@@ -1,0 +1,277 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "normalActivation": false,
+  "sharedCycleQualification": "pending parent actual shared loader/browser review",
+  "sharedStaticCycleCatalog": {
+    "triangles": 3418,
+    "vertices": 6460,
+    "meshes": 4,
+    "primitives": 4,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 234316,
+    "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "SC": {
+        "wheel_radius": 6.260869565217392,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R",
+      "SC"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "CarMeshAssetUsed": false,
+  "rawGLTFDiagnostic": true,
+  "artReviewStatus": "agent-QA; parent independent review pending; no formal human approval",
+  "family": "sidecar-motorcycle",
+  "route": "sidecar-motorcycle",
+  "revision": "v1",
+  "method": "Classic-family geometry refinement: intentionally offset original teal/cream bike, attached rounded open cream/teal sidecar tub, actual floor/seat/walls, small framed-blue windscreen and own distinct SC road wheel. Three true independently rolling F/R/SC wheels; empty passenger well, static equipment, source pilot only.",
+  "geometry": {
+    "triangles": 3418,
+    "vertices": 6460,
+    "meshes": 4,
+    "primitives": 4,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 234316,
+    "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "SC": {
+        "wheel_radius": 6.260869565217392,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R",
+      "SC"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "F",
+      "centerBlender": [
+        -1.1200000047683716,
+        -0.6800000071525574,
+        0.41999998688697815
+      ],
+      "centerExport": [
+        -19.47826095249342,
+        7.304347598034404,
+        11.826087080914043
+      ],
+      "radiusBlender": 0.42,
+      "wheel_radius": 7.304347826086957
+    },
+    {
+      "id": "R",
+      "centerBlender": [
+        1.1200000047683716,
+        -0.6800000071525574,
+        0.41999998688697815
+      ],
+      "centerExport": [
+        19.47826095249342,
+        7.304347598034404,
+        11.826087080914043
+      ],
+      "radiusBlender": 0.42,
+      "wheel_radius": 7.304347826086957
+    },
+    {
+      "id": "SC",
+      "centerBlender": [
+        0.4000000059604645,
+        0.8999999761581421,
+        0.36000001430511475
+      ],
+      "centerExport": [
+        6.956521842790687,
+        6.260869814001997,
+        -15.652173498402474
+      ],
+      "radiusBlender": 0.36,
+      "wheel_radius": 6.260869565217392
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/sidecar-motorcycle/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/sidecar-motorcycle/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/sidecar-motorcycle/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "sourceImmutable": true,
+  "sourcePilot": true,
+  "productionQualified": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "riderComposition": {
+    "immutable": true,
+    "mountSource": [
+      0,
+      -0.68,
+      1.1
+    ],
+    "contacts": 5,
+    "combinedTriangles": 5374,
+    "combinedDraws": 5,
+    "combinedAtlases": 2
+  },
+  "actualBounds": {
+    "minWorld": [
+      -27.920316696166992,
+      -17.217391967773438,
+      0.0
+    ],
+    "maxWorld": [
+      27.920316696166992,
+      18.260868072509766,
+      24.278261184692383
+    ],
+    "spanSource": [
+      3.2108364200592034,
+      2.039999952316284,
+      1.3960000181198118
+    ],
+    "centeredHorizontalCeilWorld": [
+      56,
+      37
+    ],
+    "noRescaleRecenter": true
+  },
+  "combinedBounds": {
+    "minWorld": [
+      -27.920316696166992,
+      -17.911592483520508,
+      0.0
+    ],
+    "maxWorld": [
+      27.920316696166992,
+      18.260868072509766,
+      35.91304016113281
+    ],
+    "spanSource": [
+      3.2108364200592034,
+      2.0799164819717406,
+      2.0649998092651365
+    ],
+    "centeredHorizontalCeilWorld": [
+      56,
+      37
+    ],
+    "noRescaleRecenter": true
+  },
+  "sourceQA": {
+    "exactFreshReplay": true,
+    "packedSourceAudit": true,
+    "allTriangleUVMatches": 3418,
+    "wholeBikeRiderRoll": true,
+    "threeCollisionNegativeResets": true,
+    "displacedRiderNegativeReset": true,
+    "fenderCoverageEach": 25,
+    "actual32HeadingsEach": [
+      "bike",
+      "rider",
+      "combined"
+    ],
+    "hiddenRider32Exact": true,
+    "depthMasks": true,
+    "paddingDensity32Exact": true,
+    "standardCardinalPlacementExact": true,
+    "desktopMobileOffline": true,
+    "actualOpenPodDepthAndFillNegativeReset": true,
+    "noPassengerFunctionOrSidecarArticulation": true,
+    "scopedChecks": true
+  },
+  "sourceInputHashes": {
+    "scripts/vehicle-bake/sidecar-motorcycle/build.py": "2725eccb276aa8093a199d60b6323fd3917b73121bf011de45bb388bb1cf7c83",
+    "scripts/vehicle-bake/sidecar-motorcycle/geometry.py": "70b2f2b88b7abe552c5ec8218cd40dbd235a8c8d0db364407200d325803afe4a",
+    "scripts/vehicle-bake/sidecar-motorcycle/family.json": "80349aaf3e37e5fb589fe3d7eb659134cd3ef882e0c0ad5135d13a9e5977fa08",
+    "scripts/vehicle-bake/sidecar-motorcycle/raw-audit.py": "874e36b0a489e54a56ad1b6225bf429a96f8f068ced924986b69e303395793c0"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "limitations": [
+    "Source pilot only. Actual shared CarMeshAsset loader/browser review remains pending parent",
+    "Only immutable Explorer upright/profile measured and fitted; no all-avatar rider identity/AI or occupied fallback qualification",
+    "Neutral steering; no suspension, rider pose animation or normal activation claim",
+    "Raw GLTF viewer reuses shared camera and outline math, not a copied/forked engine loader",
+    "Editable runtime-topology component master; no high-to-low decimation claim",
+    "Empty passenger well and static attached sidecar; no passenger function or sidecar articulation qualification"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: orange cab and thin empty gray platform read as a flatbed, with actual platform thickness and tidy glass/ink borders.",
+    "Signed phases and wireframes preserve fixed deck and covered far crowns. No load or moving equipment claim."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

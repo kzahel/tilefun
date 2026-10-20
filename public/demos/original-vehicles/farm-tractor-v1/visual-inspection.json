@@ -1,0 +1,14 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: bright green narrow hood, tall glazed cab, huge yellow-hubbed rear wheels and small exposed front wheels form a recognizable compact tractor.",
+    "Signed phases and wireframes inspected for mixed radii, fixed rear hitch and real rear crown coverage. Front crowns intentionally exposed; no farm-tool mechanics claim."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

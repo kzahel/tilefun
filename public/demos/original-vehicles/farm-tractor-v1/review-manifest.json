@@ -1,0 +1,1443 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "farm-tractor-v1",
+      "name": "Farm tractor",
+      "title": "Farm tractor \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original bright green/yellow farm tractor: narrow long green hood with yellow stripe, tall enclosed blue-glass cab with green canopy, huge rear agricultural tires and smaller exposed front tires; actual rear fenders only. Fixed rear hitch has no tool/hitch physics or animation claim.",
+      "audit": {
+        "triangles": 3386,
+        "vertices": 7122,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 258024,
+        "sha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.956521739130436,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.956521739130436,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 12.869565217391306,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 12.869565217391306,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/atlas.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/atlas.png",
+          "sha256": "df1abd245c911d86fdacc5cca4c8c0981e9b2e9c30f9dd46c95ae2d65fdec446"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/capture.json",
+          "sha256": "ed1be395acfe091032c6702cad211f548058b797548a258f86e0180314e0eced"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-0.png",
+          "sha256": "767bfd6ff46421e253a3104b448890acc058641aa02021bfb907645dbfefd807"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-1.png",
+          "sha256": "50646e36a7b0183d113766cb98ceaffd43474b16d9af793c1f10f0f31a1c0ee8"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-10.png",
+          "sha256": "3ee3c51f9a01ed7e9a689deb7295410fc04780e7d496b03473eec08a72b8da09"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-11.png",
+          "sha256": "3f7fa96c588092939c1a5b4dfa86944c40bbb980de9847705bf204ba47c7a7fe"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-12.png",
+          "sha256": "87fd51c5f8fa939b2478dd40b07a3be38336d1ef6707048ee878a50c4c2e0cd2"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-13.png",
+          "sha256": "4852b80baf9a0bc43edc307fc12d87469d2fc2d1fb28e89dc435dcdf04f26663"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-14.png",
+          "sha256": "ca5f06c311525145ecdd2b17dd1a2c3e4b19ae53fcf4a82a0ad9327dc196ceb7"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-15.png",
+          "sha256": "18a63685fe6683b1c40dbb53130c7b4f8a3e10d93350dd981b17d3a0760854c2"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-2.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-3.png",
+          "sha256": "739e28f8fc1bc67e6490b7a040d0d6e914ca8e9054e5f56e5a960af2eacd4f19"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-4.png",
+          "sha256": "bc2e64c45b207f97cf1da279dd314293bdda68231cac29094847a791ada4e9bb"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-5.png",
+          "sha256": "985e2f8482081da51114fc9b64ea866b63110f7026c2ac15746b1618508fb41f"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-6.png",
+          "sha256": "d5e08409fdc867d463690d03e473c328c4de70a1d3718a25ba91fe861febf3c2"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-7.png",
+          "sha256": "9cf626e73af5f5cb06250339c54bad561f318c8cb3597ae91ac6a3ffff7f5043"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-8.png",
+          "sha256": "4f1a022ee733a81a0f58fb56411198132c326308f04e7bf5c96bc61f20fa4b11"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-9.png",
+          "sha256": "e9f051475919fdd046a65acef40d56738ff1f4780c6dc7867b6f213d95f9804a"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-engine-0.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-engine-1.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "5e3f378e4afef8f54f5e035da5299bbe3630ea3b541365649b7159b102adf5cb"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-engine-2.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-engine-3.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "5e3f378e4afef8f54f5e035da5299bbe3630ea3b541365649b7159b102adf5cb"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-engine-4.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-engine-5.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "5e3f378e4afef8f54f5e035da5299bbe3630ea3b541365649b7159b102adf5cb"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-engine-6.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-engine-7.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "5e3f378e4afef8f54f5e035da5299bbe3630ea3b541365649b7159b102adf5cb"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-study-0.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-study-1.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-study-2.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-study-3.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-study-4.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-study-5.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-study-6.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/equal-phase-study-7.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-0.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-1.png",
+          "sha256": "0c7ffb44ad8810c4dc9dc830e39e05b01e49ad81cc6a1e0bb4d76fe2c89e52f3"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-2.png",
+          "sha256": "2440e79bf493d7295e797bdd496a55925e479abb179e0ce4af3e5047ca9f7d12"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-3.png",
+          "sha256": "b50a4e3a00bcaf7ba03191b8f0f81703f0066ad15479980d23c7aa696908ff84"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-4.png",
+          "sha256": "1d268a1a7c55c297b6fb8742e289d3a280ee461b3f54ac52a73e9a1ac42b85d3"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-5.png",
+          "sha256": "7f6a1ff71352fb80589cfb59319d73c2dc911074a5c793c2ef4fb67d1bc7eeb0"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-6.png",
+          "sha256": "88bd395335dbefcf1ebe8af178696992cd53825628304c7c387aecb87449b068"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-7.png",
+          "sha256": "3178b79e218261ae60edd253bc0f09e29b0c6cc84aa3340374797d559a31c004"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-engine.png",
+          "sha256": "da6172d83e3b6b1114228715c01224e079858226a38120d37261c32b9004c5c1"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/inspection-equal-phase-engine.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-equal-phase-engine.png",
+          "sha256": "c9ad320d175ef4d5bf8a64de91cb3cd08780cf0b9bc55665669d35bb67cfa6d7"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/inspection-equal-phase-study.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-equal-phase-study.png",
+          "sha256": "a9fac80c11a81a954b91d4dc1dd26ec93d302614871c3527e0ef5161eec708a8"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-phases.png",
+          "sha256": "f2959d57831d5702938a2decbd2c07443c8fef1fea8cc932aeab9223d5c28cd1"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-study.png",
+          "sha256": "a12d91cd856a249361bafd21054c8cbd4c5014ed2b26aaf299cbef3432e786bf"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/inspection-wheel-id-engine.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "eb98eda3aae27a6c801fbcdb72c775ddf91c3971d5f8a4884be766433a0a86b1"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/inspection-wheel-id-study.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "4196c6bc9736236bbb4725b2954d000eab4fb404fe0f8a3f436859711b58a8c3"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-0.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-1.png",
+          "sha256": "5624b1ac3178fbf71b8d87c82d22411422ed0c0b3e8674cb7f73a574390c075c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-2.png",
+          "sha256": "8390db471ba94c93f66eb70ebc4ee52214cf541ed1e52e09f24ab7c04700f8aa"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-3.png",
+          "sha256": "304318ed7f6b5e14fea26424638348c06e6153bdf8f037f75398639d13054905"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-4.png",
+          "sha256": "28e696815345c4282e2f1a6825d50ca60a78c7cb2c6ee82088b7690d832a8d38"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-5.png",
+          "sha256": "475ac533195b9e8a004e1618c1b3b7d74941c7e4e009011479f41007e3dfd727"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-6.png",
+          "sha256": "c2a03cf6c426936cf640053f047d08aebd04346bcee14c65fba4132cedf7b0b6"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-7.png",
+          "sha256": "cabf1c668dc12e90869bb0825abc2b528c59b0439ea5c215418ccc54e92cf98f"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-0.png",
+          "sha256": "27af1e662693c0a1825345ce4fded2c6166cf77f22620e3434b0dffec64198d5"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-1.png",
+          "sha256": "429fd9eb4b59bbd8345469c448d81b537cd57bc21eb3725a5544ddd9106189c8"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-10.png",
+          "sha256": "da74bb6184b9907c899eb63e0501cdafbca3cff30beaa95933e4a0c36c306882"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-11.png",
+          "sha256": "439add7cd0bae98cee629d649acaeb8879ad49395c89633b70fbc16acff1299b"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-12.png",
+          "sha256": "7bf3701d2977f771a9a51c51e7bdba81ecf583d8518626f9580025f8ed5a0bd2"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-13.png",
+          "sha256": "ccbbdfa33df14b16209c29f5c5b30d8fad1c3d1cd09d7466f7e1b216897ba098"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-14.png",
+          "sha256": "ca4fefac3f4003f1b88339f212eab8fb9a086c4258f55b96edcff843a65b5aee"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-15.png",
+          "sha256": "015f26a7958256aabf14acb8f9a3e4083cdf92d0f4574fac9c50176e92f94158"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-2.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-3.png",
+          "sha256": "3c319730741b0f1622aadc8a40fbf23fb5ffa65481e96998949b56ea3881f11e"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-4.png",
+          "sha256": "00c28852e25a917b6b1e0e3fd4012f670d438445adbf90ee61549027672592ed"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-5.png",
+          "sha256": "7971d8f5ddf75e112bd7c1f296f03531ff11b86f2d51e848bd7897dbe0891592"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-6.png",
+          "sha256": "ccab6ee0e70811508b53a8ee9a161b005787d52a930a787516f5f1c2955b4c3c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-7.png",
+          "sha256": "14069b36cf630a03294a0d84493b5b3d7bb1464af34d6c726a07f3b7026c02c3"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-8.png",
+          "sha256": "d83ad7be1e831e6143224959dba7a9325c6014d2c6eb78fc1d04198a1634a684"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-9.png",
+          "sha256": "cf97c9ee462eb6bcaba2e2aa1098120b55865a35a70f1220fbb2c2ba50005c0d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-0.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "56d2670010c38fb760ac10a1398b5d92b39eeceabaf0a5c7ff4ccc53801d765c"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-1.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "c7e8f20b63cc0fc6a808efaa64327752040cfc847c9311f474a3f1e0da34b40f"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-10.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "15f8e050d0a8924b88371be4f62f8635d9c51072707b6b6a64c7a571eb1837b9"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-11.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "01f5a9d537d7d0a9c1bf779ce89d2b8562a92fb851a4cc9eada9dbdbd6f29377"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-12.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "998c3603fa2016c3b7e78713e836c7ce8073301d57f02487312ed919d46b0320"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-13.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "53d5f55d4e185b3b42cf7dbfa9356d40725ede323e1d9082d762877632c8b65d"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-14.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "01525051133cc2f436dfd709c63c504a329cf03c8df39ab23907311c71758bed"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-15.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "c2c8f874776d2e4b08fb4dd5335b90b4af580921b90b0c4e0e7a04517945864f"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-2.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "518aed9de3f858058ec84e990a2d43862519b2fba58f9181bc1800af981e5932"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-3.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "d9f01f663a00711360faae55cf87f87ba590f1d4450d1071e298b3df897983d3"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-4.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "d957a2e70c48ad192354711b9919f10943a70cade551788c37fa1dddd2747e5e"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-5.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "003dbc72d04943faff4be6f902c990c134f8ed2c4b561f713ab91dc4fd1ea661"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-6.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "2cb42b7e7b5516d1acf71f32613d32d8b9197e93d0c78ab57b129f14bca3cee5"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-7.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "8c801c76453bad61b104f48273567ff0d7a3c735e6b46b813812349153674e14"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-8.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "3ed79ca8ab60da483755200a57498442a46ca16ceaebce068442f089a7a49516"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-engine-9.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "7c0af801238280d01781acf355f2c9cb0e658dafe40225a26a77e769f35d4e88"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-0.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "2325bab81529325366d10c2db51fd95f2767a4fce7ea745f71c91bd4cd5af750"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-1.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "ca37392d6e8fdfc632bac14655c9c9198f891e51a7682b7e0113d144c0f4c5e6"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-10.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "1bbf0d74304b4eb1e765a3dcb1c57bb3092a757834008f4472fe06aca4aae41e"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-11.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "5f1e40a4f6d9a2fde8a5a85f7935477d241bafb48a420d3d27fa067350840896"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-12.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "742c6616352e73411f3240403b23e8d68075c2888538c3b087095914fbe47d8a"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-13.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "3afb3a83d4e289793ad4c773054890b05b5d1b16ca3d68d1dbe0985ecd048c2f"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-14.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "fffaabe91740ee35a1822cc94c9ca92d3d7dcb10f46ff1a64aa65bffe70f3784"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-15.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "9b3a52f4dbfe4cc11d83ff08d08397008840d7eca2e4470257ac9bbfcce055f1"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-2.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "57c6d8ddc2a7a8da6732fbf95aad57b4ecc78d0ee336516122b0f0f8989ca93f"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-3.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "af416600c3d606b0fcec606d6b85c2d53412de35286fcb1c6ec637bff5d96727"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-4.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "3c58b53414c2733aacc58fd6f0e98f3a61424933d52bc81a132ecd4ef053cc28"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-5.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "39555f1cf7f30b0dc2255674dca1645e747dde88052502b097517c214ac35e67"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-6.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "b1cf0dd161337a184069fb722b9509cbe66169c435884e7a402ba44f0ab599bb"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-7.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "cf6251f7c8057c38f64b7d3853e69133540338a8f186bd6448e421d760d4c888"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-8.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "08036af028e9e2a8d16e00d68b8b9fa6401b849ca3b1c53f532237950a75c062"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wheel-id-study-9.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "cef6e80f7dcbed4e00b3f37696c166f386c88ac79cd169f4d7297559319a5f36"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wire-engine.png",
+          "sha256": "feddd8e619341ea8533bfa2fa9f01b76f76554eec98d9d65121ac2ca2ebf0435"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wire-study.png",
+          "sha256": "ff471d339b81ce2c662b436795728b38f4830d0a5fdcc335cace96ebddd2cfb8"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/model.glb",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/model.glb",
+          "sha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/recipe.json",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/recipe.json",
+          "sha256": "cc04bec970c375bfe4761c241d32b6d307c0c672af9c7c8035574912f6db60fd"
+        },
+        {
+          "source": "demos/vehicle-bake/farm-tractor/v1/report.json",
+          "retained": "demos/original-vehicles/farm-tractor-v1/inputs/report.json",
+          "sha256": "669583b063652f52f2402cd1af8734e7f14740ff01d58a92eb0a629a0824adeb"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/farm-tractor-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "farm-tractor--v1",
+          "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+          "triangles": 3386,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 6.956522455681728,
+              "minimumGap": 10.328057312484653,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 6.956522455681728,
+              "minimumGap": 10.328057312484653,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 12.869566541507425,
+              "minimumGap": 1.21730663740796,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 12.869566541507425,
+              "minimumGap": 1.21730663740796,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 6.956521739130436,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 6.956521739130436,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 12.869565217391306,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 12.869565217391306,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/browser-qa.json",
+          "sha256": "343b0a239966eb25de7fe8f1bd8ea72ed363da449aea5c2c9fc5c0fdffd3a25a"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/candidate.json",
+          "sha256": "1a77a9dbd94f7184499e780efc4913ddbbb233a42d7f5c2df639800ea2ced31a"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/capture.json",
+          "sha256": "ed1be395acfe091032c6702cad211f548058b797548a258f86e0180314e0eced"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/contact-sheet.png",
+          "sha256": "ad07cc07528a3b6afaa0f0b3aa46dc68eb63d3b464f5ca3c7dd7430c4860474f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-0.png",
+          "sha256": "767bfd6ff46421e253a3104b448890acc058641aa02021bfb907645dbfefd807"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-1.png",
+          "sha256": "50646e36a7b0183d113766cb98ceaffd43474b16d9af793c1f10f0f31a1c0ee8"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-10.png",
+          "sha256": "3ee3c51f9a01ed7e9a689deb7295410fc04780e7d496b03473eec08a72b8da09"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-11.png",
+          "sha256": "3f7fa96c588092939c1a5b4dfa86944c40bbb980de9847705bf204ba47c7a7fe"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-12.png",
+          "sha256": "87fd51c5f8fa939b2478dd40b07a3be38336d1ef6707048ee878a50c4c2e0cd2"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-13.png",
+          "sha256": "4852b80baf9a0bc43edc307fc12d87469d2fc2d1fb28e89dc435dcdf04f26663"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-14.png",
+          "sha256": "ca5f06c311525145ecdd2b17dd1a2c3e4b19ae53fcf4a82a0ad9327dc196ceb7"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-15.png",
+          "sha256": "18a63685fe6683b1c40dbb53130c7b4f8a3e10d93350dd981b17d3a0760854c2"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-1x.png",
+          "sha256": "6511b0589678ead6a07c94126dfdaa35cc766dd1ccb72f532559c0671ac012ff"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-2.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-2x.png",
+          "sha256": "66b6c2a639c48dcd46e778e9708729137b015926ab100e002851bea56f89caf5"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-3.png",
+          "sha256": "739e28f8fc1bc67e6490b7a040d0d6e914ca8e9054e5f56e5a960af2eacd4f19"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-3x.png",
+          "sha256": "e3aaac8ce21a60987a8de7189c8cd964967fefad9bb4f2554f8e1e259d8e86c7"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-4.png",
+          "sha256": "bc2e64c45b207f97cf1da279dd314293bdda68231cac29094847a791ada4e9bb"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-5.png",
+          "sha256": "985e2f8482081da51114fc9b64ea866b63110f7026c2ac15746b1618508fb41f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-6.png",
+          "sha256": "d5e08409fdc867d463690d03e473c328c4de70a1d3718a25ba91fe861febf3c2"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-7.png",
+          "sha256": "9cf626e73af5f5cb06250339c54bad561f318c8cb3597ae91ac6a3ffff7f5043"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-8.png",
+          "sha256": "4f1a022ee733a81a0f58fb56411198132c326308f04e7bf5c96bc61f20fa4b11"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/engine-9.png",
+          "sha256": "e9f051475919fdd046a65acef40d56738ff1f4780c6dc7867b6f213d95f9804a"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-roll-0.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-roll-1.png",
+          "sha256": "0c7ffb44ad8810c4dc9dc830e39e05b01e49ad81cc6a1e0bb4d76fe2c89e52f3"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-roll-2.png",
+          "sha256": "2440e79bf493d7295e797bdd496a55925e479abb179e0ce4af3e5047ca9f7d12"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-roll-3.png",
+          "sha256": "b50a4e3a00bcaf7ba03191b8f0f81703f0066ad15479980d23c7aa696908ff84"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-roll-4.png",
+          "sha256": "1d268a1a7c55c297b6fb8742e289d3a280ee461b3f54ac52a73e9a1ac42b85d3"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-roll-5.png",
+          "sha256": "7f6a1ff71352fb80589cfb59319d73c2dc911074a5c793c2ef4fb67d1bc7eeb0"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-roll-6.png",
+          "sha256": "88bd395335dbefcf1ebe8af178696992cd53825628304c7c387aecb87449b068"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-roll-7.png",
+          "sha256": "3178b79e218261ae60edd253bc0f09e29b0c6cc84aa3340374797d559a31c004"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/game-turntable.gif",
+          "sha256": "110728276f99615870906e5f08dfe4c6c32e4478ae908be71d0ef190728d6907"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/roll-0.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/roll-1.png",
+          "sha256": "5624b1ac3178fbf71b8d87c82d22411422ed0c0b3e8674cb7f73a574390c075c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/roll-2.png",
+          "sha256": "8390db471ba94c93f66eb70ebc4ee52214cf541ed1e52e09f24ab7c04700f8aa"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/roll-3.png",
+          "sha256": "304318ed7f6b5e14fea26424638348c06e6153bdf8f037f75398639d13054905"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/roll-4.png",
+          "sha256": "28e696815345c4282e2f1a6825d50ca60a78c7cb2c6ee82088b7690d832a8d38"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/roll-5.png",
+          "sha256": "475ac533195b9e8a004e1618c1b3b7d74941c7e4e009011479f41007e3dfd727"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/roll-6.png",
+          "sha256": "c2a03cf6c426936cf640053f047d08aebd04346bcee14c65fba4132cedf7b0b6"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/roll-7.png",
+          "sha256": "cabf1c668dc12e90869bb0825abc2b528c59b0439ea5c215418ccc54e92cf98f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-0.png",
+          "sha256": "27af1e662693c0a1825345ce4fded2c6166cf77f22620e3434b0dffec64198d5"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-1.png",
+          "sha256": "429fd9eb4b59bbd8345469c448d81b537cd57bc21eb3725a5544ddd9106189c8"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-10.png",
+          "sha256": "da74bb6184b9907c899eb63e0501cdafbca3cff30beaa95933e4a0c36c306882"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-11.png",
+          "sha256": "439add7cd0bae98cee629d649acaeb8879ad49395c89633b70fbc16acff1299b"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-12.png",
+          "sha256": "7bf3701d2977f771a9a51c51e7bdba81ecf583d8518626f9580025f8ed5a0bd2"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-13.png",
+          "sha256": "ccbbdfa33df14b16209c29f5c5b30d8fad1c3d1cd09d7466f7e1b216897ba098"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-14.png",
+          "sha256": "ca4fefac3f4003f1b88339f212eab8fb9a086c4258f55b96edcff843a65b5aee"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-15.png",
+          "sha256": "015f26a7958256aabf14acb8f9a3e4083cdf92d0f4574fac9c50176e92f94158"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-1x.png",
+          "sha256": "49885eb59db42bde8a340adca4e490941c7e74091a9fc51946b3dc9e4eddc3db"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-2.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-2x.png",
+          "sha256": "427a793475911662efab022498e00a69f7f6036cc2b4cdd83e7e7f765831996b"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-3.png",
+          "sha256": "3c319730741b0f1622aadc8a40fbf23fb5ffa65481e96998949b56ea3881f11e"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-3x.png",
+          "sha256": "60a81834938cf56016385e090257c9d8266b30d9603cbca4da47267a50af0bde"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-4.png",
+          "sha256": "00c28852e25a917b6b1e0e3fd4012f670d438445adbf90ee61549027672592ed"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-5.png",
+          "sha256": "7971d8f5ddf75e112bd7c1f296f03531ff11b86f2d51e848bd7897dbe0891592"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-6.png",
+          "sha256": "ccab6ee0e70811508b53a8ee9a161b005787d52a930a787516f5f1c2955b4c3c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-7.png",
+          "sha256": "14069b36cf630a03294a0d84493b5b3d7bb1464af34d6c726a07f3b7026c02c3"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-8.png",
+          "sha256": "d83ad7be1e831e6143224959dba7a9325c6014d2c6eb78fc1d04198a1634a684"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/study-9.png",
+          "sha256": "cf97c9ee462eb6bcaba2e2aa1098120b55865a35a70f1220fbb2c2ba50005c0d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/turntable.gif",
+          "sha256": "24ea9a1db20ad9709652de3b36a7fb5af95a43e1b94c7f7bf55cac4c4f1f2cf9"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/viewer-desktop.png",
+          "sha256": "161743b2ed826b516fd1e079c40e0f148ac608fd13bb7732030f4dd972f6f563"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/viewer-mobile.png",
+          "sha256": "06a17d3a74b4a38fec0ccc291e8490dac3fa90c350f7c32a6f28c2efcc764ae8"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/wheel-phases.png",
+          "sha256": "edc56220335316e49725c19d1a09a38b5f8b5c7b661e14f48adb91bee93aa6aa"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/wire-engine.png",
+          "sha256": "feddd8e619341ea8533bfa2fa9f01b76f76554eec98d9d65121ac2ca2ebf0435"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/captures/wire-study.png",
+          "sha256": "ff471d339b81ce2c662b436795728b38f4830d0a5fdcc335cace96ebddd2cfb8"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/clearance.json",
+          "sha256": "86e6e8f4aa1a77c7ab6733c9334bc2ac6ff93009b7fa3c26aae062b87c95b3bf"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/independent-source-replay.json",
+          "sha256": "8596e14b46d5beb56f4309c39eab3d30bcfcafa4683203455d508617df604862"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/atlas.png",
+          "sha256": "df1abd245c911d86fdacc5cca4c8c0981e9b2e9c30f9dd46c95ae2d65fdec446"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/capture.json",
+          "sha256": "ed1be395acfe091032c6702cad211f548058b797548a258f86e0180314e0eced"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-0.png",
+          "sha256": "767bfd6ff46421e253a3104b448890acc058641aa02021bfb907645dbfefd807"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-1.png",
+          "sha256": "50646e36a7b0183d113766cb98ceaffd43474b16d9af793c1f10f0f31a1c0ee8"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-10.png",
+          "sha256": "3ee3c51f9a01ed7e9a689deb7295410fc04780e7d496b03473eec08a72b8da09"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-11.png",
+          "sha256": "3f7fa96c588092939c1a5b4dfa86944c40bbb980de9847705bf204ba47c7a7fe"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-12.png",
+          "sha256": "87fd51c5f8fa939b2478dd40b07a3be38336d1ef6707048ee878a50c4c2e0cd2"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-13.png",
+          "sha256": "4852b80baf9a0bc43edc307fc12d87469d2fc2d1fb28e89dc435dcdf04f26663"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-14.png",
+          "sha256": "ca5f06c311525145ecdd2b17dd1a2c3e4b19ae53fcf4a82a0ad9327dc196ceb7"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-15.png",
+          "sha256": "18a63685fe6683b1c40dbb53130c7b4f8a3e10d93350dd981b17d3a0760854c2"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-2.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-3.png",
+          "sha256": "739e28f8fc1bc67e6490b7a040d0d6e914ca8e9054e5f56e5a960af2eacd4f19"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-4.png",
+          "sha256": "bc2e64c45b207f97cf1da279dd314293bdda68231cac29094847a791ada4e9bb"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-5.png",
+          "sha256": "985e2f8482081da51114fc9b64ea866b63110f7026c2ac15746b1618508fb41f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-6.png",
+          "sha256": "d5e08409fdc867d463690d03e473c328c4de70a1d3718a25ba91fe861febf3c2"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-7.png",
+          "sha256": "9cf626e73af5f5cb06250339c54bad561f318c8cb3597ae91ac6a3ffff7f5043"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-8.png",
+          "sha256": "4f1a022ee733a81a0f58fb56411198132c326308f04e7bf5c96bc61f20fa4b11"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/engine-9.png",
+          "sha256": "e9f051475919fdd046a65acef40d56738ff1f4780c6dc7867b6f213d95f9804a"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "5e3f378e4afef8f54f5e035da5299bbe3630ea3b541365649b7159b102adf5cb"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "5e3f378e4afef8f54f5e035da5299bbe3630ea3b541365649b7159b102adf5cb"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "5e3f378e4afef8f54f5e035da5299bbe3630ea3b541365649b7159b102adf5cb"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "5e3f378e4afef8f54f5e035da5299bbe3630ea3b541365649b7159b102adf5cb"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-0.png",
+          "sha256": "d1a1f2b3578729224b699aaeb8a386ed0a7ec2b048c2049260f3170828fbcc1c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-1.png",
+          "sha256": "0c7ffb44ad8810c4dc9dc830e39e05b01e49ad81cc6a1e0bb4d76fe2c89e52f3"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-2.png",
+          "sha256": "2440e79bf493d7295e797bdd496a55925e479abb179e0ce4af3e5047ca9f7d12"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-3.png",
+          "sha256": "b50a4e3a00bcaf7ba03191b8f0f81703f0066ad15479980d23c7aa696908ff84"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-4.png",
+          "sha256": "1d268a1a7c55c297b6fb8742e289d3a280ee461b3f54ac52a73e9a1ac42b85d3"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-5.png",
+          "sha256": "7f6a1ff71352fb80589cfb59319d73c2dc911074a5c793c2ef4fb67d1bc7eeb0"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-6.png",
+          "sha256": "88bd395335dbefcf1ebe8af178696992cd53825628304c7c387aecb87449b068"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/game-roll-7.png",
+          "sha256": "3178b79e218261ae60edd253bc0f09e29b0c6cc84aa3340374797d559a31c004"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-engine.png",
+          "sha256": "da6172d83e3b6b1114228715c01224e079858226a38120d37261c32b9004c5c1"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-equal-phase-engine.png",
+          "sha256": "c9ad320d175ef4d5bf8a64de91cb3cd08780cf0b9bc55665669d35bb67cfa6d7"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-equal-phase-study.png",
+          "sha256": "a9fac80c11a81a954b91d4dc1dd26ec93d302614871c3527e0ef5161eec708a8"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-phases.png",
+          "sha256": "f2959d57831d5702938a2decbd2c07443c8fef1fea8cc932aeab9223d5c28cd1"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-study.png",
+          "sha256": "a12d91cd856a249361bafd21054c8cbd4c5014ed2b26aaf299cbef3432e786bf"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "eb98eda3aae27a6c801fbcdb72c775ddf91c3971d5f8a4884be766433a0a86b1"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "4196c6bc9736236bbb4725b2954d000eab4fb404fe0f8a3f436859711b58a8c3"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-0.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-1.png",
+          "sha256": "5624b1ac3178fbf71b8d87c82d22411422ed0c0b3e8674cb7f73a574390c075c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-2.png",
+          "sha256": "8390db471ba94c93f66eb70ebc4ee52214cf541ed1e52e09f24ab7c04700f8aa"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-3.png",
+          "sha256": "304318ed7f6b5e14fea26424638348c06e6153bdf8f037f75398639d13054905"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-4.png",
+          "sha256": "28e696815345c4282e2f1a6825d50ca60a78c7cb2c6ee82088b7690d832a8d38"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-5.png",
+          "sha256": "475ac533195b9e8a004e1618c1b3b7d74941c7e4e009011479f41007e3dfd727"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-6.png",
+          "sha256": "c2a03cf6c426936cf640053f047d08aebd04346bcee14c65fba4132cedf7b0b6"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/roll-7.png",
+          "sha256": "cabf1c668dc12e90869bb0825abc2b528c59b0439ea5c215418ccc54e92cf98f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-0.png",
+          "sha256": "27af1e662693c0a1825345ce4fded2c6166cf77f22620e3434b0dffec64198d5"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-1.png",
+          "sha256": "429fd9eb4b59bbd8345469c448d81b537cd57bc21eb3725a5544ddd9106189c8"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-10.png",
+          "sha256": "da74bb6184b9907c899eb63e0501cdafbca3cff30beaa95933e4a0c36c306882"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-11.png",
+          "sha256": "439add7cd0bae98cee629d649acaeb8879ad49395c89633b70fbc16acff1299b"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-12.png",
+          "sha256": "7bf3701d2977f771a9a51c51e7bdba81ecf583d8518626f9580025f8ed5a0bd2"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-13.png",
+          "sha256": "ccbbdfa33df14b16209c29f5c5b30d8fad1c3d1cd09d7466f7e1b216897ba098"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-14.png",
+          "sha256": "ca4fefac3f4003f1b88339f212eab8fb9a086c4258f55b96edcff843a65b5aee"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-15.png",
+          "sha256": "015f26a7958256aabf14acb8f9a3e4083cdf92d0f4574fac9c50176e92f94158"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-2.png",
+          "sha256": "825de84f342d7942dda4e33d376489ec424e404815f0b493b50141ccdcfbe49d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-3.png",
+          "sha256": "3c319730741b0f1622aadc8a40fbf23fb5ffa65481e96998949b56ea3881f11e"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-4.png",
+          "sha256": "00c28852e25a917b6b1e0e3fd4012f670d438445adbf90ee61549027672592ed"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-5.png",
+          "sha256": "7971d8f5ddf75e112bd7c1f296f03531ff11b86f2d51e848bd7897dbe0891592"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-6.png",
+          "sha256": "ccab6ee0e70811508b53a8ee9a161b005787d52a930a787516f5f1c2955b4c3c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-7.png",
+          "sha256": "14069b36cf630a03294a0d84493b5b3d7bb1464af34d6c726a07f3b7026c02c3"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-8.png",
+          "sha256": "d83ad7be1e831e6143224959dba7a9325c6014d2c6eb78fc1d04198a1634a684"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/study-9.png",
+          "sha256": "cf97c9ee462eb6bcaba2e2aa1098120b55865a35a70f1220fbb2c2ba50005c0d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "56d2670010c38fb760ac10a1398b5d92b39eeceabaf0a5c7ff4ccc53801d765c"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "c7e8f20b63cc0fc6a808efaa64327752040cfc847c9311f474a3f1e0da34b40f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "15f8e050d0a8924b88371be4f62f8635d9c51072707b6b6a64c7a571eb1837b9"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "01f5a9d537d7d0a9c1bf779ce89d2b8562a92fb851a4cc9eada9dbdbd6f29377"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "998c3603fa2016c3b7e78713e836c7ce8073301d57f02487312ed919d46b0320"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "53d5f55d4e185b3b42cf7dbfa9356d40725ede323e1d9082d762877632c8b65d"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "01525051133cc2f436dfd709c63c504a329cf03c8df39ab23907311c71758bed"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "c2c8f874776d2e4b08fb4dd5335b90b4af580921b90b0c4e0e7a04517945864f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "518aed9de3f858058ec84e990a2d43862519b2fba58f9181bc1800af981e5932"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "d9f01f663a00711360faae55cf87f87ba590f1d4450d1071e298b3df897983d3"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "d957a2e70c48ad192354711b9919f10943a70cade551788c37fa1dddd2747e5e"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "003dbc72d04943faff4be6f902c990c134f8ed2c4b561f713ab91dc4fd1ea661"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "2cb42b7e7b5516d1acf71f32613d32d8b9197e93d0c78ab57b129f14bca3cee5"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "8c801c76453bad61b104f48273567ff0d7a3c735e6b46b813812349153674e14"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "3ed79ca8ab60da483755200a57498442a46ca16ceaebce068442f089a7a49516"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "7c0af801238280d01781acf355f2c9cb0e658dafe40225a26a77e769f35d4e88"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "2325bab81529325366d10c2db51fd95f2767a4fce7ea745f71c91bd4cd5af750"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "ca37392d6e8fdfc632bac14655c9c9198f891e51a7682b7e0113d144c0f4c5e6"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "1bbf0d74304b4eb1e765a3dcb1c57bb3092a757834008f4472fe06aca4aae41e"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "5f1e40a4f6d9a2fde8a5a85f7935477d241bafb48a420d3d27fa067350840896"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "742c6616352e73411f3240403b23e8d68075c2888538c3b087095914fbe47d8a"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "3afb3a83d4e289793ad4c773054890b05b5d1b16ca3d68d1dbe0985ecd048c2f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "fffaabe91740ee35a1822cc94c9ca92d3d7dcb10f46ff1a64aa65bffe70f3784"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "9b3a52f4dbfe4cc11d83ff08d08397008840d7eca2e4470257ac9bbfcce055f1"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "57c6d8ddc2a7a8da6732fbf95aad57b4ecc78d0ee336516122b0f0f8989ca93f"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "af416600c3d606b0fcec606d6b85c2d53412de35286fcb1c6ec637bff5d96727"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "3c58b53414c2733aacc58fd6f0e98f3a61424933d52bc81a132ecd4ef053cc28"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "39555f1cf7f30b0dc2255674dca1645e747dde88052502b097517c214ac35e67"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "b1cf0dd161337a184069fb722b9509cbe66169c435884e7a402ba44f0ab599bb"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "cf6251f7c8057c38f64b7d3853e69133540338a8f186bd6448e421d760d4c888"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "08036af028e9e2a8d16e00d68b8b9fa6401b849ca3b1c53f532237950a75c062"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "cef6e80f7dcbed4e00b3f37696c166f386c88ac79cd169f4d7297559319a5f36"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wire-engine.png",
+          "sha256": "feddd8e619341ea8533bfa2fa9f01b76f76554eec98d9d65121ac2ca2ebf0435"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/engine/wire-study.png",
+          "sha256": "ff471d339b81ce2c662b436795728b38f4830d0a5fdcc335cace96ebddd2cfb8"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/model.glb",
+          "sha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/recipe.json",
+          "sha256": "cc04bec970c375bfe4761c241d32b6d307c0c672af9c7c8035574912f6db60fd"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/inputs/report.json",
+          "sha256": "669583b063652f52f2402cd1af8734e7f14740ff01d58a92eb0a629a0824adeb"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/farm-tractor-v1/visual-inspection.json",
+          "sha256": "d1951e77ac2bc9332596a0585b6a3a1200935d5e9a3a0d06f65502355162e1a3"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "golf-cart",
+  "name": "Golf cart",
+  "tags": ["vehicle", "original", "golf cart"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/golf-cart-v1/review-manifest.json",
+    "sha256": "46edfe80921e840c2532f91e7d22b05529b074d42b01fc4d98efe82071fa2bc6",
+    "candidateId": "golf-cart-v1",
+    "model": "public/demos/original-vehicles/golf-cart-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/golf-cart-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/golf-cart-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/golf-cart-v1/captures",
+    "modelSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "triangles": 2682,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/golf-cart/v1/evidence/replay-verification.json",
+    "sha256": "5cd028ff156c275f3565178c18ebd3f60fed88fa803efd443cb06b08ab642a7d",
+    "build": "art-source/vehicle-bake/golf-cart/v1/build.py",
+    "family": "art-source/vehicle-bake/golf-cart/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "golf-cart-authored-v1",
+    "path": "assets/models/vehicles/golf-cart-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/golf-cart-v1.png",
+  "performance": {
+    "speed": 54,
+    "acceleration": 95,
+    "pushSpeed": 36,
+    "pushWeight": 85
+  },
+  "receipt": "art-source/vehicle-bake/runtime-golf-cart-v1.json",
+  "expectedBounds": [56, 30, 32]
+}

@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "runner": "blender",
+  "invokedBuilder": "scripts/vehicle-bake/classic-motorcycle-bear-fit/build.py",
+  "arguments": [
+    "--scratch"
+  ],
+  "args": [
+    "--scratch"
+  ],
+  "inputHashes": {
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/build.py": "be8147fb8ed5eaa5960314d30ca024698520a409184d76252a105eca5d49729a",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/geometry.py": "432da3372e03bac9f9599dadce295e8fba7fdf48e02c2cb109b72dbee5450d61",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/family.json": "b2174c2593ef3fbfdd31bcde700f9e02622cc452fcb8ce33529394374a658de8",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/bear-upright/v1/bear-upright-v1.json": "8d51332a2f7bf6c29c97bdee57df6c0a4d92349694ac9507d83a03a9920c1f81"
+  },
+  "scratchInputDependencies": [],
+  "glbSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+  "atlasSha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+  "recipeSha256": "0718d20fbefe828f10883d4cbb58e61cd1ea952a4f4aaae777df80e9fc2f1e37",
+  "outputHashes": {
+    "model.glb": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+    "atlas.png": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+    "recipe.json": "0718d20fbefe828f10883d4cbb58e61cd1ea952a4f4aaae777df80e9fc2f1e37"
+  },
+  "freshSixInputProof": "evidence/source-only-replay.json",
+  "meaning": "Normalized portable constructor receipt; --scratch outputs only under fresh data. Four own construction files plus stable catalog-cycle and unchanged Bear profile. No master, ignored or rider-model construction inputs."
+}

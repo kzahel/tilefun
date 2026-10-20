@@ -1,0 +1,790 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "forklift-v1",
+      "name": "Forklift",
+      "title": "Forklift \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original mustard warehouse forklift with rounded counterweight, low dark seat over open footwell, four slim black overhead guard pillars and open roof frame, tall dark twin mast rails/crossbars and two low narrow forward fixed forks. Four ordinary road wheels only; front wheels intentionally open, rear crowns covered; mast/forks static with no lifting gameplay.",
+      "audit": {
+        "triangles": 2940,
+        "vertices": 5844,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 213628,
+        "sha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.565217391304349,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.565217391304349,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 4.347826086956522,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 4.347826086956522,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/forklift/v1/atlas.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/atlas.png",
+          "sha256": "840dd561f30ecc9ea4015160e38e5db84359a0ae94c194593b3a657983d299be"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/capture.json",
+          "sha256": "b11f88e0386b46613598fbf85355b0138d963cf7dc27023e6e7a34654031f701"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-0.png",
+          "sha256": "6bbfafefb01b0d3dce5bd76cf498a3db010510ada22a584c78e1a73cf238874b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-1.png",
+          "sha256": "cfde4e7f6073891af13cb5f2d6c3d831ea24b0dcf4a2a7d35d5f5386977cebd9"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-10.png",
+          "sha256": "444f636876579d288399bd10bfcd25e312d0d02c1499bdb0df8be590cf28c94a"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-11.png",
+          "sha256": "de765c340099398f5657f7c9ef82067f2097dbab4c886b8b82f1068fb4d15657"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-12.png",
+          "sha256": "27fa95ffb7c79018f83a23b97520a8b1cff5d5aeda5d723c765d6c2c9ad29c88"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-13.png",
+          "sha256": "43cf47f40d2ac1fcdeb8b073178c097ba44e673aa209c2f16591d3d5aec94e48"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-14.png",
+          "sha256": "223f70631e7c4aef28e746c5fb410e5ebc9b88731c6606f0711043dfa3bf674f"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-15.png",
+          "sha256": "db6c6f6219f3942a64bf35bf4551ff96e32290017c79c41541f0b4cc95e2b5bf"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-1x.png",
+          "sha256": "032314227935496c6770862ba68eab5460c69c097741f713c100e6560083727f"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-2.png",
+          "sha256": "8ca6acf77716eb07e2e3c88710657fc1ef142eebe326408b61ae50c41e3a15af"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-2x.png",
+          "sha256": "90ce83de61e7e444cfb76ebce17b7df4932d2c9f469277b92030c3f4e71c1117"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-3.png",
+          "sha256": "bf70465991042515903e22f67978d16cf431f0d0eae54165caca455a19db7b54"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-3x.png",
+          "sha256": "00cbab20076e2c9e5274841ca99d27eacbf6e061f0260d458a99952a47f6a6fe"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-4.png",
+          "sha256": "3813caab3078d1e49de63402908703f1533ff871ee094286094a099461f25daa"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-5.png",
+          "sha256": "c52e95504ece7001c0c97903a416bdd3325a3f473839a70a36ca35b3c03e993a"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-6.png",
+          "sha256": "ea2d116265d74a0fea2059d8ba0a87b5c564adc0fcfc4e79f5b40b3127deb09b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-7.png",
+          "sha256": "c9ee6c3d051e9c1342f5b796b85038d35aa83f0793873a401288333420e7a651"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-8.png",
+          "sha256": "1f46932bc33869b18c418ed736c4b7af0bca3c52d958051b3c17254844994dfc"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/engine-9.png",
+          "sha256": "e997608f08e60899ec6acce2f4f97b92e7c437efb3d7d6fe89443871cfe96761"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-engine-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "8ca6acf77716eb07e2e3c88710657fc1ef142eebe326408b61ae50c41e3a15af"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-engine-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "fe3ddfd853a12983be0d861c39a335b8e2203774cb2aba05c2cba4be6c4f6d21"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-engine-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "1668247556847fcf19960aab0dc9f0d2c162b19c7dbfc2da8d22a65e2dc5eb11"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-engine-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "2546d064607abef752220b1178db8a4c2cda1af6e14de96586be1f0072d93db8"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-engine-4.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "f28e60617980b1bb8b5122ed7e7c726062d0ba1bb94adbd291edd93b112d345c"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-engine-5.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "cc4f82efaddf88e74d0b4c5d43cf62d5e77e33757c5bedd9c30dcc11f3eeb43b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-engine-6.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "89873a0046f5835750014ba841f1e5f1277a83dac645c41fbf51a5c98c6a435b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-engine-7.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "8e937620860be4b13507af0093ea2845e77d84a07a008614e15fd087067d63ac"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-study-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "e3cba0d34e57417603af4c79055198f180a484d55b7f3b0887ecfecb82104683"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-study-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "ede254fae2a33151adfa6fc09c8921a5c9fce7953b2ef445776476b68d053485"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-study-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "e3cba0d34e57417603af4c79055198f180a484d55b7f3b0887ecfecb82104683"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-study-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "1c5df1cc2d85fca5c95a9c59ce55223a2723f65735c0b859c3b6d6f7d0614376"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-study-4.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "a6e8d386ef873e4a52b3a5a47dfc1d567ec596a1411c1ba86328e9064f3af4ff"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-study-5.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "1c5df1cc2d85fca5c95a9c59ce55223a2723f65735c0b859c3b6d6f7d0614376"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-study-6.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "9fc2e4526d94e08d0879fac016586ba8f09fafc5f5207989694b8674329f1b91"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/equal-phase-study-7.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "1c5df1cc2d85fca5c95a9c59ce55223a2723f65735c0b859c3b6d6f7d0614376"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/fallback-cardinal-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/fallback-cardinal-0.png",
+          "sha256": "51c0bce279885e8363b5705f8cb621f5daf7cea20a62069a169914ec23c44e91"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/fallback-cardinal-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/fallback-cardinal-1.png",
+          "sha256": "f0fe3081ba542c87cff345d5e5a210403069b7542f0a3912dbb4d1f577829737"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/fallback-cardinal-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/fallback-cardinal-2.png",
+          "sha256": "2ba7264f59c95c3acc943d2fc7f0bafa0167fc03e7b3a13b323db617567a3496"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/fallback-cardinal-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/fallback-cardinal-3.png",
+          "sha256": "30b3f009ae2ef082a068fbbad4b206a59bcb3eae9c7ce673bfaadac8b268583c"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/game-roll-0.png",
+          "sha256": "8ca6acf77716eb07e2e3c88710657fc1ef142eebe326408b61ae50c41e3a15af"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/game-roll-1.png",
+          "sha256": "9b694ca639200820ce0644eb4660f9034ae4c3f2ac6fe643d9328d619511d912"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/game-roll-2.png",
+          "sha256": "ba6b6ee2a076102675f9e838cba6939e7382f8016b9317ffff4ec7d20682bd04"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/game-roll-3.png",
+          "sha256": "57129c6096ba130d7a29057af2637c2f3b6739929dba3ec640a9b60f1a64b4f8"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/game-roll-4.png",
+          "sha256": "d0ca929e50d2527ec5e4a6213c10d9aa2c16030afbaa75a1d5f6d49434d190e8"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/game-roll-5.png",
+          "sha256": "cc7a4f18e3dd78e723e2b18a348b6f6fb8ea8cb001fd9cb7d0f857930d9aa348"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/game-roll-6.png",
+          "sha256": "89873a0046f5835750014ba841f1e5f1277a83dac645c41fbf51a5c98c6a435b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/game-roll-7.png",
+          "sha256": "8e937620860be4b13507af0093ea2845e77d84a07a008614e15fd087067d63ac"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "6bbfafefb01b0d3dce5bd76cf498a3db010510ada22a584c78e1a73cf238874b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "c44441667b87985565682818798777ddcac20ba796a6ccab8ebdcf6dc9430d3c"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "a806129df92248b0796199d1a486753f0957f135c140eadefd32f69cbcd96b18"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "6bbfafefb01b0d3dce5bd76cf498a3db010510ada22a584c78e1a73cf238874b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "1f46932bc33869b18c418ed736c4b7af0bca3c52d958051b3c17254844994dfc"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "0faca257ff34c59892b64aa30b0b1c70490c1be8542ae4cfd063e4a2b6ca22b5"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "c920932ca5046a9bb3adfc720df8a11962149136aa16fb90b7721b93f46b4431"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "1f46932bc33869b18c418ed736c4b7af0bca3c52d958051b3c17254844994dfc"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "6bbfafefb01b0d3dce5bd76cf498a3db010510ada22a584c78e1a73cf238874b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "115a732987d7a79c48c4d45b46c444a2f418897a30a3b00d669bd8664dac57dc"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "27371a4935d3b88986faa574726ca06c715531244917aef8749b19c8da1f965f"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "6bbfafefb01b0d3dce5bd76cf498a3db010510ada22a584c78e1a73cf238874b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "1f46932bc33869b18c418ed736c4b7af0bca3c52d958051b3c17254844994dfc"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "7ac0d1f8eba40a19a885b6061b3c80609c9e67dd248ad3481e7507fed587cd50"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "3f5ac062541a98f1afbbf4d1adaef069ee5d3b3b774cba7029ae3908318c60a4"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "1f46932bc33869b18c418ed736c4b7af0bca3c52d958051b3c17254844994dfc"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/independent-visual.json",
+          "sha256": "46b042357671045f45851b9e369febf9c97f846b894639d75416e7dda93a2b55"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-engine.png",
+          "sha256": "5107757c765c37247f1f4af6fcb89c611ee09a6919f0044b8a36546036dd0721"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-equal-phases.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-equal-phases.png",
+          "sha256": "847d462863446a1e9bc6c25f80281168636b360a1aef3ff833d951a46cde786f"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-independent.png",
+          "sha256": "0d476552e63ae06d969730bf871b4fd504b144ccc71b350ff303278d54d768a8"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-phases.png",
+          "sha256": "4fee6f87cf8dd2495ad5456662f0859a34cd1e21a087927da571bc78eed9aa12"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-study.png",
+          "sha256": "245ffad843e14613806056f14330d759f4ced94b9289a1b5f8cba6f44ab69d87"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "a7d5166013a6fd51345dc2dc5f63e0f41f2f1e9a59946805c37aab5c7f89d623"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "101494fbd9af8c816d69866bf756ff40e5528fbaf063747cd2190a9f6ade7bb9"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "ffb71a86ac9fe44291ace9a2ce0f009ed2e38b2bb9d26b71d50d18c1bf2133d0"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-wheel-id-engine.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "da22a75c9e6d03ace9c97298f08a560d422972f225cb878ea95bb82b68c89022"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-wheel-id-study.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "2f56cb483ef51dca33e309ff3abffa3114966291bb184718b50bbd054145a00b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/inspection-wires.png",
+          "sha256": "c97397a6ff857f4bb0ce885d73d755f41522cfdbc0c95aa4d6137a3a0137e21c"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/roll-0.png",
+          "sha256": "e3cba0d34e57417603af4c79055198f180a484d55b7f3b0887ecfecb82104683"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/roll-1.png",
+          "sha256": "ede254fae2a33151adfa6fc09c8921a5c9fce7953b2ef445776476b68d053485"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/roll-2.png",
+          "sha256": "96700474971af2d0a7e88f10b5465fab04b8571e5b356b9f3c2f1cc48c11e44e"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/roll-3.png",
+          "sha256": "d1e2a6f3497365e4d83d505ca717589200619adf64b6995227e5268e47bb275b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/roll-4.png",
+          "sha256": "770a798a63fa7dbad30647b501da25070191ec0b659ec71a7f13306928594883"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/roll-5.png",
+          "sha256": "1c5df1cc2d85fca5c95a9c59ce55223a2723f65735c0b859c3b6d6f7d0614376"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/roll-6.png",
+          "sha256": "8e11fc50ad4a44576f0314f1596104f92b604221d7272d19ed5bf528fb56903d"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/roll-7.png",
+          "sha256": "1c5df1cc2d85fca5c95a9c59ce55223a2723f65735c0b859c3b6d6f7d0614376"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-0.png",
+          "sha256": "7767f6141875ac659cf58e23beb30ba76b92b7d8f122ef9a39c638929d0ecfe6"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-1.png",
+          "sha256": "b38fcc5c4e566172101c44a3a8e59c6da045d0ef60e5b98928b6c1ad56d6a9e6"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-10.png",
+          "sha256": "2c4676864978f26745c16cd41c9fa1421dfd37f589abe35f7e670832f34cd804"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-11.png",
+          "sha256": "b7cba5ba107cf5262999bc9353c4dc45f1c62141e2edb4fa9711e563e526d886"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-12.png",
+          "sha256": "324e18a4975a372aff48af735d7939a69c2484e7d7bd139ac4f84d7d91a3d7d7"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-13.png",
+          "sha256": "20f20915f684d974a204b2f82b89dc1080060babccaeeea3d23b56acaefc13b4"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-14.png",
+          "sha256": "805cef78276129bf25fe12955cbd17fb1c150ddb3e4f6e06e72c5b9e1c05c0df"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-15.png",
+          "sha256": "a38e04d9fa0bfcdfe9633c72e182207887f4593d48aec32e87a002d2da949ca7"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-1x.png",
+          "sha256": "c06590657114be073c034993766a412839ccb7ce6400baf7de11ebdfbd49fe9f"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-2.png",
+          "sha256": "e3cba0d34e57417603af4c79055198f180a484d55b7f3b0887ecfecb82104683"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-2x.png",
+          "sha256": "ad55f4bd60d5c4f44be7ac029484e871f16173131d4f93340aca52084f47e3d6"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-3.png",
+          "sha256": "a1c728101e195f76292af27cb000827f939712a772a3d3f8e41f9d1dfe9e9051"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-3x.png",
+          "sha256": "3b6499d34d31ccc90cd6e22965ec45f08b2c2a4cc40a01fa743f1a7fa6a6660b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-4.png",
+          "sha256": "be64529020638640c361986a7e334ea1b7062fef2e16e8765b25bf81c12821d2"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-5.png",
+          "sha256": "78c525b2630e43a366dffa7c50e0a1ff104001e8b5d6baca91825b257a54960a"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-6.png",
+          "sha256": "e3c16f4e6c63d8df5b11c1dc708d749d0626d4f115749026d403a28e25460735"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-7.png",
+          "sha256": "c6af31bbb574286ffc04d8444a53cb9b3e5db11755d3d3777e2979705a225dee"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-8.png",
+          "sha256": "62b3e0c54433973230ed7af0ff79a9c2d397e3cfb06a4ab9dd54236730f6a4e7"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/study-9.png",
+          "sha256": "2dcba51766f429f264af2641a20c28601f8a2a48c172833f283e4a9e54b95881"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "05d3f773a1d92ecf9641853b61f80dfa0997ca985ce027198bdaca87ffdf68ee"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "dc0265a3dff6e36c4e39d180779cf285470df13d0f20d490210633467ac913f9"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-10.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "6d3678a8d3fe79ed7545c0e3e3d8da67f4d9b91e58e3b7a8342912b42096b8fd"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-11.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "aa02506aea1d8ddd9df04d0ea654096495977c03f8dc85c5b8397c008f3e83e4"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-12.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "47e342ce1836ab86ad3c65dd8590948ccb019282c2f56e88e5c544cfe8d747a8"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-13.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "4b9cdd629edbd21d65e291bc7c8134b6e82d95894047644d24c0999f276c9c3f"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-14.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "fde9e8d2566d6232226e94bc04e79e99e5c9e31e855ea78c8783e4a069653a72"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-15.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "64d5066d8ec048370e72de7013852a5ef5d36d8862de4a0e571597c28bb80011"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "636151fab8b370621b178c9238e6ee16217a974f8160fee6acd32a9e468edea7"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "db419225942e535a7002a1d2de27acbc0dd9c5034e2607998cf515b93b77c8c7"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-4.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "5b8d3bc989ffe15022c5da03ea4a9133306c993086b3c97fa4a371631bb57878"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-5.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "5ae2e3f6f383141b79ee02badacec404eaddc7e717ff7ba9c1dc5dce2806f03e"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-6.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "7c981413fbb0233738564d4a72bdece50fc3370e2c4d0de2dd80efa6f0a4d155"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-7.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "5f45c36f15f4968100248f8ea1bea7655bae94d2e6eceb20226fe62847751fc9"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-8.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "25c2e3ece2e6ce10e29e7c7b12bb0017a2559b7d765d01f9733749157695c677"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-engine-9.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "da600bf844f3ed593d76819eaf81c6228f4d9b232ce2f2aaffdbf9f5574ad79b"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-0.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "d2b231c9ec1f50df8a7665ddac2e53fbbd65be79026a2ef90d4018cb024e2679"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-1.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "8b5f3bda80ef80d71791fc54052d4a8f083938b2a4131576cb84391700f1ac41"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-10.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "d770867b3d3a6ab95f772c6caa31812d3d4777d0e9ba4ed9a36fd8e99767ea6c"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-11.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "3da265cfa1028d66cd8f76261fc21c603923498155c1ca47e8423a14462e1c56"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-12.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "4f46c2d198b3caf9e70569f7ca7c377c06efdc2ce1867a5710f0b680cac846fc"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-13.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "3137d18ae007db1536fbc48c7ed29f12459d140638191737e1bba57870fea218"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-14.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "334d025851911884e4d51582f5a9be0b8a2626ddd44758be927e4379cd9b896a"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-15.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "7d3e8913bd0b33aa4dc1a8f74570c2f05d02c03add53ff99efd4a73296999640"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-2.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "415c9ed5fb91e23d5b64a24ca5f1f45ef84eaf6c9faadea83e0fa6eb630d1b8a"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-3.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "7606ddf1480a3896588662658edda9abf191f33f0a4136e30e11d7f2f35f3b1e"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-4.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "245e944efb185337dd832f9bbc5ef0bfe883539686de654abf02f9fa09a86ab0"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-5.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "8235773d1f127546f14f8f76224d392f52d6caf0e5d7e3b800faa84e261f7640"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-6.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "42b163d5d2a1a04283db5ec167108eefd07df4e048a9cc061665544ed7886b3f"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-7.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "8ca25166416766d829fe88455e352aba2b668f1c1f0ea5eaac5ae555954807a1"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-8.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "97130985544c4df8d1e94f3d4ef8aba86d0664b0831eee85f93fa2667b40c308"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-id-study-9.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "5f0dce71a922ba9572028a3adda64b083b3b46283d23ddb91363337a3b1f5ae4"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wheel-visual.json",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wheel-visual.json",
+          "sha256": "b38a39f82abc9eb5ca7f1d6d6c464899c84cafc8b26d48c0f078a4f852d14893"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wire-engine.png",
+          "sha256": "d19f8f03c99ee81e5b302897351330b924d50fe6906c9ed69ed5443fa2cab653"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/engine/wire-study.png",
+          "sha256": "eeb083084005e6c1ccd270d48be0643988761d598797397428fbe44970088abd"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/model.glb",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/model.glb",
+          "sha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/recipe.json",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/recipe.json",
+          "sha256": "8864e12cc377762fcac11e36097ee9c462633e489f644a6ba137011a68cab51c"
+        },
+        {
+          "source": "demos/vehicle-bake/forklift/v1/report.json",
+          "retained": "demos/original-vehicles/forklift-v1/inputs/report.json",
+          "sha256": "ebe45cee129df97171da2a945e315fd9e2c59136b2e3ee4501cada278e4b8380"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

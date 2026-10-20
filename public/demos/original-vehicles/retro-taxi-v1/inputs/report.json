@@ -1,0 +1,1162 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "retro-taxi",
+  "route": "retro-taxi",
+  "revision": "v1",
+  "method": "Original rounded low yellow four-door taxi sedan with substantial hood/trunk, domed cabin and swept front/rear glazing. Continuous actual-skin UV charts own bounded blue panes, broad two-row black/cream checker belt, four-door seams/gray handles and rear tail paint. Small fixed roof-sign solid has actual UV dark inset without text. No glass overlays, source projection or high-to-low claim.",
+  "geometry": {
+    "triangles": 2970,
+    "vertices": 5792,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 209576,
+    "sha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 7.478260869565219,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 7.478260869565219,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 7.478260869565219,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 7.478260869565219,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.399999976158142,
+        -0.8149999976158142,
+        0.4300000071525574
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        7.47826099395752,
+        14.173913002014162
+      ],
+      "radiusBlender": 0.43,
+      "wheel_radius": 7.478260869565219
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.399999976158142,
+        0.8149999976158142,
+        0.4300000071525574
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        7.47826099395752,
+        -14.173913002014162
+      ],
+      "radiusBlender": 0.43,
+      "wheel_radius": 7.478260869565219
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.3899999856948853,
+        -0.8149999976158142,
+        0.4300000071525574
+      ],
+      "centerExport": [
+        24.17391279469366,
+        7.47826099395752,
+        14.173913002014162
+      ],
+      "radiusBlender": 0.43,
+      "wheel_radius": 7.478260869565219
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.3899999856948853,
+        0.8149999976158142,
+        0.4300000071525574
+      ],
+      "centerExport": [
+        24.17391279469366,
+        7.47826099395752,
+        -14.173913002014162
+      ],
+      "radiusBlender": 0.43,
+      "wheel_radius": 7.478260869565219
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/retro-taxi/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/retro-taxi/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/retro-taxi/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Static four-door taxi, fixed blank roof sign and painted closed doors. No equipment animations or sign/light-effect tags. Existing ordinary driving hides driver; no visible animated driver.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 2970,
+  "vertexCount": 5792,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 209576,
+  "atlasBytes": 3292,
+  "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+  "atlasSha256": "fe16716c37b4757fe93c18096d8242ddb3dec8f1afa8ecb85c9d1187c73a62e4",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "retro-taxi--v1",
+    "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "triangles": 2970,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 7.4782609939575195,
+        "minimumGap": 1.660268894583096,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 7.4782609939575195,
+        "minimumGap": 1.660268894583096,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 7.478261947631836,
+        "minimumGap": 1.6602692212566659,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 7.478261947631836,
+        "minimumGap": 1.6602695608061282,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/retro-taxi/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "minBlenderWorld": [
+      -40.91304016113281,
+      -17.39130401611328,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      40.91304016113281,
+      17.39130401611328,
+      28.695653915405273
+    ],
+    "dimensionsBlenderWorld": [
+      81.82608032226562,
+      34.78260803222656,
+      28.695653438568115
+    ],
+    "dimensionsSourceUnits": [
+      4.704999618530273,
+      1.999999961853027,
+      1.6500000727176665
+    ]
+  },
+  "nativeCropEvidence": {
+    "status": "passed",
+    "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "browser": "bundled full Chromium",
+    "browserVersion": "153.0.8010.12",
+    "nativeSizes": [
+      128,
+      224
+    ],
+    "views": [
+      {
+        "mode": "study",
+        "yaw": 0,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 22.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 45,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 67.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 90,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 112.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 135,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 157.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 180,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 202.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 225,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 247.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 270,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 292.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 315,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 337.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 0,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 22.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 45,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 67.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 90,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 112.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 135,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 157.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 180,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 202.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 225,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 247.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 270,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 292.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 315,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 337.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      }
+    ],
+    "fixedDensity": true,
+    "resizedOrRefitted": false,
+    "errors": [],
+    "meaning": "Both cameras/all32 headings retain the exact full128-square centered native RGBA crop, including outline and transparent frame boundary. The taxi fits both viewports at fixed camera/density, no rescaling."
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "rayCount": 19,
+    "samples": [
+      {
+        "id": "left-front-door-glass",
+        "hitSource": [
+          -0.3800000250339508,
+          -0.8087904453277588,
+          1.220000147819519
+        ],
+        "triangle": 145,
+        "interpolatedUV": [
+          0.4240000247955322,
+          0.7466216087341309
+        ],
+        "atlasPixel": [
+          217,
+          129
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-rear-door-glass",
+        "hitSource": [
+          0.4000000059604645,
+          -0.8083128929138184,
+          1.220000147819519
+        ],
+        "triangle": 1106,
+        "interpolatedUV": [
+          0.5799999833106995,
+          0.7466214895248413
+        ],
+        "atlasPixel": [
+          296,
+          129
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-checker--0.65-0.74-cream",
+        "hitSource": [
+          -0.6500000357627869,
+          -0.9500000476837158,
+          0.7400000691413879
+        ],
+        "triangle": 120,
+        "interpolatedUV": [
+          0.3699999749660492,
+          0.8682431578636169
+        ],
+        "atlasPixel": [
+          189,
+          67
+        ],
+        "rgb": [
+          255,
+          239,
+          191
+        ],
+        "roles": [
+          "cream"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-checker--0.5-0.74-checkerBlack",
+        "hitSource": [
+          -0.5000000596046448,
+          -0.9500000476837158,
+          0.7400000691413879
+        ],
+        "triangle": 1039,
+        "interpolatedUV": [
+          0.40000003576278687,
+          0.8682433366775513
+        ],
+        "atlasPixel": [
+          204,
+          67
+        ],
+        "rgb": [
+          45,
+          48,
+          66
+        ],
+        "roles": [
+          "checkerBlack"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-checker--0.65-0.9-checkerBlack",
+        "hitSource": [
+          -0.6500000357627869,
+          -0.934999942779541,
+          0.9000000357627869
+        ],
+        "triangle": 121,
+        "interpolatedUV": [
+          0.3700000047683716,
+          0.8277026414871216
+        ],
+        "atlasPixel": [
+          189,
+          88
+        ],
+        "rgb": [
+          45,
+          48,
+          66
+        ],
+        "roles": [
+          "checkerBlack"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-checker--0.5-0.9-cream",
+        "hitSource": [
+          -0.5000000596046448,
+          -0.9349997043609619,
+          0.9000000357627869
+        ],
+        "triangle": 1040,
+        "interpolatedUV": [
+          0.4000000059604645,
+          0.8277026414871216
+        ],
+        "atlasPixel": [
+          204,
+          88
+        ],
+        "rgb": [
+          255,
+          239,
+          191
+        ],
+        "roles": [
+          "cream"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-front-door-glass",
+        "hitSource": [
+          -0.3800000250339508,
+          0.8087904453277588,
+          1.220000147819519
+        ],
+        "triangle": 152,
+        "interpolatedUV": [
+          0.42399999499320984,
+          0.7466215491294861
+        ],
+        "atlasPixel": [
+          217,
+          129
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-rear-door-glass",
+        "hitSource": [
+          0.4000000059604645,
+          0.8083128929138184,
+          1.220000147819519
+        ],
+        "triangle": 1113,
+        "interpolatedUV": [
+          0.5799999237060547,
+          0.7466214895248413
+        ],
+        "atlasPixel": [
+          296,
+          129
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-checker--0.65-0.74-cream",
+        "hitSource": [
+          -0.6500000357627869,
+          0.9500000476837158,
+          0.7400000691413879
+        ],
+        "triangle": 135,
+        "interpolatedUV": [
+          0.37000003457069397,
+          0.8682432174682617
+        ],
+        "atlasPixel": [
+          189,
+          67
+        ],
+        "rgb": [
+          255,
+          239,
+          191
+        ],
+        "roles": [
+          "cream"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-checker--0.5-0.74-checkerBlack",
+        "hitSource": [
+          -0.5000000596046448,
+          0.9500000476837158,
+          0.7400000691413879
+        ],
+        "triangle": 1054,
+        "interpolatedUV": [
+          0.40000003576278687,
+          0.8682432770729065
+        ],
+        "atlasPixel": [
+          204,
+          67
+        ],
+        "rgb": [
+          45,
+          48,
+          66
+        ],
+        "roles": [
+          "checkerBlack"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-checker--0.65-0.9-checkerBlack",
+        "hitSource": [
+          -0.6500000357627869,
+          0.9349997043609619,
+          0.9000000357627869
+        ],
+        "triangle": 134,
+        "interpolatedUV": [
+          0.3700000047683716,
+          0.8277026414871216
+        ],
+        "atlasPixel": [
+          189,
+          88
+        ],
+        "rgb": [
+          45,
+          48,
+          66
+        ],
+        "roles": [
+          "checkerBlack"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-checker--0.5-0.9-cream",
+        "hitSource": [
+          -0.5000000596046448,
+          0.934999942779541,
+          0.9000000357627869
+        ],
+        "triangle": 1053,
+        "interpolatedUV": [
+          0.4000000059604645,
+          0.8277027010917664
+        ],
+        "atlasPixel": [
+          204,
+          88
+        ],
+        "rgb": [
+          255,
+          239,
+          191
+        ],
+        "roles": [
+          "cream"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-swept-windshield",
+        "hitSource": [
+          -0.8450000286102295,
+          0.0,
+          1.2599999904632568
+        ],
+        "triangle": 1016,
+        "interpolatedUV": [
+          0.25,
+          0.31503382325172424
+        ],
+        "atlasPixel": [
+          128,
+          350
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rear-swept-window",
+        "hitSource": [
+          0.9257143139839172,
+          0.0,
+          1.2400001287460327
+        ],
+        "triangle": 233,
+        "interpolatedUV": [
+          0.7500000596046448,
+          0.31798988580703735
+        ],
+        "atlasPixel": [
+          384,
+          349
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "roof-sign-dark-actual-UV-inset",
+        "hitSource": [
+          -0.23000025749206543,
+          0.0,
+          1.5750001668930054
+        ],
+        "triangle": 1831,
+        "interpolatedUV": [
+          0.5,
+          0.07812497019767761
+        ],
+        "atlasPixel": [
+          256,
+          472
+        ],
+        "rgb": [
+          45,
+          48,
+          66
+        ],
+        "roles": [
+          "checkerBlack"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "roof-sign-cream-UV-border",
+        "hitSource": [
+          -0.23000025749206543,
+          0.3100000321865082,
+          1.5750001668930054
+        ],
+        "triangle": 1831,
+        "interpolatedUV": [
+          0.9558824300765991,
+          0.07812497019767761
+        ],
+        "atlasPixel": [
+          489,
+          472
+        ],
+        "rgb": [
+          255,
+          239,
+          191
+        ],
+        "roles": [
+          "cream"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "roof-sign-static-top",
+        "hitSource": [
+          -0.019999999552965164,
+          0.0,
+          1.6500000953674316
+        ],
+        "triangle": 731,
+        "interpolatedUV": [
+          0.5312499403953552,
+          0.0468749962747097
+        ],
+        "atlasPixel": [
+          271,
+          488
+        ],
+        "rgb": [
+          255,
+          239,
+          191
+        ],
+        "roles": [
+          "cream"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "substantial-yellow-hood",
+        "hitSource": [
+          -1.5500000715255737,
+          0.0,
+          1.0549999475479126
+        ],
+        "triangle": 936,
+        "interpolatedUV": [
+          0.18999995291233063,
+          0.109375
+        ],
+        "atlasPixel": [
+          97,
+          456
+        ],
+        "rgb": [
+          255,
+          215,
+          87
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "substantial-yellow-trunk",
+        "hitSource": [
+          1.600000023841858,
+          0.0,
+          1.0134146213531494
+        ],
+        "triangle": 1214,
+        "interpolatedUV": [
+          0.8200000524520874,
+          0.109375
+        ],
+        "atlasPixel": [
+          419,
+          456
+        ],
+        "rgb": [
+          255,
+          215,
+          87
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/retro-taxi/surface-regions.json",
+    "meaning": "Actual GLB triangle/interpolated-UV probes establish four door-window panes, front/rear glass, alternating two-row checker colors on actual side panels, roof-sign dark inset/cream border/top and substantial yellow hood/trunk. All glazing opaque on actual body skin; static sign has no text.",
+    "inputBytesUnchanged": true
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/retro-taxi/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/retro-taxi/capture.mjs",
+    "python scripts/vehicle-bake/retro-taxi/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/retro-taxi/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/retro-taxi/v1/evidence/clearance-input.json data/vehicle-bake/retro-taxi/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/retro-taxi/v1/model.glb --config art-source/vehicle-bake/retro-taxi/v1/coverage-region.json --output data/vehicle-bake/retro-taxi/recheck-coverage.json",
+    "python scripts/vehicle-bake/retro-taxi/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/retro-taxi/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 actual study and16 game headings, eight signed phases per camera and both wireframes. Original224-pixel study2/study14 and engine2/engine14 front/rear obliques were inspected; contact sheets use integer nearest scaling only.",
+    "Rounded yellow four-door sedan has substantial distinct hood/trunk, low gently domed cabin, broad blue glazing and a small fixed blank sign box. Checker belt reads clearly as alternating black/cream palette blocks on side panels.",
+    "Nineteen actualGLB triangle/interpolated-UV rays independently confirm four door panes, swept front/rear glass, both rows of alternating checker colors on each side, actual sign inset/border/top and yellow hood/trunk. No overlay glazing or checker planes.",
+    "The roof sign is fixed body geometry; all24 sign vertices remain in Body_static. Its blank dark inset belongs to actual front/back UV faces. No text, logo, animated sign or light-effect tags.",
+    "Four tires fit genuine local open arch pockets. Far crowns stay beneath integrated rounded fenders in all32 headings and signed phases;25/25 own finite region samples per wheel with controls support visual inspection. No exposed-wheel exception.",
+    "Native224/radius112 density remains fixed, with no clipping, model resizing or per-angle fit. Both-camera/all32 full centered128/224 RGBA crop parity is exact, including outer frame.",
+    "Broad warm yellow and cream clusters with cool blue glass remain coherent. Small checker/frame/handle and gray trim pixels retain expected angle-dependent aliasing. Existing ordinary hidden-driver semantics; no visible animated driver or equipment animation."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 19,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "bothCamera32Heading128FullCropParity": true,
+    "actualRoofSignStaticFixedBodyVertices": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Closed opaque four-door taxi body; no open-interior claim. Small blank roof sign is static with actual UV-owned dark inset.",
+    "Small window frames, lamps, handles and gray trim retain expected native-pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/retro-taxi/v1/atlas.png": "fe16716c37b4757fe93c18096d8242ddb3dec8f1afa8ecb85c9d1187c73a62e4",
+    "art-source/vehicle-bake/retro-taxi/v1/audit-source.py": "2098cc188005d8b1d417e24661ebdf7f6bf5529e83ad1eac14152c2ec9dbeb08",
+    "art-source/vehicle-bake/retro-taxi/v1/build.py": "06212baca486d55be9b6806a24e992c8c779abe56ac18d2d6105bbef7795419e",
+    "art-source/vehicle-bake/retro-taxi/v1/capture.mjs": "bbdfdc47a3f717b95341ff3636942ba5738bae965d329d3012f695d5cd917b22",
+    "art-source/vehicle-bake/retro-taxi/v1/car.blend": "b6b677054266b2b381648eb7ffc7334baa3ee65ce1aeaada2c4f99403003ba18",
+    "art-source/vehicle-bake/retro-taxi/v1/coverage-region.json": "861a65627dcf90414fcd677b8c409916dbf87c11d9fde7f0bcf17e4f409a1759",
+    "art-source/vehicle-bake/retro-taxi/v1/crop-parity.mjs": "bfbd8a6264bbf6e1a68354f9d53f6a7081ae75eee3208921cbcb395c796f1731",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/author-browser-qa.json": "4aa9353cdbcaac4e87f0c846d1af8badaa3b5851e762aa9d94aeb9d7910957cc",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/author-visual-inspection.json": "eece1ba2b34914b2b2535bed2fd4124664fe68ddd94d03c8b5245d07d249858f",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/both-camera-native-parity.json": "b8f50a0387e662a8bf27424321425c33f5db66d5283cce0fbb328ae08bb08a1f",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/clearance-input.json": "44bc5ad1d1f52d9611d85988e3ee3ad71a649a4a438d3aef012762da308c6cc4",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/engine-capture.json": "1e02e4dddd0b430bbe94fee717c72c39377c8306e6e626ab3dcef640ae58350c",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/packed-source-audit.json": "8290ec0b3bd13a7bdd3605488dd7836f91ecb83955573c9b0c44e1cfce61d11b",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/replay-verification.json": "b608dd66b46a5a0de71897a00cda4221766ef2f4701736a870428d36057be474",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/shared-clearance.json": "93059f5264943affb60dd9e9b159642fb7d78293229d1b09f9a84ea8c43e5729",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/upper-wheel-coverage.json": "d9da5db849a38f6124730ab00da1c56259ec798ed01cf0264073d115113c1ac8",
+    "art-source/vehicle-bake/retro-taxi/v1/family.json": "1696b34af056ed6bf63ce79714d9b40e5ee907070f617b63a511ae059f572eca",
+    "art-source/vehicle-bake/retro-taxi/v1/finalize.py": "86acd7a1f3909497af5cf0df084eee8bca66087ef032f7b55148b9a2eef9bb50",
+    "art-source/vehicle-bake/retro-taxi/v1/master.blend": "369c4bdfa46af93ff37ccde06af4b537dea8f11b6adc045eb81ab2fef86af4cc",
+    "art-source/vehicle-bake/retro-taxi/v1/model.glb": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "art-source/vehicle-bake/retro-taxi/v1/pack-author.py": "5ab89fa594bafb18bbad91b081516a9e1d7437eaab6a182e27e68563e629d6f2",
+    "art-source/vehicle-bake/retro-taxi/v1/paint-ownership.json": "0c8c9b1f77f2d81c587656b9a5efbc8e0dd1b41686753bbfb2bfbe9ff61cdb25",
+    "art-source/vehicle-bake/retro-taxi/v1/palette-draft.png": "ab238b778fe3812d7afcbcde8ea0482e1d86c03076ee52f12783ca311030ef27",
+    "art-source/vehicle-bake/retro-taxi/v1/recipe.json": "8cd5310fdf89c84aaa379c793de5b842d97f5d2038e7697fa40b0970394d1528",
+    "art-source/vehicle-bake/retro-taxi/v1/review.json": "b3d18d4b732fa028168cfca20a84aa0e90619f8fb081ff7d81a84213b2e56f91",
+    "art-source/vehicle-bake/retro-taxi/v1/sheets.py": "9c33ede564e239cc08a6b8a5f8dd89869b8a2a34b5ac62de2c4a82960354acb0",
+    "art-source/vehicle-bake/retro-taxi/v1/surface-regions.json": "b8222791dc5bdef71dd5b20db0a5a8b49baec1370a20dbf5b8d7413533f2b2b6"
+  }
+}

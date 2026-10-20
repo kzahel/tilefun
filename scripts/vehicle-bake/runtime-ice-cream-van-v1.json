@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "ice-cream-van",
+  "name": "Ice cream van",
+  "tags": ["vehicle", "original", "ice cream van"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/ice-cream-van-v1/review-manifest.json",
+    "sha256": "ec4731f064659db43ab456b23d1d7ec863d8aa373a80023a5ed7eced8ede5850",
+    "candidateId": "ice-cream-van-v1",
+    "model": "public/demos/original-vehicles/ice-cream-van-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/ice-cream-van-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/ice-cream-van-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/ice-cream-van-v1/captures",
+    "modelSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+    "triangles": 2710,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/ice-cream-van/v1/evidence/replay-verification.json",
+    "sha256": "3cf3807fe40758b63cd256af165b5940b590e75d62d8fda078119d463d8108c6",
+    "build": "art-source/vehicle-bake/ice-cream-van/v1/build.py",
+    "family": "art-source/vehicle-bake/ice-cream-van/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "ice-cream-van-authored-v1",
+    "path": "assets/models/vehicles/ice-cream-van-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/ice-cream-van-v1.png",
+  "performance": {
+    "speed": 88,
+    "acceleration": 135,
+    "pushSpeed": 42,
+    "pushWeight": 230
+  },
+  "receipt": "art-source/vehicle-bake/runtime-ice-cream-van-v1.json",
+  "expectedBounds": [86, 44, 42]
+}

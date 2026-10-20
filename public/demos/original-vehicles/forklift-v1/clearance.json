@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "forklift--v1",
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "triangles": 2940,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.565218176709749,
+        "minimumGap": 1.835063598053373,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.565218176709749,
+        "minimumGap": 1.835063598053373,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 4.347826558120597,
+        "minimumGap": 0.997351319793438,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 4.347826558120597,
+        "minimumGap": 0.997351254953859,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

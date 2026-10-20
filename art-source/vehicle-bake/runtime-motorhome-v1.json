@@ -1,0 +1,112 @@
+{
+  "modelSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+  "spriteSha256": "d310d4b1a8cffedf3cca715619ff82dd3873ef0615307aa46214492a5c09280e",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-motorhome-v1.json": "627579e6cd6fa996735a946d6e5987044f29381da3c649500267d8d57d452cf1",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/motorhome-v1/review-manifest.json": "fa65bb326f56aac5a53868df90ff2eb9f41dd32e1a97f2549e277274cbf0107d",
+    "public/demos/original-vehicles/motorhome-v1/inputs/model.glb": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+    "public/demos/original-vehicles/motorhome-v1/inputs/atlas.png": "aa4d5b8eb711f565e28466efe1a2618fdd454f1b51cb29579cea40ebe687e7a5",
+    "public/demos/original-vehicles/motorhome-v1/captures/capture.json": "a76a8ce400e32ca21d8120aa84b1f1a120c7c3d7f174b2a348642162214ac243",
+    "art-source/vehicle-bake/motorhome/v1/evidence/replay-verification.json": "ea40b9f6c7c40fdaf491d63d0ac2e0c3a663173f42f9b45154c31e2164624015",
+    "art-source/vehicle-bake/motorhome/v1/build.py": "eb41b53316b89346659aaa93034f41255d36eaf2c9f82469b9cd661464cabbf5",
+    "art-source/vehicle-bake/motorhome/v1/family.json": "2516cd535adac0c1e45f2da106038d2e33bd30cd78ff9a82e9e472ee5f62a34c",
+    "art-source/vehicle-bake/motorhome/v1/coverage-region.json": "2542c3517a3eebf4efa7dfe9d6b177e15b4743b914e9c2500502751a8504b22d",
+    "art-source/vehicle-bake/motorhome/v1/surface-regions.json": "ddacf6023d63fb3fbe3bb631a08ce7f8e0c30a19684bf4b7a8f2d45a804b3de8",
+    "art-source/vehicle-bake/motorhome/v1/pod-region.json": "9ff6d650aa2c7cf15b8a0f0ac145998ac50bb84c826a0736005acab42ff729d7",
+    "art-source/vehicle-bake/motorhome/v1/review.json": "74cbbed4aa4543394bf46325571d20ee9c58aa6a260256883c66c4ca4abb365d",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "public/demos/original-vehicles/motorhome-v1/captures/engine-4.png": "00d8d6cd8376ef04a29f72ae5c55d386477734817da840d5505d322be2eaefc4",
+    "public/demos/original-vehicles/motorhome-v1/captures/engine-12.png": "ee74117159ca31d5a7bcb9b42cd3d3a13a206444dc6c92b8343d853fb8b42d3e",
+    "public/demos/original-vehicles/motorhome-v1/captures/engine-8.png": "470bd57796c06807a71f81343f5a16fe579379959908b16bfae982ae2e1dc2f1",
+    "public/demos/original-vehicles/motorhome-v1/captures/engine-0.png": "7d2a84d32e90dfcebf484d2de6efcf04c95473e6e296f72443e7346202602825"
+  },
+  "physicalBounds": [
+    125,
+    53,
+    53
+  ],
+  "measurement": {
+    "modelSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -62.260868072509766,
+        -26.086956024169922,
+        9.5367431640625e-07
+      ],
+      "max": [
+        60.21738815307617,
+        22.65217399597168,
+        52.31304168701172
+      ],
+      "size": [
+        122.47825622558594,
+        48.73912811279297,
+        52.31304168701172
+      ]
+    },
+    "triangles": 2858,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      256,
+      256
+    ],
+    "groundOrigin": [
+      128,
+      128
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/motorhome/v1/evidence/replay-verification.json",
+    "sha256": "ea40b9f6c7c40fdaf491d63d0ac2e0c3a663173f42f9b45154c31e2164624015",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-motorhome-v1.json --blender BLENDER"
+}

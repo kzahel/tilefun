@@ -1,0 +1,994 @@
+{
+  "status": "passed",
+  "glbSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+  "riderSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "inputHashes": {
+    "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/master.blend": "56419a6c9c69e5a324e30845eadd350636ee661055fe1890b21c4efb616b5232",
+    "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/model.glb": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+    "art-source/vehicle-riders/bear-upright/v1/master.blend": "bece89367aa6aff98ea303ffe63d49a8725b4eb71b57fcdc771d0f9b790300ae",
+    "art-source/vehicle-riders/bear-upright/v1/rider.glb": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10"
+  },
+  "riderTrianglesMatchedToNamedBearMaster": 2112,
+  "bikeFixedTrianglesMatchedToNamedMaster": 1634,
+  "baseline": {
+    "status": "passed",
+    "pairs": [
+      {
+        "bikeOwner": "Actual dark saddle central hip tangent",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 6,
+        "intersectionPoints": 12,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual rounded pillion rear saddle",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 7,
+        "intersectionPoints": 12,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip left",
+        "riderOwner": "Bear gripping forepaw left",
+        "intersectionTrianglePairs": 51,
+        "intersectionPoints": 117,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual sole tangent foot peg left",
+        "riderOwner": "Bear broad hindpaw left",
+        "intersectionTrianglePairs": 2,
+        "intersectionPoints": 4,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip right",
+        "riderOwner": "Bear gripping forepaw right",
+        "intersectionTrianglePairs": 51,
+        "intersectionPoints": 118,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual sole tangent foot peg right",
+        "riderOwner": "Bear broad hindpaw right",
+        "intersectionTrianglePairs": 1,
+        "intersectionPoints": 2,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      }
+    ],
+    "inappropriatePairs": []
+  },
+  "negative": {
+    "translationSource": [
+      -0.28,
+      0,
+      -0.22
+    ],
+    "actualTankCollisionDetected": true,
+    "inappropriatePairs": [
+      {
+        "bikeOwner": "Rounded teal tank actual cream side UV panels",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 34,
+        "intersectionPoints": 68,
+        "bikeVerticesInsideClosedRiderPart": 8,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 76,
+        "unallowedExamplesWorld": [
+          [
+            -2.832775354385376,
+            0.473175972700119,
+            17.399999618530273
+          ],
+          [
+            -3.652637243270874,
+            1.1600382328033447,
+            17.399999618530273
+          ],
+          [
+            -4.34782600402832,
+            1.742451548576355,
+            17.399999618530273
+          ],
+          [
+            -3.6526355743408203,
+            1.160036563873291,
+            17.399999618530273
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded teal tank actual cream side UV panels",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 40,
+        "intersectionPoints": 80,
+        "bikeVerticesInsideClosedRiderPart": 31,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 111,
+        "unallowedExamplesWorld": [
+          [
+            -7.094559192657471,
+            2.1089391708374023,
+            16.227630615234375
+          ],
+          [
+            -7.268810749053955,
+            2.185854196548462,
+            16.40188217163086
+          ],
+          [
+            -7.4782609939575195,
+            2.4020767211914062,
+            17.18474769592285
+          ],
+          [
+            -7.268810749053955,
+            2.185854434967041,
+            16.40188217163086
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual dark saddle central hip tangent",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 27,
+        "intersectionPoints": 54,
+        "bikeVerticesInsideClosedRiderPart": 10,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 64,
+        "unallowedExamplesWorld": [
+          [
+            1.4998664855957031,
+            -1.3913042545318604,
+            16.84719467163086
+          ],
+          [
+            1.522644281387329,
+            -1.3913042545318604,
+            16.79220962524414
+          ],
+          [
+            1.5662420988082886,
+            -1.3913042545318604,
+            16.686954498291016
+          ],
+          [
+            1.522644281387329,
+            -1.3913040161132812,
+            16.79220962524414
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual dark saddle central hip tangent",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 20,
+        "intersectionPoints": 40,
+        "bikeVerticesInsideClosedRiderPart": 12,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 52,
+        "unallowedExamplesWorld": [
+          [
+            2.0636916160583496,
+            0.3684513568878174,
+            17.747825622558594
+          ],
+          [
+            2.0636911392211914,
+            0.9565216898918152,
+            17.747825622558594
+          ],
+          [
+            1.827746868133545,
+            -1.3913042545318604,
+            16.865930557250977
+          ],
+          [
+            1.7798627614974976,
+            -1.3913042545318604,
+            16.686954498291016
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual dark saddle central hip tangent",
+        "riderOwner": "Bear tiny fixed tail",
+        "intersectionTrianglePairs": 80,
+        "intersectionPoints": 160,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 16,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 176,
+        "unallowedExamplesWorld": [
+          [
+            3.4138283729553223,
+            0.9565216898918152,
+            17.747825622558594
+          ],
+          [
+            3.4563279151916504,
+            0.8911445140838623,
+            17.747825622558594
+          ],
+          [
+            1.4557380676269531,
+            0.9565216898918152,
+            17.747825622558594
+          ],
+          [
+            1.4132378101348877,
+            0.8911443948745728,
+            17.747825622558594
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual narrow saddle nose",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 14,
+        "intersectionPoints": 28,
+        "bikeVerticesInsideClosedRiderPart": 20,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 48,
+        "unallowedExamplesWorld": [
+          [
+            -2.2608652114868164,
+            1.2173902988433838,
+            17.399999618530273
+          ],
+          [
+            -3.04347825050354,
+            1.2173902988433838,
+            17.399999618530273
+          ],
+          [
+            -3.04347825050354,
+            1.2173902988433838,
+            17.399999618530273
+          ],
+          [
+            -3.217390298843384,
+            1.04347825050354,
+            17.399999618530273
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual narrow saddle nose",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 0,
+        "intersectionPoints": 0,
+        "bikeVerticesInsideClosedRiderPart": 24,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 24,
+        "unallowedExamplesWorld": [
+          [
+            -3.04347825050354,
+            -1.04347825050354,
+            16.443477630615234
+          ],
+          [
+            -3.04347825050354,
+            -1.3913042545318604,
+            16.791303634643555
+          ],
+          [
+            -3.3913042545318604,
+            -1.04347825050354,
+            16.791303634643555
+          ],
+          [
+            -3.04347825050354,
+            -1.3913042545318604,
+            17.226085662841797
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Exposed single cylinder broad block",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 31,
+        "intersectionPoints": 62,
+        "bikeVerticesInsideClosedRiderPart": 6,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 68,
+        "unallowedExamplesWorld": [
+          [
+            -3.217391014099121,
+            -1.56521737575531,
+            13.921738624572754
+          ],
+          [
+            -3.364988327026367,
+            -1.7128145694732666,
+            13.921738624572754
+          ],
+          [
+            -3.217391014099121,
+            0.5025173425674438,
+            13.921738624572754
+          ],
+          [
+            -3.217391014099121,
+            1.56521737575531,
+            13.921738624572754
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Exposed single cylinder broad block",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 23,
+        "intersectionPoints": 46,
+        "bikeVerticesInsideClosedRiderPart": 6,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 52,
+        "unallowedExamplesWorld": [
+          [
+            -3.217391014099121,
+            -1.56521737575531,
+            14.965216636657715
+          ],
+          [
+            -3.2276885509490967,
+            -1.5755149126052856,
+            14.965216636657715
+          ],
+          [
+            -3.217391014099121,
+            1.491075038909912,
+            14.965216636657715
+          ],
+          [
+            -3.217391014099121,
+            1.56521737575531,
+            14.965216636657715
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Broad engine cooling fin 0.8",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 15,
+        "intersectionPoints": 30,
+        "bikeVerticesInsideClosedRiderPart": 2,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 32,
+        "unallowedExamplesWorld": [
+          [
+            -6.381433486938477,
+            -2.17391300201416,
+            14.007696151733398
+          ],
+          [
+            -6.17391300201416,
+            -2.1739134788513184,
+            13.921738624572754
+          ],
+          [
+            -5.438742637634277,
+            -2.17391300201416,
+            13.921738624572754
+          ],
+          [
+            -6.17391300201416,
+            -2.17391300201416,
+            13.921738624572754
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Broad engine cooling fin 0.85",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 10,
+        "intersectionPoints": 20,
+        "bikeVerticesInsideClosedRiderPart": 4,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 24,
+        "unallowedExamplesWorld": [
+          [
+            -7.2719316482543945,
+            -2.17391300201416,
+            14.973913192749023
+          ],
+          [
+            -7.147627830505371,
+            -2.17391300201416,
+            14.673818588256836
+          ],
+          [
+            -7.113449573516846,
+            -2.17391300201416,
+            14.591304779052734
+          ],
+          [
+            -7.113449573516846,
+            -1.2095564603805542,
+            14.591304779052734
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Broad engine cooling fin 0.85",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 11,
+        "intersectionPoints": 22,
+        "bikeVerticesInsideClosedRiderPart": 2,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 24,
+        "unallowedExamplesWorld": [
+          [
+            -4.782608509063721,
+            -2.17391300201416,
+            14.965216636657715
+          ],
+          [
+            -4.064659118652344,
+            -2.173912525177002,
+            14.965216636657715
+          ],
+          [
+            -2.9091038703918457,
+            -2.17391300201416,
+            14.965216636657715
+          ],
+          [
+            -4.064659595489502,
+            -2.17391300201416,
+            14.965216636657715
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Narrow tubular frame member 3",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 40,
+        "intersectionPoints": 80,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 80,
+        "unallowedExamplesWorld": [
+          [
+            1.7026524543762207,
+            -0.12506023049354553,
+            16.357633590698242
+          ],
+          [
+            1.7391304969787598,
+            -0.3344259262084961,
+            16.26956558227539
+          ],
+          [
+            1.739130973815918,
+            -0.3689252436161041,
+            16.255266189575195
+          ],
+          [
+            1.7391304969787598,
+            -0.3344249725341797,
+            16.26956558227539
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Narrow tubular frame member 3",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 40,
+        "intersectionPoints": 80,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 80,
+        "unallowedExamplesWorld": [
+          [
+            1.660508155822754,
+            -0.12585118412971497,
+            16.358797073364258
+          ],
+          [
+            1.563206672668457,
+            -0.3689252436161041,
+            16.261493682861328
+          ],
+          [
+            -7.323671340942383,
+            -0.29446250200271606,
+            16.606935501098633
+          ],
+          [
+            -7.315335273742676,
+            -0.3689252436161041,
+            16.57577896118164
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Narrow tubular frame member 3",
+        "riderOwner": "Bear tiny fixed tail",
+        "intersectionTrianglePairs": 30,
+        "intersectionPoints": 60,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 5,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 65,
+        "unallowedExamplesWorld": [
+          [
+            3.4020028114318848,
+            -0.09316753596067429,
+            16.310697555541992
+          ],
+          [
+            3.315559148788452,
+            -0.31984981894493103,
+            16.219804763793945
+          ],
+          [
+            1.5357580184936523,
+            -0.3689252436161041,
+            16.26246452331543
+          ],
+          [
+            1.5005552768707275,
+            -0.3392607569694519,
+            16.2760066986084
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Narrow tubular frame member 4",
+        "riderOwner": "Bear broad seated pelvis",
+        "intersectionTrianglePairs": 34,
+        "intersectionPoints": 68,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 68,
+        "unallowedExamplesWorld": [
+          [
+            -7.304347515106201,
+            0.14470341801643372,
+            15.593979835510254
+          ],
+          [
+            -7.304347515106201,
+            0.028853416442871094,
+            15.65698528289795
+          ],
+          [
+            -7.304347038269043,
+            9.584191694816699e-17,
+            15.672674179077148
+          ],
+          [
+            -7.304347515106201,
+            0.028846263885498047,
+            15.656986236572266
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Headstock to actual grip riser",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 40,
+        "intersectionPoints": 80,
+        "bikeVerticesInsideClosedRiderPart": 3,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 83,
+        "unallowedExamplesWorld": [
+          [
+            -7.474938869476318,
+            0.13424384593963623,
+            21.453758239746094
+          ],
+          [
+            -7.495419025421143,
+            -2.6622756729821217e-17,
+            21.377206802368164
+          ],
+          [
+            -7.448515892028809,
+            -0.3074377477169037,
+            21.552520751953125
+          ],
+          [
+            -7.469933986663818,
+            -0.16704869270324707,
+            21.472463607788086
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Headstock to actual grip riser",
+        "riderOwner": "Bear short neck",
+        "intersectionTrianglePairs": 18,
+        "intersectionPoints": 36,
+        "bikeVerticesInsideClosedRiderPart": 8,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 44,
+        "unallowedExamplesWorld": [
+          [
+            -5.694772720336914,
+            0.06638014316558838,
+            22.46796226501465
+          ],
+          [
+            -5.683931827545166,
+            -2.6622756729821217e-17,
+            22.442440032958984
+          ],
+          [
+            -5.694772720336914,
+            -0.06638014316558838,
+            22.46796226501465
+          ],
+          [
+            -5.734137535095215,
+            -0.3074377477169037,
+            22.56064796447754
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Headstock to actual grip riser",
+        "riderOwner": "Bear rounded head UV owner",
+        "intersectionTrianglePairs": 20,
+        "intersectionPoints": 40,
+        "bikeVerticesInsideClosedRiderPart": 8,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 49,
+        "unallowedExamplesWorld": [
+          [
+            -5.013290882110596,
+            0.04040062427520752,
+            22.856218338012695
+          ],
+          [
+            -4.989082336425781,
+            7.64715423429152e-07,
+            22.851041793823242
+          ],
+          [
+            -4.989082336425781,
+            -2.6622756729821217e-17,
+            22.851041793823242
+          ],
+          [
+            -4.9890828132629395,
+            7.647157644896652e-07,
+            22.851041793823242
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual connected handlebar centerline",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 24,
+        "intersectionPoints": 48,
+        "bikeVerticesInsideClosedRiderPart": 6,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 54,
+        "unallowedExamplesWorld": [
+          [
+            -3.9885165691375732,
+            3.91304349899292,
+            23.521282196044922
+          ],
+          [
+            -3.865480661392212,
+            3.453166961669922,
+            23.644319534301758
+          ],
+          [
+            -4.490200996398926,
+            3.423806667327881,
+            23.65217399597168
+          ],
+          [
+            -4.359309673309326,
+            3.91304349899292,
+            23.521282196044922
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual connected handlebar centerline",
+        "riderOwner": "Bear short neck",
+        "intersectionTrianglePairs": 52,
+        "intersectionPoints": 104,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 104,
+        "unallowedExamplesWorld": [
+          [
+            -4.356522083282471,
+            3.289313793182373,
+            24.15106964111328
+          ],
+          [
+            -4.479867458343506,
+            3.308072566986084,
+            24.02772331237793
+          ],
+          [
+            -4.356522083282471,
+            -3.289313793182373,
+            24.15106964111328
+          ],
+          [
+            -4.367148399353027,
+            -3.290928840637207,
+            24.140443801879883
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual connected handlebar centerline",
+        "riderOwner": "Bear rounded head UV owner",
+        "intersectionTrianglePairs": 22,
+        "intersectionPoints": 44,
+        "bikeVerticesInsideClosedRiderPart": 18,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 62,
+        "unallowedExamplesWorld": [
+          [
+            -3.991304397583008,
+            3.868983745574951,
+            23.51849365234375
+          ],
+          [
+            -3.976278305053711,
+            3.91304349899292,
+            23.533519744873047
+          ],
+          [
+            -3.991304397583008,
+            -3.8689844608306885,
+            23.51849365234375
+          ],
+          [
+            -3.9905877113342285,
+            -3.8710861206054688,
+            23.519210815429688
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip left",
+        "riderOwner": "Bear upper arm left",
+        "intersectionTrianglePairs": 27,
+        "intersectionPoints": 54,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 55,
+        "unallowedExamplesWorld": [
+          [
+            -3.9478261470794678,
+            -5.472176551818848,
+            23.443187713623047
+          ],
+          [
+            -3.854369878768921,
+            -5.654382228851318,
+            23.536643981933594
+          ],
+          [
+            -3.9478261470794678,
+            -6.839918613433838,
+            23.443187713623047
+          ],
+          [
+            -3.8997750282287598,
+            -6.751737117767334,
+            23.491239547729492
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip left",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 12,
+        "intersectionPoints": 24,
+        "bikeVerticesInsideClosedRiderPart": 3,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 27,
+        "unallowedExamplesWorld": [
+          [
+            -4.420925140380859,
+            -3.91304349899292,
+            23.521282196044922
+          ],
+          [
+            -4.253976821899414,
+            -3.91304349899292,
+            23.521282196044922
+          ],
+          [
+            -4.478094100952148,
+            -3.91304349899292,
+            23.521282196044922
+          ],
+          [
+            -4.420925140380859,
+            -3.91304349899292,
+            23.521282196044922
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip left",
+        "riderOwner": "Bear rounded head UV owner",
+        "intersectionTrianglePairs": 28,
+        "intersectionPoints": 56,
+        "bikeVerticesInsideClosedRiderPart": 9,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 65,
+        "unallowedExamplesWorld": [
+          [
+            -4.438041687011719,
+            -3.91304349899292,
+            23.585161209106445
+          ],
+          [
+            -4.280698299407959,
+            -3.91304349899292,
+            23.567564010620117
+          ],
+          [
+            -4.5550618171691895,
+            -3.91304349899292,
+            23.598247528076172
+          ],
+          [
+            -4.438041687011719,
+            -3.91304349899292,
+            23.585161209106445
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip right",
+        "riderOwner": "Bear upper arm right",
+        "intersectionTrianglePairs": 29,
+        "intersectionPoints": 58,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 59,
+        "unallowedExamplesWorld": [
+          [
+            -3.9478261470794678,
+            5.472176551818848,
+            23.443187713623047
+          ],
+          [
+            -3.8776533603668213,
+            5.608987808227539,
+            23.51336097717285
+          ],
+          [
+            -3.9478261470794678,
+            6.839919090270996,
+            23.443187713623047
+          ],
+          [
+            -3.835268259048462,
+            6.63335657119751,
+            23.555744171142578
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip right",
+        "riderOwner": "Bear stocky torso belly UV owner",
+        "intersectionTrianglePairs": 13,
+        "intersectionPoints": 26,
+        "bikeVerticesInsideClosedRiderPart": 3,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 29,
+        "unallowedExamplesWorld": [
+          [
+            -3.9478261470794678,
+            4.204934597015381,
+            23.443187713623047
+          ],
+          [
+            -3.937366247177124,
+            4.165839195251465,
+            23.45364761352539
+          ],
+          [
+            -4.17391300201416,
+            4.431369304656982,
+            23.382606506347656
+          ],
+          [
+            -4.146185874938965,
+            4.403599739074707,
+            23.39003562927246
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip right",
+        "riderOwner": "Bear rounded head UV owner",
+        "intersectionTrianglePairs": 29,
+        "intersectionPoints": 58,
+        "bikeVerticesInsideClosedRiderPart": 9,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 67,
+        "unallowedExamplesWorld": [
+          [
+            -4.400000095367432,
+            4.908897876739502,
+            24.226375579833984
+          ],
+          [
+            -4.438589096069336,
+            4.845663070678711,
+            24.187786102294922
+          ],
+          [
+            -4.565507411956787,
+            3.9375107288360596,
+            23.608694076538086
+          ],
+          [
+            -4.564584732055664,
+            3.9353485107421875,
+            23.607770919799805
+          ]
+        ]
+      }
+    ],
+    "resetExact": true
+  },
+  "exceptions": "Only Bear broad seated pelvis against saddle top footprint (\u00b1.20X/\u00b1.27Ysource and \u00b1.002Zsource); each corresponding closed forepaw vs actual grip within .12source; each corresponding hindpaw vs sole-tangent peg within .12source and \u00b1.002Z. No blanket whole-body contact exception.",
+  "unchangedBearSelfJoins": "Immutable accepted Bear anatomy; separate family-local replay of original self/joint/straddle controls retained."
+}

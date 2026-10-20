@@ -1,0 +1,40 @@
+{
+  "status": "agent-visually-inspected-source-pilot",
+  "glbSha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+  "riderSha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+  "actual32HeadingsEach": [
+    "combined",
+    "bike-alone",
+    "rider-alone"
+  ],
+  "fixedDensity": 17.39130434782609,
+  "native224Radius112": true,
+  "fixedCommonCropIntegerNearestEnlargementForInspectionOnly": true,
+  "inspectedSheetHashes": {
+    "inspection-detail-combined-study.png": "bb99bcb2995af0f77c7d629858354c6fad07e9cb29e7f3cdac3de703533b98fc",
+    "inspection-detail-bike-alone-study.png": "97aa877471ac99fef8f473f89da7df968dfdff2e8bd28597346a723f81d6c395",
+    "inspection-detail-rider-alone-study.png": "10a94676f733a945282a9dcf4753b192a7f09572783c6f95c2b55753dd30015a",
+    "inspection-detail-ownership-mask-study.png": "5bab9a8775f2e72a8b90434717ffdc570326a764c4e341351b81acf25a940b98",
+    "inspection-detail-combined-engine.png": "773578e2c2f28c1bcd69f0147d81d93890a7030bbbeb62563c3dc058cf8e865f",
+    "inspection-detail-bike-alone-engine.png": "84d1fc269ea62d8a19f6add5ce93f4226eaa1ab2e928dea73c7ca1750e3d8c7a",
+    "inspection-detail-rider-alone-engine.png": "466ba3b3f5f75e0e7fe6974cd6aa9e37eeecec1090552c6cb306003f6f76dd6c",
+    "inspection-detail-ownership-mask-engine.png": "0b5f60520a458d9af586ae54655d2af501accba3ff3df3f0c7e7e7361f4a6a18",
+    "inspection-phases.png": "462eab79599fe4b52f9823f2b30cb4876bf4587eaf1b2ef7c25a917a19d8386a",
+    "inspection-independent.png": "45cd7b68e0ba25905bcae19219660937c9bd997951d89bac60df9a55d078ccc3",
+    "inspection-wires.png": "383236dca4c3a108dd17e7c0d68dd401e17e2a9f893f7f2d4e8f48a3dff02230"
+  },
+  "findings": [
+    "Immutable Person7 keeps its large tall teal cap/orange accent, small pale face, tiny jacket/olive legs and original relative part scale; no avatar geometry changes",
+    "Compact bent arms reach the rearward/lower controls; boot soles sit at the raised pegs; actual tank and engine remain clear",
+    "Near/far limb and vehicle occlusion changes coherently around all headings in both projections. Exact hidden-rider bare-bike parity is retained",
+    "Classic teal/cream tank, saddle, engine and curved fenders remain readable. Far crowns stay covered, with visible tire/frame negative space in side profiles",
+    "Native wireframes are actual mesh rasterization; dense subpixel triangles merge at native scale. Detailed topology/UV evidence is retained in the packed semantic master and numerical matches",
+    "Independent signed wheel phases preserve fixed rider/body and other wheel. Mobile/offline controls remain square and readable"
+  ],
+  "formalHumanApproval": false,
+  "actualSharedLoaderQualification": "pending parent",
+  "limits": [
+    "Person7 anatomy/head-depth inferred from2D, already accepted only as prototype; original cap can obscure the tiny face in elevated/rear views",
+    "Only static neutral Person7 fit; no normal/AI/fallback/all-avatar/steering/suspension/animation claim"
+  ]
+}

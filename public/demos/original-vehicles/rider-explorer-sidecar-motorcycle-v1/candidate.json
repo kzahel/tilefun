@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-sidecar-motorcycle-v1",
+      "name": "Explorer \u00b7 sidecar motorcycle fit pilot",
+      "title": "Explorer \u00b7 sidecar motorcycle \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "PREREQUISITE PROTOTYPE: unchanged true-F/R/SC sidecar motorcycle geometry/paint and static Explorer upright composed in one GLB/depth target. All original buffers/transforms retained; explicit companion child attached inside marked cycle root with root-transform compensation. One512 bike atlas plus one256 rider atlas; normal rider/AI/fallback/all27 unqualified.",
+      "audit": {
+        "triangles": 5374,
+        "vertices": 10775,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 388376,
+        "sha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "SC": {
+            "wheel_radius": 6.260869565217392,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R",
+          "SC"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/atlas.png",
+          "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/composition.json",
+          "sha256": "c3c74beb4a78f676ba701839ca341516c890cb4a55bdba01c89167c47dd78f82"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/model.glb",
+          "sha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/recipe.json",
+          "sha256": "fdcc76b49efe158a3803aa9356820cdb3b72797271053ec11c876ebbe8256888"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/report.json",
+          "sha256": "1552616f57ec27505c733ac7ce07372e96b2ac6dacf639c6cba4839227c60d69"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

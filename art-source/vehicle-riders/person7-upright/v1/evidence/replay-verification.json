@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "onlyFiveDeclaredFilesPresent": true,
+  "inputHashes": {
+    "build.py": "181943d7b512d1698f6d9f86cb3b01e3caabc190289fb58ceb469e070e361f9e",
+    "rider.json": "d840be12016eb4553db3948648c27363dede298bdaa30f28ef16cdcbad5a6193",
+    "identity.json": "7ce12a1069c4c552bbcc524e0ab6523089a311527dcc1484d116275c0ace9aa4",
+    "explorer-upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "person7-upright-v1.json": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3"
+  },
+  "outputs": {
+    "rider.glb": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+    "atlas.png": "5ceba48f52d25f94f02949502ee8e64057f90ce1c9798af9164d34132a8cc519",
+    "recipe.json": "738def6948c16042d3153c6c97d2c3af4b362189f5f848fd95c8ceb75633b740"
+  },
+  "scratchInputDependencies": [],
+  "sharedInputDependencies": [],
+  "blender": "5.2.2 LTS d13f752e3b9c factory background4threads",
+  "freshInputs": "data/vehicle-riders/person7-upright/declared-inputs-only/",
+  "freshOutputs": "data/vehicle-riders/person7-upright/replay-final/",
+  "meaning": "Rider construction reads only retained own constructor/config/identity and own/global-profile copies. Actual original profile and approved identity provenance pins are verified separately. Fixture/viewer are diagnostic outputs under ignored data, never construction inputs."
+}

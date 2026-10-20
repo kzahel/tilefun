@@ -1,0 +1,846 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "dump-truck-v1",
+      "name": "Construction dump truck",
+      "title": "Construction dump truck \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original short stout yellow-cab six-wheel dump truck. Level deep open steel-blue sloped tub owns real floor/inner walls/tailgate, broad side ribs, fixed underbody hinge and ram blocks. Six independent ordinary road wheels; all dump equipment rigid stowed only, no tipping/cargo animation.",
+      "audit": {
+        "triangles": 3720,
+        "vertices": 7066,
+        "meshes": 7,
+        "primitives": 7,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 251984,
+        "sha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "ML": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "MR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/atlas.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/atlas.png",
+          "sha256": "1c204674fb084be85a173f9286981a91319f5cb03ff4414bc79af2e1366b9953"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/capture.json",
+          "sha256": "4fd28806f41fc64571d58add4e80bc58a8c921a2557aedae3951c7553f229263"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "295942447a43ac3c953d688a77a1848ddcba9eadd630f0d19badf9ff2daaff0a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "5b43d5aa685744940418bd4a7bc4dc0102c852f9fbcd309b77be8eb383b2994f"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "1840be19a04e23df92d8405e91585799804d3e5503aae2c13dd6a9916ca8d1d1"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "89221ae58947acda9dff223bb67908e0f680c08d621591181f4ac32bf69f66a9"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "fb9da453175001087b57f2884d1c499bcfac67eaebe489eb1cb1570412810360"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "7bb10dfa9818b06efad31f209060d9ac23f4713629001cdaa56ba092bdaeaa60"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "604ade4d6491ef4a6a347038f815a599fa5145945c577e25f115949885b94951"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "1b4ce537b3ee5d96d4f902bb56f6ff85746d53f6ed06f5de6449783eb46f056a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-1x.png",
+          "sha256": "2e6e6f679c5217f12032283711749d129467fbfd6d1062a488a75fb6c019f4ca"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "e7129da38ff46dfb4df23e88bf546902d2aadcda9fea554670712d4a1f01d4d9"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-2x.png",
+          "sha256": "d3ecd2cfa6692d68873e10d3f7e2a08c7a28bb4a54c95474abe193cdc8385974"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "baa5f42c4b20314ce8b821ba97aee82497642a4d4baae46fbdf67a44fae2e659"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-3x.png",
+          "sha256": "6934919b45404aa19a4e35a2e80fecaa2ca7791be82daf5a37db8b44a9652149"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "11090c3fb34aee30ba19949eea5252628bb5fc672ac498d285172ae2f574a66c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "9d73b9753e572cc7eb187295fd52f6600f410d47f325d26871fc4e0c3ed74ff5"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "b4e775b986f498f6d99bb323ac1e91b5cafb6e23fb50ae6d30f67d9d1793dcbb"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "16d168c3ba9661c93da55065279befb3ee4cc06bf29a28c3e21c67770a84212d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "d22575aeb23f3298bc7e868a78b87e8b9d3ae6192b29a7c5057e338eea4d261c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "059e0a131b7f50c1d197f52e2f6b0331d420fdc31db3e3f2f883e9729258d273"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-engine-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "e7129da38ff46dfb4df23e88bf546902d2aadcda9fea554670712d4a1f01d4d9"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-engine-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "01249992fb8192e176c8929ee31b102cd7a275447946ca7569920713a3608c3a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-engine-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "734c3365202df536ea4016ee201362329609b6c18552a48d7ac85e980bedf163"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-engine-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "b2dc057631eb74ae69825c3ee7fed11dbb874f1b91b7f0059f35b0e50d2821db"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-engine-4.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "a3f227ce692b7df4e50a2b46f3ee9f5f25afd360d2fbb794a568eee1d1117430"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-engine-5.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "e89ccd0c7aa0c405f737dec11369b3102d87fc57340d273971e83ebced805939"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-engine-6.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "8e241b23ff75ecab6f7fa82b11dbcd6df059117eb3b22269aa4b0f650470ed31"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-engine-7.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "9b7aa7ab8e5e01dbcf967079206150c4f8b660f4daa1260f2bccc2773ccbac4e"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-study-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "70fd1c4a8f4b7ac4b9d99a59da00c146b15a8fe27e7fd390191403bdc4d85936"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-study-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "742a2b1422f1d0842d2dfc9c180a0c53d00e88d22eed0107bebc9d30c4717a28"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-study-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "83650da30279a764c67223ef8da838aa5aa9a0a373946d5be8ba07cb01024532"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-study-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "dd19a5bb03ce9f3eb34153badc438c535d234233df861e4abcc9f342833fe576"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-study-4.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "4b30d3b95ad627b8a58ba60337e6ed0eff4ac88761fe32c9d95428fcabc6ab1f"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-study-5.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "719acd15d50e050d757052a73762000f25704a62753e68d8d64bdd2847ea8b63"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-study-6.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "c6307455ad6842c403bffa93ee2fb29f76893d1a0a3edf616bd8ebaecd0502ff"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/equal-phase-study-7.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "5e283d20fb9f454d9aef97fda489fca1e34e8e9b84bad4a7e69265216c818346"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/fallback-cardinal-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/fallback-cardinal-0.png",
+          "sha256": "14ac323c25f0ae0488e0376e76dbdd790c540b3ad5bd677baf44d78b4330086c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/fallback-cardinal-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/fallback-cardinal-1.png",
+          "sha256": "f591958f9317e4f527bcb1488b9b88209b427dd84b7979a3078a210415b9416c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/fallback-cardinal-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/fallback-cardinal-2.png",
+          "sha256": "94ee698a80458692a0729b255ec09ee247c44ef41f95b672a3cf7853e243ce0f"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/fallback-cardinal-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/fallback-cardinal-3.png",
+          "sha256": "16cd1f800efe462dc967959a51f2ff18227f506eaad887de3245446006ecdf40"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "e7129da38ff46dfb4df23e88bf546902d2aadcda9fea554670712d4a1f01d4d9"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "01249992fb8192e176c8929ee31b102cd7a275447946ca7569920713a3608c3a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "734c3365202df536ea4016ee201362329609b6c18552a48d7ac85e980bedf163"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "b2dc057631eb74ae69825c3ee7fed11dbb874f1b91b7f0059f35b0e50d2821db"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "a3f227ce692b7df4e50a2b46f3ee9f5f25afd360d2fbb794a568eee1d1117430"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "e89ccd0c7aa0c405f737dec11369b3102d87fc57340d273971e83ebced805939"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "8e241b23ff75ecab6f7fa82b11dbcd6df059117eb3b22269aa4b0f650470ed31"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "9b7aa7ab8e5e01dbcf967079206150c4f8b660f4daa1260f2bccc2773ccbac4e"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "295942447a43ac3c953d688a77a1848ddcba9eadd630f0d19badf9ff2daaff0a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "16632ba36efe87e05ab8159af9ace67ada2fb0252eaf367ad8d8b5f6ea0ff2d1"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "82323e64c042afbc903c632555995baa11164901eb9b70626453a92792c98813"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "295942447a43ac3c953d688a77a1848ddcba9eadd630f0d19badf9ff2daaff0a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "d22575aeb23f3298bc7e868a78b87e8b9d3ae6192b29a7c5057e338eea4d261c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "b321c768adac11d0ed7be8bfe2e4b65312fcb96c56abc54322da760641a52a9a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "5ae5851a9452bcb44cf7013d44f591e1d1b5c220a5aa47448a8ec5b696ff6ff7"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "d22575aeb23f3298bc7e868a78b87e8b9d3ae6192b29a7c5057e338eea4d261c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-ML-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-ML-0.png",
+          "sha256": "295942447a43ac3c953d688a77a1848ddcba9eadd630f0d19badf9ff2daaff0a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-ML-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-ML-1.png",
+          "sha256": "48cfb304dda7d0043003a1ba04d5599ad24b0ac9c944b1959a828cbe21f44b62"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-ML-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-ML-2.png",
+          "sha256": "5b5182937c9be00b398d7f3dfd855620c4654ad140614ea9f97a2c303d026f25"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-ML-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-ML-3.png",
+          "sha256": "295942447a43ac3c953d688a77a1848ddcba9eadd630f0d19badf9ff2daaff0a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-MR-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-MR-0.png",
+          "sha256": "d22575aeb23f3298bc7e868a78b87e8b9d3ae6192b29a7c5057e338eea4d261c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-MR-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-MR-1.png",
+          "sha256": "ace7500ca9ad42e56828be385c87b43fe83708b21b1d261cb1b2e38b178c0562"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-MR-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-MR-2.png",
+          "sha256": "235e577f8568f86bb035a2a323dec23a7bc3371acaaff2ff8240e454289f24d1"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-MR-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-MR-3.png",
+          "sha256": "d22575aeb23f3298bc7e868a78b87e8b9d3ae6192b29a7c5057e338eea4d261c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "295942447a43ac3c953d688a77a1848ddcba9eadd630f0d19badf9ff2daaff0a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "32be96449fa38faf42e107dddbf439ba22de601919f055da918259028c945100"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "06efb837731f7e5d17df2dec412bdc572c7f6b31d2d0026b5edfa3ba3667eba8"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "295942447a43ac3c953d688a77a1848ddcba9eadd630f0d19badf9ff2daaff0a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "d22575aeb23f3298bc7e868a78b87e8b9d3ae6192b29a7c5057e338eea4d261c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "70d07778829f6d6572ce67b51c29bec144a90c96e4dcc6db4f4ab0d4d4d5a4d7"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "f91c6e5569c10eb52908503ce66b4e69b71ae8933cedd37a2f206aa9aad3cd66"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "d22575aeb23f3298bc7e868a78b87e8b9d3ae6192b29a7c5057e338eea4d261c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/independent-visual.json",
+          "sha256": "ec7b729f4cda904b29b47d92fa965c5e6b86567a71b0f5316195ba6a16e8ea0f"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "f6b054a941b066179932dc0bea1df2a32758a9613af7132049e075b5cf723f3f"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-equal-phases.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-equal-phases.png",
+          "sha256": "9186aed786f2de335bf409382ae0e78b7722d2617388f795ca0edf7f9d3f4e9d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-independent.png",
+          "sha256": "5df7ccbe15dc16630c10e97b685ea766559f7de420b5679facfd2a99c3fe0549"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "32e5912d51a35d5143ea3cd0dbaaf12f44ab0884c4837d2aaa126c08e5709dea"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "6ccfd4c1eaf4bc2780bf707f0f017681405226623e9f7e12c98cbdc66e8cd02c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "f67b59047399b4c9d3a641d21213df5eeab55ac60544913fc2c193daf4ea797e"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "72e3d61a5915ad6204441b2b543b6b7d06d2e3faaed010afdfe93b4508219089"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "1fa176d44f35ccbadf7031a1022c6596278a667e1d23275664ebe43499f25b02"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-wheel-id-engine.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "161784467f48afa8c2f5876cb38ff4b34614f7f016685db8078ccb21a1268fa7"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-wheel-id-study.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "4d03d68fb20c30d65ac8ccf145e8eec51e62a957ed3adb067369314fd0b5ede7"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/inspection-wires.png",
+          "sha256": "a893f052fd487649df327b9a6f30cecbe4039c87d7bdaef45813d09b81ed51a6"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "70fd1c4a8f4b7ac4b9d99a59da00c146b15a8fe27e7fd390191403bdc4d85936"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "742a2b1422f1d0842d2dfc9c180a0c53d00e88d22eed0107bebc9d30c4717a28"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "83650da30279a764c67223ef8da838aa5aa9a0a373946d5be8ba07cb01024532"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "dd19a5bb03ce9f3eb34153badc438c535d234233df861e4abcc9f342833fe576"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "4b30d3b95ad627b8a58ba60337e6ed0eff4ac88761fe32c9d95428fcabc6ab1f"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "719acd15d50e050d757052a73762000f25704a62753e68d8d64bdd2847ea8b63"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "c6307455ad6842c403bffa93ee2fb29f76893d1a0a3edf616bd8ebaecd0502ff"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "5e283d20fb9f454d9aef97fda489fca1e34e8e9b84bad4a7e69265216c818346"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-0.png",
+          "sha256": "2ae782c563bf5802b6a62f03a186bda917fab9cf1892aa40135275cc7faf95da"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-1.png",
+          "sha256": "676aa2fa48ac7931a7820c7595110259753535e91dfb5cf9bd889c992e3cf3f6"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-10.png",
+          "sha256": "d6505f3de92569a20da587e657e00b51c2b406eb704e44d884a879e5a5ce6d25"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-11.png",
+          "sha256": "73e9062d67c990636f32a2f8626cd4f6aeab8964e003825e5f5f4d7ac0e4e366"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-12.png",
+          "sha256": "d5ad18b8ae8d03a7518e9083236df26b9ee6fc18c3c569822cc28afa4be0d91d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-13.png",
+          "sha256": "7a7a12f97613eec0e251868c544633097b1d7a7a8256c85cfe934c33159b5a77"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-14.png",
+          "sha256": "d75f9ffeeca411cb3446e9394bd73a24d16f6dfdac945e58011b290e9ed855d2"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-15.png",
+          "sha256": "0217e381b4502622a9361506057c9e01b62f0788d9c4cd387b8fcaea4e4c7acc"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-1x.png",
+          "sha256": "b6dd88d218b9e904cb3db302edfa73e19e91f60a6074352fa230b2daa3cf700c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-2.png",
+          "sha256": "70fd1c4a8f4b7ac4b9d99a59da00c146b15a8fe27e7fd390191403bdc4d85936"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-2x.png",
+          "sha256": "00741886a9af23e911215f4a9708d3dcb61adbeeb2a58f13eebe270657446280"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-3.png",
+          "sha256": "d767e83498d4abac090daf5d7203dee6b711ad027c4f0c6e8c529c6a9b7a18a2"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-3x.png",
+          "sha256": "c633f33ec443801b1a4a582d42f95bee64d91d53ca9e9f8015e6f768aef0dc16"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-4.png",
+          "sha256": "a2a4fa26e052111c1f26eec5568c7639e885f5b7760d262b22f924b7ab31020b"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-5.png",
+          "sha256": "d672f21f8f2542c945fb0f9e708b909578d2481c3380e68600117b4c919a072e"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-6.png",
+          "sha256": "11ca728ee32e5fd31975b38e53f72553ce101bdc9e5e24bac75e0a239288596b"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-7.png",
+          "sha256": "c42ccef28408ad1901a9ddd89163b3c4f2ed2ed36bd529b83edc8cfc3ff8ba26"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-8.png",
+          "sha256": "74274150af6d3d739798983c80c5bfdfe623b16d2cefacec7cb254356714c096"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/study-9.png",
+          "sha256": "64aab2bc5fbb3e6234f5b26d8573b12e2626a2d030beae3c4eeae4322620ac7d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "32353994394247f2ae4dcd18a1ccf651e522abb1e7b91144e60b10006657de28"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "ff868f5f5c3512c189faac20c5dd6889c5095d61e257fc3847348c340b527f9d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-10.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "19e0803ea0e38405ce84cbbf03dae565b6a6a977950db875421fc2d60c9f192d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-11.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "296c72e0ebba29bf948ad2f76d7987a6f8db72a46ae8c3037f70831acb43b271"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-12.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "fb9da453175001087b57f2884d1c499bcfac67eaebe489eb1cb1570412810360"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-13.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "0209bc6dbe39a237386eb635ee0bb8b32592248b89ea326700efe09c9b72a840"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-14.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "30518780964e8566c7d041abc7a69632d781284b290eb682e2a3dd8e1b93778b"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-15.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "ab0936d76fd55db23e3f98a0cf24303dd979767defaa58d231b282ef9756fdb0"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "84468b39667993b5355dfe864ed296bfebf6d7ba16941100d2ca51704c11bb6d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "84ec6a4bcf97b7d6121d69c54e0c7642c1efd2dbbf3e4448f12bb4e60901128d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-4.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "11090c3fb34aee30ba19949eea5252628bb5fc672ac498d285172ae2f574a66c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-5.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "025788625725dd320e60fdb3dd41f9b6ea2f497b91e63c160789bbceab499fa1"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-6.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "c234ce650b8e71f1fd3f044541fbd7cb1eb14a23d7ad58c7b340726e6681f580"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-7.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "c16b83d307865e5b1f4eca1c14f10cc5af36822f0893ce041a864f47501aab0c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-8.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "d83ec286d89ef9d15d43930499b2a5443f5d9609a9ee1d1b312da4baae146173"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-engine-9.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "3ae50ed6e6162761dc467304a772d137bf91a787d3ca3050d05e9b37ecced7f6"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-0.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "74cd3b18563ef85b7de1698265e7248cce25f2bfa9d4c4d9166f7106878886b3"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-1.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "b0ee13b92d4cc5b46008d58f0a03edb2eebdb1b3d4332a5ff15c6edddbf4916f"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-10.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "5e52aefa7c2e264f06071cafe4a9928b0a7e97041f79ba65aa3ade1bb7331508"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-11.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "d5ca74f1de4d56756395bc4c70ed2668a406554fb81f924428634cf53544b9e9"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-12.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "d5ad18b8ae8d03a7518e9083236df26b9ee6fc18c3c569822cc28afa4be0d91d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-13.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "726e5e453ca38bdd134ee85b76ac769a83667d89337db8e2c144d1004e90413d"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-14.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "51013de97dfcd62ac3b0d0ea7e849f7768674975f2c86c90194f3ee5d97cfadf"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-15.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "7b3b1d3e7c1a4c9a9d481f15e93b78070f692fa7c358090becfa2cbe3fcbd91c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-2.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "98f6fc9352ddfbcb79a518bb4154fcf2906bcc23a890d33ca6e0484494b1bf0f"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-3.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "5ff68eb35a8ed16437b490cd309ab8bdb345eb7a4157cdf390d592b059659361"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-4.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "a2a4fa26e052111c1f26eec5568c7639e885f5b7760d262b22f924b7ab31020b"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-5.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "c941232c5ef06cc7c4eb785c6452a3fa6fb5844181ad4766b1f8a16f5a79469c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-6.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "d89b6e19821f44bb970bd91539bdada2331d17a0ce3a8085678e8fc32c01ddfc"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-7.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "7a8c74eb13de9d702746a60ef2dd13d22e35acc6c0ae7b535e19ee09aa82488b"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-8.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "c935074ec9c754a7a5deb0543bdace1275f2ad33a55e78670d1f6a3340459bfb"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-id-study-9.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "158d5e7fc1a4d65652428ea87491a308f8ad35c66c99fdb3de3ac3b3d2b8c572"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wheel-visual.json",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wheel-visual.json",
+          "sha256": "977d2b6640fcff9af5a006d65ffb61e103858bbf333015b1fdc6a46c4ad0497c"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "1817130e44fbb0f8c3fd32bbc3d1bf92cf99e33ab7d029f874689aec255e9a6e"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "cc69ab0706b42993415e30f583360d5e5217dbd944ae25c79c447f6b0e5f164b"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/model.glb",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/model.glb",
+          "sha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/recipe.json",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/recipe.json",
+          "sha256": "8b61b4d720814075647d56790165666dfefe27d119683fdfc9d7a3b242e1d03a"
+        },
+        {
+          "source": "demos/vehicle-bake/dump-truck/v1/report.json",
+          "retained": "demos/original-vehicles/dump-truck-v1/inputs/report.json",
+          "sha256": "2ece4f9f5218a7ed757c2b089eeaaec24a9fcc75033390eb66b34343a1894f5c"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

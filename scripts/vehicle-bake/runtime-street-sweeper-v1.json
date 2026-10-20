@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "street-sweeper",
+  "name": "Street sweeper",
+  "tags": ["vehicle", "original", "street sweeper"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/street-sweeper-v1/review-manifest.json",
+    "sha256": "8a3184c685915da0560a59a0d52707937a773cd3dc37e4ebc1a898cf037d1cec",
+    "candidateId": "street-sweeper-v1",
+    "model": "public/demos/original-vehicles/street-sweeper-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/street-sweeper-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/street-sweeper-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/street-sweeper-v1/captures",
+    "modelSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "triangles": 3236,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/street-sweeper/v1/evidence/replay-verification.json",
+    "sha256": "20645e0084825c72b12e9556c93c80fd1f73ddc7271c926958b29e5507c5d634",
+    "build": "art-source/vehicle-bake/street-sweeper/v1/build.py",
+    "family": "art-source/vehicle-bake/street-sweeper/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "street-sweeper-authored-v1",
+    "path": "assets/models/vehicles/street-sweeper-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/street-sweeper-v1.png",
+  "performance": {
+    "speed": 52,
+    "acceleration": 85,
+    "pushSpeed": 45,
+    "pushWeight": 320
+  },
+  "receipt": "art-source/vehicle-bake/runtime-street-sweeper-v1.json",
+  "expectedBounds": [70, 44, 37]
+}

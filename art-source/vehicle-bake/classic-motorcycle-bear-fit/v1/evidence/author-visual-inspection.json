@@ -1,0 +1,42 @@
+{
+  "status": "agent-visually-inspected-source-pilot",
+  "glbSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+  "riderSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "actual32HeadingsEach": [
+    "combined",
+    "bike-alone",
+    "rider-alone"
+  ],
+  "fixedDensity": 17.39130434782609,
+  "native224Radius112": true,
+  "fixedCommonCropIntegerNearestEnlargementForInspectionOnly": true,
+  "inspectedSheetHashes": {
+    "inspection-detail-combined-study.png": "6231935762847ad587db77ccd2675f69a6b6f52d26ae6eaaa80f1c9a5c7154c5",
+    "inspection-detail-bike-alone-study.png": "0f092545ff7c32b26109c46dd0e73e6971e599f0fa0fdaf0657856b3393311d9",
+    "inspection-detail-rider-alone-study.png": "8221300c79b53fe6b52f6b61fc21153180d4336462cc9c76b82edf3cd0428709",
+    "inspection-detail-ownership-mask-study.png": "b3c0a81c2d91b8cfd4b995c6daa3e142735392ba3613326779716c68e3897849",
+    "inspection-detail-combined-engine.png": "46e58c3da45ca00946d3b76f1e86b4b73fcf1a4c9579d7fe289ce2bc0b6ab4a9",
+    "inspection-detail-bike-alone-engine.png": "7c52ca12de5fb2fe9610304ec4069b618f9fc6f5ada85668280fcacd2f0abcba",
+    "inspection-detail-rider-alone-engine.png": "411724b7f720bc5d71c6451b81e433d8b7e085e41f0d0ede1627c5b1eeb2011b",
+    "inspection-detail-ownership-mask-engine.png": "e1d96592f9ac3f64eba46012218d919a0636212eb2de98d7f25efc700842ac7c",
+    "inspection-phases.png": "dea88f68fadee3d1db951ea8b832ce890ca6780551461166054f75982c92bb83",
+    "inspection-independent.png": "4d438b0318ceb8b5510d896a48836d932323198f24d0fb43eef5b682d60ab1cc",
+    "inspection-wires.png": "a469802457111848d935d32d4ec5ead5a460924a74d255b5bea93f27bb7bb583"
+  },
+  "findings": [
+    "Immutable stocky Bear identity and round ears/tan muzzle read consistently; body and limbs have not been rescaled or stretched",
+    "Both wide forepaws remain at actual grips; short hindpaws sit at higher/outboard peg tops. Real tank is clear in the own variant",
+    "Near/far rider and bike occlusion changes coherently around all sixteen headings in each camera; no layered screenshot composition",
+    "Original rounded teal/cream tank, engine, fenders and true two independent wheels remain recognizable",
+    "Cream fenders cover far tire crowns; side tire silhouettes and frame negative spaces remain visible",
+    "Native wireframe lines are rasterized from the actual mesh; dense subpixel triangulation merges at native scale, so packed semantic master and numerical triangle/UV ownership remain the detailed topology evidence",
+    "Signed/independent wheel frames preserve the fixed body and Bear; mobile/offline controls remain readable"
+  ],
+  "formalHumanApproval": false,
+  "actualSharedLoaderQualification": "pending parent",
+  "limits": [
+    "Original Bear anatomy is inferred from2D, not observed unique anatomy",
+    "Grip wrapping is declared local closed-solid overlap; no articulated fingers or rider animation",
+    "Only neutral static Bear source fit; no normal/AI/fallback/all-avatar claim"
+  ]
+}

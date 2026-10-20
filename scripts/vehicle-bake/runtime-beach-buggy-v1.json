@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "beach-buggy",
+  "name": "Beach dune buggy",
+  "tags": ["vehicle", "original", "beach buggy"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/beach-buggy-v1/review-manifest.json",
+    "sha256": "37f69334023fccde3e2ce2b7dbaa16b1912ff87b9431039c5eee1b893659df29",
+    "candidateId": "beach-buggy-v1",
+    "model": "public/demos/original-vehicles/beach-buggy-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/beach-buggy-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/beach-buggy-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/beach-buggy-v1/captures",
+    "modelSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+    "triangles": 3290,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/beach-buggy/v1/evidence/replay-verification.json",
+    "sha256": "137b394f0dc83c73435a3dea7261f444a7434e6fc8bd9191c8a715c0b3433099",
+    "build": "art-source/vehicle-bake/beach-buggy/v1/build.py",
+    "family": "art-source/vehicle-bake/beach-buggy/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "beach-buggy-authored-v1",
+    "path": "assets/models/vehicles/beach-buggy-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/beach-buggy-v1.png",
+  "performance": {
+    "speed": 120,
+    "acceleration": 210,
+    "pushSpeed": 42,
+    "pushWeight": 105
+  },
+  "receipt": "art-source/vehicle-bake/runtime-beach-buggy-v1.json",
+  "expectedBounds": [68, 38, 29]
+}

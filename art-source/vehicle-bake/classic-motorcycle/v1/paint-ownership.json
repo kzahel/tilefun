@@ -1,0 +1,124 @@
+{
+  "method": "Original classic teal/cream motorcycle with rounded narrow tank, dark saddle, exposed engine/crankcase, tubular frame, front fork/headlamp, rear swingarm and real curved fenders. TRUE two-road-wheel F/R source pilot, no four-wheel stubs. Explorer upright is immutable separately composed fit/depth proof, no normal activation.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      40,
+      43,
+      54
+    ],
+    "tireLight": [
+      65,
+      70,
+      82
+    ],
+    "paintDeep": [
+      37,
+      82,
+      95
+    ],
+    "paintShadow": [
+      43,
+      106,
+      122
+    ],
+    "paintMid": [
+      48,
+      121,
+      138
+    ],
+    "paint": [
+      62,
+      143,
+      158
+    ],
+    "paintLight": [
+      111,
+      180,
+      184
+    ],
+    "cream": [
+      244,
+      226,
+      185
+    ],
+    "creamShadow": [
+      191,
+      177,
+      150
+    ],
+    "white": [
+      248,
+      247,
+      230
+    ],
+    "seat": [
+      62,
+      57,
+      62
+    ],
+    "seatLight": [
+      89,
+      80,
+      79
+    ],
+    "frame": [
+      63,
+      71,
+      84
+    ],
+    "frameLight": [
+      103,
+      116,
+      128
+    ],
+    "engine": [
+      111,
+      119,
+      130
+    ],
+    "engineLight": [
+      151,
+      162,
+      173
+    ],
+    "chrome": [
+      198,
+      210,
+      217
+    ],
+    "rim": [
+      127,
+      139,
+      151
+    ],
+    "ruby": [
+      181,
+      50,
+      70
+    ],
+    "amber": [
+      236,
+      164,
+      77
+    ],
+    "dark": [
+      47,
+      52,
+      63
+    ]
+  },
+  "ownership": "Own teal/cream tank side/end/top UV skin charts, curved fender palette facets and explicit saddle/frame/engine/chrome swatch owners on actual geometry. One opaque512nearestunlit bikeatlas. No projected bitmap/glass overlays/exterior outline paint. Rider has its own immutable256atlas loaded separately.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Teal rounded tank with cream surface side-panel charts, dark saddle, exposed gray engine, tubular frame and real front/rear fenders. Exactly two independent road wheels F/R; opaque bikeatlas512; Explorer loaded separately readonly for measured fit/depth diagnostics.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

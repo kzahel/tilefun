@@ -14,8 +14,10 @@ test("dev full reload restores the indoor player and scopes the editor camera to
   const server = await createServer({
     configFile: false,
     base: "/tilefun/",
+    cacheDir: test.info().outputPath("vite-cache"),
+    optimizeDeps: { entries: ["index.html"] },
     plugins: [react()],
-    server: { host: "127.0.0.1", port: 0 },
+    server: { host: "127.0.0.1", port: 0, watch: null },
     logLevel: "error",
   });
   try {
@@ -122,8 +124,10 @@ test("dev reload during the guided doorway walk settles into the saved destinati
   const server = await createServer({
     configFile: false,
     base: "/tilefun/",
+    cacheDir: test.info().outputPath("vite-cache"),
+    optimizeDeps: { entries: ["index.html"] },
     plugins: [react()],
-    server: { host: "127.0.0.1", port: 0 },
+    server: { host: "127.0.0.1", port: 0, watch: null },
     logLevel: "error",
   });
   try {

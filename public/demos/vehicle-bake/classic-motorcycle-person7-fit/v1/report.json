@@ -1,0 +1,304 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "normalActivation": false,
+  "sharedTwoWheelQualification": "pending parent actual shared loader/browser review",
+  "sharedStaticCycleCatalog": {
+    "triangles": 2434,
+    "vertices": 4510,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 164512,
+    "sha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "CarMeshAssetUsed": false,
+  "rawGLTFDiagnostic": true,
+  "artReviewStatus": "awaiting-owner-review",
+  "family": "classic-motorcycle-person7-fit",
+  "route": "classic-motorcycle-person7-fit",
+  "revision": "v1",
+  "method": "Original classic teal/cream motorcycle with rounded narrow tank, dark saddle, exposed engine/crankcase, tubular frame, front fork/headlamp, rear swingarm and real curved fenders. TRUE two-road-wheel F/R source pilot, no four-wheel stubs. Person7 upright is immutable separately composed fit/depth proof, no normal activation.",
+  "geometry": {
+    "triangles": 2434,
+    "vertices": 4510,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 164512,
+    "sha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "rootMarker": {
+      "tilefun_motorcycle": 1,
+      "wheel_ids": [
+        "F",
+        "R"
+      ],
+      "presentation_stage": "source-prototype-not-production"
+    },
+    "qualification": "own raw source inventory; stable cycle catalog audited separately; actual shared loader/browser pending"
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "F",
+      "centerBlender": [
+        -1.1200000047683716,
+        0.0,
+        0.41999998688697815
+      ],
+      "centerExport": [
+        -19.47826095249342,
+        7.304347598034404,
+        -0.0
+      ],
+      "radiusBlender": 0.42,
+      "wheel_radius": 7.304347826086957
+    },
+    {
+      "id": "R",
+      "centerBlender": [
+        1.1200000047683716,
+        0.0,
+        0.41999998688697815
+      ],
+      "centerExport": [
+        19.47826095249342,
+        7.304347598034404,
+        -0.0
+      ],
+      "radiusBlender": 0.42,
+      "wheel_radius": 7.304347826086957
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "sourceImmutable": true,
+  "sourcePilot": true,
+  "productionQualified": false,
+  "humanApproval": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "riderComposition": {
+    "status": "prototype-source-complete-not-production",
+    "bike": {
+      "path": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1/model.glb",
+      "sha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+      "triangles": 2434,
+      "draws": 3,
+      "atlases": 1
+    },
+    "rider": {
+      "path": "art-source/vehicle-riders/person7-upright/v1/rider.glb",
+      "sha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+      "triangles": 1984,
+      "draws": 1,
+      "atlases": 1,
+      "immutable": true,
+      "reexported": false
+    },
+    "singleMountSource": [
+      0,
+      0,
+      1.0805
+    ],
+    "mountWorldBlender": [
+      0.0,
+      0.0,
+      18.79130434782609
+    ],
+    "gltfMountTransform": "S * [sourceX, sourceZ, -sourceY]; rider GLB already has its export scale",
+    "combined": {
+      "triangles": 4418,
+      "draws": 4,
+      "atlases": 2,
+      "oneActualDepthTarget": true,
+      "combinedGLBExported": false
+    },
+    "qualifiedComposer": "Parent may compose later after independent shared loader qualification",
+    "productionQualified": false,
+    "normalActivation": false,
+    "humanApproval": false
+  },
+  "baseProvenance": {
+    "family": "classic-motorcycle/v1",
+    "glbSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+    "finalSourceReplaySha256": "56d362eb280a85806e56a520036bf7ef03037bd5f61ad3ccf531c8efc3ec21d5",
+    "constructorForkInputHashes": {
+      "scripts/vehicle-bake/classic-motorcycle/build.py": "e3a227908b441b99e45cccb761f5c5dc55680ee4b5082efeb290950152aa92d4",
+      "scripts/vehicle-bake/classic-motorcycle/geometry.py": "46cf77360bd58db2887992f4fe5e8b7477dbf0a4a5f67c2168cc1e66caf74895",
+      "scripts/vehicle-bake/classic-motorcycle/family.json": "0676253438182a4cc7c3c7999d17928f18f5d06a443db87236c7962554081256",
+      "scripts/vehicle-bake/classic-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+    },
+    "baseConstructionSharedInputs": {
+      "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+      "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+    },
+    "parentConfirmedImmutable": true,
+    "geometryReexportedAsOwnVariant": true,
+    "binaryBasePreservationClaimed": false
+  },
+  "actualBounds": {
+    "minWorld": [
+      -27.920316696166992,
+      -5.3913044929504395,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      27.920316696166992,
+      5.3913044929504395,
+      22.782608032226562
+    ],
+    "spanSource": [
+      3.2108364200592034,
+      0.6200000166893005,
+      1.3099999344348905
+    ],
+    "centeredHorizontalCeilWorld": [
+      56,
+      11
+    ],
+    "noRescaleRecenter": true
+  },
+  "combinedBounds": {
+    "minWorld": [
+      -27.920316696166992,
+      -7.043478012084961,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      27.920316696166992,
+      7.043478012084961,
+      35.57391357421875
+    ],
+    "spanSource": [
+      3.2108364200592034,
+      0.8099999713897704,
+      2.0455000030994412
+    ]
+  },
+  "sourceQA": {
+    "exactFreshSixInputReplay": true,
+    "allActualTriangleUVMatches": 2434,
+    "packedMasterComponents": 55,
+    "trueFRRig": true,
+    "actualFiveContacts": true,
+    "narrowSemanticPairExceptionsOnly": true,
+    "actualUnchangedBasePerson7FailureRetained": true,
+    "twoWholeBodyRiderCylinderNegativeResets": true,
+    "displacedIntoTankNegativeReset": true,
+    "unchangedPerson7SelfClosedPawStraddleControls": true,
+    "crownCoverageEach": 25,
+    "actual32HeadingsEach": [
+      "combined",
+      "bike-alone",
+      "rider-alone"
+    ],
+    "all32WireframesEach": true,
+    "riderHidden32PixelExact": true,
+    "depthMasksAndSingleTarget": true,
+    "native128224FixedDensityParity": true,
+    "signedIndependentRoll": true,
+    "desktopMobileOffline": true,
+    "scopedChecks": true
+  },
+  "sourceInputHashes": {
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/build.py": "03e9c26d7af1e0c239d4ddacdc9e20404e5d3559ef065891a9d0189c66eb2291",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/geometry.py": "81ef81929ec47af6c77f0ea9ed2f1e43d1bd61013b7aee5395c896e8eef43d60",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/family.json": "17b1dd59d83d77ece99e97f54e68675e70ae666c01855d4e70347a9f2ff1b06e",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/person7-upright/v1/person7-upright-v1.json": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "scripts/vehicle-bake/source-replay.py": "f07f6c2232fc610db10733e0d662a36f139f98cef297a7e18ac59cca177d47f4",
+    "scripts/vehicle-riders/person7-upright/rider.json": "d840be12016eb4553db3948648c27363dede298bdaa30f28ef16cdcbad5a6193",
+    "scripts/vehicle-riders/person7-upright/explorer-upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "scripts/vehicle-riders/person7-upright/person7-upright-v1.json": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/person7-upright/v1/rider.glb": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+    "art-source/vehicle-riders/person7-upright/v1/recipe.json": "738def6948c16042d3153c6c97d2c3af4b362189f5f848fd95c8ceb75633b740",
+    "art-source/vehicle-riders/person7-upright/v1/report.json": "39884fde1d13088e601cf85281979fc42d8da665257b5a444af6d4c6215919c0",
+    "art-source/vehicle-riders/person7-upright/v1/master.blend": "4e7e3894ce4a68c08ef86a8fd9a911b78c682ae6f7a635a4c3120831e55a1d80",
+    "art-source/vehicle-riders/person7-upright/v1/low.blend": "f61bd3666a712be09c82d5f333c9f4e8e5317fc2fa00af8df6c1b9c6df938edc"
+  },
+  "limitations": [
+    "Prototype source only; actual shared motorcycle loader/browser qualification remains pending parent",
+    "Only unchanged Brown Person7 measured profile fitted; no other-avatar, AI, occupied fallback or normal availability claim",
+    "Neutral static control geometry; no steering, suspension, rider/equipment animation qualification",
+    "Grip/paw closed-solid overlap is the explicitly bounded wrapping contact; fingers are not articulated",
+    "Raw GLTF uses shared projection/outline math; no normal CarMeshAsset used",
+    "Original base and Person7 remain immutable; own bike geometry reexport is not binary base preservation"
+  ]
+}

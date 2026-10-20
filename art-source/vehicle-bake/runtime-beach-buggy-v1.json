@@ -1,0 +1,106 @@
+{
+  "modelSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+  "spriteSha256": "f2e7ef94927938765075e139db6fbe71c29eb1a54dcad883b15a432fe5638edf",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-beach-buggy-v1.json": "11acd5179325c86a08af5a370c23453ef3a6e6fba1dfa440145a9555e7845da1",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/beach-buggy-v1/review-manifest.json": "37f69334023fccde3e2ce2b7dbaa16b1912ff87b9431039c5eee1b893659df29",
+    "public/demos/original-vehicles/beach-buggy-v1/inputs/model.glb": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+    "public/demos/original-vehicles/beach-buggy-v1/inputs/atlas.png": "4501926e57a78b7cbfa8a326e2080c755f6e82d00f65dafe33d243f208cad43d",
+    "public/demos/original-vehicles/beach-buggy-v1/captures/capture.json": "3792049cdcc3a78cbd835b6670a4a79aaa6831fd5a2ea7db3e99160fffe100fa",
+    "art-source/vehicle-bake/beach-buggy/v1/evidence/replay-verification.json": "137b394f0dc83c73435a3dea7261f444a7434e6fc8bd9191c8a715c0b3433099",
+    "art-source/vehicle-bake/beach-buggy/v1/build.py": "02d638ca79e75a62121c11fdbd475807e2256d4c26d7eab19ade330ca375f29e",
+    "art-source/vehicle-bake/beach-buggy/v1/family.json": "ab7ec1ddc1c29d0f9406251b439d1f2dac52e4bca6e7ba7a0b8cabb52e75bebc",
+    "art-source/vehicle-bake/beach-buggy/v1/coverage-region.json": "2cd355ae3450c967ef475da5028841940f58d709934fdcf112f5315f5d5efafc",
+    "art-source/vehicle-bake/beach-buggy/v1/cockpit-region.json": "515e0587b8490e1258ff4911ed97a8b2ee873333c5a99021a5ba25bda38e2208",
+    "art-source/vehicle-bake/beach-buggy/v1/review.json": "9506dcda1b03a42e49114b2c8fe70a5aa0fa5469dd7d7b77c7b5c7aae445a8b5",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/beach-buggy-v1/captures/engine-4.png": "e8cd6fe15c99f6f32961677f2f78b36062ba15d81d7ab0a0d795f234e4f1a3a3",
+    "public/demos/original-vehicles/beach-buggy-v1/captures/engine-12.png": "b5e0ab90b0b96e0a2ceb0611a31c72329fc812cfac9020ef4e394d032f6424eb",
+    "public/demos/original-vehicles/beach-buggy-v1/captures/engine-8.png": "e20223895fb364170858675d473a89d2df4c4c781f64b0d5fa6ec8fee7b8f487",
+    "public/demos/original-vehicles/beach-buggy-v1/captures/engine-0.png": "55b3915ed7a03573fc70f961bbce9718d885d4a79e7085e43e4fa07e3fa5cacd"
+  },
+  "physicalBounds": [
+    68,
+    38,
+    29
+  ],
+  "measurement": {
+    "modelSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -33.91304016113281,
+        -18.69565200805664,
+        9.5367431640625e-07
+      ],
+      "max": [
+        33.91304016113281,
+        18.69565200805664,
+        28.613792419433594
+      ],
+      "size": [
+        67.82608032226562,
+        37.39130401611328,
+        28.613792419433594
+      ]
+    },
+    "triangles": 3290,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/beach-buggy/v1/evidence/replay-verification.json",
+    "sha256": "137b394f0dc83c73435a3dea7261f444a7434e6fc8bd9191c8a715c0b3433099",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-beach-buggy-v1.json --blender BLENDER"
+}

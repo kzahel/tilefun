@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "camper-van--v1",
+    "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+    "triangles": 2784,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 7.826088255826811,
+        "minimumGap": 1.5354779621278283,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 7.826088255826811,
+        "minimumGap": 1.5354779621278283,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 7.826087951660156,
+        "minimumGap": 1.5354764695822212,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 7.826087951660156,
+        "minimumGap": 1.5354764695822212,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

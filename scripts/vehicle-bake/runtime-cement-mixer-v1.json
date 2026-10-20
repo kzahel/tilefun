@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "cement-mixer",
+  "name": "Cement mixer truck",
+  "tags": ["vehicle", "original", "cement mixer"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/cement-mixer-v1/review-manifest.json",
+    "sha256": "b21570aae8667a2cd3547c31fc50533ed29b73379bae05ce94eee7c796e39016",
+    "candidateId": "cement-mixer-v1",
+    "model": "public/demos/original-vehicles/cement-mixer-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/cement-mixer-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/cement-mixer-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/cement-mixer-v1/captures",
+    "modelSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "triangles": 3842,
+    "meshes": 7
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/cement-mixer/v1/evidence/replay-verification.json",
+    "sha256": "2b104df4475bbd0ae9480a91b97b1696173d8b1ac89c9a9678e8ae7451fb827c",
+    "build": "art-source/vehicle-bake/cement-mixer/v1/build.py",
+    "family": "art-source/vehicle-bake/cement-mixer/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [256, 256],
+    "groundOrigin": [128, 128],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "cement-mixer-authored-v1",
+    "path": "assets/models/vehicles/cement-mixer-v1.glb",
+    "radius": 128,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/cement-mixer-v1.png",
+  "performance": {
+    "speed": 62,
+    "acceleration": 80,
+    "pushSpeed": 60,
+    "pushWeight": 720
+  },
+  "receipt": "art-source/vehicle-bake/runtime-cement-mixer-v1.json",
+  "expectedBounds": [119, 44, 52]
+}

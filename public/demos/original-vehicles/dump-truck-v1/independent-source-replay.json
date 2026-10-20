@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "dump-truck",
+  "independent": true,
+  "declaredInputPins": 24,
+  "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/dump-truck/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/dump-truck/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/dump-truck/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

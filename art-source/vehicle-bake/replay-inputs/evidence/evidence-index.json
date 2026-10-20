@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "status": "passed",
+  "evidenceOnly": true,
+  "constructionDependency": false,
+  "historicalInput": {
+    "path": "src/rendering/CarMeshAsset.ts",
+    "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts"
+  },
+  "catalog": {
+    "path": "art-source/vehicle-bake/replay-inputs/catalog.json",
+    "sha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+  },
+  "evidenceFiles": {
+    "art-source/vehicle-bake/replay-inputs/evidence/all19-pin-resolution.json": "6d806f0545746ece5328c063b6e17bbc7907f3ead6c0650d40ec4e77971dca78",
+    "art-source/vehicle-bake/replay-inputs/evidence/controls-summary.json": "6ce592acaea357b4464d29ac8e45b088ac0e30d0b1a4652a9957b4da610ea1bf",
+    "art-source/vehicle-bake/replay-inputs/evidence/README.md": "8c3b4eb1e9096c5452a8f81f98b4b267db973eb89cd7adcdf13f796b30fa16c9",
+    "art-source/vehicle-bake/replay-inputs/evidence/runtime-offroad-jeep-replay.json": "283dcae9aa18027ffa996324aad5bd21e3468eda58af85ffb2242d0240900495",
+    "art-source/vehicle-bake/replay-inputs/evidence/runtime-semi-truck-replay.json": "5305f27257f479fd84be5148e5f9c9ee2fb7cfd9e038a2cca40b7d62fe7527b0",
+    "art-source/vehicle-bake/replay-inputs/evidence/source-offroad-jeep-replay.json": "c46bf635ddc3506c3475ac50aaf0a6ee787f60741ee7f8a29bf61a8e60f11ab2"
+  },
+  "validationToolHashes": {
+    "scripts/vehicle-bake/replay_inputs.py": "f9505c413e0d51e85a52cbbb4cc2be78d302f52e2b4d4220b947d2f9c0609542",
+    "scripts/vehicle-bake/source-replay.py": "b1477d5adcaa5eaa42c4807e524bc25729fd455cf243e38b801d537b0623375e",
+    "scripts/vehicle-bake/replay-runtime.py": "6e86ddd9e337b39b79dd4e56b2bfddffd2a1675037a1325654812c43a14bc84d",
+    "scripts/vehicle-bake/replay-inputs-test.py": "ed5e6b107b598b22e8725d0f38112fba683b948af89f34888c51f6475caa2bb9",
+    "scripts/vehicle-bake/replay-runtime-test.py": "d44058967c342640f91595990497b26f416f6604d09537aa617c41ae9ddabd61"
+  },
+  "currentEngineQualification": "Separate live-loader unit/native-pixel qualification required; historical replay is not current-engine validation",
+  "normalMotorcycleActivation": false
+}

@@ -1,0 +1,90 @@
+{
+  "id": "person7",
+  "name": "Person7 legacy cap identity",
+  "sourcePNG": "public/assets/sprites/person7.png",
+  "sourceSha256": "939c90da29092dfa17246f45095fab50bd54a9e89b2d045f8a5abe05d10f0a1b",
+  "status": "observational-standing-identity-not-seated-approval",
+  "palette": {
+    "k": "#3a3a50",
+    "t": "#57969d",
+    "c": "#4d8398",
+    "s": "#426a8a",
+    "j": "#46465e",
+    "d": "#394460",
+    "h": "#706663",
+    "w": "#ffcbb0",
+    "b": "#6c95b7",
+    "l": "#6daec3",
+    "O": "#c3bc6d",
+    "o": "#bba05c",
+    "p": "#f6ae9f",
+    "H": "#957350",
+    "q": "#f69784",
+    "r": "#9f462a",
+    "R": "#da6a2e",
+    "x": "#6779b3",
+    "y": "#959d58",
+    "z": "#3d457b",
+    "a": "#79746f",
+    "u": "#e1b49c",
+    "v": "#d3a38d",
+    "n": "#6c5981"
+  },
+  "headSkinCharts": {
+    "front": [
+      "khkkdkdkdkdkdkhk",
+      "khhwwkwwwwkwwhhk",
+      "khhpwywwwwywphhk",
+      "khapqqppppqqpahk"
+    ],
+    "back": [
+      ".kkkscscscssdkk.",
+      ".khhhkdkdkdhhhk.",
+      ".khhhhhhhhhhhhk.",
+      "..khhhhhhhhhhk.."
+    ],
+    "profile": [
+      "..jkdsccscsssssd",
+      "..jwkwwwddkkkdd.",
+      "..kwywwwwhhhhhk.",
+      "...kqqpwwuhhhhk."
+    ],
+    "rightProfile": [
+      "dssssscsccsdkj..",
+      ".ddkkkddwwwkwj..",
+      ".khhhhhwwwwywk..",
+      ".khhhhuwwpqqk..."
+    ]
+  },
+  "chartSource": "Only rows19..22 of first frame in each direction, own surface UV on volumetric head. Cap/body are new semantic geometry/paint; no standing/walking billboard.",
+  "measurements": {
+    "frame": [
+      16,
+      32
+    ],
+    "frontVisibleBounds": [
+      0,
+      8,
+      16,
+      32
+    ],
+    "frontCapRows": [
+      8,
+      19
+    ],
+    "frontFaceRows": [
+      20,
+      22
+    ],
+    "frontJacketRows": [
+      23,
+      26
+    ],
+    "frontPantsBootRows": [
+      27,
+      31
+    ],
+    "frontCapWidthPx": 16,
+    "headBodyObservation": "Tall stacked cap occupies12rows, pale face3rows, jacket4rows, lower pants/boots5rows. Big legacy head/cap and compact torso/limbs differ from Explorer and Bear; no common-height normalization."
+  }
+}

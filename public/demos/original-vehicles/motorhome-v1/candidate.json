@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "motorhome-v1",
+      "name": "Family motorhome",
+      "title": "Family motorhome \u00b7 autonomous original v1",
+      "nativeSize": 256,
+      "engineRadius": 128.0,
+      "dimensions": [
+        256,
+        256
+      ],
+      "groundOrigins": {
+        "study": [
+          128,
+          156
+        ],
+        "engine": [
+          128,
+          128
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Own long cream/forest-green cab-over motorhome: real solid cantilevered sleeping pod and roof step, truck cab blue framed skin glass, independent living-side/door/end charts, broad lower green stripe, one fixed roof vent, closed awning tube and low camper step. No glass overlays or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 2858,
+        "vertices": 5698,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 206328,
+        "sha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.521739130434783,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.521739130434783,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.521739130434783,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.521739130434783,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/atlas.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/atlas.png",
+          "sha256": "aa4d5b8eb711f565e28466efe1a2618fdd454f1b51cb29579cea40ebe687e7a5"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/capture.json",
+          "sha256": "a76a8ce400e32ca21d8120aa84b1f1a120c7c3d7f174b2a348642162214ac243"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-0.png",
+          "sha256": "7d2a84d32e90dfcebf484d2de6efcf04c95473e6e296f72443e7346202602825"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-1.png",
+          "sha256": "9a51da342d38147d5a94fdf3b9ff2a06d2f19e88f04d06046585db71673b7e24"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-10.png",
+          "sha256": "0474b9f28c7c8d3fa6ef7cae2639353199afbdab3a9b9b4c20de1550480b746a"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-11.png",
+          "sha256": "a045d6927956cda349ef61841e2b1b73db77e9fd3d2e94bfe694746622565220"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-12.png",
+          "sha256": "ee74117159ca31d5a7bcb9b42cd3d3a13a206444dc6c92b8343d853fb8b42d3e"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-13.png",
+          "sha256": "d700bfc78651c1fe26cad188e75407bce8b1c470e4c85d06add180fa456bec41"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-14.png",
+          "sha256": "18480a8a4cea2ba1221533adc4fd5233802a4e3083cabef9a1282ae2106d6010"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-15.png",
+          "sha256": "f96a2a0929fd52fd5f72ad29fe7d7eda3c6b8043df9466adead37b1616e4ea7b"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-2.png",
+          "sha256": "4b2db6fbd1cf397f9100b95aa5186ccb10993f00ab12b0a9a8b38e095244c0bd"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-3.png",
+          "sha256": "5ab4b5c71081eeb2ff50a6e78ef65911ee1ecc17f3e5f14339cd39f78b292b45"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-4.png",
+          "sha256": "00d8d6cd8376ef04a29f72ae5c55d386477734817da840d5505d322be2eaefc4"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-5.png",
+          "sha256": "95e64fc85c5a9516fee1530507a61ca67179cb5c69427e8dc47f79d544f976ba"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-6.png",
+          "sha256": "eec6bc7b84cdbdbe20b15dd0d8658a2dffd59780fc0ee0df90c7ce0734c66f66"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-7.png",
+          "sha256": "9ad638418c967d861dd1900fdc46b1df7f46e8c2a9238040e3cd688d0fe59eec"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-8.png",
+          "sha256": "470bd57796c06807a71f81343f5a16fe579379959908b16bfae982ae2e1dc2f1"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/engine-9.png",
+          "sha256": "042ff75f52c177fc6ec275cc48ebe57f68c6c8a4111092728b4d2bb8bda2081e"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/game-roll-0.png",
+          "sha256": "4b2db6fbd1cf397f9100b95aa5186ccb10993f00ab12b0a9a8b38e095244c0bd"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/game-roll-1.png",
+          "sha256": "0571f6dde5f527c101c37a6e032a8bfc80c995f6d8a5e4f2fdc7c52cd051a351"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/game-roll-2.png",
+          "sha256": "d48e8f2d58daa329a08a6f3dbd3f57faec9424d53d49004ceea03d6b32f6a233"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/game-roll-3.png",
+          "sha256": "456d04ec2e5264d73fef5080e8f89d5b02a3e01637601badbb85d917c199e99c"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/game-roll-4.png",
+          "sha256": "035c11e52a144fd21bcfd9bac49d5b03e8deb7c4276039aa187dec5293ab37f1"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/game-roll-5.png",
+          "sha256": "4f42be54ae04531b6286c52204ac55069f271ca9ed46399220bab4cca2b533a9"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/game-roll-6.png",
+          "sha256": "b118db94a838fb0e832fb4abbd1ca88031872c3c3765fff089b0bdae9bcf1958"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/game-roll-7.png",
+          "sha256": "4bc334944857aac99a521be08b8dc3d5aa33156d3c99c3dd0ee8e16fb244aa8e"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/inspection-engine.png",
+          "sha256": "8ffd2d7187a266aea8bcd4bb5447a7222a2d25e49c56d208c110d0b9b2df2805"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/inspection-phases.png",
+          "sha256": "cc9082cad2987289bb869f3d73cdea42d323074fbdc071d49cbc479ef8cf4c27"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/inspection-study.png",
+          "sha256": "5717e4319cad45749513fbe969fdfffad88924c1f16e8767293f3f1fec4641f2"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/roll-0.png",
+          "sha256": "09a945efe156892f42f720de2c9c07646e10e5ab9050ba53ffbf9e82a14bbeb7"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/roll-1.png",
+          "sha256": "bc5427ec0b36ef6dee4bb57a8929ec5ae440791387e83c25308e1cc247a32b82"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/roll-2.png",
+          "sha256": "9bf877d2d1e974dbe92108a7dfdc1d0304b8ffff2f5682e8f91af75501761c53"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/roll-3.png",
+          "sha256": "50a691e7fbb0928e00e448662912a7f66d531879cbf93430407ebdafb8b20027"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/roll-4.png",
+          "sha256": "e8e9eebc0b281f5e967064b898321d2f5136462c926e9d75e44cfbeb033cf0a7"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/roll-5.png",
+          "sha256": "aa9a90c0832960c3351572858dbf9ae57a7aef52eb83f946c19a5b212f893455"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/roll-6.png",
+          "sha256": "7c16eda0c5beedac391cbcb040222950ee0249daf23e96e9f0f9d46a81264d85"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/roll-7.png",
+          "sha256": "08ff9aecdca54b57833aa91623e14c8549b7d7782c52103d2602987141634256"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-0.png",
+          "sha256": "774d685330dda00f684bbf0f4d142afcd5720a62b01aa45ef8177a9b4ec82a45"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-1.png",
+          "sha256": "7f10c4ef14035b73d89008a13c9f59201edfdb14c1cafaf69c2fcb2bef10bffe"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-10.png",
+          "sha256": "2e66e688378451a04337bac38005edf4e72bc6c10976cd6c8b585e4fda5fbce0"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-11.png",
+          "sha256": "b8b83cff275bf899d5a7046e3aca27262ea408a0fe5016923c532ae57300109c"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-12.png",
+          "sha256": "3fdd829c1b9ae829eaa0d82b83ed81b7c51baf75d3355c5e0a467e73f155f347"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-13.png",
+          "sha256": "cf5b05573c7002cdf2adb93f295c6621e0321dac2787b3d51d15a838c6459003"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-14.png",
+          "sha256": "1fc0e62dc13d63b84840385a2f77c853d92849538e339dacf9fb7f207957512e"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-15.png",
+          "sha256": "a72aad9e9996b06c3dc49708ad07bc1374e91451769c8498017735e3ab3b4692"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-2.png",
+          "sha256": "09a945efe156892f42f720de2c9c07646e10e5ab9050ba53ffbf9e82a14bbeb7"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-3.png",
+          "sha256": "f768352c89a3dba5ada57df83a3e2b68bf242744bbc069230d5e49f6c76e8e78"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-4.png",
+          "sha256": "95b5dd17c14f5db50f80569d89e47b6c0f64abe2db28453033a13cbf78b3b271"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-5.png",
+          "sha256": "7f3746002a383a63e9451aa2aba3a935480679882389a96dfb1f55bc61e27b35"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-6.png",
+          "sha256": "2d844d905ac09cd7348d0f1783ef7fd07db8dc84a94b99bc649740c50ffd6cf2"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-7.png",
+          "sha256": "f0bee63ddb14f3daeecaba6b6d9437471ed29235389871847f20763730840fee"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-8.png",
+          "sha256": "fd80a060a36f69aae1e5166502a97e010d84a15f7b59ba3f96218fd0079dba7f"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/study-9.png",
+          "sha256": "9168f4ad28ff6f07481b510616d72cab8332beadff933b47f02d8378c041ed65"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/wire-engine.png",
+          "sha256": "9fd2f757ec559ed205aae969f37b7d433376d87ae6f3ffda6a85539736c178d1"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/engine/wire-study.png",
+          "sha256": "0e34edcfecab09e4da50c2a94bd780553af14927344c9804abf625c9fd185cfb"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/model.glb",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/model.glb",
+          "sha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/recipe.json",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/recipe.json",
+          "sha256": "cfa46a586e768d3ed93eb4efa94cd50d5b00ee86776ebc8c350468f2aa4a6d1b"
+        },
+        {
+          "source": "demos/vehicle-bake/motorhome/v1/report.json",
+          "retained": "demos/original-vehicles/motorhome-v1/inputs/report.json",
+          "sha256": "7683ebce5dbffc26ea0cc26ab8c22ddff92110ceff772567019ab45d143da407"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

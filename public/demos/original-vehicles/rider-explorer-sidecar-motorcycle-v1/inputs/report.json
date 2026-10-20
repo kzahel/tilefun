@@ -1,0 +1,91 @@
+{
+  "status": "complete",
+  "sourceImmutable": true,
+  "humanApproval": false,
+  "runtime": "not integrated",
+  "method": "PREREQUISITE PROTOTYPE: unchanged true-F/R/SC sidecar motorcycle geometry/paint and static Explorer upright composed in one GLB/depth target. All original buffers/transforms retained; explicit companion child attached inside marked cycle root with root-transform compensation. One512 bike atlas plus one256 rider atlas; normal rider/AI/fallback/all27 unqualified.",
+  "audit": {
+    "triangles": 5374,
+    "vertices": 10775,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 2,
+    "textures": 2,
+    "glbBytes": 388376,
+    "sha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc",
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "SC": {
+        "wheel_radius": 6.260869565217392,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R",
+      "SC"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "sourceHashes": {
+    "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/assembly.json": "0b212ff184b90ed40aef8dfa11a57d80755178a1c86e4fdf4f50065fc2131de3",
+    "scripts/vehicle-bake/component-package-cycle.py": "d770b66e08a76cf914f58685776f1ee69bb86c9dc5d87dda519c80d0ae7e464d",
+    "scripts/vehicle-bake/compose-component.py": "6659e9d078ed6a317049ed50606551239c494c156cd6ef55586a7fe2f9ce7df4",
+    "scripts/vehicle-bake/compose-component-cycle.py": "cf7020b2e5e4d6a9bb81b8615040aadfc49a539dc453ca434ad3c909937f268d",
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/replay-verification.json": "732af64ce890d4654a152105e45a8d43604eb49f81300d474a9c265305b8f031",
+    "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/evidence/base-independent-replay.json": "8d5df19ef92cb133dc9d2643153770c092b06b337212e60b687ab3d89db8158b",
+    "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json": "20bdcf085ef11e934a40507a9cbef0cc3262e1a73c9c1d5acd5e45570b3d790a",
+    "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/evidence/rider-independent-replay.json": "0c5ee33097961dd2254c957aeb112c18ec2e2ebfb65b02b6a8fb4ad2a3a4cebb",
+    "public/demos/vehicle-bake/sidecar-motorcycle/v1/model.glb": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+    "public/demos/vehicle-bake/sidecar-motorcycle/v1/atlas.png": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+    "art-source/vehicle-bake/sidecar-motorcycle/v1/master.blend": "2cc2ff00ea3bbcd02023d9b901168a5bb225a7fa2121a0cc56832ef1a915720a",
+    "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/evidence/base-normalized-replay.json": "f45c3db27e3fedbfd5b795a0e947fb78943fa90c22bf8e856c52f9a8d02172c2",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/atlas.png": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+    "art-source/vehicle-riders/explorer-upright/v1/master.blend": "b453ca55e4bf7d2bb6adc0ea2de4685402c886111204300e10442b8acf9fb980",
+    "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/evidence/rider-normalized-replay.json": "b779197e4dab41628a4dd8ac10f38d48c2cde40947a57a2e65469890ce75fe9a"
+  },
+  "assemblyMasters": [
+    "art-source/vehicle-bake/sidecar-motorcycle/v1/master.blend",
+    "art-source/vehicle-riders/explorer-upright/v1/master.blend"
+  ],
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112.0,
+    "studyGroundOrigin": [
+      112.0,
+      140.0
+    ],
+    "engineGroundOrigin": [
+      112.0,
+      112.0
+    ]
+  },
+  "limits": [
+    "One static Explorer/one sidecar motorcycle fit only",
+    "No normal activation, all27-avatar, AI, occupied fallback or animation qualification",
+    "Standing characters and normal car driver semantics unchanged",
+    "Editable geometry stays in two retained child packed masters; placement is this explicit recipe"
+  ]
+}

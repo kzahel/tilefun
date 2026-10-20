@@ -304,7 +304,7 @@ for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
         });
         await expectOriginalFallback(page);
       } else {
-        expect((await diagnostics()).asset?.drawMeshes).toBe(5);
+        expect((await diagnostics()).asset?.drawMeshes).toBe(family.meshCount);
         await expect.poll(async () => (await diagnostics()).meshDraws).toBeGreaterThan(0);
       }
       await page.getByRole("button", { name: "Start on roof", exact: true }).click();
@@ -434,7 +434,7 @@ for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
             .toMatchObject(
               failed
                 ? { state: "failed", meshes: 0, drawMeshes: 0 }
-                : { state: "ready", drawMeshes: 5 },
+                : { state: "ready", drawMeshes: family.meshCount },
             );
           if (!failed)
             await expect.poll(async () => (await diagnostics())?.meshDraws ?? 0).toBeGreaterThan(0);

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "motorhome",
+  "name": "Family motorhome",
+  "tags": ["vehicle", "original", "motorhome"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/motorhome-v1/review-manifest.json",
+    "sha256": "fa65bb326f56aac5a53868df90ff2eb9f41dd32e1a97f2549e277274cbf0107d",
+    "candidateId": "motorhome-v1",
+    "model": "public/demos/original-vehicles/motorhome-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/motorhome-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/motorhome-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/motorhome-v1/captures",
+    "modelSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+    "triangles": 2858,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/motorhome/v1/evidence/replay-verification.json",
+    "sha256": "ea40b9f6c7c40fdaf491d63d0ac2e0c3a663173f42f9b45154c31e2164624015",
+    "build": "art-source/vehicle-bake/motorhome/v1/build.py",
+    "family": "art-source/vehicle-bake/motorhome/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [256, 256],
+    "groundOrigin": [128, 128],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "motorhome-authored-v1",
+    "path": "assets/models/vehicles/motorhome-v1.glb",
+    "radius": 128,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/motorhome-v1.png",
+  "performance": {
+    "speed": 78,
+    "acceleration": 105,
+    "pushSpeed": 48,
+    "pushWeight": 400
+  },
+  "receipt": "art-source/vehicle-bake/runtime-motorhome-v1.json",
+  "expectedBounds": [125, 53, 53]
+}

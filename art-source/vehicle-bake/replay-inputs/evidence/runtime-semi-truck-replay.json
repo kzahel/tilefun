@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "id": "semi-truck",
+  "independent": true,
+  "exactModelSpriteReceipt": {
+    "public/assets/models/vehicles/semi-truck-v1.glb": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "public/assets/vehicles/semi-truck-v1.png": "7163d3f0efa8205e3327fefc003e27ce6579e4964b057e68dc31241a7357bcf0",
+    "art-source/vehicle-bake/runtime-semi-truck-v1.json": "cff3af0d9fd40050de3d63c41427014e3300239aacbd2f6c9c6d0d9d3920262e"
+  },
+  "selectedCatalogEntryExact": true,
+  "exporterSha256": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+  "scratchInputDependencies": [],
+  "declaredInputPins": 37,
+  "historicalInputs": [
+    {
+      "path": "src/rendering/CarMeshAsset.ts",
+      "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+      "resolution": "historical",
+      "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+      "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+    }
+  ],
+  "snapshotCatalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306",
+  "version": 1,
+  "evidenceOnly": true,
+  "constructionDependency": false,
+  "committedReceipt": {
+    "path": "art-source/vehicle-bake/runtime-semi-truck-v1.json",
+    "sha256": "cff3af0d9fd40050de3d63c41427014e3300239aacbd2f6c9c6d0d9d3920262e"
+  },
+  "config": "scripts/vehicle-bake/runtime-semi-truck-v1.json",
+  "freshDeclaredInputWorkspace": true,
+  "outputFilesGeneratedDuringReplay": true,
+  "immutableExporter": "scripts/vehicle-bake/runtime-export-v3.py",
+  "measurementHelper": {
+    "path": "scripts/vehicle-bake/runtime-measure.py",
+    "sha256": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579"
+  }
+}

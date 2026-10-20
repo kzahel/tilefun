@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "mobile-crane",
+  "independent": true,
+  "declaredInputPins": 25,
+  "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/mobile-crane/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/mobile-crane/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/mobile-crane/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

@@ -1,0 +1,106 @@
+{
+  "status": "passed",
+  "scope": "own family sources only",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n16 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\build-unchanged-view.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\build-view.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\capture-raw.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\capture-unchanged-controls.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\node_modules\\.bin\\biome.cmd",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\build-unchanged-view.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\build-view.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\capture-raw.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\capture-unchanged-controls.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\coverage-region.json",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\family.json",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-person7-fit\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": "Checked 7 files in 14ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/assess-pixels.py": "4114c2e8d1f0c53803f9ea7ed5fc722ec5f171127867c51f6b960f4ed32addaf",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/audit-source.py": "7c33d24321d936c5f1c7f9e6f6cca69af4f8e4063a8f5a292e8450d192c9450b",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/baseline-fit.py": "b1fe31c17aae3f00a48e42900341b1927ad32fc8d298f3760207f3be4e820e58",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/build-unchanged-view.mjs": "f8b6e20137fc1567afda4a81af4310e99908093675fee87dcec5277ef1afcfdd",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/build-view.mjs": "ce5fc9b77dd8d4a10babda6a41438158a043579813d63d5c13930cfbe00cc324",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/build.py": "03e9c26d7af1e0c239d4ddacdc9e20404e5d3559ef065891a9d0189c66eb2291",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/capture-raw.mjs": "42a8df2d7d1040ad3c475bb692586776d1dab89851d1988533de0cea35c6429d",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/capture-unchanged-controls.mjs": "22a9d1b04b9f9a0f76f2a271938f9ad52c1ca7d96338522036ac19cae1592de6",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/checks.py": "5e5d8bd11ef015166c0c851dcb2944d32feba3ecb5dbb7015bf2710126163c6e",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/compare-base.py": "7efe82a3d3d51530916d7ec6c2838c8224202d390487b49289904985166d3417",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/coverage-region.json": "e3291626bde3aff13f6136c18a0e1e3c55001d8c3e40399f7acb0132cb06f0b9",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/family.json": "17b1dd59d83d77ece99e97f54e68675e70ae666c01855d4e70347a9f2ff1b06e",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/finalize.py": "e42ef03b9a9d359611eeb7d12d402a5fe281e5bc28e1e27b83d11f3552d1997f",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/fresh-replay.py": "701eb5b621918dba14f0f1bec4eb60783c4ff096881e2855552b7131c971aa8a",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/geometry.py": "81ef81929ec47af6c77f0ea9ed2f1e43d1bd61013b7aee5395c896e8eef43d60",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/normalize-replay.py": "e1ac3bf823775af3b9a77f5171ed77474916af84487efc3db9b7e762df2eaa0f",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/parameter-api-proof.py": "9807469b05ab6ca2bfede6461f95860b5964436b22d62507b9228fcb6c5f6ff3",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/prove-contact-pairs.py": "d774a55d931cd93b0456a777d8ab62e9d3a0ccbdbb5f1d3984f1f0ca4d66ac33",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/prove-fit.py": "1a2a8661503726454ffcdf8d18e1e8553e4aaffb7e7d1a99cf7b4a659e0d9a74",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/prove-immutable-rider-self.py": "59306f6836e3b94318f857333faa345c74d438f9483bbdea72a4fb4f9a2761fb",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/raw-diagnostic.html": "b36b2bfff0cd80db438dd7ff63906b59aa381c8b5eaa4d17892685665c3e7d02",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/raw-viewer.mjs": "6e39cef42027c33ba87a3924f075f9e8229c2586031784675aca37f3f984f902",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/sheets.py": "566ac3277efb15f158608299b4eeab22f3cea509df81b9f7c9a78bcfd773745f"
+  },
+  "pythonSyntaxCompiledOnlyIntoOwnIgnoredScratch": true,
+  "globalChecksRun": false,
+  "gitUsed": false
+}

@@ -1,0 +1,14 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: long orange/yellow carrier, offset operator pod, stepped stowed boom and low hook produce a coherent mobile crane silhouette.",
+    "Six-wheel signed phases and wireframes inspected; tire crowns remain beneath carrier fenders, fixed stowed equipment stable. No extension/lifting/outrigger animation claim."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

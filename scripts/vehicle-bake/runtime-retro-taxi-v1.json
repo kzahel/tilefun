@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "retro-taxi",
+  "name": "Checker-style taxi",
+  "tags": ["vehicle", "original", "retro taxi"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/retro-taxi-v1/review-manifest.json",
+    "sha256": "12ac6e632f2df432c38b54a529d2955ef3eaa373464cf7e16cb9456b9e59e9fb",
+    "candidateId": "retro-taxi-v1",
+    "model": "public/demos/original-vehicles/retro-taxi-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/retro-taxi-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/retro-taxi-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/retro-taxi-v1/captures",
+    "modelSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "triangles": 2970,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/retro-taxi/v1/evidence/replay-verification.json",
+    "sha256": "b608dd66b46a5a0de71897a00cda4221766ef2f4701736a870428d36057be474",
+    "build": "art-source/vehicle-bake/retro-taxi/v1/build.py",
+    "family": "art-source/vehicle-bake/retro-taxi/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "retro-taxi-authored-v1",
+    "path": "assets/models/vehicles/retro-taxi-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/retro-taxi-v1.png",
+  "performance": {
+    "speed": 120,
+    "acceleration": 210,
+    "pushSpeed": 42,
+    "pushWeight": 160
+  },
+  "receipt": "art-source/vehicle-bake/runtime-retro-taxi-v1.json",
+  "expectedBounds": [82, 35, 29]
+}

@@ -1,0 +1,975 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "flatbed-truck-v1",
+      "name": "Flatbed truck",
+      "title": "Flatbed truck \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Own short orange work cab with coherent blue framed skin glass; long truly empty thin gray flat platform with few broad panel seams, separate gray edges and dark underframe, orange front/gray rear integrated arch guards, gray bumpers and small rear hazard blocks. No cargo/towing/recessed-bed or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 2534,
+        "vertices": 4964,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 180064,
+        "sha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/atlas.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/atlas.png",
+          "sha256": "b7ff20cc00dc3946e2692fd43a529b8c3d1526db62a90e71c3c5d9dbfeb82d71"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/capture.json",
+          "sha256": "7a6d1732c8bf9ad5430b1500a6f75f9e6bfaf9dd5a34c4c2c8cf0921ee27c56c"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "7f067aff2b293866a75e19c4ce8422f79965695b599bb3ea9afaa162dff72e0b"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "5c93db9d00028266b09ac73d991af77ba344a6323ed1d5279dda04626326d7b9"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "ae5a1686607f7a0a5e46f63220d5274179798874241c361ce825a96fe290a4df"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "ce585b17b95b8f5426b4d3f75d29ed1e8c7833bddf23ab51a629b1f208ea87c7"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "c05130226272787ba6673acd3a1a40eedaef058363f12363fee4945d8a790403"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "b52322dcfe60c4c8e9c1e3b614be08ad86212ac5ab8443c66cb2442264e41162"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "dad296a84db8b6d3376eacb1678c6bc669e780e65af552b8450cb7cb329eaca8"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "a773b21924740249e78bb66fd10e1ee4350d72a6d1f81bce6ab0bb5bf0e96f1f"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "df7d75cafa4b86f556f44c86e5938c54bd6519dedd55ae2a23c630338da3871f"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "4031062d669239c979b5f6ba9e908c49918c48f9f64874d1e465dd6389d65864"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "4af087932cb041288336693ea2c4038f20f1d0eb6a0f1466e64696730795f595"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "f0234af25308253d2b602af5f87e946626555c91a53d553287ee781102e83a77"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "5ce7979d090f22099fa2b191832aef236df75d7a52c0d0f0bdfc8cd57a94b01f"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "6d448bd0cc5827932f3dd381a05e17710ecc9ee284f8b56b3f6028ed71ff4081"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "503e7e9043d6b33e9b6d50f19c0210c7776fa60b66a82707158f0c35872b17b2"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "3ab97b0c50ffb528fb222c78224f27572cb799020738edae5e652b73ed2ff116"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "df7d75cafa4b86f556f44c86e5938c54bd6519dedd55ae2a23c630338da3871f"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "b2a26c48b6895e8e9c70182f7543173553f59951f6373ee62df0e65a7870efbf"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "5900a0a7ea24cce7da7021a9a2e76f59dc0f6ba8fb553b3fd2394e45973c110b"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "c7024e2fdfc5fa351fe6000601c57fc5863c45db6a24477991a08ecd27d5d521"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "1088094dbf3da9c77d13a4b9a5bb8750de76e1d50396c54c54ac058251a25863"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "d90a112168c15806b721a76308ed28feeaeed2fa0b2294413474865c77b48350"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "049a46a37d15574fb33258fb31dd81a3674027beabc885368740fafd46f92137"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "cd4fd4d07d1c52b9646d6c7912d973d92df812968fcebc5a23510518dd49a4b4"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "51488eb566a6221b51d9d5c91a4f6cbc86fb109504adad73b7e3ed8ea15b5146"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "b65ae946214f9e78f376faf1e0961bd5b42391ba0a10feed675cf9334be85a61"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "02843c951b8ceadbd2a20b32353a18d5673958d81386780b14000fd96590b338"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "aa1232bae668ef423abdcd9cb40db041fd3b9a5b0dfb432a06982458acbe7558"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "e0ea5fac2994df0ce6f53baa6cac14f01fcab3fa8a5c2080ac947c7b70cd0f8f"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "15a4fecf0cf2859ec261f9b543b47df0da933b741fe8d30be8b9cb0f26e2e846"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "1e077f1192f438518b82061b24bd749a179f9fd57dab10b81f0ad88d7fb76eee"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "928522877a6ffee0a195ccdb7d3f6b366f2353ec01370141851a23b38efc4bd6"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "0998e871c0156f671853e3a1b5211a861a94a1c99d01591e934d74e5b17f336e"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "1b891e30f561fc658cbcb8df902e607dd9ee308af36b0bdd84664160a39a8fdd"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "2a41e5fda5eb18ef7973e1864c438b3687e747bfe3dfe1cfd598414b21bcedf4"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-0.png",
+          "sha256": "758e3b3bcd019ef530e3d3bcb89ae81ee983021e5b0c6ff701b92b6e1c9a008e"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-1.png",
+          "sha256": "55d4859949ed29f6d417a17e88eed259d1c6cd9fa81a80bff605d7980a39103d"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-10.png",
+          "sha256": "a9766810ae09047d1c3612f23f2a6caa196ac6327f21ae714376760346c706fb"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-11.png",
+          "sha256": "a806a1883fa49df83b3e92679ae828e77b6005bbb7b2b48e9ac8bfc14c9468ea"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-12.png",
+          "sha256": "831501cabf9af76fbd473dd1eee7ec5ba5854b28c101528ee21e9fbd17efaf60"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-13.png",
+          "sha256": "6d5dd48cb317178c7620ee80fa16ab96aee955d77d9e15e7d5f278c2a5248b58"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-14.png",
+          "sha256": "653392fc0bb7c20e446e006539bc22ad8c600ead302783449e310d419de61415"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-15.png",
+          "sha256": "7d6d59d8cba9707fb665b8ebfdc4fcd58bc076fc9959fb4b626f1ff132007948"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-2.png",
+          "sha256": "aa1232bae668ef423abdcd9cb40db041fd3b9a5b0dfb432a06982458acbe7558"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-3.png",
+          "sha256": "342c21301bed5c4aea0a29d813a8df23c6eb8d9dccb114645ba5e70f193f54da"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-4.png",
+          "sha256": "4a97d3c3e5aef8ca19fdd707c5b60715c3d5f8223b66f51965983ced2035b91c"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-5.png",
+          "sha256": "cd612118afc8854b18d3d4ab01a671b962077adf36c3ae3ee2ffb780ae5d4057"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-6.png",
+          "sha256": "684b370b92e508b5031850bab041aa79176411cfb0d33f3ed3d8734976e9694a"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-7.png",
+          "sha256": "1c455321f96dad867097a94812515d1ec906bc914b58f2b820e102d044f93803"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-8.png",
+          "sha256": "7bc9362b3af813d17cdadc0a76d316e3afbdcaa54192b238714c476421c9edc1"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-9.png",
+          "sha256": "ccb3d19113d2facf8cb44d3db9ebf9bce9985f2ed4b58da039378ed4749bd0b8"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "ff2de13aac9f46311642f78101cab9360677dc82e1f63c80e995c1efd165fac4"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "0332cc2b0b3c1e14c251009b12afa870ce79c11029fd7c65230e003d49927d93"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/model.glb",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/model.glb",
+          "sha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/recipe.json",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/recipe.json",
+          "sha256": "c03dd748c0b71399b0357665257123860e4ea61b900f5796eecc5bd3f6a0e3cd"
+        },
+        {
+          "source": "demos/vehicle-bake/flatbed-truck/v1/report.json",
+          "retained": "demos/original-vehicles/flatbed-truck-v1/inputs/report.json",
+          "sha256": "83096e2e1dd1e0471800beb1837f4938a9068cd886e0012b51565b31c3e5c9bc"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/flatbed-truck-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "flatbed-truck--v1",
+          "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+          "triangles": 2534,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 8.695653116241195,
+              "minimumGap": 1.6106577979935626,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 8.695653116241195,
+              "minimumGap": 1.6106577979935626,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 8.695653116241195,
+              "minimumGap": 2.147529418487146,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 8.695653116241195,
+              "minimumGap": 2.147529418487146,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 8.695652173913045,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 8.695652173913045,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 8.695652173913045,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 8.695652173913045,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/browser-qa.json",
+          "sha256": "af99668884f90269a32397dda9e3b718adbe41e002648300f1512b9b94f15733"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/candidate.json",
+          "sha256": "862446a1b2e411d0a8922128d9a3f8889844b9b7a5a0af19dd132e970196e33d"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/capture.json",
+          "sha256": "7a6d1732c8bf9ad5430b1500a6f75f9e6bfaf9dd5a34c4c2c8cf0921ee27c56c"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/contact-sheet.png",
+          "sha256": "c3eee49047575c6d7158822ec83b904144ff67a56477e4052e5c19c7621b8c71"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-0.png",
+          "sha256": "7f067aff2b293866a75e19c4ce8422f79965695b599bb3ea9afaa162dff72e0b"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-1.png",
+          "sha256": "5c93db9d00028266b09ac73d991af77ba344a6323ed1d5279dda04626326d7b9"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-10.png",
+          "sha256": "ae5a1686607f7a0a5e46f63220d5274179798874241c361ce825a96fe290a4df"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-11.png",
+          "sha256": "ce585b17b95b8f5426b4d3f75d29ed1e8c7833bddf23ab51a629b1f208ea87c7"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-12.png",
+          "sha256": "c05130226272787ba6673acd3a1a40eedaef058363f12363fee4945d8a790403"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-13.png",
+          "sha256": "b52322dcfe60c4c8e9c1e3b614be08ad86212ac5ab8443c66cb2442264e41162"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-14.png",
+          "sha256": "dad296a84db8b6d3376eacb1678c6bc669e780e65af552b8450cb7cb329eaca8"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-15.png",
+          "sha256": "a773b21924740249e78bb66fd10e1ee4350d72a6d1f81bce6ab0bb5bf0e96f1f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-1x.png",
+          "sha256": "b960645f89124904dbcebe80e2eefd48b0266544e3da4bb947e1eb84e870073e"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-2.png",
+          "sha256": "df7d75cafa4b86f556f44c86e5938c54bd6519dedd55ae2a23c630338da3871f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-2x.png",
+          "sha256": "75af25ba6a66a2c6091c9192acb1b484ce25d4ea0e1ec4fb3e297b80a32f9549"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-3.png",
+          "sha256": "4031062d669239c979b5f6ba9e908c49918c48f9f64874d1e465dd6389d65864"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-3x.png",
+          "sha256": "17bcb16b665cb21af648d74606db7271ae89a368ea76c16b4dbe522416408814"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-4.png",
+          "sha256": "4af087932cb041288336693ea2c4038f20f1d0eb6a0f1466e64696730795f595"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-5.png",
+          "sha256": "f0234af25308253d2b602af5f87e946626555c91a53d553287ee781102e83a77"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-6.png",
+          "sha256": "5ce7979d090f22099fa2b191832aef236df75d7a52c0d0f0bdfc8cd57a94b01f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-7.png",
+          "sha256": "6d448bd0cc5827932f3dd381a05e17710ecc9ee284f8b56b3f6028ed71ff4081"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-8.png",
+          "sha256": "503e7e9043d6b33e9b6d50f19c0210c7776fa60b66a82707158f0c35872b17b2"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/engine-9.png",
+          "sha256": "3ab97b0c50ffb528fb222c78224f27572cb799020738edae5e652b73ed2ff116"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-roll-0.png",
+          "sha256": "df7d75cafa4b86f556f44c86e5938c54bd6519dedd55ae2a23c630338da3871f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-roll-1.png",
+          "sha256": "b2a26c48b6895e8e9c70182f7543173553f59951f6373ee62df0e65a7870efbf"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-roll-2.png",
+          "sha256": "5900a0a7ea24cce7da7021a9a2e76f59dc0f6ba8fb553b3fd2394e45973c110b"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-roll-3.png",
+          "sha256": "c7024e2fdfc5fa351fe6000601c57fc5863c45db6a24477991a08ecd27d5d521"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-roll-4.png",
+          "sha256": "1088094dbf3da9c77d13a4b9a5bb8750de76e1d50396c54c54ac058251a25863"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-roll-5.png",
+          "sha256": "d90a112168c15806b721a76308ed28feeaeed2fa0b2294413474865c77b48350"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-roll-6.png",
+          "sha256": "049a46a37d15574fb33258fb31dd81a3674027beabc885368740fafd46f92137"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-roll-7.png",
+          "sha256": "cd4fd4d07d1c52b9646d6c7912d973d92df812968fcebc5a23510518dd49a4b4"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/game-turntable.gif",
+          "sha256": "6ef2e992d05ff2a28d7204c10508e537d4d8e3ff69a83b80556b9ebe93f77d61"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/roll-0.png",
+          "sha256": "aa1232bae668ef423abdcd9cb40db041fd3b9a5b0dfb432a06982458acbe7558"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/roll-1.png",
+          "sha256": "e0ea5fac2994df0ce6f53baa6cac14f01fcab3fa8a5c2080ac947c7b70cd0f8f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/roll-2.png",
+          "sha256": "15a4fecf0cf2859ec261f9b543b47df0da933b741fe8d30be8b9cb0f26e2e846"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/roll-3.png",
+          "sha256": "1e077f1192f438518b82061b24bd749a179f9fd57dab10b81f0ad88d7fb76eee"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/roll-4.png",
+          "sha256": "928522877a6ffee0a195ccdb7d3f6b366f2353ec01370141851a23b38efc4bd6"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/roll-5.png",
+          "sha256": "0998e871c0156f671853e3a1b5211a861a94a1c99d01591e934d74e5b17f336e"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/roll-6.png",
+          "sha256": "1b891e30f561fc658cbcb8df902e607dd9ee308af36b0bdd84664160a39a8fdd"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/roll-7.png",
+          "sha256": "2a41e5fda5eb18ef7973e1864c438b3687e747bfe3dfe1cfd598414b21bcedf4"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-0.png",
+          "sha256": "758e3b3bcd019ef530e3d3bcb89ae81ee983021e5b0c6ff701b92b6e1c9a008e"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-1.png",
+          "sha256": "55d4859949ed29f6d417a17e88eed259d1c6cd9fa81a80bff605d7980a39103d"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-10.png",
+          "sha256": "a9766810ae09047d1c3612f23f2a6caa196ac6327f21ae714376760346c706fb"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-11.png",
+          "sha256": "a806a1883fa49df83b3e92679ae828e77b6005bbb7b2b48e9ac8bfc14c9468ea"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-12.png",
+          "sha256": "831501cabf9af76fbd473dd1eee7ec5ba5854b28c101528ee21e9fbd17efaf60"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-13.png",
+          "sha256": "6d5dd48cb317178c7620ee80fa16ab96aee955d77d9e15e7d5f278c2a5248b58"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-14.png",
+          "sha256": "653392fc0bb7c20e446e006539bc22ad8c600ead302783449e310d419de61415"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-15.png",
+          "sha256": "7d6d59d8cba9707fb665b8ebfdc4fcd58bc076fc9959fb4b626f1ff132007948"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-1x.png",
+          "sha256": "4d4f49f700079e42b0f291e1e9cccbfb625492d01ed0e0320df8d85f79e5d192"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-2.png",
+          "sha256": "aa1232bae668ef423abdcd9cb40db041fd3b9a5b0dfb432a06982458acbe7558"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-2x.png",
+          "sha256": "9b28fcb76b081b8b6cfc6ebbca5c2b6c3775ba30cf23f5c57897cc9deecfc1d3"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-3.png",
+          "sha256": "342c21301bed5c4aea0a29d813a8df23c6eb8d9dccb114645ba5e70f193f54da"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-3x.png",
+          "sha256": "0648235a235b6bbf04988afb1e71ba85b2ad9d63aa2fa9a57962d7493f4bfeb4"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-4.png",
+          "sha256": "4a97d3c3e5aef8ca19fdd707c5b60715c3d5f8223b66f51965983ced2035b91c"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-5.png",
+          "sha256": "cd612118afc8854b18d3d4ab01a671b962077adf36c3ae3ee2ffb780ae5d4057"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-6.png",
+          "sha256": "684b370b92e508b5031850bab041aa79176411cfb0d33f3ed3d8734976e9694a"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-7.png",
+          "sha256": "1c455321f96dad867097a94812515d1ec906bc914b58f2b820e102d044f93803"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-8.png",
+          "sha256": "7bc9362b3af813d17cdadc0a76d316e3afbdcaa54192b238714c476421c9edc1"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/study-9.png",
+          "sha256": "ccb3d19113d2facf8cb44d3db9ebf9bce9985f2ed4b58da039378ed4749bd0b8"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/turntable.gif",
+          "sha256": "0a2d37e4cd9d2923fbf72fec692bae11aa9edee901a1125b33a2a823cd2252c5"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/viewer-desktop.png",
+          "sha256": "6c2fd5f98d55cc691809aa926d4eed836edcd02dfa4877252edbafa803e17a52"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/viewer-mobile.png",
+          "sha256": "ada5dc20b71057762855d296f270f2d77daf364dc270fee5eeaeaceb4a7cc4ab"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/wheel-phases.png",
+          "sha256": "ca30a7076eaa35a36bcced6ee2520d932e37c5461feea46d89c2c09cfabd1616"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/wire-engine.png",
+          "sha256": "ff2de13aac9f46311642f78101cab9360677dc82e1f63c80e995c1efd165fac4"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/captures/wire-study.png",
+          "sha256": "0332cc2b0b3c1e14c251009b12afa870ce79c11029fd7c65230e003d49927d93"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/clearance.json",
+          "sha256": "b57decd759b21d7403023b5d3f282e1e45cfe22d05952654de911d087ee4d5b3"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/independent-source-replay.json",
+          "sha256": "329ef03ade38f26fc2bca55a3afb52eeb9953d5ea6cf781c996d56bde7b00271"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/atlas.png",
+          "sha256": "b7ff20cc00dc3946e2692fd43a529b8c3d1526db62a90e71c3c5d9dbfeb82d71"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/capture.json",
+          "sha256": "7a6d1732c8bf9ad5430b1500a6f75f9e6bfaf9dd5a34c4c2c8cf0921ee27c56c"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "7f067aff2b293866a75e19c4ce8422f79965695b599bb3ea9afaa162dff72e0b"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "5c93db9d00028266b09ac73d991af77ba344a6323ed1d5279dda04626326d7b9"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "ae5a1686607f7a0a5e46f63220d5274179798874241c361ce825a96fe290a4df"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "ce585b17b95b8f5426b4d3f75d29ed1e8c7833bddf23ab51a629b1f208ea87c7"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "c05130226272787ba6673acd3a1a40eedaef058363f12363fee4945d8a790403"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "b52322dcfe60c4c8e9c1e3b614be08ad86212ac5ab8443c66cb2442264e41162"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "dad296a84db8b6d3376eacb1678c6bc669e780e65af552b8450cb7cb329eaca8"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "a773b21924740249e78bb66fd10e1ee4350d72a6d1f81bce6ab0bb5bf0e96f1f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "df7d75cafa4b86f556f44c86e5938c54bd6519dedd55ae2a23c630338da3871f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "4031062d669239c979b5f6ba9e908c49918c48f9f64874d1e465dd6389d65864"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "4af087932cb041288336693ea2c4038f20f1d0eb6a0f1466e64696730795f595"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "f0234af25308253d2b602af5f87e946626555c91a53d553287ee781102e83a77"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "5ce7979d090f22099fa2b191832aef236df75d7a52c0d0f0bdfc8cd57a94b01f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "6d448bd0cc5827932f3dd381a05e17710ecc9ee284f8b56b3f6028ed71ff4081"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "503e7e9043d6b33e9b6d50f19c0210c7776fa60b66a82707158f0c35872b17b2"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "3ab97b0c50ffb528fb222c78224f27572cb799020738edae5e652b73ed2ff116"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "df7d75cafa4b86f556f44c86e5938c54bd6519dedd55ae2a23c630338da3871f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "b2a26c48b6895e8e9c70182f7543173553f59951f6373ee62df0e65a7870efbf"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "5900a0a7ea24cce7da7021a9a2e76f59dc0f6ba8fb553b3fd2394e45973c110b"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "c7024e2fdfc5fa351fe6000601c57fc5863c45db6a24477991a08ecd27d5d521"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "1088094dbf3da9c77d13a4b9a5bb8750de76e1d50396c54c54ac058251a25863"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "d90a112168c15806b721a76308ed28feeaeed2fa0b2294413474865c77b48350"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "049a46a37d15574fb33258fb31dd81a3674027beabc885368740fafd46f92137"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "cd4fd4d07d1c52b9646d6c7912d973d92df812968fcebc5a23510518dd49a4b4"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "51488eb566a6221b51d9d5c91a4f6cbc86fb109504adad73b7e3ed8ea15b5146"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "b65ae946214f9e78f376faf1e0961bd5b42391ba0a10feed675cf9334be85a61"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "02843c951b8ceadbd2a20b32353a18d5673958d81386780b14000fd96590b338"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "aa1232bae668ef423abdcd9cb40db041fd3b9a5b0dfb432a06982458acbe7558"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "e0ea5fac2994df0ce6f53baa6cac14f01fcab3fa8a5c2080ac947c7b70cd0f8f"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "15a4fecf0cf2859ec261f9b543b47df0da933b741fe8d30be8b9cb0f26e2e846"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "1e077f1192f438518b82061b24bd749a179f9fd57dab10b81f0ad88d7fb76eee"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "928522877a6ffee0a195ccdb7d3f6b366f2353ec01370141851a23b38efc4bd6"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "0998e871c0156f671853e3a1b5211a861a94a1c99d01591e934d74e5b17f336e"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "1b891e30f561fc658cbcb8df902e607dd9ee308af36b0bdd84664160a39a8fdd"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "2a41e5fda5eb18ef7973e1864c438b3687e747bfe3dfe1cfd598414b21bcedf4"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-0.png",
+          "sha256": "758e3b3bcd019ef530e3d3bcb89ae81ee983021e5b0c6ff701b92b6e1c9a008e"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-1.png",
+          "sha256": "55d4859949ed29f6d417a17e88eed259d1c6cd9fa81a80bff605d7980a39103d"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-10.png",
+          "sha256": "a9766810ae09047d1c3612f23f2a6caa196ac6327f21ae714376760346c706fb"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-11.png",
+          "sha256": "a806a1883fa49df83b3e92679ae828e77b6005bbb7b2b48e9ac8bfc14c9468ea"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-12.png",
+          "sha256": "831501cabf9af76fbd473dd1eee7ec5ba5854b28c101528ee21e9fbd17efaf60"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-13.png",
+          "sha256": "6d5dd48cb317178c7620ee80fa16ab96aee955d77d9e15e7d5f278c2a5248b58"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-14.png",
+          "sha256": "653392fc0bb7c20e446e006539bc22ad8c600ead302783449e310d419de61415"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-15.png",
+          "sha256": "7d6d59d8cba9707fb665b8ebfdc4fcd58bc076fc9959fb4b626f1ff132007948"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-2.png",
+          "sha256": "aa1232bae668ef423abdcd9cb40db041fd3b9a5b0dfb432a06982458acbe7558"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-3.png",
+          "sha256": "342c21301bed5c4aea0a29d813a8df23c6eb8d9dccb114645ba5e70f193f54da"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-4.png",
+          "sha256": "4a97d3c3e5aef8ca19fdd707c5b60715c3d5f8223b66f51965983ced2035b91c"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-5.png",
+          "sha256": "cd612118afc8854b18d3d4ab01a671b962077adf36c3ae3ee2ffb780ae5d4057"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-6.png",
+          "sha256": "684b370b92e508b5031850bab041aa79176411cfb0d33f3ed3d8734976e9694a"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-7.png",
+          "sha256": "1c455321f96dad867097a94812515d1ec906bc914b58f2b820e102d044f93803"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-8.png",
+          "sha256": "7bc9362b3af813d17cdadc0a76d316e3afbdcaa54192b238714c476421c9edc1"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/study-9.png",
+          "sha256": "ccb3d19113d2facf8cb44d3db9ebf9bce9985f2ed4b58da039378ed4749bd0b8"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "ff2de13aac9f46311642f78101cab9360677dc82e1f63c80e995c1efd165fac4"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "0332cc2b0b3c1e14c251009b12afa870ce79c11029fd7c65230e003d49927d93"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/model.glb",
+          "sha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/recipe.json",
+          "sha256": "c03dd748c0b71399b0357665257123860e4ea61b900f5796eecc5bd3f6a0e3cd"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/inputs/report.json",
+          "sha256": "83096e2e1dd1e0471800beb1837f4938a9068cd886e0012b51565b31c3e5c9bc"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/flatbed-truck-v1/visual-inspection.json",
+          "sha256": "dfad46dae60c4d531e5cf12038de878a471045e3023cf23ce06ee286d5296179"
+        }
+      ]
+    }
+  ]
+}

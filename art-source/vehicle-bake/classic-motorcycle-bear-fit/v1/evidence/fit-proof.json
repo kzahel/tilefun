@@ -1,0 +1,1053 @@
+{
+  "status": "passed-actual-source-pilot",
+  "glbSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+  "riderInputHashes": {
+    "art-source/vehicle-riders/bear-upright/v1/bear-upright-v1.json": "8d51332a2f7bf6c29c97bdee57df6c0a4d92349694ac9507d83a03a9920c1f81",
+    "art-source/vehicle-riders/bear-upright/v1/rider.glb": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+    "art-source/vehicle-riders/bear-upright/v1/recipe.json": "bdd7345064b750ce8413fa2eeaab379390ad6fb96da6c3612500e72342ac2fcd",
+    "art-source/vehicle-riders/bear-upright/v1/report.json": "d10073c57e3b6f5c4860936feebab9fd31e4f7ab781dd6cdbd0330667933d896"
+  },
+  "profilePlusOneMeasuredMount": true,
+  "mountSource": [
+    0.11999999731779099,
+    0.0,
+    1.1204999685287476
+  ],
+  "actualMountWorld": [
+    2.086956739425659,
+    0.0,
+    19.486957550048828
+  ],
+  "packedScenes": {
+    "master.blend": {
+      "sha256": "56419a6c9c69e5a324e30845eadd350636ee661055fe1890b21c4efb616b5232",
+      "meshObjects": 55,
+      "triangles": 2434,
+      "oneSemanticUV": true,
+      "packedImages": 2
+    },
+    "car.blend": {
+      "sha256": "cccdba472c73ae88269ecf600502db478c6a3df6199234daf7c629f1f10062d0",
+      "meshObjects": 3,
+      "triangles": 2434,
+      "oneSemanticUV": true,
+      "packedImages": 2
+    }
+  },
+  "contacts": [
+    {
+      "name": "hip_saddle",
+      "profilePlusSingleMountWorld": [
+        2.08695650100708,
+        0.0,
+        17.747825622558594
+      ],
+      "actualRiderSocketWorld": [
+        2.08695650100708,
+        0.0,
+        17.747825622558594
+      ],
+      "actualBikeSocketWorld": [
+        2.086956739425659,
+        0.0,
+        17.747827529907227
+      ],
+      "actualBikeContactOwner": "Actual dark saddle central hip tangent",
+      "actualBikeSurfaceWorld": [
+        2.08695650100708,
+        -5.960464477539063e-08,
+        17.747825622558594
+      ],
+      "distanceToBikeSurfaceWorld": 5.960464477539063e-08,
+      "distanceToRiderSurfaceWorld": 2.384185791015625e-07,
+      "semantics": "actual surface tangent"
+    },
+    {
+      "name": "hand_left_grip",
+      "profilePlusSingleMountWorld": [
+        -4.17391300201416,
+        -5.91304349899292,
+        23.834781646728516
+      ],
+      "actualRiderSocketWorld": [
+        -4.17391300201416,
+        -5.913043975830078,
+        23.834781646728516
+      ],
+      "actualBikeSocketWorld": [
+        -4.173913478851318,
+        -5.913043975830078,
+        23.83478355407715
+      ],
+      "actualBikeContactOwner": "Actual palm wrapped grip left",
+      "actualBikeSurfaceWorld": [
+        -4.06086540222168,
+        -5.91304349899292,
+        24.256664276123047
+      ],
+      "distanceToBikeSurfaceWorld": 0.43676620721817017,
+      "distanceToRiderSurfaceWorld": 1.5214815139770508,
+      "semantics": "grip centerline inside closed palm; local wrap"
+    },
+    {
+      "name": "hand_right_grip",
+      "profilePlusSingleMountWorld": [
+        -4.17391300201416,
+        5.91304349899292,
+        23.834781646728516
+      ],
+      "actualRiderSocketWorld": [
+        -4.17391300201416,
+        5.913043975830078,
+        23.834781646728516
+      ],
+      "actualBikeSocketWorld": [
+        -4.173913478851318,
+        5.913043975830078,
+        23.83478355407715
+      ],
+      "actualBikeContactOwner": "Actual palm wrapped grip right",
+      "actualBikeSurfaceWorld": [
+        -4.06086540222168,
+        5.91304349899292,
+        24.256664276123047
+      ],
+      "distanceToBikeSurfaceWorld": 0.43676620721817017,
+      "distanceToRiderSurfaceWorld": 1.5214815139770508,
+      "semantics": "grip centerline inside closed palm; local wrap"
+    },
+    {
+      "name": "foot_left_support",
+      "profilePlusSingleMountWorld": [
+        1.04347825050354,
+        -5.5652174949646,
+        11.486955642700195
+      ],
+      "actualRiderSocketWorld": [
+        1.0434781312942505,
+        -5.5652174949646,
+        11.486953735351562
+      ],
+      "actualBikeSocketWorld": [
+        1.0434783697128296,
+        -5.5652174949646,
+        11.486954689025879
+      ],
+      "actualBikeContactOwner": "Actual sole tangent foot peg left",
+      "actualBikeSurfaceWorld": [
+        1.04347825050354,
+        -5.5652174949646,
+        11.486954689025879
+      ],
+      "distanceToBikeSurfaceWorld": 9.5367431640625e-07,
+      "distanceToRiderSurfaceWorld": 9.610960205463925e-07,
+      "semantics": "actual surface tangent"
+    },
+    {
+      "name": "foot_right_support",
+      "profilePlusSingleMountWorld": [
+        1.04347825050354,
+        5.5652174949646,
+        11.486955642700195
+      ],
+      "actualRiderSocketWorld": [
+        1.0434781312942505,
+        5.5652174949646,
+        11.486953735351562
+      ],
+      "actualBikeSocketWorld": [
+        1.0434783697128296,
+        5.5652174949646,
+        11.486954689025879
+      ],
+      "actualBikeContactOwner": "Actual sole tangent foot peg right",
+      "actualBikeSurfaceWorld": [
+        1.04347825050354,
+        5.5652174949646,
+        11.486954689025879
+      ],
+      "distanceToBikeSurfaceWorld": 9.5367431640625e-07,
+      "distanceToRiderSurfaceWorld": 9.610960205463925e-07,
+      "semantics": "actual surface tangent"
+    }
+  ],
+  "actualFit": {
+    "status": "passed",
+    "actualRiderTriangles": 2112,
+    "actualBikeFixedTriangles": 1634,
+    "allFixedComponentCount": 41,
+    "actualContactIntersections": [
+      {
+        "bikeComponent": "Actual dark saddle central hip tangent",
+        "actualIntersectionTrianglePairs": 6,
+        "intersectionPoints": 12,
+        "boundedContactOnly": true
+      },
+      {
+        "bikeComponent": "Actual palm wrapped grip left",
+        "actualIntersectionTrianglePairs": 51,
+        "intersectionPoints": 117,
+        "boundedContactOnly": true
+      },
+      {
+        "bikeComponent": "Actual palm wrapped grip right",
+        "actualIntersectionTrianglePairs": 51,
+        "intersectionPoints": 118,
+        "boundedContactOnly": true
+      },
+      {
+        "bikeComponent": "Actual rounded pillion rear saddle",
+        "actualIntersectionTrianglePairs": 7,
+        "intersectionPoints": 12,
+        "boundedContactOnly": true
+      },
+      {
+        "bikeComponent": "Actual sole tangent foot peg left",
+        "actualIntersectionTrianglePairs": 2,
+        "intersectionPoints": 4,
+        "boundedContactOnly": true
+      },
+      {
+        "bikeComponent": "Actual sole tangent foot peg right",
+        "actualIntersectionTrianglePairs": 1,
+        "intersectionPoints": 2,
+        "boundedContactOnly": true
+      }
+    ],
+    "inappropriateIntersections": [],
+    "inappropriateContainments": [],
+    "wholeRiderAndAllFixedBikeTrianglesUsed": true,
+    "closedBikePartContainmentAndRiderParityChecked": true
+  },
+  "displacedRiderNegative": {
+    "translationSource": [
+      -0.28,
+      0,
+      -0.22
+    ],
+    "allFiveSocketDistancesWorld": {
+      "hip_saddle": 6.192867301609509,
+      "hand_left_grip": 6.192866685627096,
+      "hand_right_grip": 6.192866685627096,
+      "foot_left_support": 6.192868456576401,
+      "foot_right_support": 6.192868456576401
+    },
+    "inappropriateIntersections": [
+      {
+        "bikeComponent": "Actual connected handlebar centerline",
+        "unallowedPoints": 196,
+        "examplesWorld": [
+          [
+            -4.356522083282471,
+            3.289313793182373,
+            24.15106964111328
+          ],
+          [
+            -4.479867458343506,
+            3.3080718517303467,
+            24.02772331237793
+          ],
+          [
+            -4.356522083282471,
+            -3.289313316345215,
+            24.15106964111328
+          ],
+          [
+            -4.367148399353027,
+            -3.290928363800049,
+            24.140443801879883
+          ],
+          [
+            -3.9885177612304688,
+            3.91304349899292,
+            23.52128028869629
+          ],
+          [
+            -3.865480899810791,
+            3.453160524368286,
+            23.644317626953125
+          ],
+          [
+            -3.991304397583008,
+            3.7907676696777344,
+            23.51849365234375
+          ],
+          [
+            -3.8600549697875977,
+            3.7708065509796143,
+            23.649744033813477
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Actual dark saddle central hip tangent",
+        "unallowedPoints": 216,
+        "examplesWorld": [
+          [
+            1.4998664855957031,
+            -1.3913042545318604,
+            16.84719467163086
+          ],
+          [
+            1.522644281387329,
+            -1.3913044929504395,
+            16.792207717895508
+          ],
+          [
+            1.5662416219711304,
+            -1.3913042545318604,
+            16.686954498291016
+          ],
+          [
+            1.522644281387329,
+            -1.391303539276123,
+            16.792207717895508
+          ],
+          [
+            1.8277459144592285,
+            -1.3913042545318604,
+            16.865930557250977
+          ],
+          [
+            1.7798629999160767,
+            -1.3913042545318604,
+            16.686954498291016
+          ],
+          [
+            2.6368327140808105,
+            -1.3913042545318604,
+            16.686954498291016
+          ],
+          [
+            2.7993648052215576,
+            -1.3913042545318604,
+            16.884042739868164
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Actual narrow saddle nose",
+        "unallowedPoints": 28,
+        "examplesWorld": [
+          [
+            -2.2608652114868164,
+            1.2173902988433838,
+            17.399999618530273
+          ],
+          [
+            -3.04347825050354,
+            1.2173902988433838,
+            17.399999618530273
+          ],
+          [
+            -3.04347825050354,
+            1.2173902988433838,
+            17.399999618530273
+          ],
+          [
+            -3.217390298843384,
+            1.04347825050354,
+            17.399999618530273
+          ],
+          [
+            -1.3043487071990967,
+            1.04347825050354,
+            17.399999618530273
+          ],
+          [
+            -1.4782607555389404,
+            1.2173902988433838,
+            17.399999618530273
+          ],
+          [
+            -1.4782607555389404,
+            1.2173902988433838,
+            17.399999618530273
+          ],
+          [
+            -2.2608652114868164,
+            1.2173902988433838,
+            17.399999618530273
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Broad engine cooling fin 0.8",
+        "unallowedPoints": 30,
+        "examplesWorld": [
+          [
+            -5.438742637634277,
+            -2.17391300201416,
+            13.921738624572754
+          ],
+          [
+            -6.17391300201416,
+            -2.17391300201416,
+            13.921738624572754
+          ],
+          [
+            -6.614769458770752,
+            -2.17391300201416,
+            14.104347229003906
+          ],
+          [
+            -6.381433486938477,
+            -2.17391300201416,
+            14.007696151733398
+          ],
+          [
+            -6.381433486938477,
+            -2.17391300201416,
+            14.007696151733398
+          ],
+          [
+            -6.17391300201416,
+            -2.1739134788513184,
+            13.921738624572754
+          ],
+          [
+            -6.61476993560791,
+            -2.17391300201416,
+            14.104347229003906
+          ],
+          [
+            -6.614768981933594,
+            0.46597957611083984,
+            14.104347229003906
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Broad engine cooling fin 0.85",
+        "unallowedPoints": 42,
+        "examplesWorld": [
+          [
+            -4.782608509063721,
+            -2.17391300201416,
+            14.965216636657715
+          ],
+          [
+            -4.064659595489502,
+            -2.173912525177002,
+            14.965216636657715
+          ],
+          [
+            -2.9091038703918457,
+            -2.17391300201416,
+            14.965216636657715
+          ],
+          [
+            -4.064659595489502,
+            -2.17391300201416,
+            14.965216636657715
+          ],
+          [
+            -4.8151140213012695,
+            -2.17391300201416,
+            14.973913192749023
+          ],
+          [
+            -4.782608509063721,
+            -2.17391300201416,
+            14.965216636657715
+          ],
+          [
+            -7.271931171417236,
+            -2.17391300201416,
+            14.973913192749023
+          ],
+          [
+            -7.147627830505371,
+            -2.17391300201416,
+            14.673818588256836
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Exposed single cylinder broad block",
+        "unallowedPoints": 108,
+        "examplesWorld": [
+          [
+            -3.217391014099121,
+            -1.56521737575531,
+            13.921738624572754
+          ],
+          [
+            -3.364988327026367,
+            -1.7128145694732666,
+            13.921738624572754
+          ],
+          [
+            -3.217391014099121,
+            -1.56521737575531,
+            14.965216636657715
+          ],
+          [
+            -3.2276885509490967,
+            -1.5755149126052856,
+            14.965216636657715
+          ],
+          [
+            -3.217391014099121,
+            0.5025173425674438,
+            13.921738624572754
+          ],
+          [
+            -3.217391014099121,
+            1.56521737575531,
+            13.921738624572754
+          ],
+          [
+            -3.217391014099121,
+            1.491075038909912,
+            14.965216636657715
+          ],
+          [
+            -3.217391014099121,
+            1.56521737575531,
+            14.965216636657715
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Headstock to actual grip riser",
+        "unallowedPoints": 156,
+        "examplesWorld": [
+          [
+            -5.694771766662598,
+            0.06638011336326599,
+            22.46796226501465
+          ],
+          [
+            -5.683931350708008,
+            -2.6622756729821217e-17,
+            22.442440032958984
+          ],
+          [
+            -5.0132927894592285,
+            0.040400683879852295,
+            22.856218338012695
+          ],
+          [
+            -4.989084243774414,
+            7.647167308277858e-07,
+            22.85103988647461
+          ],
+          [
+            -4.989084720611572,
+            -2.6622756729821217e-17,
+            22.85103988647461
+          ],
+          [
+            -4.9890851974487305,
+            7.647170150448801e-07,
+            22.85103988647461
+          ],
+          [
+            -7.47493839263916,
+            0.13424383103847504,
+            21.453758239746094
+          ],
+          [
+            -7.495419025421143,
+            -2.6622756729821217e-17,
+            21.377206802368164
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Narrow tubular frame member 3",
+        "unallowedPoints": 220,
+        "examplesWorld": [
+          [
+            1.7026515007019043,
+            -0.12506026029586792,
+            16.357633590698242
+          ],
+          [
+            1.7391304969787598,
+            -0.3344302177429199,
+            16.269563674926758
+          ],
+          [
+            1.739130973815918,
+            -0.3689252436161041,
+            16.255266189575195
+          ],
+          [
+            1.7391304969787598,
+            -0.3344297409057617,
+            16.269563674926758
+          ],
+          [
+            1.660508155822754,
+            -0.12585118412971497,
+            16.358797073364258
+          ],
+          [
+            1.563206672668457,
+            -0.3689252436161041,
+            16.261493682861328
+          ],
+          [
+            -7.166403770446777,
+            -0.2915109694004059,
+            16.60259246826172
+          ],
+          [
+            -7.179501533508301,
+            -0.3689252436161041,
+            16.57097053527832
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Narrow tubular frame member 4",
+        "unallowedPoints": 68,
+        "examplesWorld": [
+          [
+            -5.246230602264404,
+            9.584191694816699e-17,
+            13.921737670898438
+          ],
+          [
+            -5.378052234649658,
+            0.20621554553508759,
+            13.921738624572754
+          ],
+          [
+            -7.304347038269043,
+            9.584191694816699e-17,
+            15.672674179077148
+          ],
+          [
+            -7.304347515106201,
+            0.02882671356201172,
+            15.656988143920898
+          ],
+          [
+            -7.304348468780518,
+            0.14470338821411133,
+            15.59398078918457
+          ],
+          [
+            -7.304347515106201,
+            0.028873920440673828,
+            15.656981468200684
+          ],
+          [
+            -5.349910259246826,
+            -0.16219277679920197,
+            13.921737670898438
+          ],
+          [
+            -5.246231555938721,
+            9.584191694816699e-17,
+            13.92173957824707
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Rounded teal tank actual cream side UV panels",
+        "unallowedPoints": 148,
+        "examplesWorld": [
+          [
+            -4.34782600402832,
+            1.742451548576355,
+            17.399999618530273
+          ],
+          [
+            -3.6526358127593994,
+            1.160036563873291,
+            17.399999618530273
+          ],
+          [
+            -2.832775354385376,
+            0.473175972700119,
+            17.399999618530273
+          ],
+          [
+            -3.652637243270874,
+            1.1600382328033447,
+            17.399999618530273
+          ],
+          [
+            -2.7826085090637207,
+            -0.4157637059688568,
+            17.399999618530273
+          ],
+          [
+            -2.7826085090637207,
+            -0.35835152864456177,
+            17.399999618530273
+          ],
+          [
+            -2.7826085090637207,
+            -0.358351469039917,
+            17.399999618530273
+          ],
+          [
+            -2.7826082706451416,
+            -4.76837158203125e-07,
+            17.399999618530273
+          ]
+        ]
+      }
+    ],
+    "inappropriateContainments": [
+      {
+        "bikeComponent": "Actual connected handlebar centerline",
+        "bikeVerticesInsideRider": 24,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -3.8576254844665527,
+            -3.91304349899292,
+            23.65217399597168
+          ],
+          [
+            -3.8086957931518555,
+            3.91304349899292,
+            23.834781646728516
+          ],
+          [
+            -3.8086957931518555,
+            -3.91304349899292,
+            23.834781646728516
+          ],
+          [
+            -3.991304397583008,
+            -3.91304349899292,
+            23.51849365234375
+          ],
+          [
+            -3.8576254844665527,
+            3.91304349899292,
+            23.65217399597168
+          ],
+          [
+            -4.17391300201416,
+            -3.91304349899292,
+            23.46956443786621
+          ],
+          [
+            -3.991304397583008,
+            3.91304349899292,
+            23.51849365234375
+          ],
+          [
+            -4.356522083282471,
+            -3.91304349899292,
+            23.51849365234375
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Actual dark saddle central hip tangent",
+        "bikeVerticesInsideRider": 0,
+        "riderVerticesInsideClosedBikePart": 16,
+        "examplesWorld": [
+          [
+            3.303682804107666,
+            1.3366367816925049,
+            17.31304168701172
+          ],
+          [
+            1.5658831596374512,
+            1.3366369009017944,
+            17.31304168701172
+          ],
+          [
+            3.187272548675537,
+            1.1575613021850586,
+            16.573911666870117
+          ],
+          [
+            1.68229341506958,
+            1.157561182975769,
+            16.573911666870117
+          ],
+          [
+            3.8406925201416016,
+            0.5105498433113098,
+            17.31304168701172
+          ],
+          [
+            3.6523361206054688,
+            0.4421491026878357,
+            16.573911666870117
+          ],
+          [
+            3.8406925201416016,
+            -0.510549783706665,
+            17.31304168701172
+          ],
+          [
+            3.6523361206054688,
+            -0.44214898347854614,
+            16.573911666870117
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Actual narrow saddle nose",
+        "bikeVerticesInsideRider": 4,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -3.04347825050354,
+            -1.04347825050354,
+            17.573911666870117
+          ],
+          [
+            -3.04347825050354,
+            1.04347825050354,
+            17.573911666870117
+          ],
+          [
+            -1.4782607555389404,
+            -1.04347825050354,
+            17.573911666870117
+          ],
+          [
+            -1.4782607555389404,
+            1.04347825050354,
+            17.573911666870117
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Broad engine cooling fin 0.8",
+        "bikeVerticesInsideRider": 2,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -2.7826085090637207,
+            2.17391300201416,
+            14.104347229003906
+          ],
+          [
+            -2.7826085090637207,
+            -2.17391300201416,
+            14.104347229003906
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Broad engine cooling fin 0.85",
+        "bikeVerticesInsideRider": 2,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -2.7826085090637207,
+            2.17391300201416,
+            14.591304779052734
+          ],
+          [
+            -2.7826085090637207,
+            -2.17391300201416,
+            14.591304779052734
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Headstock to actual grip riser",
+        "bikeVerticesInsideRider": 3,
+        "riderVerticesInsideClosedBikePart": 1,
+        "examplesWorld": [
+          [
+            -4.018074035644531,
+            -0.3074377477169037,
+            23.56976890563965
+          ],
+          [
+            -3.9535231590270996,
+            -2.6622756729821217e-17,
+            23.45999526977539
+          ],
+          [
+            -4.018074035644531,
+            0.3074377477169037,
+            23.56976890563965
+          ],
+          [
+            -5.210694313049316,
+            8.914781801649951e-07,
+            22.8897705078125
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Narrow tubular frame member 3",
+        "bikeVerticesInsideRider": 0,
+        "riderVerticesInsideClosedBikePart": 5,
+        "examplesWorld": [
+          [
+            2.4347829818725586,
+            0.0,
+            15.834781646728516
+          ],
+          [
+            3.13773775100708,
+            -0.2552748918533325,
+            16.0328311920166
+          ],
+          [
+            3.13773775100708,
+            0.2552749216556549,
+            16.0328311920166
+          ],
+          [
+            1.731828212738037,
+            -0.25527504086494446,
+            16.0328311920166
+          ],
+          [
+            1.731828212738037,
+            0.25527486205101013,
+            16.0328311920166
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Rounded teal tank actual cream side UV panels",
+        "bikeVerticesInsideRider": 23,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -7.4782609939575195,
+            2.5217390060424805,
+            17.7391300201416
+          ],
+          [
+            -7.4782609939575195,
+            2.1838901042938232,
+            19.30434799194336
+          ],
+          [
+            -7.4782609939575195,
+            1.2608695030212402,
+            20.450166702270508
+          ],
+          [
+            -7.4782609939575195,
+            -1.2608695030212402,
+            20.450166702270508
+          ],
+          [
+            -7.4782609939575195,
+            1.5441198870209082e-16,
+            20.869565963745117
+          ],
+          [
+            -7.4782609939575195,
+            -2.1838901042938232,
+            19.30434799194336
+          ],
+          [
+            -7.4782609939575195,
+            -2.5217390060424805,
+            17.7391300201416
+          ],
+          [
+            -4.34782600402832,
+            1.5724008083343506,
+            18.866086959838867
+          ]
+        ]
+      }
+    ],
+    "rejected": true,
+    "baselineRestoredExact": true
+  },
+  "wholeFixedBikeAndRiderNeutralRoll": [
+    {
+      "wheel": "Wheel_F_Roll",
+      "radiusMeasuredWorld": 7.304348315896555,
+      "radiusDeclaredWorld": 7.304347826086957,
+      "groundZWorld": 4.76837158203125e-07,
+      "minimumGapWorld": 1.0207844658522651,
+      "nearestFixedOwner": "Actual curved cream teal road fender F",
+      "allNeutralRollAngles": true,
+      "fixedBikeTriangles": 1634,
+      "fixedRiderTriangles": 2112
+    },
+    {
+      "wheel": "Wheel_R_Roll",
+      "radiusMeasuredWorld": 7.304348315896555,
+      "radiusDeclaredWorld": 7.304347826086957,
+      "groundZWorld": 4.76837158203125e-07,
+      "minimumGapWorld": 0.8340051958843757,
+      "nearestFixedOwner": "Simple rear ruby lamp",
+      "allNeutralRollAngles": true,
+      "fixedBikeTriangles": 1634,
+      "fixedRiderTriangles": 2112
+    }
+  ],
+  "perWheelCollisionNegatives": [
+    {
+      "wheel": "Wheel_F_Roll",
+      "collisionRejected": true,
+      "controlledGapWorld": -7.304348315896555,
+      "fixtureTrianglesAdded": 1,
+      "noCandidateTrianglesRemoved": true,
+      "baselineRestoredExact": true
+    },
+    {
+      "wheel": "Wheel_R_Roll",
+      "collisionRejected": true,
+      "controlledGapWorld": -7.304348315896555,
+      "fixtureTrianglesAdded": 1,
+      "noCandidateTrianglesRemoved": true,
+      "baselineRestoredExact": true
+    }
+  ],
+  "actualBikeBounds": {
+    "minWorld": [
+      -27.920316696166992,
+      -7.91304349899292,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      27.920316696166992,
+      7.91304349899292,
+      24.286956787109375
+    ],
+    "spanSource": [
+      3.2108364200592034,
+      0.9100000023841857,
+      1.3964999878406523
+    ],
+    "centeredHorizontalCeilWorld": [
+      56,
+      16
+    ],
+    "noRescaleRecenter": true
+  },
+  "actualCombinedBounds": {
+    "minWorld": [
+      -27.920316696166992,
+      -8.97879695892334,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      27.920316696166992,
+      8.97879695892334,
+      38.61738967895508
+    ],
+    "spanSource": [
+      3.2108364200592034,
+      1.0325616502761839,
+      2.22049987912178
+    ]
+  },
+  "contactExceptions": {
+    "saddle": "only saddle top in measured pelvis footprint +/-.20X/.27Ysource andabsvertical.002source; pair-level proof also required",
+    "palms": "only actual grips within.12source ofcorrespondingimmutablegripcenterline; matching forepaw only in pair-level proof",
+    "soles": "only actualpegparts within.12source ofsoleanchor andabsvertical.002source",
+    "allOtherBikeRiderIntersections": "rejected"
+  },
+  "CarMeshAssetUsed": false,
+  "sharedCycleQualification": "pending parent actual shared loader/browser review",
+  "normalActivation": false
+}

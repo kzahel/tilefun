@@ -1,0 +1,395 @@
+{
+  "status": "FAILED-Explorer-upright-v1-fit-no-stretch",
+  "humanApproval": false,
+  "actualBikePresent": false,
+  "riderSha256": "33271ed4a5668c1db9e353d3113ac5cc4134822a8a4913d3072663e13a95a086",
+  "immutableGlobalProfileSha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "actualGLBContacts": [
+    {
+      "name": "hip_saddle",
+      "actualGLBAnchorWorld": [
+        0.0,
+        0.0,
+        -1.0434783697128296
+      ],
+      "immutableExplorerTargetWorld": [
+        0.0,
+        0.0,
+        -1.3826086521148682
+      ],
+      "missWorld": 0.33913027749558294,
+      "failsContactTolerance": true,
+      "actualContactOwner": "Person7 trouser pelvis",
+      "closestActualSurfaceWorld": [
+        0.0,
+        0.0,
+        -1.04347825050354
+      ],
+      "closestActualSurfaceDistanceWorld": 1.1920928955078125e-07
+    },
+    {
+      "name": "hand_left_grip",
+      "actualGLBAnchorWorld": [
+        -4.312323570251465,
+        -3.902724504470825,
+        4.014721393585205
+      ],
+      "immutableExplorerTargetWorld": [
+        -9.565217018127441,
+        -4.0,
+        4.695652008056641
+      ],
+      "missWorld": 5.297737140210945,
+      "failsContactTolerance": true,
+      "actualContactOwner": "Person7 gripping palm left",
+      "closestActualSurfaceWorld": [
+        -4.47503662109375,
+        -4.578192234039307,
+        4.164386749267578
+      ],
+      "closestActualSurfaceDistanceWorld": 0.7107263207435608
+    },
+    {
+      "name": "hand_right_grip",
+      "actualGLBAnchorWorld": [
+        -4.312323570251465,
+        3.902724504470825,
+        4.014721393585205
+      ],
+      "immutableExplorerTargetWorld": [
+        -9.565217018127441,
+        4.0,
+        4.695652008056641
+      ],
+      "missWorld": 5.297737140210945,
+      "failsContactTolerance": true,
+      "actualContactOwner": "Person7 gripping palm right",
+      "closestActualSurfaceWorld": [
+        -4.14961051940918,
+        4.578192710876465,
+        4.164386749267578
+      ],
+      "closestActualSurfaceDistanceWorld": 0.710726797580719
+    },
+    {
+      "name": "foot_left_support",
+      "actualGLBAnchorWorld": [
+        -0.9413017630577087,
+        -3.5858659744262695,
+        -6.283939838409424
+      ],
+      "immutableExplorerTargetWorld": [
+        -1.2173912525177002,
+        -4.0,
+        -9.217391014099121
+      ],
+      "missWorld": 2.975377003189202,
+      "failsContactTolerance": true,
+      "actualContactOwner": "Person7 boot left",
+      "closestActualSurfaceWorld": [
+        -0.9413018226623535,
+        -3.5858659744262695,
+        -6.283939361572266
+      ],
+      "closestActualSurfaceDistanceWorld": 4.805480102731963e-07
+    },
+    {
+      "name": "foot_right_support",
+      "actualGLBAnchorWorld": [
+        -0.9413017630577087,
+        3.5858659744262695,
+        -6.283939838409424
+      ],
+      "immutableExplorerTargetWorld": [
+        -1.2173912525177002,
+        4.0,
+        -9.217391014099121
+      ],
+      "missWorld": 2.975377003189202,
+      "failsContactTolerance": true,
+      "actualContactOwner": "Person7 boot right",
+      "closestActualSurfaceWorld": [
+        -0.9413018226623535,
+        3.5858659744262695,
+        -6.283939361572266
+      ],
+      "closestActualSurfaceDistanceWorld": 4.805480102731963e-07
+    }
+  ],
+  "fixedLengthIK": [
+    {
+      "limb": "arm_left",
+      "fixedBoneLengthsSource": [
+        0.12,
+        0.12
+      ],
+      "rootSource": [
+        -0.009999999776482582,
+        -0.2199999988079071,
+        0.20000000298023224
+      ],
+      "targetJointSource": [
+        -0.550000011920929,
+        -0.23000000417232513,
+        0.26999998092651367
+      ],
+      "actualJointSource": [
+        -0.24795857071876526,
+        -0.2244066447019577,
+        0.23084647953510284
+      ],
+      "unclampedTargetDistanceSource": 0.5446099665309101,
+      "maximumChainLengthSource": 0.24,
+      "unreachableBeyondChainWorld": 5.297564635320176,
+      "jointSource": [
+        -0.1289428174495697,
+        -0.22329087555408478,
+        0.21554911136627197
+      ],
+      "actualLengthsSource": [
+        0.11999999575578833,
+        0.12000001647284497
+      ]
+    },
+    {
+      "limb": "leg_left",
+      "fixedBoneLengthsSource": [
+        0.13,
+        0.13
+      ],
+      "rootSource": [
+        0.0,
+        -0.17000000178813934,
+        -0.05000000074505806
+      ],
+      "targetJointSource": [
+        -0.03999999910593033,
+        -0.23000000417232513,
+        -0.47499996423721313
+      ],
+      "actualJointSource": [
+        -0.02412484958767891,
+        -0.20618727803230286,
+        -0.3063265085220337
+      ],
+      "unclampedTargetDistanceSource": 0.43107419545085135,
+      "maximumChainLengthSource": 0.26,
+      "unreachableBeyondChainWorld": 2.9752033991452413,
+      "jointSource": [
+        -0.01314993854612112,
+        -0.18840338289737701,
+        -0.17801715433597565
+      ],
+      "actualLengthsSource": [
+        0.12999999004657914,
+        0.13000002499915814
+      ]
+    },
+    {
+      "limb": "arm_right",
+      "fixedBoneLengthsSource": [
+        0.12,
+        0.12
+      ],
+      "rootSource": [
+        -0.009999999776482582,
+        0.2199999988079071,
+        0.20000000298023224
+      ],
+      "targetJointSource": [
+        -0.550000011920929,
+        0.23000000417232513,
+        0.26999998092651367
+      ],
+      "actualJointSource": [
+        -0.24795857071876526,
+        0.2244066447019577,
+        0.23084647953510284
+      ],
+      "unclampedTargetDistanceSource": 0.5446099665309101,
+      "maximumChainLengthSource": 0.24,
+      "unreachableBeyondChainWorld": 5.297564635320176,
+      "jointSource": [
+        -0.1289428174495697,
+        0.22329087555408478,
+        0.21554911136627197
+      ],
+      "actualLengthsSource": [
+        0.11999999575578833,
+        0.12000001647284497
+      ]
+    },
+    {
+      "limb": "leg_right",
+      "fixedBoneLengthsSource": [
+        0.13,
+        0.13
+      ],
+      "rootSource": [
+        0.0,
+        0.17000000178813934,
+        -0.05000000074505806
+      ],
+      "targetJointSource": [
+        -0.03999999910593033,
+        0.23000000417232513,
+        -0.47499996423721313
+      ],
+      "actualJointSource": [
+        -0.02412484958767891,
+        0.20618727803230286,
+        -0.3063265085220337
+      ],
+      "unclampedTargetDistanceSource": 0.43107419545085135,
+      "maximumChainLengthSource": 0.26,
+      "unreachableBeyondChainWorld": 2.9752033991452413,
+      "jointSource": [
+        -0.01314993854612112,
+        0.18840338289737701,
+        -0.17801715433597565
+      ],
+      "actualLengthsSource": [
+        0.12999999004657914,
+        0.13000002499915814
+      ]
+    }
+  ],
+  "fixedPerson7Anatomy": {
+    "pelvisDimensions": [
+      0.25,
+      0.4,
+      0.12
+    ],
+    "torsoCenter": [
+      0,
+      0,
+      0.13
+    ],
+    "torsoDimensions": [
+      0.27,
+      0.48,
+      0.25
+    ],
+    "shoulderSource": [
+      -0.01,
+      0.22,
+      0.2
+    ],
+    "armLengthsSource": [
+      0.12,
+      0.12
+    ],
+    "wristInsetFromPalmSource": 0.055,
+    "hipJointSource": [
+      0,
+      0.17,
+      -0.05
+    ],
+    "legLengthsSource": [
+      0.13,
+      0.13
+    ],
+    "ankleFromSoleSource": [
+      0.03,
+      0,
+      0.055
+    ],
+    "palmRadii": [
+      0.058,
+      0.043,
+      0.052
+    ],
+    "bootDimensions": [
+      0.18,
+      0.15,
+      0.09
+    ],
+    "headCenter": [
+      -0.06,
+      0,
+      0.372
+    ],
+    "headDimensions": [
+      0.44,
+      0.67,
+      0.28
+    ],
+    "capCrownRings": [
+      [
+        0.615,
+        0.27,
+        0.36
+      ],
+      [
+        0.66,
+        0.3,
+        0.39
+      ],
+      [
+        0.79,
+        0.3,
+        0.39
+      ],
+      [
+        0.88,
+        0.24,
+        0.33
+      ],
+      [
+        0.94,
+        0.14,
+        0.22
+      ],
+      [
+        0.965,
+        0.07,
+        0.13
+      ]
+    ],
+    "capBandRings": [
+      [
+        0.49,
+        0.28,
+        0.37
+      ],
+      [
+        0.55,
+        0.31,
+        0.405
+      ],
+      [
+        0.62,
+        0.29,
+        0.38
+      ]
+    ],
+    "brimCenter": [
+      -0.13,
+      0,
+      0.535
+    ],
+    "brimRadii": [
+      0.175,
+      0.4,
+      0.028
+    ],
+    "lengthSemantics": "Fixed inferred joint-to-contact-center chain lengths; elbow-to-palm includes0.055source wrist/palm offset. They are not an observed biological skeleton."
+  },
+  "sameAnatomyAsFinalProposedPerson7Profile": true,
+  "boneLengthsPreserved": true,
+  "bestCommonTranslationWorld": [
+    -2.2115933895111084,
+    0.0,
+    -0.9688343405723572
+  ],
+  "remainingErrorsAfterCommonTranslationWorld": [
+    2.2994939314705536,
+    3.461313634382972,
+    3.461313634382972,
+    2.7887993028549527,
+    2.7887993028549527
+  ],
+  "rootTranslationCannotMeetAllFive": true,
+  "interpretation": "With this fixed inferred upright template and joint roots, short Person7 chains cannot span Explorer targets. Actual GLB extends chains to their geometric maximum without lengthening; this failed straightened pose is not proposed as final pose. Global profile bytes unchanged. A separately named Person7 profile is proposed for this template.2D does not prove unique3D dimensions; other inferred anatomy or torso-leaning poses are not ruled out.",
+  "fixtureAndAll32NativeAttemptViews": "Retained under ignored data/vehicle-riders/person7-upright/explorer-profile-attempt/ only."
+}

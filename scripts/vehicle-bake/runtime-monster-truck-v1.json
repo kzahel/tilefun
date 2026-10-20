@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "monster-truck",
+  "name": "Monster truck",
+  "tags": ["vehicle", "original", "monster truck"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/monster-truck-v1/review-manifest.json",
+    "sha256": "1ed3a20422be56241fa4065f21a43685e4fe4d9f97b1dacb23193e9f7749c39a",
+    "candidateId": "monster-truck-v1",
+    "model": "public/demos/original-vehicles/monster-truck-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/monster-truck-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/monster-truck-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/monster-truck-v1/captures",
+    "modelSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "triangles": 3534,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/monster-truck/v1/evidence/replay-verification.json",
+    "sha256": "35aa4f6ceaf6babe1cdbdd16d2e4cafffbd06f62f9624db615aa57367d697619",
+    "build": "art-source/vehicle-bake/monster-truck/v1/build.py",
+    "family": "art-source/vehicle-bake/monster-truck/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "monster-truck-authored-v1",
+    "path": "assets/models/vehicles/monster-truck-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/monster-truck-v1.png",
+  "performance": {
+    "speed": 105,
+    "acceleration": 170,
+    "pushSpeed": 50,
+    "pushWeight": 360
+  },
+  "receipt": "art-source/vehicle-bake/runtime-monster-truck-v1.json",
+  "expectedBounds": [87, 52, 53]
+}

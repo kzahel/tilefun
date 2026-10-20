@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "go-kart--v1",
+    "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "triangles": 2686,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 4.347826416678382,
+        "minimumGap": 0.60653549891002,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 4.347826416678382,
+        "minimumGap": 0.60653549891002,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 4.695652961730957,
+        "minimumGap": 30.695202180034528,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 4.695652961730957,
+        "minimumGap": 30.695202180034528,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

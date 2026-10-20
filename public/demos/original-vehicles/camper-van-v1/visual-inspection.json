@@ -1,0 +1,15 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 actual native headings inspected: turquoise/cream cab-over with split front glass, three framed side panes, actual raised cream roof and small fixed vent.",
+    "Signed phases/wires inspected directly; wheels remain under natural body fenders, cab/roof stable.",
+    "Fresh source-only replay exact; own glass/roof/door UV rays, actual raised-roof source audit, full-body roll and coverage controls pass."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

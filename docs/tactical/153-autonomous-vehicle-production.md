@@ -132,3 +132,34 @@ remain static. The Explorer roadster and upright pilots now have reproducible
 retained sources; the exact static assembly preserves 32 bare-car views and
 matches 32 independently composed views. Brown Bear fitting retains the failed
 Explorer-profile attempt rather than stretching stocky anatomy to fit.
+
+## Checkpoint 3 — complete ordinary fleet, combined validation pending
+
+The first full browser snapshot finished: 1,548 passed, eight failed, one skipped
+of 1,557. All 106 authored-vehicle cases passed. All eight isolated failure reruns
+pass; the picker test now counts the boat via DRIVABLE_MODELS, and manual Vite
+reload tests use their own cache, explicit entry and disabled file watcher.
+The touch/marabou failures pass without product changes. Preserve both outcomes.
+
+All 33 ordinary originals now have retained source and normal local availability.
+The final twenty add real measured four/six-wheel rigs, conservative centered
+colliders and exact reviewed cardinal packing. They pass 168 focused tests and
+twenty byte-identical runtime replays plus twenty undersized-bounds negatives.
+The catalog has 78 road types/77 ordinary traffic types/79 drivable with boat.
+Second full unit/browser validation and the next integration commit remain pending.
+
+Strict true-F/R and F/R/SC loader support passes 50 focused asset/boat tests,
+50 historical Beetle frames, 16 boat views and 19 signed-motion/reset poses
+unchanged. Nineteen historical receipts pin the prior renderer; retain its exact
+bytes in the replay-input catalog and reconstruct original environments in fresh
+workspaces. Never rewrite historical receipts or substitute fake four-wheel rigs.
+
+Three identities now have separate upright pilots: Explorer, Brown Bear and
+Person7. Actual classic-bike fitting retains the failed generic-profile/unchanged
+bike controls and mechanically adapts controls rather than stretching anatomy.
+Explorer's unchanged classic and sidecar assemblies are frozen diagnostic reviews:
+4,390/5,374 triangles, four/five meshes, two atlases. Actual shared captures match
+32 independent combined views and 32 bare views per assembly, with unchanged
+decoded rider geometry and explicit measured mounts. All-wheel clearance,
+negative/reset, mobile/offline and source-only replay pass. No normal motorcycle,
+all-27-appearance, AI occupant or occupied fallback qualification is implied.

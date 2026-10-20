@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "beach-buggy--v1",
+    "glbSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+    "triangles": 3290,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 7.652174054863465,
+        "minimumGap": 1.1940750971635943,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 7.652174054863465,
+        "minimumGap": 1.1940751761527881,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 7.652174054863465,
+        "minimumGap": 1.1940754650153096,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 7.652174054863465,
+        "minimumGap": 1.1940749581230552,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

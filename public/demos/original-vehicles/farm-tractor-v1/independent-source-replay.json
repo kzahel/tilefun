@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "farm-tractor",
+  "independent": true,
+  "declaredInputPins": 22,
+  "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/farm-tractor/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/farm-tractor/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/farm-tractor/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

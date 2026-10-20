@@ -1,0 +1,975 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "ice-cream-van-v1",
+      "name": "Ice cream van",
+      "title": "Ice cream van \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Independent pastel aqua/cream shop van with short front-third framed blue cab, real boolean-cut side serving recess and distinct inner jamb/counter/backwall owners, fixed pink/cream striped awning, opposite large cone symbol and cream roof. Actual opaque skin paint; no glass overlays or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 2710,
+        "vertices": 5329,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 193804,
+        "sha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/atlas.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/atlas.png",
+          "sha256": "1ce9d85a871391bcaaa912228bf61f78955ed970827e507c7cdaf5dfa19f0b84"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/capture.json",
+          "sha256": "b45d522d42569a19034f957ef3be01d01febb4da6e362f099239d8a3794a93ff"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-0.png",
+          "sha256": "061a9e65d797f5b8b93e0443cdd01311de96fd034983f058c87cd232a2f4ca27"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-1.png",
+          "sha256": "5b8649d5dca05f167238dfceeab2d6505d332f6c1850afc2e84cf475fcccf5be"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-10.png",
+          "sha256": "983ae2d20f6f99792bae33408d03fca1ec3450b607f3c7aa85435f108c2067f1"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-11.png",
+          "sha256": "aef8bfbda5962357d0e9e509e4794a955f80f5a46f7d39a131268656856ad2cd"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-12.png",
+          "sha256": "85440d500e0c5145ca946297c2dd7c447b14de04de93a43e9f279303530e35c6"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-13.png",
+          "sha256": "6f30ece068f04338523f8e05227dda88d2acd29e61af30d788619438895626e6"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-14.png",
+          "sha256": "a1814851c35315dfdeb163c6d00fe71c292920c8e178d91f648dd3eeb658c0fb"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-15.png",
+          "sha256": "a2e3e9e2f7bf5263cbf293e77adceb012b36643ac09810d8c5d32593e2493ea7"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-2.png",
+          "sha256": "8134e070e8d5f36b8ff3e91448dc49049d8072c67151c78e37720a7f253714df"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-3.png",
+          "sha256": "08c1fcc061cd5e42d7a1cf4a77e67b4a456e828cc91c883173bf2415fecf1e80"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-4.png",
+          "sha256": "082849e19813596f1ac542430dc4776a8f79a7998a96ecdf9802b9a3b7e56364"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-5.png",
+          "sha256": "30a57105fb17efae78326dd3fb3378d9a70c69df511cf7cf3705edf400bb9cdf"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-6.png",
+          "sha256": "86758002ba34810a20e5065d463e762d42a7cb587e347a417d3f5e1e98953277"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-7.png",
+          "sha256": "9bf6bb0baded07d6cdc80d66a4305ac09004e0dafb0424d412e5439f0d967bc5"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-8.png",
+          "sha256": "3f4f550af19abfe916ca4ae0c11dc394cb3c41de8a7a1a7a2fc26f5014846907"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-9.png",
+          "sha256": "a8f153086ded5eb3baf3758f7f5dd57f54c679ab21e151a2a4dc1fa824aee004"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-0.png",
+          "sha256": "8134e070e8d5f36b8ff3e91448dc49049d8072c67151c78e37720a7f253714df"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-1.png",
+          "sha256": "dd6f97d5415dc0390cec62b5389ecdba82e45bcfdd041a5c1cf69570bff0821d"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-2.png",
+          "sha256": "65503a05fbcc6f49bb453381a11f835b42a246a9914ed0bef5874c583fa31d77"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-3.png",
+          "sha256": "daa0fd850e1372e388ac1aacc2b176b26662e10d8ea5d4348f8506e297000a0b"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-4.png",
+          "sha256": "c38f829ccef2521b3411c0da1bc920c443881222b02b7747ed0689487af45614"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-5.png",
+          "sha256": "3f0de1131396f509b163901cf3e70a62a4a2498bd82ad63a50c9796633224cb3"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-6.png",
+          "sha256": "af3397ac63c4219bd5119f9288985be9b802e6e0c0df58670e10532d8baa5dc4"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-7.png",
+          "sha256": "849e46e7600b1581cd42914f0637d67b2237da2166bac0c727374265ae307fff"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/inspection-engine.png",
+          "sha256": "ea14ee6975ae2ae6bdbd9016ba55bcbb6baf274b52da4fdb3ce0c571c44fc9c5"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/inspection-phases.png",
+          "sha256": "01a24fe0bca27f8a3e48c7a815b5ee2aa9fc321b4944f8b4e2c5ebe739a30204"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/inspection-study.png",
+          "sha256": "5987dd736a9ea79948e02216eb33d58c63429b0048c546624cdd919aaee49cc5"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-0.png",
+          "sha256": "aa2177ed109c09bec5baddfcb50856af8e48396ff473fa885da1f451d8dd9075"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-1.png",
+          "sha256": "fe7f8db709dfdfce58433327279da08e63ad7eca9f2b6d3136e3a88bb96de200"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-2.png",
+          "sha256": "5f8bd459510256e8863ce618da8fbf860754d8b413ec0a1a58922c44ebe5d39b"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-3.png",
+          "sha256": "5c550c358ae3d892cf872702f3ba20a1d0cbeebaaa3b60f6e235e04296c91023"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-4.png",
+          "sha256": "c1fbb9a2f0b28e7cc7a33ba82c74144aacc937d070d2a29956a30db1ce65a0a9"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-5.png",
+          "sha256": "8913281ab9c6161568e711de521cf484de7d8b8211bcea836aa3b287cef1824f"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-6.png",
+          "sha256": "111f972bbaf153959c4a8169e600243a3985470a699d1f6c4c8c6e95db455d7e"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-7.png",
+          "sha256": "564a65f335f447d9456bf0cf3a0f90f47922db215ad9d1aa92070f79bc761746"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-0.png",
+          "sha256": "1eaf22b6a9595b9e98c903f5399aea775e4a5cf952316df96487a3068ef65da7"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-1.png",
+          "sha256": "cbbd0622a61be52a4b611d4c72d7ad64df4b1f632902b47a448f67bac65edb1d"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-10.png",
+          "sha256": "7e59ec37ee17814e26d9fab93f5909f85aa0a14eed8f51b53b9ed8a9ffe1ba40"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-11.png",
+          "sha256": "df93af33c6ec33e06d4b4cf6d7715f69db536314d43e2e488d6f9c30bbfef1d4"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-12.png",
+          "sha256": "923f7ae392c77421aaab7a23ebe3e5698302d92454c9b456e951b76473345951"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-13.png",
+          "sha256": "a2b68840f69aa7f411015878a98fa7d46db9f0464ad8625f934c5f0de0f08fe0"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-14.png",
+          "sha256": "2a3785abb107715b6661b373ca3ae177085e5fb77f38fee62cd6e0377ff95b35"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-15.png",
+          "sha256": "24fddb62a28d0e418f2773c53c9d587f03e81c0f83ac1608206ebe7033ea2a95"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-2.png",
+          "sha256": "aa2177ed109c09bec5baddfcb50856af8e48396ff473fa885da1f451d8dd9075"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-3.png",
+          "sha256": "45725f3737fe221fed4f5b8a2bef0c7d5498c6bd4b15d2dc1d3b1fbab39574a0"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-4.png",
+          "sha256": "140498433192620321bc5d131dcc4077ae77a731cc60f5433b8a112120d3663b"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-5.png",
+          "sha256": "0d635494db9c6fc31ca82a804d5f536b5460f26b527ec0f2bc6bae170ec179ba"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-6.png",
+          "sha256": "34af1e1aa4174458dfc8b42b9633eccc5a428139aaf3e8e7bb0679c9a71a3d6d"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-7.png",
+          "sha256": "f547dc98314efeeefc55adebbc9ada6da96e398bd02353d8d1458f4fd909f07b"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-8.png",
+          "sha256": "6ad724e3295b35112cdcaa7e4a8408cb30e31e6c3be3786cd297e802c330a1a2"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-9.png",
+          "sha256": "2d61a58329f47c829f6bf171a5dfd8aec054f698bcd6894946e2151e74562639"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/wire-engine.png",
+          "sha256": "50d9cc2dc0ead1464eac693be30242c0574bd7529f51cb195fb87111a75394b2"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/wire-study.png",
+          "sha256": "292eaab6f3626a674111e99826c0ad203f1ba4fed92d109de77065578672b8d2"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/model.glb",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/model.glb",
+          "sha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/recipe.json",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/recipe.json",
+          "sha256": "2966b09472fe345b12769e9de3066f9514439e8beb66223e01174c7825284910"
+        },
+        {
+          "source": "demos/vehicle-bake/ice-cream-van/v1/report.json",
+          "retained": "demos/original-vehicles/ice-cream-van-v1/inputs/report.json",
+          "sha256": "7405114ce74f43ced0116b99d834d5095dafba15e278f2492eb67c5449f5738c"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/ice-cream-van-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "ice-cream-van--v1",
+          "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+          "triangles": 2710,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 8.000000399840292,
+              "minimumGap": 1.533334285568495,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 8.000000399840292,
+              "minimumGap": 1.533334285568495,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 8.000001907348633,
+              "minimumGap": 1.5333342993818917,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 8.000001907348633,
+              "minimumGap": 1.5333342993818917,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/browser-qa.json",
+          "sha256": "31eb6686be983ebb825de481f0d52308870efcd0f700a0bb74ca8c862319971a"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/candidate.json",
+          "sha256": "22aa6e360d6f25a6ffd73aa47b3c950c3c2f9ff4ee2c35d796e2fd29348452ca"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/capture.json",
+          "sha256": "b45d522d42569a19034f957ef3be01d01febb4da6e362f099239d8a3794a93ff"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/contact-sheet.png",
+          "sha256": "388451f9b00839f92d0560a9a4c08cb7795a753cf3d916956279085c7f5f9e46"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-0.png",
+          "sha256": "061a9e65d797f5b8b93e0443cdd01311de96fd034983f058c87cd232a2f4ca27"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-1.png",
+          "sha256": "5b8649d5dca05f167238dfceeab2d6505d332f6c1850afc2e84cf475fcccf5be"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-10.png",
+          "sha256": "983ae2d20f6f99792bae33408d03fca1ec3450b607f3c7aa85435f108c2067f1"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-11.png",
+          "sha256": "aef8bfbda5962357d0e9e509e4794a955f80f5a46f7d39a131268656856ad2cd"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-12.png",
+          "sha256": "85440d500e0c5145ca946297c2dd7c447b14de04de93a43e9f279303530e35c6"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-13.png",
+          "sha256": "6f30ece068f04338523f8e05227dda88d2acd29e61af30d788619438895626e6"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-14.png",
+          "sha256": "a1814851c35315dfdeb163c6d00fe71c292920c8e178d91f648dd3eeb658c0fb"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-15.png",
+          "sha256": "a2e3e9e2f7bf5263cbf293e77adceb012b36643ac09810d8c5d32593e2493ea7"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-1x.png",
+          "sha256": "efa2b0af9e9b236e6921f53bc68f13fe191eb1da65355955f2541b41df49718a"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-2.png",
+          "sha256": "8134e070e8d5f36b8ff3e91448dc49049d8072c67151c78e37720a7f253714df"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-2x.png",
+          "sha256": "a317a973c8c08a6eb835f851fc2e2f1b3f2310062afb29ea05ee53ed5a9e8f18"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-3.png",
+          "sha256": "08c1fcc061cd5e42d7a1cf4a77e67b4a456e828cc91c883173bf2415fecf1e80"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-3x.png",
+          "sha256": "86c4f6e5fe0010c7c748e09fb09bd051fbf8d915047e1d0242dfd10d593d9dab"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-4.png",
+          "sha256": "082849e19813596f1ac542430dc4776a8f79a7998a96ecdf9802b9a3b7e56364"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-5.png",
+          "sha256": "30a57105fb17efae78326dd3fb3378d9a70c69df511cf7cf3705edf400bb9cdf"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-6.png",
+          "sha256": "86758002ba34810a20e5065d463e762d42a7cb587e347a417d3f5e1e98953277"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-7.png",
+          "sha256": "9bf6bb0baded07d6cdc80d66a4305ac09004e0dafb0424d412e5439f0d967bc5"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-8.png",
+          "sha256": "3f4f550af19abfe916ca4ae0c11dc394cb3c41de8a7a1a7a2fc26f5014846907"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/engine-9.png",
+          "sha256": "a8f153086ded5eb3baf3758f7f5dd57f54c679ab21e151a2a4dc1fa824aee004"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-roll-0.png",
+          "sha256": "8134e070e8d5f36b8ff3e91448dc49049d8072c67151c78e37720a7f253714df"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-roll-1.png",
+          "sha256": "dd6f97d5415dc0390cec62b5389ecdba82e45bcfdd041a5c1cf69570bff0821d"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-roll-2.png",
+          "sha256": "65503a05fbcc6f49bb453381a11f835b42a246a9914ed0bef5874c583fa31d77"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-roll-3.png",
+          "sha256": "daa0fd850e1372e388ac1aacc2b176b26662e10d8ea5d4348f8506e297000a0b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-roll-4.png",
+          "sha256": "c38f829ccef2521b3411c0da1bc920c443881222b02b7747ed0689487af45614"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-roll-5.png",
+          "sha256": "3f0de1131396f509b163901cf3e70a62a4a2498bd82ad63a50c9796633224cb3"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-roll-6.png",
+          "sha256": "af3397ac63c4219bd5119f9288985be9b802e6e0c0df58670e10532d8baa5dc4"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-roll-7.png",
+          "sha256": "849e46e7600b1581cd42914f0637d67b2237da2166bac0c727374265ae307fff"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/game-turntable.gif",
+          "sha256": "5deae18f112b456083a545430152a6b2f8fcac526b48b1bf7b7614498e8b27cd"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/roll-0.png",
+          "sha256": "aa2177ed109c09bec5baddfcb50856af8e48396ff473fa885da1f451d8dd9075"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/roll-1.png",
+          "sha256": "fe7f8db709dfdfce58433327279da08e63ad7eca9f2b6d3136e3a88bb96de200"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/roll-2.png",
+          "sha256": "5f8bd459510256e8863ce618da8fbf860754d8b413ec0a1a58922c44ebe5d39b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/roll-3.png",
+          "sha256": "5c550c358ae3d892cf872702f3ba20a1d0cbeebaaa3b60f6e235e04296c91023"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/roll-4.png",
+          "sha256": "c1fbb9a2f0b28e7cc7a33ba82c74144aacc937d070d2a29956a30db1ce65a0a9"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/roll-5.png",
+          "sha256": "8913281ab9c6161568e711de521cf484de7d8b8211bcea836aa3b287cef1824f"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/roll-6.png",
+          "sha256": "111f972bbaf153959c4a8169e600243a3985470a699d1f6c4c8c6e95db455d7e"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/roll-7.png",
+          "sha256": "564a65f335f447d9456bf0cf3a0f90f47922db215ad9d1aa92070f79bc761746"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-0.png",
+          "sha256": "1eaf22b6a9595b9e98c903f5399aea775e4a5cf952316df96487a3068ef65da7"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-1.png",
+          "sha256": "cbbd0622a61be52a4b611d4c72d7ad64df4b1f632902b47a448f67bac65edb1d"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-10.png",
+          "sha256": "7e59ec37ee17814e26d9fab93f5909f85aa0a14eed8f51b53b9ed8a9ffe1ba40"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-11.png",
+          "sha256": "df93af33c6ec33e06d4b4cf6d7715f69db536314d43e2e488d6f9c30bbfef1d4"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-12.png",
+          "sha256": "923f7ae392c77421aaab7a23ebe3e5698302d92454c9b456e951b76473345951"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-13.png",
+          "sha256": "a2b68840f69aa7f411015878a98fa7d46db9f0464ad8625f934c5f0de0f08fe0"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-14.png",
+          "sha256": "2a3785abb107715b6661b373ca3ae177085e5fb77f38fee62cd6e0377ff95b35"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-15.png",
+          "sha256": "24fddb62a28d0e418f2773c53c9d587f03e81c0f83ac1608206ebe7033ea2a95"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-1x.png",
+          "sha256": "b3065fb3d6437e9cd0aec704f4bcb5b8b7151074d46b7bbb07358fc8e091faf9"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-2.png",
+          "sha256": "aa2177ed109c09bec5baddfcb50856af8e48396ff473fa885da1f451d8dd9075"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-2x.png",
+          "sha256": "f304d203b557122d4e141285a0bc8556a767ef0513c04dde5aca4d02a9f267b8"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-3.png",
+          "sha256": "45725f3737fe221fed4f5b8a2bef0c7d5498c6bd4b15d2dc1d3b1fbab39574a0"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-3x.png",
+          "sha256": "8cdda53e4ae48094a38b9bd5c6a050b2860ad6924dd4f6fbc065b8f50949ca16"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-4.png",
+          "sha256": "140498433192620321bc5d131dcc4077ae77a731cc60f5433b8a112120d3663b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-5.png",
+          "sha256": "0d635494db9c6fc31ca82a804d5f536b5460f26b527ec0f2bc6bae170ec179ba"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-6.png",
+          "sha256": "34af1e1aa4174458dfc8b42b9633eccc5a428139aaf3e8e7bb0679c9a71a3d6d"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-7.png",
+          "sha256": "f547dc98314efeeefc55adebbc9ada6da96e398bd02353d8d1458f4fd909f07b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-8.png",
+          "sha256": "6ad724e3295b35112cdcaa7e4a8408cb30e31e6c3be3786cd297e802c330a1a2"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/study-9.png",
+          "sha256": "2d61a58329f47c829f6bf171a5dfd8aec054f698bcd6894946e2151e74562639"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/turntable.gif",
+          "sha256": "98f3aeae9809784239e2abe0806d88eda8d9c93601915d035592419ded91397b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/viewer-desktop.png",
+          "sha256": "d9b8ece97d03862910ad0c688be1b48c83c113356131fb9bbdc5db77f2cbb9cc"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/viewer-mobile.png",
+          "sha256": "124159c2796a55958ff4d714c9d345b42e8258688ab9c6f9d300c955d6c4dac8"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/wheel-phases.png",
+          "sha256": "e98727df21c0d6f765b7d8a82da5a7c2c18abc09fca35d5830c79eb0c561e9b1"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/wire-engine.png",
+          "sha256": "50d9cc2dc0ead1464eac693be30242c0574bd7529f51cb195fb87111a75394b2"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/captures/wire-study.png",
+          "sha256": "292eaab6f3626a674111e99826c0ad203f1ba4fed92d109de77065578672b8d2"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/clearance.json",
+          "sha256": "5d59ef63e10f00988da70fb97cd25ddc4a67050793b592e5d048fe48cc55ddab"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/independent-source-replay.json",
+          "sha256": "df154c51c66a5383236e5aee64421a02a658f0925b04cd6120f0add389703a64"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/atlas.png",
+          "sha256": "1ce9d85a871391bcaaa912228bf61f78955ed970827e507c7cdaf5dfa19f0b84"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/capture.json",
+          "sha256": "b45d522d42569a19034f957ef3be01d01febb4da6e362f099239d8a3794a93ff"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-0.png",
+          "sha256": "061a9e65d797f5b8b93e0443cdd01311de96fd034983f058c87cd232a2f4ca27"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-1.png",
+          "sha256": "5b8649d5dca05f167238dfceeab2d6505d332f6c1850afc2e84cf475fcccf5be"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-10.png",
+          "sha256": "983ae2d20f6f99792bae33408d03fca1ec3450b607f3c7aa85435f108c2067f1"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-11.png",
+          "sha256": "aef8bfbda5962357d0e9e509e4794a955f80f5a46f7d39a131268656856ad2cd"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-12.png",
+          "sha256": "85440d500e0c5145ca946297c2dd7c447b14de04de93a43e9f279303530e35c6"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-13.png",
+          "sha256": "6f30ece068f04338523f8e05227dda88d2acd29e61af30d788619438895626e6"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-14.png",
+          "sha256": "a1814851c35315dfdeb163c6d00fe71c292920c8e178d91f648dd3eeb658c0fb"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-15.png",
+          "sha256": "a2e3e9e2f7bf5263cbf293e77adceb012b36643ac09810d8c5d32593e2493ea7"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-2.png",
+          "sha256": "8134e070e8d5f36b8ff3e91448dc49049d8072c67151c78e37720a7f253714df"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-3.png",
+          "sha256": "08c1fcc061cd5e42d7a1cf4a77e67b4a456e828cc91c883173bf2415fecf1e80"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-4.png",
+          "sha256": "082849e19813596f1ac542430dc4776a8f79a7998a96ecdf9802b9a3b7e56364"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-5.png",
+          "sha256": "30a57105fb17efae78326dd3fb3378d9a70c69df511cf7cf3705edf400bb9cdf"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-6.png",
+          "sha256": "86758002ba34810a20e5065d463e762d42a7cb587e347a417d3f5e1e98953277"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-7.png",
+          "sha256": "9bf6bb0baded07d6cdc80d66a4305ac09004e0dafb0424d412e5439f0d967bc5"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-8.png",
+          "sha256": "3f4f550af19abfe916ca4ae0c11dc394cb3c41de8a7a1a7a2fc26f5014846907"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/engine-9.png",
+          "sha256": "a8f153086ded5eb3baf3758f7f5dd57f54c679ab21e151a2a4dc1fa824aee004"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-0.png",
+          "sha256": "8134e070e8d5f36b8ff3e91448dc49049d8072c67151c78e37720a7f253714df"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-1.png",
+          "sha256": "dd6f97d5415dc0390cec62b5389ecdba82e45bcfdd041a5c1cf69570bff0821d"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-2.png",
+          "sha256": "65503a05fbcc6f49bb453381a11f835b42a246a9914ed0bef5874c583fa31d77"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-3.png",
+          "sha256": "daa0fd850e1372e388ac1aacc2b176b26662e10d8ea5d4348f8506e297000a0b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-4.png",
+          "sha256": "c38f829ccef2521b3411c0da1bc920c443881222b02b7747ed0689487af45614"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-5.png",
+          "sha256": "3f0de1131396f509b163901cf3e70a62a4a2498bd82ad63a50c9796633224cb3"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-6.png",
+          "sha256": "af3397ac63c4219bd5119f9288985be9b802e6e0c0df58670e10532d8baa5dc4"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/game-roll-7.png",
+          "sha256": "849e46e7600b1581cd42914f0637d67b2237da2166bac0c727374265ae307fff"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/inspection-engine.png",
+          "sha256": "ea14ee6975ae2ae6bdbd9016ba55bcbb6baf274b52da4fdb3ce0c571c44fc9c5"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/inspection-phases.png",
+          "sha256": "01a24fe0bca27f8a3e48c7a815b5ee2aa9fc321b4944f8b4e2c5ebe739a30204"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/inspection-study.png",
+          "sha256": "5987dd736a9ea79948e02216eb33d58c63429b0048c546624cdd919aaee49cc5"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-0.png",
+          "sha256": "aa2177ed109c09bec5baddfcb50856af8e48396ff473fa885da1f451d8dd9075"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-1.png",
+          "sha256": "fe7f8db709dfdfce58433327279da08e63ad7eca9f2b6d3136e3a88bb96de200"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-2.png",
+          "sha256": "5f8bd459510256e8863ce618da8fbf860754d8b413ec0a1a58922c44ebe5d39b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-3.png",
+          "sha256": "5c550c358ae3d892cf872702f3ba20a1d0cbeebaaa3b60f6e235e04296c91023"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-4.png",
+          "sha256": "c1fbb9a2f0b28e7cc7a33ba82c74144aacc937d070d2a29956a30db1ce65a0a9"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-5.png",
+          "sha256": "8913281ab9c6161568e711de521cf484de7d8b8211bcea836aa3b287cef1824f"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-6.png",
+          "sha256": "111f972bbaf153959c4a8169e600243a3985470a699d1f6c4c8c6e95db455d7e"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/roll-7.png",
+          "sha256": "564a65f335f447d9456bf0cf3a0f90f47922db215ad9d1aa92070f79bc761746"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-0.png",
+          "sha256": "1eaf22b6a9595b9e98c903f5399aea775e4a5cf952316df96487a3068ef65da7"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-1.png",
+          "sha256": "cbbd0622a61be52a4b611d4c72d7ad64df4b1f632902b47a448f67bac65edb1d"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-10.png",
+          "sha256": "7e59ec37ee17814e26d9fab93f5909f85aa0a14eed8f51b53b9ed8a9ffe1ba40"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-11.png",
+          "sha256": "df93af33c6ec33e06d4b4cf6d7715f69db536314d43e2e488d6f9c30bbfef1d4"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-12.png",
+          "sha256": "923f7ae392c77421aaab7a23ebe3e5698302d92454c9b456e951b76473345951"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-13.png",
+          "sha256": "a2b68840f69aa7f411015878a98fa7d46db9f0464ad8625f934c5f0de0f08fe0"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-14.png",
+          "sha256": "2a3785abb107715b6661b373ca3ae177085e5fb77f38fee62cd6e0377ff95b35"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-15.png",
+          "sha256": "24fddb62a28d0e418f2773c53c9d587f03e81c0f83ac1608206ebe7033ea2a95"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-2.png",
+          "sha256": "aa2177ed109c09bec5baddfcb50856af8e48396ff473fa885da1f451d8dd9075"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-3.png",
+          "sha256": "45725f3737fe221fed4f5b8a2bef0c7d5498c6bd4b15d2dc1d3b1fbab39574a0"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-4.png",
+          "sha256": "140498433192620321bc5d131dcc4077ae77a731cc60f5433b8a112120d3663b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-5.png",
+          "sha256": "0d635494db9c6fc31ca82a804d5f536b5460f26b527ec0f2bc6bae170ec179ba"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-6.png",
+          "sha256": "34af1e1aa4174458dfc8b42b9633eccc5a428139aaf3e8e7bb0679c9a71a3d6d"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-7.png",
+          "sha256": "f547dc98314efeeefc55adebbc9ada6da96e398bd02353d8d1458f4fd909f07b"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-8.png",
+          "sha256": "6ad724e3295b35112cdcaa7e4a8408cb30e31e6c3be3786cd297e802c330a1a2"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/study-9.png",
+          "sha256": "2d61a58329f47c829f6bf171a5dfd8aec054f698bcd6894946e2151e74562639"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/wire-engine.png",
+          "sha256": "50d9cc2dc0ead1464eac693be30242c0574bd7529f51cb195fb87111a75394b2"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/engine/wire-study.png",
+          "sha256": "292eaab6f3626a674111e99826c0ad203f1ba4fed92d109de77065578672b8d2"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/model.glb",
+          "sha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/recipe.json",
+          "sha256": "2966b09472fe345b12769e9de3066f9514439e8beb66223e01174c7825284910"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/inputs/report.json",
+          "sha256": "7405114ce74f43ced0116b99d834d5095dafba15e278f2492eb67c5449f5738c"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/ice-cream-van-v1/visual-inspection.json",
+          "sha256": "f232fe244151d9bb8065bd2d13fddcd3a690e49f7c743e04acba790794b0022a"
+        }
+      ]
+    }
+  ]
+}

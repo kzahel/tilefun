@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "ice-cream-van",
+  "independent": true,
+  "declaredInputPins": 21,
+  "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/ice-cream-van/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/ice-cream-van/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/ice-cream-van/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

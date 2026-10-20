@@ -1,0 +1,842 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "tow-truck",
+  "route": "tow-truck",
+  "revision": "v1",
+  "method": "Original blue/cream short heavy tow truck: closed framed blue cab skin, short flat rear recovery platform, low orange folded twin recovery frame, fixed broad winch, readable single gray cable path and cast C hook. Static stowed equipment only, no towing or cable physics.",
+  "geometry": {
+    "triangles": 3394,
+    "vertices": 6374,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 229568,
+    "sha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.521739130434783,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.521739130434783,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.521739130434783,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.521739130434783,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.9800000190734863,
+        -0.8799999952316284,
+        0.49000000953674316
+      ],
+      "centerExport": [
+        -34.43478294040846,
+        8.521739296291187,
+        15.304347743158758
+      ],
+      "radiusBlender": 0.49,
+      "wheel_radius": 8.521739130434783
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.9800000190734863,
+        0.8799999952316284,
+        0.49000000953674316
+      ],
+      "centerExport": [
+        -34.43478294040846,
+        8.521739296291187,
+        -15.304347743158758
+      ],
+      "radiusBlender": 0.49,
+      "wheel_radius": 8.521739130434783
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.6200000047683716,
+        -0.8799999952316284,
+        0.49000000953674316
+      ],
+      "centerExport": [
+        28.173913126406468,
+        8.521739296291187,
+        15.304347743158758
+      ],
+      "radiusBlender": 0.49,
+      "wheel_radius": 8.521739130434783
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.6200000047683716,
+        0.8799999952316284,
+        0.49000000953674316
+      ],
+      "centerExport": [
+        28.173913126406468,
+        8.521739296291187,
+        -15.304347743158758
+      ],
+      "radiusBlender": 0.49,
+      "wheel_radius": 8.521739130434783
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/tow-truck/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/tow-truck/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/tow-truck/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "authorization": "autonomous-153",
+  "triangles": 3394,
+  "vertexCount": 6374,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 229568,
+  "atlasBytes": 3483,
+  "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+  "atlasSha256": "40889caa55d3cda45a23eefe1460ae4767368f4f5fdbc7edbc52cd533a0f85f2",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "tow-truck--v1",
+    "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "triangles": 3394,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.52174043581134,
+        "minimumGap": 0.961634769265947,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.52174043581134,
+        "minimumGap": 0.961634769265947,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.52174043581134,
+        "minimumGap": 0.9616421918921692,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.52174043581134,
+        "minimumGap": 0.9616420400367662,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/tow-truck/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/tow-truck/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "meets-declared-finite-region",
+    "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "allFourCrownsCovered": true,
+    "allWheelCoverage": "natural front nose/rear flat-platform-body fenders over declared central crown region",
+    "wheels": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": true,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "maximumRayDistanceR": 1.2,
+    "roofAndRecoveryFrameCannotQualify": true,
+    "regionMeaning": "Finite central tread footprint from each own .49source radius and .34source width. Ray limited to1.2R above sampled tread, excluding high cream roof and orange recovery frame. Actual integrated front coachwork and flat rear platform wheelhouses own covered crowns, no separate fake caps.",
+    "portableRawEvidence": "art-source/vehicle-bake/tow-truck/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "3d49a665d116e4ffd32ccfd83ebcefd3648d113c06b66a0ffbca7ee6322cc465",
+    "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "minBlenderWorld": [
+      -50.43478012084961,
+      -19.478260040283203,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      50.644126892089844,
+      19.478260040283203,
+      40.0
+    ],
+    "dimensionsBlenderWorld": [
+      101.07890701293945,
+      38.956520080566406,
+      39.999999046325684
+    ],
+    "dimensionsSourceUnits": [
+      5.812037153244018,
+      2.239999904632568,
+      2.2999999451637265
+    ],
+    "centeredHorizontalExtentWorld": [
+      101.28825378417969,
+      38.956520080566406
+    ],
+    "centeredHorizontalExtentSource": [
+      5.824074592590331,
+      2.239999904632568
+    ],
+    "centeredCeilWorldFootprint": [
+      102,
+      39
+    ],
+    "includesActualLowBoomWinchCableHook": true,
+    "rootUnchangedNoRecenterOrFitScale": true,
+    "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+  },
+  "staticRecoveryEvidence": {
+    "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "fixedOwner": "Body_static",
+    "hookMinimumGroundClearanceSource": 0.7950000023841857,
+    "hookFrontmostXSource": 2.525000028610229,
+    "hookBehindActualFlatPlatform": true,
+    "cableDiameterWorldMeasured": 1.2173938052413853,
+    "cableAtLeastOneNativePixel": true,
+    "noMotionMetadataOnBody": true,
+    "staticStowedOnly": true,
+    "allFixedTrianglesIncludedInNeutralRollEnvelope": true
+  },
+  "flatPlatformEvidence": {
+    "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "meaning": "Flat recovery platform, no recessed cargo bed claim",
+    "rays": [
+      {
+        "xySource": [
+          -0.1,
+          -0.95
+        ],
+        "actualTopZSource": 1.1699997758865355,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.1,
+          0.95
+        ],
+        "actualTopZSource": 1.1699997758865355,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.7,
+          -0.95
+        ],
+        "actualTopZSource": 1.1699999952316282,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.7,
+          0.95
+        ],
+        "actualTopZSource": 1.1699997758865355,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.6,
+          -0.95
+        ],
+        "actualTopZSource": 1.1699997758865355,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.6,
+          0.95
+        ],
+        "actualTopZSource": 1.1699997758865355,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.25,
+          -0.95
+        ],
+        "actualTopZSource": 1.1699998855590819,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.25,
+          0.95
+        ],
+        "actualTopZSource": 1.1699998855590819,
+        "owner": "Body_static"
+      }
+    ],
+    "flatTop1_17Source": true,
+    "allCandidateTrianglesIncluded": true
+  },
+  "lowBoomEquipmentEvidence": {
+    "components": [
+      "STATIC axle attachment arm -1.98",
+      "STATIC axle attachment arm 1.62",
+      "STATIC orange recovery planted foot -1",
+      "STATIC low orange folded recovery arm -1",
+      "STATIC fixed gray brace -1",
+      "STATIC orange recovery planted foot 1",
+      "STATIC low orange folded recovery arm 1",
+      "STATIC fixed gray brace 1",
+      "STATIC orange recovery low head crossbeam",
+      "STATIC winch planted mounting block",
+      "STATIC broad gray winch drum",
+      "STATIC gray winch flange -1",
+      "STATIC winch bearing foot -1",
+      "STATIC gray winch flange 1",
+      "STATIC winch bearing foot 1",
+      "STATIC gray cable winch to low head",
+      "STATIC gray cable low head to stowed hook",
+      "STATIC one cast gray C hook stowed above ground"
+    ],
+    "noMotionMetadata": true,
+    "staticStowedOnly": true,
+    "cabRoofMeasuredSource": 2.299999952316284,
+    "boomTopMeasuredSource": 2.2750000953674316,
+    "boomBelowCabRoof": true,
+    "hookMinimumGroundClearanceSource": 0.7950000166893005,
+    "hookFrontmostXSource": 2.5250000953674316,
+    "hookBehindPlatform": true,
+    "cableMeasurements": [
+      {
+        "component": "STATIC gray cable winch to low head",
+        "radiusSourceMeasured": 0.03500031619056861,
+        "diameterWorldMeasured": 1.2174023022806475,
+        "nativeAtLeastOnePixel": true
+      },
+      {
+        "component": "STATIC gray cable low head to stowed hook",
+        "radiusSourceMeasured": 0.035000183561202415,
+        "diameterWorldMeasured": 1.2173976890853015,
+        "nativeAtLeastOnePixel": true
+      }
+    ],
+    "noTowHookCablePhysicsOrAnimationClaim": true
+  },
+  "frameFit": {
+    "status": "passed",
+    "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "actualCapture": "engine/capture.json",
+    "nativeViewport": [
+      224,
+      224
+    ],
+    "nativeRadius": 112,
+    "source80ReferenceUnchanged": true,
+    "familyExtraPadding": 0,
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "engineOrigin": [
+      112,
+      112
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -16,
+      32
+    ],
+    "scale": 1,
+    "views": [
+      {
+        "yaw": 0,
+        "actual224OccupiedBounds": {
+          "minX": 61,
+          "minY": 58,
+          "maxX": 161,
+          "maxY": 128
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 45,
+          "maxX": 145,
+          "minY": 90,
+          "maxY": 160
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 22.5,
+        "actual224OccupiedBounds": {
+          "minX": 63,
+          "minY": 56,
+          "maxX": 165,
+          "maxY": 141
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 47,
+          "maxX": 149,
+          "minY": 88,
+          "maxY": 173
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 45,
+        "actual224OccupiedBounds": {
+          "minX": 67,
+          "minY": 45,
+          "maxX": 160,
+          "maxY": 151
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 51,
+          "maxX": 144,
+          "minY": 77,
+          "maxY": 183
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 67.5,
+        "actual224OccupiedBounds": {
+          "minX": 77,
+          "minY": 39,
+          "maxX": 148,
+          "maxY": 156
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 61,
+          "maxX": 132,
+          "minY": 71,
+          "maxY": 188
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 90,
+        "actual224OccupiedBounds": {
+          "minX": 93,
+          "minY": 38,
+          "maxX": 130,
+          "maxY": 152
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 77,
+          "maxX": 114,
+          "minY": 70,
+          "maxY": 184
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 112.5,
+        "actual224OccupiedBounds": {
+          "minX": 75,
+          "minY": 39,
+          "maxX": 146,
+          "maxY": 156
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 59,
+          "maxX": 130,
+          "minY": 71,
+          "maxY": 188
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 135,
+        "actual224OccupiedBounds": {
+          "minX": 63,
+          "minY": 45,
+          "maxX": 156,
+          "maxY": 151
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 47,
+          "maxX": 140,
+          "minY": 77,
+          "maxY": 183
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 157.5,
+        "actual224OccupiedBounds": {
+          "minX": 58,
+          "minY": 56,
+          "maxX": 160,
+          "maxY": 141
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 42,
+          "maxX": 144,
+          "minY": 88,
+          "maxY": 173
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 180,
+        "actual224OccupiedBounds": {
+          "minX": 62,
+          "minY": 58,
+          "maxX": 162,
+          "maxY": 128
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 46,
+          "maxX": 146,
+          "minY": 90,
+          "maxY": 160
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 202.5,
+        "actual224OccupiedBounds": {
+          "minX": 58,
+          "minY": 48,
+          "maxX": 160,
+          "maxY": 138
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 42,
+          "maxX": 144,
+          "minY": 80,
+          "maxY": 170
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 225,
+        "actual224OccupiedBounds": {
+          "minX": 63,
+          "minY": 42,
+          "maxX": 156,
+          "maxY": 147
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 47,
+          "maxX": 140,
+          "minY": 74,
+          "maxY": 179
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 247.5,
+        "actual224OccupiedBounds": {
+          "minX": 75,
+          "minY": 40,
+          "maxX": 146,
+          "maxY": 151
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 59,
+          "maxX": 130,
+          "minY": 72,
+          "maxY": 183
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 270,
+        "actual224OccupiedBounds": {
+          "minX": 93,
+          "minY": 41,
+          "maxX": 130,
+          "maxY": 151
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 77,
+          "maxX": 114,
+          "minY": 73,
+          "maxY": 183
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 292.5,
+        "actual224OccupiedBounds": {
+          "minX": 77,
+          "minY": 40,
+          "maxX": 148,
+          "maxY": 151
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 61,
+          "maxX": 132,
+          "minY": 72,
+          "maxY": 183
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 315,
+        "actual224OccupiedBounds": {
+          "minX": 67,
+          "minY": 42,
+          "maxX": 160,
+          "maxY": 147
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 51,
+          "maxX": 144,
+          "minY": 74,
+          "maxY": 179
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 337.5,
+        "actual224OccupiedBounds": {
+          "minX": 63,
+          "minY": 48,
+          "maxX": 165,
+          "maxY": 138
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 47,
+          "maxX": 149,
+          "minY": 80,
+          "maxY": 170
+        },
+        "fitsWithoutScaling": true
+      }
+    ],
+    "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+  },
+  "attachmentEvidence": {
+    "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 12.347826957702637,
+        "actualStaticArmEndAbsY": 12.086956024169922,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 12.347826957702637,
+        "actualStaticArmEndAbsY": 12.086956024169922,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RL",
+        "actualTireSlabInnerAbsY": 12.347826957702637,
+        "actualStaticArmEndAbsY": 12.086956024169922,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RR",
+        "actualTireSlabInnerAbsY": 12.347826957702637,
+        "actualStaticArmEndAbsY": 12.086956024169922,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "wheelVisualEvidence": "engine/wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/tow-truck/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/tow-truck/capture.mjs",
+    "node scripts/vehicle-bake/tow-truck/independent-visual.mjs",
+    "node scripts/vehicle-bake/tow-truck/wheel-visual.mjs",
+    "python scripts/vehicle-bake/tow-truck/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/tow-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/tow-truck/v1/evidence/clearance-input.json data/vehicle-bake/tow-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/tow-truck/v1/model.glb --config art-source/vehicle-bake/tow-truck/v1/coverage-region.json --output data/vehicle-bake/tow-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/tow-truck/assess-coverage.py --input data/vehicle-bake/tow-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/tow-truck/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/tow-truck/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/tow-truck/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 study and16 game actualGLB headings at fixed224/radius112 unchanged density plus fixed160px nearest2x detail sheets. Original blue/cream short heavy tow truck is recognizable, with closed ink-framed cool-blue glass, broad short hood, chunky front bumper, flat short recovery deck and low orange converging folded frame.",
+    "Orange recovery frame remains near/below actual cab roof height; fixed broad winch, two gray cable segments and a small gray C hook behind deck form the stowed recovery silhouette. Thin cable/hook features partially occlude behind deck or boom at some elevated headings and show native aliasing; no moving cable, towing or hook physics claimed.",
+    "Both opposing cab sides, separate front/rear windshield charts and cream roof stay coherent on actual surfaces. No glass overlay meshes or logos/tiny text. Rear is a flat recovery platform, not a recessed bed.",
+    "All4 wheel crowns remain beneath integrated front coachwork and rear platform wheelhouses in both cameras. Wheel-ID32heading diagnostics show far tires below natural fenders, near arches open, no raised caps or high/floating far wheels.",
+    "Eight signed distance phases per camera,16 equal-angle views,both wireframes and all4 independent quarter/reverse/absolute-reset images inspected. Body/recovery frame/winch/cable/hook remain fixed and no visible rolling equipment intersections.",
+    "Standard224 has zero occupied edge pixels and strict128/224 parity passes. Measured standard192x224 fallback placement fits without scaling. Minor hub/grille/cable/hook aliasing is heading dependent; no blocking visual defects identified. Actual centered bounds retain hook at original root and80/4.6 scale; runtime QA remains parent-owned."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "allWheelRadiusesMatchOwnGeometry": true,
+    "lowStaticStowedRecoveryBoomWinchCableHook": true,
+    "boomBelowActualCabRoof": true,
+    "actualHookGroundAndPlatformClearance": true,
+    "actualCableAtLeastOneNativePixel": true,
+    "flatRecoveryPlatformNotRecessedBed": true,
+    "actualAsymmetricAndCenteredBoundsIncludeEquipment": true,
+    "standard224AndFallback192x224FitWithoutScaling": true,
+    "allFourEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crownCoverage": "natural front coachwork and rear platform body;25/25 each declared central footprint",
+    "roofRecoveryFrameOutsideCoverageRayRange": true,
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "allFourCrownsCovered": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Crown coverage qualifies declared finite central tread region only; ray limit1.2R excludes cream roof and high recovery frame. Synthetic fixtures qualify bookkeeping, actual body-removal zeroes all samples. Camera headings inspected separately.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Fixed low orange frame stays below cab roof; gray cast hook behind flat deck clears ground. Thin cable/hook/grille/hub features have heading-dependent native aliasing and partial equipment occlusion.",
+    "Stowed equipment is static Body_static geometry only. No tow, hook or cable physics, equipment animation or steering/suspension qualification.",
+    "Actual hook extent retained at unchanged root/scale. Actual span and centered2*maxAbs extents both reported; parent owns runtime footprint and road-fit QA. Rear is a flat recovery platform, not a recessed cargo bed.",
+    "Actual occupied pixels fit224 and standard192x224 fallback placement without scaling; parent owns independent runtime export/QA.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/tow-truck/v1/assess-coverage.py": "7a31f8b1fc78990f06fdcda159ff03a5c39a012e2ab56f92a919badb38d69fe1",
+    "art-source/vehicle-bake/tow-truck/v1/assess-fit.py": "55ab275d17368dae194330d9c58995c065535347a879919d418a535b09d1a308",
+    "art-source/vehicle-bake/tow-truck/v1/atlas.png": "40889caa55d3cda45a23eefe1460ae4767368f4f5fdbc7edbc52cd533a0f85f2",
+    "art-source/vehicle-bake/tow-truck/v1/audit-source.py": "5b1934e26c1d7715f43c983e42246f6a0d55ff649d68681a9e2df35994e9ccbc",
+    "art-source/vehicle-bake/tow-truck/v1/build.py": "3751ec6bf9a0bba24d3c7cdc276c106a02c8e502f19ccb99e06603a6c1095394",
+    "art-source/vehicle-bake/tow-truck/v1/capture.mjs": "38f1645b0ac4aaf834ae276dabe99e6751c0f12887e2a72a217e22eb204c20c3",
+    "art-source/vehicle-bake/tow-truck/v1/car.blend": "7c92746ef676808256346f3237d66356f88128c7c12b659580666b2b94582090",
+    "art-source/vehicle-bake/tow-truck/v1/coverage-region.json": "b5c817db2e5596fd592632abaa44dc2773464dec124477ead4cb2d3631592d40",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/author-browser-qa.json": "d640dc186262593c79f0fb1b46b8c53b56c44c6ef3c074fd4ce92c6dae9e0e51",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/author-visual-inspection.json": "99182f92ecef3ca7a4349fa6858a306e28bc9e9fca62ae16e8cd8016e57ec597",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/clearance-input.json": "9b59496c91a78eef61e4a6f59a0861a946747f063d798a36f48bb61b01f5aa9b",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/engine-capture.json": "1c41c4308918c2443c54b938642aac6c604f01671998e93a5aef0f4897526090",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/fit-assessment.json": "ff36106cac57b58d4a10c492adb9d6da08c624bf7370893bd2f350019577d76e",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/independent-visual.json": "db1bb950e5e593bce6c2d202f2b4d3fdef0f1f06e093b1374b17a8696bd422b5",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/packed-source-audit.json": "2d2857eae6397453d5d6b8542342446df76a9eb54b96c38cca808a097279ab1c",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/replay-verification.json": "271276368b0228fbd5b72f1edc85d58718e8810db39020faa8de0c3a57de7625",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/shared-clearance.json": "3dbed235e81d865fe8cc03cab697bd969cebebf6eef4e8d3864f3b5b8d19bbf6",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/upper-wheel-coverage-raw.json": "3d49a665d116e4ffd32ccfd83ebcefd3648d113c06b66a0ffbca7ee6322cc465",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/wheel-coverage-assessment.json": "394ac1305660c495d4022cb4e438642103b0965d5db2b349dd1745449792a912",
+    "art-source/vehicle-bake/tow-truck/v1/evidence/wheel-visual.json": "c9652ae1d1adc49f722589fb0a95f9c8a4f9ad6075a30ffafd0856745cee7f6f",
+    "art-source/vehicle-bake/tow-truck/v1/family.json": "8cc938dc4a4ac5f00eddde11f60a019b118ccf1a230805e568abaecda5df4564",
+    "art-source/vehicle-bake/tow-truck/v1/finalize.py": "c8823a40ebade1793f934169c1635ecac151c59b7721e73b848e56e384553bb7",
+    "art-source/vehicle-bake/tow-truck/v1/geometry.py": "d1d493c7e7955f6c2d6bf788460b7b27a760ba4516ddb87d2a504e656894be96",
+    "art-source/vehicle-bake/tow-truck/v1/independent-visual.mjs": "f714992bf5032f2b6256d92e9cdae8a1b8a3ee6f172b0aa7c7403227f8543463",
+    "art-source/vehicle-bake/tow-truck/v1/master.blend": "1e773943b77b892f6447a28d6a1b5ee74ff3a33d2c7f95080da83f40afcd43d9",
+    "art-source/vehicle-bake/tow-truck/v1/model.glb": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "art-source/vehicle-bake/tow-truck/v1/paint-ownership.json": "4b267edf6a40459e37bf62428858ca5dcc55e6b529934e9f35f5b8145def12cf",
+    "art-source/vehicle-bake/tow-truck/v1/palette-draft.png": "f164b742eac82806bfd0ea2b548673ca5ff145289ef2fe9f9e012b67e06f65ff",
+    "art-source/vehicle-bake/tow-truck/v1/recipe.json": "fd14e6d1e77c6c4dd27283ccc460d3a2779502a385f2ac4a8d459d34d8ae4938",
+    "art-source/vehicle-bake/tow-truck/v1/review.json": "d60f2a110d246c80e9a90348fb7067ec8aed3517c8351bb0b1dd2644cbae3f55",
+    "art-source/vehicle-bake/tow-truck/v1/sheets.py": "e36a82d796caa8a76799a8ccef0fc906bf758083ed127d081ba9e9638a082961",
+    "art-source/vehicle-bake/tow-truck/v1/wheel-visual.mjs": "b70fbd2fe31c0f0d8b172c096c4428ffa6e05c84c3c154873b0dc35c8fff0e94"
+  }
+}

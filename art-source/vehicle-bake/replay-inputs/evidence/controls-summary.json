@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "testsPassed": 37,
+  "suites": [
+    {
+      "command": "python scripts/vehicle-bake/replay-inputs-test.py",
+      "passed": 16
+    },
+    {
+      "command": "python scripts/vehicle-bake/replay-runtime-test.py",
+      "passed": 11
+    },
+    {
+      "command": "python scripts/vehicle-bake/test_pipeline_helpers.py",
+      "passed": 10
+    }
+  ],
+  "pyCompile": true,
+  "version": 1,
+  "evidenceOnly": true,
+  "constructionDependency": false,
+  "scope": "Completed focused validation retained as portable evidence; no validation rerun for this documentation task",
+  "runtimePolicyTestsUseSyntheticExporter": true,
+  "actualRetainedExporterReplays": [
+    "runtime-offroad-jeep-replay.json",
+    "runtime-semi-truck-replay.json"
+  ],
+  "actualSourceConstructorReplay": "source-offroad-jeep-replay.json",
+  "actualRetainedExporterMissingDeclarationControl": {
+    "status": "passed",
+    "actualUnmodifiedV3Exporter": true,
+    "removedDeclaredInput": "src/rendering/CarMeshAsset.ts",
+    "missingInputRejectedBeforeOutputs": true,
+    "ambientCloneFileExisted": true,
+    "scratchFileAbsent": true
+  },
+  "actualNegativeExporterSha256": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+  "rejectionCoverage": [
+    "unregistered path with matching hash",
+    "unregistered SHA256",
+    "missing or tampered snapshot",
+    "unsafe original/snapshot paths and resolved containment",
+    "duplicate/malformed catalog registration",
+    "missing declaration in isolated scratch despite outer file presence",
+    "unpinned config or exporter",
+    "stale current input",
+    "model/receipt bytes mismatch",
+    "selected catalog entry mismatch",
+    "ignored output containment",
+    "expired deadline"
+  ]
+}

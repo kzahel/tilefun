@@ -1,0 +1,1695 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "tow-truck-v1",
+      "name": "Tow truck",
+      "title": "Tow truck \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original blue/cream short heavy tow truck: closed framed blue cab skin, short flat rear recovery platform, low orange folded twin recovery frame, fixed broad winch, readable single gray cable path and cast C hook. Static stowed equipment only, no towing or cable physics.",
+      "audit": {
+        "triangles": 3394,
+        "vertices": 6374,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 229568,
+        "sha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.521739130434783,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.521739130434783,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.521739130434783,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.521739130434783,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/atlas.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/atlas.png",
+          "sha256": "40889caa55d3cda45a23eefe1460ae4767368f4f5fdbc7edbc52cd533a0f85f2"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/capture.json",
+          "sha256": "1c41c4308918c2443c54b938642aac6c604f01671998e93a5aef0f4897526090"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "f0e97bf20d2302a0f4a1bd593982f26a04e016494b85525413186c3d82ab3e78"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "7240076f549c9d1efbf92af9ee07cd2ff0397b74f780257c868c740dc49e3e82"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "807f5cecce3f36cede28109734f320688a4b09f2288c4eab8cbdded49a366460"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "ae2521b193a1f9fddd228716ba009bef7831d1970a5e716dd8190e96ab269ac5"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "7adc9645e353907d90aced8e8900124f6602a85b061eede137e3c391a50a3572"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "e5362015dd3c9ad06436d796716306d8aa41986467fb0c8d9637662deb00c9ee"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "8580786e47b0caf8a662eff93351219db3e8edefb0ea4e75b5d18e4928880f43"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-1x.png",
+          "sha256": "0a94c3e05a4ad06ad2998e1e292d7a155a45f7f9d9cbd527682416cffdfdec63"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "4414e0ebaceaec7f96189f9ee4cbcb43181bad3887a47d775f86edd399d8a9f8"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-2x.png",
+          "sha256": "d388ed0376d718bf1282b9f78e7453fc20fa14d9e43dbf6b36daa9a2eefa4fa2"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "3a12210896c0d132b3f659149bac1f6ea8c5c76d0ac48bc7be9b640cfff59073"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-3x.png",
+          "sha256": "6e852c6216a543447d3d3a2b318a9b85713010af532a3ed7d4bca5193843fc21"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "3b1388ba65d768b61e381d0b2e81ec18a8d5304efdd0db0328340f26e3f034a2"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "d2db1abd9390ed775821f859fda6b5ef04e89f10acf67f8993cb96283b6e34b6"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "7757c1263e284dd3a64253ca0593346e65cbb9331efc21f5ae62b21d6a40d8da"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "cfc0b58b97a3e9a5e01cc2dbcbbc5c5931358038b6f9f8872c5e96ee94d31171"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "8da41bc1bedbdc6aa5fc3ed96408d343073d7c281ba52c367efdf065320880fd"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-engine-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "4414e0ebaceaec7f96189f9ee4cbcb43181bad3887a47d775f86edd399d8a9f8"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-engine-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "729dfd530e94e1685f83cda30a796dff67bb1d78aa27f9bf992da7c20fa2c0bf"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-engine-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "049158976140cc75bcd23328ef7c6999a694fa74f051ec61b121d06b7f3cc62a"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-engine-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "b7f8c3cb6ccd1002842feffb69d989671faf3441bdee4bb7064e76c583367c7d"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-engine-4.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "0acd1a596e4a0d554646c5e7a7e2882a63631afcc78e7899641ef76b9c9389ec"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-engine-5.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "34a5fbc25341d1f435a5e419b082a3f8c682f8f1dc40de083f258566d11f2776"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-engine-6.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "27ce1bb8c643111f13925b76c942ac8bbb7d66524d9c8ab3841e20e262691d81"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-engine-7.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "d5eb29b562b371101500ab01fc07bc4c401e78aaa6d063866f9b684106905a94"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-study-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "c6522c4abe415206609f1180c6a063112d4b64ec2ac4ad93e120de3a0a89735a"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-study-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "ecd040843730897381280b6c199744046f06304a56ab2aa660f367fdf348bba7"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-study-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "ed8251bb46dd71c66231703008df190736cf6877fe4099cc70952b6add13b7f2"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-study-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "b78ff6b2603f27af807bedb1fc8060b654cdb5e7e2bf11179d83081cad6d9454"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-study-4.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "34ec601afa0df4b1be05d1ffeeac10031d190af6cd8905e5ad934d03ee3f526e"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-study-5.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "b16633d7455c6ab04f04ed0d0b9d3f720d4fff96638bfbf2d2ed5b1dbb27cf34"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-study-6.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "1b2d686a50bf68e0920129e101de757764b24a594e3d6bd3932ce7b42182a2bb"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/equal-phase-study-7.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "5f9db2a64fa08e2ba37f8110d719e0e2cd2728a86a23db871ff4308028e41dd6"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "4414e0ebaceaec7f96189f9ee4cbcb43181bad3887a47d775f86edd399d8a9f8"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "729dfd530e94e1685f83cda30a796dff67bb1d78aa27f9bf992da7c20fa2c0bf"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "049158976140cc75bcd23328ef7c6999a694fa74f051ec61b121d06b7f3cc62a"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "b7f8c3cb6ccd1002842feffb69d989671faf3441bdee4bb7064e76c583367c7d"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "0acd1a596e4a0d554646c5e7a7e2882a63631afcc78e7899641ef76b9c9389ec"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "34a5fbc25341d1f435a5e419b082a3f8c682f8f1dc40de083f258566d11f2776"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "27ce1bb8c643111f13925b76c942ac8bbb7d66524d9c8ab3841e20e262691d81"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "d5eb29b562b371101500ab01fc07bc4c401e78aaa6d063866f9b684106905a94"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "de8706af8b4a51e6b383579a1245c842f33f4ddcf3dc67668d1b0aa697fa3ebc"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "5b6f9fa0cdaba49be858837ef782d401b36028d25a99bc287c62e22c476b2e3d"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "54c4683b16cfcf6622e19b2b45ff8e9799eb7e6119369d806b848d3c1f30f986"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "3365bb0c5f564894e65b8bfed1da55ba7ac1b59272b60f8f6e8799bd9cf815ee"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "196d7e58c547b9ac0e41d1bb4f4539e4891b1e913397785f2641009967eba493"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "c87e63999b2206a5f9525256500a04e80ab6b1e4ef63f381a5e4092b916608cb"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "e5677562bfeef6e24032713d555a4e5abbdea6388ea5b0c82b69643d3412ed4e"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "a72f2136f746165b7765f3da8d12ddeabc67565f53277a98352a9fe134fe2044"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-visual.json",
+          "sha256": "db1bb950e5e593bce6c2d202f2b4d3fdef0f1f06e093b1374b17a8696bd422b5"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "39eae38c248cc2dbbfd01cb9bd1fbf89f74ed682a71c734635edd261b4fd837d"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-equal-phases.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-equal-phases.png",
+          "sha256": "72d636ab2705cfefb335928c92ffa11271f8c9d2cfa4a86819f6ce4d558c164c"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-independent.png",
+          "sha256": "9a99f45da18998c46922114b85b9561f07e69446e022ca2a71dd71d728e5277a"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "5d0b6c2b3e5cca3df680d6eb8208b36cc269a1432695808c93689dd4690af5bd"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "f9cbaa10d2e54ed473beb2f5d2bdd6aedd37b9c8197e651c165b6fde1af263bc"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "bee2262885424f146dc51c2491ceaa745b61a409c21db4853215ade10c9ae367"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "a8122c7dc9c7b2f051e9b36fc52f1367aa4a1e7d2a0dca578b0e8b749a50b388"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "2aaab908658675eab27719b7580896a4e91cfd015f207cfe2ec247a8a9309320"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-wheel-id-engine.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "603925b0c702668cd5dedd6bd412575e9df8007a8807c118f9d21ead1c9ef7c5"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-wheel-id-study.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "c6cdea55bb621882be877f16b9fa3826c99ea2d51276307c881e708ed341be59"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-wires.png",
+          "sha256": "b3e74c3e0c30444ca7299b4335b50dcc62c0d5660021b2bce736b1c8c39c6ee7"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "c6522c4abe415206609f1180c6a063112d4b64ec2ac4ad93e120de3a0a89735a"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "ecd040843730897381280b6c199744046f06304a56ab2aa660f367fdf348bba7"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "ed8251bb46dd71c66231703008df190736cf6877fe4099cc70952b6add13b7f2"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "b78ff6b2603f27af807bedb1fc8060b654cdb5e7e2bf11179d83081cad6d9454"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "34ec601afa0df4b1be05d1ffeeac10031d190af6cd8905e5ad934d03ee3f526e"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "b16633d7455c6ab04f04ed0d0b9d3f720d4fff96638bfbf2d2ed5b1dbb27cf34"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "1b2d686a50bf68e0920129e101de757764b24a594e3d6bd3932ce7b42182a2bb"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "5f9db2a64fa08e2ba37f8110d719e0e2cd2728a86a23db871ff4308028e41dd6"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-0.png",
+          "sha256": "2ba6c41b479d024aa2e9216433433c799320db0cea631f7917caf80a2397bfe7"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-1.png",
+          "sha256": "ef6b97153a1dda1cffba16af044ca516eeca8fb09329716384e25856ff775b52"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-10.png",
+          "sha256": "0640887ab34627113683440be893335600fb28c9dd65eebe4daeec3abf58d426"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-11.png",
+          "sha256": "6220c48cf8282dac5d725f1939196a5034be5ac0e016b60c25be7acdb2028653"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-12.png",
+          "sha256": "a48e8df3e5d13c62f91d20e0e6b9bfac04eab0720bf0800f9731b089b4cb7073"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-13.png",
+          "sha256": "1b30cacf24ede4c1a3e761796bef647b0976000d95280b897c10cdd340888eac"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-14.png",
+          "sha256": "2bee0115ab6f906dcd6a803426360b409117197909fb57e2ab9c7f64486f45c5"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-15.png",
+          "sha256": "00717c4b93bfa55beeb4e72f17dba742e7b65eeaa894e09e99d6a58fbfceae1e"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-1x.png",
+          "sha256": "383a3ce7ddb994eb7136e64ddd64df8f62029644b434e3f35b019a8bbc9d5507"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-2.png",
+          "sha256": "c6522c4abe415206609f1180c6a063112d4b64ec2ac4ad93e120de3a0a89735a"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-2x.png",
+          "sha256": "973070f3c9d65529287375b32426389a0c0853f01b8059b1e271b552a396e57b"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-3.png",
+          "sha256": "49e7779555f206ba3214fd3566069f2a67345f5577af2e4c8bbae340287a1128"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-3x.png",
+          "sha256": "d39533e81506072597f0fec7412d4332009577b356c3eb19442ef331fc9f7f34"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-4.png",
+          "sha256": "fdbfb893e60614d3d70e47ccd1f806199cc388476a186488ad7cb9e0b37c2a69"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-5.png",
+          "sha256": "d6cd7f8da6378a5b523b1cbd20cf880194e8d1ca772d778ff3d617442fb0e7fc"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-6.png",
+          "sha256": "83e7034245ab9c232ef49b49f7e65193ff5695d5ffdbbe66471dd12bf9d2e060"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-7.png",
+          "sha256": "99cb152a2038f4e8bb168f7ce87d46a8ee44866f57bac9758b2d9a9d882a673a"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-8.png",
+          "sha256": "9d4c14b6d2db4ff2e2613108b875520fe1ce51a71b49dd6d539d9b8862915894"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-9.png",
+          "sha256": "7d8206d1f5d70f7979df9033333c2256ed7c37a7561a652a5784375d7108606a"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "3c66f48541a0e20bbca68ff3b6791d3b1425c1b72aedc429228b273ce95a3e13"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "2c40558d47cf6e8ed728d21dd56fd3818c07601aca61e8d26882cc2610580012"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-10.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "871f5ec17de25d5f5a5ac73fc0167f7d2929e3e2aa3b724f042d0456ae6aeb02"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-11.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "ce350d9dc2c031c9167aa619d3203768cfc83c741386e07a43121938ea119bd1"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-12.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "ae2521b193a1f9fddd228716ba009bef7831d1970a5e716dd8190e96ab269ac5"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-13.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "4d4bb8e60ed3f24dd530ad2d8948f0d4e7f2f84ed2984c6d33c60a0167903960"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-14.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "c8b65ea49c946ce43d683a292fdee401cd93087c56e7dba6e52c11e8c4570651"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-15.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "433d886c5e78e4e2859578ae32f416313c90fc0e902c8f1d7c3505af4cca1d6b"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "45acdbb485b0422539c1834a76ebcb456d6cbcf39baec4d87d71e52898f9bb23"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "fadb747842f65f3a9b61b37a47d77877e34a750fe5e90632cf4b7bdc2cc4cd6d"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-4.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "3b1388ba65d768b61e381d0b2e81ec18a8d5304efdd0db0328340f26e3f034a2"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-5.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "24efbbf4a4817716a7348d7575d82c2305a1adb24cf42b640a4a810eb5485e9f"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-6.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "a459f22f1a7a767e84dccef4ae6fedf39dfc0f78d2222ab2307c591cf5d19729"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-7.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "e5b684e934da8282f1fcd1be19938c5263f49ae1b08c32861596654fc8645698"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-8.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "7d11a9810b521b03caf0078f340e772ee4a305853b84ca26ce97b069c90fedf0"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-engine-9.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "9970fa456104f05ffdd7b144fb7ba4193f5b09cc5f36ba87d4f1192c19e7ba5e"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-0.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "309dedf34e1581911c730d3ac93106a234ed589b77414e9787c472340177c8fe"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-1.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "2dd7055b07c46e5365c28ca1bc46e3836779c7e3fd84e9ca1db4e8a0f77db5bd"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-10.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "de1f6068dc90cd12b1a6a95af60a9055ad7f1445dfe7c4ec0fcd9f8aae10884e"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-11.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "724e91f4a09ae5e966e468f2c37b3f0a2e801c0cad2cf41ef8e711432f61ee54"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-12.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "a48e8df3e5d13c62f91d20e0e6b9bfac04eab0720bf0800f9731b089b4cb7073"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-13.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "3e65304311352a23d5c763b81a831f03f98fc24629e5543c37cdf2fe602d25eb"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-14.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "dfb6804d4851ce53485d6a14ed9a5e999ec864bfa1ce9ae0220dfe7865af7f1f"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-15.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "546887d80b115198cf7188f6039279ec487db6c457114bf584f7dbf7df2be1fd"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-2.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "55f381a5821298a4ae591262c3e0723a89d4d147c95725919d0b432ae9db581d"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-3.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "c7a97876f2223cb070bb3b4f6a3750cc09b6f2c188dda329aa8580f89d9c25fa"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-4.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "fdbfb893e60614d3d70e47ccd1f806199cc388476a186488ad7cb9e0b37c2a69"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-5.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "8e66a7c234a891ad790e35c68b8754be7b9f9b585944806afcd8230fc481a05c"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-6.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "8740d3cc34ba693b5bd56a7604eac9e1acc254d997a2f1110a94a4f4a28777c8"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-7.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "85fdcdea3a0435c870c141f32bd1aa1cc476506abdc207b6aab9be2da40a0baf"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-8.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "438cd19146216f85d7e791a1a73b1baac82037aaaa7c8aeab9ffa837d4b86080"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-id-study-9.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "35b57d0f4e6b48e3c1a7e6ef763b777a4d999d01243d6995c9f45802b77904e2"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wheel-visual.json",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-visual.json",
+          "sha256": "c9652ae1d1adc49f722589fb0a95f9c8a4f9ad6075a30ffafd0856745cee7f6f"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "debcd8a4f11b1156bc1c699664bd5961ac366639d203cefd40d78581265af777"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "d577624a8e4b92ec0ecb81ec4a4a43db16f458774da24da5c64a161e5538ef3c"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/model.glb",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/model.glb",
+          "sha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/recipe.json",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/recipe.json",
+          "sha256": "fd14e6d1e77c6c4dd27283ccc460d3a2779502a385f2ac4a8d459d34d8ae4938"
+        },
+        {
+          "source": "demos/vehicle-bake/tow-truck/v1/report.json",
+          "retained": "demos/original-vehicles/tow-truck-v1/inputs/report.json",
+          "sha256": "166fb008c3df4eaa208759f1b84e3b5f887b6bc42fd38b55e3ff54d942254931"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/tow-truck-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "tow-truck--v1",
+          "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+          "triangles": 3394,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 8.52174043581134,
+              "minimumGap": 0.961634769265947,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 8.52174043581134,
+              "minimumGap": 0.961634769265947,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 8.52174043581134,
+              "minimumGap": 0.9616421918921692,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 8.52174043581134,
+              "minimumGap": 0.9616420400367662,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 8.521739130434783,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 8.521739130434783,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 8.521739130434783,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 8.521739130434783,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/browser-qa.json",
+          "sha256": "d640dc186262593c79f0fb1b46b8c53b56c44c6ef3c074fd4ce92c6dae9e0e51"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/candidate.json",
+          "sha256": "c4d79b501b9268d031bbb489b31032145999c9cdbe72be289f7e3b642d0347c2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/capture.json",
+          "sha256": "1c41c4308918c2443c54b938642aac6c604f01671998e93a5aef0f4897526090"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/contact-sheet.png",
+          "sha256": "2015b47bab1e2b710bbda62ff4fb9fc332a164c60ff67f63b587934197f9fc3c"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-0.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-1.png",
+          "sha256": "f0e97bf20d2302a0f4a1bd593982f26a04e016494b85525413186c3d82ab3e78"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-10.png",
+          "sha256": "7240076f549c9d1efbf92af9ee07cd2ff0397b74f780257c868c740dc49e3e82"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-11.png",
+          "sha256": "807f5cecce3f36cede28109734f320688a4b09f2288c4eab8cbdded49a366460"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-12.png",
+          "sha256": "ae2521b193a1f9fddd228716ba009bef7831d1970a5e716dd8190e96ab269ac5"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-13.png",
+          "sha256": "7adc9645e353907d90aced8e8900124f6602a85b061eede137e3c391a50a3572"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-14.png",
+          "sha256": "e5362015dd3c9ad06436d796716306d8aa41986467fb0c8d9637662deb00c9ee"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-15.png",
+          "sha256": "8580786e47b0caf8a662eff93351219db3e8edefb0ea4e75b5d18e4928880f43"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-1x.png",
+          "sha256": "0bc362ed0e469aef1361dc6dbb03a5d958c4b79f028b05719e22d750208ebe15"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-2.png",
+          "sha256": "4414e0ebaceaec7f96189f9ee4cbcb43181bad3887a47d775f86edd399d8a9f8"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-2x.png",
+          "sha256": "390631b47e10251ce8c7730d2620757a9e96a86a4c8d81d4f9e0d037363ce964"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-3.png",
+          "sha256": "3a12210896c0d132b3f659149bac1f6ea8c5c76d0ac48bc7be9b640cfff59073"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-3x.png",
+          "sha256": "be0bcc736126dacdbccd30095ce9edafeabf016dff3d71f322926a32b0e21687"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-4.png",
+          "sha256": "3b1388ba65d768b61e381d0b2e81ec18a8d5304efdd0db0328340f26e3f034a2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-5.png",
+          "sha256": "d2db1abd9390ed775821f859fda6b5ef04e89f10acf67f8993cb96283b6e34b6"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-6.png",
+          "sha256": "7757c1263e284dd3a64253ca0593346e65cbb9331efc21f5ae62b21d6a40d8da"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-7.png",
+          "sha256": "cfc0b58b97a3e9a5e01cc2dbcbbc5c5931358038b6f9f8872c5e96ee94d31171"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-8.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/engine-9.png",
+          "sha256": "8da41bc1bedbdc6aa5fc3ed96408d343073d7c281ba52c367efdf065320880fd"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-roll-0.png",
+          "sha256": "4414e0ebaceaec7f96189f9ee4cbcb43181bad3887a47d775f86edd399d8a9f8"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-roll-1.png",
+          "sha256": "729dfd530e94e1685f83cda30a796dff67bb1d78aa27f9bf992da7c20fa2c0bf"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-roll-2.png",
+          "sha256": "049158976140cc75bcd23328ef7c6999a694fa74f051ec61b121d06b7f3cc62a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-roll-3.png",
+          "sha256": "b7f8c3cb6ccd1002842feffb69d989671faf3441bdee4bb7064e76c583367c7d"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-roll-4.png",
+          "sha256": "0acd1a596e4a0d554646c5e7a7e2882a63631afcc78e7899641ef76b9c9389ec"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-roll-5.png",
+          "sha256": "34a5fbc25341d1f435a5e419b082a3f8c682f8f1dc40de083f258566d11f2776"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-roll-6.png",
+          "sha256": "27ce1bb8c643111f13925b76c942ac8bbb7d66524d9c8ab3841e20e262691d81"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-roll-7.png",
+          "sha256": "d5eb29b562b371101500ab01fc07bc4c401e78aaa6d063866f9b684106905a94"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/game-turntable.gif",
+          "sha256": "074c6632a3a3e85104a2e11cbe69ac10123fb93fb4afd9ebcf6150f347d9d7ae"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/roll-0.png",
+          "sha256": "c6522c4abe415206609f1180c6a063112d4b64ec2ac4ad93e120de3a0a89735a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/roll-1.png",
+          "sha256": "ecd040843730897381280b6c199744046f06304a56ab2aa660f367fdf348bba7"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/roll-2.png",
+          "sha256": "ed8251bb46dd71c66231703008df190736cf6877fe4099cc70952b6add13b7f2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/roll-3.png",
+          "sha256": "b78ff6b2603f27af807bedb1fc8060b654cdb5e7e2bf11179d83081cad6d9454"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/roll-4.png",
+          "sha256": "34ec601afa0df4b1be05d1ffeeac10031d190af6cd8905e5ad934d03ee3f526e"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/roll-5.png",
+          "sha256": "b16633d7455c6ab04f04ed0d0b9d3f720d4fff96638bfbf2d2ed5b1dbb27cf34"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/roll-6.png",
+          "sha256": "1b2d686a50bf68e0920129e101de757764b24a594e3d6bd3932ce7b42182a2bb"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/roll-7.png",
+          "sha256": "5f9db2a64fa08e2ba37f8110d719e0e2cd2728a86a23db871ff4308028e41dd6"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-0.png",
+          "sha256": "2ba6c41b479d024aa2e9216433433c799320db0cea631f7917caf80a2397bfe7"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-1.png",
+          "sha256": "ef6b97153a1dda1cffba16af044ca516eeca8fb09329716384e25856ff775b52"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-10.png",
+          "sha256": "0640887ab34627113683440be893335600fb28c9dd65eebe4daeec3abf58d426"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-11.png",
+          "sha256": "6220c48cf8282dac5d725f1939196a5034be5ac0e016b60c25be7acdb2028653"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-12.png",
+          "sha256": "a48e8df3e5d13c62f91d20e0e6b9bfac04eab0720bf0800f9731b089b4cb7073"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-13.png",
+          "sha256": "1b30cacf24ede4c1a3e761796bef647b0976000d95280b897c10cdd340888eac"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-14.png",
+          "sha256": "2bee0115ab6f906dcd6a803426360b409117197909fb57e2ab9c7f64486f45c5"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-15.png",
+          "sha256": "00717c4b93bfa55beeb4e72f17dba742e7b65eeaa894e09e99d6a58fbfceae1e"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-1x.png",
+          "sha256": "b1d8c4037bda4b6c6873e3c06277cf34c67b52b01b813896137fb2f87090f674"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-2.png",
+          "sha256": "c6522c4abe415206609f1180c6a063112d4b64ec2ac4ad93e120de3a0a89735a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-2x.png",
+          "sha256": "b0556956a049631044a16e71d5e30bd410f208366e4e7bd5285e79aa6d4c2744"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-3.png",
+          "sha256": "49e7779555f206ba3214fd3566069f2a67345f5577af2e4c8bbae340287a1128"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-3x.png",
+          "sha256": "e9329ced0e1fbb2ceff6671d28e0c935e2d544f43be2c776b48071a390b9ccd7"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-4.png",
+          "sha256": "fdbfb893e60614d3d70e47ccd1f806199cc388476a186488ad7cb9e0b37c2a69"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-5.png",
+          "sha256": "d6cd7f8da6378a5b523b1cbd20cf880194e8d1ca772d778ff3d617442fb0e7fc"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-6.png",
+          "sha256": "83e7034245ab9c232ef49b49f7e65193ff5695d5ffdbbe66471dd12bf9d2e060"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-7.png",
+          "sha256": "99cb152a2038f4e8bb168f7ce87d46a8ee44866f57bac9758b2d9a9d882a673a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-8.png",
+          "sha256": "9d4c14b6d2db4ff2e2613108b875520fe1ce51a71b49dd6d539d9b8862915894"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/study-9.png",
+          "sha256": "7d8206d1f5d70f7979df9033333c2256ed7c37a7561a652a5784375d7108606a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/turntable.gif",
+          "sha256": "f5db818fcdd14eef2c97ca63d7372b5d9c6914d9934dadc11004246523893618"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/viewer-desktop.png",
+          "sha256": "e03d79dc8ec6908c84c28d26f27cebe0c9aafe2f4e8b23f2eab81319bcccb3a2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/viewer-mobile.png",
+          "sha256": "691b16173c2588ba6575f10807aeb1531955e6787a8a24d187a554405f213658"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/wheel-phases.png",
+          "sha256": "3e1862336fb213aee800c2e19afe13410614badd6f02ce9420d999744ba546de"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/wire-engine.png",
+          "sha256": "debcd8a4f11b1156bc1c699664bd5961ac366639d203cefd40d78581265af777"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/captures/wire-study.png",
+          "sha256": "d577624a8e4b92ec0ecb81ec4a4a43db16f458774da24da5c64a161e5538ef3c"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/clearance.json",
+          "sha256": "3dbed235e81d865fe8cc03cab697bd969cebebf6eef4e8d3864f3b5b8d19bbf6"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/independent-source-replay.json",
+          "sha256": "8d62365b30d6297a37ebb935ff12c73ac5e8157c2fc233e8075981e9e9209489"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/atlas.png",
+          "sha256": "40889caa55d3cda45a23eefe1460ae4767368f4f5fdbc7edbc52cd533a0f85f2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/capture.json",
+          "sha256": "1c41c4308918c2443c54b938642aac6c604f01671998e93a5aef0f4897526090"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "f0e97bf20d2302a0f4a1bd593982f26a04e016494b85525413186c3d82ab3e78"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "7240076f549c9d1efbf92af9ee07cd2ff0397b74f780257c868c740dc49e3e82"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "807f5cecce3f36cede28109734f320688a4b09f2288c4eab8cbdded49a366460"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "ae2521b193a1f9fddd228716ba009bef7831d1970a5e716dd8190e96ab269ac5"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "7adc9645e353907d90aced8e8900124f6602a85b061eede137e3c391a50a3572"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "e5362015dd3c9ad06436d796716306d8aa41986467fb0c8d9637662deb00c9ee"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "8580786e47b0caf8a662eff93351219db3e8edefb0ea4e75b5d18e4928880f43"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-1x.png",
+          "sha256": "0a94c3e05a4ad06ad2998e1e292d7a155a45f7f9d9cbd527682416cffdfdec63"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "4414e0ebaceaec7f96189f9ee4cbcb43181bad3887a47d775f86edd399d8a9f8"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-2x.png",
+          "sha256": "d388ed0376d718bf1282b9f78e7453fc20fa14d9e43dbf6b36daa9a2eefa4fa2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "3a12210896c0d132b3f659149bac1f6ea8c5c76d0ac48bc7be9b640cfff59073"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-3x.png",
+          "sha256": "6e852c6216a543447d3d3a2b318a9b85713010af532a3ed7d4bca5193843fc21"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "3b1388ba65d768b61e381d0b2e81ec18a8d5304efdd0db0328340f26e3f034a2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "d2db1abd9390ed775821f859fda6b5ef04e89f10acf67f8993cb96283b6e34b6"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "7757c1263e284dd3a64253ca0593346e65cbb9331efc21f5ae62b21d6a40d8da"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "cfc0b58b97a3e9a5e01cc2dbcbbc5c5931358038b6f9f8872c5e96ee94d31171"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "8da41bc1bedbdc6aa5fc3ed96408d343073d7c281ba52c367efdf065320880fd"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "4414e0ebaceaec7f96189f9ee4cbcb43181bad3887a47d775f86edd399d8a9f8"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "729dfd530e94e1685f83cda30a796dff67bb1d78aa27f9bf992da7c20fa2c0bf"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "049158976140cc75bcd23328ef7c6999a694fa74f051ec61b121d06b7f3cc62a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "b7f8c3cb6ccd1002842feffb69d989671faf3441bdee4bb7064e76c583367c7d"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "0acd1a596e4a0d554646c5e7a7e2882a63631afcc78e7899641ef76b9c9389ec"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "34a5fbc25341d1f435a5e419b082a3f8c682f8f1dc40de083f258566d11f2776"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "27ce1bb8c643111f13925b76c942ac8bbb7d66524d9c8ab3841e20e262691d81"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "d5eb29b562b371101500ab01fc07bc4c401e78aaa6d063866f9b684106905a94"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "c6522c4abe415206609f1180c6a063112d4b64ec2ac4ad93e120de3a0a89735a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "ecd040843730897381280b6c199744046f06304a56ab2aa660f367fdf348bba7"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "ed8251bb46dd71c66231703008df190736cf6877fe4099cc70952b6add13b7f2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "b78ff6b2603f27af807bedb1fc8060b654cdb5e7e2bf11179d83081cad6d9454"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "34ec601afa0df4b1be05d1ffeeac10031d190af6cd8905e5ad934d03ee3f526e"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "b16633d7455c6ab04f04ed0d0b9d3f720d4fff96638bfbf2d2ed5b1dbb27cf34"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "1b2d686a50bf68e0920129e101de757764b24a594e3d6bd3932ce7b42182a2bb"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "5f9db2a64fa08e2ba37f8110d719e0e2cd2728a86a23db871ff4308028e41dd6"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "4414e0ebaceaec7f96189f9ee4cbcb43181bad3887a47d775f86edd399d8a9f8"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "729dfd530e94e1685f83cda30a796dff67bb1d78aa27f9bf992da7c20fa2c0bf"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "049158976140cc75bcd23328ef7c6999a694fa74f051ec61b121d06b7f3cc62a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "b7f8c3cb6ccd1002842feffb69d989671faf3441bdee4bb7064e76c583367c7d"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "0acd1a596e4a0d554646c5e7a7e2882a63631afcc78e7899641ef76b9c9389ec"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "34a5fbc25341d1f435a5e419b082a3f8c682f8f1dc40de083f258566d11f2776"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "27ce1bb8c643111f13925b76c942ac8bbb7d66524d9c8ab3841e20e262691d81"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "d5eb29b562b371101500ab01fc07bc4c401e78aaa6d063866f9b684106905a94"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "de8706af8b4a51e6b383579a1245c842f33f4ddcf3dc67668d1b0aa697fa3ebc"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "5b6f9fa0cdaba49be858837ef782d401b36028d25a99bc287c62e22c476b2e3d"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "54c4683b16cfcf6622e19b2b45ff8e9799eb7e6119369d806b848d3c1f30f986"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "3365bb0c5f564894e65b8bfed1da55ba7ac1b59272b60f8f6e8799bd9cf815ee"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "196d7e58c547b9ac0e41d1bb4f4539e4891b1e913397785f2641009967eba493"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "c87e63999b2206a5f9525256500a04e80ab6b1e4ef63f381a5e4092b916608cb"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "42c05bceb02908773a21a8624e7405fc33540c455b86f1102ec3c0b63f39e3f1"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "e5677562bfeef6e24032713d555a4e5abbdea6388ea5b0c82b69643d3412ed4e"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "a72f2136f746165b7765f3da8d12ddeabc67565f53277a98352a9fe134fe2044"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "c896d9570b9ce31c82ec688722560760cf22d2f8b35278ece82d9d859564ab54"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/independent-visual.json",
+          "sha256": "db1bb950e5e593bce6c2d202f2b4d3fdef0f1f06e093b1374b17a8696bd422b5"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "39eae38c248cc2dbbfd01cb9bd1fbf89f74ed682a71c734635edd261b4fd837d"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-equal-phases.png",
+          "sha256": "72d636ab2705cfefb335928c92ffa11271f8c9d2cfa4a86819f6ce4d558c164c"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-independent.png",
+          "sha256": "9a99f45da18998c46922114b85b9561f07e69446e022ca2a71dd71d728e5277a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "5d0b6c2b3e5cca3df680d6eb8208b36cc269a1432695808c93689dd4690af5bd"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "f9cbaa10d2e54ed473beb2f5d2bdd6aedd37b9c8197e651c165b6fde1af263bc"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "bee2262885424f146dc51c2491ceaa745b61a409c21db4853215ade10c9ae367"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "a8122c7dc9c7b2f051e9b36fc52f1367aa4a1e7d2a0dca578b0e8b749a50b388"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "2aaab908658675eab27719b7580896a4e91cfd015f207cfe2ec247a8a9309320"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "603925b0c702668cd5dedd6bd412575e9df8007a8807c118f9d21ead1c9ef7c5"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "c6cdea55bb621882be877f16b9fa3826c99ea2d51276307c881e708ed341be59"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/inspection-wires.png",
+          "sha256": "b3e74c3e0c30444ca7299b4335b50dcc62c0d5660021b2bce736b1c8c39c6ee7"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "c6522c4abe415206609f1180c6a063112d4b64ec2ac4ad93e120de3a0a89735a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "ecd040843730897381280b6c199744046f06304a56ab2aa660f367fdf348bba7"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "ed8251bb46dd71c66231703008df190736cf6877fe4099cc70952b6add13b7f2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "b78ff6b2603f27af807bedb1fc8060b654cdb5e7e2bf11179d83081cad6d9454"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "34ec601afa0df4b1be05d1ffeeac10031d190af6cd8905e5ad934d03ee3f526e"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "b16633d7455c6ab04f04ed0d0b9d3f720d4fff96638bfbf2d2ed5b1dbb27cf34"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "1b2d686a50bf68e0920129e101de757764b24a594e3d6bd3932ce7b42182a2bb"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "5f9db2a64fa08e2ba37f8110d719e0e2cd2728a86a23db871ff4308028e41dd6"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-0.png",
+          "sha256": "2ba6c41b479d024aa2e9216433433c799320db0cea631f7917caf80a2397bfe7"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-1.png",
+          "sha256": "ef6b97153a1dda1cffba16af044ca516eeca8fb09329716384e25856ff775b52"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-10.png",
+          "sha256": "0640887ab34627113683440be893335600fb28c9dd65eebe4daeec3abf58d426"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-11.png",
+          "sha256": "6220c48cf8282dac5d725f1939196a5034be5ac0e016b60c25be7acdb2028653"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-12.png",
+          "sha256": "a48e8df3e5d13c62f91d20e0e6b9bfac04eab0720bf0800f9731b089b4cb7073"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-13.png",
+          "sha256": "1b30cacf24ede4c1a3e761796bef647b0976000d95280b897c10cdd340888eac"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-14.png",
+          "sha256": "2bee0115ab6f906dcd6a803426360b409117197909fb57e2ab9c7f64486f45c5"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-15.png",
+          "sha256": "00717c4b93bfa55beeb4e72f17dba742e7b65eeaa894e09e99d6a58fbfceae1e"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-1x.png",
+          "sha256": "383a3ce7ddb994eb7136e64ddd64df8f62029644b434e3f35b019a8bbc9d5507"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-2.png",
+          "sha256": "c6522c4abe415206609f1180c6a063112d4b64ec2ac4ad93e120de3a0a89735a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-2x.png",
+          "sha256": "973070f3c9d65529287375b32426389a0c0853f01b8059b1e271b552a396e57b"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-3.png",
+          "sha256": "49e7779555f206ba3214fd3566069f2a67345f5577af2e4c8bbae340287a1128"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-3x.png",
+          "sha256": "d39533e81506072597f0fec7412d4332009577b356c3eb19442ef331fc9f7f34"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-4.png",
+          "sha256": "fdbfb893e60614d3d70e47ccd1f806199cc388476a186488ad7cb9e0b37c2a69"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-5.png",
+          "sha256": "d6cd7f8da6378a5b523b1cbd20cf880194e8d1ca772d778ff3d617442fb0e7fc"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-6.png",
+          "sha256": "83e7034245ab9c232ef49b49f7e65193ff5695d5ffdbbe66471dd12bf9d2e060"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-7.png",
+          "sha256": "99cb152a2038f4e8bb168f7ce87d46a8ee44866f57bac9758b2d9a9d882a673a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-8.png",
+          "sha256": "9d4c14b6d2db4ff2e2613108b875520fe1ce51a71b49dd6d539d9b8862915894"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/study-9.png",
+          "sha256": "7d8206d1f5d70f7979df9033333c2256ed7c37a7561a652a5784375d7108606a"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "3c66f48541a0e20bbca68ff3b6791d3b1425c1b72aedc429228b273ce95a3e13"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "2c40558d47cf6e8ed728d21dd56fd3818c07601aca61e8d26882cc2610580012"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "871f5ec17de25d5f5a5ac73fc0167f7d2929e3e2aa3b724f042d0456ae6aeb02"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "ce350d9dc2c031c9167aa619d3203768cfc83c741386e07a43121938ea119bd1"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "ae2521b193a1f9fddd228716ba009bef7831d1970a5e716dd8190e96ab269ac5"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "4d4bb8e60ed3f24dd530ad2d8948f0d4e7f2f84ed2984c6d33c60a0167903960"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "c8b65ea49c946ce43d683a292fdee401cd93087c56e7dba6e52c11e8c4570651"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "433d886c5e78e4e2859578ae32f416313c90fc0e902c8f1d7c3505af4cca1d6b"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "45acdbb485b0422539c1834a76ebcb456d6cbcf39baec4d87d71e52898f9bb23"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "fadb747842f65f3a9b61b37a47d77877e34a750fe5e90632cf4b7bdc2cc4cd6d"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "3b1388ba65d768b61e381d0b2e81ec18a8d5304efdd0db0328340f26e3f034a2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "24efbbf4a4817716a7348d7575d82c2305a1adb24cf42b640a4a810eb5485e9f"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "a459f22f1a7a767e84dccef4ae6fedf39dfc0f78d2222ab2307c591cf5d19729"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "e5b684e934da8282f1fcd1be19938c5263f49ae1b08c32861596654fc8645698"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "7d11a9810b521b03caf0078f340e772ee4a305853b84ca26ce97b069c90fedf0"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "9970fa456104f05ffdd7b144fb7ba4193f5b09cc5f36ba87d4f1192c19e7ba5e"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "309dedf34e1581911c730d3ac93106a234ed589b77414e9787c472340177c8fe"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "2dd7055b07c46e5365c28ca1bc46e3836779c7e3fd84e9ca1db4e8a0f77db5bd"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "de1f6068dc90cd12b1a6a95af60a9055ad7f1445dfe7c4ec0fcd9f8aae10884e"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "724e91f4a09ae5e966e468f2c37b3f0a2e801c0cad2cf41ef8e711432f61ee54"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "a48e8df3e5d13c62f91d20e0e6b9bfac04eab0720bf0800f9731b089b4cb7073"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "3e65304311352a23d5c763b81a831f03f98fc24629e5543c37cdf2fe602d25eb"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "dfb6804d4851ce53485d6a14ed9a5e999ec864bfa1ce9ae0220dfe7865af7f1f"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "546887d80b115198cf7188f6039279ec487db6c457114bf584f7dbf7df2be1fd"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "55f381a5821298a4ae591262c3e0723a89d4d147c95725919d0b432ae9db581d"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "c7a97876f2223cb070bb3b4f6a3750cc09b6f2c188dda329aa8580f89d9c25fa"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "fdbfb893e60614d3d70e47ccd1f806199cc388476a186488ad7cb9e0b37c2a69"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "8e66a7c234a891ad790e35c68b8754be7b9f9b585944806afcd8230fc481a05c"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "8740d3cc34ba693b5bd56a7604eac9e1acc254d997a2f1110a94a4f4a28777c8"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "85fdcdea3a0435c870c141f32bd1aa1cc476506abdc207b6aab9be2da40a0baf"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "438cd19146216f85d7e791a1a73b1baac82037aaaa7c8aeab9ffa837d4b86080"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "35b57d0f4e6b48e3c1a7e6ef763b777a4d999d01243d6995c9f45802b77904e2"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wheel-visual.json",
+          "sha256": "c9652ae1d1adc49f722589fb0a95f9c8a4f9ad6075a30ffafd0856745cee7f6f"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "debcd8a4f11b1156bc1c699664bd5961ac366639d203cefd40d78581265af777"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "d577624a8e4b92ec0ecb81ec4a4a43db16f458774da24da5c64a161e5538ef3c"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/model.glb",
+          "sha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/recipe.json",
+          "sha256": "fd14e6d1e77c6c4dd27283ccc460d3a2779502a385f2ac4a8d459d34d8ae4938"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/inputs/report.json",
+          "sha256": "166fb008c3df4eaa208759f1b84e3b5f887b6bc42fd38b55e3ff54d942254931"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/tow-truck-v1/visual-inspection.json",
+          "sha256": "7af39115d81db192444e69891798229f5a0d1908ffc264dba284887b43602b9a"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-roadster-v1",
+      "name": "Seated Explorer \u00b7 roadster contact pilot",
+      "title": "Seated Explorer \u00b7 roadster contact pilot \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "PREREQUISITE PROTOTYPE: unchanged frozen roadster and new static seated Explorer composed in one actual GLB/depth target. Original vehicle graph/mesh/paint buffers preserved; one new opaque256 rider atlas beside the original512 car atlas. Human review open; no normal activation.",
+      "audit": {
+        "triangles": 4956,
+        "vertices": 10341,
+        "meshes": 6,
+        "primitives": 6,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 370936,
+        "sha256": "c9a2792f9c8c61067ac2ede712c507a1ab9faa3ec3706bf8140cb2a5ae1fc00a",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-roadster/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-roadster-v1/inputs/atlas.png",
+          "sha256": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-roadster/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-roadster-v1/inputs/companion-atlas.png",
+          "sha256": "25475a94f315ee5af51ea830786bbe30435f01d4ddd00f32a0a7ce2719345007"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-roadster/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-roadster-v1/inputs/composition.json",
+          "sha256": "352d449f9136e98716cfb07885a53920cfad7180d43f9f05a129997ed6ff07c6"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-roadster/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-roadster-v1/inputs/model.glb",
+          "sha256": "c9a2792f9c8c61067ac2ede712c507a1ab9faa3ec3706bf8140cb2a5ae1fc00a"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-roadster/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-roadster-v1/inputs/recipe.json",
+          "sha256": "ad49368da47758d29b8bdd47bd7a947fd9986c09c196a8d25a25355b973552f7"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-roadster/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-roadster-v1/inputs/report.json",
+          "sha256": "8a609a1cada5f8b4c98ba4c0742b13ff66b9b407ec5db5064864faf9d8949742"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "glbSha256": "c9a2792f9c8c61067ac2ede712c507a1ab9faa3ec3706bf8140cb2a5ae1fc00a",
+  "browser": "bundled full Chromium",
+  "version": "153.0.8010.12",
+  "fullChromiumRequested": true,
+  "desktop": [
+    1200,
+    1050
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "controls": [
+    "heading",
+    "study/game",
+    "wireframe",
+    "rotate+roll",
+    "native/2x/3x"
+  ],
+  "nativeCardActualPixels": 224,
+  "mobileNoPageOverflowAllScales": true,
+  "offline": {
+    "exactGlbSha256": "c9a2792f9c8c61067ac2ede712c507a1ab9faa3ec3706bf8140cb2a5ae1fc00a",
+    "networkRequests": []
+  },
+  "errors": []
+}

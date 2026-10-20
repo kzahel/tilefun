@@ -1,0 +1,174 @@
+{
+  "status": "passed-confirmed-final-base-comparison",
+  "baseModelSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "variantModelSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+  "baseFinalConfirmed": true,
+  "geometryReexported": true,
+  "binaryBasePreservationClaimed": false,
+  "sameScaleWheelbaseRadii": true,
+  "exactlyUnchangedSemanticComponentGeometryTopologyUV": [
+    "Rounded teal tank actual cream side UV panels",
+    "Actual narrow saddle nose",
+    "Exposed dark gray crankcase rounded block",
+    "Exposed single cylinder broad block",
+    "Broad engine cooling fin 0.7",
+    "Broad engine cooling fin 0.75",
+    "Broad engine cooling fin 0.8",
+    "Broad engine cooling fin 0.85",
+    "Exposed round crankcase face -1",
+    "Gray outboard exhaust silencer -1",
+    "Rear swingarm -1",
+    "Rear static spring shock broad tube -1",
+    "Twin front fork stanchion -1",
+    "Fixed axle attachment stop short of hub -1.12 -1",
+    "Fixed axle attachment stop short of hub 1.12 -1",
+    "Exposed round crankcase face 1",
+    "Gray outboard exhaust silencer 1",
+    "Rear swingarm 1",
+    "Rear static spring shock broad tube 1",
+    "Twin front fork stanchion 1",
+    "Fixed axle attachment stop short of hub -1.12 1",
+    "Fixed axle attachment stop short of hub 1.12 1",
+    "Narrow tubular frame member 0",
+    "Narrow tubular frame member 1",
+    "Narrow tubular frame member 2",
+    "Narrow tubular frame member 3",
+    "Narrow tubular frame member 4",
+    "Narrow tubular frame member 5",
+    "Actual curved cream teal road fender F",
+    "Actual curved cream teal road fender R",
+    "Front round headlamp dark housing",
+    "Broad cream front headlamp face",
+    "Simple rear ruby lamp",
+    "True motorcycle rounded tire F",
+    "Classic broad wheel rim F -1",
+    "Chrome wheel hub F -1",
+    "Asymmetric wheel phase index F -1",
+    "Classic broad wheel rim F 1",
+    "Chrome wheel hub F 1",
+    "Asymmetric wheel phase index F 1",
+    "True motorcycle rounded tire R",
+    "Classic broad wheel rim R -1",
+    "Chrome wheel hub R -1",
+    "Asymmetric wheel phase index R -1",
+    "Classic broad wheel rim R 1",
+    "Chrome wheel hub R 1",
+    "Asymmetric wheel phase index R 1"
+  ],
+  "changedSemanticComponents": [
+    "Actual dark saddle central hip tangent",
+    "Actual rounded pillion rear saddle",
+    "Headstock to actual grip riser",
+    "Actual connected handlebar centerline",
+    "Actual palm wrapped grip left",
+    "Actual sole tangent foot peg left",
+    "Actual palm wrapped grip right",
+    "Actual sole tangent foot peg right"
+  ],
+  "unchangedComponents": 47,
+  "totalComponents": 55,
+  "atlasBytesExactToObservedBase": true,
+  "modifiedComponentBoundsSource": {
+    "Actual dark saddle central hip tangent": {
+      "min": [
+        -0.1,
+        -0.08,
+        0.9345
+      ],
+      "max": [
+        0.58,
+        0.08,
+        1.0204999
+      ]
+    },
+    "Actual rounded pillion rear saddle": {
+      "min": [
+        0.28,
+        -0.19,
+        0.9304999
+      ],
+      "max": [
+        0.6,
+        0.19,
+        1.0204999
+      ]
+    },
+    "Headstock to actual grip riser": {
+      "min": [
+        -0.7126724,
+        -0.025,
+        1.0784498
+      ],
+      "max": [
+        -0.2273276,
+        0.025,
+        1.3920501
+      ]
+    },
+    "Actual connected handlebar centerline": {
+      "min": [
+        -0.261,
+        -0.225,
+        1.3494999
+      ],
+      "max": [
+        -0.219,
+        0.225,
+        1.3915
+      ]
+    },
+    "Actual palm wrapped grip left": {
+      "min": [
+        -0.266,
+        -0.455,
+        1.3444999
+      ],
+      "max": [
+        -0.214,
+        -0.225,
+        1.3965
+      ]
+    },
+    "Actual sole tangent foot peg left": {
+      "min": [
+        0.035,
+        -0.41,
+        0.6105
+      ],
+      "max": [
+        0.085,
+        -0.1,
+        0.6604999
+      ]
+    },
+    "Actual palm wrapped grip right": {
+      "min": [
+        -0.266,
+        0.225,
+        1.3444999
+      ],
+      "max": [
+        -0.214,
+        0.455,
+        1.3965
+      ]
+    },
+    "Actual sole tangent foot peg right": {
+      "min": [
+        0.035,
+        0.1,
+        0.6105
+      ],
+      "max": [
+        0.085,
+        0.41,
+        0.6604999
+      ]
+    }
+  },
+  "limits": "Confirmed final immutable base; original never edited or reexported.",
+  "centralSaddleNominallyUnchangedButFloatContactRecomputed": {
+    "maximumCoordinateDeltaSource": 2.0000000011677344e-07,
+    "notClaimedBitExact": true
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "status": "passed",
+    "toolchain": "motorcycle-v1",
+    "wheelIds": [
+      "F",
+      "R",
+      "SC"
+    ],
+    "inputBytesUnchanged": true,
+    "id": "rider-explorer-sidecar-motorcycle--v1",
+    "glbSha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc",
+    "triangles": 5374,
+    "clearance": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "radius": 7.304348315896555,
+        "minimumGap": 0.7602131749964913,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "radius": 7.304348315896555,
+        "minimumGap": 0.8340051958843757,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_SC_Roll",
+        "radius": 6.26086950302124,
+        "minimumGap": 1.0236218606508238,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_SC_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

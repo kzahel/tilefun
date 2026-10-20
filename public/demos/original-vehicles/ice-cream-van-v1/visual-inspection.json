@@ -1,0 +1,15 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 actual native headings inspected: cream/aqua van, pink striped fixed side awning, actual dark side serving recess and opposite cone emblem, coherent cab glazing.",
+    "Signed phases and wireframes inspected directly; fixed body/awning stable, tires remain low beneath real fenders without crown artifacts.",
+    "Fresh retained-input exact replay, actual serving-depth rays/negative/reset, full-body rolling and coverage controls pass."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

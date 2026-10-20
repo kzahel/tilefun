@@ -1,0 +1,1405 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "mobile-crane",
+  "route": "mobile-crane",
+  "revision": "v1",
+  "toolchain": "multi-axle-v2",
+  "wheelIds": [
+    "FL",
+    "FR",
+    "ML",
+    "MR",
+    "RL",
+    "RR"
+  ],
+  "rigidVisualCombination": "One fixed body containing carrier/cabs/boom/hook/cable/outrigger caps; six independent road wheels. All work equipment rigid/stowed; no working crane gameplay or animation.",
+  "method": "Own low orange/yellow six-wheel mobile crane carrier, closed actual blue-glass driver cab, small offset glazed operator pod, three broad solid stepped telescopic sections in low rigid stow, actual fixed cable/J hook and four short retracted outrigger caps. No working equipment animation/gameplay or high-to-low transfer claim.",
+  "geometry": {
+    "triangles": 4030,
+    "vertices": 7814,
+    "meshes": 7,
+    "primitives": 7,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 279528,
+    "sha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.869565217391306,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.869565217391306,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "ML": {
+        "wheel_radius": 8.869565217391306,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "MR": {
+        "wheel_radius": 8.869565217391306,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.869565217391306,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.869565217391306,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.700000047683716,
+        -1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        -46.95652256841245,
+        8.869565051534902,
+        18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.700000047683716,
+        1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        -46.95652256841245,
+        8.869565051534902,
+        -18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "ML",
+      "centerBlender": [
+        0.0,
+        -1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        0.0,
+        8.869565051534902,
+        18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "MR",
+      "centerBlender": [
+        0.0,
+        1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        0.0,
+        8.869565051534902,
+        -18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        2.450000047683716,
+        -1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        42.60869648145594,
+        8.869565051534902,
+        18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        2.450000047683716,
+        1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        42.60869648145594,
+        8.869565051534902,
+        -18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/mobile-crane/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/mobile-crane/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/mobile-crane/v1/recipe.json",
+  "render": {
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      128,
+      156
+    ],
+    "engineGroundOrigin": [
+      128,
+      128
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "All crane equipment fixed/stowed: three boom sections, small offset glazed operator pod, real short cable/J hook and four short outrigger caps. No lift/telescope/cable/outrigger animation or gameplay.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 4030,
+  "vertexCount": 7814,
+  "meshCount": 7,
+  "primitiveCount": 7,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 279528,
+  "atlasBytes": 3061,
+  "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+  "atlasSha256": "616470c6b16478324b08413729190f8e9a3c243fb8871213b9a1fca2d238fcf5",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "mobile-crane--v1",
+    "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+    "triangles": 4030,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.869565963745117,
+        "minimumGap": 1.6015058049175366,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.869565963745117,
+        "minimumGap": 1.6015058049175366,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "radius": 8.869565963745117,
+        "minimumGap": 1.6015062893823693,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "radius": 8.869565963745117,
+        "minimumGap": 1.6015062893823693,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.869566569003961,
+        "minimumGap": 1.6015018260578469,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.869566569003961,
+        "minimumGap": 1.6015018260578469,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "collidingBodyRejected": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/mobile-crane/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+    "minBlenderWorld": [
+      -64.78260803222656,
+      -22.730438232421875,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      62.95652389526367,
+      22.730438232421875,
+      49.21738815307617
+    ],
+    "dimensionsBlenderWorld": [
+      127.73913192749023,
+      45.46087646484375,
+      49.217387199401855
+    ],
+    "dimensionsSourceUnits": [
+      7.345000085830687,
+      2.6140003967285153,
+      2.8299997639656063
+    ]
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+    "rayCount": 18,
+    "samples": [
+      {
+        "id": "driver-left-glass",
+        "hitSource": [
+          -2.5500001907348633,
+          -1.0707690715789795,
+          1.7500001192092896
+        ],
+        "triangle": 1290,
+        "interpolatedUV": [
+          0.5499997138977051,
+          0.8433610200881958
+        ],
+        "atlasPixel": [
+          281,
+          80
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "driver-right-glass",
+        "hitSource": [
+          -2.5500001907348633,
+          1.0707690715789795,
+          1.7500001192092896
+        ],
+        "triangle": 54,
+        "interpolatedUV": [
+          0.5499997735023499,
+          0.8433609008789062
+        ],
+        "atlasPixel": [
+          281,
+          80
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "driver-windshield",
+        "hitSource": [
+          -3.312502861022949,
+          0.0,
+          1.7500001192092896
+        ],
+        "triangle": 1245,
+        "interpolatedUV": [
+          0.5,
+          0.4958506226539612
+        ],
+        "atlasPixel": [
+          256,
+          258
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "operator-side-glass",
+        "hitSource": [
+          -0.5000000596046448,
+          -1.1700000762939453,
+          2.0999999046325684
+        ],
+        "triangle": 1669,
+        "interpolatedUV": [
+          0.7258064150810242,
+          0.2197265625
+        ],
+        "atlasPixel": [
+          371,
+          399
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "operator-front-glass",
+        "hitSource": [
+          -1.0499999523162842,
+          -0.7200000286102295,
+          2.0999999046325684
+        ],
+        "triangle": 1668,
+        "interpolatedUV": [
+          0.25217390060424805,
+          0.2197265774011612
+        ],
+        "atlasPixel": [
+          129,
+          399
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "driver-orange-roof",
+        "hitSource": [
+          -2.700000047683716,
+          -0.7000000476837158,
+          2.2702221870422363
+        ],
+        "triangle": 49,
+        "interpolatedUV": [
+          0.47499996423721313,
+          0.14120368659496307
+        ],
+        "atlasPixel": [
+          243,
+          439
+        ],
+        "rgb": [
+          255,
+          178,
+          66
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "carrier-orange-skin",
+        "hitSource": [
+          1.2000001668930054,
+          -1.2249999046325684,
+          1.2000001668930054
+        ],
+        "triangle": 130,
+        "interpolatedUV": [
+          0.6621623039245605,
+          0.3396739363670349
+        ],
+        "atlasPixel": [
+          339,
+          338
+        ],
+        "rgb": [
+          255,
+          178,
+          66
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "outer-stowed-boom",
+        "hitSource": [
+          2.000000238418579,
+          0.3500000238418579,
+          2.320000171661377
+        ],
+        "triangle": 295,
+        "interpolatedUV": [
+          0.5937500596046448,
+          0.015625
+        ],
+        "atlasPixel": [
+          304,
+          504
+        ],
+        "rgb": [
+          255,
+          222,
+          112
+        ],
+        "roles": [
+          "boomLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "middle-stowed-boom",
+        "hitSource": [
+          -1.4000000953674316,
+          0.3500000238418579,
+          2.5799999237060547
+        ],
+        "triangle": 1753,
+        "interpolatedUV": [
+          0.59375,
+          0.015625
+        ],
+        "atlasPixel": [
+          304,
+          504
+        ],
+        "rgb": [
+          255,
+          222,
+          112
+        ],
+        "roles": [
+          "boomLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "inner-stowed-boom",
+        "hitSource": [
+          -2.8000001907348633,
+          0.3500000238418579,
+          2.799999713897705
+        ],
+        "triangle": 1771,
+        "interpolatedUV": [
+          0.59375,
+          0.015625
+        ],
+        "atlasPixel": [
+          304,
+          504
+        ],
+        "rgb": [
+          255,
+          222,
+          112
+        ],
+        "roles": [
+          "boomLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "real-gray-J-hook",
+        "hitSource": [
+          -3.6800005435943604,
+          0.31322264671325684,
+          2.1800003051757812
+        ],
+        "triangle": 1822,
+        "interpolatedUV": [
+          0.9033139944076538,
+          0.046240560710430145
+        ],
+        "atlasPixel": [
+          462,
+          488
+        ],
+        "rgb": [
+          212,
+          212,
+          230
+        ],
+        "roles": [
+          "silver"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "real-fixed-cable",
+        "hitSource": [
+          -3.6130001544952393,
+          0.3320162296295166,
+          2.4600002765655518
+        ],
+        "triangle": 1812,
+        "interpolatedUV": [
+          0.4630895256996155,
+          0.012616817839443684
+        ],
+        "atlasPixel": [
+          237,
+          505
+        ],
+        "rgb": [
+          63,
+          69,
+          79
+        ],
+        "roles": [
+          "frame"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "silver-front-grille",
+        "hitSource": [
+          -3.5,
+          0.6200000643730164,
+          0.8100000619888306
+        ],
+        "triangle": 1464,
+        "interpolatedUV": [
+          0.3648148477077484,
+          0.7130445837974548
+        ],
+        "atlasPixel": [
+          186,
+          146
+        ],
+        "rgb": [
+          212,
+          212,
+          230
+        ],
+        "roles": [
+          "silver"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "gray-rear-bumper",
+        "hitSource": [
+          3.620000123977661,
+          0.0,
+          0.43000003695487976
+        ],
+        "triangle": 2481,
+        "interpolatedUV": [
+          0.34375,
+          0.015624997206032276
+        ],
+        "atlasPixel": [
+          176,
+          504
+        ],
+        "rgb": [
+          124,
+          135,
+          145
+        ],
+        "roles": [
+          "deckEdge"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "stowed-outrigger-(-1.55, -1)",
+        "hitSource": [
+          -1.5500000715255737,
+          -1.2899999618530273,
+          0.9399999976158142
+        ],
+        "triangle": 1872,
+        "interpolatedUV": [
+          0.4687499701976776,
+          0.01562499813735485
+        ],
+        "atlasPixel": [
+          239,
+          504
+        ],
+        "rgb": [
+          63,
+          69,
+          79
+        ],
+        "roles": [
+          "frame"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "stowed-outrigger-(-1.55, 1)",
+        "hitSource": [
+          -1.5500000715255737,
+          1.2899999618530273,
+          0.9399999976158142
+        ],
+        "triangle": 492,
+        "interpolatedUV": [
+          0.4687499701976776,
+          0.015624999068677425
+        ],
+        "atlasPixel": [
+          239,
+          504
+        ],
+        "rgb": [
+          63,
+          69,
+          79
+        ],
+        "roles": [
+          "frame"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "stowed-outrigger-(3.28, -1)",
+        "hitSource": [
+          3.2800002098083496,
+          -1.2899999618530273,
+          0.9399999976158142
+        ],
+        "triangle": 516,
+        "interpolatedUV": [
+          0.4687499403953552,
+          0.015624999068677425
+        ],
+        "atlasPixel": [
+          239,
+          504
+        ],
+        "rgb": [
+          63,
+          69,
+          79
+        ],
+        "roles": [
+          "frame"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "stowed-outrigger-(3.28, 1)",
+        "hitSource": [
+          3.2800002098083496,
+          1.2899999618530273,
+          0.9399999976158142
+        ],
+        "triangle": 1928,
+        "interpolatedUV": [
+          0.4687499403953552,
+          0.01562499813735485
+        ],
+        "atlasPixel": [
+          239,
+          504
+        ],
+        "rgb": [
+          63,
+          69,
+          79
+        ],
+        "roles": [
+          "frame"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/mobile-crane/surface-regions.json",
+    "meaning": "Actual closed cab/pod glass, three stowed section tops, carrier paint, real hook/cable and all4 short outrigger end-face UV owners",
+    "inputBytesUnchanged": true
+  },
+  "rigidStowedEquipmentEvidence": "art-source/vehicle-bake/mobile-crane/v1/evidence/rigid-stowed-equipment.json",
+  "nativeAndFallbackFit": {
+    "status": "passed",
+    "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "centered128GameCropProof": [
+      {
+        "yaw": 0,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 22.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 45,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 67.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 90,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 112.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 135,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 157.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 180,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 202.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 225,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 247.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 270,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 292.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 315,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 337.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      }
+    ],
+    "headings": [
+      {
+        "camera": "study",
+        "headingIndex": 0,
+        "alphaBounds": [
+          62,
+          116,
+          192,
+          172
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 1,
+        "alphaBounds": [
+          61,
+          107,
+          195,
+          186
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 2,
+        "alphaBounds": [
+          68,
+          97,
+          188,
+          198
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 3,
+        "alphaBounds": [
+          84,
+          92,
+          173,
+          203
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 4,
+        "alphaBounds": [
+          105,
+          93,
+          151,
+          201
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 5,
+        "alphaBounds": [
+          83,
+          92,
+          172,
+          203
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 6,
+        "alphaBounds": [
+          68,
+          97,
+          188,
+          198
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 7,
+        "alphaBounds": [
+          60,
+          109,
+          195,
+          186
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 8,
+        "alphaBounds": [
+          64,
+          111,
+          194,
+          172
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 9,
+        "alphaBounds": [
+          60,
+          103,
+          195,
+          186
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 10,
+        "alphaBounds": [
+          68,
+          90,
+          188,
+          198
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 11,
+        "alphaBounds": [
+          83,
+          79,
+          172,
+          204
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 12,
+        "alphaBounds": [
+          105,
+          75,
+          151,
+          201
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 13,
+        "alphaBounds": [
+          84,
+          76,
+          173,
+          204
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 14,
+        "alphaBounds": [
+          68,
+          84,
+          188,
+          198
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 15,
+        "alphaBounds": [
+          61,
+          98,
+          195,
+          186
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 0,
+        "alphaBounds": [
+          65,
+          69,
+          193,
+          149
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 1,
+        "alphaBounds": [
+          62,
+          59,
+          194,
+          166
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 2,
+        "alphaBounds": [
+          69,
+          46,
+          187,
+          181
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 3,
+        "alphaBounds": [
+          84,
+          40,
+          171,
+          187
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 4,
+        "alphaBounds": [
+          105,
+          41,
+          151,
+          185
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 5,
+        "alphaBounds": [
+          85,
+          43,
+          172,
+          187
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 6,
+        "alphaBounds": [
+          69,
+          50,
+          187,
+          181
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 7,
+        "alphaBounds": [
+          62,
+          64,
+          194,
+          166
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 8,
+        "alphaBounds": [
+          63,
+          64,
+          191,
+          149
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 9,
+        "alphaBounds": [
+          62,
+          54,
+          194,
+          165
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 10,
+        "alphaBounds": [
+          69,
+          36,
+          187,
+          181
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 11,
+        "alphaBounds": [
+          85,
+          22,
+          172,
+          188
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 12,
+        "alphaBounds": [
+          105,
+          17,
+          151,
+          185
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 13,
+        "alphaBounds": [
+          84,
+          18,
+          171,
+          188
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 14,
+        "alphaBounds": [
+          69,
+          28,
+          187,
+          181
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 15,
+        "alphaBounds": [
+          62,
+          46,
+          194,
+          165
+        ]
+      }
+    ],
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "sourceGameOrigin": [
+      128,
+      128
+    ],
+    "translation": [
+      -32,
+      16
+    ],
+    "cardinals": [
+      {
+        "headingIndex": 4,
+        "nativeBounds": [
+          105,
+          41,
+          151,
+          185
+        ],
+        "fallbackBounds": [
+          73,
+          57,
+          119,
+          201
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 12,
+        "nativeBounds": [
+          105,
+          17,
+          151,
+          185
+        ],
+        "fallbackBounds": [
+          73,
+          33,
+          119,
+          201
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 8,
+        "nativeBounds": [
+          63,
+          64,
+          191,
+          149
+        ],
+        "fallbackBounds": [
+          31,
+          80,
+          159,
+          165
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 0,
+        "nativeBounds": [
+          65,
+          69,
+          193,
+          149
+        ],
+        "fallbackBounds": [
+          33,
+          85,
+          161,
+          165
+        ],
+        "fitsWithoutPixelLoss": true
+      }
+    ],
+    "meaning": "Fixed native cameras and world density. Only transparent padding can be cropped/added. Cardinal occupied pixel order/RGBA values are compared exactly after integer translation; no resize or recenter."
+  },
+  "replayCommands": [
+    "python art-source/vehicle-bake/mobile-crane/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/mobile-crane/capture.mjs",
+    "python scripts/vehicle-bake/mobile-crane/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/mobile-crane/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance-v2.py -- art-source/vehicle-bake/mobile-crane/v1/evidence/clearance-input.json data/vehicle-bake/mobile-crane/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/mobile-crane/v1/model.glb --config art-source/vehicle-bake/mobile-crane/v1/coverage-region.json --output data/vehicle-bake/mobile-crane/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/mobile-crane/v1/prove-stow.py -- --input public/demos/vehicle-bake/mobile-crane/v1/model.glb --output data/vehicle-bake/mobile-crane/recheck-stow.json",
+    "python scripts/vehicle-bake/mobile-crane/measure-fit.py",
+    "python scripts/vehicle-bake/mobile-crane/pack-author.py",
+    "node scripts/vehicle-bake/family-capture-v2.mjs data/vehicle-bake/mobile-crane/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "The long low orange carrier, front blue-glass driver cab and smaller offset glazed operator pod read as a mobile crane with its equipment stowed. The three broad yellow boom sections create a restrained stepped longitudinal silhouette rather than a tall raised crane.",
+    "Actual fixed gray tip shoe, short dark cable and small gray J hook sit near the front stowed tip. Their physical surfaces and separate paint ownership are verified by actual triangle rays; their small profile naturally becomes thin or occluded in end-on headings.",
+    "Four short retracted yellow caps with dark outer end faces remain tucked into the carrier sides. No extended stabilizer arms or ground feet are presented; actual four-cap positions and fixed width are verified independently.",
+    "Driver and operator glass/frames belong to separate actual body-skin charts. The visible carrier-front skin owns the silver grille; there are no transparent glazing sheets, PBR materials, glass overlay intersections, text or logos.",
+    "All three near-side axles remain grounded with silver hubs beneath integrated orange arches. Far crowns remain under real hull/fender surfaces in both camera families; no floating cap-only cover or exposed crown spill was observed.",
+    "All6 independent quarter/reverse/pivot/absolute-reset controls pass while cab, hull, pod, boom, hook, cable and four caps remain fixed. Signed phases and both actual wireframes were inspected. No working equipment motion node is present.",
+    "All32 native256/radius128 views have zero border pixels. Centered128 game crop parity is exact at all16 headings. All4 cardinals fit standard192x224 origin96,144 by integer translation(-32,+16), preserving every occupiedRGBA pixel.",
+    "Broad orange/yellow paint clusters remain readable at native density. Thin cab frames, stepped boom edges and small cable/hook retain ordinary native-pixel aliasing. Equipment stow proofs qualify this single fixed pose only; no lift/telescope/cable/outrigger animation or gameplay is claimed."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "actualPerWheelGeometryRadiusMatchesRigMetadata": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 18,
+    "actualThreeStowedSectionsPodHookCableAndFourCaps": true,
+    "raisedActualBoomAndExtendedCapRejectedThenExactReset": true,
+    "allSixWheelCylinderCollisionNegatives": true,
+    "fourWrongWheelInventoriesAndWrongClearanceDeclarationRejected": true,
+    "native256PaddingAndStandard192x224FallbackFitAtFixedDensity": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "All crane equipment is one fixed body in low stow. No lifting, telescoping, cable or outrigger animation/gameplay is implemented or qualified.",
+    "Nominal 7.4 x 2.6 x 2.85 source proportions; actual bounds include forward hook/cable, tip shoe, both cabs, six guards and four short cap projections.",
+    "Native256/radius128 expands transparent padding at unchanged world density/origin; standard192x224 cardinal fallback retains every occupied pixel exactly.",
+    "Thin diagonal glass frames and small fixed hook/cable retain ordinary native pixel aliasing and end-on occlusion.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/mobile-crane/v1/atlas.png": "616470c6b16478324b08413729190f8e9a3c243fb8871213b9a1fca2d238fcf5",
+    "art-source/vehicle-bake/mobile-crane/v1/audit-source.py": "54bb00d8ff5fa7807f8ba9d63ced2c21097cdcea8d86106d0048ac8f21ff7806",
+    "art-source/vehicle-bake/mobile-crane/v1/build.py": "da5208a918004da88702337fc01cdf7fb10c8e8f77cbfbd87fe8dc2b5f521966",
+    "art-source/vehicle-bake/mobile-crane/v1/capture.mjs": "c3b4781d23d918ca08dd59bd591f2d3606c540b7a855c172bc074cafa0faca03",
+    "art-source/vehicle-bake/mobile-crane/v1/car.blend": "232986a381850c32b4e169377f6c8615cf18b4de07076ac9881069776e029e31",
+    "art-source/vehicle-bake/mobile-crane/v1/construction-notes.md": "4b8f31504319aac78d9b6306c80ca5463f2b3bea35f4e8f74937ad31506d6c91",
+    "art-source/vehicle-bake/mobile-crane/v1/coverage-region.json": "ee28a05ff7c3c1a9c00b4a9eb93d488fbc2cbbae9f0d11717a8ca8babafc5b1e",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/author-browser-qa.json": "bf78be88da05cabdacd81130a424cd69737a4821968b47d27f2cf48ba06c979e",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/author-visual-inspection.json": "16416c01c3fbbd773155ae296f09d27d2fb88b47d6bb1c7afd9dbcd61e54c4cd",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/clearance-input.json": "76ba3085be2c6ade6c8d5a305e08689557204be7eaa677410a44e7ba6e9f5164",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/engine-capture.json": "4dfe77a2534c67f8c69cdcaae7bef180f5a80faadcedfbc3680724d3fbe04b37",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/fresh-isolated-replay.json": "cf8da34fc3fefb054582a80460388d7cbcd800e11f4ea47b4eab74b5ddaf6a56",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/native-and-fallback-fit.json": "7b3ed7efdb57fc614b876baf7046935a08fabf90ffac1dbc68d3f62ced6d7254",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/packed-source-audit.json": "8cf30b80ab065dca8fe0ec9710291ead29b24eae231d131a01221f2122d82f0c",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/replay-verification.json": "f149597192697445676f816090f04ee9bad5363f639522a5818ef1a90edf9f2b",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/rigid-stowed-equipment.json": "d3f37eadd8b17cc8a78f5dee50c0498f4f3b5b1586f80b2b80c98a3fdbc1afa1",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/shared-clearance.json": "d9dcc3f903ef0d95dbb1548beb713eb79232a1a01f0460f24de345ad2bb81e48",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/upper-wheel-coverage.json": "8f06e2eba4b3893e4530dca16282167cf3da436c8e7a4a9dbd4f4dc8de8e143c",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/wrong-wheel-clearance-input.json": "fe0bb6c6ec88c00d57c7876b054452d5abfccee8963b5e461b16bbc50feeac55",
+    "art-source/vehicle-bake/mobile-crane/v1/evidence/wrong-wheel-clearance-negative.json": "2b18d98a99e5af973f6f94b812a01b0effe771a3cd5416fe12dd5d131c1cc5a3",
+    "art-source/vehicle-bake/mobile-crane/v1/family.json": "cf1da0e1be1f03e54232a94e5299a720ffbf6162f08e257f6bc06e4950b32eb8",
+    "art-source/vehicle-bake/mobile-crane/v1/finalize.py": "8e47fc6a0978347ed5a0aea0ed1d9f8cafd86c073290269609df0b18a757f9aa",
+    "art-source/vehicle-bake/mobile-crane/v1/master.blend": "88bf0f03d8f7efdfca1d3cda3979bdaf0d3c6f304171d284dd94afeb26df8de4",
+    "art-source/vehicle-bake/mobile-crane/v1/measure-fit.py": "9804fc66635faf7cc2062febc2bbf17fb15c6cdf36f3dfa60422715d7cd9b444",
+    "art-source/vehicle-bake/mobile-crane/v1/model.glb": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+    "art-source/vehicle-bake/mobile-crane/v1/pack-author.py": "c8ba7fd230c7e1a089071e4b4406881831d4566dbdaf221a699d0607e3b41dbb",
+    "art-source/vehicle-bake/mobile-crane/v1/paint-ownership.json": "4bda806f8e094b6e4a2ee4944144596824397e7e2b5ca98eafcebeaa48c80bda",
+    "art-source/vehicle-bake/mobile-crane/v1/palette-draft.png": "0de1e715c9b33d2867064a3b971607d7827ee89eeee163a51e31b87f452d94be",
+    "art-source/vehicle-bake/mobile-crane/v1/prove-stow.py": "350662549e2b7666bade1e8efee432dd9a8dc3c271a6c58f7110e419aeee9bdb",
+    "art-source/vehicle-bake/mobile-crane/v1/recipe.json": "19686fb534cda62fcace9059446ac9ec2a112eda28e929f3ed8bbcae8a73ab96",
+    "art-source/vehicle-bake/mobile-crane/v1/replay.py": "a37ab028df37a737c6b40776f793ae8b2ab5b6c13a39078e03ba70450beaebd4",
+    "art-source/vehicle-bake/mobile-crane/v1/review.json": "e0c941ba2f2f212d619f950a7537b2b278fbb940754e46319e6e49a319bd5cdb",
+    "art-source/vehicle-bake/mobile-crane/v1/sheets.py": "00f8669d3cfbc2b7e38e0438d1757c1fcc6d06acc78cfae45e65f13efcaf1659",
+    "art-source/vehicle-bake/mobile-crane/v1/stow-region.json": "bf87981ba11abb929f0afa3c9dd7279948106638c4fb1b0ac5f7e4d065008e22",
+    "art-source/vehicle-bake/mobile-crane/v1/surface-regions.json": "f9ee9928b5257a23dc965697af61d144239fffffb2b7a3fc1477f428b1371188"
+  }
+}

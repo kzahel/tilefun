@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "dump-truck",
+  "name": "Construction dump truck",
+  "tags": ["vehicle", "original", "dump truck"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/dump-truck-v1/review-manifest.json",
+    "sha256": "adf05231947c1c5a83eec98c6858232febdcb97ae919ac79d6f306b10cb3cac7",
+    "candidateId": "dump-truck-v1",
+    "model": "public/demos/original-vehicles/dump-truck-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/dump-truck-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/dump-truck-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/dump-truck-v1/captures",
+    "modelSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "triangles": 3720,
+    "meshes": 7
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/dump-truck/v1/evidence/replay-verification.json",
+    "sha256": "cc528e98aba78e3317b2763e7e85b5bc5dfa296c93cce273a6b85667e98ac806",
+    "build": "art-source/vehicle-bake/dump-truck/v1/build.py",
+    "family": "art-source/vehicle-bake/dump-truck/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "dump-truck-authored-v1",
+    "path": "assets/models/vehicles/dump-truck-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/dump-truck-v1.png",
+  "performance": {
+    "speed": 64,
+    "acceleration": 85,
+    "pushSpeed": 60,
+    "pushWeight": 700
+  },
+  "receipt": "art-source/vehicle-bake/runtime-dump-truck-v1.json",
+  "expectedBounds": [112, 46, 49]
+}

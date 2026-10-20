@@ -1,0 +1,776 @@
+{
+  "family": "small-open-tubular-go-kart",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    3.0,
+    1.9,
+    1.0
+  ],
+  "axles": [
+    -0.86,
+    0.89
+  ],
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      43,
+      47,
+      62
+    ],
+    "tireLight": [
+      63,
+      68,
+      84
+    ],
+    "treadMark": [
+      88,
+      94,
+      111
+    ],
+    "paintDeep": [
+      135,
+      45,
+      55
+    ],
+    "paintShadow": [
+      170,
+      43,
+      56
+    ],
+    "paintMid": [
+      203,
+      49,
+      57
+    ],
+    "paint": [
+      228,
+      63,
+      64
+    ],
+    "paintLight": [
+      248,
+      100,
+      91
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "floor": [
+      69,
+      72,
+      89
+    ],
+    "inner": [
+      49,
+      53,
+      71
+    ],
+    "seat": [
+      50,
+      54,
+      72
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original small go-kart: very low dark tubular chassis, broad bumper hoops, rounded short red/white UV-painted nose, actual shallow seat well with dark fixed seat/steering, compact rear motor and chain block. All four small tires intentionally exposed, independently rigged with front.25/rear.27 source radii. No glass, driver, helmet, roof, logos or high-to-low claim.",
+  "wheelSpecs": {
+    "F": {
+      "radius": 0.25,
+      "width": 0.24,
+      "halfTrack": 0.765
+    },
+    "R": {
+      "radius": 0.27,
+      "width": 0.24,
+      "halfTrack": 0.765
+    }
+  },
+  "suspensionTipCenterGapSource": 0.025,
+  "coverageException": {
+    "authorization": "Explicit run153 user open-wheel exception applies to all4wheels",
+    "wheels": [
+      "FL",
+      "FR",
+      "RL",
+      "RR"
+    ],
+    "requirement": "Fender crown coverage N/A; exposed tires intentional",
+    "meaning": "No fake fender caps. Preserve raw unsupported crown samples and controls; never relabel exposure as covered."
+  },
+  "noseStations": [
+    [
+      -1.28,
+      0.23,
+      0.3
+    ],
+    [
+      -1.23,
+      0.34,
+      0.36
+    ],
+    [
+      -1.03,
+      0.39,
+      0.43
+    ],
+    [
+      -0.74,
+      0.38,
+      0.47
+    ],
+    [
+      -0.54,
+      0.28,
+      0.49
+    ],
+    [
+      -0.49,
+      0.2,
+      0.43
+    ]
+  ],
+  "components": [
+    {
+      "name": "Tubular dark chassis side -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed seat support -1",
+      "group": "body",
+      "triangles": 32,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Tubular dark chassis side 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed seat support 1",
+      "group": "body",
+      "triangles": 32,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Chassis cross tube -1.2",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Chassis cross tube -0.48",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Chassis cross tube 0.52",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Chassis cross tube 1.26",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Broad fixed front bumper hoop",
+      "group": "body",
+      "triangles": 156,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Compact fixed rear bumper hoop",
+      "group": "body",
+      "triangles": 68,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Own short rounded red white kart nose",
+      "group": "body",
+      "triangles": 128,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Actual recessed cockpit floor",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "floor"
+      ]
+    },
+    {
+      "name": "Seat well red outer wall -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Dark inner seat well wall -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "inner"
+      ]
+    },
+    {
+      "name": "Seat well top lip -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Seat well red outer wall 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Dark inner seat well wall 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "inner"
+      ]
+    },
+    {
+      "name": "Seat well top lip 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed seat rear well panel",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "inner"
+      ]
+    },
+    {
+      "name": "Fixed dark seat cushion",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seat"
+      ]
+    },
+    {
+      "name": "Seat cushion broad highlight",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Fixed dark seatback",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seat"
+      ]
+    },
+    {
+      "name": "Fixed seatback broad highlight",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Fixed steering column",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Fixed steering wheel rim",
+      "group": "body",
+      "triangles": 200,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed steering cross spoke",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Fixed gray pedal -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Fixed gray pedal 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Fixed rear motor block",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Fixed rear motor dark base",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Broad motor cooling rib 0.78",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Broad motor cooling rib 0.87",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Broad motor cooling rib 0.96",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Broad motor cooling rib 1.05",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Broad motor cooling rib 1.14",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Fixed rear chain guard",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed red motor tank",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Fixed motor end cap",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "ChassisArm_FL_-0.14",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "ChassisArm_FL_0.14",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "ChassisArm_FL_fixed_tip",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "ChassisArm_FR_-0.14",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "ChassisArm_FR_0.14",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "ChassisArm_FR_fixed_tip",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "ChassisArm_RL_-0.14",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "ChassisArm_RL_0.14",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "ChassisArm_RL_fixed_tip",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "ChassisArm_RR_-0.14",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "ChassisArm_RR_0.14",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "ChassisArm_RR_fixed_tip",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -0.8600000143051147,
+        -0.7649999856948853,
+        0.25
+      ],
+      "centerExport": [
+        -14.95652198791504,
+        4.347826086956522,
+        13.304347577302353
+      ],
+      "radiusBlender": 0.25,
+      "wheel_radius": 4.347826086956522
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -0.8600000143051147,
+        0.7649999856948853,
+        0.25
+      ],
+      "centerExport": [
+        -14.95652198791504,
+        4.347826086956522,
+        -13.304347577302353
+      ],
+      "radiusBlender": 0.25,
+      "wheel_radius": 4.347826086956522
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        0.8899999856948853,
+        -0.7649999856948853,
+        0.27000001072883606
+      ],
+      "centerExport": [
+        15.478260620780615,
+        4.695652360501497,
+        13.304347577302353
+      ],
+      "radiusBlender": 0.27,
+      "wheel_radius": 4.695652173913045
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        0.8899999856948853,
+        0.7649999856948853,
+        0.27000001072883606
+      ],
+      "centerExport": [
+        15.478260620780615,
+        4.695652360501497,
+        -13.304347577302353
+      ],
+      "radiusBlender": 0.27,
+      "wheel_radius": 4.695652173913045
+    }
+  ],
+  "method": "Original small go-kart: very low dark tubular chassis, broad bumper hoops, rounded short red/white UV-painted nose, actual shallow seat well with dark fixed seat/steering, compact rear motor and chain block. All four small tires intentionally exposed, independently rigged with front.25/rear.27 source radii. No glass, driver, helmet, roof, logos or high-to-low claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/go-kart/build.py",
+    "scripts/vehicle-bake/go-kart/family.json",
+    "scripts/vehicle-bake/go-kart/coverage-region.json",
+    "scripts/vehicle-bake/go-kart/cockpit-region.json",
+    "scripts/vehicle-bake/go-kart/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

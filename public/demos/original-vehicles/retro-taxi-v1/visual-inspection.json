@@ -1,0 +1,15 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: rounded yellow sedan with framed blue glass, broad coherent checkerbelt and real small fixed roof sign.",
+    "Signed phases/wires inspected; lower wheel motion and no upper-crown protrusion; sign/body remain static.",
+    "Fresh minimal-source replay exact; actualglass/checker/sign UV rays, full-body roll and crown controls pass."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

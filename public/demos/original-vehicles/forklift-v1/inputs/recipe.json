@@ -1,0 +1,757 @@
+{
+  "family": "mustard-open-guard-fixed-forklift",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [
+    3.7,
+    1.55,
+    2.15
+  ],
+  "axles": [
+    -0.78,
+    0.92
+  ],
+  "arch": {
+    "cutRadius": 0.31,
+    "pocketInnerY": 0.42,
+    "segments": 24
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      121,
+      89,
+      39
+    ],
+    "paintShadow": [
+      167,
+      119,
+      38
+    ],
+    "paintMid": [
+      197,
+      151,
+      44
+    ],
+    "paint": [
+      225,
+      183,
+      56
+    ],
+    "paintLight": [
+      249,
+      213,
+      99
+    ],
+    "cream": [
+      244,
+      227,
+      177
+    ],
+    "glassDark": [
+      68,
+      88,
+      112
+    ],
+    "glass": [
+      105,
+      153,
+      179
+    ],
+    "glassLight": [
+      157,
+      199,
+      218
+    ],
+    "glassGlint": [
+      195,
+      225,
+      233
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      204,
+      209,
+      218
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "seat": [
+      66,
+      70,
+      84
+    ],
+    "seatLight": [
+      88,
+      92,
+      104
+    ],
+    "mast": [
+      66,
+      73,
+      87
+    ],
+    "mastLight": [
+      103,
+      113,
+      125
+    ],
+    "fork": [
+      145,
+      152,
+      164
+    ],
+    "forkLight": [
+      188,
+      195,
+      204
+    ],
+    "floor": [
+      86,
+      90,
+      102
+    ],
+    "floorLight": [
+      109,
+      114,
+      124
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original mustard warehouse forklift with rounded counterweight, low dark seat over open footwell, four slim black overhead guard pillars and open roof frame, tall dark twin mast rails/crossbars and two low narrow forward fixed forks. Four ordinary road wheels only; front wheels intentionally open, rear crowns covered; mast/forks static with no lifting gameplay.",
+  "paintOwnership": "Own counterweight side/end/top charts and broad mustard palette facets, dark inset grille/seam UV strokes, footwell/seat separate padded roles, mast/guard/forks explicit gray swatch owners. No camera projection, fake negative-space decals, glass planes, silhouette ink or animated equipment.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -0.78,
+      "halfTrack": 0.62,
+      "radius": 0.32,
+      "width": 0.24,
+      "segments": 20
+    },
+    "FR": {
+      "axle": -0.78,
+      "halfTrack": 0.62,
+      "radius": 0.32,
+      "width": 0.24,
+      "segments": 20
+    },
+    "RL": {
+      "axle": 0.92,
+      "halfTrack": 0.57,
+      "radius": 0.25,
+      "width": 0.2,
+      "segments": 20
+    },
+    "RR": {
+      "axle": 0.92,
+      "halfTrack": 0.57,
+      "radius": 0.25,
+      "width": 0.2,
+      "segments": 20
+    }
+  },
+  "coveragePolicy": {
+    "front": "N/A intentionally exposed outboard of narrow chassis; retain honest raw samples, no fender caps.",
+    "rear": "Actual rounded mustard counterweight with separate local rear wheel pockets covers own finite crown region.",
+    "allWheels": "Four whole-fixed-body rolling envelopes and individual negative/reset controls remain mandatory."
+  },
+  "boundsPolicy": "Actual fork tips, mast/guard, rounded counterweight and unequal-radius wheels measured unchanged ground/root/80/4.6 source80reference. No rescale or recenter for frame fit.",
+  "forklift": {
+    "mastX": -1.01,
+    "mastTop": 2.15,
+    "railYs": [
+      -0.39,
+      0.39
+    ],
+    "forkYs": [
+      -0.32,
+      0.32
+    ],
+    "forkTipX": -2.3,
+    "forkBackX": -1.0,
+    "forkWidth": 0.12,
+    "forkBottomZ": 0.1,
+    "forkTopZ": 0.18,
+    "guardPillarXs": [
+      -0.5,
+      0.7
+    ],
+    "guardPillarYs": [
+      -0.59,
+      0.59
+    ],
+    "guardTop": 2.09,
+    "footwellFloorTop": 0.36,
+    "seatTop": 0.8,
+    "seatBackTop": 1.23,
+    "rearBodyMaxX": 1.4,
+    "mode": "STATIC FIXED MAST/FORKS ONLY",
+    "liftingClaims": false
+  },
+  "components": [
+    {
+      "name": "Mustard rounded rear counterweight actual wheelhouse skin",
+      "group": "body",
+      "triangles": 224,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Mustard narrow central chassis front wheels deliberately outboard",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Actual open footwell lower floor",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "floor"
+      ]
+    },
+    {
+      "name": "Mustard footwell low side sill -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Mustard footwell low side sill 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Low seat actual pedestal",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Low dark driver seat cushion actual volume",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seat"
+      ]
+    },
+    {
+      "name": "Dark seat back actual volume",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seatLight"
+      ]
+    },
+    {
+      "name": "STATIC guard lower crossfoot -0.5",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC vertical overhead guard pillar -0.5 -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC vertical overhead guard pillar -0.5 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC guard lower crossfoot 0.7",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC vertical overhead guard pillar 0.7 -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC vertical overhead guard pillar 0.7 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC overhead guard side roof frame -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC overhead guard side roof frame 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC overhead open roof crossbar -0.53",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC overhead open roof crossbar 0.73",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC overhead open roof crossbar -0.12",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC overhead open roof crossbar 0.32",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC tall twin mast rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC mast gray inner runner -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "mastLight"
+      ]
+    },
+    {
+      "name": "STATIC tall twin mast rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC mast gray inner runner 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "mastLight"
+      ]
+    },
+    {
+      "name": "STATIC mast crossbar 0.26",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC mast crossbar 0.75",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC mast crossbar 1.35",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC mast crossbar 2.07",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC low fork carriage",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "mastLight"
+      ]
+    },
+    {
+      "name": "STATIC fork vertical heel -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "fork"
+      ]
+    },
+    {
+      "name": "STATIC actual low narrow forward fork blade -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "fork",
+        "forkLight"
+      ]
+    },
+    {
+      "name": "STATIC fork vertical heel 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "fork"
+      ]
+    },
+    {
+      "name": "STATIC actual low narrow forward fork blade 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "fork",
+        "forkLight"
+      ]
+    },
+    {
+      "name": "STATIC own unequal axle arm -0.78",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC own unequal axle arm 0.92",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC steering column",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "STATIC open steering ring",
+      "group": "body",
+      "triangles": 96,
+      "paintRoles": [
+        "mast"
+      ]
+    },
+    {
+      "name": "Independent forklift road tire FL",
+      "group": "FL",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray forklift wheel rim FL",
+      "group": "FL",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray forklift hub FL",
+      "group": "FL",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Forklift asymmetric hub inset FL",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Independent forklift road tire FR",
+      "group": "FR",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray forklift wheel rim FR",
+      "group": "FR",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray forklift hub FR",
+      "group": "FR",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Forklift asymmetric hub inset FR",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Independent forklift road tire RL",
+      "group": "RL",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray forklift wheel rim RL",
+      "group": "RL",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray forklift hub RL",
+      "group": "RL",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Forklift asymmetric hub inset RL",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Independent forklift road tire RR",
+      "group": "RR",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray forklift wheel rim RR",
+      "group": "RR",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray forklift hub RR",
+      "group": "RR",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Forklift asymmetric hub inset RR",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -0.7799999713897705,
+        -0.6200000047683716,
+        0.3199999928474426
+      ],
+      "centerExport": [
+        -13.56521689373514,
+        5.565217266912047,
+        10.782608778580377
+      ],
+      "radiusBlender": 0.32,
+      "wheel_radius": 5.565217391304349
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -0.7799999713897705,
+        0.6200000047683716,
+        0.3199999928474426
+      ],
+      "centerExport": [
+        -13.56521689373514,
+        5.565217266912047,
+        -10.782608778580377
+      ],
+      "radiusBlender": 0.32,
+      "wheel_radius": 5.565217391304349
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        0.9200000166893005,
+        -0.5699999928474426,
+        0.25
+      ],
+      "centerExport": [
+        16.000000290248707,
+        4.347826086956522,
+        9.913043353868568
+      ],
+      "radiusBlender": 0.25,
+      "wheel_radius": 4.347826086956522
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        0.9200000166893005,
+        0.5699999928474426,
+        0.25
+      ],
+      "centerExport": [
+        16.000000290248707,
+        4.347826086956522,
+        -9.913043353868568
+      ],
+      "radiusBlender": 0.25,
+      "wheel_radius": 4.347826086956522
+    }
+  ],
+  "method": "Original mustard warehouse forklift with rounded counterweight, low dark seat over open footwell, four slim black overhead guard pillars and open roof frame, tall dark twin mast rails/crossbars and two low narrow forward fixed forks. Four ordinary road wheels only; front wheels intentionally open, rear crowns covered; mast/forks static with no lifting gameplay.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/forklift/build.py",
+    "scripts/vehicle-bake/forklift/geometry.py",
+    "scripts/vehicle-bake/forklift/family.json",
+    "scripts/vehicle-bake/forklift/coverage-region.json",
+    "scripts/vehicle-bake/forklift/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

@@ -1,0 +1,1695 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "monster-truck-v1",
+      "name": "Monster truck",
+      "title": "Monster truck \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Independent raised narrow short-cab lime/purple monster pickup, real short recessed bed, massive block-tread black wheels/purple hubs and visible fixed dark chassis/suspension. Own continuous actual-skin glass/roof/hood charts and separate bed floor/interior/tailgate paint. Intentionally exposed tire crowns, no fake coverage caps.",
+      "audit": {
+        "triangles": 3534,
+        "vertices": 7772,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 273568,
+        "sha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 14.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 14.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 14.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 14.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/atlas.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/atlas.png",
+          "sha256": "5e0d2c01b4919e8888a766f09dd61ff1ad8cc42ec3872d7cf1c37d2d53be06bb"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/capture.json",
+          "sha256": "5b3f1348520438823a06bc14669888aae023263ee4446334c4c62ea927301e1a"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "f4d4b10023b96fead380794690fedddf3829502c36afc3fa8381b5ead14f6073"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "5fd296ea016a07aa1484c774fbeb33cdd49153bf3bda5fa0eeede0bb2db7d4d4"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "09a8f1f374313839dc711dfcab00c277bc32cc216cf767452456163faf5aa191"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "6afeb7cca7c3d8cff211347c4f9d32665997bb914419ff0be4fc632bfe1009ec"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "52fe4d38f7609498076261878584b5bc8c6af0a52ee95b7f1ca3b10b7c8a1cb4"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "4052cddd31101a68a1536be3f2f58fcf00a8e509b6953913bd21e54e300ab539"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "e31c46313de43d0dc91f76638fc8bd27ad7f81beaab593da43d5f7f08f242e7a"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-1x.png",
+          "sha256": "4a5c95de02df97919497e7eb39ab7decc047d9620ac6ae5ed06825f77e187731"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "1b06d769d43410ef5b1b435368c998a41b6c3c790f76bbb3b022ca8205e9cd62"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-2x.png",
+          "sha256": "60e29ec0265f93fb98e8d7289f56b0a9b88a4f238e6fc71879d424799de1694e"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "6912a79582879ba9530269cf5c7305d862b70863cd2b9370a9ae30ff43b2bc0e"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-3x.png",
+          "sha256": "caba215a9d2822522d08bda5e25986095e89447b8c361004adf81877a1bb2c2c"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "12fa152c363ed18d14741071bce85933c4527e5cdf55bf8fb612b4757d256613"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "fa3b69407653c182da76623253f7123bc45ec603bf5063f504bf24670515a98c"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "4218b5ff928711f9bfbd9005bc735d26b155a45b6a0fcd912962eb556c24b648"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "d7c956a069f3abe41161bf3e3c1254b4317763325ad6efc53d7cb275963b2721"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "416bb22052727fc51f4b7b055e9c2967db1478d50c99cfd12284e7fed4561965"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-engine-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "1b06d769d43410ef5b1b435368c998a41b6c3c790f76bbb3b022ca8205e9cd62"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-engine-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "d76dd4c0bc15bf19d3a6aba81fe64257b3a510694d56021d8d68589aa0ea2cd8"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-engine-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "a84f6a1593de6455d38103a3dc3e1284d4f54302e798c5e4293bac845405ee01"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-engine-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "c76780463e7fadced4ca13629c9d563f36230c9e366551f9d91570646bee50f3"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-engine-4.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "c90bf15b9202c6c3621c38413dfe7eff4d51e22dce8285d8a9b7bd165b06ebc4"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-engine-5.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "699ab8e406ecf877bd508114c29a2eb25de1dc85b93b191af6e3183c40d03d60"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-engine-6.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "e16b669b800dbb22ec71047b7ef5c9c59aef6651029d8943a60fe5bedf4cae45"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-engine-7.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "4a259be75e962aabfd39381cd243346a345c04da9f7d589f5a8f6f322349eac7"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-study-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "02bb19160b6fa23c7b5dd1c6ff2d8345bfb0aeb7d334ea0586015350798ce35f"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-study-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "8ef5c839ca16fe463856e1e856572e17341026f4ef5b105c319c1a37e215eb89"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-study-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "2ef32356c8d8a849359063acc1b415e07c1c49899a4ea3f7547bbb4f7af6c333"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-study-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "76531b93550a37bc42ae0a8fd18e4b38eaf59f6aa6bf7fa6e2fb10130bdd11f8"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-study-4.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "6a208c89d6408bfec6591d06349fcb08c02fd1b7bc8d002a9a8948f87fd98956"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-study-5.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "d9ecf0063bfbf9fb7aa3d7485a3a41ca289105ea3915c8de71c114aca3873eac"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-study-6.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "03b2d07fafb8618aa18c4899edb567a13c3a4402af0f9510451c76fcd8c4cbe5"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/equal-phase-study-7.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "5d9f5b958730363f32f10f67adde567597ede048c118743f685908e6774fb2fd"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "1b06d769d43410ef5b1b435368c998a41b6c3c790f76bbb3b022ca8205e9cd62"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "d76dd4c0bc15bf19d3a6aba81fe64257b3a510694d56021d8d68589aa0ea2cd8"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "a84f6a1593de6455d38103a3dc3e1284d4f54302e798c5e4293bac845405ee01"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "c76780463e7fadced4ca13629c9d563f36230c9e366551f9d91570646bee50f3"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "c90bf15b9202c6c3621c38413dfe7eff4d51e22dce8285d8a9b7bd165b06ebc4"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "699ab8e406ecf877bd508114c29a2eb25de1dc85b93b191af6e3183c40d03d60"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "e16b669b800dbb22ec71047b7ef5c9c59aef6651029d8943a60fe5bedf4cae45"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "4a259be75e962aabfd39381cd243346a345c04da9f7d589f5a8f6f322349eac7"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "c76efbfd2c28bbb9e9862edc7b60bcdb42b1445d68e19f06a8de21ef9280b2be"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "f5b5276af4f551a4da9e9e1698437e3458bec1fd16411fa5fdddc9bf84862727"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "1b6562e85be2b559b897890d3de11a521bb7099f5df606bbc671c1555f27826e"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "145f4eca9054d20f204f0be40e3c5d8a0fdd249c66ba7064ef35d5fe0a4bf09a"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "a0e7b04e7b764d62990677d1eb79339130986de8e0b306de3730fd5cd0670616"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "50ea932baea2d26656e6c52b39e66c7fa83f1699796d0267b5938969c591c6d1"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "5e063ebf23476af41a3f16bd96fcc5f72ee303320af4e78efcfbf74b4d1575b0"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "18afc0c901e04e62e6472092da5dca05e7808ca85992cfc5705572b496736d8f"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-visual.json",
+          "sha256": "80988d36ea91fc3db39a068211160a013696997a8b2748edd75f4a8414065f03"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "d564cbb88e748176e69cf76ac139300bf140dba2ccb4b7af4361b6c84ba3c0de"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-equal-phases.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-equal-phases.png",
+          "sha256": "396b44853e05fa1948193a6ba611a0fd15a1a0d005958fd41b1d9a7199f5bb1c"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-independent.png",
+          "sha256": "1331d8cfd81b828f1f0a8cfd004566c8a948dfc0eab4eb70b107f94368cbffbb"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "7e32c1c695da588970eba4463440b37e2b3a6fcb0c03df829d16340e465e1d74"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "11ef52344f32a721dda2ffabe9677e1238ff5a8cc61d37338da037349f91b533"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "ef27bd161c7324e6dc259e25c04d6a74ef5de890febfe0ee6e1d26d50a22512e"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "fc5bb520dc47477270d39c63fa137ee4a91fb639d4f87b43e2cb1ea110a74519"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "f0cf53e573e4a6dcf49d54ac09c1b9429ea5a00fa6e8995152df9d7595506333"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-wheel-id-engine.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "996792c74d28256eae356714a1169295b41f2a59ba0d091a33e524462490f234"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-wheel-id-study.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "78d9e437da5920fe5f48ee80bd579c670138d5bed8bba52ae494521555a633c6"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-wires.png",
+          "sha256": "8b7dc3bf90ac532919502b03db59688f54e594f70a0b1d8b34f54713da3c1419"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "02bb19160b6fa23c7b5dd1c6ff2d8345bfb0aeb7d334ea0586015350798ce35f"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "8ef5c839ca16fe463856e1e856572e17341026f4ef5b105c319c1a37e215eb89"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "2ef32356c8d8a849359063acc1b415e07c1c49899a4ea3f7547bbb4f7af6c333"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "76531b93550a37bc42ae0a8fd18e4b38eaf59f6aa6bf7fa6e2fb10130bdd11f8"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "6a208c89d6408bfec6591d06349fcb08c02fd1b7bc8d002a9a8948f87fd98956"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "d9ecf0063bfbf9fb7aa3d7485a3a41ca289105ea3915c8de71c114aca3873eac"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "03b2d07fafb8618aa18c4899edb567a13c3a4402af0f9510451c76fcd8c4cbe5"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "5d9f5b958730363f32f10f67adde567597ede048c118743f685908e6774fb2fd"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-0.png",
+          "sha256": "9466e969acadfa332715fff3a22a4f376bb2275fac4bd474071e6382ff1c614a"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-1.png",
+          "sha256": "3b1cf1e444c63b5a940e27468482a2dd52cbfae01ba23699431d9336133586cc"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-10.png",
+          "sha256": "871f626158288e90e31805edba428d68a9d2aba81399de37623bfad14226c6f2"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-11.png",
+          "sha256": "a319e82fe8c79702730ad104cb6a17fb28767d4ea47c955a840de3ec9bf99e91"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-12.png",
+          "sha256": "887c4143d8ee78dc6a55bcb61b658fc8ecb658173c03ea47ad3a840bbc90a772"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-13.png",
+          "sha256": "3f63095d087842aef330d606ccf48fd0ac52dbad1367ef6c615910d0b1027023"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-14.png",
+          "sha256": "c8213471062c29b44bd37bf03674c4fe1523831e625d3b1137801fb7bdabcb0a"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-15.png",
+          "sha256": "eea332f9cca720311819765343eb05017ba2a85e81a94cc183d43c2ced9226cb"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-1x.png",
+          "sha256": "f20ee3aa45ad9177b0e417408fd0439eee952cb863d33cc44e44ed4ffe9025fe"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-2.png",
+          "sha256": "02bb19160b6fa23c7b5dd1c6ff2d8345bfb0aeb7d334ea0586015350798ce35f"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-2x.png",
+          "sha256": "b41dfb636cf1c1fc806e5adafa6631da7c92a5288af3157a3a3c78d608ea577b"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-3.png",
+          "sha256": "88c8fd0b38574ede9c0502940c13d1ec5485d85d206b06ecd1c2c23b712da135"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-3x.png",
+          "sha256": "6570288739a2dfe1b5dfe381e090c775f78b8e74280226b3b29113b7647d5561"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-4.png",
+          "sha256": "13a9ace50d8d8d2f0e00993397ae88b32b68a1977cb7095f2abdc3d8ec3c36e2"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-5.png",
+          "sha256": "6891441081104f4d47040d796274a7ac31bfd8ab583a4c80d330d3467e844dca"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-6.png",
+          "sha256": "63d41affba7dff598cb0240316aaf8acc3f790228d7b7e2770c526d65cc8ccd8"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-7.png",
+          "sha256": "9af935f8794391d688b418af114c59afce65f08c3d07d03643a6809da360844b"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-8.png",
+          "sha256": "53b30cb9e1135d28810ac4ebb55317fccd8d2616bbe9a2cebd154f9b48d6d071"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-9.png",
+          "sha256": "158a2b2da5f432a248ec190192788be460b34e6e28c0903514035951a75e13f3"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "1cb7183b03e7015880162e92ef34ecf3323b98e72622e097d11ecb6a12596cc5"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "6823a93d5e822d4fe14bc9cc8f322d0131f02637dba426f3d39d6e0053f5cd02"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-10.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "f341cf1777ecd6fec070a1b128100063e338e930a3a7f29dbc1d522526651e26"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-11.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "875edb2d1392b8ff9c997ecf6b93e79e0ee35192a7c7b35f437e376597d3d75b"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-12.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "33ecc7a61e690146bed27d7a4cb0badddd57a8222549ea4cf093105c42006234"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-13.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "f0f5424de32fd0bc09082ecb9bf5b06ef9581153b85fe8a3daf3cd7ec5e96867"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-14.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "603eeaeea664e5723a92ef8f4e660d8e94ea382b58e2a0c7233b90f1f90480a9"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-15.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "c09556d388929ff041937d32bbe1838271154826f3a88c12ce4fb4f99b796b27"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "715b687f912ee481e938cddfecf3114aa50f3c9b432eed0e80db0570c875b64b"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "f4d9fafbced89b8b9e0983058ae0cb9ff7863e4718cbd94ce1d02376ce32f60b"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-4.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "d1a319b1db243faa16d3061b0af95754ee4ccd42cd456a8d5b44bce5a10c8713"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-5.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "d96306188521e9800207fe9f4d1ce17799738e33617e0fd0662756e4957cf3e4"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-6.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "9429c670a96aa5003767abd8fb8b675de8965d4a5e394dcd77561cad147d26a4"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-7.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "1962bebe2ae03208fdf3eda0faebd12c3fa654430a62d101cca92609898d0c11"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-8.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "975bb3d787a76f215cfb40859c3469ed38d019007934d24e4c775ac926bd6225"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-engine-9.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "7b575090f48021b14df9f1c0d01981528a8c06309999434061e7a51a1d330afc"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-0.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "bfd999523ce95fec0f1d9386db02340323ea03a39398863500679f892fb3ff09"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-1.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "95b4cc123d5ec96e278639007745d144ea7d24b971cead6677177d45746b9eea"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-10.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "c7191b2d9ac6f610139cb43d4e125d8644a53f4128092fabd69fe4d08b2e2720"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-11.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "64fc2c17f6db0fdc8d37ad2d0910490ce3e41b1134f35fbdd5a10c91374288ff"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-12.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "6d509a784f1df4a5271ee55596cbf1d48a97243dc7cd71c66775f4ed49ac92ef"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-13.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "0c43393dd81304fe0bece720a9b280c3a273bba619931e8ed747d53f83b4ae85"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-14.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "27421d1b842a4ee08f46f7a2addeca6c50cc167184c41fb8c1ae6532e4f0e6ce"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-15.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "256f7769e51797621bcf20ac79b97cbdce075c46ddf4a318977641396da9dc2d"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-2.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "c3f2f9b85b02dfee26bab47184c531df1d5d3d39e4e53d3473f9e461aee5420d"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-3.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "e97b3bed69e8fcd950a85584d77230ba148ac67f7ccfa394a69ee58f4f82729d"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-4.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "d9a9baad93d59099b30beca453a6d47a01c0fedaa3c4d083d2d497f72cbbc21d"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-5.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "d11d8c5bae95494e4d2c27eae4d4858629812192a7099f31019db3dbd26ad6ef"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-6.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "e5f0233f3a4b261ff2ea761f084587990a65ee96372db9e0628ad7f0bba2ca72"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-7.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "2eb7f5e367a086fa8829318ccca387aac56d412000f2d4824ff7717dfcfc3be5"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-8.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "3ef12ddfc902eb65c5246fc26da787c559ce6d46399ca5f7be11ff36483a7fdc"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-id-study-9.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "94b60d1594ce99513f2baaf0f1cdd8bac15c6c065520d6c4657f0a45570268b9"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wheel-visual.json",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-visual.json",
+          "sha256": "0d86adce8f9a35187e97991980409c462d52d0d50d9aa462da63ba81921f7255"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "3e641a0868e6dffc67ca1ada42583c1b9f9a92739e09648bbfb485504244c1cb"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "2268051270d793457e22d0b0cd6db19c70d4adefee6a880287ce71a940d0ef3a"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/model.glb",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/model.glb",
+          "sha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/recipe.json",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/recipe.json",
+          "sha256": "fcad0cb1f6a9340abc6e3f9aa8c41ef8caa995a71c5f4e70fc37f36c593e168d"
+        },
+        {
+          "source": "demos/vehicle-bake/monster-truck/v1/report.json",
+          "retained": "demos/original-vehicles/monster-truck-v1/inputs/report.json",
+          "sha256": "95093d7351674f4e870b4e1ccd96335763acf2ab84544b48bf69f5c00daedcdc"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/monster-truck-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "monster-truck--v1",
+          "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+          "triangles": 3534,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 14.782610406875104,
+              "minimumGap": 1.5357166701085845,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 14.782610406875104,
+              "minimumGap": 1.5357166701085845,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 14.78261006771037,
+              "minimumGap": 1.5357171310844695,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 14.78261006771037,
+              "minimumGap": 1.5357171310844695,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 14.782608695652176,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 14.782608695652176,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 14.782608695652176,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 14.782608695652176,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/browser-qa.json",
+          "sha256": "97cf690ea78862cbdc0a9af0cc4df2dd391915b648896fc0eb374ed4fdfb66d9"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/candidate.json",
+          "sha256": "43b1c25e2f7ae2676bad7b1d9274bd9564ec448168831b829be0a0b85b6c9de5"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/capture.json",
+          "sha256": "5b3f1348520438823a06bc14669888aae023263ee4446334c4c62ea927301e1a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/contact-sheet.png",
+          "sha256": "416205e8cffadf2cdf749bfa41d188e382b4a9f990563812cbcf4cf7f4c49552"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-0.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-1.png",
+          "sha256": "f4d4b10023b96fead380794690fedddf3829502c36afc3fa8381b5ead14f6073"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-10.png",
+          "sha256": "5fd296ea016a07aa1484c774fbeb33cdd49153bf3bda5fa0eeede0bb2db7d4d4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-11.png",
+          "sha256": "09a8f1f374313839dc711dfcab00c277bc32cc216cf767452456163faf5aa191"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-12.png",
+          "sha256": "6afeb7cca7c3d8cff211347c4f9d32665997bb914419ff0be4fc632bfe1009ec"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-13.png",
+          "sha256": "52fe4d38f7609498076261878584b5bc8c6af0a52ee95b7f1ca3b10b7c8a1cb4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-14.png",
+          "sha256": "4052cddd31101a68a1536be3f2f58fcf00a8e509b6953913bd21e54e300ab539"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-15.png",
+          "sha256": "e31c46313de43d0dc91f76638fc8bd27ad7f81beaab593da43d5f7f08f242e7a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-1x.png",
+          "sha256": "6602c862939ca5dece3fbced428738f5d1b9680fe8beefe0ff5de3ef1682d0ce"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-2.png",
+          "sha256": "1b06d769d43410ef5b1b435368c998a41b6c3c790f76bbb3b022ca8205e9cd62"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-2x.png",
+          "sha256": "76b1f4d28950af07236b814448b9205f04faeafece1582e073267e7d893b5170"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-3.png",
+          "sha256": "6912a79582879ba9530269cf5c7305d862b70863cd2b9370a9ae30ff43b2bc0e"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-3x.png",
+          "sha256": "2678a615735231606cdd49e7d5e88aba4119de3ddeaf17016f79c4220547f083"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-4.png",
+          "sha256": "12fa152c363ed18d14741071bce85933c4527e5cdf55bf8fb612b4757d256613"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-5.png",
+          "sha256": "fa3b69407653c182da76623253f7123bc45ec603bf5063f504bf24670515a98c"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-6.png",
+          "sha256": "4218b5ff928711f9bfbd9005bc735d26b155a45b6a0fcd912962eb556c24b648"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-7.png",
+          "sha256": "d7c956a069f3abe41161bf3e3c1254b4317763325ad6efc53d7cb275963b2721"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-8.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/engine-9.png",
+          "sha256": "416bb22052727fc51f4b7b055e9c2967db1478d50c99cfd12284e7fed4561965"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-roll-0.png",
+          "sha256": "1b06d769d43410ef5b1b435368c998a41b6c3c790f76bbb3b022ca8205e9cd62"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-roll-1.png",
+          "sha256": "d76dd4c0bc15bf19d3a6aba81fe64257b3a510694d56021d8d68589aa0ea2cd8"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-roll-2.png",
+          "sha256": "a84f6a1593de6455d38103a3dc3e1284d4f54302e798c5e4293bac845405ee01"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-roll-3.png",
+          "sha256": "c76780463e7fadced4ca13629c9d563f36230c9e366551f9d91570646bee50f3"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-roll-4.png",
+          "sha256": "c90bf15b9202c6c3621c38413dfe7eff4d51e22dce8285d8a9b7bd165b06ebc4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-roll-5.png",
+          "sha256": "699ab8e406ecf877bd508114c29a2eb25de1dc85b93b191af6e3183c40d03d60"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-roll-6.png",
+          "sha256": "e16b669b800dbb22ec71047b7ef5c9c59aef6651029d8943a60fe5bedf4cae45"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-roll-7.png",
+          "sha256": "4a259be75e962aabfd39381cd243346a345c04da9f7d589f5a8f6f322349eac7"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/game-turntable.gif",
+          "sha256": "bc92f8c58fcd53232acb45bb5996e6e81163b7ec2a45d091f6ef74a794dc4010"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/roll-0.png",
+          "sha256": "02bb19160b6fa23c7b5dd1c6ff2d8345bfb0aeb7d334ea0586015350798ce35f"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/roll-1.png",
+          "sha256": "8ef5c839ca16fe463856e1e856572e17341026f4ef5b105c319c1a37e215eb89"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/roll-2.png",
+          "sha256": "2ef32356c8d8a849359063acc1b415e07c1c49899a4ea3f7547bbb4f7af6c333"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/roll-3.png",
+          "sha256": "76531b93550a37bc42ae0a8fd18e4b38eaf59f6aa6bf7fa6e2fb10130bdd11f8"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/roll-4.png",
+          "sha256": "6a208c89d6408bfec6591d06349fcb08c02fd1b7bc8d002a9a8948f87fd98956"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/roll-5.png",
+          "sha256": "d9ecf0063bfbf9fb7aa3d7485a3a41ca289105ea3915c8de71c114aca3873eac"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/roll-6.png",
+          "sha256": "03b2d07fafb8618aa18c4899edb567a13c3a4402af0f9510451c76fcd8c4cbe5"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/roll-7.png",
+          "sha256": "5d9f5b958730363f32f10f67adde567597ede048c118743f685908e6774fb2fd"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-0.png",
+          "sha256": "9466e969acadfa332715fff3a22a4f376bb2275fac4bd474071e6382ff1c614a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-1.png",
+          "sha256": "3b1cf1e444c63b5a940e27468482a2dd52cbfae01ba23699431d9336133586cc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-10.png",
+          "sha256": "871f626158288e90e31805edba428d68a9d2aba81399de37623bfad14226c6f2"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-11.png",
+          "sha256": "a319e82fe8c79702730ad104cb6a17fb28767d4ea47c955a840de3ec9bf99e91"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-12.png",
+          "sha256": "887c4143d8ee78dc6a55bcb61b658fc8ecb658173c03ea47ad3a840bbc90a772"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-13.png",
+          "sha256": "3f63095d087842aef330d606ccf48fd0ac52dbad1367ef6c615910d0b1027023"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-14.png",
+          "sha256": "c8213471062c29b44bd37bf03674c4fe1523831e625d3b1137801fb7bdabcb0a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-15.png",
+          "sha256": "eea332f9cca720311819765343eb05017ba2a85e81a94cc183d43c2ced9226cb"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-1x.png",
+          "sha256": "02341f42c81ec43e96aad7ddeca8355a319d65b9ce81a3747d373ee12fb4194e"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-2.png",
+          "sha256": "02bb19160b6fa23c7b5dd1c6ff2d8345bfb0aeb7d334ea0586015350798ce35f"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-2x.png",
+          "sha256": "b29490e29aa73d3e9f02f81f6401a07800e2eb14d5ee739460411803c513a6c9"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-3.png",
+          "sha256": "88c8fd0b38574ede9c0502940c13d1ec5485d85d206b06ecd1c2c23b712da135"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-3x.png",
+          "sha256": "adf8a0393f79ccd28d4ee900ee6ebdf5d70cc945ecdd8639cdbcea1007db4c9d"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-4.png",
+          "sha256": "13a9ace50d8d8d2f0e00993397ae88b32b68a1977cb7095f2abdc3d8ec3c36e2"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-5.png",
+          "sha256": "6891441081104f4d47040d796274a7ac31bfd8ab583a4c80d330d3467e844dca"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-6.png",
+          "sha256": "63d41affba7dff598cb0240316aaf8acc3f790228d7b7e2770c526d65cc8ccd8"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-7.png",
+          "sha256": "9af935f8794391d688b418af114c59afce65f08c3d07d03643a6809da360844b"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-8.png",
+          "sha256": "53b30cb9e1135d28810ac4ebb55317fccd8d2616bbe9a2cebd154f9b48d6d071"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/study-9.png",
+          "sha256": "158a2b2da5f432a248ec190192788be460b34e6e28c0903514035951a75e13f3"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/turntable.gif",
+          "sha256": "0e314c1fcc9b4cf4023ec6b417b1a0e2d432e8bf6c2e0967de288f4516a19131"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/viewer-desktop.png",
+          "sha256": "1ea4af354bd9531d0515795ceb02121e83a8b093543efa21940a399a93b55e78"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/viewer-mobile.png",
+          "sha256": "c05a35a33f5766213f65112bb24b33735dedf9c5bf2d578b9b2960a862cbc62e"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/wheel-phases.png",
+          "sha256": "138e4046f5eed605c65376bdaedeb4df32ce4201a172856334fa451143a92f82"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/wire-engine.png",
+          "sha256": "3e641a0868e6dffc67ca1ada42583c1b9f9a92739e09648bbfb485504244c1cb"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/captures/wire-study.png",
+          "sha256": "2268051270d793457e22d0b0cd6db19c70d4adefee6a880287ce71a940d0ef3a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/clearance.json",
+          "sha256": "a77985ab6565707b3e1df5f5389c55cd10111c5f8f25b3b8b0dc5996564c1caa"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/independent-source-replay.json",
+          "sha256": "245d2315a3b83a27937462863169134276176df44bdc48f2341d772b684c4891"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/atlas.png",
+          "sha256": "5e0d2c01b4919e8888a766f09dd61ff1ad8cc42ec3872d7cf1c37d2d53be06bb"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/capture.json",
+          "sha256": "5b3f1348520438823a06bc14669888aae023263ee4446334c4c62ea927301e1a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "f4d4b10023b96fead380794690fedddf3829502c36afc3fa8381b5ead14f6073"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "5fd296ea016a07aa1484c774fbeb33cdd49153bf3bda5fa0eeede0bb2db7d4d4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "09a8f1f374313839dc711dfcab00c277bc32cc216cf767452456163faf5aa191"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "6afeb7cca7c3d8cff211347c4f9d32665997bb914419ff0be4fc632bfe1009ec"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "52fe4d38f7609498076261878584b5bc8c6af0a52ee95b7f1ca3b10b7c8a1cb4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "4052cddd31101a68a1536be3f2f58fcf00a8e509b6953913bd21e54e300ab539"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "e31c46313de43d0dc91f76638fc8bd27ad7f81beaab593da43d5f7f08f242e7a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-1x.png",
+          "sha256": "4a5c95de02df97919497e7eb39ab7decc047d9620ac6ae5ed06825f77e187731"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "1b06d769d43410ef5b1b435368c998a41b6c3c790f76bbb3b022ca8205e9cd62"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-2x.png",
+          "sha256": "60e29ec0265f93fb98e8d7289f56b0a9b88a4f238e6fc71879d424799de1694e"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "6912a79582879ba9530269cf5c7305d862b70863cd2b9370a9ae30ff43b2bc0e"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-3x.png",
+          "sha256": "caba215a9d2822522d08bda5e25986095e89447b8c361004adf81877a1bb2c2c"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "12fa152c363ed18d14741071bce85933c4527e5cdf55bf8fb612b4757d256613"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "fa3b69407653c182da76623253f7123bc45ec603bf5063f504bf24670515a98c"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "4218b5ff928711f9bfbd9005bc735d26b155a45b6a0fcd912962eb556c24b648"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "d7c956a069f3abe41161bf3e3c1254b4317763325ad6efc53d7cb275963b2721"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "416bb22052727fc51f4b7b055e9c2967db1478d50c99cfd12284e7fed4561965"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "1b06d769d43410ef5b1b435368c998a41b6c3c790f76bbb3b022ca8205e9cd62"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "d76dd4c0bc15bf19d3a6aba81fe64257b3a510694d56021d8d68589aa0ea2cd8"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "a84f6a1593de6455d38103a3dc3e1284d4f54302e798c5e4293bac845405ee01"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "c76780463e7fadced4ca13629c9d563f36230c9e366551f9d91570646bee50f3"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "c90bf15b9202c6c3621c38413dfe7eff4d51e22dce8285d8a9b7bd165b06ebc4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "699ab8e406ecf877bd508114c29a2eb25de1dc85b93b191af6e3183c40d03d60"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "e16b669b800dbb22ec71047b7ef5c9c59aef6651029d8943a60fe5bedf4cae45"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "4a259be75e962aabfd39381cd243346a345c04da9f7d589f5a8f6f322349eac7"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "02bb19160b6fa23c7b5dd1c6ff2d8345bfb0aeb7d334ea0586015350798ce35f"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "8ef5c839ca16fe463856e1e856572e17341026f4ef5b105c319c1a37e215eb89"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "2ef32356c8d8a849359063acc1b415e07c1c49899a4ea3f7547bbb4f7af6c333"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "76531b93550a37bc42ae0a8fd18e4b38eaf59f6aa6bf7fa6e2fb10130bdd11f8"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "6a208c89d6408bfec6591d06349fcb08c02fd1b7bc8d002a9a8948f87fd98956"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "d9ecf0063bfbf9fb7aa3d7485a3a41ca289105ea3915c8de71c114aca3873eac"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "03b2d07fafb8618aa18c4899edb567a13c3a4402af0f9510451c76fcd8c4cbe5"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "5d9f5b958730363f32f10f67adde567597ede048c118743f685908e6774fb2fd"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "1b06d769d43410ef5b1b435368c998a41b6c3c790f76bbb3b022ca8205e9cd62"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "d76dd4c0bc15bf19d3a6aba81fe64257b3a510694d56021d8d68589aa0ea2cd8"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "a84f6a1593de6455d38103a3dc3e1284d4f54302e798c5e4293bac845405ee01"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "c76780463e7fadced4ca13629c9d563f36230c9e366551f9d91570646bee50f3"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "c90bf15b9202c6c3621c38413dfe7eff4d51e22dce8285d8a9b7bd165b06ebc4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "699ab8e406ecf877bd508114c29a2eb25de1dc85b93b191af6e3183c40d03d60"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "e16b669b800dbb22ec71047b7ef5c9c59aef6651029d8943a60fe5bedf4cae45"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "4a259be75e962aabfd39381cd243346a345c04da9f7d589f5a8f6f322349eac7"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "c76efbfd2c28bbb9e9862edc7b60bcdb42b1445d68e19f06a8de21ef9280b2be"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "f5b5276af4f551a4da9e9e1698437e3458bec1fd16411fa5fdddc9bf84862727"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "1b6562e85be2b559b897890d3de11a521bb7099f5df606bbc671c1555f27826e"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "145f4eca9054d20f204f0be40e3c5d8a0fdd249c66ba7064ef35d5fe0a4bf09a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "a0e7b04e7b764d62990677d1eb79339130986de8e0b306de3730fd5cd0670616"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "50ea932baea2d26656e6c52b39e66c7fa83f1699796d0267b5938969c591c6d1"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "e13711916afbe5766edb5eef9eeabf168e85faa827a8eebc7e7e2399c4860acc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "5e063ebf23476af41a3f16bd96fcc5f72ee303320af4e78efcfbf74b4d1575b0"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "18afc0c901e04e62e6472092da5dca05e7808ca85992cfc5705572b496736d8f"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "72c5b855c231bce51cd57f61968c42ad2ec9cfd4ac35f83ba31262d3490cc9ef"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/independent-visual.json",
+          "sha256": "80988d36ea91fc3db39a068211160a013696997a8b2748edd75f4a8414065f03"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "d564cbb88e748176e69cf76ac139300bf140dba2ccb4b7af4361b6c84ba3c0de"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-equal-phases.png",
+          "sha256": "396b44853e05fa1948193a6ba611a0fd15a1a0d005958fd41b1d9a7199f5bb1c"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-independent.png",
+          "sha256": "1331d8cfd81b828f1f0a8cfd004566c8a948dfc0eab4eb70b107f94368cbffbb"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "7e32c1c695da588970eba4463440b37e2b3a6fcb0c03df829d16340e465e1d74"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "11ef52344f32a721dda2ffabe9677e1238ff5a8cc61d37338da037349f91b533"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "ef27bd161c7324e6dc259e25c04d6a74ef5de890febfe0ee6e1d26d50a22512e"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "fc5bb520dc47477270d39c63fa137ee4a91fb639d4f87b43e2cb1ea110a74519"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "f0cf53e573e4a6dcf49d54ac09c1b9429ea5a00fa6e8995152df9d7595506333"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "996792c74d28256eae356714a1169295b41f2a59ba0d091a33e524462490f234"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "78d9e437da5920fe5f48ee80bd579c670138d5bed8bba52ae494521555a633c6"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/inspection-wires.png",
+          "sha256": "8b7dc3bf90ac532919502b03db59688f54e594f70a0b1d8b34f54713da3c1419"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "02bb19160b6fa23c7b5dd1c6ff2d8345bfb0aeb7d334ea0586015350798ce35f"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "8ef5c839ca16fe463856e1e856572e17341026f4ef5b105c319c1a37e215eb89"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "2ef32356c8d8a849359063acc1b415e07c1c49899a4ea3f7547bbb4f7af6c333"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "76531b93550a37bc42ae0a8fd18e4b38eaf59f6aa6bf7fa6e2fb10130bdd11f8"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "6a208c89d6408bfec6591d06349fcb08c02fd1b7bc8d002a9a8948f87fd98956"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "d9ecf0063bfbf9fb7aa3d7485a3a41ca289105ea3915c8de71c114aca3873eac"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "03b2d07fafb8618aa18c4899edb567a13c3a4402af0f9510451c76fcd8c4cbe5"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "5d9f5b958730363f32f10f67adde567597ede048c118743f685908e6774fb2fd"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-0.png",
+          "sha256": "9466e969acadfa332715fff3a22a4f376bb2275fac4bd474071e6382ff1c614a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-1.png",
+          "sha256": "3b1cf1e444c63b5a940e27468482a2dd52cbfae01ba23699431d9336133586cc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-10.png",
+          "sha256": "871f626158288e90e31805edba428d68a9d2aba81399de37623bfad14226c6f2"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-11.png",
+          "sha256": "a319e82fe8c79702730ad104cb6a17fb28767d4ea47c955a840de3ec9bf99e91"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-12.png",
+          "sha256": "887c4143d8ee78dc6a55bcb61b658fc8ecb658173c03ea47ad3a840bbc90a772"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-13.png",
+          "sha256": "3f63095d087842aef330d606ccf48fd0ac52dbad1367ef6c615910d0b1027023"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-14.png",
+          "sha256": "c8213471062c29b44bd37bf03674c4fe1523831e625d3b1137801fb7bdabcb0a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-15.png",
+          "sha256": "eea332f9cca720311819765343eb05017ba2a85e81a94cc183d43c2ced9226cb"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-1x.png",
+          "sha256": "f20ee3aa45ad9177b0e417408fd0439eee952cb863d33cc44e44ed4ffe9025fe"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-2.png",
+          "sha256": "02bb19160b6fa23c7b5dd1c6ff2d8345bfb0aeb7d334ea0586015350798ce35f"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-2x.png",
+          "sha256": "b41dfb636cf1c1fc806e5adafa6631da7c92a5288af3157a3a3c78d608ea577b"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-3.png",
+          "sha256": "88c8fd0b38574ede9c0502940c13d1ec5485d85d206b06ecd1c2c23b712da135"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-3x.png",
+          "sha256": "6570288739a2dfe1b5dfe381e090c775f78b8e74280226b3b29113b7647d5561"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-4.png",
+          "sha256": "13a9ace50d8d8d2f0e00993397ae88b32b68a1977cb7095f2abdc3d8ec3c36e2"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-5.png",
+          "sha256": "6891441081104f4d47040d796274a7ac31bfd8ab583a4c80d330d3467e844dca"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-6.png",
+          "sha256": "63d41affba7dff598cb0240316aaf8acc3f790228d7b7e2770c526d65cc8ccd8"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-7.png",
+          "sha256": "9af935f8794391d688b418af114c59afce65f08c3d07d03643a6809da360844b"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-8.png",
+          "sha256": "53b30cb9e1135d28810ac4ebb55317fccd8d2616bbe9a2cebd154f9b48d6d071"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/study-9.png",
+          "sha256": "158a2b2da5f432a248ec190192788be460b34e6e28c0903514035951a75e13f3"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "1cb7183b03e7015880162e92ef34ecf3323b98e72622e097d11ecb6a12596cc5"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "6823a93d5e822d4fe14bc9cc8f322d0131f02637dba426f3d39d6e0053f5cd02"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "f341cf1777ecd6fec070a1b128100063e338e930a3a7f29dbc1d522526651e26"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "875edb2d1392b8ff9c997ecf6b93e79e0ee35192a7c7b35f437e376597d3d75b"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "33ecc7a61e690146bed27d7a4cb0badddd57a8222549ea4cf093105c42006234"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "f0f5424de32fd0bc09082ecb9bf5b06ef9581153b85fe8a3daf3cd7ec5e96867"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "603eeaeea664e5723a92ef8f4e660d8e94ea382b58e2a0c7233b90f1f90480a9"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "c09556d388929ff041937d32bbe1838271154826f3a88c12ce4fb4f99b796b27"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "715b687f912ee481e938cddfecf3114aa50f3c9b432eed0e80db0570c875b64b"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "f4d9fafbced89b8b9e0983058ae0cb9ff7863e4718cbd94ce1d02376ce32f60b"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "d1a319b1db243faa16d3061b0af95754ee4ccd42cd456a8d5b44bce5a10c8713"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "d96306188521e9800207fe9f4d1ce17799738e33617e0fd0662756e4957cf3e4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "9429c670a96aa5003767abd8fb8b675de8965d4a5e394dcd77561cad147d26a4"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "1962bebe2ae03208fdf3eda0faebd12c3fa654430a62d101cca92609898d0c11"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "975bb3d787a76f215cfb40859c3469ed38d019007934d24e4c775ac926bd6225"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "7b575090f48021b14df9f1c0d01981528a8c06309999434061e7a51a1d330afc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "bfd999523ce95fec0f1d9386db02340323ea03a39398863500679f892fb3ff09"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "95b4cc123d5ec96e278639007745d144ea7d24b971cead6677177d45746b9eea"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "c7191b2d9ac6f610139cb43d4e125d8644a53f4128092fabd69fe4d08b2e2720"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "64fc2c17f6db0fdc8d37ad2d0910490ce3e41b1134f35fbdd5a10c91374288ff"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "6d509a784f1df4a5271ee55596cbf1d48a97243dc7cd71c66775f4ed49ac92ef"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "0c43393dd81304fe0bece720a9b280c3a273bba619931e8ed747d53f83b4ae85"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "27421d1b842a4ee08f46f7a2addeca6c50cc167184c41fb8c1ae6532e4f0e6ce"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "256f7769e51797621bcf20ac79b97cbdce075c46ddf4a318977641396da9dc2d"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "c3f2f9b85b02dfee26bab47184c531df1d5d3d39e4e53d3473f9e461aee5420d"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "e97b3bed69e8fcd950a85584d77230ba148ac67f7ccfa394a69ee58f4f82729d"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "d9a9baad93d59099b30beca453a6d47a01c0fedaa3c4d083d2d497f72cbbc21d"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "d11d8c5bae95494e4d2c27eae4d4858629812192a7099f31019db3dbd26ad6ef"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "e5f0233f3a4b261ff2ea761f084587990a65ee96372db9e0628ad7f0bba2ca72"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "2eb7f5e367a086fa8829318ccca387aac56d412000f2d4824ff7717dfcfc3be5"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "3ef12ddfc902eb65c5246fc26da787c559ce6d46399ca5f7be11ff36483a7fdc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "94b60d1594ce99513f2baaf0f1cdd8bac15c6c065520d6c4657f0a45570268b9"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wheel-visual.json",
+          "sha256": "0d86adce8f9a35187e97991980409c462d52d0d50d9aa462da63ba81921f7255"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "3e641a0868e6dffc67ca1ada42583c1b9f9a92739e09648bbfb485504244c1cb"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "2268051270d793457e22d0b0cd6db19c70d4adefee6a880287ce71a940d0ef3a"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/model.glb",
+          "sha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/recipe.json",
+          "sha256": "fcad0cb1f6a9340abc6e3f9aa8c41ef8caa995a71c5f4e70fc37f36c593e168d"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/inputs/report.json",
+          "sha256": "95093d7351674f4e870b4e1ccd96335763acf2ab84544b48bf69f5c00daedcdc"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/monster-truck-v1/visual-inspection.json",
+          "sha256": "a7d3c4d1695114353b10af6d11cf42c28e279fa0202f977b444dbf983b472b76"
+        }
+      ]
+    }
+  ]
+}

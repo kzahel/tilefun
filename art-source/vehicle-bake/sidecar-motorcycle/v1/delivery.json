@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "sourcePilot": true,
+  "productionQualified": false,
+  "ready": true,
+  "sourceImmutable": true,
+  "glbSha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+  "atlasSha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+  "recipeSha256": "091f455c0a7fed73f8f3c94aec08e23affec0a2c488b361c07ff5e7000bc0296",
+  "report": "public/demos/vehicle-bake/sidecar-motorcycle/v1/report.json",
+  "normalActivation": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "proofCommands": [
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/sidecar-motorcycle/prove-fit.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/sidecar-motorcycle/audit-source.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/sidecar-motorcycle/v1/model.glb --config art-source/vehicle-bake/sidecar-motorcycle/v1/coverage-region.json --output data/vehicle-bake/sidecar-motorcycle/recheck-coverage.json",
+    "node scripts/vehicle-bake/sidecar-motorcycle/capture-raw.mjs",
+    "python scripts/vehicle-bake/sidecar-motorcycle/assess-pixels.py",
+    "python scripts/vehicle-bake/sidecar-motorcycle/fresh-replay.py --name parent-fresh-replay --blender BLENDER"
+  ],
+  "replayInputs": "Six declared files: own build/geometry/family/raw-audit, stable catalog-cycle and immutable upright profile; no master/scratch input",
+  "parentNext": "Independent review/replay and eventual actual shared cycle loader/browser qualification; no normal activation"
+}

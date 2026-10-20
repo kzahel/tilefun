@@ -7,6 +7,17 @@ import { PNG } from "pngjs";
 import { createServer } from "vite";
 
 const config = JSON.parse(await readFile(process.argv[2], "utf8"));
+const recipe = JSON.parse(await readFile(resolve(config.source, "recipe.json"), "utf8"));
+const composition = {
+  ...config.composition,
+  mountBlenderWorldPixels:
+    config.composition.mountBlenderWorldPixels ?? recipe.config.mountBlenderWorldPixels,
+};
+assert.ok(
+  Array.isArray(composition.mountBlenderWorldPixels) &&
+    composition.mountBlenderWorldPixels.length === 3 &&
+    composition.mountBlenderWorldPixels.every(Number.isFinite),
+);
 const qa = resolve(config.qa);
 const server = await createServer({
   configFile: false,
@@ -26,7 +37,7 @@ try {
   const origin = `http://127.0.0.1:${server.httpServer.address().port}`;
   await page.goto(`${origin}/tilefun/${config.output.replace(/^public\//, "")}/index.html`);
   await page.waitForFunction(() => window.familyReviewReady === true);
-  const geometry = await page.evaluate(async ({ component, prefix }) => {
+  const geometry = await page.evaluate(async ({ component, prefix, mountBlenderWorldPixels }) => {
     const { GLTFLoader } = await import(
       "/tilefun/node_modules/three/examples/jsm/loaders/GLTFLoader.js"
     );
@@ -39,7 +50,14 @@ try {
     if (!mount) throw Error("Missing component mount");
     standalone.scene.updateMatrixWorld(true);
     mount.updateWorldMatrix(true, true);
-    const inverseScene = mount.parent.matrixWorld.clone().invert();
+    const sourceScene = api.state.asset.object.children[0]?.children[0]?.children[0];
+    if (!sourceScene || !sourceScene.getObjectById(mount.id))
+      throw Error("Component outside the actual GLB source scene");
+    sourceScene.updateWorldMatrix(true, true);
+    const inverseScene = sourceScene.matrixWorld.clone().invert();
+    const socket = mount.position
+      .clone()
+      .set(mountBlenderWorldPixels[0], mountBlenderWorldPixels[2], -mountBlenderWorldPixels[1]);
     const expected = [],
       actual = [];
     standalone.scene.traverse((node) => {
@@ -81,7 +99,7 @@ try {
           .clone()
           .fromBufferAttribute(positions, vertex)
           .applyMatrix4(left.matrixWorld)
-          .applyMatrix4(mount.matrix);
+          .add(socket);
         const observed = mount.position
           .clone()
           .fromBufferAttribute(right.geometry.attributes.position, vertex)
@@ -102,7 +120,7 @@ try {
     });
     mount.visible = false;
     return { meshes: actual.length, vertices, unchangedAttributeChannels: channels };
-  }, config.composition);
+  }, composition);
   let compared = 0;
   for (const mode of ["study", "engine"])
     for (let index = 0; index < 16; index++) {
@@ -114,7 +132,10 @@ try {
         { mode, index },
       );
       const frozen = await readFile(
-        resolve(config.composition.baseCaptures, `${mode}-${index}.png`),
+        resolve(
+          config.composition.baseCaptures,
+          `${config.composition.baseCapturePrefix ?? ""}${mode}-${index}.png`,
+        ),
       );
       const decoded = PNG.sync.read(Buffer.from(png, "base64"));
       const expected = PNG.sync.read(frozen);

@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "runner": "blender",
+  "invokedBuilder": "scripts/vehicle-bake/classic-motorcycle-person7-fit/build.py",
+  "arguments": [
+    "--scratch"
+  ],
+  "args": [
+    "--scratch"
+  ],
+  "inputHashes": {
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/build.py": "03e9c26d7af1e0c239d4ddacdc9e20404e5d3559ef065891a9d0189c66eb2291",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/geometry.py": "81ef81929ec47af6c77f0ea9ed2f1e43d1bd61013b7aee5395c896e8eef43d60",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/family.json": "17b1dd59d83d77ece99e97f54e68675e70ae666c01855d4e70347a9f2ff1b06e",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/person7-upright/v1/person7-upright-v1.json": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3"
+  },
+  "scratchInputDependencies": [],
+  "glbSha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+  "atlasSha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+  "recipeSha256": "ad685b16018ae8fda16d1aead8dd0b2810a22cc5d4162113263d310f74d2f9e8",
+  "outputHashes": {
+    "model.glb": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+    "atlas.png": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+    "recipe.json": "ad685b16018ae8fda16d1aead8dd0b2810a22cc5d4162113263d310f74d2f9e8"
+  },
+  "freshSixInputProof": "evidence/source-only-replay.json",
+  "meaning": "Normalized portable constructor receipt; --scratch outputs only under fresh data. Four own construction files plus stable catalog-cycle and unchanged configured rider profile. No master, ignored or rider-model construction inputs."
+}

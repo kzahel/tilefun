@@ -1,0 +1,53 @@
+{
+  "sharedInputHashes": {
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "src/characters/approved-v1.json": "741c0587acde8aba2d93402fa8cdbfa1997e9b5078500015fee832cc1910a418",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235"
+  },
+  "identityInputHashes": {
+    "public/assets/sprites/person7.png": "939c90da29092dfa17246f45095fab50bd54a9e89b2d045f8a5abe05d10f0a1b"
+  },
+  "immutableGlobalProfile": {
+    "source": "art-source/vehicle-riders/profiles/upright-v1.json",
+    "ownCopy": "explorer-upright-v1.json",
+    "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "ownProposedProfile": {
+    "source": "art-source/vehicle-riders/person7-upright/v1/person7-upright-v1.json",
+    "ownCopy": "person7-upright-v1.json",
+    "sha256": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3"
+  },
+  "fixtureOutputSha256": "376b0a522391e07d56ad3c621b32c9e2afc5a8687544b748edc6e7d6f435b5b8",
+  "fixtureRecipeSha256": "850d110e83a88fb9f0bf5263c08ea8e3f22dc0d36a494108a2af3c50700e6a50",
+  "fixtureOutputsStayIgnored": true,
+  "CarMeshAssetUsed": false,
+  "actualBikePresent": false,
+  "helperCodeProvenanceOnly": {
+    "scripts/vehicle-riders/explorer-upright/build.py": "a6a6a0ca8525ed301a24440ba65b268c403d7fb847c2dfe9fdaf9a63b07a2d4d",
+    "scripts/vehicle-riders/explorer-upright/viewer.mjs": "a4362e042c3200efd7c2665ba6b157475b5e74348b9159276c28ad7b4cfc9bba",
+    "scripts/vehicle-riders/explorer-upright/capture.mjs": "6987d46dca5aa5569ae1556eb04df8270623ffaf0457a8ad1f9966a791103a89",
+    "scripts/vehicle-riders/explorer-upright/fixture.py": "b9100113d1c40b5cffa6e4ffe385313ba217f2046f6f09ec1d969ad0d54265bf"
+  },
+  "noPriorHelperRuntimeDependencyForRiderConstructor": true,
+  "readOnlyRulerControls": [
+    {
+      "id": "explorer-upright",
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "viewerFile": "explorer-upright-control.glb",
+      "screenHorizontalOffsetWorld": -52,
+      "role": "Read-only native-world ruler control, never rider constructor input"
+    },
+    {
+      "id": "bear-upright",
+      "path": "art-source/vehicle-riders/bear-upright/v1/rider.glb",
+      "sha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+      "viewerFile": "bear-upright-control.glb",
+      "screenHorizontalOffsetWorld": 52,
+      "role": "Read-only native-world ruler control, never rider constructor input"
+    }
+  ],
+  "rulerControlsAreNotRiderConstructionInputs": true
+}

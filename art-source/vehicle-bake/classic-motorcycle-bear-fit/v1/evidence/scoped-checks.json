@@ -1,0 +1,105 @@
+{
+  "status": "passed",
+  "scope": "own family sources only",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n15 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\build-unchanged-view.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\build-view.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\capture-raw.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\capture-unchanged-controls.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\node_modules\\.bin\\biome.cmd",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\build-unchanged-view.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\build-view.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\capture-raw.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\capture-unchanged-controls.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\coverage-region.json",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\family.json",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle-bear-fit\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": "Checked 7 files in 14ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/assess-pixels.py": "a2f9fa7865b6c488ae1ef0422013d3bdbe2f93fb0c01afac809c4d48095274f5",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/audit-source.py": "0e94d30ad208c499b4a42801acd6889afb422595bdfde5ae863d6d1be5cff354",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/baseline-fit.py": "8207bdd37d0209c3d26814df4334a959f5362e3e6c47168000f52bf2abb0cb31",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/build-unchanged-view.mjs": "5aed06c790e3ac54dbf8638d9c4cde9b7d45679710425e6148c57f9c65360791",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/build-view.mjs": "ae842e2fa1504850f66dc403cb4705b099964e361b7c4a163c0cd0c35bd53b80",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/build.py": "be8147fb8ed5eaa5960314d30ca024698520a409184d76252a105eca5d49729a",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/capture-raw.mjs": "cd64bbf8c2abb18a258cd324bb0ad0846c36a93ce3d3cd41325b252076c57c74",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/capture-unchanged-controls.mjs": "b9ad042effa975993ee632712515dd3b262c3235be88aefe1ec06718544528f4",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/checks.py": "fc37e327df63d1fd7b244a9d6166b31961a7cb4b232190bdaa3d766b1cacb909",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/compare-base.py": "c1af341ba755405450a887ca233ef55fe2d0fb46daff5da8e91c1f22ec1232e2",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/coverage-region.json": "b79646f0d3369b671b90803339b8ce5c042e7cf78a5fd2bc727bc65265587893",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/family.json": "b2174c2593ef3fbfdd31bcde700f9e02622cc452fcb8ce33529394374a658de8",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/finalize.py": "213456dc69b07a7bdb7feb9dd97de258c5aa59622cbe35dabfd37f87a07131e9",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/fresh-replay.py": "3e667c0e3fd32d16a115be113e5aeebe9985f632a932a109c5533a2d36f440f8",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/geometry.py": "432da3372e03bac9f9599dadce295e8fba7fdf48e02c2cb109b72dbee5450d61",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/normalize-replay.py": "e3ed63172933d1feaa1583c13858e3d45a537459a5705070298b1a8f964f7e8c",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/prove-contact-pairs.py": "df951dfb5590dfbab801da03f00eded0b6e5ed759e75ea3e1ae8c0d845039a9c",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/prove-fit.py": "d41f5e4a93d2e20093557fe0e09484efd64ee4a98f01a905d2ed2d1e3ce21b48",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/prove-immutable-bear-self.py": "f13452a20db4e9555c0e2bcae8649335e35b3b883c71f6e82ca3d33d649835fd",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/raw-diagnostic.html": "c6f285150103efea091393ea9de3fbd2a030e2cc032572cb43f18136cc8cf92b",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/raw-viewer.mjs": "5e7b11b3953199ea16070e068aa6d06088ec2637903e141717f4ec54e4079087",
+    "scripts/vehicle-bake/classic-motorcycle-bear-fit/sheets.py": "161f7284bbe5751afcbb2914bdf44ab7cbc44c864222b621754e0adf74f729f0"
+  },
+  "pythonSyntaxCompiledOnlyIntoOwnIgnoredScratch": true,
+  "globalChecksRun": false,
+  "gitUsed": false
+}

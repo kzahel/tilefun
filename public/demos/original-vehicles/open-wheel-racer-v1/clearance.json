@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "open-wheel-racer--v1",
+    "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+    "triangles": 2652,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.782609243763588,
+        "minimumGap": 4.347822885142662,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.782609243763588,
+        "minimumGap": 4.347822885142662,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 7.826087804788813,
+        "minimumGap": 6.829537445076875,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 7.826087804788813,
+        "minimumGap": 6.829537445076875,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

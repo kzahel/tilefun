@@ -1,0 +1,165 @@
+{
+  "id": "person7-upright-v1",
+  "status": "prototype-not-production",
+  "humanApproval": false,
+  "worldScale": 17.39130434782609,
+  "hipSocketSource": [
+    0,
+    0,
+    0
+  ],
+  "contactProfile": {
+    "source": "art-source/vehicle-riders/profiles/upright-v1.json",
+    "ownCopy": "explorer-upright-v1.json",
+    "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "explorerProfile": {
+    "source": "art-source/vehicle-riders/profiles/upright-v1.json",
+    "ownCopy": "explorer-upright-v1.json",
+    "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "identityInputs": {
+    "public/assets/sprites/person7.png": "939c90da29092dfa17246f45095fab50bd54a9e89b2d045f8a5abe05d10f0a1b"
+  },
+  "anatomy": {
+    "pelvisDimensions": [
+      0.25,
+      0.4,
+      0.12
+    ],
+    "torsoCenter": [
+      0,
+      0,
+      0.13
+    ],
+    "torsoDimensions": [
+      0.27,
+      0.48,
+      0.25
+    ],
+    "shoulderSource": [
+      -0.01,
+      0.22,
+      0.2
+    ],
+    "armLengthsSource": [
+      0.12,
+      0.12
+    ],
+    "wristInsetFromPalmSource": 0.055,
+    "hipJointSource": [
+      0,
+      0.17,
+      -0.05
+    ],
+    "legLengthsSource": [
+      0.13,
+      0.13
+    ],
+    "ankleFromSoleSource": [
+      0.03,
+      0,
+      0.055
+    ],
+    "palmRadii": [
+      0.058,
+      0.043,
+      0.052
+    ],
+    "bootDimensions": [
+      0.18,
+      0.15,
+      0.09
+    ],
+    "headCenter": [
+      -0.015,
+      0,
+      0.372
+    ],
+    "headDimensions": [
+      0.4,
+      0.67,
+      0.28
+    ],
+    "capCrownRings": [
+      [
+        0.62,
+        0.27,
+        0.36
+      ],
+      [
+        0.66,
+        0.3,
+        0.39
+      ],
+      [
+        0.79,
+        0.3,
+        0.39
+      ],
+      [
+        0.88,
+        0.24,
+        0.33
+      ],
+      [
+        0.94,
+        0.14,
+        0.22
+      ],
+      [
+        0.965,
+        0.07,
+        0.13
+      ]
+    ],
+    "capBandRings": [
+      [
+        0.49,
+        0.28,
+        0.37
+      ],
+      [
+        0.55,
+        0.31,
+        0.405
+      ],
+      [
+        0.62,
+        0.29,
+        0.38
+      ]
+    ],
+    "brimCenter": [
+      -0.185,
+      0,
+      0.495
+    ],
+    "brimRadii": [
+      0.23,
+      0.4,
+      0.035
+    ],
+    "lengthSemantics": "Fixed inferred joint-to-contact-center chain lengths; elbow-to-palm includes0.055source wrist/palm offset. They are not an observed biological skeleton."
+  },
+  "inference": {
+    "meaning": "Legacy sprite measures are observational, not a unique3D skeleton. Own large stacked cap, pale broad head and tiny jacket/legs are constructed at shared world ruler. No Explorer geometry or wardrobe recolor.",
+    "nativeScale": "Source visible front24px vs Explorer25 and Bear24 standing, but cap/head/torso/limb allocation differs sharply. Seated GLB dimensions derive part ratios and inferred depth, not normalized physicalHeight24 metadata.",
+    "uncertainty": "Depth, hidden joints and flexion inferred. Test original profile with fixed lengths before proposing any own profile. Other poses/leaning anatomy may change reach."
+  },
+  "render": {
+    "nativeSize": 224,
+    "radius": 112,
+    "worldDensity": "80/4.6 unchanged",
+    "origin": "Local pelvis center, not bike mount",
+    "studyDegrees": 50
+  },
+  "fixture": {
+    "gripRadiusWorld": 0.3,
+    "gripLengthWorld": 1.4
+  },
+  "limits": [
+    "One Person7 legacy human source prerequisite; no20-person rollout",
+    "Synthetic fixture only, no actual bike/normal/all-avatar/AI/fallback qualification"
+  ]
+}

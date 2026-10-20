@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "go-kart",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/go-kart/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/go-kart/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/go-kart/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

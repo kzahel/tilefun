@@ -1,0 +1,106 @@
+{
+  "modelSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+  "spriteSha256": "a846d2a256a7703aaf29ac5144deaf7c8170142c7e2e1c67678ae1a1be6e84ce",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-open-wheel-racer-v1.json": "81ec92193cdc098cc9c920e5523af118a5553b40f698a643856b15bedff6fcad",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/open-wheel-racer-v1/review-manifest.json": "6012888be229b17f404c6301a65bcd7adcdeac4fe8710b7b565621eab65b3f7f",
+    "public/demos/original-vehicles/open-wheel-racer-v1/inputs/model.glb": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+    "public/demos/original-vehicles/open-wheel-racer-v1/inputs/atlas.png": "da6c29549c53caca746352dcb1297c33ee50ef16f02e9b3dd92884b0f4f714f5",
+    "public/demos/original-vehicles/open-wheel-racer-v1/captures/capture.json": "f8f9d251139eb8641d24becd1916831ecfe57e3b860fbc67c677a236e416ddec",
+    "art-source/vehicle-bake/open-wheel-racer/v1/evidence/replay-verification.json": "0061d9bfcde87fa801030c53d9f016bc062c2f9ae0f27a5eae15c476adf1aa59",
+    "art-source/vehicle-bake/open-wheel-racer/v1/build.py": "d0ce4bafe9c013ebcce2c25761853c9b24c9334a5a587a5d7359775c1297c2f8",
+    "art-source/vehicle-bake/open-wheel-racer/v1/family.json": "2d0ad349d78eb492fc140390215d64b9012dff0ca688f20b80b8776de53a4eb5",
+    "art-source/vehicle-bake/open-wheel-racer/v1/coverage-region.json": "56acc49b2f9902d2717233547701b4942fe06256351e8d5548e56dbd135bcecf",
+    "art-source/vehicle-bake/open-wheel-racer/v1/cockpit-region.json": "fcbd5108f47a2ad3a580ab999368a805c45c0981f3231cadff60d6bf6e02d1e2",
+    "art-source/vehicle-bake/open-wheel-racer/v1/review.json": "05c2eace3f396b387930b949f6255bdfd4f29c4496835e829f2dbc8de9ba2420",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/open-wheel-racer-v1/captures/engine-4.png": "8dfeea222a56aff50a5b179d288f0a9057c0a8c9e2bc576d14f0d028f5d2b70d",
+    "public/demos/original-vehicles/open-wheel-racer-v1/captures/engine-12.png": "2410bd93c290eb37b84b63c29593ca4529ee080eb926274c7227962b563b748a",
+    "public/demos/original-vehicles/open-wheel-racer-v1/captures/engine-8.png": "0655cc61ee66255a6437b2f39a21aa917f1f519c2151ab15750e6f6975e7326d",
+    "public/demos/original-vehicles/open-wheel-racer-v1/captures/engine-0.png": "f63cb414b0bb1bc11ca39dc6d899ff6203877041724b20a98da7ce1b9aded7c8"
+  },
+  "physicalBounds": [
+    81,
+    43,
+    22
+  ],
+  "measurement": {
+    "modelSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -40.34782409667969,
+        -21.339128494262695,
+        4.76837158203125e-07
+      ],
+      "max": [
+        39.65217208862305,
+        21.339128494262695,
+        21.65217399597168
+      ],
+      "size": [
+        80.0,
+        42.67825698852539,
+        21.65217399597168
+      ]
+    },
+    "triangles": 2652,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/open-wheel-racer/v1/evidence/replay-verification.json",
+    "sha256": "0061d9bfcde87fa801030c53d9f016bc062c2f9ae0f27a5eae15c476adf1aa59",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-open-wheel-racer-v1.json --blender BLENDER"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: yellow cab, deep empty steel-blue bed, real interior/rims and six road wheels remain legible from both cameras.",
+    "Signed phases and wireframes preserve covered far crowns, fixed level bed and independent wheel motion. No dumping animation claim."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

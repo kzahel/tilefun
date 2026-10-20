@@ -1,0 +1,15 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: compact low red/white nose and bumper hoop, dark actual seatwell/back, static rear engine and four outboard tires.",
+    "Signed phases and wires inspected; exposed tires stay at chassis sides below seat, axle radii differ and roll by their own geometry, body fixed.",
+    "Actual seat-well depth controls, whole-body roll negative/reset and fresh retained-input replay pass; exposed crowns honestly N/A."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

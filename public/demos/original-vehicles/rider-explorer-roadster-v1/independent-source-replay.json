@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 12,
+  "glbSha256": "c9a2792f9c8c61067ac2ede712c507a1ab9faa3ec3706bf8140cb2a5ae1fc00a",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/rider-explorer-roadster/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/rider-explorer-roadster/replay/public/atlas.png",
+    "companion-atlas.png": "data/vehicle-bake/rider-explorer-roadster/replay/public/companion-atlas.png",
+    "recipe.json": "data/vehicle-bake/rider-explorer-roadster/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/rider-explorer-roadster-qa/retained-replay-3es47km9",
+  "scratchInputDependencies": []
+}

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "id": "offroad-jeep",
+  "independent": true,
+  "exactModelSpriteReceipt": {
+    "public/assets/models/vehicles/offroad-jeep-v1.glb": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "public/assets/vehicles/offroad-jeep-v1.png": "9fc715b676dc56d282de114a139c18157dab678527c5a2ebd05b066820cb80eb",
+    "art-source/vehicle-bake/runtime-offroad-jeep-v1.json": "9a3f48b34a9f901307df372a6e5cda1ac37a3f3db2cbcfba3a26acaaa722461f"
+  },
+  "selectedCatalogEntryExact": true,
+  "exporterSha256": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+  "scratchInputDependencies": [],
+  "declaredInputPins": 29,
+  "historicalInputs": [
+    {
+      "path": "src/rendering/CarMeshAsset.ts",
+      "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+      "resolution": "historical",
+      "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+      "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+    }
+  ],
+  "snapshotCatalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306",
+  "version": 1,
+  "evidenceOnly": true,
+  "constructionDependency": false,
+  "committedReceipt": {
+    "path": "art-source/vehicle-bake/runtime-offroad-jeep-v1.json",
+    "sha256": "9a3f48b34a9f901307df372a6e5cda1ac37a3f3db2cbcfba3a26acaaa722461f"
+  },
+  "config": "scripts/vehicle-bake/runtime-offroad-jeep-v1.json",
+  "freshDeclaredInputWorkspace": true,
+  "outputFilesGeneratedDuringReplay": true,
+  "immutableExporter": "scripts/vehicle-bake/runtime-export-v3.py",
+  "measurementHelper": {
+    "path": "scripts/vehicle-bake/runtime-measure.py",
+    "sha256": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579"
+  }
+}

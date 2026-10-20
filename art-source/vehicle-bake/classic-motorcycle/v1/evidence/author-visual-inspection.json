@@ -1,0 +1,38 @@
+{
+  "status": "agent-inspected-source-pilot",
+  "glbSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "actual32StudyGameHeadingsEach": [
+    "combined",
+    "bike-alone",
+    "rider-alone"
+  ],
+  "signedPhases": 16,
+  "wireframes": 6,
+  "independentTrueWheels": [
+    "F",
+    "R"
+  ],
+  "inspectionImages": {
+    "inspection-detail-combined-study.png": "e2f946f68c93b0c92ef6062770fa44d4b2eb9519a0cdadb2a67ec1c3e3d4deb2",
+    "inspection-detail-bike-alone-study.png": "598328b491e3b5b01cbc815b96dc629f613090aa2fc62410472115b0720e9979",
+    "inspection-detail-rider-alone-study.png": "da19808e4a0e17e69e46eecc8964667a91fccc8b765d8719470ee96bc2e6817a",
+    "inspection-detail-ownership-mask-study.png": "127727a7619f740fe61378973bd09cb070572a7218486a89e87b67d75e8cf641",
+    "inspection-detail-combined-engine.png": "47e425bdf13f510dcd554a40d62bc4ebe91c3c3461d449df42ef4aee00b46ade",
+    "inspection-detail-bike-alone-engine.png": "f1b8eb7082d9f3298b0ac14c7d7671e58347d5c04f9d0458b0a6a72ce3f39d90",
+    "inspection-detail-rider-alone-engine.png": "c25297b04dab6103f33761b79f08359be2bcbddad050ca563c413e5de50e3c2f",
+    "inspection-detail-ownership-mask-engine.png": "82212a427ea8c35d2e3261d71401462cc9926902f109c76b2c3ad90ca6c74006",
+    "inspection-phases.png": "649a4730b216ad77e376f0d9760a1ff4d4e796200a7df077327c80260a69b5e8",
+    "inspection-independent.png": "1630be73a015e0c6717c3ce6e5f9c3da0ab5599acc4348794d238fcd5357c7cd",
+    "inspection-wires.png": "5e790438fbf583e36d24a708ee2abcc92f954d20349c8678549853e93502ecee"
+  },
+  "findings": [
+    "Recognizable classic teal/cream motorcycle; rounded tank, dark saddle, engine, fork and both fenders read at native density",
+    "Immutable Explorer straddles narrow tank/frame; hands and soles align with measured physical supports",
+    "Fenders follow both tire crowns; side profiles preserve visible tires and frame negative spaces",
+    "Actual depth ownership changes coherently through headings; no screenshot overlays or four-wheel stubs",
+    "Forward/reverse/reset changes own wheel while fixed bike/rider and other wheel remain fixed",
+    "Desktop/mobile remain square and readable; offline source diagnostic matches all32 combined frames"
+  ],
+  "formalHumanApproval": false,
+  "actualSharedLoaderBrowserReview": "pending parent"
+}

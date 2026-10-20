@@ -74,12 +74,14 @@ def main():
     parser.add_argument("--blender", type=Path)
     parser.add_argument("--baseline", type=Path)
     parser.add_argument("--deadline", help="UTC ISO timestamp; refuse work at or after it")
+    parser.add_argument("--loader-qualified", action="store_true", help="Allow actual cycle capture after the shared-loader checks pass")
     args = parser.parse_args()
     os.chdir(ROOT)
     config = read(args.config)
     toolchain = config.get("toolchain", "four-wheel-v1")
-    assert toolchain in ["four-wheel-v1", "multi-axle-v2"], "Unknown review toolchain"
-    suffix = "-v2" if toolchain == "multi-axle-v2" else ""
+    suffixes = {"four-wheel-v1": "", "multi-axle-v2": "-v2", "motorcycle-v1": "-cycle"}
+    assert toolchain in suffixes, "Unknown review toolchain"
+    suffix = suffixes[toolchain]
     qa = ROOT / config["qa"]
     qa.mkdir(parents=True, exist_ok=True)
     deadline = utc(args.deadline) if args.deadline else None
@@ -132,6 +134,9 @@ def main():
     python = [sys.executable, "-X", "utf8"]
     package = python + [f"scripts/vehicle-bake/family-package{suffix}.py", args.config]
     capture = ["node", f"scripts/vehicle-bake/family-capture{suffix}.mjs", args.config]
+    if toolchain == "motorcycle-v1" and args.action == "capture":
+        assert args.loader_qualified, "Cycle capture requires independently qualified actual shared loader"
+        capture += ["--loader-qualified"]
     frozen = ROOT / config["output"] / "review-manifest.json"
     if args.action == "capture":
         assert not frozen.exists(), "Existing review is frozen; do not recapture"

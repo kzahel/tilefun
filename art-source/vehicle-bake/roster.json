@@ -91,9 +91,9 @@
       "name": "Tiny bubble microcar",
       "family": "Microcar",
       "priority": 9,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "microcar-v1"
     },
     {
@@ -101,9 +101,9 @@
       "name": "Wood-panel station wagon",
       "family": "Estate car",
       "priority": 10,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "woody-wagon-v1"
     },
     {
@@ -111,9 +111,9 @@
       "name": "Stretch limousine",
       "family": "Limousine",
       "priority": 11,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "stretch-limousine-v1"
     },
     {
@@ -121,9 +121,9 @@
       "name": "Classic hot rod",
       "family": "Hot rod",
       "priority": 12,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "hot-rod-v1"
     },
     {
@@ -131,9 +131,9 @@
       "name": "Rally hatchback",
       "family": "Rally car",
       "priority": 13,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "rally-hatchback-v1"
     },
     {
@@ -141,9 +141,9 @@
       "name": "Open-wheel racing car",
       "family": "Formula-style racer",
       "priority": 14,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "open-wheel-racer-v1"
     },
     {
@@ -151,9 +151,9 @@
       "name": "Monster truck",
       "family": "Oversized pickup",
       "priority": 15,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "monster-truck-v1"
     },
     {
@@ -161,9 +161,9 @@
       "name": "Beach dune buggy",
       "family": "Buggy",
       "priority": 16,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "beach-buggy-v1"
     },
     {
@@ -171,9 +171,9 @@
       "name": "Go-kart",
       "family": "Small open racer",
       "priority": 17,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "go-kart-v1"
     },
     {
@@ -181,9 +181,9 @@
       "name": "Golf cart",
       "family": "Small utility cart",
       "priority": 18,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "golf-cart-v1"
     },
     {
@@ -191,9 +191,9 @@
       "name": "Ice cream van",
       "family": "Shop van",
       "priority": 19,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "ice-cream-van-v1"
     },
     {
@@ -201,9 +201,9 @@
       "name": "Food truck",
       "family": "Mobile kitchen",
       "priority": 20,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "food-truck-v1"
     },
     {
@@ -211,9 +211,9 @@
       "name": "Retro camper van",
       "family": "Camper van",
       "priority": 21,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "camper-van-v1"
     },
     {
@@ -221,9 +221,9 @@
       "name": "Family motorhome",
       "family": "Recreational vehicle",
       "priority": 22,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "motorhome-v1"
     },
     {
@@ -231,9 +231,9 @@
       "name": "Checker-style taxi",
       "family": "Taxi",
       "priority": 23,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "retro-taxi-v1"
     },
     {
@@ -241,9 +241,9 @@
       "name": "Tow truck",
       "family": "Recovery truck",
       "priority": 24,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "tow-truck-v1"
     },
     {
@@ -251,9 +251,9 @@
       "name": "Flatbed work truck",
       "family": "Cargo truck",
       "priority": 25,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "flatbed-truck-v1"
     },
     {
@@ -261,9 +261,9 @@
       "name": "Semi truck with trailer",
       "family": "Articulated freight vehicle",
       "priority": 26,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "semi-truck-v1"
     },
     {
@@ -271,9 +271,9 @@
       "name": "Construction dump truck",
       "family": "Tipper truck",
       "priority": 27,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "dump-truck-v1"
     },
     {
@@ -281,9 +281,9 @@
       "name": "Concrete mixer truck",
       "family": "Construction truck",
       "priority": 28,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "cement-mixer-v1"
     },
     {
@@ -291,9 +291,9 @@
       "name": "Mobile crane truck",
       "family": "Crane truck",
       "priority": 29,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "mobile-crane-v1"
     },
     {
@@ -301,9 +301,9 @@
       "name": "Street sweeper",
       "family": "Street maintenance",
       "priority": 30,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "street-sweeper-v1"
     },
     {
@@ -311,9 +311,9 @@
       "name": "Snowplow truck",
       "family": "Winter service truck",
       "priority": 31,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "snowplow-v1"
     },
     {
@@ -321,9 +321,9 @@
       "name": "Farm tractor",
       "family": "Agricultural vehicle",
       "priority": 32,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "farm-tractor-v1"
     },
     {
@@ -331,9 +331,9 @@
       "name": "Forklift",
       "family": "Warehouse vehicle",
       "priority": 33,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
       "candidate": "forklift-v1"
     },
     {
@@ -343,7 +343,7 @@
       "priority": 34,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Visible rider saddle, narrow bike body and a separate rounded sidecar",
+      "next": "Immutable source and seated Explorer review pass actual shared two/three-wheel loader, 32 bare/32 combined pixel parity, contacts and per-wheel controls; normal activation waits on rider identity, AI and occupied fallback.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
@@ -353,7 +353,7 @@
       "priority": 35,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Rounded fuel tank, exposed engine, flat saddle and a single round headlamp",
+      "next": "Immutable source and seated Explorer review pass actual shared two/three-wheel loader, 32 bare/32 combined pixel parity, contacts and per-wheel controls; normal activation waits on rider identity, AI and occupied fallback.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {

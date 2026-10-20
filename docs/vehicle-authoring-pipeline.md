@@ -329,6 +329,44 @@ only into ignored `_pipeline-probes` and data directories, qualifies all six
 and rejects four wrong declarations. It preserves retained Beetle bytes and
 does not register a production review or authorize synthetic art.
 
+## Two- and three-wheel review prototypes
+
+Use explicit `toolchain: "motorcycle-v1"` with `wheelIds: ["F", "R"]` or
+`["F", "R", "SC"]`. The actual GLB has one marked `Motorcycle_Root` with
+`tilefun_motorcycle: 1`, the exact wheel inventory, and independently validated
+radius/axis/Steer > Roll descendants. Do not manufacture four corner assemblies.
+`production.py` maps this toolchain to the `-cycle` package, capture, clearance
+and verify helpers; `multi-axle-v2` continues to select `-v2` and ordinary
+four-wheel families keep the unsuffixed tools. Preserve receipt-pinned helpers.
+
+After independently qualifying the current shared loader, the exact capture CLI is:
+
+```sh
+python scripts/vehicle-bake/production.py CONFIG capture --blender BLENDER --loader-qualified --deadline UTC_ISO
+```
+
+The flag is an explicit qualification assertion, not a regression test or an
+activation switch. Production refuses cycle capture without it and forwards it
+to `family-capture-cycle.mjs`, including the browser stage. Direct capture uses
+`node scripts/vehicle-bake/family-capture-cycle.mjs CONFIG --loader-qualified`
+(add `--qa-only` for browser QA). Without the flag, direct capture records
+`pending-shared-loader` and exits 2; raw GLTF loading cannot substitute for the
+actual shared loader. Use a fresh output revision; frozen reviews stay immutable.
+`inspect`, `freeze` and `verify` retain the established CLI and select the same
+explicit cycle suffix. The current shared loader accepts true two/three-wheel
+markers separately from ordinary four/six-wheel cars and zero-wheel boats.
+
+The frozen Explorer classic-bike and sidecar assemblies are isolated review
+prototypes: 4,390 and 5,374 triangles respectively. Each preserves all 32 bare
+vehicle views and matches all 32 combined views exactly. Qualification includes
+the actual decoded 4,315 rider vertex positions, every wheel's clearance and
+signed motion, native inspection, mobile browser and offline review. These
+measured Explorer fits establish neither the remaining appearances nor a
+universal seat. All-27 identity coverage, automatic traffic occupants, occupied
+Canvas/failed-mesh fallback and normal motorcycle availability remain blocked by
+the [rider prerequisites](topics/vehicle-riders.md). Normal car driver semantics
+are unchanged.
+
 ## Offline fleet review
 
 `python scripts/vehicle-bake/fleet-review.py --output data/vehicle-bake/fleet`
@@ -354,6 +392,51 @@ stale input, hidden dependency, ignored dependency, expired deadline and local
 basename controls, plus actual retained component-buffer preservation. These
 byte-contract controls complement actual Blender/GLTF/native-pixel qualification.
 
+### Explicit historical replay inputs
+
+Historical receipts keep their original path/hash pins. Nineteen original-family
+source/runtime receipt pairs pin the former `src/rendering/CarMeshAsset.ts`
+SHA256 `b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c`.
+Keep those receipts and v1/v2/v3 exporters byte-identical. The retained
+`art-source/vehicle-bake/replay-inputs/catalog.json` registers explicit
+`{path, sha256, snapshot}` entries under schema `{version: 1, inputs: [...]}`.
+Snapshot files live under that same `replay-inputs/` directory.
+
+`replay_inputs.py` first checks current bytes at the original path. Only an exact
+registered path **and** hash permits historical fallback. It validates canonical
+relative paths, resolved containment, snapshot SHA256 and duplicate registrations;
+unregistered, missing or tampered inputs fail. Declared files are copied into the
+fresh workspace at their original paths, never rewritten to snapshot paths.
+`source-replay.py` uses this resolver and records historical snapshot paths and
+the actual catalog hash in its new QA receipt. Existing source receipts stay
+unchanged. Snapshot replay reproduces the historical input set; independently
+validate the current two/three-wheel loader and old car/boat pixels against the
+live engine before claiming current-engine compatibility.
+
+For immutable v3 runtime receipts use:
+
+```sh
+python scripts/vehicle-bake/replay-runtime.py RECEIPT --qa data/vehicle-bake/ID-runtime-replay --blender BLENDER --deadline UTC_ISO
+```
+
+The wrapper resolves only `receipt.inputs`, then creates a fresh ignored
+repository with their original paths, an `AGENTS.md`, `public/`, and a minimal
+`src/traffic/original-vehicles.json` containing `vehicles: []`. It discovers the
+pinned `config-runtime*.json` or `runtime-*.json`; use repository-relative
+`--config PATH` if selection is ambiguous (the config must already be pinned).
+It invokes the exact retained `runtime-export-v3.py` and `runtime-measure.py`
+with ignored output/work directories. Generated GLB, sprite and receipt bytes
+must match retained outputs exactly, and the sole generated catalog entry must
+equal the current selected entry. It never writes the live catalog or assets.
+
+The [portable compatibility evidence](../art-source/vehicle-bake/replay-inputs/evidence/README.md)
+retains fresh Jeep/semi runtime and Jeep source replay receipts, all 19-family
+pin resolutions, and the 37-control summary. Controls reject wrong/unregistered
+path/hash pairs, tampered snapshots, unsafe paths, missing declarations and
+output/catalog mismatches. Actual unchanged-v3 missing-input rejection is recorded
+separately from synthetic wrapper policy tests. These evidence files document QA;
+they are not constructor/runtime input dependencies and are not added to old pins.
+
 ## Static component assemblies
 
 The isolated Explorer/roadster control demonstrates adding a component without
@@ -378,3 +461,25 @@ independent two-asset depth rendering. Inspect contacts, depth masks, full nativ
 headings, signed wheel phases and wires separately. One static rider prototype
 does not establish normal game occupancy or all-character compatibility;
 [rider prerequisites](topics/vehicle-riders.md) owns those gates.
+
+For true-cycle prototypes use `compose-component-cycle.py` and
+`component-package-cycle.py ASSEMBLY_JSON [--scratch | --finalize]`. The composer
+appends the companion mount **inside** the existing marked `Motorcycle_Root`,
+compensating its uniform rigid world transform so measured rider positions stay
+unchanged. It rejects singular, sheared or nonuniform root transforms. Base
+geometry/paint buffers and existing arrays remain exact; only the root's child
+list gains the mount. Retain both child masters, explicit seat/grip/foot fitting
+profiles, actual decoded identity/position proofs and the placement recipe.
+Pin the cycle adapters and their actual underlying helpers; finalized assemblies
+make those helper bytes immutable. Their extra atlas and draw costs remain real.
+A frozen static Explorer composition does not supply all-27 appearance coverage,
+AI occupancy, authority/replication, or occupied failure fallback, and does not
+activate a normal motorcycle.
+
+`node scripts/vehicle-bake/current-engine-regression.mjs FAMILY_JSON
+[--loader-qualified]` recompiles today's shared engine into a new ignored copy
+of a frozen review and compares all 50 native heading/phase/wire RGBA frames.
+Component families also rerun decoded mount/attribute and independent bare/combined
+pixel parity. This keeps historical reproduction separate from current-engine
+compatibility. The cycle flag requires prior shared-loader qualification; it
+does not grant normal game activation or human approval. Frozen files stay exact.

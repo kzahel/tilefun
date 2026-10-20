@@ -1,0 +1,106 @@
+{
+  "modelSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+  "spriteSha256": "58e5b71b36d8d21fd13b8e00126884dda4e92dc250c189af4498ac5555ae42cf",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-retro-taxi-v1.json": "43b6ecaa65798f2969d1db4b4360ca22b81fcb5bb67232b8499de5ea5b0a4fc2",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/retro-taxi-v1/review-manifest.json": "12ac6e632f2df432c38b54a529d2955ef3eaa373464cf7e16cb9456b9e59e9fb",
+    "public/demos/original-vehicles/retro-taxi-v1/inputs/model.glb": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "public/demos/original-vehicles/retro-taxi-v1/inputs/atlas.png": "fe16716c37b4757fe93c18096d8242ddb3dec8f1afa8ecb85c9d1187c73a62e4",
+    "public/demos/original-vehicles/retro-taxi-v1/captures/capture.json": "1e02e4dddd0b430bbe94fee717c72c39377c8306e6e626ab3dcef640ae58350c",
+    "art-source/vehicle-bake/retro-taxi/v1/evidence/replay-verification.json": "b608dd66b46a5a0de71897a00cda4221766ef2f4701736a870428d36057be474",
+    "art-source/vehicle-bake/retro-taxi/v1/build.py": "06212baca486d55be9b6806a24e992c8c779abe56ac18d2d6105bbef7795419e",
+    "art-source/vehicle-bake/retro-taxi/v1/family.json": "1696b34af056ed6bf63ce79714d9b40e5ee907070f617b63a511ae059f572eca",
+    "art-source/vehicle-bake/retro-taxi/v1/coverage-region.json": "861a65627dcf90414fcd677b8c409916dbf87c11d9fde7f0bcf17e4f409a1759",
+    "art-source/vehicle-bake/retro-taxi/v1/surface-regions.json": "b8222791dc5bdef71dd5b20db0a5a8b49baec1370a20dbf5b8d7413533f2b2b6",
+    "art-source/vehicle-bake/retro-taxi/v1/review.json": "b3d18d4b732fa028168cfca20a84aa0e90619f8fb081ff7d81a84213b2e56f91",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/retro-taxi-v1/captures/engine-4.png": "c8c8a02bafd229b039ba89b9ad814c065e72761e1c5ec5566ee61c736cce131a",
+    "public/demos/original-vehicles/retro-taxi-v1/captures/engine-12.png": "dace4e2d03e2be96dfe0b1c4229ca192fc151e50171ded12500deedd6a6d52ef",
+    "public/demos/original-vehicles/retro-taxi-v1/captures/engine-8.png": "03b20be77b4a04473bd81418be2c114fac6825a06b9b29a5f710fbfd453bfaf4",
+    "public/demos/original-vehicles/retro-taxi-v1/captures/engine-0.png": "ae89fd4ec063736dca6232d080c553015c97962a4d6808d03dd3adb638f25996"
+  },
+  "physicalBounds": [
+    82,
+    35,
+    29
+  ],
+  "measurement": {
+    "modelSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -40.91304016113281,
+        -17.39130401611328,
+        4.76837158203125e-07
+      ],
+      "max": [
+        40.91304016113281,
+        17.39130401611328,
+        28.695653915405273
+      ],
+      "size": [
+        81.82608032226562,
+        34.78260803222656,
+        28.695653915405273
+      ]
+    },
+    "triangles": 2970,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/retro-taxi/v1/evidence/replay-verification.json",
+    "sha256": "b608dd66b46a5a0de71897a00cda4221766ef2f4701736a870428d36057be474",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-retro-taxi-v1.json --blender BLENDER"
+}

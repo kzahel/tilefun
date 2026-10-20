@@ -1599,6 +1599,2466 @@
           }
         }
       ]
+    },
+    {
+      "id": "open-wheel-racer",
+      "name": "Open-wheel racing car",
+      "sprite": "assets/vehicles/open-wheel-racer-v1.png",
+      "mesh": {
+        "assetId": "open-wheel-racer-authored-v1",
+        "path": "assets/models/vehicles/open-wheel-racer-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 190,
+        "acceleration": 360,
+        "pushSpeed": 44,
+        "pushWeight": 125
+      },
+      "views": [
+        {
+          "id": "original-vehicle:open-wheel-racer:south",
+          "vehicleId": "open-wheel-racer",
+          "direction": "south",
+          "rect": [75, 84, 42, 95],
+          "metadata": {
+            "name": "Open-wheel racing car · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "open-wheel racer"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [21, 100.5],
+            "footprint": [-21.5, -81, 43, 81],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 43,
+                "height": 81,
+                "zHeight": 22
+              }
+            ],
+            "depthOffset": -40.5
+          }
+        },
+        {
+          "id": "original-vehicle:open-wheel-racer:north",
+          "vehicleId": "open-wheel-racer",
+          "direction": "north",
+          "rect": [75, 322, 42, 75],
+          "metadata": {
+            "name": "Open-wheel racing car · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "open-wheel racer"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [21, 86.5],
+            "footprint": [-21.5, -81, 43, 81],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 43,
+                "height": 81,
+                "zHeight": 22
+              }
+            ],
+            "depthOffset": -40.5
+          }
+        },
+        {
+          "id": "original-vehicle:open-wheel-racer:west",
+          "vehicleId": "open-wheel-racer",
+          "direction": "west",
+          "rect": [56, 552, 80, 60],
+          "metadata": {
+            "name": "Open-wheel racing car · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "open-wheel racer"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [40, 61.5],
+            "footprint": [-40.5, -43, 81, 43],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 81,
+                "height": 43,
+                "zHeight": 22
+              }
+            ],
+            "depthOffset": -21.5
+          }
+        },
+        {
+          "id": "original-vehicle:open-wheel-racer:east",
+          "vehicleId": "open-wheel-racer",
+          "direction": "east",
+          "rect": [56, 776, 80, 60],
+          "metadata": {
+            "name": "Open-wheel racing car · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "open-wheel racer"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [40, 61.5],
+            "footprint": [-40.5, -43, 81, 43],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 81,
+                "height": 43,
+                "zHeight": 22
+              }
+            ],
+            "depthOffset": -21.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "monster-truck",
+      "name": "Monster truck",
+      "sprite": "assets/vehicles/monster-truck-v1.png",
+      "mesh": {
+        "assetId": "monster-truck-authored-v1",
+        "path": "assets/models/vehicles/monster-truck-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 105,
+        "acceleration": 170,
+        "pushSpeed": 50,
+        "pushWeight": 360
+      },
+      "views": [
+        {
+          "id": "original-vehicle:monster-truck:south",
+          "vehicleId": "monster-truck",
+          "direction": "south",
+          "rect": [70, 60, 52, 115],
+          "metadata": {
+            "name": "Monster truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "monster truck"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [26, 127.5],
+            "footprint": [-26.0, -87, 52, 87],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 52,
+                "height": 87,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -43.5
+          }
+        },
+        {
+          "id": "original-vehicle:monster-truck:north",
+          "vehicleId": "monster-truck",
+          "direction": "north",
+          "rect": [70, 288, 52, 111],
+          "metadata": {
+            "name": "Monster truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "monster truck"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [26, 123.5],
+            "footprint": [-26.0, -87, 52, 87],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 52,
+                "height": 87,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -43.5
+          }
+        },
+        {
+          "id": "original-vehicle:monster-truck:west",
+          "vehicleId": "monster-truck",
+          "direction": "west",
+          "rect": [53, 528, 86, 88],
+          "metadata": {
+            "name": "Monster truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "monster truck"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [43, 90.0],
+            "footprint": [-43.5, -52, 87, 52],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 87,
+                "height": 52,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -26.0
+          }
+        },
+        {
+          "id": "original-vehicle:monster-truck:east",
+          "vehicleId": "monster-truck",
+          "direction": "east",
+          "rect": [53, 752, 86, 88],
+          "metadata": {
+            "name": "Monster truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "monster truck"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [43, 90.0],
+            "footprint": [-43.5, -52, 87, 52],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 87,
+                "height": 52,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -26.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "beach-buggy",
+      "name": "Beach dune buggy",
+      "sprite": "assets/vehicles/beach-buggy-v1.png",
+      "mesh": {
+        "assetId": "beach-buggy-authored-v1",
+        "path": "assets/models/vehicles/beach-buggy-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 120,
+        "acceleration": 210,
+        "pushSpeed": 42,
+        "pushWeight": 105
+      },
+      "views": [
+        {
+          "id": "original-vehicle:beach-buggy:south",
+          "vehicleId": "beach-buggy",
+          "direction": "south",
+          "rect": [77, 99, 38, 72],
+          "metadata": {
+            "name": "Beach dune buggy · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "beach buggy"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [19, 79.0],
+            "footprint": [-19.0, -68, 38, 68],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 38,
+                "height": 68,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -34.0
+          }
+        },
+        {
+          "id": "original-vehicle:beach-buggy:north",
+          "vehicleId": "beach-buggy",
+          "direction": "north",
+          "rect": [77, 321, 38, 74],
+          "metadata": {
+            "name": "Beach dune buggy · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "beach buggy"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [19, 81.0],
+            "footprint": [-19.0, -68, 38, 68],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 38,
+                "height": 68,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -34.0
+          }
+        },
+        {
+          "id": "original-vehicle:beach-buggy:west",
+          "vehicleId": "beach-buggy",
+          "direction": "west",
+          "rect": [62, 554, 68, 54],
+          "metadata": {
+            "name": "Beach dune buggy · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "beach buggy"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [34, 57.0],
+            "footprint": [-34.0, -38, 68, 38],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 68,
+                "height": 38,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -19.0
+          }
+        },
+        {
+          "id": "original-vehicle:beach-buggy:east",
+          "vehicleId": "beach-buggy",
+          "direction": "east",
+          "rect": [62, 778, 68, 54],
+          "metadata": {
+            "name": "Beach dune buggy · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "beach buggy"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [34, 57.0],
+            "footprint": [-34.0, -38, 68, 38],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 68,
+                "height": 38,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -19.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "go-kart",
+      "name": "Go-kart",
+      "sprite": "assets/vehicles/go-kart-v1.png",
+      "mesh": {
+        "assetId": "go-kart-authored-v1",
+        "path": "assets/models/vehicles/go-kart-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 120,
+        "acceleration": 280,
+        "pushSpeed": 38,
+        "pushWeight": 65
+      },
+      "views": [
+        {
+          "id": "original-vehicle:go-kart:south",
+          "vehicleId": "go-kart",
+          "direction": "south",
+          "rect": [80, 113, 32, 53],
+          "metadata": {
+            "name": "Go-kart · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "go-kart"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [16, 57.5],
+            "footprint": [-16.5, -53, 33, 53],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 33,
+                "height": 53,
+                "zHeight": 18
+              }
+            ],
+            "depthOffset": -26.5
+          }
+        },
+        {
+          "id": "original-vehicle:go-kart:north",
+          "vehicleId": "go-kart",
+          "direction": "north",
+          "rect": [80, 337, 32, 54],
+          "metadata": {
+            "name": "Go-kart · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "go-kart"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [16, 57.5],
+            "footprint": [-16.5, -53, 33, 53],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 33,
+                "height": 53,
+                "zHeight": 18
+              }
+            ],
+            "depthOffset": -26.5
+          }
+        },
+        {
+          "id": "original-vehicle:go-kart:west",
+          "vehicleId": "go-kart",
+          "direction": "west",
+          "rect": [70, 568, 52, 39],
+          "metadata": {
+            "name": "Go-kart · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "go-kart"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [26, 40.5],
+            "footprint": [-26.5, -33, 53, 33],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 53,
+                "height": 33,
+                "zHeight": 18
+              }
+            ],
+            "depthOffset": -16.5
+          }
+        },
+        {
+          "id": "original-vehicle:go-kart:east",
+          "vehicleId": "go-kart",
+          "direction": "east",
+          "rect": [70, 792, 52, 39],
+          "metadata": {
+            "name": "Go-kart · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "go-kart"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [26, 40.5],
+            "footprint": [-26.5, -33, 53, 33],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 53,
+                "height": 33,
+                "zHeight": 18
+              }
+            ],
+            "depthOffset": -16.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "golf-cart",
+      "name": "Golf cart",
+      "sprite": "assets/vehicles/golf-cart-v1.png",
+      "mesh": {
+        "assetId": "golf-cart-authored-v1",
+        "path": "assets/models/vehicles/golf-cart-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 54,
+        "acceleration": 95,
+        "pushSpeed": 36,
+        "pushWeight": 85
+      },
+      "views": [
+        {
+          "id": "original-vehicle:golf-cart:south",
+          "vehicleId": "golf-cart",
+          "direction": "south",
+          "rect": [81, 93, 30, 72],
+          "metadata": {
+            "name": "Golf cart · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "golf cart"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [15, 79.0],
+            "footprint": [-15.0, -56, 30, 56],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 30,
+                "height": 56,
+                "zHeight": 32
+              }
+            ],
+            "depthOffset": -28.0
+          }
+        },
+        {
+          "id": "original-vehicle:golf-cart:north",
+          "vehicleId": "golf-cart",
+          "direction": "north",
+          "rect": [81, 318, 30, 71],
+          "metadata": {
+            "name": "Golf cart · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "golf cart"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [15, 78.0],
+            "footprint": [-15.0, -56, 30, 56],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 30,
+                "height": 56,
+                "zHeight": 32
+              }
+            ],
+            "depthOffset": -28.0
+          }
+        },
+        {
+          "id": "original-vehicle:golf-cart:west",
+          "vehicleId": "golf-cart",
+          "direction": "west",
+          "rect": [68, 547, 56, 58],
+          "metadata": {
+            "name": "Golf cart · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "golf cart"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [28, 60.0],
+            "footprint": [-28.0, -30, 56, 30],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 56,
+                "height": 30,
+                "zHeight": 32
+              }
+            ],
+            "depthOffset": -15.0
+          }
+        },
+        {
+          "id": "original-vehicle:golf-cart:east",
+          "vehicleId": "golf-cart",
+          "direction": "east",
+          "rect": [68, 771, 56, 58],
+          "metadata": {
+            "name": "Golf cart · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "golf cart"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [28, 60.0],
+            "footprint": [-28.0, -30, 56, 30],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 56,
+                "height": 30,
+                "zHeight": 32
+              }
+            ],
+            "depthOffset": -15.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "ice-cream-van",
+      "name": "Ice cream van",
+      "sprite": "assets/vehicles/ice-cream-van-v1.png",
+      "mesh": {
+        "assetId": "ice-cream-van-authored-v1",
+        "path": "assets/models/vehicles/ice-cream-van-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 88,
+        "acceleration": 135,
+        "pushSpeed": 42,
+        "pushWeight": 230
+      },
+      "views": [
+        {
+          "id": "original-vehicle:ice-cream-van:south",
+          "vehicleId": "ice-cream-van",
+          "direction": "south",
+          "rect": [74, 65, 41, 116],
+          "metadata": {
+            "name": "Ice cream van · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "ice cream van"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [22, 122.0],
+            "footprint": [-22.0, -86, 44, 86],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 44,
+                "height": 86,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -43.0
+          }
+        },
+        {
+          "id": "original-vehicle:ice-cream-van:north",
+          "vehicleId": "ice-cream-van",
+          "direction": "north",
+          "rect": [77, 303, 41, 102],
+          "metadata": {
+            "name": "Ice cream van · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "ice cream van"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [19, 108.0],
+            "footprint": [-22.0, -86, 44, 86],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 44,
+                "height": 86,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -43.0
+          }
+        },
+        {
+          "id": "original-vehicle:ice-cream-van:west",
+          "vehicleId": "ice-cream-van",
+          "direction": "west",
+          "rect": [53, 532, 86, 77],
+          "metadata": {
+            "name": "Ice cream van · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "ice cream van"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [43, 82.0],
+            "footprint": [-43.0, -44, 86, 44],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 86,
+                "height": 44,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -22.0
+          }
+        },
+        {
+          "id": "original-vehicle:ice-cream-van:east",
+          "vehicleId": "ice-cream-van",
+          "direction": "east",
+          "rect": [53, 760, 86, 73],
+          "metadata": {
+            "name": "Ice cream van · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "ice cream van"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [43, 78.0],
+            "footprint": [-43.0, -44, 86, 44],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 86,
+                "height": 44,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -22.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "food-truck",
+      "name": "Food truck",
+      "sprite": "assets/vehicles/food-truck-v1.png",
+      "mesh": {
+        "assetId": "food-truck-authored-v1",
+        "path": "assets/models/vehicles/food-truck-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 74,
+        "acceleration": 110,
+        "pushSpeed": 45,
+        "pushWeight": 320
+      },
+      "views": [
+        {
+          "id": "original-vehicle:food-truck:south",
+          "vehicleId": "food-truck",
+          "direction": "south",
+          "rect": [71, 48, 46, 139],
+          "metadata": {
+            "name": "Food truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "food truck"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [25, 148.5],
+            "footprint": [-25.5, -105, 51, 105],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 51,
+                "height": 105,
+                "zHeight": 49
+              }
+            ],
+            "depthOffset": -52.5
+          }
+        },
+        {
+          "id": "original-vehicle:food-truck:north",
+          "vehicleId": "food-truck",
+          "direction": "north",
+          "rect": [75, 292, 46, 119],
+          "metadata": {
+            "name": "Food truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "food truck"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [21, 128.5],
+            "footprint": [-25.5, -105, 51, 105],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 51,
+                "height": 105,
+                "zHeight": 49
+              }
+            ],
+            "depthOffset": -52.5
+          }
+        },
+        {
+          "id": "original-vehicle:food-truck:west",
+          "vehicleId": "food-truck",
+          "direction": "west",
+          "rect": [44, 525, 104, 85],
+          "metadata": {
+            "name": "Food truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "food truck"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [52, 92.5],
+            "footprint": [-52.5, -51, 105, 51],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 105,
+                "height": 51,
+                "zHeight": 49
+              }
+            ],
+            "depthOffset": -25.5
+          }
+        },
+        {
+          "id": "original-vehicle:food-truck:east",
+          "vehicleId": "food-truck",
+          "direction": "east",
+          "rect": [44, 749, 104, 85],
+          "metadata": {
+            "name": "Food truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "food truck"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [52, 92.5],
+            "footprint": [-52.5, -51, 105, 51],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 105,
+                "height": 51,
+                "zHeight": 49
+              }
+            ],
+            "depthOffset": -25.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "camper-van",
+      "name": "Retro camper van",
+      "sprite": "assets/vehicles/camper-van-v1.png",
+      "mesh": {
+        "assetId": "camper-van-authored-v1",
+        "path": "assets/models/vehicles/camper-van-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 88,
+        "acceleration": 135,
+        "pushSpeed": 45,
+        "pushWeight": 280
+      },
+      "views": [
+        {
+          "id": "original-vehicle:camper-van:south",
+          "vehicleId": "camper-van",
+          "direction": "south",
+          "rect": [78, 65, 36, 116],
+          "metadata": {
+            "name": "Retro camper van · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "camper van"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [18, 123.5],
+            "footprint": [-18.5, -89, 37, 89],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 37,
+                "height": 89,
+                "zHeight": 41
+              }
+            ],
+            "depthOffset": -44.5
+          }
+        },
+        {
+          "id": "original-vehicle:camper-van:north",
+          "vehicleId": "camper-van",
+          "direction": "north",
+          "rect": [78, 289, 36, 116],
+          "metadata": {
+            "name": "Retro camper van · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "camper van"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [18, 123.5],
+            "footprint": [-18.5, -89, 37, 89],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 37,
+                "height": 89,
+                "zHeight": 41
+              }
+            ],
+            "depthOffset": -44.5
+          }
+        },
+        {
+          "id": "original-vehicle:camper-van:west",
+          "vehicleId": "camper-van",
+          "direction": "west",
+          "rect": [52, 537, 88, 71],
+          "metadata": {
+            "name": "Retro camper van · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "camper van"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [44, 73.5],
+            "footprint": [-44.5, -37, 89, 37],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 89,
+                "height": 37,
+                "zHeight": 41
+              }
+            ],
+            "depthOffset": -18.5
+          }
+        },
+        {
+          "id": "original-vehicle:camper-van:east",
+          "vehicleId": "camper-van",
+          "direction": "east",
+          "rect": [52, 761, 88, 71],
+          "metadata": {
+            "name": "Retro camper van · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "camper van"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [44, 73.5],
+            "footprint": [-44.5, -37, 89, 37],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 89,
+                "height": 37,
+                "zHeight": 41
+              }
+            ],
+            "depthOffset": -18.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "motorhome",
+      "name": "Family motorhome",
+      "sprite": "assets/vehicles/motorhome-v1.png",
+      "mesh": {
+        "assetId": "motorhome-authored-v1",
+        "path": "assets/models/vehicles/motorhome-v1.glb",
+        "radius": 128,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 78,
+        "acceleration": 105,
+        "pushSpeed": 48,
+        "pushWeight": 400
+      },
+      "views": [
+        {
+          "id": "original-vehicle:motorhome:south",
+          "vehicleId": "motorhome",
+          "direction": "south",
+          "rect": [70, 39, 49, 159],
+          "metadata": {
+            "name": "Family motorhome · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "motorhome"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [26, 167.5],
+            "footprint": [-26.5, -125, 53, 125],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 53,
+                "height": 125,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -62.5
+          }
+        },
+        {
+          "id": "original-vehicle:motorhome:north",
+          "vehicleId": "motorhome",
+          "direction": "north",
+          "rect": [73, 257, 49, 165],
+          "metadata": {
+            "name": "Family motorhome · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "motorhome"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [23, 173.5],
+            "footprint": [-26.5, -125, 53, 125],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 53,
+                "height": 125,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -62.5
+          }
+        },
+        {
+          "id": "original-vehicle:motorhome:west",
+          "vehicleId": "motorhome",
+          "direction": "west",
+          "rect": [34, 521, 122, 91],
+          "metadata": {
+            "name": "Family motorhome · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "motorhome"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [62, 97.5],
+            "footprint": [-62.5, -53, 125, 53],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 125,
+                "height": 53,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -26.5
+          }
+        },
+        {
+          "id": "original-vehicle:motorhome:east",
+          "vehicleId": "motorhome",
+          "direction": "east",
+          "rect": [36, 745, 122, 92],
+          "metadata": {
+            "name": "Family motorhome · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "motorhome"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [60, 97.5],
+            "footprint": [-62.5, -53, 125, 53],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 125,
+                "height": 53,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -26.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "retro-taxi",
+      "name": "Checker-style taxi",
+      "sprite": "assets/vehicles/retro-taxi-v1.png",
+      "mesh": {
+        "assetId": "retro-taxi-authored-v1",
+        "path": "assets/models/vehicles/retro-taxi-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 120,
+        "acceleration": 210,
+        "pushSpeed": 42,
+        "pushWeight": 160
+      },
+      "views": [
+        {
+          "id": "original-vehicle:retro-taxi:south",
+          "vehicleId": "retro-taxi",
+          "direction": "south",
+          "rect": [79, 91, 34, 87],
+          "metadata": {
+            "name": "Checker-style taxi · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "retro taxi"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [17, 94.0],
+            "footprint": [-17.5, -82, 35, 82],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 82,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -41.0
+          }
+        },
+        {
+          "id": "original-vehicle:retro-taxi:north",
+          "vehicleId": "retro-taxi",
+          "direction": "north",
+          "rect": [79, 313, 34, 89],
+          "metadata": {
+            "name": "Checker-style taxi · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "retro taxi"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [17, 96.0],
+            "footprint": [-17.5, -82, 35, 82],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 82,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -41.0
+          }
+        },
+        {
+          "id": "original-vehicle:retro-taxi:west",
+          "vehicleId": "retro-taxi",
+          "direction": "west",
+          "rect": [55, 554, 82, 54],
+          "metadata": {
+            "name": "Checker-style taxi · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "retro taxi"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [41, 55.5],
+            "footprint": [-41.0, -35, 82, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 82,
+                "height": 35,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        },
+        {
+          "id": "original-vehicle:retro-taxi:east",
+          "vehicleId": "retro-taxi",
+          "direction": "east",
+          "rect": [55, 778, 82, 54],
+          "metadata": {
+            "name": "Checker-style taxi · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "retro taxi"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [41, 55.5],
+            "footprint": [-41.0, -35, 82, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 82,
+                "height": 35,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "tow-truck",
+      "name": "Tow truck",
+      "sprite": "assets/vehicles/tow-truck-v1.png",
+      "mesh": {
+        "assetId": "tow-truck-authored-v1",
+        "path": "assets/models/vehicles/tow-truck-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 82,
+        "acceleration": 125,
+        "pushSpeed": 50,
+        "pushWeight": 380
+      },
+      "views": [
+        {
+          "id": "original-vehicle:tow-truck:south",
+          "vehicleId": "tow-truck",
+          "direction": "south",
+          "rect": [77, 70, 38, 115],
+          "metadata": {
+            "name": "Tow truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "tow truck"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [19, 125.0],
+            "footprint": [-19.5, -102, 39, 102],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 39,
+                "height": 102,
+                "zHeight": 40
+              }
+            ],
+            "depthOffset": -51.0
+          }
+        },
+        {
+          "id": "original-vehicle:tow-truck:north",
+          "vehicleId": "tow-truck",
+          "direction": "north",
+          "rect": [77, 297, 38, 111],
+          "metadata": {
+            "name": "Tow truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "tow truck"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [19, 122.0],
+            "footprint": [-19.5, -102, 39, 102],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 39,
+                "height": 102,
+                "zHeight": 40
+              }
+            ],
+            "depthOffset": -51.0
+          }
+        },
+        {
+          "id": "original-vehicle:tow-truck:west",
+          "vehicleId": "tow-truck",
+          "direction": "west",
+          "rect": [46, 538, 101, 71],
+          "metadata": {
+            "name": "Tow truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "tow truck"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [50, 73.5],
+            "footprint": [-51.0, -39, 102, 39],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 102,
+                "height": 39,
+                "zHeight": 40
+              }
+            ],
+            "depthOffset": -19.5
+          }
+        },
+        {
+          "id": "original-vehicle:tow-truck:east",
+          "vehicleId": "tow-truck",
+          "direction": "east",
+          "rect": [45, 762, 101, 71],
+          "metadata": {
+            "name": "Tow truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "tow truck"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [51, 73.5],
+            "footprint": [-51.0, -39, 102, 39],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 102,
+                "height": 39,
+                "zHeight": 40
+              }
+            ],
+            "depthOffset": -19.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "flatbed-truck",
+      "name": "Flatbed truck",
+      "sprite": "assets/vehicles/flatbed-truck-v1.png",
+      "mesh": {
+        "assetId": "flatbed-truck-authored-v1",
+        "path": "assets/models/vehicles/flatbed-truck-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 85,
+        "acceleration": 130,
+        "pushSpeed": 50,
+        "pushWeight": 380
+      },
+      "views": [
+        {
+          "id": "original-vehicle:flatbed-truck:south",
+          "vehicleId": "flatbed-truck",
+          "direction": "south",
+          "rect": [75, 69, 42, 123],
+          "metadata": {
+            "name": "Flatbed truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "flatbed truck"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [21, 130.5],
+            "footprint": [-21.0, -111, 42, 111],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 42,
+                "height": 111,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -55.5
+          }
+        },
+        {
+          "id": "original-vehicle:flatbed-truck:north",
+          "vehicleId": "flatbed-truck",
+          "direction": "north",
+          "rect": [75, 280, 42, 132],
+          "metadata": {
+            "name": "Flatbed truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "flatbed truck"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [21, 143.5],
+            "footprint": [-21.0, -111, 42, 111],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 42,
+                "height": 111,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -55.5
+          }
+        },
+        {
+          "id": "original-vehicle:flatbed-truck:west",
+          "vehicleId": "flatbed-truck",
+          "direction": "west",
+          "rect": [41, 535, 110, 75],
+          "metadata": {
+            "name": "Flatbed truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "flatbed truck"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [55, 78.0],
+            "footprint": [-55.5, -42, 111, 42],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 111,
+                "height": 42,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -21.0
+          }
+        },
+        {
+          "id": "original-vehicle:flatbed-truck:east",
+          "vehicleId": "flatbed-truck",
+          "direction": "east",
+          "rect": [41, 759, 110, 75],
+          "metadata": {
+            "name": "Flatbed truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "flatbed truck"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [55, 78.0],
+            "footprint": [-55.5, -42, 111, 42],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 111,
+                "height": 42,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -21.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "semi-truck",
+      "name": "Semi-truck and box trailer",
+      "sprite": "assets/vehicles/semi-truck-v1.png",
+      "mesh": {
+        "assetId": "semi-truck-authored-v1",
+        "path": "assets/models/vehicles/semi-truck-v1.glb",
+        "radius": 144,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 68,
+        "acceleration": 88,
+        "pushSpeed": 60,
+        "pushWeight": 700
+      },
+      "views": [
+        {
+          "id": "original-vehicle:semi-truck:south",
+          "vehicleId": "semi-truck",
+          "direction": "south",
+          "rect": [74, 13, 44, 205],
+          "metadata": {
+            "name": "Semi-truck and box trailer · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "semi truck"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [22, 211.5],
+            "footprint": [-22.0, -161, 44, 161],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 44,
+                "height": 161,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -80.5
+          }
+        },
+        {
+          "id": "original-vehicle:semi-truck:north",
+          "vehicleId": "semi-truck",
+          "direction": "north",
+          "rect": [74, 258, 44, 178],
+          "metadata": {
+            "name": "Semi-truck and box trailer · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "semi truck"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [22, 190.5],
+            "footprint": [-22.0, -161, 44, 161],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 44,
+                "height": 161,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -80.5
+          }
+        },
+        {
+          "id": "original-vehicle:semi-truck:west",
+          "vehicleId": "semi-truck",
+          "direction": "west",
+          "rect": [16, 518, 160, 93],
+          "metadata": {
+            "name": "Semi-truck and box trailer · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "semi truck"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [80, 96.0],
+            "footprint": [-80.5, -44, 161, 44],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 161,
+                "height": 44,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -22.0
+          }
+        },
+        {
+          "id": "original-vehicle:semi-truck:east",
+          "vehicleId": "semi-truck",
+          "direction": "east",
+          "rect": [16, 742, 160, 93],
+          "metadata": {
+            "name": "Semi-truck and box trailer · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "semi truck"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [80, 96.0],
+            "footprint": [-80.5, -44, 161, 44],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 161,
+                "height": 44,
+                "zHeight": 53
+              }
+            ],
+            "depthOffset": -22.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "dump-truck",
+      "name": "Construction dump truck",
+      "sprite": "assets/vehicles/dump-truck-v1.png",
+      "mesh": {
+        "assetId": "dump-truck-authored-v1",
+        "path": "assets/models/vehicles/dump-truck-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 64,
+        "acceleration": 85,
+        "pushSpeed": 60,
+        "pushWeight": 700
+      },
+      "views": [
+        {
+          "id": "original-vehicle:dump-truck:south",
+          "vehicleId": "dump-truck",
+          "direction": "south",
+          "rect": [73, 47, 46, 143],
+          "metadata": {
+            "name": "Construction dump truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "dump truck"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [23, 153.0],
+            "footprint": [-23.0, -112, 46, 112],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 46,
+                "height": 112,
+                "zHeight": 49
+              }
+            ],
+            "depthOffset": -56.0
+          }
+        },
+        {
+          "id": "original-vehicle:dump-truck:north",
+          "vehicleId": "dump-truck",
+          "direction": "north",
+          "rect": [73, 277, 46, 137],
+          "metadata": {
+            "name": "Construction dump truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "dump truck"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [23, 147.0],
+            "footprint": [-23.0, -112, 46, 112],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 46,
+                "height": 112,
+                "zHeight": 49
+              }
+            ],
+            "depthOffset": -56.0
+          }
+        },
+        {
+          "id": "original-vehicle:dump-truck:west",
+          "vehicleId": "dump-truck",
+          "direction": "west",
+          "rect": [40, 527, 112, 85],
+          "metadata": {
+            "name": "Construction dump truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "dump truck"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [56, 88.0],
+            "footprint": [-56.0, -46, 112, 46],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 112,
+                "height": 46,
+                "zHeight": 49
+              }
+            ],
+            "depthOffset": -23.0
+          }
+        },
+        {
+          "id": "original-vehicle:dump-truck:east",
+          "vehicleId": "dump-truck",
+          "direction": "east",
+          "rect": [40, 751, 112, 85],
+          "metadata": {
+            "name": "Construction dump truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "dump truck"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [56, 88.0],
+            "footprint": [-56.0, -46, 112, 46],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 112,
+                "height": 46,
+                "zHeight": 49
+              }
+            ],
+            "depthOffset": -23.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "cement-mixer",
+      "name": "Cement mixer truck",
+      "sprite": "assets/vehicles/cement-mixer-v1.png",
+      "mesh": {
+        "assetId": "cement-mixer-authored-v1",
+        "path": "assets/models/vehicles/cement-mixer-v1.glb",
+        "radius": 128,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 62,
+        "acceleration": 80,
+        "pushSpeed": 60,
+        "pushWeight": 720
+      },
+      "views": [
+        {
+          "id": "original-vehicle:cement-mixer:south",
+          "vehicleId": "cement-mixer",
+          "direction": "south",
+          "rect": [74, 43, 44, 151],
+          "metadata": {
+            "name": "Cement mixer truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "cement mixer"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [22, 160.5],
+            "footprint": [-22.0, -119, 44, 119],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 44,
+                "height": 119,
+                "zHeight": 52
+              }
+            ],
+            "depthOffset": -59.5
+          }
+        },
+        {
+          "id": "original-vehicle:cement-mixer:north",
+          "vehicleId": "cement-mixer",
+          "direction": "north",
+          "rect": [74, 277, 44, 141],
+          "metadata": {
+            "name": "Cement mixer truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "cement mixer"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [22, 150.5],
+            "footprint": [-22.0, -119, 44, 119],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 44,
+                "height": 119,
+                "zHeight": 52
+              }
+            ],
+            "depthOffset": -59.5
+          }
+        },
+        {
+          "id": "original-vehicle:cement-mixer:west",
+          "vehicleId": "cement-mixer",
+          "direction": "west",
+          "rect": [37, 530, 118, 81],
+          "metadata": {
+            "name": "Cement mixer truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "cement mixer"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [59, 84.0],
+            "footprint": [-59.5, -44, 119, 44],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 119,
+                "height": 44,
+                "zHeight": 52
+              }
+            ],
+            "depthOffset": -22.0
+          }
+        },
+        {
+          "id": "original-vehicle:cement-mixer:east",
+          "vehicleId": "cement-mixer",
+          "direction": "east",
+          "rect": [37, 754, 118, 81],
+          "metadata": {
+            "name": "Cement mixer truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "cement mixer"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [59, 84.0],
+            "footprint": [-59.5, -44, 119, 44],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 119,
+                "height": 44,
+                "zHeight": 52
+              }
+            ],
+            "depthOffset": -22.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "mobile-crane",
+      "name": "Mobile crane truck",
+      "sprite": "assets/vehicles/mobile-crane-v1.png",
+      "mesh": {
+        "assetId": "mobile-crane-authored-v1",
+        "path": "assets/models/vehicles/mobile-crane-v1.glb",
+        "radius": 128,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 54,
+        "acceleration": 70,
+        "pushSpeed": 60,
+        "pushWeight": 800
+      },
+      "views": [
+        {
+          "id": "original-vehicle:mobile-crane:south",
+          "vehicleId": "mobile-crane",
+          "direction": "south",
+          "rect": [73, 57, 46, 144],
+          "metadata": {
+            "name": "Mobile crane truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "mobile crane"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [23, 152.0],
+            "footprint": [-23.0, -130, 46, 130],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 46,
+                "height": 130,
+                "zHeight": 50
+              }
+            ],
+            "depthOffset": -65.0
+          }
+        },
+        {
+          "id": "original-vehicle:mobile-crane:north",
+          "vehicleId": "mobile-crane",
+          "direction": "north",
+          "rect": [73, 257, 46, 168],
+          "metadata": {
+            "name": "Mobile crane truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "mobile crane"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [23, 176.0],
+            "footprint": [-23.0, -130, 46, 130],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 46,
+                "height": 130,
+                "zHeight": 50
+              }
+            ],
+            "depthOffset": -65.0
+          }
+        },
+        {
+          "id": "original-vehicle:mobile-crane:west",
+          "vehicleId": "mobile-crane",
+          "direction": "west",
+          "rect": [31, 528, 128, 85],
+          "metadata": {
+            "name": "Mobile crane truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "mobile crane"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [65, 87.0],
+            "footprint": [-65.0, -46, 130, 46],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 130,
+                "height": 46,
+                "zHeight": 50
+              }
+            ],
+            "depthOffset": -23.0
+          }
+        },
+        {
+          "id": "original-vehicle:mobile-crane:east",
+          "vehicleId": "mobile-crane",
+          "direction": "east",
+          "rect": [33, 757, 128, 80],
+          "metadata": {
+            "name": "Mobile crane truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "mobile crane"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [63, 82.0],
+            "footprint": [-65.0, -46, 130, 46],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 130,
+                "height": 46,
+                "zHeight": 50
+              }
+            ],
+            "depthOffset": -23.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "street-sweeper",
+      "name": "Street sweeper",
+      "sprite": "assets/vehicles/street-sweeper-v1.png",
+      "mesh": {
+        "assetId": "street-sweeper-authored-v1",
+        "path": "assets/models/vehicles/street-sweeper-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 52,
+        "acceleration": 85,
+        "pushSpeed": 45,
+        "pushWeight": 320
+      },
+      "views": [
+        {
+          "id": "original-vehicle:street-sweeper:south",
+          "vehicleId": "street-sweeper",
+          "direction": "south",
+          "rect": [74, 81, 44, 91],
+          "metadata": {
+            "name": "Street sweeper · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "street sweeper"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [22, 98.0],
+            "footprint": [-22.0, -70, 44, 70],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 44,
+                "height": 70,
+                "zHeight": 37
+              }
+            ],
+            "depthOffset": -35.0
+          }
+        },
+        {
+          "id": "original-vehicle:street-sweeper:north",
+          "vehicleId": "street-sweeper",
+          "direction": "north",
+          "rect": [74, 303, 44, 92],
+          "metadata": {
+            "name": "Street sweeper · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "street sweeper"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [22, 100.0],
+            "footprint": [-22.0, -70, 44, 70],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 44,
+                "height": 70,
+                "zHeight": 37
+              }
+            ],
+            "depthOffset": -35.0
+          }
+        },
+        {
+          "id": "original-vehicle:street-sweeper:west",
+          "vehicleId": "street-sweeper",
+          "direction": "west",
+          "rect": [61, 542, 70, 71],
+          "metadata": {
+            "name": "Street sweeper · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "street sweeper"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [35, 72.0],
+            "footprint": [-35.0, -44, 70, 44],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 70,
+                "height": 44,
+                "zHeight": 37
+              }
+            ],
+            "depthOffset": -22.0
+          }
+        },
+        {
+          "id": "original-vehicle:street-sweeper:east",
+          "vehicleId": "street-sweeper",
+          "direction": "east",
+          "rect": [61, 766, 70, 71],
+          "metadata": {
+            "name": "Street sweeper · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "street sweeper"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [35, 72.0],
+            "footprint": [-35.0, -44, 70, 44],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 70,
+                "height": 44,
+                "zHeight": 37
+              }
+            ],
+            "depthOffset": -22.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "snowplow",
+      "name": "Snowplow truck",
+      "sprite": "assets/vehicles/snowplow-v1.png",
+      "mesh": {
+        "assetId": "snowplow-authored-v1",
+        "path": "assets/models/vehicles/snowplow-v1.glb",
+        "radius": 128,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 64,
+        "acceleration": 95,
+        "pushSpeed": 52,
+        "pushWeight": 500
+      },
+      "views": [
+        {
+          "id": "original-vehicle:snowplow:south",
+          "vehicleId": "snowplow",
+          "direction": "south",
+          "rect": [71, 47, 50, 160],
+          "metadata": {
+            "name": "Snowplow truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "snowplow"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [25, 162.5],
+            "footprint": [-25.5, -131, 51, 131],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 51,
+                "height": 131,
+                "zHeight": 47
+              }
+            ],
+            "depthOffset": -65.5
+          }
+        },
+        {
+          "id": "original-vehicle:snowplow:north",
+          "vehicleId": "snowplow",
+          "direction": "north",
+          "rect": [71, 280, 50, 132],
+          "metadata": {
+            "name": "Snowplow truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "snowplow"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [25, 153.5],
+            "footprint": [-25.5, -131, 51, 131],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 51,
+                "height": 131,
+                "zHeight": 47
+              }
+            ],
+            "depthOffset": -65.5
+          }
+        },
+        {
+          "id": "original-vehicle:snowplow:west",
+          "vehicleId": "snowplow",
+          "direction": "west",
+          "rect": [31, 527, 120, 88],
+          "metadata": {
+            "name": "Snowplow truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "snowplow"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [65, 90.5],
+            "footprint": [-65.5, -51, 131, 51],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 131,
+                "height": 51,
+                "zHeight": 47
+              }
+            ],
+            "depthOffset": -25.5
+          }
+        },
+        {
+          "id": "original-vehicle:snowplow:east",
+          "vehicleId": "snowplow",
+          "direction": "east",
+          "rect": [41, 751, 120, 88],
+          "metadata": {
+            "name": "Snowplow truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "snowplow"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [55, 90.5],
+            "footprint": [-65.5, -51, 131, 51],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 131,
+                "height": 51,
+                "zHeight": 47
+              }
+            ],
+            "depthOffset": -25.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "farm-tractor",
+      "name": "Farm tractor",
+      "sprite": "assets/vehicles/farm-tractor-v1.png",
+      "mesh": {
+        "assetId": "farm-tractor-authored-v1",
+        "path": "assets/models/vehicles/farm-tractor-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 52,
+        "acceleration": 100,
+        "pushSpeed": 45,
+        "pushWeight": 300
+      },
+      "views": [
+        {
+          "id": "original-vehicle:farm-tractor:south",
+          "vehicleId": "farm-tractor",
+          "direction": "south",
+          "rect": [77, 77, 38, 91],
+          "metadata": {
+            "name": "Farm tractor · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "farm tractor"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [19, 101.0],
+            "footprint": [-19.0, -68, 38, 68],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 38,
+                "height": 68,
+                "zHeight": 46
+              }
+            ],
+            "depthOffset": -34.0
+          }
+        },
+        {
+          "id": "original-vehicle:farm-tractor:north",
+          "vehicleId": "farm-tractor",
+          "direction": "north",
+          "rect": [77, 313, 38, 82],
+          "metadata": {
+            "name": "Farm tractor · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "farm tractor"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [19, 89.0],
+            "footprint": [-19.0, -68, 38, 68],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 38,
+                "height": 68,
+                "zHeight": 46
+              }
+            ],
+            "depthOffset": -34.0
+          }
+        },
+        {
+          "id": "original-vehicle:farm-tractor:west",
+          "vehicleId": "farm-tractor",
+          "direction": "west",
+          "rect": [63, 535, 67, 74],
+          "metadata": {
+            "name": "Farm tractor · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "farm tractor"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [33, 76.0],
+            "footprint": [-34.0, -38, 68, 38],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 68,
+                "height": 38,
+                "zHeight": 46
+              }
+            ],
+            "depthOffset": -19.0
+          }
+        },
+        {
+          "id": "original-vehicle:farm-tractor:east",
+          "vehicleId": "farm-tractor",
+          "direction": "east",
+          "rect": [62, 759, 67, 74],
+          "metadata": {
+            "name": "Farm tractor · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "farm tractor"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [34, 76.0],
+            "footprint": [-34.0, -38, 68, 38],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 68,
+                "height": 38,
+                "zHeight": 46
+              }
+            ],
+            "depthOffset": -19.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "forklift",
+      "name": "Forklift",
+      "sprite": "assets/vehicles/forklift-v1.png",
+      "mesh": {
+        "assetId": "forklift-authored-v1",
+        "path": "assets/models/vehicles/forklift-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 40,
+        "acceleration": 95,
+        "pushSpeed": 38,
+        "pushWeight": 230
+      },
+      "views": [
+        {
+          "id": "original-vehicle:forklift:south",
+          "vehicleId": "forklift",
+          "direction": "south",
+          "rect": [82, 95, 28, 87],
+          "metadata": {
+            "name": "Forklift · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "forklift"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [14, 89.0],
+            "footprint": [-14.0, -80, 28, 80],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 28,
+                "height": 80,
+                "zHeight": 38
+              }
+            ],
+            "depthOffset": -40.0
+          }
+        },
+        {
+          "id": "original-vehicle:forklift:north",
+          "vehicleId": "forklift",
+          "direction": "north",
+          "rect": [82, 312, 28, 75],
+          "metadata": {
+            "name": "Forklift · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "forklift"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [14, 96.0],
+            "footprint": [-14.0, -80, 28, 80],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 28,
+                "height": 80,
+                "zHeight": 38
+              }
+            ],
+            "depthOffset": -40.0
+          }
+        },
+        {
+          "id": "original-vehicle:forklift:west",
+          "vehicleId": "forklift",
+          "direction": "west",
+          "rect": [56, 545, 64, 59],
+          "metadata": {
+            "name": "Forklift · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "forklift"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [40, 61.0],
+            "footprint": [-40.0, -28, 80, 28],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 80,
+                "height": 28,
+                "zHeight": 38
+              }
+            ],
+            "depthOffset": -14.0
+          }
+        },
+        {
+          "id": "original-vehicle:forklift:east",
+          "vehicleId": "forklift",
+          "direction": "east",
+          "rect": [72, 769, 64, 59],
+          "metadata": {
+            "name": "Forklift · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "forklift"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [24, 61.0],
+            "footprint": [-40.0, -28, 80, 28],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 80,
+                "height": 28,
+                "zHeight": 38
+              }
+            ],
+            "depthOffset": -14.0
+          }
+        }
+      ]
     }
   ]
 }

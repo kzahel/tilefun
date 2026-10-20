@@ -227,3 +227,351 @@ it("keeps source hierarchy by default and fails closed if a qualified batching s
   ).toThrow("Missing qualified vehicle part");
   expect(free).toHaveBeenCalledTimes(1);
 });
+
+// Motorcycle-v1 branch: true F/R[/SC], own radii, same production asset.
+function cycleFixture(sidecar = false) {
+  const scene = new THREE.Group(),
+    root = new THREE.Group();
+  root.name = "Motorcycle_Root";
+  const ids = sidecar ? ["F", "R", "SC"] : ["F", "R"];
+  root.userData = { tilefun_motorcycle: 1, wheel_ids: ids };
+  scene.add(root);
+  const map = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1);
+  const material = new THREE.MeshBasicMaterial({ map });
+  const body = new THREE.Mesh(new THREE.BoxGeometry(20, 5, 8), material);
+  body.name = "Cycle_fixed_body";
+  body.position.y = 16;
+  root.add(body);
+  const radii: Record<string, number> = { F: 6, R: 8, SC: 4 };
+  for (const [i, id] of ids.entries()) {
+    const radius = required(radii[id]);
+    const steer = new THREE.Group();
+    steer.name = `Wheel_${id}_Steer`;
+    steer.position.set(i === 0 ? -17 : i === 1 ? 14 : 0, radius, id === "SC" ? 14 : 0);
+    const roll = new THREE.Group();
+    roll.name = `Wheel_${id}_Roll`;
+    roll.userData = { wheel_radius: radius, roll_axis_gltf: [0, 0, -1] };
+    roll.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), 0.2);
+    const geometry = new THREE.CylinderGeometry(radius, radius, 2, 32);
+    geometry.rotateX(Math.PI / 2);
+    roll.add(new THREE.Mesh(geometry, material));
+    steer.add(roll);
+    root.add(steer);
+  }
+  return { scene, root, body, ids, map, material };
+}
+
+it.each([false, true])(
+  "rolls genuine two/three-wheel cycles per radius through signed travel/reset (sidecar=%s)",
+  (sidecar) => {
+    const { scene, root, body, ids, map, material } = cycleFixture(sidecar);
+    const rolls = ids.map((id) => required(root.getObjectByName(`Wheel_${id}_Roll`)));
+    const rest = rolls.map((roll) => roll.quaternion.clone());
+    const resources = new Set<THREE.BufferGeometry>();
+    scene.traverse((node) => {
+      if (node instanceof THREE.Mesh) resources.add(node.geometry);
+    });
+    const freeMaterial = vi.spyOn(material, "dispose"),
+      freeMap = vi.spyOn(map, "dispose");
+    const asset = new CarMeshAsset(scene, 1, { batch: true, preserveParts: ["Cycle_fixed_body"] });
+    scene.traverse((node) => {
+      if (node instanceof THREE.Mesh) resources.add(node.geometry);
+    });
+    const frees = [...resources].map((geometry) => vi.spyOn(geometry, "dispose"));
+    asset.object.updateMatrixWorld(true);
+    const centers = rolls.map((roll) => roll.getWorldPosition(new THREE.Vector3()));
+    const bodyRest = body.matrixWorld.clone();
+    for (const distance of [Math.PI * 3, -Math.PI * 3, 0, 13, 0]) {
+      asset.setTravel(distance);
+      asset.object.updateMatrixWorld(true);
+      rolls.forEach((roll, i) => {
+        const expected = required(rest[i])
+          .clone()
+          .multiply(
+            new THREE.Quaternion().setFromAxisAngle(
+              new THREE.Vector3(0, 0, -1),
+              -distance / roll.userData.wheel_radius,
+            ),
+          );
+        expect(roll.quaternion.angleTo(expected)).toBeLessThan(1e-7);
+        expect(
+          roll.getWorldPosition(new THREE.Vector3()).distanceTo(required(centers[i])),
+        ).toBeLessThan(1e-8);
+      });
+      expect(body.matrixWorld.equals(bodyRest)).toBe(true);
+    }
+    expect(rolls[0]?.userData.wheel_radius).not.toBe(rolls[1]?.userData.wheel_radius);
+    asset.dispose();
+    asset.dispose();
+    expect(freeMaterial).toHaveBeenCalledTimes(1);
+    expect(freeMap).toHaveBeenCalledTimes(1);
+    for (const free of frees) expect(free).toHaveBeenCalledTimes(1);
+  },
+);
+
+const cycleFaults: [string, (fixture: ReturnType<typeof cycleFixture>) => void][] = [
+  [
+    "body outside marked root",
+    ({ scene, body }) => {
+      scene.add(body);
+    },
+  ],
+  [
+    "additional mesh outside marked root",
+    ({ scene, body }) => {
+      scene.add(body.clone());
+    },
+  ],
+  [
+    "missing marker",
+    ({ root }) => {
+      delete root.userData.tilefun_motorcycle;
+    },
+  ],
+  [
+    "boolean marker",
+    ({ root }) => {
+      root.userData.tilefun_motorcycle = true;
+    },
+  ],
+  [
+    "string marker",
+    ({ root }) => {
+      root.userData.tilefun_motorcycle = "1";
+    },
+  ],
+  [
+    "wrong numeric marker",
+    ({ root }) => {
+      root.userData.tilefun_motorcycle = 2;
+    },
+  ],
+  [
+    "misnamed root",
+    ({ root }) => {
+      root.name = "WrongRoot";
+    },
+  ],
+  [
+    "no motorcycle root",
+    ({ root }) => {
+      root.name = "Unmarked";
+      delete root.userData.tilefun_motorcycle;
+    },
+  ],
+  [
+    "duplicate root",
+    ({ scene }) => {
+      const n = new THREE.Group();
+      n.name = "Motorcycle_Root";
+      n.userData.tilefun_motorcycle = 1;
+      scene.add(n);
+    },
+  ],
+  [
+    "missing inventory",
+    ({ root }) => {
+      delete root.userData.wheel_ids;
+    },
+  ],
+  [
+    "string inventory",
+    ({ root }) => {
+      root.userData.wheel_ids = "F,R";
+    },
+  ],
+  [
+    "wrong inventory",
+    ({ root }) => {
+      root.userData.wheel_ids = ["FL", "FR", "RL", "RR"];
+    },
+  ],
+  [
+    "duplicate inventory",
+    ({ root }) => {
+      root.userData.wheel_ids = ["F", "R", "R"];
+    },
+  ],
+  [
+    "missing wheel",
+    ({ root }) => {
+      root.remove(required(root.getObjectByName("Wheel_R_Steer")));
+    },
+  ],
+  [
+    "extra wheel",
+    ({ root }) => {
+      const n = required(root.getObjectByName("Wheel_F_Steer")).clone(true);
+      n.name = "Wheel_EXTRA_Steer";
+      required(n.getObjectByName("Wheel_F_Roll")).name = "Wheel_EXTRA_Roll";
+      root.add(n);
+    },
+  ],
+  [
+    "duplicate roll",
+    ({ root }) => {
+      const roll = required(root.getObjectByName("Wheel_F_Roll"));
+      required(roll.parent).add(roll.clone(true));
+    },
+  ],
+  [
+    "duplicate steer",
+    ({ root }) => {
+      const n = new THREE.Group();
+      n.name = "Wheel_F_Steer";
+      root.add(n);
+    },
+  ],
+  [
+    "wrong parent",
+    ({ root }) => {
+      root.add(required(root.getObjectByName("Wheel_F_Roll")));
+    },
+  ],
+  [
+    "outside root",
+    ({ scene, root }) => {
+      scene.add(required(root.getObjectByName("Wheel_F_Steer")));
+    },
+  ],
+  [
+    "nested wheels",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).add(
+        required(root.getObjectByName("Wheel_R_Steer")),
+      );
+    },
+  ],
+  [
+    "empty wheel",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).clear();
+    },
+  ],
+  [
+    "stray metadata",
+    ({ body }) => {
+      body.userData.wheel_radius = 6;
+    },
+  ],
+  [
+    "zero radius",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.wheel_radius = 0;
+    },
+  ],
+  [
+    "negative radius",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.wheel_radius = -1;
+    },
+  ],
+  [
+    "infinite radius",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.wheel_radius = Infinity;
+    },
+  ],
+  [
+    "NaN radius",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.wheel_radius = NaN;
+    },
+  ],
+  [
+    "string radius",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.wheel_radius = "6";
+    },
+  ],
+  [
+    "boolean radius",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.wheel_radius = true;
+    },
+  ],
+  [
+    "missing radius",
+    ({ root }) => {
+      delete required(root.getObjectByName("Wheel_F_Roll")).userData.wheel_radius;
+    },
+  ],
+  [
+    "zero axis",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.roll_axis_gltf = [0, 0, 0];
+    },
+  ],
+  [
+    "short axis",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.roll_axis_gltf = [0, 0];
+    },
+  ],
+  [
+    "nonfinite axis",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.roll_axis_gltf = [0, Infinity, -1];
+    },
+  ],
+  [
+    "nonnumeric axis",
+    ({ root }) => {
+      required(root.getObjectByName("Wheel_F_Roll")).userData.roll_axis_gltf = [0, "0", -1];
+    },
+  ],
+  [
+    "missing axis",
+    ({ root }) => {
+      delete required(root.getObjectByName("Wheel_F_Roll")).userData.roll_axis_gltf;
+    },
+  ],
+  [
+    "boat ambiguity",
+    ({ scene }) => {
+      const boat = new THREE.Group();
+      boat.name = "Boat_Root";
+      boat.userData.tilefun_watercraft = 1;
+      scene.add(boat);
+    },
+  ],
+];
+it.each(cycleFaults)(
+  "rejects malformed cycle %s and disposes all reachable resources",
+  (_label, mutate) => {
+    const f = cycleFixture(true);
+    mutate(f);
+    const geometries = new Set<THREE.BufferGeometry>();
+    f.scene.traverse((node) => {
+      if (node instanceof THREE.Mesh) geometries.add(node.geometry);
+    });
+    const frees = [...geometries].map((geometry) => vi.spyOn(geometry, "dispose"));
+    const freeMaterial = vi.spyOn(f.material, "dispose"),
+      freeMap = vi.spyOn(f.map, "dispose");
+    expect(() => new CarMeshAsset(f.scene, 1, { batch: true })).toThrow();
+    expect(freeMaterial).toHaveBeenCalledTimes(1);
+    expect(freeMap).toHaveBeenCalledTimes(1);
+    for (const free of frees) expect(free).toHaveBeenCalledTimes(1);
+  },
+);
+
+it("preserves zero-wheel marked-boat travel/reset with no cycle metadata", () => {
+  const scene = new THREE.Group(),
+    root = new THREE.Group();
+  root.name = "Boat_Root";
+  root.userData.tilefun_watercraft = 1;
+  const material = new THREE.MeshBasicMaterial();
+  const hull = new THREE.Mesh(new THREE.BoxGeometry(20, 5, 8), material);
+  hull.name = "Boat_Hull";
+  const propeller = new THREE.Mesh(new THREE.BoxGeometry(1, 2, 3), material);
+  propeller.name = "Boat_Propeller";
+  root.add(hull, propeller);
+  scene.add(root);
+  const asset = new CarMeshAsset(scene, 1);
+  const rest = propeller.quaternion.clone();
+  asset.setTravel(2);
+  expect(propeller.quaternion.angleTo(rest)).toBeGreaterThan(0.1);
+  asset.setTravel(0);
+  expect(propeller.quaternion.angleTo(rest)).toBeLessThan(1e-7);
+  asset.dispose();
+});

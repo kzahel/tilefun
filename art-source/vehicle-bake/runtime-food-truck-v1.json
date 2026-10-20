@@ -1,0 +1,113 @@
+{
+  "modelSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+  "spriteSha256": "ee745833276156a7992038557644e2129b8385098cee57b12d74e6d323241ab3",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-food-truck-v1.json": "c1d56e599f1a6f3f748ce8d0c30c65a967be9e93a1a06b5f2ae109c28eaf6359",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/food-truck-v1/review-manifest.json": "74e7ffe49f776e218342ad6f5f17466baf5bb0ab33b6607784225cdaae4f4f69",
+    "public/demos/original-vehicles/food-truck-v1/inputs/model.glb": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "public/demos/original-vehicles/food-truck-v1/inputs/atlas.png": "95e942bad878d4dd1defd6bdf3b8b279df3ac4633115403d4ff32e6c9ff2ebde",
+    "public/demos/original-vehicles/food-truck-v1/captures/capture.json": "828c3635d53948616c74c498d850d57ae2712713aba8cd0167cd6041a9293a50",
+    "art-source/vehicle-bake/food-truck/v1/evidence/replay-verification.json": "1c3b376683566dfe876516a43afa9bd56407d5e6eda53979ba92144e84bdf002",
+    "art-source/vehicle-bake/food-truck/v1/build.py": "f236b6142f3f557fadfa0e31c3ff95425bf8603bce1128cbe3786d11cfdd012d",
+    "art-source/vehicle-bake/food-truck/v1/geometry.py": "b24020814d820377b5412ce30bdef574688959e1715ac05f33ebab7f09cee61e",
+    "art-source/vehicle-bake/food-truck/v1/family.json": "c5ba7296e4ae82a23a30e53d6f6684700b3dcc0aeecd997e9f7c8daf2c5311ab",
+    "art-source/vehicle-bake/food-truck/v1/coverage-region.json": "04ac06bcf8e9964afe07631151feb45184d2110ea8bab967a46df968f6afa274",
+    "art-source/vehicle-bake/food-truck/v1/review.json": "abfbd7ae500a2087d0ce036f136674954e628ac51a909b11afecd43150ca2c25",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682",
+    "public/demos/original-vehicles/food-truck-v1/captures/engine-4.png": "7ef0c1dc7f29e5b79ba12608c2d7881c7ac577f234c8df7782192832a1ca9e0d",
+    "public/demos/original-vehicles/food-truck-v1/captures/engine-12.png": "7b604942524128dafc2ac370255ed879498519d5d4dfcd5bbcf2a0001b934e89",
+    "public/demos/original-vehicles/food-truck-v1/captures/engine-8.png": "372ad3049c5e0d6c9bb9243e258b3a12a51b338db9ec0eb7e2fe05ec41ed205a",
+    "public/demos/original-vehicles/food-truck-v1/captures/engine-0.png": "0bb52cf876dedeac61b8fe696f3a8633f43583afbcf2016c73dfc393c288df82"
+  },
+  "physicalBounds": [
+    105,
+    51,
+    49
+  ],
+  "measurement": {
+    "modelSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -52.173912048339844,
+        -25.39130401611328,
+        9.5367431640625e-07
+      ],
+      "max": [
+        52.173912048339844,
+        20.69565200805664,
+        48.695655822753906
+      ],
+      "size": [
+        104.34782409667969,
+        46.08695602416992,
+        48.695655822753906
+      ]
+    },
+    "triangles": 2934,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/food-truck/v1/evidence/replay-verification.json",
+    "sha256": "1c3b376683566dfe876516a43afa9bd56407d5e6eda53979ba92144e84bdf002",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-food-truck-v1.json --blender BLENDER"
+}

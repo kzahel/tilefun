@@ -1,0 +1,150 @@
+{
+  "status": "passed-confirmed-final-base-comparison",
+  "baseModelSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "variantModelSha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+  "baseFinalConfirmed": true,
+  "geometryReexported": true,
+  "binaryBasePreservationClaimed": false,
+  "sameScaleWheelbaseRadii": true,
+  "exactlyUnchangedSemanticComponentGeometryTopologyUV": [
+    "Rounded teal tank actual cream side UV panels",
+    "Actual dark saddle central hip tangent",
+    "Actual narrow saddle nose",
+    "Actual rounded pillion rear saddle",
+    "Exposed dark gray crankcase rounded block",
+    "Exposed single cylinder broad block",
+    "Broad engine cooling fin 0.7",
+    "Broad engine cooling fin 0.75",
+    "Broad engine cooling fin 0.8",
+    "Broad engine cooling fin 0.85",
+    "Exposed round crankcase face -1",
+    "Gray outboard exhaust silencer -1",
+    "Rear swingarm -1",
+    "Rear static spring shock broad tube -1",
+    "Twin front fork stanchion -1",
+    "Fixed axle attachment stop short of hub -1.12 -1",
+    "Fixed axle attachment stop short of hub 1.12 -1",
+    "Exposed round crankcase face 1",
+    "Gray outboard exhaust silencer 1",
+    "Rear swingarm 1",
+    "Rear static spring shock broad tube 1",
+    "Twin front fork stanchion 1",
+    "Fixed axle attachment stop short of hub -1.12 1",
+    "Fixed axle attachment stop short of hub 1.12 1",
+    "Narrow tubular frame member 0",
+    "Narrow tubular frame member 1",
+    "Narrow tubular frame member 2",
+    "Narrow tubular frame member 3",
+    "Narrow tubular frame member 4",
+    "Narrow tubular frame member 5",
+    "Actual curved cream teal road fender F",
+    "Actual curved cream teal road fender R",
+    "Front round headlamp dark housing",
+    "Broad cream front headlamp face",
+    "Simple rear ruby lamp",
+    "True motorcycle rounded tire F",
+    "Classic broad wheel rim F -1",
+    "Chrome wheel hub F -1",
+    "Asymmetric wheel phase index F -1",
+    "Classic broad wheel rim F 1",
+    "Chrome wheel hub F 1",
+    "Asymmetric wheel phase index F 1",
+    "True motorcycle rounded tire R",
+    "Classic broad wheel rim R -1",
+    "Chrome wheel hub R -1",
+    "Asymmetric wheel phase index R -1",
+    "Classic broad wheel rim R 1",
+    "Chrome wheel hub R 1",
+    "Asymmetric wheel phase index R 1"
+  ],
+  "changedSemanticComponents": [
+    "Headstock to actual grip riser",
+    "Actual connected handlebar centerline",
+    "Actual palm wrapped grip left",
+    "Actual sole tangent foot peg left",
+    "Actual palm wrapped grip right",
+    "Actual sole tangent foot peg right"
+  ],
+  "unchangedComponents": 49,
+  "totalComponents": 55,
+  "atlasBytesExactToObservedBase": true,
+  "modifiedComponentBoundsSource": {
+    "Headstock to actual grip riser": {
+      "min": [
+        -0.7083679,
+        -0.025,
+        1.0764421
+      ],
+      "max": [
+        -0.211632,
+        0.025,
+        1.2940578
+      ]
+    },
+    "Actual connected handlebar centerline": {
+      "min": [
+        -0.241,
+        -0.18,
+        1.2494999
+      ],
+      "max": [
+        -0.199,
+        0.18,
+        1.2915
+      ]
+    },
+    "Actual palm wrapped grip left": {
+      "min": [
+        -0.237,
+        -0.31,
+        1.2535
+      ],
+      "max": [
+        -0.203,
+        -0.18,
+        1.2874999
+      ]
+    },
+    "Actual sole tangent foot peg left": {
+      "min": [
+        -0.045,
+        -0.255,
+        0.7305
+      ],
+      "max": [
+        -0.005,
+        -0.1,
+        0.7705
+      ]
+    },
+    "Actual palm wrapped grip right": {
+      "min": [
+        -0.237,
+        0.18,
+        1.2535
+      ],
+      "max": [
+        -0.203,
+        0.31,
+        1.2874999
+      ]
+    },
+    "Actual sole tangent foot peg right": {
+      "min": [
+        -0.045,
+        0.1,
+        0.7305
+      ],
+      "max": [
+        -0.005,
+        0.255,
+        0.7705
+      ]
+    }
+  },
+  "limits": "Confirmed final immutable base; original never edited or reexported.",
+  "centralSaddleNominallyUnchangedButFloatContactRecomputed": {
+    "maximumCoordinateDeltaSource": 0.0,
+    "notClaimedBitExact": true
+  }
+}

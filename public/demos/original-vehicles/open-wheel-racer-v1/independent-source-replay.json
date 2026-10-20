@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "open-wheel-racer",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/open-wheel-racer/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/open-wheel-racer/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/open-wheel-racer/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

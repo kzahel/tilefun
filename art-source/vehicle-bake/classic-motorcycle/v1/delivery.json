@@ -1,0 +1,21 @@
+{
+  "status": "prototype-source-complete",
+  "ready": true,
+  "sourceImmutable": true,
+  "glbSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "atlasSha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+  "recipeSha256": "9b055a5bb4adc44b60258936ce6d7171c632d8f6fca21b43e253928a06babf01",
+  "report": "public/demos/vehicle-bake/classic-motorcycle/v1/report.json",
+  "normalActivation": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "proofCommands": [
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/classic-motorcycle/prove-fit.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/classic-motorcycle/audit-source.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/classic-motorcycle/v1/model.glb --config art-source/vehicle-bake/classic-motorcycle/v1/coverage-region.json --output data/vehicle-bake/classic-motorcycle/recheck-coverage.json",
+    "node scripts/vehicle-bake/classic-motorcycle/capture-raw.mjs",
+    "python scripts/vehicle-bake/classic-motorcycle/assess-pixels.py",
+    "python scripts/vehicle-bake/classic-motorcycle/fresh-replay.py --name parent-fresh-replay --blender BLENDER"
+  ],
+  "replayInputs": "Six declared files: own build/geometry/family/raw-audit, stable catalog-cycle and immutable upright profile; no master/scratch input",
+  "parentNext": "Independent review/replay and eventual actual shared cycle loader/browser qualification; no normal activation"
+}

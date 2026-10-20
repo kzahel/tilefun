@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 6,
+  "glbSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/classic-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/classic-motorcycle/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/classic-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/classic-motorcycle-parent/retained-replay-rouyvarx",
+  "scratchInputDependencies": []
+}

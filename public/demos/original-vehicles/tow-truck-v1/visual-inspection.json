@@ -1,0 +1,14 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: blue/cream cab and low orange folded boom, cable and real hook remain legible with clean depth and dark outlines.",
+    "Signed phase sheets and wireframes show fixed folded equipment, independently rolling covered wheels and no visible crown poke-through; towing mechanics not implemented."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

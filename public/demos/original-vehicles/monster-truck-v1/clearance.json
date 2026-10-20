@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "monster-truck--v1",
+    "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "triangles": 3534,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 14.782610406875104,
+        "minimumGap": 1.5357166701085845,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 14.782610406875104,
+        "minimumGap": 1.5357166701085845,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 14.78261006771037,
+        "minimumGap": 1.5357171310844695,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 14.78261006771037,
+        "minimumGap": 1.5357171310844695,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

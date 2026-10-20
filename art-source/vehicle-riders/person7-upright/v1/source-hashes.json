@@ -1,0 +1,18 @@
+{
+  "scripts/vehicle-riders/person7-upright/attempt-proof.py": "bc8ec94854b7d8ce69732fd09acf5ed2a17a57e7506cbf6ea493d9c6ee7b8bc0",
+  "scripts/vehicle-riders/person7-upright/build-view.mjs": "8914d8035ea23ef87c8eef07263f0c8117b5492c337fbaecfe7808bbe41a1232",
+  "scripts/vehicle-riders/person7-upright/build.py": "181943d7b512d1698f6d9f86cb3b01e3caabc190289fb58ceb469e070e361f9e",
+  "scripts/vehicle-riders/person7-upright/capture.mjs": "6dc401e0d72d9b296fff5982ae362140a381a4a26ff31701a3a70a4be48246ed",
+  "scripts/vehicle-riders/person7-upright/explorer-upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "scripts/vehicle-riders/person7-upright/finalize.py": "980da9f87833218e01e870c8938e057bc3fbc4033615d71849d5527b4adf70b7",
+  "scripts/vehicle-riders/person7-upright/fixture.py": "64d0b6e34aade3a02a20e2c0b71e7909487ffd6bebc15ad2b699645ec4971fba",
+  "scripts/vehicle-riders/person7-upright/identity-inspect.py": "7f4ed71384a0e30059d7bad793e2040bb88136fb8c2372de2a90491d07b4cc2c",
+  "scripts/vehicle-riders/person7-upright/identity.json": "7ce12a1069c4c552bbcc524e0ab6523089a311527dcc1484d116275c0ace9aa4",
+  "scripts/vehicle-riders/person7-upright/index.html": "4ca570ecdce2f3f2956b58848a6fce635cb40e3a1ac6ac6b08f810d691123527",
+  "scripts/vehicle-riders/person7-upright/inspect.py": "e942f2878239e0036dc87b96c55f5a9b24c525b3411efb1d55b7d91b5c84e12e",
+  "scripts/vehicle-riders/person7-upright/person7-upright-v1.json": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3",
+  "scripts/vehicle-riders/person7-upright/prove.py": "4a68b7dc4f828f40f84fc7afaf1c99d7d2caa3e045d9c3a15600ed2cad714f87",
+  "scripts/vehicle-riders/person7-upright/replay.py": "31a4363e5be65879f842e67b3bbb56bf374eaa6c60586b5b2891ff2606b0cfa5",
+  "scripts/vehicle-riders/person7-upright/rider.json": "d840be12016eb4553db3948648c27363dede298bdaa30f28ef16cdcbad5a6193",
+  "scripts/vehicle-riders/person7-upright/viewer.mjs": "3f934ec2e21fdac995ebbfd7561377309cd1b5423d5590ed62664493dddf6221"
+}

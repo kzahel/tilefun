@@ -1,0 +1,975 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "snowplow-v1",
+      "name": "Snowplow truck",
+      "title": "Snowplow truck \u00b7 autonomous original v1",
+      "nativeSize": 256,
+      "engineRadius": 128.0,
+      "dimensions": [
+        256,
+        256
+      ],
+      "groundOrigins": {
+        "study": [
+          128,
+          156
+        ],
+        "engine": [
+          128,
+          128
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original snowplow: orange closed work cab with blue framed glass on actual skin; solid yellow curved scoop with separate dark cutting edge, four rigid gray mount links; open thick blue/gray V-section salt hopper with three broad top bars. All equipment rigid/stowed; no plowing, spreading, terrain modification or animated equipment claim.",
+      "audit": {
+        "triangles": 2870,
+        "vertices": 5724,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 206484,
+        "sha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/atlas.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/atlas.png",
+          "sha256": "1bd3583afd6b0e40b8e8de54f564e3b97adc68396313c15fbad7eb880c9c57bc"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/capture.json",
+          "sha256": "89431b52e503f17e885c7e82f7b900957d11aea228879cbe909f16097221aefa"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-0.png",
+          "sha256": "c1fa392d40f454de5cbdda01501b05f22757fecb22da365c5d68590387325882"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-1.png",
+          "sha256": "a3b9139958c2bae82695872699779dc9e0236c465b8621ea2774105816fef7fc"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-10.png",
+          "sha256": "fc7d46aacb884d6eda46b98ff0b39c2cc37cc42396ecdbf579b0f6f8374ff56a"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-11.png",
+          "sha256": "d5a348a3fb79cb76334b5bcaeba3c82fc529dcd9707ca19cdbb038e6a2ff8303"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-12.png",
+          "sha256": "7a0f8772c4dc086866c97c680bf2a4d0ee265b57cb3458c9b9bbc8042ff01c1e"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-13.png",
+          "sha256": "11dced1ad7ad3d204d90767b81c8aedc9077c12668214a65a183f17380697242"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-14.png",
+          "sha256": "72fad4748bf49fbdb182493914f66e1a9821393961966b75d4dbf7d9cd914440"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-15.png",
+          "sha256": "de6ad2122a2ddc711bb5b2912d12cf15f2a401d94227bf301b7f6dc474037f48"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-2.png",
+          "sha256": "11963de5b69d551ae404de58769ae16594e603de2c3a9f1a93324fa785de0f06"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-3.png",
+          "sha256": "f9646b670a3e7e738795f55ac26dbf245d04fa19618c88675cbe6894284d8e1c"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-4.png",
+          "sha256": "0ba4b40ec50d49be2fb88b428f2658decc53c7013bbb562273e29201befc5542"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-5.png",
+          "sha256": "c2140838308cb13669564bd50dfb014231cebd6d1e7b62a82c2b1751b59e5e16"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-6.png",
+          "sha256": "3e8e987f25f3af905ada402ce82497817f67253a2ee8047fa176bf5fc64437a4"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-7.png",
+          "sha256": "f02ec27490ba389f99d00f44779cfa623d57a6146347eaa6acf8fc8f69b69b92"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-8.png",
+          "sha256": "cc23acd867e275481accfedbd1b951e8613c36f62617ac400605c688bc690786"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-9.png",
+          "sha256": "bd17d1cfb85a41671092aafd751c094f1646261e2808777748b79f4e12bb5c6d"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-0.png",
+          "sha256": "11963de5b69d551ae404de58769ae16594e603de2c3a9f1a93324fa785de0f06"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-1.png",
+          "sha256": "9e35cc0d85c57f97748aa0c166dcdd33d9f1e382ba253f084e4293263a9de7ad"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-2.png",
+          "sha256": "111678c03ca5447c5dc187414570c5bdeef7b417075398ec5fd42bf9d2caa453"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-3.png",
+          "sha256": "faef297a1d1cf736666af4ec99a9314ac261c3130381dcac49dfa9bceddef9c0"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-4.png",
+          "sha256": "8d2cfb66804a9a1fad7140b96eeb8be65c63620a1f23cc6bee5f2422798673a6"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-5.png",
+          "sha256": "5893b5b31bb5e265d7a21d17aaf400744626045ee2a096579621538fea320d91"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-6.png",
+          "sha256": "32ca3559e0c682c204077ab216e34fe5c3e8183fc453e8107d918de89dc876e4"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-7.png",
+          "sha256": "8f43ab576835cc89b8d8da4f1a5e2db98066b9615e4e212d56569d250f37726e"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/inspection-engine.png",
+          "sha256": "49b40700852b527ace646b08dcffb91b7dbea4ec6fb93e457f2b146669ed29cc"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/inspection-phases.png",
+          "sha256": "29bcc18c2ef0f92caa9257a92e65c32bf377bd479439bfd538f0cf13f78718fd"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/inspection-study.png",
+          "sha256": "c07f781bb89b8bebbec0590cee866f389246d1648a453c569b98f5f7ab0642e1"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-0.png",
+          "sha256": "e5dc5394d07878c66815b1207ef485f73e854cb7b080f7ba43034d6593dc4741"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-1.png",
+          "sha256": "fe6223b7228adb15340f1ba08350be0e963a1635e82f62fa5fc5eb383db63ae9"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-2.png",
+          "sha256": "dfe372426789b848612b5c56c673e91df86330eba06a483e835303fbac518f3a"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-3.png",
+          "sha256": "411597980f86aba1f63e25758d88dcd37be9690cb8c34f702280cb0b7874b8b9"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-4.png",
+          "sha256": "74f5eb2fe6dce8821b229c4d95bda0905e5862ed14adc57ddcd8a92e4c5d7280"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-5.png",
+          "sha256": "d9f76a0d76824075c23daedc983de28ec6a2fd57f262e2172d357b0d6b5ac9ca"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-6.png",
+          "sha256": "4f1226c6f56b16b669f6c0f8b0759be166efe84c0a070a2de1f0925f168fc04a"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-7.png",
+          "sha256": "552523e64bc04ec12e494da45dd4a213a4a52eb49c3e9d328b411b22ea3264e2"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-0.png",
+          "sha256": "3cc0f40887762023ed8f91916938cab425721e1a13c2f6208dec5254eb84c462"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-1.png",
+          "sha256": "739ca48c74925758708df4604a4862b53b7625212c2b44201ce405e3fee0d026"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-10.png",
+          "sha256": "c8df9ce1291d1f16b68f2a5e6c0be1b2fd0ad11990787f629f0d64cd4d74d8ed"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-11.png",
+          "sha256": "45411fbde0763f7e850a09de7db6af6650b0a980271cb7a46cda431520d8ce23"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-12.png",
+          "sha256": "9c30998598c4b7932b9f8073cb4b0e6fc10db9ae1b690c2100d21095de752969"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-13.png",
+          "sha256": "1b1cad4faee83ed377b9b4bdb83b7e9dfc3e03173d87c80eb22d9fdf16ea3ecf"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-14.png",
+          "sha256": "67b4f67aa7b66beb71661c97a836d9f2e34cfe6d003fbd81ce518c9e5e0a9979"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-15.png",
+          "sha256": "d1087482d2be5638c62b01888786379df1fb4756deed42cb36105f960e25a508"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-2.png",
+          "sha256": "e5dc5394d07878c66815b1207ef485f73e854cb7b080f7ba43034d6593dc4741"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-3.png",
+          "sha256": "7173d698a2a8b4b7e6842355a93e5a772a3fef7858d52c1ea412d7f548c8587d"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-4.png",
+          "sha256": "63819ed53ee7c66a7167bc4a036c93c3ace8d85e705d3e2a468992124ae79ef9"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-5.png",
+          "sha256": "e7f30cc89ec6bb289db1b3a556f8467ef6796b3b1ece7f5851a72b76019fe72f"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-6.png",
+          "sha256": "639caddde4a0267e643933f0ffadacd56d7f3027bede8ac3e055ce4663ea0388"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-7.png",
+          "sha256": "711c73b068db4a66da67df8f30c6115ddafa9c44e758f4b881903d4800a631e0"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-8.png",
+          "sha256": "eb283d778584556aec18eab43f6bc2545f128cc38134a6cf5d20a92d6ac048e1"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/study-9.png",
+          "sha256": "99f519ddafbc52bc6105817efbe2117bdbaa2f2c4aad82b75e7b5705e36d395d"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/wire-engine.png",
+          "sha256": "28ff0e9f0d88374b983bb9b6a4f2200c4ce030e79a036c214d2e02fcac1cb118"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/engine/wire-study.png",
+          "sha256": "5e9e76feb640103506330040c2231e6db2d4124f42faeda2439d128250c2de05"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/model.glb",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/model.glb",
+          "sha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/recipe.json",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/recipe.json",
+          "sha256": "343045ea34ded98cf758ec063b2c513c69f69fe9bc2c880420873560e396803d"
+        },
+        {
+          "source": "demos/vehicle-bake/snowplow/v1/report.json",
+          "retained": "demos/original-vehicles/snowplow-v1/inputs/report.json",
+          "sha256": "f58617d0938ffe4906048cfca2c9875f7065c7ffb07fbcd1e31d6647bdddf62a"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/snowplow-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "snowplow--v1",
+          "glbSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+          "triangles": 2870,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 8.695653116241195,
+              "minimumGap": 1.6106577979935626,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 8.695653116241195,
+              "minimumGap": 1.6106577979935626,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 8.695653116241195,
+              "minimumGap": 2.147529418487146,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 8.695653116241195,
+              "minimumGap": 2.147529418487146,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 8.695652173913045,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 8.695652173913045,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 8.695652173913045,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 8.695652173913045,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/snowplow-v1/browser-qa.json",
+          "sha256": "01e79d3154417e5c79390eca9790c8a829cbcfef9d7266e8447246ca5536a9f1"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/candidate.json",
+          "sha256": "b0be25bc56f290120b88ce6db4bdb5eb69a5db8f8a38a28009f96aee1d5190d9"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/capture.json",
+          "sha256": "89431b52e503f17e885c7e82f7b900957d11aea228879cbe909f16097221aefa"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/contact-sheet.png",
+          "sha256": "399eeb49d01edfa238be9416da32d3fba11bdf21eaa3b1b54a075b599bcf391a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-0.png",
+          "sha256": "c1fa392d40f454de5cbdda01501b05f22757fecb22da365c5d68590387325882"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-1.png",
+          "sha256": "a3b9139958c2bae82695872699779dc9e0236c465b8621ea2774105816fef7fc"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-10.png",
+          "sha256": "fc7d46aacb884d6eda46b98ff0b39c2cc37cc42396ecdbf579b0f6f8374ff56a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-11.png",
+          "sha256": "d5a348a3fb79cb76334b5bcaeba3c82fc529dcd9707ca19cdbb038e6a2ff8303"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-12.png",
+          "sha256": "7a0f8772c4dc086866c97c680bf2a4d0ee265b57cb3458c9b9bbc8042ff01c1e"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-13.png",
+          "sha256": "11dced1ad7ad3d204d90767b81c8aedc9077c12668214a65a183f17380697242"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-14.png",
+          "sha256": "72fad4748bf49fbdb182493914f66e1a9821393961966b75d4dbf7d9cd914440"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-15.png",
+          "sha256": "de6ad2122a2ddc711bb5b2912d12cf15f2a401d94227bf301b7f6dc474037f48"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-1x.png",
+          "sha256": "7448539144730879c346f6340034f5e611cf44c9b189987bc6348695feff474a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-2.png",
+          "sha256": "11963de5b69d551ae404de58769ae16594e603de2c3a9f1a93324fa785de0f06"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-2x.png",
+          "sha256": "9b65e19d8bc004770d0425590f356f91c63237833fbccd8982f32cd8966657ad"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-3.png",
+          "sha256": "f9646b670a3e7e738795f55ac26dbf245d04fa19618c88675cbe6894284d8e1c"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-3x.png",
+          "sha256": "9186fb921a4a6b4874865d1c67d8577befd64cb21089b81e7845cd7508d600cd"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-4.png",
+          "sha256": "0ba4b40ec50d49be2fb88b428f2658decc53c7013bbb562273e29201befc5542"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-5.png",
+          "sha256": "c2140838308cb13669564bd50dfb014231cebd6d1e7b62a82c2b1751b59e5e16"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-6.png",
+          "sha256": "3e8e987f25f3af905ada402ce82497817f67253a2ee8047fa176bf5fc64437a4"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-7.png",
+          "sha256": "f02ec27490ba389f99d00f44779cfa623d57a6146347eaa6acf8fc8f69b69b92"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-8.png",
+          "sha256": "cc23acd867e275481accfedbd1b951e8613c36f62617ac400605c688bc690786"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/engine-9.png",
+          "sha256": "bd17d1cfb85a41671092aafd751c094f1646261e2808777748b79f4e12bb5c6d"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-roll-0.png",
+          "sha256": "11963de5b69d551ae404de58769ae16594e603de2c3a9f1a93324fa785de0f06"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-roll-1.png",
+          "sha256": "9e35cc0d85c57f97748aa0c166dcdd33d9f1e382ba253f084e4293263a9de7ad"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-roll-2.png",
+          "sha256": "111678c03ca5447c5dc187414570c5bdeef7b417075398ec5fd42bf9d2caa453"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-roll-3.png",
+          "sha256": "faef297a1d1cf736666af4ec99a9314ac261c3130381dcac49dfa9bceddef9c0"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-roll-4.png",
+          "sha256": "8d2cfb66804a9a1fad7140b96eeb8be65c63620a1f23cc6bee5f2422798673a6"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-roll-5.png",
+          "sha256": "5893b5b31bb5e265d7a21d17aaf400744626045ee2a096579621538fea320d91"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-roll-6.png",
+          "sha256": "32ca3559e0c682c204077ab216e34fe5c3e8183fc453e8107d918de89dc876e4"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-roll-7.png",
+          "sha256": "8f43ab576835cc89b8d8da4f1a5e2db98066b9615e4e212d56569d250f37726e"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/game-turntable.gif",
+          "sha256": "d37645f7635d3a93a65ba88fed121432ffd942937f8d4724c62f8e1fa18a0882"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/roll-0.png",
+          "sha256": "e5dc5394d07878c66815b1207ef485f73e854cb7b080f7ba43034d6593dc4741"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/roll-1.png",
+          "sha256": "fe6223b7228adb15340f1ba08350be0e963a1635e82f62fa5fc5eb383db63ae9"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/roll-2.png",
+          "sha256": "dfe372426789b848612b5c56c673e91df86330eba06a483e835303fbac518f3a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/roll-3.png",
+          "sha256": "411597980f86aba1f63e25758d88dcd37be9690cb8c34f702280cb0b7874b8b9"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/roll-4.png",
+          "sha256": "74f5eb2fe6dce8821b229c4d95bda0905e5862ed14adc57ddcd8a92e4c5d7280"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/roll-5.png",
+          "sha256": "d9f76a0d76824075c23daedc983de28ec6a2fd57f262e2172d357b0d6b5ac9ca"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/roll-6.png",
+          "sha256": "4f1226c6f56b16b669f6c0f8b0759be166efe84c0a070a2de1f0925f168fc04a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/roll-7.png",
+          "sha256": "552523e64bc04ec12e494da45dd4a213a4a52eb49c3e9d328b411b22ea3264e2"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-0.png",
+          "sha256": "3cc0f40887762023ed8f91916938cab425721e1a13c2f6208dec5254eb84c462"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-1.png",
+          "sha256": "739ca48c74925758708df4604a4862b53b7625212c2b44201ce405e3fee0d026"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-10.png",
+          "sha256": "c8df9ce1291d1f16b68f2a5e6c0be1b2fd0ad11990787f629f0d64cd4d74d8ed"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-11.png",
+          "sha256": "45411fbde0763f7e850a09de7db6af6650b0a980271cb7a46cda431520d8ce23"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-12.png",
+          "sha256": "9c30998598c4b7932b9f8073cb4b0e6fc10db9ae1b690c2100d21095de752969"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-13.png",
+          "sha256": "1b1cad4faee83ed377b9b4bdb83b7e9dfc3e03173d87c80eb22d9fdf16ea3ecf"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-14.png",
+          "sha256": "67b4f67aa7b66beb71661c97a836d9f2e34cfe6d003fbd81ce518c9e5e0a9979"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-15.png",
+          "sha256": "d1087482d2be5638c62b01888786379df1fb4756deed42cb36105f960e25a508"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-1x.png",
+          "sha256": "510f427f64a2c9e208cf6a9ade1dbaa2b7b10c41aeac73edadd21423f4f4f4c2"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-2.png",
+          "sha256": "e5dc5394d07878c66815b1207ef485f73e854cb7b080f7ba43034d6593dc4741"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-2x.png",
+          "sha256": "785aa3e3efb3cd71f49cb9fb857e6fc1cdf00e1b8303f27e856d7ca1ddf11092"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-3.png",
+          "sha256": "7173d698a2a8b4b7e6842355a93e5a772a3fef7858d52c1ea412d7f548c8587d"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-3x.png",
+          "sha256": "d3029c78cf147618dcb43234bc844374760481b6cc89a06dd2a1ad64b4757882"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-4.png",
+          "sha256": "63819ed53ee7c66a7167bc4a036c93c3ace8d85e705d3e2a468992124ae79ef9"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-5.png",
+          "sha256": "e7f30cc89ec6bb289db1b3a556f8467ef6796b3b1ece7f5851a72b76019fe72f"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-6.png",
+          "sha256": "639caddde4a0267e643933f0ffadacd56d7f3027bede8ac3e055ce4663ea0388"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-7.png",
+          "sha256": "711c73b068db4a66da67df8f30c6115ddafa9c44e758f4b881903d4800a631e0"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-8.png",
+          "sha256": "eb283d778584556aec18eab43f6bc2545f128cc38134a6cf5d20a92d6ac048e1"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/study-9.png",
+          "sha256": "99f519ddafbc52bc6105817efbe2117bdbaa2f2c4aad82b75e7b5705e36d395d"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/turntable.gif",
+          "sha256": "6eb9ed893a3c672a7ccf3aba88eb57f6989e5177466f95f9b3f1696817c7365c"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/viewer-desktop.png",
+          "sha256": "81b3f47ff8545417ae005abf7593fff1bc98d801186937ee3681fc0bd1f80556"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/viewer-mobile.png",
+          "sha256": "557030722f6ee250b3b09b37e2f9c3988df745e1f6413b026e4a6c7bf35c51eb"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/wheel-phases.png",
+          "sha256": "5ba5bdc4290b2acf23363c5ac00bacc247885015af15bdc2e65624f615de24bf"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/wire-engine.png",
+          "sha256": "28ff0e9f0d88374b983bb9b6a4f2200c4ce030e79a036c214d2e02fcac1cb118"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/captures/wire-study.png",
+          "sha256": "5e9e76feb640103506330040c2231e6db2d4124f42faeda2439d128250c2de05"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/clearance.json",
+          "sha256": "c9411cb3e87b223ecf31236692905d72bc8d45cab4d7c538e984c4aa2a5475fb"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/independent-source-replay.json",
+          "sha256": "688f01cea1f5e9550657641de38389dd506d8f76a523e33fe1745e2009e291d2"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/atlas.png",
+          "sha256": "1bd3583afd6b0e40b8e8de54f564e3b97adc68396313c15fbad7eb880c9c57bc"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/capture.json",
+          "sha256": "89431b52e503f17e885c7e82f7b900957d11aea228879cbe909f16097221aefa"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-0.png",
+          "sha256": "c1fa392d40f454de5cbdda01501b05f22757fecb22da365c5d68590387325882"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-1.png",
+          "sha256": "a3b9139958c2bae82695872699779dc9e0236c465b8621ea2774105816fef7fc"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-10.png",
+          "sha256": "fc7d46aacb884d6eda46b98ff0b39c2cc37cc42396ecdbf579b0f6f8374ff56a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-11.png",
+          "sha256": "d5a348a3fb79cb76334b5bcaeba3c82fc529dcd9707ca19cdbb038e6a2ff8303"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-12.png",
+          "sha256": "7a0f8772c4dc086866c97c680bf2a4d0ee265b57cb3458c9b9bbc8042ff01c1e"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-13.png",
+          "sha256": "11dced1ad7ad3d204d90767b81c8aedc9077c12668214a65a183f17380697242"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-14.png",
+          "sha256": "72fad4748bf49fbdb182493914f66e1a9821393961966b75d4dbf7d9cd914440"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-15.png",
+          "sha256": "de6ad2122a2ddc711bb5b2912d12cf15f2a401d94227bf301b7f6dc474037f48"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-2.png",
+          "sha256": "11963de5b69d551ae404de58769ae16594e603de2c3a9f1a93324fa785de0f06"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-3.png",
+          "sha256": "f9646b670a3e7e738795f55ac26dbf245d04fa19618c88675cbe6894284d8e1c"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-4.png",
+          "sha256": "0ba4b40ec50d49be2fb88b428f2658decc53c7013bbb562273e29201befc5542"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-5.png",
+          "sha256": "c2140838308cb13669564bd50dfb014231cebd6d1e7b62a82c2b1751b59e5e16"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-6.png",
+          "sha256": "3e8e987f25f3af905ada402ce82497817f67253a2ee8047fa176bf5fc64437a4"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-7.png",
+          "sha256": "f02ec27490ba389f99d00f44779cfa623d57a6146347eaa6acf8fc8f69b69b92"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-8.png",
+          "sha256": "cc23acd867e275481accfedbd1b951e8613c36f62617ac400605c688bc690786"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/engine-9.png",
+          "sha256": "bd17d1cfb85a41671092aafd751c094f1646261e2808777748b79f4e12bb5c6d"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-0.png",
+          "sha256": "11963de5b69d551ae404de58769ae16594e603de2c3a9f1a93324fa785de0f06"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-1.png",
+          "sha256": "9e35cc0d85c57f97748aa0c166dcdd33d9f1e382ba253f084e4293263a9de7ad"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-2.png",
+          "sha256": "111678c03ca5447c5dc187414570c5bdeef7b417075398ec5fd42bf9d2caa453"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-3.png",
+          "sha256": "faef297a1d1cf736666af4ec99a9314ac261c3130381dcac49dfa9bceddef9c0"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-4.png",
+          "sha256": "8d2cfb66804a9a1fad7140b96eeb8be65c63620a1f23cc6bee5f2422798673a6"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-5.png",
+          "sha256": "5893b5b31bb5e265d7a21d17aaf400744626045ee2a096579621538fea320d91"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-6.png",
+          "sha256": "32ca3559e0c682c204077ab216e34fe5c3e8183fc453e8107d918de89dc876e4"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/game-roll-7.png",
+          "sha256": "8f43ab576835cc89b8d8da4f1a5e2db98066b9615e4e212d56569d250f37726e"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/inspection-engine.png",
+          "sha256": "49b40700852b527ace646b08dcffb91b7dbea4ec6fb93e457f2b146669ed29cc"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/inspection-phases.png",
+          "sha256": "29bcc18c2ef0f92caa9257a92e65c32bf377bd479439bfd538f0cf13f78718fd"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/inspection-study.png",
+          "sha256": "c07f781bb89b8bebbec0590cee866f389246d1648a453c569b98f5f7ab0642e1"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-0.png",
+          "sha256": "e5dc5394d07878c66815b1207ef485f73e854cb7b080f7ba43034d6593dc4741"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-1.png",
+          "sha256": "fe6223b7228adb15340f1ba08350be0e963a1635e82f62fa5fc5eb383db63ae9"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-2.png",
+          "sha256": "dfe372426789b848612b5c56c673e91df86330eba06a483e835303fbac518f3a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-3.png",
+          "sha256": "411597980f86aba1f63e25758d88dcd37be9690cb8c34f702280cb0b7874b8b9"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-4.png",
+          "sha256": "74f5eb2fe6dce8821b229c4d95bda0905e5862ed14adc57ddcd8a92e4c5d7280"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-5.png",
+          "sha256": "d9f76a0d76824075c23daedc983de28ec6a2fd57f262e2172d357b0d6b5ac9ca"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-6.png",
+          "sha256": "4f1226c6f56b16b669f6c0f8b0759be166efe84c0a070a2de1f0925f168fc04a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/roll-7.png",
+          "sha256": "552523e64bc04ec12e494da45dd4a213a4a52eb49c3e9d328b411b22ea3264e2"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-0.png",
+          "sha256": "3cc0f40887762023ed8f91916938cab425721e1a13c2f6208dec5254eb84c462"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-1.png",
+          "sha256": "739ca48c74925758708df4604a4862b53b7625212c2b44201ce405e3fee0d026"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-10.png",
+          "sha256": "c8df9ce1291d1f16b68f2a5e6c0be1b2fd0ad11990787f629f0d64cd4d74d8ed"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-11.png",
+          "sha256": "45411fbde0763f7e850a09de7db6af6650b0a980271cb7a46cda431520d8ce23"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-12.png",
+          "sha256": "9c30998598c4b7932b9f8073cb4b0e6fc10db9ae1b690c2100d21095de752969"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-13.png",
+          "sha256": "1b1cad4faee83ed377b9b4bdb83b7e9dfc3e03173d87c80eb22d9fdf16ea3ecf"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-14.png",
+          "sha256": "67b4f67aa7b66beb71661c97a836d9f2e34cfe6d003fbd81ce518c9e5e0a9979"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-15.png",
+          "sha256": "d1087482d2be5638c62b01888786379df1fb4756deed42cb36105f960e25a508"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-2.png",
+          "sha256": "e5dc5394d07878c66815b1207ef485f73e854cb7b080f7ba43034d6593dc4741"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-3.png",
+          "sha256": "7173d698a2a8b4b7e6842355a93e5a772a3fef7858d52c1ea412d7f548c8587d"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-4.png",
+          "sha256": "63819ed53ee7c66a7167bc4a036c93c3ace8d85e705d3e2a468992124ae79ef9"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-5.png",
+          "sha256": "e7f30cc89ec6bb289db1b3a556f8467ef6796b3b1ece7f5851a72b76019fe72f"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-6.png",
+          "sha256": "639caddde4a0267e643933f0ffadacd56d7f3027bede8ac3e055ce4663ea0388"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-7.png",
+          "sha256": "711c73b068db4a66da67df8f30c6115ddafa9c44e758f4b881903d4800a631e0"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-8.png",
+          "sha256": "eb283d778584556aec18eab43f6bc2545f128cc38134a6cf5d20a92d6ac048e1"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/study-9.png",
+          "sha256": "99f519ddafbc52bc6105817efbe2117bdbaa2f2c4aad82b75e7b5705e36d395d"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/wire-engine.png",
+          "sha256": "28ff0e9f0d88374b983bb9b6a4f2200c4ce030e79a036c214d2e02fcac1cb118"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/engine/wire-study.png",
+          "sha256": "5e9e76feb640103506330040c2231e6db2d4124f42faeda2439d128250c2de05"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/model.glb",
+          "sha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/recipe.json",
+          "sha256": "343045ea34ded98cf758ec063b2c513c69f69fe9bc2c880420873560e396803d"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/inputs/report.json",
+          "sha256": "f58617d0938ffe4906048cfca2c9875f7065c7ffb07fbcd1e31d6647bdddf62a"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/snowplow-v1/visual-inspection.json",
+          "sha256": "10a1ae08da73b338e772417ee198ff065494dec143a81725a0f4a5a3c36327d4"
+        }
+      ]
+    }
+  ]
+}

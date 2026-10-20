@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "flatbed-truck",
+  "name": "Flatbed truck",
+  "tags": ["vehicle", "original", "flatbed truck"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/flatbed-truck-v1/review-manifest.json",
+    "sha256": "c6c68fdeaed2221a7932b5fde64e712805fcb689ab51963de06e1fa77459a378",
+    "candidateId": "flatbed-truck-v1",
+    "model": "public/demos/original-vehicles/flatbed-truck-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/flatbed-truck-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/flatbed-truck-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/flatbed-truck-v1/captures",
+    "modelSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+    "triangles": 2534,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/flatbed-truck/v1/evidence/replay-verification.json",
+    "sha256": "c788c611097656404f7bbb901cd18e4217e0e9cc36a246d98b0931bb11d8abfc",
+    "build": "art-source/vehicle-bake/flatbed-truck/v1/build.py",
+    "family": "art-source/vehicle-bake/flatbed-truck/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "flatbed-truck-authored-v1",
+    "path": "assets/models/vehicles/flatbed-truck-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/flatbed-truck-v1.png",
+  "performance": {
+    "speed": 85,
+    "acceleration": 130,
+    "pushSpeed": 50,
+    "pushWeight": 380
+  },
+  "receipt": "art-source/vehicle-bake/runtime-flatbed-truck-v1.json",
+  "expectedBounds": [111, 42, 42]
+}

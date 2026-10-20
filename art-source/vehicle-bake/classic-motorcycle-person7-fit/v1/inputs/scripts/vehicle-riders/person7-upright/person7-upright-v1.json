@@ -1,0 +1,74 @@
+{
+  "schema": "tilefun-seated-rider-profile-v1",
+  "id": "person7-upright-measured-v1",
+  "status": "proposed-legacy-profile-prototype-not-production",
+  "units": "World logical pixels, before game rigid basis conversion",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "origin": "Local inferred Person7 pelvis center; actual bike mount not provided",
+  "contacts": {
+    "hip_saddle": [
+      0.0,
+      0.0,
+      -1.0434782608695654
+    ],
+    "hand_left_grip": [
+      -3.8260869565217397,
+      -4.260869565217392,
+      3.304347826086957
+    ],
+    "hand_right_grip": [
+      -3.8260869565217397,
+      4.260869565217392,
+      3.304347826086957
+    ],
+    "foot_left_support": [
+      -0.4347826086956523,
+      -3.304347826086957,
+      -5.391304347826088
+    ],
+    "foot_right_support": [
+      -0.4347826086956523,
+      3.304347826086957,
+      -5.391304347826088
+    ]
+  },
+  "semantics": {
+    "hip_saddle": "Pelvis bottom contact on actual saddle surface",
+    "hands": "Grip centerline anchors; deliberate palm wrap is a declared contact exception",
+    "feet": "Sole tangent points on actual top of foot support, not peg centerline"
+  },
+  "inferredContactSource": {
+    "hip_saddle": [
+      0,
+      0,
+      -0.06
+    ],
+    "hand_left_grip": [
+      -0.22,
+      -0.245,
+      0.19
+    ],
+    "hand_right_grip": [
+      -0.22,
+      0.245,
+      0.19
+    ],
+    "foot_left_support": [
+      -0.025,
+      -0.19,
+      -0.31
+    ],
+    "foot_right_support": [
+      -0.025,
+      0.19,
+      -0.31
+    ]
+  },
+  "basis": "Separate measured compact legacy Person7 profile after actual fixed-chain Explorer profile failure. No limb/body scaling or global target edits.",
+  "uncertainty": "2D sprite does not specify unique hidden skeleton or depth. Conditional on this upright template; other anatomy/leaning poses not ruled out.",
+  "limits": [
+    "One static Person7 legacy human prerequisite only",
+    "Synthetic fixture is not a bike; no production/normal/20-person/all-avatar/AI/fallback qualification"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 actual native headings inspected directly: raised lime/purple pickup, real open recessed bed, massive block-tread wheels and visible static chassis.",
+    "Signed phases/wires show wheel motion independent of raised body; all4 exposed crowns intentionally N/A and visually outboard/below body, no roof z-order artifact.",
+    "Fresh source-only replay exact; whole-body rolling collisionnegative/reset and actual bed-depth proof pass."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

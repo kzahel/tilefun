@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-sidecar-motorcycle-v1",
+      "name": "Explorer \u00b7 sidecar motorcycle fit pilot",
+      "title": "Explorer \u00b7 sidecar motorcycle \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "PREREQUISITE PROTOTYPE: unchanged true-F/R/SC sidecar motorcycle geometry/paint and static Explorer upright composed in one GLB/depth target. All original buffers/transforms retained; explicit companion child attached inside marked cycle root with root-transform compensation. One512 bike atlas plus one256 rider atlas; normal rider/AI/fallback/all27 unqualified.",
+      "audit": {
+        "triangles": 5374,
+        "vertices": 10775,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 388376,
+        "sha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "SC": {
+            "wheel_radius": 6.260869565217392,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R",
+          "SC"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/atlas.png",
+          "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/composition.json",
+          "sha256": "c3c74beb4a78f676ba701839ca341516c890cb4a55bdba01c89167c47dd78f82"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/model.glb",
+          "sha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/recipe.json",
+          "sha256": "fdcc76b49efe158a3803aa9356820cdb3b72797271053ec11c876ebbe8256888"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/report.json",
+          "sha256": "1552616f57ec27505c733ac7ce07372e96b2ac6dacf639c6cba4839227c60d69"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "toolchain": "motorcycle-v1",
+          "wheelIds": [
+            "F",
+            "R",
+            "SC"
+          ],
+          "inputBytesUnchanged": true,
+          "id": "rider-explorer-sidecar-motorcycle--v1",
+          "glbSha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc",
+          "triangles": 5374,
+          "clearance": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "radius": 7.304348315896555,
+              "minimumGap": 0.7602131749964913,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "radius": 7.304348315896555,
+              "minimumGap": 0.8340051958843757,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_SC_Roll",
+              "radius": 6.26086950302124,
+              "minimumGap": 1.0236218606508238,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "perWheelCollisionControls": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            },
+            {
+              "wheel": "Wheel_SC_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            }
+          ],
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "F",
+              "radius": 7.304347826086957,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "R",
+              "radius": 7.304347826086957,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "SC",
+              "radius": 6.260869565217392,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/browser-qa.json",
+          "sha256": "9ede20f9a6c6192e659f2cf2ecf0831d3c82eb0c8b93f0b128f6e4924ef034f2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/candidate.json",
+          "sha256": "d3e97b667554915d2e56eea04bd4a209be818137bbb2707f77c39eeb9b28a5c5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/capture.json",
+          "sha256": "6d32243c9c4b31112d58e795377723573430d275d1d5c2fa722888c3a6dc4dd8"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/contact-sheet.png",
+          "sha256": "9a7346fd7def12ac76ae4595a85e31137fe7b64fb8342f6d938337ae5b6919eb"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-0.png",
+          "sha256": "8d1f0bbfba430d4b99062b9f0bbde52d27802df9243d123681240ff05e1721fa"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-1.png",
+          "sha256": "545201c544502ed33fa183f02d8290c8f6d96b570dd4da4b72a4f1f1142c2ce8"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-10.png",
+          "sha256": "832e23a46f6e5a033972ff940ba37250ea801ea206b40cbde75fdb4bc06e0691"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-11.png",
+          "sha256": "b6d788c320ab5769031e380e607de63d6a117dab63b3f3e336b9ddf14c42cd9c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-12.png",
+          "sha256": "79f88fd73a0672e1ee096b342e770669574fb6d59135d8811313eea237d61606"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-13.png",
+          "sha256": "2c387c7babd55529d954a155fc229acae33c27b11d9c4cbd76dd7da85ec85693"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-14.png",
+          "sha256": "d41bfe8709ee4eb885c2567fd262c3a1840088f10123a91249c66c92f7124847"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-15.png",
+          "sha256": "75bd8e22ea61d25ed953cbf32ff6b1031c68de30e01649b7eb505fddef70fb3b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-1x.png",
+          "sha256": "dfa82e2921a2d8426c6aa485ec5d884760d16962e2b4760004d632602500f315"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-2.png",
+          "sha256": "6f81a614aa3db6ac28bd5ac96f3c0719968e284d527be95f70647186058d33b6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-2x.png",
+          "sha256": "4d103492da15c17df75b911eb39ed34878f0328896c7c546e8277577ca465981"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-3.png",
+          "sha256": "f4017df890899cb48e7f63525722b2993ae8ccea44081d0f35813c842d1bbe94"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-3x.png",
+          "sha256": "9c044c5215bfdf9cce539b90d3286a5419870b0d2349172665e1f728b5db795d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-4.png",
+          "sha256": "a13555ef7298286dcd2c1e33b4c105528b218de9ae4c00a2c9a7092d2268d9c2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-5.png",
+          "sha256": "b53520bd7a1c83b6d369dfd75a9c2ba10486f25d9a92c5c33d4709d9ff907124"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-6.png",
+          "sha256": "2e01d41008f82f5341cae83d4dc9b5f1812ef251136daf6a1f4f3b05ca6c275f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-7.png",
+          "sha256": "2196264e86161201c72aee8baeababecb52fed7a4ff1a49f674213990ef0838d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-8.png",
+          "sha256": "a9483791e2f0c02e3851d81971e211b16fa4fc1d1a1ef8de79196501ab16a3e1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/engine-9.png",
+          "sha256": "637f54e7bac8bc241df65fb0af7fdf6a3a48cae06167b3739c0b1642b43e4f2b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-roll-0.png",
+          "sha256": "6f81a614aa3db6ac28bd5ac96f3c0719968e284d527be95f70647186058d33b6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-roll-1.png",
+          "sha256": "f166625e32c070e8816799182a2328359dc8130cdc2b340b48c09564caf07720"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-roll-2.png",
+          "sha256": "f1ae1f0aa0d65d2d68e7b20bfb51cc152177f32d167d4c071e14f882c77fc9d6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-roll-3.png",
+          "sha256": "796b69c69a344c513e413c038403516497644a60d3f5478b31409d6cdd7c3663"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-roll-4.png",
+          "sha256": "7bf1f7f01af9bc985347c896025bd69cc33bf07e7ed0a693e585992cef9190bb"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-roll-5.png",
+          "sha256": "5facff4da6a3e57f1ea74876a4e49779777d1b3102c172f60dee7c48bdecd3d8"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-roll-6.png",
+          "sha256": "3c8eaf2c0ab499fbe87bbe8c20e0c4c653b1452fb412d738ab1b3866114a6587"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-roll-7.png",
+          "sha256": "38b2a8ccab0624bdff756cfde644db349d134eae93854ed7526f450822c9dfc6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/game-turntable.gif",
+          "sha256": "8ad484888f416100aaf9eb45d11a8a17509a4752c671b5abdd0b499a87013d6c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/roll-0.png",
+          "sha256": "dc8764e77b337d297382721ecc96c07f1e07ef18a82af559d20381abab11e861"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/roll-1.png",
+          "sha256": "7d34edd7c499bae09e1a5003361a2050821eaf4843977346250642f608f92f33"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/roll-2.png",
+          "sha256": "4d7714973f5c5a97e3c8d9e3787f709c98c374f8b425f37cb3d9cc263d2dc203"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/roll-3.png",
+          "sha256": "14e71d4b6059fbdaec22bcfb0c08608496828422b7860193d582fec0612f94e6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/roll-4.png",
+          "sha256": "7abb9543af0da7eab760847cb6f65c7547b9dca92d4756b4ce076d606be8993a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/roll-5.png",
+          "sha256": "14e71d4b6059fbdaec22bcfb0c08608496828422b7860193d582fec0612f94e6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/roll-6.png",
+          "sha256": "526b1bec0ae21b229ea74d38f344496117d32d0d7c36fb09e16ab8adfd891a46"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/roll-7.png",
+          "sha256": "4cabe36cf4c32cd9ae1c63222f1029c971c91a2282604ec8b0939b17fe32d30a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-0.png",
+          "sha256": "10d9c7d4f85dcc552a683fed191d8d33cc91ac8b96d9b3160320f9d47c3424a5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-1.png",
+          "sha256": "d0c199ca54144f0f7fd90c569ca65d4cf1c1c88af2fda41fa21cd99e570ca798"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-10.png",
+          "sha256": "31d2106019b4713a44bea3901679937fd29f66f7c07a8eaea28162faf3c6e943"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-11.png",
+          "sha256": "0ed38c9927485146e1565d9196b8ab3e5b228080e0f7ad6bea19e63472cc4209"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-12.png",
+          "sha256": "74d87d05ac431dd121b53f8002251e3d52a183dc08274bed8389a72da77f4669"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-13.png",
+          "sha256": "b000c09b97961cd2e1ef36c30efbc5e37659947e99ec0c963410d6f7de223c9e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-14.png",
+          "sha256": "f6b07c2b79fa468c5a5bab170cf4ba98d676ff821b5cd9befd9609c59bdc5547"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-15.png",
+          "sha256": "8daed0efe334a99defd8a74476e686e22a9b7cf1893262e154d5d20b2479e309"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-1x.png",
+          "sha256": "116a529c0c2904ce0717a52a4cf2f9ad63d35f478a4a879b4de520a1e3628928"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-2.png",
+          "sha256": "dc8764e77b337d297382721ecc96c07f1e07ef18a82af559d20381abab11e861"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-2x.png",
+          "sha256": "1fa6e6d4f171ebb9b54c52e9f68cd3632667563907c4433484c9eb5a71762451"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-3.png",
+          "sha256": "c50604853cd332405efe688c14cca12107222c85912425e30083c7e56f013ce7"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-3x.png",
+          "sha256": "bc8fd857751156d82b963f521c22920cdc211354fd63a3352207a0e8e3f19719"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-4.png",
+          "sha256": "707e1a1b84e0ad43922c0d0bae96cb0c71854d4ec7fa2eebd6e8f442f17fedbf"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-5.png",
+          "sha256": "6cf795944d9a3a4188912993172677d839583bcf5f164dec07cfdf0562ccc12a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-6.png",
+          "sha256": "fcc7a219492845c6f8f6a7bcc6087eae5f1f3fa8ada02d8d068f308763feeeec"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-7.png",
+          "sha256": "bf61023fa73333e5a33be21fffacd92490ca60fbf291ad285fb225654bbca044"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-8.png",
+          "sha256": "adc54e06277778a2dd33c43b05941031ff6860bf85014fbe8f56de5e309ad117"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/study-9.png",
+          "sha256": "bfa884c710cb3ecb3432ddbd4c01ac6e78306f308bf79b77f733fc7063e8a995"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/turntable.gif",
+          "sha256": "21d66cd74655dd39da1a8d7e1d572d11211acf9d6a46c784181c61c0cde235cc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/viewer-desktop.png",
+          "sha256": "057e8efd48cd079df9b8d2ac26a8d94a41d8f7c02eecdacea11bf84ba73782bb"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/viewer-mobile.png",
+          "sha256": "2284cfa3f9957ed90928a598a4703958189d783241d0dee2c4747a0279c0dbc7"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/wheel-phases.png",
+          "sha256": "00848b4949b2d5dc9f5b8af053fbaff195bf4fd2e68e4cbc24eb1be89f5eca6d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/wire-engine.png",
+          "sha256": "8c1479d4e381faed1b63581665695324023f9ffac3404a64f1a19c9860bc9a12"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/captures/wire-study.png",
+          "sha256": "6bac59a8681e88cdb2e305adf3e9ff9c526d3746a93d12f8adf712b2f4f2c8bf"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/clearance.json",
+          "sha256": "c053da337343e278283ad2c4c8520ef1a93ada4175cd379c7b9a37716af225a7"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/independent-source-replay.json",
+          "sha256": "55d61ec63a21d9c25d6ff7841c9ec4ad2ee19e63eaf5e057b0461e3d6b07209f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/atlas.png",
+          "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/composition.json",
+          "sha256": "c3c74beb4a78f676ba701839ca341516c890cb4a55bdba01c89167c47dd78f82"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/model.glb",
+          "sha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/recipe.json",
+          "sha256": "fdcc76b49efe158a3803aa9356820cdb3b72797271053ec11c876ebbe8256888"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/inputs/report.json",
+          "sha256": "1552616f57ec27505c733ac7ce07372e96b2ac6dacf639c6cba4839227c60d69"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/viewer.js",
+          "sha256": "7f8ded91f12622e5d07fc5275bd00a8ab91acacfe110ffa40703f574bc077a6f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/visual-inspection.json",
+          "sha256": "9c3c5bc3493c79d3d03a552f776f651a1b1c86f3bcbd62b92a6c84a8d1e1e164"
+        }
+      ]
+    }
+  ]
+}

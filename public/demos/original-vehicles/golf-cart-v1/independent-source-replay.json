@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "golf-cart",
+  "independent": true,
+  "declaredInputPins": 22,
+  "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/golf-cart/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/golf-cart/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/golf-cart/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

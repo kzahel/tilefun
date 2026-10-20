@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "go-kart",
+  "name": "Go-kart",
+  "tags": ["vehicle", "original", "go-kart"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/go-kart-v1/review-manifest.json",
+    "sha256": "cae615421a45bc8d8a5835b882f3355b12f9220a5c8a4c27039cb01a956d4a0d",
+    "candidateId": "go-kart-v1",
+    "model": "public/demos/original-vehicles/go-kart-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/go-kart-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/go-kart-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/go-kart-v1/captures",
+    "modelSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "triangles": 2686,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/go-kart/v1/evidence/replay-verification.json",
+    "sha256": "1a90fb75b0c70e680b95fe94fe5aaeb070cb85e0610cd3adceceac2e9cdc4d2b",
+    "build": "art-source/vehicle-bake/go-kart/v1/build.py",
+    "family": "art-source/vehicle-bake/go-kart/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "go-kart-authored-v1",
+    "path": "assets/models/vehicles/go-kart-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/go-kart-v1.png",
+  "performance": {
+    "speed": 120,
+    "acceleration": 280,
+    "pushSpeed": 38,
+    "pushWeight": 65
+  },
+  "receipt": "art-source/vehicle-bake/runtime-go-kart-v1.json",
+  "expectedBounds": [53, 33, 18]
+}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "inputs": [
+    {
+      "path": "src/rendering/CarMeshAsset.ts",
+      "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+      "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts"
+    }
+  ]
+}

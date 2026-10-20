@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 17,
+  "glbSha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/rider-explorer-sidecar-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/rider-explorer-sidecar-motorcycle/replay/public/atlas.png",
+    "companion-atlas.png": "data/vehicle-bake/rider-explorer-sidecar-motorcycle/replay/public/companion-atlas.png",
+    "recipe.json": "data/vehicle-bake/rider-explorer-sidecar-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/rider-explorer-sidecar-motorcycle-qa/retained-replay-mz_ls1_0",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

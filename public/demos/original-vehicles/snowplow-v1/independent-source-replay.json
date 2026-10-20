@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "snowplow",
+  "independent": true,
+  "declaredInputPins": 21,
+  "glbSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/snowplow/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/snowplow/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/snowplow/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

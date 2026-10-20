@@ -1,0 +1,41 @@
+{
+  "status": "prototype-not-production",
+  "sourceStage": "complete",
+  "sourceImmutable": true,
+  "humanApproval": false,
+  "geometry": {
+    "triangles": 1984,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 1,
+    "atlas": [
+      256,
+      256
+    ],
+    "glbBytes": 159796,
+    "sha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+    "uvVertices": 4488
+  },
+  "contactFitStatus": "passed-profile-contacts",
+  "targetMissWorld": {
+    "hip_saddle": 0.0,
+    "hand_left_grip": 0.0,
+    "foot_left_support": 0.0,
+    "hand_right_grip": 0.0,
+    "foot_right_support": 0.0
+  },
+  "limits": [
+    "One Person7 legacy source pilot and synthetic fixture; no actual bike/normal/20-person/all-avatar/AI/fallback qualification",
+    "Existing standing/promoted characters and normal vehicle runtime unchanged"
+  ],
+  "readyForIndependentPrerequisiteQA": true,
+  "actualBikePresent": false,
+  "CarMeshAssetUsed": false,
+  "fixtureGeometryStaysIgnored": true,
+  "sourceOnlyReplayExact": true,
+  "contactProfileId": "person7-upright-measured-v1",
+  "contactProfileSha256": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3",
+  "contactProfileStatus": "proposed-not-globally-approved",
+  "originalExplorerProfileFit": "FAILED-final-template-no-stretch",
+  "normalActivationQualified": false
+}

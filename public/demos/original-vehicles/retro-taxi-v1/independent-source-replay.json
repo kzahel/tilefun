@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "retro-taxi",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/retro-taxi/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/retro-taxi/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/retro-taxi/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

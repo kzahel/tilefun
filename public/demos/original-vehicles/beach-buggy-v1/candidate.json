@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "beach-buggy-v1",
+      "name": "Beach dune buggy",
+      "title": "Beach dune buggy \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original short rounded dune-buggy tub, broad swept integrated fenders, real recessed two-seat cockpit, fixed black tube cage and small framed windshield. Direct semantic UV paint on runtime topology; no high-to-low transfer claim.",
+      "audit": {
+        "triangles": 3290,
+        "vertices": 6630,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 237592,
+        "sha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 7.652173913043479,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 7.652173913043479,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 7.652173913043479,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 7.652173913043479,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/atlas.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/atlas.png",
+          "sha256": "4501926e57a78b7cbfa8a326e2080c755f6e82d00f65dafe33d243f208cad43d"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/capture.json",
+          "sha256": "3792049cdcc3a78cbd835b6670a4a79aaa6831fd5a2ea7db3e99160fffe100fa"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-0.png",
+          "sha256": "55b3915ed7a03573fc70f961bbce9718d885d4a79e7085e43e4fa07e3fa5cacd"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-1.png",
+          "sha256": "73a001dcff3d77ea0bf2dc385d4c1c05203ef813d60599eafef30fb94c5b26ff"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-10.png",
+          "sha256": "1f0f2daffb8742826228c86a2d11af2fff9bfe0d6f673c90333e336c81e79837"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-11.png",
+          "sha256": "d5d269608103bc0b69416a40cb004139e830334c61197313d9d3dc1134e43e8c"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-12.png",
+          "sha256": "b5e0ab90b0b96e0a2ceb0611a31c72329fc812cfac9020ef4e394d032f6424eb"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-13.png",
+          "sha256": "9fdbd374f455cd5450bef4cbb2b8f107f53a85cd6bf66c222d0656d1969f6afe"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-14.png",
+          "sha256": "75c600aa9729972b83ff006be96c970166b23cb52ea08d1ae835c39dda3d10f6"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-15.png",
+          "sha256": "9042855c5f73d9e4451aff661bed34c98c9a3489634aecfb8318848a34464f08"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-2.png",
+          "sha256": "ca38096025f95b171b27f1af67ba647ae4e82e4f7bcd103933620971728ed8b5"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-3.png",
+          "sha256": "69c481d1afb244d8433002b57f449efd2c2d8b6a6a0ed748154c525bf65220d6"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-4.png",
+          "sha256": "e8cd6fe15c99f6f32961677f2f78b36062ba15d81d7ab0a0d795f234e4f1a3a3"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-5.png",
+          "sha256": "e1472934d83f5479f96754af5d96f1814ae5578174d4f50b7319ab32543e8490"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-6.png",
+          "sha256": "4a0687631b7708878328bc8e762c6a46b98449a797f53c391bbe8dc3a7570af2"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-7.png",
+          "sha256": "fdf5371f15c320c5c19a6bba4c3117a4d1e5cfd763f11f4e078257912b08aa34"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-8.png",
+          "sha256": "e20223895fb364170858675d473a89d2df4c4c781f64b0d5fa6ec8fee7b8f487"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/engine-9.png",
+          "sha256": "01dc59f7fefab00bf8ffa23ce497d07c58bd903389fd4c1e0954c2ee5a3534b1"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/game-roll-0.png",
+          "sha256": "ca38096025f95b171b27f1af67ba647ae4e82e4f7bcd103933620971728ed8b5"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/game-roll-1.png",
+          "sha256": "ade98e6abe1d904bdd007b1e4984e6476b8e870252d7cf7617b3319d3e544d78"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/game-roll-2.png",
+          "sha256": "cc4100af069aac52394b39aa1ec0923e66febc5c4ee1b76a1e3d1d3d6202f895"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/game-roll-3.png",
+          "sha256": "7428410c3b115fec20e85ae74909e1cbbd6a89040897369b3d51fdc11cc13e66"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/game-roll-4.png",
+          "sha256": "fbf46fdf49f22d20e676d39a8beb553193bc155ffb6d4e498e1938e9d51aabd1"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/game-roll-5.png",
+          "sha256": "1e00608b3d037f9868ebaa7762b03f1ecb18e421df1677e8f83e6d4691b9658a"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/game-roll-6.png",
+          "sha256": "7dce26fa69a8cbaf1b1752db462de2cc908c2e7c78df76e5595d4b64dd3a2c92"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/game-roll-7.png",
+          "sha256": "08cf9e66073c6cbf1638ca843c6c4693a60cd66fc4f827b51985cdeb603fed4b"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/inspection-engine.png",
+          "sha256": "ce1711e464f62efc811d6b79ca44fcd7c53a93a93afd7ada6277c43fa2c0c020"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/inspection-phases.png",
+          "sha256": "b4af94dce33ccdfa3adf4ba2aba36b8609881d7bd3d51cc222d36e6529971588"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/inspection-study.png",
+          "sha256": "ffcbd6387be9c5fc57815c487fa95314f0c0240ffb5680e0b56dce581268bb78"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/roll-0.png",
+          "sha256": "281d77de6339f0e965576dd4d9193f845f02d2b63d85e0f2b875a4a20cec5c5f"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/roll-1.png",
+          "sha256": "de7b11bdf819d8baf343e849a7d808b08f6dfa59ef35b3972325792edfa53e65"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/roll-2.png",
+          "sha256": "ac9e7667ec076744362181c295dc465c95f014e5968745a7b4ec4eb11db22991"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/roll-3.png",
+          "sha256": "347f18b17261d5f048c9d6db74d43311056fefa37d343249c2a2fcd7c3cb76db"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/roll-4.png",
+          "sha256": "8b361a964f8779b00e4a8c6f5e342fb22e7cbc312b8fc1fcdb8a27f9eee99b15"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/roll-5.png",
+          "sha256": "da3cd3e3bd9874a6ab83f7859d6ceb5db124fc76ac9585cc2927549afc27dd58"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/roll-6.png",
+          "sha256": "5ef238c87f7944dc4350112355ef1efb2b2192e139d8a53e3483f2eb9ba33d79"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/roll-7.png",
+          "sha256": "d7e89d1271cb6ca5bb1a9291c3670fa835b43f79351495eafecba432172d8f3f"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-0.png",
+          "sha256": "e6e5da6146e20b67caaa46a0637cee71376bb79f87938236448a6f69dc4b5673"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-1.png",
+          "sha256": "1f5f28d49075d2d9e904662df9161e6276a86b5e613fcf92198271f92f709a56"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-10.png",
+          "sha256": "6b4c318a06d03dd3c9549d002709c7334136ae26b492ffe2eb703f39194c6a25"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-11.png",
+          "sha256": "1d4fd2a9275ab540e5b1a7f56472c31308a819f7ab2d0aa4a482f4625d50d150"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-12.png",
+          "sha256": "f65c371773eb4dadbdf3b305278b471e1a3cacd4462d704a86978b23f8feccc5"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-13.png",
+          "sha256": "640c5704ff631ea31e89ea3a2b0f5fb81f9f668a0082ff97af38f877faa2b14f"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-14.png",
+          "sha256": "f0f67febfb2c7149ed0d96750f0513a309f10b3915f268157e1f4cb73b664d4c"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-15.png",
+          "sha256": "a7101f57e59e690044a423a6fcf9a2ae68883f785e8760ed080abb3d9af38e08"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-2.png",
+          "sha256": "281d77de6339f0e965576dd4d9193f845f02d2b63d85e0f2b875a4a20cec5c5f"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-3.png",
+          "sha256": "19fde92568a4481316c0202252ddea9cd138c8339fb5467c16b6ee113774ce2b"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-4.png",
+          "sha256": "20c09a97590941f79503ebcc793c4a3c4a6345c7bb9643621b7446a04708cc03"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-5.png",
+          "sha256": "587322f1541237ee2a103d68a3ae7cb639acdc8bba899ae8fa389d7ca6f7da57"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-6.png",
+          "sha256": "3865327e08d98a657865247f0cd5d1a7fef8d0bf4cf69b4a5f4106b9b6472fb0"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-7.png",
+          "sha256": "fad42f9113f94636915c0ba7cf74adbd28e9dbeed353a71e8393e092e1c5c18d"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-8.png",
+          "sha256": "62a6b1aafad718163a50f2ef080f43119a9b68d0a50f2f368c2d5f20ac3bbb23"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/study-9.png",
+          "sha256": "b7b651dd5cff4a540d6f7e23b75e8b019ec3d953464055cb454fccb535ca7a8b"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/wire-engine.png",
+          "sha256": "843e534ac1d4004cd43534a9afba387b55bc1aef0e1fdaf122842f333f045e61"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/engine/wire-study.png",
+          "sha256": "c84d1d6b7bd03323eca7c61497ec12685cae3e7eafaf62103fd7d6f5cd510dfb"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/model.glb",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/model.glb",
+          "sha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/recipe.json",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/recipe.json",
+          "sha256": "953190e98138cea625470460c12e45741359bfdf4f3b1371f0a26a5354d10678"
+        },
+        {
+          "source": "demos/vehicle-bake/beach-buggy/v1/report.json",
+          "retained": "demos/original-vehicles/beach-buggy-v1/inputs/report.json",
+          "sha256": "93d9ada7a9a0e0ed03d71349ada46a494be5dd96987b171acfd900bbf6d69f61"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

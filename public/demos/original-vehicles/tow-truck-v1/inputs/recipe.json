@@ -1,0 +1,763 @@
+{
+  "family": "blue-cream-low-stowed-tow-truck",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [
+    5.8,
+    2.2,
+    2.3
+  ],
+  "axles": [
+    -1.98,
+    1.62
+  ],
+  "arch": {
+    "cutRadius": 0.55,
+    "pocketInnerY": 0.67,
+    "segments": 24
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      45,
+      64,
+      109
+    ],
+    "paintShadow": [
+      49,
+      81,
+      136
+    ],
+    "paintMid": [
+      53,
+      103,
+      164
+    ],
+    "paint": [
+      69,
+      132,
+      187
+    ],
+    "paintLight": [
+      104,
+      166,
+      213
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "creamShadow": [
+      191,
+      157,
+      119
+    ],
+    "creamMid": [
+      227,
+      193,
+      147
+    ],
+    "creamLight": [
+      255,
+      238,
+      202
+    ],
+    "orangeShadow": [
+      157,
+      72,
+      54
+    ],
+    "orange": [
+      221,
+      112,
+      48
+    ],
+    "orangeLight": [
+      247,
+      155,
+      67
+    ],
+    "deck": [
+      82,
+      104,
+      136
+    ],
+    "deckLight": [
+      105,
+      129,
+      155
+    ],
+    "cable": [
+      145,
+      150,
+      160
+    ],
+    "hook": [
+      182,
+      188,
+      195
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original blue/cream short heavy tow truck: closed framed blue cab skin, short flat rear recovery platform, low orange folded twin recovery frame, fixed broad winch, readable single gray cable path and cast C hook. Static stowed equipment only, no towing or cable physics.",
+  "paintOwnership": "Own blue lower coachwork side/end/hood charts and cream closed cab continuous side glass with separate fixed front/rear and roof charts. Flat rear platform has its own deck and blue/cream side charts. Orange folded frame, gray winch/cable/hook own explicit padded constant-role swatches and named source components. No camera-projected paint or glass overlay planes.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -1.98,
+      "halfTrack": 0.88,
+      "radius": 0.49,
+      "width": 0.34,
+      "segments": 24
+    },
+    "FR": {
+      "axle": -1.98,
+      "halfTrack": 0.88,
+      "radius": 0.49,
+      "width": 0.34,
+      "segments": 24
+    },
+    "RL": {
+      "axle": 1.62,
+      "halfTrack": 0.88,
+      "radius": 0.49,
+      "width": 0.34,
+      "segments": 24
+    },
+    "RR": {
+      "axle": 1.62,
+      "halfTrack": 0.88,
+      "radius": 0.49,
+      "width": 0.34,
+      "segments": 24
+    }
+  },
+  "recoveryEquipment": {
+    "mode": "STATIC STOWED ONLY",
+    "deckTop": 1.17,
+    "deckRearX": 2.47,
+    "cabRoofZ": 2.3,
+    "boomTopMaximumExpected": 2.3,
+    "cableRadiusSource": 0.035,
+    "hookRadiusSource": 0.155,
+    "hookTubeRadiusSource": 0.04,
+    "hookCenterSource": [
+      2.72,
+      0,
+      0.99
+    ],
+    "minimumHookGroundClearanceSource": 0.75,
+    "maximumBoomAboveCabSource": 0.02,
+    "physicsClaims": false
+  },
+  "coveragePolicy": {
+    "allWheels": "Natural integrated front coachwork/rear platform wheelhouses; central finite footprint with short rays excludes recovery frame."
+  },
+  "boundsPolicy": "Measure all actual static recovery equipment and centered2*maxAbs extents at unchanged ground/root and80/4.6 scale. No recenter or fit scaling.",
+  "components": [
+    {
+      "name": "Blue broad short hood coachwork integrated front fenders",
+      "group": "body",
+      "triangles": 238,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Cream closed tow cab continuous side front rear roof skin",
+      "group": "body",
+      "triangles": 84,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Blue short flat recovery platform integrated rear wheelhouses",
+      "group": "body",
+      "triangles": 172,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Dark narrow chassis rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Cream cab entry step -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamMid"
+      ]
+    },
+    {
+      "name": "Dark narrow chassis rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Cream cab entry step 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamMid"
+      ]
+    },
+    {
+      "name": "Central retained floor inside tire slabs",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm -1.98",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm 1.62",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC orange recovery planted foot -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "orangeShadow"
+      ]
+    },
+    {
+      "name": "STATIC low orange folded recovery arm -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "orange",
+        "orangeLight",
+        "orangeShadow"
+      ]
+    },
+    {
+      "name": "STATIC fixed gray brace -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC orange recovery planted foot 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "orangeShadow"
+      ]
+    },
+    {
+      "name": "STATIC low orange folded recovery arm 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "orange",
+        "orangeLight",
+        "orangeShadow"
+      ]
+    },
+    {
+      "name": "STATIC fixed gray brace 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC orange recovery low head crossbeam",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "orange",
+        "orangeLight",
+        "orangeShadow"
+      ]
+    },
+    {
+      "name": "STATIC winch planted mounting block",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "STATIC broad gray winch drum",
+      "group": "body",
+      "triangles": 60,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC gray winch flange -1",
+      "group": "body",
+      "triangles": 60,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC winch bearing foot -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC gray winch flange 1",
+      "group": "body",
+      "triangles": 60,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC winch bearing foot 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC gray cable winch to low head",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "cable"
+      ]
+    },
+    {
+      "name": "STATIC gray cable low head to stowed hook",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "cable"
+      ]
+    },
+    {
+      "name": "STATIC one cast gray C hook stowed above ground",
+      "group": "body",
+      "triangles": 108,
+      "paintRoles": [
+        "hook"
+      ]
+    },
+    {
+      "name": "Chunky cream heavy front bumper",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamMid"
+      ]
+    },
+    {
+      "name": "Short gray recovery rear bumper",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad dark tow front grille",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Tow grille broad cream slat 0.89",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Tow grille broad cream slat 0.99",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Tow grille broad cream slat 1.09",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Tow headlamp ink frame -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Tow ivory headlamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamLight"
+      ]
+    },
+    {
+      "name": "Recovery rear red lamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Tow headlamp ink frame 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Tow ivory headlamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamLight"
+      ]
+    },
+    {
+      "name": "Recovery rear red lamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Rounded covered heavy tow tire FL",
+      "group": "FL",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray heavy tow wheel rim FL",
+      "group": "FL",
+      "triangles": 58,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray heavy tow hub FL",
+      "group": "FL",
+      "triangles": 58,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Tow asymmetric hub inset FL",
+      "group": "FL",
+      "triangles": 28,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded covered heavy tow tire FR",
+      "group": "FR",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray heavy tow wheel rim FR",
+      "group": "FR",
+      "triangles": 58,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray heavy tow hub FR",
+      "group": "FR",
+      "triangles": 58,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Tow asymmetric hub inset FR",
+      "group": "FR",
+      "triangles": 28,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded covered heavy tow tire RL",
+      "group": "RL",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray heavy tow wheel rim RL",
+      "group": "RL",
+      "triangles": 58,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray heavy tow hub RL",
+      "group": "RL",
+      "triangles": 58,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Tow asymmetric hub inset RL",
+      "group": "RL",
+      "triangles": 28,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded covered heavy tow tire RR",
+      "group": "RR",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray heavy tow wheel rim RR",
+      "group": "RR",
+      "triangles": 58,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray heavy tow hub RR",
+      "group": "RR",
+      "triangles": 58,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Tow asymmetric hub inset RR",
+      "group": "RR",
+      "triangles": 28,
+      "paintRoles": [
+        "ink"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.9800000190734863,
+        -0.8799999952316284,
+        0.49000000953674316
+      ],
+      "centerExport": [
+        -34.43478294040846,
+        8.521739296291187,
+        15.304347743158758
+      ],
+      "radiusBlender": 0.49,
+      "wheel_radius": 8.521739130434783
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.9800000190734863,
+        0.8799999952316284,
+        0.49000000953674316
+      ],
+      "centerExport": [
+        -34.43478294040846,
+        8.521739296291187,
+        -15.304347743158758
+      ],
+      "radiusBlender": 0.49,
+      "wheel_radius": 8.521739130434783
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.6200000047683716,
+        -0.8799999952316284,
+        0.49000000953674316
+      ],
+      "centerExport": [
+        28.173913126406468,
+        8.521739296291187,
+        15.304347743158758
+      ],
+      "radiusBlender": 0.49,
+      "wheel_radius": 8.521739130434783
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.6200000047683716,
+        0.8799999952316284,
+        0.49000000953674316
+      ],
+      "centerExport": [
+        28.173913126406468,
+        8.521739296291187,
+        -15.304347743158758
+      ],
+      "radiusBlender": 0.49,
+      "wheel_radius": 8.521739130434783
+    }
+  ],
+  "method": "Original blue/cream short heavy tow truck: closed framed blue cab skin, short flat rear recovery platform, low orange folded twin recovery frame, fixed broad winch, readable single gray cable path and cast C hook. Static stowed equipment only, no towing or cable physics.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/tow-truck/build.py",
+    "scripts/vehicle-bake/tow-truck/geometry.py",
+    "scripts/vehicle-bake/tow-truck/family.json",
+    "scripts/vehicle-bake/tow-truck/coverage-region.json",
+    "scripts/vehicle-bake/tow-truck/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

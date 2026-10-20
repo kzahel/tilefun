@@ -1,0 +1,44 @@
+{
+  "id": "rider-explorer-classic-motorcycle-v1",
+  "canonicalConfig": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/assembly.json",
+  "retained": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1",
+  "public": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1",
+  "scratch": "data/vehicle-bake/rider-explorer-classic-motorcycle/replay/public",
+  "qa": "data/vehicle-bake/rider-explorer-classic-motorcycle-qa",
+  "wheelIds": [
+    "F",
+    "R"
+  ],
+  "base": {
+    "model": "public/demos/vehicle-bake/classic-motorcycle/v1/model.glb",
+    "atlas": "public/demos/vehicle-bake/classic-motorcycle/v1/atlas.png",
+    "master": "art-source/vehicle-bake/classic-motorcycle/v1/master.blend",
+    "replay": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/base-normalized-replay.json"
+  },
+  "component": {
+    "model": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+    "atlas": "art-source/vehicle-riders/explorer-upright/v1/atlas.png",
+    "master": "art-source/vehicle-riders/explorer-upright/v1/master.blend",
+    "replay": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/rider-normalized-replay.json"
+  },
+  "additionalInputs": [
+    "art-source/vehicle-bake/classic-motorcycle/v1/source-replay.json",
+    "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/base-independent-replay.json",
+    "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+    "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/rider-independent-replay.json"
+  ],
+  "mountBlenderWorldPixels": [
+    0,
+    0,
+    19.1304347826087
+  ],
+  "prefix": "RiderExplorer",
+  "nativeSize": 224,
+  "method": "PREREQUISITE PROTOTYPE: unchanged true-F/R classic motorcycle geometry/paint and static Explorer upright composed in one GLB/depth target. All original buffers/transforms retained; explicit companion child attached inside marked cycle root with root-transform compensation. One512 bike atlas plus one256 rider atlas; normal rider/AI/fallback/all27 unqualified.",
+  "limits": [
+    "One static Explorer/one classic bike fit only",
+    "No normal activation, all27-avatar, AI, occupied fallback or animation qualification",
+    "Standing characters and normal car driver semantics unchanged",
+    "Editable geometry stays in two retained child packed masters; placement is this explicit recipe"
+  ]
+}

@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "mobile-crane-v1",
+      "name": "Mobile crane truck",
+      "title": "Mobile crane truck \u00b7 autonomous original v1",
+      "nativeSize": 256,
+      "engineRadius": 128.0,
+      "dimensions": [
+        256,
+        256
+      ],
+      "groundOrigins": {
+        "study": [
+          128,
+          156
+        ],
+        "engine": [
+          128,
+          128
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Own low orange/yellow six-wheel mobile crane carrier, closed actual blue-glass driver cab, small offset glazed operator pod, three broad solid stepped telescopic sections in low rigid stow, actual fixed cable/J hook and four short retracted outrigger caps. No working equipment animation/gameplay or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 4030,
+        "vertices": 7814,
+        "meshes": 7,
+        "primitives": 7,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 279528,
+        "sha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.869565217391306,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.869565217391306,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "ML": {
+            "wheel_radius": 8.869565217391306,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "MR": {
+            "wheel_radius": 8.869565217391306,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.869565217391306,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.869565217391306,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/atlas.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/atlas.png",
+          "sha256": "616470c6b16478324b08413729190f8e9a3c243fb8871213b9a1fca2d238fcf5"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/capture.json",
+          "sha256": "4dfe77a2534c67f8c69cdcaae7bef180f5a80faadcedfbc3680724d3fbe04b37"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-0.png",
+          "sha256": "4bfedec1a9f8437675bf93876bb25e314e20b4616467c68141ba22a0ea2bf08d"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-1.png",
+          "sha256": "69ea47303b9dccd8b81300a4419bd29b0a53a9f63715d403b0420efa47907fed"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-10.png",
+          "sha256": "1ae1201276b6a1bf34b67ae274af0da569680e18019d9910e72e7dde6de16178"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-11.png",
+          "sha256": "f6a52a10c9e06af7b69f14209205be6c76718db869a6926a324d3f7924972585"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-12.png",
+          "sha256": "500341cc9907680ee2dc7e25c972565e4138e102815bd5d2648abbe072aa2b0c"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-13.png",
+          "sha256": "210d76089beac1cc2126168096ae3472989e9dd741be97c576eb78d8f02f80b7"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-14.png",
+          "sha256": "bcc9c850eb1c424cc63e7ee8e2955049481acacb22311fa556235935575b1975"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-15.png",
+          "sha256": "8751bcfd90e8873bf7b20caf446d4a41ee46689104a2c1021a065f16ce5b23ed"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-2.png",
+          "sha256": "32bd2b6dcfda072e2ade27f7a44614a221a1f65c80d6b080e7289a4476f16e11"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-3.png",
+          "sha256": "fdb53f7324395b35820ae7ef78bf697a9b7e7043e68a79b475e80f452a1bd648"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-4.png",
+          "sha256": "7198b3356ead4d15932ff9d01793ed1c72e12eb159d24db9616be6e1ca595398"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-5.png",
+          "sha256": "06da5d395e877276596f2ccde73af329ab5e0fd62c9dc9c4c4b016ed6c82c552"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-6.png",
+          "sha256": "d5f10be605508aac1cb7704a6a0f1fd331e4fda9431f73173536e90b9120237f"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-7.png",
+          "sha256": "008f7b5ff72ae9c7bfbcc17f2079d0d9f394bf4e84bf44e4f857caee35aac991"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-8.png",
+          "sha256": "e514a4fd10bdc107cb6462ccab3ca145c38a93c31af7ef763e8dad1a41c1c0d7"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/engine-9.png",
+          "sha256": "1010ddda9d1e328280b3dbbc804798c5a986a6003d8b0e6873749556161e4223"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/game-roll-0.png",
+          "sha256": "32bd2b6dcfda072e2ade27f7a44614a221a1f65c80d6b080e7289a4476f16e11"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/game-roll-1.png",
+          "sha256": "f9b6fd48456d241afe7c4ddcdcbc3c257de1500663613bc9e8bd74b719f39edd"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/game-roll-2.png",
+          "sha256": "090910f8c7d53ae6e53d9f9facd7d3fd4b4365b057eecd794687ed75a32f834a"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/game-roll-3.png",
+          "sha256": "06548adbca53a27772700a0ffe5e0f859a4b1eff599f8722df00d28a8fb12cc9"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/game-roll-4.png",
+          "sha256": "f71ad070ad6ae8f1b80e7edc265dc57496432d431e2cefddfd3cced3a4774548"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/game-roll-5.png",
+          "sha256": "e3d856dc47591dd30e19a0cdae1bcac52a8b6ccd67ca967961ac9c394efe6ced"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/game-roll-6.png",
+          "sha256": "47d33097ca4d78577bc87bf9cd5bdc67d61653751b160864ebead0a1ebbe6db3"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/game-roll-7.png",
+          "sha256": "872779ac6a33164165a05fef18224025237d18fe16178b3bd8a8b7fd4a94963f"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/inspection-engine.png",
+          "sha256": "495479d700e9f2e7aab6d963761867b9af768099ae7d5a75164ab1fdd838b816"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/inspection-phases.png",
+          "sha256": "3539165fe505b67b8e47d859c857fc9edff20e735e5ce8cf5158f907b2a94458"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/inspection-study.png",
+          "sha256": "5aeb9387e70bb9692eb80f3c5f6dac3da158f1639093352a54f80a96ca2ba01c"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/roll-0.png",
+          "sha256": "bd629b8fc8bb0ee4d58e7bc1725930082acd499c44cc73dc56dfb9f1f7bda43c"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/roll-1.png",
+          "sha256": "57d08ececd4eda03731b0b775f8ccaa8d9a56f61758a973b6df1ce39e3a1b675"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/roll-2.png",
+          "sha256": "65a50b64003ae6c19c853bb7445877c914b3ee52a103655a294c59841595063f"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/roll-3.png",
+          "sha256": "0536528ecb9799594fa49748e19eb05ad38b9fd2a9818fec883da4e1296e1406"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/roll-4.png",
+          "sha256": "ee38c551e01fa236da04e2a05960aaa79e878368f08a4b83dd3d2b8ab3520f62"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/roll-5.png",
+          "sha256": "177de858c0c945fe066d46a1ff41a290a5587971f9e81c7ee68afbbdb8bf85f4"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/roll-6.png",
+          "sha256": "b5aa5e6dac79eef6086f3ecf82cef5acdb45182b213ab57d714b619d1b0e8a36"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/roll-7.png",
+          "sha256": "d3933900846bafab887c1be93de932bc7865d3ed403d1b508a3377a701b80a2c"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-0.png",
+          "sha256": "dd780de13815dcc4f30628cdace47c50cf93184f3495bbb4a47c42b913e1089e"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-1.png",
+          "sha256": "fc781ab8253fe20dc2918d6658d6d40f2f209239085c9260f0d6fbd5eeb020b6"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-10.png",
+          "sha256": "483fde02a81c78c354ca5e03a975985339e9cae7860200e531328a212cb012cc"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-11.png",
+          "sha256": "a9611864e15887775515f102f417e59f71a4d3c4148ac4480d71b733f580e84d"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-12.png",
+          "sha256": "e01ef892533e3949a580e883e11f65f7a4a8749091b185ccd31465808aeb6ad6"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-13.png",
+          "sha256": "e307fa92ad1e4493f6282151c67810380452eb7d94221b810cae69cdb7e9515f"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-14.png",
+          "sha256": "80b8225131e0fb2555bfb273843226280fd6f735d1267d3f15226283340b5b56"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-15.png",
+          "sha256": "7cae7cc2d2e2bbafb0b0a5bf8dabf7ae14e129df3f17f8bde38e59e04d378a06"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-2.png",
+          "sha256": "bd629b8fc8bb0ee4d58e7bc1725930082acd499c44cc73dc56dfb9f1f7bda43c"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-3.png",
+          "sha256": "f5fcc83cd3b63f11d8959d543c9935588e051c44a46b9fe4e0cff243c0ee36c9"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-4.png",
+          "sha256": "e3bf6437533f73c6219dd987282906d6822be1f1a5e02bc9e0c20e8053e5eb43"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-5.png",
+          "sha256": "d3cfb19645bf229709662da23c63ed760193b8632e437231885c64f24adce99b"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-6.png",
+          "sha256": "b2f43014a107f1ed5eaee5accab4dcb8dbe40a7da0d6560d0d69d467e833b4d5"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-7.png",
+          "sha256": "30245809be46dd42ddbc034687853596857d5de1d5f8af841322bd0a7674d915"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-8.png",
+          "sha256": "584a109430c6b70eae45996fe850e89887e4aa2db8d66c68a36943ab5af516ef"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/study-9.png",
+          "sha256": "262a09dcc8472238f4a3c8e8789b000d6f8600c2e36979a8016b906d55dd4a84"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/wire-engine.png",
+          "sha256": "3ccadf15ad1ac563743dfc30857931146b0e6fd9a8038edfd2382dc6885aafff"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/engine/wire-study.png",
+          "sha256": "4721189cfe198a2ab5543b8ba4fe28180235db05d2116ebbd162fdfd702f7144"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/model.glb",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/model.glb",
+          "sha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/recipe.json",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/recipe.json",
+          "sha256": "19686fb534cda62fcace9059446ac9ec2a112eda28e929f3ed8bbcae8a73ab96"
+        },
+        {
+          "source": "demos/vehicle-bake/mobile-crane/v1/report.json",
+          "retained": "demos/original-vehicles/mobile-crane-v1/inputs/report.json",
+          "sha256": "49ac94ad9c80cf84887cf71f432a9332bcaecdd6b4fd9b110f5cd46208664677"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

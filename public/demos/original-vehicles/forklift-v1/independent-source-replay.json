@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "forklift",
+  "independent": true,
+  "declaredInputPins": 22,
+  "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/forklift/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/forklift/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/forklift/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

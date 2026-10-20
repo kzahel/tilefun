@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "tow-truck",
+  "independent": true,
+  "declaredInputPins": 22,
+  "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/tow-truck/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/tow-truck/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/tow-truck/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

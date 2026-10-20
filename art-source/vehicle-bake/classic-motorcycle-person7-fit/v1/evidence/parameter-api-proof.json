@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "separateFixtureNotAnAvatarOrFamilyRollout": true,
+  "onlyIgnoredOwnedFreshRootWritten": true,
+  "configArgumentWorks": true,
+  "variantIdArgumentWorks": true,
+  "sourceDependenciesDeclareActualConfigPath": true,
+  "measuredProfileAndAvatarUnchanged": true,
+  "gripHalfLengthControlSource": [
+    0.065,
+    0.075
+  ],
+  "actualGLBChanged": true,
+  "atlasUnchanged": true,
+  "inputFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/person7-upright/v1/person7-upright-v1.json",
+    "configs/explicit-fit-control.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/build.py",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/geometry.py",
+    "scripts/vehicle-bake/classic-motorcycle-person7-fit/raw-audit.py"
+  ],
+  "fixtureModelSha256": "34a660fb63aa89f883e1e24026aa31c9ff1e9da4f51732b15df9b39b4f143719"
+}

@@ -119,6 +119,17 @@ class ReplayControls(unittest.TestCase):
         del receipt["invokedBuilder"]
         self.invoke(receipt, ["--input-root", "art-source/control"])
 
+    def test_structured_output_hashes_qualify(self):
+        receipt = copy.deepcopy(self.receipt)
+        receipt["outputs"] = {
+            name: {"sha256": value, "bytes": len(self.outputs[name])}
+            for name, value in receipt.pop("outputHashes").items()
+        }
+        del receipt["glbSha256"]
+        del receipt["atlasSha256"]
+        del receipt["recipeSha256"]
+        self.invoke(receipt)
+
 
 class ComponentControls(unittest.TestCase):
     def test_actual_assets_keep_base_graph_and_binary(self):

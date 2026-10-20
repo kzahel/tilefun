@@ -1,8 +1,8 @@
 # Exposed vehicle riders
 
 Topic: vehicle-riders
-Status: Explorer and Bear source pilots complete; actual-bike and legacy-human fitting in progress; motorcycle activation deferred.
-Updated: 2026-10-19.
+Status: three identity pilots and actual classic/sidecar fits retained; two shared-loader reviews pass; normal motorcycle activation deferred.
+Updated: 2026-10-20.
 
 Owns seated player and automatic-driver presentation for motorcycles, scooters
 and other exposed seats. [Original vehicles](original-vehicles.md) owns vehicle
@@ -44,15 +44,36 @@ This is an isolated review prototype, not ordinary occupied-vehicle behavior.
 
 `explorer-upright/v1/` adds a 1,956-triangle straddled pose and explicit five-contact
 `profiles/upright-v1.json`. It passes independent replay and native view inspection
-against a synthetic contact fixture. It has no actual bike fit yet. The stockier
+against a synthetic contact fixture. Its actual classic and sidecar fits now pass
+the independent controls described below. The stockier
 Brown Bear pilot retains an actual failed fit of that unchanged profile with
 its inferred short-limb template. This does not rule out other anatomical or
 leaning interpretations. Its separately named measured Bear profile now passes
 five actual synthetic-fixture contacts, local self-intersection/straddle controls
 and independent exact source replay. The 2,112-triangle source retains its eight
 identity colors, round ears, muzzle and stocky paws. Agent inspection of all
-native headings and wire views passes; actual-bike clearance remains unqualified.
+native headings and wire views passes. Its separate mechanically fitted classic
+bike source now passes actual contacts and body/wheel envelopes; parent shared
+review remains pending for that variant.
 Do not stretch anatomy to manufacture a universal fit.
+
+Person7 retains a distinct 1,984-triangle capped legacy-human identity with its
+own measured profile and source palette. Its short-limb anatomy fails the
+unchanged Explorer profile and unchanged classic bike. A separate classic fit
+changes six bar/grip/peg components while preserving 49 of 55 components, including
+the saddle, wheels and body. Brown Bear's fit likewise changes controls instead
+of avatar scale. These are source pilots, not all-character production coverage.
+
+Explorer's exact classic and sidecar assemblies are now frozen isolated reviews
+under `public/demos/original-vehicles/rider-explorer-{classic,sidecar}-motorcycle-v1/`.
+They contain 4,390/5,374 triangles, four/five meshes and two opaque atlases. The
+strict shared loader accepts real F/R or F/R/SC rigs without dummy wheels. Every
+wheel passes independent signed travel, reverse/reset and whole-body cylinder
+negative controls. All 32 combined RGBA views match the independent two-asset
+reference; hiding the rider restores all 32 bare-bike views. Decoded vertex
+attributes and declared mount positions remain exact. Both pass desktop/mobile,
+offline and independent minimal-input source replay. These do not change normal
+game visibility, occupancy, physics or fallback behavior.
 
 The read-only appearance inventory also establishes that Classic is a small
 cream cat-like character, the twenty legacy people have distinct headwear,

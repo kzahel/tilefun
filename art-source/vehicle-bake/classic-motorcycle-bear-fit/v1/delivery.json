@@ -1,0 +1,16 @@
+{
+  "status": "complete",
+  "sourceImmutable": true,
+  "ready": true,
+  "glbSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+  "atlasSha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+  "recipeSha256": "0718d20fbefe828f10883d4cbb58e61cd1ea952a4f4aaae777df80e9fc2f1e37",
+  "baseSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "riderSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "report": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/report.json",
+  "humanApproval": false,
+  "normalActivation": false,
+  "sharedLoaderReview": "pending parent",
+  "replayInputs": "Own build.py/geometry.py/family.json/raw-audit.py; stable catalog-cycle.py; unchanged Bear measured profile. Exactly six files, no masters/scratch/Bear GLB construction input.",
+  "parentNext": "Independent actual shared motorcycle composition/review and freeze; preserve all source bytes."
+}

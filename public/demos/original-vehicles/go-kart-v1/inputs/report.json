@@ -1,0 +1,1919 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "go-kart",
+  "route": "go-kart",
+  "revision": "v1",
+  "method": "Original small go-kart: very low dark tubular chassis, broad bumper hoops, rounded short red/white UV-painted nose, actual shallow seat well with dark fixed seat/steering, compact rear motor and chain block. All four small tires intentionally exposed, independently rigged with front.25/rear.27 source radii. No glass, driver, helmet, roof, logos or high-to-low claim.",
+  "geometry": {
+    "triangles": 2686,
+    "vertices": 5642,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 205460,
+    "sha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 4.347826086956522,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 4.347826086956522,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 4.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 4.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -0.8600000143051147,
+        -0.7649999856948853,
+        0.25
+      ],
+      "centerExport": [
+        -14.95652198791504,
+        4.347826086956522,
+        13.304347577302353
+      ],
+      "radiusBlender": 0.25,
+      "wheel_radius": 4.347826086956522
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -0.8600000143051147,
+        0.7649999856948853,
+        0.25
+      ],
+      "centerExport": [
+        -14.95652198791504,
+        4.347826086956522,
+        -13.304347577302353
+      ],
+      "radiusBlender": 0.25,
+      "wheel_radius": 4.347826086956522
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        0.8899999856948853,
+        -0.7649999856948853,
+        0.27000001072883606
+      ],
+      "centerExport": [
+        15.478260620780615,
+        4.695652360501497,
+        13.304347577302353
+      ],
+      "radiusBlender": 0.27,
+      "wheel_radius": 4.695652173913045
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        0.8899999856948853,
+        0.7649999856948853,
+        0.27000001072883606
+      ],
+      "centerExport": [
+        15.478260620780615,
+        4.695652360501497,
+        -13.304347577302353
+      ],
+      "radiusBlender": 0.27,
+      "wheel_radius": 4.695652173913045
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/go-kart/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/go-kart/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/go-kart/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Fixed tubular chassis, bumpers, steering, central seat and rear motor/chain guard. No equipment animation. Four intentionally exposed wheels; no caps. Ordinary driving hides driver; driver-visible pose out of scope. No glass, roof or helmet/driver geometry.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 2686,
+  "vertexCount": 5642,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 205460,
+  "atlasBytes": 2563,
+  "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+  "atlasSha256": "45c680538913e561079b423ef1249820ac0c87901cf0e13d675e16869df3ac8f",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "go-kart--v1",
+    "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "triangles": 2686,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 4.347826416678382,
+        "minimumGap": 0.60653549891002,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 4.347826416678382,
+        "minimumGap": 0.60653549891002,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 4.695652961730957,
+        "minimumGap": 30.695202180034528,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 4.695652961730957,
+        "minimumGap": 30.695202180034528,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/go-kart/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "minBlenderWorld": [
+      -26.086833953857422,
+      -16.38260841369629,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      26.085905075073242,
+      16.38260841369629,
+      17.217391967773438
+    ],
+    "dimensionsBlenderWorld": [
+      52.172739028930664,
+      32.76521682739258,
+      17.21739149093628
+    ],
+    "dimensionsSourceUnits": [
+      2.9999324941635126,
+      1.883999967575073,
+      0.9900000107288359
+    ]
+  },
+  "cockpitDepthEvidence": {
+    "status": "passed",
+    "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "rayCount": 6,
+    "centralDownwardRays": [
+      {
+        "xySource": [
+          -0.36,
+          -0.22
+        ],
+        "firstSurfaceZSource": 0.2000002813339233,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.36,
+          0.22
+        ],
+        "firstSurfaceZSource": 0.20000004827976223,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.24,
+          -0.22
+        ],
+        "firstSurfaceZSource": 0.20000004827976223,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.24,
+          0.22
+        ],
+        "firstSurfaceZSource": 0.20000004827976223,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.08,
+          -0.22
+        ],
+        "firstSurfaceZSource": 0.2000002813339233,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.08,
+          0.22
+        ],
+        "firstSurfaceZSource": 0.2000002813339233,
+        "owner": "Body_static"
+      }
+    ],
+    "doorRailRays": [
+      {
+        "xySource": [
+          -0.2,
+          -0.35
+        ],
+        "firstSurfaceZSource": 0.4605884480476379,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.2,
+          0.35
+        ],
+        "firstSurfaceZSource": 0.4605884480476379,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.28,
+          -0.35
+        ],
+        "firstSurfaceZSource": 0.4605884480476379,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.28,
+          0.35
+        ],
+        "firstSurfaceZSource": 0.4605882287025451,
+        "owner": "Body_static"
+      }
+    ],
+    "seatCushionRays": [
+      {
+        "xySource": [
+          0.28,
+          0
+        ],
+        "firstSurfaceZSource": 0.4149999558925628,
+        "owner": "Body_static"
+      }
+    ],
+    "seatbackRays": [
+      {
+        "xySource": [
+          0.55,
+          0
+        ],
+        "firstSurfaceZSource": 0.9671239900588988,
+        "owner": "Body_static"
+      }
+    ],
+    "minimumRecessDepthSource": 0.2605879473686218,
+    "minimumRecessDepthWorld": 4.531964302062988,
+    "controls": {
+      "baselinePositivePassed": true,
+      "outsideHoodRejected": true,
+      "opaqueUpperDeckRejected": true,
+      "upperDeckNegativeRays": [
+        {
+          "xySource": [
+            -0.36,
+            -0.22
+          ],
+          "firstSurfaceZSource": 0.45999986290931694,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            -0.36,
+            0.22
+          ],
+          "firstSurfaceZSource": 0.4599999999999999,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            -0.24,
+            -0.22
+          ],
+          "firstSurfaceZSource": 0.4599999999999999,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            -0.24,
+            0.22
+          ],
+          "firstSurfaceZSource": 0.4599999999999999,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            -0.08,
+            -0.22
+          ],
+          "firstSurfaceZSource": 0.45999986290931694,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            -0.08,
+            0.22
+          ],
+          "firstSurfaceZSource": 0.4599999999999999,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        }
+      ],
+      "baselineRestored": true,
+      "inputBytesUnchanged": true
+    },
+    "regionConfig": "scripts/vehicle-bake/go-kart/cockpit-region.json",
+    "meaning": "Actual shallow kart seat well, not an opaque upper platform. Six footwell rays avoid the fixed steering/pedals and seat; separate rail, cushion and seatback rays. Temporary opaque upper deck must reject floor depth and reset exactly. Existing ordinary driving hides driver; no driver or helmet geometry."
+  },
+  "suspensionAttachmentEvidence": {
+    "status": "passed",
+    "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "gaps": [
+      {
+        "wheelLongitudinalRangeSource": [
+          -1.110000009536743,
+          -0.6100000739097594
+        ],
+        "wheelOutsideCockpitLongitudinalRange": true,
+        "wheel": "FL",
+        "radiusWorld": 4.347826086956522,
+        "innerFaceOutwardYWorld": 11.217391967773438,
+        "tipCandidateVertices": 77,
+        "actualAxialGapWorld": 0.2088642120361328,
+        "subpixelWorldGap": true
+      },
+      {
+        "wheelLongitudinalRangeSource": [
+          -1.110000009536743,
+          -0.6100000739097594
+        ],
+        "wheelOutsideCockpitLongitudinalRange": true,
+        "wheel": "FR",
+        "radiusWorld": 4.347826086956522,
+        "innerFaceOutwardYWorld": 11.217391967773438,
+        "tipCandidateVertices": 77,
+        "actualAxialGapWorld": 0.2088642120361328,
+        "subpixelWorldGap": true
+      },
+      {
+        "wheelLongitudinalRangeSource": [
+          0.6199999618530273,
+          1.1600000524520873
+        ],
+        "wheelOutsideCockpitLongitudinalRange": true,
+        "wheel": "RL",
+        "radiusWorld": 4.695652173913045,
+        "innerFaceOutwardYWorld": 11.217391967773438,
+        "tipCandidateVertices": 76,
+        "actualAxialGapWorld": 0.2088642120361328,
+        "subpixelWorldGap": true
+      },
+      {
+        "wheelLongitudinalRangeSource": [
+          0.6199999618530273,
+          1.1600000524520873
+        ],
+        "wheelOutsideCockpitLongitudinalRange": true,
+        "wheel": "RR",
+        "radiusWorld": 4.695652173913045,
+        "innerFaceOutwardYWorld": 11.217391967773438,
+        "tipCandidateVertices": 76,
+        "actualAxialGapWorld": 0.2088642120361328,
+        "subpixelWorldGap": true
+      }
+    ],
+    "meaning": "Declared actual fixed-tip region near each imported roll center; nearest fixed chassis arm vertex ends below1world pixel short of the real rotating inner tire face. Full cylinder/body proof separately qualifies every fixed triangle and all neutral rolls."
+  },
+  "differentRadiusPhases": {
+    "status": "passed",
+    "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "nativeSize": 224,
+    "radii": [
+      {
+        "id": "FL",
+        "radius": 4.347826086956522
+      },
+      {
+        "id": "FR",
+        "radius": 4.347826086956522
+      },
+      {
+        "id": "RL",
+        "radius": 4.695652173913045
+      },
+      {
+        "id": "RR",
+        "radius": 4.695652173913045
+      }
+    ],
+    "views": [
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": 0,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": 45,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -41.66666666666666,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -41.66666666666666,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": 90,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -83.33333333333331,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -83.33333333333331,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": 135,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -124.99999999999999,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -124.99999999999999,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": -180,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 166.66666666666663,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 166.66666666666663,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": -135,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 124.99999999999999,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 124.99999999999999,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": -90,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 83.33333333333331,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 83.33333333333331,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": -45,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 41.66666666666666,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 41.66666666666666,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": 0,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": 45,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -41.66666666666666,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -41.66666666666666,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": 90,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -83.33333333333331,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -83.33333333333331,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": 135,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -124.99999999999999,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -124.99999999999999,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": -180,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 166.66666666666663,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 166.66666666666663,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": -135,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 124.99999999999999,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 124.99999999999999,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": -90,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 83.33333333333331,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 83.33333333333331,
+            "quaternionErrorRadians": 2.9802322387695312e-08,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "ordinary-distance",
+        "phaseDegrees": -45,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 41.66666666666666,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 41.66666666666666,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": 0,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": 45,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 3.687956593344541,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 3.687956593344541,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": 90,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 7.375913186689082,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 7.375913186689082,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": 135,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 11.063869780033622,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 11.063869780033622,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": -180,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -14.751826373378163,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -14.751826373378163,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": -135,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -11.063869780033622,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -11.063869780033622,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": -90,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -7.375913186689082,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -7.375913186689082,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": -45,
+        "mode": "study",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -3.687956593344541,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -3.687956593344541,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": 0,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 0,
+            "expectedSignedAngleDegrees": 0,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": 45,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 3.4147746234671668,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 3.687956593344541,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 3.687956593344541,
+            "expectedSignedAngleDegrees": -45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": 90,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 6.8295492469343335,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 7.375913186689082,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 7.375913186689082,
+            "expectedSignedAngleDegrees": -90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": 135,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": 10.244323870401502,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 11.063869780033622,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": 11.063869780033622,
+            "expectedSignedAngleDegrees": -135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": -180,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -13.659098493868667,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -14.751826373378163,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -14.751826373378163,
+            "expectedSignedAngleDegrees": 180,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": -135,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -10.244323870401502,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -11.063869780033622,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -11.063869780033622,
+            "expectedSignedAngleDegrees": 135,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": -90,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -6.8295492469343335,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -7.375913186689082,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -7.375913186689082,
+            "expectedSignedAngleDegrees": 90,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      },
+      {
+        "kind": "equal-angle",
+        "phaseDegrees": -45,
+        "mode": "engine",
+        "wheels": [
+          {
+            "id": "FL",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "FR",
+            "radiusWorld": 4.347826086956522,
+            "travelWorld": -3.4147746234671668,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RL",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -3.687956593344541,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          },
+          {
+            "id": "RR",
+            "radiusWorld": 4.695652173913045,
+            "travelWorld": -3.687956593344541,
+            "expectedSignedAngleDegrees": 45,
+            "quaternionErrorRadians": 0,
+            "pivotErrorWorld": 0
+          }
+        ],
+        "fixedBodyUnchanged": true,
+        "pixelExactAbsoluteReset": true
+      }
+    ],
+    "errors": [],
+    "browser": "bundled full Chromium",
+    "browserVersion": "153.0.8010.12",
+    "meaning": "Ordinary distance is shared by all4 wheels and produces radius-dependent angles. Equal-angle diagnostic invokes the existing declared-wheel rig with each radius-specific travel and temporarily overrides only the local viewer instance; no shared harness changes. Both signed8phase sets per camera prove actual transforms, fixed body/pivots and pixel-exact absolute reset. Shared rig independently quarters/reverses each wheel."
+  },
+  "openWheelCoverageException": {
+    "authorization": "Explicit run153 user open-wheel exception applies to all4wheels",
+    "wheels": [
+      "FL",
+      "FR",
+      "RL",
+      "RR"
+    ],
+    "requirement": "Fender crown coverage N/A; exposed tires intentional",
+    "meaning": "Explicit all4-wheel exposure exception. Raw0covered/25samples each is intentional unsupported crown geometry, not fender coverage acceptance. Synthetic controls pass; body removal is honestly uninformative against an already exposed baseline. No caps were added.",
+    "status": "not-applicable-authorized-open-wheel",
+    "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "rawWheels": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "coveredCount": 0,
+        "sampleCount": 25,
+        "uncoveredCount": 25,
+        "sampleStatuses": [
+          "no-overhead-geometry"
+        ]
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "coveredCount": 0,
+        "sampleCount": 25,
+        "uncoveredCount": 25,
+        "sampleStatuses": [
+          "no-overhead-geometry"
+        ]
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "coveredCount": 0,
+        "sampleCount": 25,
+        "uncoveredCount": 25,
+        "sampleStatuses": [
+          "no-overhead-geometry"
+        ]
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "coveredCount": 0,
+        "sampleCount": 25,
+        "uncoveredCount": 25,
+        "sampleStatuses": [
+          "no-overhead-geometry"
+        ]
+      }
+    ]
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/go-kart/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/go-kart/capture.mjs",
+    "python scripts/vehicle-bake/go-kart/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/go-kart/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/go-kart/v1/evidence/clearance-input.json data/vehicle-bake/go-kart/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/go-kart/v1/model.glb --config art-source/vehicle-bake/go-kart/v1/coverage-region.json --output data/vehicle-bake/go-kart/recheck-coverage.json",
+    "python scripts/vehicle-bake/go-kart/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/go-kart/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 study and16 game headings of the exact model. Inspected both wireframes, signed ordinary-distance and equal-angle phases in both cameras, plus original224-pixel study2/study14 and engine2/engine14 front/rear obliques. Contact sheets use integer nearest scaling only.",
+    "Short red nose and broad white band, low dark tubular chassis/bumper hoop, central dark seat and gray fixed rear motor read as a small go-kart. The native size remains deliberately smaller than a normal car; no per-angle fit or enlargement was applied.",
+    "The central well remains open ahead of the seat cushion. Floor, dark inner walls and surrounding side lips are separate geometry, with six actual GLB floor rays confirming0.260588source units of depth and an opaque-upper-deck negative/reset.",
+    "All four small tires are deliberately exposed. Crown coverage is N/A under the explicit owner exception; raw0/25supported samples each and synthetic positive/negative controls are retained. No fenders or fake caps were added.",
+    "Short chassis arm tips visually meet the tires at native scale; actual imported vertices stop0.208864world pixels short of rotating inner tire faces. No large floating gaps, wheel-over-seat geometry or tire/frame intersections were observed.",
+    "Signed ordinary-distance phases produce different front/rear angles from actual radius metadata. Equal-angle family diagnostic verifies each wheel independently, fixed body/pivots and exact pixel reset. Static steering, seat, bumpers and motor remain body vertices.",
+    "Broad unlit red/white palette paint and characteristic ink remain readable at the requested small scale. Tiny hubs and thin frame/steering parts retain expected angle-dependent native aliasing. No glass cabin, roof, helmet, driver, logos, text or animated equipment.",
+    "Both-camera/all32-heading128/224 full centered native RGBA crop parity is exact at native224/radius112 density, with no edge clipping or camera/model fitting."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "allFourIntentionalOpenWheelExposureException": true,
+    "rawZeroOf25CrownCoveredEachRetainedWithControls": true,
+    "actualSubpixelSuspensionTipGap": true,
+    "ordinaryDistanceAndEqualAngleBothCameraSignedPhases": true,
+    "actualGLBCockpitFloorRays": 6,
+    "cockpitUpperDeckNegativeAndReset": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "bothCamera32Heading128224CropParity": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "All4wheel crowns intentionally exposed under explicit owner exception; fender coverage N/A, raw0of25 covered each retained with controls. No fake caps. Native views inspected separately.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "True shallow seat-well floor, fixed dark seat/steering and rear motor/chain block. No glass, roof, driver/helmet geometry or equipment animation; driver-visible pose out of scope.",
+    "Small chassis arms, steering rim and hubs retain expected native-pixel aliasing. Actual tip gaps are measured below1world pixel. Wheels stay beside and fore/aft of the central seat, never above it.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/go-kart/v1/atlas.png": "45c680538913e561079b423ef1249820ac0c87901cf0e13d675e16869df3ac8f",
+    "art-source/vehicle-bake/go-kart/v1/audit-source.py": "c2b84eab3588984d1c489d3a5150f962e62e8d9d75d434fc389416c876a5de8f",
+    "art-source/vehicle-bake/go-kart/v1/build.py": "632b352b0bcfa17d0d7d0f2021f2d7ff3bc36ba3dd1c5ec2ded5ce33a5e425ae",
+    "art-source/vehicle-bake/go-kart/v1/capture-phases.mjs": "4aafba0f3bb841ecc5c2c0d9552493a769eac3093819ca98694b36d5c097a37c",
+    "art-source/vehicle-bake/go-kart/v1/capture.mjs": "f3d40fc61f3d586ca59eefdece77d57ccc1d2ab4601a70c6a5e1542d705b7026",
+    "art-source/vehicle-bake/go-kart/v1/car.blend": "00a95de4751e9e0acef21a90624fab6ba6206fd2f0981fabf88edfe2bc862054",
+    "art-source/vehicle-bake/go-kart/v1/cockpit-region.json": "df001b97203141dde5c7df848cfb6a7eb9b39b712149e6a591d9dfe53b5aca23",
+    "art-source/vehicle-bake/go-kart/v1/coverage-region.json": "053ade1dd091a3fad1cc7a9d46caa2cc6f49261a7b8ab651839588ec3560266d",
+    "art-source/vehicle-bake/go-kart/v1/crop-parity.mjs": "3ed9e6159ef104266a8335103f9fbcdc292566b11ff517fc06e18595b8250794",
+    "art-source/vehicle-bake/go-kart/v1/evidence/author-browser-qa.json": "9297a4ff97753b97cfc70007886a69a42a563ebb52a6997114c60706059470d9",
+    "art-source/vehicle-bake/go-kart/v1/evidence/author-visual-inspection.json": "2aceda57cc16d3ac035e7558d169ddf67883eb565098d145ed98bfce3d93658f",
+    "art-source/vehicle-bake/go-kart/v1/evidence/both-camera-native-parity.json": "a5207035c6ad26e0327c1f0c3cbf1e4f419675a1cfda6e7855274a7aaac98550",
+    "art-source/vehicle-bake/go-kart/v1/evidence/clearance-input.json": "b1bddb9f3555d88638d74b1453bb0f46d34e025ee8e2bb204b71f12a472fa6c0",
+    "art-source/vehicle-bake/go-kart/v1/evidence/different-radius-phases.json": "6ba21b31ad0e0d4c2e1b4c5b8e4ab3df6abaf3f96eaf57f8be8a7b0bdff85a77",
+    "art-source/vehicle-bake/go-kart/v1/evidence/engine-capture.json": "0c4e81434ad3edd6ababf520abc14cd9af1204a2400a15bb8ba0f49f8e47cd49",
+    "art-source/vehicle-bake/go-kart/v1/evidence/open-wheel-exception.json": "5dbeac8ea7442f5c43770fbfded686e0309b25ea17a9aa513fa2caa4fd98b9b2",
+    "art-source/vehicle-bake/go-kart/v1/evidence/packed-source-audit.json": "8af954a374a9d71a22a6e6f13a30d3cfc12dab67d17729c09f68bf15fce66b67",
+    "art-source/vehicle-bake/go-kart/v1/evidence/replay-verification.json": "1a90fb75b0c70e680b95fe94fe5aaeb070cb85e0610cd3adceceac2e9cdc4d2b",
+    "art-source/vehicle-bake/go-kart/v1/evidence/shared-clearance.json": "2003d28cc78ca0a7311f1aa28b184cbbb8ea4697c0159c55c5ac281f8813a82c",
+    "art-source/vehicle-bake/go-kart/v1/evidence/upper-wheel-coverage.json": "e6088b2200b8f393846208020174338042205ec9784059d38f49938d762b2c3b",
+    "art-source/vehicle-bake/go-kart/v1/family.json": "27b7fac6b6f03ea15808128720333ef3b7d1052c20d804031fcd5d4536315ff0",
+    "art-source/vehicle-bake/go-kart/v1/finalize.py": "63eac6a54fb465f8f8edb2d2565191d954681f199072d612dc6e391e28ff5027",
+    "art-source/vehicle-bake/go-kart/v1/master.blend": "ae4b357b789202751c5355011a11ac21a21be06546db3bddd748b4e4781a90f5",
+    "art-source/vehicle-bake/go-kart/v1/model.glb": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "art-source/vehicle-bake/go-kart/v1/pack-author.py": "f12fcd4f7ea952a04489d577e94a0321c65ae3872a25353e5640742c7da229a5",
+    "art-source/vehicle-bake/go-kart/v1/paint-ownership.json": "1549d4d8d05c7dc7e2b142bbe94323d355da8131577154dbc5dfce4a3f64710f",
+    "art-source/vehicle-bake/go-kart/v1/palette-draft.png": "11569800c96ea17b373722dbdb04d276621d45a075e7787f861d1fc3bdbed29c",
+    "art-source/vehicle-bake/go-kart/v1/phase-probe-browser.mjs": "4ea901d31d3e6442738f64881944bedc57e2ba83356a8b125bf2288e44bd1d8f",
+    "art-source/vehicle-bake/go-kart/v1/recipe.json": "cc87ff55396f5ea862ba7417f25a0c2c585a44bff6f3735e3a7e09abc0e1b590",
+    "art-source/vehicle-bake/go-kart/v1/review.json": "2c7645578ce689fe1027139d61cccda9f49aca5e2af829b909ddd4fe64b57aca",
+    "art-source/vehicle-bake/go-kart/v1/sheets.py": "c0c3ea08e205f04486193d11bbd9814146544d478c36fe206c921b59e73b4cf6"
+  }
+}

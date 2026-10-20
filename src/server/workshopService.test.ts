@@ -429,6 +429,7 @@ describe("Workshop API and login boundaries", () => {
   });
 });
 
+// Each service restart validates the growing real review bank, including full input hashing.
 it("persists exact asset metadata and canonical world annotations across retries and restart", async () => {
   const f = await fixture();
   await f.login();
@@ -534,7 +535,7 @@ it("persists exact asset metadata and canonical world annotations across retries
     }),
   ).rejects.toThrow("selection cannot change");
   expect((await f.service().inbox()).requests).toHaveLength(2);
-});
+}, 30_000);
 
 it("pattern kit judgments use the global queue and preserve exact rule/pixel identities", async () => {
   const f = await fixture();

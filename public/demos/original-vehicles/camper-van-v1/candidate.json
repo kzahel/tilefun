@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "camper-van-v1",
+      "name": "Retro camper van",
+      "title": "Retro camper van \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original rounded flat-front cab-over camper with turquoise lower coachwork, cream upper skin, split blue windshield and three continuous side-skin framed panes each side. Own short front overhang and tall rounded body, actual raised cream roof and fixed small vent. Direct semantic UV paint, static side door/hatch, no glass overlays or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 2784,
+        "vertices": 5596,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 202544,
+        "sha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 7.82608695652174,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 7.82608695652174,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 7.82608695652174,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 7.82608695652174,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/atlas.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/atlas.png",
+          "sha256": "e3b1043f073eb9fbea2772e76037038c51b5e346d3a84fb46e291176f4daadac"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/capture.json",
+          "sha256": "05234db04746cdb0265480a6324d99d8b6de3cc1eb1d59a4b059882d889f036b"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-0.png",
+          "sha256": "faf5312b5b27fcd03fe8c41d51f1af470af3ba860d385da91da255b89bda583d"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-1.png",
+          "sha256": "ebb7b9593cff4daf76d8caa6c31cffe0b7234e8890046905ab68b1d9b9d2f1b8"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-10.png",
+          "sha256": "bfd4a42b98ea8be008d7f3d85df32839350d47eabcfbfaa7f6956e0a5837ff0a"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-11.png",
+          "sha256": "e945142606412bd6b2e96706a527362608c40c0cbe68f613412e3768fcf85ab4"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-12.png",
+          "sha256": "81c31fd2082c9ceb2b9c164036d337eaa236f08dbd13ce588922eb63b1a5514e"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-13.png",
+          "sha256": "32fd981765009f05a91f0f1f8ecf9eff07643cdebd9a943ef90b6f1804d79d77"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-14.png",
+          "sha256": "7909683763a6108695c40eb8608257e62b6d5ac5ff379c476ff77024f47c4a4a"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-15.png",
+          "sha256": "77415b5ce1972ccfd1dd7c187464800cbdb2cc0d51ed85fa22d0b8879fe7fd18"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-2.png",
+          "sha256": "31ce48b6f51644da4d2b187b108afabb08f109acbd0753321516c59a4c3edba4"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-3.png",
+          "sha256": "833586c86c5500a15551c69c6a2f8791539300c9674cf2e69e7e9161338a3681"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-4.png",
+          "sha256": "f2cce397c7944868e1c348728a972793e94f1baba8e150792787c605c1473e86"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-5.png",
+          "sha256": "c10da9b6658cdde9bd09e60f7a9eca429d4c810caeac6836433708347895026f"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-6.png",
+          "sha256": "8211f361706fbf55faf8ded4b6f9ec2f4a5696cfdef802b25043bdbaafaa9170"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-7.png",
+          "sha256": "387b3a3ef5f2cb9165d00cfb3aa1e35fa7c1020461b3f312ef14c14c5bf82274"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-8.png",
+          "sha256": "8d11efe690977d0ddacb242d1d3eff0de09897c71f5c77661794846d62b5fd86"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/engine-9.png",
+          "sha256": "15975896be1e47692cac5c2577eff746451998ca78f49c94ef692fdd324a1b53"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/game-roll-0.png",
+          "sha256": "31ce48b6f51644da4d2b187b108afabb08f109acbd0753321516c59a4c3edba4"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/game-roll-1.png",
+          "sha256": "86c0a9547f27ba18326f45dc414a6885f08aa6dd35376634814a69c8195f0fc7"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/game-roll-2.png",
+          "sha256": "978038c57e2db39c7d22a0523582cbaa26f4428f035569ad75c614c14688f057"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/game-roll-3.png",
+          "sha256": "809269d106b942f73998191cf93b8c82222c2e71e6e898309b87419318e56df8"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/game-roll-4.png",
+          "sha256": "34d2c5ed2085b19482355bc2b1eeb064506d657de4b18b3a2e782a596bd5647b"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/game-roll-5.png",
+          "sha256": "49c6fc6ec2757fdf09517434501ce2abbf1fcd0a1d0ff6f3fd40d5726790f601"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/game-roll-6.png",
+          "sha256": "88d2ceaf61c6fdd4357634b4f620af4898d63e1ec951617588a064881cb19519"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/game-roll-7.png",
+          "sha256": "e1de9266b0135b59c597c0afaf4b831cd8f723a8167aba5e1fd5f8005cde3933"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/inspection-engine.png",
+          "sha256": "40c871c1c718e375109bce53b2905f60a32e43924bae8436230522dd79a4045c"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/inspection-phases.png",
+          "sha256": "94ec5d7040360f817da57cad331d8a34d1d9689cce1e210f1e5d9698af459ab6"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/inspection-study.png",
+          "sha256": "a26b886443df93a52b948fd8da1445389defd015444fe7acb4e914604ec29813"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/roll-0.png",
+          "sha256": "6f4a52d4fc38d86fd7d03885fa456334c90145a27c3694c9db4f4ca151b1794c"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/roll-1.png",
+          "sha256": "f004d5f6c6b65a1eebce15aadeb9dca55900bf20ce2561b73e164764db38e83b"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/roll-2.png",
+          "sha256": "0e2ab2463e528529da87fce0112491ca516f1477c583b07f773799be5d51dec2"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/roll-3.png",
+          "sha256": "6abc5711996ec82108af657618e210a8e312c6a4e11ba9f6ad2c5ca95d38afd4"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/roll-4.png",
+          "sha256": "4b13ff86b8970ec9e4712f5ca53cec811b4128410caeb2f784addcec2721f14e"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/roll-5.png",
+          "sha256": "3da695a4623e1f4b8def9453240eddef184e70bf667e1f40df4cf4f8830a8165"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/roll-6.png",
+          "sha256": "2c2c8b4229e77c51613546d96939303153c22ec5cd448d1b7a4b65a38b389ab9"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/roll-7.png",
+          "sha256": "87bdbccbfcec628735b8959bdcb5753fe07fdfcefc1bdc166db6950ea36d81a1"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-0.png",
+          "sha256": "6ad577a64b4db69a43506e5558a80613cef8e92b2ee099c83f63bb5139999c9a"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-1.png",
+          "sha256": "c7319b7b3db0f8f068abdfc1bed21bb667ee84eaab4f1ee022c9aa0fdb927f61"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-10.png",
+          "sha256": "8a86c3d86954c84753c655924cd67ab543fddc6c842cc2f06a7003a1bfcf3a79"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-11.png",
+          "sha256": "22d3dc4e5295178314dc691011030e61ee93f433bc40a063f58ce95e8c90f73b"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-12.png",
+          "sha256": "073ba0076b44e2cd158ec7512290f7379f37e6b629dea7e33c814ee8955085ac"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-13.png",
+          "sha256": "fc2b1c8d8e93ff92632e063a413a333443d91fccbbbc6eb918fdc40dcb42c247"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-14.png",
+          "sha256": "81b35eda45cac19f8cbe6352ad3c0fd0c9a2d0c1b32fb984e47a6e434b5931dc"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-15.png",
+          "sha256": "0dfafe42367545341d2828a522343ecd2743a6910a2c91c00f89fd16de6d9330"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-2.png",
+          "sha256": "6f4a52d4fc38d86fd7d03885fa456334c90145a27c3694c9db4f4ca151b1794c"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-3.png",
+          "sha256": "796741fe6a0b975b6268c31ca59d0f984b01d0d1f052316ac394bc1ae22e76f3"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-4.png",
+          "sha256": "b3db609ccff7eeff2e1e5255f20f982054d56524dccfc1d496d222899d06da64"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-5.png",
+          "sha256": "d87044d2f734d0ab891758239a325d26b0d9ebe5e8d4a262f3b7b6754322383e"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-6.png",
+          "sha256": "27fcfe0c83c0673ea5ba45c4296e4015cedde9c19bf16f9afe579a4ea5f0b63e"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-7.png",
+          "sha256": "5abe46802adeca516069d76d54321db89f67466e0fbeb13a281ccefa319a7318"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-8.png",
+          "sha256": "b95ca3d7dc7f63d7c83f8c1a1119779a3d5c2c7da18517a09c0b14047baffbe7"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/study-9.png",
+          "sha256": "10df4ea56d3f37b0159c9d8096d68cec55a339810f3b806779086a8fa8b5d0b2"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/wire-engine.png",
+          "sha256": "4be57e518824e0a589fa6cfaf9548fb8b2d80e54e6c11571c08753721c2de4e2"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/engine/wire-study.png",
+          "sha256": "f3700fbd1b1afc76d47d6c86af44cded6379dc52d605ad5f4f1fb2bf162ee8e4"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/model.glb",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/model.glb",
+          "sha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/recipe.json",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/recipe.json",
+          "sha256": "1a4f398ff83cab6d4ca495f6e4e9e22100233b2bcd0705c8406c4eef353737f0"
+        },
+        {
+          "source": "demos/vehicle-bake/camper-van/v1/report.json",
+          "retained": "demos/original-vehicles/camper-van-v1/inputs/report.json",
+          "sha256": "13385ec1b8fca507c3d48317d8d6e058cb55a6845a2327afed134ba7fd896080"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

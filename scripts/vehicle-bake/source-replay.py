@@ -12,24 +12,18 @@ import hashlib
 import json
 import os
 import re
-from pathlib import Path, PurePosixPath
-import shutil
+from pathlib import Path
 import subprocess
 import sys
 import tempfile
+
+from replay_inputs import copy_inputs, safe_relative
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def safe_relative(name):
-    path = PurePosixPath(name)
-    assert not path.is_absolute() and ".." not in path.parts and ":" not in name and "\\" not in name
-    assert path.parts and path.parts[0] not in ["data", "test-results"], "Ignored input dependency"
-    return path
 
 
 def main():
@@ -43,6 +37,11 @@ def main():
     args = parser.parse_args()
     receipt = json.loads(args.receipt.read_text(encoding="utf-8-sig"))
     aliases = receipt.get("outputs")
+    if isinstance(aliases, dict):
+        aliases = {
+            name: value.get("sha256") if isinstance(value, dict) else value
+            for name, value in aliases.items()
+        }
     if isinstance(aliases, dict) and all(isinstance(value, str) and re.fullmatch("[0-9a-f]{64}", value) for value in aliases.values()):
         receipt.setdefault("outputHashes", aliases)
         models = [value for name, value in aliases.items() if name.endswith(".glb")]
@@ -70,13 +69,11 @@ def main():
     assert qa.is_relative_to((ROOT / "data").resolve()), "Replay artifacts must stay under ignored data"
     qa.mkdir(parents=True, exist_ok=True)
     scratch = Path(tempfile.mkdtemp(prefix="retained-replay-", dir=qa))
-    for name, expected in pins.items():
-        relative = safe_relative(name)
-        source = (ROOT / relative).resolve()
-        assert source.is_relative_to(ROOT) and sha(source) == expected, "Missing/stale retained input: " + name
-        target = scratch / relative
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, target)
+    try:
+        resolution = copy_inputs(ROOT, pins, scratch)
+    except ValueError as error:
+        # Preserve this CLI's existing rejection contract for callers/controls.
+        raise AssertionError(str(error)) from error
     (scratch / "AGENTS.md").write_bytes(b"# Isolated retained-input source replay root.\n")
     (scratch / "public").mkdir(exist_ok=True)
     arguments = receipt.get("arguments", ["--scratch"])
@@ -125,6 +122,7 @@ def main():
         assert matches, "No freshly generated exact output: " + name
         paths[name] = matches[0].relative_to(scratch).as_posix()
     result = {"status": "passed", "independent": True, "declaredInputPins": len(pins), "glbSha256": receipt["glbSha256"], "exactOutputs": paths, "scratchRoot": scratch.relative_to(ROOT).as_posix(), "scratchInputDependencies": []}
+    result.update(resolution)
     (qa / "parent-source-replay.json").write_bytes((json.dumps(result, indent=2) + "\n").encode())
     print(json.dumps(result))
 

@@ -1,0 +1,106 @@
+{
+  "modelSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+  "spriteSha256": "25fbf4885f0b6ed1c627f0061ec670077dd740c334020cac8b1e3aa30859a079",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-go-kart-v1.json": "a785bb2a3f41c2c50c8387ba725a4e3e93fd19073fed7673fb3f5ee4d828148b",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/go-kart-v1/review-manifest.json": "cae615421a45bc8d8a5835b882f3355b12f9220a5c8a4c27039cb01a956d4a0d",
+    "public/demos/original-vehicles/go-kart-v1/inputs/model.glb": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "public/demos/original-vehicles/go-kart-v1/inputs/atlas.png": "45c680538913e561079b423ef1249820ac0c87901cf0e13d675e16869df3ac8f",
+    "public/demos/original-vehicles/go-kart-v1/captures/capture.json": "0c4e81434ad3edd6ababf520abc14cd9af1204a2400a15bb8ba0f49f8e47cd49",
+    "art-source/vehicle-bake/go-kart/v1/evidence/replay-verification.json": "1a90fb75b0c70e680b95fe94fe5aaeb070cb85e0610cd3adceceac2e9cdc4d2b",
+    "art-source/vehicle-bake/go-kart/v1/build.py": "632b352b0bcfa17d0d7d0f2021f2d7ff3bc36ba3dd1c5ec2ded5ce33a5e425ae",
+    "art-source/vehicle-bake/go-kart/v1/family.json": "27b7fac6b6f03ea15808128720333ef3b7d1052c20d804031fcd5d4536315ff0",
+    "art-source/vehicle-bake/go-kart/v1/coverage-region.json": "053ade1dd091a3fad1cc7a9d46caa2cc6f49261a7b8ab651839588ec3560266d",
+    "art-source/vehicle-bake/go-kart/v1/cockpit-region.json": "df001b97203141dde5c7df848cfb6a7eb9b39b712149e6a591d9dfe53b5aca23",
+    "art-source/vehicle-bake/go-kart/v1/review.json": "2c7645578ce689fe1027139d61cccda9f49aca5e2af829b909ddd4fe64b57aca",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/go-kart-v1/captures/engine-4.png": "5c9ea70b29a43154aae9a1a9bf5230f626ed8cbed6691dc37f2414163349c8aa",
+    "public/demos/original-vehicles/go-kart-v1/captures/engine-12.png": "2af0586c1e436012a37a0c5db248a2d1973c7d3586bbfac081df6687ea878b60",
+    "public/demos/original-vehicles/go-kart-v1/captures/engine-8.png": "bb2051bcd0c73375bd7c18e8cd94bbb0ad25bfb143cad743082fc23fd3d1ed30",
+    "public/demos/original-vehicles/go-kart-v1/captures/engine-0.png": "6a895ea7560599a298030e36c674ca8c1a22a277ab2e80fafadf87a8d610d370"
+  },
+  "physicalBounds": [
+    53,
+    33,
+    18
+  ],
+  "measurement": {
+    "modelSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -26.086833953857422,
+        -16.38260841369629,
+        4.76837158203125e-07
+      ],
+      "max": [
+        26.085905075073242,
+        16.38260841369629,
+        17.217391967773438
+      ],
+      "size": [
+        52.17273712158203,
+        32.76521682739258,
+        17.217391967773438
+      ]
+    },
+    "triangles": 2686,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/go-kart/v1/evidence/replay-verification.json",
+    "sha256": "1a90fb75b0c70e680b95fe94fe5aaeb070cb85e0610cd3adceceac2e9cdc4d2b",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-go-kart-v1.json --blender BLENDER"
+}

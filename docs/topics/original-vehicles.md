@@ -1,8 +1,8 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: thirteen road originals integrated locally; autonomous run 153 validates and expands the fleet.
-Updated: 2026-10-19.
+Status: 33 road originals integrated locally; second full validation underway; motorcycles remain rider prototypes.
+Updated: 2026-10-20.
 
 The owner separately authorized an original **explorer motorboat** and working
 lake gameplay in [152](../tactical/152-explorer-boat-and-lakes.md). Its independent
@@ -35,11 +35,30 @@ Batch 2 adds microcar, woody wagon, limousine, hot rod and rally hatchback local
 **13 originals, 58 road types, 57 ordinary traffic types**, plus the boat. Its
 focused units, typechecks, lint, build and 1,779-identity inventory pass; the full
 unit suite records 5,808 passes, five known Windows failures and ten skips.
-The 1,557-case browser run remains active with the catalog held stable; final
-browser outcome and the second commit remain pending. Twenty further original
-source families through tractor and forklift have complete source and independent
-native-view/source-replay QA. These sources are not yet normal runtime
-vehicles. [Vehicle status](../vehicle-status.md) distinguishes those checkpoints.
+The first 1,557-case browser run finished with 1,548 passes, eight failures and
+one skip. All eight failures pass isolated reruns: two harness corrections account
+for the boat in the picker and isolate manual dev-reload from concurrent asset
+authoring. The unchanged touch/marabou cases also pass isolated reruns. Commit
+`6e36319c` retains that thirteen-original checkpoint and all 33 ordinary source
+families. This is not a clean whole-suite browser result.
+
+Twenty further originals through tractor and forklift now have immutable frozen
+reviews, exact runtime packaging and normal local editor/traffic registration:
+**33 originals, 78 road types, 77 ordinary traffic types**, plus the boat (79
+drivable types). All 168 focused original tests pass; conservative imported bounds,
+native fallback packing, explicit four/six-wheel geometry and road admission are
+checked per family. A second full snapshot validates this combined fleet and the
+new strict two/three-wheel loader. The six-wheel semi is rigid; crane, mixer,
+forklift and other work equipment remain static. [Vehicle status](../vehicle-status.md)
+distinguishes completed validation from pending broad checks.
+
+Historical receipts retain their original renderer pins through an explicitly
+registered byte-identical replay snapshot; their constructors/exporters and
+receipts remain unchanged. Current-engine compatibility is tested separately.
+The isolated Explorer/classic and Explorer/sidecar assemblies pass actual shared
+loader, native pixel/component parity and independent wheel/body qualification.
+They do not enable ordinary motorcycle occupancy; [riders](vehicle-riders.md)
+owns identity, AI and occupied fallback prerequisites.
 Historical checkpoint details below retain their original counts and gates.
 
 The owner accepted school bus v1 and explicitly authorized runtime integration.

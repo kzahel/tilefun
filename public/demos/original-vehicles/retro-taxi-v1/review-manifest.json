@@ -1,0 +1,975 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "retro-taxi-v1",
+      "name": "Checker-style taxi",
+      "title": "Checker-style taxi \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original rounded low yellow four-door taxi sedan with substantial hood/trunk, domed cabin and swept front/rear glazing. Continuous actual-skin UV charts own bounded blue panes, broad two-row black/cream checker belt, four-door seams/gray handles and rear tail paint. Small fixed roof-sign solid has actual UV dark inset without text. No glass overlays, source projection or high-to-low claim.",
+      "audit": {
+        "triangles": 2970,
+        "vertices": 5792,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 209576,
+        "sha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 7.478260869565219,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 7.478260869565219,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 7.478260869565219,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 7.478260869565219,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/atlas.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/atlas.png",
+          "sha256": "fe16716c37b4757fe93c18096d8242ddb3dec8f1afa8ecb85c9d1187c73a62e4"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/capture.json",
+          "sha256": "1e02e4dddd0b430bbe94fee717c72c39377c8306e6e626ab3dcef640ae58350c"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-0.png",
+          "sha256": "ae89fd4ec063736dca6232d080c553015c97962a4d6808d03dd3adb638f25996"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-1.png",
+          "sha256": "dfd6939144298a082165b9629a9867cac7be094406411b7031d3d29624c5b0dc"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-10.png",
+          "sha256": "296ada3891e8dfa1e5e13b2425e206b38b2b6b850c59e34bf6fe599e36d580cb"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-11.png",
+          "sha256": "d1f478ecfcc4988db406ecf1a94c9350a6c3ac09a95db0d3c122805c6f91c453"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-12.png",
+          "sha256": "dace4e2d03e2be96dfe0b1c4229ca192fc151e50171ded12500deedd6a6d52ef"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-13.png",
+          "sha256": "d03f6cb0245d9ad1e895eb0d3de90e444192034f0bee3e9f6fdcb2ff6f0fc9f2"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-14.png",
+          "sha256": "944b27b8bca461d472ed3d1533e9cb487e1e3dfa98a521a3c1c853c2bc0a97e8"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-15.png",
+          "sha256": "90bedeac0e5d22e5ec1e11680cf7974fa8dcd7a64916d3a192b98097c6b47a56"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-2.png",
+          "sha256": "81a34507dee91c527f72a66e030c98d939418ffb3b113bf6039853b238c05f2c"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-3.png",
+          "sha256": "f0f2e3093c1787e46b0237f4aa2c7011ab173eba306024039058b6efe285efed"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-4.png",
+          "sha256": "c8c8a02bafd229b039ba89b9ad814c065e72761e1c5ec5566ee61c736cce131a"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-5.png",
+          "sha256": "f703aefe47edfc90101527feccba3a1226f5a477a2cd67925647f07512df0995"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-6.png",
+          "sha256": "2ef9e480593ffa1a7983ac5d098b9b9a60516acbefd81253afe939b5af72a721"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-7.png",
+          "sha256": "78073c9907e0f779125d96ab3b0d450b8a0688ddb9eb8df9dd17c58f76fff187"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-8.png",
+          "sha256": "03b20be77b4a04473bd81418be2c114fac6825a06b9b29a5f710fbfd453bfaf4"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-9.png",
+          "sha256": "e504217b9e597988359623bb64ef6eb15a933d6da971c48389d24a8384ebf057"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-0.png",
+          "sha256": "81a34507dee91c527f72a66e030c98d939418ffb3b113bf6039853b238c05f2c"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-1.png",
+          "sha256": "3602565b696de05d0bd91716b88e8e419fc14a9585d53a5b9db80435a3256bd2"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-2.png",
+          "sha256": "0b42b671ac811455cf6ef5dddd1b805f3b5ec3cf6bf6e3dc7707c2ef5123f592"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-3.png",
+          "sha256": "dbbee966b723dca4975b60918d3dd9ee25b9fe60f60472a165c87188238e171f"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-4.png",
+          "sha256": "3d2a880c4a0cf893ad608424d2a4f36c306261b5f13f6c97765d2784b7ef7bee"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-5.png",
+          "sha256": "57040336d1b5a384db6c5546f7a401a82f0d6253eca60438f0dce6799e544f9f"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-6.png",
+          "sha256": "8d9789a1f9b1ce18831aceb57eb78b29ce53e73267a3e186325d76963a974327"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-7.png",
+          "sha256": "6a9ce30266f5abdd5f36c657fd130166609a6e2ba743e69fe5174aff682197e4"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/inspection-engine.png",
+          "sha256": "0301a11624e3a4ff4c4283ed1c89ee5077674b1c2faccdc0ebcc08dab9f71f35"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/inspection-phases.png",
+          "sha256": "522ff58385ea2e160f7a717d37b193ca90365b87fedd770a233c0e4217e07958"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/inspection-study.png",
+          "sha256": "68a2dd148ff7152586d77db0f3017d9efa77aa5a7630dfa76b1e59c220592ff9"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-0.png",
+          "sha256": "215ce368f2b3a321111f261e75cf4aa348e50f6171c4fd2b9ec5cf86c69bc6ea"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-1.png",
+          "sha256": "41f2c8439c2e8d4450950bcaf173bc77fb3940619080de700cbd1224d73d2b98"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-2.png",
+          "sha256": "a486f3cd2b4b587ac56c5beac714f598477feec3d1fbb40ebea9dc64d7116c72"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-3.png",
+          "sha256": "58306e2b91e434cb8a1c727dbe1d9e6b1ba7831d1e9fbd6daf67d69dfc79ca84"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-4.png",
+          "sha256": "6b63ffa8c27ae2d80d21945ab21dc7220206269b774803c70abb75bac3fa94e2"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-5.png",
+          "sha256": "9fb54d15044c768bf7fbc928a01f7159587e0d6da2b34b8df3058802a58f4b3a"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-6.png",
+          "sha256": "7bca2013641787a3a794377c18e9c1550ff174bcf40ee10d22470f13f7e1a6fb"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-7.png",
+          "sha256": "fc0d5c12edf1f91b81f378139f6b9769e70bac82e99f5bfc7274661609d334ff"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-0.png",
+          "sha256": "66a1c601df21a3ddbe0b35f56eb73518eb53b5b74a62c8bfc96df01323c9a8a6"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-1.png",
+          "sha256": "90af3b9e5dd6e5c5b76b2fde93c930bf5f25bf9e5437bd5ae16cb1fc96a76555"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-10.png",
+          "sha256": "a55314fc93d212ab35868ebf434a4c9c92a82406955d8ba1d7422ef275baa435"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-11.png",
+          "sha256": "5671a1fa58c1eef258b714ea74a2207ebc701d9cd9a8edb89ce9f9f1399732bc"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-12.png",
+          "sha256": "46b72e8b0daa0a3c388829502879b612b75b7ec4ff306c4b3f27fb5643d7bf9e"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-13.png",
+          "sha256": "bd3e5340271d5713476d3a210b5d670f3711250738440343dddb46cd73793a87"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-14.png",
+          "sha256": "4c9f003fd9aea257f6e55c82cb957e864b5f8603ceb5833fac06d96803612d4b"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-15.png",
+          "sha256": "3e702410909b31f4a4ffe722d89810740775e7b8f59e0cdf351e3e9ead57b766"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-2.png",
+          "sha256": "215ce368f2b3a321111f261e75cf4aa348e50f6171c4fd2b9ec5cf86c69bc6ea"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-3.png",
+          "sha256": "ff0980b44fa81828995729750037ec8b34cc0c1d84802bb12fbff493234db09c"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-4.png",
+          "sha256": "dc189d16865c6ae52ff51fb3628818c66869e5c1ec12352550b830e1705991b6"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-5.png",
+          "sha256": "6942330b167eb3ecb9a5d05a9e196e37bb043490ef8a055c4d184d760518aedb"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-6.png",
+          "sha256": "6a5172ee54b7a7d3f2d887a2523f560a03fcb4fb863f6d0a67fd1b72803d7eb8"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-7.png",
+          "sha256": "07b87d769bf6445692860499954d3f1d068eb010aa613c64d5220fe5cb5b0b7d"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-8.png",
+          "sha256": "0f8e1e09a4bec99b9d461b0cff6f254bedda8bcd5e79e4b21d50f26ef626560b"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-9.png",
+          "sha256": "e13b7bb1b720b2d5accc86970cbdf6ad4d5aa93a90cb52089c41c6f9ecfef587"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/wire-engine.png",
+          "sha256": "679643496918d67f2dfd7e188c18157aa16ac5b553a27d2bd38e31204a012c69"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/engine/wire-study.png",
+          "sha256": "3652fd7b84d841e0ea4549dcb17f8eedb1720e0e2194eae74b7266c44f64f0a3"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/model.glb",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/model.glb",
+          "sha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/recipe.json",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/recipe.json",
+          "sha256": "8cd5310fdf89c84aaa379c793de5b842d97f5d2038e7697fa40b0970394d1528"
+        },
+        {
+          "source": "demos/vehicle-bake/retro-taxi/v1/report.json",
+          "retained": "demos/original-vehicles/retro-taxi-v1/inputs/report.json",
+          "sha256": "c9e1b78b0212f071b863f688a2f029291ed695dbf9adec37001452348d052fe3"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/retro-taxi-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "retro-taxi--v1",
+          "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+          "triangles": 2970,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 7.4782609939575195,
+              "minimumGap": 1.660268894583096,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 7.4782609939575195,
+              "minimumGap": 1.660268894583096,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 7.478261947631836,
+              "minimumGap": 1.6602692212566659,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 7.478261947631836,
+              "minimumGap": 1.6602695608061282,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 7.478260869565219,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 7.478260869565219,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 7.478260869565219,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 7.478260869565219,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/browser-qa.json",
+          "sha256": "4aa9353cdbcaac4e87f0c846d1af8badaa3b5851e762aa9d94aeb9d7910957cc"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/candidate.json",
+          "sha256": "9dac3a3a23c3262f3faa42d2a8924b7357adfac8072a456d722f35cf58be9499"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/capture.json",
+          "sha256": "1e02e4dddd0b430bbe94fee717c72c39377c8306e6e626ab3dcef640ae58350c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/contact-sheet.png",
+          "sha256": "023c2eabf3e25e838d1bf28ca29a3298a800dd6a2e92aa166fe142759709ba13"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-0.png",
+          "sha256": "ae89fd4ec063736dca6232d080c553015c97962a4d6808d03dd3adb638f25996"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-1.png",
+          "sha256": "dfd6939144298a082165b9629a9867cac7be094406411b7031d3d29624c5b0dc"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-10.png",
+          "sha256": "296ada3891e8dfa1e5e13b2425e206b38b2b6b850c59e34bf6fe599e36d580cb"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-11.png",
+          "sha256": "d1f478ecfcc4988db406ecf1a94c9350a6c3ac09a95db0d3c122805c6f91c453"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-12.png",
+          "sha256": "dace4e2d03e2be96dfe0b1c4229ca192fc151e50171ded12500deedd6a6d52ef"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-13.png",
+          "sha256": "d03f6cb0245d9ad1e895eb0d3de90e444192034f0bee3e9f6fdcb2ff6f0fc9f2"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-14.png",
+          "sha256": "944b27b8bca461d472ed3d1533e9cb487e1e3dfa98a521a3c1c853c2bc0a97e8"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-15.png",
+          "sha256": "90bedeac0e5d22e5ec1e11680cf7974fa8dcd7a64916d3a192b98097c6b47a56"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-1x.png",
+          "sha256": "da78ee5cd7fb8d3d6f1b1d51a9a59a3ea7f8e1a8107214192088beefff73f62e"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-2.png",
+          "sha256": "81a34507dee91c527f72a66e030c98d939418ffb3b113bf6039853b238c05f2c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-2x.png",
+          "sha256": "487bf860070c8451a025daa25f844d6304b634255279f7c0be6c781a0e0ba17e"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-3.png",
+          "sha256": "f0f2e3093c1787e46b0237f4aa2c7011ab173eba306024039058b6efe285efed"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-3x.png",
+          "sha256": "95b3d18cf0a5b3823a1e792ddf7b5966008171e274a4296c663f5d30e220132b"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-4.png",
+          "sha256": "c8c8a02bafd229b039ba89b9ad814c065e72761e1c5ec5566ee61c736cce131a"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-5.png",
+          "sha256": "f703aefe47edfc90101527feccba3a1226f5a477a2cd67925647f07512df0995"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-6.png",
+          "sha256": "2ef9e480593ffa1a7983ac5d098b9b9a60516acbefd81253afe939b5af72a721"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-7.png",
+          "sha256": "78073c9907e0f779125d96ab3b0d450b8a0688ddb9eb8df9dd17c58f76fff187"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-8.png",
+          "sha256": "03b20be77b4a04473bd81418be2c114fac6825a06b9b29a5f710fbfd453bfaf4"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/engine-9.png",
+          "sha256": "e504217b9e597988359623bb64ef6eb15a933d6da971c48389d24a8384ebf057"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-roll-0.png",
+          "sha256": "81a34507dee91c527f72a66e030c98d939418ffb3b113bf6039853b238c05f2c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-roll-1.png",
+          "sha256": "3602565b696de05d0bd91716b88e8e419fc14a9585d53a5b9db80435a3256bd2"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-roll-2.png",
+          "sha256": "0b42b671ac811455cf6ef5dddd1b805f3b5ec3cf6bf6e3dc7707c2ef5123f592"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-roll-3.png",
+          "sha256": "dbbee966b723dca4975b60918d3dd9ee25b9fe60f60472a165c87188238e171f"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-roll-4.png",
+          "sha256": "3d2a880c4a0cf893ad608424d2a4f36c306261b5f13f6c97765d2784b7ef7bee"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-roll-5.png",
+          "sha256": "57040336d1b5a384db6c5546f7a401a82f0d6253eca60438f0dce6799e544f9f"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-roll-6.png",
+          "sha256": "8d9789a1f9b1ce18831aceb57eb78b29ce53e73267a3e186325d76963a974327"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-roll-7.png",
+          "sha256": "6a9ce30266f5abdd5f36c657fd130166609a6e2ba743e69fe5174aff682197e4"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/game-turntable.gif",
+          "sha256": "a07cce16513398fa63350d1fe6a26aaa24574d471a14786703aa28041d0c3888"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/roll-0.png",
+          "sha256": "215ce368f2b3a321111f261e75cf4aa348e50f6171c4fd2b9ec5cf86c69bc6ea"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/roll-1.png",
+          "sha256": "41f2c8439c2e8d4450950bcaf173bc77fb3940619080de700cbd1224d73d2b98"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/roll-2.png",
+          "sha256": "a486f3cd2b4b587ac56c5beac714f598477feec3d1fbb40ebea9dc64d7116c72"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/roll-3.png",
+          "sha256": "58306e2b91e434cb8a1c727dbe1d9e6b1ba7831d1e9fbd6daf67d69dfc79ca84"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/roll-4.png",
+          "sha256": "6b63ffa8c27ae2d80d21945ab21dc7220206269b774803c70abb75bac3fa94e2"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/roll-5.png",
+          "sha256": "9fb54d15044c768bf7fbc928a01f7159587e0d6da2b34b8df3058802a58f4b3a"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/roll-6.png",
+          "sha256": "7bca2013641787a3a794377c18e9c1550ff174bcf40ee10d22470f13f7e1a6fb"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/roll-7.png",
+          "sha256": "fc0d5c12edf1f91b81f378139f6b9769e70bac82e99f5bfc7274661609d334ff"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-0.png",
+          "sha256": "66a1c601df21a3ddbe0b35f56eb73518eb53b5b74a62c8bfc96df01323c9a8a6"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-1.png",
+          "sha256": "90af3b9e5dd6e5c5b76b2fde93c930bf5f25bf9e5437bd5ae16cb1fc96a76555"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-10.png",
+          "sha256": "a55314fc93d212ab35868ebf434a4c9c92a82406955d8ba1d7422ef275baa435"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-11.png",
+          "sha256": "5671a1fa58c1eef258b714ea74a2207ebc701d9cd9a8edb89ce9f9f1399732bc"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-12.png",
+          "sha256": "46b72e8b0daa0a3c388829502879b612b75b7ec4ff306c4b3f27fb5643d7bf9e"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-13.png",
+          "sha256": "bd3e5340271d5713476d3a210b5d670f3711250738440343dddb46cd73793a87"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-14.png",
+          "sha256": "4c9f003fd9aea257f6e55c82cb957e864b5f8603ceb5833fac06d96803612d4b"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-15.png",
+          "sha256": "3e702410909b31f4a4ffe722d89810740775e7b8f59e0cdf351e3e9ead57b766"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-1x.png",
+          "sha256": "7cac257a9359b9275345bb67951ef95517b1e207ef48f50dc1a899a193a0c52c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-2.png",
+          "sha256": "215ce368f2b3a321111f261e75cf4aa348e50f6171c4fd2b9ec5cf86c69bc6ea"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-2x.png",
+          "sha256": "1a3e20e3e4ce62cb349d71c28ddf4c865b2a2417fedc1dc2fa6f509b45f90a61"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-3.png",
+          "sha256": "ff0980b44fa81828995729750037ec8b34cc0c1d84802bb12fbff493234db09c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-3x.png",
+          "sha256": "e5def253bfef95a563f496282aecd23b6487658bb47f2f945747df55d59f541a"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-4.png",
+          "sha256": "dc189d16865c6ae52ff51fb3628818c66869e5c1ec12352550b830e1705991b6"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-5.png",
+          "sha256": "6942330b167eb3ecb9a5d05a9e196e37bb043490ef8a055c4d184d760518aedb"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-6.png",
+          "sha256": "6a5172ee54b7a7d3f2d887a2523f560a03fcb4fb863f6d0a67fd1b72803d7eb8"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-7.png",
+          "sha256": "07b87d769bf6445692860499954d3f1d068eb010aa613c64d5220fe5cb5b0b7d"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-8.png",
+          "sha256": "0f8e1e09a4bec99b9d461b0cff6f254bedda8bcd5e79e4b21d50f26ef626560b"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/study-9.png",
+          "sha256": "e13b7bb1b720b2d5accc86970cbdf6ad4d5aa93a90cb52089c41c6f9ecfef587"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/turntable.gif",
+          "sha256": "342b6f0fa82df33c3ec0864276b2cd75a6a36760871b2aa0b338ef2306feed54"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/viewer-desktop.png",
+          "sha256": "f0e99fadb42976f0fdba0bd30af236d1dc0aade0da88601014389cdeca5edc74"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/viewer-mobile.png",
+          "sha256": "c684ffbf1b21567ccdb4f684fdec997d5a7ad633faea4e9988663dee5273a7e5"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/wheel-phases.png",
+          "sha256": "17bb88080ea1022651ac3b3976760c68d279692a5bdd6f9c3fc53eca3255cd15"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/wire-engine.png",
+          "sha256": "679643496918d67f2dfd7e188c18157aa16ac5b553a27d2bd38e31204a012c69"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/captures/wire-study.png",
+          "sha256": "3652fd7b84d841e0ea4549dcb17f8eedb1720e0e2194eae74b7266c44f64f0a3"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/clearance.json",
+          "sha256": "93059f5264943affb60dd9e9b159642fb7d78293229d1b09f9a84ea8c43e5729"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/independent-source-replay.json",
+          "sha256": "c954ca18491fa837d5705f22501d4e4e96dca4686aa2bde5fcd09bcfb88f4d7e"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/atlas.png",
+          "sha256": "fe16716c37b4757fe93c18096d8242ddb3dec8f1afa8ecb85c9d1187c73a62e4"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/capture.json",
+          "sha256": "1e02e4dddd0b430bbe94fee717c72c39377c8306e6e626ab3dcef640ae58350c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-0.png",
+          "sha256": "ae89fd4ec063736dca6232d080c553015c97962a4d6808d03dd3adb638f25996"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-1.png",
+          "sha256": "dfd6939144298a082165b9629a9867cac7be094406411b7031d3d29624c5b0dc"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-10.png",
+          "sha256": "296ada3891e8dfa1e5e13b2425e206b38b2b6b850c59e34bf6fe599e36d580cb"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-11.png",
+          "sha256": "d1f478ecfcc4988db406ecf1a94c9350a6c3ac09a95db0d3c122805c6f91c453"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-12.png",
+          "sha256": "dace4e2d03e2be96dfe0b1c4229ca192fc151e50171ded12500deedd6a6d52ef"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-13.png",
+          "sha256": "d03f6cb0245d9ad1e895eb0d3de90e444192034f0bee3e9f6fdcb2ff6f0fc9f2"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-14.png",
+          "sha256": "944b27b8bca461d472ed3d1533e9cb487e1e3dfa98a521a3c1c853c2bc0a97e8"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-15.png",
+          "sha256": "90bedeac0e5d22e5ec1e11680cf7974fa8dcd7a64916d3a192b98097c6b47a56"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-2.png",
+          "sha256": "81a34507dee91c527f72a66e030c98d939418ffb3b113bf6039853b238c05f2c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-3.png",
+          "sha256": "f0f2e3093c1787e46b0237f4aa2c7011ab173eba306024039058b6efe285efed"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-4.png",
+          "sha256": "c8c8a02bafd229b039ba89b9ad814c065e72761e1c5ec5566ee61c736cce131a"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-5.png",
+          "sha256": "f703aefe47edfc90101527feccba3a1226f5a477a2cd67925647f07512df0995"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-6.png",
+          "sha256": "2ef9e480593ffa1a7983ac5d098b9b9a60516acbefd81253afe939b5af72a721"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-7.png",
+          "sha256": "78073c9907e0f779125d96ab3b0d450b8a0688ddb9eb8df9dd17c58f76fff187"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-8.png",
+          "sha256": "03b20be77b4a04473bd81418be2c114fac6825a06b9b29a5f710fbfd453bfaf4"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/engine-9.png",
+          "sha256": "e504217b9e597988359623bb64ef6eb15a933d6da971c48389d24a8384ebf057"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-0.png",
+          "sha256": "81a34507dee91c527f72a66e030c98d939418ffb3b113bf6039853b238c05f2c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-1.png",
+          "sha256": "3602565b696de05d0bd91716b88e8e419fc14a9585d53a5b9db80435a3256bd2"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-2.png",
+          "sha256": "0b42b671ac811455cf6ef5dddd1b805f3b5ec3cf6bf6e3dc7707c2ef5123f592"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-3.png",
+          "sha256": "dbbee966b723dca4975b60918d3dd9ee25b9fe60f60472a165c87188238e171f"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-4.png",
+          "sha256": "3d2a880c4a0cf893ad608424d2a4f36c306261b5f13f6c97765d2784b7ef7bee"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-5.png",
+          "sha256": "57040336d1b5a384db6c5546f7a401a82f0d6253eca60438f0dce6799e544f9f"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-6.png",
+          "sha256": "8d9789a1f9b1ce18831aceb57eb78b29ce53e73267a3e186325d76963a974327"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/game-roll-7.png",
+          "sha256": "6a9ce30266f5abdd5f36c657fd130166609a6e2ba743e69fe5174aff682197e4"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/inspection-engine.png",
+          "sha256": "0301a11624e3a4ff4c4283ed1c89ee5077674b1c2faccdc0ebcc08dab9f71f35"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/inspection-phases.png",
+          "sha256": "522ff58385ea2e160f7a717d37b193ca90365b87fedd770a233c0e4217e07958"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/inspection-study.png",
+          "sha256": "68a2dd148ff7152586d77db0f3017d9efa77aa5a7630dfa76b1e59c220592ff9"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-0.png",
+          "sha256": "215ce368f2b3a321111f261e75cf4aa348e50f6171c4fd2b9ec5cf86c69bc6ea"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-1.png",
+          "sha256": "41f2c8439c2e8d4450950bcaf173bc77fb3940619080de700cbd1224d73d2b98"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-2.png",
+          "sha256": "a486f3cd2b4b587ac56c5beac714f598477feec3d1fbb40ebea9dc64d7116c72"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-3.png",
+          "sha256": "58306e2b91e434cb8a1c727dbe1d9e6b1ba7831d1e9fbd6daf67d69dfc79ca84"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-4.png",
+          "sha256": "6b63ffa8c27ae2d80d21945ab21dc7220206269b774803c70abb75bac3fa94e2"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-5.png",
+          "sha256": "9fb54d15044c768bf7fbc928a01f7159587e0d6da2b34b8df3058802a58f4b3a"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-6.png",
+          "sha256": "7bca2013641787a3a794377c18e9c1550ff174bcf40ee10d22470f13f7e1a6fb"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/roll-7.png",
+          "sha256": "fc0d5c12edf1f91b81f378139f6b9769e70bac82e99f5bfc7274661609d334ff"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-0.png",
+          "sha256": "66a1c601df21a3ddbe0b35f56eb73518eb53b5b74a62c8bfc96df01323c9a8a6"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-1.png",
+          "sha256": "90af3b9e5dd6e5c5b76b2fde93c930bf5f25bf9e5437bd5ae16cb1fc96a76555"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-10.png",
+          "sha256": "a55314fc93d212ab35868ebf434a4c9c92a82406955d8ba1d7422ef275baa435"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-11.png",
+          "sha256": "5671a1fa58c1eef258b714ea74a2207ebc701d9cd9a8edb89ce9f9f1399732bc"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-12.png",
+          "sha256": "46b72e8b0daa0a3c388829502879b612b75b7ec4ff306c4b3f27fb5643d7bf9e"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-13.png",
+          "sha256": "bd3e5340271d5713476d3a210b5d670f3711250738440343dddb46cd73793a87"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-14.png",
+          "sha256": "4c9f003fd9aea257f6e55c82cb957e864b5f8603ceb5833fac06d96803612d4b"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-15.png",
+          "sha256": "3e702410909b31f4a4ffe722d89810740775e7b8f59e0cdf351e3e9ead57b766"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-2.png",
+          "sha256": "215ce368f2b3a321111f261e75cf4aa348e50f6171c4fd2b9ec5cf86c69bc6ea"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-3.png",
+          "sha256": "ff0980b44fa81828995729750037ec8b34cc0c1d84802bb12fbff493234db09c"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-4.png",
+          "sha256": "dc189d16865c6ae52ff51fb3628818c66869e5c1ec12352550b830e1705991b6"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-5.png",
+          "sha256": "6942330b167eb3ecb9a5d05a9e196e37bb043490ef8a055c4d184d760518aedb"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-6.png",
+          "sha256": "6a5172ee54b7a7d3f2d887a2523f560a03fcb4fb863f6d0a67fd1b72803d7eb8"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-7.png",
+          "sha256": "07b87d769bf6445692860499954d3f1d068eb010aa613c64d5220fe5cb5b0b7d"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-8.png",
+          "sha256": "0f8e1e09a4bec99b9d461b0cff6f254bedda8bcd5e79e4b21d50f26ef626560b"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/study-9.png",
+          "sha256": "e13b7bb1b720b2d5accc86970cbdf6ad4d5aa93a90cb52089c41c6f9ecfef587"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/wire-engine.png",
+          "sha256": "679643496918d67f2dfd7e188c18157aa16ac5b553a27d2bd38e31204a012c69"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/engine/wire-study.png",
+          "sha256": "3652fd7b84d841e0ea4549dcb17f8eedb1720e0e2194eae74b7266c44f64f0a3"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/model.glb",
+          "sha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/recipe.json",
+          "sha256": "8cd5310fdf89c84aaa379c793de5b842d97f5d2038e7697fa40b0970394d1528"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/inputs/report.json",
+          "sha256": "c9e1b78b0212f071b863f688a2f029291ed695dbf9adec37001452348d052fe3"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/retro-taxi-v1/visual-inspection.json",
+          "sha256": "1270657b5816ade5cb1aa54f9a7907961410f728b28dfdf2c0d4eb4da3605793"
+        }
+      ]
+    }
+  ]
+}

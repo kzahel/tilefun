@@ -1,0 +1,14 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: small yellow counterweight body, real open seat/footwell, dark overhead cage, tall twin mast and two low projecting forks remain recognizable.",
+    "Signed phases and wireframes preserve fixed mast/forks and independent unequal-radius wheels. Front crowns intentionally exposed, rear crowns beneath counterweight. No lifting animation claim."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

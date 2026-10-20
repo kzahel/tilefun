@@ -1,0 +1,493 @@
+{
+  "observationAtTaskStart": {
+    "id": "person7",
+    "name": "Person7",
+    "path": "public/assets/sprites/person7.png",
+    "frame": [
+      16,
+      32
+    ],
+    "columns": 6,
+    "physicalHeight": 24,
+    "physicalWidth": 10,
+    "sha256": "939c90da29092dfa17246f45095fab50bd54a9e89b2d045f8a5abe05d10f0a1b",
+    "sheetDimensions": [
+      96,
+      128
+    ],
+    "frames": [
+      {
+        "row": 0,
+        "column": 0,
+        "opaqueBounds": [
+          0,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          24
+        ],
+        "opaquePixels": 322
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "opaqueBounds": [
+          0,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          24
+        ],
+        "opaquePixels": 322
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "opaqueBounds": [
+          0,
+          7,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          25
+        ],
+        "opaquePixels": 336
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "opaqueBounds": [
+          0,
+          7,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          25
+        ],
+        "opaquePixels": 332
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "opaqueBounds": [
+          0,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          24
+        ],
+        "opaquePixels": 322
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "opaqueBounds": [
+          0,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          24
+        ],
+        "opaquePixels": 322
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "opaqueBounds": [
+          0,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          24
+        ],
+        "opaquePixels": 312
+      },
+      {
+        "row": 1,
+        "column": 1,
+        "opaqueBounds": [
+          0,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          24
+        ],
+        "opaquePixels": 312
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "opaqueBounds": [
+          0,
+          7,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          25
+        ],
+        "opaquePixels": 326
+      },
+      {
+        "row": 1,
+        "column": 3,
+        "opaqueBounds": [
+          0,
+          7,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          25
+        ],
+        "opaquePixels": 322
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "opaqueBounds": [
+          0,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          24
+        ],
+        "opaquePixels": 312
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "opaqueBounds": [
+          0,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          16,
+          24
+        ],
+        "opaquePixels": 312
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "opaqueBounds": [
+          1,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          15,
+          24
+        ],
+        "opaquePixels": 258
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "opaqueBounds": [
+          1,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          15,
+          24
+        ],
+        "opaquePixels": 258
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "opaqueBounds": [
+          1,
+          7,
+          16,
+          32
+        ],
+        "span": [
+          15,
+          25
+        ],
+        "opaquePixels": 266
+      },
+      {
+        "row": 2,
+        "column": 3,
+        "opaqueBounds": [
+          1,
+          7,
+          16,
+          32
+        ],
+        "span": [
+          15,
+          25
+        ],
+        "opaquePixels": 266
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "opaqueBounds": [
+          1,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          15,
+          24
+        ],
+        "opaquePixels": 258
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "opaqueBounds": [
+          1,
+          8,
+          16,
+          32
+        ],
+        "span": [
+          15,
+          24
+        ],
+        "opaquePixels": 258
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "opaqueBounds": [
+          0,
+          8,
+          15,
+          32
+        ],
+        "span": [
+          15,
+          24
+        ],
+        "opaquePixels": 258
+      },
+      {
+        "row": 3,
+        "column": 1,
+        "opaqueBounds": [
+          0,
+          8,
+          15,
+          32
+        ],
+        "span": [
+          15,
+          24
+        ],
+        "opaquePixels": 258
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "opaqueBounds": [
+          0,
+          7,
+          15,
+          32
+        ],
+        "span": [
+          15,
+          25
+        ],
+        "opaquePixels": 266
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "opaqueBounds": [
+          0,
+          7,
+          15,
+          32
+        ],
+        "span": [
+          15,
+          25
+        ],
+        "opaquePixels": 266
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "opaqueBounds": [
+          0,
+          8,
+          15,
+          32
+        ],
+        "span": [
+          15,
+          24
+        ],
+        "opaquePixels": 258
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "opaqueBounds": [
+          0,
+          8,
+          15,
+          32
+        ],
+        "span": [
+          15,
+          24
+        ],
+        "opaquePixels": 258
+      }
+    ],
+    "palette": [
+      {
+        "hex": "#3a3a50",
+        "sheetPixels": 1784
+      },
+      {
+        "hex": "#57969d",
+        "sheetPixels": 1050
+      },
+      {
+        "hex": "#4d8398",
+        "sheetPixels": 906
+      },
+      {
+        "hex": "#426a8a",
+        "sheetPixels": 636
+      },
+      {
+        "hex": "#46465e",
+        "sheetPixels": 474
+      },
+      {
+        "hex": "#394460",
+        "sheetPixels": 402
+      },
+      {
+        "hex": "#706663",
+        "sheetPixels": 348
+      },
+      {
+        "hex": "#ffcbb0",
+        "sheetPixels": 300
+      },
+      {
+        "hex": "#6c95b7",
+        "sheetPixels": 280
+      },
+      {
+        "hex": "#6daec3",
+        "sheetPixels": 188
+      },
+      {
+        "hex": "#c3bc6d",
+        "sheetPixels": 132
+      },
+      {
+        "hex": "#bba05c",
+        "sheetPixels": 100
+      },
+      {
+        "hex": "#f6ae9f",
+        "sheetPixels": 96
+      },
+      {
+        "hex": "#957350",
+        "sheetPixels": 84
+      },
+      {
+        "hex": "#f69784",
+        "sheetPixels": 48
+      },
+      {
+        "hex": "#9f462a",
+        "sheetPixels": 36
+      },
+      {
+        "hex": "#da6a2e",
+        "sheetPixels": 24
+      },
+      {
+        "hex": "#6779b3",
+        "sheetPixels": 24
+      },
+      {
+        "hex": "#959d58",
+        "sheetPixels": 20
+      },
+      {
+        "hex": "#3d457b",
+        "sheetPixels": 16
+      },
+      {
+        "hex": "#79746f",
+        "sheetPixels": 12
+      },
+      {
+        "hex": "#e1b49c",
+        "sheetPixels": 12
+      },
+      {
+        "hex": "#d3a38d",
+        "sheetPixels": 4
+      },
+      {
+        "hex": "#6c5981",
+        "sheetPixels": 4
+      }
+    ],
+    "row0Column0Span": [
+      16,
+      24
+    ],
+    "maxFrameSpan": [
+      16,
+      25
+    ],
+    "observedIdentity": "Large stacked teal cap with small orange side accent, pale face, blue/teal jacket and olive lower blocks.",
+    "proposedAnatomyWork": "Cap height/brim and accent need their own geometry/UV ownership; check overhead and handlebar occlusion.",
+    "seated3DQualified": false,
+    "productionBikeQualified": false
+  },
+  "constructionDependency": false,
+  "meaning": "Retained appearance inventory and coverage document are observational context, not immutable engine or rider construction pins. Source PNG/own identity JSON supply this family's retained paint evidence."
+}

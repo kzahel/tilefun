@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "open-wheel-racer",
+  "name": "Open-wheel racing car",
+  "tags": ["vehicle", "original", "open-wheel racer"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/open-wheel-racer-v1/review-manifest.json",
+    "sha256": "6012888be229b17f404c6301a65bcd7adcdeac4fe8710b7b565621eab65b3f7f",
+    "candidateId": "open-wheel-racer-v1",
+    "model": "public/demos/original-vehicles/open-wheel-racer-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/open-wheel-racer-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/open-wheel-racer-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/open-wheel-racer-v1/captures",
+    "modelSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+    "triangles": 2652,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/open-wheel-racer/v1/evidence/replay-verification.json",
+    "sha256": "0061d9bfcde87fa801030c53d9f016bc062c2f9ae0f27a5eae15c476adf1aa59",
+    "build": "art-source/vehicle-bake/open-wheel-racer/v1/build.py",
+    "family": "art-source/vehicle-bake/open-wheel-racer/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "open-wheel-racer-authored-v1",
+    "path": "assets/models/vehicles/open-wheel-racer-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/open-wheel-racer-v1.png",
+  "performance": {
+    "speed": 190,
+    "acceleration": 360,
+    "pushSpeed": 44,
+    "pushWeight": 125
+  },
+  "receipt": "art-source/vehicle-bake/runtime-open-wheel-racer-v1.json",
+  "expectedBounds": [81, 43, 22]
+}

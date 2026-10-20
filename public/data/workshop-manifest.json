@@ -14736,6 +14736,259 @@
       "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
     },
     {
+      "id": "projection:original-vehicle-open-wheel-racer-v1",
+      "batchId": "original-vehicles",
+      "name": "Open-wheel racing car · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/open-wheel-racer-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "30419ffbfc469e97cde58f0bcc9f9e24cc9d65c71e12ff8b4eae78d93b8e7f24",
+      "sourceFingerprint": "30419ffbfc469e97cde58f0bcc9f9e24cc9d65c71e12ff8b4eae78d93b8e7f24",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-monster-truck-v1",
+      "batchId": "original-vehicles",
+      "name": "Monster truck · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/monster-truck-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "b94f42ee3568cf79a8ee02b14f91271c62aa8f9db3bb8f39f352d4dca5fc01df",
+      "sourceFingerprint": "b94f42ee3568cf79a8ee02b14f91271c62aa8f9db3bb8f39f352d4dca5fc01df",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-beach-buggy-v1",
+      "batchId": "original-vehicles",
+      "name": "Beach dune buggy · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/beach-buggy-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "a99157763e63ff3557b87bb849fd3bd40ce39a2dd222efca9ce99f7688201c78",
+      "sourceFingerprint": "a99157763e63ff3557b87bb849fd3bd40ce39a2dd222efca9ce99f7688201c78",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-go-kart-v1",
+      "batchId": "original-vehicles",
+      "name": "Go-kart · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/go-kart-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "d29d0a7d559fbfbaabfc123699e5d6615dc93e935892c029bb61c5b485c8fdaf",
+      "sourceFingerprint": "d29d0a7d559fbfbaabfc123699e5d6615dc93e935892c029bb61c5b485c8fdaf",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-golf-cart-v1",
+      "batchId": "original-vehicles",
+      "name": "Golf cart · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/golf-cart-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "67475146513e3fb751f9a2e9b43779b6b1574a54503ebac9656e9f5a545665ef",
+      "sourceFingerprint": "67475146513e3fb751f9a2e9b43779b6b1574a54503ebac9656e9f5a545665ef",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-ice-cream-van-v1",
+      "batchId": "original-vehicles",
+      "name": "Ice cream van · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/ice-cream-van-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "6e000d0e1db87e645d67fb8e05c72367d9696fd49c5bd5c4602b9d6edeac208c",
+      "sourceFingerprint": "6e000d0e1db87e645d67fb8e05c72367d9696fd49c5bd5c4602b9d6edeac208c",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-food-truck-v1",
+      "batchId": "original-vehicles",
+      "name": "Food truck · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/food-truck-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "5d3710157cff895d13222115e0edf4abfc1f61032e9374eca4529a718fc90075",
+      "sourceFingerprint": "5d3710157cff895d13222115e0edf4abfc1f61032e9374eca4529a718fc90075",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-camper-van-v1",
+      "batchId": "original-vehicles",
+      "name": "Retro camper van · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/camper-van-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "98815b96eca3f9035965aa95cd9a0aae441cbf4d8247a64adb606f47fb551ffd",
+      "sourceFingerprint": "98815b96eca3f9035965aa95cd9a0aae441cbf4d8247a64adb606f47fb551ffd",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-motorhome-v1",
+      "batchId": "original-vehicles",
+      "name": "Family motorhome · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/motorhome-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "ac10ac607e9109b321fdc499d4dd5cb40c72d378a996b8102a5c2fa7da5b2657",
+      "sourceFingerprint": "ac10ac607e9109b321fdc499d4dd5cb40c72d378a996b8102a5c2fa7da5b2657",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-retro-taxi-v1",
+      "batchId": "original-vehicles",
+      "name": "Checker-style taxi · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/retro-taxi-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "9024cfa1da7330a6889cf143ca47e527337d76b40a2131c4abd71870f17cb645",
+      "sourceFingerprint": "9024cfa1da7330a6889cf143ca47e527337d76b40a2131c4abd71870f17cb645",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-tow-truck-v1",
+      "batchId": "original-vehicles",
+      "name": "Tow truck · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/tow-truck-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "c0dcc734d472385b0fa878dd501923905effbf11d5add8723ca940d2194b7976",
+      "sourceFingerprint": "c0dcc734d472385b0fa878dd501923905effbf11d5add8723ca940d2194b7976",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-flatbed-truck-v1",
+      "batchId": "original-vehicles",
+      "name": "Flatbed truck · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/flatbed-truck-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "e657a78c67075e97fb3521386eb2fc14a2725fe02a0e3a9efea385b499924c8b",
+      "sourceFingerprint": "e657a78c67075e97fb3521386eb2fc14a2725fe02a0e3a9efea385b499924c8b",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-semi-truck-v1",
+      "batchId": "original-vehicles",
+      "name": "Semi-truck and box trailer · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/semi-truck-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "9c1ea7bbdc31c5ef6b94d574f6e8d23b01ef4d266a63eb250c1ccfa63f53df03",
+      "sourceFingerprint": "9c1ea7bbdc31c5ef6b94d574f6e8d23b01ef4d266a63eb250c1ccfa63f53df03",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-dump-truck-v1",
+      "batchId": "original-vehicles",
+      "name": "Construction dump truck · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/dump-truck-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "4d8168581651dfe5f9b0355afebe21510498d86075a42a8aebe820931e90b681",
+      "sourceFingerprint": "4d8168581651dfe5f9b0355afebe21510498d86075a42a8aebe820931e90b681",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-cement-mixer-v1",
+      "batchId": "original-vehicles",
+      "name": "Cement mixer truck · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/cement-mixer-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "666e61ab5048b7bd996d7c17f53447bc97455c8790034d3fedd61e809e9b7c42",
+      "sourceFingerprint": "666e61ab5048b7bd996d7c17f53447bc97455c8790034d3fedd61e809e9b7c42",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-mobile-crane-v1",
+      "batchId": "original-vehicles",
+      "name": "Mobile crane truck · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/mobile-crane-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "c786447e3a92d3c382195862099ca112cb074596cf4e7ff1d56f55174bfb07ac",
+      "sourceFingerprint": "c786447e3a92d3c382195862099ca112cb074596cf4e7ff1d56f55174bfb07ac",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-street-sweeper-v1",
+      "batchId": "original-vehicles",
+      "name": "Street sweeper · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/street-sweeper-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "f9a73f622294d455463edb137d74e9a1e9b4bc116f4cabc91a5a725df6d10c96",
+      "sourceFingerprint": "f9a73f622294d455463edb137d74e9a1e9b4bc116f4cabc91a5a725df6d10c96",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-snowplow-v1",
+      "batchId": "original-vehicles",
+      "name": "Snowplow truck · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/snowplow-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "acec2852ab90ea974a90664d2ff5d4224650e0664a75a3dae18b86381728ba45",
+      "sourceFingerprint": "acec2852ab90ea974a90664d2ff5d4224650e0664a75a3dae18b86381728ba45",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-farm-tractor-v1",
+      "batchId": "original-vehicles",
+      "name": "Farm tractor · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/farm-tractor-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "0578576ba31966892436949843b001889c35c835b535c84e1547e2fc9d7d3cdc",
+      "sourceFingerprint": "0578576ba31966892436949843b001889c35c835b535c84e1547e2fc9d7d3cdc",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-forklift-v1",
+      "batchId": "original-vehicles",
+      "name": "Forklift · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/forklift-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "e86f60b005efcb708c10b3cba84cda5e07f64f3d89bcbf0a0343e2bfa3e163a4",
+      "sourceFingerprint": "e86f60b005efcb708c10b3cba84cda5e07f64f3d89bcbf0a0343e2bfa3e163a4",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-explorer-roadster-v1",
+      "batchId": "original-vehicles",
+      "name": "Seated Explorer · roadster contact pilot · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-explorer-roadster-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "bf9c690be776c49a0c36f4449fc9a33e697c10f9f409d375260bbdbf7becc39c",
+      "sourceFingerprint": "bf9c690be776c49a0c36f4449fc9a33e697c10f9f409d375260bbdbf7becc39c",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-explorer-classic-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "Explorer · classic motorcycle · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-explorer-classic-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "24f3d2185dd44066c9a1a3da467405e370ff2eed8e88ac5f002f412a86994bdb",
+      "sourceFingerprint": "24f3d2185dd44066c9a1a3da467405e370ff2eed8e88ac5f002f412a86994bdb",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-explorer-sidecar-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "Explorer · sidecar motorcycle · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-explorer-sidecar-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "aeb6e87cba726d8b408028e013fd0aa09f36d8105e28dd6e987b79f28ecb1103",
+      "sourceFingerprint": "aeb6e87cba726d8b408028e013fd0aa09f36d8105e28dd6e987b79f28ecb1103",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
       "id": "projection:original-vehicle-explorer-boat-v1",
       "batchId": "original-vehicles",
       "name": "Explorer motorboat · hollow hull and outboard v1",
@@ -47031,5 +47284,5 @@
       }
     }
   ],
-  "inputDigest": "70b170a5e9fd5ae677127dc6d28461fbdbf0217fcd573745fb97776df4781afd"
+  "inputDigest": "ed9c4176e815576a542f5b189b1e8b2bf08ef23d0b5202e23124e7aaba464cc9"
 }

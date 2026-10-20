@@ -1,0 +1,39 @@
+{
+  "status": "agent-inspected-source-pilot",
+  "glbSha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+  "actual32StudyGameHeadingsEach": [
+    "combined",
+    "bike-alone",
+    "rider-alone"
+  ],
+  "signedPhases": 16,
+  "wireframes": 6,
+  "independentTrueWheels": [
+    "F",
+    "R",
+    "SC"
+  ],
+  "inspectionImages": {
+    "inspection-detail-combined-study.png": "d295a7fb59c7e762add5e6451b726e59134935358fa524e2ce1c3158ea0fc23a",
+    "inspection-detail-bike-alone-study.png": "886ffb3850d7e1538f5b22bb0964bf264af157044094bc083f6ba24a8bf92a75",
+    "inspection-detail-rider-alone-study.png": "bd5d0f8e66fc961586cfa09b8727fc2a938b23f5873af53eec8d878c0bfea59d",
+    "inspection-detail-ownership-mask-study.png": "9f3e439ef8c150ccaa89a69e27e3c4409144eab9af77beaa914353ace42f9c3a",
+    "inspection-detail-combined-engine.png": "fe1234f0a32529e8241604d27fae59fbc0e2ef5d02e07a3de49ef2525420287a",
+    "inspection-detail-bike-alone-engine.png": "342d8ffdf0baf135503a63d51ddf9f1faa5659c82d98e32cc33430b68a11f14b",
+    "inspection-detail-rider-alone-engine.png": "cdd10815410a1be21a20f673fddeaa2466d2cf80f2b0fed6f4bb6dacf1850319",
+    "inspection-detail-ownership-mask-engine.png": "f5310d80824b4fb2a3545146abc8599938701f0b277628da4ddd562ed42860d0",
+    "inspection-phases.png": "b13b5c7a0bb4413adf519205c1c72564485586fbf7944a90798216da726bcf89",
+    "inspection-independent.png": "34f2f64e68d379a0f422a51d2db62bc681d447ff7f2ab50bb715e484795d21d9",
+    "inspection-wires.png": "aa7d5868c789ffcbb810108de975212400c75bf92574c5a0ae889a0a3091efec"
+  },
+  "findings": [
+    "Recognizable teal/cream classic sidecar; rounded tank, open passenger tub, seat, small blue windscreen, attachment frame and three real fenders read at native density",
+    "Immutable Explorer straddles narrow tank/frame; hands and soles align with measured physical supports",
+    "Fenders follow all three tire crowns; side profiles preserve visible tires, frame negative spaces and the open well",
+    "Actual depth ownership changes coherently through headings; no screenshot overlays or four-wheel stubs",
+    "Forward/reverse/reset changes own wheel while fixed bike/rider and other wheels remain fixed; SC observed at180deg where its hub is visible",
+    "Desktop/mobile remain square and readable; offline source diagnostic matches all32 combined frames"
+  ],
+  "formalHumanApproval": false,
+  "actualSharedLoaderBrowserReview": "pending parent"
+}

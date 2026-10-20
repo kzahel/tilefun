@@ -69,7 +69,81 @@ export class CarMeshAsset {
         rolls.set(id, node);
       });
       const boat = scene.getObjectByName("Boat_Root");
-      if (boat?.userData.tilefun_watercraft === 1) {
+      const cycleCandidates: THREE.Object3D[] = [];
+      let hasBoatMarker = false;
+      scene.traverse((node) => {
+        if (node.name === "Motorcycle_Root" || Object.hasOwn(node.userData, "tilefun_motorcycle"))
+          cycleCandidates.push(node);
+        if (Object.hasOwn(node.userData, "tilefun_watercraft")) hasBoatMarker = true;
+      });
+      if (cycleCandidates.length) {
+        const cycle = cycleCandidates[0];
+        if (
+          cycleCandidates.length !== 1 ||
+          !cycle ||
+          cycle.name !== "Motorcycle_Root" ||
+          cycle.userData.tilefun_motorcycle !== 1 ||
+          hasBoatMarker
+        )
+          throw Error("Invalid authored motorcycle root or ambiguous boat marker");
+        const ids: unknown = cycle.userData.wheel_ids;
+        if (
+          !Array.isArray(ids) ||
+          (ids.length !== 2 && ids.length !== 3) ||
+          ids[0] !== "F" ||
+          ids[1] !== "R" ||
+          (ids.length === 3 && ids[2] !== "SC") ||
+          rolls.size !== ids.length ||
+          ids.some((id) => !rolls.has(id))
+        )
+          throw Error("Invalid authored motorcycle wheel inventory");
+        const steers = new Map<string, THREE.Object3D>();
+        scene.traverse((node) => {
+          const match = /^Wheel_(.+)_Steer$/.exec(node.name);
+          if (match) {
+            const id = match[1];
+            if (!id || steers.has(id)) throw Error("Duplicate authored motorcycle steer");
+            steers.set(id, node);
+          }
+          if (
+            (Object.hasOwn(node.userData, "wheel_radius") ||
+              Object.hasOwn(node.userData, "roll_axis_gltf")) &&
+            ![...rolls.values()].includes(node)
+          )
+            throw Error("Authored motorcycle wheel metadata outside a roll node");
+        });
+        const inside = (node: THREE.Object3D, ancestor: THREE.Object3D) => {
+          for (let parent: THREE.Object3D | null = node; parent; parent = parent.parent)
+            if (parent === ancestor) return true;
+          return false;
+        };
+        scene.traverse((node) => {
+          if (node instanceof THREE.Mesh && !inside(node, cycle))
+            throw Error("Authored motorcycle mesh outside marked root");
+        });
+        if (steers.size !== ids.length) throw Error("Invalid authored motorcycle steer inventory");
+        for (const id of ids) {
+          const roll = rolls.get(id),
+            steer = steers.get(id);
+          if (
+            !roll ||
+            !steer ||
+            roll.parent !== steer ||
+            !inside(roll, cycle) ||
+            !inside(steer, cycle)
+          )
+            throw Error(`Invalid authored motorcycle wheel ownership ${id}`);
+          let hasMesh = false;
+          roll.traverse((node) => {
+            if (node instanceof THREE.Mesh) hasMesh = true;
+          });
+          if (
+            !hasMesh ||
+            [...rolls.values()].some((other) => other !== roll && inside(steer, other))
+          )
+            throw Error(`Empty or nested authored motorcycle wheel ${id}`);
+        }
+      } else if (boat?.userData.tilefun_watercraft === 1) {
         if (rolls.size || !scene.getObjectByName("Boat_Hull"))
           throw Error("Invalid authored boat rig");
         const propeller = scene.getObjectByName("Boat_Propeller");

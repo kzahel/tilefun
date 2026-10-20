@@ -1,0 +1,41 @@
+{
+  "status": "prototype-source-complete-not-production",
+  "bike": {
+    "path": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1/model.glb",
+    "sha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+    "triangles": 2434,
+    "draws": 3,
+    "atlases": 1
+  },
+  "rider": {
+    "path": "art-source/vehicle-riders/person7-upright/v1/rider.glb",
+    "sha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+    "triangles": 1984,
+    "draws": 1,
+    "atlases": 1,
+    "immutable": true,
+    "reexported": false
+  },
+  "singleMountSource": [
+    0,
+    0,
+    1.0805
+  ],
+  "mountWorldBlender": [
+    0.0,
+    0.0,
+    18.79130434782609
+  ],
+  "gltfMountTransform": "S * [sourceX, sourceZ, -sourceY]; rider GLB already has its export scale",
+  "combined": {
+    "triangles": 4418,
+    "draws": 4,
+    "atlases": 2,
+    "oneActualDepthTarget": true,
+    "combinedGLBExported": false
+  },
+  "qualifiedComposer": "Parent may compose later after independent shared loader qualification",
+  "productionQualified": false,
+  "normalActivation": false,
+  "humanApproval": false
+}

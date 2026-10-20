@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 6,
+  "glbSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/classic-motorcycle-bear-fit/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/classic-motorcycle-bear-fit/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/classic-motorcycle-bear-fit/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/classic-motorcycle-bear-fit/generic-replay/retained-replay-e147nxvs",
+  "scratchInputDependencies": []
+}

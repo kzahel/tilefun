@@ -3056,6 +3056,206 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "vehicle-v1:open-wheel-racer",
+      "name": "vehicle v1:open wheel racer",
+      "image": "assets/vehicles/open-wheel-racer-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "a846d2a256a7703aaf29ac5144deaf7c8170142c7e2e1c67678ae1a1be6e84ce",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:monster-truck",
+      "name": "vehicle v1:monster truck",
+      "image": "assets/vehicles/monster-truck-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "e8d6d1cf1fe1bd4e91e251e409f97b18a259be5ca83b7c8870b27a5979d6a8e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:beach-buggy",
+      "name": "vehicle v1:beach buggy",
+      "image": "assets/vehicles/beach-buggy-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "f2e7ef94927938765075e139db6fbe71c29eb1a54dcad883b15a432fe5638edf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:go-kart",
+      "name": "vehicle v1:go kart",
+      "image": "assets/vehicles/go-kart-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "25fbf4885f0b6ed1c627f0061ec670077dd740c334020cac8b1e3aa30859a079",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:golf-cart",
+      "name": "vehicle v1:golf cart",
+      "image": "assets/vehicles/golf-cart-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "cf982bfcafc7c6559c4ea6bf09e89c8fafe33057050c2664afcd9afceb7a1491",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:ice-cream-van",
+      "name": "vehicle v1:ice cream van",
+      "image": "assets/vehicles/ice-cream-van-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "761ba1d87fb5ec9476b265edeeea30f67e589c003b814b9bf9ed6d25759044fe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:food-truck",
+      "name": "vehicle v1:food truck",
+      "image": "assets/vehicles/food-truck-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "ee745833276156a7992038557644e2129b8385098cee57b12d74e6d323241ab3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:camper-van",
+      "name": "vehicle v1:camper van",
+      "image": "assets/vehicles/camper-van-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "deb4076593fc53106931c0d10dd4e5fffa56a975e6bb6788f0c8b15dccc78860",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:motorhome",
+      "name": "vehicle v1:motorhome",
+      "image": "assets/vehicles/motorhome-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "d310d4b1a8cffedf3cca715619ff82dd3873ef0615307aa46214492a5c09280e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:retro-taxi",
+      "name": "vehicle v1:retro taxi",
+      "image": "assets/vehicles/retro-taxi-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "58e5b71b36d8d21fd13b8e00126884dda4e92dc250c189af4498ac5555ae42cf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:tow-truck",
+      "name": "vehicle v1:tow truck",
+      "image": "assets/vehicles/tow-truck-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "0a9341982f0e18de69a56ffc0f2270ab66f14ad67e61cbeab8849c4955e0b6b3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:flatbed-truck",
+      "name": "vehicle v1:flatbed truck",
+      "image": "assets/vehicles/flatbed-truck-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "2be7c5f9089c30b512e3720e60850196d3a7bd1e7a0b244829617228cfc00b94",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:semi-truck",
+      "name": "vehicle v1:semi truck",
+      "image": "assets/vehicles/semi-truck-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "7163d3f0efa8205e3327fefc003e27ce6579e4964b057e68dc31241a7357bcf0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:dump-truck",
+      "name": "vehicle v1:dump truck",
+      "image": "assets/vehicles/dump-truck-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "94bee0800169d3b3b7887b37833d915905cbeaca76f26cd8152f40541b66e7d0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:cement-mixer",
+      "name": "vehicle v1:cement mixer",
+      "image": "assets/vehicles/cement-mixer-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "42c2438f8f8048989753a760bbf4f2207fac48170643a6e7ab89d04740bb9d52",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:mobile-crane",
+      "name": "vehicle v1:mobile crane",
+      "image": "assets/vehicles/mobile-crane-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "2d93067c8b9803effeff096806da4967299cabc756d48a5a1648c0f2b6f78026",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:street-sweeper",
+      "name": "vehicle v1:street sweeper",
+      "image": "assets/vehicles/street-sweeper-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "79f7f9b854f076d66e477c48d2bda1b4437d38d1f2d058afaf8885bb29d77e12",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:snowplow",
+      "name": "vehicle v1:snowplow",
+      "image": "assets/vehicles/snowplow-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "1479a1bf8e5bc9a0d43a374750c84a981e601eadc2dff21daf8459635c530483",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:farm-tractor",
+      "name": "vehicle v1:farm tractor",
+      "image": "assets/vehicles/farm-tractor-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "2fffee64bb635e0941a8b9b88eb343b5e70e8a1c0a490851d6c1c98f17d023c6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:forklift",
+      "name": "vehicle v1:forklift",
+      "image": "assets/vehicles/forklift-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "7393f68ee10971fd318401dc241cf03085219a8a31b230ab505b77e3467a727a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "vehicle-v1:explorer-boat",
       "name": "vehicle v1:explorer boat",
       "image": "assets/vehicles/explorer-boat-v1.png",
@@ -32253,6 +32453,366 @@
         896
       ],
       "label": "vehicle-v1:rally-hatchback · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:open-wheel-racer",
+      "sheetId": "vehicle-v1:open-wheel-racer",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:open-wheel-racer · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:monster-truck",
+      "sheetId": "vehicle-v1:monster-truck",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:monster-truck · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:beach-buggy",
+      "sheetId": "vehicle-v1:beach-buggy",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beach-buggy · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:go-kart",
+      "sheetId": "vehicle-v1:go-kart",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:go-kart · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:golf-cart",
+      "sheetId": "vehicle-v1:golf-cart",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:golf-cart · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:ice-cream-van",
+      "sheetId": "vehicle-v1:ice-cream-van",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:ice-cream-van · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:food-truck",
+      "sheetId": "vehicle-v1:food-truck",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:food-truck · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:camper-van",
+      "sheetId": "vehicle-v1:camper-van",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:camper-van · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:motorhome",
+      "sheetId": "vehicle-v1:motorhome",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:motorhome · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:retro-taxi",
+      "sheetId": "vehicle-v1:retro-taxi",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:retro-taxi · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:tow-truck",
+      "sheetId": "vehicle-v1:tow-truck",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:tow-truck · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:flatbed-truck",
+      "sheetId": "vehicle-v1:flatbed-truck",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:flatbed-truck · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:semi-truck",
+      "sheetId": "vehicle-v1:semi-truck",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:semi-truck · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:dump-truck",
+      "sheetId": "vehicle-v1:dump-truck",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:dump-truck · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:cement-mixer",
+      "sheetId": "vehicle-v1:cement-mixer",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:cement-mixer · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:mobile-crane",
+      "sheetId": "vehicle-v1:mobile-crane",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:mobile-crane · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:street-sweeper",
+      "sheetId": "vehicle-v1:street-sweeper",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:street-sweeper · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:snowplow",
+      "sheetId": "vehicle-v1:snowplow",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:snowplow · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:farm-tractor",
+      "sheetId": "vehicle-v1:farm-tractor",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:farm-tractor · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:forklift",
+      "sheetId": "vehicle-v1:forklift",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:forklift · registered 192×224 frames",
       "kind": "sprite",
       "consumers": [
         {

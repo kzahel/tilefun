@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "id": "FL",
+      "yaw": 0,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 33,
+      "reverseChangedChannels": 27,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesChassisAndBed": true,
+      "images": [
+        "engine/independent-FL-0.png",
+        "engine/independent-FL-1.png",
+        "engine/independent-FL-2.png",
+        "engine/independent-FL-3.png"
+      ]
+    },
+    {
+      "id": "FR",
+      "yaw": 180,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 33,
+      "reverseChangedChannels": 27,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesChassisAndBed": true,
+      "images": [
+        "engine/independent-FR-0.png",
+        "engine/independent-FR-1.png",
+        "engine/independent-FR-2.png",
+        "engine/independent-FR-3.png"
+      ]
+    },
+    {
+      "id": "RL",
+      "yaw": 0,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 30,
+      "reverseChangedChannels": 33,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesChassisAndBed": true,
+      "images": [
+        "engine/independent-RL-0.png",
+        "engine/independent-RL-1.png",
+        "engine/independent-RL-2.png",
+        "engine/independent-RL-3.png"
+      ]
+    },
+    {
+      "id": "RR",
+      "yaw": 180,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 30,
+      "reverseChangedChannels": 33,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesChassisAndBed": true,
+      "images": [
+        "engine/independent-RR-0.png",
+        "engine/independent-RR-1.png",
+        "engine/independent-RR-2.png",
+        "engine/independent-RR-3.png"
+      ]
+    }
+  ],
+  "errors": []
+}

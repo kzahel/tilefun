@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "semi-truck",
+  "independent": true,
+  "declaredInputPins": 25,
+  "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/semi-truck/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/semi-truck/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/semi-truck/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

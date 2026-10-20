@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "flatbed-truck",
+  "independent": true,
+  "declaredInputPins": 21,
+  "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/flatbed-truck/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/flatbed-truck/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/flatbed-truck/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

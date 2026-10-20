@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "food-truck",
+  "name": "Food truck",
+  "tags": ["vehicle", "original", "food truck"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/food-truck-v1/review-manifest.json",
+    "sha256": "74e7ffe49f776e218342ad6f5f17466baf5bb0ab33b6607784225cdaae4f4f69",
+    "candidateId": "food-truck-v1",
+    "model": "public/demos/original-vehicles/food-truck-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/food-truck-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/food-truck-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/food-truck-v1/captures",
+    "modelSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "triangles": 2934,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/food-truck/v1/evidence/replay-verification.json",
+    "sha256": "1c3b376683566dfe876516a43afa9bd56407d5e6eda53979ba92144e84bdf002",
+    "build": "art-source/vehicle-bake/food-truck/v1/build.py",
+    "family": "art-source/vehicle-bake/food-truck/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "food-truck-authored-v1",
+    "path": "assets/models/vehicles/food-truck-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/food-truck-v1.png",
+  "performance": {
+    "speed": 74,
+    "acceleration": 110,
+    "pushSpeed": 45,
+    "pushWeight": 320
+  },
+  "receipt": "art-source/vehicle-bake/runtime-food-truck-v1.json",
+  "expectedBounds": [105, 51, 49]
+}

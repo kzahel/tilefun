@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "forklift",
+  "name": "Forklift",
+  "tags": ["vehicle", "original", "forklift"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/forklift-v1/review-manifest.json",
+    "sha256": "0c3286de417a16336695483318e297e8078a5caedffd2a14757d1725d122599c",
+    "candidateId": "forklift-v1",
+    "model": "public/demos/original-vehicles/forklift-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/forklift-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/forklift-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/forklift-v1/captures",
+    "modelSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "triangles": 2940,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/forklift/v1/evidence/replay-verification.json",
+    "sha256": "702111ec5d8440c6ab42ed1ea94a25131fe9e4eba28ef6fffc2949f120835b36",
+    "build": "art-source/vehicle-bake/forklift/v1/build.py",
+    "family": "art-source/vehicle-bake/forklift/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "forklift-authored-v1",
+    "path": "assets/models/vehicles/forklift-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/forklift-v1.png",
+  "performance": {
+    "speed": 40,
+    "acceleration": 95,
+    "pushSpeed": 38,
+    "pushWeight": 230
+  },
+  "receipt": "art-source/vehicle-bake/runtime-forklift-v1.json",
+  "expectedBounds": [80, 28, 38]
+}

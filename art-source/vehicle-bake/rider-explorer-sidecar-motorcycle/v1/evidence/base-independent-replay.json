@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 6,
+  "glbSha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/sidecar-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/sidecar-motorcycle/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/sidecar-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/sidecar-motorcycle-qa/retained-replay-_lmsopbo",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

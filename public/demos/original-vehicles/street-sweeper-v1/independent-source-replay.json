@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "street-sweeper",
+  "independent": true,
+  "declaredInputPins": 22,
+  "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/street-sweeper/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/street-sweeper/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/street-sweeper/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

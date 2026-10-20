@@ -24,6 +24,7 @@ import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { AUTONOMOUS_ORIGINAL_VEHICLES } from "./AutonomousOriginalVehicles.fixture.js";
 import { verifyOriginalWheelGeometryAndTravel } from "./AutonomousOriginalVehicles.test-helper.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
+import { readRetainedReplayInput } from "./RetainedReplayInputs.test-helper.js";
 import { TrafficTestHarness } from "./TrafficTestHarness.js";
 import {
   applyVehicleFacing,
@@ -47,7 +48,12 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
     const model = readFileSync(`public/${definition.mesh.path}`);
     expect(createHash("sha256").update(model).digest("hex")).toBe(receipt.modelSha256);
     for (const [path, expected] of Object.entries(receipt.inputs)) {
-      expect(createHash("sha256").update(readFileSync(path)).digest("hex"), path).toBe(expected);
+      expect(
+        createHash("sha256")
+          .update(readRetainedReplayInput(process.cwd(), path, expected as string))
+          .digest("hex"),
+        path,
+      ).toBe(expected);
     }
     expect(authoredVehicleForType(type)?.path).toBe(definition.mesh.path);
     expect(VEHICLE_BANK.views).toHaveLength(180);
@@ -147,16 +153,18 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
     const scene = new TrafficTestHarness();
     for (const state of [...scene.traffic.states.values()])
       scene.entities.remove(state.entity.id, false);
-    // Persisted exclusions isolate the new identity without replacing production
-    // lane selection, random model choice, width admission or collision checks.
+    // Isolate the target identity while retaining production lane selection,
+    // deterministic model choice, width admission and collision checks.
     const graph = scene.strategy.trafficNetwork(4800, 8304);
     const positions = [
       { x: 4800, y: 8304 },
       ...[...graph.lanes.values()].slice(0, 64).map((lane) => lane.a),
-      ...Array.from({ length: 17 }, (_, i) => (i - 8) * 4096).flatMap((dx) =>
-        Array.from({ length: 17 }, (_, i) => ({ x: 4800 + dx, y: 8304 + (i - 8) * 4096 })),
+      // Roster growth changes selector modulo; cover a bounded real-world grid.
+      ...Array.from({ length: 33 }, (_, i) => (i - 16) * 4096).flatMap((dx) =>
+        Array.from({ length: 33 }, (_, i) => ({ x: 4800 + dx, y: 8304 + (i - 16) * 4096 })),
       ),
     ];
+    let productionCandidates = 0;
     for (const position of positions) {
       scene.player.position = { wx: position.x, wy: position.y };
       const cx = Math.floor(position.x / 256),
@@ -170,6 +178,7 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
         return false;
       };
       scene.traffic.tick(2.1, [scene.player]);
+      productionCandidates += candidates.length;
       if (!candidates.length) continue;
       for (const point of candidates) {
         const px = Math.floor(point.wx / 256),
@@ -181,7 +190,10 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       scene.traffic.tick(2.1, [scene.player]);
       if (scene.traffic.states.size) break;
     }
-    const car = required([...scene.traffic.states.values()][0]);
+    const car = required(
+      [...scene.traffic.states.values()][0],
+      `No ${model} after ${positions.length} generated positions and ${productionCandidates} production candidates`,
+    );
     expect(car.entity.type).toBe(`vehicle-v1:${model}`);
     expect(car.placed).not.toBe(true);
     expect(car.lane.width).toBeGreaterThanOrEqual(roadWidth);
@@ -242,18 +254,34 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
         expect(bounds.max[axis]).toBeLessThanOrEqual(limit + legacyTolerance + 0.00001);
       }
       expect(bounds.max.z).toBeLessThanOrEqual(height);
-      // A loose collider cannot mask a scale regression.
-      size.forEach((value, axis) => {
-        expect(value).toBeGreaterThan(required(family.bounds[axis]) - 2);
-      });
-      expect(asset.meshCount).toBe(5);
-      expect(asset.drawMeshCount).toBe(5);
+      // Asymmetric equipment can have a smaller span than its origin-centered
+      // collider. Compare decoded extents to independent measured literals so
+      // neither a shifted origin nor inflated metadata can mask a scale change.
+      if ("actualOriginExtents" in family) {
+        const extents = [
+          2 * Math.max(Math.abs(bounds.min.x), Math.abs(bounds.max.x)),
+          2 * Math.max(Math.abs(bounds.min.y), Math.abs(bounds.max.y)),
+          bounds.max.z,
+        ];
+        extents.forEach((value, axis) => {
+          expect(value).toBeCloseTo(required(family.actualOriginExtents[axis]), 4);
+          expect(value).toBeLessThanOrEqual(required(family.bounds[axis]) + 0.00001);
+          expect(value).toBeGreaterThan(required(family.bounds[axis]) - 1 - 0.00001);
+        });
+      } else {
+        size.forEach((value, axis) => {
+          expect(value).toBeGreaterThan(required(family.bounds[axis]) - 2);
+        });
+      }
+      expect(asset.meshCount).toBe(family.meshCount);
+      expect(asset.drawMeshCount).toBe(family.meshCount);
+      expect(Object.keys(family.wheelRadii)).toEqual([...family.wheelIds]);
       verifyOriginalWheelGeometryAndTravel(asset, family.wheelRadii);
       const json = gltf.parser.json;
       const primitives = json.meshes.flatMap(
         (mesh: { primitives: { indices: number }[] }) => mesh.primitives,
       );
-      expect(primitives).toHaveLength(5);
+      expect(primitives).toHaveLength(family.primitiveCount);
       expect(
         primitives.reduce(
           (sum: number, primitive: { indices: number }) =>
@@ -282,7 +310,7 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
     if (receipt.measurement) {
       expect(receipt.measurement.modelSha256).toBe(family.modelSha256);
       expect(receipt.measurement.triangles).toBe(family.triangles);
-      expect(receipt.measurement.meshes).toBe(5);
+      expect(receipt.measurement.meshes).toBe(family.meshCount);
       expect(receipt.capture).toEqual({
         frameSize: [family.nativeSize, family.nativeSize],
         groundOrigin: [family.nativeSize / 2, family.nativeSize / 2],
@@ -298,7 +326,12 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
         ...replay.sharedInputHashes,
       })) {
         expect(path).not.toMatch(/^(?:data|test-results)\//);
-        expect(createHash("sha256").update(readFileSync(path)).digest("hex"), path).toBe(hash);
+        expect(
+          createHash("sha256")
+            .update(readRetainedReplayInput(process.cwd(), path, hash as string))
+            .digest("hex"),
+          path,
+        ).toBe(hash);
       }
     }
     for (const path of Object.keys(receipt.inputs))
@@ -388,7 +421,10 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       session.player.player.position = { wx: 160, wy: -16 };
       session.realm.vehicles.enter(session.player, car.entity.id);
       expect(session.player.player.parentId).toBe(car.entity.id);
-      for (let i = 0; i < 100; i++) await session.step({ ...idle, dx: 1 });
+      // Slow work vehicles retain the same meaningful 80px movement target.
+      // Four seconds bounds the production-input control without inflating speed.
+      for (let i = 0; i < 240 && car.entity.position.wx <= 240; i++)
+        await session.step({ ...idle, dx: 1 });
       expect(car.entity.position.wx).toBeGreaterThan(240);
       const position = { ...car.entity.position };
       await session.reload();

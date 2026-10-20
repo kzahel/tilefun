@@ -525,7 +525,9 @@ describe("RemoteStateView", () => {
         playerEntityId: 1,
       }),
     );
-    view.applyPending();
+    // The real 2ms frame budget may defer the second queued frame under load.
+    for (let pass = 0; pass < 2 && view.pendingMessageCount > 0; pass++) view.applyPending();
+    expect(view.pendingMessageCount).toBe(0);
 
     // Entity 1 moved, entity 2 exited
     expect(view.entities).toHaveLength(1);

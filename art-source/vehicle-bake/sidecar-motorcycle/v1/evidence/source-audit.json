@@ -1,0 +1,473 @@
+{
+  "status": "passed",
+  "glbSha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+  "sourceInputHashes": {
+    "master.blend": "2cc2ff00ea3bbcd02023d9b901168a5bb225a7fa2121a0cc56832ef1a915720a",
+    "car.blend": "0db143b369d00210b22d8490bff8bb92ed3f14e7fbcff803e26795be41071af1",
+    "atlas.png": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+    "model.glb": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60"
+  },
+  "packedScenes": [
+    {
+      "path": "master.blend",
+      "sha256": "2cc2ff00ea3bbcd02023d9b901168a5bb225a7fa2121a0cc56832ef1a915720a",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 74,
+      "triangles": 3418,
+      "semanticUV": true
+    },
+    {
+      "path": "car.blend",
+      "sha256": "0db143b369d00210b22d8490bff8bb92ed3f14e7fbcff803e26795be41071af1",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 4,
+      "triangles": 3418,
+      "semanticUV": true
+    }
+  ],
+  "semanticOwners": [
+    {
+      "owner": "Rounded teal tank actual cream side UV panels",
+      "triangles": 116,
+      "vertices": 60
+    },
+    {
+      "owner": "Actual dark saddle central hip tangent",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual narrow saddle nose",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual rounded pillion rear saddle",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Exposed dark gray crankcase rounded block",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Exposed single cylinder broad block",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Broad engine cooling fin 0.7",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "Broad engine cooling fin 0.75",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "Broad engine cooling fin 0.8",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "Broad engine cooling fin 0.85",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "Exposed round crankcase face -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Gray outboard exhaust silencer -1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Rear swingarm -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Rear static spring shock broad tube -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Twin front fork stanchion -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Fixed axle attachment stop short of hub -1.12 -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Fixed axle attachment stop short of hub 1.12 -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Exposed round crankcase face 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Gray outboard exhaust silencer 1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Rear swingarm 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Rear static spring shock broad tube 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Twin front fork stanchion 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Fixed axle attachment stop short of hub -1.12 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Fixed axle attachment stop short of hub 1.12 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Narrow tubular frame member 0",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Narrow tubular frame member 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Narrow tubular frame member 2",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Narrow tubular frame member 3",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Narrow tubular frame member 4",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Narrow tubular frame member 5",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Headstock to actual grip riser",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Actual connected handlebar centerline",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual curved cream teal road fender F",
+      "triangles": 132,
+      "vertices": 68
+    },
+    {
+      "owner": "Actual curved cream teal road fender R",
+      "triangles": 132,
+      "vertices": 68
+    },
+    {
+      "owner": "Front round headlamp dark housing",
+      "triangles": 60,
+      "vertices": 32
+    },
+    {
+      "owner": "Broad cream front headlamp face",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Simple rear ruby lamp",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "SC actual rounded cream teal vessel open well walls and floor",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "owner": "SC small actual seat cushion above deep floor",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "SC small actual seat back",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "SC small fixed blue framed windscreen actual skin",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "SC attached fixed chassis arm 0",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SC attached fixed chassis arm 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SC attached fixed chassis arm 2",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SC attached fixed chassis arm 3",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SC axle attachment stops short of actual hub cylinder",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SC actual curved cream teal road fender",
+      "triangles": 132,
+      "vertices": 68
+    },
+    {
+      "owner": "SC fixed fender rim bridge 0.2",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SC fixed fender rim bridge 0.6",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "True motorcycle rounded tire F",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim F -1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub F -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index F -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim F 1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub F 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index F 1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "True motorcycle rounded tire R",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim R -1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub R -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index R -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim R 1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub R 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index R 1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "True motorcycle rounded tire SC",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim SC -1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub SC -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index SC -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim SC 1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub SC 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index SC 1",
+      "triangles": 22,
+      "vertices": 16
+    }
+  ],
+  "actualTriangleUVMatches": 3418,
+  "actualCornerPositionAndUVMatches": 10254,
+  "allActualGLBTrianglesMatchedToOwnSourceUV": true,
+  "tank": {
+    "actualRoundedTaperedVolume": true,
+    "rings": [
+      {
+        "xSource": -0.8,
+        "vertices": 12,
+        "widthSource": 0.06959998607635498,
+        "heightSource": 0.08639997243881226
+      },
+      {
+        "xSource": -0.66,
+        "vertices": 12,
+        "widthSource": 0.2667999863624573,
+        "heightSource": 0.3312000632286072
+      },
+      {
+        "xSource": -0.43,
+        "vertices": 12,
+        "widthSource": 0.28999996185302734,
+        "heightSource": 0.3600000739097595
+      },
+      {
+        "xSource": -0.25,
+        "vertices": 12,
+        "widthSource": 0.20879995822906494,
+        "heightSource": 0.2592000365257263
+      },
+      {
+        "xSource": -0.16,
+        "vertices": 12,
+        "widthSource": 0.05799996852874756,
+        "heightSource": 0.07199996709823608
+      }
+    ],
+    "closedEndFaces": 2,
+    "distinctSideTopEndUVCharts": true,
+    "surfaceUVPaintNotCameraProjection": true
+  },
+  "method": "Original semantic component master at runtime topology; no high-to-low or bitmap transfer claim",
+  "readonlySourceUnchanged": true
+}

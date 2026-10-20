@@ -1,0 +1,637 @@
+{
+  "status": "passed",
+  "families": [
+    {
+      "id": "offroad-jeep",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-offroad-jeep-v1.json",
+          "declaredPins": 29,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "9a3f48b34a9f901307df372a6e5cda1ac37a3f3db2cbcfba3a26acaaa722461f"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/offroad-jeep/v1/evidence/replay-verification.json",
+          "declaredPins": 17,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "b0f30ed6b59e7d13bc7678bf536ff4b93501b66916dfffa92274f7c5051d3de3"
+        }
+      ]
+    },
+    {
+      "id": "race-coupe",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-race-coupe-v1.json",
+          "declaredPins": 32,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "013f2060c539cce9f2c362b5d6536a01679b05ef1827bc5454d22699fdde0cbe"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/race-coupe/v1/evidence/replay-verification.json",
+          "declaredPins": 20,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "06fcc5e2c0c4728936ea0a23af0f051af17ca9fa61470215d96b0bb6677554d1"
+        }
+      ]
+    },
+    {
+      "id": "woody-wagon",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-woody-wagon-v1.json",
+          "declaredPins": 29,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "9e01de28b2611129f58f64e68f65cf85997ae6f0f5da01b708290006e439306a"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/woody-wagon/v1/evidence/replay-verification.json",
+          "declaredPins": 17,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "70afabbe39603f9fbb02af3ff017017d5fa310061a48c9cf13f7ef9015b8b43e"
+        }
+      ]
+    },
+    {
+      "id": "hot-rod",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-hot-rod-v1.json",
+          "declaredPins": 29,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "eabb8116f21f12d1bb3251392a4e1ead7682d5b2ba87a3aa578fadfaa5ff5b14"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/hot-rod/v1/evidence/replay-verification.json",
+          "declaredPins": 17,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "db53b8320c95fdf2af4fafc27a89c38cd692e9dc7c883f9b3d6867bd6c5d1410"
+        }
+      ]
+    },
+    {
+      "id": "monster-truck",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-monster-truck-v1.json",
+          "declaredPins": 34,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "c73c0960f2eeb92f4a8dc5731923ace22103639d1de89eb876b5e611bb870585"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/monster-truck/v1/evidence/replay-verification.json",
+          "declaredPins": 22,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "35aa4f6ceaf6babe1cdbdd16d2e4cafffbd06f62f9624db615aa57367d697619"
+        }
+      ]
+    },
+    {
+      "id": "golf-cart",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-golf-cart-v1.json",
+          "declaredPins": 34,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "252381b6c7d5a3e2ce141b6112118c1af15433bf8f0f3b038c6aa40f8ce6e502"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/golf-cart/v1/evidence/replay-verification.json",
+          "declaredPins": 22,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "5cd028ff156c275f3565178c18ebd3f60fed88fa803efd443cb06b08ab642a7d"
+        }
+      ]
+    },
+    {
+      "id": "ice-cream-van",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-ice-cream-van-v1.json",
+          "declaredPins": 33,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "317e6b19c80083cd3a9513c6d2e7405716fe69aa41251095d7602765f7aa980d"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/ice-cream-van/v1/evidence/replay-verification.json",
+          "declaredPins": 21,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "3cf3807fe40758b63cd256af165b5940b590e75d62d8fda078119d463d8108c6"
+        }
+      ]
+    },
+    {
+      "id": "food-truck",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-food-truck-v1.json",
+          "declaredPins": 34,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "fb92e95d0c0bf05d05033df62b791307343acaeaac8993c6aadc93ac4f25b376"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/food-truck/v1/evidence/replay-verification.json",
+          "declaredPins": 22,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "1c3b376683566dfe876516a43afa9bd56407d5e6eda53979ba92144e84bdf002"
+        }
+      ]
+    },
+    {
+      "id": "motorhome",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-motorhome-v1.json",
+          "declaredPins": 33,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "36062c06663a0a137fb44940832ce8fb5a71be1206ccc1c3c50bf6345d11fa01"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/motorhome/v1/evidence/replay-verification.json",
+          "declaredPins": 21,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "ea40b9f6c7c40fdaf491d63d0ac2e0c3a663173f42f9b45154c31e2164624015"
+        }
+      ]
+    },
+    {
+      "id": "tow-truck",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-tow-truck-v1.json",
+          "declaredPins": 34,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "c5c616b50899385fdf863501d89b0bef03b5b4d9c6f9f7ed7487dac2ac43de46"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/tow-truck/v1/evidence/replay-verification.json",
+          "declaredPins": 22,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "271276368b0228fbd5b72f1edc85d58718e8810db39020faa8de0c3a57de7625"
+        }
+      ]
+    },
+    {
+      "id": "flatbed-truck",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-flatbed-truck-v1.json",
+          "declaredPins": 33,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "dc9826e221e8c1559fdb9465793a257af7405fbfd4b5f1d7112a4aa6bfccdffd"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/flatbed-truck/v1/evidence/replay-verification.json",
+          "declaredPins": 21,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "c788c611097656404f7bbb901cd18e4217e0e9cc36a246d98b0931bb11d8abfc"
+        }
+      ]
+    },
+    {
+      "id": "semi-truck",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-semi-truck-v1.json",
+          "declaredPins": 37,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "cff3af0d9fd40050de3d63c41427014e3300239aacbd2f6c9c6d0d9d3920262e"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/semi-truck/v1/evidence/replay-verification.json",
+          "declaredPins": 25,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "c87c708239159c7fc4baf428e3f40c13afb587689874b6c0f1a6d9690121fa0b"
+        }
+      ]
+    },
+    {
+      "id": "dump-truck",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-dump-truck-v1.json",
+          "declaredPins": 36,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "8c15e97d72c89ebce019b38b05a96a462419d80e04c826767a585fc21fb18c96"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/dump-truck/v1/evidence/replay-verification.json",
+          "declaredPins": 24,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "cc528e98aba78e3317b2763e7e85b5bc5dfa296c93cce273a6b85667e98ac806"
+        }
+      ]
+    },
+    {
+      "id": "cement-mixer",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-cement-mixer-v1.json",
+          "declaredPins": 36,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "86bacd81b8a00898bde474912246c00302c7b34105d506caf01f17010fc70cf3"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/cement-mixer/v1/evidence/replay-verification.json",
+          "declaredPins": 24,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "2b104df4475bbd0ae9480a91b97b1696173d8b1ac89c9a9678e8ae7451fb827c"
+        }
+      ]
+    },
+    {
+      "id": "mobile-crane",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-mobile-crane-v1.json",
+          "declaredPins": 37,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "6cfa371d1f20e5a67fb9a80b448289b9a901daa6eeb56f2ce0bd1ce15a46ca19"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/mobile-crane/v1/evidence/replay-verification.json",
+          "declaredPins": 25,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "f149597192697445676f816090f04ee9bad5363f639522a5818ef1a90edf9f2b"
+        }
+      ]
+    },
+    {
+      "id": "street-sweeper",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-street-sweeper-v1.json",
+          "declaredPins": 34,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "f7a3b9faedf7eb1f22340467d4128144aff1e2af74f35311aa3741e68e9f73f3"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/street-sweeper/v1/evidence/replay-verification.json",
+          "declaredPins": 22,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "20645e0084825c72b12e9556c93c80fd1f73ddc7271c926958b29e5507c5d634"
+        }
+      ]
+    },
+    {
+      "id": "snowplow",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-snowplow-v1.json",
+          "declaredPins": 33,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "809519a9eb9c0ef03f31f9796ee78b6d0acc8c29f0bdcc9a2e5295a0e39a12cb"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/snowplow/v1/evidence/replay-verification.json",
+          "declaredPins": 21,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "9878730239a709e10acdccf7e83450aef773886e8d12d5d6f2811ad405308ce6"
+        }
+      ]
+    },
+    {
+      "id": "farm-tractor",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-farm-tractor-v1.json",
+          "declaredPins": 34,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "ed7be6f4280f2c1409a22b10e481780788e3ff88d644aba44483bbd01158f627"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/farm-tractor/v1/evidence/replay-verification.json",
+          "declaredPins": 22,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "6199683efff5b6339f87d87673936f97673ea7e14407d3fedbb077fa0ce9a398"
+        }
+      ]
+    },
+    {
+      "id": "forklift",
+      "receipts": [
+        {
+          "receipt": "art-source/vehicle-bake/runtime-forklift-v1.json",
+          "declaredPins": 34,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "72a10c7f1c83ea3a7186de3ca1965667024b89ce0ab2a7574f16acb4215b2f91"
+        },
+        {
+          "receipt": "art-source/vehicle-bake/forklift/v1/evidence/replay-verification.json",
+          "declaredPins": 22,
+          "historicalInputs": [
+            {
+              "path": "src/rendering/CarMeshAsset.ts",
+              "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+              "resolution": "historical",
+              "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts",
+              "catalogSha256": "37f202dfbf895424d21efcf43bd77ad75cbb21a19359e6b8858b8109ef8ba306"
+            }
+          ],
+          "receiptSha256": "702111ec5d8440c6ab42ed1ea94a25131fe9e4eba28ef6fffc2949f120835b36"
+        }
+      ]
+    }
+  ],
+  "version": 1,
+  "evidenceOnly": true,
+  "constructionDependency": false,
+  "familyCount": 19,
+  "receiptCount": 38
+}

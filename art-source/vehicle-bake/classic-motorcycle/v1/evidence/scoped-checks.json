@@ -1,0 +1,55 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n10 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\fnm_multishells\\24284_1790502943936\\npx.cmd",
+        "biome",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\classic-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "npm warn Unknown env config \"audit-config\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"npm-globalconfig\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"overrides\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"recursive\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"supported-architectures\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nChecked 6 files in 16ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/classic-motorcycle/assess-pixels.py": "4e0560a1016f787e057ff61307c335c333e33c863382bf18848a1f04a55bfcc3",
+    "scripts/vehicle-bake/classic-motorcycle/audit-source.py": "561047ff5e6be8b2402030b1c2b9cb40d6798c6de8ed1d64a281bf1a9247cf54",
+    "scripts/vehicle-bake/classic-motorcycle/build-view.mjs": "8779c43dc79075ca22077cbcdd891a9bcaca21811c276ea8e8c7955c472405db",
+    "scripts/vehicle-bake/classic-motorcycle/build.py": "e3a227908b441b99e45cccb761f5c5dc55680ee4b5082efeb290950152aa92d4",
+    "scripts/vehicle-bake/classic-motorcycle/capture-raw.mjs": "9f79d9e8846ba4608d9521e578d4d4f7f6193e973a0bea0da9363c253cdc1a2d",
+    "scripts/vehicle-bake/classic-motorcycle/coverage-region.json": "e5ce499508c2ad95497c758d3ed91ad3c3108fa557ed8592477a53e8b16276ff",
+    "scripts/vehicle-bake/classic-motorcycle/family.json": "0676253438182a4cc7c3c7999d17928f18f5d06a443db87236c7962554081256",
+    "scripts/vehicle-bake/classic-motorcycle/finalize.py": "d2245543e1ef583e656b4ef972e66293e34a9872bab9959af3440d9561d7743d",
+    "scripts/vehicle-bake/classic-motorcycle/fresh-replay.py": "2fba40f40efd3d5a4ddc471e3291bfc96e3345370a1d35f06347ff892a719a66",
+    "scripts/vehicle-bake/classic-motorcycle/geometry.py": "46cf77360bd58db2887992f4fe5e8b7477dbf0a4a5f67c2168cc1e66caf74895",
+    "scripts/vehicle-bake/classic-motorcycle/inspect-rider.py": "82f25b23dc325e680aaaeb5204623e095318a27c024012ec621bcf7fcd0ca4ec",
+    "scripts/vehicle-bake/classic-motorcycle/prove-fit.py": "3f6752abdd07c92a699bb2c26ba520200741d814bdc6e7e1a1707c49a836b690",
+    "scripts/vehicle-bake/classic-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/classic-motorcycle/raw-diagnostic.html": "08d9d5fd20dc0b131984d15c98ebf66033aef9dc62f4dea6e50802b0f6b5b2eb",
+    "scripts/vehicle-bake/classic-motorcycle/raw-viewer.mjs": "bb611ac0b2eb9f6cea7987b52a88dc8256555885b821ddb545cd1d3109de0177",
+    "scripts/vehicle-bake/classic-motorcycle/sheets.py": "93f9906bf3c4b12caa89fd094a16e057f4fe0b8e023be5a8489fe3ea31a2d6d7"
+  }
+}

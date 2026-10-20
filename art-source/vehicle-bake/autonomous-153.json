@@ -4,33 +4,15 @@
   "deadline": "2026-10-20T05:19:36Z",
   "status": "active",
   "authorization": "Owner requests autonomous authoring, visual QA, game availability, commits and pushes for up to eight hours; per-vehicle appearance pauses waived; no quantity guarantee.",
-  "batch": 2,
+  "batch": 3,
   "active": [
-    "microcar",
-    "woody-wagon",
-    "stretch-limousine",
-    "hot-rod",
-    "rally-hatchback",
-    "open-wheel-racer",
-    "monster-truck",
-    "beach-buggy",
-    "go-kart",
-    "golf-cart",
-    "ice-cream-van",
-    "food-truck",
-    "camper-van",
-    "motorhome",
-    "retro-taxi",
-    "tow-truck",
-    "flatbed-truck",
-    "semi-truck",
-    "dump-truck",
-    "cement-mixer",
-    "mobile-crane",
-    "street-sweeper",
-    "snowplow",
-    "farm-tractor",
-    "forklift"
+    "sidecar-motorcycle",
+    "classic-motorcycle",
+    "sport-motorcycle",
+    "cruiser-motorcycle",
+    "dirt-motorcycle",
+    "touring-motorcycle",
+    "retro-scooter"
   ],
   "integratedThisRun": [
     {
@@ -82,6 +64,256 @@
         19
       ],
       "status": "integrated"
+    },
+    {
+      "id": "woody-wagon",
+      "modelSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+      "physicalBounds": [
+        95,
+        35,
+        31
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "microcar",
+      "modelSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+      "physicalBounds": [
+        56,
+        31,
+        30
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "stretch-limousine",
+      "modelSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+      "physicalBounds": [
+        123,
+        35,
+        30
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "hot-rod",
+      "modelSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+      "physicalBounds": [
+        74,
+        42,
+        28
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "rally-hatchback",
+      "modelSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+      "physicalBounds": [
+        74,
+        35,
+        29
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "open-wheel-racer",
+      "modelSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+      "physicalBounds": [
+        81,
+        43,
+        22
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "monster-truck",
+      "modelSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+      "physicalBounds": [
+        87,
+        52,
+        53
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "beach-buggy",
+      "modelSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+      "physicalBounds": [
+        68,
+        38,
+        29
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "go-kart",
+      "modelSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+      "physicalBounds": [
+        53,
+        33,
+        18
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "golf-cart",
+      "modelSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+      "physicalBounds": [
+        56,
+        30,
+        32
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "ice-cream-van",
+      "modelSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+      "physicalBounds": [
+        86,
+        44,
+        42
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "food-truck",
+      "modelSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+      "physicalBounds": [
+        105,
+        51,
+        49
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "camper-van",
+      "modelSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+      "physicalBounds": [
+        89,
+        37,
+        41
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "motorhome",
+      "modelSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+      "physicalBounds": [
+        125,
+        53,
+        53
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "retro-taxi",
+      "modelSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+      "physicalBounds": [
+        82,
+        35,
+        29
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "tow-truck",
+      "modelSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+      "physicalBounds": [
+        102,
+        39,
+        40
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "flatbed-truck",
+      "modelSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+      "physicalBounds": [
+        111,
+        42,
+        42
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "semi-truck",
+      "modelSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+      "physicalBounds": [
+        161,
+        44,
+        53
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "dump-truck",
+      "modelSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+      "physicalBounds": [
+        112,
+        46,
+        49
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "cement-mixer",
+      "modelSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+      "physicalBounds": [
+        119,
+        44,
+        52
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "mobile-crane",
+      "modelSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+      "physicalBounds": [
+        130,
+        46,
+        50
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "street-sweeper",
+      "modelSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+      "physicalBounds": [
+        70,
+        44,
+        37
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "snowplow",
+      "modelSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+      "physicalBounds": [
+        131,
+        51,
+        47
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "farm-tractor",
+      "modelSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+      "physicalBounds": [
+        68,
+        38,
+        46
+      ],
+      "status": "integrated-local-broad-validation-pending"
+    },
+    {
+      "id": "forklift",
+      "modelSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+      "physicalBounds": [
+        80,
+        28,
+        38
+      ],
+      "status": "integrated-local-broad-validation-pending"
     }
   ],
   "completedArtThisRun": [
@@ -313,52 +545,38 @@
       "build": "pass",
       "commit": "bb6da261",
       "pushed": true
+    },
+    {
+      "commit": "6e36319c",
+      "status": "committed-and-pushed",
+      "runtimeOriginals": 13,
+      "retainedOrdinarySourceFamilies": 33,
+      "validation": "5808unit passes/5knownWindowsfailures/10skips; fullbrowser1548passed8failed1skipped; all8isolatedretests pass afterpickerboatcount and devreloadharness fixes"
     }
   ],
   "pendingValidation": {
-    "batch": 2,
-    "ids": [
-      "microcar",
-      "woody-wagon",
-      "stretch-limousine",
-      "hot-rod",
-      "rally-hatchback"
-    ],
-    "unit": "5808 passed, 5 known Windows failures, 10 skipped; 621 seconds",
-    "typecheck": "pass",
-    "lint": "pass, existing119warnings/35infos",
-    "build": "pass",
-    "workshopIdentities": 1779,
-    "browser": "Full 1557-case run active; max10 failures; catalog/review registration held stable",
-    "sourceOnlyQueue": [
-      "open-wheel-racer",
-      "monster-truck",
-      "beach-buggy",
-      "go-kart",
-      "golf-cart",
-      "ice-cream-van",
-      "food-truck",
-      "camper-van",
-      "motorhome",
-      "retro-taxi",
-      "tow-truck",
-      "flatbed-truck",
-      "semi-truck",
-      "dump-truck",
-      "cement-mixer",
-      "mobile-crane",
-      "street-sweeper",
-      "snowplow",
-      "farm-tractor",
-      "forklift"
-    ]
+    "batch": 3,
+    "runtimeOriginals": 33,
+    "roadTypes": 78,
+    "ordinaryTrafficTypes": 77,
+    "drivableIncludingBoat": 79,
+    "focusedOriginalTests": "168passed; 169withsnapshotresolvernegativecontrols",
+    "loaderTests": "53passed asset/boat/resolver; finalcurrentengine50PNG +32bare+32combined eachclassic/sidecar exact",
+    "typecheck": "pass all3projects finalsource",
+    "unit": "6003passed,7failed,10skipped;5knownWindows plus2harness timings; both45focusedpass afterboundedqueue+case30s integration bound; finalfull rerun active",
+    "browser": "Second full snapshot pending build; first 1557 result retained separately",
+    "workshopIdentitiesExpected": 1802,
+    "build": "pass;1802Workshop identities verified"
   },
-  "lastCheckpointAt": "2026-10-19T23:49:40.852885+00:00",
+  "lastCheckpointAt": "2026-10-20T00:56:53.751339+00:00",
   "riderPrototypes": {
     "explorerRoadster": "Source complete; independent replay/contact controls and exact32-view composition parity pass; not normal game occupancy",
-    "explorerUpright": "Source complete; independent replay and native32-view inspection pass; synthetic contact profile only",
-    "brownBearUpright": "Source complete; independent exact replay, rerun5contact/self/straddle negatives and native32camera/wire inspection pass; original Explorer-profile failed fit retained; measured Bear profile only, actual bike unqualified",
-    "motorcycleActivation": "Deferred: actual-bike contact, all27 appearances, AI stopped occupancy, shared depth and Canvas/failed-mesh fallback remain unqualified",
-    "next": "Person7 capped legacy-human identity pilot, actual classic motorcycle source and explicit2/3wheel review adapters in progress"
+    "explorerUpright": "Source complete and actual unchanged classic/sidecar fit qualified as isolated shared-loader review prototype",
+    "brownBearUpright": "Immutable source and actual mechanically fitted classic bike pilot pass; failed unchanged-bike and Explorer-profile fits retained; parent actualsharedreview pending",
+    "motorcycleActivation": "Deferred: all27 identity-specific seats, AI stopped occupancy and Canvas/failed-mesh occupied fallback remain unqualified",
+    "next": "Distinct sport/cruiser bike source families; reusable measured profile control fitting; keep normalcycles gated",
+    "person7Upright": "Immutable distinct capped legacy-human source and actual mechanically fitted bike pilot pass; no anatomical scaling, 6controls changed/49components unchanged; parent actualsharedreview pending",
+    "classicMotorcycle": "Immutable trueF/R classic source plus exact Explorer assembly frozen;4390tri/4draw/2atlas; actualsharedloader32bare+32combinedparity/contact/clearance/browser pass; normalfalse",
+    "sidecarMotorcycle": "Immutable trueF/R/SC source plus exact Explorer assembly frozen;5374tri/5draw/2atlas; actualsharedloader32bare+32combinedparity/contact/clearance/browser pass; normalfalse"
   }
 }

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "snowplow",
+  "name": "Snowplow truck",
+  "tags": ["vehicle", "original", "snowplow"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/snowplow-v1/review-manifest.json",
+    "sha256": "19ebf744f9e97c61fa5260d600dcd9d64697cf6ddaec94b9e84b1aab7673ac94",
+    "candidateId": "snowplow-v1",
+    "model": "public/demos/original-vehicles/snowplow-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/snowplow-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/snowplow-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/snowplow-v1/captures",
+    "modelSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+    "triangles": 2870,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/snowplow/v1/evidence/replay-verification.json",
+    "sha256": "9878730239a709e10acdccf7e83450aef773886e8d12d5d6f2811ad405308ce6",
+    "build": "art-source/vehicle-bake/snowplow/v1/build.py",
+    "family": "art-source/vehicle-bake/snowplow/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [256, 256],
+    "groundOrigin": [128, 128],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "snowplow-authored-v1",
+    "path": "assets/models/vehicles/snowplow-v1.glb",
+    "radius": 128,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/snowplow-v1.png",
+  "performance": {
+    "speed": 64,
+    "acceleration": 95,
+    "pushSpeed": 52,
+    "pushWeight": 500
+  },
+  "receipt": "art-source/vehicle-bake/runtime-snowplow-v1.json",
+  "expectedBounds": [131, 51, 47]
+}

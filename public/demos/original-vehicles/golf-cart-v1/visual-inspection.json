@@ -1,0 +1,15 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 actual native headings inspected directly: mint low cart with cream opaque canopy, open tan bench/footwell and rear bagwell; supports remain thin and grounded.",
+    "Signed phases/wires inspected: natural front/rear fenders hide upper crowns, fixed canopy and bench stable while lower wheels roll.",
+    "Fresh retained-input replay exact; actual footwell/seat, side opening, bagwell depth and full-body roll controls pass."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

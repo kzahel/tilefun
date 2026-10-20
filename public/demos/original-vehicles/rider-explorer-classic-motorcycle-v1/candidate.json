@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-classic-motorcycle-v1",
+      "name": "Explorer \u00b7 classic motorcycle fit pilot",
+      "title": "Explorer \u00b7 classic motorcycle \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "PREREQUISITE PROTOTYPE: unchanged true-F/R classic motorcycle geometry/paint and static Explorer upright composed in one GLB/depth target. All original buffers/transforms retained; explicit companion child attached inside marked cycle root with root-transform compensation. One512 bike atlas plus one256 rider atlas; normal rider/AI/fallback/all27 unqualified.",
+      "audit": {
+        "triangles": 4390,
+        "vertices": 8829,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 318676,
+        "sha256": "98820ac0014a0afbf8018abae55436d0c9f4889a880431ac7113f08144e9f1e8",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-classic-motorcycle-v1/inputs/atlas.png",
+          "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-classic-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-classic-motorcycle-v1/inputs/composition.json",
+          "sha256": "8fd92fc4975585917d86e84ec71cc8c32e4ba4350532f40f47f921379618ca62"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-classic-motorcycle-v1/inputs/model.glb",
+          "sha256": "98820ac0014a0afbf8018abae55436d0c9f4889a880431ac7113f08144e9f1e8"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-classic-motorcycle-v1/inputs/recipe.json",
+          "sha256": "8d20926d25447e08e6fa5247fd63e1f8dee82b7930546366bdbf74ae77351ad4"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-classic-motorcycle-v1/inputs/report.json",
+          "sha256": "8f957b2ccd3be9cfee2c782f8846a55f7b4a9303524ffc06a9130fdc57266f58"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

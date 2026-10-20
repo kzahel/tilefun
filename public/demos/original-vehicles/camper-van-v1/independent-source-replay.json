@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "camper-van",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/camper-van/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/camper-van/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/camper-van/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

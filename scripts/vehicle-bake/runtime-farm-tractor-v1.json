@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "farm-tractor",
+  "name": "Farm tractor",
+  "tags": ["vehicle", "original", "farm tractor"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/farm-tractor-v1/review-manifest.json",
+    "sha256": "9254004800fb06be4a7505b44c6f6acee74a54dc1b88188350b5d8afcec8d7a8",
+    "candidateId": "farm-tractor-v1",
+    "model": "public/demos/original-vehicles/farm-tractor-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/farm-tractor-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/farm-tractor-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/farm-tractor-v1/captures",
+    "modelSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "triangles": 3386,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/farm-tractor/v1/evidence/replay-verification.json",
+    "sha256": "6199683efff5b6339f87d87673936f97673ea7e14407d3fedbb077fa0ce9a398",
+    "build": "art-source/vehicle-bake/farm-tractor/v1/build.py",
+    "family": "art-source/vehicle-bake/farm-tractor/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "farm-tractor-authored-v1",
+    "path": "assets/models/vehicles/farm-tractor-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/farm-tractor-v1.png",
+  "performance": {
+    "speed": 52,
+    "acceleration": 100,
+    "pushSpeed": 45,
+    "pushWeight": 300
+  },
+  "receipt": "art-source/vehicle-bake/runtime-farm-tractor-v1.json",
+  "expectedBounds": [68, 38, 46]
+}

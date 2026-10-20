@@ -1,0 +1,41 @@
+{
+  "status": "prototype-source-complete-not-production",
+  "bike": {
+    "path": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/model.glb",
+    "sha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+    "triangles": 2434,
+    "draws": 3,
+    "atlases": 1
+  },
+  "rider": {
+    "path": "art-source/vehicle-riders/bear-upright/v1/rider.glb",
+    "sha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+    "triangles": 2112,
+    "draws": 1,
+    "atlases": 1,
+    "immutable": true,
+    "reexported": false
+  },
+  "singleMountSource": [
+    0.12,
+    0,
+    1.1205
+  ],
+  "mountWorldBlender": [
+    2.086956521739131,
+    0.0,
+    19.486956521739135
+  ],
+  "gltfMountTransform": "S * [sourceX, sourceZ, -sourceY]; rider GLB already has its export scale",
+  "combined": {
+    "triangles": 4546,
+    "draws": 4,
+    "atlases": 2,
+    "oneActualDepthTarget": true,
+    "combinedGLBExported": false
+  },
+  "qualifiedComposer": "Parent may compose later after independent shared loader qualification",
+  "productionQualified": false,
+  "normalActivation": false,
+  "humanApproval": false
+}

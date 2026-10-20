@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "rider-explorer-roadster--v1",
+    "glbSha256": "c9a2792f9c8c61067ac2ede712c507a1ab9faa3ec3706bf8140cb2a5ae1fc00a",
+    "triangles": 4956,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786944783795878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786941910791528,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786945772582992,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786943302858559,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

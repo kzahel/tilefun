@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "food-truck",
+  "independent": true,
+  "declaredInputPins": 22,
+  "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/food-truck/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/food-truck/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/food-truck/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

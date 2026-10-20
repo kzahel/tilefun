@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "camper-van",
+  "name": "Retro camper van",
+  "tags": ["vehicle", "original", "camper van"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/camper-van-v1/review-manifest.json",
+    "sha256": "8ad71eb0101dd037b9a2b2f872324e96f8771b63ada2b7e920e1af6c2a1cbd0a",
+    "candidateId": "camper-van-v1",
+    "model": "public/demos/original-vehicles/camper-van-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/camper-van-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/camper-van-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/camper-van-v1/captures",
+    "modelSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+    "triangles": 2784,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/camper-van/v1/evidence/replay-verification.json",
+    "sha256": "45958c62a9abcca346626e387394a9c5dd703cd5e42def543410f2f5aeb3596b",
+    "build": "art-source/vehicle-bake/camper-van/v1/build.py",
+    "family": "art-source/vehicle-bake/camper-van/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "camper-van-authored-v1",
+    "path": "assets/models/vehicles/camper-van-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/camper-van-v1.png",
+  "performance": {
+    "speed": 88,
+    "acceleration": 135,
+    "pushSpeed": 45,
+    "pushWeight": 280
+  },
+  "receipt": "art-source/vehicle-bake/runtime-camper-van-v1.json",
+  "expectedBounds": [89, 37, 41]
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "beach-buggy",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/beach-buggy/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/beach-buggy/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/beach-buggy/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

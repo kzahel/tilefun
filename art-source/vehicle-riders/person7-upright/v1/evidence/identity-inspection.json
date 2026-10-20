@@ -1,0 +1,144 @@
+{
+  "status": "author-comparative-inspection-pending-human-review",
+  "humanApproval": false,
+  "riderSha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+  "sourceStandingSha256": "939c90da29092dfa17246f45095fab50bd54a9e89b2d045f8a5abe05d10f0a1b",
+  "pixelComparison": "Person7 source16x32 padded in64px cell; actual figures use one fixed64px hip-centered crop per camera, all headings. Every display uses4x nearest enlargement only; no per-figure or per-heading scaling. Different standing/seated poses mean no pixel-equivalence claim.",
+  "views": [
+    {
+      "label": "front",
+      "sourceRow": 0,
+      "sourceBounds": [
+        0,
+        8,
+        16,
+        32
+      ],
+      "actualYaw": 90.0,
+      "actualBounds": {
+        "study": [
+          105,
+          127,
+          119,
+          145
+        ],
+        "engine": [
+          105,
+          93,
+          119,
+          119
+        ]
+      }
+    },
+    {
+      "label": "back",
+      "sourceRow": 1,
+      "sourceBounds": [
+        0,
+        8,
+        16,
+        32
+      ],
+      "actualYaw": 270.0,
+      "actualBounds": {
+        "study": [
+          105,
+          127,
+          119,
+          144
+        ],
+        "engine": [
+          105,
+          92,
+          119,
+          118
+        ]
+      }
+    },
+    {
+      "label": "profile-left",
+      "sourceRow": 2,
+      "sourceBounds": [
+        1,
+        8,
+        16,
+        32
+      ],
+      "actualYaw": 0.0,
+      "actualBounds": {
+        "study": [
+          106,
+          125,
+          117,
+          147
+        ],
+        "engine": [
+          107,
+          91,
+          118,
+          122
+        ]
+      }
+    },
+    {
+      "label": "profile-right",
+      "sourceRow": 3,
+      "sourceBounds": [
+        0,
+        8,
+        15,
+        32
+      ],
+      "actualYaw": 180.0,
+      "actualBounds": {
+        "study": [
+          107,
+          125,
+          118,
+          147
+        ],
+        "engine": [
+          106,
+          91,
+          117,
+          122
+        ]
+      }
+    }
+  ],
+  "scaleControls": [
+    {
+      "id": "explorer-upright",
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "viewerFile": "explorer-upright-control.glb",
+      "screenHorizontalOffsetWorld": -52,
+      "role": "Read-only native-world ruler control, never rider constructor input"
+    },
+    {
+      "id": "bear-upright",
+      "path": "art-source/vehicle-riders/bear-upright/v1/rider.glb",
+      "sha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+      "viewerFile": "bear-upright-control.glb",
+      "screenHorizontalOffsetWorld": 52,
+      "role": "Read-only native-world ruler control, never rider constructor input"
+    }
+  ],
+  "sourceRulerInputs": {
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/assets/sprites/person7.png": "939c90da29092dfa17246f45095fab50bd54a9e89b2d045f8a5abe05d10f0a1b",
+    "public/demos/pixel-characters/bear-32.png": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d"
+  },
+  "sourceGroundPivots": "Person7 bottom32, approved32px Explorer/Bear pivot27; only translations align standing ground. Actual ruler aligns hip origins; hips at screen-horizontal offsets-52/0/+52world. No identity is resized.",
+  "observations": [
+    "Own tall stacked teal cap, actual projecting brim and orange skin-UV accent retain Person7 silhouette.",
+    "Pale face and source gray-brown side/back hair use Person7 own skin charts; blue/teal jacket and olive trousers/boots are distinct from Explorer/Bear.",
+    "Compact legacy torso and limbs remain under a large cap instead of extending to Explorer contact reach. Actual ruler shows relative size without normalizing to height24 metadata."
+  ],
+  "uncertainty": [
+    "Sprite observations do not specify unique depth or hidden skeleton. Cap/head forward depth and bill were refined to reveal face while frontal widths, cap height and fixed short chains remain unchanged.",
+    "The3D view has heading-dependent apparent height because depth contributes to fixed projection. Source raster/standing pose is not reconstructed pixel-for-pixel.",
+    "Small eye/face/brim/orange clusters lose pixels at some headings. No inferred face/head or seated body approval is transferred from standing source.",
+    "Explorer-profile failure is conditional on this fixed upright template, not every possible leaning pose or inferred anatomy."
+  ]
+}

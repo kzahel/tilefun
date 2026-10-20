@@ -1,0 +1,798 @@
+{
+  "status": "passed",
+  "presentationStatus": "prototype-not-production",
+  "humanApproval": false,
+  "actualBikePresent": false,
+  "riderSha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+  "profileSha256": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3",
+  "immutableExplorerProfileSha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "packedSources": {
+    "master.blend": {
+      "sha256": "4e7e3894ce4a68c08ef86a8fd9a911b78c682ae6f7a635a4c3120831e55a1d80",
+      "meshes": 26,
+      "packedImages": 1,
+      "semanticUV": true
+    },
+    "low.blend": {
+      "sha256": "f61bd3666a712be09c82d5f333c9f4e8e5317fc2fa00af8df6c1b9c6df938edc",
+      "meshes": 1,
+      "packedImages": 1,
+      "semanticUV": true
+    }
+  },
+  "contactLandmarks": [
+    {
+      "name": "hip_saddle",
+      "actualGLBAnchorLocalWorld": [
+        0.0,
+        0.0,
+        -1.0434783697128296
+      ],
+      "profileTargetLocalWorld": [
+        0.0,
+        0.0,
+        -1.0434782608695654
+      ],
+      "profileErrorWorld": 1.1920928955078125e-07
+    },
+    {
+      "name": "hand_left_grip",
+      "actualGLBAnchorLocalWorld": [
+        -3.826087474822998,
+        -4.260869979858398,
+        3.3043479919433594
+      ],
+      "profileTargetLocalWorld": [
+        -3.8260869565217397,
+        -4.260869565217392,
+        3.304347826086957
+      ],
+      "profileErrorWorld": 7.152557373046875e-07
+    },
+    {
+      "name": "hand_right_grip",
+      "actualGLBAnchorLocalWorld": [
+        -3.826087474822998,
+        4.260869979858398,
+        3.3043479919433594
+      ],
+      "profileTargetLocalWorld": [
+        -3.8260869565217397,
+        4.260869565217392,
+        3.304347826086957
+      ],
+      "profileErrorWorld": 7.152557373046875e-07
+    },
+    {
+      "name": "foot_left_support",
+      "actualGLBAnchorLocalWorld": [
+        -0.43478259444236755,
+        -3.3043479919433594,
+        -5.391304969787598
+      ],
+      "profileTargetLocalWorld": [
+        -0.4347826086956523,
+        -3.304347826086957,
+        -5.391304347826088
+      ],
+      "profileErrorWorld": 5.331201499700045e-07
+    },
+    {
+      "name": "foot_right_support",
+      "actualGLBAnchorLocalWorld": [
+        -0.43478259444236755,
+        3.3043479919433594,
+        -5.391304969787598
+      ],
+      "profileTargetLocalWorld": [
+        -0.4347826086956523,
+        3.304347826086957,
+        -5.391304347826088
+      ],
+      "profileErrorWorld": 5.331201499700045e-07
+    }
+  ],
+  "actualFixedBoneLengthChecks": [
+    {
+      "owner": "Person7 upper arm left",
+      "actualGLBRingCentersWorld": [
+        [
+          -0.17391298711299896,
+          -3.82608699798584,
+          3.4782605171203613
+        ],
+        [
+          -1.8905096054077148,
+          -5.012417793273926,
+          3.514354944229126
+        ]
+      ],
+      "actualLengthWorld": 2.0869564965871468,
+      "fixedAuthoredLengthWorld": 2.086956521739131,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 2.515198405106389e-08
+    },
+    {
+      "owner": "Person7 forearm left",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.8905097246170044,
+          -5.012417793273926,
+          3.514354705810547
+        ],
+        [
+          -2.9389472007751465,
+          -4.605328559875488,
+          3.4006006717681885
+        ]
+      ],
+      "actualLengthWorld": 1.1304347529107184,
+      "fixedAuthoredLengthWorld": 1.1304347826086958,
+      "forepawCenterBeyondWristWorld": 0.9565217391304349,
+      "errorWorld": 2.9697977410592102e-08
+    },
+    {
+      "owner": "Person7 bent thigh left",
+      "actualGLBRingCentersWorld": [
+        [
+          0.0,
+          -2.95652174949646,
+          -0.869564950466156
+        ],
+        [
+          -1.277554988861084,
+          -3.526076078414917,
+          -2.6457951068878174
+        ]
+      ],
+      "actualLengthWorld": 2.260869777695979,
+      "fixedAuthoredLengthWorld": 2.2608695652173916,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 2.124785876134183e-07
+    },
+    {
+      "owner": "Person7 short shin left",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.277554988861084,
+          -3.526076078414917,
+          -2.6457951068878174
+        ],
+        [
+          0.08695649355649948,
+          -3.3043477535247803,
+          -4.4347825050354
+        ]
+      ],
+      "actualLengthWorld": 2.2608695247702695,
+      "fixedAuthoredLengthWorld": 2.2608695652173916,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 4.04471220960545e-08
+    },
+    {
+      "owner": "Person7 upper arm right",
+      "actualGLBRingCentersWorld": [
+        [
+          -0.17391300201416016,
+          3.8260865211486816,
+          3.4782605171203613
+        ],
+        [
+          -1.8905097246170044,
+          5.012417793273926,
+          3.514354944229126
+        ]
+      ],
+      "actualLengthWorld": 2.0869568964349385,
+      "fixedAuthoredLengthWorld": 2.086956521739131,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 3.7469580771443134e-07
+    },
+    {
+      "owner": "Person7 forearm right",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.890509843826294,
+          5.012417793273926,
+          3.514354705810547
+        ],
+        [
+          -2.9389474391937256,
+          4.605328559875488,
+          3.4006009101867676
+        ]
+      ],
+      "actualLengthWorld": 1.130434834473083,
+      "fixedAuthoredLengthWorld": 1.1304347826086958,
+      "forepawCenterBeyondWristWorld": 0.9565217391304349,
+      "errorWorld": 5.1864387229372255e-08
+    },
+    {
+      "owner": "Person7 bent thigh right",
+      "actualGLBRingCentersWorld": [
+        [
+          -7.450580596923828e-09,
+          2.956521987915039,
+          -0.869564950466156
+        ],
+        [
+          -1.277554988861084,
+          3.526076078414917,
+          -2.6457948684692383
+        ]
+      ],
+      "actualLengthWorld": 2.260869560196348,
+      "fixedAuthoredLengthWorld": 2.2608695652173916,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 5.0210435809106e-09
+    },
+    {
+      "owner": "Person7 short shin right",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.277554988861084,
+          3.526075839996338,
+          -2.6457951068878174
+        ],
+        [
+          0.08695650100708008,
+          3.3043477535247803,
+          -4.4347825050354
+        ]
+      ],
+      "actualLengthWorld": 2.260869501702125,
+      "fixedAuthoredLengthWorld": 2.2608695652173916,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 6.351526637971006e-08
+    }
+  ],
+  "selfIntersectionPairs": [
+    {
+      "partA": "Person7 bent thigh left",
+      "partB": "Person7 knee left",
+      "trianglePairs": 61,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07345941662788391,
+          -0.2027493715286255,
+          -0.15213322639465332
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.8942568068560541,
+        "actualIntersectionPointCount": 122
+      }
+    },
+    {
+      "partA": "Person7 bent thigh left",
+      "partB": "Person7 short shin left",
+      "trianglePairs": 24,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07345941662788391,
+          -0.2027493715286255,
+          -0.15213322639465332
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.9997653564821803,
+        "actualIntersectionPointCount": 48
+      }
+    },
+    {
+      "partA": "Person7 bent thigh left",
+      "partB": "Person7 trouser pelvis",
+      "trianglePairs": 21,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.0,
+          -0.17000000178813934,
+          -0.05000000074505806
+        ],
+        "radiusWorld": 2.2608695652173916,
+        "maximumActualIntersectionDistanceWorld": 1.1925095491594275,
+        "actualIntersectionPointCount": 42
+      }
+    },
+    {
+      "partA": "Person7 bent thigh right",
+      "partB": "Person7 knee right",
+      "trianglePairs": 61,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07345941662788391,
+          0.2027493715286255,
+          -0.15213322639465332
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.8942567120842189,
+        "actualIntersectionPointCount": 122
+      }
+    },
+    {
+      "partA": "Person7 bent thigh right",
+      "partB": "Person7 short shin right",
+      "trianglePairs": 23,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07345941662788391,
+          0.2027493715286255,
+          -0.15213322639465332
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.9997653564821803,
+        "actualIntersectionPointCount": 46
+      }
+    },
+    {
+      "partA": "Person7 bent thigh right",
+      "partB": "Person7 trouser pelvis",
+      "trianglePairs": 21,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.0,
+          0.17000000178813934,
+          -0.05000000074505806
+        ],
+        "radiusWorld": 2.2608695652173916,
+        "maximumActualIntersectionDistanceWorld": 1.1925095491594275,
+        "actualIntersectionPointCount": 42
+      }
+    },
+    {
+      "partA": "Person7 boot left",
+      "partB": "Person7 short shin left",
+      "trianglePairs": 18,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.004999998956918716,
+          -0.1899999976158142,
+          -0.2549999952316284
+        ],
+        "radiusWorld": 2.086956521739131,
+        "maximumActualIntersectionDistanceWorld": 1.5358296717885813,
+        "actualIntersectionPointCount": 36
+      }
+    },
+    {
+      "partA": "Person7 boot right",
+      "partB": "Person7 short shin right",
+      "trianglePairs": 18,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.004999998956918716,
+          0.1899999976158142,
+          -0.2549999952316284
+        ],
+        "radiusWorld": 2.086956521739131,
+        "maximumActualIntersectionDistanceWorld": 1.5358296717885813,
+        "actualIntersectionPointCount": 36
+      }
+    },
+    {
+      "partA": "Person7 ear -1",
+      "partB": "Person7 face UV owner",
+      "trianglePairs": 21,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.015,
+          -0.325,
+          0.345
+        ],
+        "radiusWorld": 1.565217391304348,
+        "maximumActualIntersectionDistanceWorld": 0.7345341027541593,
+        "actualIntersectionPointCount": 42
+      }
+    },
+    {
+      "partA": "Person7 ear 1",
+      "partB": "Person7 face UV owner",
+      "trianglePairs": 21,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.015,
+          0.325,
+          0.345
+        ],
+        "radiusWorld": 1.565217391304348,
+        "maximumActualIntersectionDistanceWorld": 0.7345341027541593,
+        "actualIntersectionPointCount": 42
+      }
+    },
+    {
+      "partA": "Person7 elbow left",
+      "partB": "Person7 forearm left",
+      "trianglePairs": 47,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.10870430618524551,
+          -0.2882140278816223,
+          0.20207540690898895
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.9298763604231732,
+        "actualIntersectionPointCount": 94
+      }
+    },
+    {
+      "partA": "Person7 elbow left",
+      "partB": "Person7 upper arm left",
+      "trianglePairs": 60,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.10870430618524551,
+          -0.2882140278816223,
+          0.20207540690898895
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.935160170989286,
+        "actualIntersectionPointCount": 120
+      }
+    },
+    {
+      "partA": "Person7 elbow right",
+      "partB": "Person7 forearm right",
+      "trianglePairs": 47,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.10870430618524551,
+          0.2882140278816223,
+          0.20207540690898895
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.9298763604231732,
+        "actualIntersectionPointCount": 94
+      }
+    },
+    {
+      "partA": "Person7 elbow right",
+      "partB": "Person7 upper arm right",
+      "trianglePairs": 60,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.10870430618524551,
+          0.2882140278816223,
+          0.20207540690898895
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.9351601777388178,
+        "actualIntersectionPointCount": 120
+      }
+    },
+    {
+      "partA": "Person7 face UV owner",
+      "partB": "Person7 jacket torso UV owner",
+      "trianglePairs": 28,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.015,
+          0,
+          0.255
+        ],
+        "radiusWorld": 3.478260869565218,
+        "maximumActualIntersectionDistanceWorld": 3.098744868558549,
+        "actualIntersectionPointCount": 56
+      }
+    },
+    {
+      "partA": "Person7 face UV owner",
+      "partB": "Person7 neck",
+      "trianglePairs": 32,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.015,
+          0,
+          0.255
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.2658440317957909,
+        "actualIntersectionPointCount": 63
+      }
+    },
+    {
+      "partA": "Person7 face UV owner",
+      "partB": "Person7 projecting fixed cap brim",
+      "trianglePairs": 16,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.13,
+          0,
+          0.51
+        ],
+        "radiusWorld": 6.260869565217392,
+        "maximumActualIntersectionDistanceWorld": 1.4069701558258532,
+        "actualIntersectionPointCount": 32
+      }
+    },
+    {
+      "partA": "Person7 face UV owner",
+      "partB": "Person7 small face nose",
+      "trianglePairs": 16,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.295,
+          0,
+          0.335
+        ],
+        "radiusWorld": 1.565217391304348,
+        "maximumActualIntersectionDistanceWorld": 0.5954529330676138,
+        "actualIntersectionPointCount": 33
+      }
+    },
+    {
+      "partA": "Person7 face UV owner",
+      "partB": "Person7 stacked cap band UV owner",
+      "trianglePairs": 34,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.05,
+          0,
+          0.5
+        ],
+        "radiusWorld": 6.260869565217392,
+        "maximumActualIntersectionDistanceWorld": 2.9462927719335625,
+        "actualIntersectionPointCount": 68
+      }
+    },
+    {
+      "partA": "Person7 forearm left",
+      "partB": "Person7 gripping palm left",
+      "trianglePairs": 6,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.2200000137090683,
+          -0.24500000476837158,
+          0.1899999976158142
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.977085738197748,
+        "actualIntersectionPointCount": 12
+      }
+    },
+    {
+      "partA": "Person7 forearm left",
+      "partB": "Person7 upper arm left",
+      "trianglePairs": 25,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.10870430618524551,
+          -0.2882140278816223,
+          0.20207540690898895
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.9275976860527486,
+        "actualIntersectionPointCount": 52
+      }
+    },
+    {
+      "partA": "Person7 forearm right",
+      "partB": "Person7 gripping palm right",
+      "trianglePairs": 7,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.2200000137090683,
+          0.24500000476837158,
+          0.1899999976158142
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.9770858277951238,
+        "actualIntersectionPointCount": 14
+      }
+    },
+    {
+      "partA": "Person7 forearm right",
+      "partB": "Person7 upper arm right",
+      "trianglePairs": 25,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.10870430618524551,
+          0.2882140278816223,
+          0.20207540690898895
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.9275976860527486,
+        "actualIntersectionPointCount": 50
+      }
+    },
+    {
+      "partA": "Person7 jacket torso UV owner",
+      "partB": "Person7 neck",
+      "trianglePairs": 20,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.015,
+          0,
+          0.255
+        ],
+        "radiusWorld": 2.6086956521739135,
+        "maximumActualIntersectionDistanceWorld": 1.2405085703604861,
+        "actualIntersectionPointCount": 40
+      }
+    },
+    {
+      "partA": "Person7 jacket torso UV owner",
+      "partB": "Person7 trouser pelvis",
+      "trianglePairs": 46,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0,
+          0,
+          0.03
+        ],
+        "radiusWorld": 4.347826086956522,
+        "maximumActualIntersectionDistanceWorld": 3.839585162306786,
+        "actualIntersectionPointCount": 92
+      }
+    },
+    {
+      "partA": "Person7 jacket torso UV owner",
+      "partB": "Person7 upper arm left",
+      "trianglePairs": 21,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.009999999776482582,
+          -0.2199999988079071,
+          0.20000000298023224
+        ],
+        "radiusWorld": 2.2608695652173916,
+        "maximumActualIntersectionDistanceWorld": 1.730260852394413,
+        "actualIntersectionPointCount": 42
+      }
+    },
+    {
+      "partA": "Person7 jacket torso UV owner",
+      "partB": "Person7 upper arm right",
+      "trianglePairs": 22,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.009999999776482582,
+          0.2199999988079071,
+          0.20000000298023224
+        ],
+        "radiusWorld": 2.2608695652173916,
+        "maximumActualIntersectionDistanceWorld": 1.730260852394413,
+        "actualIntersectionPointCount": 44
+      }
+    },
+    {
+      "partA": "Person7 knee left",
+      "partB": "Person7 short shin left",
+      "trianglePairs": 35,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07345941662788391,
+          -0.2027493715286255,
+          -0.15213322639465332
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.8988866802706507,
+        "actualIntersectionPointCount": 70
+      }
+    },
+    {
+      "partA": "Person7 knee right",
+      "partB": "Person7 short shin right",
+      "trianglePairs": 33,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07345941662788391,
+          0.2027493715286255,
+          -0.15213322639465332
+        ],
+        "radiusWorld": 1.739130434782609,
+        "maximumActualIntersectionDistanceWorld": 0.8988866802706507,
+        "actualIntersectionPointCount": 66
+      }
+    },
+    {
+      "partA": "Person7 projecting fixed cap brim",
+      "partB": "Person7 stacked cap band UV owner",
+      "trianglePairs": 52,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.13,
+          0,
+          0.54
+        ],
+        "radiusWorld": 7.478260869565219,
+        "maximumActualIntersectionDistanceWorld": 6.5806593812320076,
+        "actualIntersectionPointCount": 104
+      }
+    },
+    {
+      "partA": "Person7 stacked cap band UV owner",
+      "partB": "Person7 tall teal cap crown UV owner",
+      "trianglePairs": 56,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.015,
+          0,
+          0.62
+        ],
+        "radiusWorld": 7.478260869565219,
+        "maximumActualIntersectionDistanceWorld": 6.318840845739752,
+        "actualIntersectionPointCount": 112
+      }
+    }
+  ],
+  "inappropriateSelfIntersectionPairs": [],
+  "straddleOpening": {
+    "allLegTrianglesOutsideCentralYStrip": true,
+    "minimumLegInnerHalfGapWorld": 1.9999998807907104,
+    "certifiedFiniteEmptyStripWidthWorld": 2,
+    "excludesPelvisAndFixture": true,
+    "notBikeClearance": true
+  },
+  "negativeControls": {
+    "displacedSocketDistancesWorld": {
+      "hip_saddle": 3.6055512093385724,
+      "hand_left_grip": 3.605551010962346,
+      "hand_right_grip": 3.605551010962346,
+      "foot_left_support": 3.6055510109623223,
+      "foot_right_support": 3.6055510109623223
+    },
+    "allDisplacedSocketsRejected": true,
+    "collapsedRightLegIntoLeftTrianglePairs": 403,
+    "collapsedLegsRejected": true,
+    "baselineRestored": true
+  },
+  "handFootGeometry": {
+    "actualClosedSolidChecks": [
+      {
+        "owner": "Person7 boot left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 11.017941510017275
+      },
+      {
+        "owner": "Person7 boot right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 11.01794584094396
+      },
+      {
+        "owner": "Person7 gripping palm left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 2.494081643720468
+      },
+      {
+        "owner": "Person7 gripping palm right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 2.4940884510676065
+      }
+    ],
+    "closedVolumetricPalmsBoots": true
+  },
+  "limits": [
+    "Body depth/joint positions inferred from2D; not unique observed anatomy",
+    "Only declared bounded anatomical joins and matching fixture contacts excepted",
+    "Finite triangle surface and central opening checks do not prove any bike/frame/wheel/animation or other-avatar fit"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "status": "complete",
+  "sourceImmutable": true,
+  "ready": true,
+  "glbSha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+  "atlasSha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+  "recipeSha256": "ad685b16018ae8fda16d1aead8dd0b2810a22cc5d4162113263d310f74d2f9e8",
+  "baseSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "riderSha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+  "report": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1/report.json",
+  "humanApproval": false,
+  "normalActivation": false,
+  "sharedLoaderReview": "pending parent",
+  "replayInputs": "Own build.py/geometry.py/family.json/raw-audit.py; stable catalog-cycle.py; unchanged Person7 measured profile. Exactly six files, no masters/scratch/Person7 GLB construction input.",
+  "parentNext": "Independent actual shared motorcycle composition/review and freeze; preserve all source bytes."
+}

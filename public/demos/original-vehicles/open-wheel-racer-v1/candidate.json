@@ -1,0 +1,540 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "open-wheel-racer-v1",
+      "name": "Open-wheel racing car",
+      "title": "Open-wheel racing car \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original narrow formula chassis with true recessed single-seat cockpit, sidepods, static wings and wishbone/upright geometry ending short of exposed tire inner faces. Cyan/turquoise skin, yellow nose/wing accents, exact UV-owned dark cockpit/seat and small opaque blue windscreen. All4road wheels intentionally exposed, no fenders/caps. Front/rear radii independent; no high-to-low transfer claim.",
+      "audit": {
+        "triangles": 2652,
+        "vertices": 5208,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 191584,
+        "sha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 7.82608695652174,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 7.82608695652174,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/atlas.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/atlas.png",
+          "sha256": "da6c29549c53caca746352dcb1297c33ee50ef16f02e9b3dd92884b0f4f714f5"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/capture.json",
+          "sha256": "f8f9d251139eb8641d24becd1916831ecfe57e3b860fbc67c677a236e416ddec"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-0.png",
+          "sha256": "f63cb414b0bb1bc11ca39dc6d899ff6203877041724b20a98da7ce1b9aded7c8"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-1.png",
+          "sha256": "c4c3188d8453a2d6557232ae9902417cb25dcacb7f09ee5b0d8001421fb0e8b1"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-10.png",
+          "sha256": "4a2ac8e479ce45f49c5d0d5c4edb948236fff67734a30a32e3b885e52c9a1232"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-11.png",
+          "sha256": "44fc0c53ed209983bc26d46e22fdf9865e0595f859e19495d557199661f8c4f0"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-12.png",
+          "sha256": "2410bd93c290eb37b84b63c29593ca4529ee080eb926274c7227962b563b748a"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-13.png",
+          "sha256": "4672870a1eb150dd76fabba5c8b485cd75cf793a66d400bc85f1131038b88009"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-14.png",
+          "sha256": "9b5b0cd2a9b3b98a95d6af11b41a695c31b8da876a8c1ded5933e2f6667a0132"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-15.png",
+          "sha256": "a5a5699e949808504eb705250b30b3712c9302262192147a3757aba2ec6377dd"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-2.png",
+          "sha256": "8869496788a8923b1455045376333c5a89d66caf44cb7be4ad09ab881b0a2599"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-3.png",
+          "sha256": "5597b19e00fb498daa903e3c865da79dd5d5824eebf269be3e1e726788dcafa4"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-4.png",
+          "sha256": "8dfeea222a56aff50a5b179d288f0a9057c0a8c9e2bc576d14f0d028f5d2b70d"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-5.png",
+          "sha256": "18c20a0e463c691c2a716b585e5306809f3ded7e8c17ff7eaafb2bb4127eaeec"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-6.png",
+          "sha256": "c59002011c290da78eca254dca6ce99864eb0cb34b99a805b34e9343a9ae49f6"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-7.png",
+          "sha256": "22d1233ad2c72712152aefb51f24b3f33b607e7749e50a5f8cb28bc1a9966532"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-8.png",
+          "sha256": "0655cc61ee66255a6437b2f39a21aa917f1f519c2151ab15750e6f6975e7326d"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/engine-9.png",
+          "sha256": "2dcc0c94616c426c9a16be80c4a0196284737a7e7171be09ff332a94d07fc4de"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-engine-0.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-engine-0.png",
+          "sha256": "8869496788a8923b1455045376333c5a89d66caf44cb7be4ad09ab881b0a2599"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-engine-1.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-engine-1.png",
+          "sha256": "aac10f88f34fab8416bf0c65047fc00234003ca7dc879a7c4108ed9a1251ca97"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-engine-2.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-engine-2.png",
+          "sha256": "1511614582e32e6ffd73cb3452087e3773937cbb5e6df3715a43646a205be7c5"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-engine-3.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-engine-3.png",
+          "sha256": "e3eaef711f7506c8d64a202f120b2c0655a755fca466d4d00f67b4e853af74ac"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-engine-4.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-engine-4.png",
+          "sha256": "b9edccfe421f41d4013e5abc4ef5a5410f0d0ef5d64715647c623b9d0f8a1f7f"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-engine-5.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-engine-5.png",
+          "sha256": "f9da696b5d98310e31de4bdb80ed01be65b9bb9ea5f1a049ac84f2cdc23c0e8a"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-engine-6.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-engine-6.png",
+          "sha256": "5d6ce1eb65a059cfcdf0c7b93fd0208ed687e64008b7a1e088a9c63e47bba3bf"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-engine-7.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-engine-7.png",
+          "sha256": "9312f3e04fb6939b776c89168d461a3b7f7d9ed6f6a8a8ae659f7e838c8ff205"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-study-0.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-study-0.png",
+          "sha256": "0136bad90ccde4fcdeb10e368b9e332e96833774603dda572de4629c4ff134f5"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-study-1.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-study-1.png",
+          "sha256": "623a7eab61b468266bce4b2a93b013d8bb718a0ee2536ebbbab06fa7acb493d7"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-study-2.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-study-2.png",
+          "sha256": "dd38030a13a7a0897fe7a060f5dd5bad7c21d259fa1bb71ea187c3b5853030ab"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-study-3.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-study-3.png",
+          "sha256": "6a3a7d77dd11907ec38bf8dbd9901d60eebeb82f2949766645c2de614f619f33"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-study-4.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-study-4.png",
+          "sha256": "27b4e38aa40f0861a1bd1b92a2c2a66e0c7a6c2194f28cc106d7656e6b096a96"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-study-5.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-study-5.png",
+          "sha256": "a89fb86a2f6bb0ca5abd0ce4480679e55da6712979e9057cc4f2a613d75b2651"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-study-6.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-study-6.png",
+          "sha256": "8cdf8ce71b6aba79d11b60d0fa3efe648a444cc1def62ff2941468c6dbd9696a"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/equal-angle-study-7.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/equal-angle-study-7.png",
+          "sha256": "77b3552f9f2857931401af0ab01b6bc266da49143e0ed3d38fca7b0398e4742f"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/game-roll-0.png",
+          "sha256": "8869496788a8923b1455045376333c5a89d66caf44cb7be4ad09ab881b0a2599"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/game-roll-1.png",
+          "sha256": "62da3142d296cc387e82a3461568ed973143e66153309a480e2669dbd6622a87"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/game-roll-2.png",
+          "sha256": "a13ec8c92b7ffab65462dec8759bea2e619cae9955bfa06ed71ac084db19013f"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/game-roll-3.png",
+          "sha256": "da6e343e26a0968e2b3541701870027f23efcecfe5ac4ca997dc7c16ae3f5cac"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/game-roll-4.png",
+          "sha256": "7711ebf3ce8c3464b89e70323b82e73c765b32d466f36a4507b28034a9f572cf"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/game-roll-5.png",
+          "sha256": "edfaebf1990d6c7bf4ec70979693096a8b254b79f9ce18639a7ddfd5c5964eb8"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/game-roll-6.png",
+          "sha256": "a0e77885cd6a622b8f87ded4c7bacb36b7c04640c5aeade084474f5368cdbb6b"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/game-roll-7.png",
+          "sha256": "3daa98ee2dc836f6d489d65dd8cf0316d231410f90fda48b83f5e78e9bb00ad3"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/inspection-engine.png",
+          "sha256": "fef3aa2285619e65b7c87ef2e2813943bfba171729007ee8d8eba1945dde620d"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/inspection-equal-angle.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/inspection-equal-angle.png",
+          "sha256": "790ba5653d37391ac07a0af071c87c199200057e2f4e2eead02fe7e971f58823"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/inspection-ordinary-distance.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/inspection-ordinary-distance.png",
+          "sha256": "1e3b3f61eead564ca7876565502abf744d30a40b38e28583a19188b8ff81489b"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/inspection-phases.png",
+          "sha256": "bfa9fe818ab3d0a0e2cd3390a22150c610451471ab7bd7108de44fdd6be32457"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/inspection-study.png",
+          "sha256": "da34354307df1ac4f0197c63d4e676259814c92f47ad92bd31e7100ad2d654d0"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-engine-0.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-engine-0.png",
+          "sha256": "8869496788a8923b1455045376333c5a89d66caf44cb7be4ad09ab881b0a2599"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-engine-1.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-engine-1.png",
+          "sha256": "62da3142d296cc387e82a3461568ed973143e66153309a480e2669dbd6622a87"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-engine-2.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-engine-2.png",
+          "sha256": "a13ec8c92b7ffab65462dec8759bea2e619cae9955bfa06ed71ac084db19013f"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-engine-3.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-engine-3.png",
+          "sha256": "da6e343e26a0968e2b3541701870027f23efcecfe5ac4ca997dc7c16ae3f5cac"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-engine-4.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-engine-4.png",
+          "sha256": "7711ebf3ce8c3464b89e70323b82e73c765b32d466f36a4507b28034a9f572cf"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-engine-5.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-engine-5.png",
+          "sha256": "edfaebf1990d6c7bf4ec70979693096a8b254b79f9ce18639a7ddfd5c5964eb8"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-engine-6.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-engine-6.png",
+          "sha256": "a0e77885cd6a622b8f87ded4c7bacb36b7c04640c5aeade084474f5368cdbb6b"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-engine-7.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-engine-7.png",
+          "sha256": "3daa98ee2dc836f6d489d65dd8cf0316d231410f90fda48b83f5e78e9bb00ad3"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-study-0.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-study-0.png",
+          "sha256": "0136bad90ccde4fcdeb10e368b9e332e96833774603dda572de4629c4ff134f5"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-study-1.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-study-1.png",
+          "sha256": "928201702a476b8dca32c5f37129548269ca6cb5d8052058e51168de42788a29"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-study-2.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-study-2.png",
+          "sha256": "94f73bc91521f80404ce418c2f5b0459f91cd30ea25b125b15630a954560b2a7"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-study-3.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-study-3.png",
+          "sha256": "9a9f89fd42e2aef6184212ed0b220c9f5e39e039652ed1706130485e98d3eba4"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-study-4.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-study-4.png",
+          "sha256": "87829774208ce6a4ee7aa76520041b67a055952e5d93360629363ced87f788c4"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-study-5.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-study-5.png",
+          "sha256": "1e40a0f5f443def8c1a904ef4af40eae08615283c797519ae275b53ee3dcba1b"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-study-6.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-study-6.png",
+          "sha256": "e52716c23b87619842dfd38e981527208ef747832ae768baae193bdd0a640124"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/ordinary-distance-study-7.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/ordinary-distance-study-7.png",
+          "sha256": "f3053d09f8ee08fd2b67b32aef406a3f3739b2b354b272e0a3b470af8e34ccd0"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/roll-0.png",
+          "sha256": "0136bad90ccde4fcdeb10e368b9e332e96833774603dda572de4629c4ff134f5"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/roll-1.png",
+          "sha256": "928201702a476b8dca32c5f37129548269ca6cb5d8052058e51168de42788a29"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/roll-2.png",
+          "sha256": "94f73bc91521f80404ce418c2f5b0459f91cd30ea25b125b15630a954560b2a7"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/roll-3.png",
+          "sha256": "9a9f89fd42e2aef6184212ed0b220c9f5e39e039652ed1706130485e98d3eba4"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/roll-4.png",
+          "sha256": "87829774208ce6a4ee7aa76520041b67a055952e5d93360629363ced87f788c4"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/roll-5.png",
+          "sha256": "1e40a0f5f443def8c1a904ef4af40eae08615283c797519ae275b53ee3dcba1b"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/roll-6.png",
+          "sha256": "e52716c23b87619842dfd38e981527208ef747832ae768baae193bdd0a640124"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/roll-7.png",
+          "sha256": "f3053d09f8ee08fd2b67b32aef406a3f3739b2b354b272e0a3b470af8e34ccd0"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-0.png",
+          "sha256": "ba48e63cbbd653dadc67cdf4ceab17203b756a8f42f2a21bfa856f3d88239dbf"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-1.png",
+          "sha256": "26d8cc6af4cc0e4dc658b8ab520699338ab6199d5686cbbee8b5492b17586258"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-10.png",
+          "sha256": "83ec904e9eda7680a9fdbdee57fc151cc29da496843a5f0ec31f3bcd1b7e4228"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-11.png",
+          "sha256": "76100d270bb61cbf1d5ce3f86a4c5265ec3c5a40de75dbb346ecf2d3dcd40f42"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-12.png",
+          "sha256": "b83b067f30d62b9b574a878bad561b07ce409f93bd0c2ab777b6f3d71e5da265"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-13.png",
+          "sha256": "76ae33b0567f6fc94461e388938100419ab6a458e9a52272752b6b85ea206d05"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-14.png",
+          "sha256": "9da1192cf50839d17f97c5ddc8a3cf45f6e46d4575342be1c926bd5b59741ff2"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-15.png",
+          "sha256": "ac0cb6ed8650a54c7995795f2c0381f98a1c9ef1051a9cc31b72f27263f96755"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-2.png",
+          "sha256": "0136bad90ccde4fcdeb10e368b9e332e96833774603dda572de4629c4ff134f5"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-3.png",
+          "sha256": "719e71691169df28fb5d0ccb7dcc42a449bc61969be3677ed40037242c6b442e"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-4.png",
+          "sha256": "bc8eca63d10b3ff2de7425c0d067a33071231995e651adf4c5a6f5572b8b322c"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-5.png",
+          "sha256": "6961349f6dea7c2b52fc1db3f1c1c6f529b28e127c9901ab569fdd0dca7c61c7"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-6.png",
+          "sha256": "eed4a770694bbdac676edfab4058a89d3c2b2199bf4e6ff97cc7c5fae79179f5"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-7.png",
+          "sha256": "424b65bb07242a8108e55a606b27d43c7297fcf6d113fdc64801df4dfa2a478b"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-8.png",
+          "sha256": "45901df55f7916e088a07f50538eb259a13e79f88397c3cd9020804ac504497d"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/study-9.png",
+          "sha256": "0a0aef1c16dc64b29a66767d1cf5dabd7e994e7552d6b635a979eb0050188acf"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/wire-engine.png",
+          "sha256": "e39c01785207d59c9f01a4f6674a4da0e51519552c804a0cdcf68bef78cafd0c"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/engine/wire-study.png",
+          "sha256": "1bd9c2cb2b19d59e67bfc37a13e8570e713f597862dc4785a046f81d8c676870"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/model.glb",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/model.glb",
+          "sha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/recipe.json",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/recipe.json",
+          "sha256": "15b007e8549435c4cafef31f5b458e1c33e3bea9a77a4b67df9ba6b779701bc2"
+        },
+        {
+          "source": "demos/vehicle-bake/open-wheel-racer/v1/report.json",
+          "retained": "demos/original-vehicles/open-wheel-racer-v1/inputs/report.json",
+          "sha256": "a7d1932f8061dd52c58059271616cd84c6aceca4bee66213069f510d9da86783"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

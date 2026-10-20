@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "monster-truck",
+  "independent": true,
+  "declaredInputPins": 22,
+  "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/monster-truck/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/monster-truck/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/monster-truck/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

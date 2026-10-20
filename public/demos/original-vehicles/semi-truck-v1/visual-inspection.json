@@ -1,0 +1,14 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 native headings inspected: purple tractor, actual cab/trailer gap, long cream/teal box and all six road wheels form a coherent heavy truck silhouette.",
+    "Signed phases and wireframes retain fixed body, covered far crowns and independent six-wheel motion; native288 padding without rescale. One rigid vehicle, not articulated trailer simulation."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

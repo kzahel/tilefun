@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "retro-taxi--v1",
+    "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+    "triangles": 2970,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 7.4782609939575195,
+        "minimumGap": 1.660268894583096,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 7.4782609939575195,
+        "minimumGap": 1.660268894583096,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 7.478261947631836,
+        "minimumGap": 1.6602692212566659,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 7.478261947631836,
+        "minimumGap": 1.6602695608061282,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

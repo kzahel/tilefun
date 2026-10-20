@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "cement-mixer",
+  "independent": true,
+  "declaredInputPins": 24,
+  "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/cement-mixer/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/cement-mixer/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/cement-mixer/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

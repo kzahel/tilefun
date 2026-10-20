@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "before": {
+    "scripts/vehicle-riders/person7-upright/viewer.mjs": "3f934ec2e21fdac995ebbfd7561377309cd1b5423d5590ed62664493dddf6221",
+    "scripts/vehicle-riders/person7-upright/build-view.mjs": "8914d8035ea23ef87c8eef07263f0c8117b5492c337fbaecfe7808bbe41a1232",
+    "scripts/vehicle-riders/person7-upright/index.html": "4ca570ecdce2f3f2956b58848a6fce635cb40e3a1ac6ac6b08f810d691123527",
+    "scripts/vehicle-riders/person7-upright/rider.json": "d840be12016eb4553db3948648c27363dede298bdaa30f28ef16cdcbad5a6193",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45"
+  },
+  "after": {
+    "scripts/vehicle-riders/person7-upright/viewer.mjs": "3f934ec2e21fdac995ebbfd7561377309cd1b5423d5590ed62664493dddf6221",
+    "scripts/vehicle-riders/person7-upright/build-view.mjs": "8914d8035ea23ef87c8eef07263f0c8117b5492c337fbaecfe7808bbe41a1232",
+    "scripts/vehicle-riders/person7-upright/index.html": "4ca570ecdce2f3f2956b58848a6fce635cb40e3a1ac6ac6b08f810d691123527",
+    "scripts/vehicle-riders/person7-upright/rider.json": "d840be12016eb4553db3948648c27363dede298bdaa30f28ef16cdcbad5a6193",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45"
+  },
+  "noInputChangesDuringBuild": true,
+  "viewBundleSha256": "06e6fc78a7eb9599e2cba809190c67575047b2b67045912f40c594bb75327af9"
+}

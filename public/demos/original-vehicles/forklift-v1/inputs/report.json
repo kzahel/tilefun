@@ -1,0 +1,1234 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "forklift",
+  "route": "forklift",
+  "revision": "v1",
+  "method": "Original mustard warehouse forklift with rounded counterweight, low dark seat over open footwell, four slim black overhead guard pillars and open roof frame, tall dark twin mast rails/crossbars and two low narrow forward fixed forks. Four ordinary road wheels only; front wheels intentionally open, rear crowns covered; mast/forks static with no lifting gameplay.",
+  "geometry": {
+    "triangles": 2940,
+    "vertices": 5844,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 213628,
+    "sha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 5.565217391304349,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 5.565217391304349,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 4.347826086956522,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 4.347826086956522,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -0.7799999713897705,
+        -0.6200000047683716,
+        0.3199999928474426
+      ],
+      "centerExport": [
+        -13.56521689373514,
+        5.565217266912047,
+        10.782608778580377
+      ],
+      "radiusBlender": 0.32,
+      "wheel_radius": 5.565217391304349
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -0.7799999713897705,
+        0.6200000047683716,
+        0.3199999928474426
+      ],
+      "centerExport": [
+        -13.56521689373514,
+        5.565217266912047,
+        -10.782608778580377
+      ],
+      "radiusBlender": 0.32,
+      "wheel_radius": 5.565217391304349
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        0.9200000166893005,
+        -0.5699999928474426,
+        0.25
+      ],
+      "centerExport": [
+        16.000000290248707,
+        4.347826086956522,
+        9.913043353868568
+      ],
+      "radiusBlender": 0.25,
+      "wheel_radius": 4.347826086956522
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        0.9200000166893005,
+        0.5699999928474426,
+        0.25
+      ],
+      "centerExport": [
+        16.000000290248707,
+        4.347826086956522,
+        -9.913043353868568
+      ],
+      "radiusBlender": 0.25,
+      "wheel_radius": 4.347826086956522
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/forklift/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/forklift/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/forklift/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "authorization": "autonomous-153",
+  "triangles": 2940,
+  "vertexCount": 5844,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 213628,
+  "atlasBytes": 2535,
+  "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+  "atlasSha256": "840dd561f30ecc9ea4015160e38e5db84359a0ae94c194593b3a657983d299be",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "forklift--v1",
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "triangles": 2940,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.565218176709749,
+        "minimumGap": 1.835063598053373,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.565218176709749,
+        "minimumGap": 1.835063598053373,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 4.347826558120597,
+        "minimumGap": 0.997351319793438,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 4.347826558120597,
+        "minimumGap": 0.997351254953859,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/forklift/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/forklift/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "assessment",
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "allFourCrownsCovered": false,
+    "frontCoverage": "not-applicable/intentionally-open",
+    "rearCoverage": "meets-declared-finite-region",
+    "familyDeclaredFrontException": true,
+    "policy": "Forklift front .32source wheels are intentionally exposed outboard of its narrow chassis. No front fender caps or claim of supported front crowns. Raw shared expected-fraction failures are retained, not changed to passes.",
+    "regionMeaning": "Finite region is declared for the rear .25source tire tread with .20source width. Front samples remain raw diagnostics only and do not qualify front tread coverage.",
+    "front": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "applicability": "not-applicable/intentionally-open",
+        "rawCoveredCount": 0,
+        "rawSampleCount": 25,
+        "rawDeclaredExpectationMet": false
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "applicability": "not-applicable/intentionally-open",
+        "rawCoveredCount": 0,
+        "rawSampleCount": 25,
+        "rawDeclaredExpectationMet": false
+      }
+    ],
+    "rear": [
+      {
+        "wheel": "Wheel_RL_Roll",
+        "applicability": "covered rear fender",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "applicability": "covered rear fender",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": true,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "portableRawEvidence": "art-source/vehicle-bake/forklift/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "710dd1ff8214b3754483cd8c9049a4c4302a36f19a03eb05a5bb4cc4edfcc601",
+    "separateRequirements": "All-four whole-fixed-body neutral rolling clearance and collision negative/reset mandatory; all32 native study/game views and wheel-ID diagnostics separately inspect exposed front attachment and rear occlusion. No universal coverage pass asserted."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "minBlenderWorld": [
+      -40.0,
+      -13.72174072265625,
+      0.0
+    ],
+    "maxBlenderWorld": [
+      24.34782600402832,
+      13.72174072265625,
+      37.39130401611328
+    ],
+    "dimensionsBlenderWorld": [
+      64.34782600402832,
+      27.4434814453125,
+      37.39130401611328
+    ],
+    "dimensionsSourceUnits": [
+      3.699999995231628,
+      1.5780001831054684,
+      2.1499999809265136
+    ],
+    "centeredHorizontalExtentWorld": [
+      80.0,
+      27.4434814453125
+    ],
+    "centeredHorizontalExtentSource": [
+      4.6,
+      1.5780001831054684
+    ],
+    "centeredCeilWorldFootprint": [
+      80,
+      28
+    ],
+    "includesActualForkTipsMastGuardCounterweightWheels": true,
+    "rootUnchangedNoRecenterOrFitScale": true,
+    "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+  },
+  "actualFixedBodyGeometryUV": {
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "status": "passed",
+    "fixedOwner": "Body_static",
+    "allFixedComponentsMatched": 37,
+    "actualTriangleUvMatches": 1700,
+    "components": [
+      {
+        "component": "Mustard rounded rear counterweight actual wheelhouse skin",
+        "actualTrianglesWithMatchingPositionAndUV": 224,
+        "actualVerticesMatched": 114
+      },
+      {
+        "component": "Mustard narrow central chassis front wheels deliberately outboard",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "Actual open footwell lower floor",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "Mustard footwell low side sill -1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "Mustard footwell low side sill 1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "Low seat actual pedestal",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "Low dark driver seat cushion actual volume",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "Dark seat back actual volume",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC guard lower crossfoot -0.5",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC vertical overhead guard pillar -0.5 -1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC vertical overhead guard pillar -0.5 1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC guard lower crossfoot 0.7",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC vertical overhead guard pillar 0.7 -1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC vertical overhead guard pillar 0.7 1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC overhead guard side roof frame -1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC overhead guard side roof frame 1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC overhead open roof crossbar -0.53",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC overhead open roof crossbar 0.73",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC overhead open roof crossbar -0.12",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC overhead open roof crossbar 0.32",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC tall twin mast rail -1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC mast gray inner runner -1",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC tall twin mast rail 1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC mast gray inner runner 1",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC mast crossbar 0.26",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC mast crossbar 0.75",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC mast crossbar 1.35",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC mast crossbar 2.07",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC low fork carriage",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC fork vertical heel -1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC actual low narrow forward fork blade -1",
+        "actualTrianglesWithMatchingPositionAndUV": 20,
+        "actualVerticesMatched": 12
+      },
+      {
+        "component": "STATIC fork vertical heel 1",
+        "actualTrianglesWithMatchingPositionAndUV": 44,
+        "actualVerticesMatched": 24
+      },
+      {
+        "component": "STATIC actual low narrow forward fork blade 1",
+        "actualTrianglesWithMatchingPositionAndUV": 20,
+        "actualVerticesMatched": 12
+      },
+      {
+        "component": "STATIC own unequal axle arm -0.78",
+        "actualTrianglesWithMatchingPositionAndUV": 28,
+        "actualVerticesMatched": 16
+      },
+      {
+        "component": "STATIC own unequal axle arm 0.92",
+        "actualTrianglesWithMatchingPositionAndUV": 28,
+        "actualVerticesMatched": 16
+      },
+      {
+        "component": "STATIC steering column",
+        "actualTrianglesWithMatchingPositionAndUV": 28,
+        "actualVerticesMatched": 16
+      },
+      {
+        "component": "STATIC open steering ring",
+        "actualTrianglesWithMatchingPositionAndUV": 96,
+        "actualVerticesMatched": 48
+      }
+    ],
+    "actualAssessment": {
+      "twoActualForkBlades": [
+        {
+          "component": "STATIC actual low narrow forward fork blade -1",
+          "minimumSource": [
+            -2.299999952316284,
+            -0.3799999952316284,
+            0.10000000149011612
+          ],
+          "maximumSource": [
+            -1.100000023841858,
+            -0.25999999046325684,
+            0.18000000715255737
+          ],
+          "actualLengthSource": 1.1999999284744263,
+          "actualWidthSource": 0.12000000476837158
+        },
+        {
+          "component": "STATIC actual low narrow forward fork blade 1",
+          "minimumSource": [
+            -2.299999952316284,
+            0.25999999046325684,
+            0.10000000149011612
+          ],
+          "maximumSource": [
+            -1.100000023841858,
+            0.3799999952316284,
+            0.18000000715255737
+          ],
+          "actualLengthSource": 1.1999999284744263,
+          "actualWidthSource": 0.12000000476837158
+        }
+      ],
+      "twoMastRails": 2,
+      "fourGuardPillars": 4,
+      "mastTopSource": 2.1500000953674316,
+      "actualFootwellFloorTop": 0.36000001430511475,
+      "actualSeatTop": 0.800000011920929,
+      "seatAboveFloorSource": 0.4399999976158142,
+      "equipmentStaticOnly": true
+    },
+    "exactFourRoadRollNodes": true,
+    "noEquipmentAnimation": true,
+    "viewIndependentSurfacePaint": true,
+    "positionToleranceSource": 2e-05,
+    "uvTolerance": 2e-06
+  },
+  "negativeSpaceEvidence": {
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "status": "passed",
+    "allCandidateTriangleCount": 2940,
+    "fourFootwellFloorRays": [
+      {
+        "xySource": [
+          -0.32,
+          -0.23
+        ],
+        "firstHitFloorZ": 0.36000002384185786,
+        "depthBelowSeatSource": 0.4399999761581422
+      },
+      {
+        "xySource": [
+          -0.32,
+          0.23
+        ],
+        "firstHitFloorZ": 0.36000002384185786,
+        "depthBelowSeatSource": 0.4399999761581422
+      },
+      {
+        "xySource": [
+          -0.2,
+          -0.23
+        ],
+        "firstHitFloorZ": 0.36000002384185786,
+        "depthBelowSeatSource": 0.4399999761581422
+      },
+      {
+        "xySource": [
+          -0.2,
+          0.23
+        ],
+        "firstHitFloorZ": 0.36000002384185786,
+        "depthBelowSeatSource": 0.4399999761581422
+      }
+    ],
+    "openMastRays": 8,
+    "openGuardRays": 6,
+    "separateForkGapRays": 2,
+    "fillNegativeControls": [
+      {
+        "fixture": "footwell-filled",
+        "fixtureTrianglesAdded": 2,
+        "rejectedRayCount": 4,
+        "rejected": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "fixture": "mast-filled",
+        "fixtureTrianglesAdded": 2,
+        "rejectedRayCount": 8,
+        "rejected": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "fixture": "guard-filled",
+        "fixtureTrianglesAdded": 2,
+        "rejectedRayCount": 6,
+        "rejected": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "fixture": "fork-gap-filled",
+        "fixtureTrianglesAdded": 2,
+        "rejectedRayCount": 2,
+        "rejected": true,
+        "noCandidateTrianglesRemoved": true
+      }
+    ],
+    "baselineRestoredExact": true,
+    "actualGeometryNotPaintedDecals": true
+  },
+  "fixedEquipmentEvidence": {
+    "components": [
+      "STATIC guard lower crossfoot -0.5",
+      "STATIC vertical overhead guard pillar -0.5 -1",
+      "STATIC vertical overhead guard pillar -0.5 1",
+      "STATIC guard lower crossfoot 0.7",
+      "STATIC vertical overhead guard pillar 0.7 -1",
+      "STATIC vertical overhead guard pillar 0.7 1",
+      "STATIC overhead guard side roof frame -1",
+      "STATIC overhead guard side roof frame 1",
+      "STATIC overhead open roof crossbar -0.53",
+      "STATIC overhead open roof crossbar 0.73",
+      "STATIC overhead open roof crossbar -0.12",
+      "STATIC overhead open roof crossbar 0.32",
+      "STATIC tall twin mast rail -1",
+      "STATIC mast gray inner runner -1",
+      "STATIC tall twin mast rail 1",
+      "STATIC mast gray inner runner 1",
+      "STATIC mast crossbar 0.26",
+      "STATIC mast crossbar 0.75",
+      "STATIC mast crossbar 1.35",
+      "STATIC mast crossbar 2.07",
+      "STATIC low fork carriage",
+      "STATIC fork vertical heel -1",
+      "STATIC actual low narrow forward fork blade -1",
+      "STATIC fork vertical heel 1",
+      "STATIC actual low narrow forward fork blade 1",
+      "STATIC own unequal axle arm -0.78",
+      "STATIC own unequal axle arm 0.92",
+      "STATIC steering column",
+      "STATIC open steering ring"
+    ],
+    "noMotionMetadata": true,
+    "staticMastForksOnly": true,
+    "noLiftingGameplayClaim": true,
+    "twoActualForkBlades": [
+      {
+        "component": "STATIC actual low narrow forward fork blade -1",
+        "minimumSource": [
+          -2.299999952316284,
+          -0.3799999952316284,
+          0.10000000149011612
+        ],
+        "maximumSource": [
+          -1.100000023841858,
+          -0.25999999046325684,
+          0.18000000715255737
+        ],
+        "actualLengthSource": 1.1999999284744263,
+        "actualWidthSource": 0.12000000476837158
+      },
+      {
+        "component": "STATIC actual low narrow forward fork blade 1",
+        "minimumSource": [
+          -2.299999952316284,
+          0.25999999046325684,
+          0.10000000149011612
+        ],
+        "maximumSource": [
+          -1.100000023841858,
+          0.3799999952316284,
+          0.18000000715255737
+        ],
+        "actualLengthSource": 1.1999999284744263,
+        "actualWidthSource": 0.12000000476837158
+      }
+    ],
+    "twoMastRails": 2,
+    "fourGuardPillars": 4,
+    "mastTopSource": 2.1500000953674316,
+    "actualFootwellFloorTop": 0.36000001430511475,
+    "actualSeatTop": 0.800000011920929,
+    "seatAboveFloorSource": 0.4399999976158142,
+    "equipmentStaticOnly": true
+  },
+  "perWheelCollisionControls": {
+    "status": "passed",
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "standardFourWheelToolchain": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "allFixedTriangles": 1700,
+        "minimumBaselineGapWorld": 1.835063598053373,
+        "negativeFixtureAddedTriangles": 1,
+        "controlledGapWorld": -5.565218176709749,
+        "collisionRejected": true,
+        "baselineRestoredExact": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "allFixedTriangles": 1700,
+        "minimumBaselineGapWorld": 1.835063598053373,
+        "negativeFixtureAddedTriangles": 1,
+        "controlledGapWorld": -5.565218176709749,
+        "collisionRejected": true,
+        "baselineRestoredExact": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "allFixedTriangles": 1700,
+        "minimumBaselineGapWorld": 0.997351319793438,
+        "negativeFixtureAddedTriangles": 1,
+        "controlledGapWorld": -4.347826558120597,
+        "collisionRejected": true,
+        "baselineRestoredExact": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "allFixedTriangles": 1700,
+        "minimumBaselineGapWorld": 0.997351254953859,
+        "negativeFixtureAddedTriangles": 1,
+        "controlledGapWorld": -4.347826558120597,
+        "collisionRejected": true,
+        "baselineRestoredExact": true,
+        "noCandidateTrianglesRemoved": true
+      }
+    ],
+    "allFourNegativeResetPassed": true,
+    "inputBytesUnchanged": true
+  },
+  "frameFit": {
+    "status": "passed",
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "actualCapture": "engine/capture.json",
+    "nativeViewport": [
+      224,
+      224
+    ],
+    "nativeRadius": 112,
+    "source80ReferenceUnchanged": true,
+    "familyExtraPadding": 0,
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "engineOrigin": [
+      112,
+      112
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -16,
+      32
+    ],
+    "scale": 1,
+    "views": [
+      {
+        "yaw": 0,
+        "actual224OccupiedBounds": {
+          "minX": 88,
+          "minY": 65,
+          "maxX": 151,
+          "maxY": 123
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 72,
+          "maxX": 135,
+          "minY": 97,
+          "maxY": 155
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 22.5,
+        "actual224OccupiedBounds": {
+          "minX": 85,
+          "minY": 61,
+          "maxX": 150,
+          "maxY": 130
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 69,
+          "maxX": 134,
+          "minY": 93,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 45,
+        "actual224OccupiedBounds": {
+          "minX": 87,
+          "minY": 59,
+          "maxX": 144,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 71,
+          "maxX": 128,
+          "minY": 91,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 67.5,
+        "actual224OccupiedBounds": {
+          "minX": 91,
+          "minY": 60,
+          "maxX": 132,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 75,
+          "maxX": 116,
+          "minY": 92,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 90,
+        "actual224OccupiedBounds": {
+          "minX": 98,
+          "minY": 63,
+          "maxX": 125,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 82,
+          "maxX": 109,
+          "minY": 95,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 112.5,
+        "actual224OccupiedBounds": {
+          "minX": 91,
+          "minY": 60,
+          "maxX": 132,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 75,
+          "maxX": 116,
+          "minY": 92,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 135,
+        "actual224OccupiedBounds": {
+          "minX": 79,
+          "minY": 59,
+          "maxX": 136,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 63,
+          "maxX": 120,
+          "minY": 91,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 157.5,
+        "actual224OccupiedBounds": {
+          "minX": 73,
+          "minY": 61,
+          "maxX": 138,
+          "maxY": 130
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 57,
+          "maxX": 122,
+          "minY": 93,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 180,
+        "actual224OccupiedBounds": {
+          "minX": 72,
+          "minY": 65,
+          "maxX": 135,
+          "maxY": 123
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 56,
+          "maxX": 119,
+          "minY": 97,
+          "maxY": 155
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 202.5,
+        "actual224OccupiedBounds": {
+          "minX": 73,
+          "minY": 61,
+          "maxX": 138,
+          "maxY": 128
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 57,
+          "maxX": 122,
+          "minY": 93,
+          "maxY": 160
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 225,
+        "actual224OccupiedBounds": {
+          "minX": 79,
+          "minY": 57,
+          "maxX": 136,
+          "maxY": 131
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 63,
+          "maxX": 120,
+          "minY": 89,
+          "maxY": 163
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 247.5,
+        "actual224OccupiedBounds": {
+          "minX": 91,
+          "minY": 55,
+          "maxX": 132,
+          "maxY": 132
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 75,
+          "maxX": 116,
+          "minY": 87,
+          "maxY": 164
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 270,
+        "actual224OccupiedBounds": {
+          "minX": 98,
+          "minY": 56,
+          "maxX": 125,
+          "maxY": 130
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 82,
+          "maxX": 109,
+          "minY": 88,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 292.5,
+        "actual224OccupiedBounds": {
+          "minX": 91,
+          "minY": 55,
+          "maxX": 132,
+          "maxY": 132
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 75,
+          "maxX": 116,
+          "minY": 87,
+          "maxY": 164
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 315,
+        "actual224OccupiedBounds": {
+          "minX": 87,
+          "minY": 57,
+          "maxX": 144,
+          "maxY": 131
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 71,
+          "maxX": 128,
+          "minY": 89,
+          "maxY": 163
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 337.5,
+        "actual224OccupiedBounds": {
+          "minX": 85,
+          "minY": 61,
+          "maxX": 150,
+          "maxY": 128
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 69,
+          "maxX": 134,
+          "minY": 93,
+          "maxY": 160
+        },
+        "fitsWithoutScaling": true
+      }
+    ],
+    "cardinalExactPixelProof": [
+      {
+        "yaw": 0.0,
+        "image": "engine/fallback-cardinal-0.png",
+        "sha256": "51c0bce279885e8363b5705f8cb621f5daf7cea20a62069a169914ec23c44e91",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 1712,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 90.0,
+        "image": "engine/fallback-cardinal-1.png",
+        "sha256": "f0fe3081ba542c87cff345d5e5a210403069b7542f0a3912dbb4d1f577829737",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 1526,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 180.0,
+        "image": "engine/fallback-cardinal-2.png",
+        "sha256": "2ba7264f59c95c3acc943d2fc7f0bafa0167fc03e7b3a13b323db617567a3496",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 1712,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 270.0,
+        "image": "engine/fallback-cardinal-3.png",
+        "sha256": "30b3f009ae2ef082a068fbbad4b206a59bcb3eae9c7ce673bfaadac8b268583c",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 1524,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      }
+    ],
+    "standardCardinalPlacementPixelExact": true,
+    "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+  },
+  "attachmentEvidence": {
+    "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 8.695653915405273,
+        "actualStaticArmEndAbsY": 8.434782981872559,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 8.695653915405273,
+        "actualStaticArmEndAbsY": 8.434782981872559,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RL",
+        "actualTireSlabInnerAbsY": 8.17391300201416,
+        "actualStaticArmEndAbsY": 7.91304349899292,
+        "axialGapWorld": 0.26086950302124023,
+        "subpixelGap": true
+      },
+      {
+        "id": "RR",
+        "actualTireSlabInnerAbsY": 8.17391300201416,
+        "actualStaticArmEndAbsY": 7.91304349899292,
+        "axialGapWorld": 0.26086950302124023,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "wheelVisualEvidence": "engine/wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/forklift/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/forklift/capture.mjs",
+    "node scripts/vehicle-bake/forklift/independent-visual.mjs",
+    "node scripts/vehicle-bake/forklift/wheel-visual.mjs",
+    "python scripts/vehicle-bake/forklift/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/forklift/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/forklift/clearance-controls.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/forklift/v1/evidence/clearance-input.json data/vehicle-bake/forklift/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/forklift/v1/model.glb --config art-source/vehicle-bake/forklift/v1/coverage-region.json --output data/vehicle-bake/forklift/recheck-coverage.json",
+    "python scripts/vehicle-bake/forklift/assess-coverage.py --input data/vehicle-bake/forklift/recheck-coverage.json",
+    "python scripts/vehicle-bake/forklift/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/forklift/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/forklift/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "All16study+16game actualheadings inspected: mustard rounded rear counterweight, low dark seat/open footwell, four slimguardpillars/openroofframe, talltwinmast/crossbars and two true low forwardforks recognizable.",
+    "Front .32source roadwheels deliberately exposed outboard of narrow chassis, attached through subpixel axle gaps. Rear .25source crowns covered under realcounterweight localpockets. No fakecaps or frontcovered metric asserted.",
+    "All8signeddistancephases/camera,16equal-angle phaseviews,bothwireframes and32four-color wheel-ID diagnostics inspected; four unequal-radius roadwheels stay in place whilemast/forks/seat/guard/body remain fixed.",
+    "All4independentquarter/reverse/reset image sets inspected. Tinyasymmetric hubmarks move subtly,positive3-6channel changes perwheel andpixel-exact absolute reset;allothermeshesfixed.",
+    "Actualopenfootwell floor.36 underseat.80 =>.44source depth. Mast/guard/fork-gap voids are genuinegeometry and all-triangle probes plus4fillednegativefixtures/reset pass in source+GLB.",
+    "All37fixedsourcecomponents/1,700fixedtriangles match actualGLB position+UV corners within exporttolerance. No negative-space decal or glassplanes.",
+    "Fullnative224/radius112 and128/224 centeredgamecrops exact,zerooccupiededgepixels;all4fallback192x224cardinalimages preserve everyoccupiedRGBApixel bytranslation(-16,+32),no scaling.",
+    "Desktop/mobile/offline screenshots andchecks pass in bundledfullChromium,nooffline networkrequests;browser/serverreaped.",
+    "Thin guard/fork/hub palette features have expectedheadingaliasing; seat is unoccupied withordinaryhiddendriverconvention,no standing-person claim. No lifting or specialforkliftsteeringgameplay."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "allWheelRadiusesMatchOwnGeometry": true,
+    "twoRealLowForkBladesTwinMastAndFourGuardPillarsStaticOnly": true,
+    "realFootwellSeatMastGuardNegativeSpaces": true,
+    "actualEquipmentTrianglePositionAndUVMatch": true,
+    "sourceAndActualGLBOpenSpaceFillNegativesReset": true,
+    "allFourIndividualCollisionNegativeControlsReset": true,
+    "exact192x224CardinalPixelPlacement": true,
+    "actualAsymmetricAndCenteredBoundsIncludeEquipment": true,
+    "standard224AndFallback192x224FitWithoutScaling": true,
+    "allFourEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crownCoverage": "rear counterweight25/25each; front0/25 raw intentionally-open/N-A",
+    "guardRoofOutsideCoverageRayRange": true,
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "allFourCrownsCovered": false,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Rear crown coverage qualifies its declared finite central tread region only. Front wheels are intentionally exposed outboard of narrow chassis; raw0/25 and failed covered-expectation metrics retained, no universal four-crown pass asserted. Native headings independently inspected.",
+    "Full neutral roll only; nonzero steering/suspension and equipment motion unqualified. Ordinary four-wheel drive contract; no special forklift steering or lifting gameplay.",
+    "Open seat/guard has no glass or visible occupant geometry; ordinary hidden-driver convention, no rider/standing-person claim.",
+    "Mast, crossbars, guard, seat and two forks are rigid Body_static geometry. Thin forks/guard/hub marks have heading-dependent native aliasing, no enlarged or per-angle fit.",
+    "Actual fork-inclusive span and centered2*maxAbs bounds retained at unchanged root/scale. Asymmetric fork extension makes centered collision length larger than physical span; parent owns runtime footprint/road-fit QA.",
+    "Actual occupied pixels fit224 and standard192x224 fallback placement without scaling; parent owns independent runtime export/QA.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/forklift/v1/assess-coverage.py": "14e55fcd2c02fec0db245a63eed57a442ba272d2ef0f9950f847d4df385ce5d0",
+    "art-source/vehicle-bake/forklift/v1/assess-fit.py": "d4cd659042da3ac61ba03c217ede5f3692d3889859fc7efbab1970954478793b",
+    "art-source/vehicle-bake/forklift/v1/atlas.png": "840dd561f30ecc9ea4015160e38e5db84359a0ae94c194593b3a657983d299be",
+    "art-source/vehicle-bake/forklift/v1/audit-source.py": "5df897d43d4048b0d18a5bd8be7a3351c918a541aa8231fc15442d24beece25b",
+    "art-source/vehicle-bake/forklift/v1/build.py": "38b3d84ab0f3cad714cb2b8ce6536a86ec98551bc4c547112f0dbe180e3f513d",
+    "art-source/vehicle-bake/forklift/v1/capture.mjs": "9c8fd0c6118aa0027100d8474abf88d46b5ce5d35634f10e8ec49d7bde2fdf68",
+    "art-source/vehicle-bake/forklift/v1/car.blend": "538975660927228ddb5e30f6b0b85202b054fac638f27c06fc268927e5c2347f",
+    "art-source/vehicle-bake/forklift/v1/clearance-controls.py": "ba02bccf1130d9e243a8e09fb0d6721489caba247fb00b515320e507eafda9b4",
+    "art-source/vehicle-bake/forklift/v1/coverage-region.json": "536f09269c6da216f46ff02f5021fef99d06862f58333a590e2314657b4abb88",
+    "art-source/vehicle-bake/forklift/v1/evidence/author-browser-qa.json": "e712ed7b3df054058c6c86e80cda186e377d0ab9cf6d51c0b4e214f42330cc6c",
+    "art-source/vehicle-bake/forklift/v1/evidence/author-visual-inspection.json": "7c4c6c210e3caa4ce14cc2b74e1c1378e74be5d9a24d05ff05fe59c3d48b8162",
+    "art-source/vehicle-bake/forklift/v1/evidence/clearance-controls.json": "253ed84afa80f62278b2554184ff47a408e982fea0efac671531600b461c6036",
+    "art-source/vehicle-bake/forklift/v1/evidence/clearance-input.json": "f09d40fc8f729d71a209ce4783a019ec3ecf70463ae64ffbbdff5fcebd99f410",
+    "art-source/vehicle-bake/forklift/v1/evidence/engine-capture.json": "b11f88e0386b46613598fbf85355b0138d963cf7dc27023e6e7a34654031f701",
+    "art-source/vehicle-bake/forklift/v1/evidence/fit-assessment.json": "3cb59e63664e3a08474764f3a03a38fbde123424be35fed42f5648adc8486f9e",
+    "art-source/vehicle-bake/forklift/v1/evidence/independent-visual.json": "46b042357671045f45851b9e369febf9c97f846b894639d75416e7dda93a2b55",
+    "art-source/vehicle-bake/forklift/v1/evidence/packed-source-audit.json": "4168ae0ebf98f98a43d3f18f25c24666f61cbc3484f82a88a7defbee2cff8329",
+    "art-source/vehicle-bake/forklift/v1/evidence/replay-verification.json": "702111ec5d8440c6ab42ed1ea94a25131fe9e4eba28ef6fffc2949f120835b36",
+    "art-source/vehicle-bake/forklift/v1/evidence/shared-clearance.json": "81c219e56a8f4b00c3519d15ae0f68edbff6a899d5e8496ae71d80b539621735",
+    "art-source/vehicle-bake/forklift/v1/evidence/upper-wheel-coverage-raw.json": "710dd1ff8214b3754483cd8c9049a4c4302a36f19a03eb05a5bb4cc4edfcc601",
+    "art-source/vehicle-bake/forklift/v1/evidence/wheel-coverage-assessment.json": "d4bdee3638dbab00e8363aee6483e1e5bc1b0631bddb4b4fa2287542a8b8da9d",
+    "art-source/vehicle-bake/forklift/v1/evidence/wheel-visual.json": "b38a39f82abc9eb5ca7f1d6d6c464899c84cafc8b26d48c0f078a4f852d14893",
+    "art-source/vehicle-bake/forklift/v1/family.json": "6264c92dc0b35bee3560b97d09423530cb3ea2d60458a5e80fa2287d37bbf001",
+    "art-source/vehicle-bake/forklift/v1/finalize.py": "10baa814741132764ee84d0622d83a21faf7c62b2541471ec9bcee07df2b1c42",
+    "art-source/vehicle-bake/forklift/v1/geometry.py": "6e343b8a2e04fe8ee870bf029c975dc92696a4611552f39aa8731c1b7abf6233",
+    "art-source/vehicle-bake/forklift/v1/independent-visual.mjs": "df212527313c705c4caad9f3757429f79f50af8f257cbb6293ea1064f837e1c4",
+    "art-source/vehicle-bake/forklift/v1/master.blend": "de61ca4ccf313345da5987b2022fcae62d7e5bbc606327ff683a74070f2e1614",
+    "art-source/vehicle-bake/forklift/v1/model.glb": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+    "art-source/vehicle-bake/forklift/v1/paint-ownership.json": "33a9a7c9b26611f339a38f0f9fcadc317595462008477e0a84139004d7fa2550",
+    "art-source/vehicle-bake/forklift/v1/palette-draft.png": "5f86e26f14f0fcbab17b56dd925b7213ee95b5d9fc4c2d061a4ec73ee45a9865",
+    "art-source/vehicle-bake/forklift/v1/recipe.json": "8864e12cc377762fcac11e36097ee9c462633e489f644a6ba137011a68cab51c",
+    "art-source/vehicle-bake/forklift/v1/review.json": "7141234c54e7fa523b134ed0f571312d04d6c329a5d8d69d691635d8a4251c7d",
+    "art-source/vehicle-bake/forklift/v1/sheets.py": "6f8c56939b49efd659a622fa565815d8dee066f469e30ac78d22d9bc12c94d62",
+    "art-source/vehicle-bake/forklift/v1/wheel-visual.mjs": "8c54c5cb1d3c8f4b7ee18f2fc4e916f47d59e1b90ff213a847aa66ef5c75176c"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "independent": true,
+  "glbSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "atlasSha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+  "recipeSha256": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+  "scratchInputDependencies": [],
+  "originalSourceReceipt": {
+    "path": "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+    "sha256": "20bdcf085ef11e934a40507a9cbef0cc3262e1a73c9c1d5acd5e45570b3d790a"
+  },
+  "independentReplayReceipt": {
+    "path": "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/evidence/rider-independent-replay.json",
+    "sha256": "0c5ee33097961dd2254c957aeb112c18ec2e2ebfb65b02b6a8fb4ad2a3a4cebb"
+  },
+  "meaning": "Normalized aliases of immutable child receipt; exact source output reproduced independently; not human approval or normal availability"
+}

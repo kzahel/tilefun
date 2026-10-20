@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "motorhome",
+  "independent": true,
+  "declaredInputPins": 21,
+  "glbSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/motorhome/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/motorhome/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/motorhome/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

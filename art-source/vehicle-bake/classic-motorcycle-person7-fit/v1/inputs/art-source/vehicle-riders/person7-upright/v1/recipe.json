@@ -1,0 +1,693 @@
+{
+  "status": "prototype-not-production",
+  "humanApproval": false,
+  "template": "Own measured legacy Person7 human/cap anatomy, fixed short inferred chains and constrained bent pose; no Explorer head/body recolor or vehicle loft",
+  "contactFitStatus": "passed-profile-contacts",
+  "actualContactsSource": {
+    "hip_saddle": [
+      0.0,
+      0.0,
+      -0.05999999865889549
+    ],
+    "hand_left_grip": [
+      -0.2200000137090683,
+      -0.24500000476837158,
+      0.1899999976158142
+    ],
+    "foot_left_support": [
+      -0.02500000037252903,
+      -0.1899999976158142,
+      -0.3100000023841858
+    ],
+    "hand_right_grip": [
+      -0.2200000137090683,
+      0.24500000476837158,
+      0.1899999976158142
+    ],
+    "foot_right_support": [
+      -0.02500000037252903,
+      0.1899999976158142,
+      -0.3100000023841858
+    ]
+  },
+  "targetMissWorld": {
+    "hip_saddle": 0.0,
+    "hand_left_grip": 0.0,
+    "foot_left_support": 0.0,
+    "hand_right_grip": 0.0,
+    "foot_right_support": 0.0
+  },
+  "fixedLengthIK": [
+    {
+      "limb": "arm_left",
+      "fixedBoneLengthsSource": [
+        0.12,
+        0.12
+      ],
+      "rootSource": [
+        -0.009999999776482582,
+        -0.2199999988079071,
+        0.20000000298023224
+      ],
+      "targetJointSource": [
+        -0.2200000137090683,
+        -0.24500000476837158,
+        0.1899999976158142
+      ],
+      "actualJointSource": [
+        -0.2200000137090683,
+        -0.24500000476837158,
+        0.1899999976158142
+      ],
+      "unclampedTargetDistanceSource": 0.21171916673585614,
+      "maximumChainLengthSource": 0.24,
+      "unreachableBeyondChainWorld": 0.0,
+      "jointSource": [
+        -0.10870430618524551,
+        -0.2882140278816223,
+        0.20207540690898895
+      ],
+      "actualLengthsSource": [
+        0.12000000645750922,
+        0.1200000080642831
+      ]
+    },
+    {
+      "limb": "leg_left",
+      "fixedBoneLengthsSource": [
+        0.13,
+        0.13
+      ],
+      "rootSource": [
+        0.0,
+        -0.17000000178813934,
+        -0.05000000074505806
+      ],
+      "targetJointSource": [
+        0.004999998956918716,
+        -0.1899999976158142,
+        -0.2549999952316284
+      ],
+      "actualJointSource": [
+        0.004999998956918716,
+        -0.1899999976158142,
+        -0.2549999952316284
+      ],
+      "unclampedTargetDistanceSource": 0.2060339770319409,
+      "maximumChainLengthSource": 0.26,
+      "unreachableBeyondChainWorld": 0.0,
+      "jointSource": [
+        -0.07345941662788391,
+        -0.2027493715286255,
+        -0.15213322639465332
+      ],
+      "actualLengthsSource": [
+        0.1300000145049901,
+        0.12999999351665145
+      ]
+    },
+    {
+      "limb": "arm_right",
+      "fixedBoneLengthsSource": [
+        0.12,
+        0.12
+      ],
+      "rootSource": [
+        -0.009999999776482582,
+        0.2199999988079071,
+        0.20000000298023224
+      ],
+      "targetJointSource": [
+        -0.2200000137090683,
+        0.24500000476837158,
+        0.1899999976158142
+      ],
+      "actualJointSource": [
+        -0.2200000137090683,
+        0.24500000476837158,
+        0.1899999976158142
+      ],
+      "unclampedTargetDistanceSource": 0.21171916673585614,
+      "maximumChainLengthSource": 0.24,
+      "unreachableBeyondChainWorld": 0.0,
+      "jointSource": [
+        -0.10870430618524551,
+        0.2882140278816223,
+        0.20207540690898895
+      ],
+      "actualLengthsSource": [
+        0.12000000645750922,
+        0.1200000080642831
+      ]
+    },
+    {
+      "limb": "leg_right",
+      "fixedBoneLengthsSource": [
+        0.13,
+        0.13
+      ],
+      "rootSource": [
+        0.0,
+        0.17000000178813934,
+        -0.05000000074505806
+      ],
+      "targetJointSource": [
+        0.004999998956918716,
+        0.1899999976158142,
+        -0.2549999952316284
+      ],
+      "actualJointSource": [
+        0.004999998956918716,
+        0.1899999976158142,
+        -0.2549999952316284
+      ],
+      "unclampedTargetDistanceSource": 0.2060339770319409,
+      "maximumChainLengthSource": 0.26,
+      "unreachableBeyondChainWorld": 0.0,
+      "jointSource": [
+        -0.07345941662788391,
+        0.2027493715286255,
+        -0.15213322639465332
+      ],
+      "actualLengthsSource": [
+        0.1300000145049901,
+        0.12999999351665145
+      ]
+    }
+  ],
+  "anatomicalJointsSource": {
+    "left": {
+      "shoulder": [
+        -0.009999999776482582,
+        -0.2199999988079071,
+        0.20000000298023224
+      ],
+      "elbow": [
+        -0.10870430618524551,
+        -0.2882140278816223,
+        0.20207540690898895
+      ],
+      "wrist": [
+        -0.16898947954177856,
+        -0.2648064196109772,
+        0.19553455710411072
+      ],
+      "palm": [
+        -0.2200000137090683,
+        -0.24500000476837158,
+        0.1899999976158142
+      ],
+      "hip": [
+        0.0,
+        -0.17000000178813934,
+        -0.05000000074505806
+      ],
+      "knee": [
+        -0.07345941662788391,
+        -0.2027493715286255,
+        -0.15213322639465332
+      ],
+      "ankle": [
+        0.004999998956918716,
+        -0.1899999976158142,
+        -0.2549999952316284
+      ],
+      "sole": [
+        -0.02500000037252903,
+        -0.1899999976158142,
+        -0.3100000023841858
+      ]
+    },
+    "right": {
+      "shoulder": [
+        -0.009999999776482582,
+        0.2199999988079071,
+        0.20000000298023224
+      ],
+      "elbow": [
+        -0.10870430618524551,
+        0.2882140278816223,
+        0.20207540690898895
+      ],
+      "wrist": [
+        -0.16898947954177856,
+        0.2648064196109772,
+        0.19553455710411072
+      ],
+      "palm": [
+        -0.2200000137090683,
+        0.24500000476837158,
+        0.1899999976158142
+      ],
+      "hip": [
+        0.0,
+        0.17000000178813934,
+        -0.05000000074505806
+      ],
+      "knee": [
+        -0.07345941662788391,
+        0.2027493715286255,
+        -0.15213322639465332
+      ],
+      "ankle": [
+        0.004999998956918716,
+        0.1899999976158142,
+        -0.2549999952316284
+      ],
+      "sole": [
+        -0.02500000037252903,
+        0.1899999976158142,
+        -0.3100000023841858
+      ]
+    }
+  },
+  "config": {
+    "id": "person7-upright-v1",
+    "status": "prototype-not-production",
+    "humanApproval": false,
+    "worldScale": 17.39130434782609,
+    "hipSocketSource": [
+      0,
+      0,
+      0
+    ],
+    "contactProfile": {
+      "source": "art-source/vehicle-riders/person7-upright/v1/person7-upright-v1.json",
+      "ownCopy": "person7-upright-v1.json",
+      "sha256": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3"
+    },
+    "explorerProfile": {
+      "source": "art-source/vehicle-riders/profiles/upright-v1.json",
+      "ownCopy": "explorer-upright-v1.json",
+      "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+    },
+    "identityInputs": {
+      "public/assets/sprites/person7.png": "939c90da29092dfa17246f45095fab50bd54a9e89b2d045f8a5abe05d10f0a1b"
+    },
+    "anatomy": {
+      "pelvisDimensions": [
+        0.25,
+        0.4,
+        0.12
+      ],
+      "torsoCenter": [
+        0,
+        0,
+        0.13
+      ],
+      "torsoDimensions": [
+        0.27,
+        0.48,
+        0.25
+      ],
+      "shoulderSource": [
+        -0.01,
+        0.22,
+        0.2
+      ],
+      "armLengthsSource": [
+        0.12,
+        0.12
+      ],
+      "wristInsetFromPalmSource": 0.055,
+      "hipJointSource": [
+        0,
+        0.17,
+        -0.05
+      ],
+      "legLengthsSource": [
+        0.13,
+        0.13
+      ],
+      "ankleFromSoleSource": [
+        0.03,
+        0,
+        0.055
+      ],
+      "palmRadii": [
+        0.058,
+        0.043,
+        0.052
+      ],
+      "bootDimensions": [
+        0.18,
+        0.15,
+        0.09
+      ],
+      "headCenter": [
+        -0.06,
+        0,
+        0.372
+      ],
+      "headDimensions": [
+        0.44,
+        0.67,
+        0.28
+      ],
+      "capCrownRings": [
+        [
+          0.615,
+          0.27,
+          0.36
+        ],
+        [
+          0.66,
+          0.3,
+          0.39
+        ],
+        [
+          0.79,
+          0.3,
+          0.39
+        ],
+        [
+          0.88,
+          0.24,
+          0.33
+        ],
+        [
+          0.94,
+          0.14,
+          0.22
+        ],
+        [
+          0.965,
+          0.07,
+          0.13
+        ]
+      ],
+      "capBandRings": [
+        [
+          0.49,
+          0.28,
+          0.37
+        ],
+        [
+          0.55,
+          0.31,
+          0.405
+        ],
+        [
+          0.62,
+          0.29,
+          0.38
+        ]
+      ],
+      "brimCenter": [
+        -0.13,
+        0,
+        0.535
+      ],
+      "brimRadii": [
+        0.175,
+        0.4,
+        0.028
+      ],
+      "lengthSemantics": "Fixed inferred joint-to-contact-center chain lengths; elbow-to-palm includes0.055source wrist/palm offset. They are not an observed biological skeleton."
+    },
+    "inference": {
+      "meaning": "Legacy sprite measures are observational, not a unique3D skeleton. Own large stacked cap, pale broad head and tiny jacket/legs are constructed at shared world ruler. No Explorer geometry or wardrobe recolor.",
+      "nativeScale": "Source visible front24px vs Explorer25 and Bear24 standing, but cap/head/torso/limb allocation differs sharply. Seated GLB dimensions derive part ratios and inferred depth, not normalized physicalHeight24 metadata.",
+      "uncertainty": "Depth, hidden joints and flexion inferred. Test original profile with fixed lengths before proposing any own profile. Other poses/leaning anatomy may change reach.",
+      "headDepthRefinement": "Forward head depth and cap bill inferred from2D were refined to reveal the small pale face beneath actual hat geometry. Source frontal widths, cap height and fixed short limb lengths unchanged. No view-dependent fitting."
+    },
+    "render": {
+      "nativeSize": 224,
+      "radius": 112,
+      "worldDensity": "80/4.6 unchanged",
+      "origin": "Local pelvis center, not bike mount",
+      "studyDegrees": 50
+    },
+    "fixture": {
+      "gripRadiusWorld": 0.3,
+      "gripLengthWorld": 1.4
+    },
+    "limits": [
+      "One Person7 legacy human source prerequisite; no20-person rollout",
+      "Synthetic fixture only, no actual bike/normal/all-avatar/AI/fallback qualification"
+    ],
+    "profileFeasibility": "Original Explorer profile failed fixed inferred legacy chain reach; separately named Person7 profile proposed, not globally approved.",
+    "scaleControls": [
+      {
+        "id": "explorer-upright",
+        "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+        "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+        "viewerFile": "explorer-upright-control.glb",
+        "screenHorizontalOffsetWorld": -52,
+        "role": "Read-only native-world ruler control, never rider constructor input"
+      },
+      {
+        "id": "bear-upright",
+        "path": "art-source/vehicle-riders/bear-upright/v1/rider.glb",
+        "sha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+        "viewerFile": "bear-upright-control.glb",
+        "screenHorizontalOffsetWorld": 52,
+        "role": "Read-only native-world ruler control, never rider constructor input"
+      }
+    ]
+  },
+  "palette": {
+    "k": "#3a3a50",
+    "t": "#57969d",
+    "c": "#4d8398",
+    "s": "#426a8a",
+    "j": "#46465e",
+    "d": "#394460",
+    "h": "#706663",
+    "w": "#ffcbb0",
+    "b": "#6c95b7",
+    "l": "#6daec3",
+    "O": "#c3bc6d",
+    "o": "#bba05c",
+    "p": "#f6ae9f",
+    "H": "#957350",
+    "q": "#f69784",
+    "r": "#9f462a",
+    "R": "#da6a2e",
+    "x": "#6779b3",
+    "y": "#959d58",
+    "z": "#3d457b",
+    "a": "#79746f",
+    "u": "#e1b49c",
+    "v": "#d3a38d",
+    "n": "#6c5981"
+  },
+  "components": [
+    {
+      "name": "Person7 trouser pelvis",
+      "triangles": 108,
+      "semanticOwner": "Person7 trouser pelvis"
+    },
+    {
+      "name": "Person7 upper arm left",
+      "triangles": 28,
+      "semanticOwner": "Person7 upper arm left"
+    },
+    {
+      "name": "Person7 elbow left",
+      "triangles": 64,
+      "semanticOwner": "Person7 elbow left"
+    },
+    {
+      "name": "Person7 forearm left",
+      "triangles": 28,
+      "semanticOwner": "Person7 forearm left"
+    },
+    {
+      "name": "Person7 gripping palm left",
+      "triangles": 100,
+      "semanticOwner": "Person7 gripping palm left"
+    },
+    {
+      "name": "Person7 bent thigh left",
+      "triangles": 28,
+      "semanticOwner": "Person7 bent thigh left"
+    },
+    {
+      "name": "Person7 knee left",
+      "triangles": 64,
+      "semanticOwner": "Person7 knee left"
+    },
+    {
+      "name": "Person7 short shin left",
+      "triangles": 28,
+      "semanticOwner": "Person7 short shin left"
+    },
+    {
+      "name": "Person7 boot left",
+      "triangles": 108,
+      "semanticOwner": "Person7 boot left"
+    },
+    {
+      "name": "Person7 upper arm right",
+      "triangles": 28,
+      "semanticOwner": "Person7 upper arm right"
+    },
+    {
+      "name": "Person7 elbow right",
+      "triangles": 64,
+      "semanticOwner": "Person7 elbow right"
+    },
+    {
+      "name": "Person7 forearm right",
+      "triangles": 28,
+      "semanticOwner": "Person7 forearm right"
+    },
+    {
+      "name": "Person7 gripping palm right",
+      "triangles": 100,
+      "semanticOwner": "Person7 gripping palm right"
+    },
+    {
+      "name": "Person7 bent thigh right",
+      "triangles": 28,
+      "semanticOwner": "Person7 bent thigh right"
+    },
+    {
+      "name": "Person7 knee right",
+      "triangles": 64,
+      "semanticOwner": "Person7 knee right"
+    },
+    {
+      "name": "Person7 short shin right",
+      "triangles": 28,
+      "semanticOwner": "Person7 short shin right"
+    },
+    {
+      "name": "Person7 boot right",
+      "triangles": 108,
+      "semanticOwner": "Person7 boot right"
+    },
+    {
+      "name": "Person7 jacket torso UV owner",
+      "triangles": 108,
+      "semanticOwner": "Person7 jacket torso UV owner"
+    },
+    {
+      "name": "Person7 neck",
+      "triangles": 64,
+      "semanticOwner": "Person7 neck"
+    },
+    {
+      "name": "Person7 face UV owner",
+      "triangles": 168,
+      "semanticOwner": "Person7 face UV owner"
+    },
+    {
+      "name": "Person7 tall teal cap crown UV owner",
+      "triangles": 188,
+      "semanticOwner": "Person7 tall teal cap crown UV owner"
+    },
+    {
+      "name": "Person7 stacked cap band UV owner",
+      "triangles": 92,
+      "semanticOwner": "Person7 stacked cap band UV owner"
+    },
+    {
+      "name": "Person7 projecting fixed cap brim",
+      "triangles": 168,
+      "semanticOwner": "Person7 projecting fixed cap brim"
+    },
+    {
+      "name": "Person7 small face nose",
+      "triangles": 64,
+      "semanticOwner": "Person7 small face nose"
+    },
+    {
+      "name": "Person7 ear -1",
+      "triangles": 64,
+      "semanticOwner": "Person7 ear -1"
+    },
+    {
+      "name": "Person7 ear 1",
+      "triangles": 64,
+      "semanticOwner": "Person7 ear 1"
+    }
+  ],
+  "semanticUV": "Own Person7 source face charts on volumetric head; continuous crown/band UVs with orange accent, blue/teal jacket skin charts and olive trouser/boot palette ownership. No standing billboard or coincident paint planes.",
+  "masterMeaning": "Editable named semantic components at runtime topology; no skeletal animation/high-to-low claim",
+  "sourceDependencies": [
+    "build.py",
+    "rider.json",
+    "identity.json",
+    "explorer-upright-v1.json",
+    "person7-upright-v1.json"
+  ],
+  "scratchInputDependencies": [],
+  "immutableContactProfile": {
+    "schema": "tilefun-seated-rider-profile-v1",
+    "id": "person7-upright-measured-v1",
+    "status": "proposed-legacy-profile-prototype-not-production",
+    "units": "World logical pixels, before game rigid basis conversion",
+    "forwardBlender": "-X",
+    "upBlender": "+Z",
+    "origin": "Local inferred Person7 pelvis center; actual bike mount not provided",
+    "contacts": {
+      "hip_saddle": [
+        0.0,
+        0.0,
+        -1.0434782608695654
+      ],
+      "hand_left_grip": [
+        -3.8260869565217397,
+        -4.260869565217392,
+        3.304347826086957
+      ],
+      "hand_right_grip": [
+        -3.8260869565217397,
+        4.260869565217392,
+        3.304347826086957
+      ],
+      "foot_left_support": [
+        -0.4347826086956523,
+        -3.304347826086957,
+        -5.391304347826088
+      ],
+      "foot_right_support": [
+        -0.4347826086956523,
+        3.304347826086957,
+        -5.391304347826088
+      ]
+    },
+    "semantics": {
+      "hip_saddle": "Pelvis bottom contact on actual saddle surface",
+      "hands": "Grip centerline anchors; deliberate palm wrap is a declared contact exception",
+      "feet": "Sole tangent points on actual top of foot support, not peg centerline"
+    },
+    "inferredContactSource": {
+      "hip_saddle": [
+        0,
+        0,
+        -0.06
+      ],
+      "hand_left_grip": [
+        -0.22,
+        -0.245,
+        0.19
+      ],
+      "hand_right_grip": [
+        -0.22,
+        0.245,
+        0.19
+      ],
+      "foot_left_support": [
+        -0.025,
+        -0.19,
+        -0.31
+      ],
+      "foot_right_support": [
+        -0.025,
+        0.19,
+        -0.31
+      ]
+    },
+    "basis": "Separate measured compact legacy Person7 profile after actual fixed-chain Explorer profile failure. No limb/body scaling or global target edits.",
+    "uncertainty": "2D sprite does not specify unique hidden skeleton or depth. Conditional on this upright template; other anatomy/leaning poses not ruled out.",
+    "limits": [
+      "One static Person7 legacy human prerequisite only",
+      "Synthetic fixture is not a bike; no production/normal/20-person/all-avatar/AI/fallback qualification"
+    ]
+  },
+  "profileSha256": "65ec7db152e47f2b622f8babf7fd2b9c236dc7d0ea6d4a9bd73832c278b192d3",
+  "deterministicIndexOrder": "Winding-preserving cyclic-start and triangle-order canonicalization after export; vertex/normal/UV/image buffers untouched. Opaque static single mesh; geometry unchanged."
+}

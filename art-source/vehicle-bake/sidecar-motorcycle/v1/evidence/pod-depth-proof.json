@@ -1,0 +1,188 @@
+{
+  "status": "passed",
+  "glbSha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+  "results": [
+    {
+      "input": "art-source/vehicle-bake/sidecar-motorcycle/v1/master.blend",
+      "sha256": "2cc2ff00ea3bbcd02023d9b901168a5bb225a7fa2121a0cc56832ef1a915720a",
+      "status": "passed",
+      "allCandidateTriangles": 3418,
+      "actualFloorRays": [
+        {
+          "xySource": [
+            -0.2,
+            0.24999999999999997
+          ],
+          "actualFloorZSource": 0.4100000262260437,
+          "depthBelowRimSource": 0.4699999737739563
+        },
+        {
+          "xySource": [
+            -0.2,
+            0.44999999999999996
+          ],
+          "actualFloorZSource": 0.4099999666213989,
+          "depthBelowRimSource": 0.4700000333786011
+        },
+        {
+          "xySource": [
+            0,
+            0.24999999999999997
+          ],
+          "actualFloorZSource": 0.4100000262260437,
+          "depthBelowRimSource": 0.4699999737739563
+        },
+        {
+          "xySource": [
+            0,
+            0.44999999999999996
+          ],
+          "actualFloorZSource": 0.40999990701675415,
+          "depthBelowRimSource": 0.47000009298324585
+        },
+        {
+          "xySource": [
+            0.2,
+            0.24999999999999997
+          ],
+          "actualFloorZSource": 0.4100000262260437,
+          "depthBelowRimSource": 0.4699999737739563
+        },
+        {
+          "xySource": [
+            0.2,
+            0.44999999999999996
+          ],
+          "actualFloorZSource": 0.40999990701675415,
+          "depthBelowRimSource": 0.47000009298324585
+        }
+      ],
+      "actualSeatRays": [
+        {
+          "xySource": [
+            0.55,
+            0.24999999999999997
+          ],
+          "actualSeatTopSource": 0.6700000166893005,
+          "actualFloorBelowSeatSource": 0.4099999964237213,
+          "seatAboveFloorSource": 0.2600000202655792
+        },
+        {
+          "xySource": [
+            0.55,
+            0.44999999999999996
+          ],
+          "actualSeatTopSource": 0.6700000166893005,
+          "actualFloorBelowSeatSource": 0.4099999964237213,
+          "seatAboveFloorSource": 0.2600000202655792
+        }
+      ],
+      "fillNegative": {
+        "addedTriangles": 2,
+        "candidateTrianglesRemoved": 0,
+        "blockedFloorRays": 6,
+        "rejected": true,
+        "baselineRestoredExact": true
+      },
+      "sourceBytesUnchanged": true,
+      "actualFixedAxleAttachment": {
+        "matchingStubEndVertices": 8,
+        "gapSource": 0.008999943733215332,
+        "gapWorldPixels": 0.15652076057765799,
+        "subpixelAttachedGap": true
+      }
+    },
+    {
+      "input": "public/demos/vehicle-bake/sidecar-motorcycle/v1/model.glb",
+      "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+      "status": "passed",
+      "allCandidateTriangles": 3418,
+      "actualFloorRays": [
+        {
+          "xySource": [
+            -0.2,
+            0.24999999999999997
+          ],
+          "actualFloorZSource": 0.4099999570846557,
+          "depthBelowRimSource": 0.4700000429153443
+        },
+        {
+          "xySource": [
+            -0.2,
+            0.44999999999999996
+          ],
+          "actualFloorZSource": 0.4099999570846557,
+          "depthBelowRimSource": 0.4700000429153443
+        },
+        {
+          "xySource": [
+            0,
+            0.24999999999999997
+          ],
+          "actualFloorZSource": 0.4099999570846557,
+          "depthBelowRimSource": 0.4700000429153443
+        },
+        {
+          "xySource": [
+            0,
+            0.44999999999999996
+          ],
+          "actualFloorZSource": 0.4099999570846557,
+          "depthBelowRimSource": 0.4700000429153443
+        },
+        {
+          "xySource": [
+            0.2,
+            0.24999999999999997
+          ],
+          "actualFloorZSource": 0.4099999570846557,
+          "depthBelowRimSource": 0.4700000429153443
+        },
+        {
+          "xySource": [
+            0.2,
+            0.44999999999999996
+          ],
+          "actualFloorZSource": 0.4099999570846557,
+          "depthBelowRimSource": 0.4700000429153443
+        }
+      ],
+      "actualSeatRays": [
+        {
+          "xySource": [
+            0.55,
+            0.24999999999999997
+          ],
+          "actualSeatTopSource": 0.6700000047683715,
+          "actualFloorBelowSeatSource": 0.4099999845027923,
+          "seatAboveFloorSource": 0.2600000202655792
+        },
+        {
+          "xySource": [
+            0.55,
+            0.44999999999999996
+          ],
+          "actualSeatTopSource": 0.6700000596046447,
+          "actualFloorBelowSeatSource": 0.4099999845027923,
+          "seatAboveFloorSource": 0.2600000751018524
+        }
+      ],
+      "fillNegative": {
+        "addedTriangles": 2,
+        "candidateTrianglesRemoved": 0,
+        "blockedFloorRays": 6,
+        "rejected": true,
+        "baselineRestoredExact": true
+      },
+      "sourceBytesUnchanged": true,
+      "actualFixedAxleAttachment": {
+        "matchingStubEndVertices": 24,
+        "gapSource": 0.009000003337860107,
+        "gapWorldPixels": 0.1565217971801758,
+        "subpixelAttachedGap": true
+      }
+    }
+  ],
+  "emptyPassengerWell": true,
+  "noPassengerFunctionOrArticulationClaim": true
+}

@@ -1,0 +1,713 @@
+{
+  "status": "passed",
+  "glbSha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+  "riderSha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+  "inputHashes": {
+    "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/master.blend": "719c8d087f6f3e1a5ce10ac22b05f4c8ea664e2154f3e2f760dee2f6fcd6c1bb",
+    "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/model.glb": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+    "art-source/vehicle-riders/person7-upright/v1/master.blend": "4e7e3894ce4a68c08ef86a8fd9a911b78c682ae6f7a635a4c3120831e55a1d80",
+    "art-source/vehicle-riders/person7-upright/v1/rider.glb": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99"
+  },
+  "riderTrianglesMatchedToNamedMaster": 1984,
+  "bikeFixedTrianglesMatchedToNamedMaster": 1634,
+  "baseline": {
+    "status": "passed",
+    "pairs": [
+      {
+        "bikeOwner": "Actual dark saddle central hip tangent",
+        "riderOwner": "Person7 trouser pelvis",
+        "intersectionTrianglePairs": 13,
+        "intersectionPoints": 26,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip left",
+        "riderOwner": "Person7 gripping palm left",
+        "intersectionTrianglePairs": 56,
+        "intersectionPoints": 128,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip right",
+        "riderOwner": "Person7 gripping palm right",
+        "intersectionTrianglePairs": 56,
+        "intersectionPoints": 128,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      }
+    ],
+    "inappropriatePairs": []
+  },
+  "negative": {
+    "translationSource": [
+      -0.28,
+      0,
+      -0.22
+    ],
+    "actualTankCollisionDetected": true,
+    "inappropriatePairs": [
+      {
+        "bikeOwner": "Rounded teal tank actual cream side UV panels",
+        "riderOwner": "Person7 trouser pelvis",
+        "intersectionTrianglePairs": 28,
+        "intersectionPoints": 56,
+        "bikeVerticesInsideClosedRiderPart": 3,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 59,
+        "unallowedExamplesWorld": [
+          [
+            -4.086325168609619,
+            -0.7561557292938232,
+            16.008695602416992
+          ],
+          [
+            -4.101884365081787,
+            -0.8048039078712463,
+            16.008695602416992
+          ],
+          [
+            -4.101884841918945,
+            0.8048039674758911,
+            16.008695602416992
+          ],
+          [
+            -4.086325168609619,
+            0.7561556696891785,
+            16.008695602416992
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded teal tank actual cream side UV panels",
+        "riderOwner": "Person7 jacket torso UV owner",
+        "intersectionTrianglePairs": 48,
+        "intersectionPoints": 96,
+        "bikeVerticesInsideClosedRiderPart": 21,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 117,
+        "unallowedExamplesWorld": [
+          [
+            -4.024648666381836,
+            -0.7724505662918091,
+            19.399999618530273
+          ],
+          [
+            -4.34782600402832,
+            -1.142303466796875,
+            19.399999618530273
+          ],
+          [
+            -4.34782600402832,
+            1.142303466796875,
+            19.399999618530273
+          ],
+          [
+            -4.024648189544678,
+            0.7724505662918091,
+            19.399999618530273
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded teal tank actual cream side UV panels",
+        "riderOwner": "Person7 neck",
+        "intersectionTrianglePairs": 36,
+        "intersectionPoints": 72,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 24,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 96,
+        "unallowedExamplesWorld": [
+          [
+            -4.760951042175293,
+            0.9544174075126648,
+            19.79125213623047
+          ],
+          [
+            -4.676445960998535,
+            1.005448341369629,
+            19.695581436157227
+          ],
+          [
+            -5.006345748901367,
+            1.1762595176696777,
+            19.609722137451172
+          ],
+          [
+            -4.676445960998535,
+            1.0054481029510498,
+            19.695581436157227
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded teal tank actual cream side UV panels",
+        "riderOwner": "Person7 face UV owner",
+        "intersectionTrianglePairs": 41,
+        "intersectionPoints": 82,
+        "bikeVerticesInsideClosedRiderPart": 6,
+        "riderVerticesInsideClosedBikePart": 11,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 99,
+        "unallowedExamplesWorld": [
+          [
+            -4.042811393737793,
+            -0.7800588011741638,
+            19.416358947753906
+          ],
+          [
+            -4.34782600402832,
+            -1.2078189849853516,
+            19.31867027282715
+          ],
+          [
+            -4.34782600402832,
+            1.2078192234039307,
+            19.31867027282715
+          ],
+          [
+            -4.042811393737793,
+            0.780058741569519,
+            19.416358947753906
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded teal tank actual cream side UV panels",
+        "riderOwner": "Person7 small face nose",
+        "intersectionTrianglePairs": 22,
+        "intersectionPoints": 45,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 11,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 56,
+        "unallowedExamplesWorld": [
+          [
+            -9.42109489440918,
+            1.4841205728999458e-16,
+            20.747926712036133
+          ],
+          [
+            -9.458412170410156,
+            0.11583118885755539,
+            20.707061767578125
+          ],
+          [
+            -9.51889705657959,
+            0.3035748600959778,
+            20.640827178955078
+          ],
+          [
+            -9.63153076171875,
+            0.47374579310417175,
+            20.577171325683594
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual narrow saddle nose",
+        "riderOwner": "Person7 jacket torso UV owner",
+        "intersectionTrianglePairs": 18,
+        "intersectionPoints": 36,
+        "bikeVerticesInsideClosedRiderPart": 12,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 48,
+        "unallowedExamplesWorld": [
+          [
+            -2.5217387676239014,
+            1.159420371055603,
+            16.559419631958008
+          ],
+          [
+            -2.5217387676239014,
+            1.04347825050354,
+            16.443477630615234
+          ],
+          [
+            -2.5217387676239014,
+            1.275362253189087,
+            17.34202766418457
+          ],
+          [
+            -2.5217387676239014,
+            1.04347825050354,
+            17.573911666870117
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Exposed single cylinder broad block",
+        "riderOwner": "Person7 trouser pelvis",
+        "intersectionTrianglePairs": 35,
+        "intersectionPoints": 70,
+        "bikeVerticesInsideClosedRiderPart": 6,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 76,
+        "unallowedExamplesWorld": [
+          [
+            -3.217391014099121,
+            -1.56521737575531,
+            13.957756996154785
+          ],
+          [
+            -3.304347515106201,
+            -1.6521738767623901,
+            13.921738624572754
+          ],
+          [
+            -3.364988327026367,
+            -1.7128145694732666,
+            13.921738624572754
+          ],
+          [
+            -3.304347515106201,
+            -1.6521737575531006,
+            13.921738624572754
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Exposed single cylinder broad block",
+        "riderOwner": "Person7 jacket torso UV owner",
+        "intersectionTrianglePairs": 21,
+        "intersectionPoints": 46,
+        "bikeVerticesInsideClosedRiderPart": 2,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 48,
+        "unallowedExamplesWorld": [
+          [
+            -3.6521735191345215,
+            -1.9913053512573242,
+            15.052172660827637
+          ],
+          [
+            -3.350883960723877,
+            -1.56521737575531,
+            15.176970481872559
+          ],
+          [
+            -3.6521735191345215,
+            -1.9913054704666138,
+            15.052172660827637
+          ],
+          [
+            -3.350883960723877,
+            -1.56521737575531,
+            15.176970481872559
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Broad engine cooling fin 0.8",
+        "riderOwner": "Person7 trouser pelvis",
+        "intersectionTrianglePairs": 24,
+        "intersectionPoints": 48,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 48,
+        "unallowedExamplesWorld": [
+          [
+            -6.866987705230713,
+            -2.17391300201416,
+            14.104347229003906
+          ],
+          [
+            -6.865195274353027,
+            -2.17391300201416,
+            14.100020408630371
+          ],
+          [
+            -2.879584789276123,
+            -2.17391300201416,
+            14.09768009185791
+          ],
+          [
+            -2.873934745788574,
+            -2.17391300201416,
+            14.100020408630371
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Broad engine cooling fin 0.8",
+        "riderOwner": "Person7 bent thigh left",
+        "intersectionTrianglePairs": 12,
+        "intersectionPoints": 24,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 25,
+        "unallowedExamplesWorld": [
+          [
+            -5.230555534362793,
+            -2.17391300201416,
+            14.104347229003906
+          ],
+          [
+            -5.063500881195068,
+            -2.17391300201416,
+            13.984192848205566
+          ],
+          [
+            -5.37522554397583,
+            -2.17391300201416,
+            14.104347229003906
+          ],
+          [
+            -5.417420864105225,
+            -2.17391300201416,
+            13.959432601928711
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Broad engine cooling fin 0.8",
+        "riderOwner": "Person7 bent thigh right",
+        "intersectionTrianglePairs": 11,
+        "intersectionPoints": 22,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 23,
+        "unallowedExamplesWorld": [
+          [
+            -5.230555534362793,
+            2.17391300201416,
+            14.104347229003906
+          ],
+          [
+            -5.270489692687988,
+            2.0843372344970703,
+            14.104347229003906
+          ],
+          [
+            -5.2704901695251465,
+            2.0843372344970703,
+            14.104347229003906
+          ],
+          [
+            -5.273842811584473,
+            2.0768167972564697,
+            14.104347229003906
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Broad engine cooling fin 0.85",
+        "riderOwner": "Person7 trouser pelvis",
+        "intersectionTrianglePairs": 10,
+        "intersectionPoints": 20,
+        "bikeVerticesInsideClosedRiderPart": 4,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 24,
+        "unallowedExamplesWorld": [
+          [
+            -7.043478012084961,
+            -2.17391300201416,
+            14.973913192749023
+          ],
+          [
+            -7.043478012084961,
+            -2.17391300201416,
+            14.680978775024414
+          ],
+          [
+            -7.043478012084961,
+            -2.17391300201416,
+            14.591304779052734
+          ],
+          [
+            -7.043478012084961,
+            -1.1548911333084106,
+            14.591304779052734
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Narrow tubular frame member 3",
+        "riderOwner": "Person7 trouser pelvis",
+        "intersectionTrianglePairs": 30,
+        "intersectionPoints": 60,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 60,
+        "unallowedExamplesWorld": [
+          [
+            -3.054685592651367,
+            0.4594306945800781,
+            15.905282020568848
+          ],
+          [
+            -3.304347515106201,
+            0.4985809326171875,
+            16.008695602416992
+          ],
+          [
+            -5.046781539916992,
+            0.4730483889579773,
+            16.008695602416992
+          ],
+          [
+            -3.304347515106201,
+            0.4985811710357666,
+            16.008695602416992
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Narrow tubular frame member 3",
+        "riderOwner": "Person7 jacket torso UV owner",
+        "intersectionTrianglePairs": 40,
+        "intersectionPoints": 80,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 80,
+        "unallowedExamplesWorld": [
+          [
+            -7.217391014099121,
+            -0.2924678921699524,
+            16.604000091552734
+          ],
+          [
+            -7.217390537261963,
+            -0.3689252436161041,
+            16.572311401367188
+          ],
+          [
+            -2.5217390060424805,
+            -0.2043418437242508,
+            16.474308013916016
+          ],
+          [
+            -2.521738052368164,
+            -0.3689252436161041,
+            16.40609359741211
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Narrow tubular frame member 4",
+        "riderOwner": "Person7 trouser pelvis",
+        "intersectionTrianglePairs": 40,
+        "intersectionPoints": 80,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 80,
+        "unallowedExamplesWorld": [
+          [
+            -7.043478488922119,
+            0.15303371846675873,
+            15.36751651763916
+          ],
+          [
+            -7.043478012084961,
+            0.09330296516418457,
+            15.399998664855957
+          ],
+          [
+            -7.027936935424805,
+            9.584191694816699e-17,
+            15.437519073486328
+          ],
+          [
+            -7.043478012084961,
+            0.09331560134887695,
+            15.399998664855957
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Headstock to actual grip riser",
+        "riderOwner": "Person7 face UV owner",
+        "intersectionTrianglePairs": 21,
+        "intersectionPoints": 42,
+        "bikeVerticesInsideClosedRiderPart": 8,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 51,
+        "unallowedExamplesWorld": [
+          [
+            -8.849787712097168,
+            0.3074377477169037,
+            19.984933853149414
+          ],
+          [
+            -8.825048446655273,
+            0.18850132822990417,
+            19.94144058227539
+          ],
+          [
+            -8.825048446655273,
+            0.18850132822990417,
+            19.94144058227539
+          ],
+          [
+            -8.785840034484863,
+            5.193572292228055e-07,
+            19.872509002685547
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Headstock to actual grip riser",
+        "riderOwner": "Person7 small face nose",
+        "intersectionTrianglePairs": 14,
+        "intersectionPoints": 28,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 30,
+        "unallowedExamplesWorld": [
+          [
+            -9.62177562713623,
+            0.09884624183177948,
+            20.45492172241211
+          ],
+          [
+            -9.696742057800293,
+            0.16924349963665009,
+            20.397348403930664
+          ],
+          [
+            -9.896677017211914,
+            0.13284419476985931,
+            20.342330932617188
+          ],
+          [
+            -10.0,
+            0.09298936277627945,
+            20.323148727416992
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual connected handlebar centerline",
+        "riderOwner": "Person7 face UV owner",
+        "intersectionTrianglePairs": 0,
+        "intersectionPoints": 0,
+        "bikeVerticesInsideClosedRiderPart": 24,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 24,
+        "unallowedExamplesWorld": [
+          [
+            -3.5097994804382324,
+            -3.13043475151062,
+            21.913042068481445
+          ],
+          [
+            -3.460869789123535,
+            3.13043475151062,
+            22.095651626586914
+          ],
+          [
+            -3.460869789123535,
+            -3.13043475151062,
+            22.095651626586914
+          ],
+          [
+            -3.6434783935546875,
+            -3.13043475151062,
+            21.779361724853516
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip left",
+        "riderOwner": "Person7 face UV owner",
+        "intersectionTrianglePairs": 30,
+        "intersectionPoints": 60,
+        "bikeVerticesInsideClosedRiderPart": 12,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 72,
+        "unallowedExamplesWorld": [
+          [
+            -3.9739131927490234,
+            -4.409653186798096,
+            22.351694107055664
+          ],
+          [
+            -4.016473293304443,
+            -4.502132892608643,
+            22.309133529663086
+          ],
+          [
+            -3.6782610416412354,
+            -4.292407512664795,
+            21.83960723876953
+          ],
+          [
+            -3.6195569038391113,
+            -4.1648478507995605,
+            21.898311614990234
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip right",
+        "riderOwner": "Person7 face UV owner",
+        "intersectionTrianglePairs": 30,
+        "intersectionPoints": 60,
+        "bikeVerticesInsideClosedRiderPart": 12,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 72,
+        "unallowedExamplesWorld": [
+          [
+            -4.042250156402588,
+            4.558144569396973,
+            22.283355712890625
+          ],
+          [
+            -4.02922248840332,
+            4.529836177825928,
+            22.296384811401367
+          ],
+          [
+            -3.9739131927490234,
+            4.409653186798096,
+            22.351694107055664
+          ],
+          [
+            -4.02922248840332,
+            4.529836177825928,
+            22.296384811401367
+          ]
+        ]
+      }
+    ],
+    "resetExact": true
+  },
+  "exceptions": {
+    "hipHalfExtentXY": [
+      0.13,
+      0.15
+    ],
+    "surfaceZTolerance": 0.002,
+    "palmRadius": 0.075,
+    "soleRadius": 0.1
+  },
+  "unchangedRiderSelfJoins": "Immutable accepted configured rider anatomy; separate family-local replay of original self/joint/straddle controls retained."
+}

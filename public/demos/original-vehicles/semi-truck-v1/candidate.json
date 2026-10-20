@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "semi-truck-v1",
+      "name": "Semi-truck and box trailer",
+      "title": "Semi-truck and box trailer \u00b7 autonomous original v1",
+      "nativeSize": 288,
+      "engineRadius": 144.0,
+      "dimensions": [
+        288,
+        288
+      ],
+      "groundOrigins": {
+        "study": [
+          144,
+          172
+        ],
+        "engine": [
+          144,
+          144
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Own rigid purple tractor and long cream/teal box trailer with distinct actual UV owners, real open coupling gap/fifth-wheel/frame bridge, six covered independent road wheels and two restrained fixed silver stacks below trailer roof. No articulation/hitch/separate trailer physics or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 3748,
+        "vertices": 7426,
+        "meshes": 7,
+        "primitives": 7,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 264932,
+        "sha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "ML": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "MR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.695652173913045,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/atlas.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/atlas.png",
+          "sha256": "c70cd3564989f7a62499cb7a1639c273adb98419feef23c1dca396dda18954d8"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/capture.json",
+          "sha256": "e58d6455da862682a4e30feca9308ed10cbc7496c37f28f04d6dbb26f94ee6e1"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "34d4c0557e71ea968c6b06f871b7a1d0c26427b57970e66ce30172b27074e641"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "0cef1f3fd57498f3bf7aad4f97c98a8c85d07934de97a5ca84974884d7fdbe09"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "8b846c379b49c31083440ceeb783fec8a30aa2948e0111ba6464d33b643fb22c"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "37bf95422e32edc56407c94fa98f91e399595665069568fda44bd5532b5c49d0"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "514b963b4b8c95875425a8e3b3b9c83cfacba95b59acd81955c6ee0c6022a080"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "f0c39874a93810bcebf197dfce71d25a420708412f66837a731f80c96072da5e"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "7f101905b1e2c147fd5a08e5a398d1aafe86ecb6288894661d4407cae32bdece"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "5961fd60442ff1e430beb35186e5abc3105ff80e8f32d2baa3344c2ff3935648"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "2b888519d0593f12216068d883453778f9098c4e55d4bd0455736e33e53e1e9e"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "b3b1682fab9c77a4ae974f1ad0a3d121ccb062527c4071a354fe38b132675ff9"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "56c0423607de39a822d0db0108a7205774a7e603a4546729ced4a63bd0bd1a77"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "11d043de8ab9d680c8f29e74372a421ea9fb2f41d089b3489a188583538ceffa"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "a93660ab76e6e5a80d549bd81eaa894ee47292b50b66bcff15325096a7ad4667"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "2c38cd3a474d4b9d6c39d71de623c35fd09a1de0879a4c24d163a7988b8268dd"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "b8f2a18b7bce169776fcb7e57bdd87365f63c5db7439ef81fdb2f4544b016bb5"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "6d87b1b949cde9553bcabb2925c629a03a4a9d7a1a629f477f6d2a647ce0d731"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "2b888519d0593f12216068d883453778f9098c4e55d4bd0455736e33e53e1e9e"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "9760945de7fa2139b25fb2064947a515384851ffac4b70beec0f7a67cb4afb78"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "cba3db689d1703900343bda768d20b415c9bbd2bc4529eaf816622ee79d97db3"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "f2e3068435fd27fc1f227f8f7c994a1bc0e31a7cb3bca49afdc026cfe5304eeb"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "454e831239fb2e24db14dde780290b479ba167a83f5de492dbd74985322f3ade"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "7d8f3277a4c19a891ff254c9f0017cdef57dae8870173cb7858b95c9f527aafb"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "fe5640466de5ce1265cee24b78678e2a4053eae4631d92cf43c277f9a8632982"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "9ccd6f2daba6a3d165f8f2db6916da1ca1190fa0c681183f34c572a498a11386"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "b38a2f0e02a6891c31ce62bcdebd8132cbb3afa6fca3436757556097a6cf7f7a"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "bab838a5497fcb0ce1abb89b91abe09ec8348ebc4817a0e307cd822e25571991"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "94be0964a86820c3129face3265757b1fa135b3370dd5cf479e1cc2de30a15fe"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "f82c2c60ec4ce0295bd258896302f6249802c42cd5837fb8d307840833dfa8b1"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "251b466afdbe3219b361aa0540a25a565f1521d9889aa84f6df3594260b78236"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "6cda8725cfdccede583fc69277a37392979d2e85d17e95ebf92cb204eaebaa43"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "e5e9c5c477d6c299f218bbf24304889e171349a2bccfb4beaba86f5e70a54d4f"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "53fd57b69985f64e3fa96c705379e8680c51b278b8f694bfcc4f18d6b4b339a4"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "cb5cb597ac80b242e926bbe9d649bd6ee4884e409df5a076146aaf8f099b4afe"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "0e17233d06bc194d362cea871f8b382302d8fc1fdea980db4600211153f4474b"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "bea38dc9af1ce1ee10ebf75ea1cda94636e0c87a33375f1916ae9fa05ba3577d"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-0.png",
+          "sha256": "4535cfd6711dc2fc5902add9dec6e412b0bfe143a6a9b808a2af651440ed216c"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-1.png",
+          "sha256": "3e096c9487a41e1d46652cbd3f90833409d3ae89daac443d2a5fe5baf1fdc54c"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-10.png",
+          "sha256": "d4785d7740ac23b075d88fb5e0ae96770f55f165b23367171599b9d05ab497c8"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-11.png",
+          "sha256": "8d6cce558d23cc95416b7ea2709977958aa221a1a134aab33e9270887ffb931c"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-12.png",
+          "sha256": "0a98e6ab8fff783ca478ca21b35c2e7a840496c483daede10bbfef6c0f93be54"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-13.png",
+          "sha256": "983f3887e8ffa07701d4a5ccaf70e1b25d5d8ea0878bf78fa808eb75280a04ee"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-14.png",
+          "sha256": "eb054b53175da18cf2acb6147dfaaca6def41a955845ed1e99f22f26d45101af"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-15.png",
+          "sha256": "f627e0f3daa1ef63ebb50b166d4b2d0d4dca0bbfeddf64cd5cf2c35e076adce7"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-2.png",
+          "sha256": "f82c2c60ec4ce0295bd258896302f6249802c42cd5837fb8d307840833dfa8b1"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-3.png",
+          "sha256": "f9dbce6034463e5273c9eeb02a9afb724b437bd2b470dc0e78a67197ccee4df0"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-4.png",
+          "sha256": "8af4faf2f0f631e32acf432feb283ceb9e937a854e419819610256da52375273"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-5.png",
+          "sha256": "7b414139b571a5f6b9519dcf68fafa890c7dcb5ad2e2b47cec767a0f2c8c7e24"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-6.png",
+          "sha256": "a4f6f8313dfec11989982265296e8c2ee22b109010b9cee1abf8009c28e3442a"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-7.png",
+          "sha256": "63e2c67c446b7dbba4b6b15cc4b51bd7ffe4710966430a0773012a9e6d71bb89"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-8.png",
+          "sha256": "b80a2fc4c71afff5ef4e4cc11a6a1c0b96babe2adf76a6d9681a284227aa81f7"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/study-9.png",
+          "sha256": "3352201ddb8fb9926241366ff93af69820680ef96e25ea9d31a3e37b27f8f1d6"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "274ed9aa8b11b025b33484e7c486562d9254f3cbd69c010b95df9b7cacaeba8d"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "574c4d3a2adc1ff3d756eca4ca073ec1b48cf0e19b6f6c27dcb6f39321191ae5"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/model.glb",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/model.glb",
+          "sha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/recipe.json",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/recipe.json",
+          "sha256": "6d4a0386eea50a9fe5fafd0db6bfabc5662ebcf8ec43017f86e1d18424220a6e"
+        },
+        {
+          "source": "demos/vehicle-bake/semi-truck/v1/report.json",
+          "retained": "demos/original-vehicles/semi-truck-v1/inputs/report.json",
+          "sha256": "fe8eea494312ee5272ba17208b386ca76fd186d2f218babf9c6dfd19ea2df17b"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "semi-truck",
+  "name": "Semi-truck and box trailer",
+  "tags": ["vehicle", "original", "semi truck"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/semi-truck-v1/review-manifest.json",
+    "sha256": "6f828801cc3ab7a163659d7340dfd3a6f539941b4adacc8ce8d592f216fc0e38",
+    "candidateId": "semi-truck-v1",
+    "model": "public/demos/original-vehicles/semi-truck-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/semi-truck-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/semi-truck-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/semi-truck-v1/captures",
+    "modelSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "triangles": 3748,
+    "meshes": 7
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/semi-truck/v1/evidence/replay-verification.json",
+    "sha256": "c87c708239159c7fc4baf428e3f40c13afb587689874b6c0f1a6d9690121fa0b",
+    "build": "art-source/vehicle-bake/semi-truck/v1/build.py",
+    "family": "art-source/vehicle-bake/semi-truck/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [288, 288],
+    "groundOrigin": [144, 144],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "semi-truck-authored-v1",
+    "path": "assets/models/vehicles/semi-truck-v1.glb",
+    "radius": 144,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/semi-truck-v1.png",
+  "performance": {
+    "speed": 68,
+    "acceleration": 88,
+    "pushSpeed": 60,
+    "pushWeight": 700
+  },
+  "receipt": "art-source/vehicle-bake/runtime-semi-truck-v1.json",
+  "expectedBounds": [161, 44, 53]
+}

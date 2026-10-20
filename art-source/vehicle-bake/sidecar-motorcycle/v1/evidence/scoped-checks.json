@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\sidecar-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n11 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\sidecar-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\fnm_multishells\\24284_1790502943936\\npx.cmd",
+        "biome",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\sidecar-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "npm warn Unknown env config \"audit-config\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"npm-globalconfig\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"overrides\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"recursive\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"supported-architectures\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nChecked 6 files in 16ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/sidecar-motorcycle/assess-pixels.py": "376f6754beec5846814a5820bb122635647ed41a3f6c8297d8aebb5b061c6298",
+    "scripts/vehicle-bake/sidecar-motorcycle/audit-source.py": "ae4976fa3673b19070f48c76b5fee144d8029cd9740c001c60d2e34fcb837c55",
+    "scripts/vehicle-bake/sidecar-motorcycle/build-view.mjs": "6616099a5d4d593e6547922970d2062680484115f4260f07dd099530fa2dec6b",
+    "scripts/vehicle-bake/sidecar-motorcycle/build.py": "2725eccb276aa8093a199d60b6323fd3917b73121bf011de45bb388bb1cf7c83",
+    "scripts/vehicle-bake/sidecar-motorcycle/capture-raw.mjs": "665b5ba2d4829c781811b036554662011d51c733625ac59f8cbd63075df4aca6",
+    "scripts/vehicle-bake/sidecar-motorcycle/coverage-region.json": "734893baf357dac4b49fc193572034d87be8d327f89c91e6f4c2dfe640a7d5a2",
+    "scripts/vehicle-bake/sidecar-motorcycle/family.json": "80349aaf3e37e5fb589fe3d7eb659134cd3ef882e0c0ad5135d13a9e5977fa08",
+    "scripts/vehicle-bake/sidecar-motorcycle/finalize.py": "65f27b40812cf42a91859e328c3b02066e51479a7f8eec69ca3ba1cdfc25ba6e",
+    "scripts/vehicle-bake/sidecar-motorcycle/fresh-replay.py": "8334cff67ba203f824d5c9393844aa164b29cb1f34cfe106a474e09ec526e898",
+    "scripts/vehicle-bake/sidecar-motorcycle/geometry.py": "70b2f2b88b7abe552c5ec8218cd40dbd235a8c8d0db364407200d325803afe4a",
+    "scripts/vehicle-bake/sidecar-motorcycle/inspect-rider.py": "cdec36fc9276c584856460cfb4e9f1e3b921caebe654c582c826afe0040570ad",
+    "scripts/vehicle-bake/sidecar-motorcycle/prove-fit.py": "4422b7f8c3e1b3d6828524208e1d15623a42e5b1e01dbfe5932f3bea4cd3de84",
+    "scripts/vehicle-bake/sidecar-motorcycle/prove-pod.py": "681a8a2e81c909d684650840a1dc44f0fb2b8a5c4266a0de899656ef9e6668db",
+    "scripts/vehicle-bake/sidecar-motorcycle/raw-audit.py": "874e36b0a489e54a56ad1b6225bf429a96f8f068ced924986b69e303395793c0",
+    "scripts/vehicle-bake/sidecar-motorcycle/raw-diagnostic.html": "45bdab03843996fe965c1c709b31dbae94a464da1571df2be4c833cf736355cd",
+    "scripts/vehicle-bake/sidecar-motorcycle/raw-viewer.mjs": "e5d4894135ed376cccb94c4a4bf76b41ff9157a9ae8ef6cf3b801c958ead8cbf",
+    "scripts/vehicle-bake/sidecar-motorcycle/sheets.py": "2a18d33165c529787f481a1d2a3389ee02c5cc9092ad70391938e929f072d6aa"
+  }
+}

@@ -81,6 +81,24 @@ only four of six tires. Keep all receipt-pinned v1 tools byte-identical. This
 adapter still requires four corner assemblies and does not solve motorcycles;
 their visible occupants follow `docs/topics/vehicle-riders.md`.
 
+True two/three-wheel review prototypes instead use explicit `motorcycle-v1`,
+exact `wheelIds: ["F", "R"]` or `["F", "R", "SC"]`, and one actual marked
+`Motorcycle_Root`; never add fake four-corner assemblies. `production.py` selects
+the `-cycle` package/capture/clearance/verify helpers. After independent current
+shared-loader qualification, use `python scripts/vehicle-bake/production.py CONFIG
+capture --blender BLENDER --loader-qualified --deadline UTC_ISO`. The flag asserts
+prior qualification; it does not perform that qualification or authorize normal
+activation. Direct `family-capture-cycle.mjs CONFIG --loader-qualified` uses the
+actual shared loader; without the flag it exits 2 with pending status. Preserve
+all pinned old and cycle helpers. Read the pipeline's two/three-wheel section.
+
+Frozen Explorer classic-bike (4,390 triangles) and sidecar (5,374 triangles)
+prototypes qualify exact 32 bare + 32 combined views each, 4,315 decoded rider
+vertex positions, per-wheel clearance/signed motion and mobile/offline review.
+This is measured Explorer identity/fit evidence only. All-27 appearances, AI
+occupants, occupied Canvas/failed-mesh fallback and normal motorcycle activation
+remain blocked; existing ordinary driver semantics stay unchanged.
+
 Use `source-replay.py RECEIPT --qa data/... --blender BLENDER` for modern retained
 input-map receipts; local basenames require `--input-root`. The fresh workspace
 must produce new exact model/atlas/recipe bytes without ignored dependencies.
@@ -90,6 +108,34 @@ and replay receipts. Read the pipeline's assembly section before applying it.
 Qualify decoded geometry and all native views with `component-parity.mjs`; keep
 its extra atlas/draw costs honest. This proves composition, not production rider
 coverage, authority, automatic occupants or failure fallback.
+
+Historical replay pins resolve through `replay_inputs.py`: current bytes first,
+then only an exact original path + SHA256 entry in retained
+`art-source/vehicle-bake/replay-inputs/catalog.json`. Validate snapshot containment
+and bytes; reject unregistered, missing, duplicate or tampered registrations.
+Nineteen source/runtime receipt pairs retain the old CarMeshAsset renderer pin;
+do not rewrite them to the live two/three-wheel loader. `source-replay.py` copies
+resolved files to their original scratch paths and records snapshots/catalog
+hash in new QA evidence. Validate the current engine and old car/boat pixels
+separately; historical reproducibility does not qualify the live renderer.
+
+Use `python scripts/vehicle-bake/replay-runtime.py RECEIPT --qa data/... --blender
+BLENDER --deadline UTC_ISO` for retained v3 runtime replay. Only receipt-declared
+inputs enter a fresh repository; the unchanged pinned exporter measures the GLB
+and must reproduce model/sprite/receipt bytes plus the selected catalog entry.
+An explicit repository-relative `--config PATH` must already be pinned. Preserve
+v1/v2/v3 bytes. The portable `replay-inputs/evidence/` receipts and 37-control
+summary are QA evidence, not construction dependencies; never add them to old
+input maps. Read the pipeline's historical replay section for exact controls.
+
+Cycle assemblies use `compose-component-cycle.py` and
+`component-package-cycle.py ASSEMBLY_JSON` (then declared-input replay and
+`--finalize`). Attach the companion inside marked Motorcycle_Root with uniform
+root-transform compensation, retaining exact base buffers and measured rider
+world positions. Pin both cycle adapters and their underlying helpers before
+finalization; finalized helper bytes are immutable. Retain child masters,
+identity-specific contact profiles and assembly recipe. Static composition
+does not qualify normal occupancy, all appearances, AI or fallback.
 
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,

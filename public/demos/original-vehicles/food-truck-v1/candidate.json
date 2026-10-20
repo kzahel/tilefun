@@ -1,0 +1,770 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "food-truck-v1",
+      "name": "Food truck",
+      "title": "Food truck \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original red and cream mobile kitchen. Own continuous cab side/front actual-skin blue glass, broad red/cream rear box with real side serving cavity/counter/fixed short shade, opposite-side simple burger emblem painted in own side UV chart, cream roof and one fixed vent.",
+      "audit": {
+        "triangles": 2934,
+        "vertices": 5545,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 200124,
+        "sha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.347826086956523,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.347826086956523,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.347826086956523,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.347826086956523,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/atlas.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/atlas.png",
+          "sha256": "95e942bad878d4dd1defd6bdf3b8b279df3ac4633115403d4ff32e6c9ff2ebde"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/capture.json",
+          "sha256": "828c3635d53948616c74c498d850d57ae2712713aba8cd0167cd6041a9293a50"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-0.png",
+          "sha256": "0bb52cf876dedeac61b8fe696f3a8633f43583afbcf2016c73dfc393c288df82"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-1.png",
+          "sha256": "352039b9576c59c4954bd4360783d252464b027ebc2b0165355cccea9ccdbb0e"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-10.png",
+          "sha256": "aba13a25879697fac0e94550a1c69b99cb453142314c16d3093576d06c39d26a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-11.png",
+          "sha256": "a9cf597af514052944d3d93f1fc1d6d547e6cb22a8127ba2c86813e6e7503410"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-12.png",
+          "sha256": "7b604942524128dafc2ac370255ed879498519d5d4dfcd5bbcf2a0001b934e89"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-13.png",
+          "sha256": "348735fb6be6a443d25d1c3185de5edb6a084750a2fc55726a34deed503ad6db"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-14.png",
+          "sha256": "cba10cadd57c4b817f4598bb615492b00b1aa936ee7cb78dc95431ac5ccfffda"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-15.png",
+          "sha256": "e408be4aa19d98ebe730968b714807ff3dbabcf74eda30e5161f740be60f3bf5"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-1x.png",
+          "sha256": "0c202bfafd25dd020e298c66daf58318604171f24518eeab693c8e3cf9e0db0c"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-2.png",
+          "sha256": "b05e0eb7639146db2bbbd6bf5bf80df30a58facc7fc0cf183a2360db2ec3d557"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-2x.png",
+          "sha256": "662fe742f12129948d583662d254cd18a928271f3d241e22c897e0929b2802c5"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-3.png",
+          "sha256": "1e6ea405703d6a6526fc8c235235b117b849e975af8e1ffca7190dfb9949cad5"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-3x.png",
+          "sha256": "44c7b0b293542a0f016f606441f2f8f6b2ad762741ed1f4395bb830039c3dcc1"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-4.png",
+          "sha256": "7ef0c1dc7f29e5b79ba12608c2d7881c7ac577f234c8df7782192832a1ca9e0d"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-5.png",
+          "sha256": "c4b84d038ad4ed443e05b3959c235714b75262d59841f2814a13342332025912"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-6.png",
+          "sha256": "124995c6b9593461582a84ea213d207d1e8f895b159459dd92d5a921b38f2e82"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-7.png",
+          "sha256": "8119bb4b8ce996b54c9de80a1d44f4692309fa7f2fc7276603c25da482ef9dc2"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-8.png",
+          "sha256": "372ad3049c5e0d6c9bb9243e258b3a12a51b338db9ec0eb7e2fe05ec41ed205a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/engine-9.png",
+          "sha256": "9781be8c0a310357b06aa1312f7b996644f8fadafea55a1bbdb06e9bb186b3ab"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-engine-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "b05e0eb7639146db2bbbd6bf5bf80df30a58facc7fc0cf183a2360db2ec3d557"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-engine-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "d3ff1a52220e0fff413bbd3a143e1d678f0f3da872739852885636181c124e6a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-engine-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "1f7e0466b91f564ea332417432656fa0874ddbdb6de8ce4b95dba0366f871628"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-engine-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "ef55f0c141831c4ff6631b54aaa35ceca28acaac8946aa513b8b66dd6f8d4d02"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-engine-4.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "f4e05f100b9ac7ee883803ce20928439cfae1f10c77cc64511ec56254467057e"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-engine-5.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "1dcc6111f3fdb6955fa2f17afece5869fafd7400db81f041ead59d8edb10a171"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-engine-6.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "51c876f3896765c4006d9eace8c16b05a42d8740c7ff88c4b216168881fab6ef"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-engine-7.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "ae7d015f82df87402b22e84a11e0ccd7777bc31f8c396b6e219af8fda949e99e"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-study-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "2f5646450ea0c245ff963e2e1dcb3b8c3b2664f61af8a43d66725ebc4e3a9e4f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-study-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "16aa054c16b53d1a0368534a7b55c0f88d4d4ec2ddb985f9e279a9683e7ade7d"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-study-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "a1636fdeab33a856c7a3892be25b5bb559b92d3f4085318405e1917821d73933"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-study-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "8793daeff4c9bb801e075dfb5d003e2b5e1ef7ebc06ea1c17629a7a4063b497a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-study-4.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "1440c65dfeaa104f53fe76b037c4ac1fd13b2e6d7356cfb1d241ae1a53c62e43"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-study-5.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "d15897bed3e991281c9e9f5cc503a1adb57d69bb3641a6dfd72bd1549c3c05fb"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-study-6.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "0297be0ee61268dc0bd27becbcc77816ae8af14d13f647ee9478aee5ed9442ab"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/equal-phase-study-7.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "c7b61fae89cf8127a03f6039eea152692008ec873be4ed3ab907b1f614e024b7"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/game-roll-0.png",
+          "sha256": "b05e0eb7639146db2bbbd6bf5bf80df30a58facc7fc0cf183a2360db2ec3d557"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/game-roll-1.png",
+          "sha256": "d3ff1a52220e0fff413bbd3a143e1d678f0f3da872739852885636181c124e6a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/game-roll-2.png",
+          "sha256": "1f7e0466b91f564ea332417432656fa0874ddbdb6de8ce4b95dba0366f871628"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/game-roll-3.png",
+          "sha256": "ef55f0c141831c4ff6631b54aaa35ceca28acaac8946aa513b8b66dd6f8d4d02"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/game-roll-4.png",
+          "sha256": "f4e05f100b9ac7ee883803ce20928439cfae1f10c77cc64511ec56254467057e"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/game-roll-5.png",
+          "sha256": "1dcc6111f3fdb6955fa2f17afece5869fafd7400db81f041ead59d8edb10a171"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/game-roll-6.png",
+          "sha256": "51c876f3896765c4006d9eace8c16b05a42d8740c7ff88c4b216168881fab6ef"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/game-roll-7.png",
+          "sha256": "ae7d015f82df87402b22e84a11e0ccd7777bc31f8c396b6e219af8fda949e99e"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "0bb52cf876dedeac61b8fe696f3a8633f43583afbcf2016c73dfc393c288df82"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "d710d248407a657a8c4e940fe02550ca9ce084c90be2ff4cba8b695cd2fc2c4f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "ea55e1c5f2c18163b9e99bf62e174ebbb1ccbf6ef6f1908aa6621ba2a2bd29c0"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "0bb52cf876dedeac61b8fe696f3a8633f43583afbcf2016c73dfc393c288df82"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "372ad3049c5e0d6c9bb9243e258b3a12a51b338db9ec0eb7e2fe05ec41ed205a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "08a9733471d1e3ddb0b07f2813a9ea5d7115ebf412ddd3b0b7b1e1abbf9a062b"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "35bc676f51e0ec9887da2ecc3f411bd3e08cffa5361d9e754f6fff018bf86c4d"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "372ad3049c5e0d6c9bb9243e258b3a12a51b338db9ec0eb7e2fe05ec41ed205a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "0bb52cf876dedeac61b8fe696f3a8633f43583afbcf2016c73dfc393c288df82"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "33865ac0dcbee1ed1b0c00758226ddf753336c1cf75411018657a89af0f04a6e"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "57af7eb54fbbb6d421ef9924afd3885cbd67528d6dc870ab2c62498be01f37b4"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "0bb52cf876dedeac61b8fe696f3a8633f43583afbcf2016c73dfc393c288df82"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "372ad3049c5e0d6c9bb9243e258b3a12a51b338db9ec0eb7e2fe05ec41ed205a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "2d9fc26f704bcffbb51d59c7dd62b23b020e83126ca7628ef670a3a8fd18e858"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "acabd4a9ba7547ff02fecd9db2fbc32f1297e9c48a431ad9eab6c19b3ae51955"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "372ad3049c5e0d6c9bb9243e258b3a12a51b338db9ec0eb7e2fe05ec41ed205a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/independent-visual.json",
+          "sha256": "b9bde18f8df41d66cd6df2faf634236cc26436413bef308df2d4697bc19e2771"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-engine.png",
+          "sha256": "27e41be910587f625f7eb1e949d8b7b3569fb9ad57b38c230a5fe8af79b241cd"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-equal-phases.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-equal-phases.png",
+          "sha256": "da102b469f2213ff2e73ddde85c90ea47a24ff8cec5877b47436ac1d8181f1a3"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-independent.png",
+          "sha256": "0ccbdbe33af0d02bb954cb44b735f914b144328593cd401752148f3ca7c92c34"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-phases.png",
+          "sha256": "33b648c04290b42584f417f34e4b8e6a189d3a2d175316378c096714d2e85669"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-study.png",
+          "sha256": "e15e8a95c17e5ead8e2cfd6acc111ec61598c8d286d78f1c4191496b309fb4ef"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "bdf872790dc7e8d610d8aecec9db896561cb857e3805c4301fe8d38ccd802fc2"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "d6d92a7e1e1387bc30428bf70bc55dac95ef0a151fed0f006bf0e29beb2b4d57"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "50cdcfe3da1ae7178eb875e5a7f7452a45138115c0b37e8306d6a062e33552e4"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-wheel-id-engine.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "c5c3fdfbc0d4383801b8824cbacced7d4237488691dccd4231b9d19a900f510f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-wheel-id-study.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "642da68fcef3f31679c6cadb85f80fbd266e8669ea9fa67dd367a975b2102f38"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/inspection-wires.png",
+          "sha256": "c0c0aa1327967cb51eb50813832abb0947e4b97370aabc0aeb5e402cf4f75bf0"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/roll-0.png",
+          "sha256": "2f5646450ea0c245ff963e2e1dcb3b8c3b2664f61af8a43d66725ebc4e3a9e4f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/roll-1.png",
+          "sha256": "16aa054c16b53d1a0368534a7b55c0f88d4d4ec2ddb985f9e279a9683e7ade7d"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/roll-2.png",
+          "sha256": "a1636fdeab33a856c7a3892be25b5bb559b92d3f4085318405e1917821d73933"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/roll-3.png",
+          "sha256": "8793daeff4c9bb801e075dfb5d003e2b5e1ef7ebc06ea1c17629a7a4063b497a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/roll-4.png",
+          "sha256": "1440c65dfeaa104f53fe76b037c4ac1fd13b2e6d7356cfb1d241ae1a53c62e43"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/roll-5.png",
+          "sha256": "d15897bed3e991281c9e9f5cc503a1adb57d69bb3641a6dfd72bd1549c3c05fb"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/roll-6.png",
+          "sha256": "0297be0ee61268dc0bd27becbcc77816ae8af14d13f647ee9478aee5ed9442ab"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/roll-7.png",
+          "sha256": "c7b61fae89cf8127a03f6039eea152692008ec873be4ed3ab907b1f614e024b7"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-0.png",
+          "sha256": "66a5a75fb9e9ff74bea2a0be4bb15d38a2ffd54e9418c9befbc6bb0249c74206"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-1.png",
+          "sha256": "708c04b1b31131646db64f3877eb795d9ceff0f1c170db635ce97704267cad61"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-10.png",
+          "sha256": "a14cf9cafbf14fe983deba568b1a22bfe25d632f8b27fc2740c8925f309dd911"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-11.png",
+          "sha256": "976c838f44e723d0c245ed404a88a2ebb3a3b1124a6ee626ac83b2d2d3ab7618"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-12.png",
+          "sha256": "10254cee12b901b114f58638b6c5db6e9e49b8944d862b3c8bae41dc03022817"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-13.png",
+          "sha256": "0e90af5e7680921909db486100b8be919ee5c616d6d18f15c860c53878351cfa"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-14.png",
+          "sha256": "bf430d419cae85cf490ccfeba3d55f3545ea8de95b5a32e1ecf0f0dc49f06cb3"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-15.png",
+          "sha256": "9f3eaa0be7e8554840932e7d745de75b752463b33f9a8cb4c2cd0d22badafbe9"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-1x.png",
+          "sha256": "274dea3bb0e6f2504a0f6c60e29736df863820c22538f984e689549dfce59d58"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-2.png",
+          "sha256": "2f5646450ea0c245ff963e2e1dcb3b8c3b2664f61af8a43d66725ebc4e3a9e4f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-2x.png",
+          "sha256": "872757700270297ae77dbd2aaa78fe090eb2d71f486dc3edda030094815f4232"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-3.png",
+          "sha256": "0e328364074ebbc9ebd71b38309c0690e3fe6eba5e5b515fa1ab0c611881e05d"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-3x.png",
+          "sha256": "c308c226d2c6ca8414a7189a9b3d347f0c68aecceb6974436a3e2115272402d2"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-4.png",
+          "sha256": "9de920558ee99c8df2ed71b4b360f8713b9412ca69d0e7996d155078102f7e13"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-5.png",
+          "sha256": "d43d1ac79f2e3eecdf5ed73e9d55a7aea3f6e7d048557f7e3ab24985f4951f98"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-6.png",
+          "sha256": "e40a37f2dd63c8ba2a1af69f75f5d0a99a78b84aaed0941de4af77a8c9a8147d"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-7.png",
+          "sha256": "d8429098d88c7aba8682fb390bb75f0fe815eb284fbe646b76b559f8460a9d1f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-8.png",
+          "sha256": "6ff6b01b31031a355c836718dd5e60b2f85db200a4e904a74e06f5bfa622fd31"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/study-9.png",
+          "sha256": "d05d69856a9ecf5376118f5e4fff5e310dc00bfc8acd7641a6941e92bc2b9eff"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "ac571b314b947c2cfba5b876dce694079df7ce19423d434fef469cc798f1d078"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "cba50ba6062aec9c8af007979b96d8f7c5a772d4a5b567762085664edc6209ce"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-10.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "997730f8ea7935ab374b2d7641104b226a9bd90d7a7389342d109c49ce8b9b1f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-11.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "07f165ce31beaeaada3bfb23e459aca67cac6aec7d87ca43bac186e60c018353"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-12.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "7b604942524128dafc2ac370255ed879498519d5d4dfcd5bbcf2a0001b934e89"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-13.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "92edc690332706bfa65676241d67290411cc3bf257f1aa51915f8d57cb12e968"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-14.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "c92da3b372135a2cd4c3bbc90c1dbb6a23f6a5ff7fd2d360c7bc4a634debeeb8"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-15.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "8d4dcebf7c19fe6ddd139e678eca3ecbd3d92afed5e180b80264b311dfb558a2"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "50f3141286f8d4f7226fdf9d154ba5ef1302d43b451b6cb431a218b5b897ab07"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "0a880ffadb8486682833e379cdaaeefcee15f0ee5251b9952e66f5cee95b5ac3"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-4.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "7ef0c1dc7f29e5b79ba12608c2d7881c7ac577f234c8df7782192832a1ca9e0d"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-5.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "d1169f5d03864b4d2fb22141328abd0e30ce47d926f4aabcb445b80361716e29"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-6.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "9d8cfa4c0b1db130e770131a61f2d3faaedaafe76667fe5f7085210977988bbb"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-7.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "3e953c055057eae8eb7d9abef18a5f2b79221f0a957dd39fb041d05f83c2be9f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-8.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "1fceeb7b2c10c20e8c2f57576737bd5fea8a1f733466f7eabfc9dbac7b9a51bc"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-engine-9.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "06001ae6cad39349d27d186bff1f2f235594c32cfbc033ccd3a44f025c449215"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-0.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "4834ebaccf3d92362f8bee29cdcda3fd48a748ecec48e5eb83abdd6bb03089a3"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-1.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "a88a84ed75d0cb0fa7fb8e2c49bdf768f3487c711590e23f5ef8ef3b1261f841"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-10.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "f3c9600bf29f287bc226acc583c0404ffe3ae36981a40c2e052c8a96c7edeadb"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-11.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "ab8a30638ee8c9ab4824680070fbc19de19dcccdee41025e07e7c11d41f737e9"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-12.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "10254cee12b901b114f58638b6c5db6e9e49b8944d862b3c8bae41dc03022817"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-13.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "a8f72aa24ee5008401887e24c8cf56f111fe41f56702a11ac110e042c9384b3b"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-14.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "d3c1d6713421d4781f60e64fae35571f6e4eb9dee75f4699882624e217e9fa27"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-15.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "f38d4544a46d6a5f0a3d11338bc338ee7e687a82a752940ebf43a2f60417090f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-2.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "4ec0130aa999e41f8f93eac73b67c8f7b92c2790b9f48d594ec390c346373681"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-3.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "fbc6f5cff8bf13bc94b11691b15552f5ed789760356b68b6eea178cdfb17247e"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-4.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "9de920558ee99c8df2ed71b4b360f8713b9412ca69d0e7996d155078102f7e13"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-5.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "d49655842967f1da136a5973e28cb3db79655035d3b7daa6d7adb01f3cf07dca"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-6.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "284aa56b3ad324d0a87efa2b1dc41b0015d1a2747c69b8aef4e19ae9069619fd"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-7.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "ae7c076347e3d5376f12c521b1f0bb206c9fb6da03ed8c5e2192f51ee025424f"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-8.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "aabe1265e3c1ce096ac714f29097536c9ca6551d28fc6ce1a29707aafe85ba5a"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-id-study-9.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "a8fb76093d5d2b6c24fc609ccf386124e65c2129c028e486f2498f975ccea8e3"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wheel-visual.json",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wheel-visual.json",
+          "sha256": "d7a147e41aa15297a3561c78c2e4b81a5823efb29f73d84dd410e49afe109db3"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wire-engine.png",
+          "sha256": "12f0f4c90d8b27143b5740979e20d622a67e7f7da5aaf3b7f2ef9462c50e2fb3"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/engine/wire-study.png",
+          "sha256": "f9b42cc0915d890525601f30ecf94d4c3671463784c1497a88f20ebd98cb729c"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/model.glb",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/model.glb",
+          "sha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/recipe.json",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/recipe.json",
+          "sha256": "b28dcebe32c3059e96c8093e49889d55b112e53f14e009a27698b95a39681de6"
+        },
+        {
+          "source": "demos/vehicle-bake/food-truck/v1/report.json",
+          "retained": "demos/original-vehicles/food-truck-v1/inputs/report.json",
+          "sha256": "1057097e6ab808c05c3a41a74f2c85dfbd96763be27c404587fb07c853eb40bc"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}
