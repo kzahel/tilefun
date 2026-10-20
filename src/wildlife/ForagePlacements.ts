@@ -3,6 +3,7 @@ import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { createFauna, faunaType } from "./Fauna.js";
 import { forageType, sourceType } from "./ForageResources.js";
+import { gardenSupplies } from "./GardenHabitat.js";
 import { pastureSite } from "./PastureHabitat.js";
 import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
@@ -51,7 +52,7 @@ export function foragePlacements(
   cx: number,
   cy: number,
 ): ActorPlacement[] {
-  const result: ActorPlacement[] = [];
+  const result: ActorPlacement[] = gardenSupplies(actors, nature, cx, cy);
   let robinFood = false;
   for (const actor of actors) {
     const rabbit = actor.type === RABBIT_TYPE,

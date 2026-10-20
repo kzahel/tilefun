@@ -43,6 +43,13 @@ from existing owner IDs and stay on the owning side of cell boundaries. Animal
 positions, IDs, RNG and roster ownership remain unchanged. Older saved regions
 retain their realization; ordinary editor items expose the same behaviors.
 
+[166](../tactical/166-scratching-and-pollination.md) adds shared soil patches at
+natural chicken homes and at most two flowers/one growing plant per occupied
+bee/hummingbird species and cell. Viable sites are dry, clear and cell-owned.
+Additions preserve original animals, RNG and ownership pools. Manual animals
+create no supplies; existing regions retain their realization and can use editor
+resources. The behavior topic owns finite stock and pollen timing.
+
 The user approved dropping historical playable generator compatibility during active
 development. `CURRENT_REGIONAL_VERSION` in `GenerationDescriptor.ts` is the single
 regional creation/runtime version, currently **regional-v13**. It composes connected dense neighborhoods, gentle road

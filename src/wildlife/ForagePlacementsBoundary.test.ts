@@ -80,3 +80,40 @@ it.each(["goat", "piglet", "elephant"] as const)(
       }
   },
 );
+
+it.each(["chicken", "bee", "ruby-throated-hummingbird"] as const)(
+  "%s shared garden supplies stay bounded and cell-owned at negative and positive seams",
+  (species) => {
+    for (const [cx, cy] of [
+      [0, 0],
+      [-2, -1],
+      [2, 3],
+    ])
+      for (const [dx, dy] of [
+        [1, 1],
+        [254, 1],
+        [1, 254],
+        [254, 254],
+      ]) {
+        const actor = {
+          type: faunaType(species),
+          featureId: `wildlife:${species}:edge`,
+          wx: (cx ?? 0) * 256 + (dx ?? 0),
+          wy: (cy ?? 0) * 256 + (dy ?? 0),
+          route: [],
+        };
+        const items = foragePlacements(
+          [actor, { ...actor, featureId: actor.featureId + ":peer" }],
+          nature,
+          cx ?? 0,
+          cy ?? 0,
+        );
+        expect(items).toHaveLength(species === "chicken" ? 1 : 3);
+        expect(new Set(items.map((e) => e.featureId)).size).toBe(items.length);
+        for (const item of items) {
+          expect(Math.floor(item.wx / 256)).toBe(cx);
+          expect(Math.floor(item.wy / 256)).toBe(cy);
+        }
+      }
+  },
+);

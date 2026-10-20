@@ -89,9 +89,13 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
             ? "Seed-bearing plant"
             : kind === "browse-shrub"
               ? "Leafy browsing shrub"
-              : kind === "root-patch"
-                ? "Rooting patch"
-                : "Growing edible plant",
+              : kind === "scratch-patch"
+                ? "Chicken scratching patch"
+                : kind === "nectar-flower"
+                  ? "Nectar flower"
+                  : kind === "root-patch"
+                    ? "Rooting patch"
+                    : "Growing edible plant",
     color: "#54834b",
   })),
   ...(["twig", "nut", "fruit", "greens", "seed", "root"] as const).map((kind) => ({

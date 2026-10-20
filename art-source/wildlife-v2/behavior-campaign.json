@@ -2,7 +2,7 @@
   "version": 1,
   "id": "wildlife-distinct-behaviors",
   "updated": "2026-10-20",
-  "state": "fourth-batch-automation-verified",
+  "state": "fifth-batch-automation-verified-human-review-pending",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -422,7 +422,7 @@
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained new action bank; next propose chicken, bee and hummingbird interactions.",
+      "nextAction": "Human review of the behavior demonstration and retained new action bank.",
       "updatedUtc": "2026-10-20T16:11:35.721653+00:00"
     },
     "goat": {
@@ -502,7 +502,7 @@
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained new action bank; next propose chicken, bee and hummingbird interactions.",
+      "nextAction": "Human review of the behavior demonstration and retained new action bank.",
       "updatedUtc": "2026-10-20T16:11:35.721640+00:00"
     },
     "elephant": {
@@ -582,7 +582,7 @@
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained new action bank; next propose chicken, bee and hummingbird interactions.",
+      "nextAction": "Human review of the behavior demonstration and retained new action bank.",
       "updatedUtc": "2026-10-20T16:11:35.721656+00:00"
     },
     "giraffe": {
@@ -879,7 +879,7 @@
       "runtimeType": "wildlife-chicken-provisional-v1",
       "family": "Birds",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -887,27 +887,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing native locomotion and periodic action inspected; resource interactions absent. New action banks preserve every original travel cell.",
+            "ref": "docs/tactical/166-scratching-and-pollination.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Scratch actual finite soil, uncover one seed, pick it up and eat.",
+        "trigger": "Nearby stocked scratch-patch.",
+        "scenario": "behavior-chicken",
+        "tactical": "docs/tactical/166-scratching-and-pollination.md",
+        "resourceRules": "Finite saved stock with ready active growth only; pollen transfers have a saved 60-second destination cap and cannot create instant food.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "resource conservation",
+          "interruption and protections",
+          "save/reload and readiness",
+          "ordinary game/manual and shared lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/166-scratching-and-pollination.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/166-scratching-and-pollination.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/GardenWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/chicken/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/garden-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/166-scratching-and-pollination/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained new action bank."
     },
     "butterfly": {
       "name": "Orange butterfly",
@@ -3881,7 +3924,7 @@
       "runtimeType": "wildlife-ruby-throated-hummingbird-provisional-v1",
       "family": "Birds",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "air",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "open",
@@ -3889,27 +3932,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing native locomotion and periodic action inspected; resource interactions absent. New action banks preserve every original travel cell.",
+            "ref": "docs/tactical/166-scratching-and-pollination.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Hover to sip finite nectar, then briefly guard the actual flower against unprotected conspecifics.",
+        "trigger": "Nearby stocked nectar-flower.",
+        "scenario": "behavior-hummingbird",
+        "tactical": "docs/tactical/166-scratching-and-pollination.md",
+        "resourceRules": "Finite saved stock with ready active growth only; pollen transfers have a saved 60-second destination cap and cannot create instant food.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "resource conservation",
+          "interruption and protections",
+          "save/reload and readiness",
+          "ordinary game/manual and shared lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/166-scratching-and-pollination.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/166-scratching-and-pollination.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/GardenWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/garden-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/166-scratching-and-pollination/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained new action bank."
     },
     "flamingo": {
       "name": "Flamingo",
@@ -5645,7 +5731,7 @@
       "runtimeType": "wildlife-bee-provisional-v1",
       "family": "Insects & arthropods",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "air",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -5653,27 +5739,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing native locomotion and periodic action inspected; resource interactions absent. New action banks preserve every original travel cell.",
+            "ref": "docs/tactical/166-scratching-and-pollination.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Sip finite nectar, carry pollen between distinct flowers and help one nearby depleted crop grow.",
+        "trigger": "Nearby stocked nectar-flower.",
+        "scenario": "behavior-bee",
+        "tactical": "docs/tactical/166-scratching-and-pollination.md",
+        "resourceRules": "Finite saved stock with ready active growth only; pollen transfers have a saved 60-second destination cap and cannot create instant food.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "resource conservation",
+          "interruption and protections",
+          "save/reload and readiness",
+          "ordinary game/manual and shared lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/166-scratching-and-pollination.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/166-scratching-and-pollination.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/GardenWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/bee/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/garden-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/166-scratching-and-pollination/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained new action bank."
     },
     "ladybug": {
       "name": "Ladybug",
@@ -5892,7 +6021,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the ginger coat\u2019s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the ginger coat’s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-ginger",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -5971,7 +6100,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the black coat\u2019s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the black coat’s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-black",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",

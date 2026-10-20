@@ -1,0 +1,18 @@
+{
+  "identity": "ruby-throated-hummingbird-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "47e5cf9067c48ca9543ce7a9e34018cb751425dbfff4a196f0e30824f315982c",
+    "index.html": "e2dd044cd77f5db8e811339390d1f98767b02dc435e939bf6522fa2d3a88d182",
+    "pixel-audit.json": "5c811db3409e8a024df8be9aac2d1638df192915e845de74bd507630af67afa6",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "d2315a98a3b6814e70095042ac79cec7efbd7edcb13c9cba51ba90e73781c63b",
+    "preview.gif": "2cafe4308f25adcf47833d62d75de63bbd74c0692177ac08985e0aadedb7626f",
+    "scene-native.png": "7fc5202f32243a1ebfa2a231da18cf3f75c382e0109caa70b4c02c7b1e814cfb",
+    "sheet.png": "5b24feb59e4abd62bfa287a4243cc5a83335ceeb3d75f2197b88679e25fecc52",
+    "source-audit.json": "a893bfba8bf3f5d196b67251bc095753f67a0f5f9745b9e6879f1b52d8f5c755",
+    "sprite.json": "c1c9c43a7614cd742f349f6c593d565c5b4621a049e745cc1e877486219317f8"
+  }
+}

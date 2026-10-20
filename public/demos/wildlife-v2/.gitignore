@@ -663,3 +663,9 @@
 !piglet/behavior-v1/*
 !elephant/behavior-v1/*
 !foraging-resources/behavior-v4/*
+
+# Owner-authorized behavior batch 166.
+!chicken/behavior-v1/*
+!bee/behavior-v1/*
+!ruby-throated-hummingbird/behavior-v1/*
+!foraging-resources/behavior-v5/*

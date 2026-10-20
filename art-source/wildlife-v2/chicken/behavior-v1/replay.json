@@ -1,0 +1,18 @@
+{
+  "identity": "chicken-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "faa208faa5e65e8f58a42dfb1214e8ef474c9824849ddd0655f074b71a7df4f8",
+    "index.html": "d5dcd8749a426a40a7d8bdc0b5702ec195d74f1774f89a4a1972e67c1eb09f6a",
+    "pixel-audit.json": "192e08b4601656e7c825210d39328a2b4648cbe6047f36296a80a5451bd7d08f",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "7d18f423f2049cff3ee6a5bbc95d9b7d9c2427d11bcc06a46e6c75b4b7b0ef38",
+    "preview.gif": "6931a6feffa09857dc632b3530c65f50bc5f23794a1b6ae22ba372450131480f",
+    "scene-native.png": "bc26636872f17351ffa8c48c2206070ff1cf6c374d0d39b04194b9cb7bf1e1d6",
+    "sheet.png": "b82e728eaaa059b53ca06d82356ed6374348f50ccfd6fe2b35ecc6db77f62acd",
+    "source-audit.json": "397a3f5429b92a4afc89469726c5d83677777e699fc55dce097adb14e52f7680",
+    "sprite.json": "9943aa94569b6483f0171ac36c2ab59b4184a05fe2f964ba7bf58f521825dc7f"
+  }
+}

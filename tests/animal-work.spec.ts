@@ -166,7 +166,7 @@ test("Animal Browser filters behavior demonstrations and opens the selected acti
   await page.goto("/tilefun/workshop.html?geometry=nature-behavior-dog#/tool/world-geometry");
   await page.getByLabel("Behavior progress", { exact: true }).selectOption("demonstrations");
   const results = page.getByRole("region", { name: "Animal results" });
-  await expect(results.locator("article")).toHaveCount(14);
+  await expect(results.locator("article")).toHaveCount(17);
   await page.getByLabel("Find animal", { exact: true }).fill("crow");
   await results.getByRole("button", { name: "Demonstrate behavior", exact: true }).click();
   await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue("behavior-crow");

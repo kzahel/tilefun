@@ -1,0 +1,44 @@
+{
+  "identity": "foraging-resources-behavior-v5",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/166-scratching-and-pollination.md",
+  "replay": {
+    "identity": "foraging-resources-behavior-v5",
+    "status": "byte-identical",
+    "isolation": "minimal retained inputs only",
+    "artifacts": 7,
+    "sha256": {
+      "contact-sheet-native.png": "651fbecb7f0f5b1fada9e0ce16984f46949dc7d0be79c9dde9b7fa075efa7727",
+      "index.html": "762517ef90d5424df7ee43c73f64debc9504e49407973e73172781457b756085",
+      "pixel-audit.json": "e7fddbbe9ba92e642614a56ef35b65862bf83f24bdb2de1fe840d121de8fdbee",
+      "preview.png": "6b283b438d8f6974975fd90a1ed6fc60bc653314a80e3912b6bb8c909fc6581b",
+      "scene-native.png": "6b283b438d8f6974975fd90a1ed6fc60bc653314a80e3912b6bb8c909fc6581b",
+      "sheet.png": "0ed2417421390816125ea8594e40e73d12f003e7fe43c709697d18adeb5db551",
+      "sprite.json": "86511b53161aa722246f177f1985d0bbb373523bdd73f20d4650c1d04adfd570"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/foraging-resources/behavior-v5/inputs.json": "b203be68d0122805410428a4993b63a243172400359f09b7714f4079d33b335e",
+    "art-source/wildlife-v2/foraging-resources/behavior-v5/paint.json": "b5ec4ea942791bd75b3d86774b19e7fe5daba1a7a14f4765d92db67ba3f4eff4",
+    "art-source/wildlife-v2/foraging-resources/behavior-v5/README.md": "add9f1f59017b6e887f1bcd5f11baa444183bfef0eaf9b3c5f85463694d80662",
+    "art-source/wildlife-v2/foraging-resources/behavior-v5/replay.json": "b357a022f89077aafdfc967e298d27331e865a57a96980023e3bab823e0da01f",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/contact-sheet-native.png": "651fbecb7f0f5b1fada9e0ce16984f46949dc7d0be79c9dde9b7fa075efa7727",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/index.html": "762517ef90d5424df7ee43c73f64debc9504e49407973e73172781457b756085",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/pixel-audit.json": "e7fddbbe9ba92e642614a56ef35b65862bf83f24bdb2de1fe840d121de8fdbee",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/preview.png": "6b283b438d8f6974975fd90a1ed6fc60bc653314a80e3912b6bb8c909fc6581b",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/scene-native.png": "6b283b438d8f6974975fd90a1ed6fc60bc653314a80e3912b6bb8c909fc6581b",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/sheet.png": "0ed2417421390816125ea8594e40e73d12f003e7fe43c709697d18adeb5db551",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/sprite.json": "86511b53161aa722246f177f1985d0bbb373523bdd73f20d4650c1d04adfd570",
+    "scripts/wildlife/garden-build.py": "41a0e54521d1da81151b1f61b149bc0ff2552deffb24ff5c27fd527d028972b8",
+    "scripts/wildlife/garden-finish.py": "81b1670795e9454cc48b5888d5b56303f452347a6c3260049e3185d55140d96c",
+    "scripts/wildlife/garden-replay.py": "db332f9e0c6190b3c297cd4f7b452727459d2985dc488649635cbffe44fd2436",
+    "scripts/wildlife/garden-resources.py": "96326e1455f75f7c1252ce0afd570f0f71c62b9a0d67af14d467c2505141383e",
+    "scripts/wildlife/garden-art.mjs": "34c8cedae75e4c9c336ea91aee1c5dda30ec4e63e4559b4f485276c29dd57173",
+    "scripts/wildlife/register-garden-166.mjs": "05871d8920c8d34e377fc2d6adea12bbc74fb8746dc6e4429b9e806d896b11ba",
+    "scripts/wildlife/capture-behavior-155.mjs": "4cba4172d32bd77168b8929743c1b133e8ee6f22ec4285f0f3c71867beb1e6f8",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v4/sheet.png": "91b0a72c9389b89425a36119f4d8319d2fe655f0a3863c1e74d093247a27d234"
+  }
+}

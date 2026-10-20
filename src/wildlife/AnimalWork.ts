@@ -14,7 +14,10 @@ export interface AnimalWork {
     | "cat"
     | "goat"
     | "pig"
-    | "elephant";
+    | "elephant"
+    | "chicken"
+    | "bee"
+    | "hummingbird";
   state:
     | "idle"
     | "seek"
@@ -40,7 +43,11 @@ export interface AnimalWork {
     | "reach"
     | "curl"
     | "shake"
-    | "hop";
+    | "hop"
+    | "scratch"
+    | "peck"
+    | "sip"
+    | "guard";
   elapsed: number;
   cooldown: number;
   targetId?: string;
@@ -67,11 +74,15 @@ export interface AnimalWork {
   uncovered?: number;
   harvested?: number;
   shaken?: number;
+  lastFlowerId?: string;
+  pollinated?: number;
+  guardWarned?: boolean;
+  warnings?: number;
 }
 
 export type FoodKind = "nut" | "fruit" | "root";
 export interface WorkItem {
-  kind: "ball" | "twig" | FoodKind | "nest" | "cache" | "greens" | "seed";
+  kind: "ball" | "twig" | FoodKind | "nest" | "cache" | "greens" | "seed" | "nectar";
   claimedBy?: string;
   /** Stable player identity for thrown balls, or natural lineage/manual owner for a site. */
   owner?: string;
@@ -80,8 +91,9 @@ export interface WorkItem {
   units: number;
   contents: FoodKind[];
   ballOrder?: number;
+  pollination?: { remaining: number; count: number };
   growth?: {
-    food: "fruit" | "nut" | "seed" | "greens" | "root";
+    food: "fruit" | "nut" | "seed" | "greens" | "root" | "nectar";
     capacity: number;
     interval: number;
     remaining: number;

@@ -16,6 +16,10 @@ export function tickFoodSources(
     const item = e.workItem,
       growth = item?.growth;
     if (!growth || !item || !manager.byId.has(e.id) || !ready(e.position, 96)) continue;
+    if (item.pollination) {
+      item.pollination.remaining = Math.max(0, item.pollination.remaining - dt);
+      restoreWorkItemPose(e);
+    }
     if (e.type === sourceType("fruit-tree") || e.type === sourceType("nut-tree")) {
       const trees = env.climbTrees?.(e.position, 64) ?? [];
       if (growth.tree) {

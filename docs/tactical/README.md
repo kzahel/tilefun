@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [166 Scratching and pollination](166-scratching-and-pollination.md) | Implemented, automation verified; exact review pending: chicken, bee and hummingbird; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [165 Truck bed gameplay](165-truck-bed-gameplay.md) | Normal dump-bed activation, safe game controls, independent riders and persistent loose toys/food; [vehicles](../topics/vehicles.md) |
 | [164 Playable truck bed](164-playable-truck-bed.md) | Opt-in recessed support, moving sprite occupant, local depth and debug geometry through the real Worker/shared renderer; [vehicles](../topics/vehicles.md) |
 | [163 Browsing, rooting and trunks](163-browsing-rooting-and-trunks.md) | Implemented and automation verified: goat browsing/rock hops, pig rooting and elephant fruit work; [animal behaviors](../topics/wildlife-behaviors.md) |

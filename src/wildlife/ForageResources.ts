@@ -9,6 +9,8 @@ export const SOURCE_KINDS = [
   "growing-plant",
   "browse-shrub",
   "root-patch",
+  "scratch-patch",
+  "nectar-flower",
 ] as const;
 export type SourceKind = (typeof SOURCE_KINDS)[number];
 export const sourceType = (kind: SourceKind) => `wildlife-resource-${kind}-v1`;
@@ -19,6 +21,8 @@ export const SOURCE_FOOD = {
   "growing-plant": "greens",
   "browse-shrub": "greens",
   "root-patch": "root",
+  "scratch-patch": "seed",
+  "nectar-flower": "nectar",
 } as const;
 const sourceStart: Record<SourceKind, number> = {
   "growing-plant": 14,
@@ -27,6 +31,8 @@ const sourceStart: Record<SourceKind, number> = {
   "fruit-tree": 26,
   "browse-shrub": 30,
   "root-patch": 34,
+  "scratch-patch": 39,
+  "nectar-flower": 43,
 };
 export function createFoodSource(kind: SourceKind, wx: number, wy: number): Entity {
   const food = SOURCE_FOOD[kind],
@@ -48,7 +54,7 @@ export function createFoodSource(kind: SourceKind, wx: number, wy: number): Enti
 }
 
 export const FORAGE_SHEET = "wildlife-forage-resources-v1";
-export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v4/sheet.png";
+export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v5/sheet.png";
 export const FORAGE_KINDS = [
   "twig",
   "fruit",
@@ -58,6 +64,7 @@ export const FORAGE_KINDS = [
   "greens",
   "seed",
   "root",
+  "nectar",
 ] as const;
 export type ForageKind = (typeof FORAGE_KINDS)[number];
 export const forageType = (kind: ForageKind) => `wildlife-resource-${kind}-v1`;
@@ -70,6 +77,7 @@ const cells = {
   greens: [10, 11, 12],
   seed: [13],
   root: [38],
+  nectar: [51],
 };
 export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
   FORAGE_KINDS.map((kind) => [
@@ -111,7 +119,13 @@ export function restoreWorkItemPose(e: Entity): void {
   const source = SOURCE_KINDS.find((kind) => e.type === sourceType(kind));
   const sourceCells =
     item.growth && source
-      ? Array.from({ length: 4 }, (_, i) => sourceStart[source] + i)
+      ? Array.from(
+          { length: 4 },
+          (_, i) =>
+            sourceStart[source] +
+            (source === "nectar-flower" && (item.pollination?.remaining ?? 0) > 0 ? 4 : 0) +
+            i,
+        )
       : undefined;
   const stage = sourceCells
     ? Math.max(0, Math.min(3, item.units))
@@ -123,7 +137,8 @@ export function restoreWorkItemPose(e: Entity): void {
           ? 1
           : 0;
   if (e.sprite) {
-    e.sprite.clip = stage;
+    e.sprite.clip =
+      stage + (source === "nectar-flower" && (item.pollination?.remaining ?? 0) > 0 ? 4 : 0);
     e.sprite.frameCol = (sourceCells ?? cells[item.kind])[stage] ?? 0;
     e.sprite.animTimer = 0;
   }
@@ -162,7 +177,7 @@ for (const kind of SOURCE_KINDS) {
     sprite: def.sprite
       ? {
           ...def.sprite,
-          clips: Array.from({ length: 4 }, (_, i) => ({
+          clips: Array.from({ length: kind === "nectar-flower" ? 8 : 4 }, (_, i) => ({
             name: `stage-${i}`,
             start: sourceStart[kind] + i,
             count: 1,

@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-20",
+  "base": "b08c207f",
+  "state": "automation-verified-human-review-pending",
+  "authority": {
+    "newScenarios": 16,
+    "affectedSuitePassed": 77,
+    "finalGardenBoundaryPassed": 24,
+    "movedResourceRegressions": 3
+  },
+  "art": {
+    "pendingIdentities": 4,
+    "artifactAssertions": 118,
+    "uniquePins": 91,
+    "isolatedReplayArtifacts": 37,
+    "exactNativeAnd3xCrops": 1656,
+    "fixedLengthChecks": 768,
+    "wingRootChecks": 192,
+    "connectedHeadBodyChecks": 336,
+    "priorTravelCellsUnchanged": true,
+    "priorThirtyNineResourceCellsUnchanged": true,
+    "humanReview": "pending"
+  },
+  "focusedBrowser": {
+    "passed": 2,
+    "seconds": 38.5,
+    "rendererBoundaries": ["Canvas2D", "GPU"],
+    "animalsPerBoundary": 3,
+    "contract": "Actual native coat pixels, changing stationary hover sprite crops, golden pollination pixels, Worker action clips/attachments, exact paused saved poses and ordinary visiting-bird command"
+  },
+  "manifest": {
+    "candidates": 1915,
+    "inputDigest": "b1deeeda7240c44037499e50ed3290bdffbbb6903e32105cf1d577f8190dd3f4",
+    "normalRetinaChromiumVerified": true
+  },
+  "integration": {
+    "nodeComparatorPassed": 1,
+    "httpWebSocketPassed": 3,
+    "workerPassed": 11,
+    "workerDryRunBuild": "passed"
+  },
+  "fullUnits": {
+    "cases": 6498,
+    "passed": 6482,
+    "failed": 6,
+    "skipped": 10,
+    "seconds": 760.41,
+    "knownWindowsFailures": 5,
+    "resolvedNearRipeRegression": 1,
+    "note": "Full run started before the near-ripe pollination correction; the final 24-case garden/boundary recheck passes, including three later moved-resource/height regressions. Coverage is full sweep plus scoped correction rechecks, not one all-green run."
+  },
+  "fullBrowser": {
+    "cases": 826,
+    "passed": 825,
+    "failed": 1,
+    "minutes": 37.4,
+    "isolatedUnchangedRerunPassed": 1,
+    "failure": "Existing outdoor picnic-table movement lower-bound assertion: 1.9924px versus 2.99px; isolated rerun passed without changes.",
+    "note": "Sweep used frozen pre-contact-correction production source. Final corrected source passes both strengthened garden renderer boundaries."
+  },
+  "finalChecks": {
+    "types": "passed",
+    "lint": "passed with 121 existing warnings and 41 infos",
+    "build": "passed",
+    "catalogSheets": 699,
+    "catalogSourceUses": 1393,
+    "streamingAssertReady": "passed after contact correction",
+    "migrationBaselineDecisions": 403,
+    "browserInventory": 826,
+    "oldExactReviewsPreserved": 245,
+    "newHumanReviews": "pending"
+  }
+}

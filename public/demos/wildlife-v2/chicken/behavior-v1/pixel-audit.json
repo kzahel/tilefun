@@ -1,0 +1,30 @@
+{
+  "identity": "chicken-behavior-v1",
+  "poses": 144,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "scratch": 16,
+      "peck": 10,
+      "eat": 5
+    },
+    "up": {
+      "scratch": 16,
+      "peck": 10,
+      "eat": 5
+    },
+    "left": {
+      "scratch": 16,
+      "peck": 10,
+      "eat": 5
+    },
+    "right": {
+      "scratch": 16,
+      "peck": 10,
+      "eat": 5
+    }
+  },
+  "connectedHeadBodyChecks": 144
+}

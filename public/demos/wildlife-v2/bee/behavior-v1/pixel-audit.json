@@ -1,0 +1,22 @@
+{
+  "identity": "bee-behavior-v1",
+  "poses": 64,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "sip": 15
+    },
+    "up": {
+      "sip": 15
+    },
+    "left": {
+      "sip": 15
+    },
+    "right": {
+      "sip": 15
+    }
+  },
+  "connectedHeadBodyChecks": 64
+}

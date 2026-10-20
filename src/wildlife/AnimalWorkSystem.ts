@@ -8,6 +8,7 @@ import { carrySocket } from "./BehaviorArt.js";
 import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
+import { GardenWork, isGardenWorker } from "./GardenWork.js";
 import { isMeadowWorker, MeadowWork } from "./MeadowWork.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 import { isPastureWorker, PastureWork } from "./PastureWork.js";
@@ -39,10 +40,12 @@ const carrying = (e: Entity) => !!e.animalWork?.heldId;
 
 /** Shared production authority; all durable state lives on ordinary saved actors. */
 export class AnimalWorkSystem {
+  private readonly garden: GardenWork;
   private readonly meadow: MeadowWork;
   private readonly woodland: WoodlandWork;
   private readonly pasture: PastureWork;
   constructor(private readonly manager: EntityManager) {
+    this.garden = new GardenWork(manager, this);
     this.meadow = new MeadowWork(manager);
     this.woodland = new WoodlandWork(manager, this);
     this.pasture = new PastureWork(manager, this);
@@ -167,7 +170,8 @@ export class AnimalWorkSystem {
       startZ = animal.wz ?? 0;
     const samples = Math.max(1, Math.ceil(distance / 4));
     if (samples > 96 || (planning && !planning.path(animal, samples))) return false;
-    const flight = animal.animalWork?.kind === "crow";
+    const flight = ["crow", "bee", "hummingbird"].includes(animal.animalWork?.kind ?? "");
+    const lift = animal.animalWork?.kind === "crow" ? 24 : (p.hop?.height ?? 0);
     for (let i = 1; i <= samples; i++) {
       const t = i / samples,
         pos = {
@@ -175,9 +179,10 @@ export class AnimalWorkSystem {
           wy: animal.position.wy + (point.wy - animal.position.wy) * t,
         };
       const height = flight
-        ? startZ + (z - startZ) * t + Math.sin(Math.PI * t) * 24
+        ? startZ + (z - startZ) * t + Math.sin(Math.PI * t) * lift
         : (context.environment.surfaceZ?.(pos) ?? startZ);
       if (
+        !context.ready(pos, p.body[0]) ||
         context.environment.isWater(pos) ||
         (!flight && Math.abs(height - startZ) > 4) ||
         !context.environment.canOccupy({ ...animal, wz: height }, pos)
@@ -191,7 +196,7 @@ export class AnimalWorkSystem {
       elapsed: 0,
       duration: p.hop ? Math.max(p.hop.duration, distance / 40) : distance / p.speed + 0.05,
       escaping: false,
-      ...(p.hop ? { startZ, endZ: z, ...(flight ? { lift: 24 } : {}) } : {}),
+      ...(p.hop ? { startZ, endZ: z, ...(flight ? { lift } : {}) } : {}),
     };
     if (animal.wanderAI) animal.wanderAI.state = "walking";
     restoreFaunaPose(animal);
@@ -247,6 +252,7 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
+    if (isGardenWorker(animal)) return this.garden.update(animal, dt, context, planning);
     if (isPastureWorker(animal)) return this.pasture.update(animal, dt, context, planning);
     if (isWoodlandWorker(animal)) return this.woodland.update(animal, dt, context, planning);
     if (isMeadowWorker(animal)) return this.meadow.update(animal, dt, context, planning);

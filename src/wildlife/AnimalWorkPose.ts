@@ -15,63 +15,68 @@ export function restoreAnimalWorkPose(animal: Entity): void {
     return;
   const woodland = task.kind === "capuchin" || task.kind === "raccoon" || task.kind === "cat";
   const pasture = task.kind === "goat" || task.kind === "pig" || task.kind === "elephant";
-  const name = pasture
-    ? [
-        "rear",
-        "browse",
-        "lower",
-        "hop",
-        "sniff",
-        "root",
-        "pickup",
-        "reach",
-        "curl",
-        "eat",
-        "shake",
-      ].includes(task.state)
+  const garden = ["chicken", "bee", "hummingbird"].includes(task.kind);
+  const name = garden
+    ? ["scratch", "peck", "eat", "sip", "guard"].includes(task.state)
       ? task.state
       : undefined
-    : woodland
-      ? task.state === "climb" || task.state === "descend"
-        ? "climb"
-        : task.state === "stalk"
-          ? "stalk"
-          : task.state === "pounce"
-            ? "pounce"
-            : task.state === "bat"
-              ? "bat"
-              : task.state === "perch"
-                ? "sit"
-                : task.state === "eat"
-                  ? "eat"
-                  : task.state === "pickup"
-                    ? "pickup"
-                    : undefined
-      : task.state === "scan"
-        ? task.elapsed < 0.6
-          ? "rear"
-          : "scan"
-        : task.state === "lower"
-          ? "lower"
-          : task.state === "alarm"
-            ? "alarm"
-            : task.state === "rest" && task.kind === "rabbit"
-              ? "action"
-              : task.state === "pickup"
-                ? "pickup"
-                : task.state === "deposit"
-                  ? task.kind === "crow"
-                    ? "build"
-                    : "dig"
-                  : task.state === "retrieve"
-                    ? "dig"
-                    : task.state === "eat"
-                      ? task.kind === "meerkat"
-                        ? "action"
-                        : "eat"
-                      : task.kind === "dog" && task.state === "rest"
-                        ? "release"
-                        : undefined;
+    : pasture
+      ? [
+          "rear",
+          "browse",
+          "lower",
+          "hop",
+          "sniff",
+          "root",
+          "pickup",
+          "reach",
+          "curl",
+          "eat",
+          "shake",
+        ].includes(task.state)
+        ? task.state
+        : undefined
+      : woodland
+        ? task.state === "climb" || task.state === "descend"
+          ? "climb"
+          : task.state === "stalk"
+            ? "stalk"
+            : task.state === "pounce"
+              ? "pounce"
+              : task.state === "bat"
+                ? "bat"
+                : task.state === "perch"
+                  ? "sit"
+                  : task.state === "eat"
+                    ? "eat"
+                    : task.state === "pickup"
+                      ? "pickup"
+                      : undefined
+        : task.state === "scan"
+          ? task.elapsed < 0.6
+            ? "rear"
+            : "scan"
+          : task.state === "lower"
+            ? "lower"
+            : task.state === "alarm"
+              ? "alarm"
+              : task.state === "rest" && task.kind === "rabbit"
+                ? "action"
+                : task.state === "pickup"
+                  ? "pickup"
+                  : task.state === "deposit"
+                    ? task.kind === "crow"
+                      ? "build"
+                      : "dig"
+                    : task.state === "retrieve"
+                      ? "dig"
+                      : task.state === "eat"
+                        ? task.kind === "meerkat"
+                          ? "action"
+                          : "eat"
+                        : task.kind === "dog" && task.state === "rest"
+                          ? "release"
+                          : undefined;
   const clips = animal.rabbit
     ? RABBIT_CLIPS
     : animal.robin

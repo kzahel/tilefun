@@ -1,9 +1,9 @@
 # Distinct animal behaviors and interactions
 
 Topic: wildlife-behaviors
-Status: four behavior batches implemented. Fourteen entries have targeted automation
-verification: twelve distinct signatures and two inherited cat coats. Final 163
-source and Canvas/GPU checks pass; exact art/behavior human review remains pending.
+Status: five behavior batches implemented. Seventeen entries have targeted automation
+verification: fifteen distinct signatures and two inherited cat coats. Broad and
+focused automation results are recorded in166; exact human review remains pending.
 Updated: 2026-10-20.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
@@ -47,7 +47,7 @@ original mallard-duck and bear roster IDs. Preserve completed art ledgers as his
 The [generated progress report](../wildlife-behavior-status.md) derives its counts
 and animal table from this ledger. The same generator writes compact Animal
 Browser progress data. Filter **Behavior progress → Demonstrations** and select
-**Demonstrate behavior** to open a shared authority scene. The other 192 animals
+**Demonstrate behavior** to open a shared authority scene. The other 189 animals
 still need detailed audits and phase assignment. Existing behavior has not been
 removed or declared absent. Verified stages require recorded evidence.
 
@@ -130,8 +130,8 @@ Use the existing embedded engine hosts, not a separate showcase implementation.
 These are proposed capability groups, not a requirement to finish one entire
 group before starting another. Prefer complete, demonstrable slices. The initial
 inventory/report and first implementation batch are established. Next step:
-review the fourteen implemented demonstrations, then audit the next small land/air
-batch against these completion rules. Continue classifying the remaining 192
+review the seventeen implemented demonstrations, then audit the next small land/air
+batch against these completion rules. Continue classifying the remaining 189
 entries and record proposed mechanics before expanding production.
 
 ## First batch contracts
@@ -296,3 +296,38 @@ behavior-v4 appends nine stock/item cells; all earlier native cells are unchange
 Editable rigs, fixed mesh geometry, connected fixed-length limbs/trunk, source
 projections, retained palette masters and isolated replays are receipt-pinned.
 The exact new art remains pending human review.
+
+## Scratching and flower visits (166)
+
+[166](../tactical/166-scratching-and-pollination.md) is the current bounded batch:
+chickens scratch finite soil, take one actual seed and eat; bees sip finite nectar
+and carry pollen between distinct blooms; hummingbirds hover, sip and briefly
+guard the actual flower against nearby unprotected conspecifics. Guardians warn
+at most once in a six-second guard and release the flower afterward. Players,
+following/attached/ridden animals and ordinary alarm/escape protections remain.
+
+Soil patches and flowers hold three portions, renewing one per 180 admitted ready
+simulation seconds with saved timers and no offline catch-up. Empty patches and
+flowers remain visible. A pollen-marked destination accepts one transfer per 60
+ready seconds and advances at most one nearby depleted plant/seed/fruit crop by
+at most 30 seconds, stopping at one second remaining; already nearer-ripe crops
+are unchanged. There is no instant stock creation, loose-food scattering or cache
+refill. Pollinated blooms use distinct saved visual stages and ordinary clip IDs.
+
+Fresh natural chicken cells share one soil patch; bee/hummingbird cells share at
+most two flowers and one growing plant per occupied species/cell. New IDs derive
+from existing animal owners and points remain in their actual cells, including
+negative boundaries. Original animals/RNG/roster pools remain unchanged. Manual
+placement makes no supplies; the editor exposes Chicken scratching patch and
+Nectar flower. Three ordinary-authority demonstrations use the same saved actors.
+The hummingbird scene can place an ordinary visiting bird through the editor.
+
+New behavior-v1 action banks append connected fixed-volume anatomy without
+changing any native travel pixels. Resource behavior-v5 appends 13 cells to the
+unchanged prior39. Exact new art remains pending human review; final automation
+status and known test caveats belong to tactical166.
+
+Committed scratching, sipping and guarding revalidate current source contact and
+height before taking stock or warning rivals. Moving a patch/bloom releases its
+claim; a seed already uncovered remains a real held item. Approach points use
+actual surface height and reject unsupported differences beyond normal reach.

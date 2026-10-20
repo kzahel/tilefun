@@ -1,0 +1,21 @@
+{
+  "blend": "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/ruby-throated-hummingbird.blend",
+  "masters": "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/masters.json",
+  "projection": "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/projection.json",
+  "sheet": "public/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png",
+  "metadata": "public/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sprite.json",
+  "canvas": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/ruby-throated-hummingbird.blend": "bf8cd3bcd5f86fa4d80b0e79b02075d2f3c3d24bf55ec6273e048e34aa2558c7",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/masters.json": "7ef6fc053bfaad2f3a4ff255e57bade1f2687aa4cab650c907490f023f49ae1a",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/projection.json": "a3d087b5a4ef1ef629faad21eab52b72a16d313c90b45c262437d734fe8efa96",
+    "public/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75",
+    "public/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sprite.json": "54332e55b23826699f485f5941a985544a2fe962f2204acc8f18ae182d7d00c2",
+    "art-source/wildlife-v2/_families/seabirds-and-hummingbird-147/build.py": "b158ef7fd84fca8711d34a2d0240b3ed626dc7df268c634db836dda374b04cbd",
+    "art-source/wildlife-v2/_families/seabirds-and-hummingbird-147/profiles.json": "5825e9bd746c29c357049197819a14a8db8562742fe37d9ebf64c070b9927242"
+  }
+}

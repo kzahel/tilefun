@@ -147,3 +147,7 @@ scripts/instrumentation/truck-bed-game.ts text eol=lf
 # Exact retained wildlife action helpers for batch 163.
 scripts/wildlife/pasture-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 scripts/wildlife/register-pasture-163.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Exact retained wildlife action helpers for batch 166.
+scripts/wildlife/garden-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/wildlife/register-garden-166.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

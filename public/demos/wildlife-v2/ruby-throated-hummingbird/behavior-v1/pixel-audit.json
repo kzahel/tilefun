@@ -1,0 +1,26 @@
+{
+  "identity": "ruby-throated-hummingbird-behavior-v1",
+  "poses": 128,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "sip": 14,
+      "guard": 15
+    },
+    "up": {
+      "sip": 15,
+      "guard": 15
+    },
+    "left": {
+      "sip": 15,
+      "guard": 15
+    },
+    "right": {
+      "sip": 15,
+      "guard": 15
+    }
+  },
+  "connectedHeadBodyChecks": 128
+}

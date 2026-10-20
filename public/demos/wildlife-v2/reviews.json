@@ -22403,5 +22403,329 @@
         "sha256": "4860a33a1437d95d2b570b9dceb29dbbb9f4468af37a294909b335be8c96ee96"
       }
     ]
+  },
+  {
+    "id": "chicken-behavior-v1",
+    "animalId": "chicken",
+    "revision": "behavior-v1",
+    "name": "Chicken scratching and seed pecking",
+    "batchId": "wildlife-v2-behaviors-166",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/chicken/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-chicken-behavior-v1",
+      "name": "Chicken scratching and seed pecking sheet",
+      "image": "demos/wildlife-v2/chicken/behavior-v1/sheet.png",
+      "width": 3696,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b82e728eaaa059b53ca06d82356ed6374348f50ccfd6fe2b35ecc6db77f62acd",
+      "source": "art-source/wildlife-v2/chicken/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-chicken-behavior-v1-scene",
+      "name": "Chicken scratching and seed pecking scene",
+      "image": "demos/wildlife-v2/chicken/behavior-v1/scene-native.png",
+      "width": 384,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "bc26636872f17351ffa8c48c2206070ff1cf6c374d0d39b04194b9cb7bf1e1d6",
+      "source": "art-source/wildlife-v2/chicken/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-chicken-behavior-v1-contact",
+      "name": "Chicken scratching and seed pecking contact",
+      "image": "demos/wildlife-v2/chicken/behavior-v1/contact-sheet-native.png",
+      "width": 1728,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "faa208faa5e65e8f58a42dfb1214e8ef474c9824849ddd0655f074b71a7df4f8",
+      "source": "art-source/wildlife-v2/chicken/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/chicken/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/contact-sheet-native.png",
+        "sha256": "faa208faa5e65e8f58a42dfb1214e8ef474c9824849ddd0655f074b71a7df4f8"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/index.html",
+        "sha256": "d5dcd8749a426a40a7d8bdc0b5702ec195d74f1774f89a4a1972e67c1eb09f6a"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/pixel-audit.json",
+        "sha256": "192e08b4601656e7c825210d39328a2b4648cbe6047f36296a80a5451bd7d08f"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/preview-native.gif",
+        "sha256": "7d18f423f2049cff3ee6a5bbc95d9b7d9c2427d11bcc06a46e6c75b4b7b0ef38"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/preview.gif",
+        "sha256": "6931a6feffa09857dc632b3530c65f50bc5f23794a1b6ae22ba372450131480f"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/scene-native.png",
+        "sha256": "bc26636872f17351ffa8c48c2206070ff1cf6c374d0d39b04194b9cb7bf1e1d6"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/sheet.png",
+        "sha256": "b82e728eaaa059b53ca06d82356ed6374348f50ccfd6fe2b35ecc6db77f62acd"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/source-audit.json",
+        "sha256": "397a3f5429b92a4afc89469726c5d83677777e699fc55dce097adb14e52f7680"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/sprite.json",
+        "sha256": "9943aa94569b6483f0171ac36c2ab59b4184a05fe2f964ba7bf58f521825dc7f"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/behavior-v1/validation.json",
+        "sha256": "7c97141e5ff4315c3f6474f4a4c6e9765ab73a87e4a9da33e0c044fa1b8b505c"
+      }
+    ]
+  },
+  {
+    "id": "bee-behavior-v1",
+    "animalId": "bee",
+    "revision": "behavior-v1",
+    "name": "Bee flower visits and pollination",
+    "batchId": "wildlife-v2-behaviors-166",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/bee/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-bee-behavior-v1",
+      "name": "Bee flower visits and pollination sheet",
+      "image": "demos/wildlife-v2/bee/behavior-v1/sheet.png",
+      "width": 1824,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "404b5b6a67a391d67ee9bf6c6951eadd92bd1c5cbe58aa0060b2603352981e36",
+      "source": "art-source/wildlife-v2/bee/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-bee-behavior-v1-scene",
+      "name": "Bee flower visits and pollination scene",
+      "image": "demos/wildlife-v2/bee/behavior-v1/scene-native.png",
+      "width": 320,
+      "height": 72,
+      "tileSize": 16,
+      "fingerprint": "3e5600f04e3c8570051295285d3c11a08a47f2a653032b68d4d20aa8af854694",
+      "source": "art-source/wildlife-v2/bee/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-bee-behavior-v1-contact",
+      "name": "Bee flower visits and pollination contact",
+      "image": "demos/wildlife-v2/bee/behavior-v1/contact-sheet-native.png",
+      "width": 512,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "fcc218f9ef6ee6205dbb5142dca98572508bb8b4b678b5c0b4abeada4d658c7d",
+      "source": "art-source/wildlife-v2/bee/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/bee/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/contact-sheet-native.png",
+        "sha256": "fcc218f9ef6ee6205dbb5142dca98572508bb8b4b678b5c0b4abeada4d658c7d"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/index.html",
+        "sha256": "16e26f9afbb3636fe0e8bcf6a1c4cf649c348db85757a97351be291c42e8e776"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/pixel-audit.json",
+        "sha256": "76d3f3345f10a8d5c73c3aebed96f649b93fdb635b6f84a1d7e02a55ec923105"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/preview-native.gif",
+        "sha256": "fe9b1e53f843cd37180cbaa9cfd5168a80d49b461d4fb9c52e4c9eca188a3f56"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/preview.gif",
+        "sha256": "ddd29dce0069d21f31d971e1c8f954cc2988af792014e417a6b22ad6bee76d8b"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/scene-native.png",
+        "sha256": "3e5600f04e3c8570051295285d3c11a08a47f2a653032b68d4d20aa8af854694"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/sheet.png",
+        "sha256": "404b5b6a67a391d67ee9bf6c6951eadd92bd1c5cbe58aa0060b2603352981e36"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/source-audit.json",
+        "sha256": "58268be6bc015be4e5949e64a330d63544b295ecdbf2c8e875c912591e3d5e45"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/sprite.json",
+        "sha256": "2ebe56fe66df638467eb121d95ba69ad3f33eaf6b1e4b30a5904b57f77b0ef88"
+      },
+      {
+        "path": "demos/wildlife-v2/bee/behavior-v1/validation.json",
+        "sha256": "f2dafc05af1669447698ae3498576e00da29b6abaa74844c868e40320bfd698e"
+      }
+    ]
+  },
+  {
+    "id": "ruby-throated-hummingbird-behavior-v1",
+    "animalId": "ruby-throated-hummingbird",
+    "revision": "behavior-v1",
+    "name": "Hummingbird hovering, sipping and guarding",
+    "batchId": "wildlife-v2-behaviors-166",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-ruby-throated-hummingbird-behavior-v1",
+      "name": "Hummingbird hovering, sipping and guarding sheet",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/sheet.png",
+      "width": 4672,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "5b24feb59e4abd62bfa287a4243cc5a83335ceeb3d75f2197b88679e25fecc52",
+      "source": "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-ruby-throated-hummingbird-behavior-v1-scene",
+      "name": "Hummingbird hovering, sipping and guarding scene",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/scene-native.png",
+      "width": 448,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "7fc5202f32243a1ebfa2a231da18cf3f75c382e0109caa70b4c02c7b1e814cfb",
+      "source": "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-ruby-throated-hummingbird-behavior-v1-contact",
+      "name": "Hummingbird hovering, sipping and guarding contact",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/contact-sheet-native.png",
+      "width": 2048,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "47e5cf9067c48ca9543ce7a9e34018cb751425dbfff4a196f0e30824f315982c",
+      "source": "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/contact-sheet-native.png",
+        "sha256": "47e5cf9067c48ca9543ce7a9e34018cb751425dbfff4a196f0e30824f315982c"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/index.html",
+        "sha256": "e2dd044cd77f5db8e811339390d1f98767b02dc435e939bf6522fa2d3a88d182"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/pixel-audit.json",
+        "sha256": "5c811db3409e8a024df8be9aac2d1638df192915e845de74bd507630af67afa6"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/preview-native.gif",
+        "sha256": "d2315a98a3b6814e70095042ac79cec7efbd7edcb13c9cba51ba90e73781c63b"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/preview.gif",
+        "sha256": "2cafe4308f25adcf47833d62d75de63bbd74c0692177ac08985e0aadedb7626f"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/scene-native.png",
+        "sha256": "7fc5202f32243a1ebfa2a231da18cf3f75c382e0109caa70b4c02c7b1e814cfb"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/sheet.png",
+        "sha256": "5b24feb59e4abd62bfa287a4243cc5a83335ceeb3d75f2197b88679e25fecc52"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/source-audit.json",
+        "sha256": "a893bfba8bf3f5d196b67251bc095753f67a0f5f9745b9e6879f1b52d8f5c755"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/sprite.json",
+        "sha256": "c1c9c43a7614cd742f349f6c593d565c5b4621a049e745cc1e877486219317f8"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/validation.json",
+        "sha256": "9fc7fd182fc519291229d46b7d78d078b455739d126baf645d171e16f66b6782"
+      }
+    ]
+  },
+  {
+    "id": "foraging-resources-behavior-v5",
+    "animalId": "foraging-resources",
+    "revision": "behavior-v5",
+    "name": "Finite scratching patches and nectar flowers",
+    "batchId": "wildlife-v2-behaviors-166",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/foraging-resources/behavior-v5/",
+    "sheet": {
+      "id": "wildlife-v2-foraging-resources-behavior-v5",
+      "name": "Finite scratching patches and nectar flowers sheet",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v5/sheet.png",
+      "width": 1664,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "0ed2417421390816125ea8594e40e73d12f003e7fe43c709697d18adeb5db551",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v5"
+    },
+    "scene": {
+      "id": "wildlife-v2-foraging-resources-behavior-v5-scene",
+      "name": "Finite scratching patches and nectar flowers scene",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v5/scene-native.png",
+      "width": 416,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "6b283b438d8f6974975fd90a1ed6fc60bc653314a80e3912b6bb8c909fc6581b",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v5"
+    },
+    "contact": {
+      "id": "wildlife-v2-foraging-resources-behavior-v5-contact",
+      "name": "Finite scratching patches and nectar flowers contact",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v5/contact-sheet-native.png",
+      "width": 416,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "651fbecb7f0f5b1fada9e0ce16984f46949dc7d0be79c9dde9b7fa075efa7727",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v5"
+    },
+    "preview": "demos/wildlife-v2/foraging-resources/behavior-v5/preview.png",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v5/contact-sheet-native.png",
+        "sha256": "651fbecb7f0f5b1fada9e0ce16984f46949dc7d0be79c9dde9b7fa075efa7727"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v5/index.html",
+        "sha256": "762517ef90d5424df7ee43c73f64debc9504e49407973e73172781457b756085"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v5/pixel-audit.json",
+        "sha256": "e7fddbbe9ba92e642614a56ef35b65862bf83f24bdb2de1fe840d121de8fdbee"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v5/preview.png",
+        "sha256": "6b283b438d8f6974975fd90a1ed6fc60bc653314a80e3912b6bb8c909fc6581b"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v5/scene-native.png",
+        "sha256": "6b283b438d8f6974975fd90a1ed6fc60bc653314a80e3912b6bb8c909fc6581b"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v5/sheet.png",
+        "sha256": "0ed2417421390816125ea8594e40e73d12f003e7fe43c709697d18adeb5db551"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v5/sprite.json",
+        "sha256": "86511b53161aa722246f177f1985d0bbb373523bdd73f20d4650c1d04adfd570"
+      }
+    ]
   }
 ]

@@ -153,13 +153,13 @@
     "review": "not-requested"
   },
   "chicken": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Scratch actual finite soil, uncover one seed, pick it up and eat.",
+    "scene": "behavior-chicken",
+    "review": "pending"
   },
   "butterfly": {
     "phase": "unclassified",
@@ -846,13 +846,13 @@
     "review": "not-requested"
   },
   "ruby-throated-hummingbird": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "air",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Hover to sip finite nectar, then briefly guard the actual flower against unprotected conspecifics.",
+    "scene": "behavior-hummingbird",
+    "review": "pending"
   },
   "flamingo": {
     "phase": "unclassified",
@@ -1287,13 +1287,13 @@
     "review": "not-requested"
   },
   "bee": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "air",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Sip finite nectar, carry pollen between distinct flowers and help one nearby depleted crop grow.",
+    "scene": "behavior-bee",
+    "review": "pending"
   },
   "ladybug": {
     "phase": "unclassified",

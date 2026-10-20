@@ -1,0 +1,37 @@
+{
+  "identity": "bee-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 32,
+  "frameHeight": 32,
+  "anchor": [
+    16,
+    24
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "sip",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "fly": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 20
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "sip": {
+      "start": 41,
+      "count": 16,
+      "frameDuration": 50,
+      "loop": true
+    }
+  },
+  "sheetSha256": "404b5b6a67a391d67ee9bf6c6951eadd92bd1c5cbe58aa0060b2603352981e36"
+}

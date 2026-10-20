@@ -1,0 +1,21 @@
+{
+  "blend": "art-source/wildlife-v2/bee/roster-v2/bee.blend",
+  "masters": "art-source/wildlife-v2/bee/roster-v2/masters.json",
+  "projection": "art-source/wildlife-v2/bee/roster-v2/projection.json",
+  "sheet": "public/demos/wildlife-v2/bee/roster-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/bee/roster-v2/sprite.json",
+  "canvas": 32,
+  "anchor": [
+    16,
+    24
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/bee/roster-v2/bee.blend": "8ea09b1040d3f62049a5e7c3776dd758bebc14111efed4a7041197c2e5cdd77d",
+    "art-source/wildlife-v2/bee/roster-v2/masters.json": "b109116b2e26c51e326970df1a7fbde04fe78ebab3c1e60d8991efc4acc3a08c",
+    "art-source/wildlife-v2/bee/roster-v2/projection.json": "02c9d41e8feaf940cd279c595ba71b877b7287cd694bab3fdeb6f0df7012b11f",
+    "public/demos/wildlife-v2/bee/roster-v2/sheet.png": "9826558c7d1e4cef63a67d11b5722b56f5741714ead9987d59d83c6216fa4aa1",
+    "public/demos/wildlife-v2/bee/roster-v2/sprite.json": "1383c11c90fe0be7a2163f88df3cf736ee17282415cdbcfc29edd3693064f181",
+    "art-source/wildlife-v2/_families/insects-140/build.py": "a4e447b1d956d1616dc7daeb4d70156ace89d68febfb50892b84b424c8a82656",
+    "art-source/wildlife-v2/_families/insects-140/profiles.json": "73a52b7f394cb06a2ed091d9551d98f61243e4fd9ee7da0d6a173f44c9839fe2"
+  }
+}

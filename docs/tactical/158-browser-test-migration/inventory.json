@@ -5,8 +5,8 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 824,
-      "inventorySha256": "cd4d227212c542626bd7811e204a4a1ad23536f7d431b98b4af97cc1be4315e0",
+      "cases": 826,
+      "inventorySha256": "9f408f8097581db125817e9b8f3074778e64a88400c9737c36b60700537b8425",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -21,7 +21,7 @@
         {
           "path": "tests/animal-work.spec.ts",
           "cases": 9,
-          "sourceSha256": "7df4f8ba0f4bd09c3c97be2d2697f8175a0323ab8db12e0e276f1ba90237730a"
+          "sourceSha256": "7ee93169fbcf54db4e844f1efe269d21cd18ecf24b33632b20438f4bb52b5e71"
         },
         {
           "path": "tests/aquatic-hunters.spec.ts",
@@ -204,6 +204,11 @@
           "sourceSha256": "e276218f89f92bd3fcc16ebf261ed4dfb0034f7bab914f29fe18dd7d977a81d5"
         },
         {
+          "path": "tests/garden-work.spec.ts",
+          "cases": 2,
+          "sourceSha256": "ba9eb41b4588c18d9b356f1ae52ab0c797eda9fe8e9499746f5f411bbe9e263f"
+        },
+        {
           "path": "tests/generated-crossing.spec.ts",
           "cases": 3,
           "sourceSha256": "9cca11271bad4458a4028a5408ff2c8b52bfa947f3b7600232201b91d6f13dd4"
@@ -276,7 +281,7 @@
         {
           "path": "tests/meadow-work.spec.ts",
           "cases": 7,
-          "sourceSha256": "c3d4acd5a61c49b6f9f269aa5d95c7adde58272a56e296de7ad72670ca9d3f09"
+          "sourceSha256": "70055dff5d7c1c3405b78ed5630c3cd95622101b1f391ddcff0ea3c0dc7b8a5c"
         },
         {
           "path": "tests/mobile-editor.spec.ts",

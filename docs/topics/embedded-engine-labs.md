@@ -78,6 +78,12 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 
 ## Animal browser and natural return timing
 
+[166](../tactical/166-scratching-and-pollination.md) adds chicken/bee/hummingbird
+activity scenes through ordinary Realm resources, flight/work clocks, clips and
+replicated attachments. Flower contact derives from authored beak sockets. A
+visiting hummingbird uses the same place-entity command as the game editor.
+Pause locks this action; the lab supplies no private pollination/guard loop.
+
 [163](../tactical/163-browsing-rooting-and-trunks.md) adds goat, pig and elephant
 activity scenes through ordinary Realm/Worker authority. They share finite source
 stock/growth, real prop support and collision, saved work/motion and ordinary
