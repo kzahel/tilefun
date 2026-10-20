@@ -1,42 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { predatorType } from "../src/wildlife/Predator.js";
 
 test.use({ channel: "chromium" });
-for (const id of ["food-web-natural", "food-web-placed"])
-  for (const renderer of ["canvas", "gpu"]) {
-    test(`${id} runs cross-predator meals and preserves its origin policy on reload (${renderer})`, async ({
-      page,
-    }) => {
-      await page.goto(
-        `/tilefun/workshop.html?geometry=nature-${id}&renderer=${renderer}#/tool/world-geometry`,
-      );
-      const canvas = page.getByLabel("Natural landscape playground");
-      await expect(canvas).toHaveAttribute("data-ready", "true");
-      const animals = async () =>
-        JSON.parse((await canvas.getAttribute("data-food-web-actors")) ?? "[]") as {
-          id: number;
-          type: string;
-        }[];
-      await expect.poll(async () => (await animals()).length).toBe(4);
-      const wolf = (await animals()).find((e) => e.type === predatorType("dire-wolf"));
-      expect(wolf).toBeDefined();
-      await expect
-        .poll(async () => (await animals()).some((e) => e.id === wolf?.id), { timeout: 25000 })
-        .toBe(false);
-      await page.getByRole("button", { name: "Pause", exact: true }).click();
-      const types = (await animals()).map((e) => e.type).sort();
-      if (id === "food-web-natural") {
-        expect(types.length).toBeLessThan(4);
-        expect(types).not.toContain(predatorType("dire-wolf"));
-      } else {
-        expect(types.length).toBeLessThan(4);
-        expect(types).not.toContain(predatorType("dire-wolf"));
-      }
-      await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-      await expect(canvas).toHaveAttribute("data-reload-count", "1");
-      expect((await animals()).map((e) => e.type).sort()).toEqual(types);
-    });
-  }
 test("a live wolf pack howls, hunts together and reloads three pack members", async ({ page }) => {
   await page.goto(
     "/tilefun/workshop.html?geometry=nature-wolf-pack&renderer=gpu#/tool/world-geometry",

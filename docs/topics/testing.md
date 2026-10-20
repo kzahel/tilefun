@@ -2,7 +2,7 @@
 
 Topic: testing
 
-Status: browser-suite audit complete; migrations and CI changes pending, 2026-10-20.
+Status: browser-suite migration in progress, 2026-10-20.
 
 Choose test scope from the failure being prevented. Check existing assertions
 before adding a test, including tests with different names or hosts. Prefer Node
@@ -31,9 +31,7 @@ cases and six capture-only cases. These are audit dispositions, not approved
 deletion counts; the ledger records partial overlap and outstanding parity work.
 The Node baseline is 6,066 cases plus 11 separate Worker-package cases.
 
-Next: reconcile the food-chain matrix's small assertion differences in its existing
-native owner, then close the all-profile ball-command gap and move those matrices
-to Node. Retain shared browser pause/reload,
-input, rendering and storage boundaries. Follow the audit's staged plan and update
-its decisions as migration evidence becomes available. Avoid adding redundant
-native tests merely to replace a removed browser count.
+[Migration 158](../tactical/158-browser-test-migration.md) owns execution, current
+counts and validation. The audit remains a frozen baseline. Reconcile assertions
+in existing native owners, close genuine gaps and retain browser boundaries.
+Avoid adding redundant native tests merely to replace a removed browser count.

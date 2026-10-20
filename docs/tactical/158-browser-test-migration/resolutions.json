@@ -1,0 +1,5037 @@
+{
+  "baselineCommit": "9ae14797e6c9b1848748ee3ec78171ff90949b55",
+  "baselineAudit": "../157-browser-test-audit/ledger.json",
+  "templates": [
+    {
+      "source": "tests/ambulance-driving.spec.ts:12",
+      "cases": 8,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/animal-browser.spec.ts:41",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
+      "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
+      "browserCoverage": ["tests/animal-browser.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/animal-browser.spec.ts:103",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
+      "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
+      "browserCoverage": ["tests/animal-browser.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/animal-browser.spec.ts:120",
+      "cases": 4,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
+      "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
+      "browserCoverage": ["tests/animal-browser.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/animal-browser.spec.ts:181",
+      "cases": 53,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
+      "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
+      "browserCoverage": ["tests/animal-browser.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/animal-browser.spec.ts:239",
+      "cases": 17,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
+      "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
+      "browserCoverage": ["tests/animal-browser.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/animal-work.spec.ts:18",
+      "cases": 6,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/animal-work.spec.ts:70",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/animal-work.spec.ts:179",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Filters Animal Browser demonstration cards and opens a selected activity.",
+      "nativeCoverage": ["src/wildlife/AnimalWork.test.ts"],
+      "browserCoverage": ["tests/animal-work.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/aquatic-hunters.spec.ts:9",
+      "cases": 24,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/art-workbench.spec.ts:8",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Source canvas selection/bookmarks, cross-browser notes, offline outbox, phone dragging and stale-source visible blocking require browser UI/storage/image behavior.",
+      "nativeCoverage": [
+        "src/art/ArtCatalog.test.ts",
+        "src/art/ArtNoteInbox.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/explorer/ViewState.test.ts"
+      ],
+      "browserCoverage": ["tests/art-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/art-workbench.spec.ts:40",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Source canvas selection/bookmarks, cross-browser notes, offline outbox, phone dragging and stale-source visible blocking require browser UI/storage/image behavior.",
+      "nativeCoverage": [
+        "src/art/ArtCatalog.test.ts",
+        "src/art/ArtNoteInbox.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/explorer/ViewState.test.ts"
+      ],
+      "browserCoverage": ["tests/art-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/art-workbench.spec.ts:78",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Source canvas selection/bookmarks, cross-browser notes, offline outbox, phone dragging and stale-source visible blocking require browser UI/storage/image behavior.",
+      "nativeCoverage": [
+        "src/art/ArtCatalog.test.ts",
+        "src/art/ArtNoteInbox.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/explorer/ViewState.test.ts"
+      ],
+      "browserCoverage": ["tests/art-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/art-workbench.spec.ts:103",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Source canvas selection/bookmarks, cross-browser notes, offline outbox, phone dragging and stale-source visible blocking require browser UI/storage/image behavior.",
+      "nativeCoverage": [
+        "src/art/ArtCatalog.test.ts",
+        "src/art/ArtNoteInbox.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/explorer/ViewState.test.ts"
+      ],
+      "browserCoverage": ["tests/art-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/art-workbench.spec.ts:142",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Source canvas selection/bookmarks, cross-browser notes, offline outbox, phone dragging and stale-source visible blocking require browser UI/storage/image behavior.",
+      "nativeCoverage": [
+        "src/art/ArtCatalog.test.ts",
+        "src/art/ArtNoteInbox.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/explorer/ViewState.test.ts"
+      ],
+      "browserCoverage": ["tests/art-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/art-workbench.spec.ts:171",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Source canvas selection/bookmarks, cross-browser notes, offline outbox, phone dragging and stale-source visible blocking require browser UI/storage/image behavior.",
+      "nativeCoverage": [
+        "src/art/ArtCatalog.test.ts",
+        "src/art/ArtNoteInbox.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/explorer/ViewState.test.ts"
+      ],
+      "browserCoverage": ["tests/art-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-train.spec.ts:11",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real carriage GLB load/draw, renderer switching, native-art request suppression, archived review navigation and aborted-request fallback are browser contracts.",
+      "nativeCoverage": [
+        "src/rendering/AuthoredTrainMeshes.test.ts",
+        "src/railway/CurveTrain.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-train.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-train.spec.ts:93",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real carriage GLB load/draw, renderer switching, native-art request suppression, archived review navigation and aborted-request fallback are browser contracts.",
+      "nativeCoverage": [
+        "src/rendering/AuthoredTrainMeshes.test.ts",
+        "src/railway/CurveTrain.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-train.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-train.spec.ts:122",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real carriage GLB load/draw, renderer switching, native-art request suppression, archived review navigation and aborted-request fallback are browser contracts.",
+      "nativeCoverage": [
+        "src/rendering/AuthoredTrainMeshes.test.ts",
+        "src/railway/CurveTrain.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-train.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-train.spec.ts:139",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real carriage GLB load/draw, renderer switching, native-art request suppression, archived review navigation and aborted-request fallback are browser contracts.",
+      "nativeCoverage": [
+        "src/rendering/AuthoredTrainMeshes.test.ts",
+        "src/railway/CurveTrain.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-train.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-train.spec.ts:180",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real carriage GLB load/draw, renderer switching, native-art request suppression, archived review navigation and aborted-request fallback are browser contracts.",
+      "nativeCoverage": [
+        "src/rendering/AuthoredTrainMeshes.test.ts",
+        "src/railway/CurveTrain.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-train.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-vehicle-gameplay.spec.ts:12",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual browser GLB fetching, native image decode, GPU upload/draw eligibility and failed-fetch fallback are browser contracts; Node already decodes actual geometry with texture decoding substituted.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/AuthoredVehicleMeshes.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-vehicle-gameplay.spec.ts:46",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual browser GLB fetching, native image decode, GPU upload/draw eligibility and failed-fetch fallback are browser contracts; Node already decodes actual geometry with texture decoding substituted.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/AuthoredVehicleMeshes.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-vehicle-gameplay.spec.ts:77",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual browser GLB fetching, native image decode, GPU upload/draw eligibility and failed-fetch fallback are browser contracts; Node already decodes actual geometry with texture decoding substituted.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/AuthoredVehicleMeshes.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-vehicle-gameplay.spec.ts:108",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual browser GLB fetching, native image decode, GPU upload/draw eligibility and failed-fetch fallback are browser contracts; Node already decodes actual geometry with texture decoding substituted.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/AuthoredVehicleMeshes.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-vehicle-gameplay.spec.ts:152",
+      "cases": 11,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual browser GLB fetching, native image decode, GPU upload/draw eligibility and failed-fetch fallback are browser contracts; Node already decodes actual geometry with texture decoding substituted.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/AuthoredVehicleMeshes.test.ts"
+      ],
+      "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-vehicle-gameplay.spec.ts:273",
+      "cases": 66,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-vehicle-gameplay.spec.ts:339",
+      "cases": 99,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/authored-vehicle-review.spec.ts:51",
+      "cases": 46,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/blender-tiger.spec.ts:3",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone demo keyboard/pointer routing, mobile layout, image decoding and exact canvas/source pixel equality need the browser.",
+      "nativeCoverage": [],
+      "browserCoverage": ["tests/blender-tiger.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/blender-tiger.spec.ts:33",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone demo keyboard/pointer routing, mobile layout, image decoding and exact canvas/source pixel equality need the browser.",
+      "nativeCoverage": [],
+      "browserCoverage": ["tests/blender-tiger.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/blender-tiger.spec.ts:75",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone demo keyboard/pointer routing, mobile layout, image decoding and exact canvas/source pixel equality need the browser.",
+      "nativeCoverage": [],
+      "browserCoverage": ["tests/blender-tiger.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/boat-lakes.spec.ts:37",
+      "cases": 3,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/boat-lakes.spec.ts:104",
+      "cases": 3,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/building-doors.spec.ts:8",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/building-doors.spec.ts:84",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Opens registered door/interior review candidates and requires actual browser verification readiness.",
+      "nativeCoverage": [
+        "src/interiors/DoorTraversal.test.ts",
+        "src/client/DoorPresentation.test.ts",
+        "src/server/RealmBrowser.test.ts"
+      ],
+      "browserCoverage": ["tests/building-doors.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-doors.spec.ts:94",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/building-doors.spec.ts:239",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Opens registered door/interior review candidates and requires actual browser verification readiness.",
+      "nativeCoverage": [
+        "src/interiors/DoorTraversal.test.ts",
+        "src/client/DoorPresentation.test.ts",
+        "src/server/RealmBrowser.test.ts"
+      ],
+      "browserCoverage": ["tests/building-doors.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-lab.spec.ts:5",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas source-pixel/alpha checks, navigation, responsive controls, feedback drafts/outbox and stale-byte disabled UI are browser contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/building-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-lab.spec.ts:38",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas source-pixel/alpha checks, navigation, responsive controls, feedback drafts/outbox and stale-byte disabled UI are browser contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/building-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-lab.spec.ts:57",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas source-pixel/alpha checks, navigation, responsive controls, feedback drafts/outbox and stale-byte disabled UI are browser contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/building-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-lab.spec.ts:65",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas source-pixel/alpha checks, navigation, responsive controls, feedback drafts/outbox and stale-byte disabled UI are browser contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/building-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-lab.spec.ts:133",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas source-pixel/alpha checks, navigation, responsive controls, feedback drafts/outbox and stale-byte disabled UI are browser contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/building-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-lab.spec.ts:175",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas source-pixel/alpha checks, navigation, responsive controls, feedback drafts/outbox and stale-byte disabled UI are browser contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/building-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-lab.spec.ts:186",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas source-pixel/alpha checks, navigation, responsive controls, feedback drafts/outbox and stale-byte disabled UI are browser contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/building-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-lab.spec.ts:250",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas source-pixel/alpha checks, navigation, responsive controls, feedback drafts/outbox and stale-byte disabled UI are browser contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/building-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-review.spec.ts:8",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Visible review advance/pause/undo, offline/reload and second-browser synchronization require DOM/local browser storage.",
+      "nativeCoverage": [
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/building-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-review.spec.ts:70",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Visible review advance/pause/undo, offline/reload and second-browser synchronization require DOM/local browser storage.",
+      "nativeCoverage": [
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/building-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-review.spec.ts:106",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Visible review advance/pause/undo, offline/reload and second-browser synchronization require DOM/local browser storage.",
+      "nativeCoverage": [
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/building-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-review.spec.ts:135",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Visible review advance/pause/undo, offline/reload and second-browser synchronization require DOM/local browser storage.",
+      "nativeCoverage": [
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/building-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/building-review.spec.ts:178",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Visible review advance/pause/undo, offline/reload and second-browser synchronization require DOM/local browser storage.",
+      "nativeCoverage": [
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/building-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/car-controls.spec.ts:38",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/car-projection.spec.ts:7",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "GPU pixel changes/source comparison, orbit pointer controls, WebGL context loss/recovery, teardown and responsive layout require a browser.",
+      "nativeCoverage": ["src/projection/CarProxy.test.ts", "src/projection/ProxyTexture.test.ts"],
+      "browserCoverage": ["tests/car-projection.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/car-projection.spec.ts:116",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "GPU pixel changes/source comparison, orbit pointer controls, WebGL context loss/recovery, teardown and responsive layout require a browser.",
+      "nativeCoverage": ["src/projection/CarProxy.test.ts", "src/projection/ProxyTexture.test.ts"],
+      "browserCoverage": ["tests/car-projection.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/car-steering.spec.ts:6",
+      "cases": 4,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/character-gameplay.spec.ts:44",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/character-gameplay.spec.ts:115",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Checks actual phone picker scrolling, preview animation and isolated browser profile choices.",
+      "nativeCoverage": [
+        "src/characters/PlayerModels.test.ts",
+        "src/characters/CharacterCatalog.test.ts",
+        "src/persistence/RealmRecords.test.ts"
+      ],
+      "browserCoverage": ["tests/character-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/character-presentation.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real Worker ownership, pose/frame UI, render-size/camera controls, stacked canvases and resource cleanup need browser integration.",
+      "nativeCoverage": [
+        "src/scenarios/ScenarioPresentationHost.test.ts",
+        "src/characters/CharacterTestScene.test.ts",
+        "src/rendering/RenderHost.test.ts"
+      ],
+      "browserCoverage": ["tests/character-presentation.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/character-rendering.spec.ts:8",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Current browser rendering fingerprint and disabled approval on mismatched manifest require canvas/UI.",
+      "nativeCoverage": ["src/characters/CharacterCatalog.test.ts", "src/art/ArtCatalog.test.ts"],
+      "browserCoverage": ["tests/character-rendering.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/character-rendering.spec.ts:26",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Current browser rendering fingerprint and disabled approval on mismatched manifest require canvas/UI.",
+      "nativeCoverage": ["src/characters/CharacterCatalog.test.ts", "src/art/ArtCatalog.test.ts"],
+      "browserCoverage": ["tests/character-rendering.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/character-workshop.spec.ts:7",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real movement controls, animation, jump routing, draft/feedback forms, canceled touch and offline retry are browser contracts.",
+      "nativeCoverage": [
+        "src/characters/CharacterTestScene.test.ts",
+        "src/characters/CharacterCatalog.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/character-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/character-workshop.spec.ts:66",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real movement controls, animation, jump routing, draft/feedback forms, canceled touch and offline retry are browser contracts.",
+      "nativeCoverage": [
+        "src/characters/CharacterTestScene.test.ts",
+        "src/characters/CharacterCatalog.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/character-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/character-workshop.spec.ts:114",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real movement controls, animation, jump routing, draft/feedback forms, canceled touch and offline retry are browser contracts.",
+      "nativeCoverage": [
+        "src/characters/CharacterTestScene.test.ts",
+        "src/characters/CharacterCatalog.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/character-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/city-places-review.spec.ts:9",
+      "cases": 4,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Review page indexing, phone controls, archived explorer rendering and current-world handoff links are actual browser navigation/identity contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityPlacesStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/city-places-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/city-places-review.spec.ts:58",
+      "cases": 4,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Review page indexing, phone controls, archived explorer rendering and current-world handoff links are actual browser navigation/identity contracts.",
+      "nativeCoverage": [
+        "src/generation/regional/CityPlacesStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/city-places-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/city-train-riding.spec.ts:38",
+      "cases": 3,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/city-train-riding.spec.ts:149",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/commercial-review.spec.ts:17",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual review pause/layout, exact feedback discoverability and archive\u2192current-world navigation need DOM/browser integration.",
+      "nativeCoverage": [
+        "src/generation/regional/CommercialDistrictStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/commercial-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/commercial-review.spec.ts:71",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual review pause/layout, exact feedback discoverability and archive\u2192current-world navigation need DOM/browser integration.",
+      "nativeCoverage": [
+        "src/generation/regional/CommercialDistrictStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/commercial-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/commercial-review.spec.ts:94",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual review pause/layout, exact feedback discoverability and archive\u2192current-world navigation need DOM/browser integration.",
+      "nativeCoverage": [
+        "src/generation/regional/CommercialDistrictStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/commercial-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/controller-menu.spec.ts:74",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
+      "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
+      "browserCoverage": ["tests/controller-menu.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/controller-menu.spec.ts:114",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
+      "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
+      "browserCoverage": ["tests/controller-menu.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/controller-menu.spec.ts:174",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
+      "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
+      "browserCoverage": ["tests/controller-menu.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/controller-menu.spec.ts:200",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
+      "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
+      "browserCoverage": ["tests/controller-menu.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/controller-menu.spec.ts:271",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
+      "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
+      "browserCoverage": ["tests/controller-menu.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/curved-trains.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/curved-trains.spec.ts:70",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Checks phone layout, CSS user-select and cancelable contextmenu on controls.",
+      "nativeCoverage": [
+        "src/scenarios/CurvedTrainRecipe.test.ts",
+        "src/railway/CurveTrain.test.ts",
+        "src/scenarios/ScenarioPresentationHost.test.ts"
+      ],
+      "browserCoverage": ["tests/curved-trains.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/deer-gameplay.spec.ts:8",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/deer-gameplay.spec.ts:75",
+      "cases": 1,
+      "auditDisposition": "node",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/deer-gameplay.spec.ts:138",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/dense-review.spec.ts:12",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Asserts actual review/explorer UI rendering, navigation or outbox/pause state.",
+      "nativeCoverage": [
+        "src/generation/regional/DenseDistrictStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/persistence/WorldInspection.test.ts",
+        "src/interiors/GameplayInterior.test.ts"
+      ],
+      "browserCoverage": ["tests/dense-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/dense-review.spec.ts:56",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Asserts actual review/explorer UI rendering, navigation or outbox/pause state.",
+      "nativeCoverage": [
+        "src/generation/regional/DenseDistrictStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/persistence/WorldInspection.test.ts",
+        "src/interiors/GameplayInterior.test.ts"
+      ],
+      "browserCoverage": ["tests/dense-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/dense-review.spec.ts:104",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Asserts actual review/explorer UI rendering, navigation or outbox/pause state.",
+      "nativeCoverage": [
+        "src/generation/regional/DenseDistrictStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/persistence/WorldInspection.test.ts",
+        "src/interiors/GameplayInterior.test.ts"
+      ],
+      "browserCoverage": ["tests/dense-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/dense-review.spec.ts:126",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Asserts actual review/explorer UI rendering, navigation or outbox/pause state.",
+      "nativeCoverage": [
+        "src/generation/regional/DenseDistrictStrategy.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/persistence/WorldInspection.test.ts",
+        "src/interiors/GameplayInterior.test.ts"
+      ],
+      "browserCoverage": ["tests/dense-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/dense-review.spec.ts:168",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/dense-review.spec.ts:281",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/editor.spec.ts:19",
+      "cases": 1,
+      "auditDisposition": "capture",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/editor.spec.ts:44",
+      "cases": 1,
+      "auditDisposition": "capture",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/entity-picker.spec.ts:12",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Reads actual sprite alpha bounds, CSS button/canvas sizes/contrast and checks the selected label on desktop/phone.",
+      "nativeCoverage": ["src/characters/PlayerModels.test.ts", "src/assets/SpriteCatalog.test.ts"],
+      "browserCoverage": ["tests/entity-picker.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:65",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:134",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:151",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:181",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:228",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:299",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:318",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:336",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:359",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:408",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:464",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:507",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:518",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:602",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:794",
+      "cases": 8,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:825",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:884",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:919",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/family-sheets.spec.ts:958",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact canvas composition/pixel changes, native padding, controlled animations, scoped note drafts, navigation/layout and stale-byte UI need browser behavior.",
+      "nativeCoverage": [
+        "src/workshop/FamilySheetNotes.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "scripts/build-family-expansion.test.py"
+      ],
+      "browserCoverage": ["tests/family-sheets.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/fault-reports.spec.ts:15",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/fault-reports.spec.ts:51",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/fault-reports.spec.ts:90",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/fault-reports.spec.ts:134",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/fauna-gameplay.spec.ts:13",
+      "cases": 306,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/fauna-gameplay.spec.ts:174",
+      "cases": 153,
+      "auditDisposition": "node",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/fauna-gameplay.spec.ts:264",
+      "cases": 153,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/fauna-gameplay.spec.ts:328",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Changes the scene selector and checks automatic zoom/framing defaults; this is page control integration.",
+      "nativeCoverage": [
+        "src/wildlife/Fauna.test.ts",
+        "src/wildlife/WaterFauna.test.ts",
+        "src/wildlife/FaunaBodies.test.ts",
+        "src/wildlife/GrazerRiding.test.ts"
+      ],
+      "browserCoverage": ["tests/fauna-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/fierce-creatures.spec.ts:7",
+      "cases": 10,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/food-chain.spec.ts:7",
+      "cases": 4,
+      "auditDisposition": "node",
+      "status": "resolved",
+      "resolution": "Reconciled explicit initial count and exact survivor types in existing native owner; removed four renderer variants. Wolf-pack browser keeps actual sound, Pause and Save/reload controls.",
+      "nativeCoverage": ["src/wildlife/FoodChain.test.ts"],
+      "browserCoverage": ["tests/food-chain.spec.ts"],
+      "validation": [
+        "vitest FoodChain: 3 passed",
+        "Playwright food-chain + interior-approved: 16 passed"
+      ]
+    },
+    {
+      "source": "tests/food-chain.spec.ts:40",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/frog-gameplay.spec.ts:8",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/frog-gameplay.spec.ts:88",
+      "cases": 1,
+      "auditDisposition": "node",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/frog-gameplay.spec.ts:163",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-motion.spec.ts:5",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-motion.spec.ts:57",
+      "cases": 11,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-motion.spec.ts:73",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual direction release and sprite-pixel hit testing during drag.",
+      "nativeCoverage": [
+        "src/interiors/FurnitureMotion.test.ts",
+        "src/interiors/MotionReview.test.ts",
+        "src/scenarios/ScenarioSession.test.ts"
+      ],
+      "browserCoverage": ["tests/furniture-motion.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-motion.spec.ts:107",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-motion.spec.ts:174",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Pointer cancellation releases Jump and browser camera keeps the jump visible.",
+      "nativeCoverage": [
+        "src/interiors/FurnitureMotion.test.ts",
+        "src/interiors/MotionReview.test.ts",
+        "src/scenarios/ScenarioSession.test.ts"
+      ],
+      "browserCoverage": ["tests/furniture-motion.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-motion.spec.ts:196",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Offline review advance/sync/disabled controls must reflect policy in the page.",
+      "nativeCoverage": [
+        "src/interiors/FurnitureMotion.test.ts",
+        "src/interiors/MotionReview.test.ts",
+        "src/scenarios/ScenarioSession.test.ts"
+      ],
+      "browserCoverage": ["tests/furniture-motion.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-motion.spec.ts:281",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Reads actual rendered player pixels and occlusion depth after a landing.",
+      "nativeCoverage": [
+        "src/interiors/FurnitureMotion.test.ts",
+        "src/interiors/MotionReview.test.ts",
+        "src/scenarios/ScenarioSession.test.ts"
+      ],
+      "browserCoverage": ["tests/furniture-motion.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-motion.spec.ts:332",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Holds the initial real Worker response and replaces it during startup; browser race coverage.",
+      "nativeCoverage": [
+        "src/interiors/FurnitureMotion.test.ts",
+        "src/interiors/MotionReview.test.ts",
+        "src/scenarios/ScenarioSession.test.ts"
+      ],
+      "browserCoverage": ["tests/furniture-motion.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/furniture-presentation.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real Worker counts, renderer-specific canvases, URL preservation, screenshot composition and teardown require browser lifecycle.",
+      "nativeCoverage": [
+        "src/scenarios/ScenarioPresentationHost.test.ts",
+        "src/rendering/RenderHost.test.ts"
+      ],
+      "browserCoverage": ["tests/furniture-presentation.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gameplay-interiors.spec.ts:9",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/gameplay-room-editing.spec.ts:63",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/generated-crossing.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/generated-crossing.spec.ts:81",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Seed selector handoff and mobile layout are genuine page controls.",
+      "nativeCoverage": [
+        "src/scenarios/GeneratedCrossingRecipe.test.ts",
+        "src/scenarios/RailCrossingRecipe.test.ts"
+      ],
+      "browserCoverage": ["tests/generated-crossing.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:5",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:22",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:40",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:72",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:145",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:196",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:261",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:278",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:301",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:323",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:380",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:400",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:434",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:457",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:471",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:544",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:600",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:658",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/gpu-renderer.spec.ts:706",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual shaders/pixels, mesh upload/draw/fallback, indexed batches, context loss/recovery, frame caches and live renderer switching require a graphics browser.",
+      "nativeCoverage": [
+        "src/rendering/GpuRasterSurface.test.ts",
+        "src/rendering/CarMeshAsset.test.ts",
+        "src/rendering/EntityMeshPose.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/GrassDetail.test.ts"
+      ],
+      "browserCoverage": ["tests/gpu-renderer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/horse-riding.spec.ts:8",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/hotel-signs.spec.ts:11",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact sign/top source pixels, selector/reload, scoped drafts and visible phone voting require canvas/DOM/browser storage.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/hotel-signs.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/hotel-signs.spec.ts:123",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact sign/top source pixels, selector/reload, scoped drafts and visible phone voting require canvas/DOM/browser storage.",
+      "nativeCoverage": [
+        "src/generation/regional/CityBuildingPrefabs.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/hotel-signs.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-approved.spec.ts:13",
+      "cases": 1,
+      "auditDisposition": "node",
+      "status": "resolved",
+      "resolution": "Moved unchanged production comparator/tolerance expectations to browser-free Playwright Node lane; npm test runs it once without preview/session/browser setup.",
+      "nativeCoverage": ["tests-node/visual-comparison.spec.ts"],
+      "browserCoverage": ["tests/interior-approved.spec.ts"],
+      "validation": [
+        "test:node-integration: 1 passed (no browser fixtures)",
+        "Playwright food-chain + interior-approved: 16 passed"
+      ]
+    },
+    {
+      "source": "tests/interior-approved.spec.ts:44",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual wall/cap/occlusion pixels, approved PNG comparisons and compact review UI need current browser canvas rendering.",
+      "nativeCoverage": [
+        "src/interiors/ApartmentWallProfiles.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts",
+        "src/interiors/review/ReviewCases.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-approved.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-approved.spec.ts:80",
+      "cases": 4,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual wall/cap/occlusion pixels, approved PNG comparisons and compact review UI need current browser canvas rendering.",
+      "nativeCoverage": [
+        "src/interiors/ApartmentWallProfiles.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts",
+        "src/interiors/review/ReviewCases.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-approved.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-approved.spec.ts:115",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual wall/cap/occlusion pixels, approved PNG comparisons and compact review UI need current browser canvas rendering.",
+      "nativeCoverage": [
+        "src/interiors/ApartmentWallProfiles.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts",
+        "src/interiors/review/ReviewCases.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-approved.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-approved.spec.ts:133",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual wall/cap/occlusion pixels, approved PNG comparisons and compact review UI need current browser canvas rendering.",
+      "nativeCoverage": [
+        "src/interiors/ApartmentWallProfiles.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts",
+        "src/interiors/review/ReviewCases.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-approved.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-approved.spec.ts:160",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual wall/cap/occlusion pixels, approved PNG comparisons and compact review UI need current browser canvas rendering.",
+      "nativeCoverage": [
+        "src/interiors/ApartmentWallProfiles.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts",
+        "src/interiors/review/ReviewCases.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-approved.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-approved.spec.ts:216",
+      "cases": 4,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual wall/cap/occlusion pixels, approved PNG comparisons and compact review UI need current browser canvas rendering.",
+      "nativeCoverage": [
+        "src/interiors/ApartmentWallProfiles.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts",
+        "src/interiors/review/ReviewCases.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-approved.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-approved.spec.ts:258",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual wall/cap/occlusion pixels, approved PNG comparisons and compact review UI need current browser canvas rendering.",
+      "nativeCoverage": [
+        "src/interiors/ApartmentWallProfiles.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts",
+        "src/interiors/review/ReviewCases.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-approved.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-furniture.spec.ts:6",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Canvas hashing, overlay pixel changes, furniture UI/source metadata in reports and browser review state require the page.",
+      "nativeCoverage": [
+        "src/interiors/FurnitureCatalog.test.ts",
+        "src/interiors/review/ReviewCases.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-furniture.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-loading.spec.ts:4",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Measures browser scheduling/resource requests/canvas counts and background verification/category UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/MotionReview.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-loading.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-loading.spec.ts:93",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Measures browser scheduling/resource requests/canvas counts and background verification/category UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/MotionReview.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-loading.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-rounds.spec.ts:13",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Tests actual wall pixels, pin coordinate transforms, phone layout, persisted categories and review pause/undo UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-rounds.spec.ts:53",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Tests actual wall pixels, pin coordinate transforms, phone layout, persisted categories and review pause/undo UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-rounds.spec.ts:78",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Tests actual wall pixels, pin coordinate transforms, phone layout, persisted categories and review pause/undo UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-rounds.spec.ts:132",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Tests actual wall pixels, pin coordinate transforms, phone layout, persisted categories and review pause/undo UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-rounds.spec.ts:188",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Tests actual wall pixels, pin coordinate transforms, phone layout, persisted categories and review pause/undo UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-rounds.spec.ts:235",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Tests actual wall pixels, pin coordinate transforms, phone layout, persisted categories and review pause/undo UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-rounds.spec.ts:254",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Tests actual wall pixels, pin coordinate transforms, phone layout, persisted categories and review pause/undo UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review-rounds.spec.ts:283",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Tests actual wall pixels, pin coordinate transforms, phone layout, persisted categories and review pause/undo UI.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:9",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:56",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:95",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:140",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:191",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:232",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:250",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:313",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:353",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:400",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:462",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:517",
+      "cases": 4,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:701",
+      "cases": 11,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-review.spec.ts:750",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Most templates assert specific actual pixel joins; remaining templates assert keyboard review, pins, offline storage and phone focus/layout.",
+      "nativeCoverage": [
+        "src/interiors/review/ReviewCases.test.ts",
+        "src/interiors/ApartmentWallAlignment.test.ts",
+        "src/interiors/ApartmentWallSurfaces.test.ts"
+      ],
+      "browserCoverage": ["tests/interior-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-workbench.spec.ts:4",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Pointer painting, plan/render tab layout, local custom fixtures, undo and exported issue UI require browser integration.",
+      "nativeCoverage": ["src/interiors/workbench/WorkbenchDocument.test.ts"],
+      "browserCoverage": ["tests/interior-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-workbench.spec.ts:75",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Pointer painting, plan/render tab layout, local custom fixtures, undo and exported issue UI require browser integration.",
+      "nativeCoverage": ["src/interiors/workbench/WorkbenchDocument.test.ts"],
+      "browserCoverage": ["tests/interior-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interior-workbench.spec.ts:94",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Pointer painting, plan/render tab layout, local custom fixtures, undo and exported issue UI require browser integration.",
+      "nativeCoverage": ["src/interiors/workbench/WorkbenchDocument.test.ts"],
+      "browserCoverage": ["tests/interior-workbench.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/interiors-screenshots.spec.ts:13",
+      "cases": 1,
+      "auditDisposition": "capture",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/interiors-screenshots.spec.ts:32",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/interiors-screenshots.spec.ts:113",
+      "cases": 1,
+      "auditDisposition": "capture",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/interiors-screenshots.spec.ts:124",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/interiors-screenshots.spec.ts:171",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/interiors.spec.ts:30",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Checks actual atlas-painted canvas content in the validation panel.",
+      "nativeCoverage": [
+        "src/interiors/GenericHomeGeometry.test.ts",
+        "src/interiors/FurnitureCatalog.test.ts"
+      ],
+      "browserCoverage": ["tests/interiors.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/lived-in-interiors.spec.ts:14",
+      "cases": 6,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/lived-in-interiors.spec.ts:79",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Verifies actual registered lived-in review render readiness.",
+      "nativeCoverage": [
+        "src/interiors/LivedInLayouts.test.ts",
+        "src/server/ResidentTransfer.test.ts",
+        "src/interiors/InteriorPresentation.test.ts"
+      ],
+      "browserCoverage": ["tests/lived-in-interiors.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/mall-doors.spec.ts:12",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/mobile-editor.spec.ts:56",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real scroll/tab/header bounds, touch placement, minimization and Atlas modal close/selection routing need browser layout/input.",
+      "nativeCoverage": ["src/editor/EditorModel.test.ts", "src/input/TouchButtons.test.ts"],
+      "browserCoverage": ["tests/mobile-editor.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/mobile-editor.spec.ts:131",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real scroll/tab/header bounds, touch placement, minimization and Atlas modal close/selection routing need browser layout/input.",
+      "nativeCoverage": ["src/editor/EditorModel.test.ts", "src/input/TouchButtons.test.ts"],
+      "browserCoverage": ["tests/mobile-editor.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/mobile-fullscreen.spec.ts:6",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual requestFullscreen/fullscreenElement and touch/desktop action routing require browser activation/lifecycle semantics.",
+      "nativeCoverage": [],
+      "browserCoverage": ["tests/mobile-fullscreen.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/mobile-fullscreen.spec.ts:31",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual requestFullscreen/fullscreenElement and touch/desktop action routing require browser activation/lifecycle semantics.",
+      "nativeCoverage": [],
+      "browserCoverage": ["tests/mobile-fullscreen.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/mobile-fullscreen.spec.ts:66",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual requestFullscreen/fullscreenElement and touch/desktop action routing require browser activation/lifecycle semantics.",
+      "nativeCoverage": [],
+      "browserCoverage": ["tests/mobile-fullscreen.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/natural-landscapes.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Checks actual explorer/lab controls, copied URL settings, handoff or review readiness/phone layout.",
+      "nativeCoverage": [
+        "src/generation/regional/NaturalLandscape.test.ts",
+        "src/scenarios/NaturalLandscapeRecipe.test.ts",
+        "src/scenarios/TrainRoofRiding.test.ts"
+      ],
+      "browserCoverage": ["tests/natural-landscapes.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/natural-landscapes.spec.ts:82",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/natural-landscapes.spec.ts:133",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/natural-landscapes.spec.ts:168",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Checks actual explorer/lab controls, copied URL settings, handoff or review readiness/phone layout.",
+      "nativeCoverage": [
+        "src/generation/regional/NaturalLandscape.test.ts",
+        "src/scenarios/NaturalLandscapeRecipe.test.ts",
+        "src/scenarios/TrainRoofRiding.test.ts"
+      ],
+      "browserCoverage": ["tests/natural-landscapes.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/natural-landscapes.spec.ts:192",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Checks actual explorer/lab controls, copied URL settings, handoff or review readiness/phone layout.",
+      "nativeCoverage": [
+        "src/generation/regional/NaturalLandscape.test.ts",
+        "src/scenarios/NaturalLandscapeRecipe.test.ts",
+        "src/scenarios/TrainRoofRiding.test.ts"
+      ],
+      "browserCoverage": ["tests/natural-landscapes.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/original-vehicle.spec.ts:6",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/outdoor-presentation.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real Worker count, backend canvases, camera framing, CSS pixelated surface and disposal/reset require browser lifecycle.",
+      "nativeCoverage": [
+        "src/scenarios/ScenarioPresentationHost.test.ts",
+        "src/rendering/RenderHost.test.ts"
+      ],
+      "browserCoverage": ["tests/outdoor-presentation.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/outdoor-workshop.spec.ts:5",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Bounded live DOM, geometry preview controls, source proposals, spatial note selection, authentication UI and reload/outbox need browser integration.",
+      "nativeCoverage": [
+        "src/assets/outdoor/OutdoorCatalog.test.ts",
+        "src/workshop/OutdoorQueries.test.ts",
+        "src/workshop/SceneReview.test.ts",
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/outdoor-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/outdoor-workshop.spec.ts:68",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Bounded live DOM, geometry preview controls, source proposals, spatial note selection, authentication UI and reload/outbox need browser integration.",
+      "nativeCoverage": [
+        "src/assets/outdoor/OutdoorCatalog.test.ts",
+        "src/workshop/OutdoorQueries.test.ts",
+        "src/workshop/SceneReview.test.ts",
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/outdoor-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/outdoor-workshop.spec.ts:89",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Bounded live DOM, geometry preview controls, source proposals, spatial note selection, authentication UI and reload/outbox need browser integration.",
+      "nativeCoverage": [
+        "src/assets/outdoor/OutdoorCatalog.test.ts",
+        "src/workshop/OutdoorQueries.test.ts",
+        "src/workshop/SceneReview.test.ts",
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/outdoor-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/outdoor-workshop.spec.ts:153",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/outdoor-workshop.spec.ts:187",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Bounded live DOM, geometry preview controls, source proposals, spatial note selection, authentication UI and reload/outbox need browser integration.",
+      "nativeCoverage": [
+        "src/assets/outdoor/OutdoorCatalog.test.ts",
+        "src/workshop/OutdoorQueries.test.ts",
+        "src/workshop/SceneReview.test.ts",
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/outdoor-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/p2p-menu.spec.ts:9",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real host/join menus, invitation routing, peer connection and return-to-local UI compose browser APIs and multiple contexts.",
+      "nativeCoverage": [
+        "src/transport/PeerGuestTransport.test.ts",
+        "src/ui/sessionNavigation.test.ts"
+      ],
+      "browserCoverage": ["tests/p2p-menu.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/p2p-recovery.spec.ts:107",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual RTC negotiated message limits, fragmentation, channel reconnect and Retry/Back overlays need browser transport/DOM integration.",
+      "nativeCoverage": [
+        "src/transport/webrtcFragment.test.ts",
+        "src/transport/PeerGuestTransport.test.ts",
+        "src/transport/PeerConnectionDiagnostics.test.ts"
+      ],
+      "browserCoverage": ["tests/p2p-recovery.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/p2p-recovery.spec.ts:157",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual RTC negotiated message limits, fragmentation, channel reconnect and Retry/Back overlays need browser transport/DOM integration.",
+      "nativeCoverage": [
+        "src/transport/webrtcFragment.test.ts",
+        "src/transport/PeerGuestTransport.test.ts",
+        "src/transport/PeerConnectionDiagnostics.test.ts"
+      ],
+      "browserCoverage": ["tests/p2p-recovery.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/parking-lab.spec.ts:6",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Static layout canvas pixel differences, exact rendered fingerprint and phone controls require a browser.",
+      "nativeCoverage": [
+        "src/art/studies/ParkingLotStudy.test.ts",
+        "src/road/ParkingSurface.test.ts"
+      ],
+      "browserCoverage": ["tests/parking-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/parking-lab.spec.ts:43",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Static layout canvas pixel differences, exact rendered fingerprint and phone controls require a browser.",
+      "nativeCoverage": [
+        "src/art/studies/ParkingLotStudy.test.ts",
+        "src/road/ParkingSurface.test.ts"
+      ],
+      "browserCoverage": ["tests/parking-lab.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/parking-visits.spec.ts:42",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/parking-visits.spec.ts:119",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/parking-visits.spec.ts:176",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/pattern-studio.spec.ts:32",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/pattern-studio.spec.ts:68",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/pattern-studio.spec.ts:109",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Verifies inbox discovery, current preview identity, Next navigation and deep link routing.",
+      "nativeCoverage": [
+        "src/patterns/PatternDocument.test.ts",
+        "src/patterns/TreeBrushEditor.test.ts",
+        "src/interiors/GameplayRoom.test.ts",
+        "src/editor/EditorModel.test.ts"
+      ],
+      "browserCoverage": ["tests/pattern-studio.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pattern-studio.spec.ts:123",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/pattern-studio.spec.ts:181",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Phone grid fit and Shift-drag pan past canvas edges are DOM/pointer contracts.",
+      "nativeCoverage": [
+        "src/patterns/PatternDocument.test.ts",
+        "src/patterns/TreeBrushEditor.test.ts",
+        "src/interiors/GameplayRoom.test.ts",
+        "src/editor/EditorModel.test.ts"
+      ],
+      "browserCoverage": ["tests/pattern-studio.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pinch-zoom.spec.ts:78",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real simultaneous contacts, joystick/button ownership, Options preference storage/focus and visible phone controls are browser integration.",
+      "nativeCoverage": [
+        "src/input/TouchPinch.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/pinch-zoom.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pinch-zoom.spec.ts:150",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real simultaneous contacts, joystick/button ownership, Options preference storage/focus and visible phone controls are browser integration.",
+      "nativeCoverage": [
+        "src/input/TouchPinch.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/pinch-zoom.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pinch-zoom.spec.ts:190",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real simultaneous contacts, joystick/button ownership, Options preference storage/focus and visible phone controls are browser integration.",
+      "nativeCoverage": [
+        "src/input/TouchPinch.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/pinch-zoom.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pixel-characters.spec.ts:5",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
+      "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
+      "browserCoverage": ["tests/pixel-characters.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pixel-characters.spec.ts:66",
+      "cases": 4,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
+      "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
+      "browserCoverage": ["tests/pixel-characters.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pixel-characters.spec.ts:143",
+      "cases": 5,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
+      "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
+      "browserCoverage": ["tests/pixel-characters.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pixel-characters.spec.ts:183",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
+      "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
+      "browserCoverage": ["tests/pixel-characters.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pixel-characters.spec.ts:204",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
+      "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
+      "browserCoverage": ["tests/pixel-characters.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pixel-characters.spec.ts:249",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
+      "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
+      "browserCoverage": ["tests/pixel-characters.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:146",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual speech-related dialog controls, pointer/focus/fullscreen lifecycle, screenshot capture, local outbox and private review UI require browser integration.",
+      "nativeCoverage": ["src/server/playIdeas.test.ts"],
+      "browserCoverage": ["tests/play-ideas.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:208",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual speech-related dialog controls, pointer/focus/fullscreen lifecycle, screenshot capture, local outbox and private review UI require browser integration.",
+      "nativeCoverage": ["src/server/playIdeas.test.ts"],
+      "browserCoverage": ["tests/play-ideas.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:235",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:271",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual speech-related dialog controls, pointer/focus/fullscreen lifecycle, screenshot capture, local outbox and private review UI require browser integration.",
+      "nativeCoverage": ["src/server/playIdeas.test.ts"],
+      "browserCoverage": ["tests/play-ideas.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:291",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:316",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:353",
+      "cases": 5,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:377",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/play-ideas.spec.ts:408",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual speech-related dialog controls, pointer/focus/fullscreen lifecycle, screenshot capture, local outbox and private review UI require browser integration.",
+      "nativeCoverage": ["src/server/playIdeas.test.ts"],
+      "browserCoverage": ["tests/play-ideas.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/player-dev-reload.spec.ts:10",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual Vite full reload/page refresh during doorway transitions and editor camera restoration through browser storage need browser lifecycle.",
+      "nativeCoverage": [
+        "src/persistence/PlayerLocationStore.test.ts",
+        "src/client/ReloadCamera.test.ts",
+        "src/client/DoorPresentation.test.ts"
+      ],
+      "browserCoverage": ["tests/player-dev-reload.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/player-dev-reload.spec.ts:120",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual Vite full reload/page refresh during doorway transitions and editor camera restoration through browser storage need browser lifecycle.",
+      "nativeCoverage": [
+        "src/persistence/PlayerLocationStore.test.ts",
+        "src/client/ReloadCamera.test.ts",
+        "src/client/DoorPresentation.test.ts"
+      ],
+      "browserCoverage": ["tests/player-dev-reload.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/player-markers.spec.ts:138",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/predator-gameplay.spec.ts:7",
+      "cases": 72,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/predator-origins.spec.ts:18",
+      "cases": 8,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/predator-world.spec.ts:36",
+      "cases": 48,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/prediction-recovery.spec.ts:7",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/pwa.spec.ts:4",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Uses Chromium CDP manifest parsing/installability, native image decode and actual serviceWorker registrations under build and Vite serving.",
+      "nativeCoverage": [],
+      "browserCoverage": ["tests/pwa.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/pwa.spec.ts:12",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Uses Chromium CDP manifest parsing/installability, native image decode and actual serviceWorker registrations under build and Vite serving.",
+      "nativeCoverage": [],
+      "browserCoverage": ["tests/pwa.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/rabbit-gameplay.spec.ts:8",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/rabbit-gameplay.spec.ts:77",
+      "cases": 1,
+      "auditDisposition": "node",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/rabbit-gameplay.spec.ts:140",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/racetrack.spec.ts:8",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/racetrack.spec.ts:78",
+      "cases": 3,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/racetrack.spec.ts:128",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Map marker labels, panning, oval pixels and phone layout are browser rendering/UI contracts.",
+      "nativeCoverage": [
+        "src/traffic/Racetrack.test.ts",
+        "src/generation/regional/RacetrackPlanner.test.ts"
+      ],
+      "browserCoverage": ["tests/racetrack.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/rail-crossing.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/rail-crossing.spec.ts:50",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Checks actual phone layout.",
+      "nativeCoverage": [
+        "src/scenarios/RailCrossingRecipe.test.ts",
+        "src/railway/RoadRailBridge.test.ts"
+      ],
+      "browserCoverage": ["tests/rail-crossing.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/rail-map.spec.ts:6",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Rail-line pixels, station labels/buttons, map navigation and responsive layout need the browser.",
+      "nativeCoverage": ["src/railway/Railway.test.ts"],
+      "browserCoverage": ["tests/rail-map.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/railway-preview.spec.ts:14",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Rendered railway identity gate, animation scrub UI, persisted review state and stale-preview UI blocking need the browser.",
+      "nativeCoverage": [
+        "src/railway/RailwayPreview.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/railway-preview.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/railway-preview.spec.ts:38",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Rendered railway identity gate, animation scrub UI, persisted review state and stale-preview UI blocking need the browser.",
+      "nativeCoverage": [
+        "src/railway/RailwayPreview.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/railway-preview.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/railway-preview.spec.ts:64",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Rendered railway identity gate, animation scrub UI, persisted review state and stale-preview UI blocking need the browser.",
+      "nativeCoverage": [
+        "src/railway/RailwayPreview.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/railway-preview.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/railway-preview.spec.ts:100",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Rendered railway identity gate, animation scrub UI, persisted review state and stale-preview UI blocking need the browser.",
+      "nativeCoverage": [
+        "src/railway/RailwayPreview.test.ts",
+        "src/art/ArtCatalog.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/railway-preview.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/railway.spec.ts:4",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/raptors.spec.ts:7",
+      "cases": 6,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/remote-world.spec.ts:13",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/road-geometry.spec.ts:14",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact atlas canvas equality, review navigation/layout, outbox sync and batch pause UI need the browser.",
+      "nativeCoverage": [
+        "src/road/CitySurfaceRecipes.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/road-geometry.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/road-geometry.spec.ts:79",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact atlas canvas equality, review navigation/layout, outbox sync and batch pause UI need the browser.",
+      "nativeCoverage": [
+        "src/road/CitySurfaceRecipes.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/road-geometry.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/road-geometry.spec.ts:103",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact atlas canvas equality, review navigation/layout, outbox sync and batch pause UI need the browser.",
+      "nativeCoverage": [
+        "src/road/CitySurfaceRecipes.test.ts",
+        "src/server/artNotesHttp.test.ts",
+        "src/art/BuildingReviewQueue.test.ts"
+      ],
+      "browserCoverage": ["tests/road-geometry.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/roadkill.spec.ts:8",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/robin-gameplay.spec.ts:10",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/robin-gameplay.spec.ts:85",
+      "cases": 1,
+      "auditDisposition": "node",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/robin-gameplay.spec.ts:158",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/scenario-lifecycle.spec.ts:3",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual browser Worker counts across tool changes and no IndexedDB world creation are native browser resource/lifecycle contracts.",
+      "nativeCoverage": [
+        "src/scenarios/ScenarioPresentationHost.test.ts",
+        "src/scenarios/ScenarioWorkerHost.test.ts"
+      ],
+      "browserCoverage": ["tests/scenario-lifecycle.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/scenario-scheduling.spec.ts:6",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Stalls the actual page main thread and verifies a separate authority Worker continues, channel bounds and hidden/pause fences.",
+      "nativeCoverage": [
+        "src/scenarios/ScenarioScheduling.test.ts",
+        "src/server/ServerLoop.test.ts",
+        "src/transport/OrderedWorkerChannel.test.ts"
+      ],
+      "browserCoverage": ["tests/scenario-scheduling.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/screenshot.spec.ts:34",
+      "cases": 2,
+      "auditDisposition": "capture",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/secretary-bird.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/secretary-bird.spec.ts:42",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Checks browser preview frame advancement and Watch AI scene selection.",
+      "nativeCoverage": ["src/wildlife/SecretaryBird.test.ts"],
+      "browserCoverage": ["tests/secretary-bird.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/server-security.spec.ts:9",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/settlement-life.spec.ts:11",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/settlement-life.spec.ts:60",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/settlement-life.spec.ts:92",
+      "cases": 4,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:3",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:14",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:40",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:75",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:112",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:128",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:160",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:196",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:224",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:271",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/smoke.spec.ts:291",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Basic real canvas content/layout and actual input/render startup checks need browser rendering, but several generic movement/no-console cases overlap.",
+      "nativeCoverage": [
+        "src/rendering/RenderingBoundary.test.ts",
+        "src/rendering/TileRenderer.test.ts"
+      ],
+      "browserCoverage": ["tests/smoke.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/source-viewport.spec.ts:11",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real trackpad wheel cancellation, focused keyboard/Shift interaction, scroll suppression, cursor CSS and resized source-canvas selection require browser events/layout.",
+      "nativeCoverage": [
+        "src/explorer/ViewState.test.ts",
+        "src/workshop/WorkshopProjection.test.ts"
+      ],
+      "browserCoverage": ["tests/source-viewport.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/source-viewport.spec.ts:63",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real trackpad wheel cancellation, focused keyboard/Shift interaction, scroll suppression, cursor CSS and resized source-canvas selection require browser events/layout.",
+      "nativeCoverage": [
+        "src/explorer/ViewState.test.ts",
+        "src/workshop/WorkshopProjection.test.ts"
+      ],
+      "browserCoverage": ["tests/source-viewport.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/source-viewport.spec.ts:116",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real trackpad wheel cancellation, focused keyboard/Shift interaction, scroll suppression, cursor CSS and resized source-canvas selection require browser events/layout.",
+      "nativeCoverage": [
+        "src/explorer/ViewState.test.ts",
+        "src/workshop/WorkshopProjection.test.ts"
+      ],
+      "browserCoverage": ["tests/source-viewport.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/streaming.spec.ts:6",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Measures actual moving-camera visible terrain readiness in the production Worker/frame/render composition.",
+      "nativeCoverage": [
+        "src/server/RealmStreaming.test.ts",
+        "src/world/ChunkManager.test.ts",
+        "src/rendering/TerrainPreparation.test.ts"
+      ],
+      "browserCoverage": ["tests/streaming.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/street-review.spec.ts:11",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Reads exact atlas pavement pixels and checks actual review/outbox/focus/link/draft behavior.",
+      "nativeCoverage": [
+        "src/generation/regional/StreetRecipes.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/street-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/street-review.spec.ts:54",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Reads exact atlas pavement pixels and checks actual review/outbox/focus/link/draft behavior.",
+      "nativeCoverage": [
+        "src/generation/regional/StreetRecipes.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/street-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/street-review.spec.ts:97",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Reads exact atlas pavement pixels and checks actual review/outbox/focus/link/draft behavior.",
+      "nativeCoverage": [
+        "src/generation/regional/StreetRecipes.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/street-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/street-review.spec.ts:152",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Reads exact atlas pavement pixels and checks actual review/outbox/focus/link/draft behavior.",
+      "nativeCoverage": [
+        "src/generation/regional/StreetRecipes.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/street-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/street-review.spec.ts:181",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Reads exact atlas pavement pixels and checks actual review/outbox/focus/link/draft behavior.",
+      "nativeCoverage": [
+        "src/generation/regional/StreetRecipes.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/street-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/surface-review.spec.ts:15",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact current canvas/source pixel comparison, render fingerprints, visible review gating and note links need browser integration.",
+      "nativeCoverage": [
+        "src/road/CitySurfaceRecipes.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/surface-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/surface-review.spec.ts:109",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact current canvas/source pixel comparison, render fingerprints, visible review gating and note links need browser integration.",
+      "nativeCoverage": [
+        "src/road/CitySurfaceRecipes.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/surface-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/surface-review.spec.ts:162",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact current canvas/source pixel comparison, render fingerprints, visible review gating and note links need browser integration.",
+      "nativeCoverage": [
+        "src/road/CitySurfaceRecipes.test.ts",
+        "src/art/CityReviewArchive.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/artNotesHttp.test.ts"
+      ],
+      "browserCoverage": ["tests/surface-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tap-movement.spec.ts:166",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual native/synthetic pointer routing, fullscreen first gesture, focus/menu/modal isolation, settings storage and input ownership are browser contracts.",
+      "nativeCoverage": [
+        "src/input/TapMovement.test.ts",
+        "src/input/TouchTap.test.ts",
+        "src/input/TouchHold.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/tap-movement.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tap-movement.spec.ts:215",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual native/synthetic pointer routing, fullscreen first gesture, focus/menu/modal isolation, settings storage and input ownership are browser contracts.",
+      "nativeCoverage": [
+        "src/input/TapMovement.test.ts",
+        "src/input/TouchTap.test.ts",
+        "src/input/TouchHold.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/tap-movement.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tap-movement.spec.ts:279",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual native/synthetic pointer routing, fullscreen first gesture, focus/menu/modal isolation, settings storage and input ownership are browser contracts.",
+      "nativeCoverage": [
+        "src/input/TapMovement.test.ts",
+        "src/input/TouchTap.test.ts",
+        "src/input/TouchHold.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/tap-movement.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tap-movement.spec.ts:314",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual native/synthetic pointer routing, fullscreen first gesture, focus/menu/modal isolation, settings storage and input ownership are browser contracts.",
+      "nativeCoverage": [
+        "src/input/TapMovement.test.ts",
+        "src/input/TouchTap.test.ts",
+        "src/input/TouchHold.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/tap-movement.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tap-movement.spec.ts:447",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual native/synthetic pointer routing, fullscreen first gesture, focus/menu/modal isolation, settings storage and input ownership are browser contracts.",
+      "nativeCoverage": [
+        "src/input/TapMovement.test.ts",
+        "src/input/TouchTap.test.ts",
+        "src/input/TouchHold.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/tap-movement.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tap-movement.spec.ts:485",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual native/synthetic pointer routing, fullscreen first gesture, focus/menu/modal isolation, settings storage and input ownership are browser contracts.",
+      "nativeCoverage": [
+        "src/input/TapMovement.test.ts",
+        "src/input/TouchTap.test.ts",
+        "src/input/TouchHold.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/tap-movement.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tap-movement.spec.ts:537",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual native/synthetic pointer routing, fullscreen first gesture, focus/menu/modal isolation, settings storage and input ownership are browser contracts.",
+      "nativeCoverage": [
+        "src/input/TapMovement.test.ts",
+        "src/input/TouchTap.test.ts",
+        "src/input/TouchHold.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/tap-movement.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tap-movement.spec.ts:614",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual native/synthetic pointer routing, fullscreen first gesture, focus/menu/modal isolation, settings storage and input ownership are browser contracts.",
+      "nativeCoverage": [
+        "src/input/TapMovement.test.ts",
+        "src/input/TouchTap.test.ts",
+        "src/input/TouchHold.test.ts",
+        "src/input/TouchJoystick.test.ts",
+        "src/input/TouchButtons.test.ts"
+      ],
+      "browserCoverage": ["tests/tap-movement.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/terrain-pacing.spec.ts:21",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Measures actual render demand/quiet frames/GPU upload counters and live zoom shortcut routing.",
+      "nativeCoverage": [
+        "src/rendering/TerrainPreparation.test.ts",
+        "src/rendering/TerrainResources.test.ts",
+        "src/rendering/TerrainFrame.test.ts"
+      ],
+      "browserCoverage": ["tests/terrain-pacing.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/three-debug.spec.ts:3",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Creates a real WebGL context and verifies visible debug canvas removal/lifetime.",
+      "nativeCoverage": ["src/rendering/RenderingBoundary.test.ts"],
+      "browserCoverage": ["tests/three-debug.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tools-index.spec.ts:4",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/tools-index.spec.ts:64",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual game sidebar/navigation, tool cards, bookmark/reset behavior and return links need DOM routing.",
+      "nativeCoverage": [
+        "src/art/ArtCatalog.test.ts",
+        "src/server/staticFiles.test.ts",
+        "src/explorer/PreviewSettings.test.ts"
+      ],
+      "browserCoverage": ["tests/tools-index.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/tools-index.spec.ts:96",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual game sidebar/navigation, tool cards, bookmark/reset behavior and return links need DOM routing.",
+      "nativeCoverage": [
+        "src/art/ArtCatalog.test.ts",
+        "src/server/staticFiles.test.ts",
+        "src/explorer/PreviewSettings.test.ts"
+      ],
+      "browserCoverage": ["tests/tools-index.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/traffic-rendering.spec.ts:33",
+      "cases": 3,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual terrain-cache settling, rAF interpolation, embedded surface DOM alignment, resize/scroll and GPU context lifecycle require a browser.",
+      "nativeCoverage": [
+        "src/rendering/TerrainPreparation.test.ts",
+        "src/rendering/RenderHost.test.ts",
+        "src/scenarios/ScenarioPresentationHost.test.ts",
+        "src/rendering/PresentationTimeline.test.ts"
+      ],
+      "browserCoverage": ["tests/traffic-rendering.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/traffic-rendering.spec.ts:93",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual terrain-cache settling, rAF interpolation, embedded surface DOM alignment, resize/scroll and GPU context lifecycle require a browser.",
+      "nativeCoverage": [
+        "src/rendering/TerrainPreparation.test.ts",
+        "src/rendering/RenderHost.test.ts",
+        "src/scenarios/ScenarioPresentationHost.test.ts",
+        "src/rendering/PresentationTimeline.test.ts"
+      ],
+      "browserCoverage": ["tests/traffic-rendering.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/traffic-rendering.spec.ts:129",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual terrain-cache settling, rAF interpolation, embedded surface DOM alignment, resize/scroll and GPU context lifecycle require a browser.",
+      "nativeCoverage": [
+        "src/rendering/TerrainPreparation.test.ts",
+        "src/rendering/RenderHost.test.ts",
+        "src/scenarios/ScenarioPresentationHost.test.ts",
+        "src/rendering/PresentationTimeline.test.ts"
+      ],
+      "browserCoverage": ["tests/traffic-rendering.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/traffic.spec.ts:6",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/traffic.spec.ts:35",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/traffic.spec.ts:50",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/train-audio.spec.ts:18",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Uses real AudioContext stereo energy and game menu/focus/scene voice cleanup.",
+      "nativeCoverage": ["src/audio/TrainAudio.test.ts", "src/audio/AudioManager.test.ts"],
+      "browserCoverage": ["tests/train-audio.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/train-call.spec.ts:72",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/train-geometry.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/train-geometry.spec.ts:82",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Phone layout, contextmenu cancellation and camera/level UI preserving simulation state.",
+      "nativeCoverage": [
+        "src/scenarios/TrainGeometryRecipe.test.ts",
+        "src/scenarios/TrainRoofRiding.test.ts"
+      ],
+      "browserCoverage": ["tests/train-geometry.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/underground-garage.spec.ts:5",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/underground-garage.spec.ts:84",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Touch level controls and phone layout need DOM/input routing.",
+      "nativeCoverage": [
+        "src/scenarios/UndergroundGarageRecipe.test.ts",
+        "src/physics/TerrainExcavation.test.ts"
+      ],
+      "browserCoverage": ["tests/underground-garage.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-driving.spec.ts:140",
+      "cases": 4,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-driving.spec.ts:413",
+      "cases": 4,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-game-fit.spec.ts:3",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-geometry.spec.ts:6",
+      "cases": 4,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-paint-gameplay.spec.ts:18",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exercises actual shared GPU paint cache for every scheme and selector hide/reset behavior.",
+      "nativeCoverage": [
+        "src/server/VehiclePaintIntegration.test.ts",
+        "src/server/VehiclePaintReplication.test.ts",
+        "src/traffic/VehiclePaint.test.ts",
+        "src/rendering/VehiclePaintResources.test.ts"
+      ],
+      "browserCoverage": ["tests/vehicle-paint-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-paint-gameplay.spec.ts:60",
+      "cases": 6,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Aborts actual model/paint/atlas requests and verifies surviving painted sprite fallback.",
+      "nativeCoverage": [
+        "src/server/VehiclePaintIntegration.test.ts",
+        "src/server/VehiclePaintReplication.test.ts",
+        "src/traffic/VehiclePaint.test.ts",
+        "src/rendering/VehiclePaintResources.test.ts"
+      ],
+      "browserCoverage": ["tests/vehicle-paint-gameplay.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-paint-gameplay.spec.ts:113",
+      "cases": 6,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-paint-study.spec.ts:12",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Standalone comparison image sizing, paint/camera selection and responsive layout need browser image/DOM behavior.",
+      "nativeCoverage": ["src/traffic/VehiclePaint.test.ts"],
+      "browserCoverage": ["tests/vehicle-paint-study.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-placement.spec.ts:62",
+      "cases": 4,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-rendering.spec.ts:13",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real rendering fingerprint verification and mismatched-manifest disabled approval require Chromium canvas/UI.",
+      "nativeCoverage": [
+        "src/assets/vehicles/VehicleCatalog.test.ts",
+        "src/art/ArtCatalog.test.ts"
+      ],
+      "browserCoverage": ["tests/vehicle-rendering.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-rendering.spec.ts:33",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Real rendering fingerprint verification and mismatched-manifest disabled approval require Chromium canvas/UI.",
+      "nativeCoverage": [
+        "src/assets/vehicles/VehicleCatalog.test.ts",
+        "src/art/ArtCatalog.test.ts"
+      ],
+      "browserCoverage": ["tests/vehicle-rendering.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-steering.spec.ts:8",
+      "cases": 66,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-workshop.spec.ts:7",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Form validation, collision preview, direction draft persistence, offline queue and pause/approval UI require browser integration.",
+      "nativeCoverage": [
+        "src/assets/vehicles/VehicleCatalog.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/vehicle-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-workshop.spec.ts:66",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Form validation, collision preview, direction draft persistence, offline queue and pause/approval UI require browser integration.",
+      "nativeCoverage": [
+        "src/assets/vehicles/VehicleCatalog.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/vehicle-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/vehicle-workshop.spec.ts:103",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Form validation, collision preview, direction draft persistence, offline queue and pause/approval UI require browser integration.",
+      "nativeCoverage": [
+        "src/assets/vehicles/VehicleCatalog.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/server/workshopService.test.ts"
+      ],
+      "browserCoverage": ["tests/vehicle-workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/warning-beacon-driving.spec.ts:7",
+      "cases": 4,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/water-animation.spec.ts:3",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/webrtc-delivery.spec.ts:185",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Interception happens at real RTCDataChannel receive boundaries; verifies reliable lane choice, reconnect and reset ordering across actual clients.",
+      "nativeCoverage": [
+        "src/server/ReplicationDelivery.test.ts",
+        "src/transport/webrtcChannels.test.ts",
+        "src/transport/webrtcFragment.test.ts"
+      ],
+      "browserCoverage": ["tests/webrtc-delivery.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/webrtc-delivery.spec.ts:235",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Interception happens at real RTCDataChannel receive boundaries; verifies reliable lane choice, reconnect and reset ordering across actual clients.",
+      "nativeCoverage": [
+        "src/server/ReplicationDelivery.test.ts",
+        "src/transport/webrtcChannels.test.ts",
+        "src/transport/webrtcFragment.test.ts"
+      ],
+      "browserCoverage": ["tests/webrtc-delivery.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/wildlife-gameplay.spec.ts:7",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/wildlife-gameplay.spec.ts:95",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/wildlife-gameplay.spec.ts:149",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/wildlife-gameplay.spec.ts:196",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/wildlife-review.spec.ts:14",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact image/canvas equality, playback controls, source-byte failure UI and disabled approval affordances are browser contracts.",
+      "nativeCoverage": ["src/art/WildlifeReview.test.ts", "src/server/workshopService.test.ts"],
+      "browserCoverage": ["tests/wildlife-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/wildlife-review.spec.ts:49",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact image/canvas equality, playback controls, source-byte failure UI and disabled approval affordances are browser contracts.",
+      "nativeCoverage": ["src/art/WildlifeReview.test.ts", "src/server/workshopService.test.ts"],
+      "browserCoverage": ["tests/wildlife-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/wildlife-review.spec.ts:129",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact image/canvas equality, playback controls, source-byte failure UI and disabled approval affordances are browser contracts.",
+      "nativeCoverage": ["src/art/WildlifeReview.test.ts", "src/server/workshopService.test.ts"],
+      "browserCoverage": ["tests/wildlife-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/wildlife-review.spec.ts:148",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Exact image/canvas equality, playback controls, source-byte failure UI and disabled approval affordances are browser contracts.",
+      "nativeCoverage": ["src/art/WildlifeReview.test.ts", "src/server/workshopService.test.ts"],
+      "browserCoverage": ["tests/wildlife-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/worker-server.spec.ts:34",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual Worker isolation under busy authority/crash, browser map recovery, page shutdown/IDB reopen, cross-heap settings and visibility lifecycle require browser integration.",
+      "nativeCoverage": [
+        "src/server/RealmStreaming.test.ts",
+        "src/transport/WorkerClientTransport.test.ts",
+        "src/transport/OrderedWorkerChannel.test.ts",
+        "src/transport/LocalServerWatchdog.test.ts",
+        "src/scenarios/ScenarioWorkerHost.test.ts"
+      ],
+      "browserCoverage": ["tests/worker-server.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/worker-server.spec.ts:120",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual Worker isolation under busy authority/crash, browser map recovery, page shutdown/IDB reopen, cross-heap settings and visibility lifecycle require browser integration.",
+      "nativeCoverage": [
+        "src/server/RealmStreaming.test.ts",
+        "src/transport/WorkerClientTransport.test.ts",
+        "src/transport/OrderedWorkerChannel.test.ts",
+        "src/transport/LocalServerWatchdog.test.ts",
+        "src/scenarios/ScenarioWorkerHost.test.ts"
+      ],
+      "browserCoverage": ["tests/worker-server.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/worker-server.spec.ts:152",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual Worker isolation under busy authority/crash, browser map recovery, page shutdown/IDB reopen, cross-heap settings and visibility lifecycle require browser integration.",
+      "nativeCoverage": [
+        "src/server/RealmStreaming.test.ts",
+        "src/transport/WorkerClientTransport.test.ts",
+        "src/transport/OrderedWorkerChannel.test.ts",
+        "src/transport/LocalServerWatchdog.test.ts",
+        "src/scenarios/ScenarioWorkerHost.test.ts"
+      ],
+      "browserCoverage": ["tests/worker-server.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/worker-server.spec.ts:177",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual Worker isolation under busy authority/crash, browser map recovery, page shutdown/IDB reopen, cross-heap settings and visibility lifecycle require browser integration.",
+      "nativeCoverage": [
+        "src/server/RealmStreaming.test.ts",
+        "src/transport/WorkerClientTransport.test.ts",
+        "src/transport/OrderedWorkerChannel.test.ts",
+        "src/transport/LocalServerWatchdog.test.ts",
+        "src/scenarios/ScenarioWorkerHost.test.ts"
+      ],
+      "browserCoverage": ["tests/worker-server.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/worker-server.spec.ts:230",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual Worker isolation under busy authority/crash, browser map recovery, page shutdown/IDB reopen, cross-heap settings and visibility lifecycle require browser integration.",
+      "nativeCoverage": [
+        "src/server/RealmStreaming.test.ts",
+        "src/transport/WorkerClientTransport.test.ts",
+        "src/transport/OrderedWorkerChannel.test.ts",
+        "src/transport/LocalServerWatchdog.test.ts",
+        "src/scenarios/ScenarioWorkerHost.test.ts"
+      ],
+      "browserCoverage": ["tests/worker-server.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop-dev-review.spec.ts:6",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Development-source drift banners and enabling/disabling real review buttons depend on current page-render verification.",
+      "nativeCoverage": ["src/server/workshopService.test.ts", "src/art/ArtCatalog.test.ts"],
+      "browserCoverage": ["tests/workshop-dev-review.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop-rendering.spec.ts:9",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Current full Chromium/retina GPU district pixels must match registered image hashes.",
+      "nativeCoverage": [
+        "src/generation/regional/DistrictStrategy.test.ts",
+        "src/art/ArtCatalog.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop-rendering.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop-standalone.spec.ts:10",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop-viewport.spec.ts:9",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Cursor-anchored zoom/pan, page-scroll cancellation, rendered pixel stability and zoomed pin hit testing require browser input/canvas layout.",
+      "nativeCoverage": [
+        "src/explorer/ViewState.test.ts",
+        "src/workshop/WorkshopProjection.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop-viewport.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop-viewport.spec.ts:115",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Cursor-anchored zoom/pan, page-scroll cancellation, rendered pixel stability and zoomed pin hit testing require browser input/canvas layout.",
+      "nativeCoverage": [
+        "src/explorer/ViewState.test.ts",
+        "src/workshop/WorkshopProjection.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop-viewport.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop.spec.ts:13",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Login/session expiry, exact current render, draft imports/outbox, shared navigation and pin coordinates require browser integration.",
+      "nativeCoverage": [
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/workshop/SceneReview.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop.spec.ts:47",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Login/session expiry, exact current render, draft imports/outbox, shared navigation and pin coordinates require browser integration.",
+      "nativeCoverage": [
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/workshop/SceneReview.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop.spec.ts:142",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Login/session expiry, exact current render, draft imports/outbox, shared navigation and pin coordinates require browser integration.",
+      "nativeCoverage": [
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/workshop/SceneReview.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop.spec.ts:181",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Login/session expiry, exact current render, draft imports/outbox, shared navigation and pin coordinates require browser integration.",
+      "nativeCoverage": [
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/workshop/SceneReview.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop.spec.ts:226",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Login/session expiry, exact current render, draft imports/outbox, shared navigation and pin coordinates require browser integration.",
+      "nativeCoverage": [
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/workshop/SceneReview.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop.spec.ts:257",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Login/session expiry, exact current render, draft imports/outbox, shared navigation and pin coordinates require browser integration.",
+      "nativeCoverage": [
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/workshop/SceneReview.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/workshop.spec.ts:292",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Login/session expiry, exact current render, draft imports/outbox, shared navigation and pin coordinates require browser integration.",
+      "nativeCoverage": [
+        "src/server/workshopAuth.test.ts",
+        "src/server/workshopService.test.ts",
+        "src/art/BuildingReviewQueue.test.ts",
+        "src/workshop/SceneReview.test.ts"
+      ],
+      "browserCoverage": ["tests/workshop.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-explorer.spec.ts:8",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual worker lifetime/queue cancellation, resource-request exclusions, phone interaction, canvas residency and browser download/storage/UI are integration contracts.",
+      "nativeCoverage": [
+        "src/explorer/QueryClient.test.ts",
+        "src/explorer/PreviewSettings.test.ts",
+        "src/explorer/ReviewStore.test.ts",
+        "src/explorer/ViewState.test.ts",
+        "src/generation/Generator.test.ts"
+      ],
+      "browserCoverage": ["tests/world-explorer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-explorer.spec.ts:51",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual worker lifetime/queue cancellation, resource-request exclusions, phone interaction, canvas residency and browser download/storage/UI are integration contracts.",
+      "nativeCoverage": [
+        "src/explorer/QueryClient.test.ts",
+        "src/explorer/PreviewSettings.test.ts",
+        "src/explorer/ReviewStore.test.ts",
+        "src/explorer/ViewState.test.ts",
+        "src/generation/Generator.test.ts"
+      ],
+      "browserCoverage": ["tests/world-explorer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-explorer.spec.ts:94",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual worker lifetime/queue cancellation, resource-request exclusions, phone interaction, canvas residency and browser download/storage/UI are integration contracts.",
+      "nativeCoverage": [
+        "src/explorer/QueryClient.test.ts",
+        "src/explorer/PreviewSettings.test.ts",
+        "src/explorer/ReviewStore.test.ts",
+        "src/explorer/ViewState.test.ts",
+        "src/generation/Generator.test.ts"
+      ],
+      "browserCoverage": ["tests/world-explorer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-explorer.spec.ts:128",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual worker lifetime/queue cancellation, resource-request exclusions, phone interaction, canvas residency and browser download/storage/UI are integration contracts.",
+      "nativeCoverage": [
+        "src/explorer/QueryClient.test.ts",
+        "src/explorer/PreviewSettings.test.ts",
+        "src/explorer/ReviewStore.test.ts",
+        "src/explorer/ViewState.test.ts",
+        "src/generation/Generator.test.ts"
+      ],
+      "browserCoverage": ["tests/world-explorer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-explorer.spec.ts:182",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual worker lifetime/queue cancellation, resource-request exclusions, phone interaction, canvas residency and browser download/storage/UI are integration contracts.",
+      "nativeCoverage": [
+        "src/explorer/QueryClient.test.ts",
+        "src/explorer/PreviewSettings.test.ts",
+        "src/explorer/ReviewStore.test.ts",
+        "src/explorer/ViewState.test.ts",
+        "src/generation/Generator.test.ts"
+      ],
+      "browserCoverage": ["tests/world-explorer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-explorer.spec.ts:194",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual worker lifetime/queue cancellation, resource-request exclusions, phone interaction, canvas residency and browser download/storage/UI are integration contracts.",
+      "nativeCoverage": [
+        "src/explorer/QueryClient.test.ts",
+        "src/explorer/PreviewSettings.test.ts",
+        "src/explorer/ReviewStore.test.ts",
+        "src/explorer/ViewState.test.ts",
+        "src/generation/Generator.test.ts"
+      ],
+      "browserCoverage": ["tests/world-explorer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-explorer.spec.ts:244",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/world-explorer.spec.ts:309",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Actual worker lifetime/queue cancellation, resource-request exclusions, phone interaction, canvas residency and browser download/storage/UI are integration contracts.",
+      "nativeCoverage": [
+        "src/explorer/QueryClient.test.ts",
+        "src/explorer/PreviewSettings.test.ts",
+        "src/explorer/ReviewStore.test.ts",
+        "src/explorer/ViewState.test.ts",
+        "src/generation/Generator.test.ts"
+      ],
+      "browserCoverage": ["tests/world-explorer.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-generation.spec.ts:8",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/world-generation.spec.ts:38",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/world-generation.spec.ts:91",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/world-generation.spec.ts:106",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/world-generation.spec.ts:249",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/world-geometry.spec.ts:8",
+      "cases": 2,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    },
+    {
+      "source": "tests/world-geometry.spec.ts:55",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Long-press/contextmenu, touch release, CSS selection suppression and page pause routing.",
+      "nativeCoverage": [
+        "src/scenarios/WorldGeometryRecipe.test.ts",
+        "src/physics/surfaceHeight.test.ts",
+        "src/rendering/SurfacePresentation.test.ts"
+      ],
+      "browserCoverage": ["tests/world-geometry.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-geometry.spec.ts:116",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Compares actual automatic/all/lower rendered pixels on both backends.",
+      "nativeCoverage": [
+        "src/scenarios/WorldGeometryRecipe.test.ts",
+        "src/physics/surfaceHeight.test.ts",
+        "src/rendering/SurfacePresentation.test.ts"
+      ],
+      "browserCoverage": ["tests/world-geometry.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-map.spec.ts:12",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Native multifinger transitions, hold-to-travel cancellation, live multiplayer marker DOM and world/realm menu isolation need browser pointer/DOM composition.",
+      "nativeCoverage": [
+        "src/explorer/ViewState.test.ts",
+        "src/ui/PlayerMarkers.test.ts",
+        "src/input/TouchPinch.test.ts"
+      ],
+      "browserCoverage": ["tests/world-map.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-map.spec.ts:58",
+      "cases": 1,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Native multifinger transitions, hold-to-travel cancellation, live multiplayer marker DOM and world/realm menu isolation need browser pointer/DOM composition.",
+      "nativeCoverage": [
+        "src/explorer/ViewState.test.ts",
+        "src/ui/PlayerMarkers.test.ts",
+        "src/input/TouchPinch.test.ts"
+      ],
+      "browserCoverage": ["tests/world-map.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-map.spec.ts:186",
+      "cases": 2,
+      "auditDisposition": "browser",
+      "status": "retained",
+      "resolution": "Native multifinger transitions, hold-to-travel cancellation, live multiplayer marker DOM and world/realm menu isolation need browser pointer/DOM composition.",
+      "nativeCoverage": [
+        "src/explorer/ViewState.test.ts",
+        "src/ui/PlayerMarkers.test.ts",
+        "src/input/TouchPinch.test.ts"
+      ],
+      "browserCoverage": ["tests/world-map.spec.ts"],
+      "validation": []
+    },
+    {
+      "source": "tests/world-recreation.spec.ts:5",
+      "cases": 1,
+      "auditDisposition": "split",
+      "status": "pending",
+      "resolution": "",
+      "nativeCoverage": [],
+      "browserCoverage": [],
+      "validation": []
+    }
+  ]
+}

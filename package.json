@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "check": "biome check .",
     "check:fix": "biome check --fix .",
-    "test": "vitest run",
+    "test": "vitest run && npm run test:node-integration",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
@@ -42,7 +42,8 @@
     "deck:doctor": "node scripts/steam-deck.mjs doctor",
     "deck:install": "node scripts/steam-deck.mjs install",
     "deck:launch": "node scripts/steam-deck.mjs launch",
-    "deck:status": "node scripts/steam-deck.mjs status"
+    "deck:status": "node scripts/steam-deck.mjs status",
+    "test:node-integration": "playwright test --config=playwright.node.config.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

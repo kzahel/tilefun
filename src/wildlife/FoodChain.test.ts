@@ -15,6 +15,7 @@ it.each(["food-web-natural", "food-web-placed"])(
       const wolf = required(animals().find((e) => creatureSpecies(e) === "dire-wolf"));
       const original = wolf.persistentId,
         count = animals().length;
+      expect(count).toBe(4);
       for (let i = 0; i < 900 && !rex().predator?.meals; i++) {
         await session.step(idle);
         if (id === "food-web-natural")
@@ -36,10 +37,18 @@ it.each(["food-web-natural", "food-web-placed"])(
         expect(next).toBeUndefined();
         expect(animals().length).toBeLessThan(count);
       }
+      const types = animals()
+        .map((e) => e.type)
+        .sort();
       const survivors = animals()
         .map((e) => e.persistentId)
         .sort();
       await session.reload();
+      expect(
+        animals()
+          .map((e) => e.type)
+          .sort(),
+      ).toEqual(types);
       expect(
         animals()
           .map((e) => e.persistentId)
