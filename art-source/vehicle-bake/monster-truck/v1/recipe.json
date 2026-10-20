@@ -1,0 +1,1652 @@
+{
+  "family": "raised-lime-purple-monster-pickup",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    5.0,
+    2.98,
+    3.0
+  ],
+  "axles": [
+    -1.45,
+    1.45
+  ],
+  "arch": {
+    "cutRadius": 0.95,
+    "pocketInnerY": 0.7,
+    "segments": 20
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      48,
+      86,
+      49
+    ],
+    "paintShadow": [
+      70,
+      120,
+      43
+    ],
+    "paintMid": [
+      103,
+      158,
+      46
+    ],
+    "paint": [
+      143,
+      199,
+      60
+    ],
+    "paintLight": [
+      183,
+      226,
+      91
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "purple": [
+      116,
+      63,
+      147
+    ],
+    "purpleLight": [
+      155,
+      100,
+      187
+    ],
+    "purpleDeep": [
+      68,
+      43,
+      91
+    ],
+    "bedFloor": [
+      73,
+      52,
+      98
+    ],
+    "bedRib": [
+      106,
+      72,
+      129
+    ],
+    "bedWall": [
+      53,
+      40,
+      77
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Independent raised narrow short-cab lime/purple monster pickup, real short recessed bed, massive block-tread black wheels/purple hubs and visible fixed dark chassis/suspension. Own continuous actual-skin glass/roof/hood charts and separate bed floor/interior/tailgate paint. Intentionally exposed tire crowns, no fake coverage caps.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -1.45,
+      "halfTrack": 1.1,
+      "radius": 0.85,
+      "width": 0.66,
+      "segments": 16,
+      "treadGroups": 12
+    },
+    "FR": {
+      "axle": -1.45,
+      "halfTrack": 1.1,
+      "radius": 0.85,
+      "width": 0.66,
+      "segments": 16,
+      "treadGroups": 12
+    },
+    "RL": {
+      "axle": 1.45,
+      "halfTrack": 1.1,
+      "radius": 0.85,
+      "width": 0.66,
+      "segments": 16,
+      "treadGroups": 12
+    },
+    "RR": {
+      "axle": 1.45,
+      "halfTrack": 1.1,
+      "radius": 0.85,
+      "width": 0.66,
+      "segments": 16,
+      "treadGroups": 12
+    }
+  },
+  "coveragePolicy": {
+    "allWheels": "not-applicable/intentionally-exposed outside narrow raised pickup body",
+    "rawMeaning": "Keep shared finite-region ray evidence and false expectations honestly. Major crowns are intentionally outboard; no fabricated all-four covered metric or rooflike fender caps."
+  },
+  "cargoBed": {
+    "floorCenter": [
+      1.45,
+      0,
+      1.8
+    ],
+    "floorSize": [
+      1.74,
+      1.46,
+      0.1
+    ],
+    "floorTop": 1.85,
+    "railTop": 2.455,
+    "frontWallX": 0.6,
+    "rearWallX": 2.33,
+    "sideWallY": 0.8,
+    "rayXs": [
+      0.85,
+      1.2,
+      1.6,
+      2.05
+    ],
+    "rayYs": [
+      -0.35,
+      0,
+      0.35
+    ],
+    "minimumDepth": 0.55
+  },
+  "components": [
+    {
+      "name": "Raised short closed lime cab actual side glass roof skin",
+      "group": "body",
+      "triangles": 100,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Raised short rounded lime hood own skin",
+      "group": "body",
+      "triangles": 122,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Recessed monster cargo floor",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedFloor"
+      ]
+    },
+    {
+      "name": "Short monster cargo side wall -1",
+      "group": "body",
+      "triangles": 64,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Purple rolled cargo rim -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Short monster cargo side wall 1",
+      "group": "body",
+      "triangles": 64,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Purple rolled cargo rim 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Cargo front bulkhead",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Cargo front bulkhead purple upper seam",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Closed short cargo tailgate",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Closed short cargo tailgate purple upper seam",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Narrow cab support floor",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "STATIC dark long chassis rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Purple raised side step -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "STATIC dark long chassis rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Purple raised side step 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm -1.45",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC central axle housing -1.45",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "STATIC frame crossmember -1.45",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "STATIC fixed diagonal suspension link -1.45 -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC fixed purple shock -1.45 -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "STATIC fixed diagonal suspension link -1.45 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC fixed purple shock -1.45 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm 1.45",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC central axle housing 1.45",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "STATIC frame crossmember 1.45",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "STATIC fixed diagonal suspension link 1.45 -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC fixed purple shock 1.45 -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "STATIC fixed diagonal suspension link 1.45 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC fixed purple shock 1.45 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Purple short heavy bumper -2.42",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Purple short heavy bumper 2.42",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Broad dark front grille",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Broad purple grille slat 1.88",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Broad purple grille slat 2.0",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Broad purple grille slat 2.1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Monster headlamp dark frame -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Monster ivory headlamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Ruby rear corner lamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Monster headlamp dark frame 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Monster ivory headlamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Ruby rear corner lamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Massive rounded black tire carcass FL",
+      "group": "FL",
+      "triangles": 124,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 0 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 0 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 1 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 1 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 2 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 2 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 3 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 3 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 4 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 4 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 5 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 5 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 6 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 6 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 7 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 7 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 8 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 8 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 9 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 9 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 10 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 10 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 11 0",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FL 11 1",
+      "group": "FL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Purple monster wheel rim FL",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Purple monster broad hub FL",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Monster hub dark asymmetric inset FL",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "purpleDeep"
+      ]
+    },
+    {
+      "name": "Massive rounded black tire carcass FR",
+      "group": "FR",
+      "triangles": 124,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 0 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 0 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 1 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 1 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 2 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 2 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 3 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 3 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 4 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 4 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 5 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 5 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 6 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 6 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 7 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 7 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 8 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 8 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 9 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 9 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 10 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 10 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 11 0",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread FR 11 1",
+      "group": "FR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Purple monster wheel rim FR",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Purple monster broad hub FR",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Monster hub dark asymmetric inset FR",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "purpleDeep"
+      ]
+    },
+    {
+      "name": "Massive rounded black tire carcass RL",
+      "group": "RL",
+      "triangles": 124,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 0 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 0 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 1 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 1 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 2 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 2 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 3 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 3 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 4 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 4 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 5 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 5 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 6 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 6 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 7 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 7 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 8 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 8 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 9 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 9 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 10 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 10 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 11 0",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RL 11 1",
+      "group": "RL",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Purple monster wheel rim RL",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Purple monster broad hub RL",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Monster hub dark asymmetric inset RL",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "purpleDeep"
+      ]
+    },
+    {
+      "name": "Massive rounded black tire carcass RR",
+      "group": "RR",
+      "triangles": 124,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 0 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 0 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 1 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 1 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 2 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 2 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 3 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 3 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 4 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 4 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 5 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 5 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 6 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 6 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 7 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 7 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 8 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 8 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 9 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 9 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 10 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 10 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 11 0",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad block tread RR 11 1",
+      "group": "RR",
+      "triangles": 12,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Purple monster wheel rim RR",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "purple"
+      ]
+    },
+    {
+      "name": "Purple monster broad hub RR",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "purpleLight"
+      ]
+    },
+    {
+      "name": "Monster hub dark asymmetric inset RR",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "purpleDeep"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4500000476837158,
+        -1.100000023841858,
+        0.8500000238418579
+      ],
+      "centerExport": [
+        -25.217392133629843,
+        14.782609110293183,
+        19.130435197249707
+      ],
+      "radiusBlender": 0.85,
+      "wheel_radius": 14.782608695652176
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4500000476837158,
+        1.100000023841858,
+        0.8500000238418579
+      ],
+      "centerExport": [
+        -25.217392133629843,
+        14.782609110293183,
+        -19.130435197249707
+      ],
+      "radiusBlender": 0.85,
+      "wheel_radius": 14.782608695652176
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.4500000476837158,
+        -1.100000023841858,
+        0.8500000238418579
+      ],
+      "centerExport": [
+        25.217392133629843,
+        14.782609110293183,
+        19.130435197249707
+      ],
+      "radiusBlender": 0.85,
+      "wheel_radius": 14.782608695652176
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.4500000476837158,
+        1.100000023841858,
+        0.8500000238418579
+      ],
+      "centerExport": [
+        25.217392133629843,
+        14.782609110293183,
+        -19.130435197249707
+      ],
+      "radiusBlender": 0.85,
+      "wheel_radius": 14.782608695652176
+    }
+  ],
+  "method": "Independent raised narrow short-cab lime/purple monster pickup, real short recessed bed, massive block-tread black wheels/purple hubs and visible fixed dark chassis/suspension. Own continuous actual-skin glass/roof/hood charts and separate bed floor/interior/tailgate paint. Intentionally exposed tire crowns, no fake coverage caps.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/monster-truck/build.py",
+    "scripts/vehicle-bake/monster-truck/geometry.py",
+    "scripts/vehicle-bake/monster-truck/family.json",
+    "scripts/vehicle-bake/monster-truck/coverage-region.json",
+    "scripts/vehicle-bake/monster-truck/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

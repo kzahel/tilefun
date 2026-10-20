@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/camper-van/v1/report.json",
+  "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+  "atlasSha256": "e3b1043f073eb9fbea2772e76037038c51b5e346d3a84fb46e291176f4daadac",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/camper-van/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/camper-van/capture.mjs",
+    "python scripts/vehicle-bake/camper-van/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/camper-van/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/camper-van/v1/evidence/clearance-input.json data/vehicle-bake/camper-van/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/camper-van/v1/model.glb --config art-source/vehicle-bake/camper-van/v1/coverage-region.json --output data/vehicle-bake/camper-van/recheck-coverage.json",
+    "python scripts/vehicle-bake/camper-van/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/camper-van/author-config.json --qa-only"
+  ]
+}

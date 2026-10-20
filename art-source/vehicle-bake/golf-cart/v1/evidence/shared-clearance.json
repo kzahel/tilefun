@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "golf-cart--v1",
+    "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "triangles": 2682,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.391305103149664,
+        "minimumGap": 0.8160002579699777,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.391305103149664,
+        "minimumGap": 0.816000676071666,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.391304969787598,
+        "minimumGap": 0.8159986506972396,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.391304969787598,
+        "minimumGap": 0.8159986506972396,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

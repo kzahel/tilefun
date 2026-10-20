@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/farm-tractor/v1/report.json",
+  "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+  "atlasSha256": "df1abd245c911d86fdacc5cca4c8c0981e9b2e9c30f9dd46c95ae2d65fdec446",
+  "replayCommands": [
+    "python art-source/vehicle-bake/farm-tractor/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/farm-tractor/capture.mjs",
+    "node scripts/vehicle-bake/farm-tractor/mixed-wheel-visual.mjs",
+    "python scripts/vehicle-bake/farm-tractor/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/farm-tractor/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/farm-tractor/clearance-each.py -- art-source/vehicle-bake/farm-tractor/v1/evidence/clearance-input.json data/vehicle-bake/farm-tractor/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/farm-tractor/v1/clearance-each.py -- art-source/vehicle-bake/farm-tractor/v1/evidence/packed-source-clearance-input.json data/vehicle-bake/farm-tractor/recheck-source-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/farm-tractor/v1/model.glb --config art-source/vehicle-bake/farm-tractor/v1/coverage-region.json --output data/vehicle-bake/farm-tractor/recheck-coverage.json",
+    "python scripts/vehicle-bake/farm-tractor/assess-coverage.py --input data/vehicle-bake/farm-tractor/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/farm-tractor/v1/prove-tractor.py -- --input public/demos/vehicle-bake/farm-tractor/v1/model.glb --output data/vehicle-bake/farm-tractor/recheck-tractor.json",
+    "python scripts/vehicle-bake/farm-tractor/measure-fit.py",
+    "python scripts/vehicle-bake/farm-tractor/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/farm-tractor/author-config.json --qa-only"
+  ]
+}

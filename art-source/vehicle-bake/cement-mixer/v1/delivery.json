@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "report": "public/demos/vehicle-bake/cement-mixer/v1/report.json",
+  "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+  "atlasSha256": "848fe02f0b4cc179850573655fdf9ade3752c95b048fda8d3a28e8b973291205",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/cement-mixer/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/cement-mixer/capture.mjs",
+    "node scripts/vehicle-bake/cement-mixer/independent-visual.mjs",
+    "node scripts/vehicle-bake/cement-mixer/wheel-visual.mjs",
+    "python scripts/vehicle-bake/cement-mixer/sheets.py",
+    "python scripts/vehicle-bake/cement-mixer/audit-inventory.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/cement-mixer/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance-v2.py -- art-source/vehicle-bake/cement-mixer/v1/evidence/clearance-input.json data/vehicle-bake/cement-mixer/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/cement-mixer/v1/model.glb --config art-source/vehicle-bake/cement-mixer/v1/coverage-region.json --output data/vehicle-bake/cement-mixer/recheck-coverage.json",
+    "python scripts/vehicle-bake/cement-mixer/assess-coverage.py --input data/vehicle-bake/cement-mixer/recheck-coverage.json",
+    "python scripts/vehicle-bake/cement-mixer/assess-fit.py",
+    "python scripts/vehicle-bake/family-package-v2.py data/vehicle-bake/cement-mixer/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture-v2.mjs data/vehicle-bake/cement-mixer/author-config.json --qa-only"
+  ]
+}

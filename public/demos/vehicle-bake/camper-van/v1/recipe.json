@@ -1,0 +1,663 @@
+{
+  "family": "retro-rounded-cab-over-camper-van",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    5.1,
+    2.1,
+    2.33
+  ],
+  "wheelRadius": 0.45,
+  "wheelWidth": 0.27,
+  "axles": [
+    -1.46,
+    1.48
+  ],
+  "halfTrack": 0.85,
+  "arch": {
+    "cutRadius": 0.545,
+    "pocketInnerY": 0.64,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [
+      0.61,
+      0.75,
+      0.89,
+      1.0,
+      1.05
+    ],
+    "shoulderRadii": [
+      0.56,
+      0.61,
+      0.62,
+      0.59,
+      0.56
+    ],
+    "archRadius": 0.535
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      41,
+      105,
+      117
+    ],
+    "paintShadow": [
+      42,
+      127,
+      141
+    ],
+    "paintMid": [
+      46,
+      152,
+      165
+    ],
+    "paint": [
+      65,
+      177,
+      183
+    ],
+    "paintLight": [
+      114,
+      201,
+      195
+    ],
+    "cream": [
+      238,
+      220,
+      184
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "creamLight": [
+      255,
+      242,
+      210
+    ],
+    "creamShadow": [
+      212,
+      191,
+      157
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original rounded flat-front cab-over camper with turquoise lower coachwork, cream upper skin, split blue windshield and three continuous side-skin framed panes each side. Own short front overhang and tall rounded body, actual raised cream roof and fixed small vent. Direct semantic UV paint, static side door/hatch, no glass overlays or high-to-low transfer claim.",
+  "bodyStations": [
+    [
+      -2.44,
+      0.74,
+      1.85
+    ],
+    [
+      -2.39,
+      0.88,
+      1.96
+    ],
+    [
+      -2.24,
+      0.98,
+      2.02
+    ],
+    [
+      -1.96,
+      1.015,
+      2.04
+    ],
+    [
+      -1.48,
+      1.02,
+      2.045
+    ],
+    [
+      -0.9,
+      1.02,
+      2.05
+    ],
+    [
+      0,
+      1.02,
+      2.055
+    ],
+    [
+      0.9,
+      1.02,
+      2.05
+    ],
+    [
+      1.75,
+      1.015,
+      2.04
+    ],
+    [
+      2.2,
+      0.98,
+      2.015
+    ],
+    [
+      2.39,
+      0.87,
+      1.96
+    ],
+    [
+      2.44,
+      0.74,
+      1.86
+    ]
+  ],
+  "bodySection": [
+    [
+      -0.82,
+      0
+    ],
+    [
+      -0.96,
+      0.075
+    ],
+    [
+      -1,
+      0.28
+    ],
+    [
+      -1,
+      0.59
+    ],
+    [
+      -0.985,
+      0.81
+    ],
+    [
+      -0.95,
+      0.94
+    ],
+    [
+      -0.81,
+      1.005
+    ],
+    [
+      -0.56,
+      1.02
+    ],
+    [
+      0,
+      1.025
+    ],
+    [
+      0.56,
+      1.02
+    ],
+    [
+      0.81,
+      1.005
+    ],
+    [
+      0.95,
+      0.94
+    ],
+    [
+      0.985,
+      0.81
+    ],
+    [
+      1,
+      0.59
+    ],
+    [
+      1,
+      0.28
+    ],
+    [
+      0.96,
+      0.075
+    ],
+    [
+      0.82,
+      0
+    ]
+  ],
+  "raisedRoof": {
+    "center": [
+      0,
+      0,
+      2.12
+    ],
+    "dimensions": [
+      4.68,
+      1.96,
+      0.28
+    ],
+    "bevelRadius": 0.1,
+    "bevelSegments": 3,
+    "static": true
+  },
+  "components": [
+    {
+      "name": "Own rounded flat front cab over camper coachwork",
+      "group": "body",
+      "triangles": 636,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Integrated rounded camper open wheel arch -1.46 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Integrated rounded camper open wheel arch -1.46 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Integrated rounded camper open wheel arch 1.48 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Integrated rounded camper open wheel arch 1.48 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Actual raised cream camper roof",
+      "group": "body",
+      "triangles": 188,
+      "paintRoles": [
+        "creamLight"
+      ]
+    },
+    {
+      "name": "Fixed roof vent dark base",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed gray roof vent lid",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Rounded gray bumper -2.49",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Bumper broad silver top -2.49",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Rounded gray bumper 2.49",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Bumper broad silver top 2.49",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Round front gray lamp rim -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Round front gray headlamp -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Round front gray lamp rim 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Round front gray headlamp 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4600000381469727,
+        -0.8500000238418579,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        -25.391305011251703,
+        7.826086749201237,
+        14.782609110293183
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4600000381469727,
+        0.8500000238418579,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        -25.391305011251703,
+        7.826086749201237,
+        -14.782609110293183
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.4800000190734863,
+        -0.8500000238418579,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        25.739130766495418,
+        7.826086749201237,
+        14.782609110293183
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.4800000190734863,
+        0.8500000238418579,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        25.739130766495418,
+        7.826086749201237,
+        -14.782609110293183
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    }
+  ],
+  "method": "Original rounded flat-front cab-over camper with turquoise lower coachwork, cream upper skin, split blue windshield and three continuous side-skin framed panes each side. Own short front overhang and tall rounded body, actual raised cream roof and fixed small vent. Direct semantic UV paint, static side door/hatch, no glass overlays or high-to-low transfer claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/camper-van/build.py",
+    "scripts/vehicle-bake/camper-van/family.json",
+    "scripts/vehicle-bake/camper-van/coverage-region.json",
+    "scripts/vehicle-bake/camper-van/surface-regions.json",
+    "scripts/vehicle-bake/camper-van/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

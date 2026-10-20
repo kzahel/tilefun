@@ -1,0 +1,41 @@
+{
+  "status": "prototype-not-production",
+  "sourceStage": "complete",
+  "sourceImmutable": true,
+  "humanApproval": false,
+  "geometry": {
+    "triangles": 2112,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 1,
+    "atlas": [
+      256,
+      256
+    ],
+    "glbBytes": 165060,
+    "sha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+    "uvVertices": 4626
+  },
+  "contactFitStatus": "passed-profile-contacts",
+  "targetMissWorld": {
+    "hip_saddle": 0.0,
+    "hand_left_grip": 0.0,
+    "foot_left_support": 5.183012589164403e-07,
+    "hand_right_grip": 0.0,
+    "foot_right_support": 5.183012589164403e-07
+  },
+  "limits": [
+    "One static Brown Bear player-avatar and synthetic fixture; no actual bike/production/27-avatar/AI/fallback qualification",
+    "Existing standing/promoted characters and normal vehicle runtime unchanged"
+  ],
+  "readyForIndependentPrerequisiteQA": true,
+  "actualBikePresent": false,
+  "CarMeshAssetUsed": false,
+  "fixtureGeometryStaysIgnored": true,
+  "sourceOnlyReplayExact": true,
+  "contactProfileId": "brown-bear-upright-measured-v1",
+  "contactProfileSha256": "8d51332a2f7bf6c29c97bdee57df6c0a4d92349694ac9507d83a03a9920c1f81",
+  "contactProfileStatus": "proposed-not-globally-approved",
+  "originalExplorerProfileFit": "FAILED-final-template-no-stretch",
+  "normalActivationQualified": false
+}

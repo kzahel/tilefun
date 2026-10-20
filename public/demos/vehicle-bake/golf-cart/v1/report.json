@@ -1,0 +1,920 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "golf-cart",
+  "route": "golf-cart",
+  "revision": "v1",
+  "method": "Original mint open golf cart; real deep passenger footwell, tan bench and back, white low-crown canopy on four slim fixed dark supports, small framed blue windscreen, recessed rear bagwell. Actual-surface semantic UV paint only.",
+  "geometry": {
+    "triangles": 2682,
+    "vertices": 5102,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 185488,
+    "sha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 5.391304347826088,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 5.391304347826088,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 5.391304347826088,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 5.391304347826088,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.0499999523162842,
+        -0.6499999761581421,
+        0.3100000023841858
+      ],
+      "centerExport": [
+        -18.26086873593538,
+        5.391304389290188,
+        11.304347411445951
+      ],
+      "radiusBlender": 0.31,
+      "wheel_radius": 5.391304347826088
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.0499999523162842,
+        0.6499999761581421,
+        0.3100000023841858
+      ],
+      "centerExport": [
+        -18.26086873593538,
+        5.391304389290188,
+        -11.304347411445951
+      ],
+      "radiusBlender": 0.31,
+      "wheel_radius": 5.391304347826088
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.0399999618530273,
+        -0.6499999761581421,
+        0.3100000023841858
+      ],
+      "centerExport": [
+        18.086955858313523,
+        5.391304389290188,
+        11.304347411445951
+      ],
+      "radiusBlender": 0.31,
+      "wheel_radius": 5.391304347826088
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.0399999618530273,
+        0.6499999761581421,
+        0.3100000023841858
+      ],
+      "centerExport": [
+        18.086955858313523,
+        5.391304389290188,
+        -11.304347411445951
+      ],
+      "radiusBlender": 0.31,
+      "wheel_radius": 5.391304347826088
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/golf-cart/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/golf-cart/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/golf-cart/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "driverDisplay": "ordinary hidden like current roadster; no occupant mesh",
+  "authorization": "autonomous-153",
+  "triangles": 2682,
+  "vertexCount": 5102,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 185488,
+  "atlasBytes": 3549,
+  "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+  "atlasSha256": "d5d67a2c4c23b35a7ab0ec6d1b258ab11e6c83762d54d443cd598a8b59322bbe",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "golf-cart--v1",
+    "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "triangles": 2682,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.391305103149664,
+        "minimumGap": 0.8160002579699777,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.391305103149664,
+        "minimumGap": 0.816000676071666,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.391304969787598,
+        "minimumGap": 0.8159986506972396,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.391304969787598,
+        "minimumGap": 0.8159986506972396,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/golf-cart/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/golf-cart/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "meets-declared-finite-region",
+    "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "allFourCrownsCovered": true,
+    "allWheelCoverage": "natural front nose/rear tub fenders over declared central crown region",
+    "wheels": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": true,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "maximumRayDistanceR": 1.15,
+    "canopyCannotQualify": true,
+    "regionMeaning": "Finite central tread footprint from each own .31source radius and .24source width. Ray limited to1.15R above sampled tread; white canopy is outside this range. Actual natural nose/rear tub body owns covered crowns, no separate fake caps.",
+    "portableRawEvidence": "art-source/vehicle-bake/golf-cart/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "6de3f8511b3367b005c8ab4eeba147b3e087c0acfbd7bc3703f752b9635756ff",
+    "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "minBlenderWorld": [
+      -27.82608413696289,
+      -14.782608985900879,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      27.82608413696289,
+      14.782608985900879,
+      31.304346084594727
+    ],
+    "dimensionsBlenderWorld": [
+      55.65216827392578,
+      29.565217971801758,
+      31.30434560775757
+    ],
+    "dimensionsSourceUnits": [
+      3.199999675750732,
+      1.7000000333786007,
+      1.79999987244606
+    ]
+  },
+  "openPassengerAndBagwellEvidence": {
+    "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "footwellRays": [
+      {
+        "xySource": [
+          -0.44,
+          -0.3
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.320000033378601,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.44,
+          0
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.3199999237060546,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.44,
+          0.3
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.320000033378601,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.12,
+          -0.3
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.3199999785423278,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.12,
+          0
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.3199999785423278,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.12,
+          0.3
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.3199999785423278,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.04,
+          -0.3
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.3199999237060546,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.04,
+          0
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.3199999237060546,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.04,
+          0.3
+        ],
+        "originZSource": 1.2,
+        "firstHitZSource": 0.3199999237060546,
+        "owner": "Body_static"
+      }
+    ],
+    "sideOpeningRays": [
+      {
+        "xSource": -0.44,
+        "zSource": 0.42,
+        "fullSideToSideOpen": true
+      },
+      {
+        "xSource": -0.44,
+        "zSource": 0.55,
+        "fullSideToSideOpen": true
+      },
+      {
+        "xSource": -0.44,
+        "zSource": 0.68,
+        "fullSideToSideOpen": true
+      },
+      {
+        "xSource": -0.12,
+        "zSource": 0.42,
+        "fullSideToSideOpen": true
+      },
+      {
+        "xSource": -0.12,
+        "zSource": 0.55,
+        "fullSideToSideOpen": true
+      },
+      {
+        "xSource": -0.12,
+        "zSource": 0.68,
+        "fullSideToSideOpen": true
+      },
+      {
+        "xSource": 0.04,
+        "zSource": 0.42,
+        "fullSideToSideOpen": true
+      },
+      {
+        "xSource": 0.04,
+        "zSource": 0.55,
+        "fullSideToSideOpen": true
+      },
+      {
+        "xSource": 0.04,
+        "zSource": 0.68,
+        "fullSideToSideOpen": true
+      }
+    ],
+    "bagwellRays": [
+      {
+        "xySource": [
+          1.04,
+          -0.25
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5200000405311583,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.04,
+          0
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5199999856948851,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.04,
+          0.25
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5199999856948851,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          -0.25
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5199999856948851,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          0
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5199999856948851,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          0.25
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5199999856948851,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.36,
+          -0.25
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5199999856948851,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.36,
+          0
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5199999856948851,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.36,
+          0.25
+        ],
+        "originZSource": 1.3,
+        "firstHitZSource": 0.5199999856948851,
+        "owner": "Body_static"
+      }
+    ],
+    "seatTopMeasuredSource": 0.7899999213218688,
+    "seatAboveFloorMeasuredSource": 0.4699998879432678,
+    "bagwellRailTopMeasuredSource": 0.7900000309944152,
+    "bagwellRecessMeasuredSource": 0.26999999046325684,
+    "realOpenPassengerWell": true,
+    "realRecessedRearBagwell": true,
+    "originsBelowCanopy": true
+  },
+  "frameFit": {
+    "status": "passed",
+    "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "actualCapture": "engine/capture.json",
+    "nativeViewport": [
+      224,
+      224
+    ],
+    "nativeRadius": 112,
+    "source80ReferenceUnchanged": true,
+    "familyExtraPadding": 0,
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "engineOrigin": [
+      112,
+      112
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -16,
+      32
+    ],
+    "scale": 1,
+    "views": [
+      {
+        "yaw": 0,
+        "actual224OccupiedBounds": {
+          "minX": 84,
+          "minY": 67,
+          "maxX": 139,
+          "maxY": 124
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 68,
+          "maxX": 123,
+          "minY": 99,
+          "maxY": 156
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 22.5,
+        "actual224OccupiedBounds": {
+          "minX": 82,
+          "minY": 60,
+          "maxX": 141,
+          "maxY": 130
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 66,
+          "maxX": 125,
+          "minY": 92,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 45,
+        "actual224OccupiedBounds": {
+          "minX": 84,
+          "minY": 57,
+          "maxX": 139,
+          "maxY": 134
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 68,
+          "maxX": 123,
+          "minY": 89,
+          "maxY": 166
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 67.5,
+        "actual224OccupiedBounds": {
+          "minX": 89,
+          "minY": 57,
+          "maxX": 134,
+          "maxY": 135
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 73,
+          "maxX": 118,
+          "minY": 89,
+          "maxY": 167
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 90,
+        "actual224OccupiedBounds": {
+          "minX": 97,
+          "minY": 61,
+          "maxX": 126,
+          "maxY": 132
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 81,
+          "maxX": 110,
+          "minY": 93,
+          "maxY": 164
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 112.5,
+        "actual224OccupiedBounds": {
+          "minX": 89,
+          "minY": 57,
+          "maxX": 134,
+          "maxY": 135
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 73,
+          "maxX": 118,
+          "minY": 89,
+          "maxY": 167
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 135,
+        "actual224OccupiedBounds": {
+          "minX": 84,
+          "minY": 57,
+          "maxX": 139,
+          "maxY": 134
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 68,
+          "maxX": 123,
+          "minY": 89,
+          "maxY": 166
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 157.5,
+        "actual224OccupiedBounds": {
+          "minX": 82,
+          "minY": 60,
+          "maxX": 141,
+          "maxY": 130
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 66,
+          "maxX": 125,
+          "minY": 92,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 180,
+        "actual224OccupiedBounds": {
+          "minX": 84,
+          "minY": 67,
+          "maxX": 139,
+          "maxY": 124
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 68,
+          "maxX": 123,
+          "minY": 99,
+          "maxY": 156
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 202.5,
+        "actual224OccupiedBounds": {
+          "minX": 82,
+          "minY": 61,
+          "maxX": 141,
+          "maxY": 130
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 66,
+          "maxX": 125,
+          "minY": 93,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 225,
+        "actual224OccupiedBounds": {
+          "minX": 84,
+          "minY": 57,
+          "maxX": 139,
+          "maxY": 134
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 68,
+          "maxX": 123,
+          "minY": 89,
+          "maxY": 166
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 247.5,
+        "actual224OccupiedBounds": {
+          "minX": 89,
+          "minY": 58,
+          "maxX": 134,
+          "maxY": 135
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 73,
+          "maxX": 118,
+          "minY": 90,
+          "maxY": 167
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 270,
+        "actual224OccupiedBounds": {
+          "minX": 97,
+          "minY": 62,
+          "maxX": 126,
+          "maxY": 132
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 81,
+          "maxX": 110,
+          "minY": 94,
+          "maxY": 164
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 292.5,
+        "actual224OccupiedBounds": {
+          "minX": 89,
+          "minY": 58,
+          "maxX": 134,
+          "maxY": 135
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 73,
+          "maxX": 118,
+          "minY": 90,
+          "maxY": 167
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 315,
+        "actual224OccupiedBounds": {
+          "minX": 84,
+          "minY": 57,
+          "maxX": 139,
+          "maxY": 134
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 68,
+          "maxX": 123,
+          "minY": 89,
+          "maxY": 166
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 337.5,
+        "actual224OccupiedBounds": {
+          "minX": 82,
+          "minY": 61,
+          "maxX": 141,
+          "maxY": 130
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 66,
+          "maxX": 125,
+          "minY": 93,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      }
+    ],
+    "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+  },
+  "attachmentEvidence": {
+    "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 9.217391967773438,
+        "actualStaticArmEndAbsY": 8.956521034240723,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 9.217391967773438,
+        "actualStaticArmEndAbsY": 8.956521034240723,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RL",
+        "actualTireSlabInnerAbsY": 9.217391967773438,
+        "actualStaticArmEndAbsY": 8.956521034240723,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RR",
+        "actualTireSlabInnerAbsY": 9.217391967773438,
+        "actualStaticArmEndAbsY": 8.956521034240723,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "wheelVisualEvidence": "engine/wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/golf-cart/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/golf-cart/capture.mjs",
+    "node scripts/vehicle-bake/golf-cart/independent-visual.mjs",
+    "node scripts/vehicle-bake/golf-cart/wheel-visual.mjs",
+    "python scripts/vehicle-bake/golf-cart/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/golf-cart/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/golf-cart/v1/evidence/clearance-input.json data/vehicle-bake/golf-cart/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/golf-cart/v1/model.glb --config art-source/vehicle-bake/golf-cart/v1/coverage-region.json --output data/vehicle-bake/golf-cart/recheck-coverage.json",
+    "python scripts/vehicle-bake/golf-cart/assess-coverage.py --input data/vehicle-bake/golf-cart/recheck-coverage.json",
+    "python scripts/vehicle-bake/golf-cart/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/golf-cart/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/golf-cart/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 study and16 game actualGLB headings at fixed224/radius112 unchanged density, plus fixed96px nearest3x details. Original mint rounded-nose open cart, white canopy, tan bench/back and rear bagwell remain recognizable.",
+    "Both passenger sides are physically open; dark low ribbed footwell remains below raised tan seat. White flat canopy has four slim dark supports, planted on actual nose/rear deck; no oversized cage bars.",
+    "Small blue opaque front windscreen carries continuous actual-surface ink frame, separate from canopy/body; no intersecting glass overlay or closed side cabin invented.",
+    "All4 small lightgray-hub black wheels stay under real front nose/rear tub fenders. Wheel-ID32heading diagnostics show far crowns under natural panels, no roof/floating tire artifact. Finite ray range excludes canopy.",
+    "Inspected8 signed distance phases per camera,16 equal-angle signed views,both actual wireframes and all4 independent quarter/reverse/absolute-reset image sets; fixed body, canopy, seat and screen remain still. Small hubs have3-6 changed channels, enough for native motion/reset evidence without oversized wheel marks.",
+    "Roof naturally occludes some interior from elevated headings. Minor support/hub and lamp aliasing varies by heading; no blocking visual defects identified. Ordinary driver display stays hidden like current roadster, no occupant mesh."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "allWheelRadiusesMatchOwnGeometry": true,
+    "fourSlimStaticCanopySupports": true,
+    "canopyMountsPlantedInActualBody": true,
+    "realOpenPassengerWellAndTanBench": true,
+    "footwellAndBagwellNineRaysEach": true,
+    "sideOpeningNineRays": true,
+    "standard224AndFallback192x224FitWithoutScaling": true,
+    "allFourEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crownCoverage": "natural nose and rear tub;25/25 each declared central footprint",
+    "canopyOutsideCoverageRayRange": true,
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "allFourCrownsCovered": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Crown coverage qualifies declared finite central tread region only; ray limit1.15R excludes white canopy. Synthetic fixtures qualify bookkeeping, actual body-removal zeroes all samples. Camera headings inspected separately.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Small .31source wheels and slim canopy supports show minor native aliasing. Roof naturally occludes parts of passenger well from elevated headings; both open sides and tan bench remain readable.",
+    "Driver display remains ordinary hidden like current roadster. No occupant or standing-person mesh; no new gameplay features.",
+    "Actual occupied pixels fit224 and standard192x224 fallback placement without scaling; parent owns independent runtime export/QA.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/golf-cart/v1/assess-coverage.py": "e2c76556b2919e89fcfbb9e88df7c6d0e848cd679303c0867ab4371c8dfa31f0",
+    "art-source/vehicle-bake/golf-cart/v1/assess-fit.py": "ee3ab61bac875951baeffafc0d9864181b36f898ab63ee9ac1682af6cbd18c8d",
+    "art-source/vehicle-bake/golf-cart/v1/atlas.png": "d5d67a2c4c23b35a7ab0ec6d1b258ab11e6c83762d54d443cd598a8b59322bbe",
+    "art-source/vehicle-bake/golf-cart/v1/audit-source.py": "3fd656f5c853892c964faef6ec6f9b780241b984a7ff461b27b96979261dc482",
+    "art-source/vehicle-bake/golf-cart/v1/build.py": "d92e353cfc8636781926b5e938aa19bc75fa3273e65783ecf3e15606194746d1",
+    "art-source/vehicle-bake/golf-cart/v1/capture.mjs": "5192dc45ca741991653ce556f8b9688ad4f1b0431980c5d22e3989782ae29e88",
+    "art-source/vehicle-bake/golf-cart/v1/car.blend": "4bdf3b2d4c8ffd47abc426e2ae304396e36cb1bc6e515bcca816682ec4872a33",
+    "art-source/vehicle-bake/golf-cart/v1/coverage-region.json": "bebced1c623d0646bc54ebe732fbe5c826b1768331c7caa2cb9df97df64c1d6c",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/author-browser-qa.json": "855406117e6c04ac7fb9bb838034f22d7d176fd9ed72f5def3fa4706de3d7d99",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/author-visual-inspection.json": "ef091cc68f5d1cc03d792b11fd3b77bd14e1289224ff7caa0ab1f747c9de2c8b",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/clearance-input.json": "2d2548315565f95065db0c7579ce609684bef4cda06bb3f9d3e25f1a5e687196",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/engine-capture.json": "a468bc92bfbc3038660d377baeb0db986e271c9a515a338fa4e8809958160103",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/fit-assessment.json": "88b78b9db353ca04ffb350e49c67a27503c23a787fd79dafd28368936ceb8ead",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/independent-visual.json": "0a7bb044d849e380c2ab9a4cd2b8146eeba0603482f5b858a53f8a78dd63d9ac",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/packed-source-audit.json": "093dcd9bdd0dfc514777dc729ac26e3a437e2bba85db834b0b0203d3251fc467",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/replay-verification.json": "5cd028ff156c275f3565178c18ebd3f60fed88fa803efd443cb06b08ab642a7d",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/shared-clearance.json": "070aa6e59ce7662194e6c951a122a7f217dd0fa59b79ebe073d22d3393300b69",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/upper-wheel-coverage-raw.json": "6de3f8511b3367b005c8ab4eeba147b3e087c0acfbd7bc3703f752b9635756ff",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/wheel-coverage-assessment.json": "c027e7875dd126796893f4e8333fd8a5ba2bb72b15aac4b9fa9307a1cd8ad161",
+    "art-source/vehicle-bake/golf-cart/v1/evidence/wheel-visual.json": "6578eb00e92d64679cc2fd4b96312d2f8aecb70118b85781e39874cc03145357",
+    "art-source/vehicle-bake/golf-cart/v1/family.json": "e2045793c6371f1ee67f7132f51040994057f883e2498889b7cdee2e29fff62f",
+    "art-source/vehicle-bake/golf-cart/v1/finalize.py": "1102ad9b856edcea05ac9d3dea7d46ca53883a8074414a18e2e69268a082b06d",
+    "art-source/vehicle-bake/golf-cart/v1/geometry.py": "189b41d4b2aff7c9da0f598c4d3ab034dbe4f712faeb745455de7d508ad09315",
+    "art-source/vehicle-bake/golf-cart/v1/independent-visual.mjs": "86eab2972e6a1fa9137745784c700c9f49f69ece8c6117297bb5f47f43d6ec70",
+    "art-source/vehicle-bake/golf-cart/v1/master.blend": "969f2947dd9a4815c74efce35f5227fbeb603c92056f9d6e2ed76bf4f0c3d91e",
+    "art-source/vehicle-bake/golf-cart/v1/model.glb": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+    "art-source/vehicle-bake/golf-cart/v1/paint-ownership.json": "655e7d83d55071388a093abd74c9ce0115a167693fba08c28e0fd43d471216fb",
+    "art-source/vehicle-bake/golf-cart/v1/palette-draft.png": "ef0d91f701c5eec5a9b62d82ddf6168bc915f0a5a7e3eeaea270d3cf89318b6d",
+    "art-source/vehicle-bake/golf-cart/v1/recipe.json": "a58a2807c16b1e41b635b4de35b2803752b77ac0535971138682c830a4922dac",
+    "art-source/vehicle-bake/golf-cart/v1/review.json": "0276530dd8bbab154626854ae15627948878490d80b819e1c308e4c9bbaee7a7",
+    "art-source/vehicle-bake/golf-cart/v1/sheets.py": "250fef0f00a6de8d7c1992f373a12d4d6512f35b39c7e6d15401ab0397adec81",
+    "art-source/vehicle-bake/golf-cart/v1/wheel-visual.mjs": "a3f27638ccb0c278ffa43582eceff5caf15be75c8bbfc1518b1aed06963810e8"
+  }
+}

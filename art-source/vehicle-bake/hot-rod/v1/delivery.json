@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending",
+  "report": "public/demos/vehicle-bake/hot-rod/v1/report.json",
+  "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+  "atlasSha256": "4ee45269c3ebe6b291f13789fc0bf7e947d3555fa9e75d86e75b4ec95454ddff",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/hot-rod/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/hot-rod/capture.mjs",
+    "node scripts/vehicle-bake/hot-rod/independent-visual.mjs",
+    "node scripts/vehicle-bake/hot-rod/mixed-wheel-visual.mjs",
+    "python scripts/vehicle-bake/hot-rod/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/hot-rod/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/hot-rod/v1/evidence/clearance-input.json data/vehicle-bake/hot-rod/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/hot-rod/v1/model.glb --config art-source/vehicle-bake/hot-rod/v1/coverage-region.json --output data/vehicle-bake/hot-rod/recheck-coverage.json",
+    "python scripts/vehicle-bake/hot-rod/assess-coverage.py --input data/vehicle-bake/hot-rod/recheck-coverage.json",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/hot-rod/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/hot-rod/author-config.json --qa-only"
+  ]
+}

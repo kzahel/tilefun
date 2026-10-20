@@ -1,0 +1,17 @@
+{
+  "status": "no-blocking-issues-for-prerequisite-pose",
+  "riderSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "humanApproval": false,
+  "actualBikePresent": false,
+  "examined": "All16 study plus16 game rider-alone and synthetic-fixture combined native224 captures; four actual wireframes; desktop/mobile screenshots. Same-bounds4x nearest sheets aid inspection, original native pixels retained.",
+  "observations": [
+    "Short rounded brown crown and warm face/eyes read at native scale, with angle-dependent pixel loss. Same teal jacket/canvas pack/dark boots identity palette.",
+    "Bent outboard knees, lowered support soles and raised bent arms read coherently; far limbs occlude by actual depth.",
+    "Five neutral patches are visibly minimal synthetic contacts, never a bike. Fixture geometry and combined viewer/captures remain ignored."
+  ],
+  "limits": [
+    "Static coarse anatomy and closed mitten hands; no fingers, animation or actual bike clearance proof.",
+    "Face detail varies with heading; likeness and contact profile await independent parent/human review.",
+    "Finite surface intersection diagnostics and central opening do not qualify arbitrary frames, mounts or other avatars."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "golf-cart-v1",
+  "clearanceId": "golf-cart--v1",
+  "name": "Mint open golf cart",
+  "title": "Mint open golf cart \u00b7 open passenger well and slim canopy family v1",
+  "source": "public/demos/vehicle-bake/golf-cart/v1",
+  "glb": "public/demos/vehicle-bake/golf-cart/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/golf-cart/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/golf-cart/v1/report.json",
+  "output": "public/demos/original-vehicles/golf-cart-v1",
+  "qa": "data/vehicle-bake/golf-cart/qa",
+  "offline": "data/vehicle-bake/golf-cart/review.html",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "meshRadius": 112
+}

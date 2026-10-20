@@ -1,0 +1,115 @@
+{
+  "family": "rigid-purple-tractor-cream-teal-box-trailer",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [9.2, 2.6, 3.05],
+  "wheelRadius": 0.5,
+  "wheelWidth": 0.32,
+  "axles": [-3.45, -0.75, 3.45],
+  "halfTrack": 0.97,
+  "arch": {
+    "cutRadius": 0.6,
+    "pocketInnerY": 0.72,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [0.7, 0.85, 1.07, 1.18, 1.22],
+    "shoulderRadii": [0.62, 0.66, 0.66, 0.64, 0.62],
+    "archRadius": 0.59
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [77, 53, 105],
+    "paintShadow": [103, 69, 137],
+    "paintMid": [132, 89, 166],
+    "paint": [159, 112, 191],
+    "paintLight": [185, 139, 210],
+    "cream": [255, 230, 163],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119],
+    "deck": [163, 168, 176],
+    "deckLight": [184, 188, 195],
+    "deckEdge": [124, 135, 145],
+    "deckSeam": [98, 107, 119],
+    "frame": [63, 69, 79],
+    "box": [245, 235, 203],
+    "boxRoof": [255, 248, 225],
+    "boxShadow": [207, 199, 173],
+    "teal": [50, 146, 147]
+  },
+  "render": {
+    "nativeSize": 288,
+    "meshRadius": 144,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [144, 172],
+    "engineGroundOrigin": [144, 144]
+  },
+  "paintMethod": "Own rigid purple tractor and long cream/teal box trailer with distinct actual UV owners, real open coupling gap/fifth-wheel/frame bridge, six covered independent road wheels and two restrained fixed silver stacks below trailer roof. No articulation/hitch/separate trailer physics or high-to-low transfer claim.",
+  "bodyStations": [
+    [-4.43, 1.0, 1.22],
+    [-4.3, 1.07, 1.48],
+    [-4.05, 1.08, 1.6],
+    [-3.8, 1.1, 2.48],
+    [-3.55, 1.1, 2.67],
+    [-2.0, 1.1, 2.67],
+    [-1.78, 1.065, 2.53]
+  ],
+  "bodySection": [
+    [-0.87, 0],
+    [-1, 0.07],
+    [-1, 0.42],
+    [-0.99, 0.8],
+    [-0.97, 0.92],
+    [-0.9, 0.985],
+    [-0.7, 1.015],
+    [0, 1.025],
+    [0.7, 1.015],
+    [0.9, 0.985],
+    [0.97, 0.92],
+    [0.99, 0.8],
+    [1, 0.42],
+    [1, 0.07],
+    [0.87, 0]
+  ],
+  "toolchain": "multi-axle-v2",
+  "wheelIds": ["FL", "FR", "ML", "MR", "RL", "RR"],
+  "axleDefinitions": [
+    {
+      "id": "F",
+      "x": -3.45,
+      "meaning": "tractor front"
+    },
+    {
+      "id": "M",
+      "x": -0.75,
+      "meaning": "tractor drive"
+    },
+    {
+      "id": "R",
+      "x": 3.45,
+      "meaning": "trailer rear"
+    }
+  ],
+  "trailer": {
+    "xRange": [-1.05, 4.55],
+    "width": 2.5,
+    "bottomZ": 1.26,
+    "roofZ": 3.03,
+    "meaning": "Long closed rigid visual trailer box; parent later owns any articulation/hitch/physics design"
+  }
+}

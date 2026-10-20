@@ -1,0 +1,53 @@
+{
+  "status": "source-complete-prototype-not-production",
+  "humanApproval": false,
+  "riderSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "geometry": {
+    "triangles": 2112,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 1,
+    "atlas": [
+      256,
+      256
+    ],
+    "glbBytes": 165060,
+    "sha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+    "uvVertices": 4626
+  },
+  "packedSources": {
+    "master.blend": {
+      "sha256": "bece89367aa6aff98ea303ffe63d49a8725b4eb71b57fcdc771d0f9b790300ae",
+      "meshes": 25,
+      "packedImages": 1,
+      "semanticUV": true
+    },
+    "low.blend": {
+      "sha256": "43bc3632f09bdd5913c49af7c23f1611ebf661b7f5896f8b79db345ceb81ab32",
+      "meshes": 1,
+      "packedImages": 1,
+      "semanticUV": true
+    }
+  },
+  "sourceOnlyReplayExact": true,
+  "declaredInputCount": 5,
+  "originalExplorerProfileFailed": true,
+  "ownProfileProposalOnly": true,
+  "fixtureGeometryIgnoredOnly": true,
+  "priorRiderPinsUnchanged": {
+    "art-source/vehicle-riders/explorer/v1/retained-files.json": {
+      "sha256": "db612385e280ed07d50d8dea938a473b3a9634aad309567dc48ef80349209df5",
+      "verifiedFiles": 174
+    },
+    "art-source/vehicle-riders/explorer-upright/v1/retained-files.json": {
+      "sha256": "b66363d5ccd72ce5c93dea65eb4f1d80da82a8673aad67dddd7333315bafeb05",
+      "verifiedFiles": 66
+    }
+  },
+  "approvedBearInputsUnchanged": {
+    "art-source/pixel-characters/bear.json": "a9ae53f83c1e88fbe57ca8e748a3f3f6be27807259271d574b58e3e3f75fd36a",
+    "public/demos/pixel-characters/bear-32.png": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d"
+  },
+  "globalProfileUnchanged": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "noStandingWildlifeNormalSourceCatalogReviewEdits": true
+}

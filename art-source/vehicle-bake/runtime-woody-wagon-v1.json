@@ -1,0 +1,108 @@
+{
+  "modelSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+  "spriteSha256": "623956df0bc663ae70c8b76bbc8bc66c73fde7beb2339f2dbaa80e3fbd60ea94",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-woody-wagon-v1.json": "74154bd9a71382d33e3a11a0ef9ca2b7b0e24e0c6d0f3b49bbb30931ac885d27",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/woody-wagon-v1/review-manifest.json": "916fb3ec9648f483602961ba3cb7837ee8ab0ac446499dfacd480beb1b4936c9",
+    "public/demos/original-vehicles/woody-wagon-v1/inputs/model.glb": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+    "public/demos/original-vehicles/woody-wagon-v1/inputs/atlas.png": "2fdb5c112858ccac1a4a6ff5487bbe3c35c089eed995d468847114a3faf76545",
+    "public/demos/original-vehicles/woody-wagon-v1/captures/capture.json": "85a3d16a97444385fdee33008fba906cac71c9a33ff00a459a05741f656b5400",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/replay-verification.json": "70afabbe39603f9fbb02af3ff017017d5fa310061a48c9cf13f7ef9015b8b43e",
+    "art-source/vehicle-bake/woody-wagon/v1/build.py": "cbe6f406c291115425a83a46b426819eff8a29f230935957334d9b59025a6d1e",
+    "art-source/vehicle-bake/woody-wagon/v1/geometry.py": "b7453bf180aba866ea9fd8b52da93a28ead7f270ef16c0124da98991cabbb3a6",
+    "art-source/vehicle-bake/woody-wagon/v1/family.json": "de500d1cfd770d9f3b8905692830c98a764a82f94de3c50601517f1be9ab0ed6",
+    "art-source/vehicle-bake/woody-wagon/v1/coverage-region.json": "23ad7ceabfa8b22dea0826f74b6ce44512fe492b376f81bc8360e3cb745ae12b",
+    "art-source/vehicle-bake/woody-wagon/v1/review.json": "fda166756bbc926fab548681fb7b364d3ab0c1a55d547479700dfe71ac56e623",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+    "public/demos/original-vehicles/woody-wagon-v1/captures/engine-4.png": "5fb77ece0cb7e4860472bbe93bf76e7290f741d49d9884f2339df72dbe8e07a7",
+    "public/demos/original-vehicles/woody-wagon-v1/captures/engine-12.png": "2e83235bdcd0fe853255de4323949c9a4982ab593c15911df43875beab3e46dc",
+    "public/demos/original-vehicles/woody-wagon-v1/captures/engine-8.png": "b3a30fcf1772d52381cc863db39922d9bb79a4102309453e133153510be6e96b",
+    "public/demos/original-vehicles/woody-wagon-v1/captures/engine-0.png": "dab31ce12e4ff5f4e534b122bc0fa23529d2544b7422501fdb1bcdf44fa6af61"
+  },
+  "physicalBounds": [
+    95,
+    35,
+    31
+  ],
+  "measurement": {
+    "modelSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -47.4782600402832,
+        -17.39130401611328,
+        4.76837158203125e-07
+      ],
+      "max": [
+        47.4782600402832,
+        17.39130401611328,
+        30.30434799194336
+      ],
+      "size": [
+        94.9565200805664,
+        34.78260803222656,
+        30.30434799194336
+      ]
+    },
+    "triangles": 2792,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/woody-wagon/v1/evidence/replay-verification.json",
+    "sha256": "70afabbe39603f9fbb02af3ff017017d5fa310061a48c9cf13f7ef9015b8b43e",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-woody-wagon-v1.json --blender BLENDER"
+}

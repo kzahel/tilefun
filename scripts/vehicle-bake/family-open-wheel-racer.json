@@ -1,0 +1,15 @@
+{
+  "id": "open-wheel-racer-v1",
+  "clearanceId": "open-wheel-racer--v1",
+  "name": "Open-wheel racing car",
+  "title": "Open-wheel racing car \u00b7 autonomous original v1",
+  "source": "public/demos/vehicle-bake/open-wheel-racer/v1",
+  "glb": "public/demos/vehicle-bake/open-wheel-racer/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/open-wheel-racer/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/open-wheel-racer/v1/report.json",
+  "output": "public/demos/original-vehicles/open-wheel-racer-v1",
+  "qa": "data/vehicle-bake/open-wheel-racer-qa",
+  "offline": "data/vehicle-bake/open-wheel-racer-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224
+}

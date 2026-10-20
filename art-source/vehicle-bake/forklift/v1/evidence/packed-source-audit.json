@@ -1,0 +1,591 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedEquipment": {
+      "components": [
+        "STATIC guard lower crossfoot -0.5",
+        "STATIC vertical overhead guard pillar -0.5 -1",
+        "STATIC vertical overhead guard pillar -0.5 1",
+        "STATIC guard lower crossfoot 0.7",
+        "STATIC vertical overhead guard pillar 0.7 -1",
+        "STATIC vertical overhead guard pillar 0.7 1",
+        "STATIC overhead guard side roof frame -1",
+        "STATIC overhead guard side roof frame 1",
+        "STATIC overhead open roof crossbar -0.53",
+        "STATIC overhead open roof crossbar 0.73",
+        "STATIC overhead open roof crossbar -0.12",
+        "STATIC overhead open roof crossbar 0.32",
+        "STATIC tall twin mast rail -1",
+        "STATIC mast gray inner runner -1",
+        "STATIC tall twin mast rail 1",
+        "STATIC mast gray inner runner 1",
+        "STATIC mast crossbar 0.26",
+        "STATIC mast crossbar 0.75",
+        "STATIC mast crossbar 1.35",
+        "STATIC mast crossbar 2.07",
+        "STATIC low fork carriage",
+        "STATIC fork vertical heel -1",
+        "STATIC actual low narrow forward fork blade -1",
+        "STATIC fork vertical heel 1",
+        "STATIC actual low narrow forward fork blade 1",
+        "STATIC own unequal axle arm -0.78",
+        "STATIC own unequal axle arm 0.92",
+        "STATIC steering column",
+        "STATIC open steering ring"
+      ],
+      "noMotionMetadata": true,
+      "staticMastForksOnly": true,
+      "noLiftingGameplayClaim": true,
+      "twoActualForkBlades": [
+        {
+          "component": "STATIC actual low narrow forward fork blade -1",
+          "minimumSource": [
+            -2.299999952316284,
+            -0.3799999952316284,
+            0.10000000149011612
+          ],
+          "maximumSource": [
+            -1.100000023841858,
+            -0.25999999046325684,
+            0.18000000715255737
+          ],
+          "actualLengthSource": 1.1999999284744263,
+          "actualWidthSource": 0.12000000476837158
+        },
+        {
+          "component": "STATIC actual low narrow forward fork blade 1",
+          "minimumSource": [
+            -2.299999952316284,
+            0.25999999046325684,
+            0.10000000149011612
+          ],
+          "maximumSource": [
+            -1.100000023841858,
+            0.3799999952316284,
+            0.18000000715255737
+          ],
+          "actualLengthSource": 1.1999999284744263,
+          "actualWidthSource": 0.12000000476837158
+        }
+      ],
+      "twoMastRails": 2,
+      "fourGuardPillars": 4,
+      "mastTopSource": 2.1500000953674316,
+      "actualFootwellFloorTop": 0.36000001430511475,
+      "actualSeatTop": 0.800000011920929,
+      "seatAboveFloorSource": 0.4399999976158142,
+      "equipmentStaticOnly": true
+    },
+    "sourceNegativeSpaces": {
+      "status": "passed",
+      "allCandidateTriangleCount": 2940,
+      "fourFootwellFloorRays": [
+        {
+          "xySource": [
+            -0.32,
+            -0.23
+          ],
+          "firstHitFloorZ": 0.36000001430511475,
+          "depthBelowSeatSource": 0.4399999856948853
+        },
+        {
+          "xySource": [
+            -0.32,
+            0.23
+          ],
+          "firstHitFloorZ": 0.36000001430511475,
+          "depthBelowSeatSource": 0.4399999856948853
+        },
+        {
+          "xySource": [
+            -0.2,
+            -0.23
+          ],
+          "firstHitFloorZ": 0.36000001430511475,
+          "depthBelowSeatSource": 0.4399999856948853
+        },
+        {
+          "xySource": [
+            -0.2,
+            0.23
+          ],
+          "firstHitFloorZ": 0.36000001430511475,
+          "depthBelowSeatSource": 0.4399999856948853
+        }
+      ],
+      "openMastRays": 8,
+      "openGuardRays": 6,
+      "separateForkGapRays": 2,
+      "fillNegativeControls": [
+        {
+          "fixture": "footwell-filled",
+          "fixtureTrianglesAdded": 2,
+          "rejectedRayCount": 4,
+          "rejected": true,
+          "noCandidateTrianglesRemoved": true
+        },
+        {
+          "fixture": "mast-filled",
+          "fixtureTrianglesAdded": 2,
+          "rejectedRayCount": 8,
+          "rejected": true,
+          "noCandidateTrianglesRemoved": true
+        },
+        {
+          "fixture": "guard-filled",
+          "fixtureTrianglesAdded": 2,
+          "rejectedRayCount": 6,
+          "rejected": true,
+          "noCandidateTrianglesRemoved": true
+        },
+        {
+          "fixture": "fork-gap-filled",
+          "fixtureTrianglesAdded": 2,
+          "rejectedRayCount": 2,
+          "rejected": true,
+          "noCandidateTrianglesRemoved": true
+        }
+      ],
+      "baselineRestoredExact": true,
+      "actualGeometryNotPaintedDecals": true
+    },
+    "skinOwnership": {
+      "method": "Own counterweight side/end/top charts and broad mustard palette facets, dark inset grille/seam UV strokes, footwell/seat separate padded roles, mast/guard/forks explicit gray swatch owners. No camera projection, fake negative-space decals, glass planes, silhouette ink or animated equipment.",
+      "counterweightSideEndTopCharts": true,
+      "seatFootwellGuardMastForkSwatches": true,
+      "noGlassOrNegativeSpaceOverlayPlanes": true
+    },
+    "master.blend": {
+      "sha256": "de61ca4ccf313345da5987b2022fcae62d7e5bbc606327ff683a74070f2e1614",
+      "triangles": 2940,
+      "meshObjects": 53,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "wheelRadiusRig": [
+      {
+        "id": "FL",
+        "radiusSourceMeasured": 0.3200000144065372,
+        "radiusWorldDeclared": 5.565217391304349,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "FR",
+        "radiusSourceMeasured": 0.3200000144065372,
+        "radiusWorldDeclared": 5.565217391304349,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RL",
+        "radiusSourceMeasured": 0.2500000596046448,
+        "radiusWorldDeclared": 4.347826086956522,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RR",
+        "radiusSourceMeasured": 0.2500000596046448,
+        "radiusWorldDeclared": 4.347826086956522,
+        "geometryAndOwnMetadataMatch": true
+      }
+    ],
+    "car.blend": {
+      "sha256": "538975660927228ddb5e30f6b0b85202b054fac638f27c06fc268927e5c2347f",
+      "triangles": 2940,
+      "meshObjects": 5,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+      "minBlenderWorld": [
+        -40.0,
+        -13.72174072265625,
+        0.0
+      ],
+      "maxBlenderWorld": [
+        24.34782600402832,
+        13.72174072265625,
+        37.39130401611328
+      ],
+      "dimensionsBlenderWorld": [
+        64.34782600402832,
+        27.4434814453125,
+        37.39130401611328
+      ],
+      "dimensionsSourceUnits": [
+        3.699999995231628,
+        1.5780001831054684,
+        2.1499999809265136
+      ],
+      "centeredHorizontalExtentWorld": [
+        80.0,
+        27.4434814453125
+      ],
+      "centeredHorizontalExtentSource": [
+        4.6,
+        1.5780001831054684
+      ],
+      "centeredCeilWorldFootprint": [
+        80,
+        28
+      ],
+      "includesActualForkTipsMastGuardCounterweightWheels": true,
+      "rootUnchangedNoRecenterOrFitScale": true,
+      "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+    },
+    "actualGLBEquipmentGeometryUV": {
+      "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+      "status": "passed",
+      "fixedOwner": "Body_static",
+      "allFixedComponentsMatched": 37,
+      "actualTriangleUvMatches": 1700,
+      "components": [
+        {
+          "component": "Mustard rounded rear counterweight actual wheelhouse skin",
+          "actualTrianglesWithMatchingPositionAndUV": 224,
+          "actualVerticesMatched": 114
+        },
+        {
+          "component": "Mustard narrow central chassis front wheels deliberately outboard",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "Actual open footwell lower floor",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "Mustard footwell low side sill -1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "Mustard footwell low side sill 1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "Low seat actual pedestal",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "Low dark driver seat cushion actual volume",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "Dark seat back actual volume",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC guard lower crossfoot -0.5",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC vertical overhead guard pillar -0.5 -1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC vertical overhead guard pillar -0.5 1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC guard lower crossfoot 0.7",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC vertical overhead guard pillar 0.7 -1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC vertical overhead guard pillar 0.7 1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC overhead guard side roof frame -1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC overhead guard side roof frame 1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC overhead open roof crossbar -0.53",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC overhead open roof crossbar 0.73",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC overhead open roof crossbar -0.12",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC overhead open roof crossbar 0.32",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC tall twin mast rail -1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC mast gray inner runner -1",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC tall twin mast rail 1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC mast gray inner runner 1",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC mast crossbar 0.26",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC mast crossbar 0.75",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC mast crossbar 1.35",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC mast crossbar 2.07",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC low fork carriage",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC fork vertical heel -1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC actual low narrow forward fork blade -1",
+          "actualTrianglesWithMatchingPositionAndUV": 20,
+          "actualVerticesMatched": 12
+        },
+        {
+          "component": "STATIC fork vertical heel 1",
+          "actualTrianglesWithMatchingPositionAndUV": 44,
+          "actualVerticesMatched": 24
+        },
+        {
+          "component": "STATIC actual low narrow forward fork blade 1",
+          "actualTrianglesWithMatchingPositionAndUV": 20,
+          "actualVerticesMatched": 12
+        },
+        {
+          "component": "STATIC own unequal axle arm -0.78",
+          "actualTrianglesWithMatchingPositionAndUV": 28,
+          "actualVerticesMatched": 16
+        },
+        {
+          "component": "STATIC own unequal axle arm 0.92",
+          "actualTrianglesWithMatchingPositionAndUV": 28,
+          "actualVerticesMatched": 16
+        },
+        {
+          "component": "STATIC steering column",
+          "actualTrianglesWithMatchingPositionAndUV": 28,
+          "actualVerticesMatched": 16
+        },
+        {
+          "component": "STATIC open steering ring",
+          "actualTrianglesWithMatchingPositionAndUV": 96,
+          "actualVerticesMatched": 48
+        }
+      ],
+      "actualAssessment": {
+        "twoActualForkBlades": [
+          {
+            "component": "STATIC actual low narrow forward fork blade -1",
+            "minimumSource": [
+              -2.299999952316284,
+              -0.3799999952316284,
+              0.10000000149011612
+            ],
+            "maximumSource": [
+              -1.100000023841858,
+              -0.25999999046325684,
+              0.18000000715255737
+            ],
+            "actualLengthSource": 1.1999999284744263,
+            "actualWidthSource": 0.12000000476837158
+          },
+          {
+            "component": "STATIC actual low narrow forward fork blade 1",
+            "minimumSource": [
+              -2.299999952316284,
+              0.25999999046325684,
+              0.10000000149011612
+            ],
+            "maximumSource": [
+              -1.100000023841858,
+              0.3799999952316284,
+              0.18000000715255737
+            ],
+            "actualLengthSource": 1.1999999284744263,
+            "actualWidthSource": 0.12000000476837158
+          }
+        ],
+        "twoMastRails": 2,
+        "fourGuardPillars": 4,
+        "mastTopSource": 2.1500000953674316,
+        "actualFootwellFloorTop": 0.36000001430511475,
+        "actualSeatTop": 0.800000011920929,
+        "seatAboveFloorSource": 0.4399999976158142,
+        "equipmentStaticOnly": true
+      },
+      "exactFourRoadRollNodes": true,
+      "noEquipmentAnimation": true,
+      "viewIndependentSurfacePaint": true,
+      "positionToleranceSource": 2e-05,
+      "uvTolerance": 2e-06
+    },
+    "actualGLBNegativeSpaces": {
+      "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+      "status": "passed",
+      "allCandidateTriangleCount": 2940,
+      "fourFootwellFloorRays": [
+        {
+          "xySource": [
+            -0.32,
+            -0.23
+          ],
+          "firstHitFloorZ": 0.36000002384185786,
+          "depthBelowSeatSource": 0.4399999761581422
+        },
+        {
+          "xySource": [
+            -0.32,
+            0.23
+          ],
+          "firstHitFloorZ": 0.36000002384185786,
+          "depthBelowSeatSource": 0.4399999761581422
+        },
+        {
+          "xySource": [
+            -0.2,
+            -0.23
+          ],
+          "firstHitFloorZ": 0.36000002384185786,
+          "depthBelowSeatSource": 0.4399999761581422
+        },
+        {
+          "xySource": [
+            -0.2,
+            0.23
+          ],
+          "firstHitFloorZ": 0.36000002384185786,
+          "depthBelowSeatSource": 0.4399999761581422
+        }
+      ],
+      "openMastRays": 8,
+      "openGuardRays": 6,
+      "separateForkGapRays": 2,
+      "fillNegativeControls": [
+        {
+          "fixture": "footwell-filled",
+          "fixtureTrianglesAdded": 2,
+          "rejectedRayCount": 4,
+          "rejected": true,
+          "noCandidateTrianglesRemoved": true
+        },
+        {
+          "fixture": "mast-filled",
+          "fixtureTrianglesAdded": 2,
+          "rejectedRayCount": 8,
+          "rejected": true,
+          "noCandidateTrianglesRemoved": true
+        },
+        {
+          "fixture": "guard-filled",
+          "fixtureTrianglesAdded": 2,
+          "rejectedRayCount": 6,
+          "rejected": true,
+          "noCandidateTrianglesRemoved": true
+        },
+        {
+          "fixture": "fork-gap-filled",
+          "fixtureTrianglesAdded": 2,
+          "rejectedRayCount": 2,
+          "rejected": true,
+          "noCandidateTrianglesRemoved": true
+        }
+      ],
+      "baselineRestoredExact": true,
+      "actualGeometryNotPaintedDecals": true
+    },
+    "actualGLBAttachments": {
+      "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+      "results": [
+        {
+          "id": "FL",
+          "actualTireSlabInnerAbsY": 8.695653915405273,
+          "actualStaticArmEndAbsY": 8.434782981872559,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "FR",
+          "actualTireSlabInnerAbsY": 8.695653915405273,
+          "actualStaticArmEndAbsY": 8.434782981872559,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RL",
+          "actualTireSlabInnerAbsY": 8.17391300201416,
+          "actualStaticArmEndAbsY": 7.91304349899292,
+          "axialGapWorld": 0.26086950302124023,
+          "subpixelGap": true
+        },
+        {
+          "id": "RR",
+          "actualTireSlabInnerAbsY": 8.17391300201416,
+          "actualStaticArmEndAbsY": 7.91304349899292,
+          "axialGapWorld": 0.26086950302124023,
+          "subpixelGap": true
+        }
+      ],
+      "allFixedTrianglesSeparatelyClearanceProven": true
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "family": "classic-chopped-purple-v8-hot-rod",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [4.2, 2.4, 1.6],
+  "axles": [-1.4, 1.03],
+  "arch": {
+    "cutRadius": 0.65,
+    "pocketInnerY": 0.5,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 18,
+    "lateralStations": [0.57, 0.7, 0.93, 1.13, 1.2],
+    "shoulderRadii": [0.64, 0.71, 0.71, 0.68, 0.64],
+    "archRadius": 0.605
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [64, 40, 77],
+    "paintShadow": [88, 48, 106],
+    "paintMid": [112, 61, 139],
+    "paint": [138, 77, 166],
+    "paintLight": [169, 108, 193],
+    "cream": [255, 225, 166],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119],
+    "flame": [238, 129, 61],
+    "flameLight": [255, 174, 80],
+    "engine": [113, 119, 137],
+    "engineDark": [77, 81, 101]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Independent chopped closed-cab hot rod with narrow exposed V8/chassis, intentionally open small front wheels and real rear fenders covering fat rear tires. Plum coachwork and restrained orange flames use own continuous actual-skin charts. Separate fixed glass/roof ownership; no screen projection.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -1.4,
+      "halfTrack": 1.0,
+      "radius": 0.32,
+      "width": 0.16,
+      "segments": 20
+    },
+    "FR": {
+      "axle": -1.4,
+      "halfTrack": 1.0,
+      "radius": 0.32,
+      "width": 0.16,
+      "segments": 20
+    },
+    "RL": {
+      "axle": 1.03,
+      "halfTrack": 0.89,
+      "radius": 0.55,
+      "width": 0.48,
+      "segments": 28
+    },
+    "RR": {
+      "axle": 1.03,
+      "halfTrack": 0.89,
+      "radius": 0.55,
+      "width": 0.48,
+      "segments": 28
+    }
+  },
+  "coveragePolicy": {
+    "front": "not-applicable/intentionally-open; do not add fender caps or claim covered crowns",
+    "rear": "actual broad rear fender support sampled plus native32-view inspection",
+    "rawRegionMeaning": "Declared region fits fat rear tire central crown. Front results remain unmodified raw diagnostic samples only; do not interpret their region as a front-tread acceptance test."
+  },
+  "flamePolygons": [
+    {
+      "role": "flame",
+      "points": [
+        [-0.5, 0.64],
+        [0.52, 0.67],
+        [0.15, 0.79],
+        [0.67, 0.92],
+        [0.05, 0.85],
+        [0.2, 1.02],
+        [-0.18, 0.88],
+        [-0.5, 0.94]
+      ]
+    },
+    {
+      "role": "flameLight",
+      "points": [[-0.47, 0.67], [0.16, 0.7], [-0.15, 0.81], [0.04, 0.88], [-0.44, 0.84]]
+    }
+  ]
+}

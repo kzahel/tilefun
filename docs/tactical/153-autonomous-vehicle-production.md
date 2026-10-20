@@ -90,3 +90,45 @@ admission instead of deriving expectations from the live catalog.
 Next: independent microcar, woody wagon and limousine inspection/replay, followed
 by hot rod and rally hatchback. Intentional exposed wheels require honest coverage
 N/A records and full neutral-roll clearance, rather than invented fender passes.
+
+## Checkpoint 2 — integration under combined validation
+
+Microcar, woody wagon, limousine, hot rod and rally hatchback are frozen and
+integrated locally, with all earlier eight catalog objects unchanged. The catalog
+now has 13 originals/58 road types/57 ordinary traffic types, plus the boat.
+Typechecks, lint, build and the 1,779-identity inventory pass. The complete unit
+run records **5,808 passed, five known Windows failures, ten skipped** in 621s;
+no new failures. All five additions passed their mobile Canvas/GPU/failed-model
+placement, boarding, driving, save/reload and deletion cases inside the ongoing
+full browser run. The full 1,557-case run is bounded to ten failures; catalog and
+registered review inputs stay held stable until that run ends. Final browser
+outcome and commit remain pending; do not claim a whole-suite pass yet.
+
+Open-wheel racer, monster truck, buggy, kart, golf cart and ice cream van have
+complete immutable source and independent native/phase/wire/body-roll/source-only
+replay QA. More source families can proceed while review registration and runtime
+activation wait for the validation hold. Pending work remains explicit in the
+roster rather than inheriting an approval from another family.
+
+The versioned multi-axle path qualifies all six actual wheel envelopes and
+independent signed motion, rejects one body collision per wheel, rejects four
+bad inventory declarations and rejects a wrong actual clearance declaration.
+Its v2 capture preserves all 50 frozen Beetle native/phase/wire PNGs exactly;
+frozen-only v2 verification also passes. Synthetic controls stay outside normal
+review registration and are archived under ignored data after testing, so they
+do not enter later public builds. Earlier pinned tools remain unchanged.
+
+Ordinary vehicle art continues while one YA lane prepares a separate seated
+Explorer geometry/UV template against the unchanged roadster. This is an isolated
+contact/depth/identity control for [rider prerequisites](../topics/vehicle-riders.md),
+not normal motorcycle activation or a claim of 27-avatar, AI or fallback support.
+
+At the next source checkpoint, twenty further original source families through
+tractor and forklift have complete source and independent QA. Independent
+capture/replay/visual QA is recorded per family while registration/runtime remain
+held for the same full browser snapshot. No source-only family is counted as
+playable. The six-wheel semi is explicitly rigid, and crane/mixer/work equipment
+remain static. The Explorer roadster and upright pilots now have reproducible
+retained sources; the exact static assembly preserves 32 bare-car views and
+matches 32 independently composed views. Brown Bear fitting retains the failed
+Explorer-profile attempt rather than stretching stocky anatomy to fit.

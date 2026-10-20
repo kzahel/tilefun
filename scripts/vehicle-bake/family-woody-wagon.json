@@ -1,0 +1,15 @@
+{
+  "id": "woody-wagon-v1",
+  "clearanceId": "woody-wagon--v1",
+  "name": "Wood-panel station wagon",
+  "title": "Wood-panel station wagon \u00b7 autonomous original v1",
+  "source": "public/demos/vehicle-bake/woody-wagon/v1",
+  "glb": "public/demos/vehicle-bake/woody-wagon/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/woody-wagon/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/woody-wagon/v1/report.json",
+  "output": "public/demos/original-vehicles/woody-wagon-v1",
+  "qa": "data/vehicle-bake/woody-wagon-qa",
+  "offline": "data/vehicle-bake/woody-wagon-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224
+}

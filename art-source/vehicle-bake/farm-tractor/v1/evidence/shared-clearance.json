@@ -1,0 +1,62 @@
+[
+  {
+    "status": "passed",
+    "id": "farm-tractor--v1",
+    "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "sourceBlendSha256": null,
+    "inputKind": "actual-GLB",
+    "triangles": 3386,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.956522455681728,
+        "minimumGap": 10.328057312484653,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.956522455681728,
+        "minimumGap": 10.328057312484653,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 12.869566541507425,
+        "minimumGap": 1.21730663740796,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 12.869566541507425,
+        "minimumGap": 1.21730663740796,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "perWheelControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      }
+    ],
+    "steering": "unqualified"
+  }
+]

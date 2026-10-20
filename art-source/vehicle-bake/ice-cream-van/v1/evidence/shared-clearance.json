@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "ice-cream-van--v1",
+    "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+    "triangles": 2710,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.000000399840292,
+        "minimumGap": 1.533334285568495,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.000000399840292,
+        "minimumGap": 1.533334285568495,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.5333342993818917,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.5333342993818917,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

@@ -1,0 +1,864 @@
+{
+  "family": "classic-chopped-purple-v8-hot-rod",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    4.2,
+    2.4,
+    1.6
+  ],
+  "axles": [
+    -1.4,
+    1.03
+  ],
+  "arch": {
+    "cutRadius": 0.65,
+    "pocketInnerY": 0.5,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 18,
+    "lateralStations": [
+      0.57,
+      0.7,
+      0.93,
+      1.13,
+      1.2
+    ],
+    "shoulderRadii": [
+      0.64,
+      0.71,
+      0.71,
+      0.68,
+      0.64
+    ],
+    "archRadius": 0.605
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      64,
+      40,
+      77
+    ],
+    "paintShadow": [
+      88,
+      48,
+      106
+    ],
+    "paintMid": [
+      112,
+      61,
+      139
+    ],
+    "paint": [
+      138,
+      77,
+      166
+    ],
+    "paintLight": [
+      169,
+      108,
+      193
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "flame": [
+      238,
+      129,
+      61
+    ],
+    "flameLight": [
+      255,
+      174,
+      80
+    ],
+    "engine": [
+      113,
+      119,
+      137
+    ],
+    "engineDark": [
+      77,
+      81,
+      101
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Independent chopped closed-cab hot rod with narrow exposed V8/chassis, intentionally open small front wheels and real rear fenders covering fat rear tires. Plum coachwork and restrained orange flames use own continuous actual-skin charts. Separate fixed glass/roof ownership; no screen projection.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -1.4,
+      "halfTrack": 1.0,
+      "radius": 0.32,
+      "width": 0.16,
+      "segments": 20
+    },
+    "FR": {
+      "axle": -1.4,
+      "halfTrack": 1.0,
+      "radius": 0.32,
+      "width": 0.16,
+      "segments": 20
+    },
+    "RL": {
+      "axle": 1.03,
+      "halfTrack": 0.89,
+      "radius": 0.55,
+      "width": 0.48,
+      "segments": 28
+    },
+    "RR": {
+      "axle": 1.03,
+      "halfTrack": 0.89,
+      "radius": 0.55,
+      "width": 0.48,
+      "segments": 28
+    }
+  },
+  "coveragePolicy": {
+    "front": "not-applicable/intentionally-open; do not add fender caps or claim covered crowns",
+    "rear": "actual broad rear fender support sampled plus native32-view inspection",
+    "rawRegionMeaning": "Declared region fits fat rear tire central crown. Front results remain unmodified raw diagnostic samples only; do not interpret their region as a front-tread acceptance test."
+  },
+  "flamePolygons": [
+    {
+      "role": "flame",
+      "points": [
+        [
+          -0.5,
+          0.64
+        ],
+        [
+          0.52,
+          0.67
+        ],
+        [
+          0.15,
+          0.79
+        ],
+        [
+          0.67,
+          0.92
+        ],
+        [
+          0.05,
+          0.85
+        ],
+        [
+          0.2,
+          1.02
+        ],
+        [
+          -0.18,
+          0.88
+        ],
+        [
+          -0.5,
+          0.94
+        ]
+      ]
+    },
+    {
+      "role": "flameLight",
+      "points": [
+        [
+          -0.47,
+          0.67
+        ],
+        [
+          0.16,
+          0.7
+        ],
+        [
+          -0.15,
+          0.81
+        ],
+        [
+          0.04,
+          0.88
+        ],
+        [
+          -0.44,
+          0.84
+        ]
+      ]
+    }
+  ],
+  "components": [
+    {
+      "name": "Chopped closed plum cab actual glass flame roof skin",
+      "group": "body",
+      "triangles": 180,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Short rounded plum rear body and trunk skin",
+      "group": "body",
+      "triangles": 136,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Central narrow cab and tail floor",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintDeep"
+      ]
+    },
+    {
+      "name": "REAR broad integrated plum fender and inner wheelhouse -1",
+      "group": "body",
+      "triangles": 199,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "REAR broad integrated plum fender and inner wheelhouse 1",
+      "group": "body",
+      "triangles": 199,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Exposed narrow front chassis rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "engineDark"
+      ]
+    },
+    {
+      "name": "Short plum running board -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Visible diagonal front chassis brace -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "engine"
+      ]
+    },
+    {
+      "name": "Exposed narrow front chassis rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "engineDark"
+      ]
+    },
+    {
+      "name": "Short plum running board 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Visible diagonal front chassis brace 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "engine"
+      ]
+    },
+    {
+      "name": "FRONT fixed transverse attachment arm stops short of tire cylinders",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "REAR fixed axle stops short of rear tire cylinders",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "engineDark"
+      ]
+    },
+    {
+      "name": "Short classic chrome bumper -2.05",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Short classic chrome bumper 2.02",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Exposed V8 dark broad crankcase",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "engineDark"
+      ]
+    },
+    {
+      "name": "Exposed V8 broad angled chrome valve bank -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Exposed V8 broad angled chrome valve bank 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Exposed V8 central intake block",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "engine"
+      ]
+    },
+    {
+      "name": "Exposed V8 single broad round air cleaner",
+      "group": "body",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Air cleaner top broad gray highlight",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Upright simple plum radiator surround",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Upright dark radiator grille aperture",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Restrained radiator vertical chrome slat -0.2",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Restrained radiator vertical chrome slat -0.12",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Restrained radiator vertical chrome slat -0.04",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Restrained radiator vertical chrome slat 0.04",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Restrained radiator vertical chrome slat 0.12",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Restrained radiator vertical chrome slat 0.2",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Front gray chrome round lamp bezel -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Front ivory round lamp lens -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Small rear ruby lamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "STATIC V8 header -1 0",
+      "group": "body",
+      "triangles": 26,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC V8 header -1 1",
+      "group": "body",
+      "triangles": 26,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC V8 header -1 2",
+      "group": "body",
+      "triangles": 26,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC V8 header -1 3",
+      "group": "body",
+      "triangles": 26,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC fixed side exhaust -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "STATIC exhaust dark open-mouth paint -1",
+      "group": "body",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Front gray chrome round lamp bezel 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Front ivory round lamp lens 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Small rear ruby lamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "STATIC V8 header 1 0",
+      "group": "body",
+      "triangles": 26,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC V8 header 1 1",
+      "group": "body",
+      "triangles": 26,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC V8 header 1 2",
+      "group": "body",
+      "triangles": 26,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC V8 header 1 3",
+      "group": "body",
+      "triangles": 26,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC fixed side exhaust 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "STATIC exhaust dark open-mouth paint 1",
+      "group": "body",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Skinny exposed FRONT tire FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Hot rod gray chrome wheel rim FL",
+      "group": "FL",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Hot rod broad chrome dome hub FL",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hot rod asymmetric dark hub inset FL",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Skinny exposed FRONT tire FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Hot rod gray chrome wheel rim FR",
+      "group": "FR",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Hot rod broad chrome dome hub FR",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hot rod asymmetric dark hub inset FR",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Oversized wide REAR tire RL",
+      "group": "RL",
+      "triangles": 220,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Hot rod gray chrome wheel rim RL",
+      "group": "RL",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Hot rod broad chrome dome hub RL",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hot rod asymmetric dark hub inset RL",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Oversized wide REAR tire RR",
+      "group": "RR",
+      "triangles": 220,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Hot rod gray chrome wheel rim RR",
+      "group": "RR",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Hot rod broad chrome dome hub RR",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hot rod asymmetric dark hub inset RR",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.399999976158142,
+        -1.0,
+        0.3199999928474426
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.565217266912047,
+        17.39130434782609
+      ],
+      "radiusBlender": 0.32,
+      "wheel_radius": 5.565217391304349
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.399999976158142,
+        1.0,
+        0.3199999928474426
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.565217266912047,
+        -17.39130434782609
+      ],
+      "radiusBlender": 0.32,
+      "wheel_radius": 5.565217391304349
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.0299999713897705,
+        -0.8899999856948853,
+        0.550000011920929
+      ],
+      "centerExport": [
+        17.913042980691664,
+        9.565217598624853,
+        15.478260620780615
+      ],
+      "radiusBlender": 0.55,
+      "wheel_radius": 9.56521739130435
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.0299999713897705,
+        0.8899999856948853,
+        0.550000011920929
+      ],
+      "centerExport": [
+        17.913042980691664,
+        9.565217598624853,
+        -15.478260620780615
+      ],
+      "radiusBlender": 0.55,
+      "wheel_radius": 9.56521739130435
+    }
+  ],
+  "method": "Independent chopped closed-cab hot rod with narrow exposed V8/chassis, intentionally open small front wheels and real rear fenders covering fat rear tires. Plum coachwork and restrained orange flames use own continuous actual-skin charts. Separate fixed glass/roof ownership; no screen projection.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/hot-rod/build.py",
+    "scripts/vehicle-bake/hot-rod/geometry.py",
+    "scripts/vehicle-bake/hot-rod/family.json",
+    "scripts/vehicle-bake/hot-rod/coverage-region.json",
+    "scripts/vehicle-bake/hot-rod/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

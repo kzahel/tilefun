@@ -1,0 +1,125 @@
+{
+  "status": "passed",
+  "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+  "toolchain": "multi-axle-v2",
+  "wheelIds": [
+    "FL",
+    "FR",
+    "ML",
+    "MR",
+    "RL",
+    "RR"
+  ],
+  "actualAudit": {
+    "triangles": 3720,
+    "vertices": 7066,
+    "meshes": 7,
+    "primitives": 7,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 251984,
+    "sha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "ML": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "MR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "wrongInventoryControls": [
+    {
+      "case": "omitted-middle-pair",
+      "declaredWheelIds": [
+        "FL",
+        "FR",
+        "RL",
+        "RR"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "omitted-MR",
+      "declaredWheelIds": [
+        "FL",
+        "FR",
+        "ML",
+        "RL",
+        "RR"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "duplicate-ML",
+      "declaredWheelIds": [
+        "FL",
+        "FR",
+        "ML",
+        "MR",
+        "RL",
+        "RR",
+        "ML"
+      ],
+      "rejected": true
+    },
+    {
+      "case": "unexpected-extra-XL",
+      "declaredWheelIds": [
+        "FL",
+        "FR",
+        "ML",
+        "MR",
+        "RL",
+        "RR",
+        "XL"
+      ],
+      "rejected": true
+    }
+  ],
+  "inputBytesUnchanged": true,
+  "catalogV2Sha256": "e4e43dfa0c98f2e3118cd23ebe6b9e8d69a2ff916db9e0eba09851745e32a3c6",
+  "underlyingCatalogSha256": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+}

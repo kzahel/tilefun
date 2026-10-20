@@ -1,0 +1,178 @@
+{
+  "status": "passed",
+  "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+  "inputBytesUnchanged": true,
+  "configuration": {
+    "xGapSamples": [
+      -1.55,
+      -1.3,
+      -1.15
+    ],
+    "zGapSamples": [
+      1.6,
+      2.25
+    ],
+    "gapProbeX": -1.4,
+    "gapProbeZ": 2.2,
+    "minimumGap": 0.6,
+    "maximumGap": 1.0,
+    "plateSamples": [
+      -1.55,
+      -1.3,
+      -1.15
+    ],
+    "plateTopZ": 1.19,
+    "meaning": "Actual open space between cab and rigid trailer, real low fifth-wheel plate/frame bridge; filled-gap negative/reset. No articulated joint or hitch physics claim.",
+    "frameProbeX": -1.55
+  },
+  "actualCoupling": {
+    "emptySideRays": [
+      {
+        "x": -1.55,
+        "z": 1.6,
+        "clearSourceDistance": 4.0
+      },
+      {
+        "x": -1.55,
+        "z": 2.25,
+        "clearSourceDistance": 4.0
+      },
+      {
+        "x": -1.3,
+        "z": 1.6,
+        "clearSourceDistance": 4.0
+      },
+      {
+        "x": -1.3,
+        "z": 2.25,
+        "clearSourceDistance": 4.0
+      },
+      {
+        "x": -1.15,
+        "z": 1.6,
+        "clearSourceDistance": 4.0
+      },
+      {
+        "x": -1.15,
+        "z": 2.25,
+        "clearSourceDistance": 4.0
+      }
+    ],
+    "cabRearTriangle": {
+      "hit": true,
+      "source": [
+        -1.7799999713897705,
+        0.0,
+        2.200000047683716
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "triangle": 91,
+      "owner": "Body_static"
+    },
+    "trailerFrontTriangle": {
+      "hit": true,
+      "source": [
+        -1.0499999523162842,
+        0.0,
+        2.200000047683716
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "triangle": 1344,
+      "owner": "Body_static"
+    },
+    "actualGap": 0.7300000190734863,
+    "lowCouplingPlate": [
+      {
+        "x": -1.55,
+        "hit": true,
+        "source": [
+          -1.5500000715255737,
+          0.0,
+          1.190000057220459
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 1521,
+        "owner": "Body_static"
+      },
+      {
+        "x": -1.3,
+        "hit": true,
+        "source": [
+          -1.3000000715255737,
+          0.0,
+          1.190000057220459
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 1521,
+        "owner": "Body_static"
+      },
+      {
+        "x": -1.15,
+        "hit": true,
+        "source": [
+          -1.1500000953674316,
+          0.0,
+          1.190000057220459
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 368,
+        "owner": "Body_static"
+      }
+    ],
+    "realFrameBridge": {
+      "hit": true,
+      "source": [
+        -1.5500000715255737,
+        -0.6350001096725464,
+        0.7900000810623169
+      ],
+      "normal": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "triangle": 166,
+      "owner": "Body_static"
+    },
+    "realSaddleUnderside": {
+      "hit": true,
+      "source": [
+        -1.3000000715255737,
+        0.0,
+        0.8800000548362732
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "triangle": 389,
+      "owner": "Body_static"
+    }
+  },
+  "controls": {
+    "filledGapRejected": true,
+    "baselineRestored": true
+  },
+  "meaning": "Actual six clear side rays, cab/trailer end hits, exposed low plate and frame bridge; one fixed visual combination only."
+}

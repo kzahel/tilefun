@@ -1,0 +1,332 @@
+{
+  "status": "passed",
+  "results": {
+    "masterCockpitFloor": {
+      "status": "passed",
+      "rays": [
+        {
+          "xySource": [
+            -0.18,
+            -0.16
+          ],
+          "firstSurfaceZSource": 0.3099997043609619,
+          "owner": "Actual recessed cockpit floor"
+        },
+        {
+          "xySource": [
+            -0.18,
+            0.16
+          ],
+          "firstSurfaceZSource": 0.3099997043609619,
+          "owner": "Actual recessed cockpit floor"
+        },
+        {
+          "xySource": [
+            -0.08,
+            -0.16
+          ],
+          "firstSurfaceZSource": 0.309999942779541,
+          "owner": "Actual recessed cockpit floor"
+        },
+        {
+          "xySource": [
+            -0.08,
+            0.16
+          ],
+          "firstSurfaceZSource": 0.3099994659423828,
+          "owner": "Actual recessed cockpit floor"
+        },
+        {
+          "xySource": [
+            0.03,
+            -0.16
+          ],
+          "firstSurfaceZSource": 0.3099997043609619,
+          "owner": "Actual recessed cockpit floor"
+        },
+        {
+          "xySource": [
+            0.03,
+            0.16
+          ],
+          "firstSurfaceZSource": 0.3099997043609619,
+          "owner": "Actual recessed cockpit floor"
+        }
+      ]
+    },
+    "master.blend": {
+      "sha256": "c9461fb4cb10971221b03206cc244a2fcd32d413477f4e10c27b9b6746c84c65",
+      "meshObjects": 62,
+      "triangles": 2652,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "30ccef1b35cb3c1e7dde93f8610a49f0cb2877f78894c967f12f866af209007f",
+      "meshObjects": 5,
+      "triangles": 2652,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+      "minBlenderWorld": [
+        -40.34782409667969,
+        -21.339128494262695,
+        4.76837158203125e-07
+      ],
+      "maxBlenderWorld": [
+        39.65217208862305,
+        21.339128494262695,
+        21.65217399597168
+      ],
+      "dimensionsBlenderWorld": [
+        79.99999618530273,
+        42.67825698852539,
+        21.65217351913452
+      ],
+      "dimensionsSourceUnits": [
+        4.5999997806549064,
+        2.4539997768402095,
+        1.2449999773502347
+      ]
+    },
+    "actualGLBOpenCockpit": {
+      "status": "passed",
+      "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+      "rayCount": 6,
+      "centralDownwardRays": [
+        {
+          "xySource": [
+            -0.18,
+            -0.16
+          ],
+          "firstSurfaceZSource": 0.3099999260902404,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.18,
+            0.16
+          ],
+          "firstSurfaceZSource": 0.3099999260902404,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.08,
+            -0.16
+          ],
+          "firstSurfaceZSource": 0.3099999260902404,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.08,
+            0.16
+          ],
+          "firstSurfaceZSource": 0.3099999260902404,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.03,
+            -0.16
+          ],
+          "firstSurfaceZSource": 0.30999970674514765,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.03,
+            0.16
+          ],
+          "firstSurfaceZSource": 0.3099994599819183,
+          "owner": "Body_static"
+        }
+      ],
+      "doorRailRays": [
+        {
+          "xySource": [
+            0.05,
+            -0.34
+          ],
+          "firstSurfaceZSource": 0.7954999995231627,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.05,
+            0.34
+          ],
+          "firstSurfaceZSource": 0.7954999995231627,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.32,
+            -0.34
+          ],
+          "firstSurfaceZSource": 0.7955002737045287,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.32,
+            0.34
+          ],
+          "firstSurfaceZSource": 0.79549978017807,
+          "owner": "Body_static"
+        }
+      ],
+      "seatCushionRays": [
+        {
+          "xySource": [
+            0.27,
+            0
+          ],
+          "firstSurfaceZSource": 0.46950027465820304,
+          "owner": "Body_static"
+        }
+      ],
+      "seatbackRays": [
+        {
+          "xySource": [
+            0.51,
+            0
+          ],
+          "firstSurfaceZSource": 0.8688790488243102,
+          "owner": "Body_static"
+        }
+      ],
+      "minimumRecessDepthSource": 0.4854998540878296,
+      "minimumRecessDepthWorld": 8.443475723266603,
+      "controls": {
+        "baselinePositivePassed": true,
+        "outsideHoodRejected": true,
+        "opaqueUpperDeckRejected": true,
+        "upperDeckNegativeRays": [
+          {
+            "xySource": [
+              -0.18,
+              -0.16
+            ],
+            "firstSurfaceZSource": 0.7799999785423277,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.18,
+              0.16
+            ],
+            "firstSurfaceZSource": 0.7799999785423277,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.08,
+              -0.16
+            ],
+            "firstSurfaceZSource": 0.7799999785423277,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.08,
+              0.16
+            ],
+            "firstSurfaceZSource": 0.7799999785423277,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              0.03,
+              -0.16
+            ],
+            "firstSurfaceZSource": 0.7799999785423277,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              0.03,
+              0.16
+            ],
+            "firstSurfaceZSource": 0.7799999785423277,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          }
+        ],
+        "baselineRestored": true,
+        "inputBytesUnchanged": true
+      },
+      "regionConfig": "scripts/vehicle-bake/open-wheel-racer/cockpit-region.json",
+      "meaning": "Actual open single-seat cockpit. Six front-footwell rays avoid fixed seat/dashboard and reach the low floor. A temporary opaque upper deck must reject them; ordinary driving hides the driver, no helmet/driver mesh."
+    },
+    "actualGLBSuspensionAttachment": {
+      "status": "passed",
+      "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+      "gaps": [
+        {
+          "wheelLongitudinalRangeSource": [
+            -1.6699998760223387,
+            -0.889999952316284
+          ],
+          "wheelOutsideCockpitLongitudinalRange": true,
+          "wheel": "FL",
+          "radiusWorld": 6.782608695652176,
+          "innerFaceOutwardYWorld": 15.478260040283203,
+          "tipCandidateVertices": 108,
+          "actualAxialGapWorld": 0.2854175567626953,
+          "subpixelWorldGap": true
+        },
+        {
+          "wheelLongitudinalRangeSource": [
+            -1.6699998760223387,
+            -0.889999952316284
+          ],
+          "wheelOutsideCockpitLongitudinalRange": true,
+          "wheel": "FR",
+          "radiusWorld": 6.782608695652176,
+          "innerFaceOutwardYWorld": 15.478260040283203,
+          "tipCandidateVertices": 108,
+          "actualAxialGapWorld": 0.2854175567626953,
+          "subpixelWorldGap": true
+        },
+        {
+          "wheelLongitudinalRangeSource": [
+            0.8900001716613768,
+            1.7900000667572018
+          ],
+          "wheelOutsideCockpitLongitudinalRange": true,
+          "wheel": "RL",
+          "radiusWorld": 7.82608695652174,
+          "innerFaceOutwardYWorld": 13.56521987915039,
+          "tipCandidateVertices": 116,
+          "actualAxialGapWorld": 0.28542041778564453,
+          "subpixelWorldGap": true
+        },
+        {
+          "wheelLongitudinalRangeSource": [
+            0.8900001716613768,
+            1.7900000667572018
+          ],
+          "wheelOutsideCockpitLongitudinalRange": true,
+          "wheel": "RR",
+          "radiusWorld": 7.82608695652174,
+          "innerFaceOutwardYWorld": 13.56521987915039,
+          "tipCandidateVertices": 118,
+          "actualAxialGapWorld": 0.28542041778564453,
+          "subpixelWorldGap": true
+        }
+      ],
+      "meaning": "Declared actual fixed-tip region near each imported roll center; nearest fixed arm/upright vertex ends below1world pixel short of the real rotating inner tire face. Full cylinder/body proof separately qualifies every fixed triangle and all neutral rolls."
+    }
+  }
+}

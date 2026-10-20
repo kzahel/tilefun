@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "hot-rod",
+  "name": "Hot rod",
+  "tags": ["vehicle", "original", "hot rod"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/hot-rod-v1/review-manifest.json",
+    "sha256": "ec81837db0a8814dcb3df8e31a65833f2cf5ff692b94d30628a7593a2543bd4f",
+    "candidateId": "hot-rod-v1",
+    "model": "public/demos/original-vehicles/hot-rod-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/hot-rod-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/hot-rod-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/hot-rod-v1/captures",
+    "modelSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "triangles": 3194,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/hot-rod/v1/evidence/replay-verification.json",
+    "sha256": "db53b8320c95fdf2af4fafc27a89c38cd692e9dc7c883f9b3d6867bd6c5d1410",
+    "build": "art-source/vehicle-bake/hot-rod/v1/build.py",
+    "family": "art-source/vehicle-bake/hot-rod/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "hot-rod-authored-v1",
+    "path": "assets/models/vehicles/hot-rod-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/hot-rod-v1.png",
+  "performance": {
+    "speed": 135,
+    "acceleration": 230,
+    "pushSpeed": 44,
+    "pushWeight": 110
+  },
+  "receipt": "art-source/vehicle-bake/runtime-hot-rod-v1.json",
+  "expectedBounds": [74, 42, 28]
+}

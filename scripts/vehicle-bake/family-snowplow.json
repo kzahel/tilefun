@@ -1,0 +1,15 @@
+{
+  "id": "snowplow-v1",
+  "clearanceId": "snowplow--v1",
+  "name": "Snowplow truck",
+  "title": "Snowplow truck \u00b7 autonomous original v1",
+  "source": "public/demos/vehicle-bake/snowplow/v1",
+  "glb": "public/demos/vehicle-bake/snowplow/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/snowplow/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/snowplow/v1/report.json",
+  "output": "public/demos/original-vehicles/snowplow-v1",
+  "qa": "data/vehicle-bake/snowplow-qa",
+  "offline": "data/vehicle-bake/snowplow-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 256
+}

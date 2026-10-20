@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending",
+  "report": "public/demos/vehicle-bake/woody-wagon/v1/report.json",
+  "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+  "atlasSha256": "2fdb5c112858ccac1a4a6ff5487bbe3c35c089eed995d468847114a3faf76545",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/woody-wagon/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/woody-wagon/capture.mjs",
+    "node scripts/vehicle-bake/woody-wagon/independent-visual.mjs",
+    "python scripts/vehicle-bake/woody-wagon/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/woody-wagon/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/woody-wagon/v1/evidence/clearance-input.json data/vehicle-bake/woody-wagon/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/woody-wagon/v1/model.glb --config art-source/vehicle-bake/woody-wagon/v1/coverage-region.json --output data/vehicle-bake/woody-wagon/recheck-coverage.json"
+  ]
+}

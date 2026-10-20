@@ -1,0 +1,319 @@
+{
+  "method": "Independent pastel aqua/cream shop van with short front-third framed blue cab, real boolean-cut side serving recess and distinct inner jamb/counter/backwall owners, fixed pink/cream striped awning, opposite large cone symbol and cream roof. Actual opaque skin paint; no glass overlays or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      67,
+      138,
+      145
+    ],
+    "paintShadow": [
+      93,
+      160,
+      164
+    ],
+    "paintMid": [
+      134,
+      193,
+      188
+    ],
+    "paint": [
+      161,
+      216,
+      207
+    ],
+    "paintLight": [
+      255,
+      244,
+      214
+    ],
+    "cream": [
+      255,
+      237,
+      194
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "violet": [
+      224,
+      143,
+      163
+    ],
+    "violetLight": [
+      248,
+      181,
+      193
+    ],
+    "violetShadow": [
+      190,
+      116,
+      144
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "interiorBack": [
+      77,
+      96,
+      107
+    ],
+    "counter": [
+      99,
+      126,
+      132
+    ],
+    "cone": [
+      207,
+      144,
+      77
+    ],
+    "coneLight": [
+      238,
+      184,
+      105
+    ]
+  },
+  "semanticOwners": {
+    "servingSideSkin": {
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        128
+      ],
+      "meaning": "Actual -Y aqua side skin, bounded cab glass and dark perimeter surrounding a true empty serving aperture"
+    },
+    "oppositeConeSide": {
+      "atlasPixelRect": [
+        0,
+        128,
+        512,
+        256
+      ],
+      "meaning": "Actual +Y skin with large simple pink scoop and warm cone emblem; no overlay"
+    },
+    "endCaps": {
+      "atlasPixelRect": [
+        0,
+        256,
+        512,
+        320
+      ]
+    },
+    "windshield": {
+      "atlasPixelRect": [
+        0,
+        320,
+        512,
+        384
+      ]
+    },
+    "creamRoof": {
+      "atlasPixelRect": [
+        0,
+        384,
+        512,
+        432
+      ]
+    },
+    "creamNose": {
+      "atlasPixelRect": [
+        0,
+        432,
+        512,
+        464
+      ]
+    },
+    "recessInterior": {
+      "components": [
+        "Serving recess backwall independent owner",
+        "Serving recess counter-floor independent owner",
+        "Serving recess ceiling independent owner",
+        "Serving recess front-jamb independent owner",
+        "Serving recess rear-jamb independent owner"
+      ],
+      "roles": [
+        "interiorBack",
+        "counter",
+        "paintDeep",
+        "cream"
+      ],
+      "meaning": "Real finite-depth cut surfaces with exclusive padded colour ownership; no coincident painted opening"
+    },
+    "awning": {
+      "meaning": "Eight alternating opaque cream/pink geometry strips, short valance and fixed corner brackets"
+    },
+    "wheels": {
+      "meaning": "Four independent tire/rim/hub surfaces use padded palette islands; no fender paint on wheels"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "violet": [
+      80,
+      504
+    ],
+    "violetLight": [
+      112,
+      504
+    ],
+    "violetShadow": [
+      144,
+      504
+    ],
+    "rubyLight": [
+      176,
+      504
+    ],
+    "interiorBack": [
+      208,
+      504
+    ],
+    "counter": [
+      240,
+      504
+    ],
+    "cone": [
+      272,
+      504
+    ],
+    "coneLight": [
+      304,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Original authored semantic UVs including unseen surfaces; no source projection or high-to-low transfer claim.",
+  "outerInk": "Shared engine exterior pass RGB58,58,80; no geometry outline shell.",
+  "asymmetry": "Physical serving recess/awning -Y; large cone on intact +Y body skin."
+}

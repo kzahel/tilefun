@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "inputHashes": {
+    "art-source/vehicle-bake/ice-cream-van/v1/build.py": "e660e459182e40394a545aa021d3825bbf9ade0a05638e1ea8de1e8b7570e22a",
+    "art-source/vehicle-bake/ice-cream-van/v1/family.json": "682239f04338cb81351789c49454ef17e0d61f0d1396f52fea2b70e6e7578e1a",
+    "art-source/vehicle-bake/ice-cream-van/v1/coverage-region.json": "b45ec3b106f297e2d9726262e6f35f4e91b20935947994f2cb8a38cd9591341d",
+    "art-source/vehicle-bake/ice-cream-van/v1/surface-regions.json": "0545f9d231ccf6239ec2205b6beee2a99a7375bcf40551ecb5a80bcc95e1717b",
+    "art-source/vehicle-bake/ice-cream-van/v1/serving-region.json": "ce26acb716b408b5fe84125efec8ad53c3fe979fbdcbeaf435058f18a02ebb49",
+    "art-source/vehicle-bake/ice-cream-van/v1/review.json": "a09039f6d749df32797b7b0eff5a42a9a532ce9eb3187a711cc74d0e0fa3de13"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+  },
+  "outputs": {
+    "model.glb": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+    "atlas.png": "1ce9d85a871391bcaaa912228bf61f78955ed970827e507c7cdaf5dfa19f0b84",
+    "recipe.json": "2966b09472fe345b12769e9de3066f9514439e8beb66223e01174c7825284910"
+  },
+  "scratchInputDependencies": [],
+  "isolatedRoot": "data/vehicle-bake/ice-cream-van/fresh-declared-replay",
+  "bootstrap": "Empty AGENTS.md/public root sentinels only; no vehicle inputs",
+  "meaning": "Fresh miniature repository contains only listed inputs. GLB, atlas and recipe match byte for byte; packed blend determinism is not claimed."
+}

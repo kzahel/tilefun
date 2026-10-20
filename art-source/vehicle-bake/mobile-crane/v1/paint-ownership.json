@@ -1,0 +1,340 @@
+{
+  "method": "Own low orange/yellow six-wheel mobile crane carrier, closed actual blue-glass driver cab, small offset glazed operator pod, three broad solid stepped telescopic sections in low rigid stow, actual fixed cable/J hook and four short retracted outrigger caps. No working equipment animation/gameplay or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      160,
+      83,
+      44
+    ],
+    "paintShadow": [
+      193,
+      103,
+      45
+    ],
+    "paintMid": [
+      219,
+      123,
+      45
+    ],
+    "paint": [
+      236,
+      145,
+      55
+    ],
+    "paintLight": [
+      255,
+      178,
+      66
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "deck": [
+      163,
+      168,
+      176
+    ],
+    "deckLight": [
+      184,
+      188,
+      195
+    ],
+    "deckEdge": [
+      124,
+      135,
+      145
+    ],
+    "deckSeam": [
+      98,
+      107,
+      119
+    ],
+    "frame": [
+      63,
+      69,
+      79
+    ],
+    "boom": [
+      246,
+      202,
+      74
+    ],
+    "boomLight": [
+      255,
+      222,
+      112
+    ],
+    "boomShadow": [
+      206,
+      157,
+      52
+    ]
+  },
+  "semanticOwners": {
+    "driverCabSides": {
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        128
+      ],
+      "meaning": "Closed actual skin glass, continuous dark frames and orange body/door seam"
+    },
+    "driverCabEnds": {
+      "atlasPixelRect": [
+        0,
+        128,
+        512,
+        208
+      ]
+    },
+    "driverWindshield": {
+      "atlasPixelRect": [
+        0,
+        208,
+        512,
+        288
+      ]
+    },
+    "lowCarrierSkin": {
+      "atlasPixelRect": [
+        0,
+        288,
+        512,
+        352
+      ],
+      "meaning": "Real low closed hull with all6 open local tire pockets and integrated arch shoulders"
+    },
+    "offsetOperatorPod": {
+      "atlasPixelRect": [
+        0,
+        352,
+        512,
+        432
+      ],
+      "meaning": "Own actual closed pod front/side glass charts, no overlay"
+    },
+    "driverRoof": {
+      "atlasPixelRect": [
+        0,
+        432,
+        512,
+        464
+      ]
+    },
+    "rigidStowedBoom": {
+      "components": [
+        "Rigid stowed boom section 0",
+        "Rigid stowed boom section 1",
+        "Rigid stowed boom section 2"
+      ],
+      "roles": [
+        "boom",
+        "boomLight",
+        "boomShadow"
+      ],
+      "meaning": "Three broad overlapping stepped solid sections, all fixed; no lift/telescope node or motion claim"
+    },
+    "hookCable": {
+      "components": [
+        "Fixed short stowed hook cable",
+        "Fixed readable gray J hook"
+      ],
+      "meaning": "Actual small fixed gray geometry near stowed front tip; no cable animation"
+    },
+    "fourStowedOutriggers": {
+      "meaning": "Four short solid yellow cap components tucked within measured carrier width; dark actual outer end-face paint, not extended stabilizer arms"
+    },
+    "sixRoadWheels": {
+      "ids": [
+        "FL",
+        "FR",
+        "ML",
+        "MR",
+        "RL",
+        "RR"
+      ],
+      "meaning": "All6 independently rolling tire/rim/hub assemblies; only qualified moving parts"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "rubyLight": [
+      80,
+      504
+    ],
+    "deck": [
+      112,
+      504
+    ],
+    "deckLight": [
+      144,
+      504
+    ],
+    "deckEdge": [
+      176,
+      504
+    ],
+    "deckSeam": [
+      208,
+      504
+    ],
+    "frame": [
+      240,
+      504
+    ],
+    "boom": [
+      272,
+      504
+    ],
+    "boomLight": [
+      304,
+      504
+    ],
+    "boomShadow": [
+      336,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Original semantic UV painting including unseen surfaces; no source projection/high-to-low transfer claim.",
+  "outerInk": "Shared exterior pass RGB58,58,80; no geometry outline shell."
+}

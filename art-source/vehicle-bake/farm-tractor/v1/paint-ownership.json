@@ -1,0 +1,109 @@
+{
+  "method": "Original bright green/yellow farm tractor: narrow long green hood with yellow stripe, tall enclosed blue-glass cab with green canopy, huge rear agricultural tires and smaller exposed front tires; actual rear fenders only. Fixed rear hitch has no tool/hitch physics or animation claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      42,
+      83,
+      59
+    ],
+    "paintShadow": [
+      54,
+      112,
+      67
+    ],
+    "paintMid": [
+      68,
+      139,
+      70
+    ],
+    "paint": [
+      87,
+      163,
+      72
+    ],
+    "paintLight": [
+      127,
+      191,
+      85
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "yellow": [
+      248,
+      200,
+      60
+    ],
+    "yellowLight": [
+      255,
+      225,
+      104
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "frame": [
+      63,
+      69,
+      79
+    ]
+  },
+  "ownership": "Own actual closed cab side/front/rear blue glass charts with broad dark frames; green canopy roof chart, narrow hood side yellow stripe. Rear-only real fenders; four distinct tire/hub role owners, huge rear chevron treads. Fixed underframe/exhaust/hitch. No glass overlays or screen projection.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored semantic surfaces; economical runtime-topology master, no high-to-low transfer claim.",
+  "outerInk": "Shared RGB58,58,80 exterior pass; no mesh outline shell.",
+  "mixedRadii": "Front .40 and rear .74 source; each wheel measured and declared separately. Front crown coverage intentionally N/A, rear finite central region only.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

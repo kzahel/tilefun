@@ -1,0 +1,63 @@
+{
+  "status": "meets-declared-finite-region",
+  "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+  "allFourCrownsCovered": true,
+  "allWheelCoverage": "natural front nose/rear tub fenders over declared central crown region",
+  "wheels": [
+    {
+      "wheel": "Wheel_FL_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_FR_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_RL_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_RR_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    }
+  ],
+  "controls": {
+    "bodyRemovalCoveredCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "syntheticBroadPanelPositiveCounts": [
+      25,
+      25,
+      25,
+      25
+    ],
+    "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "positiveAndNegativeControlsPassed": true,
+    "fixtureIsNotCandidateGeometry": true,
+    "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+  },
+  "bodyRemovalInformativeAgainstBaseline": true,
+  "maximumRayDistanceR": 1.15,
+  "canopyCannotQualify": true,
+  "regionMeaning": "Finite central tread footprint from each own .31source radius and .24source width. Ray limited to1.15R above sampled tread; white canopy is outside this range. Actual natural nose/rear tub body owns covered crowns, no separate fake caps.",
+  "portableRawEvidence": "art-source/vehicle-bake/golf-cart/v1/evidence/upper-wheel-coverage-raw.json",
+  "portableRawSha256": "6de3f8511b3367b005c8ab4eeba147b3e087c0acfbd7bc3703f752b9635756ff",
+  "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+}

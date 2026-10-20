@@ -1,0 +1,763 @@
+{
+  "family": "rounded-yellow-four-door-retro-taxi",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    4.7,
+    2.0,
+    1.65
+  ],
+  "wheelRadius": 0.43,
+  "wheelWidth": 0.25,
+  "axles": [
+    -1.4,
+    1.39
+  ],
+  "halfTrack": 0.815,
+  "arch": {
+    "cutRadius": 0.53,
+    "pocketInnerY": 0.6,
+    "segments": 24
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [
+      0.56,
+      0.68,
+      0.84,
+      0.95,
+      1.0
+    ],
+    "shoulderRadii": [
+      0.54,
+      0.59,
+      0.595,
+      0.57,
+      0.54
+    ],
+    "archRadius": 0.512
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      179,
+      122,
+      36
+    ],
+    "paintShadow": [
+      210,
+      145,
+      37
+    ],
+    "paintMid": [
+      235,
+      170,
+      42
+    ],
+    "paint": [
+      247,
+      194,
+      54
+    ],
+    "paintLight": [
+      255,
+      215,
+      87
+    ],
+    "cream": [
+      255,
+      239,
+      191
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "roof": [
+      255,
+      224,
+      119
+    ],
+    "checkerBlack": [
+      45,
+      48,
+      66
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original rounded low yellow four-door taxi sedan with substantial hood/trunk, domed cabin and swept front/rear glazing. Continuous actual-skin UV charts own bounded blue panes, broad two-row black/cream checker belt, four-door seams/gray handles and rear tail paint. Small fixed roof-sign solid has actual UV dark inset without text. No glass overlays, source projection or high-to-low claim.",
+  "sedanStations": [
+    [
+      -2.21,
+      0.8,
+      0.89
+    ],
+    [
+      -2.15,
+      0.93,
+      0.99
+    ],
+    [
+      -1.95,
+      1.0,
+      1.035
+    ],
+    [
+      -1.55,
+      1.0,
+      1.055
+    ],
+    [
+      -1.13,
+      1.0,
+      1.065
+    ],
+    [
+      -1.03,
+      1.0,
+      1.09
+    ],
+    [
+      -0.66,
+      1.0,
+      1.43
+    ],
+    [
+      -0.44,
+      1.0,
+      1.49
+    ],
+    [
+      -0.12,
+      1.0,
+      1.51
+    ],
+    [
+      0.24,
+      1.0,
+      1.51
+    ],
+    [
+      0.57,
+      1.0,
+      1.47
+    ],
+    [
+      0.78,
+      1.0,
+      1.36
+    ],
+    [
+      1.12,
+      1.0,
+      1.08
+    ],
+    [
+      1.43,
+      1.0,
+      1.03
+    ],
+    [
+      1.84,
+      0.98,
+      0.99
+    ],
+    [
+      2.12,
+      0.91,
+      0.94
+    ],
+    [
+      2.21,
+      0.79,
+      0.84
+    ]
+  ],
+  "section": [
+    [
+      -0.78,
+      0.24
+    ],
+    [
+      -0.9,
+      0.34
+    ],
+    [
+      -0.95,
+      0.58
+    ],
+    [
+      -0.95,
+      0.84
+    ],
+    [
+      -0.92,
+      0.96
+    ],
+    [
+      -0.86,
+      "glassBase"
+    ],
+    [
+      -0.81,
+      "glassMiddle"
+    ],
+    [
+      -0.75,
+      "roofEdge"
+    ],
+    [
+      -0.62,
+      "roofShoulder"
+    ],
+    [
+      -0.33,
+      "roofCrown"
+    ],
+    [
+      0,
+      "top"
+    ],
+    [
+      0.33,
+      "roofCrown"
+    ],
+    [
+      0.62,
+      "roofShoulder"
+    ],
+    [
+      0.75,
+      "roofEdge"
+    ],
+    [
+      0.81,
+      "glassMiddle"
+    ],
+    [
+      0.86,
+      "glassBase"
+    ],
+    [
+      0.92,
+      0.96
+    ],
+    [
+      0.95,
+      0.84
+    ],
+    [
+      0.95,
+      0.58
+    ],
+    [
+      0.9,
+      0.34
+    ],
+    [
+      0.78,
+      0.24
+    ]
+  ],
+  "roofLevels": {
+    "glassBase": 1.015,
+    "glassMiddle": 0.42,
+    "roofEdge": 0.83,
+    "roofShoulder": 0.95,
+    "roofCrown": 0.99
+  },
+  "sidePanes": [
+    [
+      [
+        -0.91,
+        1.06
+      ],
+      [
+        -0.05,
+        1.06
+      ],
+      [
+        -0.05,
+        1.43
+      ],
+      [
+        -0.56,
+        1.43
+      ]
+    ],
+    [
+      [
+        0.08,
+        1.06
+      ],
+      [
+        0.99,
+        1.06
+      ],
+      [
+        0.63,
+        1.43
+      ],
+      [
+        0.08,
+        1.43
+      ]
+    ]
+  ],
+  "checkerBelt": {
+    "longitudinalRange": [
+      -1.0,
+      1.0
+    ],
+    "verticalRange": [
+      0.67,
+      0.97
+    ],
+    "cellSize": 0.15,
+    "roles": [
+      "cream",
+      "checkerBlack"
+    ],
+    "rows": 2,
+    "owner": "Actual sedan side-skin triangles"
+  },
+  "roofSign": {
+    "center": [
+      -0.02,
+      0,
+      1.575
+    ],
+    "dimensions": [
+      0.42,
+      0.68,
+      0.15
+    ],
+    "insetUVRect": [
+      0.1,
+      0.9,
+      0.18,
+      0.82
+    ],
+    "static": true,
+    "text": false
+  },
+  "components": [
+    {
+      "name": "Own rounded yellow taxi substantial hood domed cabin trunk skin",
+      "group": "body",
+      "triangles": 1010,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Integrated rounded taxi fender -1.4 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Integrated rounded taxi fender -1.4 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Integrated rounded taxi fender 1.39 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Integrated rounded taxi fender 1.39 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Fixed taxi roof sign actual UV inset owner",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Fixed taxi roof sign low support",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded gray taxi bumper -2.3",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad silver bumper edge -2.3",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Rounded gray taxi bumper 2.3",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad silver bumper edge 2.3",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Simple round gray headlamp rim -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Simple round gray headlamp -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Simple round gray headlamp rim 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Simple round gray headlamp 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.399999976158142,
+        -0.8149999976158142,
+        0.4300000071525574
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        7.47826099395752,
+        14.173913002014162
+      ],
+      "radiusBlender": 0.43,
+      "wheel_radius": 7.478260869565219
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.399999976158142,
+        0.8149999976158142,
+        0.4300000071525574
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        7.47826099395752,
+        -14.173913002014162
+      ],
+      "radiusBlender": 0.43,
+      "wheel_radius": 7.478260869565219
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.3899999856948853,
+        -0.8149999976158142,
+        0.4300000071525574
+      ],
+      "centerExport": [
+        24.17391279469366,
+        7.47826099395752,
+        14.173913002014162
+      ],
+      "radiusBlender": 0.43,
+      "wheel_radius": 7.478260869565219
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.3899999856948853,
+        0.8149999976158142,
+        0.4300000071525574
+      ],
+      "centerExport": [
+        24.17391279469366,
+        7.47826099395752,
+        -14.173913002014162
+      ],
+      "radiusBlender": 0.43,
+      "wheel_radius": 7.478260869565219
+    }
+  ],
+  "method": "Original rounded low yellow four-door taxi sedan with substantial hood/trunk, domed cabin and swept front/rear glazing. Continuous actual-skin UV charts own bounded blue panes, broad two-row black/cream checker belt, four-door seams/gray handles and rear tail paint. Small fixed roof-sign solid has actual UV dark inset without text. No glass overlays, source projection or high-to-low claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/retro-taxi/build.py",
+    "scripts/vehicle-bake/retro-taxi/family.json",
+    "scripts/vehicle-bake/retro-taxi/coverage-region.json",
+    "scripts/vehicle-bake/retro-taxi/surface-regions.json",
+    "scripts/vehicle-bake/retro-taxi/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

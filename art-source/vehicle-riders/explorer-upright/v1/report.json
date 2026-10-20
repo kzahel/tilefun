@@ -1,0 +1,29 @@
+{
+  "status": "prototype-not-production",
+  "sourceStage": "complete",
+  "sourceImmutable": true,
+  "humanApproval": false,
+  "geometry": {
+    "triangles": 1956,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 1,
+    "atlas": [
+      256,
+      256
+    ],
+    "glbBytes": 153736,
+    "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "uvVertices": 4315
+  },
+  "limits": [
+    "One upright Explorer and synthetic profile fixture only; no actual bike/production/27-avatar/AI/fallback qualification",
+    "Existing standing/promoted characters and normal vehicle runtime unchanged"
+  ],
+  "readyForIndependentPrerequisiteQA": true,
+  "actualBikePresent": false,
+  "CarMeshAssetUsed": false,
+  "fixtureGeometryStaysIgnored": true,
+  "profileSha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "sourceOnlyReplayExact": true
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "woody-wagon",
+  "name": "Wood-panel station wagon",
+  "tags": ["vehicle", "original", "station wagon"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/woody-wagon-v1/review-manifest.json",
+    "sha256": "916fb3ec9648f483602961ba3cb7837ee8ab0ac446499dfacd480beb1b4936c9",
+    "candidateId": "woody-wagon-v1",
+    "model": "public/demos/original-vehicles/woody-wagon-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/woody-wagon-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/woody-wagon-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/woody-wagon-v1/captures",
+    "modelSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+    "triangles": 2792,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/woody-wagon/v1/evidence/replay-verification.json",
+    "sha256": "70afabbe39603f9fbb02af3ff017017d5fa310061a48c9cf13f7ef9015b8b43e",
+    "build": "art-source/vehicle-bake/woody-wagon/v1/build.py",
+    "family": "art-source/vehicle-bake/woody-wagon/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "woody-wagon-authored-v1",
+    "path": "assets/models/vehicles/woody-wagon-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/woody-wagon-v1.png",
+  "performance": {
+    "speed": 100,
+    "acceleration": 165,
+    "pushSpeed": 45,
+    "pushWeight": 230
+  },
+  "receipt": "art-source/vehicle-bake/runtime-woody-wagon-v1.json",
+  "expectedBounds": [95, 35, 31]
+}

@@ -29,6 +29,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Boats](boats.md) | Drivable explorer motorboat, shore moorings, large lakes and water wildlife |
 | [Vehicle model porting](vehicle-model-porting.md) | All 45 sprite sets, Blender model delivery, per-vehicle engine integration and next actions |
 | [Original vehicles](original-vehicles.md) | Red coupe low-poly style/budget pilot, reusable authoring pipeline and gated expansion queue |
+| [Vehicle riders](vehicle-riders.md) | Seated avatar/depth/fallback and automatic-occupant prerequisites for motorcycles and exposed seats |
 | [Trains](trains.md) | Proposed generated town railways, paired local/express tracks, stations, forks, bridges and tunnels |
 | [World geometry](world-geometry.md) | First ramp/deck/passage engine lab; direction and open terrain/indoor decisions for connected stacked spaces |
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |

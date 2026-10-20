@@ -1,0 +1,139 @@
+{
+  "status": "source-complete-prototype-not-production",
+  "riderSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "geometry": {
+    "triangles": 1956,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 1,
+    "atlas": [
+      256,
+      256
+    ],
+    "glbBytes": 153736,
+    "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "uvVertices": 4315
+  },
+  "sourceOnlyReplayExact": true,
+  "humanApproval": false,
+  "previousImmutableBundles": {
+    "art-source/vehicle-bake/beach-buggy/v1/retained-files.json": {
+      "sha256": "f3423e6a594af8e0665c80d34e6d685f741239f1cb1b95a448ab25ec202f5e16",
+      "verifiedFiles": 87
+    },
+    "art-source/vehicle-bake/beetle/v1/retained-files.json": {
+      "sha256": "53ccfd3613bf9a1407960c402a71b0addf605e19dac144e9c20ec06db4197793",
+      "verifiedFiles": 80
+    },
+    "art-source/vehicle-bake/camper-van/v1/retained-files.json": {
+      "sha256": "a9ff7e1dc2dcbf08b012830d46d5afbd4f064d87ea65d072fbb4b3db2fc1aeb7",
+      "verifiedFiles": 87
+    },
+    "art-source/vehicle-bake/cement-mixer/v1/retained-files.json": {
+      "sha256": "5558140b46923c6bb385adf191abfd5ee94ae663ddaa328c68ba688c43d97296",
+      "verifiedFiles": 185
+    },
+    "art-source/vehicle-bake/classic-roadster/v1/retained-files.json": {
+      "sha256": "e35f816afa17a3a9e810d1abd1c144165623cb047deb65920d4e09d4e3009dcf",
+      "verifiedFiles": 87
+    },
+    "art-source/vehicle-bake/delivery-van/v1/retained-files.json": {
+      "sha256": "4b22f456bcf77bc8df234da5e508a0f346dd81f7fd3e711aeb76be8ca9340874",
+      "verifiedFiles": 85
+    },
+    "art-source/vehicle-bake/dump-truck/v1/retained-files.json": {
+      "sha256": "6c37a928eab2ed04cebdbcfabaddaa28e1c6452429f75872aa847810c07b58d1",
+      "verifiedFiles": 185
+    },
+    "art-source/vehicle-bake/flatbed-truck/v1/retained-files.json": {
+      "sha256": "2f2d8fa64b5211cbd28e993a11b3c100be6328dfcb04d3123810b4d09117a24a",
+      "verifiedFiles": 93
+    },
+    "art-source/vehicle-bake/food-truck/v1/retained-files.json": {
+      "sha256": "7563034a74cb6293fa65baa1205fa03f44e79b3a865fd69bab00b8de2abab57d",
+      "verifiedFiles": 171
+    },
+    "art-source/vehicle-bake/go-kart/v1/retained-files.json": {
+      "sha256": "aa7bd8890f463a72653cf669f262678809d730c93627ae278963151680fa1ca5",
+      "verifiedFiles": 125
+    },
+    "art-source/vehicle-bake/golf-cart/v1/retained-files.json": {
+      "sha256": "252a2830840d2948b5ff9fc5459f84b8b7c045a23a869cab869c9a551095ea5a",
+      "verifiedFiles": 171
+    },
+    "art-source/vehicle-bake/hot-rod/v1/retained-files.json": {
+      "sha256": "83b24e49e8307cf1109b2743c37c6d1588e6094aaf7a99cf96dbf48c573b8cec",
+      "verifiedFiles": 169
+    },
+    "art-source/vehicle-bake/ice-cream-van/v1/retained-files.json": {
+      "sha256": "27e6ade7e9b5ba1d942f314e1db48baf7cc8a28fa03407eb95974e90d40157aa",
+      "verifiedFiles": 91
+    },
+    "art-source/vehicle-bake/microcar/v1/retained-files.json": {
+      "sha256": "470d1ee9868052a05b6535987fb6f31d73e665ae2e83eeb2369d6d5ba39e861f",
+      "verifiedFiles": 85
+    },
+    "art-source/vehicle-bake/mobile-crane/v1/retained-files.json": {
+      "sha256": "0ccd7d48aead6b930f91ad1b86234e6a346c78b36547f3f5b2f501036fb4c856",
+      "verifiedFiles": 95
+    },
+    "art-source/vehicle-bake/monster-truck/v1/retained-files.json": {
+      "sha256": "973b5f85673f0bd18b9d36e25866b731376c4382e68b8d176ac6933ed6b761c7",
+      "verifiedFiles": 171
+    },
+    "art-source/vehicle-bake/motorhome/v1/retained-files.json": {
+      "sha256": "ce9b354b38dd6d9929b79409284af2fd7580c0b718b3645d692ddbce37736fc2",
+      "verifiedFiles": 93
+    },
+    "art-source/vehicle-bake/offroad-jeep/v1/retained-files.json": {
+      "sha256": "1b01a4199d0cc75a2f70e03604c8170f481abe8b7941d2d2803f46fac0eff334",
+      "verifiedFiles": 113
+    },
+    "art-source/vehicle-bake/open-wheel-racer/v1/retained-files.json": {
+      "sha256": "3beff7bc8c1b005024b5fd8b26debe1deee8a14223082bb6b0a0dae1c58f99e4",
+      "verifiedFiles": 123
+    },
+    "art-source/vehicle-bake/pickup/v1/retained-files.json": {
+      "sha256": "71da2c827d01e58e5ddcc5b9d0f1bf885318ebb573fc58791b24b883edc579ab",
+      "verifiedFiles": 89
+    },
+    "art-source/vehicle-bake/race-coupe/v1/retained-files.json": {
+      "sha256": "83cecc19688e5fce184b6777e386534a8bb061ce80420737b218ad4b234b49fb",
+      "verifiedFiles": 115
+    },
+    "art-source/vehicle-bake/rally-hatchback/v1/retained-files.json": {
+      "sha256": "debecba691997e699c3dd9cca983eee6129e68e661e11791e5155c6ff74756d9",
+      "verifiedFiles": 87
+    },
+    "art-source/vehicle-bake/retro-taxi/v1/retained-files.json": {
+      "sha256": "b967a04a4a557e0fdebd48cf00685d90ddcdf7526e2f28935b81a1da7f379665",
+      "verifiedFiles": 87
+    },
+    "art-source/vehicle-bake/school-bus/v1/retained-files.json": {
+      "sha256": "b2bb071f8306b2dff5a543dd7f0062ad1aef9383fdbc5284ac16315d15083ea6",
+      "verifiedFiles": 83
+    },
+    "art-source/vehicle-bake/semi-truck/v1/retained-files.json": {
+      "sha256": "f5360c4c85685c6f8c3e3840396944b1da07e9cdab327fecf6411ac5c6e917ea",
+      "verifiedFiles": 95
+    },
+    "art-source/vehicle-bake/stretch-limousine/v1/retained-files.json": {
+      "sha256": "d01a29e1bf84beb9b247e911895f465baa7dd4aa76f91a404bcf965b9b8f0f59",
+      "verifiedFiles": 87
+    },
+    "art-source/vehicle-bake/tow-truck/v1/retained-files.json": {
+      "sha256": "998ea9ce256c62fbfe417e593366eb4cae4047f3ee7b41e6c53ac1f8662ff057",
+      "verifiedFiles": 171
+    },
+    "art-source/vehicle-bake/woody-wagon/v1/retained-files.json": {
+      "sha256": "f8e0d95ffd1bc31324a5408c5ed8437b18ba5345924fb9388592d06a5fd64b0c",
+      "verifiedFiles": 113
+    },
+    "art-source/vehicle-riders/explorer/v1/retained-files.json": {
+      "sha256": "db612385e280ed07d50d8dea938a473b3a9634aad309567dc48ef80349209df5",
+      "verifiedFiles": 174
+    }
+  },
+  "allPreviousPinnedFilesUnchanged": true,
+  "fixtureGeometryRetainedOnlyUnderIgnoredData": true
+}

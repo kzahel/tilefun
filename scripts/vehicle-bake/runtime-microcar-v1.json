@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "microcar",
+  "name": "Tiny bubble microcar",
+  "tags": ["vehicle", "original", "microcar"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/microcar-v1/review-manifest.json",
+    "sha256": "5129c61ced219a5948a4fd3e8901cdc6d7418dd2a933b97f53820ddee47fd6da",
+    "candidateId": "microcar-v1",
+    "model": "public/demos/original-vehicles/microcar-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/microcar-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/microcar-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/microcar-v1/captures",
+    "modelSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+    "triangles": 2596,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/microcar/v1/evidence/replay-verification.json",
+    "sha256": "2efc570c6f81d7c0b0d4793a6a3bf9978c7c0a4613b923e8a5eb5af7b6935a9a",
+    "build": "art-source/vehicle-bake/microcar/v1/build.py",
+    "family": "art-source/vehicle-bake/microcar/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "microcar-authored-v1",
+    "path": "assets/models/vehicles/microcar-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/microcar-v1.png",
+  "performance": {
+    "speed": 85,
+    "acceleration": 170,
+    "pushSpeed": 32,
+    "pushWeight": 55
+  },
+  "receipt": "art-source/vehicle-bake/runtime-microcar-v1.json",
+  "expectedBounds": [56, 31, 30]
+}

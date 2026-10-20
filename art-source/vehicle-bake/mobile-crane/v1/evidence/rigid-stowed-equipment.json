@@ -1,0 +1,314 @@
+{
+  "status": "passed",
+  "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+  "inputBytesUnchanged": true,
+  "configuration": {
+    "maximumHeight": 2.9,
+    "maximumAbsWidth": 1.35,
+    "maximumSpanLength": 7.55,
+    "boomSamples": [
+      {
+        "x": 2.0,
+        "topZ": 2.32,
+        "width": 0.72,
+        "probeZ": 2.0
+      },
+      {
+        "x": -1.4,
+        "topZ": 2.58,
+        "width": 0.58,
+        "probeZ": 2.3
+      },
+      {
+        "x": -2.8,
+        "topZ": 2.8,
+        "width": 0.44,
+        "probeZ": 2.6
+      }
+    ],
+    "podRoof": [
+      [
+        -0.425,
+        -0.72,
+        2.56
+      ]
+    ],
+    "outriggerXs": [
+      -1.55,
+      3.28
+    ],
+    "outriggerOuterY": 1.29,
+    "meaning": "Actual low stowed section heights/widths, closed pod, fixed cable/hook and four tucked caps. Raised actual tip/extended cap negative/reset; no working equipment pose or gameplay claim."
+  },
+  "actualStowedEquipment": {
+    "boundsSource": {
+      "min": [
+        -3.7250001430511475,
+        -1.3070002794265747,
+        5.4836274188119205e-08
+      ],
+      "max": [
+        3.620000123977661,
+        1.3070002794265747,
+        2.8299999237060547
+      ]
+    },
+    "threeSteppedSections": [
+      {
+        "x": 2.0,
+        "top": {
+          "source": [
+            2.000000238418579,
+            0.3500000238418579,
+            2.320000171661377
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "triangle": 295,
+          "owner": "Body_static"
+        },
+        "left": {
+          "source": [
+            2.000000238418579,
+            -0.009999752044677734,
+            2.000000238418579
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "triangle": 294,
+          "owner": "Body_static"
+        },
+        "right": {
+          "source": [
+            2.000000238418579,
+            0.7100000381469727,
+            2.000000238418579
+          ],
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "triangle": 1736,
+          "owner": "Body_static"
+        },
+        "width": 0.7199997901916504
+      },
+      {
+        "x": -1.4,
+        "top": {
+          "source": [
+            -1.4000000953674316,
+            0.3500000238418579,
+            2.5799999237060547
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "triangle": 1753,
+          "owner": "Body_static"
+        },
+        "left": {
+          "source": [
+            -1.4000000953674316,
+            0.059999946504831314,
+            2.3000001907348633
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "triangle": 1752,
+          "owner": "Body_static"
+        },
+        "right": {
+          "source": [
+            -1.4000000953674316,
+            0.6399998664855957,
+            2.3000001907348633
+          ],
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "triangle": 322,
+          "owner": "Body_static"
+        },
+        "width": 0.5799999199807644
+      },
+      {
+        "x": -2.8,
+        "top": {
+          "source": [
+            -2.8000001907348633,
+            0.3500000238418579,
+            2.799999713897705
+          ],
+          "normal": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "triangle": 1771,
+          "owner": "Body_static"
+        },
+        "left": {
+          "source": [
+            -2.8000001907348633,
+            0.12999987602233887,
+            2.6000001430511475
+          ],
+          "normal": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "triangle": 1770,
+          "owner": "Body_static"
+        },
+        "right": {
+          "source": [
+            -2.8000001907348633,
+            0.5699999332427979,
+            2.6000001430511475
+          ],
+          "normal": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "triangle": 348,
+          "owner": "Body_static"
+        },
+        "width": 0.440000057220459
+      }
+    ],
+    "offsetOperatorPod": [
+      {
+        "source": [
+          -0.42500004172325134,
+          -0.7200000286102295,
+          2.559999942779541
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 1670,
+        "owner": "Body_static"
+      }
+    ],
+    "fourStowedCaps": [
+      {
+        "x": -1.55,
+        "side": -1,
+        "source": [
+          -1.5500000715255737,
+          -1.2899999618530273,
+          0.9399999976158142
+        ],
+        "normal": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "triangle": 1872,
+        "owner": "Body_static"
+      },
+      {
+        "x": -1.55,
+        "side": 1,
+        "source": [
+          -1.5500000715255737,
+          1.2899999618530273,
+          0.9399999976158142
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "triangle": 492,
+        "owner": "Body_static"
+      },
+      {
+        "x": 3.28,
+        "side": -1,
+        "source": [
+          3.2800002098083496,
+          -1.2899999618530273,
+          0.9399999976158142
+        ],
+        "normal": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "triangle": 516,
+        "owner": "Body_static"
+      },
+      {
+        "x": 3.28,
+        "side": 1,
+        "source": [
+          3.2800002098083496,
+          1.2899999618530273,
+          0.9399999976158142
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "triangle": 1928,
+        "owner": "Body_static"
+      }
+    ],
+    "actualGrayHook": {
+      "source": [
+        -3.6800005435943604,
+        0.31322264671325684,
+        2.1800003051757812
+      ],
+      "normal": [
+        -0.5124807357788086,
+        -0.8541989922523499,
+        0.08779291063547134
+      ],
+      "triangle": 1822,
+      "owner": "Body_static"
+    },
+    "actualFixedCable": {
+      "source": [
+        -3.6130001544952393,
+        0.3320162296295166,
+        2.4600002765655518
+      ],
+      "normal": [
+        0.4652032256126404,
+        -0.8660259246826172,
+        -0.18326206505298615
+      ],
+      "triangle": 1812,
+      "owner": "Body_static"
+    }
+  },
+  "controls": {
+    "raisedActualBoomRejected": true,
+    "raisedVertices": 16,
+    "extendedCapRejected": true,
+    "baselineRestored": true
+  },
+  "meaning": "Actual exported low nested section widths/heights, offset closed pod, four short cap ends and real fixed hook/cable. Fixed/stowed visual state only; no working crane animation or gameplay qualified."
+}

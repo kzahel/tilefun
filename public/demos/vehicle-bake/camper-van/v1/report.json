@@ -1,0 +1,1227 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "camper-van",
+  "route": "camper-van",
+  "revision": "v1",
+  "method": "Original rounded flat-front cab-over camper with turquoise lower coachwork, cream upper skin, split blue windshield and three continuous side-skin framed panes each side. Own short front overhang and tall rounded body, actual raised cream roof and fixed small vent. Direct semantic UV paint, static side door/hatch, no glass overlays or high-to-low transfer claim.",
+  "geometry": {
+    "triangles": 2784,
+    "vertices": 5596,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 202544,
+    "sha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 7.82608695652174,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 7.82608695652174,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 7.82608695652174,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 7.82608695652174,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4600000381469727,
+        -0.8500000238418579,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        -25.391305011251703,
+        7.826086749201237,
+        14.782609110293183
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4600000381469727,
+        0.8500000238418579,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        -25.391305011251703,
+        7.826086749201237,
+        -14.782609110293183
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.4800000190734863,
+        -0.8500000238418579,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        25.739130766495418,
+        7.826086749201237,
+        14.782609110293183
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.4800000190734863,
+        0.8500000238418579,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        25.739130766495418,
+        7.826086749201237,
+        -14.782609110293183
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/camper-van/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/camper-van/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/camper-van/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Static closed cab-over camper, raised roof/vent and painted closed doors/hatch. No roof/door/equipment animations. Existing ordinary driving hides driver; no visible animated driver.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 2784,
+  "vertexCount": 5596,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 202544,
+  "atlasBytes": 3575,
+  "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+  "atlasSha256": "e3b1043f073eb9fbea2772e76037038c51b5e346d3a84fb46e291176f4daadac",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "camper-van--v1",
+    "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+    "triangles": 2784,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 7.826088255826811,
+        "minimumGap": 1.5354779621278283,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 7.826088255826811,
+        "minimumGap": 1.5354779621278283,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 7.826087951660156,
+        "minimumGap": 1.5354764695822212,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 7.826087951660156,
+        "minimumGap": 1.5354764695822212,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/camper-van/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+    "minBlenderWorld": [
+      -44.34782409667969,
+      -18.260868072509766,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      44.34782409667969,
+      18.260868072509766,
+      40.556522369384766
+    ],
+    "dimensionsBlenderWorld": [
+      88.69564819335938,
+      36.52173614501953,
+      40.55652189254761
+    ],
+    "dimensionsSourceUnits": [
+      5.0999997711181635,
+      2.0999998283386225,
+      2.332000008821487
+    ]
+  },
+  "nativeCropEvidence": {
+    "status": "passed",
+    "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+    "browser": "bundled full Chromium",
+    "browserVersion": "153.0.8010.12",
+    "nativeSizes": [
+      128,
+      224
+    ],
+    "views": [
+      {
+        "mode": "study",
+        "yaw": 0,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 22.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 45,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 67.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 90,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 112.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 135,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 157.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 180,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 202.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 225,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 247.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 270,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 292.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 315,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 337.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 0,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 22.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 39,
+        "fullFrameMismatchedChannels": 39
+      },
+      {
+        "mode": "engine",
+        "yaw": 45,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 87,
+        "fullFrameMismatchedChannels": 87
+      },
+      {
+        "mode": "engine",
+        "yaw": 67.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 108,
+        "fullFrameMismatchedChannels": 108
+      },
+      {
+        "mode": "engine",
+        "yaw": 90,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 96,
+        "fullFrameMismatchedChannels": 96
+      },
+      {
+        "mode": "engine",
+        "yaw": 112.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 108,
+        "fullFrameMismatchedChannels": 108
+      },
+      {
+        "mode": "engine",
+        "yaw": 135,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 87,
+        "fullFrameMismatchedChannels": 87
+      },
+      {
+        "mode": "engine",
+        "yaw": 157.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 39,
+        "fullFrameMismatchedChannels": 39
+      },
+      {
+        "mode": "engine",
+        "yaw": 180,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 0,
+        "fullFrameMismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 202.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 39,
+        "fullFrameMismatchedChannels": 39
+      },
+      {
+        "mode": "engine",
+        "yaw": 225,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 87,
+        "fullFrameMismatchedChannels": 87
+      },
+      {
+        "mode": "engine",
+        "yaw": 247.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 108,
+        "fullFrameMismatchedChannels": 108
+      },
+      {
+        "mode": "engine",
+        "yaw": 270,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 96,
+        "fullFrameMismatchedChannels": 96
+      },
+      {
+        "mode": "engine",
+        "yaw": 292.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 108,
+        "fullFrameMismatchedChannels": 108
+      },
+      {
+        "mode": "engine",
+        "yaw": 315,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 87,
+        "fullFrameMismatchedChannels": 87
+      },
+      {
+        "mode": "engine",
+        "yaw": 337.5,
+        "comparedPixels": 15876,
+        "excludedFrameBoundary": 1,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0,
+        "boundaryMismatchedChannels": 39,
+        "fullFrameMismatchedChannels": 39
+      }
+    ],
+    "fixedDensity": true,
+    "resizedOrRefitted": false,
+    "errors": [],
+    "meaning": "Both cameras/all32 headings retain exact centered126-square interior RGBA crops at unchanged density. Raw128 frame-boundary mismatches are retained separately: tall camper silhouettes can touch the128 frame and change outline neighbor tests there. Native224 is the qualified uncut viewport. No model/camera fitting or rescaling."
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+    "rayCount": 19,
+    "samples": [
+      {
+        "id": "left-cab-actual-skin-glass",
+        "hitSource": [
+          -1.6500000953674316,
+          -1.0108503103256226,
+          1.5200001001358032
+        ],
+        "triangle": 891,
+        "interpolatedUV": [
+          0.1826922744512558,
+          0.7678571343421936
+        ],
+        "atlasPixel": [
+          93,
+          118
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-camper-door-actual-skin-glass",
+        "hitSource": [
+          -0.15000002086162567,
+          -1.0129040479660034,
+          1.5200001001358032
+        ],
+        "triangle": 945,
+        "interpolatedUV": [
+          0.4711538255214691,
+          0.7678570747375488
+        ],
+        "atlasPixel": [
+          241,
+          118
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-rear-actual-skin-glass",
+        "hitSource": [
+          1.350000023841858,
+          -1.0100129842758179,
+          1.5200001001358032
+        ],
+        "triangle": 987,
+        "interpolatedUV": [
+          0.759615421295166,
+          0.7678570747375488
+        ],
+        "atlasPixel": [
+          388,
+          118
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-lower-turquoise",
+        "hitSource": [
+          0.10000000149011612,
+          -1.0193523168563843,
+          0.800000011920929
+        ],
+        "triangle": 101,
+        "interpolatedUV": [
+          0.5192307829856873,
+          0.8964285254478455
+        ],
+        "atlasPixel": [
+          265,
+          53
+        ],
+        "rgb": [
+          65,
+          177,
+          183
+        ],
+        "roles": [
+          "paint"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-cream-upper-post",
+        "hitSource": [
+          0.6000000834465027,
+          -1.0128315687179565,
+          1.5200001001358032
+        ],
+        "triangle": 962,
+        "interpolatedUV": [
+          0.6153846979141235,
+          0.7678571939468384
+        ],
+        "atlasPixel": [
+          315,
+          118
+        ],
+        "rgb": [
+          238,
+          220,
+          184
+        ],
+        "roles": [
+          "cream"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-closed-camper-door-seam",
+        "hitSource": [
+          0.550000011920929,
+          -1.0199999809265137,
+          0.8800000548362732
+        ],
+        "triangle": 961,
+        "interpolatedUV": [
+          0.6057692170143127,
+          0.8821427822113037
+        ],
+        "atlasPixel": [
+          310,
+          60
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-cab-actual-skin-glass",
+        "hitSource": [
+          -1.6500000953674316,
+          1.0108503103256226,
+          1.5200001001358032
+        ],
+        "triangle": 900,
+        "interpolatedUV": [
+          0.1826922595500946,
+          0.7678570747375488
+        ],
+        "atlasPixel": [
+          93,
+          118
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-camper-door-actual-skin-glass",
+        "hitSource": [
+          -0.15000002086162567,
+          1.0129040479660034,
+          1.5200001001358032
+        ],
+        "triangle": 954,
+        "interpolatedUV": [
+          0.4711538255214691,
+          0.7678570747375488
+        ],
+        "atlasPixel": [
+          241,
+          118
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-rear-actual-skin-glass",
+        "hitSource": [
+          1.350000023841858,
+          1.0100129842758179,
+          1.5200001001358032
+        ],
+        "triangle": 996,
+        "interpolatedUV": [
+          0.759615421295166,
+          0.7678570747375488
+        ],
+        "atlasPixel": [
+          388,
+          118
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-lower-turquoise",
+        "hitSource": [
+          0.10000000149011612,
+          1.0193523168563843,
+          0.800000011920929
+        ],
+        "triangle": 114,
+        "interpolatedUV": [
+          0.5192307829856873,
+          0.8964285254478455
+        ],
+        "atlasPixel": [
+          265,
+          53
+        ],
+        "rgb": [
+          65,
+          177,
+          183
+        ],
+        "roles": [
+          "paint"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-cream-upper-post",
+        "hitSource": [
+          0.6000000834465027,
+          1.0128315687179565,
+          1.5200001001358032
+        ],
+        "triangle": 971,
+        "interpolatedUV": [
+          0.6153846979141235,
+          0.7678571939468384
+        ],
+        "atlasPixel": [
+          315,
+          118
+        ],
+        "rgb": [
+          238,
+          220,
+          184
+        ],
+        "roles": [
+          "cream"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-closed-camper-door-seam",
+        "hitSource": [
+          0.550000011920929,
+          1.0199998617172241,
+          0.8800000548362732
+        ],
+        "triangle": 972,
+        "interpolatedUV": [
+          0.6057692170143127,
+          0.8821428418159485
+        ],
+        "atlasPixel": [
+          310,
+          60
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-split-pane--0.3",
+        "hitSource": [
+          -2.440000057220459,
+          -0.30000004172325134,
+          1.5200001001358032
+        ],
+        "triangle": 1091,
+        "interpolatedUV": [
+          0.18478260934352875,
+          0.5282738208770752
+        ],
+        "atlasPixel": [
+          94,
+          241
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-split-pane-0.3",
+        "hitSource": [
+          -2.440000057220459,
+          0.30000004172325134,
+          1.5200001001358032
+        ],
+        "triangle": 1091,
+        "interpolatedUV": [
+          0.31521740555763245,
+          0.5282737612724304
+        ],
+        "atlasPixel": [
+          161,
+          241
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-ink-center-divider",
+        "hitSource": [
+          -2.440000057220459,
+          0.0,
+          1.5200001001358032
+        ],
+        "triangle": 1091,
+        "interpolatedUV": [
+          0.25,
+          0.5282738208770752
+        ],
+        "atlasPixel": [
+          128,
+          241
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-bounded-outer-frame",
+        "hitSource": [
+          -2.440000057220459,
+          0.6500000357627869,
+          1.5200001001358032
+        ],
+        "triangle": 1089,
+        "interpolatedUV": [
+          0.3913043141365051,
+          0.5282737612724304
+        ],
+        "atlasPixel": [
+          200,
+          241
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rear-broad-glass",
+        "hitSource": [
+          2.440000057220459,
+          0.30000004172325134,
+          1.5200001001358032
+        ],
+        "triangle": 186,
+        "interpolatedUV": [
+          0.8152173757553101,
+          0.5282737612724304
+        ],
+        "atlasPixel": [
+          417,
+          241
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "raised-cream-roof",
+        "hitSource": [
+          -0.6000000834465027,
+          0.0,
+          2.259999990463257
+        ],
+        "triangle": 1629,
+        "interpolatedUV": [
+          0.2171805202960968,
+          0.01484026201069355
+        ],
+        "atlasPixel": [
+          111,
+          504
+        ],
+        "rgb": [
+          255,
+          242,
+          210
+        ],
+        "roles": [
+          "creamLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "fixed-gray-roof-vent",
+        "hitSource": [
+          0.6500000357627869,
+          0.0,
+          2.3320000171661377
+        ],
+        "triangle": 706,
+        "interpolatedUV": [
+          0.90625,
+          0.046875
+        ],
+        "atlasPixel": [
+          464,
+          488
+        ],
+        "rgb": [
+          212,
+          212,
+          230
+        ],
+        "roles": [
+          "silver"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/camper-van/surface-regions.json",
+    "meaning": "Actual GLB triangle rays with interpolated atlas UV establish three framed side panes on each continuous body side, split front blue glazing/dark divider, lower turquoise paint, upper cream, static camper door seam, rear glass and actual raised roof/vent. All glazing opaque; closed body has no open-well claim.",
+    "inputBytesUnchanged": true
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/camper-van/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/camper-van/capture.mjs",
+    "python scripts/vehicle-bake/camper-van/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/camper-van/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/camper-van/v1/evidence/clearance-input.json data/vehicle-bake/camper-van/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/camper-van/v1/model.glb --config art-source/vehicle-bake/camper-van/v1/coverage-region.json --output data/vehicle-bake/camper-van/recheck-coverage.json",
+    "python scripts/vehicle-bake/camper-van/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/camper-van/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 actual study and16 game headings, eight signed phases per camera and both wireframes. Inspected original224-pixel study2/study14 and engine2/engine14 front/rear obliques. Contact sheets use integer nearest scaling only.",
+    "Rounded full-height front sits ahead of the front axle with no hood shelf. Turquoise lower/cream upper body, split blue windshield, three broad framed side panes per side, camper-door seam and raised cream roof/gray vent read as a retro cab-over camper.",
+    "Split front glass has a continuous dark central divider and bounded perimeter. Cab/side panes stay on the actual continuous skin, with19 actualGLB interpolated UV rays independently confirming glazing, framing, paint, side door seam and roof/vent roles. No coincident glass overlays.",
+    "Four tires sit in genuinely open local arch pockets. Far crowns remain under broad integrated rounded fenders in all32 headings and signed phases. Own finite region25/25 each with controls supports the visual inspection; no exposed-wheel exception needed.",
+    "Actual raised roof is a static rounded solid with96 vertices and0.28source height, all retained in Body_static. Small vent, lamps and bumpers also remain fixed during wheel phases. No animated roof or doors claimed.",
+    "Native224/radius112 retains fixed density with no clipping or per-angle fitting. Both-camera/all32 native128/224 centered126-square interior crops match exactly. Raw one-pixel outer-frame differences are retained for14 game headings where the tall silhouette touches128-frame outline neighbor tests;224 is the qualified uncut viewport.",
+    "Broad turquoise, cream and cool blue palette clusters remain coherent at native scale. Small frames, lamp/handle and gray trim highlights retain expected native aliasing. No badge, logo, text, transparent glass, PBR or visible animated driver."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 19,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "bothCamera32Heading126InteriorCropParity": true,
+    "actualRaisedRoofStaticFixedBodyVertices": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Closed opaque camper body; no open-interior claim. Raised roof, vent and painted doors/hatch are static.",
+    "Small window frames, lamps, handles and gray trim retain expected native-pixel aliasing.",
+    "Native128 frame-boundary outline differs where tall camper silhouette touches that smaller frame; raw counts retained. All32 interior126-square crops exact; native224 is qualified uncut view.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/camper-van/v1/atlas.png": "e3b1043f073eb9fbea2772e76037038c51b5e346d3a84fb46e291176f4daadac",
+    "art-source/vehicle-bake/camper-van/v1/audit-source.py": "6d4693e4da2967b845f4ec16966dde02042e01708ee8fecb5bd0d2b085617773",
+    "art-source/vehicle-bake/camper-van/v1/build.py": "da9e02dac31269e7a2c731d2d0594b498b86a2718913c4cbc42c4aa8a46b82bf",
+    "art-source/vehicle-bake/camper-van/v1/capture.mjs": "c56922ed14a436e0e20e1670f80a11e4681e87304fa8d4926f9657234c921627",
+    "art-source/vehicle-bake/camper-van/v1/car.blend": "6a67efa5ec336fc831130d5fa2df078e5dc36314e02c0a7282dae11bce906092",
+    "art-source/vehicle-bake/camper-van/v1/coverage-region.json": "850160fdd289bce327a681d84e5d8803ad9c4fdfafcdc330bafd17f1e7c1938a",
+    "art-source/vehicle-bake/camper-van/v1/crop-parity.mjs": "65f560783ae1e1e7ab69a58fbce60fa38aed01469dde777c82749b222c44316d",
+    "art-source/vehicle-bake/camper-van/v1/evidence/author-browser-qa.json": "efcc9a2b67a2f90cf6306dd5922252a8cf88b69f717487d340f04339ba73ef0a",
+    "art-source/vehicle-bake/camper-van/v1/evidence/author-visual-inspection.json": "7be70a7540317bbf4c8dc2e74d6cbd913080162a953dba5eefc48bd7163d1fad",
+    "art-source/vehicle-bake/camper-van/v1/evidence/both-camera-native-parity.json": "2b1ed22caf1a5d75df117815df1f4b2c2c546668ac983ec16c02167e01684df5",
+    "art-source/vehicle-bake/camper-van/v1/evidence/clearance-input.json": "93e196b29fbf5e3241376a8981e6f4b9609841f49e22329c0e10fdc9a5d113e8",
+    "art-source/vehicle-bake/camper-van/v1/evidence/engine-capture.json": "05234db04746cdb0265480a6324d99d8b6de3cc1eb1d59a4b059882d889f036b",
+    "art-source/vehicle-bake/camper-van/v1/evidence/packed-source-audit.json": "60d93c9517b37baddf42bf54c3bea70dc7d562a7716cda6a30c62207dc15501e",
+    "art-source/vehicle-bake/camper-van/v1/evidence/replay-verification.json": "45958c62a9abcca346626e387394a9c5dd703cd5e42def543410f2f5aeb3596b",
+    "art-source/vehicle-bake/camper-van/v1/evidence/shared-clearance.json": "b9999ec4ed8b150f34786bcb5395d58cfe98fde39439585d530b93a2defdeea4",
+    "art-source/vehicle-bake/camper-van/v1/evidence/upper-wheel-coverage.json": "304fa5845273d7868b7ed866ef956e0bc60018350c8e913cd2bd0193ef7da938",
+    "art-source/vehicle-bake/camper-van/v1/family.json": "cb276ba62d83d694de5856ef76e7cc7f15676504a4e6f70e4ffdf85b8f1336d0",
+    "art-source/vehicle-bake/camper-van/v1/finalize.py": "1d1666339aa3894cfbddf747a2585a70cd2f796aabf9be3a5f75237630c50254",
+    "art-source/vehicle-bake/camper-van/v1/master.blend": "5bbf5c4028bed2e8ce782887d1e5882b8da3ef4a034d69c256e316fbc56509ec",
+    "art-source/vehicle-bake/camper-van/v1/model.glb": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+    "art-source/vehicle-bake/camper-van/v1/pack-author.py": "04e71a98b36c4eb440a9cfa5234ab99c1067da1932b5c24b811ff921fe3105d8",
+    "art-source/vehicle-bake/camper-van/v1/paint-ownership.json": "c15c2676acab0ccd70551764ffbad6e6872981ae44f52f14e5173e3fddf75ea0",
+    "art-source/vehicle-bake/camper-van/v1/palette-draft.png": "b78ec5f1757b5c3b6f702333b36c664a1e7427590f205047b6cdee52538c7cf5",
+    "art-source/vehicle-bake/camper-van/v1/recipe.json": "1a4f398ff83cab6d4ca495f6e4e9e22100233b2bcd0705c8406c4eef353737f0",
+    "art-source/vehicle-bake/camper-van/v1/review.json": "343c5a7c4ded895a19edff6a95eff76797231bd5f6339f4185234e642914b8c0",
+    "art-source/vehicle-bake/camper-van/v1/sheets.py": "ab9246c32c77b2b416f749602686299d6cee2a8abc4059c60d923b1f9ac40e14",
+    "art-source/vehicle-bake/camper-van/v1/surface-regions.json": "ef1c2e9279122844926ad4bd3e55097fc68fd03342fbff359de857cc296ceeb0"
+  }
+}

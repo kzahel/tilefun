@@ -1,0 +1,269 @@
+{
+  "method": "Original rounded flat-front cab-over camper with turquoise lower coachwork, cream upper skin, split blue windshield and three continuous side-skin framed panes each side. Own short front overhang and tall rounded body, actual raised cream roof and fixed small vent. Direct semantic UV paint, static side door/hatch, no glass overlays or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      41,
+      105,
+      117
+    ],
+    "paintShadow": [
+      42,
+      127,
+      141
+    ],
+    "paintMid": [
+      46,
+      152,
+      165
+    ],
+    "paint": [
+      65,
+      177,
+      183
+    ],
+    "paintLight": [
+      114,
+      201,
+      195
+    ],
+    "cream": [
+      238,
+      220,
+      184
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "creamLight": [
+      255,
+      242,
+      210
+    ],
+    "creamShadow": [
+      212,
+      191,
+      157
+    ]
+  },
+  "ownership": "Direct semantic UV paint on original rounded cab-over skin. Three framed opaque side panes each side, split front blue windshield with dark divider, turquoise lower/cream upper and painted camper door/hatch seams are part of the actual body triangles. Raised cream roof, fixed gray vent, bumpers, round gray lamps and integrated rounded fenders have exact named component owners. No glass overlays or source projection.",
+  "semanticOwners": {
+    "bodySide": {
+      "component": "Own rounded flat front cab over camper coachwork",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        192
+      ],
+      "meaning": "Continuous cab-over side skin, three framed panes per side, turquoise lower/cream upper and camper door seam/handle"
+    },
+    "endCaps": {
+      "atlasPixelRect": [
+        0,
+        192,
+        512,
+        272
+      ],
+      "meaning": "Front half owns split blue windshield/dark divider and quiet lower grille; rear half owns broad bounded rear glass/hatch seam/handle/red lamps"
+    },
+    "frontCornerSkin": {
+      "atlasPixelRect": [
+        0,
+        272,
+        512,
+        352
+      ],
+      "meaning": "Rounded actual front-corner triangles use the same bounded split-front semantics; no overlay"
+    },
+    "bodyUpperSkin": {
+      "atlasPixelRect": [
+        0,
+        352,
+        512,
+        432
+      ],
+      "meaning": "Actual upper cream main-body roof beneath raised roof geometry"
+    },
+    "raisedRoofAndVent": {
+      "components": [
+        "Actual raised cream camper roof",
+        "Fixed roof vent dark base",
+        "Fixed gray roof vent lid"
+      ],
+      "roles": [
+        "creamLight",
+        "ink",
+        "silver"
+      ],
+      "meaning": "Actual fixed solids with named padded role UV islands, no animated roof/vent"
+    },
+    "trim": {
+      "roles": [
+        "ink",
+        "rim",
+        "silver",
+        "paint",
+        "paintLight",
+        "paintShadow",
+        "paintDeep"
+      ],
+      "meaning": "Named gray bumpers/headlamps and four broad integrated fender surfaces; palette UV islands"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "rubyLight": [
+      80,
+      504
+    ],
+    "creamLight": [
+      112,
+      504
+    ],
+    "creamShadow": [
+      144,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric cab-over camper side-window paint with central camper door each side and distinct split front/rear glazing. Closed opaque body; no interior openness claim.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/flatbed-truck/v1/report.json",
+  "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+  "atlasSha256": "b7ff20cc00dc3946e2692fd43a529b8c3d1526db62a90e71c3c5d9dbfeb82d71",
+  "replayCommands": [
+    "python art-source/vehicle-bake/flatbed-truck/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/flatbed-truck/capture.mjs",
+    "python scripts/vehicle-bake/flatbed-truck/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/flatbed-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/flatbed-truck/v1/evidence/clearance-input.json data/vehicle-bake/flatbed-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/flatbed-truck/v1/model.glb --config art-source/vehicle-bake/flatbed-truck/v1/coverage-region.json --output data/vehicle-bake/flatbed-truck/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/flatbed-truck/v1/prove-deck.py -- --input public/demos/vehicle-bake/flatbed-truck/v1/model.glb --output data/vehicle-bake/flatbed-truck/recheck-deck.json",
+    "python scripts/vehicle-bake/flatbed-truck/measure-fit.py",
+    "python scripts/vehicle-bake/flatbed-truck/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/flatbed-truck/author-config.json --qa-only"
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "woody-wagon--v1",
+    "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+    "triangles": 2792,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.782610042575929,
+        "minimumGap": 1.376550641921666,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.782610042575929,
+        "minimumGap": 1.376550641921666,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.782609939575195,
+        "minimumGap": 1.376550303760844,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.782609939575195,
+        "minimumGap": 1.3765502408057486,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

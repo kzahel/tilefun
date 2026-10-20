@@ -1,0 +1,39 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+  "method": "Actual exported GLB nativePNG sets and fixed-camera-crop nearest2x sheets inspected. No fit scaling/per-heading repositioning or bitmap repaint. Agent QA only; parent owns independent capture/freeze.",
+  "observations": [
+    "All16study+16game headings inspected: compact municipal white/mint enclosed cab with large framedblueglass, genuine rounded graygreen collection tank and two low outboard bristled brush discs.",
+    "Natural front/rear collection-body wheelhouses hide far crowns in both cameras; neararches open. Four actual road wheels remain correctly placed underbody.",
+    "Both brush discs stay low at actualgroundclearance.055source, captop.22source. Dark radial bristle blocks distinguish the horizontal fixed discs from vertical road tires; parts partly occlude by cab/chassis at elevated headings.",
+    "Eight signed distance phases/camera,16equal-angle phase views,both wireframes and32four-color wheel-ID diagnostic views inspected. Brushes/tank/arms/body remain static.",
+    "All4 independent quarter-turn/reverse/reset sets inspected; tiny asymmetric hub marks move subtly but positive6-9channel changes each confirmed,absolute reset pixels exact andother meshes fixed.",
+    "Tank has real closed rounded16vertex crosssections and tapering endrings. Actual504 brush/tank triangles match source positions/UVs within export tolerances; source+GLB misposition controls reject raisedbrushes/tankovercab andrestore.",
+    "Native224/radius112 at unchanged source80density,zerooccupiededgepixels; strict128/224 game center crop parity exact. All4standard192x224 cardinal PNGs preserve everyoccupiedRGBApixel bytranslation(-16,+32),no rescale.",
+    "Bundled fullChromium desktop/mobile/offline screenshots and checks pass; mobile controls fit and offline model is exact with no network requests.",
+    "No logos/tinytext/PBR,paint on actual skins with continuous glassframes; restrained characteristic ink and broad palettes. Minor bristle/hub/grille aliasing retained without blocking findings."
+  ],
+  "inspectedImages": {
+    "author-view/captures/inspection-engine.png": "82098da58bc61df0c7f44229bec4e43230dbef698806aa5a2d53b28d1f446b59",
+    "author-view/captures/inspection-equal-phases.png": "fb57b28c7f59695ecf7e7f186e31fb95baf2d60cdf1f70874a979dcb00f15d77",
+    "author-view/captures/inspection-independent.png": "ffb91b3422ab70090bf4a47d1e56582ca80d7c93d65669645832264a6b06ce97",
+    "author-view/captures/inspection-phases.png": "315ff313679cc186e627f475d4584c4fd4eeb06ef606831b48a342b8ef5cc150",
+    "author-view/captures/inspection-study.png": "27cdcea0e23456d764b88d276b395e28d3968207d3e39d11e4e5580b61f3cdb2",
+    "author-view/captures/inspection-tight-engine.png": "0c372730b82d541de84ccae5e1654211dfbe791b5c8847dcd36f4382c7ae6c1d",
+    "author-view/captures/inspection-tight-phases.png": "f09a3186ee0ffd988f786b707c925a5c0e55292fbbb7f78e5c44c5426daea81c",
+    "author-view/captures/inspection-tight-study.png": "d749a32890812c6a9934ff72158709d28b8cd34f54e82c787e9566be34b80dca",
+    "author-view/captures/inspection-wheel-id-engine.png": "402ea473c65514655bde8845f322a2ba15ef490a09f8879f9d9b6e24afdaed9b",
+    "author-view/captures/inspection-wheel-id-study.png": "146f623f33ae30eb3a70e991d6b655a092cac9573cb7033c4dd24439d7e12e32",
+    "author-view/captures/inspection-wires.png": "1540198771fbf49ec423b3b39c0bd702e49096aff3d1c2550f709befcfca72ff"
+  },
+  "inspectedBrowserImages": {
+    "desktop.png": "5b9132f524e5324e6546d9cda52f135c23c7bc1127cc41e37bf6519092941ac0",
+    "mobile.png": "3a47c694929838cabcd8d20886a5709115ce22fc7211c2aaace2756b7b436847"
+  },
+  "limitations": [
+    "Economical runtime-topology component master,not high-to-low transfer.",
+    "Brushes/collectiontank/arms static Body_static only,no cleaning or brush rotation claim.",
+    "Finite crownregion bookkeeping andnativefarcrowninspection retained separately;neutralroll only,nonzero steering/suspension unqualified.",
+    "Parent hold continues forregisteredreview/catalog; parentowns independentQA/freeze/runtime/globalchecks."
+  ]
+}

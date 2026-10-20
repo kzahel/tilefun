@@ -1,0 +1,26 @@
+{
+  "id": "mobile-crane-v1",
+  "clearanceId": "mobile-crane--v1",
+  "name": "Rigid stowed mobile crane",
+  "title": "Low orange and yellow mobile crane \u00b7 all equipment stowed and fixed v1",
+  "source": "public/demos/vehicle-bake/mobile-crane/v1",
+  "glb": "public/demos/vehicle-bake/mobile-crane/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/mobile-crane/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/mobile-crane/v1/report.json",
+  "output": "public/demos/original-vehicles/mobile-crane-v1",
+  "qa": "data/vehicle-bake/mobile-crane/qa",
+  "offline": "data/vehicle-bake/mobile-crane/review.html",
+  "render": {
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [128, 156],
+    "engineGroundOrigin": [128, 128]
+  },
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 256,
+  "meshRadius": 128,
+  "toolchain": "multi-axle-v2",
+  "wheelIds": ["FL", "FR", "ML", "MR", "RL", "RR"]
+}

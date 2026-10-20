@@ -77,6 +77,9 @@ def main():
     args = parser.parse_args()
     os.chdir(ROOT)
     config = read(args.config)
+    toolchain = config.get("toolchain", "four-wheel-v1")
+    assert toolchain in ["four-wheel-v1", "multi-axle-v2"], "Unknown review toolchain"
+    suffix = "-v2" if toolchain == "multi-axle-v2" else ""
     qa = ROOT / config["qa"]
     qa.mkdir(parents=True, exist_ok=True)
     deadline = utc(args.deadline) if args.deadline else None
@@ -127,8 +130,8 @@ def main():
             raise RuntimeError(f"Stage failed: {name}; see {log}")
 
     python = [sys.executable, "-X", "utf8"]
-    package = python + ["scripts/vehicle-bake/family-package.py", args.config]
-    capture = ["node", "scripts/vehicle-bake/family-capture.mjs", args.config]
+    package = python + [f"scripts/vehicle-bake/family-package{suffix}.py", args.config]
+    capture = ["node", f"scripts/vehicle-bake/family-capture{suffix}.mjs", args.config]
     frozen = ROOT / config["output"] / "review-manifest.json"
     if args.action == "capture":
         assert not frozen.exists(), "Existing review is frozen; do not recapture"
@@ -138,7 +141,7 @@ def main():
         run("capture", capture)
         run("clearance", [
             args.blender, "--background", "--factory-startup", "--threads", "4",
-            "--python-exit-code", "1", "--python", "scripts/vehicle-bake/clearance.py",
+            "--python-exit-code", "1", "--python", f"scripts/vehicle-bake/clearance{suffix}.py",
             "--", qa / "clearance-input.json", qa / "clearance.json",
         ])
         run("assemble", package + ["assemble"])
@@ -152,7 +155,7 @@ def main():
         run("freeze", package + ["freeze"])
         run("offline", package + ["offline"])
     if args.action in ["freeze", "verify"]:
-        verify = python + ["scripts/vehicle-bake/family-verify.py", args.config]
+        verify = python + [f"scripts/vehicle-bake/family-verify{suffix}.py", args.config]
         if args.baseline:
             verify += ["--baseline", args.baseline]
         run("verify", verify)

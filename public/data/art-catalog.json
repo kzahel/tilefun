@@ -3006,6 +3006,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "vehicle-v1:woody-wagon",
+      "name": "vehicle v1:woody wagon",
+      "image": "assets/vehicles/woody-wagon-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "623956df0bc663ae70c8b76bbc8bc66c73fde7beb2339f2dbaa80e3fbd60ea94",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:microcar",
+      "name": "vehicle v1:microcar",
+      "image": "assets/vehicles/microcar-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "2d30a38edc7c9176b464fb55b9de61e5c9ffe166e88ef0544d9f6a0e785242ad",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:stretch-limousine",
+      "name": "vehicle v1:stretch limousine",
+      "image": "assets/vehicles/stretch-limousine-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "095a059199f249e96158cf78630e8fd4fc214fca59976c6c51ffc6d380a9dc73",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:hot-rod",
+      "name": "vehicle v1:hot rod",
+      "image": "assets/vehicles/hot-rod-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "4f42a21145ab7cd03e412fffc78a9f23fcc78bbfdcd143177d9ed3e40ea3dbe0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:rally-hatchback",
+      "name": "vehicle v1:rally hatchback",
+      "image": "assets/vehicles/rally-hatchback-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "989d9d89752b76b2783f28dd6a384ec7d130d9f9ae22c2d0f4eb12b168c04439",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "vehicle-v1:explorer-boat",
       "name": "vehicle v1:explorer boat",
       "image": "assets/vehicles/explorer-boat-v1.png",
@@ -32113,6 +32163,96 @@
         896
       ],
       "label": "vehicle-v1:race-coupe · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:woody-wagon",
+      "sheetId": "vehicle-v1:woody-wagon",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:woody-wagon · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:microcar",
+      "sheetId": "vehicle-v1:microcar",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:microcar · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:stretch-limousine",
+      "sheetId": "vehicle-v1:stretch-limousine",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:stretch-limousine · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:hot-rod",
+      "sheetId": "vehicle-v1:hot-rod",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:hot-rod · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:rally-hatchback",
+      "sheetId": "vehicle-v1:rally-hatchback",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:rally-hatchback · registered 192×224 frames",
       "kind": "sprite",
       "consumers": [
         {

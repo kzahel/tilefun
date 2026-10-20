@@ -1,0 +1,63 @@
+{
+  "family": "small-open-tubular-go-kart",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [3.0, 1.9, 1.0],
+  "axles": [-0.86, 0.89],
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [43, 47, 62],
+    "tireLight": [63, 68, 84],
+    "treadMark": [88, 94, 111],
+    "paintDeep": [135, 45, 55],
+    "paintShadow": [170, 43, 56],
+    "paintMid": [203, 49, 57],
+    "paint": [228, 63, 64],
+    "paintLight": [248, 100, 91],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "floor": [69, 72, 89],
+    "inner": [49, 53, 71],
+    "seat": [50, 54, 72]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Original small go-kart: very low dark tubular chassis, broad bumper hoops, rounded short red/white UV-painted nose, actual shallow seat well with dark fixed seat/steering, compact rear motor and chain block. All four small tires intentionally exposed, independently rigged with front.25/rear.27 source radii. No glass, driver, helmet, roof, logos or high-to-low claim.",
+  "wheelSpecs": {
+    "F": {
+      "radius": 0.25,
+      "width": 0.24,
+      "halfTrack": 0.765
+    },
+    "R": {
+      "radius": 0.27,
+      "width": 0.24,
+      "halfTrack": 0.765
+    }
+  },
+  "suspensionTipCenterGapSource": 0.025,
+  "coverageException": {
+    "authorization": "Explicit run153 user open-wheel exception applies to all4wheels",
+    "wheels": ["FL", "FR", "RL", "RR"],
+    "requirement": "Fender crown coverage N/A; exposed tires intentional",
+    "meaning": "No fake fender caps. Preserve raw unsupported crown samples and controls; never relabel exposure as covered."
+  },
+  "noseStations": [
+    [-1.28, 0.23, 0.3],
+    [-1.23, 0.34, 0.36],
+    [-1.03, 0.39, 0.43],
+    [-0.74, 0.38, 0.47],
+    [-0.54, 0.28, 0.49],
+    [-0.49, 0.2, 0.43]
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "food-truck--v1",
+    "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "triangles": 2934,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.347827911376953,
+        "minimumGap": 0.9631294742726784,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.347827911376953,
+        "minimumGap": 0.9631294903329941,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.347827911376953,
+        "minimumGap": 0.963130265009033,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.347827911376953,
+        "minimumGap": 0.963130265009033,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

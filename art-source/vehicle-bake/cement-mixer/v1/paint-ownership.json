@@ -1,0 +1,159 @@
+{
+  "method": "Original bright cobalt and cream six-wheel concrete mixer. Closed forward cab, genuine tapered 18-segment drum on a slightly rising longitudinal axis, broad cream/cobalt/orange spiral UV bands, small fixed hopper and stowed chute. All equipment static, ordinary six-wheel driving only.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      38,
+      49,
+      100
+    ],
+    "paintShadow": [
+      39,
+      67,
+      142
+    ],
+    "paintMid": [
+      43,
+      86,
+      184
+    ],
+    "paint": [
+      47,
+      105,
+      218
+    ],
+    "paintLight": [
+      95,
+      150,
+      246
+    ],
+    "cream": [
+      248,
+      232,
+      192
+    ],
+    "glassDark": [
+      65,
+      85,
+      109
+    ],
+    "glass": [
+      104,
+      150,
+      175
+    ],
+    "glassLight": [
+      153,
+      197,
+      212
+    ],
+    "glassGlint": [
+      195,
+      224,
+      228
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "steelShadow": [
+      112,
+      117,
+      124
+    ],
+    "steelMid": [
+      184,
+      173,
+      149
+    ],
+    "steel": [
+      225,
+      210,
+      172
+    ],
+    "steelLight": [
+      249,
+      239,
+      213
+    ],
+    "steelRim": [
+      255,
+      246,
+      220
+    ],
+    "floor": [
+      224,
+      124,
+      54
+    ],
+    "floorLight": [
+      246,
+      156,
+      77
+    ],
+    "inner": [
+      69,
+      100,
+      161
+    ],
+    "innerShadow": [
+      50,
+      72,
+      123
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "ownership": "Actual cab skin owns continuous side glass and separate front/rear and cream roof charts. Drum owns a longitudinal/angular UV chart, broad spiral bands and padded axial seam. Chassis, supports, hopper and chute own explicit palette swatches. No screen projection, glass overlays, exterior silhouette ink or borrowed geometry.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Cobalt closed cab with separate front/rear glass and cream roof owners; tapered round drum with longitudinal/angular spiral chart, static hopper/chute/supports and six road wheels.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

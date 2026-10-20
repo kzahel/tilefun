@@ -72,6 +72,25 @@ declared retained inputs in a fresh directory. Intentional exposed-wheel familie
 may mark crown coverage N/A explicitly; never fake covered samples. Full-body
 neutral-roll nonintersection and independent per-wheel radii remain mandatory.
 
+Additional axles use a new explicit `multi-axle-v2` review config with complete
+`wheelIds`, the v2 catalog/package/capture/clearance/verify adapters and unchanged
+shared viewer. Read the pipeline guide's multiple-axle section, then run the
+synthetic `multi-axle-smoke.py --blender BLENDER` control. Declare every axle in
+the retained replay dependencies and runtime fixtures; never silently qualify
+only four of six tires. Keep all receipt-pinned v1 tools byte-identical. This
+adapter still requires four corner assemblies and does not solve motorcycles;
+their visible occupants follow `docs/topics/vehicle-riders.md`.
+
+Use `source-replay.py RECEIPT --qa data/... --blender BLENDER` for modern retained
+input-map receipts; local basenames require `--input-root`. The fresh workspace
+must produce new exact model/atlas/recipe bytes without ignored dependencies.
+Static component prototypes can use `compose-component.py` and
+`component-package.py` with explicit placement JSON, both retained child masters
+and replay receipts. Read the pipeline's assembly section before applying it.
+Qualify decoded geometry and all native views with `component-parity.mjs`; keep
+its extra atlas/draw costs honest. This proves composition, not production rider
+coverage, authority, automatic occupants or failure fallback.
+
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,
 not completed models. A small red compact is `compact-4`; an ambulance is

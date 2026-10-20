@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "street-sweeper--v1",
+    "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "triangles": 3236,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.2608706503855664,
+        "minimumGap": 0.9809836999563872,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.2608706503855664,
+        "minimumGap": 0.9809836999563872,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.2608706503855664,
+        "minimumGap": 0.9809831178874484,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.2608706503855664,
+        "minimumGap": 0.9809831178874484,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

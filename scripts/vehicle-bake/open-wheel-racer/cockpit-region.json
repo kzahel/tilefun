@@ -1,0 +1,16 @@
+{
+  "name": "open-wheel-racer-real-single-seat-cockpit-v1",
+  "units": "Blender source units before80/4.6 export scale",
+  "floorTopZ": 0.31,
+  "floorTolerance": 1e-5,
+  "minimumDoorRailZ": 0.77,
+  "minimumRecessDepth": 0.44,
+  "floorRaysX": [-0.18, -0.08, 0.03],
+  "floorRaysY": [-0.16, 0.16],
+  "railRaysXY": [[0.05, -0.34], [0.05, 0.34], [0.32, -0.34], [0.32, 0.34]],
+  "seatRaysXY": [[0.27, 0]],
+  "seatbackRaysXY": [[0.51, 0]],
+  "outsideControlXY": [-0.8, 0],
+  "upperDeckNegativeZ": 0.78,
+  "meaning": "Actual open single-seat cockpit. Six front-footwell rays avoid fixed seat/dashboard and reach the low floor. A temporary opaque upper deck must reject them; ordinary driving hides the driver, no helmet/driver mesh."
+}

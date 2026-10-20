@@ -1,0 +1,447 @@
+{
+  "status": "passed",
+  "results": {
+    "staticCage": {
+      "componentOwners": [
+        "Fixed cage transverse hoop -0.48",
+        "Fixed cage transverse hoop 0.79",
+        "Fixed cage roof side rail -1",
+        "Fixed cage rear brace -1",
+        "Fixed cage roof side rail 1",
+        "Fixed cage rear brace 1"
+      ],
+      "masterFixedBodyGroup": true,
+      "neverWheelChildren": true,
+      "allCageVerticesInLowFixedBody": true,
+      "cageVertexCount": 144
+    },
+    "masterCockpitFloor": {
+      "status": "passed",
+      "rays": [
+        {
+          "xySource": [
+            -0.2,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.40200018882751465,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            -0.2,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.40199995040893555,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            -0.2,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.40199995040893555,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            -0.2,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.40200018882751465,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            -0.07,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.40200018882751465,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            -0.07,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.40200018882751465,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            -0.07,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.40199995040893555,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            -0.07,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.40199995040893555,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            0.03,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.40200018882751465,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            0.03,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.40199971199035645,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            0.03,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.40199971199035645,
+          "owner": "Recessed cockpit floor visible in footwells"
+        },
+        {
+          "xySource": [
+            0.03,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.40200018882751465,
+          "owner": "Recessed cockpit floor visible in footwells"
+        }
+      ]
+    },
+    "master.blend": {
+      "sha256": "b87f90eee1984ece67a6734b580e81b41e9ad9709bb5ff70b2b524a38f38cf94",
+      "meshObjects": 56,
+      "triangles": 3290,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "520fcdbdd59956a0143cc9a624211d9c430666eb0da943df49d7d42a84a8a2b4",
+      "meshObjects": 5,
+      "triangles": 3290,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+      "minBlenderWorld": [
+        -33.91304016113281,
+        -18.69565200805664,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        33.91304016113281,
+        18.69565200805664,
+        28.613792419433594
+      ],
+      "dimensionsBlenderWorld": [
+        67.82608032226562,
+        37.39130401611328,
+        28.613791465759277
+      ],
+      "dimensionsSourceUnits": [
+        3.899999618530273,
+        2.1499999809265136,
+        1.6452930092811582
+      ]
+    },
+    "actualGLBOpenCockpit": {
+      "status": "passed",
+      "glbSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+      "rayCount": 12,
+      "centralDownwardRays": [
+        {
+          "xySource": [
+            -0.2,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.2,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.2,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.2,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.07,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.40199970126152035,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.07,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.07,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.07,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.03,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.03,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.03,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.40200019478797905,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.03,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.4019999480247497,
+          "owner": "Body_static"
+        }
+      ],
+      "doorRailRays": [
+        {
+          "xySource": [
+            -0.07,
+            -0.68
+          ],
+          "firstSurfaceZSource": 0.9399999952316282,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.07,
+            0.68
+          ],
+          "firstSurfaceZSource": 0.9399999952316282,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.45,
+            -0.68
+          ],
+          "firstSurfaceZSource": 0.9399999952316282,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.45,
+            0.68
+          ],
+          "firstSurfaceZSource": 0.9399999952316282,
+          "owner": "Body_static"
+        }
+      ],
+      "seatCushionRays": [
+        {
+          "xySource": [
+            0.3,
+            -0.322
+          ],
+          "firstSurfaceZSource": 0.6454999256134032,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.3,
+            0.322
+          ],
+          "firstSurfaceZSource": 0.645500144958496,
+          "owner": "Body_static"
+        }
+      ],
+      "seatbackRays": [
+        {
+          "xySource": [
+            0.67,
+            -0.322
+          ],
+          "firstSurfaceZSource": 1.0674999237060545,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.67,
+            0.322
+          ],
+          "firstSurfaceZSource": 1.0674999237060545,
+          "owner": "Body_static"
+        }
+      ],
+      "minimumRecessDepthSource": 0.5379998004436493,
+      "minimumRecessDepthWorld": 9.356518268585205,
+      "controls": {
+        "baselinePositivePassed": true,
+        "outsideHoodRejected": true,
+        "opaqueUpperDeckRejected": true,
+        "upperDeckNegativeRays": [
+          {
+            "xySource": [
+              -0.2,
+              -0.48
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.2,
+              -0.13
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.2,
+              0.13
+            ],
+            "firstSurfaceZSource": 0.9399998855590819,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.2,
+              0.48
+            ],
+            "firstSurfaceZSource": 0.940000214576721,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.07,
+              -0.48
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.07,
+              -0.13
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.07,
+              0.13
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              -0.07,
+              0.48
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              0.03,
+              -0.48
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              0.03,
+              -0.13
+            ],
+            "firstSurfaceZSource": 0.9399998855590819,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              0.03,
+              0.13
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          },
+          {
+            "xySource": [
+              0.03,
+              0.48
+            ],
+            "firstSurfaceZSource": 0.9400001049041746,
+            "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+          }
+        ],
+        "baselineRestored": true,
+        "inputBytesUnchanged": true
+      },
+      "regionConfig": "scripts/vehicle-bake/beach-buggy/cockpit-region.json",
+      "meaning": "Declared floor rays avoid cushions, steering rim and low center tunnel. Floor, rails, cushions and seatbacks are independently sampled; a temporary opaque upper deck must reject the floor-depth condition. No driver or equipment animation."
+    }
+  }
+}

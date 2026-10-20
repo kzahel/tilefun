@@ -1,0 +1,120 @@
+{
+  "status": "author-comparative-inspection-pending-human-review",
+  "humanApproval": false,
+  "riderSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "approvedStandingSha256": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d",
+  "pixelComparison": "One fixed64px hip-centered crop per camera across all headings; integer4x display only, no individual pose normalization/auto-fit. Standing frames retain32px in a64px padded cell. Different standing/seated poses and fixed3D camera mean no pixel-equivalence claim.",
+  "views": [
+    {
+      "label": "front",
+      "approvedRow": 0,
+      "actualYaw": 90.0,
+      "standingBounds": [
+        6,
+        4,
+        27,
+        28
+      ],
+      "actualNativeBounds": {
+        "study": [
+          103,
+          127,
+          121,
+          148
+        ],
+        "engine": [
+          103,
+          92,
+          121,
+          123
+        ]
+      }
+    },
+    {
+      "label": "back",
+      "approvedRow": 1,
+      "actualYaw": 270.0,
+      "standingBounds": [
+        6,
+        4,
+        27,
+        28
+      ],
+      "actualNativeBounds": {
+        "study": [
+          103,
+          125,
+          121,
+          146
+        ],
+        "engine": [
+          103,
+          91,
+          121,
+          121
+        ]
+      }
+    },
+    {
+      "label": "profile-left",
+      "approvedRow": 2,
+      "actualYaw": 0.0,
+      "standingBounds": [
+        8,
+        4,
+        25,
+        28
+      ],
+      "actualNativeBounds": {
+        "study": [
+          103,
+          122,
+          119,
+          151
+        ],
+        "engine": [
+          105,
+          86,
+          121,
+          127
+        ]
+      }
+    },
+    {
+      "label": "profile-right",
+      "approvedRow": 3,
+      "actualYaw": 180.0,
+      "standingBounds": [
+        7,
+        4,
+        25,
+        28
+      ],
+      "actualNativeBounds": {
+        "study": [
+          105,
+          122,
+          121,
+          151
+        ],
+        "engine": [
+          103,
+          86,
+          119,
+          127
+        ]
+      }
+    }
+  ],
+  "observations": [
+    "Stocky brown torso, broad head, two round ear solids, tan muzzle/belly, wide closed paws and tiny fixed tail are retained as distinct animal components.",
+    "Head is a rounded ellipsoid with approved Bear front/back/profile paint; projected muzzle and nose are solids, not a face billboard.",
+    "Short upper/lower limb center lengths and head/torso dimensions are inferred once, independent of target reach. No Explorer clothes/head/body used."
+  ],
+  "uncertainty": [
+    "Approved sprite art has no unique depth/skeleton. Template depths, pelvis center, joint centers and seated flexion are inferred.",
+    "Game-camera apparent height varies with yaw because source lateral depth contributes to fixed world projection. No per-angle model/camera scaling applied.",
+    "Ear/eye/tail details lose pixels at some headings; seated likeness awaits independent parent/human judgment.",
+    "Failed upright Explorer reach is conditional on this fixed inferred upright template, not proof that every possible Bear anatomy or leaning pose is infeasible."
+  ]
+}

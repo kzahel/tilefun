@@ -1,0 +1,20 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/stretch-limousine/v1/report.json",
+  "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+  "atlasSha256": "9c92ffbee406ff8c9d32cca682db31547c28ef4e065f93fafe65c87d64ca2a21",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/stretch-limousine/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/stretch-limousine/capture.mjs",
+    "python scripts/vehicle-bake/stretch-limousine/sheets.py",
+    "python scripts/vehicle-bake/stretch-limousine/audit-native.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/stretch-limousine/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/stretch-limousine/v1/evidence/clearance-input.json data/vehicle-bake/stretch-limousine/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/stretch-limousine/v1/model.glb --config art-source/vehicle-bake/stretch-limousine/v1/coverage-region.json --output data/vehicle-bake/stretch-limousine/recheck-coverage.json",
+    "python scripts/vehicle-bake/stretch-limousine/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/stretch-limousine/author-config.json --qa-only"
+  ]
+}

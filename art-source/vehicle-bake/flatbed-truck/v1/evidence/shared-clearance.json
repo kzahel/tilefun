@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "flatbed-truck--v1",
+    "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+    "triangles": 2534,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 1.6106577979935626,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 1.6106577979935626,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 2.147529418487146,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 2.147529418487146,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

@@ -1,0 +1,73 @@
+{
+  "family": "sunny-beach-dune-buggy",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [3.9, 2.15, 1.65],
+  "wheelRadius": 0.44,
+  "wheelWidth": 0.38,
+  "axles": [-1.18, 1.18],
+  "halfTrack": 0.81,
+  "arch": {
+    "cutRadius": 0.515,
+    "pocketInnerY": 0.57,
+    "segments": 24
+  },
+  "fender": {
+    "segments": 14,
+    "lateralStations": [0.55, 0.68, 0.85, 1.0, 1.075],
+    "shoulderRadii": [0.55, 0.62, 0.63, 0.59, 0.55],
+    "archRadius": 0.505
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [151, 68, 37],
+    "paintShadow": [184, 78, 37],
+    "paintMid": [220, 103, 37],
+    "paint": [241, 132, 42],
+    "paintLight": [255, 173, 64],
+    "cream": [218, 219, 224],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "bedFloor": [62, 65, 81],
+    "bedRib": [86, 90, 108],
+    "bedWall": [51, 55, 75],
+    "rubyLight": [223, 93, 119],
+    "seatBlue": [65, 85, 113],
+    "seatLight": [92, 128, 158],
+    "seatDark": [46, 61, 85]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Original short rounded dune-buggy tub, broad swept integrated fenders, real recessed two-seat cockpit, fixed black tube cage and small framed windshield. Direct semantic UV paint on runtime topology; no high-to-low transfer claim.",
+  "bodyStations": [
+    [-1.82, 0.51, 0.73],
+    [-1.75, 0.68, 0.85],
+    [-1.51, 0.77, 0.92],
+    [-1.05, 0.79, 0.96],
+    [-0.6, 0.79, 0.96],
+    [-0.35, 0.78, 0.93],
+    [0.35, 0.78, 0.93],
+    [0.93, 0.8, 0.96],
+    [1.25, 0.79, 0.96],
+    [1.59, 0.72, 0.89],
+    [1.82, 0.53, 0.77]
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "family": "green-yellow-enclosed-cab-farm-tractor",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [3.8, 2.15, 2.65],
+  "axles": [-1.24, 1.0],
+  "fender": {
+    "segments": 20,
+    "lateralStations": [0.57, 0.65, 0.83, 1.04, 1.08],
+    "shoulderRadii": [0.83, 0.86, 0.86, 0.83, 0.81],
+    "archRadius": 0.8
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [42, 83, 59],
+    "paintShadow": [54, 112, 67],
+    "paintMid": [68, 139, 70],
+    "paint": [87, 163, 72],
+    "paintLight": [127, 191, 85],
+    "cream": [255, 230, 163],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "yellow": [248, 200, 60],
+    "yellowLight": [255, 225, 104],
+    "ruby": [186, 39, 88],
+    "frame": [63, 69, 79]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Original bright green/yellow farm tractor: narrow long green hood with yellow stripe, tall enclosed blue-glass cab with green canopy, huge rear agricultural tires and smaller exposed front tires; actual rear fenders only. Fixed rear hitch has no tool/hitch physics or animation claim.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -1.24,
+      "halfTrack": 0.7,
+      "radius": 0.4,
+      "width": 0.22,
+      "segments": 24
+    },
+    "FR": {
+      "axle": -1.24,
+      "halfTrack": 0.7,
+      "radius": 0.4,
+      "width": 0.22,
+      "segments": 24
+    },
+    "RL": {
+      "axle": 1.0,
+      "halfTrack": 0.82,
+      "radius": 0.74,
+      "width": 0.4,
+      "segments": 32
+    },
+    "RR": {
+      "axle": 1.0,
+      "halfTrack": 0.82,
+      "radius": 0.74,
+      "width": 0.4,
+      "segments": 32
+    }
+  },
+  "coveragePolicy": {
+    "front": "not-applicable/intentionally-open; do not add fender caps or claim covered crowns",
+    "rear": "actual broad rear fender support sampled plus native32-view inspection",
+    "rawRegionMeaning": "Declared region fits fat rear tire central crown. Front results remain unmodified raw diagnostic samples only; do not interpret their region as a front-tread acceptance test."
+  },
+  "tractor": {
+    "hood": {
+      "center": [-0.9, 0, 1.035],
+      "size": [1.76, 0.86, 0.79]
+    },
+    "cab": {
+      "center": [0.545, 0, 1.65],
+      "size": [1.17, 1.2, 1.66]
+    },
+    "canopy": {
+      "center": [0.54, 0, 2.55],
+      "size": [1.48, 1.44, 0.14]
+    },
+    "rearHitch": "Fixed rear drawbar and two links; no tool/physics animation",
+    "frontCoverage": "not-applicable/intentionally-exposed",
+    "rearCoverage": "finite-central-crown-region-only"
+  }
+}

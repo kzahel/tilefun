@@ -1,0 +1,338 @@
+{
+  "method": "Own rigid purple tractor and long cream/teal box trailer with distinct actual UV owners, real open coupling gap/fifth-wheel/frame bridge, six covered independent road wheels and two restrained fixed silver stacks below trailer roof. No articulation/hitch/separate trailer physics or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      77,
+      53,
+      105
+    ],
+    "paintShadow": [
+      103,
+      69,
+      137
+    ],
+    "paintMid": [
+      132,
+      89,
+      166
+    ],
+    "paint": [
+      159,
+      112,
+      191
+    ],
+    "paintLight": [
+      185,
+      139,
+      210
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "deck": [
+      163,
+      168,
+      176
+    ],
+    "deckLight": [
+      184,
+      188,
+      195
+    ],
+    "deckEdge": [
+      124,
+      135,
+      145
+    ],
+    "deckSeam": [
+      98,
+      107,
+      119
+    ],
+    "frame": [
+      63,
+      69,
+      79
+    ],
+    "box": [
+      245,
+      235,
+      203
+    ],
+    "boxRoof": [
+      255,
+      248,
+      225
+    ],
+    "boxShadow": [
+      207,
+      199,
+      173
+    ],
+    "teal": [
+      50,
+      146,
+      147
+    ]
+  },
+  "semanticOwners": {
+    "purpleCabSides": {
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        128
+      ],
+      "meaning": "Actual tall tractor cab skin; blue panes/dark continuous frames and door seams"
+    },
+    "cabEnds": {
+      "atlasPixelRect": [
+        0,
+        128,
+        512,
+        208
+      ],
+      "meaning": "Actual silver/ink grille and headlights, purple closed rear cab"
+    },
+    "windshield": {
+      "atlasPixelRect": [
+        0,
+        208,
+        512,
+        288
+      ]
+    },
+    "longTrailerSides": {
+      "atlasPixelRect": [
+        0,
+        288,
+        512,
+        384
+      ],
+      "meaning": "Actual cream rigid box skin and broad teal lower stripe; no projected view silhouette"
+    },
+    "trailerEnds": {
+      "atlasPixelRect": [
+        0,
+        384,
+        512,
+        448
+      ],
+      "meaning": "Own cream/teal front and rear door/seam/handle/lamp paint"
+    },
+    "trailerRoof": {
+      "atlasPixelRect": [
+        0,
+        448,
+        512,
+        464
+      ]
+    },
+    "cabRoof": {
+      "atlasPixelRect": [
+        0,
+        464,
+        512,
+        480
+      ]
+    },
+    "coupling": {
+      "meaning": "Real empty gap between cab and trailer volumes; actual plate and frame bridge below, not a dark painted fake gap"
+    },
+    "sixRoadWheels": {
+      "ids": [
+        "FL",
+        "FR",
+        "ML",
+        "MR",
+        "RL",
+        "RR"
+      ],
+      "meaning": "Six independent Steer > Roll > tire/rim/hub assemblies, exact per-wheel radii. No articulation."
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "rubyLight": [
+      80,
+      504
+    ],
+    "deck": [
+      112,
+      504
+    ],
+    "deckLight": [
+      144,
+      504
+    ],
+    "deckEdge": [
+      176,
+      504
+    ],
+    "deckSeam": [
+      208,
+      504
+    ],
+    "frame": [
+      240,
+      504
+    ],
+    "box": [
+      272,
+      504
+    ],
+    "boxRoof": [
+      304,
+      504
+    ],
+    "boxShadow": [
+      336,
+      504
+    ],
+    "teal": [
+      368,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Original authored semantic UVs including unseen surfaces; no projection/high-to-low transfer claim.",
+  "outerInk": "Shared exterior pass RGB58,58,80; no geometry outline shell."
+}

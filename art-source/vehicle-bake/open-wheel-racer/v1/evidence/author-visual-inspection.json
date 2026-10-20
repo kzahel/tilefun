@@ -1,0 +1,17 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+  "reviewKind": "author actual-export QA; explicit open-wheel exception, not formal human approval",
+  "observations": [
+    "Inspected all16study plus16game headings at native224/radius112 fixed density and origins. Long low cyan/yellow nose, narrow chassis/sidepods, true single-seat well and broad static wings read as formula open-wheel racer.",
+    "All4tire crowns are intentionally fully exposed, with zero fake fender caps. Raw crown metric0of25covered each is retained honestly; fender coverage is N/A by explicit user exception. Broad wings sit fore/aft of wheels and do not masquerade as crown covers.",
+    "Wheel radius difference is visible: source front0.39/rear0.45. All four tire contacts onground, black exposed tires and simple gray hubs; native near/far wheel placement and suspension read as attached. No visible large floating gaps, tires over cockpit or raised-crown covers.",
+    "ActualGLB suspension-tip axial gaps about0.285world pixels are subpixel; true wheel longitudinal intervals front[-1.67,-.89],rear[.89,1.79] do not overlap cockpit[-.28,.58]. Elevated projection places far tires behind the narrow chassis, with correct outboard physical placement.",
+    "Front and rear obliques show small blue framed windscreen, cyan rim, recessed dark well/floor and fixed dark seat. No helmet sphere or invented driver. ActualGLB six floor rays and opaque-deck negative/reset independently prove the empty cockpit depth.",
+    "Inspected8signed ordinary-distance phases/camera,8signed equal-angle phases/camera and both wireframes. Ordinary same-distance angles differ by0.39/0.45radius ratio; equal-angle uses per-wheel travel. Every actual wheel transform/pivot checked, body/wings/seat/suspension fixed and pixel-exact absolute reset per phase.",
+    "Shared rig independently quarters/reverses/resets each declared wheel using its own radius. All-body neutral full-roll cylinder proof includes chassis, sidepods, cockpit, wings, supports and suspension; deliberate collision control rejected/reset.",
+    "Additional individual native front/rear obliques and sides inspected: low narrow body, wing supports, wishbone tips and seat silhouette coherent. Small wheel/hub/frame/rod aliases are expected at fixed native density; no blocking appearance issues.",
+    "One opaque512 unlit nearest atlas with cyan/turquoise/yellow broad clusters, coolblue glass, dark inner seat/floor and shared ink58,58,80. Semantic owners retained; no PBR, view-dependent paint, screen redraw, fender caps or driver/helmet geometry.",
+    "Ordinary existing driving semantics hide the driver, so cockpit stays visually empty while driving. No new rider/gameplay/equipment animation. Neutral steering and static suspension only; no nonzero steering or suspension-pose clearance claim."
+  ]
+}

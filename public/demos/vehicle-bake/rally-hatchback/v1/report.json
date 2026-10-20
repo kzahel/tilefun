@@ -1,0 +1,1070 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "rally-hatchback",
+  "route": "rally-hatchback",
+  "revision": "v1",
+  "method": "Original short boxy rally hatchback contour loft: short hood, upright low cabin, two side doors with rear quarter panes and a sloping hatch. Actual skin UV charts own continuous framed blue glazing, broad white/red/black team blocks and trim. Fixed roof scoop/spoiler and four static auxiliary lenses, no equipment animation or beacon tags; no glass overlays or high-to-low transfer claim.",
+  "geometry": {
+    "triangles": 2900,
+    "vertices": 5551,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 201980,
+    "sha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.25,
+        -0.7699999809265137,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -21.739130434782613,
+        6.608695569245713,
+        13.391304016113283
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.25,
+        0.7699999809265137,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -21.739130434782613,
+        6.608695569245713,
+        -13.391304016113283
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.2000000476837158,
+        -0.7699999809265137,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        20.86956604667332,
+        6.608695569245713,
+        13.391304016113283
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.2000000476837158,
+        0.7699999809265137,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        20.86956604667332,
+        6.608695569245713,
+        -13.391304016113283
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/rally-hatchback/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/rally-hatchback/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/rally-hatchback/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Fixed modest roof scoop, rear spoiler and exactly four static ordinary auxiliary lenses. No beacon/signal/effect tags, flashing lights or equipment animation; ordinary driving semantics.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 2900,
+  "vertexCount": 5551,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 201980,
+  "atlasBytes": 3775,
+  "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+  "atlasSha256": "8ecd127298a141ecedb41f91aa79bcafcf34cc8afac5c7a3cb24e913cc6f475a",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "rally-hatchback--v1",
+    "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "triangles": 2900,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.49528498451284,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.4952849910033228,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.4952850647269331,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.49528514700891,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/rally-hatchback/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "minBlenderWorld": [
+      -36.73912811279297,
+      -17.39130401611328,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      36.73912811279297,
+      17.39130401611328,
+      28.521738052368164
+    ],
+    "dimensionsBlenderWorld": [
+      73.47825622558594,
+      34.78260803222656,
+      28.521737575531006
+    ],
+    "dimensionsSourceUnits": [
+      4.224999732971191,
+      1.999999961853027,
+      1.6399999105930325
+    ]
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "rayCount": 14,
+    "samples": [
+      {
+        "id": "left-main-door-pane",
+        "hitSource": [
+          -0.10000000149011612,
+          -0.8209195137023926,
+          1.2000001668930054
+        ],
+        "triangle": 995,
+        "interpolatedUV": [
+          0.47777777910232544,
+          0.7466214895248413
+        ],
+        "atlasPixel": [
+          244,
+          129
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-rear-quarter-pane",
+        "hitSource": [
+          0.7400000691413879,
+          -0.8166491985321045,
+          1.190000057220459
+        ],
+        "triangle": 135,
+        "interpolatedUV": [
+          0.6644444465637207,
+          0.7491554021835327
+        ],
+        "atlasPixel": [
+          340,
+          128
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-main-bottom-frame",
+        "hitSource": [
+          0.10000000149011612,
+          -0.8433332443237305,
+          1.0650001764297485
+        ],
+        "triangle": 118,
+        "interpolatedUV": [
+          0.5222221612930298,
+          0.780827522277832
+        ],
+        "atlasPixel": [
+          267,
+          112
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-quarter-front-frame",
+        "hitSource": [
+          0.5400000810623169,
+          -0.8204936981201172,
+          1.2000001668930054
+        ],
+        "triangle": 1012,
+        "interpolatedUV": [
+          0.6200000047683716,
+          0.7466214895248413
+        ],
+        "atlasPixel": [
+          317,
+          129
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-main-door-pane",
+        "hitSource": [
+          -0.10000000149011612,
+          0.8209195137023926,
+          1.2000001668930054
+        ],
+        "triangle": 1000,
+        "interpolatedUV": [
+          0.47777777910232544,
+          0.7466216087341309
+        ],
+        "atlasPixel": [
+          244,
+          129
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-rear-quarter-pane",
+        "hitSource": [
+          0.7400000691413879,
+          0.8166491985321045,
+          1.190000057220459
+        ],
+        "triangle": 140,
+        "interpolatedUV": [
+          0.6644445061683655,
+          0.7491554021835327
+        ],
+        "atlasPixel": [
+          340,
+          128
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-main-bottom-frame",
+        "hitSource": [
+          0.10000000149011612,
+          0.8433332443237305,
+          1.0650001764297485
+        ],
+        "triangle": 123,
+        "interpolatedUV": [
+          0.5222222208976746,
+          0.7808275818824768
+        ],
+        "atlasPixel": [
+          267,
+          112
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-quarter-front-frame",
+        "hitSource": [
+          0.5400000810623169,
+          0.8204939365386963,
+          1.2000001668930054
+        ],
+        "triangle": 1017,
+        "interpolatedUV": [
+          0.6200000047683716,
+          0.7466215491294861
+        ],
+        "atlasPixel": [
+          317,
+          129
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-windshield",
+        "hitSource": [
+          -0.8550000190734863,
+          0.0,
+          1.2799999713897705
+        ],
+        "triangle": 953,
+        "interpolatedUV": [
+          0.25,
+          0.30912160873413086
+        ],
+        "atlasPixel": [
+          128,
+          353
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "sloping-hatch-window",
+        "hitSource": [
+          1.182058572769165,
+          0.0,
+          1.2500001192092896
+        ],
+        "triangle": 1065,
+        "interpolatedUV": [
+          0.7499999403953552,
+          0.31355568766593933
+        ],
+        "atlasPixel": [
+          383,
+          351
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-windshield-frame",
+        "hitSource": [
+          -0.8491380214691162,
+          0.7000000476837158,
+          1.2700001001358032
+        ],
+        "triangle": 954,
+        "interpolatedUV": [
+          0.40909090638160706,
+          0.31059959530830383
+        ],
+        "atlasPixel": [
+          209,
+          352
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "hatch-window-frame",
+        "hitSource": [
+          1.1733843088150024,
+          0.6200000643730164,
+          1.2500001192092896
+        ],
+        "triangle": 154,
+        "interpolatedUV": [
+          0.8909090757369995,
+          0.31355568766593933
+        ],
+        "atlasPixel": [
+          456,
+          351
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "white-roof-shoulder",
+        "hitSource": [
+          0.3500000238418579,
+          0.5000000596046448,
+          1.5032105445861816
+        ],
+        "triangle": 1015,
+        "interpolatedUV": [
+          0.5777777433395386,
+          0.15909093618392944
+        ],
+        "atlasPixel": [
+          295,
+          430
+        ],
+        "rgb": [
+          248,
+          247,
+          239
+        ],
+        "roles": [
+          "roof"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "broad-red-hood-stripe",
+        "hitSource": [
+          -1.600000023841858,
+          0.0,
+          1.0250000953674316
+        ],
+        "triangle": 25,
+        "interpolatedUV": [
+          0.14444443583488464,
+          0.09375
+        ],
+        "atlasPixel": [
+          73,
+          464
+        ],
+        "rgb": [
+          202,
+          61,
+          80
+        ],
+        "roles": [
+          "red"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/rally-hatchback/surface-regions.json",
+    "meaning": "ActualGLB triangle-ray UV samples verify door/quarter panes and frames, swept front windshield, sloping hatch glass, white roof and broad red hood stripe. All equipment fixed; closed cabin, no open-interior claim.",
+    "inputBytesUnchanged": true
+  },
+  "fixedGeometryEvidence": {
+    "status": "passed",
+    "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "fixedTriangles": 1916,
+    "duplicateTriangleCoordinates": 0,
+    "zeroAreaTriangles": 0,
+    "meaning": "All fixed body/trim triangles checked for identical geometric faces independently of UV splits. Constructor uses one strictly ordered closed section per longitudinal station, with no cabin-side overlays."
+  },
+  "fixedRallyEquipment": {
+    "status": "passed",
+    "auxiliaryLenses": 4,
+    "roofScoops": 1,
+    "spoilerWings": 1,
+    "animatedEquipment": false,
+    "paintedTreadPanelsPerWheel": [
+      {
+        "wheel": "Wheel rubber FL",
+        "paintedTreadPanels": 5
+      },
+      {
+        "wheel": "Wheel rubber FR",
+        "paintedTreadPanels": 5
+      },
+      {
+        "wheel": "Wheel rubber RL",
+        "paintedTreadPanels": 5
+      },
+      {
+        "wheel": "Wheel rubber RR",
+        "paintedTreadPanels": 5
+      }
+    ]
+  },
+  "bothCameraNativeParity": {
+    "status": "passed",
+    "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "browser": "bundled full Chromium",
+    "browserVersion": "153.0.8010.12",
+    "nativeSizes": [
+      128,
+      224
+    ],
+    "views": [
+      {
+        "mode": "study",
+        "yaw": 0,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 22.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 45,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 67.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 90,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 112.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 135,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 157.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 180,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 202.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 225,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 247.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 270,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 292.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 315,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "study",
+        "yaw": 337.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 0,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 22.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 45,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 67.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 90,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 112.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 135,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 157.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 180,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 202.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 225,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 247.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 270,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 292.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 315,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      },
+      {
+        "mode": "engine",
+        "yaw": 337.5,
+        "comparedPixels": 16384,
+        "excludedFrameBoundary": 0,
+        "centeredOffset": [
+          48,
+          48
+        ],
+        "mismatchedChannels": 0
+      }
+    ],
+    "fixedDensity": true,
+    "resizedOrRefitted": false,
+    "errors": [],
+    "meaning": "Both cameras/all32 headings retain the exact full128-square centered native RGBA crop, including outline and transparent frame boundary. The hatch fits both viewports at fixed camera/density, no rescaling."
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/rally-hatchback/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/rally-hatchback/capture.mjs",
+    "python scripts/vehicle-bake/rally-hatchback/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/rally-hatchback/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/rally-hatchback/v1/evidence/clearance-input.json data/vehicle-bake/rally-hatchback/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/rally-hatchback/v1/model.glb --config art-source/vehicle-bake/rally-hatchback/v1/coverage-region.json --output data/vehicle-bake/rally-hatchback/recheck-coverage.json",
+    "python scripts/vehicle-bake/rally-hatchback/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/rally-hatchback/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16study and all16game headings, native224/radius112 unchanged world density/ground origins. Short boxy hatch silhouette, short hood, main side-door pane plus rear quarter pane, sloping hatch, fixed roof scoop and rear spoiler read as a distinct rally hatchback.",
+    "Broad white/red/black team blocks and chevrons on actual skin, no logos or tiny text. Cool blue windshield, side/quarter and hatch glass all retain dark bounded frames on the same physical hatchback shell. No coincident body/glass overlays or recolored coupe/van construction.",
+    "Four ordinary cream auxiliary lenses are visible in the front row and sit on a fixed mounting bar connected into the nose. Scoop and wing supports are seated into actual roof/hatch shoulders; modest fixed equipment, no floating raised geometry or animated/beacon styling.",
+    "Chunky tire width and gray painted tread panels remain wheel-owned and roll with the wheel. All four far crowns stay beneath integrated fenders/hood/hatch shoulders in both camera sets at all headings; near-wheel local pockets are genuinely open and properly seated.",
+    "Inspected8signed phases in each camera and both wireframes. Body, livery, windows, lamps, mounting bar, roof scoop, spoiler and mirrors remain fixed; four wheels independently quarter-turn/reverse/reset with centered pivots.",
+    "Additionally inspected individual224px native side/front/rear obliques and frontal view: four auxiliary lenses, side/quarter frames and short hatch geometry remain coherent. Small tread/highlight aliases are expected at native density; no blocking visual findings.",
+    "ActualGLB14 triangle-ray/barycentric UV probes separately verify main/quarter panes and frames, windshield/hatch glass and frames, white roof and broad red hood stripe. Actual1916 fixed triangles have zero duplicate geometric faces and zero zero-area triangles.",
+    "Both study and game cameras/all32 headings have exact full128x128 RGBA crop equality against centered224 captures, including outline and transparent frame boundary; zero mismatched channels, no resizing, no per-angle fitting.",
+    "Packed-master audit confirms exactly4static auxiliary lenses,1scoop,1spoiler and5painted tread panels per wheel. ActualGLB has no exported animations or beacon/light/signal/effect tags. Equipment is static ordinary art.",
+    "Closed cabin and static equipment; no open-interior depth or high-to-low transfer claim. Existing ordinary driving semantics, no visible animated driver and no new rider/equipment gameplay."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 14,
+    "bothCamera32Native128vs224CropParity": true,
+    "noDuplicateOrZeroAreaFixedTriangles": true,
+    "fourStaticAuxiliaryLensesNoAnimationOrBeaconTags": true,
+    "fivePaintedTreadPanelsPerWheel": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Closed short hatch cabin; fixed scoop/spoiler and four static ordinary auxiliary lenses, no beacon tags, flashing lights or equipment animation.",
+    "Thin window frames, tread marks, lamp/handle and gray trim highlights retain expected angle-dependent native pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/rally-hatchback/v1/atlas.png": "8ecd127298a141ecedb41f91aa79bcafcf34cc8afac5c7a3cb24e913cc6f475a",
+    "art-source/vehicle-bake/rally-hatchback/v1/audit-source.py": "63b16c3163266ea1dc8dfaf2cd0f0c5c1e36cfc953ec5cf538f6ffb707c06521",
+    "art-source/vehicle-bake/rally-hatchback/v1/build.py": "9bd3237de6986282090eddc2ee00be3c82dc0660d4064e98be98cd98962fd30c",
+    "art-source/vehicle-bake/rally-hatchback/v1/capture.mjs": "8307dea965999bf298645278be3af6980cee40f7c809e9cb76196b77a326c943",
+    "art-source/vehicle-bake/rally-hatchback/v1/car.blend": "1e0e6f36d89835a8ae8eb807198c7fecb8111dcae4a653e5602955b1244f6c52",
+    "art-source/vehicle-bake/rally-hatchback/v1/coverage-region.json": "6bd28198ffefacc4b5c6db4d3d43dcef7f1acf095fc08445eaca30bc37f6bacf",
+    "art-source/vehicle-bake/rally-hatchback/v1/crop-parity.mjs": "5117df71d6c947fcba8e8e7a3cead2457a10ea7adbd198638763695b4320edfa",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/author-browser-qa.json": "1840baa7e30da79cb8d558a533c0f815eef889222c001b54d13f3a1759bb1260",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/author-visual-inspection.json": "40a43365a3cea1fb91515d65688ead7c4ac1e0d4e3afba2f65e7a0b9244a5af4",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/both-camera-native-parity.json": "31ae0b3c98de01c91142a56771e2892fddb9fcde171d05f55d8324caaaa9cb6b",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/clearance-input.json": "c460c37e3948749d8fb3e0f33e78cf6d0ce0199a73f287b4d13780cef7b40353",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/engine-capture.json": "7e7ffe983abb8fcd58c858746ae463b2ddc622c2a3a924a12dad96593f19cb3d",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/packed-source-audit.json": "fba2e5018f3d72f0446dc14d7884e3727175740cb4d447f65d7a5a14603c4e6f",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/replay-verification.json": "b506cdd5e232d07144ad989b5a48bb602bd16a44ae200f1ecefde7348271065d",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/shared-clearance.json": "3955a9d5846700d0fe2cdc07d590ed4ef1832da5329f01ab3b97572149753a26",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/upper-wheel-coverage.json": "3d0cc223699f8c702013e498c5dd23c4ec3e0ba578579b06da8604fd7ae58504",
+    "art-source/vehicle-bake/rally-hatchback/v1/family.json": "b21a26bc0cce74da39e93a25a4eeda2c2e1d9677cd0667d0c9de0919c1942d4b",
+    "art-source/vehicle-bake/rally-hatchback/v1/finalize.py": "030dbaf69940765a4e38e9c4a3bb90a2a6f09d10b46b75e5d592e7f1179d666d",
+    "art-source/vehicle-bake/rally-hatchback/v1/master.blend": "3e4f022488a160646e82ef72c8f062d51d033744574ddc5c9a01f8d736f6c19d",
+    "art-source/vehicle-bake/rally-hatchback/v1/model.glb": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "art-source/vehicle-bake/rally-hatchback/v1/pack-author.py": "2b13ac6c772f8ca958c7ca1b887a3ca04f1421ed26b9e7de5aa7d6c840e04caa",
+    "art-source/vehicle-bake/rally-hatchback/v1/paint-ownership.json": "c557f808b669322abf3bd5109d8e26a0a9f6bac46905b39156fbb99189e416bb",
+    "art-source/vehicle-bake/rally-hatchback/v1/palette-draft.png": "498efdec792c491c12ebc2c771e4ddd769e7710f4916584e2868c40ad8174b0f",
+    "art-source/vehicle-bake/rally-hatchback/v1/recipe.json": "44228d37b9ea88a476dddcac56fe28409c7b68a8aa84e6ec947eea34b372fdcc",
+    "art-source/vehicle-bake/rally-hatchback/v1/review.json": "3a3b198f2891909438c80704708ad8b13a3f234061d0557afbcf9d2f4a582aa3",
+    "art-source/vehicle-bake/rally-hatchback/v1/sheets.py": "c30475ae16aadeb5efa70f227a6c60935c9f9f95e97f113cf3cb29b8ec1be6da",
+    "art-source/vehicle-bake/rally-hatchback/v1/surface-regions.json": "0cfd442cf89415772e54f01a99a11603dedcf6992f9b4d346d73c679db1816b6"
+  }
+}

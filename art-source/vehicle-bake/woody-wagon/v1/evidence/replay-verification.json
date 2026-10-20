@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+  "atlasSha256": "2fdb5c112858ccac1a4a6ff5487bbe3c35c089eed995d468847114a3faf76545",
+  "recipeSha256": "dce7a10b509d605d50d4778f70ac55068233ca78c63d5ca4a5b2d3c24d765fe5",
+  "invokedBuilder": "art-source/vehicle-bake/woody-wagon/v1/build.py",
+  "inputHashes": {
+    "art-source/vehicle-bake/woody-wagon/v1/build.py": "cbe6f406c291115425a83a46b426819eff8a29f230935957334d9b59025a6d1e",
+    "art-source/vehicle-bake/woody-wagon/v1/geometry.py": "b7453bf180aba866ea9fd8b52da93a28ead7f270ef16c0124da98991cabbb3a6",
+    "art-source/vehicle-bake/woody-wagon/v1/family.json": "de500d1cfd770d9f3b8905692830c98a764a82f94de3c50601517f1be9ab0ed6",
+    "art-source/vehicle-bake/woody-wagon/v1/coverage-region.json": "23ad7ceabfa8b22dea0826f74b6ce44512fe492b376f81bc8360e3cb745ae12b",
+    "art-source/vehicle-bake/woody-wagon/v1/review.json": "fda166756bbc926fab548681fb7b364d3ab0c1a55d547479700dfe71ac56e623"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d"
+  },
+  "scratchInputDependencies": [],
+  "blender": "5.2.2 LTS d13f752e3b9c; factory startup; background; 4 threads; python exit code 1",
+  "meaning": "Retained constructor, family geometry and configs plus repository catalog helper only. Scratch contains outputs, not inputs. Exact GLB, atlas and recipe reproduced; packed scene bytes retained, not asserted deterministic across saves."
+}

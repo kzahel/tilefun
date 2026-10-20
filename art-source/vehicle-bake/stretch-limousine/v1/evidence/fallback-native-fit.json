@@ -1,0 +1,287 @@
+{
+  "status": "passed",
+  "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+  "nativeSize": [
+    224,
+    224
+  ],
+  "frameSize": [
+    192,
+    224
+  ],
+  "nativeGroundOrigin": [
+    112,
+    112
+  ],
+  "fallbackGroundOrigin": [
+    96,
+    144
+  ],
+  "translationOnly": [
+    -16,
+    32
+  ],
+  "resizing": false,
+  "perHeadingFit": false,
+  "views": [
+    {
+      "headingDegrees": 0.0,
+      "nativeBounds": [
+        51,
+        70,
+        173,
+        127
+      ],
+      "fallbackBounds": [
+        35,
+        102,
+        157,
+        159
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 22.5,
+      "nativeBounds": [
+        50,
+        60,
+        174,
+        144
+      ],
+      "fallbackBounds": [
+        34,
+        92,
+        158,
+        176
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 45.0,
+      "nativeBounds": [
+        58,
+        46,
+        166,
+        160
+      ],
+      "fallbackBounds": [
+        42,
+        78,
+        150,
+        192
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 67.5,
+      "nativeBounds": [
+        74,
+        38,
+        150,
+        169
+      ],
+      "fallbackBounds": [
+        58,
+        70,
+        134,
+        201
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 90.0,
+      "nativeBounds": [
+        95,
+        37,
+        129,
+        168
+      ],
+      "fallbackBounds": [
+        79,
+        69,
+        113,
+        200
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 112.5,
+      "nativeBounds": [
+        74,
+        38,
+        150,
+        169
+      ],
+      "fallbackBounds": [
+        58,
+        70,
+        134,
+        201
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 135.0,
+      "nativeBounds": [
+        58,
+        46,
+        166,
+        160
+      ],
+      "fallbackBounds": [
+        42,
+        78,
+        150,
+        192
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 157.5,
+      "nativeBounds": [
+        50,
+        60,
+        174,
+        144
+      ],
+      "fallbackBounds": [
+        34,
+        92,
+        158,
+        176
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 180.0,
+      "nativeBounds": [
+        51,
+        70,
+        173,
+        127
+      ],
+      "fallbackBounds": [
+        35,
+        102,
+        157,
+        159
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 202.5,
+      "nativeBounds": [
+        50,
+        59,
+        174,
+        143
+      ],
+      "fallbackBounds": [
+        34,
+        91,
+        158,
+        175
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 225.0,
+      "nativeBounds": [
+        58,
+        44,
+        166,
+        160
+      ],
+      "fallbackBounds": [
+        42,
+        76,
+        150,
+        192
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 247.5,
+      "nativeBounds": [
+        74,
+        35,
+        150,
+        169
+      ],
+      "fallbackBounds": [
+        58,
+        67,
+        134,
+        201
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 270.0,
+      "nativeBounds": [
+        95,
+        35,
+        129,
+        168
+      ],
+      "fallbackBounds": [
+        79,
+        67,
+        113,
+        200
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 292.5,
+      "nativeBounds": [
+        74,
+        35,
+        150,
+        169
+      ],
+      "fallbackBounds": [
+        58,
+        67,
+        134,
+        201
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 315.0,
+      "nativeBounds": [
+        58,
+        44,
+        166,
+        160
+      ],
+      "fallbackBounds": [
+        42,
+        76,
+        150,
+        192
+      ],
+      "occupiedPixelsExact": true
+    },
+    {
+      "headingDegrees": 337.5,
+      "nativeBounds": [
+        50,
+        59,
+        174,
+        143
+      ],
+      "fallbackBounds": [
+        34,
+        91,
+        158,
+        175
+      ],
+      "occupiedPixelsExact": true
+    }
+  ],
+  "negativeOffFrameTranslationRejected": true,
+  "baselineRestored": true,
+  "meaning": "All16 native game headings fit the ordinary fallback frame with exact RGBA occupied pixels, fixed origins and transparent-margin cropping only. Physical collider measurement/runtime packaging remains parent-owned v3 work."
+}

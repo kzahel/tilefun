@@ -1,0 +1,346 @@
+{
+  "status": "passed",
+  "results": {
+    "master.blend": {
+      "sha256": "6dbf9c57ad6627850df51abfff0f8a92a6255f0ea82df130be5b25e48feda0c1",
+      "meshObjects": 55,
+      "triangles": 2710,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "b65030cb51b1dde080c6e1d55dfa93b413a3f8cb0e2cf0eb76826e20aec82f4d",
+      "meshObjects": 5,
+      "triangles": 2710,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+      "minBlenderWorld": [
+        -42.73912811279297,
+        -21.869565963745117,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        42.73912811279297,
+        18.60869598388672,
+        41.03913116455078
+      ],
+      "dimensionsBlenderWorld": [
+        85.47825622558594,
+        40.478261947631836,
+        41.039130210876465
+      ],
+      "dimensionsSourceUnits": [
+        4.91499973297119,
+        2.32750006198883,
+        2.3597499871253964
+      ]
+    },
+    "actualGLBSemanticSurfaces": {
+      "status": "passed",
+      "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+      "rayCount": 11,
+      "samples": [
+        {
+          "id": "cab-serving-side",
+          "hitSource": [
+            -1.2000001668930054,
+            -1.0173417329788208,
+            1.7000001668930054
+          ],
+          "triangle": 75,
+          "interpolatedUV": [
+            0.2692307233810425,
+            0.8425531387329102
+          ],
+          "atlasPixel": [
+            137,
+            80
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "cab-opposite-side",
+          "hitSource": [
+            -1.2000001668930054,
+            1.0173417329788208,
+            1.7000001668930054
+          ],
+          "triangle": 84,
+          "interpolatedUV": [
+            0.2692307233810425,
+            0.5925531983375549
+          ],
+          "atlasPixel": [
+            137,
+            208
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "windshield",
+          "hitSource": [
+            -1.7965478897094727,
+            0.0,
+            1.7000001668930054
+          ],
+          "triangle": 843,
+          "interpolatedUV": [
+            0.5,
+            0.2962765693664551
+          ],
+          "atlasPixel": [
+            256,
+            360
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "rear-door-seam",
+          "hitSource": [
+            2.3499999046325684,
+            0.0,
+            1.5000001192092896
+          ],
+          "triangle": 149,
+          "interpolatedUV": [
+            0.75,
+            0.4319148659706116
+          ],
+          "atlasPixel": [
+            384,
+            290
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "cream-roof",
+          "hitSource": [
+            0.0,
+            0.0,
+            2.3554792404174805
+          ],
+          "triangle": 932,
+          "interpolatedUV": [
+            0.5,
+            0.203125
+          ],
+          "atlasPixel": [
+            256,
+            408
+          ],
+          "rgb": [
+            255,
+            244,
+            214
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "recess-backwall",
+          "hitSource": [
+            0.6000000834465027,
+            -0.5300000905990601,
+            1.5000001192092896
+          ],
+          "triangle": 203,
+          "interpolatedUV": [
+            0.40810322761535645,
+            0.015379725024104118
+          ],
+          "atlasPixel": [
+            208,
+            504
+          ],
+          "rgb": [
+            77,
+            96,
+            107
+          ],
+          "roles": [
+            "interiorBack"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "counter-ledge",
+          "hitSource": [
+            0.4000000059604645,
+            -1.100000023841858,
+            1.187999963760376
+          ],
+          "triangle": 1187,
+          "interpolatedUV": [
+            0.4671773314476013,
+            0.014695756137371063
+          ],
+          "atlasPixel": [
+            239,
+            504
+          ],
+          "rgb": [
+            99,
+            126,
+            132
+          ],
+          "roles": [
+            "counter"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "opposite-cone-scoop",
+          "hitSource": [
+            0.7300000786781311,
+            1.0165200233459473,
+            1.78000009059906
+          ],
+          "triangle": 114,
+          "interpolatedUV": [
+            0.6403846740722656,
+            0.5840425491333008
+          ],
+          "atlasPixel": [
+            327,
+            212
+          ],
+          "rgb": [
+            224,
+            143,
+            163
+          ],
+          "roles": [
+            "violet"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "opposite-cone-waffle",
+          "hitSource": [
+            0.7300000786781311,
+            1.0249998569488525,
+            1.0800001621246338
+          ],
+          "triangle": 115,
+          "interpolatedUV": [
+            0.6403846144676208,
+            0.6585105657577515
+          ],
+          "atlasPixel": [
+            327,
+            174
+          ],
+          "rgb": [
+            207,
+            144,
+            77
+          ],
+          "roles": [
+            "cone"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "awning-stripe",
+          "hitSource": [
+            0.4000000059604645,
+            -1.1399999856948853,
+            2.212857246398926
+          ],
+          "triangle": 1214,
+          "interpolatedUV": [
+            0.46311891078948975,
+            0.04489650949835777
+          ],
+          "atlasPixel": [
+            237,
+            489
+          ],
+          "rgb": [
+            255,
+            244,
+            214
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "lower-aqua-body",
+          "hitSource": [
+            0.0,
+            1.024999976158142,
+            1.0000001192092896
+          ],
+          "triangle": 937,
+          "interpolatedUV": [
+            0.5,
+            0.6670212745666504
+          ],
+          "atlasPixel": [
+            256,
+            170
+          ],
+          "rgb": [
+            161,
+            216,
+            207
+          ],
+          "roles": [
+            "paint"
+          ],
+          "owner": "Body_static"
+        }
+      ],
+      "regionConfig": "scripts/vehicle-bake/ice-cream-van/surface-regions.json",
+      "meaning": "Actual triangle/UV role samples on each independent exterior/serving surface owner",
+      "inputBytesUnchanged": true
+    }
+  }
+}

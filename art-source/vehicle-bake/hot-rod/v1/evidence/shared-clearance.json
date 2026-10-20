@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "hot-rod--v1",
+    "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "triangles": 3194,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.565217564413184,
+        "minimumGap": 24.614084232589153,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.565217564413184,
+        "minimumGap": 24.614084232589153,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 9.565218053588476,
+        "minimumGap": 1.6424182658782094,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 9.565218053588476,
+        "minimumGap": 1.6424182658782094,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

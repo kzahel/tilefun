@@ -1,0 +1,139 @@
+{
+  "method": "Independent long low estate body and swept greenhouse. Continuous own side UV charts carry cream/caramel paint, bounded warm wood panels with sparse graphic grain, and framed blue passenger/quarter glass. Fixed front/rear glass and roof owners; static four-bar roof rack. No source projection or view-dependent paint.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      147,
+      108,
+      69
+    ],
+    "paintShadow": [
+      181,
+      139,
+      86
+    ],
+    "paintMid": [
+      213,
+      174,
+      112
+    ],
+    "paint": [
+      235,
+      207,
+      153
+    ],
+    "paintLight": [
+      250,
+      229,
+      181
+    ],
+    "cream": [
+      255,
+      238,
+      192
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "woodTrim": [
+      92,
+      59,
+      47
+    ],
+    "woodEdge": [
+      220,
+      166,
+      100
+    ],
+    "wood": [
+      175,
+      111,
+      60
+    ],
+    "woodLight": [
+      192,
+      129,
+      72
+    ],
+    "woodGrain": [
+      140,
+      84,
+      51
+    ],
+    "rack": [
+      94,
+      98,
+      111
+    ]
+  },
+  "ownership": "Independent estate lower-side wood-panel chart with bounded dark trim and sparse grain; continuous passenger/quarter glass side charts; separate swept windshield and rear glass/end charts; low crowned roof and long hood charts; broad open fenders and classic centered wheels; static four-bar rack. Named source components retain base FACE paint_role attributes; their continuous UV charts own window/paint details. Trim islands share padded constant-role swatches; wheel-only meshes never sample coachwork.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Coherent opposite side wood/passenger/quarter window charts; separate front/rear glass and roof, asymmetric front/rear lamps and tailgate wood owner.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

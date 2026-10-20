@@ -1,0 +1,481 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedEquipment": {
+      "components": [
+        "STATIC rounded gray green collection tank actual closed skin",
+        "STATIC brush fixed arm -1",
+        "STATIC brush vertical mount -1",
+        "STATIC tank support saddle -1",
+        "STATIC brush fixed arm 1",
+        "STATIC brush vertical mount 1",
+        "STATIC tank support saddle 1",
+        "STATIC axle attachment arm -1.25",
+        "STATIC axle attachment arm 1.2",
+        "STATIC low circular brush cap -1",
+        "STATIC broad dark brush bristle block -1 0",
+        "STATIC broad dark brush bristle block -1 1",
+        "STATIC broad dark brush bristle block -1 2",
+        "STATIC broad dark brush bristle block -1 3",
+        "STATIC broad dark brush bristle block -1 4",
+        "STATIC broad dark brush bristle block -1 5",
+        "STATIC broad dark brush bristle block -1 6",
+        "STATIC broad dark brush bristle block -1 7",
+        "STATIC broad dark brush bristle block -1 8",
+        "STATIC broad dark brush bristle block -1 9",
+        "STATIC broad dark brush bristle block -1 10",
+        "STATIC broad dark brush bristle block -1 11",
+        "STATIC low circular brush cap 1",
+        "STATIC broad dark brush bristle block 1 0",
+        "STATIC broad dark brush bristle block 1 1",
+        "STATIC broad dark brush bristle block 1 2",
+        "STATIC broad dark brush bristle block 1 3",
+        "STATIC broad dark brush bristle block 1 4",
+        "STATIC broad dark brush bristle block 1 5",
+        "STATIC broad dark brush bristle block 1 6",
+        "STATIC broad dark brush bristle block 1 7",
+        "STATIC broad dark brush bristle block 1 8",
+        "STATIC broad dark brush bristle block 1 9",
+        "STATIC broad dark brush bristle block 1 10",
+        "STATIC broad dark brush bristle block 1 11"
+      ],
+      "twoBrushCaps": 2,
+      "broadBristleBlocks": 24,
+      "tankClosedManifold64Vertices": true,
+      "tank16AngularVerticesPer4Rings": true,
+      "actualAssessment": {
+        "status": "passed",
+        "reasons": [],
+        "brushes": [
+          {
+            "side": -1,
+            "centerXYSource": [
+              -0.04999999701976776,
+              -1.0
+            ],
+            "minimumZSource": 0.054999999701976776,
+            "maximumZSource": 0.2199999988079071,
+            "radiusSourceMeasured": 0.25000001526599647,
+            "actualBroadBristleBlocks": 12
+          },
+          {
+            "side": 1,
+            "centerXYSource": [
+              -0.04999999701976776,
+              1.0
+            ],
+            "minimumZSource": 0.054999999701976776,
+            "maximumZSource": 0.2199999988079071,
+            "radiusSourceMeasured": 0.25000001526599647,
+            "actualBroadBristleBlocks": 12
+          }
+        ],
+        "tankMeasuredSpanSource": [
+          2.060000032186508,
+          1.8799999952316284,
+          1.0600000619888306
+        ],
+        "tankVertices": 64
+      },
+      "mispositionNegativeControls": [
+        {
+          "case": "brush-raised-above-cab",
+          "side": -1,
+          "translationSource": [
+            0,
+            0,
+            2.1
+          ],
+          "rejected": true,
+          "reasons": [
+            "brush not low above ground -1"
+          ]
+        },
+        {
+          "case": "brush-raised-above-cab",
+          "side": 1,
+          "translationSource": [
+            0,
+            0,
+            2.1
+          ],
+          "rejected": true,
+          "reasons": [
+            "brush not low above ground 1"
+          ]
+        },
+        {
+          "case": "tank-moved-over-cab",
+          "translationSource": [
+            -2,
+            0,
+            0
+          ],
+          "rejected": true,
+          "reasons": [
+            "tank outside rear collection zone"
+          ]
+        }
+      ],
+      "baselineRestoredExact": true,
+      "noMotionMetadata": true,
+      "staticBrushesAndTankOnly": true,
+      "noCleaningOrBrushRotationAnimationClaim": true,
+      "brushPaletteRoles": [
+        "bristle",
+        "bristleLight",
+        "brushCap"
+      ]
+    },
+    "skinOwnership": {
+      "method": "Own mint lower fender skins, continuous side glass plus separate windshield/rear-glass/white roof charts, rounded tank side/end/top chart ownership and explicit padded palette UVs for bristle blocks/caps/arms. Paint lies on actual surfaces, no glass overlays or screen projection.",
+      "cabFrontRearRoofOwnershipSeparate": true,
+      "actualTankOwnSurfaceChart": true,
+      "actualBrushAndBristlePaletteUVs": true,
+      "noGlassOverlayMeshes": true
+    },
+    "master.blend": {
+      "sha256": "c6fb36235eef40d17ea7122da688240ce838b1b308e1cca17d390d3ee12300a5",
+      "triangles": 3236,
+      "meshObjects": 66,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "wheelRadiusRig": [
+      {
+        "id": "FL",
+        "radiusSourceMeasured": 0.36000004401832325,
+        "radiusWorldDeclared": 6.260869565217392,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "FR",
+        "radiusSourceMeasured": 0.36000004401832325,
+        "radiusWorldDeclared": 6.260869565217392,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RL",
+        "radiusSourceMeasured": 0.36000004401832325,
+        "radiusWorldDeclared": 6.260869565217392,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RR",
+        "radiusSourceMeasured": 0.36000004401832325,
+        "radiusWorldDeclared": 6.260869565217392,
+        "geometryAndOwnMetadataMatch": true
+      }
+    ],
+    "car.blend": {
+      "sha256": "050aeebc40e8764fc76700ffbd38c5db549f08cee38339b54d3dc50492549c10",
+      "triangles": 3236,
+      "meshObjects": 5,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+      "minBlenderWorld": [
+        -34.78260803222656,
+        -21.660886764526367,
+        0.0
+      ],
+      "maxBlenderWorld": [
+        34.78260803222656,
+        21.660886764526367,
+        36.52173614501953
+      ],
+      "dimensionsBlenderWorld": [
+        69.56521606445312,
+        43.321773529052734,
+        36.52173614501953
+      ],
+      "dimensionsSourceUnits": [
+        3.999999923706054,
+        2.491001977920532,
+        2.0999998283386225
+      ],
+      "centeredHorizontalExtentWorld": [
+        69.56521606445312,
+        43.321773529052734
+      ],
+      "centeredHorizontalExtentSource": [
+        3.999999923706054,
+        2.491001977920532
+      ],
+      "centeredCeilWorldFootprint": [
+        70,
+        44
+      ],
+      "includesActualTwoBrushesArmsTankAndWheels": true,
+      "rootUnchangedNoRecenterOrFitScale": true,
+      "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+    },
+    "actualGLBEquipmentGeometryUV": {
+      "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+      "status": "passed",
+      "fixedOwner": "Body_static",
+      "all27BrushTankComponentsMatched": true,
+      "actualTriangleUvMatches": 504,
+      "components": [
+        {
+          "component": "STATIC low circular brush cap -1",
+          "actualTrianglesWithMatchingPositionAndUV": 46,
+          "actualVerticesMatched": 32
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 0",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 1",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 2",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 3",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 4",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 5",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 6",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 7",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 8",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 9",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 10",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block -1 11",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC low circular brush cap 1",
+          "actualTrianglesWithMatchingPositionAndUV": 46,
+          "actualVerticesMatched": 32
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 0",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 1",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 2",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 3",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 4",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 5",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 6",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 7",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 8",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 9",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 10",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC broad dark brush bristle block 1 11",
+          "actualTrianglesWithMatchingPositionAndUV": 12,
+          "actualVerticesMatched": 8
+        },
+        {
+          "component": "STATIC rounded gray green collection tank actual closed skin",
+          "actualTrianglesWithMatchingPositionAndUV": 124,
+          "actualVerticesMatched": 64
+        }
+      ],
+      "actualAssessment": {
+        "status": "passed",
+        "reasons": [],
+        "brushes": [
+          {
+            "side": -1,
+            "centerXYSource": [
+              -0.04999999701976776,
+              -1.0
+            ],
+            "minimumZSource": 0.054999999701976776,
+            "maximumZSource": 0.2199999988079071,
+            "radiusSourceMeasured": 0.25000001526599647,
+            "actualBroadBristleBlocks": 12
+          },
+          {
+            "side": 1,
+            "centerXYSource": [
+              -0.04999999701976776,
+              1.0
+            ],
+            "minimumZSource": 0.054999999701976776,
+            "maximumZSource": 0.2199999988079071,
+            "radiusSourceMeasured": 0.25000001526599647,
+            "actualBroadBristleBlocks": 12
+          }
+        ],
+        "tankMeasuredSpanSource": [
+          2.060000032186508,
+          1.8799999952316284,
+          1.0600000619888306
+        ],
+        "tankVertices": 64
+      },
+      "noBrushRollNodes": true,
+      "noEquipmentAnimation": true,
+      "viewIndependentSurfacePaint": true,
+      "sourceMispositionControlsRejectAndReset": true,
+      "actualGLBMispositionControls": [
+        {
+          "case": "brush-raised-above-cab",
+          "side": -1,
+          "translationSource": [
+            0,
+            0,
+            2.1
+          ],
+          "rejected": true,
+          "reasons": [
+            "brush not low above ground -1"
+          ]
+        },
+        {
+          "case": "brush-raised-above-cab",
+          "side": 1,
+          "translationSource": [
+            0,
+            0,
+            2.1
+          ],
+          "rejected": true,
+          "reasons": [
+            "brush not low above ground 1"
+          ]
+        },
+        {
+          "case": "tank-moved-over-cab",
+          "translationSource": [
+            -2,
+            0,
+            0
+          ],
+          "rejected": true,
+          "reasons": [
+            "tank outside rear collection zone"
+          ]
+        }
+      ],
+      "actualGLBBaselineRestoredExact": true,
+      "positionToleranceSource": 2e-05,
+      "uvTolerance": 2e-06
+    },
+    "actualGLBAttachments": {
+      "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+      "results": [
+        {
+          "id": "FL",
+          "actualTireSlabInnerAbsY": 11.478260040283203,
+          "actualStaticArmEndAbsY": 11.217391014099121,
+          "axialGapWorld": 0.26086902618408203,
+          "subpixelGap": true
+        },
+        {
+          "id": "FR",
+          "actualTireSlabInnerAbsY": 11.478260040283203,
+          "actualStaticArmEndAbsY": 11.217391014099121,
+          "axialGapWorld": 0.26086902618408203,
+          "subpixelGap": true
+        },
+        {
+          "id": "RL",
+          "actualTireSlabInnerAbsY": 11.478260040283203,
+          "actualStaticArmEndAbsY": 11.217391014099121,
+          "axialGapWorld": 0.26086902618408203,
+          "subpixelGap": true
+        },
+        {
+          "id": "RR",
+          "actualTireSlabInnerAbsY": 11.478260040283203,
+          "actualStaticArmEndAbsY": 11.217391014099121,
+          "axialGapWorld": 0.26086902618408203,
+          "subpixelGap": true
+        }
+      ],
+      "allFixedTrianglesSeparatelyClearanceProven": true
+    }
+  }
+}

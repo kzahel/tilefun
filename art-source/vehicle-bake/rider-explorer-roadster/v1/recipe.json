@@ -1,0 +1,72 @@
+{
+  "method": "Exact static GLB component graph/buffer assembly; child authored master/constructor proofs retained separately",
+  "config": {
+    "id": "rider-explorer-roadster-v1",
+    "canonicalConfig": "art-source/vehicle-bake/rider-explorer-roadster/v1/assembly.json",
+    "retained": "art-source/vehicle-bake/rider-explorer-roadster/v1",
+    "public": "public/demos/vehicle-bake/rider-explorer-roadster/v1",
+    "scratch": "data/vehicle-bake/rider-explorer-roadster/replay/public",
+    "qa": "data/vehicle-bake/rider-explorer-roadster-qa",
+    "base": {
+      "model": "public/demos/original-vehicles/classic-roadster-v1/inputs/model.glb",
+      "atlas": "public/demos/original-vehicles/classic-roadster-v1/inputs/atlas.png",
+      "master": "art-source/vehicle-bake/classic-roadster/v1/master.blend",
+      "replay": "art-source/vehicle-bake/classic-roadster/v1/evidence/replay-verification.json"
+    },
+    "component": {
+      "model": "art-source/vehicle-riders/explorer/v1/rider.glb",
+      "atlas": "art-source/vehicle-riders/explorer/v1/atlas.png",
+      "master": "art-source/vehicle-riders/explorer/v1/master.blend",
+      "replay": "art-source/vehicle-riders/explorer/v1/evidence/replay-verification.json"
+    },
+    "mountBlenderWorldPixels": [
+      8.695652173913045,
+      -5.6000000000000005,
+      12.608695652173914
+    ],
+    "prefix": "RiderExplorer",
+    "nativeSize": 224,
+    "method": "PREREQUISITE PROTOTYPE: unchanged frozen roadster and new static seated Explorer composed in one actual GLB/depth target. Original vehicle graph/mesh/paint buffers preserved; one new opaque256 rider atlas beside the original512 car atlas. Human review open; no normal activation.",
+    "limits": [
+      "One avatar and one fixed roadster seat only",
+      "No all27-avatar, motorcycle, AI, occupied fallback or animation qualification",
+      "Original standing/promoted characters and normal car semantics unchanged",
+      "Editable geometry stays in the two retained packed child masters; assembly placement is this recipe"
+    ]
+  },
+  "inputs": {
+    "art-source/vehicle-bake/rider-explorer-roadster/v1/assembly.json": "0c4163ac2ae24d8a6c367b51f5117238e1aaacf39aec6df1944ce05e093cc5e8",
+    "scripts/vehicle-bake/component-package.py": "4b88b7c8059c2bcae557cb869856abd68f966c78dc6edd5e1cb61dc7870b4e1e",
+    "scripts/vehicle-bake/compose-component.py": "6659e9d078ed6a317049ed50606551239c494c156cd6ef55586a7fe2f9ce7df4",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "public/demos/original-vehicles/classic-roadster-v1/inputs/model.glb": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "public/demos/original-vehicles/classic-roadster-v1/inputs/atlas.png": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b",
+    "art-source/vehicle-bake/classic-roadster/v1/master.blend": "d69ec2f5b7e109a1b0df63ec17c3775d8cdab7dd7c017e50306b01b362c4fd17",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/replay-verification.json": "d8226264687195e6aa70d315ab4b28b0c88d39000bb40e81f501a1c84f23b02b",
+    "art-source/vehicle-riders/explorer/v1/rider.glb": "519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+    "art-source/vehicle-riders/explorer/v1/atlas.png": "25475a94f315ee5af51ea830786bbe30435f01d4ddd00f32a0a7ce2719345007",
+    "art-source/vehicle-riders/explorer/v1/master.blend": "d9f7267a7681bad7de958f6805008d1d4bb8ac35c9962a1c47c841cd56a391b3",
+    "art-source/vehicle-riders/explorer/v1/evidence/replay-verification.json": "a54b7c829c0358eb15aeaf5ba8a2a38de33abee51ae16549a2668d0a587bd125"
+  },
+  "preservation": {
+    "baseSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "componentSha256": "519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+    "baseArraysPreserved": [
+      "bufferViews",
+      "accessors",
+      "samplers",
+      "images",
+      "textures",
+      "materials",
+      "meshes",
+      "nodes"
+    ],
+    "baseBinaryPrefixExact": true,
+    "mountBlenderWorldPixels": [
+      8.695652173913045,
+      -5.6000000000000005,
+      12.608695652173914
+    ],
+    "componentPrefix": "RiderExplorer"
+  }
+}

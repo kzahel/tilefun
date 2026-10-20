@@ -1,0 +1,322 @@
+{
+  "method": "Original snowplow: orange closed work cab with blue framed glass on actual skin; solid yellow curved scoop with separate dark cutting edge, four rigid gray mount links; open thick blue/gray V-section salt hopper with three broad top bars. All equipment rigid/stowed; no plowing, spreading, terrain modification or animated equipment claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      139,
+      71,
+      48
+    ],
+    "paintShadow": [
+      176,
+      85,
+      44
+    ],
+    "paintMid": [
+      208,
+      104,
+      48
+    ],
+    "paint": [
+      229,
+      118,
+      55
+    ],
+    "paintLight": [
+      250,
+      153,
+      69
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "deck": [
+      163,
+      168,
+      176
+    ],
+    "deckLight": [
+      184,
+      188,
+      195
+    ],
+    "deckEdge": [
+      124,
+      135,
+      145
+    ],
+    "deckSeam": [
+      98,
+      107,
+      119
+    ],
+    "frame": [
+      63,
+      69,
+      79
+    ],
+    "blade": [
+      249,
+      196,
+      57
+    ],
+    "bladeLight": [
+      255,
+      222,
+      98
+    ],
+    "bladeShadow": [
+      207,
+      146,
+      43
+    ],
+    "hopper": [
+      84,
+      118,
+      148
+    ],
+    "hopperLight": [
+      119,
+      151,
+      176
+    ],
+    "hopperInner": [
+      73,
+      91,
+      114
+    ]
+  },
+  "semanticOwners": {
+    "orangeCabSides": {
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        176
+      ],
+      "meaning": "Actual short closed cab skin, coherent blue glass, dark frame and door seam; no overlay"
+    },
+    "cabFrontAndRear": {
+      "atlasPixelRect": [
+        0,
+        176,
+        512,
+        256
+      ]
+    },
+    "cabWindshield": {
+      "atlasPixelRect": [
+        0,
+        256,
+        512,
+        336
+      ]
+    },
+    "hopperVSection": {
+      "meaning": "Actual thick open V shell, separate blue outer and dark inner skin, gray end plates and three broad gray top bars."
+    },
+    "curvedPlowBlade": {
+      "meaning": "Actual .09-thick yellow curved scoop with dark lower cutting strip and closed sides; fixed slight yaw."
+    },
+    "fourMountLinks": {
+      "meaning": "Two lower and two upper fixed gray links on inner frame, clear of all rolling cylinders."
+    },
+    "guardsAndUnderframe": {
+      "meaning": "Four integrated rounded open guards, gray rear/orange front, dark real underframe."
+    },
+    "wheels": {
+      "meaning": "Four independent tire/rim/hub surfaces; no guard paint on tire surfaces"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "rubyLight": [
+      80,
+      504
+    ],
+    "deck": [
+      112,
+      504
+    ],
+    "deckLight": [
+      144,
+      504
+    ],
+    "deckEdge": [
+      176,
+      504
+    ],
+    "deckSeam": [
+      208,
+      504
+    ],
+    "frame": [
+      240,
+      504
+    ],
+    "blade": [
+      272,
+      504
+    ],
+    "bladeLight": [
+      304,
+      504
+    ],
+    "bladeShadow": [
+      336,
+      504
+    ],
+    "hopper": [
+      368,
+      504
+    ],
+    "hopperLight": [
+      400,
+      504
+    ],
+    "hopperInner": [
+      432,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Original authored semantic UVs including unseen surfaces; no projected source or high-to-low transfer claim.",
+  "outerInk": "Shared exterior pass RGB58,58,80; no geometry outline shell."
+}

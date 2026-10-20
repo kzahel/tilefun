@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/open-wheel-racer/v1/report.json",
+  "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+  "atlasSha256": "da6c29549c53caca746352dcb1297c33ee50ef16f02e9b3dd92884b0f4f714f5",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/open-wheel-racer/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/open-wheel-racer/capture.mjs",
+    "python scripts/vehicle-bake/open-wheel-racer/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/open-wheel-racer/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/open-wheel-racer/v1/evidence/clearance-input.json data/vehicle-bake/open-wheel-racer/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/open-wheel-racer/v1/model.glb --config art-source/vehicle-bake/open-wheel-racer/v1/coverage-region.json --output data/vehicle-bake/open-wheel-racer/recheck-coverage.json",
+    "python scripts/vehicle-bake/open-wheel-racer/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/open-wheel-racer/author-config.json --qa-only"
+  ]
+}

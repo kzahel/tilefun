@@ -1,0 +1,21 @@
+{
+  "status":"no-blocking-issues-for-prerequisite-pilot",
+  "riderSha256":"519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+  "humanApproval":false,
+  "observations":[
+    "Inspected all16study+16game combined and rider-alone native captures, both-camera combined/rider wireframes, original224front/rear obliques and same-bounds4x nearest identity details across all32headings.",
+    "Short brown hair, warm face/eye pixels, teal jacket, dark brown trousers/boots and canvas backpack preserve the approved Explorer identity palette. Head is volumetric with view-independent source-derived front/back/profile UV paint; no standing sprite or billboard.",
+    "Side views show actual bent thighs/knees/shins, arms/elbows and warm gripping hands. Front views foreshorten those bends naturally. Backpack remains behind the teal torso and above the seatback, with0.991304world vertical separation.",
+    "Actual shared-depth combined views occlude lower legs/boots behind door rails and windshield/cockpit geometry. Far limbs interleave coherently. Visibility masks prove1..79actual rider pixels hidden by car depth across heading/camera sets; masks never add pixels outside rider-alone alpha.",
+    "All32rider-hidden pixels exactly match unchanged frozen classic-roadster-v1 views. Both assets use same yaw/camera/normalized parent/native224/radius112 clock and one real depth target, followed by the shared CarPixelOutline pass.",
+    "Actual contact sockets match declared hip/cushion, palm/rim and sole/floor targets below0.0001world. Actual surfaces have only declared palm-rim, pelvis/cushion and sole/floor contacts, zero inappropriate intersections and zero vertices inside the closed main car body. Translated-into-hood negative rejects and reset restores.",
+    "Desktop/mobile view, camera, heading, wireframe and zoom controls work without page overflow. Self-contained offline viewer reproduces exact combined pixels with zero network requests."
+  ],
+  "limits":[
+    "Prototype-not-production; humanApproval:false. One static Explorer and one roadster seat only. No normal activation, all27-avatar, AI-occupant, two-wheel-bike, fallback, pooling/resource-lifecycle, remote-player or authority/prediction qualification.",
+    "Native face/eye pixels, straps, near/far hands and boots alias or merge at shallow headings. Same-bounds integer magnification is inspection only; all original224captures retain fixed world density.",
+    "Palms intentionally wrap the rim solid at exact source centerline grips; those local contacts are explicit overlap exceptions, not a universal clearance pass. Hip/cushion and sole/floor contacts are static tangencies. No animation or pose transitions qualified.",
+    "Approved standing PNG is immutable identity reference, not a seated approval or target. Existing normal vehicles continue hidden-driver semantics; this isolated viewer changes no runtime or promoted character bytes.",
+    "Parent independent prerequisite art review remains pending; a second seat/bike profile and separate engine/failure-matrix qualification are required before motorcycle availability."
+  ]
+}

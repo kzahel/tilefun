@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "tow-truck--v1",
+    "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+    "triangles": 3394,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.52174043581134,
+        "minimumGap": 0.961634769265947,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.52174043581134,
+        "minimumGap": 0.961634769265947,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.52174043581134,
+        "minimumGap": 0.9616421918921692,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.52174043581134,
+        "minimumGap": 0.9616420400367662,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

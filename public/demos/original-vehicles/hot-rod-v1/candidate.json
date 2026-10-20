@@ -1,0 +1,770 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "hot-rod-v1",
+      "name": "Hot rod",
+      "title": "Hot rod \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Independent chopped closed-cab hot rod with narrow exposed V8/chassis, intentionally open small front wheels and real rear fenders covering fat rear tires. Plum coachwork and restrained orange flames use own continuous actual-skin charts. Separate fixed glass/roof ownership; no screen projection.",
+      "audit": {
+        "triangles": 3194,
+        "vertices": 6335,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 231608,
+        "sha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.565217391304349,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.565217391304349,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 9.56521739130435,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 9.56521739130435,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/atlas.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/atlas.png",
+          "sha256": "4ee45269c3ebe6b291f13789fc0bf7e947d3555fa9e75d86e75b4ec95454ddff"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/capture.json",
+          "sha256": "55d07580aa012e9ddde283877a54e422142422a076295e790eccc357f9048b92"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-0.png",
+          "sha256": "51cb1d3fcfa83df9a8655ced4c44383875eca73ca52db6e6c506940079ce970e"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-1.png",
+          "sha256": "15310718b104b3624a59fc21bc8f65f67dfe08333c5c282e7b6350f74ea28e02"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-10.png",
+          "sha256": "4f27f28c94a8821015db6b7928b956df918181370d9a836aa8627fd4ab262d56"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-11.png",
+          "sha256": "1e0dd84ad00d879712a9f69da6e8e933ad6ec23ffd07f4d9c10ba1a8559c19a6"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-12.png",
+          "sha256": "a8f84fcce25fe179128c8187872ee1777d3edcbbc1ad0bb62d576bdabc2d6799"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-13.png",
+          "sha256": "f06e9dd3d9b2fbfdfda90cf53701dcf4c4bfbb91a6f111225e0cc142474f59bb"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-14.png",
+          "sha256": "c2ca3e7871995c5d3b6d9bd3968808e624970ece0b3f978aa2163cbfda57b9bf"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-15.png",
+          "sha256": "7c2a3a62e9e66933e2af04285e06820421e0c014dfc4bbd7e0ecbc4e7ec4689b"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-1x.png",
+          "sha256": "be0af7e7a0da77bca370279c60cba13f75908f4b35b0d56dc77f3e645e95499b"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-2.png",
+          "sha256": "9f931d68f6245bcfebce4b2c9d7d94755b953143ac2c1466e325460a684dc0fc"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-2x.png",
+          "sha256": "9bbb0a6ed18c5103bf8ebf468930559a7acba87ab7e6b5fd30c9a6f7dcb846ac"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-3.png",
+          "sha256": "71db8fb9b9beb9adeb457ce73f7b7ab0a4054cd8a76300060c07be41b73fbd0a"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-3x.png",
+          "sha256": "dd5b6e2b4005fb19e92aefe881d9f5057d1b0535814644d040b3e8333670c2cf"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-4.png",
+          "sha256": "baf56ebe1113f2c95786b918c6dc135fe274047cf4d2d4e16acca7236746cde4"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-5.png",
+          "sha256": "a01d6ddf534ea1370f9ac46970180a51e9d7824cf78829c5ba631a48cb103e1f"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-6.png",
+          "sha256": "7ee74618328db5d69944cbe4968a9b6c1bbf9bd668528133de6b8c9a2ea6d5e5"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-7.png",
+          "sha256": "7443455aaa8c50f1d5f2f0842026547ae55b6af92acf39d5f3d7f09571196b32"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-8.png",
+          "sha256": "3335f6e8e8c0c64c728a5bfdfc13da6d5e14116d825e9f011b48c1e5cf4864b8"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/engine-9.png",
+          "sha256": "14c2fadfc5eb81671c8387f67cd3d0f68ba6faf4b7c3b25836270cd5780aaab3"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-engine-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-engine-0.png",
+          "sha256": "9f931d68f6245bcfebce4b2c9d7d94755b953143ac2c1466e325460a684dc0fc"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-engine-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-engine-1.png",
+          "sha256": "88cb068652874bef6a8a49983ca841ef6d0d551a5137386e42951fbcb92b0d7c"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-engine-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-engine-2.png",
+          "sha256": "0bbe822654559145ef21c272a5c64bd3c7d1453317f7aada722d8e807d9d094d"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-engine-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-engine-3.png",
+          "sha256": "2a11280da1ca794de71bc7a4841c38b55f2b6fe5f9e73ce91bdb2486ed9c29ec"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-engine-4.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-engine-4.png",
+          "sha256": "c9a08f4a63e849ed515ac02f86943bf13e65cbe777dbd286212669db9f0a488a"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-engine-5.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-engine-5.png",
+          "sha256": "d68a69a86466bc15ff2b990aade5aa03db2fefdecb40e5c0b0fa90ac109e82e5"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-engine-6.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-engine-6.png",
+          "sha256": "a14edbf20899fe93073df59b1d7bd7bbf18be5128cc156f21167ec2cf92dc52f"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-engine-7.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-engine-7.png",
+          "sha256": "8bfb326f1a78316bd40e1a3312d57ab846ba1c77114dd01d7afda40586052f46"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-study-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-study-0.png",
+          "sha256": "272260fccdceaffda3ddfc66d37636a573c8952d5088fbe772a90b5254896635"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-study-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-study-1.png",
+          "sha256": "d22c620dbea6dfa2caf99e64b19b57a4252ba7d13f26070c95267c7fc86f2d00"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-study-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-study-2.png",
+          "sha256": "59b9514c59bbb5b16cfccf5a1e07a2e1a3a49d53aba070a0169adcf18ad3a93a"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-study-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-study-3.png",
+          "sha256": "624949c68d68baeb76df107011f9bb56ec1c56226b186e13b43d9f3e60230ec1"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-study-4.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-study-4.png",
+          "sha256": "4006f3a1a741f8bafc0d871cd8caf49ff00382774f6fda709a733d3ebaa962db"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-study-5.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-study-5.png",
+          "sha256": "fb9a8b59bf4da5c43e8642a946a739a21e2b88ea33fa3e8cfe3051daa097b675"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-study-6.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-study-6.png",
+          "sha256": "65449b48825f81ea7ed2ae29c7fb5cf05810a16559e7574426be3311ca9a510d"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/equal-phase-study-7.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/equal-phase-study-7.png",
+          "sha256": "39b6d97c7d4102a9acf998d663612242ea1b2cd56801b26e75d01e48e9462bdd"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/game-roll-0.png",
+          "sha256": "9f931d68f6245bcfebce4b2c9d7d94755b953143ac2c1466e325460a684dc0fc"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/game-roll-1.png",
+          "sha256": "29251aa9fbe5cdb444279ac9d78de5637f01a87512770fb33871b81e729d6dd5"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/game-roll-2.png",
+          "sha256": "900ebcce25b8d74d0947dadc8c1ef2f3e851df10006facdbac1fa686ae8f2d6a"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/game-roll-3.png",
+          "sha256": "6cac5e759bf86a471ac18691b527f191dd298eaf80ee67dc2504eae445161d3f"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/game-roll-4.png",
+          "sha256": "ab48a253746685264c9bf7365f2392c2116448cf698f47ebb1ba2df8aa573ac0"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/game-roll-5.png",
+          "sha256": "12907bf8b8dea9d37620eb5d781ade432badc1e7909d802eaa47862dd65fda86"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/game-roll-6.png",
+          "sha256": "98bdc6120a1463b17f3a0e9dc48248e2a8262c76bfc979007b7059ac5e55ee3f"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/game-roll-7.png",
+          "sha256": "8348a81a32a1ca42be22e637622311263d38063c0885841f21fa064eda3f3a52"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "51cb1d3fcfa83df9a8655ced4c44383875eca73ca52db6e6c506940079ce970e"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "54cd4dd0823fd80211b87bf5f18e49373f1a907fd8daaefbbb84df95e20ab880"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "e5a80e02270f7c48ad293347eaaa42570ca4e03ed8e627d2b010f69b65e9ce88"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "51cb1d3fcfa83df9a8655ced4c44383875eca73ca52db6e6c506940079ce970e"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "3335f6e8e8c0c64c728a5bfdfc13da6d5e14116d825e9f011b48c1e5cf4864b8"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "d65b42bfd6fa3cb7d1353e9ae161b90c8d0a121dd8a602e2b399f96374114ebd"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "2176c69b16f167d3defc5ce8f220312e6002ca06d1dd864f6de885c75de21998"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "3335f6e8e8c0c64c728a5bfdfc13da6d5e14116d825e9f011b48c1e5cf4864b8"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "51cb1d3fcfa83df9a8655ced4c44383875eca73ca52db6e6c506940079ce970e"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "c2a91bc4b9e085a34d568ae52a90e5cf0616feb1e5a08a4be1232e81ee31edf8"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "0ce6488c4bd5e05293d5c80d5eaf333c7b35aa41d15b00ca0d31b5416eeb2a38"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "51cb1d3fcfa83df9a8655ced4c44383875eca73ca52db6e6c506940079ce970e"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "3335f6e8e8c0c64c728a5bfdfc13da6d5e14116d825e9f011b48c1e5cf4864b8"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "84032d3dcf998f143545dcef0a2f12475c1c329ae75723558d0b63d784439c30"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "fc0316041f38b6f8a03d11c3c89e60a52186c0b52e719e3cf6f5034f46cf5bf1"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "3335f6e8e8c0c64c728a5bfdfc13da6d5e14116d825e9f011b48c1e5cf4864b8"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/independent-visual.json",
+          "sha256": "5eca045f8a976531fb1f7d7cc377082c2023e893bfb26544dd4939d0041cd1c7"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-engine.png",
+          "sha256": "b0e03ebfdd77a0223d69ab65c3e48f8258a7091f66d9e18269fe838c5624d8a4"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-equal-phases.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-equal-phases.png",
+          "sha256": "610113afe0e56e04514685eae0b368ffcab134e16c91a1b18ef5718af5cf01b2"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-independent.png",
+          "sha256": "055e19d42dcc51136dfa773bde6cbc395a969e2708feb49364be4950cca414aa"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-phases.png",
+          "sha256": "8ec432d03a2fac998b09efb29fd64cb22e68582eccd01303ca13690bafadd95b"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-study.png",
+          "sha256": "f452348bbba7fad2a7eb54dcf2593dda6dd5ccab220922a2ae01c77c493b59d0"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "cb6d74fd87e5208b386311724b723d7cde821ddca8c478f06fb002b4e57a7e20"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "9cacf13c0c8ba9ef52e3a2149c19eb649d4d041e2df8b5794cc881a5f3195953"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "96028a6858891bcdac73395d896bbeb49991cd712dd2dd17bd8c2e0efbc9ddda"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-wheel-id-engine.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-wheel-id-engine.png",
+          "sha256": "60e1b7d0cc4054487e823079dc09ec080c95c7ae3f5e6d4fb9a0daa4ae5ac522"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-wheel-id-study.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-wheel-id-study.png",
+          "sha256": "be6fad0ee8322b709151c73aedac87ca10607633a3f5b6fa9f146b6e60bdfc8b"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/inspection-wires.png",
+          "sha256": "09c396c29826c2006d40941368aa2b7ac6990589999ba13e1585c90822d8d4ae"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/mixed-wheel-visual.json",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/mixed-wheel-visual.json",
+          "sha256": "61440403733f9cfa6eda3b31354668afbb0b2e7ad7802c86b38106aeab421104"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/roll-0.png",
+          "sha256": "272260fccdceaffda3ddfc66d37636a573c8952d5088fbe772a90b5254896635"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/roll-1.png",
+          "sha256": "e64a935ceb48b9bbb1cf68cc079d51559a1bf9e1ea65b26eea79d95bdb12c460"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/roll-2.png",
+          "sha256": "62e4d9e7cb6ef26ae713a63ab4dfeae3edc2cee6e12d575f907332fafe60ff9e"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/roll-3.png",
+          "sha256": "72717101142bac7b70359e0db97e772a588b06d2f6746ac5e13d6642a1da8148"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/roll-4.png",
+          "sha256": "fe0b4069d080f5f936d869c1f956c91b04157477205d50017e4976f91eb57c1f"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/roll-5.png",
+          "sha256": "b68533bbc51b27b9083d7c2bb848828752b6fba7234f88e14beaa3c020823d6a"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/roll-6.png",
+          "sha256": "4d72d4acfccff4f42f300340aab78db38f9ca51f6d6034d27ab74b955da29943"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/roll-7.png",
+          "sha256": "02055f8de3ffaac7dfb1eae7978c461c2fc73e66b356106bee52d2d266a5dab3"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-0.png",
+          "sha256": "62e6408e9cb6d63fdf6374377d09897baf828a172ce1f10324b2bf2226912dcb"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-1.png",
+          "sha256": "89475d0ad3a8ff1440a57fc84e8a8ac5c6473214118e1d59b546fd6714b055ef"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-10.png",
+          "sha256": "24d4f662291cba025b534f7e851d26ecedb8a2dee58c9ee6bf70997abd1cd9d4"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-11.png",
+          "sha256": "0bcbc93019971ff8d1136c88976cc9f76be4996eb622f9a1c25d71a087c56433"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-12.png",
+          "sha256": "aab7b5fdbafde50f489df1f0eda5220bdd73d56eb795e28433bd916c69c81464"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-13.png",
+          "sha256": "c8189167ada124a8ddefef726fa17b54bac84affaedbcfba518d080cd6be19e9"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-14.png",
+          "sha256": "2a391bfc05ee9730f16aadc93d76d9cb88ddb607d648eaddbabeb330684b061b"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-15.png",
+          "sha256": "bcb29ef93bff2bf93216c761750e11a364ddbe9bbb6b7a50ca6c8b2c06dc8782"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-1x.png",
+          "sha256": "0db2449169997528330fa6cf62ea378ff87ad1f4429f3d7f1fd937a82470b765"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-2.png",
+          "sha256": "272260fccdceaffda3ddfc66d37636a573c8952d5088fbe772a90b5254896635"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-2x.png",
+          "sha256": "5c0b9508ac25869deb23e7c09e28b3f92f26a75f1e1d048f242ab33cf2ccc9ae"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-3.png",
+          "sha256": "f0bd7784ac7dadbb13ab6fd90a82f24de95baf72530e2729cd5d8da808dfa1a8"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-3x.png",
+          "sha256": "88e74545f6c63b88bc93870093e4f48d6c05d509eb5a9dcb6b0ed7ec1d1b7e14"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-4.png",
+          "sha256": "3a9c9506b40c7fd4e4453fd09a75b372cfecd35b9e593ce9da0c94578d9c8dc7"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-5.png",
+          "sha256": "c80033c74770fed985ae7e2bea1120d241f4a76a9605b705003586d9a1e56c73"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-6.png",
+          "sha256": "451c9064a865ad2b750b864cb1bf354dad6f8a65bd69a21f98533033767c98de"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-7.png",
+          "sha256": "e48d3905336f3efa7b20c1e18509a12a35af2d444fc771996f249f1512e66ebd"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-8.png",
+          "sha256": "5f0bba3861ec09613ee12860db131fc6f9cd90a1b571a8aa5f2475c31e6f6504"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/study-9.png",
+          "sha256": "820e8c2dee01c15760007b4420a05fbab43d2b247fc7d73ccbe0fca14c440595"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-0.png",
+          "sha256": "e1223260a04474c094ceeced830caffc1add5c83b30edfa2464d68f3ff096a71"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-1.png",
+          "sha256": "496a06b6ca4a6d952deda452cd580274be0819d78b285fbad8109d16ea523d03"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-10.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-10.png",
+          "sha256": "c7d20a98fa0cf5751319be2f2f92ea8ccab7bfe71298b5f576857abb8184da7f"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-11.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-11.png",
+          "sha256": "4bcea22599079f36e6a2be05cf53759244bb62a66a19fbd98d34ce3f4a58c847"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-12.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-12.png",
+          "sha256": "70cd989322b3270e57246cf7782e45847a332bfbdec5769e3af53419b384643d"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-13.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-13.png",
+          "sha256": "4068430824159c1d5e7cea570ef7e0ffb1d7bf213741f05cad5dfa2115ea0fd6"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-14.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-14.png",
+          "sha256": "aa45ebdcec4bb5ea4efd34059ac81bb31e5b32744424b9a7d36eb95d35bd02c9"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-15.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-15.png",
+          "sha256": "9d0914b6643d3574d77a2d696b05f3dc5707aec3dfc08eda7384cf4679048cbb"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-2.png",
+          "sha256": "9ef6940b99a0b5774468d1fc109c44ef1cd141a656c07befc068540963509cf5"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-3.png",
+          "sha256": "9af002c4350139a7eddf381060b8488d52c46455ab1f7141038516f17db64d66"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-4.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-4.png",
+          "sha256": "b1b8cae49853bb1713b6be03ec39d32a5c9af36da5b827f5cbe29a8e38e0a48b"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-5.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-5.png",
+          "sha256": "4e7ef970aa9a65edd0fae0893f1259902c5301633c7ed4a1341e45bd05054317"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-6.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-6.png",
+          "sha256": "868c05fd9adb9ebbb84af0a7e1e2719e8f26a9935c816c499a1b2dab930ead10"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-7.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-7.png",
+          "sha256": "51d88e6941f0bc298442e9dd571d001f326e3c9c9fbd405e6957d5045a90f915"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-8.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-8.png",
+          "sha256": "7405ad08f16b6cf599d7d6a08682e5255739efe34c0adc763e4ae9480acc5173"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-engine-9.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-engine-9.png",
+          "sha256": "ef85984afbe5c0c9b48fbe29af1824d58201247235fc54ce372caad7348e72e0"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-0.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-0.png",
+          "sha256": "2044e1005379ef820674882ee104d51933cd8d6d225a11245e22319a9b12700e"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-1.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-1.png",
+          "sha256": "49b441ffdc7c47073b4b838a512cb11be9495d100dee6527ecfcff67f14cf58e"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-10.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-10.png",
+          "sha256": "fbdc28fa9db1ad1113acd2bbe2ebe0dd19d9b44ef83e2c0fee6c0d400cb2c4d1"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-11.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-11.png",
+          "sha256": "2a99ad9a02ea6e64405e90c1cb909d11085e0009904825a5ee6dbc840a7be8d0"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-12.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-12.png",
+          "sha256": "b064dfa72a54d3ee7b211b3d62f9a383d6562c98d43989bc8f4f188ded0f4e45"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-13.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-13.png",
+          "sha256": "3558086dcffa4660a20590a3cf0d500b96ece21dfb50fd1df9eb01abe5444174"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-14.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-14.png",
+          "sha256": "016be3f604c1052f95a9c65161b1f68d13d6c9b48a713e8301dfb329a249f870"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-15.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-15.png",
+          "sha256": "0ff41a7e70085256a80024faff6149749664681577271971151674fad7895323"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-2.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-2.png",
+          "sha256": "aeed7b0638028d8d7f2973923eb66b90b0a8148629b7ab7a3c44d6d2a2426b15"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-3.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-3.png",
+          "sha256": "46604752f63d756615034562ff7164ace4280eab9d8eb86d4cddcf6d207fa0b4"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-4.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-4.png",
+          "sha256": "6a439824e6ea5d18797c261a4bbb807c2c12f4bb57a8ea254d13cbe7871dfcc0"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-5.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-5.png",
+          "sha256": "e71c29317fb3339ab991f397d2bad30cfcf2d70b72e9fd79e4aa207c80975ac1"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-6.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-6.png",
+          "sha256": "73074dae533dc3a3b2d230c1d9d8795cb48b1c3316e1c0e923641db4b8317da9"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-7.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-7.png",
+          "sha256": "6ab8cb5fedb283b11561382e4fe95896232a2b1b20028822a90a473cb6184c56"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-8.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-8.png",
+          "sha256": "305d66c6da306c92056bd62c531656f0edb2c0018477e5e7133ec0aaf7442684"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wheel-id-study-9.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wheel-id-study-9.png",
+          "sha256": "6a3919b0bf0e929bf95cf602d797a42b2c7383c8522ef83b002c17abab511145"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wire-engine.png",
+          "sha256": "23c27feaae4459f8ec37065c25fd4882de7d7a9045edbc072ba0b02ddb6d3fbf"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/engine/wire-study.png",
+          "sha256": "fcf811139e8407b60634be94a15cef93957fff5ee7abb2c77280a288aff03c03"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/model.glb",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/model.glb",
+          "sha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/recipe.json",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/recipe.json",
+          "sha256": "649f8267aa74e1f1b5bb7143612aaf1d4d5515491ef8d07e1451f59b9c585f3c"
+        },
+        {
+          "source": "demos/vehicle-bake/hot-rod/v1/report.json",
+          "retained": "demos/original-vehicles/hot-rod-v1/inputs/report.json",
+          "sha256": "709d046b9573a9fbf5a3506e7a13e2aa01efd6e0e5d682a9835a98e134325f81"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

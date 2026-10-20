@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "woody-wagon",
+  "independent": true,
+  "declaredInputPins": 17,
+  "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/woody-wagon/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/woody-wagon/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/woody-wagon/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

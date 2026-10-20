@@ -14681,6 +14681,61 @@
       "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
     },
     {
+      "id": "projection:original-vehicle-microcar-v1",
+      "batchId": "original-vehicles",
+      "name": "Tiny bubble microcar · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/microcar-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "a1d55a976eece7ac59080c912f5895affd3ff195a38553483bde4206d873600e",
+      "sourceFingerprint": "a1d55a976eece7ac59080c912f5895affd3ff195a38553483bde4206d873600e",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-woody-wagon-v1",
+      "batchId": "original-vehicles",
+      "name": "Wood-panel station wagon · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/woody-wagon-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "6c9f9405125287671a8776daa87544aab15892301b2952b65f375bba723ca7fd",
+      "sourceFingerprint": "6c9f9405125287671a8776daa87544aab15892301b2952b65f375bba723ca7fd",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-stretch-limousine-v1",
+      "batchId": "original-vehicles",
+      "name": "Stretch limousine · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/stretch-limousine-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "630bc201ae4103a6ac0a959edeeb4b28a8958b01d730156d7dff7f3a84c523fb",
+      "sourceFingerprint": "630bc201ae4103a6ac0a959edeeb4b28a8958b01d730156d7dff7f3a84c523fb",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-hot-rod-v1",
+      "batchId": "original-vehicles",
+      "name": "Hot rod · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/hot-rod-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "2249891ddbf57334c0d13cb6736b7cbae8c0b989fd148978406b2411f372b203",
+      "sourceFingerprint": "2249891ddbf57334c0d13cb6736b7cbae8c0b989fd148978406b2411f372b203",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rally-hatchback-v1",
+      "batchId": "original-vehicles",
+      "name": "Rally hatchback · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rally-hatchback-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "121ab64b52f9679ea8cf7ac4c3be4ab72581f37a75df404247a1b9c00e9d39e6",
+      "sourceFingerprint": "121ab64b52f9679ea8cf7ac4c3be4ab72581f37a75df404247a1b9c00e9d39e6",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
       "id": "projection:original-vehicle-explorer-boat-v1",
       "batchId": "original-vehicles",
       "name": "Explorer motorboat · hollow hull and outboard v1",
@@ -46976,5 +47031,5 @@
       }
     }
   ],
-  "inputDigest": "08f208d637eda3b64cf65c1cfff835f06f4c1451f3b516fdc2f2c936ff84e461"
+  "inputDigest": "70b170a5e9fd5ae677127dc6d28461fbdbf0217fcd573745fb97776df4781afd"
 }

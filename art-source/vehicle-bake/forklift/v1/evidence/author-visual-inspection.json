@@ -1,0 +1,39 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+  "method": "Actual exported GLB native224 captures and fixed-camera-crop nearest2x sheets, no bitmap paint-over or per-heading fit. Agent QA only; parent independent review/freeze pending.",
+  "observations": [
+    "All16study+16game actualheadings inspected: mustard rounded rear counterweight, low dark seat/open footwell, four slimguardpillars/openroofframe, talltwinmast/crossbars and two true low forwardforks recognizable.",
+    "Front .32source roadwheels deliberately exposed outboard of narrow chassis, attached through subpixel axle gaps. Rear .25source crowns covered under realcounterweight localpockets. No fakecaps or frontcovered metric asserted.",
+    "All8signeddistancephases/camera,16equal-angle phaseviews,bothwireframes and32four-color wheel-ID diagnostics inspected; four unequal-radius roadwheels stay in place whilemast/forks/seat/guard/body remain fixed.",
+    "All4independentquarter/reverse/reset image sets inspected. Tinyasymmetric hubmarks move subtly,positive3-6channel changes perwheel andpixel-exact absolute reset;allothermeshesfixed.",
+    "Actualopenfootwell floor.36 underseat.80 =>.44source depth. Mast/guard/fork-gap voids are genuinegeometry and all-triangle probes plus4fillednegativefixtures/reset pass in source+GLB.",
+    "All37fixedsourcecomponents/1,700fixedtriangles match actualGLB position+UV corners within exporttolerance. No negative-space decal or glassplanes.",
+    "Fullnative224/radius112 and128/224 centeredgamecrops exact,zerooccupiededgepixels;all4fallback192x224cardinalimages preserve everyoccupiedRGBApixel bytranslation(-16,+32),no scaling.",
+    "Desktop/mobile/offline screenshots andchecks pass in bundledfullChromium,nooffline networkrequests;browser/serverreaped.",
+    "Thin guard/fork/hub palette features have expectedheadingaliasing; seat is unoccupied withordinaryhiddendriverconvention,no standing-person claim. No lifting or specialforkliftsteeringgameplay."
+  ],
+  "inspectedImages": {
+    "author-view/captures/inspection-engine.png": "5107757c765c37247f1f4af6fcb89c611ee09a6919f0044b8a36546036dd0721",
+    "author-view/captures/inspection-equal-phases.png": "847d462863446a1e9bc6c25f80281168636b360a1aef3ff833d951a46cde786f",
+    "author-view/captures/inspection-independent.png": "0d476552e63ae06d969730bf871b4fd504b144ccc71b350ff303278d54d768a8",
+    "author-view/captures/inspection-phases.png": "4fee6f87cf8dd2495ad5456662f0859a34cd1e21a087927da571bc78eed9aa12",
+    "author-view/captures/inspection-study.png": "245ffad843e14613806056f14330d759f4ced94b9289a1b5f8cba6f44ab69d87",
+    "author-view/captures/inspection-tight-engine.png": "a7d5166013a6fd51345dc2dc5f63e0f41f2f1e9a59946805c37aab5c7f89d623",
+    "author-view/captures/inspection-tight-phases.png": "101494fbd9af8c816d69866bf756ff40e5528fbaf063747cd2190a9f6ade7bb9",
+    "author-view/captures/inspection-tight-study.png": "ffb71a86ac9fe44291ace9a2ce0f009ed2e38b2bb9d26b71d50d18c1bf2133d0",
+    "author-view/captures/inspection-wheel-id-engine.png": "da22a75c9e6d03ace9c97298f08a560d422972f225cb878ea95bb82b68c89022",
+    "author-view/captures/inspection-wheel-id-study.png": "2f56cb483ef51dca33e309ff3abffa3114966291bb184718b50bbd054145a00b",
+    "author-view/captures/inspection-wires.png": "c97397a6ff857f4bb0ce885d73d755f41522cfdbc0c95aa4d6137a3a0137e21c"
+  },
+  "inspectedBrowserImages": {
+    "desktop.png": "e7b9e1b2473b6ac630f78f57fe49e1ae5eccbb7ca0daeffac39dc87367188d9b",
+    "mobile.png": "4460860bc17a5292b07e3151f6cba6903e8e00b0f21363f81d1c942d94f47b66"
+  },
+  "limitations": [
+    "Neutralrollonly;nonzerosteering/suspension/equipmentmotionunqualified.",
+    "FrontcrownsN/A/intentionallyopen,raw0/25expectedcoveredfailuresretained;rear25/25ownfinitefootprint.",
+    "Groundrootunchanged;actualasymmetricforkspan3.7source vscentered4.6source,physicalfootprint80x28worldmeasuredwithoutrescale.",
+    "Parentholdremains;independentQA/freeze/registration/runtime/globalchecksparentowned."
+  ]
+}

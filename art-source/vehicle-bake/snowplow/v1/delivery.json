@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/snowplow/v1/report.json",
+  "glbSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+  "atlasSha256": "1bd3583afd6b0e40b8e8de54f564e3b97adc68396313c15fbad7eb880c9c57bc",
+  "replayCommands": [
+    "python art-source/vehicle-bake/snowplow/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/snowplow/capture.mjs",
+    "python scripts/vehicle-bake/snowplow/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/snowplow/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/snowplow/v1/evidence/clearance-input.json data/vehicle-bake/snowplow/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/snowplow/v1/model.glb --config art-source/vehicle-bake/snowplow/v1/coverage-region.json --output data/vehicle-bake/snowplow/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/snowplow/v1/prove-equipment.py -- --input public/demos/vehicle-bake/snowplow/v1/model.glb --output data/vehicle-bake/snowplow/recheck-equipment.json",
+    "python scripts/vehicle-bake/snowplow/measure-fit.py",
+    "python scripts/vehicle-bake/snowplow/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/snowplow/author-config.json --qa-only"
+  ]
+}

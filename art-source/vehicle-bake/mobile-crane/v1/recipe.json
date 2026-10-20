@@ -1,0 +1,956 @@
+{
+  "family": "orange-yellow-low-mobile-crane-rigid-stowed",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    7.4,
+    2.6,
+    2.85
+  ],
+  "wheelRadius": 0.51,
+  "wheelWidth": 0.34,
+  "axles": [
+    -2.7,
+    0,
+    2.45
+  ],
+  "halfTrack": 1.08,
+  "arch": {
+    "cutRadius": 0.61,
+    "pocketInnerY": 0.78,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [
+      0.8,
+      0.94,
+      1.17,
+      1.26,
+      1.3
+    ],
+    "shoulderRadii": [
+      0.63,
+      0.68,
+      0.68,
+      0.66,
+      0.63
+    ],
+    "archRadius": 0.605
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      160,
+      83,
+      44
+    ],
+    "paintShadow": [
+      193,
+      103,
+      45
+    ],
+    "paintMid": [
+      219,
+      123,
+      45
+    ],
+    "paint": [
+      236,
+      145,
+      55
+    ],
+    "paintLight": [
+      255,
+      178,
+      66
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "deck": [
+      163,
+      168,
+      176
+    ],
+    "deckLight": [
+      184,
+      188,
+      195
+    ],
+    "deckEdge": [
+      124,
+      135,
+      145
+    ],
+    "deckSeam": [
+      98,
+      107,
+      119
+    ],
+    "frame": [
+      63,
+      69,
+      79
+    ],
+    "boom": [
+      246,
+      202,
+      74
+    ],
+    "boomLight": [
+      255,
+      222,
+      112
+    ],
+    "boomShadow": [
+      206,
+      157,
+      52
+    ]
+  },
+  "render": {
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      128,
+      156
+    ],
+    "engineGroundOrigin": [
+      128,
+      128
+    ]
+  },
+  "paintMethod": "Own low orange/yellow six-wheel mobile crane carrier, closed actual blue-glass driver cab, small offset glazed operator pod, three broad solid stepped telescopic sections in low rigid stow, actual fixed cable/J hook and four short retracted outrigger caps. No working equipment animation/gameplay or high-to-low transfer claim.",
+  "bodyStations": [
+    [
+      -3.47,
+      0.98,
+      1.18
+    ],
+    [
+      -3.39,
+      1.08,
+      1.45
+    ],
+    [
+      -3.2,
+      1.08,
+      2.1
+    ],
+    [
+      -3.02,
+      1.08,
+      2.24
+    ],
+    [
+      -1.97,
+      1.08,
+      2.24
+    ],
+    [
+      -1.83,
+      1.02,
+      2.12
+    ]
+  ],
+  "bodySection": [
+    [
+      -0.87,
+      0
+    ],
+    [
+      -1,
+      0.07
+    ],
+    [
+      -1,
+      0.42
+    ],
+    [
+      -0.99,
+      0.8
+    ],
+    [
+      -0.97,
+      0.92
+    ],
+    [
+      -0.9,
+      0.985
+    ],
+    [
+      -0.7,
+      1.015
+    ],
+    [
+      0,
+      1.025
+    ],
+    [
+      0.7,
+      1.015
+    ],
+    [
+      0.9,
+      0.985
+    ],
+    [
+      0.97,
+      0.92
+    ],
+    [
+      0.99,
+      0.8
+    ],
+    [
+      1,
+      0.42
+    ],
+    [
+      1,
+      0.07
+    ],
+    [
+      0.87,
+      0
+    ]
+  ],
+  "toolchain": "multi-axle-v2",
+  "wheelIds": [
+    "FL",
+    "FR",
+    "ML",
+    "MR",
+    "RL",
+    "RR"
+  ],
+  "axleDefinitions": [
+    {
+      "id": "F",
+      "x": -2.7
+    },
+    {
+      "id": "M",
+      "x": 0
+    },
+    {
+      "id": "R",
+      "x": 2.45
+    }
+  ],
+  "operatorPod": {
+    "center": [
+      -0.425,
+      -0.72,
+      1.895
+    ],
+    "size": [
+      1.25,
+      0.9,
+      1.33
+    ]
+  },
+  "stowedBoom": [
+    {
+      "xRange": [
+        -0.25,
+        2.7
+      ],
+      "width": 0.72,
+      "zRange": [
+        1.7,
+        2.32
+      ]
+    },
+    {
+      "xRange": [
+        -1.95,
+        0.35
+      ],
+      "width": 0.58,
+      "zRange": [
+        2.02,
+        2.58
+      ]
+    },
+    {
+      "xRange": [
+        -3.55,
+        -1.45
+      ],
+      "width": 0.44,
+      "zRange": [
+        2.38,
+        2.8
+      ]
+    }
+  ],
+  "outriggerXs": [
+    -1.55,
+    3.28
+  ],
+  "components": [
+    {
+      "name": "Own closed orange mobile-crane driver cab",
+      "group": "body",
+      "triangles": 308,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Own low orange six-wheel crane carrier",
+      "group": "body",
+      "triangles": 332,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Own offset closed glazed operator pod",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Fixed stowed crane turntable",
+      "group": "body",
+      "triangles": 46,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Fixed low boom pedestal",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Rigid stowed boom section 0",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "boom"
+      ]
+    },
+    {
+      "name": "Rigid stowed boom section 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "boom"
+      ]
+    },
+    {
+      "name": "Rigid stowed boom section 2",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "boom"
+      ]
+    },
+    {
+      "name": "Stowed forward boom roof cradle",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Fixed gray boom tip shoe",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Fixed short stowed hook cable",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Fixed readable gray J hook",
+      "group": "body",
+      "triangles": 68,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Short stowed outrigger cap (-1.55, -1)",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "boom"
+      ]
+    },
+    {
+      "name": "Short stowed outrigger cap (-1.55, 1)",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "boom"
+      ]
+    },
+    {
+      "name": "Short stowed outrigger cap (3.28, -1)",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "boom"
+      ]
+    },
+    {
+      "name": "Short stowed outrigger cap (3.28, 1)",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "boom"
+      ]
+    },
+    {
+      "name": "Dark crane underframe rail -0.56",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Dark crane underframe rail 0.56",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard -2.7 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard -2.7 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard 0 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard 0 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard 2.45 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard 2.45 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Gray mobile-crane front bumper",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Gray mobile-crane rear bumper",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Carrier small red rear lamp -1.04",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Carrier small red rear lamp 1.04",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Fixed cab mirror stalk -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Compact fixed blue mirror -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Mirror glass owner -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "glass"
+      ]
+    },
+    {
+      "name": "Fixed cab mirror stalk 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Compact fixed blue mirror 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Mirror glass owner 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "glass"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber ML",
+      "group": "ML",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim ML-1",
+      "group": "ML",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub ML-1",
+      "group": "ML",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint ML-1",
+      "group": "ML",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber MR",
+      "group": "MR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim MR1",
+      "group": "MR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub MR1",
+      "group": "MR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint MR1",
+      "group": "MR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.700000047683716,
+        -1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        -46.95652256841245,
+        8.869565051534902,
+        18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.700000047683716,
+        1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        -46.95652256841245,
+        8.869565051534902,
+        -18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "ML",
+      "centerBlender": [
+        0.0,
+        -1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        0.0,
+        8.869565051534902,
+        18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "MR",
+      "centerBlender": [
+        0.0,
+        1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        0.0,
+        8.869565051534902,
+        -18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        2.450000047683716,
+        -1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        42.60869648145594,
+        8.869565051534902,
+        18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        2.450000047683716,
+        1.0800000429153442,
+        0.5099999904632568
+      ],
+      "centerExport": [
+        42.60869648145594,
+        8.869565051534902,
+        -18.782609442005988
+      ],
+      "radiusBlender": 0.51,
+      "wheel_radius": 8.869565217391306
+    }
+  ],
+  "method": "Own low orange/yellow six-wheel mobile crane carrier, closed actual blue-glass driver cab, small offset glazed operator pod, three broad solid stepped telescopic sections in low rigid stow, actual fixed cable/J hook and four short retracted outrigger caps. No working equipment animation/gameplay or high-to-low transfer claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/mobile-crane/build.py",
+    "scripts/vehicle-bake/mobile-crane/family.json",
+    "scripts/vehicle-bake/mobile-crane/coverage-region.json",
+    "scripts/vehicle-bake/mobile-crane/surface-regions.json",
+    "scripts/vehicle-bake/mobile-crane/stow-region.json",
+    "scripts/vehicle-bake/mobile-crane/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog-v2.py:audit_glb(wheel_ids=all6) + underlying catalog.py",
+    "scripts/vehicle-bake/clearance-v2.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

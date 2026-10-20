@@ -1,0 +1,108 @@
+{
+  "family": "red-cream-mobile-kitchen",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [6, 2.4, 2.8],
+  "axles": [-2.05, 1.9],
+  "arch": {
+    "cutRadius": 0.54,
+    "pocketInnerY": 0.75,
+    "segments": 24
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [42, 43, 57],
+    "tireLight": [64, 66, 81],
+    "paintDeep": [117, 42, 61],
+    "paintShadow": [157, 48, 65],
+    "paintMid": [191, 57, 71],
+    "paint": [220, 69, 77],
+    "paintLight": [241, 104, 104],
+    "cream": [255, 225, 166],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "creamShadow": [191, 157, 119],
+    "creamMid": [227, 193, 147],
+    "creamLight": [255, 238, 202],
+    "innerShadow": [91, 82, 82],
+    "inner": [156, 134, 113],
+    "innerLight": [193, 169, 139],
+    "counter": [112, 111, 114],
+    "counterLight": [214, 215, 200],
+    "lettuce": [114, 155, 82],
+    "bun": [234, 174, 97],
+    "patty": [108, 65, 63],
+    "chassis": [61, 64, 79],
+    "chassisLight": [87, 91, 108]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Original red and cream mobile kitchen. Own continuous cab side/front actual-skin blue glass, broad red/cream rear box with real side serving cavity/counter/fixed short shade, opposite-side simple burger emblem painted in own side UV chart, cream roof and one fixed vent.",
+  "paintOwnership": "Own closed cab side/front/rear/roof semantic skin charts; body side with serving border differs from opposite-side burger chart. Actual cavity backwall owns a warm matte panel chart; inner jambs own shadow swatches, counter and fixed short shade use explicit padded roles. Roof/vent separate owners. No projected bitmap, silhouette ink or intersecting glass overlay.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -2.05,
+      "halfTrack": 0.95,
+      "radius": 0.48,
+      "width": 0.32,
+      "segments": 24
+    },
+    "FR": {
+      "axle": -2.05,
+      "halfTrack": 0.95,
+      "radius": 0.48,
+      "width": 0.32,
+      "segments": 24
+    },
+    "RL": {
+      "axle": 1.9,
+      "halfTrack": 0.95,
+      "radius": 0.48,
+      "width": 0.32,
+      "segments": 24
+    },
+    "RR": {
+      "axle": 1.9,
+      "halfTrack": 0.95,
+      "radius": 0.48,
+      "width": 0.32,
+      "segments": 24
+    }
+  },
+  "servingRecess": {
+    "side": "-Y",
+    "outerPlaneY": -1.15,
+    "backWallY": -0.55,
+    "xMin": -0.68,
+    "xMax": 2.24,
+    "zMin": 1.18,
+    "zMax": 2.38,
+    "rayXs": [-0.45, 0.1, 0.7, 1.3, 1.95],
+    "rayZs": [1.4, 1.75, 2.15],
+    "rayOriginY": -3.0,
+    "minimumDepth": 0.55,
+    "counterTop": 1.2,
+    "fixedShadeTopApprox": 2.48,
+    "negativeFillY": -1.15
+  },
+  "coveragePolicy": {
+    "allWheels": "Natural nose/rear body wheelhouse cover; finite central tread footprint with short rays excluding high serving shade/roof."
+  },
+  "boundsPolicy": "Keep original ground/root origin and80/4.6 scale. Measure actual asymmetric shade/counter extent plus centered2*maxAbs bounds; never recenter or narrow-fit scale."
+}

@@ -1,0 +1,72 @@
+{
+  "family": "tiny-bubble-microcar",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [3.22, 1.75, 1.72],
+  "wheelRadius": 0.29,
+  "wheelWidth": 0.18,
+  "axles": [-0.88, 0.86],
+  "halfTrack": 0.66,
+  "arch": {
+    "cutRadius": 0.365,
+    "pocketInnerY": 0.49,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 14,
+    "lateralStations": [0.46, 0.56, 0.69, 0.81, 0.875],
+    "shoulderRadii": [0.385, 0.43, 0.43, 0.415, 0.395],
+    "archRadius": 0.35
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [145, 76, 101],
+    "paintShadow": [173, 91, 112],
+    "paintMid": [198, 111, 128],
+    "paint": [222, 139, 147],
+    "paintLight": [242, 187, 183],
+    "cream": [255, 233, 187],
+    "roof": [255, 220, 207],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Original short egg/bubble coachwork with its own rounded cross section, tiny axles and local wheel pockets. Continuous longitudinal/angular skin UV owns curved panoramic front and one side pane each with dark frames; pale upper paint over dusty coral rose. No glass overlays, projection or high-to-low transfer claim.",
+  "eggStations": [
+    [-1.52, 0.38, 0.95],
+    [-1.47, 0.59, 1.19],
+    [-1.34, 0.72, 1.43],
+    [-1.1, 0.8, 1.59],
+    [-0.75, 0.85, 1.68],
+    [-0.3, 0.855, 1.72],
+    [0.25, 0.84, 1.69],
+    [0.7, 0.79, 1.58],
+    [1.05, 0.69, 1.39],
+    [1.33, 0.54, 1.08],
+    [1.47, 0.34, 0.79],
+    [1.5, 0.12, 0.65]
+  ],
+  "upperBaseZ": 0.52,
+  "lowerFloorZ": 0.19,
+  "crossSectionSegments": 20
+}

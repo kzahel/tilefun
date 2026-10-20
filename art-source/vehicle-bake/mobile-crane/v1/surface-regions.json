@@ -1,0 +1,113 @@
+{
+  "meaning": "Actual closed cab/pod glass, three stowed section tops, carrier paint, real hook/cable and all4 short outrigger end-face UV owners",
+  "rays": [
+    {
+      "id": "driver-left-glass",
+      "origin": [-2.55, -2.5, 1.75],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "driver-right-glass",
+      "origin": [-2.55, 2.5, 1.75],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "driver-windshield",
+      "origin": [-4.5, 0, 1.75],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "operator-side-glass",
+      "origin": [-0.5, -2.5, 2.1],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "operator-front-glass",
+      "origin": [-1.4, -0.72, 2.1],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "driver-orange-roof",
+      "origin": [-2.7, -0.7, 3.5],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "carrier-orange-skin",
+      "origin": [1.2, -2.5, 1.2],
+      "direction": [0, 1, 0],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "outer-stowed-boom",
+      "origin": [2, 0.35, 4],
+      "direction": [0, 0, -1],
+      "roles": ["boomLight"]
+    },
+    {
+      "id": "middle-stowed-boom",
+      "origin": [-1.4, 0.35, 4],
+      "direction": [0, 0, -1],
+      "roles": ["boomLight"]
+    },
+    {
+      "id": "inner-stowed-boom",
+      "origin": [-2.8, 0.35, 4],
+      "direction": [0, 0, -1],
+      "roles": ["boomLight"]
+    },
+    {
+      "id": "real-gray-J-hook",
+      "origin": [-3.68, -2.5, 2.18],
+      "direction": [0, 1, 0],
+      "roles": ["silver"]
+    },
+    {
+      "id": "real-fixed-cable",
+      "origin": [-3.613, -2.5, 2.46],
+      "direction": [0, 1, 0],
+      "roles": ["frame"]
+    },
+    {
+      "id": "silver-front-grille",
+      "origin": [-4.5, 0.62, 0.81],
+      "direction": [1, 0, 0],
+      "roles": ["silver"]
+    },
+    {
+      "id": "gray-rear-bumper",
+      "origin": [4.5, 0, 0.43],
+      "direction": [-1, 0, 0],
+      "roles": ["deckEdge"]
+    },
+    {
+      "id": "stowed-outrigger-(-1.55, -1)",
+      "origin": [-1.55, -2.5, 0.94],
+      "direction": [0, 1, 0],
+      "roles": ["frame"]
+    },
+    {
+      "id": "stowed-outrigger-(-1.55, 1)",
+      "origin": [-1.55, 2.5, 0.94],
+      "direction": [0, -1, 0],
+      "roles": ["frame"]
+    },
+    {
+      "id": "stowed-outrigger-(3.28, -1)",
+      "origin": [3.28, -2.5, 0.94],
+      "direction": [0, 1, 0],
+      "roles": ["frame"]
+    },
+    {
+      "id": "stowed-outrigger-(3.28, 1)",
+      "origin": [3.28, 2.5, 0.94],
+      "direction": [0, -1, 0],
+      "roles": ["frame"]
+    }
+  ]
+}

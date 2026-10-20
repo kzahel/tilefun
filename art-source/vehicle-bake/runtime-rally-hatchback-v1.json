@@ -1,0 +1,106 @@
+{
+  "modelSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+  "spriteSha256": "989d9d89752b76b2783f28dd6a384ec7d130d9f9ae22c2d0f4eb12b168c04439",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-rally-hatchback-v1.json": "67545221b69ba769b6f80c1d3c9c956e1ceafc6c4475dff729ac1971f77c69d2",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/rally-hatchback-v1/review-manifest.json": "33d8a45e436f46a6744021e984674184dfd8b29b03dd3e1621174746fcace432",
+    "public/demos/original-vehicles/rally-hatchback-v1/inputs/model.glb": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "public/demos/original-vehicles/rally-hatchback-v1/inputs/atlas.png": "8ecd127298a141ecedb41f91aa79bcafcf34cc8afac5c7a3cb24e913cc6f475a",
+    "public/demos/original-vehicles/rally-hatchback-v1/captures/capture.json": "7e7ffe983abb8fcd58c858746ae463b2ddc622c2a3a924a12dad96593f19cb3d",
+    "art-source/vehicle-bake/rally-hatchback/v1/evidence/replay-verification.json": "b506cdd5e232d07144ad989b5a48bb602bd16a44ae200f1ecefde7348271065d",
+    "art-source/vehicle-bake/rally-hatchback/v1/build.py": "9bd3237de6986282090eddc2ee00be3c82dc0660d4064e98be98cd98962fd30c",
+    "art-source/vehicle-bake/rally-hatchback/v1/family.json": "b21a26bc0cce74da39e93a25a4eeda2c2e1d9677cd0667d0c9de0919c1942d4b",
+    "art-source/vehicle-bake/rally-hatchback/v1/coverage-region.json": "6bd28198ffefacc4b5c6db4d3d43dcef7f1acf095fc08445eaca30bc37f6bacf",
+    "art-source/vehicle-bake/rally-hatchback/v1/surface-regions.json": "0cfd442cf89415772e54f01a99a11603dedcf6992f9b4d346d73c679db1816b6",
+    "art-source/vehicle-bake/rally-hatchback/v1/review.json": "3a3b198f2891909438c80704708ad8b13a3f234061d0557afbcf9d2f4a582aa3",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/rally-hatchback-v1/captures/engine-4.png": "595ccce857a49c594add7359aacaabd454d7430815e70242969f2a0a00a2a5f3",
+    "public/demos/original-vehicles/rally-hatchback-v1/captures/engine-12.png": "01cf0d911a1df159e693e05306f1c28308f061fe92799ced88d634b1e243a5a9",
+    "public/demos/original-vehicles/rally-hatchback-v1/captures/engine-8.png": "827ed3764de42b3eaf01513e58119fbf6bd5f8fe5de789151f8c7c9baafc0ad6",
+    "public/demos/original-vehicles/rally-hatchback-v1/captures/engine-0.png": "80f0e552092da5118cd713152a1b8297cacd2067f492d0481841e776bbf70071"
+  },
+  "physicalBounds": [
+    74,
+    35,
+    29
+  ],
+  "measurement": {
+    "modelSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -36.73912811279297,
+        -17.39130401611328,
+        4.76837158203125e-07
+      ],
+      "max": [
+        36.73912811279297,
+        17.39130401611328,
+        28.521738052368164
+      ],
+      "size": [
+        73.47825622558594,
+        34.78260803222656,
+        28.521738052368164
+      ]
+    },
+    "triangles": 2900,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/rally-hatchback/v1/evidence/replay-verification.json",
+    "sha256": "b506cdd5e232d07144ad989b5a48bb602bd16a44ae200f1ecefde7348271065d",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-rally-hatchback-v1.json --blender BLENDER"
+}

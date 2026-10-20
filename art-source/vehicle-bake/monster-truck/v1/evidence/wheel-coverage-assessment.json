@@ -1,0 +1,67 @@
+{
+  "status": "assessment",
+  "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+  "allFourCrownsCovered": false,
+  "allWheelCoverage": "not-applicable/intentionally-exposed",
+  "ownerAuthorizedException": true,
+  "policy": "All four massive tires deliberately project beyond the narrow raised body. No fake crown caps or passed geometry coverage metric. Raw 0/25 expectation failures retained unchanged.",
+  "wheels": [
+    {
+      "wheel": "Wheel_FL_Roll",
+      "applicability": "not-applicable/intentionally-exposed",
+      "rawCoveredCount": 0,
+      "rawSampleCount": 25,
+      "rawDeclaredExpectationMet": false
+    },
+    {
+      "wheel": "Wheel_FR_Roll",
+      "applicability": "not-applicable/intentionally-exposed",
+      "rawCoveredCount": 0,
+      "rawSampleCount": 25,
+      "rawDeclaredExpectationMet": false
+    },
+    {
+      "wheel": "Wheel_RL_Roll",
+      "applicability": "not-applicable/intentionally-exposed",
+      "rawCoveredCount": 0,
+      "rawSampleCount": 25,
+      "rawDeclaredExpectationMet": false
+    },
+    {
+      "wheel": "Wheel_RR_Roll",
+      "applicability": "not-applicable/intentionally-exposed",
+      "rawCoveredCount": 0,
+      "rawSampleCount": 25,
+      "rawDeclaredExpectationMet": false
+    }
+  ],
+  "controls": {
+    "bodyRemovalCoveredCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bodyRemovalInformativeAgainstBaseline": false,
+    "syntheticBroadPanelPositiveCounts": [
+      25,
+      25,
+      25,
+      25
+    ],
+    "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "positiveAndNegativeControlsPassed": true,
+    "fixtureIsNotCandidateGeometry": true,
+    "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+  },
+  "bodyRemovalInformativeAgainstBaseline": false,
+  "controlMeaning": "Synthetic positive/offset fixtures exercise bookkeeping only. Removing already-uncovered body is not informative and no geometry pass is inferred.",
+  "portableRawEvidence": "art-source/vehicle-bake/monster-truck/v1/evidence/upper-wheel-coverage-raw.json",
+  "portableRawSha256": "b14497e5deaa7e4c2f11bd5f1b7926993f44b2e0d378356a3a847621980ac698",
+  "separateRequirements": "All-four full neutral rolling clearance, collision negative/reset, actual32 headings and independent wheel attachment/visibility remain mandatory."
+}

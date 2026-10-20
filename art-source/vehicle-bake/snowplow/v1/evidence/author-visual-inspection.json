@@ -1,0 +1,15 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+  "inspectedViews": 32,
+  "inspectedSignedPhaseFrames": 16,
+  "inspectedWireframes": 2,
+  "observations": [
+    "Inspected all 16 actual study and all 16 actual game headings in native-derived integer-2x contact sheets. Recognizable orange closed cab, broad bright yellow front scoop and long blue/gray V hopper; broad gray spanning bars and real open dark interior read in elevated/oblique views.",
+    "Inspected all eight signed wheel phases per camera and both actual wireframes. Four road tires remain seated beneath integrated orange front/gray rear guard shoulders; far crowns remain covered. No isolated raised fender caps, floating glass overlays or equipment clipping found.",
+    "Scoop side profile visibly curves and the dark lower edge remains above ground; shallow fixed yaw remains readable in front/oblique views. Fixed gray mount links connect the inner frame to the rear of the blade. All equipment is rigid/stowed.",
+    "All 32 native PNGs have transparent margins with no edge pixels. 256/radius128 is padding at unchanged 80/4.6 scale and camera/world density. Four cardinal occupied RGBA pixel sequences match standard192x224 origin96,144 exactly after integer translation(-32,+16).",
+    "Expected angle-dependent aliasing remains on thin top bars, mirror stalks, glass diagonals, scoop segments and small hazard paint. No tiny text/logos/PBR/transparent glass or functional salt/plowing claim. No blocking visual issue found; this is author agent QA, parent independently qualifies/final-freezes."
+  ],
+  "formalHumanApproval": false
+}

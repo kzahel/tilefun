@@ -1,0 +1,13 @@
+{
+  "meaning": "Real side-opening depth is measured from actual exported triangles; an inserted outer false panel and raised inner deck must fail independently, with reset.",
+  "outerY": -1.04,
+  "backY": -0.53,
+  "minimumDepth": 0.4,
+  "maximumDepth": 0.65,
+  "xSamples": [0, 0.7, 1.4],
+  "zSamples": [1.35, 1.6, 1.85],
+  "counterX": [0, 0.7, 1.4],
+  "counterY": [-0.85, -0.65],
+  "counterTopZ": 1.18,
+  "depthTolerance": 0.025
+}

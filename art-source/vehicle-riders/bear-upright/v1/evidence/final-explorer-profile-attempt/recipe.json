@@ -1,0 +1,570 @@
+{
+  "status": "prototype-not-production",
+  "humanApproval": false,
+  "template": "Own broad Brown Bear animal-avatar anatomy, fixed short bone lengths and constrained two-bone pose; no Explorer body/clothes or vehicle loft",
+  "contactFitStatus": "FAILED-profile-fit-no-stretch",
+  "actualContactsSource": {
+    "hip_saddle": [
+      0.0,
+      0.0,
+      -0.10000000149011612
+    ],
+    "hand_left_grip": [
+      -0.4267592430114746,
+      -0.25174835324287415,
+      0.29416483640670776
+    ],
+    "foot_left_support": [
+      -0.06885924935340881,
+      -0.23000000417232513,
+      -0.5094665288925171
+    ],
+    "hand_right_grip": [
+      -0.4267592430114746,
+      0.25174835324287415,
+      0.29416483640670776
+    ],
+    "foot_right_support": [
+      -0.06885924935340881,
+      0.23000000417232513,
+      -0.5094665288925171
+    ]
+  },
+  "targetMissWorld": {
+    "hip_saddle": 0.35652181259489013,
+    "hand_left_grip": 2.2166387766973914,
+    "foot_left_support": 0.35765401791482504,
+    "hand_right_grip": 2.2166387766973914,
+    "foot_right_support": 0.35765401791482504
+  },
+  "fixedLengthIK": [
+    {
+      "limb": "arm_left",
+      "fixedBoneLengthsSource": [
+        0.21,
+        0.19
+      ],
+      "rootSource": [
+        -0.03999999910593033,
+        -0.3199999928474426,
+        0.3700000047683716
+      ],
+      "targetJointSource": [
+        -0.550000011920929,
+        -0.23000000417232513,
+        0.26999998092651367
+      ],
+      "actualJointSource": [
+        -0.4267592430114746,
+        -0.25174835324287415,
+        0.29416483640670776
+      ],
+      "unclampedTargetDistanceSource": 0.5274466608439419,
+      "maximumChainLengthSource": 0.4,
+      "unreachableBeyondChainWorld": 2.2164636668511637,
+      "jointSource": [
+        -0.24331630766391754,
+        -0.2855496108531952,
+        0.3303055167198181
+      ],
+      "actualLengthsSource": [
+        0.210000002631208,
+        0.18999995993743962
+      ]
+    },
+    {
+      "limb": "leg_left",
+      "fixedBoneLengthsSource": [
+        0.17,
+        0.17
+      ],
+      "rootSource": [
+        0.0,
+        -0.23000000417232513,
+        -0.10000000149011612
+      ],
+      "targetJointSource": [
+        -0.019999999552965164,
+        -0.23000000417232513,
+        -0.4599999785423279
+      ],
+      "actualJointSource": [
+        -0.018859252333641052,
+        -0.23000000417232513,
+        -0.4394665062427521
+      ],
+      "unclampedTargetDistanceSource": 0.36055511153003494,
+      "maximumChainLengthSource": 0.34,
+      "unreachableBeyondChainWorld": 0.35748020052234647,
+      "jointSource": [
+        -0.010638081468641758,
+        -0.23048487305641174,
+        -0.2696661055088043
+      ],
+      "actualLengthsSource": [
+        0.1699999774500684,
+        0.16999999837914795
+      ]
+    },
+    {
+      "limb": "arm_right",
+      "fixedBoneLengthsSource": [
+        0.21,
+        0.19
+      ],
+      "rootSource": [
+        -0.03999999910593033,
+        0.3199999928474426,
+        0.3700000047683716
+      ],
+      "targetJointSource": [
+        -0.550000011920929,
+        0.23000000417232513,
+        0.26999998092651367
+      ],
+      "actualJointSource": [
+        -0.4267592430114746,
+        0.25174835324287415,
+        0.29416483640670776
+      ],
+      "unclampedTargetDistanceSource": 0.5274466608439419,
+      "maximumChainLengthSource": 0.4,
+      "unreachableBeyondChainWorld": 2.2164636668511637,
+      "jointSource": [
+        -0.24331630766391754,
+        0.2855496108531952,
+        0.3303055167198181
+      ],
+      "actualLengthsSource": [
+        0.210000002631208,
+        0.18999995993743962
+      ]
+    },
+    {
+      "limb": "leg_right",
+      "fixedBoneLengthsSource": [
+        0.17,
+        0.17
+      ],
+      "rootSource": [
+        0.0,
+        0.23000000417232513,
+        -0.10000000149011612
+      ],
+      "targetJointSource": [
+        -0.019999999552965164,
+        0.23000000417232513,
+        -0.4599999785423279
+      ],
+      "actualJointSource": [
+        -0.018859252333641052,
+        0.23000000417232513,
+        -0.4394665062427521
+      ],
+      "unclampedTargetDistanceSource": 0.36055511153003494,
+      "maximumChainLengthSource": 0.34,
+      "unreachableBeyondChainWorld": 0.35748020052234647,
+      "jointSource": [
+        -0.010638081468641758,
+        0.23048487305641174,
+        -0.2696661055088043
+      ],
+      "actualLengthsSource": [
+        0.1699999774500684,
+        0.16999999837914795
+      ]
+    }
+  ],
+  "anatomicalJointsSource": {
+    "left": {
+      "shoulder": [
+        -0.03999999910593033,
+        -0.3199999928474426,
+        0.3700000047683716
+      ],
+      "elbow": [
+        -0.24331630766391754,
+        -0.2855496108531952,
+        0.3303055167198181
+      ],
+      "wrist": [
+        -0.3350377678871155,
+        -0.26864898204803467,
+        0.31223517656326294
+      ],
+      "palm": [
+        -0.4267592430114746,
+        -0.25174835324287415,
+        0.29416483640670776
+      ],
+      "hip": [
+        0.0,
+        -0.23000000417232513,
+        -0.10000000149011612
+      ],
+      "knee": [
+        -0.010638081468641758,
+        -0.23048487305641174,
+        -0.2696661055088043
+      ],
+      "ankle": [
+        -0.018859252333641052,
+        -0.23000000417232513,
+        -0.4394665062427521
+      ],
+      "sole": [
+        -0.06885924935340881,
+        -0.23000000417232513,
+        -0.5094665288925171
+      ]
+    },
+    "right": {
+      "shoulder": [
+        -0.03999999910593033,
+        0.3199999928474426,
+        0.3700000047683716
+      ],
+      "elbow": [
+        -0.24331630766391754,
+        0.2855496108531952,
+        0.3303055167198181
+      ],
+      "wrist": [
+        -0.3350377678871155,
+        0.26864898204803467,
+        0.31223517656326294
+      ],
+      "palm": [
+        -0.4267592430114746,
+        0.25174835324287415,
+        0.29416483640670776
+      ],
+      "hip": [
+        0.0,
+        0.23000000417232513,
+        -0.10000000149011612
+      ],
+      "knee": [
+        -0.010638081468641758,
+        0.23048487305641174,
+        -0.2696661055088043
+      ],
+      "ankle": [
+        -0.018859252333641052,
+        0.23000000417232513,
+        -0.4394665062427521
+      ],
+      "sole": [
+        -0.06885924935340881,
+        0.23000000417232513,
+        -0.5094665288925171
+      ]
+    }
+  },
+  "config": {
+    "id": "bear-upright-v1",
+    "status": "prototype-not-production",
+    "humanApproval": false,
+    "worldScale": 17.39130434782609,
+    "hipSocketSource": [
+      0,
+      0,
+      0
+    ],
+    "contactProfile": {
+      "source": "art-source/vehicle-riders/profiles/upright-v1.json",
+      "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+      "ownCopy": "explorer-upright-v1.json"
+    },
+    "explorerProfile": {
+      "source": "art-source/vehicle-riders/profiles/upright-v1.json",
+      "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+      "ownCopy": "explorer-upright-v1.json"
+    },
+    "identityInputs": {
+      "art-source/pixel-characters/bear.json": "a9ae53f83c1e88fbe57ca8e748a3f3f6be27807259271d574b58e3e3f75fd36a",
+      "public/demos/pixel-characters/bear-32.png": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d"
+    },
+    "anatomy": {
+      "headCenter": [
+        -0.05,
+        0,
+        0.72
+      ],
+      "headDimensions": [
+        0.58,
+        0.86,
+        0.64
+      ],
+      "torsoCenter": [
+        0,
+        0,
+        0.21
+      ],
+      "torsoDimensions": [
+        0.56,
+        0.72,
+        0.5
+      ],
+      "pelvisDimensions": [
+        0.52,
+        0.65,
+        0.2
+      ],
+      "shoulderSource": [
+        -0.04,
+        0.32,
+        0.37
+      ],
+      "armLengthsSource": [
+        0.21,
+        0.19
+      ],
+      "hipJointSource": [
+        0,
+        0.23,
+        -0.1
+      ],
+      "legLengthsSource": [
+        0.17,
+        0.17
+      ],
+      "ankleFromSoleSource": [
+        0.05,
+        0,
+        0.07
+      ],
+      "forepawRadii": [
+        0.105,
+        0.105,
+        0.09
+      ],
+      "hindpawDimensions": [
+        0.28,
+        0.25,
+        0.12
+      ],
+      "wristInsetFromPalmSource": 0.095,
+      "lengthSemantics": "Fixed lengths between inferred centers; arm chain elbow-to-palm includes a0.095source wrist/palm offset. Actual forearm skin tube is0.095source. Not an observed biological skeleton."
+    },
+    "inference": {
+      "meaning": "No unique3D anatomy is observable from2D sprites. Fixed dimensions inferred before profile solving; limb lengths never scale to reach a target. Own broad animal torso/head/paws, no Explorer clothes or body recolor.",
+      "sourceRatios": "Approved head master16 columns incl ears,14 rows; body13x11; arm5x6; foot6x4. Approved32px sheet first front span21x24. These guide broad head/torso and short limbs, not an exact3D reconstruction.",
+      "uncertainty": "Depth, hidden joint centers, flexion and seated posture are inferred; parent likeness/contact review required. No actual bike clearance.",
+      "jointRefinement": "After finite surface diagnostics, hidden hip joints placed at pelvis bottom rather than middle; fixed short bone lengths and external body dimensions unchanged. Forearm skin stops at wrist within broad paw instead of running through grip. Original-profile failure is rerun on final template."
+    },
+    "render": {
+      "nativeSize": 224,
+      "radius": 112,
+      "worldDensity": "80/4.6 unchanged",
+      "origin": "Local pelvis center, not measured bike mount",
+      "studyDegrees": 50
+    },
+    "limits": [
+      "One static Brown Bear player-avatar prerequisite; no wildlife edit/expansion",
+      "Synthetic contact fixture only, no actual bike/normal/all27/AI/fallback qualification"
+    ],
+    "profileFeasibility": "Explorer profile failed actual GLB fixed-chain reach; separate brown-bear-upright-measured-v1 proposed, not globally accepted"
+  },
+  "palette": {
+    "b": "#3e2924",
+    "s": "#664333",
+    "c": "#946345",
+    "h": "#b28256",
+    "t": "#dfb880",
+    "g": "#ba925e",
+    "k": "#241f22",
+    "w": "#f7e4ba"
+  },
+  "components": [
+    {
+      "name": "Bear broad seated pelvis",
+      "triangles": 108,
+      "semanticOwner": "Bear broad seated pelvis"
+    },
+    {
+      "name": "Bear upper arm left",
+      "triangles": 28,
+      "semanticOwner": "Bear upper arm left"
+    },
+    {
+      "name": "Bear elbow left",
+      "triangles": 64,
+      "semanticOwner": "Bear elbow left"
+    },
+    {
+      "name": "Bear forearm left",
+      "triangles": 28,
+      "semanticOwner": "Bear forearm left"
+    },
+    {
+      "name": "Bear gripping forepaw left",
+      "triangles": 100,
+      "semanticOwner": "Bear gripping forepaw left"
+    },
+    {
+      "name": "Bear bent thigh left",
+      "triangles": 28,
+      "semanticOwner": "Bear bent thigh left"
+    },
+    {
+      "name": "Bear knee left",
+      "triangles": 64,
+      "semanticOwner": "Bear knee left"
+    },
+    {
+      "name": "Bear short shin left",
+      "triangles": 28,
+      "semanticOwner": "Bear short shin left"
+    },
+    {
+      "name": "Bear broad hindpaw left",
+      "triangles": 108,
+      "semanticOwner": "Bear broad hindpaw left"
+    },
+    {
+      "name": "Bear upper arm right",
+      "triangles": 28,
+      "semanticOwner": "Bear upper arm right"
+    },
+    {
+      "name": "Bear elbow right",
+      "triangles": 64,
+      "semanticOwner": "Bear elbow right"
+    },
+    {
+      "name": "Bear forearm right",
+      "triangles": 28,
+      "semanticOwner": "Bear forearm right"
+    },
+    {
+      "name": "Bear gripping forepaw right",
+      "triangles": 100,
+      "semanticOwner": "Bear gripping forepaw right"
+    },
+    {
+      "name": "Bear bent thigh right",
+      "triangles": 28,
+      "semanticOwner": "Bear bent thigh right"
+    },
+    {
+      "name": "Bear knee right",
+      "triangles": 64,
+      "semanticOwner": "Bear knee right"
+    },
+    {
+      "name": "Bear short shin right",
+      "triangles": 28,
+      "semanticOwner": "Bear short shin right"
+    },
+    {
+      "name": "Bear broad hindpaw right",
+      "triangles": 108,
+      "semanticOwner": "Bear broad hindpaw right"
+    },
+    {
+      "name": "Bear stocky torso belly UV owner",
+      "triangles": 188,
+      "semanticOwner": "Bear stocky torso belly UV owner"
+    },
+    {
+      "name": "Bear short neck",
+      "triangles": 100,
+      "semanticOwner": "Bear short neck"
+    },
+    {
+      "name": "Bear rounded head UV owner",
+      "triangles": 288,
+      "semanticOwner": "Bear rounded head UV owner"
+    },
+    {
+      "name": "Bear round ear -1",
+      "triangles": 100,
+      "semanticOwner": "Bear round ear -1"
+    },
+    {
+      "name": "Bear round ear 1",
+      "triangles": 100,
+      "semanticOwner": "Bear round ear 1"
+    },
+    {
+      "name": "Bear tan muzzle UV owner",
+      "triangles": 168,
+      "semanticOwner": "Bear tan muzzle UV owner"
+    },
+    {
+      "name": "Bear dark nose",
+      "triangles": 64,
+      "semanticOwner": "Bear dark nose"
+    },
+    {
+      "name": "Bear tiny fixed tail",
+      "triangles": 100,
+      "semanticOwner": "Bear tiny fixed tail"
+    }
+  ],
+  "semanticUV": "Approved Bear head pattern crop on volumetric rounded head; own tan belly and muzzle charts on actual curved animal skin. Round ear/sole palette ownership; no coincident artwork planes.",
+  "masterMeaning": "Editable named semantic components at runtime topology; no skeletal animation/high-to-low claim",
+  "sourceDependencies": [
+    "build.py",
+    "rider.json",
+    "identity.json",
+    "explorer-upright-v1.json",
+    "bear-upright-v1.json"
+  ],
+  "scratchInputDependencies": [],
+  "immutableContactProfile": {
+    "schema": "tilefun-seated-rider-profile-v1",
+    "id": "upright-motorcycle-v1",
+    "status": "prototype-contract-not-production",
+    "units": "World logical pixels, before game rigid basis conversion",
+    "forwardBlender": "-X",
+    "upBlender": "+Z",
+    "origin": "Local pelvis/hip center; bike supplies a separately measured mount translation",
+    "contacts": {
+      "hip_saddle": [
+        0,
+        0,
+        -1.382608695652174
+      ],
+      "hand_left_grip": [
+        -9.565217391304348,
+        -4,
+        4.695652173913044
+      ],
+      "hand_right_grip": [
+        -9.565217391304348,
+        4,
+        4.695652173913044
+      ],
+      "foot_left_support": [
+        -1.217391304347826,
+        -4,
+        -9.217391304347826
+      ],
+      "foot_right_support": [
+        -1.217391304347826,
+        4,
+        -9.217391304347826
+      ]
+    },
+    "semantics": {
+      "hip_saddle": "Pelvis bottom contact on actual saddle surface",
+      "hands": "Grip centerline anchors; deliberate palm wrap is a declared contact exception",
+      "feet": "Sole tangent points on actual top of foot support, not peg centerline"
+    },
+    "requirements": [
+      "True straddled bent legs and bent arms, not an upright walking sprite",
+      "One depth target for rider and bike; same interpolated pose and yaw",
+      "Actual body, wheel envelope and contact checks on each bike/profile/avatar combination",
+      "Existing avatar identity and frozen standing approvals remain unchanged"
+    ],
+    "limits": [
+      "Initial Explorer prototype only; not universal avatar fit",
+      "No normal activation, AI occupancy, failure fallback or animation qualified",
+      "Body dimensions and mounts must be measured; this contract does not prove clearance"
+    ]
+  },
+  "profileSha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "deterministicIndexOrder": "Winding-preserving cyclic-start and triangle-order canonicalization after export; vertex/normal/UV/image buffers untouched. Opaque static single mesh; geometry unchanged."
+}

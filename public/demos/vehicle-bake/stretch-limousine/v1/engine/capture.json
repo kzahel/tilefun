@@ -1,0 +1,614 @@
+{
+  "status": "passed",
+  "id": "stretch-limousine-v1",
+  "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+  "stats": {
+    "triangles": 2956,
+    "vertices": 5768,
+    "primitives": 5,
+    "sourceMeshes": 5,
+    "drawMeshes": 5,
+    "bodyDrawCalls": 5
+  },
+  "rig": {
+    "wheels": [
+      {
+        "id": "FL",
+        "radius": 6.608695652173914,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true,
+        "reverseQuarterTurn": true,
+        "absoluteReset": true
+      },
+      {
+        "id": "FR",
+        "radius": 6.608695652173914,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true,
+        "reverseQuarterTurn": true,
+        "absoluteReset": true
+      },
+      {
+        "id": "RL",
+        "radius": 6.608695652173914,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true,
+        "reverseQuarterTurn": true,
+        "absoluteReset": true
+      },
+      {
+        "id": "RR",
+        "radius": 6.608695652173914,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true,
+        "reverseQuarterTurn": true,
+        "absoluteReset": true
+      }
+    ],
+    "forwardReverseAbsoluteReset": true
+  },
+  "views": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "opaque": 4375,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 49,
+        "minY": 111,
+        "maxX": 174,
+        "maxY": 151
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 22.5,
+      "opaque": 4307,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 48,
+        "minY": 102,
+        "maxX": 175,
+        "maxY": 164
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "opaque": 4046,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 57,
+        "minY": 91,
+        "maxX": 166,
+        "maxY": 177
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 67.5,
+      "opaque": 3631,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 74,
+        "minY": 84,
+        "maxX": 149,
+        "maxY": 184
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "opaque": 3394,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 94,
+        "minY": 83,
+        "maxX": 129,
+        "maxY": 183
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 112.5,
+      "opaque": 3631,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 74,
+        "minY": 84,
+        "maxX": 149,
+        "maxY": 184
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "opaque": 4046,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 57,
+        "minY": 91,
+        "maxX": 166,
+        "maxY": 177
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 157.5,
+      "opaque": 4307,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 48,
+        "minY": 102,
+        "maxX": 175,
+        "maxY": 164
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 180,
+      "opaque": 4375,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 49,
+        "minY": 111,
+        "maxX": 174,
+        "maxY": 151
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 202.5,
+      "opaque": 4319,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 48,
+        "minY": 101,
+        "maxX": 175,
+        "maxY": 164
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 225,
+      "opaque": 4074,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 57,
+        "minY": 89,
+        "maxX": 166,
+        "maxY": 177
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 247.5,
+      "opaque": 3670,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 74,
+        "minY": 82,
+        "maxX": 149,
+        "maxY": 184
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 270,
+      "opaque": 3430,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 94,
+        "minY": 82,
+        "maxX": 129,
+        "maxY": 183
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 292.5,
+      "opaque": 3670,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 74,
+        "minY": 82,
+        "maxX": 149,
+        "maxY": 184
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 315,
+      "opaque": 4074,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 57,
+        "minY": 89,
+        "maxX": 166,
+        "maxY": 177
+      }
+    },
+    {
+      "mode": "study",
+      "yaw": 337.5,
+      "opaque": 4319,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 48,
+        "minY": 101,
+        "maxX": 175,
+        "maxY": 164
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "opaque": 5814,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 51,
+        "minY": 70,
+        "maxX": 172,
+        "maxY": 126
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 22.5,
+      "opaque": 5723,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 50,
+        "minY": 60,
+        "maxX": 173,
+        "maxY": 143
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "opaque": 5349,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 58,
+        "minY": 46,
+        "maxX": 165,
+        "maxY": 159
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 67.5,
+      "opaque": 4708,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 74,
+        "minY": 38,
+        "maxX": 149,
+        "maxY": 168
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "opaque": 4252,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 95,
+        "minY": 37,
+        "maxX": 128,
+        "maxY": 167
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 112.5,
+      "opaque": 4708,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 74,
+        "minY": 38,
+        "maxX": 149,
+        "maxY": 168
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "opaque": 5349,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 58,
+        "minY": 46,
+        "maxX": 165,
+        "maxY": 159
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 157.5,
+      "opaque": 5723,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 50,
+        "minY": 60,
+        "maxX": 173,
+        "maxY": 143
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 180,
+      "opaque": 5814,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 51,
+        "minY": 70,
+        "maxX": 172,
+        "maxY": 126
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 202.5,
+      "opaque": 5737,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 50,
+        "minY": 59,
+        "maxX": 173,
+        "maxY": 142
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 225,
+      "opaque": 5386,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 58,
+        "minY": 44,
+        "maxX": 165,
+        "maxY": 159
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 247.5,
+      "opaque": 4766,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 74,
+        "minY": 35,
+        "maxX": 149,
+        "maxY": 168
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 270,
+      "opaque": 4306,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 95,
+        "minY": 35,
+        "maxX": 128,
+        "maxY": 167
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 292.5,
+      "opaque": 4767,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 74,
+        "minY": 35,
+        "maxX": 149,
+        "maxY": 168
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 315,
+      "opaque": 5386,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 58,
+        "minY": 44,
+        "maxX": 165,
+        "maxY": 159
+      }
+    },
+    {
+      "mode": "engine",
+      "yaw": 337.5,
+      "opaque": 5737,
+      "edgePixels": 0,
+      "bounds": {
+        "minX": 50,
+        "minY": 59,
+        "maxX": 173,
+        "maxY": 142
+      }
+    }
+  ],
+  "phases": [
+    {
+      "phaseDegrees": 0,
+      "distance": 0
+    },
+    {
+      "phaseDegrees": 45,
+      "distance": 5.190457427670093
+    },
+    {
+      "phaseDegrees": 90,
+      "distance": 10.380914855340187
+    },
+    {
+      "phaseDegrees": 135,
+      "distance": 15.57137228301028
+    },
+    {
+      "phaseDegrees": -180,
+      "distance": -20.761829710680374
+    },
+    {
+      "phaseDegrees": -135,
+      "distance": -15.57137228301028
+    },
+    {
+      "phaseDegrees": -90,
+      "distance": -10.380914855340187
+    },
+    {
+      "phaseDegrees": -45,
+      "distance": -5.190457427670093
+    }
+  ],
+  "centered128GameCropProof": [
+    {
+      "yaw": 0,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 22.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 45,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 67.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 90,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 112.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 135,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 157.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 180,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 202.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 225,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 247.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 270,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 292.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 315,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 337.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    }
+  ],
+  "sourceScale": "80 / 4.6 (unchanged)",
+  "nativeSize": 224,
+  "dimensions": [
+    224,
+    224
+  ],
+  "groundOrigins": {
+    "study": [
+      112,
+      140
+    ],
+    "engine": [
+      112,
+      112
+    ]
+  },
+  "study": "50 degrees; viewport expands by nativeSize / 128; constant 28px registration",
+  "game": "setCarMeshProjection(camera.projectionMatrix,nativeSize/2); centered ground",
+  "engineComponents": [
+    "CarMeshAsset",
+    "VehicleGeometryBatches",
+    "CarPixelOutline",
+    "setCarMeshProjection"
+  ],
+  "registration": "Human review pending; no gameplay activation",
+  "errors": []
+}

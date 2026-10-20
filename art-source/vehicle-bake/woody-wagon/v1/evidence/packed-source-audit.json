@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedRoofRack": {
+      "status": "passed",
+      "components": [
+        "STATIC roof rack slender longitudinal rail -1",
+        "STATIC roof rack planted foot -1 -0.18",
+        "STATIC roof rack planted foot -1 1.78",
+        "STATIC roof rack slender longitudinal rail 1",
+        "STATIC roof rack planted foot 1 -0.18",
+        "STATIC roof rack planted foot 1 1.78",
+        "STATIC roof rack slim crossbar -0.18",
+        "STATIC roof rack slim crossbar 1.78"
+      ],
+      "twoRailsTwoBarsFourFeet": true,
+      "noMotionMetadata": true,
+      "mounts": [
+        {
+          "xy": [
+            -0.18,
+            -0.61
+          ],
+          "actualRoofZ": 1.6209373474121094,
+          "footBottomZ": 1.6095,
+          "footTopZ": 1.6945,
+          "plantedInActualRoof": true
+        },
+        {
+          "xy": [
+            -0.18,
+            0.61
+          ],
+          "actualRoofZ": 1.6209375858306885,
+          "footBottomZ": 1.6095,
+          "footTopZ": 1.6945,
+          "plantedInActualRoof": true
+        },
+        {
+          "xy": [
+            1.78,
+            -0.61
+          ],
+          "actualRoofZ": 1.6209373474121094,
+          "footBottomZ": 1.6095,
+          "footTopZ": 1.6945,
+          "plantedInActualRoof": true
+        },
+        {
+          "xy": [
+            1.78,
+            0.61
+          ],
+          "actualRoofZ": 1.6209373474121094,
+          "footBottomZ": 1.6095,
+          "footTopZ": 1.6945,
+          "plantedInActualRoof": true
+        }
+      ]
+    },
+    "skinOwnership": {
+      "continuousLowerSideWoodOwner": "Long rounded estate coachwork and real wood-inlay skin",
+      "passengerQuarterGlassFrontRearRoofSkin": "Sweeping estate greenhouse actual continuous side front rear roof skin",
+      "oppositeSides": "Coherent continuous mirrored-family skin charts, no glass overlay meshes",
+      "atlasRegionsTopDownY": {
+        "woodSides": [
+          0,
+          176
+        ],
+        "passengerQuarterSides": [
+          176,
+          304
+        ],
+        "fixedFrontRearGlassAndTailgateWood": [
+          304,
+          416
+        ],
+        "roof": [
+          416,
+          448
+        ],
+        "hood": [
+          448,
+          480
+        ],
+        "roleSwatches": [
+          480,
+          512
+        ]
+      },
+      "woodStyle": "Broad warm inlays bounded by dark trim, sparse long grain strokes; actual body UV paint, no photoreal/random texture."
+    },
+    "master.blend": {
+      "sha256": "8e5575e44dc0d631a73e0ce7fc4350fc9816acb2778399366037639c2b73232b",
+      "triangles": 2792,
+      "meshObjects": 53,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "car.blend": {
+      "sha256": "94992fa2cb88d2ac95533bd71eae7ad4e30455e2fbc24ffcdc4009e4bfe4b1b7",
+      "triangles": 2792,
+      "meshObjects": 5,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+      "minBlenderWorld": [
+        -47.4782600402832,
+        -17.39130401611328,
+        4.76837158203125e-07
+      ],
+      "maxBlenderWorld": [
+        47.4782600402832,
+        17.39130401611328,
+        30.30434799194336
+      ],
+      "dimensionsBlenderWorld": [
+        94.9565200805664,
+        34.78260803222656,
+        30.3043475151062
+      ],
+      "dimensionsSourceUnits": [
+        5.459999904632568,
+        1.999999961853027,
+        1.7424999821186062
+      ],
+      "includesStaticRack": true
+    },
+    "actualGLBStaticRoofRack": {
+      "status": "passed",
+      "owner": "Body_static",
+      "noRollMetadata": true,
+      "includedInAllFixedTriangleClearance": true
+    }
+  }
+}

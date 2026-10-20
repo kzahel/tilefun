@@ -1,0 +1,164 @@
+{
+  "method": "Original blue/cream short heavy tow truck: closed framed blue cab skin, short flat rear recovery platform, low orange folded twin recovery frame, fixed broad winch, readable single gray cable path and cast C hook. Static stowed equipment only, no towing or cable physics.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      45,
+      64,
+      109
+    ],
+    "paintShadow": [
+      49,
+      81,
+      136
+    ],
+    "paintMid": [
+      53,
+      103,
+      164
+    ],
+    "paint": [
+      69,
+      132,
+      187
+    ],
+    "paintLight": [
+      104,
+      166,
+      213
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "creamShadow": [
+      191,
+      157,
+      119
+    ],
+    "creamMid": [
+      227,
+      193,
+      147
+    ],
+    "creamLight": [
+      255,
+      238,
+      202
+    ],
+    "orangeShadow": [
+      157,
+      72,
+      54
+    ],
+    "orange": [
+      221,
+      112,
+      48
+    ],
+    "orangeLight": [
+      247,
+      155,
+      67
+    ],
+    "deck": [
+      82,
+      104,
+      136
+    ],
+    "deckLight": [
+      105,
+      129,
+      155
+    ],
+    "cable": [
+      145,
+      150,
+      160
+    ],
+    "hook": [
+      182,
+      188,
+      195
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "ownership": "Own blue lower coachwork side/end/hood charts and cream closed cab continuous side glass with separate fixed front/rear and roof charts. Flat rear platform has its own deck and blue/cream side charts. Orange folded frame, gray winch/cable/hook own explicit padded constant-role swatches and named source components. No camera-projected paint or glass overlay planes.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Closed cab front/rear glass and cream roof own charts; coherent opposing blue/cream body sides. Flat recovery deck, low orange twin A-frame, one fixed gray cable path and a stowed gray C hook behind platform. No recessed cargo bed claim.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

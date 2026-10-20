@@ -1,0 +1,20 @@
+{
+  "blade": {
+    "bottomZ": 0.15,
+    "topZ": 1.17,
+    "thicknessX": 0.09,
+    "halfWidth": 1.45,
+    "yawSlope": 0.055,
+    "profileSegments": 12
+  },
+  "hopper": {
+    "xRange": [-0.7, 2.95],
+    "topZ": 2.6,
+    "bottomZ": 1.22,
+    "topHalfWidth": 1.07,
+    "bottomHalfWidth": 0.32,
+    "shellThickness": 0.1
+  },
+  "topBars": [-0.35, 1.1, 2.6],
+  "mountYs": [-0.5, 0.5]
+}

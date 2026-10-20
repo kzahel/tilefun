@@ -1,0 +1,90 @@
+{
+  "name": "rally-hatchback-own-skin-regions-v1",
+  "meaning": "ActualGLB triangle-ray UV samples verify door/quarter panes and frames, swept front windshield, sloping hatch glass, white roof and broad red hood stripe. All equipment fixed; closed cabin, no open-interior claim.",
+  "rays": [
+    {
+      "id": "left-main-door-pane",
+      "origin": [-0.1, -3, 1.2],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-rear-quarter-pane",
+      "origin": [0.74, -3, 1.19],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-main-bottom-frame",
+      "origin": [0.1, -3, 1.065],
+      "direction": [0, 1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "left-quarter-front-frame",
+      "origin": [0.54, -3, 1.2],
+      "direction": [0, 1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "right-main-door-pane",
+      "origin": [-0.1, 3, 1.2],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-rear-quarter-pane",
+      "origin": [0.74, 3, 1.19],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-main-bottom-frame",
+      "origin": [0.1, 3, 1.065],
+      "direction": [0, -1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "right-quarter-front-frame",
+      "origin": [0.54, 3, 1.2],
+      "direction": [0, -1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "front-windshield",
+      "origin": [-3, 0, 1.28],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "sloping-hatch-window",
+      "origin": [3, 0, 1.25],
+      "direction": [-1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "front-windshield-frame",
+      "origin": [-3, 0.7, 1.27],
+      "direction": [1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "hatch-window-frame",
+      "origin": [3, 0.62, 1.25],
+      "direction": [-1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "white-roof-shoulder",
+      "origin": [0.35, 0.5, 3],
+      "direction": [0, 0, -1],
+      "roles": ["roof", "paintLight"]
+    },
+    {
+      "id": "broad-red-hood-stripe",
+      "origin": [-1.6, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["red"]
+    }
+  ]
+}

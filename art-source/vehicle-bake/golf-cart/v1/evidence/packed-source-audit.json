@@ -1,0 +1,630 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedEquipment": {
+      "components": [
+        "STATIC front slim canopy support -1",
+        "STATIC rear slim canopy support -1",
+        "STATIC front slim canopy support 1",
+        "STATIC rear slim canopy support 1",
+        "STATIC white flat softly edged canopy own roof skin",
+        "STATIC small framed blue front windscreen own skin",
+        "STATIC steering column",
+        "STATIC small steering wheel ring",
+        "STATIC broad steering spoke 0",
+        "STATIC broad steering spoke 2.0943951023931953",
+        "STATIC broad steering spoke 4.1887902047863905",
+        "STATIC axle attachment arm -1.05",
+        "STATIC axle attachment arm 1.04"
+      ],
+      "fourSlimCanopySupports": [
+        "STATIC front slim canopy support -1",
+        "STATIC rear slim canopy support -1",
+        "STATIC front slim canopy support 1",
+        "STATIC rear slim canopy support 1"
+      ],
+      "supportDiameterSource": 0.048,
+      "supportDiameterWorld": 0.8347826086956524,
+      "noMotionMetadata": true,
+      "driverDisplay": "ordinary hidden; no occupant geometry"
+    },
+    "sourceOpenSpaces": {
+      "footwellRays": [
+        {
+          "xySource": [
+            -0.44,
+            -0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3200000524520874,
+          "owner": "Actual low open passenger footwell floor"
+        },
+        {
+          "xySource": [
+            -0.44,
+            0
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3200000524520874,
+          "owner": "Actual low open passenger footwell floor"
+        },
+        {
+          "xySource": [
+            -0.44,
+            0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3200000524520874,
+          "owner": "Actual low open passenger footwell floor"
+        },
+        {
+          "xySource": [
+            -0.12,
+            -0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999928474426,
+          "owner": "Actual low open passenger footwell floor"
+        },
+        {
+          "xySource": [
+            -0.12,
+            0
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3200000524520874,
+          "owner": "Actual low open passenger footwell floor"
+        },
+        {
+          "xySource": [
+            -0.12,
+            0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999928474426,
+          "owner": "Actual low open passenger footwell floor"
+        },
+        {
+          "xySource": [
+            0.04,
+            -0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999928474426,
+          "owner": "Actual low open passenger footwell floor"
+        },
+        {
+          "xySource": [
+            0.04,
+            0
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3200000524520874,
+          "owner": "Actual low open passenger footwell floor"
+        },
+        {
+          "xySource": [
+            0.04,
+            0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999928474426,
+          "owner": "Actual low open passenger footwell floor"
+        }
+      ],
+      "sideOpeningRays": [
+        {
+          "xSource": -0.44,
+          "zSource": 0.42,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.44,
+          "zSource": 0.55,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.44,
+          "zSource": 0.68,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.12,
+          "zSource": 0.42,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.12,
+          "zSource": 0.55,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.12,
+          "zSource": 0.68,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": 0.04,
+          "zSource": 0.42,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": 0.04,
+          "zSource": 0.55,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": 0.04,
+          "zSource": 0.68,
+          "fullSideToSideOpen": true
+        }
+      ],
+      "bagwellRays": [
+        {
+          "xySource": [
+            1.04,
+            -0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        },
+        {
+          "xySource": [
+            1.04,
+            0
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        },
+        {
+          "xySource": [
+            1.04,
+            0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        },
+        {
+          "xySource": [
+            1.2,
+            -0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        },
+        {
+          "xySource": [
+            1.2,
+            0
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        },
+        {
+          "xySource": [
+            1.2,
+            0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        },
+        {
+          "xySource": [
+            1.36,
+            -0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        },
+        {
+          "xySource": [
+            1.36,
+            0
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        },
+        {
+          "xySource": [
+            1.36,
+            0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999809265137,
+          "owner": "Mint rear bag tub integrated natural rear fenders"
+        }
+      ],
+      "seatTopMeasuredSource": 0.7899999618530273,
+      "seatAboveFloorMeasuredSource": 0.46999990940093994,
+      "bagwellRailTopMeasuredSource": 0.7900000214576721,
+      "bagwellRecessMeasuredSource": 0.27000004053115845,
+      "realOpenPassengerWell": true,
+      "realRecessedRearBagwell": true,
+      "originsBelowCanopy": true
+    },
+    "canopyMounts": {
+      "lowerEndpoints": [
+        {
+          "xySource": [
+            -0.65,
+            -0.66
+          ],
+          "supportBottomSource": 0.73,
+          "actualBodyTopSource": 0.7628354430198669,
+          "plantedInActualBody": true
+        },
+        {
+          "xySource": [
+            -0.65,
+            0.66
+          ],
+          "supportBottomSource": 0.73,
+          "actualBodyTopSource": 0.7613202929496765,
+          "plantedInActualBody": true
+        },
+        {
+          "xySource": [
+            0.9,
+            -0.66
+          ],
+          "supportBottomSource": 0.77,
+          "actualBodyTopSource": 0.7900000214576721,
+          "plantedInActualBody": true
+        },
+        {
+          "xySource": [
+            0.9,
+            0.66
+          ],
+          "supportBottomSource": 0.77,
+          "actualBodyTopSource": 0.7900000214576721,
+          "plantedInActualBody": true
+        }
+      ],
+      "upperEndpointZ": 1.72,
+      "canopyBottomZ": 1.7,
+      "allFourPlanted": true
+    },
+    "skinOwnership": {
+      "method": "Rounded mint nose owns actual top/side chart; four slim dark fixed canopy supports; white roof owns top/edge chart, opaque front screen owns continuous framed blue UV chart; tan cushion/back own coherent upholstery charts, open floor and real rear bagwell own separate rib/shadow paint. Constant-role swatches padded. No camera-projected paint or glass overlay on body.",
+      "frontScreenOwner": "STATIC small framed blue front windscreen own skin",
+      "roofOwner": "STATIC white flat softly edged canopy own roof skin",
+      "sidePassengerOpen": true,
+      "noBodyGlassOverlayMeshes": true
+    },
+    "master.blend": {
+      "sha256": "969f2947dd9a4815c74efce35f5227fbeb603c92056f9d6e2ed76bf4f0c3d91e",
+      "triangles": 2682,
+      "meshObjects": 47,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "wheelRadiusRig": [
+      {
+        "id": "FL",
+        "radiusSourceMeasured": 0.31000002803131627,
+        "radiusWorldDeclared": 5.391304347826088,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "FR",
+        "radiusSourceMeasured": 0.31000002803131627,
+        "radiusWorldDeclared": 5.391304347826088,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RL",
+        "radiusSourceMeasured": 0.31000002803131627,
+        "radiusWorldDeclared": 5.391304347826088,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RR",
+        "radiusSourceMeasured": 0.31000002803131627,
+        "radiusWorldDeclared": 5.391304347826088,
+        "geometryAndOwnMetadataMatch": true
+      }
+    ],
+    "car.blend": {
+      "sha256": "4bdf3b2d4c8ffd47abc426e2ae304396e36cb1bc6e515bcca816682ec4872a33",
+      "triangles": 2682,
+      "meshObjects": 5,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+      "minBlenderWorld": [
+        -27.82608413696289,
+        -14.782608985900879,
+        4.76837158203125e-07
+      ],
+      "maxBlenderWorld": [
+        27.82608413696289,
+        14.782608985900879,
+        31.304346084594727
+      ],
+      "dimensionsBlenderWorld": [
+        55.65216827392578,
+        29.565217971801758,
+        31.30434560775757
+      ],
+      "dimensionsSourceUnits": [
+        3.199999675750732,
+        1.7000000333786007,
+        1.79999987244606
+      ]
+    },
+    "actualGLBOpenSpaces": {
+      "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+      "footwellRays": [
+        {
+          "xySource": [
+            -0.44,
+            -0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.320000033378601,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.44,
+            0
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999237060546,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.44,
+            0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.320000033378601,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.12,
+            -0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999785423278,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.12,
+            0
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999785423278,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.12,
+            0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999785423278,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.04,
+            -0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999237060546,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.04,
+            0
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999237060546,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.04,
+            0.3
+          ],
+          "originZSource": 1.2,
+          "firstHitZSource": 0.3199999237060546,
+          "owner": "Body_static"
+        }
+      ],
+      "sideOpeningRays": [
+        {
+          "xSource": -0.44,
+          "zSource": 0.42,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.44,
+          "zSource": 0.55,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.44,
+          "zSource": 0.68,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.12,
+          "zSource": 0.42,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.12,
+          "zSource": 0.55,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": -0.12,
+          "zSource": 0.68,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": 0.04,
+          "zSource": 0.42,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": 0.04,
+          "zSource": 0.55,
+          "fullSideToSideOpen": true
+        },
+        {
+          "xSource": 0.04,
+          "zSource": 0.68,
+          "fullSideToSideOpen": true
+        }
+      ],
+      "bagwellRays": [
+        {
+          "xySource": [
+            1.04,
+            -0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5200000405311583,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.04,
+            0
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999856948851,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.04,
+            0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999856948851,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            -0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999856948851,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            0
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999856948851,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999856948851,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.36,
+            -0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999856948851,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.36,
+            0
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999856948851,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.36,
+            0.25
+          ],
+          "originZSource": 1.3,
+          "firstHitZSource": 0.5199999856948851,
+          "owner": "Body_static"
+        }
+      ],
+      "seatTopMeasuredSource": 0.7899999213218688,
+      "seatAboveFloorMeasuredSource": 0.4699998879432678,
+      "bagwellRailTopMeasuredSource": 0.7900000309944152,
+      "bagwellRecessMeasuredSource": 0.26999999046325684,
+      "realOpenPassengerWell": true,
+      "realRecessedRearBagwell": true,
+      "originsBelowCanopy": true
+    },
+    "actualGLBAttachments": {
+      "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+      "results": [
+        {
+          "id": "FL",
+          "actualTireSlabInnerAbsY": 9.217391967773438,
+          "actualStaticArmEndAbsY": 8.956521034240723,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "FR",
+          "actualTireSlabInnerAbsY": 9.217391967773438,
+          "actualStaticArmEndAbsY": 8.956521034240723,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RL",
+          "actualTireSlabInnerAbsY": 9.217391967773438,
+          "actualStaticArmEndAbsY": 8.956521034240723,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RR",
+          "actualTireSlabInnerAbsY": 9.217391967773438,
+          "actualStaticArmEndAbsY": 8.956521034240723,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        }
+      ],
+      "allFixedTrianglesSeparatelyClearanceProven": true
+    }
+  }
+}

@@ -1,7 +1,7 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: eight road originals integrated; autonomous run 153 continues with the next families.
+Status: thirteen road originals integrated locally; autonomous run 153 validates and expands the fleet.
 Updated: 2026-10-19.
 
 The owner separately authorized an original **explorer motorboat** and working
@@ -31,7 +31,15 @@ full-Chromium gameplay checks across all eight originals. The complete unit run
 passes 5,768 tests with the five known Windows failures and ten skips; typechecks,
 lint, build and the 1,774-identity Workshop inventory pass. New origin-centered
 bounds use the versioned v3 exporter; pickup is conservatively 95×39×36px.
-Microcar, woody wagon and limousine sources are next in independent review.
+Batch 2 adds microcar, woody wagon, limousine, hot rod and rally hatchback locally:
+**13 originals, 58 road types, 57 ordinary traffic types**, plus the boat. Its
+focused units, typechecks, lint, build and 1,779-identity inventory pass; the full
+unit suite records 5,808 passes, five known Windows failures and ten skips.
+The 1,557-case browser run remains active with the catalog held stable; final
+browser outcome and the second commit remain pending. Twenty further original
+source families through tractor and forklift have complete source and independent
+native-view/source-replay QA. These sources are not yet normal runtime
+vehicles. [Vehicle status](../vehicle-status.md) distinguishes those checkpoints.
 Historical checkpoint details below retain their original counts and gates.
 
 The owner accepted school bus v1 and explicitly authorized runtime integration.

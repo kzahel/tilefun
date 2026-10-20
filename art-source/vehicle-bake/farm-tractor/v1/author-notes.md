@@ -1,0 +1,11 @@
+# Farm tractor v1 source handoff
+
+Original green/yellow enclosed-cab farm tractor, long narrow hood with yellow side stripe, tall coherent blue-glass skin charts and broad green canopy; real large rear fenders, intentionally exposed small front tires. Yellow pressed rims, actual rolling rear chevron lugs, fixed upright exhaust and rear drawbar. No farm-tool/hitch physics or equipment animation claim.
+
+Each front radius.40 source/6.956521739130436 world, each rear.74/12.869565217391306; each has actual own tire geometry and metadata, centered grounded pivot and own steer>roll hierarchy. Rear base carcass is.70; actual rolling lugs reach.74. Full actual fixed-body/cylinder clearance and deliberate collision rejection/reset per tire on both packed low source (unchanged80/4.6 scale in memory) and exported GLB. Every actual GLB radius matches own metadata within.0001 world; four independent forward/reverse/quarter/absolute reset checks pass. Equal-angle mixed-size captures supplement ordinary shared-distance phases.
+
+Rear central tread crown region25/25 each with controls. Front crown coverage explicitly N/A/intentionally exposed, raw0/25 failures retained, never promoted to coverage passes. All32 native views, signed phases and wires inspected; wheel-ID views diagnose rear occlusion/front attachment only, never source paint.
+
+Native224/radius112 at common scale/cameras, study112,140 and game112,112. Standard192x224 origin96,144 cardinals4,12,8,0 exact occupiedRGBA sequences via(-16,+32), no resize/recenter. All16 centered128 game crops exact. Actual narrow hood/tall cab/canopy/rear fenders/drawbar triangle rays and low-cab/wide-hood/displaced-hitch rejection/reset pass;15 actual barycentric UV/atlas semantic rays.
+
+109 named editable master components and5 runtime meshes, packed atlas and explicitly unused planning palette in both scenes; economical runtime-topology master, no automatic high-to-low claim. One opaque512 nearest unlit atlas with exact embedded pixels. Seven retained source/config inputs plus catalog.py reproduce GLB/atlas/recipe byteexact in a fresh miniature repo; no data geometry input. Desktop/mobile/offline full bundled Chromium passes; no offline network requests. Parent owns independent QA/capture/freeze/runtime/docs/global validation. No formal human approval claimed.

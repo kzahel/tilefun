@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "motorhome--v1",
+    "glbSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+    "triangles": 2858,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.521739959716797,
+        "minimumGap": 1.6127981729712708,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.521739959716797,
+        "minimumGap": 1.612798724799772,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.521739959716797,
+        "minimumGap": 1.612793488502394,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.521739959716797,
+        "minimumGap": 1.612793488502394,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

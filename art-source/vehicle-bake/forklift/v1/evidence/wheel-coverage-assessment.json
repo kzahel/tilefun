@@ -1,0 +1,69 @@
+{
+  "status": "assessment",
+  "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+  "allFourCrownsCovered": false,
+  "frontCoverage": "not-applicable/intentionally-open",
+  "rearCoverage": "meets-declared-finite-region",
+  "familyDeclaredFrontException": true,
+  "policy": "Forklift front .32source wheels are intentionally exposed outboard of its narrow chassis. No front fender caps or claim of supported front crowns. Raw shared expected-fraction failures are retained, not changed to passes.",
+  "regionMeaning": "Finite region is declared for the rear .25source tire tread with .20source width. Front samples remain raw diagnostics only and do not qualify front tread coverage.",
+  "front": [
+    {
+      "wheel": "Wheel_FL_Roll",
+      "applicability": "not-applicable/intentionally-open",
+      "rawCoveredCount": 0,
+      "rawSampleCount": 25,
+      "rawDeclaredExpectationMet": false
+    },
+    {
+      "wheel": "Wheel_FR_Roll",
+      "applicability": "not-applicable/intentionally-open",
+      "rawCoveredCount": 0,
+      "rawSampleCount": 25,
+      "rawDeclaredExpectationMet": false
+    }
+  ],
+  "rear": [
+    {
+      "wheel": "Wheel_RL_Roll",
+      "applicability": "covered rear fender",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_RR_Roll",
+      "applicability": "covered rear fender",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    }
+  ],
+  "controls": {
+    "bodyRemovalCoveredCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "syntheticBroadPanelPositiveCounts": [
+      25,
+      25,
+      25,
+      25
+    ],
+    "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "positiveAndNegativeControlsPassed": true,
+    "fixtureIsNotCandidateGeometry": true,
+    "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+  },
+  "portableRawEvidence": "art-source/vehicle-bake/forklift/v1/evidence/upper-wheel-coverage-raw.json",
+  "portableRawSha256": "710dd1ff8214b3754483cd8c9049a4c4302a36f19a03eb05a5bb4cc4edfcc601",
+  "separateRequirements": "All-four whole-fixed-body neutral rolling clearance and collision negative/reset mandatory; all32 native study/game views and wheel-ID diagnostics separately inspect exposed front attachment and rear occlusion. No universal coverage pass asserted."
+}

@@ -1,0 +1,16 @@
+{
+  "candidates": [
+    {
+      "id": "cement-mixer--v1",
+      "glb": "cement-mixer/v1/model.glb",
+      "wheelIds": [
+        "FL",
+        "FR",
+        "ML",
+        "MR",
+        "RL",
+        "RR"
+      ]
+    }
+  ]
+}

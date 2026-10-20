@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "microcar-v1",
+      "name": "Tiny bubble microcar",
+      "title": "Tiny bubble microcar \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original short egg/bubble coachwork with its own rounded cross section, tiny axles and local wheel pockets. Continuous longitudinal/angular skin UV owns curved panoramic front and one side pane each with dark frames; pale upper paint over dusty coral rose. No glass overlays, projection or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 2596,
+        "vertices": 5314,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 192480,
+        "sha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.043478260869565,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.043478260869565,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.043478260869565,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.043478260869565,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/microcar/v1/atlas.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/atlas.png",
+          "sha256": "f21ea2d9f704abaa3ca47f51ff8bb3478bada3e1b0e0358e7c28570e887d10e7"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/capture.json",
+          "sha256": "c124b863080072699ac9435a3a2a8e937b4d3182902e86fe3fd64e9a1579d938"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-0.png",
+          "sha256": "febe8edfa41f37ad9eed39186e18f6c3e6e9e0d582640deb6e7e8390aa8ed7fb"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-1.png",
+          "sha256": "8ec0e2313a4c831a8ed8d546d92184750cd020a6d93d1a5679fd5f2fbc877c6d"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-10.png",
+          "sha256": "64bb1394b87e0dd67a636c808cb5465f5a6d65b201e6045cf1e883c7d857c74a"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-11.png",
+          "sha256": "893da3a5a177ef02142502c023daa9b3e8a71f8a5dc2d0633f0462ef26e2d325"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-12.png",
+          "sha256": "0459c43e229b5669ca04272ee3d65ab843c0627fb411991eed01e0252e3a8e0a"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-13.png",
+          "sha256": "8bf710da529037325c383e96482dff53c3911c181e486f04510249331e06c78d"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-14.png",
+          "sha256": "b84c291a3b2e67a2ac3962b4ea2f7255d060751a16b1a0f05082c1ba9cc64954"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-15.png",
+          "sha256": "bfc031028ae24efb58a2893e6a46b96a24e61120a8ae65d43d10d2a03364fadf"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-2.png",
+          "sha256": "93d15660cf1193d7557236fb543e861247c0ba44e8e2b74e176b6fa0ade30d49"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-3.png",
+          "sha256": "256e98e1dc7634efa1a49482051788d71aa9d1fcb1eec6022798f2344dbeacc9"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-4.png",
+          "sha256": "b71effdc1e0ed7b2398cd9661d9808091b56cffaf76fafcd11ea73019ab2d9db"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-5.png",
+          "sha256": "57b0d0ba856da0585608dbf31065ad64c8051f11b696f928e16028f92213eae5"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-6.png",
+          "sha256": "c4a992c5a41ed992a686c1af466a86ce4fd3eac41471289a18c1c13a1b2d94c5"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-7.png",
+          "sha256": "30ede06e4c02f1e134a3a58d040bc970639ba6b50939a5c240d1085046428008"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-8.png",
+          "sha256": "2749f872da25a96a0197850345f41063eae81d7baba1b200db4e088f66b94e1e"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/engine-9.png",
+          "sha256": "65185fa8fdcc54b1c101f485b75d0dd7338eaac5e0f18efbebdf7ee768bbe60a"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/game-roll-0.png",
+          "sha256": "93d15660cf1193d7557236fb543e861247c0ba44e8e2b74e176b6fa0ade30d49"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/game-roll-1.png",
+          "sha256": "3fa62e4114e0e86ab2a6b7636df65f44256efffcdf213fb42bb8f62095220458"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/game-roll-2.png",
+          "sha256": "3fa62e4114e0e86ab2a6b7636df65f44256efffcdf213fb42bb8f62095220458"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/game-roll-3.png",
+          "sha256": "c2b3d310bfa0fce614f6ee9de2f277b1e8910a67c50f1b2d519b49781c893d9b"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/game-roll-4.png",
+          "sha256": "c2b3d310bfa0fce614f6ee9de2f277b1e8910a67c50f1b2d519b49781c893d9b"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/game-roll-5.png",
+          "sha256": "4803a3dde48ef43835bd483813ebc33e5ee2ca09728cfb80b19a2a4b7a44314e"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/game-roll-6.png",
+          "sha256": "9000e76ad28d0a392f5a2506cb5dcb28771b6631c0b4e105457fa19c0071d80d"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/game-roll-7.png",
+          "sha256": "8e56117641bcf7504d038068b11fb1b86eb9e228bb286696d9f68ecc466e2d00"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/inspection-engine.png",
+          "sha256": "2f57f0d2e7ddc171ba1f5e525598e9f1fe25fcbbfca64cf12dba084394406bdb"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/inspection-phases.png",
+          "sha256": "d854b4b30d0808e5025c093af47d7cae2ffb6380bf758318ba86e31152cb3e53"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/inspection-study.png",
+          "sha256": "0ebe4b3f82741a64cdcd3fc1cc6e0d253c1644f3554715852c3418e9eb4ae649"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/roll-0.png",
+          "sha256": "49e8d8efc7b9813d15ab78880e905e2824dc422a9daccd0380be007a8731cd2d"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/roll-1.png",
+          "sha256": "03ba502a336dea9414804a58236c8fd615450d721436b7be173aa1dd292f7e7c"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/roll-2.png",
+          "sha256": "3fc9b3cd6e80761c66069d84cd9e628401657d35b072239ef33fb2af62784933"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/roll-3.png",
+          "sha256": "e9765ba682c97bb55ba283e5234676ab2e31558fbf4ca312f948dcb9fa21a0f2"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/roll-4.png",
+          "sha256": "605562bd2d4ddf504b454c2a49a9ca1b0c52e060e886c9515154d0eafad408e2"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/roll-5.png",
+          "sha256": "dd8b90415c1764a443fa3694c832181a9f6b58f1583aea83f689258b1efd7a82"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/roll-6.png",
+          "sha256": "87cc74e5ccc8f24c44dacbac1b6a7f8805d83ff0673eed244bd0a08a61d77897"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/roll-7.png",
+          "sha256": "e9765ba682c97bb55ba283e5234676ab2e31558fbf4ca312f948dcb9fa21a0f2"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-0.png",
+          "sha256": "b1968b804070928053f3e8e0e27b0bc1e06b379cdf21ae2aa471058c655bd574"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-1.png",
+          "sha256": "e343243d6342cc4554965a70bec7f5d5c2e3bb192e117ca30b54bfba2221450d"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-10.png",
+          "sha256": "3c7913269df701cc55e1ab3ef57b2129415a651c7f50e522894d52b9f7aa6be6"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-11.png",
+          "sha256": "82e95d70964379d7a35dba0a9b627b0b743adffe0ec80a99c3abc7dc6861632a"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-12.png",
+          "sha256": "431dd1f7830c2881e33b7f6c8053840a562fc9654ddc5a49a5a57b91f65a521d"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-13.png",
+          "sha256": "1b852c44fb6cd7736773bf5549f7e5bb3706bb92e6c145428fd4d7ca9f701da7"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-14.png",
+          "sha256": "5bd1c980ea70db2738ee7cd60c8c5ef053a8a41b7e27c415dcc3afdc5ef0053f"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-15.png",
+          "sha256": "a9efd146b2e877343a52e7512ecda6ce20b0a5394fd0bc777b2f435832e6b6cd"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-2.png",
+          "sha256": "49e8d8efc7b9813d15ab78880e905e2824dc422a9daccd0380be007a8731cd2d"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-3.png",
+          "sha256": "14fe1e06b8e85ecbd821cf2d6f2b69e42a432f76dde86c56aa5229ee12ce5363"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-4.png",
+          "sha256": "a410e09d139e669d53c668c49af579e45bca09db96729d3053fe7ff55be8660b"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-5.png",
+          "sha256": "3d50270a804f9d0f7a7cb8e354eaa7ba83bcb805ec24908f0bd528534d64e97d"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-6.png",
+          "sha256": "e87b112e0f8edaf3587ab004c3c3dbe57c70f874bb600e10f9f9c0b14350ad03"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-7.png",
+          "sha256": "70709bbb39ebe17ad720159dff17a08a376c275148f6a6adcf5c37ab337e95cf"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-8.png",
+          "sha256": "d41e0470e25639e7ff697583b44ff89258e6006055cd371b4c326e8569960999"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/study-9.png",
+          "sha256": "f5da08cc696c445925024d3c0ff42b71521db64153ea3c83d14f16df51a1fce8"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/wire-engine.png",
+          "sha256": "42c4222eca951b6c509ddb0006016362dd26f2017f3a11f7b8acea7d6a5590f4"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/engine/wire-study.png",
+          "sha256": "4dbf08b23749ca88361efa6f9952d3b39bf060b9ab09a169042b2133fa155c3a"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/model.glb",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/model.glb",
+          "sha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/recipe.json",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/recipe.json",
+          "sha256": "e10254fe5790831ee7d316a6c4ed9b55500b4ee6cf21deab34f2e9139f8c2a15"
+        },
+        {
+          "source": "demos/vehicle-bake/microcar/v1/report.json",
+          "retained": "demos/original-vehicles/microcar-v1/inputs/report.json",
+          "sha256": "aa5878e17bf036cbe3c26326c8ce82472ac47b208d808fb8e0e1c26a674a744d"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

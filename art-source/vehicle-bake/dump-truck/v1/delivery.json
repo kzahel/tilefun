@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "report": "public/demos/vehicle-bake/dump-truck/v1/report.json",
+  "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+  "atlasSha256": "1c204674fb084be85a173f9286981a91319f5cb03ff4414bc79af2e1366b9953",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/dump-truck/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/dump-truck/capture.mjs",
+    "node scripts/vehicle-bake/dump-truck/independent-visual.mjs",
+    "node scripts/vehicle-bake/dump-truck/wheel-visual.mjs",
+    "python scripts/vehicle-bake/dump-truck/sheets.py",
+    "python scripts/vehicle-bake/dump-truck/audit-inventory.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/dump-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance-v2.py -- art-source/vehicle-bake/dump-truck/v1/evidence/clearance-input.json data/vehicle-bake/dump-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/dump-truck/v1/model.glb --config art-source/vehicle-bake/dump-truck/v1/coverage-region.json --output data/vehicle-bake/dump-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/dump-truck/assess-coverage.py --input data/vehicle-bake/dump-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/dump-truck/assess-fit.py",
+    "python scripts/vehicle-bake/family-package-v2.py data/vehicle-bake/dump-truck/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture-v2.mjs data/vehicle-bake/dump-truck/author-config.json --qa-only"
+  ]
+}

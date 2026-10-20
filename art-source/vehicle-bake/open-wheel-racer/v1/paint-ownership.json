@@ -1,0 +1,276 @@
+{
+  "method": "Original narrow formula chassis with true recessed single-seat cockpit, sidepods, static wings and wishbone/upright geometry ending short of exposed tire inner faces. Cyan/turquoise skin, yellow nose/wing accents, exact UV-owned dark cockpit/seat and small opaque blue windscreen. All4road wheels intentionally exposed, no fenders/caps. Front/rear radii independent; no high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      43,
+      47,
+      62
+    ],
+    "tireLight": [
+      63,
+      68,
+      84
+    ],
+    "treadMark": [
+      88,
+      94,
+      111
+    ],
+    "paintDeep": [
+      34,
+      99,
+      123
+    ],
+    "paintShadow": [
+      35,
+      123,
+      145
+    ],
+    "paintMid": [
+      40,
+      149,
+      166
+    ],
+    "paint": [
+      48,
+      174,
+      184
+    ],
+    "paintLight": [
+      103,
+      204,
+      200
+    ],
+    "yellow": [
+      255,
+      216,
+      108
+    ],
+    "yellowLight": [
+      255,
+      237,
+      156
+    ],
+    "cream": [
+      255,
+      233,
+      187
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "floor": [
+      52,
+      68,
+      80
+    ],
+    "inner": [
+      39,
+      53,
+      65
+    ],
+    "seat": [
+      48,
+      53,
+      70
+    ]
+  },
+  "ownership": "Own narrow formula chassis UV skin: broad cyan/yellow nose, real low floor and dark inner panels/seat, opaque framed blue windscreen, sidepods and static broad wings. Four intentionally exposed tire assemblies, no crown/fender caps. Wishbone/upright tips end subpixel short of real rotating inner tire faces. No source projection, glass overlays or high-to-low transfer claim.",
+  "semanticOwners": {
+    "chassisTop": {
+      "component": "Own narrow formula monocoque with actual recessed cockpit",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        160
+      ],
+      "meaning": "Actual chassis top cyan clusters and broad yellow nose accent; no surface bridges the open cockpit"
+    },
+    "chassisSide": {
+      "atlasPixelRect": [
+        0,
+        160,
+        512,
+        320
+      ],
+      "meaning": "Narrow low body-side cyan shading and yellow nose accents"
+    },
+    "smallWindscreen": {
+      "component": "Small static framed opaque blue windscreen",
+      "atlasPixelRect": [
+        0,
+        320,
+        512,
+        448
+      ],
+      "meaning": "Actual front/back slab faces own bounded coolblue glass, thin slab edges stay ink"
+    },
+    "cockpit": {
+      "roles": [
+        "floor",
+        "inner",
+        "seat",
+        "ink",
+        "tireLight"
+      ],
+      "meaning": "Recessed actual floor, inner panels/dashboard and fixed dark seat; no driver or helmet sphere"
+    },
+    "wingsSuspension": {
+      "roles": [
+        "paint",
+        "paintLight",
+        "paintShadow",
+        "yellow",
+        "ink",
+        "rim"
+      ],
+      "meaning": "Fixed front/rear airfoils, endplates, supports and wishbone/upright rods; static exact palette UV islands"
+    },
+    "exposedWheels": {
+      "roles": [
+        "tire",
+        "tireLight",
+        "rim",
+        "silver",
+        "white"
+      ],
+      "meaning": "Independent wheel meshes with front0.39/rear0.45 source radii; no fake fender covers. Ordinary same-distance roll differs by radius; equal-angle proof is family-only."
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "treadMark": [
+      112,
+      488
+    ],
+    "paintDeep": [
+      144,
+      488
+    ],
+    "paintShadow": [
+      176,
+      488
+    ],
+    "paintMid": [
+      208,
+      488
+    ],
+    "paint": [
+      240,
+      488
+    ],
+    "paintLight": [
+      272,
+      488
+    ],
+    "yellow": [
+      304,
+      488
+    ],
+    "yellowLight": [
+      336,
+      488
+    ],
+    "cream": [
+      368,
+      488
+    ],
+    "glassDark": [
+      400,
+      488
+    ],
+    "glass": [
+      432,
+      488
+    ],
+    "glassLight": [
+      464,
+      488
+    ],
+    "glassGlint": [
+      496,
+      488
+    ],
+    "rim": [
+      16,
+      504
+    ],
+    "silver": [
+      48,
+      504
+    ],
+    "white": [
+      80,
+      504
+    ],
+    "floor": [
+      112,
+      504
+    ],
+    "inner": [
+      144,
+      504
+    ],
+    "seat": [
+      176,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Single-seat real open cockpit, long yellow nose, broad fixed wings and four intentionally exposed wheel crowns; different front/rear radii have explicit owners.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

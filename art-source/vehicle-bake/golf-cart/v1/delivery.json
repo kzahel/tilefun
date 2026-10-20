@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "report": "public/demos/vehicle-bake/golf-cart/v1/report.json",
+  "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+  "atlasSha256": "d5d67a2c4c23b35a7ab0ec6d1b258ab11e6c83762d54d443cd598a8b59322bbe",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/golf-cart/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/golf-cart/capture.mjs",
+    "node scripts/vehicle-bake/golf-cart/independent-visual.mjs",
+    "node scripts/vehicle-bake/golf-cart/wheel-visual.mjs",
+    "python scripts/vehicle-bake/golf-cart/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/golf-cart/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/golf-cart/v1/evidence/clearance-input.json data/vehicle-bake/golf-cart/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/golf-cart/v1/model.glb --config art-source/vehicle-bake/golf-cart/v1/coverage-region.json --output data/vehicle-bake/golf-cart/recheck-coverage.json",
+    "python scripts/vehicle-bake/golf-cart/assess-coverage.py --input data/vehicle-bake/golf-cart/recheck-coverage.json",
+    "python scripts/vehicle-bake/golf-cart/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/golf-cart/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/golf-cart/author-config.json --qa-only"
+  ]
+}

@@ -1,0 +1,133 @@
+"""Contact sheets from actual shared engine PNGs; integer nearest scaling only."""
+
+from pathlib import Path
+from PIL import Image, ImageDraw
+
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / "AGENTS.md").is_file())
+p = ROOT / "data/vehicle-bake/cement-mixer/author-view/captures"
+for mode in ["study", "engine"]:
+    cell = 512
+    sheet = Image.new("RGB", (4 * cell, 4 * (cell + 26)), "#263d37")
+    draw = ImageDraw.Draw(sheet)
+    for i in range(16):
+        im = Image.open(p / f"{mode}-{i}.png").convert("RGBA")
+        assert im.size == (256, 256)
+        x = (i % 4) * cell
+        y = (i // 4) * (cell + 26)
+        draw.text(
+            (x + 8, y + 4),
+            f"{mode} / {i*22.5:g} degrees / actual GLB / 2x nearest",
+            fill="white",
+        )
+        sheet.paste(
+            im.resize((cell, cell), Image.Resampling.NEAREST),
+            (x, y + 26),
+            im.resize((cell, cell), Image.Resampling.NEAREST),
+        )
+    sheet.save(p / f"inspection-{mode}.png")
+sheet = Image.new("RGB", (4 * 512, 4 * 538), "#263d37")
+draw = ImageDraw.Draw(sheet)
+for row, mode in enumerate(["study", "engine"]):
+    for i in range(8):
+        prefix = "roll" if mode == "study" else "game-roll"
+        im = (
+            Image.open(p / f"{prefix}-{i}.png")
+            .convert("RGBA")
+            .resize((512, 512), Image.Resampling.NEAREST)
+        )
+        x = (i % 4) * 512
+        y = (row * 2 + i // 4) * 538
+        phase = (i if i < 4 else i - 8) * 45
+        draw.text(
+            (x + 8, y + 4), f"{mode} / roll {phase} degrees / 2x nearest", fill="white"
+        )
+        sheet.paste(im, (x, y + 26), im)
+sheet.save(p / "inspection-phases.png")
+
+
+# Detail sheets use a single fixed 192px crop per camera, then nearest2x. Original
+# full256px captures above remain the camera/clipping evidence.
+def detail_sheet(name, panels):
+    out = Image.new("RGB", (1536, 408 * ((len(panels) + 3) // 4)), "#263d37")
+    pen = ImageDraw.Draw(out)
+    for i, (file, mode, label) in enumerate(panels):
+        box = (32, 48, 224, 240) if mode == "study" else (32, 8, 224, 200)
+        tile = (
+            Image.open(p / file)
+            .convert("RGBA")
+            .crop(box)
+            .resize((384, 384), Image.Resampling.NEAREST)
+        )
+        x, y = (i % 4) * 384, (i // 4) * 408
+        out.paste(tile, (x, y + 24), tile)
+        pen.text((x + 5, y + 5), label, fill="white")
+    out.save(p / name)
+
+
+for mode in ["study", "engine"]:
+    detail_sheet(
+        f"inspection-tight-{mode}.png",
+        [
+            (f"{mode}-{i}.png", mode, f"{mode} {i * 22.5:g}deg / fixed crop2x")
+            for i in range(16)
+        ],
+    )
+detail_sheet(
+    "inspection-tight-phases.png",
+    [
+        (
+            f"{'roll' if mode == 'study' else 'game-roll'}-{i}.png",
+            mode,
+            f"{mode} {(i if i < 4 else i - 8) * 45}deg",
+        )
+        for mode in ["study", "engine"]
+        for i in range(8)
+    ],
+)
+if (p / "independent-FL-0.png").exists():
+    detail_sheet(
+        "inspection-independent.png",
+        [
+            (
+                f"independent-{w}-{i}.png",
+                "engine",
+                f"{w} only {[0, 90, -90, 0][i]}deg / other fixed",
+            )
+            for w in ["FL", "FR", "ML", "MR", "RL", "RR"]
+            for i in range(4)
+        ],
+    )
+detail_sheet(
+    "inspection-wires.png",
+    [
+        (f"wire-{mode}.png", mode, f"{mode} actual GLB wireframe")
+        for mode in ["study", "engine"]
+    ],
+)
+
+if (p / "equal-phase-study-0.png").exists():
+    detail_sheet(
+        "inspection-equal-phases.png",
+        [
+            (
+                f"equal-phase-{mode}-{i}.png",
+                mode,
+                f"{mode} ALL wheels {(i if i < 4 else i - 8) * 45}deg",
+            )
+            for mode in ["study", "engine"]
+            for i in range(8)
+        ],
+    )
+if (p / "wheel-id-study-0.png").exists():
+    for mode in ["study", "engine"]:
+        detail_sheet(
+            f"inspection-wheel-id-{mode}.png",
+            [
+                (
+                    f"wheel-id-{mode}-{i}.png",
+                    mode,
+                    f"{mode} {i * 22.5:g}deg / wheel-ID only",
+                )
+                for i in range(16)
+            ],
+        )

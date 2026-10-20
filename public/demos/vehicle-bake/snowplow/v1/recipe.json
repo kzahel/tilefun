@@ -1,0 +1,829 @@
+{
+  "family": "orange-work-cab-yellow-scooped-blade-blue-V-hopper",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    7.0,
+    2.9,
+    2.65
+  ],
+  "wheelRadius": 0.5,
+  "wheelWidth": 0.32,
+  "axles": [
+    -2.15,
+    2.02
+  ],
+  "halfTrack": 0.94,
+  "arch": {
+    "cutRadius": 0.6,
+    "pocketInnerY": 0.7,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [
+      0.69,
+      0.82,
+      1.04,
+      1.13,
+      1.17
+    ],
+    "shoulderRadii": [
+      0.62,
+      0.66,
+      0.66,
+      0.64,
+      0.62
+    ],
+    "archRadius": 0.59
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      139,
+      71,
+      48
+    ],
+    "paintShadow": [
+      176,
+      85,
+      44
+    ],
+    "paintMid": [
+      208,
+      104,
+      48
+    ],
+    "paint": [
+      229,
+      118,
+      55
+    ],
+    "paintLight": [
+      250,
+      153,
+      69
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "deck": [
+      163,
+      168,
+      176
+    ],
+    "deckLight": [
+      184,
+      188,
+      195
+    ],
+    "deckEdge": [
+      124,
+      135,
+      145
+    ],
+    "deckSeam": [
+      98,
+      107,
+      119
+    ],
+    "frame": [
+      63,
+      69,
+      79
+    ],
+    "blade": [
+      249,
+      196,
+      57
+    ],
+    "bladeLight": [
+      255,
+      222,
+      98
+    ],
+    "bladeShadow": [
+      207,
+      146,
+      43
+    ],
+    "hopper": [
+      84,
+      118,
+      148
+    ],
+    "hopperLight": [
+      119,
+      151,
+      176
+    ],
+    "hopperInner": [
+      73,
+      91,
+      114
+    ]
+  },
+  "render": {
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      128,
+      156
+    ],
+    "engineGroundOrigin": [
+      128,
+      128
+    ]
+  },
+  "paintMethod": "Original snowplow: orange closed work cab with blue framed glass on actual skin; solid yellow curved scoop with separate dark cutting edge, four rigid gray mount links; open thick blue/gray V-section salt hopper with three broad top bars. All equipment rigid/stowed; no plowing, spreading, terrain modification or animated equipment claim.",
+  "bodyStations": [
+    [
+      -3.04,
+      1.0,
+      1.2
+    ],
+    [
+      -2.99,
+      1.05,
+      1.65
+    ],
+    [
+      -2.74,
+      1.055,
+      2.3
+    ],
+    [
+      -2.5,
+      1.055,
+      2.36
+    ],
+    [
+      -1.15,
+      1.055,
+      2.36
+    ],
+    [
+      -0.97,
+      1.02,
+      2.28
+    ],
+    [
+      -0.91,
+      0.98,
+      2.17
+    ]
+  ],
+  "bodySection": [
+    [
+      -0.87,
+      0
+    ],
+    [
+      -1,
+      0.07
+    ],
+    [
+      -1,
+      0.42
+    ],
+    [
+      -0.99,
+      0.8
+    ],
+    [
+      -0.97,
+      0.92
+    ],
+    [
+      -0.9,
+      0.985
+    ],
+    [
+      -0.7,
+      1.015
+    ],
+    [
+      0,
+      1.025
+    ],
+    [
+      0.7,
+      1.015
+    ],
+    [
+      0.9,
+      0.985
+    ],
+    [
+      0.97,
+      0.92
+    ],
+    [
+      0.99,
+      0.8
+    ],
+    [
+      1,
+      0.42
+    ],
+    [
+      1,
+      0.07
+    ],
+    [
+      0.87,
+      0
+    ]
+  ],
+  "equipment": {
+    "blade": {
+      "bottomZ": 0.15,
+      "topZ": 1.17,
+      "thicknessX": 0.09,
+      "halfWidth": 1.45,
+      "yawSlope": 0.055,
+      "profileSegments": 12
+    },
+    "hopper": {
+      "xRange": [
+        -0.7,
+        2.95
+      ],
+      "topZ": 2.6,
+      "bottomZ": 1.22,
+      "topHalfWidth": 1.07,
+      "bottomHalfWidth": 0.32,
+      "shellThickness": 0.1
+    },
+    "topBars": [
+      -0.35,
+      1.1,
+      2.6
+    ],
+    "mountYs": [
+      -0.5,
+      0.5
+    ]
+  },
+  "components": [
+    {
+      "name": "Own short orange closed work cab",
+      "group": "body",
+      "triangles": 326,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Actual open thick V section salt hopper",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "deckEdge",
+        "hopper",
+        "hopperInner",
+        "hopperLight"
+      ]
+    },
+    {
+      "name": "Gray hopper end plate -0.7",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Gray hopper end plate 2.95",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Broad fixed hopper top bar -0.35",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Broad fixed hopper top bar 1.1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Broad fixed hopper top bar 2.6",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Dark longitudinal underframe rail -0.56",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Dark longitudinal underframe rail 0.56",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Fixed hopper saddle -0.6",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Fixed hopper saddle 0.9",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Fixed hopper saddle 2.75",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Solid curved yellow plow scoop with dark lower edge",
+      "group": "body",
+      "triangles": 100,
+      "paintRoles": [
+        "blade",
+        "bladeLight",
+        "bladeShadow",
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed gray blade mount (-0.5, False)",
+      "group": "body",
+      "triangles": 32,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Fixed gray blade mount (-0.5, True)",
+      "group": "body",
+      "triangles": 32,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Blade rear stiffener -0.5",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "bladeShadow"
+      ]
+    },
+    {
+      "name": "Fixed gray blade mount (0.5, False)",
+      "group": "body",
+      "triangles": 32,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Fixed gray blade mount (0.5, True)",
+      "group": "body",
+      "triangles": 32,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Blade rear stiffener 0.5",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "bladeShadow"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard -2.15 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard -2.15 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard 2.02 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "deck",
+        "deckLight",
+        "deckSeam"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard 2.02 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "deck",
+        "deckLight",
+        "deckSeam"
+      ]
+    },
+    {
+      "name": "Gray front work-truck bumper",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Rear gray bumper with small hazard paint",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckLight"
+      ]
+    },
+    {
+      "name": "Small rear red lamp -0.93",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Small rear red lamp 0.93",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Fixed cab mirror stalk -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Compact fixed blue mirror -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Mirror glass owner -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "glass"
+      ]
+    },
+    {
+      "name": "Fixed cab mirror stalk 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Compact fixed blue mirror 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Mirror glass owner 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "glass"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.1500000953674316,
+        -0.9399999976158142,
+        0.5
+      ],
+      "centerExport": [
+        -37.391306006390124,
+        8.695652173913045,
+        16.347826045492422
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.1500000953674316,
+        0.9399999976158142,
+        0.5
+      ],
+      "centerExport": [
+        -37.391306006390124,
+        8.695652173913045,
+        -16.347826045492422
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        2.0199999809265137,
+        -0.9399999976158142,
+        0.5
+      ],
+      "centerExport": [
+        35.1304344508959,
+        8.695652173913045,
+        16.347826045492422
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        2.0199999809265137,
+        0.9399999976158142,
+        0.5
+      ],
+      "centerExport": [
+        35.1304344508959,
+        8.695652173913045,
+        -16.347826045492422
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    }
+  ],
+  "method": "Original snowplow: orange closed work cab with blue framed glass on actual skin; solid yellow curved scoop with separate dark cutting edge, four rigid gray mount links; open thick blue/gray V-section salt hopper with three broad top bars. All equipment rigid/stowed; no plowing, spreading, terrain modification or animated equipment claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/snowplow/build.py",
+    "scripts/vehicle-bake/snowplow/family.json",
+    "scripts/vehicle-bake/snowplow/coverage-region.json",
+    "scripts/vehicle-bake/snowplow/surface-regions.json",
+    "scripts/vehicle-bake/snowplow/equipment-region.json",
+    "scripts/vehicle-bake/snowplow/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

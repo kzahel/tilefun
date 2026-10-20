@@ -1,0 +1,801 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "monster-truck",
+  "route": "monster-truck",
+  "revision": "v1",
+  "method": "Independent raised narrow short-cab lime/purple monster pickup, real short recessed bed, massive block-tread black wheels/purple hubs and visible fixed dark chassis/suspension. Own continuous actual-skin glass/roof/hood charts and separate bed floor/interior/tailgate paint. Intentionally exposed tire crowns, no fake coverage caps.",
+  "geometry": {
+    "triangles": 3534,
+    "vertices": 7772,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 273568,
+    "sha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 14.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 14.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 14.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 14.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4500000476837158,
+        -1.100000023841858,
+        0.8500000238418579
+      ],
+      "centerExport": [
+        -25.217392133629843,
+        14.782609110293183,
+        19.130435197249707
+      ],
+      "radiusBlender": 0.85,
+      "wheel_radius": 14.782608695652176
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4500000476837158,
+        1.100000023841858,
+        0.8500000238418579
+      ],
+      "centerExport": [
+        -25.217392133629843,
+        14.782609110293183,
+        -19.130435197249707
+      ],
+      "radiusBlender": 0.85,
+      "wheel_radius": 14.782608695652176
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.4500000476837158,
+        -1.100000023841858,
+        0.8500000238418579
+      ],
+      "centerExport": [
+        25.217392133629843,
+        14.782609110293183,
+        19.130435197249707
+      ],
+      "radiusBlender": 0.85,
+      "wheel_radius": 14.782608695652176
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.4500000476837158,
+        1.100000023841858,
+        0.8500000238418579
+      ],
+      "centerExport": [
+        25.217392133629843,
+        14.782609110293183,
+        -19.130435197249707
+      ],
+      "radiusBlender": 0.85,
+      "wheel_radius": 14.782608695652176
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/monster-truck/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/monster-truck/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/monster-truck/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending",
+  "authorization": "autonomous-153",
+  "triangles": 3534,
+  "vertexCount": 7772,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 273568,
+  "atlasBytes": 3374,
+  "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+  "atlasSha256": "5e0d2c01b4919e8888a766f09dd61ff1ad8cc42ec3872d7cf1c37d2d53be06bb",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "monster-truck--v1",
+    "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "triangles": 3534,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 14.782610406875104,
+        "minimumGap": 1.5357166701085845,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 14.782610406875104,
+        "minimumGap": 1.5357166701085845,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 14.78261006771037,
+        "minimumGap": 1.5357171310844695,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 14.78261006771037,
+        "minimumGap": 1.5357171310844695,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/monster-truck/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/monster-truck/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "assessment",
+    "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "allFourCrownsCovered": false,
+    "allWheelCoverage": "not-applicable/intentionally-exposed",
+    "ownerAuthorizedException": true,
+    "policy": "All four massive tires deliberately project beyond the narrow raised body. No fake crown caps or passed geometry coverage metric. Raw 0/25 expectation failures retained unchanged.",
+    "wheels": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "applicability": "not-applicable/intentionally-exposed",
+        "rawCoveredCount": 0,
+        "rawSampleCount": 25,
+        "rawDeclaredExpectationMet": false
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "applicability": "not-applicable/intentionally-exposed",
+        "rawCoveredCount": 0,
+        "rawSampleCount": 25,
+        "rawDeclaredExpectationMet": false
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "applicability": "not-applicable/intentionally-exposed",
+        "rawCoveredCount": 0,
+        "rawSampleCount": 25,
+        "rawDeclaredExpectationMet": false
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "applicability": "not-applicable/intentionally-exposed",
+        "rawCoveredCount": 0,
+        "rawSampleCount": 25,
+        "rawDeclaredExpectationMet": false
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": false,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "bodyRemovalInformativeAgainstBaseline": false,
+    "controlMeaning": "Synthetic positive/offset fixtures exercise bookkeeping only. Removing already-uncovered body is not informative and no geometry pass is inferred.",
+    "portableRawEvidence": "art-source/vehicle-bake/monster-truck/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "b14497e5deaa7e4c2f11bd5f1b7926993f44b2e0d378356a3a847621980ac698",
+    "separateRequirements": "All-four full neutral rolling clearance, collision negative/reset, actual32 headings and independent wheel attachment/visibility remain mandatory."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "minBlenderWorld": [
+      -43.4782600402832,
+      -25.843477249145508,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      43.4782600402832,
+      25.843477249145508,
+      52.173912048339844
+    ],
+    "dimensionsBlenderWorld": [
+      86.9565200805664,
+      51.686954498291016,
+      52.17391109466553
+    ],
+    "dimensionsSourceUnits": [
+      4.999999904632568,
+      2.971999883651733,
+      2.999999887943267
+    ]
+  },
+  "cargoRecessEvidence": {
+    "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "rays": [
+      {
+        "xySource": [
+          0.85,
+          -0.35
+        ],
+        "firstHitZSource": 1.8500001621246336,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.85,
+          0
+        ],
+        "firstHitZSource": 1.8500003814697263,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.85,
+          0.35
+        ],
+        "firstHitZSource": 1.8500001621246336,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          -0.35
+        ],
+        "firstHitZSource": 1.849999723434448,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          0
+        ],
+        "firstHitZSource": 1.849999723434448,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          0.35
+        ],
+        "firstHitZSource": 1.8500001621246336,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.6,
+          -0.35
+        ],
+        "firstHitZSource": 1.849999723434448,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.6,
+          0
+        ],
+        "firstHitZSource": 1.8500001621246336,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.6,
+          0.35
+        ],
+        "firstHitZSource": 1.849999723434448,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.05,
+          -0.35
+        ],
+        "firstHitZSource": 1.849999723434448,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.05,
+          0
+        ],
+        "firstHitZSource": 1.849999723434448,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.05,
+          0.35
+        ],
+        "firstHitZSource": 1.849999723434448,
+        "owner": "Body_static"
+      }
+    ],
+    "railTopSource": 2.4549997711181635,
+    "railTopMeasuredFromGeometry": true,
+    "minimumMeasuredRecessSource": 0.6049993896484371,
+    "realOpenRecess": true
+  },
+  "frameFit": {
+    "status": "passed",
+    "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "actualCapture": "engine/capture.json",
+    "nativeViewport": [
+      224,
+      224
+    ],
+    "nativeRadius": 112,
+    "source80ReferenceUnchanged": true,
+    "familyExtraPadding": 0,
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "engineOrigin": [
+      112,
+      112
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -16,
+      32
+    ],
+    "scale": 1,
+    "views": [
+      {
+        "yaw": 0,
+        "actual224OccupiedBounds": {
+          "minX": 69,
+          "minY": 48,
+          "maxX": 154,
+          "maxY": 135
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 53,
+          "maxX": 138,
+          "minY": 80,
+          "maxY": 167
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 22.5,
+        "actual224OccupiedBounds": {
+          "minX": 66,
+          "minY": 40,
+          "maxX": 157,
+          "maxY": 144
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 50,
+          "maxX": 141,
+          "minY": 72,
+          "maxY": 176
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 45,
+        "actual224OccupiedBounds": {
+          "minX": 67,
+          "minY": 30,
+          "maxX": 156,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 51,
+          "maxX": 140,
+          "minY": 62,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 67.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 26,
+          "maxX": 149,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 58,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 90,
+        "actual224OccupiedBounds": {
+          "minX": 86,
+          "minY": 28,
+          "maxX": 137,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 70,
+          "maxX": 121,
+          "minY": 60,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 112.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 26,
+          "maxX": 149,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 58,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 135,
+        "actual224OccupiedBounds": {
+          "minX": 67,
+          "minY": 30,
+          "maxX": 156,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 51,
+          "maxX": 140,
+          "minY": 62,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 157.5,
+        "actual224OccupiedBounds": {
+          "minX": 66,
+          "minY": 40,
+          "maxX": 157,
+          "maxY": 144
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 50,
+          "maxX": 141,
+          "minY": 72,
+          "maxY": 176
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 180,
+        "actual224OccupiedBounds": {
+          "minX": 69,
+          "minY": 48,
+          "maxX": 154,
+          "maxY": 135
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 53,
+          "maxX": 138,
+          "minY": 80,
+          "maxY": 167
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 202.5,
+        "actual224OccupiedBounds": {
+          "minX": 66,
+          "minY": 45,
+          "maxX": 157,
+          "maxY": 144
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 50,
+          "maxX": 141,
+          "minY": 77,
+          "maxY": 176
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 225,
+        "actual224OccupiedBounds": {
+          "minX": 67,
+          "minY": 36,
+          "maxX": 156,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 51,
+          "maxX": 140,
+          "minY": 68,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 247.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 31,
+          "maxX": 149,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 63,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 270,
+        "actual224OccupiedBounds": {
+          "minX": 86,
+          "minY": 32,
+          "maxX": 137,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 70,
+          "maxX": 121,
+          "minY": 64,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 292.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 31,
+          "maxX": 149,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 63,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 315,
+        "actual224OccupiedBounds": {
+          "minX": 67,
+          "minY": 36,
+          "maxX": 156,
+          "maxY": 149
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 51,
+          "maxX": 140,
+          "minY": 68,
+          "maxY": 181
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 337.5,
+        "actual224OccupiedBounds": {
+          "minX": 66,
+          "minY": 45,
+          "maxX": 157,
+          "maxY": 144
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 50,
+          "maxX": 141,
+          "minY": 77,
+          "maxY": 176
+        },
+        "fitsWithoutScaling": true
+      }
+    ],
+    "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+  },
+  "attachmentEvidence": {
+    "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 13.391304016113281,
+        "actualStaticArmEndAbsY": 13.130434036254883,
+        "axialGapWorld": 0.26086997985839844,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 13.391304016113281,
+        "actualStaticArmEndAbsY": 13.130434036254883,
+        "axialGapWorld": 0.26086997985839844,
+        "subpixelGap": true
+      },
+      {
+        "id": "RL",
+        "actualTireSlabInnerAbsY": 13.391304016113281,
+        "actualStaticArmEndAbsY": 13.130434036254883,
+        "axialGapWorld": 0.26086997985839844,
+        "subpixelGap": true
+      },
+      {
+        "id": "RR",
+        "actualTireSlabInnerAbsY": 13.391304016113281,
+        "actualStaticArmEndAbsY": 13.130434036254883,
+        "axialGapWorld": 0.26086997985839844,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "wheelVisualEvidence": "engine/wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/monster-truck/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/monster-truck/capture.mjs",
+    "node scripts/vehicle-bake/monster-truck/independent-visual.mjs",
+    "node scripts/vehicle-bake/monster-truck/wheel-visual.mjs",
+    "python scripts/vehicle-bake/monster-truck/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/monster-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/monster-truck/v1/evidence/clearance-input.json data/vehicle-bake/monster-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/monster-truck/v1/model.glb --config art-source/vehicle-bake/monster-truck/v1/coverage-region.json --output data/vehicle-bake/monster-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/monster-truck/assess-coverage.py --input data/vehicle-bake/monster-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/monster-truck/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/monster-truck/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/monster-truck/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 study and16 game actualGLB headings at fixed224 density plus fixed-crop nearest detail sheets; raised lime short-cab/purple roof pickup silhouette and enormous block-tread tires remain coherent.",
+    "Actual recessed short purple cargo bed is visibly open across elevated headings; front/rear skin glass and both side windows retain blue glass and continuous ink frames without overlay planes.",
+    "All four wheels intentionally project outboard; wheel-ID32heading diagnostics show no wheels on cab roof. No fake fender caps; raw crown samples0/25 each are intentionally exposed N/A, no coverage pass claimed.",
+    "Visible fixed dark frame and purple shocks read as attachment beneath body; all4 actual axle-arm gaps measured subpixel separately.",
+    "Inspected both wireframes, eight signed distance phases per camera,16 equal-angle signed views, and each independent wheel quarter/reverse/absolute-reset view; fixed body/bed remains still and no visible neutral rolling intersections.",
+    "Minor native tread/hub and suspension aliasing varies with heading; no blocking visual defects identified. Standard224 frame has zero occupied edge pixels."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "allWheelRadiusesMatchOwnGeometry": true,
+    "staticChassisSuspensionAndRealCargoBed": true,
+    "realCargoRecessTwelveRays": true,
+    "standard224AndFallback192x224FitWithoutScaling": true,
+    "allFourEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crownCoverage": "not-applicable/intentionally-exposed",
+    "rawZeroOf25EachPreserved": true,
+    "bodyRemovalInformativeAgainstBaseline": false,
+    "allFourCrownsCovered": false,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "All four crown regions raw0/25 expectation failures preserved under explicit intentionally-exposed exception. Synthetic fixtures qualify bookkeeping only; body removal is uninformative against zero baseline. No candidate crown coverage pass asserted.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "All massive wheels intentionally remain visible outboard of narrow raised pickup. Minor native tread/attachment/hub aliasing varies with heading.",
+    "Actual occupied pixels fit224 and standard192x224 fallback placement without scaling; parent owns independent runtime export/QA.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/monster-truck/v1/assess-coverage.py": "cad8c48469bfc911f7373dbae488a09f7eddf95dc9c59580b4f5b68bc4ab9ced",
+    "art-source/vehicle-bake/monster-truck/v1/assess-fit.py": "d7ca01e4411cda1555e6328ec496bead0fec0e5263d834dd409ee56ef26281a7",
+    "art-source/vehicle-bake/monster-truck/v1/atlas.png": "5e0d2c01b4919e8888a766f09dd61ff1ad8cc42ec3872d7cf1c37d2d53be06bb",
+    "art-source/vehicle-bake/monster-truck/v1/audit-source.py": "c1e3a3634c82cec20ccfb7dcc09cb106cf47ecacbf01995347e70a8d23b57654",
+    "art-source/vehicle-bake/monster-truck/v1/build.py": "25d23147a905111c301d3ffa460f98cbefede4b3e13c11e53e24588532d47619",
+    "art-source/vehicle-bake/monster-truck/v1/capture.mjs": "c6fb97892f35443591ac74a2bc0725239eda62714f619026184dc2f8518470f9",
+    "art-source/vehicle-bake/monster-truck/v1/car.blend": "dc043c3c0bbb9c3f341fbd5457994d424078a420dfdd6503cded8498e81cd237",
+    "art-source/vehicle-bake/monster-truck/v1/coverage-region.json": "3a2411c2ec807ed53875d93408f05d4dd985448bb8609c9121e6b02a052d34dd",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/author-browser-qa.json": "97cf690ea78862cbdc0a9af0cc4df2dd391915b648896fc0eb374ed4fdfb66d9",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/author-visual-inspection.json": "9c3e8f387da65b8c0cdabe6febafe3003b8b0d524e34ad83c92f8ac50681fb23",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/clearance-input.json": "fa47b58f57aa4cd2b13b8ebb0c888f5d25c72e433046c0c3a0ab84f8ab37a874",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/engine-capture.json": "5b3f1348520438823a06bc14669888aae023263ee4446334c4c62ea927301e1a",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/fit-assessment.json": "c8e901fcd15ce3add784a7e4388b4dc58b9b4f2a1af6e9dbd2dd23a97715253c",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/independent-visual.json": "80988d36ea91fc3db39a068211160a013696997a8b2748edd75f4a8414065f03",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/packed-source-audit.json": "6c997e2af5e5a43556558b60e3719892aa4ccd11377df7aaece4947fb2e5b9a6",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/replay-verification.json": "35aa4f6ceaf6babe1cdbdd16d2e4cafffbd06f62f9624db615aa57367d697619",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/shared-clearance.json": "a77985ab6565707b3e1df5f5389c55cd10111c5f8f25b3b8b0dc5996564c1caa",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/upper-wheel-coverage-raw.json": "b14497e5deaa7e4c2f11bd5f1b7926993f44b2e0d378356a3a847621980ac698",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/wheel-coverage-assessment.json": "1730a737a90f5d86bb85da2d0d6b845071cc01048c8b7e3d430a3bf3c3b4026f",
+    "art-source/vehicle-bake/monster-truck/v1/evidence/wheel-visual.json": "0d86adce8f9a35187e97991980409c462d52d0d50d9aa462da63ba81921f7255",
+    "art-source/vehicle-bake/monster-truck/v1/family.json": "0f0630f818042b6562c261f5f82e8f9aa3078045ffb222819d7593c72af800e4",
+    "art-source/vehicle-bake/monster-truck/v1/finalize.py": "a05e18d117b95401e04ab14e0260e367bee3b1dd361aa12c6c6bfb3f78610fff",
+    "art-source/vehicle-bake/monster-truck/v1/geometry.py": "f1d2565627cf4b22c4fd79851ba98dbbaf904fc3d88623f26f10e0a49b0e0ef5",
+    "art-source/vehicle-bake/monster-truck/v1/independent-visual.mjs": "e0b6a4ca6e187b609ac6e21054182812465190103bd85185013ea62b7c615a06",
+    "art-source/vehicle-bake/monster-truck/v1/master.blend": "31face52a31657bfe7da14d6c792c0aec7bb69f9f7f8f4762844693d7531f732",
+    "art-source/vehicle-bake/monster-truck/v1/model.glb": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+    "art-source/vehicle-bake/monster-truck/v1/paint-ownership.json": "58ed8544c306456826a501ef6ab271700fa825e8e130d1734a46624fe7edc461",
+    "art-source/vehicle-bake/monster-truck/v1/palette-draft.png": "983192f057032b7dfafb11f9977c756fd964766f46207e3e4ee8f73615337cde",
+    "art-source/vehicle-bake/monster-truck/v1/recipe.json": "fcad0cb1f6a9340abc6e3f9aa8c41ef8caa995a71c5f4e70fc37f36c593e168d",
+    "art-source/vehicle-bake/monster-truck/v1/review.json": "ee15918fff9b388a6e8da767c9a3744859db2b4590a58ed540119776d8ef5cc8",
+    "art-source/vehicle-bake/monster-truck/v1/sheets.py": "774bc34f7364a99f493a617a18724fa763ac22d83f819c2890304e2e253a9f41",
+    "art-source/vehicle-bake/monster-truck/v1/wheel-visual.mjs": "fa157fd67ac4c07d00009f5af31000972a52343eedeafe724290c35d153cc310"
+  }
+}

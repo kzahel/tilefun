@@ -1,0 +1,21 @@
+{
+  "baseSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "componentSha256": "519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+  "baseArraysPreserved": [
+    "bufferViews",
+    "accessors",
+    "samplers",
+    "images",
+    "textures",
+    "materials",
+    "meshes",
+    "nodes"
+  ],
+  "baseBinaryPrefixExact": true,
+  "mountBlenderWorldPixels": [
+    8.695652173913045,
+    -5.6000000000000005,
+    12.608695652173914
+  ],
+  "componentPrefix": "RiderExplorer"
+}

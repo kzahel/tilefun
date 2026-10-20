@@ -1,0 +1,17 @@
+{
+  "hood": {
+    "center": [-0.9, 0, 1.035],
+    "size": [1.76, 0.86, 0.79]
+  },
+  "cab": {
+    "center": [0.545, 0, 1.65],
+    "size": [1.17, 1.2, 1.66]
+  },
+  "canopy": {
+    "center": [0.54, 0, 2.55],
+    "size": [1.48, 1.44, 0.14]
+  },
+  "rearHitch": "Fixed rear drawbar and two links; no tool/physics animation",
+  "frontCoverage": "not-applicable/intentionally-exposed",
+  "rearCoverage": "finite-central-crown-region-only"
+}

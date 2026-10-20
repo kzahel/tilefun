@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rally-hatchback-v1",
+      "name": "Rally hatchback",
+      "title": "Rally hatchback \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original short boxy rally hatchback contour loft: short hood, upright low cabin, two side doors with rear quarter panes and a sloping hatch. Actual skin UV charts own continuous framed blue glazing, broad white/red/black team blocks and trim. Fixed roof scoop/spoiler and four static auxiliary lenses, no equipment animation or beacon tags; no glass overlays or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 2900,
+        "vertices": 5551,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 201980,
+        "sha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/atlas.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/atlas.png",
+          "sha256": "8ecd127298a141ecedb41f91aa79bcafcf34cc8afac5c7a3cb24e913cc6f475a"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/capture.json",
+          "sha256": "7e7ffe983abb8fcd58c858746ae463b2ddc622c2a3a924a12dad96593f19cb3d"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-0.png",
+          "sha256": "80f0e552092da5118cd713152a1b8297cacd2067f492d0481841e776bbf70071"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-1.png",
+          "sha256": "0906e694d02a6e7ddc102a5f149abdee9855e48323a8209065cc69b9872fd9b6"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-10.png",
+          "sha256": "99fd251e67b7211601e5720d4e0039da982706645c8373e0ccd2411b4e7459d7"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-11.png",
+          "sha256": "14c254b47179fb992b8183f1926791d020cd89853277d06b78f263e1210041be"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-12.png",
+          "sha256": "01cf0d911a1df159e693e05306f1c28308f061fe92799ced88d634b1e243a5a9"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-13.png",
+          "sha256": "3740c4ba51edd927c3af7bd7cc81f68d8810aa0cdac4085c75f9841e1abb2227"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-14.png",
+          "sha256": "4d269f14d3e15528aecbb09970212d79a77942679e71683be5eaca528d4894ee"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-15.png",
+          "sha256": "79d1066f00a8ebd95fab04a0949052444cfb0242262aad445bd9859a32b159ff"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-2.png",
+          "sha256": "78479b6a89fc44c7109814b20064d3e47bdfd2393a4d8df9ea792e93bef96f01"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-3.png",
+          "sha256": "fad2d3417c425213c841db9d3b8e1538daf8d513106ef06abab369d2074257d3"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-4.png",
+          "sha256": "595ccce857a49c594add7359aacaabd454d7430815e70242969f2a0a00a2a5f3"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-5.png",
+          "sha256": "27daddc26b1bb36f1a09d665800f954bc00d9eb83707e01b8454a32346210b63"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-6.png",
+          "sha256": "baf5232a1d2a96b317e6eb88f3810c2c50c8d186d505cc360f7fa86a0cb27490"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-7.png",
+          "sha256": "0950b0a8885786eb08ab10b53b665020ee67a92379768a367213afde84141341"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-8.png",
+          "sha256": "827ed3764de42b3eaf01513e58119fbf6bd5f8fe5de789151f8c7c9baafc0ad6"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/engine-9.png",
+          "sha256": "112f1cf0c405616315b62c75294d07a10d3fa2f8b15fdf319f0766e5542b7b24"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/game-roll-0.png",
+          "sha256": "78479b6a89fc44c7109814b20064d3e47bdfd2393a4d8df9ea792e93bef96f01"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/game-roll-1.png",
+          "sha256": "c3f8ba41326c378c7c0d2bb4a3420d6186090d8c1361e19c5d756f517773b0b0"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/game-roll-2.png",
+          "sha256": "f3b9115297a51b9ad18f6c6851b2172d26084ffbf0e197d837a008551c0da7a7"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/game-roll-3.png",
+          "sha256": "f63690d1233fd842b9ca447946f5348a018d54978f76987507db1745f4a60801"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/game-roll-4.png",
+          "sha256": "6b14f2a4ce940e3994595ccc1b7edb028b15239dc414dd21a941b9c7a36b19c3"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/game-roll-5.png",
+          "sha256": "45d5dda623a0ec481dcaa5b35cc1ea7d18ef13f8fc4f3d52e13858176bea85de"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/game-roll-6.png",
+          "sha256": "3c2fe2747520a0ce866a8a4e251fb2ff89b5b0f6d87d8fa61bc09624b7ad91de"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/game-roll-7.png",
+          "sha256": "8457f9b6cf9cd0e7f4112fee0e46c789a552ecfa1312c8fd9dd7dbaefe68c723"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/inspection-engine.png",
+          "sha256": "e1d91098a7275e1fa9b3d07a0bea9dd94b8daceec6e930da121a14500c2e526f"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/inspection-phases.png",
+          "sha256": "c51890c72878da8d103b580fb57682525eead135f5c13b9de708a5222f9632ff"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/inspection-study.png",
+          "sha256": "7d6b658f92c8af6f842d4b950aef7261f2d1a30acadff76602181e518bf53417"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/roll-0.png",
+          "sha256": "ab1460e3d4a1a8a20e764a7de275d3b5afc85302741ebdecd5966a02a9d324d0"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/roll-1.png",
+          "sha256": "775e36881c2a5c83c2b0a920a99a1b9c7fce1a4dc3811721bee9a5efdfab6f72"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/roll-2.png",
+          "sha256": "a996b0093bc4c4d1ea0dbe0f705ce66e71a8ee36e27af371bda0aaf8f8e6d955"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/roll-3.png",
+          "sha256": "587a74ca2e2a4c3b2fbb8f9198997062138b4756d89cba8804d15d36deae0575"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/roll-4.png",
+          "sha256": "708da7a14bd9fe7f716312b045865acf5fd9a6de75d18221f7d33ea8064c92bd"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/roll-5.png",
+          "sha256": "7a1320c7a67ecf7d940b9c4d455b66ef39007e2abf298d739eb8e245048f80d1"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/roll-6.png",
+          "sha256": "f97bc5db462d4f79355f99982f99830a0ef45e411e2f0c1b0a3e843811f2df94"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/roll-7.png",
+          "sha256": "c326f740b451d49021eefa03519cf7671b14d16f577c819bff69d4ac984d16e2"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-0.png",
+          "sha256": "2bd78f7a53f96008e79bcdb582635deb16726804c426a5f12045792f594bf779"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-1.png",
+          "sha256": "ec5cdaf971ab32baf9cd5977853eba405662ba0f60709a0392b618905ae90829"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-10.png",
+          "sha256": "66931ffab91134b8ed5d1ccfe1f3e905df8aa761f1ea64d2699c2f693d10891d"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-11.png",
+          "sha256": "8ad09bb4398f0b5ca02e3d22dd05aef8ee1f80924a3644b1e987f5d3e1739386"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-12.png",
+          "sha256": "3d72e3442cdf72e781d84314c8654116e9dc1d91f4a8bf49598786ab9e26fd13"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-13.png",
+          "sha256": "8a9157f794d3b585262bbc5626de5540913e818315aaaecede3e42ff1d74f4cc"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-14.png",
+          "sha256": "220e3e52414dd9fe86a110d69e65d8dd759500e1758b8c68971dd4683c132c3c"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-15.png",
+          "sha256": "ac3be79424988a565fc14615d375150b32f4d54e7bf577a7a03d6c1aacea196a"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-2.png",
+          "sha256": "ab1460e3d4a1a8a20e764a7de275d3b5afc85302741ebdecd5966a02a9d324d0"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-3.png",
+          "sha256": "e7cc0b8f487b3e7677f1e3ca79b9646c8f4514e13224e015f84c2bcc9bf3845c"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-4.png",
+          "sha256": "ee18672803b833357e484687672e19dd8b96b2e873eb5702e70ed9dcc1418463"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-5.png",
+          "sha256": "5c2e272a86d934453baacff9f02953f04a96922b4904ce97aeea8e8b5eb896bb"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-6.png",
+          "sha256": "4cb266e5f40b16066b5f089a8129ceedd8988e3b58e3c3e46bd92765232998ac"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-7.png",
+          "sha256": "c2c121d185479ee11cb0930827d8635d9da603a9279f9523543cb39a0e975376"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-8.png",
+          "sha256": "c0d738079699f8d1387804cfedf4d501beaf98692432e94a3af361b90989e8ab"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/study-9.png",
+          "sha256": "75763cc734997c344c8c7c126b34352b0e67dd7862c69119407c88ca942890df"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/wire-engine.png",
+          "sha256": "003340546b2bb91e990711ba3635de6370fcd923de82c035de2e6ca567969a69"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/engine/wire-study.png",
+          "sha256": "37bb4d83ff190c39dbd4a832736fe273fe7c0a37e173656638fed81288345ff2"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/model.glb",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/model.glb",
+          "sha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/recipe.json",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/recipe.json",
+          "sha256": "44228d37b9ea88a476dddcac56fe28409c7b68a8aa84e6ec947eea34b372fdcc"
+        },
+        {
+          "source": "demos/vehicle-bake/rally-hatchback/v1/report.json",
+          "retained": "demos/original-vehicles/rally-hatchback-v1/inputs/report.json",
+          "sha256": "dad511e020b992dca3e75bbd44963a6dcb47565ad09e29abd3dede6915e762d4"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

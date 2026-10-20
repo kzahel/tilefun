@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "report": "public/demos/vehicle-bake/street-sweeper/v1/report.json",
+  "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+  "atlasSha256": "01a728ca080975f94e71b65258f78c188a2a77516ff7a68c428c61404dfe1a91",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/street-sweeper/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/street-sweeper/capture.mjs",
+    "node scripts/vehicle-bake/street-sweeper/independent-visual.mjs",
+    "node scripts/vehicle-bake/street-sweeper/wheel-visual.mjs",
+    "python scripts/vehicle-bake/street-sweeper/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/street-sweeper/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/street-sweeper/clearance-controls.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/street-sweeper/v1/evidence/clearance-input.json data/vehicle-bake/street-sweeper/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/street-sweeper/v1/model.glb --config art-source/vehicle-bake/street-sweeper/v1/coverage-region.json --output data/vehicle-bake/street-sweeper/recheck-coverage.json",
+    "python scripts/vehicle-bake/street-sweeper/assess-coverage.py --input data/vehicle-bake/street-sweeper/recheck-coverage.json",
+    "python scripts/vehicle-bake/street-sweeper/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/street-sweeper/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/street-sweeper/author-config.json --qa-only"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "report": "public/demos/vehicle-bake/forklift/v1/report.json",
+  "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+  "atlasSha256": "840dd561f30ecc9ea4015160e38e5db84359a0ae94c194593b3a657983d299be",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/forklift/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/forklift/capture.mjs",
+    "node scripts/vehicle-bake/forklift/independent-visual.mjs",
+    "node scripts/vehicle-bake/forklift/wheel-visual.mjs",
+    "python scripts/vehicle-bake/forklift/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/forklift/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/forklift/clearance-controls.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/forklift/v1/evidence/clearance-input.json data/vehicle-bake/forklift/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/forklift/v1/model.glb --config art-source/vehicle-bake/forklift/v1/coverage-region.json --output data/vehicle-bake/forklift/recheck-coverage.json",
+    "python scripts/vehicle-bake/forklift/assess-coverage.py --input data/vehicle-bake/forklift/recheck-coverage.json",
+    "python scripts/vehicle-bake/forklift/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/forklift/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/forklift/author-config.json --qa-only"
+  ]
+}

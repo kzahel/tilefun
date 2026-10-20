@@ -1,0 +1,149 @@
+{
+  "method": "Original compact white/mint municipal sweeper, short enclosed broad blue-glass cab, genuine rounded gray-green rear collection tank, two low outboard circular brush discs with12 broad dark bristle blocks each and fixed arms. Four ordinary road wheels only; brushes/static equipment have no roll nodes or cleaning animation claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      56,
+      104,
+      100
+    ],
+    "paintShadow": [
+      73,
+      137,
+      123
+    ],
+    "paintMid": [
+      103,
+      171,
+      147
+    ],
+    "paint": [
+      143,
+      207,
+      176
+    ],
+    "paintLight": [
+      189,
+      235,
+      204
+    ],
+    "cream": [
+      239,
+      239,
+      224
+    ],
+    "glassDark": [
+      68,
+      88,
+      112
+    ],
+    "glass": [
+      105,
+      153,
+      179
+    ],
+    "glassLight": [
+      157,
+      199,
+      218
+    ],
+    "glassGlint": [
+      195,
+      225,
+      233
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "tankShadow": [
+      106,
+      127,
+      129
+    ],
+    "tankMid": [
+      145,
+      164,
+      158
+    ],
+    "tank": [
+      178,
+      197,
+      184
+    ],
+    "tankLight": [
+      211,
+      225,
+      204
+    ],
+    "bristle": [
+      57,
+      63,
+      76
+    ],
+    "bristleLight": [
+      82,
+      91,
+      100
+    ],
+    "brushCap": [
+      116,
+      153,
+      130
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "ownership": "Own mint lower fender skins, continuous side glass plus separate windshield/rear-glass/white roof charts, rounded tank side/end/top chart ownership and explicit padded palette UVs for bristle blocks/caps/arms. Paint lies on actual surfaces, no glass overlays or screen projection.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "White enclosed cab front/rear glass and roof own charts; mint lower fenders, rounded gray-green tank, two static low circular12-block brushes and fixed arms. Brush equipment joins Body_static and never rolls.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

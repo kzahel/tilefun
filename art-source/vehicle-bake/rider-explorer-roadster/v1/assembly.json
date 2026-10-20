@@ -1,0 +1,30 @@
+{
+  "id": "rider-explorer-roadster-v1",
+  "canonicalConfig": "art-source/vehicle-bake/rider-explorer-roadster/v1/assembly.json",
+  "retained": "art-source/vehicle-bake/rider-explorer-roadster/v1",
+  "public": "public/demos/vehicle-bake/rider-explorer-roadster/v1",
+  "scratch": "data/vehicle-bake/rider-explorer-roadster/replay/public",
+  "qa": "data/vehicle-bake/rider-explorer-roadster-qa",
+  "base": {
+    "model": "public/demos/original-vehicles/classic-roadster-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/classic-roadster-v1/inputs/atlas.png",
+    "master": "art-source/vehicle-bake/classic-roadster/v1/master.blend",
+    "replay": "art-source/vehicle-bake/classic-roadster/v1/evidence/replay-verification.json"
+  },
+  "component": {
+    "model": "art-source/vehicle-riders/explorer/v1/rider.glb",
+    "atlas": "art-source/vehicle-riders/explorer/v1/atlas.png",
+    "master": "art-source/vehicle-riders/explorer/v1/master.blend",
+    "replay": "art-source/vehicle-riders/explorer/v1/evidence/replay-verification.json"
+  },
+  "mountBlenderWorldPixels": [8.695652173913045, -5.6000000000000005, 12.608695652173914],
+  "prefix": "RiderExplorer",
+  "nativeSize": 224,
+  "method": "PREREQUISITE PROTOTYPE: unchanged frozen roadster and new static seated Explorer composed in one actual GLB/depth target. Original vehicle graph/mesh/paint buffers preserved; one new opaque256 rider atlas beside the original512 car atlas. Human review open; no normal activation.",
+  "limits": [
+    "One avatar and one fixed roadster seat only",
+    "No all27-avatar, motorcycle, AI, occupied fallback or animation qualification",
+    "Original standing/promoted characters and normal car semantics unchanged",
+    "Editable geometry stays in the two retained packed child masters; assembly placement is this recipe"
+  ]
+}

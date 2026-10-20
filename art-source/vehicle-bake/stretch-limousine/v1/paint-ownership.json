@@ -1,0 +1,255 @@
+{
+  "method": "Original low long-wheelbase classic sedan loft with one continuous rounded hood/cabin/short-trunk skin. Five bounded blue side panes, swept windshield/rear glass, four total door seams/handles and slim chrome beltline use actual semantic UV charts. No glass overlays, coincident loft faces, projection or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      66,
+      70,
+      89
+    ],
+    "paintShadow": [
+      67,
+      76,
+      94
+    ],
+    "paintMid": [
+      71,
+      81,
+      98
+    ],
+    "paint": [
+      80,
+      91,
+      108
+    ],
+    "paintLight": [
+      116,
+      129,
+      146
+    ],
+    "roof": [
+      147,
+      158,
+      175
+    ],
+    "cream": [
+      255,
+      233,
+      187
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ]
+  },
+  "ownership": "One actual continuous closed sedan skin with original strictly ordered station contours: hood, swept front glass, long low cabin, swept rear glass and short trunk. Five side panes each, four total doors, slim silver beltline and end lamp/grille paint own distinct semantic UV charts; no duplicate loft/glass surfaces.",
+  "semanticOwners": {
+    "sedanSide": {
+      "component": "Own low classic stretch sedan continuous hood cabin trunk skin",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        192
+      ],
+      "meaning": "All ten bounded actual side panes, dark frames, four total door outlines/handles and slim chrome beltline on the same physical skin"
+    },
+    "endCaps": {
+      "atlasPixelRect": [
+        0,
+        192,
+        512,
+        272
+      ],
+      "meaning": "Front grille/headlamps and rear red lamps, no borrowed nose/rear glass paint"
+    },
+    "frontRearWindows": {
+      "atlasPixelRect": [
+        0,
+        272,
+        512,
+        384
+      ],
+      "meaning": "Left half swept windshield; right half swept rear window; continuous dark frames on sloping real body triangles"
+    },
+    "roof": {
+      "atlasPixelRect": [
+        0,
+        384,
+        512,
+        448
+      ],
+      "meaning": "Long low slightly crowned lighter slate gray roof"
+    },
+    "hoodTrunk": {
+      "atlasPixelRect": [
+        0,
+        448,
+        512,
+        480
+      ],
+      "meaning": "Distinct low rounded hood and short trunk"
+    },
+    "trim": {
+      "roles": [
+        "silver",
+        "ink",
+        "glass",
+        "paintLight",
+        "paint",
+        "paintMid"
+      ],
+      "meaning": "Named slim bumpers, compact fixed mirrors and integrated low fenders own padded swatches"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "roof": [
+      272,
+      488
+    ],
+    "cream": [
+      304,
+      488
+    ],
+    "glassDark": [
+      336,
+      488
+    ],
+    "glass": [
+      368,
+      488
+    ],
+    "glassLight": [
+      400,
+      488
+    ],
+    "glassGlint": [
+      432,
+      488
+    ],
+    "rim": [
+      464,
+      488
+    ],
+    "silver": [
+      496,
+      488
+    ],
+    "white": [
+      16,
+      504
+    ],
+    "ruby": [
+      48,
+      504
+    ],
+    "amber": [
+      80,
+      504
+    ],
+    "rubyLight": [
+      112,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric long closed sedan cabin; five panes each side, distinct hood and short trunk, swept front and rear glass have separate owners.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

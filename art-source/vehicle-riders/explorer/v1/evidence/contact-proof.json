@@ -1,0 +1,1068 @@
+{
+  "status": "passed",
+  "presentationStatus": "prototype-not-production",
+  "humanApproval": false,
+  "riderSha256": "519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+  "carSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "packedSources": {
+    "master.blend": {
+      "sha256": "d9f7267a7681bad7de958f6805008d1d4bb8ac35c9962a1c47c841cd56a391b3",
+      "meshes": 35,
+      "packedImages": 1,
+      "oneSemanticUV": true
+    },
+    "low.blend": {
+      "sha256": "78db1785f9efeb15275cbe4b563117c2fca7fb5892de161b2eece9126a91c9cb",
+      "meshes": 1,
+      "packedImages": 1,
+      "oneSemanticUV": true
+    }
+  },
+  "actualContactSockets": [
+    {
+      "name": "hip_cushion",
+      "actualGLTFSocketWorldBlender": [
+        8.69565200805664,
+        -5.599999904632568,
+        11.226086616516113
+      ],
+      "targetWorldBlender": [
+        8.69565200805664,
+        -5.599999904632568,
+        11.226086616516113
+      ],
+      "socketToDeclaredTargetWorld": 0.0,
+      "nearestActualCarSurfaceWorld": [
+        8.69565200805664,
+        -5.599999904632568,
+        11.226086616516113
+      ],
+      "distanceToActualSurfaceWorld": 0.0,
+      "surfaceOwner": "Cream tan cushion center -1",
+      "meaning": "Surface contact anchor"
+    },
+    {
+      "name": "hand_left_rim",
+      "actualGLTFSocketWorldBlender": [
+        -1.043478012084961,
+        -8.034782409667969,
+        13.913043975830078
+      ],
+      "targetWorldBlender": [
+        -1.04347825050354,
+        -8.034782409667969,
+        13.913043022155762
+      ],
+      "socketToDeclaredTargetWorld": 9.830249847454215e-07,
+      "nearestActualCarSurfaceWorld": [
+        -1.043478012084961,
+        -8.0,
+        13.913043975830078
+      ],
+      "distanceToActualSurfaceWorld": 0.03478240966796875,
+      "surfaceOwner": "Static steering wheel spoke",
+      "meaning": "Hand targets are exact ring centerline grips; palms wrap rim solid as declared exception"
+    },
+    {
+      "name": "hand_right_rim",
+      "actualGLTFSocketWorldBlender": [
+        -1.043478012084961,
+        -3.165217399597168,
+        13.913043975830078
+      ],
+      "targetWorldBlender": [
+        -1.04347825050354,
+        -3.165217161178589,
+        13.913043022155762
+      ],
+      "socketToDeclaredTargetWorld": 1.0115243642614567e-06,
+      "nearestActualCarSurfaceWorld": [
+        -1.04347825050354,
+        -3.165217161178589,
+        13.913043975830078
+      ],
+      "distanceToActualSurfaceWorld": 3.3717478231665154e-07,
+      "surfaceOwner": "Static steering wheel in cockpit",
+      "meaning": "Hand targets are exact ring centerline grips; palms wrap rim solid as declared exception"
+    },
+    {
+      "name": "foot_left_floor",
+      "actualGLTFSocketWorldBlender": [
+        -1.3913049697875977,
+        -7.600000381469727,
+        7.25217342376709
+      ],
+      "targetWorldBlender": [
+        -1.3913042545318604,
+        -7.599999904632568,
+        7.252173900604248
+      ],
+      "socketToDeclaredTargetWorld": 9.830249847454215e-07,
+      "nearestActualCarSurfaceWorld": [
+        -1.3913049697875977,
+        -7.59999942779541,
+        7.252173900604248
+      ],
+      "distanceToActualSurfaceWorld": 1.0662403155947686e-06,
+      "surfaceOwner": "Recessed cockpit floor visible in footwells",
+      "meaning": "Surface contact anchor"
+    },
+    {
+      "name": "foot_right_floor",
+      "actualGLTFSocketWorldBlender": [
+        -1.3913049697875977,
+        -3.5999999046325684,
+        7.25217342376709
+      ],
+      "targetWorldBlender": [
+        -1.3913042545318604,
+        -3.5999999046325684,
+        7.252173900604248
+      ],
+      "socketToDeclaredTargetWorld": 8.596304119739507e-07,
+      "nearestActualCarSurfaceWorld": [
+        -1.3913049697875977,
+        -3.600001335144043,
+        7.252173900604248
+      ],
+      "distanceToActualSurfaceWorld": 1.5078915112098912e-06,
+      "surfaceOwner": "Recessed cockpit floor visible in footwells",
+      "meaning": "Surface contact anchor"
+    }
+  ],
+  "actualSurfaceIntersections": [
+    {
+      "riderTriangle": 93,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 67,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 1555,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 92,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 68,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 80,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 66,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 1555,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 0,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 1555,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 40,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 39,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 1,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 1555,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 7,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 7,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 1555,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 6,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 1555,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 4,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 1555,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 5,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 1555,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 41,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 42,
+      "riderOwner": "Seated dark trouser pelvis",
+      "carTriangle": 306,
+      "carOwner": "Cream tan cushion center -1",
+      "declaredContactException": "declared pelvis cushion contact"
+    },
+    {
+      "riderTriangle": 476,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 469,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 467,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 466,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 259,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 261,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 268,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 248,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 247,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 258,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 236,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 1129,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 936,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1129,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2180,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1091,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 937,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1091,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2182,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1091,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 938,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1088,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2181,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1088,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 935,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1088,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 938,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1090,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 937,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1090,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2181,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1090,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 938,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1128,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2181,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1128,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 936,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1128,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2180,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1128,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 935,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1092,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 935,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1092,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 938,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1092,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2183,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1137,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 988,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1137,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2230,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1137,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 986,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1137,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2231,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1137,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2232,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1137,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 987,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 894,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 956,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 894,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2200,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 892,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 955,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 892,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2200,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 912,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 956,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 885,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2202,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 885,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 958,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 885,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 955,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 885,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2203,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 889,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 958,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 889,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2203,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 887,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2201,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 887,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 957,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 887,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2202,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 887,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 956,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 886,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 957,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 886,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2202,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1115,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 980,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1115,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2224,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1115,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2225,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1110,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2224,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1110,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 979,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1110,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2227,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1114,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2224,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1114,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 981,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1114,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2225,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1138,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 982,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1138,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2226,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1113,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2224,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1113,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2227,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1113,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 981,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1139,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 982,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1139,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2227,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1139,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 981,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1139,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2226,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1130,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 988,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1130,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2230,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1130,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 985,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 1130,
+      "riderOwner": "Warm hand gripping actual rim 1",
+      "carTriangle": 2233,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 896,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 988,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 896,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2230,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 896,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 985,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 896,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2233,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 898,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2230,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 898,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 986,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 898,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2231,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 898,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2232,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 898,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 987,
+      "carOwner": "Static steering wheel spoke",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 901,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 962,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 901,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2207,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 902,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 962,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 902,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2206,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 947,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2206,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 905,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 960,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 905,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 959,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 905,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2204,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 905,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2207,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 904,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 959,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 904,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2204,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 911,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 960,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 911,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 961,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 911,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2205,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 911,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2206,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 910,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 960,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 910,
+      "riderOwner": "Warm hand gripping actual rim -1",
+      "carTriangle": 2205,
+      "carOwner": "Static steering wheel in cockpit",
+      "declaredContactException": "declared palm wraps rim"
+    },
+    {
+      "riderTriangle": 455,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 456,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 457,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 441,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 440,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 444,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 436,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 439,
+      "riderOwner": "Brown boot solid sole 1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 249,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 232,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 233,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 228,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    },
+    {
+      "riderTriangle": 231,
+      "riderOwner": "Brown boot solid sole -1",
+      "carTriangle": 1525,
+      "carOwner": "Recessed cockpit floor visible in footwells",
+      "declaredContactException": "declared sole floor contact"
+    }
+  ],
+  "inappropriateSurfaceIntersections": [],
+  "actualMainBodyInteriorVertexCount": 0,
+  "actualMainBodyInteriorVerticesWorld": [],
+  "backpackSeatbackVerticalSeparationWorld": 0.9913043975830078,
+  "mainBodyTrianglesFromActualGLB": 696,
+  "carSemanticOwnershipMatches": 2236,
+  "contactExceptions": [
+    "Pelvis/cushion top tangency",
+    "Warm hand geometry wraps fixed steering rim at exact declared centerline grips",
+    "Boot sole/floor tangency"
+  ],
+  "controls": {
+    "translatedIntoHoodRejected": true,
+    "negativeInteriorVertices": 478,
+    "negativeSurfaceIntersectionCount": 225,
+    "baselineRestored": true,
+    "inputBytesUnchanged": true
+  },
+  "limits": [
+    "Static art pose only; no moving wheel/driver interaction or production physics qualification",
+    "Hand/rim overlap is an intended grip exception; not mislabeled as universal separation",
+    "Surface intersection plus actual closed main-body interior ray parity, no universal animated clearance claim"
+  ]
+}

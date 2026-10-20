@@ -13,6 +13,8 @@
       "!ME complete tileset.tsx",
       "!public/demos/vehicle-bake/viewer.js",
       "!public/demos/original-vehicles/**/viewer.js",
+      "!public/demos/vehicle-riders/**/viewer.js",
+      "!public/demos/vehicle-riders/**/offline.html",
       "!art-source/vehicle-bake/**/scripts/capture.mjs",
       "!art-source/vehicle-bake/**/recipe-scripts/capture.mjs",
       "!art-source/wildlife-v2/cat/motion-v2/projection.json",
@@ -56,7 +58,8 @@
         "public/demos/wildlife-v2/horse/motion-study-v2/playback.js",
         "public/demos/wildlife-v2/horse/motion-study-v1/index.html",
         "public/demos/wildlife-v2/horse/motion-study-v2/index.html",
-        "public/demos/original-vehicles/explorer-boat-v1/index.html"
+        "public/demos/original-vehicles/explorer-boat-v1/index.html",
+        "art-source/vehicle-bake/food-truck/v1/independent-visual.mjs"
       ],
       "formatter": {
         "enabled": false
@@ -82,12 +85,15 @@
         "art-source/train-models/**/*.json",
         "art-source/vehicle-style-study/**/*.json",
         "art-source/vehicle-bake/**/*.json",
+        "art-source/vehicle-riders/**/*.json",
+        "scripts/vehicle-riders/**/*.json",
         "scripts/vehicle-bake/beetle/*.json",
         "public/assets/models/trains/review/**/*.json",
         "public/demos/wildlife-v2/**/*.json",
         "public/demos/vehicle-style-study/**/*.json",
         "public/demos/vehicle-bake/**/*.json",
         "public/demos/original-vehicles/**/*.json",
+        "public/demos/vehicle-riders/**/*.json",
         "src/wildlife/reviews.json"
       ],
       "files": {

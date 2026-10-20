@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "id": "FL",
+      "yaw": 0,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 3,
+      "reverseChangedChannels": 6,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesMastForksGuardSeat": true,
+      "images": [
+        "engine/independent-FL-0.png",
+        "engine/independent-FL-1.png",
+        "engine/independent-FL-2.png",
+        "engine/independent-FL-3.png"
+      ]
+    },
+    {
+      "id": "FR",
+      "yaw": 180,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 3,
+      "reverseChangedChannels": 6,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesMastForksGuardSeat": true,
+      "images": [
+        "engine/independent-FR-0.png",
+        "engine/independent-FR-1.png",
+        "engine/independent-FR-2.png",
+        "engine/independent-FR-3.png"
+      ]
+    },
+    {
+      "id": "RL",
+      "yaw": 0,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 6,
+      "reverseChangedChannels": 3,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesMastForksGuardSeat": true,
+      "images": [
+        "engine/independent-RL-0.png",
+        "engine/independent-RL-1.png",
+        "engine/independent-RL-2.png",
+        "engine/independent-RL-3.png"
+      ]
+    },
+    {
+      "id": "RR",
+      "yaw": 180,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 6,
+      "reverseChangedChannels": 3,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesMastForksGuardSeat": true,
+      "images": [
+        "engine/independent-RR-0.png",
+        "engine/independent-RR-1.png",
+        "engine/independent-RR-2.png",
+        "engine/independent-RR-3.png"
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,368 @@
+{
+  "status": "passed",
+  "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+  "browser": "bundled full Chromium",
+  "browserVersion": "153.0.8010.12",
+  "nativeSizes": [
+    128,
+    224
+  ],
+  "views": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 22.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 67.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 112.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 157.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 180,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 202.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 225,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 247.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 270,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 292.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 315,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 337.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 22.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 67.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 112.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 157.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 180,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 202.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 225,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 247.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 270,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 292.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 315,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 337.5,
+      "comparedPixels": 16384,
+      "excludedFrameBoundary": 0,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0
+    }
+  ],
+  "fixedDensity": true,
+  "resizedOrRefitted": false,
+  "errors": [],
+  "meaning": "Both cameras/all32 headings retain the exact full128-square centered native RGBA crop, including outline and transparent frame boundary. The kart fits both viewports at fixed camera/density, no rescaling."
+}

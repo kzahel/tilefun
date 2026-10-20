@@ -22,6 +22,7 @@ import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { AUTONOMOUS_ORIGINAL_VEHICLES } from "./AutonomousOriginalVehicles.fixture.js";
+import { verifyOriginalWheelGeometryAndTravel } from "./AutonomousOriginalVehicles.test-helper.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
 import { TrafficTestHarness } from "./TrafficTestHarness.js";
 import {
@@ -101,7 +102,7 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       expect(client.sprite?.frameRow).toBe(car.sprite?.frameRow);
     }
     expect(vehicleRoadWidth(type)).toBe(width * 2 + 12);
-    expect(vehicleTurningRadius(type)).toBeCloseTo(length * 0.7);
+    expect(vehicleTurningRadius(type)).toBeCloseTo(Math.max(40, length * 0.7));
     expect(vehiclePerformance(type).speed).toBe(family.performance.speed);
     expect(authoredVehicleForType(type)?.lateralScale).toBe(1);
     expect(vehicleMeshHeightScale(family.model)).toBe(1);
@@ -247,6 +248,7 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       });
       expect(asset.meshCount).toBe(5);
       expect(asset.drawMeshCount).toBe(5);
+      verifyOriginalWheelGeometryAndTravel(asset, family.wheelRadii);
       const json = gltf.parser.json;
       const primitives = json.meshes.flatMap(
         (mesh: { primitives: { indices: number }[] }) => mesh.primitives,
@@ -306,13 +308,14 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
 );
 
 it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
-  "excludes $model from undersized roads while allowing smaller traffic",
+  "excludes $model from undersized roads with a live population control",
   ({ model, bounds }) => {
     const roadWidth = bounds[1] * 2 + 12;
     const scene = new TrafficTestHarness();
     for (const state of [...scene.traffic.states.values()])
       scene.entities.remove(state.entity.id, false);
     const graph = scene.strategy.trafficNetwork(4800, 8304);
+    const originalWidths = new Map([...graph.lanes.values()].map((lane) => [lane.id, lane.width]));
     // Hold this generated region fixed while exercising the public population path.
     scene.strategy.trafficNetwork = () => graph;
     for (const lane of graph.lanes.values()) lane.width = Math.min(lane.width, roadWidth - 1);
@@ -321,25 +324,40 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       considered.push(identity);
       return true;
     };
-    for (const position of [
-      { x: 4800, y: 8304 },
-      ...[...graph.lanes.values()].slice(0, 12).map((lane) => lane.a),
-    ]) {
-      scene.player.position = { wx: position.x, wy: position.y };
-      const cx = Math.floor(position.x / 256),
-        cy = Math.floor(position.y / 256);
-      for (let y = cy - 7; y <= cy + 7; y++)
-        for (let x = cx - 7; x <= cx + 7; x++) scene.world.getChunk(x, y);
-      scene.traffic.visibleRanges = [{ minCx: cx, maxCx: cx, minCy: cy, maxCy: cy }];
-      scene.traffic.tick(2.1, [scene.player]);
-    }
-    expect(considered.length).toBeGreaterThan(0);
+    const populate = () => {
+      for (const position of [
+        { x: 4800, y: 8304 },
+        ...[...graph.lanes.values()].slice(0, 12).map((lane) => lane.a),
+      ]) {
+        scene.player.position = { wx: position.x, wy: position.y };
+        const cx = Math.floor(position.x / 256),
+          cy = Math.floor(position.y / 256);
+        for (let y = cy - 7; y <= cy + 7; y++)
+          for (let x = cx - 7; x <= cx + 7; x++) scene.world.getChunk(x, y);
+        scene.traffic.visibleRanges = [{ minCx: cx, maxCx: cx, minCy: cy, maxCy: cy }];
+        scene.traffic.tick(2.1, [scene.player]);
+      }
+    };
+    populate();
     expect(considered.some((identity) => identity.includes(`:${model}:`))).toBe(false);
     const cars = [...scene.traffic.states.values()];
-    expect(cars.length).toBeGreaterThan(0);
     expect(
       cars.every((car) => car.lane.width < roadWidth && car.entity.type !== `vehicle-v1:${model}`),
     ).toBe(true);
+    if (roadWidth <= 80) {
+      // The shared population prefilter requires an 80px onward route before
+      // model selection. A sub-74px microcar road therefore admits no model.
+      // Restore the same real network to prove the negative used a live path.
+      expect(considered).toHaveLength(0);
+      expect(cars).toHaveLength(0);
+      for (const lane of graph.lanes.values()) lane.width = required(originalWidths.get(lane.id));
+      populate();
+      expect(considered.length).toBeGreaterThan(0);
+      expect(scene.traffic.states.size).toBeGreaterThan(0);
+    } else {
+      expect(considered.length).toBeGreaterThan(0);
+      expect(cars.length).toBeGreaterThan(0);
+    }
   },
 );
 

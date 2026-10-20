@@ -1,0 +1,282 @@
+{
+  "id": "bear",
+  "name": "Brown Bear",
+  "description": "A friendly stocky brown bear with small round ears, a tan muzzle, big paws and a tiny tail.",
+  "poseGuides": "art-source/pixel-tiger/pose-guides.json",
+  "provenance": "Original broad bear front/back/profile masters and separate native16 drawings composed from the committed tiger.blend frames 1, 3, 5, 7. Wide planted contacts, short opposing paw swings and reduced head bob adapt the existing rig guides. A tiny profile tail and a baked round rump tail replace the long guide tail. No new Blender model or Aseprite painting.",
+  "palette": {
+    "b": "#3e2924",
+    "s": "#664333",
+    "c": "#946345",
+    "h": "#b28256",
+    "t": "#dfb880",
+    "g": "#ba925e",
+    "k": "#241f22",
+    "w": "#f7e4ba"
+  },
+  "limbs": {
+    "outline": "b",
+    "fill": "c",
+    "profileForegroundArm": 1
+  },
+  "tail": {
+    "patterns": {
+      "down": ["tailStub", "tailStub", "tailStub", "tailStub"],
+      "up": ["tailStub", "tailStub", "tailStub", "tailStub"],
+      "left": ["tailStub", "tailStub", "tailStub", "tailStub"],
+      "right": ["tailStub", "tailStub", "tailStub", "tailStub"]
+    }
+  },
+  "poseOverrides": {
+    "down": [
+      {
+        "head": [16, 11],
+        "body": [16, 20],
+        "hands": [[8, 23], [24, 21]],
+        "feet": [[12, 25], [20, 27]],
+        "tailCenter": [16, 22]
+      },
+      {
+        "head": [16, 11],
+        "body": [16, 20],
+        "hands": [[9, 23], [23, 21]],
+        "feet": [[13, 25], [19, 26]],
+        "tailCenter": [16, 22]
+      },
+      {
+        "head": [16, 11],
+        "body": [16, 20],
+        "hands": [[8, 21], [24, 23]],
+        "feet": [[12, 27], [20, 25]],
+        "tailCenter": [16, 22]
+      },
+      {
+        "head": [16, 11],
+        "body": [16, 20],
+        "hands": [[9, 21], [23, 23]],
+        "feet": [[13, 26], [19, 25]],
+        "tailCenter": [16, 22]
+      }
+    ],
+    "up": [
+      {
+        "head": [16, 11],
+        "body": [16, 20],
+        "hands": [[8, 21], [24, 23]],
+        "feet": [[12, 25], [20, 27]],
+        "tailCenter": [16, 22]
+      },
+      {
+        "head": [16, 11],
+        "body": [16, 20],
+        "hands": [[9, 23], [23, 21]],
+        "feet": [[13, 25], [19, 26]],
+        "tailCenter": [16, 22]
+      },
+      {
+        "head": [16, 11],
+        "body": [16, 20],
+        "hands": [[8, 23], [24, 21]],
+        "feet": [[12, 27], [20, 25]],
+        "tailCenter": [16, 22]
+      },
+      {
+        "head": [16, 11],
+        "body": [16, 20],
+        "hands": [[9, 21], [23, 23]],
+        "feet": [[13, 26], [19, 25]],
+        "tailCenter": [16, 22]
+      }
+    ],
+    "left": [
+      {
+        "head": [15, 11],
+        "body": [16, 20],
+        "hands": [[12, 20], [19, 24]],
+        "feet": [[19, 25], [12, 27]],
+        "tailCenter": [23, 22]
+      },
+      {
+        "head": [15, 11],
+        "body": [16, 20],
+        "hands": [[13, 20], [18, 23]],
+        "feet": [[15, 25], [17, 27]],
+        "tailCenter": [23, 22]
+      },
+      {
+        "head": [15, 11],
+        "body": [16, 20],
+        "hands": [[18, 20], [12, 24]],
+        "feet": [[12, 25], [19, 27]],
+        "tailCenter": [23, 22]
+      },
+      {
+        "head": [15, 11],
+        "body": [16, 20],
+        "hands": [[17, 20], [13, 23]],
+        "feet": [[17, 27], [15, 25]],
+        "tailCenter": [23, 22]
+      }
+    ],
+    "right": [
+      {
+        "head": [17, 11],
+        "body": [16, 20],
+        "hands": [[20, 20], [13, 24]],
+        "feet": [[13, 25], [20, 27]],
+        "tailCenter": [9, 22]
+      },
+      {
+        "head": [17, 11],
+        "body": [16, 20],
+        "hands": [[19, 20], [14, 23]],
+        "feet": [[17, 25], [15, 27]],
+        "tailCenter": [9, 22]
+      },
+      {
+        "head": [17, 11],
+        "body": [16, 20],
+        "hands": [[14, 20], [20, 24]],
+        "feet": [[20, 25], [13, 27]],
+        "tailCenter": [9, 22]
+      },
+      {
+        "head": [17, 11],
+        "body": [16, 20],
+        "hands": [[15, 20], [19, 23]],
+        "feet": [[15, 27], [17, 25]],
+        "tailCenter": [9, 22]
+      }
+    ]
+  },
+  "32": {
+    "front": [
+      "..bbb.......bbb..",
+      ".bhcgb.....bgssb.",
+      ".bcggbbbbbbbggsb.",
+      "..bchhhccccsssb..",
+      ".bchhhhcccccsssb.",
+      "bcccccccccccssssb",
+      "bcchwkccckwcssssb",
+      "bcccckccckcccsssb",
+      "bcccgttttttgcsssb",
+      ".bcgttkkktttgssb.",
+      ".bgttttktttttgsb.",
+      "..bgttgtgtttgsb..",
+      "...bggttttggsb...",
+      "....bbbbbbbbb...."
+    ],
+    "back": [
+      "..bbb.......bbb..",
+      ".bhccb.....bcssb.",
+      ".bchhbbbbbbbcscb.",
+      "..bchhhccccsssb..",
+      ".bchhhhcccccsssb.",
+      "bchhhhccccccssssb",
+      "bcchhcccccccssssb",
+      "bcccccccccccssssb",
+      "bccccccccccsssssb",
+      ".bccccccccsssssb.",
+      ".bccccccsssssssb.",
+      "..bccccsssssssb..",
+      "...bcssssssssb...",
+      "....bbbbbbbbb...."
+    ],
+    "profile": [
+      ".......bbb.....",
+      "......bhcgb....",
+      "....bbbggcsbb..",
+      "...bchhhcccssb.",
+      "..bchhhccccsssb",
+      "..bccccccccsssb",
+      "..bcwkkccccsssb",
+      ".bbcckcccccsssb",
+      "bgttttgcccssssb",
+      "kkkttttgcsssssb",
+      "bgktgttgcssssb.",
+      ".bgttttgcsssb..",
+      "..bggggssssb...",
+      "...bbbbbbbb...."
+    ],
+    "body": [
+      "...bbbbbbb...",
+      "..bchhhcssb..",
+      ".bchhccccssb.",
+      "bchhcccccsssb",
+      "bchccccccsssb",
+      "bccccccccsssb",
+      "bcccccccssssb",
+      "bccccccsssssb",
+      ".bcccssssssb.",
+      "..bsssssssb..",
+      "...bbbbbbb..."
+    ],
+    "backBody": [
+      "...bbbbbbb...",
+      "..bchhhcssb..",
+      ".bchhccccssb.",
+      "bchhcccccsssb",
+      "bchccccccsssb",
+      "bccccccccsssb",
+      "bccccbbcssssb",
+      "bcccbsccssssb",
+      ".bccbcsssssb.",
+      "..bsbbssssb..",
+      "...bbbbbbb..."
+    ],
+    "sideBody": [
+      "...bbbbbb...",
+      "..bchhccsb..",
+      ".bchhcccssb.",
+      "bchhccccsssb",
+      "bchcccccsssb",
+      "bcccccccsssb",
+      "bccccccssssb",
+      "bcccccsssssb",
+      ".bcccsssssb.",
+      "..bssssssb..",
+      "...bbbbbb..."
+    ],
+    "arm": [".bbb.", "bhcsb", "bccsb", "bccsb", "bsssb", ".bbb."],
+    "foot": [".bbbb.", "bhccsb", "bccssb", "bbbbbb"],
+    "tailStub": [".bb.", "bhcb", "bcsb", ".bb."]
+  },
+  "16": {
+    "front": [
+      ".bb...bb.",
+      "bgbbbbgsb",
+      "bchhccssb",
+      "bckcckssb",
+      "bcgtttgcb",
+      ".bttkttb.",
+      ".bgtktgb.",
+      "..bbbbb.."
+    ],
+    "back": [
+      ".bb...bb.",
+      "bchbbcssb",
+      "bchhccssb",
+      "bchcccssb",
+      "bccccsssb",
+      ".bccsssb.",
+      ".bcssssb.",
+      "..bbbbb.."
+    ],
+    "profile": [
+      "....bb..",
+      "...bgcb.",
+      "..bhccsb",
+      ".bckccsb",
+      "bgttccsb",
+      "kktgcssb",
+      ".bgttsb.",
+      "..bbbb.."
+    ],
+    "body": [".bbbbb.", "bchccsb", "bcccssb", "bccsssb", "bcssssb", ".bbbbb."],
+    "backBody": [".bbbbb.", "bchccsb", "bcccssb", "bccbssb", "bcbcssb", ".bbbbb."],
+    "sideBody": [".bbbbb.", "bchccsb", "bcccssb", "bccsssb", "bcssssb", ".bbbbb."],
+    "arm": ["bbb", "ccs", "css", "bbb"],
+    "foot": ["bccb", "bbbb"],
+    "tailStub": ["bc", "bs"]
+  }
+}

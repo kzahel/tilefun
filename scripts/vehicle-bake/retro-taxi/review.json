@@ -1,0 +1,24 @@
+{
+  "id": "retro-taxi-v1",
+  "clearanceId": "retro-taxi--v1",
+  "name": "Rounded yellow retro taxi",
+  "title": "Rounded yellow four-door taxi \u00b7 original family v1",
+  "source": "public/demos/vehicle-bake/retro-taxi/v1",
+  "glb": "public/demos/vehicle-bake/retro-taxi/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/retro-taxi/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/retro-taxi/v1/report.json",
+  "output": "public/demos/original-vehicles/retro-taxi-v1",
+  "qa": "data/vehicle-bake/retro-taxi/qa",
+  "offline": "data/vehicle-bake/retro-taxi/review.html",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "meshRadius": 112
+}

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "inputHashes": {
+    "art-source/vehicle-bake/snowplow/v1/build.py": "fbb6b3744063de2e5de6d2d10d54816c0e8c38e904009fed7ae2120225024cfe",
+    "art-source/vehicle-bake/snowplow/v1/family.json": "06ee3e86a9f68d0d92d5de8654e664dfdda8cc45aa401808574d62f9b7a7a70e",
+    "art-source/vehicle-bake/snowplow/v1/coverage-region.json": "5c7cd28f8e27efc03f3ce38fbfc9b616eb041c8bbc82ad30c9694e807531ac56",
+    "art-source/vehicle-bake/snowplow/v1/surface-regions.json": "a0bfc5341c2f788d18812ad8c7fa162539bc1ecf851763cc5529b5332afadf6b",
+    "art-source/vehicle-bake/snowplow/v1/equipment-region.json": "fcc5456b98cac38ecfea18bcd967ab56392db31a78827623d1202d8388a244b3",
+    "art-source/vehicle-bake/snowplow/v1/review.json": "5e080269a8315e31d86ea0412eda7e4e6fd2b41cfe7d475c0d13945349b2120a"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+  },
+  "outputs": {
+    "model.glb": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+    "atlas.png": "1bd3583afd6b0e40b8e8de54f564e3b97adc68396313c15fbad7eb880c9c57bc",
+    "recipe.json": "343045ea34ded98cf758ec063b2c513c69f69fe9bc2c880420873560e396803d"
+  },
+  "scratchInputDependencies": [],
+  "isolatedRoot": "data/vehicle-bake/snowplow/fresh-declared-replay",
+  "bootstrap": "Empty AGENTS.md/public root sentinels only; no vehicle inputs",
+  "meaning": "Fresh miniature repository contains only listed inputs. GLB, atlas and recipe match byte for byte; packed blend determinism is not claimed."
+}

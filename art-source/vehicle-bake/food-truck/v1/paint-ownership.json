@@ -1,0 +1,169 @@
+{
+  "method": "Original red and cream mobile kitchen. Own continuous cab side/front actual-skin blue glass, broad red/cream rear box with real side serving cavity/counter/fixed short shade, opposite-side simple burger emblem painted in own side UV chart, cream roof and one fixed vent.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      117,
+      42,
+      61
+    ],
+    "paintShadow": [
+      157,
+      48,
+      65
+    ],
+    "paintMid": [
+      191,
+      57,
+      71
+    ],
+    "paint": [
+      220,
+      69,
+      77
+    ],
+    "paintLight": [
+      241,
+      104,
+      104
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "creamShadow": [
+      191,
+      157,
+      119
+    ],
+    "creamMid": [
+      227,
+      193,
+      147
+    ],
+    "creamLight": [
+      255,
+      238,
+      202
+    ],
+    "innerShadow": [
+      91,
+      82,
+      82
+    ],
+    "inner": [
+      156,
+      134,
+      113
+    ],
+    "innerLight": [
+      193,
+      169,
+      139
+    ],
+    "counter": [
+      112,
+      111,
+      114
+    ],
+    "counterLight": [
+      214,
+      215,
+      200
+    ],
+    "lettuce": [
+      114,
+      155,
+      82
+    ],
+    "bun": [
+      234,
+      174,
+      97
+    ],
+    "patty": [
+      108,
+      65,
+      63
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "ownership": "Own closed cab side/front/rear/roof semantic skin charts; body side with serving border differs from opposite-side burger chart. Actual cavity backwall owns a warm matte panel chart; inner jambs own shadow swatches, counter and fixed short shade use explicit padded roles. Roof/vent separate owners. No projected bitmap, silhouette ink or intersecting glass overlay.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Serving recess, fixed shade and counter on -Y side; broad original burger graphic on opposite +Y actual skin. Closed cab front glass owns a separate chart; no rear-box glass invented.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "meaning": "Actual triangle/UV role samples on each independent exterior/serving surface owner",
+  "rays": [
+    {
+      "id": "cab-serving-side",
+      "origin": [-1.2, -2, 1.7],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "cab-opposite-side",
+      "origin": [-1.2, 2, 1.7],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "windshield",
+      "origin": [-3, 0, 1.7],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "rear-door-seam",
+      "origin": [3, 0, 1.5],
+      "direction": [-1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "cream-roof",
+      "origin": [0, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "recess-backwall",
+      "origin": [0.6, -1.6, 1.5],
+      "direction": [0, 1, 0],
+      "roles": ["interiorBack"]
+    },
+    {
+      "id": "counter-ledge",
+      "origin": [0.4, -1.1, 1.7],
+      "direction": [0, 0, -1],
+      "roles": ["counter"]
+    },
+    {
+      "id": "opposite-cone-scoop",
+      "origin": [0.73, 2, 1.78],
+      "direction": [0, -1, 0],
+      "roles": ["violet", "violetLight"]
+    },
+    {
+      "id": "opposite-cone-waffle",
+      "origin": [0.73, 2, 1.08],
+      "direction": [0, -1, 0],
+      "roles": ["cone", "coneLight"]
+    },
+    {
+      "id": "awning-stripe",
+      "origin": [0.4, -1.14, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight", "violet"]
+    },
+    {
+      "id": "lower-aqua-body",
+      "origin": [0.0, 2, 1.0],
+      "direction": [0, -1, 0],
+      "roles": ["paint"]
+    }
+  ]
+}

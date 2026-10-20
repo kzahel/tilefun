@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "microcar",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/microcar/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/microcar/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/microcar/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

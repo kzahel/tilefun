@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "inputHashes": {
+    "art-source/vehicle-bake/mobile-crane/v1/build.py": "da5208a918004da88702337fc01cdf7fb10c8e8f77cbfbd87fe8dc2b5f521966",
+    "art-source/vehicle-bake/mobile-crane/v1/family.json": "cf1da0e1be1f03e54232a94e5299a720ffbf6162f08e257f6bc06e4950b32eb8",
+    "art-source/vehicle-bake/mobile-crane/v1/coverage-region.json": "ee28a05ff7c3c1a9c00b4a9eb93d488fbc2cbbae9f0d11717a8ca8babafc5b1e",
+    "art-source/vehicle-bake/mobile-crane/v1/surface-regions.json": "f9ee9928b5257a23dc965697af61d144239fffffb2b7a3fc1477f428b1371188",
+    "art-source/vehicle-bake/mobile-crane/v1/stow-region.json": "bf87981ba11abb929f0afa3c9dd7279948106638c4fb1b0ac5f7e4d065008e22",
+    "art-source/vehicle-bake/mobile-crane/v1/review.json": "e0c941ba2f2f212d619f950a7537b2b278fbb940754e46319e6e49a319bd5cdb"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/catalog-v2.py": "e4e43dfa0c98f2e3118cd23ebe6b9e8d69a2ff916db9e0eba09851745e32a3c6"
+  },
+  "outputs": {
+    "model.glb": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+    "atlas.png": "616470c6b16478324b08413729190f8e9a3c243fb8871213b9a1fca2d238fcf5",
+    "recipe.json": "19686fb534cda62fcace9059446ac9ec2a112eda28e929f3ed8bbcae8a73ab96"
+  },
+  "scratchInputDependencies": [],
+  "isolatedRoot": "data/vehicle-bake/mobile-crane/fresh-declared-replay",
+  "bootstrap": "Empty AGENTS.md/public root sentinels only; no vehicle inputs",
+  "meaning": "Fresh miniature repository contains only listed inputs. GLB, atlas and recipe match byte for byte; packed blend determinism is not claimed."
+}

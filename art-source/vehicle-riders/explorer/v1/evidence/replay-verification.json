@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "glbSha256": "519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+  "atlasSha256": "25475a94f315ee5af51ea830786bbe30435f01d4ddd00f32a0a7ce2719345007",
+  "recipeSha256": "3c77490694143f4c76d372905c589f7afb41c739b152f43b7dfc7bcc37e7663d",
+  "inputHashes": {
+    "art-source/vehicle-riders/explorer/v1/build.py": "45117bfbc43ba1fab4a3929c73018ef32e6a288da8be2a64141cab696435a85b",
+    "art-source/vehicle-riders/explorer/v1/rider.json": "fec42bf3317a3ee369e337389c8d60f817bce47df52ca4644e366396092be996",
+    "art-source/vehicle-riders/explorer/v1/identity.json": "d3cc61aeb2f96910f99f5174023457aee96e69af3800171454647ff0b1ce487e"
+  },
+  "sharedInputHashes": {},
+  "scratchInputDependencies": [],
+  "blender": "5.2.2 LTS d13f752e3b9c, background factory startup four threads",
+  "freshOutput": "data/vehicle-riders/explorer/replay-final/",
+  "meaning": "Rider mesh/atlas/recipe need only retained constructor/config/identity JSON plus Blender. Shared car/renderer assets belong to composition diagnostics, not rider construction. Winding-preserving index order canonicalization changes no geometry/vertex/normal/UV/image buffers."
+}

@@ -1,0 +1,859 @@
+{
+  "status": "passed",
+  "presentationStatus": "prototype-not-production",
+  "humanApproval": false,
+  "actualBikePresent": false,
+  "riderSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "profileSha256": "8d51332a2f7bf6c29c97bdee57df6c0a4d92349694ac9507d83a03a9920c1f81",
+  "immutableExplorerProfileSha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "fixtureSha256": "96cd9f07c8cd49b954c21b2e7d416e33b5597b586e3e1e588777d7abfc58c728",
+  "packedSources": {
+    "master.blend": {
+      "sha256": "bece89367aa6aff98ea303ffe63d49a8725b4eb71b57fcdc771d0f9b790300ae",
+      "meshes": 25,
+      "packedImages": 1,
+      "semanticUV": true
+    },
+    "low.blend": {
+      "sha256": "43bc3632f09bdd5913c49af7c23f1611ebf661b7f5896f8b79db345ceb81ab32",
+      "meshes": 1,
+      "packedImages": 1,
+      "semanticUV": true
+    }
+  },
+  "contactLandmarks": [
+    {
+      "name": "hip_saddle",
+      "actualGLBAnchorWorld": [
+        0.0,
+        0.0,
+        -1.7391303777694702
+      ],
+      "profileTargetWorld": [
+        0.0,
+        0.0,
+        -1.7391303777694702
+      ],
+      "profileErrorWorld": 0.0,
+      "actualRiderContactOwner": "Bear broad seated pelvis",
+      "closestRiderSurfaceWorld": [
+        0.0,
+        0.0,
+        -1.7391303777694702
+      ],
+      "closestRiderSurfaceDistanceWorld": 0.0,
+      "handCenterErrorWorld": null,
+      "closestFixtureSurfaceWorld": [
+        0.0,
+        0.0,
+        -1.7391304969787598
+      ],
+      "closestFixtureSurfaceDistanceWorld": 1.1920928955078125e-07,
+      "contactSemantics": "Pelvis bottom / hindpaw sole on actual top of synthetic contact patch"
+    },
+    {
+      "name": "hand_left_grip",
+      "actualGLBAnchorWorld": [
+        -6.26086950302124,
+        -5.913043975830078,
+        4.3478264808654785
+      ],
+      "profileTargetWorld": [
+        -6.26086950302124,
+        -5.91304349899292,
+        4.34782600402832
+      ],
+      "profileErrorWorld": 6.743495761743046e-07,
+      "actualRiderContactOwner": "Bear gripping forepaw left",
+      "closestRiderSurfaceWorld": [
+        -6.1505022048950195,
+        -6.252719879150391,
+        5.826793193817139
+      ],
+      "closestRiderSurfaceDistanceWorld": 1.5214805603027344,
+      "handCenterErrorWorld": 8.259061849445711e-07,
+      "closestFixtureSurfaceWorld": [
+        -6.373369216918945,
+        -5.913043975830078,
+        4.76768159866333
+      ],
+      "closestFixtureSurfaceDistanceWorld": 0.4346659779548645,
+      "contactSemantics": "Grip center inside closed broad forepaw; deliberate palm wrapping"
+    },
+    {
+      "name": "hand_right_grip",
+      "actualGLBAnchorWorld": [
+        -6.26086950302124,
+        5.913043975830078,
+        4.3478264808654785
+      ],
+      "profileTargetWorld": [
+        -6.26086950302124,
+        5.91304349899292,
+        4.34782600402832
+      ],
+      "profileErrorWorld": 6.743495761743046e-07,
+      "actualRiderContactOwner": "Bear gripping forepaw right",
+      "closestRiderSurfaceWorld": [
+        -6.1505022048950195,
+        6.252719879150391,
+        5.826793193817139
+      ],
+      "closestRiderSurfaceDistanceWorld": 1.5214805603027344,
+      "handCenterErrorWorld": 1.1680077279964342e-06,
+      "closestFixtureSurfaceWorld": [
+        -6.3733696937561035,
+        5.913043975830078,
+        4.76768159866333
+      ],
+      "closestFixtureSurfaceDistanceWorld": 0.43466609716415405,
+      "contactSemantics": "Grip center inside closed broad forepaw; deliberate palm wrapping"
+    },
+    {
+      "name": "foot_left_support",
+      "actualGLBAnchorWorld": [
+        -1.0434783697128296,
+        -5.5652174949646,
+        -8.000001907348633
+      ],
+      "profileTargetWorld": [
+        -1.04347825050354,
+        -5.5652174949646,
+        -8.0
+      ],
+      "profileErrorWorld": 1.9110702922202824e-06,
+      "actualRiderContactOwner": "Bear broad hindpaw left",
+      "closestRiderSurfaceWorld": [
+        -1.04347825050354,
+        -5.5652174949646,
+        -8.000000953674316
+      ],
+      "closestRiderSurfaceDistanceWorld": 9.610960205463925e-07,
+      "handCenterErrorWorld": null,
+      "closestFixtureSurfaceWorld": [
+        -1.04347825050354,
+        -5.5652174949646,
+        -8.0
+      ],
+      "closestFixtureSurfaceDistanceWorld": 1.911070285132155e-06,
+      "contactSemantics": "Pelvis bottom / hindpaw sole on actual top of synthetic contact patch"
+    },
+    {
+      "name": "foot_right_support",
+      "actualGLBAnchorWorld": [
+        -1.0434783697128296,
+        5.5652174949646,
+        -8.000001907348633
+      ],
+      "profileTargetWorld": [
+        -1.04347825050354,
+        5.5652174949646,
+        -8.0
+      ],
+      "profileErrorWorld": 1.9110702922202824e-06,
+      "actualRiderContactOwner": "Bear broad hindpaw right",
+      "closestRiderSurfaceWorld": [
+        -1.0434784889221191,
+        5.5652174949646,
+        -8.000000953674316
+      ],
+      "closestRiderSurfaceDistanceWorld": 9.610960205463925e-07,
+      "handCenterErrorWorld": null,
+      "closestFixtureSurfaceWorld": [
+        -1.04347825050354,
+        5.5652174949646,
+        -8.0
+      ],
+      "closestFixtureSurfaceDistanceWorld": 1.911070285132155e-06,
+      "contactSemantics": "Pelvis bottom / hindpaw sole on actual top of synthetic contact patch"
+    }
+  ],
+  "actualFixedBoneLengthChecks": [
+    {
+      "owner": "Bear upper arm left",
+      "actualGLBRingCentersWorld": [
+        [
+          -0.6956520080566406,
+          -5.565217018127441,
+          6.4347825050354
+        ],
+        [
+          -3.640932321548462,
+          -7.532637596130371,
+          5.544302463531494
+        ]
+      ],
+      "actualLengthWorld": 3.6521739247052567,
+      "fixedAuthoredLengthWorld": 3.6521739130434785,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 1.1661778209770546e-08
+    },
+    {
+      "owner": "Bear forearm left",
+      "actualGLBRingCentersWorld": [
+        [
+          -3.640932083129883,
+          -7.532637596130371,
+          5.5443034172058105
+        ],
+        [
+          -4.950901508331299,
+          -6.722840309143066,
+          4.946064472198486
+        ]
+      ],
+      "actualLengthWorld": 1.6521747403475568,
+      "fixedAuthoredLengthWorld": 1.6521739130434785,
+      "forepawCenterBeyondWristWorld": 1.6521739130434785,
+      "errorWorld": 8.273040783546293e-07
+    },
+    {
+      "owner": "Bear bent thigh left",
+      "actualGLBRingCentersWorld": [
+        [
+          2.7939677238464355e-09,
+          -4.0,
+          -1.7391302585601807
+        ],
+        [
+          -1.3255122900009155,
+          -5.224680423736572,
+          -4.080966472625732
+        ]
+      ],
+      "actualLengthWorld": 2.9565218810535114,
+      "fixedAuthoredLengthWorld": 2.9565217391304355,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 1.4192307595806142e-07
+    },
+    {
+      "owner": "Bear short shin left",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.3255122900009155,
+          -5.224679946899414,
+          -4.080966472625732
+        ],
+        [
+          -0.17391298711299896,
+          -5.565217971801758,
+          -6.782608985900879
+        ]
+      ],
+      "actualLengthWorld": 2.9565215295066274,
+      "fixedAuthoredLengthWorld": 2.9565217391304355,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 2.0962380808953185e-07
+    },
+    {
+      "owner": "Bear upper arm right",
+      "actualGLBRingCentersWorld": [
+        [
+          -0.6956519484519958,
+          5.565217018127441,
+          6.434782981872559
+        ],
+        [
+          -3.640932083129883,
+          7.532637596130371,
+          5.544302463531494
+        ]
+      ],
+      "actualLengthWorld": 3.652173916545097,
+      "fixedAuthoredLengthWorld": 3.6521739130434785,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 3.501618550671992e-09
+    },
+    {
+      "owner": "Bear forearm right",
+      "actualGLBRingCentersWorld": [
+        [
+          -3.6409318447113037,
+          7.532638072967529,
+          5.544302940368652
+        ],
+        [
+          -4.950901508331299,
+          6.722840309143066,
+          4.946064472198486
+        ]
+      ],
+      "actualLengthWorld": 1.6521749838637618,
+      "fixedAuthoredLengthWorld": 1.6521739130434785,
+      "forepawCenterBeyondWristWorld": 1.6521739130434785,
+      "errorWorld": 1.0708202833331626e-06
+    },
+    {
+      "owner": "Bear bent thigh right",
+      "actualGLBRingCentersWorld": [
+        [
+          0.0,
+          4.0,
+          -1.7391302585601807
+        ],
+        [
+          -1.325512170791626,
+          5.224680423736572,
+          -4.080966949462891
+        ]
+      ],
+      "actualLengthWorld": 2.9565222439405736,
+      "fixedAuthoredLengthWorld": 2.9565217391304355,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 5.048101381355252e-07
+    },
+    {
+      "owner": "Bear short shin right",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.325512409210205,
+          5.224679946899414,
+          -4.080966472625732
+        ],
+        [
+          -0.17391298711299896,
+          5.565218448638916,
+          -6.782608985900879
+        ]
+      ],
+      "actualLengthWorld": 2.956521624008482,
+      "fixedAuthoredLengthWorld": 2.9565217391304355,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 1.1512195330354302e-07
+    }
+  ],
+  "selfIntersectionPairs": [
+    {
+      "partA": "Bear bent thigh left",
+      "partB": "Bear broad seated pelvis",
+      "trianglePairs": 19,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.0,
+          -0.23000000417232513,
+          -0.10000000149011612
+        ],
+        "radiusWorld": 3.8260869565217397,
+        "maximumActualIntersectionDistanceWorld": 1.9250357095855608,
+        "actualIntersectionPointCount": 40
+      }
+    },
+    {
+      "partA": "Bear bent thigh left",
+      "partB": "Bear knee left",
+      "trianglePairs": 49,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07621696591377258,
+          -0.3004191219806671,
+          -0.23465558886528015
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.6996729452018835,
+        "actualIntersectionPointCount": 98
+      }
+    },
+    {
+      "partA": "Bear bent thigh left",
+      "partB": "Bear short shin left",
+      "trianglePairs": 27,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07621696591377258,
+          -0.3004191219806671,
+          -0.23465558886528015
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.6509359782710555,
+        "actualIntersectionPointCount": 54
+      }
+    },
+    {
+      "partA": "Bear bent thigh right",
+      "partB": "Bear broad seated pelvis",
+      "trianglePairs": 21,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.0,
+          0.23000000417232513,
+          -0.10000000149011612
+        ],
+        "radiusWorld": 3.8260869565217397,
+        "maximumActualIntersectionDistanceWorld": 1.9250357095855608,
+        "actualIntersectionPointCount": 44
+      }
+    },
+    {
+      "partA": "Bear bent thigh right",
+      "partB": "Bear knee right",
+      "trianglePairs": 47,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07621696591377258,
+          0.3004191219806671,
+          -0.23465558886528015
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.6996728093122064,
+        "actualIntersectionPointCount": 94
+      }
+    },
+    {
+      "partA": "Bear bent thigh right",
+      "partB": "Bear short shin right",
+      "trianglePairs": 29,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07621696591377258,
+          0.3004191219806671,
+          -0.23465558886528015
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.6509360143746021,
+        "actualIntersectionPointCount": 58
+      }
+    },
+    {
+      "partA": "Bear broad hindpaw left",
+      "partB": "Bear short shin left",
+      "trianglePairs": 24,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.009999998845160007,
+          -0.320000022649765,
+          -0.39000004529953003
+        ],
+        "radiusWorld": 3.304347826086957,
+        "maximumActualIntersectionDistanceWorld": 2.105616902250603,
+        "actualIntersectionPointCount": 48
+      }
+    },
+    {
+      "partA": "Bear broad hindpaw right",
+      "partB": "Bear short shin right",
+      "trianglePairs": 22,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.009999998845160007,
+          0.320000022649765,
+          -0.39000004529953003
+        ],
+        "radiusWorld": 3.304347826086957,
+        "maximumActualIntersectionDistanceWorld": 2.105616902250603,
+        "actualIntersectionPointCount": 44
+      }
+    },
+    {
+      "partA": "Bear broad seated pelvis",
+      "partB": "Bear stocky torso belly UV owner",
+      "trianglePairs": 68,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0,
+          0,
+          0.035
+        ],
+        "radiusWorld": 7.652173913043479,
+        "maximumActualIntersectionDistanceWorld": 6.507441302883669,
+        "actualIntersectionPointCount": 136
+      }
+    },
+    {
+      "partA": "Bear broad seated pelvis",
+      "partB": "Bear tiny fixed tail",
+      "trianglePairs": 21,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.3,
+          0,
+          0.095
+        ],
+        "radiusWorld": 2.7826086956521743,
+        "maximumActualIntersectionDistanceWorld": 1.5252134095626677,
+        "actualIntersectionPointCount": 42
+      }
+    },
+    {
+      "partA": "Bear dark nose",
+      "partB": "Bear tan muzzle UV owner",
+      "trianglePairs": 33,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.492,
+          0,
+          0.64
+        ],
+        "radiusWorld": 2.086956521739131,
+        "maximumActualIntersectionDistanceWorld": 1.3446044824905845,
+        "actualIntersectionPointCount": 67
+      }
+    },
+    {
+      "partA": "Bear elbow left",
+      "partB": "Bear forearm left",
+      "trianglePairs": 92,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.20935361087322235,
+          -0.43312668800354004,
+          0.31879743933677673
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.464779376840756,
+        "actualIntersectionPointCount": 184
+      }
+    },
+    {
+      "partA": "Bear elbow left",
+      "partB": "Bear upper arm left",
+      "trianglePairs": 34,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.20935361087322235,
+          -0.43312668800354004,
+          0.31879743933677673
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.450957476256353,
+        "actualIntersectionPointCount": 68
+      }
+    },
+    {
+      "partA": "Bear elbow right",
+      "partB": "Bear forearm right",
+      "trianglePairs": 92,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.20935361087322235,
+          0.43312668800354004,
+          0.31879743933677673
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.464779376840756,
+        "actualIntersectionPointCount": 184
+      }
+    },
+    {
+      "partA": "Bear elbow right",
+      "partB": "Bear upper arm right",
+      "trianglePairs": 32,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.20935361087322235,
+          0.43312668800354004,
+          0.31879743933677673
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.4509578973214292,
+        "actualIntersectionPointCount": 64
+      }
+    },
+    {
+      "partA": "Bear forearm left",
+      "partB": "Bear gripping forepaw left",
+      "trianglePairs": 18,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.36000001430511475,
+          -0.3400000035762787,
+          0.25
+        ],
+        "radiusWorld": 2.9565217391304355,
+        "maximumActualIntersectionDistanceWorld": 1.8254069404518205,
+        "actualIntersectionPointCount": 36
+      }
+    },
+    {
+      "partA": "Bear forearm left",
+      "partB": "Bear upper arm left",
+      "trianglePairs": 24,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.20935361087322235,
+          -0.43312668800354004,
+          0.31879743933677673
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.7165311097313114,
+        "actualIntersectionPointCount": 49
+      }
+    },
+    {
+      "partA": "Bear forearm right",
+      "partB": "Bear gripping forepaw right",
+      "trianglePairs": 13,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.36000001430511475,
+          0.3400000035762787,
+          0.25
+        ],
+        "radiusWorld": 2.9565217391304355,
+        "maximumActualIntersectionDistanceWorld": 1.8254069404518205,
+        "actualIntersectionPointCount": 26
+      }
+    },
+    {
+      "partA": "Bear forearm right",
+      "partB": "Bear upper arm right",
+      "trianglePairs": 25,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.20935361087322235,
+          0.43312668800354004,
+          0.31879743933677673
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.7165311097313114,
+        "actualIntersectionPointCount": 50
+      }
+    },
+    {
+      "partA": "Bear knee left",
+      "partB": "Bear short shin left",
+      "trianglePairs": 36,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07621696591377258,
+          -0.3004191219806671,
+          -0.23465558886528015
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.7032724675371247,
+        "actualIntersectionPointCount": 72
+      }
+    },
+    {
+      "partA": "Bear knee right",
+      "partB": "Bear short shin right",
+      "trianglePairs": 38,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07621696591377258,
+          0.3004191219806671,
+          -0.23465558886528015
+        ],
+        "radiusWorld": 3.130434782608696,
+        "maximumActualIntersectionDistanceWorld": 1.7032724675371247,
+        "actualIntersectionPointCount": 76
+      }
+    },
+    {
+      "partA": "Bear round ear -1",
+      "partB": "Bear rounded head UV owner",
+      "trianglePairs": 18,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.025,
+          -0.365,
+          1
+        ],
+        "radiusWorld": 3.304347826086957,
+        "maximumActualIntersectionDistanceWorld": 1.9045994601348974,
+        "actualIntersectionPointCount": 36
+      }
+    },
+    {
+      "partA": "Bear round ear 1",
+      "partB": "Bear rounded head UV owner",
+      "trianglePairs": 18,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.025,
+          0.365,
+          1
+        ],
+        "radiusWorld": 3.304347826086957,
+        "maximumActualIntersectionDistanceWorld": 1.90459897506067,
+        "actualIntersectionPointCount": 36
+      }
+    },
+    {
+      "partA": "Bear rounded head UV owner",
+      "partB": "Bear short neck",
+      "trianglePairs": 62,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0,
+          0,
+          0.445
+        ],
+        "radiusWorld": 5.217391304347827,
+        "maximumActualIntersectionDistanceWorld": 4.187370805384279,
+        "actualIntersectionPointCount": 124
+      }
+    },
+    {
+      "partA": "Bear rounded head UV owner",
+      "partB": "Bear stocky torso belly UV owner",
+      "trianglePairs": 43,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0,
+          0,
+          0.445
+        ],
+        "radiusWorld": 5.217391304347827,
+        "maximumActualIntersectionDistanceWorld": 4.233125448169879,
+        "actualIntersectionPointCount": 86
+      }
+    },
+    {
+      "partA": "Bear rounded head UV owner",
+      "partB": "Bear tan muzzle UV owner",
+      "trianglePairs": 50,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.354,
+          0,
+          0.595
+        ],
+        "radiusWorld": 5.043478260869565,
+        "maximumActualIntersectionDistanceWorld": 3.748602755832575,
+        "actualIntersectionPointCount": 100
+      }
+    },
+    {
+      "partA": "Bear short neck",
+      "partB": "Bear stocky torso belly UV owner",
+      "trianglePairs": 42,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0,
+          0,
+          0.445
+        ],
+        "radiusWorld": 5.217391304347827,
+        "maximumActualIntersectionDistanceWorld": 4.344576489533362,
+        "actualIntersectionPointCount": 84
+      }
+    },
+    {
+      "partA": "Bear stocky torso belly UV owner",
+      "partB": "Bear tiny fixed tail",
+      "trianglePairs": 33,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.3,
+          0,
+          0.095
+        ],
+        "radiusWorld": 2.7826086956521743,
+        "maximumActualIntersectionDistanceWorld": 1.553610222391619,
+        "actualIntersectionPointCount": 66
+      }
+    },
+    {
+      "partA": "Bear stocky torso belly UV owner",
+      "partB": "Bear upper arm left",
+      "trianglePairs": 30,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.03999999910593033,
+          -0.3199999928474426,
+          0.3700000047683716
+        ],
+        "radiusWorld": 3.478260869565218,
+        "maximumActualIntersectionDistanceWorld": 3.357565800731421,
+        "actualIntersectionPointCount": 60
+      }
+    },
+    {
+      "partA": "Bear stocky torso belly UV owner",
+      "partB": "Bear upper arm right",
+      "trianglePairs": 30,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.03999999910593033,
+          0.3199999928474426,
+          0.3700000047683716
+        ],
+        "radiusWorld": 3.478260869565218,
+        "maximumActualIntersectionDistanceWorld": 3.357565516693992,
+        "actualIntersectionPointCount": 60
+      }
+    }
+  ],
+  "inappropriateSelfIntersectionPairs": [],
+  "inappropriateFixtureIntersectionPairs": [],
+  "straddleOpening": {
+    "allLegTrianglesOutsideCentralYStrip": true,
+    "minimumLegInnerHalfGapWorld": 2.4357333183288574,
+    "certifiedFiniteEmptyStripWidthWorld": 2,
+    "excludesPelvisAndFixture": true,
+    "notBikeClearance": true
+  },
+  "negativeControls": {
+    "displacedSocketDistancesWorld": {
+      "hip_saddle": 3.605551275463989,
+      "hand_left_grip": 3.6055515399656763,
+      "hand_right_grip": 3.6055515399656763,
+      "foot_left_support": 3.605550217457173,
+      "foot_right_support": 3.605550217457173
+    },
+    "allDisplacedSocketsRejected": true,
+    "collapsedRightLegIntoLeftTrianglePairs": 385,
+    "collapsedLegsRejected": true,
+    "baselineRestored": true
+  },
+  "pawGeometry": {
+    "actualClosedSolidChecks": [
+      {
+        "owner": "Bear broad hindpaw left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 37.17380494996905
+      },
+      {
+        "owner": "Bear broad hindpaw right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 37.17380489905675
+      },
+      {
+        "owner": "Bear gripping forepaw left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 19.082391539872333
+      },
+      {
+        "owner": "Bear gripping forepaw right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 19.082335322650277
+      }
+    ],
+    "closedVolumetricForeHindpaws": true
+  },
+  "limits": [
+    "Body depth/joint positions inferred from2D; not unique observed anatomy",
+    "Only declared bounded anatomical joins and matching fixture contacts excepted",
+    "Finite triangle surface and central opening checks do not prove any bike/frame/wheel/animation or other-avatar fit"
+  ]
+}

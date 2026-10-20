@@ -1,0 +1,129 @@
+{
+  "method": "Independent chopped closed-cab hot rod with narrow exposed V8/chassis, intentionally open small front wheels and real rear fenders covering fat rear tires. Plum coachwork and restrained orange flames use own continuous actual-skin charts. Separate fixed glass/roof ownership; no screen projection.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      64,
+      40,
+      77
+    ],
+    "paintShadow": [
+      88,
+      48,
+      106
+    ],
+    "paintMid": [
+      112,
+      61,
+      139
+    ],
+    "paint": [
+      138,
+      77,
+      166
+    ],
+    "paintLight": [
+      169,
+      108,
+      193
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "flame": [
+      238,
+      129,
+      61
+    ],
+    "flameLight": [
+      255,
+      174,
+      80
+    ],
+    "engine": [
+      113,
+      119,
+      137
+    ],
+    "engineDark": [
+      77,
+      81,
+      101
+    ]
+  },
+  "ownership": "Own chopped cab side chart with restrained orange polygon flames; separate fixed windshield/rear glass charts and roof; short rounded plum trunk chart; broad actual rear fenders only; intentionally open small front wheels. Exposed broad-block V8, fixed exhaust/headers and narrow chassis use explicit role swatches. Named source components retain base FACE paint_role attributes; their continuous UV charts own window/paint details. Trim islands share padded constant-role swatches; wheel-only meshes never sample coachwork.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Coherent opposite cab-side glass/flame charts; separate windshield/rear glass/roof. Intentionally exposed skinny front wheels and covered fat rear tires have own radii, tracks and widths.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

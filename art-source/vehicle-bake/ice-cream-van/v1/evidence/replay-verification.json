@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+  "atlasSha256": "1ce9d85a871391bcaaa912228bf61f78955ed970827e507c7cdaf5dfa19f0b84",
+  "recipeSha256": "2966b09472fe345b12769e9de3066f9514439e8beb66223e01174c7825284910",
+  "invokedBuilder": "art-source/vehicle-bake/ice-cream-van/v1/build.py",
+  "inputHashes": {
+    "art-source/vehicle-bake/ice-cream-van/v1/build.py": "e660e459182e40394a545aa021d3825bbf9ade0a05638e1ea8de1e8b7570e22a",
+    "art-source/vehicle-bake/ice-cream-van/v1/family.json": "682239f04338cb81351789c49454ef17e0d61f0d1396f52fea2b70e6e7578e1a",
+    "art-source/vehicle-bake/ice-cream-van/v1/coverage-region.json": "b45ec3b106f297e2d9726262e6f35f4e91b20935947994f2cb8a38cd9591341d",
+    "art-source/vehicle-bake/ice-cream-van/v1/surface-regions.json": "0545f9d231ccf6239ec2205b6beee2a99a7375bcf40551ecb5a80bcc95e1717b",
+    "art-source/vehicle-bake/ice-cream-van/v1/serving-region.json": "ce26acb716b408b5fe84125efec8ad53c3fe979fbdcbeaf435058f18a02ebb49",
+    "art-source/vehicle-bake/ice-cream-van/v1/review.json": "a09039f6d749df32797b7b0eff5a42a9a532ce9eb3187a711cc74d0e0fa3de13"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235"
+  },
+  "scratchInputDependencies": [],
+  "isolatedReplay": {
+    "status": "passed",
+    "byteIdentical": true,
+    "inputHashes": {
+      "art-source/vehicle-bake/ice-cream-van/v1/build.py": "e660e459182e40394a545aa021d3825bbf9ade0a05638e1ea8de1e8b7570e22a",
+      "art-source/vehicle-bake/ice-cream-van/v1/family.json": "682239f04338cb81351789c49454ef17e0d61f0d1396f52fea2b70e6e7578e1a",
+      "art-source/vehicle-bake/ice-cream-van/v1/coverage-region.json": "b45ec3b106f297e2d9726262e6f35f4e91b20935947994f2cb8a38cd9591341d",
+      "art-source/vehicle-bake/ice-cream-van/v1/surface-regions.json": "0545f9d231ccf6239ec2205b6beee2a99a7375bcf40551ecb5a80bcc95e1717b",
+      "art-source/vehicle-bake/ice-cream-van/v1/serving-region.json": "ce26acb716b408b5fe84125efec8ad53c3fe979fbdcbeaf435058f18a02ebb49",
+      "art-source/vehicle-bake/ice-cream-van/v1/review.json": "a09039f6d749df32797b7b0eff5a42a9a532ce9eb3187a711cc74d0e0fa3de13"
+    },
+    "sharedInputHashes": {
+      "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+    },
+    "outputs": {
+      "model.glb": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+      "atlas.png": "1ce9d85a871391bcaaa912228bf61f78955ed970827e507c7cdaf5dfa19f0b84",
+      "recipe.json": "2966b09472fe345b12769e9de3066f9514439e8beb66223e01174c7825284910"
+    },
+    "scratchInputDependencies": [],
+    "isolatedRoot": "data/vehicle-bake/ice-cream-van/fresh-declared-replay",
+    "bootstrap": "Empty AGENTS.md/public root sentinels only; no vehicle inputs",
+    "meaning": "Fresh miniature repository contains only listed inputs. GLB, atlas and recipe match byte for byte; packed blend determinism is not claimed."
+  },
+  "blender": "5.2.2 LTS d13f752e3b9c; factory startup; background; four threads",
+  "meaning": "Only six retained constructor/config inputs plus catalog.py were placed in a fresh miniature repository. Model, atlas and recipe exact. Other pinned helpers qualify QA only; packed scene byte determinism not claimed."
+}

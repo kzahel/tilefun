@@ -1,0 +1,154 @@
+{
+  "method": "Original mustard warehouse forklift with rounded counterweight, low dark seat over open footwell, four slim black overhead guard pillars and open roof frame, tall dark twin mast rails/crossbars and two low narrow forward fixed forks. Four ordinary road wheels only; front wheels intentionally open, rear crowns covered; mast/forks static with no lifting gameplay.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      121,
+      89,
+      39
+    ],
+    "paintShadow": [
+      167,
+      119,
+      38
+    ],
+    "paintMid": [
+      197,
+      151,
+      44
+    ],
+    "paint": [
+      225,
+      183,
+      56
+    ],
+    "paintLight": [
+      249,
+      213,
+      99
+    ],
+    "cream": [
+      244,
+      227,
+      177
+    ],
+    "glassDark": [
+      68,
+      88,
+      112
+    ],
+    "glass": [
+      105,
+      153,
+      179
+    ],
+    "glassLight": [
+      157,
+      199,
+      218
+    ],
+    "glassGlint": [
+      195,
+      225,
+      233
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      204,
+      209,
+      218
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "seat": [
+      66,
+      70,
+      84
+    ],
+    "seatLight": [
+      88,
+      92,
+      104
+    ],
+    "mast": [
+      66,
+      73,
+      87
+    ],
+    "mastLight": [
+      103,
+      113,
+      125
+    ],
+    "fork": [
+      145,
+      152,
+      164
+    ],
+    "forkLight": [
+      188,
+      195,
+      204
+    ],
+    "floor": [
+      86,
+      90,
+      102
+    ],
+    "floorLight": [
+      109,
+      114,
+      124
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "ownership": "Own counterweight side/end/top charts and broad mustard palette facets, dark inset grille/seam UV strokes, footwell/seat separate padded roles, mast/guard/forks explicit gray swatch owners. No camera projection, fake negative-space decals, glass planes, silhouette ink or animated equipment.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Mustard rounded rear counterweight owns side/end/top charts; real open footwell, dark seat and four guard pillars, tall twin mast/crossbars and two forward fork tines own explicit semantic UV swatches. All equipment joins Body_static, not wheel rigs.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

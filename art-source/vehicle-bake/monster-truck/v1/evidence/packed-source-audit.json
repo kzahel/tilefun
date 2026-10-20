@@ -1,0 +1,347 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedEquipment": {
+      "components": [
+        "STATIC dark long chassis rail -1",
+        "STATIC dark long chassis rail 1",
+        "STATIC axle attachment arm -1.45",
+        "STATIC central axle housing -1.45",
+        "STATIC frame crossmember -1.45",
+        "STATIC fixed diagonal suspension link -1.45 -1",
+        "STATIC fixed purple shock -1.45 -1",
+        "STATIC fixed diagonal suspension link -1.45 1",
+        "STATIC fixed purple shock -1.45 1",
+        "STATIC axle attachment arm 1.45",
+        "STATIC central axle housing 1.45",
+        "STATIC frame crossmember 1.45",
+        "STATIC fixed diagonal suspension link 1.45 -1",
+        "STATIC fixed purple shock 1.45 -1",
+        "STATIC fixed diagonal suspension link 1.45 1",
+        "STATIC fixed purple shock 1.45 1"
+      ],
+      "noMotionMetadata": true,
+      "fakeFenderCaps": 0,
+      "coverage": "not-applicable/intentionally-exposed"
+    },
+    "sourceCargoRecess": {
+      "rays": [
+        {
+          "xySource": [
+            0.85,
+            -0.35
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            0.85,
+            0
+          ],
+          "firstHitZSource": 1.8500001430511475,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            0.85,
+            0.35
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            1.2,
+            -0.35
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            1.2,
+            0
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            1.2,
+            0.35
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            1.6,
+            -0.35
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            1.6,
+            0
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            1.6,
+            0.35
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            2.05,
+            -0.35
+          ],
+          "firstHitZSource": 1.8500001430511475,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            2.05,
+            0
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        },
+        {
+          "xySource": [
+            2.05,
+            0.35
+          ],
+          "firstHitZSource": 1.8499999046325684,
+          "owner": "Recessed monster cargo floor"
+        }
+      ],
+      "railTopSource": 2.4549999237060547,
+      "railTopMeasuredFromGeometry": true,
+      "minimumMeasuredRecessSource": 0.6049997806549072,
+      "realOpenRecess": true
+    },
+    "skinOwnership": {
+      "cab": "Continuous actual-skin side glass; fixed front/rear glass half charts and own purple roof chart",
+      "hood": "Own lime actual-skin chart",
+      "cargo": "Actual recessed floor owns sparse rib paint; walls own inside/outside palette swatches",
+      "treads": "96 broad wedge blocks with explicit tire roles; purple hubs own palette swatches",
+      "noGlassOverlayMeshes": true
+    },
+    "master.blend": {
+      "sha256": "31face52a31657bfe7da14d6c792c0aec7bb69f9f7f8f4762844693d7531f732",
+      "triangles": 3534,
+      "meshObjects": 154,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "wheelRadiusRig": [
+      {
+        "id": "FL",
+        "radiusSourceMeasured": 0.8500001430511475,
+        "radiusWorldDeclared": 14.782608695652176,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "FR",
+        "radiusSourceMeasured": 0.8500001430511475,
+        "radiusWorldDeclared": 14.782608695652176,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RL",
+        "radiusSourceMeasured": 0.8500001430511475,
+        "radiusWorldDeclared": 14.782608695652176,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RR",
+        "radiusSourceMeasured": 0.8500001430511475,
+        "radiusWorldDeclared": 14.782608695652176,
+        "geometryAndOwnMetadataMatch": true
+      }
+    ],
+    "car.blend": {
+      "sha256": "dc043c3c0bbb9c3f341fbd5457994d424078a420dfdd6503cded8498e81cd237",
+      "triangles": 3534,
+      "meshObjects": 5,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+      "minBlenderWorld": [
+        -43.4782600402832,
+        -25.843477249145508,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        43.4782600402832,
+        25.843477249145508,
+        52.173912048339844
+      ],
+      "dimensionsBlenderWorld": [
+        86.9565200805664,
+        51.686954498291016,
+        52.17391109466553
+      ],
+      "dimensionsSourceUnits": [
+        4.999999904632568,
+        2.971999883651733,
+        2.999999887943267
+      ]
+    },
+    "actualGLBCargoRecess": {
+      "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+      "rays": [
+        {
+          "xySource": [
+            0.85,
+            -0.35
+          ],
+          "firstHitZSource": 1.8500001621246336,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.85,
+            0
+          ],
+          "firstHitZSource": 1.8500003814697263,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.85,
+            0.35
+          ],
+          "firstHitZSource": 1.8500001621246336,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            -0.35
+          ],
+          "firstHitZSource": 1.849999723434448,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            0
+          ],
+          "firstHitZSource": 1.849999723434448,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            0.35
+          ],
+          "firstHitZSource": 1.8500001621246336,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.6,
+            -0.35
+          ],
+          "firstHitZSource": 1.849999723434448,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.6,
+            0
+          ],
+          "firstHitZSource": 1.8500001621246336,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.6,
+            0.35
+          ],
+          "firstHitZSource": 1.849999723434448,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.05,
+            -0.35
+          ],
+          "firstHitZSource": 1.849999723434448,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.05,
+            0
+          ],
+          "firstHitZSource": 1.849999723434448,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.05,
+            0.35
+          ],
+          "firstHitZSource": 1.849999723434448,
+          "owner": "Body_static"
+        }
+      ],
+      "railTopSource": 2.4549997711181635,
+      "railTopMeasuredFromGeometry": true,
+      "minimumMeasuredRecessSource": 0.6049993896484371,
+      "realOpenRecess": true
+    },
+    "actualGLBAttachments": {
+      "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+      "results": [
+        {
+          "id": "FL",
+          "actualTireSlabInnerAbsY": 13.391304016113281,
+          "actualStaticArmEndAbsY": 13.130434036254883,
+          "axialGapWorld": 0.26086997985839844,
+          "subpixelGap": true
+        },
+        {
+          "id": "FR",
+          "actualTireSlabInnerAbsY": 13.391304016113281,
+          "actualStaticArmEndAbsY": 13.130434036254883,
+          "axialGapWorld": 0.26086997985839844,
+          "subpixelGap": true
+        },
+        {
+          "id": "RL",
+          "actualTireSlabInnerAbsY": 13.391304016113281,
+          "actualStaticArmEndAbsY": 13.130434036254883,
+          "axialGapWorld": 0.26086997985839844,
+          "subpixelGap": true
+        },
+        {
+          "id": "RR",
+          "actualTireSlabInnerAbsY": 13.391304016113281,
+          "actualStaticArmEndAbsY": 13.130434036254883,
+          "axialGapWorld": 0.26086997985839844,
+          "subpixelGap": true
+        }
+      ],
+      "allFixedTrianglesSeparatelyClearanceProven": true
+    }
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "method": "Original small go-kart: very low dark tubular chassis, broad bumper hoops, rounded short red/white UV-painted nose, actual shallow seat well with dark fixed seat/steering, compact rear motor and chain block. All four small tires intentionally exposed, independently rigged with front.25/rear.27 source radii. No glass, driver, helmet, roof, logos or high-to-low claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      43,
+      47,
+      62
+    ],
+    "tireLight": [
+      63,
+      68,
+      84
+    ],
+    "treadMark": [
+      88,
+      94,
+      111
+    ],
+    "paintDeep": [
+      135,
+      45,
+      55
+    ],
+    "paintShadow": [
+      170,
+      43,
+      56
+    ],
+    "paintMid": [
+      203,
+      49,
+      57
+    ],
+    "paint": [
+      228,
+      63,
+      64
+    ],
+    "paintLight": [
+      248,
+      100,
+      91
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "floor": [
+      69,
+      72,
+      89
+    ],
+    "inner": [
+      49,
+      53,
+      71
+    ],
+    "seat": [
+      50,
+      54,
+      72
+    ]
+  },
+  "ownership": "Own short rounded nose and actual low seat-well side skin use continuous red/white charts. Dark tubular frame, bumper hoops, fixed central seat/steering, gray rear motor ribs, chain guard and all4 exposed wheels have named geometry and padded semantic swatches. No glass or coincident surface overlays. No source projection or high-to-low claim.",
+  "semanticOwners": {
+    "noseTop": {
+      "component": "Own short rounded red white kart nose",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        160
+      ],
+      "meaning": "Actual rounded nose skin, broad red paint with central white band"
+    },
+    "noseAndWellSides": {
+      "atlasPixelRect": [
+        0,
+        160,
+        512,
+        320
+      ],
+      "meaning": "Actual nose and well-side red paint with bounded broad white side block"
+    },
+    "seatWell": {
+      "roles": [
+        "floor",
+        "inner",
+        "seat",
+        "ink",
+        "tireLight"
+      ],
+      "meaning": "Separate floor/sidewalls/lips and fixed cushion/back. Six rays reach the real floor below surrounding walls; no opaque upper deck."
+    },
+    "chassisMotor": {
+      "roles": [
+        "ink",
+        "rim",
+        "silver",
+        "paint"
+      ],
+      "meaning": "Fixed tubular chassis/bumper hoops, short arm tips, steering, gray motor and chain guard; exact named semantic owners"
+    },
+    "exposedWheels": {
+      "roles": [
+        "tire",
+        "tireLight",
+        "rim",
+        "silver",
+        "white"
+      ],
+      "meaning": "Four independent small tires, source front.25/rear.27 radii. No fenders/caps. Ordinary distance and family-only equal-angle phases are independently proved."
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "treadMark": [
+      112,
+      488
+    ],
+    "paintDeep": [
+      144,
+      488
+    ],
+    "paintShadow": [
+      176,
+      488
+    ],
+    "paintMid": [
+      208,
+      488
+    ],
+    "paint": [
+      240,
+      488
+    ],
+    "paintLight": [
+      272,
+      488
+    ],
+    "rim": [
+      304,
+      488
+    ],
+    "silver": [
+      336,
+      488
+    ],
+    "white": [
+      368,
+      488
+    ],
+    "floor": [
+      400,
+      488
+    ],
+    "inner": [
+      432,
+      488
+    ],
+    "seat": [
+      464,
+      488
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Low central seat well and rear fixed motor, short red/white nose and four intentionally exposed wheel crowns; front/rear radii have explicit owners.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

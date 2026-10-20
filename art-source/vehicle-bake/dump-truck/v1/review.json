@@ -1,0 +1,26 @@
+{
+  "id": "dump-truck-v1",
+  "clearanceId": "dump-truck--v1",
+  "name": "Yellow six-wheel dump truck",
+  "title": "Yellow six-wheel dump truck \u00b7 level deep open dump-body family v1",
+  "source": "public/demos/vehicle-bake/dump-truck/v1",
+  "glb": "public/demos/vehicle-bake/dump-truck/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/dump-truck/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/dump-truck/v1/report.json",
+  "output": "public/demos/original-vehicles/dump-truck-v1",
+  "qa": "data/vehicle-bake/dump-truck/qa",
+  "offline": "data/vehicle-bake/dump-truck/review.html",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "meshRadius": 112,
+  "toolchain": "multi-axle-v2",
+  "wheelIds": ["FL", "FR", "ML", "MR", "RL", "RR"]
+}

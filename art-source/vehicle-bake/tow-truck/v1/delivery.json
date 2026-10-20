@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "report": "public/demos/vehicle-bake/tow-truck/v1/report.json",
+  "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+  "atlasSha256": "40889caa55d3cda45a23eefe1460ae4767368f4f5fdbc7edbc52cd533a0f85f2",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/tow-truck/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/tow-truck/capture.mjs",
+    "node scripts/vehicle-bake/tow-truck/independent-visual.mjs",
+    "node scripts/vehicle-bake/tow-truck/wheel-visual.mjs",
+    "python scripts/vehicle-bake/tow-truck/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/tow-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/tow-truck/v1/evidence/clearance-input.json data/vehicle-bake/tow-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/tow-truck/v1/model.glb --config art-source/vehicle-bake/tow-truck/v1/coverage-region.json --output data/vehicle-bake/tow-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/tow-truck/assess-coverage.py --input data/vehicle-bake/tow-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/tow-truck/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/tow-truck/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/tow-truck/author-config.json --qa-only"
+  ]
+}

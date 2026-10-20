@@ -1,0 +1,408 @@
+{
+  "status": "passed",
+  "presentationStatus": "prototype-not-production",
+  "humanApproval": false,
+  "riderSha256": "519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+  "carSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "browser": "bundled full Chromium",
+  "browserVersion": "153.0.8010.12",
+  "nativeSize": 224,
+  "radius": 112,
+  "singleDepthTarget": true,
+  "sharedNormalizedParent": true,
+  "sharedCarProjectionAndOutline": true,
+  "views": [
+    {
+      "mode": "study",
+      "index": 0,
+      "yaw": 0,
+      "counts": {
+        "combined": 2513,
+        "rider": 195,
+        "bare": 2513,
+        "visible-mask": 164
+      },
+      "occludedRiderPixels": 31
+    },
+    {
+      "mode": "study",
+      "index": 1,
+      "yaw": 22.5,
+      "counts": {
+        "combined": 2493,
+        "rider": 202,
+        "bare": 2492,
+        "visible-mask": 171
+      },
+      "occludedRiderPixels": 31
+    },
+    {
+      "mode": "study",
+      "index": 2,
+      "yaw": 45,
+      "counts": {
+        "combined": 2398,
+        "rider": 202,
+        "bare": 2393,
+        "visible-mask": 166
+      },
+      "occludedRiderPixels": 36
+    },
+    {
+      "mode": "study",
+      "index": 3,
+      "yaw": 67.5,
+      "counts": {
+        "combined": 2275,
+        "rider": 188,
+        "bare": 2270,
+        "visible-mask": 145
+      },
+      "occludedRiderPixels": 43
+    },
+    {
+      "mode": "study",
+      "index": 4,
+      "yaw": 90,
+      "counts": {
+        "combined": 2180,
+        "rider": 197,
+        "bare": 2180,
+        "visible-mask": 147
+      },
+      "occludedRiderPixels": 50
+    },
+    {
+      "mode": "study",
+      "index": 5,
+      "yaw": 112.5,
+      "counts": {
+        "combined": 2270,
+        "rider": 196,
+        "bare": 2270,
+        "visible-mask": 144
+      },
+      "occludedRiderPixels": 52
+    },
+    {
+      "mode": "study",
+      "index": 6,
+      "yaw": 135,
+      "counts": {
+        "combined": 2418,
+        "rider": 199,
+        "bare": 2393,
+        "visible-mask": 160
+      },
+      "occludedRiderPixels": 39
+    },
+    {
+      "mode": "study",
+      "index": 7,
+      "yaw": 157.5,
+      "counts": {
+        "combined": 2543,
+        "rider": 207,
+        "bare": 2492,
+        "visible-mask": 178
+      },
+      "occludedRiderPixels": 29
+    },
+    {
+      "mode": "study",
+      "index": 8,
+      "yaw": 180,
+      "counts": {
+        "combined": 2568,
+        "rider": 190,
+        "bare": 2513,
+        "visible-mask": 184
+      },
+      "occludedRiderPixels": 6
+    },
+    {
+      "mode": "study",
+      "index": 9,
+      "yaw": 202.5,
+      "counts": {
+        "combined": 2530,
+        "rider": 189,
+        "bare": 2480,
+        "visible-mask": 187
+      },
+      "occludedRiderPixels": 2
+    },
+    {
+      "mode": "study",
+      "index": 10,
+      "yaw": 225,
+      "counts": {
+        "combined": 2454,
+        "rider": 174,
+        "bare": 2422,
+        "visible-mask": 173
+      },
+      "occludedRiderPixels": 1
+    },
+    {
+      "mode": "study",
+      "index": 11,
+      "yaw": 247.5,
+      "counts": {
+        "combined": 2308,
+        "rider": 159,
+        "bare": 2305,
+        "visible-mask": 154
+      },
+      "occludedRiderPixels": 5
+    },
+    {
+      "mode": "study",
+      "index": 12,
+      "yaw": 270,
+      "counts": {
+        "combined": 2212,
+        "rider": 137,
+        "bare": 2212,
+        "visible-mask": 125
+      },
+      "occludedRiderPixels": 12
+    },
+    {
+      "mode": "study",
+      "index": 13,
+      "yaw": 292.5,
+      "counts": {
+        "combined": 2306,
+        "rider": 157,
+        "bare": 2305,
+        "visible-mask": 147
+      },
+      "occludedRiderPixels": 10
+    },
+    {
+      "mode": "study",
+      "index": 14,
+      "yaw": 315,
+      "counts": {
+        "combined": 2422,
+        "rider": 175,
+        "bare": 2422,
+        "visible-mask": 165
+      },
+      "occludedRiderPixels": 10
+    },
+    {
+      "mode": "study",
+      "index": 15,
+      "yaw": 337.5,
+      "counts": {
+        "combined": 2480,
+        "rider": 186,
+        "bare": 2480,
+        "visible-mask": 165
+      },
+      "occludedRiderPixels": 21
+    },
+    {
+      "mode": "engine",
+      "index": 0,
+      "yaw": 0,
+      "counts": {
+        "combined": 3219,
+        "rider": 269,
+        "bare": 3219,
+        "visible-mask": 226
+      },
+      "occludedRiderPixels": 43
+    },
+    {
+      "mode": "engine",
+      "index": 1,
+      "yaw": 22.5,
+      "counts": {
+        "combined": 3218,
+        "rider": 288,
+        "bare": 3218,
+        "visible-mask": 236
+      },
+      "occludedRiderPixels": 52
+    },
+    {
+      "mode": "engine",
+      "index": 2,
+      "yaw": 45,
+      "counts": {
+        "combined": 3094,
+        "rider": 288,
+        "bare": 3089,
+        "visible-mask": 230
+      },
+      "occludedRiderPixels": 58
+    },
+    {
+      "mode": "engine",
+      "index": 3,
+      "yaw": 67.5,
+      "counts": {
+        "combined": 2915,
+        "rider": 263,
+        "bare": 2908,
+        "visible-mask": 195
+      },
+      "occludedRiderPixels": 68
+    },
+    {
+      "mode": "engine",
+      "index": 4,
+      "yaw": 90,
+      "counts": {
+        "combined": 2733,
+        "rider": 264,
+        "bare": 2732,
+        "visible-mask": 188
+      },
+      "occludedRiderPixels": 76
+    },
+    {
+      "mode": "engine",
+      "index": 5,
+      "yaw": 112.5,
+      "counts": {
+        "combined": 2908,
+        "rider": 269,
+        "bare": 2908,
+        "visible-mask": 196
+      },
+      "occludedRiderPixels": 73
+    },
+    {
+      "mode": "engine",
+      "index": 6,
+      "yaw": 135,
+      "counts": {
+        "combined": 3137,
+        "rider": 289,
+        "bare": 3089,
+        "visible-mask": 224
+      },
+      "occludedRiderPixels": 65
+    },
+    {
+      "mode": "engine",
+      "index": 7,
+      "yaw": 157.5,
+      "counts": {
+        "combined": 3307,
+        "rider": 286,
+        "bare": 3218,
+        "visible-mask": 242
+      },
+      "occludedRiderPixels": 44
+    },
+    {
+      "mode": "engine",
+      "index": 8,
+      "yaw": 180,
+      "counts": {
+        "combined": 3308,
+        "rider": 268,
+        "bare": 3219,
+        "visible-mask": 266
+      },
+      "occludedRiderPixels": 2
+    },
+    {
+      "mode": "engine",
+      "index": 9,
+      "yaw": 202.5,
+      "counts": {
+        "combined": 3301,
+        "rider": 264,
+        "bare": 3209,
+        "visible-mask": 262
+      },
+      "occludedRiderPixels": 2
+    },
+    {
+      "mode": "engine",
+      "index": 10,
+      "yaw": 225,
+      "counts": {
+        "combined": 3186,
+        "rider": 250,
+        "bare": 3127,
+        "visible-mask": 245
+      },
+      "occludedRiderPixels": 5
+    },
+    {
+      "mode": "engine",
+      "index": 11,
+      "yaw": 247.5,
+      "counts": {
+        "combined": 2965,
+        "rider": 221,
+        "bare": 2956,
+        "visible-mask": 208
+      },
+      "occludedRiderPixels": 13
+    },
+    {
+      "mode": "engine",
+      "index": 12,
+      "yaw": 270,
+      "counts": {
+        "combined": 2798,
+        "rider": 203,
+        "bare": 2798,
+        "visible-mask": 181
+      },
+      "occludedRiderPixels": 22
+    },
+    {
+      "mode": "engine",
+      "index": 13,
+      "yaw": 292.5,
+      "counts": {
+        "combined": 2956,
+        "rider": 222,
+        "bare": 2956,
+        "visible-mask": 205
+      },
+      "occludedRiderPixels": 17
+    },
+    {
+      "mode": "engine",
+      "index": 14,
+      "yaw": 315,
+      "counts": {
+        "combined": 3127,
+        "rider": 251,
+        "bare": 3127,
+        "visible-mask": 228
+      },
+      "occludedRiderPixels": 23
+    },
+    {
+      "mode": "engine",
+      "index": 15,
+      "yaw": 337.5,
+      "counts": {
+        "combined": 3210,
+        "rider": 262,
+        "bare": 3209,
+        "visible-mask": 229
+      },
+      "occludedRiderPixels": 33
+    }
+  ],
+  "desktopMobileControls": true,
+  "mobileNoOverflow": true,
+  "offline": {
+    "exactCombinedPixels": true,
+    "networkRequests": []
+  },
+  "errors": [],
+  "limitation": "Only art/composition proof. No main renderer/authority/pooling/fallback/AI or all-avatar support."
+}

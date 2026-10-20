@@ -1,0 +1,1041 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "stretch-limousine",
+  "route": "stretch-limousine",
+  "revision": "v1",
+  "method": "Original low long-wheelbase classic sedan loft with one continuous rounded hood/cabin/short-trunk skin. Five bounded blue side panes, swept windshield/rear glass, four total door seams/handles and slim chrome beltline use actual semantic UV charts. No glass overlays, coincident loft faces, projection or high-to-low transfer claim.",
+  "geometry": {
+    "triangles": 2956,
+    "vertices": 5768,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 209072,
+    "sha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.5799999237060547,
+        -0.800000011920929,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -44.869563890540086,
+        6.608695569245713,
+        13.913043685581375
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.5799999237060547,
+        0.800000011920929,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -44.869563890540086,
+        6.608695569245713,
+        -13.913043685581375
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        2.4600000381469727,
+        -0.800000011920929,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        42.78260935907779,
+        6.608695569245713,
+        13.913043685581375
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        2.4600000381469727,
+        0.800000011920929,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        42.78260935907779,
+        6.608695569245713,
+        -13.913043685581375
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/stretch-limousine/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/stretch-limousine/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/stretch-limousine/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Static limousine body, four closed doors and fixed mirrors; ordinary driving and traffic semantics, no equipment animation.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 2956,
+  "vertexCount": 5768,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 209072,
+  "atlasBytes": 3582,
+  "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+  "atlasSha256": "9c92ffbee406ff8c9d32cca682db31547c28ef4e065f93fafe65c87d64ca2a21",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "stretch-limousine--v1",
+    "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "triangles": 2956,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.1529550952525023,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.1529550952525023,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.1529549166513124,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.1529549166513124,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/stretch-limousine/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "minBlenderWorld": [
+      -61.21738815307617,
+      -17.39130401611328,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      61.21738815307617,
+      17.39130401611328,
+      29.913043975830078
+    ],
+    "dimensionsBlenderWorld": [
+      122.43477630615234,
+      34.78260803222656,
+      29.91304349899292
+    ],
+    "dimensionsSourceUnits": [
+      7.039999637603759,
+      1.999999961853027,
+      1.7200000011920926
+    ]
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "rayCount": 17,
+    "samples": [
+      {
+        "id": "left-bounded-pane-1",
+        "hitSource": [
+          -1.3850001096725464,
+          -0.8005468845367432,
+          1.3400001525878906
+        ],
+        "triangle": 141,
+        "interpolatedUV": [
+          0.30763888359069824,
+          0.7341772317886353
+        ],
+        "atlasPixel": [
+          157,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-bounded-pane-2",
+        "hitSource": [
+          -0.5750000476837158,
+          -0.801260232925415,
+          1.3400001525878906
+        ],
+        "triangle": 162,
+        "interpolatedUV": [
+          0.4201388955116272,
+          0.7341772317886353
+        ],
+        "atlasPixel": [
+          215,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-bounded-pane-3",
+        "hitSource": [
+          0.20500001311302185,
+          -0.8015041351318359,
+          1.3400001525878906
+        ],
+        "triangle": 1116,
+        "interpolatedUV": [
+          0.5284723043441772,
+          0.7341772317886353
+        ],
+        "atlasPixel": [
+          270,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-bounded-pane-4",
+        "hitSource": [
+          0.9750000238418579,
+          -0.8010830879211426,
+          1.3400001525878906
+        ],
+        "triangle": 1116,
+        "interpolatedUV": [
+          0.6354166865348816,
+          0.7341771125793457
+        ],
+        "atlasPixel": [
+          325,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-bounded-pane-5",
+        "hitSource": [
+          1.6750000715255737,
+          -0.7997183799743652,
+          1.3400001525878906
+        ],
+        "triangle": 1137,
+        "interpolatedUV": [
+          0.732638955116272,
+          0.7341771125793457
+        ],
+        "atlasPixel": [
+          375,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-bounded-pane-1",
+        "hitSource": [
+          -1.3850001096725464,
+          0.8005468845367432,
+          1.3400001525878906
+        ],
+        "triangle": 148,
+        "interpolatedUV": [
+          0.30763888359069824,
+          0.7341771721839905
+        ],
+        "atlasPixel": [
+          157,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-bounded-pane-2",
+        "hitSource": [
+          -0.5750000476837158,
+          0.801260232925415,
+          1.3400001525878906
+        ],
+        "triangle": 169,
+        "interpolatedUV": [
+          0.4201388955116272,
+          0.7341772317886353
+        ],
+        "atlasPixel": [
+          215,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-bounded-pane-3",
+        "hitSource": [
+          0.20500001311302185,
+          0.801504373550415,
+          1.3400001525878906
+        ],
+        "triangle": 1123,
+        "interpolatedUV": [
+          0.5284722447395325,
+          0.7341771721839905
+        ],
+        "atlasPixel": [
+          270,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-bounded-pane-4",
+        "hitSource": [
+          0.9750000238418579,
+          0.8010830879211426,
+          1.3400001525878906
+        ],
+        "triangle": 1123,
+        "interpolatedUV": [
+          0.6354166865348816,
+          0.7341771125793457
+        ],
+        "atlasPixel": [
+          325,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-bounded-pane-5",
+        "hitSource": [
+          1.6750000715255737,
+          0.7997186183929443,
+          1.3400001525878906
+        ],
+        "triangle": 1144,
+        "interpolatedUV": [
+          0.732638955116272,
+          0.7341771125793457
+        ],
+        "atlasPixel": [
+          375,
+          136
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "swept-front-windshield",
+        "hitSource": [
+          -1.9630612134933472,
+          0.0,
+          1.4199999570846558
+        ],
+        "triangle": 1027,
+        "interpolatedUV": [
+          0.25,
+          0.3026107847690582
+        ],
+        "atlasPixel": [
+          128,
+          357
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "swept-rear-window",
+        "hitSource": [
+          2.131481409072876,
+          0.0,
+          1.3900001049041748
+        ],
+        "triangle": 250,
+        "interpolatedUV": [
+          0.7499999403953552,
+          0.3067641854286194
+        ],
+        "atlasPixel": [
+          383,
+          354
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-window-frame",
+        "hitSource": [
+          -1.9190857410430908,
+          0.7099999785423279,
+          1.4199999570846558
+        ],
+        "triangle": 1029,
+        "interpolatedUV": [
+          0.4113636016845703,
+          0.30261075496673584
+        ],
+        "atlasPixel": [
+          210,
+          357
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rear-window-frame",
+        "hitSource": [
+          2.076395273208618,
+          0.7099999785423279,
+          1.4000000953674316
+        ],
+        "triangle": 252,
+        "interpolatedUV": [
+          0.9113636016845703,
+          0.3053797483444214
+        ],
+        "atlasPixel": [
+          466,
+          355
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "long-low-gray-roof",
+        "hitSource": [
+          0.20000000298023224,
+          0.0,
+          1.7180393934249878
+        ],
+        "triangle": 187,
+        "interpolatedUV": [
+          0.5277777910232544,
+          0.1875
+        ],
+        "atlasPixel": [
+          270,
+          416
+        ],
+        "rgb": [
+          147,
+          158,
+          175
+        ],
+        "roles": [
+          "roof"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "distinct-front-hood",
+        "hitSource": [
+          -2.8500001430511475,
+          0.0,
+          1.113611102104187
+        ],
+        "triangle": 958,
+        "interpolatedUV": [
+          0.10416659712791443,
+          0.09375
+        ],
+        "atlasPixel": [
+          53,
+          464
+        ],
+        "rgb": [
+          116,
+          129,
+          146
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "short-rear-trunk",
+        "hitSource": [
+          2.9000003337860107,
+          0.0,
+          1.0296225547790527
+        ],
+        "triangle": 1252,
+        "interpolatedUV": [
+          0.902777910232544,
+          0.09375
+        ],
+        "atlasPixel": [
+          462,
+          464
+        ],
+        "rgb": [
+          116,
+          129,
+          146
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/stretch-limousine/surface-regions.json",
+    "meaning": "ActualGLB triangle rays and interpolated UV samples check every5bounded pane each side, swept front/rear glazing and frames, gray roof, distinct hood and short trunk. Closed cabin, direct skin paint, no glass overlay or coincident loft-side geometry claim.",
+    "inputBytesUnchanged": true
+  },
+  "fixedGeometryEvidence": {
+    "status": "passed",
+    "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "fixedTriangles": 1972,
+    "duplicateTriangleCoordinates": 0,
+    "zeroAreaTriangles": 0,
+    "meaning": "All fixed body/trim triangles checked for identical geometric faces independently of UV splits. Constructor uses one strictly ordered closed section per longitudinal station, with no cabin-side overlays."
+  },
+  "fallbackNativeFit": {
+    "status": "passed",
+    "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "nativeSize": [
+      224,
+      224
+    ],
+    "frameSize": [
+      192,
+      224
+    ],
+    "nativeGroundOrigin": [
+      112,
+      112
+    ],
+    "fallbackGroundOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -16,
+      32
+    ],
+    "resizing": false,
+    "perHeadingFit": false,
+    "views": [
+      {
+        "headingDegrees": 0.0,
+        "nativeBounds": [
+          51,
+          70,
+          173,
+          127
+        ],
+        "fallbackBounds": [
+          35,
+          102,
+          157,
+          159
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 22.5,
+        "nativeBounds": [
+          50,
+          60,
+          174,
+          144
+        ],
+        "fallbackBounds": [
+          34,
+          92,
+          158,
+          176
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 45.0,
+        "nativeBounds": [
+          58,
+          46,
+          166,
+          160
+        ],
+        "fallbackBounds": [
+          42,
+          78,
+          150,
+          192
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 67.5,
+        "nativeBounds": [
+          74,
+          38,
+          150,
+          169
+        ],
+        "fallbackBounds": [
+          58,
+          70,
+          134,
+          201
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 90.0,
+        "nativeBounds": [
+          95,
+          37,
+          129,
+          168
+        ],
+        "fallbackBounds": [
+          79,
+          69,
+          113,
+          200
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 112.5,
+        "nativeBounds": [
+          74,
+          38,
+          150,
+          169
+        ],
+        "fallbackBounds": [
+          58,
+          70,
+          134,
+          201
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 135.0,
+        "nativeBounds": [
+          58,
+          46,
+          166,
+          160
+        ],
+        "fallbackBounds": [
+          42,
+          78,
+          150,
+          192
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 157.5,
+        "nativeBounds": [
+          50,
+          60,
+          174,
+          144
+        ],
+        "fallbackBounds": [
+          34,
+          92,
+          158,
+          176
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 180.0,
+        "nativeBounds": [
+          51,
+          70,
+          173,
+          127
+        ],
+        "fallbackBounds": [
+          35,
+          102,
+          157,
+          159
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 202.5,
+        "nativeBounds": [
+          50,
+          59,
+          174,
+          143
+        ],
+        "fallbackBounds": [
+          34,
+          91,
+          158,
+          175
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 225.0,
+        "nativeBounds": [
+          58,
+          44,
+          166,
+          160
+        ],
+        "fallbackBounds": [
+          42,
+          76,
+          150,
+          192
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 247.5,
+        "nativeBounds": [
+          74,
+          35,
+          150,
+          169
+        ],
+        "fallbackBounds": [
+          58,
+          67,
+          134,
+          201
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 270.0,
+        "nativeBounds": [
+          95,
+          35,
+          129,
+          168
+        ],
+        "fallbackBounds": [
+          79,
+          67,
+          113,
+          200
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 292.5,
+        "nativeBounds": [
+          74,
+          35,
+          150,
+          169
+        ],
+        "fallbackBounds": [
+          58,
+          67,
+          134,
+          201
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 315.0,
+        "nativeBounds": [
+          58,
+          44,
+          166,
+          160
+        ],
+        "fallbackBounds": [
+          42,
+          76,
+          150,
+          192
+        ],
+        "occupiedPixelsExact": true
+      },
+      {
+        "headingDegrees": 337.5,
+        "nativeBounds": [
+          50,
+          59,
+          174,
+          143
+        ],
+        "fallbackBounds": [
+          34,
+          91,
+          158,
+          175
+        ],
+        "occupiedPixelsExact": true
+      }
+    ],
+    "negativeOffFrameTranslationRejected": true,
+    "baselineRestored": true,
+    "meaning": "All16 native game headings fit the ordinary fallback frame with exact RGBA occupied pixels, fixed origins and transparent-margin cropping only. Physical collider measurement/runtime packaging remains parent-owned v3 work."
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/stretch-limousine/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/stretch-limousine/capture.mjs",
+    "python scripts/vehicle-bake/stretch-limousine/sheets.py",
+    "python scripts/vehicle-bake/stretch-limousine/audit-native.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/stretch-limousine/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/stretch-limousine/v1/evidence/clearance-input.json data/vehicle-bake/stretch-limousine/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/stretch-limousine/v1/model.glb --config art-source/vehicle-bake/stretch-limousine/v1/coverage-region.json --output data/vehicle-bake/stretch-limousine/recheck-coverage.json",
+    "python scripts/vehicle-bake/stretch-limousine/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/stretch-limousine/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16study and all16game headings at native224/radius112, unchanged world density and fixed origins. Actual length7.04 source is below7.2 maximum. Low roofline, distinct front hood, swept front/rear glazing, short trunk and long wheelbase read as classic stretch limousine rather than bus or van.",
+    "Five bounded blue panes per side, dark continuous frames and broad cool-glass clusters on the same actual sedan skin. Four total closed doors(two each side) have painted outlines and handles; middle extension panes are fixed cabin glass. No coincident loft side-face overlays or separate body glass overlays.",
+    "Charcoal/slate main body remains distinct from outline ink58,58,80. Lighter gray low crowned roof and restrained silver beltline/bumpers form coherent broad clusters. Final beltline widened slightly to read near1native pixel while staying slim.",
+    "Front and rear semantic window charts stay separated from hood/trunk and end lamp/grille owners. ActualGLB17 triangle-ray UV probes verify all10side panes plus swept front/rear glass and frames, gray roof, hood and trunk.",
+    "Far tire crowns stay beneath integrated hood/trunk fenders in all headings. Near tires sit in true local open arch pockets; no floating raised caps or visible wheel/body conflicts. Full fixed-body neutral-roll cylinder proof and own25of25 crown/support controls independently pass.",
+    "Inspected8signed wheel phases per camera and both wireframes. Only four standard roadwheels roll; body, long roof, glass, doors, lamps, mirrors and chrome stay fixed. Independent quarter/reverse/reset/pivot proof passes.",
+    "Additionally inspected individual224px native opposing sides and front/rear obliques. Low cabin, pane borders, hood/trunk separation and wheel coverage remain clear at final density.",
+    "Fallback audit confirms all16native game headings fit ordinary192x224 frames around96,144 by fixed(-16,+32) translation and transparent-margin cropping only; exact occupied RGBA pixels, no resizing/per-angle fitting. Collider measurement and runtime export stay parent-owned v3 work.",
+    "All1972 fixed exported body/trim triangles audited for zero area and identical geometric coordinates; neither found. Constructor has one ordered closed contour per station, no duplicated cabin-side surfaces.",
+    "Expected minor native aliasing on thin chrome, mirror/handle highlights and small glass corners; no blocking visual issue. Closed cabin with static doors/equipment; existing ordinary driving and traffic semantics, no visible animated driver or new rider gameplay."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 17,
+    "all16FallbackHeadingsExactNoResize": true,
+    "noDuplicateOrZeroAreaFixedTriangles": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Closed low stretched sedan with four total doors; no open-interior depth or animated equipment claim.",
+    "Slim beltline, small pane corners, rear lamps/handles and chrome retain expected angle-dependent native pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/stretch-limousine/v1/atlas.png": "9c92ffbee406ff8c9d32cca682db31547c28ef4e065f93fafe65c87d64ca2a21",
+    "art-source/vehicle-bake/stretch-limousine/v1/audit-native.py": "1771d33adbf174207b604d6c27c5ffc708a0afb8121510585f83caeb145c0b45",
+    "art-source/vehicle-bake/stretch-limousine/v1/audit-source.py": "cc352a36d9e7fd3f0a43973921de4c195d0402b5d32642d690362fc9e098dfa8",
+    "art-source/vehicle-bake/stretch-limousine/v1/build.py": "6e140e96a33cfaef855690cfe119ce82fd9b3fc3167c43cea2f7b68c8377a7ef",
+    "art-source/vehicle-bake/stretch-limousine/v1/capture.mjs": "87f46d0245e31235abf05ec85bae9ef4c0298d1d6eb6a433f38ba9b3f4638360",
+    "art-source/vehicle-bake/stretch-limousine/v1/car.blend": "dc132aef6c48bac46fb0227a9e2b61b85a5e4f8d23f2d164ccd28facb21398d9",
+    "art-source/vehicle-bake/stretch-limousine/v1/coverage-region.json": "e79d24f833b8d4f29a1c9bd2e60f34940e8b074aa858cb81ee7ab46612102744",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/author-browser-qa.json": "dd3ac62349be26e68156d4c4e33b2561a5695a724fb5fa47834fe43254d820c6",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/author-visual-inspection.json": "3777e0e4fed50f9589a2b1b384303d6c8558a649749247978711fbc4a9f5e4e1",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/clearance-input.json": "412e50a5e1eb8695bb8a709c626680d6a3fd52eed9a58597459565bf2699114b",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/engine-capture.json": "cb66fc3bee874840bcf9bc1c440ef428ccc1ce970cc15bb51c59b6d330fd66ce",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/fallback-native-fit.json": "609ceec9c13106b98bfa4b13c7384bf3c1afbc419193dc0e6e92e92b79d25b2e",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/packed-source-audit.json": "a14e980463e218cfe2b62888bc7bb2875288b1dbd514e9b61d057a4edabe2a7d",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/replay-verification.json": "7b6a33ca9608cb15ef0b793d33cb7b98ad69cbdfc8e3bcd65cf32dc11a39b5e4",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/shared-clearance.json": "21b3e627d685c852abe3b8c67951a33f134d0cdf4a1e812a4f870ec5d5aee825",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/upper-wheel-coverage.json": "f6ff2d1cbed4d1200f0170e458df88a51a18c01dcc9806cff9b5b1459e3d47fd",
+    "art-source/vehicle-bake/stretch-limousine/v1/family.json": "8510cad6b6a68d1419328a226537b37120054ff2c331810db2093a636750028b",
+    "art-source/vehicle-bake/stretch-limousine/v1/finalize.py": "b5616b768a089d7c7ad831544e77c21bb9b8ba4959db228512d3356b36d710c6",
+    "art-source/vehicle-bake/stretch-limousine/v1/master.blend": "350a4e705cab253d65c3750091b399eb7d68ccacb9169de1fad724010c350470",
+    "art-source/vehicle-bake/stretch-limousine/v1/model.glb": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "art-source/vehicle-bake/stretch-limousine/v1/pack-author.py": "4c5254764d7447b6ee7e41a820b9cbbf2b1fbe66c35df8c1e19e61035920a267",
+    "art-source/vehicle-bake/stretch-limousine/v1/paint-ownership.json": "44f526e0c9850920ebfc7446a8798b7b46a62fda1c3a7641871093ac31b32b71",
+    "art-source/vehicle-bake/stretch-limousine/v1/palette-draft.png": "97f8203d8158ac4fc727e86b5625dd4f9b14ce44cbeb4d5c6e0fc11a38443d96",
+    "art-source/vehicle-bake/stretch-limousine/v1/recipe.json": "98ea25b9dfef57af41102cf1e6c85816cc0b3411442f2879cdd7ee87c6394c83",
+    "art-source/vehicle-bake/stretch-limousine/v1/review.json": "d91d54dcc9a3f44d43275fc89e1a51faa4f0e83a76d6019e8973afea09770ec2",
+    "art-source/vehicle-bake/stretch-limousine/v1/sheets.py": "361129ca41ae9986a17387114a17728a4297a7b7810578a6613bfbead9b6e333",
+    "art-source/vehicle-bake/stretch-limousine/v1/surface-regions.json": "ef8a4b204022b29b50e24614ad1a13d89e9777bc57a90f3b5f879598199fd53d"
+  }
+}

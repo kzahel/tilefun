@@ -9,7 +9,7 @@
       "priority": 1,
       "status": "integrated",
       "authorization": "Current red-car pipeline pilot only",
-      "next": "Use Edit > Vehicles > Red sports coupe or encounter ordinary generated-road traffic; next pipeline examples are Beetle, school bus and pickup",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "a-reduced-projection--mid-fenders-v3",
       "ownerFeedback": "2026-10-19: good looks better; requested final asset commit"
     },
@@ -20,7 +20,7 @@
       "priority": 2,
       "status": "integrated",
       "authorization": "2026-10-19 owner explicitly requested Beetle authoring for review",
-      "next": "Spawn Beetle-style compact from Edit > Vehicles or normal road traffic; pickup is the current authoring example",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "beetle-v1",
       "ownerFeedback": "2026-10-19: looks fine; requested commit, gameplay activation and next vehicle"
     },
@@ -31,7 +31,7 @@
       "priority": 3,
       "status": "integrated",
       "authorization": "2026-10-19 owner requested next vehicle after accepted Beetle gameplay/commit checkpoint",
-      "next": "Spawn Yellow school bus from Edit > Vehicles or encounter ordinary traffic on roads at least 98px wide; pickup review is next",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "school-bus-v1",
       "ownerFeedback": "2026-10-19: looks great; integrate it, commit, then proceed directly with the pickup"
     },
@@ -42,7 +42,7 @@
       "priority": 4,
       "status": "integrated",
       "authorization": "2026-10-19 owner explicitly requested proceeding directly with pickup after approved school-bus integration",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "pickup-v1",
       "ownerFeedback": "2026-10-19: Looks great; asked whether it was already in the world and editor. Informed that runtime integration is pending."
     },
@@ -53,7 +53,7 @@
       "priority": 5,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "classic-roadster-v1"
     },
     {
@@ -63,7 +63,7 @@
       "priority": 6,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "offroad-jeep-v1"
     },
     {
@@ -73,7 +73,7 @@
       "priority": 7,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "delivery-van-v1"
     },
     {
@@ -83,7 +83,7 @@
       "priority": 8,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
       "candidate": "race-coupe-v1"
     },
     {
@@ -91,9 +91,9 @@
       "name": "Tiny bubble microcar",
       "family": "Microcar",
       "priority": 9,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exact-model review and replay queued; source complete at 2,596 triangles",
+      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
       "candidate": "microcar-v1"
     },
     {
@@ -101,9 +101,9 @@
       "name": "Wood-panel station wagon",
       "family": "Estate car",
       "priority": 10,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exact-model review and replay queued; source complete",
+      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
       "candidate": "woody-wagon-v1"
     },
     {
@@ -111,9 +111,9 @@
       "name": "Stretch limousine",
       "family": "Limousine",
       "priority": 11,
-      "status": "checking",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Independent exact-model review and replay queued; source complete at 2,956 triangles",
+      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
       "candidate": "stretch-limousine-v1"
     },
     {
@@ -121,198 +121,220 @@
       "name": "Classic hot rod",
       "family": "Hot rod",
       "priority": 12,
-      "status": "authoring",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Chopped roof, exposed front wheels and oversized rear tires"
+      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
+      "candidate": "hot-rod-v1"
     },
     {
       "id": "rally-hatchback",
       "name": "Rally hatchback",
       "family": "Rally car",
       "priority": 13,
-      "status": "authoring",
+      "status": "integrating",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Stubby hatchback, contrasting paint blocks, auxiliary lamps and a roof scoop"
+      "next": "Normal editor/traffic integration complete; full browser validation and incremental commit pending.",
+      "candidate": "rally-hatchback-v1"
     },
     {
       "id": "open-wheel-racer",
       "name": "Open-wheel racing car",
       "family": "Formula-style racer",
       "priority": 14,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Exposed tires, narrow central body, open cockpit and wide wings"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "open-wheel-racer-v1"
     },
     {
       "id": "monster-truck",
       "name": "Monster truck",
       "family": "Oversized pickup",
       "priority": 15,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Huge tires, high body and a clearly separated pickup bed"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "monster-truck-v1"
     },
     {
       "id": "beach-buggy",
       "name": "Beach dune buggy",
       "family": "Buggy",
       "priority": 16,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Open sides, rounded fenders, visible seats and a simple roll cage"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "beach-buggy-v1"
     },
     {
       "id": "go-kart",
       "name": "Go-kart",
       "family": "Small open racer",
       "priority": 17,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Very low chassis, four exposed wheels and one visible seat"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "go-kart-v1"
     },
     {
       "id": "golf-cart",
       "name": "Golf cart",
       "family": "Small utility cart",
       "priority": 18,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Open passenger sides, bench seats and a canopy on thin supports"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "golf-cart-v1"
     },
     {
       "id": "ice-cream-van",
       "name": "Ice cream van",
       "family": "Shop van",
       "priority": 19,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Pastel paint, a serving hatch, striped awning and a large ice cream emblem"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "ice-cream-van-v1"
     },
     {
       "id": "food-truck",
       "name": "Food truck",
       "family": "Mobile kitchen",
       "priority": 20,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Boxy kitchen body, wide serving window, folded counter and bold food graphics"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "food-truck-v1"
     },
     {
       "id": "camper-van",
       "name": "Retro camper van",
       "family": "Camper van",
       "priority": 21,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rounded cab-over nose, two-tone paint and a contrasting raised camper roof"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "camper-van-v1"
     },
     {
       "id": "motorhome",
       "name": "Family motorhome",
       "family": "Recreational vehicle",
       "priority": 22,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Tall living compartment, over-cab sleeping pod, side windows and a camper door"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "motorhome-v1"
     },
     {
       "id": "retro-taxi",
       "name": "Checker-style taxi",
       "family": "Taxi",
       "priority": 23,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rounded yellow sedan, roof sign and a broad checker stripe"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "retro-taxi-v1"
     },
     {
       "id": "tow-truck",
       "name": "Tow truck",
       "family": "Recovery truck",
       "priority": 24,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Short cab, exposed rear lifting boom, winch and a prominent tow hook"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "tow-truck-v1"
     },
     {
       "id": "flatbed-truck",
       "name": "Flatbed work truck",
       "family": "Cargo truck",
       "priority": 25,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Separate cab, long low open deck and a few restrained stake rails"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "flatbed-truck-v1"
     },
     {
       "id": "semi-truck",
       "name": "Semi truck with trailer",
       "family": "Articulated freight vehicle",
       "priority": 26,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Tall tractor cab and a long box trailer; articulation is a later gameplay question"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "semi-truck-v1"
     },
     {
       "id": "dump-truck",
       "name": "Construction dump truck",
       "family": "Tipper truck",
       "priority": 27,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Short stout cab and a deep open tipping body with sloping sides"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "dump-truck-v1"
     },
     {
       "id": "cement-mixer",
       "name": "Concrete mixer truck",
       "family": "Construction truck",
       "priority": 28,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Large striped mixing drum, rear chute and multiple axles"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "cement-mixer-v1"
     },
     {
       "id": "mobile-crane",
       "name": "Mobile crane truck",
       "family": "Crane truck",
       "priority": 29,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Long low carrier, folded telescoping boom, hook and stowed outriggers"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "mobile-crane-v1"
     },
     {
       "id": "street-sweeper",
       "name": "Street sweeper",
       "family": "Street maintenance",
       "priority": 30,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Compact cab, low side brushes and a contrasting rear collection tank"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "street-sweeper-v1"
     },
     {
       "id": "snowplow",
       "name": "Snowplow truck",
       "family": "Winter service truck",
       "priority": 31,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Bright front blade, chunky work cab and a rear salt hopper"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "snowplow-v1"
     },
     {
       "id": "farm-tractor",
       "name": "Farm tractor",
       "family": "Agricultural vehicle",
       "priority": 32,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Huge rear wheels, small front wheels, narrow hood and a tall cab"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "farm-tractor-v1"
     },
     {
       "id": "forklift",
       "name": "Forklift",
       "family": "Warehouse vehicle",
       "priority": 33,
-      "status": "queued",
+      "status": "checking",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Tiny upright body, overhead guard, vertical mast and low front forks"
+      "next": "Independent exported views/phases/wires and exact source replay pass; freeze and runtime queued behind full browser hold.",
+      "candidate": "forklift-v1"
     },
     {
       "id": "sidecar-motorcycle",
@@ -321,7 +343,8 @@
       "priority": 34,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Visible rider saddle, narrow bike body and a separate rounded sidecar"
+      "next": "Rider presentation prerequisite; Visible rider saddle, narrow bike body and a separate rounded sidecar",
+      "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
       "id": "classic-motorcycle",
@@ -330,7 +353,8 @@
       "priority": 35,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Rounded fuel tank, exposed engine, flat saddle and a single round headlamp"
+      "next": "Rider presentation prerequisite; Rounded fuel tank, exposed engine, flat saddle and a single round headlamp",
+      "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
       "id": "sport-motorcycle",
@@ -339,7 +363,8 @@
       "priority": 36,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Low streamlined fairings, a small windscreen, broad rear tire and compact tail"
+      "next": "Rider presentation prerequisite; Low streamlined fairings, a small windscreen, broad rear tire and compact tail",
+      "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
       "id": "cruiser-motorcycle",
@@ -348,7 +373,8 @@
       "priority": 37,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Long low silhouette, swept handlebars, large front fork and stepped saddle"
+      "next": "Rider presentation prerequisite; Long low silhouette, swept handlebars, large front fork and stepped saddle",
+      "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
       "id": "dirt-motorcycle",
@@ -357,7 +383,8 @@
       "priority": 38,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; High fenders, narrow body, knobby tires, long suspension and a front number plate"
+      "next": "Rider presentation prerequisite; High fenders, narrow body, knobby tires, long suspension and a front number plate",
+      "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
       "id": "touring-motorcycle",
@@ -366,7 +393,8 @@
       "priority": 39,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Upright riding position, tall windscreen, broad fairing and matching side panniers"
+      "next": "Rider presentation prerequisite; Upright riding position, tall windscreen, broad fairing and matching side panniers",
+      "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
       "id": "retro-scooter",
@@ -375,7 +403,8 @@
       "priority": 40,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Rounded leg shield, step-through frame, small wheels and bright two-tone bodywork"
+      "next": "Rider presentation prerequisite; Rounded leg shield, step-through frame, small wheels and bright two-tone bodywork",
+      "prerequisite": "docs/topics/vehicle-riders.md"
     }
   ]
 }

@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "microcar--v1",
+    "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+    "triangles": 2596,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.043479020121175,
+        "minimumGap": 1.226192879646458,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.043479020121175,
+        "minimumGap": 1.226192879646458,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.043478114852719,
+        "minimumGap": 1.2261938960269845,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.043478114852719,
+        "minimumGap": 1.2261938960269845,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

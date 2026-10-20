@@ -1,0 +1,108 @@
+{
+  "name": "stretch-limousine-own-sedan-skin-regions-v1",
+  "meaning": "ActualGLB triangle rays and interpolated UV samples check every5bounded pane each side, swept front/rear glazing and frames, gray roof, distinct hood and short trunk. Closed cabin, direct skin paint, no glass overlay or coincident loft-side geometry claim.",
+  "rays": [
+    {
+      "id": "left-bounded-pane-1",
+      "origin": [-1.385, -3, 1.34],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-bounded-pane-2",
+      "origin": [-0.575, -3, 1.34],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-bounded-pane-3",
+      "origin": [0.20500000000000002, -3, 1.34],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-bounded-pane-4",
+      "origin": [0.9750000000000001, -3, 1.34],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-bounded-pane-5",
+      "origin": [1.6749999999999998, -3, 1.34],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-bounded-pane-1",
+      "origin": [-1.385, 3, 1.34],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-bounded-pane-2",
+      "origin": [-0.575, 3, 1.34],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-bounded-pane-3",
+      "origin": [0.20500000000000002, 3, 1.34],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-bounded-pane-4",
+      "origin": [0.9750000000000001, 3, 1.34],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-bounded-pane-5",
+      "origin": [1.6749999999999998, 3, 1.34],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "swept-front-windshield",
+      "origin": [-4, 0, 1.42],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "swept-rear-window",
+      "origin": [4, 0, 1.39],
+      "direction": [-1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "front-window-frame",
+      "origin": [-4, 0.71, 1.42],
+      "direction": [1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "rear-window-frame",
+      "origin": [4, 0.71, 1.4],
+      "direction": [-1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "long-low-gray-roof",
+      "origin": [0.2, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["roof"]
+    },
+    {
+      "id": "distinct-front-hood",
+      "origin": [-2.85, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "short-rear-trunk",
+      "origin": [2.9, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    }
+  ]
+}

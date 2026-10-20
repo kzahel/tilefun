@@ -1,0 +1,16 @@
+{
+  "name": "beach-buggy-real-two-seat-cockpit-v1",
+  "units": "Blender source units before 80/4.6 export scale",
+  "floorTopZ": 0.402,
+  "floorTolerance": 1e-5,
+  "minimumDoorRailZ": 0.9,
+  "minimumRecessDepth": 0.45,
+  "floorRaysX": [-0.2, -0.07, 0.03],
+  "floorRaysY": [-0.48, -0.13, 0.13, 0.48],
+  "railRaysXY": [[-0.07, -0.68], [-0.07, 0.68], [0.45, -0.68], [0.45, 0.68]],
+  "seatRaysXY": [[0.3, -0.322], [0.3, 0.322]],
+  "seatbackRaysXY": [[0.67, -0.322], [0.67, 0.322]],
+  "outsideControlXY": [-1.0, 0],
+  "upperDeckNegativeZ": 0.94,
+  "meaning": "Declared floor rays avoid cushions, steering rim and low center tunnel. Floor, rails, cushions and seatbacks are independently sampled; a temporary opaque upper deck must reject the floor-depth condition. No driver or equipment animation."
+}

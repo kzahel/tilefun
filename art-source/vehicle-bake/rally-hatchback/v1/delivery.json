@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/rally-hatchback/v1/report.json",
+  "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+  "atlasSha256": "8ecd127298a141ecedb41f91aa79bcafcf34cc8afac5c7a3cb24e913cc6f475a",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/rally-hatchback/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/rally-hatchback/capture.mjs",
+    "python scripts/vehicle-bake/rally-hatchback/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/rally-hatchback/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/rally-hatchback/v1/evidence/clearance-input.json data/vehicle-bake/rally-hatchback/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/rally-hatchback/v1/model.glb --config art-source/vehicle-bake/rally-hatchback/v1/coverage-region.json --output data/vehicle-bake/rally-hatchback/recheck-coverage.json",
+    "python scripts/vehicle-bake/rally-hatchback/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/rally-hatchback/author-config.json --qa-only"
+  ]
+}

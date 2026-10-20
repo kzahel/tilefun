@@ -1,0 +1,952 @@
+{
+  "family": "yellow-six-wheel-level-dump-truck",
+  "revision": "v1",
+  "toolchain": "multi-axle-v2",
+  "wheelIds": [
+    "FL",
+    "FR",
+    "ML",
+    "MR",
+    "RL",
+    "RR"
+  ],
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [
+    6.4,
+    2.6,
+    2.8
+  ],
+  "axles": [
+    -2.3,
+    1.12,
+    2.4
+  ],
+  "arch": {
+    "cutRadius": 0.56,
+    "pocketInnerY": 0.76,
+    "segments": 24
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      147,
+      99,
+      46
+    ],
+    "paintShadow": [
+      187,
+      130,
+      43
+    ],
+    "paintMid": [
+      217,
+      164,
+      48
+    ],
+    "paint": [
+      239,
+      191,
+      65
+    ],
+    "paintLight": [
+      255,
+      220,
+      111
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "steelShadow": [
+      49,
+      75,
+      102
+    ],
+    "steelMid": [
+      64,
+      95,
+      126
+    ],
+    "steel": [
+      80,
+      119,
+      151
+    ],
+    "steelLight": [
+      120,
+      158,
+      184
+    ],
+    "steelRim": [
+      149,
+      181,
+      200
+    ],
+    "floor": [
+      56,
+      78,
+      105
+    ],
+    "floorLight": [
+      76,
+      102,
+      130
+    ],
+    "inner": [
+      84,
+      116,
+      142
+    ],
+    "innerShadow": [
+      61,
+      87,
+      114
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original short stout yellow-cab six-wheel dump truck. Level deep open steel-blue sloped tub owns real floor/inner walls/tailgate, broad side ribs, fixed underbody hinge and ram blocks. Six independent ordinary road wheels; all dump equipment rigid stowed only, no tipping/cargo animation.",
+  "paintOwnership": "Own yellow lower coachwork/hood chart and continuous cab side glass with separate fixed front/rear and roof owners. Steel-blue sloped dump tub has independently owned floor, inner/outer side wall, front bulkhead and closed tailgate charts plus constant-role broad ribs/rims; fixed hinges/rams own gray swatches. No projected bitmap, silhouette ink or glass overlays.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -2.3,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "FR": {
+      "axle": -2.3,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "ML": {
+      "axle": 1.12,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "MR": {
+      "axle": 1.12,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "RL": {
+      "axle": 2.4,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "RR": {
+      "axle": 2.4,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    }
+  },
+  "dumpBody": {
+    "mode": "LEVEL STATIC STOWED ONLY",
+    "floorTop": 1.25,
+    "railTop": 2.46,
+    "rayXs": [
+      -0.3,
+      0.4,
+      1.2,
+      2.0,
+      2.7
+    ],
+    "rayYs": [
+      -0.55,
+      0,
+      0.55
+    ],
+    "minimumDepth": 1.12,
+    "negativeFillZ": 2.46,
+    "fillXMin": -0.48,
+    "fillXMax": 2.95,
+    "fillYMin": -1.1,
+    "fillYMax": 1.1,
+    "animationClaims": false
+  },
+  "coveragePolicy": {
+    "allWheels": "Natural yellow front fenders and continuous steel-blue rear lower wheelhouse body below tub, each own central finite footprint; short rays exclude upper bed rim."
+  },
+  "boundsPolicy": "Measure all six wheels and static tub/equipment at unchanged root/80/4.6 scale. Centered2*maxAbs horizontal envelope and standard192x224 cardinal placement; no fit scaling.",
+  "components": [
+    {
+      "name": "Yellow stout short nose integrated front fenders",
+      "group": "body",
+      "triangles": 220,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Yellow closed dump cab continuous side front rear roof glass skin",
+      "group": "body",
+      "triangles": 84,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Steel blue lower rear body integrated middle last axle wheelhouses",
+      "group": "body",
+      "triangles": 268,
+      "paintRoles": [
+        "steelMid"
+      ]
+    },
+    {
+      "name": "Deep open steel blue dump bed actual floor",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "floor"
+      ]
+    },
+    {
+      "name": "Sloped steel dump side wall inner outer skin -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel"
+      ]
+    },
+    {
+      "name": "STATIC broad dump top side rim -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Broad dump side rib -1 -0.1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel",
+        "steelLight",
+        "steelMid",
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Broad dump side rib -1 1.1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel",
+        "steelLight",
+        "steelMid",
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Broad dump side rib -1 2.3",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel",
+        "steelLight",
+        "steelMid",
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Sloped steel dump side wall inner outer skin 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel"
+      ]
+    },
+    {
+      "name": "STATIC broad dump top side rim 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Broad dump side rib 1 -0.1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel",
+        "steelLight",
+        "steelMid",
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Broad dump side rib 1 1.1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel",
+        "steelLight",
+        "steelMid",
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Broad dump side rib 1 2.3",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel",
+        "steelLight",
+        "steelMid",
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Sloped dump front bulkhead actual inside skin",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel"
+      ]
+    },
+    {
+      "name": "STATIC dump top frontwall rim",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Closed steel dump tailgate actual inside skin",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "steel"
+      ]
+    },
+    {
+      "name": "STATIC dump top tailgate rim",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "steelRim"
+      ]
+    },
+    {
+      "name": "Dark heavy underframe rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Gray cab step -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC fixed stowed underbed ram -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC underbed ram lower mount -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC small rear bed hinge block -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Dark heavy underframe rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Gray cab step 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC fixed stowed underbed ram 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC underbed ram lower mount 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC small rear bed hinge block 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Retained narrow central floor no full axle tunnels",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "STATIC rear bed hinge pin",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm -2.3",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm 1.12",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm 2.4",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "Short heavy gray dump bumper -3.11",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Short heavy gray dump bumper 3.11",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Dark broad dump front grille",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Broad yellow grille slat 0.95",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Broad yellow grille slat 1.06",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Broad yellow grille slat 1.17",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Dump front headlamp ink frame -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Dump ivory headlamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Dump rear red lamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Dump front headlamp ink frame 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Dump ivory headlamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Dump rear red lamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Rounded dump road tire FL",
+      "group": "FL",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray dump wheel rim FL",
+      "group": "FL",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray dump hub FL",
+      "group": "FL",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Dump asymmetric hub inset FL",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded dump road tire FR",
+      "group": "FR",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray dump wheel rim FR",
+      "group": "FR",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray dump hub FR",
+      "group": "FR",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Dump asymmetric hub inset FR",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded dump road tire ML",
+      "group": "ML",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray dump wheel rim ML",
+      "group": "ML",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray dump hub ML",
+      "group": "ML",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Dump asymmetric hub inset ML",
+      "group": "ML",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded dump road tire MR",
+      "group": "MR",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray dump wheel rim MR",
+      "group": "MR",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray dump hub MR",
+      "group": "MR",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Dump asymmetric hub inset MR",
+      "group": "MR",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded dump road tire RL",
+      "group": "RL",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray dump wheel rim RL",
+      "group": "RL",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray dump hub RL",
+      "group": "RL",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Dump asymmetric hub inset RL",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded dump road tire RR",
+      "group": "RR",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Gray dump wheel rim RR",
+      "group": "RR",
+      "triangles": 46,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray dump hub RR",
+      "group": "RR",
+      "triangles": 46,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Dump asymmetric hub inset RR",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.299999952316284,
+        -1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        -39.99999917071799,
+        8.695652173913045,
+        18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.299999952316284,
+        1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        -39.99999917071799,
+        8.695652173913045,
+        -18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "ML",
+      "centerBlender": [
+        1.1200000047683716,
+        -1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        19.47826095249342,
+        8.695652173913045,
+        18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "MR",
+      "centerBlender": [
+        1.1200000047683716,
+        1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        19.47826095249342,
+        8.695652173913045,
+        -18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        2.4000000953674316,
+        -1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        41.73913209334664,
+        8.695652173913045,
+        18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        2.4000000953674316,
+        1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        41.73913209334664,
+        8.695652173913045,
+        -18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    }
+  ],
+  "method": "Original short stout yellow-cab six-wheel dump truck. Level deep open steel-blue sloped tub owns real floor/inner walls/tailgate, broad side ribs, fixed underbody hinge and ram blocks. Six independent ordinary road wheels; all dump equipment rigid stowed only, no tipping/cargo animation.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/dump-truck/build.py",
+    "scripts/vehicle-bake/dump-truck/geometry.py",
+    "scripts/vehicle-bake/dump-truck/family.json",
+    "scripts/vehicle-bake/dump-truck/coverage-region.json",
+    "scripts/vehicle-bake/dump-truck/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog-v2.py:audit_glb(wheel_ids=all6) and underlying catalog.py",
+    "scripts/vehicle-bake/clearance-v2.py all6 with per-wheel collision controls",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

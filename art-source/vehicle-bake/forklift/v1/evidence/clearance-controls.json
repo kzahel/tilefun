@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+  "standardFourWheelToolchain": true,
+  "perWheelCollisionControls": [
+    {
+      "wheel": "Wheel_FL_Roll",
+      "allFixedTriangles": 1700,
+      "minimumBaselineGapWorld": 1.835063598053373,
+      "negativeFixtureAddedTriangles": 1,
+      "controlledGapWorld": -5.565218176709749,
+      "collisionRejected": true,
+      "baselineRestoredExact": true,
+      "noCandidateTrianglesRemoved": true
+    },
+    {
+      "wheel": "Wheel_FR_Roll",
+      "allFixedTriangles": 1700,
+      "minimumBaselineGapWorld": 1.835063598053373,
+      "negativeFixtureAddedTriangles": 1,
+      "controlledGapWorld": -5.565218176709749,
+      "collisionRejected": true,
+      "baselineRestoredExact": true,
+      "noCandidateTrianglesRemoved": true
+    },
+    {
+      "wheel": "Wheel_RL_Roll",
+      "allFixedTriangles": 1700,
+      "minimumBaselineGapWorld": 0.997351319793438,
+      "negativeFixtureAddedTriangles": 1,
+      "controlledGapWorld": -4.347826558120597,
+      "collisionRejected": true,
+      "baselineRestoredExact": true,
+      "noCandidateTrianglesRemoved": true
+    },
+    {
+      "wheel": "Wheel_RR_Roll",
+      "allFixedTriangles": 1700,
+      "minimumBaselineGapWorld": 0.997351254953859,
+      "negativeFixtureAddedTriangles": 1,
+      "controlledGapWorld": -4.347826558120597,
+      "collisionRejected": true,
+      "baselineRestoredExact": true,
+      "noCandidateTrianglesRemoved": true
+    }
+  ],
+  "allFourNegativeResetPassed": true,
+  "inputBytesUnchanged": true
+}

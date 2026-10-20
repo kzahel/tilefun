@@ -1,0 +1,24 @@
+{
+  "id": "microcar-v1",
+  "clearanceId": "microcar--v1",
+  "name": "Tiny rose bubble microcar",
+  "title": "Tiny rose bubble microcar \u00b7 original egg-shaped family v1",
+  "source": "public/demos/vehicle-bake/microcar/v1",
+  "glb": "public/demos/vehicle-bake/microcar/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/microcar/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/microcar/v1/report.json",
+  "output": "public/demos/original-vehicles/microcar-v1",
+  "qa": "data/vehicle-bake/microcar/qa",
+  "offline": "data/vehicle-bake/microcar/review.html",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "meshRadius": 112
+}

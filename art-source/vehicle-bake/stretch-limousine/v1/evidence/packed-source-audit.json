@@ -1,0 +1,510 @@
+{
+  "status": "passed",
+  "results": {
+    "master.blend": {
+      "sha256": "350a4e705cab253d65c3750091b399eb7d68ccacb9169de1fad724010c350470",
+      "meshObjects": 31,
+      "triangles": 2956,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "dc132aef6c48bac46fb0227a9e2b61b85a5e4f8d23f2d164ccd28facb21398d9",
+      "meshObjects": 5,
+      "triangles": 2956,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBFixedGeometry": {
+      "status": "passed",
+      "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+      "fixedTriangles": 1972,
+      "duplicateTriangleCoordinates": 0,
+      "zeroAreaTriangles": 0,
+      "meaning": "All fixed body/trim triangles checked for identical geometric faces independently of UV splits. Constructor uses one strictly ordered closed section per longitudinal station, with no cabin-side overlays."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+      "minBlenderWorld": [
+        -61.21738815307617,
+        -17.39130401611328,
+        4.76837158203125e-07
+      ],
+      "maxBlenderWorld": [
+        61.21738815307617,
+        17.39130401611328,
+        29.913043975830078
+      ],
+      "dimensionsBlenderWorld": [
+        122.43477630615234,
+        34.78260803222656,
+        29.91304349899292
+      ],
+      "dimensionsSourceUnits": [
+        7.039999637603759,
+        1.999999961853027,
+        1.7200000011920926
+      ]
+    },
+    "actualGLBSemanticSurfaces": {
+      "status": "passed",
+      "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+      "rayCount": 17,
+      "samples": [
+        {
+          "id": "left-bounded-pane-1",
+          "hitSource": [
+            -1.3850001096725464,
+            -0.8005468845367432,
+            1.3400001525878906
+          ],
+          "triangle": 141,
+          "interpolatedUV": [
+            0.30763888359069824,
+            0.7341772317886353
+          ],
+          "atlasPixel": [
+            157,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-bounded-pane-2",
+          "hitSource": [
+            -0.5750000476837158,
+            -0.801260232925415,
+            1.3400001525878906
+          ],
+          "triangle": 162,
+          "interpolatedUV": [
+            0.4201388955116272,
+            0.7341772317886353
+          ],
+          "atlasPixel": [
+            215,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-bounded-pane-3",
+          "hitSource": [
+            0.20500001311302185,
+            -0.8015041351318359,
+            1.3400001525878906
+          ],
+          "triangle": 1116,
+          "interpolatedUV": [
+            0.5284723043441772,
+            0.7341772317886353
+          ],
+          "atlasPixel": [
+            270,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-bounded-pane-4",
+          "hitSource": [
+            0.9750000238418579,
+            -0.8010830879211426,
+            1.3400001525878906
+          ],
+          "triangle": 1116,
+          "interpolatedUV": [
+            0.6354166865348816,
+            0.7341771125793457
+          ],
+          "atlasPixel": [
+            325,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-bounded-pane-5",
+          "hitSource": [
+            1.6750000715255737,
+            -0.7997183799743652,
+            1.3400001525878906
+          ],
+          "triangle": 1137,
+          "interpolatedUV": [
+            0.732638955116272,
+            0.7341771125793457
+          ],
+          "atlasPixel": [
+            375,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-bounded-pane-1",
+          "hitSource": [
+            -1.3850001096725464,
+            0.8005468845367432,
+            1.3400001525878906
+          ],
+          "triangle": 148,
+          "interpolatedUV": [
+            0.30763888359069824,
+            0.7341771721839905
+          ],
+          "atlasPixel": [
+            157,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-bounded-pane-2",
+          "hitSource": [
+            -0.5750000476837158,
+            0.801260232925415,
+            1.3400001525878906
+          ],
+          "triangle": 169,
+          "interpolatedUV": [
+            0.4201388955116272,
+            0.7341772317886353
+          ],
+          "atlasPixel": [
+            215,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-bounded-pane-3",
+          "hitSource": [
+            0.20500001311302185,
+            0.801504373550415,
+            1.3400001525878906
+          ],
+          "triangle": 1123,
+          "interpolatedUV": [
+            0.5284722447395325,
+            0.7341771721839905
+          ],
+          "atlasPixel": [
+            270,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-bounded-pane-4",
+          "hitSource": [
+            0.9750000238418579,
+            0.8010830879211426,
+            1.3400001525878906
+          ],
+          "triangle": 1123,
+          "interpolatedUV": [
+            0.6354166865348816,
+            0.7341771125793457
+          ],
+          "atlasPixel": [
+            325,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-bounded-pane-5",
+          "hitSource": [
+            1.6750000715255737,
+            0.7997186183929443,
+            1.3400001525878906
+          ],
+          "triangle": 1144,
+          "interpolatedUV": [
+            0.732638955116272,
+            0.7341771125793457
+          ],
+          "atlasPixel": [
+            375,
+            136
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "swept-front-windshield",
+          "hitSource": [
+            -1.9630612134933472,
+            0.0,
+            1.4199999570846558
+          ],
+          "triangle": 1027,
+          "interpolatedUV": [
+            0.25,
+            0.3026107847690582
+          ],
+          "atlasPixel": [
+            128,
+            357
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "swept-rear-window",
+          "hitSource": [
+            2.131481409072876,
+            0.0,
+            1.3900001049041748
+          ],
+          "triangle": 250,
+          "interpolatedUV": [
+            0.7499999403953552,
+            0.3067641854286194
+          ],
+          "atlasPixel": [
+            383,
+            354
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "front-window-frame",
+          "hitSource": [
+            -1.9190857410430908,
+            0.7099999785423279,
+            1.4199999570846558
+          ],
+          "triangle": 1029,
+          "interpolatedUV": [
+            0.4113636016845703,
+            0.30261075496673584
+          ],
+          "atlasPixel": [
+            210,
+            357
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "rear-window-frame",
+          "hitSource": [
+            2.076395273208618,
+            0.7099999785423279,
+            1.4000000953674316
+          ],
+          "triangle": 252,
+          "interpolatedUV": [
+            0.9113636016845703,
+            0.3053797483444214
+          ],
+          "atlasPixel": [
+            466,
+            355
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "long-low-gray-roof",
+          "hitSource": [
+            0.20000000298023224,
+            0.0,
+            1.7180393934249878
+          ],
+          "triangle": 187,
+          "interpolatedUV": [
+            0.5277777910232544,
+            0.1875
+          ],
+          "atlasPixel": [
+            270,
+            416
+          ],
+          "rgb": [
+            147,
+            158,
+            175
+          ],
+          "roles": [
+            "roof"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "distinct-front-hood",
+          "hitSource": [
+            -2.8500001430511475,
+            0.0,
+            1.113611102104187
+          ],
+          "triangle": 958,
+          "interpolatedUV": [
+            0.10416659712791443,
+            0.09375
+          ],
+          "atlasPixel": [
+            53,
+            464
+          ],
+          "rgb": [
+            116,
+            129,
+            146
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "short-rear-trunk",
+          "hitSource": [
+            2.9000003337860107,
+            0.0,
+            1.0296225547790527
+          ],
+          "triangle": 1252,
+          "interpolatedUV": [
+            0.902777910232544,
+            0.09375
+          ],
+          "atlasPixel": [
+            462,
+            464
+          ],
+          "rgb": [
+            116,
+            129,
+            146
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        }
+      ],
+      "regionConfig": "scripts/vehicle-bake/stretch-limousine/surface-regions.json",
+      "meaning": "ActualGLB triangle rays and interpolated UV samples check every5bounded pane each side, swept front/rear glazing and frames, gray roof, distinct hood and short trunk. Closed cabin, direct skin paint, no glass overlay or coincident loft-side geometry claim.",
+      "inputBytesUnchanged": true
+    }
+  }
+}

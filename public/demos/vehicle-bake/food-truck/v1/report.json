@@ -1,0 +1,1002 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "food-truck",
+  "route": "food-truck",
+  "revision": "v1",
+  "method": "Original red and cream mobile kitchen. Own continuous cab side/front actual-skin blue glass, broad red/cream rear box with real side serving cavity/counter/fixed short shade, opposite-side simple burger emblem painted in own side UV chart, cream roof and one fixed vent.",
+  "geometry": {
+    "triangles": 2934,
+    "vertices": 5545,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 200124,
+    "sha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.347826086956523,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.347826086956523,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.347826086956523,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.347826086956523,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.049999952316284,
+        -0.949999988079071,
+        0.47999998927116394
+      ],
+      "centerExport": [
+        -35.65217308376147,
+        8.34782590036807,
+        16.52173892311428
+      ],
+      "radiusBlender": 0.48,
+      "wheel_radius": 8.347826086956523
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.049999952316284,
+        0.949999988079071,
+        0.47999998927116394
+      ],
+      "centerExport": [
+        -35.65217308376147,
+        8.34782590036807,
+        -16.52173892311428
+      ],
+      "radiusBlender": 0.48,
+      "wheel_radius": 8.347826086956523
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.899999976158142,
+        -0.949999988079071,
+        0.47999998927116394
+      ],
+      "centerExport": [
+        33.04347784622856,
+        8.34782590036807,
+        16.52173892311428
+      ],
+      "radiusBlender": 0.48,
+      "wheel_radius": 8.347826086956523
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.899999976158142,
+        0.949999988079071,
+        0.47999998927116394
+      ],
+      "centerExport": [
+        33.04347784622856,
+        8.34782590036807,
+        -16.52173892311428
+      ],
+      "radiusBlender": 0.48,
+      "wheel_radius": 8.347826086956523
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/food-truck/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/food-truck/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/food-truck/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "authorization": "autonomous-153",
+  "triangles": 2934,
+  "vertexCount": 5545,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 200124,
+  "atlasBytes": 3358,
+  "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+  "atlasSha256": "95e942bad878d4dd1defd6bdf3b8b279df3ac4633115403d4ff32e6c9ff2ebde",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "food-truck--v1",
+    "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "triangles": 2934,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.347827911376953,
+        "minimumGap": 0.9631294742726784,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.347827911376953,
+        "minimumGap": 0.9631294903329941,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.347827911376953,
+        "minimumGap": 0.963130265009033,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.347827911376953,
+        "minimumGap": 0.963130265009033,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/food-truck/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/food-truck/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "meets-declared-finite-region",
+    "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "allFourCrownsCovered": true,
+    "allWheelCoverage": "natural front nose/rear kitchen-body fenders over declared central crown region",
+    "wheels": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": true,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "maximumRayDistanceR": 1.5,
+    "roofAndShadeCannotQualify": true,
+    "regionMeaning": "Finite central tread footprint from each own .48source radius and .32source width. Ray limited to1.5R above sampled tread; cream roof/fixed shade are outside this range. Actual integrated nose/rear kitchen-body owns covered crowns, no separate fake caps.",
+    "portableRawEvidence": "art-source/vehicle-bake/food-truck/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "36e0ae1005509601f4cc1ad6bf05d207b0497c945b6a16ab249f117ff8600ab1",
+    "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "minBlenderWorld": [
+      -52.173912048339844,
+      -25.39130401611328,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      52.173912048339844,
+      20.69565200805664,
+      48.695655822753906
+    ],
+    "dimensionsBlenderWorld": [
+      104.34782409667969,
+      46.08695602416992,
+      48.69565486907959
+    ],
+    "dimensionsSourceUnits": [
+      5.999999885559081,
+      2.64999997138977,
+      2.800000154972076
+    ],
+    "centeredHorizontalExtentWorld": [
+      104.34782409667969,
+      50.78260803222656
+    ],
+    "centeredHorizontalExtentSource": [
+      5.999999885559081,
+      2.919999961853027
+    ],
+    "centeredCeilWorldFootprint": [
+      105,
+      51
+    ],
+    "includesActualShadeCounterFoldedEdgeAndVent": true,
+    "asymmetricEquipmentPreserved": true,
+    "rootUnchangedNoRecenterOrFitScale": true,
+    "runtimeIntegration": "parent-owned; measure centered2*maxAbs rather than raw span"
+  },
+  "servingRecessEvidence": {
+    "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "allTriangleCount": 2934,
+    "rayCount": 15,
+    "rays": [
+      {
+        "xzSource": [
+          -0.45,
+          1.4
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          -0.45,
+          1.75
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          -0.45,
+          2.15
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          0.1,
+          1.4
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          0.1,
+          1.75
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          0.1,
+          2.15
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          0.7,
+          1.4
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          0.7,
+          1.75
+        ],
+        "firstHitYSource": -0.5499997043609618,
+        "depthBehindActualOuterPlaneSource": 0.6000002956390381,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          0.7,
+          2.15
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          1.3,
+          1.4
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          1.3,
+          1.75
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          1.3,
+          2.15
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          1.95,
+          1.4
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          1.95,
+          1.75
+        ],
+        "firstHitYSource": -0.5499999237060545,
+        "depthBehindActualOuterPlaneSource": 0.6000000762939454,
+        "owner": "Body_static"
+      },
+      {
+        "xzSource": [
+          1.95,
+          2.15
+        ],
+        "firstHitYSource": -0.5499997043609618,
+        "depthBehindActualOuterPlaneSource": 0.6000002956390381,
+        "owner": "Body_static"
+      }
+    ],
+    "minimumMeasuredDepthSource": 0.6000000762939454,
+    "outerPlaneSourceY": -1.15,
+    "filledWindowNegative": {
+      "fixtureTriangles": 2,
+      "rejectedRayCount": 15,
+      "rays": [
+        {
+          "xzSource": [
+            -0.45,
+            1.4
+          ],
+          "firstHitYSource": -1.1500002193450927,
+          "depthBehindActualOuterPlaneSource": -2.1934509275567393e-07,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            -0.45,
+            1.75
+          ],
+          "firstHitYSource": -1.15,
+          "depthBehindActualOuterPlaneSource": 0.0,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            -0.45,
+            2.15
+          ],
+          "firstHitYSource": -1.1500002193450927,
+          "depthBehindActualOuterPlaneSource": -2.1934509275567393e-07,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            0.1,
+            1.4
+          ],
+          "firstHitYSource": -1.15,
+          "depthBehindActualOuterPlaneSource": 0.0,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            0.1,
+            1.75
+          ],
+          "firstHitYSource": -1.15,
+          "depthBehindActualOuterPlaneSource": 0.0,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            0.1,
+            2.15
+          ],
+          "firstHitYSource": -1.15,
+          "depthBehindActualOuterPlaneSource": 0.0,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            0.7,
+            1.4
+          ],
+          "firstHitYSource": -1.15,
+          "depthBehindActualOuterPlaneSource": 0.0,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            0.7,
+            1.75
+          ],
+          "firstHitYSource": -1.1499997806549072,
+          "depthBehindActualOuterPlaneSource": 2.1934509275567393e-07,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            0.7,
+            2.15
+          ],
+          "firstHitYSource": -1.1500002193450927,
+          "depthBehindActualOuterPlaneSource": -2.1934509275567393e-07,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            1.3,
+            1.4
+          ],
+          "firstHitYSource": -1.15,
+          "depthBehindActualOuterPlaneSource": 0.0,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            1.3,
+            1.75
+          ],
+          "firstHitYSource": -1.1500002193450927,
+          "depthBehindActualOuterPlaneSource": -2.1934509275567393e-07,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            1.3,
+            2.15
+          ],
+          "firstHitYSource": -1.1500002193450927,
+          "depthBehindActualOuterPlaneSource": -2.1934509275567393e-07,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            1.95,
+            1.4
+          ],
+          "firstHitYSource": -1.15,
+          "depthBehindActualOuterPlaneSource": 0.0,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            1.95,
+            1.75
+          ],
+          "firstHitYSource": -1.1500002193450927,
+          "depthBehindActualOuterPlaneSource": -2.1934509275567393e-07,
+          "owner": "CONTROL filled serving plane"
+        },
+        {
+          "xzSource": [
+            1.95,
+            2.15
+          ],
+          "firstHitYSource": -1.1500002193450927,
+          "depthBehindActualOuterPlaneSource": -2.1934509275567393e-07,
+          "owner": "CONTROL filled serving plane"
+        }
+      ],
+      "rejected": true
+    },
+    "baselineRestoredExact": true,
+    "noCandidateGeometryRemoved": true,
+    "noPackedSourceMutation": true
+  },
+  "frameFit": {
+    "status": "passed",
+    "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "actualCapture": "engine/capture.json",
+    "nativeViewport": [
+      224,
+      224
+    ],
+    "nativeRadius": 112,
+    "source80ReferenceUnchanged": true,
+    "familyExtraPadding": 0,
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "engineOrigin": [
+      112,
+      112
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -16,
+      32
+    ],
+    "scale": 1,
+    "views": [
+      {
+        "yaw": 0,
+        "actual224OccupiedBounds": {
+          "minX": 60,
+          "minY": 45,
+          "maxX": 163,
+          "maxY": 129
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 44,
+          "maxX": 147,
+          "minY": 77,
+          "maxY": 161
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 22.5,
+        "actual224OccupiedBounds": {
+          "minX": 57,
+          "minY": 28,
+          "maxX": 166,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 41,
+          "maxX": 150,
+          "minY": 60,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 45,
+        "actual224OccupiedBounds": {
+          "minX": 62,
+          "minY": 16,
+          "maxX": 161,
+          "maxY": 152
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 46,
+          "maxX": 145,
+          "minY": 48,
+          "maxY": 184
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 67.5,
+        "actual224OccupiedBounds": {
+          "minX": 73,
+          "minY": 12,
+          "maxX": 149,
+          "maxY": 157
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 57,
+          "maxX": 133,
+          "minY": 44,
+          "maxY": 189
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 90,
+        "actual224OccupiedBounds": {
+          "minX": 87,
+          "minY": 16,
+          "maxX": 132,
+          "maxY": 154
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 71,
+          "maxX": 116,
+          "minY": 48,
+          "maxY": 186
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 112.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 12,
+          "maxX": 149,
+          "maxY": 157
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 44,
+          "maxY": 189
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 135,
+        "actual224OccupiedBounds": {
+          "minX": 62,
+          "minY": 16,
+          "maxX": 161,
+          "maxY": 152
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 46,
+          "maxX": 145,
+          "minY": 48,
+          "maxY": 184
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 157.5,
+        "actual224OccupiedBounds": {
+          "minX": 57,
+          "minY": 28,
+          "maxX": 166,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 41,
+          "maxX": 150,
+          "minY": 60,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 180,
+        "actual224OccupiedBounds": {
+          "minX": 60,
+          "minY": 45,
+          "maxX": 163,
+          "maxY": 129
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 44,
+          "maxX": 147,
+          "minY": 77,
+          "maxY": 161
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 202.5,
+        "actual224OccupiedBounds": {
+          "minX": 57,
+          "minY": 40,
+          "maxX": 166,
+          "maxY": 141
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 41,
+          "maxX": 150,
+          "minY": 72,
+          "maxY": 173
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 225,
+        "actual224OccupiedBounds": {
+          "minX": 62,
+          "minY": 37,
+          "maxX": 161,
+          "maxY": 152
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 46,
+          "maxX": 145,
+          "minY": 69,
+          "maxY": 184
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 247.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 34,
+          "maxX": 150,
+          "maxY": 157
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 134,
+          "minY": 66,
+          "maxY": 189
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 270,
+        "actual224OccupiedBounds": {
+          "minX": 91,
+          "minY": 36,
+          "maxX": 136,
+          "maxY": 154
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 75,
+          "maxX": 120,
+          "minY": 68,
+          "maxY": 186
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 292.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 34,
+          "maxX": 149,
+          "maxY": 157
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 66,
+          "maxY": 189
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 315,
+        "actual224OccupiedBounds": {
+          "minX": 62,
+          "minY": 37,
+          "maxX": 161,
+          "maxY": 152
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 46,
+          "maxX": 145,
+          "minY": 69,
+          "maxY": 184
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 337.5,
+        "actual224OccupiedBounds": {
+          "minX": 57,
+          "minY": 40,
+          "maxX": 166,
+          "maxY": 141
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 41,
+          "maxX": 150,
+          "minY": 72,
+          "maxY": 173
+        },
+        "fitsWithoutScaling": true
+      }
+    ],
+    "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+  },
+  "attachmentEvidence": {
+    "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 13.739130020141602,
+        "actualStaticArmEndAbsY": 13.478260040283203,
+        "axialGapWorld": 0.26086997985839844,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 13.739130020141602,
+        "actualStaticArmEndAbsY": 13.478260040283203,
+        "axialGapWorld": 0.26086997985839844,
+        "subpixelGap": true
+      },
+      {
+        "id": "RL",
+        "actualTireSlabInnerAbsY": 13.739130020141602,
+        "actualStaticArmEndAbsY": 13.478260040283203,
+        "axialGapWorld": 0.26086997985839844,
+        "subpixelGap": true
+      },
+      {
+        "id": "RR",
+        "actualTireSlabInnerAbsY": 13.739130020141602,
+        "actualStaticArmEndAbsY": 13.478260040283203,
+        "axialGapWorld": 0.26086997985839844,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "wheelVisualEvidence": "engine/wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/food-truck/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/food-truck/capture.mjs",
+    "node scripts/vehicle-bake/food-truck/independent-visual.mjs",
+    "node scripts/vehicle-bake/food-truck/wheel-visual.mjs",
+    "python scripts/vehicle-bake/food-truck/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/food-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/food-truck/v1/evidence/clearance-input.json data/vehicle-bake/food-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/food-truck/v1/model.glb --config art-source/vehicle-bake/food-truck/v1/coverage-region.json --output data/vehicle-bake/food-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/food-truck/assess-coverage.py --input data/vehicle-bake/food-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/food-truck/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/food-truck/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/food-truck/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 study and16 game actualGLB headings at fixed224/radius112 unchanged density plus fixed160px nearest2x detail sheets. Red/cream closed cab and tall mobile kitchen silhouette, continuous framed blue windshield/side glass and opposite-side broad custom burger graphic are recognizable. No lettering or brand mark.",
+    "Serving side has an actual wide .60source cavity with shadowed floor/counter, visible narrow warm back-wall strip, short cream/yellow fixed shade and folded counter edge. Elevated cameras naturally show mostly the dark counter well; all-triangle15-ray depth plus filled-window negative/reset independently qualify true geometry.",
+    "All4 crowns remain under genuine nose/rear kitchen-body fenders across both cameras. Wheel-ID32heading diagnostics show no high/floating far wheels; near arches remain open. No fake caps.",
+    "Eight signed distance phases per camera,16 equal-angle phase views,both wireframes and all4 independent wheel quarter/reverse/absolute-reset images inspected. Body, kitchen, counter, shade and roof vent stay fixed; no visible wheel/equipment intersections.",
+    "Standard224 zero occupied edge pixels, strict128/224 center crop parity passed. Fixed family detail crops are diagnostic only and preserve full occupied vehicle; original224 captures remain primary.",
+    "Minor native grille/hub/vent aliasing varies with heading. Actual asymmetry from serving equipment remains at original root and source80/4.6 scale; no narrow-road fit or runtime approval claimed. No blocking visual defects identified."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "allWheelRadiusesMatchOwnGeometry": true,
+    "staticShadeCounterFoldedEdgeOneVent": true,
+    "actualServingRecessAllTriangleFifteenRays": true,
+    "filledServingWindowNegativeRejected": true,
+    "servingRecessResetExact": true,
+    "actualAsymmetricAndCenteredBoundsIncludeEquipment": true,
+    "standard224AndFallback192x224FitWithoutScaling": true,
+    "allFourEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crownCoverage": "natural nose and rear kitchen body;25/25 each declared central footprint",
+    "roofShadeOutsideCoverageRayRange": true,
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "allFourCrownsCovered": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Crown coverage qualifies declared finite central tread region only; ray limit1.5R excludes cream roof and shade. Synthetic fixtures qualify bookkeeping, actual body-removal zeroes all samples. Camera headings inspected separately.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Elevated study/game cameras see the dark counter well and a narrow warm back-wall strip; all-triangle depth rays independently prove actual .60source side recess. Minor hub/grille/vent aliasing varies with heading.",
+    "Serving shade/counter/vent fixed only; no hatch animation or serving interaction feature.",
+    "Asymmetric equipment preserved at unchanged root/scale. Actual span and centered2*maxAbs extents both reported; parent owns runtime footprint and road-fit QA.",
+    "Actual occupied pixels fit224 and standard192x224 fallback placement without scaling; parent owns independent runtime export/QA.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/food-truck/v1/assess-coverage.py": "d085bf043c3118fd7fa2f795d7504a212b937393a38dd6200ae61b71c7a60ab0",
+    "art-source/vehicle-bake/food-truck/v1/assess-fit.py": "095393e4931e565cfb276a2dd2dd59297aa6936f726f7a7d2b37f514ca21ff2d",
+    "art-source/vehicle-bake/food-truck/v1/atlas.png": "95e942bad878d4dd1defd6bdf3b8b279df3ac4633115403d4ff32e6c9ff2ebde",
+    "art-source/vehicle-bake/food-truck/v1/audit-source.py": "a7437b6b7b5cf169dfb54c3d6d747353e4f8d8d0fb2ac5097edaf441c05c0223",
+    "art-source/vehicle-bake/food-truck/v1/build.py": "f236b6142f3f557fadfa0e31c3ff95425bf8603bce1128cbe3786d11cfdd012d",
+    "art-source/vehicle-bake/food-truck/v1/capture.mjs": "f703e4b2c5c3174047a8fcbc50aab69abdb43cebedd76b630491815979ad112f",
+    "art-source/vehicle-bake/food-truck/v1/car.blend": "ebc77442c2b23b9ed0e62d3616c756b2a3cd2fcb3270c076cdd616520bf694e6",
+    "art-source/vehicle-bake/food-truck/v1/coverage-region.json": "04ac06bcf8e9964afe07631151feb45184d2110ea8bab967a46df968f6afa274",
+    "art-source/vehicle-bake/food-truck/v1/evidence/author-browser-qa.json": "7b716ff6cc2b9a1d751b65052f0ec2ea20c0d738d9c2e7afe52af3c72c8663cc",
+    "art-source/vehicle-bake/food-truck/v1/evidence/author-visual-inspection.json": "7443a3e01b40eb9fa9cc6359fcbdeacec2d418784660ffbe38008107ed2e14de",
+    "art-source/vehicle-bake/food-truck/v1/evidence/clearance-input.json": "53d715392badc1a5e5ce2e72dd79499bbde0e1f636e9a955e88e4bd091d492eb",
+    "art-source/vehicle-bake/food-truck/v1/evidence/engine-capture.json": "828c3635d53948616c74c498d850d57ae2712713aba8cd0167cd6041a9293a50",
+    "art-source/vehicle-bake/food-truck/v1/evidence/fit-assessment.json": "8fbf2b7e5bdf84a2bc1029e70c1de5bdbce7eb014c1485f32a765711d04bf19c",
+    "art-source/vehicle-bake/food-truck/v1/evidence/independent-visual.json": "b9bde18f8df41d66cd6df2faf634236cc26436413bef308df2d4697bc19e2771",
+    "art-source/vehicle-bake/food-truck/v1/evidence/packed-source-audit.json": "412aa574d5a5b161b0330658776e055ce17fdc8a9833c7234b90d2203473c0d6",
+    "art-source/vehicle-bake/food-truck/v1/evidence/replay-verification.json": "1c3b376683566dfe876516a43afa9bd56407d5e6eda53979ba92144e84bdf002",
+    "art-source/vehicle-bake/food-truck/v1/evidence/shared-clearance.json": "67932ee92fa121106ad85aac38212d39aedc9142483ec642c9efff1855078bfc",
+    "art-source/vehicle-bake/food-truck/v1/evidence/upper-wheel-coverage-raw.json": "36e0ae1005509601f4cc1ad6bf05d207b0497c945b6a16ab249f117ff8600ab1",
+    "art-source/vehicle-bake/food-truck/v1/evidence/wheel-coverage-assessment.json": "3f76721e6c7eee92868e7cd8884d9efa0d146f98cef6ae886694e29f82f10b59",
+    "art-source/vehicle-bake/food-truck/v1/evidence/wheel-visual.json": "d7a147e41aa15297a3561c78c2e4b81a5823efb29f73d84dd410e49afe109db3",
+    "art-source/vehicle-bake/food-truck/v1/family.json": "c5ba7296e4ae82a23a30e53d6f6684700b3dcc0aeecd997e9f7c8daf2c5311ab",
+    "art-source/vehicle-bake/food-truck/v1/finalize.py": "52cceb56315af625a2f362b626bd825dc651e90df8b137d69f9e64f9a7e027d2",
+    "art-source/vehicle-bake/food-truck/v1/geometry.py": "b24020814d820377b5412ce30bdef574688959e1715ac05f33ebab7f09cee61e",
+    "art-source/vehicle-bake/food-truck/v1/independent-visual.mjs": "e89b0fc4bd4a750cf8ae3b83858b0eb304204c433a267029503a69e2b8b16451",
+    "art-source/vehicle-bake/food-truck/v1/master.blend": "d5aebef37e83508f888a11e62a78a2062f9e2d018842c2ff61fb507b0999e65d",
+    "art-source/vehicle-bake/food-truck/v1/model.glb": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+    "art-source/vehicle-bake/food-truck/v1/paint-ownership.json": "c1f6606a669bf643e669d218a26233aa5d0be0314fc7ba2f3cdf12f985fd4324",
+    "art-source/vehicle-bake/food-truck/v1/palette-draft.png": "b0efaca025f1e915a62eee72d4eae3fd12c9a94c59d787fc06f4f82c04b6556a",
+    "art-source/vehicle-bake/food-truck/v1/recipe.json": "b28dcebe32c3059e96c8093e49889d55b112e53f14e009a27698b95a39681de6",
+    "art-source/vehicle-bake/food-truck/v1/review.json": "abfbd7ae500a2087d0ce036f136674954e628ac51a909b11afecd43150ca2c25",
+    "art-source/vehicle-bake/food-truck/v1/sheets.py": "8b6e1b38cb3de515bc65d1ee4e94d407c769aa2bcb759db95e5936e528cfb5d8",
+    "art-source/vehicle-bake/food-truck/v1/wheel-visual.mjs": "ff7ba51b75acf48edc85cda987867f0c660ddf02ac7504ee5962b6997b3c698e"
+  }
+}

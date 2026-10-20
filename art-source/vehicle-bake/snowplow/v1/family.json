@@ -1,0 +1,111 @@
+{
+  "family": "orange-work-cab-yellow-scooped-blade-blue-V-hopper",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [7.0, 2.9, 2.65],
+  "wheelRadius": 0.5,
+  "wheelWidth": 0.32,
+  "axles": [-2.15, 2.02],
+  "halfTrack": 0.94,
+  "arch": {
+    "cutRadius": 0.6,
+    "pocketInnerY": 0.7,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [0.69, 0.82, 1.04, 1.13, 1.17],
+    "shoulderRadii": [0.62, 0.66, 0.66, 0.64, 0.62],
+    "archRadius": 0.59
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [139, 71, 48],
+    "paintShadow": [176, 85, 44],
+    "paintMid": [208, 104, 48],
+    "paint": [229, 118, 55],
+    "paintLight": [250, 153, 69],
+    "cream": [255, 230, 163],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119],
+    "deck": [163, 168, 176],
+    "deckLight": [184, 188, 195],
+    "deckEdge": [124, 135, 145],
+    "deckSeam": [98, 107, 119],
+    "frame": [63, 69, 79],
+    "blade": [249, 196, 57],
+    "bladeLight": [255, 222, 98],
+    "bladeShadow": [207, 146, 43],
+    "hopper": [84, 118, 148],
+    "hopperLight": [119, 151, 176],
+    "hopperInner": [73, 91, 114]
+  },
+  "render": {
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [128, 156],
+    "engineGroundOrigin": [128, 128]
+  },
+  "paintMethod": "Original snowplow: orange closed work cab with blue framed glass on actual skin; solid yellow curved scoop with separate dark cutting edge, four rigid gray mount links; open thick blue/gray V-section salt hopper with three broad top bars. All equipment rigid/stowed; no plowing, spreading, terrain modification or animated equipment claim.",
+  "bodyStations": [
+    [-3.04, 1.0, 1.2],
+    [-2.99, 1.05, 1.65],
+    [-2.74, 1.055, 2.3],
+    [-2.5, 1.055, 2.36],
+    [-1.15, 1.055, 2.36],
+    [-0.97, 1.02, 2.28],
+    [-0.91, 0.98, 2.17]
+  ],
+  "bodySection": [
+    [-0.87, 0],
+    [-1, 0.07],
+    [-1, 0.42],
+    [-0.99, 0.8],
+    [-0.97, 0.92],
+    [-0.9, 0.985],
+    [-0.7, 1.015],
+    [0, 1.025],
+    [0.7, 1.015],
+    [0.9, 0.985],
+    [0.97, 0.92],
+    [0.99, 0.8],
+    [1, 0.42],
+    [1, 0.07],
+    [0.87, 0]
+  ],
+  "equipment": {
+    "blade": {
+      "bottomZ": 0.15,
+      "topZ": 1.17,
+      "thicknessX": 0.09,
+      "halfWidth": 1.45,
+      "yawSlope": 0.055,
+      "profileSegments": 12
+    },
+    "hopper": {
+      "xRange": [-0.7, 2.95],
+      "topZ": 2.6,
+      "bottomZ": 1.22,
+      "topHalfWidth": 1.07,
+      "bottomHalfWidth": 0.32,
+      "shellThickness": 0.1
+    },
+    "topBars": [-0.35, 1.1, 2.6],
+    "mountYs": [-0.5, 0.5]
+  }
+}

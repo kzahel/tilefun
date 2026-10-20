@@ -1,0 +1,1191 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "street-sweeper",
+  "route": "street-sweeper",
+  "revision": "v1",
+  "method": "Original compact white/mint municipal sweeper, short enclosed broad blue-glass cab, genuine rounded gray-green rear collection tank, two low outboard circular brush discs with12 broad dark bristle blocks each and fixed arms. Four ordinary road wheels only; brushes/static equipment have no roll nodes or cleaning animation claim.",
+  "geometry": {
+    "triangles": 3236,
+    "vertices": 6094,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 219336,
+    "sha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 6.260869565217392,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 6.260869565217392,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 6.260869565217392,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 6.260869565217392,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.25,
+        -0.800000011920929,
+        0.36000001430511475
+      ],
+      "centerExport": [
+        -21.739130434782613,
+        6.260869814001997,
+        13.913043685581375
+      ],
+      "radiusBlender": 0.36,
+      "wheel_radius": 6.260869565217392
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.25,
+        0.800000011920929,
+        0.36000001430511475
+      ],
+      "centerExport": [
+        -21.739130434782613,
+        6.260869814001997,
+        -13.913043685581375
+      ],
+      "radiusBlender": 0.36,
+      "wheel_radius": 6.260869565217392
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.2000000476837158,
+        -0.800000011920929,
+        0.36000001430511475
+      ],
+      "centerExport": [
+        20.86956604667332,
+        6.260869814001997,
+        13.913043685581375
+      ],
+      "radiusBlender": 0.36,
+      "wheel_radius": 6.260869565217392
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.2000000476837158,
+        0.800000011920929,
+        0.36000001430511475
+      ],
+      "centerExport": [
+        20.86956604667332,
+        6.260869814001997,
+        -13.913043685581375
+      ],
+      "radiusBlender": 0.36,
+      "wheel_radius": 6.260869565217392
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/street-sweeper/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/street-sweeper/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/street-sweeper/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "authorization": "autonomous-153",
+  "triangles": 3236,
+  "vertexCount": 6094,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 219336,
+  "atlasBytes": 3235,
+  "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+  "atlasSha256": "01a728ca080975f94e71b65258f78c188a2a77516ff7a68c428c61404dfe1a91",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "street-sweeper--v1",
+    "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "triangles": 3236,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.2608706503855664,
+        "minimumGap": 0.9809836999563872,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.2608706503855664,
+        "minimumGap": 0.9809836999563872,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.2608706503855664,
+        "minimumGap": 0.9809831178874484,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.2608706503855664,
+        "minimumGap": 0.9809831178874484,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/street-sweeper/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/street-sweeper/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "meets-declared-finite-region",
+    "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "allFourCrownsCovered": true,
+    "allWheelCoverage": "natural front nose/rear collection lower body fenders over declared central crown region",
+    "wheels": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": true,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "maximumRayDistanceR": 1.2,
+    "roofAndUpperTankCannotQualify": true,
+    "regionMeaning": "Finite central tread footprint from each own .36source radius and .28source width. Ray limited to1.2R above sampled tread, excluding white cab roof and upper collection tank. Actual integrated front coachwork and rear collection lower wheelhouses own covered crowns, no separate fake caps.",
+    "portableRawEvidence": "art-source/vehicle-bake/street-sweeper/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "8dc3f67452f9b390a4de9d819eddbafd7dedd2c44055e8d68fd12b55a16f9a27",
+    "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "minBlenderWorld": [
+      -34.78260803222656,
+      -21.660886764526367,
+      0.0
+    ],
+    "maxBlenderWorld": [
+      34.78260803222656,
+      21.660886764526367,
+      36.52173614501953
+    ],
+    "dimensionsBlenderWorld": [
+      69.56521606445312,
+      43.321773529052734,
+      36.52173614501953
+    ],
+    "dimensionsSourceUnits": [
+      3.999999923706054,
+      2.491001977920532,
+      2.0999998283386225
+    ],
+    "centeredHorizontalExtentWorld": [
+      69.56521606445312,
+      43.321773529052734
+    ],
+    "centeredHorizontalExtentSource": [
+      3.999999923706054,
+      2.491001977920532
+    ],
+    "centeredCeilWorldFootprint": [
+      70,
+      44
+    ],
+    "includesActualTwoBrushesArmsTankAndWheels": true,
+    "rootUnchangedNoRecenterOrFitScale": true,
+    "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+  },
+  "brushTankGeometryUV": {
+    "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "status": "passed",
+    "fixedOwner": "Body_static",
+    "all27BrushTankComponentsMatched": true,
+    "actualTriangleUvMatches": 504,
+    "components": [
+      {
+        "component": "STATIC low circular brush cap -1",
+        "actualTrianglesWithMatchingPositionAndUV": 46,
+        "actualVerticesMatched": 32
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 0",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 1",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 2",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 3",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 4",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 5",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 6",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 7",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 8",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 9",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 10",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block -1 11",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC low circular brush cap 1",
+        "actualTrianglesWithMatchingPositionAndUV": 46,
+        "actualVerticesMatched": 32
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 0",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 1",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 2",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 3",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 4",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 5",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 6",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 7",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 8",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 9",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 10",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC broad dark brush bristle block 1 11",
+        "actualTrianglesWithMatchingPositionAndUV": 12,
+        "actualVerticesMatched": 8
+      },
+      {
+        "component": "STATIC rounded gray green collection tank actual closed skin",
+        "actualTrianglesWithMatchingPositionAndUV": 124,
+        "actualVerticesMatched": 64
+      }
+    ],
+    "actualAssessment": {
+      "status": "passed",
+      "reasons": [],
+      "brushes": [
+        {
+          "side": -1,
+          "centerXYSource": [
+            -0.04999999701976776,
+            -1.0
+          ],
+          "minimumZSource": 0.054999999701976776,
+          "maximumZSource": 0.2199999988079071,
+          "radiusSourceMeasured": 0.25000001526599647,
+          "actualBroadBristleBlocks": 12
+        },
+        {
+          "side": 1,
+          "centerXYSource": [
+            -0.04999999701976776,
+            1.0
+          ],
+          "minimumZSource": 0.054999999701976776,
+          "maximumZSource": 0.2199999988079071,
+          "radiusSourceMeasured": 0.25000001526599647,
+          "actualBroadBristleBlocks": 12
+        }
+      ],
+      "tankMeasuredSpanSource": [
+        2.060000032186508,
+        1.8799999952316284,
+        1.0600000619888306
+      ],
+      "tankVertices": 64
+    },
+    "noBrushRollNodes": true,
+    "noEquipmentAnimation": true,
+    "viewIndependentSurfacePaint": true,
+    "sourceMispositionControlsRejectAndReset": true,
+    "actualGLBMispositionControls": [
+      {
+        "case": "brush-raised-above-cab",
+        "side": -1,
+        "translationSource": [
+          0,
+          0,
+          2.1
+        ],
+        "rejected": true,
+        "reasons": [
+          "brush not low above ground -1"
+        ]
+      },
+      {
+        "case": "brush-raised-above-cab",
+        "side": 1,
+        "translationSource": [
+          0,
+          0,
+          2.1
+        ],
+        "rejected": true,
+        "reasons": [
+          "brush not low above ground 1"
+        ]
+      },
+      {
+        "case": "tank-moved-over-cab",
+        "translationSource": [
+          -2,
+          0,
+          0
+        ],
+        "rejected": true,
+        "reasons": [
+          "tank outside rear collection zone"
+        ]
+      }
+    ],
+    "actualGLBBaselineRestoredExact": true,
+    "positionToleranceSource": 2e-05,
+    "uvTolerance": 2e-06
+  },
+  "fixedEquipmentEvidence": {
+    "components": [
+      "STATIC rounded gray green collection tank actual closed skin",
+      "STATIC brush fixed arm -1",
+      "STATIC brush vertical mount -1",
+      "STATIC tank support saddle -1",
+      "STATIC brush fixed arm 1",
+      "STATIC brush vertical mount 1",
+      "STATIC tank support saddle 1",
+      "STATIC axle attachment arm -1.25",
+      "STATIC axle attachment arm 1.2",
+      "STATIC low circular brush cap -1",
+      "STATIC broad dark brush bristle block -1 0",
+      "STATIC broad dark brush bristle block -1 1",
+      "STATIC broad dark brush bristle block -1 2",
+      "STATIC broad dark brush bristle block -1 3",
+      "STATIC broad dark brush bristle block -1 4",
+      "STATIC broad dark brush bristle block -1 5",
+      "STATIC broad dark brush bristle block -1 6",
+      "STATIC broad dark brush bristle block -1 7",
+      "STATIC broad dark brush bristle block -1 8",
+      "STATIC broad dark brush bristle block -1 9",
+      "STATIC broad dark brush bristle block -1 10",
+      "STATIC broad dark brush bristle block -1 11",
+      "STATIC low circular brush cap 1",
+      "STATIC broad dark brush bristle block 1 0",
+      "STATIC broad dark brush bristle block 1 1",
+      "STATIC broad dark brush bristle block 1 2",
+      "STATIC broad dark brush bristle block 1 3",
+      "STATIC broad dark brush bristle block 1 4",
+      "STATIC broad dark brush bristle block 1 5",
+      "STATIC broad dark brush bristle block 1 6",
+      "STATIC broad dark brush bristle block 1 7",
+      "STATIC broad dark brush bristle block 1 8",
+      "STATIC broad dark brush bristle block 1 9",
+      "STATIC broad dark brush bristle block 1 10",
+      "STATIC broad dark brush bristle block 1 11"
+    ],
+    "twoBrushCaps": 2,
+    "broadBristleBlocks": 24,
+    "tankClosedManifold64Vertices": true,
+    "tank16AngularVerticesPer4Rings": true,
+    "actualAssessment": {
+      "status": "passed",
+      "reasons": [],
+      "brushes": [
+        {
+          "side": -1,
+          "centerXYSource": [
+            -0.04999999701976776,
+            -1.0
+          ],
+          "minimumZSource": 0.054999999701976776,
+          "maximumZSource": 0.2199999988079071,
+          "radiusSourceMeasured": 0.25000001526599647,
+          "actualBroadBristleBlocks": 12
+        },
+        {
+          "side": 1,
+          "centerXYSource": [
+            -0.04999999701976776,
+            1.0
+          ],
+          "minimumZSource": 0.054999999701976776,
+          "maximumZSource": 0.2199999988079071,
+          "radiusSourceMeasured": 0.25000001526599647,
+          "actualBroadBristleBlocks": 12
+        }
+      ],
+      "tankMeasuredSpanSource": [
+        2.060000032186508,
+        1.8799999952316284,
+        1.0600000619888306
+      ],
+      "tankVertices": 64
+    },
+    "mispositionNegativeControls": [
+      {
+        "case": "brush-raised-above-cab",
+        "side": -1,
+        "translationSource": [
+          0,
+          0,
+          2.1
+        ],
+        "rejected": true,
+        "reasons": [
+          "brush not low above ground -1"
+        ]
+      },
+      {
+        "case": "brush-raised-above-cab",
+        "side": 1,
+        "translationSource": [
+          0,
+          0,
+          2.1
+        ],
+        "rejected": true,
+        "reasons": [
+          "brush not low above ground 1"
+        ]
+      },
+      {
+        "case": "tank-moved-over-cab",
+        "translationSource": [
+          -2,
+          0,
+          0
+        ],
+        "rejected": true,
+        "reasons": [
+          "tank outside rear collection zone"
+        ]
+      }
+    ],
+    "baselineRestoredExact": true,
+    "noMotionMetadata": true,
+    "staticBrushesAndTankOnly": true,
+    "noCleaningOrBrushRotationAnimationClaim": true,
+    "brushPaletteRoles": [
+      "bristle",
+      "bristleLight",
+      "brushCap"
+    ]
+  },
+  "perWheelCollisionControls": {
+    "status": "passed",
+    "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "standardFourWheelToolchain": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "allFixedTriangles": 1716,
+        "minimumBaselineGapWorld": 0.9809836999563872,
+        "negativeFixtureAddedTriangles": 1,
+        "controlledGapWorld": -6.2608706503855664,
+        "collisionRejected": true,
+        "baselineRestoredExact": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "allFixedTriangles": 1716,
+        "minimumBaselineGapWorld": 0.9809836999563872,
+        "negativeFixtureAddedTriangles": 1,
+        "controlledGapWorld": -6.2608706503855664,
+        "collisionRejected": true,
+        "baselineRestoredExact": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "allFixedTriangles": 1716,
+        "minimumBaselineGapWorld": 0.9809831178874484,
+        "negativeFixtureAddedTriangles": 1,
+        "controlledGapWorld": -6.2608706503855664,
+        "collisionRejected": true,
+        "baselineRestoredExact": true,
+        "noCandidateTrianglesRemoved": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "allFixedTriangles": 1716,
+        "minimumBaselineGapWorld": 0.9809831178874484,
+        "negativeFixtureAddedTriangles": 1,
+        "controlledGapWorld": -6.2608706503855664,
+        "collisionRejected": true,
+        "baselineRestoredExact": true,
+        "noCandidateTrianglesRemoved": true
+      }
+    ],
+    "allFourNegativeResetPassed": true,
+    "inputBytesUnchanged": true
+  },
+  "frameFit": {
+    "status": "passed",
+    "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "actualCapture": "engine/capture.json",
+    "nativeViewport": [
+      224,
+      224
+    ],
+    "nativeRadius": 112,
+    "source80ReferenceUnchanged": true,
+    "familyExtraPadding": 0,
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "engineOrigin": [
+      112,
+      112
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -16,
+      32
+    ],
+    "scale": 1,
+    "views": [
+      {
+        "yaw": 0,
+        "actual224OccupiedBounds": {
+          "minX": 77,
+          "minY": 62,
+          "maxX": 146,
+          "maxY": 132
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 61,
+          "maxX": 130,
+          "minY": 94,
+          "maxY": 164
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 22.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 59,
+          "maxX": 149,
+          "maxY": 134
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 91,
+          "maxY": 166
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 45,
+        "actual224OccupiedBounds": {
+          "minX": 76,
+          "minY": 53,
+          "maxX": 147,
+          "maxY": 139
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 60,
+          "maxX": 131,
+          "minY": 85,
+          "maxY": 171
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 67.5,
+        "actual224OccupiedBounds": {
+          "minX": 83,
+          "minY": 50,
+          "maxX": 139,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 67,
+          "maxX": 123,
+          "minY": 82,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 90,
+        "actual224OccupiedBounds": {
+          "minX": 90,
+          "minY": 49,
+          "maxX": 133,
+          "maxY": 139
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 74,
+          "maxX": 117,
+          "minY": 81,
+          "maxY": 171
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 112.5,
+        "actual224OccupiedBounds": {
+          "minX": 84,
+          "minY": 50,
+          "maxX": 140,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 68,
+          "maxX": 124,
+          "minY": 82,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 135,
+        "actual224OccupiedBounds": {
+          "minX": 76,
+          "minY": 53,
+          "maxX": 147,
+          "maxY": 139
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 60,
+          "maxX": 131,
+          "minY": 85,
+          "maxY": 171
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 157.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 59,
+          "maxX": 149,
+          "maxY": 134
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 91,
+          "maxY": 166
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 180,
+        "actual224OccupiedBounds": {
+          "minX": 77,
+          "minY": 62,
+          "maxX": 146,
+          "maxY": 132
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 61,
+          "maxX": 130,
+          "minY": 94,
+          "maxY": 164
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 202.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 53,
+          "maxX": 149,
+          "maxY": 134
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 85,
+          "maxY": 166
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 225,
+        "actual224OccupiedBounds": {
+          "minX": 76,
+          "minY": 47,
+          "maxX": 147,
+          "maxY": 139
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 60,
+          "maxX": 131,
+          "minY": 79,
+          "maxY": 171
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 247.5,
+        "actual224OccupiedBounds": {
+          "minX": 84,
+          "minY": 45,
+          "maxX": 140,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 68,
+          "maxX": 124,
+          "minY": 77,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 270,
+        "actual224OccupiedBounds": {
+          "minX": 90,
+          "minY": 47,
+          "maxX": 133,
+          "maxY": 138
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 74,
+          "maxX": 117,
+          "minY": 79,
+          "maxY": 170
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 292.5,
+        "actual224OccupiedBounds": {
+          "minX": 83,
+          "minY": 45,
+          "maxX": 139,
+          "maxY": 142
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 67,
+          "maxX": 123,
+          "minY": 77,
+          "maxY": 174
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 315,
+        "actual224OccupiedBounds": {
+          "minX": 76,
+          "minY": 47,
+          "maxX": 147,
+          "maxY": 139
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 60,
+          "maxX": 131,
+          "minY": 79,
+          "maxY": 171
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 337.5,
+        "actual224OccupiedBounds": {
+          "minX": 74,
+          "minY": 53,
+          "maxX": 149,
+          "maxY": 134
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 58,
+          "maxX": 133,
+          "minY": 85,
+          "maxY": 166
+        },
+        "fitsWithoutScaling": true
+      }
+    ],
+    "cardinalExactPixelProof": [
+      {
+        "yaw": 0.0,
+        "image": "engine/fallback-cardinal-0.png",
+        "sha256": "a37b828d7e1cd75a55285e9c6ed45f57b6e7b23164db98dd23f55d2c1c875e88",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 3803,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 90.0,
+        "image": "engine/fallback-cardinal-1.png",
+        "sha256": "7b5a04dd8f2f3897e00611c684aaffb6f45ce420a6909fbbe08ca1c2f8235253",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 3063,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 180.0,
+        "image": "engine/fallback-cardinal-2.png",
+        "sha256": "ec0e2794cb15b79739cc3ce20e12e364673b1bac64569624b1f80ae13c1cc086",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 3804,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 270.0,
+        "image": "engine/fallback-cardinal-3.png",
+        "sha256": "73818f81bc125848b5bb07de2f6f5e3b43bae002b49742c752813b3b7cc748c8",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 3152,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      }
+    ],
+    "standardCardinalPlacementPixelExact": true,
+    "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+  },
+  "attachmentEvidence": {
+    "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 11.478260040283203,
+        "actualStaticArmEndAbsY": 11.217391014099121,
+        "axialGapWorld": 0.26086902618408203,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 11.478260040283203,
+        "actualStaticArmEndAbsY": 11.217391014099121,
+        "axialGapWorld": 0.26086902618408203,
+        "subpixelGap": true
+      },
+      {
+        "id": "RL",
+        "actualTireSlabInnerAbsY": 11.478260040283203,
+        "actualStaticArmEndAbsY": 11.217391014099121,
+        "axialGapWorld": 0.26086902618408203,
+        "subpixelGap": true
+      },
+      {
+        "id": "RR",
+        "actualTireSlabInnerAbsY": 11.478260040283203,
+        "actualStaticArmEndAbsY": 11.217391014099121,
+        "axialGapWorld": 0.26086902618408203,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "wheelVisualEvidence": "engine/wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/street-sweeper/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/street-sweeper/capture.mjs",
+    "node scripts/vehicle-bake/street-sweeper/independent-visual.mjs",
+    "node scripts/vehicle-bake/street-sweeper/wheel-visual.mjs",
+    "python scripts/vehicle-bake/street-sweeper/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/street-sweeper/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/street-sweeper/clearance-controls.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/street-sweeper/v1/evidence/clearance-input.json data/vehicle-bake/street-sweeper/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/street-sweeper/v1/model.glb --config art-source/vehicle-bake/street-sweeper/v1/coverage-region.json --output data/vehicle-bake/street-sweeper/recheck-coverage.json",
+    "python scripts/vehicle-bake/street-sweeper/assess-coverage.py --input data/vehicle-bake/street-sweeper/recheck-coverage.json",
+    "python scripts/vehicle-bake/street-sweeper/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/street-sweeper/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/street-sweeper/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "All16study+16game headings inspected: compact municipal white/mint enclosed cab with large framedblueglass, genuine rounded graygreen collection tank and two low outboard bristled brush discs.",
+    "Natural front/rear collection-body wheelhouses hide far crowns in both cameras; neararches open. Four actual road wheels remain correctly placed underbody.",
+    "Both brush discs stay low at actualgroundclearance.055source, captop.22source. Dark radial bristle blocks distinguish the horizontal fixed discs from vertical road tires; parts partly occlude by cab/chassis at elevated headings.",
+    "Eight signed distance phases/camera,16equal-angle phase views,both wireframes and32four-color wheel-ID diagnostic views inspected. Brushes/tank/arms/body remain static.",
+    "All4 independent quarter-turn/reverse/reset sets inspected; tiny asymmetric hub marks move subtly but positive6-9channel changes each confirmed,absolute reset pixels exact andother meshes fixed.",
+    "Tank has real closed rounded16vertex crosssections and tapering endrings. Actual504 brush/tank triangles match source positions/UVs within export tolerances; source+GLB misposition controls reject raisedbrushes/tankovercab andrestore.",
+    "Native224/radius112 at unchanged source80density,zerooccupiededgepixels; strict128/224 game center crop parity exact. All4standard192x224 cardinal PNGs preserve everyoccupiedRGBApixel bytranslation(-16,+32),no rescale.",
+    "Bundled fullChromium desktop/mobile/offline screenshots and checks pass; mobile controls fit and offline model is exact with no network requests.",
+    "No logos/tinytext/PBR,paint on actual skins with continuous glassframes; restrained characteristic ink and broad palettes. Minor bristle/hub/grille aliasing retained without blocking findings."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "allWheelRadiusesMatchOwnGeometry": true,
+    "twoRealLowCircularBristledBrushesStaticBodyOnly": true,
+    "roundedClosedTankActualVolume": true,
+    "actualEquipmentTrianglePositionAndUVMatch": true,
+    "sourceAndActualGLBEquipmentMispositionNegativesReset": true,
+    "allFourIndividualCollisionNegativeControlsReset": true,
+    "exact192x224CardinalPixelPlacement": true,
+    "actualAsymmetricAndCenteredBoundsIncludeEquipment": true,
+    "standard224AndFallback192x224FitWithoutScaling": true,
+    "allFourEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crownCoverage": "natural front coachwork and rear collection lower body;25/25 each declared central footprint",
+    "roofUpperTankOutsideCoverageRayRange": true,
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "allFourCrownsCovered": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Crown coverage qualifies declared finite central tread region only; ray limit1.2R excludes white cab roof and upper collection tank. Synthetic fixtures qualify bookkeeping, actual body-removal zeroes all samples. Camera headings inspected separately.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Two low horizontal brush discs have12 actual dark bristle blocks each. Palette caps and bristle edges have heading-dependent native aliasing; arms/brushes partly occluded from elevated views.",
+    "Brushes, arms and collection tank are static Body_static geometry only. No cleaning, brush rotation or equipment animation/gameplay qualification.",
+    "Actual brush-inclusive overall width and tank/body/wheel bounds measured at unchanged root/scale. Span and centered2*maxAbs extents both reported; parent owns runtime footprint and road-fit QA.",
+    "Actual occupied pixels fit224 and standard192x224 fallback placement without scaling; parent owns independent runtime export/QA.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/street-sweeper/v1/assess-coverage.py": "f6ad80edb6d8487e50e4f6d92f9e24a4f460808c155abcb8e85e71d32cbdf285",
+    "art-source/vehicle-bake/street-sweeper/v1/assess-fit.py": "5572558586f0dde7857475972e58944db7f2b677ad04dd20ddde2c6d1da335fd",
+    "art-source/vehicle-bake/street-sweeper/v1/atlas.png": "01a728ca080975f94e71b65258f78c188a2a77516ff7a68c428c61404dfe1a91",
+    "art-source/vehicle-bake/street-sweeper/v1/audit-source.py": "ee23d27985ab3f335d8c4cd7affb85eae43282cfae8795d98a680e0e550f9bde",
+    "art-source/vehicle-bake/street-sweeper/v1/build.py": "3ab3bb3b4d5ac378b395f04e171aa851403d166763e3849f8d9696b166608a18",
+    "art-source/vehicle-bake/street-sweeper/v1/capture.mjs": "17d9ec3be225079436bbf2c1ba42e101a18bbb8ceee2b554438f6712e7e02dc1",
+    "art-source/vehicle-bake/street-sweeper/v1/car.blend": "050aeebc40e8764fc76700ffbd38c5db549f08cee38339b54d3dc50492549c10",
+    "art-source/vehicle-bake/street-sweeper/v1/clearance-controls.py": "b283551ce0ccd7e8c748a662f5991a2ecd9ef0764f453f3ecbac80b013d41275",
+    "art-source/vehicle-bake/street-sweeper/v1/coverage-region.json": "ba6f238454c1f2b75b209a7b73f6d89b372a924c720cef2415c977d622c20ef4",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/author-browser-qa.json": "7f1d65b0d9178592ded443f25068513ec10973726cccc643e820b7a688e0af8a",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/author-visual-inspection.json": "82c5f2438f58f2511086f9e5a90223985b5e6a56bc06a3641d3c11ae566c98b5",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/clearance-controls.json": "dbf0b40964f38edfaf4fa4f0a94b6ce973e363c013f84807eae2d0e29ab59d62",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/clearance-input.json": "616672fb7370096a7e7a65e208644ad14778d661db23bb019e51a39216f9ad77",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/engine-capture.json": "b43838309711484f1ac96f7e0f7236d37f51c44fabd79da481297eac97ab7e1c",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/fit-assessment.json": "a60003c6bba1aafb05ebd38b0ae9f165e488550e18e2404264972c33e5dea566",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/independent-visual.json": "fba8c1069cabe9c3dbfb90c1465878f0d6916353b7b8dfe0fb009c9a0529815a",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/packed-source-audit.json": "1d59acb48a7a35711235e7d6e2e690c59d71a46eeecee4941bd0d7e3aba94264",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/replay-verification.json": "20645e0084825c72b12e9556c93c80fd1f73ddc7271c926958b29e5507c5d634",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/shared-clearance.json": "208d803edb64727d365da6e7d7e8a09bedc056e7e8f8fbce2fc6c7520acd6500",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/upper-wheel-coverage-raw.json": "8dc3f67452f9b390a4de9d819eddbafd7dedd2c44055e8d68fd12b55a16f9a27",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/wheel-coverage-assessment.json": "0c13db02367caaae3eea1121e48fcf5688003edd592af06e7c3a93f10dee15de",
+    "art-source/vehicle-bake/street-sweeper/v1/evidence/wheel-visual.json": "d2bebff93636a9a5e5e05e0908c30d2744ac0f36213b780656d612a4c85d39cb",
+    "art-source/vehicle-bake/street-sweeper/v1/family.json": "3e802b5c40569c09049db5ce30d4375ad567177077e0bf24125741a19b620d68",
+    "art-source/vehicle-bake/street-sweeper/v1/finalize.py": "58ea2fc8a259adfaa9cb6ab8156ebf8e64de46e5b0307720e798c41d69cb0419",
+    "art-source/vehicle-bake/street-sweeper/v1/geometry.py": "a00895c94783e79b22725d08886815dfd92b81b427713c9a38546f3dd4e202c0",
+    "art-source/vehicle-bake/street-sweeper/v1/independent-visual.mjs": "4589171708ce046d3ba5b84961f0907769c415a23ba8e6ebce0b76ddef25a310",
+    "art-source/vehicle-bake/street-sweeper/v1/master.blend": "c6fb36235eef40d17ea7122da688240ce838b1b308e1cca17d390d3ee12300a5",
+    "art-source/vehicle-bake/street-sweeper/v1/model.glb": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+    "art-source/vehicle-bake/street-sweeper/v1/paint-ownership.json": "9d12cb558fc99399b523175f6bf4b50d9b9d557b2bb77480fbcaf30eda58a353",
+    "art-source/vehicle-bake/street-sweeper/v1/palette-draft.png": "f34c3b9b65b7200c2fc6c4142fa075f9efddf010c546a4fe0f4c35bc7b6e04d2",
+    "art-source/vehicle-bake/street-sweeper/v1/recipe.json": "494676481003778f2d0af510d3d36e113a63a089c9965153f59dfade71b684ab",
+    "art-source/vehicle-bake/street-sweeper/v1/review.json": "8aa1da819bf5b78779d3359979d018ee5f30d769945d23f516bd7369c30a8eb6",
+    "art-source/vehicle-bake/street-sweeper/v1/sheets.py": "bb066294da315b13e8973af5d6ed128708780e851d5ee5c066a5f20084c39bd7",
+    "art-source/vehicle-bake/street-sweeper/v1/wheel-visual.mjs": "4c7c558b92663b388073991fbfbeb16e19cf35b098ad794b0d2d40a6cd0cad4a"
+  }
+}

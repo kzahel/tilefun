@@ -1,0 +1,313 @@
+{
+  "method": "Original short rounded dune-buggy tub, broad swept integrated fenders, real recessed two-seat cockpit, fixed black tube cage and small framed windshield. Direct semantic UV paint on runtime topology; no high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      151,
+      68,
+      37
+    ],
+    "paintShadow": [
+      184,
+      78,
+      37
+    ],
+    "paintMid": [
+      220,
+      103,
+      37
+    ],
+    "paint": [
+      241,
+      132,
+      42
+    ],
+    "paintLight": [
+      255,
+      173,
+      64
+    ],
+    "cream": [
+      218,
+      219,
+      224
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "bedFloor": [
+      62,
+      65,
+      81
+    ],
+    "bedRib": [
+      86,
+      90,
+      108
+    ],
+    "bedWall": [
+      51,
+      55,
+      75
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "seatBlue": [
+      65,
+      85,
+      113
+    ],
+    "seatLight": [
+      92,
+      128,
+      158
+    ],
+    "seatDark": [
+      46,
+      61,
+      85
+    ]
+  },
+  "ownership": "Own continuous side and hood/deck charts on the low rounded body; genuine cockpit floor/inner panels, blue bucket cushions/seatbacks, opaque glass/framing, fixed black cage and gray trim have exact named semantic owners. Named source components retain base FACE paint_role attributes; their continuous UV charts own window/paint details. Trim islands share padded constant-role swatches; wheel-only meshes never sample coachwork.",
+  "semanticOwners": {
+    "bodySide": {
+      "component": "Own short rounded orange buggy tub with genuine cockpit",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        160
+      ],
+      "meaning": "Continuous real body side paint, lower shadow and door cutline"
+    },
+    "hood": {
+      "atlasPixelRect": [
+        0,
+        160,
+        512,
+        288
+      ],
+      "meaning": "Short rounded orange nose skin, broad warm clusters"
+    },
+    "rearDeck": {
+      "atlasPixelRect": [
+        0,
+        288,
+        512,
+        384
+      ],
+      "meaning": "Flat rear engine cover with broad vent paint, never covers cockpit"
+    },
+    "windscreen": {
+      "component": "Static tiny windscreen exact framed opaque glass owner",
+      "atlasPixelRect": [
+        0,
+        384,
+        512,
+        464
+      ],
+      "meaning": "Only actual front/back slab faces own blue glass with continuous dark perimeter; thin edges remain ink"
+    },
+    "bucketSeatbacks": {
+      "components": [
+        "Blue bucket seatback -1",
+        "Blue bucket seatback 1",
+        "Blue seatback center face -1",
+        "Blue seatback center face 1"
+      ],
+      "roles": [
+        "seatBlue",
+        "seatLight",
+        "seatDark"
+      ],
+      "meaning": "Padded role swatches; actual back/cushion geometry, not a painted upper deck"
+    },
+    "trim": {
+      "roles": [
+        "silver",
+        "rim",
+        "ink",
+        "cream",
+        "ruby"
+      ],
+      "meaning": "Exact named bumpers, round lamps, fixed cage tubes and static steering components; padded role islands"
+    },
+    "cockpit": {
+      "roles": [
+        "bedFloor",
+        "bedWall",
+        "bedRib"
+      ],
+      "meaning": "Recessed actual floor, separate inner door panels/dashboard and low center tunnel"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "bedFloor": [
+      80,
+      504
+    ],
+    "bedRib": [
+      112,
+      504
+    ],
+    "bedWall": [
+      144,
+      504
+    ],
+    "rubyLight": [
+      176,
+      504
+    ],
+    "seatBlue": [
+      208,
+      504
+    ],
+    "seatLight": [
+      240,
+      504
+    ],
+    "seatDark": [
+      272,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric two-seat open dune buggy; short nose and flat engine cover have distinct semantic ownership.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

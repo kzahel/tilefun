@@ -1,0 +1,17 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+  "reviewKind": "author actual-export QA only; formal human appearance approval not claimed",
+  "observations": [
+    "Inspected all16study and all16game headings, native224/radius112 unchanged world density/ground origins. Short boxy hatch silhouette, short hood, main side-door pane plus rear quarter pane, sloping hatch, fixed roof scoop and rear spoiler read as a distinct rally hatchback.",
+    "Broad white/red/black team blocks and chevrons on actual skin, no logos or tiny text. Cool blue windshield, side/quarter and hatch glass all retain dark bounded frames on the same physical hatchback shell. No coincident body/glass overlays or recolored coupe/van construction.",
+    "Four ordinary cream auxiliary lenses are visible in the front row and sit on a fixed mounting bar connected into the nose. Scoop and wing supports are seated into actual roof/hatch shoulders; modest fixed equipment, no floating raised geometry or animated/beacon styling.",
+    "Chunky tire width and gray painted tread panels remain wheel-owned and roll with the wheel. All four far crowns stay beneath integrated fenders/hood/hatch shoulders in both camera sets at all headings; near-wheel local pockets are genuinely open and properly seated.",
+    "Inspected8signed phases in each camera and both wireframes. Body, livery, windows, lamps, mounting bar, roof scoop, spoiler and mirrors remain fixed; four wheels independently quarter-turn/reverse/reset with centered pivots.",
+    "Additionally inspected individual224px native side/front/rear obliques and frontal view: four auxiliary lenses, side/quarter frames and short hatch geometry remain coherent. Small tread/highlight aliases are expected at native density; no blocking visual findings.",
+    "ActualGLB14 triangle-ray/barycentric UV probes separately verify main/quarter panes and frames, windshield/hatch glass and frames, white roof and broad red hood stripe. Actual1916 fixed triangles have zero duplicate geometric faces and zero zero-area triangles.",
+    "Both study and game cameras/all32 headings have exact full128x128 RGBA crop equality against centered224 captures, including outline and transparent frame boundary; zero mismatched channels, no resizing, no per-angle fitting.",
+    "Packed-master audit confirms exactly4static auxiliary lenses,1scoop,1spoiler and5painted tread panels per wheel. ActualGLB has no exported animations or beacon/light/signal/effect tags. Equipment is static ordinary art.",
+    "Closed cabin and static equipment; no open-interior depth or high-to-low transfer claim. Existing ordinary driving semantics, no visible animated driver and no new rider/equipment gameplay."
+  ]
+}

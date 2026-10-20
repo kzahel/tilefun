@@ -1,0 +1,274 @@
+{
+  "method": "Own long cream/forest-green cab-over motorhome: real solid cantilevered sleeping pod and roof step, truck cab blue framed skin glass, independent living-side/door/end charts, broad lower green stripe, one fixed roof vent, closed awning tube and low camper step. No glass overlays or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      154,
+      152,
+      139
+    ],
+    "paintShadow": [
+      199,
+      195,
+      174
+    ],
+    "paintMid": [
+      227,
+      222,
+      197
+    ],
+    "paint": [
+      247,
+      241,
+      214
+    ],
+    "paintLight": [
+      255,
+      249,
+      229
+    ],
+    "cream": [
+      239,
+      222,
+      164
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "green": [
+      56,
+      105,
+      85
+    ],
+    "greenLight": [
+      86,
+      137,
+      112
+    ],
+    "greenShadow": [
+      42,
+      79,
+      69
+    ]
+  },
+  "semanticOwners": {
+    "doorSideSkin": {
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        128
+      ],
+      "meaning": "Actual -Y cab/living skin, distinct cab/living/door windows and door outline; broad green lower stripe"
+    },
+    "oppositeLivingSkin": {
+      "atlasPixelRect": [
+        0,
+        128,
+        512,
+        256
+      ],
+      "meaning": "Actual +Y skin with own large living panes; no door ghost"
+    },
+    "endCaps": {
+      "atlasPixelRect": [
+        0,
+        256,
+        512,
+        320
+      ]
+    },
+    "cabWindshield": {
+      "atlasPixelRect": [
+        0,
+        320,
+        512,
+        384
+      ]
+    },
+    "creamRoof": {
+      "atlasPixelRect": [
+        0,
+        384,
+        512,
+        432
+      ]
+    },
+    "sleepingPod": {
+      "atlasSidePixelRect": [
+        0,
+        432,
+        512,
+        480
+      ],
+      "component": "Actual solid over-cab sleeping pod",
+      "meaning": "Real closed volume with chamfered nose, crowned cream roof and independent underside cream/shadow swatches; no painted rectangle"
+    },
+    "equipment": {
+      "components": [
+        "Single fixed cream roof vent",
+        "Roof vent cream lid",
+        "Closed fixed camper awning tube",
+        "Low camper entry step"
+      ],
+      "meaning": "All fixed body-owned geometry; no animated equipment"
+    },
+    "wheels": {
+      "meaning": "Four independent tire/rim/hub surfaces in own padded palette islands"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "rubyLight": [
+      80,
+      504
+    ],
+    "green": [
+      112,
+      504
+    ],
+    "greenLight": [
+      144,
+      504
+    ],
+    "greenShadow": [
+      176,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Original authored semantic UVs including unseen surfaces; no projection/high-to-low transfer claim.",
+  "outerInk": "Shared exterior pass RGB58,58,80; no geometry outline shell."
+}

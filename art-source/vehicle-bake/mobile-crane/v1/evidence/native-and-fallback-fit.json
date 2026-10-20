@@ -1,0 +1,525 @@
+{
+  "status": "passed",
+  "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+  "nativeSize": 256,
+  "meshRadius": 128,
+  "centered128GameCropProof": [
+    {
+      "yaw": 0,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 22.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 45,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 67.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 90,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 112.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 135,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 157.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 180,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 202.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 225,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 247.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 270,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 292.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 315,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 337.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    }
+  ],
+  "headings": [
+    {
+      "camera": "study",
+      "headingIndex": 0,
+      "alphaBounds": [
+        62,
+        116,
+        192,
+        172
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 1,
+      "alphaBounds": [
+        61,
+        107,
+        195,
+        186
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 2,
+      "alphaBounds": [
+        68,
+        97,
+        188,
+        198
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 3,
+      "alphaBounds": [
+        84,
+        92,
+        173,
+        203
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 4,
+      "alphaBounds": [
+        105,
+        93,
+        151,
+        201
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 5,
+      "alphaBounds": [
+        83,
+        92,
+        172,
+        203
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 6,
+      "alphaBounds": [
+        68,
+        97,
+        188,
+        198
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 7,
+      "alphaBounds": [
+        60,
+        109,
+        195,
+        186
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 8,
+      "alphaBounds": [
+        64,
+        111,
+        194,
+        172
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 9,
+      "alphaBounds": [
+        60,
+        103,
+        195,
+        186
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 10,
+      "alphaBounds": [
+        68,
+        90,
+        188,
+        198
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 11,
+      "alphaBounds": [
+        83,
+        79,
+        172,
+        204
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 12,
+      "alphaBounds": [
+        105,
+        75,
+        151,
+        201
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 13,
+      "alphaBounds": [
+        84,
+        76,
+        173,
+        204
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 14,
+      "alphaBounds": [
+        68,
+        84,
+        188,
+        198
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 15,
+      "alphaBounds": [
+        61,
+        98,
+        195,
+        186
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 0,
+      "alphaBounds": [
+        65,
+        69,
+        193,
+        149
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 1,
+      "alphaBounds": [
+        62,
+        59,
+        194,
+        166
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 2,
+      "alphaBounds": [
+        69,
+        46,
+        187,
+        181
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 3,
+      "alphaBounds": [
+        84,
+        40,
+        171,
+        187
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 4,
+      "alphaBounds": [
+        105,
+        41,
+        151,
+        185
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 5,
+      "alphaBounds": [
+        85,
+        43,
+        172,
+        187
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 6,
+      "alphaBounds": [
+        69,
+        50,
+        187,
+        181
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 7,
+      "alphaBounds": [
+        62,
+        64,
+        194,
+        166
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 8,
+      "alphaBounds": [
+        63,
+        64,
+        191,
+        149
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 9,
+      "alphaBounds": [
+        62,
+        54,
+        194,
+        165
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 10,
+      "alphaBounds": [
+        69,
+        36,
+        187,
+        181
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 11,
+      "alphaBounds": [
+        85,
+        22,
+        172,
+        188
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 12,
+      "alphaBounds": [
+        105,
+        17,
+        151,
+        185
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 13,
+      "alphaBounds": [
+        84,
+        18,
+        171,
+        188
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 14,
+      "alphaBounds": [
+        69,
+        28,
+        187,
+        181
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 15,
+      "alphaBounds": [
+        62,
+        46,
+        194,
+        165
+      ]
+    }
+  ],
+  "fallbackFrame": [
+    192,
+    224
+  ],
+  "fallbackOrigin": [
+    96,
+    144
+  ],
+  "sourceGameOrigin": [
+    128,
+    128
+  ],
+  "translation": [
+    -32,
+    16
+  ],
+  "cardinals": [
+    {
+      "headingIndex": 4,
+      "nativeBounds": [
+        105,
+        41,
+        151,
+        185
+      ],
+      "fallbackBounds": [
+        73,
+        57,
+        119,
+        201
+      ],
+      "fitsWithoutPixelLoss": true
+    },
+    {
+      "headingIndex": 12,
+      "nativeBounds": [
+        105,
+        17,
+        151,
+        185
+      ],
+      "fallbackBounds": [
+        73,
+        33,
+        119,
+        201
+      ],
+      "fitsWithoutPixelLoss": true
+    },
+    {
+      "headingIndex": 8,
+      "nativeBounds": [
+        63,
+        64,
+        191,
+        149
+      ],
+      "fallbackBounds": [
+        31,
+        80,
+        159,
+        165
+      ],
+      "fitsWithoutPixelLoss": true
+    },
+    {
+      "headingIndex": 0,
+      "nativeBounds": [
+        65,
+        69,
+        193,
+        149
+      ],
+      "fallbackBounds": [
+        33,
+        85,
+        161,
+        165
+      ],
+      "fitsWithoutPixelLoss": true
+    }
+  ],
+  "meaning": "Fixed native cameras and world density. Only transparent padding can be cropped/added. Cardinal occupied pixel order/RGBA values are compared exactly after integer translation; no resize or recenter."
+}

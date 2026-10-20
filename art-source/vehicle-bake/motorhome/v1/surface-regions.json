@@ -1,0 +1,83 @@
+{
+  "meaning": "Own cab, living-side, camper door, pod, roof and fixed equipment actual triangle/UV owners",
+  "rays": [
+    {
+      "id": "cab-door-glass",
+      "origin": [-2.5, -2, 1.6],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "cab-opposite-glass",
+      "origin": [-2.5, 2, 1.6],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "windshield",
+      "origin": [-4, 0, 1.7],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "living-window-door-side",
+      "origin": [-0.4, -2, 2.1],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "living-window-opposite",
+      "origin": [1.5, 2, 2.1],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "camper-door-window",
+      "origin": [1.15, -2, 2.1],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "camper-door-outline",
+      "origin": [0.54, -2, 1.3],
+      "direction": [0, 1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "forest-lower-stripe",
+      "origin": [0, 2, 0.8],
+      "direction": [0, -1, 0],
+      "roles": ["green"]
+    },
+    {
+      "id": "cream-roof",
+      "origin": [0, 0, 4],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "sleeping-pod-front",
+      "origin": [-4, 0, 2.55],
+      "direction": [1, 0, 0],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "rear-window",
+      "origin": [4, 0, 2.1],
+      "direction": [-1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "entry-step",
+      "origin": [0.965, -1.4, 0.6],
+      "direction": [0, 0, -1],
+      "roles": ["silver"]
+    },
+    {
+      "id": "closed-awning-tube",
+      "origin": [0, -1.3, 3.5],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    }
+  ]
+}

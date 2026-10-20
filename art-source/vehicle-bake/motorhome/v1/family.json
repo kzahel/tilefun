@@ -1,0 +1,97 @@
+{
+  "family": "cream-forest-green-cab-over-motorhome",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [6.9, 2.5, 3.0],
+  "wheelRadius": 0.49,
+  "wheelWidth": 0.3,
+  "axles": [-2.42, 2.08],
+  "halfTrack": 1.02,
+  "arch": {
+    "cutRadius": 0.59,
+    "pocketInnerY": 0.8,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [0.78, 0.9, 1.11, 1.22, 1.27],
+    "shoulderRadii": [0.61, 0.65, 0.65, 0.64, 0.61],
+    "archRadius": 0.58
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [154, 152, 139],
+    "paintShadow": [199, 195, 174],
+    "paintMid": [227, 222, 197],
+    "paint": [247, 241, 214],
+    "paintLight": [255, 249, 229],
+    "cream": [239, 222, 164],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119],
+    "green": [56, 105, 85],
+    "greenLight": [86, 137, 112],
+    "greenShadow": [42, 79, 69]
+  },
+  "render": {
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [128, 156],
+    "engineGroundOrigin": [128, 128]
+  },
+  "paintMethod": "Own long cream/forest-green cab-over motorhome: real solid cantilevered sleeping pod and roof step, truck cab blue framed skin glass, independent living-side/door/end charts, broad lower green stripe, one fixed roof vent, closed awning tube and low camper step. No glass overlays or high-to-low transfer claim.",
+  "bodyStations": [
+    [-3.35, 1.04, 1.18],
+    [-3.3, 1.06, 1.7],
+    [-3.15, 1.06, 2.1],
+    [-2.95, 1.08, 2.13],
+    [-1.85, 1.08, 2.13],
+    [-1.68, 1.2, 2.2],
+    [-1.6, 1.22, 2.6399999999999997],
+    [-1.3, 1.22, 2.7199999999999998],
+    [2.8, 1.22, 2.7199999999999998],
+    [3.3, 1.2, 2.6799999999999997],
+    [3.4, 1.13, 2.5999999999999996]
+  ],
+  "bodySection": [
+    [-0.87, 0],
+    [-1, 0.07],
+    [-1, 0.42],
+    [-0.99, 0.8],
+    [-0.97, 0.92],
+    [-0.9, 0.985],
+    [-0.7, 1.015],
+    [0, 1.025],
+    [0.7, 1.015],
+    [0.9, 0.985],
+    [0.97, 0.92],
+    [0.99, 0.8],
+    [1, 0.42],
+    [1, 0.07],
+    [0.87, 0]
+  ],
+  "sleepingPod": {
+    "stations": [
+      [-3.58, 1.01, 2.36, 2.8000000000000003],
+      [-3.42, 1.16, 2.3, 2.95],
+      [-2.92, 1.18, 2.29, 2.99],
+      [-1.72, 1.18, 2.27, 2.99],
+      [-1.42, 1.17, 2.26, 2.98]
+    ],
+    "meaning": "Closed real volume cantilevered over cab and attached into living box; thickness and protrusion checked on actual GLB"
+  }
+}

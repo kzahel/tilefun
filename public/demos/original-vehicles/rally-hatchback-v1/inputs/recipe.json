@@ -1,0 +1,791 @@
+{
+  "family": "short-boxy-rally-hatchback",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    4.25,
+    2.0,
+    1.64
+  ],
+  "wheelRadius": 0.38,
+  "wheelWidth": 0.3,
+  "axles": [
+    -1.25,
+    1.2
+  ],
+  "halfTrack": 0.77,
+  "arch": {
+    "cutRadius": 0.47,
+    "pocketInnerY": 0.57,
+    "segments": 24
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [
+      0.53,
+      0.66,
+      0.82,
+      0.94,
+      1.0
+    ],
+    "shoulderRadii": [
+      0.5,
+      0.565,
+      0.565,
+      0.55,
+      0.52
+    ],
+    "archRadius": 0.45
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "treadMark": [
+      98,
+      101,
+      115
+    ],
+    "paintDeep": [
+      156,
+      160,
+      170
+    ],
+    "paintShadow": [
+      178,
+      183,
+      190
+    ],
+    "paintMid": [
+      211,
+      214,
+      214
+    ],
+    "paint": [
+      238,
+      237,
+      231
+    ],
+    "paintLight": [
+      255,
+      252,
+      241
+    ],
+    "roof": [
+      248,
+      247,
+      239
+    ],
+    "cream": [
+      255,
+      233,
+      187
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "red": [
+      202,
+      61,
+      80
+    ],
+    "redLight": [
+      232,
+      101,
+      106
+    ],
+    "redShadow": [
+      155,
+      49,
+      76
+    ],
+    "teamBlack": [
+      46,
+      48,
+      65
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original short boxy rally hatchback contour loft: short hood, upright low cabin, two side doors with rear quarter panes and a sloping hatch. Actual skin UV charts own continuous framed blue glazing, broad white/red/black team blocks and trim. Fixed roof scoop/spoiler and four static auxiliary lenses, no equipment animation or beacon tags; no glass overlays or high-to-low transfer claim.",
+  "hatchStations": [
+    [
+      -2.02,
+      0.86,
+      0.94
+    ],
+    [
+      -1.94,
+      0.98,
+      1.0
+    ],
+    [
+      -1.6,
+      1.0,
+      1.025
+    ],
+    [
+      -1.18,
+      1.0,
+      1.04
+    ],
+    [
+      -1.09,
+      1.0,
+      1.1
+    ],
+    [
+      -0.62,
+      1.0,
+      1.46
+    ],
+    [
+      -0.48,
+      1.0,
+      1.5
+    ],
+    [
+      0.1,
+      1.0,
+      1.52
+    ],
+    [
+      0.68,
+      1.0,
+      1.5
+    ],
+    [
+      0.83,
+      0.99,
+      1.46
+    ],
+    [
+      1.4,
+      0.98,
+      1.12
+    ],
+    [
+      1.74,
+      0.97,
+      0.97
+    ],
+    [
+      2.0,
+      0.85,
+      0.88
+    ]
+  ],
+  "section": [
+    [
+      -0.8,
+      0.23
+    ],
+    [
+      -0.93,
+      0.34
+    ],
+    [
+      -0.97,
+      0.62
+    ],
+    [
+      -0.97,
+      0.85
+    ],
+    [
+      -0.93,
+      0.94
+    ],
+    [
+      -0.86,
+      "base"
+    ],
+    [
+      -0.78,
+      "edge"
+    ],
+    [
+      -0.68,
+      "shoulder"
+    ],
+    [
+      0,
+      "top"
+    ],
+    [
+      0.68,
+      "shoulder"
+    ],
+    [
+      0.78,
+      "edge"
+    ],
+    [
+      0.86,
+      "base"
+    ],
+    [
+      0.93,
+      0.94
+    ],
+    [
+      0.97,
+      0.85
+    ],
+    [
+      0.97,
+      0.62
+    ],
+    [
+      0.93,
+      0.34
+    ],
+    [
+      0.8,
+      0.23
+    ]
+  ],
+  "sideMainPane": [
+    [
+      -0.9,
+      1.04
+    ],
+    [
+      0.4,
+      1.04
+    ],
+    [
+      0.4,
+      1.4
+    ],
+    [
+      -0.55,
+      1.4
+    ]
+  ],
+  "sideQuarterPane": [
+    [
+      0.52,
+      1.04
+    ],
+    [
+      1.28,
+      1.04
+    ],
+    [
+      0.88,
+      1.36
+    ],
+    [
+      0.52,
+      1.4
+    ]
+  ],
+  "components": [
+    {
+      "name": "Own short boxy rally hatchback hood cabin sloping hatch skin",
+      "group": "body",
+      "triangles": 736,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Integrated chunky rally fender -1.25 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "red",
+        "redLight",
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Integrated chunky rally fender -1.25 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "red",
+        "redLight",
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Integrated chunky rally fender 1.2 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "red",
+        "redLight",
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Integrated chunky rally fender 1.2 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "red",
+        "redLight",
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Short dark rally bumper -2.065",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Broad gray bumper edge -2.065",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Short dark rally bumper 2.065",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Broad gray bumper edge 2.065",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp mounting bar",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp gray housing 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp lens 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp gray housing 2",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp lens 2",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp gray housing 3",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp lens 3",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp gray housing 4",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Static auxiliary lamp lens 4",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Fixed modest roof scoop",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink",
+        "paint",
+        "red"
+      ]
+    },
+    {
+      "name": "Fixed spoiler support -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Fixed spoiler support 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Fixed rear spoiler wing",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "teamBlack"
+      ]
+    },
+    {
+      "name": "Fixed rally mirror stem -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed compact rally mirror -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Fixed rally mirror stem 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed compact rally mirror 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight",
+        "treadMark"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight",
+        "treadMark"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight",
+        "treadMark"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight",
+        "treadMark"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.25,
+        -0.7699999809265137,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -21.739130434782613,
+        6.608695569245713,
+        13.391304016113283
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.25,
+        0.7699999809265137,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -21.739130434782613,
+        6.608695569245713,
+        -13.391304016113283
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.2000000476837158,
+        -0.7699999809265137,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        20.86956604667332,
+        6.608695569245713,
+        13.391304016113283
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.2000000476837158,
+        0.7699999809265137,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        20.86956604667332,
+        6.608695569245713,
+        -13.391304016113283
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    }
+  ],
+  "method": "Original short boxy rally hatchback contour loft: short hood, upright low cabin, two side doors with rear quarter panes and a sloping hatch. Actual skin UV charts own continuous framed blue glazing, broad white/red/black team blocks and trim. Fixed roof scoop/spoiler and four static auxiliary lenses, no equipment animation or beacon tags; no glass overlays or high-to-low transfer claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/rally-hatchback/build.py",
+    "scripts/vehicle-bake/rally-hatchback/family.json",
+    "scripts/vehicle-bake/rally-hatchback/coverage-region.json",
+    "scripts/vehicle-bake/rally-hatchback/surface-regions.json",
+    "scripts/vehicle-bake/rally-hatchback/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

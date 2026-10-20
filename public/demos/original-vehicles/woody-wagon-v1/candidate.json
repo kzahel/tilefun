@@ -1,0 +1,510 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "woody-wagon-v1",
+      "name": "Wood-panel station wagon",
+      "title": "Wood-panel station wagon \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Independent long low estate body and swept greenhouse. Continuous own side UV charts carry cream/caramel paint, bounded warm wood panels with sparse graphic grain, and framed blue passenger/quarter glass. Fixed front/rear glass and roof owners; static four-bar roof rack. No source projection or view-dependent paint.",
+      "audit": {
+        "triangles": 2792,
+        "vertices": 5442,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 198016,
+        "sha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/atlas.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/atlas.png",
+          "sha256": "2fdb5c112858ccac1a4a6ff5487bbe3c35c089eed995d468847114a3faf76545"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/capture.json",
+          "sha256": "85a3d16a97444385fdee33008fba906cac71c9a33ff00a459a05741f656b5400"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-0.png",
+          "sha256": "dab31ce12e4ff5f4e534b122bc0fa23529d2544b7422501fdb1bcdf44fa6af61"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-1.png",
+          "sha256": "1b40e17d400921aefe0482115a02c8d3dd47ae96a46d74051ad59c3adb1eee2a"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-10.png",
+          "sha256": "ab5d2d58b6c0f5e96328f63523544ddb97748932059dc8237cb84ece639abe45"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-11.png",
+          "sha256": "c04be3e7d6f17f62d858bf5644c9ffab0bc9293c14623f8c28bef0e05b680194"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-12.png",
+          "sha256": "2e83235bdcd0fe853255de4323949c9a4982ab593c15911df43875beab3e46dc"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-13.png",
+          "sha256": "2a47c24c8c92e2b3cff069f0a4f06ef251209c27e6df6df30f92dddbdf0fc7ab"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-14.png",
+          "sha256": "863aedee895abb4b2bdc09a0c07770b51ec09d9fa5ac9e05f306d3b8f3b4b411"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-15.png",
+          "sha256": "600aba55b22b8cdc9531b0619ac91846bb48317a551984bec2ef5e6b5b51ae47"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-1x.png",
+          "sha256": "d7663c1d232cdcedd0e03d013ae2693958af6ec9e6fd00f0e0bab12f4b2ded85"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-2.png",
+          "sha256": "a638e4730c903af4e954e6fb3af77939d0041462453b69f068fb8f87f7f472be"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-2x.png",
+          "sha256": "29a3a45710d8f66ab2fed5c11edde5265e4f07ec959fafdc97503fec316cf28b"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-3.png",
+          "sha256": "9519c67136df4e42eff2cdb2a4ca7b2749e6feea155b515114e235d72a6a9e3e"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-3x.png",
+          "sha256": "cf1904a3913516f19eac11d0df7dd796ae61ad242cadaeebeb13c6353adca897"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-4.png",
+          "sha256": "5fb77ece0cb7e4860472bbe93bf76e7290f741d49d9884f2339df72dbe8e07a7"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-5.png",
+          "sha256": "c3f637fae7119fcfa8a0c5825a53b8df4c38d2bdcf348e8d7830034a362e4058"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-6.png",
+          "sha256": "a69d055fb1f4b38dafc1d0f255268c5f135dba05ae45096c961fa4cee6e1df66"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-7.png",
+          "sha256": "19fa957b89d7b29c963a11b5430432a295fb45bd48a878be0fb2e49fefbdae01"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-8.png",
+          "sha256": "b3a30fcf1772d52381cc863db39922d9bb79a4102309453e133153510be6e96b"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/engine-9.png",
+          "sha256": "ed94e4662b341670a9d1467c2f3a9f927111c161e6382694a309e6706a6e0fb5"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/game-roll-0.png",
+          "sha256": "a638e4730c903af4e954e6fb3af77939d0041462453b69f068fb8f87f7f472be"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/game-roll-1.png",
+          "sha256": "16fe615be4e7dc14c2a1934c6b87c6c8e495629fa180f683167a70562e70abab"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/game-roll-2.png",
+          "sha256": "8934c2fdc0e43247019adc37f9928fc377e791f10f1253043ef9d6efc3309bbc"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/game-roll-3.png",
+          "sha256": "86cc2baf63765feb3e8c513fc6c197ea5221e1d986caecd8c701cc9597ed5946"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/game-roll-4.png",
+          "sha256": "521d61d6f38472a161955628ecfcafa709f8d02ff5f1b24a5b9eebdc5144cc57"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/game-roll-5.png",
+          "sha256": "a9efabcc3a61c1a1c52e8837bf4d806c0dbc0f6471a818ae9c1c8899c9930bbc"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/game-roll-6.png",
+          "sha256": "e9962505252b73a49c30c1be3b1f2b741122d61067679a95813ed638826e95ee"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/game-roll-7.png",
+          "sha256": "616bfa74152c7236588e38bf81c2a0a55e78daa266b11119493a5b6ffff8dcd2"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "dab31ce12e4ff5f4e534b122bc0fa23529d2544b7422501fdb1bcdf44fa6af61"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "6783d558e45a359859442a0e08cf34701598044c88c57de4a2047665054e9af5"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "80a0cec267d825446f0c5b82e559af6ffb06b3f2db4285a079cf469d29661244"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "dab31ce12e4ff5f4e534b122bc0fa23529d2544b7422501fdb1bcdf44fa6af61"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "b3a30fcf1772d52381cc863db39922d9bb79a4102309453e133153510be6e96b"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "0f452c90868172c10e89ba42c3f51ac7a7a6dbee6cb91a3a305660a6cb873cbb"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "f00b5bda8c2fcf56b14650f95002f3bffce3571721e00320e69709ac04e46d7c"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "b3a30fcf1772d52381cc863db39922d9bb79a4102309453e133153510be6e96b"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "dab31ce12e4ff5f4e534b122bc0fa23529d2544b7422501fdb1bcdf44fa6af61"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "a9881a27a9c5db82113b6803da8653463f09c890a424ae42a8d71e723df9f0e7"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "3a26ca810a20f7bf1f7fbd5c6ed619178772de0cf746482040264d4428a276e3"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "dab31ce12e4ff5f4e534b122bc0fa23529d2544b7422501fdb1bcdf44fa6af61"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "b3a30fcf1772d52381cc863db39922d9bb79a4102309453e133153510be6e96b"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "a6972e51adfba07882e197f43534b8c1d11447c6cb7b70571413478133614daf"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "dc22c8c32fc2078a0506c64308588755dffec57c90f703963261881ae0203934"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "b3a30fcf1772d52381cc863db39922d9bb79a4102309453e133153510be6e96b"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/independent-visual.json",
+          "sha256": "e56bfae1665e55ff97c854ba6ee25d5bef99ba8d13c531b5de4c8ebebbbfe059"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/inspection-engine.png",
+          "sha256": "edf564e43c83214d4187ea6556077abc2aeaec323948bf097595305bb88cd183"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/inspection-independent.png",
+          "sha256": "1561b924b0286809f5b8cf9525d9c2d8855f7a454bba8c99697f8cd605fb27c6"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/inspection-phases.png",
+          "sha256": "2066c1f7e8736ef1fd0c21bb5388c94ed49e9baa0a91ba7a5a22d56c1f315a1b"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/inspection-study.png",
+          "sha256": "c7a3555ca4f508ee17b7eb7fe1b72e24589fceb09447c1f0db2655b2ee35d64b"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "4b39279f88d7bb212247aab78dc82b7e2a306e49f8e4ad4523256a5b6d3412ae"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "c9330bbe829611ecf160e3c58b98c0e7557087a9cf3c823078044fb440e66aa4"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "99a2d8ea7bee56a2a1fd4e79be1ac3e1f5f796e6829e2aa772705aa7f302384f"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/inspection-wires.png",
+          "sha256": "7c98e6ae3b7887dc508afd1d13f29ea808ce02888cda070133aeb0967773cc32"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/roll-0.png",
+          "sha256": "cb7651c5e1f4b43ae5124863745f4cefabe8a42cd936021399aa56088208876d"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/roll-1.png",
+          "sha256": "85c5bd6e983c8b4c2a66acb7dc3bc8c6eb8122b6792204d1a4723d56dc792741"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/roll-2.png",
+          "sha256": "b97b844a0723654036b5e829294ac20ecf549e3027f0970e717adf61781dc1dc"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/roll-3.png",
+          "sha256": "7ae4f3afbfe336cfa8d0b540d85c588a5d41605e33f512bb70ba01cfbddd08dd"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/roll-4.png",
+          "sha256": "d4f638b4f5b8405352d3b6a0e621d4b4e7b01f98d6a9e15a0184d905b4189697"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/roll-5.png",
+          "sha256": "4afd7f3088ac30a37346d5f24ecce73dd36e78db15f51b9a1a4a27baf7800777"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/roll-6.png",
+          "sha256": "a24dd4507fc4b543c6cd1a592fdedd1167167671957fa27cd12232171127cba2"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/roll-7.png",
+          "sha256": "4f6c62e717946c076452f96c91862d050c7609ac3be53ff4ba2302668a89abdd"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-0.png",
+          "sha256": "1cdaa5d5d6c8f6aa30a5a003ab6bdcb316a92cec9e9b8e41d2b7c479f8d6ccf3"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-1.png",
+          "sha256": "4e8ef6dd3d4e40c9857415a6f0567e04d6e44c3c22b94cd483e05339416f532c"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-10.png",
+          "sha256": "70e638694bf286953d45e6442d9f2cab7647a9624410fcd76565d5f876659b76"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-11.png",
+          "sha256": "6e27d06651095f8b4fd932ce29a7c483b19862a5484642be374fb5ccb029a42f"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-12.png",
+          "sha256": "0ec22e816426f422319471e817fd3cebf47590909555bcc4071ee5e9bfbdd7d9"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-13.png",
+          "sha256": "e203377a7d443c36619b7b2bf5cc16a96f3c21b48d5f128118c46b927c112511"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-14.png",
+          "sha256": "bab4f42e05fb404751f2155c1d5684b744c8dfc73a8d31a592f284e5579f9ce2"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-15.png",
+          "sha256": "abca2dcb7114955aaede5e6661053ee6801b513918e3e03b3ae7da20513468ce"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-1x.png",
+          "sha256": "c8f7aa7fce30bdcc6ebb16ef946d15e3e8dffd31746f31aa1f9a0d61684d5d3e"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-2.png",
+          "sha256": "cb7651c5e1f4b43ae5124863745f4cefabe8a42cd936021399aa56088208876d"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-2x.png",
+          "sha256": "1efcd904d654601af45298336d868f2965816799d75298432aa22d0bc3ec3786"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-3.png",
+          "sha256": "3e7a64497721038c567740cb6471a6e5c383983ca748a13a35ebe5e8cae62e50"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-3x.png",
+          "sha256": "e93ce1800386b7e57779c556eb3d8dbafb8169f24c567b1b29c38fc7af5dbc92"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-4.png",
+          "sha256": "427a09870c5dec58d15172601f6f754fb44f6797a7bf3f416384dd5b238acb79"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-5.png",
+          "sha256": "6aff4896f23adbc09cef70bd537ac588cf69ef413b2b0daf9ff8e5ce2b0ae105"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-6.png",
+          "sha256": "2248a96ebc9f86bd5fe90221f5bd2b1d3f368488b62cb778f35fc8d604d799a0"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-7.png",
+          "sha256": "54bd51c612892a9ce267ad374970e1de81bbbd7b6969cc49f71ebb7f242a187e"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-8.png",
+          "sha256": "cbf85c086e969627ae779edc2559dedc04595226815296af3434cfd8ccde6826"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/study-9.png",
+          "sha256": "26c2b2737dba09b3bc09126efc918be396c137a4591e238b4c9e2970bffb95c7"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/wire-engine.png",
+          "sha256": "df6494b6ec60a4ce4b4bae46be2d6de58ecdedaa34d0aa1eabd4e6a6078695c8"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/engine/wire-study.png",
+          "sha256": "9c62036590ec813250790d9bb5f4f6fae2e0d36ca6aded68d18178c6d53313c6"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/model.glb",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/model.glb",
+          "sha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/recipe.json",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/recipe.json",
+          "sha256": "dce7a10b509d605d50d4778f70ac55068233ca78c63d5ca4a5b2d3c24d765fe5"
+        },
+        {
+          "source": "demos/vehicle-bake/woody-wagon/v1/report.json",
+          "retained": "demos/original-vehicles/woody-wagon-v1/inputs/report.json",
+          "sha256": "2c6bf615fa1762354f5fc76cc6402677c922fc9dc26fce833bc1bee45f07c746"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

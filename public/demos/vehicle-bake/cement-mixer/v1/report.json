@@ -1,0 +1,1284 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "cement-mixer",
+  "route": "cement-mixer",
+  "revision": "v1",
+  "method": "Original bright cobalt and cream six-wheel concrete mixer. Closed forward cab, genuine tapered 18-segment drum on a slightly rising longitudinal axis, broad cream/cobalt/orange spiral UV bands, small fixed hopper and stowed chute. All equipment static, ordinary six-wheel driving only.",
+  "geometry": {
+    "triangles": 3842,
+    "vertices": 7264,
+    "meshes": 7,
+    "primitives": 7,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 259728,
+    "sha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "ML": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "MR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.450000047683716,
+        -1.0,
+        0.5
+      ],
+      "centerExport": [
+        -42.60869648145594,
+        8.695652173913045,
+        17.39130434782609
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.450000047683716,
+        1.0,
+        0.5
+      ],
+      "centerExport": [
+        -42.60869648145594,
+        8.695652173913045,
+        -17.39130434782609
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "ML",
+      "centerBlender": [
+        1.1200000047683716,
+        -1.0,
+        0.5
+      ],
+      "centerExport": [
+        19.47826095249342,
+        8.695652173913045,
+        17.39130434782609
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "MR",
+      "centerBlender": [
+        1.1200000047683716,
+        1.0,
+        0.5
+      ],
+      "centerExport": [
+        19.47826095249342,
+        8.695652173913045,
+        -17.39130434782609
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        2.450000047683716,
+        -1.0,
+        0.5
+      ],
+      "centerExport": [
+        42.60869648145594,
+        8.695652173913045,
+        17.39130434782609
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        2.450000047683716,
+        1.0,
+        0.5
+      ],
+      "centerExport": [
+        42.60869648145594,
+        8.695652173913045,
+        -17.39130434782609
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/cement-mixer/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/cement-mixer/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/cement-mixer/v1/recipe.json",
+  "render": {
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      128,
+      156
+    ],
+    "engineGroundOrigin": [
+      128,
+      128
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "authorization": "autonomous-153",
+  "toolchain": "multi-axle-v2",
+  "wheelIds": [
+    "FL",
+    "FR",
+    "ML",
+    "MR",
+    "RL",
+    "RR"
+  ],
+  "triangles": 3842,
+  "vertexCount": 7264,
+  "meshCount": 7,
+  "primitiveCount": 7,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 259728,
+  "atlasBytes": 3730,
+  "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+  "atlasSha256": "848fe02f0b4cc179850573655fdf9ade3752c95b048fda8d3a28e8b973291205",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "cement-mixer--v1",
+    "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "triangles": 3842,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601529194956875,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601529194956875,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601551967932149,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601553630913013,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601536045670986,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601523432590113,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "collidingBodyRejected": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/cement-mixer/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/cement-mixer/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "meets-declared-finite-region",
+    "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "allSixCrownsCovered": true,
+    "allWheelCoverage": "natural front fenders and rear lower middle/last wheelhouse body over declared central crown region",
+    "wheels": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": true,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "maximumRayDistanceR": 1.25,
+    "upperDrumCannotQualify": true,
+    "regionMeaning": "Finite central tread footprint from each of six own .50source radius and .36source width wheels. Ray limited to1.25R above sampled tread, excluding raised drum. Actual natural front fenders and continuous lower middle/last wheelhouse body cover the crowns, no separate caps.",
+    "portableRawEvidence": "art-source/vehicle-bake/cement-mixer/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "c0e72a2be904468c83a835e11a3aabe82e06fec3aeb4037d7a4d75de0afaa551",
+    "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "minBlenderWorld": [
+      -59.13043212890625,
+      -21.7391300201416,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      59.13043212890625,
+      21.7391300201416,
+      51.623451232910156
+    ],
+    "dimensionsBlenderWorld": [
+      118.2608642578125,
+      43.4782600402832,
+      51.62345027923584
+    ],
+    "dimensionsSourceUnits": [
+      6.799999694824217,
+      2.499999952316284,
+      2.96834839105606
+    ],
+    "centeredHorizontalExtentWorld": [
+      118.2608642578125,
+      43.4782600402832
+    ],
+    "centeredHorizontalExtentSource": [
+      6.799999694824217,
+      2.499999952316284
+    ],
+    "centeredCeilWorldFootprint": [
+      119,
+      44
+    ],
+    "includesActualStaticDrumHopperChuteSixWheels": true,
+    "rootUnchangedNoRecenterOrFitScale": true,
+    "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+  },
+  "drumGeometryUVStripeEvidence": {
+    "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "status": "passed",
+    "ringCount": 9,
+    "segmentsPerRing": 18,
+    "actualDrumTriangles": 320,
+    "actualSideTriangles": 288,
+    "axisSource": [
+      0.9984909296035767,
+      0.0,
+      0.054917000234127045
+    ],
+    "axisTiltDegrees": 3.148096099562759,
+    "ringMeasurements": [
+      {
+        "distanceAlongAxis": 0,
+        "radiusMeasuredMin": 0.29999994040408046,
+        "radiusMeasuredMax": 0.30000006736953916,
+        "uniqueAngularVertices": 18
+      },
+      {
+        "distanceAlongAxis": 0.24,
+        "radiusMeasuredMin": 0.549999850768237,
+        "radiusMeasuredMax": 0.5500000995795407,
+        "uniqueAngularVertices": 18
+      },
+      {
+        "distanceAlongAxis": 0.62,
+        "radiusMeasuredMin": 0.8299999204428312,
+        "radiusMeasuredMax": 0.8300000957671094,
+        "uniqueAngularVertices": 18
+      },
+      {
+        "distanceAlongAxis": 1.05,
+        "radiusMeasuredMin": 0.8999998452633279,
+        "radiusMeasuredMax": 0.9000001826737305,
+        "uniqueAngularVertices": 18
+      },
+      {
+        "distanceAlongAxis": 1.7,
+        "radiusMeasuredMin": 0.8999998767601449,
+        "radiusMeasuredMax": 0.900000119680117,
+        "uniqueAngularVertices": 18
+      },
+      {
+        "distanceAlongAxis": 2.22,
+        "radiusMeasuredMin": 0.7999999806546837,
+        "radiusMeasuredMax": 0.8000001496387855,
+        "uniqueAngularVertices": 18
+      },
+      {
+        "distanceAlongAxis": 2.7,
+        "radiusMeasuredMin": 0.6099998663434398,
+        "radiusMeasuredMax": 0.6100001235306519,
+        "uniqueAngularVertices": 18
+      },
+      {
+        "distanceAlongAxis": 3.12,
+        "radiusMeasuredMin": 0.37999991317333787,
+        "radiusMeasuredMax": 0.3800001887980637,
+        "uniqueAngularVertices": 18
+      },
+      {
+        "distanceAlongAxis": 3.3,
+        "radiusMeasuredMin": 0.27999992856301753,
+        "radiusMeasuredMax": 0.28000011059187296,
+        "uniqueAngularVertices": 18
+      }
+    ],
+    "maximumPositionErrorSource": 1.1920928955078125e-07,
+    "uvVertexChecks": 864,
+    "triangleBarycentricSamples": 1152,
+    "sampledPaletteRoles": {
+      "floorLight": 218,
+      "ink": 66,
+      "cream": 482,
+      "paint": 386
+    },
+    "representativeSurfaceSamples": {
+      "floorLight": {
+        "actualTriangle": 722,
+        "sourcePosition": [
+          -0.4236849546432495,
+          0.45561033487319946,
+          2.0613958835601807
+        ],
+        "barycentricWeights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "uv": [
+          0.04936671257019043,
+          0.493272602558136
+        ],
+        "atlasPixel": [
+          25,
+          259
+        ],
+        "rgb": [
+          246,
+          156,
+          77
+        ]
+      },
+      "ink": {
+        "actualTriangle": 722,
+        "sourcePosition": [
+          -0.48621097207069397,
+          0.3933662176132202,
+          2.032837390899658
+        ],
+        "barycentricWeights": [
+          0.6,
+          0.2,
+          0.2
+        ],
+        "uv": [
+          0.030010653659701347,
+          0.495572954416275
+        ],
+        "atlasPixel": [
+          15,
+          258
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ]
+      },
+      "cream": {
+        "actualTriangle": 723,
+        "sourcePosition": [
+          -0.5089725255966187,
+          0.3428506851196289,
+          2.15533447265625
+        ],
+        "barycentricWeights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "uv": [
+          0.025171639397740364,
+          0.4760199785232544
+        ],
+        "atlasPixel": [
+          12,
+          268
+        ],
+        "rgb": [
+          248,
+          232,
+          192
+        ]
+      },
+      "paint": {
+        "actualTriangle": 730,
+        "sourcePosition": [
+          -0.5054425001144409,
+          -0.3662462830543518,
+          2.0911529064178467
+        ],
+        "barycentricWeights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "uv": [
+          0.025171639397740364,
+          0.3552517294883728
+        ],
+        "atlasPixel": [
+          12,
+          330
+        ],
+        "rgb": [
+          47,
+          105,
+          218
+        ]
+      }
+    },
+    "longitudinalAngularUVsMatchGeometry": true,
+    "viewIndependentSurfacePaint": true,
+    "angularWrapSeamIsExplicit": true,
+    "flattenedDrumNegativeRejected": true,
+    "collapsedUvStripeNegativeRejected": true,
+    "candidateUnchanged": true,
+    "staticRestPoseOnly": true
+  },
+  "inventoryEvidence": {
+    "status": "passed",
+    "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "toolchain": "multi-axle-v2",
+    "wheelIds": [
+      "FL",
+      "FR",
+      "ML",
+      "MR",
+      "RL",
+      "RR"
+    ],
+    "actualAudit": {
+      "triangles": 3842,
+      "vertices": 7264,
+      "meshes": 7,
+      "primitives": 7,
+      "materials": 1,
+      "textures": 1,
+      "glbBytes": 259728,
+      "sha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+      "wheels": {
+        "FL": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "FR": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "ML": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "MR": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "RL": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "RR": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        }
+      }
+    },
+    "wrongInventoryControls": [
+      {
+        "case": "omitted-middle-pair",
+        "declaredWheelIds": [
+          "FL",
+          "FR",
+          "RL",
+          "RR"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "omitted-MR",
+        "declaredWheelIds": [
+          "FL",
+          "FR",
+          "ML",
+          "RL",
+          "RR"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "duplicate-ML",
+        "declaredWheelIds": [
+          "FL",
+          "FR",
+          "ML",
+          "MR",
+          "RL",
+          "RR",
+          "ML"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "unexpected-extra-XL",
+        "declaredWheelIds": [
+          "FL",
+          "FR",
+          "ML",
+          "MR",
+          "RL",
+          "RR",
+          "XL"
+        ],
+        "rejected": true
+      }
+    ],
+    "inputBytesUnchanged": true,
+    "catalogV2Sha256": "e4e43dfa0c98f2e3118cd23ebe6b9e8d69a2ff916db9e0eba09851745e32a3c6",
+    "underlyingCatalogSha256": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+  },
+  "parentFrozenVerification": {
+    "status": "parent-owned; not run while review/catalog hold remains",
+    "tool": "scripts/vehicle-bake/family-verify-v2.py",
+    "sha256": "2a27d067e8aa99adcc4f1b9065a5989b6ef8b1622190e6bf41cc473be01de24d",
+    "dependencies": [
+      "scripts/vehicle-bake/family-package-v2.py",
+      "scripts/vehicle-bake/family-package.py",
+      "scripts/vehicle-bake/catalog-v2.py",
+      "scripts/vehicle-bake/catalog.py"
+    ],
+    "commandAfterParentFreezes": "python scripts/vehicle-bake/family-verify-v2.py PARENT_FROZEN_CONFIG"
+  },
+  "fixedStaticEquipmentEvidence": {
+    "components": [
+      "STATIC cream drum bearing pedestal -1 -0.24",
+      "STATIC broad drum cradle brace -1 -0.24",
+      "STATIC cream drum bearing pedestal -1 2.24",
+      "STATIC broad drum cradle brace -1 2.24",
+      "STATIC cream drum bearing pedestal 1 -0.24",
+      "STATIC broad drum cradle brace 1 -0.24",
+      "STATIC cream drum bearing pedestal 1 2.24",
+      "STATIC broad drum cradle brace 1 2.24",
+      "STATIC axle attachment arm -2.45",
+      "STATIC axle attachment arm 1.12",
+      "STATIC axle attachment arm 2.45",
+      "STATIC tapered round drum longitudinal angular spiral UV skin",
+      "STATIC rear hopper actual inner floor",
+      "STATIC cream hopper side inner outer wall -1",
+      "STATIC cream hopper side inner outer wall 1",
+      "STATIC hopper end wall 2.65",
+      "STATIC hopper end wall 3.2",
+      "STATIC short stowed gray chute trough floor lips",
+      "STATIC chute support"
+    ],
+    "drum": "STATIC tapered round drum longitudinal angular spiral UV skin",
+    "hopper": [
+      "STATIC rear hopper actual inner floor",
+      "STATIC cream hopper side inner outer wall -1",
+      "STATIC cream hopper side inner outer wall 1",
+      "STATIC hopper end wall 2.65",
+      "STATIC hopper end wall 3.2"
+    ],
+    "chute": [
+      "STATIC short stowed gray chute trough floor lips",
+      "STATIC chute support"
+    ],
+    "noMotionMetadata": true,
+    "staticRestPoseOnly": true,
+    "noMixingHingeOrConcreteGameplayClaim": true
+  },
+  "frameFit": {
+    "status": "passed",
+    "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "actualCapture": "engine/capture.json",
+    "nativeViewport": [
+      256,
+      256
+    ],
+    "nativeRadius": 128,
+    "source80ReferenceUnchanged": true,
+    "familyExtraPadding": 32,
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "engineOrigin": [
+      128,
+      128
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -32,
+      16
+    ],
+    "scale": 1,
+    "views": [
+      {
+        "yaw": 0,
+        "actual256OccupiedBounds": {
+          "minX": 69,
+          "minY": 66,
+          "maxX": 186,
+          "maxY": 146
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 37,
+          "maxX": 154,
+          "minY": 82,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 22.5,
+        "actual256OccupiedBounds": {
+          "minX": 66,
+          "minY": 55,
+          "maxX": 189,
+          "maxY": 162
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 34,
+          "maxX": 157,
+          "minY": 71,
+          "maxY": 178
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 45,
+        "actual256OccupiedBounds": {
+          "minX": 72,
+          "minY": 38,
+          "maxX": 183,
+          "maxY": 174
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 40,
+          "maxX": 151,
+          "minY": 54,
+          "maxY": 190
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 67.5,
+        "actual256OccupiedBounds": {
+          "minX": 86,
+          "minY": 29,
+          "maxX": 169,
+          "maxY": 180
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 54,
+          "maxX": 137,
+          "minY": 45,
+          "maxY": 196
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 90,
+        "actual256OccupiedBounds": {
+          "minX": 106,
+          "minY": 27,
+          "maxX": 149,
+          "maxY": 177
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 74,
+          "maxX": 117,
+          "minY": 43,
+          "maxY": 193
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 112.5,
+        "actual256OccupiedBounds": {
+          "minX": 86,
+          "minY": 29,
+          "maxX": 169,
+          "maxY": 180
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 54,
+          "maxX": 137,
+          "minY": 45,
+          "maxY": 196
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 135,
+        "actual256OccupiedBounds": {
+          "minX": 72,
+          "minY": 38,
+          "maxX": 183,
+          "maxY": 174
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 40,
+          "maxX": 151,
+          "minY": 54,
+          "maxY": 190
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 157.5,
+        "actual256OccupiedBounds": {
+          "minX": 66,
+          "minY": 55,
+          "maxX": 189,
+          "maxY": 162
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 34,
+          "maxX": 157,
+          "minY": 71,
+          "maxY": 178
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 180,
+        "actual256OccupiedBounds": {
+          "minX": 69,
+          "minY": 66,
+          "maxX": 186,
+          "maxY": 146
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 37,
+          "maxX": 154,
+          "minY": 82,
+          "maxY": 162
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 202.5,
+        "actual256OccupiedBounds": {
+          "minX": 66,
+          "minY": 51,
+          "maxX": 189,
+          "maxY": 162
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 34,
+          "maxX": 157,
+          "minY": 67,
+          "maxY": 178
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 225,
+        "actual256OccupiedBounds": {
+          "minX": 72,
+          "minY": 40,
+          "maxX": 183,
+          "maxY": 174
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 40,
+          "maxX": 151,
+          "minY": 56,
+          "maxY": 190
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 247.5,
+        "actual256OccupiedBounds": {
+          "minX": 86,
+          "minY": 35,
+          "maxX": 169,
+          "maxY": 180
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 54,
+          "maxX": 137,
+          "minY": 51,
+          "maxY": 196
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 270,
+        "actual256OccupiedBounds": {
+          "minX": 106,
+          "minY": 37,
+          "maxX": 149,
+          "maxY": 177
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 74,
+          "maxX": 117,
+          "minY": 53,
+          "maxY": 193
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 292.5,
+        "actual256OccupiedBounds": {
+          "minX": 86,
+          "minY": 35,
+          "maxX": 169,
+          "maxY": 180
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 54,
+          "maxX": 137,
+          "minY": 51,
+          "maxY": 196
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 315,
+        "actual256OccupiedBounds": {
+          "minX": 72,
+          "minY": 40,
+          "maxX": 183,
+          "maxY": 174
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 40,
+          "maxX": 151,
+          "minY": 56,
+          "maxY": 190
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 337.5,
+        "actual256OccupiedBounds": {
+          "minX": 66,
+          "minY": 51,
+          "maxX": 189,
+          "maxY": 162
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 34,
+          "maxX": 157,
+          "minY": 67,
+          "maxY": 178
+        },
+        "fitsWithoutScaling": true
+      }
+    ],
+    "cardinalExactPixelProof": [
+      {
+        "yaw": 0.0,
+        "image": "engine/fallback-cardinal-0.png",
+        "sha256": "6c7e3117470ada4073de7c9695c18f0aeed10e0c38b509954e9f1610a163bb49",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 7677,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -32,
+          16
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 90.0,
+        "image": "engine/fallback-cardinal-1.png",
+        "sha256": "d087a2cebedc931d6220c74e9cc38db15fb98a8d2bb7ad16917d1382fc70f0fb",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 5880,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -32,
+          16
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 180.0,
+        "image": "engine/fallback-cardinal-2.png",
+        "sha256": "0e3d404654cbfc7b37f642c6c2cf21cfa1ebb4bf4b19719bc9f8e57acd21ccb1",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 7677,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -32,
+          16
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 270.0,
+        "image": "engine/fallback-cardinal-3.png",
+        "sha256": "837e49933b87ddce13f532fbe6eb8f903e154d3ade325c3982f1601b7d1ba4aa",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 5950,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -32,
+          16
+        ],
+        "scale": 1
+      }
+    ],
+    "standardCardinalPlacementPixelExact": true,
+    "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+  },
+  "attachmentEvidence": {
+    "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 14.260870933532715,
+        "actualStaticArmEndAbsY": 14.0,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 14.260870933532715,
+        "actualStaticArmEndAbsY": 14.0,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "ML",
+        "actualTireSlabInnerAbsY": 14.260870933532715,
+        "actualStaticArmEndAbsY": 14.0,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "MR",
+        "actualTireSlabInnerAbsY": 14.260870933532715,
+        "actualStaticArmEndAbsY": 14.0,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RL",
+        "actualTireSlabInnerAbsY": 14.260870933532715,
+        "actualStaticArmEndAbsY": 14.0,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RR",
+        "actualTireSlabInnerAbsY": 14.260870933532715,
+        "actualStaticArmEndAbsY": 14.0,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "wheelVisualEvidence": "engine/wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/cement-mixer/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/cement-mixer/capture.mjs",
+    "node scripts/vehicle-bake/cement-mixer/independent-visual.mjs",
+    "node scripts/vehicle-bake/cement-mixer/wheel-visual.mjs",
+    "python scripts/vehicle-bake/cement-mixer/sheets.py",
+    "python scripts/vehicle-bake/cement-mixer/audit-inventory.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/cement-mixer/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance-v2.py -- art-source/vehicle-bake/cement-mixer/v1/evidence/clearance-input.json data/vehicle-bake/cement-mixer/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/cement-mixer/v1/model.glb --config art-source/vehicle-bake/cement-mixer/v1/coverage-region.json --output data/vehicle-bake/cement-mixer/recheck-coverage.json",
+    "python scripts/vehicle-bake/cement-mixer/assess-coverage.py --input data/vehicle-bake/cement-mixer/recheck-coverage.json",
+    "python scripts/vehicle-bake/cement-mixer/assess-fit.py",
+    "python scripts/vehicle-bake/family-package-v2.py data/vehicle-bake/cement-mixer/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture-v2.mjs data/vehicle-bake/cement-mixer/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "All16study+16game headings: cobalt forward closed cab, cream roof, framed blue glass, round tapered spiral drum, short rear hopper/chute and six wheels recognizable.",
+    "Near arches open; far tire crowns hidden beneath actual integrated front/rear wheelhouse body in both cameras. No cap geometry or wheel perched on cab/roof.",
+    "All eight signed distance phases per camera and16 equal-angle views inspected; static drum/hopper/chute/body stay fixed, no equipment animation claimed.",
+    "Six independent forward/reverse/reset sets inspected, includingML/MR. Asymmetric hub mark moves subtly at native; pixel changes and absolute reset confirmed by independent checks.",
+    "Both actual wireframes show cab wheel pockets and round ring topology on drum; no flat roof masquerading as mixer.",
+    "32 six-color wheel-ID diagnostics inspected: correct front/middle/rear tire positions and far-crown occlusion; colors are temporary diagnostics only.",
+    "Native256/radius128 and strict128/native centered game crops pass at unchanged source80 density. Exact192x224 cardinal placement uses translation(-32,+16), no resized pixels.",
+    "Desktop/mobile/offline screenshots inspected; native card256px, mobile controls fit and offline uses exact embedded GLB without network.",
+    "Broad cream/cobalt/orange spiral follows actual cylindrical UV chart through all views; angular wrap seam has explicit cream padding. Minor stripe/grille/hub edge aliasing is retained, no blocking visual issue."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "allWheelRadiusesMatchOwnGeometry": true,
+    "actualRoundTapered18Segment9RingStaticDrum": true,
+    "actualSourceAndGLBDrumUVAndTriangleSurfaceStripeSamples": true,
+    "actualSixWheelV2Inventory": true,
+    "wrongInventoryControlsRejected": true,
+    "sixPerWheelCollisionNegativeControls": true,
+    "exactStandard192x224CardinalPixels": true,
+    "actualCenteredBoundsIncludeAllSixWheelsAndEquipment": true,
+    "native256PaddingAndFallback192x224FitWithoutScaling": true,
+    "allSixEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allSixNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crownCoverage": "natural front coachwork and rear lower middle/last axle wheelhouse body;25/25 each declared central footprint",
+    "upperDrumOutsideCoverageRayRange": true,
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "allSixCrownsCovered": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Crown coverage qualifies declared finite central tread region only; ray limit1.25R excludes raised drum. Synthetic fixtures qualify bookkeeping, actual body-removal zeroes all samples. Camera headings inspected separately.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Round tapered drum, hopper and chute are rigid static rest pose only. Minor grille/hub/stripe edge aliasing varies with heading; native far-crown views inspected separately from finite geometry rays.",
+    "Drum, hopper, bearing supports and chute are static Body_static geometry only. No mixing, hinged equipment, concrete gameplay, steering or suspension qualification.",
+    "Actual six-wheel/drum/equipment extents retained at unchanged root/scale. Span and centered2*maxAbs extents measured, standard192x224 cardinal pixel placement exact; parent owns actual runtime export/footprint QA.",
+    "Multi-axle-v2 frozen-review verifier is pinned for parent-owned later review/freeze; not claimed run during review/catalog hold.",
+    "Actual occupied pixels fit256 and standard192x224 fallback placement without scaling; parent owns independent runtime export/QA.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/cement-mixer/v1/assess-coverage.py": "90097e55b928da2fd189eb5b20a7587625c5b9ebc7ffd28156ce4274e4387ce3",
+    "art-source/vehicle-bake/cement-mixer/v1/assess-fit.py": "080e5c343c3e16a029cb778adf7f9d7334b623a152c4beb5649e5db92752dba9",
+    "art-source/vehicle-bake/cement-mixer/v1/atlas.png": "848fe02f0b4cc179850573655fdf9ade3752c95b048fda8d3a28e8b973291205",
+    "art-source/vehicle-bake/cement-mixer/v1/audit-inventory.py": "45e24eac52d929f9cb4a5f0a47adc59540f34067d69e173c9577a8ef48b2eb19",
+    "art-source/vehicle-bake/cement-mixer/v1/audit-source.py": "ab89b10f41292aa148e897065f125e3620d144b6f858e1d4c0d3fa259de97619",
+    "art-source/vehicle-bake/cement-mixer/v1/build.py": "25156ff7e61e1564705f28326da2fe0b54e9173b51f3cccacd69925900462bdf",
+    "art-source/vehicle-bake/cement-mixer/v1/capture.mjs": "143199e180060a764bdf4300f35ca0a1601ec0cdd48d1070c3f7e7b65cfe9777",
+    "art-source/vehicle-bake/cement-mixer/v1/car.blend": "c6d3d31629f76ce54535c20e6684b13d7aba02b0069fc02e87696d293ddd36fe",
+    "art-source/vehicle-bake/cement-mixer/v1/coverage-region.json": "d6cfef25d4b43211c3aa429c0a3e2593eafee898d5cb0e375984d3bd632c5501",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/author-browser-qa.json": "f25c94495d374ad3430ffc483cf038176037dbdc13eeb1fd6ba563d980de2f6c",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/author-visual-inspection.json": "5616a7a0e4aa72ffa79e8889c44cfee79a4cffdf5a07c47fc4c3ba5e28e077a6",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/clearance-input.json": "07b38028282f1eb1da3375ced58abcff1e0916ff0a7b7bb450a74b4c8ea917b1",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/engine-capture.json": "008be35cc5458362ee6efa6ec0c45a29bd8bfc66a0c29c085aca119f1bc8142a",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/fit-assessment.json": "14c222a95d179a8ea704278eb8dbe7787417b8fd8f6675478148d67f9893f42e",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/independent-visual.json": "161a536ff414d7719bda7f9c33b94c00d8aa646661861a9655b95408247b0b73",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/inventory-controls.json": "8b05f387c251101c38a1617dd77974389f7ec8914f9a89ea944d40a994e94e54",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/packed-source-audit.json": "fac62a033e6fca97cac218ee3339a69d26138072692c468ca839ecdf7c2ca353",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/replay-verification.json": "2b104df4475bbd0ae9480a91b97b1696173d8b1ac89c9a9678e8ae7451fb827c",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/shared-clearance.json": "90d94bc9c152aa45b054764a611a5c84a98c1abd57e6b51bfb9083ed12470ec5",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/upper-wheel-coverage-raw.json": "c0e72a2be904468c83a835e11a3aabe82e06fec3aeb4037d7a4d75de0afaa551",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/wheel-coverage-assessment.json": "51eeeef370a7955788515d30af1bcb2ac5dd5187b2ed22e52614ecfac51c929a",
+    "art-source/vehicle-bake/cement-mixer/v1/evidence/wheel-visual.json": "2c6e5cc268fc581c97dae3f5255fe0dda0d4c8b7e0cc612ef8bb7f1508ca4eaf",
+    "art-source/vehicle-bake/cement-mixer/v1/family.json": "321ed43f0e9823fbdded580aec9e6fa08caa218196e6c089a07a0c15188f27f2",
+    "art-source/vehicle-bake/cement-mixer/v1/finalize.py": "bdaeb459cae036685192a0a6171c93e3156e6143af557d2607c8cc11947cd1ed",
+    "art-source/vehicle-bake/cement-mixer/v1/geometry.py": "2141cf86ff0f5c704ba192f5b96f0db25d0893aec44afb63e34ffce9bb5198d3",
+    "art-source/vehicle-bake/cement-mixer/v1/independent-visual.mjs": "08f908ccbe8139832afeff5fbfc80714fcb23bf620e0f94ce965a0921171ce73",
+    "art-source/vehicle-bake/cement-mixer/v1/master.blend": "592db1dad78c774411e565f0a2c3e2ba6ab49ad979f5bff90ceb271b65099890",
+    "art-source/vehicle-bake/cement-mixer/v1/model.glb": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+    "art-source/vehicle-bake/cement-mixer/v1/paint-ownership.json": "f74aa62101ceba7153e31bf671efcc8488f1c9e63f016c4d3010110f40520f6e",
+    "art-source/vehicle-bake/cement-mixer/v1/palette-draft.png": "f7ee01caf0bdd9a5860f5f4c1febabce80a25a790de4f57a9da3425765fcdb97",
+    "art-source/vehicle-bake/cement-mixer/v1/recipe.json": "671d4bfd654e79283c3380dc64d231c019f9b2944c1c9249fc73d401a7c60702",
+    "art-source/vehicle-bake/cement-mixer/v1/review.json": "de5b1d8234338a2af73edf40f871e3e9a785ce41da30721c5a446eb56740f2f0",
+    "art-source/vehicle-bake/cement-mixer/v1/sheets.py": "1480487b21f00a015536a2ceec50bd272714b3fe5dc074b514d3ee5065d5d72e",
+    "art-source/vehicle-bake/cement-mixer/v1/wheel-visual.mjs": "0934c9b9342e8927119838bef49eeb90bca455f8b21d65bedbdf995cbd641c11"
+  }
+}

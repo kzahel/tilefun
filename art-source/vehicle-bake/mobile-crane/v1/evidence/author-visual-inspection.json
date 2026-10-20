@@ -1,0 +1,25 @@
+{
+  "status": "no-blocking-issues",
+  "reviewer": "run153 assigned author; agent QA only, not parent independent QA or formal human approval",
+  "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+  "inspected": {
+    "nativeHeadings": {"study": 16, "engine": 16},
+    "signedRollPhases": {"study": 8, "engine": 8},
+    "wireframes": ["study", "engine"],
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "wheelIds": ["FL", "FR", "ML", "MR", "RL", "RR"],
+    "presentation": "Actual native PNGs and integer nearest2x contact sheets; same world density, cameras and vehicle origin"
+  },
+  "observations": [
+    "The long low orange carrier, front blue-glass driver cab and smaller offset glazed operator pod read as a mobile crane with its equipment stowed. The three broad yellow boom sections create a restrained stepped longitudinal silhouette rather than a tall raised crane.",
+    "Actual fixed gray tip shoe, short dark cable and small gray J hook sit near the front stowed tip. Their physical surfaces and separate paint ownership are verified by actual triangle rays; their small profile naturally becomes thin or occluded in end-on headings.",
+    "Four short retracted yellow caps with dark outer end faces remain tucked into the carrier sides. No extended stabilizer arms or ground feet are presented; actual four-cap positions and fixed width are verified independently.",
+    "Driver and operator glass/frames belong to separate actual body-skin charts. The visible carrier-front skin owns the silver grille; there are no transparent glazing sheets, PBR materials, glass overlay intersections, text or logos.",
+    "All three near-side axles remain grounded with silver hubs beneath integrated orange arches. Far crowns remain under real hull/fender surfaces in both camera families; no floating cap-only cover or exposed crown spill was observed.",
+    "All6 independent quarter/reverse/pivot/absolute-reset controls pass while cab, hull, pod, boom, hook, cable and four caps remain fixed. Signed phases and both actual wireframes were inspected. No working equipment motion node is present.",
+    "All32 native256/radius128 views have zero border pixels. Centered128 game crop parity is exact at all16 headings. All4 cardinals fit standard192x224 origin96,144 by integer translation(-32,+16), preserving every occupiedRGBA pixel.",
+    "Broad orange/yellow paint clusters remain readable at native density. Thin cab frames, stepped boom edges and small cable/hook retain ordinary native-pixel aliasing. Equipment stow proofs qualify this single fixed pose only; no lift/telescope/cable/outrigger animation or gameplay is claimed."
+  ],
+  "decision": "Complete stable author handoff ready for parent independent capture/replay/inspection; no freeze, root registration or runtime activation"
+}

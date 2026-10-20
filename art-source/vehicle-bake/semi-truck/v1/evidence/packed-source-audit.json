@@ -1,0 +1,441 @@
+{
+  "status": "passed",
+  "results": {
+    "explicitSixWheelInventory": {
+      "status": "passed",
+      "wheelIds": [
+        "FL",
+        "FR",
+        "ML",
+        "MR",
+        "RL",
+        "RR"
+      ],
+      "negativeDeclarationsRejected": [
+        "four-corner-only",
+        "missing-middle-left",
+        "duplicate-wheel",
+        "unexpected-wheel"
+      ]
+    },
+    "master.blend": {
+      "sha256": "0b5a00db81cf595d24b437f040bc2ddb936d9dd65e7dbea838fab69edc0718af",
+      "meshObjects": 65,
+      "triangles": 3748,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "e24807fd7914e46e4b2161abbc6e977fd99c5ef7e4bc445120c88d0ca4ac2c7d",
+      "meshObjects": 7,
+      "triangles": 3748,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+      "minBlenderWorld": [
+        -79.91304016113281,
+        -21.95652198791504,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        80.34782409667969,
+        21.95652198791504,
+        52.69565200805664
+      ],
+      "dimensionsBlenderWorld": [
+        160.2608642578125,
+        43.91304397583008,
+        52.695651054382324
+      ],
+      "dimensionsSourceUnits": [
+        9.214999694824217,
+        2.525000028610229,
+        3.029999935626983
+      ]
+    },
+    "actualGLBSemanticSurfaces": {
+      "status": "passed",
+      "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+      "rayCount": 14,
+      "samples": [
+        {
+          "id": "tractor-left-glass",
+          "hitSource": [
+            -2.9000003337860107,
+            -1.0908477306365967,
+            2.049999952316284
+          ],
+          "triangle": 1210,
+          "interpolatedUV": [
+            0.5873013734817505,
+            0.8324074149131775
+          ],
+          "atlasPixel": [
+            300,
+            85
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "tractor-right-glass",
+          "hitSource": [
+            -2.9000003337860107,
+            1.0908477306365967,
+            2.049999952316284
+          ],
+          "triangle": 71,
+          "interpolatedUV": [
+            0.5873013734817505,
+            0.8324073553085327
+          ],
+          "atlasPixel": [
+            300,
+            85
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "tractor-windshield",
+          "hitSource": [
+            -3.948004722595215,
+            0.0,
+            2.000000238418579
+          ],
+          "triangle": 1170,
+          "interpolatedUV": [
+            0.5,
+            0.4918981194496155
+          ],
+          "atlasPixel": [
+            256,
+            260
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "silver-front-grille",
+          "hitSource": [
+            -4.429999828338623,
+            0.6299999952316284,
+            0.9499999284744263
+          ],
+          "triangle": 1257,
+          "interpolatedUV": [
+            0.36666667461395264,
+            0.7089120149612427
+          ],
+          "atlasPixel": [
+            187,
+            149
+          ],
+          "rgb": [
+            212,
+            212,
+            230
+          ],
+          "roles": [
+            "silver"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "purple-cab-roof",
+          "hitSource": [
+            -2.500000238418579,
+            0.0,
+            2.728749990463257
+          ],
+          "triangle": 67,
+          "interpolatedUV": [
+            0.7142855525016785,
+            0.078125
+          ],
+          "atlasPixel": [
+            365,
+            472
+          ],
+          "rgb": [
+            185,
+            139,
+            210
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "trailer-teal-left",
+          "hitSource": [
+            2.000000238418579,
+            -1.2500001192092896,
+            1.7500001192092896
+          ],
+          "triangle": 140,
+          "interpolatedUV": [
+            0.5378151535987854,
+            0.38218748569488525
+          ],
+          "atlasPixel": [
+            275,
+            316
+          ],
+          "rgb": [
+            50,
+            146,
+            147
+          ],
+          "roles": [
+            "teal"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "trailer-teal-right",
+          "hitSource": [
+            2.000000238418579,
+            1.2499998807907104,
+            1.7500001192092896
+          ],
+          "triangle": 142,
+          "interpolatedUV": [
+            0.5378152132034302,
+            0.38218745589256287
+          ],
+          "atlasPixel": [
+            275,
+            316
+          ],
+          "rgb": [
+            50,
+            146,
+            147
+          ],
+          "roles": [
+            "teal"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "trailer-cream-skin",
+          "hitSource": [
+            2.000000238418579,
+            1.2499998807907104,
+            2.500000238418579
+          ],
+          "triangle": 1347,
+          "interpolatedUV": [
+            0.5378152132034302,
+            0.31187498569488525
+          ],
+          "atlasPixel": [
+            275,
+            352
+          ],
+          "rgb": [
+            245,
+            235,
+            203
+          ],
+          "roles": [
+            "box"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "cream-trailer-roof",
+          "hitSource": [
+            2.000000238418579,
+            0.0,
+            3.0299999713897705
+          ],
+          "triangle": 141,
+          "interpolatedUV": [
+            0.5378152132034302,
+            0.109375
+          ],
+          "atlasPixel": [
+            275,
+            456
+          ],
+          "rgb": [
+            255,
+            248,
+            225
+          ],
+          "roles": [
+            "boxRoof"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "trailer-rear-door-seam",
+          "hitSource": [
+            4.550000190734863,
+            0.0,
+            2.3000001907348633
+          ],
+          "triangle": 1348,
+          "interpolatedUV": [
+            0.75,
+            0.1787499636411667
+          ],
+          "atlasPixel": [
+            384,
+            420
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "real-fifth-wheel-plate",
+          "hitSource": [
+            -1.3000000715255737,
+            0.0,
+            1.190000057220459
+          ],
+          "triangle": 1521,
+          "interpolatedUV": [
+            0.34375,
+            0.01562499813735485
+          ],
+          "atlasPixel": [
+            176,
+            504
+          ],
+          "rgb": [
+            124,
+            135,
+            145
+          ],
+          "roles": [
+            "deckEdge"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "real-frame-bridge",
+          "hitSource": [
+            -1.3000000715255737,
+            -0.5600000023841858,
+            0.6800000071525574
+          ],
+          "triangle": 1361,
+          "interpolatedUV": [
+            0.4662834405899048,
+            0.014391734264791012
+          ],
+          "atlasPixel": [
+            238,
+            504
+          ],
+          "rgb": [
+            63,
+            69,
+            79
+          ],
+          "roles": [
+            "frame"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "restrained-fixed-stack",
+          "hitSource": [
+            -1.9600002765655518,
+            -1.2002776861190796,
+            2.500000238418579
+          ],
+          "triangle": 1558,
+          "interpolatedUV": [
+            0.9045315980911255,
+            0.05015839263796806
+          ],
+          "atlasPixel": [
+            463,
+            486
+          ],
+          "rgb": [
+            212,
+            212,
+            230
+          ],
+          "roles": [
+            "silver"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "middle-guard-underside",
+          "hitSource": [
+            -0.7500000596046448,
+            -1.0900001525878906,
+            1.156363606452942
+          ],
+          "triangle": 707,
+          "interpolatedUV": [
+            0.22833803296089172,
+            0.01669035106897354
+          ],
+          "atlasPixel": [
+            116,
+            503
+          ],
+          "rgb": [
+            163,
+            168,
+            176
+          ],
+          "roles": [
+            "deck"
+          ],
+          "owner": "Body_static"
+        }
+      ],
+      "regionConfig": "scripts/vehicle-bake/semi-truck/surface-regions.json",
+      "meaning": "Actual distinct cab/trailer glass/paint/roof/stripe/end seam and real coupling/frame/stack/guard triangle UV ownership",
+      "inputBytesUnchanged": true
+    }
+  }
+}

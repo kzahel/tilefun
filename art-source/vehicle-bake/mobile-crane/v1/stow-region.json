@@ -1,0 +1,29 @@
+{
+  "maximumHeight": 2.9,
+  "maximumAbsWidth": 1.35,
+  "maximumSpanLength": 7.55,
+  "boomSamples": [
+    {
+      "x": 2.0,
+      "topZ": 2.32,
+      "width": 0.72,
+      "probeZ": 2.0
+    },
+    {
+      "x": -1.4,
+      "topZ": 2.58,
+      "width": 0.58,
+      "probeZ": 2.3
+    },
+    {
+      "x": -2.8,
+      "topZ": 2.8,
+      "width": 0.44,
+      "probeZ": 2.6
+    }
+  ],
+  "podRoof": [[-0.425, -0.72, 2.56]],
+  "outriggerXs": [-1.55, 3.28],
+  "outriggerOuterY": 1.29,
+  "meaning": "Actual low stowed section heights/widths, closed pod, fixed cable/hook and four tucked caps. Raised actual tip/extended cap negative/reset; no working equipment pose or gameplay claim."
+}

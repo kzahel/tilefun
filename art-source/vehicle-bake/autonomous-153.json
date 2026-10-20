@@ -4,13 +4,33 @@
   "deadline": "2026-10-20T05:19:36Z",
   "status": "active",
   "authorization": "Owner requests autonomous authoring, visual QA, game availability, commits and pushes for up to eight hours; per-vehicle appearance pauses waived; no quantity guarantee.",
-  "batch": 1,
+  "batch": 2,
   "active": [
     "microcar",
     "woody-wagon",
     "stretch-limousine",
     "hot-rod",
-    "rally-hatchback"
+    "rally-hatchback",
+    "open-wheel-racer",
+    "monster-truck",
+    "beach-buggy",
+    "go-kart",
+    "golf-cart",
+    "ice-cream-van",
+    "food-truck",
+    "camper-van",
+    "motorhome",
+    "retro-taxi",
+    "tow-truck",
+    "flatbed-truck",
+    "semi-truck",
+    "dump-truck",
+    "cement-mixer",
+    "mobile-crane",
+    "street-sweeper",
+    "snowplow",
+    "farm-tractor",
+    "forklift"
   ],
   "integratedThisRun": [
     {
@@ -96,6 +116,181 @@
       "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
       "status": "frozen",
       "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "microcar",
+      "candidate": "microcar-v1",
+      "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "woody-wagon",
+      "candidate": "woody-wagon-v1",
+      "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "stretch-limousine",
+      "candidate": "stretch-limousine-v1",
+      "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "hot-rod",
+      "candidate": "hot-rod-v1",
+      "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "rally-hatchback",
+      "candidate": "rally-hatchback-v1",
+      "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "open-wheel-racer",
+      "candidate": "open-wheel-racer-v1",
+      "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "monster-truck",
+      "candidate": "monster-truck-v1",
+      "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "beach-buggy",
+      "candidate": "beach-buggy-v1",
+      "glbSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "go-kart",
+      "candidate": "go-kart-v1",
+      "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "golf-cart",
+      "candidate": "golf-cart-v1",
+      "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "ice-cream-van",
+      "candidate": "ice-cream-van-v1",
+      "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "food-truck",
+      "candidate": "food-truck-v1",
+      "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "camper-van",
+      "candidate": "camper-van-v1",
+      "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "motorhome",
+      "candidate": "motorhome-v1",
+      "glbSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "retro-taxi",
+      "candidate": "retro-taxi-v1",
+      "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "tow-truck",
+      "candidate": "tow-truck-v1",
+      "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "flatbed-truck",
+      "candidate": "flatbed-truck-v1",
+      "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "semi-truck",
+      "candidate": "semi-truck-v1",
+      "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "dump-truck",
+      "candidate": "dump-truck-v1",
+      "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "cement-mixer",
+      "candidate": "cement-mixer-v1",
+      "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "mobile-crane",
+      "candidate": "mobile-crane-v1",
+      "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "street-sweeper",
+      "candidate": "street-sweeper-v1",
+      "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "snowplow",
+      "candidate": "snowplow-v1",
+      "glbSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "farm-tractor",
+      "candidate": "farm-tractor-v1",
+      "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+    },
+    {
+      "id": "forklift",
+      "candidate": "forklift-v1",
+      "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+      "status": "qa-complete-unregistered",
+      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
     }
   ],
   "deferred": [],
@@ -115,7 +310,55 @@
       "unit": "5768 passed, 5 known Windows failures, 10 skipped",
       "browser": "56 passed; full Chromium canvas/GPU/failure fallback, gameplay, rolling, save/reload/delete",
       "workshopIdentities": 1774,
-      "build": "pass"
+      "build": "pass",
+      "commit": "bb6da261",
+      "pushed": true
     }
-  ]
+  ],
+  "pendingValidation": {
+    "batch": 2,
+    "ids": [
+      "microcar",
+      "woody-wagon",
+      "stretch-limousine",
+      "hot-rod",
+      "rally-hatchback"
+    ],
+    "unit": "5808 passed, 5 known Windows failures, 10 skipped; 621 seconds",
+    "typecheck": "pass",
+    "lint": "pass, existing119warnings/35infos",
+    "build": "pass",
+    "workshopIdentities": 1779,
+    "browser": "Full 1557-case run active; max10 failures; catalog/review registration held stable",
+    "sourceOnlyQueue": [
+      "open-wheel-racer",
+      "monster-truck",
+      "beach-buggy",
+      "go-kart",
+      "golf-cart",
+      "ice-cream-van",
+      "food-truck",
+      "camper-van",
+      "motorhome",
+      "retro-taxi",
+      "tow-truck",
+      "flatbed-truck",
+      "semi-truck",
+      "dump-truck",
+      "cement-mixer",
+      "mobile-crane",
+      "street-sweeper",
+      "snowplow",
+      "farm-tractor",
+      "forklift"
+    ]
+  },
+  "lastCheckpointAt": "2026-10-19T23:49:40.852885+00:00",
+  "riderPrototypes": {
+    "explorerRoadster": "Source complete; independent replay/contact controls and exact32-view composition parity pass; not normal game occupancy",
+    "explorerUpright": "Source complete; independent replay and native32-view inspection pass; synthetic contact profile only",
+    "brownBearUpright": "Source complete; independent exact replay, rerun5contact/self/straddle negatives and native32camera/wire inspection pass; original Explorer-profile failed fit retained; measured Bear profile only, actual bike unqualified",
+    "motorcycleActivation": "Deferred: actual-bike contact, all27 appearances, AI stopped occupancy, shared depth and Canvas/failed-mesh fallback remain unqualified",
+    "next": "Person7 capped legacy-human identity pilot, actual classic motorcycle source and explicit2/3wheel review adapters in progress"
+  }
 }

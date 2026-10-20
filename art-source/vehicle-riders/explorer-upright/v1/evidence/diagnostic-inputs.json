@@ -1,0 +1,28 @@
+{
+  "sharedInputHashes": {
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "src/characters/approved-v1.json": "741c0587acde8aba2d93402fa8cdbfa1997e9b5078500015fee832cc1910a418",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235"
+  },
+  "identityInputHashes": {
+    "art-source/vehicle-riders/explorer/v1/build.py": "45117bfbc43ba1fab4a3929c73018ef32e6a288da8be2a64141cab696435a85b",
+    "art-source/vehicle-riders/explorer/v1/identity.json": "d3cc61aeb2f96910f99f5174023457aee96e69af3800171454647ff0b1ce487e",
+    "art-source/vehicle-riders/explorer/v1/rider.glb": "519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+    "art-source/pixel-characters/person.json": "d3cc61aeb2f96910f99f5174023457aee96e69af3800171454647ff0b1ce487e",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae"
+  },
+  "profileInput": {
+    "source": "art-source/vehicle-riders/profiles/upright-v1.json",
+    "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "ownCopy": "profile.json",
+    "units": "World logical pixels; constructor divides exactly by worldScale"
+  },
+  "fixtureConstructor": "scripts/vehicle-riders/explorer-upright/fixture.py",
+  "fixtureRecipeSha256": "c81039852e25e2c6f81218d76979a5a65e6f1aacc0193c2d7d4e3c795ec96e34",
+  "fixtureOutputSha256": "f08f65368f840015a298d3fe499c86dd4898bafd86e315820d818757f5ccaf76",
+  "fixtureOutputsStayIgnored": true,
+  "actualBikePresent": false,
+  "CarMeshAssetUsed": false
+}

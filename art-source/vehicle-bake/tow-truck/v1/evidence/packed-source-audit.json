@@ -1,0 +1,330 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedEquipment": {
+      "components": [
+        "STATIC axle attachment arm -1.98",
+        "STATIC axle attachment arm 1.62",
+        "STATIC orange recovery planted foot -1",
+        "STATIC low orange folded recovery arm -1",
+        "STATIC fixed gray brace -1",
+        "STATIC orange recovery planted foot 1",
+        "STATIC low orange folded recovery arm 1",
+        "STATIC fixed gray brace 1",
+        "STATIC orange recovery low head crossbeam",
+        "STATIC winch planted mounting block",
+        "STATIC broad gray winch drum",
+        "STATIC gray winch flange -1",
+        "STATIC winch bearing foot -1",
+        "STATIC gray winch flange 1",
+        "STATIC winch bearing foot 1",
+        "STATIC gray cable winch to low head",
+        "STATIC gray cable low head to stowed hook",
+        "STATIC one cast gray C hook stowed above ground"
+      ],
+      "noMotionMetadata": true,
+      "staticStowedOnly": true,
+      "cabRoofMeasuredSource": 2.299999952316284,
+      "boomTopMeasuredSource": 2.2750000953674316,
+      "boomBelowCabRoof": true,
+      "hookMinimumGroundClearanceSource": 0.7950000166893005,
+      "hookFrontmostXSource": 2.5250000953674316,
+      "hookBehindPlatform": true,
+      "cableMeasurements": [
+        {
+          "component": "STATIC gray cable winch to low head",
+          "radiusSourceMeasured": 0.03500031619056861,
+          "diameterWorldMeasured": 1.2174023022806475,
+          "nativeAtLeastOnePixel": true
+        },
+        {
+          "component": "STATIC gray cable low head to stowed hook",
+          "radiusSourceMeasured": 0.035000183561202415,
+          "diameterWorldMeasured": 1.2173976890853015,
+          "nativeAtLeastOnePixel": true
+        }
+      ],
+      "noTowHookCablePhysicsOrAnimationClaim": true
+    },
+    "sourceFlatPlatform": {
+      "meaning": "Flat recovery platform, no recessed cargo bed claim",
+      "rays": [
+        {
+          "xySource": [
+            -0.1,
+            -0.95
+          ],
+          "actualTopZSource": 1.1699998378753662,
+          "owner": "Blue short flat recovery platform integrated rear wheelhouses"
+        },
+        {
+          "xySource": [
+            -0.1,
+            0.95
+          ],
+          "actualTopZSource": 1.1699998378753662,
+          "owner": "Blue short flat recovery platform integrated rear wheelhouses"
+        },
+        {
+          "xySource": [
+            0.7,
+            -0.95
+          ],
+          "actualTopZSource": 1.1699998378753662,
+          "owner": "Blue short flat recovery platform integrated rear wheelhouses"
+        },
+        {
+          "xySource": [
+            0.7,
+            0.95
+          ],
+          "actualTopZSource": 1.1700000762939453,
+          "owner": "Blue short flat recovery platform integrated rear wheelhouses"
+        },
+        {
+          "xySource": [
+            1.6,
+            -0.95
+          ],
+          "actualTopZSource": 1.1699998378753662,
+          "owner": "Blue short flat recovery platform integrated rear wheelhouses"
+        },
+        {
+          "xySource": [
+            1.6,
+            0.95
+          ],
+          "actualTopZSource": 1.1699998378753662,
+          "owner": "Blue short flat recovery platform integrated rear wheelhouses"
+        },
+        {
+          "xySource": [
+            2.25,
+            -0.95
+          ],
+          "actualTopZSource": 1.1699998378753662,
+          "owner": "Blue short flat recovery platform integrated rear wheelhouses"
+        },
+        {
+          "xySource": [
+            2.25,
+            0.95
+          ],
+          "actualTopZSource": 1.1699998378753662,
+          "owner": "Blue short flat recovery platform integrated rear wheelhouses"
+        }
+      ],
+      "flatTop1_17Source": true,
+      "allCandidateTrianglesIncluded": true
+    },
+    "skinOwnership": {
+      "method": "Own blue lower coachwork side/end/hood charts and cream closed cab continuous side glass with separate fixed front/rear and roof charts. Flat rear platform has its own deck and blue/cream side charts. Orange folded frame, gray winch/cable/hook own explicit padded constant-role swatches and named source components. No camera-projected paint or glass overlay planes.",
+      "cabFrontRearRoofOwnershipSeparate": true,
+      "coherentOppositeBodySides": true,
+      "orangeFrameAndGrayEquipmentSwatchesExplicit": true,
+      "noGlassOverlayMeshes": true
+    },
+    "master.blend": {
+      "sha256": "1e773943b77b892f6447a28d6a1b5ee74ff3a33d2c7f95080da83f40afcd43d9",
+      "triangles": 3394,
+      "meshObjects": 54,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "wheelRadiusRig": [
+      {
+        "id": "FL",
+        "radiusSourceMeasured": 0.49000002188173036,
+        "radiusWorldDeclared": 8.521739130434783,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "FR",
+        "radiusSourceMeasured": 0.49000002188173036,
+        "radiusWorldDeclared": 8.521739130434783,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RL",
+        "radiusSourceMeasured": 0.4900001287460327,
+        "radiusWorldDeclared": 8.521739130434783,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RR",
+        "radiusSourceMeasured": 0.4900001287460327,
+        "radiusWorldDeclared": 8.521739130434783,
+        "geometryAndOwnMetadataMatch": true
+      }
+    ],
+    "car.blend": {
+      "sha256": "7c92746ef676808256346f3237d66356f88128c7c12b659580666b2b94582090",
+      "triangles": 3394,
+      "meshObjects": 5,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+      "minBlenderWorld": [
+        -50.43478012084961,
+        -19.478260040283203,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        50.644126892089844,
+        19.478260040283203,
+        40.0
+      ],
+      "dimensionsBlenderWorld": [
+        101.07890701293945,
+        38.956520080566406,
+        39.999999046325684
+      ],
+      "dimensionsSourceUnits": [
+        5.812037153244018,
+        2.239999904632568,
+        2.2999999451637265
+      ],
+      "centeredHorizontalExtentWorld": [
+        101.28825378417969,
+        38.956520080566406
+      ],
+      "centeredHorizontalExtentSource": [
+        5.824074592590331,
+        2.239999904632568
+      ],
+      "centeredCeilWorldFootprint": [
+        102,
+        39
+      ],
+      "includesActualLowBoomWinchCableHook": true,
+      "rootUnchangedNoRecenterOrFitScale": true,
+      "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+    },
+    "actualGLBStaticRecovery": {
+      "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+      "fixedOwner": "Body_static",
+      "hookMinimumGroundClearanceSource": 0.7950000023841857,
+      "hookFrontmostXSource": 2.525000028610229,
+      "hookBehindActualFlatPlatform": true,
+      "cableDiameterWorldMeasured": 1.2173938052413853,
+      "cableAtLeastOneNativePixel": true,
+      "noMotionMetadataOnBody": true,
+      "staticStowedOnly": true,
+      "allFixedTrianglesIncludedInNeutralRollEnvelope": true
+    },
+    "actualGLBFlatPlatform": {
+      "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+      "meaning": "Flat recovery platform, no recessed cargo bed claim",
+      "rays": [
+        {
+          "xySource": [
+            -0.1,
+            -0.95
+          ],
+          "actualTopZSource": 1.1699997758865355,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.1,
+            0.95
+          ],
+          "actualTopZSource": 1.1699997758865355,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.7,
+            -0.95
+          ],
+          "actualTopZSource": 1.1699999952316282,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.7,
+            0.95
+          ],
+          "actualTopZSource": 1.1699997758865355,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.6,
+            -0.95
+          ],
+          "actualTopZSource": 1.1699997758865355,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.6,
+            0.95
+          ],
+          "actualTopZSource": 1.1699997758865355,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.25,
+            -0.95
+          ],
+          "actualTopZSource": 1.1699998855590819,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.25,
+            0.95
+          ],
+          "actualTopZSource": 1.1699998855590819,
+          "owner": "Body_static"
+        }
+      ],
+      "flatTop1_17Source": true,
+      "allCandidateTrianglesIncluded": true
+    },
+    "actualGLBAttachments": {
+      "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+      "results": [
+        {
+          "id": "FL",
+          "actualTireSlabInnerAbsY": 12.347826957702637,
+          "actualStaticArmEndAbsY": 12.086956024169922,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "FR",
+          "actualTireSlabInnerAbsY": 12.347826957702637,
+          "actualStaticArmEndAbsY": 12.086956024169922,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RL",
+          "actualTireSlabInnerAbsY": 12.347826957702637,
+          "actualStaticArmEndAbsY": 12.086956024169922,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RR",
+          "actualTireSlabInnerAbsY": 12.347826957702637,
+          "actualStaticArmEndAbsY": 12.086956024169922,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        }
+      ],
+      "allFixedTrianglesSeparatelyClearanceProven": true
+    }
+  }
+}

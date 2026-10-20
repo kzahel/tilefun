@@ -1,0 +1,7 @@
+[
+  {
+    "status": "failed",
+    "id": "wrong-four-wheel-crane-negative",
+    "error": "('Declared/actual wheels', ['FL', 'FR', 'RL', 'RR'], ['FL', 'FR', 'ML', 'MR', 'RL', 'RR'])"
+  }
+]

@@ -1,0 +1,1264 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "farm-tractor",
+  "route": "farm-tractor",
+  "revision": "v1",
+  "method": "Original bright green/yellow farm tractor: narrow long green hood with yellow stripe, tall enclosed blue-glass cab with green canopy, huge rear agricultural tires and smaller exposed front tires; actual rear fenders only. Fixed rear hitch has no tool/hitch physics or animation claim.",
+  "geometry": {
+    "triangles": 3386,
+    "vertices": 7122,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 258024,
+    "sha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 6.956521739130436,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 6.956521739130436,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 12.869565217391306,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 12.869565217391306,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.2400000095367432,
+        -0.699999988079071,
+        0.4000000059604645
+      ],
+      "centerExport": [
+        -21.565217557160754,
+        6.956521842790687,
+        12.17391283615776
+      ],
+      "radiusBlender": 0.4,
+      "wheel_radius": 6.956521739130436
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.2400000095367432,
+        0.699999988079071,
+        0.4000000059604645
+      ],
+      "centerExport": [
+        -21.565217557160754,
+        6.956521842790687,
+        -12.17391283615776
+      ],
+      "radiusBlender": 0.4,
+      "wheel_radius": 6.956521739130436
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.0,
+        -0.8199999928474426,
+        0.7400000095367432
+      ],
+      "centerExport": [
+        17.39130434782609,
+        12.869565383247709,
+        14.260869440825092
+      ],
+      "radiusBlender": 0.74,
+      "wheel_radius": 12.869565217391306
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.0,
+        0.8199999928474426,
+        0.7400000095367432
+      ],
+      "centerExport": [
+        17.39130434782609,
+        12.869565383247709,
+        -14.260869440825092
+      ],
+      "radiusBlender": 0.74,
+      "wheel_radius": 12.869565217391306
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/farm-tractor/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/farm-tractor/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/farm-tractor/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 3386,
+  "vertexCount": 7122,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 258024,
+  "atlasBytes": 3272,
+  "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+  "atlasSha256": "df1abd245c911d86fdacc5cca4c8c0981e9b2e9c30f9dd46c95ae2d65fdec446",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "farm-tractor--v1",
+    "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "sourceBlendSha256": null,
+    "inputKind": "actual-GLB",
+    "triangles": 3386,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.956522455681728,
+        "minimumGap": 10.328057312484653,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.956522455681728,
+        "minimumGap": 10.328057312484653,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 12.869566541507425,
+        "minimumGap": 1.21730663740796,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 12.869566541507425,
+        "minimumGap": 1.21730663740796,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "perWheelControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      }
+    ],
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/farm-tractor/v1/evidence/rear-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/farm-tractor/v1/evidence/upper-wheel-coverage-raw.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "minBlenderWorld": [
+      -33.130435943603516,
+      -18.782609939575195,
+      0.0
+    ],
+    "maxBlenderWorld": [
+      33.91304397583008,
+      18.782609939575195,
+      45.565216064453125
+    ],
+    "dimensionsBlenderWorld": [
+      67.0434799194336,
+      37.56521987915039,
+      45.565216064453125
+    ],
+    "dimensionsSourceUnits": [
+      3.8550000953674313,
+      2.160000143051147,
+      2.6199999237060543
+    ]
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "rayCount": 15,
+    "samples": [
+      {
+        "id": "cab-glass--1",
+        "hitSource": [
+          0.30000004172325134,
+          -0.5999999642372131,
+          1.8999998569488525
+        ],
+        "triangle": 700,
+        "interpolatedUV": [
+          0.3333333730697632,
+          0.769230842590332
+        ],
+        "atlasPixel": [
+          170,
+          118
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "green-cab-door--1",
+        "hitSource": [
+          0.30000004172325134,
+          -1.0728390216827393,
+          1.1500000953674316
+        ],
+        "triangle": 1166,
+        "interpolatedUV": [
+          0.3385239541530609,
+          0.04802342504262924
+        ],
+        "atlasPixel": [
+          173,
+          487
+        ],
+        "rgb": [
+          68,
+          139,
+          70
+        ],
+        "roles": [
+          "paintMid"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "hood-yellow-stripe--1",
+        "hitSource": [
+          -1.0000001192092896,
+          -0.43000006675720215,
+          1.0200001001358032
+        ],
+        "triangle": 718,
+        "interpolatedUV": [
+          0.44999992847442627,
+          0.14531248807907104
+        ],
+        "atlasPixel": [
+          230,
+          437
+        ],
+        "rgb": [
+          248,
+          200,
+          60
+        ],
+        "roles": [
+          "yellow"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rear-green-fender--1",
+        "hitSource": [
+          1.0000001192092896,
+          -0.8300000429153442,
+          1.600000023841858
+        ],
+        "triangle": 1139,
+        "interpolatedUV": [
+          0.4062500298023224,
+          0.0410156324505806
+        ],
+        "atlasPixel": [
+          208,
+          490
+        ],
+        "rgb": [
+          87,
+          163,
+          72
+        ],
+        "roles": [
+          "paint"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "cab-glass-1",
+        "hitSource": [
+          0.30000004172325134,
+          0.6000000834465027,
+          1.8999998569488525
+        ],
+        "triangle": 24,
+        "interpolatedUV": [
+          0.33333340287208557,
+          0.769230842590332
+        ],
+        "atlasPixel": [
+          170,
+          118
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "green-cab-door-1",
+        "hitSource": [
+          0.30000004172325134,
+          1.0728389024734497,
+          1.1500000953674316
+        ],
+        "triangle": 1286,
+        "interpolatedUV": [
+          0.3385239839553833,
+          0.04802340269088745
+        ],
+        "atlasPixel": [
+          173,
+          487
+        ],
+        "rgb": [
+          68,
+          139,
+          70
+        ],
+        "roles": [
+          "paintMid"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "hood-yellow-stripe-1",
+        "hitSource": [
+          -1.0000001192092896,
+          0.43000006675720215,
+          1.0200001001358032
+        ],
+        "triangle": 50,
+        "interpolatedUV": [
+          0.44999992847442627,
+          0.14531247317790985
+        ],
+        "atlasPixel": [
+          230,
+          437
+        ],
+        "rgb": [
+          248,
+          200,
+          60
+        ],
+        "roles": [
+          "yellow"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rear-green-fender-1",
+        "hitSource": [
+          1.0000001192092896,
+          0.8300000429153442,
+          1.600000023841858
+        ],
+        "triangle": 634,
+        "interpolatedUV": [
+          0.40625,
+          0.0410156324505806
+        ],
+        "atlasPixel": [
+          208,
+          490
+        ],
+        "rgb": [
+          87,
+          163,
+          72
+        ],
+        "roles": [
+          "paint"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "windshield",
+        "hitSource": [
+          -0.039999932050704956,
+          0.0,
+          1.9500000476837158
+        ],
+        "triangle": 699,
+        "interpolatedUV": [
+          0.25,
+          0.4246795177459717
+        ],
+        "atlasPixel": [
+          128,
+          294
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rear-window",
+        "hitSource": [
+          1.1299999952316284,
+          0.0,
+          1.9500000476837158
+        ],
+        "triangle": 703,
+        "interpolatedUV": [
+          0.75,
+          0.4246795177459717
+        ],
+        "atlasPixel": [
+          384,
+          294
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "canopy-green",
+        "hitSource": [
+          0.5000000596046448,
+          0.0,
+          2.619999885559082
+        ],
+        "triangle": 737,
+        "interpolatedUV": [
+          0.4684127867221832,
+          0.04670638591051102
+        ],
+        "atlasPixel": [
+          239,
+          488
+        ],
+        "rgb": [
+          127,
+          191,
+          85
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "hood-green-top",
+        "hitSource": [
+          -1.100000023841858,
+          0.0,
+          1.4299999475479126
+        ],
+        "triangle": 719,
+        "interpolatedUV": [
+          0.3999999761581421,
+          0.08125001192092896
+        ],
+        "atlasPixel": [
+          204,
+          470
+        ],
+        "rgb": [
+          127,
+          191,
+          85
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-grille",
+        "hitSource": [
+          -1.8020000457763672,
+          0.06000000610947609,
+          1.0000001192092896
+        ],
+        "triangle": 813,
+        "interpolatedUV": [
+          0.030597658827900887,
+          0.047697730362415314
+        ],
+        "atlasPixel": [
+          15,
+          487
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "yellow-front-weight",
+        "hitSource": [
+          -1.90500009059906,
+          0.0,
+          0.6000000834465027
+        ],
+        "triangle": 861,
+        "interpolatedUV": [
+          0.96875,
+          0.0468749925494194
+        ],
+        "atlasPixel": [
+          496,
+          488
+        ],
+        "rgb": [
+          248,
+          200,
+          60
+        ],
+        "roles": [
+          "yellow"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "fixed-rear-drawbar",
+        "hitSource": [
+          1.9500000476837158,
+          0.0,
+          0.4400000274181366
+        ],
+        "triangle": 1045,
+        "interpolatedUV": [
+          0.1562499850988388,
+          0.015624994412064552
+        ],
+        "atlasPixel": [
+          79,
+          504
+        ],
+        "rgb": [
+          63,
+          69,
+          79
+        ],
+        "roles": [
+          "frame"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/farm-tractor/surface-regions.json",
+    "meaning": "Actual blue-glass cab skin, green door/canopy/hood, yellow hood stripe/front weight, rear-only green fenders, front grille and fixed drawbar UV owners",
+    "inputBytesUnchanged": true
+  },
+  "tractorShapeEvidence": "art-source/vehicle-bake/farm-tractor/v1/evidence/tractor-shape-geometry.json",
+  "mixedWheelVisualEvidence": "art-source/vehicle-bake/farm-tractor/v1/evidence/mixed-wheel-visual.json",
+  "nativeAndFallbackFit": {
+    "status": "passed",
+    "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "centered128GameCropProof": [
+      {
+        "yaw": 0,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 22.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 45,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 67.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 90,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 112.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 135,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 157.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 180,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 202.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 225,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 247.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 270,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 292.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 315,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 337.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      }
+    ],
+    "headings": [
+      {
+        "camera": "study",
+        "headingIndex": 0,
+        "alphaBounds": [
+          78,
+          101,
+          147,
+          153
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 1,
+        "alphaBounds": [
+          78,
+          95,
+          149,
+          157
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 2,
+        "alphaBounds": [
+          82,
+          92,
+          148,
+          161
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 3,
+        "alphaBounds": [
+          88,
+          91,
+          142,
+          162
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 4,
+        "alphaBounds": [
+          93,
+          93,
+          131,
+          160
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 5,
+        "alphaBounds": [
+          82,
+          91,
+          136,
+          162
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 6,
+        "alphaBounds": [
+          76,
+          92,
+          142,
+          161
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 7,
+        "alphaBounds": [
+          75,
+          95,
+          146,
+          157
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 8,
+        "alphaBounds": [
+          77,
+          101,
+          146,
+          153
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 9,
+        "alphaBounds": [
+          75,
+          101,
+          146,
+          158
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 10,
+        "alphaBounds": [
+          76,
+          102,
+          142,
+          162
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 11,
+        "alphaBounds": [
+          82,
+          100,
+          136,
+          162
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 12,
+        "alphaBounds": [
+          93,
+          100,
+          131,
+          162
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 13,
+        "alphaBounds": [
+          88,
+          100,
+          142,
+          162
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 14,
+        "alphaBounds": [
+          82,
+          102,
+          148,
+          162
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 15,
+        "alphaBounds": [
+          78,
+          101,
+          149,
+          158
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 0,
+        "alphaBounds": [
+          78,
+          55,
+          145,
+          129
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 1,
+        "alphaBounds": [
+          76,
+          47,
+          146,
+          133
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 2,
+        "alphaBounds": [
+          76,
+          43,
+          142,
+          138
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 3,
+        "alphaBounds": [
+          83,
+          42,
+          135,
+          140
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 4,
+        "alphaBounds": [
+          93,
+          45,
+          131,
+          136
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 5,
+        "alphaBounds": [
+          89,
+          42,
+          141,
+          140
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 6,
+        "alphaBounds": [
+          82,
+          43,
+          148,
+          138
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 7,
+        "alphaBounds": [
+          78,
+          47,
+          148,
+          133
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 8,
+        "alphaBounds": [
+          79,
+          55,
+          146,
+          129
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 9,
+        "alphaBounds": [
+          78,
+          55,
+          148,
+          135
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 10,
+        "alphaBounds": [
+          82,
+          56,
+          148,
+          139
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 11,
+        "alphaBounds": [
+          89,
+          57,
+          141,
+          139
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 12,
+        "alphaBounds": [
+          93,
+          57,
+          131,
+          139
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 13,
+        "alphaBounds": [
+          83,
+          57,
+          135,
+          139
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 14,
+        "alphaBounds": [
+          76,
+          56,
+          142,
+          139
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 15,
+        "alphaBounds": [
+          76,
+          55,
+          146,
+          135
+        ]
+      }
+    ],
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "sourceGameOrigin": [
+      112,
+      112
+    ],
+    "translation": [
+      -16,
+      32
+    ],
+    "cardinals": [
+      {
+        "headingIndex": 4,
+        "nativeBounds": [
+          93,
+          45,
+          131,
+          136
+        ],
+        "fallbackBounds": [
+          77,
+          77,
+          115,
+          168
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 12,
+        "nativeBounds": [
+          93,
+          57,
+          131,
+          139
+        ],
+        "fallbackBounds": [
+          77,
+          89,
+          115,
+          171
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 8,
+        "nativeBounds": [
+          79,
+          55,
+          146,
+          129
+        ],
+        "fallbackBounds": [
+          63,
+          87,
+          130,
+          161
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 0,
+        "nativeBounds": [
+          78,
+          55,
+          145,
+          129
+        ],
+        "fallbackBounds": [
+          62,
+          87,
+          129,
+          161
+        ],
+        "fitsWithoutPixelLoss": true
+      }
+    ],
+    "meaning": "Fixed native cameras and world density. Only transparent padding can be cropped/added. Cardinal occupied pixel order/RGBA values are compared exactly after integer translation; no resize or recenter."
+  },
+  "replayCommands": [
+    "python art-source/vehicle-bake/farm-tractor/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/farm-tractor/capture.mjs",
+    "node scripts/vehicle-bake/farm-tractor/mixed-wheel-visual.mjs",
+    "python scripts/vehicle-bake/farm-tractor/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/farm-tractor/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/farm-tractor/clearance-each.py -- art-source/vehicle-bake/farm-tractor/v1/evidence/clearance-input.json data/vehicle-bake/farm-tractor/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/farm-tractor/v1/clearance-each.py -- art-source/vehicle-bake/farm-tractor/v1/evidence/packed-source-clearance-input.json data/vehicle-bake/farm-tractor/recheck-source-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/farm-tractor/v1/model.glb --config art-source/vehicle-bake/farm-tractor/v1/coverage-region.json --output data/vehicle-bake/farm-tractor/recheck-coverage.json",
+    "python scripts/vehicle-bake/farm-tractor/assess-coverage.py --input data/vehicle-bake/farm-tractor/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/farm-tractor/v1/prove-tractor.py -- --input public/demos/vehicle-bake/farm-tractor/v1/model.glb --output data/vehicle-bake/farm-tractor/recheck-tractor.json",
+    "python scripts/vehicle-bake/farm-tractor/measure-fit.py",
+    "python scripts/vehicle-bake/farm-tractor/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/farm-tractor/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 actual study and16 actual engine headings. Bright green/yellow palette, huge rear wheels, small exposed front wheels, long narrow hood, tall closed blue-glass cab/canopy and fixed rear drawbar read as a farm tractor at native density.",
+    "Only two real broad rounded rear fenders exist; no front fender caps. Rear central tread crowns lie under the rounded fenders; rear sidewalls/outer shoulder edges remain partly exposed as expected. Far rear crowns inspected in both camera sets. Fronts are intentionally exposed and coverage N/A; raw0/25 results retained unchanged.",
+    "Inspected eight signed ordinary-distance roll phases per camera, eight additional equal-angle phases per camera using each own radius, both actual wireframes, and32 diagnostic wheel-ID views. Rear chevron tread geometry rolls with its own rear tire. Wheel centers, body and fixed hitch remain seated; no clipping or detached equipment found.",
+    "All32 native224 frames have clear transparent margins; centered128 crop parity exact at all16 engine headings. Standard192x224 origin96,144 cardinals4,12,8,0 retain occupiedRGBA sequences exactly at integer(-16,+32). No enlargement of viewport needed, no model resize/recenter.",
+    "Glass frames and panes belong to coherent closed cab skin UV charts; hood yellow stripe and green upper surface have separate actual owners. Canopy edge, grille bars, chevron treads and narrow yellow accents show expected angle-dependent native aliasing. No blocking issue found. Author QA only; parent independently qualifies/freezes."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "actualPerWheelGeometryRadiusMatchesRigMetadata": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "rearCrowns25of25EachWithControlsFrontIntentionallyNA": true,
+    "actualGLBSemanticTriangleUVRays": 15,
+    "actualNarrowHoodTallCabCanopyRearFendersFixedDrawbar": true,
+    "lowCabWideHoodDisplacedHitchRejectedThenExactReset": true,
+    "actualCylinderCollisionNegativeResetForEachWheel": true,
+    "packedLowSourceAndActualGLBFourCylinderNegativeReset": true,
+    "ownRadiusEqualAnglePhasesAndWheelIdViews": true,
+    "native224AndStandard192x224FallbackFitAtFixedDensity": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Rear drawbar is rigid decorative geometry; no farm-tool/hitch physics or animated equipment claim.",
+    "Nominal3.8 x2.15 x2.65 source proportions, unchanged80/4.6 scale. Huge rear .74 and small front .40 wheels have distinct actual geometry/metadata; front crowns intentionally exposed/N/A, rear finite region covered.",
+    "Cab pillars, rear chevron treads, yellow stripes, grille bars and canopy edge retain expected angle-dependent native pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/farm-tractor/v1/assess-coverage.py": "cd0310cc101f6591165e34fc8562722e47879fc7a6a67ee7e0459506a9db5be2",
+    "art-source/vehicle-bake/farm-tractor/v1/atlas.png": "df1abd245c911d86fdacc5cca4c8c0981e9b2e9c30f9dd46c95ae2d65fdec446",
+    "art-source/vehicle-bake/farm-tractor/v1/audit-source.py": "8437abc092280e362707f8621d69cd392124d4b25f5ef86a17d1a1183ff95760",
+    "art-source/vehicle-bake/farm-tractor/v1/author-notes.md": "e028ea7ac7b9c95e6836b873e67b453768e78b40ae6ce44f5d7d98dccc472d77",
+    "art-source/vehicle-bake/farm-tractor/v1/build.py": "6480572a2336d3fe8f8049b4f7dbb8ca76470223e696934d7714f143818b29bd",
+    "art-source/vehicle-bake/farm-tractor/v1/capture.mjs": "139d3ed9cbda6434dcbed3e851ed0fd039952bd2a172d98b7a4b495b7a2d4f36",
+    "art-source/vehicle-bake/farm-tractor/v1/car.blend": "85cd313f4a19b0308ad66be809714264fe513d7260f719e51eb3ff8486bebd76",
+    "art-source/vehicle-bake/farm-tractor/v1/clearance-each.py": "be17b8e3aba97914d614e56e1bbd96482b3462f712811d2b8e2b07476866849c",
+    "art-source/vehicle-bake/farm-tractor/v1/coverage-region.json": "3913d2912013071b2333e1eba8754d6b908d8193cf0e5c3c1a0e6da3a9c45a7d",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/author-browser-qa.json": "343b0a239966eb25de7fe8f1bd8ea72ed363da449aea5c2c9fc5c0fdffd3a25a",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/author-visual-inspection.json": "9f10df878030f2b4ac17668fa1fc63c3ddba2c997861ce9d779025bf637c7dd8",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/clearance-input.json": "94bef263dac4cdf728938584fadaa761302ca5864ba7ddacef463c8cdabb968c",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/engine-capture.json": "ed1be395acfe091032c6702cad211f548058b797548a258f86e0180314e0eced",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/fresh-isolated-replay.json": "5b50a13dee2f09aaad70d887313d836639cbbdff1498cd67ea80727328f1bf8a",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/mixed-wheel-visual.json": "92ece31e86eb9d296f3ef6f9dc4409fca85753cd3024b711cb6b495fd3758802",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/native-and-fallback-fit.json": "3a48118a59915188222b33d0c3251b629d93b771817aee38786c0378e64c46ab",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/packed-source-audit.json": "6069dc4f2fafba9f1ead92f8e4e88df48c9f027a1d38fb79a0a37e72c2b57d3a",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/packed-source-clearance-input.json": "aeb3594d87e2a042aff0b3feae73f38f4b3142c4eec59b6ebc860fed14672b42",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/packed-source-clearance.json": "56a0095088fb7ca54f1c8d60f3c121721fd9c09de4f234367aa3b0136ddec95c",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/rear-coverage-assessment.json": "18bfd016d7972184e17cc78933b27fd5fbe41d409ed360ad6d8cd67907e7cf94",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/replay-verification.json": "6199683efff5b6339f87d87673936f97673ea7e14407d3fedbb077fa0ce9a398",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/shared-clearance-common.json": "86e6e8f4aa1a77c7ab6733c9334bc2ac6ff93009b7fa3c26aae062b87c95b3bf",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/shared-clearance.json": "dd6c22ca32f7c9205b90e4b81dcadb3e88b9b4e0c7575df989f7817ca7af9310",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/tractor-shape-geometry.json": "538f601d4859a70bfb05fe8329a8a77b3e549c9768ea41f19bde8dab48d1979d",
+    "art-source/vehicle-bake/farm-tractor/v1/evidence/upper-wheel-coverage-raw.json": "f35ec170c186477a527b032ca2bca0b88b446c8fe5f1a44c22ddf0fd17b702a6",
+    "art-source/vehicle-bake/farm-tractor/v1/family.json": "509f1b16ca5efc73e4bfe316d2fb7b58c75cd91a4e970bb730df3a41986214a5",
+    "art-source/vehicle-bake/farm-tractor/v1/finalize.py": "46c0689a52a11cff2cec25697e7ad1465acab56ed3058f3d9bba2a2f87ddeb07",
+    "art-source/vehicle-bake/farm-tractor/v1/geometry.py": "512b1a369ac783b6edece8194219d0f2d6f468f42fa3a5eda35107efcb7b3ce3",
+    "art-source/vehicle-bake/farm-tractor/v1/master.blend": "e0062d01047340b48cf47b24513b835bfb7f69af24b11e3fee2598eee2e4cb9b",
+    "art-source/vehicle-bake/farm-tractor/v1/measure-fit.py": "babb457f9bf9db9079f919af4c626e8561b201f6147a4cf08571f6fc6ff8e818",
+    "art-source/vehicle-bake/farm-tractor/v1/mixed-wheel-visual.mjs": "fe6e474cc5d1e7aeb05ae97c6db1d214e1454461aa9881efdee9b242ab10465b",
+    "art-source/vehicle-bake/farm-tractor/v1/model.glb": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "art-source/vehicle-bake/farm-tractor/v1/pack-author.py": "ccf6b9021b9417b3a8e690f509930a52744979d9a26ee9c342126fff8cd79b84",
+    "art-source/vehicle-bake/farm-tractor/v1/paint-ownership.json": "7a1ff4b9bf34d703936ab883a06ab05c43b72b4566a6ef5b5cb3f91a08d7229f",
+    "art-source/vehicle-bake/farm-tractor/v1/palette-draft.png": "51a8e5bdb2fcb4cc24884e46381fdc3916419a8a05d62354b99c1cca339e6201",
+    "art-source/vehicle-bake/farm-tractor/v1/prove-tractor.py": "2aae5d17fc996523fb3c9ede410ab286456ccc5c44ec2c98a30a7a8c0d02746d",
+    "art-source/vehicle-bake/farm-tractor/v1/recipe.json": "cc04bec970c375bfe4761c241d32b6d307c0c672af9c7c8035574912f6db60fd",
+    "art-source/vehicle-bake/farm-tractor/v1/replay.py": "f2660dc1441dc73708027abcb276bcae72ea14235ec3673c948eaa969984ee5a",
+    "art-source/vehicle-bake/farm-tractor/v1/review.json": "aa779da5221fc25ae6ff64e9a009fa210f2b92870e36646ac70594cca694c0b7",
+    "art-source/vehicle-bake/farm-tractor/v1/sheets.py": "6e5a9b7c2707628a3fb996cf689dcdd33e897c50185c6a7e0f561bd87c61859a",
+    "art-source/vehicle-bake/farm-tractor/v1/surface-regions.json": "470449861c18544122fc4e2ed34bddeb518642e9dff8b58e663313990b362c2a",
+    "art-source/vehicle-bake/farm-tractor/v1/tractor-region.json": "51e273ecb7db18681990fb6c820ee0dd337b695c02bdbbfd5aa9432eaf81dc18"
+  }
+}

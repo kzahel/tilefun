@@ -1,0 +1,51 @@
+{
+  "authorization": "Explicit run153 user open-wheel exception applies to all4wheels",
+  "wheels": [
+    "FL",
+    "FR",
+    "RL",
+    "RR"
+  ],
+  "requirement": "Fender crown coverage N/A; exposed tires intentional",
+  "meaning": "Explicit all4-wheel exposure exception. Raw0covered/25samples each is intentional unsupported crown geometry, not fender coverage acceptance. Synthetic controls pass; body removal is honestly uninformative against an already exposed baseline. No caps were added.",
+  "status": "not-applicable-authorized-open-wheel",
+  "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+  "rawWheels": [
+    {
+      "wheel": "Wheel_FL_Roll",
+      "coveredCount": 0,
+      "sampleCount": 25,
+      "uncoveredCount": 25,
+      "sampleStatuses": [
+        "no-overhead-geometry"
+      ]
+    },
+    {
+      "wheel": "Wheel_FR_Roll",
+      "coveredCount": 0,
+      "sampleCount": 25,
+      "uncoveredCount": 25,
+      "sampleStatuses": [
+        "no-overhead-geometry"
+      ]
+    },
+    {
+      "wheel": "Wheel_RL_Roll",
+      "coveredCount": 0,
+      "sampleCount": 25,
+      "uncoveredCount": 25,
+      "sampleStatuses": [
+        "no-overhead-geometry"
+      ]
+    },
+    {
+      "wheel": "Wheel_RR_Roll",
+      "coveredCount": 0,
+      "sampleCount": 25,
+      "uncoveredCount": 25,
+      "sampleStatuses": [
+        "no-overhead-geometry"
+      ]
+    }
+  ]
+}

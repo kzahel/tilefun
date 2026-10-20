@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "inputHashes": {
+    "art-source/vehicle-bake/flatbed-truck/v1/build.py": "ac5c7c47fc16c613507a198c4cdf3b906161302f59423b929d6b211a203c7cd3",
+    "art-source/vehicle-bake/flatbed-truck/v1/family.json": "ca13d209d7920a465314e6b2c8d53ee1bccfd783cd44fd8f0f801a3ab9bf0887",
+    "art-source/vehicle-bake/flatbed-truck/v1/coverage-region.json": "ee265df707eeb219ac5ba4a6cfd7545b91167f68d8df8a6cd2c31ef2224d3727",
+    "art-source/vehicle-bake/flatbed-truck/v1/surface-regions.json": "9a88d5b4408705a645614cf02390a2ff7e408f120294173506ca86ca782f158c",
+    "art-source/vehicle-bake/flatbed-truck/v1/deck-region.json": "58a3243958883fde53d913d6a67d6da51056a2f6f5d216a5ddde64da0510093a",
+    "art-source/vehicle-bake/flatbed-truck/v1/review.json": "ae28a71bb30bcfd9539e331e337aa3d5dc567247ba78033d2a3739d8ede263e1"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+  },
+  "outputs": {
+    "model.glb": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+    "atlas.png": "b7ff20cc00dc3946e2692fd43a529b8c3d1526db62a90e71c3c5d9dbfeb82d71",
+    "recipe.json": "c03dd748c0b71399b0357665257123860e4ea61b900f5796eecc5bd3f6a0e3cd"
+  },
+  "scratchInputDependencies": [],
+  "isolatedRoot": "data/vehicle-bake/flatbed-truck/fresh-declared-replay",
+  "bootstrap": "Empty AGENTS.md/public root sentinels only; no vehicle inputs",
+  "meaning": "Fresh miniature repository contains only listed inputs. GLB, atlas and recipe match byte for byte; packed blend determinism is not claimed."
+}

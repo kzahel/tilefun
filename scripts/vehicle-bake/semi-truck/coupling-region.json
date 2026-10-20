@@ -1,0 +1,12 @@
+{
+  "xGapSamples": [-1.55, -1.3, -1.15],
+  "zGapSamples": [1.6, 2.25],
+  "gapProbeX": -1.4,
+  "gapProbeZ": 2.2,
+  "minimumGap": 0.6,
+  "maximumGap": 1.0,
+  "plateSamples": [-1.55, -1.3, -1.15],
+  "plateTopZ": 1.19,
+  "meaning": "Actual open space between cab and rigid trailer, real low fifth-wheel plate/frame bridge; filled-gap negative/reset. No articulated joint or hitch physics claim.",
+  "frameProbeX": -1.55
+}

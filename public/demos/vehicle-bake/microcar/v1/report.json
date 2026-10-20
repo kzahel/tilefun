@@ -1,0 +1,585 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "microcar",
+  "route": "microcar",
+  "revision": "v1",
+  "method": "Original short egg/bubble coachwork with its own rounded cross section, tiny axles and local wheel pockets. Continuous longitudinal/angular skin UV owns curved panoramic front and one side pane each with dark frames; pale upper paint over dusty coral rose. No glass overlays, projection or high-to-low transfer claim.",
+  "geometry": {
+    "triangles": 2596,
+    "vertices": 5314,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 192480,
+    "sha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 5.043478260869565,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 5.043478260869565,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 5.043478260869565,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 5.043478260869565,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -0.8799999952316284,
+        -0.6600000262260437,
+        0.28999999165534973
+      ],
+      "centerExport": [
+        -15.304347743158758,
+        5.043478115745214,
+        11.478261325670326
+      ],
+      "radiusBlender": 0.29,
+      "wheel_radius": 5.043478260869565
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -0.8799999952316284,
+        0.6600000262260437,
+        0.28999999165534973
+      ],
+      "centerExport": [
+        -15.304347743158758,
+        5.043478115745214,
+        -11.478261325670326
+      ],
+      "radiusBlender": 0.29,
+      "wheel_radius": 5.043478260869565
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        0.8600000143051147,
+        -0.6600000262260437,
+        0.28999999165534973
+      ],
+      "centerExport": [
+        14.95652198791504,
+        5.043478115745214,
+        11.478261325670326
+      ],
+      "radiusBlender": 0.29,
+      "wheel_radius": 5.043478260869565
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        0.8600000143051147,
+        0.6600000262260437,
+        0.28999999165534973
+      ],
+      "centerExport": [
+        14.95652198791504,
+        5.043478115745214,
+        -11.478261325670326
+      ],
+      "radiusBlender": 0.29,
+      "wheel_radius": 5.043478260869565
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/microcar/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/microcar/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/microcar/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Static closed microcar body and glazing; no animated doors or equipment.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 2596,
+  "vertexCount": 5314,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 192480,
+  "atlasBytes": 3658,
+  "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+  "atlasSha256": "f21ea2d9f704abaa3ca47f51ff8bb3478bada3e1b0e0358e7c28570e887d10e7",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "microcar--v1",
+    "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+    "triangles": 2596,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.043479020121175,
+        "minimumGap": 1.226192879646458,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.043479020121175,
+        "minimumGap": 1.226192879646458,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.043478114852719,
+        "minimumGap": 1.2261938960269845,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.043478114852719,
+        "minimumGap": 1.2261938960269845,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/microcar/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+    "minBlenderWorld": [
+      -28.0,
+      -15.217391014099121,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      27.652172088623047,
+      15.217391014099121,
+      29.913043975830078
+    ],
+    "dimensionsBlenderWorld": [
+      55.65217208862305,
+      30.434782028198242,
+      29.91304349899292
+    ],
+    "dimensionsSourceUnits": [
+      3.1999998950958246,
+      1.7499999666213986,
+      1.7200000011920926
+    ]
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+    "rayCount": 11,
+    "samples": [
+      {
+        "id": "left-continuous-side-glass",
+        "hitSource": [
+          0.05000000074505806,
+          -0.7492592334747314,
+          1.100000023841858
+        ],
+        "triangle": 826,
+        "interpolatedUV": [
+          0.5152438879013062,
+          0.8948553800582886
+        ],
+        "atlasPixel": [
+          263,
+          53
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-continuous-side-glass",
+        "hitSource": [
+          0.05000000074505806,
+          0.7492592334747314,
+          1.100000023841858
+        ],
+        "triangle": 839,
+        "interpolatedUV": [
+          0.5152438879013062,
+          0.41764456033706665
+        ],
+        "atlasPixel": [
+          263,
+          298
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-side-front-frame",
+        "hitSource": [
+          -0.45000001788139343,
+          -0.7574853897094727,
+          1.100000023841858
+        ],
+        "triangle": 83,
+        "interpolatedUV": [
+          0.3628048300743103,
+          0.8954740762710571
+        ],
+        "atlasPixel": [
+          185,
+          53
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-side-front-frame",
+        "hitSource": [
+          -0.45000001788139343,
+          0.7574853897094727,
+          1.100000023841858
+        ],
+        "triangle": 96,
+        "interpolatedUV": [
+          0.3628048300743103,
+          0.41702592372894287
+        ],
+        "atlasPixel": [
+          185,
+          298
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-rose-lower-skin",
+        "hitSource": [
+          0.4000000059604645,
+          -0.8144845962524414,
+          0.7000000476837158
+        ],
+        "triangle": 844,
+        "interpolatedUV": [
+          0.6219513416290283,
+          0.9701575040817261
+        ],
+        "atlasPixel": [
+          318,
+          15
+        ],
+        "rgb": [
+          198,
+          111,
+          128
+        ],
+        "roles": [
+          "paintMid"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-rose-lower-skin",
+        "hitSource": [
+          0.4000000059604645,
+          0.8144941329956055,
+          0.7000000476837158
+        ],
+        "triangle": 865,
+        "interpolatedUV": [
+          0.6219509840011597,
+          0.34234246611595154
+        ],
+        "atlasPixel": [
+          318,
+          336
+        ],
+        "rgb": [
+          198,
+          111,
+          128
+        ],
+        "roles": [
+          "paintMid"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "panoramic-curved-front-glass",
+        "hitSource": [
+          -1.2349998950958252,
+          0.0,
+          1.5000001192092896
+        ],
+        "triangle": 760,
+        "interpolatedUV": [
+          0.12347568571567535,
+          0.6562500596046448
+        ],
+        "atlasPixel": [
+          63,
+          175
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "panoramic-front-frame",
+        "hitSource": [
+          -1.3833333253860474,
+          0.0,
+          1.350000023841858
+        ],
+        "triangle": 739,
+        "interpolatedUV": [
+          0.07825202494859695,
+          0.65625
+        ],
+        "atlasPixel": [
+          40,
+          176
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "pale-rounded-roof",
+        "hitSource": [
+          0.20000000298023224,
+          0.0,
+          1.6927274465560913
+        ],
+        "triangle": 110,
+        "interpolatedUV": [
+          0.5609756112098694,
+          0.65625
+        ],
+        "atlasPixel": [
+          287,
+          176
+        ],
+        "rgb": [
+          255,
+          220,
+          207
+        ],
+        "roles": [
+          "roof"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "short-rear-vent-bar",
+        "hitSource": [
+          1.1699999570846558,
+          0.0,
+          1.2571427822113037
+        ],
+        "triangle": 170,
+        "interpolatedUV": [
+          0.8567073345184326,
+          0.6562499403953552
+        ],
+        "atlasPixel": [
+          438,
+          176
+        ],
+        "rgb": [
+          145,
+          76,
+          101
+        ],
+        "roles": [
+          "paintDeep"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rounded-front-door-nose",
+        "hitSource": [
+          -1.5199999809265137,
+          0.0,
+          0.9000000357627869
+        ],
+        "triangle": 1041,
+        "interpolatedUV": [
+          0.25,
+          0.109375
+        ],
+        "atlasPixel": [
+          128,
+          456
+        ],
+        "rgb": [
+          242,
+          187,
+          183
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/microcar/surface-regions.json",
+    "meaning": "Actual exported triangle rays and interpolated UV samples independently check the panoramic front, continuous side panes and dark frame edges on rounded body skin, pale roof, rose lower skin, rear vent and short front nose. Closed passenger cabin; no open-interior claim.",
+    "inputBytesUnchanged": true
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/microcar/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/microcar/capture.mjs",
+    "python scripts/vehicle-bake/microcar/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/microcar/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/microcar/v1/evidence/clearance-input.json data/vehicle-bake/microcar/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/microcar/v1/model.glb --config art-source/vehicle-bake/microcar/v1/coverage-region.json --output data/vehicle-bake/microcar/recheck-coverage.json",
+    "python scripts/vehicle-bake/microcar/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/microcar/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16study and all16game heading captures at native224/radius112 and the unchanged world pixel density. Short3.2-source-unit microcar remains visibly smaller than normal cars without auto fitting/shrinking or clipping.",
+    "Own egg body, high pale rounded upper shell, short rounded front-door/nose and tiny four wheels read as bubble microcar. No van/coupe/SUV rescaling, separate cabin box or stretched hood geometry.",
+    "Dusty rose/coral pink body and pale upper paint form broad coherent clusters; curved panoramic front glass and a single continuous side pane per side have dark perimeter frames on the actual rounded skin. No intersecting glass overlays, duplicated apertures, PBR, logos, text or cartoon facial features.",
+    "Front obliques show ordinary round cream lamps on the compact rounded nose; rear obliques show short vent paint and restrained tiny bumper/lamp detail. Side window and front pillar separation remain readable.",
+    "Far wheel crowns remain beneath real integrated body/fenders at both narrowing egg ends in all heading views, including front/rear obliques. Near wheels are seated in real open local arch pockets; no detached raised-cap silhouette or blocking wheel/body intersections.",
+    "Inspected8signed roll phases per camera and both wireframes. Four independent standard roadwheel rigs only; fixed body/upper paint/frames/lamps stay fixed. Automated independent quarter turn, reverse and absolute reset proof passes.",
+    "Additionally inspected individual224px native opposing front/rear obliques and side views. Tiny wheels remain readable; glass/frame/roof ownership is coherent and rear crown coverage remains sound.",
+    "ActualGLB triangle-ray/barycentric UV audit separately verifies both continuous side panes/frames, curved panoramic windshield/frame, pale roof, rose lower skin, short rear vent and rounded nose.",
+    "Expected slight native aliasing on curved window corners, round lamps, rear vents and tiny chrome highlights; no blocking visual findings.",
+    "Closed passenger cabin; no open-interior depth or high-to-low transfer claim. No visible animated driver; existing ordinary driving semantics, no new rider or equipment gameplay."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 11,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Closed egg-shaped passenger cabin; no open-interior depth or animated equipment claim.",
+    "Curved window frame edges, round lamps, rear vent bars and tiny chrome highlights retain expected angle-dependent native pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/microcar/v1/atlas.png": "f21ea2d9f704abaa3ca47f51ff8bb3478bada3e1b0e0358e7c28570e887d10e7",
+    "art-source/vehicle-bake/microcar/v1/audit-source.py": "651dbb115983033438143c24fe6a2e5e723ec663f45bc6bff97ee2f2b57ae96d",
+    "art-source/vehicle-bake/microcar/v1/build.py": "592e5b11e9a204d81c0b3b8dcac5b601354fe0ed135410a2469fced5b3384d14",
+    "art-source/vehicle-bake/microcar/v1/capture.mjs": "4018428c0d65568ee8a09fc2ffe85cd338f4c8001f31f52c8173bf161c42f284",
+    "art-source/vehicle-bake/microcar/v1/car.blend": "d1ee5248cc176207005c455608171d6a2649364f4ee7cfa705d0dd9c7e8e69b2",
+    "art-source/vehicle-bake/microcar/v1/coverage-region.json": "5f5d61290d3275580c00711d1037e35233285c89a0547ad0eb370067b27670be",
+    "art-source/vehicle-bake/microcar/v1/evidence/author-browser-qa.json": "1ef41e0eed9b1df4cd962ba94a4e66358841f78cd724d0ad49c3f090c8f650ba",
+    "art-source/vehicle-bake/microcar/v1/evidence/author-visual-inspection.json": "5a12cd8035e868454eea2d29769ac9c22798a790d901ab6cabbb45c945497030",
+    "art-source/vehicle-bake/microcar/v1/evidence/clearance-input.json": "1f0c53e595fb813ae7ed83fd08a3aed085de064aed52ac0505edb95a50572cde",
+    "art-source/vehicle-bake/microcar/v1/evidence/engine-capture.json": "c124b863080072699ac9435a3a2a8e937b4d3182902e86fe3fd64e9a1579d938",
+    "art-source/vehicle-bake/microcar/v1/evidence/packed-source-audit.json": "c8216f6a924d74a93c1357c8b6f8f5c263a43dfb095efcc7158d667099231f73",
+    "art-source/vehicle-bake/microcar/v1/evidence/replay-verification.json": "2efc570c6f81d7c0b0d4793a6a3bf9978c7c0a4613b923e8a5eb5af7b6935a9a",
+    "art-source/vehicle-bake/microcar/v1/evidence/shared-clearance.json": "a147a1fdc3131de7181578913800b7edbdb36aa3f3c4132d0546ad1fc1d2485f",
+    "art-source/vehicle-bake/microcar/v1/evidence/upper-wheel-coverage.json": "aff722bc70bc3f6b6baf01af9e09437daef14c172a1a921da6447840d8f5be04",
+    "art-source/vehicle-bake/microcar/v1/family.json": "6387b66916c956b39b0ec6e4298fa3d916092a0ab9f15d9280e49590fbe0e225",
+    "art-source/vehicle-bake/microcar/v1/finalize.py": "19dd106e8434a0a695730d9329f4b8cd430ab343b3598ea55075506e85cd8124",
+    "art-source/vehicle-bake/microcar/v1/master.blend": "3ec7243159861e823c9bde31968609f5d67e7a6390e1b9ef84182831a7867bf0",
+    "art-source/vehicle-bake/microcar/v1/model.glb": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+    "art-source/vehicle-bake/microcar/v1/pack-author.py": "7fe71cc29b6e28d2381caeff9fd18a2180b8e5710ed342a1dfaff1660d213b32",
+    "art-source/vehicle-bake/microcar/v1/paint-ownership.json": "8cfc5ca009ea8ee698c5a0386abf5467f69d6e7e8ced2ebd39c3c843ef8720b1",
+    "art-source/vehicle-bake/microcar/v1/palette-draft.png": "90d659e3a6b1c6312f25e0fac0aeddae5f97aead0245574f0ae66f7503b6a59d",
+    "art-source/vehicle-bake/microcar/v1/recipe.json": "e10254fe5790831ee7d316a6c4ed9b55500b4ee6cf21deab34f2e9139f8c2a15",
+    "art-source/vehicle-bake/microcar/v1/review.json": "711bcb36a873f26b359f202b9c72bb1dc01d4991fb416a9e7ecbd7c19ed1147a",
+    "art-source/vehicle-bake/microcar/v1/sheets.py": "d2e54ff86010fc837f6fedbba7616d159f9f38288ad5cf21f6efd899b9a14465",
+    "art-source/vehicle-bake/microcar/v1/surface-regions.json": "bb93ddc8635a6a671246c6d587a38adf5a9d4cb534b93dd73b63c02986d4fe68"
+  }
+}

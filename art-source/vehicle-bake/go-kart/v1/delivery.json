@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/go-kart/v1/report.json",
+  "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+  "atlasSha256": "45c680538913e561079b423ef1249820ac0c87901cf0e13d675e16869df3ac8f",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/go-kart/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/go-kart/capture.mjs",
+    "python scripts/vehicle-bake/go-kart/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/go-kart/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/go-kart/v1/evidence/clearance-input.json data/vehicle-bake/go-kart/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/go-kart/v1/model.glb --config art-source/vehicle-bake/go-kart/v1/coverage-region.json --output data/vehicle-bake/go-kart/recheck-coverage.json",
+    "python scripts/vehicle-bake/go-kart/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/go-kart/author-config.json --qa-only"
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "hot-rod",
+  "route": "hot-rod",
+  "revision": "v1",
+  "method": "Independent chopped closed-cab hot rod with narrow exposed V8/chassis, intentionally open small front wheels and real rear fenders covering fat rear tires. Plum coachwork and restrained orange flames use own continuous actual-skin charts. Separate fixed glass/roof ownership; no screen projection.",
+  "geometry": {
+    "triangles": 3194,
+    "vertices": 6335,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 231608,
+    "sha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 5.565217391304349,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 5.565217391304349,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 9.56521739130435,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 9.56521739130435,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.399999976158142,
+        -1.0,
+        0.3199999928474426
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.565217266912047,
+        17.39130434782609
+      ],
+      "radiusBlender": 0.32,
+      "wheel_radius": 5.565217391304349
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.399999976158142,
+        1.0,
+        0.3199999928474426
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.565217266912047,
+        -17.39130434782609
+      ],
+      "radiusBlender": 0.32,
+      "wheel_radius": 5.565217391304349
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.0299999713897705,
+        -0.8899999856948853,
+        0.550000011920929
+      ],
+      "centerExport": [
+        17.913042980691664,
+        9.565217598624853,
+        15.478260620780615
+      ],
+      "radiusBlender": 0.55,
+      "wheel_radius": 9.56521739130435
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.0299999713897705,
+        0.8899999856948853,
+        0.550000011920929
+      ],
+      "centerExport": [
+        17.913042980691664,
+        9.565217598624853,
+        -15.478260620780615
+      ],
+      "radiusBlender": 0.55,
+      "wheel_radius": 9.56521739130435
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/hot-rod/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/hot-rod/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/hot-rod/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending",
+  "authorization": "autonomous-153",
+  "triangles": 3194,
+  "vertexCount": 6335,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 231608,
+  "atlasBytes": 3244,
+  "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+  "atlasSha256": "4ee45269c3ebe6b291f13789fc0bf7e947d3555fa9e75d86e75b4ec95454ddff",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "hot-rod--v1",
+    "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "triangles": 3194,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.565217564413184,
+        "minimumGap": 24.614084232589153,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.565217564413184,
+        "minimumGap": 24.614084232589153,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 9.565218053588476,
+        "minimumGap": 1.6424182658782094,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 9.565218053588476,
+        "minimumGap": 1.6424182658782094,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/hot-rod/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/hot-rod/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "assessment",
+    "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "allFourCrownsCovered": false,
+    "frontCoverage": "not-applicable/intentionally-open",
+    "rearCoverage": "meets-declared-finite-region",
+    "ownerAuthorizedFrontException": true,
+    "policy": "Small front wheels are intentionally exposed outboard of the narrow chassis. No front fender caps or claim of supported front crowns. Raw shared expected-fraction failures are retained, not changed to passes.",
+    "regionMeaning": "Finite region is declared for the fat rear tire tread. Front samples remain raw diagnostics only and do not qualify front tread coverage.",
+    "front": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "applicability": "not-applicable/intentionally-open",
+        "rawCoveredCount": 0,
+        "rawSampleCount": 25,
+        "rawDeclaredExpectationMet": false
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "applicability": "not-applicable/intentionally-open",
+        "rawCoveredCount": 0,
+        "rawSampleCount": 25,
+        "rawDeclaredExpectationMet": false
+      }
+    ],
+    "rear": [
+      {
+        "wheel": "Wheel_RL_Roll",
+        "applicability": "covered rear fender",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "applicability": "covered rear fender",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": true,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "portableRawEvidence": "art-source/vehicle-bake/hot-rod/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "87b537608b88b4cf52c616eea610c9d5621fc96cab5c171dcdae28893520ca6c",
+    "separateRequirements": "All-four whole-fixed-body neutral rolling clearance and collision negative/reset mandatory; all32 native study/game views and wheel-ID diagnostics separately inspect exposed front attachment and rear occlusion. No universal coverage pass asserted."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "minBlenderWorld": [
+      -36.695648193359375,
+      -20.869565963745117,
+      0.0
+    ],
+    "maxBlenderWorld": [
+      36.34782409667969,
+      20.869565963745117,
+      27.826086044311523
+    ],
+    "dimensionsBlenderWorld": [
+      73.04347229003906,
+      41.739131927490234,
+      27.826086044311523
+    ],
+    "dimensionsSourceUnits": [
+      4.199999656677245,
+      2.4000000858306882,
+      1.5999999475479123
+    ]
+  },
+  "frontAttachmentEvidence": {
+    "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 16.000001907348633,
+        "actualStaticArmEndAbsY": 15.739130020141602,
+        "axialGapWorld": 0.26087188720703125,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 16.000001907348633,
+        "actualStaticArmEndAbsY": 15.739130020141602,
+        "axialGapWorld": 0.26087188720703125,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "mixedRadiusVisualEvidence": "engine/mixed-wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/hot-rod/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/hot-rod/capture.mjs",
+    "node scripts/vehicle-bake/hot-rod/independent-visual.mjs",
+    "node scripts/vehicle-bake/hot-rod/mixed-wheel-visual.mjs",
+    "python scripts/vehicle-bake/hot-rod/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/hot-rod/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/hot-rod/v1/evidence/clearance-input.json data/vehicle-bake/hot-rod/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/hot-rod/v1/model.glb --config art-source/vehicle-bake/hot-rod/v1/coverage-region.json --output data/vehicle-bake/hot-rod/recheck-coverage.json",
+    "python scripts/vehicle-bake/hot-rod/assess-coverage.py --input data/vehicle-bake/hot-rod/recheck-coverage.json",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/hot-rod/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/hot-rod/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected16 study+16 game actual textured GLB headings at224 native/fixed density, plus fixed-crop nearest detail sheets. Recognizable chopped closed cab, short rounded tail, broad-block exposed gray V8, narrow front chassis, small skinny front wheels, oversized rear tires, fixed side pipes and restrained orange flame shapes on plum skin. No logos/tiny text/PBR appearance.",
+    "Cab side cool-blue glass uses continuous dark framed own skin chart; windshield/rear glass half-charts and roof have separate semantic owners. Orange flame polygons are atlas paint on actual side skin, not screen overlays or geometry clutter. Engine reads as broad crankcase/valve-bank/intake/air-cleaner blocks.",
+    "Intentionally open front wheels remain exposed/outboard, visibly next to engine/front chassis in both complete camera sets, never assigned to cab roof. Actual exported attachment arms stop0.260872world units short of each front tire slab, below one logical pixel. Native line/hub attachment looks seated rather than floating.",
+    "Rear tires are under broad integrated plum fenders with real open outer arches and closed inboard wheelhouse cheeks. Tightened wheel-local rear pockets leave a clean body join. No visible rear wheel crowns on cab/trunk roof or above real rear fenders; temporary32-view wheel-ID colors independently distinguish tires from plum inner-panel crease/shadow lines.",
+    "Coverage is explicitly per axle: shared raw front0/25each and declaredExpectationMet=false retained unchanged; frontN/A/intentionally-open by owner instruction, no all-four covered metric claimed. Rear25/25each meets own finite fat-tire region; positive/negative ray controls pass. All-four neutral-roll fixed-triangle nonintersection, collision negative and reset separately pass.",
+    "Inspected8 ordinary shared-distance phases/camera,8 additional equal-angle phases/camera using each wheel own radius, both wireframes and per-wheel neutral/quarter/reverse/reset visuals. Front radius.32/rear.55 each match own exported geometry; all other wheels/static engine/exhaust/body stay fixed; reset pixels identical.",
+    "Packed master63 semantic meshes/low5,2 packed images and one UV layer audited. Actual bounds4.2x2.4x1.6source; no camera fitting/rescale/recenter. No blocking visual findings. Minor native aliasing of skinny front hubs/chrome headers and plum wheelhouse join lines remains.",
+    "Neutral steering only; no steering/suspension/exhaust/equipment/new physics qualification. Honest front exception remains explicit in portable raw evidence, assessment and final report."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "mixedRadiusesMatchOwnWheelGeometry": true,
+    "staticV8AndSideExhaust": true,
+    "allFourEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "rearCrown25of25EachWithControls": true,
+    "frontCoverage": "not-applicable/intentionally-open",
+    "allFourCrownsCovered": false,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Rear crown region25/25 each with controls; front0/25 raw results retained as intentionally-open/not-applicable by explicit owner exception. No all-four coverage pass asserted.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Exposed front wheels intentionally remain visible outboard of chassis. Minor native aliasing of gray headers/lamps/hub marks varies with heading.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/hot-rod/v1/assess-coverage.py": "2c665014e6e87826013a93ae6fea1b4529ffac23c5db2d46844c8519f52e7f47",
+    "art-source/vehicle-bake/hot-rod/v1/atlas.png": "4ee45269c3ebe6b291f13789fc0bf7e947d3555fa9e75d86e75b4ec95454ddff",
+    "art-source/vehicle-bake/hot-rod/v1/audit-source.py": "c20a0e519f9988f84dbea94031eb1851a75a23ddb4db65a80f069c06f0fdcc3d",
+    "art-source/vehicle-bake/hot-rod/v1/build.py": "772068a12c7a4a4dede341abb1ad88711c98768be076b4d33db036b6f10bf451",
+    "art-source/vehicle-bake/hot-rod/v1/capture.mjs": "fe9421eafccfdadad6736bcfdf02d527431ae4c22eb97320d84b59589c05aa33",
+    "art-source/vehicle-bake/hot-rod/v1/car.blend": "cf92d5cd7346e53b468684fd050a754438ad27fe80e3682b515bc02c61c30bba",
+    "art-source/vehicle-bake/hot-rod/v1/coverage-region.json": "a1013b60eba1ebab45e109217c8db1ac6958e6f78e9a3a70132d95dc42d39425",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/author-browser-qa.json": "61dca5e88e85c687f208f019226c0188c3de28beb103da5fcf58d9b0a50c8db4",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/author-visual-inspection.json": "8ae0acbaa740536f482182693e64f18802df19d09533271c3d517cfa40bbf268",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/clearance-input.json": "9ff91e02735b63bfa328c4f322b0b22bd194ad65229b6595f75ca7c85646669d",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/engine-capture.json": "55d07580aa012e9ddde283877a54e422142422a076295e790eccc357f9048b92",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/independent-visual.json": "5eca045f8a976531fb1f7d7cc377082c2023e893bfb26544dd4939d0041cd1c7",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/mixed-wheel-visual.json": "61440403733f9cfa6eda3b31354668afbb0b2e7ad7802c86b38106aeab421104",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/packed-source-audit.json": "2aed8cb0589ed34c05e8df84d096745f8c39bcb814c8207eacad154d820539ff",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/replay-verification.json": "db53b8320c95fdf2af4fafc27a89c38cd692e9dc7c883f9b3d6867bd6c5d1410",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/shared-clearance.json": "19e2a83fd22646d674cd908e9736d148e0306dcdef152f20c93296221625fbd0",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/upper-wheel-coverage-raw.json": "87b537608b88b4cf52c616eea610c9d5621fc96cab5c171dcdae28893520ca6c",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/wheel-coverage-assessment.json": "c65ca7e459f905296aeac44bdf205870393f4e27d06a57471439b5caebd269a6",
+    "art-source/vehicle-bake/hot-rod/v1/family.json": "05f6e87a42c3793469d391eb7f25571f15c7957d0a8a3df3ef1b1aa41a1909d9",
+    "art-source/vehicle-bake/hot-rod/v1/finalize.py": "9cf15eaa6dd35359d83f72acabb1a2d76ead5830bf58371d1570d8656f3c652e",
+    "art-source/vehicle-bake/hot-rod/v1/geometry.py": "7b717a1c3fedd849979fa4c8f44b02ae550505c2cb3a6594bcdfbe94cf3eaad3",
+    "art-source/vehicle-bake/hot-rod/v1/independent-visual.mjs": "52a6fc4c351b5be9c26801356638c22594741bc150f3e9df93c8678a1363ed40",
+    "art-source/vehicle-bake/hot-rod/v1/master.blend": "20533837114f1f8396bba6c109f9805d5b76b2b042c038adfa959293855ca6fe",
+    "art-source/vehicle-bake/hot-rod/v1/mixed-wheel-visual.mjs": "e3a516386ccad5f5708bbc32834797793fb67986c30aa1e5efe766be19bf3c37",
+    "art-source/vehicle-bake/hot-rod/v1/model.glb": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "art-source/vehicle-bake/hot-rod/v1/paint-ownership.json": "48bc86076cc4207f833486a2f77a7e88f92241b2dd62a32f70e9c8c29b36670a",
+    "art-source/vehicle-bake/hot-rod/v1/palette-draft.png": "79484e2cacd62cb16971465ed250e0f11d8599e9bf6487a1d8e7564c17cf596c",
+    "art-source/vehicle-bake/hot-rod/v1/recipe.json": "649f8267aa74e1f1b5bb7143612aaf1d4d5515491ef8d07e1451f59b9c585f3c",
+    "art-source/vehicle-bake/hot-rod/v1/review.json": "b69e2397f64006ca11b18b3428c26703a9e508e633a0945cf9d93f09c6f0bc09",
+    "art-source/vehicle-bake/hot-rod/v1/sheets.py": "0f6b175a13ccb9cbfb54435a9cec2881b63acf0cd99eabed23b59af89ecc5b0b"
+  }
+}

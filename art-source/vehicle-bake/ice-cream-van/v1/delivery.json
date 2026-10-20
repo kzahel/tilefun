@@ -1,0 +1,20 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/ice-cream-van/v1/report.json",
+  "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+  "atlasSha256": "1ce9d85a871391bcaaa912228bf61f78955ed970827e507c7cdaf5dfa19f0b84",
+  "replayCommands": [
+    "python art-source/vehicle-bake/ice-cream-van/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/ice-cream-van/capture.mjs",
+    "python scripts/vehicle-bake/ice-cream-van/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/ice-cream-van/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/ice-cream-van/v1/evidence/clearance-input.json data/vehicle-bake/ice-cream-van/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/ice-cream-van/v1/model.glb --config art-source/vehicle-bake/ice-cream-van/v1/coverage-region.json --output data/vehicle-bake/ice-cream-van/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/ice-cream-van/v1/prove-recess.py -- --input public/demos/vehicle-bake/ice-cream-van/v1/model.glb --output data/vehicle-bake/ice-cream-van/recheck-recess.json",
+    "python scripts/vehicle-bake/ice-cream-van/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/ice-cream-van/author-config.json --qa-only"
+  ]
+}

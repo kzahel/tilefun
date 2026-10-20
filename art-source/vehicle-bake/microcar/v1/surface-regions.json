@@ -1,0 +1,72 @@
+{
+  "name": "microcar-own-rounded-skin-surface-regions-v1",
+  "meaning": "Actual exported triangle rays and interpolated UV samples independently check the panoramic front, continuous side panes and dark frame edges on rounded body skin, pale roof, rose lower skin, rear vent and short front nose. Closed passenger cabin; no open-interior claim.",
+  "rays": [
+    {
+      "id": "left-continuous-side-glass",
+      "origin": [0.05, -3, 1.1],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-continuous-side-glass",
+      "origin": [0.05, 3, 1.1],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-side-front-frame",
+      "origin": [-0.45, -3, 1.1],
+      "direction": [0, 1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "right-side-front-frame",
+      "origin": [-0.45, 3, 1.1],
+      "direction": [0, -1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "left-rose-lower-skin",
+      "origin": [0.4, -3, 0.7],
+      "direction": [0, 1, 0],
+      "roles": ["paint", "paintMid"]
+    },
+    {
+      "id": "right-rose-lower-skin",
+      "origin": [0.4, 3, 0.7],
+      "direction": [0, -1, 0],
+      "roles": ["paint", "paintMid"]
+    },
+    {
+      "id": "panoramic-curved-front-glass",
+      "origin": [-3, 0, 1.5],
+      "direction": [1, 0, 0],
+      "roles": ["glassLight", "glassGlint", "glass"]
+    },
+    {
+      "id": "panoramic-front-frame",
+      "origin": [-3, 0, 1.35],
+      "direction": [1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "pale-rounded-roof",
+      "origin": [0.2, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["roof"]
+    },
+    {
+      "id": "short-rear-vent-bar",
+      "origin": [1.17, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintDeep"]
+    },
+    {
+      "id": "rounded-front-door-nose",
+      "origin": [-3, 0, 0.9],
+      "direction": [1, 0, 0],
+      "roles": ["paintLight"]
+    }
+  ]
+}

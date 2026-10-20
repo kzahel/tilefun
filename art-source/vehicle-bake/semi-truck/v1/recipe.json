@@ -1,0 +1,984 @@
+{
+  "family": "rigid-purple-tractor-cream-teal-box-trailer",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    9.2,
+    2.6,
+    3.05
+  ],
+  "wheelRadius": 0.5,
+  "wheelWidth": 0.32,
+  "axles": [
+    -3.45,
+    -0.75,
+    3.45
+  ],
+  "halfTrack": 0.97,
+  "arch": {
+    "cutRadius": 0.6,
+    "pocketInnerY": 0.72,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [
+      0.7,
+      0.85,
+      1.07,
+      1.18,
+      1.22
+    ],
+    "shoulderRadii": [
+      0.62,
+      0.66,
+      0.66,
+      0.64,
+      0.62
+    ],
+    "archRadius": 0.59
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      77,
+      53,
+      105
+    ],
+    "paintShadow": [
+      103,
+      69,
+      137
+    ],
+    "paintMid": [
+      132,
+      89,
+      166
+    ],
+    "paint": [
+      159,
+      112,
+      191
+    ],
+    "paintLight": [
+      185,
+      139,
+      210
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "deck": [
+      163,
+      168,
+      176
+    ],
+    "deckLight": [
+      184,
+      188,
+      195
+    ],
+    "deckEdge": [
+      124,
+      135,
+      145
+    ],
+    "deckSeam": [
+      98,
+      107,
+      119
+    ],
+    "frame": [
+      63,
+      69,
+      79
+    ],
+    "box": [
+      245,
+      235,
+      203
+    ],
+    "boxRoof": [
+      255,
+      248,
+      225
+    ],
+    "boxShadow": [
+      207,
+      199,
+      173
+    ],
+    "teal": [
+      50,
+      146,
+      147
+    ]
+  },
+  "render": {
+    "nativeSize": 288,
+    "meshRadius": 144,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      144,
+      172
+    ],
+    "engineGroundOrigin": [
+      144,
+      144
+    ]
+  },
+  "paintMethod": "Own rigid purple tractor and long cream/teal box trailer with distinct actual UV owners, real open coupling gap/fifth-wheel/frame bridge, six covered independent road wheels and two restrained fixed silver stacks below trailer roof. No articulation/hitch/separate trailer physics or high-to-low transfer claim.",
+  "bodyStations": [
+    [
+      -4.43,
+      1.0,
+      1.22
+    ],
+    [
+      -4.3,
+      1.07,
+      1.48
+    ],
+    [
+      -4.05,
+      1.08,
+      1.6
+    ],
+    [
+      -3.8,
+      1.1,
+      2.48
+    ],
+    [
+      -3.55,
+      1.1,
+      2.67
+    ],
+    [
+      -2.0,
+      1.1,
+      2.67
+    ],
+    [
+      -1.78,
+      1.065,
+      2.53
+    ]
+  ],
+  "bodySection": [
+    [
+      -0.87,
+      0
+    ],
+    [
+      -1,
+      0.07
+    ],
+    [
+      -1,
+      0.42
+    ],
+    [
+      -0.99,
+      0.8
+    ],
+    [
+      -0.97,
+      0.92
+    ],
+    [
+      -0.9,
+      0.985
+    ],
+    [
+      -0.7,
+      1.015
+    ],
+    [
+      0,
+      1.025
+    ],
+    [
+      0.7,
+      1.015
+    ],
+    [
+      0.9,
+      0.985
+    ],
+    [
+      0.97,
+      0.92
+    ],
+    [
+      0.99,
+      0.8
+    ],
+    [
+      1,
+      0.42
+    ],
+    [
+      1,
+      0.07
+    ],
+    [
+      0.87,
+      0
+    ]
+  ],
+  "toolchain": "multi-axle-v2",
+  "wheelIds": [
+    "FL",
+    "FR",
+    "ML",
+    "MR",
+    "RL",
+    "RR"
+  ],
+  "axleDefinitions": [
+    {
+      "id": "F",
+      "x": -3.45,
+      "meaning": "tractor front"
+    },
+    {
+      "id": "M",
+      "x": -0.75,
+      "meaning": "tractor drive"
+    },
+    {
+      "id": "R",
+      "x": 3.45,
+      "meaning": "trailer rear"
+    }
+  ],
+  "trailer": {
+    "xRange": [
+      -1.05,
+      4.55
+    ],
+    "width": 2.5,
+    "bottomZ": 1.26,
+    "roofZ": 3.03,
+    "meaning": "Long closed rigid visual trailer box; parent later owns any articulation/hitch/physics design"
+  },
+  "components": [
+    {
+      "name": "Own tall purple tractor cab",
+      "group": "body",
+      "triangles": 322,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Own long rigid cream box trailer",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "box"
+      ]
+    },
+    {
+      "name": "Tractor dark frame rail -0.56",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Trailer dark underframe rail -0.56",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Tractor dark frame rail 0.56",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Trailer dark underframe rail 0.56",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Rigid frame crossmember -1.64",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Rigid frame crossmember -0.35",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Rigid frame crossmember 1.65",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Rigid frame crossmember 4.26",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Visible fifth-wheel coupling plate",
+      "group": "body",
+      "triangles": 46,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Fixed fifth-wheel frame saddle",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Fixed visual coupling kingpin",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Restrained silver exhaust stack -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Exhaust dark outlet -1",
+      "group": "body",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Restrained silver exhaust stack 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Exhaust dark outlet 1",
+      "group": "body",
+      "triangles": 22,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Trailer guard fixed hanger (-1.1099999999999999, -1)",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Trailer guard fixed hanger (-1.1099999999999999, 1)",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Trailer guard fixed hanger (-0.39, -1)",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Trailer guard fixed hanger (-0.39, 1)",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Trailer guard fixed hanger (3.0900000000000003, -1)",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Trailer guard fixed hanger (3.0900000000000003, 1)",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Trailer guard fixed hanger (3.81, -1)",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Trailer guard fixed hanger (3.81, 1)",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard -3.45 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard -3.45 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard -0.75 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "deck",
+        "deckLight",
+        "deckSeam"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard -0.75 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "deck",
+        "deckLight",
+        "deckSeam"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard 3.45 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "deck",
+        "deckLight",
+        "deckSeam"
+      ]
+    },
+    {
+      "name": "Integrated truck arch guard 3.45 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "deck",
+        "deckLight",
+        "deckSeam"
+      ]
+    },
+    {
+      "name": "Silver tractor front bumper",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Rear gray trailer bumper",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "deckEdge"
+      ]
+    },
+    {
+      "name": "Trailer red rear lamp -1.04",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Trailer red rear lamp 1.04",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Fixed cab mirror stalk -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Compact fixed blue mirror -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Mirror glass owner -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "glass"
+      ]
+    },
+    {
+      "name": "Fixed cab mirror stalk 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Compact fixed blue mirror 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Mirror glass owner 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "glass"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber ML",
+      "group": "ML",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim ML-1",
+      "group": "ML",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub ML-1",
+      "group": "ML",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint ML-1",
+      "group": "ML",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber MR",
+      "group": "MR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim MR1",
+      "group": "MR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub MR1",
+      "group": "MR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint MR1",
+      "group": "MR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -3.450000047683716,
+        -0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        -60.00000082928202,
+        8.695652173913045,
+        16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -3.450000047683716,
+        0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        -60.00000082928202,
+        8.695652173913045,
+        -16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "ML",
+      "centerBlender": [
+        -0.75,
+        -0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        -13.043478260869566,
+        8.695652173913045,
+        16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "MR",
+      "centerBlender": [
+        -0.75,
+        0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        -13.043478260869566,
+        8.695652173913045,
+        -16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        3.450000047683716,
+        -0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        60.00000082928202,
+        8.695652173913045,
+        16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        3.450000047683716,
+        0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        60.00000082928202,
+        8.695652173913045,
+        -16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    }
+  ],
+  "method": "Own rigid purple tractor and long cream/teal box trailer with distinct actual UV owners, real open coupling gap/fifth-wheel/frame bridge, six covered independent road wheels and two restrained fixed silver stacks below trailer roof. No articulation/hitch/separate trailer physics or high-to-low transfer claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/semi-truck/build.py",
+    "scripts/vehicle-bake/semi-truck/family.json",
+    "scripts/vehicle-bake/semi-truck/coverage-region.json",
+    "scripts/vehicle-bake/semi-truck/surface-regions.json",
+    "scripts/vehicle-bake/semi-truck/coupling-region.json",
+    "scripts/vehicle-bake/semi-truck/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog-v2.py:audit_glb(wheel_ids=all6) + underlying catalog.py",
+    "scripts/vehicle-bake/clearance-v2.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "xSamples": [-3.3, -2.8, -2.2],
+  "ySamples": [0, 0.5],
+  "minimumThickness": 0.4,
+  "minimumFrontProtrusion": 0.12,
+  "meaning": "Actual exported top/underside triangles prove a solid overhead sleeping pod; flattening the pod must fail, restoring exact coordinates must pass."
+}

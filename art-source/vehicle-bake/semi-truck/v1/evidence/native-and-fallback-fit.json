@@ -1,0 +1,569 @@
+{
+  "status": "passed",
+  "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+  "nativeSize": 288,
+  "meshRadius": 144,
+  "paddingComparison": [
+    {
+      "centeredViewport": 224,
+      "viewsTouchingOrExceedingBoundary": [
+        {
+          "camera": "engine",
+          "headingIndex": 2
+        },
+        {
+          "camera": "engine",
+          "headingIndex": 3
+        },
+        {
+          "camera": "engine",
+          "headingIndex": 4
+        },
+        {
+          "camera": "engine",
+          "headingIndex": 5
+        },
+        {
+          "camera": "engine",
+          "headingIndex": 6
+        }
+      ]
+    },
+    {
+      "centeredViewport": 256,
+      "viewsTouchingOrExceedingBoundary": [
+        {
+          "camera": "engine",
+          "headingIndex": 3
+        },
+        {
+          "camera": "engine",
+          "headingIndex": 4
+        },
+        {
+          "camera": "engine",
+          "headingIndex": 5
+        }
+      ]
+    }
+  ],
+  "centered128GameCropProof": [
+    {
+      "yaw": 0,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 22.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 45,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 67.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 90,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 112.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 135,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 157.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 180,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 202.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 225,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 247.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 270,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 292.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 315,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    },
+    {
+      "yaw": 337.5,
+      "comparedPixels": 15876,
+      "mismatchedChannels": 0,
+      "includesInteriorOutline": true,
+      "excludedFrameBoundary": 1
+    }
+  ],
+  "headings": [
+    {
+      "camera": "study",
+      "headingIndex": 0,
+      "alphaBounds": [
+        62,
+        121,
+        226,
+        187
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 1,
+      "alphaBounds": [
+        61,
+        99,
+        228,
+        206
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 2,
+      "alphaBounds": [
+        72,
+        82,
+        216,
+        223
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 3,
+      "alphaBounds": [
+        95,
+        74,
+        195,
+        231
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 4,
+      "alphaBounds": [
+        122,
+        76,
+        166,
+        231
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 5,
+      "alphaBounds": [
+        93,
+        74,
+        193,
+        231
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 6,
+      "alphaBounds": [
+        72,
+        82,
+        216,
+        223
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 7,
+      "alphaBounds": [
+        60,
+        99,
+        227,
+        206
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 8,
+      "alphaBounds": [
+        62,
+        121,
+        226,
+        187
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 9,
+      "alphaBounds": [
+        60,
+        111,
+        227,
+        204
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 10,
+      "alphaBounds": [
+        72,
+        98,
+        216,
+        220
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 11,
+      "alphaBounds": [
+        93,
+        91,
+        193,
+        228
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 12,
+      "alphaBounds": [
+        122,
+        91,
+        166,
+        227
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 13,
+      "alphaBounds": [
+        95,
+        91,
+        195,
+        228
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 14,
+      "alphaBounds": [
+        72,
+        98,
+        216,
+        220
+      ]
+    },
+    {
+      "camera": "study",
+      "headingIndex": 15,
+      "alphaBounds": [
+        61,
+        111,
+        228,
+        204
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 0,
+      "alphaBounds": [
+        64,
+        70,
+        224,
+        163
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 1,
+      "alphaBounds": [
+        62,
+        42,
+        225,
+        186
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 2,
+      "alphaBounds": [
+        73,
+        21,
+        214,
+        208
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 3,
+      "alphaBounds": [
+        94,
+        11,
+        192,
+        219
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 4,
+      "alphaBounds": [
+        122,
+        13,
+        166,
+        218
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 5,
+      "alphaBounds": [
+        96,
+        11,
+        194,
+        219
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 6,
+      "alphaBounds": [
+        74,
+        21,
+        215,
+        208
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 7,
+      "alphaBounds": [
+        63,
+        42,
+        226,
+        186
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 8,
+      "alphaBounds": [
+        64,
+        70,
+        224,
+        163
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 9,
+      "alphaBounds": [
+        63,
+        59,
+        226,
+        185
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 10,
+      "alphaBounds": [
+        74,
+        42,
+        215,
+        203
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 11,
+      "alphaBounds": [
+        96,
+        34,
+        194,
+        214
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 12,
+      "alphaBounds": [
+        122,
+        34,
+        166,
+        212
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 13,
+      "alphaBounds": [
+        94,
+        34,
+        192,
+        214
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 14,
+      "alphaBounds": [
+        73,
+        42,
+        214,
+        203
+      ]
+    },
+    {
+      "camera": "engine",
+      "headingIndex": 15,
+      "alphaBounds": [
+        62,
+        59,
+        225,
+        185
+      ]
+    }
+  ],
+  "fallbackFrame": [
+    192,
+    224
+  ],
+  "fallbackOrigin": [
+    96,
+    144
+  ],
+  "sourceGameOrigin": [
+    144,
+    144
+  ],
+  "translation": [
+    -48,
+    0
+  ],
+  "cardinals": [
+    {
+      "headingIndex": 4,
+      "nativeBounds": [
+        122,
+        13,
+        166,
+        218
+      ],
+      "fallbackBounds": [
+        74,
+        13,
+        118,
+        218
+      ],
+      "fitsWithoutPixelLoss": true
+    },
+    {
+      "headingIndex": 12,
+      "nativeBounds": [
+        122,
+        34,
+        166,
+        212
+      ],
+      "fallbackBounds": [
+        74,
+        34,
+        118,
+        212
+      ],
+      "fitsWithoutPixelLoss": true
+    },
+    {
+      "headingIndex": 8,
+      "nativeBounds": [
+        64,
+        70,
+        224,
+        163
+      ],
+      "fallbackBounds": [
+        16,
+        70,
+        176,
+        163
+      ],
+      "fitsWithoutPixelLoss": true
+    },
+    {
+      "headingIndex": 0,
+      "nativeBounds": [
+        64,
+        70,
+        224,
+        163
+      ],
+      "fallbackBounds": [
+        16,
+        70,
+        176,
+        163
+      ],
+      "fitsWithoutPixelLoss": true
+    }
+  ],
+  "meaning": "Fixed native cameras and world density. Only transparent padding can be cropped/added. Cardinal occupied pixel order/RGBA values are compared exactly after integer translation; no resize or recenter."
+}

@@ -1,0 +1,300 @@
+{
+  "status": "passed",
+  "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+  "inputBytesUnchanged": true,
+  "configuration": {
+    "meaning": "Real side-opening depth is measured from actual exported triangles; an inserted outer false panel and raised inner deck must fail independently, with reset.",
+    "outerY": -1.04,
+    "backY": -0.53,
+    "minimumDepth": 0.4,
+    "maximumDepth": 0.65,
+    "xSamples": [
+      0,
+      0.7,
+      1.4
+    ],
+    "zSamples": [
+      1.35,
+      1.6,
+      1.85
+    ],
+    "counterX": [
+      0,
+      0.7,
+      1.4
+    ],
+    "counterY": [
+      -0.85,
+      -0.65
+    ],
+    "counterTopZ": 1.18,
+    "depthTolerance": 0.025
+  },
+  "actualBackwallRays": [
+    {
+      "x": 0,
+      "z": 1.35,
+      "depth": 0.50999990940094,
+      "pointSource": [
+        0.0,
+        -0.5300000905990601,
+        1.350000023841858
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 203
+    },
+    {
+      "x": 0,
+      "z": 1.6,
+      "depth": 0.50999990940094,
+      "pointSource": [
+        0.0,
+        -0.5300000905990601,
+        1.600000023841858
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 203
+    },
+    {
+      "x": 0,
+      "z": 1.85,
+      "depth": 0.50999990940094,
+      "pointSource": [
+        0.0,
+        -0.5300000905990601,
+        1.8500001430511475
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1163
+    },
+    {
+      "x": 0.7,
+      "z": 1.35,
+      "depth": 0.5100001478195191,
+      "pointSource": [
+        0.7000000476837158,
+        -0.529999852180481,
+        1.350000023841858
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 203
+    },
+    {
+      "x": 0.7,
+      "z": 1.6,
+      "depth": 0.50999990940094,
+      "pointSource": [
+        0.7000000476837158,
+        -0.5300000905990601,
+        1.600000023841858
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1163
+    },
+    {
+      "x": 0.7,
+      "z": 1.85,
+      "depth": 0.50999990940094,
+      "pointSource": [
+        0.7000000476837158,
+        -0.5300000905990601,
+        1.8500001430511475
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1163
+    },
+    {
+      "x": 1.4,
+      "z": 1.35,
+      "depth": 0.50999990940094,
+      "pointSource": [
+        1.4000000953674316,
+        -0.5300000905990601,
+        1.350000023841858
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1163
+    },
+    {
+      "x": 1.4,
+      "z": 1.6,
+      "depth": 0.5100001478195191,
+      "pointSource": [
+        1.4000000953674316,
+        -0.529999852180481,
+        1.600000023841858
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1163
+    },
+    {
+      "x": 1.4,
+      "z": 1.85,
+      "depth": 0.50999990940094,
+      "pointSource": [
+        1.4000000953674316,
+        -0.5300000905990601,
+        1.8500001430511475
+      ],
+      "normal": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1163
+    }
+  ],
+  "actualCounterRays": [
+    {
+      "x": 0,
+      "y": -0.85,
+      "pointSource": [
+        0.0,
+        -0.8500000834465027,
+        1.1800000667572021
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1168
+    },
+    {
+      "x": 0,
+      "y": -0.65,
+      "pointSource": [
+        0.0,
+        -0.6500000357627869,
+        1.1800000667572021
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1167
+    },
+    {
+      "x": 0.7,
+      "y": -0.85,
+      "pointSource": [
+        0.7000000476837158,
+        -0.8500000834465027,
+        1.1800000667572021
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1167
+    },
+    {
+      "x": 0.7,
+      "y": -0.65,
+      "pointSource": [
+        0.7000000476837158,
+        -0.6500000357627869,
+        1.1800000667572021
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1167
+    },
+    {
+      "x": 1.4,
+      "y": -0.85,
+      "pointSource": [
+        1.4000000953674316,
+        -0.8500000834465027,
+        1.1800000667572021
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "owner": "Body_static",
+      "triangle": 205
+    },
+    {
+      "x": 1.4,
+      "y": -0.65,
+      "pointSource": [
+        1.4000000953674316,
+        -0.6500000357627869,
+        1.1800000667572021
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "owner": "Body_static",
+      "triangle": 1167
+    }
+  ],
+  "controls": {
+    "falseClosedPanel": {
+      "name": "NEGATIVE_false_closed_serving_sticker_panel",
+      "rejected": true,
+      "restored": true
+    },
+    "falseRaisedDeck": {
+      "name": "NEGATIVE_false_solid_raised_counter_deck",
+      "rejected": true,
+      "restored": true
+    },
+    "baselineRestored": true
+  },
+  "meaning": "Actual exported triangles prove finite side depth and low counter; no pose, label or metadata readback substitutes for geometry."
+}

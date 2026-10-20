@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "rally-hatchback--v1",
+    "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "triangles": 2900,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.49528498451284,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.4952849910033228,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.4952850647269331,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.49528514700891,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "family": "seventies-longroof-wood-panel-estate",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [5.44, 2.0, 1.745],
+  "wheelRadius": 0.39,
+  "wheelWidth": 0.26,
+  "axles": [-1.7, 1.61],
+  "halfTrack": 0.79,
+  "arch": {
+    "cutRadius": 0.475,
+    "pocketInnerY": 0.62,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 14,
+    "lateralStations": [0.59, 0.72, 0.88, 0.97, 1.0],
+    "shoulderRadii": [0.485, 0.545, 0.545, 0.525, 0.495],
+    "archRadius": 0.45
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [147, 108, 69],
+    "paintShadow": [181, 139, 86],
+    "paintMid": [213, 174, 112],
+    "paint": [235, 207, 153],
+    "paintLight": [250, 229, 181],
+    "cream": [255, 238, 192],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119],
+    "woodTrim": [92, 59, 47],
+    "woodEdge": [220, 166, 100],
+    "wood": [175, 111, 60],
+    "woodLight": [192, 129, 72],
+    "woodGrain": [140, 84, 51],
+    "rack": [94, 98, 111]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Independent long low estate body and swept greenhouse. Continuous own side UV charts carry cream/caramel paint, bounded warm wood panels with sparse graphic grain, and framed blue passenger/quarter glass. Fixed front/rear glass and roof owners; static four-bar roof rack. No source projection or view-dependent paint."
+}

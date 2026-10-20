@@ -1,0 +1,17 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+  "inspectedNativeViews": 32,
+  "ordinarySignedPhaseFrames": 16,
+  "ownRadiusEqualPhaseFrames": 16,
+  "wheelIdDiagnosticViews": 32,
+  "wireframes": 2,
+  "observations": [
+    "Inspected all16 actual study and16 actual engine headings. Bright green/yellow palette, huge rear wheels, small exposed front wheels, long narrow hood, tall closed blue-glass cab/canopy and fixed rear drawbar read as a farm tractor at native density.",
+    "Only two real broad rounded rear fenders exist; no front fender caps. Rear central tread crowns lie under the rounded fenders; rear sidewalls/outer shoulder edges remain partly exposed as expected. Far rear crowns inspected in both camera sets. Fronts are intentionally exposed and coverage N/A; raw0/25 results retained unchanged.",
+    "Inspected eight signed ordinary-distance roll phases per camera, eight additional equal-angle phases per camera using each own radius, both actual wireframes, and32 diagnostic wheel-ID views. Rear chevron tread geometry rolls with its own rear tire. Wheel centers, body and fixed hitch remain seated; no clipping or detached equipment found.",
+    "All32 native224 frames have clear transparent margins; centered128 crop parity exact at all16 engine headings. Standard192x224 origin96,144 cardinals4,12,8,0 retain occupiedRGBA sequences exactly at integer(-16,+32). No enlargement of viewport needed, no model resize/recenter.",
+    "Glass frames and panes belong to coherent closed cab skin UV charts; hood yellow stripe and green upper surface have separate actual owners. Canopy edge, grille bars, chevron treads and narrow yellow accents show expected angle-dependent native aliasing. No blocking issue found. Author QA only; parent independently qualifies/freezes."
+  ],
+  "formalHumanApproval": false
+}

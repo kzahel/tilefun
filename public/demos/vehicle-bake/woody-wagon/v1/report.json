@@ -1,0 +1,294 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "woody-wagon",
+  "route": "woody-wagon",
+  "revision": "v1",
+  "method": "Independent long low estate body and swept greenhouse. Continuous own side UV charts carry cream/caramel paint, bounded warm wood panels with sparse graphic grain, and framed blue passenger/quarter glass. Fixed front/rear glass and roof owners; static four-bar roof rack. No source projection or view-dependent paint.",
+  "geometry": {
+    "triangles": 2792,
+    "vertices": 5442,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 198016,
+    "sha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 6.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 6.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 6.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 6.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.7000000476837158,
+        -0.7900000214576721,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        -29.565218220586367,
+        6.78260844686757,
+        13.739130807959517
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.7000000476837158,
+        0.7900000214576721,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        -29.565218220586367,
+        6.78260844686757,
+        -13.739130807959517
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.6100000143051147,
+        -0.7900000214576721,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        28.00000024878461,
+        6.78260844686757,
+        13.739130807959517
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.6100000143051147,
+        0.7900000214576721,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        28.00000024878461,
+        6.78260844686757,
+        -13.739130807959517
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/woody-wagon/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/woody-wagon/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/woody-wagon/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending",
+  "authorization": "autonomous-153",
+  "triangles": 2792,
+  "vertexCount": 5442,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 198016,
+  "atlasBytes": 3808,
+  "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+  "atlasSha256": "2fdb5c112858ccac1a4a6ff5487bbe3c35c089eed995d468847114a3faf76545",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "woody-wagon--v1",
+    "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+    "triangles": 2792,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.782610042575929,
+        "minimumGap": 1.376550641921666,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.782610042575929,
+        "minimumGap": 1.376550641921666,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.782609939575195,
+        "minimumGap": 1.376550303760844,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.782609939575195,
+        "minimumGap": 1.3765502408057486,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/woody-wagon/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+    "minBlenderWorld": [
+      -47.4782600402832,
+      -17.39130401611328,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      47.4782600402832,
+      17.39130401611328,
+      30.30434799194336
+    ],
+    "dimensionsBlenderWorld": [
+      94.9565200805664,
+      34.78260803222656,
+      30.3043475151062
+    ],
+    "dimensionsSourceUnits": [
+      5.459999904632568,
+      1.999999961853027,
+      1.7424999821186062
+    ],
+    "includesStaticRack": true
+  },
+  "staticRoofRackEvidence": {
+    "status": "passed",
+    "owner": "Body_static",
+    "noRollMetadata": true,
+    "includedInAllFixedTriangleClearance": true
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/woody-wagon/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/woody-wagon/capture.mjs",
+    "node scripts/vehicle-bake/woody-wagon/independent-visual.mjs",
+    "python scripts/vehicle-bake/woody-wagon/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/woody-wagon/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/woody-wagon/v1/evidence/clearance-input.json data/vehicle-bake/woody-wagon/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/woody-wagon/v1/model.glb --config art-source/vehicle-bake/woody-wagon/v1/coverage-region.json --output data/vehicle-bake/woody-wagon/recheck-coverage.json"
+  ],
+  "visualInspection": [
+    "Inspected all16 study and16 game actual GLB headings at224 native with fixed pixel density and fixed-crop nearest detail sheets. Long low estate silhouette, modest long hood, sweeping windshield, three passenger/quarter window sections and long crowned roof are distinct from SUV. Cream/caramel paint and broad warm wood side/tailgate inlays read at native pixels.",
+    "Wood panels use bounded dark trim, sparse long graphic grain strokes and quiet door seams in actual body UV paint. No noisy photo texture, logos or tiny text. Tailgate wood ownership is separate from rear glass, and front/rear lamp/grille paint is coherent.",
+    "Continuous ink-framed blue-grey glazing remains on actual side/front/rear greenhouse skin. Roof and hood chart ownership is separate; no intersecting glass overlays or broken glass-plane seams observed across opposite headings.",
+    "Near classic tires sit within actual open local arches; broad cream integrated fenders keep all far crowns below hood/fender surfaces in both complete camera sets. Body floor retains central geometry and wheel-local pockets.",
+    "Two slim longitudinal roof-rack rails and two crossbars stay small against long roof; four feet intersect actual roof skin. Rack has no motion metadata, is consolidated into Body_static and stays fixed under drive.",
+    "Inspected8 signed phases per camera, both actual GLB wireframes and all four individual wheel neutral/quarter/reverse/reset visuals. Small asymmetrical hub insets move independently; all other wheels/fixed body remain unchanged; reset pixels match exactly.",
+    "Actual bounds including rack5.46L2.0W1.7425H source, radius.39/source6.7826world wheels. No camera fitting, recentering or model shrinking. No blocking visual findings; thin rack/grain/hub marks have minor ordinary native aliasing.",
+    "Economical semantic master at runtime topology, not a high-to-low transfer demonstration. Full neutral rolling only; steering/suspension/equipment/new gameplay unqualified."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "staticPlantedFourBarRoofRack": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Finite family crown sampling and native visual inspection are separate evidence.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Minor native-pixel aliasing of slim rack/grain lines and hub marks varies with heading.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/woody-wagon/v1/atlas.png": "2fdb5c112858ccac1a4a6ff5487bbe3c35c089eed995d468847114a3faf76545",
+    "art-source/vehicle-bake/woody-wagon/v1/audit-source.py": "da31bd64cacd170f0e575b9e50fac871154295b18dce485bf74913f0ade4168b",
+    "art-source/vehicle-bake/woody-wagon/v1/build.py": "cbe6f406c291115425a83a46b426819eff8a29f230935957334d9b59025a6d1e",
+    "art-source/vehicle-bake/woody-wagon/v1/capture.mjs": "010238cac76296d300ca87c006666db65f3fc6614fd7e6c303c97cf8bebde572",
+    "art-source/vehicle-bake/woody-wagon/v1/car.blend": "94992fa2cb88d2ac95533bd71eae7ad4e30455e2fbc24ffcdc4009e4bfe4b1b7",
+    "art-source/vehicle-bake/woody-wagon/v1/coverage-region.json": "23ad7ceabfa8b22dea0826f74b6ce44512fe492b376f81bc8360e3cb745ae12b",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/author-browser-qa.json": "93f0e1efe581d82cc55e2eab5a7848e9f22b8a8aad373c92303e13aa4e0d10b7",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/author-visual-inspection.json": "c7dfbaad97238a5bca65a3eb2d03a6923705f4e6560dbcfb212626796c6c7d92",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/clearance-input.json": "bce7e853dcdf08fd9a8c779ce9f0c039c6f0bd2afc60af003541b20b49775954",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/engine-capture.json": "85a3d16a97444385fdee33008fba906cac71c9a33ff00a459a05741f656b5400",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/independent-visual.json": "e56bfae1665e55ff97c854ba6ee25d5bef99ba8d13c531b5de4c8ebebbbfe059",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/packed-source-audit.json": "f59ea89a4a3af3f5970025ebc2474328c1145c7763d92a0038578101b8912072",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/replay-verification.json": "70afabbe39603f9fbb02af3ff017017d5fa310061a48c9cf13f7ef9015b8b43e",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/shared-clearance.json": "4ceb8b858724de4696998350ae5789890999f585ef83dbe3d8440df628343bf6",
+    "art-source/vehicle-bake/woody-wagon/v1/evidence/upper-wheel-coverage.json": "f7e6bc6337d2becd1a0767cc60167c5cc928db397af4a72a2614daff9a6a557b",
+    "art-source/vehicle-bake/woody-wagon/v1/family.json": "de500d1cfd770d9f3b8905692830c98a764a82f94de3c50601517f1be9ab0ed6",
+    "art-source/vehicle-bake/woody-wagon/v1/finalize.py": "b1d48cf5f82694deb2acae1f98a77edaf02a7632afc3ebbc1a8268cac0535aa0",
+    "art-source/vehicle-bake/woody-wagon/v1/geometry.py": "b7453bf180aba866ea9fd8b52da93a28ead7f270ef16c0124da98991cabbb3a6",
+    "art-source/vehicle-bake/woody-wagon/v1/independent-visual.mjs": "690b7305c472db7051a3eb1a4802aa1a5203fb5ecc00451330de8c414aba3d38",
+    "art-source/vehicle-bake/woody-wagon/v1/master.blend": "8e5575e44dc0d631a73e0ce7fc4350fc9816acb2778399366037639c2b73232b",
+    "art-source/vehicle-bake/woody-wagon/v1/model.glb": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+    "art-source/vehicle-bake/woody-wagon/v1/paint-ownership.json": "1f1abaa006992ce2ac74a4399a59273f8e28489595888d7b69b01667788340bc",
+    "art-source/vehicle-bake/woody-wagon/v1/palette-draft.png": "3e4f99078f06d300a5362672bd71b459190e013f62dad25e99205d84213975be",
+    "art-source/vehicle-bake/woody-wagon/v1/recipe.json": "dce7a10b509d605d50d4778f70ac55068233ca78c63d5ca4a5b2d3c24d765fe5",
+    "art-source/vehicle-bake/woody-wagon/v1/review.json": "fda166756bbc926fab548681fb7b364d3ab0c1a55d547479700dfe71ac56e623",
+    "art-source/vehicle-bake/woody-wagon/v1/sheets.py": "5500931c102dc46206ed1f7bd994d174ee1c315367380b68e70948a19d55197d"
+  }
+}

@@ -1,0 +1,359 @@
+{
+  "status": "passed",
+  "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+  "actualCapture": "engine/capture.json",
+  "nativeViewport": [
+    224,
+    224
+  ],
+  "nativeRadius": 112,
+  "source80ReferenceUnchanged": true,
+  "familyExtraPadding": 0,
+  "fallbackFrame": [
+    192,
+    224
+  ],
+  "engineOrigin": [
+    112,
+    112
+  ],
+  "fallbackOrigin": [
+    96,
+    144
+  ],
+  "translationOnly": [
+    -16,
+    32
+  ],
+  "scale": 1,
+  "views": [
+    {
+      "yaw": 0,
+      "actual224OccupiedBounds": {
+        "minX": 77,
+        "minY": 62,
+        "maxX": 146,
+        "maxY": 132
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 61,
+        "maxX": 130,
+        "minY": 94,
+        "maxY": 164
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 22.5,
+      "actual224OccupiedBounds": {
+        "minX": 74,
+        "minY": 59,
+        "maxX": 149,
+        "maxY": 134
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 58,
+        "maxX": 133,
+        "minY": 91,
+        "maxY": 166
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 45,
+      "actual224OccupiedBounds": {
+        "minX": 76,
+        "minY": 53,
+        "maxX": 147,
+        "maxY": 139
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 60,
+        "maxX": 131,
+        "minY": 85,
+        "maxY": 171
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 67.5,
+      "actual224OccupiedBounds": {
+        "minX": 83,
+        "minY": 50,
+        "maxX": 139,
+        "maxY": 142
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 67,
+        "maxX": 123,
+        "minY": 82,
+        "maxY": 174
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 90,
+      "actual224OccupiedBounds": {
+        "minX": 90,
+        "minY": 49,
+        "maxX": 133,
+        "maxY": 139
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 74,
+        "maxX": 117,
+        "minY": 81,
+        "maxY": 171
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 112.5,
+      "actual224OccupiedBounds": {
+        "minX": 84,
+        "minY": 50,
+        "maxX": 140,
+        "maxY": 142
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 68,
+        "maxX": 124,
+        "minY": 82,
+        "maxY": 174
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 135,
+      "actual224OccupiedBounds": {
+        "minX": 76,
+        "minY": 53,
+        "maxX": 147,
+        "maxY": 139
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 60,
+        "maxX": 131,
+        "minY": 85,
+        "maxY": 171
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 157.5,
+      "actual224OccupiedBounds": {
+        "minX": 74,
+        "minY": 59,
+        "maxX": 149,
+        "maxY": 134
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 58,
+        "maxX": 133,
+        "minY": 91,
+        "maxY": 166
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 180,
+      "actual224OccupiedBounds": {
+        "minX": 77,
+        "minY": 62,
+        "maxX": 146,
+        "maxY": 132
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 61,
+        "maxX": 130,
+        "minY": 94,
+        "maxY": 164
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 202.5,
+      "actual224OccupiedBounds": {
+        "minX": 74,
+        "minY": 53,
+        "maxX": 149,
+        "maxY": 134
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 58,
+        "maxX": 133,
+        "minY": 85,
+        "maxY": 166
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 225,
+      "actual224OccupiedBounds": {
+        "minX": 76,
+        "minY": 47,
+        "maxX": 147,
+        "maxY": 139
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 60,
+        "maxX": 131,
+        "minY": 79,
+        "maxY": 171
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 247.5,
+      "actual224OccupiedBounds": {
+        "minX": 84,
+        "minY": 45,
+        "maxX": 140,
+        "maxY": 142
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 68,
+        "maxX": 124,
+        "minY": 77,
+        "maxY": 174
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 270,
+      "actual224OccupiedBounds": {
+        "minX": 90,
+        "minY": 47,
+        "maxX": 133,
+        "maxY": 138
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 74,
+        "maxX": 117,
+        "minY": 79,
+        "maxY": 170
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 292.5,
+      "actual224OccupiedBounds": {
+        "minX": 83,
+        "minY": 45,
+        "maxX": 139,
+        "maxY": 142
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 67,
+        "maxX": 123,
+        "minY": 77,
+        "maxY": 174
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 315,
+      "actual224OccupiedBounds": {
+        "minX": 76,
+        "minY": 47,
+        "maxX": 147,
+        "maxY": 139
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 60,
+        "maxX": 131,
+        "minY": 79,
+        "maxY": 171
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 337.5,
+      "actual224OccupiedBounds": {
+        "minX": 74,
+        "minY": 53,
+        "maxX": 149,
+        "maxY": 134
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 58,
+        "maxX": 133,
+        "minY": 85,
+        "maxY": 166
+      },
+      "fitsWithoutScaling": true
+    }
+  ],
+  "cardinalExactPixelProof": [
+    {
+      "yaw": 0.0,
+      "image": "engine/fallback-cardinal-0.png",
+      "sha256": "a37b828d7e1cd75a55285e9c6ed45f57b6e7b23164db98dd23f55d2c1c875e88",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedPixelsExact": true,
+      "occupiedPixels": 3803,
+      "opaquePixelsLost": 0,
+      "translationOnly": [
+        -16,
+        32
+      ],
+      "scale": 1
+    },
+    {
+      "yaw": 90.0,
+      "image": "engine/fallback-cardinal-1.png",
+      "sha256": "7b5a04dd8f2f3897e00611c684aaffb6f45ce420a6909fbbe08ca1c2f8235253",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedPixelsExact": true,
+      "occupiedPixels": 3063,
+      "opaquePixelsLost": 0,
+      "translationOnly": [
+        -16,
+        32
+      ],
+      "scale": 1
+    },
+    {
+      "yaw": 180.0,
+      "image": "engine/fallback-cardinal-2.png",
+      "sha256": "ec0e2794cb15b79739cc3ce20e12e364673b1bac64569624b1f80ae13c1cc086",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedPixelsExact": true,
+      "occupiedPixels": 3804,
+      "opaquePixelsLost": 0,
+      "translationOnly": [
+        -16,
+        32
+      ],
+      "scale": 1
+    },
+    {
+      "yaw": 270.0,
+      "image": "engine/fallback-cardinal-3.png",
+      "sha256": "73818f81bc125848b5bb07de2f6f5e3b43bae002b49742c752813b3b7cc748c8",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedPixelsExact": true,
+      "occupiedPixels": 3152,
+      "opaquePixelsLost": 0,
+      "translationOnly": [
+        -16,
+        32
+      ],
+      "scale": 1
+    }
+  ],
+  "standardCardinalPlacementPixelExact": true,
+  "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+}

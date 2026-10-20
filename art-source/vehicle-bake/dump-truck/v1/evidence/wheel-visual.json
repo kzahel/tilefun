@@ -1,0 +1,883 @@
+{
+  "status": "passed",
+  "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+  "browser": "bundled full Chromium",
+  "phases": [
+    {
+      "mode": "study",
+      "phaseDegrees": 0,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-study-0.png"
+    },
+    {
+      "mode": "study",
+      "phaseDegrees": 45,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-study-1.png"
+    },
+    {
+      "mode": "study",
+      "phaseDegrees": 90,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-study-2.png"
+    },
+    {
+      "mode": "study",
+      "phaseDegrees": 135,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-study-3.png"
+    },
+    {
+      "mode": "study",
+      "phaseDegrees": -180,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-study-4.png"
+    },
+    {
+      "mode": "study",
+      "phaseDegrees": -135,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-study-5.png"
+    },
+    {
+      "mode": "study",
+      "phaseDegrees": -90,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-study-6.png"
+    },
+    {
+      "mode": "study",
+      "phaseDegrees": -45,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-study-7.png"
+    },
+    {
+      "mode": "engine",
+      "phaseDegrees": 0,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 0,
+          "perWheelDiagnosticDistance": 0
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-engine-0.png"
+    },
+    {
+      "mode": "engine",
+      "phaseDegrees": 45,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 45,
+          "perWheelDiagnosticDistance": 6.8295492469343335
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-engine-1.png"
+    },
+    {
+      "mode": "engine",
+      "phaseDegrees": 90,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 90,
+          "perWheelDiagnosticDistance": 13.659098493868667
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-engine-2.png"
+    },
+    {
+      "mode": "engine",
+      "phaseDegrees": 135,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": 135,
+          "perWheelDiagnosticDistance": 20.488647740803
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-engine-3.png"
+    },
+    {
+      "mode": "engine",
+      "phaseDegrees": -180,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -180,
+          "perWheelDiagnosticDistance": -27.318196987737334
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-engine-4.png"
+    },
+    {
+      "mode": "engine",
+      "phaseDegrees": -135,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -135,
+          "perWheelDiagnosticDistance": -20.488647740803
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-engine-5.png"
+    },
+    {
+      "mode": "engine",
+      "phaseDegrees": -90,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -90,
+          "perWheelDiagnosticDistance": -13.659098493868667
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-engine-6.png"
+    },
+    {
+      "mode": "engine",
+      "phaseDegrees": -45,
+      "wheels": [
+        {
+          "id": "FL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "FR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "ML",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "MR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "RL",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        },
+        {
+          "id": "RR",
+          "radius": 8.695652173913045,
+          "phaseDegrees": -45,
+          "perWheelDiagnosticDistance": -6.8295492469343335
+        }
+      ],
+      "fixedBody": true,
+      "image": "engine/equal-phase-engine-7.png"
+    }
+  ],
+  "wheelIdViews": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "image": "engine/wheel-id-study-0.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 22.5,
+      "image": "engine/wheel-id-study-1.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "image": "engine/wheel-id-study-2.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 67.5,
+      "image": "engine/wheel-id-study-3.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "image": "engine/wheel-id-study-4.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 112.5,
+      "image": "engine/wheel-id-study-5.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "image": "engine/wheel-id-study-6.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 157.5,
+      "image": "engine/wheel-id-study-7.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 180,
+      "image": "engine/wheel-id-study-8.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 202.5,
+      "image": "engine/wheel-id-study-9.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 225,
+      "image": "engine/wheel-id-study-10.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 247.5,
+      "image": "engine/wheel-id-study-11.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 270,
+      "image": "engine/wheel-id-study-12.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 292.5,
+      "image": "engine/wheel-id-study-13.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 315,
+      "image": "engine/wheel-id-study-14.png"
+    },
+    {
+      "mode": "study",
+      "yaw": 337.5,
+      "image": "engine/wheel-id-study-15.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "image": "engine/wheel-id-engine-0.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 22.5,
+      "image": "engine/wheel-id-engine-1.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "image": "engine/wheel-id-engine-2.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 67.5,
+      "image": "engine/wheel-id-engine-3.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "image": "engine/wheel-id-engine-4.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 112.5,
+      "image": "engine/wheel-id-engine-5.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "image": "engine/wheel-id-engine-6.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 157.5,
+      "image": "engine/wheel-id-engine-7.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 180,
+      "image": "engine/wheel-id-engine-8.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 202.5,
+      "image": "engine/wheel-id-engine-9.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 225,
+      "image": "engine/wheel-id-engine-10.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 247.5,
+      "image": "engine/wheel-id-engine-11.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 270,
+      "image": "engine/wheel-id-engine-12.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 292.5,
+      "image": "engine/wheel-id-engine-13.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 315,
+      "image": "engine/wheel-id-engine-14.png"
+    },
+    {
+      "mode": "engine",
+      "yaw": 337.5,
+      "image": "engine/wheel-id-engine-15.png"
+    }
+  ],
+  "wheelIdLegend": {
+    "FL": "green",
+    "FR": "yellow",
+    "ML": "magenta",
+    "MR": "blue",
+    "RL": "cyan",
+    "RR": "red"
+  },
+  "meaning": "16 equal-angle phase diagnostics use each wheel's own radius. Standard capture.json separately proves ordinary shared-distance rolling. Wheel-ID views override only temporary wheel materials to inspect attachment and rear occlusion; never source/model paint or art acceptance.",
+  "errors": []
+}

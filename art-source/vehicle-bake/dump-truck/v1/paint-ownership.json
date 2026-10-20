@@ -1,0 +1,159 @@
+{
+  "method": "Original short stout yellow-cab six-wheel dump truck. Level deep open steel-blue sloped tub owns real floor/inner walls/tailgate, broad side ribs, fixed underbody hinge and ram blocks. Six independent ordinary road wheels; all dump equipment rigid stowed only, no tipping/cargo animation.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      147,
+      99,
+      46
+    ],
+    "paintShadow": [
+      187,
+      130,
+      43
+    ],
+    "paintMid": [
+      217,
+      164,
+      48
+    ],
+    "paint": [
+      239,
+      191,
+      65
+    ],
+    "paintLight": [
+      255,
+      220,
+      111
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "steelShadow": [
+      49,
+      75,
+      102
+    ],
+    "steelMid": [
+      64,
+      95,
+      126
+    ],
+    "steel": [
+      80,
+      119,
+      151
+    ],
+    "steelLight": [
+      120,
+      158,
+      184
+    ],
+    "steelRim": [
+      149,
+      181,
+      200
+    ],
+    "floor": [
+      56,
+      78,
+      105
+    ],
+    "floorLight": [
+      76,
+      102,
+      130
+    ],
+    "inner": [
+      84,
+      116,
+      142
+    ],
+    "innerShadow": [
+      61,
+      87,
+      114
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "ownership": "Own yellow lower coachwork/hood chart and continuous cab side glass with separate fixed front/rear and roof owners. Steel-blue sloped dump tub has independently owned floor, inner/outer side wall, front bulkhead and closed tailgate charts plus constant-role broad ribs/rims; fixed hinges/rams own gray swatches. No projected bitmap, silhouette ink or glass overlays.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Yellow closed cab with separate front/rear glass and roof owners; symmetric steel-blue sloped dump walls and broad ribs, closed rear tailgate, deep empty floor. Level rigid bed, fixed underbody hinge/ram blocks and six road wheel assemblies.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

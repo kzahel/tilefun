@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "inputHashes": {
+    "art-source/vehicle-bake/semi-truck/v1/build.py": "7cf416516dfa64b37d9b00dcb9acd0bca6826d736a78b118466261ad349e7443",
+    "art-source/vehicle-bake/semi-truck/v1/family.json": "07cb56984bf0f5754d3f29dcb215fdc7b9d3d900ee60b1a2f5ecb745126f1650",
+    "art-source/vehicle-bake/semi-truck/v1/coverage-region.json": "bf76ff7ea9a39df5f9f5e10acb7b36c1d01682e32c27a4203365aa6d9ee643e2",
+    "art-source/vehicle-bake/semi-truck/v1/surface-regions.json": "f443879c9c73562393d2211212bf5e39e034f270d730793bb09d099cd3e30815",
+    "art-source/vehicle-bake/semi-truck/v1/coupling-region.json": "10ab080fa46c5d42f791878e30f204725a93af3b3f1683e0fcb194cc7e243174",
+    "art-source/vehicle-bake/semi-truck/v1/review.json": "c3695c4de3a37295a68f23ed6f37ea783841490fb0e8435ffb858166f436b480"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/catalog-v2.py": "e4e43dfa0c98f2e3118cd23ebe6b9e8d69a2ff916db9e0eba09851745e32a3c6"
+  },
+  "outputs": {
+    "model.glb": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "atlas.png": "c70cd3564989f7a62499cb7a1639c273adb98419feef23c1dca396dda18954d8",
+    "recipe.json": "6d4a0386eea50a9fe5fafd0db6bfabc5662ebcf8ec43017f86e1d18424220a6e"
+  },
+  "scratchInputDependencies": [],
+  "isolatedRoot": "data/vehicle-bake/semi-truck/final-connected-replay",
+  "bootstrap": "Empty AGENTS.md/public root sentinels only; no vehicle inputs",
+  "meaning": "Fresh miniature repository contains only listed inputs. GLB, atlas and recipe match byte for byte; packed blend determinism is not claimed."
+}

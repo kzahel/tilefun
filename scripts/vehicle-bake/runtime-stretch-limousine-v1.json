@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "stretch-limousine",
+  "name": "Stretch limousine",
+  "tags": ["vehicle", "original", "limousine"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/stretch-limousine-v1/review-manifest.json",
+    "sha256": "4b409af058e07b39ed47212031df6e0e3530550331b4e7a2ac4c6dec435b5a6c",
+    "candidateId": "stretch-limousine-v1",
+    "model": "public/demos/original-vehicles/stretch-limousine-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/stretch-limousine-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/stretch-limousine-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/stretch-limousine-v1/captures",
+    "modelSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "triangles": 2956,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/stretch-limousine/v1/evidence/replay-verification.json",
+    "sha256": "7b6a33ca9608cb15ef0b793d33cb7b98ad69cbdfc8e3bcd65cf32dc11a39b5e4",
+    "build": "art-source/vehicle-bake/stretch-limousine/v1/build.py",
+    "family": "art-source/vehicle-bake/stretch-limousine/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "stretch-limousine-authored-v1",
+    "path": "assets/models/vehicles/stretch-limousine-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/stretch-limousine-v1.png",
+  "performance": {
+    "speed": 90,
+    "acceleration": 145,
+    "pushSpeed": 48,
+    "pushWeight": 320
+  },
+  "receipt": "art-source/vehicle-bake/runtime-stretch-limousine-v1.json",
+  "expectedBounds": [123, 35, 30]
+}

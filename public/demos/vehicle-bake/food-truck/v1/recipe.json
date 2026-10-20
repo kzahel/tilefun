@@ -1,0 +1,717 @@
+{
+  "family": "red-cream-mobile-kitchen",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [
+    6,
+    2.4,
+    2.8
+  ],
+  "axles": [
+    -2.05,
+    1.9
+  ],
+  "arch": {
+    "cutRadius": 0.54,
+    "pocketInnerY": 0.75,
+    "segments": 24
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      117,
+      42,
+      61
+    ],
+    "paintShadow": [
+      157,
+      48,
+      65
+    ],
+    "paintMid": [
+      191,
+      57,
+      71
+    ],
+    "paint": [
+      220,
+      69,
+      77
+    ],
+    "paintLight": [
+      241,
+      104,
+      104
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "creamShadow": [
+      191,
+      157,
+      119
+    ],
+    "creamMid": [
+      227,
+      193,
+      147
+    ],
+    "creamLight": [
+      255,
+      238,
+      202
+    ],
+    "innerShadow": [
+      91,
+      82,
+      82
+    ],
+    "inner": [
+      156,
+      134,
+      113
+    ],
+    "innerLight": [
+      193,
+      169,
+      139
+    ],
+    "counter": [
+      112,
+      111,
+      114
+    ],
+    "counterLight": [
+      214,
+      215,
+      200
+    ],
+    "lettuce": [
+      114,
+      155,
+      82
+    ],
+    "bun": [
+      234,
+      174,
+      97
+    ],
+    "patty": [
+      108,
+      65,
+      63
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original red and cream mobile kitchen. Own continuous cab side/front actual-skin blue glass, broad red/cream rear box with real side serving cavity/counter/fixed short shade, opposite-side simple burger emblem painted in own side UV chart, cream roof and one fixed vent.",
+  "paintOwnership": "Own closed cab side/front/rear/roof semantic skin charts; body side with serving border differs from opposite-side burger chart. Actual cavity backwall owns a warm matte panel chart; inner jambs own shadow swatches, counter and fixed short shade use explicit padded roles. Roof/vent separate owners. No projected bitmap, silhouette ink or intersecting glass overlay.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -2.05,
+      "halfTrack": 0.95,
+      "radius": 0.48,
+      "width": 0.32,
+      "segments": 24
+    },
+    "FR": {
+      "axle": -2.05,
+      "halfTrack": 0.95,
+      "radius": 0.48,
+      "width": 0.32,
+      "segments": 24
+    },
+    "RL": {
+      "axle": 1.9,
+      "halfTrack": 0.95,
+      "radius": 0.48,
+      "width": 0.32,
+      "segments": 24
+    },
+    "RR": {
+      "axle": 1.9,
+      "halfTrack": 0.95,
+      "radius": 0.48,
+      "width": 0.32,
+      "segments": 24
+    }
+  },
+  "servingRecess": {
+    "side": "-Y",
+    "outerPlaneY": -1.15,
+    "backWallY": -0.55,
+    "xMin": -0.68,
+    "xMax": 2.24,
+    "zMin": 1.18,
+    "zMax": 2.38,
+    "rayXs": [
+      -0.45,
+      0.1,
+      0.7,
+      1.3,
+      1.95
+    ],
+    "rayZs": [
+      1.4,
+      1.75,
+      2.15
+    ],
+    "rayOriginY": -3.0,
+    "minimumDepth": 0.55,
+    "counterTop": 1.2,
+    "fixedShadeTopApprox": 2.48,
+    "negativeFillY": -1.15
+  },
+  "coveragePolicy": {
+    "allWheels": "Natural nose/rear body wheelhouse cover; finite central tread footprint with short rays excluding high serving shade/roof."
+  },
+  "boundsPolicy": "Keep original ground/root origin and80/4.6 scale. Measure actual asymmetric shade/counter extent plus centered2*maxAbs bounds; never recenter or narrow-fit scale.",
+  "components": [
+    {
+      "name": "Red rounded forward nose with integrated natural front fenders",
+      "group": "body",
+      "triangles": 220,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Cream closed forward cab continuous side front rear glass skin",
+      "group": "body",
+      "triangles": 62,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Red cream kitchen box actual serving recess and opposite emblem skin",
+      "group": "body",
+      "triangles": 188,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "STATIC cream kitchen roof separate surface owner",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamLight"
+      ]
+    },
+    {
+      "name": "STATIC one broad cream roof vent",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamMid"
+      ]
+    },
+    {
+      "name": "STATIC single dark vent top inset",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC cream yellow short serving shade attached wedge",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "amber",
+        "cream",
+        "creamLight",
+        "creamMid"
+      ]
+    },
+    {
+      "name": "STATIC serving hatch hinge seam",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "STATIC broad serving counter actual horizontal slab",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "counter"
+      ]
+    },
+    {
+      "name": "STATIC folded outer counter edge",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "counterLight"
+      ]
+    },
+    {
+      "name": "Narrow dark chassis rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Narrow dark chassis rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Retained central floor no full axle tunnel",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "chassis"
+      ]
+    },
+    {
+      "name": "Cab entry step -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Cab entry step 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm -2.05",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "STATIC axle attachment arm 1.9",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "chassisLight"
+      ]
+    },
+    {
+      "name": "Short cream truck bumper -2.94",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamMid"
+      ]
+    },
+    {
+      "name": "Short cream truck bumper 2.94",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamMid"
+      ]
+    },
+    {
+      "name": "Broad front dark grille",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Broad gray grille slat 0.84",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray grille slat 0.94",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad gray grille slat 1.04",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Food truck headlamp ink frame -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Food truck warm headlamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamLight"
+      ]
+    },
+    {
+      "name": "Food truck rear red lamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Food truck rear ivory lamp inset -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Food truck headlamp ink frame 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Food truck warm headlamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "creamLight"
+      ]
+    },
+    {
+      "name": "Food truck rear red lamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Food truck rear ivory lamp inset 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Rounded covered food truck tire FL",
+      "group": "FL",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad gray truck wheel rim FL",
+      "group": "FL",
+      "triangles": 58,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple gray truck hub FL",
+      "group": "FL",
+      "triangles": 58,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Truck asymmetric hub inset FL",
+      "group": "FL",
+      "triangles": 28,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded covered food truck tire FR",
+      "group": "FR",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad gray truck wheel rim FR",
+      "group": "FR",
+      "triangles": 58,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple gray truck hub FR",
+      "group": "FR",
+      "triangles": 58,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Truck asymmetric hub inset FR",
+      "group": "FR",
+      "triangles": 28,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded covered food truck tire RL",
+      "group": "RL",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad gray truck wheel rim RL",
+      "group": "RL",
+      "triangles": 58,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple gray truck hub RL",
+      "group": "RL",
+      "triangles": 58,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Truck asymmetric hub inset RL",
+      "group": "RL",
+      "triangles": 28,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Rounded covered food truck tire RR",
+      "group": "RR",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Broad gray truck wheel rim RR",
+      "group": "RR",
+      "triangles": 58,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple gray truck hub RR",
+      "group": "RR",
+      "triangles": 58,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Truck asymmetric hub inset RR",
+      "group": "RR",
+      "triangles": 28,
+      "paintRoles": [
+        "ink"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.049999952316284,
+        -0.949999988079071,
+        0.47999998927116394
+      ],
+      "centerExport": [
+        -35.65217308376147,
+        8.34782590036807,
+        16.52173892311428
+      ],
+      "radiusBlender": 0.48,
+      "wheel_radius": 8.347826086956523
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.049999952316284,
+        0.949999988079071,
+        0.47999998927116394
+      ],
+      "centerExport": [
+        -35.65217308376147,
+        8.34782590036807,
+        -16.52173892311428
+      ],
+      "radiusBlender": 0.48,
+      "wheel_radius": 8.347826086956523
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.899999976158142,
+        -0.949999988079071,
+        0.47999998927116394
+      ],
+      "centerExport": [
+        33.04347784622856,
+        8.34782590036807,
+        16.52173892311428
+      ],
+      "radiusBlender": 0.48,
+      "wheel_radius": 8.347826086956523
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.899999976158142,
+        0.949999988079071,
+        0.47999998927116394
+      ],
+      "centerExport": [
+        33.04347784622856,
+        8.34782590036807,
+        -16.52173892311428
+      ],
+      "radiusBlender": 0.48,
+      "wheel_radius": 8.347826086956523
+    }
+  ],
+  "method": "Original red and cream mobile kitchen. Own continuous cab side/front actual-skin blue glass, broad red/cream rear box with real side serving cavity/counter/fixed short shade, opposite-side simple burger emblem painted in own side UV chart, cream roof and one fixed vent.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/food-truck/build.py",
+    "scripts/vehicle-bake/food-truck/geometry.py",
+    "scripts/vehicle-bake/food-truck/family.json",
+    "scripts/vehicle-bake/food-truck/coverage-region.json",
+    "scripts/vehicle-bake/food-truck/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

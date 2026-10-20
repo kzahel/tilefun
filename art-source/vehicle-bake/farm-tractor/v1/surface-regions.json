@@ -1,0 +1,95 @@
+{
+  "meaning": "Actual blue-glass cab skin, green door/canopy/hood, yellow hood stripe/front weight, rear-only green fenders, front grille and fixed drawbar UV owners",
+  "rays": [
+    {
+      "id": "cab-glass--1",
+      "origin": [0.3, -1.5, 1.9],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "green-cab-door--1",
+      "origin": [0.3, -1.5, 1.15],
+      "direction": [0, 1, 0],
+      "roles": ["paint", "paintMid"]
+    },
+    {
+      "id": "hood-yellow-stripe--1",
+      "origin": [-1, -1.2, 1.02],
+      "direction": [0, 1, 0],
+      "roles": ["yellow"]
+    },
+    {
+      "id": "rear-green-fender--1",
+      "origin": [1, -0.83, 1.9],
+      "direction": [0, 0, -1],
+      "roles": ["paint", "paintLight"]
+    },
+    {
+      "id": "cab-glass-1",
+      "origin": [0.3, 1.5, 1.9],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "green-cab-door-1",
+      "origin": [0.3, 1.5, 1.15],
+      "direction": [0, -1, 0],
+      "roles": ["paint", "paintMid"]
+    },
+    {
+      "id": "hood-yellow-stripe-1",
+      "origin": [-1, 1.2, 1.02],
+      "direction": [0, -1, 0],
+      "roles": ["yellow"]
+    },
+    {
+      "id": "rear-green-fender-1",
+      "origin": [1, 0.83, 1.9],
+      "direction": [0, 0, -1],
+      "roles": ["paint", "paintLight"]
+    },
+    {
+      "id": "windshield",
+      "origin": [-0.5, 0, 1.95],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "rear-window",
+      "origin": [1.5, 0, 1.95],
+      "direction": [-1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "canopy-green",
+      "origin": [0.5, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "hood-green-top",
+      "origin": [-1.1, 0, 2],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "front-grille",
+      "origin": [-2.5, 0.06, 1.0],
+      "direction": [1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "yellow-front-weight",
+      "origin": [-2.5, 0, 0.6],
+      "direction": [1, 0, 0],
+      "roles": ["yellow"]
+    },
+    {
+      "id": "fixed-rear-drawbar",
+      "origin": [2.5, 0, 0.44],
+      "direction": [-1, 0, 0],
+      "roles": ["frame"]
+    }
+  ]
+}

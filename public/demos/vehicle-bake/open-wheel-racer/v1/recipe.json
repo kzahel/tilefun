@@ -1,0 +1,810 @@
+{
+  "family": "single-seat-open-wheel-formula-racer",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    4.6,
+    2.45,
+    1.25
+  ],
+  "axles": [
+    -1.28,
+    1.34
+  ],
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      43,
+      47,
+      62
+    ],
+    "tireLight": [
+      63,
+      68,
+      84
+    ],
+    "treadMark": [
+      88,
+      94,
+      111
+    ],
+    "paintDeep": [
+      34,
+      99,
+      123
+    ],
+    "paintShadow": [
+      35,
+      123,
+      145
+    ],
+    "paintMid": [
+      40,
+      149,
+      166
+    ],
+    "paint": [
+      48,
+      174,
+      184
+    ],
+    "paintLight": [
+      103,
+      204,
+      200
+    ],
+    "yellow": [
+      255,
+      216,
+      108
+    ],
+    "yellowLight": [
+      255,
+      237,
+      156
+    ],
+    "cream": [
+      255,
+      233,
+      187
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "floor": [
+      52,
+      68,
+      80
+    ],
+    "inner": [
+      39,
+      53,
+      65
+    ],
+    "seat": [
+      48,
+      53,
+      70
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original narrow formula chassis with true recessed single-seat cockpit, sidepods, static wings and wishbone/upright geometry ending short of exposed tire inner faces. Cyan/turquoise skin, yellow nose/wing accents, exact UV-owned dark cockpit/seat and small opaque blue windscreen. All4road wheels intentionally exposed, no fenders/caps. Front/rear radii independent; no high-to-low transfer claim.",
+  "wheelSpecs": {
+    "F": {
+      "radius": 0.39,
+      "width": 0.28,
+      "halfTrack": 1.03
+    },
+    "R": {
+      "radius": 0.45,
+      "width": 0.38,
+      "halfTrack": 0.97
+    }
+  },
+  "chassisStations": [
+    [
+      -2.05,
+      0.17,
+      0.4
+    ],
+    [
+      -1.78,
+      0.23,
+      0.45
+    ],
+    [
+      -1.15,
+      0.27,
+      0.52
+    ],
+    [
+      -0.6,
+      0.35,
+      0.65
+    ],
+    [
+      -0.32,
+      0.38,
+      0.77
+    ],
+    [
+      0.25,
+      0.4,
+      0.78
+    ],
+    [
+      0.62,
+      0.4,
+      0.8
+    ],
+    [
+      0.95,
+      0.34,
+      0.91
+    ],
+    [
+      1.3,
+      0.28,
+      0.85
+    ],
+    [
+      1.76,
+      0.23,
+      0.6
+    ],
+    [
+      1.86,
+      0.18,
+      0.4
+    ]
+  ],
+  "suspensionTipCenterGapSource": 0.032,
+  "coverageException": {
+    "authorization": "Explicit run153 user open-wheel exception applies to all4wheels",
+    "wheels": [
+      "FL",
+      "FR",
+      "RL",
+      "RR"
+    ],
+    "requirement": "Fender crown coverage N/A; exposed tires intentional",
+    "meaning": "No fake fender caps. Preserve raw unsupported crown samples and controls; never relabel exposure as covered."
+  },
+  "components": [
+    {
+      "name": "Own narrow formula monocoque with actual recessed cockpit",
+      "group": "body",
+      "triangles": 328,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Actual recessed cockpit floor",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "floor"
+      ]
+    },
+    {
+      "name": "Dark inner cockpit panel -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "inner"
+      ]
+    },
+    {
+      "name": "Continuous cyan cockpit rim -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Low integrated formula sidepod -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Broad sidepod inlet -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Dark inner cockpit panel 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "inner"
+      ]
+    },
+    {
+      "name": "Continuous cyan cockpit rim 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Low integrated formula sidepod 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Broad sidepod inlet 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Dark dashboard in real cockpit",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed dark seat cushion",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seat"
+      ]
+    },
+    {
+      "name": "Fixed dark seatback",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seat"
+      ]
+    },
+    {
+      "name": "Fixed seatback broad highlight",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Low narrow undertray",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Small static framed opaque blue windscreen",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Front broad static formula wing",
+      "group": "body",
+      "triangles": 80,
+      "paintRoles": [
+        "paint",
+        "paintLight",
+        "paintShadow",
+        "yellow"
+      ]
+    },
+    {
+      "name": "Front fixed wing endplate -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "yellow"
+      ]
+    },
+    {
+      "name": "Front fixed wing endplate 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "yellow"
+      ]
+    },
+    {
+      "name": "Rear broad static formula wing",
+      "group": "body",
+      "triangles": 80,
+      "paintRoles": [
+        "paint",
+        "paintLight",
+        "paintShadow",
+        "yellow"
+      ]
+    },
+    {
+      "name": "Rear fixed wing endplate -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Rear fixed wing endplate 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Rear wing fixed pylon -1",
+      "group": "body",
+      "triangles": 32,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Front wing fixed nose brace -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Rear wing fixed pylon 1",
+      "group": "body",
+      "triangles": 32,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Front wing fixed nose brace 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Suspension_FL_upper_-0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_FL_upper_0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_FL_lower_-0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_FL_lower_0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_FL_fixed_upright",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Suspension_FR_upper_-0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_FR_upper_0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_FR_lower_-0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_FR_lower_0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_FR_fixed_upright",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Suspension_RL_upper_-0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_RL_upper_0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_RL_lower_-0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_RL_lower_0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_RL_fixed_upright",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Suspension_RR_upper_-0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_RR_upper_0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_RR_lower_-0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_RR_lower_0.27",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Suspension_RR_fixed_upright",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 188,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 188,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 188,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 188,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.2799999713897705,
+        -1.0299999713897705,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        -22.260869067648187,
+        6.78260844686757,
+        17.913042980691664
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.2799999713897705,
+        1.0299999713897705,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        -22.260869067648187,
+        6.78260844686757,
+        -17.913042980691664
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.340000033378601,
+        -0.9700000286102295,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        23.30434840658437,
+        7.826086749201237,
+        16.869565714960515
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.340000033378601,
+        0.9700000286102295,
+        0.44999998807907104
+      ],
+      "centerExport": [
+        23.30434840658437,
+        7.826086749201237,
+        -16.869565714960515
+      ],
+      "radiusBlender": 0.45,
+      "wheel_radius": 7.82608695652174
+    }
+  ],
+  "method": "Original narrow formula chassis with true recessed single-seat cockpit, sidepods, static wings and wishbone/upright geometry ending short of exposed tire inner faces. Cyan/turquoise skin, yellow nose/wing accents, exact UV-owned dark cockpit/seat and small opaque blue windscreen. All4road wheels intentionally exposed, no fenders/caps. Front/rear radii independent; no high-to-low transfer claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/open-wheel-racer/build.py",
+    "scripts/vehicle-bake/open-wheel-racer/family.json",
+    "scripts/vehicle-bake/open-wheel-racer/coverage-region.json",
+    "scripts/vehicle-bake/open-wheel-racer/cockpit-region.json",
+    "scripts/vehicle-bake/open-wheel-racer/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

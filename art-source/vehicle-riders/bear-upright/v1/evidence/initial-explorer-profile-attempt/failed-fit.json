@@ -1,0 +1,298 @@
+{
+  "status": "FAILED-Explorer-upright-v1-fit-no-stretch",
+  "humanApproval": false,
+  "actualBikePresent": false,
+  "riderSha256": "04a1c08e906628821f0940184b56f25e8f25d6dbfa177fb2cbe2b903a63edf6f",
+  "immutableGlobalProfileSha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "actualGLBContacts": [
+    {
+      "name": "hip_saddle",
+      "actualGLBAnchorWorld": [
+        0.0,
+        0.0,
+        -1.7391303777694702
+      ],
+      "immutableExplorerTargetWorld": [
+        0.0,
+        0.0,
+        -1.3826086521148682
+      ],
+      "missWorld": 0.35652172366988716,
+      "failsContactTolerance": true
+    },
+    {
+      "name": "hand_left_grip",
+      "actualGLBAnchorWorld": [
+        -7.421900272369385,
+        -4.378232002258301,
+        5.115910530090332
+      ],
+      "immutableExplorerTargetWorld": [
+        -9.565217018127441,
+        -4.0,
+        4.695652008056641
+      ],
+      "missWorld": 2.2166378619597937,
+      "failsContactTolerance": true
+    },
+    {
+      "name": "hand_right_grip",
+      "actualGLBAnchorWorld": [
+        -7.421900272369385,
+        4.378232002258301,
+        5.115910530090332
+      ],
+      "immutableExplorerTargetWorld": [
+        -9.565217018127441,
+        4.0,
+        4.695652008056641
+      ],
+      "missWorld": 2.2166378619597937,
+      "failsContactTolerance": true
+    },
+    {
+      "name": "foot_left_support",
+      "actualGLBAnchorWorld": [
+        -1.1380547285079956,
+        -4.000000476837158,
+        -7.471987724304199
+      ],
+      "immutableExplorerTargetWorld": [
+        -1.2173912525177002,
+        -4.0,
+        -9.217391014099121
+      ],
+      "missWorld": 1.7472054880728505,
+      "failsContactTolerance": true
+    },
+    {
+      "name": "foot_right_support",
+      "actualGLBAnchorWorld": [
+        -1.1380547285079956,
+        4.000000476837158,
+        -7.471987724304199
+      ],
+      "immutableExplorerTargetWorld": [
+        -1.2173912525177002,
+        4.0,
+        -9.217391014099121
+      ],
+      "missWorld": 1.7472054880728505,
+      "failsContactTolerance": true
+    }
+  ],
+  "fixedLengthIK": [
+    {
+      "limb": "arm_left",
+      "fixedBoneLengthsSource": [
+        0.21,
+        0.19
+      ],
+      "rootSource": [
+        -0.03999999910593033,
+        -0.3199999928474426,
+        0.3700000047683716
+      ],
+      "targetJointSource": [
+        -0.550000011920929,
+        -0.23000000417232513,
+        0.26999998092651367
+      ],
+      "actualJointSource": [
+        -0.4267592430114746,
+        -0.25174835324287415,
+        0.29416483640670776
+      ],
+      "unclampedTargetDistanceSource": 0.5274466608439419,
+      "maximumChainLengthSource": 0.4,
+      "unreachableBeyondChainWorld": 2.2164636668511637,
+      "jointSource": [
+        -0.24331630766391754,
+        -0.2855496108531952,
+        0.3303055167198181
+      ],
+      "actualLengthsSource": [
+        0.210000002631208,
+        0.18999995993743962
+      ]
+    },
+    {
+      "limb": "leg_left",
+      "fixedBoneLengthsSource": [
+        0.17,
+        0.17
+      ],
+      "rootSource": [
+        0.0,
+        -0.23000000417232513,
+        -0.019999999552965164
+      ],
+      "targetJointSource": [
+        -0.019999999552965164,
+        -0.23000000417232513,
+        -0.4599999785423279
+      ],
+      "actualJointSource": [
+        -0.015438149683177471,
+        -0.23000000417232513,
+        -0.3596392869949341
+      ],
+      "unclampedTargetDistanceSource": 0.44045427587722547,
+      "maximumChainLengthSource": 0.34,
+      "unreachableBeyondChainWorld": 1.7470308848213127,
+      "jointSource": [
+        -0.008928230963647366,
+        -0.23048466444015503,
+        -0.18976467847824097
+      ],
+      "actualLengthsSource": [
+        0.16999998635676433,
+        0.16999998809015435
+      ]
+    },
+    {
+      "limb": "arm_right",
+      "fixedBoneLengthsSource": [
+        0.21,
+        0.19
+      ],
+      "rootSource": [
+        -0.03999999910593033,
+        0.3199999928474426,
+        0.3700000047683716
+      ],
+      "targetJointSource": [
+        -0.550000011920929,
+        0.23000000417232513,
+        0.26999998092651367
+      ],
+      "actualJointSource": [
+        -0.4267592430114746,
+        0.25174835324287415,
+        0.29416483640670776
+      ],
+      "unclampedTargetDistanceSource": 0.5274466608439419,
+      "maximumChainLengthSource": 0.4,
+      "unreachableBeyondChainWorld": 2.2164636668511637,
+      "jointSource": [
+        -0.24331630766391754,
+        0.2855496108531952,
+        0.3303055167198181
+      ],
+      "actualLengthsSource": [
+        0.210000002631208,
+        0.18999995993743962
+      ]
+    },
+    {
+      "limb": "leg_right",
+      "fixedBoneLengthsSource": [
+        0.17,
+        0.17
+      ],
+      "rootSource": [
+        0.0,
+        0.23000000417232513,
+        -0.019999999552965164
+      ],
+      "targetJointSource": [
+        -0.019999999552965164,
+        0.23000000417232513,
+        -0.4599999785423279
+      ],
+      "actualJointSource": [
+        -0.015438149683177471,
+        0.23000000417232513,
+        -0.3596392869949341
+      ],
+      "unclampedTargetDistanceSource": 0.44045427587722547,
+      "maximumChainLengthSource": 0.34,
+      "unreachableBeyondChainWorld": 1.7470308848213127,
+      "jointSource": [
+        -0.008928230963647366,
+        0.23048466444015503,
+        -0.18976467847824097
+      ],
+      "actualLengthsSource": [
+        0.16999998635676433,
+        0.16999998809015435
+      ]
+    }
+  ],
+  "fixedBearAnatomy": {
+    "headCenter": [
+      -0.05,
+      0,
+      0.72
+    ],
+    "headDimensions": [
+      0.58,
+      0.86,
+      0.64
+    ],
+    "torsoCenter": [
+      0,
+      0,
+      0.21
+    ],
+    "torsoDimensions": [
+      0.56,
+      0.72,
+      0.5
+    ],
+    "pelvisDimensions": [
+      0.52,
+      0.65,
+      0.2
+    ],
+    "shoulderSource": [
+      -0.04,
+      0.32,
+      0.37
+    ],
+    "armLengthsSource": [
+      0.21,
+      0.19
+    ],
+    "hipJointSource": [
+      0,
+      0.23,
+      -0.02
+    ],
+    "legLengthsSource": [
+      0.17,
+      0.17
+    ],
+    "ankleFromSoleSource": [
+      0.05,
+      0,
+      0.07
+    ],
+    "forepawRadii": [
+      0.105,
+      0.105,
+      0.09
+    ],
+    "hindpawDimensions": [
+      0.28,
+      0.25,
+      0.12
+    ]
+  },
+  "boneLengthsPreserved": true,
+  "bestCommonTranslationWorld": [
+    -0.8890613913536072,
+    0.0,
+    -0.7949604392051697
+  ],
+  "remainingErrorsAfterCommonTranslationWorld": [
+    1.454764989147331,
+    1.362577475304911,
+    1.362577475304911,
+    1.2485978845885128,
+    1.2485978845885128
+  ],
+  "rootTranslationCannotMeetAllFive": true,
+  "interpretation": "Fixed inferred short Bear chains cannot span Explorer targets. First actual GLB extends chains to their geometric maximum without lengthening; this failed straightened pose is not proposed as final anatomy. Global profile bytes unchanged. A separate measured Bear profile is required for this inferred body;2D does not prove unique3D dimensions.",
+  "fixtureAndAll32NativeAttemptViews": "Retained under ignored data/vehicle-riders/bear-upright/explorer-profile-attempt/ only."
+}

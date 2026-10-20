@@ -1,0 +1,103 @@
+{
+  "family": "raised-lime-purple-monster-pickup",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [5.0, 2.98, 3.0],
+  "axles": [-1.45, 1.45],
+  "arch": {
+    "cutRadius": 0.95,
+    "pocketInnerY": 0.7,
+    "segments": 20
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [42, 43, 57],
+    "tireLight": [64, 66, 81],
+    "paintDeep": [48, 86, 49],
+    "paintShadow": [70, 120, 43],
+    "paintMid": [103, 158, 46],
+    "paint": [143, 199, 60],
+    "paintLight": [183, 226, 91],
+    "cream": [255, 225, 166],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119],
+    "purple": [116, 63, 147],
+    "purpleLight": [155, 100, 187],
+    "purpleDeep": [68, 43, 91],
+    "bedFloor": [73, 52, 98],
+    "bedRib": [106, 72, 129],
+    "bedWall": [53, 40, 77],
+    "chassis": [61, 64, 79],
+    "chassisLight": [87, 91, 108]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Independent raised narrow short-cab lime/purple monster pickup, real short recessed bed, massive block-tread black wheels/purple hubs and visible fixed dark chassis/suspension. Own continuous actual-skin glass/roof/hood charts and separate bed floor/interior/tailgate paint. Intentionally exposed tire crowns, no fake coverage caps.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -1.45,
+      "halfTrack": 1.1,
+      "radius": 0.85,
+      "width": 0.66,
+      "segments": 16,
+      "treadGroups": 12
+    },
+    "FR": {
+      "axle": -1.45,
+      "halfTrack": 1.1,
+      "radius": 0.85,
+      "width": 0.66,
+      "segments": 16,
+      "treadGroups": 12
+    },
+    "RL": {
+      "axle": 1.45,
+      "halfTrack": 1.1,
+      "radius": 0.85,
+      "width": 0.66,
+      "segments": 16,
+      "treadGroups": 12
+    },
+    "RR": {
+      "axle": 1.45,
+      "halfTrack": 1.1,
+      "radius": 0.85,
+      "width": 0.66,
+      "segments": 16,
+      "treadGroups": 12
+    }
+  },
+  "coveragePolicy": {
+    "allWheels": "not-applicable/intentionally-exposed outside narrow raised pickup body",
+    "rawMeaning": "Keep shared finite-region ray evidence and false expectations honestly. Major crowns are intentionally outboard; no fabricated all-four covered metric or rooflike fender caps."
+  },
+  "cargoBed": {
+    "floorCenter": [1.45, 0, 1.8],
+    "floorSize": [1.74, 1.46, 0.1],
+    "floorTop": 1.85,
+    "railTop": 2.455,
+    "frontWallX": 0.6,
+    "rearWallX": 2.33,
+    "sideWallY": 0.8,
+    "rayXs": [0.85, 1.2, 1.6, 2.05],
+    "rayYs": [-0.35, 0, 0.35],
+    "minimumDepth": 0.55
+  }
+}

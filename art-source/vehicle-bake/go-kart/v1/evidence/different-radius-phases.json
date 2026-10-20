@@ -1,0 +1,1341 @@
+{
+  "status": "passed",
+  "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+  "nativeSize": 224,
+  "radii": [
+    {
+      "id": "FL",
+      "radius": 4.347826086956522
+    },
+    {
+      "id": "FR",
+      "radius": 4.347826086956522
+    },
+    {
+      "id": "RL",
+      "radius": 4.695652173913045
+    },
+    {
+      "id": "RR",
+      "radius": 4.695652173913045
+    }
+  ],
+  "views": [
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": 0,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": 45,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -41.66666666666666,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -41.66666666666666,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": 90,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -83.33333333333331,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -83.33333333333331,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": 135,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -124.99999999999999,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -124.99999999999999,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": -180,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 166.66666666666663,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 166.66666666666663,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": -135,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 124.99999999999999,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 124.99999999999999,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": -90,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 83.33333333333331,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 83.33333333333331,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": -45,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 41.66666666666666,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 41.66666666666666,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": 0,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": 45,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -41.66666666666666,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -41.66666666666666,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": 90,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -83.33333333333331,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -83.33333333333331,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": 135,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -124.99999999999999,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -124.99999999999999,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": -180,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 166.66666666666663,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 166.66666666666663,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": -135,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 124.99999999999999,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 124.99999999999999,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": -90,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 83.33333333333331,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 83.33333333333331,
+          "quaternionErrorRadians": 2.9802322387695312e-8,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "ordinary-distance",
+      "phaseDegrees": -45,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 41.66666666666666,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 41.66666666666666,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": 0,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": 45,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 3.687956593344541,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 3.687956593344541,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": 90,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 7.375913186689082,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 7.375913186689082,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": 135,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 11.063869780033622,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 11.063869780033622,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": -180,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -14.751826373378163,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -14.751826373378163,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": -135,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -11.063869780033622,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -11.063869780033622,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": -90,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -7.375913186689082,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -7.375913186689082,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": -45,
+      "mode": "study",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -3.687956593344541,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -3.687956593344541,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": 0,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 0,
+          "expectedSignedAngleDegrees": 0,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": 45,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 3.4147746234671668,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 3.687956593344541,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 3.687956593344541,
+          "expectedSignedAngleDegrees": -45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": 90,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 6.8295492469343335,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 7.375913186689082,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 7.375913186689082,
+          "expectedSignedAngleDegrees": -90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": 135,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": 10.244323870401502,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 11.063869780033622,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": 11.063869780033622,
+          "expectedSignedAngleDegrees": -135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": -180,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -13.659098493868667,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -14.751826373378163,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -14.751826373378163,
+          "expectedSignedAngleDegrees": 180,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": -135,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -10.244323870401502,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -11.063869780033622,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -11.063869780033622,
+          "expectedSignedAngleDegrees": 135,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": -90,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -6.8295492469343335,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -7.375913186689082,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -7.375913186689082,
+          "expectedSignedAngleDegrees": 90,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    },
+    {
+      "kind": "equal-angle",
+      "phaseDegrees": -45,
+      "mode": "engine",
+      "wheels": [
+        {
+          "id": "FL",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "FR",
+          "radiusWorld": 4.347826086956522,
+          "travelWorld": -3.4147746234671668,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RL",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -3.687956593344541,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        },
+        {
+          "id": "RR",
+          "radiusWorld": 4.695652173913045,
+          "travelWorld": -3.687956593344541,
+          "expectedSignedAngleDegrees": 45,
+          "quaternionErrorRadians": 0,
+          "pivotErrorWorld": 0
+        }
+      ],
+      "fixedBodyUnchanged": true,
+      "pixelExactAbsoluteReset": true
+    }
+  ],
+  "errors": [],
+  "browser": "bundled full Chromium",
+  "browserVersion": "153.0.8010.12",
+  "meaning": "Ordinary distance is shared by all4 wheels and produces radius-dependent angles. Equal-angle diagnostic invokes the existing declared-wheel rig with each radius-specific travel and temporarily overrides only the local viewer instance; no shared harness changes. Both signed8phase sets per camera prove actual transforms, fixed body/pivots and pixel-exact absolute reset. Shared rig independently quarters/reverses each wheel."
+}

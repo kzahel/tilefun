@@ -1,0 +1,583 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedEquipment": {
+      "components": [
+        "STATIC cream drum bearing pedestal -1 -0.24",
+        "STATIC broad drum cradle brace -1 -0.24",
+        "STATIC cream drum bearing pedestal -1 2.24",
+        "STATIC broad drum cradle brace -1 2.24",
+        "STATIC cream drum bearing pedestal 1 -0.24",
+        "STATIC broad drum cradle brace 1 -0.24",
+        "STATIC cream drum bearing pedestal 1 2.24",
+        "STATIC broad drum cradle brace 1 2.24",
+        "STATIC axle attachment arm -2.45",
+        "STATIC axle attachment arm 1.12",
+        "STATIC axle attachment arm 2.45",
+        "STATIC tapered round drum longitudinal angular spiral UV skin",
+        "STATIC rear hopper actual inner floor",
+        "STATIC cream hopper side inner outer wall -1",
+        "STATIC cream hopper side inner outer wall 1",
+        "STATIC hopper end wall 2.65",
+        "STATIC hopper end wall 3.2",
+        "STATIC short stowed gray chute trough floor lips",
+        "STATIC chute support"
+      ],
+      "drum": "STATIC tapered round drum longitudinal angular spiral UV skin",
+      "hopper": [
+        "STATIC rear hopper actual inner floor",
+        "STATIC cream hopper side inner outer wall -1",
+        "STATIC cream hopper side inner outer wall 1",
+        "STATIC hopper end wall 2.65",
+        "STATIC hopper end wall 3.2"
+      ],
+      "chute": [
+        "STATIC short stowed gray chute trough floor lips",
+        "STATIC chute support"
+      ],
+      "noMotionMetadata": true,
+      "staticRestPoseOnly": true,
+      "noMixingHingeOrConcreteGameplayClaim": true
+    },
+    "sourceDrumGeometryUV": {
+      "status": "passed",
+      "ringCount": 9,
+      "segmentsPerRing": 18,
+      "actualDrumTriangles": 320,
+      "actualSideTriangles": 288,
+      "axisSource": [
+        0.9984909296035767,
+        0.0,
+        0.054917000234127045
+      ],
+      "axisTiltDegrees": 3.148096099562759,
+      "ringMeasurements": [
+        {
+          "distanceAlongAxis": 0,
+          "radiusMeasuredMin": 0.29999994040408046,
+          "radiusMeasuredMax": 0.30000006736953916,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 0.24,
+          "radiusMeasuredMin": 0.549999850768237,
+          "radiusMeasuredMax": 0.5500000995795407,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 0.62,
+          "radiusMeasuredMin": 0.8299999204428312,
+          "radiusMeasuredMax": 0.8300000957671094,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 1.05,
+          "radiusMeasuredMin": 0.8999998452633279,
+          "radiusMeasuredMax": 0.9000001826737305,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 1.7,
+          "radiusMeasuredMin": 0.8999998767601449,
+          "radiusMeasuredMax": 0.900000119680117,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 2.22,
+          "radiusMeasuredMin": 0.7999999806546837,
+          "radiusMeasuredMax": 0.8000001496387855,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 2.7,
+          "radiusMeasuredMin": 0.6099998663434398,
+          "radiusMeasuredMax": 0.6100000991025233,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 3.12,
+          "radiusMeasuredMin": 0.37999991317333787,
+          "radiusMeasuredMax": 0.38000012762260343,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 3.3,
+          "radiusMeasuredMin": 0.27999992856301753,
+          "radiusMeasuredMax": 0.28000011059187296,
+          "uniqueAngularVertices": 18
+        }
+      ],
+      "maximumPositionErrorSource": 0,
+      "uvVertexChecks": 864,
+      "triangleBarycentricSamples": 1152,
+      "sampledPaletteRoles": {
+        "cream": 489,
+        "floorLight": 219,
+        "ink": 65,
+        "paint": 379
+      },
+      "representativeSurfaceSamples": {
+        "cream": {
+          "actualTriangle": 0,
+          "sourcePosition": [
+            -0.5054425001144409,
+            0.3662462532520294,
+            2.0911526679992676
+          ],
+          "barycentricWeights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "uv": [
+            0.025171637535095215,
+            0.4875217378139496
+          ],
+          "atlasPixel": [
+            12,
+            262
+          ],
+          "rgb": [
+            248,
+            232,
+            192
+          ]
+        },
+        "floorLight": {
+          "actualTriangle": 1,
+          "sourcePosition": [
+            -0.4236849546432495,
+            0.45561033487319946,
+            2.0613958835601807
+          ],
+          "barycentricWeights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "uv": [
+            0.04936671257019043,
+            0.493272602558136
+          ],
+          "atlasPixel": [
+            25,
+            259
+          ],
+          "rgb": [
+            246,
+            156,
+            77
+          ]
+        },
+        "ink": {
+          "actualTriangle": 1,
+          "sourcePosition": [
+            -0.48621097207069397,
+            0.3933662176132202,
+            2.032837390899658
+          ],
+          "barycentricWeights": [
+            0.6,
+            0.2,
+            0.2
+          ],
+          "uv": [
+            0.030010653659701347,
+            0.49557292461395264
+          ],
+          "atlasPixel": [
+            15,
+            258
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ]
+        },
+        "paint": {
+          "actualTriangle": 16,
+          "sourcePosition": [
+            -0.501999020576477,
+            -0.3773026168346405,
+            2.028543710708618
+          ],
+          "barycentricWeights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "uv": [
+            0.025171637535095215,
+            0.3495008647441864
+          ],
+          "atlasPixel": [
+            12,
+            333
+          ],
+          "rgb": [
+            47,
+            105,
+            218
+          ]
+        }
+      },
+      "longitudinalAngularUVsMatchGeometry": true,
+      "viewIndependentSurfacePaint": true,
+      "angularWrapSeamIsExplicit": true,
+      "flattenedDrumNegativeRejected": true,
+      "collapsedUvStripeNegativeRejected": true,
+      "candidateUnchanged": true,
+      "staticRestPoseOnly": true
+    },
+    "skinOwnership": {
+      "method": "Actual cab skin owns continuous side glass and separate front/rear and cream roof charts. Drum owns a longitudinal/angular UV chart, broad spiral bands and padded axial seam. Chassis, supports, hopper and chute own explicit palette swatches. No screen projection, glass overlays, exterior silhouette ink or borrowed geometry.",
+      "frontRearGlassAndCreamRoofSeparateCharts": true,
+      "actualRoundTaperedDrumOwner": "STATIC tapered round drum longitudinal angular spiral UV skin",
+      "noGlassOverlayMeshes": true,
+      "notCameraProjection": true
+    },
+    "master.blend": {
+      "sha256": "592db1dad78c774411e565f0a2c3e2ba6ab49ad979f5bff90ceb271b65099890",
+      "triangles": 3842,
+      "meshObjects": 63,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "sixWheelRadiusRig": [
+      {
+        "id": "FL",
+        "axleSourceMeasured": -2.450000047683716,
+        "radiusSourceMeasured": 0.5000000732111918,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "FR",
+        "axleSourceMeasured": -2.450000047683716,
+        "radiusSourceMeasured": 0.5000000732111918,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "ML",
+        "axleSourceMeasured": 1.1200000047683716,
+        "radiusSourceMeasured": 0.5000000033369227,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "MR",
+        "axleSourceMeasured": 1.1200000047683716,
+        "radiusSourceMeasured": 0.5000000033369227,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RL",
+        "axleSourceMeasured": 2.450000047683716,
+        "radiusSourceMeasured": 0.5000000732111918,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RR",
+        "axleSourceMeasured": 2.450000047683716,
+        "radiusSourceMeasured": 0.5000000732111918,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      }
+    ],
+    "car.blend": {
+      "sha256": "c6d3d31629f76ce54535c20e6684b13d7aba02b0069fc02e87696d293ddd36fe",
+      "triangles": 3842,
+      "meshObjects": 7,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+      "minBlenderWorld": [
+        -59.13043212890625,
+        -21.7391300201416,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        59.13043212890625,
+        21.7391300201416,
+        51.623451232910156
+      ],
+      "dimensionsBlenderWorld": [
+        118.2608642578125,
+        43.4782600402832,
+        51.62345027923584
+      ],
+      "dimensionsSourceUnits": [
+        6.799999694824217,
+        2.499999952316284,
+        2.96834839105606
+      ],
+      "centeredHorizontalExtentWorld": [
+        118.2608642578125,
+        43.4782600402832
+      ],
+      "centeredHorizontalExtentSource": [
+        6.799999694824217,
+        2.499999952316284
+      ],
+      "centeredCeilWorldFootprint": [
+        119,
+        44
+      ],
+      "includesActualStaticDrumHopperChuteSixWheels": true,
+      "rootUnchangedNoRecenterOrFitScale": true,
+      "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+    },
+    "actualGLBDrumGeometryUV": {
+      "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+      "status": "passed",
+      "ringCount": 9,
+      "segmentsPerRing": 18,
+      "actualDrumTriangles": 320,
+      "actualSideTriangles": 288,
+      "axisSource": [
+        0.9984909296035767,
+        0.0,
+        0.054917000234127045
+      ],
+      "axisTiltDegrees": 3.148096099562759,
+      "ringMeasurements": [
+        {
+          "distanceAlongAxis": 0,
+          "radiusMeasuredMin": 0.29999994040408046,
+          "radiusMeasuredMax": 0.30000006736953916,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 0.24,
+          "radiusMeasuredMin": 0.549999850768237,
+          "radiusMeasuredMax": 0.5500000995795407,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 0.62,
+          "radiusMeasuredMin": 0.8299999204428312,
+          "radiusMeasuredMax": 0.8300000957671094,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 1.05,
+          "radiusMeasuredMin": 0.8999998452633279,
+          "radiusMeasuredMax": 0.9000001826737305,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 1.7,
+          "radiusMeasuredMin": 0.8999998767601449,
+          "radiusMeasuredMax": 0.900000119680117,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 2.22,
+          "radiusMeasuredMin": 0.7999999806546837,
+          "radiusMeasuredMax": 0.8000001496387855,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 2.7,
+          "radiusMeasuredMin": 0.6099998663434398,
+          "radiusMeasuredMax": 0.6100001235306519,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 3.12,
+          "radiusMeasuredMin": 0.37999991317333787,
+          "radiusMeasuredMax": 0.3800001887980637,
+          "uniqueAngularVertices": 18
+        },
+        {
+          "distanceAlongAxis": 3.3,
+          "radiusMeasuredMin": 0.27999992856301753,
+          "radiusMeasuredMax": 0.28000011059187296,
+          "uniqueAngularVertices": 18
+        }
+      ],
+      "maximumPositionErrorSource": 1.1920928955078125e-07,
+      "uvVertexChecks": 864,
+      "triangleBarycentricSamples": 1152,
+      "sampledPaletteRoles": {
+        "floorLight": 218,
+        "ink": 66,
+        "cream": 482,
+        "paint": 386
+      },
+      "representativeSurfaceSamples": {
+        "floorLight": {
+          "actualTriangle": 722,
+          "sourcePosition": [
+            -0.4236849546432495,
+            0.45561033487319946,
+            2.0613958835601807
+          ],
+          "barycentricWeights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "uv": [
+            0.04936671257019043,
+            0.493272602558136
+          ],
+          "atlasPixel": [
+            25,
+            259
+          ],
+          "rgb": [
+            246,
+            156,
+            77
+          ]
+        },
+        "ink": {
+          "actualTriangle": 722,
+          "sourcePosition": [
+            -0.48621097207069397,
+            0.3933662176132202,
+            2.032837390899658
+          ],
+          "barycentricWeights": [
+            0.6,
+            0.2,
+            0.2
+          ],
+          "uv": [
+            0.030010653659701347,
+            0.495572954416275
+          ],
+          "atlasPixel": [
+            15,
+            258
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ]
+        },
+        "cream": {
+          "actualTriangle": 723,
+          "sourcePosition": [
+            -0.5089725255966187,
+            0.3428506851196289,
+            2.15533447265625
+          ],
+          "barycentricWeights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "uv": [
+            0.025171639397740364,
+            0.4760199785232544
+          ],
+          "atlasPixel": [
+            12,
+            268
+          ],
+          "rgb": [
+            248,
+            232,
+            192
+          ]
+        },
+        "paint": {
+          "actualTriangle": 730,
+          "sourcePosition": [
+            -0.5054425001144409,
+            -0.3662462830543518,
+            2.0911529064178467
+          ],
+          "barycentricWeights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "uv": [
+            0.025171639397740364,
+            0.3552517294883728
+          ],
+          "atlasPixel": [
+            12,
+            330
+          ],
+          "rgb": [
+            47,
+            105,
+            218
+          ]
+        }
+      },
+      "longitudinalAngularUVsMatchGeometry": true,
+      "viewIndependentSurfacePaint": true,
+      "angularWrapSeamIsExplicit": true,
+      "flattenedDrumNegativeRejected": true,
+      "collapsedUvStripeNegativeRejected": true,
+      "candidateUnchanged": true,
+      "staticRestPoseOnly": true
+    },
+    "actualGLBSixAttachments": {
+      "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+      "results": [
+        {
+          "id": "FL",
+          "actualTireSlabInnerAbsY": 14.260870933532715,
+          "actualStaticArmEndAbsY": 14.0,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "FR",
+          "actualTireSlabInnerAbsY": 14.260870933532715,
+          "actualStaticArmEndAbsY": 14.0,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "ML",
+          "actualTireSlabInnerAbsY": 14.260870933532715,
+          "actualStaticArmEndAbsY": 14.0,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "MR",
+          "actualTireSlabInnerAbsY": 14.260870933532715,
+          "actualStaticArmEndAbsY": 14.0,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RL",
+          "actualTireSlabInnerAbsY": 14.260870933532715,
+          "actualStaticArmEndAbsY": 14.0,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RR",
+          "actualTireSlabInnerAbsY": 14.260870933532715,
+          "actualStaticArmEndAbsY": 14.0,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        }
+      ],
+      "allFixedTrianglesSeparatelyClearanceProven": true
+    }
+  }
+}

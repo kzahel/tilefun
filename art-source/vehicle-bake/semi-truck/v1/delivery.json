@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/semi-truck/v1/report.json",
+  "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+  "atlasSha256": "c70cd3564989f7a62499cb7a1639c273adb98419feef23c1dca396dda18954d8",
+  "replayCommands": [
+    "python art-source/vehicle-bake/semi-truck/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/semi-truck/capture.mjs",
+    "python scripts/vehicle-bake/semi-truck/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/semi-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance-v2.py -- art-source/vehicle-bake/semi-truck/v1/evidence/clearance-input.json data/vehicle-bake/semi-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/semi-truck/v1/model.glb --config art-source/vehicle-bake/semi-truck/v1/coverage-region.json --output data/vehicle-bake/semi-truck/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/semi-truck/v1/prove-coupling.py -- --input public/demos/vehicle-bake/semi-truck/v1/model.glb --output data/vehicle-bake/semi-truck/recheck-coupling.json",
+    "python scripts/vehicle-bake/semi-truck/measure-fit.py",
+    "python scripts/vehicle-bake/semi-truck/pack-author.py",
+    "node scripts/vehicle-bake/family-capture-v2.mjs data/vehicle-bake/semi-truck/author-config.json --qa-only"
+  ]
+}

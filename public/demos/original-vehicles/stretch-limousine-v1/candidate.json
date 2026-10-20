@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "stretch-limousine-v1",
+      "name": "Stretch limousine",
+      "title": "Stretch limousine \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original low long-wheelbase classic sedan loft with one continuous rounded hood/cabin/short-trunk skin. Five bounded blue side panes, swept windshield/rear glass, four total door seams/handles and slim chrome beltline use actual semantic UV charts. No glass overlays, coincident loft faces, projection or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 2956,
+        "vertices": 5768,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 209072,
+        "sha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/atlas.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/atlas.png",
+          "sha256": "9c92ffbee406ff8c9d32cca682db31547c28ef4e065f93fafe65c87d64ca2a21"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/capture.json",
+          "sha256": "cb66fc3bee874840bcf9bc1c440ef428ccc1ce970cc15bb51c59b6d330fd66ce"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-0.png",
+          "sha256": "72db498502b89e59c503cfc9c0af8e55fad06c3e7d92379defb0a6913cd344f3"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-1.png",
+          "sha256": "17b7cfb1a7e263939f7620fd32c1827ff1ef525ffc630a6e31982b66c018533b"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-10.png",
+          "sha256": "50c058351b1ad0757d34e4d8d5ee8df7f7ea0b3cb6f9de03e4623af87fa4771e"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-11.png",
+          "sha256": "b3df9f569651acdaa8e65927aa53cf075860bfad7a2ad9fac9b16db0e3e0dab1"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-12.png",
+          "sha256": "8540925e677133aa7aac5a5312b09e1d8f56e699cd5ad3cae1fb79e4cc42623f"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-13.png",
+          "sha256": "ac2dbd996c4ac63b1585f6f1008a701c2c51add38555689939803ddcdfb675f4"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-14.png",
+          "sha256": "5db73753faaee6e0c1297dd22b3627a1b40c7a57a30a5ba9b8fcb2a178fb6863"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-15.png",
+          "sha256": "3a7a7606eb6f49555b46d2331668639a1eaf72a70f0a11ab4c0cbfa2c3fc8920"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-2.png",
+          "sha256": "082cc3e88ad54238624474ae7840418b4b8df771dee29dcf72dafe7b9b903a50"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-3.png",
+          "sha256": "b6f2eb0de5f8671ab609e1aa0e67920282180116171c24a6aba3f25a30b0e930"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-4.png",
+          "sha256": "624bf603443c73b7c0cbc77364c082693b032a9993da275d14a678b629c700c7"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-5.png",
+          "sha256": "79c030ff0bb2ddf017c6659a6b02ceb31b4aa3e503dd2b455fcc56ee8c1aa4bc"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-6.png",
+          "sha256": "f5e42f76e67926dba689c697285833d154c08bb118a7ac8bb468b80d060a2617"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-7.png",
+          "sha256": "a8f138a4c18e9e6e7a8d0b78b409bf3a160c13ab18d637d6c5f82f26526a9865"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-8.png",
+          "sha256": "4a618bfaaaea33b3c3f634f4d2df08b77e8bebcced6fa29af4c36274a4225532"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/engine-9.png",
+          "sha256": "22dd7f2a8e4bb21029d274cefb0b3ef319c115a1023a5cdafb5fa63822b223e6"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/game-roll-0.png",
+          "sha256": "082cc3e88ad54238624474ae7840418b4b8df771dee29dcf72dafe7b9b903a50"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/game-roll-1.png",
+          "sha256": "6ff151712dd9e6fe29e55e167a3c5adab97bed83ceaeedb5a787e35a75bb0a8e"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/game-roll-2.png",
+          "sha256": "96cb3e37aeca800f817532d9551d5aaf8074ea70fb194cfe372da80bfa210568"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/game-roll-3.png",
+          "sha256": "c4f1deec855243f0bf228dda57d1d110cd3b4e92ff0c35434f1f37d4d8aa278f"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/game-roll-4.png",
+          "sha256": "5ef63b090c22609bf30064b1d87821f3dbd9a454f019303fdfb4d39d77863488"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/game-roll-5.png",
+          "sha256": "e2ddfb1963004cafeaa552e11934499021ab7ee761ffaeae2e7d24219e2cb3b5"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/game-roll-6.png",
+          "sha256": "2e9266426ccf713d2c80eafcbd2383508a3050ecf5ed2c681f673b0e81db45da"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/game-roll-7.png",
+          "sha256": "c73f1038be2bfa254fbd5415e295f90cd4124c095df85835a2403ed126d4744e"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/inspection-engine.png",
+          "sha256": "fa051d1032fe0c506b0e350c8024e8c5a08043c93f7932425a5f4148c17fb4e3"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/inspection-phases.png",
+          "sha256": "0d7c5bc89485d4caff80738befac77b57b8f375fe5934127891eb60913ad95af"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/inspection-study.png",
+          "sha256": "2a56b4ddfb60e1723e025211af36ba668e7e36cba1b4efd0c44093e46a0a6d2f"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/roll-0.png",
+          "sha256": "fc1ceb095f6ed8faeab22db3d32e0ebd00a940cead9dfb37d7b52a7f04fdb86d"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/roll-1.png",
+          "sha256": "21ad81ab29a72db6a7b2907b0b5a0e7a255da0c7d479277dbe934cf44bd8b2ae"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/roll-2.png",
+          "sha256": "323e07fa575507fc37e105f7817b2afae94c9e52720bb2b19a2c4456254c44d2"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/roll-3.png",
+          "sha256": "b9bef3d5235a5f725a16697a6f3d8a9b3b363413fb002b794a57bb005a634fe5"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/roll-4.png",
+          "sha256": "b4811dfdfaadb23cf498b58ed618bc2046fa4b0b3310e99ddde7423d41517aea"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/roll-5.png",
+          "sha256": "34ab00608b03f12a255e4c4be83266dcfe827997d061d06c436764fbaff6e9f5"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/roll-6.png",
+          "sha256": "b585c5b50db04ace3dd630df076f42f4a4e166d0eee1e477df08d7e2984e1352"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/roll-7.png",
+          "sha256": "531cac662d6eb728f5575b8fd545eda54e57a54e811d9dce9af071c94bf2d056"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-0.png",
+          "sha256": "afc48157b571fde153e21733c2d49fbb6750fb3d2ae05a9dabd9c958f7e70239"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-1.png",
+          "sha256": "3e2d207e3e618466ca250bce68c456725bccd71128327fd4df182fc296230dd2"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-10.png",
+          "sha256": "b67fa94b1231250c1325bd993d9ee7e2d1704b374ed3be5de581547badb80b11"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-11.png",
+          "sha256": "d57870288ece2a00580f127dde26b9aff5211e198eb3ec3b5fd19c280814b2d8"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-12.png",
+          "sha256": "af88a5719d86abd21253a6597cd401c4eafd857fef57cf59308611770b5aaf4f"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-13.png",
+          "sha256": "09ee085443b4ce8f2790e4a56895c5d82ca314769c0c0f0756853d18e8948304"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-14.png",
+          "sha256": "2be4adacf05b15659a0487319200ee38b8ef266b60a689a4c769b9b55e99898d"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-15.png",
+          "sha256": "3b93cb8d6106ec30e3041caf461dc8934770d1d9566815af1d9334e853672607"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-2.png",
+          "sha256": "fc1ceb095f6ed8faeab22db3d32e0ebd00a940cead9dfb37d7b52a7f04fdb86d"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-3.png",
+          "sha256": "a25764bd0fe9f981c3bcf4e141f8652482646faa828760176971ff942cef2984"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-4.png",
+          "sha256": "d5bb740e14183f83d6b2a70ac9188f60156ad1ec1c4bad56427ce66ccab68ccf"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-5.png",
+          "sha256": "100ae105b3bb0e2186f6775031d5035618bec41107837171a70cad070aa02a5c"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-6.png",
+          "sha256": "8ca1dda9aaff25ca375da0021b6bbf3bcf2c7ab9076e645c56c22d198897d405"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-7.png",
+          "sha256": "1cde22294c1de9afedd5f77d5fa80ed95c4c59e936ecf2daf11af3919de33b38"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-8.png",
+          "sha256": "ae986e4f2453f04cb2638f84bcd348359efaef1b34beb678b77c72936f04a87f"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/study-9.png",
+          "sha256": "20581fcefff04c64459e19f7f7693bd289d81223c318aa3ed4c7fac164013e97"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/wire-engine.png",
+          "sha256": "87a30c8b226eacddf03d4a95f54c717ddcbbbc595bf23f8f65a723fbc4743d54"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/engine/wire-study.png",
+          "sha256": "bac9f26e55e0408443cb9947427c47428c6707f2d5c0528d521a136aa0540417"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/model.glb",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/model.glb",
+          "sha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/recipe.json",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/recipe.json",
+          "sha256": "98ea25b9dfef57af41102cf1e6c85816cc0b3411442f2879cdd7ee87c6394c83"
+        },
+        {
+          "source": "demos/vehicle-bake/stretch-limousine/v1/report.json",
+          "retained": "demos/original-vehicles/stretch-limousine-v1/inputs/report.json",
+          "sha256": "9e567e57c1af26ec259c87abea91665b94d93094e4dbd67b6f25300aa188439c"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

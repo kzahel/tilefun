@@ -1,0 +1,398 @@
+{
+  "status": "passed",
+  "results": {
+    "master.blend": {
+      "sha256": "01e611eef0f2121d4366398c0d9a5a3b037e6c291ab6bdb0db4162cdadb20e2a",
+      "meshObjects": 41,
+      "triangles": 2858,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "9ec812dc30eab348084f30d3ff720a6da53fc19ff5f9da33b9a56ed10c4638bf",
+      "meshObjects": 5,
+      "triangles": 2858,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+      "minBlenderWorld": [
+        -62.260868072509766,
+        -26.086956024169922,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        60.21738815307617,
+        22.65217399597168,
+        52.31304168701172
+      ],
+      "dimensionsBlenderWorld": [
+        122.47825622558594,
+        48.7391300201416,
+        52.3130407333374
+      ],
+      "dimensionsSourceUnits": [
+        7.042499732971191,
+        2.8024999761581415,
+        3.0079998421669
+      ]
+    },
+    "actualGLBSemanticSurfaces": {
+      "status": "passed",
+      "glbSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+      "rayCount": 13,
+      "samples": [
+        {
+          "id": "cab-door-glass",
+          "hitSource": [
+            -2.500000238418579,
+            -1.071838140487671,
+            1.600000023841858
+          ],
+          "triangle": 950,
+          "interpolatedUV": [
+            0.1575341820716858,
+            0.8827586770057678
+          ],
+          "atlasPixel": [
+            80,
+            60
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "cab-opposite-glass",
+          "hitSource": [
+            -2.500000238418579,
+            1.071838140487671,
+            1.600000023841858
+          ],
+          "triangle": 56,
+          "interpolatedUV": [
+            0.15753419697284698,
+            0.6327586770057678
+          ],
+          "atlasPixel": [
+            80,
+            188
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "windshield",
+          "hitSource": [
+            -3.303236484527588,
+            0.0,
+            1.7000001668930054
+          ],
+          "triangle": 893,
+          "interpolatedUV": [
+            0.5,
+            0.31206896901130676
+          ],
+          "atlasPixel": [
+            256,
+            352
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "living-window-door-side",
+          "hitSource": [
+            -0.4000000059604645,
+            -1.2096728086471558,
+            2.0999999046325684
+          ],
+          "triangle": 1042,
+          "interpolatedUV": [
+            0.4452054500579834,
+            0.8396552205085754
+          ],
+          "atlasPixel": [
+            227,
+            82
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "living-window-opposite",
+          "hitSource": [
+            1.5000001192092896,
+            1.2096728086471558,
+            2.0999999046325684
+          ],
+          "triangle": 117,
+          "interpolatedUV": [
+            0.7054794430732727,
+            0.5896552205085754
+          ],
+          "atlasPixel": [
+            361,
+            210
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "camper-door-window",
+          "hitSource": [
+            1.1500000953674316,
+            -1.2096729278564453,
+            2.0999999046325684
+          ],
+          "triangle": 1042,
+          "interpolatedUV": [
+            0.6575342416763306,
+            0.8396552801132202
+          ],
+          "atlasPixel": [
+            336,
+            82
+          ],
+          "rgb": [
+            186,
+            210,
+            224
+          ],
+          "roles": [
+            "glassGlint"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "camper-door-outline",
+          "hitSource": [
+            0.5400000810623169,
+            -1.2200000286102295,
+            1.3000000715255737
+          ],
+          "triangle": 1029,
+          "interpolatedUV": [
+            0.5739725828170776,
+            0.9086207151412964
+          ],
+          "atlasPixel": [
+            293,
+            46
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "forest-lower-stripe",
+          "hitSource": [
+            0.0,
+            1.21999990940094,
+            0.800000011920929
+          ],
+          "triangle": 1053,
+          "interpolatedUV": [
+            0.5,
+            0.7017242312431335
+          ],
+          "atlasPixel": [
+            256,
+            152
+          ],
+          "rgb": [
+            56,
+            105,
+            85
+          ],
+          "roles": [
+            "green"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "cream-roof",
+          "hitSource": [
+            0.0,
+            0.0,
+            2.7799999713897705
+          ],
+          "triangle": 1046,
+          "interpolatedUV": [
+            0.5,
+            0.203125
+          ],
+          "atlasPixel": [
+            256,
+            408
+          ],
+          "rgb": [
+            255,
+            249,
+            229
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "sleeping-pod-front",
+          "hitSource": [
+            -3.5799999237060547,
+            0.0,
+            2.5500001907348633
+          ],
+          "triangle": 1297,
+          "interpolatedUV": [
+            0.009589051827788353,
+            0.11184205114841461
+          ],
+          "atlasPixel": [
+            4,
+            454
+          ],
+          "rgb": [
+            255,
+            249,
+            229
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "rear-window",
+          "hitSource": [
+            3.4000000953674316,
+            0.0,
+            2.0999999046325684
+          ],
+          "triangle": 1124,
+          "interpolatedUV": [
+            0.75,
+            0.4198276102542877
+          ],
+          "atlasPixel": [
+            384,
+            297
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "entry-step",
+          "hitSource": [
+            0.9649999737739563,
+            -1.4000000953674316,
+            0.38749998807907104
+          ],
+          "triangle": 1433,
+          "interpolatedUV": [
+            0.9030367136001587,
+            0.04848160594701767
+          ],
+          "atlasPixel": [
+            462,
+            487
+          ],
+          "rgb": [
+            212,
+            212,
+            230
+          ],
+          "roles": [
+            "silver"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "closed-awning-tube",
+          "hitSource": [
+            0.0,
+            -1.3000000715255737,
+            2.618502378463745
+          ],
+          "triangle": 1362,
+          "interpolatedUV": [
+            0.4676986634731293,
+            0.04405289888381958
+          ],
+          "atlasPixel": [
+            239,
+            489
+          ],
+          "rgb": [
+            255,
+            249,
+            229
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        }
+      ],
+      "regionConfig": "scripts/vehicle-bake/motorhome/surface-regions.json",
+      "meaning": "Own cab, living-side, camper door, pod, roof and fixed equipment actual triangle/UV owners",
+      "inputBytesUnchanged": true
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending",
+  "report": "public/demos/vehicle-bake/monster-truck/v1/report.json",
+  "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+  "atlasSha256": "5e0d2c01b4919e8888a766f09dd61ff1ad8cc42ec3872d7cf1c37d2d53be06bb",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/monster-truck/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/monster-truck/capture.mjs",
+    "node scripts/vehicle-bake/monster-truck/independent-visual.mjs",
+    "node scripts/vehicle-bake/monster-truck/wheel-visual.mjs",
+    "python scripts/vehicle-bake/monster-truck/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/monster-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/monster-truck/v1/evidence/clearance-input.json data/vehicle-bake/monster-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/monster-truck/v1/model.glb --config art-source/vehicle-bake/monster-truck/v1/coverage-region.json --output data/vehicle-bake/monster-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/monster-truck/assess-coverage.py --input data/vehicle-bake/monster-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/monster-truck/assess-fit.py",
+    "python scripts/vehicle-bake/family-package.py data/vehicle-bake/monster-truck/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/monster-truck/author-config.json --qa-only"
+  ]
+}

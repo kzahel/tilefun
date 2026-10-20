@@ -1,0 +1,120 @@
+{
+  "family": "yellow-six-wheel-level-dump-truck",
+  "revision": "v1",
+  "toolchain": "multi-axle-v2",
+  "wheelIds": ["FL", "FR", "ML", "MR", "RL", "RR"],
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [6.4, 2.6, 2.8],
+  "axles": [-2.3, 1.12, 2.4],
+  "arch": {
+    "cutRadius": 0.56,
+    "pocketInnerY": 0.76,
+    "segments": 24
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [42, 43, 57],
+    "tireLight": [64, 66, 81],
+    "paintDeep": [147, 99, 46],
+    "paintShadow": [187, 130, 43],
+    "paintMid": [217, 164, 48],
+    "paint": [239, 191, 65],
+    "paintLight": [255, 220, 111],
+    "cream": [255, 225, 166],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "steelShadow": [49, 75, 102],
+    "steelMid": [64, 95, 126],
+    "steel": [80, 119, 151],
+    "steelLight": [120, 158, 184],
+    "steelRim": [149, 181, 200],
+    "floor": [56, 78, 105],
+    "floorLight": [76, 102, 130],
+    "inner": [84, 116, 142],
+    "innerShadow": [61, 87, 114],
+    "chassis": [61, 64, 79],
+    "chassisLight": [87, 91, 108]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Original short stout yellow-cab six-wheel dump truck. Level deep open steel-blue sloped tub owns real floor/inner walls/tailgate, broad side ribs, fixed underbody hinge and ram blocks. Six independent ordinary road wheels; all dump equipment rigid stowed only, no tipping/cargo animation.",
+  "paintOwnership": "Own yellow lower coachwork/hood chart and continuous cab side glass with separate fixed front/rear and roof owners. Steel-blue sloped dump tub has independently owned floor, inner/outer side wall, front bulkhead and closed tailgate charts plus constant-role broad ribs/rims; fixed hinges/rams own gray swatches. No projected bitmap, silhouette ink or glass overlays.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -2.3,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "FR": {
+      "axle": -2.3,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "ML": {
+      "axle": 1.12,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "MR": {
+      "axle": 1.12,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "RL": {
+      "axle": 2.4,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    },
+    "RR": {
+      "axle": 2.4,
+      "halfTrack": 1.04,
+      "radius": 0.5,
+      "width": 0.36,
+      "segments": 20
+    }
+  },
+  "dumpBody": {
+    "mode": "LEVEL STATIC STOWED ONLY",
+    "floorTop": 1.25,
+    "railTop": 2.46,
+    "rayXs": [-0.3, 0.4, 1.2, 2.0, 2.7],
+    "rayYs": [-0.55, 0, 0.55],
+    "minimumDepth": 1.12,
+    "negativeFillZ": 2.46,
+    "fillXMin": -0.48,
+    "fillXMax": 2.95,
+    "fillYMin": -1.1,
+    "fillYMax": 1.1,
+    "animationClaims": false
+  },
+  "coveragePolicy": {
+    "allWheels": "Natural yellow front fenders and continuous steel-blue rear lower wheelhouse body below tub, each own central finite footprint; short rays exclude upper bed rim."
+  },
+  "boundsPolicy": "Measure all six wheels and static tub/equipment at unchanged root/80/4.6 scale. Centered2*maxAbs horizontal envelope and standard192x224 cardinal placement; no fit scaling."
+}

@@ -1,0 +1,24 @@
+{
+  "id": "ice-cream-van-v1",
+  "clearanceId": "ice-cream-van--v1",
+  "name": "Pastel ice cream van",
+  "title": "Pastel aqua and cream ice cream shop van \u00b7 recessed serving opening v1",
+  "source": "public/demos/vehicle-bake/ice-cream-van/v1",
+  "glb": "public/demos/vehicle-bake/ice-cream-van/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/ice-cream-van/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/ice-cream-van/v1/report.json",
+  "output": "public/demos/original-vehicles/ice-cream-van-v1",
+  "qa": "data/vehicle-bake/ice-cream-van/qa",
+  "offline": "data/vehicle-bake/ice-cream-van/review.html",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "meshRadius": 112
+}

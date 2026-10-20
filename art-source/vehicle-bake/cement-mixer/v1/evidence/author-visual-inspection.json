@@ -1,0 +1,39 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+  "method": "Actual exported GLB PNGs inspected in full native captures and fixed-camera-crop nearest2x sheets; no paint-over or per-heading fitting. Agent QA only, parent independently captures/freezes.",
+  "observations": [
+    "All16study+16game headings: cobalt forward closed cab, cream roof, framed blue glass, round tapered spiral drum, short rear hopper/chute and six wheels recognizable.",
+    "Near arches open; far tire crowns hidden beneath actual integrated front/rear wheelhouse body in both cameras. No cap geometry or wheel perched on cab/roof.",
+    "All eight signed distance phases per camera and16 equal-angle views inspected; static drum/hopper/chute/body stay fixed, no equipment animation claimed.",
+    "Six independent forward/reverse/reset sets inspected, includingML/MR. Asymmetric hub mark moves subtly at native; pixel changes and absolute reset confirmed by independent checks.",
+    "Both actual wireframes show cab wheel pockets and round ring topology on drum; no flat roof masquerading as mixer.",
+    "32 six-color wheel-ID diagnostics inspected: correct front/middle/rear tire positions and far-crown occlusion; colors are temporary diagnostics only.",
+    "Native256/radius128 and strict128/native centered game crops pass at unchanged source80 density. Exact192x224 cardinal placement uses translation(-32,+16), no resized pixels.",
+    "Desktop/mobile/offline screenshots inspected; native card256px, mobile controls fit and offline uses exact embedded GLB without network.",
+    "Broad cream/cobalt/orange spiral follows actual cylindrical UV chart through all views; angular wrap seam has explicit cream padding. Minor stripe/grille/hub edge aliasing is retained, no blocking visual issue."
+  ],
+  "inspectedImages": {
+    "author-view/captures/inspection-engine.png": "76570725626672bc64ab7b48687954a3017bfb1e42fa52e7ed6f5c188de8d7a0",
+    "author-view/captures/inspection-equal-phases.png": "d2fbe33fa5a391e18db30a5b7f678ba1f3b0b184074d79778ca1c14f4b2c0c05",
+    "author-view/captures/inspection-independent.png": "ac9f53bf351c127aa7fddc931d3962560c33cb866b1f0527c4d905665f9e9c30",
+    "author-view/captures/inspection-phases.png": "606a1eb840d17a140d98626f4843347d76f03d486255c58516e7aaa0b79fa927",
+    "author-view/captures/inspection-study.png": "337cf71aeb58a5961b206c34db1129d7c4b84420e2c42f817ffd52143af25930",
+    "author-view/captures/inspection-tight-engine.png": "7cdc853721b8ceca4f5387b9ef87fb678f724fdfe36c78d1fc3e9fb76a4d4eab",
+    "author-view/captures/inspection-tight-phases.png": "7aaed62a6c63820516a7e88779af673465fa94315119e4d838381462482c4fa9",
+    "author-view/captures/inspection-tight-study.png": "fa5f5d759aa9c00176effe2492a0598070f090ace24e754059f04ceeabcf917e",
+    "author-view/captures/inspection-wheel-id-engine.png": "cb1d157b4f7e0aaf22035da00f18934a36c90aa87dc6706c89eddbc7b7b65419",
+    "author-view/captures/inspection-wheel-id-study.png": "4557c1c2e44821dd62d5f2698866e9238dfae0d7267bac413f0c3b41007d260d",
+    "author-view/captures/inspection-wires.png": "ee0d16f372f4d1baf17156c36021d8299fb425b095383ba8a83a93a4937c5121"
+  },
+  "inspectedBrowserImages": {
+    "desktop.png": "ff9e9e4f97e4ef858f3037ec9bc421960ca82a1eaadc175de088fdbd72b3c801",
+    "mobile.png": "ea047f0b0fe2378f75a8c0c7914b2f0d299cd537f1d09fded50d8def6cd0c986"
+  },
+  "limitations": [
+    "Economical semantic runtime-topology master; no high-to-low transfer claim.",
+    "All fixed equipment static; neutral-roll only. Nonzero steering/suspension and mixing/concrete gameplay unqualified.",
+    "Finite crown sampling does not substitute for native camera inspection; both retained.",
+    "Parent owns independent QA/freeze/registration/runtime/global checks while catalog/review hold remains."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "scripts/vehicle-riders/explorer-upright/build-view.mjs": "2825a9cefe3b01e2ac3962540fbfc2dc0b27c17c098a37fe94da22b1f9538f5e",
+  "scripts/vehicle-riders/explorer-upright/build.py": "a6a6a0ca8525ed301a24440ba65b268c403d7fb847c2dfe9fdaf9a63b07a2d4d",
+  "scripts/vehicle-riders/explorer-upright/capture.mjs": "6987d46dca5aa5569ae1556eb04df8270623ffaf0457a8ad1f9966a791103a89",
+  "scripts/vehicle-riders/explorer-upright/finalize.py": "287165d729ee59e0c98a9294ea48519be43c7a00c61119a1f07a4324100f7111",
+  "scripts/vehicle-riders/explorer-upright/fixture.py": "b9100113d1c40b5cffa6e4ffe385313ba217f2046f6f09ec1d969ad0d54265bf",
+  "scripts/vehicle-riders/explorer-upright/identity.json": "d3cc61aeb2f96910f99f5174023457aee96e69af3800171454647ff0b1ce487e",
+  "scripts/vehicle-riders/explorer-upright/index.html": "72c787d68074836bf53b796472bd20c4c41cdbb37e2b58d2e362eff4270ca250",
+  "scripts/vehicle-riders/explorer-upright/inspect.py": "129a98633ddfd3a6232f12a545c5a0706b4a306fecf9bd4de26f594d88953b95",
+  "scripts/vehicle-riders/explorer-upright/profile.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "scripts/vehicle-riders/explorer-upright/prove.py": "aabbc02ee6877c597032c686c5b19d9e8405dfeaf07e75b217e424a5f8bb64e4",
+  "scripts/vehicle-riders/explorer-upright/rider.json": "a4e6fb37e0200bb9642302527b229824f4f5b67d10a3f69a21bc21f6109d64b6",
+  "scripts/vehicle-riders/explorer-upright/viewer.mjs": "a4362e042c3200efd7c2665ba6b157475b5e74348b9159276c28ad7b4cfc9bba"
+}

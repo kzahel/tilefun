@@ -1,0 +1,561 @@
+{
+  "status": "passed",
+  "results": {
+    "staticRaisedRoof": {
+      "owner": "Actual raised cream camper roof",
+      "sourceHeight": 0.28000009059906006,
+      "vertexCount": 96,
+      "static": true,
+      "allRoofVerticesInFixedBody": true
+    },
+    "master.blend": {
+      "sha256": "5bbf5c4028bed2e8ce782887d1e5882b8da3ef4a034d69c256e316fbc56509ec",
+      "meshObjects": 32,
+      "triangles": 2784,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "6a67efa5ec336fc831130d5fa2df078e5dc36314e02c0a7282dae11bce906092",
+      "meshObjects": 5,
+      "triangles": 2784,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+      "minBlenderWorld": [
+        -44.34782409667969,
+        -18.260868072509766,
+        4.76837158203125e-07
+      ],
+      "maxBlenderWorld": [
+        44.34782409667969,
+        18.260868072509766,
+        40.556522369384766
+      ],
+      "dimensionsBlenderWorld": [
+        88.69564819335938,
+        36.52173614501953,
+        40.55652189254761
+      ],
+      "dimensionsSourceUnits": [
+        5.0999997711181635,
+        2.0999998283386225,
+        2.332000008821487
+      ]
+    },
+    "actualGLBSemanticSurfaces": {
+      "status": "passed",
+      "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+      "rayCount": 19,
+      "samples": [
+        {
+          "id": "left-cab-actual-skin-glass",
+          "hitSource": [
+            -1.6500000953674316,
+            -1.0108503103256226,
+            1.5200001001358032
+          ],
+          "triangle": 891,
+          "interpolatedUV": [
+            0.1826922744512558,
+            0.7678571343421936
+          ],
+          "atlasPixel": [
+            93,
+            118
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-camper-door-actual-skin-glass",
+          "hitSource": [
+            -0.15000002086162567,
+            -1.0129040479660034,
+            1.5200001001358032
+          ],
+          "triangle": 945,
+          "interpolatedUV": [
+            0.4711538255214691,
+            0.7678570747375488
+          ],
+          "atlasPixel": [
+            241,
+            118
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-rear-actual-skin-glass",
+          "hitSource": [
+            1.350000023841858,
+            -1.0100129842758179,
+            1.5200001001358032
+          ],
+          "triangle": 987,
+          "interpolatedUV": [
+            0.759615421295166,
+            0.7678570747375488
+          ],
+          "atlasPixel": [
+            388,
+            118
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-lower-turquoise",
+          "hitSource": [
+            0.10000000149011612,
+            -1.0193523168563843,
+            0.800000011920929
+          ],
+          "triangle": 101,
+          "interpolatedUV": [
+            0.5192307829856873,
+            0.8964285254478455
+          ],
+          "atlasPixel": [
+            265,
+            53
+          ],
+          "rgb": [
+            65,
+            177,
+            183
+          ],
+          "roles": [
+            "paint"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-cream-upper-post",
+          "hitSource": [
+            0.6000000834465027,
+            -1.0128315687179565,
+            1.5200001001358032
+          ],
+          "triangle": 962,
+          "interpolatedUV": [
+            0.6153846979141235,
+            0.7678571939468384
+          ],
+          "atlasPixel": [
+            315,
+            118
+          ],
+          "rgb": [
+            238,
+            220,
+            184
+          ],
+          "roles": [
+            "cream"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-closed-camper-door-seam",
+          "hitSource": [
+            0.550000011920929,
+            -1.0199999809265137,
+            0.8800000548362732
+          ],
+          "triangle": 961,
+          "interpolatedUV": [
+            0.6057692170143127,
+            0.8821427822113037
+          ],
+          "atlasPixel": [
+            310,
+            60
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-cab-actual-skin-glass",
+          "hitSource": [
+            -1.6500000953674316,
+            1.0108503103256226,
+            1.5200001001358032
+          ],
+          "triangle": 900,
+          "interpolatedUV": [
+            0.1826922595500946,
+            0.7678570747375488
+          ],
+          "atlasPixel": [
+            93,
+            118
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-camper-door-actual-skin-glass",
+          "hitSource": [
+            -0.15000002086162567,
+            1.0129040479660034,
+            1.5200001001358032
+          ],
+          "triangle": 954,
+          "interpolatedUV": [
+            0.4711538255214691,
+            0.7678570747375488
+          ],
+          "atlasPixel": [
+            241,
+            118
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-rear-actual-skin-glass",
+          "hitSource": [
+            1.350000023841858,
+            1.0100129842758179,
+            1.5200001001358032
+          ],
+          "triangle": 996,
+          "interpolatedUV": [
+            0.759615421295166,
+            0.7678570747375488
+          ],
+          "atlasPixel": [
+            388,
+            118
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-lower-turquoise",
+          "hitSource": [
+            0.10000000149011612,
+            1.0193523168563843,
+            0.800000011920929
+          ],
+          "triangle": 114,
+          "interpolatedUV": [
+            0.5192307829856873,
+            0.8964285254478455
+          ],
+          "atlasPixel": [
+            265,
+            53
+          ],
+          "rgb": [
+            65,
+            177,
+            183
+          ],
+          "roles": [
+            "paint"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-cream-upper-post",
+          "hitSource": [
+            0.6000000834465027,
+            1.0128315687179565,
+            1.5200001001358032
+          ],
+          "triangle": 971,
+          "interpolatedUV": [
+            0.6153846979141235,
+            0.7678571939468384
+          ],
+          "atlasPixel": [
+            315,
+            118
+          ],
+          "rgb": [
+            238,
+            220,
+            184
+          ],
+          "roles": [
+            "cream"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-closed-camper-door-seam",
+          "hitSource": [
+            0.550000011920929,
+            1.0199998617172241,
+            0.8800000548362732
+          ],
+          "triangle": 972,
+          "interpolatedUV": [
+            0.6057692170143127,
+            0.8821428418159485
+          ],
+          "atlasPixel": [
+            310,
+            60
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "front-split-pane--0.3",
+          "hitSource": [
+            -2.440000057220459,
+            -0.30000004172325134,
+            1.5200001001358032
+          ],
+          "triangle": 1091,
+          "interpolatedUV": [
+            0.18478260934352875,
+            0.5282738208770752
+          ],
+          "atlasPixel": [
+            94,
+            241
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "front-split-pane-0.3",
+          "hitSource": [
+            -2.440000057220459,
+            0.30000004172325134,
+            1.5200001001358032
+          ],
+          "triangle": 1091,
+          "interpolatedUV": [
+            0.31521740555763245,
+            0.5282737612724304
+          ],
+          "atlasPixel": [
+            161,
+            241
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "front-ink-center-divider",
+          "hitSource": [
+            -2.440000057220459,
+            0.0,
+            1.5200001001358032
+          ],
+          "triangle": 1091,
+          "interpolatedUV": [
+            0.25,
+            0.5282738208770752
+          ],
+          "atlasPixel": [
+            128,
+            241
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "front-bounded-outer-frame",
+          "hitSource": [
+            -2.440000057220459,
+            0.6500000357627869,
+            1.5200001001358032
+          ],
+          "triangle": 1089,
+          "interpolatedUV": [
+            0.3913043141365051,
+            0.5282737612724304
+          ],
+          "atlasPixel": [
+            200,
+            241
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "rear-broad-glass",
+          "hitSource": [
+            2.440000057220459,
+            0.30000004172325134,
+            1.5200001001358032
+          ],
+          "triangle": 186,
+          "interpolatedUV": [
+            0.8152173757553101,
+            0.5282737612724304
+          ],
+          "atlasPixel": [
+            417,
+            241
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "raised-cream-roof",
+          "hitSource": [
+            -0.6000000834465027,
+            0.0,
+            2.259999990463257
+          ],
+          "triangle": 1629,
+          "interpolatedUV": [
+            0.2171805202960968,
+            0.01484026201069355
+          ],
+          "atlasPixel": [
+            111,
+            504
+          ],
+          "rgb": [
+            255,
+            242,
+            210
+          ],
+          "roles": [
+            "creamLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "fixed-gray-roof-vent",
+          "hitSource": [
+            0.6500000357627869,
+            0.0,
+            2.3320000171661377
+          ],
+          "triangle": 706,
+          "interpolatedUV": [
+            0.90625,
+            0.046875
+          ],
+          "atlasPixel": [
+            464,
+            488
+          ],
+          "rgb": [
+            212,
+            212,
+            230
+          ],
+          "roles": [
+            "silver"
+          ],
+          "owner": "Body_static"
+        }
+      ],
+      "regionConfig": "scripts/vehicle-bake/camper-van/surface-regions.json",
+      "meaning": "Actual GLB triangle rays with interpolated atlas UV establish three framed side panes on each continuous body side, split front blue glazing/dark divider, lower turquoise paint, upper cream, static camper door seam, rear glass and actual raised roof/vent. All glazing opaque; closed body has no open-well claim.",
+      "inputBytesUnchanged": true
+    }
+  }
+}

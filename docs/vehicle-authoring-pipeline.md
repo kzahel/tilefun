@@ -267,6 +267,12 @@ config, `runtime-school-bus-v1.json`, consumed by the existing versioned exporte
 
 ## Bounded production orchestration
 
+The historical `catalog.py` CLI owns the original a/b/c experiment comparison.
+Limit it with `--only` to those explicit experiment IDs. Its broad directory scan
+does not understand the later original-family names. New families use their
+explicit `family-ID.json` and production/packaging commands below; importing the
+pinned GLB audit is separate from rebuilding that historical experiment catalog.
+
 `production.py CONFIG capture --blender BLENDER --deadline UTC_ISO` runs the
 established prepare/build/capture/clearance/assembly/browser stages into a new
 review directory. It stops before freezing so a coordinator can inspect the
@@ -296,3 +302,79 @@ Preserve v1/v2 and v3 once their receipt hashes are retained. Intentional expose
 wheels (for example hot-rod fronts) retain raw unsupported crown samples plus an
 explicit N/A explanation; actual whole-body roll clearance still covers every
 wheel. Different axle radii must be measured and exercised independently.
+
+## Multiple axles
+
+The original receipt-pinned tools retain their four-wheel assumptions. A new
+family with additional axles uses `toolchain: "multi-axle-v2"` and an exact
+`wheelIds` list in its family review config, for example
+`["FL", "FR", "ML", "MR", "RL", "RR"]`. The production coordinator selects
+`family-package-v2.py`, `family-capture-v2.mjs`, `clearance-v2.py` and
+`family-verify-v2.py`. Packaging delegates unchanged presentation/freeze logic to
+the old packager while using `catalog-v2.py` for the explicit full wheel inventory.
+Retain and hash both adapter and underlying dependencies in source replays.
+
+Every declared axle must exist exactly once, with its own positive radius and
+roll-axis metadata. Four established corner IDs remain mandatory; omitted,
+duplicate or unexpected wheels fail. Native capture exercises each independent
+wheel, and actual GLB body-clearance proof covers all wheel envelopes with its
+collision negative/reset control. No extra axle is merely counted and skipped.
+Current viewer/renderer and the v3 runtime exporter already support multiple
+assemblies; runtime fixtures must declare all radii and actual mesh counts.
+Two-wheel motorcycles need a separate family contract plus [rider prerequisites](topics/vehicle-riders.md).
+
+Run `python scripts/vehicle-bake/multi-axle-smoke.py --blender BLENDER` for an
+actual six-wheel GLB/tool/browser control. It clones two real wheel assemblies
+only into ignored `_pipeline-probes` and data directories, qualifies all six
+and rejects four wrong declarations. It preserves retained Beetle bytes and
+does not register a production review or authorize synthetic art.
+
+## Offline fleet review
+
+`python scripts/vehicle-bake/fleet-review.py --output data/vehicle-bake/fleet`
+composes existing exact native captures into a PNG contact sheet and a network-free
+HTML index. Cards link each locally regenerated standalone GLB review. The tool
+does not rerender or change art/review/runtime state. New families keep fixed
+pixel scale; the sheet expands its padding to fit larger models.
+
+## Independent retained-input replay
+
+`python scripts/vehicle-bake/source-replay.py RECEIPT --qa data/vehicle-bake/ID-replay
+--blender BLENDER --deadline UTC_ISO` copies only declared retained inputs to a
+fresh ignored workspace, invokes the recorded constructor and verifies newly
+generated model, atlas and recipe hashes. Modern receipts use `inputHashes` and
+optional `sharedInputHashes`; local-basename receipts need `--input-root` naming
+their retained repository directory. Pure Python assembly receipts declare
+`runner: "python"`, `invokedBuilder` and `arguments`. Existing retained output
+files cannot masquerade as replay outputs. Historical role-map receipts keep
+their established family-specific replay command.
+
+`python scripts/vehicle-bake/test_pipeline_helpers.py` exercises fresh output,
+stale input, hidden dependency, ignored dependency, expired deadline and local
+basename controls, plus actual retained component-buffer preservation. These
+byte-contract controls complement actual Blender/GLTF/native-pixel qualification.
+
+## Static component assemblies
+
+The isolated Explorer/roadster control demonstrates adding a component without
+re-exporting an immutable car. `compose-component.py` accepts two embedded static
+GLBs, preserves the base buffer and all existing array entries, namespaces the
+new component and records an explicit Blender-world-pixel mount. Its translation
+to glTF is `[x, z, -y]`. It rejects animation/skins/external resources; it does not
+merge atlases or claim a high-to-low bake.
+
+`component-package.py ASSEMBLY_JSON` produces draft assembly outputs. Run the
+declared-input replay, then `component-package.py ASSEMBLY_JSON --finalize` only
+after exact output reproduction passes. Retain both child packed masters and
+replay receipts, exact input GLBs/atlases, placement recipe and assembly helpers.
+The editable sources are the two child masters plus placement recipe; do not
+claim an additional combined Blender master. Helpers become immutable when
+final receipts pin them.
+
+`node scripts/vehicle-bake/component-parity.mjs FAMILY_JSON` checks actual decoded
+geometry/socket positions and all 32 rider-hidden car RGBA views. Optional
+`composition.combinedCaptures` also compares all 32 composed views against an
+independent two-asset depth rendering. Inspect contacts, depth masks, full native
+headings, signed wheel phases and wires separately. One static rider prototype
+does not establish normal game occupancy or all-character compatibility;
+[rider prerequisites](topics/vehicle-riders.md) owns those gates.

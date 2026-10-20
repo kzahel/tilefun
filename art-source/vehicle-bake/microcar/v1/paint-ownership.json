@@ -1,0 +1,248 @@
+{
+  "method": "Original short egg/bubble coachwork with its own rounded cross section, tiny axles and local wheel pockets. Continuous longitudinal/angular skin UV owns curved panoramic front and one side pane each with dark frames; pale upper paint over dusty coral rose. No glass overlays, projection or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      145,
+      76,
+      101
+    ],
+    "paintShadow": [
+      173,
+      91,
+      112
+    ],
+    "paintMid": [
+      198,
+      111,
+      128
+    ],
+    "paint": [
+      222,
+      139,
+      147
+    ],
+    "paintLight": [
+      242,
+      187,
+      183
+    ],
+    "cream": [
+      255,
+      233,
+      187
+    ],
+    "roof": [
+      255,
+      220,
+      207
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ]
+  },
+  "ownership": "Own continuous longitudinal/angular chart on actual egg skin: one curved panoramic front aperture, one side pane each, dark perimeter frames and painted pillar gaps. Pale roof/upper paint and coral rose lower body remain physical skin. Local arch booleans preserve UV interpolation. No glass overlay or silhouette paint.",
+  "semanticOwners": {
+    "eggSkin": {
+      "component": "Own tiny egg bubble continuous upper skin and tapered lower shell",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        352
+      ],
+      "domain": {
+        "xSource": [
+          -1.64,
+          1.64
+        ],
+        "lateralAngle": [
+          -1.5707963267948966,
+          1.5707963267948966
+        ]
+      },
+      "meaning": "Single coherent actual rounded skin chart for panoramic front, side panes, pale roof, rose paint and rear vent bars; separate solid pillar gaps"
+    },
+    "lowerShell": {
+      "atlasPixelRect": [
+        0,
+        352,
+        512,
+        432
+      ],
+      "meaning": "Lower side shadows and front-door lower seam"
+    },
+    "endCaps": {
+      "atlasPixelRect": [
+        0,
+        432,
+        512,
+        480
+      ],
+      "meaning": "Short rounded front-door/nose cap and compact rear underside; no duplicate glazing"
+    },
+    "trim": {
+      "roles": [
+        "silver",
+        "cream",
+        "ruby",
+        "paintDeep",
+        "paintLight",
+        "paint",
+        "paintMid"
+      ],
+      "meaning": "Named tiny bumpers, ordinary round lamps, handles and integrated broad fenders own padded role swatches"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "roof": [
+      304,
+      488
+    ],
+    "glassDark": [
+      336,
+      488
+    ],
+    "glass": [
+      368,
+      488
+    ],
+    "glassLight": [
+      400,
+      488
+    ],
+    "glassGlint": [
+      432,
+      488
+    ],
+    "rim": [
+      464,
+      488
+    ],
+    "silver": [
+      496,
+      488
+    ],
+    "white": [
+      16,
+      504
+    ],
+    "ruby": [
+      48,
+      504
+    ],
+    "amber": [
+      80,
+      504
+    ],
+    "rubyLight": [
+      112,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric egg body with distinct front panoramic aperture and rear vent bars; one pane per side, closed passenger cabin.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

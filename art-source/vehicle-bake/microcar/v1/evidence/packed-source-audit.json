@@ -1,0 +1,346 @@
+{
+  "status": "passed",
+  "results": {
+    "master.blend": {
+      "sha256": "3ec7243159861e823c9bde31968609f5d67e7a6390e1b9ef84182831a7867bf0",
+      "meshObjects": 31,
+      "triangles": 2596,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "d1ee5248cc176207005c455608171d6a2649364f4ee7cfa705d0dd9c7e8e69b2",
+      "meshObjects": 5,
+      "triangles": 2596,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+      "minBlenderWorld": [
+        -28.0,
+        -15.217391014099121,
+        4.76837158203125e-07
+      ],
+      "maxBlenderWorld": [
+        27.652172088623047,
+        15.217391014099121,
+        29.913043975830078
+      ],
+      "dimensionsBlenderWorld": [
+        55.65217208862305,
+        30.434782028198242,
+        29.91304349899292
+      ],
+      "dimensionsSourceUnits": [
+        3.1999998950958246,
+        1.7499999666213986,
+        1.7200000011920926
+      ]
+    },
+    "actualGLBSemanticSurfaces": {
+      "status": "passed",
+      "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+      "rayCount": 11,
+      "samples": [
+        {
+          "id": "left-continuous-side-glass",
+          "hitSource": [
+            0.05000000074505806,
+            -0.7492592334747314,
+            1.100000023841858
+          ],
+          "triangle": 826,
+          "interpolatedUV": [
+            0.5152438879013062,
+            0.8948553800582886
+          ],
+          "atlasPixel": [
+            263,
+            53
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-continuous-side-glass",
+          "hitSource": [
+            0.05000000074505806,
+            0.7492592334747314,
+            1.100000023841858
+          ],
+          "triangle": 839,
+          "interpolatedUV": [
+            0.5152438879013062,
+            0.41764456033706665
+          ],
+          "atlasPixel": [
+            263,
+            298
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-side-front-frame",
+          "hitSource": [
+            -0.45000001788139343,
+            -0.7574853897094727,
+            1.100000023841858
+          ],
+          "triangle": 83,
+          "interpolatedUV": [
+            0.3628048300743103,
+            0.8954740762710571
+          ],
+          "atlasPixel": [
+            185,
+            53
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-side-front-frame",
+          "hitSource": [
+            -0.45000001788139343,
+            0.7574853897094727,
+            1.100000023841858
+          ],
+          "triangle": 96,
+          "interpolatedUV": [
+            0.3628048300743103,
+            0.41702592372894287
+          ],
+          "atlasPixel": [
+            185,
+            298
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "left-rose-lower-skin",
+          "hitSource": [
+            0.4000000059604645,
+            -0.8144845962524414,
+            0.7000000476837158
+          ],
+          "triangle": 844,
+          "interpolatedUV": [
+            0.6219513416290283,
+            0.9701575040817261
+          ],
+          "atlasPixel": [
+            318,
+            15
+          ],
+          "rgb": [
+            198,
+            111,
+            128
+          ],
+          "roles": [
+            "paintMid"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "right-rose-lower-skin",
+          "hitSource": [
+            0.4000000059604645,
+            0.8144941329956055,
+            0.7000000476837158
+          ],
+          "triangle": 865,
+          "interpolatedUV": [
+            0.6219509840011597,
+            0.34234246611595154
+          ],
+          "atlasPixel": [
+            318,
+            336
+          ],
+          "rgb": [
+            198,
+            111,
+            128
+          ],
+          "roles": [
+            "paintMid"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "panoramic-curved-front-glass",
+          "hitSource": [
+            -1.2349998950958252,
+            0.0,
+            1.5000001192092896
+          ],
+          "triangle": 760,
+          "interpolatedUV": [
+            0.12347568571567535,
+            0.6562500596046448
+          ],
+          "atlasPixel": [
+            63,
+            175
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "panoramic-front-frame",
+          "hitSource": [
+            -1.3833333253860474,
+            0.0,
+            1.350000023841858
+          ],
+          "triangle": 739,
+          "interpolatedUV": [
+            0.07825202494859695,
+            0.65625
+          ],
+          "atlasPixel": [
+            40,
+            176
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "pale-rounded-roof",
+          "hitSource": [
+            0.20000000298023224,
+            0.0,
+            1.6927274465560913
+          ],
+          "triangle": 110,
+          "interpolatedUV": [
+            0.5609756112098694,
+            0.65625
+          ],
+          "atlasPixel": [
+            287,
+            176
+          ],
+          "rgb": [
+            255,
+            220,
+            207
+          ],
+          "roles": [
+            "roof"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "short-rear-vent-bar",
+          "hitSource": [
+            1.1699999570846558,
+            0.0,
+            1.2571427822113037
+          ],
+          "triangle": 170,
+          "interpolatedUV": [
+            0.8567073345184326,
+            0.6562499403953552
+          ],
+          "atlasPixel": [
+            438,
+            176
+          ],
+          "rgb": [
+            145,
+            76,
+            101
+          ],
+          "roles": [
+            "paintDeep"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "rounded-front-door-nose",
+          "hitSource": [
+            -1.5199999809265137,
+            0.0,
+            0.9000000357627869
+          ],
+          "triangle": 1041,
+          "interpolatedUV": [
+            0.25,
+            0.109375
+          ],
+          "atlasPixel": [
+            128,
+            456
+          ],
+          "rgb": [
+            242,
+            187,
+            183
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        }
+      ],
+      "regionConfig": "scripts/vehicle-bake/microcar/surface-regions.json",
+      "meaning": "Actual exported triangle rays and interpolated UV samples independently check the panoramic front, continuous side panes and dark frame edges on rounded body skin, pale roof, rose lower skin, rear vent and short front nose. Closed passenger cabin; no open-interior claim.",
+      "inputBytesUnchanged": true
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "rally-hatchback",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/rally-hatchback/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/rally-hatchback/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/rally-hatchback/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

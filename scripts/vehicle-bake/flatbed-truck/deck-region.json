@@ -1,0 +1,10 @@
+{
+  "xSamples": [-0.55, 0.95, 2.65],
+  "ySamples": [-0.8, 0, 0.8],
+  "topZ": 1.24,
+  "bottomZ": 1.13,
+  "heightTolerance": 0.012,
+  "minimumThickness": 0.09,
+  "maximumThickness": 0.13,
+  "meaning": "Actual exposed flat top and thin edges/underside; no recessed-bed depth claim. Raised obstruction and flattened deck controls must fail, then reset."
+}

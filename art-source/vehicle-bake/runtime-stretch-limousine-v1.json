@@ -1,0 +1,106 @@
+{
+  "modelSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+  "spriteSha256": "095a059199f249e96158cf78630e8fd4fc214fca59976c6c51ffc6d380a9dc73",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-stretch-limousine-v1.json": "c894ecd448460b9cefb62df3be5b40e1c08de3005c7bf1700f05f53bbbcea53e",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/stretch-limousine-v1/review-manifest.json": "4b409af058e07b39ed47212031df6e0e3530550331b4e7a2ac4c6dec435b5a6c",
+    "public/demos/original-vehicles/stretch-limousine-v1/inputs/model.glb": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "public/demos/original-vehicles/stretch-limousine-v1/inputs/atlas.png": "9c92ffbee406ff8c9d32cca682db31547c28ef4e065f93fafe65c87d64ca2a21",
+    "public/demos/original-vehicles/stretch-limousine-v1/captures/capture.json": "cb66fc3bee874840bcf9bc1c440ef428ccc1ce970cc15bb51c59b6d330fd66ce",
+    "art-source/vehicle-bake/stretch-limousine/v1/evidence/replay-verification.json": "7b6a33ca9608cb15ef0b793d33cb7b98ad69cbdfc8e3bcd65cf32dc11a39b5e4",
+    "art-source/vehicle-bake/stretch-limousine/v1/build.py": "6e140e96a33cfaef855690cfe119ce82fd9b3fc3167c43cea2f7b68c8377a7ef",
+    "art-source/vehicle-bake/stretch-limousine/v1/family.json": "8510cad6b6a68d1419328a226537b37120054ff2c331810db2093a636750028b",
+    "art-source/vehicle-bake/stretch-limousine/v1/coverage-region.json": "e79d24f833b8d4f29a1c9bd2e60f34940e8b074aa858cb81ee7ab46612102744",
+    "art-source/vehicle-bake/stretch-limousine/v1/surface-regions.json": "ef8a4b204022b29b50e24614ad1a13d89e9777bc57a90f3b5f879598199fd53d",
+    "art-source/vehicle-bake/stretch-limousine/v1/review.json": "d91d54dcc9a3f44d43275fc89e1a51faa4f0e83a76d6019e8973afea09770ec2",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/stretch-limousine-v1/captures/engine-4.png": "624bf603443c73b7c0cbc77364c082693b032a9993da275d14a678b629c700c7",
+    "public/demos/original-vehicles/stretch-limousine-v1/captures/engine-12.png": "8540925e677133aa7aac5a5312b09e1d8f56e699cd5ad3cae1fb79e4cc42623f",
+    "public/demos/original-vehicles/stretch-limousine-v1/captures/engine-8.png": "4a618bfaaaea33b3c3f634f4d2df08b77e8bebcced6fa29af4c36274a4225532",
+    "public/demos/original-vehicles/stretch-limousine-v1/captures/engine-0.png": "72db498502b89e59c503cfc9c0af8e55fad06c3e7d92379defb0a6913cd344f3"
+  },
+  "physicalBounds": [
+    123,
+    35,
+    30
+  ],
+  "measurement": {
+    "modelSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -61.21738815307617,
+        -17.39130401611328,
+        4.76837158203125e-07
+      ],
+      "max": [
+        61.21738815307617,
+        17.39130401611328,
+        29.913043975830078
+      ],
+      "size": [
+        122.43477630615234,
+        34.78260803222656,
+        29.913043975830078
+      ]
+    },
+    "triangles": 2956,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/stretch-limousine/v1/evidence/replay-verification.json",
+    "sha256": "7b6a33ca9608cb15ef0b793d33cb7b98ad69cbdfc8e3bcd65cf32dc11a39b5e4",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-stretch-limousine-v1.json --blender BLENDER"
+}

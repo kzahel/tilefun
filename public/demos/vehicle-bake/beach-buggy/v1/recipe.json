@@ -1,0 +1,785 @@
+{
+  "family": "sunny-beach-dune-buggy",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    3.9,
+    2.15,
+    1.65
+  ],
+  "wheelRadius": 0.44,
+  "wheelWidth": 0.38,
+  "axles": [
+    -1.18,
+    1.18
+  ],
+  "halfTrack": 0.81,
+  "arch": {
+    "cutRadius": 0.515,
+    "pocketInnerY": 0.57,
+    "segments": 24
+  },
+  "fender": {
+    "segments": 14,
+    "lateralStations": [
+      0.55,
+      0.68,
+      0.85,
+      1.0,
+      1.075
+    ],
+    "shoulderRadii": [
+      0.55,
+      0.62,
+      0.63,
+      0.59,
+      0.55
+    ],
+    "archRadius": 0.505
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      151,
+      68,
+      37
+    ],
+    "paintShadow": [
+      184,
+      78,
+      37
+    ],
+    "paintMid": [
+      220,
+      103,
+      37
+    ],
+    "paint": [
+      241,
+      132,
+      42
+    ],
+    "paintLight": [
+      255,
+      173,
+      64
+    ],
+    "cream": [
+      218,
+      219,
+      224
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "bedFloor": [
+      62,
+      65,
+      81
+    ],
+    "bedRib": [
+      86,
+      90,
+      108
+    ],
+    "bedWall": [
+      51,
+      55,
+      75
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "seatBlue": [
+      65,
+      85,
+      113
+    ],
+    "seatLight": [
+      92,
+      128,
+      158
+    ],
+    "seatDark": [
+      46,
+      61,
+      85
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original short rounded dune-buggy tub, broad swept integrated fenders, real recessed two-seat cockpit, fixed black tube cage and small framed windshield. Direct semantic UV paint on runtime topology; no high-to-low transfer claim.",
+  "bodyStations": [
+    [
+      -1.82,
+      0.51,
+      0.73
+    ],
+    [
+      -1.75,
+      0.68,
+      0.85
+    ],
+    [
+      -1.51,
+      0.77,
+      0.92
+    ],
+    [
+      -1.05,
+      0.79,
+      0.96
+    ],
+    [
+      -0.6,
+      0.79,
+      0.96
+    ],
+    [
+      -0.35,
+      0.78,
+      0.93
+    ],
+    [
+      0.35,
+      0.78,
+      0.93
+    ],
+    [
+      0.93,
+      0.8,
+      0.96
+    ],
+    [
+      1.25,
+      0.79,
+      0.96
+    ],
+    [
+      1.59,
+      0.72,
+      0.89
+    ],
+    [
+      1.82,
+      0.53,
+      0.77
+    ]
+  ],
+  "components": [
+    {
+      "name": "Own short rounded orange buggy tub with genuine cockpit",
+      "group": "body",
+      "triangles": 670,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Dark inner tub panel -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedWall"
+      ]
+    },
+    {
+      "name": "Rounded orange cockpit rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Dark inner tub panel 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedWall"
+      ]
+    },
+    {
+      "name": "Rounded orange cockpit rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Dark dashboard across actual front cockpit",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedWall"
+      ]
+    },
+    {
+      "name": "Orange dashboard cap",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Recessed cockpit floor visible in footwells",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedFloor"
+      ]
+    },
+    {
+      "name": "Narrow low center tunnel",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedRib"
+      ]
+    },
+    {
+      "name": "Blue bucket seat cushion -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seatBlue"
+      ]
+    },
+    {
+      "name": "Light blue cushion center -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "seatLight"
+      ]
+    },
+    {
+      "name": "Blue bucket seatback -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seatBlue"
+      ]
+    },
+    {
+      "name": "Blue seatback center face -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "seatLight"
+      ]
+    },
+    {
+      "name": "Dark seatback top seam -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "seatDark"
+      ]
+    },
+    {
+      "name": "Blue bucket seat cushion 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seatBlue"
+      ]
+    },
+    {
+      "name": "Light blue cushion center 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "seatLight"
+      ]
+    },
+    {
+      "name": "Blue bucket seatback 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seatBlue"
+      ]
+    },
+    {
+      "name": "Blue seatback center face 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "seatLight"
+      ]
+    },
+    {
+      "name": "Dark seatback top seam 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "seatDark"
+      ]
+    },
+    {
+      "name": "Static tiny windscreen exact framed opaque glass owner",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed cage transverse hoop -0.48",
+      "group": "body",
+      "triangles": 92,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed cage transverse hoop 0.79",
+      "group": "body",
+      "triangles": 92,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed cage roof side rail -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed cage rear brace -1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed cage roof side rail 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Fixed cage rear brace 1",
+      "group": "body",
+      "triangles": 20,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Broad integrated buggy fender -1.18 -1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad integrated buggy fender -1.18 1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad integrated buggy fender 1.18 -1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad integrated buggy fender 1.18 1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Small gray bumper -1.9",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Small gray bumper 1.9",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Gray headlamp rim -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Gray headlamp lens -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Small red rear lamp -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Gray headlamp rim 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Gray headlamp lens 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Small red rear lamp 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Static steering wheel in cockpit",
+      "group": "body",
+      "triangles": 100,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Static steering wheel spoke",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.1799999475479126,
+        -0.8100000023841858,
+        0.4399999976158142
+      ],
+      "centerExport": [
+        -20.52173821822457,
+        7.652173871579379,
+        14.086956563203234
+      ],
+      "radiusBlender": 0.44,
+      "wheel_radius": 7.652173913043479
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.1799999475479126,
+        0.8100000023841858,
+        0.4399999976158142
+      ],
+      "centerExport": [
+        -20.52173821822457,
+        7.652173871579379,
+        -14.086956563203234
+      ],
+      "radiusBlender": 0.44,
+      "wheel_radius": 7.652173913043479
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.1799999475479126,
+        -0.8100000023841858,
+        0.4399999976158142
+      ],
+      "centerExport": [
+        20.52173821822457,
+        7.652173871579379,
+        14.086956563203234
+      ],
+      "radiusBlender": 0.44,
+      "wheel_radius": 7.652173913043479
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.1799999475479126,
+        0.8100000023841858,
+        0.4399999976158142
+      ],
+      "centerExport": [
+        20.52173821822457,
+        7.652173871579379,
+        -14.086956563203234
+      ],
+      "radiusBlender": 0.44,
+      "wheel_radius": 7.652173913043479
+    }
+  ],
+  "method": "Original short rounded dune-buggy tub, broad swept integrated fenders, real recessed two-seat cockpit, fixed black tube cage and small framed windshield. Direct semantic UV paint on runtime topology; no high-to-low transfer claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/beach-buggy/build.py",
+    "scripts/vehicle-bake/beach-buggy/family.json",
+    "scripts/vehicle-bake/beach-buggy/coverage-region.json",
+    "scripts/vehicle-bake/beach-buggy/cockpit-region.json",
+    "scripts/vehicle-bake/beach-buggy/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

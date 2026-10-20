@@ -1,0 +1,288 @@
+{
+  "status": "passed",
+  "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+  "actualCapture": "engine/capture.json",
+  "nativeViewport": [
+    224,
+    224
+  ],
+  "nativeRadius": 112,
+  "source80ReferenceUnchanged": true,
+  "familyExtraPadding": 0,
+  "fallbackFrame": [
+    192,
+    224
+  ],
+  "engineOrigin": [
+    112,
+    112
+  ],
+  "fallbackOrigin": [
+    96,
+    144
+  ],
+  "translationOnly": [
+    -16,
+    32
+  ],
+  "scale": 1,
+  "views": [
+    {
+      "yaw": 0,
+      "actual224OccupiedBounds": {
+        "minX": 60,
+        "minY": 45,
+        "maxX": 163,
+        "maxY": 129
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 44,
+        "maxX": 147,
+        "minY": 77,
+        "maxY": 161
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 22.5,
+      "actual224OccupiedBounds": {
+        "minX": 57,
+        "minY": 28,
+        "maxX": 166,
+        "maxY": 142
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 41,
+        "maxX": 150,
+        "minY": 60,
+        "maxY": 174
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 45,
+      "actual224OccupiedBounds": {
+        "minX": 62,
+        "minY": 16,
+        "maxX": 161,
+        "maxY": 152
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 46,
+        "maxX": 145,
+        "minY": 48,
+        "maxY": 184
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 67.5,
+      "actual224OccupiedBounds": {
+        "minX": 73,
+        "minY": 12,
+        "maxX": 149,
+        "maxY": 157
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 57,
+        "maxX": 133,
+        "minY": 44,
+        "maxY": 189
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 90,
+      "actual224OccupiedBounds": {
+        "minX": 87,
+        "minY": 16,
+        "maxX": 132,
+        "maxY": 154
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 71,
+        "maxX": 116,
+        "minY": 48,
+        "maxY": 186
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 112.5,
+      "actual224OccupiedBounds": {
+        "minX": 74,
+        "minY": 12,
+        "maxX": 149,
+        "maxY": 157
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 58,
+        "maxX": 133,
+        "minY": 44,
+        "maxY": 189
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 135,
+      "actual224OccupiedBounds": {
+        "minX": 62,
+        "minY": 16,
+        "maxX": 161,
+        "maxY": 152
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 46,
+        "maxX": 145,
+        "minY": 48,
+        "maxY": 184
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 157.5,
+      "actual224OccupiedBounds": {
+        "minX": 57,
+        "minY": 28,
+        "maxX": 166,
+        "maxY": 142
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 41,
+        "maxX": 150,
+        "minY": 60,
+        "maxY": 174
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 180,
+      "actual224OccupiedBounds": {
+        "minX": 60,
+        "minY": 45,
+        "maxX": 163,
+        "maxY": 129
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 44,
+        "maxX": 147,
+        "minY": 77,
+        "maxY": 161
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 202.5,
+      "actual224OccupiedBounds": {
+        "minX": 57,
+        "minY": 40,
+        "maxX": 166,
+        "maxY": 141
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 41,
+        "maxX": 150,
+        "minY": 72,
+        "maxY": 173
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 225,
+      "actual224OccupiedBounds": {
+        "minX": 62,
+        "minY": 37,
+        "maxX": 161,
+        "maxY": 152
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 46,
+        "maxX": 145,
+        "minY": 69,
+        "maxY": 184
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 247.5,
+      "actual224OccupiedBounds": {
+        "minX": 74,
+        "minY": 34,
+        "maxX": 150,
+        "maxY": 157
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 58,
+        "maxX": 134,
+        "minY": 66,
+        "maxY": 189
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 270,
+      "actual224OccupiedBounds": {
+        "minX": 91,
+        "minY": 36,
+        "maxX": 136,
+        "maxY": 154
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 75,
+        "maxX": 120,
+        "minY": 68,
+        "maxY": 186
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 292.5,
+      "actual224OccupiedBounds": {
+        "minX": 74,
+        "minY": 34,
+        "maxX": 149,
+        "maxY": 157
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 58,
+        "maxX": 133,
+        "minY": 66,
+        "maxY": 189
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 315,
+      "actual224OccupiedBounds": {
+        "minX": 62,
+        "minY": 37,
+        "maxX": 161,
+        "maxY": 152
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 46,
+        "maxX": 145,
+        "minY": 69,
+        "maxY": 184
+      },
+      "fitsWithoutScaling": true
+    },
+    {
+      "yaw": 337.5,
+      "actual224OccupiedBounds": {
+        "minX": 57,
+        "minY": 40,
+        "maxX": 166,
+        "maxY": 141
+      },
+      "fallback192x224OccupiedBounds": {
+        "minX": 41,
+        "maxX": 150,
+        "minY": 72,
+        "maxY": 173
+      },
+      "fitsWithoutScaling": true
+    }
+  ],
+  "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+}

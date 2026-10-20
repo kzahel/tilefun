@@ -1,0 +1,149 @@
+{
+  "method": "Independent raised narrow short-cab lime/purple monster pickup, real short recessed bed, massive block-tread black wheels/purple hubs and visible fixed dark chassis/suspension. Own continuous actual-skin glass/roof/hood charts and separate bed floor/interior/tailgate paint. Intentionally exposed tire crowns, no fake coverage caps.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      48,
+      86,
+      49
+    ],
+    "paintShadow": [
+      70,
+      120,
+      43
+    ],
+    "paintMid": [
+      103,
+      158,
+      46
+    ],
+    "paint": [
+      143,
+      199,
+      60
+    ],
+    "paintLight": [
+      183,
+      226,
+      91
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "purple": [
+      116,
+      63,
+      147
+    ],
+    "purpleLight": [
+      155,
+      100,
+      187
+    ],
+    "purpleDeep": [
+      68,
+      43,
+      91
+    ],
+    "bedFloor": [
+      73,
+      52,
+      98
+    ],
+    "bedRib": [
+      106,
+      72,
+      129
+    ],
+    "bedWall": [
+      53,
+      40,
+      77
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "ownership": "Own raised short cab side chart with purple graphic band and framed blue glass; separate fixed windshield/rear and purple roof charts; short rounded lime hood, recessed purple cargo floor with sparse ribs and shadowed actual interior walls; lime outside walls/tailgate and purple rims; dark fixed chassis/suspension and massive black block tread with purple hubs. Tire crowns intentionally outboard and exposed, no fake caps. Named source components retain base FACE paint_role attributes; their continuous UV charts own window/paint details. Trim islands share padded constant-role swatches; wheel-only meshes never sample coachwork.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Coherent opposite cab glass/body charts; own front/rear glass and roof. Short open cargo tub behind closed cab, massive equal-radius exposed tires and distinct front/rear lamps.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

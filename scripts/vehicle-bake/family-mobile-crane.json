@@ -1,0 +1,17 @@
+{
+  "id": "mobile-crane-v1",
+  "clearanceId": "mobile-crane--v1",
+  "name": "Mobile crane truck",
+  "title": "Mobile crane truck \u00b7 autonomous original v1",
+  "source": "public/demos/vehicle-bake/mobile-crane/v1",
+  "glb": "public/demos/vehicle-bake/mobile-crane/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/mobile-crane/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/mobile-crane/v1/report.json",
+  "output": "public/demos/original-vehicles/mobile-crane-v1",
+  "qa": "data/vehicle-bake/mobile-crane-qa",
+  "offline": "data/vehicle-bake/mobile-crane-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 256,
+  "toolchain": "multi-axle-v2",
+  "wheelIds": ["FL", "FR", "ML", "MR", "RL", "RR"]
+}

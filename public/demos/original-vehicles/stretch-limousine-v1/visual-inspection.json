@@ -1,0 +1,15 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized run153; formal art review open",
+  "observations": [
+    "All32 actual native headings inspected: long low charcoal sedan, five framed panes per side, distinct hood and trunk; no clipping.",
+    "Signed phases show fixed body/glass and correct lower wheel exposure; both actual wireframes inspected.",
+    "Fresh declared-input replay exact; crown coverage and full-body rolling clearance qualified separately."
+  ],
+  "limitations": [
+    "Agent inspection; not human approval",
+    "Neutral rolling qualified; steering/suspension animation not qualified"
+  ]
+}

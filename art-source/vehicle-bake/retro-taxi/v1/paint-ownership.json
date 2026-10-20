@@ -1,0 +1,278 @@
+{
+  "method": "Original rounded low yellow four-door taxi sedan with substantial hood/trunk, domed cabin and swept front/rear glazing. Continuous actual-skin UV charts own bounded blue panes, broad two-row black/cream checker belt, four-door seams/gray handles and rear tail paint. Small fixed roof-sign solid has actual UV dark inset without text. No glass overlays, source projection or high-to-low claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      179,
+      122,
+      36
+    ],
+    "paintShadow": [
+      210,
+      145,
+      37
+    ],
+    "paintMid": [
+      235,
+      170,
+      42
+    ],
+    "paint": [
+      247,
+      194,
+      54
+    ],
+    "paintLight": [
+      255,
+      215,
+      87
+    ],
+    "cream": [
+      255,
+      239,
+      191
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "roof": [
+      255,
+      224,
+      119
+    ],
+    "checkerBlack": [
+      45,
+      48,
+      66
+    ]
+  },
+  "ownership": "Original rounded low four-door sedan skin with continuous side pane/door/checker charts, swept front/rear blue glazing, domed roof and substantial hood/trunk. Checker belt is actual side-panel UV paint with two rows of broad black/cream squares, no overlay planes. Fixed small roof sign has dark inset painted on its actual front/back faces. All other trim and wheels own named padded semantic palette islands.",
+  "semanticOwners": {
+    "sedanSides": {
+      "component": "Own rounded yellow taxi substantial hood domed cabin trunk skin",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        192
+      ],
+      "meaning": "Two framed blue door panes per side, four total door seams/handles and two-row checker belt on actual body skin"
+    },
+    "endCaps": {
+      "atlasPixelRect": [
+        0,
+        192,
+        512,
+        272
+      ],
+      "meaning": "Simple front grille and rear red tail paint"
+    },
+    "frontRearGlass": {
+      "atlasPixelRect": [
+        0,
+        272,
+        512,
+        384
+      ],
+      "meaning": "Front half swept windshield, rear half swept rear window; continuous dark frames on actual surface triangles"
+    },
+    "domedRoof": {
+      "atlasPixelRect": [
+        0,
+        384,
+        512,
+        448
+      ],
+      "meaning": "Broad warm yellow domed roof skin beneath fixed sign"
+    },
+    "hoodTrunk": {
+      "atlasPixelRect": [
+        0,
+        448,
+        512,
+        464
+      ],
+      "meaning": "Substantial rounded yellow hood/trunk paint"
+    },
+    "roofSign": {
+      "component": "Fixed taxi roof sign actual UV inset owner",
+      "atlasPixelRect": [
+        0,
+        464,
+        512,
+        480
+      ],
+      "roles": [
+        "cream",
+        "checkerBlack"
+      ],
+      "meaning": "Small actual static solid, front/back UV-owned blank dark inset and cream border; no text or logo"
+    },
+    "trim": {
+      "roles": [
+        "ink",
+        "rim",
+        "silver",
+        "paint",
+        "paintLight",
+        "paintDeep"
+      ],
+      "meaning": "Named static bumpers/headlamps, low sign support and broad integrated rounded fender shoulders"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "rubyLight": [
+      80,
+      504
+    ],
+    "roof": [
+      112,
+      504
+    ],
+    "checkerBlack": [
+      144,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric low four-door sedan, broad side checker belt, swept front/rear glass and substantial hood/trunk. Small fixed blank roof sign; no open-interior claim.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

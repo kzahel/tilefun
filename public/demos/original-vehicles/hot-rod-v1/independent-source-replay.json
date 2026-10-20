@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "hot-rod",
+  "independent": true,
+  "declaredInputPins": 17,
+  "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/hot-rod/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/hot-rod/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/hot-rod/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

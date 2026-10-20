@@ -1,0 +1,39 @@
+{
+  "schema": "tilefun-seated-rider-profile-v1",
+  "id": "brown-bear-upright-measured-v1",
+  "status": "proposed-bear-profile-prototype-not-production",
+  "units": "World logical pixels, before game rigid basis conversion",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "origin": "Local Bear pelvis center; no actual bike mount supplied",
+  "contacts": {
+    "hip_saddle": [0.0, 0.0, -1.739130434782609],
+    "hand_left_grip": [-6.260869565217392, -5.913043478260871, 4.347826086956522],
+    "hand_right_grip": [-6.260869565217392, 5.913043478260871, 4.347826086956522],
+    "foot_left_support": [-1.0434782608695654, -5.565217391304349, -8.000000000000002],
+    "foot_right_support": [-1.0434782608695654, 5.565217391304349, -8.000000000000002]
+  },
+  "semantics": {
+    "hip_saddle": "Pelvis bottom contact on actual saddle surface",
+    "hands": "Grip centerline anchors; deliberate palm wrap is a declared contact exception",
+    "feet": "Sole tangent points on actual top of foot support, not peg centerline"
+  },
+  "basis": "Separate profile after failed Explorer reach. Fixed bone lengths; foot supports lowered during actual self-intersection refinement to clear wide hindpaws from folded knees. No global profile edit or actual bike-fit claim.",
+  "inferredContactSource": {
+    "hip_saddle": [0, 0, -0.1],
+    "hand_left_grip": [-0.36, -0.34, 0.25],
+    "hand_right_grip": [-0.36, 0.34, 0.25],
+    "foot_left_support": [-0.06, -0.32, -0.46],
+    "foot_right_support": [-0.06, 0.32, -0.46]
+  },
+  "uncertainty": "Measured from an authored inferred3D template, not uniquely determined by standing sprites. Fixture is not a bike; parent review pending.",
+  "requirements": [
+    "Actual fixed bone lengths and volumetric paw/saddle contacts",
+    "Independent native identity and geometry review",
+    "Actual bike/frame/wheel/engine qualification remains separate"
+  ],
+  "limits": [
+    "One static Brown Bear avatar prerequisite only",
+    "No normal/all27/AI/fallback or wildlife expansion qualification"
+  ]
+}

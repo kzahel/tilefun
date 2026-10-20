@@ -1,0 +1,20 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+  "reviewer": "author agent; independent parent inspection remains pending",
+  "observations": [
+    "Inspected all16 actual study and16 game headings, eight signed phases per camera and both wireframes. Inspected original224-pixel study2/study14 and engine2/engine14 front/rear obliques. Contact sheets use integer nearest scaling only.",
+    "Rounded full-height front sits ahead of the front axle with no hood shelf. Turquoise lower/cream upper body, split blue windshield, three broad framed side panes per side, camper-door seam and raised cream roof/gray vent read as a retro cab-over camper.",
+    "Split front glass has a continuous dark central divider and bounded perimeter. Cab/side panes stay on the actual continuous skin, with19 actualGLB interpolated UV rays independently confirming glazing, framing, paint, side door seam and roof/vent roles. No coincident glass overlays.",
+    "Four tires sit in genuinely open local arch pockets. Far crowns remain under broad integrated rounded fenders in all32 headings and signed phases. Own finite region25/25 each with controls supports the visual inspection; no exposed-wheel exception needed.",
+    "Actual raised roof is a static rounded solid with96 vertices and0.28source height, all retained in Body_static. Small vent, lamps and bumpers also remain fixed during wheel phases. No animated roof or doors claimed.",
+    "Native224/radius112 retains fixed density with no clipping or per-angle fitting. Both-camera/all32 native128/224 centered126-square interior crops match exactly. Raw one-pixel outer-frame differences are retained for14 game headings where the tall silhouette touches128-frame outline neighbor tests;224 is the qualified uncut viewport.",
+    "Broad turquoise, cream and cool blue palette clusters remain coherent at native scale. Small frames, lamp/handle and gray trim highlights retain expected native aliasing. No badge, logo, text, transparent glass, PBR or visible animated driver."
+  ],
+  "limits": [
+    "Honest author agent-QA only; independent parent review/freeze remains next.",
+    "Neutral steering and wheel roll only; roof, doors and vent are static. Existing ordinary driving hides driver; no visible animated driver.",
+    "Closed opaque body has no open-interior claim. Finite crown samples supplement visual inspection rather than certify universal coverage.",
+    "128 frame-boundary outline is not byte-identical to the centered224 crop when clipped; raw counts retained. All32 interior126-square crops are exact at unchanged density."
+  ]
+}

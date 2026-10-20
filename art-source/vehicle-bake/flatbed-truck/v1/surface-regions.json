@@ -1,0 +1,83 @@
+{
+  "meaning": "Actual cab glass/paint, flat deck top/seams/thin edge, dark underframe, arch guard and bumper hazard triangle UV owners",
+  "rays": [
+    {
+      "id": "cab-glass-left",
+      "origin": [-2, -2, 1.75],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "cab-glass-right",
+      "origin": [-2, 2, 1.75],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "windshield",
+      "origin": [-4, 0, 1.75],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "cab-rear-window",
+      "origin": [-0.7, 0, 1.75],
+      "direction": [-1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "orange-roof",
+      "origin": [-1.6, 0, 3.0],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "deck-panel-light",
+      "origin": [1, 0.8, 3],
+      "direction": [0, 0, -1],
+      "roles": ["deckLight", "deck"]
+    },
+    {
+      "id": "deck-panel-seam",
+      "origin": [1, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["deckSeam"]
+    },
+    {
+      "id": "deck-thin-side-edge",
+      "origin": [0.4, -2, 1.185],
+      "direction": [0, 1, 0],
+      "roles": ["deckEdge"]
+    },
+    {
+      "id": "dark-frame",
+      "origin": [0.3, -0.56, 0.5],
+      "direction": [0, 0, 1],
+      "roles": ["frame"]
+    },
+    {
+      "id": "front-arch-orange",
+      "origin": [-2.15, -1.08, 1.4],
+      "direction": [0, 0, -1],
+      "roles": ["paint", "paintLight", "paintDeep"]
+    },
+    {
+      "id": "rear-guard-gray",
+      "origin": [2.02, -1.15, 1.6],
+      "direction": [0, 0, -1],
+      "roles": ["deck", "deckLight", "deckSeam"]
+    },
+    {
+      "id": "rear-hazard",
+      "origin": [4, 0.8, 0.73],
+      "direction": [-1, 0, 0],
+      "roles": ["ink", "paintLight"]
+    },
+    {
+      "id": "gray-front-bumper",
+      "origin": [-4, 0, 0.43],
+      "direction": [1, 0, 0],
+      "roles": ["deckLight"]
+    }
+  ]
+}

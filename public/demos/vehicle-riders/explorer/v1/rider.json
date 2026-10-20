@@ -1,0 +1,49 @@
+{
+  "id": "explorer-seated-roadster-control-v1",
+  "status": "prototype-not-production",
+  "humanApproval": false,
+  "worldScale": 17.39130434782609,
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "origin": "local pelvis/hip center",
+  "hipSocketSource": [0.5, -0.322, 0.725],
+  "socketTranslationGLTFWorld": [8.695652173913045, 12.608695652173914, 5.6000000000000005],
+  "riderContactSocketsSource": {
+    "hip_cushion": [0.5, -0.322, 0.6455],
+    "hand_left_rim": [-0.06, -0.462, 0.8],
+    "hand_right_rim": [-0.06, -0.182, 0.8],
+    "foot_left_floor": [-0.08, -0.437, 0.417],
+    "foot_right_floor": [-0.08, -0.207, 0.417]
+  },
+  "carControl": {
+    "glb": "public/demos/original-vehicles/classic-roadster-v1/inputs/model.glb",
+    "sha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "master": "art-source/vehicle-bake/classic-roadster/v1/master.blend",
+    "build": "scripts/vehicle-bake/classic-roadster/build.py",
+    "frozenCaptures": "public/demos/original-vehicles/classic-roadster-v1/captures"
+  },
+  "identityReference": {
+    "approvedPNG": "public/demos/pixel-characters/person-32.png",
+    "approvedPNGsha256": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "source": "art-source/pixel-characters/person.json",
+    "usage": "Identity/palette and source head UV evidence only; never a seated sprite or billboard"
+  },
+  "render": {
+    "nativeSize": 224,
+    "radius": 112,
+    "worldDensity": "80/4.6 unchanged",
+    "studyDegrees": 50,
+    "studyOrigin": [112, 140],
+    "gameOrigin": [112, 112]
+  },
+  "contactExceptions": [
+    "Pelvis/cushion top tangency",
+    "Warm hand geometry wraps fixed steering rim at exact declared centerline grips",
+    "Boot sole/floor tangency"
+  ],
+  "limits": [
+    "Static seat-specific Explorer prototype only",
+    "No normal activation, all-avatar, AI-occupant or fallback support",
+    "Roof/doors/vehicle and existing promoted character bytes unchanged"
+  ]
+}

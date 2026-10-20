@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "inputHashes": {
+    "art-source/vehicle-bake/farm-tractor/v1/build.py": "6480572a2336d3fe8f8049b4f7dbb8ca76470223e696934d7714f143818b29bd",
+    "art-source/vehicle-bake/farm-tractor/v1/geometry.py": "512b1a369ac783b6edece8194219d0f2d6f468f42fa3a5eda35107efcb7b3ce3",
+    "art-source/vehicle-bake/farm-tractor/v1/family.json": "509f1b16ca5efc73e4bfe316d2fb7b58c75cd91a4e970bb730df3a41986214a5",
+    "art-source/vehicle-bake/farm-tractor/v1/coverage-region.json": "3913d2912013071b2333e1eba8754d6b908d8193cf0e5c3c1a0e6da3a9c45a7d",
+    "art-source/vehicle-bake/farm-tractor/v1/surface-regions.json": "470449861c18544122fc4e2ed34bddeb518642e9dff8b58e663313990b362c2a",
+    "art-source/vehicle-bake/farm-tractor/v1/tractor-region.json": "51e273ecb7db18681990fb6c820ee0dd337b695c02bdbbfd5aa9432eaf81dc18",
+    "art-source/vehicle-bake/farm-tractor/v1/review.json": "aa779da5221fc25ae6ff64e9a009fa210f2b92870e36646ac70594cca694c0b7"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+  },
+  "outputs": {
+    "model.glb": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+    "atlas.png": "df1abd245c911d86fdacc5cca4c8c0981e9b2e9c30f9dd46c95ae2d65fdec446",
+    "recipe.json": "cc04bec970c375bfe4761c241d32b6d307c0c672af9c7c8035574912f6db60fd"
+  },
+  "scratchInputDependencies": [],
+  "isolatedRoot": "data/vehicle-bake/farm-tractor/fresh-declared-replay",
+  "bootstrap": "Empty AGENTS.md/public root sentinels only; no vehicle inputs",
+  "meaning": "Fresh miniature repository contains only listed inputs. GLB, atlas and recipe match byte for byte; packed blend determinism is not claimed."
+}

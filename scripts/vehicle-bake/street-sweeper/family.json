@@ -1,0 +1,106 @@
+{
+  "family": "white-mint-fixed-brush-street-sweeper",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [4, 2, 2.1],
+  "axles": [-1.25, 1.2],
+  "arch": {
+    "cutRadius": 0.42,
+    "pocketInnerY": 0.56,
+    "segments": 24
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [42, 43, 57],
+    "tireLight": [64, 66, 81],
+    "paintDeep": [56, 104, 100],
+    "paintShadow": [73, 137, 123],
+    "paintMid": [103, 171, 147],
+    "paint": [143, 207, 176],
+    "paintLight": [189, 235, 204],
+    "cream": [239, 239, 224],
+    "glassDark": [68, 88, 112],
+    "glass": [105, 153, 179],
+    "glassLight": [157, 199, 218],
+    "glassGlint": [195, 225, 233],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "tankShadow": [106, 127, 129],
+    "tankMid": [145, 164, 158],
+    "tank": [178, 197, 184],
+    "tankLight": [211, 225, 204],
+    "bristle": [57, 63, 76],
+    "bristleLight": [82, 91, 100],
+    "brushCap": [116, 153, 130],
+    "chassis": [61, 64, 79],
+    "chassisLight": [87, 91, 108]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Original compact white/mint municipal sweeper, short enclosed broad blue-glass cab, genuine rounded gray-green rear collection tank, two low outboard circular brush discs with12 broad dark bristle blocks each and fixed arms. Four ordinary road wheels only; brushes/static equipment have no roll nodes or cleaning animation claim.",
+  "paintOwnership": "Own mint lower fender skins, continuous side glass plus separate windshield/rear-glass/white roof charts, rounded tank side/end/top chart ownership and explicit padded palette UVs for bristle blocks/caps/arms. Paint lies on actual surfaces, no glass overlays or screen projection.",
+  "wheelSpecs": {
+    "FL": {
+      "axle": -1.25,
+      "halfTrack": 0.8,
+      "radius": 0.36,
+      "width": 0.28,
+      "segments": 24
+    },
+    "FR": {
+      "axle": -1.25,
+      "halfTrack": 0.8,
+      "radius": 0.36,
+      "width": 0.28,
+      "segments": 24
+    },
+    "RL": {
+      "axle": 1.2,
+      "halfTrack": 0.8,
+      "radius": 0.36,
+      "width": 0.28,
+      "segments": 24
+    },
+    "RR": {
+      "axle": 1.2,
+      "halfTrack": 0.8,
+      "radius": 0.36,
+      "width": 0.28,
+      "segments": 24
+    }
+  },
+  "coveragePolicy": {
+    "allWheels": "Actual mint front fenders and rear collection lower wheelhouse body; own finite central crown region with short rays excluding upper cab/tank."
+  },
+  "boundsPolicy": "Measure all actual fixed brushes/arms/tank and wheels, including2.5source overall brush width, unchanged ground/root/80/4.6 scale; no fit scaling or recenter.",
+  "brushes": {
+    "centers": [[-0.05, -1.0, 0.16], [-0.05, 1.0, 0.16]],
+    "outerRadius": 0.25,
+    "capRadius": 0.18,
+    "capTop": 0.22,
+    "bristleBottom": 0.055,
+    "bristleTop": 0.185,
+    "blocksPerBrush": 12,
+    "mode": "FIXED STATIC BODY ONLY",
+    "animationClaims": false
+  },
+  "tank": {
+    "frontX": -0.25,
+    "rearX": 1.82,
+    "maximumHeight": 2.0,
+    "maximumHalfWidth": 0.94,
+    "closedVolume": true
+  }
+}

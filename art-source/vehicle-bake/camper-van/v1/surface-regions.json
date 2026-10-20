@@ -1,0 +1,120 @@
+{
+  "name": "camper-van-own-actual-skin-regions-v1",
+  "meaning": "Actual GLB triangle rays with interpolated atlas UV establish three framed side panes on each continuous body side, split front blue glazing/dark divider, lower turquoise paint, upper cream, static camper door seam, rear glass and actual raised roof/vent. All glazing opaque; closed body has no open-well claim.",
+  "rays": [
+    {
+      "id": "left-cab-actual-skin-glass",
+      "origin": [-1.65, -3, 1.52],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-camper-door-actual-skin-glass",
+      "origin": [-0.15, -3, 1.52],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-rear-actual-skin-glass",
+      "origin": [1.35, -3, 1.52],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-lower-turquoise",
+      "origin": [0.1, -3, 0.8],
+      "direction": [0, 1, 0],
+      "roles": ["paint"]
+    },
+    {
+      "id": "left-cream-upper-post",
+      "origin": [0.6, -3, 1.52],
+      "direction": [0, 1, 0],
+      "roles": ["cream"]
+    },
+    {
+      "id": "left-closed-camper-door-seam",
+      "origin": [0.55, -3, 0.88],
+      "direction": [0, 1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "right-cab-actual-skin-glass",
+      "origin": [-1.65, 3, 1.52],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-camper-door-actual-skin-glass",
+      "origin": [-0.15, 3, 1.52],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-rear-actual-skin-glass",
+      "origin": [1.35, 3, 1.52],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-lower-turquoise",
+      "origin": [0.1, 3, 0.8],
+      "direction": [0, -1, 0],
+      "roles": ["paint"]
+    },
+    {
+      "id": "right-cream-upper-post",
+      "origin": [0.6, 3, 1.52],
+      "direction": [0, -1, 0],
+      "roles": ["cream"]
+    },
+    {
+      "id": "right-closed-camper-door-seam",
+      "origin": [0.55, 3, 0.88],
+      "direction": [0, -1, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "front-split-pane--0.3",
+      "origin": [-3, -0.3, 1.52],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "front-split-pane-0.3",
+      "origin": [-3, 0.3, 1.52],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "front-ink-center-divider",
+      "origin": [-3, 0, 1.52],
+      "direction": [1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "front-bounded-outer-frame",
+      "origin": [-3, 0.65, 1.52],
+      "direction": [1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "rear-broad-glass",
+      "origin": [3, 0.3, 1.52],
+      "direction": [-1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "raised-cream-roof",
+      "origin": [-0.6, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["creamLight"]
+    },
+    {
+      "id": "fixed-gray-roof-vent",
+      "origin": [0.65, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["silver"]
+    }
+  ]
+}

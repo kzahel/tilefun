@@ -1,0 +1,432 @@
+{
+  "status": "passed",
+  "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+  "browser": "bundled full Chromium",
+  "browserVersion": "153.0.8010.12",
+  "nativeSizes": [
+    128,
+    224
+  ],
+  "views": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 22.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 67.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 112.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 157.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 180,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 202.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 225,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 247.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 270,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 292.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 315,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 337.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 22.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 39,
+      "fullFrameMismatchedChannels": 39
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 87,
+      "fullFrameMismatchedChannels": 87
+    },
+    {
+      "mode": "engine",
+      "yaw": 67.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 108,
+      "fullFrameMismatchedChannels": 108
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 96,
+      "fullFrameMismatchedChannels": 96
+    },
+    {
+      "mode": "engine",
+      "yaw": 112.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 108,
+      "fullFrameMismatchedChannels": 108
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 87,
+      "fullFrameMismatchedChannels": 87
+    },
+    {
+      "mode": "engine",
+      "yaw": 157.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 39,
+      "fullFrameMismatchedChannels": 39
+    },
+    {
+      "mode": "engine",
+      "yaw": 180,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 0,
+      "fullFrameMismatchedChannels": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 202.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 39,
+      "fullFrameMismatchedChannels": 39
+    },
+    {
+      "mode": "engine",
+      "yaw": 225,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 87,
+      "fullFrameMismatchedChannels": 87
+    },
+    {
+      "mode": "engine",
+      "yaw": 247.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 108,
+      "fullFrameMismatchedChannels": 108
+    },
+    {
+      "mode": "engine",
+      "yaw": 270,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 96,
+      "fullFrameMismatchedChannels": 96
+    },
+    {
+      "mode": "engine",
+      "yaw": 292.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 108,
+      "fullFrameMismatchedChannels": 108
+    },
+    {
+      "mode": "engine",
+      "yaw": 315,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 87,
+      "fullFrameMismatchedChannels": 87
+    },
+    {
+      "mode": "engine",
+      "yaw": 337.5,
+      "comparedPixels": 15876,
+      "excludedFrameBoundary": 1,
+      "centeredOffset": [
+        48,
+        48
+      ],
+      "mismatchedChannels": 0,
+      "boundaryMismatchedChannels": 39,
+      "fullFrameMismatchedChannels": 39
+    }
+  ],
+  "fixedDensity": true,
+  "resizedOrRefitted": false,
+  "errors": [],
+  "meaning": "Both cameras/all32 headings retain exact centered126-square interior RGBA crops at unchanged density. Raw128 frame-boundary mismatches are retained separately: tall camper silhouettes can touch the128 frame and change outline neighbor tests there. Native224 is the qualified uncut viewport. No model/camera fitting or rescaling."
+}

@@ -1,0 +1,1378 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "dump-truck",
+  "route": "dump-truck",
+  "revision": "v1",
+  "method": "Original short stout yellow-cab six-wheel dump truck. Level deep open steel-blue sloped tub owns real floor/inner walls/tailgate, broad side ribs, fixed underbody hinge and ram blocks. Six independent ordinary road wheels; all dump equipment rigid stowed only, no tipping/cargo animation.",
+  "geometry": {
+    "triangles": 3720,
+    "vertices": 7066,
+    "meshes": 7,
+    "primitives": 7,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 251984,
+    "sha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "ML": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "MR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.299999952316284,
+        -1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        -39.99999917071799,
+        8.695652173913045,
+        18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.299999952316284,
+        1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        -39.99999917071799,
+        8.695652173913045,
+        -18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "ML",
+      "centerBlender": [
+        1.1200000047683716,
+        -1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        19.47826095249342,
+        8.695652173913045,
+        18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "MR",
+      "centerBlender": [
+        1.1200000047683716,
+        1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        19.47826095249342,
+        8.695652173913045,
+        -18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        2.4000000953674316,
+        -1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        41.73913209334664,
+        8.695652173913045,
+        18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        2.4000000953674316,
+        1.0399999618530273,
+        0.5
+      ],
+      "centerExport": [
+        41.73913209334664,
+        8.695652173913045,
+        -18.086955858313523
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/dump-truck/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/dump-truck/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/dump-truck/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending; review/catalog registration on parent hold",
+  "authorization": "autonomous-153",
+  "toolchain": "multi-axle-v2",
+  "wheelIds": [
+    "FL",
+    "FR",
+    "ML",
+    "MR",
+    "RL",
+    "RR"
+  ],
+  "triangles": 3720,
+  "vertexCount": 7066,
+  "meshCount": 7,
+  "primitiveCount": 7,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 251984,
+  "atlasBytes": 3058,
+  "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+  "atlasSha256": "1c204674fb084be85a173f9286981a91319f5cb03ff4414bc79af2e1366b9953",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "dump-truck--v1",
+    "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "triangles": 3720,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.960150197384479,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.960150197384479,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601549899355,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601553723468577,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601520290395928,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601509781384365,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "collidingBodyRejected": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/dump-truck/v1/evidence/wheel-coverage-assessment.json",
+  "rawCoverageEvidence": "art-source/vehicle-bake/dump-truck/v1/evidence/upper-wheel-coverage-raw.json",
+  "coverageAssessment": {
+    "status": "meets-declared-finite-region",
+    "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "allSixCrownsCovered": true,
+    "allWheelCoverage": "natural front fenders and rear lower middle/last wheelhouse body over declared central crown region",
+    "wheels": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "coveredCount": 25,
+        "sampleCount": 25,
+        "declaredExpectationMet": true
+      }
+    ],
+    "controls": {
+      "bodyRemovalCoveredCounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "bodyRemovalInformativeAgainstBaseline": true,
+      "syntheticBroadPanelPositiveCounts": [
+        25,
+        25,
+        25,
+        25,
+        25,
+        25
+      ],
+      "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "positiveAndNegativeControlsPassed": true,
+      "fixtureIsNotCandidateGeometry": true,
+      "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+    },
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "maximumRayDistanceR": 1.25,
+    "upperBedRimCannotQualify": true,
+    "regionMeaning": "Finite central tread footprint from each of six own .50source radius and .36source width wheels. Ray limited to1.25R above sampled tread, excluding upper dump-body rim. Actual natural front fenders and continuous lower middle/last wheelhouse body cover the crowns, no separate caps.",
+    "portableRawEvidence": "art-source/vehicle-bake/dump-truck/v1/evidence/upper-wheel-coverage-raw.json",
+    "portableRawSha256": "c652fb4d9bc62fe0643d4eab61245a91c43e55c644f71f538f2235085615022e",
+    "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+  },
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "minBlenderWorld": [
+      -55.65216827392578,
+      -22.608694076538086,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      55.65216827392578,
+      22.608694076538086,
+      48.69565200805664
+    ],
+    "dimensionsBlenderWorld": [
+      111.30433654785156,
+      45.21738815307617,
+      48.695651054382324
+    ],
+    "dimensionsSourceUnits": [
+      6.399999351501464,
+      2.5999998188018796,
+      2.799999935626983
+    ],
+    "centeredHorizontalExtentWorld": [
+      111.30433654785156,
+      45.21738815307617
+    ],
+    "centeredHorizontalExtentSource": [
+      6.399999351501464,
+      2.5999998188018796
+    ],
+    "centeredCeilWorldFootprint": [
+      112,
+      46
+    ],
+    "includesActualLevelTubRimsHingesRamsSixWheels": true,
+    "rootUnchangedNoRecenterOrFitScale": true,
+    "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+  },
+  "dumpDepthEvidence": {
+    "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "allTriangleCount": 3720,
+    "rayCount": 15,
+    "actualRailTopSource": 2.459999961853027,
+    "rays": [
+      {
+        "xySource": [
+          -0.3,
+          -0.55
+        ],
+        "firstHitZSource": 1.24999942779541,
+        "depthBelowActualRailSource": 1.2100005340576168,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.3,
+          0
+        ],
+        "firstHitZSource": 1.2499998664855956,
+        "depthBelowActualRailSource": 1.2100000953674312,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          -0.3,
+          0.55
+        ],
+        "firstHitZSource": 1.2499996471405028,
+        "depthBelowActualRailSource": 1.210000314712524,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.4,
+          -0.55
+        ],
+        "firstHitZSource": 1.2499998664855956,
+        "depthBelowActualRailSource": 1.2100000953674312,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.4,
+          0
+        ],
+        "firstHitZSource": 1.2499998664855956,
+        "depthBelowActualRailSource": 1.2100000953674312,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.4,
+          0.55
+        ],
+        "firstHitZSource": 1.2499996471405028,
+        "depthBelowActualRailSource": 1.210000314712524,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          -0.55
+        ],
+        "firstHitZSource": 1.2499998664855956,
+        "depthBelowActualRailSource": 1.2100000953674312,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          0
+        ],
+        "firstHitZSource": 1.2500000858306883,
+        "depthBelowActualRailSource": 1.2099998760223385,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          1.2,
+          0.55
+        ],
+        "firstHitZSource": 1.24999942779541,
+        "depthBelowActualRailSource": 1.2100005340576168,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.0,
+          -0.55
+        ],
+        "firstHitZSource": 1.2499996471405028,
+        "depthBelowActualRailSource": 1.210000314712524,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.0,
+          0
+        ],
+        "firstHitZSource": 1.2500000858306883,
+        "depthBelowActualRailSource": 1.2099998760223385,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.0,
+          0.55
+        ],
+        "firstHitZSource": 1.2499996471405028,
+        "depthBelowActualRailSource": 1.210000314712524,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.7,
+          -0.55
+        ],
+        "firstHitZSource": 1.2499996471405028,
+        "depthBelowActualRailSource": 1.210000314712524,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.7,
+          0
+        ],
+        "firstHitZSource": 1.2499998664855956,
+        "depthBelowActualRailSource": 1.2100000953674312,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          2.7,
+          0.55
+        ],
+        "firstHitZSource": 1.24999942779541,
+        "depthBelowActualRailSource": 1.2100005340576168,
+        "owner": "Body_static"
+      }
+    ],
+    "minimumMeasuredDepthSource": 1.2099998760223385,
+    "filledTopNegative": {
+      "fixtureTriangles": 2,
+      "rejectedRayCount": 15,
+      "rays": [
+        {
+          "xySource": [
+            -0.3,
+            -0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            -0.3,
+            0
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            -0.3,
+            0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            0.4,
+            -0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            0.4,
+            0
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            0.4,
+            0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            1.2,
+            -0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            1.2,
+            0
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            1.2,
+            0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            2.0,
+            -0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            2.0,
+            0
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            2.0,
+            0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            2.7,
+            -0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            2.7,
+            0
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        },
+        {
+          "xySource": [
+            2.7,
+            0.55
+          ],
+          "firstHitZSource": 2.459999961853027,
+          "depthBelowActualRailSource": 0.0,
+          "owner": "CONTROL filled dump top"
+        }
+      ],
+      "rejected": true
+    },
+    "baselineRestoredExact": true,
+    "noCandidateGeometryRemoved": true,
+    "levelStaticOnly": true
+  },
+  "inventoryEvidence": {
+    "status": "passed",
+    "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "toolchain": "multi-axle-v2",
+    "wheelIds": [
+      "FL",
+      "FR",
+      "ML",
+      "MR",
+      "RL",
+      "RR"
+    ],
+    "actualAudit": {
+      "triangles": 3720,
+      "vertices": 7066,
+      "meshes": 7,
+      "primitives": 7,
+      "materials": 1,
+      "textures": 1,
+      "glbBytes": 251984,
+      "sha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+      "wheels": {
+        "FL": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "FR": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "ML": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "MR": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "RL": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        },
+        "RR": {
+          "wheel_radius": 8.695652173913045,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        }
+      }
+    },
+    "wrongInventoryControls": [
+      {
+        "case": "omitted-middle-pair",
+        "declaredWheelIds": [
+          "FL",
+          "FR",
+          "RL",
+          "RR"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "omitted-MR",
+        "declaredWheelIds": [
+          "FL",
+          "FR",
+          "ML",
+          "RL",
+          "RR"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "duplicate-ML",
+        "declaredWheelIds": [
+          "FL",
+          "FR",
+          "ML",
+          "MR",
+          "RL",
+          "RR",
+          "ML"
+        ],
+        "rejected": true
+      },
+      {
+        "case": "unexpected-extra-XL",
+        "declaredWheelIds": [
+          "FL",
+          "FR",
+          "ML",
+          "MR",
+          "RL",
+          "RR",
+          "XL"
+        ],
+        "rejected": true
+      }
+    ],
+    "inputBytesUnchanged": true,
+    "catalogV2Sha256": "e4e43dfa0c98f2e3118cd23ebe6b9e8d69a2ff916db9e0eba09851745e32a3c6",
+    "underlyingCatalogSha256": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+  },
+  "parentFrozenVerification": {
+    "status": "parent-owned; not run while review/catalog hold remains",
+    "tool": "scripts/vehicle-bake/family-verify-v2.py",
+    "sha256": "2a27d067e8aa99adcc4f1b9065a5989b6ef8b1622190e6bf41cc473be01de24d",
+    "dependencies": [
+      "scripts/vehicle-bake/family-package-v2.py",
+      "scripts/vehicle-bake/family-package.py",
+      "scripts/vehicle-bake/catalog-v2.py",
+      "scripts/vehicle-bake/catalog.py"
+    ],
+    "commandAfterParentFreezes": "python scripts/vehicle-bake/family-verify-v2.py PARENT_FROZEN_CONFIG"
+  },
+  "fixedLevelEquipmentEvidence": {
+    "components": [
+      "STATIC broad dump top side rim -1",
+      "STATIC broad dump top side rim 1",
+      "STATIC dump top frontwall rim",
+      "STATIC dump top tailgate rim",
+      "STATIC fixed stowed underbed ram -1",
+      "STATIC underbed ram lower mount -1",
+      "STATIC small rear bed hinge block -1",
+      "STATIC fixed stowed underbed ram 1",
+      "STATIC underbed ram lower mount 1",
+      "STATIC small rear bed hinge block 1",
+      "STATIC rear bed hinge pin",
+      "STATIC axle attachment arm -2.3",
+      "STATIC axle attachment arm 1.12",
+      "STATIC axle attachment arm 2.4"
+    ],
+    "sixBroadSideRibs": [
+      "Broad dump side rib -1 -0.1",
+      "Broad dump side rib -1 1.1",
+      "Broad dump side rib -1 2.3",
+      "Broad dump side rib 1 -0.1",
+      "Broad dump side rib 1 1.1",
+      "Broad dump side rib 1 2.3"
+    ],
+    "twoFixedRams": [
+      "STATIC fixed stowed underbed ram -1",
+      "STATIC fixed stowed underbed ram 1"
+    ],
+    "fixedHinges": [
+      "STATIC small rear bed hinge block -1",
+      "STATIC small rear bed hinge block 1",
+      "STATIC rear bed hinge pin"
+    ],
+    "noMotionMetadata": true,
+    "levelStaticStowedOnly": true,
+    "noTippingOrCargoAnimationClaim": true
+  },
+  "frameFit": {
+    "status": "passed",
+    "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "actualCapture": "engine/capture.json",
+    "nativeViewport": [
+      224,
+      224
+    ],
+    "nativeRadius": 112,
+    "source80ReferenceUnchanged": true,
+    "familyExtraPadding": 0,
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "engineOrigin": [
+      112,
+      112
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "translationOnly": [
+      -16,
+      32
+    ],
+    "scale": 1,
+    "views": [
+      {
+        "yaw": 0,
+        "actual224OccupiedBounds": {
+          "minX": 56,
+          "minY": 47,
+          "maxX": 167,
+          "maxY": 131
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 40,
+          "maxX": 151,
+          "minY": 79,
+          "maxY": 163
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 22.5,
+        "actual224OccupiedBounds": {
+          "minX": 53,
+          "minY": 28,
+          "maxX": 170,
+          "maxY": 145
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 37,
+          "maxX": 154,
+          "minY": 60,
+          "maxY": 177
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 45,
+        "actual224OccupiedBounds": {
+          "minX": 58,
+          "minY": 15,
+          "maxX": 165,
+          "maxY": 156
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 42,
+          "maxX": 149,
+          "minY": 47,
+          "maxY": 188
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 67.5,
+        "actual224OccupiedBounds": {
+          "minX": 70,
+          "minY": 11,
+          "maxX": 152,
+          "maxY": 161
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 54,
+          "maxX": 136,
+          "minY": 43,
+          "maxY": 193
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 90,
+        "actual224OccupiedBounds": {
+          "minX": 89,
+          "minY": 15,
+          "maxX": 134,
+          "maxY": 157
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 73,
+          "maxX": 118,
+          "minY": 47,
+          "maxY": 189
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 112.5,
+        "actual224OccupiedBounds": {
+          "minX": 71,
+          "minY": 11,
+          "maxX": 153,
+          "maxY": 161
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 55,
+          "maxX": 137,
+          "minY": 43,
+          "maxY": 193
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 135,
+        "actual224OccupiedBounds": {
+          "minX": 58,
+          "minY": 15,
+          "maxX": 165,
+          "maxY": 156
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 42,
+          "maxX": 149,
+          "minY": 47,
+          "maxY": 188
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 157.5,
+        "actual224OccupiedBounds": {
+          "minX": 53,
+          "minY": 28,
+          "maxX": 170,
+          "maxY": 145
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 37,
+          "maxX": 154,
+          "minY": 60,
+          "maxY": 177
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 180,
+        "actual224OccupiedBounds": {
+          "minX": 56,
+          "minY": 47,
+          "maxX": 167,
+          "maxY": 131
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 40,
+          "maxX": 151,
+          "minY": 79,
+          "maxY": 163
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 202.5,
+        "actual224OccupiedBounds": {
+          "minX": 53,
+          "minY": 32,
+          "maxX": 170,
+          "maxY": 146
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 37,
+          "maxX": 154,
+          "minY": 64,
+          "maxY": 178
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 225,
+        "actual224OccupiedBounds": {
+          "minX": 58,
+          "minY": 23,
+          "maxX": 165,
+          "maxY": 156
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 42,
+          "maxX": 149,
+          "minY": 55,
+          "maxY": 188
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 247.5,
+        "actual224OccupiedBounds": {
+          "minX": 71,
+          "minY": 19,
+          "maxX": 152,
+          "maxY": 161
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 55,
+          "maxX": 136,
+          "minY": 51,
+          "maxY": 193
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 270,
+        "actual224OccupiedBounds": {
+          "minX": 89,
+          "minY": 21,
+          "maxX": 134,
+          "maxY": 157
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 73,
+          "maxX": 118,
+          "minY": 53,
+          "maxY": 189
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 292.5,
+        "actual224OccupiedBounds": {
+          "minX": 71,
+          "minY": 19,
+          "maxX": 152,
+          "maxY": 161
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 55,
+          "maxX": 136,
+          "minY": 51,
+          "maxY": 193
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 315,
+        "actual224OccupiedBounds": {
+          "minX": 58,
+          "minY": 23,
+          "maxX": 165,
+          "maxY": 156
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 42,
+          "maxX": 149,
+          "minY": 55,
+          "maxY": 188
+        },
+        "fitsWithoutScaling": true
+      },
+      {
+        "yaw": 337.5,
+        "actual224OccupiedBounds": {
+          "minX": 53,
+          "minY": 32,
+          "maxX": 170,
+          "maxY": 146
+        },
+        "fallback192x224OccupiedBounds": {
+          "minX": 37,
+          "maxX": 154,
+          "minY": 64,
+          "maxY": 178
+        },
+        "fitsWithoutScaling": true
+      }
+    ],
+    "cardinalExactPixelProof": [
+      {
+        "yaw": 0.0,
+        "image": "engine/fallback-cardinal-0.png",
+        "sha256": "14ac323c25f0ae0488e0376e76dbdd790c540b3ad5bd677baf44d78b4330086c",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 8468,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 90.0,
+        "image": "engine/fallback-cardinal-1.png",
+        "sha256": "f591958f9317e4f527bcb1488b9b88209b427dd84b7979a3078a210415b9416c",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 6364,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 180.0,
+        "image": "engine/fallback-cardinal-2.png",
+        "sha256": "94ee698a80458692a0729b255ec09ee247c44ef41f95b672a3cf7853e243ce0f",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 8468,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      },
+      {
+        "yaw": 270.0,
+        "image": "engine/fallback-cardinal-3.png",
+        "sha256": "16cd1f800efe462dc967959a51f2ff18227f506eaad887de3245446006ecdf40",
+        "dimensions": [
+          192,
+          224
+        ],
+        "allOccupiedPixelsExact": true,
+        "occupiedPixels": 6052,
+        "opaquePixelsLost": 0,
+        "translationOnly": [
+          -16,
+          32
+        ],
+        "scale": 1
+      }
+    ],
+    "standardCardinalPlacementPixelExact": true,
+    "limitation": "Measured occupied pixels fit standard fallback placement. Parent still owns independent runtime export/QA; this is no runtime registration claim."
+  },
+  "attachmentEvidence": {
+    "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "results": [
+      {
+        "id": "FL",
+        "actualTireSlabInnerAbsY": 14.956522941589355,
+        "actualStaticArmEndAbsY": 14.69565200805664,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "FR",
+        "actualTireSlabInnerAbsY": 14.956522941589355,
+        "actualStaticArmEndAbsY": 14.69565200805664,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "ML",
+        "actualTireSlabInnerAbsY": 14.956522941589355,
+        "actualStaticArmEndAbsY": 14.69565200805664,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "MR",
+        "actualTireSlabInnerAbsY": 14.956522941589355,
+        "actualStaticArmEndAbsY": 14.69565200805664,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RL",
+        "actualTireSlabInnerAbsY": 14.956522941589355,
+        "actualStaticArmEndAbsY": 14.69565200805664,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      },
+      {
+        "id": "RR",
+        "actualTireSlabInnerAbsY": 14.956522941589355,
+        "actualStaticArmEndAbsY": 14.69565200805664,
+        "axialGapWorld": 0.26087093353271484,
+        "subpixelGap": true
+      }
+    ],
+    "allFixedTrianglesSeparatelyClearanceProven": true
+  },
+  "wheelVisualEvidence": "engine/wheel-visual.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/dump-truck/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/dump-truck/capture.mjs",
+    "node scripts/vehicle-bake/dump-truck/independent-visual.mjs",
+    "node scripts/vehicle-bake/dump-truck/wheel-visual.mjs",
+    "python scripts/vehicle-bake/dump-truck/sheets.py",
+    "python scripts/vehicle-bake/dump-truck/audit-inventory.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/dump-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance-v2.py -- art-source/vehicle-bake/dump-truck/v1/evidence/clearance-input.json data/vehicle-bake/dump-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/dump-truck/v1/model.glb --config art-source/vehicle-bake/dump-truck/v1/coverage-region.json --output data/vehicle-bake/dump-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/dump-truck/assess-coverage.py --input data/vehicle-bake/dump-truck/recheck-coverage.json",
+    "python scripts/vehicle-bake/dump-truck/assess-fit.py",
+    "python scripts/vehicle-bake/family-package-v2.py data/vehicle-bake/dump-truck/author-config.json assemble",
+    "node scripts/vehicle-bake/family-capture-v2.mjs data/vehicle-bake/dump-truck/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 study and16 game actualGLB headings at fixed224/radius112 unchanged80/4.6 density, plus fixed160px nearest2x detail sheets. Original short stout yellow closed cab with blue framed glass, steel-blue deep level open dump body, sloped walls/closed tailgate and broad side ribs are recognizable.",
+    "Actual interior floor, inside front/side/rear walls and thick bright rims remain readable across elevated headings. No painted flat deck substitutes for tub;15 all-triangle depth rays and filled-top negative/reset independently prove1.21source true depth. Bed is level/rigid and all hinge/ram blocks static; no animated tipping/cargo claim.",
+    "Six road wheels form front plus two rear axle pairs. Inspected all six own quarter/reverse/absolute-reset image sets; ML and MR are independently exercised and visible, not merely counted. All other wheels/body stay fixed.",
+    "Both cameras keep far crowns under genuine integrated yellow front fenders and continuous steel-blue lower middle/last wheelhouse body. Near arches remain open. Six-color wheel-ID32heading diagnostics show no high/floating far wheels or fake detached caps.",
+    "Eight signed distance phases per camera,16 equal-angle views and both actual wireframes inspected. All-six whole-body neutral-roll and individual collision-negative/reset controls pass.",
+    "Standard224 has zero occupied edge pixels and strict128/224 crop parity passes. Viewed all4 exact192x224 cardinal placement PNGs; no occupied pixels lost or scaled. Minor grille/rib/hub aliasing varies with heading; no blocking visual defects identified. Parent owns independent frozen QA/runtime."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "allWheelRadiusesMatchOwnGeometry": true,
+    "levelStaticSlopedDumpTubWithActualFloorWallsTailgate": true,
+    "allTriangle15RayDepthAndFilledTopNegativeReset": true,
+    "actualSixWheelV2Inventory": true,
+    "wrongInventoryControlsRejected": true,
+    "sixPerWheelCollisionNegativeControls": true,
+    "exactStandard192x224CardinalPixels": true,
+    "actualCenteredBoundsIncludeAllSixWheelsAndEquipment": true,
+    "standard224AndFallback192x224FitWithoutScaling": true,
+    "allSixEqualAngleSignedPhaseViews": true,
+    "wheelId32HeadingDiagnostics": true,
+    "allSixNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crownCoverage": "natural front coachwork and rear lower middle/last axle wheelhouse body;25/25 each declared central footprint",
+    "upperDumpRimOutsideCoverageRayRange": true,
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "allSixCrownsCovered": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Crown coverage qualifies declared finite central tread region only; ray limit1.25R excludes upper dump rim. Synthetic fixtures qualify bookkeeping, actual body-removal zeroes all samples. Camera headings inspected separately.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Deep sloped empty tub and six wheels are rigid at level/stowed pose. Minor grille/hub/rib aliasing varies with heading; native interior/far-crown views inspected separately from geometry rays.",
+    "Dump tub, tailgate, hinge and ram blocks are static Body_static geometry only. No animated tipping/cargo or steering/suspension qualification.",
+    "Actual six-wheel/tub/equipment extents retained at unchanged root/scale. Span and centered2*maxAbs extents measured, standard192x224 cardinal pixel placement exact; parent owns actual runtime export/footprint QA.",
+    "Multi-axle-v2 frozen-review verifier is pinned for parent-owned later review/freeze; not claimed run during review/catalog hold.",
+    "Actual occupied pixels fit224 and standard192x224 fallback placement without scaling; parent owns independent runtime export/QA.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/dump-truck/v1/assess-coverage.py": "4bf2be055ccaa203b0a248fbb1446d477232f7061c1acdf12e8f555ea4df862f",
+    "art-source/vehicle-bake/dump-truck/v1/assess-fit.py": "f33497200be367c1569cf53cd838776854a5dfd12b188e31bcef407c19ece2be",
+    "art-source/vehicle-bake/dump-truck/v1/atlas.png": "1c204674fb084be85a173f9286981a91319f5cb03ff4414bc79af2e1366b9953",
+    "art-source/vehicle-bake/dump-truck/v1/audit-inventory.py": "5dbffc86b7c2f6c3742df12bd5ce10f7ec8151ea9ed81ed345c1c7b3762d1549",
+    "art-source/vehicle-bake/dump-truck/v1/audit-source.py": "745620a7de6a5dd2fc1631684b59431b96f26a5de1e4e00e34491d7473cc5072",
+    "art-source/vehicle-bake/dump-truck/v1/build.py": "2576e11a53bae149e1f890cc3638946535e0cdf1c198dfb9024cc00d87d9fad9",
+    "art-source/vehicle-bake/dump-truck/v1/capture.mjs": "a8b5d229a0217487878a05ebf9b5ae4e0824c0537357b6a7ff085ac4ee0e4b81",
+    "art-source/vehicle-bake/dump-truck/v1/car.blend": "0bed0dc0a0d4bf6942f72035f599d0a6eef21932532ccf3a2a95913690a482a5",
+    "art-source/vehicle-bake/dump-truck/v1/coverage-region.json": "0beb628822dd557f9060dbbc71abb9d69f3e43e24410a9101a5b129a100d1c35",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/author-browser-qa.json": "49e33f212334cb81a58062dcbe5f304baf39694ba7f6e0588e63e3b926e2f6b8",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/author-visual-inspection.json": "0fc8c2154a7e3912bb555b834439c7c5dc96ceb1143ac0b78f8604f47d2c7c4a",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/clearance-input.json": "f2b75a818c6f7adfa8b1fb83a9b2f0e97cd8dde5a487eacc09af4c215164edcd",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/engine-capture.json": "4fd28806f41fc64571d58add4e80bc58a8c921a2557aedae3951c7553f229263",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/fit-assessment.json": "b14cec743644381587bd98654fcc8c4c5096cbe725bd3e4fcfc51f1921e29eb1",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/independent-visual.json": "ec7b729f4cda904b29b47d92fa965c5e6b86567a71b0f5316195ba6a16e8ea0f",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/inventory-controls.json": "84ea8b65db8a1fa1a9e0fdd1e564f8fc76eaf57c018ef7a9f3084bf624070b83",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/packed-source-audit.json": "0582087dd5235c2b32ffe7636439f365c5558017ded56813a570780b1acf2bb9",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/replay-verification.json": "cc528e98aba78e3317b2763e7e85b5bc5dfa296c93cce273a6b85667e98ac806",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/shared-clearance.json": "c664f7425992b2a83b1046c18881daaaf238afa5b27d016f2f4b1329bf8babf0",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/upper-wheel-coverage-raw.json": "c652fb4d9bc62fe0643d4eab61245a91c43e55c644f71f538f2235085615022e",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/wheel-coverage-assessment.json": "aa2a242d71df140b3a0db994e8415482f206bf73ccb9283603b7821deded19ee",
+    "art-source/vehicle-bake/dump-truck/v1/evidence/wheel-visual.json": "977d2b6640fcff9af5a006d65ffb61e103858bbf333015b1fdc6a46c4ad0497c",
+    "art-source/vehicle-bake/dump-truck/v1/family.json": "85245d305aed926d43c038bdd3b6dedf3c3bee712eb7a3108fe69c569862f2dd",
+    "art-source/vehicle-bake/dump-truck/v1/finalize.py": "72c94453f535aa98ab328b7d64b27747a9b234bb36fc55acf5b8f9f848e80eb5",
+    "art-source/vehicle-bake/dump-truck/v1/geometry.py": "80e515852ef3f1a8b0998ae14a1975c7a520c378a954e2fecbc2ea8530231842",
+    "art-source/vehicle-bake/dump-truck/v1/independent-visual.mjs": "597a3655b6e813bfd33914cc14b19ddd28f75159b17abaecf0a98ad90956a25d",
+    "art-source/vehicle-bake/dump-truck/v1/master.blend": "6c8c178a506e3301cb3f30ad9ddd7c1ee8e66f5c5970742fd960e0942feb0c9d",
+    "art-source/vehicle-bake/dump-truck/v1/model.glb": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "art-source/vehicle-bake/dump-truck/v1/paint-ownership.json": "9f1028871602562c308d0e0ac300d3987211a11201c6a8a6776b2ef46ce2060b",
+    "art-source/vehicle-bake/dump-truck/v1/palette-draft.png": "21b1490f2af782635c293a19ba5bc643cfab65cb56bfe16725fa780d8c3766ea",
+    "art-source/vehicle-bake/dump-truck/v1/recipe.json": "8b61b4d720814075647d56790165666dfefe27d119683fdfc9d7a3b242e1d03a",
+    "art-source/vehicle-bake/dump-truck/v1/review.json": "570533b262df50474449679f2876ae1f676f3368f8a7797003f58bbc3209d2bd",
+    "art-source/vehicle-bake/dump-truck/v1/sheets.py": "fdff01f8568a895825f366b26747e0748c45238282646f61e3e40c3fb1c24561",
+    "art-source/vehicle-bake/dump-truck/v1/wheel-visual.mjs": "cf2d070c0825d54db4eedbccde7d3a009723776b08271f55273986fcbc1c3dfe"
+  }
+}

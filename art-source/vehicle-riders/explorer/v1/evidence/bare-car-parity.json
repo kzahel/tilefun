@@ -1,0 +1,169 @@
+{
+  "status": "passed",
+  "carSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "frozenViews": "public/demos/original-vehicles/classic-roadster-v1/captures",
+  "comparedPixelsPerView": 50176,
+  "views": [
+    {
+      "mode": "study",
+      "index": 0,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 1,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 2,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 3,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 4,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 5,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 6,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 7,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 8,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 9,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 10,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 11,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 12,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 13,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 14,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "study",
+      "index": 15,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 0,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 1,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 2,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 3,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 4,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 5,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 6,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 7,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 8,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 9,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 10,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 11,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 12,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 13,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 14,
+      "mismatchedRGBAChannels": 0
+    },
+    {
+      "mode": "engine",
+      "index": 15,
+      "mismatchedRGBAChannels": 0
+    }
+  ],
+  "meaning": "All32 rider-hidden pixels exactly match existing unchanged frozen roadster views. No re-export, camera fitting or per-heading resizing."
+}

@@ -1,0 +1,329 @@
+{
+  "status": "passed",
+  "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+  "inputBytesUnchanged": true,
+  "configuration": {
+    "xSamples": [
+      -0.55,
+      0.95,
+      2.65
+    ],
+    "ySamples": [
+      -0.8,
+      0,
+      0.8
+    ],
+    "topZ": 1.24,
+    "bottomZ": 1.13,
+    "heightTolerance": 0.012,
+    "minimumThickness": 0.09,
+    "maximumThickness": 0.13,
+    "meaning": "Actual exposed flat top and thin edges/underside; no recessed-bed depth claim. Raised obstruction and flattened deck controls must fail, then reset."
+  },
+  "actualFlatDeck": [
+    {
+      "x": -0.55,
+      "y": -0.8,
+      "thickness": 0.10999977588653564,
+      "top": {
+        "source": [
+          -0.550000011920929,
+          -0.800000011920929,
+          1.239999771118164
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 993,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          -0.550000011920929,
+          -0.800000011920929,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 138,
+        "owner": "Body_static"
+      }
+    },
+    {
+      "x": -0.55,
+      "y": 0,
+      "thickness": 0.10999977588653564,
+      "top": {
+        "source": [
+          -0.550000011920929,
+          0.0,
+          1.239999771118164
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 993,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          -0.550000011920929,
+          0.0,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 138,
+        "owner": "Body_static"
+      }
+    },
+    {
+      "x": -0.55,
+      "y": 0.8,
+      "thickness": 0.1099998950958252,
+      "top": {
+        "source": [
+          -0.550000011920929,
+          0.800000011920929,
+          1.2399998903274536
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 993,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          -0.550000011920929,
+          0.800000011920929,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 138,
+        "owner": "Body_static"
+      }
+    },
+    {
+      "x": 0.95,
+      "y": -0.8,
+      "thickness": 0.1099998950958252,
+      "top": {
+        "source": [
+          0.9499999284744263,
+          -0.800000011920929,
+          1.2399998903274536
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 993,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          0.9499999284744263,
+          -0.800000011920929,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 990,
+        "owner": "Body_static"
+      }
+    },
+    {
+      "x": 0.95,
+      "y": 0,
+      "thickness": 0.10999977588653564,
+      "top": {
+        "source": [
+          0.9499999284744263,
+          0.0,
+          1.239999771118164
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 993,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          0.9499999284744263,
+          0.0,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 138,
+        "owner": "Body_static"
+      }
+    },
+    {
+      "x": 0.95,
+      "y": 0.8,
+      "thickness": 0.10999977588653564,
+      "top": {
+        "source": [
+          0.9499999284744263,
+          0.800000011920929,
+          1.239999771118164
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 141,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          0.9499999284744263,
+          0.800000011920929,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 138,
+        "owner": "Body_static"
+      }
+    },
+    {
+      "x": 2.65,
+      "y": -0.8,
+      "thickness": 0.1099996566772461,
+      "top": {
+        "source": [
+          2.6500000953674316,
+          -0.800000011920929,
+          1.2399996519088745
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 141,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          2.6500000953674316,
+          -0.800000011920929,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 990,
+        "owner": "Body_static"
+      }
+    },
+    {
+      "x": 2.65,
+      "y": 0,
+      "thickness": 0.10999977588653564,
+      "top": {
+        "source": [
+          2.6500000953674316,
+          0.0,
+          1.239999771118164
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 141,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          2.6500000953674316,
+          0.0,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 990,
+        "owner": "Body_static"
+      }
+    },
+    {
+      "x": 2.65,
+      "y": 0.8,
+      "thickness": 0.10999977588653564,
+      "top": {
+        "source": [
+          2.6500000953674316,
+          0.800000011920929,
+          1.239999771118164
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "triangle": 141,
+        "owner": "Body_static"
+      },
+      "underside": {
+        "source": [
+          2.6500000953674316,
+          0.800000011920929,
+          1.1299999952316284
+        ],
+        "normal": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "triangle": 990,
+        "owner": "Body_static"
+      }
+    }
+  ],
+  "controls": {
+    "raisedObstructionRejected": true,
+    "zeroThicknessDeckRejected": true,
+    "flattenedVertices": 216,
+    "baselineRestored": true
+  },
+  "meaning": "Nine actual exported top/underside ray pairs prove empty flat platform elevation and real thin edges. No recessed-bed or open-interior depth is claimed."
+}

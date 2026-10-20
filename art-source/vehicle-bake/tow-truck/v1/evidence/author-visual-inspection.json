@@ -1,0 +1,12 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+  "observations": [
+    "Inspected all16 study and16 game actualGLB headings at fixed224/radius112 unchanged density plus fixed160px nearest2x detail sheets. Original blue/cream short heavy tow truck is recognizable, with closed ink-framed cool-blue glass, broad short hood, chunky front bumper, flat short recovery deck and low orange converging folded frame.",
+    "Orange recovery frame remains near/below actual cab roof height; fixed broad winch, two gray cable segments and a small gray C hook behind deck form the stowed recovery silhouette. Thin cable/hook features partially occlude behind deck or boom at some elevated headings and show native aliasing; no moving cable, towing or hook physics claimed.",
+    "Both opposing cab sides, separate front/rear windshield charts and cream roof stay coherent on actual surfaces. No glass overlay meshes or logos/tiny text. Rear is a flat recovery platform, not a recessed bed.",
+    "All4 wheel crowns remain beneath integrated front coachwork and rear platform wheelhouses in both cameras. Wheel-ID32heading diagnostics show far tires below natural fenders, near arches open, no raised caps or high/floating far wheels.",
+    "Eight signed distance phases per camera,16 equal-angle views,both wireframes and all4 independent quarter/reverse/absolute-reset images inspected. Body/recovery frame/winch/cable/hook remain fixed and no visible rolling equipment intersections.",
+    "Standard224 has zero occupied edge pixels and strict128/224 parity passes. Measured standard192x224 fallback placement fits without scaling. Minor hub/grille/cable/hook aliasing is heading dependent; no blocking visual defects identified. Actual centered bounds retain hook at original root and80/4.6 scale; runtime QA remains parent-owned."
+  ]
+}

@@ -1,0 +1,1345 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "semi-truck",
+  "route": "semi-truck",
+  "revision": "v1",
+  "toolchain": "multi-axle-v2",
+  "wheelIds": [
+    "FL",
+    "FR",
+    "ML",
+    "MR",
+    "RL",
+    "RR"
+  ],
+  "rigidVisualCombination": "One fixed body containing cab/trailer/frame/coupling/stacks; six independent road wheels. No articulation, hitch gameplay or separate trailer physics.",
+  "method": "Own rigid purple tractor and long cream/teal box trailer with distinct actual UV owners, real open coupling gap/fifth-wheel/frame bridge, six covered independent road wheels and two restrained fixed silver stacks below trailer roof. No articulation/hitch/separate trailer physics or high-to-low transfer claim.",
+  "geometry": {
+    "triangles": 3748,
+    "vertices": 7426,
+    "meshes": 7,
+    "primitives": 7,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 264932,
+    "sha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "ML": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "MR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.695652173913045,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -3.450000047683716,
+        -0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        -60.00000082928202,
+        8.695652173913045,
+        16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -3.450000047683716,
+        0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        -60.00000082928202,
+        8.695652173913045,
+        -16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "ML",
+      "centerBlender": [
+        -0.75,
+        -0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        -13.043478260869566,
+        8.695652173913045,
+        16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "MR",
+      "centerBlender": [
+        -0.75,
+        0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        -13.043478260869566,
+        8.695652173913045,
+        -16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        3.450000047683716,
+        -0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        60.00000082928202,
+        8.695652173913045,
+        16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        3.450000047683716,
+        0.9700000286102295,
+        0.5
+      ],
+      "centerExport": [
+        60.00000082928202,
+        8.695652173913045,
+        -16.869565714960515
+      ],
+      "radiusBlender": 0.5,
+      "wheel_radius": 8.695652173913045
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/semi-truck/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/semi-truck/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/semi-truck/v1/recipe.json",
+  "render": {
+    "nativeSize": 288,
+    "meshRadius": 144,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      144,
+      172
+    ],
+    "engineGroundOrigin": [
+      144,
+      144
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Rigid visual tractor-and-box-trailer combination with real coupling gap/frame/fifth-wheel, six independent wheels and fixed stacks. No articulation, hitch gameplay, separate trailer physics or animated equipment.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 3748,
+  "vertexCount": 7426,
+  "meshCount": 7,
+  "primitiveCount": 7,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 264932,
+  "atlasBytes": 2942,
+  "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+  "atlasSha256": "c70cd3564989f7a62499cb7a1639c273adb98419feef23c1dca396dda18954d8",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "semi-truck--v1",
+    "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "triangles": 3748,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.695653954468506,
+        "minimumGap": 1.6106545792242102,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.695653954468506,
+        "minimumGap": 1.6106545792242102,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "radius": 8.695652961730957,
+        "minimumGap": 2.026828349195119,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "radius": 8.695652961730957,
+        "minimumGap": 2.026828349195119,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.695653954468506,
+        "minimumGap": 2.0268229712539316,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.695653954468506,
+        "minimumGap": 2.0268229712539316,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "collidingBodyRejected": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/semi-truck/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "minBlenderWorld": [
+      -79.91304016113281,
+      -21.95652198791504,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      80.34782409667969,
+      21.95652198791504,
+      52.69565200805664
+    ],
+    "dimensionsBlenderWorld": [
+      160.2608642578125,
+      43.91304397583008,
+      52.695651054382324
+    ],
+    "dimensionsSourceUnits": [
+      9.214999694824217,
+      2.525000028610229,
+      3.029999935626983
+    ]
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "rayCount": 14,
+    "samples": [
+      {
+        "id": "tractor-left-glass",
+        "hitSource": [
+          -2.9000003337860107,
+          -1.0908477306365967,
+          2.049999952316284
+        ],
+        "triangle": 1210,
+        "interpolatedUV": [
+          0.5873013734817505,
+          0.8324074149131775
+        ],
+        "atlasPixel": [
+          300,
+          85
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "tractor-right-glass",
+        "hitSource": [
+          -2.9000003337860107,
+          1.0908477306365967,
+          2.049999952316284
+        ],
+        "triangle": 71,
+        "interpolatedUV": [
+          0.5873013734817505,
+          0.8324073553085327
+        ],
+        "atlasPixel": [
+          300,
+          85
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "tractor-windshield",
+        "hitSource": [
+          -3.948004722595215,
+          0.0,
+          2.000000238418579
+        ],
+        "triangle": 1170,
+        "interpolatedUV": [
+          0.5,
+          0.4918981194496155
+        ],
+        "atlasPixel": [
+          256,
+          260
+        ],
+        "rgb": [
+          115,
+          140,
+          168
+        ],
+        "roles": [
+          "glass"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "silver-front-grille",
+        "hitSource": [
+          -4.429999828338623,
+          0.6299999952316284,
+          0.9499999284744263
+        ],
+        "triangle": 1257,
+        "interpolatedUV": [
+          0.36666667461395264,
+          0.7089120149612427
+        ],
+        "atlasPixel": [
+          187,
+          149
+        ],
+        "rgb": [
+          212,
+          212,
+          230
+        ],
+        "roles": [
+          "silver"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "purple-cab-roof",
+        "hitSource": [
+          -2.500000238418579,
+          0.0,
+          2.728749990463257
+        ],
+        "triangle": 67,
+        "interpolatedUV": [
+          0.7142855525016785,
+          0.078125
+        ],
+        "atlasPixel": [
+          365,
+          472
+        ],
+        "rgb": [
+          185,
+          139,
+          210
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "trailer-teal-left",
+        "hitSource": [
+          2.000000238418579,
+          -1.2500001192092896,
+          1.7500001192092896
+        ],
+        "triangle": 140,
+        "interpolatedUV": [
+          0.5378151535987854,
+          0.38218748569488525
+        ],
+        "atlasPixel": [
+          275,
+          316
+        ],
+        "rgb": [
+          50,
+          146,
+          147
+        ],
+        "roles": [
+          "teal"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "trailer-teal-right",
+        "hitSource": [
+          2.000000238418579,
+          1.2499998807907104,
+          1.7500001192092896
+        ],
+        "triangle": 142,
+        "interpolatedUV": [
+          0.5378152132034302,
+          0.38218745589256287
+        ],
+        "atlasPixel": [
+          275,
+          316
+        ],
+        "rgb": [
+          50,
+          146,
+          147
+        ],
+        "roles": [
+          "teal"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "trailer-cream-skin",
+        "hitSource": [
+          2.000000238418579,
+          1.2499998807907104,
+          2.500000238418579
+        ],
+        "triangle": 1347,
+        "interpolatedUV": [
+          0.5378152132034302,
+          0.31187498569488525
+        ],
+        "atlasPixel": [
+          275,
+          352
+        ],
+        "rgb": [
+          245,
+          235,
+          203
+        ],
+        "roles": [
+          "box"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "cream-trailer-roof",
+        "hitSource": [
+          2.000000238418579,
+          0.0,
+          3.0299999713897705
+        ],
+        "triangle": 141,
+        "interpolatedUV": [
+          0.5378152132034302,
+          0.109375
+        ],
+        "atlasPixel": [
+          275,
+          456
+        ],
+        "rgb": [
+          255,
+          248,
+          225
+        ],
+        "roles": [
+          "boxRoof"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "trailer-rear-door-seam",
+        "hitSource": [
+          4.550000190734863,
+          0.0,
+          2.3000001907348633
+        ],
+        "triangle": 1348,
+        "interpolatedUV": [
+          0.75,
+          0.1787499636411667
+        ],
+        "atlasPixel": [
+          384,
+          420
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "real-fifth-wheel-plate",
+        "hitSource": [
+          -1.3000000715255737,
+          0.0,
+          1.190000057220459
+        ],
+        "triangle": 1521,
+        "interpolatedUV": [
+          0.34375,
+          0.01562499813735485
+        ],
+        "atlasPixel": [
+          176,
+          504
+        ],
+        "rgb": [
+          124,
+          135,
+          145
+        ],
+        "roles": [
+          "deckEdge"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "real-frame-bridge",
+        "hitSource": [
+          -1.3000000715255737,
+          -0.5600000023841858,
+          0.6800000071525574
+        ],
+        "triangle": 1361,
+        "interpolatedUV": [
+          0.4662834405899048,
+          0.014391734264791012
+        ],
+        "atlasPixel": [
+          238,
+          504
+        ],
+        "rgb": [
+          63,
+          69,
+          79
+        ],
+        "roles": [
+          "frame"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "restrained-fixed-stack",
+        "hitSource": [
+          -1.9600002765655518,
+          -1.2002776861190796,
+          2.500000238418579
+        ],
+        "triangle": 1558,
+        "interpolatedUV": [
+          0.9045315980911255,
+          0.05015839263796806
+        ],
+        "atlasPixel": [
+          463,
+          486
+        ],
+        "rgb": [
+          212,
+          212,
+          230
+        ],
+        "roles": [
+          "silver"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "middle-guard-underside",
+        "hitSource": [
+          -0.7500000596046448,
+          -1.0900001525878906,
+          1.156363606452942
+        ],
+        "triangle": 707,
+        "interpolatedUV": [
+          0.22833803296089172,
+          0.01669035106897354
+        ],
+        "atlasPixel": [
+          116,
+          503
+        ],
+        "rgb": [
+          163,
+          168,
+          176
+        ],
+        "roles": [
+          "deck"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/semi-truck/surface-regions.json",
+    "meaning": "Actual distinct cab/trailer glass/paint/roof/stripe/end seam and real coupling/frame/stack/guard triangle UV ownership",
+    "inputBytesUnchanged": true
+  },
+  "rigidCouplingEvidence": "art-source/vehicle-bake/semi-truck/v1/evidence/rigid-coupling-geometry.json",
+  "nativeAndFallbackFit": {
+    "status": "passed",
+    "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "nativeSize": 288,
+    "meshRadius": 144,
+    "paddingComparison": [
+      {
+        "centeredViewport": 224,
+        "viewsTouchingOrExceedingBoundary": [
+          {
+            "camera": "engine",
+            "headingIndex": 2
+          },
+          {
+            "camera": "engine",
+            "headingIndex": 3
+          },
+          {
+            "camera": "engine",
+            "headingIndex": 4
+          },
+          {
+            "camera": "engine",
+            "headingIndex": 5
+          },
+          {
+            "camera": "engine",
+            "headingIndex": 6
+          }
+        ]
+      },
+      {
+        "centeredViewport": 256,
+        "viewsTouchingOrExceedingBoundary": [
+          {
+            "camera": "engine",
+            "headingIndex": 3
+          },
+          {
+            "camera": "engine",
+            "headingIndex": 4
+          },
+          {
+            "camera": "engine",
+            "headingIndex": 5
+          }
+        ]
+      }
+    ],
+    "centered128GameCropProof": [
+      {
+        "yaw": 0,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 22.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 45,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 67.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 90,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 112.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 135,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 157.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 180,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 202.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 225,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 247.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 270,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 292.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 315,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      },
+      {
+        "yaw": 337.5,
+        "comparedPixels": 15876,
+        "mismatchedChannels": 0,
+        "includesInteriorOutline": true,
+        "excludedFrameBoundary": 1
+      }
+    ],
+    "headings": [
+      {
+        "camera": "study",
+        "headingIndex": 0,
+        "alphaBounds": [
+          62,
+          121,
+          226,
+          187
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 1,
+        "alphaBounds": [
+          61,
+          99,
+          228,
+          206
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 2,
+        "alphaBounds": [
+          72,
+          82,
+          216,
+          223
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 3,
+        "alphaBounds": [
+          95,
+          74,
+          195,
+          231
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 4,
+        "alphaBounds": [
+          122,
+          76,
+          166,
+          231
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 5,
+        "alphaBounds": [
+          93,
+          74,
+          193,
+          231
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 6,
+        "alphaBounds": [
+          72,
+          82,
+          216,
+          223
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 7,
+        "alphaBounds": [
+          60,
+          99,
+          227,
+          206
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 8,
+        "alphaBounds": [
+          62,
+          121,
+          226,
+          187
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 9,
+        "alphaBounds": [
+          60,
+          111,
+          227,
+          204
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 10,
+        "alphaBounds": [
+          72,
+          98,
+          216,
+          220
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 11,
+        "alphaBounds": [
+          93,
+          91,
+          193,
+          228
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 12,
+        "alphaBounds": [
+          122,
+          91,
+          166,
+          227
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 13,
+        "alphaBounds": [
+          95,
+          91,
+          195,
+          228
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 14,
+        "alphaBounds": [
+          72,
+          98,
+          216,
+          220
+        ]
+      },
+      {
+        "camera": "study",
+        "headingIndex": 15,
+        "alphaBounds": [
+          61,
+          111,
+          228,
+          204
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 0,
+        "alphaBounds": [
+          64,
+          70,
+          224,
+          163
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 1,
+        "alphaBounds": [
+          62,
+          42,
+          225,
+          186
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 2,
+        "alphaBounds": [
+          73,
+          21,
+          214,
+          208
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 3,
+        "alphaBounds": [
+          94,
+          11,
+          192,
+          219
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 4,
+        "alphaBounds": [
+          122,
+          13,
+          166,
+          218
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 5,
+        "alphaBounds": [
+          96,
+          11,
+          194,
+          219
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 6,
+        "alphaBounds": [
+          74,
+          21,
+          215,
+          208
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 7,
+        "alphaBounds": [
+          63,
+          42,
+          226,
+          186
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 8,
+        "alphaBounds": [
+          64,
+          70,
+          224,
+          163
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 9,
+        "alphaBounds": [
+          63,
+          59,
+          226,
+          185
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 10,
+        "alphaBounds": [
+          74,
+          42,
+          215,
+          203
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 11,
+        "alphaBounds": [
+          96,
+          34,
+          194,
+          214
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 12,
+        "alphaBounds": [
+          122,
+          34,
+          166,
+          212
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 13,
+        "alphaBounds": [
+          94,
+          34,
+          192,
+          214
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 14,
+        "alphaBounds": [
+          73,
+          42,
+          214,
+          203
+        ]
+      },
+      {
+        "camera": "engine",
+        "headingIndex": 15,
+        "alphaBounds": [
+          62,
+          59,
+          225,
+          185
+        ]
+      }
+    ],
+    "fallbackFrame": [
+      192,
+      224
+    ],
+    "fallbackOrigin": [
+      96,
+      144
+    ],
+    "sourceGameOrigin": [
+      144,
+      144
+    ],
+    "translation": [
+      -48,
+      0
+    ],
+    "cardinals": [
+      {
+        "headingIndex": 4,
+        "nativeBounds": [
+          122,
+          13,
+          166,
+          218
+        ],
+        "fallbackBounds": [
+          74,
+          13,
+          118,
+          218
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 12,
+        "nativeBounds": [
+          122,
+          34,
+          166,
+          212
+        ],
+        "fallbackBounds": [
+          74,
+          34,
+          118,
+          212
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 8,
+        "nativeBounds": [
+          64,
+          70,
+          224,
+          163
+        ],
+        "fallbackBounds": [
+          16,
+          70,
+          176,
+          163
+        ],
+        "fitsWithoutPixelLoss": true
+      },
+      {
+        "headingIndex": 0,
+        "nativeBounds": [
+          64,
+          70,
+          224,
+          163
+        ],
+        "fallbackBounds": [
+          16,
+          70,
+          176,
+          163
+        ],
+        "fitsWithoutPixelLoss": true
+      }
+    ],
+    "meaning": "Fixed native cameras and world density. Only transparent padding can be cropped/added. Cardinal occupied pixel order/RGBA values are compared exactly after integer translation; no resize or recenter."
+  },
+  "replayCommands": [
+    "python art-source/vehicle-bake/semi-truck/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/semi-truck/capture.mjs",
+    "python scripts/vehicle-bake/semi-truck/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/semi-truck/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance-v2.py -- art-source/vehicle-bake/semi-truck/v1/evidence/clearance-input.json data/vehicle-bake/semi-truck/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/semi-truck/v1/model.glb --config art-source/vehicle-bake/semi-truck/v1/coverage-region.json --output data/vehicle-bake/semi-truck/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/semi-truck/v1/prove-coupling.py -- --input public/demos/vehicle-bake/semi-truck/v1/model.glb --output data/vehicle-bake/semi-truck/recheck-coupling.json",
+    "python scripts/vehicle-bake/semi-truck/measure-fit.py",
+    "python scripts/vehicle-bake/semi-truck/pack-author.py",
+    "node scripts/vehicle-bake/family-capture-v2.mjs data/vehicle-bake/semi-truck/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Purple tall tractor cab, framed blue glass, restrained silver grille and two slim fixed stacks read separately from the much longer cream box trailer with broad teal stripe. Stack tops remain below trailer roof.",
+    "The side gap between cab and trailer is visibly open above a low gray fifth-wheel plate and dark frame bridge. Fixed saddle and short visual kingpin connect those low components to frame/trailer; actual gap and plate/frame/saddle triangle rays independently qualify the geometry.",
+    "All three near-side axles read as real tires with silver hubs. Far crowns remain beneath real cab arches or broad trailer underside/gray guards in both camera families; no floating cap-only cover or exposed crown spill was observed.",
+    "Cab skin glass/frames and trailer cream/teal/roof/end-door paint have distinct actual UV owners. No overlaid glass sheets, view-dependent paint, logos, tiny text or transparent surfaces were observed.",
+    "All32 final native views have zero border pixels. Expanded288/radius144 padding retains shared centered128 crop parity at all16 game headings. Both224 and256 centered viewports would clip portions of the measured final extents; no rescale or vehicle-origin move was used.",
+    "All4 actual cardinals fit standard192x224 origin96,144 by translation(-48,0), with every occupiedRGBA pixel exact. Rear-facing cardinal reachesY218 exclusive and retains6px bottom padding.",
+    "All6 independent quarter/reverse/pivot/reset controls pass while the entire cab/trailer/frame/coupling/stack body remains fixed. Signed phase contacts and both actual wireframes were inspected. No articulated joint or separate trailer body is present.",
+    "Large quiet cream trailer faces and thin diagonal grille/frame/door edges retain ordinary native-pixel aliasing. End-on headings naturally occlude the coupling space and far wheels; physical gap evidence does not imply visibility from every camera."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "actualPerWheelGeometryRadiusMatchesRigMetadata": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 14,
+    "actualOpenCouplingGapPlateFrameRays": true,
+    "filledGapRejectedThenExactReset": true,
+    "allSixWheelCylinderCollisionNegatives": true,
+    "fourWrongWheelInventoriesAndWrongClearanceDeclarationRejected": true,
+    "native288PaddingAndStandard192x224FallbackFitAtFixedDensity": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Rigid visual tractor-and-box-trailer combination is one fixed body. No articulated joint, hitch gameplay or separate trailer physics is implemented or qualified.",
+    "Nominal 9.2 x 2.6 x 3.05 source proportions; actual bounds include bumpers, mirrors, six guards and fixed stacks, whose tops remain below trailer roof.",
+    "Native288/radius144 expands transparent padding at unchanged world density/origin; standard192x224 cardinal fallback retains every occupied pixel exactly.",
+    "Thin diagonal glass frames, rear door seams and chrome highlights retain ordinary native pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/semi-truck/v1/atlas.png": "c70cd3564989f7a62499cb7a1639c273adb98419feef23c1dca396dda18954d8",
+    "art-source/vehicle-bake/semi-truck/v1/audit-source.py": "b29f27e61e09c50bfc17dadf8554ecfe69aebbed79f4449077fad806f68ab6f8",
+    "art-source/vehicle-bake/semi-truck/v1/build.py": "7cf416516dfa64b37d9b00dcb9acd0bca6826d736a78b118466261ad349e7443",
+    "art-source/vehicle-bake/semi-truck/v1/capture.mjs": "acc9470fc33158081953e7e86e021818cff5a60a523de25384d097e0882793b8",
+    "art-source/vehicle-bake/semi-truck/v1/car.blend": "e24807fd7914e46e4b2161abbc6e977fd99c5ef7e4bc445120c88d0ca4ac2c7d",
+    "art-source/vehicle-bake/semi-truck/v1/construction-notes.md": "ece022f1fd52ebdd86d179f2765bd71fbcff6cec8fef45955a639e1f55a6fc53",
+    "art-source/vehicle-bake/semi-truck/v1/coupling-region.json": "10ab080fa46c5d42f791878e30f204725a93af3b3f1683e0fcb194cc7e243174",
+    "art-source/vehicle-bake/semi-truck/v1/coverage-region.json": "bf76ff7ea9a39df5f9f5e10acb7b36c1d01682e32c27a4203365aa6d9ee643e2",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/author-browser-qa.json": "60b084ca96ea05e7556f6643e1e014442a5f3cce0ae53869e759041fcb8c50a2",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/author-visual-inspection.json": "baec99aa3380afeee4a63d94e884d4d1ccb4cfc79c493a90bc643e6f4b8ad444",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/clearance-input.json": "d6b9d4513d3a8d2f728a9909691f2fbcb77b77b2ab33d4b207e9985feecb1534",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/engine-capture.json": "e58d6455da862682a4e30feca9308ed10cbc7496c37f28f04d6dbb26f94ee6e1",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/fresh-isolated-replay.json": "283ff2652c9c5992eb0813679956e9dc34b6eb62a15678b85f862d22f3e697c8",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/native-and-fallback-fit.json": "8aee5af675a3777c3174a019da792bbb57260803167903887f7f9ef93ef1872a",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/packed-source-audit.json": "a356793614426dd86b49198c80cf8553e5bcabc2227d55c148dc8cae74a5c34c",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/replay-verification.json": "c87c708239159c7fc4baf428e3f40c13afb587689874b6c0f1a6d9690121fa0b",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/rigid-coupling-geometry.json": "ef54bfd45d19b5f546f49c8786b1a48064e2a5c461b51aed4109b2cc7faec594",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/shared-clearance.json": "75acf8256d1205824660bc362dbc13ce1793cb332a9062526470ac567148fe95",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/upper-wheel-coverage.json": "3829c04c1854f8c2b081653ef7b805ea8abef9adf0be0c9eaad4ee998f7ed896",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/wrong-wheel-clearance-input.json": "b233b05d29fbff82d1072c292093fd80786c5fc9a3ebbaaefcda0259b477fc2c",
+    "art-source/vehicle-bake/semi-truck/v1/evidence/wrong-wheel-clearance-negative.json": "4b7bec7d924456eaa3942db6f60083d018f3847b3900e92a976be4c174b80ce9",
+    "art-source/vehicle-bake/semi-truck/v1/family.json": "07cb56984bf0f5754d3f29dcb215fdc7b9d3d900ee60b1a2f5ecb745126f1650",
+    "art-source/vehicle-bake/semi-truck/v1/finalize.py": "1364cf747723850c3e0ba6281a3159269a45264cfa987610179a6fa033080057",
+    "art-source/vehicle-bake/semi-truck/v1/master.blend": "0b5a00db81cf595d24b437f040bc2ddb936d9dd65e7dbea838fab69edc0718af",
+    "art-source/vehicle-bake/semi-truck/v1/measure-fit.py": "a2cf639303a275e61f1958dd92b0440e829b3c60f9e72d42a7a81f798c12d3c9",
+    "art-source/vehicle-bake/semi-truck/v1/model.glb": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+    "art-source/vehicle-bake/semi-truck/v1/pack-author.py": "04c43b0a2d2b7006aef0725fb638971b47e3d7d0d5fbb8d56416682b16d3cdd1",
+    "art-source/vehicle-bake/semi-truck/v1/paint-ownership.json": "2fc2757a1b85316e241367d6624b4a62c51172c6b5bb152bd453e53156a4a9e2",
+    "art-source/vehicle-bake/semi-truck/v1/palette-draft.png": "2993459e39d084719dd6db86c4b797dd17572cacebf0cc2238f2524ab247a5f5",
+    "art-source/vehicle-bake/semi-truck/v1/prove-coupling.py": "f73997a00aec6c95ff76a44611eb00f4b091ae553d4c7f6f463282335ab7750a",
+    "art-source/vehicle-bake/semi-truck/v1/recipe.json": "6d4a0386eea50a9fe5fafd0db6bfabc5662ebcf8ec43017f86e1d18424220a6e",
+    "art-source/vehicle-bake/semi-truck/v1/replay.py": "bae970870ebdf8406aaf250ca5eb819efff8fa7124da309daae12738039fe1fd",
+    "art-source/vehicle-bake/semi-truck/v1/review.json": "c3695c4de3a37295a68f23ed6f37ea783841490fb0e8435ffb858166f436b480",
+    "art-source/vehicle-bake/semi-truck/v1/sheets.py": "bd0b8eb75893ee414fe7fa1dfd7dc73ad44b97fe70b31aa83ee5454751f4e16a",
+    "art-source/vehicle-bake/semi-truck/v1/surface-regions.json": "f443879c9c73562393d2211212bf5e39e034f270d730793bb09d099cd3e30815"
+  }
+}

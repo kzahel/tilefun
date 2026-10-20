@@ -1,0 +1,17 @@
+{
+  "id": "semi-truck-v1",
+  "clearanceId": "semi-truck--v1",
+  "name": "Semi-truck and box trailer",
+  "title": "Semi-truck and box trailer \u00b7 autonomous original v1",
+  "source": "public/demos/vehicle-bake/semi-truck/v1",
+  "glb": "public/demos/vehicle-bake/semi-truck/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/semi-truck/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/semi-truck/v1/report.json",
+  "output": "public/demos/original-vehicles/semi-truck-v1",
+  "qa": "data/vehicle-bake/semi-truck-qa",
+  "offline": "data/vehicle-bake/semi-truck-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 288,
+  "toolchain": "multi-axle-v2",
+  "wheelIds": ["FL", "FR", "ML", "MR", "RL", "RR"]
+}

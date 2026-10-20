@@ -984,6 +984,621 @@
           }
         }
       ]
+    },
+    {
+      "id": "woody-wagon",
+      "name": "Wood-panel station wagon",
+      "sprite": "assets/vehicles/woody-wagon-v1.png",
+      "mesh": {
+        "assetId": "woody-wagon-authored-v1",
+        "path": "assets/models/vehicles/woody-wagon-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 100,
+        "acceleration": 165,
+        "pushSpeed": 45,
+        "pushWeight": 230
+      },
+      "views": [
+        {
+          "id": "original-vehicle:woody-wagon:south",
+          "vehicleId": "woody-wagon",
+          "direction": "south",
+          "rect": [79, 76, 34, 109],
+          "metadata": {
+            "name": "Wood-panel station wagon · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "station wagon"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [17, 115.5],
+            "footprint": [-17.5, -95, 35, 95],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 95,
+                "zHeight": 31
+              }
+            ],
+            "depthOffset": -47.5
+          }
+        },
+        {
+          "id": "original-vehicle:woody-wagon:north",
+          "vehicleId": "woody-wagon",
+          "direction": "north",
+          "rect": [79, 305, 34, 104],
+          "metadata": {
+            "name": "Wood-panel station wagon · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "station wagon"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [17, 110.5],
+            "footprint": [-17.5, -95, 35, 95],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 95,
+                "zHeight": 31
+              }
+            ],
+            "depthOffset": -47.5
+          }
+        },
+        {
+          "id": "original-vehicle:woody-wagon:west",
+          "vehicleId": "woody-wagon",
+          "direction": "west",
+          "rect": [49, 551, 94, 56],
+          "metadata": {
+            "name": "Wood-panel station wagon · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "station wagon"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [47, 58.5],
+            "footprint": [-47.5, -35, 95, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 95,
+                "height": 35,
+                "zHeight": 31
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        },
+        {
+          "id": "original-vehicle:woody-wagon:east",
+          "vehicleId": "woody-wagon",
+          "direction": "east",
+          "rect": [49, 775, 94, 56],
+          "metadata": {
+            "name": "Wood-panel station wagon · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "station wagon"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [47, 58.5],
+            "footprint": [-47.5, -35, 95, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 95,
+                "height": 35,
+                "zHeight": 31
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "microcar",
+      "name": "Tiny bubble microcar",
+      "sprite": "assets/vehicles/microcar-v1.png",
+      "mesh": {
+        "assetId": "microcar-authored-v1",
+        "path": "assets/models/vehicles/microcar-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 85,
+        "acceleration": 170,
+        "pushSpeed": 32,
+        "pushWeight": 55
+      },
+      "views": [
+        {
+          "id": "original-vehicle:microcar:south",
+          "vehicleId": "microcar",
+          "direction": "south",
+          "rect": [81, 102, 30, 65],
+          "metadata": {
+            "name": "Tiny bubble microcar · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "microcar"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [15, 70.0],
+            "footprint": [-15.5, -56, 31, 56],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 31,
+                "height": 56,
+                "zHeight": 30
+              }
+            ],
+            "depthOffset": -28.0
+          }
+        },
+        {
+          "id": "original-vehicle:microcar:north",
+          "vehicleId": "microcar",
+          "direction": "north",
+          "rect": [81, 320, 30, 71],
+          "metadata": {
+            "name": "Tiny bubble microcar · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "microcar"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [15, 76.0],
+            "footprint": [-15.5, -56, 31, 56],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 31,
+                "height": 56,
+                "zHeight": 30
+              }
+            ],
+            "depthOffset": -28.0
+          }
+        },
+        {
+          "id": "original-vehicle:microcar:west",
+          "vehicleId": "microcar",
+          "direction": "west",
+          "rect": [68, 557, 56, 48],
+          "metadata": {
+            "name": "Tiny bubble microcar · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "microcar"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [28, 50.5],
+            "footprint": [-28.0, -31, 56, 31],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 56,
+                "height": 31,
+                "zHeight": 30
+              }
+            ],
+            "depthOffset": -15.5
+          }
+        },
+        {
+          "id": "original-vehicle:microcar:east",
+          "vehicleId": "microcar",
+          "direction": "east",
+          "rect": [68, 781, 56, 48],
+          "metadata": {
+            "name": "Tiny bubble microcar · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "microcar"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [28, 50.5],
+            "footprint": [-28.0, -31, 56, 31],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 56,
+                "height": 31,
+                "zHeight": 30
+              }
+            ],
+            "depthOffset": -15.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "stretch-limousine",
+      "name": "Stretch limousine",
+      "sprite": "assets/vehicles/stretch-limousine-v1.png",
+      "mesh": {
+        "assetId": "stretch-limousine-authored-v1",
+        "path": "assets/models/vehicles/stretch-limousine-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 90,
+        "acceleration": 145,
+        "pushSpeed": 48,
+        "pushWeight": 320
+      },
+      "views": [
+        {
+          "id": "original-vehicle:stretch-limousine:south",
+          "vehicleId": "stretch-limousine",
+          "direction": "south",
+          "rect": [79, 69, 34, 131],
+          "metadata": {
+            "name": "Stretch limousine · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "limousine"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [17, 136.5],
+            "footprint": [-17.5, -123, 35, 123],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 123,
+                "zHeight": 30
+              }
+            ],
+            "depthOffset": -61.5
+          }
+        },
+        {
+          "id": "original-vehicle:stretch-limousine:north",
+          "vehicleId": "stretch-limousine",
+          "direction": "north",
+          "rect": [79, 291, 34, 133],
+          "metadata": {
+            "name": "Stretch limousine · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "limousine"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [17, 138.5],
+            "footprint": [-17.5, -123, 35, 123],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 123,
+                "zHeight": 30
+              }
+            ],
+            "depthOffset": -61.5
+          }
+        },
+        {
+          "id": "original-vehicle:stretch-limousine:west",
+          "vehicleId": "stretch-limousine",
+          "direction": "west",
+          "rect": [35, 550, 122, 57],
+          "metadata": {
+            "name": "Stretch limousine · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "limousine"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [61, 59.5],
+            "footprint": [-61.5, -35, 123, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 123,
+                "height": 35,
+                "zHeight": 30
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        },
+        {
+          "id": "original-vehicle:stretch-limousine:east",
+          "vehicleId": "stretch-limousine",
+          "direction": "east",
+          "rect": [35, 774, 122, 57],
+          "metadata": {
+            "name": "Stretch limousine · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "limousine"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [61, 59.5],
+            "footprint": [-61.5, -35, 123, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 123,
+                "height": 35,
+                "zHeight": 30
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "hot-rod",
+      "name": "Hot rod",
+      "sprite": "assets/vehicles/hot-rod-v1.png",
+      "mesh": {
+        "assetId": "hot-rod-authored-v1",
+        "path": "assets/models/vehicles/hot-rod-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 135,
+        "acceleration": 230,
+        "pushSpeed": 44,
+        "pushWeight": 110
+      },
+      "views": [
+        {
+          "id": "original-vehicle:hot-rod:south",
+          "vehicleId": "hot-rod",
+          "direction": "south",
+          "rect": [75, 91, 42, 85],
+          "metadata": {
+            "name": "Hot rod · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "hot rod"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [21, 90.0],
+            "footprint": [-21.0, -74, 42, 74],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 42,
+                "height": 74,
+                "zHeight": 28
+              }
+            ],
+            "depthOffset": -37.0
+          }
+        },
+        {
+          "id": "original-vehicle:hot-rod:north",
+          "vehicleId": "hot-rod",
+          "direction": "north",
+          "rect": [75, 318, 42, 79],
+          "metadata": {
+            "name": "Hot rod · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "hot rod"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [21, 87.0],
+            "footprint": [-21.0, -74, 42, 74],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 42,
+                "height": 74,
+                "zHeight": 28
+              }
+            ],
+            "depthOffset": -37.0
+          }
+        },
+        {
+          "id": "original-vehicle:hot-rod:west",
+          "vehicleId": "hot-rod",
+          "direction": "west",
+          "rect": [59, 550, 73, 60],
+          "metadata": {
+            "name": "Hot rod · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "hot rod"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [37, 63.0],
+            "footprint": [-37.0, -42, 74, 42],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 74,
+                "height": 42,
+                "zHeight": 28
+              }
+            ],
+            "depthOffset": -21.0
+          }
+        },
+        {
+          "id": "original-vehicle:hot-rod:east",
+          "vehicleId": "hot-rod",
+          "direction": "east",
+          "rect": [60, 774, 73, 60],
+          "metadata": {
+            "name": "Hot rod · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "hot rod"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [36, 63.0],
+            "footprint": [-37.0, -42, 74, 42],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 74,
+                "height": 42,
+                "zHeight": 28
+              }
+            ],
+            "depthOffset": -21.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "rally-hatchback",
+      "name": "Rally hatchback",
+      "sprite": "assets/vehicles/rally-hatchback-v1.png",
+      "mesh": {
+        "assetId": "rally-hatchback-authored-v1",
+        "path": "assets/models/vehicles/rally-hatchback-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 140,
+        "acceleration": 260,
+        "pushSpeed": 44,
+        "pushWeight": 125
+      },
+      "views": [
+        {
+          "id": "original-vehicle:rally-hatchback:south",
+          "vehicleId": "rally-hatchback",
+          "direction": "south",
+          "rect": [79, 94, 34, 81],
+          "metadata": {
+            "name": "Rally hatchback · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "rally hatchback"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [17, 87.0],
+            "footprint": [-17.5, -74, 35, 74],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 74,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -37.0
+          }
+        },
+        {
+          "id": "original-vehicle:rally-hatchback:north",
+          "vehicleId": "rally-hatchback",
+          "direction": "north",
+          "rect": [79, 316, 34, 83],
+          "metadata": {
+            "name": "Rally hatchback · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "rally hatchback"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [17, 89.0],
+            "footprint": [-17.5, -74, 35, 74],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 74,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -37.0
+          }
+        },
+        {
+          "id": "original-vehicle:rally-hatchback:west",
+          "vehicleId": "rally-hatchback",
+          "direction": "west",
+          "rect": [59, 551, 74, 56],
+          "metadata": {
+            "name": "Rally hatchback · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "rally hatchback"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [37, 58.5],
+            "footprint": [-37.0, -35, 74, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 74,
+                "height": 35,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        },
+        {
+          "id": "original-vehicle:rally-hatchback:east",
+          "vehicleId": "rally-hatchback",
+          "direction": "east",
+          "rect": [59, 775, 74, 56],
+          "metadata": {
+            "name": "Rally hatchback · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "rally hatchback"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [37, 58.5],
+            "footprint": [-37.0, -35, 74, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 74,
+                "height": 35,
+                "zHeight": 29
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        }
+      ]
     }
   ]
 }

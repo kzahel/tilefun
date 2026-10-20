@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "outputs": {
+    "rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "atlas.png": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+    "recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251"
+  },
+  "inputHashes": {
+    "build.py": "a6a6a0ca8525ed301a24440ba65b268c403d7fb847c2dfe9fdaf9a63b07a2d4d",
+    "rider.json": "a4e6fb37e0200bb9642302527b229824f4f5b67d10a3f69a21bc21f6109d64b6",
+    "identity.json": "d3cc61aeb2f96910f99f5174023457aee96e69af3800171454647ff0b1ce487e",
+    "profile.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "scratchInputDependencies": [],
+  "sharedInputDependencies": [],
+  "freshOutput": "data/vehicle-riders/explorer-upright/replay-final/",
+  "blender": "5.2.2 LTS d13f752e3b9c, factory startup background four threads",
+  "meaning": "Only four retained own inputs construct rider mesh/atlas/recipe. Profile/identity source pins are provenance; constructor uses retained exact copies. Diagnostic fixture and viewer are separate, generated under ignored data. GLB index ordering canonicalized without changing winding or vertex/normal/UV/image buffers."
+}

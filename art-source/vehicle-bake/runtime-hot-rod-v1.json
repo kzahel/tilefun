@@ -1,0 +1,108 @@
+{
+  "modelSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+  "spriteSha256": "4f42a21145ab7cd03e412fffc78a9f23fcc78bbfdcd143177d9ed3e40ea3dbe0",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-hot-rod-v1.json": "86cb5f53a937b1aaf2411f9523f5140e952a0717a3efadc5cb9503607b948ce7",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/hot-rod-v1/review-manifest.json": "ec81837db0a8814dcb3df8e31a65833f2cf5ff692b94d30628a7593a2543bd4f",
+    "public/demos/original-vehicles/hot-rod-v1/inputs/model.glb": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "public/demos/original-vehicles/hot-rod-v1/inputs/atlas.png": "4ee45269c3ebe6b291f13789fc0bf7e947d3555fa9e75d86e75b4ec95454ddff",
+    "public/demos/original-vehicles/hot-rod-v1/captures/capture.json": "55d07580aa012e9ddde283877a54e422142422a076295e790eccc357f9048b92",
+    "art-source/vehicle-bake/hot-rod/v1/evidence/replay-verification.json": "db53b8320c95fdf2af4fafc27a89c38cd692e9dc7c883f9b3d6867bd6c5d1410",
+    "art-source/vehicle-bake/hot-rod/v1/build.py": "772068a12c7a4a4dede341abb1ad88711c98768be076b4d33db036b6f10bf451",
+    "art-source/vehicle-bake/hot-rod/v1/geometry.py": "7b717a1c3fedd849979fa4c8f44b02ae550505c2cb3a6594bcdfbe94cf3eaad3",
+    "art-source/vehicle-bake/hot-rod/v1/family.json": "05f6e87a42c3793469d391eb7f25571f15c7957d0a8a3df3ef1b1aa41a1909d9",
+    "art-source/vehicle-bake/hot-rod/v1/coverage-region.json": "a1013b60eba1ebab45e109217c8db1ac6958e6f78e9a3a70132d95dc42d39425",
+    "art-source/vehicle-bake/hot-rod/v1/review.json": "b69e2397f64006ca11b18b3428c26703a9e508e633a0945cf9d93f09c6f0bc09",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+    "public/demos/original-vehicles/hot-rod-v1/captures/engine-4.png": "baf56ebe1113f2c95786b918c6dc135fe274047cf4d2d4e16acca7236746cde4",
+    "public/demos/original-vehicles/hot-rod-v1/captures/engine-12.png": "a8f84fcce25fe179128c8187872ee1777d3edcbbc1ad0bb62d576bdabc2d6799",
+    "public/demos/original-vehicles/hot-rod-v1/captures/engine-8.png": "3335f6e8e8c0c64c728a5bfdfc13da6d5e14116d825e9f011b48c1e5cf4864b8",
+    "public/demos/original-vehicles/hot-rod-v1/captures/engine-0.png": "51cb1d3fcfa83df9a8655ced4c44383875eca73ca52db6e6c506940079ce970e"
+  },
+  "physicalBounds": [
+    74,
+    42,
+    28
+  ],
+  "measurement": {
+    "modelSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -36.695648193359375,
+        -20.869565963745117,
+        0.0
+      ],
+      "max": [
+        36.34782409667969,
+        20.869565963745117,
+        27.826086044311523
+      ],
+      "size": [
+        73.04347229003906,
+        41.739131927490234,
+        27.826086044311523
+      ]
+    },
+    "triangles": 3194,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/hot-rod/v1/evidence/replay-verification.json",
+    "sha256": "db53b8320c95fdf2af4fafc27a89c38cd692e9dc7c883f9b3d6867bd6c5d1410",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-hot-rod-v1.json --blender BLENDER"
+}

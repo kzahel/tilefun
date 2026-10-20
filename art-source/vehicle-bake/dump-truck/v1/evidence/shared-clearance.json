@@ -1,0 +1,76 @@
+[
+  {
+    "status": "passed",
+    "id": "dump-truck--v1",
+    "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "triangles": 3720,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.960150197384479,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.960150197384479,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601549899355,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601553723468577,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601520290395928,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.695653116241195,
+        "minimumGap": 0.9601509781384365,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_ML_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_MR_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "collidingBodyRejected": true
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "collidingBodyRejected": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

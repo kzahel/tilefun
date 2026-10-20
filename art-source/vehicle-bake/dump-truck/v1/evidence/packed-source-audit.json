@@ -1,0 +1,779 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedEquipment": {
+      "components": [
+        "STATIC broad dump top side rim -1",
+        "STATIC broad dump top side rim 1",
+        "STATIC dump top frontwall rim",
+        "STATIC dump top tailgate rim",
+        "STATIC fixed stowed underbed ram -1",
+        "STATIC underbed ram lower mount -1",
+        "STATIC small rear bed hinge block -1",
+        "STATIC fixed stowed underbed ram 1",
+        "STATIC underbed ram lower mount 1",
+        "STATIC small rear bed hinge block 1",
+        "STATIC rear bed hinge pin",
+        "STATIC axle attachment arm -2.3",
+        "STATIC axle attachment arm 1.12",
+        "STATIC axle attachment arm 2.4"
+      ],
+      "sixBroadSideRibs": [
+        "Broad dump side rib -1 -0.1",
+        "Broad dump side rib -1 1.1",
+        "Broad dump side rib -1 2.3",
+        "Broad dump side rib 1 -0.1",
+        "Broad dump side rib 1 1.1",
+        "Broad dump side rib 1 2.3"
+      ],
+      "twoFixedRams": [
+        "STATIC fixed stowed underbed ram -1",
+        "STATIC fixed stowed underbed ram 1"
+      ],
+      "fixedHinges": [
+        "STATIC small rear bed hinge block -1",
+        "STATIC small rear bed hinge block 1",
+        "STATIC rear bed hinge pin"
+      ],
+      "noMotionMetadata": true,
+      "levelStaticStowedOnly": true,
+      "noTippingOrCargoAnimationClaim": true
+    },
+    "sourceDumpDepth": {
+      "allTriangleCount": 3720,
+      "rayCount": 15,
+      "actualRailTopSource": 2.4600000381469727,
+      "rays": [
+        {
+          "xySource": [
+            -0.3,
+            -0.55
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            -0.3,
+            0
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            -0.3,
+            0.55
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            0.4,
+            -0.55
+          ],
+          "firstHitZSource": 1.250000238418579,
+          "depthBelowActualRailSource": 1.2099997997283936,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            0.4,
+            0
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            0.4,
+            0.55
+          ],
+          "firstHitZSource": 1.249999761581421,
+          "depthBelowActualRailSource": 1.2100002765655518,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            1.2,
+            -0.55
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            1.2,
+            0
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            1.2,
+            0.55
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            2.0,
+            -0.55
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            2.0,
+            0
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            2.0,
+            0.55
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            2.7,
+            -0.55
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            2.7,
+            0
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        },
+        {
+          "xySource": [
+            2.7,
+            0.55
+          ],
+          "firstHitZSource": 1.25,
+          "depthBelowActualRailSource": 1.2100000381469727,
+          "owner": "Deep open steel blue dump bed actual floor"
+        }
+      ],
+      "minimumMeasuredDepthSource": 1.2099997997283936,
+      "filledTopNegative": {
+        "fixtureTriangles": 2,
+        "rejectedRayCount": 15,
+        "rays": [
+          {
+            "xySource": [
+              -0.3,
+              -0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              -0.3,
+              0
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              -0.3,
+              0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              0.4,
+              -0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              0.4,
+              0
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              0.4,
+              0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              1.2,
+              -0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              1.2,
+              0
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              1.2,
+              0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.0,
+              -0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.0,
+              0
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.0,
+              0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.7,
+              -0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.7,
+              0
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.7,
+              0.55
+            ],
+            "firstHitZSource": 2.4600000381469727,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          }
+        ],
+        "rejected": true
+      },
+      "baselineRestoredExact": true,
+      "noCandidateGeometryRemoved": true,
+      "levelStaticOnly": true
+    },
+    "skinOwnership": {
+      "method": "Own yellow lower coachwork/hood chart and continuous cab side glass with separate fixed front/rear and roof owners. Steel-blue sloped dump tub has independently owned floor, inner/outer side wall, front bulkhead and closed tailgate charts plus constant-role broad ribs/rims; fixed hinges/rams own gray swatches. No projected bitmap, silhouette ink or glass overlays.",
+      "frontRearGlassAndRoofSeparateCharts": true,
+      "actualBedFloorOwner": "Deep open steel blue dump bed actual floor",
+      "slopedInnerOuterWallOwners": true,
+      "frontBulkheadAndTailgateOwnersSeparate": true,
+      "noGlassOverlayMeshes": true,
+      "notCameraProjection": true
+    },
+    "master.blend": {
+      "sha256": "6c8c178a506e3301cb3f30ad9ddd7c1ee8e66f5c5970742fd960e0942feb0c9d",
+      "triangles": 3720,
+      "meshObjects": 69,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "sixWheelRadiusRig": [
+      {
+        "id": "FL",
+        "axleSourceMeasured": -2.299999952316284,
+        "radiusSourceMeasured": 0.5000000732111918,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "FR",
+        "axleSourceMeasured": -2.299999952316284,
+        "radiusSourceMeasured": 0.5000000732111918,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "ML",
+        "axleSourceMeasured": 1.1200000047683716,
+        "radiusSourceMeasured": 0.5000000033369227,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "MR",
+        "axleSourceMeasured": 1.1200000047683716,
+        "radiusSourceMeasured": 0.5000000033369227,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RL",
+        "axleSourceMeasured": 2.4000000953674316,
+        "radiusSourceMeasured": 0.5000000732111918,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      },
+      {
+        "id": "RR",
+        "axleSourceMeasured": 2.4000000953674316,
+        "radiusSourceMeasured": 0.5000000732111918,
+        "radiusWorldDeclared": 8.695652173913045,
+        "geometryAndOwnMetadataMatch": true
+      }
+    ],
+    "car.blend": {
+      "sha256": "0bed0dc0a0d4bf6942f72035f599d0a6eef21932532ccf3a2a95913690a482a5",
+      "triangles": 3720,
+      "meshObjects": 7,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+      "minBlenderWorld": [
+        -55.65216827392578,
+        -22.608694076538086,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        55.65216827392578,
+        22.608694076538086,
+        48.69565200805664
+      ],
+      "dimensionsBlenderWorld": [
+        111.30433654785156,
+        45.21738815307617,
+        48.695651054382324
+      ],
+      "dimensionsSourceUnits": [
+        6.399999351501464,
+        2.5999998188018796,
+        2.799999935626983
+      ],
+      "centeredHorizontalExtentWorld": [
+        111.30433654785156,
+        45.21738815307617
+      ],
+      "centeredHorizontalExtentSource": [
+        6.399999351501464,
+        2.5999998188018796
+      ],
+      "centeredCeilWorldFootprint": [
+        112,
+        46
+      ],
+      "includesActualLevelTubRimsHingesRamsSixWheels": true,
+      "rootUnchangedNoRecenterOrFitScale": true,
+      "runtimeIntegration": "parent-owned; centered2*maxAbs footprint"
+    },
+    "actualGLBDumpDepth": {
+      "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+      "allTriangleCount": 3720,
+      "rayCount": 15,
+      "actualRailTopSource": 2.459999961853027,
+      "rays": [
+        {
+          "xySource": [
+            -0.3,
+            -0.55
+          ],
+          "firstHitZSource": 1.24999942779541,
+          "depthBelowActualRailSource": 1.2100005340576168,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.3,
+            0
+          ],
+          "firstHitZSource": 1.2499998664855956,
+          "depthBelowActualRailSource": 1.2100000953674312,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            -0.3,
+            0.55
+          ],
+          "firstHitZSource": 1.2499996471405028,
+          "depthBelowActualRailSource": 1.210000314712524,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.4,
+            -0.55
+          ],
+          "firstHitZSource": 1.2499998664855956,
+          "depthBelowActualRailSource": 1.2100000953674312,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.4,
+            0
+          ],
+          "firstHitZSource": 1.2499998664855956,
+          "depthBelowActualRailSource": 1.2100000953674312,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            0.4,
+            0.55
+          ],
+          "firstHitZSource": 1.2499996471405028,
+          "depthBelowActualRailSource": 1.210000314712524,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            -0.55
+          ],
+          "firstHitZSource": 1.2499998664855956,
+          "depthBelowActualRailSource": 1.2100000953674312,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            0
+          ],
+          "firstHitZSource": 1.2500000858306883,
+          "depthBelowActualRailSource": 1.2099998760223385,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            1.2,
+            0.55
+          ],
+          "firstHitZSource": 1.24999942779541,
+          "depthBelowActualRailSource": 1.2100005340576168,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.0,
+            -0.55
+          ],
+          "firstHitZSource": 1.2499996471405028,
+          "depthBelowActualRailSource": 1.210000314712524,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.0,
+            0
+          ],
+          "firstHitZSource": 1.2500000858306883,
+          "depthBelowActualRailSource": 1.2099998760223385,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.0,
+            0.55
+          ],
+          "firstHitZSource": 1.2499996471405028,
+          "depthBelowActualRailSource": 1.210000314712524,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.7,
+            -0.55
+          ],
+          "firstHitZSource": 1.2499996471405028,
+          "depthBelowActualRailSource": 1.210000314712524,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.7,
+            0
+          ],
+          "firstHitZSource": 1.2499998664855956,
+          "depthBelowActualRailSource": 1.2100000953674312,
+          "owner": "Body_static"
+        },
+        {
+          "xySource": [
+            2.7,
+            0.55
+          ],
+          "firstHitZSource": 1.24999942779541,
+          "depthBelowActualRailSource": 1.2100005340576168,
+          "owner": "Body_static"
+        }
+      ],
+      "minimumMeasuredDepthSource": 1.2099998760223385,
+      "filledTopNegative": {
+        "fixtureTriangles": 2,
+        "rejectedRayCount": 15,
+        "rays": [
+          {
+            "xySource": [
+              -0.3,
+              -0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              -0.3,
+              0
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              -0.3,
+              0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              0.4,
+              -0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              0.4,
+              0
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              0.4,
+              0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              1.2,
+              -0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              1.2,
+              0
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              1.2,
+              0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.0,
+              -0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.0,
+              0
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.0,
+              0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.7,
+              -0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.7,
+              0
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          },
+          {
+            "xySource": [
+              2.7,
+              0.55
+            ],
+            "firstHitZSource": 2.459999961853027,
+            "depthBelowActualRailSource": 0.0,
+            "owner": "CONTROL filled dump top"
+          }
+        ],
+        "rejected": true
+      },
+      "baselineRestoredExact": true,
+      "noCandidateGeometryRemoved": true,
+      "levelStaticOnly": true
+    },
+    "actualGLBSixAttachments": {
+      "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+      "results": [
+        {
+          "id": "FL",
+          "actualTireSlabInnerAbsY": 14.956522941589355,
+          "actualStaticArmEndAbsY": 14.69565200805664,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "FR",
+          "actualTireSlabInnerAbsY": 14.956522941589355,
+          "actualStaticArmEndAbsY": 14.69565200805664,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "ML",
+          "actualTireSlabInnerAbsY": 14.956522941589355,
+          "actualStaticArmEndAbsY": 14.69565200805664,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "MR",
+          "actualTireSlabInnerAbsY": 14.956522941589355,
+          "actualStaticArmEndAbsY": 14.69565200805664,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RL",
+          "actualTireSlabInnerAbsY": 14.956522941589355,
+          "actualStaticArmEndAbsY": 14.69565200805664,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        },
+        {
+          "id": "RR",
+          "actualTireSlabInnerAbsY": 14.956522941589355,
+          "actualStaticArmEndAbsY": 14.69565200805664,
+          "axialGapWorld": 0.26087093353271484,
+          "subpixelGap": true
+        }
+      ],
+      "allFixedTrianglesSeparatelyClearanceProven": true
+    }
+  }
+}

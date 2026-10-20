@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "inputHashes": {
+    "art-source/vehicle-bake/motorhome/v1/build.py": "eb41b53316b89346659aaa93034f41255d36eaf2c9f82469b9cd661464cabbf5",
+    "art-source/vehicle-bake/motorhome/v1/family.json": "2516cd535adac0c1e45f2da106038d2e33bd30cd78ff9a82e9e472ee5f62a34c",
+    "art-source/vehicle-bake/motorhome/v1/coverage-region.json": "2542c3517a3eebf4efa7dfe9d6b177e15b4743b914e9c2500502751a8504b22d",
+    "art-source/vehicle-bake/motorhome/v1/surface-regions.json": "ddacf6023d63fb3fbe3bb631a08ce7f8e0c30a19684bf4b7a8f2d45a804b3de8",
+    "art-source/vehicle-bake/motorhome/v1/pod-region.json": "9ff6d650aa2c7cf15b8a0f0ac145998ac50bb84c826a0736005acab42ff729d7",
+    "art-source/vehicle-bake/motorhome/v1/review.json": "74cbbed4aa4543394bf46325571d20ee9c58aa6a260256883c66c4ca4abb365d"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+  },
+  "outputs": {
+    "model.glb": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+    "atlas.png": "aa4d5b8eb711f565e28466efe1a2618fdd454f1b51cb29579cea40ebe687e7a5",
+    "recipe.json": "cfa46a586e768d3ed93eb4efa94cd50d5b00ee86776ebc8c350468f2aa4a6d1b"
+  },
+  "scratchInputDependencies": [],
+  "isolatedRoot": "data/vehicle-bake/motorhome/final-source-replay",
+  "bootstrap": "Empty AGENTS.md/public root sentinels only; no vehicle inputs",
+  "meaning": "Fresh miniature repository contains only listed inputs. GLB, atlas and recipe match byte for byte; packed blend determinism is not claimed."
+}

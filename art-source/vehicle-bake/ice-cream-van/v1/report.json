@@ -1,0 +1,593 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "ice-cream-van",
+  "route": "ice-cream-van",
+  "revision": "v1",
+  "method": "Independent pastel aqua/cream shop van with short front-third framed blue cab, real boolean-cut side serving recess and distinct inner jamb/counter/backwall owners, fixed pink/cream striped awning, opposite large cone symbol and cream roof. Actual opaque skin paint; no glass overlays or high-to-low transfer claim.",
+  "geometry": {
+    "triangles": 2710,
+    "vertices": 5329,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 193804,
+    "sha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.399999976158142,
+        -0.8600000143051147,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        8.000000145124353,
+        14.95652198791504
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.399999976158142,
+        0.8600000143051147,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        8.000000145124353,
+        -14.95652198791504
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.4299999475479126,
+        -0.8600000143051147,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        24.869564305181093,
+        8.000000145124353,
+        14.95652198791504
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.4299999475479126,
+        0.8600000143051147,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        24.869564305181093,
+        8.000000145124353,
+        -14.95652198791504
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/ice-cream-van/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/ice-cream-van/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/ice-cream-van/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Static shop van with physical serving recess, counter/backwall, fixed striped awning and opposite cone; no equipment animation.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 2710,
+  "vertexCount": 5329,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 193804,
+  "atlasBytes": 3802,
+  "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+  "atlasSha256": "1ce9d85a871391bcaaa912228bf61f78955ed970827e507c7cdaf5dfa19f0b84",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "ice-cream-van--v1",
+    "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+    "triangles": 2710,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.000000399840292,
+        "minimumGap": 1.533334285568495,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.000000399840292,
+        "minimumGap": 1.533334285568495,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.5333342993818917,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.5333342993818917,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/ice-cream-van/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+    "minBlenderWorld": [
+      -42.73912811279297,
+      -21.869565963745117,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      42.73912811279297,
+      18.60869598388672,
+      41.03913116455078
+    ],
+    "dimensionsBlenderWorld": [
+      85.47825622558594,
+      40.478261947631836,
+      41.039130210876465
+    ],
+    "dimensionsSourceUnits": [
+      4.91499973297119,
+      2.32750006198883,
+      2.3597499871253964
+    ]
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+    "rayCount": 11,
+    "samples": [
+      {
+        "id": "cab-serving-side",
+        "hitSource": [
+          -1.2000001668930054,
+          -1.0173417329788208,
+          1.7000001668930054
+        ],
+        "triangle": 75,
+        "interpolatedUV": [
+          0.2692307233810425,
+          0.8425531387329102
+        ],
+        "atlasPixel": [
+          137,
+          80
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "cab-opposite-side",
+        "hitSource": [
+          -1.2000001668930054,
+          1.0173417329788208,
+          1.7000001668930054
+        ],
+        "triangle": 84,
+        "interpolatedUV": [
+          0.2692307233810425,
+          0.5925531983375549
+        ],
+        "atlasPixel": [
+          137,
+          208
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "windshield",
+        "hitSource": [
+          -1.7965478897094727,
+          0.0,
+          1.7000001668930054
+        ],
+        "triangle": 843,
+        "interpolatedUV": [
+          0.5,
+          0.2962765693664551
+        ],
+        "atlasPixel": [
+          256,
+          360
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rear-door-seam",
+        "hitSource": [
+          2.3499999046325684,
+          0.0,
+          1.5000001192092896
+        ],
+        "triangle": 149,
+        "interpolatedUV": [
+          0.75,
+          0.4319148659706116
+        ],
+        "atlasPixel": [
+          384,
+          290
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "cream-roof",
+        "hitSource": [
+          0.0,
+          0.0,
+          2.3554792404174805
+        ],
+        "triangle": 932,
+        "interpolatedUV": [
+          0.5,
+          0.203125
+        ],
+        "atlasPixel": [
+          256,
+          408
+        ],
+        "rgb": [
+          255,
+          244,
+          214
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "recess-backwall",
+        "hitSource": [
+          0.6000000834465027,
+          -0.5300000905990601,
+          1.5000001192092896
+        ],
+        "triangle": 203,
+        "interpolatedUV": [
+          0.40810322761535645,
+          0.015379725024104118
+        ],
+        "atlasPixel": [
+          208,
+          504
+        ],
+        "rgb": [
+          77,
+          96,
+          107
+        ],
+        "roles": [
+          "interiorBack"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "counter-ledge",
+        "hitSource": [
+          0.4000000059604645,
+          -1.100000023841858,
+          1.187999963760376
+        ],
+        "triangle": 1187,
+        "interpolatedUV": [
+          0.4671773314476013,
+          0.014695756137371063
+        ],
+        "atlasPixel": [
+          239,
+          504
+        ],
+        "rgb": [
+          99,
+          126,
+          132
+        ],
+        "roles": [
+          "counter"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "opposite-cone-scoop",
+        "hitSource": [
+          0.7300000786781311,
+          1.0165200233459473,
+          1.78000009059906
+        ],
+        "triangle": 114,
+        "interpolatedUV": [
+          0.6403846740722656,
+          0.5840425491333008
+        ],
+        "atlasPixel": [
+          327,
+          212
+        ],
+        "rgb": [
+          224,
+          143,
+          163
+        ],
+        "roles": [
+          "violet"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "opposite-cone-waffle",
+        "hitSource": [
+          0.7300000786781311,
+          1.0249998569488525,
+          1.0800001621246338
+        ],
+        "triangle": 115,
+        "interpolatedUV": [
+          0.6403846144676208,
+          0.6585105657577515
+        ],
+        "atlasPixel": [
+          327,
+          174
+        ],
+        "rgb": [
+          207,
+          144,
+          77
+        ],
+        "roles": [
+          "cone"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "awning-stripe",
+        "hitSource": [
+          0.4000000059604645,
+          -1.1399999856948853,
+          2.212857246398926
+        ],
+        "triangle": 1214,
+        "interpolatedUV": [
+          0.46311891078948975,
+          0.04489650949835777
+        ],
+        "atlasPixel": [
+          237,
+          489
+        ],
+        "rgb": [
+          255,
+          244,
+          214
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "lower-aqua-body",
+        "hitSource": [
+          0.0,
+          1.024999976158142,
+          1.0000001192092896
+        ],
+        "triangle": 937,
+        "interpolatedUV": [
+          0.5,
+          0.6670212745666504
+        ],
+        "atlasPixel": [
+          256,
+          170
+        ],
+        "rgb": [
+          161,
+          216,
+          207
+        ],
+        "roles": [
+          "paint"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/ice-cream-van/surface-regions.json",
+    "meaning": "Actual triangle/UV role samples on each independent exterior/serving surface owner",
+    "inputBytesUnchanged": true
+  },
+  "servingRecessEvidence": "art-source/vehicle-bake/ice-cream-van/v1/evidence/serving-recess-depth.json",
+  "replayCommands": [
+    "python art-source/vehicle-bake/ice-cream-van/v1/replay.py --blender BLENDER --name NEW_FRESH_OUTPUT",
+    "node scripts/vehicle-bake/ice-cream-van/capture.mjs",
+    "python scripts/vehicle-bake/ice-cream-van/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/ice-cream-van/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/ice-cream-van/v1/evidence/clearance-input.json data/vehicle-bake/ice-cream-van/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/ice-cream-van/v1/model.glb --config art-source/vehicle-bake/ice-cream-van/v1/coverage-region.json --output data/vehicle-bake/ice-cream-van/recheck-coverage.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/ice-cream-van/v1/prove-recess.py -- --input public/demos/vehicle-bake/ice-cream-van/v1/model.glb --output data/vehicle-bake/ice-cream-van/recheck-recess.json",
+    "python scripts/vehicle-bake/ice-cream-van/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/ice-cream-van/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Compact tall aqua shop body has a broad cream roof, short sloping cab nose and continuous framed blue windshield and cab panes.",
+    "Near serving side reads as a broad dark opening below a short cream/pink striped fixed awning; the counter edge and pale jamb separate it from the exterior skin. Its actual depth is qualified independently by triangle rays and false-solid controls.",
+    "Opposite side owns a large pink scoop and warm waffle-cone symbol on aqua skin; it remains distinct in opposite-side and oblique native views without text or logos.",
+    "All four tires remain seated in integrated open fender pockets. No isolated far-crown caps, tire/body intersection, floating spare, or wheel intrusion into the fixed counter/awning was observed in either camera family.",
+    "Front/rear ends, cream roof and cab glass have coherent paint ownership; no coplanar glass overlays, flickering surface seams or clipped viewport borders were observed.",
+    "Both actual wireframes retain a single fixed body and four independent road-wheel meshes. Signed roll frames retain fixed body/awning/counter geometry; quantitative per-wheel quarter/reverse/reset controls independently passed.",
+    "At end-on headings the side recess and cone naturally become occluded. Thin awning and diagonal emblem edges retain expected native-pixel aliasing; the physical recess is not claimed to show its entire backwall from every elevated angle."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 11,
+    "physicalServingOpeningNineDepthSixCounterRays": true,
+    "falseClosedPanelAndRaisedDeckRejectedThenRestored": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Serving recess is finite depth with actual counter, backwall, ceiling and jambs; no full cabin, shop equipment or animated awning claim.",
+    "Nominal 4.9 x 2.1 x 2.35 source dimensions describe the body family; fixed awning and mirror width is included in actual exported bounds.",
+    "Envelope diagonal, rear lamp/handle and chrome highlights retain expected angle-dependent native pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/ice-cream-van/v1/atlas.png": "1ce9d85a871391bcaaa912228bf61f78955ed970827e507c7cdaf5dfa19f0b84",
+    "art-source/vehicle-bake/ice-cream-van/v1/audit-source.py": "31af67dc13a6be0ef366736769b71d930267dc64e81799860ea610b3652d91a5",
+    "art-source/vehicle-bake/ice-cream-van/v1/build.py": "e660e459182e40394a545aa021d3825bbf9ade0a05638e1ea8de1e8b7570e22a",
+    "art-source/vehicle-bake/ice-cream-van/v1/capture.mjs": "90563550e77388275f61f5ead3dd406858529439c20c237b2a828bfe091f93f8",
+    "art-source/vehicle-bake/ice-cream-van/v1/car.blend": "b65030cb51b1dde080c6e1d55dfa93b413a3f8cb0e2cf0eb76826e20aec82f4d",
+    "art-source/vehicle-bake/ice-cream-van/v1/construction-notes.md": "2a32b130cd3027b43e4db1cd87abbea482098fdf96389a99033d2334ef0d0bd1",
+    "art-source/vehicle-bake/ice-cream-van/v1/coverage-region.json": "b45ec3b106f297e2d9726262e6f35f4e91b20935947994f2cb8a38cd9591341d",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/author-browser-qa.json": "31eb6686be983ebb825de481f0d52308870efcd0f700a0bb74ca8c862319971a",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/author-visual-inspection.json": "e624e13d0898ce3e76be5312e83feb75d96e995f6e7f4bd9d60c68865b6c8085",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/clearance-input.json": "52bd982962dcf212e842b1c99b44841848a97dc69f95aa284a0755532d97b584",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/engine-capture.json": "b45d522d42569a19034f957ef3be01d01febb4da6e362f099239d8a3794a93ff",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/fresh-isolated-replay.json": "6ba73dbef560f0db07176f4285c7ab50a781d6b5683ff4341138d63d62aad992",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/packed-source-audit.json": "0aa3479e562ef346d774c9eaefc36fd6cceff340974e13bcdc6b36323c1ac776",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/replay-verification.json": "3cf3807fe40758b63cd256af165b5940b590e75d62d8fda078119d463d8108c6",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/serving-recess-depth.json": "a48e19e7a2d30bbef31e043f91283a0626f89f4bfa58f8da0a24d55b7e487e94",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/shared-clearance.json": "5d59ef63e10f00988da70fb97cd25ddc4a67050793b592e5d048fe48cc55ddab",
+    "art-source/vehicle-bake/ice-cream-van/v1/evidence/upper-wheel-coverage.json": "e6a2d0c61b8bfa4d76872c494ebf47c30a2d345361b522bb47f39b0e436349f4",
+    "art-source/vehicle-bake/ice-cream-van/v1/family.json": "682239f04338cb81351789c49454ef17e0d61f0d1396f52fea2b70e6e7578e1a",
+    "art-source/vehicle-bake/ice-cream-van/v1/finalize.py": "2ac1fdf2bb12e39c5bddb5b459d9964bf5590e342f81515bc7eaf9b8085e4899",
+    "art-source/vehicle-bake/ice-cream-van/v1/master.blend": "6dbf9c57ad6627850df51abfff0f8a92a6255f0ea82df130be5b25e48feda0c1",
+    "art-source/vehicle-bake/ice-cream-van/v1/model.glb": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+    "art-source/vehicle-bake/ice-cream-van/v1/pack-author.py": "a04df0511ee5660d95f77d44d5f232ea038dc4effac6ec8dc6a8c778763d1b0f",
+    "art-source/vehicle-bake/ice-cream-van/v1/paint-ownership.json": "789a42b2027d26f57ee05f640da95d494076f0bd78f3115811f31fcd471c871c",
+    "art-source/vehicle-bake/ice-cream-van/v1/palette-draft.png": "2a060d5e86629adce65298ebc4030cbf23aa827d8e7337d9998303693214c878",
+    "art-source/vehicle-bake/ice-cream-van/v1/prove-recess.py": "e745c9dc35220fc3ff27c47d9fd70b347966e67acc4014b99951384580603901",
+    "art-source/vehicle-bake/ice-cream-van/v1/recipe.json": "2966b09472fe345b12769e9de3066f9514439e8beb66223e01174c7825284910",
+    "art-source/vehicle-bake/ice-cream-van/v1/replay.py": "250be6b53dca5100946a0c2b67edeb8ff8d691c0e7e31062a34ebafca9060a95",
+    "art-source/vehicle-bake/ice-cream-van/v1/review.json": "a09039f6d749df32797b7b0eff5a42a9a532ce9eb3187a711cc74d0e0fa3de13",
+    "art-source/vehicle-bake/ice-cream-van/v1/serving-region.json": "ce26acb716b408b5fe84125efec8ad53c3fe979fbdcbeaf435058f18a02ebb49",
+    "art-source/vehicle-bake/ice-cream-van/v1/sheets.py": "3593ee68ca6a1ed19c77a51007c642bdf3b3113b31eabe6a136dbfe0b6cefb03",
+    "art-source/vehicle-bake/ice-cream-van/v1/surface-regions.json": "0545f9d231ccf6239ec2205b6beee2a99a7375bcf40551ecb5a80bcc95e1717b"
+  }
+}

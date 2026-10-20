@@ -1,0 +1,704 @@
+{
+  "family": "seventies-longroof-wood-panel-estate",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    5.44,
+    2.0,
+    1.745
+  ],
+  "wheelRadius": 0.39,
+  "wheelWidth": 0.26,
+  "axles": [
+    -1.7,
+    1.61
+  ],
+  "halfTrack": 0.79,
+  "arch": {
+    "cutRadius": 0.475,
+    "pocketInnerY": 0.62,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 14,
+    "lateralStations": [
+      0.59,
+      0.72,
+      0.88,
+      0.97,
+      1.0
+    ],
+    "shoulderRadii": [
+      0.485,
+      0.545,
+      0.545,
+      0.525,
+      0.495
+    ],
+    "archRadius": 0.45
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      147,
+      108,
+      69
+    ],
+    "paintShadow": [
+      181,
+      139,
+      86
+    ],
+    "paintMid": [
+      213,
+      174,
+      112
+    ],
+    "paint": [
+      235,
+      207,
+      153
+    ],
+    "paintLight": [
+      250,
+      229,
+      181
+    ],
+    "cream": [
+      255,
+      238,
+      192
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "woodTrim": [
+      92,
+      59,
+      47
+    ],
+    "woodEdge": [
+      220,
+      166,
+      100
+    ],
+    "wood": [
+      175,
+      111,
+      60
+    ],
+    "woodLight": [
+      192,
+      129,
+      72
+    ],
+    "woodGrain": [
+      140,
+      84,
+      51
+    ],
+    "rack": [
+      94,
+      98,
+      111
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Independent long low estate body and swept greenhouse. Continuous own side UV charts carry cream/caramel paint, bounded warm wood panels with sparse graphic grain, and framed blue passenger/quarter glass. Fixed front/rear glass and roof owners; static four-bar roof rack. No source projection or view-dependent paint.",
+  "components": [
+    {
+      "name": "Long rounded estate coachwork and real wood-inlay skin",
+      "group": "body",
+      "triangles": 368,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Sweeping estate greenhouse actual continuous side front rear roof skin",
+      "group": "body",
+      "triangles": 84,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Narrow retained estate chassis",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintDeep"
+      ]
+    },
+    {
+      "name": "Integrated estate low broad open fender -1.7 -1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated estate low broad open fender -1.7 1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated estate low broad open fender 1.61 -1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated estate low broad open fender 1.61 1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Restrained chrome rocker trim -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Restrained chrome rocker trim 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Classic short chrome bumper -2.65",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Bumper rubber strip -2.65",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Classic short chrome bumper 2.65",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Bumper rubber strip 2.65",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "STATIC roof rack slender longitudinal rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rack"
+      ]
+    },
+    {
+      "name": "STATIC roof rack planted foot -1 -0.18",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "STATIC roof rack planted foot -1 1.78",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "STATIC roof rack slender longitudinal rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rack"
+      ]
+    },
+    {
+      "name": "STATIC roof rack planted foot 1 -0.18",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "STATIC roof rack planted foot 1 1.78",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "STATIC roof rack slim crossbar -0.18",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC roof rack slim crossbar 1.78",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Classic horizontal estate grille aperture",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Simple broad horizontal grille bar 0.66",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple broad horizontal grille bar 0.745",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple broad horizontal grille bar 0.83",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Front headlamp dark framed rectangular surround -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Twin classic rectangular headlamp -1 0.64",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Twin classic rectangular headlamp -1 0.79",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Front amber corner lamp -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "amber"
+      ]
+    },
+    {
+      "name": "Rear upright ruby corner lamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Rear ruby broad highlight -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rubyLight"
+      ]
+    },
+    {
+      "name": "Front headlamp dark framed rectangular surround 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Twin classic rectangular headlamp 1 0.64",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Twin classic rectangular headlamp 1 0.79",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Front amber corner lamp 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "amber"
+      ]
+    },
+    {
+      "name": "Rear upright ruby corner lamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Rear ruby broad highlight 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rubyLight"
+      ]
+    },
+    {
+      "name": "Classic estate tire FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Classic polished wheel rim FL",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Classic metal dome hub FL",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Estate asymmetric hub inset FL",
+      "group": "FL",
+      "triangles": 16,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Classic estate tire FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Classic polished wheel rim FR",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Classic metal dome hub FR",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Estate asymmetric hub inset FR",
+      "group": "FR",
+      "triangles": 16,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Classic estate tire RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Classic polished wheel rim RL",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Classic metal dome hub RL",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Estate asymmetric hub inset RL",
+      "group": "RL",
+      "triangles": 16,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Classic estate tire RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Classic polished wheel rim RR",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Classic metal dome hub RR",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Estate asymmetric hub inset RR",
+      "group": "RR",
+      "triangles": 16,
+      "paintRoles": [
+        "ink"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.7000000476837158,
+        -0.7900000214576721,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        -29.565218220586367,
+        6.78260844686757,
+        13.739130807959517
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.7000000476837158,
+        0.7900000214576721,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        -29.565218220586367,
+        6.78260844686757,
+        -13.739130807959517
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.6100000143051147,
+        -0.7900000214576721,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        28.00000024878461,
+        6.78260844686757,
+        13.739130807959517
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.6100000143051147,
+        0.7900000214576721,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        28.00000024878461,
+        6.78260844686757,
+        -13.739130807959517
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    }
+  ],
+  "method": "Independent long low estate body and swept greenhouse. Continuous own side UV charts carry cream/caramel paint, bounded warm wood panels with sparse graphic grain, and framed blue passenger/quarter glass. Fixed front/rear glass and roof owners; static four-bar roof rack. No source projection or view-dependent paint.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/woody-wagon/build.py",
+    "scripts/vehicle-bake/woody-wagon/geometry.py",
+    "scripts/vehicle-bake/woody-wagon/family.json",
+    "scripts/vehicle-bake/woody-wagon/coverage-region.json",
+    "scripts/vehicle-bake/woody-wagon/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "status": "passed",
+  "singleDepthTarget": true,
+  "views": [
+    {
+      "mode": "study",
+      "index": 0,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 31
+    },
+    {
+      "mode": "study",
+      "index": 1,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 31
+    },
+    {
+      "mode": "study",
+      "index": 2,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 36
+    },
+    {
+      "mode": "study",
+      "index": 3,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 43
+    },
+    {
+      "mode": "study",
+      "index": 4,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 50
+    },
+    {
+      "mode": "study",
+      "index": 5,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 52
+    },
+    {
+      "mode": "study",
+      "index": 6,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 39
+    },
+    {
+      "mode": "study",
+      "index": 7,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 29
+    },
+    {
+      "mode": "study",
+      "index": 8,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 6
+    },
+    {
+      "mode": "study",
+      "index": 9,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 2
+    },
+    {
+      "mode": "study",
+      "index": 10,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 1
+    },
+    {
+      "mode": "study",
+      "index": 11,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 5
+    },
+    {
+      "mode": "study",
+      "index": 12,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 12
+    },
+    {
+      "mode": "study",
+      "index": 13,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 10
+    },
+    {
+      "mode": "study",
+      "index": 14,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 10
+    },
+    {
+      "mode": "study",
+      "index": 15,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 21
+    },
+    {
+      "mode": "engine",
+      "index": 0,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 43
+    },
+    {
+      "mode": "engine",
+      "index": 1,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 52
+    },
+    {
+      "mode": "engine",
+      "index": 2,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 58
+    },
+    {
+      "mode": "engine",
+      "index": 3,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 68
+    },
+    {
+      "mode": "engine",
+      "index": 4,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 76
+    },
+    {
+      "mode": "engine",
+      "index": 5,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 73
+    },
+    {
+      "mode": "engine",
+      "index": 6,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 65
+    },
+    {
+      "mode": "engine",
+      "index": 7,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 44
+    },
+    {
+      "mode": "engine",
+      "index": 8,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 2
+    },
+    {
+      "mode": "engine",
+      "index": 9,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 2
+    },
+    {
+      "mode": "engine",
+      "index": 10,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 5
+    },
+    {
+      "mode": "engine",
+      "index": 11,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 13
+    },
+    {
+      "mode": "engine",
+      "index": 12,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 22
+    },
+    {
+      "mode": "engine",
+      "index": 13,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 17
+    },
+    {
+      "mode": "engine",
+      "index": 14,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 23
+    },
+    {
+      "mode": "engine",
+      "index": 15,
+      "visibleMaskOutsideRiderPixels": 0,
+      "actualCarDepthOccludedRiderPixels": 33
+    }
+  ],
+  "meaning": "Car writes real depth without color in the visibility diagnostic; rider then depth-tests in that same target. Visible alpha is a strict subset of rider-alone alpha at all32headings. Production combined view uses both original opaque materials, one shared camera/yaw/target and one shared outline. No sprite overlays."
+}

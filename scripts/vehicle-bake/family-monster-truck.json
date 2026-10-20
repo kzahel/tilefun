@@ -1,0 +1,15 @@
+{
+  "id": "monster-truck-v1",
+  "clearanceId": "monster-truck--v1",
+  "name": "Monster truck",
+  "title": "Monster truck \u00b7 autonomous original v1",
+  "source": "public/demos/vehicle-bake/monster-truck/v1",
+  "glb": "public/demos/vehicle-bake/monster-truck/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/monster-truck/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/monster-truck/v1/report.json",
+  "output": "public/demos/original-vehicles/monster-truck-v1",
+  "qa": "data/vehicle-bake/monster-truck-qa",
+  "offline": "data/vehicle-bake/monster-truck-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224
+}

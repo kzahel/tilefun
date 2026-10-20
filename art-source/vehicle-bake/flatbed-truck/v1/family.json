@@ -1,0 +1,92 @@
+{
+  "family": "orange-work-cab-empty-gray-flatbed",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [6.3, 2.3, 2.4],
+  "wheelRadius": 0.5,
+  "wheelWidth": 0.32,
+  "axles": [-2.15, 2.02],
+  "halfTrack": 0.94,
+  "arch": {
+    "cutRadius": 0.6,
+    "pocketInnerY": 0.7,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [0.69, 0.82, 1.04, 1.13, 1.17],
+    "shoulderRadii": [0.62, 0.66, 0.66, 0.64, 0.62],
+    "archRadius": 0.59
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [139, 71, 48],
+    "paintShadow": [176, 85, 44],
+    "paintMid": [208, 104, 48],
+    "paint": [229, 118, 55],
+    "paintLight": [250, 153, 69],
+    "cream": [255, 230, 163],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119],
+    "deck": [163, 168, 176],
+    "deckLight": [184, 188, 195],
+    "deckEdge": [124, 135, 145],
+    "deckSeam": [98, 107, 119],
+    "frame": [63, 69, 79]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Own short orange work cab with coherent blue framed skin glass; long truly empty thin gray flat platform with few broad panel seams, separate gray edges and dark underframe, orange front/gray rear integrated arch guards, gray bumpers and small rear hazard blocks. No cargo/towing/recessed-bed or high-to-low transfer claim.",
+  "bodyStations": [
+    [-3.04, 1.0, 1.2],
+    [-2.99, 1.05, 1.65],
+    [-2.74, 1.055, 2.3],
+    [-2.5, 1.055, 2.36],
+    [-1.15, 1.055, 2.36],
+    [-0.97, 1.02, 2.28],
+    [-0.91, 0.98, 2.17]
+  ],
+  "bodySection": [
+    [-0.87, 0],
+    [-1, 0.07],
+    [-1, 0.42],
+    [-0.99, 0.8],
+    [-0.97, 0.92],
+    [-0.9, 0.985],
+    [-0.7, 1.015],
+    [0, 1.025],
+    [0.7, 1.015],
+    [0.9, 0.985],
+    [0.97, 0.92],
+    [0.99, 0.8],
+    [1, 0.42],
+    [1, 0.07],
+    [0.87, 0]
+  ],
+  "flatDeck": {
+    "xRange": [-0.85, 3.07],
+    "width": 2.2,
+    "bottomZ": 1.13,
+    "topZ": 1.24,
+    "meaning": "Actual thin planar exposed platform, not a recessed bed or cargo block"
+  }
+}

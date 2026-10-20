@@ -1,0 +1,125 @@
+{
+  "family": "orange-yellow-low-mobile-crane-rigid-stowed",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [7.4, 2.6, 2.85],
+  "wheelRadius": 0.51,
+  "wheelWidth": 0.34,
+  "axles": [-2.7, 0, 2.45],
+  "halfTrack": 1.08,
+  "arch": {
+    "cutRadius": 0.61,
+    "pocketInnerY": 0.78,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [0.8, 0.94, 1.17, 1.26, 1.3],
+    "shoulderRadii": [0.63, 0.68, 0.68, 0.66, 0.63],
+    "archRadius": 0.605
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [160, 83, 44],
+    "paintShadow": [193, 103, 45],
+    "paintMid": [219, 123, 45],
+    "paint": [236, 145, 55],
+    "paintLight": [255, 178, 66],
+    "cream": [255, 230, 163],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "rubyLight": [223, 93, 119],
+    "deck": [163, 168, 176],
+    "deckLight": [184, 188, 195],
+    "deckEdge": [124, 135, 145],
+    "deckSeam": [98, 107, 119],
+    "frame": [63, 69, 79],
+    "boom": [246, 202, 74],
+    "boomLight": [255, 222, 112],
+    "boomShadow": [206, 157, 52]
+  },
+  "render": {
+    "nativeSize": 256,
+    "meshRadius": 128,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [128, 156],
+    "engineGroundOrigin": [128, 128]
+  },
+  "paintMethod": "Own low orange/yellow six-wheel mobile crane carrier, closed actual blue-glass driver cab, small offset glazed operator pod, three broad solid stepped telescopic sections in low rigid stow, actual fixed cable/J hook and four short retracted outrigger caps. No working equipment animation/gameplay or high-to-low transfer claim.",
+  "bodyStations": [
+    [-3.47, 0.98, 1.18],
+    [-3.39, 1.08, 1.45],
+    [-3.2, 1.08, 2.1],
+    [-3.02, 1.08, 2.24],
+    [-1.97, 1.08, 2.24],
+    [-1.83, 1.02, 2.12]
+  ],
+  "bodySection": [
+    [-0.87, 0],
+    [-1, 0.07],
+    [-1, 0.42],
+    [-0.99, 0.8],
+    [-0.97, 0.92],
+    [-0.9, 0.985],
+    [-0.7, 1.015],
+    [0, 1.025],
+    [0.7, 1.015],
+    [0.9, 0.985],
+    [0.97, 0.92],
+    [0.99, 0.8],
+    [1, 0.42],
+    [1, 0.07],
+    [0.87, 0]
+  ],
+  "toolchain": "multi-axle-v2",
+  "wheelIds": ["FL", "FR", "ML", "MR", "RL", "RR"],
+  "axleDefinitions": [
+    {
+      "id": "F",
+      "x": -2.7
+    },
+    {
+      "id": "M",
+      "x": 0
+    },
+    {
+      "id": "R",
+      "x": 2.45
+    }
+  ],
+  "operatorPod": {
+    "center": [-0.425, -0.72, 1.895],
+    "size": [1.25, 0.9, 1.33]
+  },
+  "stowedBoom": [
+    {
+      "xRange": [-0.25, 2.7],
+      "width": 0.72,
+      "zRange": [1.7, 2.32]
+    },
+    {
+      "xRange": [-1.95, 0.35],
+      "width": 0.58,
+      "zRange": [2.02, 2.58]
+    },
+    {
+      "xRange": [-3.55, -1.45],
+      "width": 0.44,
+      "zRange": [2.38, 2.8]
+    }
+  ],
+  "outriggerXs": [-1.55, 3.28]
+}

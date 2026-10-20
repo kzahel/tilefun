@@ -1,0 +1,154 @@
+{
+  "method": "Original mint open golf cart; real deep passenger footwell, tan bench and back, white low-crown canopy on four slim fixed dark supports, small framed blue windscreen, recessed rear bagwell. Actual-surface semantic UV paint only.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      42,
+      43,
+      57
+    ],
+    "tireLight": [
+      64,
+      66,
+      81
+    ],
+    "paintDeep": [
+      58,
+      109,
+      98
+    ],
+    "paintShadow": [
+      84,
+      139,
+      119
+    ],
+    "paintMid": [
+      115,
+      170,
+      145
+    ],
+    "paint": [
+      151,
+      202,
+      174
+    ],
+    "paintLight": [
+      189,
+      226,
+      198
+    ],
+    "cream": [
+      255,
+      225,
+      166
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "seatShadow": [
+      137,
+      96,
+      72
+    ],
+    "seat": [
+      193,
+      150,
+      105
+    ],
+    "seatLight": [
+      226,
+      186,
+      137
+    ],
+    "roofShadow": [
+      169,
+      181,
+      185
+    ],
+    "roof": [
+      232,
+      238,
+      223
+    ],
+    "roofLight": [
+      248,
+      248,
+      239
+    ],
+    "floor": [
+      78,
+      89,
+      96
+    ],
+    "floorLight": [
+      108,
+      121,
+      124
+    ],
+    "chassis": [
+      61,
+      64,
+      79
+    ],
+    "chassisLight": [
+      87,
+      91,
+      108
+    ]
+  },
+  "ownership": "Rounded mint nose owns actual top/side chart; four slim dark fixed canopy supports; white roof owns top/edge chart, opaque front screen owns continuous framed blue UV chart; tan cushion/back own coherent upholstery charts, open floor and real rear bagwell own separate rib/shadow paint. Constant-role swatches padded. No camera-projected paint or glass overlay on body.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Open sides, own opaque framed front windscreen and white canopy; tan bench faces front, rear bagwell recessed. No rear glass or closed cabin invented.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "status": "no-blocking-issues-for-source-prerequisite-pilot",
+  "humanApproval": false,
+  "riderSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "actualBikePresent": false,
+  "examined": "All16study+16game native224 rider-alone and synthetic-fixture combined headings, all32rider wire headings and fixture wire controls; comparative standing/front/back/profile identity sheet and desktop/mobile screenshots. Integer4x nearest diagnostics preserve native pixels.",
+  "observations": [
+    "Distinct stocky Brown Bear animal template, broad torso and head, round ear solids, tan muzzle/belly, broad paws and tiny tail. No Explorer clothing/head/body recolor.",
+    "Bent arms and short straddled legs remain coherent through headings; contact fixture stays minimal and synthetic.",
+    "Muzzle shadow separates face from small belly patch; white eye glints and broad original8-color clusters retain Bear identity."
+  ],
+  "limits": [
+    "Approved sprite art has no unique depth/skeleton. Template depths, pelvis center, joint centers and seated flexion are inferred.",
+    "Game-camera apparent height varies with yaw because source lateral depth contributes to fixed world projection. No per-angle model/camera scaling applied.",
+    "Ear/eye/tail details lose pixels at some headings; seated likeness awaits independent parent/human judgment.",
+    "Failed upright Explorer reach is conditional on this fixed inferred upright template, not proof that every possible Bear anatomy or leaning pose is infeasible.",
+    "Static closed forepaws have no fingers/articulated grasp; no fur or pose animation.",
+    "Surface intersection diagnostics are finite and except only explicitly bounded local anatomical joins and matching paw/seat contacts."
+  ]
+}

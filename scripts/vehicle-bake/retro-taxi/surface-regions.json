@@ -1,0 +1,120 @@
+{
+  "name": "retro-taxi-own-glass-checker-roofsign-UV-regions-v1",
+  "meaning": "Actual GLB triangle/interpolated-UV probes establish four door-window panes, front/rear glass, alternating two-row checker colors on actual side panels, roof-sign dark inset/cream border/top and substantial yellow hood/trunk. All glazing opaque on actual body skin; static sign has no text.",
+  "rays": [
+    {
+      "id": "left-front-door-glass",
+      "origin": [-0.38, -3, 1.22],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-rear-door-glass",
+      "origin": [0.4, -3, 1.22],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-checker--0.65-0.74-cream",
+      "origin": [-0.65, -3, 0.74],
+      "direction": [0, 1, 0],
+      "roles": ["cream"]
+    },
+    {
+      "id": "left-checker--0.5-0.74-checkerBlack",
+      "origin": [-0.5, -3, 0.74],
+      "direction": [0, 1, 0],
+      "roles": ["checkerBlack"]
+    },
+    {
+      "id": "left-checker--0.65-0.9-checkerBlack",
+      "origin": [-0.65, -3, 0.9],
+      "direction": [0, 1, 0],
+      "roles": ["checkerBlack"]
+    },
+    {
+      "id": "left-checker--0.5-0.9-cream",
+      "origin": [-0.5, -3, 0.9],
+      "direction": [0, 1, 0],
+      "roles": ["cream"]
+    },
+    {
+      "id": "right-front-door-glass",
+      "origin": [-0.38, 3, 1.22],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-rear-door-glass",
+      "origin": [0.4, 3, 1.22],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-checker--0.65-0.74-cream",
+      "origin": [-0.65, 3, 0.74],
+      "direction": [0, -1, 0],
+      "roles": ["cream"]
+    },
+    {
+      "id": "right-checker--0.5-0.74-checkerBlack",
+      "origin": [-0.5, 3, 0.74],
+      "direction": [0, -1, 0],
+      "roles": ["checkerBlack"]
+    },
+    {
+      "id": "right-checker--0.65-0.9-checkerBlack",
+      "origin": [-0.65, 3, 0.9],
+      "direction": [0, -1, 0],
+      "roles": ["checkerBlack"]
+    },
+    {
+      "id": "right-checker--0.5-0.9-cream",
+      "origin": [-0.5, 3, 0.9],
+      "direction": [0, -1, 0],
+      "roles": ["cream"]
+    },
+    {
+      "id": "front-swept-windshield",
+      "origin": [-3, 0, 1.26],
+      "direction": [1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "rear-swept-window",
+      "origin": [3, 0, 1.24],
+      "direction": [-1, 0, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "roof-sign-dark-actual-UV-inset",
+      "origin": [-3, 0, 1.575],
+      "direction": [1, 0, 0],
+      "roles": ["checkerBlack"]
+    },
+    {
+      "id": "roof-sign-cream-UV-border",
+      "origin": [-3, 0.31, 1.575],
+      "direction": [1, 0, 0],
+      "roles": ["cream"]
+    },
+    {
+      "id": "roof-sign-static-top",
+      "origin": [-0.02, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["cream"]
+    },
+    {
+      "id": "substantial-yellow-hood",
+      "origin": [-1.55, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    },
+    {
+      "id": "substantial-yellow-trunk",
+      "origin": [1.6, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    }
+  ]
+}

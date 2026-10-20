@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "rally-hatchback",
+  "name": "Rally hatchback",
+  "tags": ["vehicle", "original", "rally hatchback"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/rally-hatchback-v1/review-manifest.json",
+    "sha256": "33d8a45e436f46a6744021e984674184dfd8b29b03dd3e1621174746fcace432",
+    "candidateId": "rally-hatchback-v1",
+    "model": "public/demos/original-vehicles/rally-hatchback-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/rally-hatchback-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/rally-hatchback-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/rally-hatchback-v1/captures",
+    "modelSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+    "triangles": 2900,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/rally-hatchback/v1/evidence/replay-verification.json",
+    "sha256": "b506cdd5e232d07144ad989b5a48bb602bd16a44ae200f1ecefde7348271065d",
+    "build": "art-source/vehicle-bake/rally-hatchback/v1/build.py",
+    "family": "art-source/vehicle-bake/rally-hatchback/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "rally-hatchback-authored-v1",
+    "path": "assets/models/vehicles/rally-hatchback-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/rally-hatchback-v1.png",
+  "performance": {
+    "speed": 140,
+    "acceleration": 260,
+    "pushSpeed": 44,
+    "pushWeight": 125
+  },
+  "receipt": "art-source/vehicle-bake/runtime-rally-hatchback-v1.json",
+  "expectedBounds": [74, 35, 29]
+}

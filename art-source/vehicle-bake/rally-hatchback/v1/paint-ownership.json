@@ -1,0 +1,311 @@
+{
+  "method": "Original short boxy rally hatchback contour loft: short hood, upright low cabin, two side doors with rear quarter panes and a sloping hatch. Actual skin UV charts own continuous framed blue glazing, broad white/red/black team blocks and trim. Fixed roof scoop/spoiler and four static auxiliary lenses, no equipment animation or beacon tags; no glass overlays or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "treadMark": [
+      98,
+      101,
+      115
+    ],
+    "paintDeep": [
+      156,
+      160,
+      170
+    ],
+    "paintShadow": [
+      178,
+      183,
+      190
+    ],
+    "paintMid": [
+      211,
+      214,
+      214
+    ],
+    "paint": [
+      238,
+      237,
+      231
+    ],
+    "paintLight": [
+      255,
+      252,
+      241
+    ],
+    "roof": [
+      248,
+      247,
+      239
+    ],
+    "cream": [
+      255,
+      233,
+      187
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "red": [
+      202,
+      61,
+      80
+    ],
+    "redLight": [
+      232,
+      101,
+      106
+    ],
+    "redShadow": [
+      155,
+      49,
+      76
+    ],
+    "teamBlack": [
+      46,
+      48,
+      65
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ]
+  },
+  "ownership": "Own short boxy hatchback skin: front and hatch glass charts, main side panes and rear quarter panes, broad diagonal team blocks, white roof and red hood stripe all belong to actual surface triangles. One closed ordered contour per station, no coincident body/glass overlays. Scoop, spoiler and four auxiliary lenses are fixed named geometry with role-owned UVs.",
+  "semanticOwners": {
+    "hatchSide": {
+      "component": "Own short boxy rally hatchback hood cabin sloping hatch skin",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        192
+      ],
+      "meaning": "Door panes, rear quarter panes, dark frames, two side doors/seams/handles, broad red and black team blocks on white actual skin"
+    },
+    "endCaps": {
+      "atlasPixelRect": [
+        0,
+        192,
+        512,
+        272
+      ],
+      "meaning": "Front grille/main headlamps and rear red lamps; no glazing duplication"
+    },
+    "windshieldHatchGlass": {
+      "atlasPixelRect": [
+        0,
+        272,
+        512,
+        384
+      ],
+      "meaning": "Left half front windshield; right half sloping hatch window, actual skin UVs with continuous dark frames"
+    },
+    "roof": {
+      "atlasPixelRect": [
+        0,
+        384,
+        512,
+        448
+      ],
+      "meaning": "Broad white roof and center red stripe, fixed scoop seated into roof"
+    },
+    "hood": {
+      "atlasPixelRect": [
+        0,
+        448,
+        512,
+        480
+      ],
+      "meaning": "Short hood with broad red/black team stripes, no small logos/text"
+    },
+    "equipmentAndTrim": {
+      "roles": [
+        "teamBlack",
+        "rim",
+        "cream",
+        "paint",
+        "paintLight",
+        "red"
+      ],
+      "meaning": "Four ordinary static auxiliary lenses, fixed scoop and spoiler, mirrors, bumpers. No beacon/effect tags or flashing/animated equipment."
+    },
+    "wheels": {
+      "roles": [
+        "tire",
+        "tireLight",
+        "treadMark",
+        "rim",
+        "silver",
+        "white"
+      ],
+      "meaning": "Chunky independent wheel meshes; five circumferential tread marks painted per wheel, no geometry tread blocks or body texels"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "treadMark": [
+      112,
+      488
+    ],
+    "paintDeep": [
+      144,
+      488
+    ],
+    "paintShadow": [
+      176,
+      488
+    ],
+    "paintMid": [
+      208,
+      488
+    ],
+    "paint": [
+      240,
+      488
+    ],
+    "paintLight": [
+      272,
+      488
+    ],
+    "roof": [
+      304,
+      488
+    ],
+    "cream": [
+      336,
+      488
+    ],
+    "glassDark": [
+      368,
+      488
+    ],
+    "glass": [
+      400,
+      488
+    ],
+    "glassLight": [
+      432,
+      488
+    ],
+    "glassGlint": [
+      464,
+      488
+    ],
+    "rim": [
+      496,
+      488
+    ],
+    "silver": [
+      16,
+      504
+    ],
+    "white": [
+      48,
+      504
+    ],
+    "ruby": [
+      80,
+      504
+    ],
+    "amber": [
+      112,
+      504
+    ],
+    "red": [
+      144,
+      504
+    ],
+    "redLight": [
+      176,
+      504
+    ],
+    "redShadow": [
+      208,
+      504
+    ],
+    "teamBlack": [
+      240,
+      504
+    ],
+    "rubyLight": [
+      272,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric short hatchback with main side-door and quarter panes, swept front windshield, sloping rear glass and broad abstract team livery. No text or logos.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

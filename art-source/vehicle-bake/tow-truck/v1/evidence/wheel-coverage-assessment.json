@@ -1,0 +1,63 @@
+{
+  "status": "meets-declared-finite-region",
+  "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+  "allFourCrownsCovered": true,
+  "allWheelCoverage": "natural front nose/rear flat-platform-body fenders over declared central crown region",
+  "wheels": [
+    {
+      "wheel": "Wheel_FL_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_FR_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_RL_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_RR_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    }
+  ],
+  "controls": {
+    "bodyRemovalCoveredCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "syntheticBroadPanelPositiveCounts": [
+      25,
+      25,
+      25,
+      25
+    ],
+    "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "positiveAndNegativeControlsPassed": true,
+    "fixtureIsNotCandidateGeometry": true,
+    "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+  },
+  "bodyRemovalInformativeAgainstBaseline": true,
+  "maximumRayDistanceR": 1.2,
+  "roofAndRecoveryFrameCannotQualify": true,
+  "regionMeaning": "Finite central tread footprint from each own .49source radius and .34source width. Ray limited to1.2R above sampled tread, excluding high cream roof and orange recovery frame. Actual integrated front coachwork and flat rear platform wheelhouses own covered crowns, no separate fake caps.",
+  "portableRawEvidence": "art-source/vehicle-bake/tow-truck/v1/evidence/upper-wheel-coverage-raw.json",
+  "portableRawSha256": "3d49a665d116e4ffd32ccfd83ebcefd3648d113c06b66a0ffbca7ee6322cc465",
+  "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+}

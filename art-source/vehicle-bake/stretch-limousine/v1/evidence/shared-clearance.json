@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "stretch-limousine--v1",
+    "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+    "triangles": 2956,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.1529550952525023,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.1529550952525023,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.1529549166513124,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.6086964898868965,
+        "minimumGap": 1.1529549166513124,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

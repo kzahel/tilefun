@@ -1,0 +1,81 @@
+{
+  "status": "meets-declared-finite-region",
+  "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+  "allSixCrownsCovered": true,
+  "allWheelCoverage": "natural front fenders and rear lower middle/last wheelhouse body over declared central crown region",
+  "wheels": [
+    {
+      "wheel": "Wheel_FL_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_FR_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_ML_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_MR_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_RL_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    },
+    {
+      "wheel": "Wheel_RR_Roll",
+      "coveredCount": 25,
+      "sampleCount": 25,
+      "declaredExpectationMet": true
+    }
+  ],
+  "controls": {
+    "bodyRemovalCoveredCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "bodyRemovalInformativeAgainstBaseline": true,
+    "syntheticBroadPanelPositiveCounts": [
+      25,
+      25,
+      25,
+      25,
+      25,
+      25
+    ],
+    "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "positiveAndNegativeControlsPassed": true,
+    "fixtureIsNotCandidateGeometry": true,
+    "meaning": "Controls exercise only ray/support bookkeeping. They deliberately do not approve the canopy silhouette."
+  },
+  "bodyRemovalInformativeAgainstBaseline": true,
+  "maximumRayDistanceR": 1.25,
+  "upperDrumCannotQualify": true,
+  "regionMeaning": "Finite central tread footprint from each of six own .50source radius and .36source width wheels. Ray limited to1.25R above sampled tread, excluding raised drum. Actual natural front fenders and continuous lower middle/last wheelhouse body cover the crowns, no separate caps.",
+  "portableRawEvidence": "art-source/vehicle-bake/cement-mixer/v1/evidence/upper-wheel-coverage-raw.json",
+  "portableRawSha256": "c0e72a2be904468c83a835e11a3aabe82e06fec3aeb4037d7a4d75de0afaa551",
+  "limitations": "Finite geometry samples plus all32 native camera and wheel-ID inspection. Does not qualify steering, suspension or continuous coverage outside declared sampled region; whole-body full neutral roll separately mandatory."
+}

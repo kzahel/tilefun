@@ -1,0 +1,568 @@
+{
+  "family": "tiny-bubble-microcar",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    3.22,
+    1.75,
+    1.72
+  ],
+  "wheelRadius": 0.29,
+  "wheelWidth": 0.18,
+  "axles": [
+    -0.88,
+    0.86
+  ],
+  "halfTrack": 0.66,
+  "arch": {
+    "cutRadius": 0.365,
+    "pocketInnerY": 0.49,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 14,
+    "lateralStations": [
+      0.46,
+      0.56,
+      0.69,
+      0.81,
+      0.875
+    ],
+    "shoulderRadii": [
+      0.385,
+      0.43,
+      0.43,
+      0.415,
+      0.395
+    ],
+    "archRadius": 0.35
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      145,
+      76,
+      101
+    ],
+    "paintShadow": [
+      173,
+      91,
+      112
+    ],
+    "paintMid": [
+      198,
+      111,
+      128
+    ],
+    "paint": [
+      222,
+      139,
+      147
+    ],
+    "paintLight": [
+      242,
+      187,
+      183
+    ],
+    "cream": [
+      255,
+      233,
+      187
+    ],
+    "roof": [
+      255,
+      220,
+      207
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original short egg/bubble coachwork with its own rounded cross section, tiny axles and local wheel pockets. Continuous longitudinal/angular skin UV owns curved panoramic front and one side pane each with dark frames; pale upper paint over dusty coral rose. No glass overlays, projection or high-to-low transfer claim.",
+  "eggStations": [
+    [
+      -1.52,
+      0.38,
+      0.95
+    ],
+    [
+      -1.47,
+      0.59,
+      1.19
+    ],
+    [
+      -1.34,
+      0.72,
+      1.43
+    ],
+    [
+      -1.1,
+      0.8,
+      1.59
+    ],
+    [
+      -0.75,
+      0.85,
+      1.68
+    ],
+    [
+      -0.3,
+      0.855,
+      1.72
+    ],
+    [
+      0.25,
+      0.84,
+      1.69
+    ],
+    [
+      0.7,
+      0.79,
+      1.58
+    ],
+    [
+      1.05,
+      0.69,
+      1.39
+    ],
+    [
+      1.33,
+      0.54,
+      1.08
+    ],
+    [
+      1.47,
+      0.34,
+      0.79
+    ],
+    [
+      1.5,
+      0.12,
+      0.65
+    ]
+  ],
+  "upperBaseZ": 0.52,
+  "lowerFloorZ": 0.19,
+  "crossSectionSegments": 20,
+  "components": [
+    {
+      "name": "Own tiny egg bubble continuous upper skin and tapered lower shell",
+      "group": "body",
+      "triangles": 784,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Integrated tiny bubble wheel shoulder -0.88 -1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated tiny bubble wheel shoulder -0.88 1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated tiny bubble wheel shoulder 0.86 -1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated tiny bubble wheel shoulder 0.86 1",
+      "group": "body",
+      "triangles": 140,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Tiny restrained chrome bumper -1.57",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Tiny restrained chrome bumper 1.55",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Ordinary round headlamp rim -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Ordinary cream round headlamp -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Tiny rear ruby lamp -1",
+      "group": "body",
+      "triangles": 22,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Quiet side door handle -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Ordinary round headlamp rim 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Ordinary cream round headlamp 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Tiny rear ruby lamp 1",
+      "group": "body",
+      "triangles": 22,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Quiet side door handle 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -0.8799999952316284,
+        -0.6600000262260437,
+        0.28999999165534973
+      ],
+      "centerExport": [
+        -15.304347743158758,
+        5.043478115745214,
+        11.478261325670326
+      ],
+      "radiusBlender": 0.29,
+      "wheel_radius": 5.043478260869565
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -0.8799999952316284,
+        0.6600000262260437,
+        0.28999999165534973
+      ],
+      "centerExport": [
+        -15.304347743158758,
+        5.043478115745214,
+        -11.478261325670326
+      ],
+      "radiusBlender": 0.29,
+      "wheel_radius": 5.043478260869565
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        0.8600000143051147,
+        -0.6600000262260437,
+        0.28999999165534973
+      ],
+      "centerExport": [
+        14.95652198791504,
+        5.043478115745214,
+        11.478261325670326
+      ],
+      "radiusBlender": 0.29,
+      "wheel_radius": 5.043478260869565
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        0.8600000143051147,
+        0.6600000262260437,
+        0.28999999165534973
+      ],
+      "centerExport": [
+        14.95652198791504,
+        5.043478115745214,
+        -11.478261325670326
+      ],
+      "radiusBlender": 0.29,
+      "wheel_radius": 5.043478260869565
+    }
+  ],
+  "method": "Original short egg/bubble coachwork with its own rounded cross section, tiny axles and local wheel pockets. Continuous longitudinal/angular skin UV owns curved panoramic front and one side pane each with dark frames; pale upper paint over dusty coral rose. No glass overlays, projection or high-to-low transfer claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/microcar/build.py",
+    "scripts/vehicle-bake/microcar/family.json",
+    "scripts/vehicle-bake/microcar/coverage-region.json",
+    "scripts/vehicle-bake/microcar/surface-regions.json",
+    "scripts/vehicle-bake/microcar/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

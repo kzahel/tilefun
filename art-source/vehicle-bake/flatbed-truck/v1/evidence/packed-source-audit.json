@@ -1,0 +1,398 @@
+{
+  "status": "passed",
+  "results": {
+    "master.blend": {
+      "sha256": "bd751caebacb5f87004beabadfd1d0e82f1ab067f03f07166006086260866cb1",
+      "meshObjects": 43,
+      "triangles": 2534,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "5adb1ece29d05b568e43c00e0a9fb862f1ba5141733ff6b06b0e64b4c5df9e82",
+      "meshObjects": 5,
+      "triangles": 2534,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+      "minBlenderWorld": [
+        -54.78260803222656,
+        -20.913042068481445,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        55.04347610473633,
+        20.913042068481445,
+        41.93043518066406
+      ],
+      "dimensionsBlenderWorld": [
+        109.82608413696289,
+        41.82608413696289,
+        41.930434226989746
+      ],
+      "dimensionsSourceUnits": [
+        6.314999837875365,
+        2.4049998378753656,
+        2.41099996805191
+      ]
+    },
+    "actualGLBSemanticSurfaces": {
+      "status": "passed",
+      "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+      "rayCount": 13,
+      "samples": [
+        {
+          "id": "cab-glass-left",
+          "hitSource": [
+            -2.000000238418579,
+            -1.0471991300582886,
+            1.7500001192092896
+          ],
+          "triangle": 841,
+          "interpolatedUV": [
+            0.4999999403953552,
+            0.7752975225448608
+          ],
+          "atlasPixel": [
+            255,
+            115
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "cab-glass-right",
+          "hitSource": [
+            -2.000000238418579,
+            1.047199010848999,
+            1.7500001192092896
+          ],
+          "triangle": 56,
+          "interpolatedUV": [
+            0.49999991059303284,
+            0.7752975225448608
+          ],
+          "atlasPixel": [
+            255,
+            115
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "windshield",
+          "hitSource": [
+            -2.9649529457092285,
+            0.0,
+            1.7500001192092896
+          ],
+          "triangle": 796,
+          "interpolatedUV": [
+            0.5,
+            0.39786258339881897
+          ],
+          "atlasPixel": [
+            256,
+            308
+          ],
+          "rgb": [
+            164,
+            187,
+            213
+          ],
+          "roles": [
+            "glassLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "cab-rear-window",
+          "hitSource": [
+            -0.9100000262260437,
+            0.0,
+            1.7500001192092896
+          ],
+          "triangle": 91,
+          "interpolatedUV": [
+            0.75,
+            0.5541125535964966
+          ],
+          "atlasPixel": [
+            384,
+            228
+          ],
+          "rgb": [
+            115,
+            140,
+            168
+          ],
+          "roles": [
+            "glass"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "orange-roof",
+          "hitSource": [
+            -1.600000023841858,
+            0.0,
+            2.4110000133514404
+          ],
+          "triangle": 845,
+          "interpolatedUV": [
+            0.6600000262260437,
+            0.125
+          ],
+          "atlasPixel": [
+            337,
+            448
+          ],
+          "rgb": [
+            250,
+            153,
+            69
+          ],
+          "roles": [
+            "paintLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "deck-panel-light",
+          "hitSource": [
+            1.0000001192092896,
+            0.800000011920929,
+            1.239999771118164
+          ],
+          "triangle": 141,
+          "interpolatedUV": [
+            0.46987950801849365,
+            0.1875000149011612
+          ],
+          "atlasPixel": [
+            240,
+            415
+          ],
+          "rgb": [
+            184,
+            188,
+            195
+          ],
+          "roles": [
+            "deckLight"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "deck-panel-seam",
+          "hitSource": [
+            1.0000001192092896,
+            0.0,
+            1.239999771118164
+          ],
+          "triangle": 993,
+          "interpolatedUV": [
+            0.4698795974254608,
+            0.25
+          ],
+          "atlasPixel": [
+            240,
+            384
+          ],
+          "rgb": [
+            98,
+            107,
+            119
+          ],
+          "roles": [
+            "deckSeam"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "deck-thin-side-edge",
+          "hitSource": [
+            0.4000000059604645,
+            -1.1000001430511475,
+            1.1850000619888306
+          ],
+          "triangle": 992,
+          "interpolatedUV": [
+            0.3416077792644501,
+            0.01669609174132347
+          ],
+          "atlasPixel": [
+            174,
+            503
+          ],
+          "rgb": [
+            124,
+            135,
+            145
+          ],
+          "roles": [
+            "deckEdge"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "dark-frame",
+          "hitSource": [
+            0.30000004172325134,
+            -0.5600000023841858,
+            0.6800000071525574
+          ],
+          "triangle": 1008,
+          "interpolatedUV": [
+            0.4681496322154999,
+            0.015324827283620834
+          ],
+          "atlasPixel": [
+            239,
+            504
+          ],
+          "rgb": [
+            63,
+            69,
+            79
+          ],
+          "roles": [
+            "frame"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "front-arch-orange",
+          "hitSource": [
+            -2.1500000953674316,
+            -1.0800001621246338,
+            1.1511110067367554
+          ],
+          "triangle": 1161,
+          "interpolatedUV": [
+            0.4010416269302368,
+            0.04361980780959129
+          ],
+          "atlasPixel": [
+            205,
+            489
+          ],
+          "rgb": [
+            229,
+            118,
+            55
+          ],
+          "roles": [
+            "paint"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "rear-guard-gray",
+          "hitSource": [
+            2.0199999809265137,
+            -1.1500000953674316,
+            1.1299998760223389
+          ],
+          "triangle": 1337,
+          "interpolatedUV": [
+            0.4003905951976776,
+            0.012695339508354664
+          ],
+          "atlasPixel": [
+            204,
+            505
+          ],
+          "rgb": [
+            98,
+            107,
+            119
+          ],
+          "roles": [
+            "deckSeam"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "rear-hazard",
+          "hitSource": [
+            3.1649999618530273,
+            0.800000011920929,
+            0.7300000786781311
+          ],
+          "triangle": 681,
+          "interpolatedUV": [
+            0.8333333730697632,
+            0.0794270858168602
+          ],
+          "atlasPixel": [
+            426,
+            471
+          ],
+          "rgb": [
+            58,
+            58,
+            80
+          ],
+          "roles": [
+            "ink"
+          ],
+          "owner": "Body_static"
+        },
+        {
+          "id": "gray-front-bumper",
+          "hitSource": [
+            -3.1500000953674316,
+            0.0,
+            0.43000003695487976
+          ],
+          "triangle": 1455,
+          "interpolatedUV": [
+            0.28125,
+            0.015624996274709702
+          ],
+          "atlasPixel": [
+            144,
+            504
+          ],
+          "rgb": [
+            184,
+            188,
+            195
+          ],
+          "roles": [
+            "deckLight"
+          ],
+          "owner": "Body_static"
+        }
+      ],
+      "regionConfig": "scripts/vehicle-bake/flatbed-truck/surface-regions.json",
+      "meaning": "Actual cab glass/paint, flat deck top/seams/thin edge, dark underframe, arch guard and bumper hazard triangle UV owners",
+      "inputBytesUnchanged": true
+    }
+  }
+}

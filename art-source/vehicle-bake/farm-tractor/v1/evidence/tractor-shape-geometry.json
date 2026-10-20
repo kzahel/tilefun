@@ -1,0 +1,133 @@
+{
+  "status": "passed",
+  "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+  "inputBytesUnchanged": true,
+  "actualGeometry": {
+    "narrowHoodTop": {
+      "point": [
+        -1.100000023841858,
+        0.0,
+        1.4299999475479126
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "triangle": 719
+    },
+    "hoodSides": [
+      {
+        "point": [
+          -1.0000001192092896,
+          -0.4299999475479126,
+          1.2000001668930054
+        ],
+        "normal": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "triangle": 718
+      },
+      {
+        "point": [
+          -1.0000001192092896,
+          0.4300000071525574,
+          1.2000001668930054
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "triangle": 720
+      }
+    ],
+    "cabFront": {
+      "point": [
+        -0.039999932050704956,
+        0.0,
+        1.9500000476837158
+      ],
+      "normal": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "triangle": 699
+    },
+    "canopyTop": {
+      "point": [
+        0.5000000596046448,
+        0.0,
+        2.619999885559082
+      ],
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "triangle": 737
+    },
+    "rearCrownSurfaces": [
+      {
+        "point": [
+          1.0000001192092896,
+          -0.8300000429153442,
+          1.600000023841858
+        ],
+        "normal": [
+          0.07767549157142639,
+          -0.14099396765232086,
+          0.9869585633277893
+        ],
+        "triangle": 1139
+      },
+      {
+        "point": [
+          1.0000001192092896,
+          0.8300000429153442,
+          1.600000023841858
+        ],
+        "normal": [
+          0.07767549157142639,
+          0.14099396765232086,
+          0.9869585633277893
+        ],
+        "triangle": 634
+      }
+    ],
+    "fixedRearDrawbar": {
+      "point": [
+        1.9500000476837158,
+        0.0,
+        0.4400000274181366
+      ],
+      "normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "triangle": 1045
+    }
+  },
+  "controls": {
+    "lowCabAndCanopy": {
+      "rejected": true,
+      "baselineRestored": true,
+      "changedVertices": 200
+    },
+    "tooWideHood": {
+      "rejected": true,
+      "baselineRestored": true,
+      "changedVertices": 140
+    },
+    "displacedFixedHitch": {
+      "rejected": true,
+      "baselineRestored": true,
+      "changedVertices": 216
+    }
+  },
+  "meaning": "Real exported triangles prove long narrow hood, tall cab/canopy, rear rounded fenders and fixed drawbar. No farm-tool attachment physics, steering-pose, suspension or animated equipment claim."
+}

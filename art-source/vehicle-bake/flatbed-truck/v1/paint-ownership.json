@@ -1,0 +1,288 @@
+{
+  "method": "Own short orange work cab with coherent blue framed skin glass; long truly empty thin gray flat platform with few broad panel seams, separate gray edges and dark underframe, orange front/gray rear integrated arch guards, gray bumpers and small rear hazard blocks. No cargo/towing/recessed-bed or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      139,
+      71,
+      48
+    ],
+    "paintShadow": [
+      176,
+      85,
+      44
+    ],
+    "paintMid": [
+      208,
+      104,
+      48
+    ],
+    "paint": [
+      229,
+      118,
+      55
+    ],
+    "paintLight": [
+      250,
+      153,
+      69
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "deck": [
+      163,
+      168,
+      176
+    ],
+    "deckLight": [
+      184,
+      188,
+      195
+    ],
+    "deckEdge": [
+      124,
+      135,
+      145
+    ],
+    "deckSeam": [
+      98,
+      107,
+      119
+    ],
+    "frame": [
+      63,
+      69,
+      79
+    ]
+  },
+  "semanticOwners": {
+    "orangeCabSides": {
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        176
+      ],
+      "meaning": "Actual short closed cab skin, coherent blue glass, dark frame and door seam; no overlay"
+    },
+    "cabFrontAndRear": {
+      "atlasPixelRect": [
+        0,
+        176,
+        512,
+        256
+      ]
+    },
+    "cabWindshield": {
+      "atlasPixelRect": [
+        0,
+        256,
+        512,
+        336
+      ]
+    },
+    "flatPlatformTop": {
+      "component": "Actual exposed thin flat platform",
+      "atlasPixelRect": [
+        0,
+        336,
+        512,
+        432
+      ],
+      "meaning": "Real flat top with three broad longitudinal panel seams; no recessed bed, cargo or invented depth"
+    },
+    "cabRoof": {
+      "atlasPixelRect": [
+        0,
+        432,
+        512,
+        464
+      ]
+    },
+    "rearBumperHazards": {
+      "atlasPixelRect": [
+        0,
+        464,
+        512,
+        480
+      ]
+    },
+    "thinDeckEdges": {
+      "meaning": "Actual platform vertical/beveled edges have separate padded gray ownership"
+    },
+    "underframeAndGuards": {
+      "meaning": "Two dark longitudinal rails, fixed crossmembers/supports and four rounded open guards; front orange, rear gray"
+    },
+    "wheels": {
+      "meaning": "Four independent tire/rim/hub surfaces; no guard paint on tire surfaces"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "rubyLight": [
+      80,
+      504
+    ],
+    "deck": [
+      112,
+      504
+    ],
+    "deckLight": [
+      144,
+      504
+    ],
+    "deckEdge": [
+      176,
+      504
+    ],
+    "deckSeam": [
+      208,
+      504
+    ],
+    "frame": [
+      240,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Original authored semantic UVs including unseen surfaces; no projected source or high-to-low transfer claim.",
+  "outerInk": "Shared exterior pass RGB58,58,80; no geometry outline shell."
+}
