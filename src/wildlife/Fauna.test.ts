@@ -419,10 +419,18 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
             s.realm.entityManager.spawn(
               createAnimal(s.player.player.position.wx + 100, s.player.player.position.wy),
             );
-        s.realm.entityManager.remove(removed.id);
-        const manual = s.realm.entityManager.spawn(
-          createAnimal(s.player.player.position.wx + 50, s.player.player.position.wy),
-        );
+        s.realm.handleMessage(s.player.clientId, s.player, {
+          type: "edit-delete-entity",
+          entityId: removed.id,
+        });
+        const known = new Set(animal().map((e) => e.id));
+        s.realm.handleMessage(s.player.clientId, s.player, {
+          type: "edit-spawn",
+          entityType: TYPE,
+          wx: s.player.player.position.wx + 50,
+          wy: s.player.player.position.wy,
+        });
+        const manual = required(animal().find((e) => !known.has(e.id)));
         const saved = encodeActor(retained),
           manualId = manual.persistentId;
         await s.reload();

@@ -53,3 +53,9 @@ fixture with browser representatives. Retained eight land pause/reload cases, fo
 lagoon cases and three actual editor/IndexedDB cases (15/15 browsers), replacing
 144 old cases. Native aquatic parity observes the hunter/fish contract; unrelated
 land wildlife can legitimately appear when new chunks become ready on reopening.
+
+Fauna: strengthened existing land/water lifecycle owners to exercise editor commands
+and exact deleted/manual identities through reload. The four existing exhaustive
+suites pass 1,955 cases. Six distinct presentation/editor representatives plus
+scene switching pass 20 browser cases, replacing 461; every species still has
+real decoded animation pixel coverage in Animal Browser.

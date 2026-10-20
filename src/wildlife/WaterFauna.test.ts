@@ -172,6 +172,26 @@ describe.each(FAUNA_PROFILES.filter((p) => ["pond", "shore", "deep"].includes(p.
           expect(restored.fauna).toEqual(a.fauna);
           expect(restored.sprite?.frameCol).toBe(a.frame);
         }
+        // Exercise the editor command path as well as generated persistence for
+        // every pond/shore/deep-water profile. Reuse this production fixture.
+        const removed = required(animals()[0]);
+        const removedId = removed.persistentId;
+        s.realm.handleMessage(s.player.clientId, s.player, {
+          type: "edit-delete-entity",
+          entityId: removed.id,
+        });
+        const known = new Set(animals().map((e) => e.id));
+        s.realm.handleMessage(s.player.clientId, s.player, {
+          type: "edit-spawn",
+          entityType: removed.type,
+          wx: removed.position.wx,
+          wy: removed.position.wy,
+        });
+        const manual = required(animals().find((e) => !known.has(e.id)));
+        expect(manual.proceduralId).toBeUndefined();
+        await s.reload();
+        expect(animals().some((e) => e.persistentId === removedId)).toBe(false);
+        expect(animals().some((e) => e.persistentId === manual.persistentId)).toBe(true);
       } finally {
         await s.close();
       }

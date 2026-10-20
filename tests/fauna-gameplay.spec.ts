@@ -5,7 +5,12 @@ import { FAUNA_PROFILES, faunaType } from "../src/wildlife/Fauna.js";
 
 test.use({ channel: "chromium" });
 test.describe.configure({ mode: "parallel" });
-for (const profile of FAUNA_PROFILES) {
+// Exhaustive species semantics, command persistence and residency live in
+// Fauna/WaterFauna/FaunaBodies/MallardResidency. These fixtures cover distinct
+// browser boundaries: dry walk, ride, hop, pond, shore gait and deep visibility.
+// animal-browser.spec still decodes and animates every roster asset in four views.
+const browserSpecies = new Set(["fox", "horse", "kangaroo", "fish", "penguin", "manta-ray"]);
+for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species))) {
   const TYPE = faunaType(profile.species);
   const [arrivalX, arrivalY] = profile.inspection;
   for (const renderer of ["canvas", "gpu"]) {
