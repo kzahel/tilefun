@@ -1,0 +1,9 @@
+{
+  "files": [
+    "art-source/wildlife-v2/dog/behavior-v1/inputs/base-masters.json",
+    "art-source/wildlife-v2/dog/behavior-v1/inputs/base.blend",
+    "art-source/wildlife-v2/dog/behavior-v1/inputs/template-build.py",
+    "art-source/wildlife-v2/dog/behavior-v1/inputs/template-finish.py",
+    "art-source/wildlife-v2/dog/behavior-v1/camera.json"
+  ]
+}

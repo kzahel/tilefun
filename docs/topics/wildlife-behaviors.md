@@ -1,0 +1,158 @@
+# Distinct animal behaviors and interactions
+
+Topic: wildlife-behaviors
+Status: 206-entry ledger; first batch implements dog fetch, crow nests and squirrel
+food caches. Shared game/lab automation passes; human review remains pending.
+Updated: 2026-10-20.
+
+Owner wants every animal to have recognizable behavior, with suitable animation
+where needed, starting with land and air animals. The completed 196-entry art
+roster is the starting inventory, not a completed behavior campaign. Additional
+game-active animals and fantasy creatures must also appear in the scope audit.
+The [wildlife topic](wildlife.md) owns existing art/ecology contracts; this topic
+owns the proposed behavior campaign, completion criteria and delivery sequence.
+
+## What counts
+
+Each animal needs a signature mechanic: an observable trigger, a decision or
+action, and a meaningful outcome. New colors, idle clips, speeds or diet settings
+alone do not constitute a new behavior. Shared engine systems are encouraged;
+recognizable differences should come from actual choices and interactions rather
+than duplicating simulation code per species. Closely related animals may share
+a foundation while differing in a documented, observable way.
+
+The first batch implements squirrel food caching/retrieval, dog ball fetching and
+crow material carrying/nesting. Later proposals include meerkat lookout alarms
+and apes climbing to food; those remain unimplemented plans.
+Owner also requested appropriate birds making visible nests and visible foraging,
+including fruit. Resource seeking, taking, carrying, eating and nest construction
+must have observable outcomes rather than disconnected action loops. Nesting does
+not automatically add breeding. Required resources, habitat geometry and player
+affordances belong in each plan.
+
+Coat variants and upright companions must be explicitly accounted for. A variant
+may inherit its base behavior, but inheritance is not counted as another unique
+mechanic. If distinct variant behavior is required, record an observable override.
+Report animal coverage separately from the number of distinct mechanics.
+
+## One source of progress
+
+The tracked [behavior ledger](../../art-source/wildlife-v2/behavior-campaign.json)
+is the canonical per-animal audit and plan. It contains all 206 current browser
+entries: all 196 original roster entries plus four pet variants, panther and five
+fantasy creatures. Mallard and brown-bear runtime IDs explicitly map to the
+original mallard-duck and bear roster IDs. Preserve completed art ledgers as history.
+
+The [generated progress report](../wildlife-behavior-status.md) derives its counts
+and animal table from this ledger. The same generator writes compact Animal
+Browser progress data. Filter **Behavior progress → Demonstrations** and select
+**Demonstrate behavior** to open a shared authority scene. The other 203 animals
+still need detailed audits and phase assignment. Existing behavior has not been
+removed or declared absent. Verified stages require recorded evidence.
+
+Regenerate with `npx tsx scripts/wildlife/behavior-status.mjs`; append `--check` to
+verify current runtime/roster coverage and report freshness. The tool rejects
+missing identities, invalid states, evidence-free verified stages and unexplained
+not-required exemptions. Its one-time `--seed` option refuses to overwrite a
+ledger, protecting subsequent audits. Update the ledger first, then regenerate.
+
+Each animal entry should contain:
+
+| Field | Purpose |
+| --- | --- |
+| Stable animal ID, runtime IDs, base/variant relationship | Prevent missing animals, duplicate counts and identities inferred from display names |
+| Phase and habitat | Land/air first; aquatic deferred; explicitly assign amphibious animals |
+| Current behavior and gaps | Evidence-backed baseline, including shared systems already used |
+| Signature behavior and acceptance scenario | Trigger, action, outcome and how someone can observe the difference |
+| Interactions and dependencies | Player, other animals, food, objects and required habitat or engine support |
+| Animation requirements | Reuse verified clips, or specify new actions, transitions, body motion and source revisions |
+| Independent progress states | Design, AI, animation, world/lab integration, validation and human review |
+| Evidence and delivery | Tests, deterministic lab case, exact animation review, commit and deployment verification |
+| Next action and impediment | Concrete next step; name a real missing dependency or recorded review request |
+
+Use explicit states per work area: not audited, planned, in progress, verified,
+or not required with a reason. Design can be specified before implementation.
+Animation reuse needs verification; it must not silently mean missing animation.
+Human review remains separate: not requested, pending, needs changes, approved.
+Only actual human feedback may set review outcomes. Changes to an existing
+signature mechanic or its animation reopen affected verification/review states.
+
+The summary should show land/air and later aquatic totals separately, with counts
+for audited, designed, AI implemented, animation ready, game/lab verified and
+human-reviewed animals. Show missing evidence and real dependencies alongside
+those counts. Do not label an animal complete because its plan exists or its
+sprite animates. Do not convert historical art holds into current work blockers.
+
+## Delivery and verification
+
+Work in small batches of roughly three to five related animals. Use a bounded
+[tactical](../tactical/README.md) for each batch; link it from ledger entries.
+Implement a representative end-to-end animal before expanding a new foundation
+such as climbing or burrowing. Completed specialist behavior can be retained
+after an audit against these same requirements; it need not be rewritten.
+
+Behavior-complete requires the signature mechanic to work through shared game
+authority in both natural and manually placed animals. It must survive save,
+reload and residency changes, respect collision and heights, retain food-web
+and companion/player protections, and have appropriate bounded execution cost.
+Multiplayer clients must observe the same authoritative action. Preserve the
+natural-only, delayed distant meal-replacement contract.
+
+Animation-complete requires suitable existing or new clips and transitions,
+connected limbs, body weight/motion, ground contact and no unexplained sliding.
+Changed art uses a new retained source/review identity; old banks stay immutable.
+Follow [art review](art-review.md) and existing wildlife motion instructions.
+Human approval is an independent recorded outcome, not an inferred test result.
+
+Every signature mechanic needs a reproducible lab scenario that exposes its
+trigger and outcome, plus appropriate automated evidence. Animal Browser should
+offer behavior descriptions, behavior/animation/review filters, next-action and
+date sorting, and a direct demonstration link. Scenario controls should trigger
+ordinary gameplay inputs or conditions; they must exercise shared production AI.
+Use the existing embedded engine hosts, not a separate showcase implementation.
+
+## Proposed order
+
+1. Audit all current animal IDs; classify land, air, amphibious and aquatic scope.
+   Specify the first small batch and build the ledger/status/browser views.
+2. Prove ground interactions with a small pet/foraging batch, then expand resource
+   seeking, carrying, caching and distinct social reactions where appropriate.
+3. Improve air animals through real flight/perch/navigation and observable
+   feeding or object interactions. Distinguish flight from looping wing animation.
+4. Add climbing, burrowing and other habitat foundations through single-animal
+   pilots, then related species; schedule independent batches around dependencies.
+5. Deepen land hunters and herd/sentinel behavior, retaining existing specialist
+   mechanics. Continue until every in-scope animal satisfies its recorded plan.
+6. Address aquatic specialties in a later phase. Amphibious animals need explicit
+   land/air-phase boundaries rather than disappearing between the two queues.
+
+These are proposed capability groups, not a requirement to finish one entire
+group before starting another. Prefer complete, demonstrable slices. The initial
+inventory/report and first implementation batch are established. Next step:
+review the dog/crow/squirrel demonstrations, then audit the next small land/air
+batch against these completion rules. Continue classifying the remaining 203
+entries and record proposed mechanics before expanding production.
+
+## First batch contracts
+
+[155](../tactical/155-fetch-nests-and-caches.md) owns the bounded implementation.
+AnimalWork lives on the saved animal; material/site state lives on saved entities.
+Claims use durable identities. Existing binary fields carry clip phase, socket
+parenting and world height; gameplay decisions and resource counts remain server
+authority. Dog coats inherit fetching, without being counted as extra unique
+mechanics or receiving unverified new coat art.
+
+Thrown owned balls remain available for 35 seconds after settling; a bounded
+active fetch extends that timer. Another throw reuses a returned ball within
+reach. Crows consume four real loose twigs to build a nest on an actual oak/palm
+canopy. A removed or moved supporting tree leaves a fallen nest and cancels its
+active task. Squirrels store the exact nut/fruit kinds in a cache, rest, retrieve
+one saved item and consume it once. Resource supplies are finite and can also
+be placed/deleted with the editor. Nesting adds no breeding.
+
+Travel and site selection respect loaded actor readiness, collision, heights and
+the existing planning budget. Alarm, following/riding, owner loss and item/site
+deletion interrupt tasks safely. New `behavior-v1` banks retain native Blender
+sources, projected mouth/paw sockets, independent audits and replay evidence.
+The separate native-pixel material bank supplies five nest and two cache stages.
+All four art identities remain pending human review.

@@ -1,0 +1,13 @@
+{
+  "species": "red-squirrel",
+  "revision": "behavior-v1",
+  "previous": "roster-v2",
+  "columns": 65,
+  "newClips": [
+    "pickup",
+    "dig",
+    "eat"
+  ],
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/155-fetch-nests-and-caches.md"
+}

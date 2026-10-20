@@ -97,8 +97,10 @@ import {
   TrafficSystem,
 } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
+import { AnimalWorkSystem } from "../wildlife/AnimalWorkSystem.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
 import { createFierceDen, denForPredator } from "../wildlife/FierceDens.js";
+import { freshBallWork } from "../wildlife/ForageResources.js";
 import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import type { WildlifeEnvironment } from "../wildlife/mallardAI.js";
@@ -214,6 +216,7 @@ export class Realm {
 
   world: World;
   entityManager: EntityManager;
+  animalWork: AnimalWorkSystem;
   propManager: PropManager;
   treeBrush: TreeBrushEditor;
   worldAPI: WorldAPIImpl;
@@ -363,6 +366,7 @@ export class Realm {
     this.mods = mods;
     this.world = new World();
     this.entityManager = new EntityManager();
+    this.animalWork = new AnimalWorkSystem(this.entityManager);
     this.propManager = new PropManager();
     const trafficRoutes =
       this.options.traffic ??
@@ -1012,7 +1016,34 @@ export class Realm {
         this.propManager.simulationProps = this.streaming
           ? this.propActivity.select(this.propManager, this.streaming)
           : this.propManager.props;
+        const workPlayers = activeSessions.map((session) => ({
+          identity: session.profileId || session.clientId,
+          entity: session.player,
+        }));
         const wildlifeEnvironment: WildlifeEnvironment = {
+          animalWork: (animal, elapsed, planning) =>
+            this.animalWork.update(
+              animal,
+              elapsed,
+              {
+                environment: wildlifeEnvironment,
+                players: workPlayers,
+                ready: (point, radius) => {
+                  const range = {
+                    minCx: Math.floor((point.wx - radius) / 256),
+                    maxCx: Math.floor((point.wx + radius) / 256),
+                    minCy: Math.floor((point.wy - radius) / 256),
+                    maxCy: Math.floor((point.wy + radius) / 256),
+                  };
+                  if (this.streaming) return this.streaming.rangeReady(range);
+                  for (let cy = range.minCy; cy <= range.maxCy; cy++)
+                    for (let cx = range.minCx; cx <= range.maxCx; cx++)
+                      if (!this.world.getChunkIfLoaded(cx, cy)) return false;
+                  return true;
+                },
+              },
+              planning,
+            ),
           ensurePredatorDen: (animal) => {
             const ai = animal.predator,
               spec = denForPredator(animal.type);
@@ -1232,6 +1263,8 @@ export class Realm {
           (tx, ty) => this.world.getHeightAt(tx, ty),
           active,
         );
+
+        this.animalWork.syncAll(active);
 
         for (const entity of entityTickDts.keys()) {
           if (
@@ -1559,13 +1592,23 @@ export class Realm {
         const jitteredSpeed = speed * speedJitter;
         const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
         const zSpeed = jitteredSpeed * Math.sin(THROW_ANGLE);
-        const ball = createBall(player.position.wx, player.position.wy);
+        const reusable = this.entityManager.entities.find(
+          (e) =>
+            e.type === "ball" &&
+            e.workItem?.returned &&
+            e.parentId === undefined &&
+            Math.hypot(e.position.wx - player.position.wx, e.position.wy - player.position.wy) < 36,
+        );
+        const ball = reusable ?? createBall(player.position.wx, player.position.wy);
+        ball.position = { ...player.position };
+        ball.workItem = freshBallWork(session.profileId || session.clientId, player.position);
+        delete ball.deathTimer;
         ball.ballThrowerId = player.id;
         ball.velocity = { vx: Math.cos(baseAngle) * xySpeed, vy: Math.sin(baseAngle) * xySpeed };
         ball.wz = (player.wz ?? 0) + 8; // throw from chest height
         ball.jumpVZ = zSpeed;
         ball.jumpZ = 8;
-        this.entityManager.spawn(ball);
+        if (!reusable) this.entityManager.spawn(ball);
         break;
       }
 
@@ -1748,6 +1791,7 @@ export class Realm {
       this.generator = interiorGenerator(this.interior, descriptorFromMetadata(worldMeta).seed);
     this.world = new World(this.interior ? this.generator.terrain : strategy);
     this.entityManager = new EntityManager();
+    this.animalWork = new AnimalWorkSystem(this.entityManager);
     this.propManager = new PropManager();
     const trafficRoutes =
       this.options.traffic ??

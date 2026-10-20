@@ -6,6 +6,15 @@ Updated: 2026-10-19.
 
 ## Current generation policy
 
+Behavior batch [155](../tactical/155-fetch-nests-and-caches.md) adds finite loose
+twigs/nuts/fruit at existing crow/squirrel homes and ordinary oak nest trees at
+crow clearings. Resource/tree identities derive from existing animal feature IDs;
+ownership pools, animal RNG and existing animal placements retain their ordering.
+Consumed procedural resources use ordinary deletion tombstones. Tree canopies
+are included across chunk boundaries and remain ordinary editable props. Existing
+saved regions can retain their old realization; inspect a fresh world for these
+new natural supplies. No migration or regeneration of promoted art is involved.
+
 The user approved dropping historical playable generator compatibility during active
 development. `CURRENT_REGIONAL_VERSION` in `GenerationDescriptor.ts` is the single
 regional creation/runtime version, currently **regional-v13**. It composes connected dense neighborhoods, gentle road

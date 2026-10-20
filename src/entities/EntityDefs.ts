@@ -5,6 +5,7 @@ import { TRAIN_CARRIAGE_DEFS, TRAIN_DEF, TRAIN_TYPE } from "../railway/Train.js"
 import { VEHICLE_DEFS } from "../traffic/Vehicle.js";
 import { DEER_DEF, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_DEFS } from "../wildlife/Fauna.js";
+import { FORAGE_DEFS } from "../wildlife/ForageResources.js";
 import { FROG_DEF, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_DEF, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_DEFS } from "../wildlife/Predator.js";
@@ -164,6 +165,7 @@ function wormDef(n: number): EntityDef {
 // ---- ENTITY_DEFS registry ----
 
 export const ENTITY_DEFS: Record<string, EntityDef> = {
+  ...FORAGE_DEFS,
   ...CHARACTER_ENTITY_DEFS,
   ...INDOOR_PEOPLE_DEFS,
   ...FAUNA_DEFS,

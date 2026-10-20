@@ -1,0 +1,12 @@
+{
+  "species": "dog",
+  "revision": "behavior-v1",
+  "previous": "motion-v2",
+  "columns": 57,
+  "newClips": [
+    "pickup",
+    "release"
+  ],
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/155-fetch-nests-and-caches.md"
+}

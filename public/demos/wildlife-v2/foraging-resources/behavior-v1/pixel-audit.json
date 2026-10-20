@@ -1,0 +1,7 @@
+{
+  "identity": "foraging-resources-behavior-v1",
+  "poses": 40,
+  "binaryAlpha": true,
+  "originalEditablePixelRecipe": true,
+  "distinctNestStages": 5
+}

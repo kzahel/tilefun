@@ -153,6 +153,7 @@ export default function NaturalLandscapePage() {
       height: 640,
       terrain: true,
       fixedCamera: (player, alpha) => {
+        if (caseId.startsWith("behavior-")) return { wx: 160, wy: 144 };
         const train = host.current?.session.view.entities.find((e) => e.type === CURVE_TRAIN);
         const watched = settings.current.watchAnimal
           ? ANIMAL_BROWSER_ENTRIES.find((a) => a.scene === caseId)
@@ -398,6 +399,19 @@ export default function NaturalLandscapePage() {
           Math.max(Number(c.dataset.playerMaxVz ?? 0), view.serverPlayerEntity.jumpVZ ?? 0),
         );
         c.dataset.playerZ = String(view.serverPlayerEntity.wz ?? 0);
+        c.dataset.workActors = JSON.stringify(
+          view.serverEntities
+            .filter((e) => e.type.includes("wildlife-") || e.type === "ball")
+            .map((e) => ({
+              id: e.id,
+              type: e.type,
+              x: e.position.wx,
+              y: e.position.wy,
+              z: e.wz ?? 0,
+              clip: e.sprite?.clip,
+              parent: e.parentId ?? -1,
+            })),
+        );
         c.dataset.playerParent = String(view.serverPlayerEntity.parentId ?? -1);
         c.dataset.boatPoses = JSON.stringify(
           view.serverEntities.filter(isBoat).map((e) => ({
@@ -546,6 +560,30 @@ export default function NaturalLandscapePage() {
           );
         }}
       />
+      {caseId.startsWith("behavior-") && (
+        <div className="actions">
+          <p>
+            {caseId === "behavior-dog"
+              ? "Throw a ball and wait for it to settle. The dog picks it up, carries it back and drops it near you. Throw again to reuse the returned ball."
+              : caseId === "behavior-crow"
+                ? "The crow gathers real loose twigs, carries them to a tree perch and builds its nest in four visible stages."
+                : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
+          </p>
+          {caseId === "behavior-dog" && (
+            <button
+              type="button"
+              disabled={paused}
+              onClick={() =>
+                void host.current
+                  ?.command({ kind: "throw-ball", dirX: 1, dirY: 0, force: 0 })
+                  .catch((e) => setError(String(e)))
+              }
+            >
+              Throw ball for dog
+            </button>
+          )}
+        </div>
+      )}
       <div
         className="actions"
         style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "end" }}

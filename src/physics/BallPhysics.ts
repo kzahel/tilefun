@@ -44,6 +44,7 @@ export function tickBallPhysics(
 
   for (const ball of active) {
     if (ball.type !== "ball") continue;
+    if (ball.parentId !== undefined) continue;
     if (!ball.velocity) continue;
 
     // Save prev position for render interpolation
@@ -117,7 +118,7 @@ export function tickBallPhysics(
           if (hSpeed < 5) {
             ball.velocity.vx = 0;
             ball.velocity.vy = 0;
-            ball.deathTimer = BALL_DESPAWN_TIME;
+            ball.deathTimer = ball.workItem?.owner ? 35 : BALL_DESPAWN_TIME;
           }
         } else {
           // Bounce
@@ -144,7 +145,7 @@ export function tickBallPhysics(
       if (hSpeed < 3 && ball.deathTimer === undefined) {
         ball.velocity.vx = 0;
         ball.velocity.vy = 0;
-        ball.deathTimer = BALL_DESPAWN_TIME;
+        ball.deathTimer = ball.workItem?.owner ? 35 : BALL_DESPAWN_TIME;
       }
     }
 
@@ -175,6 +176,15 @@ export function tickBallPhysics(
       }
 
       for (const other of nearby) {
+        // A fetching dog deliberately reaches for its settled target. A moving
+        // projectile still uses the ordinary hit/startle response.
+        if (
+          other.animalWork?.kind === "dog" &&
+          other.animalWork.targetId === ball.persistentId &&
+          ball.jumpVZ === undefined &&
+          Math.hypot(ball.velocity.vx, ball.velocity.vy) < 8
+        )
+          continue;
         if (
           other === ball ||
           other.type === "ball" ||

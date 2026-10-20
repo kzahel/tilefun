@@ -94,7 +94,7 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
     animal.velocity.vx = ((ai.target.wx - animal.position.wx) * fraction) / dt;
     animal.velocity.vy = ((ai.target.wy - animal.position.wy) * fraction) / dt;
     const t = Math.max(0, Math.min(1, (motion.elapsed - push) / (land - push)));
-    const height = Math.sin(Math.PI * t) * p.hop.height;
+    const height = Math.sin(Math.PI * t) * (motion.lift ?? p.hop.height);
     animal.wz = (motion.startZ ?? 0) + ((motion.endZ ?? 0) - (motion.startZ ?? 0)) * t + height;
     animal.jumpZ = height;
     return;

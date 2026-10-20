@@ -1,7 +1,7 @@
 import { isBoat } from "../boats/Boat.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
-import type { Entity } from "../entities/Entity.js";
+import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { terrainBaseZ } from "../physics/TerrainExcavation.js";
 import { isDrivable } from "../traffic/Driving.js";
@@ -11,6 +11,8 @@ import {
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
+import { faunaProfile } from "../wildlife/Fauna.js";
+import { isCarryable } from "../wildlife/ForageResources.js";
 import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../wildlife/Roadkill.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
@@ -178,6 +180,10 @@ export function collectScene(
     // Shadow parameters
     const boatParent =
       e.parentId === undefined ? undefined : entities.find((p) => p.id === e.parentId && isBoat(p));
+    const carryingParent =
+      e.parentId === undefined || !isCarryable(e)
+        ? undefined
+        : entities.find((p) => p.id === e.parentId && faunaProfile(p.type));
     const hasShadow = !boatParent && !e.flashHidden && !e.noShadow;
     const col = e.collider;
     const shadowWidth = col ? col.width : e.sprite.spriteWidth * 0.6;
@@ -194,16 +200,27 @@ export function collectScene(
         : terrainZ;
 
     // Sort key
-    const sortKey = boatParent
-      ? interpolatePosition(boatParent.position, boatParent.prevPosition, alpha).wy +
-        (boatParent.sortOffsetY ?? 0) +
-        0.1
-      : depthAboveProps(
-          pos.wy + (e.sortOffsetY ?? 0) + (e.wz ?? 0) * Z_SORT_FACTOR,
-          e.collider ? getEntityAABB(pos, e.collider) : null,
-          zOffset,
+    const sortKey = carryingParent
+      ? depthAboveProps(
+          interpolatePosition(carryingParent.position, carryingParent.prevPosition, alpha).wy +
+            (carryingParent.sortOffsetY ?? 0) +
+            (carryingParent.wz ?? 0) * Z_SORT_FACTOR,
+          carryingParent.collider
+            ? getEntityAABB(carryingParent.position, carryingParent.collider)
+            : null,
+          interpolateWz(carryingParent, alpha) ?? 0,
           depthSurfaces,
-        );
+        ) + (carryingParent.sprite?.direction === Direction.Up ? -0.1 : 0.1)
+      : boatParent
+        ? interpolatePosition(boatParent.position, boatParent.prevPosition, alpha).wy +
+          (boatParent.sortOffsetY ?? 0) +
+          0.1
+        : depthAboveProps(
+            pos.wy + (e.sortOffsetY ?? 0) + (e.wz ?? 0) * Z_SORT_FACTOR,
+            e.collider ? getEntityAABB(pos, e.collider) : null,
+            zOffset,
+            depthSurfaces,
+          );
 
     const mesh =
       frame?.meshPoses.evaluate(e, poseTime, pos) ??

@@ -39,6 +39,7 @@ export function updateFaunaAI(
     : undefined;
   if (ai.state !== "recover" && (nearby || herdAlarm))
     startleFauna(animal, nearby ?? herdAlarm ?? animal.position);
+  if (environment.animalWork?.(animal, dt, planning)) return;
   if (ai.motion) return;
   velocity.vx = velocity.vy = 0;
   ai.timer -= dt;

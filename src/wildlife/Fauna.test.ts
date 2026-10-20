@@ -408,7 +408,11 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
             ).toBe(0);
           }
         }
-        expect([...clips].filter((c) => c !== 3).sort()).toEqual([0, 1, 2]);
+        if ([...clips].some((c) => c >= 4)) {
+          // Resource work can replace a generic idle action in natural homes.
+          expect(clips.has(0) && clips.has(1)).toBe(true);
+          expect([...clips].every((c) => c < p.clips.length)).toBe(true);
+        } else expect([...clips].filter((c) => c !== 3).sort()).toEqual([0, 1, 2]);
         const removed = required(animal()[0]),
           retained =
             animal()[1] ??

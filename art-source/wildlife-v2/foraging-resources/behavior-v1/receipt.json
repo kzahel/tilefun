@@ -1,0 +1,36 @@
+{
+  "identity": "foraging-resources-behavior-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/155-fetch-nests-and-caches.md",
+  "pixelAudit": {
+    "identity": "foraging-resources-behavior-v1",
+    "poses": 40,
+    "binaryAlpha": true,
+    "originalEditablePixelRecipe": true,
+    "distinctNestStages": 5
+  },
+  "replay": {
+    "identity": "foraging-resources-behavior-v1",
+    "status": "byte-identical",
+    "sha256": {
+      "sheet.png": "79cbee7876d340e41f00d02c46781445ff0457711144a26f6091994d203459bb"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/foraging-resources/behavior-v1/paint.json": "95c7534dadd2b1ff500aed004f6f2e875183d8a2fff0ccf09180d43ea8035654",
+    "art-source/wildlife-v2/foraging-resources/behavior-v1/README.md": "8e3622a8a90e47f83132b7b85d7fc2c80824fb1af71e5fe93a0748c5ab5ab671",
+    "art-source/wildlife-v2/foraging-resources/behavior-v1/replay.json": "ba3c8487257fc6f3b95f728c3de96990ce2e91f08dcb13a397223224c930c8d3",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v1/contact-sheet-native.png": "79cbee7876d340e41f00d02c46781445ff0457711144a26f6091994d203459bb",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v1/index.html": "7631cd516cbca588f70ff8490bff48aa2cc1f618525926b1fce6f29baac8f64c",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v1/pixel-audit.json": "8704e2bf2cfb99a6588fddceb476f1c0277936212518227cf32680400d6b7835",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v1/preview.png": "7c1c1e823ea7953eae4cfad4c2439cdd17c59833493f6ae4cf06549740a25cf3",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v1/scene-native.png": "929f43f3f94d2e71574b1ac5b6392e982b49eb92a51bfcc7448d27e906331a2d",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v1/sheet.png": "79cbee7876d340e41f00d02c46781445ff0457711144a26f6091994d203459bb",
+    "scripts/wildlife/register-behavior-155.mjs": "bbfd72ea3ae03c566bdaa409c1f79a170e576e29e32a14ad283b7e070fdde94a",
+    "scripts/wildlife/capture-behavior-155.mjs": "4cba4172d32bd77168b8929743c1b133e8ee6f22ec4285f0f3c71867beb1e6f8",
+    "scripts/wildlife/replay-behavior-155.py": "0bbd07a15eb09491c28b64afea32c852227f88ff6e105daaf591021ca1d674f3",
+    "scripts/wildlife/build-foraging-resources.py": "7103a494a366d08d59a9b67df9e0e752e94f48b49b5df400c529176db51b516f",
+    "scripts/wildlife/behavior-art.mjs": "1980d13fdbf739918ae6bb9eb9f467f511f621c69ffe68c7376b07f7fc8b49dd"
+  }
+}

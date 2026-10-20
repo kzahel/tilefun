@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-20",
+  "status": "automation-verified-human-review-pending",
+  "animals": ["dog", "crow", "red-squirrel"],
+  "checks": {
+    "typecheck": "pass",
+    "lint": "pass; existing warnings only",
+    "productionBuild": "pass",
+    "behaviorTests": 11,
+    "coldFocusedTests": 413,
+    "naturalFaunaFocusedTests": 26,
+    "browserCases": 9,
+    "finalBrowserRerunCases": 5,
+    "renderers": ["Canvas2D", "GPU"],
+    "normalRetinaWorkshopCandidates": 1840,
+    "liveStudyCodeFingerprintRefreshes": 912,
+    "streamingReadiness": "pass",
+    "priorCandidateRecordsPreserved": 912,
+    "previousCandidates": 1824,
+    "newBehaviorSceneCandidates": 12,
+    "newArtReviewCandidates": 4
+  },
+  "fullUnits": {
+    "passed": 6020,
+    "failed": 6,
+    "skipped": 10,
+    "durationSeconds": 744.13,
+    "knownWindowsFailures": [
+      "FsSecurity dangling database symlink: three EPERM cases",
+      "privateDataPlugin symlink EPERM",
+      "SqliteRecordStore SIGKILL expectation"
+    ],
+    "resolvedFailure": "Tree-support test added during the running suite used its cached earlier AnimalWorkSystem; fresh cold 413-test rerun includes all 11 behavior cases and passes.",
+    "base": "37ea89d4 (before remote car-control integration)"
+  },
+  "sourceReplay": {
+    "checkout": "isolated minimal retained sources",
+    "results": [
+      {
+        "identity": "dog-behavior-v1",
+        "status": "byte-identical",
+        "artifacts": 10,
+        "checkout": "isolated retained sources and person scale reference only"
+      },
+      {
+        "identity": "crow-behavior-v1",
+        "status": "byte-identical",
+        "artifacts": 10,
+        "checkout": "isolated retained sources and person scale reference only"
+      },
+      {
+        "identity": "red-squirrel-behavior-v1",
+        "status": "byte-identical",
+        "artifacts": 10,
+        "checkout": "isolated retained sources and person scale reference only"
+      },
+      {
+        "identity": "foraging-resources-behavior-v1",
+        "status": "byte-identical",
+        "artifacts": 1,
+        "checkout": "isolated retained sources and person scale reference only"
+      }
+    ],
+    "sharedInputs": {
+      "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+      "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae"
+    }
+  },
+  "receipts": {
+    "art-source/wildlife-v2/dog/behavior-v1/receipt.json": "b12540f35466e939071966c7068af7d5b326a00971f6bfd640abdfa426f5022e",
+    "art-source/wildlife-v2/crow/behavior-v1/receipt.json": "666cab6dd4d1e82017cb722d5248a33df61cbb0a28cd224cdfd1cb4eea570645",
+    "art-source/wildlife-v2/red-squirrel/behavior-v1/receipt.json": "d21e45268ae1e172bcfd5f294158e900da17314198a7da7c2c6932de9c823205",
+    "art-source/wildlife-v2/foraging-resources/behavior-v1/receipt.json": "ba95d1594933e902ac935a06b337b0bbcb41f9beffd726b41594ef3111e27223"
+  },
+  "reviewStatus": "pending",
+  "deployment": "External host deploys from pushed repository; deployment is independently verified.",
+  "rebaseIntegration": {
+    "onto": "00a47116",
+    "preservedLocalVehicleStudy": "50014c58",
+    "focusedUnitTests": 325,
+    "typecheck": "pass",
+    "lint": "pass; existing warnings only",
+    "normalRetinaManifestCandidates": 1840,
+    "productionBuild": "pass",
+    "browser": "pass",
+    "browserCases": 6,
+    "streamingReadiness": "pass"
+  }
+}

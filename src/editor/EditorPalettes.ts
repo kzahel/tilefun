@@ -6,6 +6,7 @@ import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
+import { forageType } from "../wildlife/ForageResources.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
@@ -77,6 +78,11 @@ export interface EntityPaletteEntry {
 }
 
 export const ENTITY_PALETTE: EntityPaletteEntry[] = [
+  ...(["twig", "nut", "fruit"] as const).map((kind) => ({
+    type: forageType(kind),
+    label: kind === "twig" ? "Loose nest twig" : kind === "nut" ? "Foraging nut" : "Fallen fruit",
+    color: "#a77b4c",
+  })),
   ...PROMOTED_CHARACTERS.map((c) => ({ type: c.sheetKey, label: c.name, color: "#d4a880" })),
   { type: MALLARD_TYPE, label: "Mallard duck", color: "#638f66" },
   { type: FROG_TYPE, label: "Common frog", color: "#937b4c" },

@@ -637,3 +637,9 @@
 # Verified pending motion identities, owner-authorized autonomous run 147.
 !elephant-upright/roster-v3/*
 !giraffe-upright/roster-v3/*
+
+# Pending behavior batch 155, owner-authorized.
+!dog/behavior-v1/*
+!crow/behavior-v1/*
+!red-squirrel/behavior-v1/*
+!foraging-resources/behavior-v1/*

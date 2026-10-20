@@ -1,0 +1,18 @@
+{
+  "identity": "red-squirrel-behavior-v1-pixels-01",
+  "poses": 260,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "retainedRigidPaintMasters": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.0,
+    "up": 1.0,
+    "left": 1.1245748299319764,
+    "right": 1.0403368794326262
+  },
+  "boundDurationMs": 640,
+  "boundHeightPixels": 6,
+  "source": "Fresh empty-scene rodent anatomy, moving rigid torso/head paint, actual bound limbs/tail and held nut"
+}

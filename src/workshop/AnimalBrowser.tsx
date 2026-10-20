@@ -1,6 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ANIMAL_BROWSER_ENTRIES, type AnimalBrowserEntry } from "./AnimalBrowserData.js";
+import retainedBehaviors from "./animal-behavior-status.json";
 import retainedDates from "./animal-browser-dates.json";
+
+const behaviors: Record<
+  string,
+  {
+    phase: string;
+    ai: string;
+    animation: string;
+    validation: string;
+    description: string | null;
+    scene: string | null;
+    review: string;
+  }
+> = retainedBehaviors;
 
 const dates: Record<string, { added: string | null; updated: string | null }> = retainedDates;
 const images = new Map<string, Promise<HTMLImageElement>>();
@@ -175,6 +189,7 @@ export default function AnimalBrowser({
 }) {
   const [search, setSearch] = useState(""),
     [family, setFamily] = useState("all"),
+    [behavior, setBehavior] = useState("all"),
     [sort, setSort] = useState("newest"),
     [motion, setMotion] = useState("walk"),
     [direction, setDirection] = useState(2);
@@ -190,6 +205,12 @@ export default function AnimalBrowser({
       ANIMAL_BROWSER_ENTRIES.filter(
         (a) =>
           (family === "all" || a.family === family) &&
+          (behavior === "all" ||
+            (behavior === "demonstrations"
+              ? !!behaviors[a.id]?.scene
+              : behavior === "verified"
+                ? behaviors[a.id]?.validation === "verified"
+                : behaviors[a.id]?.ai === "not-audited")) &&
           `${a.name} ${a.id} ${a.family}`.toLowerCase().includes(search.trim().toLowerCase()),
       ).sort((a, b) => {
         if (sort === "family")
@@ -204,7 +225,7 @@ export default function AnimalBrowser({
           a.name.localeCompare(b.name)
         );
       }),
-    [search, family, sort],
+    [search, family, sort, behavior],
   );
   return (
     <details open className="animal-browser" style={{ margin: "16px 0" }}>
@@ -244,6 +265,19 @@ export default function AnimalBrowser({
             <option value="oldest">Oldest added</option>
             <option value="name">Name A–Z</option>
             <option value="family">Family</option>
+          </select>
+        </label>
+        <label>
+          Behavior{" "}
+          <select
+            aria-label="Behavior progress"
+            value={behavior}
+            onChange={(e) => setBehavior(e.target.value)}
+          >
+            <option value="all">All progress</option>
+            <option value="demonstrations">Behavior demonstrations</option>
+            <option value="verified">Game/lab verified</option>
+            <option value="unaudited">Needs behavior audit</option>
           </select>
         </label>
         <label>
@@ -321,6 +355,26 @@ export default function AnimalBrowser({
                 {a.scene === selected ? "Watch again" : "Watch AI"}
               </button>
             </p>
+            {behaviors[a.id]?.description && <p>{behaviors[a.id]?.description}</p>}
+            <small>
+              Behavior: {behaviors[a.id]?.ai.replaceAll("-", " ") ?? "not audited"}
+              {behaviors[a.id]?.scene && (
+                <> · Animation: {behaviors[a.id]?.animation.replaceAll("-", " ")}</>
+              )}
+            </small>
+            {behaviors[a.id]?.scene && (
+              <p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const scene = behaviors[a.id]?.scene;
+                    if (scene) onSelect(scene);
+                  }}
+                >
+                  Demonstrate behavior
+                </button>
+              </p>
+            )}
           </article>
         ))}
       </section>

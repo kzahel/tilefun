@@ -4,7 +4,19 @@ Topic: wildlife
 Status: all 196 roster animals implemented and available in the animated lab.
 New exact art remains pending human review; specialist behavior limits are
 recorded in the individual checkpoints.
-Updated: 2026-10-19.
+Updated: 2026-10-20.
+
+Owner requested planning for distinct behavior and suitable animation for every
+animal on 2026-10-20, starting with land and air animals. The
+[behavior campaign plan](wildlife-behaviors.md) separates this new work from the
+completed art roster, proposes a canonical per-animal ledger and defines
+observable mechanics, animation, game/lab validation and human-review progress.
+The behavior ledger and generated status report now cover all 206 current lab
+entries, including all 196 roster entries. [Batch 155](../tactical/155-fetch-nests-and-caches.md)
+adds dog ball fetching, crow twig collection/nesting and squirrel food caches,
+with real carried objects, saved resource counts and new action clips. Animal
+Browser exposes progress filters and demonstrations from this ledger. The other
+203 animals still need detailed audits; new behavior/art review remains pending.
 
 [Explorer boats and large lakes](boats.md) add four natural fish schools, four
 other water species and one aquatic hunter per new large lake. Existing water

@@ -10,6 +10,7 @@ import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_IMAGE, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { FIERCE_DENS } from "../wildlife/FierceDens.js";
+import { FORAGE_IMAGE, FORAGE_SHEET } from "../wildlife/ForageResources.js";
 import { FROG_IMAGE, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_IMAGE, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
@@ -44,6 +45,7 @@ async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
   }
 }
 export const SPRITE_MANIFEST: SpriteAsset[] = [
+  { key: FORAGE_SHEET, path: FORAGE_IMAGE, w: 32, h: 32 },
   ...FIERCE_DENS.map((d) => ({
     key: d.type,
     path: `demos/wildlife-v2/${d.species}/fierce-v1/den.png`,

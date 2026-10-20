@@ -100,7 +100,8 @@
         "public/demos/vehicle-bake/**/*.json",
         "public/demos/original-vehicles/**/*.json",
         "public/demos/vehicle-riders/**/*.json",
-        "src/wildlife/reviews.json"
+        "src/wildlife/reviews.json",
+        "src/wildlife/behavior-art.json"
       ],
       "files": {
         "maxSize": 33554432

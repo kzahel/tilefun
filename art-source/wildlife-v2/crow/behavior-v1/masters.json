@@ -1,0 +1,15 @@
+{
+  "identity": "crow-behavior-v1-pixels-01",
+  "palette": {
+    "B": "#30373a",
+    "H": "#5b6264",
+    "C": "#3c4445",
+    "M": "#2b3235",
+    "N": "#151c20",
+    "E": "#d5bf86",
+    "K": "#151c20",
+    "T": "#485154",
+    "R": "#858b88"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

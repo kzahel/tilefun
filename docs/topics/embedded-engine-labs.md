@@ -849,6 +849,14 @@ ownership and reload tests cover the distinction.
 
 ## Native props in animal fixtures
 
+Behavior fixtures `behavior-dog`, `behavior-crow` and `behavior-squirrel` use the
+same Realm-owned AnimalWorkSystem, ball physics, resource entities and persistent
+actor records as the game. The dog's lab button sends an ordinary throw-ball
+command; the crow uses an ordinary native oak canopy. Client observations use
+existing binary sprite phases, world height and parenting/socket offsets. The
+lab does not own task decisions or food/nest counts. Animal Browser demonstrations
+and progress filters consume generated data from the canonical behavior ledger.
+
 Raptor inspection adds optional bounded `ScenarioRecipe.nativeProps` placements.
 ScenarioSession creates them with the ordinary prop factory, preserving their
 production type and persistence. Custom fixture geometry keeps its anonymous

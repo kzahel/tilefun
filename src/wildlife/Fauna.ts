@@ -1,6 +1,7 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
+import { behaviorArt } from "./BehaviorArt.js";
 import { BOVID_PROFILES } from "./Bovids.js";
 import { CONTINUATION_BIRD_PROFILES } from "./ContinuationBirds.js";
 import { CRUSTACEAN_FAUNA_PROFILES } from "./Crustaceans.js";
@@ -1398,7 +1399,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
       ],
     };
   }),
-];
+].map(behaviorArt);
 /** Same cat/dog habitat owner, independent deterministic coat choice. */
 export function petCoat(species: "cat" | "dog", roll: number): FaunaSpecies {
   const coats: FaunaSpecies[] = [
@@ -1426,7 +1427,14 @@ export interface FaunaBehavior {
   water?: boolean;
   actionElapsed?: number;
   alarmFrom?: PositionComponent;
-  motion?: { elapsed: number; duration: number; escaping: boolean; startZ?: number; endZ?: number };
+  motion?: {
+    elapsed: number;
+    duration: number;
+    escaping: boolean;
+    startZ?: number;
+    endZ?: number;
+    lift?: number;
+  };
 }
 export function faunaDefinition(p: FaunaProfile) {
   const walk = p.clips[1];

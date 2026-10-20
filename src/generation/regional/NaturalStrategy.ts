@@ -1,6 +1,7 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { RailwayStrategy } from "../../railway/RailwayStrategy.js";
 import { RoadType } from "../../road/RoadType.js";
+import { crowNestTrees, foragePlacements } from "../../wildlife/ForagePlacements.js";
 import type { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
 import { insideDenseBounds } from "./DenseDistrictPlanner.js";
@@ -82,12 +83,14 @@ export class NaturalStrategy extends RailwayStrategy {
       .query(bounds)
       .flatMap((p) => settlementPets(p, this.world.seed))
       .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
+    const wildlife = this.nature.wildlife(cx, cy);
     return [
       ...super.actors(cx, cy),
       ...residents,
       ...pets,
       ...this.spectators(cx, cy),
-      ...this.nature.wildlife(cx, cy),
+      ...wildlife,
+      ...foragePlacements(wildlife, this.nature, cx, cy),
     ];
   }
   spectators(cx: number, cy: number) {
@@ -103,6 +106,7 @@ export class NaturalStrategy extends RailwayStrategy {
       ...super.placements(cx, cy),
       ...this.nature.farms.placements(this.nature.farms.query(bounds), bounds),
       ...this.nature.placements(cx, cy),
+      ...crowNestTrees(this.nature, cx, cy),
       ...this.racetracks
         .query({
           minX: bounds.minX - 4,

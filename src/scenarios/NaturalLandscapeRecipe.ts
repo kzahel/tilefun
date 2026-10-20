@@ -13,12 +13,22 @@ import { createDeer } from "../wildlife/Deer.js";
 import { createFauna, FAUNA_PROFILES } from "../wildlife/Fauna.js";
 import { createPredator, PREDATOR_PROFILES } from "../wildlife/Predator.js";
 import { createRabbit } from "../wildlife/Rabbit.js";
+import { animalWorkRecipe } from "./AnimalWorkRecipe.js";
 import { cityTrainRecipe } from "./CityTrainRecipe.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  { id: "behavior-dog", name: "Dog · fetch a thrown ball", seed: 1, x: 8, y: 9 },
+  { id: "behavior-crow", name: "Crow · carry twigs and build a nest", seed: 1, x: 8, y: 9 },
+  {
+    id: "behavior-squirrel",
+    name: "Squirrel · forage, cache and retrieve food",
+    seed: 1,
+    x: 8,
+    y: 9,
+  },
   {
     id: "lake",
     name: "Large lake · motorboat & water wildlife",
@@ -73,6 +83,8 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  if (id === "behavior-dog" || id === "behavior-crow" || id === "behavior-squirrel")
+    return animalWorkRecipe(id.slice("behavior-".length) as "dog" | "crow" | "squirrel");
   if (id === "lake" && !at) {
     const lake = new NaturalLandscape(regionalWorld(2026), profile).lake(1, -2);
     if (!lake) throw Error("Missing boat lake");

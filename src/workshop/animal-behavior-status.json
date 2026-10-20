@@ -1,0 +1,1856 @@
+{
+  "fox": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "cat": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "dog": {
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Fetch the actual thrown ball, carry it back and release it near its player.",
+    "scene": "behavior-dog",
+    "review": "pending"
+  },
+  "cow": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "sheep": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "horse": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "piglet": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "goat": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "elephant": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "giraffe": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "kangaroo": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "king-cobra": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "ant": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "fish": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "penguin": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "harbor-seal": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "manta-ray": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "chicken": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "butterfly": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "red-squirrel": {
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Forage nuts/fruit, bury a persistent cache, return to retrieve food and eat it.",
+    "scene": "behavior-squirrel",
+    "review": "pending"
+  },
+  "gorilla": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "crab": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "octopus": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "jellyfish": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "donkey": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "mule": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "llama": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "alpaca": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "gemsbok-oryx": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "gazelle": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "impala": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "springbok": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "saiga-antelope": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "gerenuk": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "american-bison": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "water-buffalo": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "musk-ox": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "wildebeest": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "zebra": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "okapi": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "camel": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "panda": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "moose": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "elk": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "rhinoceros": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "warthog": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "hippopotamus": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "mouse": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "rat": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "hamster": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "guinea-pig": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "chinchilla": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "hedgehog": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "porcupine": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "raccoon": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "skunk": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "red-panda": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "ostrich": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "emu": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "cassowary": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "kiwi": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "kakapo": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "wild-turkey": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "peacock": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "whale-shark": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "humpback-whale": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "blue-whale": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "sea-turtle": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "pigeon": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "dove": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "sparrow": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "parrot": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "toucan": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "great-hornbill": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "raven": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "crow": {
+    "phase": "air",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Collect actual loose materials and build a persistent elevated nest in visible stages.",
+    "scene": "behavior-crow",
+    "review": "pending"
+  },
+  "atlantic-puffin": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "chimpanzee": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "orangutan": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "capuchin-monkey": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "ring-tailed-lemur": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "mandrill": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "proboscis-monkey": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "japanese-macaque": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "ocean-sunfish": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "pufferfish": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "meerkat": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "giant-anteater": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "aardvark": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "armadillo": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "pangolin": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "pelican": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "blue-footed-booby": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "great-frigatebird": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "ruby-throated-hummingbird": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "flamingo": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "shoebill": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "marabou-stork": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "great-blue-heron": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "sloth": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "binturong": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "aye-aye": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "kinkajou": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "opossum": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "echidna": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "bat": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "wallaby": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "manatee": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "dugong": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "river-otter": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "platypus": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "sea-lion": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "walrus": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "snail": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "worm": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "leaf-insect": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "roly-poly": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "earwig": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "millipede": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "seahorse": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "nautilus": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "leafy-seadragon": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "starfish": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "horseshoe-crab": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "shrimp": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "elephant-upright": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "giraffe-upright": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "salamander": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "newt": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "axolotl": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "frilled-neck-lizard": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "land-tortoise": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "pond-turtle": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "beaver": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "capybara": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "koala": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "wombat": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "quokka": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "malayan-tapir": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "gecko": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "iguana": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "chameleon": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "texas-horned-lizard": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "bee": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "ladybug": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "dragonfly": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "stag-beetle": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "grasshopper": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "cricket": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "cat-ginger": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "cat-black": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "dog-golden": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "dog-shepherd": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "panther": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "tiger": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "lion": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "brown-bear": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "giant-spider": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "griffin": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "dire-wolf": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "t-rex": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "small-dragon": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "wolf": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "coyote": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "spotted-hyena": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "jaguar": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "leopard": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "cheetah": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "lynx": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "bobcat": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "polar-bear": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "mongoose": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "honey-badger": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "fossa": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "white-nosed-coati": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "owl": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "eagle": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "hawk": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "secretary-bird": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "crocodile": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "alligator": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "komodo-dragon": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "gaboon-viper": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "spider": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "praying-mantis": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "scorpion": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "centipede": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "coconut-crab": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "tasmanian-devil": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "swordfish": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "anglerfish": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "moray-eel": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "electric-eel": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "cuttlefish": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "lobster": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "mantis-shrimp": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "shark": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "hammerhead-shark": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "orca": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "dolphin": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "narwhal": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "deer": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "frog": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "mallard": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "robin": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  },
+  "rabbit": {
+    "phase": "unclassified",
+    "ai": "not-audited",
+    "animation": "not-audited",
+    "validation": "not-audited",
+    "description": null,
+    "scene": null,
+    "review": "not-requested"
+  }
+}

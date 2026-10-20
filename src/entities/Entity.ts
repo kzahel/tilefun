@@ -1,3 +1,4 @@
+import type { AnimalWork, WorkItem } from "../wildlife/AnimalWork.js";
 import type { DeerBehavior } from "../wildlife/Deer.js";
 import type { FaunaBehavior } from "../wildlife/Fauna.js";
 import type { FrogBehavior } from "../wildlife/Frog.js";
@@ -132,6 +133,8 @@ export interface Entity {
   predator?: PredatorBehavior;
   deer?: DeerBehavior;
   fauna?: FaunaBehavior;
+  animalWork?: AnimalWork;
+  workItem?: WorkItem;
   resident?: import("../interiors/ResidentBehavior.js").ResidentBehavior;
   routeAI?: {
     points: readonly RouteWaypoint[];

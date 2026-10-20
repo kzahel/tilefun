@@ -1,0 +1,12 @@
+{
+  "species": "crow",
+  "revision": "behavior-v1",
+  "previous": "roster-v3",
+  "columns": 57,
+  "newClips": [
+    "pickup",
+    "build"
+  ],
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/155-fetch-nests-and-caches.md"
+}

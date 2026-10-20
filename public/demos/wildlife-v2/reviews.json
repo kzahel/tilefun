@@ -20917,5 +20917,349 @@
         "sha256": "4996a3ebd43a9c765ef06a4c064619a25f33da9fa2123b0d9f74a792f7491eca"
       }
     ]
+  },
+  {
+    "id": "dog-behavior-v1",
+    "animalId": "dog",
+    "revision": "behavior-v1",
+    "name": "Dog fetch actions",
+    "batchId": "wildlife-v2-behaviors-155",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/dog/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-dog-behavior-v1",
+      "name": "Dog fetch actions sheet",
+      "image": "demos/wildlife-v2/dog/behavior-v1/sheet.png",
+      "width": 3648,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e73713252efb76dab0ca9788e209af7bb6c784808b0837e6c07333a7f84a5a1e",
+      "source": "art-source/wildlife-v2/dog/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-dog-behavior-v1-scene",
+      "name": "Dog fetch actions scene",
+      "image": "demos/wildlife-v2/dog/behavior-v1/scene-native.png",
+      "width": 256,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "a4eb206a379951e92500a9f957cce0f5e3e576a3d6ea86b0c98490bbca128e1b",
+      "source": "art-source/wildlife-v2/dog/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-dog-behavior-v1-contact",
+      "name": "Dog fetch actions contact",
+      "image": "demos/wildlife-v2/dog/behavior-v1/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "426db1b61f5b3f0263c1051ff58ee186d6884c77fcadcb6e2dc6b320cf31c0be",
+      "source": "art-source/wildlife-v2/dog/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/dog/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/contact-sheet-native.png",
+        "sha256": "426db1b61f5b3f0263c1051ff58ee186d6884c77fcadcb6e2dc6b320cf31c0be"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/index.html",
+        "sha256": "de5ada19e19dffeea6d1125598e1739dc20bf7fffd21732f4b57bfe18e40cab3"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/pixel-audit.json",
+        "sha256": "efd234e79f626c482484b53ee409c46400935c6601d94f514786022a64469238"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/preview-native.gif",
+        "sha256": "b09ce228c4248c9fb983692b36cd1ab3f1e868206824cdba2e7f01222564b2f5"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/preview.gif",
+        "sha256": "153b9c3ddaf72d24216ae0acdadda03b31da02e41cc6bc1fb16b0287107b67bf"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/scene-background.png",
+        "sha256": "1a86cce5d70096d2954c1bf45f58f316f8561d34e2c935a9f67e4e26e41537a2"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/scene-native.png",
+        "sha256": "a4eb206a379951e92500a9f957cce0f5e3e576a3d6ea86b0c98490bbca128e1b"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/sheet.png",
+        "sha256": "e73713252efb76dab0ca9788e209af7bb6c784808b0837e6c07333a7f84a5a1e"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/source-audit.json",
+        "sha256": "230ad7e131bea88a85163bd68168408fff1bd82f432268a30407bce0a6f3d9f3"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/sprite.json",
+        "sha256": "c4b305194eb0cdc3502ea57489a9e1ed52b827543eb90b6520b72b928ed1c6ef"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/travel-native.gif",
+        "sha256": "30e1f490248a4a5408f7dcae5ccba4f4a27689742e9e5469d754f2af8bf224ff"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/behavior-v1/validation.json",
+        "sha256": "fd931fc2de20739390c29dd2de77d24549199021c79062674d1b865e4e49649a"
+      }
+    ]
+  },
+  {
+    "id": "crow-behavior-v1",
+    "animalId": "crow",
+    "revision": "behavior-v1",
+    "name": "Crow gathering and nesting",
+    "batchId": "wildlife-v2-behaviors-155",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/crow/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-crow-behavior-v1",
+      "name": "Crow gathering and nesting sheet",
+      "image": "demos/wildlife-v2/crow/behavior-v1/sheet.png",
+      "width": 3648,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "63886d849149c4f0ed4aaf3c29b43f56d7c498f5e6e25fa49fb87c2c2bbf60ad",
+      "source": "art-source/wildlife-v2/crow/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-crow-behavior-v1-scene",
+      "name": "Crow gathering and nesting scene",
+      "image": "demos/wildlife-v2/crow/behavior-v1/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "f1c6fdddb00409418f3ae141f4ddfd25851457c7aef3756b7d47671c2f669d11",
+      "source": "art-source/wildlife-v2/crow/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-crow-behavior-v1-contact",
+      "name": "Crow gathering and nesting contact",
+      "image": "demos/wildlife-v2/crow/behavior-v1/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "00a18cee151d92284d748f92489e4ada6aabbbf5b24467c2034f47c3f98a49a6",
+      "source": "art-source/wildlife-v2/crow/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/crow/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/contact-sheet-native.png",
+        "sha256": "00a18cee151d92284d748f92489e4ada6aabbbf5b24467c2034f47c3f98a49a6"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/index.html",
+        "sha256": "58b38976c5806f12d40754cf8289fcec82a4c8d014f9e66158b41687a1094f10"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/pixel-audit.json",
+        "sha256": "70ce4685186db7e0fe1c2bb14ea811b996a7cfff62f46f8fb38ca767eae26973"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/preview-native.gif",
+        "sha256": "0a7e72a628818649c53eecaa68fb93dd5de5b9f7e45b722b6e8df1edbe7a1687"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/preview.gif",
+        "sha256": "f26a4a52a6057fdc8517d5ea60ef591baaba01059923fe94ddcd6eabd3a3a6b2"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/scene-background.png",
+        "sha256": "4389808deefaa300568125638444a31f4ac262365e51a34b3ab9d136dbf100f7"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/scene-native.png",
+        "sha256": "f1c6fdddb00409418f3ae141f4ddfd25851457c7aef3756b7d47671c2f669d11"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/sheet.png",
+        "sha256": "63886d849149c4f0ed4aaf3c29b43f56d7c498f5e6e25fa49fb87c2c2bbf60ad"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/source-audit.json",
+        "sha256": "e1647eec98edea56358d135e45a07b5b0f7f226799ee139c17b50701b91c7b76"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/sprite.json",
+        "sha256": "5f44013012463b25f4ae13d1f5427f3edd774729bf1b92fb46c849eca7370350"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/travel-native.gif",
+        "sha256": "45a269a39520307cc3b457d1397ed80c8970c1a0fe288e147a282f94df40fd11"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/behavior-v1/validation.json",
+        "sha256": "11ba7bc953f65e173f776bfe60fd6db0c25644533b0150afdb63c729051028fe"
+      }
+    ]
+  },
+  {
+    "id": "red-squirrel-behavior-v1",
+    "animalId": "red-squirrel",
+    "revision": "behavior-v1",
+    "name": "Red squirrel caching and eating",
+    "batchId": "wildlife-v2-behaviors-155",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/red-squirrel/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-red-squirrel-behavior-v1",
+      "name": "Red squirrel caching and eating sheet",
+      "image": "demos/wildlife-v2/red-squirrel/behavior-v1/sheet.png",
+      "width": 3120,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b503373982d721e8f10d583016de0f3abe569abccc8df77425754e7d23bae356",
+      "source": "art-source/wildlife-v2/red-squirrel/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-red-squirrel-behavior-v1-scene",
+      "name": "Red squirrel caching and eating scene",
+      "image": "demos/wildlife-v2/red-squirrel/behavior-v1/scene-native.png",
+      "width": 352,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "756cbcd7ba7d5707e0f86163490b1ddf1aeb56c3d0984ac68703b45eb4dd49f5",
+      "source": "art-source/wildlife-v2/red-squirrel/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-red-squirrel-behavior-v1-contact",
+      "name": "Red squirrel caching and eating contact",
+      "image": "demos/wildlife-v2/red-squirrel/behavior-v1/contact-sheet-native.png",
+      "width": 384,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "f3bae327101d874ca8665fe1aa49712080a50c224bd3ce5bed91779d2b67aa5f",
+      "source": "art-source/wildlife-v2/red-squirrel/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/red-squirrel/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/contact-sheet-native.png",
+        "sha256": "f3bae327101d874ca8665fe1aa49712080a50c224bd3ce5bed91779d2b67aa5f"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/index.html",
+        "sha256": "28de8672647831e98364e28e12d980bcf5c40df8aa70f40b21e19cdd09025f8a"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/pixel-audit.json",
+        "sha256": "e61139d6f02d0b8200aaf1d34888808b2e33f297824b011dfe7ebf015da0ed5d"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/preview-native.gif",
+        "sha256": "31a2bb9725dd05b6351502109391bde4806d94f5d0e381aacf8d3504eef1312f"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/preview.gif",
+        "sha256": "fc9e2ded6b81f050d78b9e92f772b811526d24aeca6669b2902d0e79013a3d0d"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/scene-background.png",
+        "sha256": "4a16c1c96af147fa5fa64df8714993c8ffac52373f8f6020931a66e6cdc916bb"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/scene-native.png",
+        "sha256": "756cbcd7ba7d5707e0f86163490b1ddf1aeb56c3d0984ac68703b45eb4dd49f5"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/sheet.png",
+        "sha256": "b503373982d721e8f10d583016de0f3abe569abccc8df77425754e7d23bae356"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/source-audit.json",
+        "sha256": "ee0d436673259e8074959615d9e9f1b429e21f917ebf7b7717d195e4ac661ee6"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/sprite.json",
+        "sha256": "16eb7487d761e23f6fa64e0c431dba519dc36a8c3a15490b8838a315cdec476f"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/travel-native.gif",
+        "sha256": "72b91a5d75946d157d044f4838be50d9e79ba7ffd9a848b028b868ccd34d9136"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/behavior-v1/validation.json",
+        "sha256": "8d5fd36e1f91f0377e3c494cae61a0ef075dcdbbb312024ff06b06c652c646ea"
+      }
+    ]
+  },
+  {
+    "id": "foraging-resources-behavior-v1",
+    "animalId": "foraging-resources",
+    "revision": "behavior-v1",
+    "name": "Foraging materials, nests and caches",
+    "batchId": "wildlife-v2-behaviors-155",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/foraging-resources/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-foraging-resources-behavior-v1",
+      "name": "Foraging materials, nests and caches sheet",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v1/sheet.png",
+      "width": 320,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "79cbee7876d340e41f00d02c46781445ff0457711144a26f6091994d203459bb",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-foraging-resources-behavior-v1-scene",
+      "name": "Foraging materials, nests and caches scene",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v1/scene-native.png",
+      "width": 320,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "929f43f3f94d2e71574b1ac5b6392e982b49eb92a51bfcc7448d27e906331a2d",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-foraging-resources-behavior-v1-contact",
+      "name": "Foraging materials, nests and caches contact",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v1/contact-sheet-native.png",
+      "width": 320,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "79cbee7876d340e41f00d02c46781445ff0457711144a26f6091994d203459bb",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/foraging-resources/behavior-v1/preview.png",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v1/contact-sheet-native.png",
+        "sha256": "79cbee7876d340e41f00d02c46781445ff0457711144a26f6091994d203459bb"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v1/index.html",
+        "sha256": "7631cd516cbca588f70ff8490bff48aa2cc1f618525926b1fce6f29baac8f64c"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v1/pixel-audit.json",
+        "sha256": "8704e2bf2cfb99a6588fddceb476f1c0277936212518227cf32680400d6b7835"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v1/preview.png",
+        "sha256": "7c1c1e823ea7953eae4cfad4c2439cdd17c59833493f6ae4cf06549740a25cf3"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v1/scene-native.png",
+        "sha256": "929f43f3f94d2e71574b1ac5b6392e982b49eb92a51bfcc7448d27e906331a2d"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v1/sheet.png",
+        "sha256": "79cbee7876d340e41f00d02c46781445ff0457711144a26f6091994d203459bb"
+      }
+    ]
   }
 ]

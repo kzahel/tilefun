@@ -36,6 +36,7 @@ for (const line of output.split(/\r?\n/)) {
 }
 const previous = JSON.parse(readFileSync("art-source/wildlife-v2/autonomous-140.json", "utf8"));
 const ledger = JSON.parse(readFileSync("art-source/wildlife-v2/autonomous-147.json", "utf8"));
+const behaviors = JSON.parse(readFileSync("art-source/wildlife-v2/behavior-campaign.json", "utf8"));
 const dates = Object.fromEntries(
   ANIMAL_BROWSER_ENTRIES.map((p) => {
     const bank = additions.get(`public/${p.image}`) ?? null;
@@ -57,7 +58,11 @@ const dates = Object.fromEntries(
       p.id,
       {
         added,
-        updated: completed ?? bank,
+        updated:
+          [completed, bank, behaviors.animals[p.id]?.updatedUtc]
+            .filter((value): value is string => typeof value === "string")
+            .sort()
+            .at(-1) ?? null,
       },
     ];
   }),

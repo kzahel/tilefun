@@ -5,7 +5,9 @@ import type { Prop } from "../entities/Prop.js";
 import { createProp } from "../entities/PropFactories.js";
 import { restoreResidentPose } from "../interiors/ResidentBehavior.js";
 import { generateUUID } from "../shared/uuid.js";
+import { restoreAnimalWorkPose } from "../wildlife/AnimalWorkPose.js";
 import { restoreDeerPose } from "../wildlife/deerInteractions.js";
+import { restoreWorkItemPose } from "../wildlife/ForageResources.js";
 import { restoreFaunaPose } from "../wildlife/faunaInteractions.js";
 import { restoreFrogPose } from "../wildlife/frogInteractions.js";
 import { restoreMallardPose } from "../wildlife/mallardInteractions.js";
@@ -38,6 +40,8 @@ export const DURABLE_ENTITY_FIELDS = [
   "robin",
   "deer",
   "fauna",
+  "animalWork",
+  "workItem",
   "predator",
   "routeAI",
   "resident",
@@ -140,6 +144,8 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
     restoreRobinPose(actor);
     restoreDeerPose(actor);
     restoreFaunaPose(actor);
+    restoreAnimalWorkPose(actor);
+    restoreWorkItemPose(actor);
     restorePredatorPose(actor);
     restoreResidentPose(actor);
   }

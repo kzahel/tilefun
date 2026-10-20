@@ -2,6 +2,7 @@ import { CHARACTER_FACTORIES } from "../characters/PromotedCharacters.js";
 import { INDOOR_PEOPLE_FACTORIES } from "../interiors/IndoorPeople.js";
 import { createDeer, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_FACTORIES } from "../wildlife/Fauna.js";
+import { FORAGE_FACTORIES } from "../wildlife/ForageResources.js";
 import { createFrog, FROG_TYPE } from "../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_FACTORIES } from "../wildlife/Predator.js";
@@ -46,6 +47,7 @@ import { createSeagull } from "./Seagull.js";
 import { createWorm1, createWorm2, createWorm3, createWorm4 } from "./Worm.js";
 
 export const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity> = {
+  ...FORAGE_FACTORIES,
   ...CHARACTER_FACTORIES,
   ...INDOOR_PEOPLE_FACTORIES,
   ...FAUNA_FACTORIES,
