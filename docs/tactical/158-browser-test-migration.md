@@ -186,3 +186,34 @@ affected shard in the same single-worker CI mode (97/97 in 6.2 minutes). Typeche
 lint and migration inventory verification also pass. The full local 808-case
 run above predates this test-only synchronization correction; final exact-commit
 CI remains the authoritative cross-platform validation of the correction.
+
+Second CI follow-up: [run 39414481169](https://github.com/kzahel/tilefun/actions/runs/39414481169)
+passes the corrected doorway shard, but exposes a P2P menu leave/startup race on
+shard 4. The test treated an address change as completion of full local-client
+initialization, so its final readiness assertion could start while the new
+assets/client were still loading. It now waits for the replacement document load
+and the actual local desktop boot menu before checking readiness. No timeout
+limits changed. Three repeated real host/join/leave runs pass. A temporary
+seven-second required-asset delay reproduces the exact five-second readiness
+failure in the original sequence and passes with the correction; that diagnostic
+delay is removed, not committed. The entire affected browser shard then passed
+112/112 in 14.1 minutes with one worker and CI settings.
+
+The second CI check job also exposed a pre-existing native junction-fixture bound:
+one of four saved/reloaded competing cars was still in its turn at the fixed
+1,800-step assertion. The test now stops when every car has completed the junction,
+bounded by the same 3,600-step simulation allowance as TrafficJunction's exhaustive
+queue owner; its wall-clock timeout and all-car completion assertions are unchanged.
+The existing ScenarioTraffic and TrafficJunction suites pass 20/20 cases. A
+20-iteration diagnostic of the existing reload case also passes: completion ranged
+from 1,684 to 1,861 steps, with 3 runs beyond the old cutoff. The diagnostic
+iterations/logging were removed after verification; no redundant matrix was added.
+
+The second run finished with the P2P boot race and native queue-cutoff assertion
+as its only failures; all seven other browser shards and raster verification
+passed, including the corrected doorway test's full shard.
+
+After both second-run corrections, fresh `npm test` passes all 6,387 tests in
+347 files (424.23 seconds) and the browser-free PNG comparator (1/1). Typechecks,
+lint and migration inventory verification also pass. The full affected browser
+shards pass locally with CI settings: doorway 97/97 and P2P/landscape/input 112/112.

@@ -306,7 +306,7 @@
         {
           "path": "tests/p2p-menu.spec.ts",
           "cases": 1,
-          "sourceSha256": "459e7d8917ebefa3af13b2892ecfafbbbc084cf8f66e843d8117fdc2d999488e"
+          "sourceSha256": "c314240da29c2ba15420dc947102c72876df6e8425fbf06cc53c2329a46226ec"
         },
         {
           "path": "tests/p2p-recovery.spec.ts",

@@ -3387,14 +3387,15 @@
       "cases": 1,
       "auditDisposition": "browser",
       "status": "retained",
-      "resolution": "Real host/join menus, invitation routing, peer connection and return-to-local UI compose browser APIs and multiple contexts.",
+      "resolution": "Real host/join menus, invitation routing, peer connection and return-to-local UI compose browser APIs and multiple contexts. CI follow-up: leaving multiplayer waits for the replacement document load and the actual local desktop boot menu before checking readiness; a changed address alone is not initialization completion.",
       "nativeCoverage": [
         "src/transport/PeerGuestTransport.test.ts",
         "src/ui/sessionNavigation.test.ts"
       ],
       "browserCoverage": ["tests/p2p-menu.spec.ts"],
       "validation": [
-        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158",
+        "Three repeated host/join/leave browser runs pass. A temporary seven-second required-asset delay reproduces the exact old readiness failure and passes with the corrected navigation/boot sequence; the delay is not committed."
       ]
     },
     {

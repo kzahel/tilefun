@@ -65,7 +65,13 @@ test("host and join through menus share a world and can return to local play", a
     await expect(guest.locator("#game")).toHaveAttribute("data-renderer", "gpu");
     await expect(guest.getByTestId("world-menu")).toBeVisible({ timeout: 30000 });
     await guest.getByRole("button", { name: "Multiplayer", exact: true }).click();
-    await guest.getByRole("button", { name: "Leave multiplayer" }).click({ timeout: 5000 });
+    await Promise.all([
+      guest.waitForURL((url) => !url.searchParams.has("join"), { waitUntil: "load" }),
+      guest.getByRole("button", { name: "Leave multiplayer" }).click({ timeout: 5000 }),
+    ]);
+    // A changed URL precedes startup of the replacement local authority/client.
+    // The desktop boot menu is the actual UI completion of that initialization.
+    await guest.getByTestId("world-menu").waitFor({ state: "visible" });
     await expect(guest).not.toHaveURL(/join=/);
     await expect(guest.locator("#game")).toHaveAttribute("data-ready", "true");
   } finally {

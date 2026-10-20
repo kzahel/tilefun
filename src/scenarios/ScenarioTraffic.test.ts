@@ -106,14 +106,20 @@ it("clears competing junction queues through Realm save/reload", async () => {
     const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
     for (let i = 0; i < 180; i++) await session.step(idle);
     await session.reload();
-    for (let i = 0; i < 1800; i++) await session.step(idle);
-    for (let i = 0; i < incoming.length; i++) {
-      const car = required(
-        session.realm.traffic?.states.get(required(session.handles[`car-${i}`])),
+    const cars = () =>
+      incoming.map((_, i) =>
+        required(session.realm.traffic?.states.get(required(session.handles[`car-${i}`]))),
       );
+    // Queue release is the contract, not a snapshot at an arbitrary step. Use
+    // the same bounded simulation budget as TrafficJunction's competing queues.
+    let steps = 0;
+    for (; steps < 3600 && cars().some((car) => car.choices === 0); steps++)
+      await session.step(idle);
+    for (const car of cars()) {
       expect(
         car.choices,
         JSON.stringify({
+          steps,
           waiting: car.waiting,
           position: car.entity.position,
           distance: car.distance,
