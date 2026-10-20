@@ -82,9 +82,7 @@ for (const renderer of ["canvas", "gpu"]) {
   });
 }
 
-test("ordinary ball throws ricochet from a robin, trigger a short escape flight", async ({
-  page,
-}) => {
+test("robin ball contact dispatches client chirps through the live Worker", async ({ page }) => {
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
   await page.goto(
@@ -138,18 +136,6 @@ test("ordinary ball throws ricochet from a robin, trigger a short escape flight"
       { timeout: 15000, intervals: [150] },
     )
     .toBe("scared");
-  await expect
-    .poll(
-      async () => {
-        const f = await robin();
-        return f.state === "scared" && f.clip === 2 && f.z > 3;
-      },
-      { intervals: [30] },
-    )
-    .toBe(true);
-  await page.screenshot({ path: "/tmp/tilefun-robin-ball-hop.png" });
-  await expect.poll(async () => (await robin()).state, { timeout: 10000 }).not.toBe("scared");
-  expect((await robin()).exists).toBe(true);
   await expect
     .poll(async () => Number(await page.locator("#game").getAttribute("data-chirps")))
     .toBeGreaterThan(0);

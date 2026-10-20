@@ -38,3 +38,10 @@ food-chain/interior-approved 16/16, and build passed.
 [Resolution ledger](158-browser-test-migration/resolutions.json) tracks all 403
 baseline templates: retained browser contracts, completed migrations and remaining
 work. Template keys refer to the frozen audit source locations.
+
+Ball commands: all 157 subjects pass a production spawn/throw/codec/Realm/replica
+escape/recovery test in 11.76 seconds. Removed 155 state-only browser cases;
+retained two focused frog/robin client audio dispatch cases (both pass), with an
+actual keyboard-release ball-creation check in the frog case. The original audit's
+portable classification for these two complete bodies was too broad; their domain
+semantics moved but their browser audio wiring remains.

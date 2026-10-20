@@ -953,11 +953,14 @@
       "source": "tests/deer-gameplay.spec.ts:75",
       "cases": 1,
       "auditDisposition": "node",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Moved spawn/throw binary commands, real collision/ricochet, replicated escape clip/height, recovery and survival to all-157 native matrix. Removed state-only browser body.",
+      "nativeCoverage": ["src/wildlife/BallCommands.test.ts", "src/wildlife/FaunaBodies.test.ts"],
+      "browserCoverage": ["tests/frog-gameplay.spec.ts"],
+      "validation": [
+        "BallCommands: 157 passed",
+        "real browser frog/robin ball audio + keyboard: 2 passed"
+      ]
     },
     {
       "source": "tests/deer-gameplay.spec.ts:138",
@@ -1395,11 +1398,14 @@
       "source": "tests/fauna-gameplay.spec.ts:174",
       "cases": 153,
       "auditDisposition": "node",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Moved spawn/throw binary commands, real collision/ricochet, replicated escape clip/height, recovery and survival to all-157 native matrix. Removed state-only browser body.",
+      "nativeCoverage": ["src/wildlife/BallCommands.test.ts", "src/wildlife/FaunaBodies.test.ts"],
+      "browserCoverage": ["tests/frog-gameplay.spec.ts"],
+      "validation": [
+        "BallCommands: 157 passed",
+        "real browser frog/robin ball audio + keyboard: 2 passed"
+      ]
     },
     {
       "source": "tests/fauna-gameplay.spec.ts:264",
@@ -1473,11 +1479,14 @@
       "source": "tests/frog-gameplay.spec.ts:88",
       "cases": 1,
       "auditDisposition": "node",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Moved spawn/throw binary commands, real collision/ricochet, replicated escape clip/height, recovery and survival to all-157 native matrix. Kept actual client audio dispatch; frog also proves real keyboard-release -> PlayScene -> Worker ball creation. Baseline audio classification corrected.",
+      "nativeCoverage": ["src/wildlife/BallCommands.test.ts", "src/wildlife/FaunaBodies.test.ts"],
+      "browserCoverage": ["tests/frog-gameplay.spec.ts"],
+      "validation": [
+        "BallCommands: 157 passed",
+        "real browser frog/robin ball audio + keyboard: 2 passed"
+      ]
     },
     {
       "source": "tests/frog-gameplay.spec.ts:163",
@@ -3232,11 +3241,14 @@
       "source": "tests/rabbit-gameplay.spec.ts:77",
       "cases": 1,
       "auditDisposition": "node",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Moved spawn/throw binary commands, real collision/ricochet, replicated escape clip/height, recovery and survival to all-157 native matrix. Removed state-only browser body.",
+      "nativeCoverage": ["src/wildlife/BallCommands.test.ts", "src/wildlife/FaunaBodies.test.ts"],
+      "browserCoverage": ["tests/frog-gameplay.spec.ts"],
+      "validation": [
+        "BallCommands: 157 passed",
+        "real browser frog/robin ball audio + keyboard: 2 passed"
+      ]
     },
     {
       "source": "tests/rabbit-gameplay.spec.ts:140",
@@ -3466,11 +3478,14 @@
       "source": "tests/robin-gameplay.spec.ts:85",
       "cases": 1,
       "auditDisposition": "node",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Moved spawn/throw binary commands, real collision/ricochet, replicated escape clip/height, recovery and survival to all-157 native matrix. Kept actual client audio dispatch; frog also proves real keyboard-release -> PlayScene -> Worker ball creation. Baseline audio classification corrected.",
+      "nativeCoverage": ["src/wildlife/BallCommands.test.ts", "src/wildlife/FaunaBodies.test.ts"],
+      "browserCoverage": ["tests/robin-gameplay.spec.ts"],
+      "validation": [
+        "BallCommands: 157 passed",
+        "real browser frog/robin ball audio + keyboard: 2 passed"
+      ]
     },
     {
       "source": "tests/robin-gameplay.spec.ts:158",

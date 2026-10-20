@@ -74,69 +74,6 @@ for (const renderer of ["canvas", "gpu"]) {
   });
 }
 
-test("ordinary ball throws ricochet from a rabbit, trigger a short escape hop", async ({
-  page,
-}) => {
-  const generation = createDescriptor("flat", 1);
-  const arrival = { x: 4, y: 4, generation };
-  await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
-  );
-  await page.getByRole("button", { name: "New World", exact: true }).click();
-  await expect(page.getByTestId("world-menu")).toBeHidden();
-  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-  await page.getByTestId("main-menu-toggle").click();
-  await page.getByRole("button", { name: "Edit", exact: true }).click();
-  await page.evaluate((type) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    const p = g.stateView.playerEntity.position;
-    g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 100, wy: p.wy });
-  }, RABBIT_TYPE);
-  const rabbit = () =>
-    page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      const f = g.stateView.entities.find((e) => e.type === type);
-      return { exists: !!f, state: f?.wanderAI?.state, z: f?.wz ?? 0, clip: f?.sprite?.clip };
-    }, RABBIT_TYPE);
-  await expect.poll(async () => (await rabbit()).exists).toBe(true);
-  await page.getByRole("button", { name: "Exit editor", exact: true }).click();
-  // Throws deliberately vary. Require a real hit from a short aimed volley.
-  await expect
-    .poll(
-      async () => {
-        const state = (await rabbit()).state;
-        if (state !== "scared")
-          await page.evaluate((type) => {
-            const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-            const p = g.stateView.playerEntity.position,
-              f = g.stateView.entities.find((e) => e.type === type);
-            if (f)
-              g.transport.send({
-                type: "throw-ball",
-                dirX: f.position.wx - p.wx,
-                dirY: f.position.wy - p.wy,
-                force: 0,
-              });
-          }, RABBIT_TYPE);
-        return state;
-      },
-      { timeout: 15000, intervals: [150] },
-    )
-    .toBe("scared");
-  await expect
-    .poll(
-      async () => {
-        const f = await rabbit();
-        return f.state === "scared" && f.clip === 1 && f.z > 3;
-      },
-      { intervals: [30] },
-    )
-    .toBe(true);
-  await page.screenshot({ path: "/tmp/tilefun-rabbit-ball-hop.png" });
-  await expect.poll(async () => (await rabbit()).state, { timeout: 10000 }).not.toBe("scared");
-  expect((await rabbit()).exists).toBe(true);
-});
-
 test("ordinary meadow rabbits support manual creation and durable deletion on world reopening", async ({
   page,
 }) => {

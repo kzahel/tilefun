@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { TerrainId } from "../src/autotile/TerrainId.js";
 import type { GameClient } from "../src/client/GameClient.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { FAUNA_PROFILES, faunaType } from "../src/wildlife/Fauna.js";
@@ -170,96 +169,6 @@ for (const profile of FAUNA_PROFILES) {
       expect(errors).toEqual([]);
     });
   }
-
-  test(`${profile.species} ordinary ball throws trigger a harmless escape`, async ({ page }) => {
-    const generation = createDescriptor("flat", 1);
-    const arrival = { x: 4, y: 4, generation };
-    await page.goto(
-      `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
-    );
-    await page.getByRole("button", { name: "New World", exact: true }).click();
-    await expect(page.getByTestId("world-menu")).toBeHidden();
-    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-    await page.getByTestId("main-menu-toggle").click();
-    await page.getByRole("button", { name: "Edit", exact: true }).click();
-    if (["pond", "deep"].includes(profile.habitat)) {
-      await page.evaluate((terrainId) => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-        const p = g.stateView.playerEntity.position,
-          tx = Math.floor(p.wx / 16),
-          ty = Math.floor(p.wy / 16);
-        for (let y = ty - 12; y <= ty + 12; y++)
-          for (let x = tx + 3; x <= tx + 21; x++)
-            g.transport.send({
-              type: "edit-terrain-tile",
-              tx: x,
-              ty: y,
-              terrainId,
-              paintMode: "positive",
-              bridgeDepth: 0,
-            });
-      }, TerrainId.DeepWater);
-    }
-    // A minimum-force ball splashes down before 100px. Aquatic bodies need
-    // to meet its first descending arc; dry-ground subjects can meet a bounce.
-    const distance = ["pond", "deep"].includes(profile.habitat) ? 75 : 100;
-    await page.evaluate(
-      ({ type, distance }) => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-        const p = g.stateView.playerEntity.position;
-        g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + distance, wy: p.wy });
-      },
-      { type: TYPE, distance },
-    );
-    const deer = () =>
-      page.evaluate((type) => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-        const f = g.stateView.entities.find((e) => e.type === type);
-        return { exists: !!f, state: f?.wanderAI?.state, z: f?.wz ?? 0, clip: f?.sprite?.clip };
-      }, TYPE);
-    await expect.poll(async () => (await deer()).exists).toBe(true);
-    await page.getByRole("button", { name: "Exit editor", exact: true }).click();
-    // Throws deliberately vary. Require a real hit from a short aimed volley.
-    await expect
-      .poll(
-        async () => {
-          const state = (await deer()).state;
-          if (state !== "scared")
-            await page.evaluate((type) => {
-              const g = (document.querySelector("#game") as unknown as { __game: GameClient })
-                .__game;
-              const p = g.stateView.playerEntity.position,
-                f = g.stateView.entities.find((e) => e.type === type);
-              if (f)
-                g.transport.send({
-                  type: "throw-ball",
-                  dirX: f.position.wx - p.wx,
-                  dirY: f.position.wy - p.wy,
-                  force: 0,
-                });
-            }, TYPE);
-          return state;
-        },
-        { timeout: 15000, intervals: [150] },
-      )
-      .toBe("scared");
-    await expect
-      .poll(
-        async () => {
-          const f = await deer();
-          return (
-            f.state === "scared" &&
-            profile.clips[f.clip ?? -1]?.name.startsWith("flee") &&
-            (profile.hop ? f.z > 2 : f.z === 0)
-          );
-        },
-        { intervals: [30] },
-      )
-      .toBe(true);
-    await page.screenshot({ path: `/tmp/tilefun-fauna-${profile.species}-ball.png` });
-    await expect.poll(async () => (await deer()).state, { timeout: 10000 }).not.toBe("scared");
-    expect((await deer()).exists).toBe(true);
-  });
 
   test(`${profile.species} manual creation and durable deletion on world reopening`, async ({
     page,

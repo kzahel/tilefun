@@ -85,9 +85,7 @@ for (const renderer of ["canvas", "gpu"]) {
   });
 }
 
-test("ordinary ball throws ricochet from a frog, trigger a croak and a short escape hop", async ({
-  page,
-}) => {
+test("frog ball contact dispatches client croaks through the live Worker", async ({ page }) => {
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
   await page.goto(
@@ -120,6 +118,17 @@ test("ordinary ball throws ricochet from a frog, trigger a croak and a short esc
     }, FROG_TYPE);
   await expect.poll(async () => (await frog()).exists).toBe(true);
   await page.getByRole("button", { name: "Exit editor", exact: true }).click();
+  // Keep one actual keyboard-release -> PlayScene -> Worker throw boundary.
+  await page.keyboard.press("b", { delay: 50 });
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        (
+          document.querySelector("#game") as unknown as { __game: GameClient }
+        ).__game.stateView.entities.some((e) => e.type === "ball"),
+      ),
+    )
+    .toBe(true);
   // Throws deliberately vary. Require a real hit from a short aimed volley.
   await expect
     .poll(
@@ -146,18 +155,6 @@ test("ordinary ball throws ricochet from a frog, trigger a croak and a short esc
   await expect
     .poll(async () => Number(await page.locator("#game").getAttribute("data-croaks")))
     .toBeGreaterThan(0);
-  await expect
-    .poll(
-      async () => {
-        const f = await frog();
-        return f.state === "scared" && f.clip === 1 && f.z > 3;
-      },
-      { intervals: [30] },
-    )
-    .toBe(true);
-  await page.screenshot({ path: "/tmp/tilefun-frog-ball-hop.png" });
-  await expect.poll(async () => (await frog()).state, { timeout: 10000 }).not.toBe("scared");
-  expect((await frog()).exists).toBe(true);
 });
 
 test("ordinary pond frogs support manual creation and durable deletion on world reopening", async ({

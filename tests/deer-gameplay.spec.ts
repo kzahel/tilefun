@@ -72,69 +72,6 @@ for (const renderer of ["canvas", "gpu"]) {
   });
 }
 
-test("ordinary ball throws ricochet from a deer, trigger a short grounded escape", async ({
-  page,
-}) => {
-  const generation = createDescriptor("flat", 1);
-  const arrival = { x: 4, y: 4, generation };
-  await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
-  );
-  await page.getByRole("button", { name: "New World", exact: true }).click();
-  await expect(page.getByTestId("world-menu")).toBeHidden();
-  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-  await page.getByTestId("main-menu-toggle").click();
-  await page.getByRole("button", { name: "Edit", exact: true }).click();
-  await page.evaluate((type) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    const p = g.stateView.playerEntity.position;
-    g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 100, wy: p.wy });
-  }, DEER_TYPE);
-  const deer = () =>
-    page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      const f = g.stateView.entities.find((e) => e.type === type);
-      return { exists: !!f, state: f?.wanderAI?.state, z: f?.wz ?? 0, clip: f?.sprite?.clip };
-    }, DEER_TYPE);
-  await expect.poll(async () => (await deer()).exists).toBe(true);
-  await page.getByRole("button", { name: "Exit editor", exact: true }).click();
-  // Throws deliberately vary. Require a real hit from a short aimed volley.
-  await expect
-    .poll(
-      async () => {
-        const state = (await deer()).state;
-        if (state !== "scared")
-          await page.evaluate((type) => {
-            const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-            const p = g.stateView.playerEntity.position,
-              f = g.stateView.entities.find((e) => e.type === type);
-            if (f)
-              g.transport.send({
-                type: "throw-ball",
-                dirX: f.position.wx - p.wx,
-                dirY: f.position.wy - p.wy,
-                force: 0,
-              });
-          }, DEER_TYPE);
-        return state;
-      },
-      { timeout: 15000, intervals: [150] },
-    )
-    .toBe("scared");
-  await expect
-    .poll(
-      async () => {
-        const f = await deer();
-        return f.state === "scared" && f.clip === 3 && f.z === 0;
-      },
-      { intervals: [30] },
-    )
-    .toBe(true);
-  await page.screenshot({ path: "/tmp/tilefun-deer-ball-hop.png" });
-  await expect.poll(async () => (await deer()).state, { timeout: 10000 }).not.toBe("scared");
-  expect((await deer()).exists).toBe(true);
-});
-
 test("ordinary woodland deer support manual creation and durable deletion on world reopening", async ({
   page,
 }) => {
