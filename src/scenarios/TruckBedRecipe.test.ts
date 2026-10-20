@@ -68,6 +68,8 @@ it("replicates opt-in bed geometry and its removal through the ordinary binary f
   try {
     const truck = session.realm.entityManager.byId.get(session.handles.truck ?? -1);
     if (!truck) throw new Error("Missing truck");
+    truck.vehicleBedTilt = Math.fround(0.4);
+    truck.vehicleBedTarget = Math.fround(DUMP_BED.maxTilt);
     const before = serializeEntity(truck),
       copy = deserializeEntity(before);
     const frame = decodeServerMessage(
@@ -81,7 +83,10 @@ it("replicates opt-in bed geometry and its removal through the ordinary binary f
     );
     if (frame.type !== "frame") throw new Error("Missing frame");
     expect(frame.entityBaselines?.[0]?.vehicleBed).toBe(true);
+    expect(frame.entityBaselines?.[0]?.vehicleBedTilt).toBe(Math.fround(0.4));
     delete truck.vehicleBed;
+    delete truck.vehicleBedTilt;
+    delete truck.vehicleBedTarget;
     const delta = diffEntitySnapshots(before, serializeEntity(truck));
     const changed = decodeServerMessage(
       encodeServerMessage({
@@ -96,6 +101,8 @@ it("replicates opt-in bed geometry and its removal through the ordinary binary f
     expect(changed.entityDeltas[0].vehicleBed).toBeNull();
     applyEntityDelta(copy, changed.entityDeltas[0]);
     expect(copy.vehicleBed).toBeUndefined();
+    expect(copy.vehicleBedTilt).toBeUndefined();
+    expect(copy.vehicleBedTarget).toBeUndefined();
     expect(roofSupport(session.player.player, [truck])).toBeUndefined();
     const absent = serializeEntity(truck);
     truck.vehicleBed = true;

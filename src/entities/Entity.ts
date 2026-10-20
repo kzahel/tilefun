@@ -130,6 +130,9 @@ export interface Entity {
   paintSchemeId?: string;
   /** Qualified source-derived hollow-bed profile; enabled for normal dump trucks. */
   vehicleBed?: true;
+  /** Hinged dump bed angle/target in radians; authority owns the clock. */
+  vehicleBedTilt?: number;
+  vehicleBedTarget?: number;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;

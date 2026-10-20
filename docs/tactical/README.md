@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [167 Tipping dump bed](167-tipping-dump-bed.md) | Implemented and validated; appearance awaits owner inspection: articulated retained truck revision, shared inclined contacts and actual discharge; [vehicles](../topics/vehicles.md) |
 | [166 Scratching and pollination](166-scratching-and-pollination.md) | Implemented, automation verified; exact review pending: chicken, bee and hummingbird; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [165 Truck bed gameplay](165-truck-bed-gameplay.md) | Normal dump-bed activation, safe game controls, independent riders and persistent loose toys/food; [vehicles](../topics/vehicles.md) |
 | [164 Playable truck bed](164-playable-truck-bed.md) | Opt-in recessed support, moving sprite occupant, local depth and debug geometry through the real Worker/shared renderer; [vehicles](../topics/vehicles.md) |

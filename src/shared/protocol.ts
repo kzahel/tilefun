@@ -225,6 +225,9 @@ export interface EntitySnapshot {
   vehicleHeading?: number;
   paintSchemeId?: string;
   vehicleBed?: true;
+  /** Hinged dump bed angle/target in radians; authority owns the clock. */
+  vehicleBedTilt?: number;
+  vehicleBedTarget?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

@@ -58,3 +58,10 @@ support, prediction and persistence are qualified in native tests; no per-car
 browser matrix or extra CI shards are introduced. The inventory helper now
 invokes the installed Playwright CLI with the current Node executable so the
 same collection verification works on Windows without an `npx` shell shim.
+
+[167](../tactical/167-tipping-dump-bed.md) extends the existing bed boundary with
+articulation, mid-tip reload, disabled/failed meshes and discharge; it adds no
+browser cases or CI shards. Native tests own diagonal chunk-seam bounds, inclined
+contacts, loose actor identities, drive lock and both spatial indexes. The native
+predator recipe save check now compares complete return-queue records by persistent
+actor ID, preserving exact field coverage across record enumeration orders.

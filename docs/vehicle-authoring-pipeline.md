@@ -518,3 +518,20 @@ Component families also rerun decoded mount/attribute and independent bare/combi
 pixel parity. This keeps historical reproduction separate from current-engine
 compatibility. The cycle flag requires prior shared-loader qualification; it
 does not grant normal game activation or human approval. Frozen files stay exact.
+
+## Articulated equipment
+
+[Dump v2](../art-source/vehicle-bake/dump-truck/v2/) and tactical 167 retain the first
+working equipment extension. `articulate.py` splits original semantic components
+into a fixed chassis, hinged tub, upper-hinged tailgate and extending ram meshes;
+no palette transfer or geometry decimation is performed. Old revisions stay exact.
+All six wheel rigs and all 3,720 triangles survive. Replay into a fresh output,
+compare exact GLB/atlas/fallback-geometry bytes, then qualify decoded rest vertices,
+independent hinges, ram endpoints, wheel travel and absolute shared-resource reset.
+
+The [bed workflow](vehicle-bed-prototype.md) owns the runtime contract: plain posed
+convex contacts/support, fixed-clock current/target state, authority clearance,
+independent upright riders, real loose cargo discharge, save/replica/prediction,
+shared game/lab controls and matching software-raster failed-mesh fallback. Do not
+qualify a machinery extension from a render-only hinge animation. New source
+revisions/poses need their own human appearance inspection.

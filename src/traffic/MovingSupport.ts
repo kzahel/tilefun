@@ -9,6 +9,9 @@ import type { World } from "../world/World.js";
 import { roofSupport } from "./RoofSupport.js";
 import { isVehicle } from "./Vehicle.js";
 import {
+  bedFloorOffset,
+  bedFloorSupport,
+  bedFramePoint,
   bedLocalPoint,
   bedWorldPoint,
   hasVehicleBed,
@@ -21,14 +24,22 @@ import { bedInteriorOccupant } from "./VehicleCargo.js";
 export interface RoofOffset {
   x: number;
   y: number;
+  bedFloor?: true;
 }
 function quarter(e: Entity): number {
   if (isCurveTrain(e)) return Math.floor(((e.sprite?.frameRow ?? 0) + 32) / 64) % 4;
   if (isVehicle(e)) return [1, 3, 2, 0][e.sprite?.direction ?? Direction.Down] ?? 0;
   return 0;
 }
-export function roofOffset(position: Entity["position"], support: Entity): RoofOffset {
-  if (hasVehicleBed(support)) return bedLocalPoint(support, position);
+export function roofOffset(
+  position: Entity["position"],
+  support: Entity,
+  bedFloor = false,
+): RoofOffset {
+  if (hasVehicleBed(support))
+    return bedFloor
+      ? { ...bedFloorOffset(support, position), bedFloor: true }
+      : bedLocalPoint(support, position);
   const c = required(support.collider),
     angle = (-quarter(support) * Math.PI) / 2;
   const x = (position.wx - support.position.wx - c.offsetX) / (c.width / 2);
@@ -39,7 +50,10 @@ export function roofOffset(position: Entity["position"], support: Entity): RoofO
   };
 }
 export function roofPosition(offset: RoofOffset, support: Entity): Entity["position"] {
-  if (hasVehicleBed(support)) return bedWorldPoint(support, offset.x, offset.y);
+  if (hasVehicleBed(support))
+    return offset.bedFloor
+      ? bedFramePoint(support, offset.x, offset.y)
+      : bedWorldPoint(support, offset.x, offset.y);
   const c = required(support.collider),
     angle = (quarter(support) * Math.PI) / 2;
   return {
@@ -55,6 +69,14 @@ export function roofPosition(offset: RoofOffset, support: Entity): Entity["posit
   };
 }
 export function movingPassengerPosition(rider: Entity, before: Entity, after: Entity) {
+  if (hasVehicleBed(before) && rider.collider) {
+    const floor = bedFloorSupport(before, getEntityAABB(rider.position, rider.collider));
+    if (floor !== undefined && Math.abs((rider.wz ?? 0) - floor) < 0.1) {
+      const offset = bedFloorOffset(before, rider.position),
+        p = bedFramePoint(after, offset.x, offset.y);
+      return { wx: p.wx, wy: p.wy };
+    }
+  }
   return roofPosition(roofOffset(rider.position, before), after);
 }
 
@@ -95,7 +117,13 @@ export function planMovingPassengers(
   const result = [];
   for (const rider of riders) {
     const position = movingPassengerPosition(rider, before, after);
-    const z = (after.wz ?? 0) + movingSupportZ(before, rider) - (before.wz ?? 0);
+    const floor = hasVehicleBed(before)
+      ? bedFloorSupport(before, getEntityAABB(rider.position, required(rider.collider)))
+      : undefined;
+    const onFloor = floor !== undefined && Math.abs((rider.wz ?? 0) - floor) < 0.1;
+    const z = onFloor
+      ? (bedFloorSupport(after, getEntityAABB(position, required(rider.collider))) ?? rider.wz ?? 0)
+      : (after.wz ?? 0) + movingSupportZ(before, rider) - (before.wz ?? 0);
     const current = getEntityAABB(rider.position, required(rider.collider));
     const next = getEntityAABB(position, required(rider.collider));
     if (

@@ -6,7 +6,7 @@ import { nearestStationBench } from "../railway/StationBench.js";
 import { isTrain } from "../railway/Train.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/Driving.js";
-import { hasVehicleBed } from "../traffic/VehicleBed.js";
+import { bedDriveLocked, hasVehicleBed } from "../traffic/VehicleBed.js";
 import {
   bedContents,
   nearbyCargo,
@@ -46,6 +46,8 @@ export class VehicleControl {
       ["leave", "Climb out"],
       ["load", "Load cargo"],
       ["unload", "Unload cargo"],
+      ["tip", "Tip bed"],
+      ["lower", "Lower bed"],
     ] as const) {
       const button = document.createElement("button");
       button.type = "button";
@@ -83,16 +85,16 @@ export class VehicleControl {
         .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0];
     const bench = !candidate ? nearestStationBench(p, view.props) : undefined;
     const bed =
-      !current && allowed && !view.editorEnabled
+      allowed && !view.editorEnabled
         ? entities
             .filter(
               (e) =>
                 hasVehicleBed(e) &&
                 boardingDistance(p, e) <= 32 &&
                 Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 0.5 &&
-                p.parentId === undefined &&
+                (p.parentId === undefined || current?.id === e.id) &&
                 p.jumpVZ === undefined &&
-                Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <= 52,
+                Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <= 112,
             )
             .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0]
         : undefined;
@@ -100,13 +102,20 @@ export class VehicleControl {
     for (const [action, button] of this.bedButtons) {
       button.hidden =
         !bed ||
-        (action === "board"
-          ? !!inside
-          : action === "leave"
-            ? !inside
-            : action === "load"
-              ? !nearbyCargo(p, bed, entities).length
-              : !bedContents(bed, entities).length);
+        ((action === "tip" || action === "lower") &&
+          entities.some((other) => other.parentId === bed.id && other.id !== p.id)) ||
+        (action !== "tip" && action !== "lower" && (bedDriveLocked(bed) || !!current)) ||
+        (action === "tip"
+          ? (bed.vehicleBedTarget ?? 0) > 0
+          : action === "lower"
+            ? !bedDriveLocked(bed)
+            : action === "board"
+              ? !!inside
+              : action === "leave"
+                ? !inside
+                : action === "load"
+                  ? !nearbyCargo(p, bed, entities).length
+                  : !bedContents(bed, entities).length);
       button.disabled = this.busy || locked;
       button.style.display = button.hidden ? "none" : "";
       button.onclick = () => {

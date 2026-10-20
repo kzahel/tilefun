@@ -1,6 +1,8 @@
+import { DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../config/constants.js";
 import { type AABB, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntitySurface } from "../physics/surfaceHeight.js";
+import { type BedVertex, solidOccludes, solidOverlaps, solidTop } from "./BedSolid.js";
 
 /** Plain physics geometry; opt-in per vehicle, shared by authority/prediction/debug.
  * Source: retained dump-truck/v1/geometry.py and family.json, scale 400/23.
@@ -23,22 +25,25 @@ function part(name: string, bottom: AABB, top: AABB, z0: number, z1: number): Be
 }
 const floor = sourceRect(-0.64, 2.98, -0.93, 0.93);
 export const DUMP_BED = {
+  hinge: { x: -3.12 * scale, z: 1.1 * scale },
+  gateHinge: { x: -3.1 * scale, z: 2.425 * scale },
+  maxTilt: (Math.PI * 48) / 180,
   floorZ: 1.25 * scale,
   center: { x: -1.17 * scale, y: 0 },
   parts: [
     part(
       "chassis",
-      { left: -56, right: 56, top: -23, bottom: 23 },
-      { left: -56, right: 56, top: -23, bottom: 23 },
+      { left: -51.5, right: 51.5, top: -14, bottom: 14 },
+      { left: -51.5, right: 51.5, top: -14, bottom: 14 },
       0,
-      1.17,
+      0.7,
     ),
     part("floor", floor, floor, 1.17, 1.25),
     part(
       "cab",
       sourceRect(-3.07, -0.84, -1.27, 1.27),
       sourceRect(-3.07, -0.84, -1.27, 1.27),
-      1.17,
+      0.43,
       2.8,
     ),
     ...([-1, 1] as const).map((side) =>
@@ -58,8 +63,143 @@ export const DUMP_BED = {
       2.46,
     ),
     part("tailgate", sourceRect(2.9, 2.99, -1, 1), sourceRect(2.99, 3.15, -1.24, 1.24), 1.25, 2.46),
+    ...[-2.3, 1.12, 2.4].flatMap((axle) =>
+      [-1, 1].map((side) => {
+        const rect = sourceRect(axle - 0.5, axle + 0.5, side * 1.04 - 0.18, side * 1.04 + 0.18);
+        return part(`wheel-${axle}-${side}`, rect, rect, 0, 1);
+      }),
+    ),
   ],
 } as const;
+export function bedPartMoves(part: BedPart) {
+  return (
+    part.name === "floor" ||
+    part.name.startsWith("side-") ||
+    part.name === "front-wall" ||
+    part.name === "tailgate"
+  );
+}
+const queryBounds = new WeakMap<
+  EntitySurface,
+  { wx: number; wy: number; heading: number; tilt: number; bounds: AABB }
+>();
+/** Pedestrian/support/visual broad phase, separate from road admission. Includes
+ * continuous yaw and the articulated overhang; the road-size policy stays fixed. */
+export function bedQueryBounds(e: EntitySurface): AABB {
+  const heading = bedHeading(e),
+    tilt = bedTilt(e),
+    wx = e.position.wx,
+    wy = e.position.wy,
+    old = queryBounds.get(e);
+  if (old && old.wx === wx && old.wy === wy && old.heading === heading && old.tilt === tilt)
+    return old.bounds;
+  const points = [
+    [-56, -23],
+    [56, -23],
+    [56, 23],
+    [-56, 23],
+  ].map(([x = 0, y = 0]) => bedWorldPoint(e, x, y));
+  if (tilt > 0)
+    for (const part of DUMP_BED.parts)
+      if (bedPartMoves(part))
+        for (const v of bedPartVertices(e, part)) points.push({ wx: v.x, wy: v.y });
+  const bounds = {
+    left: Math.min(...points.map((p) => p.wx)),
+    right: Math.max(...points.map((p) => p.wx)),
+    top: Math.min(...points.map((p) => p.wy)),
+    bottom: Math.max(...points.map((p) => p.wy)),
+  };
+  queryBounds.set(e, { wx, wy, heading, tilt, bounds });
+  return bounds;
+}
+
+export function bedTilt(e: EntitySurface): number {
+  return Math.max(0, Math.min(DUMP_BED.maxTilt, e.vehicleBedTilt ?? 0));
+}
+export function bedGateAngle(e: EntitySurface): number {
+  return (Math.min(1, bedTilt(e) / (Math.PI / 12)) * Math.PI * 80) / 180;
+}
+export function bedDriveLocked(e: EntitySurface): boolean {
+  return hasVehicleBed(e) && (bedTilt(e) > 0.00001 || (e.vehicleBedTarget ?? 0) > 0);
+}
+function pitch(x: number, z: number, hinge: { x: number; z: number }, angle: number) {
+  const dx = x - hinge.x,
+    dz = z - hinge.z,
+    c = Math.cos(angle),
+    s = Math.sin(angle);
+  return { x: hinge.x + c * dx - s * dz, z: hinge.z + s * dx + c * dz };
+}
+export function bedFramePoint(e: EntitySurface, x: number, y: number, z = DUMP_BED.floorZ) {
+  const p = pitch(x, z, DUMP_BED.hinge, bedTilt(e));
+  return { ...bedWorldPoint(e, p.x, y), wz: (e.wz ?? 0) + p.z };
+}
+export function bedFrameLocal(e: EntitySurface, position: Entity["position"], wz: number) {
+  const p = bedLocalPoint(e, position);
+  return { ...pitch(p.x, wz - (e.wz ?? 0), DUMP_BED.hinge, -bedTilt(e)), y: p.y };
+}
+/** Recover the rest-floor XY anchor without treating an upright person's feet as a rotating body. */
+export function bedFloorOffset(e: EntitySurface, position: Entity["position"]) {
+  const p = bedLocalPoint(e, position),
+    a = bedTilt(e);
+  return {
+    x:
+      DUMP_BED.hinge.x +
+      (p.x - DUMP_BED.hinge.x + Math.sin(a) * (DUMP_BED.floorZ - DUMP_BED.hinge.z)) / Math.cos(a),
+    y: p.y,
+  };
+}
+/** World convex contact vertices, using the same two pivots as the visible v2 rig. */
+export function bedPartVertices(e: EntitySurface, part: BedPart): BedVertex[] {
+  return [part.bottom, part.top].flatMap((r, i) =>
+    [
+      [r.left, r.top],
+      [r.right, r.top],
+      [r.right, r.bottom],
+      [r.left, r.bottom],
+    ].map(([x = 0, y = 0]) => {
+      let z = i ? part.z1 : part.z0;
+      if (bedPartMoves(part)) {
+        if (part.name === "tailgate")
+          ({ x, z } = pitch(x, z, DUMP_BED.gateHinge, -bedGateAngle(e)));
+        ({ x, z } = pitch(x, z, DUMP_BED.hinge, bedTilt(e)));
+      }
+      const p = bedWorldPoint(e, x, y);
+      return { x: p.wx, y: p.wy, z: (e.wz ?? 0) + z };
+    }),
+  );
+}
+export function bedFloorSupport(e: EntitySurface, footprint: AABB): number | undefined {
+  if (!hasVehicleBed(e)) return;
+  const floor = DUMP_BED.parts[1];
+  if (bedTilt(e) === 0)
+    return bedRectOverlaps(e, floor.top, footprint) ? (e.wz ?? 0) + DUMP_BED.floorZ : undefined;
+  return solidTop(bedPartVertices(e, floor), footprint);
+}
+/** Grounded movement can follow the same incline it already stands on. It cannot
+ * step through a bed wall, acquire a remote floor, or lift an airborne body. */
+export function vehicleBedMovementBlocks(e: EntitySurface, footprint: AABB, actor: Entity) {
+  return vehicleBedBlocks(
+    e,
+    footprint,
+    vehicleBedStepZ(e, footprint, actor),
+    actor.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT,
+  );
+}
+export function vehicleBedStepZ(e: EntitySurface, footprint: AABB, actor: Entity) {
+  let z = actor.wz ?? 0;
+  if (actor.jumpVZ === undefined && actor.collider && bedTilt(e) > 0) {
+    const current = bedFloorSupport(e, getEntityAABB(actor.position, actor.collider)),
+      next = bedFloorSupport(e, footprint);
+    if (
+      current !== undefined &&
+      next !== undefined &&
+      Math.abs(z - current) <= STEP_UP_THRESHOLD &&
+      Math.abs(next - z) <= STEP_UP_THRESHOLD
+    )
+      z = next;
+  }
+  return z;
+}
 
 export function hasVehicleBed(e: Pick<EntitySurface, "type" | "vehicleBed">): boolean {
   return e.vehicleBed === true && e.type === "vehicle-v1:dump-truck";
@@ -127,6 +267,10 @@ export function vehicleBedBlocks(
   wz: number,
   height: number,
 ): boolean {
+  if (bedTilt(e) > 0)
+    return DUMP_BED.parts.some((part) =>
+      solidOverlaps(bedPartVertices(e, part), footprint, wz, height),
+    );
   const base = e.wz ?? 0;
   for (const part of DUMP_BED.parts) {
     const z0 = Math.max(part.z0, wz - base),
@@ -152,6 +296,10 @@ export function vehicleBedBlocks(
 }
 /** Ray toward the fixed camera (+world Y,+Z); used only by sprite fallback clips. */
 export function bedOccludesPoint(e: EntitySurface, wx: number, wy: number, wz: number): boolean {
+  if (bedTilt(e) > 0)
+    return DUMP_BED.parts.some((part) =>
+      solidOccludes(bedPartVertices(e, part), { x: wx, y: wy, z: wz }),
+    );
   const p = bedLocalPoint(e, { wx, wy }),
     a = bedHeading(e);
   const dx = Math.sin(a),
@@ -193,6 +341,11 @@ export function bedOccludesPoint(e: EntitySurface, wx: number, wy: number, wz: n
 /** All actual support tops under the foot, including the recessed floor. */
 export function entitySupportTops(e: EntitySurface, footprint: AABB): number[] {
   if (!e.collider) return [];
+  if (hasVehicleBed(e) && bedTilt(e) > 0)
+    return DUMP_BED.parts.flatMap((part) => {
+      const z = solidTop(bedPartVertices(e, part), footprint);
+      return z === undefined ? [] : [z];
+    });
   if (hasVehicleBed(e))
     return DUMP_BED.parts
       .filter((part) => bedRectOverlaps(e, part.top, footprint))
@@ -220,9 +373,6 @@ export function bedVisualOwner(actor: Entity, vehicles: readonly Entity[]): Enti
   if (!actor.collider || actor.parentId !== undefined) return;
   const footprint = getEntityAABB(actor.position, actor.collider);
   return vehicles.find(
-    (e) =>
-      hasVehicleBed(e) &&
-      e.collider &&
-      aabbsOverlap(footprint, getEntityAABB(e.position, e.collider)),
+    (e) => hasVehicleBed(e) && e.collider && aabbsOverlap(footprint, bedQueryBounds(e)),
   );
 }

@@ -120,6 +120,7 @@ try {
         truck: truck && {
           id: truck.id,
           bed: truck.vehicleBed,
+          tilt: truck.vehicleBedTilt ?? 0,
           position: truck.position,
           wz: truck.wz,
         },
@@ -181,6 +182,11 @@ try {
       controls.y + controls.height <= 844,
   );
   await page.screenshot({ path: resolve(output, "mobile-game.png") });
+  await page.getByRole("button", { name: "Tip bed", exact: true }).tap();
+  await expect.poll(async () => (await state()).truck?.tilt ?? 0).toBeGreaterThan(0.28);
+  await page.screenshot({ path: resolve(output, "mobile-game-tipping.png") });
+  await page.getByRole("button", { name: "Lower bed", exact: true }).tap();
+  await expect.poll(async () => (await state()).truck?.tilt ?? 99).toBe(0);
   assert.deepEqual(errors, []);
   await writeFile(
     resolve(output, "main-game.json"),

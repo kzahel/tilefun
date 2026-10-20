@@ -35,6 +35,16 @@ cardinal fallback, measured physical bounds and shared catalog registration.
 Keep original entries separate from the immutable source bank; qualify ordinary
 editor/traffic, save/reload and failed-mesh fallback through game and lab paths.
 
+For working equipment, read `docs/vehicle-bed-prototype.md` and tactical 167.
+The dump v2 constructor splits retained semantic parts into explicit bed/tailgate
+hinges and extending rams without changing rest vertices, UVs or six wheel rigs.
+Replay into a fresh output; old revisions and finished recipes stay immutable.
+Pair absolute per-draw rig poses with shared plain contact/support geometry,
+authority clearance, real loose occupants, save/replica/prediction and a matching
+dynamic failed-mesh fallback. Qualify actual decoded pivots, fixed wheels, reset
+and projected extents through the full motion range. Reuse these contracts for
+another machine; its geometry, pivots and control policy remain family-specific.
+
 The Beetle experiment in tactical 146 adds direct semantic UV painting on its own
 rounded-family topology. Use `scripts/vehicle-bake/beetle/` for that family and
 the `family-*` review tools for new original-family capture/packaging. Curved glass

@@ -35,7 +35,8 @@ import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js"
 import { ParkingSystem, type SavedParking } from "./ParkingSystem.js";
 import { roofSupport } from "./RoofSupport.js";
 import { SHOPPING_PARKED_BAYS, type ShoppingCenter, shoppingLot } from "./ShoppingCenter.js";
-import { hasVehicleBed } from "./VehicleBed.js";
+import { bedDriveLocked, hasVehicleBed } from "./VehicleBed.js";
+import { tickVehicleBedEquipment } from "./VehicleBedEquipment.js";
 import { bedInteriorOccupant } from "./VehicleCargo.js";
 import { trafficPaint, validVehiclePaint } from "./VehiclePaint.js";
 import { commitVehiclePushes, type VehiclePush } from "./VehiclePush.js";
@@ -89,6 +90,9 @@ export interface SavedTraffic {
   paintSchemeId?: string;
   /** Qualified hollow-bed profile; missing on older dump records is migrated. */
   vehicleBed?: true;
+  /** Hinged dump bed angle/target in radians; authority owns the clock. */
+  vehicleBedTilt?: number;
+  vehicleBedTarget?: number;
   resumePath?: Path;
   persistentId?: string;
   originScope?: string;
@@ -736,6 +740,14 @@ export class TrafficSystem {
         continue;
       }
       if (active && !active.has(s.entity)) continue;
+      if (tickVehicleBedEquipment(s.entity, dt, this.entities, this.props, this.world))
+        this.onChange?.(s, false);
+      if (bedDriveLocked(s.entity)) {
+        s.speed = 0;
+        s.entity.velocity = { vx: 0, vy: 0 };
+        if (s.entity.sprite) s.entity.sprite.moving = false;
+        continue;
+      }
       s.shoppingCooldown = Math.max(0, (s.shoppingCooldown ?? 0) - dt);
       if (s.driverId !== undefined || s.parked) continue;
       if (this.tryShopping(s)) continue;
@@ -1055,6 +1067,10 @@ export class TrafficSystem {
       ...(s.entity.vehicleHeading !== undefined ? { vehicleHeading: s.entity.vehicleHeading } : {}),
       ...(s.entity.paintSchemeId === undefined ? {} : { paintSchemeId: s.entity.paintSchemeId }),
       ...(s.entity.vehicleBed ? { vehicleBed: true as const } : {}),
+      ...(s.entity.vehicleBedTilt !== undefined ? { vehicleBedTilt: s.entity.vehicleBedTilt } : {}),
+      ...(s.entity.vehicleBedTarget !== undefined
+        ? { vehicleBedTarget: s.entity.vehicleBedTarget }
+        : {}),
       ...(s.resumePath ? { resumePath: s.resumePath } : {}),
       identity: required(s.entity.proceduralId),
       model: s.entity.type.slice(11),
@@ -1138,6 +1154,14 @@ export class TrafficSystem {
         : (graph.lanes.get(r.laneId) ?? this.strategy.trafficNetwork(r.x, r.y).lanes.get(r.laneId));
       if (r.parked !== undefined && typeof r.parked !== "boolean")
         throw new Error("Invalid parked state.");
+      if (
+        [r.vehicleBedTilt, r.vehicleBedTarget].some(
+          (v) =>
+            v !== undefined &&
+            (r.model !== "dump-truck" || !Number.isFinite(v) || v < 0 || v > 0.838),
+        )
+      )
+        throw Error("Invalid saved dump equipment.");
       if (r.vehicleBed !== undefined && (r.vehicleBed !== true || r.model !== "dump-truck"))
         throw new Error("Invalid vehicle bed profile");
       if (!validVehiclePaint(r.model, r.paintSchemeId))
@@ -1238,7 +1262,12 @@ export class TrafficSystem {
       s.choices = Math.max(0, Math.floor(r.choices));
       s.entity.proceduralId = r.identity;
       // Older dump records acquire the same qualified profile as new placements.
-      if (r.model === "dump-truck") s.entity.vehicleBed = true;
+      if (r.model === "dump-truck") {
+        s.entity.vehicleBed = true;
+        if (r.vehicleBedTilt !== undefined) s.entity.vehicleBedTilt = Math.fround(r.vehicleBedTilt);
+        if (r.vehicleBedTarget !== undefined)
+          s.entity.vehicleBedTarget = Math.fround(r.vehicleBedTarget);
+      }
       if (r.paintSchemeId === undefined) delete s.entity.paintSchemeId;
       else s.entity.paintSchemeId = r.paintSchemeId;
       s.distance = r.distance;

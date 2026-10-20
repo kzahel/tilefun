@@ -2,6 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "./Camera.js";
 import { drawCurveTrain } from "./CurveTrainPresentation.js";
+import { drawDumpTruckFallback } from "./DumpTruckFallback.js";
 import { GRASS_ANCHOR_X, GRASS_ANCHOR_Y } from "./GrassBladeRenderer.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
@@ -191,6 +192,10 @@ function drawSprite(
   if (item.flashHidden) return;
   if (ctx.meshBody?.(camera, item)) return;
   if (drawCurveTrain(ctx, camera, item, sheets)) return;
+  if (drawDumpTruckFallback(ctx, camera, item, sheets)) {
+    drawBedContentsFallback(ctx, camera, item, sheets, drawSprite);
+    return;
+  }
   const sheet = sheets.get(item.sheetKey);
   if (!sheet) return;
 

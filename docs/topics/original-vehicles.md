@@ -4,6 +4,15 @@ Topic: original-vehicles
 Status: 33 road originals integrated and published; Linux CI passed. Windows full result and corrected touch-readiness reruns are recorded separately; motorcycles remain rider prototypes.
 Updated: 2026-10-20.
 
+The owner's follow-on machinery authorization now extends the existing dump truck
+in [167](../tactical/167-tipping-dump-bed.md). V2 retains its exact rest component
+vertices/UV paint and 3,720 triangles while introducing tub/tailgate hinges and
+extending rams, shared tilted contacts and actual cargo/rider discharge. Existing
+v1 catalogs, source and capture receipts remain immutable; active mesh registration
+selects v2 explicitly. This is a revision of one original, not another family:
+**33 originals / 78 road types / 45 source ports** remain unchanged. New v2 poses
+await human appearance inspection; the next original-authoring queue is unchanged.
+
 The owner separately authorized an original **explorer motorboat** and working
 lake gameplay in [152](../tactical/152-explorer-boat-and-lakes.md). Its independent
 hollow-hull Blender/UV source and zero-wheel outboard rig do not change the car

@@ -16,7 +16,8 @@ import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
-import { hasVehicleBed, vehicleBedBlocks } from "../traffic/VehicleBed.js";
+import { hasVehicleBed, vehicleBedMovementBlocks } from "../traffic/VehicleBed.js";
+import { slideOnVehicleBed } from "../traffic/VehicleBedSlide.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
 import { startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
@@ -59,11 +60,13 @@ export function tickBallPhysics(
     if (ball.wz !== undefined) ball.prevWz = ball.wz;
     if (ball.jumpZ !== undefined) ball.prevJumpZ = ball.jumpZ;
 
+    slideOnVehicleBed(ball, dt, beds);
+
     // ── XY movement with wall bouncing ──
     const dx = ball.velocity.vx * dt;
     const dy = ball.velocity.vy * dt;
     const bedBlocked = (box: ReturnType<typeof getEntityAABB>) =>
-      beds.some((e) => vehicleBedBlocks(e, box, ball.wz ?? 0, ball.collider?.physicalHeight ?? 4));
+      beds.some((e) => vehicleBedMovementBlocks(e, box, ball));
 
     if (ball.collider) {
       // Try X

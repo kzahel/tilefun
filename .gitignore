@@ -306,3 +306,7 @@ data/
 !/art-source/vehicle-bake/rider-player-classic-motorcycle/v1/
 /public/demos/vehicle-bake/rider-player-classic-motorcycle/*
 !/public/demos/vehicle-bake/rider-player-classic-motorcycle/v1/
+
+# Retained articulated equipment; scratch and Blender backups remain ignored.
+!/art-source/vehicle-bake/dump-truck/v2/
+/art-source/vehicle-bake/dump-truck/v2/*.blend1

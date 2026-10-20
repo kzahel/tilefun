@@ -25,7 +25,17 @@ it("registers every source type exactly once and consumes its latest retained ex
     }
     const original = ORIGINAL_VEHICLES.find((vehicle) => vehicle.id === definition.vehicle);
     if (original) {
-      expect(definition).toEqual({ vehicle: original.id, ...original.mesh });
+      expect(definition).toEqual({
+        vehicle: original.id,
+        ...original.mesh,
+        ...(original.id === "dump-truck"
+          ? {
+              assetId: "dump-truck-authored-v2",
+              path: "assets/models/vehicles/dump-truck-v2.glb",
+              radius: 128,
+            }
+          : {}),
+      });
       continue;
     }
     const bundle = latest.get(definition.vehicle);

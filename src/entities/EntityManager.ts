@@ -12,7 +12,8 @@ import {
   resolveGroundZForLanding,
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
-import { hasVehicleBed, vehicleBedBlocks } from "../traffic/VehicleBed.js";
+import { hasVehicleBed, vehicleBedMovementBlocks } from "../traffic/VehicleBed.js";
+import { isLooseCargo } from "../traffic/VehicleCargo.js";
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { prepareFaunaTravel, settleFauna, syncFaunaWater } from "../wildlife/faunaInteractions.js";
@@ -216,7 +217,7 @@ export class EntityManager {
           const eWz = e.wz ?? 0;
           const eHeight = e.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
           if (hasVehicleBed(e)) {
-            if (vehicleBedBlocks(e, aabb, selfWz, selfHeight)) return true;
+            if (vehicleBedMovementBlocks(e, aabb, self)) return true;
             continue;
           }
           if (
@@ -393,6 +394,7 @@ export class EntityManager {
 
     // --- Phase 2.5: Ground tracking â€” snap wz to surface, detect cliff edges ---
     if (getHeight) {
+      const cargoBeds = this.entities.filter(hasVehicleBed);
       // Membership is stable during this synchronous pass. Keep live objects: earlier
       // ground snaps must still affect later support checks. Never reuse across ticks,
       // movement, index updates, edits or streaming changes.
@@ -527,7 +529,19 @@ export class EntityManager {
           entity.wz = entity.animalWork?.climbZ ?? entity.wz ?? 0;
           continue;
         }
-        applyGroundTracking(entity, computeGroundZ(entity), playerSet.has(entity));
+        applyGroundTracking(
+          entity,
+          computeGroundZ(entity),
+          playerSet.has(entity) ||
+            (isLooseCargo(entity) &&
+              cargoBeds.some(
+                (b) =>
+                  Math.hypot(
+                    b.position.wx - entity.position.wx,
+                    b.position.wy - entity.position.wy,
+                  ) < 100,
+              )),
+        );
       }
       // Also initialize players that may not be in this.entities
       for (const player of players) {

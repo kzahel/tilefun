@@ -201,18 +201,31 @@ it("normal game requests spawn a hollow dump truck, load one real toy and board 
     const world = await registry.createWorld("Truck cargo", "flat", 42);
     await server.loadWorld(world.id);
     const session = server.getLocalSession();
-    const x = session.player.position.wx,
-      y = session.player.position.wy;
-    transport.clientSend("local", {
-      type: "edit-spawn",
-      entityType: "vehicle-v1:dump-truck",
-      wx: x + 140,
-      wy: y,
-    });
-    await server.settle();
-    const truck = server.entityManager.entities.find((e) => e.type === "vehicle-v1:dump-truck");
+    let truck: (typeof server.entityManager.entities)[number] | undefined;
+    // Ordinary flat-world props/animals can occupy a proposed placement. Use a
+    // bounded set of nearby editor positions rather than assuming one is clear.
+    for (const [dx, dy] of [
+      [140, 0],
+      [-140, 0],
+      [0, 140],
+      [0, -140],
+      [140, 140],
+      [-140, -140],
+    ]) {
+      transport.clientSend("local", {
+        type: "edit-spawn",
+        entityType: "vehicle-v1:dump-truck",
+        wx: session.player.position.wx + (dx ?? 0),
+        wy: session.player.position.wy + (dy ?? 0),
+      });
+      await server.settle();
+      truck = server.entityManager.entities.find((e) => e.type === "vehicle-v1:dump-truck");
+      if (truck) break;
+    }
     expect(truck?.vehicleBed).toBe(true);
     if (!truck) throw Error("Missing normal placement");
+    const x = truck.position.wx - 140,
+      y = truck.position.wy;
     const { createBall } = await import("../entities/Ball.js");
     const ball = server.entityManager.spawn(createBall(x + 120, y + 42));
     session.editorEnabled = false;
@@ -249,6 +262,17 @@ it("normal game requests spawn a hollow dump truck, load one real toy and board 
       transport.messagesOfType("local", "request-error").find((m) => m.requestId === 16503)
         ?.message,
     ).toMatch("already");
+    transport.clientSend("local", {
+      type: "vehicle-bed-action",
+      requestId: 16701,
+      entityId: truck.id,
+      action: "tip",
+    });
+    await server.settle();
+    expect(
+      transport.messagesOfType("local", "vehicle-controlled").some((m) => m.requestId === 16701),
+    ).toBe(true);
+    expect(truck.vehicleBedTarget).toBeGreaterThan(0.8);
   } finally {
     await server.destroy();
   }

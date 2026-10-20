@@ -1,8 +1,12 @@
 import { sha256 } from "../art/ArtSource.js";
 import prediction from "../client/PlayerPredictor.ts?raw";
+import remotePresentation from "../client/RemotePresentation.ts?raw";
+import collisionIndex from "../entities/CollisionIndex.ts?raw";
+import spatialHash from "../entities/SpatialHash.ts?raw";
 import balls from "../physics/BallPhysics.ts?raw";
 import collision from "../physics/SimulationEnvironment.ts?raw";
 import surfaces from "../physics/surfaceHeight.ts?raw";
+import foodPhysics from "../physics/VehicleCargoPhysics.ts?raw";
 import {
   authoredVehicleForType,
   vehicleMeshHeightScale,
@@ -10,8 +14,11 @@ import {
 import assetLoader from "../rendering/CarMeshAsset.ts?raw";
 import outline from "../rendering/CarPixelOutline.ts?raw";
 import collection from "../rendering/collectScene.ts?raw";
+import cpuFallback from "../rendering/DumpTruckFallback.ts?raw";
+import cpuGeometry from "../rendering/dump-truck-v2-fallback.json?raw";
 import meshBodies from "../rendering/GpuMeshBodies.ts?raw";
 import contents from "../rendering/GpuVehicleContents.ts?raw";
+import timeline from "../rendering/PresentationTimeline.ts?raw";
 import debug from "../rendering/VehicleBedDebug.ts?raw";
 import fallback from "../rendering/VehicleBedPresentation.ts?raw";
 import recipe from "../scenarios/TruckBedRecipe.ts?raw";
@@ -19,12 +26,15 @@ import cargoControl from "../server/VehicleBedControl.ts?raw";
 import codec from "../shared/binaryCodec.ts?raw";
 import deltas from "../shared/entityDelta.ts?raw";
 import serialization from "../shared/serialization.ts?raw";
+import solids from "../traffic/BedSolid.ts?raw";
 import driving from "../traffic/Driving.ts?raw";
 import support from "../traffic/MovingSupport.ts?raw";
 import roofSupport from "../traffic/RoofSupport.ts?raw";
 import traffic from "../traffic/TrafficSystem.ts?raw";
 import vehicles from "../traffic/Vehicle.ts?raw";
 import geometry from "../traffic/VehicleBed.ts?raw";
+import equipment from "../traffic/VehicleBedEquipment.ts?raw";
+import slide from "../traffic/VehicleBedSlide.ts?raw";
 import cargo from "../traffic/VehicleCargo.ts?raw";
 import pushes from "../traffic/VehiclePush.ts?raw";
 import vehicleControls from "../ui/VehicleControl.ts?raw";
@@ -34,16 +44,26 @@ import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export async function buildTruckBedCandidate(): Promise<WorkshopCandidate> {
   return {
-    id: "geometry:truck-bed-v1",
+    id: "geometry:truck-bed-v2",
     batchId: "world-geometry",
     kind: "geometry",
-    name: "Playable dump-truck bed",
+    name: "Tipping dump-truck bed",
     prompt:
-      "Use ordinary game controls to board, carry loose toys/food, ride and reload. Inspect floor/wall contacts and upright sprite depth. Level bed; tipping requires an articulated revision.",
+      "Use ordinary game controls to board, carry loose toys/food, ride and reload. Inspect floor/wall contacts and upright sprite depth. Tip/lower the articulated bed and inspect real cargo/rider discharge.",
     url: "/tilefun/workshop.html?geometry=truck-bed#/tool/world-geometry",
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
+          solids,
+          spatialHash,
+          collisionIndex,
+          equipment,
+          slide,
+          foodPhysics,
+          cpuFallback,
+          cpuGeometry,
+          remotePresentation,
+          timeline,
           prediction,
           collision,
           surfaces,
@@ -73,11 +93,11 @@ export async function buildTruckBedCandidate(): Promise<WorkshopCandidate> {
           runtime: scenarioRuntimeSource,
           registration: authoredVehicleForType("vehicle-v1:dump-truck"),
           heightScale: vehicleMeshHeightScale("dump-truck"),
-          model: "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+          model: "237be10a2c5e63b9e7b226d4d6e4acd84f623e703386a2b43b43f3e0baecc719",
         }),
       ),
     ),
     excluded:
-      "Interactive engine prototype using unchanged approved artwork; not an immutable art approval snapshot.",
+      "Interactive articulated-equipment engine review; v1 source preserved, changed v2 poses await human inspection. Not an immutable art approval snapshot.",
   };
 }

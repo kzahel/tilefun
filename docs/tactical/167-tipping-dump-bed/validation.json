@@ -1,0 +1,112 @@
+{
+  "schema": "tilefun-articulated-dump-bed-v1",
+  "status": "implemented-validated-awaiting-human-appearance-review",
+  "date": "2026-10-20",
+  "model": {
+    "path": "public/assets/models/vehicles/dump-truck-v2.glb",
+    "sha256": "237be10a2c5e63b9e7b226d4d6e4acd84f623e703386a2b43b43f3e0baecc719",
+    "bytes": 259684,
+    "triangles": 3720,
+    "meshes": 11,
+    "embeddedImages": 2,
+    "radius": 128
+  },
+  "sourceReplay": {
+    "model.glb": {
+      "bytes": 259684,
+      "sha256": "237be10a2c5e63b9e7b226d4d6e4acd84f623e703386a2b43b43f3e0baecc719",
+      "exact": true
+    },
+    "atlas.png": {
+      "bytes": 3058,
+      "sha256": "1c204674fb084be85a173f9286981a91319f5cb03ff4414bc79af2e1366b9953",
+      "exact": true
+    },
+    "fallback.json": {
+      "bytes": 540080,
+      "sha256": "e5c41fced0acf8d6c813b358c09df5f53f3eb06557546bba987da4f5d695aae2",
+      "exact": true
+    }
+  },
+  "validation": {
+    "affectedNative": {
+      "files": 30,
+      "passed": 773,
+      "seconds": 134.31,
+      "log": "data/vehicle-bake/tipping-affected-seams.log"
+    },
+    "fullNative": {
+      "files": 359,
+      "passed": 6498,
+      "failed": 5,
+      "skipped": 10,
+      "seconds": 637.79,
+      "log": "data/vehicle-bake/tipping-unit-final.log",
+      "notes": [
+        "Five existing Windows symlink/process-death failures; static-file symlink setup/cleanup errors and ten skips.",
+        "Active dump registration assertions use v2. Orca return records compared exactly after sorting by persistent actor ID; all 48 recipes pass."
+      ]
+    },
+    "focusedBrowser": {
+      "passed": 5,
+      "seconds": 41.2,
+      "log": "data/vehicle-bake/tipping-browser-ship.log",
+      "epoch": "final frozen source build"
+    },
+    "fullBrowser": {
+      "passed": 822,
+      "failed": 4,
+      "cases": 826,
+      "minutes": 38.4,
+      "log": "data/vehicle-bake/tipping-browser-all.log",
+      "epoch": "frozen build before final query-bounds fix",
+      "notes": [
+        "Two stale v1 registration expectations corrected.",
+        "Pinch-menu timeout passes unchanged serial rerun.",
+        "Standalone source identity rejected edits after frozen build; regenerated final build passes.",
+        "All four failures plus tipping boundary pass final five-case rerun."
+      ]
+    },
+    "nodeComparator": "passed",
+    "streaming": {
+      "assertReady": "passed",
+      "report": "data/3d-investigation/truck-bed-tipping-seam-streaming/report.json",
+      "scope": "ordinary GPU-mesh world readiness, not occupied tipping truck/device frame budget"
+    },
+    "retainedRecipeAndRuntimeCopies": "hashes pass",
+    "originalV1Model": "unchanged eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "finalHeightCompatibility": {
+      "files": 4,
+      "passed": 41,
+      "seconds": 5.79,
+      "log": "data/vehicle-bake/tipping-default-height.log"
+    },
+    "predatorRecipes": {
+      "passed": 48,
+      "seconds": 25.55,
+      "log": "data/vehicle-bake/tipping-return-queue.log"
+    },
+    "finalBuild": {
+      "typecheck": "passed all three targets",
+      "lint": "passed, 121 existing warnings and 41 infos",
+      "productionBuild": "passed",
+      "catalogSheets": 700,
+      "catalogUses": 1394,
+      "workshopVerifiedCandidates": 1915,
+      "logPrefix": "data/vehicle-bake/tipping-*-ship.log"
+    }
+  },
+  "capture": {
+    "gallery": "data/3d-investigation/truck-bed-tipping-complete/index.html",
+    "mainGame": "data/3d-investigation/truck-bed-tipping-complete/main-game.png",
+    "phone": "data/3d-investigation/truck-bed-tipping-complete/mobile-game-tipping.png",
+    "pageErrors": [],
+    "sourceHashesVerified": true
+  },
+  "limits": [
+    "No human appearance approval is synthesized.",
+    "Upright sprite planes and physical-ray fallback clips remain approximations.",
+    "Whole-group ordering against external props retains tactical 162 limits.",
+    "No general rigid-body engine or mobile performance budget is claimed."
+  ]
+}

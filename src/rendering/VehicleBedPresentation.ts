@@ -10,6 +10,7 @@ export function bedItemPose(item: SpriteItem) {
     type: "vehicle-v1:dump-truck",
     vehicleBed: true as const,
     vehicleHeading: item.bedGroup?.heading ?? 0,
+    vehicleBedTilt: item.bedGroup?.tilt ?? 0,
     position: { wx: item.wx, wy: item.wy },
     wz: item.zOffset,
     collider: null,

@@ -11,7 +11,13 @@ import {
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
-import { bedHeading, bedVisualOwner, hasVehicleBed } from "../traffic/VehicleBed.js";
+import {
+  bedGateAngle,
+  bedHeading,
+  bedTilt,
+  bedVisualOwner,
+  hasVehicleBed,
+} from "../traffic/VehicleBed.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
 import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../wildlife/Roadkill.js";
@@ -233,6 +239,8 @@ export function collectScene(
               authoredTrainForType(e.type) ? trainMeshHeading(e) : entityHeading(e),
             ),
             radius: meshRadius,
+            bedTilt: bedTilt(e),
+            bedGateAngle: bedGateAngle(e),
           }
         : undefined);
     const spriteItem = {
@@ -442,7 +450,7 @@ export function collectScene(
       const body = owner && bedSprites.get(owner.id),
         content = bedSprites.get(actor.id);
       if (!body || !content) continue;
-      body.bedGroup ??= { heading: bedHeading(owner), contents: [] };
+      body.bedGroup ??= { heading: bedHeading(owner), tilt: bedTilt(owner), contents: [] };
       content.hasShadow = false;
       body.bedGroup.contents.push(content);
       grouped.add(content);

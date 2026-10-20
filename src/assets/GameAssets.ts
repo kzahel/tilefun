@@ -46,6 +46,7 @@ async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
   }
 }
 export const SPRITE_MANIFEST: SpriteAsset[] = [
+  { key: "dump-truck-v2-atlas", path: "assets/vehicles/dump-truck-v2-atlas.png", w: 512, h: 512 },
   ...Object.entries(VEHICLE_PAINTS.families).flatMap(([model, family]) =>
     family.schemes.map((paint) => ({
       key: vehiclePaintSheet(`vehicle-v1:${model}`, paint.id),

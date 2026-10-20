@@ -1,0 +1,33 @@
+{
+  "revision": "v2",
+  "method": "Retained original component split; same topology, semantic UVs and six wheel rigs",
+  "bedHingeBlender": [
+    3.12,
+    0,
+    1.1
+  ],
+  "tailgateHingeBlender": [
+    3.1,
+    0,
+    2.425
+  ],
+  "exportWorldScale": 17.39130434782609,
+  "maxTiltDegrees": 48,
+  "tailgateOpenDegrees": 80,
+  "triangles": 3720,
+  "artReviewStatus": "awaiting-owner-review",
+  "inputs": {
+    "art-source/vehicle-bake/dump-truck/v1/master.blend": "6c8c178a506e3301cb3f30ad9ddd7c1ee8e66f5c5970742fd960e0942feb0c9d",
+    "art-source/vehicle-bake/dump-truck/v1/car.blend": "0bed0dc0a0d4bf6942f72035f599d0a6eef21932532ccf3a2a95913690a482a5",
+    "art-source/vehicle-bake/dump-truck/v1/family.json": "85245d305aed926d43c038bdd3b6dedf3c3bee712eb7a3108fe69c569862f2dd",
+    "art-source/vehicle-bake/dump-truck/v1/recipe.json": "8b61b4d720814075647d56790165666dfefe27d119683fdfc9d7a3b242e1d03a",
+    "art-source/vehicle-bake/dump-truck/v1/atlas.png": "1c204674fb084be85a173f9286981a91319f5cb03ff4414bc79af2e1366b9953",
+    "scripts/vehicle-bake/dump-truck/articulate.py": "5b4fd3533f7b83246fa92ee67e6f1f9e48a4f3f1af6a9e1a9b1c884c88d7382c"
+  },
+  "outputs": {
+    "model.glb": "237be10a2c5e63b9e7b226d4d6e4acd84f623e703386a2b43b43f3e0baecc719",
+    "car.blend": "2d5ad1e51293b5f971b17e8dfd0c5a095cbe6abf7a300d0fa51aa68f12f9d4fe",
+    "atlas.png": "1c204674fb084be85a173f9286981a91319f5cb03ff4414bc79af2e1366b9953",
+    "fallback.json": "e5c41fced0acf8d6c813b358c09df5f53f3eb06557546bba987da4f5d695aae2"
+  }
+}

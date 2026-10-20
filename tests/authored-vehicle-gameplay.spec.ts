@@ -273,9 +273,18 @@ for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
     test(`${family.title} shares GPU traffic presentation and roof support with ${failed ? "failed-mesh sprite fallback" : "its own mesh"}`, async ({
       page,
     }, testInfo) => {
+      // Base review receipts stay v1; normal dump gameplay uses the articulated revision.
+      const runtime =
+        family.model === "dump-truck"
+          ? {
+              assetId: "dump-truck-authored-v2",
+              modelPath: "assets/models/vehicles/dump-truck-v2.glb",
+              meshCount: 11,
+            }
+          : family;
       const errors: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
-      if (failed) await page.route(`**/${family.modelPath}`, (route) => route.abort());
+      if (failed) await page.route(`**/${runtime.modelPath}`, (route) => route.abort());
       await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
       const canvas = page.getByLabel("Generated traffic playground");
       await expect(canvas).toHaveAttribute("data-ready", "true");
@@ -292,7 +301,7 @@ for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
               eligible: report?.meshEligibleVehicleTypes,
             };
           },
-          { assetId: family.assetId },
+          { assetId: runtime.assetId },
         );
       await expect
         .poll(async () => (await diagnostics()).asset?.state)
@@ -306,7 +315,7 @@ for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
         });
         await expectOriginalFallback(page);
       } else {
-        expect((await diagnostics()).asset?.drawMeshes).toBe(family.meshCount);
+        expect((await diagnostics()).asset?.drawMeshes).toBe(runtime.meshCount);
         await expect.poll(async () => (await diagnostics()).meshDraws).toBeGreaterThan(0);
       }
       // Physical roof heights are exhaustive in OriginalVehicles.test; retain

@@ -1,3 +1,4 @@
+import { bedQueryBounds, hasVehicleBed } from "../traffic/VehicleBed.js";
 import type { AABB } from "./collision.js";
 import type { Entity } from "./Entity.js";
 
@@ -56,10 +57,15 @@ export class CollisionIndex {
       return;
     }
     const { wx, wy } = entity.position;
-    const minX = Math.floor((wx + collider.offsetX - collider.width / 2) / this.cellSize);
-    const minY = Math.floor((wy + collider.offsetY - collider.height) / this.cellSize);
-    const maxX = Math.floor((wx + collider.offsetX + collider.width / 2) / this.cellSize);
-    const maxY = Math.floor((wy + collider.offsetY) / this.cellSize);
+    const bed = hasVehicleBed(entity) ? bedQueryBounds(entity) : undefined;
+    const minX = Math.floor(
+      (bed?.left ?? wx + collider.offsetX - collider.width / 2) / this.cellSize,
+    );
+    const minY = Math.floor((bed?.top ?? wy + collider.offsetY - collider.height) / this.cellSize);
+    const maxX = Math.floor(
+      (bed?.right ?? wx + collider.offsetX + collider.width / 2) / this.cellSize,
+    );
+    const maxY = Math.floor((bed?.bottom ?? wy + collider.offsetY) / this.cellSize);
     const sameCells =
       old && old.minX === minX && old.minY === minY && old.maxX === maxX && old.maxY === maxY;
     if (old?.epoch === this.epoch && sameCells) return;

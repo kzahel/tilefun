@@ -1,6 +1,6 @@
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
-import { type BedPart, bedWorldPoint, DUMP_BED } from "../traffic/VehicleBed.js";
+import { type BedPart, bedPartMoves, bedPartVertices, DUMP_BED } from "../traffic/VehicleBed.js";
 import type { Camera } from "./Camera.js";
 import type { OverlayFrame } from "./OverlayFrame.js";
 
@@ -13,20 +13,7 @@ export function drawVehicleBedDebug(
   contents: readonly Entity[] = [],
 ) {
   function prism(part: BedPart, color: string) {
-    const vertices = [part.bottom, part.top].flatMap((r, index) =>
-      [
-        [r.left, r.top],
-        [r.right, r.top],
-        [r.right, r.bottom],
-        [r.left, r.bottom],
-      ].map(([x = 0, y = 0]) => {
-        const point = bedWorldPoint(truck, x, y);
-        return camera.worldToScreen(
-          point.wx,
-          point.wy - (truck.wz ?? 0) - (index ? part.z1 : part.z0),
-        );
-      }),
-    );
+    const vertices = bedPartVertices(truck, part).map((p) => camera.worldToScreen(p.x, p.y - p.z));
     for (let i = 0; i < 4; i++)
       for (const [a, b] of [
         [i, (i + 1) % 4],
@@ -39,14 +26,7 @@ export function drawVehicleBedDebug(
       }
   }
   for (const part of DUMP_BED.parts)
-    prism(
-      part,
-      part.name === "floor"
-        ? "#64ff8a"
-        : part.name === "cab" || part.name === "chassis"
-          ? "#abb6c477"
-          : "#ff7373",
-    );
+    prism(part, part.name === "floor" ? "#64ff8a" : !bedPartMoves(part) ? "#abb6c477" : "#ff7373");
   for (const player of [actor, ...contents]) {
     if (player.collider) {
       const box = getEntityAABB(player.position, player.collider),

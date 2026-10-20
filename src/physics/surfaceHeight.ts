@@ -234,6 +234,9 @@ export function applyGroundTracking(
 export interface EntitySurface {
   type?: string;
   vehicleBed?: true;
+  /** Hinged dump bed angle/target in radians; authority owns the clock. */
+  vehicleBedTilt?: number;
+  vehicleBedTarget?: number;
   vehicleHeading?: number;
   sprite?: { direction: number } | null;
   velocity?: { vx: number; vy: number } | null;

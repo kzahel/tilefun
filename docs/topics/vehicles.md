@@ -4,6 +4,13 @@ Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
 Updated: 2026-10-20.
 
+[167](../tactical/167-tipping-dump-bed.md) adds the articulated v2 dump model,
+normal Tip bed / Lower bed controls, automatic tailgate, extending rams, shared
+inclined collision/support and actual loose cargo/rider discharge. Nearby stopped
+or cab-driver authority, clearance, drive lock, save/reload, nullable binary state,
+prediction and GPU/Canvas/failed-mesh presentation share the game/lab paths.
+Crates and enclosed seats remain follow-ons; v1 source and review bytes stay exact.
+
 [156](../tactical/156-vehicle-paint-gameplay.md) adds fourteen owner-authorized paint
 schemes for Beetle, pickup and sports coupe. Edit → Vehicles has paint swatches;
 ordinary traffic chooses stable weighted schemes. Each car saves/replicates its
@@ -33,11 +40,11 @@ vehicle controls board and leave the bed and load/unload real loose balls, fruit
 nuts, roots and twigs. A driver and independent bed riders share ordinary authority;
 contents retain identity, floor height and moving support through turns and saves.
 [Bed workflow](../vehicle-bed-prototype.md) owns geometry and repeatable instructions.
-Tipping, crates and enclosed passenger seats remain next work. No artwork changed.
+Crates and enclosed passenger seats remain next work. Tactical 165 changed no artwork; 167 retains the articulated revision.
 
 1. **Working machinery.** Lift and carry movable pallets with the forklift; tip
    the dump-truck bed; rotate the cement-mixer drum. Reuse articulated component
-   authoring and shared equipment controls across suitable work vehicles. Current
+   authoring and shared equipment controls across suitable work vehicles. The dump now tips; other
    equipment remains at its authored rest pose.
 2. **Paint shop and broader colors.** Repaint an existing car in the world and
    retain that choice through driving, saves and multiplayer. Extend curated
@@ -105,7 +112,7 @@ cross-asset rendering/source-readiness investigation. Its schematic GPU proof
 qualifies bed-wall occlusion of an existing sprite plane at level/tilted poses;
 [164](../tactical/164-playable-truck-bed.md) now qualifies a level bed's support,
 collision and local sprite depth through the shared production scenario host,
-including debug geometry. Broader cargo, seats and tipping remain next work here.
+including debug geometry. Tipping and loose cargo are delivered in 167; crates and seats remain next work here.
 
 Owner refinement, 2026-10-20: author simple clip geometry from the actual bed model
 and provide a way to inspect both player and bed clipping. The proposed authoring

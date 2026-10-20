@@ -1,6 +1,7 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
 import { isVehicle } from "../traffic/Vehicle.js";
+import { bedGateAngle, bedTilt } from "../traffic/VehicleBed.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
 import { COMPACT_CAR_MESH, type MeshInstance, vehicleMeshRadius } from "./MeshPresentation.js";
@@ -17,6 +18,8 @@ interface Pose {
     wheelTravel: number;
     emergencyEnabled?: boolean;
     presentationTime?: number;
+    bedTilt?: number;
+    bedGateAngle?: number;
   };
 }
 export function meshAssetFor(
@@ -156,6 +159,8 @@ export class EntityMeshPose {
     if (entity.paintSchemeId === undefined) delete pose.instance.paintSchemeId;
     else pose.instance.paintSchemeId = entity.paintSchemeId;
     pose.instance.presentationTime = time;
+    pose.instance.bedTilt = bedTilt(entity);
+    pose.instance.bedGateAngle = bedGateAngle(entity);
     return pose.instance;
   }
   clear() {

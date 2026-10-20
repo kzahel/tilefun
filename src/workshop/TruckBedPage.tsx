@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { getEntityAABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import type { RendererMode } from "../rendering/RenderHost.js";
@@ -7,7 +8,7 @@ import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.
 import type { ScenarioCommand } from "../scenarios/ScenarioProtocol.js";
 import { truckBedRecipe } from "../scenarios/TruckBedRecipe.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
-import { bedLocalPoint, DUMP_BED } from "../traffic/VehicleBed.js";
+import { bedFloorSupport, bedLocalPoint, DUMP_BED } from "../traffic/VehicleBed.js";
 import { bedContents } from "../traffic/VehicleCargo.js";
 
 export type TruckBedCanvas = HTMLCanvasElement & {
@@ -21,6 +22,8 @@ export type TruckBedCanvas = HTMLCanvasElement & {
     floorZ: number;
     predictedZ: number | undefined;
     cargoCount: number;
+    bedTilt: number;
+    bedTarget: number;
   };
   __captureTruckBed?: () => HTMLCanvasElement;
 };
@@ -77,7 +80,7 @@ export default function TruckBedPage() {
         const p = truck
           ? interpolatePosition(truck.position, truck.prevPosition, alpha)
           : player.position;
-        return { wx: p.wx, wy: p.wy - 15 };
+        return { wx: p.wx, wy: p.wy - 40 };
       },
       overlay: (frame, h) => {
         if (!settings.current.debug) return;
@@ -102,7 +105,14 @@ export default function TruckBedPage() {
         const local = truck ? bedLocalPoint(truck, player.position) : undefined;
         const supported = !!truck && roofSupport(player, h.session.view.entities)?.id === truck.id;
         const standingInBed =
-          supported && Math.abs((player.wz ?? 0) - DUMP_BED.floorZ - (truck?.wz ?? 0)) < 0.1;
+          supported &&
+          !!truck &&
+          !!player.collider &&
+          Math.abs(
+            (player.wz ?? 0) -
+              (bedFloorSupport(truck, getEntityAABB(player.position, player.collider)) ??
+                -Infinity),
+          ) < 0.1;
         const state =
           player.jumpVZ !== undefined
             ? "Airborne"
@@ -136,7 +146,13 @@ export default function TruckBedPage() {
         playerZ: player.wz ?? 0,
         supportId: roofSupport(player, view.entities)?.id,
         local: truck ? bedLocalPoint(truck, player.position) : undefined,
-        floorZ: DUMP_BED.floorZ,
+        floorZ:
+          truck && player.collider
+            ? (bedFloorSupport(truck, getEntityAABB(player.position, player.collider)) ??
+              DUMP_BED.floorZ)
+            : DUMP_BED.floorZ,
+        bedTilt: truck?.vehicleBedTilt ?? 0,
+        bedTarget: truck?.vehicleBedTarget ?? 0,
         predictedZ: session.session.predictor.player?.wz,
         cargoCount: truck ? bedContents(truck, view.entities).length : 0,
       };
@@ -204,7 +220,8 @@ export default function TruckBedPage() {
       <h1>Truck bed playground</h1>
       <p>
         Walk and jump inside a real dump-truck bed, then ride while it moves. WASD / arrows move;
-        Space jumps. Jump over the rim to leave.
+        Space jumps. Tip bed opens the tailgate and lets riders and loose cargo slide out; lower it
+        to drive or load again.
       </p>
       <div className="actions">
         <button type="button" disabled={busy} onClick={() => void command("board")}>

@@ -19,7 +19,17 @@ export interface AuthoredVehicleMesh {
 }
 export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
   BOAT_MESH,
-  ...ORIGINAL_VEHICLES.map((vehicle) => ({ vehicle: vehicle.id, ...vehicle.mesh })),
+  ...ORIGINAL_VEHICLES.map((vehicle) => ({
+    vehicle: vehicle.id,
+    ...vehicle.mesh,
+    ...(vehicle.id === "dump-truck"
+      ? {
+          assetId: "dump-truck-authored-v2",
+          path: "assets/models/vehicles/dump-truck-v2.glb",
+          radius: 128,
+        }
+      : {}),
+  })),
   ...([1, 2, 3, 4, 5, 6] as const).map((number) => {
     const revision = number <= 2 ? "v7" : "v1";
     return {

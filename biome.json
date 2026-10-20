@@ -9,6 +9,8 @@
     "includes": [
       "**",
       "!dist",
+      "!src/rendering/dump-truck-v2-fallback.json",
+      "!art-source/vehicle-bake/dump-truck/v2",
       "!test-results",
       "!ME complete tileset.tsx",
       "!public/demos/vehicle-bake/viewer.js",

@@ -6,6 +6,14 @@ desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-ca
 GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
 Updated: 2026-10-20.
 
+[167](../tactical/167-tipping-dump-bed.md) adds absolute per-draw dump tub, gate
+and ram transforms to the existing shared loader. One cached model can render
+level and tipped instances without pose leakage. Upright bed contents retain the
+same local depth composition. The nonzero-tilt Canvas/disabled/pending/failed path
+software-rasterizes the retained actual triangles/UVs with a bounded atlas-owned
+pose cache; source-derived physical rays still approximate content occlusion.
+This preserves the existing whole-group world-ordering limit from tactical 162.
+
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
 owns timing and allocation evidence; [client/server architecture](../client-server-architecture.md)
 owns authority and prediction. [Parent 022](../tactical/022-renderer-backend-decoupling.md)

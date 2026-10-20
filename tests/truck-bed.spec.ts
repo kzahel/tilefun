@@ -106,6 +106,42 @@ test("bed occupant clips in the shared host and survives backend changes and pau
   await expect(page.getByRole("button", { name: "Reload", exact: true })).toBeEnabled();
   expect((await report())?.playerZ).toBeCloseTo(initial?.floorZ ?? 0, 3);
   expect((await report())?.cargoCount).toBe(2);
+  await page.getByLabel("Truck renderer", { exact: true }).selectOption("gpu-mesh");
+  await expect(page.getByLabel("Truck renderer", { exact: true })).toBeEnabled();
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await page.getByRole("button", { name: "Tip bed", exact: true }).click();
+  await expect.poll(async () => (await report())?.bedTilt ?? 0).toBeGreaterThan(0.28);
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect.poll(async () => (await report())?.authority.clock?.running).toBe(false);
+  const tipped = await report();
+  expect(tipped?.playerZ).toBeCloseTo(tipped?.floorZ ?? 0, 2);
+  expect(tipped?.predictedZ).toBeCloseTo(tipped?.floorZ ?? 0, 1);
+  await testInfo.attach("tipped-mesh", { body: await capture(), contentType: "image/png" });
+  await page.getByRole("button", { name: "Reload", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Reload", exact: true })).toBeEnabled();
+  expect((await report())?.bedTilt).toBe(tipped?.bedTilt);
+  for (const mode of ["canvas", "gpu"]) {
+    await page.getByLabel("Truck renderer", { exact: true }).selectOption(mode);
+    await expect(page.getByLabel("Truck renderer", { exact: true })).toBeEnabled();
+    expect((await report())?.bedTilt).toBe(tipped?.bedTilt);
+    await testInfo.attach(`tipped-${mode}`, { body: await capture(), contentType: "image/png" });
+  }
+  let failedLoads = 0;
+  await page.route("**/assets/models/vehicles/dump-truck-v2.glb", async (route) => {
+    failedLoads++;
+    await route.abort();
+  });
+  await page.getByLabel("Truck renderer", { exact: true }).selectOption("gpu-mesh");
+  await expect.poll(() => failedLoads).toBeGreaterThan(0);
+  expect((await report())?.bedMeshDraws).toBe(0);
+  await testInfo.attach("tipped-failed-glb", { body: await capture(), contentType: "image/png" });
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect.poll(async () => (await report())?.bedTilt ?? 0).toBeGreaterThan(0.83);
+  await expect.poll(async () => (await report())?.playerZ ?? 99).toBeLessThan(0.1);
+  await expect.poll(async () => (await report())?.cargoCount ?? 99).toBe(0);
+  await page.getByRole("button", { name: "Stand beside truck", exact: true }).click();
+  await page.getByRole("button", { name: "Lower bed", exact: true }).click();
+  await expect.poll(async () => (await report())?.bedTilt ?? 99).toBe(0);
   expect(errors).toEqual([]);
   // The named canvas itself remains the keyboard surface after GPU replacement.
   await expect(canvas).toBeVisible();

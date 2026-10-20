@@ -85,6 +85,7 @@ import {
 import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
+import { tickVehicleCargoPhysics } from "../physics/VehicleCargoPhysics.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js";
 import type { ClientMessage } from "../shared/protocol.js";
@@ -1313,6 +1314,15 @@ export class Realm {
           (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
           (tx, ty) => this.world.getHeightAt(tx, ty),
           active,
+        );
+
+        tickVehicleCargoPhysics(
+          this.entityManager,
+          this.propManager,
+          stepDt,
+          getHeight,
+          active,
+          (actor) => this.records?.changed(actor),
         );
 
         this.animalWork.syncAll(active);

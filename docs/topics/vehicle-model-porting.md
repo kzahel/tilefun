@@ -6,6 +6,12 @@ engine integrations (49 exact retained revisions). Production model art review
 remains open; runtime keeps steering neutral and equipment at its authored rest pose.
 Updated: 2026-10-12.
 
+The original dump truck's articulated v2 equipment extension in
+[167](../tactical/167-tipping-dump-bed.md) is separate from this 45-source port
+queue. It changes no source-port count or frozen sprite/model revision here.
+Its own source, pose/contact/fallback qualification and pending human appearance
+inspection belong to [original vehicles](original-vehicles.md) and the bed workflow.
+
 Owns the running vehicle-by-vehicle queue, progress and next action for porting
 the sprite bank to editable Blender models and engine assets. Update this list
 at each authoring, retention, integration or review checkpoint.

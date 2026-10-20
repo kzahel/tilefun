@@ -111,3 +111,9 @@ geometry, owned UV atlases and wheel/bogie/coupler rigs are retained with exact
 sources and dependencies in `art-source/train-models/blue/{v1,v3}/`. The model/motion
 inspection captures are unapproved prototypes; the existing live train sprite
 bank stays unchanged. Source credit: https://limezu.itch.io/modernexteriors
+
+Dump-truck articulated v2 retains the original Tilefun-authored yellow/steel-blue
+geometry and semantic UV paint. Separate bed/tailgate hinges and extending ram
+poses use a new retained [source bundle](../../art-source/vehicle-bake/dump-truck/v2/).
+The original v1 GLB, source and sprite fallback remain immutable. V2 carries no
+new human art approval; see tactical 167 for gameplay and verification evidence.

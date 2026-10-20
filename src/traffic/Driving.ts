@@ -23,7 +23,7 @@ import {
   vehicleNoseHeading,
   vehicleTurningRadius,
 } from "./Vehicle.js";
-import { movingSupportZ } from "./VehicleBed.js";
+import { bedDriveLocked, movingSupportZ } from "./VehicleBed.js";
 import { bedInteriorOccupant } from "./VehicleCargo.js";
 import { carBodyMotion, entityBody, orientedCar } from "./VehicleContact.js";
 import { vehiclePerformance } from "./VehiclePerformance.js";
@@ -81,6 +81,12 @@ export function drivenCarPose(
   straight = false,
 ): Entity | undefined {
   if (![input.dx, input.dy, dt].every(Number.isFinite) || dt <= 0 || dt > 0.1) return;
+  if (bedDriveLocked(car))
+    return {
+      ...car,
+      velocity: { vx: 0, vy: 0 },
+      sprite: car.sprite && { ...car.sprite, moving: false },
+    };
   const length = Math.hypot(input.dx, input.dy);
   const scale = length > 1 ? 1 / length : 1;
   const performance = vehiclePerformance(car.type);

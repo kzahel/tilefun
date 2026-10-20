@@ -1,5 +1,6 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
+import { getEntityAABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
@@ -7,11 +8,49 @@ import { createTrain } from "../railway/Train.js";
 import { interpolatePosition } from "../rendering/EntityInterpolation.js";
 import { bindPredictedPlayerPose } from "../rendering/PlayerPresentation.js";
 import { createVehicle } from "../traffic/Vehicle.js";
-import { DUMP_BED } from "../traffic/VehicleBed.js";
+import { bedFloorSupport, DUMP_BED } from "../traffic/VehicleBed.js";
 import { World } from "../world/World.js";
 import { PlayerPredictor } from "./PlayerPredictor.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
+it("rebases an upright predicted rider onto committed inclined floors and their displayed pose", () => {
+  const world = new World(new FlatStrategy());
+  world.getChunk(0, 0);
+  const truck = createVehicle("dump-truck", 100, 100, Direction.Right);
+  truck.id = 2;
+  const player = createPlayer(100 + DUMP_BED.center.x, 103);
+  player.id = 1;
+  player.wz = player.groundZ = DUMP_BED.floorZ;
+  const predictor = new PlayerPredictor();
+  predictor.reset(player);
+  predictor.reconcile(player, 0, world, [], [truck]);
+  for (let i = 1; i <= 8; i++) {
+    truck.vehicleBedTilt = i * 0.03;
+    truck.vehicleBedTarget = 0.3;
+    predictor.update(1 / 60, idle, world, [], [truck]);
+    const physics = required(predictor.player);
+    expect(physics.wz).toBeCloseTo(
+      required(bedFloorSupport(truck, getEntityAABB(physics.position, required(physics.collider)))),
+      5,
+    );
+    const shown = required(
+      predictor.samplePresentationPlayer(0.5, [
+        { ...truck, vehicleBedTilt: truck.vehicleBedTilt - 0.01 },
+      ]),
+    );
+    expect(shown.wz).toBeCloseTo(
+      required(
+        bedFloorSupport(
+          { ...truck, vehicleBedTilt: truck.vehicleBedTilt - 0.01 },
+          getEntityAABB(shown.position, required(shown.collider)),
+        ),
+      ),
+      5,
+    );
+    expect(physics.parentId).toBeUndefined();
+    expect(physics.jumpVZ).toBeUndefined();
+  }
+});
 it("preserves the recessed bed support height during repeated prediction and presentation", () => {
   const world = new World(new FlatStrategy());
   world.getChunk(0, 0);

@@ -41,6 +41,8 @@ export interface EntityDelta {
   vehicleHeading?: number | null;
   paintSchemeId?: string | null;
   vehicleBed?: true | null;
+  vehicleBedTilt?: number | null;
+  vehicleBedTarget?: number | null;
   wz?: number | null;
   parentId?: number | null;
   localOffsetX?: number | null;
@@ -99,6 +101,8 @@ export function diffEntitySnapshots(
   diffOptionalNum("jumpInputState", prev, curr, ensure);
   diffOptionalNum("emergencyState", prev, curr, ensure);
   diffOptionalNum("vehicleHeading", prev, curr, ensure);
+  diffOptionalNum("vehicleBedTilt", prev, curr, ensure);
+  diffOptionalNum("vehicleBedTarget", prev, curr, ensure);
   if (prev.vehicleBed !== curr.vehicleBed) ensure().vehicleBed = curr.vehicleBed ?? null;
   if (prev.paintSchemeId !== curr.paintSchemeId)
     ensure().paintSchemeId = curr.paintSchemeId ?? null;
@@ -147,6 +151,8 @@ type OptionalNumField =
   | "jumpInputState"
   | "emergencyState"
   | "vehicleHeading"
+  | "vehicleBedTilt"
+  | "vehicleBedTarget"
   | "wz"
   | "parentId"
   | "localOffsetX"
@@ -324,6 +330,8 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "jumpInputState");
   applyOptionalNum(entity, delta, "emergencyState");
   applyOptionalNum(entity, delta, "vehicleHeading");
+  applyOptionalNum(entity, delta, "vehicleBedTilt");
+  applyOptionalNum(entity, delta, "vehicleBedTarget");
   if (delta.vehicleBed === null) delete entity.vehicleBed;
   else if (delta.vehicleBed) entity.vehicleBed = true;
   if (delta.paintSchemeId === null) delete entity.paintSchemeId;

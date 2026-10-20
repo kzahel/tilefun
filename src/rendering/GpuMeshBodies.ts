@@ -131,6 +131,7 @@ export class GpuMeshBodies {
     const object = asset.object;
     object.quaternion.set(...item.mesh.orientation);
     asset.setTravel(item.mesh.wheelTravel ?? 0);
+    asset.setDumpBed(item.mesh.bedTilt ?? 0, item.mesh.bedGateAngle ?? 0);
     asset.setEmergency(item.mesh.emergencyEnabled ?? false, item.mesh.presentationTime ?? 0);
     this.scene.add(object);
     if (item.bedGroup) this.scene.add(this.contents.group);

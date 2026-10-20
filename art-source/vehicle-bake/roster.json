@@ -273,8 +273,16 @@
       "priority": 27,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
-      "candidate": "dump-truck-v1"
+      "next": "Normal placements and traffic use articulated v2: Tip/Lower, real cargo and upright riders, saves and matching fallbacks. Inspect the new poses in tactical 167; base v1 review remains frozen. Crates/pallets and other machinery are follow-ons.",
+      "candidate": "dump-truck-v1",
+      "equipmentRevision": {
+        "revision": "v2",
+        "source": "art-source/vehicle-bake/dump-truck/v2/recipe.json",
+        "runtime": "public/assets/models/vehicles/dump-truck-v2.glb",
+        "review": "geometry:truck-bed-v2",
+        "humanAppearanceReview": "pending",
+        "record": "docs/tactical/167-tipping-dump-bed.md"
+      }
     },
     {
       "id": "cement-mixer",

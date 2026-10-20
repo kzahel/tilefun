@@ -6,7 +6,7 @@
     {
       "name": "browser",
       "cases": 826,
-      "inventorySha256": "9f408f8097581db125817e9b8f3074778e64a88400c9737c36b60700537b8425",
+      "inventorySha256": "81a508c5b75696a9738278cf2cca365d96b54f6678bfd3635f12fcf7b6671d12",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -41,7 +41,7 @@
         {
           "path": "tests/authored-vehicle-gameplay.spec.ts",
           "cases": 90,
-          "sourceSha256": "33b5a5144b1cfa1f0144f9ea7fa902adba80e38e6cb81ff6b48c88f13c9bcb6b"
+          "sourceSha256": "77f428706aeb0dd960674dcea91952761073284605c77bd69be50f4d03ddeb8d"
         },
         {
           "path": "tests/authored-vehicle-review.spec.ts",
@@ -546,7 +546,7 @@
         {
           "path": "tests/truck-bed.spec.ts",
           "cases": 1,
-          "sourceSha256": "aaf4634c58911284d7c7c8cdd75eb59d502f505769eefbb789b7cac73d4336e9"
+          "sourceSha256": "c5f99f42e4a4f21ee11172284dff19b1450e150ce2dec261c02f4604ce289deb"
         },
         {
           "path": "tests/underground-garage.spec.ts",

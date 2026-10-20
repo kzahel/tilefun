@@ -22,7 +22,7 @@ import { retainDrivingQueries } from "../traffic/DrivingQueries.js";
 import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { isVehicle } from "../traffic/Vehicle.js";
-import { movingSupportZ } from "../traffic/VehicleBed.js";
+import { bedFloorSupport, movingSupportZ } from "../traffic/VehicleBed.js";
 import type { VehiclePush } from "../traffic/VehiclePush.js";
 import type { World } from "../world/World.js";
 
@@ -368,7 +368,13 @@ export class PlayerPredictor {
         const height = movingSupportZ(this.support, this.predicted) - (this.support.wz ?? 0);
         this.support = current;
         this.predicted.position = roofPosition(this.supportOffset, current);
-        this.predicted.wz = this.predicted.groundZ = (current.wz ?? 0) + height;
+        this.predicted.wz = this.predicted.groundZ =
+          this.supportOffset.bedFloor && this.predicted.collider
+            ? (bedFloorSupport(
+                current,
+                getEntityAABB(this.predicted.position, this.predicted.collider),
+              ) ?? (current.wz ?? 0) + height)
+            : (current.wz ?? 0) + height;
       } else this.clearSupport();
     }
     this.captureSupport(entities);
@@ -772,6 +778,11 @@ export class PlayerPredictor {
       if (serverMount.emergencyState !== undefined)
         this.predictedMount.emergencyState = serverMount.emergencyState;
       else delete this.predictedMount.emergencyState;
+      for (const key of ["vehicleBedTilt", "vehicleBedTarget"] as const) {
+        const value = serverMount[key];
+        if (value === undefined) delete this.predictedMount[key];
+        else this.predictedMount[key] = value;
+      }
       if (serverMount.vehicleBed) this.predictedMount.vehicleBed = true;
       else delete this.predictedMount.vehicleBed;
       if (serverMount.paintSchemeId !== undefined)
@@ -1192,6 +1203,7 @@ export class PlayerPredictor {
     if (support && offset && previousOffset) {
       position = roofPosition(
         {
+          ...(offset.bedFloor ? { bedFloor: true as const } : {}),
           x: previousOffset.x + (offset.x - previousOffset.x) * alpha,
           y: previousOffset.y + (offset.y - previousOffset.y) * alpha,
         },
@@ -1199,6 +1211,7 @@ export class PlayerPredictor {
       );
       const raw = roofPosition(
         {
+          ...(offset.bedFloor ? { bedFloor: true as const } : {}),
           x: previousOffset.x + (offset.x - previousOffset.x) * alpha,
           y: previousOffset.y + (offset.y - previousOffset.y) * alpha,
         },
@@ -1248,7 +1261,10 @@ export class PlayerPredictor {
       position.wy += shift.wy * decay;
     }
     const wz = support
-      ? movingSupportZ(support, player)
+      ? offset?.bedFloor && player.collider
+        ? (bedFloorSupport(support, getEntityAABB(position, player.collider)) ??
+          movingSupportZ(support, player))
+        : movingSupportZ(support, player)
       : (player.prevWz ?? player.wz ?? 0) +
         ((player.wz ?? 0) - (player.prevWz ?? player.wz ?? 0)) * alpha;
     const jumpZ =
@@ -1293,7 +1309,18 @@ export class PlayerPredictor {
       this.poseSourceSeconds = this.sourceFrameSeconds;
     }
     this.support = support;
-    this.supportOffset = roofOffset(this.predicted.position, support);
+    this.supportOffset = roofOffset(
+      this.predicted.position,
+      support,
+      !!this.predicted.collider &&
+        Math.abs(
+          (this.predicted.wz ?? 0) -
+            (bedFloorSupport(
+              support,
+              getEntityAABB(this.predicted.position, this.predicted.collider),
+            ) ?? -Infinity),
+        ) < 0.1,
+    );
     if (changed) {
       this.clearPresentationError();
       this.prevSupportOffset = { ...this.supportOffset };
@@ -1643,6 +1670,8 @@ export class PlayerPredictor {
     if (serverPlayer.emergencyState !== undefined)
       clone.emergencyState = serverPlayer.emergencyState;
     if (serverPlayer.paintSchemeId !== undefined) clone.paintSchemeId = serverPlayer.paintSchemeId;
+    for (const key of ["vehicleBedTilt", "vehicleBedTarget"] as const)
+      if (serverPlayer[key] !== undefined) clone[key] = serverPlayer[key];
     if (serverPlayer.vehicleBed) clone.vehicleBed = true;
     if (serverPlayer.playerModel !== undefined) clone.playerModel = serverPlayer.playerModel;
     if (serverPlayer.sortOffsetY !== undefined) clone.sortOffsetY = serverPlayer.sortOffsetY;

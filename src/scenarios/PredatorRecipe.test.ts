@@ -38,6 +38,11 @@ it.each(PREDATOR_PROFILES)(
       const remaining = aquatic ? fish().length : prey().length;
       if (aquatic) expect(remaining).toBeLessThan(population);
       else expect(remaining).toBe(1);
+      // Compare the complete saved return queue by stable actor identity.
+      const pending = () =>
+        [...session.realm.entityManager.wildlifeRespawns.values()].sort((a, b) =>
+          a.actor.persistentId.localeCompare(b.actor.persistentId),
+        );
       const before = {
         position: { ...hunter().position },
         z: hunter().wz ?? 0,
@@ -46,7 +51,7 @@ it.each(PREDATOR_PROFILES)(
         survivors: observed()
           .map((e) => [e.persistentId, e.type])
           .sort(),
-        pending: structuredClone([...session.realm.entityManager.wildlifeRespawns.values()]),
+        pending: structuredClone(pending()),
       };
       await session.reload();
       expect(hunter().position).toEqual(before.position);
@@ -58,7 +63,7 @@ it.each(PREDATOR_PROFILES)(
           .map((e) => [e.persistentId, e.type])
           .sort(),
       ).toEqual(before.survivors);
-      expect([...session.realm.entityManager.wildlifeRespawns.values()]).toEqual(before.pending);
+      expect(pending()).toEqual(before.pending);
       expect(aquatic ? fish().length : prey().length).toBe(remaining);
     } finally {
       await session.close();

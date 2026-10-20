@@ -2,9 +2,15 @@ import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
 import { roofSupport } from "./RoofSupport.js";
-import { bedVisualOwner, DUMP_BED, hasVehicleBed, vehicleBedBlocks } from "./VehicleBed.js";
+import {
+  bedFloorSupport,
+  bedVisualOwner,
+  DUMP_BED,
+  hasVehicleBed,
+  vehicleBedBlocks,
+} from "./VehicleBed.js";
 
-export type VehicleBedAction = "board" | "leave" | "load" | "unload";
+export type VehicleBedAction = "board" | "leave" | "load" | "unload" | "tip" | "lower";
 
 /** Airborne contents still occupy the hollow volume, rather than the broad body.
  * This is not support: jumps retain world momentum and are never carried here. */
@@ -37,10 +43,7 @@ export function isLooseCargo(e: Entity): boolean {
 export function bedContents(truck: Entity, entities: readonly Entity[]): Entity[] {
   if (!hasVehicleBed(truck)) return [];
   return entities.filter(
-    (e) =>
-      isLooseCargo(e) &&
-      Math.abs((e.wz ?? 0) - (truck.wz ?? 0) - DUMP_BED.floorZ) < 0.1 &&
-      roofSupport(e, [truck])?.id === truck.id,
+    (e) => isLooseCargo(e) && onBedFloor(e, truck) && roofSupport(e, [truck])?.id === truck.id,
   );
 }
 export function nearbyCargo(player: Entity, truck: Entity, entities: readonly Entity[]) {
@@ -79,7 +82,9 @@ export function bedSlots(actor: Entity) {
 export function onBedFloor(actor: Entity, truck: Entity): boolean {
   if (!actor.collider || !hasVehicleBed(truck)) return false;
   return (
-    Math.abs((actor.wz ?? 0) - (truck.wz ?? 0) - DUMP_BED.floorZ) < 0.1 &&
-    roofSupport(actor, [truck])?.id === truck.id
+    Math.abs(
+      (actor.wz ?? 0) -
+        (bedFloorSupport(truck, getEntityAABB(actor.position, actor.collider)) ?? -Infinity),
+    ) < 0.1 && roofSupport(actor, [truck])?.id === truck.id
   );
 }

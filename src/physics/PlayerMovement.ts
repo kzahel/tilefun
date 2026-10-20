@@ -22,6 +22,7 @@ import { setSpriteClip } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
 import { isTrain } from "../railway/Train.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
+import { slideOnVehicleBed } from "../traffic/VehicleBedSlide.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
@@ -572,6 +573,7 @@ export function tickJumpGravity(
   props?: readonly PropSurface[],
   entities?: readonly EntitySurface[],
 ): JumpGravityOutcome {
+  slideOnVehicleBed(entity, dt, entities ?? [], props);
   const existingGroundZ = entity.groundZ ?? entity.wz ?? 0;
   if (entity.jumpVZ !== undefined && entity.wz !== undefined) {
     const prevWz = entity.wz;

@@ -6,7 +6,13 @@ import {
 } from "../entities/collision.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { boardingDistance } from "../traffic/Driving.js";
-import { bedWorldPoint, DUMP_BED, hasVehicleBed, vehicleBedBlocks } from "../traffic/VehicleBed.js";
+import {
+  bedDriveLocked,
+  bedWorldPoint,
+  DUMP_BED,
+  hasVehicleBed,
+  vehicleBedBlocks,
+} from "../traffic/VehicleBed.js";
 import {
   bedContents,
   bedSlots,
@@ -31,15 +37,17 @@ export function controlVehicleBed(
     !truck ||
     !hasVehicleBed(truck) ||
     !realm.traffic?.states.has(id) ||
-    !["board", "leave", "load", "unload"].includes(action)
+    !["board", "leave", "load", "unload", "tip", "lower"].includes(action)
   )
     throw Error("Truck bed unavailable.");
+  const equipment = action === "tip" || action === "lower";
+  const driver = realm.vehicles.get(session);
   if (
     session.editorEnabled ||
     session.transitioning ||
     session.retired ||
-    player.parentId !== undefined ||
-    realm.vehicles.get(session) ||
+    (player.parentId !== undefined && !(equipment && driver?.id === truck.id)) ||
+    (driver && !(equipment && driver.id === truck.id)) ||
     session.debugPaused ||
     realm.saveManager?.pressured
   )
@@ -47,12 +55,24 @@ export function controlVehicleBed(
   if (
     boardingDistance(player, truck) > 32 ||
     player.jumpVZ !== undefined ||
-    Math.abs((player.wz ?? 0) - (truck.wz ?? 0)) > 52
+    Math.abs((player.wz ?? 0) - (truck.wz ?? 0)) > (equipment ? 112 : 52)
   )
     throw Error("Stand beside or inside the truck bed.");
   if (Math.hypot(truck.velocity?.vx ?? 0, truck.velocity?.vy ?? 0) > 0.5)
     throw Error("Wait for the truck to stop.");
 
+  if (equipment) {
+    if (realm.entityManager.entities.some((e) => e.parentId === truck.id && e.id !== player.id))
+      throw Error("The driver controls the bed.");
+    truck.vehicleBedTarget = action === "tip" ? Math.fround(DUMP_BED.maxTilt) : 0;
+    const state = realm.traffic?.states.get(truck.id);
+    if (state) {
+      state.speed = 0;
+      realm.traffic?.onChange?.(state, false);
+    }
+    return;
+  }
+  if (bedDriveLocked(truck)) throw Error("Lower the bed before climbing or loading.");
   const contents = bedContents(truck, realm.entityManager.entities);
   const actor =
     action === "load"

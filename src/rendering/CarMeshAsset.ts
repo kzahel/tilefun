@@ -37,6 +37,16 @@ export class CarMeshAsset {
   private lights?: VehicleEmergencyLights;
   private propeller?: THREE.Object3D;
   private propellerRest?: THREE.Quaternion;
+  private dumpBed?: THREE.Object3D;
+  private dumpGate?: THREE.Object3D;
+  private dumpBedRest?: THREE.Quaternion;
+  private dumpGateRest?: THREE.Quaternion;
+  private dumpRams: {
+    node: THREE.Object3D;
+    mount: THREE.Vector3;
+    length: number;
+    rest: THREE.Quaternion;
+  }[] = [];
   constructor(scene: THREE.Group, lateralScale = 1.3, options?: CarMeshAssetOptions) {
     let meshes = 0;
     scene.traverse((node) => {
@@ -60,6 +70,43 @@ export class CarMeshAsset {
     });
     this.meshCount = meshes;
     try {
+      const bed = scene.getObjectByName("Dump_Bed_Hinge"),
+        gate = scene.getObjectByName("Dump_Tailgate_Hinge");
+      if (bed || gate) {
+        if (
+          !bed ||
+          !gate ||
+          gate.parent !== bed ||
+          bed.userData.tilefun_dump_bed !== 1 ||
+          gate.userData.tilefun_dump_tailgate !== 1
+        )
+          throw Error("Invalid dump equipment rig");
+        this.dumpBed = bed;
+        this.dumpGate = gate;
+        this.dumpBedRest = bed.quaternion.clone();
+        this.dumpGateRest = gate.quaternion.clone();
+        scene.traverse((node) => {
+          if (node.userData.tilefun_dump_ram === 1) {
+            const mount = node.userData.bed_mount_gltf,
+              length = node.userData.rest_length;
+            if (
+              !Array.isArray(mount) ||
+              mount.length !== 3 ||
+              !mount.every(Number.isFinite) ||
+              !Number.isFinite(length) ||
+              length <= 0
+            )
+              throw Error("Invalid dump ram");
+            this.dumpRams.push({
+              node,
+              mount: new THREE.Vector3(mount[0], mount[1], mount[2]),
+              length,
+              rest: node.quaternion.clone(),
+            });
+          }
+        });
+        if (this.dumpRams.length !== 2) throw Error("Missing dump hydraulic rams");
+      }
       const rolls = new Map<string, THREE.Object3D>();
       scene.traverse((node) => {
         const match = /^Wheel_(.+)_Roll$/.exec(node.name);
@@ -246,6 +293,30 @@ export class CarMeshAsset {
   }
   setEmergency(enabled: boolean, time: number) {
     this.lights?.setState(enabled, time);
+  }
+  setDumpBed(tilt = 0, gateAngle = 0) {
+    if (!this.dumpBed || !this.dumpGate) return;
+    const axis = new THREE.Vector3(0, 0, -1);
+    if (this.dumpBed && this.dumpBedRest)
+      this.dumpBed.quaternion
+        .copy(this.dumpBedRest)
+        .multiply(this.rotation.setFromAxisAngle(axis, tilt));
+    if (this.dumpGate && this.dumpGateRest)
+      this.dumpGate.quaternion
+        .copy(this.dumpGateRest)
+        .multiply(this.rotation.setFromAxisAngle(axis, -gateAngle));
+    this.object.updateMatrixWorld(true);
+    for (const ram of this.dumpRams) {
+      if (!ram.node.parent) continue;
+      const end = this.dumpBed.localToWorld(ram.mount.clone());
+      const delta = ram.node.parent.worldToLocal(end).sub(ram.node.position);
+      ram.node.scale.y = delta.length() / ram.length;
+      this.rotation.setFromUnitVectors(
+        new THREE.Vector3(0, 1, 0).applyQuaternion(ram.rest),
+        delta.normalize(),
+      );
+      ram.node.quaternion.copy(this.rotation).multiply(ram.rest);
+    }
   }
   dispose() {
     this.lights?.dispose();

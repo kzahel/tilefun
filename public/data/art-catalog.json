@@ -276,6 +276,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "dump-truck-v2-atlas",
+      "name": "dump truck v2 atlas",
+      "image": "assets/vehicles/dump-truck-v2-atlas.png",
+      "width": 512,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "1c204674fb084be85a173f9286981a91319f5cb03ff4414bc79af2e1366b9953",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "vehicle-v1:beetle:paint:butter",
       "name": "vehicle v1:beetle:paint:butter",
       "image": "assets/vehicles/paint-v1/beetle-butter.png",
@@ -7987,7 +7997,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1132"
+          "source": "src/server/Realm.ts:1133"
         },
         {
           "system": "Gameplay",
@@ -8747,7 +8757,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:148"
+          "source": "src/assets/GameAssets.ts:149"
         },
         {
           "system": "Gameplay",
@@ -8793,7 +8803,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:149"
+          "source": "src/assets/GameAssets.ts:150"
         },
         {
           "system": "Gameplay",
@@ -8831,7 +8841,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:150"
+          "source": "src/assets/GameAssets.ts:151"
         },
         {
           "system": "Gameplay",
@@ -8861,7 +8871,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:151"
+          "source": "src/assets/GameAssets.ts:152"
         },
         {
           "system": "Gameplay",
@@ -8895,7 +8905,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:152"
+          "source": "src/assets/GameAssets.ts:153"
         },
         {
           "system": "Gameplay",
@@ -8911,7 +8921,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1134"
+          "source": "src/server/Realm.ts:1135"
         },
         {
           "system": "Gameplay",
@@ -8937,7 +8947,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:153"
+          "source": "src/assets/GameAssets.ts:154"
         },
         {
           "system": "Gameplay",
@@ -9033,7 +9043,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1134"
+          "source": "src/server/Realm.ts:1135"
         },
         {
           "system": "Gameplay",
@@ -9071,7 +9081,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:154"
+          "source": "src/assets/GameAssets.ts:155"
         },
         {
           "system": "Gameplay",
@@ -9101,7 +9111,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:155"
+          "source": "src/assets/GameAssets.ts:156"
         },
         {
           "system": "Gameplay",
@@ -9155,7 +9165,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:156"
+          "source": "src/assets/GameAssets.ts:157"
         },
         {
           "system": "Gameplay",
@@ -9193,7 +9203,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:158"
+          "source": "src/assets/GameAssets.ts:159"
         },
         {
           "system": "Gameplay",
@@ -9223,7 +9233,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:159"
+          "source": "src/assets/GameAssets.ts:160"
         },
         {
           "system": "Gameplay",
@@ -9257,7 +9267,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:160"
+          "source": "src/assets/GameAssets.ts:161"
         },
         {
           "system": "Gameplay",
@@ -9291,7 +9301,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:161"
+          "source": "src/assets/GameAssets.ts:162"
         },
         {
           "system": "Gameplay",
@@ -9321,7 +9331,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:162"
+          "source": "src/assets/GameAssets.ts:163"
         },
         {
           "system": "Gameplay",
@@ -9355,7 +9365,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:163"
+          "source": "src/assets/GameAssets.ts:164"
         },
         {
           "system": "Gameplay",
@@ -9385,7 +9395,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:164"
+          "source": "src/assets/GameAssets.ts:165"
         },
         {
           "system": "Gameplay",
@@ -9415,7 +9425,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:165"
+          "source": "src/assets/GameAssets.ts:166"
         },
         {
           "system": "Gameplay",
@@ -9445,7 +9455,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:166"
+          "source": "src/assets/GameAssets.ts:167"
         },
         {
           "system": "Gameplay",
@@ -9475,7 +9485,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:167"
+          "source": "src/assets/GameAssets.ts:168"
         },
         {
           "system": "Gameplay",
@@ -27724,6 +27734,32 @@
       ]
     },
     {
+      "id": "sprite:dump-truck-v2-atlas",
+      "sheetId": "dump-truck-v2-atlas",
+      "rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "label": "dump-truck-v2-atlas · registered 512×512 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/assets/GameAssets.ts:49"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/DumpTruckFallback.ts:28"
+        }
+      ]
+    },
+    {
       "id": "sprite:vehicle-v1:beetle:paint:butter",
       "sheetId": "vehicle-v1:beetle:paint:butter",
       "rect": [
@@ -28041,7 +28077,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1132"
+          "source": "src/server/Realm.ts:1133"
         },
         {
           "system": "Gameplay",
@@ -31907,7 +31943,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:88"
+          "source": "src/assets/GameAssets.ts:89"
         },
         {
           "system": "Gameplay",
@@ -31933,7 +31969,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:89"
+          "source": "src/assets/GameAssets.ts:90"
         },
         {
           "system": "Gameplay",
@@ -31967,7 +32003,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:90"
+          "source": "src/assets/GameAssets.ts:91"
         },
         {
           "system": "Gameplay",
@@ -32835,11 +32871,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:247"
+          "source": "src/rendering/collectScene.ts:255"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:257"
+          "source": "src/rendering/collectScene.ts:265"
         },
         {
           "system": "Gameplay",
@@ -33431,15 +33467,19 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/rendering/DumpTruckFallback.ts:55"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/rendering/VehicleBedPresentation.ts:10"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/VehicleBed.ts:65"
+          "source": "src/traffic/VehicleBed.ts:205"
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/TruckBedCandidate.ts:74"
+          "source": "src/workshop/TruckBedCandidate.ts:94"
         }
       ]
     },
@@ -33587,7 +33627,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:107"
+          "source": "src/assets/GameAssets.ts:108"
         },
         {
           "system": "Gameplay",
@@ -33631,7 +33671,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:1077"
+          "source": "src/client/PlayerPredictor.ts:1088"
         },
         {
           "system": "Gameplay",
@@ -33683,7 +33723,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PlayerMovement.ts:611"
+          "source": "src/physics/PlayerMovement.ts:613"
         },
         {
           "system": "Gameplay",
@@ -33691,7 +33731,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:440"
+          "source": "src/rendering/collectScene.ts:448"
         },
         {
           "system": "Gameplay",
@@ -33719,23 +33759,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:337"
+          "source": "src/server/Realm.ts:338"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1554"
+          "source": "src/server/Realm.ts:1564"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1739"
+          "source": "src/server/Realm.ts:1749"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2445"
+          "source": "src/server/Realm.ts:2455"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2665"
+          "source": "src/server/Realm.ts:2675"
         },
         {
           "system": "Gameplay",
@@ -33755,15 +33795,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/shared/serialization.ts:131"
+          "source": "src/shared/serialization.ts:135"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:356"
+          "source": "src/traffic/Driving.ts:362"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/MovingSupport.ts:90"
+          "source": "src/traffic/MovingSupport.ts:112"
         },
         {
           "system": "Gameplay",
@@ -33771,7 +33811,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/VehicleCargo.ts:15"
+          "source": "src/traffic/VehicleBedSlide.ts:54"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/VehicleCargo.ts:21"
         },
         {
           "system": "Gameplay",
@@ -33813,7 +33857,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:113"
+          "source": "src/assets/GameAssets.ts:114"
         },
         {
           "system": "Gameplay",
@@ -33955,7 +33999,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:118"
+          "source": "src/assets/GameAssets.ts:119"
         },
         {
           "system": "Gameplay",
@@ -34045,7 +34089,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:119"
+          "source": "src/assets/GameAssets.ts:120"
         },
         {
           "system": "Editor",
@@ -34119,7 +34163,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:120"
+          "source": "src/assets/GameAssets.ts:121"
         },
         {
           "system": "Editor",
@@ -34161,7 +34205,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:121"
+          "source": "src/assets/GameAssets.ts:122"
         },
         {
           "system": "Editor",
@@ -34207,7 +34251,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:122"
+          "source": "src/assets/GameAssets.ts:123"
         },
         {
           "system": "Editor",
@@ -34253,7 +34297,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:123"
+          "source": "src/assets/GameAssets.ts:124"
         },
         {
           "system": "Editor",
@@ -34299,7 +34343,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:124"
+          "source": "src/assets/GameAssets.ts:125"
         },
         {
           "system": "Gameplay",
@@ -34353,7 +34397,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:125"
+          "source": "src/assets/GameAssets.ts:126"
         },
         {
           "system": "Editor",
@@ -34399,7 +34443,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:126"
+          "source": "src/assets/GameAssets.ts:127"
         },
         {
           "system": "Editor",
@@ -34545,7 +34589,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:127"
+          "source": "src/assets/GameAssets.ts:128"
         },
         {
           "system": "Editor",
@@ -34595,7 +34639,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:128"
+          "source": "src/assets/GameAssets.ts:129"
         },
         {
           "system": "Editor",
@@ -34625,7 +34669,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:129"
+          "source": "src/assets/GameAssets.ts:130"
         },
         {
           "system": "Editor",
@@ -34655,7 +34699,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:130"
+          "source": "src/assets/GameAssets.ts:131"
         },
         {
           "system": "Editor",
@@ -34685,7 +34729,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:131"
+          "source": "src/assets/GameAssets.ts:132"
         },
         {
           "system": "Editor",
@@ -34715,7 +34759,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:132"
+          "source": "src/assets/GameAssets.ts:133"
         },
         {
           "system": "Gameplay",
@@ -34735,11 +34779,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:53"
+          "source": "src/physics/BallPhysics.ts:54"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:212"
+          "source": "src/physics/BallPhysics.ts:215"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/VehicleCargoPhysics.ts:21"
         },
         {
           "system": "Editor",
@@ -34747,11 +34795,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1650"
+          "source": "src/server/Realm.ts:1660"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2629"
+          "source": "src/server/Realm.ts:2639"
         },
         {
           "system": "Gameplay",
@@ -34829,7 +34877,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:133"
+          "source": "src/assets/GameAssets.ts:134"
         },
         {
           "system": "Editor",
@@ -34879,7 +34927,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:134"
+          "source": "src/assets/GameAssets.ts:135"
         },
         {
           "system": "Editor",
@@ -35429,7 +35477,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:148"
+          "source": "src/assets/GameAssets.ts:149"
         },
         {
           "system": "Gameplay",
@@ -35479,7 +35527,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:149"
+          "source": "src/assets/GameAssets.ts:150"
         },
         {
           "system": "Gameplay",
@@ -35521,7 +35569,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:150"
+          "source": "src/assets/GameAssets.ts:151"
         },
         {
           "system": "Gameplay",
@@ -35555,7 +35603,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:151"
+          "source": "src/assets/GameAssets.ts:152"
         },
         {
           "system": "Gameplay",
@@ -35593,7 +35641,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:152"
+          "source": "src/assets/GameAssets.ts:153"
         },
         {
           "system": "Gameplay",
@@ -35609,7 +35657,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1134"
+          "source": "src/server/Realm.ts:1135"
         },
         {
           "system": "Gameplay",
@@ -35639,7 +35687,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:153"
+          "source": "src/assets/GameAssets.ts:154"
         },
         {
           "system": "Gameplay",
@@ -35735,7 +35783,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1134"
+          "source": "src/server/Realm.ts:1135"
         },
         {
           "system": "Gameplay",
@@ -35777,7 +35825,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:154"
+          "source": "src/assets/GameAssets.ts:155"
         },
         {
           "system": "Gameplay",
@@ -35811,7 +35859,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:155"
+          "source": "src/assets/GameAssets.ts:156"
         },
         {
           "system": "Gameplay",
@@ -35869,7 +35917,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:156"
+          "source": "src/assets/GameAssets.ts:157"
         },
         {
           "system": "Gameplay",
@@ -35911,7 +35959,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:158"
+          "source": "src/assets/GameAssets.ts:159"
         },
         {
           "system": "Gameplay",
@@ -35945,7 +35993,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:159"
+          "source": "src/assets/GameAssets.ts:160"
         },
         {
           "system": "Gameplay",
@@ -35983,7 +36031,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:160"
+          "source": "src/assets/GameAssets.ts:161"
         },
         {
           "system": "Gameplay",
@@ -36021,7 +36069,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:161"
+          "source": "src/assets/GameAssets.ts:162"
         },
         {
           "system": "Gameplay",
@@ -36055,7 +36103,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:162"
+          "source": "src/assets/GameAssets.ts:163"
         },
         {
           "system": "Gameplay",
@@ -36093,7 +36141,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:163"
+          "source": "src/assets/GameAssets.ts:164"
         },
         {
           "system": "Gameplay",
@@ -36127,7 +36175,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:164"
+          "source": "src/assets/GameAssets.ts:165"
         },
         {
           "system": "Gameplay",
@@ -36161,7 +36209,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:165"
+          "source": "src/assets/GameAssets.ts:166"
         },
         {
           "system": "Gameplay",
@@ -36195,7 +36243,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:166"
+          "source": "src/assets/GameAssets.ts:167"
         },
         {
           "system": "Gameplay",
@@ -36229,7 +36277,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:167"
+          "source": "src/assets/GameAssets.ts:168"
         },
         {
           "system": "Gameplay",
@@ -36263,7 +36311,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:169"
+          "source": "src/assets/GameAssets.ts:170"
         },
         {
           "system": "Gameplay",

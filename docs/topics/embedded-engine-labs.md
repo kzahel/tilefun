@@ -6,6 +6,12 @@ Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
 Updated: 2026-10-20.
 
+[167](../tactical/167-tipping-dump-bed.md) extends those same normal controls and
+fixed-clock authority with tipping/lowering. Inclined support, cargo gravity,
+nullable replica state, renderer pose, debug and Canvas/failed-mesh fallback are
+shared; no lab equipment simulation exists. Pause/step/reload keep the same rig
+and occupants. The playground camera now fits the fully raised tub.
+
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
 owns recipes, memory persistence and simulation hosting;

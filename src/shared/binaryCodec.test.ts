@@ -187,6 +187,8 @@ describe("EntitySnapshot binary codec", () => {
       jumpInputState: 3,
       emergencyState: 5,
       vehicleHeading: Math.fround(-2.13),
+      vehicleBedTilt: Math.fround(0.42),
+      vehicleBedTarget: Math.fround(0.8),
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -221,6 +223,8 @@ describe("EntitySnapshot binary codec", () => {
     expect(result.jumpInputState).toBe(3);
     expect(result.emergencyState).toBe(5);
     expect(result.vehicleHeading).toBe(Math.fround(-2.13));
+    expect(result.vehicleBedTilt).toBe(Math.fround(0.42));
+    expect(result.vehicleBedTarget).toBe(Math.fround(0.8));
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);
@@ -273,7 +277,7 @@ describe("EntitySnapshot binary codec", () => {
       entityExits: [12, 13],
     };
     const bytes = encodeServerMessage(msg);
-    expect(new DataView(bytes).getUint8(0)).toBe(0x06);
+    expect(new DataView(bytes).getUint8(0)).toBe(0x07);
     expect(roundtripServer(msg)).toEqual(msg);
   });
 
@@ -284,7 +288,7 @@ describe("EntitySnapshot binary codec", () => {
       lastProcessedInputSeq: 0,
       playerEntityId: 1,
     });
-    for (const tag of [0x01, 0x04, 0x05]) {
+    for (const tag of [0x01, 0x04, 0x05, 0x06]) {
       new DataView(bytes).setUint8(0, tag);
       expect(() => decodeServerMessage(bytes)).toThrow("matching updated client and server");
     }
@@ -547,6 +551,8 @@ describe("EntityDelta binary codec", () => {
       jumpInputState: 3,
       emergencyState: 5,
       vehicleHeading: Math.fround(-2.13),
+      vehicleBedTilt: Math.fround(0.42),
+      vehicleBedTarget: Math.fround(0.8),
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -571,6 +577,8 @@ describe("EntityDelta binary codec", () => {
     expect(result.jumpInputState).toBe(3);
     expect(result.emergencyState).toBe(5);
     expect(result.vehicleHeading).toBe(Math.fround(-2.13));
+    expect(result.vehicleBedTilt).toBe(Math.fround(0.42));
+    expect(result.vehicleBedTarget).toBe(Math.fround(0.8));
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);
