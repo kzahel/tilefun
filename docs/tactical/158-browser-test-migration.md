@@ -1,6 +1,6 @@
 # 158 — Browser-test migration
 
-Status: in progress, 2026-10-20. Owner: [testing](../topics/testing.md).
+Status: implemented and locally validated, 2026-10-20. Owner: [testing](../topics/testing.md).
 
 Implements [audit 157](157-browser-test-audit.md) end to end. Preserve that audit as
 a dated baseline. Resolve every portable, mixed and capture-only source template,
@@ -110,8 +110,8 @@ does not require duplicating their assertions in a new controller abstraction.
 Current collection: **808 browser cases**, versus 1,724 baseline (916 fewer,
 53.1%). Six opt-in captures sit outside that inventory. One new browser case
 replaces the unasserted editor captures with an actual palette/mouse stroke →
-Worker authority → changed terrain replica check (passes). Complete final local
-and exact-SHA CI validation remains before completion.
+Worker authority → changed terrain replica check (passes). Final local evidence
+and the required exact-commit CI gates are recorded below.
 
 CI uses eight browser shards for the reduced suite. Registered candidate raster
 verification runs once in a separate required job instead of sixteen times.
@@ -137,3 +137,38 @@ editing pass (4/4); no timeout increases or golden changes. Refreshed generated
 inventories: art-catalog changes only source line references and workshop-manifest
 changes only inputDigest; all 1,840 candidate records are unchanged and their
 registered raster identities verified by normal manifest generation.
+
+## Final validation and handoff
+
+All 403 original templates have an execution decision: 352 retained and 51
+resolved; zero pending. The migration verifier passes and fingerprints the current
+808-case browser lane, one browser-free comparator, three HTTP/WS cases and six
+opt-in captures. Its baseline accounting stays separate from frozen audit 157.
+
+Full local validation on the resulting implementation:
+
+- `npm run typecheck`, `npm run check`, and `npm run build`: passed. Lint has
+  zero errors; its existing 120 warnings and 37 informational diagnostics remain.
+- `npm test`: 6,387/6,387 Vitest tests in 347 files (458.40 seconds), plus the
+  unchanged browser-free PNG comparator (1/1). The baseline was 6,066 tests in
+  341 files: 321 demonstrated native coverage gaps added, rather than 916 nominal
+  replacements for the removed browser cases.
+- `npm run check:worker`: all 11 Worker-package tests and deployment dry build passed.
+- `npx playwright test --workers=2 --reporter=list,json`: 808/808 passed in
+  31.3 minutes, with zero skipped, unexpected or flaky cases. Summed local test
+  durations were 62.2 minutes; these are local measurements, not a comparison
+  with differently provisioned GitHub software-GPU runners.
+- `npm run test:http-integration`: 3/3 passed against isolated real standalone
+  subprocesses; explicit capture lane: 6/6 passed.
+- `npm run art:catalog`, `npm run workshop:manifest`, and the exact CI command
+  `npm run workshop:manifest -- --verify-raster`: passed. All 1,840 registered
+  candidate identities match in normal Chromium at retina scale; the last command
+  writes no manifest. Reviewed pixels, immutable receipts and golden references
+  were preserved.
+- Main and Worker `npm audit --audit-level=high`: zero vulnerabilities.
+
+The final handoff gate is the exact pushed commit's [CI checks](https://github.com/kzahel/tilefun/actions/workflows/ci.yml):
+check, raster, all eight e2e shards and deploy must succeed. GitHub's checks attached
+to that commit are the authoritative CI record; no documentation-only follow-up
+commit should bypass that final gate. Compare actual job durations with audit 157's
+historical baseline when evaluating savings, rather than extrapolating case counts.

@@ -2,7 +2,7 @@
 
 Topic: testing
 
-Status: browser-suite migration in progress, 2026-10-20.
+Status: browser-suite migration implemented and locally validated, 2026-10-20.
 
 Choose test scope from the failure being prevented. Check existing assertions
 before adding a test, including tests with different names or hosts. Prefer Node
@@ -35,3 +35,10 @@ The Node baseline is 6,066 cases plus 11 separate Worker-package cases.
 counts and validation. The audit remains a frozen baseline. Reconcile assertions
 in existing native owners, close genuine gaps and retain browser boundaries.
 Avoid adding redundant native tests merely to replace a removed browser count.
+
+Migration 158 resolves all 403 baseline templates. The default browser lane now
+contains 808 cases (53.1% fewer); exhaustive semantic coverage uses existing native
+owners with only demonstrated parity gaps added. The other lanes contain one
+browser-free comparator, three real HTTP/WS integration cases, and six opt-in
+captures. CI uses eight browser shards and verifies registered art rasters once
+in a separate required job. Keep those boundaries when extending coverage.
