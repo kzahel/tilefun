@@ -71,6 +71,14 @@ Use `https://tilefun.graehlarts.com/tilefun/` for human review links.
 
 ## Validation
 
+Before adding or expanding tests, identify the behavior and check existing
+coverage. Choose the narrowest test level that can detect the failure: prefer
+Node-based unit or headless simulation/integration tests; use a browser only for
+a specific browser-dependent contract (headless Chromium still counts as a
+browser). Existing similar tests are not a reason to copy their test level or
+multiply their case matrix. Keep browser coverage focused on distinct boundaries;
+validate exhaustive content variants below the browser where possible.
+
 Run typechecks, unit tests and lint before considering work done:
 
 ```sh

@@ -32,6 +32,7 @@ completion from an old unchecked checklist. Existing guide filenames stay stable
 | Area | Read |
 | --- | --- |
 | Setup and portable data | [Setup](setup-and-local-data.md) |
+| Test scope and browser coverage | [Testing](topics/testing.md), [complete browser-test audit](tactical/157-browser-test-audit.md) |
 | Workshop, login and feedback APIs | [Workshop](tilefun-workshop.md), [art workbench](art-workbench.md) |
 | Embedded gameplay labs | [Engine alignment](topics/embedded-engine-labs.md), [scenario runtime](topics/gameplay-scenarios.md) |
 | World exploration and generation | [World explorer](world-explorer.md), [city topic](topics/city-generation.md) |
