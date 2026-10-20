@@ -2,7 +2,7 @@
 
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-19.
+Updated: 2026-10-20.
 
 [156](../tactical/156-vehicle-paint-gameplay.md) adds fourteen owner-authorized paint
 schemes for Beetle, pickup and sports coupe. Edit → Vehicles has paint swatches;
@@ -167,19 +167,60 @@ dimensions.
 
 The former cardinal boxes were undersized even before diagonal rotation (e.g.
 compact side 56×20 versus its centered registered mesh envelope 59×31). Continuous
-turns could put much of a mesh outside its collision box. Runtime bounds now use
-a conservative rotated rectangle's axis-aligned envelope, including parked cars.
-This favors clearance over exact polygon contact, so diagonal empty corners can
-stop a car earlier. Roof standing areas and body heights keep their native rules.
+turns could put much of a mesh outside its collision box. Spatial query bounds
+use a conservative rotated rectangle's axis-aligned envelope, including parked
+cars. Driven movement uses oriented bodies for actual
+car, actor, wall and solid/water-tile contact, so empty query-box corners do not
+stop a clear chassis. Roof standing areas and body heights keep their native rules.
 
 New contact or deeper penetration blocks the complete body/push/passenger step.
-An existing overlap may move only toward a nearer exit face; a clear straight roll
-can replace a turn whose widening box is blocked. This permits recovery from old
+An existing overlap may roll toward an exit without increasing penetration; a
+clear straight roll can replace a blocked turn. This permits recovery from old
 saved footprints or moving-body overlap without teleporting or pushing fixed cars.
 Compound building walls and solid/water tiles obey the same recovery rule; surface
 slabs retain ordinary vertical clearance. Automatic queues leave a full body length
 at junctions and can retreat safely from an obsolete queue gap even before a
 junction owner is chosen. The owner-requested no-new-overlap checks remain enforced.
+
+### Rotated body contact fix (2026-10-20)
+
+The owner's red-car screenshot led to a native reproduction: a compact at -60°
+stopped against a parked car in an empty corner of its enclosing AABB, despite
+clear oriented bodies. A 59×31px chassis has a 56.35×66.60px query envelope at
+that bearing. Both manual control styles failed identically. The same fixture
+now advances with and without push planning; wall and solid-tile variants pass.
+This is a matching synthetic scene, not recovered screenshot world coordinates.
+
+`physics/OrientedBox` and `traffic/VehicleContact` provide shared upright body
+geometry. Authority and prediction use it through ordinary `drivenCarPose`,
+including embedded labs. Fixed-bearing movement uses continuous swept SAT;
+turns follow the rolling arc with conservative interval separation bounds,
+including angular bulges outside the endpoint boxes. Unresolved intervals block
+within a bounded work budget; no thin-obstacle point-sampling gap is introduced.
+Retained dimensions, replicated/persisted headings and query indices stay intact.
+
+Existing overlap recovery permits a straight roll toward an exit while the
+nearest penetration stays constant or decreases; turns must prove no deeper
+penetration over the arc. New contacts still block. Gentle pushes clear the
+actual final body along travel, rather than its empty enclosing corners, and
+validate the complete plan before committing. Roadkill uses the same swept body.
+Boats and trains retain their movement owners. On-foot movement/support and
+cardinal automatic routing retain their conservative footprints. Roof/passenger
+clearance and surface-slab height policy remain unchanged.
+
+Regression coverage includes the reported empty corners and genuine impacts
+against cars/walls/tiles, diagonal gentle contact, existing overlap escape,
+rotation-only thin contacts, angle wrap, arc query bounds and delayed binary
+prediction replay. Full validation of this fix atop `69883a30` passes: 6,444
+unit tests, one Node integration check, all 821 browser checks in bundled
+Chromium (32.7 minutes), typechecks, lint (existing warnings), regenerated
+inventories, production build and streaming readiness. After rebasing onto
+`b8a7af65`, the collision implementation is unchanged; 1,144 focused native
+checks and 32 focused browser checks pass, including the new wildlife behavior.
+Typechecks, lint, regenerated inventories (1,898 manifest identities), production
+build and all six streaming readiness cases also pass after the rebase.
+Next: hands-on driving around parked cars in both control styles, especially
+close rolling turns and backing away from contact.
 
 ## Horns, driving personality and gentle contact
 

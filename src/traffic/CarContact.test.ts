@@ -123,3 +123,77 @@ it("can retreat diagonally from a car overlap when one axis gets closer but the 
   expect(next.position.wx).toBeLessThan(car.position.wx);
   expect(next.position.wy).toBeLessThan(car.position.wy);
 });
+
+it.each(["car", "wall", "tile"] as const)(
+  "drives through the empty diagonal query-box corner beside a %s",
+  (kind) => {
+    const { car, world } = fixture();
+    car.vehicleHeading = Math.fround(-Math.PI / 3);
+    applyVehicleFacing(car);
+    const other = createVehicle("compact-1", box(car).right + 29.5 + 0.02, 20);
+    other.id = 2;
+    const props = kind === "wall" ? [wall(0)] : [];
+    if (props[0]) {
+      props[0].position = { wx: other.position.wx, wy: 20 };
+      props[0].collider = { ...required(other.collider), zHeight: 24 };
+    }
+    if (kind === "tile") {
+      // The tile at (1, 1) is inside the box but clear of the diagonal chassis.
+      world.getCollisionIfLoaded = (x, y) => (x === 1 && y === 1 ? CollisionFlag.Solid : 0);
+    }
+    const entities = kind === "car" ? [car, other] : [car];
+    for (const relativeDriving of [false, true])
+      for (const pushes of [undefined, [] as VehiclePush[]]) {
+        const next = required(
+          drivenCarPose(
+            car,
+            {
+              dx: relativeDriving ? 0 : Math.cos(required(car.vehicleHeading)),
+              dy: relativeDriving ? -1 : Math.sin(required(car.vehicleHeading)),
+              relativeDriving,
+            },
+            1 / 60,
+            world,
+            props,
+            entities,
+            undefined,
+            pushes,
+          ),
+        );
+        expect(next.position.wy).toBeLessThan(car.position.wy);
+        expect(next.position.wx).toBeGreaterThan(car.position.wx);
+        if (kind === "car") expect(aabbsOverlap(box(next), box(other))).toBe(true);
+        expect(pushes ?? []).toEqual([]);
+      }
+  },
+);
+
+it.each(["car", "wall", "tile"] as const)(
+  "still blocks a real diagonal bumper impact with a %s",
+  (kind) => {
+    const { car, world } = fixture();
+    car.vehicleHeading = Math.fround(-Math.PI / 3);
+    applyVehicleFacing(car);
+    const other = createVehicle("compact-1", 20, -35);
+    other.id = 2;
+    const props = kind === "wall" ? [wall(0)] : [];
+    if (props[0]) {
+      props[0].position = { ...other.position };
+      props[0].collider = { ...required(other.collider), zHeight: 24 };
+    }
+    if (kind === "tile")
+      world.getCollisionIfLoaded = (x, y) => (x === 1 && y === -2 ? CollisionFlag.Solid : 0);
+    expect(
+      drivenCarPose(
+        car,
+        { dx: 0, dy: -1, relativeDriving: true },
+        1 / 60,
+        world,
+        props,
+        kind === "car" ? [car, other] : [car],
+        undefined,
+        [],
+      ),
+    ).toBeUndefined();
+  },
+);

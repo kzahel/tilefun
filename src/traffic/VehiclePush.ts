@@ -8,12 +8,14 @@ import {
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { Prop } from "../entities/Prop.js";
+import { boxDepth, separationAlong } from "../physics/OrientedBox.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { canBecomeRoadkill, createRoadkill } from "../wildlife/Roadkill.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import { separatesContact } from "./ContactRecovery.js";
 import type { DrivingQueries } from "./DrivingQueries.js";
+import { carBodyMotion, entityBody, orientedCar } from "./VehicleContact.js";
 
 export interface VehiclePush {
   entity: Entity;
@@ -81,10 +83,16 @@ export function planVehiclePushes(
   const planned = new Map<number, VehiclePush>();
   for (const { before, after } of motions) {
     if (!before.collider || !after.collider) return;
-    const swept = envelope(
-      getEntityAABB(before.position, before.collider),
-      getEntityAABB(after.position, after.collider),
-    );
+    const motion =
+      orientedCar(before) && before.vehicleHeading !== undefined
+        ? carBodyMotion(before, after)
+        : undefined;
+    const swept =
+      motion?.bounds ??
+      envelope(
+        getEntityAABB(before.position, before.collider),
+        getEntityAABB(after.position, after.collider),
+      );
     const dx = after.position.wx - before.position.wx,
       dy = after.position.wy - before.position.wy;
     const distance = Math.hypot(dx, dy),
@@ -109,15 +117,17 @@ export function planVehiclePushes(
       const box = getEntityAABB(other.position, other.collider);
       if (!aabbsOverlap(swept, box)) continue;
       if (
-        separatesContact(
-          getEntityAABB(before.position, before.collider),
-          getEntityAABB(after.position, after.collider),
-          box,
-        )
+        motion
+          ? !motion.contact(entityBody(other), true)
+          : separatesContact(
+              getEntityAABB(before.position, before.collider),
+              getEntityAABB(after.position, after.collider),
+              box,
+            )
       )
         continue;
       if (distance > 0 && canBecomeRoadkill(other)) {
-        if (sweptBodyContact(before, after, other))
+        if (motion ? motion.contact(entityBody(other)) : sweptBodyContact(before, after, other))
           planned.set(other.id, {
             entity: other,
             position: { ...other.position },
@@ -134,18 +144,20 @@ export function planVehiclePushes(
       )
         return;
       // Move along travel until one axis clears the complete vehicle sweep.
-      const amount = Math.min(
-        ux > 0
-          ? (swept.right - box.left + 0.001) / ux
-          : ux < 0
-            ? (swept.left - box.right - 0.001) / ux
-            : Infinity,
-        uy > 0
-          ? (swept.bottom - box.top + 0.001) / uy
-          : uy < 0
-            ? (swept.top - box.bottom - 0.001) / uy
-            : Infinity,
-      );
+      const amount = motion
+        ? separationAlong(entityBody(after), entityBody(other), ux, uy)
+        : Math.min(
+            ux > 0
+              ? (swept.right - box.left + 0.001) / ux
+              : ux < 0
+                ? (swept.left - box.right - 0.001) / ux
+                : Infinity,
+            uy > 0
+              ? (swept.bottom - box.top + 0.001) / uy
+              : uy < 0
+                ? (swept.top - box.bottom - 0.001) / uy
+                : Infinity,
+          );
       if (amount > tuning.pushSpeed * dt + 0.01 || amount < 0) return;
       const position = { wx: other.position.wx + ux * amount, wy: other.position.wy + uy * amount };
       const existing = planned.get(other.id);
@@ -203,18 +215,15 @@ export function planVehiclePushes(
         continue;
       if (
         overlapsHeight(other, low, low + height) &&
-        aabbsOverlap(swept, getEntityAABB(other.position, other.collider))
+        aabbsOverlap(swept, getEntityAABB(other.position, other.collider)) &&
+        (!orientedCar(other) ||
+          carBodyMotion(entity, { ...entity, position, wz: push.z }).contact(entityBody(other)))
       )
         return;
     }
     for (const { after } of motions) {
       if (!after.collider || !overlapsHeight(after, low, low + height)) continue;
-      if (
-        aabbsOverlap(
-          getEntityAABB(position, collider),
-          getEntityAABB(after.position, after.collider),
-        )
-      )
+      if (boxDepth(entityBody({ ...entity, position, wz: push.z }), entityBody(after)) > 1e-7)
         return;
     }
   }

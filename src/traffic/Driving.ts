@@ -7,6 +7,7 @@ import {
 } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { axisBox } from "../physics/OrientedBox.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { isTrain } from "../railway/Train.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -21,6 +22,7 @@ import {
   vehicleNoseHeading,
   vehicleTurningRadius,
 } from "./Vehicle.js";
+import { carBodyMotion, entityBody, orientedCar } from "./VehicleContact.js";
 import { vehiclePerformance } from "./VehiclePerformance.js";
 import { planVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 
@@ -234,7 +236,9 @@ function checkedCarPose(
   if (!car.collider || !next.collider) return;
   const before = getEntityAABB(car.position, car.collider),
     after = getEntityAABB(next.position, next.collider);
-  const swept = {
+  let motion =
+    orientedCar(car) && car.vehicleHeading !== undefined ? carBodyMotion(car, next) : undefined;
+  const swept = motion?.bounds ?? {
     left: Math.min(before.left, after.left),
     top: Math.min(before.top, after.top),
     right: Math.max(before.right, after.right),
@@ -246,13 +250,22 @@ function checkedCarPose(
       if (
         world.getCollisionIfLoaded(x, y) &
           (isBoat(car) ? CollisionFlag.Solid : CollisionFlag.Solid | CollisionFlag.Water) &&
-        (isBoat(car) ||
-          !separatesContact(before, after, {
-            left: x * 16,
-            right: (x + 1) * 16,
-            top: y * 16,
-            bottom: (y + 1) * 16,
-          }))
+        (motion
+          ? motion.contact(
+              axisBox(
+                { left: x * 16, right: (x + 1) * 16, top: y * 16, bottom: (y + 1) * 16 },
+                -1e30,
+                1e30,
+              ),
+              true,
+            )
+          : isBoat(car) ||
+            !separatesContact(before, after, {
+              left: x * 16,
+              right: (x + 1) * 16,
+              top: y * 16,
+              bottom: (y + 1) * 16,
+            }))
       )
         return;
     }
@@ -271,6 +284,7 @@ function checkedCarPose(
   const beforeZ = car.wz ?? 0;
   if (Math.abs(z - beforeZ) > Math.hypot(velocity.vx, velocity.vy) * dt * 0.5 + 0.001) return;
   next.wz = next.groundZ = z;
+  if (motion) motion = carBodyMotion(car, next);
   const height = next.collider.physicalHeight ?? 24;
   for (const prop of localProps)
     for (const wall of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
@@ -283,6 +297,21 @@ function checkedCarPose(
         Math.min(beforeZ, z),
         height + Math.abs(z - beforeZ),
       );
+      if (motion) {
+        if (
+          (wasBlocked || blocked) &&
+          motion.contact(
+            axisBox(
+              getEntityAABB(prop.position, wall),
+              wall.surface ? -1e30 : (wall.zBase ?? 0),
+              wall.surface ? 1e30 : (wall.zBase ?? 0) + (wall.zHeight ?? 1e30),
+            ),
+            !wall.surface,
+          )
+        )
+          return;
+        continue;
+      }
       if (
         (wasBlocked || blocked) &&
         !(
@@ -309,7 +338,13 @@ function checkedCarPose(
     )
       continue;
     const box = getEntityAABB(other.position, other.collider);
-    if (aabbsOverlap(swept, box) && (isBoat(car) || !separatesContact(before, after, box))) return;
+    if (
+      aabbsOverlap(swept, box) &&
+      (motion
+        ? motion.contact(entityBody(other), true)
+        : isBoat(car) || !separatesContact(before, after, box))
+    )
+      return;
   }
   for (const rider of entities) {
     if (rider.type !== "player" || !rider.collider || roofSupport(rider, entities)?.id !== car.id)

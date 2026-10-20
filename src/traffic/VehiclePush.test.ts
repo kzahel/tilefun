@@ -6,9 +6,11 @@ import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
+import { boxDepth } from "../physics/OrientedBox.js";
 import { World } from "../world/World.js";
 import { drivenCarPose } from "./Driving.js";
-import { createVehicle, VEHICLE_MODELS } from "./Vehicle.js";
+import { applyVehicleFacing, createVehicle, VEHICLE_MODELS } from "./Vehicle.js";
+import { entityBody } from "./VehicleContact.js";
 import { vehiclePerformance } from "./VehiclePerformance.js";
 import { commitVehiclePushes, planVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 
@@ -173,4 +175,37 @@ it("keeps airborne height and jumping velocity when a replicated player has no c
   commitVehiclePushes(plan, f.entities);
   expect(f.player.wz).toBe(4);
   expect(f.player.jumpVZ).toBe(20);
+});
+
+it("nudges at the real diagonal bumper without clearing the empty query-box corner", () => {
+  const f = fixture();
+  const angle = Math.fround(-Math.PI / 3),
+    dx = Math.cos(angle),
+    dy = Math.sin(angle);
+  f.car.vehicleHeading = angle;
+  applyVehicleFacing(f.car);
+  f.car.velocity = { vx: dx * 112, vy: dy * 112 };
+  const distance = 29.5 + 5 * Math.abs(dx) + 3 * Math.abs(dy) + 0.02;
+  f.player.position = { wx: dx * distance, wy: dy * distance + 3 };
+  const pushes: VehiclePush[] = [];
+  const next = required(
+    drivenCarPose(
+      f.car,
+      { dx: 0, dy: -1, relativeDriving: true },
+      1 / 60,
+      f.world,
+      [],
+      f.entities.entities,
+      undefined,
+      pushes,
+    ),
+  );
+  expect(pushes).toHaveLength(1);
+  const push = required(pushes[0]);
+  expect(
+    Math.hypot(push.position.wx - f.player.position.wx, push.position.wy - f.player.position.wy),
+  ).toBeLessThan(0.7);
+  expect(
+    boxDepth(entityBody(next), entityBody({ ...f.player, position: push.position })),
+  ).toBeLessThanOrEqual(0);
 });

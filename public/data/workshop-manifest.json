@@ -5056,7 +5056,7 @@
       "name": "Shopping center · parking and shoppers",
       "prompt": "Watch the normal generated city shopping trip, with native road arrival, return, obstruction waits and paused save/reload. Pavement and markings use the ordinary terrain chunk renderer.",
       "url": "/tilefun/workshop.html#/tool/parking-lab?play=1",
-      "fingerprint": "af54ff0d2d684113e64c0fc099f5b6ccad3d54b9778bfcb0a5553ed19902c3fc",
+      "fingerprint": "5086a077329cf2239b84eb8873d1c1cf61393d40098c6a0d1ddc5490d67195cb",
       "excluded": "Playable behavior study; static parking-pattern review snapshots retain their own identities."
     },
     {
@@ -5066,7 +5066,7 @@
       "name": "Generated city · road to shopping center",
       "prompt": "Follow the same native road car into the generated shopping center, watch its shopper visit and return, then follow its checked merge back onto the boulevard. One visitor per center; no entrance or exit teleport.",
       "url": "/tilefun/workshop.html#/tool/parking-lab?play=1&city=1",
-      "fingerprint": "af54ff0d2d684113e64c0fc099f5b6ccad3d54b9778bfcb0a5553ed19902c3fc",
+      "fingerprint": "5086a077329cf2239b84eb8873d1c1cf61393d40098c6a0d1ddc5490d67195cb",
       "excluded": "Playable behavior study; static parking-pattern review snapshots retain their own identities."
     },
     {
@@ -48866,5 +48866,5 @@
       }
     }
   ],
-  "inputDigest": "a33bdb5b797a8edad00dc326fbcafcad7255ba90d936f25b15279d2f70c7e982"
+  "inputDigest": "0a7f0397eb90b7ac22a80f813e31f67aac8daed31270b43d81d4a9a01b1a003d"
 }

@@ -868,6 +868,12 @@ binary input path; main-game tap/hold destinations remain world-relative. Traffi
 lookahead/queues use the same calibrated body dimensions. Trains and automatic
 road motion keep their existing owners.
 
+The 2026-10-20 diagonal-contact fix keeps those query envelopes but adds shared
+oriented-body contact through `drivenCarPose` and `VehiclePush`. Game and lab
+prediction use the same translation/rolling-arc sweeps, overlap escape and gentle
+push planning. No fixture or lab owns an alternate collision implementation.
+The [vehicle topic](vehicles.md#rotated-body-contact-fix-2026-10-20) owns details.
+
 ## Racing diagnostics
 
 Scenario Worker responses derive `racer:` handles from ordinary TrafficSystem
