@@ -1,0 +1,32 @@
+{
+  "identity": "capuchin-monkey-behavior-v1",
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "poses": 160,
+  "distinctActionFrames": {
+    "down": {
+      "climb": 11,
+      "pickup": 7,
+      "eat": 12,
+      "sit": 8
+    },
+    "up": {
+      "climb": 12,
+      "pickup": 7,
+      "eat": 8,
+      "sit": 8
+    },
+    "left": {
+      "climb": 12,
+      "pickup": 7,
+      "eat": 12,
+      "sit": 8
+    },
+    "right": {
+      "climb": 12,
+      "pickup": 7,
+      "eat": 12,
+      "sit": 8
+    }
+  }
+}

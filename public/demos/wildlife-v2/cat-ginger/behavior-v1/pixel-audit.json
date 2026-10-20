@@ -1,0 +1,36 @@
+{
+  "identity": "cat-ginger-behavior-v1",
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "poses": 176,
+  "distinctActionFrames": {
+    "down": {
+      "stalk": 8,
+      "pounce": 7,
+      "bat": 7,
+      "climb": 11,
+      "sit": 8
+    },
+    "up": {
+      "stalk": 8,
+      "pounce": 7,
+      "bat": 6,
+      "climb": 10,
+      "sit": 8
+    },
+    "left": {
+      "stalk": 8,
+      "pounce": 7,
+      "bat": 7,
+      "climb": 12,
+      "sit": 8
+    },
+    "right": {
+      "stalk": 8,
+      "pounce": 7,
+      "bat": 7,
+      "climb": 12,
+      "sit": 8
+    }
+  }
+}

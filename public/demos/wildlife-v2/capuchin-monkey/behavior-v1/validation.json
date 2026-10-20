@@ -1,0 +1,18 @@
+{
+  "identity": "capuchin-monkey-behavior-v1",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 81,
+      "exactFacingCrops": 324
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 81,
+      "exactFacingCrops": 324
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

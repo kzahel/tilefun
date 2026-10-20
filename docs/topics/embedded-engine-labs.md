@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-19.
+Updated: 2026-10-20.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -17,6 +17,13 @@ replicated authority phase through shared `RemoteStateView` code. This prevents
 client animation lead from changing the frozen frame after pause/reload.
 The [scenario topic](gameplay-scenarios.md) owns that clock contract and the
 replacement-host error guard used by furniture playtest.
+
+[162](../tactical/162-shared-world-depth-comparison.md) is a standalone rendering
+experiment fed by normal headless scenario authority, binary replication and
+scene collection. It reuses production vehicle assets/loading without adding a
+second gameplay implementation. Its shared-depth target is not yet part of the
+game or an embedded host. Any next production prototype must use shared read-only
+presentation inputs and keep game/lab renderer lifecycle behavior aligned.
 
 ## Shared reverse driving (2026-10-19)
 
@@ -80,6 +87,15 @@ now schedules natural meal returns after 60–120 simulated seconds at distant,
 validated ready sites. Independent scoped SaveManager records preserve pending
 returns through reload; the wildlife topic owns distances, retry policy and
 manual/natural origin rules. Scenario fingerprints include the return scheduler.
+
+[161](../tactical/161-climbing-raids-and-play.md) uses the same shared authority
+for continuous supported tree climbing, real cache transfers, physical cat toy
+play, renewable food stocks and persistent bounded thrown balls. The five new
+activity scenes include three base animals and the two inherited cat coats.
+No lab-specific AI or accelerated growth timers are introduced. Capuchin framing
+includes its complete source cell at the ground and on the crown. Saved grips,
+carried food and action clocks restore through ordinary actor records and sprite
+replication; both renderers use the same retained action banks.
 
 ## Wildlife motion repairs
 

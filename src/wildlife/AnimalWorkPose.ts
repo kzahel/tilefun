@@ -7,9 +7,30 @@ import { ROBIN_CLIPS } from "./Robin.js";
 /** Restore task clips before the first snapshot after loading a save. */
 export function restoreAnimalWorkPose(animal: Entity): void {
   const task = animal.animalWork;
-  if (!task || !animal.sprite || (animal.fauna ?? animal.rabbit ?? animal.robin)?.alarmFrom) return;
-  const name =
-    task.state === "scan"
+  if (
+    !task ||
+    !animal.sprite ||
+    ((animal.fauna ?? animal.rabbit ?? animal.robin)?.alarmFrom && task.state !== "descend")
+  )
+    return;
+  const woodland = task.kind === "capuchin" || task.kind === "raccoon" || task.kind === "cat";
+  const name = woodland
+    ? task.state === "climb" || task.state === "descend"
+      ? "climb"
+      : task.state === "stalk"
+        ? "stalk"
+        : task.state === "pounce"
+          ? "pounce"
+          : task.state === "bat"
+            ? "bat"
+            : task.state === "perch"
+              ? "sit"
+              : task.state === "eat"
+                ? "eat"
+                : task.state === "pickup"
+                  ? "pickup"
+                  : undefined
+    : task.state === "scan"
       ? task.elapsed < 0.6
         ? "rear"
         : "scan"
@@ -49,7 +70,11 @@ export function restoreAnimalWorkPose(animal: Entity): void {
     setSpriteClipElapsed(
       animal,
       Math.round(
-        (task.state === "scan" && task.elapsed >= 0.6 ? task.elapsed - 0.6 : task.elapsed) * 1000,
+        (task.state === "pounce"
+          ? (animal.fauna?.motion?.elapsed ?? task.elapsed)
+          : task.state === "scan" && task.elapsed >= 0.6
+            ? task.elapsed - 0.6
+            : task.elapsed) * 1000,
       ),
     );
   }

@@ -3,7 +3,10 @@
 Topic: wildlife-behaviors
 Status: 206-entry ledger; dog fetch, crow nests and squirrel caches implemented.
 Second batch implements rabbit plants, robin ground forage and meerkat lookouts.
-All six mechanics are automation verified; exact art/behavior human review remains pending.
+Third batch adds capuchin climbing, raccoon cache raids and cat toy play/perch rests,
+plus renewable food sources and persistent bounded toys. Eleven entries are automation
+verified: nine distinct signatures and two inherited cat coats. Exact art/behavior
+human review remains pending.
 Updated: 2026-10-20.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
@@ -24,7 +27,7 @@ a foundation while differing in a documented, observable way.
 
 The first batch implements squirrel food caching/retrieval, dog ball fetching and
 crow material carrying/nesting. The second adds plant feeding, perch foraging and
-meerkat lookout alarms. Apes climbing to food remain a later proposal.
+meerkat lookout alarms. The third adds capuchin fruit climbing, raccoon cache raids and cat toy play/tree rests.
 Owner also requested appropriate birds making visible nests and visible foraging,
 including fruit. Resource seeking, taking, carrying, eating and nest construction
 must have observable outcomes rather than disconnected action loops. Nesting does
@@ -47,7 +50,7 @@ original mallard-duck and bear roster IDs. Preserve completed art ledgers as his
 The [generated progress report](../wildlife-behavior-status.md) derives its counts
 and animal table from this ledger. The same generator writes compact Animal
 Browser progress data. Filter **Behavior progress → Demonstrations** and select
-**Demonstrate behavior** to open a shared authority scene. The other 200 animals
+**Demonstrate behavior** to open a shared authority scene. The other 195 animals
 still need detailed audits and phase assignment. Existing behavior has not been
 removed or declared absent. Verified stages require recorded evidence.
 
@@ -207,3 +210,53 @@ can place an ordinary tiger through the production editor command.
 Demonstration framing is species-specific: the robin view includes both the
 tree crown and ground food; rabbit feeding and the initial meerkat group fit
 fully in frame. Existing dog/crow/squirrel framing is retained.
+
+## Climbing, cache raids and play (161)
+
+[161](../tactical/161-climbing-raids-and-play.md) adds three signatures, with cat
+coats inheriting one mechanic and retaining their own original travel pixels.
+The capuchin approaches an actual oak/palm trunk, grips and climbs continuously,
+picks one fruit from its finite crop, eats while supported on the crown, rests
+and descends. Removing/moving support cancels the task; unavailable support scopes
+freeze the committed grip. Alarms interrupt feeding and reverse a partial ascent
+from the actual attained height. Following/ridden animals keep their protections.
+
+The raccoon reserves a real squirrel cache, takes one actual stored item, carries
+it to a nearby tree and eats. No food is created by theft or by the cache itself.
+The squirrel can replenish its cache by harvesting real nuts. Natural raccoon
+clearings add one ordinary foraging squirrel per group, plus supported tree/nut
+supplies, so this interaction can occur in the world. Existing owners, roster
+slots, actor identities and RNG ordering remain unchanged; additions are cell-owned.
+Manually placing an animal still creates no supplies or neighbours.
+
+Cats stalk a settled/rolling ball in short crouched approaches, physically pounce,
+bat it with an actual impulse and pursue again. After three plays they can climb
+to a real tree rest. Slow deliberate toy contact is play; unrelated fast ball hits
+retain their ordinary startle response. Ginger/black coats share the same saved
+behavior with separately retained action atlases. All three have lab demonstrations.
+
+### Food renewal and toys
+
+The editor exposes a tree fruit crop, tree nut supply, seed-bearing plant and
+growing edible plant. Place tree crops beside ordinary trees; fruit is supported
+on the canopy and nuts become available beside the trunk. Sources hold at most
+three portions. Fruit renews one portion per 240 seconds, nuts per 300 seconds,
+plants/seeds per 180 seconds of admitted ready simulation. Full sources discard
+surplus growth time. Sources do not accrue offline stock or scatter unlimited
+loose items. Remaining stock and timers survive saves. Deleted trees remove their
+associated source. Loose player-placed food and caches remain finite.
+
+Fresh natural rabbit/robin supplies are growing plants; robin groves retain their
+one-patch-per-chunk bound. Capuchin homes have real supported fruit crops, and
+squirrel homes have nut supplies alongside their original loose food. Existing
+saves can receive these features through ordinary editor placements; no world
+migration or old-bank regeneration occurs.
+
+Each player keeps at most ten thrown balls per realm, counting unloaded actors.
+An eleventh retires that player's oldest loose ball. Held toys are protected;
+if all ten are held, another throw is refused. Creation order and ownership
+survive fetch, rethrow, unload and reload. Returned balls can be reused only by
+their owner. Player toys have no timed expiry and remain on water; ordinary editor
+balls keep their previous disposable behavior. Explicit editor deletion still works.
+A compact saved owner index prevents travel/reload from bypassing the limit and
+rejects a retired toy even if an older scope snapshot arrives late.

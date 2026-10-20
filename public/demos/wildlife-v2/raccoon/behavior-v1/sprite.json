@@ -1,0 +1,43 @@
+{
+  "identity": "raccoon-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "pickup",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 40
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "pickup": {
+      "start": 41,
+      "count": 8,
+      "frameDuration": 125,
+      "loop": false
+    },
+    "eat": {
+      "start": 49,
+      "count": 12,
+      "frameDuration": 150,
+      "loop": true
+    }
+  },
+  "sheetSha256": "c9a9f77230d75cc5f04ae69c2f9522fa28f13f0421a5db46fb3d715fc542db7d"
+}

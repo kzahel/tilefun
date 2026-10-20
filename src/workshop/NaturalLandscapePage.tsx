@@ -34,6 +34,8 @@ import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 
 function animalInspectionZoom(id: string): number | undefined {
+  if (id === "behavior-capuchin" || id === "behavior-raccoon") return 1;
+  if (id.startsWith("behavior-cat")) return 1.4;
   if (id === "behavior-rabbit") return 2;
   if (id === "behavior-robin") return 1;
   if (id === "behavior-meerkat") return 1.4;
@@ -156,6 +158,8 @@ export default function NaturalLandscapePage() {
       height: 640,
       terrain: true,
       fixedCamera: (player, alpha) => {
+        if (caseId === "behavior-capuchin") return { wx: 160, wy: 100 };
+        if (caseId === "behavior-raccoon") return { wx: 160, wy: 128 };
         if (caseId === "behavior-rabbit") return { wx: 160, wy: 176 };
         // Include the elevated tree crown and the ground food in the same view.
         if (caseId === "behavior-robin") return { wx: 144, wy: 112 };
@@ -583,17 +587,23 @@ export default function NaturalLandscapePage() {
       {caseId.startsWith("behavior-") && (
         <div className="actions">
           <p>
-            {caseId === "behavior-dog"
-              ? "Throw a ball and wait for it to settle. The dog picks it up, carries it back and drops it near you. Throw again to reuse the returned ball."
-              : caseId === "behavior-crow"
-                ? "The crow gathers real loose twigs, carries them to a tree perch and builds its nest in four visible stages."
-                : caseId === "behavior-rabbit"
-                  ? "The rabbit hops to an edible plant, nibbles it in three visible stages and checks for danger between bites. Food is finite; reset the scene to replenish it."
-                  : caseId === "behavior-robin"
-                    ? "The robin flies down from an actual tree canopy, pecks and eats the ground food, then flies back to its perch."
-                    : caseId === "behavior-meerkat"
-                      ? "The group takes turns standing upright to scan. Place a tiger nearby to see the lookout give an alarm and the group escape."
-                      : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
+            {caseId === "behavior-capuchin"
+              ? "The monkey climbs a real tree, picks one fruit, eats on the crown and climbs down. The crop slowly regrows while the world runs."
+              : caseId === "behavior-raccoon"
+                ? "The raccoon takes actual food from the squirrel’s cache and carries it under a tree to eat. The squirrel gathers nuts to refill its cache."
+                : caseId.startsWith("behavior-cat")
+                  ? "The cat crouches, stalks, pounces and bats a physical ball, then chases it again. After playing it can climb to rest on the tree."
+                  : caseId === "behavior-dog"
+                    ? "Throw a ball and wait for it to settle. The dog picks it up, carries it back and drops it near you. Throw again to reuse the returned ball."
+                    : caseId === "behavior-crow"
+                      ? "The crow gathers real loose twigs, carries them to a tree perch and builds its nest in four visible stages."
+                      : caseId === "behavior-rabbit"
+                        ? "The rabbit hops to an edible plant, nibbles it in three visible stages and checks for danger between bites. Food is finite; reset the scene to replenish it."
+                        : caseId === "behavior-robin"
+                          ? "The robin flies down from an actual tree canopy, pecks and eats the ground food, then flies back to its perch."
+                          : caseId === "behavior-meerkat"
+                            ? "The group takes turns standing upright to scan. Place a tiger nearby to see the lookout give an alarm and the group escape."
+                            : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
           </p>
           {caseId === "behavior-dog" && (
             <button

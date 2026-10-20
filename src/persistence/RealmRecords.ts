@@ -25,6 +25,7 @@ export interface FeatureRecord {
 /** Shared actor lifecycle -> dirty records. Never enumerates actors to save metadata. */
 export class RealmRecords {
   private hydrating = false;
+  acceptsRecord?: (record: ActorRecord) => boolean;
   private observed = new WeakSet<Entity | Prop>();
   private origins = new WeakMap<Entity | Prop, string>();
   readonly byId = new Map<string, Entity | Prop>();
@@ -269,7 +270,7 @@ export class RealmRecords {
     this.hydrating = true;
     try {
       for (const record of records) {
-        if (this.byId.has(record.persistentId)) continue;
+        if (this.byId.has(record.persistentId) || this.acceptsRecord?.(record) === false) continue;
         const actor = decodeActor(record, this.definitions);
         if (record.originScope) this.origins.set(actor, record.originScope);
         if ("isProp" in actor) this.props.add(actor);

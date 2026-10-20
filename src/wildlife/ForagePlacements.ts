@@ -1,8 +1,8 @@
 import { TerrainId } from "../autotile/TerrainId.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
-import { faunaType } from "./Fauna.js";
-import { forageType } from "./ForageResources.js";
+import { createFauna, faunaType } from "./Fauna.js";
+import { forageType, sourceType } from "./ForageResources.js";
 import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
@@ -11,10 +11,22 @@ export function crowNestTrees(nature: NaturalLandscape, cx: number, cy: number) 
   const rows = [];
   for (let y = cy - 1; y <= cy + 1; y++)
     for (let x = cx - 1; x <= cx + 1; x++) {
-      if (nature.faunaHome(Math.floor(x / 4), Math.floor(y / 4), true)?.species !== "crow")
+      if (
+        !["crow", "red-squirrel", "capuchin-monkey", "raccoon"].includes(
+          nature.faunaHome(Math.floor(x / 4), Math.floor(y / 4), true)?.species ?? "",
+        )
+      )
         continue;
       for (const actor of nature.wildlife(x, y)) {
-        if (actor.type !== faunaType("crow")) continue;
+        if (
+          ![
+            faunaType("crow"),
+            faunaType("red-squirrel"),
+            faunaType("capuchin-monkey"),
+            faunaType("raccoon"),
+          ].includes(actor.type)
+        )
+          continue;
         const wx = actor.wx,
           wy = actor.wy - 52;
         // Include overlapping canopies on both sides of chunk boundaries.
@@ -46,6 +58,16 @@ export function foragePlacements(
       meerkat = actor.type === faunaType("meerkat"),
       crow = actor.type === faunaType("crow"),
       squirrel = actor.type === faunaType("red-squirrel");
+    const capuchin = actor.type === faunaType("capuchin-monkey");
+    if (capuchin || squirrel)
+      result.push({
+        featureId: `${actor.featureId}:growing-food`,
+        type: sourceType(capuchin ? "fruit-tree" : "nut-tree"),
+        // Birth stays in the owning cell; ready support later binds to the actual tree.
+        wx: Math.max(cx * 256 + 4, Math.min(cx * 256 + 252, actor.wx)),
+        wy: Math.max(cy * 256 + 6, Math.min(cy * 256 + 250, actor.wy - 52)),
+        route: [],
+      });
     if (!crow && !squirrel && !rabbit && !robin && !meerkat) continue;
     // Robin groves have one bird per tree. Share a finite seed patch within
     // each occupied chunk instead of doubling the whole forest's actor count.
@@ -73,19 +95,23 @@ export function foragePlacements(
         continue;
       result.push({
         featureId: `${actor.featureId}:forage:${index}`,
-        type: forageType(
-          rabbit
-            ? "greens"
-            : robin
-              ? "seed"
-              : meerkat
-                ? "fruit"
-                : crow
-                  ? "twig"
-                  : index % 2
-                    ? "fruit"
-                    : "nut",
-        ),
+        type: rabbit
+          ? sourceType("growing-plant")
+          : robin
+            ? sourceType("seed-plant")
+            : forageType(
+                rabbit
+                  ? "greens"
+                  : robin
+                    ? "seed"
+                    : meerkat
+                      ? "fruit"
+                      : crow
+                        ? "twig"
+                        : index % 2
+                          ? "fruit"
+                          : "nut",
+              ),
         wx,
         wy,
         route: [],
@@ -96,5 +122,36 @@ export function foragePlacements(
       if (rabbit || robin || meerkat) break;
     }
   }
+  return result;
+}
+
+/** One real cache-building neighbour per natural raccoon group; original owners/RNG stay intact. */
+export function raccoonForagers(
+  nature: NaturalLandscape,
+  cx: number,
+  cy: number,
+): ActorPlacement[] {
+  const result: ActorPlacement[] = [];
+  for (let y = cy - 1; y <= cy + 1; y++)
+    for (let x = cx - 1; x <= cx + 1; x++) {
+      if (nature.faunaHome(Math.floor(x / 4), Math.floor(y / 4), true)?.species !== "raccoon")
+        continue;
+      for (const actor of nature.wildlife(x, y)) {
+        if (actor.type !== faunaType("raccoon") || !actor.featureId.endsWith(":0")) continue;
+        const wx = actor.wx + 40,
+          wy = actor.wy + 20;
+        if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+        const fauna = createFauna("red-squirrel", wx, wy).fauna;
+        if (fauna)
+          result.push({
+            featureId: `${actor.featureId}:cache-forager`,
+            type: faunaType("red-squirrel"),
+            wx,
+            wy,
+            route: [],
+            fauna,
+          });
+      }
+    }
   return result;
 }

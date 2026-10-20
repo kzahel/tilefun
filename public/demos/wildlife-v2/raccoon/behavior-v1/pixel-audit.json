@@ -1,0 +1,24 @@
+{
+  "identity": "raccoon-behavior-v1",
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "poses": 80,
+  "distinctActionFrames": {
+    "down": {
+      "pickup": 7,
+      "eat": 12
+    },
+    "up": {
+      "pickup": 7,
+      "eat": 12
+    },
+    "left": {
+      "pickup": 7,
+      "eat": 12
+    },
+    "right": {
+      "pickup": 7,
+      "eat": 12
+    }
+  }
+}

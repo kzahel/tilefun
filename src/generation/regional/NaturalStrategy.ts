@@ -1,7 +1,11 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { RailwayStrategy } from "../../railway/RailwayStrategy.js";
 import { RoadType } from "../../road/RoadType.js";
-import { crowNestTrees, foragePlacements } from "../../wildlife/ForagePlacements.js";
+import {
+  crowNestTrees,
+  foragePlacements,
+  raccoonForagers,
+} from "../../wildlife/ForagePlacements.js";
 import type { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
 import { insideDenseBounds } from "./DenseDistrictPlanner.js";
@@ -83,7 +87,7 @@ export class NaturalStrategy extends RailwayStrategy {
       .query(bounds)
       .flatMap((p) => settlementPets(p, this.world.seed))
       .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
-    const wildlife = this.nature.wildlife(cx, cy);
+    const wildlife = [...this.nature.wildlife(cx, cy), ...raccoonForagers(this.nature, cx, cy)];
     return [
       ...super.actors(cx, cy),
       ...residents,

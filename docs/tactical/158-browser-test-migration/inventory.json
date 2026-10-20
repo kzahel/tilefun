@@ -5,8 +5,8 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 815,
-      "inventorySha256": "bcf4c0d60d4303b4dd5432b4d08f2854739d7676238cae956cae20dbdeed9af7",
+      "cases": 821,
+      "inventorySha256": "87bca4274229afc225a86a33df8fa677a0be1aed238820ed255e4a4bbdf1d7d1",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -21,7 +21,7 @@
         {
           "path": "tests/animal-work.spec.ts",
           "cases": 9,
-          "sourceSha256": "684265f4f1a9d5cf6fa047ba93a26f69d3f54e11affe01deb52256a6b684d319"
+          "sourceSha256": "76cba2dac60994a90599d480ae1049eccde77586d74ec03601acb6d869b414d2"
         },
         {
           "path": "tests/aquatic-hunters.spec.ts",
@@ -276,7 +276,7 @@
         {
           "path": "tests/meadow-work.spec.ts",
           "cases": 7,
-          "sourceSha256": "c9688fdc48d1a29a4824c2d39a6f4b864ffc0b1e62851b13d72eb3dc7426e18e"
+          "sourceSha256": "b550fe8748eb90d74e59928bc0927f771cf96b04c561d55b7570d6c532f061a0"
         },
         {
           "path": "tests/mobile-editor.spec.ts",
@@ -602,6 +602,11 @@
           "path": "tests/wildlife-review.spec.ts",
           "cases": 4,
           "sourceSha256": "77f713eebb03324625bba03c70279c7680bb88590d014bd2b9a943c0c5ca4821"
+        },
+        {
+          "path": "tests/woodland-work.spec.ts",
+          "cases": 6,
+          "sourceSha256": "df3f51bf43caa2d701df06a574559eb16929317a4042e8178971ceeb44ed7a82"
         },
         {
           "path": "tests/worker-server.spec.ts",

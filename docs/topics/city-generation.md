@@ -23,6 +23,19 @@ existing 128-actor query cap; actor, persistence and planning caps are unchanged
 Manually placed animals create no food. Ordinary resource tombstones preserve
 consumption, including shared seed patches, through reloads.
 
+[161](../tactical/161-climbing-raids-and-play.md) evolves rabbit/robin food into
+bounded growing plants, adds ordinary trees and supported crops at capuchin and
+squirrel homes, and one actual cache-building squirrel per natural raccoon group.
+All additions derive stable feature IDs from existing owners and preserve original
+roster slots, animal identities/positions, RNG ordering and query-order independence.
+The bounded neighbour and associated forage belong to their actual destination
+cells, including boundary crossings; overlapping tree crowns are included on both
+sides. New crops begin inside their owning cell, then bind to their actual tree
+only when the full support scope is ready; edge and negative-cell cases are tested.
+Manually placing an animal creates no automatic food or neighbours. Existing
+saved regions keep their realization; new sources are also ordinary editor items.
+The [behavior topic](wildlife-behaviors.md) owns saved stock and renewal timing.
+
 The user approved dropping historical playable generator compatibility during active
 development. `CURRENT_REGIONAL_VERSION` in `GenerationDescriptor.ts` is the single
 regional creation/runtime version, currently **regional-v13**. It composes connected dense neighborhoods, gentle road

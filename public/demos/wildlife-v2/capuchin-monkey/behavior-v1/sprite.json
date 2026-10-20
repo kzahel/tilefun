@@ -1,0 +1,55 @@
+{
+  "identity": "capuchin-monkey-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "anchor": [
+    48,
+    72
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "climb",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 40
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "climb": {
+      "start": 41,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": true
+    },
+    "pickup": {
+      "start": 53,
+      "count": 8,
+      "frameDuration": 125,
+      "loop": false
+    },
+    "eat": {
+      "start": 61,
+      "count": 12,
+      "frameDuration": 150,
+      "loop": true
+    },
+    "sit": {
+      "start": 73,
+      "count": 8,
+      "frameDuration": 150,
+      "loop": true
+    }
+  },
+  "sheetSha256": "ee5a78b0fafe8211f6287c3d0bf0340028ef4aca7f861d08420f5f42e4b4272a"
+}

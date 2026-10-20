@@ -1,0 +1,18 @@
+{
+  "identity": "raccoon-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "ff99e0047a50ecf4435ac35228760b2c9ee0a390ac5e645bc1d18c4f0fab9148",
+    "index.html": "3c592ad9c2109437d6e89d5c3a85b932aa81d7fa3810c5c5c1e8e15bb02214a4",
+    "pixel-audit.json": "663f42413d8f4697800632dbd9f0c44769096a0a5d475e73c1e07ebd4777606c",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "0620ea0c20f04c341a4aa426c0b2c1f4d25ab1c0e2dd03fffedf461c08f3c89b",
+    "preview.gif": "94a5f407e1b2ea4263e3e69786e3463144d85c716628fc8aa412152188f4a319",
+    "scene-native.png": "69971f22d2e81a5b0431f4b46f8ca658ec1dd2eb454269ee2b16eb6afc94ae3f",
+    "sheet.png": "c9a9f77230d75cc5f04ae69c2f9522fa28f13f0421a5db46fb3d715fc542db7d",
+    "source-audit.json": "4ec1f59b5fbf75ce7f403e2e259e8775b003ef545e781caa01cd18acd6f7bec6",
+    "sprite.json": "16cd63ddb614a63a6ee51fece081d1c85ce40e7dcf03877ed51c83d31dee5a67"
+  }
+}

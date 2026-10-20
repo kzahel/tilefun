@@ -2,7 +2,16 @@ import type { PositionComponent } from "../entities/Entity.js";
 
 /** Authoritative semantic state. Only ordinary poses/attachments cross the wire. */
 export interface AnimalWork {
-  kind: "dog" | "crow" | "squirrel" | "rabbit" | "robin" | "meerkat";
+  kind:
+    | "dog"
+    | "crow"
+    | "squirrel"
+    | "rabbit"
+    | "robin"
+    | "meerkat"
+    | "capuchin"
+    | "raccoon"
+    | "cat";
   state:
     | "idle"
     | "seek"
@@ -14,7 +23,13 @@ export interface AnimalWork {
     | "rest"
     | "scan"
     | "alarm"
-    | "lower";
+    | "lower"
+    | "climb"
+    | "descend"
+    | "stalk"
+    | "pounce"
+    | "bat"
+    | "perch";
   elapsed: number;
   cooldown: number;
   targetId?: string;
@@ -30,6 +45,11 @@ export interface AnimalWork {
   alarms?: number;
   threat?: PositionComponent;
   facing?: number;
+  tree?: import("./TreeClimbing.js").ClimbTree;
+  stolen?: number;
+  played?: number;
+  climbZ?: number;
+  climbFrom?: PositionComponent & { z: number };
 }
 
 export type FoodKind = "nut" | "fruit";
@@ -42,4 +62,12 @@ export interface WorkItem {
   returned?: boolean;
   units: number;
   contents: FoodKind[];
+  ballOrder?: number;
+  growth?: {
+    food: "fruit" | "nut" | "seed" | "greens";
+    capacity: number;
+    interval: number;
+    remaining: number;
+    tree?: import("./TreeClimbing.js").ClimbTree;
+  };
 }

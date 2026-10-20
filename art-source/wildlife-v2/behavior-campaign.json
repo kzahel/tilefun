@@ -2,7 +2,7 @@
   "version": 1,
   "id": "wildlife-distinct-behaviors",
   "updated": "2026-10-20",
-  "state": "second-batch-verified",
+  "state": "third-batch-verified",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -78,7 +78,7 @@
       "runtimeType": "wildlife-cat-provisional-v1",
       "family": "Domestic pets",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -86,27 +86,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing ground travel and periodic action lacked climbing, resource transfers or toy play. This batch adds the recorded signature through shared Realm authority.",
+            "ref": "docs/tactical/161-climbing-raids-and-play.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Crouch and stalk a ball, physically pounce and bat it, then climb to a tree rest.",
+        "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
+        "scenario": "behavior-cat",
+        "tactical": "docs/tactical/161-climbing-raids-and-play.md",
+        "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "supported tree movement",
+          "save/reload",
+          "ordinary world/manual and lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/WoodlandWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/cat/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "src/scenarios/WoodlandWorkRecipe.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "updatedUtc": "2026-10-20T14:07:29.399361+00:00"
     },
     "dog": {
       "name": "Dog",
@@ -152,7 +195,7 @@
         "trigger": "A player throws a ball nearby.",
         "scenario": "behavior-dog",
         "tactical": "docs/tactical/155-fetch-nests-and-caches.md",
-        "resourceRules": "Claim one actual unheld item; transfer/consume it once; release on interruption.",
+        "resourceRules": "Loose food/caches stay finite; explicit saved plants/trees renew capped stock. Player toys retain owner/creation order with ten per owner/realm.",
         "animationRevision": "behavior-v1",
         "requirements": [
           "pickup",
@@ -184,6 +227,10 @@
         {
           "area": "validation",
           "ref": "docs/tactical/155-fetch-nests-and-caches/validation.json"
+        },
+        {
+          "area": "validation",
+          "ref": "src/wildlife/OwnedBalls.test.ts"
         }
       ],
       "notRequiredReasons": {},
@@ -810,7 +857,7 @@
         "trigger": "An available resource is reachable within the home area.",
         "scenario": "behavior-squirrel",
         "tactical": "docs/tactical/155-fetch-nests-and-caches.md",
-        "resourceRules": "Claim one actual unheld item; transfer/consume it once; release on interruption.",
+        "resourceRules": "Loose food/caches stay finite; explicit saved plants/trees renew capped stock. Player toys retain owner/creation order with ten per owner/realm.",
         "animationRevision": "behavior-v1",
         "requirements": [
           "pickup",
@@ -843,6 +890,10 @@
         {
           "area": "validation",
           "ref": "docs/tactical/155-fetch-nests-and-caches/validation.json"
+        },
+        {
+          "area": "validation",
+          "ref": "src/wildlife/WoodlandWork.test.ts"
         }
       ],
       "notRequiredReasons": {},
@@ -2079,7 +2130,7 @@
       "runtimeType": "wildlife-raccoon-provisional-v1",
       "family": "Small & exotic mammals",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -2087,27 +2138,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing ground travel and periodic action lacked climbing, resource transfers or toy play. This batch adds the recorded signature through shared Realm authority.",
+            "ref": "docs/tactical/161-climbing-raids-and-play.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Take actual food from a squirrel cache, carry it under a tree and eat it.",
+        "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
+        "scenario": "behavior-raccoon",
+        "tactical": "docs/tactical/161-climbing-raids-and-play.md",
+        "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "cache transfer",
+          "save/reload",
+          "ordinary world/manual and lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/WoodlandWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/raccoon/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "src/scenarios/WoodlandWorkRecipe.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "updatedUtc": "2026-10-20T14:07:29.399359+00:00"
     },
     "skunk": {
       "name": "Skunk",
@@ -3025,7 +3119,7 @@
       "runtimeType": "wildlife-capuchin-monkey-provisional-v1",
       "family": "Primates",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -3033,27 +3127,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing ground travel and periodic action lacked climbing, resource transfers or toy play. This batch adds the recorded signature through shared Realm authority.",
+            "ref": "docs/tactical/161-climbing-raids-and-play.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Climb a real tree, pick finite fruit, eat on its crown and descend.",
+        "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
+        "scenario": "behavior-capuchin",
+        "tactical": "docs/tactical/161-climbing-raids-and-play.md",
+        "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "supported tree movement",
+          "save/reload",
+          "ordinary world/manual and lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/WoodlandWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/capuchin-monkey/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "src/scenarios/WoodlandWorkRecipe.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "updatedUtc": "2026-10-20T14:07:29.399343+00:00"
     },
     "ring-tailed-lemur": {
       "name": "Ring-tailed lemur",
@@ -5592,7 +5729,7 @@
       "runtimeType": "wildlife-cat-ginger-provisional-v1",
       "family": "Pets",
       "variantOf": "cat",
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -5600,27 +5737,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing ground travel and periodic action lacked climbing, resource transfers or toy play. This batch adds the recorded signature through shared Realm authority.",
+            "ref": "docs/tactical/161-climbing-raids-and-play.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Inherit cat toy play and tree rests with the ginger coat’s own action atlas.",
+        "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
+        "scenario": "behavior-cat-ginger",
+        "tactical": "docs/tactical/161-climbing-raids-and-play.md",
+        "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "supported tree movement",
+          "save/reload",
+          "ordinary world/manual and lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/WoodlandWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/cat-ginger/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "src/scenarios/WoodlandWorkRecipe.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "updatedUtc": "2026-10-20T14:07:29.399363+00:00"
     },
     "cat-black": {
       "name": "Black cat",
@@ -5628,7 +5808,7 @@
       "runtimeType": "wildlife-cat-black-provisional-v1",
       "family": "Pets",
       "variantOf": "cat",
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -5636,27 +5816,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing ground travel and periodic action lacked climbing, resource transfers or toy play. This batch adds the recorded signature through shared Realm authority.",
+            "ref": "docs/tactical/161-climbing-raids-and-play.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Inherit cat toy play and tree rests with the black coat’s own action atlas.",
+        "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
+        "scenario": "behavior-cat-black",
+        "tactical": "docs/tactical/161-climbing-raids-and-play.md",
+        "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "supported tree movement",
+          "save/reload",
+          "ordinary world/manual and lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/161-climbing-raids-and-play.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/WoodlandWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/cat-black/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "src/scenarios/WoodlandWorkRecipe.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "updatedUtc": "2026-10-20T14:07:29.399364+00:00"
     },
     "dog-golden": {
       "name": "Golden retriever",
@@ -7609,7 +7832,7 @@
         "trigger": "Reachable finite food within home territory.",
         "scenario": "behavior-robin",
         "tactical": "docs/tactical/159-foraging-and-lookouts.md",
-        "resourceRules": "Real saved food; natural groves share one finite seed patch per occupied chunk. Placed birds create no food. Native alarm/escape interrupts feeding.",
+        "resourceRules": "Loose food/caches stay finite; explicit saved plants/trees renew capped stock. Player toys retain owner/creation order with ten per owner/realm.",
         "animationRevision": "behavior-v1",
         "requirements": [
           "feeding",
@@ -7641,6 +7864,10 @@
         {
           "area": "validation",
           "ref": "docs/tactical/159-foraging-and-lookouts/validation.json"
+        },
+        {
+          "area": "validation",
+          "ref": "src/wildlife/WoodlandWork.test.ts"
         }
       ],
       "notRequiredReasons": {},
@@ -7690,7 +7917,7 @@
         "trigger": "Reachable finite food within home territory.",
         "scenario": "behavior-rabbit",
         "tactical": "docs/tactical/159-foraging-and-lookouts.md",
-        "resourceRules": "Real saved resources; no automatic food creation for placed animals. Native alarm/escape interrupts tasks.",
+        "resourceRules": "Loose food/caches stay finite; explicit saved plants/trees renew capped stock. Player toys retain owner/creation order with ten per owner/realm.",
         "animationRevision": "behavior-v1",
         "requirements": [
           "feeding",
@@ -7722,6 +7949,10 @@
         {
           "area": "validation",
           "ref": "docs/tactical/159-foraging-and-lookouts/validation.json"
+        },
+        {
+          "area": "validation",
+          "ref": "src/wildlife/WoodlandWork.test.ts"
         }
       ],
       "notRequiredReasons": {},

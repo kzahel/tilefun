@@ -99,11 +99,20 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
     animal.jumpZ = height;
     return;
   }
+  if (animal.animalWork?.state === "pounce") {
+    const t = motion.elapsed / motion.duration;
+    animal.wz =
+      (motion.startZ ?? 0) +
+      ((motion.endZ ?? 0) - (motion.startZ ?? 0)) * t +
+      Math.sin(Math.PI * t) * (motion.lift ?? 0);
+    animal.jumpZ = Math.sin(Math.PI * t) * (motion.lift ?? 0);
+  }
   const dx = ai.target.wx - animal.position.wx,
     dy = ai.target.wy - animal.position.wy;
   const distance = Math.hypot(dx, dy);
   const speed = Math.min(
-    (ai.water ? (p.swimSpeed ?? p.speed) : p.speed) * (motion.escaping ? 2 : 1),
+    (motion.workSpeed ?? (ai.water ? (p.swimSpeed ?? p.speed) : p.speed)) *
+      (motion.escaping ? 2 : 1),
     distance / dt,
   );
   animal.velocity.vx = distance > 0.001 ? (dx / distance) * speed : 0;

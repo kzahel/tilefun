@@ -10,6 +10,7 @@ import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import { isMeadowWorker, MeadowWork } from "./MeadowWork.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
+import { isWoodlandWorker, WoodlandWork } from "./WoodlandWork.js";
 
 const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 export interface WorkPlayer {
@@ -38,8 +39,10 @@ const carrying = (e: Entity) => !!e.animalWork?.heldId;
 /** Shared production authority; all durable state lives on ordinary saved actors. */
 export class AnimalWorkSystem {
   private readonly meadow: MeadowWork;
+  private readonly woodland: WoodlandWork;
   constructor(private readonly manager: EntityManager) {
     this.meadow = new MeadowWork(manager);
+    this.woodland = new WoodlandWork(manager, this);
     manager.removalListeners.add((removed, destroyed) => {
       if (!destroyed) return; // Residency eviction is not a death or a resource deletion.
       if (removed.animalWork) this.cancel(removed, 3);
@@ -63,7 +66,7 @@ export class AnimalWorkSystem {
     task.state = state;
     task.elapsed = 0;
   }
-  private drop(animal: Entity) {
+  drop(animal: Entity) {
     const task = animal.animalWork,
       item = this.find(task?.heldId);
     if (task) delete task.heldId;
@@ -77,9 +80,9 @@ export class AnimalWorkSystem {
     if (item.workItem) delete item.workItem.claimedBy;
     if (item.velocity) item.velocity = { vx: 0, vy: 0 };
     item.noShadow = false;
-    if (item.type === "ball") item.deathTimer = 35;
+    if (item.type === "ball" && !item.workItem?.owner) item.deathTimer = 35;
   }
-  private cancel(animal: Entity, cooldown: number) {
+  cancel(animal: Entity, cooldown: number) {
     const task = animal.animalWork;
     if (!task) return;
     this.drop(animal);
@@ -146,7 +149,7 @@ export class AnimalWorkSystem {
       return item;
     }
   }
-  private go(
+  go(
     animal: Entity,
     point: PositionComponent,
     z: number,
@@ -191,7 +194,28 @@ export class AnimalWorkSystem {
     restoreFaunaPose(animal);
     return true;
   }
-  private hold(animal: Entity, item: Entity): boolean {
+  hold(animal: Entity, item: Entity): boolean {
+    if (item.workItem?.growth) {
+      if (
+        item.workItem.units <= 0 ||
+        item.workItem.claimedBy ||
+        gap(animal.position, item.position) > 15 ||
+        Math.abs((animal.wz ?? 0) - (item.wz ?? 0)) > 6
+      )
+        return false;
+      const food = item.workItem.growth.food;
+      if (food !== "fruit" && food !== "nut") return false;
+      const loose = createForageItem(food, item.position.wx, item.position.wy);
+      loose.wz = item.wz ?? 0;
+      this.manager.spawn(loose);
+      if (!this.hold(animal, loose)) {
+        this.manager.remove(loose.id);
+        return false;
+      }
+      item.workItem.units--;
+      restoreWorkItemPose(item);
+      return true;
+    }
     if (
       !item.workItem ||
       item.parentId !== undefined ||
@@ -220,6 +244,7 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
+    if (isWoodlandWorker(animal)) return this.woodland.update(animal, dt, context, planning);
     if (isMeadowWorker(animal)) return this.meadow.update(animal, dt, context, planning);
     const kind = workerKind(animal),
       ai = animal.fauna;
@@ -254,13 +279,6 @@ export class AnimalWorkSystem {
           return false;
         }
       }
-    }
-    // Ordinary balls have a short expiry. A bounded active fetch keeps its
-    // target alive through approach/pickup; cancellation stops this renewal.
-    if (kind === "dog" && ["seek", "pickup"].includes(task.state)) {
-      const ball = this.find(task.targetId);
-      if (ball?.type === "ball" && ball.parentId === undefined)
-        ball.deathTimer = Math.max(5, ball.deathTimer ?? 0);
     }
     if (
       animal.parentId !== undefined ||
@@ -305,6 +323,14 @@ export class AnimalWorkSystem {
     if (task.state === "deposit" || task.state === "eat" || task.state === "retrieve") {
       if (task.elapsed < (task.state === "eat" ? 2 : 1.4)) return true;
       const site = this.find(task.siteId);
+      if (
+        task.state === "retrieve" &&
+        site?.workItem?.claimedBy &&
+        site.workItem.claimedBy !== animal.persistentId
+      ) {
+        this.cancel(animal, 2);
+        return false;
+      }
       if (task.state === "retrieve" && site?.workItem?.contents.length) {
         const food = site.workItem.contents.shift();
         if (!food) {
@@ -436,6 +462,7 @@ export class AnimalWorkSystem {
           !item ||
           e.parentId !== undefined ||
           item.claimedBy ||
+          (item.growth && item.units <= 0) ||
           gap(e.position, ai.home) > ai.radius ||
           gap(e.position, animal.position) > 160
         )

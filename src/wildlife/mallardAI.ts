@@ -20,6 +20,10 @@ export interface WildlifeEnvironment {
   isWater(point: PositionComponent): boolean;
   isDeepWater?(point: PositionComponent): boolean;
   surfaceZ?(point: PositionComponent): number;
+  climbTrees?(
+    home: PositionComponent,
+    radius: number,
+  ): readonly import("./TreeClimbing.js").ClimbTree[];
   perches?(home: PositionComponent, radius: number): readonly import("./Robin.js").RobinPerch[];
 }
 const distance = (a: PositionComponent, b: PositionComponent) =>

@@ -1,0 +1,132 @@
+{
+  "blend": "art-source/wildlife-v2/capuchin-monkey/roster-v3/capuchin-monkey.blend",
+  "metadata": "public/demos/wildlife-v2/capuchin-monkey/roster-v3/sprite.json",
+  "sheet": "public/demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png",
+  "canvas": 96,
+  "anchor": [
+    48,
+    72
+  ],
+  "palette": {
+    "B": "#67503a",
+    "H": "#a58b60",
+    "C": "#e7d9b5",
+    "M": "#4e4034",
+    "E": "#d8be94",
+    "K": "#292d2c",
+    "N": "#252927",
+    "T": "#bf6052"
+  },
+  "profile": {
+    "label": "Capuchin monkey",
+    "torso": [
+      0.0,
+      -0.045,
+      1.242
+    ],
+    "radii": [
+      0.468,
+      0.738,
+      0.495
+    ],
+    "chest": [
+      0.0,
+      0.378,
+      1.305
+    ],
+    "chestRadii": [
+      0.396,
+      0.378,
+      0.45
+    ],
+    "head": [
+      0.0,
+      0.711,
+      1.71
+    ],
+    "skull": [
+      0.324,
+      0.315,
+      0.342
+    ],
+    "muzzleY": 0.225,
+    "muzzleRadii": [
+      0.207,
+      0.216,
+      0.18
+    ],
+    "earX": 0.30600000000000005,
+    "earZ": 0.036000000000000004,
+    "earRadii": [
+      0.108,
+      0.063,
+      0.135
+    ],
+    "foreHip": [
+      0.279,
+      0.387,
+      1.161
+    ],
+    "hindHip": [
+      0.288,
+      -0.477,
+      1.116
+    ],
+    "foreLengths": [
+      0.585,
+      0.72,
+      0.225,
+      0.117
+    ],
+    "hindLengths": [
+      0.585,
+      0.648,
+      0.216,
+      0.117
+    ],
+    "legRadii": [
+      0.126,
+      0.0945,
+      0.0675,
+      0.0495
+    ],
+    "footWidth": 0.117,
+    "footLength": 0.189,
+    "tailLengths": [
+      0.558,
+      0.612,
+      0.54
+    ],
+    "tailRadius": 0.06300000000000001,
+    "tailY": -0.684,
+    "tailAngle": 0.2,
+    "tailKey": "B",
+    "walkSpeed": 12,
+    "chaseSpeed": 24,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "lift": 0.162,
+    "forageDrop": 0.20700000000000002,
+    "palette": {
+      "B": "#67503a",
+      "H": "#a58b60",
+      "C": "#e7d9b5",
+      "M": "#4e4034",
+      "E": "#d8be94",
+      "K": "#292d2c",
+      "N": "#252927",
+      "T": "#bf6052"
+    },
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ]
+  },
+  "sha256": {
+    "art-source/wildlife-v2/capuchin-monkey/roster-v3/capuchin-monkey.blend": "1bd4d070ddf9283b7bbc0ecfb4d70b6956cf6fbeddabf11ce8d46696fb65b09d",
+    "public/demos/wildlife-v2/capuchin-monkey/roster-v3/sprite.json": "fa3b784a4fa11b7b1980301b29644f5cf893c50660968073f95d020709e0bccc",
+    "public/demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png": "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26",
+    "art-source/wildlife-v2/capuchin-monkey/roster-v3/masters.json": "8fad2711a8e21370b0796f6198f16578c96f06366b8b119b5d7b7934502fe6ce"
+  }
+}

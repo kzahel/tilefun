@@ -130,3 +130,7 @@ public/demos/vehicle-riders/**/offline.html -text -whitespace
 # Retained wildlife behavior recipes preserve exact source hashes.
 scripts/wildlife/meadow-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 scripts/wildlife/register-meadow-157.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Exact retained wildlife action helpers for batch 161.
+scripts/wildlife/woodland-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/wildlife/register-woodland-161.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

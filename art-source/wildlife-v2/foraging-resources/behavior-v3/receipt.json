@@ -1,0 +1,43 @@
+{
+  "identity": "foraging-resources-behavior-v3",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/161-climbing-raids-and-play.md",
+  "replay": {
+    "identity": "foraging-resources-behavior-v3",
+    "status": "byte-identical",
+    "isolation": "minimal retained inputs only",
+    "artifacts": 7,
+    "sha256": {
+      "contact-sheet-native.png": "646da265e2b3cfc49b80ce62c7e815d26de3427f89c2189ac7a0ae3354a3bdbf",
+      "index.html": "972dd5079f273efba15dd063a11aee5134059c2e25beb97f387ca4f6e129c4fb",
+      "pixel-audit.json": "8a716269eb786aecccee0daa6fc315970efefbf36e8b0a620b4cdfbd0faa3968",
+      "preview.png": "3c4de3a5e4db8bd7e592dba3a3596359ca700310a05b00df5d40103b72927111",
+      "scene-native.png": "3c4de3a5e4db8bd7e592dba3a3596359ca700310a05b00df5d40103b72927111",
+      "sheet.png": "646da265e2b3cfc49b80ce62c7e815d26de3427f89c2189ac7a0ae3354a3bdbf",
+      "sprite.json": "19efcd96b57e2775c915e1fb19070669a7e2a49df6df677c32dccb75fbbe2eb6"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/foraging-resources/behavior-v3/inputs.json": "8f6ffbdb64b8f8894e9ec22bc0d38e73bd3eba1e79a849849566682406709935",
+    "art-source/wildlife-v2/foraging-resources/behavior-v3/paint.json": "cfb5d34a83459c6dfee9afdc8a8cb7b338491adaa8512d0e6caa5b786b17ef0a",
+    "art-source/wildlife-v2/foraging-resources/behavior-v3/replay.json": "6cc808c31ab1926ff63bfb50e971ee12240a7b79c90010680a315b91c9ec58e7",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v3/contact-sheet-native.png": "646da265e2b3cfc49b80ce62c7e815d26de3427f89c2189ac7a0ae3354a3bdbf",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v3/index.html": "972dd5079f273efba15dd063a11aee5134059c2e25beb97f387ca4f6e129c4fb",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v3/pixel-audit.json": "8a716269eb786aecccee0daa6fc315970efefbf36e8b0a620b4cdfbd0faa3968",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v3/preview.png": "3c4de3a5e4db8bd7e592dba3a3596359ca700310a05b00df5d40103b72927111",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v3/scene-native.png": "3c4de3a5e4db8bd7e592dba3a3596359ca700310a05b00df5d40103b72927111",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v3/sheet.png": "646da265e2b3cfc49b80ce62c7e815d26de3427f89c2189ac7a0ae3354a3bdbf",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v3/sprite.json": "19efcd96b57e2775c915e1fb19070669a7e2a49df6df677c32dccb75fbbe2eb6",
+    "scripts/wildlife/woodland-build.py": "42a2ec4264a033903b73ebd3c7a4783c110e8da0c42bb2235f91b1197314b561",
+    "scripts/wildlife/woodland-finish.py": "dde1af93221081bf62d9243695f72882c9eeb5c794ca3417ab3d29450d7ee0b5",
+    "scripts/wildlife/woodland-replay.py": "65da7cdfdcd0b164c6f2389031515e33165c8e9c354f919ac735c33b9d13d1e8",
+    "scripts/wildlife/woodland-resources.py": "5378b7d4b919430752797990dc51b2d52b401965cdd2b0d90aa31bdd81d8fce0",
+    "scripts/wildlife/woodland-art.mjs": "ef21ceb4da44df11866e9424472095a6936b80afde0a63777b00362b7abe949a",
+    "scripts/wildlife/register-woodland-161.mjs": "03377b2fd56c15fdce0c4ef252ec631baf1369dee79de321790671fe98e4f3b0",
+    "scripts/wildlife/capture-behavior-155.mjs": "4cba4172d32bd77168b8929743c1b133e8ee6f22ec4285f0f3c71867beb1e6f8",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v2/sheet.png": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc"
+  }
+}

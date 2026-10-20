@@ -1,0 +1,18 @@
+{
+  "identity": "capuchin-monkey-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "7778cbb05eec231d08ea24fffb80df95e7ba756b7611c7f6cf22c1d762ec419b",
+    "index.html": "ca3db0439aa790b21cf93cb04fa92c7fd852a3e07c5f8b715d994a76e7b5a825",
+    "pixel-audit.json": "be0507f90388ba6ada40f34d770507ec66827f9e12d3681bb510c9a16f1a5d7f",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "9614fd418a579904f0e3b32518e7781cb5f82d597d9dbb61fe63a6d67544dc94",
+    "preview.gif": "01efbbf03d6652bcb77cff04ec98d896058915730cab4fee9b26d8f49a7c0b3c",
+    "scene-native.png": "77d10814f8fa1c1d6786f6939445da2ddacde0832ae7ab14200396a106e81ce5",
+    "sheet.png": "ee5a78b0fafe8211f6287c3d0bf0340028ef4aca7f861d08420f5f42e4b4272a",
+    "source-audit.json": "98be5b349be502bac24dee62655a6d3d8fc2442120a6491d41cb947374b34875",
+    "sprite.json": "72845213c25bf63cfbd9591a075a67fa2386f81eefbd06a32423aee62ae3357e"
+  }
+}

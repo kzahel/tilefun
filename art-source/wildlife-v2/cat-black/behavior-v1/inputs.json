@@ -1,0 +1,31 @@
+{
+  "blend": "art-source/wildlife-v2/cat/behavior-v1/cat.blend",
+  "projection": "art-source/wildlife-v2/cat/behavior-v1/projection.json",
+  "metadata": "public/demos/wildlife-v2/cat-black/draft-v1/sprite.json",
+  "sheet": "public/demos/wildlife-v2/cat-black/draft-v1/sheet.png",
+  "canvas": 48,
+  "anchor": [
+    24,
+    34
+  ],
+  "palette": {
+    "k": "#171e28",
+    "s": "#2b3341",
+    "c": "#454e5e",
+    "h": "#677083",
+    "w": "#3b4352",
+    "g": "#303849",
+    "e": "#dfc36d",
+    "p": "#bc828d"
+  },
+  "animationInheritance": "cat fixed-length action rig; independent original coat travel bank and own palette",
+  "sha256": {
+    "art-source/wildlife-v2/cat/behavior-v1/cat.blend": "9f890894247530c0065857eca715a46b469202e151181bcbd58f6ab9b24a2167",
+    "art-source/wildlife-v2/cat/behavior-v1/projection.json": "4879670898ac1c44413fcaf582a5eace44aed78970413fab3b06220b1b9b258e",
+    "public/demos/wildlife-v2/cat-black/draft-v1/sprite.json": "4ba7b0e11143c2141269927d47cb90fc08a9f1f26e9e3bce65d4177174583083",
+    "public/demos/wildlife-v2/cat-black/draft-v1/sheet.png": "ada428cfca901ba8bc2283e2f7dec2ae5c13a4ba66df493294b7a4cd78e7fc5c",
+    "art-source/wildlife-v2/cat-black/draft-v1/masters.json": "19775fb09b482a91b55db7fb39f46d39a8d7a555b6a6127e3226e317720f4535",
+    "public/demos/wildlife-v2/cat/behavior-v1/source-audit.json": "80b5c8d7faeee2b4d946e8b566e14f277eabd48bd7fb3423ca7837e8bcd54ea2"
+  },
+  "audit": "public/demos/wildlife-v2/cat/behavior-v1/source-audit.json"
+}

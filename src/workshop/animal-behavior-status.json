@@ -9,13 +9,13 @@
     "review": "not-requested"
   },
   "cat": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Crouch and stalk a ball, physically pounce and bat it, then climb to a tree rest.",
+    "scene": "behavior-cat",
+    "review": "pending"
   },
   "dog": {
     "phase": "land",
@@ -486,13 +486,13 @@
     "review": "not-requested"
   },
   "raccoon": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Take actual food from a squirrel cache, carry it under a tree and eat it.",
+    "scene": "behavior-raccoon",
+    "review": "pending"
   },
   "skunk": {
     "phase": "unclassified",
@@ -711,13 +711,13 @@
     "review": "not-requested"
   },
   "capuchin-monkey": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Climb a real tree, pick finite fruit, eat on its crown and descend.",
+    "scene": "behavior-capuchin",
+    "review": "pending"
   },
   "ring-tailed-lemur": {
     "phase": "unclassified",
@@ -1341,22 +1341,22 @@
     "review": "not-requested"
   },
   "cat-ginger": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Inherit cat toy play and tree rests with the ginger coat’s own action atlas.",
+    "scene": "behavior-cat-ginger",
+    "review": "pending"
   },
   "cat-black": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Inherit cat toy play and tree rests with the black coat’s own action atlas.",
+    "scene": "behavior-cat-black",
+    "review": "pending"
   },
   "dog-golden": {
     "phase": "unclassified",

@@ -1,0 +1,18 @@
+{
+  "identity": "cat-ginger-behavior-v1",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 65,
+      "exactFacingCrops": 260
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 65,
+      "exactFacingCrops": 260
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

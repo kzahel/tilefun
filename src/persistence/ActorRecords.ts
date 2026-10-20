@@ -138,6 +138,7 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
   }
   if ("isProp" in actor && record.spawnTimer !== undefined) actor.spawnTimer = record.spawnTimer;
   if (!("isProp" in actor)) {
+    if (actor.type === "ball" && actor.workItem?.owner) delete actor.deathTimer;
     restoreMallardPose(actor);
     restoreFrogPose(actor);
     restoreRabbitPose(actor);

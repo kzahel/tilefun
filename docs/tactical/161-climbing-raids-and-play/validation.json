@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-20",
+  "base": "8df681d3",
+  "state": "automation-verified-human-review-pending",
+  "mechanics": [
+    "capuchin climbing and fruit",
+    "raccoon cache raids",
+    "cat physical toy play and tree rests"
+  ],
+  "inheritedCoats": ["cat-ginger", "cat-black"],
+  "authority": {
+    "passed": 663,
+    "files": 6,
+    "seconds": 19.33,
+    "includes": "natural habitats, boundary ownership at positive/negative cells, save/reload, conservation, growth and owned toys"
+  },
+  "art": {
+    "pendingIdentities": 6,
+    "priorReviewObjectsPreserved": 235,
+    "pinnedArtifacts": 168,
+    "isolatedReplayArtifacts": 57,
+    "exactNativeAnd3xCrops": 2856,
+    "fixedLengthEndpointChecks": 1664,
+    "priorTravelCellsUnchanged": true,
+    "humanReview": "pending"
+  },
+  "focusedBrowser": {
+    "passed": 6,
+    "seconds": 72,
+    "renderers": ["Canvas2D", "GPU"],
+    "contract": "Real Worker action pixels, supported/carrying poses, save/reload and outcomes",
+    "sourceScope": "Rechecked against final production build after crop boundary correction"
+  },
+  "manifest": {
+    "candidates": 1882,
+    "normalRetinaChromiumVerified": true,
+    "added": 26,
+    "previousExact": 920,
+    "previousLiveFingerprintOnly": 936,
+    "oldCandidatesRemoved": 0,
+    "priorReviewObjectsPreserved": 235,
+    "inputDigest": "499883b08c1ae5e76bee38e578e2201ff81a249930a3b5848831edda9995a83d"
+  },
+  "broadUnits": {
+    "passed": 6415,
+    "failed": 5,
+    "skipped": 10,
+    "total": 6430,
+    "files": 350,
+    "seconds": 745.62,
+    "remainingFailures": "Known Windows symlink-permission and SIGKILL portability cases; no introduced failures.",
+    "sourceScope": "Before final cat contact offset and crop birth clamp; all 663 affected tests rechecked afterward.",
+    "log": "data/wildlife-161-full-tests-final.txt"
+  },
+  "fullBrowser": {
+    "totalCasesCovered": 821,
+    "passedCheckpoints": [87, 292, 441, 1],
+    "remainingFailures": 0,
+    "isolation": "Shared auth/output files disappeared during the first continuation. Remaining 442 cases reran with isolated auth/data/output: 441 passed; one hardcoded interior-review filesystem path then passed with matching server path.",
+    "otherRechecks": "The prior mobile scroll, pinch and rabbit reload timeouts passed during isolated continuation.",
+    "logs": [
+      "data/wildlife-161-full-browser.txt",
+      "data/wildlife-161-browser-resume.txt",
+      "data/wildlife-161-browser-isolated.txt",
+      "data/wildlife-161-interior-recheck.txt"
+    ]
+  },
+  "additionalChecks": {
+    "nodeComparator": "1/1 passed",
+    "httpWebSocket": "3/3 passed",
+    "worker": "11 passed; dry-run build passed",
+    "typecheck": "passed",
+    "lint": "passed; 121 existing warnings and 38 infos",
+    "build": "passed; committed assets, refreshed catalog and normal-retina manifest",
+    "streaming": "final --assert-ready passed; all measured settled stages complete, no missing/incomplete/stale terrain"
+  },
+  "stagedVerification": {
+    "manifestInputs": 11453,
+    "uniqueInputs": 9429,
+    "indexMatchesWorkingTree": true,
+    "inputDigest": "499883b08c1ae5e76bee38e578e2201ff81a249930a3b5848831edda9995a83d",
+    "uniqueStagedArtifactPins": 117,
+    "allMatchRetainedSha256": true
+  }
+}

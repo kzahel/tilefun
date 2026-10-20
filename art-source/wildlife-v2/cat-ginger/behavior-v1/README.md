@@ -1,0 +1,1 @@
+Inherited cat play/climb action rig, with the original coat atlas preserved byte-for-byte. Inputs pin the editable base-cat action source, its projected volumes and this coat’s palette. New exact pixels remain pending human review.

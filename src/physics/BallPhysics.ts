@@ -87,7 +87,8 @@ export function tickBallPhysics(
       // Only despawn if ball is at or near ground level (not flying over)
       const groundZ = getSurfaceZ(ball.position.wx, ball.position.wy, getHeight);
       const ballZ = ball.wz ?? 0;
-      if (ballZ - groundZ < 4) {
+      // Player toys remain on the water surface until their owner retires them.
+      if (ballZ - groundZ < 4 && !ball.workItem?.owner) {
         toRemove.push(ball.id);
         continue;
       }
@@ -118,7 +119,7 @@ export function tickBallPhysics(
           if (hSpeed < 5) {
             ball.velocity.vx = 0;
             ball.velocity.vy = 0;
-            ball.deathTimer = ball.workItem?.owner ? 35 : BALL_DESPAWN_TIME;
+            if (!ball.workItem?.owner) ball.deathTimer = BALL_DESPAWN_TIME;
           }
         } else {
           // Bounce
@@ -145,7 +146,7 @@ export function tickBallPhysics(
       if (hSpeed < 3 && ball.deathTimer === undefined) {
         ball.velocity.vx = 0;
         ball.velocity.vy = 0;
-        ball.deathTimer = ball.workItem?.owner ? 35 : BALL_DESPAWN_TIME;
+        if (!ball.workItem?.owner) ball.deathTimer = BALL_DESPAWN_TIME;
       }
     }
 
@@ -179,10 +180,11 @@ export function tickBallPhysics(
         // A fetching dog deliberately reaches for its settled target. A moving
         // projectile still uses the ordinary hit/startle response.
         if (
-          other.animalWork?.kind === "dog" &&
+          (other.animalWork?.kind === "dog" || other.animalWork?.kind === "cat") &&
           other.animalWork.targetId === ball.persistentId &&
-          ball.jumpVZ === undefined &&
-          Math.hypot(ball.velocity.vx, ball.velocity.vy) < 8
+          (other.animalWork?.kind === "cat" || ball.jumpVZ === undefined) &&
+          Math.hypot(ball.velocity.vx, ball.velocity.vy) <
+            (other.animalWork?.kind === "cat" ? 80 : 8)
         )
           continue;
         if (

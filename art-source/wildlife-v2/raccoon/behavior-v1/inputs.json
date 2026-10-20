@@ -1,0 +1,125 @@
+{
+  "blend": "art-source/wildlife-v2/raccoon/roster-v2/raccoon.blend",
+  "metadata": "public/demos/wildlife-v2/raccoon/roster-v2/sprite.json",
+  "sheet": "public/demos/wildlife-v2/raccoon/roster-v2/sheet.png",
+  "canvas": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "palette": {
+    "K": "#272f34",
+    "B": "#8c8c80",
+    "H": "#b8b7a5",
+    "C": "#d8d4bd",
+    "M": "#414849",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "profile": {
+    "label": "Raccoon",
+    "torso": [
+      0,
+      -0.06,
+      1.0
+    ],
+    "radii": [
+      0.43,
+      0.75,
+      0.42
+    ],
+    "chest": [
+      0,
+      0.42000000000000004,
+      1.035
+    ],
+    "chestRadii": [
+      0.4085,
+      0.41250000000000003,
+      0.4284
+    ],
+    "head": [
+      0,
+      0.6835,
+      1.1176
+    ],
+    "skull": [
+      0.29,
+      0.31,
+      0.28
+    ],
+    "muzzleY": 0.2263,
+    "muzzleRadii": [
+      0.1827,
+      0.22319999999999998,
+      0.12040000000000001
+    ],
+    "earX": 0.22619999999999998,
+    "earZ": 0.23800000000000002,
+    "earRadii": [
+      0.13,
+      0.08,
+      0.15
+    ],
+    "foreHip": [
+      0.2924,
+      0.42000000000000004,
+      0.87
+    ],
+    "hindHip": [
+      0.301,
+      -0.51,
+      0.85
+    ],
+    "foreLengths": [
+      0.43,
+      0.46,
+      0.25,
+      0.14
+    ],
+    "hindLengths": [
+      0.43,
+      0.46,
+      0.25,
+      0.14
+    ],
+    "legRadii": [
+      0.105,
+      0.075,
+      0.055,
+      0.04
+    ],
+    "footWidth": 0.095,
+    "footLength": 0.16,
+    "tailLengths": [
+      0.4,
+      0.36,
+      0.32
+    ],
+    "tailRadius": 0.16,
+    "tailY": -0.7125,
+    "tailAngle": 0.25,
+    "tailKey": "B",
+    "walkSpeed": 14,
+    "chaseSpeed": 28,
+    "walkMs": 40,
+    "chaseMs": 20.0,
+    "lift": 0.15,
+    "forageDrop": 0.2,
+    "palette": {
+      "K": "#272f34",
+      "B": "#8c8c80",
+      "H": "#b8b7a5",
+      "C": "#d8d4bd",
+      "M": "#414849",
+      "E": "#d3b066",
+      "N": "#242c31"
+    }
+  },
+  "sha256": {
+    "art-source/wildlife-v2/raccoon/roster-v2/raccoon.blend": "6682e68c925847c7c1f528bde653bcc5d79d48d2de91be98844647e578dbdd64",
+    "public/demos/wildlife-v2/raccoon/roster-v2/sprite.json": "0e6fd181ad6bc1ec34cece447aaf763863e1023f5bbd4d7c7d8c596490e6e8c0",
+    "public/demos/wildlife-v2/raccoon/roster-v2/sheet.png": "85626535162b313521b0a7a75ac832a11722e7e0bea1dae38b124f49212c8525",
+    "art-source/wildlife-v2/raccoon/roster-v2/masters.json": "29b6c90b54374bac1f34e29369af55bb339731e0fc5e0fac1df8a41c1fe7ce31"
+  }
+}

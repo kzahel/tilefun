@@ -649,3 +649,11 @@
 !robin/behavior-v1/*
 !meerkat/behavior-v1/*
 !foraging-resources/behavior-v2/*
+
+# Owner-authorized behavior batch 161.
+!capuchin-monkey/behavior-v1/*
+!raccoon/behavior-v1/*
+!cat/behavior-v1/*
+!cat-ginger/behavior-v1/*
+!cat-black/behavior-v1/*
+!foraging-resources/behavior-v3/*

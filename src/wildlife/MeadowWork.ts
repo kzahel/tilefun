@@ -286,7 +286,7 @@ export class MeadowWork {
       target.workItem.units = Math.max(0, (target.workItem.units || 1) - 1);
       task.eaten++;
       this.release(a);
-      if (!target.workItem.units) this.manager.remove(target.id);
+      if (!target.workItem.units && !target.workItem.growth) this.manager.remove(target.id);
       else restoreWorkItemPose(target);
       this.enter(a, kind === "robin" ? "return" : "rest");
       return true;
@@ -358,6 +358,7 @@ export class MeadowWork {
       .filter(
         (e) =>
           e.workItem &&
+          (!e.workItem.growth || e.workItem.units > 0) &&
           e.parentId === undefined &&
           this.availableFood(e, c) &&
           gap(e.position, ai.home) < ai.radius &&

@@ -6,26 +6,26 @@ Generated from [the canonical ledger](../art-source/wildlife-v2/behavior-campaig
 
 | Work area | Not audited | Planned | In progress | Verified | Not required |
 | --- | --- | --- | --- | --- | --- |
-| audit | 200 | 0 | 0 | 6 | 0 |
-| design | 200 | 0 | 0 | 6 | 0 |
-| ai | 200 | 0 | 0 | 6 | 0 |
-| animation | 200 | 0 | 0 | 6 | 0 |
-| integration | 200 | 0 | 0 | 6 | 0 |
-| validation | 200 | 0 | 0 | 6 | 0 |
+| audit | 195 | 0 | 0 | 11 | 0 |
+| design | 195 | 0 | 0 | 11 | 0 |
+| ai | 195 | 0 | 0 | 11 | 0 |
+| animation | 195 | 0 | 0 | 11 | 0 |
+| integration | 195 | 0 | 0 | 11 | 0 |
+| validation | 195 | 0 | 0 | 11 | 0 |
 
-Phase assignment: unclassified: 200; land: 4; air: 2; amphibious: 0; aquatic: 0.
+Phase assignment: unclassified: 195; land: 9; air: 2; amphibious: 0; aquatic: 0.
 
 | Human review | Not requested | Pending | Needs changes | Approved |
 | --- | --- | --- | --- | --- |
-| behavior | 200 | 6 | 0 | 0 |
-| animation | 200 | 6 | 0 | 0 |
+| behavior | 195 | 11 | 0 | 0 |
+| animation | 195 | 11 | 0 | 0 |
 
 Requested ideas are proposals, not completed designs: dog ball fetching, crow object carrying, appropriate bird nesting, and visible food/fruit foraging.
 
 | Animal | Phase | Audit | Design | AI | Animation | Integration | Validation | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Red fox (fox) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Cat (cat) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Cat (cat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions. |
 | Dog (dog) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; then audit the next land/air batch. |
 | Pasture cow (cow) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Sheep (sheep) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -78,7 +78,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Chinchilla (chinchilla) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Hedgehog (hedgehog) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Porcupine (porcupine) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Raccoon (raccoon) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Raccoon (raccoon) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions. |
 | Skunk (skunk) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Red panda (red-panda) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Ostrich (ostrich) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -103,7 +103,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Atlantic puffin (atlantic-puffin) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Chimpanzee (chimpanzee) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Orangutan (orangutan) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Capuchin monkey (capuchin-monkey) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Capuchin monkey (capuchin-monkey) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions. |
 | Ring-tailed lemur (ring-tailed-lemur) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Mandrill (mandrill) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Proboscis monkey (proboscis-monkey) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -173,8 +173,8 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Stag beetle (stag-beetle) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Grasshopper (grasshopper) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Cricket (cricket) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Ginger tabby (cat-ginger) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Black cat (cat-black) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Ginger tabby (cat-ginger) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions. |
+| Black cat (cat-black) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions. |
 | Golden retriever (dog-golden) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Pointed-ear shepherd (dog-shepherd) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Panther (panther) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |

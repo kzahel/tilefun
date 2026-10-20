@@ -24,7 +24,7 @@ import {
   aabbsOverlap,
   getEntityAABB,
 } from "../entities/collision.js";
-import type { ColliderComponent, Entity } from "../entities/Entity.js";
+import type { ColliderComponent, Entity, PositionComponent } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
@@ -100,15 +100,18 @@ import type { IServerTransport } from "../transport/Transport.js";
 import { AnimalWorkSystem } from "../wildlife/AnimalWorkSystem.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
 import { createFierceDen, denForPredator } from "../wildlife/FierceDens.js";
+import { tickFoodSources } from "../wildlife/FoodGrowth.js";
 import { freshBallWork } from "../wildlife/ForageResources.js";
 import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import type { WildlifeEnvironment } from "../wildlife/mallardAI.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
+import { OwnedBalls } from "../wildlife/OwnedBalls.js";
 import { resolvePredatorCatches, startlePredator } from "../wildlife/predatorAI.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
 import { startleRobin } from "../wildlife/robinInteractions.js";
 import { robinTreePerches } from "../wildlife/robinPerches.js";
+import { climbTrees } from "../wildlife/TreeClimbing.js";
 import {
   type PendingWildlifeRespawn,
   tickWildlifeRespawns,
@@ -217,6 +220,7 @@ export class Realm {
   world: World;
   entityManager: EntityManager;
   animalWork: AnimalWorkSystem;
+  ownedBalls: OwnedBalls;
   propManager: PropManager;
   treeBrush: TreeBrushEditor;
   worldAPI: WorldAPIImpl;
@@ -367,6 +371,7 @@ export class Realm {
     this.world = new World();
     this.entityManager = new EntityManager();
     this.animalWork = new AnimalWorkSystem(this.entityManager);
+    this.ownedBalls = new OwnedBalls(this.entityManager);
     this.propManager = new PropManager();
     const trafficRoutes =
       this.options.traffic ??
@@ -1020,6 +1025,19 @@ export class Realm {
           identity: session.profileId || session.clientId,
           entity: session.player,
         }));
+        const workReady = (point: PositionComponent, radius: number) => {
+          const range = {
+            minCx: Math.floor((point.wx - radius) / 256),
+            maxCx: Math.floor((point.wx + radius) / 256),
+            minCy: Math.floor((point.wy - radius) / 256),
+            maxCy: Math.floor((point.wy + radius) / 256),
+          };
+          if (this.streaming) return this.streaming.rangeReady(range);
+          for (let cy = range.minCy; cy <= range.maxCy; cy++)
+            for (let cx = range.minCx; cx <= range.maxCx; cx++)
+              if (!this.world.getChunkIfLoaded(cx, cy)) return false;
+          return true;
+        };
         const wildlifeEnvironment: WildlifeEnvironment = {
           huntCandidates: (hunter, radius) =>
             this.entityManager.spatialHash
@@ -1045,19 +1063,7 @@ export class Realm {
               {
                 environment: wildlifeEnvironment,
                 players: workPlayers,
-                ready: (point, radius) => {
-                  const range = {
-                    minCx: Math.floor((point.wx - radius) / 256),
-                    maxCx: Math.floor((point.wx + radius) / 256),
-                    minCy: Math.floor((point.wy - radius) / 256),
-                    maxCy: Math.floor((point.wy + radius) / 256),
-                  };
-                  if (this.streaming) return this.streaming.rangeReady(range);
-                  for (let cy = range.minCy; cy <= range.maxCy; cy++)
-                    for (let cx = range.minCx; cx <= range.maxCx; cx++)
-                      if (!this.world.getChunkIfLoaded(cx, cy)) return false;
-                  return true;
-                },
+                ready: workReady,
               },
               planning,
             ),
@@ -1137,6 +1143,16 @@ export class Realm {
                     ]
                   : [];
               }),
+          climbTrees: (home, radius) =>
+            climbTrees(
+              this.propManager.getPropsInChunkRange(
+                Math.floor((home.wx - radius) / 256),
+                Math.floor((home.wy - radius) / 256),
+                Math.floor((home.wx + radius) / 256),
+                Math.floor((home.wy + radius) / 256),
+              ),
+              (p) => getSurfaceZ(p.wx, p.wy, getHeight),
+            ),
           perches: (home, radius) =>
             robinTreePerches(
               this.propManager.getPropsInChunkRange(
@@ -1272,6 +1288,8 @@ export class Realm {
           );
         }
 
+        tickFoodSources(this.entityManager, entityTickDts, wildlifeEnvironment, workReady);
+
         // â”€â”€ Ball physics (gravity, bouncing, entity collision) â”€â”€
         tickBallPhysics(
           this.entityManager,
@@ -1282,6 +1300,7 @@ export class Realm {
         );
 
         this.animalWork.syncAll(active);
+        this.ownedBalls.sync(active);
 
         for (const entity of entityTickDts.keys()) {
           if (
@@ -1609,16 +1628,23 @@ export class Realm {
         const jitteredSpeed = speed * speedJitter;
         const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
         const zSpeed = jitteredSpeed * Math.sin(THROW_ANGLE);
+        const owner = session.profileId || session.clientId;
         const reusable = this.entityManager.entities.find(
           (e) =>
             e.type === "ball" &&
             e.workItem?.returned &&
+            e.workItem.owner === owner &&
             e.parentId === undefined &&
             Math.hypot(e.position.wx - player.position.wx, e.position.wy - player.position.wy) < 36,
         );
         const ball = reusable ?? createBall(player.position.wx, player.position.wy);
         ball.position = { ...player.position };
-        ball.workItem = freshBallWork(session.profileId || session.clientId, player.position);
+        const order = ball.workItem?.ballOrder;
+        ball.workItem = {
+          ...freshBallWork(owner, player.position),
+          ...(order !== undefined ? { ballOrder: order } : {}),
+        };
+        if (!this.ownedBalls.admit(owner, ball)) break;
         delete ball.deathTimer;
         ball.ballThrowerId = player.id;
         ball.velocity = { vx: Math.cos(baseAngle) * xySpeed, vy: Math.sin(baseAngle) * xySpeed };
@@ -1809,6 +1835,7 @@ export class Realm {
     this.world = new World(this.interior ? this.generator.terrain : strategy);
     this.entityManager = new EntityManager();
     this.animalWork = new AnimalWorkSystem(this.entityManager);
+    this.ownedBalls = new OwnedBalls(this.entityManager);
     this.propManager = new PropManager();
     const trafficRoutes =
       this.options.traffic ??
@@ -1881,6 +1908,9 @@ export class Realm {
     this.registerMods();
 
     await this.saveManager.open();
+    this.ownedBalls = new OwnedBalls(this.entityManager, this.saveManager);
+    await this.ownedBalls.load();
+    this.records.acceptsRecord = (record) => this.ownedBalls.accepts(record);
     const savedMeta = await this.saveManager.loadMeta();
     const returns = await this.saveManager.loadRecords("meta", WILDLIFE_RESPAWN_SCOPE);
     if (returns.size > WILDLIFE_RESPAWN_LIMIT)

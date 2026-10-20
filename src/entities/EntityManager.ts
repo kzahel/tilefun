@@ -24,6 +24,7 @@ import {
   settleRabbit,
 } from "../wildlife/rabbitInteractions.js";
 import { prepareRobinMotion, settleRobin } from "../wildlife/robinInteractions.js";
+import { controlsTreeHeight } from "../wildlife/TreeClimbing.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { CollisionIndex } from "./CollisionIndex.js";
 import type { AABB } from "./collision.js";
@@ -495,6 +496,11 @@ export class EntityManager {
               CollisionFlag.Water) !==
               0,
           );
+        if (entity.animalWork?.state === "pounce" && entity.fauna?.motion) {
+          if (entity.fauna.motion.elapsed >= entity.fauna.motion.duration)
+            settleFauna(entity, computeGroundZ(entity));
+          continue;
+        }
         if (entity.fauna?.motion && faunaProfile(entity.type)?.hop) {
           if (entity.fauna.motion.elapsed >= entity.fauna.motion.duration)
             settleFauna(entity, computeGroundZ(entity));
@@ -509,6 +515,10 @@ export class EntityManager {
             ) < 0.5)
         )
           settleFauna(entity);
+        if (controlsTreeHeight(entity)) {
+          entity.wz = entity.animalWork?.climbZ ?? entity.wz ?? 0;
+          continue;
+        }
         applyGroundTracking(entity, computeGroundZ(entity), playerSet.has(entity));
       }
       // Also initialize players that may not be in this.entities

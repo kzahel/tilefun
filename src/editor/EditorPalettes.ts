@@ -6,7 +6,7 @@ import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
-import { forageType } from "../wildlife/ForageResources.js";
+import { forageType, SOURCE_KINDS, sourceType } from "../wildlife/ForageResources.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
@@ -78,6 +78,18 @@ export interface EntityPaletteEntry {
 }
 
 export const ENTITY_PALETTE: EntityPaletteEntry[] = [
+  ...SOURCE_KINDS.map((kind) => ({
+    type: sourceType(kind),
+    label:
+      kind === "fruit-tree"
+        ? "Tree fruit crop (place beside a tree)"
+        : kind === "nut-tree"
+          ? "Tree nut supply (place beside a tree)"
+          : kind === "seed-plant"
+            ? "Seed-bearing plant"
+            : "Growing edible plant",
+    color: "#54834b",
+  })),
   ...(["twig", "nut", "fruit", "greens", "seed"] as const).map((kind) => ({
     type: forageType(kind),
     label:

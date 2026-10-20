@@ -308,6 +308,22 @@ export function writeStatus() {
     "[Animal browser and AI playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry)",
     "",
   );
+  const behaviorPath = resolve(ROOT, "art-source/wildlife-v2/behavior-campaign.json");
+  if (existsSync(behaviorPath)) {
+    const animals = Object.values(read("art-source/wildlife-v2/behavior-campaign.json").animals);
+    const verified = animals.filter((a) => a.progress.validation === "verified");
+    const active = animals.filter((a) => Object.values(a.progress).includes("in-progress"));
+    lines.splice(
+      4,
+      0,
+      "## Distinct animal behaviors",
+      "",
+      `${verified.length}/${animals.length} entries game/lab verified; ${active.length} in progress. Inherited coat entries count as coverage, not additional distinct mechanics. Human behavior/art review remains separate.`,
+      "",
+      "[Current behavior ledger and progress](wildlife-behavior-status.md) · [Planning and completion rules](topics/wildlife-behaviors.md)",
+      "",
+    );
+  }
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));
   renameSync(temporary, output);
