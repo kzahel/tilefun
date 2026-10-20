@@ -35,6 +35,8 @@ import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js"
 import { ParkingSystem, type SavedParking } from "./ParkingSystem.js";
 import { roofSupport } from "./RoofSupport.js";
 import { SHOPPING_PARKED_BAYS, type ShoppingCenter, shoppingLot } from "./ShoppingCenter.js";
+import { hasVehicleBed } from "./VehicleBed.js";
+import { bedInteriorOccupant } from "./VehicleCargo.js";
 import { trafficPaint, validVehiclePaint } from "./VehiclePaint.js";
 import { commitVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 
@@ -85,6 +87,8 @@ export interface SavedTraffic {
   facing?: number;
   vehicleHeading?: number;
   paintSchemeId?: string;
+  /** Qualified hollow-bed profile; missing on older dump records is migrated. */
+  vehicleBed?: true;
   resumePath?: Path;
   persistentId?: string;
   originScope?: string;
@@ -343,6 +347,17 @@ export class TrafficSystem {
     }
     return samplePath(p, p.length);
   }
+  private bedPathHeading(s: TrafficState, ahead: number): number {
+    // Retain the same continuous yaw for bed contacts, contents and the mesh,
+    // including a stopped/reloaded truck. Road admission keeps its existing policy.
+    const p = this.pose(s, ahead),
+      q = this.pose(s, ahead + 0.01);
+    const dx = q.x - p.x,
+      dy = q.y - p.y;
+    return Math.hypot(dx, dy) > 0.000001
+      ? Math.fround(Math.atan2(dy, dx))
+      : (s.entity.vehicleHeading ?? vehicleCardinalHeading(p.direction));
+  }
   private box(s: TrafficState, ahead: number): AABB {
     const pose = this.pose(s, ahead),
       c = vehicleBodySize(s.entity.type, vehicleCardinalHeading(pose.direction));
@@ -465,7 +480,8 @@ export class TrafficSystem {
           !e.collider ||
           e.collider.solid === false ||
           e.flashHidden ||
-          riders.includes(e)
+          riders.includes(e) ||
+          bedInteriorOccupant(s.entity, e)
         )
           continue;
         const base = e.wz ?? 0;
@@ -500,7 +516,15 @@ export class TrafficSystem {
       Math.floor(box.right / CHUNK_SIZE_PX) + 1,
       Math.floor(box.bottom / CHUNK_SIZE_PX) + 1,
     )) {
-      if (e === s.entity || !e.collider || e.collider.solid === false || e.flashHidden) continue;
+      if (
+        e === s.entity ||
+        !e.collider ||
+        e.collider.solid === false ||
+        e.flashHidden ||
+        roofSupport(e, [s.entity]) ||
+        bedInteriorOccupant(s.entity, e)
+      )
+        continue;
       // A roof passenger's feet are at the roof plane, outside the vehicle body.
       if ((e.wz ?? 0) >= height - 0.05) continue;
       const obstacle = getEntityAABB(e.position, e.collider);
@@ -791,7 +815,12 @@ export class TrafficSystem {
         sprite: s.entity.sprite ? { ...s.entity.sprite } : null,
       };
       if (surface && !surface.reason) next.wz = next.groundZ = surface.z;
-      delete next.vehicleHeading;
+      if (hasVehicleBed(next))
+        next.vehicleHeading =
+          move > 0.000001
+            ? this.bedPathHeading(s, move)
+            : (s.entity.vehicleHeading ?? vehicleCardinalHeading(s.entity.sprite?.direction));
+      else delete next.vehicleHeading;
       applyVehicleFacing(next, pose.direction);
       const passengers = planMovingPassengers(
         s.entity,
@@ -808,7 +837,9 @@ export class TrafficSystem {
         s.entity.velocity = { vx: 0, vy: 0 };
       } else {
         carryMovingPassengers(passengers, this.entities);
-        if (Math.abs(move) > 0.000001) delete s.entity.vehicleHeading;
+        if (hasVehicleBed(next) && next.vehicleHeading !== undefined)
+          s.entity.vehicleHeading = next.vehicleHeading;
+        else if (Math.abs(move) > 0.000001) delete s.entity.vehicleHeading;
         s.entity.position = next.position;
         s.entity.collider = next.collider;
         s.entity.sprite = next.sprite;
@@ -1023,6 +1054,7 @@ export class TrafficSystem {
       facing: s.entity.sprite?.direction ?? 0,
       ...(s.entity.vehicleHeading !== undefined ? { vehicleHeading: s.entity.vehicleHeading } : {}),
       ...(s.entity.paintSchemeId === undefined ? {} : { paintSchemeId: s.entity.paintSchemeId }),
+      ...(s.entity.vehicleBed ? { vehicleBed: true as const } : {}),
       ...(s.resumePath ? { resumePath: s.resumePath } : {}),
       identity: required(s.entity.proceduralId),
       model: s.entity.type.slice(11),
@@ -1106,6 +1138,8 @@ export class TrafficSystem {
         : (graph.lanes.get(r.laneId) ?? this.strategy.trafficNetwork(r.x, r.y).lanes.get(r.laneId));
       if (r.parked !== undefined && typeof r.parked !== "boolean")
         throw new Error("Invalid parked state.");
+      if (r.vehicleBed !== undefined && (r.vehicleBed !== true || r.model !== "dump-truck"))
+        throw new Error("Invalid vehicle bed profile");
       if (!validVehiclePaint(r.model, r.paintSchemeId))
         throw new Error("Invalid saved vehicle paint.");
       if (
@@ -1203,6 +1237,8 @@ export class TrafficSystem {
       s.next = next;
       s.choices = Math.max(0, Math.floor(r.choices));
       s.entity.proceduralId = r.identity;
+      // Older dump records acquire the same qualified profile as new placements.
+      if (r.model === "dump-truck") s.entity.vehicleBed = true;
       if (r.paintSchemeId === undefined) delete s.entity.paintSchemeId;
       else s.entity.paintSchemeId = r.paintSchemeId;
       s.distance = r.distance;
@@ -1215,8 +1251,10 @@ export class TrafficSystem {
       s.entity.position = r.parked
         ? { wx: r.wx ?? pose.x, wy: r.wy ?? pose.y }
         : { wx: pose.x, wy: pose.y };
-      if (r.parked && r.vehicleHeading !== undefined)
+      if ((r.parked || hasVehicleBed(s.entity)) && r.vehicleHeading !== undefined)
         s.entity.vehicleHeading = Math.fround(r.vehicleHeading);
+      else if (!r.parked && hasVehicleBed(s.entity))
+        s.entity.vehicleHeading = this.bedPathHeading(s, 0);
       applyVehicleFacing(s.entity, r.parked ? (r.facing ?? pose.direction) : pose.direction);
       this.entities.spatialHash.update(s.entity);
       s.shoppingCooldown = r.shoppingCooldown ?? 0;

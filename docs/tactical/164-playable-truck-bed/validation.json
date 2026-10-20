@@ -1,0 +1,106 @@
+{
+  "schema": "tilefun-playable-truck-bed-validation-v1",
+  "date": "2026-10-20",
+  "status": "implemented-and-locally-validated-public-deployment-unverified",
+  "optIn": {
+    "type": "vehicle-v1:dump-truck",
+    "vehicleBed": true,
+    "frameTag": "0x06",
+    "floorZ": 21.73913043478261,
+    "profilePrisms": 7
+  },
+  "assetsUnchanged": {
+    "public/assets/models/vehicles/dump-truck-v1.glb": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae"
+  },
+  "captureSources": {
+    "scripts/instrumentation/truck-bed-playground.ts": "10ab279fe56a7cda3f941a0d8facfdaeb0492cc27bdc524f7aaebd7c061f4dca",
+    "src/traffic/VehicleBed.ts": "c70fea38e39bd9edfc67ae1b64ced8165662be56c0a82c9ff1fcfee8758ce2f1",
+    "src/scenarios/TruckBedRecipe.ts": "4c4f51726de67a9b9856dd0f99283bf2da36db6b9e41be06156b6a57160d064b",
+    "src/workshop/TruckBedPage.tsx": "fa8fe285be465605a13ddf1bd4b8da4934d2edb8c702c51643f6f3bdc859d6d5",
+    "src/rendering/GpuVehicleContents.ts": "70409ac670280b4945d61cca5df732d21696d5931c3b728d4cee530be8b0f3ce",
+    "src/rendering/VehicleBedPresentation.ts": "52c4c4aa587da2ef8928c03966b85a60031d5ccd83bf86b24f2cf886dbf18dbf",
+    "src/rendering/VehicleBedDebug.ts": "1ea66de7a1ac5447bea92cf98d7c1daddd2be072a991c188543b9ba8cfd166e7"
+  },
+  "capture": {
+    "command": "npx tsx scripts/instrumentation/truck-bed-playground.ts",
+    "output": "data/3d-investigation/truck-bed",
+    "states": [
+      "center-right",
+      "near-wall",
+      "fallback-canvas",
+      "fallback-gpu",
+      "jump",
+      "heading-down",
+      "heading-left",
+      "heading-up"
+    ],
+    "errors": [],
+    "liveClockPoses": true
+  },
+  "checks": {
+    "typecheck": "pass",
+    "lint": {
+      "errors": 0,
+      "warnings": 121,
+      "infos": 39
+    },
+    "build": "pass",
+    "focusedNative": {
+      "passed": 51,
+      "files": 4
+    },
+    "builtFullChromium": {
+      "passed": 2,
+      "seconds": 8.6
+    },
+    "nodeComparator": {
+      "passed": 1
+    },
+    "artCatalog": {
+      "sheets": 695,
+      "sourceUses": 1393
+    },
+    "workshopManifest": {
+      "candidates": 1899,
+      "normalChromiumRetinaVerified": true,
+      "candidate": "geometry:truck-bed-v1"
+    },
+    "streamingReady": {
+      "passed": true,
+      "renderer": "gpu",
+      "meshes": true,
+      "output": "data/3d-investigation/truck-bed-streaming/report.json"
+    },
+    "browserInventory": {
+      "browser": 824,
+      "nodeComparator": 1,
+      "httpWs": 3,
+      "capture": 6
+    }
+  },
+  "broadNative": {
+    "passed": 6438,
+    "failed": 8,
+    "skipped": 10,
+    "files": 354,
+    "seconds": 614.5,
+    "failureOwners": [
+      "FsSecurity (3 Windows symlinks)",
+      "SqliteRecordStore (process-death test)",
+      "privateDataPlugin (Windows symlink)",
+      "PredatorRecipe (orca reload)",
+      "Fauna (goat ground height, concurrent 163)",
+      "SettlementLife (farm spawn count, concurrent 163)"
+    ],
+    "hookFailures": "staticFiles symlink setup/cleanup"
+  },
+  "limits": [
+    "One opt-in level bed; no default fleet activation",
+    "No tipping, loose crates, passenger seats or boarding mechanic",
+    "Loaded visual geometry and simpler physical/fallback geometry are distinct",
+    "Sprite plane depth is not anatomical character geometry",
+    "Straight route only; heading changes reset the fixture",
+    "No full world depth or device-population performance qualification"
+  ]
+}

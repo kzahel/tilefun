@@ -1,14 +1,39 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
+import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { createTrain } from "../railway/Train.js";
 import { interpolatePosition } from "../rendering/EntityInterpolation.js";
 import { bindPredictedPlayerPose } from "../rendering/PlayerPresentation.js";
+import { createVehicle } from "../traffic/Vehicle.js";
+import { DUMP_BED } from "../traffic/VehicleBed.js";
 import { World } from "../world/World.js";
 import { PlayerPredictor } from "./PlayerPredictor.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
+it("preserves the recessed bed support height during repeated prediction and presentation", () => {
+  const world = new World(new FlatStrategy());
+  world.getChunk(0, 0);
+  const truck = createVehicle("dump-truck", 80, 80, Direction.Right);
+  truck.vehicleBed = true;
+  truck.id = 2;
+  const player = createPlayer(80 + DUMP_BED.center.x, 83);
+  player.id = 1;
+  player.wz = player.groundZ = DUMP_BED.floorZ;
+  const predictor = new PlayerPredictor();
+  predictor.reset(player);
+  predictor.reconcile(player, 0, world, [], [truck]);
+  for (let i = 0; i < 8; i++) {
+    truck.prevPosition = { ...truck.position };
+    truck.position.wx += 2;
+    predictor.update(1 / 60, idle, world, [], [truck]);
+    expect(predictor.player?.wz).toBeCloseTo(DUMP_BED.floorZ, 6);
+    expect(predictor.presentationPlayer?.wz).toBeCloseTo(DUMP_BED.floorZ, 6);
+    expect(predictor.samplePresentationPlayer(0.5, [truck])?.wz).toBeCloseTo(DUMP_BED.floorZ, 6);
+    expect(predictor.player?.jumpVZ).toBeUndefined();
+  }
+});
 it("shares the carrier's render endpoints while replaying roof walking and detaches on jump/loss", () => {
   const world = new World(new FlatStrategy());
   world.getChunk(0, 0);

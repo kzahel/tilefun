@@ -195,6 +195,7 @@ export function createVehicle(
   const entity: Entity = {
     id: 0,
     type,
+    ...(model === "dump-truck" ? { vehicleBed: true as const } : {}),
     ...(paintSchemeId === undefined ? {} : { paintSchemeId }),
     position: { wx, wy },
     velocity: { vx: 0, vy: 0 },

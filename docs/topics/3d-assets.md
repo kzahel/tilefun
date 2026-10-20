@@ -1,6 +1,22 @@
 # 3D assets and sprite reconstruction
 
 Topic: 3d-assets
+
+Current investigation, 2026-10-20: [160](../tactical/160-live-3d-and-shared-depth-investigation.md)
+examines live character meshes alongside shared-world depth for passengers and
+truck cargo. Four actual Blender sources were inspected/exported without changing
+their bytes, and a bounded GPU bed/billboard comparison passes. Generated pose
+geometry and authored pixel finishes are distinct asset layers; direct export
+does not preserve all appearance/animation semantics.
+[162](../tactical/162-shared-world-depth-comparison.md) adds real headless authority
+snapshots, actual vehicle bodies and exterior wall occluders: most poses match,
+with one small clipping conflict that whole-group sorting cannot resolve. Shared
+presentation-host integration follows in
+[164](../tactical/164-playable-truck-bed.md) for one opt-in level dump bed, using
+the existing character sprite and actual Worker/shared renderer. Broader world
+depth and a prepared live-character appearance comparison remain open. Existing
+model production/review gates remain unchanged.
+
 Original vehicle expansion experiment: [141](../tactical/141-sports-car-style-experiments.md)
 compares detailed shaded/toon Blender renders, guide-based pixel finishing and
 simple geometry/paint for a new red sports car. Four offline prototypes and a
@@ -547,3 +563,10 @@ owns its five-family queue. After reviewing the v3 curved-service LAN lab, the
 owner authorized these exact three carriages in game. Shared mesh mode now uses
 them by default; native art remains the Canvas/disabled/failed-load fallback.
 The review gate still applies to other families and changed geometry.
+
+
+[165](../tactical/165-truck-bed-gameplay.md) activates the qualified level dump bed
+in normal gameplay: visible independent riders, loose toys/food, shared controls,
+continuous bed/mesh yaw, saves and physical debug overlays. The existing GLB and
+sprite sources remain unchanged. Tipping requires a separate articulated revision;
+[vehicles](vehicles.md) and the [bed guide](../vehicle-bed-prototype.md) own that work.

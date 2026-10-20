@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x05 = FrameMessage (u16 entity types, vehicle paint) (server→client)
+ *   0x06 = FrameMessage (u16 entity types, vehicle paint, opt-in bed geometry) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x80 = player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -26,7 +26,8 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x05;
+const TAG_FRAME = 0x06;
+const TAG_PRE_BED_FRAME = 0x05;
 const TAG_PRE_PAINT_FRAME = 0x04;
 const TAG_LEGACY_FRAME = 0x01;
 const TAG_SYNC_CHUNKS = 0x03;
@@ -58,6 +59,7 @@ const BIT_JUMP_INPUT_STATE = 14;
 const BIT_EMERGENCY_STATE = 15;
 const BIT_VEHICLE_HEADING = 16;
 const BIT_VEHICLE_PAINT = 17;
+const BIT_VEHICLE_BED = 18;
 const BIT_AIR_MOMENTUM_X = 12;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
@@ -77,7 +79,7 @@ export function decodeServerMessage(buf: ArrayBuffer): ServerMessage {
   const view = new DataView(buf);
   const tag = view.getUint8(0);
   if (tag === TAG_FRAME) return decodeFrameMessage(view, buf);
-  if (tag === TAG_LEGACY_FRAME || tag === TAG_PRE_PAINT_FRAME)
+  if (tag === TAG_LEGACY_FRAME || tag === TAG_PRE_PAINT_FRAME || tag === TAG_PRE_BED_FRAME)
     throw new Error("Legacy entity frame: matching updated client and server builds are required");
   if (tag === TAG_SYNC_CHUNKS) return decodeSyncChunksMessage(view, buf);
   if (tag === TAG_JSON) return decodeJsonFallback(buf) as ServerMessage;
@@ -273,6 +275,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.emergencyState !== undefined) mask |= 1 << BIT_EMERGENCY_STATE;
   if (snap.vehicleHeading !== undefined) mask |= 1 << BIT_VEHICLE_HEADING;
   if (snap.paintSchemeId !== undefined) mask |= 1 << BIT_VEHICLE_PAINT;
+  if (snap.vehicleBed) mask |= 1 << BIT_VEHICLE_BED;
   view.setUint32(off, mask, true);
   off += 4;
 
@@ -453,6 +456,7 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
     off += 4;
   }
   if (mask & (1 << BIT_VEHICLE_PAINT)) snap.paintSchemeId = paintFromWire(view.getUint8(off++));
+  if (mask & (1 << BIT_VEHICLE_BED)) snap.vehicleBed = true;
   return [snap, off];
 }
 
@@ -562,6 +566,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   if (delta.paintSchemeId !== undefined) {
     changeMask |= 1 << 18;
     if (delta.paintSchemeId === null) nullMask |= 1 << 18;
+  }
+  if (delta.vehicleBed !== undefined) {
+    changeMask |= 1 << 19;
+    if (delta.vehicleBed === null) nullMask |= 1 << 19;
   }
   view.setUint32(off, changeMask, true);
   off += 4;
@@ -831,6 +839,7 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
   }
   if (changeMask & (1 << 18))
     delta.paintSchemeId = nullMask & (1 << 18) ? null : paintFromWire(view.getUint8(off++));
+  if (changeMask & (1 << 19)) delta.vehicleBed = nullMask & (1 << 19) ? null : true;
   return [delta, off];
 }
 

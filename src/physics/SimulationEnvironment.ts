@@ -7,6 +7,7 @@ import {
 } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { hasVehicleBed, vehicleBedBlocks } from "../traffic/VehicleBed.js";
 import { zRangesOverlap } from "./AABB3D.js";
 import type { MovementContext } from "./MovementContext.js";
 import { querySurfacePatch } from "./SurfacePatch.js";
@@ -51,6 +52,10 @@ export function createMovementContext(options: CreateMovementContextOptions): Mo
       for (const other of options.queryEntities(aabb)) {
         if (options.excludeIds.has(other.id) || !other.collider || !shouldEntityBlock(other))
           continue;
+        if (hasVehicleBed(other)) {
+          if (vehicleBedBlocks(other, aabb, selfWz, selfHeight)) return true;
+          continue;
+        }
         const otherWz = other.wz ?? 0;
         const otherHeight = other.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
         if (!zRangesOverlap(selfWz, selfHeight, otherWz, otherHeight)) continue;

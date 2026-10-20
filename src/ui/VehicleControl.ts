@@ -6,8 +6,16 @@ import { nearestStationBench } from "../railway/StationBench.js";
 import { isTrain } from "../railway/Train.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/Driving.js";
+import { hasVehicleBed } from "../traffic/VehicleBed.js";
+import {
+  bedContents,
+  nearbyCargo,
+  onBedFloor,
+  type VehicleBedAction,
+} from "../traffic/VehicleCargo.js";
 
 type VehicleRequest =
+  | { type: "vehicle-bed-action"; entityId: number; action: VehicleBedAction }
   | { type: "enter-vehicle"; entityId: number }
   | { type: "exit-vehicle" }
   | { type: "call-train"; benchId: number };
@@ -19,6 +27,8 @@ export class VehicleControl {
   private busy = false;
   private error = false;
   private targetKey = "";
+  private bedActions = document.createElement("div");
+  private bedButtons = new Map<VehicleBedAction, HTMLButtonElement>();
   constructor(private send: (request: VehicleRequest) => Promise<unknown>) {
     this.root.style.cssText =
       "position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:16px;z-index:80;max-width:min(360px,calc(100vw - 180px));text-align:left;color:white;font:15px sans-serif";
@@ -30,7 +40,22 @@ export class VehicleControl {
     this.status.style.cssText = "background:#243a32;border-radius:6px;margin:4px 0;padding:4px";
     // Keep the button anchored while the first touch replaces keyboard hints
     // or an authority error wraps the status onto another line.
-    this.root.append(this.status, this.button);
+    this.bedActions.style.cssText = "display:flex;gap:6px;flex-wrap:wrap;margin-top:6px";
+    for (const [action, label] of [
+      ["board", "Ride in bed"],
+      ["leave", "Climb out"],
+      ["load", "Load cargo"],
+      ["unload", "Unload cargo"],
+    ] as const) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = label;
+      button.style.cssText = this.button.style.cssText;
+      button.dataset.bedAction = action;
+      this.bedButtons.set(action, button);
+      this.bedActions.append(button);
+    }
+    this.root.append(this.status, this.button, this.bedActions);
     this.root.hidden = true;
     document.body.append(this.root);
   }
@@ -57,6 +82,37 @@ export class VehicleControl {
         )
         .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0];
     const bench = !candidate ? nearestStationBench(p, view.props) : undefined;
+    const bed =
+      !current && allowed && !view.editorEnabled
+        ? entities
+            .filter(
+              (e) =>
+                hasVehicleBed(e) &&
+                boardingDistance(p, e) <= 32 &&
+                Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 0.5 &&
+                p.parentId === undefined &&
+                p.jumpVZ === undefined &&
+                Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <= 52,
+            )
+            .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0]
+        : undefined;
+    const inside = bed && onBedFloor(p, bed);
+    for (const [action, button] of this.bedButtons) {
+      button.hidden =
+        !bed ||
+        (action === "board"
+          ? !!inside
+          : action === "leave"
+            ? !inside
+            : action === "load"
+              ? !nearbyCargo(p, bed, entities).length
+              : !bedContents(bed, entities).length);
+      button.disabled = this.busy || locked;
+      button.style.display = button.hidden ? "none" : "";
+      button.onclick = () => {
+        if (bed) this.activateRequest({ type: "vehicle-bed-action", entityId: bed.id, action });
+      };
+    }
     const key = current
       ? `inside:${current.id}`
       : candidate
@@ -77,9 +133,13 @@ export class VehicleControl {
             ? { type: "enter-vehicle", entityId: candidate.id }
             : bench
               ? { type: "call-train", benchId: bench.id }
-              : null
+              : bed && inside
+                ? { type: "vehicle-bed-action", entityId: bed.id, action: "leave" }
+                : null
         : null;
-    this.root.hidden = !this.request;
+    this.root.hidden = !this.request && !bed;
+    this.button.hidden = !this.request || this.request.type === "vehicle-bed-action";
+    this.button.style.display = this.button.hidden ? "none" : "";
     this.button.disabled = this.busy || locked;
     const action = current
       ? "Get out"
@@ -116,15 +176,17 @@ export class VehicleControl {
                 : "Drag a direction · aim behind to reverse");
       if (this.status.textContent !== hint) this.status.textContent = hint;
     }
-    return !!this.request;
+    return !!this.request || !!bed;
   }
   activate(): boolean {
     if (!this.request) return false;
+    return this.activateRequest(this.request);
+  }
+  private activateRequest(request: VehicleRequest): boolean {
     if (this.busy || this.button.disabled) return true;
     this.busy = true;
     this.status.textContent = "";
     this.error = false;
-    const request = this.request;
     const targetKey = this.targetKey;
     void this.send(request)
       .then(() => {

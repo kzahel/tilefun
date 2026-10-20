@@ -44,6 +44,7 @@ export interface ScenarioRecipe {
     y: number;
     distance: number;
     name: string;
+    vehicleBed?: true;
   }[];
 }
 export const FLAT_SCENARIO = {

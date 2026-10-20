@@ -12,6 +12,144 @@ Game and Traffic lab share the catalog and lazy GPU paint cache. Missing paint i
 older records retains the original. [Paint variants](../vehicle-paint-variants.md)
 owns the palette, packaging and runtime contracts.
 
+## Desired next work
+
+Owner direction, 2026-10-20: record these three directions as desired follow-ons.
+They are product requests; the behaviors below are not implemented yet.
+The owner's subsequent focus is **truck cargo and passengers together**; the paint
+shop remains desired later work. Proposed sequence: one additional passenger in
+an enclosed car first, then a level truck bed with a player and a crate, followed
+by tipping/unloading. An enclosed passenger can share the current hidden-occupant
+presentation while seat ownership/entry/exit are established; exposed bed riders
+add physical support and partial-occlusion requirements.
+
+The owner subsequently authorized the level bed-occupant proof first.
+[164](../tactical/164-playable-truck-bed.md) delivers the opt-in playable dump bed
+through the real Worker and shared renderer: recessed walking/jumping support,
+moving carry, saved height, sprite-plane clipping and debug overlays.
+[165](../tactical/165-truck-bed-gameplay.md) activates that level profile for normal
+dump-truck placements, generated traffic and older saved dump trucks. Game/lab
+vehicle controls board and leave the bed and load/unload real loose balls, fruit,
+nuts, roots and twigs. A driver and independent bed riders share ordinary authority;
+contents retain identity, floor height and moving support through turns and saves.
+[Bed workflow](../vehicle-bed-prototype.md) owns geometry and repeatable instructions.
+Tipping, crates and enclosed passenger seats remain next work. No artwork changed.
+
+1. **Working machinery.** Lift and carry movable pallets with the forklift; tip
+   the dump-truck bed; rotate the cement-mixer drum. Reuse articulated component
+   authoring and shared equipment controls across suitable work vehicles. Current
+   equipment remains at its authored rest pose.
+2. **Paint shop and broader colors.** Repaint an existing car in the world and
+   retain that choice through driving, saves and multiplayer. Extend curated
+   paint ownership and palettes to vans, roadsters and off-road vehicles. Existing
+   spawn-time paint selection is delivered; repainting an existing car is new work.
+3. **Passenger seats.** Let another player join a driven car and ride in a bus,
+   with explicit seat occupancy, boarding/exit, capacity and persisted/replicated
+   passenger relationships. Preserve the existing driver and roof-riding behavior.
+
+### Dump-truck cargo and people
+
+The owner especially wants the tipping dump bed to carry actual objects **and
+people**. Loading, transporting and unloading should work with the bed as a real
+container; animating an empty bed alone does not satisfy this desired experience.
+Tipping should eventually let loose contents slide/fall out, with people able to
+stand, move and jump inside the bed. Passenger seats and loose bed occupants are
+different relationships: standing in the bed must not silently become a rigid
+seat attachment or driver mount.
+
+Remaining constraints, verified in `RoofSupport.ts`, `MovingSupport.ts` and
+`GpuMeshBodies.ts`: ordinary vehicle support is the top of one conservative body footprint,
+and moving-support carrying selects players on that roof. Qualified dump beds now
+carry loose toys/food too, with source-derived hollow collision and support. The GPU renderer
+depth-tests a vehicle's meshes together, then flattens the complete vehicle into
+one image before ordinary actor composition. These paths do not establish a
+recessed bed floor, cargo retention, moving bed walls or partial actor/vehicle
+occlusion on unqualified models. Dump beds use local shared depth and physical
+fallback clips; broader world depth remains open. A whole-sprite draw-order change cannot express legs hidden by a near
+bed wall while a head remains visible above it.
+
+Proposed foundation to qualify in a bounded prototype:
+
+- Author an open bed with a real floor, side/front walls, rear opening or
+  tailgate, and a hinge pivot. Export simple support/collision shapes in the same
+  component coordinates as the visible mesh; high triangle counts are unnecessary.
+- Keep physical support/collision and visual occlusion as separate consumers of
+  the same moving bed pose. First prove cargo and a standing person in a level
+  bed while driving/turning/braking, then introduce tilt, headroom/swept clearance,
+  opening the rear, gravity/sliding and release onto the ground. People should
+  stay upright while standing rather than rotating rigidly with the bed.
+- Carry real content identities and support-local positions through the committed
+  vehicle/bed motion. Define supported movable objects explicitly, including
+  loading/removal, collisions, detachment, chunk residency, save/reload and
+  multiplayer prediction. Neither loose contents nor people may disappear into
+  the old solid whole-body collider.
+- Prove partial occlusion across headings and bed angles: far wall behind the
+  contents, near wall in front of lower portions, and visible upper portions.
+  Standing character sprites can be tested as depth-aware billboards; a complete
+  seated-avatar inventory is a separate [rider concern](vehicle-riders.md).
+  Compare shared-depth composition with part/depth-mask composition before
+  choosing the renderer contract. Canvas and disabled/loading/failed-mesh paths
+  need a matching layered or masked presentation for dynamic contents.
+- Exercise the same authority and presentation in game and an embedded lab. A
+  useful first proof is one crate and one player in a level bed, followed by a
+  controlled tipping/unloading cycle; retain explicit failure/reset cases.
+
+This foundation can later support pickup beds, forklift loads and moving work
+platforms. [World geometry](world-geometry.md) owns broader stacked-space work;
+this request does not select a general rigid-body engine or change terrain rules.
+
+### Bed geometry and debug inspection
+
+[160](../tactical/160-live-3d-and-shared-depth-investigation.md) now owns the
+cross-asset rendering/source-readiness investigation. Its schematic GPU proof
+qualifies bed-wall occlusion of an existing sprite plane at level/tilted poses;
+[164](../tactical/164-playable-truck-bed.md) now qualifies a level bed's support,
+collision and local sprite depth through the shared production scenario host,
+including debug geometry. Broader cargo, seats and tipping remain next work here.
+
+Owner refinement, 2026-10-20: author simple clip geometry from the actual bed model
+and provide a way to inspect both player and bed clipping. The proposed authoring
+contract keeps three distinct representations, all using the same units, pivot
+and pose:
+
+- **Visible mesh / visual depth:** use the actual low-poly bed walls and floor to
+  occlude contents. Derive any fallback masks from this geometry rather than
+  hand-painting unrelated screen clips. Native-resolution depth rendering can
+  follow arbitrary vehicle headings and bed tilt; a fixed four-direction mask
+  alone cannot cover those poses. The bed and its contents must participate in
+  depth composition before the vehicle is flattened to its final game image.
+- **Collision and support:** export a small set of floor/wall slabs or convex
+  shapes from tagged Blender geometry or shared authoring dimensions. The bed
+  must be hollow and separately articulated from the cab/chassis. Worker
+  authority and local prediction consume plain shape data, not Three.js objects.
+  Rotated/tilted shapes require explicit shared contact/support queries.
+- **Person/object body:** retain explicit physical body bounds. Test a foot-anchored,
+  alpha-tested upright sprite plane for initial visual depth. A collision box
+  does not describe a character's visible silhouette or per-pixel anatomical
+  depth; keep the sprite-plane approximation visible in the diagnostic view.
+
+Desired shared game/lab debug modes:
+
+- Normal art with translucent wireframes: green supporting floor, red blocking
+  bed walls, blue player/object collider, marked foot contact and bed hinge.
+- Geometry-only and x-ray views, including the original whole-body vehicle box,
+  so an unintended solid box spanning the hollow bed is immediately visible.
+- Sprite plane and visual-depth view, with hidden sprite pixels highlighted in a
+  separate overlay. This distinguishes physical penetration from wrong visual
+  ordering. Render debug geometry without altering the ordinary depth result.
+- Pause, step, vehicle heading and bed-angle controls; top/side inspection plus
+  the actual native-pixel game camera. Show the support/seat identity, contact
+  normal and local/world position. Compare displayed geometry against the same
+  authoritative/predicted pose to diagnose a one-frame transform mismatch.
+
+Prototype checks should move a person/crate against each wall, jump above the
+rim, pass behind/in front, cross the rear opening and leave the bed. Repeat while
+turning/tilting and with two simultaneous occupants; inspect both accepted and
+rejected contact/visibility cases. This is desired diagnostic coverage, not a
+claim that the new shapes, depth composition or seats already exist.
+
+## Related vehicle work
+
 [Boats](boats.md) adds an original explorer motorboat through shared driving,
 boarding, prediction, records and presentation. It uses water-only motion and
 natural lake moorings, and is excluded from the unchanged road vehicle catalog
@@ -576,6 +714,14 @@ The outer boulevard fixes a wide-vehicle dead end exposed by the larger grid,
 without changing traffic AI, vehicle bounds or promoted art.
 
 ## Complete authored vehicle bank
+
+[162](../tactical/162-shared-world-depth-comparison.md) compares actual dump-truck
+and pickup meshes with outside sprite actors and low walls. Ordinary overlapping
+poses match local and world depth; one wall-corner pose needs per-pixel depth
+across groups. Existing sprites can participate as upright alpha-tested planes.
+This is diagnostic evidence, not implemented passenger/cargo gameplay or a new
+default renderer. Local truck-owned depth remains plausible for bed occupants;
+cross-group occlusion needs the shared-host comparison recorded there.
 
 [122](../tactical/122-complete-vehicle-port.md) completes all 45 own-model
 registrations without changing the approved physical source bank. Shared game/lab

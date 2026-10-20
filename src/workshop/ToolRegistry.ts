@@ -3,6 +3,13 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "truck-bed",
+    name: "Truck bed playground",
+    description: "Walk and jump inside a dump-truck bed, ride along and inspect clipping geometry.",
+    url: "workshop.html?geometry=truck-bed#/tool/world-geometry",
+    mode: "link",
+  },
+  {
     id: "original-vehicles",
     name: "Original vehicle review",
     description:

@@ -472,6 +472,8 @@ export class Realm {
       ride &&
       Number.isFinite(ride.offsetX) &&
       Number.isFinite(ride.offsetY) &&
+      (ride.height === undefined ||
+        (Number.isFinite(ride.height) && ride.height >= 0 && ride.height <= 512)) &&
       Math.hypot(ride.offsetX, ride.offsetY) < 512
     ) {
       const vehicle = this.entityManager.entities.find((e) => e.proceduralId === ride.identity);
@@ -480,7 +482,7 @@ export class Realm {
           wx: vehicle.position.wx + ride.offsetX,
           wy: vehicle.position.wy + ride.offsetY,
         };
-        player.wz = (vehicle.wz ?? 0) + (vehicle.collider.physicalHeight ?? 0);
+        player.wz = (vehicle.wz ?? 0) + (ride.height ?? vehicle.collider.physicalHeight ?? 0);
         player.groundZ = player.wz;
         if (roofSupport(player, [vehicle])?.id !== vehicle.id) {
           player.position = { wx: spawnX, wy: spawnY };
@@ -646,6 +648,9 @@ export class Realm {
               identity,
               offsetX: session.player.position.wx - support.position.wx,
               offsetY: session.player.position.wy - support.position.wy,
+              ...(support.vehicleBed
+                ? { height: (session.player.wz ?? 0) - (support.wz ?? 0) }
+                : {}),
             },
           }
         : {}),

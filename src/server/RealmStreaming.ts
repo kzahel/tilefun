@@ -8,6 +8,8 @@ import type { FeatureRecord, RealmRecords } from "../persistence/RealmRecords.js
 import type { SavedChunkData, SaveManager } from "../persistence/SaveManager.js";
 import type { TrafficRecords } from "../persistence/TrafficRecords.js";
 import type { SavedTraffic } from "../traffic/TrafficSystem.js";
+import { hasVehicleBed } from "../traffic/VehicleBed.js";
+import { bedContents } from "../traffic/VehicleCargo.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { ChunkResidency } from "./ChunkResidency.js";
@@ -279,6 +281,17 @@ export class RealmStreaming {
 
 function recordsDependencyTickets(records: RealmRecords, demand: Map<string, ChunkDemand>) {
   const keys = new Set<string>();
+  // A loose load may straddle a chunk boundary. Hold both sides while either is
+  // demanded, without persisting a rigid parent/seat attachment on the contents.
+  for (const truck of records.entities.entities) {
+    if (!hasVehicleBed(truck)) continue;
+    const scopes = [
+      actorScope(truck.position),
+      ...bedContents(truck, records.entities.entities).map((e) => actorScope(e.position)),
+    ];
+    if (scopes.some((key) => (demand.get(key)?.activity ?? 0) > 0))
+      for (const key of scopes) keys.add(key);
+  }
   for (const [scope, actors] of records.buckets) {
     if (!demand.get(scope)?.activity) continue;
     for (const actor of actors)

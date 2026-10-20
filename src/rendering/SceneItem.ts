@@ -10,6 +10,9 @@ import type { TerrainResourceId } from "./TerrainPresentation.js";
 export type SceneItem = SpriteItem | ElevationItem | GrassItem | ParticleItem;
 
 export interface SpriteItem {
+  /** One opt-in truck body and upright sprite planes share its local depth target.
+   * Raster fallbacks use the same plain bed profile to clip the contents. */
+  bedGroup?: { heading: number; contents: SpriteItem[] };
   /** Optional representation; all sprite fields remain the complete fallback. */
   mesh?: MeshInstance;
   /** Sprite rider's visual attachment, applied only while its supporting mesh is ready. */

@@ -1,0 +1,473 @@
+{
+  "schema": "tilefun-3d-source-inspection-v1",
+  "blender": "5.2.2 LTS",
+  "scope": "Four representative sources; optional scratch exports, no art/runtime qualification",
+  "inspectorSha256": "3dbd697c9be73af1edc72d8d298bc7a332e8da166268db12cc4ce6d77789c2e6",
+  "sources": [
+    {
+      "source": "art-source/blender/tiger.blend",
+      "sourceSha256": "2340409c583caf8daeef55e0c4558b4b8c21d0ade819f3eb8b88829ecec445b2",
+      "bytes": 183923,
+      "sceneMeshes": 47,
+      "renderVisibleMeshes": 47,
+      "renderVisibleEvaluatedTriangles": 14040,
+      "hiddenMeshNames": [],
+      "uvMappedVisibleMeshes": 30,
+      "visibleMaterials": 5,
+      "materialNodeTypes": [
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeEmission",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeShaderToRGB",
+        "ShaderNodeValToRGB"
+      ],
+      "usedImages": [],
+      "armatures": [
+        {
+          "name": "Tiger rig.009",
+          "bones": 11
+        }
+      ],
+      "armatureModifiedMeshes": 47,
+      "otherModifierTypes": ["SOLIDIFY"],
+      "actions": 1,
+      "animatedObjects": 1,
+      "sampledFrames": [1, 4, 8],
+      "meshesWithChangedWorldMatrixInSamples": 0,
+      "armaturesWithChangedPoseInSamples": 1,
+      "savedFrame": 1,
+      "frameRange": [1, 8],
+      "fps": 8.0,
+      "camera": {
+        "type": "ORTHO",
+        "orthoScale": 2.950000047683716
+      },
+      "renderSize": [128, 128, 100],
+      "sourceUnchanged": true,
+      "trialExport": {
+        "status": "exported, unqualified",
+        "artifact": "blender--tiger.glb",
+        "bytes": 541392,
+        "sha256": "92210a467ff4def27dbb68c2f982030d66ad0255b950f9aceeaeb06a8ff00b5f",
+        "meshes": 47,
+        "primitives": 48,
+        "skins": 1,
+        "animations": [
+          {
+            "name": "Tiger Walk - in place.009",
+            "channels": 33
+          }
+        ],
+        "materials": 5,
+        "images": 0,
+        "materialBaseColors": [
+          {
+            "name": "Tiger orange bands.009",
+            "rgba": [0, 0, 0, 1],
+            "emissive": [1, 1, 1]
+          },
+          {
+            "name": "Stripes and pupils.009",
+            "rgba": [0, 0, 0, 1],
+            "emissive": [0.022173885256052017, 0.016807375475764275, 0.03433980792760849]
+          },
+          {
+            "name": "Warm cream bands.009",
+            "rgba": [0, 0, 0, 1],
+            "emissive": [1, 1, 1]
+          },
+          {
+            "name": "Eye sparkle.009",
+            "rgba": [0, 0, 0, 1],
+            "emissive": [1, 0.8879231214523315, 0.6307571530342102]
+          },
+          {
+            "name": "Inner ear and nose.009",
+            "rgba": [0, 0, 0, 1],
+            "emissive": [0.838798999786377, 0.31854677200317383, 0.2788942754268646]
+          }
+        ],
+        "extensionsUsed": [],
+        "triangles": 13886
+      }
+    },
+    {
+      "source": "art-source/wildlife-v2/tiger/pilot-v1/animal.blend",
+      "sourceSha256": "14684028dcf93808a61c0b533c782bf50c14bc8c171e6969ca6138ac3dee4171",
+      "bytes": 241085,
+      "sceneMeshes": 46,
+      "renderVisibleMeshes": 46,
+      "renderVisibleEvaluatedTriangles": 20580,
+      "hiddenMeshNames": [],
+      "uvMappedVisibleMeshes": 46,
+      "visibleMaterials": 5,
+      "materialNodeTypes": ["ShaderNodeBsdfPrincipled", "ShaderNodeOutputMaterial"],
+      "usedImages": [],
+      "armatures": [],
+      "armatureModifiedMeshes": 0,
+      "otherModifierTypes": [],
+      "actions": 30,
+      "animatedObjects": 30,
+      "sampledFrames": [1, 29, 58],
+      "meshesWithChangedWorldMatrixInSamples": 20,
+      "armaturesWithChangedPoseInSamples": 0,
+      "savedFrame": 1,
+      "frameRange": [1, 58],
+      "fps": 24.0,
+      "camera": {
+        "type": "ORTHO",
+        "orthoScale": 9.600000381469727
+      },
+      "renderSize": [384, 384, 100],
+      "sourceUnchanged": true,
+      "trialExport": {
+        "status": "exported, unqualified",
+        "artifact": "wildlife-v2--tiger--pilot-v1--animal.glb",
+        "bytes": 1558644,
+        "sha256": "96f98135fd27b423bdcdd5130ffda41225ee4a8b677a749c64b99f3718c43970",
+        "meshes": 46,
+        "primitives": 46,
+        "skins": 0,
+        "animations": [
+          {
+            "name": "BODY-weight-transferAction",
+            "channels": 2
+          },
+          {
+            "name": "FL-0Action",
+            "channels": 2
+          },
+          {
+            "name": "FL-1Action",
+            "channels": 2
+          },
+          {
+            "name": "FL-2Action",
+            "channels": 2
+          },
+          {
+            "name": "FL-haunchAction",
+            "channels": 2
+          },
+          {
+            "name": "FL-pawAction",
+            "channels": 2
+          },
+          {
+            "name": "FR-0Action",
+            "channels": 2
+          },
+          {
+            "name": "FR-1Action",
+            "channels": 2
+          },
+          {
+            "name": "FR-2Action",
+            "channels": 2
+          },
+          {
+            "name": "FR-haunchAction",
+            "channels": 2
+          },
+          {
+            "name": "FR-pawAction",
+            "channels": 2
+          },
+          {
+            "name": "HEAD-followAction",
+            "channels": 2
+          },
+          {
+            "name": "JAW-hingeAction",
+            "channels": 2
+          },
+          {
+            "name": "HL-0Action",
+            "channels": 2
+          },
+          {
+            "name": "HL-1Action",
+            "channels": 2
+          },
+          {
+            "name": "HL-2Action",
+            "channels": 2
+          },
+          {
+            "name": "HL-haunchAction",
+            "channels": 2
+          },
+          {
+            "name": "HL-pawAction",
+            "channels": 2
+          },
+          {
+            "name": "HR-0Action",
+            "channels": 2
+          },
+          {
+            "name": "HR-1Action",
+            "channels": 2
+          },
+          {
+            "name": "HR-2Action",
+            "channels": 2
+          },
+          {
+            "name": "HR-haunchAction",
+            "channels": 2
+          },
+          {
+            "name": "HR-pawAction",
+            "channels": 2
+          },
+          {
+            "name": "tail-0Action",
+            "channels": 2
+          },
+          {
+            "name": "tail-1Action",
+            "channels": 2
+          },
+          {
+            "name": "tail-2Action",
+            "channels": 2
+          },
+          {
+            "name": "tail-3Action",
+            "channels": 2
+          },
+          {
+            "name": "tail-4Action",
+            "channels": 2
+          },
+          {
+            "name": "tail-5Action",
+            "channels": 2
+          },
+          {
+            "name": "tail-6Action",
+            "channels": 2
+          }
+        ],
+        "materials": 5,
+        "images": 0,
+        "materialBaseColors": [
+          {
+            "name": "ivory underside and muzzle",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          },
+          {
+            "name": "warm ochre coat",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          },
+          {
+            "name": "charcoal stripes",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          },
+          {
+            "name": "amber eye",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          },
+          {
+            "name": "muted nose",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          }
+        ],
+        "extensionsUsed": [],
+        "triangles": 20580
+      }
+    },
+    {
+      "source": "art-source/wildlife-v2/rabbit/behavior-v1/rabbit.blend",
+      "sourceSha256": "6192f44a47fb23fb29355c5de1c4ba2f8e294760da857a134b37742cdd8bc6fd",
+      "bytes": 147871,
+      "sceneMeshes": 24,
+      "renderVisibleMeshes": 24,
+      "renderVisibleEvaluatedTriangles": 5376,
+      "hiddenMeshNames": [],
+      "uvMappedVisibleMeshes": 24,
+      "visibleMaterials": 4,
+      "materialNodeTypes": ["ShaderNodeBsdfPrincipled", "ShaderNodeOutputMaterial"],
+      "usedImages": [],
+      "armatures": [],
+      "armatureModifiedMeshes": 0,
+      "otherModifierTypes": [],
+      "actions": 28,
+      "animatedObjects": 28,
+      "sampledFrames": [1, 23, 46],
+      "meshesWithChangedWorldMatrixInSamples": 20,
+      "armaturesWithChangedPoseInSamples": 0,
+      "savedFrame": 200,
+      "frameRange": [1, 46],
+      "fps": 8.0,
+      "camera": {
+        "type": "ORTHO",
+        "orthoScale": 3.200000047683716
+      },
+      "renderSize": [192, 192, 100],
+      "sourceUnchanged": true,
+      "trialExport": {
+        "status": "exported, unqualified",
+        "artifact": "wildlife-v2--rabbit--behavior-v1--rabbit.glb",
+        "bytes": 431880,
+        "sha256": "6e6f0c656e4ceea7fa693c4a1b65a8d33dfe62eba939b090c664d2b9232d620b",
+        "meshes": 24,
+        "primitives": 24,
+        "skins": 0,
+        "animations": [
+          {
+            "name": "BODY-rigid-pitchAction",
+            "channels": 2
+          },
+          {
+            "name": "fore1-footAction",
+            "channels": 2
+          },
+          {
+            "name": "fore1-lowerAction",
+            "channels": 2
+          },
+          {
+            "name": "fore1-upperAction",
+            "channels": 2
+          },
+          {
+            "name": "fore-1-footAction",
+            "channels": 2
+          },
+          {
+            "name": "fore-1-lowerAction",
+            "channels": 2
+          },
+          {
+            "name": "fore-1-upperAction",
+            "channels": 2
+          },
+          {
+            "name": "HEAD-stable-volumeAction",
+            "channels": 2
+          },
+          {
+            "name": "ear-hinge1Action",
+            "channels": 2
+          },
+          {
+            "name": "ear-hinge-1Action",
+            "channels": 2
+          },
+          {
+            "name": "hind1-footAction",
+            "channels": 2
+          },
+          {
+            "name": "hind1-lowerAction",
+            "channels": 2
+          },
+          {
+            "name": "hind1-upperAction",
+            "channels": 2
+          },
+          {
+            "name": "hind-1-footAction",
+            "channels": 2
+          },
+          {
+            "name": "hind-1-lowerAction",
+            "channels": 2
+          },
+          {
+            "name": "hind-1-upperAction",
+            "channels": 2
+          }
+        ],
+        "materials": 4,
+        "images": 0,
+        "materialBaseColors": [
+          {
+            "name": "warm grey brown",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          },
+          {
+            "name": "cream",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          },
+          {
+            "name": "ear interior",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          },
+          {
+            "name": "eye",
+            "rgba": [0.800000011920929, 0.800000011920929, 0.800000011920929, 1],
+            "emissive": [0, 0, 0]
+          }
+        ],
+        "extensionsUsed": [],
+        "triangles": 5376
+      }
+    },
+    {
+      "source": "art-source/vehicle-riders/explorer-upright/v1/low.blend",
+      "sourceSha256": "ac36f7aea5434aa7a09ef14a92078ac5d3ae05a3b3f26ed2244cbf9c69764a2c",
+      "bytes": 129738,
+      "sceneMeshes": 1,
+      "renderVisibleMeshes": 1,
+      "renderVisibleEvaluatedTriangles": 1956,
+      "hiddenMeshNames": [],
+      "uvMappedVisibleMeshes": 1,
+      "visibleMaterials": 1,
+      "materialNodeTypes": ["ShaderNodeOutputMaterial", "ShaderNodeTexImage"],
+      "usedImages": [
+        {
+          "name": "atlas.png",
+          "width": 256,
+          "height": 256,
+          "packed": true
+        }
+      ],
+      "armatures": [],
+      "armatureModifiedMeshes": 0,
+      "otherModifierTypes": [],
+      "actions": 0,
+      "animatedObjects": 0,
+      "sampledFrames": [1, 125, 250],
+      "meshesWithChangedWorldMatrixInSamples": 0,
+      "armaturesWithChangedPoseInSamples": 0,
+      "savedFrame": 1,
+      "frameRange": [1, 250],
+      "fps": 24.0,
+      "camera": null,
+      "renderSize": [1920, 1080, 100],
+      "sourceUnchanged": true,
+      "trialExport": {
+        "status": "exported, unqualified",
+        "artifact": "vehicle-riders--explorer-upright--v1--low.glb",
+        "bytes": 153284,
+        "sha256": "5f8eb74f3a6bb7179a9365a0409a6d8dd2dcf7c22a51136c25404a494599ba31",
+        "meshes": 1,
+        "primitives": 1,
+        "skins": 0,
+        "animations": [],
+        "materials": 1,
+        "images": 1,
+        "materialBaseColors": [
+          {
+            "name": "Explorer_original10color_opaque_unlit",
+            "rgba": [1, 1, 1, 1],
+            "emissive": [0, 0, 0]
+          }
+        ],
+        "extensionsUsed": ["KHR_materials_unlit"],
+        "triangles": 1956
+      }
+    }
+  ]
+}

@@ -40,8 +40,14 @@ const lanes = await Promise.all(
   ].map(async ([name, config, directory]) => {
     const report = JSON.parse(
       execFileSync(
-        "npx",
-        ["--no-install", "playwright", "test", `--config=${config}`, "--list", "--reporter=json"],
+        process.execPath,
+        [
+          resolve(root, "node_modules/@playwright/test/cli.js"),
+          "test",
+          `--config=${config}`,
+          "--list",
+          "--reporter=json",
+        ],
         { cwd: root, encoding: "utf8", maxBuffer: 16 * 1024 * 1024 },
       ),
     );

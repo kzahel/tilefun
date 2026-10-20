@@ -39,10 +39,17 @@ See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity lim
 ## Transport and requests
 
 Vehicle paint identity adds one optional dictionary byte to entity baselines and
-nullable deltas. Frame tag 0x05 requires matching updated endpoints; pre-paint 0x04
-is rejected rather than decoded with missing fields. The authority validates each
+nullable deltas. Frame tag 0x06 adds the opt-in qualified vehicle-bed bit and
+requires matching endpoints; older 0x01/0x04/0x05 tags are rejected. The authority validates each
 scheme against its model, and local mount prediction preserves the replicated
 choice. [Vehicle paints](vehicle-paint-variants.md) owns the complete contract.
+The [bed prototype](vehicle-bed-prototype.md) owns its plain physical profile,
+replicated flag, persistent traffic state and relative occupant support height.
+Normal dump trucks now set that flag, including old saved records. The ordinary
+`vehicle-bed-action` request returns `vehicle-controlled` or `request-error` after
+authority validates proximity, stopped motion, actor ownership, ready space and
+clearance. Loose cargo remains ordinary actors with no seat parent; moving support
+and bed contacts are shared engine code. See [165](tactical/165-truck-bed-gameplay.md).
 
 [Transport interfaces](../src/transport/Transport.ts) separate hosts from the
 shared protocol. Worker traffic is ordered binary data with bounded batches and

@@ -274,6 +274,20 @@ export class ScenarioClient {
       this.controls--;
     }
   }
+  async step(input: Movement, range: ChunkRange) {
+    if (this.running) throw new Error("Pause before stepping");
+    this.controls++;
+    this.schedulePump();
+    try {
+      await this.ready;
+      await this.request({ kind: "step", input, dt: 1 / 60, range });
+      this.seq = Math.max(this.seq, this.view.lastProcessedInputSeq);
+      this.view.resetPresentationClock(true);
+      this.predictor.reset(this.view.serverPlayerEntity);
+    } finally {
+      this.controls--;
+    }
+  }
   async reload(reset = false) {
     this.controls++;
     this.schedulePump();

@@ -7,6 +7,7 @@ import type { RasterSurface } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
+import { drawBedContentsFallback } from "./VehicleBedPresentation.js";
 
 /** Canvas-specific resource resolution stays on the drawing side of the boundary. */
 export interface CanvasTerrainSource {
@@ -265,6 +266,7 @@ function drawSprite(
     );
   }
   ctx.restore();
+  drawBedContentsFallback(ctx, camera, item, sheets, drawSprite);
 }
 
 function drawElevation(

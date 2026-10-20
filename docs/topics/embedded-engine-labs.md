@@ -22,8 +22,15 @@ replacement-host error guard used by furniture playtest.
 experiment fed by normal headless scenario authority, binary replication and
 scene collection. It reuses production vehicle assets/loading without adding a
 second gameplay implementation. Its shared-depth target is not yet part of the
-game or an embedded host. Any next production prototype must use shared read-only
-presentation inputs and keep game/lab renderer lifecycle behavior aligned.
+game or an embedded host. [164](../tactical/164-playable-truck-bed.md) then adds
+bounded truck-owned depth through normal `ScenarioPresentationHost`, real Worker,
+replication and shared backends. Its opt-in hollow-bed physics/support is shared
+with game code; renderer switches preserve that same Worker/world. This is local
+group depth, not the broader shared world target from the earlier experiment.
+[165](../tactical/165-truck-bed-gameplay.md) enables normal dump beds and extends
+the existing shared vehicle control panel with boarding, exit and loose cargo.
+ScenarioPresentationHost forwards the same actions to VehicleControl authority;
+there is one panel and no separate lab cargo simulation. Pause locks those actions.
 
 ## Shared reverse driving (2026-10-19)
 

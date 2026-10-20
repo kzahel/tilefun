@@ -10,6 +10,7 @@ import type { Prop } from "../entities/Prop.js";
 import { axisBox } from "../physics/OrientedBox.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { isTrain } from "../railway/Train.js";
+import { isCarryable } from "../wildlife/ForageResources.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import { separatesContact } from "./ContactRecovery.js";
@@ -22,6 +23,8 @@ import {
   vehicleNoseHeading,
   vehicleTurningRadius,
 } from "./Vehicle.js";
+import { movingSupportZ } from "./VehicleBed.js";
+import { bedInteriorOccupant } from "./VehicleCargo.js";
 import { carBodyMotion, entityBody, orientedCar } from "./VehicleContact.js";
 import { vehiclePerformance } from "./VehiclePerformance.js";
 import { planVehiclePushes, type VehiclePush } from "./VehiclePush.js";
@@ -327,6 +330,8 @@ function checkedCarPose(
     if (
       other.id === car.id ||
       other.parentId === car.id ||
+      roofSupport(other, [car])?.id === car.id ||
+      (bedInteriorOccupant(car, other) && bedInteriorOccupant(next, other)) ||
       !other.collider ||
       other.collider.solid === false
     )
@@ -347,7 +352,11 @@ function checkedCarPose(
       return;
   }
   for (const rider of entities) {
-    if (rider.type !== "player" || !rider.collider || roofSupport(rider, entities)?.id !== car.id)
+    if (
+      (rider.type !== "player" && !isCarryable(rider)) ||
+      !rider.collider ||
+      roofSupport(rider, entities)?.id !== car.id
+    )
       continue;
     const position = movingPassengerPosition(rider, car, next);
     const a = getEntityAABB(rider.position, rider.collider),
@@ -358,7 +367,7 @@ function checkedCarPose(
       top: Math.min(a.top, b.top),
       bottom: Math.max(a.bottom, b.bottom),
     };
-    const roofZ = z + height;
+    const roofZ = z + movingSupportZ(car, rider) - (car.wz ?? 0);
     if (
       (queries?.props(sweep) ?? props).some((p) =>
         aabbOverlapsPropWalls(

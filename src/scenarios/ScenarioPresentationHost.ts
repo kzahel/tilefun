@@ -13,7 +13,7 @@ import { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
-import type { RenderHost } from "../rendering/RenderHost.js";
+import type { RendererMode, RenderHost } from "../rendering/RenderHost.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
@@ -139,7 +139,9 @@ export class ScenarioPresentationHost {
             ? { kind: "enter-vehicle", entityId: request.entityId }
             : request.type === "call-train"
               ? { kind: "call-train", benchId: request.benchId }
-              : { kind: "exit-vehicle" },
+              : request.type === "vehicle-bed-action"
+                ? { kind: "vehicle-bed-action", entityId: request.entityId, action: request.action }
+                : { kind: "exit-vehicle" },
         ),
       );
       this.vehicleControl.root.style.position = "absolute";
@@ -368,6 +370,24 @@ export class ScenarioPresentationHost {
     return this.host.captureFrame?.() ?? this.canvas;
   }
 
+  /** Keep the Worker, world and controlled player while replacing the backend. */
+  async selectRenderer(mode: RendererMode) {
+    if (!this.host?.rendererControl) throw new Error("Renderer selection unavailable");
+    return this.host.rendererControl.select(mode);
+  }
+  async step() {
+    if (!this.options.settings().paused) throw new Error("Pause before stepping");
+    this.controls++;
+    this.syncAuthority();
+    try {
+      await this.session.step(this.options.input(), this.camera.getVisibleChunkRange());
+      this.interpolate = false;
+    } finally {
+      this.controls--;
+      this.syncAuthority();
+    }
+  }
+
   /** Resize presentation without restarting the Worker or changing its world. */
   resize(width: number, height: number) {
     if (this.disposed) return;
@@ -413,6 +433,9 @@ export class ScenarioPresentationHost {
       ],
       // Optional backend diagnostics stay outside presentation policy.
       meshDraws: (terrain as typeof terrain & { gpu?: { meshDraws: number } })?.gpu?.meshDraws ?? 0,
+      bedMeshDraws:
+        (terrain as typeof terrain & { gpu?: { vehicleBedDraws: number } })?.gpu?.vehicleBedDraws ??
+        0,
     };
   }
 

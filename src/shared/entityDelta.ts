@@ -40,6 +40,7 @@ export interface EntityDelta {
   emergencyState?: number | null;
   vehicleHeading?: number | null;
   paintSchemeId?: string | null;
+  vehicleBed?: true | null;
   wz?: number | null;
   parentId?: number | null;
   localOffsetX?: number | null;
@@ -98,6 +99,7 @@ export function diffEntitySnapshots(
   diffOptionalNum("jumpInputState", prev, curr, ensure);
   diffOptionalNum("emergencyState", prev, curr, ensure);
   diffOptionalNum("vehicleHeading", prev, curr, ensure);
+  if (prev.vehicleBed !== curr.vehicleBed) ensure().vehicleBed = curr.vehicleBed ?? null;
   if (prev.paintSchemeId !== curr.paintSchemeId)
     ensure().paintSchemeId = curr.paintSchemeId ?? null;
   diffOptionalNum("wz", prev, curr, ensure);
@@ -322,6 +324,8 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "jumpInputState");
   applyOptionalNum(entity, delta, "emergencyState");
   applyOptionalNum(entity, delta, "vehicleHeading");
+  if (delta.vehicleBed === null) delete entity.vehicleBed;
+  else if (delta.vehicleBed) entity.vehicleBed = true;
   if (delta.paintSchemeId === null) delete entity.paintSchemeId;
   else if (delta.paintSchemeId !== undefined) entity.paintSchemeId = delta.paintSchemeId;
   applyVehicleFacing(entity);

@@ -36,6 +36,12 @@ export type VehicleHornMessage = {
 };
 
 export type ClientMessage =
+  | {
+      type: "vehicle-bed-action";
+      requestId: number;
+      entityId: number;
+      action: import("../traffic/VehicleCargo.js").VehicleBedAction;
+    }
   | { type: "vehicle-horn"; active: boolean }
   | { type: "call-train"; requestId: number; benchId: number }
   | { type: "enter-vehicle"; requestId: number; entityId: number }
@@ -218,6 +224,7 @@ export interface EntitySnapshot {
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
   paintSchemeId?: string;
+  vehicleBed?: true;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

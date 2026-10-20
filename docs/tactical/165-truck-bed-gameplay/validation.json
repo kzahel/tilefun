@@ -1,0 +1,143 @@
+{
+  "schema": "tilefun-truck-bed-gameplay-validation-v1",
+  "date": "2026-10-20",
+  "status": "implemented-and-locally-validated-public-deployment-unverified",
+  "activation": {
+    "type": "vehicle-v1:dump-truck",
+    "floorZ": 21.73913043478261,
+    "ordinaryCreation": true,
+    "oldSavedRecordsMigrate": true,
+    "frameTag": "0x06"
+  },
+  "assetsUnchanged": {
+    "public/assets/models/vehicles/dump-truck-v1.glb": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae"
+  },
+  "sources": {
+    "src/traffic/Vehicle.ts": "35139bd3bc7fab04f2a4a3b37392947244d0b988b15050a8c45c43f5b532ce5b",
+    "src/traffic/VehicleBed.ts": "c70fea38e39bd9edfc67ae1b64ced8165662be56c0a82c9ff1fcfee8758ce2f1",
+    "src/traffic/VehicleCargo.ts": "fe39e7d1c33c1eaffa3292779504a270dbd40b701b113b5fa211e1133560d26a",
+    "src/server/VehicleBedControl.ts": "b2d3392fbe68ed5d4bbc50fabccf077af717c4763b24cfd34073f13b052ef158",
+    "src/ui/VehicleControl.ts": "5f465762ebc7e5a7839beb60029f524bf65b7fa49563704454c2a63f989a007e",
+    "src/traffic/MovingSupport.ts": "19fe593d296dc729692aba0432ba392253364900ab4c30dcfed8617d7368c71f",
+    "src/physics/BallPhysics.ts": "bedda069ee3f40c8fb7a4fb8aaef6f5e04e603ede520c492fd17a91c66a7e628",
+    "src/server/RealmStreaming.ts": "b9f7eada3bd4814e7589554cd8ad62b81dcc9f076df128331516f02229736187",
+    "src/rendering/collectScene.ts": "410c5ed31d66e8b538193f5fd5b4bbce74fb06e17ffa9cfde015d1e0c358fac9",
+    "src/rendering/GpuVehicleContents.ts": "70409ac670280b4945d61cca5df732d21696d5931c3b728d4cee530be8b0f3ce",
+    "src/rendering/VehicleBedPresentation.ts": "52c4c4aa587da2ef8928c03966b85a60031d5ccd83bf86b24f2cf886dbf18dbf",
+    "src/rendering/VehicleBedDebug.ts": "7846c19841265752373425faca40bb83b47f9b5aaede2b7108179da604023c37",
+    "src/scenarios/TruckBedRecipe.ts": "7accbcf5a53280d5818ae3d49016727f72c8b8dffa29fae59451e2159d7211c3",
+    "src/workshop/TruckBedPage.tsx": "3b704a4b8e1ae16a920eed1dfc788f342878595a4c5bf54c0c7b5d2cf1e5a163",
+    "scripts/instrumentation/truck-bed-game.ts": "c656214efe99a638e4726efaf564fbbee31937b7c70eb81a70c38c7078fb7572",
+    "scripts/instrumentation/truck-bed-playground.ts": "8de75c7137755c79fb70e7feb1c7185c625769aa5f76d4500dc56f0007496cb6",
+    "tests/truck-bed.spec.ts": "aaf4634c58911284d7c7c8cdd75eb59d502f505769eefbb789b7cac73d4336e9",
+    "src/traffic/TrafficSystem.ts": "804f8483bd48fbf4f955a40f2d3d792d41a9e19eb440c25e2c7b090e8b68a772",
+    "src/traffic/Driving.ts": "e40b67fea437e132aec80ec6d7c0b74296a2f532eed2bcea0d39a9ad5276bf63",
+    "src/traffic/VehiclePush.ts": "574ad2d14a8e71757923e87c0de9e2c79662a60f9fc21d26683bd3548acb6a19",
+    "src/workshop/TruckBedCandidate.ts": "c9f7cc295b32de64b107228d560f1ffd13ab3dabb9206692949d1acf94b4c6ab",
+    "src/scenarios/TruckBedGameplay.test.ts": "f60450fb1231c7429514501ac763bc8faef3cb67e20221c287cd73a74d4f706e"
+  },
+  "checks": {
+    "typecheck": "pass",
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 121,
+      "existingInfos": 39
+    },
+    "build": "pass",
+    "focusedNative": {
+      "passed": 277,
+      "files": 11
+    },
+    "normalGameServerRequest": "pass",
+    "collectSceneRegression": {
+      "passed": 168
+    },
+    "fleetSupportRegression": {
+      "passed": 2,
+      "allAdmittedFamiliesCompleteGeneratedRoadTurns": true
+    },
+    "builtFullChromium": {
+      "passed": 3,
+      "seconds": 14.5,
+      "includes": [
+        "bed real Worker, game controls, cargo, backend replacement and reload",
+        "atomic mesh fallback",
+        "standalone login/review freshness"
+      ]
+    },
+    "nodeComparator": {
+      "passed": 1
+    },
+    "artCatalog": {
+      "sheets": 695,
+      "uses": 1393
+    },
+    "workshopManifest": {
+      "candidates": 1899,
+      "normalChromiumRetinaVerified": true
+    },
+    "streamingReady": {
+      "passed": true,
+      "renderer": "gpu",
+      "meshes": true,
+      "output": "data/3d-investigation/truck-bed-gameplay-streaming-heading/report.json"
+    },
+    "normalGameCapture": {
+      "passed": true,
+      "realWorker": true,
+      "editorPointerPlacement": true,
+      "normalLoadAndBoardRequests": true,
+      "independentRider": true,
+      "keyboardBedWalking": true,
+      "phoneTouchBoardAndExit": true,
+      "phoneViewport": [390, 844],
+      "output": "data/3d-investigation/truck-bed-gameplay/main-game.json"
+    }
+  },
+  "broadNative": {
+    "passed": 6445,
+    "failed": 8,
+    "skipped": 10,
+    "files": 355,
+    "seconds": 792.57,
+    "fixedOnFocusedRerun": [
+      "collectScene dump truck main-list assumption",
+      "OriginalVehicles dump truck solid-roof assumption",
+      "TrafficJourney dump truck solid-roof assumption"
+    ],
+    "remainingFailures": [
+      "FsSecurity: three Windows symlink EPERM",
+      "privateDataPlugin: one Windows symlink EPERM",
+      "SqliteRecordStore: one process-death fixture"
+    ],
+    "hookFailures": ["staticFiles Windows symlink setup plus cleanup"],
+    "unrelatedTestsModified": false
+  },
+  "capture": {
+    "command": "npx tsx scripts/instrumentation/truck-bed-playground.ts --output=data/3d-investigation/truck-bed-gameplay --game",
+    "states": 10,
+    "errors": [],
+    "normalGameAndPhone": "pass"
+  },
+  "limits": [
+    "Level dump bed; no tipping or articulated tailgate",
+    "Existing balls and loose food/twigs; no crate asset",
+    "Independent bed riders; no enclosed passenger-seat relationship",
+    "Local depth only; existing cross-group occluder limitation remains",
+    "Canvas fallback uses approximate physical-profile clips, not exact mesh-pixel parity",
+    "Local implementation; public deployment not verified"
+  ],
+  "broadBuiltBrowser": {
+    "passed": 823,
+    "failed": 1,
+    "minutes": 37.8,
+    "failure": "Standalone review correctly blocked voting while manifest/source inputs changed during the broad run",
+    "finalFrozenRebuildRerun": "pass",
+    "testsWeakened": false
+  },
+  "lateCorrections": [
+    "Airborne contents use hollow-volume crossing/push checks and actual committed wall clearance; autonomous/driven jump and wall-sweep negatives pass",
+    "Routed dump bed shares continuous mesh yaw through stopping, replication and reload; existing generated-road admission policy is unchanged"
+  ]
+}

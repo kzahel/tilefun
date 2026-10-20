@@ -45,7 +45,7 @@ export interface SavedPlayerData {
   /** Preserve total and passive XY motion only for an airborne save. */
   airborneVelocity?: { vx: number; vy: number; momentumX?: number; momentumY?: number };
   mount?: { id: string; offsetX: number; offsetY: number; wz: number; jumpZ: number };
-  roofRide?: { identity: string; offsetX: number; offsetY: number };
+  roofRide?: { identity: string; offsetX: number; offsetY: number; height?: number };
   returnLocation?: import("../server/PlayerSession.js").PlayerSession["returnLocation"];
   gemsCollected: number;
   x: number;

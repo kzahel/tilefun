@@ -3,6 +3,9 @@ import type { GameContext } from "../core/GameScene.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
+import { drawVehicleBedDebug } from "../rendering/VehicleBedDebug.js";
+import { hasVehicleBed } from "../traffic/VehicleBed.js";
+import { bedContents } from "../traffic/VehicleCargo.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 
 // ── 3D debug renderer (lazy-loaded) ──
@@ -80,6 +83,24 @@ export function renderDebugOverlay(gc: GameContext): void {
   if (!gc.debugEnabled && !anyCvar) return;
 
   const { ctx, camera, stateView } = gc;
+  if (gc.debugEnabled || showBboxes) {
+    const overlay = gc.sceneFrame.overlays;
+    overlay.begin();
+    try {
+      for (const truck of stateView.entities)
+        if (hasVehicleBed(truck))
+          drawVehicleBedDebug(
+            overlay,
+            camera,
+            truck,
+            stateView.playerEntity,
+            bedContents(truck, stateView.entities),
+          );
+      gc.renderer.submit(camera, { kind: "overlay", items: overlay.items });
+    } finally {
+      overlay.release();
+    }
+  }
   const px = stateView.playerEntity.position.wx;
   const py = stateView.playerEntity.position.wy;
   const ptx = Math.floor(px / TILE_SIZE);

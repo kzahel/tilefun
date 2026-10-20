@@ -5,6 +5,8 @@ public/demos/wildlife-v2/** -text whitespace=blank-at-eol,blank-at-eof,space-bef
 
 # Spatial workflow shell launchers and frozen evidence preserve cross-platform bytes.
 scripts/spatial-assets/*.sh text eol=lf
+scripts/instrumentation/inspect-3d-sources.py text eol=lf
+scripts/instrumentation/live-3d-comparison*.mjs text eol=lf
 docs/tactical/071-spatial-assets/**/*.json -text
 docs/tactical/072-conditioning-fidelity/**/*.json -text
 
@@ -134,6 +136,13 @@ scripts/wildlife/register-meadow-157.mjs -text whitespace=blank-at-eol,blank-at-
 # Exact retained wildlife action helpers for batch 161.
 scripts/wildlife/woodland-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 scripts/wildlife/register-woodland-161.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Shared-world diagnostic source hashes are portable across checkouts.
+scripts/instrumentation/shared-world-depth-fixture.ts text eol=lf
+scripts/instrumentation/shared-world-depth-entry.mjs text eol=lf
+scripts/instrumentation/shared-world-depth.mjs text eol=lf
+scripts/instrumentation/truck-bed-playground.ts text eol=lf
+scripts/instrumentation/truck-bed-game.ts text eol=lf
 
 # Exact retained wildlife action helpers for batch 163.
 scripts/wildlife/pasture-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

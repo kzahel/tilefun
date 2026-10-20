@@ -193,6 +193,67 @@ function firstRealmId(transport: TestTransport, clientId: string): string {
 
 // ---- Tests ----
 
+it("normal game requests spawn a hollow dump truck, load one real toy and board independently", async () => {
+  const { server, transport, registry } = await createTestSetup();
+  try {
+    transport.connect("local");
+    await server.settle();
+    const world = await registry.createWorld("Truck cargo", "flat", 42);
+    await server.loadWorld(world.id);
+    const session = server.getLocalSession();
+    const x = session.player.position.wx,
+      y = session.player.position.wy;
+    transport.clientSend("local", {
+      type: "edit-spawn",
+      entityType: "vehicle-v1:dump-truck",
+      wx: x + 140,
+      wy: y,
+    });
+    await server.settle();
+    const truck = server.entityManager.entities.find((e) => e.type === "vehicle-v1:dump-truck");
+    expect(truck?.vehicleBed).toBe(true);
+    if (!truck) throw Error("Missing normal placement");
+    const { createBall } = await import("../entities/Ball.js");
+    const ball = server.entityManager.spawn(createBall(x + 120, y + 42));
+    session.editorEnabled = false;
+    session.player.position = { wx: x + 120, wy: y + 43 };
+    server.entityManager.spatialHash.update(session.player);
+    transport.clientSend("local", {
+      type: "vehicle-bed-action",
+      requestId: 16501,
+      entityId: truck.id,
+      action: "load",
+    });
+    await server.settle();
+    expect(
+      transport.messagesOfType("local", "vehicle-controlled").some((m) => m.requestId === 16501),
+    ).toBe(true);
+    expect(ball.wz).toBeCloseTo((400 / 23) * 1.25);
+    transport.clientSend("local", {
+      type: "vehicle-bed-action",
+      requestId: 16502,
+      entityId: truck.id,
+      action: "board",
+    });
+    await server.settle();
+    expect(session.player.wz).toBeCloseTo(ball.wz ?? -1);
+    expect(session.player.parentId).toBeUndefined();
+    transport.clientSend("local", {
+      type: "vehicle-bed-action",
+      requestId: 16503,
+      entityId: truck.id,
+      action: "board",
+    });
+    await server.settle();
+    expect(
+      transport.messagesOfType("local", "request-error").find((m) => m.requestId === 16503)
+        ?.message,
+    ).toMatch("already");
+  } finally {
+    await server.destroy();
+  }
+}, 30000);
+
 describe("Realm browser protocol", () => {
   it("local client auto-joins default realm on connect", async () => {
     const { transport } = await createTestSetup();

@@ -16,14 +16,19 @@ import {
   isWarningVehicle,
   nextVehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import type { VehicleBedAction } from "../traffic/VehicleCargo.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { safeArrival } from "./SafeArrival.js";
+import { controlVehicleBed } from "./VehicleBedControl.js";
 
 /** Inside seats use ordinary replicated parenting/mount identity. Roof riders are independent. */
 export class VehicleControl {
+  bed(session: PlayerSession, id: number, action: VehicleBedAction): void {
+    controlVehicleBed(this.realm, session, id, action);
+  }
   private drivers = new Map<
     number,
     {

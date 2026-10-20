@@ -22,6 +22,7 @@ import { retainDrivingQueries } from "../traffic/DrivingQueries.js";
 import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { isVehicle } from "../traffic/Vehicle.js";
+import { movingSupportZ } from "../traffic/VehicleBed.js";
 import type { VehiclePush } from "../traffic/VehiclePush.js";
 import type { World } from "../world/World.js";
 
@@ -364,10 +365,10 @@ export class PlayerPredictor {
     if (this.support && this.supportOffset) {
       const current = entities.find((e) => e.id === this.support?.id);
       if (current) {
+        const height = movingSupportZ(this.support, this.predicted) - (this.support.wz ?? 0);
         this.support = current;
         this.predicted.position = roofPosition(this.supportOffset, current);
-        this.predicted.wz = this.predicted.groundZ =
-          (current.wz ?? 0) + (current.collider?.physicalHeight ?? 0);
+        this.predicted.wz = this.predicted.groundZ = (current.wz ?? 0) + height;
       } else this.clearSupport();
     }
     this.captureSupport(entities);
@@ -771,6 +772,8 @@ export class PlayerPredictor {
       if (serverMount.emergencyState !== undefined)
         this.predictedMount.emergencyState = serverMount.emergencyState;
       else delete this.predictedMount.emergencyState;
+      if (serverMount.vehicleBed) this.predictedMount.vehicleBed = true;
+      else delete this.predictedMount.vehicleBed;
       if (serverMount.paintSchemeId !== undefined)
         this.predictedMount.paintSchemeId = serverMount.paintSchemeId;
       else delete this.predictedMount.paintSchemeId;
@@ -1150,7 +1153,7 @@ export class PlayerPredictor {
       };
     }
     const previous = { ...support, position: support.prevPosition ?? support.position };
-    const height = support.collider?.physicalHeight ?? 0;
+    const height = movingSupportZ(support, player) - (support.wz ?? 0);
     return {
       ...player,
       position: roofPosition(offset, support),
@@ -1245,7 +1248,7 @@ export class PlayerPredictor {
       position.wy += shift.wy * decay;
     }
     const wz = support
-      ? (support.wz ?? 0) + (support.collider?.physicalHeight ?? 0)
+      ? movingSupportZ(support, player)
       : (player.prevWz ?? player.wz ?? 0) +
         ((player.wz ?? 0) - (player.prevWz ?? player.wz ?? 0)) * alpha;
     const jumpZ =
@@ -1640,6 +1643,7 @@ export class PlayerPredictor {
     if (serverPlayer.emergencyState !== undefined)
       clone.emergencyState = serverPlayer.emergencyState;
     if (serverPlayer.paintSchemeId !== undefined) clone.paintSchemeId = serverPlayer.paintSchemeId;
+    if (serverPlayer.vehicleBed) clone.vehicleBed = true;
     if (serverPlayer.playerModel !== undefined) clone.playerModel = serverPlayer.playerModel;
     if (serverPlayer.sortOffsetY !== undefined) clone.sortOffsetY = serverPlayer.sortOffsetY;
     if (serverPlayer.jumpZ !== undefined) clone.jumpZ = serverPlayer.jumpZ;

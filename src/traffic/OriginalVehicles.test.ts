@@ -474,16 +474,17 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       for (let i = 0; i < 60; i++) await session.step(idle);
       expect(restored.parked).toBe(true);
       expect(restored.entity.position).toEqual(position);
-      // Per-model roof height is a physical contract, independent of GPU mesh
+      // Per-model support height is a physical contract, independent of GPU mesh
       // loading. Retain real browser roof/input representatives separately.
       const rider = session.player.player;
+      const supportHeight = family.model === "dump-truck" ? (400 / 23) * 1.25 : family.bounds[2];
       rider.position = { ...restored.entity.position };
-      rider.wz = family.bounds[2] + 3;
+      rider.wz = supportHeight + 3;
       rider.jumpZ = rider.wz;
       rider.jumpVZ = -40;
       session.realm.entityManager.spatialHash.update(rider);
       for (let i = 0; i < 12; i++) await session.step(idle);
-      expect(rider.wz).toBe(family.bounds[2]);
+      expect(rider.wz).toBe(supportHeight);
       session.player.editorEnabled = true;
       session.realm.handleMessage(session.player.clientId, session.player, {
         type: "edit-delete-entity",

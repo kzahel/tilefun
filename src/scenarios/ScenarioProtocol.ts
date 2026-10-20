@@ -3,6 +3,12 @@ import type { Movement } from "../input/ActionManager.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 export type ScenarioCommand =
+  | {
+      kind: "vehicle-bed-action";
+      entityId: number;
+      action: import("../traffic/VehicleCargo.js").VehicleBedAction;
+    }
+  | { kind: "vehicle-bed"; action: "board" | "outside" | "drive" | "stop" }
   | { kind: "place-entity"; entityType: string; position: Entity["position"] }
   | { kind: "throw-ball"; dirX: number; dirY: number; force: number }
   | { kind: "vehicle-horn"; active: boolean }

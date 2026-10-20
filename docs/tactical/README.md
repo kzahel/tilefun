@@ -12,8 +12,12 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [165 Truck bed gameplay](165-truck-bed-gameplay.md) | Normal dump-bed activation, safe game controls, independent riders and persistent loose toys/food; [vehicles](../topics/vehicles.md) |
+| [164 Playable truck bed](164-playable-truck-bed.md) | Opt-in recessed support, moving sprite occupant, local depth and debug geometry through the real Worker/shared renderer; [vehicles](../topics/vehicles.md) |
 | [163 Browsing, rooting and trunks](163-browsing-rooting-and-trunks.md) | Implemented and automation verified: goat browsing/rock hops, pig rooting and elephant fruit work; [animal behaviors](../topics/wildlife-behaviors.md) |
+| [162 Shared world depth comparison](162-shared-world-depth-comparison.md) | Actual vehicles and authority snapshots: five matching poses, one whole-group clipping limit; production host integration open; [rendering](../topics/rendering-architecture.md) |
 | [161 Climbing, cache raids and play](161-climbing-raids-and-play.md) | Three new signatures and two inherited cat coats; renewable food and persistent toys; [animal behaviors](../topics/wildlife-behaviors.md) |
+| [160 Live 3D and shared depth](160-live-3d-and-shared-depth-investigation.md) | Four-source export audit and schematic GPU depth comparison complete; shared-world integration and live-character appearance remain open; [rendering](../topics/rendering-architecture.md), [characters](../topics/characters.md) |
 | [159 Foraging and lookouts](159-foraging-and-lookouts.md) | Implemented and automation verified: rabbit plant feeding, robin ground forage/perch return and meerkat sentinels; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [158 Browser-test migration](158-browser-test-migration.md) | Implemented and locally green: all 403 decisions resolved, 1,724 → 808 browser cases, eight CI shards and preserved browser boundaries; [testing](../topics/testing.md) |
 | [157 Browser-test audit](157-browser-test-audit.md) | Complete audit of 1,724 cases / 403 templates: portable semantics, existing coverage, browser boundaries and staged migration; [testing](../topics/testing.md) |

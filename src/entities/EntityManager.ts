@@ -12,6 +12,7 @@ import {
   resolveGroundZForLanding,
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
+import { hasVehicleBed, vehicleBedBlocks } from "../traffic/VehicleBed.js";
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { prepareFaunaTravel, settleFauna, syncFaunaWater } from "../wildlife/faunaInteractions.js";
@@ -214,6 +215,10 @@ export class EntityManager {
             continue;
           const eWz = e.wz ?? 0;
           const eHeight = e.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+          if (hasVehicleBed(e)) {
+            if (vehicleBedBlocks(e, aabb, selfWz, selfHeight)) return true;
+            continue;
+          }
           if (
             zRangesOverlap(selfWz, selfHeight, eWz, eHeight) &&
             aabbsOverlap(aabb, getEntityAABB(e.position, e.collider))

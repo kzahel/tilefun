@@ -51,3 +51,10 @@ Worker save/reload. The seventh checks the canonical progress filter and demo
 links. Fifteen production authority cases own the food, ownership, interruption,
 residency and group-duty semantics below the browser. The 403-template audit
 baseline stays unchanged; the migration inventory records the current collection.
+
+[164](../tactical/164-playable-truck-bed.md) adds one focused Worker/GPU/host
+lifecycle boundary for the opt-in bed occupant. Bed shapes, yaw, collision,
+support, prediction and persistence are qualified in native tests; no per-car
+browser matrix or extra CI shards are introduced. The inventory helper now
+invokes the installed Playwright CLI with the current Node executable so the
+same collection verification works on Windows without an `npx` shell shim.

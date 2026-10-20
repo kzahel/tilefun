@@ -4,7 +4,7 @@ Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-car presentation delivered;
 GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
-Updated: 2026-10-18.
+Updated: 2026-10-20.
 
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
 owns timing and allocation evidence; [client/server architecture](../client-server-architecture.md)
@@ -269,6 +269,28 @@ simulation. Keep presentation inputs read-only and physical proxies independent
 from visual meshes. Existing height-aware physics can remain while that is tested.
 
 ## Open engine checkpoints
+
+[160](../tactical/160-live-3d-and-shared-depth-investigation.md) records the owner's
+2026-10-20 request to investigate live character meshes and broader shared scene
+depth for vehicle passengers/cargo. A schematic GPU comparison shows the unchanged
+Explorer sprite can participate in depth as an upright alpha-tested plane; local
+group and world-depth results match in that bounded fixture. The four-source GLB
+audit exposes material, animation packaging and source-identity gaps. Production
+remains on isolated mesh-body depth. [162](../tactical/162-shared-world-depth-comparison.md)
+extends this to actual dump-truck/pickup meshes and ordinary authority/collector
+snapshots. Five of six poses match, including overlapping vehicles. A wall corner
+has seven differing visibility pixels; all whole-group orders still leave at
+least three wrong. This establishes one cross-group clipping limit while keeping
+the existing character sprite. The standalone harness does not yet exercise the
+Worker, production outline placement or `RenderHost` lifecycle. Next is bounded
+shared presentation-host integration. [164](../tactical/164-playable-truck-bed.md)
+implements a bounded version for one opt-in level dump bed: neutral sprite
+contents join the vehicle's existing depth target, with shared source-derived
+fallback clips and physical debug overlays. It runs the normal Worker and
+  selectable renderer. [165](../tactical/165-truck-bed-gameplay.md) enables normal
+  dump beds and groups loose toy/food sprites with riders, including Canvas and
+  loading/failed-mesh clipping. Source artwork and full-world depth remain
+  unchanged. No full-world renderer or automatic art conversion is selected.
 
 [Parent 039](../tactical/039-fixed-view-gpu-parent.md) now tracks authorized
 autonomous delivery of the six implementation slices. These are follow-ups,

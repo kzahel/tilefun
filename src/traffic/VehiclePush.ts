@@ -15,6 +15,8 @@ import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import { separatesContact } from "./ContactRecovery.js";
 import type { DrivingQueries } from "./DrivingQueries.js";
+import { roofSupport } from "./RoofSupport.js";
+import { bedInteriorOccupant } from "./VehicleCargo.js";
 import { carBodyMotion, entityBody, orientedCar } from "./VehicleContact.js";
 
 export interface VehiclePush {
@@ -103,7 +105,9 @@ export function planVehiclePushes(
         movingIds.has(other.id) ||
         !other.collider ||
         (other.collider.solid === false && other.type !== "ball") ||
-        other.parentId !== undefined
+        other.parentId !== undefined ||
+        roofSupport(other, [before])?.id === before.id ||
+        (bedInteriorOccupant(before, other) && bedInteriorOccupant(after, other))
       )
         continue;
       if (

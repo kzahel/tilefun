@@ -128,6 +128,8 @@ export interface Entity {
   vehicleHeading?: number;
   /** Stable, model-scoped coachwork choice; absent preserves the original paint. */
   paintSchemeId?: string;
+  /** Qualified source-derived hollow-bed profile; enabled for normal dump trucks. */
+  vehicleBed?: true;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;

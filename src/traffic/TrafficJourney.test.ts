@@ -3,6 +3,7 @@ import { required } from "../art/ArtCatalog.js";
 import { nextLanes } from "./LaneGraph.js";
 import { TrafficTestHarness } from "./TrafficTestHarness.js";
 import { TRAFFIC_MODELS, vehicleRoadWidth } from "./Vehicle.js";
+import { DUMP_BED, hasVehicleBed } from "./VehicleBed.js";
 
 it("carries a passenger along an intercity corridor back into city streets with bounded residency", () => {
   const scene = new TrafficTestHarness();
@@ -57,7 +58,9 @@ it("all admitted vehicle families turn on actual generated roads with stable roo
     for (const s of scene.traffic.states.values()) scene.entities.remove(s.entity.id, false);
     scene.traffic.states.clear();
     const car = scene.traffic.add(model, lane, 80);
-    const height = required(required(car.entity.collider).physicalHeight);
+    const height = hasVehicleBed(car.entity)
+      ? DUMP_BED.floorZ
+      : required(required(car.entity.collider).physicalHeight);
     scene.player.position = { wx: car.entity.position.wx, wy: car.entity.position.wy + 3 };
     scene.player.wz = height;
     scene.player.groundZ = height;

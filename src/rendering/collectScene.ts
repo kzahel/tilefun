@@ -11,6 +11,7 @@ import {
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
+import { bedHeading, bedVisualOwner, hasVehicleBed } from "../traffic/VehicleBed.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
 import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../wildlife/Roadkill.js";
@@ -94,6 +95,7 @@ export function collectScene(
     (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
   );
   const movingRoofs = entities.filter(hasMovingRoof);
+  const bedSprites = movingRoofs.some(hasVehicleBed) ? new Map<number, SpriteItem>() : undefined;
   const vehicleSurfaces = movingRoofs.flatMap((e) =>
     e.collider
       ? [
@@ -294,6 +296,7 @@ export function collectScene(
       flashHidden: e.flashHidden ?? false,
     } satisfies SpriteItem;
     items.push(spriteItem);
+    bedSprites?.set(e.id, spriteItem);
     if (visibleGrass && isVehicleSprite(e.type)) grassVehicles.push(spriteItem);
 
     const ghost = ghostByEntityId?.get(e.id);
@@ -431,6 +434,22 @@ export function collectScene(
     items.push(p);
   }
 
+  if (bedSprites) {
+    const grouped = new Set<SpriteItem>();
+    for (const actor of entities) {
+      if (actor.type !== "player" && !isCarryable(actor)) continue;
+      const owner = bedVisualOwner(actor, movingRoofs);
+      const body = owner && bedSprites.get(owner.id),
+        content = bedSprites.get(actor.id);
+      if (!body || !content) continue;
+      body.bedGroup ??= { heading: bedHeading(owner), contents: [] };
+      content.hasShadow = false;
+      body.bedGroup.contents.push(content);
+      grouped.add(content);
+    }
+    for (let i = items.length - 1; i >= 0; i--)
+      if (grouped.has(items[i] as SpriteItem)) items.splice(i, 1);
+  }
   // Sort by pre-computed sort key for correct depth ordering
   items.sort((a, b) => a.sortKey - b.sortKey);
 

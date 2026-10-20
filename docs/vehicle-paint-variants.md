@@ -109,8 +109,10 @@ other colors favor practical/common paints while retaining every reviewed option
 The entity baseline carries one optional dictionary byte (presence bit 17), and
 the delta carries a nullable byte at bit 18. Snapshot reuse, replicas and local
 mount prediction retain the choice; null restores the original. The append-only
-wire dictionary is in `VehiclePaint.ts`. Frame tag **0x05** requires matching
-updated client/server builds; pre-paint 0x04 frames are rejected explicitly.
+wire dictionary is in `VehiclePaint.ts`. Frame tag **0x06** requires matching
+updated client/server builds; earlier 0x01/0x04/0x05 frames are rejected explicitly.
+The optional bed-profile bit added in [164](tactical/164-playable-truck-bed.md)
+does not alter the paint byte/dictionary.
 
 `GpuMeshBodies` keeps the existing one mesh asset per model. `VehiclePaintResources`
 loads each requested atlas lazily and publishes it at a frame boundary. Rendering

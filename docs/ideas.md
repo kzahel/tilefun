@@ -12,6 +12,11 @@ copying every item into multiple checklists.
   inside driving, persistent parked cars and tap controls delivered. Follow
   [vehicles](topics/vehicles.md) and [trains](topics/trains.md); visible NPC driver
   exchange and parked-car adoption remain future work.
+- [Vehicle activities and customization](topics/vehicles.md#desired-next-work)
+  (owner request, 2026-10-20): working forklift/pallets, a tipping dump truck with
+  actual cargo and people in its bed, spinning mixer drum, a paint shop for
+  existing cars and co-op passenger seats. The vehicle topic owns the desired
+  behaviors and the moving-container collision/occlusion prototype direction.
 - [Voice agents and child-directed development](topics/voice-agents.md): proposed
   companion NPC and voice-driven builder sessions; the first direction to explore
   is turning a child's request into development, clarification and playable changes.
@@ -119,6 +124,11 @@ choices remain open.
 
 ## Engine, hosting and distribution
 
+- [Live characters and shared 3D scene depth](tactical/160-live-3d-and-shared-depth-investigation.md)
+  (owner direction, 2026-10-20): investigate using more retained meshes at runtime
+  while preserving the pixel-art look. Initial source/export and schematic GPU
+  depth evidence is recorded; real-world composition and character appearance
+  comparison precede selecting a production route.
 - [Terrain heights and stacked spaces](topics/world-geometry.md): 2026-10-04
   requests for tile-based mountain slopes, ramps into underground and above-ground
   parking garages, bridges and tunnels. Explore constrained surfaces/sectors;

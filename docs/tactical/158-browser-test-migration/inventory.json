@@ -5,8 +5,8 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 823,
-      "inventorySha256": "5a50a2e90f3730c6e1a60cac5390f2144f152257efda37b8d6b65d74ff7a9036",
+      "cases": 824,
+      "inventorySha256": "cd4d227212c542626bd7811e204a4a1ad23536f7d431b98b4af97cc1be4315e0",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -537,6 +537,11 @@
           "path": "tests/train-geometry.spec.ts",
           "cases": 3,
           "sourceSha256": "74b9b55e1f5bc2524a78128a6f550be7abcd4091c3eceebb67f7fb8b497aea64"
+        },
+        {
+          "path": "tests/truck-bed.spec.ts",
+          "cases": 1,
+          "sourceSha256": "aaf4634c58911284d7c7c8cdd75eb59d502f505769eefbb789b7cac73d4336e9"
         },
         {
           "path": "tests/underground-garage.spec.ts",

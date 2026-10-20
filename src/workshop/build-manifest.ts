@@ -20,6 +20,7 @@ import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.j
 import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
+import { buildTruckBedCandidate } from "./TruckBedCandidate.js";
 import { buildVehicleBakeCandidates } from "./VehicleBakeCandidates.js";
 import { buildVehicleCandidates } from "./VehicleCandidates.js";
 import { buildVehicleGameFitCandidate } from "./VehicleGameFitCandidate.js";
@@ -71,6 +72,7 @@ try {
     await buildWorldGeometryCandidate("car-bridge"),
     await buildWorldGeometryCandidate("car-garage"),
     await buildWorldGeometryCandidate("train-grades"),
+    await buildTruckBedCandidate(),
     await buildCurvedTrainCandidate(true),
     await buildCurvedTrainCandidate(false),
     await buildCityTrainCandidate(),

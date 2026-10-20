@@ -39,7 +39,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
     super(surface, new Map());
     this.surface = surface;
     this.meshes = new GpuMeshBodies(surface);
-    surface.meshBody = (camera, item) => this.meshes.draw(camera, item);
+    surface.meshBody = (camera, item) => this.meshes.draw(camera, item, this.sheets);
     surface.meshReady = this.meshes.ready;
     const ctx = this.overlay.getContext("2d");
     if (!ctx) throw Error("Overlay surface unavailable");
@@ -94,6 +94,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
       gpu: {
         ...this.surface.stats,
         meshDraws: this.meshes.draws,
+        vehicleBedDraws: this.meshes.bedDraws,
         meshDrawCalls: this.meshes.drawCalls,
         meshState: this.meshes.car.state,
         meshAsset: this.meshes.car.value ? COMPACT_CAR_MESH : null,
@@ -115,12 +116,14 @@ export class GpuRenderBackend extends RasterRenderBackend {
     this.overlayValid = false;
     this.overlayItems.length = 0;
     this.surface.clearResources();
+    this.meshes.contents.clear();
   }
   override clear() {
     super.clear();
     this.overlayValid = false;
     this.overlayItems.length = 0;
     this.surface.clearResources();
+    this.meshes.contents.clear();
   }
   override recover() {
     super.recover();

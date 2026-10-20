@@ -4,9 +4,18 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { isCurveTrain } from "../railway/CurveTrain.js";
+import { isCarryable } from "../wildlife/ForageResources.js";
 import type { World } from "../world/World.js";
 import { roofSupport } from "./RoofSupport.js";
 import { isVehicle } from "./Vehicle.js";
+import {
+  bedLocalPoint,
+  bedWorldPoint,
+  hasVehicleBed,
+  movingSupportZ,
+  vehicleBedBlocks,
+} from "./VehicleBed.js";
+import { bedInteriorOccupant } from "./VehicleCargo.js";
 
 /** Coordinates in the native cardinal roof pose, normalized by its dimensions. */
 export interface RoofOffset {
@@ -19,6 +28,7 @@ function quarter(e: Entity): number {
   return 0;
 }
 export function roofOffset(position: Entity["position"], support: Entity): RoofOffset {
+  if (hasVehicleBed(support)) return bedLocalPoint(support, position);
   const c = required(support.collider),
     angle = (-quarter(support) * Math.PI) / 2;
   const x = (position.wx - support.position.wx - c.offsetX) / (c.width / 2);
@@ -29,6 +39,7 @@ export function roofOffset(position: Entity["position"], support: Entity): RoofO
   };
 }
 export function roofPosition(offset: RoofOffset, support: Entity): Entity["position"] {
+  if (hasVehicleBed(support)) return bedWorldPoint(support, offset.x, offset.y);
   const c = required(support.collider),
     angle = (quarter(support) * Math.PI) / 2;
   return {
@@ -57,18 +68,41 @@ export function planMovingPassengers(
   world: World,
   excludedRiderIds?: ReadonlySet<number>,
 ): { rider: Entity; position: Entity["position"]; z: number }[] | undefined {
+  // Check the actual committed wall motion against airborne contents, without
+  // making them supported passengers or stopping for a distant lookahead proxy.
+  if (hasVehicleBed(before))
+    for (const actor of entities.entities) {
+      if (
+        actor.jumpVZ !== undefined &&
+        actor.collider &&
+        bedInteriorOccupant(before, actor) &&
+        vehicleBedBlocks(
+          after,
+          getEntityAABB(actor.position, actor.collider),
+          actor.wz ?? 0,
+          actor.collider.physicalHeight ?? 12,
+        )
+      )
+        return;
+    }
   const riders = entities.entities.filter(
     (e) =>
-      e.type === "player" &&
+      (e.type === "player" || (hasVehicleBed(before) && isCarryable(e))) &&
+      e.parentId === undefined &&
       !excludedRiderIds?.has(e.id) &&
       roofSupport(e, entities.entities)?.id === before.id,
   );
   const result = [];
   for (const rider of riders) {
     const position = movingPassengerPosition(rider, before, after);
-    const z = (after.wz ?? 0) + (after.collider?.physicalHeight ?? 44);
+    const z = (after.wz ?? 0) + movingSupportZ(before, rider) - (before.wz ?? 0);
     const current = getEntityAABB(rider.position, required(rider.collider));
     const next = getEntityAABB(position, required(rider.collider));
+    if (
+      hasVehicleBed(after) &&
+      vehicleBedBlocks(after, next, z, rider.collider?.physicalHeight ?? 16)
+    )
+      return;
     const swept = {
       left: Math.min(current.left, next.left),
       right: Math.max(current.right, next.right),

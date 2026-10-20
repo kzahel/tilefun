@@ -16,6 +16,7 @@ import {
   encodeClientMessage,
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
+import { bedWorldPoint, DUMP_BED, hasVehicleBed } from "../traffic/VehicleBed.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioCommand } from "./ScenarioProtocol.js";
@@ -307,6 +308,10 @@ export class ScenarioSession {
           fixture.z ?? 0,
           fixture.paintSchemeId,
         ).entity;
+        if (fixture.vehicleBed) {
+          if (fixture.model !== "dump-truck") throw new Error("Unqualified bed model");
+          car.vehicleBed = true;
+        }
         this.handles[fixture.name] = car.id;
         if (car.proceduralId) this.identities[fixture.name] = car.proceduralId;
       }
@@ -415,6 +420,10 @@ export class ScenarioSession {
   }
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
+    if (command.kind === "vehicle-bed-action") {
+      this.realm.vehicles.bed(this.player, command.entityId, command.action);
+      return;
+    }
     const player = this.player.player;
     if (command.kind === "place-entity") {
       if (!Number.isFinite(command.position.wx) || !Number.isFinite(command.position.wy))
@@ -486,6 +495,24 @@ export class ScenarioSession {
       }
       if (command.speed !== undefined) settings.speed = command.speed;
       if (command.gap !== undefined) settings.gap = command.gap;
+      return;
+    }
+    if (command.kind === "vehicle-bed") {
+      const truck = this.realm.entityManager.byId.get(this.handles.truck ?? -1);
+      if (!truck || !hasVehicleBed(truck) || !this.realm.traffic)
+        throw new Error("No qualified truck-bed fixture");
+      if (command.action === "drive" || command.action === "stop") {
+        this.realm.traffic.settings.speed = command.action === "drive" ? 40 : 0;
+        return;
+      }
+      const board = command.action === "board";
+      const position = bedWorldPoint(truck, DUMP_BED.center.x, board ? 0 : 42);
+      position.wy += 3;
+      await this.command({
+        kind: "teleport",
+        position,
+        z: (truck.wz ?? 0) + (board ? DUMP_BED.floorZ : 0),
+      });
       return;
     }
     if (this.realm.vehicles.get(this.player)) this.realm.vehicles.exit(this.player, true);

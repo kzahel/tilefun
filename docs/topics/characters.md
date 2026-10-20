@@ -2,7 +2,17 @@
 
 Topic: characters
 Status: six approved characters promoted to Entities; per-profile player model selection implemented.
-Updated: 2026-10-18.
+Updated: 2026-10-20.
+
+The owner requested investigating live 3D characters on 2026-10-20.
+[160](../tactical/160-live-3d-and-shared-depth-investigation.md) audits actual sources
+and runs an initial shared-depth GPU comparison. The five authored pixel-pattern
+appearances use Blender pose guides but do not each retain a matching standing
+mesh. The upright Tiger has an exportable skeleton; its direct material export
+loses the intended toon colors. Static seated rider prototypes remain separate
+from animated standing-player coverage. Existing approved art/gameplay is unchanged;
+next compare native sprite, shared-depth billboard and one properly prepared live
+mesh under the same fixed camera and presentation clock.
 
 ## Current slice
 

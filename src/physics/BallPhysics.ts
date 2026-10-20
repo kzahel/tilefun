@@ -15,6 +15,8 @@ import { aabbOverlapsSolid, aabbsOverlap, getEntityAABB } from "../entities/coll
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
+import { roofSupport } from "../traffic/RoofSupport.js";
+import { hasVehicleBed, vehicleBedBlocks } from "../traffic/VehicleBed.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
 import { startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
@@ -24,7 +26,11 @@ import { startleRabbit } from "../wildlife/rabbitInteractions.js";
 import { startleRobin } from "../wildlife/robinInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { zRangesOverlap } from "./AABB3D.js";
-import { getSurfaceZ } from "./surfaceHeight.js";
+import {
+  getSurfaceZ,
+  resolveGroundZForLanding,
+  resolveGroundZForTracking,
+} from "./surfaceHeight.js";
 
 const WALL_MASK = CollisionFlag.Solid;
 
@@ -41,6 +47,7 @@ export function tickBallPhysics(
   active: readonly Entity[] = entityManager.entities,
 ): void {
   const toRemove: number[] = [];
+  const beds = entityManager.entities.filter(hasVehicleBed);
 
   for (const ball of active) {
     if (ball.type !== "ball") continue;
@@ -55,12 +62,14 @@ export function tickBallPhysics(
     // ── XY movement with wall bouncing ──
     const dx = ball.velocity.vx * dt;
     const dy = ball.velocity.vy * dt;
+    const bedBlocked = (box: ReturnType<typeof getEntityAABB>) =>
+      beds.some((e) => vehicleBedBlocks(e, box, ball.wz ?? 0, ball.collider?.physicalHeight ?? 4));
 
     if (ball.collider) {
       // Try X
       const testX = { wx: ball.position.wx + dx, wy: ball.position.wy };
       const xBox = getEntityAABB(testX, ball.collider);
-      if (aabbOverlapsSolid(xBox, getCollision, WALL_MASK)) {
+      if (aabbOverlapsSolid(xBox, getCollision, WALL_MASK) || bedBlocked(xBox)) {
         ball.velocity.vx = -ball.velocity.vx * BOUNCE_RESTITUTION;
       } else {
         ball.position.wx = testX.wx;
@@ -69,7 +78,7 @@ export function tickBallPhysics(
       // Try Y
       const testY = { wx: ball.position.wx, wy: ball.position.wy + dy };
       const yBox = getEntityAABB(testY, ball.collider);
-      if (aabbOverlapsSolid(yBox, getCollision, WALL_MASK)) {
+      if (aabbOverlapsSolid(yBox, getCollision, WALL_MASK) || bedBlocked(yBox)) {
         ball.velocity.vy = -ball.velocity.vy * BOUNCE_RESTITUTION;
       } else {
         ball.position.wy = testY.wy;
@@ -96,10 +105,11 @@ export function tickBallPhysics(
 
     // ── Gravity + vertical bounce ──
     if (ball.jumpVZ !== undefined && ball.wz !== undefined) {
+      const previousZ = ball.wz;
       ball.jumpVZ -= BALL_GRAVITY * dt;
       ball.wz += ball.jumpVZ * dt;
 
-      const groundZ = getSurfaceZ(ball.position.wx, ball.position.wy, getHeight);
+      const groundZ = resolveGroundZForLanding(ball, getHeight, [], beds, previousZ);
       ball.groundZ = groundZ;
 
       if (ball.wz <= groundZ) {
@@ -119,7 +129,8 @@ export function tickBallPhysics(
           if (hSpeed < 5) {
             ball.velocity.vx = 0;
             ball.velocity.vy = 0;
-            if (!ball.workItem?.owner) ball.deathTimer = BALL_DESPAWN_TIME;
+            if (!ball.workItem?.owner && !roofSupport(ball, beds))
+              ball.deathTimer = BALL_DESPAWN_TIME;
           }
         } else {
           // Bounce
@@ -134,10 +145,16 @@ export function tickBallPhysics(
       }
     } else {
       // Ball is on the ground — snap to terrain height and apply rolling friction
-      const groundZ = getSurfaceZ(ball.position.wx, ball.position.wy, getHeight);
+      const groundZ = resolveGroundZForTracking(ball, getHeight, [], beds);
+      const onBed = groundZ > getSurfaceZ(ball.position.wx, ball.position.wy, getHeight) + 0.1;
       ball.groundZ = groundZ;
-      if (ball.wz !== undefined) ball.wz = groundZ;
-      Reflect.set(ball, "jumpZ", undefined);
+      if ((ball.wz ?? 0) > groundZ + 0.1) {
+        ball.jumpVZ = 0;
+        ball.jumpZ = (ball.wz ?? 0) - groundZ;
+      } else {
+        ball.wz = groundZ;
+        Reflect.set(ball, "jumpZ", undefined);
+      }
       ball.velocity.vx *= 1 - 3 * dt;
       ball.velocity.vy *= 1 - 3 * dt;
       const hSpeed = Math.sqrt(
@@ -146,9 +163,10 @@ export function tickBallPhysics(
       if (hSpeed < 3 && ball.deathTimer === undefined) {
         ball.velocity.vx = 0;
         ball.velocity.vy = 0;
-        if (!ball.workItem?.owner) ball.deathTimer = BALL_DESPAWN_TIME;
+        if (!ball.workItem?.owner && !onBed) ball.deathTimer = BALL_DESPAWN_TIME;
       }
     }
+    if (roofSupport(ball, beds)) delete ball.deathTimer;
 
     // ── Entity collision: bounce off and push entities ──
     if (ball.collider) {
@@ -177,6 +195,8 @@ export function tickBallPhysics(
       }
 
       for (const other of nearby) {
+        // Hollow tub contacts were resolved per axis; never bounce off its broad body.
+        if (hasVehicleBed(other)) continue;
         // A fetching dog deliberately reaches for its settled target. A moving
         // projectile still uses the ordinary hit/startle response.
         if (

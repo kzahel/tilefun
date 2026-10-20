@@ -1,0 +1,76 @@
+{
+  "schema": "tilefun-shared-depth-comparison-v1",
+  "browser": "153.0.8010.12",
+  "scope": "Schematic GPU-only fixture using production projection and unchanged Explorer sprite; not production integration, collision, fallback or performance qualification",
+  "sourceHashes": {
+    "scripts/instrumentation/live-3d-comparison-entry.mjs": "8e0b4a3f468b70503b9c266c0ea9437e498d88ce4457ef6d72b2713c6dc1fa20",
+    "scripts/instrumentation/live-3d-comparison.mjs": "574a09ecddeac03370da782bf4eee3723d896291caf74b1f99e65b1f2f18d6d2",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae"
+  },
+  "trialGlbSha256": "92210a467ff4def27dbb68c2f982030d66ad0255b950f9aceeaeb06a8ff00b5f",
+  "errors": [],
+  "results": [
+    {
+      "heading": 0,
+      "tilt": 0,
+      "hiddenActorPixels": 33,
+      "visibleActorPixels": 168,
+      "rayOracleMismatches": 0,
+      "ambiguous": 0,
+      "failures": [],
+      "isolatedVersusSharedPixels": 33,
+      "localVersusWorldPixels": 0
+    },
+    {
+      "heading": 45,
+      "tilt": 0,
+      "hiddenActorPixels": 5,
+      "visibleActorPixels": 196,
+      "rayOracleMismatches": 0,
+      "ambiguous": 0,
+      "failures": [],
+      "isolatedVersusSharedPixels": 5,
+      "localVersusWorldPixels": 0
+    },
+    {
+      "heading": 0,
+      "tilt": 25,
+      "hiddenActorPixels": 180,
+      "visibleActorPixels": 21,
+      "rayOracleMismatches": 0,
+      "ambiguous": 0,
+      "failures": [],
+      "isolatedVersusSharedPixels": 180,
+      "localVersusWorldPixels": 0
+    },
+    {
+      "heading": 45,
+      "tilt": 25,
+      "hiddenActorPixels": 146,
+      "visibleActorPixels": 55,
+      "rayOracleMismatches": 0,
+      "ambiguous": 0,
+      "failures": [],
+      "isolatedVersusSharedPixels": 146,
+      "localVersusWorldPixels": 0
+    }
+  ],
+  "animatedRawExport": {
+    "animations": 1,
+    "samples": [
+      {
+        "time": 0,
+        "drawCalls": 48,
+        "triangles": 13886,
+        "changedChannels": 0
+      },
+      {
+        "time": 0.375,
+        "drawCalls": 48,
+        "triangles": 13886,
+        "changedChannels": 393
+      }
+    ]
+  }
+}

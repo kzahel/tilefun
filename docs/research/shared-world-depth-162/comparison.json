@@ -1,0 +1,366 @@
+{
+  "schema": "tilefun-shared-world-depth-v1",
+  "fixtureSource": "ScenarioSession -> binary -> RemoteStateView -> collectScene",
+  "worker": false,
+  "viewport": {
+    "width": 256,
+    "height": 224,
+    "centerX": 20,
+    "centerY": -16
+  },
+  "vehicleMaterials": {
+    "dump-truck": ["OPAQUE"],
+    "pickup": ["OPAQUE"]
+  },
+  "hashes": {
+    "scripts/instrumentation/shared-world-depth-fixture.ts": "f23e425b40832ad876824e409e4b2e95e9d86601fd2879ff79b294f9a236e938",
+    "scripts/instrumentation/shared-world-depth-entry.mjs": "b73698de1f22eda728f3cb48ed725a98f84d5502947d0bc46b045dde56c9d6b5",
+    "scripts/instrumentation/shared-world-depth.mjs": "7898869356e91bfc1b2c83510448a74c1148c29f8acdc2920f6accd970521369",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarMeshAsset.ts": "27a6791277d89e50819ec67a5a0de381ea94e414fa10a32dcb36980dfbac389e",
+    "src/rendering/collectScene.ts": "e0e7532ce8cf7a2ff6e9d30333f8b5f42a4b09ee16725a82cebdd5cb0b74c690",
+    "public/assets/models/vehicles/dump-truck-v1.glb": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+    "public/assets/models/vehicles/pickup-v1.glb": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/pixel-characters/cat-32.png": "3419d15cdc76b7bac85001a793f3f6a1fa2243910b1ce2d552de7c9a1ae58b99"
+  },
+  "results": [
+    {
+      "id": "between-vehicles",
+      "name": "Between two parked vehicles",
+      "playerZ": 0,
+      "oracle": {
+        "checked": 311,
+        "mismatches": 0,
+        "ambiguous": 0,
+        "wrong": []
+      },
+      "order": ["dump-truck", "back-wall", "side-wall", "person", "cat", "pickup"],
+      "labels": [
+        {
+          "key": "dump-truck",
+          "label": 16711680
+        },
+        {
+          "key": "back-wall",
+          "label": 65280
+        },
+        {
+          "key": "side-wall",
+          "label": 255
+        },
+        {
+          "key": "person",
+          "label": 16776960
+        },
+        {
+          "key": "cat",
+          "label": 16711935
+        },
+        {
+          "key": "pickup",
+          "label": 65535
+        }
+      ],
+      "submissions": {
+        "local": {
+          "drawCalls": 22,
+          "triangles": 6744
+        },
+        "world": {
+          "drawCalls": 16,
+          "triangles": 6732
+        }
+      },
+      "differentPixels": 0,
+      "vehicleOverlap": 177,
+      "bestWholeGroupError": 0,
+      "bestWholeGroupOrder": ["dump-truck", "back-wall", "side-wall", "person", "cat", "pickup"],
+      "permutations": 720,
+      "twoWayConstraints": []
+    },
+    {
+      "id": "truck-ground",
+      "name": "Behind the actual dump truck",
+      "playerZ": 0,
+      "oracle": {
+        "checked": 378,
+        "mismatches": 0,
+        "ambiguous": 0,
+        "wrong": []
+      },
+      "order": ["person", "dump-truck", "back-wall", "side-wall", "cat", "pickup"],
+      "labels": [
+        {
+          "key": "person",
+          "label": 16776960
+        },
+        {
+          "key": "dump-truck",
+          "label": 16711680
+        },
+        {
+          "key": "back-wall",
+          "label": 65280
+        },
+        {
+          "key": "side-wall",
+          "label": 255
+        },
+        {
+          "key": "cat",
+          "label": 16711935
+        },
+        {
+          "key": "pickup",
+          "label": 65535
+        }
+      ],
+      "submissions": {
+        "local": {
+          "drawCalls": 22,
+          "triangles": 6744
+        },
+        "world": {
+          "drawCalls": 16,
+          "triangles": 6732
+        }
+      },
+      "differentPixels": 0,
+      "vehicleOverlap": 177,
+      "bestWholeGroupError": 0,
+      "bestWholeGroupOrder": ["person", "dump-truck", "back-wall", "side-wall", "cat", "pickup"],
+      "permutations": 720,
+      "twoWayConstraints": []
+    },
+    {
+      "id": "truck-jump",
+      "name": "Jumping behind the actual dump truck",
+      "playerZ": 57.31669235229492,
+      "oracle": {
+        "checked": 177,
+        "mismatches": 0,
+        "ambiguous": 0,
+        "wrong": []
+      },
+      "order": ["dump-truck", "back-wall", "side-wall", "person", "cat", "pickup"],
+      "labels": [
+        {
+          "key": "dump-truck",
+          "label": 16711680
+        },
+        {
+          "key": "back-wall",
+          "label": 65280
+        },
+        {
+          "key": "side-wall",
+          "label": 255
+        },
+        {
+          "key": "person",
+          "label": 16776960
+        },
+        {
+          "key": "cat",
+          "label": 16711935
+        },
+        {
+          "key": "pickup",
+          "label": 65535
+        }
+      ],
+      "submissions": {
+        "local": {
+          "drawCalls": 22,
+          "triangles": 6744
+        },
+        "world": {
+          "drawCalls": 16,
+          "triangles": 6732
+        }
+      },
+      "differentPixels": 0,
+      "vehicleOverlap": 177,
+      "bestWholeGroupError": 0,
+      "bestWholeGroupOrder": ["dump-truck", "back-wall", "side-wall", "person", "cat", "pickup"],
+      "permutations": 720,
+      "twoWayConstraints": []
+    },
+    {
+      "id": "wall-corner",
+      "name": "Outside person inside the wall corner",
+      "playerZ": 0,
+      "oracle": {
+        "checked": 296,
+        "mismatches": 0,
+        "ambiguous": 0,
+        "wrong": []
+      },
+      "order": ["dump-truck", "back-wall", "person", "side-wall", "cat", "pickup"],
+      "labels": [
+        {
+          "key": "dump-truck",
+          "label": 16711680
+        },
+        {
+          "key": "back-wall",
+          "label": 65280
+        },
+        {
+          "key": "person",
+          "label": 16776960
+        },
+        {
+          "key": "side-wall",
+          "label": 255
+        },
+        {
+          "key": "cat",
+          "label": 16711935
+        },
+        {
+          "key": "pickup",
+          "label": 65535
+        }
+      ],
+      "submissions": {
+        "local": {
+          "drawCalls": 22,
+          "triangles": 6744
+        },
+        "world": {
+          "drawCalls": 16,
+          "triangles": 6732
+        }
+      },
+      "differentPixels": 7,
+      "vehicleOverlap": 177,
+      "bestWholeGroupError": 3,
+      "bestWholeGroupOrder": ["dump-truck", "back-wall", "side-wall", "person", "cat", "pickup"],
+      "permutations": 720,
+      "twoWayConstraints": [
+        {
+          "a": "person",
+          "b": "side-wall",
+          "aInFront": 7,
+          "bInFront": 3
+        }
+      ]
+    },
+    {
+      "id": "wall-jump",
+      "name": "Jumping above the wall corner",
+      "playerZ": 57.31669235229492,
+      "oracle": {
+        "checked": 177,
+        "mismatches": 0,
+        "ambiguous": 0,
+        "wrong": []
+      },
+      "order": ["dump-truck", "back-wall", "side-wall", "cat", "pickup", "person"],
+      "labels": [
+        {
+          "key": "dump-truck",
+          "label": 16711680
+        },
+        {
+          "key": "back-wall",
+          "label": 65280
+        },
+        {
+          "key": "side-wall",
+          "label": 255
+        },
+        {
+          "key": "cat",
+          "label": 16711935
+        },
+        {
+          "key": "pickup",
+          "label": 65535
+        },
+        {
+          "key": "person",
+          "label": 16776960
+        }
+      ],
+      "submissions": {
+        "local": {
+          "drawCalls": 22,
+          "triangles": 6744
+        },
+        "world": {
+          "drawCalls": 16,
+          "triangles": 6732
+        }
+      },
+      "differentPixels": 0,
+      "vehicleOverlap": 177,
+      "bestWholeGroupError": 0,
+      "bestWholeGroupOrder": ["dump-truck", "back-wall", "side-wall", "cat", "pickup", "person"],
+      "permutations": 720,
+      "twoWayConstraints": []
+    },
+    {
+      "id": "wall-front",
+      "name": "Outside person in front of the wall",
+      "playerZ": 0,
+      "oracle": {
+        "checked": 178,
+        "mismatches": 0,
+        "ambiguous": 0,
+        "wrong": []
+      },
+      "order": ["dump-truck", "back-wall", "side-wall", "cat", "person", "pickup"],
+      "labels": [
+        {
+          "key": "dump-truck",
+          "label": 16711680
+        },
+        {
+          "key": "back-wall",
+          "label": 65280
+        },
+        {
+          "key": "side-wall",
+          "label": 255
+        },
+        {
+          "key": "cat",
+          "label": 16711935
+        },
+        {
+          "key": "person",
+          "label": 16776960
+        },
+        {
+          "key": "pickup",
+          "label": 65535
+        }
+      ],
+      "submissions": {
+        "local": {
+          "drawCalls": 22,
+          "triangles": 6744
+        },
+        "world": {
+          "drawCalls": 16,
+          "triangles": 6732
+        }
+      },
+      "differentPixels": 0,
+      "vehicleOverlap": 177,
+      "bestWholeGroupError": 0,
+      "bestWholeGroupOrder": ["dump-truck", "back-wall", "side-wall", "cat", "person", "pickup"],
+      "permutations": 720,
+      "twoWayConstraints": []
+    }
+  ],
+  "limits": [
+    "Standalone GPU harness using authority snapshots, not a Worker or RenderHost integration",
+    "Unchanged character billboards provide planar artwork depth, not anatomical geometry",
+    "Same end-of-scene outline on both modes; visibility measured before outlines",
+    "Flat background has no terrain depth; both vehicle GLBs verified OPAQUE"
+  ]
+}

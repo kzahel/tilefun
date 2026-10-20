@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import type { Spritesheet } from "../assets/Spritesheet.js";
 import { vehiclePaint } from "../traffic/VehiclePaint.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
@@ -7,6 +8,7 @@ import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
+import { GpuVehicleContents } from "./GpuVehicleContents.js";
 import {
   AMBULANCE_MESH,
   COMPACT_CAR_MESH,
@@ -18,9 +20,10 @@ import { ResourceSlot } from "./ResourceSlot.js";
 import type { SpriteItem } from "./SceneItem.js";
 import { VehiclePaintResources } from "./VehiclePaintResources.js";
 
-/** One render target reused synchronously; only this body's triangles share depth. */
+/** One target reused synchronously; a body and its opt-in sprite contents share depth. */
 export class GpuMeshBodies {
   readonly paints = new VehiclePaintResources();
+  readonly contents = new GpuVehicleContents();
   readonly car = new ResourceSlot<CarMeshAsset>();
   readonly ambulance = new ResourceSlot<CarMeshAsset>();
   readonly fireTruck = new ResourceSlot<CarMeshAsset>();
@@ -37,6 +40,7 @@ export class GpuMeshBodies {
   private readonly clearColor = new THREE.Color();
   private enabled = false;
   draws = 0;
+  bedDraws = 0;
   drawCalls = 0;
   paintDraws = 0;
   paintFallbacks = 0;
@@ -92,7 +96,11 @@ export class GpuMeshBodies {
     if (this.enabled)
       for (const [assetId, slot] of this.slots) if (slot.state === "ready") this.ready.add(assetId);
   }
-  draw(camera: Camera, item: SpriteItem): boolean {
+  draw(
+    camera: Camera,
+    item: SpriteItem,
+    sheets: ReadonlyMap<string, Spritesheet> = new Map(),
+  ): boolean {
     const asset = item.mesh ? this.request(item.mesh.assetId)?.value : undefined;
     if (resolveBody(item.mesh, this.ready) !== "mesh" || !item.mesh || !asset) return false;
     const definition = authoredVehicleForAsset(item.mesh.assetId);
@@ -102,10 +110,21 @@ export class GpuMeshBodies {
       this.paintFallbacks++;
       return false; // Complete matching sprite while pending/failed.
     }
+    if (item.bedGroup && !this.contents.prepare(item, sheets)) return false;
     const { surface } = this,
       renderer = surface.renderer;
     surface.flush();
-    const radius = item.mesh.radius;
+    let radius = item.mesh.radius;
+    for (const content of item.bedGroup?.contents ?? []) {
+      const bottom = content.wy - item.wy - content.zOffset + item.zOffset + content.drawOffsetY;
+      radius = Math.max(
+        radius,
+        Math.abs(content.wx - item.wx) + content.spriteWidth / 2,
+        Math.abs(bottom),
+        Math.abs(bottom - content.spriteHeight * (content.scaleY ?? 1)),
+      );
+    }
+    radius = Math.ceil(radius);
     const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2)));
     if (this.target.width !== resolution || this.target.height !== resolution)
       this.target.setSize(resolution, resolution);
@@ -114,6 +133,7 @@ export class GpuMeshBodies {
     asset.setTravel(item.mesh.wheelTravel ?? 0);
     asset.setEmergency(item.mesh.emergencyEnabled ?? false, item.mesh.presentationTime ?? 0);
     this.scene.add(object);
+    if (item.bedGroup) this.scene.add(this.contents.group);
     setCarMeshProjection(this.camera.projectionMatrix, radius);
     this.camera.projectionMatrixInverse.copy(this.camera.projectionMatrix).invert();
     renderer.getClearColor(this.clearColor);
@@ -135,6 +155,7 @@ export class GpuMeshBodies {
       renderer.setRenderTarget(previous);
       renderer.setClearColor(this.clearColor, alpha);
       this.scene.remove(object);
+      this.scene.remove(this.contents.group);
     }
     const anchor = projectWorld(camera, item.wx, item.wy, item.zOffset);
     surface.save();
@@ -149,6 +170,7 @@ export class GpuMeshBodies {
     surface.flush();
     surface.restore();
     this.draws++;
+    if (item.bedGroup) this.bedDraws++;
     if (paintTexture) this.paintDraws++;
     return true;
   }
@@ -158,6 +180,7 @@ export class GpuMeshBodies {
   }
   dispose() {
     this.paints.dispose();
+    this.contents.clear();
     this.ready.clear();
     for (const slot of this.slots.values()) slot.dispose();
     this.outline.dispose();

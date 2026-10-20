@@ -8,6 +8,7 @@ import { createCurveTrain } from "../railway/CurveTrain.js";
 import { RailAlignment } from "../railway/RailPath.js";
 import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import { createVehicle, VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { DUMP_BED, hasVehicleBed } from "../traffic/VehicleBed.js";
 import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
@@ -17,14 +18,14 @@ const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoad
 const terrain = { collectElevationItems: () => [] };
 
 it.each(VEHICLE_MODELS)(
-  "attaches a roof passenger to %s fitted mesh without changing physics or fallback height",
+  "attaches a supported passenger to %s fitted mesh without changing physics or fallback height",
   (model) => {
     const car = createVehicle(model, 200, 150);
     car.id = 1;
     car.wz = 16;
     const player = createPlayer(200, 150);
     player.id = 2;
-    player.wz = 16 + (car.collider?.physicalHeight ?? 0);
+    player.wz = 16 + (hasVehicleBed(car) ? DUMP_BED.floorZ : (car.collider?.physicalHeight ?? 0));
     const before = structuredClone(player);
     const camera = new Camera();
     camera.setViewport(600, 400);
@@ -43,7 +44,11 @@ it.each(VEHICLE_MODELS)(
       undefined,
       new SceneFrame(),
     );
-    const rider = items.find(
+    const body = items.find(
+      (item) => item.kind === "sprite" && item.sheetKey === car.sprite?.sheetKey,
+    );
+    const candidates = body?.kind === "sprite" && body.bedGroup ? body.bedGroup.contents : items;
+    const rider = candidates.find(
       (item) => item.kind === "sprite" && item.sheetKey === player.sprite?.sheetKey,
     );
     if (rider?.kind !== "sprite") throw Error("Missing rider");
