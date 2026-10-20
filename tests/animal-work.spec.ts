@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import type { GameClient } from "../src/client/GameClient.js";
+import { Direction } from "../src/entities/Entity.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 
 test.use({ channel: "chromium" });
@@ -118,10 +119,48 @@ for (const renderer of ["canvas", "gpu"]) {
             }
           : undefined;
       });
+    const expectMovingFacing = async () => {
+      await expect
+        .poll(
+          async () => {
+            const pose = await page.evaluate(() => {
+              const g = (document.querySelector("#game") as unknown as { __game: GameClient })
+                .__game;
+              const dog = g.stateView.entities.find(
+                (e) => e.type === "wildlife-dog-provisional-v1",
+              );
+              return {
+                vx: dog?.velocity?.vx ?? 0,
+                vy: dog?.velocity?.vy ?? 0,
+                direction: dog?.sprite?.direction,
+                row: dog?.sprite?.frameRow,
+                clip: dog?.sprite?.clip,
+              };
+            });
+            if (Math.hypot(pose.vx, pose.vy) < 1) return false;
+            const heading =
+              Math.abs(pose.vx) > Math.abs(pose.vy)
+                ? pose.vx < 0
+                  ? Direction.Left
+                  : Direction.Right
+                : pose.vy < 0
+                  ? Direction.Up
+                  : Direction.Down;
+            expect(pose.direction).toBe(heading);
+            expect(pose.row).toBe(heading);
+            expect(pose.clip).toBe(1);
+            return true;
+          },
+          { timeout: 45_000, intervals: [50] },
+        )
+        .toBe(true);
+    };
+    await expectMovingFacing();
     await expect
       .poll(async () => (await ball())?.parent ?? -1, { timeout: 45_000, intervals: [50] })
       .toBeGreaterThan(0);
     const id = (await ball())?.id;
+    await expectMovingFacing();
     await expect
       .poll(
         async () => {

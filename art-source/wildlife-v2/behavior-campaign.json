@@ -7617,6 +7617,16 @@
       "date": "2026-10-20",
       "tactical": "docs/tactical/155-fetch-nests-and-caches.md",
       "status": "Rebased onto 00a47116, preserving the vehicle paint study. Combined type/lint/build, 325 focused unit tests, six animal/car-control browser cases and streaming readiness pass. Inventories regenerated; exact source receipts and prior candidate preservation verified."
+    },
+    {
+      "date": "2026-10-20",
+      "tactical": "docs/tactical/155-fetch-nests-and-caches.md",
+      "status": "Owner-reported task-heading defect reproduced for dog/crow/squirrel and fixed by applying the shared Fauna pose update at each accepted movement leg. Three new regressions fail before/pass after; all 14 animal-work tests pass, including replication and return-trip reload. Full/browser verification running; no retained art changed."
+    },
+    {
+      "date": "2026-10-20",
+      "tactical": "docs/tactical/155-fetch-nests-and-caches.md",
+      "status": "Task-facing follow-up verified: 14 animal-work tests, nine existing browser cases and two explicit client-facing checks pass in Canvas/GPU; type/lint/build/streaming pass. Full units 6051 pass, five known Windows failures, ten skips. All 109 source/review hashes and 1840 review identities unchanged."
     }
   ]
 }

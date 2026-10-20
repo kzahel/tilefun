@@ -2,6 +2,7 @@ import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { createBall } from "../entities/Ball.js";
 import type { Entity } from "../entities/Entity.js";
+import { directionFromVelocity } from "../entities/wanderAI.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { animalWorkRecipe } from "../scenarios/AnimalWorkRecipe.js";
@@ -10,6 +11,49 @@ import { decodeServerMessage } from "../shared/binaryCodec.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createFauna } from "./Fauna.js";
 import { freshBallWork } from "./ForageResources.js";
+
+it.each(["dog", "crow", "squirrel"] as const)(
+  "%s faces each actual work target and switches to locomotion before travelling",
+  async (kind) => {
+    const s = await ScenarioSession.create(animalWorkRecipe(kind));
+    try {
+      let animal = actor(s, kind === "squirrel" ? "red-squirrel" : kind);
+      if (kind === "dog") addFetchBall(s);
+      const headings = new Set<number>();
+      let reloaded = false;
+      for (let i = 0; i < 90 * 30 && !animal.animalWork?.deliveries; i++) {
+        await s.step(idle, 1 / 30);
+        if (!animal.fauna?.motion) continue;
+        const dx = animal.fauna.target.wx - animal.position.wx;
+        const dy = animal.fauna.target.wy - animal.position.wy;
+        if (Math.hypot(dx, dy) <= 1) continue;
+        const expected = directionFromVelocity(dx, dy);
+        expect(animal.sprite?.direction).toBe(expected);
+        expect(animal.sprite?.frameRow).toBe(expected);
+        expect(animal.sprite?.moving).toBe(true);
+        expect(animal.sprite?.clip).toBe(1);
+        const replicated = deserializeEntity(serializeEntity(animal));
+        expect(replicated.sprite?.direction).toBe(expected);
+        expect(replicated.sprite?.frameRow).toBe(expected);
+        headings.add(expected);
+        if (animal.animalWork?.heldId && !reloaded) {
+          await s.reload();
+          animal = actor(s, kind === "squirrel" ? "red-squirrel" : kind);
+          expect(animal.sprite?.direction).toBe(expected);
+          expect(animal.sprite?.frameRow).toBe(expected);
+          expect(animal.sprite?.clip).toBe(1);
+          reloaded = true;
+        }
+      }
+      expect(animal.animalWork?.deliveries).toBe(1);
+      expect(headings.size).toBeGreaterThanOrEqual(2);
+      expect(reloaded).toBe(true);
+    } finally {
+      await s.close();
+    }
+  },
+  60000,
+);
 
 it("drops an existing nest when its supporting tree is deleted and does not invent materials", async () => {
   const s = await ScenarioSession.create(animalWorkRecipe("crow"));

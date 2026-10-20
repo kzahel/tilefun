@@ -156,3 +156,8 @@ deletion interrupt tasks safely. New `behavior-v1` banks retain native Blender
 sources, projected mouth/paw sockets, independent audits and replay evidence.
 The separate native-pixel material bank supplies five nest and two cache stages.
 All four art identities remain pending human review.
+
+Every admitted task movement leg applies the shared Fauna pose update immediately:
+facing, sprite row and locomotion clip follow the new target, including return
+trips. The same pose crosses replication and mid-carry reload. The heading fix
+changes simulation pose selection and leaves the retained art banks untouched.

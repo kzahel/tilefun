@@ -7,7 +7,7 @@ import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import { carrySocket } from "./BehaviorArt.js";
 import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
-import { settleFauna } from "./faunaInteractions.js";
+import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 
 const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
@@ -182,6 +182,7 @@ export class AnimalWorkSystem {
       ...(p.hop ? { startZ, endZ: z, ...(flight ? { lift: 24 } : {}) } : {}),
     };
     if (animal.wanderAI) animal.wanderAI.state = "walking";
+    restoreFaunaPose(animal);
     return true;
   }
   private hold(animal: Entity, item: Entity): boolean {

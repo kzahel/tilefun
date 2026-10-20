@@ -128,3 +128,25 @@ against the combined source. Typecheck, lint and 325 focused animal/scenario,
 binary protocol, input and driving/contact tests pass; normal retina Chromium
 again verifies 1,840 candidates. Final combined browser/streaming results are
 recorded in the validation summary.
+
+## Target-facing correction (2026-10-20)
+
+Owner observed animals travelling toward task targets without turning to face
+them. `AnimalWorkSystem.go` committed target/motion state but omitted the shared
+`restoreFaunaPose` call used by ordinary roaming. It now applies that same update
+when starting each accepted leg, synchronizing facing, directional sprite row,
+moving state and locomotion phase before the first movement frame. Return trips
+also replace the preceding pickup/action clip with locomotion. Existing shared
+attachment synchronization uses the newly selected mouth/paw socket.
+
+Three production Realm regressions failed before the correction and pass after
+it. All 14 animal-work tests pass, including heading checks throughout approach
+and return, replicated pose and mid-carry reload for dog, crow and squirrel.
+Retained animal/resource art and source receipts are unchanged.
+
+Verification: 6,051 full-unit passes, five known Windows symlink/SIGKILL failures
+and ten skips. All nine existing browser cases pass; two additional runs explicitly
+check the displayed client heading and locomotion on approach/return in Canvas2D
+and GPU. Typecheck, lint, build and streaming readiness pass. All 109 retained
+source/review hashes and all 1,840 existing candidate identities remain exact;
+only inventory source references/input digest are refreshed.

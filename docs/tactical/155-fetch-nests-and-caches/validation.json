@@ -85,5 +85,29 @@
     "browser": "pass",
     "browserCases": 6,
     "streamingReadiness": "pass"
+  },
+  "headingCorrection": {
+    "date": "2026-10-20",
+    "base": "77363d76",
+    "before": "Three task-facing regressions fail for dog/crow/squirrel",
+    "after": {
+      "animalWorkTests": 14,
+      "existingBrowserCases": 9,
+      "explicitClientHeadingCases": 2,
+      "renderers": ["Canvas2D", "GPU"],
+      "typecheck": "pass",
+      "lint": "pass; existing warnings only",
+      "build": "pass",
+      "streamingReadiness": "pass",
+      "retainedSourceReviewHashesUnchanged": 109,
+      "reviewIdentitiesUnchanged": 1840
+    },
+    "fullUnits": {
+      "passed": 6051,
+      "failed": 5,
+      "skipped": 10,
+      "durationSeconds": 634.05,
+      "failures": "Known Windows FsSecurity/privateDataPlugin symlink EPERM and SqliteRecordStore SIGKILL expectations only"
+    }
   }
 }
