@@ -1021,6 +1021,23 @@ export class Realm {
           entity: session.player,
         }));
         const wildlifeEnvironment: WildlifeEnvironment = {
+          huntCandidates: (hunter, radius) =>
+            this.entityManager.spatialHash
+              .queryRange(
+                Math.floor((hunter.position.wx - radius) / 256),
+                Math.floor((hunter.position.wy - radius) / 256),
+                Math.floor((hunter.position.wx + radius) / 256),
+                Math.floor((hunter.position.wy + radius) / 256),
+              )
+              .filter(
+                (e) =>
+                  entityTickDts.has(e) &&
+                  !e.workItem &&
+                  Math.hypot(
+                    e.position.wx - hunter.position.wx,
+                    e.position.wy - hunter.position.wy,
+                  ) <= radius,
+              ),
           animalWork: (animal, elapsed, planning) =>
             this.animalWork.update(
               animal,

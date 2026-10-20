@@ -102,6 +102,7 @@
         "public/demos/vehicle-riders/**/*.json",
         "src/wildlife/reviews.json",
         "src/wildlife/behavior-art.json",
+        "src/wildlife/meadow-art.json",
         "src/traffic/vehicle-paints-v1.json"
       ],
       "files": {

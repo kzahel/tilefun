@@ -15,11 +15,33 @@ import { createPredator, PREDATOR_PROFILES } from "../wildlife/Predator.js";
 import { createRabbit } from "../wildlife/Rabbit.js";
 import { animalWorkRecipe } from "./AnimalWorkRecipe.js";
 import { cityTrainRecipe } from "./CityTrainRecipe.js";
+import { meadowWorkRecipe } from "./MeadowWorkRecipe.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  {
+    id: "behavior-rabbit",
+    name: "Rabbit · nibble plants and check for danger",
+    seed: 1,
+    x: 8,
+    y: 11,
+  },
+  {
+    id: "behavior-robin",
+    name: "Robin · descend, feed and return to a tree",
+    seed: 1,
+    x: 8,
+    y: 11,
+  },
+  {
+    id: "behavior-meerkat",
+    name: "Meerkats · rotating lookouts and group alarms",
+    seed: 1,
+    x: 8,
+    y: 11,
+  },
   { id: "behavior-dog", name: "Dog · fetch a thrown ball", seed: 1, x: 8, y: 9 },
   { id: "behavior-crow", name: "Crow · carry twigs and build a nest", seed: 1, x: 8, y: 9 },
   {
@@ -83,6 +105,8 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  if (id === "behavior-rabbit" || id === "behavior-robin" || id === "behavior-meerkat")
+    return meadowWorkRecipe(id.slice("behavior-".length) as "rabbit" | "robin" | "meerkat");
   if (id === "behavior-dog" || id === "behavior-crow" || id === "behavior-squirrel")
     return animalWorkRecipe(id.slice("behavior-".length) as "dog" | "crow" | "squirrel");
   if (id === "lake" && !at) {

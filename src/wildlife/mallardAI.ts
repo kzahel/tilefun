@@ -8,6 +8,8 @@ import { settleMallard } from "./mallardInteractions.js";
 export type WildlifeBody = Pick<Entity, "collider" | "wz">;
 
 export interface WildlifeEnvironment {
+  /** Ready local actors, excluding inert materials; acquisition still has its normal quota. */
+  huntCandidates?(hunter: Entity, radius: number): readonly Entity[];
   animalWork?(animal: Entity, dt: number, planning?: AiPlanningScheduler): boolean;
   ensurePredatorDen?(animal: Entity): void;
   predatorPerches?(

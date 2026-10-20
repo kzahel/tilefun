@@ -32,6 +32,7 @@ export function updateRabbitAI(
   if (ai.state === "hop") return;
   const nearby = players.find((p) => distance(p, rabbit.position) < 26);
   if (nearby && ai.state !== "recover") startleRabbit(rabbit, nearby);
+  if (environment.animalWork?.(rabbit, dt, planning)) return;
   const chooseHop = (escaping: boolean) => {
     const from = ai.alarmFrom ?? rabbit.position;
     const away =

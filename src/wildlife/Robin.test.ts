@@ -153,7 +153,7 @@ it("uses unchanged native robin cells and hop/flap/song ranges", () => {
   for (const clip of ROBIN_CLIPS) {
     expect(metadata.clips[clip.name].start).toBe(clip.start);
     expect(metadata.clips[clip.name].count).toBe(clip.count);
-    expect(clip.frameDuration).toBe(metadata.frameDurationMs);
+    expect(clip.frameDuration).toBe(metadata.clips[clip.name].frameDuration);
   }
 });
 
@@ -354,7 +354,7 @@ it("runs hops, flights, crown rests and songs in production Realm and saves dura
         ).toBe(0);
       }
     }
-    expect([...clips].sort()).toEqual([0, 1, 2, 3]);
+    expect([...clips]).toEqual(expect.arrayContaining([0, 1, 2, 3]));
     expect(perched).toBe(true);
     const removed = required(birds()[0]),
       retained = required(birds()[1]);

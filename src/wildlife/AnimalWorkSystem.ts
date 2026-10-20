@@ -8,6 +8,7 @@ import { carrySocket } from "./BehaviorArt.js";
 import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
+import { isMeadowWorker, MeadowWork } from "./MeadowWork.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 
 const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
@@ -36,7 +37,9 @@ const carrying = (e: Entity) => !!e.animalWork?.heldId;
 
 /** Shared production authority; all durable state lives on ordinary saved actors. */
 export class AnimalWorkSystem {
+  private readonly meadow: MeadowWork;
   constructor(private readonly manager: EntityManager) {
+    this.meadow = new MeadowWork(manager);
     manager.removalListeners.add((removed, destroyed) => {
       if (!destroyed) return; // Residency eviction is not a death or a resource deletion.
       if (removed.animalWork) this.cancel(removed, 3);
@@ -80,6 +83,9 @@ export class AnimalWorkSystem {
     const task = animal.animalWork;
     if (!task) return;
     this.drop(animal);
+    const target = this.find(task.targetId);
+    if (target?.workItem && target.workItem.claimedBy === animal.persistentId)
+      delete target.workItem.claimedBy;
     delete task.targetId;
     task.cooldown = cooldown;
     this.enter(task, "idle");
@@ -214,6 +220,7 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
+    if (isMeadowWorker(animal)) return this.meadow.update(animal, dt, context, planning);
     const kind = workerKind(animal),
       ai = animal.fauna;
     if (!kind || !ai) return false;
@@ -470,8 +477,10 @@ export class AnimalWorkSystem {
   sync(animal: Entity): void {
     const task = animal.animalWork,
       p = faunaProfile(animal.type);
-    if (!task || !p || !animal.sprite || animal.fauna?.alarmFrom) return;
+    if (!task || !animal.sprite || (animal.fauna ?? animal.rabbit ?? animal.robin)?.alarmFrom)
+      return;
     restoreAnimalWorkPose(animal);
+    if (!p) return;
     const item = this.find(task.heldId);
     if (item) {
       item.flashHidden = false;

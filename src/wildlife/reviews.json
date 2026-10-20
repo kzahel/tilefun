@@ -21261,5 +21261,329 @@
         "sha256": "79cbee7876d340e41f00d02c46781445ff0457711144a26f6091994d203459bb"
       }
     ]
+  },
+  {
+    "id": "rabbit-behavior-v1",
+    "animalId": "rabbit",
+    "revision": "behavior-v1",
+    "name": "Rabbit plant feeding",
+    "batchId": "wildlife-v2-behaviors-157",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/rabbit/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-rabbit-behavior-v1",
+      "name": "Rabbit plant feeding sheet",
+      "image": "demos/wildlife-v2/rabbit/behavior-v1/sheet.png",
+      "width": 736,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "8562cf6309f06b942e3c41e34af5571690743aec4012fb506e61d526b18a23c0",
+      "source": "art-source/wildlife-v2/rabbit/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-rabbit-behavior-v1-scene",
+      "name": "Rabbit plant feeding scene",
+      "image": "demos/wildlife-v2/rabbit/behavior-v1/scene-native.png",
+      "width": 320,
+      "height": 72,
+      "tileSize": 16,
+      "fingerprint": "a3f38e26942ec8b4fec78eb6577c08cdf864e047de6b262a8812550607def2bd",
+      "source": "art-source/wildlife-v2/rabbit/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-rabbit-behavior-v1-contact",
+      "name": "Rabbit plant feeding contact",
+      "image": "demos/wildlife-v2/rabbit/behavior-v1/contact-sheet-native.png",
+      "width": 256,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "c15c6993a372cd4d4c56a39bfe1fee918865acd9a6190004bc8355b6c2192d59",
+      "source": "art-source/wildlife-v2/rabbit/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/rabbit/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/contact-sheet-native.png",
+        "sha256": "c15c6993a372cd4d4c56a39bfe1fee918865acd9a6190004bc8355b6c2192d59"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/index.html",
+        "sha256": "a9586f5e12d9c41ea29cd999e6d6b85825f7b7e23dd6f99a8af07cef77ab97b0"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/pixel-audit.json",
+        "sha256": "31d91002b694e02af652fa4e42aa47690cfa8249b806399aa4c9158527827001"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/preview-native.gif",
+        "sha256": "c901f9cecd84ead40a2370aab5f43ef30cb098286728211d8b6b27c1a0a6715b"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/preview.gif",
+        "sha256": "e7dec487416833639fd8d4382e2941e5dafa5fdaeb36ec9da0f602e87e9d6822"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/scene-native.png",
+        "sha256": "a3f38e26942ec8b4fec78eb6577c08cdf864e047de6b262a8812550607def2bd"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/sheet.png",
+        "sha256": "8562cf6309f06b942e3c41e34af5571690743aec4012fb506e61d526b18a23c0"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/source-audit.json",
+        "sha256": "f91e2b3a5b40ca106a350a5f399ac7d3d2a27873b114bfb7eaf629c38d53b6a4"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/sprite.json",
+        "sha256": "d818314a8700d5d34880a590aa00250f14047687766572d92976ea8223ca134c"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/behavior-v1/validation.json",
+        "sha256": "391fdc55142e2f9121c8cf250ac6c38ee9a90b3612dc5ae9c9bb387764fd9bb6"
+      }
+    ]
+  },
+  {
+    "id": "robin-behavior-v1",
+    "animalId": "robin",
+    "revision": "behavior-v1",
+    "name": "Robin ground foraging",
+    "batchId": "wildlife-v2-behaviors-157",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/robin/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-robin-behavior-v1",
+      "name": "Robin ground foraging sheet",
+      "image": "demos/wildlife-v2/robin/behavior-v1/sheet.png",
+      "width": 992,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "bd9d7ad12c02a8f0779992b217ffea9a2fb458504983585b09b0efc9a8a0fe8b",
+      "source": "art-source/wildlife-v2/robin/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-robin-behavior-v1-scene",
+      "name": "Robin ground foraging scene",
+      "image": "demos/wildlife-v2/robin/behavior-v1/scene-native.png",
+      "width": 320,
+      "height": 72,
+      "tileSize": 16,
+      "fingerprint": "d09f9d1c303d2423d6a5a442ee8f9e44b9034e3f0a98d713c5d89f7f12003cc7",
+      "source": "art-source/wildlife-v2/robin/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-robin-behavior-v1-contact",
+      "name": "Robin ground foraging contact",
+      "image": "demos/wildlife-v2/robin/behavior-v1/contact-sheet-native.png",
+      "width": 256,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "bba4db504743bff7bae7f248886bc1b1ac04195b49571c626edebb63da33c0fa",
+      "source": "art-source/wildlife-v2/robin/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/robin/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/contact-sheet-native.png",
+        "sha256": "bba4db504743bff7bae7f248886bc1b1ac04195b49571c626edebb63da33c0fa"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/index.html",
+        "sha256": "01653a7b4b3b17f9159ddca83ac9d82e79078d900b35cdc1c9b0acbe40a986f8"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/pixel-audit.json",
+        "sha256": "711a32daf9d2ff2559b7dd8178263fb37b7c012ad2a6323f4be9803399ccd545"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/preview-native.gif",
+        "sha256": "b3138f5ee04f9c762cc82db7bc11a3f9dcddde31e2788453d52db2bfb339d69f"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/preview.gif",
+        "sha256": "10b4ef86af051b36d93b9c132a66b3c549cbd6b4be080385752c185f6c2e20ee"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/scene-native.png",
+        "sha256": "d09f9d1c303d2423d6a5a442ee8f9e44b9034e3f0a98d713c5d89f7f12003cc7"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/sheet.png",
+        "sha256": "bd9d7ad12c02a8f0779992b217ffea9a2fb458504983585b09b0efc9a8a0fe8b"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/source-audit.json",
+        "sha256": "e2a89a732291158e84011f409c31144285a3fc7c67d2b25f8cf1f590a467a3c2"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/sprite.json",
+        "sha256": "733bcff0b8df21eeaf83d275f197d82c3a46be2597fbdd1970da014494f47d97"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/behavior-v1/validation.json",
+        "sha256": "25db0544b9d19a4ea4075bfc7a26be3fe56e378ae3e21ebd2c99f2eea627b2a9"
+      }
+    ]
+  },
+  {
+    "id": "meerkat-behavior-v1",
+    "animalId": "meerkat",
+    "revision": "behavior-v1",
+    "name": "Meerkat lookouts and group alarms",
+    "batchId": "wildlife-v2-behaviors-157",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/meerkat/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-meerkat-behavior-v1",
+      "name": "Meerkat lookouts and group alarms sheet",
+      "image": "demos/wildlife-v2/meerkat/behavior-v1/sheet.png",
+      "width": 7392,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0e94f1ae11b9933cacf7c7580da1c8f745cdbba89ed39aca79c2ac6f54b5c24d",
+      "source": "art-source/wildlife-v2/meerkat/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-meerkat-behavior-v1-scene",
+      "name": "Meerkat lookouts and group alarms scene",
+      "image": "demos/wildlife-v2/meerkat/behavior-v1/scene-native.png",
+      "width": 576,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "07bb0c807e642e0f34e7664b92af9380404678e76eb031126adef3262891e299",
+      "source": "art-source/wildlife-v2/meerkat/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-meerkat-behavior-v1-contact",
+      "name": "Meerkat lookouts and group alarms contact",
+      "image": "demos/wildlife-v2/meerkat/behavior-v1/contact-sheet-native.png",
+      "width": 3456,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "99b6ba2b61eb8ec9588de9f4e9cb5dc2dd4f5454bc7445f24d7dd43caa5f6899",
+      "source": "art-source/wildlife-v2/meerkat/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/meerkat/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/contact-sheet-native.png",
+        "sha256": "99b6ba2b61eb8ec9588de9f4e9cb5dc2dd4f5454bc7445f24d7dd43caa5f6899"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/index.html",
+        "sha256": "5397ace5c08866f54e7afbc2be1412f2410693bb12177e3b4b2ba0f6aa62613d"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/pixel-audit.json",
+        "sha256": "9958baac423b1ff0028419c0398d33d1a894f41c1be0ea2bb1fc7cb908f43f86"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/preview-native.gif",
+        "sha256": "80c1bc3dbb1de74843df9be54ed7dee0ae2037e7007caaccc5c10b992872496d"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/preview.gif",
+        "sha256": "6819ac8766902a7367d6226e60c010ba72c6949315f23cfd4324a5204c766a2b"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/scene-native.png",
+        "sha256": "07bb0c807e642e0f34e7664b92af9380404678e76eb031126adef3262891e299"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/sheet.png",
+        "sha256": "0e94f1ae11b9933cacf7c7580da1c8f745cdbba89ed39aca79c2ac6f54b5c24d"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/source-audit.json",
+        "sha256": "731719b9c9a74d336c38120a29289bef28a9e1eeac1f824f2ce701e4dc1397d4"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/sprite.json",
+        "sha256": "62d69950e2e5df8dc71ff077a8e4496415b2f4c8161a51a7077480b8eab9f566"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/behavior-v1/validation.json",
+        "sha256": "65c829509bc363bcdc4e774ff3038c525902a48f903e6b595af5a3105c193b41"
+      }
+    ]
+  },
+  {
+    "id": "foraging-resources-behavior-v2",
+    "animalId": "foraging-resources",
+    "revision": "behavior-v2",
+    "name": "Edible plants and bird seed",
+    "batchId": "wildlife-v2-behaviors-157",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/foraging-resources/behavior-v2/",
+    "sheet": {
+      "id": "wildlife-v2-foraging-resources-behavior-v2",
+      "name": "Edible plants and bird seed sheet",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v2/sheet.png",
+      "width": 448,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-foraging-resources-behavior-v2-scene",
+      "name": "Edible plants and bird seed scene",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v2/scene-native.png",
+      "width": 192,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "8de70ab436d61d180f7ae3639eb042de4d5261fa93bc267382bc5e0732e4a493",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-foraging-resources-behavior-v2-contact",
+      "name": "Edible plants and bird seed contact",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v2/contact-sheet-native.png",
+      "width": 448,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v2"
+    },
+    "preview": "demos/wildlife-v2/foraging-resources/behavior-v2/preview.png",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v2/contact-sheet-native.png",
+        "sha256": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v2/index.html",
+        "sha256": "e3b59d5ed0375b1d4ba119d4e594215e98f02349fcc83ab6dc010602c78979dd"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v2/pixel-audit.json",
+        "sha256": "d480773ed76f39750f941b498e89973177d3db92da4f1bec543d7149060ed5d2"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v2/preview.png",
+        "sha256": "8de70ab436d61d180f7ae3639eb042de4d5261fa93bc267382bc5e0732e4a493"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v2/scene-native.png",
+        "sha256": "8de70ab436d61d180f7ae3639eb042de4d5261fa93bc267382bc5e0732e4a493"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v2/sheet.png",
+        "sha256": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v2/sprite.json",
+        "sha256": "62100e86fbdf2a320b371b22b062a90642cac320e56c972122c6e14e82083c66"
+      }
+    ]
   }
 ]

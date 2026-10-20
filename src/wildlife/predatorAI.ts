@@ -332,12 +332,16 @@ export function updatePredatorAI(
       let nearest: Entity | undefined,
         best = fierce?.sense ?? 144;
       let packTarget: Entity | undefined;
-      // The active population is already spatially bounded; inspect at most 24
-      // candidates per admitted turn, rotating to avoid starving later actors.
-      const start = Math.floor(random(e) * Math.max(1, animals.length));
-      for (let i = 0; i < Math.min(24, animals.length); i++) {
+      // Search the actual sensing neighborhood, not the wider loaded population.
+      // Loose food and distant actors must not hide nearby prey in the quota.
+      const radius = (fierce?.sense ?? 160) + 32;
+      const candidates =
+        env.huntCandidates?.(e, radius) ??
+        animals.filter((a) => !a.workItem && distance(a.position, e.position) <= radius);
+      const start = Math.floor(random(e) * Math.max(1, candidates.length));
+      for (let i = 0; i < Math.min(24, candidates.length); i++) {
         if (planning && !planning.candidate(e)) break;
-        const a = required(animals[(start + i) % animals.length]);
+        const a = required(candidates[(start + i) % candidates.length]);
         const d = distance(e.position, a.position);
         const ally = a.predator;
         if (
@@ -389,9 +393,9 @@ export function updatePredatorAI(
           );
           e.sprite.frameRow = e.sprite.direction;
           alarmPrey(nearest, e.position);
-          for (let i = 0; i < Math.min(48, animals.length); i++) {
+          for (let i = 0; i < Math.min(48, candidates.length); i++) {
             if (planning && !planning.candidate(e)) break;
-            const animal = required(animals[(start + i) % animals.length]);
+            const animal = required(candidates[(start + i) % candidates.length]);
             if (canEat(e, animal) && distance(e.position, animal.position) < fierce.displayRadius)
               alarmPrey(animal, e.position);
           }

@@ -2,7 +2,7 @@
   "version": 1,
   "id": "wildlife-distinct-behaviors",
   "updated": "2026-10-20",
-  "state": "first-batch-verified-pending-human-review",
+  "state": "second-batch-verified",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -3277,7 +3277,7 @@
       "runtimeType": "wildlife-meerkat-provisional-v1",
       "family": "Small & exotic mammals",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "open",
@@ -3285,27 +3285,74 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Shared ground foraging and herd startle; no upright lookout or predator warning at baseline.",
+            "ref": "src/wildlife/faunaAI.ts"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/MeadowWork.ts",
+          "src/wildlife/ForagePlacements.ts",
+          "src/persistence/ActorRecords.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Rotate upright lookout duty, detect actual predators and alarm nearby group members into escape.",
+        "trigger": "Group is calm; an eligible member takes lookout duty. An edible-prey predator enters sight range.",
+        "scenario": "behavior-meerkat",
+        "tactical": "docs/tactical/159-foraging-and-lookouts.md",
+        "resourceRules": "Real saved resources; no automatic food creation for placed animals. Native alarm/escape interrupts tasks.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "rear",
+          "scan",
+          "alarm",
+          "lower",
+          "group-escape"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "src/wildlife/faunaAI.ts"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/159-foraging-and-lookouts.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/MeadowWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/meerkat/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/meadow-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/159-foraging-and-lookouts/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained action bank; then audit the next land/air batch.",
+      "updatedUtc": "2026-10-20T11:33:51.281796+00:00"
     },
     "giant-anteater": {
       "name": "Giant anteater",
@@ -7525,7 +7572,7 @@
       "runtimeType": "wildlife-robin-v1",
       "family": "Birds",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "air",
       "inventoryFacts": {
         "system": "robin",
         "habitat": null,
@@ -7533,27 +7580,72 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Native hopping, flight, tree perches and singing; no real food consumption at baseline.",
+            "ref": "src/wildlife/robinAI.ts"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/MeadowWork.ts",
+          "src/wildlife/ForagePlacements.ts",
+          "src/persistence/ActorRecords.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Descend from a real tree canopy, peck ground food and return to a supported perch.",
+        "trigger": "Reachable finite food within home territory.",
+        "scenario": "behavior-robin",
+        "tactical": "docs/tactical/159-foraging-and-lookouts.md",
+        "resourceRules": "Real saved food; natural groves share one finite seed patch per occupied chunk. Placed birds create no food. Native alarm/escape interrupts feeding.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "feeding",
+          "target-facing",
+          "native-travel"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "src/wildlife/robinAI.ts"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/159-foraging-and-lookouts.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/MeadowWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/robin/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/meadow-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/159-foraging-and-lookouts/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained action bank; then audit the next land/air batch.",
+      "updatedUtc": "2026-10-20T11:33:51.281793+00:00"
     },
     "rabbit": {
       "name": "Rabbit",
@@ -7561,7 +7653,7 @@
       "runtimeType": "wildlife-rabbit-v1",
       "family": "Farm & livestock",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "rabbit",
         "habitat": null,
@@ -7569,27 +7661,72 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Native hopping and ear-alert action; no plant depletion at baseline.",
+            "ref": "src/wildlife/rabbitAI.ts"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/MeadowWork.ts",
+          "src/wildlife/ForagePlacements.ts",
+          "src/persistence/ActorRecords.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Hop to an edible plant, nibble finite portions and check for danger between bites.",
+        "trigger": "Reachable finite food within home territory.",
+        "scenario": "behavior-rabbit",
+        "tactical": "docs/tactical/159-foraging-and-lookouts.md",
+        "resourceRules": "Real saved resources; no automatic food creation for placed animals. Native alarm/escape interrupts tasks.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "feeding",
+          "target-facing",
+          "native-travel"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "src/wildlife/rabbitAI.ts"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/159-foraging-and-lookouts.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/MeadowWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/rabbit/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/meadow-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/159-foraging-and-lookouts/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained action bank; then audit the next land/air batch.",
+      "updatedUtc": "2026-10-20T11:33:51.281781+00:00"
     }
   },
   "checkpoints": [
@@ -7627,6 +7764,18 @@
       "date": "2026-10-20",
       "tactical": "docs/tactical/155-fetch-nests-and-caches.md",
       "status": "Task-facing follow-up verified: 14 animal-work tests, nine existing browser cases and two explicit client-facing checks pass in Canvas/GPU; type/lint/build/streaming pass. Full units 6051 pass, five known Windows failures, ten skips. All 109 source/review hashes and 1840 review identities unchanged."
+    },
+    {
+      "date": "2026-10-20",
+      "summary": "157 in progress: rabbit finite plant feeding, robin ground forage/perch return and meerkat rotating sentinels; 10 production tests pass. New action banks pending final replay, registration and browser verification."
+    },
+    {
+      "date": "2026-10-20",
+      "summary": "157 retained art verified: four pending identities, 123 pins, 37 isolated replay artifacts, 1048 native/3x crop checks. Integration found and corrected stale physics indexing and excessive natural food density; final rechecks in progress."
+    },
+    {
+      "date": "2026-10-20",
+      "summary": "157 full-unit run: 6063 pass; five known Windows failures plus two checks now passing cold (85 aquatic and 13 Workshop tests). Production build, streaming readiness and normal-retina 1856-candidate manifest pass. Full 1731-case browser sweep in progress; shared food picker sheet/frame lookup correction queued after its stable build."
     }
   ]
 }

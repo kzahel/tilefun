@@ -180,10 +180,15 @@ describe.each(AQUATIC_HUNTER_PROFILES)("$species aquatic source and authority", 
       const saved = JSON.parse(JSON.stringify(hunter().predator));
       const queued = JSON.parse(
         JSON.stringify([...s.realm.entityManager.wildlifeRespawns.values()]),
-      );
+      ) as { actor: { persistentId: string } }[];
+      queued.sort((a, b) => a.actor.persistentId.localeCompare(b.actor.persistentId));
       await s.reload();
       expect(hunter().predator).toEqual(saved);
-      expect([...s.realm.entityManager.wildlifeRespawns.values()]).toEqual(queued);
+      expect(
+        [...s.realm.entityManager.wildlifeRespawns.values()].sort((a, b) =>
+          a.actor.persistentId.localeCompare(b.actor.persistentId),
+        ),
+      ).toEqual(queued);
       const n = new NaturalLandscape(regionalWorld(2026), "thicket");
       expect(n.terrain(hunter().position.wx / 16, hunter().position.wy / 16)).toBe(
         TerrainId.DeepWater,

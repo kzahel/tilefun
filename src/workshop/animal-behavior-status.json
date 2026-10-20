@@ -774,13 +774,13 @@
     "review": "not-requested"
   },
   "meerkat": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Rotate upright lookout duty, detect actual predators and alarm nearby group members into escape.",
+    "scene": "behavior-meerkat",
+    "review": "pending"
   },
   "giant-anteater": {
     "phase": "unclassified",
@@ -1836,21 +1836,21 @@
     "review": "not-requested"
   },
   "robin": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "air",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Descend from a real tree canopy, peck ground food and return to a supported perch.",
+    "scene": "behavior-robin",
+    "review": "pending"
   },
   "rabbit": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Hop to an edible plant, nibble finite portions and check for danger between bites.",
+    "scene": "behavior-rabbit",
+    "review": "pending"
   }
 }

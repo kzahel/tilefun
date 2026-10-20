@@ -34,6 +34,9 @@ import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 
 function animalInspectionZoom(id: string): number | undefined {
+  if (id === "behavior-rabbit") return 2;
+  if (id === "behavior-robin") return 1;
+  if (id === "behavior-meerkat") return 1.4;
   return (
     FAUNA_PROFILES.find((p) => p.species === id)?.inspectionZoom ??
     (PREDATOR_PROFILES.find((p) => p.species === id)?.expansion?.habitat === "deep"
@@ -153,6 +156,10 @@ export default function NaturalLandscapePage() {
       height: 640,
       terrain: true,
       fixedCamera: (player, alpha) => {
+        if (caseId === "behavior-rabbit") return { wx: 160, wy: 176 };
+        // Include the elevated tree crown and the ground food in the same view.
+        if (caseId === "behavior-robin") return { wx: 144, wy: 112 };
+        if (caseId === "behavior-meerkat") return { wx: 164, wy: 176 };
         if (caseId.startsWith("behavior-")) return { wx: 160, wy: 144 };
         const train = host.current?.session.view.entities.find((e) => e.type === CURVE_TRAIN);
         const watched = settings.current.watchAnimal
@@ -402,15 +409,28 @@ export default function NaturalLandscapePage() {
         c.dataset.workActors = JSON.stringify(
           view.serverEntities
             .filter((e) => e.type.includes("wildlife-") || e.type === "ball")
-            .map((e) => ({
-              id: e.id,
-              type: e.type,
-              x: e.position.wx,
-              y: e.position.wy,
-              z: e.wz ?? 0,
-              clip: e.sprite?.clip,
-              parent: e.parentId ?? -1,
-            })),
+            .map((e) => {
+              const p = h.camera.worldToScreen(e.position.wx, e.position.wy - (e.wz ?? 0));
+              const sprite = e.sprite,
+                scale = h.camera.scale;
+              const bottom = p.sy + (sprite?.drawOffsetY ?? 0) * scale;
+              const visible =
+                !!sprite &&
+                p.sx - (sprite.spriteWidth / 2) * scale >= 0 &&
+                p.sx + (sprite.spriteWidth / 2) * scale <= h.camera.viewportWidth &&
+                bottom - sprite.spriteHeight * scale >= 0 &&
+                bottom <= h.camera.viewportHeight;
+              return {
+                id: e.id,
+                type: e.type,
+                x: e.position.wx,
+                y: e.position.wy,
+                z: e.wz ?? 0,
+                clip: e.sprite?.clip,
+                parent: e.parentId ?? -1,
+                visible,
+              };
+            }),
         );
         c.dataset.playerParent = String(view.serverPlayerEntity.parentId ?? -1);
         c.dataset.boatPoses = JSON.stringify(
@@ -567,7 +587,13 @@ export default function NaturalLandscapePage() {
               ? "Throw a ball and wait for it to settle. The dog picks it up, carries it back and drops it near you. Throw again to reuse the returned ball."
               : caseId === "behavior-crow"
                 ? "The crow gathers real loose twigs, carries them to a tree perch and builds its nest in four visible stages."
-                : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
+                : caseId === "behavior-rabbit"
+                  ? "The rabbit hops to an edible plant, nibbles it in three visible stages and checks for danger between bites. Food is finite; reset the scene to replenish it."
+                  : caseId === "behavior-robin"
+                    ? "The robin flies down from an actual tree canopy, pecks and eats the ground food, then flies back to its perch."
+                    : caseId === "behavior-meerkat"
+                      ? "The group takes turns standing upright to scan. Place a tiger nearby to see the lookout give an alarm and the group escape."
+                      : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
           </p>
           {caseId === "behavior-dog" && (
             <button
@@ -580,6 +606,23 @@ export default function NaturalLandscapePage() {
               }
             >
               Throw ball for dog
+            </button>
+          )}
+          {caseId === "behavior-meerkat" && (
+            <button
+              type="button"
+              disabled={paused}
+              onClick={() =>
+                void host.current
+                  ?.command({
+                    kind: "place-entity",
+                    entityType: predatorType("tiger"),
+                    position: { wx: 244, wy: 176 },
+                  })
+                  .catch((e) => setError(String(e)))
+              }
+            >
+              Place tiger nearby
             </button>
           )}
         </div>
@@ -637,6 +680,9 @@ export default function NaturalLandscapePage() {
             value={zoom}
             onChange={(e) => setZoom(Number(e.target.value))}
           >
+            {![0.25, 0.13, 0.3, 0.4, 0.6, 0.8, 1.3].includes(zoom) && (
+              <option value={zoom}>Animal detail ({zoom}×)</option>
+            )}
             <option value={0.25}>Countryside</option>
             <option value={0.13}>Speedway overview</option>
             <option value={0.3}>Scenery</option>

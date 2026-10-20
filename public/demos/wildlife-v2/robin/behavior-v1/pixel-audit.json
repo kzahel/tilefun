@@ -1,0 +1,21 @@
+{
+  "identity": "robin-behavior-v1",
+  "poses": 32,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "eat": 4
+    },
+    "up": {
+      "eat": 4
+    },
+    "left": {
+      "eat": 4
+    },
+    "right": {
+      "eat": 4
+    }
+  }
+}

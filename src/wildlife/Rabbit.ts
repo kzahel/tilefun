@@ -1,13 +1,14 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 
-/** Provisional gameplay reuses the unchanged, unapproved rabbit pilot sheet. */
+/** Native pilot travel is retained exactly; behavior-v1 appends feeding poses. */
 export const RABBIT_TYPE = "wildlife-rabbit-v1";
-export const RABBIT_IMAGE = "demos/wildlife-v2/rabbit/pilot-v1/sheet.png";
+export const RABBIT_IMAGE = "demos/wildlife-v2/rabbit/behavior-v1/sheet.png";
 export const RABBIT_CLIPS = [
   { name: "idle", start: 0, count: 1, frameDuration: 125, loop: true },
   { name: "hop", start: 1, count: 8, frameDuration: 125, loop: false },
   { name: "action", start: 9, count: 6, frameDuration: 125, loop: false },
+  { name: "eat", start: 15, count: 8, frameDuration: 150, loop: false },
 ] as const;
 export interface RabbitBehavior {
   home: PositionComponent;

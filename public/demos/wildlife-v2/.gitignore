@@ -643,3 +643,9 @@
 !crow/behavior-v1/*
 !red-squirrel/behavior-v1/*
 !foraging-resources/behavior-v1/*
+
+# Owner-authorized behavior batch 157.
+!rabbit/behavior-v1/*
+!robin/behavior-v1/*
+!meerkat/behavior-v1/*
+!foraging-resources/behavior-v2/*

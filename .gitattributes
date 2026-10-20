@@ -126,3 +126,7 @@ scripts/vehicle-riders/** -text whitespace=blank-at-eol,blank-at-eof,space-befor
 # Retained upstream shader strings keep their intentional indentation.
 public/demos/vehicle-riders/**/viewer.js -text -whitespace
 public/demos/vehicle-riders/**/offline.html -text -whitespace
+
+# Retained wildlife behavior recipes preserve exact source hashes.
+scripts/wildlife/meadow-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/wildlife/register-meadow-157.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

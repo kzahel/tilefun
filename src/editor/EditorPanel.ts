@@ -1193,7 +1193,7 @@ export class EditorPanel {
     }
   }
 
-  /** Find visible pixels in the first frame without changing the gameplay sheet. */
+  /** Find visible pixels in the initial pose without changing the gameplay sheet. */
   private entityPreviewRegion(
     sheet: Spritesheet,
     row: number,

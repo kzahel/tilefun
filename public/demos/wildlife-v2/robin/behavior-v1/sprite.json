@@ -1,0 +1,49 @@
+{
+  "identity": "robin-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 32,
+  "frameHeight": 32,
+  "anchor": [
+    16,
+    25
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "eat",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "durationMs": 120,
+      "frameDuration": 120
+    },
+    "hop": {
+      "start": 1,
+      "count": 8,
+      "description": "Paired gather/push/rise/apex/descend/landing/absorb/recover; three fixed segments per leg",
+      "durationMs": 960,
+      "frameDuration": 120
+    },
+    "flap": {
+      "start": 9,
+      "count": 8,
+      "description": "Shoulder downstroke with folding elbow recovery, rigid head/body and tucked feet",
+      "durationMs": 960,
+      "frameDuration": 120
+    },
+    "action": {
+      "start": 17,
+      "count": 6,
+      "description": "Perched-song bill hinge and tail cock; fixed head, no audio",
+      "durationMs": 720,
+      "frameDuration": 120
+    },
+    "eat": {
+      "start": 23,
+      "count": 8,
+      "frameDuration": 150,
+      "loop": false
+    }
+  },
+  "sheetSha256": "bd9d7ad12c02a8f0779992b217ffea9a2fb458504983585b09b0efc9a8a0fe8b"
+}

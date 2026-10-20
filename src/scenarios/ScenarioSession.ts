@@ -416,6 +416,17 @@ export class ScenarioSession {
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
     const player = this.player.player;
+    if (command.kind === "place-entity") {
+      if (!Number.isFinite(command.position.wx) || !Number.isFinite(command.position.wy))
+        throw Error("Invalid scenario placement");
+      this.realm.handleMessage(this.player.clientId, this.player, {
+        type: "edit-spawn",
+        entityType: command.entityType,
+        wx: command.position.wx,
+        wy: command.position.wy,
+      });
+      return;
+    }
     if (command.kind === "throw-ball") {
       if (
         ![command.dirX, command.dirY, command.force].every(Number.isFinite) ||

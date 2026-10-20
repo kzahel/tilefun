@@ -871,3 +871,18 @@ fixture rock has collision but is not a recognized native perch. No lab-only
 perching or flight simulation is introduced; game and lab use PredatorMotion,
 Realm support collision and durable ordinary props. Native flight/reload and
 perch checks cover the boundary.
+
+
+## Foraging and lookout demonstrations
+
+Tactical 157 adds `behavior-rabbit`, `behavior-robin` and `behavior-meerkat` to
+the same shared Realm fixtures. Food consists of ordinary saved resource actors;
+tree canopies use native prop surfaces. `place-entity` scenario commands forward
+the same `edit-spawn` message used by the game editor, letting the meerkat lab
+introduce an ordinary tiger. The command does not own AI, hunger, sensing or alarm
+state. Production motion, sprite clips and durable work records serve both hosts.
+
+Same-tick resource consumption also exercises the shared EntityManager lifetime
+contract: actors removed by AI are filtered out of the admitted physics list
+before it can update spatial interest. Game clients and labs therefore both
+observe the removal instead of retaining an indexed resource ghost.

@@ -42,3 +42,12 @@ owners with only demonstrated parity gaps added. The other lanes contain one
 browser-free comparator, three real HTTP/WS integration cases, and six opt-in
 captures. CI uses eight browser shards and verifies registered art rasters once
 in a separate required job. Keep those boundaries when extending coverage.
+
+Wildlife [159](../tactical/159-foraging-and-lookouts.md) adds seven focused
+browser cases, bringing the current browser lane to 815. Six check three new
+behavior/animation boundaries in Canvas and GPU: native hopping/feeding,
+height-aware tree-perch returns, and upright lookout/alarm presentation with
+Worker save/reload. The seventh checks the canonical progress filter and demo
+links. Fifteen production authority cases own the food, ownership, interruption,
+residency and group-duty semantics below the browser. The 403-template audit
+baseline stays unchanged; the migration inventory records the current collection.

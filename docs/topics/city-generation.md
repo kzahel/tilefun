@@ -2,7 +2,7 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-10-19.
+Updated: 2026-10-20.
 
 ## Current generation policy
 
@@ -14,6 +14,14 @@ Consumed procedural resources use ordinary deletion tombstones. Tree canopies
 are included across chunk boundaries and remain ordinary editable props. Existing
 saved regions can retain their old realization; inspect a fresh world for these
 new natural supplies. No migration or regeneration of promoted art is involved.
+
+[157](../tactical/159-foraging-and-lookouts.md) adds finite rabbit plants and
+meerkat fruit, plus one shared seed patch per occupied robin chunk. Existing
+animal identities, positions, ordering and ownership pools remain unchanged.
+Sharing seeds keeps the two dense forest inspection regressions below the
+existing 128-actor query cap; actor, persistence and planning caps are unchanged.
+Manually placed animals create no food. Ordinary resource tombstones preserve
+consumption, including shared seed patches, through reloads.
 
 The user approved dropping historical playable generator compatibility during active
 development. `CURRENT_REGIONAL_VERSION` in `GenerationDescriptor.ts` is the single

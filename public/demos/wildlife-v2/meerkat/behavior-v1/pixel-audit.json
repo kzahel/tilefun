@@ -1,0 +1,33 @@
+{
+  "identity": "meerkat-behavior-v1",
+  "poses": 144,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "scan": 11,
+      "alarm": 7,
+      "rear": 8,
+      "lower": 8
+    },
+    "up": {
+      "scan": 11,
+      "alarm": 7,
+      "rear": 8,
+      "lower": 8
+    },
+    "left": {
+      "scan": 10,
+      "alarm": 6,
+      "rear": 8,
+      "lower": 8
+    },
+    "right": {
+      "scan": 10,
+      "alarm": 6,
+      "rear": 8,
+      "lower": 8
+    }
+  }
+}

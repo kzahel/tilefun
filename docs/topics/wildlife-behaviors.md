@@ -1,8 +1,9 @@
 # Distinct animal behaviors and interactions
 
 Topic: wildlife-behaviors
-Status: 206-entry ledger; first batch implements dog fetch, crow nests and squirrel
-food caches. Shared game/lab automation passes; human review remains pending.
+Status: 206-entry ledger; dog fetch, crow nests and squirrel caches implemented.
+Second batch implements rabbit plants, robin ground forage and meerkat lookouts.
+All six mechanics are automation verified; exact art/behavior human review remains pending.
 Updated: 2026-10-20.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
@@ -22,8 +23,8 @@ than duplicating simulation code per species. Closely related animals may share
 a foundation while differing in a documented, observable way.
 
 The first batch implements squirrel food caching/retrieval, dog ball fetching and
-crow material carrying/nesting. Later proposals include meerkat lookout alarms
-and apes climbing to food; those remain unimplemented plans.
+crow material carrying/nesting. The second adds plant feeding, perch foraging and
+meerkat lookout alarms. Apes climbing to food remain a later proposal.
 Owner also requested appropriate birds making visible nests and visible foraging,
 including fruit. Resource seeking, taking, carrying, eating and nest construction
 must have observable outcomes rather than disconnected action loops. Nesting does
@@ -46,7 +47,7 @@ original mallard-duck and bear roster IDs. Preserve completed art ledgers as his
 The [generated progress report](../wildlife-behavior-status.md) derives its counts
 and animal table from this ledger. The same generator writes compact Animal
 Browser progress data. Filter **Behavior progress → Demonstrations** and select
-**Demonstrate behavior** to open a shared authority scene. The other 203 animals
+**Demonstrate behavior** to open a shared authority scene. The other 200 animals
 still need detailed audits and phase assignment. Existing behavior has not been
 removed or declared absent. Verified stages require recorded evidence.
 
@@ -129,8 +130,8 @@ Use the existing embedded engine hosts, not a separate showcase implementation.
 These are proposed capability groups, not a requirement to finish one entire
 group before starting another. Prefer complete, demonstrable slices. The initial
 inventory/report and first implementation batch are established. Next step:
-review the dog/crow/squirrel demonstrations, then audit the next small land/air
-batch against these completion rules. Continue classifying the remaining 203
+review the six implemented demonstrations, then audit the next small land/air
+batch against these completion rules. Continue classifying the remaining 200
 entries and record proposed mechanics before expanding production.
 
 ## First batch contracts
@@ -161,3 +162,48 @@ Every admitted task movement leg applies the shared Fauna pose update immediatel
 facing, sprite row and locomotion clip follow the new target, including return
 trips. The same pose crosses replication and mid-carry reload. The heading fix
 changes simulation pose selection and leaves the retained art banks untouched.
+
+
+## Plant feeding, perch foraging and lookout groups
+
+[157](../tactical/159-foraging-and-lookouts.md) implements the owner-authorized
+second batch through the same Realm AnimalWork service. Rabbits use native short
+hops to edible plants, nibble three saved portions and pause with an ear alert
+between bites. Plant sprite stages reflect actual remaining portions, then the
+entity is removed. Robins fly down from native tree canopies, peck real seed or
+fruit, consume it once and return to their saved supported perch. Tree removal
+prevents a return and collision-resolved landing uses the actual ground.
+
+Nearby meerkats rotate lookout duty, visibly rise, scan in four directions and
+lower again. The active sentinel can spot a predator within 128 pixels, provided
+the directed food web permits that predator to eat it and their heights are
+compatible. Its visible alarm interrupts nearby group activity and starts ordinary
+escapes away from the threat. Natural group IDs isolate groups; nearby ungrouped
+manual meerkats can cooperate. Following/ridden animals retain their protections.
+Calm group members may forage nearby fruit while a sentinel watches.
+
+Natural rabbit and meerkat homes receive one finite food patch per animal.
+Robin groves share one finite seed patch per occupied chunk, retaining every
+bird and keeping dense forest previews within the existing 128-actor limit.
+Resource identities remain cell-owned; crow/squirrel supplies are unchanged.
+Manually placed animals seek nearby player-placed resources
+without creating food automatically. The editor exposes **Edible plant** and
+**Bird seed** alongside existing fruit/nuts/twigs. Resource claims prevent duplicate
+bites, release on interruption/destruction and survive saves. Loose-food claims
+are provisional: a ready resource whose claimant unloaded or cancelled its task
+can be claimed again. Returning animals revalidate ownership before consuming;
+carried/parented inventory keeps its existing group ownership. Native motion owns
+travel, facing, heights and collision; work clips and stationary facing hydrate
+through saved records and ordinary replicated sprite fields. Natural meal
+replacement remains delayed, distant and restricted to naturally spawned prey.
+
+New `behavior-v1` action banks append rabbit/robin feeding and meerkat
+rear/scan/alarm/lower poses; all prior native travel cells stay pixel-identical.
+Resource `behavior-v2` appends three plant stages and bird seed, preserving the
+previous ten material cells. Exact sources, isolated replays and pending review
+identities are retained. The six behavior demonstrations appear in the Animal
+Browser filter; activity scenes open at a readable zoom and the meerkat scene
+can place an ordinary tiger through the production editor command.
+Demonstration framing is species-specific: the robin view includes both the
+tree crown and ground food; rabbit feeding and the initial meerkat group fit
+fully in frame. Existing dog/crow/squirrel framing is retained.

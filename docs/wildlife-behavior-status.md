@@ -6,19 +6,19 @@ Generated from [the canonical ledger](../art-source/wildlife-v2/behavior-campaig
 
 | Work area | Not audited | Planned | In progress | Verified | Not required |
 | --- | --- | --- | --- | --- | --- |
-| audit | 203 | 0 | 0 | 3 | 0 |
-| design | 203 | 0 | 0 | 3 | 0 |
-| ai | 203 | 0 | 0 | 3 | 0 |
-| animation | 203 | 0 | 0 | 3 | 0 |
-| integration | 203 | 0 | 0 | 3 | 0 |
-| validation | 203 | 0 | 0 | 3 | 0 |
+| audit | 200 | 0 | 0 | 6 | 0 |
+| design | 200 | 0 | 0 | 6 | 0 |
+| ai | 200 | 0 | 0 | 6 | 0 |
+| animation | 200 | 0 | 0 | 6 | 0 |
+| integration | 200 | 0 | 0 | 6 | 0 |
+| validation | 200 | 0 | 0 | 6 | 0 |
 
-Phase assignment: unclassified: 203; land: 2; air: 1; amphibious: 0; aquatic: 0.
+Phase assignment: unclassified: 200; land: 4; air: 2; amphibious: 0; aquatic: 0.
 
 | Human review | Not requested | Pending | Needs changes | Approved |
 | --- | --- | --- | --- | --- |
-| behavior | 203 | 3 | 0 | 0 |
-| animation | 203 | 3 | 0 | 0 |
+| behavior | 200 | 6 | 0 | 0 |
+| animation | 200 | 6 | 0 | 0 |
 
 Requested ideas are proposals, not completed designs: dog ball fetching, crow object carrying, appropriate bird nesting, and visible food/fruit foraging.
 
@@ -110,7 +110,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Japanese macaque (japanese-macaque) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Ocean sunfish (ocean-sunfish) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Pufferfish (pufferfish) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Meerkat (meerkat) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Meerkat (meerkat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank; then audit the next land/air batch. |
 | Giant anteater (giant-anteater) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Aardvark (aardvark) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Armadillo (armadillo) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -228,7 +228,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | White-tailed deer (deer) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Frog (frog) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Mallard duck (mallard) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Robin (robin) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Rabbit (rabbit) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Robin (robin) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank; then audit the next land/air batch. |
+| Rabbit (rabbit) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank; then audit the next land/air batch. |
 
 Regenerate: `npx tsx scripts/wildlife/behavior-status.mjs`. Check inventory and report freshness: append `--check`. Seeding is one-time and refuses to overwrite an existing ledger. Edit animal audits/plans in the ledger; do not hand-edit this generated report. Human approval must reference actual recorded feedback; generated counts do not certify approvals.

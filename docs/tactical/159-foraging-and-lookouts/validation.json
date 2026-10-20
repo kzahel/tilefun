@@ -1,0 +1,156 @@
+{
+  "date": "2026-10-20",
+  "base": "9ae14797",
+  "state": "automation-verified-human-review-pending",
+  "animals": ["rabbit", "robin", "meerkat"],
+  "authorityTests": {
+    "new": 15,
+    "generatedHuntAndWorkChecks": 97,
+    "source": "src/wildlife/MeadowWork.test.ts; src/wildlife/NaturalHunters.test.ts",
+    "finalWorkAndLifecycleChecks": 50,
+    "finalBundle": {
+      "passed": 132,
+      "files": 4,
+      "seconds": 54.74
+    }
+  },
+  "art": {
+    "newPendingIdentities": 4,
+    "priorReviewObjectsPreserved": 231,
+    "pinnedArtifacts": 123,
+    "isolatedReplayArtifacts": 37,
+    "animalPoses": 524,
+    "nativeAnd3xExactCrops": 1048,
+    "newActionPoses": 208,
+    "fixedLengthEndpointChecks": 684,
+    "maximumEndpointGapWorldUnits": 1.3328003749250113e-7,
+    "priorNativeCellsUnchanged": true,
+    "humanReview": "pending"
+  },
+  "focusedBrowser": {
+    "passed": 18,
+    "renderers": ["Canvas2D", "GPU"],
+    "scope": "All six behavior demos, persistence, full animal/perch visibility and all editor thumbnails at desktop/phone widths; corrected meerkat framing rechecked in Canvas/GPU."
+  },
+  "inventories": {
+    "candidates": 1856,
+    "added": 16,
+    "existingMissing": 0,
+    "existingExact": 916,
+    "existingLiveFingerprintRefreshOnly": 924,
+    "normalRetinaChromiumVerified": true
+  },
+  "checks": {
+    "typecheck": "pass",
+    "lint": "pass (120 existing warnings, 37 infos)",
+    "build": "pass",
+    "streamingReadiness": "pass",
+    "fullUnits": {
+      "passed": 6063,
+      "failed": 7,
+      "skipped": 10,
+      "seconds": 778.14,
+      "knownWindowsFailures": 5,
+      "correctedAndColdRechecked": {
+        "aquaticSavedQueueOrder": {
+          "passed": 85,
+          "seconds": 35.16
+        },
+        "workshopServiceTimeout": {
+          "passed": 13,
+          "seconds": 46.81
+        }
+      },
+      "unresolvedNewFailures": 0
+    },
+    "fullBrowser": {
+      "total": 1731,
+      "passed": 1730,
+      "skipped": 1,
+      "failed": 0,
+      "completedAcrossResumedRuns": true,
+      "correctionCasesRechecked": 18,
+      "skippedCases": [
+        "[chromium] \u203a interiors-screenshots.spec.ts \u203a capture source atlas geometry grids"
+      ],
+      "testIdentityCoverageSha256": "6ed7507962d8a12fc442762c3e66c53b4e53b2988fee87b21d346ecfc17b71e9",
+      "scope": "Pre-rebase full suite; equivalent production source retained across browser-test migration. Post-rebase checks recorded separately."
+    },
+    "finalSource": {
+      "typecheck": "pass",
+      "lint": "pass (120 existing warnings, 37 infos)",
+      "build": "pass",
+      "normalRetinaCandidates": 1856,
+      "streamingReadiness": "pass"
+    }
+  },
+  "corrections": [
+    "Exclude despawned admitted actors before physics/spatial indexing.",
+    "Keep finite rabbit/meerkat patches; robin groves share one seed patch per occupied chunk.",
+    "Use ready local creature candidates for bounded hunting; exclude materials.",
+    "Compare durable saved poses and respawn records independently of runtime IDs/map order.",
+    "Resolve editor preview atlas and initial frame through entity definitions.",
+    "Reclaim ready unparented food after claimant/task loss; returning actors revalidate ownership.",
+    "Use species-specific demonstration framing; assert initial animals, feeding and returned perch visibility."
+  ],
+  "denseForestPreviews": {
+    "before": [167, 159],
+    "after": [124, 127],
+    "actorCap": 128,
+    "allAnimalsRetained": true,
+    "failedBeforePassedAfter": 2
+  },
+  "rebasedOnto": "e98bd2cc",
+  "retainedReviewBatch": "wildlife-v2-behaviors-157",
+  "postRebase": {
+    "base": "e98bd2cc",
+    "typecheck": "pass",
+    "lint": "pass (120 existing warnings, 37 infos)",
+    "build": "pass",
+    "normalRetinaCandidates": 1856,
+    "browser": {
+      "passed": 26,
+      "failed": 0
+    },
+    "httpWebSocket": {
+      "passed": 3
+    },
+    "nodeComparator": {
+      "passed": 1
+    },
+    "fullNative": {
+      "passed": 6389,
+      "failed": 6,
+      "skipped": 10,
+      "total": 6405,
+      "files": 348,
+      "seconds": 578.47,
+      "knownWindowsFailures": 5,
+      "junctionQueue": {
+        "coldFilePassed": 7,
+        "focusedOwnRuns": ["pass", "pass", "pass", "fail"],
+        "focusedParentRuns": ["pass", "pass", "pass", "fail"],
+        "parentSource": "Unmodified e98bd2cc source extracted with git archive; retained vehicle assets and installed dependency versions shared.",
+        "introducedByWildlife": false
+      }
+    },
+    "currentInventory": {
+      "auditDecisionsPreserved": 403,
+      "browser": 815,
+      "nodeComparator": 1,
+      "httpWebSocket": 3,
+      "captures": 6
+    },
+    "retainedArtifactPins": 123,
+    "priorReviewObjectsPreserved": 231,
+    "concurrentVehicleDocsRestoredExactly": 3
+  },
+  "finalIntegration": {
+    "parent": "0a3201ec",
+    "changes": "Test-only boot and junction completion synchronization from main.",
+    "currentTrafficFilePassed": 7,
+    "currentP2PMenuPassed": 1,
+    "migrationInventory": "815 browser cases, 403 baseline decisions preserved",
+    "productionSourceUnchanged": true
+  }
+}

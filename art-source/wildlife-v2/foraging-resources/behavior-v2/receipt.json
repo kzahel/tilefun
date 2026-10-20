@@ -1,0 +1,45 @@
+{
+  "identity": "foraging-resources-behavior-v2",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/157-foraging-and-lookouts.md",
+  "replay": {
+    "identity": "foraging-resources-behavior-v2",
+    "status": "byte-identical",
+    "isolation": "retained inputs only",
+    "artifacts": 7,
+    "sha256": {
+      "contact-sheet-native.png": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc",
+      "index.html": "e3b59d5ed0375b1d4ba119d4e594215e98f02349fcc83ab6dc010602c78979dd",
+      "pixel-audit.json": "d480773ed76f39750f941b498e89973177d3db92da4f1bec543d7149060ed5d2",
+      "preview.png": "8de70ab436d61d180f7ae3639eb042de4d5261fa93bc267382bc5e0732e4a493",
+      "scene-native.png": "8de70ab436d61d180f7ae3639eb042de4d5261fa93bc267382bc5e0732e4a493",
+      "sheet.png": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc",
+      "sprite.json": "62100e86fbdf2a320b371b22b062a90642cac320e56c972122c6e14e82083c66"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/foraging-resources/behavior-v2/paint.json": "32b063acf6bc975b93de8eda68c4381983519d756e66327d08b24e62a04629ac",
+    "art-source/wildlife-v2/foraging-resources/behavior-v2/README.md": "8d97332ce8e794345ea8d44067ceebc15168c111e3ea327e46ef6205b8ff709c",
+    "art-source/wildlife-v2/foraging-resources/behavior-v2/replay.json": "13421dd639b6921a49f7de0498446d0dd6cc6ba91b16dbb16aa58ba9fbd10829",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v2/contact-sheet-native.png": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v2/index.html": "e3b59d5ed0375b1d4ba119d4e594215e98f02349fcc83ab6dc010602c78979dd",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v2/pixel-audit.json": "d480773ed76f39750f941b498e89973177d3db92da4f1bec543d7149060ed5d2",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v2/preview.png": "8de70ab436d61d180f7ae3639eb042de4d5261fa93bc267382bc5e0732e4a493",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v2/scene-native.png": "8de70ab436d61d180f7ae3639eb042de4d5261fa93bc267382bc5e0732e4a493",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v2/sheet.png": "4ff258f30f6215c77cbf3ccb32a0791b15678921eea252740dc844de107cacfc",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v2/sprite.json": "62100e86fbdf2a320b371b22b062a90642cac320e56c972122c6e14e82083c66",
+    "scripts/wildlife/meadow-build.py": "110502c3521c5ce3517e5f872f337d693ece865cb332a3e47723fe6d452c5a58",
+    "scripts/wildlife/meadow-finish.py": "5a3c75861568368f23da09aaa0c81a5b0553aadc37360167ee167d614600d02a",
+    "scripts/wildlife/meadow-audit.py": "cf3d431188d14882106acb19e31dd8b7aea450be629215a9f9e0bb1877c4689d",
+    "scripts/wildlife/meadow-replay.py": "4752d8ca0c8d2ece650ad6eab19dd29dc2978034c04e6e391f03398177413e5a",
+    "scripts/wildlife/meadow-resources.py": "f3e931383ad4410c3faf8a7c4299148156ca2edc8a964af7b64e5689e3ba80b9",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/meadow-art.mjs": "03e8f870f645a9f987584d63062ee70aaa884e4e92a853014161739ee7636399",
+    "scripts/wildlife/register-meadow-157.mjs": "a610de110683396d9dd2dacd44dad57ae3cf1091ae25514a8ab507150e792944",
+    "scripts/wildlife/capture-behavior-155.mjs": "4cba4172d32bd77168b8929743c1b133e8ee6f22ec4285f0f3c71867beb1e6f8",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae"
+  },
+  "prepublicationPageCorrection": "UTF-8, LF, accessible labels and controls corrected before commit. All raster artifacts unchanged."
+}

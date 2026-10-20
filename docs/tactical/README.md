@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [159 Foraging and lookouts](159-foraging-and-lookouts.md) | Implemented and automation verified: rabbit plant feeding, robin ground forage/perch return and meerkat sentinels; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [158 Browser-test migration](158-browser-test-migration.md) | Implemented and locally green: all 403 decisions resolved, 1,724 → 808 browser cases, eight CI shards and preserved browser boundaries; [testing](../topics/testing.md) |
 | [157 Browser-test audit](157-browser-test-audit.md) | Complete audit of 1,724 cases / 403 templates: portable semantics, existing coverage, browser boundaries and staged migration; [testing](../topics/testing.md) |
 | [156 Vehicle paint gameplay](156-vehicle-paint-gameplay.md) | Fourteen shared editor/traffic paints, persistent replicated identity, lazy GPU atlases and matching sprite fallbacks; [original vehicles](../topics/original-vehicles.md) |

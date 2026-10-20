@@ -134,7 +134,11 @@ export class EntityManager {
     getTerrain?: (tx: number, ty: number) => number,
   ): void {
     const playerSet = new Set(players);
-    const active = entityTickDts ? [...entityTickDts.keys()] : this.entities;
+    // AI can consume/despawn an admitted actor before physics starts. Never
+    // reinsert that stale tick entry into spatial interest or collision indexes.
+    const active = entityTickDts
+      ? [...entityTickDts.keys()].filter((e) => this.byId.get(e.id) === e)
+      : this.entities;
     // Sparse chunk queries are already short. Pay the resident-index build cost
     // only when a queried neighborhood can contain a crowded origin bucket.
     const useCollisionIndex =

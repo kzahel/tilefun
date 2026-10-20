@@ -1,0 +1,18 @@
+{
+  "identity": "meerkat-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "99b6ba2b61eb8ec9588de9f4e9cb5dc2dd4f5454bc7445f24d7dd43caa5f6899",
+    "index.html": "5397ace5c08866f54e7afbc2be1412f2410693bb12177e3b4b2ba0f6aa62613d",
+    "pixel-audit.json": "9958baac423b1ff0028419c0398d33d1a894f41c1be0ea2bb1fc7cb908f43f86",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "80c1bc3dbb1de74843df9be54ed7dee0ae2037e7007caaccc5c10b992872496d",
+    "preview.gif": "6819ac8766902a7367d6226e60c010ba72c6949315f23cfd4324a5204c766a2b",
+    "scene-native.png": "07bb0c807e642e0f34e7664b92af9380404678e76eb031126adef3262891e299",
+    "sheet.png": "0e94f1ae11b9933cacf7c7580da1c8f745cdbba89ed39aca79c2ac6f54b5c24d",
+    "source-audit.json": "731719b9c9a74d336c38120a29289bef28a9e1eeac1f824f2ce701e4dc1397d4",
+    "sprite.json": "62d69950e2e5df8dc71ff077a8e4496415b2f4c8161a51a7077480b8eab9f566"
+  }
+}

@@ -3,11 +3,19 @@ import type { EntityDef } from "../entities/EntityDefs.js";
 import type { WorkItem } from "./AnimalWork.js";
 
 export const FORAGE_SHEET = "wildlife-forage-resources-v1";
-export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v1/sheet.png";
-export const FORAGE_KINDS = ["twig", "fruit", "nut", "nest", "cache"] as const;
+export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v2/sheet.png";
+export const FORAGE_KINDS = ["twig", "fruit", "nut", "nest", "cache", "greens", "seed"] as const;
 export type ForageKind = (typeof FORAGE_KINDS)[number];
 export const forageType = (kind: ForageKind) => `wildlife-resource-${kind}-v1`;
-const cells = { twig: [0], fruit: [1], nut: [2], nest: [3, 4, 5, 6, 7], cache: [8, 9] };
+const cells = {
+  twig: [0],
+  fruit: [1],
+  nut: [2],
+  nest: [3, 4, 5, 6, 7],
+  cache: [8, 9],
+  greens: [10, 11, 12],
+  seed: [13],
+};
 export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
   FORAGE_KINDS.map((kind) => [
     forageType(kind),
@@ -46,11 +54,13 @@ export function restoreWorkItemPose(e: Entity): void {
   const item = e.workItem;
   if (!item || item.kind === "ball") return;
   const stage =
-    item.kind === "nest"
-      ? Math.min(4, item.units)
-      : item.kind === "cache" && item.contents.length
-        ? 1
-        : 0;
+    item.kind === "greens"
+      ? Math.max(0, Math.min(2, 3 - item.units))
+      : item.kind === "nest"
+        ? Math.min(4, item.units)
+        : item.kind === "cache" && item.contents.length
+          ? 1
+          : 0;
   if (e.sprite) {
     e.sprite.clip = stage;
     e.sprite.frameCol = cells[item.kind][stage] ?? 0;
@@ -78,7 +88,7 @@ export function createForageItem(kind: ForageKind, wx: number, wy: number): Enti
     },
     collider: { ...def.collider },
     wanderAI: null,
-    workItem: { kind, units: 0, contents: [] },
+    workItem: { kind, units: kind === "greens" ? 3 : kind === "seed" ? 1 : 0, contents: [] },
     weight: 0.1,
     tags: new Set(["wildlife-resource"]),
   };

@@ -3,6 +3,8 @@ import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { faunaType } from "./Fauna.js";
 import { forageType } from "./ForageResources.js";
+import { RABBIT_TYPE } from "./Rabbit.js";
+import { ROBIN_TYPE } from "./Robin.js";
 
 /** Natural crow homes are clearings: give each crow an ordinary supported tree. */
 export function crowNestTrees(nature: NaturalLandscape, cx: number, cy: number) {
@@ -29,7 +31,7 @@ export function crowNestTrees(nature: NaturalLandscape, cx: number, cy: number) 
   return rows;
 }
 
-/** Stable finite litter at natural crow/squirrel homes, owned by its original cell. */
+/** Finite native food/litter, with stable identities owned by the original cell. */
 export function foragePlacements(
   actors: readonly ActorPlacement[],
   nature: NaturalLandscape,
@@ -37,10 +39,17 @@ export function foragePlacements(
   cy: number,
 ): ActorPlacement[] {
   const result: ActorPlacement[] = [];
+  let robinFood = false;
   for (const actor of actors) {
-    const crow = actor.type === faunaType("crow"),
+    const rabbit = actor.type === RABBIT_TYPE,
+      robin = actor.type === ROBIN_TYPE,
+      meerkat = actor.type === faunaType("meerkat"),
+      crow = actor.type === faunaType("crow"),
       squirrel = actor.type === faunaType("red-squirrel");
-    if (!crow && !squirrel) continue;
+    if (!crow && !squirrel && !rabbit && !robin && !meerkat) continue;
+    // Robin groves have one bird per tree. Share a finite seed patch within
+    // each occupied chunk instead of doubling the whole forest's actor count.
+    if (robin && robinFood) continue;
     for (const [index, offset] of [
       [-24, 24],
       [24, 24],
@@ -64,11 +73,27 @@ export function foragePlacements(
         continue;
       result.push({
         featureId: `${actor.featureId}:forage:${index}`,
-        type: forageType(crow ? "twig" : index % 2 ? "fruit" : "nut"),
+        type: forageType(
+          rabbit
+            ? "greens"
+            : robin
+              ? "seed"
+              : meerkat
+                ? "fruit"
+                : crow
+                  ? "twig"
+                  : index % 2
+                    ? "fruit"
+                    : "nut",
+        ),
         wx,
         wy,
         route: [],
       });
+      if (robin) robinFood = true;
+      // Rabbits/meerkats retain one patch per animal; robin groves share one.
+      // Nest builders and caching squirrels keep their original six supplies.
+      if (rabbit || robin || meerkat) break;
     }
   }
   return result;

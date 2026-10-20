@@ -24,6 +24,7 @@ export function updateRobinAI(
     return ai.randomState / 4294967296;
   };
   if (ai.motion) return;
+  if (environment.animalWork?.(bird, dt, planning)) return;
   // Current crowns matter for decisions and the smaller perched alarm radius.
   // A distant player cannot alarm either pose, so idle waits need no prop query.
   if (

@@ -1,0 +1,37 @@
+{
+  "identity": "rabbit-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 32,
+  "frameHeight": 32,
+  "anchor": [
+    16,
+    24
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "eat",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 125
+    },
+    "hop": {
+      "start": 1,
+      "count": 8,
+      "frameDuration": 125
+    },
+    "action": {
+      "start": 9,
+      "count": 6,
+      "frameDuration": 125
+    },
+    "eat": {
+      "start": 15,
+      "count": 8,
+      "frameDuration": 150,
+      "loop": false
+    }
+  },
+  "sheetSha256": "8562cf6309f06b942e3c41e34af5571690743aec4012fb506e61d526b18a23c0"
+}

@@ -1,0 +1,18 @@
+{
+  "identity": "robin-behavior-v1",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 31,
+      "exactFacingCrops": 124
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 31,
+      "exactFacingCrops": 124
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

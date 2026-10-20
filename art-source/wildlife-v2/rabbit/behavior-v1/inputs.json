@@ -1,0 +1,17 @@
+{
+  "blend": "art-source/wildlife-v2/rabbit/pilot-v1/rabbit.blend",
+  "sheet": "public/demos/wildlife-v2/rabbit/pilot-v1/sheet.png",
+  "metadata": "public/demos/wildlife-v2/rabbit/pilot-v1/sprite.json",
+  "canvas": 32,
+  "anchor": [
+    16,
+    24
+  ],
+  "masters": "art-source/wildlife-v2/rabbit/pilot-v1/masters.json",
+  "sha256": {
+    "art-source/wildlife-v2/rabbit/pilot-v1/rabbit.blend": "a699a7e99893ffee1c42dde81261745a4811459a6f3793e19904d266c32923dc",
+    "public/demos/wildlife-v2/rabbit/pilot-v1/sheet.png": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110",
+    "public/demos/wildlife-v2/rabbit/pilot-v1/sprite.json": "526a3a575e5c5e9c744e4b228e53453b37207b438edf9f620b6aefbe454455e3",
+    "art-source/wildlife-v2/rabbit/pilot-v1/masters.json": "c4cb88c30ef3585c8a99e27a45f4cbb2b22a1c540877ee9e77871db2b1040e79"
+  }
+}

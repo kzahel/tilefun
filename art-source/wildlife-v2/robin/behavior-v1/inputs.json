@@ -1,0 +1,17 @@
+{
+  "blend": "art-source/wildlife-v2/robin/draft-v2/robin.blend",
+  "sheet": "public/demos/wildlife-v2/robin/draft-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/robin/draft-v2/sprite.json",
+  "canvas": 32,
+  "anchor": [
+    16,
+    25
+  ],
+  "masters": "art-source/wildlife-v2/robin/draft-v2/masters.json",
+  "sha256": {
+    "art-source/wildlife-v2/robin/draft-v2/robin.blend": "a51c6a42066a28126fef5377842ecb67c09c748b99dfc06ce1a21baceaff2adc",
+    "public/demos/wildlife-v2/robin/draft-v2/sheet.png": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+    "public/demos/wildlife-v2/robin/draft-v2/sprite.json": "30800bf96036022810760e7ae25372e98bc0d84ca588f6e9adef34c536abf8df",
+    "art-source/wildlife-v2/robin/draft-v2/masters.json": "87d4b85f45cce5b919eda049081d13dc8f1b829d324e2b583958b2f223ffd5ae"
+  }
+}

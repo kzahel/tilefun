@@ -1,0 +1,121 @@
+{
+  "blend": "art-source/wildlife-v2/meerkat/roster-v3/meerkat.blend",
+  "sheet": "public/demos/wildlife-v2/meerkat/roster-v3/sheet.png",
+  "metadata": "public/demos/wildlife-v2/meerkat/roster-v3/sprite.json",
+  "canvas": 96,
+  "anchor": [
+    48,
+    72
+  ],
+  "profile": {
+    "label": "Meerkat",
+    "torso": [
+      0,
+      -0.05,
+      1.12
+    ],
+    "radii": [
+      0.3,
+      0.63,
+      0.43
+    ],
+    "chest": [
+      0,
+      0.34,
+      1.18
+    ],
+    "chestRadii": [
+      0.29,
+      0.31,
+      0.35
+    ],
+    "head": [
+      0,
+      0.68,
+      1.48
+    ],
+    "skull": [
+      0.23,
+      0.26,
+      0.24
+    ],
+    "muzzleY": 0.23,
+    "muzzleRadii": [
+      0.15,
+      0.22,
+      0.12
+    ],
+    "earX": 0.1909,
+    "earZ": 0.15,
+    "earRadii": [
+      0.09,
+      0.06,
+      0.11
+    ],
+    "foreHip": [
+      0.21,
+      0.34,
+      1.0
+    ],
+    "hindHip": [
+      0.22,
+      -0.41,
+      0.96
+    ],
+    "foreLengths": [
+      0.48,
+      0.5,
+      0.22,
+      0.12
+    ],
+    "hindLengths": [
+      0.48,
+      0.5,
+      0.22,
+      0.12
+    ],
+    "legRadii": [
+      0.1,
+      0.075,
+      0.055,
+      0.04
+    ],
+    "footWidth": 0.13,
+    "footLength": 0.18,
+    "tailLengths": [
+      0.35,
+      0.4,
+      0.36
+    ],
+    "tailRadius": 0.07,
+    "tailY": -0.6359000000000001,
+    "tailAngle": 0.2,
+    "tailKey": "B",
+    "walkSpeed": 12,
+    "chaseSpeed": 24,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "lift": 0.14,
+    "forageDrop": 0.12,
+    "palette": {
+      "B": "#a99463",
+      "H": "#c4b383",
+      "C": "#ded4ad",
+      "M": "#67583f",
+      "K": "#292e2d",
+      "E": "#e3ce95",
+      "N": "#252c2b",
+      "T": "#d8cdb0"
+    },
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ]
+  },
+  "sha256": {
+    "art-source/wildlife-v2/meerkat/roster-v3/meerkat.blend": "709c6866fd87675e4e01545710c2958f54348fcaf43efcb71395012eaf31ffb5",
+    "public/demos/wildlife-v2/meerkat/roster-v3/sheet.png": "f231ed461ef4f0bce8ea2f8a8e2817fd3664061b4ca575a78a5a9766999d3200",
+    "public/demos/wildlife-v2/meerkat/roster-v3/sprite.json": "31c3c29847a86cbb26ba692194e2475e959a97cd791e729efd1a7e1d0bd90c48"
+  }
+}

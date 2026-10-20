@@ -1,0 +1,21 @@
+{
+  "identity": "rabbit-behavior-v1",
+  "poses": 32,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "eat": 4
+    },
+    "up": {
+      "eat": 3
+    },
+    "left": {
+      "eat": 4
+    },
+    "right": {
+      "eat": 4
+    }
+  }
+}

@@ -16,7 +16,17 @@ entries, including all 196 roster entries. [Batch 155](../tactical/155-fetch-nes
 adds dog ball fetching, crow twig collection/nesting and squirrel food caches,
 with real carried objects, saved resource counts and new action clips. Animal
 Browser exposes progress filters and demonstrations from this ledger. The other
-203 animals still need detailed audits; new behavior/art review remains pending.
+200 animals still need detailed audits; new behavior/art review remains pending.
+
+[Batch 157](../tactical/159-foraging-and-lookouts.md) adds finite rabbit plant
+feeding, robin ground-food/perch trips and rotating meerkat lookouts with group
+alarms. New action banks preserve native travel cells. Rabbit/meerkat food is
+finite; robin groves share one seed patch per occupied chunk, retaining every
+bird within the existing inspection cap. Editor food supports existing
+worlds and placed animals. Shared lifetime and local predator-sensing corrections
+keep consumed resources removed and actual nearby prey discoverable. The
+[behavior ledger](../../art-source/wildlife-v2/behavior-campaign.json) owns progress
+and pending human review for all six implemented signature mechanics.
 
 [Explorer boats and large lakes](boats.md) add four natural fish schools, four
 other water species and one aquatic hunter per new large lake. Existing water

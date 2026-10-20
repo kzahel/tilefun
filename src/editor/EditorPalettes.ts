@@ -78,9 +78,18 @@ export interface EntityPaletteEntry {
 }
 
 export const ENTITY_PALETTE: EntityPaletteEntry[] = [
-  ...(["twig", "nut", "fruit"] as const).map((kind) => ({
+  ...(["twig", "nut", "fruit", "greens", "seed"] as const).map((kind) => ({
     type: forageType(kind),
-    label: kind === "twig" ? "Loose nest twig" : kind === "nut" ? "Foraging nut" : "Fallen fruit",
+    label:
+      kind === "greens"
+        ? "Edible plant"
+        : kind === "seed"
+          ? "Bird seed"
+          : kind === "twig"
+            ? "Loose nest twig"
+            : kind === "nut"
+              ? "Foraging nut"
+              : "Fallen fruit",
     color: "#a77b4c",
   })),
   ...PROMOTED_CHARACTERS.map((c) => ({ type: c.sheetKey, label: c.name, color: "#d4a880" })),

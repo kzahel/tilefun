@@ -35,7 +35,7 @@ import { startleRabbit } from "./rabbitInteractions.js";
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 
-it("uses the unchanged rabbit sheet and its native hop/action frame ranges", () => {
+it("retains native rabbit hop/action ranges and defines the feeding clip", () => {
   const sprite = JSON.parse(
     readFileSync(`public/${RABBIT_IMAGE.replace("sheet.png", "sprite.json")}`, "utf8"),
   );
@@ -48,7 +48,7 @@ it("uses the unchanged rabbit sheet and its native hop/action frame ranges", () 
   for (const clip of RABBIT_CLIPS) {
     expect(sprite.clips[clip.name].start).toBe(clip.start);
     expect(sprite.clips[clip.name].count).toBe(clip.count);
-    expect(clip.frameDuration).toBe(1000 / sprite.fps);
+    expect(clip.frameDuration).toBe(sprite.clips[clip.name].frameDuration);
   }
 });
 
@@ -347,7 +347,7 @@ it("runs all native cycles on dry ground in the production Realm and retains sav
         ).toBeLessThanOrEqual(required(rabbit.rabbit).radius + 1);
       }
     }
-    expect([...clips].sort()).toEqual([0, 1, 2]);
+    expect([...clips]).toEqual(expect.arrayContaining([0, 1, 2]));
     const removed = required(rabbits()[0]),
       retained = required(rabbits()[1]);
     s.realm.entityManager.remove(removed.id);

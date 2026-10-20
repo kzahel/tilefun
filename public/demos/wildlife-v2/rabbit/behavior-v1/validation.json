@@ -1,0 +1,18 @@
+{
+  "identity": "rabbit-behavior-v1",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 23,
+      "exactFacingCrops": 92
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 23,
+      "exactFacingCrops": 92
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

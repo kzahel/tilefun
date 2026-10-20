@@ -1,0 +1,55 @@
+{
+  "identity": "meerkat-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "anchor": [
+    48,
+    72
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "scan",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 40
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "scan": {
+      "start": 41,
+      "count": 12,
+      "frameDuration": 125,
+      "loop": true
+    },
+    "alarm": {
+      "start": 53,
+      "count": 8,
+      "frameDuration": 90,
+      "loop": false
+    },
+    "rear": {
+      "start": 61,
+      "count": 8,
+      "frameDuration": 75,
+      "loop": false
+    },
+    "lower": {
+      "start": 69,
+      "count": 8,
+      "frameDuration": 75,
+      "loop": false
+    }
+  },
+  "sheetSha256": "0e94f1ae11b9933cacf7c7580da1c8f745cdbba89ed39aca79c2ac6f54b5c24d"
+}

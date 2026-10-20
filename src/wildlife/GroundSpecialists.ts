@@ -1,6 +1,6 @@
 import type { FaunaProfile } from "./Fauna.js";
 
-/** Shared ground walking/foraging; curling, burrowing and sentinel rearing are future work. */
+/** Native ground locomotion. Meerkat lookout actions are selected by BehaviorArt. */
 export const GROUND_SPECIALIST_PROFILES: readonly FaunaProfile[] = [
   {
     species: "meerkat",

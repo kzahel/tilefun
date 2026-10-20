@@ -1,0 +1,77 @@
+{
+  "rabbit": {
+    "identity": "rabbit-behavior-v1",
+    "sha256": "8562cf6309f06b942e3c41e34af5571690743aec4012fb506e61d526b18a23c0",
+    "image": "demos/wildlife-v2/rabbit/behavior-v1/sheet.png",
+    "clips": {
+      "eat": {
+        "start": 15,
+        "count": 8,
+        "frameDuration": 150,
+        "loop": false
+      }
+    },
+    "sockets": [
+      [],
+      [],
+      [],
+      []
+    ]
+  },
+  "robin": {
+    "identity": "robin-behavior-v1",
+    "sha256": "bd9d7ad12c02a8f0779992b217ffea9a2fb458504983585b09b0efc9a8a0fe8b",
+    "image": "demos/wildlife-v2/robin/behavior-v1/sheet.png",
+    "clips": {
+      "eat": {
+        "start": 23,
+        "count": 8,
+        "frameDuration": 150,
+        "loop": false
+      }
+    },
+    "sockets": [
+      [],
+      [],
+      [],
+      []
+    ]
+  },
+  "meerkat": {
+    "identity": "meerkat-behavior-v1",
+    "sha256": "0e94f1ae11b9933cacf7c7580da1c8f745cdbba89ed39aca79c2ac6f54b5c24d",
+    "image": "demos/wildlife-v2/meerkat/behavior-v1/sheet.png",
+    "clips": {
+      "scan": {
+        "start": 41,
+        "count": 12,
+        "frameDuration": 125,
+        "loop": true
+      },
+      "alarm": {
+        "start": 53,
+        "count": 8,
+        "frameDuration": 90,
+        "loop": false
+      },
+      "rear": {
+        "start": 61,
+        "count": 8,
+        "frameDuration": 75,
+        "loop": false
+      },
+      "lower": {
+        "start": 69,
+        "count": 8,
+        "frameDuration": 75,
+        "loop": false
+      }
+    },
+    "sockets": [
+      [],
+      [],
+      [],
+      []
+    ]
+  }
+}

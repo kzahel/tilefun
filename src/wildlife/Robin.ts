@@ -1,14 +1,15 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 
-/** Existing unapproved draft, unchanged native cells and animation ranges. */
+/** Native draft travel is retained exactly; behavior-v1 appends feeding poses. */
 export const ROBIN_TYPE = "wildlife-robin-v1";
-export const ROBIN_IMAGE = "demos/wildlife-v2/robin/draft-v2/sheet.png";
+export const ROBIN_IMAGE = "demos/wildlife-v2/robin/behavior-v1/sheet.png";
 export const ROBIN_CLIPS = [
   { name: "idle", start: 0, count: 1, frameDuration: 120, loop: true },
   { name: "hop", start: 1, count: 8, frameDuration: 120, loop: false },
   { name: "flap", start: 9, count: 8, frameDuration: 120, loop: true },
   { name: "action", start: 17, count: 6, frameDuration: 120, loop: false },
+  { name: "eat", start: 23, count: 8, frameDuration: 150, loop: false },
 ] as const;
 export interface RobinPerch extends PositionComponent {
   z: number;
