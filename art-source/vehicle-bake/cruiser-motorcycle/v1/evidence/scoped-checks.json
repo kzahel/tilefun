@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "scope": "own family sources only",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n15 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle\\build-view.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle\\capture-raw.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\node_modules\\.bin\\biome.cmd",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle\\build-view.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle\\capture-raw.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle\\coverage-region.json",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle\\family.json",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\cruiser-motorcycle\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": "Checked 5 files in 14ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/cruiser-motorcycle/assess-pixels.py": "2cb732ae5f6f09bbe811156fab166d03c90d9ac65dc249c25ebea764fb6b17ac",
+    "scripts/vehicle-bake/cruiser-motorcycle/audit-source.py": "133647ea6b51837241f02be401c03607bc3fd5d767be9ed046276ed6490f8a92",
+    "scripts/vehicle-bake/cruiser-motorcycle/build-view.mjs": "79336edae8aac9848641b4ca976273f289af54ddcfcbb601baad2ef4430dc12b",
+    "scripts/vehicle-bake/cruiser-motorcycle/build.py": "c42183cead0792e6e396b6d1f7ae8bf25344f5695df50d95c19c3bb9c41e6bd0",
+    "scripts/vehicle-bake/cruiser-motorcycle/capture-raw.mjs": "d2c0c4b61d2447963e032bdda8b3762cad71ae2c5a4f72f2c5e6f32de6829b06",
+    "scripts/vehicle-bake/cruiser-motorcycle/checks.py": "9a13d02602a26355b74f2df0efba714b17aeb69524a452c9b2193df3ef2865c2",
+    "scripts/vehicle-bake/cruiser-motorcycle/coverage-region.json": "7c9a9a476e158c2e4487e3c5a160c7dcad2c1f5c5f8f2ee3579a137a9ce58b95",
+    "scripts/vehicle-bake/cruiser-motorcycle/family.json": "92cf225bd3606c3bff47c8cb55a33ed236faa159e2cd9114e94d101a19fa66f6",
+    "scripts/vehicle-bake/cruiser-motorcycle/finalize.py": "d41c401a6b9d222c5d7e3afa48eac0d185df9f2ce14549f3069ef894b5b87937",
+    "scripts/vehicle-bake/cruiser-motorcycle/fresh-replay.py": "4151298402f16360f8df381b9ec896341641153adedc15b6477fa49644dc55f9",
+    "scripts/vehicle-bake/cruiser-motorcycle/geometry.py": "296ce4d7ba979342c3444a9de85c090895f2b910291518772de0042c609e0b11",
+    "scripts/vehicle-bake/cruiser-motorcycle/normalize-replay.py": "ea0ec605aadddfa536b637d3512de040b23088ea644bd41fd4ede8ad87cd412b",
+    "scripts/vehicle-bake/cruiser-motorcycle/parameter-api-proof.py": "6c720a1b3dd922090c9703653098f5c3dc9bfc3901bad89a202f27da43cb9590",
+    "scripts/vehicle-bake/cruiser-motorcycle/prove-contact-pairs.py": "96a37dc3755dcef75b8f8725f939b5e9ca067ce46b49de53ad92c7adbc67959d",
+    "scripts/vehicle-bake/cruiser-motorcycle/prove-fit.py": "a674eddd517c1cff2102b40da64a7fc21d86ae786f03c20b2533a9086e27281e",
+    "scripts/vehicle-bake/cruiser-motorcycle/prove-immutable-rider-self.py": "84d2693a039808566658b49ff346051cd0a6e06eb0e1703d7f5f0f09c5a0c7ed",
+    "scripts/vehicle-bake/cruiser-motorcycle/prove-shape.py": "f3f9566ea83f764bf6e71713c33c56dfeaccea7a865195301ef2f1bb94dfec20",
+    "scripts/vehicle-bake/cruiser-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/cruiser-motorcycle/raw-diagnostic.html": "0818040fedf6b4c5a0e43d5efc2c2b41735f3e7a0e70658a1e6868be029c0cfa",
+    "scripts/vehicle-bake/cruiser-motorcycle/raw-viewer.mjs": "306c059e9deb48f53d78ab64f7c4829015fe50c1031e2213aa387e1de4d4fa44",
+    "scripts/vehicle-bake/cruiser-motorcycle/sheets.py": "e6e6fd40d3eb29d67c46dfea8c12db95e87c433b0f37fddbfb539c64a1806592"
+  },
+  "pythonSyntaxCompiledOnlyIntoOwnIgnoredScratch": true,
+  "globalChecksRun": false,
+  "gitUsed": false
+}

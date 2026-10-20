@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "before": {
+    "scripts/vehicle-riders/classic-upright-v2/viewer.mjs": "5fad029304e90c47901eb6093e7e695f65bab0bb01389f8a189ed51302b23c77",
+    "scripts/vehicle-riders/classic-upright-v2/build-view.mjs": "3628288caab43cbb9eacf2290869b027e104aec1a37bf0218a7f10b7a309a22a",
+    "scripts/vehicle-riders/classic-upright-v2/index.html": "0b870e54ce010d3343f2e7ee9a2e4e93cc1e6a27813f4d2881cba9138a9eaa5b",
+    "scripts/vehicle-riders/classic-upright-v2/rider.json": "f7ea4250d40a5b026a031ea908aa1cccb6a25a9c7ec35f9f924d3535428959f8",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "scripts/vehicle-riders/classic-upright-v2/outline.ts": "5a2b8dcbbd643ac28e2bba5260b31c6911aadf9a7b403a69a1841375c36ca559",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45"
+  },
+  "after": {
+    "scripts/vehicle-riders/classic-upright-v2/viewer.mjs": "5fad029304e90c47901eb6093e7e695f65bab0bb01389f8a189ed51302b23c77",
+    "scripts/vehicle-riders/classic-upright-v2/build-view.mjs": "3628288caab43cbb9eacf2290869b027e104aec1a37bf0218a7f10b7a309a22a",
+    "scripts/vehicle-riders/classic-upright-v2/index.html": "0b870e54ce010d3343f2e7ee9a2e4e93cc1e6a27813f4d2881cba9138a9eaa5b",
+    "scripts/vehicle-riders/classic-upright-v2/rider.json": "f7ea4250d40a5b026a031ea908aa1cccb6a25a9c7ec35f9f924d3535428959f8",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "scripts/vehicle-riders/classic-upright-v2/outline.ts": "5a2b8dcbbd643ac28e2bba5260b31c6911aadf9a7b403a69a1841375c36ca559",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45"
+  },
+  "noInputChangesDuringBuild": true,
+  "viewBundleSha256": "2d3bd65f520403b7c44bd5f68ee611683e47e309b3133240b67e73f94151e086"
+}

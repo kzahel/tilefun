@@ -1,0 +1,44 @@
+[
+  {
+    "status": "passed",
+    "toolchain": "motorcycle-v1",
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "inputBytesUnchanged": true,
+    "id": "rider-bear-classic-motorcycle--v1",
+    "glbSha256": "1668ee4341aba50c66f36753e1fb425ad5acf0fd7a460c8b6ac6e8cb73b4058f",
+    "triangles": 4546,
+    "clearance": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "radius": 7.304348315896555,
+        "minimumGap": 1.0207844658522651,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "radius": 7.304348315896555,
+        "minimumGap": 0.8340051958843757,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

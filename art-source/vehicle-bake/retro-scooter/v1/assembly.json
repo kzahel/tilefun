@@ -1,0 +1,35 @@
+{
+  "status": "source-pilot-only",
+  "bike": {
+    "path": "public/demos/vehicle-bake/retro-scooter/v1/model.glb",
+    "sha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+    "triangles": 2280,
+    "draws": 3,
+    "atlases": 1
+  },
+  "rider": {
+    "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+    "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "triangles": 1956,
+    "draws": 1,
+    "atlases": 1,
+    "immutable": true,
+    "reexported": false
+  },
+  "singleMountSource": [
+    0.05,
+    0,
+    0.93
+  ],
+  "gltfMountTransform": "S*[x,z,-y], S=80/4.6; rider GLB already carries export scale",
+  "combined": {
+    "triangles": 4236,
+    "draws": 4,
+    "atlases": 2,
+    "oneActualDepthTarget": true,
+    "combinedGLBExported": false
+  },
+  "normalActivation": false,
+  "productionQualified": false,
+  "humanApproval": false
+}

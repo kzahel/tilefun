@@ -1,0 +1,136 @@
+{
+  "status": "measured-read-only",
+  "inputHashes": {
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "worldScale": 17.39130434782609,
+  "riderTriangleCount": 1956,
+  "localSourceMin": [
+    -0.6070634269714354,
+    -0.34991653800010675,
+    -0.5299999833106994
+  ],
+  "localSourceMax": [
+    0.31000000834465025,
+    0.34991653800010675,
+    0.9649999618530272
+  ],
+  "localSourceSpan": [
+    0.9170634353160857,
+    0.6998330760002135,
+    1.4949999451637266
+  ],
+  "actualContactSockets": [
+    {
+      "name": "hip_saddle",
+      "actualSocketLocalWorld": [
+        0.0,
+        0.0,
+        -1.3826087713241577
+      ],
+      "actualSocketLocalSource": [
+        0.0,
+        0.0,
+        -0.07950000435113906
+      ],
+      "closestActualRiderSurfaceWorld": [
+        0.0,
+        0.0,
+        -1.3826086521148682
+      ],
+      "distanceToActualRiderSurfaceWorld": 1.1920928955078125e-07
+    },
+    {
+      "name": "hand_left_grip",
+      "actualSocketLocalWorld": [
+        -9.565217018127441,
+        -4.000000476837158,
+        4.695651531219482
+      ],
+      "actualSocketLocalSource": [
+        -0.5499999785423278,
+        -0.23000002741813655,
+        0.2699999630451202
+      ],
+      "closestActualRiderSurfaceWorld": [
+        -9.345734596252441,
+        -4.691145420074463,
+        4.695651531219482
+      ],
+      "distanceToActualRiderSurfaceWorld": 0.7251577973365784
+    },
+    {
+      "name": "hand_right_grip",
+      "actualSocketLocalWorld": [
+        -9.565217018127441,
+        4.000000476837158,
+        4.695651531219482
+      ],
+      "actualSocketLocalSource": [
+        -0.5499999785423278,
+        0.23000002741813655,
+        0.2699999630451202
+      ],
+      "closestActualRiderSurfaceWorld": [
+        -9.784699440002441,
+        4.691145896911621,
+        4.695651531219482
+      ],
+      "distanceToActualRiderSurfaceWorld": 0.7251582741737366
+    },
+    {
+      "name": "foot_left_support",
+      "actualSocketLocalWorld": [
+        -1.2173912525177002,
+        -4.000000476837158,
+        -9.217391967773438
+      ],
+      "actualSocketLocalSource": [
+        -0.06999999701976775,
+        -0.23000002741813655,
+        -0.5300000381469726
+      ],
+      "closestActualRiderSurfaceWorld": [
+        -1.2173911333084106,
+        -4.000000476837158,
+        -9.217391014099121
+      ],
+      "distanceToActualRiderSurfaceWorld": 9.610960205463925e-07
+    },
+    {
+      "name": "foot_right_support",
+      "actualSocketLocalWorld": [
+        -1.2173912525177002,
+        4.000000476837158,
+        -9.217391967773438
+      ],
+      "actualSocketLocalSource": [
+        -0.06999999701976775,
+        0.23000002741813655,
+        -0.5300000381469726
+      ],
+      "closestActualRiderSurfaceWorld": [
+        -1.2173912525177002,
+        4.000000476837158,
+        -9.217391014099121
+      ],
+      "distanceToActualRiderSurfaceWorld": 9.5367431640625e-07
+    }
+  ],
+  "minimumLegInnerHalfGapBelowHipPoint10Source": 0.1599999892711639,
+  "familyInput": {
+    "path": "scripts/vehicle-bake/sport-motorcycle/family.json",
+    "sha256": "cc67a4ecfc9b0211250a5d91ce8e77449fc4e4ba4edc73adaee35ec44c6a5306"
+  },
+  "candidateSingleMountSource": [
+    0,
+    0,
+    1.1
+  ],
+  "candidateHipBottomSeatTopSource": 1.0205000000000002,
+  "candidateCrownZSource": 2.0649999618530273,
+  "limits": "Anatomy measurement only; actual bike/rider clearances and contacts remain to prove."
+}

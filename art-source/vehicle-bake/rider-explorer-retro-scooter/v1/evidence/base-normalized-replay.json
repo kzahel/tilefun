@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "independent": true,
+  "glbSha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+  "atlasSha256": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372",
+  "recipeSha256": "75105422444d59842b723ff0bd6653a0b521b3c022bddd0a80d47de5d5acb38b",
+  "scratchInputDependencies": [],
+  "originalSourceReceipt": {
+    "path": "art-source/vehicle-bake/retro-scooter/v1/evidence/replay-verification.json",
+    "sha256": "80d080d4237c73b6b200b22a8fa7ef9cfd0aef38ca9d9c555203e95b3139cc67"
+  },
+  "independentReplayReceipt": {
+    "path": "art-source/vehicle-bake/rider-explorer-retro-scooter/v1/evidence/base-independent-replay.json",
+    "sha256": "1585e1b6923c56fa88fb6eef60337f92274281240d67e01a6704462621c35cf4"
+  },
+  "meaning": "Normalized immutable child aliases; independently reproduced source outputs; not human approval or normal availability"
+}

@@ -1,0 +1,780 @@
+{
+  "family": "original-mint-cream-step-through-scooter",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [
+    2.69,
+    0.72,
+    1.305
+  ],
+  "riderMountSource": [
+    0.05000000074505806,
+    0.0,
+    0.9300000071525574
+  ],
+  "constructionSharedInputs": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733"
+  },
+  "riderProfile": {
+    "path": "art-source/vehicle-riders/profiles/upright-v1.json",
+    "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "riderInputs": {
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "wheelSpecs": {
+    "F": {
+      "axle": -0.98,
+      "halfTrack": 0,
+      "radius": 0.31,
+      "width": 0.18,
+      "segments": 20
+    },
+    "R": {
+      "axle": 0.95,
+      "halfTrack": 0,
+      "radius": 0.33,
+      "width": 0.24,
+      "segments": 24
+    }
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      40,
+      43,
+      54
+    ],
+    "tireLight": [
+      65,
+      70,
+      82
+    ],
+    "paintDeep": [
+      49,
+      106,
+      103
+    ],
+    "paintShadow": [
+      64,
+      143,
+      128
+    ],
+    "paintMid": [
+      86,
+      166,
+      144
+    ],
+    "paint": [
+      113,
+      190,
+      163
+    ],
+    "paintLight": [
+      166,
+      220,
+      187
+    ],
+    "cream": [
+      244,
+      229,
+      196
+    ],
+    "creamShadow": [
+      194,
+      181,
+      153
+    ],
+    "white": [
+      248,
+      247,
+      230
+    ],
+    "seat": [
+      62,
+      57,
+      62
+    ],
+    "seatLight": [
+      89,
+      80,
+      79
+    ],
+    "frame": [
+      63,
+      71,
+      84
+    ],
+    "frameLight": [
+      103,
+      116,
+      128
+    ],
+    "engine": [
+      111,
+      119,
+      130
+    ],
+    "engineLight": [
+      151,
+      162,
+      173
+    ],
+    "chrome": [
+      198,
+      210,
+      217
+    ],
+    "rim": [
+      127,
+      139,
+      151
+    ],
+    "ruby": [
+      181,
+      50,
+      70
+    ],
+    "amber": [
+      236,
+      164,
+      77
+    ],
+    "dark": [
+      47,
+      52,
+      63
+    ]
+  },
+  "paintMethod": "Original mint/cream retro scooter: own rounded transverse legshield, open step-through continuous floor and edge rails, broad rear cowling cut with real wheel arch, long rear saddle and headlamp nacelle. True smaller F/R wheels. Unchanged Explorer is separately mounted; soles contact floor, no pegs.",
+  "paintOwnership": "Actual curved shield front/back skin chart, rear cowling side/top/end charts and real arch faces, continuous floor top UV with broad foot tracks, saddle/nacelle/gray lamp/rim swatch owners. One opaque512nearestunlit bike atlas, immutable rider atlas separate; no overlays/PBR/view-dependent paint.",
+  "sourceStatus": "prototype-source-only; parent actual shared-cycle family qualification pending",
+  "contactPolicy": {
+    "profilePlusOneMountOnly": true,
+    "hip": "actual dark saddle top tangent",
+    "hands": "actual grip centerlines, local closed palm wrap only",
+    "feet": "actual continuous floor TOP, closed sole tangent; no foot pegs",
+    "exceptions": "Corresponding closed palms/grips, boot soles/floor top, pelvis/saddle only within explicit measured bounds."
+  },
+  "fenders": {
+    "F": {
+      "innerRadius": 0.365,
+      "outerRadius": 0.405,
+      "halfWidth": 0.15,
+      "angularLimit": 1.15,
+      "segments": 16
+    }
+  },
+  "limits": [
+    "No normalactivation/AI/occupiedfallback/allavatars qualification",
+    "No nonzero steering/suspension/rideranimation claim",
+    "RawGLTF diagnostics are separate from parent actualsharedreview"
+  ],
+  "controlVariant": {
+    "saddleCenterX": 0.16,
+    "saddleLength": 0.48,
+    "saddleWidth": 0.16,
+    "pillionCenterX": 0.68,
+    "pillionLength": 0.84,
+    "pillionWidth": 0.43,
+    "pillionRise": 0.02,
+    "gripHalfLength": 0.075,
+    "gripRadius": 0.024,
+    "headstock": [
+      -0.62,
+      0,
+      1.2
+    ]
+  },
+  "id": "retro-scooter",
+  "rider": {
+    "id": "explorer-upright",
+    "label": "Explorer",
+    "sourceDirectory": "art-source/vehicle-riders/explorer-upright/v1",
+    "glbPath": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+    "glbSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "rootName": "Explorer_HipOrigin_forward_minus_X",
+    "meshName": "Explorer_static_seated",
+    "triangles": 1956,
+    "semanticContacts": {
+      "hip_saddle": "Upright seated trouser pelvis",
+      "hand_left_grip": "Warm gripping hand left",
+      "hand_right_grip": "Warm gripping hand right",
+      "foot_left_support": "Boot sole left",
+      "foot_right_support": "Boot sole right"
+    }
+  },
+  "contactBoundsSource": {
+    "hipHalfExtentXY": [
+      0.17,
+      0.14
+    ],
+    "surfaceZTolerance": 0.002,
+    "palmRadius": 0.085,
+    "soleRadius": 0.125
+  },
+  "negativeRiderTranslationSource": [
+    -0.35,
+    0,
+    -0.22
+  ],
+  "geometryOwners": {
+    "rearBody": "Rounded mint rear cowling actual arch skin UV",
+    "shield": "Rounded transverse mint cream legshield skin UV",
+    "floor": "Actual continuous step-through floor"
+  },
+  "displayName": "Mint and cream retro scooter",
+  "authoringLimits": [
+    "New scooter body topology; generic export/fit primitives reused in owned source only",
+    "Unchanged Explorer upright/profile; physical floor contacts, no avatar deformation",
+    "No normal/AI/fallback/all-avatar/steering/suspension/animation claim"
+  ],
+  "rearBody": {
+    "stations": [
+      [
+        0.25,
+        0.22
+      ],
+      [
+        0.36,
+        0.74
+      ],
+      [
+        0.55,
+        1
+      ],
+      [
+        0.95,
+        1
+      ],
+      [
+        1.2,
+        0.76
+      ],
+      [
+        1.32,
+        0.28
+      ]
+    ],
+    "segments": 16,
+    "centerZ": 0.57,
+    "heightRadius": 0.29,
+    "halfWidth": 0.36,
+    "archRadius": 0.385,
+    "archSegments": 40,
+    "chartX": [
+      0.2,
+      1.36
+    ],
+    "chartZ": [
+      0.2,
+      0.92
+    ]
+  },
+  "shield": {
+    "levels": [
+      [
+        0.4,
+        -0.54,
+        0.23
+      ],
+      [
+        0.46,
+        -0.57,
+        0.3
+      ],
+      [
+        0.68,
+        -0.64,
+        0.36
+      ],
+      [
+        0.94,
+        -0.67,
+        0.34
+      ],
+      [
+        1.08,
+        -0.64,
+        0.26
+      ],
+      [
+        1.13,
+        -0.61,
+        0.16
+      ]
+    ],
+    "widthFractions": [
+      -1,
+      -0.85,
+      -0.5,
+      0,
+      0.5,
+      0.85,
+      1
+    ],
+    "thickness": 0.08,
+    "edgeCurve": 0.06,
+    "chartY": [
+      -0.38,
+      0.38
+    ],
+    "chartZ": [
+      0.35,
+      1.15
+    ]
+  },
+  "floor": {
+    "xRange": [
+      -0.56,
+      0.32
+    ],
+    "halfWidth": 0.33,
+    "thickness": 0.05,
+    "railHeight": 0.08,
+    "rayX": [
+      -0.42,
+      -0.27,
+      -0.12
+    ],
+    "rayY": [
+      -0.2,
+      0,
+      0.2
+    ],
+    "rayOriginZ": 1.25,
+    "owner": "Actual continuous step-through floor"
+  },
+  "contactOwners": {
+    "floor": "Actual continuous step-through floor"
+  },
+  "negativeCollisionOwnerToken": "legshield",
+  "components": [
+    {
+      "name": "Rounded mint rear cowling actual arch skin UV",
+      "group": "body",
+      "triangles": 268,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Rounded transverse mint cream legshield skin UV",
+      "group": "body",
+      "triangles": 164,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Actual continuous step-through floor",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "creamShadow"
+      ]
+    },
+    {
+      "name": "Step-through raised outer floor rail -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Step-through raised outer floor rail 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Actual dark saddle central hip tangent",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seat"
+      ]
+    },
+    {
+      "name": "Scooter broad long rear saddle",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "seatLight"
+      ]
+    },
+    {
+      "name": "Scooter front fork -1",
+      "group": "body",
+      "triangles": 36,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Scooter rear arm -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Scooter fixed axle stub F -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "frameLight"
+      ]
+    },
+    {
+      "name": "Scooter fixed axle stub R -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "frameLight"
+      ]
+    },
+    {
+      "name": "Scooter front fork 1",
+      "group": "body",
+      "triangles": 36,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Scooter rear arm 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Scooter fixed axle stub F 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "frameLight"
+      ]
+    },
+    {
+      "name": "Scooter fixed axle stub R 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "frameLight"
+      ]
+    },
+    {
+      "name": "Scooter low floor frame",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Scooter steering mast",
+      "group": "body",
+      "triangles": 36,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Headstock to actual grip riser",
+      "group": "body",
+      "triangles": 36,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Actual connected handlebar centerline",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Actual palm wrapped grip left",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "dark"
+      ]
+    },
+    {
+      "name": "Actual palm wrapped grip right",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "dark"
+      ]
+    },
+    {
+      "name": "Scooter rounded handlebar headlamp nacelle",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "paintLight"
+      ]
+    },
+    {
+      "name": "Scooter gray round headlamp rim",
+      "group": "body",
+      "triangles": 52,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Scooter cream round headlamp lens",
+      "group": "body",
+      "triangles": 52,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Scooter small rear red lamp",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Scooter actual curved front fender F",
+      "group": "body",
+      "triangles": 132,
+      "paintRoles": [
+        "cream",
+        "creamShadow",
+        "paint",
+        "paintDeep"
+      ]
+    },
+    {
+      "name": "Scooter true rounded road tire F",
+      "group": "F",
+      "triangles": 196,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Scooter broad wheel rim F -1",
+      "group": "F",
+      "triangles": 52,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Scooter chrome wheel hub F -1",
+      "group": "F",
+      "triangles": 34,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Scooter asymmetric phase index F -1",
+      "group": "F",
+      "triangles": 22,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Scooter broad wheel rim F 1",
+      "group": "F",
+      "triangles": 52,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Scooter chrome wheel hub F 1",
+      "group": "F",
+      "triangles": 34,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Scooter asymmetric phase index F 1",
+      "group": "F",
+      "triangles": 22,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Scooter true rounded road tire R",
+      "group": "R",
+      "triangles": 236,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Scooter broad wheel rim R -1",
+      "group": "R",
+      "triangles": 52,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Scooter chrome wheel hub R -1",
+      "group": "R",
+      "triangles": 34,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Scooter asymmetric phase index R -1",
+      "group": "R",
+      "triangles": 22,
+      "paintRoles": [
+        "frame"
+      ]
+    },
+    {
+      "name": "Scooter broad wheel rim R 1",
+      "group": "R",
+      "triangles": 52,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Scooter chrome wheel hub R 1",
+      "group": "R",
+      "triangles": 34,
+      "paintRoles": [
+        "chrome"
+      ]
+    },
+    {
+      "name": "Scooter asymmetric phase index R 1",
+      "group": "R",
+      "triangles": 22,
+      "paintRoles": [
+        "frame"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "F",
+      "centerBlender": [
+        -0.9800000190734863,
+        0.0,
+        0.3100000023841858
+      ],
+      "centerExport": [
+        -17.043478592582375,
+        5.391304389290188,
+        -0.0
+      ],
+      "radiusBlender": 0.31,
+      "wheel_radius": 5.391304347826088
+    },
+    {
+      "id": "R",
+      "centerBlender": [
+        0.949999988079071,
+        0.0,
+        0.33000001311302185
+      ],
+      "centerExport": [
+        16.52173892311428,
+        5.739130662835163,
+        -0.0
+      ],
+      "radiusBlender": 0.33,
+      "wheel_radius": 5.73913043478261
+    }
+  ],
+  "riderProfileInput": {
+    "path": "art-source/vehicle-riders/profiles/upright-v1.json",
+    "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "actualBikeContactsSource": {
+    "hip_saddle": [
+      0.05000000074505806,
+      0.0,
+      0.8504999876022339
+    ],
+    "hand_left_grip": [
+      -0.5,
+      -0.23000000417232513,
+      1.2000000476837158
+    ],
+    "hand_right_grip": [
+      -0.5,
+      0.23000000417232513,
+      1.2000000476837158
+    ],
+    "foot_left_support": [
+      -0.019999999552965164,
+      -0.23000000417232513,
+      0.40000003576278687
+    ],
+    "foot_right_support": [
+      -0.019999999552965164,
+      0.23000000417232513,
+      0.40000003576278687
+    ]
+  },
+  "method": "Original mint/cream retro scooter: own rounded transverse legshield, open step-through continuous floor and edge rails, broad rear cowling cut with real wheel arch, long rear saddle and headlamp nacelle. True smaller F/R wheels. Unchanged Explorer is separately mounted; soles contact floor, no pegs.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/retro-scooter/build.py",
+    "scripts/vehicle-bake/retro-scooter/geometry.py",
+    "scripts/vehicle-bake/retro-scooter/family.json",
+    "scripts/vehicle-bake/retro-scooter/raw-audit.py"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "Explicit stable catalog-cycle.py static true-F/R audit; no shared runtime/browser qualification inferred",
+    "Own two-wheel actual-body+rider envelope/negative proofs; parent cycle review pending",
+    "Raw GLTF depth diagnostic imports only shared CarMeshProjection and CarPixelOutline math; CarMeshAsset not used"
+  ]
+}

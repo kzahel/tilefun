@@ -1,0 +1,40 @@
+{
+  "status": "source-pilot-complete-not-production",
+  "bike": {
+    "path": "public/demos/vehicle-bake/classic-motorcycle-player-fit/v1/model.glb",
+    "sha256": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+    "triangles": 2602,
+    "draws": 3,
+    "atlases": 1
+  },
+  "rider": {
+    "path": "art-source/vehicle-riders/classic-upright/v3/rider.glb",
+    "sha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+    "triangles": 1766,
+    "draws": 1,
+    "atlases": 1,
+    "immutable": true,
+    "reexported": false
+  },
+  "singleMountSource": [
+    0.1,
+    0,
+    1.0605
+  ],
+  "mountWorldBlender": [
+    1.739130434782609,
+    0.0,
+    18.44347826086957
+  ],
+  "mountTransform": "Translation only; source XYZ maps to glTF X,Z,-Y. No rider scaling/repose/profile change.",
+  "combined": {
+    "triangles": 4368,
+    "draws": 4,
+    "atlases": 2,
+    "oneActualDepthTarget": true,
+    "combinedGLBExported": false
+  },
+  "humanApproval": false,
+  "normalActivation": false,
+  "actualSharedLoaderQualification": "pending parent"
+}

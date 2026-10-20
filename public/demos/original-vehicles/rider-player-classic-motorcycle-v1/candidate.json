@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-player-classic-motorcycle-v1",
+      "name": "Classic \u00b7 fitted classic-bike pilot",
+      "title": "Classic default player \u00b7 fitted classic bike \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact mechanically fitted classic bike and unchanged Classic v3 composed at one measured mount, preserving child geometry and paint. No normal occupancy, AI, occupied fallback or all27 qualification.",
+      "audit": {
+        "triangles": 4368,
+        "vertices": 8836,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 318760,
+        "sha256": "5dd8f8c38f13b6983ecf63feaf2c750270e52c4dc317ca98f35dc92f809a0d2e",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-player-classic-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-player-classic-motorcycle-v1/inputs/atlas.png",
+          "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-player-classic-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-player-classic-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-player-classic-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-player-classic-motorcycle-v1/inputs/composition.json",
+          "sha256": "7ae3ad70243826a66969db244b2a4cecd446c387b4e89f8d4001b6844b6f8928"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-player-classic-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-player-classic-motorcycle-v1/inputs/model.glb",
+          "sha256": "5dd8f8c38f13b6983ecf63feaf2c750270e52c4dc317ca98f35dc92f809a0d2e"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-player-classic-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-player-classic-motorcycle-v1/inputs/recipe.json",
+          "sha256": "6200c9c13bfe8ea63c5b39e734588cdd5e2b24aa0b7b8e30e3cdc9e68052a79a"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-player-classic-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-player-classic-motorcycle-v1/inputs/report.json",
+          "sha256": "f148296eb701ba7e1a131116c12ae7728d6c8b38fdfc1ffb817b3d5e83bd2ea7"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "sourcePilot": true,
+  "productionQualified": false,
+  "ready": true,
+  "sourceImmutable": true,
+  "glbSha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+  "atlasSha256": "3538c7e7d14926a4ffb9bef798cfe6d04b0231fb7fb6533f65c15c80eece4069",
+  "recipeSha256": "ac3225d69649e8af3a6e9de6f48bb405755b46ffd630de7ca25031dab10c9f62",
+  "report": "public/demos/vehicle-bake/sport-motorcycle/v1/report.json",
+  "normalActivation": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "proofCommands": [
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/sport-motorcycle/prove-fit.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/sport-motorcycle/audit-source.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/sport-motorcycle/v1/model.glb --config art-source/vehicle-bake/sport-motorcycle/v1/coverage-region.json --output data/vehicle-bake/sport-motorcycle/recheck-coverage.json",
+    "node scripts/vehicle-bake/sport-motorcycle/capture-raw.mjs",
+    "python scripts/vehicle-bake/sport-motorcycle/assess-pixels.py",
+    "python scripts/vehicle-bake/sport-motorcycle/fresh-replay.py --name parent-fresh-replay --blender BLENDER"
+  ],
+  "replayInputs": "Six declared files: own build/geometry/family/raw-audit, stable catalog-cycle and immutable upright profile; no master/scratch input",
+  "parentNext": "Independent review/replay and eventual actual shared cycle loader/browser qualification; no normal activation"
+}

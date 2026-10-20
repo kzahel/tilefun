@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-touring-motorcycle-v1",
+      "name": "explorer-upright \u00b7 touring-motorcycle fit pilot",
+      "title": "explorer-upright \u00b7 touring-motorcycle \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact touring-motorcycle and unchanged explorer-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 4452,
+        "vertices": 9095,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 330048,
+        "sha256": "773afa2b30863c7561bee970f8de709e3cd0de22e1d9a382170992ebcf7d9b33",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-touring-motorcycle-v1/inputs/atlas.png",
+          "sha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-touring-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-touring-motorcycle-v1/inputs/composition.json",
+          "sha256": "4d5abf01e4ca9481d62ee2e17a4bdfd52954219fcb2926bee959252f071bdccb"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-touring-motorcycle-v1/inputs/model.glb",
+          "sha256": "773afa2b30863c7561bee970f8de709e3cd0de22e1d9a382170992ebcf7d9b33"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-touring-motorcycle-v1/inputs/recipe.json",
+          "sha256": "1e6b7781121449ef150bbadc292a04aeb5cbf5a1cc8388d20eeaa88c3c04c0fd"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-touring-motorcycle-v1/inputs/report.json",
+          "sha256": "f22b2adbcea9e1fcfdd990b2f2f735b26e2a8bab94d10857bc4a21a3625a364b"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

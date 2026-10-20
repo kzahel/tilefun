@@ -1,0 +1,1648 @@
+{
+  "schema": "sport-own-per-wheel-region-composition-v1",
+  "status": "evidence-only",
+  "input": "public/demos/vehicle-bake/sport-motorcycle/v1/model.glb",
+  "inputSha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+  "inputBytesUnchanged": true,
+  "region": {
+    "method": "Each actual tire half-width, central75percent and same finite longitudinal/support rules; wheel-specific selected raw result, no altered shared metric",
+    "byWheel": {
+      "F": {
+        "name": "sport-F-actual-tire-central75pct-halfwidth-v1",
+        "longitudinalFractionsR": [
+          -0.6,
+          -0.3,
+          0,
+          0.3,
+          0.6
+        ],
+        "treadFractions": [
+          -0.75,
+          -0.375,
+          0,
+          0.375,
+          0.75
+        ],
+        "treadCenterOutwardR": 0,
+        "treadHalfWidthR": 0.2619047619047619,
+        "minimumComponentAxialSpanR": 0.35,
+        "minimumComponentAreaR2": 0.2,
+        "minimumAbsNormalZ": 0.25,
+        "supportHalfWidthR": 0.12,
+        "supportFractions": [
+          -1,
+          -0.5,
+          0,
+          0.5,
+          1
+        ],
+        "maximumRayDistanceR": 1.2,
+        "expectedCoveredFraction": 1,
+        "sourceRollSuffix": "_Roll"
+      },
+      "R": {
+        "name": "sport-R-actual-tire-central75pct-halfwidth-v1",
+        "longitudinalFractionsR": [
+          -0.6,
+          -0.3,
+          0,
+          0.3,
+          0.6
+        ],
+        "treadFractions": [
+          -0.75,
+          -0.375,
+          0,
+          0.375,
+          0.75
+        ],
+        "treadCenterOutwardR": 0,
+        "treadHalfWidthR": 0.35714285714285715,
+        "minimumComponentAxialSpanR": 0.35,
+        "minimumComponentAreaR2": 0.2,
+        "minimumAbsNormalZ": 0.25,
+        "supportHalfWidthR": 0.12,
+        "supportFractions": [
+          -1,
+          -0.5,
+          0,
+          0.5,
+          1
+        ],
+        "maximumRayDistanceR": 1.2,
+        "expectedCoveredFraction": 1,
+        "sourceRollSuffix": "_Roll"
+      }
+    }
+  },
+  "wheels": [
+    {
+      "wheel": "Wheel_F_Roll",
+      "centerWorld": [
+        -19.478260040283203,
+        0.0,
+        7.304347991943359
+      ],
+      "radiusWorld": 7.304348315896555,
+      "actualAxialBoundsWorld": [
+        -2.5565216541290283,
+        2.5565216541290283
+      ],
+      "samples": [
+        {
+          "xFractionR": -0.6,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            -23.860868453979492,
+            -1.4347827434539795,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadVerticalMarginWorld": 1.9566350252612708,
+          "broadVerticalMarginR": 0.26787263430510544,
+          "upwardPanelGapWorld": 1.2405715258105872,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405715258105872,
+          "nearestBroadGeometryDistanceWorld": 1.0150521993637085
+        },
+        {
+          "xFractionR": -0.6,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            -23.860868453979492,
+            -0.7173913717269897,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadVerticalMarginWorld": 1.9566340715869543,
+          "broadVerticalMarginR": 0.267872503742559,
+          "upwardPanelGapWorld": 1.2405715258105872,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405715258105872,
+          "nearestBroadGeometryDistanceWorld": 1.0150521993637085
+        },
+        {
+          "xFractionR": -0.6,
+          "treadFraction": 0,
+          "pointWorld": [
+            -23.860868453979492,
+            0.0,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadVerticalMarginWorld": 1.9566350252612708,
+          "broadVerticalMarginR": 0.26787263430510544,
+          "upwardPanelGapWorld": 1.2405715258105872,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405715258105872,
+          "nearestBroadGeometryDistanceWorld": 1.0150514841079712
+        },
+        {
+          "xFractionR": -0.6,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            -23.860868453979492,
+            0.7173913717269897,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadVerticalMarginWorld": 1.9566350252612708,
+          "broadVerticalMarginR": 0.26787263430510544,
+          "upwardPanelGapWorld": 1.2405715258105872,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405715258105872,
+          "nearestBroadGeometryDistanceWorld": 1.0150514841079712
+        },
+        {
+          "xFractionR": -0.6,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            -23.860868453979492,
+            1.4347827434539795,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadUpHit": {
+            "z": 14.388398170471191,
+            "distance": 1.2405643463134766,
+            "component": 29,
+            "normalAbsZ": 0.8182129859924316
+          },
+          "broadVerticalMarginWorld": 1.9566350252612708,
+          "broadVerticalMarginR": 0.26787263430510544,
+          "upwardPanelGapWorld": 1.2405715258105872,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405715258105872,
+          "nearestBroadGeometryDistanceWorld": 1.0150514841079712
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            -21.669565200805664,
+            -1.4347827434539795,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541452169418335,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541452169418335,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 6.492962728763015,
+          "broadVerticalMarginR": 0.8889174568294189,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180423259735107
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            -21.669565200805664,
+            -0.7173913717269897,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 6.492962728763015,
+          "broadVerticalMarginR": 0.8889174568294189,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180423259735107
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": 0,
+          "pointWorld": [
+            -21.669565200805664,
+            0.0,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 6.492962728763015,
+          "broadVerticalMarginR": 0.8889174568294189,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180423259735107
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            -21.669565200805664,
+            0.7173913717269897,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541449785232544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541449785232544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 6.492962728763015,
+          "broadVerticalMarginR": 0.8889174568294189,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180423259735107
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            -21.669565200805664,
+            1.4347827434539795,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 6.492962728763015,
+          "broadVerticalMarginR": 0.8889174568294189,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180413722991943
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            -19.478260040283203,
+            -1.4347827434539795,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434695482254028,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434695482254028,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadVerticalMarginWorld": 7.639289532003836,
+          "broadVerticalMarginR": 1.0458550443683448,
+          "upwardPanelGapWorld": 1.0434767344574496,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0434767344574496,
+          "nearestBroadGeometryDistanceWorld": 1.0394847393035889
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            -19.478260040283203,
+            -0.7173913717269897,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434694290161133,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434694290161133,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadVerticalMarginWorld": 7.639289532003836,
+          "broadVerticalMarginR": 1.0458550443683448,
+          "upwardPanelGapWorld": 1.0434767344574496,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0434767344574496,
+          "nearestBroadGeometryDistanceWorld": 1.039484977722168
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": 0,
+          "pointWorld": [
+            -19.478260040283203,
+            0.0,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434694290161133,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434694290161133,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadVerticalMarginWorld": 7.639289532003836,
+          "broadVerticalMarginR": 1.0458550443683448,
+          "upwardPanelGapWorld": 1.0434767344574496,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0434767344574496,
+          "nearestBroadGeometryDistanceWorld": 1.039484977722168
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            -19.478260040283203,
+            0.7173913717269897,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434694290161133,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434694290161133,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadVerticalMarginWorld": 7.639289532003836,
+          "broadVerticalMarginR": 1.0458550443683448,
+          "upwardPanelGapWorld": 1.0434767344574496,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0434767344574496,
+          "nearestBroadGeometryDistanceWorld": 1.0394847393035889
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            -19.478260040283203,
+            1.4347827434539795,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434695482254028,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadUpHit": {
+            "z": 15.652173042297363,
+            "distance": 1.0434695482254028,
+            "component": 29,
+            "normalAbsZ": 0.9961743354797363
+          },
+          "broadVerticalMarginWorld": 7.639289532003836,
+          "broadVerticalMarginR": 1.0458550443683448,
+          "upwardPanelGapWorld": 1.0434767344574496,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0434767344574496,
+          "nearestBroadGeometryDistanceWorld": 1.039484977722168
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            -17.286954879760742,
+            -1.4347827434539795,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541449785232544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541449785232544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 8.381531606936843,
+          "broadVerticalMarginR": 1.1474715120986219,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180423259735107
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            -17.286954879760742,
+            -0.7173913717269897,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 8.381531606936843,
+          "broadVerticalMarginR": 1.1474715120986219,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180423259735107
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": 0,
+          "pointWorld": [
+            -17.286954879760742,
+            0.0,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541452169418335,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541452169418335,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 8.381531606936843,
+          "broadVerticalMarginR": 1.1474715120986219,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180423259735107
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            -17.286954879760742,
+            0.7173913717269897,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.054145097732544,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 8.381531606936843,
+          "broadVerticalMarginR": 1.1474715120986219,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180413722991943
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            -17.286954879760742,
+            1.4347827434539795,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541452169418335,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadUpHit": {
+            "z": 15.326404571533203,
+            "distance": 1.0541452169418335,
+            "component": 29,
+            "normalAbsZ": 0.9657441973686218
+          },
+          "broadVerticalMarginWorld": 8.381531606936843,
+          "broadVerticalMarginR": 1.1474715120986219,
+          "upwardPanelGapWorld": 1.0541523802522725,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.0541523802522725,
+          "nearestBroadGeometryDistanceWorld": 1.0180423259735107
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            -15.095650672912598,
+            -1.4347827434539795,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadVerticalMarginWorld": 4.133778122185099,
+          "broadVerticalMarginR": 0.5659338716348863,
+          "upwardPanelGapWorld": 1.2405696184619543,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405696184619543,
+          "nearestBroadGeometryDistanceWorld": 1.0150508880615234
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            -15.095650672912598,
+            -0.7173913717269897,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadVerticalMarginWorld": 4.133778122185099,
+          "broadVerticalMarginR": 0.5659338716348863,
+          "upwardPanelGapWorld": 1.2405696184619543,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405696184619543,
+          "nearestBroadGeometryDistanceWorld": 1.0150508880615234
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": 0,
+          "pointWorld": [
+            -15.095650672912598,
+            0.0,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadVerticalMarginWorld": 4.133778122185099,
+          "broadVerticalMarginR": 0.5659338716348863,
+          "upwardPanelGapWorld": 1.2405696184619543,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405696184619543,
+          "nearestBroadGeometryDistanceWorld": 1.0150508880615234
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            -15.095650672912598,
+            0.7173913717269897,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadVerticalMarginWorld": 4.133778122185099,
+          "broadVerticalMarginR": 0.5659338716348863,
+          "upwardPanelGapWorld": 1.2405696184619543,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405696184619543,
+          "nearestBroadGeometryDistanceWorld": 1.0150514841079712
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            -15.095650672912598,
+            1.4347827434539795,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadUpHit": {
+            "z": 14.388396263122559,
+            "distance": 1.2405624389648438,
+            "component": 29,
+            "normalAbsZ": 0.8182132840156555
+          },
+          "broadVerticalMarginWorld": 4.133778122185099,
+          "broadVerticalMarginR": 0.5659338716348863,
+          "upwardPanelGapWorld": 1.2405696184619543,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2405696184619543,
+          "nearestBroadGeometryDistanceWorld": 1.0150508880615234
+        }
+      ],
+      "sampleCount": 25,
+      "coveredCount": 25,
+      "coveredFraction": 1.0,
+      "declaredExpectedFraction": 1,
+      "declaredExpectationMet": true,
+      "uncoveredSamples": [],
+      "rawOnlyCount": 0,
+      "unsupportedPanelCount": 0
+    },
+    {
+      "wheel": "Wheel_R_Roll",
+      "centerWorld": [
+        19.478260040283203,
+        0.0,
+        7.304347991943359
+      ],
+      "radiusWorld": 7.304348315896555,
+      "actualAxialBoundsWorld": [
+        -3.252173900604248,
+        3.252173900604248
+      ],
+      "samples": [
+        {
+          "xFractionR": -0.6,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            15.095650672912598,
+            -1.9565218687057495,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadVerticalMarginWorld": 7.330273178337443,
+          "broadVerticalMarginR": 1.0035492368818812,
+          "upwardPanelGapWorld": 1.4501529009326575,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501529009326575,
+          "nearestBroadGeometryDistanceWorld": 1.1961528062820435
+        },
+        {
+          "xFractionR": -0.6,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            15.095650672912598,
+            -0.9782609343528748,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadVerticalMarginWorld": 7.582607773064005,
+          "broadVerticalMarginR": 1.0380950421767086,
+          "upwardPanelGapWorld": 1.4501529009326575,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501529009326575,
+          "nearestBroadGeometryDistanceWorld": 1.1961523294448853
+        },
+        {
+          "xFractionR": -0.6,
+          "treadFraction": 0,
+          "pointWorld": [
+            15.095650672912598,
+            0.0,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadVerticalMarginWorld": 7.582607773064005,
+          "broadVerticalMarginR": 1.0380950421767086,
+          "upwardPanelGapWorld": 1.4501529009326575,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501529009326575,
+          "nearestBroadGeometryDistanceWorld": 1.1961528062820435
+        },
+        {
+          "xFractionR": -0.6,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            15.095650672912598,
+            0.9782609343528748,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadVerticalMarginWorld": 7.582607773064005,
+          "broadVerticalMarginR": 1.0380950421767086,
+          "upwardPanelGapWorld": 1.4501529009326575,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501529009326575,
+          "nearestBroadGeometryDistanceWorld": 1.1961528062820435
+        },
+        {
+          "xFractionR": -0.6,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            15.095650672912598,
+            1.9565218687057495,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadUpHit": {
+            "z": 14.597979545593262,
+            "distance": 1.4501458406448364,
+            "component": 30,
+            "normalAbsZ": 0.8795722723007202
+          },
+          "broadVerticalMarginWorld": 7.330273178337443,
+          "broadVerticalMarginR": 1.0035492368818812,
+          "upwardPanelGapWorld": 1.4501529009326575,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501529009326575,
+          "nearestBroadGeometryDistanceWorld": 1.1961528062820435
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            17.286954879760742,
+            -1.9565218687057495,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552682161331177,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552682161331177,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 6.534808050418288,
+          "broadVerticalMarginR": 0.8946462802433031,
+          "upwardPanelGapWorld": 1.2552756178621358,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552756178621358,
+          "nearestBroadGeometryDistanceWorld": 1.204959511756897
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            17.286954879760742,
+            -0.9782609343528748,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552683353424072,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552683353424072,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 6.875573049807937,
+          "broadVerticalMarginR": 0.9412986282218403,
+          "upwardPanelGapWorld": 1.2552756178621358,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552756178621358,
+          "nearestBroadGeometryDistanceWorld": 1.2049578428268433
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": 0,
+          "pointWorld": [
+            17.286954879760742,
+            0.0,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552682161331177,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552682161331177,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 6.875573049807937,
+          "broadVerticalMarginR": 0.9412986282218403,
+          "upwardPanelGapWorld": 1.2552756178621358,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552756178621358,
+          "nearestBroadGeometryDistanceWorld": 1.2049578428268433
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            17.286954879760742,
+            0.9782609343528748,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552680969238281,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552680969238281,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 6.875573049807937,
+          "broadVerticalMarginR": 0.9412986282218403,
+          "upwardPanelGapWorld": 1.2552756178621358,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552756178621358,
+          "nearestBroadGeometryDistanceWorld": 1.2049587965011597
+        },
+        {
+          "xFractionR": -0.3,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            17.286954879760742,
+            1.9565218687057495,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552680969238281,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527527809143066,
+            "distance": 1.2552680969238281,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 6.534808050418288,
+          "broadVerticalMarginR": 0.8946462802433031,
+          "upwardPanelGapWorld": 1.2552756178621358,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552756178621358,
+          "nearestBroadGeometryDistanceWorld": 1.2049585580825806
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            19.478260040283203,
+            -1.9565218687057495,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadVerticalMarginWorld": 6.529914532003836,
+          "broadVerticalMarginR": 0.8939763343148207,
+          "upwardPanelGapWorld": 1.2173906901459262,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2173906901459262,
+          "nearestBroadGeometryDistanceWorld": 1.2143383026123047
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            19.478260040283203,
+            -0.9782609343528748,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadVerticalMarginWorld": 6.956521663961844,
+          "broadVerticalMarginR": 0.9523808782259561,
+          "upwardPanelGapWorld": 1.2173906901459262,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2173906901459262,
+          "nearestBroadGeometryDistanceWorld": 1.2143383026123047
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": 0,
+          "pointWorld": [
+            19.478260040283203,
+            0.0,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadVerticalMarginWorld": 6.956521663961844,
+          "broadVerticalMarginR": 0.9523808782259561,
+          "upwardPanelGapWorld": 1.2173906901459262,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2173906901459262,
+          "nearestBroadGeometryDistanceWorld": 1.2143374681472778
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            19.478260040283203,
+            0.9782609343528748,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadVerticalMarginWorld": 6.956521663961844,
+          "broadVerticalMarginR": 0.9523808782259561,
+          "upwardPanelGapWorld": 1.2173906901459262,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2173906901459262,
+          "nearestBroadGeometryDistanceWorld": 1.2143383026123047
+        },
+        {
+          "xFractionR": 0,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            19.478260040283203,
+            1.9565218687057495,
+            14.608695983886719
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadUpHit": {
+            "z": 15.82608699798584,
+            "distance": 1.2173833847045898,
+            "component": 30,
+            "normalAbsZ": 0.9974924325942993
+          },
+          "broadVerticalMarginWorld": 6.529914532003836,
+          "broadVerticalMarginR": 0.8939763343148207,
+          "upwardPanelGapWorld": 1.2173906901459262,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2173906901459262,
+          "nearestBroadGeometryDistanceWorld": 1.2143383026123047
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            21.669565200805664,
+            -1.9565218687057495,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552686929702759,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552686929702759,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 1.8764180052522725,
+          "broadVerticalMarginR": 0.25689054301649306,
+          "upwardPanelGapWorld": 1.2552765715364522,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552765715364522,
+          "nearestBroadGeometryDistanceWorld": 1.204959511756897
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            21.669565200805664,
+            -0.9782609343528748,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552685737609863,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552685737609863,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 6.924250494265944,
+          "broadVerticalMarginR": 0.9479628017186148,
+          "upwardPanelGapWorld": 1.2552765715364522,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552765715364522,
+          "nearestBroadGeometryDistanceWorld": 1.204959511756897
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": 0,
+          "pointWorld": [
+            21.669565200805664,
+            0.0,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552686929702759,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552686929702759,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 6.994151006961257,
+          "broadVerticalMarginR": 0.9575325141244686,
+          "upwardPanelGapWorld": 1.2552765715364522,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552765715364522,
+          "nearestBroadGeometryDistanceWorld": 1.204959511756897
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            21.669565200805664,
+            0.9782609343528748,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552685737609863,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552685737609863,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 6.924250494265944,
+          "broadVerticalMarginR": 0.9479628017186148,
+          "upwardPanelGapWorld": 1.2552765715364522,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552765715364522,
+          "nearestBroadGeometryDistanceWorld": 1.2049585580825806
+        },
+        {
+          "xFractionR": 0.3,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            21.669565200805664,
+            1.9565218687057495,
+            14.272252082824707
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552686929702759,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadUpHit": {
+            "z": 15.527528762817383,
+            "distance": 1.2552686929702759,
+            "component": 30,
+            "normalAbsZ": 0.9775066375732422
+          },
+          "broadVerticalMarginWorld": 1.8764160979036397,
+          "broadVerticalMarginR": 0.2568902818914001,
+          "upwardPanelGapWorld": 1.2552765715364522,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.2552765715364522,
+          "nearestBroadGeometryDistanceWorld": 1.204959511756897
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": -0.75,
+          "pointWorld": [
+            23.860868453979492,
+            -1.9565218687057495,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.450147271156311,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.450147271156311,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadVerticalMarginWorld": 2.140454796074259,
+          "broadVerticalMarginR": 0.29303843457409573,
+          "upwardPanelGapWorld": 1.4501548082812903,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501548082812903,
+          "nearestBroadGeometryDistanceWorld": 1.1961549520492554
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": -0.375,
+          "pointWorld": [
+            23.860868453979492,
+            -0.9782609343528748,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.450147271156311,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.450147271156311,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadVerticalMarginWorld": 2.1404557497485754,
+          "broadVerticalMarginR": 0.2930385651366422,
+          "upwardPanelGapWorld": 1.4501548082812903,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501538546069739,
+          "nearestBroadGeometryDistanceWorld": 1.1961549520492554
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": 0,
+          "pointWorld": [
+            23.860868453979492,
+            0.0,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.4501473903656006,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.4501473903656006,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadVerticalMarginWorld": 2.1404538423999426,
+          "broadVerticalMarginR": 0.2930383040115493,
+          "upwardPanelGapWorld": 1.4501548082812903,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501548082812903,
+          "nearestBroadGeometryDistanceWorld": 1.196154236793518
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": 0.375,
+          "pointWorld": [
+            23.860868453979492,
+            0.9782609343528748,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.4501473903656006,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.4501473903656006,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadVerticalMarginWorld": 2.1404557497485754,
+          "broadVerticalMarginR": 0.2930385651366422,
+          "upwardPanelGapWorld": 1.4501548082812903,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501538546069739,
+          "nearestBroadGeometryDistanceWorld": 1.196155309677124
+        },
+        {
+          "xFractionR": 0.6,
+          "treadFraction": 0.75,
+          "pointWorld": [
+            23.860868453979492,
+            1.9565218687057495,
+            13.147826194763184
+          ],
+          "status": "panel-covered",
+          "covered": true,
+          "rawUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.450147271156311,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadUpHit": {
+            "z": 14.597981452941895,
+            "distance": 1.450147271156311,
+            "component": 30,
+            "normalAbsZ": 0.8795725107192993
+          },
+          "broadVerticalMarginWorld": 2.1404538423999426,
+          "broadVerticalMarginR": 0.2930383040115493,
+          "upwardPanelGapWorld": 1.4501548082812903,
+          "supportHits": 5,
+          "supportTests": 5,
+          "minimumSupportGapWorld": 1.4501548082812903,
+          "nearestBroadGeometryDistanceWorld": 1.196154236793518
+        }
+      ],
+      "sampleCount": 25,
+      "coveredCount": 25,
+      "coveredFraction": 1.0,
+      "declaredExpectedFraction": 1,
+      "declaredExpectationMet": true,
+      "uncoveredSamples": [],
+      "rawOnlyCount": 0,
+      "unsupportedPanelCount": 0
+    }
+  ],
+  "controls": {
+    "bodyRemovalCoveredCounts": [
+      0,
+      0
+    ],
+    "syntheticBroadPanelPositiveCounts": [
+      25,
+      25
+    ],
+    "sameSyntheticPanelsOffsetOutsideRegionCounts": [
+      0,
+      0
+    ],
+    "positiveAndNegativeControlsPassed": true,
+    "fixtureIsNotCandidateGeometry": true
+  },
+  "rawProofHashes": {
+    "coverage-F.json": "f338f0b0594eff0c53ff6ffc16364628b2126c1ced261ed08a6404c88afd3017",
+    "coverage-R.json": "552997a83570055489ba142f53d9a1b4b1591ff7b217dcf767c0ae0bcba0fc52"
+  },
+  "sharedToolHash": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+  "limitation": "Finite sampled geometric coverage; native all-heading inspection and full-roll clearance remain separate."
+}

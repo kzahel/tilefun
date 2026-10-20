@@ -1,0 +1,105 @@
+{
+  "status": "passed",
+  "glbSha256": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+  "riderSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "actualDecodedSourceOwnerMapping": true,
+  "riserEndpointConnections": [
+    {
+      "component": "Headstock to actual grip riser",
+      "endpointSurfaceGapsWorld": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "component": "Swept control riser segment 1",
+      "endpointSurfaceGapsWorld": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "component": "Swept control riser segment 2",
+      "endpointSurfaceGapsWorld": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "component": "Swept control riser segment 3",
+      "endpointSurfaceGapsWorld": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "component": "Swept control riser segment 4",
+      "endpointSurfaceGapsWorld": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "forkCrownStemConnected": true,
+  "stemCrossbarConnected": true,
+  "bracketGripConnections": [
+    {
+      "side": "left",
+      "bracketCrankcaseConnected": true,
+      "bracketPegConnected": true,
+      "barGripConnected": true
+    },
+    {
+      "side": "right",
+      "bracketCrankcaseConnected": true,
+      "bracketPegConnected": true,
+      "barGripConnected": true
+    }
+  ],
+  "actualTankClearance": {
+    "Headstock to actual grip riser": {
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 0
+    },
+    "Swept control riser segment 1": {
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 0
+    },
+    "Swept control riser segment 2": {
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 0
+    },
+    "Swept control riser segment 3": {
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 0
+    },
+    "Swept control riser segment 4": {
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 0
+    },
+    "Actual connected handlebar centerline": {
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 0
+    },
+    "Connected high peg bracket left": {
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 0
+    },
+    "Connected high peg bracket right": {
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 0
+    }
+  },
+  "loweredRiserTankNegative": {
+    "translationSource": [
+      0,
+      -0.19,
+      -0.18
+    ],
+    "surfaceTrianglePairs": 0,
+    "containedVertices": 16,
+    "rejected": true,
+    "resetExact": true
+  },
+  "limits": "Static mechanical source fit only; no operating steering or road qualification"
+}

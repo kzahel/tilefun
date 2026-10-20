@@ -1,0 +1,50 @@
+{
+  "status": "source-pilot-complete",
+  "sourceStage": "complete",
+  "sourceImmutable": true,
+  "humanApproval": false,
+  "geometry": {
+    "triangles": 1766,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 1,
+    "atlas": [
+      256,
+      256
+    ],
+    "glbBytes": 143668,
+    "sha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192"
+  },
+  "contactFitStatus": "passed-profile-contacts",
+  "targetMissWorld": {
+    "hip_saddle": 6.478765736455504e-08,
+    "hand_left_grip": 4.04922858528469e-08,
+    "foot_left_support": 0.0,
+    "hand_right_grip": 4.04922858528469e-08,
+    "foot_right_support": 0.0
+  },
+  "limits": [
+    "One static Classic compact cream cat player-avatar and synthetic fixture; no actual bike/production/27-avatar/AI/fallback qualification",
+    "Existing standing/promoted characters and normal vehicle runtime unchanged"
+  ],
+  "runtime": "not integrated",
+  "normalActivation": false,
+  "actualBikeQualified": false,
+  "all27Qualified": false,
+  "aiOccupantsQualified": false,
+  "occupiedFallbackQualified": false,
+  "v1Control": "Failed identity-legibility control; immutable, no approval inferred",
+  "peerIdentityReview": "pending parent independent v2 inspection before any retained actual-bike fit",
+  "actualNativeIdentityFeatures": "Two separated interior eye landmarks plus visible violet/yellow collar at front and near-front; original forehead/cheeks/pink pointed ears retained on actual skin. Some side/rear collar cues remain occluded; no exact standing silhouette parity.",
+  "evidence": {
+    "actualContacts": 5,
+    "fixedBoneChecks": 8,
+    "riderNativeHeadings": 32,
+    "riderWireHeadings": 32,
+    "syntheticFixtureCombinedHeadings": 32,
+    "sourceOnlyExactReplay": true,
+    "actualPaletteColors": 7
+  },
+  "profileId": "classic-compact-upright-measured-v1",
+  "editableMaster": "Named semantic components at runtime topology; joined low; one packed atlas in each. No automatic high-to-low or skeletal animation claim."
+}

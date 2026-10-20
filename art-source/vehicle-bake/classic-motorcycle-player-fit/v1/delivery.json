@@ -1,0 +1,187 @@
+{
+  "ready": true,
+  "status": "complete-source-pilot",
+  "sourceImmutable": true,
+  "glbSha256": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+  "atlasSha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+  "recipeSha256": "cbe2275464db8b7a6a4c916902ed497da7a93af561801a841ef1796f0954b570",
+  "riderSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "baseSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "triangles": {
+    "bike": 2602,
+    "rider": 1766,
+    "combined": 4368
+  },
+  "combinedDraws": 4,
+  "combinedAtlases": 2,
+  "mountSource": [
+    0.1,
+    0,
+    1.0605
+  ],
+  "contacts": [
+    {
+      "name": "hip_saddle",
+      "profilePlusSingleMountWorld": [
+        1.7391303777694702,
+        0.0,
+        17.747825622558594
+      ],
+      "actualRiderSocketWorld": [
+        1.7391303777694702,
+        0.0,
+        17.747825622558594
+      ],
+      "actualBikeSocketWorld": [
+        1.7391303777694702,
+        0.0,
+        17.74782943725586
+      ],
+      "actualBikeContactOwner": "Actual dark saddle central hip tangent",
+      "actualBikeSurfaceWorld": [
+        1.7391306161880493,
+        -5.960464477539063e-08,
+        17.747827529907227
+      ],
+      "distanceToBikeSurfaceWorld": 1.923115860336111e-06,
+      "distanceToRiderSurfaceWorld": 2.6656007889869215e-07,
+      "semantics": "actual surface tangent"
+    },
+    {
+      "name": "hand_left_grip",
+      "profilePlusSingleMountWorld": [
+        -1.2173913717269897,
+        -3.13043475151062,
+        18.356521606445312
+      ],
+      "actualRiderSocketWorld": [
+        -1.2173916101455688,
+        -3.13043475151062,
+        18.356521606445312
+      ],
+      "actualBikeSocketWorld": [
+        -1.2173912525177002,
+        -3.13043475151062,
+        18.356521606445312
+      ],
+      "actualBikeContactOwner": "Actual palm wrapped grip left",
+      "actualBikeSurfaceWorld": [
+        -1.4039937257766724,
+        -3.13043475151062,
+        18.40652084350586
+      ],
+      "distanceToBikeSurfaceWorld": 0.1931847780942917,
+      "distanceToRiderSurfaceWorld": 0.4347827732563019,
+      "semantics": "grip centerline inside closed palm; local wrap"
+    },
+    {
+      "name": "hand_right_grip",
+      "profilePlusSingleMountWorld": [
+        -1.2173913717269897,
+        3.13043475151062,
+        18.356521606445312
+      ],
+      "actualRiderSocketWorld": [
+        -1.2173916101455688,
+        3.13043475151062,
+        18.356521606445312
+      ],
+      "actualBikeSocketWorld": [
+        -1.2173912525177002,
+        3.13043475151062,
+        18.356521606445312
+      ],
+      "actualBikeContactOwner": "Actual palm wrapped grip right",
+      "actualBikeSurfaceWorld": [
+        -1.4039937257766724,
+        3.13043475151062,
+        18.40652084350586
+      ],
+      "distanceToBikeSurfaceWorld": 0.1931847780942917,
+      "distanceToRiderSurfaceWorld": 0.43478280305862427,
+      "semantics": "grip centerline inside closed palm; local wrap"
+    },
+    {
+      "name": "foot_left_support",
+      "profilePlusSingleMountWorld": [
+        1.1304347515106201,
+        -3.13043475151062,
+        15.226086616516113
+      ],
+      "actualRiderSocketWorld": [
+        1.1304347515106201,
+        -3.13043475151062,
+        15.226085662841797
+      ],
+      "actualBikeSocketWorld": [
+        1.1304348707199097,
+        -3.13043475151062,
+        15.226086616516113
+      ],
+      "actualBikeContactOwner": "Actual sole tangent foot peg left",
+      "actualBikeSurfaceWorld": [
+        1.1304347515106201,
+        -3.13043475151062,
+        15.226086616516113
+      ],
+      "distanceToBikeSurfaceWorld": 0.0,
+      "distanceToRiderSurfaceWorld": 0.0,
+      "semantics": "actual surface tangent"
+    },
+    {
+      "name": "foot_right_support",
+      "profilePlusSingleMountWorld": [
+        1.1304347515106201,
+        3.13043475151062,
+        15.226086616516113
+      ],
+      "actualRiderSocketWorld": [
+        1.1304347515106201,
+        3.13043475151062,
+        15.226085662841797
+      ],
+      "actualBikeSocketWorld": [
+        1.1304348707199097,
+        3.13043475151062,
+        15.226086616516113
+      ],
+      "actualBikeContactOwner": "Actual sole tangent foot peg right",
+      "actualBikeSurfaceWorld": [
+        1.1304347515106201,
+        3.13043475151062,
+        15.226086616516113
+      ],
+      "distanceToBikeSurfaceWorld": 0.0,
+      "distanceToRiderSurfaceWorld": 0.0,
+      "semantics": "actual surface tangent"
+    }
+  ],
+  "components": {
+    "exactUnchanged": 49,
+    "changed": [
+      "Headstock to actual grip riser",
+      "Actual connected handlebar centerline",
+      "Actual palm wrapped grip left",
+      "Actual palm wrapped grip right",
+      "Actual sole tangent foot peg left",
+      "Actual sole tangent foot peg right"
+    ],
+    "added": [
+      "Swept control riser segment 1",
+      "Swept control riser segment 2",
+      "Swept control riser segment 3",
+      "Swept control riser segment 4",
+      "Connected high peg bracket left",
+      "Connected high peg bracket right"
+    ]
+  },
+  "report": "art-source/vehicle-bake/classic-motorcycle-player-fit/v1/report.json",
+  "assembly": "art-source/vehicle-bake/classic-motorcycle-player-fit/v1/assembly.json",
+  "proofs": "art-source/vehicle-bake/classic-motorcycle-player-fit/v1/evidence",
+  "offline": "public/demos/vehicle-bake/classic-motorcycle-player-fit/v1/offline-raw.html",
+  "humanApproval": false,
+  "normalActivation": false,
+  "all27AIAndFallbackQualified": false,
+  "sharedLoaderReview": "pending parent",
+  "parentNext": "Independent shared-loader composition, visual review and freeze"
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "status": "passed",
+    "toolchain": "motorcycle-v1",
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "inputBytesUnchanged": true,
+    "id": "rider-person7-classic-motorcycle--v1",
+    "glbSha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2",
+    "triangles": 4418,
+    "clearance": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "radius": 7.304348315896555,
+        "minimumGap": 1.0207844658522651,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "radius": 7.304348315896555,
+        "minimumGap": 0.8340051958843757,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

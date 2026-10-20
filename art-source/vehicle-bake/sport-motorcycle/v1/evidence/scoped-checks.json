@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\sport-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n11 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\sport-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\fnm_multishells\\24284_1790502943936\\npx.cmd",
+        "biome",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\sport-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "npm warn Unknown env config \"audit-config\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"npm-globalconfig\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"overrides\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"recursive\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"supported-architectures\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nChecked 6 files in 16ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/sport-motorcycle/assess-pixels.py": "8f723f53da844d33a685583828fd47d40c17169b791bc20441b9689cd5c27d8f",
+    "scripts/vehicle-bake/sport-motorcycle/audit-source.py": "bcdac55aea84ff78eb7f7b9d03e99821d76fd20b9fe3bfdbecf870fdb7c374a3",
+    "scripts/vehicle-bake/sport-motorcycle/build-view.mjs": "60ebe66df7fc6108252f863a2eafaa483771fb39e5f7a1168ff229a10da58891",
+    "scripts/vehicle-bake/sport-motorcycle/build.py": "757416b73aec5c1307affffe523be7eba149b5602c832c0ee41e6256d702ded4",
+    "scripts/vehicle-bake/sport-motorcycle/capture-raw.mjs": "11f5aab89f63a1bb66f68d6f13bdd20265eae79c0ed5999f1fdffac17db9047c",
+    "scripts/vehicle-bake/sport-motorcycle/coverage-region.json": "23bba15e986cdf0ffa7b05245e061e0dc32023577afd3b27eb11981a1e487447",
+    "scripts/vehicle-bake/sport-motorcycle/family.json": "53a02e3a87d0e19a2de1ed5689845addfb6ebe5716452e7fdfc000d8011a4191",
+    "scripts/vehicle-bake/sport-motorcycle/finalize.py": "6ca5e4037f3e23ac4f22bdfa7cb649e2b01c622eb2dd56b1ff6d695e6a6ca039",
+    "scripts/vehicle-bake/sport-motorcycle/fresh-replay.py": "9d39ecd33bed5974dd9654a824091a526efb8c7feaeaaafee69769685ff9511a",
+    "scripts/vehicle-bake/sport-motorcycle/geometry.py": "9db1e53d60d784594b38553a0dd176a3f67b49db8067e2ebaece7d49c22bb927",
+    "scripts/vehicle-bake/sport-motorcycle/inspect-rider.py": "cf2f3cc8058ac80dfcd5ad4e01e0cc41acf02fce64caeeee90345d8f17d4a4d2",
+    "scripts/vehicle-bake/sport-motorcycle/prove-coverage.py": "d3438f93a748af37b47a78a52ac93b3a0c7466ba8b18c1fa7d85044d918cf6ea",
+    "scripts/vehicle-bake/sport-motorcycle/prove-fit.py": "563134944579779ca347c9ff769a44381ae08b7f1306e9ba52eb2bd6c1c85d1d",
+    "scripts/vehicle-bake/sport-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/sport-motorcycle/raw-diagnostic.html": "36e5223767b09f4ff00e8846cd5425cb098a811b31c4963b60617ebc45b164d6",
+    "scripts/vehicle-bake/sport-motorcycle/raw-viewer.mjs": "bb611ac0b2eb9f6cea7987b52a88dc8256555885b821ddb545cd1d3109de0177",
+    "scripts/vehicle-bake/sport-motorcycle/sheets.py": "e88cb710aa8bb3827e021f6094f344bcd5ddc8cb92e52d6a07a296716f8fc8ae"
+  }
+}

@@ -1,7 +1,7 @@
 # Exposed vehicle riders
 
 Topic: vehicle-riders
-Status: three identity pilots and actual classic/sidecar fits retained; two shared-loader reviews pass; normal motorcycle activation deferred.
+Status: four identities have isolated shared-renderer bike prototypes; all seven Explorer bike styles are frozen; normal motorcycle activation remains deferred.
 Updated: 2026-10-20.
 
 Owns seated player and automatic-driver presentation for motorcycles, scooters
@@ -53,8 +53,8 @@ five actual synthetic-fixture contacts, local self-intersection/straddle control
 and independent exact source replay. The 2,112-triangle source retains its eight
 identity colors, round ears, muzzle and stocky paws. Agent inspection of all
 native headings and wire views passes. Its separate mechanically fitted classic
-bike source now passes actual contacts and body/wheel envelopes; parent shared
-review remains pending for that variant.
+bike source passes actual contacts and body/wheel envelopes. Its isolated shared
+review is now frozen with exact bare/combined pixel and component parity.
 Do not stretch anatomy to manufacture a universal fit.
 
 Person7 retains a distinct 1,984-triangle capped legacy-human identity with its
@@ -74,6 +74,61 @@ reference; hiding the rider restores all 32 bare-bike views. Decoded vertex
 attributes and declared mount positions remain exact. Both pass desktop/mobile,
 offline and independent minimal-input source replay. These do not change normal
 game visibility, occupancy, physics or fallback behavior.
+
+All seven queued cycle styles now have distinct retained sources and independent
+Explorer compositions passing actual shared-loader capture, 32 bare/32 combined
+pixel parity and full per-wheel controls. All seven Explorer reviews are frozen
+and registered, alongside the separately fitted Bear, Person7 and Classic pilots.
+The scooter uses a real recessed floor; its
+Explorer pose remains straddled, not a knees-together scooter pose.
+
+The default Classic cream-cat v1 adds a 1,740-triangle compact anatomy experiment.
+Independent four-input replay, five synthetic contacts and negative/reset controls
+pass. Parent agent inspection flags weak eye/face legibility at native pixels;
+actual-ray/UV diagnosis confirms that a short face and dominant roof leave isolated
+low eye dots, while its collar is hidden even before outlining. The immutable
+1,766-triangle v2 improves face/collar readability: frontal interior eye pixels
+increase from two to four in both cameras, and the collar becomes visible. Its
+18 lower-body components and contact profile remain exact. However, parent and
+independent agent inspection find that pointed-ear identity disappears in elevated
+front/near-front views; pink ear paint alone does not establish the silhouette.
+
+The immutable v3 restores native pointed ears while preserving v2's head/face,
+collar, lower body, atlas and contact profile. Independent actual ear-removal
+controls produce four silhouette pixels per ear in frontal study and seven in
+game view, with distinct near-front contributions and exact resets in all 32
+headings. All 32 eye/collar landmarks remain exact to v2. Its tall game profile
+still differs from the standing sprite; this is agent evidence, not standing
+pixel parity or a formal human verdict. The retained
+[v3 peer comparison](../../art-source/vehicle-riders/classic-comparison/v2/report.md)
+and older comparison package remain immutable.
+
+The separate `classic-motorcycle-player-fit/v1` source now fits that unchanged
+1,766-triangle Classic to a 2,602-triangle bike (4,368 combined, four source primitives/two
+atlases) through one translation mount. It retains 49 base components, modifies
+six control components and adds six connected riser/peg supports. Five actual
+contacts, bounded owner-pair exceptions, tank-displacement negatives and both
+whole-bike/rider neutral-roll envelopes pass the retained source proofs. Parent
+reports a fresh six-input replay and 733-pin/public audit pass. Independent
+read-only inspection of all 32 bare/combined/rider/mask views, wires and signed
+roll finds no blocking native fit issue; tiny limbs, dense native wire lines and
+subtle wheel pixels limit visual diagnosis. The actual shared component
+`rider-player-classic-motorcycle` is now frozen and registered. Its seventeen-input
+fresh replay, both wheel-cylinder negatives/reset, desktop/mobile/offline capture,
+32 bare/32 combined RGBA references and all 4,038 decoded rider vertices/32,304
+attribute channels pass. Parent inspected every native heading, signed phase and
+wire view. This does not qualify nonzero steering clearance, normal activation,
+all appearances, AI occupants, fallback or human approval.
+
+The durable [v1/v2 comparison report](../../art-source/vehicle-riders/classic-comparison/v1/report.md)
+retains native comparison figures, helper evidence and input hashes. Its read-only
+`scripts/vehicle-riders/compare-outline.mjs --revision v1|v2` keeps v1 as the default;
+that pinned helper stays immutable. V3 peer assessment used a separate adapter
+retained in the new comparison package. Source violet 92/78/146 differs from shared vehicle ink
+58/58/80: each revision reproduces its own 96 sealed reference RGBA images, while
+the two strokes preserve alpha/masks and deliberately differ in edge RGB. Palette,
+contact and replay success do not establish identity quality, actual-bike fit or
+normal shared-render parity. Do not invent a missing mouth.
 
 The read-only appearance inventory also establishes that Classic is a small
 cream cat-like character, the twenty legacy people have distinct headwear,
@@ -110,13 +165,16 @@ is viable. One avatar/seat proof would establish an interface, not universal
 coverage. Qualify all supported appearances (or an owner-accepted identity policy),
 an extreme second body/seat profile, automatic traffic and the failure matrix
 before making a motorcycle normally available. Keep standing approvals and frozen
-vehicle sources unchanged. Run 153 continues ordinary vehicle production while
-separate YA work prepares an actual bike fit and a capped legacy-human pilot.
+vehicle sources unchanged. Run 153's separate source pilots establish configured
+identity/contact evidence while parent owns shared-component and presentation
+failure-matrix qualification.
 The retained pilots have no normal catalog activation, all-avatar, AI or fallback
 claim. They do not change any approved standing character or current car.
 
 The retained [appearance inventory and fitting proposal](../vehicle-rider-coverage.md)
-records the remaining 26 identities and the limits of sprite-derived measurements.
+records the initial 26 identities beyond Explorer and the limits of sprite-derived
+measurements. Four identities now have source pilots; 23 appearances still lack
+seated source, and normal occupancy remains unqualified for all 27.
 
 Code entry points: `src/characters/PlayerModels.ts`,
 `src/characters/CharacterCatalog.ts`, `src/rendering/collectScene.ts`,

@@ -1,0 +1,44 @@
+[
+  {
+    "status": "passed",
+    "toolchain": "motorcycle-v1",
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "inputBytesUnchanged": true,
+    "id": "rider-explorer-retro-scooter--v1",
+    "glbSha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264",
+    "triangles": 4236,
+    "clearance": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "radius": 5.391305103149664,
+        "minimumGap": 0.9401285056704465,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "radius": 5.739130991044102,
+        "minimumGap": 0.9358791889080225,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

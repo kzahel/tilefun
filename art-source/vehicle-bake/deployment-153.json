@@ -1,0 +1,427 @@
+{
+  "schema": "tilefun-vehicle-deployment-check-v1",
+  "checkedAt": "2026-10-20T02:28:15.719275+00:00",
+  "baseURL": "https://kzahel.github.io/tilefun/",
+  "commit": "8f2aea6efe67f02d3a895d003cd72bb7e194d309",
+  "ciRunURL": "https://github.com/kzahel/tilefun/actions/runs/39352227458",
+  "ciJobs": "check, all16 e2e shards and deploy passed",
+  "ordinaryOriginals": 33,
+  "exactRuntimeFiles": [
+    {
+      "path": "assets/models/vehicles/rosso-coupe-v3.glb",
+      "httpStatus": 200,
+      "sha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+      "bytes": 149324
+    },
+    {
+      "path": "assets/vehicles/rosso-coupe-v1.png",
+      "httpStatus": 200,
+      "sha256": "3c89ecdda89149c2a6a470b73cee0ccaa8761c6cc0afabbe3840f096fd1d72d0",
+      "bytes": 6391
+    },
+    {
+      "path": "assets/models/vehicles/beetle-v1.glb",
+      "httpStatus": 200,
+      "sha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+      "bytes": 198312
+    },
+    {
+      "path": "assets/vehicles/beetle-v1.png",
+      "httpStatus": 200,
+      "sha256": "b26dd0ca1ea498477b11ca276b5dc7cb2bbadaadd0b58be90a9b15d452b9a9f5",
+      "bytes": 7527
+    },
+    {
+      "path": "assets/models/vehicles/school-bus-v1.glb",
+      "httpStatus": 200,
+      "sha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+      "bytes": 182232
+    },
+    {
+      "path": "assets/vehicles/school-bus-v1.png",
+      "httpStatus": 200,
+      "sha256": "ec42ee8d4653c915bd80fa45ae555b2bec963ac4b52390bace1d054d023948fd",
+      "bytes": 5722
+    },
+    {
+      "path": "assets/models/vehicles/pickup-v1.glb",
+      "httpStatus": 200,
+      "sha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+      "bytes": 207472
+    },
+    {
+      "path": "assets/vehicles/pickup-v1.png",
+      "httpStatus": 200,
+      "sha256": "32681b6f11e4f1f3bfb65ca8f8ed3667a6e45efcdfc84190839d0759d3928de6",
+      "bytes": 5445
+    },
+    {
+      "path": "assets/models/vehicles/classic-roadster-v1.glb",
+      "httpStatus": 200,
+      "sha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+      "bytes": 222216
+    },
+    {
+      "path": "assets/vehicles/classic-roadster-v1.png",
+      "httpStatus": 200,
+      "sha256": "a42a360fb3a4586f553a618e879de6612397bbe23348196fed5cf35aab598a1a",
+      "bytes": 5587
+    },
+    {
+      "path": "assets/models/vehicles/offroad-jeep-v1.glb",
+      "httpStatus": 200,
+      "sha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+      "bytes": 216488
+    },
+    {
+      "path": "assets/vehicles/offroad-jeep-v1.png",
+      "httpStatus": 200,
+      "sha256": "9fc715b676dc56d282de114a139c18157dab678527c5a2ebd05b066820cb80eb",
+      "bytes": 4973
+    },
+    {
+      "path": "assets/models/vehicles/delivery-van-v1.glb",
+      "httpStatus": 200,
+      "sha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+      "bytes": 173600
+    },
+    {
+      "path": "assets/vehicles/delivery-van-v1.png",
+      "httpStatus": 200,
+      "sha256": "2a5e68aa43f6c08c2735e57c4e3fe1d7de858b93825a9a53dc28b9672e7ef084",
+      "bytes": 4615
+    },
+    {
+      "path": "assets/models/vehicles/race-coupe-v1.glb",
+      "httpStatus": 200,
+      "sha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+      "bytes": 159872
+    },
+    {
+      "path": "assets/vehicles/race-coupe-v1.png",
+      "httpStatus": 200,
+      "sha256": "516359d32f53d9bed329645587831909b9325f7f4004816d9254b63945a530ad",
+      "bytes": 7179
+    },
+    {
+      "path": "assets/models/vehicles/woody-wagon-v1.glb",
+      "httpStatus": 200,
+      "sha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+      "bytes": 198016
+    },
+    {
+      "path": "assets/vehicles/woody-wagon-v1.png",
+      "httpStatus": 200,
+      "sha256": "623956df0bc663ae70c8b76bbc8bc66c73fde7beb2339f2dbaa80e3fbd60ea94",
+      "bytes": 5058
+    },
+    {
+      "path": "assets/models/vehicles/microcar-v1.glb",
+      "httpStatus": 200,
+      "sha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+      "bytes": 192480
+    },
+    {
+      "path": "assets/vehicles/microcar-v1.png",
+      "httpStatus": 200,
+      "sha256": "2d30a38edc7c9176b464fb55b9de61e5c9ffe166e88ef0544d9f6a0e785242ad",
+      "bytes": 4589
+    },
+    {
+      "path": "assets/models/vehicles/stretch-limousine-v1.glb",
+      "httpStatus": 200,
+      "sha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+      "bytes": 209072
+    },
+    {
+      "path": "assets/vehicles/stretch-limousine-v1.png",
+      "httpStatus": 200,
+      "sha256": "095a059199f249e96158cf78630e8fd4fc214fca59976c6c51ffc6d380a9dc73",
+      "bytes": 5047
+    },
+    {
+      "path": "assets/models/vehicles/hot-rod-v1.glb",
+      "httpStatus": 200,
+      "sha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+      "bytes": 231608
+    },
+    {
+      "path": "assets/vehicles/hot-rod-v1.png",
+      "httpStatus": 200,
+      "sha256": "4f42a21145ab7cd03e412fffc78a9f23fcc78bbfdcd143177d9ed3e40ea3dbe0",
+      "bytes": 6464
+    },
+    {
+      "path": "assets/models/vehicles/rally-hatchback-v1.glb",
+      "httpStatus": 200,
+      "sha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+      "bytes": 201980
+    },
+    {
+      "path": "assets/vehicles/rally-hatchback-v1.png",
+      "httpStatus": 200,
+      "sha256": "989d9d89752b76b2783f28dd6a384ec7d130d9f9ae22c2d0f4eb12b168c04439",
+      "bytes": 5473
+    },
+    {
+      "path": "assets/models/vehicles/open-wheel-racer-v1.glb",
+      "httpStatus": 200,
+      "sha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+      "bytes": 191584
+    },
+    {
+      "path": "assets/vehicles/open-wheel-racer-v1.png",
+      "httpStatus": 200,
+      "sha256": "a846d2a256a7703aaf29ac5144deaf7c8170142c7e2e1c67678ae1a1be6e84ce",
+      "bytes": 5862
+    },
+    {
+      "path": "assets/models/vehicles/monster-truck-v1.glb",
+      "httpStatus": 200,
+      "sha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+      "bytes": 273568
+    },
+    {
+      "path": "assets/vehicles/monster-truck-v1.png",
+      "httpStatus": 200,
+      "sha256": "e8d6d1cf1fe1bd4e91e251e409f97b18a259be5ca83b7c8870b27a5979d6a8e3",
+      "bytes": 7810
+    },
+    {
+      "path": "assets/models/vehicles/beach-buggy-v1.glb",
+      "httpStatus": 200,
+      "sha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+      "bytes": 237592
+    },
+    {
+      "path": "assets/vehicles/beach-buggy-v1.png",
+      "httpStatus": 200,
+      "sha256": "f2e7ef94927938765075e139db6fbe71c29eb1a54dcad883b15a432fe5638edf",
+      "bytes": 5485
+    },
+    {
+      "path": "assets/models/vehicles/go-kart-v1.glb",
+      "httpStatus": 200,
+      "sha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+      "bytes": 205460
+    },
+    {
+      "path": "assets/vehicles/go-kart-v1.png",
+      "httpStatus": 200,
+      "sha256": "25fbf4885f0b6ed1c627f0061ec670077dd740c334020cac8b1e3aa30859a079",
+      "bytes": 4259
+    },
+    {
+      "path": "assets/models/vehicles/golf-cart-v1.glb",
+      "httpStatus": 200,
+      "sha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+      "bytes": 185488
+    },
+    {
+      "path": "assets/vehicles/golf-cart-v1.png",
+      "httpStatus": 200,
+      "sha256": "cf982bfcafc7c6559c4ea6bf09e89c8fafe33057050c2664afcd9afceb7a1491",
+      "bytes": 3384
+    },
+    {
+      "path": "assets/models/vehicles/ice-cream-van-v1.glb",
+      "httpStatus": 200,
+      "sha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+      "bytes": 193804
+    },
+    {
+      "path": "assets/vehicles/ice-cream-van-v1.png",
+      "httpStatus": 200,
+      "sha256": "761ba1d87fb5ec9476b265edeeea30f67e589c003b814b9bf9ed6d25759044fe",
+      "bytes": 5019
+    },
+    {
+      "path": "assets/models/vehicles/food-truck-v1.glb",
+      "httpStatus": 200,
+      "sha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+      "bytes": 200124
+    },
+    {
+      "path": "assets/vehicles/food-truck-v1.png",
+      "httpStatus": 200,
+      "sha256": "ee745833276156a7992038557644e2129b8385098cee57b12d74e6d323241ab3",
+      "bytes": 4752
+    },
+    {
+      "path": "assets/models/vehicles/camper-van-v1.glb",
+      "httpStatus": 200,
+      "sha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+      "bytes": 202544
+    },
+    {
+      "path": "assets/vehicles/camper-van-v1.png",
+      "httpStatus": 200,
+      "sha256": "deb4076593fc53106931c0d10dd4e5fffa56a975e6bb6788f0c8b15dccc78860",
+      "bytes": 4356
+    },
+    {
+      "path": "assets/models/vehicles/motorhome-v1.glb",
+      "httpStatus": 200,
+      "sha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+      "bytes": 206328
+    },
+    {
+      "path": "assets/vehicles/motorhome-v1.png",
+      "httpStatus": 200,
+      "sha256": "d310d4b1a8cffedf3cca715619ff82dd3873ef0615307aa46214492a5c09280e",
+      "bytes": 5323
+    },
+    {
+      "path": "assets/models/vehicles/retro-taxi-v1.glb",
+      "httpStatus": 200,
+      "sha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+      "bytes": 209576
+    },
+    {
+      "path": "assets/vehicles/retro-taxi-v1.png",
+      "httpStatus": 200,
+      "sha256": "58e5b71b36d8d21fd13b8e00126884dda4e92dc250c189af4498ac5555ae42cf",
+      "bytes": 5655
+    },
+    {
+      "path": "assets/models/vehicles/tow-truck-v1.glb",
+      "httpStatus": 200,
+      "sha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+      "bytes": 229568
+    },
+    {
+      "path": "assets/vehicles/tow-truck-v1.png",
+      "httpStatus": 200,
+      "sha256": "0a9341982f0e18de69a56ffc0f2270ab66f14ad67e61cbeab8849c4955e0b6b3",
+      "bytes": 6631
+    },
+    {
+      "path": "assets/models/vehicles/flatbed-truck-v1.glb",
+      "httpStatus": 200,
+      "sha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+      "bytes": 180064
+    },
+    {
+      "path": "assets/vehicles/flatbed-truck-v1.png",
+      "httpStatus": 200,
+      "sha256": "2be7c5f9089c30b512e3720e60850196d3a7bd1e7a0b244829617228cfc00b94",
+      "bytes": 4899
+    },
+    {
+      "path": "assets/models/vehicles/semi-truck-v1.glb",
+      "httpStatus": 200,
+      "sha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+      "bytes": 264932
+    },
+    {
+      "path": "assets/vehicles/semi-truck-v1.png",
+      "httpStatus": 200,
+      "sha256": "7163d3f0efa8205e3327fefc003e27ce6579e4964b057e68dc31241a7357bcf0",
+      "bytes": 5741
+    },
+    {
+      "path": "assets/models/vehicles/dump-truck-v1.glb",
+      "httpStatus": 200,
+      "sha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+      "bytes": 251984
+    },
+    {
+      "path": "assets/vehicles/dump-truck-v1.png",
+      "httpStatus": 200,
+      "sha256": "94bee0800169d3b3b7887b37833d915905cbeaca76f26cd8152f40541b66e7d0",
+      "bytes": 5425
+    },
+    {
+      "path": "assets/models/vehicles/cement-mixer-v1.glb",
+      "httpStatus": 200,
+      "sha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+      "bytes": 259728
+    },
+    {
+      "path": "assets/vehicles/cement-mixer-v1.png",
+      "httpStatus": 200,
+      "sha256": "42c2438f8f8048989753a760bbf4f2207fac48170643a6e7ab89d04740bb9d52",
+      "bytes": 7297
+    },
+    {
+      "path": "assets/models/vehicles/mobile-crane-v1.glb",
+      "httpStatus": 200,
+      "sha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+      "bytes": 279528
+    },
+    {
+      "path": "assets/vehicles/mobile-crane-v1.png",
+      "httpStatus": 200,
+      "sha256": "2d93067c8b9803effeff096806da4967299cabc756d48a5a1648c0f2b6f78026",
+      "bytes": 6162
+    },
+    {
+      "path": "assets/models/vehicles/street-sweeper-v1.glb",
+      "httpStatus": 200,
+      "sha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+      "bytes": 219336
+    },
+    {
+      "path": "assets/vehicles/street-sweeper-v1.png",
+      "httpStatus": 200,
+      "sha256": "79f7f9b854f076d66e477c48d2bda1b4437d38d1f2d058afaf8885bb29d77e12",
+      "bytes": 5032
+    },
+    {
+      "path": "assets/models/vehicles/snowplow-v1.glb",
+      "httpStatus": 200,
+      "sha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+      "bytes": 206484
+    },
+    {
+      "path": "assets/vehicles/snowplow-v1.png",
+      "httpStatus": 200,
+      "sha256": "1479a1bf8e5bc9a0d43a374750c84a981e601eadc2dff21daf8459635c530483",
+      "bytes": 6462
+    },
+    {
+      "path": "assets/models/vehicles/farm-tractor-v1.glb",
+      "httpStatus": 200,
+      "sha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+      "bytes": 258024
+    },
+    {
+      "path": "assets/vehicles/farm-tractor-v1.png",
+      "httpStatus": 200,
+      "sha256": "2fffee64bb635e0941a8b9b88eb343b5e70e8a1c0a490851d6c1c98f17d023c6",
+      "bytes": 5252
+    },
+    {
+      "path": "assets/models/vehicles/forklift-v1.glb",
+      "httpStatus": 200,
+      "sha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+      "bytes": 213628
+    },
+    {
+      "path": "assets/vehicles/forklift-v1.png",
+      "httpStatus": 200,
+      "sha256": "7393f68ee10971fd318401dc241cf03085219a8a31b230ab505b77e3467a727a",
+      "bytes": 4184
+    }
+  ],
+  "deployedEntryAndExactCatalogBundles": [
+    {
+      "path": "assets/main-CfYJTSrZ.js",
+      "sha256": "1db134be20988f5bb141ef37fc0ffe59d020ae3482992936d4b2d34af696cad7",
+      "bytes": 472842,
+      "localBuildByteMatch": false
+    },
+    {
+      "path": "assets/OriginalVehicles-D0zJ1qHT.js",
+      "sha256": "00f4ec22063a79d9c49bf5c36aef5cf7a7176cae7f3961b973577160bbb47421",
+      "bytes": 59699,
+      "localBuildByteMatch": true
+    }
+  ],
+  "scope": "HTTP bytes match all66 locally validated runtime assets and the built OriginalVehicles catalog chunk containing all33 entries. The entry bundle differs between Linux CI and the Windows build. This is deployment evidence, not an additional interactive gameplay run or human appearance approval.",
+  "separateHumanReviewHost": {
+    "url": "https://tilefun.graehlarts.com/tilefun/",
+    "status": "The separately hosted Vite development/review server is not updated by GitHub Pages deployment. At this checkpoint its pickup GLB route returns the HTML app shell; do not claim this host has the new fleet.",
+    "checkedAt": "2026-10-20T02:28:15.719290+00:00"
+  }
+}

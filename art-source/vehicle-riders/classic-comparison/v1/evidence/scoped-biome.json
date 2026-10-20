@@ -1,0 +1,123 @@
+{
+  "status": "canonical-and-copy-pass-historical-eye-snapshot-exemption-pending-root",
+  "readOnly": true,
+  "configChanged": false,
+  "sourceBytesChanged": false,
+  "results": [
+    {
+      "path": "scripts/vehicle-riders/compare-outline.mjs",
+      "sha256": "b5b7360c89762628f508b2613199ccf73ba868f999d71a7a83afc0f4b593b9e2",
+      "command": [
+        "node_modules/.bin/biome.cmd",
+        "check",
+        "--reporter=json",
+        "scripts/vehicle-riders/compare-outline.mjs"
+      ],
+      "exitCode": 0,
+      "readOnly": true,
+      "bytesUnchanged": true,
+      "diagnostics": []
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-comparison/v1/helpers/compare-outline.mjs",
+      "sha256": "b5b7360c89762628f508b2613199ccf73ba868f999d71a7a83afc0f4b593b9e2",
+      "command": [
+        "node_modules/.bin/biome.cmd",
+        "check",
+        "--reporter=json",
+        "art-source/vehicle-riders/classic-comparison/v1/helpers/compare-outline.mjs"
+      ],
+      "exitCode": 0,
+      "readOnly": true,
+      "bytesUnchanged": true,
+      "diagnostics": []
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-comparison/v1/helpers/peer-eye-probe.mjs",
+      "sha256": "5a03b35493ab3ff93fa6189ea417cdcf70dab5a2e2b8bedaec7294377fcd4561",
+      "command": [
+        "node_modules/.bin/biome.cmd",
+        "check",
+        "--reporter=json",
+        "art-source/vehicle-riders/classic-comparison/v1/helpers/peer-eye-probe.mjs"
+      ],
+      "exitCode": 1,
+      "readOnly": true,
+      "bytesUnchanged": true,
+      "diagnostics": [
+        {
+          "category": "lint/style/useTemplate",
+          "severity": "info",
+          "message": "Template literals are preferred over string concatenation.",
+          "location": {
+            "path": "art-source\\vehicle-riders\\classic-comparison\\v1\\helpers\\peer-eye-probe.mjs",
+            "start": {
+              "line": 149,
+              "column": 51
+            },
+            "end": {
+              "line": 149,
+              "column": 86
+            }
+          }
+        },
+        {
+          "category": "assist/source/organizeImports",
+          "severity": "error",
+          "message": "Sort these imports.",
+          "location": {
+            "path": "art-source\\vehicle-riders\\classic-comparison\\v1\\helpers\\peer-eye-probe.mjs",
+            "start": {
+              "line": 1,
+              "column": 1
+            },
+            "end": {
+              "line": 5,
+              "column": 40
+            }
+          }
+        },
+        {
+          "category": "lint/suspicious/useIterableCallbackReturn",
+          "severity": "error",
+          "message": "This callback passed to forEach() iterable method should not return a value.",
+          "location": {
+            "path": "art-source\\vehicle-riders\\classic-comparison\\v1\\helpers\\peer-eye-probe.mjs",
+            "start": {
+              "line": 94,
+              "column": 52
+            },
+            "end": {
+              "line": 94,
+              "column": 59
+            }
+          }
+        },
+        {
+          "category": "format",
+          "severity": "error",
+          "message": "Formatter would have printed the following content:",
+          "location": {
+            "path": "art-source\\vehicle-riders\\classic-comparison\\v1\\helpers\\peer-eye-probe.mjs",
+            "start": {
+              "line": 0,
+              "column": 0
+            },
+            "end": {
+              "line": 0,
+              "column": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "preciseSnapshotExemptionPath": "art-source/vehicle-riders/classic-comparison/v1/helpers/peer-eye-probe.mjs",
+  "diagnosticCategories": [
+    "format",
+    "assist/source/organizeImports",
+    "lint/suspicious/useIterableCallbackReturn",
+    "lint/style/useTemplate"
+  ],
+  "rootOwnsConfigExemptionAndFinalRepositoryLint": true
+}

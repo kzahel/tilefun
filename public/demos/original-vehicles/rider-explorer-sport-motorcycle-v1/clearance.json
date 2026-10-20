@@ -1,0 +1,44 @@
+[
+  {
+    "status": "passed",
+    "toolchain": "motorcycle-v1",
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "inputBytesUnchanged": true,
+    "id": "rider-explorer-sport-motorcycle--v1",
+    "glbSha256": "3f7a572939629bb474ae8698e93bcd69f2ed9f9bf9b5de56e19bfc979d2306e2",
+    "triangles": 4212,
+    "clearance": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "radius": 7.304348315896555,
+        "minimumGap": 1.0115405620005005,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "radius": 7.304348315896555,
+        "minimumGap": 1.1960202930653212,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

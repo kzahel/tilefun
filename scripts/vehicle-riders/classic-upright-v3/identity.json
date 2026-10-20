@@ -1,0 +1,123 @@
+{
+  "id": "player",
+  "name": "Classic compact cream cat",
+  "sourcePNG": "public/assets/sprites/player.png",
+  "sourceSha256": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb",
+  "palette": {
+    "k": "#5c4e92",
+    "c": "#f3f2c0",
+    "p": "#e8b5ac",
+    "v": "#ddd5de",
+    "y": "#f3d8c5",
+    "n": "#766daa",
+    "l": "#eae178"
+  },
+  "sourceCharts": {
+    "front": [
+      "...kkk....kkk...",
+      "..kccck..kccck..",
+      "..kppckkkkcppk..",
+      "..kppcvvvvcppk..",
+      "..kcccvvvvccck..",
+      "..kcccvvvvccck..",
+      ".kkcccccccccckk.",
+      "..kckcccccckck..",
+      ".kkcccccccccckk.",
+      "..kyyccccccyyk..",
+      "...kknnnnnnkk...",
+      "..kvcnnlcnncvk..",
+      "..kvcccllcccvk..",
+      "...kkcccccckk...",
+      "....kvvkkvvk....",
+      ".....kk..kk....."
+    ],
+    "back": [
+      "...kkk....kkk...",
+      "..kccck..kccck..",
+      "..kccckkkkccck..",
+      "..kcccvvvvccck..",
+      "..kcccccccccck..",
+      "..kcccccccccck..",
+      ".kkcccccccccckk.",
+      "..kcccccccccck..",
+      ".kkcccccccccckk.",
+      "..kcccccccccck..",
+      "...kknnnnnnkk...",
+      "..kvcnnkknncvk..",
+      "..kvcckcckccvk..",
+      "...kkcccccckk...",
+      "....kvvkkvvk....",
+      ".....kk..kk....."
+    ],
+    "left": [
+      ".......kkk......",
+      "......kccck.....",
+      ".....kkcppck....",
+      "....kcccppck....",
+      "....kcccccck....",
+      "....kcccccck....",
+      "...kkcccccckk...",
+      "...kcckcccck....",
+      "...kccccccckk...",
+      "...kcccyycck....",
+      "....knnnnnk.....",
+      "....lnnnncvk....",
+      "....lkccccvk....",
+      ".....kcccck.....",
+      "......kvvk......",
+      ".......kk......."
+    ],
+    "right": [
+      "......kkk.......",
+      ".....kccck......",
+      "....kcppckk.....",
+      "....kcppccck....",
+      "....kcccccck....",
+      "....kcccccck....",
+      "...kkcccccckk...",
+      "....kcccckcck...",
+      "...kkccccccck...",
+      "....kccyyccck...",
+      ".....knnnnnk....",
+      "....kvcnnnnl....",
+      "....kvcccckl....",
+      ".....kcccck.....",
+      "......kvvk......",
+      ".......kk......."
+    ]
+  },
+  "measurements": {
+    "frame": [
+      16,
+      16
+    ],
+    "headIncludingEarsRows": [
+      0,
+      10
+    ],
+    "bodyAndFeetRows": [
+      11,
+      15
+    ],
+    "frontHeadWidthPx": 14,
+    "frontBodyWidthPx": 12,
+    "frontFootRows": [
+      14,
+      15
+    ],
+    "maxStandingVisibleSpan": [
+      14,
+      16
+    ],
+    "sideStandingVisibleSpan": [
+      10,
+      16
+    ]
+  },
+  "observations": [
+    "Pointed paired ears, pink inner ears, broad cream head, violet eyes/outline/feet, lavender forehead patch, tiny cream torso, violet collar and yellow collar center",
+    "All four directions inspected at native pixels and common12x nearest scale",
+    "No separate tail in any of the sixteen frames; no invented tail geometry"
+  ],
+  "inference": "Depth/short joints are inferred, not observed skeletal anatomy. Own compact source-ruler body; no Explorer recolor or common-height normalization."
+}

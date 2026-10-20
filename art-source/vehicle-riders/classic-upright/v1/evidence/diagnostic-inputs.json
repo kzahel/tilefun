@@ -1,0 +1,36 @@
+{
+  "constructionInputCount": 4,
+  "constructionInputs": {
+    "art-source/vehicle-riders/classic-upright/v1/build.py": "df67e8e10428c6a9fba91dd84d5591a063cbdd97a4e410d947b3f9d57c1c5c18",
+    "art-source/vehicle-riders/classic-upright/v1/rider.json": "955bc5d2e298dda6b974add4f07a78b69eca2c4084e506fe3a1278d968c0c6a9",
+    "art-source/vehicle-riders/classic-upright/v1/identity.json": "bd6fe837c1138be80a49d9c677627168da3a4d002d4db59002fa7ee6b5f36317",
+    "art-source/vehicle-riders/classic-upright/v1/classic-upright-v1.json": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b"
+  },
+  "identityInputHashes": {
+    "public/assets/sprites/player.png": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb"
+  },
+  "sharedProjection": {
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb"
+  },
+  "ownedSourceVioletOutline": {
+    "scripts/vehicle-riders/classic-upright/outline.ts": "5a2b8dcbbd643ac28e2bba5260b31c6911aadf9a7b403a69a1841375c36ca559"
+  },
+  "helperMechanicsCopiedFrom": {
+    "scripts/vehicle-riders/bear-upright/build.py": "e12b9d4ac80b20a87a14c0615ad407f75c8d9295af6d6aad1a8b847d993d0c00",
+    "scripts/vehicle-riders/person7-upright/prove.py": "4a68b7dc4f828f40f84fc7afaf1c99d7d2caa3e045d9c3a15600ed2cad714f87",
+    "scripts/vehicle-riders/person7-upright/fixture.py": "64d0b6e34aade3a02a20e2c0b71e7909487ffd6bebc15ad2b699645ec4971fba",
+    "scripts/vehicle-riders/person7-upright/viewer.mjs": "3f934ec2e21fdac995ebbfd7561377309cd1b5423d5590ed62664493dddf6221",
+    "scripts/vehicle-riders/person7-upright/capture.mjs": "6dc401e0d72d9b296fff5982ae362140a381a4a26ff31701a3a70a4be48246ed",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26"
+  },
+  "helperMechanicsMeaning": "Read-only copy provenance only; generic mechanics adapted into own files. Prior source anatomy/geometry not an input. These external paths are not constructor dependencies.",
+  "fixtureOutputSha256": "b577f988fe4612b858e16f4a769717a07babe5d978e9ce4450ae3183186b368e",
+  "fixtureOutputNotConstructionInput": true,
+  "sourceViewerIsNotCarMeshAsset": true,
+  "noIgnoredConstructionDependencies": true,
+  "checks": {
+    "pyCompile": true,
+    "blackCheck": true,
+    "scopedBiome": true
+  }
+}

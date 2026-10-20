@@ -1,0 +1,114 @@
+{
+  "id": "classic-upright-v1",
+  "status": "source-pilot-not-production",
+  "humanApproval": false,
+  "worldScale": 17.39130434782609,
+  "hipSocketSource": [
+    0,
+    0,
+    0
+  ],
+  "contactProfile": {
+    "source": "art-source/vehicle-riders/classic-upright/v1/classic-upright-v1.json",
+    "ownCopy": "classic-upright-v1.json",
+    "sha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b"
+  },
+  "identityInputs": {
+    "public/assets/sprites/player.png": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb"
+  },
+  "anatomy": {
+    "pelvisDimensions": [
+      0.16,
+      0.24,
+      0.08
+    ],
+    "torsoCenter": [
+      0,
+      0,
+      0.075
+    ],
+    "torsoDimensions": [
+      0.18,
+      0.3,
+      0.15
+    ],
+    "shoulderSource": [
+      -0.025,
+      0.17,
+      0.07
+    ],
+    "armLengthsSource": [
+      0.09,
+      0.105
+    ],
+    "wristInsetFromPalmSource": 0.025,
+    "hipJointSource": [
+      0,
+      0.12,
+      -0.025
+    ],
+    "legLengthsSource": [
+      0.095,
+      0.11
+    ],
+    "ankleFromSoleSource": [
+      0.015,
+      0,
+      0.035
+    ],
+    "palmRadii": [
+      0.04,
+      0.035,
+      0.035
+    ],
+    "bootDimensions": [
+      0.13,
+      0.12,
+      0.065
+    ],
+    "headCenter": [
+      0.025,
+      0,
+      0.3
+    ],
+    "headDimensions": [
+      0.48,
+      0.78,
+      0.32
+    ],
+    "headTopSource": 0.46,
+    "earTipSource": 0.73
+  },
+  "render": {
+    "nativeSize": 224,
+    "radius": 112,
+    "worldDensity": "80/4.6 unchanged",
+    "origin": "Local pelvis, not bike mount",
+    "studyDegrees": 50
+  },
+  "fixture": {
+    "gripRadiusWorld": 0.2,
+    "gripLengthWorld": 0.8
+  },
+  "inference": {
+    "meaning": "Own compact nonhuman cat template; broad head/pointed ears/tiny torso and short limbs. Every palette color is from actual standing PNG. Fixed limb lengths chosen before own short-reach fixture. No Explorer anatomy scaling.",
+    "standingRuler": "Original Classic16px standing vs promoted25px. At unchanged80/4.6 ruler: actual head width13.565world, head+ear Zspan10.261world, seated total Zspan15.913world. Native projections also include volumetric depth; no per-angle image fitting or unique inferred standing skeleton claimed.",
+    "tail": "No separate tail visible in all16frames; none invented",
+    "headRefinement": "All four source directions require a broad head with actual depth and side eye/ear paint. Early narrow-depth native views were rejected as thin profiles. Own head depth/ear volume and separate side-skin charts refined; fixed limb lengths, global ruler and every contact target unchanged.",
+    "eyeUV": "Own semantic eye clusters placed higher on actual front skin to stay readable in elevated/game projections; source exact violet and original eye spacing retained. No framebuffer redraw."
+  },
+  "scaleControls": [
+    {
+      "id": "explorer-upright",
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "viewerFile": "explorer-upright-control.glb",
+      "screenHorizontalOffsetWorld": -40,
+      "role": "Read-only common-world-ruler diagnostic, never construction input"
+    }
+  ],
+  "limits": [
+    "Classic static source pilot only",
+    "Synthetic contact fixture; no actual-bike/production/all27/AI/occupied fallback qualification"
+  ]
+}

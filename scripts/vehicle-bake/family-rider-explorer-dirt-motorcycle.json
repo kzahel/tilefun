@@ -1,0 +1,32 @@
+{
+  "id": "rider-explorer-dirt-motorcycle-v1",
+  "clearanceId": "rider-explorer-dirt-motorcycle--v1",
+  "name": "explorer-upright \u00b7 dirt-motorcycle fit pilot",
+  "title": "explorer-upright \u00b7 dirt-motorcycle \u00b7 shared-loader pilot",
+  "source": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1",
+  "glb": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/report.json",
+  "output": "public/demos/original-vehicles/rider-explorer-dirt-motorcycle-v1",
+  "qa": "data/vehicle-bake/rider-explorer-dirt-motorcycle-qa",
+  "offline": "data/vehicle-bake/rider-explorer-dirt-motorcycle-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "composition": {
+    "component": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+    "prefix": "RiderExplorer",
+    "mountBlenderWorldPixels": [
+      0.0,
+      0.0,
+      22.260869565217394
+    ],
+    "baseCaptures": "public/demos/vehicle-bake/dirt-motorcycle/v1/raw-captures",
+    "baseCapturePrefix": "bike-alone-",
+    "combinedCaptures": "public/demos/vehicle-bake/dirt-motorcycle/v1/raw-captures"
+  },
+  "toolchain": "motorcycle-v1",
+  "wheelIds": [
+    "F",
+    "R"
+  ]
+}

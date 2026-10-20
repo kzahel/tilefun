@@ -1,0 +1,31 @@
+{
+  "status": "source-pilot-only",
+  "bike": {
+    "path": "public/demos/vehicle-bake/sport-motorcycle/v1/model.glb",
+    "sha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+    "triangles": 2256,
+    "draws": 3,
+    "atlases": 1
+  },
+  "rider": {
+    "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+    "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "triangles": 1956,
+    "draws": 1,
+    "atlases": 1,
+    "immutable": true
+  },
+  "singleMountSource": [
+    0,
+    0,
+    1.1
+  ],
+  "combined": {
+    "triangles": 4212,
+    "draws": 4,
+    "atlases": 2,
+    "oneActualDepthTarget": true
+  },
+  "productionQualified": false,
+  "normalActivation": false
+}

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "independent": true,
+  "glbSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "atlasSha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+  "recipeSha256": "3de564020167453c221e3fc96c8e4ca726257f2416be20a1adff8682704aafa3",
+  "scratchInputDependencies": [],
+  "originalSourceReceipt": {
+    "path": "art-source/vehicle-riders/classic-upright/v3/evidence/replay-verification.json",
+    "sha256": "ce9166b1a265bb2fbe287d1af3a9801936bf2147406a2262973c3475478c3390"
+  },
+  "independentReplayReceipt": {
+    "path": "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/rider-independent-replay.json",
+    "sha256": "4fc85ac8596e4600d30dede7f4e7ae21efe6dd546c9671c09b29c82afa9a191b"
+  },
+  "meaning": "Immutable child aliases with independent declared-input source replay; no human approval or normal availability"
+}

@@ -1,0 +1,1731 @@
+{
+  "status": "passed",
+  "auditKind": "static-hash-declaration",
+  "auditorSha256": "c800a704af6f3a0ffb3554f9188a19597406eec5c99dab38af1c2ef6c633ebf0",
+  "receipt": "art-source/vehicle-bake/touring-motorcycle/v1/source-replay.json",
+  "receiptSha256": "7579467fb957e089706e523185f45d1ffbbf962c483af607aab85a2992f90663",
+  "retained": "art-source/vehicle-bake/touring-motorcycle/v1",
+  "public": "public/demos/vehicle-bake/touring-motorcycle/v1",
+  "inputRoot": null,
+  "explicitModelName": "model.glb",
+  "declaredInputPins": 6,
+  "auditedReceiptPinMaps": [
+    "inputHashes",
+    "sharedInputHashes"
+  ],
+  "supplementalReceiptHashMapsNotAudited": [
+    "diagnosticSharedInputHashes"
+  ],
+  "inputs": [
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/build.py",
+      "sha256": "d75cad0de4024d3aff6e5c57f7d254ea36b3897406a50ebbea2d0994c964a00d",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/geometry.py",
+      "sha256": "45a07781001bda9eac8ee2689b3b736c7a74ddc3a61f71a27687bdc0e4de45bf",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/family.json",
+      "sha256": "f8cbd870c7ba8e50743ee99625c43107085a1dcae30fb33f112d967cdbebb08a",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/raw-audit.py",
+      "sha256": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/catalog-cycle.py",
+      "sha256": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/profiles/upright-v1.json",
+      "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+      "resolution": "current"
+    }
+  ],
+  "normalizedOutputs": {
+    "model.glb": {
+      "sha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+      "bytes": 176016,
+      "byteExact": true
+    },
+    "atlas.png": {
+      "sha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+      "bytes": 2945,
+      "byteExact": true
+    },
+    "recipe.json": {
+      "sha256": "e80a2140aff86e45e2974f741f63d0fc47d49d1f03847329f8e91f6b1b6daab3",
+      "bytes": 16954,
+      "byteExact": true
+    }
+  },
+  "checkedOutputs": [
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/model.glb",
+      "sha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+      "bytes": 176016
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/atlas.png",
+      "sha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+      "bytes": 2945
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/recipe.json",
+      "sha256": "e80a2140aff86e45e2974f741f63d0fc47d49d1f03847329f8e91f6b1b6daab3",
+      "bytes": 16954
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/model.glb",
+      "sha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+      "bytes": 176016
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/atlas.png",
+      "sha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+      "bytes": 2945
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/recipe.json",
+      "sha256": "e80a2140aff86e45e2974f741f63d0fc47d49d1f03847329f8e91f6b1b6daab3",
+      "bytes": 16954
+    }
+  ],
+  "retainedFilePins": 321,
+  "retainedFilesSha256": "6575f6b2ff8b7c97a6398fe081fbd367db74f7fbd4824611cb32beaaabe42d7a",
+  "retainedFiles": [
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/assess-pixels.py",
+      "sha256": "ba72e9d4d8439b6cbadf0fd2971aafc682aeeae1e0d642896a2342760e0c8575",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/audit-source.py",
+      "sha256": "7c4d5527780eac16bc2c8416f27ad04fda4faad0692fa35b5dd0654a41387db4",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/build-view.mjs",
+      "sha256": "83307efe98095e0f70859e0dbbcc07b73167793549e07703fcf8294d8b30e685",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/build.py",
+      "sha256": "d75cad0de4024d3aff6e5c57f7d254ea36b3897406a50ebbea2d0994c964a00d",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/capture-raw.mjs",
+      "sha256": "fb285336385b3ad1f3f34704d9b0358e62cc04fdb5a640cef36dbd0fa36dff17",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/coverage-region.json",
+      "sha256": "eb978371bb89d6b4dc5e37de366e5e7fa8144dae3cb6f4cda0300137f499cdb2",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/family.json",
+      "sha256": "f8cbd870c7ba8e50743ee99625c43107085a1dcae30fb33f112d967cdbebb08a",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/finalize.py",
+      "sha256": "f5a6963f97da96d7d187654f4037f22635bc2bb7f62c5ec1a5f4ad6d7ff80e30",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/fresh-replay.py",
+      "sha256": "6faa9015cba3d85449ec4d690b52bde319cdd47fc27c8725dc57ff23144ff134",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/geometry.py",
+      "sha256": "45a07781001bda9eac8ee2689b3b736c7a74ddc3a61f71a27687bdc0e4de45bf",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/inspect-rider.py",
+      "sha256": "608eaa139888aad4d05d04f40c0def17ceb09a4ad845005017b29d8fe17777a6",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/prove-coverage.py",
+      "sha256": "f351e115e8e99c2eee1290df9bd8c57b968e96cf8646bbb394704279503bf747",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/prove-fit.py",
+      "sha256": "8ac09d3206d9218572d4785209356da3ab6a1e417170db72fe8db80c94ab26f6",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/raw-audit.py",
+      "sha256": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/raw-diagnostic.html",
+      "sha256": "d1b5b64bb39389014a4343eb4f366e40ec4fc2fe2b429e659a04e1769c2f0a67",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/raw-viewer.mjs",
+      "sha256": "bb611ac0b2eb9f6cea7987b52a88dc8256555885b821ddb545cd1d3109de0177",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/touring-motorcycle/sheets.py",
+      "sha256": "2d6f41dcfd690a4fd12a5fdf87e33a577de6c28639bc09064c322eefb71e0207",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/assembly.json",
+      "sha256": "6a15dd994a14727cd5f5befc563af202fc8dcbba87d3adb9f610d3bdb60c8942",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/assess-pixels.py",
+      "sha256": "ba72e9d4d8439b6cbadf0fd2971aafc682aeeae1e0d642896a2342760e0c8575",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/atlas.png",
+      "sha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/audit-source.py",
+      "sha256": "7c4d5527780eac16bc2c8416f27ad04fda4faad0692fa35b5dd0654a41387db4",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/build-view.mjs",
+      "sha256": "83307efe98095e0f70859e0dbbcc07b73167793549e07703fcf8294d8b30e685",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/build.py",
+      "sha256": "d75cad0de4024d3aff6e5c57f7d254ea36b3897406a50ebbea2d0994c964a00d",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/capture-raw.mjs",
+      "sha256": "fb285336385b3ad1f3f34704d9b0358e62cc04fdb5a640cef36dbd0fa36dff17",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/car.blend",
+      "sha256": "b82062629114249c5947356cc2b0d4786417b5b2b7ddf66fd0522566a0b2a76c",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/coverage-region.json",
+      "sha256": "eb978371bb89d6b4dc5e37de366e5e7fa8144dae3cb6f4cda0300137f499cdb2",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/delivery.json",
+      "sha256": "7922c5c67259d33e7407629346e7a124a15a105edd14d021180985534ab4ea4e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/author-visual-inspection.json",
+      "sha256": "1f2ea9f23c6ac175a4323e052374447706bab9dc10f8fec8460479294b57cee5",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/coverage-F.json",
+      "sha256": "dab2883d2f927de0a14c04c08e5b649f13cbb4792c0651344574e6cdbb0dddb2",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/coverage-R.json",
+      "sha256": "96b2cbcdabf53018dda1fe44a27ade1b0e7f93e6f38c99cde198c75d06cb3b2a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/coverage.json",
+      "sha256": "98681934e3b44ab9d6c6cc0e1b1da237000da12d0811389dc06f13835d935606",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/desktop.png",
+      "sha256": "2fa507cfa3180c9d3616bf2820f00320e902b62a4767beb7707acd5b5349738a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/fit-proof.json",
+      "sha256": "e285a88ed0388c0c2992303878e3512625b77bdcad186c9543c43a09e120c706",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/mobile.png",
+      "sha256": "e0127db9c91c6c1182c12f1606d21e7f36b5df3cd40125a23c7f3a75800c7255",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/pixel-assessment.json",
+      "sha256": "49262be18c24802ea7d9820b070b3c50ed27c1f0680fc9b4e9593953b4d85356",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/raw-capture.json",
+      "sha256": "7ed7c9bcac8cff6fa61e5bb1854fae1eee52447d1aa29935fa46b0842dd6f5b8",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/replay-verification.json",
+      "sha256": "cc03c6f681567389c1452f136f38860cbbdb317439ac3442b27d91ce87847421",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/rider-measurements.json",
+      "sha256": "a34773a9e4d560d3ab6076ccb8795019e001d50ec293ac4debf7d230562d95b2",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/scoped-checks.json",
+      "sha256": "ea07e1616f660304dccf35994d1e87cf7ba66c5f4d18a3fe812908a02b01a46b",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/source-audit.json",
+      "sha256": "e37354d63e32472ab909041d113db2d6aab6bbfd8e1bc731149e81eb02779076",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/evidence/source-only-replay.json",
+      "sha256": "8c16ec2f9826bfb24f5316a1b1946b218e1596e35b7f77493c11d36d3ea843ce",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/family.json",
+      "sha256": "f8cbd870c7ba8e50743ee99625c43107085a1dcae30fb33f112d967cdbebb08a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/finalize.py",
+      "sha256": "f5a6963f97da96d7d187654f4037f22635bc2bb7f62c5ec1a5f4ad6d7ff80e30",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/fresh-replay.py",
+      "sha256": "6faa9015cba3d85449ec4d690b52bde319cdd47fc27c8725dc57ff23144ff134",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/geometry.py",
+      "sha256": "45a07781001bda9eac8ee2689b3b736c7a74ddc3a61f71a27687bdc0e4de45bf",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/inspect-rider.py",
+      "sha256": "608eaa139888aad4d05d04f40c0def17ceb09a4ad845005017b29d8fe17777a6",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/master.blend",
+      "sha256": "dfb2c5255b8828057bce7f5ca84f9529502516d75d2d9016582d839ca9f6ecf4",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/model.glb",
+      "sha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/paint-ownership.json",
+      "sha256": "384d6fc496e7a6a5797210e7c41ae203b6a56cafbf22986fa9f532224e3aad99",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/palette-draft.png",
+      "sha256": "027db10cc6c4a3a977a3ac03c66d9ada359bff8b5bcbd47afb2d18b6e0a0efa3",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/proof-inputs.json",
+      "sha256": "346cdf06888ccd69c97425673f8a049bee561621bb24e3df9e469057baffd250",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/prove-coverage.py",
+      "sha256": "f351e115e8e99c2eee1290df9bd8c57b968e96cf8646bbb394704279503bf747",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/prove-fit.py",
+      "sha256": "8ac09d3206d9218572d4785209356da3ab6a1e417170db72fe8db80c94ab26f6",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/raw-audit.py",
+      "sha256": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/raw-diagnostic.html",
+      "sha256": "d1b5b64bb39389014a4343eb4f366e40ec4fc2fe2b429e659a04e1769c2f0a67",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/raw-viewer.mjs",
+      "sha256": "bb611ac0b2eb9f6cea7987b52a88dc8256555885b821ddb545cd1d3109de0177",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/recipe.json",
+      "sha256": "e80a2140aff86e45e2974f741f63d0fc47d49d1f03847329f8e91f6b1b6daab3",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/report.json",
+      "sha256": "1c7ffb8098add21b7261860489311a86343a811806d377a22ed098953ce2672a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/sheets.py",
+      "sha256": "2d6f41dcfd690a4fd12a5fdf87e33a577de6c28639bc09064c322eefb71e0207",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/touring-motorcycle/v1/source-replay.json",
+      "sha256": "7579467fb957e089706e523185f45d1ffbbf962c483af607aab85a2992f90663",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/atlas.png",
+      "sha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/model.glb",
+      "sha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/offline-raw.html",
+      "sha256": "394343bdd40a6b42cb3a10fa1a9418bbeccbc886c070b32614980fb8c7fdfbfe",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-0.png",
+      "sha256": "605d2bb28f923c42717695bd7eccd487776c045e2c9381e3693c2755410ad831",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-1.png",
+      "sha256": "0950f0aba81290bd3b521a3b0828b1737023b2b707ec3a94f313aab10f1f3342",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-10.png",
+      "sha256": "7d353fd3d1c65a452ea890b5f3b3ac53705eb2f403b24368952c952d04fd2b25",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-11.png",
+      "sha256": "192a566b8d0b95fcc71d6399e4cd6be81e158bc6667659060b0f2457a712d483",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-12.png",
+      "sha256": "5121c5eab4b8ebad6d4173261851e1294eafedf5dbbff8e8134c4c5123b83ed2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-13.png",
+      "sha256": "7675ac14667633205c82939d742a6b8dfffae6d81495a40ac63245ec2588fa20",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-14.png",
+      "sha256": "cb821ba41d54c36c38c1425e8dbdeae19b363126ff6d28d709726c41dd35acfa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-15.png",
+      "sha256": "05277b3923c23363ea49317cd5e1c7895bff7e93a1f81e152cd1a17d1a6d1766",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-2.png",
+      "sha256": "a6dec38f23fd14a08a15be6e394c142ed891b2f842db21df179d3554748691d3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-3.png",
+      "sha256": "3f2949d130656426eb9a1127dcd6b0add77589dcc0cb10dae571035e29749203",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-4.png",
+      "sha256": "a7add743047a3c2fbbba74df9bb94af6a7fe7e0ca3c5efc27ec299e26056e2af",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-5.png",
+      "sha256": "9628224e7de42de4425e283a74d346b772d800bc6333e017e55080fe34cd5d27",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-6.png",
+      "sha256": "7dd46f4e46d5ecc04d320bf6f5a04114fe309bed0b4b4be80174f1ef58318016",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-7.png",
+      "sha256": "f5c7d40ecabbbeb2c2f34a8ed412ddcbdf9e197bda6e03db06c4a82f87c938ce",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-8.png",
+      "sha256": "ddbf034ca9d0143b43be666757ececb6072ae9c305ca6a25711c960bcc639082",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-engine-9.png",
+      "sha256": "7d46e90c84e6b69bf5446c45b18201c544e3f9b3295e83fc7ba88e6513729cb0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-0.png",
+      "sha256": "89c186237f367d8e7b1c5e3af9da6100f57533ae930011df6804af68088338fd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-1.png",
+      "sha256": "3d069452a0d494d67c2733b4647e50add4c9c4a8a02f8baa8f0884dfe1036525",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-10.png",
+      "sha256": "c6947b43ea53719bc79d9be4d4a0fafa01a9367bb381d5f345af7033c948d3b5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-11.png",
+      "sha256": "371a925bcddeb7fb46c939a4ff9f219ef5a0952096875c98b8fa4b2237da00f1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-12.png",
+      "sha256": "3f87af84461d459450b354c8cde0d90c10e189ac4c4e7f30a5fca600dc28bd9b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-13.png",
+      "sha256": "3a39a7b38b0bd092cfb570a67512018c1e36833d39d95c85036b6bb554e59408",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-14.png",
+      "sha256": "d218983340474b569ecfb82fc8e9852ddcfd5e43d8dfe07976d6a5a05cfef5c2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-15.png",
+      "sha256": "7958e67d4db7bf6e737d670cb8ca21dd8a5e86f99f48d5f630d7eb844f4936e8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-2.png",
+      "sha256": "c03620e439ea2ca4d8ee737314925fa924de2236757bc8a0b5ef55078dcda40c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-3.png",
+      "sha256": "4d2aaf69cde4b960a426d8386218d1bfeda1c9912c28dd303f8601870c4c5a15",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-4.png",
+      "sha256": "f7480edaaa04c422f01fc8481ca86a4954909483bb1bab1bd7f7484bf736a741",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-5.png",
+      "sha256": "757a43b86413bcd560bf43a4198618edd91837a6d1043251676c8c3365f104d2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-6.png",
+      "sha256": "8abb7db882b866b8b28eb5e63de1f995539e7d64ecd60cdb69cb2f8fc43ffbe8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-7.png",
+      "sha256": "02275d2caca2cc621ed9e5383ffa2d2076e75949ee18763af1dcba39737e8891",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-8.png",
+      "sha256": "abedbbe91aeef1c2e06af343c7e3701e4d3bc095d3d733477c45a905e1f94397",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/bike-alone-study-9.png",
+      "sha256": "a4aed83d1603045207f5b75c9733388bd06510e9f57b071b815bfa7086b559b7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-0.png",
+      "sha256": "623d9195bed81edbe2fb441566683165e3f67ca21116833d22d4b59c435f3d45",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-1.png",
+      "sha256": "6c5480e1d9558c0d6ef0424e992dd1d233bfe907d6f1aee6c31866dc4b43eb74",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-10.png",
+      "sha256": "237d8aa3f50e12141924894eea174285f4b4043190ae752ef111aaf4afddf670",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-11.png",
+      "sha256": "f65b8faabf67b56ec67070ca62b184618badf00367d83e93ad0d0c6eae769e64",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-12.png",
+      "sha256": "ba0b68831f8310ac8314b05e246281df6bb7d4bee6d656218adee766bbf049c9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-13.png",
+      "sha256": "81d86de9cbf32f7f8a3933e4960f6bc8b93e44fb15c52a3f1f1bb729d9dc17f4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-14.png",
+      "sha256": "e79de29775f9d1f01a13f1428c87c3d45ea4e81c5226158e2c03ca8075068d8a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-15.png",
+      "sha256": "f7a1c7705c88a8a0d5af949fd2fef51fce1c9e26e858b26af22dc73880cb5085",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-2.png",
+      "sha256": "dac99d60a2227d395022a63ba97e276b40fe619f93148d4fbfcdf84672560376",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-3.png",
+      "sha256": "e5cb7827a9fde889d22b2495b46d5ad0d73e1a84f5843106337cc62a136f558f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-4.png",
+      "sha256": "f670178cb66c04c1e01466fbefc92fc44ce14116f15c90965156ef41bb50e555",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-5.png",
+      "sha256": "848d647e0dd744c3f897c7ed6746bf811e2f2d0463abc8fc8ee1409e3b6d36c2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-6.png",
+      "sha256": "96a7a10c2ac0ff8d8a6f108d276105549f7c0a92f37499573ab4e1cc5bc0231a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-7.png",
+      "sha256": "97c48b1423fac2186b3cf9c1c78f786b91f3ff90e6776e2643c4fee0720eb9b3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-8.png",
+      "sha256": "5f2f9bd69448a8ca93d0ed2fae0f825eb0bbb416cc0ea205c7a48b38ffbbc88a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-engine-9.png",
+      "sha256": "768da9b3f241e182d78def33e8de75d9feb725d8b28da77d6e485607c4613ca8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-0.png",
+      "sha256": "032ce7866922191ca77ce69ee53e7dade270370d973dc3386e29a2a44f6b3eb2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-1.png",
+      "sha256": "7363fa27346b040274f5437ab7963d33ea9a240a92ccbbb14a5ba097963cb928",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-10.png",
+      "sha256": "8373ffd7d3da58c2bd1bd8955a8e3acc30074d46e6c0a231448a4cab27ad3887",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-11.png",
+      "sha256": "91ad85de948e0b5cb72404b97a3edc246fdec83b70241683850fb960bbd67a22",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-12.png",
+      "sha256": "124ebe702af527179143168f038a86bbd72879f212629856f0b9d6b7f65434ab",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-13.png",
+      "sha256": "6acbae90654bfcf9c2ad2f76a7300645a4bcf5a2d6efa5acda62a052540d596e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-14.png",
+      "sha256": "0164ff8f39554390049abdd66af798ebd679be7c1a69eb5668b7516aec8b2e98",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-15.png",
+      "sha256": "1b260d992892b7e99b5b6c972813757c4d28d32059b00215d545b9095f70e849",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-2.png",
+      "sha256": "b56fed245bdcf30db80d119b381d3ed46474d5013eb6e0e8a1bdf05d40bca69e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-3.png",
+      "sha256": "dd2faa398e1053e2370c8c14ba6ebeaa1ab89c9d10dc1eafcfd5044ebaaee447",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-4.png",
+      "sha256": "76ca9a12380d49e5eef59800160bf0a536131f30b3f8a9743cde154b3008660c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-5.png",
+      "sha256": "bc56158be385cb9c8f70453999b51c5d5fe138851997b0499e16ed613cfe5a1f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-6.png",
+      "sha256": "730870fd447d2acebeb3f91550bd728052555f21ce24e86821eebf3742fee88b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-7.png",
+      "sha256": "0672c37fd89fc98cbd42fb8660b619d698008ee0a883c1757edcbebe376a31f8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-8.png",
+      "sha256": "47e9b9785560a85ba8eaa19c6d5d968819c481e19b352bee60aabb06e1575f85",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/combined-study-9.png",
+      "sha256": "59ec81648471c056b9e63b0d032f8e699618fbac3ad2aec48a7af71877d9ff79",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/independent-F-0.png",
+      "sha256": "623d9195bed81edbe2fb441566683165e3f67ca21116833d22d4b59c435f3d45",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/independent-F-1.png",
+      "sha256": "2527bd50dad2e6799118f08d5a4963c54df823daa4133599d1c072103c396b8f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/independent-F-2.png",
+      "sha256": "196c40c3468ab873a2db029392ff90d1153c996aab39a1d599f9fcbd3ee5b400",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/independent-F-3.png",
+      "sha256": "623d9195bed81edbe2fb441566683165e3f67ca21116833d22d4b59c435f3d45",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/independent-R-0.png",
+      "sha256": "e79de29775f9d1f01a13f1428c87c3d45ea4e81c5226158e2c03ca8075068d8a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/independent-R-1.png",
+      "sha256": "ec6319a62110f7a8f3a6aaf08caca546d3a29a7a25a3399d5bce1e04c8f6b937",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/independent-R-2.png",
+      "sha256": "9782d020b6878f63cafa4572a82e886e5085256e843d53210c78c400d4c662f6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/independent-R-3.png",
+      "sha256": "e79de29775f9d1f01a13f1428c87c3d45ea4e81c5226158e2c03ca8075068d8a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-bike-alone-engine.png",
+      "sha256": "bf55c298aab3827d349b07f1a6f7bec1f85a6b9484b32486d386c5b4b583406e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-bike-alone-study.png",
+      "sha256": "81646e3779c6aada70f4b78311d443b94b949f1ce541d209041ecf2f094a2f0e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-combined-engine.png",
+      "sha256": "1d472c4da0f66c6f365072926202f59a4ec2b63465efcf457f2a02cab8c8cbbd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-combined-study.png",
+      "sha256": "c6e97827f8db6c8b0200ca965cd7ddaa6cf60407c235b0360a24619791322536",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-detail-bike-alone-engine.png",
+      "sha256": "ca401ac3da53b863fc32aa3d7c996e9b93123c4215aa3cc0c25eba5b08f9036a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-detail-bike-alone-study.png",
+      "sha256": "3b86caf2773a5a1a3c26aa2033a3d56f9e49babe47a66f8fa0fa8e0ce0091962",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-detail-combined-engine.png",
+      "sha256": "d5fb082a777587f80032927734da3580ba40367e95e62240ffe8be8daed80848",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-detail-combined-study.png",
+      "sha256": "4d11b890cfa2580fb3503ba0ca80cb120985d5e9238c86a1a99376a4342f217a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-detail-ownership-mask-engine.png",
+      "sha256": "8af19b4c4ffad1b88b9fee1e14e5ad6335575896d78239021e63653d2adcabe9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-detail-ownership-mask-study.png",
+      "sha256": "d59029ff2f9a0852e45b4bcc131dd001235f31acac9e16dac6ad4bf26bf4ac96",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-detail-rider-alone-engine.png",
+      "sha256": "c25297b04dab6103f33761b79f08359be2bcbddad050ca563c413e5de50e3c2f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-detail-rider-alone-study.png",
+      "sha256": "da19808e4a0e17e69e46eecc8964667a91fccc8b765d8719470ee96bc2e6817a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-independent.png",
+      "sha256": "115d0cc758823bee3ca245a3bacd85d8a0cbe0e1f1b24a39d308625c6e47a991",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-ownership-mask-engine.png",
+      "sha256": "291146998075ed9ad4929e19a806a2eb799b7e840ff40834aba8e7869cfee7f6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-ownership-mask-study.png",
+      "sha256": "1d0a21c49cae8cf46a622cec9ab02e1a9766be8f7be60bf1ec1c930087b03160",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-phases.png",
+      "sha256": "2268facc6a3479b6aa12bbad4677c19f083758ce873f1d5ae54083536b895f8e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-rider-alone-engine.png",
+      "sha256": "19d0e38fac26e42dc782f05acf810e5376f25421183f52b1302b2a53b3b79770",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-rider-alone-study.png",
+      "sha256": "ecef01a9ab1394aef8ebc8d44e52e558392c7e47d62f9a006f93f434d1a67e7d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/inspection-wires.png",
+      "sha256": "1b6e967d4f1d63e682c0e6b5fe4af254be6c161489d4c78e5f0f94d7108413f7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-0.png",
+      "sha256": "3204b23e431e6a7ab6a086f5638f23d5a7f271c0b9fca232b495c6236e53900f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-1.png",
+      "sha256": "762b022f3160eebdec37df02441ed3e8cd224ed70a051bf683b1fe274ee01d53",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-10.png",
+      "sha256": "bc9a6f79522702856bd277825cd667651481741b544691d49d381dbe6b4782fc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-11.png",
+      "sha256": "7a82ce00273893a701f23d3d022435ceb4038be0e299d1ca76e1708530019d65",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-12.png",
+      "sha256": "bd6c0f85444c8310be75f67d7b734d055ffe4a331f3c666a24193ea59ea3ce96",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-13.png",
+      "sha256": "988a376e453dfb911dd027b97d9818db315e4458938c6b64ecbaa273130adb2c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-14.png",
+      "sha256": "a62f8f66aef46fccbc22d474d019b7266e48a1c6a114bc795cc7b7aa38bca99f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-15.png",
+      "sha256": "b171f31c881fb18f188568b9b304c03638142e00b4b76e62535ea6555c81147b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-2.png",
+      "sha256": "119076346cf24e93a9ad7c289129273d3635c6acbad634950bd9735d8a65afce",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-3.png",
+      "sha256": "8d0669794344a81734f7df48efe8b6156167922b492956e75856e04028fccca9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-4.png",
+      "sha256": "0b64cc640155d5aed9cda60e91c800adc42248a8b3b205f3908ac5b2a7db0343",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-5.png",
+      "sha256": "26c1383d8b3c7a6a06c589ceb323c7340b27f11eb1cb5c05f1764774891111ca",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-6.png",
+      "sha256": "2f8f959c9d53c439def6fcd27dee3648ab714baa6ea0cb1d4ffb288bc12d1274",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-7.png",
+      "sha256": "e22fcb81c2842e3fc106709fd6c2a949d9b473ada9cb60e02ed509b23490f3bf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-8.png",
+      "sha256": "3c8604a4fb2ad5173c8a1e46496245647c51e894769ee8efe91c4537fdb0c202",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-engine-9.png",
+      "sha256": "d5d79a253ade6c7701477f15377fa796b7161e7ebd993ff33e066acf857cc71a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-0.png",
+      "sha256": "832ca80f392873630c487d2d8bcca772a0c2bfe45765c5e947436fe6904c322f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-1.png",
+      "sha256": "678a63cf66c6660440caeb7f243e2bf9626c9e1c5c0f9c373ea26ac8194812ed",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-10.png",
+      "sha256": "79bc493089b77855142f0a04608a8c5a7bc194c2f8af384dd002817ff67ff313",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-11.png",
+      "sha256": "97aefac0fa5830aca51ea5f3c1d61983f30a591782db2316ec1169b19177d2c4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-12.png",
+      "sha256": "cee9b9577573ae5af6204a072397b0757edea9b04a970ed79ed073fbcff2dae8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-13.png",
+      "sha256": "90b5b0a5a77cad0c95a864839ff9e54093d1ef04ac5a9ca196787d2b18e5e925",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-14.png",
+      "sha256": "01760e8929d8ab394fce0961db02c68e54c815635c0c4431e1e15c2385e00dfa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-15.png",
+      "sha256": "745df41e34d1700ec6fed7dc8d34eeaeceff52815d83ec0830c2dd40acfe82d0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-2.png",
+      "sha256": "ddab6844e9c203a61aa929f3ec2d7d79f83386f3927b29bd9480077b4203107b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-3.png",
+      "sha256": "ca16835f26edbf041efa63187cd7fb28604a62d2ca7a8ffda8f85c5649fafae9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-4.png",
+      "sha256": "e6ff47cb9f86b689776e7312dd4a9989d621a1cd3ff1203d17a5db163998dd18",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-5.png",
+      "sha256": "e61b06878a81f8ab09d652827382c32a06ff06f4b82e1869c2b9b0314e8ef856",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-6.png",
+      "sha256": "c3bbdd6fac5724eceb6c64e4e255951622d7763f5b895a77a32c94bcdad159d2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-7.png",
+      "sha256": "c124a1603a4a9fb0cb65ee865a1bd950f32ab14144c4783f4668dfffc84424d4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-8.png",
+      "sha256": "2c0d3670ea6092b9be3a7d243ff202b5830e2050d44ce007c54343b3e8f6f960",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/ownership-mask-study-9.png",
+      "sha256": "584c462b7aa6cb7c50f9b714f753d454e16ebaee6dd90078669e7d8f24f0088a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-engine-0.png",
+      "sha256": "dac99d60a2227d395022a63ba97e276b40fe619f93148d4fbfcdf84672560376",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-engine-1.png",
+      "sha256": "d4c8b70d9611585b652ceda28d89546bddf45b8dfa5fe854e41b68dd51f7f987",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-engine-2.png",
+      "sha256": "9029bd08d5d02d3a24fdeee43805d065d9dcb11124d43319cfbeec96b30d6e2e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-engine-3.png",
+      "sha256": "a765f64613499a93cf89dba0f807d8d1636c4954227cbd46a873b7cc6519877a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-engine-4.png",
+      "sha256": "18a40709d19ee75658b4c0d5c3e256c133635fc597046c57423104154410dd86",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-engine-5.png",
+      "sha256": "dc736796f2db95a88624fc4154b681904f7ca834d66a17ddb502767880004f9e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-engine-6.png",
+      "sha256": "9029bd08d5d02d3a24fdeee43805d065d9dcb11124d43319cfbeec96b30d6e2e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-engine-7.png",
+      "sha256": "a23e99d9afaf98acd8a44fbbe43dc30cf587b987519a1b8ad1d159adfb1262a6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-study-0.png",
+      "sha256": "b56fed245bdcf30db80d119b381d3ed46474d5013eb6e0e8a1bdf05d40bca69e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-study-1.png",
+      "sha256": "c1404b2e261912b54bc5985656828d5cccd754bb95f5ba9edcfbc514f848e020",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-study-2.png",
+      "sha256": "c9315335291191c52dd35575cf1d8e2360b45142bb668ddbb0f65d5b2887afc9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-study-3.png",
+      "sha256": "8be66161704d5a641909fb68150d3c1c03548616ae03fabb5f695183b88e29ac",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-study-4.png",
+      "sha256": "b56fed245bdcf30db80d119b381d3ed46474d5013eb6e0e8a1bdf05d40bca69e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-study-5.png",
+      "sha256": "ac2e9f1c76711b6246ccb002d62ba1848e26e53545922ed883358bf803e3509b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-study-6.png",
+      "sha256": "6fa1c725936f07f5c5933476a9edea34909775f4d8782985f9a5556ea3a1dc12",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/phase-study-7.png",
+      "sha256": "f4cdaf3958f98d9508aeb8db93325e4bcda2ad4bc04ab49dbeedf02f1707e647",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-bike-alone-0.png",
+      "sha256": "a3ed0962ba7467361e0af7000082f9e7ea24253088d8a837ef606fe91ebbc833",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-bike-alone-1.png",
+      "sha256": "e7fe51619aaa5837c3a7085dab37af9831a9bd5a68e4c6310c4de37d54d50f13",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-bike-alone-2.png",
+      "sha256": "a81959c5fc9952b2443710e65653b81e7dc530b2952be6f181e656aa6a111695",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-bike-alone-3.png",
+      "sha256": "fb62adb5cd3b5a22439d2ac519e382e1b59ca83b9cb3451e6302fa615f8d8c50",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-combined-0.png",
+      "sha256": "efa9da941ce861dfb5c9e16b0422a057ba819ec50646dfd14df6edbc54a4eb59",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-combined-1.png",
+      "sha256": "f703846b99ba57fd98e06c803991cb70d90910829df83533d11098ca62a0a33f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-combined-2.png",
+      "sha256": "f4d8269e2380ff83e786ef8f50d90781025fcaa3190d23284151d55ba2b99d90",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-combined-3.png",
+      "sha256": "b02878aee7e9dc502a8e3aa67a9923b61a6b6d9d6b24938da171b99f58826339",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-rider-alone-0.png",
+      "sha256": "2fb68ee3f1543ab16b3cbf3cfc4224f3f5c2aea6da4c920ee2477708a4fa3741",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-rider-alone-1.png",
+      "sha256": "ecfa5295020e36818172296155ff6cd63afa34115f6f3c21e4dd698ba8e54b81",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-rider-alone-2.png",
+      "sha256": "34d5f8a457abb620d14547c83e5d9da4d41b3eddb3bb6ac3c6e886f2711dbcc7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/placement-cardinal-rider-alone-3.png",
+      "sha256": "4c1505c4f28b17d6b70e5c3651187585330995bcfa49f6d487a9c4f64b67221f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-0.png",
+      "sha256": "b40d345262dfd1f6d057345ede401893d342bd91df6e0d7263e51bef7c6770aa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-1.png",
+      "sha256": "6df954061aa425fbc9aaca6ff124c7122b9b4e4540591fb79d1c91c1c2b708ef",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-10.png",
+      "sha256": "d13745b9fece2eb787924d649c5444e365fc176679d0090005c09a4b36e0122e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-11.png",
+      "sha256": "313d44c64c74a08f0db30e7ab435ecce2dcdf4e3d8cc938ef356822c50cdcc84",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-12.png",
+      "sha256": "16e9217799fddc5989e0ae65587840b6b29a354b494d8ab520b09ca291220a0c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-13.png",
+      "sha256": "6521c40809f377e4b43a957caa3fd2706c2bc89e22f129599fce5e8338bbb4c5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-14.png",
+      "sha256": "c9e49b0729c1a0bfa51c8dea12cad925376bf13ba9c946de42708b032f0f5fa7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-15.png",
+      "sha256": "0aa02a01ba6465c9402a272a6fb12596af3e06028ed8c0008717c76288b35cc3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-2.png",
+      "sha256": "46928509cba04d18015b9af2e8eb5431030524e58ac31d85d5f691a2d55d0e79",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-3.png",
+      "sha256": "ecba163aac9f28cdfd72d3deb95d7d29d6cddda0294ae742aa4a6672ca0bb5db",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-4.png",
+      "sha256": "a2015f425bea635492ee76c53fb28f063edfa63af0cf4e4fd6eb6fc2a1c68713",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-5.png",
+      "sha256": "e099f4b7f34403b8123e74a378b2d1ce96b44d9c6984c7d1f97148ccb62d1ff1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-6.png",
+      "sha256": "b2f129061ec4016e3ace6244a242603a006dac278fd297c2690b756ea6416749",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-7.png",
+      "sha256": "9afd517890b02ca501c98305f37fec2c0c8122dd04a2ced246d5db928b85773c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-8.png",
+      "sha256": "34816e67e6e943d950daa50a8e9de300af8636b41dd77c38a23fa4d76ebb4f69",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-engine-9.png",
+      "sha256": "9b42436b7d2f186065a126134ff9dee9e517ae173a9665f4c9494256ed8dae6a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-0.png",
+      "sha256": "e43f938658f61590478349afae48969242465fc180d7c87f69723cb70ff0f2ad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-1.png",
+      "sha256": "8bb3038493dc9f8202b0d4e3e93e32db148e0b6d12f2e923727f0cce534a4084",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-10.png",
+      "sha256": "4e641cfcc9321bd1b27467aa3b241494f6b177b3984b0a919afbf063608dc86f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-11.png",
+      "sha256": "4433ab87762cbc83bc1ae2e8adc64ba1abdbc6f45aced10f90c3e8ec45a6d92e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-12.png",
+      "sha256": "9356a2c12ca7ebf1f0bca922b08d5875b6281cee7bf51ddaa7694c5bb55e6916",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-13.png",
+      "sha256": "940dcc4d7249408749073130144f637096c726da2f5c828bcb78987f0c194a46",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-14.png",
+      "sha256": "bd5dbc165da43fe9fa8e82d5a3c61c437def45f8f174e30e83976804a9f8e11d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-15.png",
+      "sha256": "7b9e83657b06b8200579cabfc589f335d69da1704c6bb2a280ee35c1c8214e18",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-2.png",
+      "sha256": "44cae171ea992a1e5f102054cd232b4ba3c08c09cc3540196d4a916d7638cf8a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-3.png",
+      "sha256": "c21eea3d9df7d41ef514f1d083ae34d5f20b0b1d8954bdd69ebe565dd73828c9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-4.png",
+      "sha256": "6043d91a78b6b477d70223073826c5f184f76c951a325cd265ccb829a634178f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-5.png",
+      "sha256": "f219ab93f4920faa18fbf16e78a2c545bc0b24cb7f07a9e2b5cb849287db0dc1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-6.png",
+      "sha256": "314d4a09163f6dc89e7670f9f4d9be1fcd9340481d043692b0ea17dec1eb0e0b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-7.png",
+      "sha256": "275945a38b759175697e09d3358011cd68b28876e1d9f3bcf6c50d6469f553c4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-8.png",
+      "sha256": "a0eb67708de8376dededce15cc71d27ed4ddb322e55b1e3d805da90405d6a75e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-alone-study-9.png",
+      "sha256": "e07e93e198deb8a03cf3f1afe3f95916f78716f30af873d3f60369787eed0eb8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-0.png",
+      "sha256": "605d2bb28f923c42717695bd7eccd487776c045e2c9381e3693c2755410ad831",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-1.png",
+      "sha256": "0950f0aba81290bd3b521a3b0828b1737023b2b707ec3a94f313aab10f1f3342",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-10.png",
+      "sha256": "7d353fd3d1c65a452ea890b5f3b3ac53705eb2f403b24368952c952d04fd2b25",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-11.png",
+      "sha256": "192a566b8d0b95fcc71d6399e4cd6be81e158bc6667659060b0f2457a712d483",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-12.png",
+      "sha256": "5121c5eab4b8ebad6d4173261851e1294eafedf5dbbff8e8134c4c5123b83ed2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-13.png",
+      "sha256": "7675ac14667633205c82939d742a6b8dfffae6d81495a40ac63245ec2588fa20",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-14.png",
+      "sha256": "cb821ba41d54c36c38c1425e8dbdeae19b363126ff6d28d709726c41dd35acfa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-15.png",
+      "sha256": "05277b3923c23363ea49317cd5e1c7895bff7e93a1f81e152cd1a17d1a6d1766",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-2.png",
+      "sha256": "a6dec38f23fd14a08a15be6e394c142ed891b2f842db21df179d3554748691d3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-3.png",
+      "sha256": "3f2949d130656426eb9a1127dcd6b0add77589dcc0cb10dae571035e29749203",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-4.png",
+      "sha256": "a7add743047a3c2fbbba74df9bb94af6a7fe7e0ca3c5efc27ec299e26056e2af",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-5.png",
+      "sha256": "9628224e7de42de4425e283a74d346b772d800bc6333e017e55080fe34cd5d27",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-6.png",
+      "sha256": "7dd46f4e46d5ecc04d320bf6f5a04114fe309bed0b4b4be80174f1ef58318016",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-7.png",
+      "sha256": "f5c7d40ecabbbeb2c2f34a8ed412ddcbdf9e197bda6e03db06c4a82f87c938ce",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-8.png",
+      "sha256": "ddbf034ca9d0143b43be666757ececb6072ae9c305ca6a25711c960bcc639082",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-engine-9.png",
+      "sha256": "7d46e90c84e6b69bf5446c45b18201c544e3f9b3295e83fc7ba88e6513729cb0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-0.png",
+      "sha256": "89c186237f367d8e7b1c5e3af9da6100f57533ae930011df6804af68088338fd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-1.png",
+      "sha256": "3d069452a0d494d67c2733b4647e50add4c9c4a8a02f8baa8f0884dfe1036525",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-10.png",
+      "sha256": "c6947b43ea53719bc79d9be4d4a0fafa01a9367bb381d5f345af7033c948d3b5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-11.png",
+      "sha256": "371a925bcddeb7fb46c939a4ff9f219ef5a0952096875c98b8fa4b2237da00f1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-12.png",
+      "sha256": "3f87af84461d459450b354c8cde0d90c10e189ac4c4e7f30a5fca600dc28bd9b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-13.png",
+      "sha256": "3a39a7b38b0bd092cfb570a67512018c1e36833d39d95c85036b6bb554e59408",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-14.png",
+      "sha256": "d218983340474b569ecfb82fc8e9852ddcfd5e43d8dfe07976d6a5a05cfef5c2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-15.png",
+      "sha256": "7958e67d4db7bf6e737d670cb8ca21dd8a5e86f99f48d5f630d7eb844f4936e8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-2.png",
+      "sha256": "c03620e439ea2ca4d8ee737314925fa924de2236757bc8a0b5ef55078dcda40c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-3.png",
+      "sha256": "4d2aaf69cde4b960a426d8386218d1bfeda1c9912c28dd303f8601870c4c5a15",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-4.png",
+      "sha256": "f7480edaaa04c422f01fc8481ca86a4954909483bb1bab1bd7f7484bf736a741",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-5.png",
+      "sha256": "757a43b86413bcd560bf43a4198618edd91837a6d1043251676c8c3365f104d2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-6.png",
+      "sha256": "8abb7db882b866b8b28eb5e63de1f995539e7d64ecd60cdb69cb2f8fc43ffbe8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-7.png",
+      "sha256": "02275d2caca2cc621ed9e5383ffa2d2076e75949ee18763af1dcba39737e8891",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-8.png",
+      "sha256": "abedbbe91aeef1c2e06af343c7e3701e4d3bc095d3d733477c45a905e1f94397",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/rider-hidden-study-9.png",
+      "sha256": "a4aed83d1603045207f5b75c9733388bd06510e9f57b071b815bfa7086b559b7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-0.png",
+      "sha256": "793ecfac372fe124c8eac1d22cfeb6633f7d3c595d07b2ba2c9b0c9a51b06d3f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-1.png",
+      "sha256": "8725b93085fbe24aaa50eaf5a44baf7a36458dd1b85df797a05e9459807b4dfa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-10.png",
+      "sha256": "f7c2e9e82cebdd823a8de6a23778f20418c1996a6e34084bf5c47043eccda1e1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-11.png",
+      "sha256": "2575bfc2ddac8230a889333ddd8e416a5d754140545177cd6126d4a7f883319e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-12.png",
+      "sha256": "16e9217799fddc5989e0ae65587840b6b29a354b494d8ab520b09ca291220a0c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-13.png",
+      "sha256": "e99291f3f42203f05d4d38f603fc464681ca8c947319de116614514c0204b3a7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-14.png",
+      "sha256": "d9e2a0e86a430682a26ea6934779ab7305f0b1402cf59d93b4a944fb893f844e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-15.png",
+      "sha256": "6a547d4768ad1a4172f48e18fefb12da5e300c8d157d06cef1d359c80a621a1a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-2.png",
+      "sha256": "2a8b40b78d302517c43ca7df23602cd1477b188649e18bf81f5ccaacb196f192",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-3.png",
+      "sha256": "a9c7e14c3be6f96cf75ad0db0ff80dd8c949bf90c4c83e06d7433aeb6f5d3927",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-4.png",
+      "sha256": "9e85497167343ccf34ffef6a54b03a73e5c18188ce75a22dad727eb79ef71746",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-5.png",
+      "sha256": "067dcf02db8109eefda0139cdec14d247d3f3c663c0cddda8b76f965b015154c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-6.png",
+      "sha256": "0bd8bd6d95db70b661d405488da4c2ea3b3e769771d0126615f313f31db80151",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-7.png",
+      "sha256": "c4b7f825c277cd58a1acd920d1c06091430d7e74f99e33c23373fdbd635d6955",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-8.png",
+      "sha256": "0aa5eb9291fb9d7a63f563a0b7d6ea1fb8326f0d9308f33b33867bb06ab9ac08",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-engine-9.png",
+      "sha256": "ccb08bf7bb6d7e899162f8ec896b42c676a6d59c5020214c2bb40127d9f5328c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-0.png",
+      "sha256": "eba95d67f9ba65036bf412a1156abb3feff40129ec996307c2eedc91d925ef1f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-1.png",
+      "sha256": "73a9af7528db1e4226bfdf7aa92543499e1180498cb352066e04f47447c4ed49",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-10.png",
+      "sha256": "55b20c921f98096ebf6a8194ff84127c861e80b2825809d00e8f35ab70d71637",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-11.png",
+      "sha256": "e28ac0708d06284c4b278f78a80549e578bd13227ea0f36f20da24ef7f2736af",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-12.png",
+      "sha256": "9356a2c12ca7ebf1f0bca922b08d5875b6281cee7bf51ddaa7694c5bb55e6916",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-13.png",
+      "sha256": "8007b64a2d23c8a04ef0ab92a3cde0a3ccf28ae8f154910a248a47da4c234a1c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-14.png",
+      "sha256": "bcb93337c3e9a61ede9e865da800f9e9cd46f2eba775d3dd86607b327b59bf3a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-15.png",
+      "sha256": "a9541f08dea7aefd5d610c1a5dd370861c132ccb5d92fac514882caaa1cc54d4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-2.png",
+      "sha256": "cfb034acb9e65c058d7eb620a885914b9c7be532913d88f21b116ab0d8ce1d64",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-3.png",
+      "sha256": "45579dddb5b98a4ec216aba14436483108586af193b68b0cbafbce65232d29c2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-4.png",
+      "sha256": "c0dce2442786eaeed8657e2b3472f456f41187a85d6f3d820e370e6894e3fbfc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-5.png",
+      "sha256": "3667cc3d12e5e705c7646641fc85a8efe27b7978b318e314b6ab8ec021dae592",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-6.png",
+      "sha256": "d82ef7833ff88a2a5c52f84ec3278d0a2b88d1bbdeef4572a99b2a006dacc7c4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-7.png",
+      "sha256": "def92a551e6d712a3910ab16fe85646c601ee191cd989a4e78756be398532235",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-8.png",
+      "sha256": "e169e46aa671d3ec0878f1127155ad4fcfc3cc0a135ec9e8a893d2dc92911000",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/visible-rider-mask-study-9.png",
+      "sha256": "7c31e0ef7c19742033243902207dc28d7f1b240479d63ff00aec0ed88f302c37",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/wire-bike-alone-engine.png",
+      "sha256": "b55419a66226666673c4a45d9f6c3bb536d90405bfb9b6ad3ed715fda95c2065",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/wire-bike-alone-study.png",
+      "sha256": "c2e216a04cbf8c4327b0d34f8dad53a510fcf977765fd5f41a1888ba1338eb01",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/wire-combined-engine.png",
+      "sha256": "bb5a6437584d68b1abdd6af5a3340c0452408d7b006dc918d6f032dcfce990e1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/wire-combined-study.png",
+      "sha256": "d76dc9d307a0cf68ec8be0b6735208649fb2fa55e28b791db85978da96b51d03",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/wire-rider-alone-engine.png",
+      "sha256": "60a845db5cd0b92f62895e5863bc9d8edae81e6a29fda9fedc6a1edd1dce5f8f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-captures/wire-rider-alone-study.png",
+      "sha256": "27bfd85b8259441385f66708dbfc40916fee35b1c7a3cef2f912f37ca3fe0bce",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-diagnostic.html",
+      "sha256": "d1b5b64bb39389014a4343eb4f366e40ec4fc2fe2b429e659a04e1769c2f0a67",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/raw-viewer.js",
+      "sha256": "e5cd24e248373211a6f13e283f56b0ee61e1641ac50062b7b50a1c3bf2ad90ba",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/recipe.json",
+      "sha256": "e80a2140aff86e45e2974f741f63d0fc47d49d1f03847329f8e91f6b1b6daab3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/report.json",
+      "sha256": "1c7ffb8098add21b7261860489311a86343a811806d377a22ed098953ce2672a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/touring-motorcycle/v1/rider-reference.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "resolution": "current"
+    }
+  ],
+  "historicalResolutions": [],
+  "ignoreRuleHashes": {
+    ".gitignore": "5fa6141ba0b839177666f8dac1909601fee97d9daaa627622b6326bec53f49b1"
+  },
+  "resolverSha256": "f9505c413e0d51e85a52cbbb4cc2be78d302f52e2b4d4220b947d2f9c0609542",
+  "freshConstructionPerformed": false,
+  "qualificationGranted": false,
+  "limits": [
+    "STATIC HASH/DECLARATION audit only; no constructor or imported builder executed",
+    "Fresh declared-input construction with source-replay.py remains mandatory separately",
+    "No hidden-import, mesh, contact, pixel, human-approval or normal-activation qualification",
+    "Repository .gitignore rules checked; Git index, global ignores and tracked exceptions not consulted",
+    "Only declared retained-files entries audited; no assertion that the map inventories every unlisted file",
+    "Receipt byteExact/status fields are historical metadata, not fresh replay evidence",
+    "Supplemental diagnostic hash maps are not constructor declarations and are listed separately as unaudited"
+  ]
+}

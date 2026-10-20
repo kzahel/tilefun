@@ -1,0 +1,482 @@
+[
+  {
+    "name": "classic-motorcycle",
+    "group": "bike",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-motorcycle.json",
+    "auditSha256": "2c74f3313be969794b5408efa0135ce461b73367f3cae8fc79befdc2453422e2",
+    "receipt": "art-source/vehicle-bake/classic-motorcycle/v1/source-replay.json",
+    "receiptSha256": "56d362eb280a85806e56a520036bf7ef03037bd5f61ad3ccf531c8efc3ec21d5",
+    "retainedSource": "art-source/vehicle-bake/classic-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/classic-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "prototype-source-complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "sidecar-motorcycle",
+    "group": "bike",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/sidecar-motorcycle.json",
+    "auditSha256": "d14170513873176bc9af8417156b3d0b3eecf823427294d9e73b12c863243a36",
+    "receipt": "art-source/vehicle-bake/sidecar-motorcycle/v1/source-replay.json",
+    "receiptSha256": "e250b1322a4c052bc8921d9790d5930a624074ed0f44e73241a1be461f5e0959",
+    "retainedSource": "art-source/vehicle-bake/sidecar-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/sidecar-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "sport-motorcycle",
+    "group": "bike",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/sport-motorcycle.json",
+    "auditSha256": "ab02f242520dc962cd818cf039bfdcc845cfd5573cd98577aa049e29bfdd247b",
+    "receipt": "art-source/vehicle-bake/sport-motorcycle/v1/source-replay.json",
+    "receiptSha256": "1e4c42088de5ab32990b4be828ce11f2f34d8a3e0161f4354adb8bad0433e02d",
+    "retainedSource": "art-source/vehicle-bake/sport-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/sport-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "cruiser-motorcycle",
+    "group": "bike",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/cruiser-motorcycle.json",
+    "auditSha256": "90e6d939cf4dfc93abb10e82d515b85adc392eca60dd21ea89838a50f9d149a3",
+    "receipt": "art-source/vehicle-bake/cruiser-motorcycle/v1/source-replay.json",
+    "receiptSha256": "5fefa6d5a6bf9e5e9b26d6f5f24642adc7e52a597c8ff7b97c5877e6bb8cd59f",
+    "retainedSource": "art-source/vehicle-bake/cruiser-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/cruiser-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "retro-scooter",
+    "group": "bike",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/retro-scooter.json",
+    "auditSha256": "32bfb273923ff18cccedcad5ffdae6f8ca33e478547ca3620ade5034c2202c37",
+    "receipt": "art-source/vehicle-bake/retro-scooter/v1/source-replay.json",
+    "receiptSha256": "7388c4aff1bdf342237f35c2a657389b1344d35d252166b66224a45b865a3f08",
+    "retainedSource": "art-source/vehicle-bake/retro-scooter/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/retro-scooter/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "dirt-motorcycle",
+    "group": "bike",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/dirt-motorcycle.json",
+    "auditSha256": "81bff0ca9ec97366182836b22f1bce93efcffee3a222734753ded2496c8699d8",
+    "receipt": "art-source/vehicle-bake/dirt-motorcycle/v1/source-replay.json",
+    "receiptSha256": "4c8df58f8948e3852a07641d45944c5fbea7cada6dff121f509a89db60c146c9",
+    "retainedSource": "art-source/vehicle-bake/dirt-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/dirt-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "touring-motorcycle",
+    "group": "bike",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/touring-motorcycle.json",
+    "auditSha256": "d5a5053ff94ad0b5106612076a61cdeb6c2a38e009b622d02dad3905e99df634",
+    "receipt": "art-source/vehicle-bake/touring-motorcycle/v1/source-replay.json",
+    "receiptSha256": "7579467fb957e089706e523185f45d1ffbbf962c483af607aab85a2992f90663",
+    "retainedSource": "art-source/vehicle-bake/touring-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/touring-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "rider-explorer-classic-motorcycle",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-classic-motorcycle.json",
+    "auditSha256": "d538e1649e9cdcbd187eb2b6afbc973508ae89a5bfc47a16969f9a7b02004a4c",
+    "receipt": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/replay-verification.json",
+    "receiptSha256": "3a6ff0a5281f7b62ac0af53be1a33132aaebbfd0c69caa0b3bb493e07a49ddd9",
+    "retainedSource": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "rider-explorer-sidecar-motorcycle",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-sidecar-motorcycle.json",
+    "auditSha256": "0f34cef8192516f43eb6f791d48ceb4913ffbe057c4e9d73c63abdf36b873f12",
+    "receipt": "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/evidence/replay-verification.json",
+    "receiptSha256": "507e426cd52f90c3054fcda46e334b55d0ca6c9472157def5d02162ee1ebd70f",
+    "retainedSource": "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "rider-explorer-sport-motorcycle",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-sport-motorcycle.json",
+    "auditSha256": "853c564a28cf169e32eb7eebdc9f130f35c0c5d44a6b910eefea78c79e808e84",
+    "receipt": "art-source/vehicle-bake/rider-explorer-sport-motorcycle/v1/evidence/replay-verification.json",
+    "receiptSha256": "b9d79e1b59b908d7fdef32f6d96cc19e86844c64c020c7315f36ac92055d1aa6",
+    "retainedSource": "art-source/vehicle-bake/rider-explorer-sport-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-explorer-sport-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "rider-explorer-cruiser-motorcycle",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-cruiser-motorcycle.json",
+    "auditSha256": "382f1b3267d968bac68d5913818e9c41daff51b05652534def3936aee8b1e826",
+    "receipt": "art-source/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/evidence/replay-verification.json",
+    "receiptSha256": "65d680e397c020f3434764fd93da052f21d4a4c3903fe585c35863b3b0c938c6",
+    "retainedSource": "art-source/vehicle-bake/rider-explorer-cruiser-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "rider-explorer-retro-scooter",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-retro-scooter.json",
+    "auditSha256": "97d8eb9bca307059e459af4c0f33c8e04ccc22a756cc2946c88d0b32737aaf25",
+    "receipt": "art-source/vehicle-bake/rider-explorer-retro-scooter/v1/evidence/replay-verification.json",
+    "receiptSha256": "af86af094e40f29df34e142ed8c6b151261338fe61ff182efd318fae2bd5c2af",
+    "retainedSource": "art-source/vehicle-bake/rider-explorer-retro-scooter/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-explorer-retro-scooter/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "rider-explorer-dirt-motorcycle",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-dirt-motorcycle.json",
+    "auditSha256": "294d8311595b1399cd32eac892eacc95516ce430494f60ff0c536e3a9fb510fa",
+    "receipt": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/evidence/replay-verification.json",
+    "receiptSha256": "b52738b05d96a6d4c8c5324eecf816f056f43fb012055f6b913999bbe79c0db1",
+    "retainedSource": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "rider-explorer-touring-motorcycle",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-touring-motorcycle.json",
+    "auditSha256": "293d46da67c44f0cbf99b54beb0c7131d62d8d9db00d0e13d91ed6f2e4e6a95f",
+    "receipt": "art-source/vehicle-bake/rider-explorer-touring-motorcycle/v1/evidence/replay-verification.json",
+    "receiptSha256": "c75595f34dfae571d6bf26aab68a099e4d167feeb20c303493b0e8ea1d070fea",
+    "retainedSource": "art-source/vehicle-bake/rider-explorer-touring-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-explorer-touring-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "rider-bear-classic-motorcycle",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-bear-classic-motorcycle.json",
+    "auditSha256": "53b0dfd7291624737272049ec8d4c6315567874a0d5c444ec1004a86630aa592",
+    "receipt": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/replay-verification.json",
+    "receiptSha256": "87d9ed9a6c69223a10c32245a8f4d7a2493855e1f29253a1acde483674b93090",
+    "retainedSource": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "rider-person7-classic-motorcycle",
+    "group": "compound",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-person7-classic-motorcycle.json",
+    "auditSha256": "6baefaa6f204569582a70672f498064182fde6da357179fe96151780c0096b1d",
+    "receipt": "art-source/vehicle-bake/rider-person7-classic-motorcycle/v1/evidence/replay-verification.json",
+    "receiptSha256": "d776c2da81b8e31f14cccf5408cd0efb9b9c371b4afd082c320e0ef23f5a3658",
+    "retainedSource": "art-source/vehicle-bake/rider-person7-classic-motorcycle/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": null,
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "classic-motorcycle-bear-fit",
+    "group": "fit",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-motorcycle-bear-fit.json",
+    "auditSha256": "2764fb2b840c5764434d85044a190b98f76269b890f12357de02675555c6373d",
+    "receipt": "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/source-replay.json",
+    "receiptSha256": "dfaa733a5812a73e55ca6260bdd62c5015ebee92262cc01beb96a248306d5286",
+    "retainedSource": "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "classic-motorcycle-person7-fit",
+    "group": "fit",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-motorcycle-person7-fit.json",
+    "auditSha256": "99e66cfb56e23b5d318a7798c25ef2b3e634074f172a270fda89708c88611066",
+    "receipt": "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/source-replay.json",
+    "receiptSha256": "37a8b692a9ca65a21628b8e8f38dbc01242489ac12ff2346d8629f5252b60468",
+    "retainedSource": "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1",
+    "publicDuplicate": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": false,
+      "actualSharedLoaderBrowserReview": "pending parent"
+    }
+  },
+  {
+    "name": "explorer-v1",
+    "group": "rider",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/explorer-v1.json",
+    "auditSha256": "5393b7fbddb4315ab7010a461d1f2e51f2cc997b9eb9ff4b3cf3992210d94f4c",
+    "receipt": "art-source/vehicle-riders/explorer/v1/evidence/replay-verification.json",
+    "receiptSha256": "a54b7c829c0358eb15aeaf5ba8a2a38de33abee51ae16549a2668d0a587bd125",
+    "retainedSource": "art-source/vehicle-riders/explorer/v1",
+    "publicDuplicate": "public/demos/vehicle-riders/explorer/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "prototype-not-production",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "explorer-upright-v1",
+    "group": "rider",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/explorer-upright-v1.json",
+    "auditSha256": "78833f4aa438534079914bd389643f6e62984be97fbf337b59276d958592f309",
+    "receipt": "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+    "receiptSha256": "20bdcf085ef11e934a40507a9cbef0cc3262e1a73c9c1d5acd5e45570b3d790a",
+    "retainedSource": "art-source/vehicle-riders/explorer-upright/v1",
+    "publicDuplicate": "public/demos/vehicle-riders/explorer-upright/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "prototype-not-production",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "bear-upright-v1",
+    "group": "rider",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/bear-upright-v1.json",
+    "auditSha256": "12ae6c06f98daa7003fbf0997dbf3696bd3169f59421e45dc8e07484217c06d4",
+    "receipt": "art-source/vehicle-riders/bear-upright/v1/evidence/replay-verification.json",
+    "receiptSha256": "bb6b0b3092b43aa583a77823632e114612696596543aaba13601908f861e2314",
+    "retainedSource": "art-source/vehicle-riders/bear-upright/v1",
+    "publicDuplicate": "public/demos/vehicle-riders/bear-upright/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "prototype-not-production",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "person7-upright-v1",
+    "group": "rider",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/person7-upright-v1.json",
+    "auditSha256": "0494a084d4627798262f93424884bf43297131fbd0ca99ff0000998dff381028",
+    "receipt": "art-source/vehicle-riders/person7-upright/v1/evidence/replay-verification.json",
+    "receiptSha256": "b2524210f971a5e52e29252d51b8684656fb7585ec4811c3fbede3426235d008",
+    "retainedSource": "art-source/vehicle-riders/person7-upright/v1",
+    "publicDuplicate": "public/demos/vehicle-riders/person7-upright/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "prototype-not-production",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": null,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "classic-upright-v1",
+    "group": "rider",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-upright-v1.json",
+    "auditSha256": "ca8cae62aa83fe602211fd2991ba78cc8f216ecf5b7c0c27ff30c45b9612f69e",
+    "receipt": "art-source/vehicle-riders/classic-upright/v1/evidence/replay-verification.json",
+    "receiptSha256": "e3526f684bcbc894a18e08c17b0643a56c4bedc1da90a00f32512112dd5249dc",
+    "retainedSource": "art-source/vehicle-riders/classic-upright/v1",
+    "publicDuplicate": "public/demos/vehicle-riders/classic-upright/v1",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "source-pilot-complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  },
+  {
+    "name": "classic-upright-v2",
+    "group": "rider",
+    "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-upright-v2.json",
+    "auditSha256": "6ea22e9dd4161f79704961ec2434595ad8e51634697916096a16f3d899a97178",
+    "receipt": "art-source/vehicle-riders/classic-upright/v2/evidence/replay-verification.json",
+    "receiptSha256": "9fd9f258fe0d90442041b4caf6c5e7b6608c080c16569ca6e881f6f116651a74",
+    "retainedSource": "art-source/vehicle-riders/classic-upright/v2",
+    "publicDuplicate": "public/demos/vehicle-riders/classic-upright/v2",
+    "recordedReplayStatus": "passed",
+    "freshConstructionPerformedThisAudit": false,
+    "sourceFlagsAsRecorded": {
+      "status": "source-pilot-complete",
+      "sourceStage": "complete",
+      "sourceImmutable": true,
+      "normalActivation": false,
+      "productionQualified": null,
+      "actualSharedLoaderBrowserReview": null
+    }
+  }
+]

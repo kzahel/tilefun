@@ -1,0 +1,212 @@
+{
+  "status": "passed-confirmed-final-base-comparison",
+  "baseModelSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+  "variantModelSha256": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+  "baseFinalConfirmed": true,
+  "geometryReexported": true,
+  "binaryBasePreservationClaimed": false,
+  "sameScaleWheelbaseRadii": true,
+  "unchangedAtSevenDecimalSourceGeometryTopologyUV": [
+    "Rounded teal tank actual cream side UV panels",
+    "Actual dark saddle central hip tangent",
+    "Actual narrow saddle nose",
+    "Actual rounded pillion rear saddle",
+    "Exposed dark gray crankcase rounded block",
+    "Exposed single cylinder broad block",
+    "Broad engine cooling fin 0.7",
+    "Broad engine cooling fin 0.75",
+    "Broad engine cooling fin 0.8",
+    "Broad engine cooling fin 0.85",
+    "Exposed round crankcase face -1",
+    "Gray outboard exhaust silencer -1",
+    "Rear swingarm -1",
+    "Rear static spring shock broad tube -1",
+    "Twin front fork stanchion -1",
+    "Fixed axle attachment stop short of hub -1.12 -1",
+    "Fixed axle attachment stop short of hub 1.12 -1",
+    "Exposed round crankcase face 1",
+    "Gray outboard exhaust silencer 1",
+    "Rear swingarm 1",
+    "Rear static spring shock broad tube 1",
+    "Twin front fork stanchion 1",
+    "Fixed axle attachment stop short of hub -1.12 1",
+    "Fixed axle attachment stop short of hub 1.12 1",
+    "Narrow tubular frame member 0",
+    "Narrow tubular frame member 1",
+    "Narrow tubular frame member 2",
+    "Narrow tubular frame member 3",
+    "Narrow tubular frame member 4",
+    "Narrow tubular frame member 5",
+    "Actual curved cream teal road fender F",
+    "Actual curved cream teal road fender R",
+    "Front round headlamp dark housing",
+    "Broad cream front headlamp face",
+    "Simple rear ruby lamp",
+    "True motorcycle rounded tire F",
+    "Classic broad wheel rim F -1",
+    "Chrome wheel hub F -1",
+    "Asymmetric wheel phase index F -1",
+    "Classic broad wheel rim F 1",
+    "Chrome wheel hub F 1",
+    "Asymmetric wheel phase index F 1",
+    "True motorcycle rounded tire R",
+    "Classic broad wheel rim R -1",
+    "Chrome wheel hub R -1",
+    "Asymmetric wheel phase index R -1",
+    "Classic broad wheel rim R 1",
+    "Chrome wheel hub R 1",
+    "Asymmetric wheel phase index R 1"
+  ],
+  "changedSemanticComponents": [
+    "Headstock to actual grip riser",
+    "Actual connected handlebar centerline",
+    "Actual palm wrapped grip left",
+    "Actual sole tangent foot peg left",
+    "Actual palm wrapped grip right",
+    "Actual sole tangent foot peg right"
+  ],
+  "unchangedComponents": 49,
+  "baseComponents": 55,
+  "totalComponents": 61,
+  "addedSemanticComponents": [
+    "Swept control riser segment 1",
+    "Swept control riser segment 2",
+    "Swept control riser segment 3",
+    "Swept control riser segment 4",
+    "Connected high peg bracket left",
+    "Connected high peg bracket right"
+  ],
+  "comparisonPrecisionSource": 1e-07,
+  "exactFloatUnchangedComponents": [
+    "Rounded teal tank actual cream side UV panels",
+    "Actual dark saddle central hip tangent",
+    "Actual narrow saddle nose",
+    "Actual rounded pillion rear saddle",
+    "Exposed dark gray crankcase rounded block",
+    "Exposed single cylinder broad block",
+    "Broad engine cooling fin 0.7",
+    "Broad engine cooling fin 0.75",
+    "Broad engine cooling fin 0.8",
+    "Broad engine cooling fin 0.85",
+    "Exposed round crankcase face -1",
+    "Gray outboard exhaust silencer -1",
+    "Rear swingarm -1",
+    "Rear static spring shock broad tube -1",
+    "Twin front fork stanchion -1",
+    "Fixed axle attachment stop short of hub -1.12 -1",
+    "Fixed axle attachment stop short of hub 1.12 -1",
+    "Exposed round crankcase face 1",
+    "Gray outboard exhaust silencer 1",
+    "Rear swingarm 1",
+    "Rear static spring shock broad tube 1",
+    "Twin front fork stanchion 1",
+    "Fixed axle attachment stop short of hub -1.12 1",
+    "Fixed axle attachment stop short of hub 1.12 1",
+    "Narrow tubular frame member 0",
+    "Narrow tubular frame member 1",
+    "Narrow tubular frame member 2",
+    "Narrow tubular frame member 3",
+    "Narrow tubular frame member 4",
+    "Narrow tubular frame member 5",
+    "Actual curved cream teal road fender F",
+    "Actual curved cream teal road fender R",
+    "Front round headlamp dark housing",
+    "Broad cream front headlamp face",
+    "Simple rear ruby lamp",
+    "True motorcycle rounded tire F",
+    "Classic broad wheel rim F -1",
+    "Chrome wheel hub F -1",
+    "Asymmetric wheel phase index F -1",
+    "Classic broad wheel rim F 1",
+    "Chrome wheel hub F 1",
+    "Asymmetric wheel phase index F 1",
+    "True motorcycle rounded tire R",
+    "Classic broad wheel rim R -1",
+    "Chrome wheel hub R -1",
+    "Asymmetric wheel phase index R -1",
+    "Classic broad wheel rim R 1",
+    "Chrome wheel hub R 1",
+    "Asymmetric wheel phase index R 1"
+  ],
+  "nominallyUnchangedActualFloatDeltas": {},
+  "atlasBytesExactToObservedBase": true,
+  "modifiedComponentBoundsSource": {
+    "Headstock to actual grip riser": {
+      "min": [
+        -0.71,
+        0.18,
+        1.12
+      ],
+      "max": [
+        -0.69,
+        0.2,
+        1.235
+      ]
+    },
+    "Actual connected handlebar centerline": {
+      "min": [
+        -0.0795,
+        -0.125,
+        1.046
+      ],
+      "max": [
+        -0.0605,
+        0.125,
+        1.0650001
+      ]
+    },
+    "Actual palm wrapped grip left": {
+      "min": [
+        -0.0815,
+        -0.235,
+        1.044
+      ],
+      "max": [
+        -0.0585,
+        -0.125,
+        1.067
+      ]
+    },
+    "Actual sole tangent foot peg left": {
+      "min": [
+        0.053,
+        -0.24,
+        0.8515
+      ],
+      "max": [
+        0.077,
+        -0.1,
+        0.8755
+      ]
+    },
+    "Actual palm wrapped grip right": {
+      "min": [
+        -0.0815,
+        0.125,
+        1.044
+      ],
+      "max": [
+        -0.0585,
+        0.235,
+        1.067
+      ]
+    },
+    "Actual sole tangent foot peg right": {
+      "min": [
+        0.053,
+        0.1,
+        0.8515
+      ],
+      "max": [
+        0.077,
+        0.24,
+        0.8755
+      ]
+    }
+  },
+  "limits": "Confirmed final immutable base; original never edited or reexported.",
+  "centralSaddleNominallyUnchangedButFloatContactRecomputed": {
+    "maximumCoordinateDeltaSource": 0.0,
+    "notClaimedBitExact": true
+  }
+}

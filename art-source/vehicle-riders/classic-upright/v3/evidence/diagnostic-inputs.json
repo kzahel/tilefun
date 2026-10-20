@@ -1,0 +1,36 @@
+{
+  "constructionInputCount": 4,
+  "constructionInputs": {
+    "art-source/vehicle-riders/classic-upright/v3/build.py": "56a5c19148b5131c8f4e2b31f83ccebe84a7d9cd6166813b9f1a591bd77343ce",
+    "art-source/vehicle-riders/classic-upright/v3/rider.json": "c76b114c1cd5314bf4098cdbbb3218cef03b7e3f5104b815669c2863e5b873c7",
+    "art-source/vehicle-riders/classic-upright/v3/identity.json": "bd6fe837c1138be80a49d9c677627168da3a4d002d4db59002fa7ee6b5f36317",
+    "art-source/vehicle-riders/classic-upright/v3/classic-upright-v1.json": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b"
+  },
+  "identityInputHashes": {
+    "public/assets/sprites/player.png": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb"
+  },
+  "diagnosticSharedInputs": {
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "scripts/vehicle-riders/classic-upright-v3/outline.ts": "5a2b8dcbbd643ac28e2bba5260b31c6911aadf9a7b403a69a1841375c36ca559",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45"
+  },
+  "readOnlyV2Diagnostic": {
+    "art-source/vehicle-riders/classic-upright/v2/rider.glb": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192"
+  },
+  "ownHelperCopyProvenance": {
+    "scripts/vehicle-riders/classic-upright-v2/build.py": "2ae5ce89ae3f287c76f671c96052ea4b2ba8f2db5b75ca778ad2cfea675ae5fb",
+    "scripts/vehicle-riders/classic-upright-v2/prove.py": "d708e027b5922af530c7f206a851a76855d22bdc7def75ceac75d342422a6bbf",
+    "scripts/vehicle-riders/classic-upright-v2/viewer.mjs": "5fad029304e90c47901eb6093e7e695f65bab0bb01389f8a189ed51302b23c77",
+    "scripts/vehicle-riders/classic-upright-v2/capture.mjs": "6a580d27d54d0c660ac81e5a31ee40c850360e0e47566a1bf9667cb75b2a852d"
+  },
+  "meaning": "New owned v3 copies, actual ear geometry/UV modified; old bytes unchanged. Diagnostic controls are not construction dependencies. Constructor needs only4retained files, never old GLBs/master/ignored evidence.",
+  "earSemanticMapActualDecoded": true,
+  "sourceViewerIsNotCarMeshAsset": true,
+  "fixtureOutputSha256": "b577f988fe4612b858e16f4a769717a07babe5d978e9ce4450ae3183186b368e",
+  "checks": {
+    "pyCompile": true,
+    "blackCheck": true,
+    "scopedBiome": true
+  }
+}

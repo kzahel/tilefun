@@ -1,0 +1,455 @@
+{
+  "status": "passed",
+  "glbSha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+  "sourceHashes": {
+    "master.blend": "c895774f3a4d4c5cfde3720db4dd536206c531db0c7bb40392c1ca706625be02",
+    "model.glb": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65"
+  },
+  "ownMasterMeshComponents": 40,
+  "geometryOnlyPaletteChange": false,
+  "actualScooterParts": {
+    "rearBody": {
+      "minSource": [
+        0.25,
+        -0.36000001430511475,
+        0.2800000011920929
+      ],
+      "maxSource": [
+        1.3200000524520874,
+        0.36000001430511475,
+        0.8600000143051147
+      ],
+      "spanSource": [
+        1.0700000524520874,
+        0.7200000286102295,
+        0.5800000131130219
+      ]
+    },
+    "shield": {
+      "minSource": [
+        -0.7250000238418579,
+        -0.36000001430511475,
+        0.4000000059604645
+      ],
+      "maxSource": [
+        -0.45500001311302185,
+        0.36000001430511475,
+        1.1299999952316284
+      ],
+      "spanSource": [
+        0.27000001072883606,
+        0.7200000286102295,
+        0.7299999892711639
+      ]
+    },
+    "floor": {
+      "minSource": [
+        -0.5600000023841858,
+        -0.33000001311302185,
+        0.3500000238418579
+      ],
+      "maxSource": [
+        0.3199999928474426,
+        0.33000001311302185,
+        0.40000003576278687
+      ],
+      "spanSource": [
+        0.8799999952316284,
+        0.6600000262260437,
+        0.050000011920928955
+      ]
+    }
+  },
+  "broadRearSaddle": {
+    "minSource": [
+      0.2600000202655792,
+      -0.2150000035762787,
+      0.7705000042915344
+    ],
+    "maxSource": [
+      1.100000023841858,
+      0.2150000035762787,
+      0.8705000281333923
+    ],
+    "spanSource": [
+      0.8400000035762787,
+      0.4300000071525574,
+      0.10000002384185791
+    ]
+  },
+  "wheelbaseSource": 1.93,
+  "independentDifferentRadiiSource": {
+    "F": 0.31,
+    "R": 0.33
+  },
+  "floorDepth": {
+    "actualGLBDownRays": [
+      {
+        "originSource": [
+          -0.42,
+          -0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.41999998688697815,
+          -0.20000000298023224,
+          0.3999999165534973
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      },
+      {
+        "originSource": [
+          -0.42,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.41999998688697815,
+          0.0,
+          0.40000003576278687
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      },
+      {
+        "originSource": [
+          -0.42,
+          0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.41999998688697815,
+          0.20000000298023224,
+          0.40000003576278687
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      },
+      {
+        "originSource": [
+          -0.27,
+          -0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.27000001072883606,
+          -0.20000000298023224,
+          0.40000003576278687
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      },
+      {
+        "originSource": [
+          -0.27,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.27000001072883606,
+          0.0,
+          0.40000003576278687
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      },
+      {
+        "originSource": [
+          -0.27,
+          0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.27000001072883606,
+          0.20000000298023224,
+          0.40000003576278687
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      },
+      {
+        "originSource": [
+          -0.12,
+          -0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.11999999731779099,
+          -0.20000000298023224,
+          0.40000003576278687
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      },
+      {
+        "originSource": [
+          -0.12,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.11999999731779099,
+          0.0,
+          0.40000003576278687
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      },
+      {
+        "originSource": [
+          -0.12,
+          0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.11999999731779099,
+          0.20000000298023224,
+          0.40000003576278687
+        ],
+        "owner": "Actual continuous step-through floor",
+        "floorReached": true
+      }
+    ],
+    "all9ActualFloorHits": true,
+    "floorTopSource": 0.40000003576278687,
+    "railTopSource": 0.4800000357627869,
+    "recessBelowRailsSource": 0.08,
+    "floorRemovalNegative": [
+      {
+        "originSource": [
+          -0.42,
+          -0.2,
+          1.25
+        ],
+        "hitSource": null,
+        "owner": null,
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.42,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.41999998688697815,
+          0.0,
+          0.3420001268386841
+        ],
+        "owner": "Scooter low floor frame",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.42,
+          0.2,
+          1.25
+        ],
+        "hitSource": null,
+        "owner": null,
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.27,
+          -0.2,
+          1.25
+        ],
+        "hitSource": null,
+        "owner": null,
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.27,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.27000001072883606,
+          0.0,
+          0.3420001268386841
+        ],
+        "owner": "Scooter low floor frame",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.27,
+          0.2,
+          1.25
+        ],
+        "hitSource": null,
+        "owner": null,
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.12,
+          -0.2,
+          1.25
+        ],
+        "hitSource": null,
+        "owner": null,
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.12,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.11999999731779099,
+          0.0,
+          0.3420000374317169
+        ],
+        "owner": "Scooter low floor frame",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.12,
+          0.2,
+          1.25
+        ],
+        "hitSource": null,
+        "owner": null,
+        "floorReached": false
+      }
+    ],
+    "opaqueDeckNegative": [
+      {
+        "originSource": [
+          -0.42,
+          -0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.41999998688697815,
+          -0.20000000298023224,
+          0.7000001072883606
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.42,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.41999998688697815,
+          0.0,
+          0.7000001072883606
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.42,
+          0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.41999998688697815,
+          0.20000000298023224,
+          0.7000001072883606
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.27,
+          -0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.27000001072883606,
+          -0.20000000298023224,
+          0.699999988079071
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.27,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.27000001072883606,
+          0.0,
+          0.7000000476837158
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.27,
+          0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.27000001072883606,
+          0.20000000298023224,
+          0.699999988079071
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.12,
+          -0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.11999999731779099,
+          -0.20000000298023224,
+          0.699999988079071
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.12,
+          0,
+          1.25
+        ],
+        "hitSource": [
+          -0.11999999731779099,
+          0.0,
+          0.7000001072883606
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      },
+      {
+        "originSource": [
+          -0.12,
+          0.2,
+          1.25
+        ],
+        "hitSource": [
+          -0.11999999731779099,
+          0.20000000298023224,
+          0.699999988079071
+        ],
+        "owner": "Opaque upper deck negative",
+        "floorReached": false
+      }
+    ],
+    "resetExact": true
+  },
+  "noAvatarGeometryOrScaleChange": true,
+  "sourceMasterUnchanged": true,
+  "limits": "Actual source morphology/floor evidence only. Rider retains upright straddle pose; no scooter-specific knees-together pose, animation or shared runtime claim."
+}

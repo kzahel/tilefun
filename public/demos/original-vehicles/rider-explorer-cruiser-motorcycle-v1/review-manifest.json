@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-cruiser-motorcycle-v1",
+      "name": "explorer-upright \u00b7 cruiser-motorcycle fit pilot",
+      "title": "explorer-upright \u00b7 cruiser-motorcycle \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact cruiser-motorcycle and unchanged explorer-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 5012,
+        "vertices": 9967,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 361432,
+        "sha256": "7aa2d37360049a94e052e264f2c813f78f7cd78e2ce1b440b02f01f394d11103",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.478260869565219,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/atlas.png",
+          "sha256": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/composition.json",
+          "sha256": "cf4a18bcb75ebdc5e7fa9199eab483d7992730fb49c2d38d51505896ffe84cee"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/model.glb",
+          "sha256": "7aa2d37360049a94e052e264f2c813f78f7cd78e2ce1b440b02f01f394d11103"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/recipe.json",
+          "sha256": "07d2f3067773965c252b63852430b5a47e0d67bec00433b342657f2a6198e430"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/report.json",
+          "sha256": "649cb03b93a3d204336dd12ff6b8eb89a77a827d1a6e8d2e5eb54b2acfe2d886"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "toolchain": "motorcycle-v1",
+          "wheelIds": [
+            "F",
+            "R"
+          ],
+          "inputBytesUnchanged": true,
+          "id": "rider-explorer-cruiser-motorcycle--v1",
+          "glbSha256": "7aa2d37360049a94e052e264f2c813f78f7cd78e2ce1b440b02f01f394d11103",
+          "triangles": 5012,
+          "clearance": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "radius": 7.4782609939575195,
+              "minimumGap": 1.0233441755653558,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "radius": 8.000000305263706,
+              "minimumGap": 0.4637818253893755,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "perWheelCollisionControls": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            }
+          ],
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "F",
+              "radius": 7.478260869565219,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "R",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/browser-qa.json",
+          "sha256": "ebcc9b26a7f4e944c41ec43ccfc00975684bc8f99d01d643ffa88f877f59d6c6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/candidate.json",
+          "sha256": "1e6a19ab3d583587a5079b6cfe9b04049cba99b9b6977d773c1956a87485b5ae"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/capture.json",
+          "sha256": "2f9ecb9ffc60f186255d1afbaba7c72e75090fcd79550d5e8499e400410e9666"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/contact-sheet.png",
+          "sha256": "e4681265a31b56b5d28439dba45f9b98223c185733d1c1c555d5020ff145afb0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-0.png",
+          "sha256": "c1e84189933c65f803175fa49bceaf4c9dfb52c11b9a6bf1e3cf245b8217c238"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-1.png",
+          "sha256": "3fcbf883b89298fe9d28fddac92225585bb7b08ed8458332a0b3f6c99aef8fe3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-10.png",
+          "sha256": "4aca369da0f8adf9c16a1c3e1ccb93a89d4e22685777d4206fde2e513ecc2c16"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-11.png",
+          "sha256": "7d50b991a3add86deec3abf83209bde290b84725ad5f83e797b4c5dd51b49965"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-12.png",
+          "sha256": "d3d1f2370fbbefc7827f66e9a2f0b29a8d36e0cd661aadcea44b704f16e643bd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-13.png",
+          "sha256": "0f923836abe5535dbc3a375c22539cbccc05c63e21486111d44cba95f7c88829"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-14.png",
+          "sha256": "fe3874e60d25319212dd02e15de44cedab7bfad4c591c360c8b491644250909d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-15.png",
+          "sha256": "b1f086640d9b3c9a281c26eada772a2450d6f9dbb50fc6253dc7e6183a7e8c02"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-1x.png",
+          "sha256": "7236acf658befa864a5588045103ab870192fc625b82c450e751aca7de096383"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-2.png",
+          "sha256": "8eec93de64a219e03370285bb7d2456b248234396dff5a3fb587ae2ff2ab7809"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-2x.png",
+          "sha256": "ae4ce2cd545742efaa7d2ecac9741c073eab1f824a338fc42d207c509f8cc282"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-3.png",
+          "sha256": "052405e5f03a54d4a3111fc8ffa769751283c954ed55163e0f2e6b4db5954f18"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-3x.png",
+          "sha256": "f4c0230dd0e426f084e8d6724e63b3d2fb31552e55d0317b726729cbea5a0674"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-4.png",
+          "sha256": "0a9426869a3f78d0ebd660d890c6aa98aff330e83abdfb574863660795a7ef29"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-5.png",
+          "sha256": "e69e595bb0b8283722b86eaa29434ae3fd3765121e02a1f0b01b1861ed6baf7e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-6.png",
+          "sha256": "712476c71e77c371d4e3b018d71c7287479a7b6dd176c6153e0afab93e69df5d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-7.png",
+          "sha256": "c012fafccfe79200a45a5e7272ff536334b02e947859188cb70b504540e2d7f1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-8.png",
+          "sha256": "fde0a800273ec4a73f8fab9e64a85a4090e45d85a49082e62b9dbaa5a8bd88bf"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/engine-9.png",
+          "sha256": "84668dbd83985bff5c687864e1f3a4de2d87902b3c88edc9366b5c3841993026"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-roll-0.png",
+          "sha256": "8eec93de64a219e03370285bb7d2456b248234396dff5a3fb587ae2ff2ab7809"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-roll-1.png",
+          "sha256": "a09978d696eb05c384401591617cd8b091e58a5cbb92129f13d4f65bbeb25109"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-roll-2.png",
+          "sha256": "79fc535e013c55a4ff7a4ffe26fc128b7041e4040d263b1305a8265348de78bf"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-roll-3.png",
+          "sha256": "9db8e6679d474501439f7c7a193bb47738488fcb4bfcab10d1affa0ac1710b57"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-roll-4.png",
+          "sha256": "1c9d6acdb32bb486389468534bec248d6d2dec2fb160f49e6f389a660a5ca173"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-roll-5.png",
+          "sha256": "1f654f8f2a2bd33283751807557d79084f58593c347d62600c763d5e04624879"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-roll-6.png",
+          "sha256": "1c9d6acdb32bb486389468534bec248d6d2dec2fb160f49e6f389a660a5ca173"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-roll-7.png",
+          "sha256": "ea9dac65e01daf60a212a24b0ca0c2fd0190c37a0e7bdc4f5382d07d0765e6fc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/game-turntable.gif",
+          "sha256": "f2e0019057a323153ba957dc5514cbf628a0c5a6a214cfe8d41ddf743963dae1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/roll-0.png",
+          "sha256": "80d80ec851dec7808ad516786c7f4d32aaba7ef03a556a8ebd7c428ade075ed7"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/roll-1.png",
+          "sha256": "3636b6513197d863df06f78869ad172a00fabd84056bb6c3c661a3c20774f4a9"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/roll-2.png",
+          "sha256": "e75795aba6556fa4276760dae7e610f867fd156001566c03feb760c5347fbf95"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/roll-3.png",
+          "sha256": "57a0827912621c5d55360e5fc102617c297b1bd99057310aa37a28778123d060"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/roll-4.png",
+          "sha256": "9262db212d28b8b097731a953792fe36324419ff7f126f0548fd329fe8c66247"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/roll-5.png",
+          "sha256": "8eef241bf36963a82f171bc636d24f1bb18568faa6df2bdc2a26e680b34f2dcd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/roll-6.png",
+          "sha256": "c60be6fbacecede36a7c81f75c7e1fcfedc817ddf28dce257292383eb8a01ebd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/roll-7.png",
+          "sha256": "66129292418173d0a91c0dce4431c9db7a3d0a7473e3a1c5a76a1363a1825e9b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-0.png",
+          "sha256": "c44cac58de376ba8395a01ad18614eb9ebbbb7769d2002129798d2cf927f3e00"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-1.png",
+          "sha256": "207278674b219b973456b48d8f2d4be711916f2a91e214cfa1df8e60335ebf3e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-10.png",
+          "sha256": "1729f1db089b14e22a8a0b47aab8fed6bf44ce1bcc709949b7df411a42fa7c06"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-11.png",
+          "sha256": "7f01b97b9f71945dfd00db692eae73d8fa8942948a8762b5bff878c9b01b9ac8"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-12.png",
+          "sha256": "eff1a98e8e43a04e69df923f3e77eef8f8f43d9eaf8156af6c27ce53e2b96ad3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-13.png",
+          "sha256": "a85ccec4e51b57261f944fe0ddaffad262c01e2968cd668090bb980d976fcafc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-14.png",
+          "sha256": "e462fc7e224f5a11f445883775fe3b94314bbb33201419e04e6c455dd5299b04"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-15.png",
+          "sha256": "1385360512b987f4bf0e0266286fc52087ffd0e417529b59145a3abf8726809f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-1x.png",
+          "sha256": "37589d6de4e3a5945aa8a3a0098ccb42fc71477b7fc801f449a6ebafd6210209"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-2.png",
+          "sha256": "80d80ec851dec7808ad516786c7f4d32aaba7ef03a556a8ebd7c428ade075ed7"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-2x.png",
+          "sha256": "e62b2c8488e15786178c05006dde1dd1b9c502be41ea39742ba64d3b761fbfd4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-3.png",
+          "sha256": "cfb5a8c819738146eb88176450b0cd74f441666222d1ce1d48dd3e4d7bd38f38"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-3x.png",
+          "sha256": "1849a93726ca3faaa1272d67587fa0999c25fbbe9355ffe0148d896a492a277d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-4.png",
+          "sha256": "2b18714cc3dd98624b6cd3e47445662f1270b2f2de66dc1b03219f170883a452"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-5.png",
+          "sha256": "a277db3251b486768a7023d6be2ed5ebdcc08b1c6b9617e50edc38880b1f0476"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-6.png",
+          "sha256": "8b0f62efc3ba74fefdd4fa1c96af8765335b4b3bb5806bbde9a254ae14f7cab0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-7.png",
+          "sha256": "5807f671267f7d99126b3559982ce6575f708997f0fdd860888f7e6e9d15e335"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-8.png",
+          "sha256": "8467bc9260bac77da53fc136bb31fe7d2677c7cf83b03c6c5ddf278ed295ef0a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/study-9.png",
+          "sha256": "3141e54e0f4b7e2953c5eb34875306aba8dc34aae8675cb3233c4566c8a39f67"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/turntable.gif",
+          "sha256": "b6492c189a782c874b60ba0acc5efafddad12ec532e1ff98404e7fec8b8a467d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/viewer-desktop.png",
+          "sha256": "c90c511d631534ac877fa683798582d5ce8ac0d27f302d44e0cbef4d818ac8f1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/viewer-mobile.png",
+          "sha256": "3122eea7081da298e7ba397f91ba10266f1c0c68b3275370a0c85d6cd15f5204"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/wheel-phases.png",
+          "sha256": "5f5591f673ab6046b2f4cb8e2bc4851a11fa918db78c65770e793c724ae30992"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/wire-engine.png",
+          "sha256": "0cb13d63af814319cb15cd96d783d02b3645d210666cc953d8e12ca84bcdf9cf"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/captures/wire-study.png",
+          "sha256": "7739032a3f3f74b2efbea480c7557e8a1ce47d2c16c912a441c06209a7ba051c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/clearance.json",
+          "sha256": "6ef02cc40c1ef86707b9d80b6c7c8d9968d5156f923e37ed45254544dfe00b95"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/independent-source-replay.json",
+          "sha256": "6e66fcc82942825d73ef52061e05c7277a2f5b1f627666e9457e8849ba963d8d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/atlas.png",
+          "sha256": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/composition.json",
+          "sha256": "cf4a18bcb75ebdc5e7fa9199eab483d7992730fb49c2d38d51505896ffe84cee"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/model.glb",
+          "sha256": "7aa2d37360049a94e052e264f2c813f78f7cd78e2ce1b440b02f01f394d11103"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/recipe.json",
+          "sha256": "07d2f3067773965c252b63852430b5a47e0d67bec00433b342657f2a6198e430"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/inputs/report.json",
+          "sha256": "649cb03b93a3d204336dd12ff6b8eb89a77a827d1a6e8d2e5eb54b2acfe2d886"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/viewer.js",
+          "sha256": "bd64d254a6f8eac0d8fc5bc86bd85fb414db1a694fc5e72c7b2fc6ae9408a949"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/visual-inspection.json",
+          "sha256": "68d4d3587b8f522a772b8fc9f4c109e4c47825622bb1207a605b6ad23cbeff8c"
+        }
+      ]
+    }
+  ]
+}

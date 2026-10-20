@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "inputHashes": {
+    "scripts/vehicle-bake/cruiser-motorcycle/build.py": "c42183cead0792e6e396b6d1f7ae8bf25344f5695df50d95c19c3bb9c41e6bd0",
+    "scripts/vehicle-bake/cruiser-motorcycle/geometry.py": "296ce4d7ba979342c3444a9de85c090895f2b910291518772de0042c609e0b11",
+    "scripts/vehicle-bake/cruiser-motorcycle/family.json": "92cf225bd3606c3bff47c8cb55a33ed236faa159e2cd9114e94d101a19fa66f6",
+    "scripts/vehicle-bake/cruiser-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "initialFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/profiles/upright-v1.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/cruiser-motorcycle/build.py",
+    "scripts/vehicle-bake/cruiser-motorcycle/family.json",
+    "scripts/vehicle-bake/cruiser-motorcycle/geometry.py",
+    "scripts/vehicle-bake/cruiser-motorcycle/raw-audit.py"
+  ],
+  "noIgnoredMasterOrScratchDependencies": true,
+  "packedMasterNotAConstructionInput": true,
+  "riderGLBRecipeReport": "Separate immutable diagnostic inputs; constructor reads profile only",
+  "freshRoot": "data/vehicle-bake/cruiser-motorcycle/final-six-input-replay",
+  "command": [
+    "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe",
+    "--background",
+    "--factory-startup",
+    "--threads",
+    "4",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "C:\\Users\\sox\\Documents\\code\\tilefun\\data\\vehicle-bake\\cruiser-motorcycle\\final-six-input-replay\\scripts\\vehicle-bake\\cruiser-motorcycle\\build.py"
+  ],
+  "portableCommand": "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/cruiser-motorcycle/build.py",
+  "outputs": {
+    "model.glb": {
+      "sha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+      "bytes": 207368,
+      "byteExact": true
+    },
+    "atlas.png": {
+      "sha256": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c",
+      "bytes": 2995,
+      "byteExact": true
+    },
+    "recipe.json": {
+      "sha256": "db45601c6ffbb597df871f2a388eaae00959bd8b8637b3609808c74d9163e8a5",
+      "bytes": 20441,
+      "byteExact": true
+    }
+  },
+  "sharedStaticCycleCatalogActuallyUsed": true,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "runtimeActivation": false
+}

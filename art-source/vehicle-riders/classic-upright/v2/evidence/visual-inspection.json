@@ -1,0 +1,29 @@
+{
+  "status": "no-blocking-issues-for-source-pilot",
+  "humanApproval": false,
+  "riderSha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+  "actualBikePresent": false,
+  "peerIdentityReview": "pending parent/A independent actual v2 assessment",
+  "inspected": [
+    "Actual original four standing frames and16frame sheet; retained v1 is labelled failed identity control",
+    "All16study+16game actual exported rider/synthetic-combined headings and corresponding32rider/32combined wires",
+    "All32 actual raw/source-violet/shared58 headings and actual eye-only/collar-only removal/reset PNGs",
+    "Same4x common-ruler original/v1/v2 front,near-front,side; no asset/view resize",
+    "Desktop/mobile screenshots and actual network-free offline parity"
+  ],
+  "observations": [
+    "Actual rounded cheek/forehead skin replaces the blank box roof, reducing rectangular face reading. Eyes are larger separate interior landmarks in both cameras, and near-front reads with existing forehead/cheek/pink ear colors. No nose/mouth invented.",
+    "Original ear spacing is inset rather than v1 outer-corner placement. Short solid tip ridge and tapered ear shoulders remain pointed in actual native silhouettes; some exact-study tips are only a small ink peak. The total ruler/bounds remain exact.",
+    "Visible real closed collar skin restores front/near-front violet/yellow cue. At front both outlines retain study n6/l2 and game n14/l6. Some side/rear yellow cues stay hidden; not all32-color visibility claimed.",
+    "Actual side is rounder than v1 flat slab, but volumetric side projection remains taller than original2D standing art. Exact standing sprite parity is not a source-pilot claim.",
+    "All18 lower-body/torso owners retain exact actual polygon coordinates/winding/UV and sampled paint; hip/profile/five paw contacts remain exact. One genuine closed neck collar added; finite neck/torso join only."
+  ],
+  "limits": [
+    "Agent native art QA; finite feature controls do not independently award likeness. Actual sheets require visual inspection.",
+    "Some side/rear yellow collar samples remain hidden or consumed by inward stroke; front and near-front cues are proven, not universal color visibility.",
+    "2D standing and seated volumetric profiles differ under fixed projection. No per-view resize or exact sprite silhouette parity claim.",
+    "No actual bike, shared CarMeshAsset, normal availability, human approval, all27, AI or occupied fallback qualification."
+  ],
+  "priorProtectedFilesVerified": 824,
+  "appearanceBasis": "Actual exported native pixel inspection plus finite feature controls; not palette/contact membership alone."
+}

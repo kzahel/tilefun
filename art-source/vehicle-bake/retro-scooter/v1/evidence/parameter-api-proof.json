@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "separateFixtureNotAnAvatarOrFamilyRollout": true,
+  "onlyIgnoredOwnedFreshRootWritten": true,
+  "configArgumentWorks": true,
+  "variantIdArgumentWorks": true,
+  "sourceDependenciesDeclareActualConfigPath": true,
+  "measuredProfileAndAvatarUnchanged": true,
+  "gripHalfLengthControlSource": [
+    0.075,
+    0.08499999999999999
+  ],
+  "actualGLBChanged": true,
+  "atlasUnchanged": true,
+  "mismatchedVariantIdRejected": true,
+  "corruptProfilePinRejected": true,
+  "negativeAttemptsPreservedPriorOutputs": true,
+  "validResetModelAtlasRecipeExact": true,
+  "inputFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/profiles/upright-v1.json",
+    "configs/explicit-fit-control.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/retro-scooter/build.py",
+    "scripts/vehicle-bake/retro-scooter/geometry.py",
+    "scripts/vehicle-bake/retro-scooter/raw-audit.py"
+  ],
+  "fixtureModelSha256": "d96aa5be48f192125b9a2957e34bc08d792c8a6f4d02693ba6d20ae7ac80a08f"
+}

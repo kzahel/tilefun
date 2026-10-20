@@ -1,0 +1,4154 @@
+{
+  "status": "passed-native-feature-controls",
+  "humanApproval": false,
+  "riderSha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+  "atlasSha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+  "actualGLBSourceView": true,
+  "CarMeshAssetUsed": false,
+  "sourceVioletAndUnchangedSharedOutlineSeparatelyMeasured": true,
+  "sharedOutlineSha256": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+  "eyeRemovalTexels": 944,
+  "collarRemovalTexels": 7832,
+  "all32GeometryOccupancyAndResetExact": true,
+  "frontTwoSeparateInteriorEyeLandmarksBothCamerasBothOutlines": true,
+  "frontVioletYellowCollarVisibleBothCamerasBothOutlines": true,
+  "v1FailedControlNotApproval": true,
+  "rows": [
+    {
+      "camera": "study",
+      "yaw": 0,
+      "eyePixels": {
+        "raw": 5,
+        "violet": 4,
+        "shared": 4
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                108,
+                132
+              ]
+            ],
+            "centroid": [
+              108.0,
+              132.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                108,
+                137
+              ],
+              [
+                108,
+                138
+              ]
+            ],
+            "centroid": [
+              108.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                139
+              ],
+              [
+                111,
+                140
+              ]
+            ],
+            "centroid": [
+              111.0,
+              139.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                108,
+                137
+              ],
+              [
+                108,
+                138
+              ]
+            ],
+            "centroid": [
+              108.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                139
+              ],
+              [
+                111,
+                140
+              ]
+            ],
+            "centroid": [
+              111.0,
+              139.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                108,
+                137
+              ],
+              [
+                108,
+                138
+              ]
+            ],
+            "centroid": [
+              108.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                139
+              ],
+              [
+                111,
+                140
+              ]
+            ],
+            "centroid": [
+              111.0,
+              139.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 4,
+          "l": 0
+        },
+        "violet": {
+          "n": 1,
+          "l": 0
+        },
+        "shared": {
+          "n": 1,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          108,
+          132
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 22.5,
+      "eyePixels": {
+        "raw": 6,
+        "violet": 5,
+        "shared": 5
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                133
+              ]
+            ],
+            "centroid": [
+              107.0,
+              133.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                109,
+                138
+              ],
+              [
+                110,
+                138
+              ],
+              [
+                110,
+                139
+              ]
+            ],
+            "centroid": [
+              109.66666666666667,
+              138.33333333333334
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                139
+              ],
+              [
+                113,
+                140
+              ]
+            ],
+            "centroid": [
+              113.0,
+              139.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                109,
+                138
+              ],
+              [
+                110,
+                138
+              ],
+              [
+                110,
+                139
+              ]
+            ],
+            "centroid": [
+              109.66666666666667,
+              138.33333333333334
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                139
+              ],
+              [
+                113,
+                140
+              ]
+            ],
+            "centroid": [
+              113.0,
+              139.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                109,
+                138
+              ],
+              [
+                110,
+                138
+              ],
+              [
+                110,
+                139
+              ]
+            ],
+            "centroid": [
+              109.66666666666667,
+              138.33333333333334
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                139
+              ],
+              [
+                113,
+                140
+              ]
+            ],
+            "centroid": [
+              113.0,
+              139.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 6,
+          "l": 2
+        },
+        "violet": {
+          "n": 2,
+          "l": 0
+        },
+        "shared": {
+          "n": 2,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          107,
+          133
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 45,
+      "eyePixels": {
+        "raw": 8,
+        "violet": 8,
+        "shared": 8
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                134
+              ]
+            ],
+            "centroid": [
+              107.0,
+              134.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                138
+              ],
+              [
+                111,
+                139
+              ],
+              [
+                112,
+                138
+              ],
+              [
+                112,
+                139
+              ]
+            ],
+            "centroid": [
+              111.5,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                138
+              ],
+              [
+                115,
+                139
+              ],
+              [
+                116,
+                139
+              ]
+            ],
+            "centroid": [
+              115.33333333333333,
+              138.66666666666666
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                107,
+                134
+              ]
+            ],
+            "centroid": [
+              107.0,
+              134.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                138
+              ],
+              [
+                111,
+                139
+              ],
+              [
+                112,
+                138
+              ],
+              [
+                112,
+                139
+              ]
+            ],
+            "centroid": [
+              111.5,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                138
+              ],
+              [
+                115,
+                139
+              ],
+              [
+                116,
+                139
+              ]
+            ],
+            "centroid": [
+              115.33333333333333,
+              138.66666666666666
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                107,
+                134
+              ]
+            ],
+            "centroid": [
+              107.0,
+              134.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                138
+              ],
+              [
+                111,
+                139
+              ],
+              [
+                112,
+                138
+              ],
+              [
+                112,
+                139
+              ]
+            ],
+            "centroid": [
+              111.5,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                138
+              ],
+              [
+                115,
+                139
+              ],
+              [
+                116,
+                139
+              ]
+            ],
+            "centroid": [
+              115.33333333333333,
+              138.66666666666666
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 9,
+          "l": 3
+        },
+        "violet": {
+          "n": 3,
+          "l": 2
+        },
+        "shared": {
+          "n": 3,
+          "l": 2
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 67.5,
+      "eyePixels": {
+        "raw": 6,
+        "violet": 6,
+        "shared": 6
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                136
+              ],
+              [
+                107,
+                137
+              ]
+            ],
+            "centroid": [
+              107.0,
+              136.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                138
+              ],
+              [
+                114,
+                138
+              ]
+            ],
+            "centroid": [
+              113.5,
+              138.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                117,
+                137
+              ],
+              [
+                117,
+                138
+              ]
+            ],
+            "centroid": [
+              117.0,
+              137.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                107,
+                136
+              ],
+              [
+                107,
+                137
+              ]
+            ],
+            "centroid": [
+              107.0,
+              136.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                138
+              ],
+              [
+                114,
+                138
+              ]
+            ],
+            "centroid": [
+              113.5,
+              138.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                117,
+                137
+              ],
+              [
+                117,
+                138
+              ]
+            ],
+            "centroid": [
+              117.0,
+              137.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                107,
+                136
+              ],
+              [
+                107,
+                137
+              ]
+            ],
+            "centroid": [
+              107.0,
+              136.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                138
+              ],
+              [
+                114,
+                138
+              ]
+            ],
+            "centroid": [
+              113.5,
+              138.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                117,
+                137
+              ],
+              [
+                117,
+                138
+              ]
+            ],
+            "centroid": [
+              117.0,
+              137.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 11,
+          "l": 2
+        },
+        "violet": {
+          "n": 7,
+          "l": 1
+        },
+        "shared": {
+          "n": 7,
+          "l": 1
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 90,
+      "eyePixels": {
+        "raw": 6,
+        "violet": 4,
+        "shared": 4
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                105,
+                136
+              ]
+            ],
+            "centroid": [
+              105.0,
+              136.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                108,
+                137
+              ],
+              [
+                108,
+                138
+              ]
+            ],
+            "centroid": [
+              108.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                137
+              ],
+              [
+                115,
+                138
+              ]
+            ],
+            "centroid": [
+              115.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                118,
+                136
+              ]
+            ],
+            "centroid": [
+              118.0,
+              136.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                108,
+                137
+              ],
+              [
+                108,
+                138
+              ]
+            ],
+            "centroid": [
+              108.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                137
+              ],
+              [
+                115,
+                138
+              ]
+            ],
+            "centroid": [
+              115.0,
+              137.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                108,
+                137
+              ],
+              [
+                108,
+                138
+              ]
+            ],
+            "centroid": [
+              108.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                137
+              ],
+              [
+                115,
+                138
+              ]
+            ],
+            "centroid": [
+              115.0,
+              137.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 10,
+          "l": 4
+        },
+        "violet": {
+          "n": 6,
+          "l": 2
+        },
+        "shared": {
+          "n": 6,
+          "l": 2
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          105,
+          136
+        ],
+        [
+          118,
+          136
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 112.5,
+      "eyePixels": {
+        "raw": 6,
+        "violet": 6,
+        "shared": 6
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                106,
+                137
+              ],
+              [
+                106,
+                138
+              ]
+            ],
+            "centroid": [
+              106.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                109,
+                138
+              ],
+              [
+                110,
+                138
+              ]
+            ],
+            "centroid": [
+              109.5,
+              138.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                136
+              ],
+              [
+                116,
+                137
+              ]
+            ],
+            "centroid": [
+              116.0,
+              136.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                106,
+                137
+              ],
+              [
+                106,
+                138
+              ]
+            ],
+            "centroid": [
+              106.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                109,
+                138
+              ],
+              [
+                110,
+                138
+              ]
+            ],
+            "centroid": [
+              109.5,
+              138.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                136
+              ],
+              [
+                116,
+                137
+              ]
+            ],
+            "centroid": [
+              116.0,
+              136.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                106,
+                137
+              ],
+              [
+                106,
+                138
+              ]
+            ],
+            "centroid": [
+              106.0,
+              137.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                109,
+                138
+              ],
+              [
+                110,
+                138
+              ]
+            ],
+            "centroid": [
+              109.5,
+              138.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                136
+              ],
+              [
+                116,
+                137
+              ]
+            ],
+            "centroid": [
+              116.0,
+              136.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 11,
+          "l": 2
+        },
+        "violet": {
+          "n": 7,
+          "l": 1
+        },
+        "shared": {
+          "n": 7,
+          "l": 1
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 135,
+      "eyePixels": {
+        "raw": 8,
+        "violet": 8,
+        "shared": 8
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                108,
+                138
+              ],
+              [
+                108,
+                139
+              ]
+            ],
+            "centroid": [
+              108.0,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                138
+              ],
+              [
+                111,
+                139
+              ],
+              [
+                112,
+                138
+              ],
+              [
+                112,
+                139
+              ]
+            ],
+            "centroid": [
+              111.5,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                134
+              ],
+              [
+                116,
+                135
+              ]
+            ],
+            "centroid": [
+              116.0,
+              134.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                108,
+                138
+              ],
+              [
+                108,
+                139
+              ]
+            ],
+            "centroid": [
+              108.0,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                138
+              ],
+              [
+                111,
+                139
+              ],
+              [
+                112,
+                138
+              ],
+              [
+                112,
+                139
+              ]
+            ],
+            "centroid": [
+              111.5,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                134
+              ],
+              [
+                116,
+                135
+              ]
+            ],
+            "centroid": [
+              116.0,
+              134.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                108,
+                138
+              ],
+              [
+                108,
+                139
+              ]
+            ],
+            "centroid": [
+              108.0,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                138
+              ],
+              [
+                111,
+                139
+              ],
+              [
+                112,
+                138
+              ],
+              [
+                112,
+                139
+              ]
+            ],
+            "centroid": [
+              111.5,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                134
+              ],
+              [
+                116,
+                135
+              ]
+            ],
+            "centroid": [
+              116.0,
+              134.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 9,
+          "l": 3
+        },
+        "violet": {
+          "n": 3,
+          "l": 2
+        },
+        "shared": {
+          "n": 3,
+          "l": 2
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 157.5,
+      "eyePixels": {
+        "raw": 6,
+        "violet": 5,
+        "shared": 5
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                110,
+                139
+              ],
+              [
+                110,
+                140
+              ]
+            ],
+            "centroid": [
+              110.0,
+              139.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                138
+              ],
+              [
+                113,
+                139
+              ],
+              [
+                114,
+                138
+              ]
+            ],
+            "centroid": [
+              113.33333333333333,
+              138.33333333333334
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                133
+              ]
+            ],
+            "centroid": [
+              116.0,
+              133.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                110,
+                139
+              ],
+              [
+                110,
+                140
+              ]
+            ],
+            "centroid": [
+              110.0,
+              139.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                138
+              ],
+              [
+                113,
+                139
+              ],
+              [
+                114,
+                138
+              ]
+            ],
+            "centroid": [
+              113.33333333333333,
+              138.33333333333334
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                110,
+                139
+              ],
+              [
+                110,
+                140
+              ]
+            ],
+            "centroid": [
+              110.0,
+              139.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                138
+              ],
+              [
+                113,
+                139
+              ],
+              [
+                114,
+                138
+              ]
+            ],
+            "centroid": [
+              113.33333333333333,
+              138.33333333333334
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 6,
+          "l": 2
+        },
+        "violet": {
+          "n": 2,
+          "l": 0
+        },
+        "shared": {
+          "n": 2,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          116,
+          133
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 180,
+      "eyePixels": {
+        "raw": 5,
+        "violet": 4,
+        "shared": 4
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                112,
+                139
+              ],
+              [
+                112,
+                140
+              ]
+            ],
+            "centroid": [
+              112.0,
+              139.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                132
+              ]
+            ],
+            "centroid": [
+              115.0,
+              132.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                137
+              ],
+              [
+                115,
+                138
+              ]
+            ],
+            "centroid": [
+              115.0,
+              137.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                112,
+                139
+              ],
+              [
+                112,
+                140
+              ]
+            ],
+            "centroid": [
+              112.0,
+              139.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                137
+              ],
+              [
+                115,
+                138
+              ]
+            ],
+            "centroid": [
+              115.0,
+              137.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                112,
+                139
+              ],
+              [
+                112,
+                140
+              ]
+            ],
+            "centroid": [
+              112.0,
+              139.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                137
+              ],
+              [
+                115,
+                138
+              ]
+            ],
+            "centroid": [
+              115.0,
+              137.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 4,
+          "l": 0
+        },
+        "violet": {
+          "n": 1,
+          "l": 0
+        },
+        "shared": {
+          "n": 1,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          115,
+          132
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 202.5,
+      "eyePixels": {
+        "raw": 3,
+        "violet": 2,
+        "shared": 2
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                115,
+                138
+              ],
+              [
+                115,
+                139
+              ]
+            ],
+            "centroid": [
+              115.0,
+              138.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                136
+              ]
+            ],
+            "centroid": [
+              116.0,
+              136.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                115,
+                138
+              ],
+              [
+                115,
+                139
+              ]
+            ],
+            "centroid": [
+              115.0,
+              138.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                115,
+                138
+              ],
+              [
+                115,
+                139
+              ]
+            ],
+            "centroid": [
+              115.0,
+              138.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 1,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          116,
+          136
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 225,
+      "eyePixels": {
+        "raw": 2,
+        "violet": 1,
+        "shared": 1
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                116,
+                137
+              ]
+            ],
+            "centroid": [
+              116.0,
+              137.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                117,
+                138
+              ]
+            ],
+            "centroid": [
+              117.0,
+              138.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                116,
+                137
+              ]
+            ],
+            "centroid": [
+              116.0,
+              137.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                116,
+                137
+              ]
+            ],
+            "centroid": [
+              116.0,
+              137.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 0,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          117,
+          138
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 247.5,
+      "eyePixels": {
+        "raw": 0,
+        "violet": 0,
+        "shared": 0
+      },
+      "eyeClusters": {
+        "raw": [],
+        "violet": [],
+        "shared": []
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 0,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 270,
+      "eyePixels": {
+        "raw": 0,
+        "violet": 0,
+        "shared": 0
+      },
+      "eyeClusters": {
+        "raw": [],
+        "violet": [],
+        "shared": []
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 0,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 292.5,
+      "eyePixels": {
+        "raw": 0,
+        "violet": 0,
+        "shared": 0
+      },
+      "eyeClusters": {
+        "raw": [],
+        "violet": [],
+        "shared": []
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 0,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 315,
+      "eyePixels": {
+        "raw": 1,
+        "violet": 1,
+        "shared": 1
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                137
+              ]
+            ],
+            "centroid": [
+              107.0,
+              137.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                107,
+                137
+              ]
+            ],
+            "centroid": [
+              107.0,
+              137.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                107,
+                137
+              ]
+            ],
+            "centroid": [
+              107.0,
+              137.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 0,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "study",
+      "yaw": 337.5,
+      "eyePixels": {
+        "raw": 2,
+        "violet": 1,
+        "shared": 1
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                136
+              ]
+            ],
+            "centroid": [
+              107.0,
+              136.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                108,
+                139
+              ]
+            ],
+            "centroid": [
+              108.0,
+              139.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                108,
+                139
+              ]
+            ],
+            "centroid": [
+              108.0,
+              139.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                108,
+                139
+              ]
+            ],
+            "centroid": [
+              108.0,
+              139.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 1,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          107,
+          136
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 0,
+      "eyePixels": {
+        "raw": 6,
+        "violet": 6,
+        "shared": 6
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                112,
+                109
+              ],
+              [
+                112,
+                110
+              ],
+              [
+                112,
+                111
+              ]
+            ],
+            "centroid": [
+              112.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                106
+              ],
+              [
+                115,
+                107
+              ],
+              [
+                115,
+                108
+              ]
+            ],
+            "centroid": [
+              115.0,
+              107.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                112,
+                109
+              ],
+              [
+                112,
+                110
+              ],
+              [
+                112,
+                111
+              ]
+            ],
+            "centroid": [
+              112.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                106
+              ],
+              [
+                115,
+                107
+              ],
+              [
+                115,
+                108
+              ]
+            ],
+            "centroid": [
+              115.0,
+              107.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                112,
+                109
+              ],
+              [
+                112,
+                110
+              ],
+              [
+                112,
+                111
+              ]
+            ],
+            "centroid": [
+              112.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                106
+              ],
+              [
+                115,
+                107
+              ],
+              [
+                115,
+                108
+              ]
+            ],
+            "centroid": [
+              115.0,
+              107.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 7,
+          "l": 1
+        },
+        "violet": {
+          "n": 1,
+          "l": 0
+        },
+        "shared": {
+          "n": 1,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 22.5,
+      "eyePixels": {
+        "raw": 9,
+        "violet": 8,
+        "shared": 8
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                110,
+                109
+              ],
+              [
+                110,
+                110
+              ],
+              [
+                110,
+                111
+              ]
+            ],
+            "centroid": [
+              110.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                108
+              ],
+              [
+                113,
+                109
+              ],
+              [
+                113,
+                110
+              ],
+              [
+                114,
+                108
+              ],
+              [
+                114,
+                109
+              ]
+            ],
+            "centroid": [
+              113.4,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                102
+              ]
+            ],
+            "centroid": [
+              116.0,
+              102.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                110,
+                109
+              ],
+              [
+                110,
+                110
+              ],
+              [
+                110,
+                111
+              ]
+            ],
+            "centroid": [
+              110.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                108
+              ],
+              [
+                113,
+                109
+              ],
+              [
+                113,
+                110
+              ],
+              [
+                114,
+                108
+              ],
+              [
+                114,
+                109
+              ]
+            ],
+            "centroid": [
+              113.4,
+              108.8
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                110,
+                109
+              ],
+              [
+                110,
+                110
+              ],
+              [
+                110,
+                111
+              ]
+            ],
+            "centroid": [
+              110.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                108
+              ],
+              [
+                113,
+                109
+              ],
+              [
+                113,
+                110
+              ],
+              [
+                114,
+                108
+              ],
+              [
+                114,
+                109
+              ]
+            ],
+            "centroid": [
+              113.4,
+              108.8
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 11,
+          "l": 2
+        },
+        "violet": {
+          "n": 5,
+          "l": 1
+        },
+        "shared": {
+          "n": 5,
+          "l": 1
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          116,
+          102
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 45,
+      "eyePixels": {
+        "raw": 10,
+        "violet": 10,
+        "shared": 10
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                108,
+                108
+              ],
+              [
+                108,
+                109
+              ],
+              [
+                108,
+                110
+              ]
+            ],
+            "centroid": [
+              108.0,
+              109.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                108
+              ],
+              [
+                111,
+                109
+              ],
+              [
+                111,
+                110
+              ],
+              [
+                112,
+                108
+              ],
+              [
+                112,
+                109
+              ]
+            ],
+            "centroid": [
+              111.4,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                103
+              ],
+              [
+                116,
+                104
+              ]
+            ],
+            "centroid": [
+              116.0,
+              103.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                108,
+                108
+              ],
+              [
+                108,
+                109
+              ],
+              [
+                108,
+                110
+              ]
+            ],
+            "centroid": [
+              108.0,
+              109.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                108
+              ],
+              [
+                111,
+                109
+              ],
+              [
+                111,
+                110
+              ],
+              [
+                112,
+                108
+              ],
+              [
+                112,
+                109
+              ]
+            ],
+            "centroid": [
+              111.4,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                103
+              ],
+              [
+                116,
+                104
+              ]
+            ],
+            "centroid": [
+              116.0,
+              103.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                108,
+                108
+              ],
+              [
+                108,
+                109
+              ],
+              [
+                108,
+                110
+              ]
+            ],
+            "centroid": [
+              108.0,
+              109.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                108
+              ],
+              [
+                111,
+                109
+              ],
+              [
+                111,
+                110
+              ],
+              [
+                112,
+                108
+              ],
+              [
+                112,
+                109
+              ]
+            ],
+            "centroid": [
+              111.4,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                103
+              ],
+              [
+                116,
+                104
+              ]
+            ],
+            "centroid": [
+              116.0,
+              103.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 15,
+          "l": 4
+        },
+        "violet": {
+          "n": 10,
+          "l": 3
+        },
+        "shared": {
+          "n": 10,
+          "l": 3
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 67.5,
+      "eyePixels": {
+        "raw": 10,
+        "violet": 7,
+        "shared": 7
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                106,
+                107
+              ],
+              [
+                106,
+                108
+              ]
+            ],
+            "centroid": [
+              106.0,
+              107.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                109,
+                108
+              ],
+              [
+                109,
+                109
+              ],
+              [
+                110,
+                108
+              ],
+              [
+                110,
+                109
+              ]
+            ],
+            "centroid": [
+              109.5,
+              108.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                105
+              ],
+              [
+                116,
+                106
+              ],
+              [
+                116,
+                107
+              ]
+            ],
+            "centroid": [
+              116.0,
+              106.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                117,
+                102
+              ]
+            ],
+            "centroid": [
+              117.0,
+              102.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                109,
+                108
+              ],
+              [
+                109,
+                109
+              ],
+              [
+                110,
+                108
+              ],
+              [
+                110,
+                109
+              ]
+            ],
+            "centroid": [
+              109.5,
+              108.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                105
+              ],
+              [
+                116,
+                106
+              ],
+              [
+                116,
+                107
+              ]
+            ],
+            "centroid": [
+              116.0,
+              106.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                109,
+                108
+              ],
+              [
+                109,
+                109
+              ],
+              [
+                110,
+                108
+              ],
+              [
+                110,
+                109
+              ]
+            ],
+            "centroid": [
+              109.5,
+              108.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                105
+              ],
+              [
+                116,
+                106
+              ],
+              [
+                116,
+                107
+              ]
+            ],
+            "centroid": [
+              116.0,
+              106.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 16,
+          "l": 4
+        },
+        "violet": {
+          "n": 12,
+          "l": 3
+        },
+        "shared": {
+          "n": 12,
+          "l": 3
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          106,
+          108
+        ],
+        [
+          106,
+          107
+        ],
+        [
+          117,
+          102
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 90,
+      "eyePixels": {
+        "raw": 4,
+        "violet": 4,
+        "shared": 4
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                108,
+                107
+              ],
+              [
+                108,
+                108
+              ]
+            ],
+            "centroid": [
+              108.0,
+              107.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                107
+              ],
+              [
+                115,
+                108
+              ]
+            ],
+            "centroid": [
+              115.0,
+              107.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                108,
+                107
+              ],
+              [
+                108,
+                108
+              ]
+            ],
+            "centroid": [
+              108.0,
+              107.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                107
+              ],
+              [
+                115,
+                108
+              ]
+            ],
+            "centroid": [
+              115.0,
+              107.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                108,
+                107
+              ],
+              [
+                108,
+                108
+              ]
+            ],
+            "centroid": [
+              108.0,
+              107.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                107
+              ],
+              [
+                115,
+                108
+              ]
+            ],
+            "centroid": [
+              115.0,
+              107.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 16,
+          "l": 8
+        },
+        "violet": {
+          "n": 14,
+          "l": 6
+        },
+        "shared": {
+          "n": 14,
+          "l": 6
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 112.5,
+      "eyePixels": {
+        "raw": 10,
+        "violet": 7,
+        "shared": 7
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                106,
+                102
+              ]
+            ],
+            "centroid": [
+              106.0,
+              102.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                107,
+                105
+              ],
+              [
+                107,
+                106
+              ],
+              [
+                107,
+                107
+              ]
+            ],
+            "centroid": [
+              107.0,
+              106.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                108
+              ],
+              [
+                113,
+                109
+              ],
+              [
+                114,
+                108
+              ],
+              [
+                114,
+                109
+              ]
+            ],
+            "centroid": [
+              113.5,
+              108.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                117,
+                107
+              ],
+              [
+                117,
+                108
+              ]
+            ],
+            "centroid": [
+              117.0,
+              107.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                107,
+                105
+              ],
+              [
+                107,
+                106
+              ],
+              [
+                107,
+                107
+              ]
+            ],
+            "centroid": [
+              107.0,
+              106.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                108
+              ],
+              [
+                113,
+                109
+              ],
+              [
+                114,
+                108
+              ],
+              [
+                114,
+                109
+              ]
+            ],
+            "centroid": [
+              113.5,
+              108.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                107,
+                105
+              ],
+              [
+                107,
+                106
+              ],
+              [
+                107,
+                107
+              ]
+            ],
+            "centroid": [
+              107.0,
+              106.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                108
+              ],
+              [
+                113,
+                109
+              ],
+              [
+                114,
+                108
+              ],
+              [
+                114,
+                109
+              ]
+            ],
+            "centroid": [
+              113.5,
+              108.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 15,
+          "l": 5
+        },
+        "violet": {
+          "n": 11,
+          "l": 4
+        },
+        "shared": {
+          "n": 11,
+          "l": 4
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          117,
+          108
+        ],
+        [
+          117,
+          107
+        ],
+        [
+          106,
+          102
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 135,
+      "eyePixels": {
+        "raw": 10,
+        "violet": 10,
+        "shared": 10
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                103
+              ],
+              [
+                107,
+                104
+              ]
+            ],
+            "centroid": [
+              107.0,
+              103.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                108
+              ],
+              [
+                111,
+                109
+              ],
+              [
+                112,
+                108
+              ],
+              [
+                112,
+                109
+              ],
+              [
+                112,
+                110
+              ]
+            ],
+            "centroid": [
+              111.6,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                108
+              ],
+              [
+                115,
+                109
+              ],
+              [
+                115,
+                110
+              ]
+            ],
+            "centroid": [
+              115.0,
+              109.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                107,
+                103
+              ],
+              [
+                107,
+                104
+              ]
+            ],
+            "centroid": [
+              107.0,
+              103.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                108
+              ],
+              [
+                111,
+                109
+              ],
+              [
+                112,
+                108
+              ],
+              [
+                112,
+                109
+              ],
+              [
+                112,
+                110
+              ]
+            ],
+            "centroid": [
+              111.6,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                108
+              ],
+              [
+                115,
+                109
+              ],
+              [
+                115,
+                110
+              ]
+            ],
+            "centroid": [
+              115.0,
+              109.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                107,
+                103
+              ],
+              [
+                107,
+                104
+              ]
+            ],
+            "centroid": [
+              107.0,
+              103.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                108
+              ],
+              [
+                111,
+                109
+              ],
+              [
+                112,
+                108
+              ],
+              [
+                112,
+                109
+              ],
+              [
+                112,
+                110
+              ]
+            ],
+            "centroid": [
+              111.6,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                115,
+                108
+              ],
+              [
+                115,
+                109
+              ],
+              [
+                115,
+                110
+              ]
+            ],
+            "centroid": [
+              115.0,
+              109.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 15,
+          "l": 4
+        },
+        "violet": {
+          "n": 10,
+          "l": 3
+        },
+        "shared": {
+          "n": 10,
+          "l": 3
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 157.5,
+      "eyePixels": {
+        "raw": 10,
+        "violet": 8,
+        "shared": 8
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                102
+              ],
+              [
+                107,
+                103
+              ]
+            ],
+            "centroid": [
+              107.0,
+              102.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                109,
+                108
+              ],
+              [
+                109,
+                109
+              ],
+              [
+                110,
+                108
+              ],
+              [
+                110,
+                109
+              ],
+              [
+                110,
+                110
+              ]
+            ],
+            "centroid": [
+              109.6,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                109
+              ],
+              [
+                113,
+                110
+              ],
+              [
+                113,
+                111
+              ]
+            ],
+            "centroid": [
+              113.0,
+              110.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                109,
+                108
+              ],
+              [
+                109,
+                109
+              ],
+              [
+                110,
+                108
+              ],
+              [
+                110,
+                109
+              ],
+              [
+                110,
+                110
+              ]
+            ],
+            "centroid": [
+              109.6,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                109
+              ],
+              [
+                113,
+                110
+              ],
+              [
+                113,
+                111
+              ]
+            ],
+            "centroid": [
+              113.0,
+              110.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                109,
+                108
+              ],
+              [
+                109,
+                109
+              ],
+              [
+                110,
+                108
+              ],
+              [
+                110,
+                109
+              ],
+              [
+                110,
+                110
+              ]
+            ],
+            "centroid": [
+              109.6,
+              108.8
+            ]
+          },
+          {
+            "pixels": [
+              [
+                113,
+                109
+              ],
+              [
+                113,
+                110
+              ],
+              [
+                113,
+                111
+              ]
+            ],
+            "centroid": [
+              113.0,
+              110.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 12,
+          "l": 1
+        },
+        "violet": {
+          "n": 5,
+          "l": 1
+        },
+        "shared": {
+          "n": 5,
+          "l": 1
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          107,
+          103
+        ],
+        [
+          107,
+          102
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 180,
+      "eyePixels": {
+        "raw": 5,
+        "violet": 5,
+        "shared": 5
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                108,
+                107
+              ],
+              [
+                108,
+                108
+              ]
+            ],
+            "centroid": [
+              108.0,
+              107.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                109
+              ],
+              [
+                111,
+                110
+              ],
+              [
+                111,
+                111
+              ]
+            ],
+            "centroid": [
+              111.0,
+              110.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                108,
+                107
+              ],
+              [
+                108,
+                108
+              ]
+            ],
+            "centroid": [
+              108.0,
+              107.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                109
+              ],
+              [
+                111,
+                110
+              ],
+              [
+                111,
+                111
+              ]
+            ],
+            "centroid": [
+              111.0,
+              110.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                108,
+                107
+              ],
+              [
+                108,
+                108
+              ]
+            ],
+            "centroid": [
+              108.0,
+              107.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                111,
+                109
+              ],
+              [
+                111,
+                110
+              ],
+              [
+                111,
+                111
+              ]
+            ],
+            "centroid": [
+              111.0,
+              110.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 7,
+          "l": 1
+        },
+        "violet": {
+          "n": 1,
+          "l": 0
+        },
+        "shared": {
+          "n": 1,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 202.5,
+      "eyePixels": {
+        "raw": 4,
+        "violet": 2,
+        "shared": 2
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                106
+              ],
+              [
+                107,
+                107
+              ]
+            ],
+            "centroid": [
+              107.0,
+              106.5
+            ]
+          },
+          {
+            "pixels": [
+              [
+                108,
+                109
+              ],
+              [
+                108,
+                110
+              ]
+            ],
+            "centroid": [
+              108.0,
+              109.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                108,
+                109
+              ],
+              [
+                108,
+                110
+              ]
+            ],
+            "centroid": [
+              108.0,
+              109.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                108,
+                109
+              ],
+              [
+                108,
+                110
+              ]
+            ],
+            "centroid": [
+              108.0,
+              109.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 1,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          107,
+          107
+        ],
+        [
+          107,
+          106
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 225,
+      "eyePixels": {
+        "raw": 1,
+        "violet": 1,
+        "shared": 1
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                107,
+                107
+              ]
+            ],
+            "centroid": [
+              107.0,
+              107.0
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                107,
+                107
+              ]
+            ],
+            "centroid": [
+              107.0,
+              107.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                107,
+                107
+              ]
+            ],
+            "centroid": [
+              107.0,
+              107.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 2,
+          "l": 0
+        },
+        "violet": {
+          "n": 1,
+          "l": 0
+        },
+        "shared": {
+          "n": 1,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 247.5,
+      "eyePixels": {
+        "raw": 1,
+        "violet": 0,
+        "shared": 0
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                106,
+                105
+              ]
+            ],
+            "centroid": [
+              106.0,
+              105.0
+            ]
+          }
+        ],
+        "violet": [],
+        "shared": []
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 3,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          106,
+          105
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 270,
+      "eyePixels": {
+        "raw": 1,
+        "violet": 0,
+        "shared": 0
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                106,
+                102
+              ]
+            ],
+            "centroid": [
+              106.0,
+              102.0
+            ]
+          }
+        ],
+        "violet": [],
+        "shared": []
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 4,
+          "l": 0
+        },
+        "violet": {
+          "n": 2,
+          "l": 0
+        },
+        "shared": {
+          "n": 2,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          106,
+          102
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 292.5,
+      "eyePixels": {
+        "raw": 1,
+        "violet": 0,
+        "shared": 0
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                117,
+                105
+              ]
+            ],
+            "centroid": [
+              117.0,
+              105.0
+            ]
+          }
+        ],
+        "violet": [],
+        "shared": []
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 3,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          117,
+          105
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 315,
+      "eyePixels": {
+        "raw": 2,
+        "violet": 2,
+        "shared": 2
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                116,
+                107
+              ],
+              [
+                116,
+                108
+              ]
+            ],
+            "centroid": [
+              116.0,
+              107.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                116,
+                107
+              ],
+              [
+                116,
+                108
+              ]
+            ],
+            "centroid": [
+              116.0,
+              107.5
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                116,
+                107
+              ],
+              [
+                116,
+                108
+              ]
+            ],
+            "centroid": [
+              116.0,
+              107.5
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 2,
+          "l": 0
+        },
+        "violet": {
+          "n": 1,
+          "l": 0
+        },
+        "shared": {
+          "n": 1,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [],
+      "exactEyeAndCollarResets": true
+    },
+    {
+      "camera": "engine",
+      "yaw": 337.5,
+      "eyePixels": {
+        "raw": 3,
+        "violet": 1,
+        "shared": 1
+      },
+      "eyeClusters": {
+        "raw": [
+          {
+            "pixels": [
+              [
+                115,
+                110
+              ]
+            ],
+            "centroid": [
+              115.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": [
+              [
+                116,
+                105
+              ],
+              [
+                116,
+                106
+              ]
+            ],
+            "centroid": [
+              116.0,
+              105.5
+            ]
+          }
+        ],
+        "violet": [
+          {
+            "pixels": [
+              [
+                115,
+                110
+              ]
+            ],
+            "centroid": [
+              115.0,
+              110.0
+            ]
+          }
+        ],
+        "shared": [
+          {
+            "pixels": [
+              [
+                115,
+                110
+              ]
+            ],
+            "centroid": [
+              115.0,
+              110.0
+            ]
+          }
+        ]
+      },
+      "collarVisiblePixels": {
+        "raw": {
+          "n": 1,
+          "l": 0
+        },
+        "violet": {
+          "n": 0,
+          "l": 0
+        },
+        "shared": {
+          "n": 0,
+          "l": 0
+        }
+      },
+      "eyeBoundaryLossShared": [
+        [
+          116,
+          106
+        ],
+        [
+          116,
+          105
+        ]
+      ],
+      "exactEyeAndCollarResets": true
+    }
+  ],
+  "limits": [
+    "Agent native art QA; finite feature controls do not independently award likeness. Actual sheets require visual inspection.",
+    "Some side/rear yellow collar samples remain hidden or consumed by inward stroke; front and near-front cues are proven, not universal color visibility.",
+    "2D standing and seated volumetric profiles differ under fixed projection. No per-view resize or exact sprite silhouette parity claim.",
+    "No actual bike, shared CarMeshAsset, normal availability, human approval, all27, AI or occupied fallback qualification."
+  ]
+}

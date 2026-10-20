@@ -1,0 +1,120 @@
+{
+  "status": "passed",
+  "scope": "own family sources only",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "black",
+        "--check",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n19 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\build-unchanged-view.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\build-view.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\capture-raw.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\capture-steer.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\capture-unchanged-controls.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "REPOSITORY\\node_modules\\.bin\\biome.cmd",
+        "check",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\build-unchanged-view.mjs",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\build-view.mjs",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\capture-raw.mjs",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\capture-steer.mjs",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\capture-unchanged-controls.mjs",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\coverage-region.json",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\family.json",
+        "REPOSITORY\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": "Checked 8 files in 15ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/assess-pixels.py": "23dc53fdeb8f78e0c0f4f56cd396a87d258d25760e312ca7788299d97a47d809",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/audit-source.py": "8ca8efbb20b66b6de93b93b8fc633bc8c52ab8d7cbf5604031119b0c1e4d5561",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/baseline-fit.py": "2ab0e1c047234402403f20ba0b8fc08720b3ccaf49b9648d0be737bbfe27c393",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/build-unchanged-view.mjs": "57efa61d5ac1243c0351a9e4cf929954a2168d75e0278ec3bf57671d91ee639d",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/build-view.mjs": "ffa293595137252f1d01d300d99e113e42e0b26a3395e908d749e4f7465efb85",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/build.py": "03e9c26d7af1e0c239d4ddacdc9e20404e5d3559ef065891a9d0189c66eb2291",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/capture-raw.mjs": "597357d1a84a3b13da8816e9fdd50d0925e86acea60918fd35bb1a4baa2ab502",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/capture-steer.mjs": "751e2327853828caa79ffd7d4c56ed49dddf4f60d57546eb6d7b96a8213b33a4",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/capture-unchanged-controls.mjs": "930a91203a8f7a099fc2fe8b1e50bea30f6974b703ced3f0e277051e278ff1c4",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/checks.py": "379ec24d48faa4b7b63f387870236620e5d4bd894b941456c71566487284877f",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/compare-base.py": "a4ea9c9becfac9443692b8b67c7257e1509ff4d0f1ffebacdb0e88fdd13e1c2f",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/coverage-region.json": "3698bfe41306ea4ea7780b6d5a15c0dc94f16bb5a9672b4f1c96fd6f22440822",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/family.json": "b1ddea1fb830acbcb3309124ee1d14257f9b64ff00978fd2dcea1a0f8cbdf3e8",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/finalize.py": "f81a41d216b216a16e5244ad0c7a320a902c806c849118cc9350153303de72e3",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/fresh-replay.py": "eeaf7894fdd59bb8ddaf6f92db7bcccd1d902d61eaa10e405c585a6e18ba8764",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/geometry.py": "bc4c1e84b853b36890427499ebcef460fd1f4762052a97b80b72e486e6331683",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/normalize-replay.py": "cbf6f6fa98fe22030abe3038022089fe32df4e5e33937529078acdfc33faeb31",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/parameter-api-proof.py": "af78cfa7583f300eca3d07a888c8d7b23aba453f50965c92c8391143fb2fa14d",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/prove-contact-pairs.py": "08a78c490f1d630a31a237598bd60989becff701d9d986615defc86dad5c3735",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/prove-contact-rays.py": "a6b79e3c269d55d823d530624699f7250b2a840c589160cc239214b1a7fc6d1c",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/prove-fit.py": "0c9f1bb456877682f5e7b8c5d63d2ff0fed78411f036cf03afa1021edea49891",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/prove-immutable-rider-self.py": "10ae85926095fbc65548f73d437762d637d01cd089997aa460fc3769357251ff",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/prove-mechanics.py": "03a70f8da0db382c8b195a1bca54d53858f3eb99cdf44e43906d590d0a8dc16f",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/raw-diagnostic.html": "b36b2bfff0cd80db438dd7ff63906b59aa381c8b5eaa4d17892685665c3e7d02",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/raw-viewer.mjs": "299fd60a33ca2b48ab65b2a8fa6b1d18ef5d9743469c11495d1e1e86e6253e36",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/rider-fixture.py": "40930fc00c57a5c2deb6850a8ac2ccf05495b29bc81c4b358b8d319037949aa9",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/sheets.py": "65a3316c18266a2a865c71d96a2512ce4e3e3c64daef1a968a4e5c62fe9c7417"
+  },
+  "pythonSyntaxCompiledOnlyIntoOwnIgnoredScratch": true,
+  "globalChecksRun": false,
+  "gitUsed": false
+}

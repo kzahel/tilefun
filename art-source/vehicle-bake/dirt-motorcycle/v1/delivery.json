@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "sourcePilot": true,
+  "productionQualified": false,
+  "ready": true,
+  "sourceImmutable": true,
+  "glbSha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+  "atlasSha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175",
+  "recipeSha256": "5303df2547415a8226ae230f7c84aa2424db1a460f9cd82417dc78b294734683",
+  "report": "public/demos/vehicle-bake/dirt-motorcycle/v1/report.json",
+  "normalActivation": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "proofCommands": [
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/dirt-motorcycle/prove-fit.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/dirt-motorcycle/audit-source.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/dirt-motorcycle/prove-coverage.py",
+    "node scripts/vehicle-bake/dirt-motorcycle/capture-raw.mjs",
+    "python scripts/vehicle-bake/dirt-motorcycle/assess-pixels.py",
+    "python scripts/vehicle-bake/dirt-motorcycle/fresh-replay.py --name parent-fresh-replay --blender BLENDER"
+  ],
+  "replayInputs": "Six declared files: own build/geometry/family/raw-audit, stable catalog-cycle and immutable upright profile; no master/scratch input",
+  "parentNext": "Independent review/replay and eventual actual shared cycle loader/browser qualification; no normal activation"
+}

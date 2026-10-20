@@ -1,0 +1,7310 @@
+{
+  "status": "passed-raw-source-diagnostic",
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "riderSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "CarMeshAssetUsed": false,
+  "normalCatalogUsed": false,
+  "sharedCycleQualification": "pending parent actual shared loader/browser review",
+  "trueWheelIds": [
+    "F",
+    "R"
+  ],
+  "nativeSize": 224,
+  "source80ReferenceUnchanged": true,
+  "singleDepthTarget": true,
+  "frames": [
+    {
+      "view": "combined",
+      "yaw": 0,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 880,
+      "bounds": {
+        "minX": 79,
+        "minY": 115,
+        "maxX": 142,
+        "maxY": 141
+      },
+      "image": "combined-study-0.png",
+      "sha256": "c44cac58de376ba8395a01ad18614eb9ebbbb7769d2002129798d2cf927f3e00"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 0,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 764,
+      "bounds": {
+        "minX": 79,
+        "minY": 121,
+        "maxX": 142,
+        "maxY": 141
+      },
+      "image": "bike-alone-study-0.png",
+      "sha256": "035b43d262d7287a8adfba9d3149c16e29ee7971d3ef66edc1cc228f6c91afc2"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 0,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 159,
+      "bounds": {
+        "minX": 107,
+        "minY": 115,
+        "maxX": 122,
+        "maxY": 138
+      },
+      "image": "rider-alone-study-0.png",
+      "sha256": "ec21eb5c25575933e09298c671f32eba931dd772a4bbcc0f7828068070039d57"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 0,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 764,
+      "bounds": {
+        "minX": 79,
+        "minY": 121,
+        "maxX": 142,
+        "maxY": 141
+      },
+      "image": "rider-hidden-study-0.png",
+      "sha256": "035b43d262d7287a8adfba9d3149c16e29ee7971d3ef66edc1cc228f6c91afc2"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 0,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 156,
+      "bounds": {
+        "minX": 107,
+        "minY": 115,
+        "maxX": 122,
+        "maxY": 138
+      },
+      "image": "visible-rider-mask-study-0.png",
+      "sha256": "0ff7029dbbcfda40b84bd0083f6491b356595dc21a72aaeaeb3be3d2c3a89ec3"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 0,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 880,
+      "bounds": {
+        "minX": 79,
+        "minY": 115,
+        "maxX": 142,
+        "maxY": 141
+      },
+      "image": "ownership-mask-study-0.png",
+      "sha256": "ee403cabe1e72805c491e48d8bdca019de9548074ff90783c548aee5176d210a"
+    },
+    {
+      "view": "combined",
+      "yaw": 22.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 849,
+      "bounds": {
+        "minX": 80,
+        "minY": 114,
+        "maxX": 141,
+        "maxY": 148
+      },
+      "image": "combined-study-1.png",
+      "sha256": "207278674b219b973456b48d8f2d4be711916f2a91e214cfa1df8e60335ebf3e"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 22.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 727,
+      "bounds": {
+        "minX": 80,
+        "minY": 119,
+        "maxX": 141,
+        "maxY": 148
+      },
+      "image": "bike-alone-study-1.png",
+      "sha256": "34e88153947e382fe42bf19101db91e71c73d88ae2669f9892408e640fa8f85b"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 22.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 172,
+      "bounds": {
+        "minX": 106,
+        "minY": 114,
+        "maxX": 122,
+        "maxY": 136
+      },
+      "image": "rider-alone-study-1.png",
+      "sha256": "3bb93f7568fcbf61438007e670d51b08e97ce8c869b261a276aec04becc3d080"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 22.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 727,
+      "bounds": {
+        "minX": 80,
+        "minY": 119,
+        "maxX": 141,
+        "maxY": 148
+      },
+      "image": "rider-hidden-study-1.png",
+      "sha256": "34e88153947e382fe42bf19101db91e71c73d88ae2669f9892408e640fa8f85b"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 22.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 165,
+      "bounds": {
+        "minX": 106,
+        "minY": 114,
+        "maxX": 122,
+        "maxY": 136
+      },
+      "image": "visible-rider-mask-study-1.png",
+      "sha256": "3bf14412d4e41656f12c3d7b8abadcbbe06b41bf8c2716d255243870851ea611"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 22.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 849,
+      "bounds": {
+        "minX": 80,
+        "minY": 114,
+        "maxX": 141,
+        "maxY": 148
+      },
+      "image": "ownership-mask-study-1.png",
+      "sha256": "cd682185b785daca5ea5adefa5a711fb9ed2dfd911f0a4ab8a8e63814266d8b3"
+    },
+    {
+      "view": "combined",
+      "yaw": 45,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 743,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "image": "combined-study-2.png",
+      "sha256": "80d80ec851dec7808ad516786c7f4d32aaba7ef03a556a8ebd7c428ade075ed7"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 45,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 626,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "image": "bike-alone-study-2.png",
+      "sha256": "7fda787abfa8c8f5f30d4aaccce80f71568f24ccc2c3fa94acd2f4a108db5ac1"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 45,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 174,
+      "bounds": {
+        "minX": 105,
+        "minY": 113,
+        "maxX": 120,
+        "maxY": 135
+      },
+      "image": "rider-alone-study-2.png",
+      "sha256": "615d68c088c2162a81d82a663fd9b1148f2c8ecbccb904465b5873932ff258d4"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 45,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 626,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "image": "rider-hidden-study-2.png",
+      "sha256": "7fda787abfa8c8f5f30d4aaccce80f71568f24ccc2c3fa94acd2f4a108db5ac1"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 45,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 165,
+      "bounds": {
+        "minX": 105,
+        "minY": 113,
+        "maxX": 120,
+        "maxY": 135
+      },
+      "image": "visible-rider-mask-study-2.png",
+      "sha256": "c90bf80e12b1009c0e0f27fbf6bdebe5e5d1820412b2e7e3fb22b7c78dc8a08a"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 45,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 743,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "image": "ownership-mask-study-2.png",
+      "sha256": "a196c4ff6efd2f400c4953ceca19ef899825ab5a0e78a8c80f83e47910dd70e4"
+    },
+    {
+      "view": "combined",
+      "yaw": 67.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 601,
+      "bounds": {
+        "minX": 97,
+        "minY": 109,
+        "maxX": 127,
+        "maxY": 159
+      },
+      "image": "combined-study-3.png",
+      "sha256": "cfb5a8c819738146eb88176450b0cd74f441666222d1ce1d48dd3e4d7bd38f38"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 67.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 519,
+      "bounds": {
+        "minX": 97,
+        "minY": 109,
+        "maxX": 127,
+        "maxY": 159
+      },
+      "image": "bike-alone-study-3.png",
+      "sha256": "7adb090cb1454f01b5b415fbaaf4c6bab30136ab01a462cc1d7f6326a3185cf6"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 67.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 165,
+      "bounds": {
+        "minX": 106,
+        "minY": 113,
+        "maxX": 118,
+        "maxY": 133
+      },
+      "image": "rider-alone-study-3.png",
+      "sha256": "c157fc500e1e0a68b9c37d61200af920c3852f39e0b28a39d877e1399c72128e"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 67.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 519,
+      "bounds": {
+        "minX": 97,
+        "minY": 109,
+        "maxX": 127,
+        "maxY": 159
+      },
+      "image": "rider-hidden-study-3.png",
+      "sha256": "7adb090cb1454f01b5b415fbaaf4c6bab30136ab01a462cc1d7f6326a3185cf6"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 67.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 155,
+      "bounds": {
+        "minX": 106,
+        "minY": 113,
+        "maxX": 118,
+        "maxY": 133
+      },
+      "image": "visible-rider-mask-study-3.png",
+      "sha256": "cdb4d04de09cde32cca256a2e1563221be998c8971fcdf2822198e68edceee2c"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 67.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 601,
+      "bounds": {
+        "minX": 97,
+        "minY": 109,
+        "maxX": 127,
+        "maxY": 159
+      },
+      "image": "ownership-mask-study-3.png",
+      "sha256": "fe252c44f6ffc7efe193b3bf9f3ebef6443d2679810ee7483551471cc112a769"
+    },
+    {
+      "view": "combined",
+      "yaw": 90,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 476,
+      "bounds": {
+        "minX": 106,
+        "minY": 107,
+        "maxX": 117,
+        "maxY": 161
+      },
+      "image": "combined-study-4.png",
+      "sha256": "2b18714cc3dd98624b6cd3e47445662f1270b2f2de66dc1b03219f170883a452"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 90,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 452,
+      "bounds": {
+        "minX": 106,
+        "minY": 107,
+        "maxX": 117,
+        "maxY": 161
+      },
+      "image": "bike-alone-study-4.png",
+      "sha256": "da84a1da3ec29e8eef4e9a7fa0ff40f06d7969ded0e9db254322ed5111337904"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 90,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 160,
+      "bounds": {
+        "minX": 106,
+        "minY": 113,
+        "maxX": 117,
+        "maxY": 132
+      },
+      "image": "rider-alone-study-4.png",
+      "sha256": "0411b7ed4aa52f1125162850caa020b3bf7fb8bfa81aa95291f9b5247ef13696"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 90,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 452,
+      "bounds": {
+        "minX": 106,
+        "minY": 107,
+        "maxX": 117,
+        "maxY": 161
+      },
+      "image": "rider-hidden-study-4.png",
+      "sha256": "da84a1da3ec29e8eef4e9a7fa0ff40f06d7969ded0e9db254322ed5111337904"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 90,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 160,
+      "bounds": {
+        "minX": 106,
+        "minY": 113,
+        "maxX": 117,
+        "maxY": 132
+      },
+      "image": "visible-rider-mask-study-4.png",
+      "sha256": "0411b7ed4aa52f1125162850caa020b3bf7fb8bfa81aa95291f9b5247ef13696"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 90,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 476,
+      "bounds": {
+        "minX": 106,
+        "minY": 107,
+        "maxX": 117,
+        "maxY": 161
+      },
+      "image": "ownership-mask-study-4.png",
+      "sha256": "b4c5e453a94b0eff3f33bafa22c7c7723464ebc9c496da2feb887567a835a57d"
+    },
+    {
+      "view": "combined",
+      "yaw": 112.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 601,
+      "bounds": {
+        "minX": 96,
+        "minY": 109,
+        "maxX": 126,
+        "maxY": 159
+      },
+      "image": "combined-study-5.png",
+      "sha256": "a277db3251b486768a7023d6be2ed5ebdcc08b1c6b9617e50edc38880b1f0476"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 112.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 519,
+      "bounds": {
+        "minX": 96,
+        "minY": 109,
+        "maxX": 126,
+        "maxY": 159
+      },
+      "image": "bike-alone-study-5.png",
+      "sha256": "32e268e6df809ba65ef19f0f48723a2c9ff0f95eb743ac870c083b5e1906f7b2"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 112.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 165,
+      "bounds": {
+        "minX": 105,
+        "minY": 113,
+        "maxX": 117,
+        "maxY": 133
+      },
+      "image": "rider-alone-study-5.png",
+      "sha256": "f0045940e33d9bb517e64ede6a3cf33b13edada7334c44eac3c639bc1c08395d"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 112.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 519,
+      "bounds": {
+        "minX": 96,
+        "minY": 109,
+        "maxX": 126,
+        "maxY": 159
+      },
+      "image": "rider-hidden-study-5.png",
+      "sha256": "32e268e6df809ba65ef19f0f48723a2c9ff0f95eb743ac870c083b5e1906f7b2"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 112.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 155,
+      "bounds": {
+        "minX": 105,
+        "minY": 113,
+        "maxX": 117,
+        "maxY": 133
+      },
+      "image": "visible-rider-mask-study-5.png",
+      "sha256": "5961bf7bc7b8f6b0c120e0c4663ccab3bd11f52f712bc488537d16922b794690"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 112.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 601,
+      "bounds": {
+        "minX": 96,
+        "minY": 109,
+        "maxX": 126,
+        "maxY": 159
+      },
+      "image": "ownership-mask-study-5.png",
+      "sha256": "8fbf56450aae2eb3a8d97003886e6168140ea0b6e2722608cd006fe530ac0236"
+    },
+    {
+      "view": "combined",
+      "yaw": 135,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 743,
+      "bounds": {
+        "minX": 88,
+        "minY": 113,
+        "maxX": 137,
+        "maxY": 154
+      },
+      "image": "combined-study-6.png",
+      "sha256": "8b0f62efc3ba74fefdd4fa1c96af8765335b4b3bb5806bbde9a254ae14f7cab0"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 135,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 626,
+      "bounds": {
+        "minX": 88,
+        "minY": 113,
+        "maxX": 137,
+        "maxY": 154
+      },
+      "image": "bike-alone-study-6.png",
+      "sha256": "45617559bfd7412f5d00aae80fe76c5730510943c22663efe693eb9a5ab00265"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 135,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 174,
+      "bounds": {
+        "minX": 103,
+        "minY": 113,
+        "maxX": 118,
+        "maxY": 135
+      },
+      "image": "rider-alone-study-6.png",
+      "sha256": "3a9a17cba05e43321bb530dd9acfb1f7057f8b4777f147fdf88c60c5d663d9f5"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 135,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 626,
+      "bounds": {
+        "minX": 88,
+        "minY": 113,
+        "maxX": 137,
+        "maxY": 154
+      },
+      "image": "rider-hidden-study-6.png",
+      "sha256": "45617559bfd7412f5d00aae80fe76c5730510943c22663efe693eb9a5ab00265"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 135,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 165,
+      "bounds": {
+        "minX": 103,
+        "minY": 113,
+        "maxX": 118,
+        "maxY": 135
+      },
+      "image": "visible-rider-mask-study-6.png",
+      "sha256": "f3ff756be14a7d725ad14ac4afef47ea6220bef2e57915934757b169f5024a40"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 135,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 743,
+      "bounds": {
+        "minX": 88,
+        "minY": 113,
+        "maxX": 137,
+        "maxY": 154
+      },
+      "image": "ownership-mask-study-6.png",
+      "sha256": "9491e6f8f5713fb338d03b7d8ef52086ff2011ca0c699a127a1169f2841b3ee8"
+    },
+    {
+      "view": "combined",
+      "yaw": 157.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 849,
+      "bounds": {
+        "minX": 82,
+        "minY": 114,
+        "maxX": 143,
+        "maxY": 148
+      },
+      "image": "combined-study-7.png",
+      "sha256": "5807f671267f7d99126b3559982ce6575f708997f0fdd860888f7e6e9d15e335"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 157.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 727,
+      "bounds": {
+        "minX": 82,
+        "minY": 119,
+        "maxX": 143,
+        "maxY": 148
+      },
+      "image": "bike-alone-study-7.png",
+      "sha256": "fffb1b46dbb0168d8d5e054f54401a88861bc373a97e26411cd886bbe12b514c"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 157.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 172,
+      "bounds": {
+        "minX": 101,
+        "minY": 114,
+        "maxX": 117,
+        "maxY": 136
+      },
+      "image": "rider-alone-study-7.png",
+      "sha256": "19eb0c6cbe6b519a77d6f43e07636c2857a41c3be98d4be4c4805633e8fbad8e"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 157.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 727,
+      "bounds": {
+        "minX": 82,
+        "minY": 119,
+        "maxX": 143,
+        "maxY": 148
+      },
+      "image": "rider-hidden-study-7.png",
+      "sha256": "fffb1b46dbb0168d8d5e054f54401a88861bc373a97e26411cd886bbe12b514c"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 157.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 165,
+      "bounds": {
+        "minX": 101,
+        "minY": 114,
+        "maxX": 117,
+        "maxY": 136
+      },
+      "image": "visible-rider-mask-study-7.png",
+      "sha256": "2c2523cc2eaf0d1765327d6ca1b21e38f0e3fac6579b123221897229e3ccbe53"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 157.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 849,
+      "bounds": {
+        "minX": 82,
+        "minY": 114,
+        "maxX": 143,
+        "maxY": 148
+      },
+      "image": "ownership-mask-study-7.png",
+      "sha256": "ef63ebec82de0d54624c20299ad0ff2afe8694ee13b8c9b537d22758cb6fbf6b"
+    },
+    {
+      "view": "combined",
+      "yaw": 180,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 881,
+      "bounds": {
+        "minX": 81,
+        "minY": 115,
+        "maxX": 144,
+        "maxY": 141
+      },
+      "image": "combined-study-8.png",
+      "sha256": "8467bc9260bac77da53fc136bb31fe7d2677c7cf83b03c6c5ddf278ed295ef0a"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 180,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 764,
+      "bounds": {
+        "minX": 81,
+        "minY": 121,
+        "maxX": 144,
+        "maxY": 141
+      },
+      "image": "bike-alone-study-8.png",
+      "sha256": "7d183ac8e5d6fc9840fff965fec29466f69ac9e7130fd5daceace5e2741faa19"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 180,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 160,
+      "bounds": {
+        "minX": 101,
+        "minY": 115,
+        "maxX": 116,
+        "maxY": 138
+      },
+      "image": "rider-alone-study-8.png",
+      "sha256": "b44a90bac187bec70cca7490e97436b94b7da8bdcc378fc02754731c8a080102"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 180,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 764,
+      "bounds": {
+        "minX": 81,
+        "minY": 121,
+        "maxX": 144,
+        "maxY": 141
+      },
+      "image": "rider-hidden-study-8.png",
+      "sha256": "7d183ac8e5d6fc9840fff965fec29466f69ac9e7130fd5daceace5e2741faa19"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 180,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 157,
+      "bounds": {
+        "minX": 101,
+        "minY": 115,
+        "maxX": 116,
+        "maxY": 138
+      },
+      "image": "visible-rider-mask-study-8.png",
+      "sha256": "1b25915556546f0ba95b8e5ac943a7e05cbded2c40723ad5aa7681527e9a6886"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 180,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 881,
+      "bounds": {
+        "minX": 81,
+        "minY": 115,
+        "maxX": 144,
+        "maxY": 141
+      },
+      "image": "ownership-mask-study-8.png",
+      "sha256": "b29650156edb6d6bddd98c210f967f80336d32d5c5cf9ac8225e40460cbb69eb"
+    },
+    {
+      "view": "combined",
+      "yaw": 202.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 846,
+      "bounds": {
+        "minX": 82,
+        "minY": 117,
+        "maxX": 143,
+        "maxY": 148
+      },
+      "image": "combined-study-9.png",
+      "sha256": "3141e54e0f4b7e2953c5eb34875306aba8dc34aae8675cb3233c4566c8a39f67"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 202.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 739,
+      "bounds": {
+        "minX": 82,
+        "minY": 119,
+        "maxX": 143,
+        "maxY": 148
+      },
+      "image": "bike-alone-study-9.png",
+      "sha256": "5989cf0c6cdf5c2a34a720e06ddf0065c14a429fb4e32a488282b20dc91085bc"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 202.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 159,
+      "bounds": {
+        "minX": 101,
+        "minY": 117,
+        "maxX": 117,
+        "maxY": 139
+      },
+      "image": "rider-alone-study-9.png",
+      "sha256": "e873231450659cbcf84b720fab9803ceec667ffa6465cb1f88d1127dc7405cff"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 202.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 739,
+      "bounds": {
+        "minX": 82,
+        "minY": 119,
+        "maxX": 143,
+        "maxY": 148
+      },
+      "image": "rider-hidden-study-9.png",
+      "sha256": "5989cf0c6cdf5c2a34a720e06ddf0065c14a429fb4e32a488282b20dc91085bc"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 202.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 155,
+      "bounds": {
+        "minX": 101,
+        "minY": 117,
+        "maxX": 117,
+        "maxY": 139
+      },
+      "image": "visible-rider-mask-study-9.png",
+      "sha256": "552127c43fa19d6ad092f772580a01c39fb80331385706db23fcf07e9f6ede7c"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 202.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 846,
+      "bounds": {
+        "minX": 82,
+        "minY": 117,
+        "maxX": 143,
+        "maxY": 148
+      },
+      "image": "ownership-mask-study-9.png",
+      "sha256": "a807d39ec51753e02d11f22f2a79d30e062273de60cbca7bf96edd9782dba83e"
+    },
+    {
+      "view": "combined",
+      "yaw": 225,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 741,
+      "bounds": {
+        "minX": 88,
+        "minY": 112,
+        "maxX": 136,
+        "maxY": 153
+      },
+      "image": "combined-study-10.png",
+      "sha256": "1729f1db089b14e22a8a0b47aab8fed6bf44ce1bcc709949b7df411a42fa7c06"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 225,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 638,
+      "bounds": {
+        "minX": 88,
+        "minY": 112,
+        "maxX": 136,
+        "maxY": 153
+      },
+      "image": "bike-alone-study-10.png",
+      "sha256": "1aa66794ca1a4760c8b6cd44309058382e4d995cfc251a1e2dfebcdd3a5af099"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 225,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 168,
+      "bounds": {
+        "minX": 103,
+        "minY": 118,
+        "maxX": 118,
+        "maxY": 140
+      },
+      "image": "rider-alone-study-10.png",
+      "sha256": "7e4a635205de68048e2d3fa802532186f21fc6105c02724368424c405bdd459a"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 225,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 638,
+      "bounds": {
+        "minX": 88,
+        "minY": 112,
+        "maxX": 136,
+        "maxY": 153
+      },
+      "image": "rider-hidden-study-10.png",
+      "sha256": "1aa66794ca1a4760c8b6cd44309058382e4d995cfc251a1e2dfebcdd3a5af099"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 225,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 161,
+      "bounds": {
+        "minX": 103,
+        "minY": 118,
+        "maxX": 118,
+        "maxY": 140
+      },
+      "image": "visible-rider-mask-study-10.png",
+      "sha256": "c07099904becbcc1d986557c249086a07bad7b83381d253ef57a0d5186e4a824"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 225,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 741,
+      "bounds": {
+        "minX": 88,
+        "minY": 112,
+        "maxX": 136,
+        "maxY": 153
+      },
+      "image": "ownership-mask-study-10.png",
+      "sha256": "da6ac72f367b440d3c9798d969f1646a7560e4de0a9bfadcad9857fe61c647a5"
+    },
+    {
+      "view": "combined",
+      "yaw": 247.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 601,
+      "bounds": {
+        "minX": 96,
+        "minY": 107,
+        "maxX": 127,
+        "maxY": 157
+      },
+      "image": "combined-study-11.png",
+      "sha256": "7f01b97b9f71945dfd00db692eae73d8fa8942948a8762b5bff878c9b01b9ac8"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 247.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 530,
+      "bounds": {
+        "minX": 96,
+        "minY": 107,
+        "maxX": 127,
+        "maxY": 157
+      },
+      "image": "bike-alone-study-11.png",
+      "sha256": "ba2003f7aae78ce3faa5f9c919cba23b8c8752785ab201fc2fa99ec04cb4b8bc"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 247.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 166,
+      "bounds": {
+        "minX": 105,
+        "minY": 119,
+        "maxX": 117,
+        "maxY": 140
+      },
+      "image": "rider-alone-study-11.png",
+      "sha256": "424ccbfd1accb89399af0fc5e0f757f4ddf792abd61fe4274f77011384faa458"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 247.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 530,
+      "bounds": {
+        "minX": 96,
+        "minY": 107,
+        "maxX": 127,
+        "maxY": 157
+      },
+      "image": "rider-hidden-study-11.png",
+      "sha256": "ba2003f7aae78ce3faa5f9c919cba23b8c8752785ab201fc2fa99ec04cb4b8bc"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 247.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 159,
+      "bounds": {
+        "minX": 105,
+        "minY": 119,
+        "maxX": 117,
+        "maxY": 140
+      },
+      "image": "visible-rider-mask-study-11.png",
+      "sha256": "683b48776d467b59dcbe8a9e6c9f4c27ba9cb8cccaaa02fb3876f69357e59af1"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 247.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 601,
+      "bounds": {
+        "minX": 96,
+        "minY": 107,
+        "maxX": 127,
+        "maxY": 157
+      },
+      "image": "ownership-mask-study-11.png",
+      "sha256": "929b01af299400ba142d2591a954283ea851b578fe80dbc72a9a52095cecabf2"
+    },
+    {
+      "view": "combined",
+      "yaw": 270,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 488,
+      "bounds": {
+        "minX": 106,
+        "minY": 106,
+        "maxX": 117,
+        "maxY": 158
+      },
+      "image": "combined-study-12.png",
+      "sha256": "eff1a98e8e43a04e69df923f3e77eef8f8f43d9eaf8156af6c27ce53e2b96ad3"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 270,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 448,
+      "bounds": {
+        "minX": 106,
+        "minY": 106,
+        "maxX": 117,
+        "maxY": 158
+      },
+      "image": "bike-alone-study-12.png",
+      "sha256": "eb8345a10e285dfc84ee68edc36a6329dd1eef34912d49438392ca4e971128af"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 270,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 166,
+      "bounds": {
+        "minX": 106,
+        "minY": 119,
+        "maxX": 117,
+        "maxY": 139
+      },
+      "image": "rider-alone-study-12.png",
+      "sha256": "da6b49a5395cbbe1a8427e131f4a81acae7e403bffdb3a86d6d7b5469d72b9b9"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 270,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 448,
+      "bounds": {
+        "minX": 106,
+        "minY": 106,
+        "maxX": 117,
+        "maxY": 158
+      },
+      "image": "rider-hidden-study-12.png",
+      "sha256": "eb8345a10e285dfc84ee68edc36a6329dd1eef34912d49438392ca4e971128af"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 270,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 164,
+      "bounds": {
+        "minX": 106,
+        "minY": 119,
+        "maxX": 117,
+        "maxY": 139
+      },
+      "image": "visible-rider-mask-study-12.png",
+      "sha256": "a3b76c6468d320ac51be9bbdd2ad49fbc082baef2ff1bdfe1cd49c3d1d180d06"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 270,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 488,
+      "bounds": {
+        "minX": 106,
+        "minY": 106,
+        "maxX": 117,
+        "maxY": 158
+      },
+      "image": "ownership-mask-study-12.png",
+      "sha256": "d09843f5bbc7e18e077b581637528955ebc3c1104cc92e90cacd0e85d53cff67"
+    },
+    {
+      "view": "combined",
+      "yaw": 292.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 601,
+      "bounds": {
+        "minX": 96,
+        "minY": 107,
+        "maxX": 127,
+        "maxY": 157
+      },
+      "image": "combined-study-13.png",
+      "sha256": "a85ccec4e51b57261f944fe0ddaffad262c01e2968cd668090bb980d976fcafc"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 292.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 530,
+      "bounds": {
+        "minX": 96,
+        "minY": 107,
+        "maxX": 127,
+        "maxY": 157
+      },
+      "image": "bike-alone-study-13.png",
+      "sha256": "8d7a9c92856b12721aace146d8f21b289e139692c3661a1990ee75cd8963c5fb"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 292.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 167,
+      "bounds": {
+        "minX": 106,
+        "minY": 119,
+        "maxX": 118,
+        "maxY": 140
+      },
+      "image": "rider-alone-study-13.png",
+      "sha256": "1d97225de3041a318bd97e54364a00c7a6c0124b8e7d3767411a6977210ff75b"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 292.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 530,
+      "bounds": {
+        "minX": 96,
+        "minY": 107,
+        "maxX": 127,
+        "maxY": 157
+      },
+      "image": "rider-hidden-study-13.png",
+      "sha256": "8d7a9c92856b12721aace146d8f21b289e139692c3661a1990ee75cd8963c5fb"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 292.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 160,
+      "bounds": {
+        "minX": 106,
+        "minY": 119,
+        "maxX": 118,
+        "maxY": 140
+      },
+      "image": "visible-rider-mask-study-13.png",
+      "sha256": "76b2127cd8bbbb5a4db81e77ae760b6b9de34d11a861f8b13efea45b272c80a4"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 292.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 601,
+      "bounds": {
+        "minX": 96,
+        "minY": 107,
+        "maxX": 127,
+        "maxY": 157
+      },
+      "image": "ownership-mask-study-13.png",
+      "sha256": "4b15e1c4b001a4a293843342e24c03ba0be91b7f2e0fb87547f9b031e64d5ba4"
+    },
+    {
+      "view": "combined",
+      "yaw": 315,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 741,
+      "bounds": {
+        "minX": 87,
+        "minY": 112,
+        "maxX": 135,
+        "maxY": 153
+      },
+      "image": "combined-study-14.png",
+      "sha256": "e462fc7e224f5a11f445883775fe3b94314bbb33201419e04e6c455dd5299b04"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 315,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 638,
+      "bounds": {
+        "minX": 87,
+        "minY": 112,
+        "maxX": 135,
+        "maxY": 153
+      },
+      "image": "bike-alone-study-14.png",
+      "sha256": "b1a5b63dcbeb27d3540bacaf6777ae4247293cb0bd289e43f5bbccda8decfd06"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 315,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 168,
+      "bounds": {
+        "minX": 105,
+        "minY": 118,
+        "maxX": 120,
+        "maxY": 140
+      },
+      "image": "rider-alone-study-14.png",
+      "sha256": "2f86999bee14012e37a0b7d31726f718c981f2a256a0e4a023e9a60e4f40729f"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 315,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 638,
+      "bounds": {
+        "minX": 87,
+        "minY": 112,
+        "maxX": 135,
+        "maxY": 153
+      },
+      "image": "rider-hidden-study-14.png",
+      "sha256": "b1a5b63dcbeb27d3540bacaf6777ae4247293cb0bd289e43f5bbccda8decfd06"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 315,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 161,
+      "bounds": {
+        "minX": 105,
+        "minY": 118,
+        "maxX": 120,
+        "maxY": 140
+      },
+      "image": "visible-rider-mask-study-14.png",
+      "sha256": "2ba0c12619bb5bad8511769d2f7e54aeb032553b58a286b6ce9adcb73be83c3b"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 315,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 741,
+      "bounds": {
+        "minX": 87,
+        "minY": 112,
+        "maxX": 135,
+        "maxY": 153
+      },
+      "image": "ownership-mask-study-14.png",
+      "sha256": "118aeb3df81696864fe1c998bc92603a7d2853dd579e748b4bc0a49b8ea77577"
+    },
+    {
+      "view": "combined",
+      "yaw": 337.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 846,
+      "bounds": {
+        "minX": 80,
+        "minY": 117,
+        "maxX": 141,
+        "maxY": 148
+      },
+      "image": "combined-study-15.png",
+      "sha256": "1385360512b987f4bf0e0266286fc52087ffd0e417529b59145a3abf8726809f"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 337.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 739,
+      "bounds": {
+        "minX": 80,
+        "minY": 119,
+        "maxX": 141,
+        "maxY": 148
+      },
+      "image": "bike-alone-study-15.png",
+      "sha256": "53c2d91a689863a731e33c919b387d76551136156bdb50aa1091277522219da4"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 337.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 159,
+      "bounds": {
+        "minX": 106,
+        "minY": 117,
+        "maxX": 122,
+        "maxY": 139
+      },
+      "image": "rider-alone-study-15.png",
+      "sha256": "96f30346b4c1f2c64bae1fdf278644dffdac0484e5aee7eba49ad03918f11b98"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 337.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 739,
+      "bounds": {
+        "minX": 80,
+        "minY": 119,
+        "maxX": 141,
+        "maxY": 148
+      },
+      "image": "rider-hidden-study-15.png",
+      "sha256": "53c2d91a689863a731e33c919b387d76551136156bdb50aa1091277522219da4"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 337.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 155,
+      "bounds": {
+        "minX": 106,
+        "minY": 117,
+        "maxX": 122,
+        "maxY": 139
+      },
+      "image": "visible-rider-mask-study-15.png",
+      "sha256": "5155743ff934eb5a3bd2408af7ce31bc093ccd0efbcbc1fa8a8705872ba808ab"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 337.5,
+      "mode": "study",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 846,
+      "bounds": {
+        "minX": 80,
+        "minY": 117,
+        "maxX": 141,
+        "maxY": 148
+      },
+      "image": "ownership-mask-study-15.png",
+      "sha256": "9b250e5e9ffe6c7620e812d7d8440be6387eb7ebad02bbac5ddb575609df3fe3"
+    },
+    {
+      "view": "combined",
+      "yaw": 0,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1232,
+      "bounds": {
+        "minX": 82,
+        "minY": 75,
+        "maxX": 144,
+        "maxY": 113
+      },
+      "image": "combined-engine-0.png",
+      "sha256": "c1e84189933c65f803175fa49bceaf4c9dfb52c11b9a6bf1e3cf245b8217c238"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 0,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1051,
+      "bounds": {
+        "minX": 82,
+        "minY": 89,
+        "maxX": 144,
+        "maxY": 113
+      },
+      "image": "bike-alone-engine-0.png",
+      "sha256": "680c339df5c6db1132d311c92236ef19e5ef0059adffb3c7b6533a0fef53be66"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 0,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 232,
+      "bounds": {
+        "minX": 101,
+        "minY": 75,
+        "maxX": 116,
+        "maxY": 108
+      },
+      "image": "rider-alone-engine-0.png",
+      "sha256": "469af2f29790d336471ddc4a520aa4d3400c5d265316b46f053bc981d7c84d00"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 0,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1051,
+      "bounds": {
+        "minX": 82,
+        "minY": 89,
+        "maxX": 144,
+        "maxY": 113
+      },
+      "image": "rider-hidden-engine-0.png",
+      "sha256": "680c339df5c6db1132d311c92236ef19e5ef0059adffb3c7b6533a0fef53be66"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 0,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 227,
+      "bounds": {
+        "minX": 101,
+        "minY": 75,
+        "maxX": 116,
+        "maxY": 108
+      },
+      "image": "visible-rider-mask-engine-0.png",
+      "sha256": "032e78941d378b20593108711f45d0865d92aabd07e6fdd08eba61c730effbba"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 0,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1225,
+      "bounds": {
+        "minX": 82,
+        "minY": 75,
+        "maxX": 144,
+        "maxY": 113
+      },
+      "image": "ownership-mask-engine-0.png",
+      "sha256": "abb2a685bd601b9661a4378e36accf2d194e686e28afb410d38a93fb0d1a3850"
+    },
+    {
+      "view": "combined",
+      "yaw": 22.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1195,
+      "bounds": {
+        "minX": 83,
+        "minY": 74,
+        "maxX": 142,
+        "maxY": 122
+      },
+      "image": "combined-engine-1.png",
+      "sha256": "3fcbf883b89298fe9d28fddac92225585bb7b08ed8458332a0b3f6c99aef8fe3"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 22.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1016,
+      "bounds": {
+        "minX": 83,
+        "minY": 82,
+        "maxX": 142,
+        "maxY": 122
+      },
+      "image": "bike-alone-engine-1.png",
+      "sha256": "0571633b6ffa69388e97bf2627d2594b49e873f5b3177156b7305d74ec19ef3a"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 22.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 236,
+      "bounds": {
+        "minX": 101,
+        "minY": 74,
+        "maxX": 117,
+        "maxY": 106
+      },
+      "image": "rider-alone-engine-1.png",
+      "sha256": "e15fe0957433b6ae8abc42a31922793079f690537b773b44f0172340bdbd0c70"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 22.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1016,
+      "bounds": {
+        "minX": 83,
+        "minY": 82,
+        "maxX": 142,
+        "maxY": 122
+      },
+      "image": "rider-hidden-engine-1.png",
+      "sha256": "0571633b6ffa69388e97bf2627d2594b49e873f5b3177156b7305d74ec19ef3a"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 22.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 220,
+      "bounds": {
+        "minX": 101,
+        "minY": 74,
+        "maxX": 117,
+        "maxY": 106
+      },
+      "image": "visible-rider-mask-engine-1.png",
+      "sha256": "96068c6b5f43bbb4005d7f1d928f04462f8103f7bfcf1e853038f30c24942701"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 22.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1187,
+      "bounds": {
+        "minX": 83,
+        "minY": 74,
+        "maxX": 142,
+        "maxY": 122
+      },
+      "image": "ownership-mask-engine-1.png",
+      "sha256": "674b03175b93e5211d966d406d355e11e395f43791814321932f21c60dcbcfcf"
+    },
+    {
+      "view": "combined",
+      "yaw": 45,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "image": "combined-engine-2.png",
+      "sha256": "8eec93de64a219e03370285bb7d2456b248234396dff5a3fb587ae2ff2ab7809"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 45,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 884,
+      "bounds": {
+        "minX": 88,
+        "minY": 74,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "image": "bike-alone-engine-2.png",
+      "sha256": "d0db3df52c2dff58a7db02b8a0acab2d73ff9bf011bb4592c5502ffe0b424bb9"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 45,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 246,
+      "bounds": {
+        "minX": 103,
+        "minY": 73,
+        "maxX": 117,
+        "maxY": 104
+      },
+      "image": "rider-alone-engine-2.png",
+      "sha256": "74ddc6285be0702620b31174d6cc15fa63cde85319b094782edbd37ef01fe8ec"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 45,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 884,
+      "bounds": {
+        "minX": 88,
+        "minY": 74,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "image": "rider-hidden-engine-2.png",
+      "sha256": "d0db3df52c2dff58a7db02b8a0acab2d73ff9bf011bb4592c5502ffe0b424bb9"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 45,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 228,
+      "bounds": {
+        "minX": 103,
+        "minY": 73,
+        "maxX": 117,
+        "maxY": 104
+      },
+      "image": "visible-rider-mask-engine-2.png",
+      "sha256": "1a834f32a12dda5f9cdef3df5d9ca1d8b806996c848c8d0e47c48d8755e391ea"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 45,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1049,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "image": "ownership-mask-engine-2.png",
+      "sha256": "143916051b8a59eb300b5186eda94339c1590ec00bda94d9629f5616d460d8a3"
+    },
+    {
+      "view": "combined",
+      "yaw": 67.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 816,
+      "bounds": {
+        "minX": 97,
+        "minY": 69,
+        "maxX": 126,
+        "maxY": 136
+      },
+      "image": "combined-engine-3.png",
+      "sha256": "052405e5f03a54d4a3111fc8ffa769751283c954ed55163e0f2e6b4db5954f18"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 67.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 689,
+      "bounds": {
+        "minX": 97,
+        "minY": 69,
+        "maxX": 126,
+        "maxY": 136
+      },
+      "image": "bike-alone-engine-3.png",
+      "sha256": "b1c3792c3f314bacca3e64fd009c3fe696bba6ed3944e8b170a57ef3d86ebf73"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 67.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 233,
+      "bounds": {
+        "minX": 105,
+        "minY": 72,
+        "maxX": 117,
+        "maxY": 102
+      },
+      "image": "rider-alone-engine-3.png",
+      "sha256": "6f99787918473d39856de1ad3ff584f5822d69dbb73fb7feecd39b7542c27e45"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 67.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 689,
+      "bounds": {
+        "minX": 97,
+        "minY": 69,
+        "maxX": 126,
+        "maxY": 136
+      },
+      "image": "rider-hidden-engine-3.png",
+      "sha256": "b1c3792c3f314bacca3e64fd009c3fe696bba6ed3944e8b170a57ef3d86ebf73"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 67.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 216,
+      "bounds": {
+        "minX": 105,
+        "minY": 72,
+        "maxX": 117,
+        "maxY": 102
+      },
+      "image": "visible-rider-mask-engine-3.png",
+      "sha256": "cb5afc10a006e50ef20fdfef37c80cf956f360aa007f24df3627c315514d50ff"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 67.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 814,
+      "bounds": {
+        "minX": 97,
+        "minY": 69,
+        "maxX": 126,
+        "maxY": 136
+      },
+      "image": "ownership-mask-engine-3.png",
+      "sha256": "3f964e4c864672655650a862c763e0d67792a20966a5e35013b226f8ae5bd6ee"
+    },
+    {
+      "view": "combined",
+      "yaw": 90,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 608,
+      "bounds": {
+        "minX": 106,
+        "minY": 68,
+        "maxX": 117,
+        "maxY": 138
+      },
+      "image": "combined-engine-4.png",
+      "sha256": "0a9426869a3f78d0ebd660d890c6aa98aff330e83abdfb574863660795a7ef29"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 90,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 554,
+      "bounds": {
+        "minX": 106,
+        "minY": 68,
+        "maxX": 117,
+        "maxY": 138
+      },
+      "image": "bike-alone-engine-4.png",
+      "sha256": "3f132933a32adb340c2770b9e21c2ffa26dda48a4f527e882b0979a26e1f9f9c"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 90,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 220,
+      "bounds": {
+        "minX": 106,
+        "minY": 72,
+        "maxX": 117,
+        "maxY": 100
+      },
+      "image": "rider-alone-engine-4.png",
+      "sha256": "56a81444fa3c1ded5f7d6218840d0c2e9ced20af0632dc483805c2870c696941"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 90,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 554,
+      "bounds": {
+        "minX": 106,
+        "minY": 68,
+        "maxX": 117,
+        "maxY": 138
+      },
+      "image": "rider-hidden-engine-4.png",
+      "sha256": "3f132933a32adb340c2770b9e21c2ffa26dda48a4f527e882b0979a26e1f9f9c"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 90,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 218,
+      "bounds": {
+        "minX": 106,
+        "minY": 72,
+        "maxX": 117,
+        "maxY": 100
+      },
+      "image": "visible-rider-mask-engine-4.png",
+      "sha256": "ee1346bc7fd4c1968cf3a79fee9934dfe122aee580548438bd7d302ccf2b82aa"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 90,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 608,
+      "bounds": {
+        "minX": 106,
+        "minY": 68,
+        "maxX": 117,
+        "maxY": 138
+      },
+      "image": "ownership-mask-engine-4.png",
+      "sha256": "886508f52cc7ad58486fd6da4da523b2bf410fd39d31318b9021441df4038591"
+    },
+    {
+      "view": "combined",
+      "yaw": 112.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 817,
+      "bounds": {
+        "minX": 97,
+        "minY": 69,
+        "maxX": 126,
+        "maxY": 136
+      },
+      "image": "combined-engine-5.png",
+      "sha256": "e69e595bb0b8283722b86eaa29434ae3fd3765121e02a1f0b01b1861ed6baf7e"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 112.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 690,
+      "bounds": {
+        "minX": 97,
+        "minY": 69,
+        "maxX": 126,
+        "maxY": 136
+      },
+      "image": "bike-alone-engine-5.png",
+      "sha256": "b5f91f2dacb9fc181ac82f3e5da168805b9d0a42708aaef620bc8cb53df3f59b"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 112.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 233,
+      "bounds": {
+        "minX": 106,
+        "minY": 72,
+        "maxX": 118,
+        "maxY": 102
+      },
+      "image": "rider-alone-engine-5.png",
+      "sha256": "95140e0edfd141eee196afa2f5af76f53f1c180fb376104177d480299ae4f293"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 112.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 690,
+      "bounds": {
+        "minX": 97,
+        "minY": 69,
+        "maxX": 126,
+        "maxY": 136
+      },
+      "image": "rider-hidden-engine-5.png",
+      "sha256": "b5f91f2dacb9fc181ac82f3e5da168805b9d0a42708aaef620bc8cb53df3f59b"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 112.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 216,
+      "bounds": {
+        "minX": 106,
+        "minY": 72,
+        "maxX": 118,
+        "maxY": 102
+      },
+      "image": "visible-rider-mask-engine-5.png",
+      "sha256": "0c7f776a51e6b64df339dd3012d8345ed5784c0639d2f8329d34636c17f10cb7"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 112.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 815,
+      "bounds": {
+        "minX": 97,
+        "minY": 69,
+        "maxX": 126,
+        "maxY": 136
+      },
+      "image": "ownership-mask-engine-5.png",
+      "sha256": "bf180cccecc68ad3b8df0ed8d01e8e1c7453e47464ce0f00a54f7d3c880c3e9f"
+    },
+    {
+      "view": "combined",
+      "yaw": 135,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 87,
+        "minY": 73,
+        "maxX": 135,
+        "maxY": 130
+      },
+      "image": "combined-engine-6.png",
+      "sha256": "712476c71e77c371d4e3b018d71c7287479a7b6dd176c6153e0afab93e69df5d"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 135,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 884,
+      "bounds": {
+        "minX": 87,
+        "minY": 74,
+        "maxX": 135,
+        "maxY": 130
+      },
+      "image": "bike-alone-engine-6.png",
+      "sha256": "d41414358995269c1d0709b57ca6393cb42f990a89e3e8f3f49e6d57b2ce42dd"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 135,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 246,
+      "bounds": {
+        "minX": 106,
+        "minY": 73,
+        "maxX": 120,
+        "maxY": 104
+      },
+      "image": "rider-alone-engine-6.png",
+      "sha256": "71ba68399ba28b4782c98228c7c64bacc28c0496cb9010e4aff01e8e9ad9244b"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 135,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 884,
+      "bounds": {
+        "minX": 87,
+        "minY": 74,
+        "maxX": 135,
+        "maxY": 130
+      },
+      "image": "rider-hidden-engine-6.png",
+      "sha256": "d41414358995269c1d0709b57ca6393cb42f990a89e3e8f3f49e6d57b2ce42dd"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 135,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 228,
+      "bounds": {
+        "minX": 106,
+        "minY": 73,
+        "maxX": 120,
+        "maxY": 104
+      },
+      "image": "visible-rider-mask-engine-6.png",
+      "sha256": "8dfa561615d6cded170e3f3deff8a81aa753c64f1eec87bda6e18bd82a33f248"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 135,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1049,
+      "bounds": {
+        "minX": 87,
+        "minY": 73,
+        "maxX": 135,
+        "maxY": 130
+      },
+      "image": "ownership-mask-engine-6.png",
+      "sha256": "8918ae080019949dd449fa9063e45079a3579bf858897bc6d55d82e76ab1c52c"
+    },
+    {
+      "view": "combined",
+      "yaw": 157.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1196,
+      "bounds": {
+        "minX": 81,
+        "minY": 74,
+        "maxX": 140,
+        "maxY": 122
+      },
+      "image": "combined-engine-7.png",
+      "sha256": "c012fafccfe79200a45a5e7272ff536334b02e947859188cb70b504540e2d7f1"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 157.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1016,
+      "bounds": {
+        "minX": 81,
+        "minY": 82,
+        "maxX": 140,
+        "maxY": 122
+      },
+      "image": "bike-alone-engine-7.png",
+      "sha256": "0d183d5e9096d86d04153a6e141a0bf4c8183b5c9dbc079625da06e86a5247c0"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 157.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 237,
+      "bounds": {
+        "minX": 106,
+        "minY": 74,
+        "maxX": 122,
+        "maxY": 106
+      },
+      "image": "rider-alone-engine-7.png",
+      "sha256": "8e592802a634f4405274535d5ff322847ffc63f538ebc267db963638d21cfd98"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 157.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1016,
+      "bounds": {
+        "minX": 81,
+        "minY": 82,
+        "maxX": 140,
+        "maxY": 122
+      },
+      "image": "rider-hidden-engine-7.png",
+      "sha256": "0d183d5e9096d86d04153a6e141a0bf4c8183b5c9dbc079625da06e86a5247c0"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 157.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 221,
+      "bounds": {
+        "minX": 106,
+        "minY": 74,
+        "maxX": 122,
+        "maxY": 106
+      },
+      "image": "visible-rider-mask-engine-7.png",
+      "sha256": "86482d9e490c189807defc39d7a17212d8c0d47533157a2ead0aed363e9803a4"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 157.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1188,
+      "bounds": {
+        "minX": 81,
+        "minY": 74,
+        "maxX": 140,
+        "maxY": 122
+      },
+      "image": "ownership-mask-engine-7.png",
+      "sha256": "754cbf19094c7f323a8b430c852a49c596e13eaf9bc8cbbe6f4762050931fed5"
+    },
+    {
+      "view": "combined",
+      "yaw": 180,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1232,
+      "bounds": {
+        "minX": 79,
+        "minY": 75,
+        "maxX": 141,
+        "maxY": 113
+      },
+      "image": "combined-engine-8.png",
+      "sha256": "fde0a800273ec4a73f8fab9e64a85a4090e45d85a49082e62b9dbaa5a8bd88bf"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 180,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1051,
+      "bounds": {
+        "minX": 79,
+        "minY": 89,
+        "maxX": 141,
+        "maxY": 113
+      },
+      "image": "bike-alone-engine-8.png",
+      "sha256": "0871c918d7615071a9b92b86609b819754dab236fd5a7aecf118c0294fdce2be"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 180,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 232,
+      "bounds": {
+        "minX": 107,
+        "minY": 75,
+        "maxX": 122,
+        "maxY": 108
+      },
+      "image": "rider-alone-engine-8.png",
+      "sha256": "b32b614330d29c9bbb22370507e92f9e112e838a450ceb3b6f7cdf1b1aa110c3"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 180,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1051,
+      "bounds": {
+        "minX": 79,
+        "minY": 89,
+        "maxX": 141,
+        "maxY": 113
+      },
+      "image": "rider-hidden-engine-8.png",
+      "sha256": "0871c918d7615071a9b92b86609b819754dab236fd5a7aecf118c0294fdce2be"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 180,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 227,
+      "bounds": {
+        "minX": 107,
+        "minY": 75,
+        "maxX": 122,
+        "maxY": 108
+      },
+      "image": "visible-rider-mask-engine-8.png",
+      "sha256": "d8ae06eb9d9269cd1b57d9bd2deeb70dfd771f2b10392da76daa4221813fa03b"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 180,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1225,
+      "bounds": {
+        "minX": 79,
+        "minY": 75,
+        "maxX": 141,
+        "maxY": 113
+      },
+      "image": "ownership-mask-engine-8.png",
+      "sha256": "7d51efc404485081ed1a5d9fb2751750a5d33ee26979d11a07fc926203629da0"
+    },
+    {
+      "view": "combined",
+      "yaw": 202.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1201,
+      "bounds": {
+        "minX": 81,
+        "minY": 77,
+        "maxX": 140,
+        "maxY": 122
+      },
+      "image": "combined-engine-9.png",
+      "sha256": "84668dbd83985bff5c687864e1f3a4de2d87902b3c88edc9366b5c3841993026"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 202.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1031,
+      "bounds": {
+        "minX": 81,
+        "minY": 82,
+        "maxX": 140,
+        "maxY": 122
+      },
+      "image": "bike-alone-engine-9.png",
+      "sha256": "c903185a4ac131361ce779dc9057c8b1e0d1ece59e5850ab8a032c965c4b0b3a"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 202.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 233,
+      "bounds": {
+        "minX": 106,
+        "minY": 77,
+        "maxX": 122,
+        "maxY": 110
+      },
+      "image": "rider-alone-engine-9.png",
+      "sha256": "40c7b688bbe71edcd817d9e8bbb50d1075f3a95fb1fa0b028a22b4b56c5fd126"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 202.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1031,
+      "bounds": {
+        "minX": 81,
+        "minY": 82,
+        "maxX": 140,
+        "maxY": 122
+      },
+      "image": "rider-hidden-engine-9.png",
+      "sha256": "c903185a4ac131361ce779dc9057c8b1e0d1ece59e5850ab8a032c965c4b0b3a"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 202.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 227,
+      "bounds": {
+        "minX": 106,
+        "minY": 77,
+        "maxX": 122,
+        "maxY": 110
+      },
+      "image": "visible-rider-mask-engine-9.png",
+      "sha256": "fc32a4fd20679cb287529ab723b8c94aec10269dd9e432cfa0128d76694708e1"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 202.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1192,
+      "bounds": {
+        "minX": 81,
+        "minY": 77,
+        "maxX": 140,
+        "maxY": 122
+      },
+      "image": "ownership-mask-engine-9.png",
+      "sha256": "ed01fd89eaf5288ffc6f528c58f7a7206f83729063ca1d8eab4ad1912fd4bd66"
+    },
+    {
+      "view": "combined",
+      "yaw": 225,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1053,
+      "bounds": {
+        "minX": 87,
+        "minY": 74,
+        "maxX": 135,
+        "maxY": 129
+      },
+      "image": "combined-engine-10.png",
+      "sha256": "4aca369da0f8adf9c16a1c3e1ccb93a89d4e22685777d4206fde2e513ecc2c16"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 225,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 904,
+      "bounds": {
+        "minX": 87,
+        "minY": 74,
+        "maxX": 135,
+        "maxY": 129
+      },
+      "image": "bike-alone-engine-10.png",
+      "sha256": "2b73732df98dd80cdeab1da7844d15658168f25e4b280971355e0e656e583f5d"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 225,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 235,
+      "bounds": {
+        "minX": 105,
+        "minY": 79,
+        "maxX": 120,
+        "maxY": 110
+      },
+      "image": "rider-alone-engine-10.png",
+      "sha256": "6c14749ccc234d89b47b58b8cf49feab9e5d35a6830b11ce2fb891ec7b00bb3f"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 225,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 904,
+      "bounds": {
+        "minX": 87,
+        "minY": 74,
+        "maxX": 135,
+        "maxY": 129
+      },
+      "image": "rider-hidden-engine-10.png",
+      "sha256": "2b73732df98dd80cdeab1da7844d15658168f25e4b280971355e0e656e583f5d"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 225,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 222,
+      "bounds": {
+        "minX": 105,
+        "minY": 79,
+        "maxX": 120,
+        "maxY": 110
+      },
+      "image": "visible-rider-mask-engine-10.png",
+      "sha256": "5b1594f316ec36f2b424794a3de88c569b93be47d09f5c998feeffdd82b8d3b7"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 225,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1046,
+      "bounds": {
+        "minX": 87,
+        "minY": 74,
+        "maxX": 135,
+        "maxY": 129
+      },
+      "image": "ownership-mask-engine-10.png",
+      "sha256": "be03d67407b5362e9a199fb903ddbf314a0f07bd91f00c03a59a36551066fd67"
+    },
+    {
+      "view": "combined",
+      "yaw": 247.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 814,
+      "bounds": {
+        "minX": 97,
+        "minY": 68,
+        "maxX": 126,
+        "maxY": 134
+      },
+      "image": "combined-engine-11.png",
+      "sha256": "7d50b991a3add86deec3abf83209bde290b84725ad5f83e797b4c5dd51b49965"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 247.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 705,
+      "bounds": {
+        "minX": 97,
+        "minY": 68,
+        "maxX": 126,
+        "maxY": 134
+      },
+      "image": "bike-alone-engine-11.png",
+      "sha256": "3977bde1cdc9bede52316d6cdb3a638b945bc4baae9ca5db0139aa90d7b203be"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 247.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 231,
+      "bounds": {
+        "minX": 106,
+        "minY": 80,
+        "maxX": 118,
+        "maxY": 110
+      },
+      "image": "rider-alone-engine-11.png",
+      "sha256": "0d23778720988725396d4d62db0a222c7ad6b06de52ad1c34f3b88efe6955eea"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 247.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 705,
+      "bounds": {
+        "minX": 97,
+        "minY": 68,
+        "maxX": 126,
+        "maxY": 134
+      },
+      "image": "rider-hidden-engine-11.png",
+      "sha256": "3977bde1cdc9bede52316d6cdb3a638b945bc4baae9ca5db0139aa90d7b203be"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 247.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 219,
+      "bounds": {
+        "minX": 106,
+        "minY": 80,
+        "maxX": 117,
+        "maxY": 110
+      },
+      "image": "visible-rider-mask-engine-11.png",
+      "sha256": "4e3bcd17c88ed8c03a6e799918cdb2b3829d6aff1c10643870ec6d2a43b31770"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 247.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 814,
+      "bounds": {
+        "minX": 97,
+        "minY": 68,
+        "maxX": 126,
+        "maxY": 134
+      },
+      "image": "ownership-mask-engine-11.png",
+      "sha256": "2a6046f5a1bd3670f44e3bf84b5981780c4b69ef325462d23ba3b7376bf10233"
+    },
+    {
+      "view": "combined",
+      "yaw": 270,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 596,
+      "bounds": {
+        "minX": 106,
+        "minY": 67,
+        "maxX": 117,
+        "maxY": 135
+      },
+      "image": "combined-engine-12.png",
+      "sha256": "d3d1f2370fbbefc7827f66e9a2f0b29a8d36e0cd661aadcea44b704f16e643bd"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 270,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 540,
+      "bounds": {
+        "minX": 106,
+        "minY": 67,
+        "maxX": 117,
+        "maxY": 135
+      },
+      "image": "bike-alone-engine-12.png",
+      "sha256": "45b10cc3e88409541d9984c018918858538fa5765ace0a546cce98bb5450adf6"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 270,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 228,
+      "bounds": {
+        "minX": 106,
+        "minY": 80,
+        "maxX": 117,
+        "maxY": 109
+      },
+      "image": "rider-alone-engine-12.png",
+      "sha256": "38b0e2d2511108b066c7561a768435b7440e8da7b8e0894546f139f439386e43"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 270,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 540,
+      "bounds": {
+        "minX": 106,
+        "minY": 67,
+        "maxX": 117,
+        "maxY": 135
+      },
+      "image": "rider-hidden-engine-12.png",
+      "sha256": "45b10cc3e88409541d9984c018918858538fa5765ace0a546cce98bb5450adf6"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 270,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 224,
+      "bounds": {
+        "minX": 106,
+        "minY": 80,
+        "maxX": 117,
+        "maxY": 109
+      },
+      "image": "visible-rider-mask-engine-12.png",
+      "sha256": "fbfca75a63c353c1a33bd5ed4b90b3bc3ae02bf7530d2a1f8b84689659b84541"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 270,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 596,
+      "bounds": {
+        "minX": 106,
+        "minY": 67,
+        "maxX": 117,
+        "maxY": 135
+      },
+      "image": "ownership-mask-engine-12.png",
+      "sha256": "b8207f3085fde579ca48a31b1bbc41ab863573bdd9e565c7d0a38cf9c0c3e814"
+    },
+    {
+      "view": "combined",
+      "yaw": 292.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 814,
+      "bounds": {
+        "minX": 97,
+        "minY": 68,
+        "maxX": 126,
+        "maxY": 134
+      },
+      "image": "combined-engine-13.png",
+      "sha256": "0f923836abe5535dbc3a375c22539cbccc05c63e21486111d44cba95f7c88829"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 292.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 705,
+      "bounds": {
+        "minX": 97,
+        "minY": 68,
+        "maxX": 126,
+        "maxY": 134
+      },
+      "image": "bike-alone-engine-13.png",
+      "sha256": "72d726d67c17cbd497632336d8ddcdcec1efa64248ac1c7740e74221124b535c"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 292.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 231,
+      "bounds": {
+        "minX": 105,
+        "minY": 80,
+        "maxX": 117,
+        "maxY": 110
+      },
+      "image": "rider-alone-engine-13.png",
+      "sha256": "fb29e0dedc565f39141ce8f9cc0e53adc546f38279bb15aae64b2e6d65ffe081"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 292.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 705,
+      "bounds": {
+        "minX": 97,
+        "minY": 68,
+        "maxX": 126,
+        "maxY": 134
+      },
+      "image": "rider-hidden-engine-13.png",
+      "sha256": "72d726d67c17cbd497632336d8ddcdcec1efa64248ac1c7740e74221124b535c"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 292.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 219,
+      "bounds": {
+        "minX": 106,
+        "minY": 80,
+        "maxX": 117,
+        "maxY": 110
+      },
+      "image": "visible-rider-mask-engine-13.png",
+      "sha256": "f028ce164efa43bf585894f4163d91b5682d80343e3c064b6feab3193713d424"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 292.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 814,
+      "bounds": {
+        "minX": 97,
+        "minY": 68,
+        "maxX": 126,
+        "maxY": 134
+      },
+      "image": "ownership-mask-engine-13.png",
+      "sha256": "638e859fc0acd16d4a977d7494a1eb698fe2bbba4fd547efa40b7b18a8807b64"
+    },
+    {
+      "view": "combined",
+      "yaw": 315,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 74,
+        "maxX": 136,
+        "maxY": 129
+      },
+      "image": "combined-engine-14.png",
+      "sha256": "fe3874e60d25319212dd02e15de44cedab7bfad4c591c360c8b491644250909d"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 315,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 904,
+      "bounds": {
+        "minX": 88,
+        "minY": 74,
+        "maxX": 136,
+        "maxY": 129
+      },
+      "image": "bike-alone-engine-14.png",
+      "sha256": "5b0e566562a230f0a27d81d49539928e2ede3ac2d6a8d529d7c1ca7db3c3554a"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 315,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 236,
+      "bounds": {
+        "minX": 103,
+        "minY": 79,
+        "maxX": 118,
+        "maxY": 110
+      },
+      "image": "rider-alone-engine-14.png",
+      "sha256": "b1ff971df4b2f5545555b6c55613d598cf5bd078707103d93dc19b7e591b68f3"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 315,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 904,
+      "bounds": {
+        "minX": 88,
+        "minY": 74,
+        "maxX": 136,
+        "maxY": 129
+      },
+      "image": "rider-hidden-engine-14.png",
+      "sha256": "5b0e566562a230f0a27d81d49539928e2ede3ac2d6a8d529d7c1ca7db3c3554a"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 315,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 223,
+      "bounds": {
+        "minX": 103,
+        "minY": 79,
+        "maxX": 118,
+        "maxY": 110
+      },
+      "image": "visible-rider-mask-engine-14.png",
+      "sha256": "d2ea1ad3743eb3fb8815d4dae21f17bbee387cadf77da45fe583ae33b6b768de"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 315,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1047,
+      "bounds": {
+        "minX": 88,
+        "minY": 74,
+        "maxX": 136,
+        "maxY": 129
+      },
+      "image": "ownership-mask-engine-14.png",
+      "sha256": "7923a97afdba7e501761f66b33ac5b43f3b3666d4b0631cb7859d73a59e9093f"
+    },
+    {
+      "view": "combined",
+      "yaw": 337.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1202,
+      "bounds": {
+        "minX": 83,
+        "minY": 77,
+        "maxX": 142,
+        "maxY": 122
+      },
+      "image": "combined-engine-15.png",
+      "sha256": "b1f086640d9b3c9a281c26eada772a2450d6f9dbb50fc6253dc7e6183a7e8c02"
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 337.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1031,
+      "bounds": {
+        "minX": 83,
+        "minY": 82,
+        "maxX": 142,
+        "maxY": 122
+      },
+      "image": "bike-alone-engine-15.png",
+      "sha256": "e6c2e5362e41f3fc238eafa005ed497fe598f964c19e4c8bbd23a77227d2ec74"
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 337.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 1,
+      "edgePixels": 0,
+      "occupiedPixels": 234,
+      "bounds": {
+        "minX": 101,
+        "minY": 77,
+        "maxX": 117,
+        "maxY": 110
+      },
+      "image": "rider-alone-engine-15.png",
+      "sha256": "65fd080b3862c051b83f99688c26777a53abac1190f82293efaec1e013647ab4"
+    },
+    {
+      "view": "rider-hidden",
+      "yaw": 337.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 3,
+      "edgePixels": 0,
+      "occupiedPixels": 1031,
+      "bounds": {
+        "minX": 83,
+        "minY": 82,
+        "maxX": 142,
+        "maxY": 122
+      },
+      "image": "rider-hidden-engine-15.png",
+      "sha256": "e6c2e5362e41f3fc238eafa005ed497fe598f964c19e4c8bbd23a77227d2ec74"
+    },
+    {
+      "view": "visible-rider-mask",
+      "yaw": 337.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 228,
+      "bounds": {
+        "minX": 101,
+        "minY": 77,
+        "maxX": 117,
+        "maxY": 110
+      },
+      "image": "visible-rider-mask-engine-15.png",
+      "sha256": "1a3ce4314bdff70770a8de8acac9e3261aa77cd881a06661ac96289ed42dad76"
+    },
+    {
+      "view": "ownership-mask",
+      "yaw": 337.5,
+      "mode": "engine",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1193,
+      "bounds": {
+        "minX": 83,
+        "minY": 77,
+        "maxX": 142,
+        "maxY": 122
+      },
+      "image": "ownership-mask-engine-15.png",
+      "sha256": "b1a8d780ea8143cb5d04a7b570fbda5ee1bd847f78b4493901e35d940a7e827a"
+    }
+  ],
+  "depth": [
+    {
+      "yaw": 0,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 159,
+      "bikeTotal": 764,
+      "riderVisible": 156,
+      "bikeVisible": 724,
+      "riderOccludedByBike": 3,
+      "bikeOccludedByRider": 40,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 22.5,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 172,
+      "bikeTotal": 727,
+      "riderVisible": 165,
+      "bikeVisible": 684,
+      "riderOccludedByBike": 7,
+      "bikeOccludedByRider": 43,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 45,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 174,
+      "bikeTotal": 626,
+      "riderVisible": 165,
+      "bikeVisible": 578,
+      "riderOccludedByBike": 9,
+      "bikeOccludedByRider": 48,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 67.5,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 165,
+      "bikeTotal": 519,
+      "riderVisible": 155,
+      "bikeVisible": 446,
+      "riderOccludedByBike": 10,
+      "bikeOccludedByRider": 73,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 90,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 160,
+      "bikeTotal": 452,
+      "riderVisible": 160,
+      "bikeVisible": 316,
+      "riderOccludedByBike": 0,
+      "bikeOccludedByRider": 136,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 112.5,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 165,
+      "bikeTotal": 519,
+      "riderVisible": 155,
+      "bikeVisible": 446,
+      "riderOccludedByBike": 10,
+      "bikeOccludedByRider": 73,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 135,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 174,
+      "bikeTotal": 626,
+      "riderVisible": 165,
+      "bikeVisible": 578,
+      "riderOccludedByBike": 9,
+      "bikeOccludedByRider": 48,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 157.5,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 172,
+      "bikeTotal": 727,
+      "riderVisible": 165,
+      "bikeVisible": 684,
+      "riderOccludedByBike": 7,
+      "bikeOccludedByRider": 43,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 180,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 160,
+      "bikeTotal": 764,
+      "riderVisible": 157,
+      "bikeVisible": 724,
+      "riderOccludedByBike": 3,
+      "bikeOccludedByRider": 40,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 202.5,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 159,
+      "bikeTotal": 739,
+      "riderVisible": 155,
+      "bikeVisible": 691,
+      "riderOccludedByBike": 4,
+      "bikeOccludedByRider": 48,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 225,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 168,
+      "bikeTotal": 638,
+      "riderVisible": 161,
+      "bikeVisible": 580,
+      "riderOccludedByBike": 7,
+      "bikeOccludedByRider": 58,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 247.5,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 166,
+      "bikeTotal": 530,
+      "riderVisible": 159,
+      "bikeVisible": 442,
+      "riderOccludedByBike": 7,
+      "bikeOccludedByRider": 88,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 270,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 166,
+      "bikeTotal": 448,
+      "riderVisible": 164,
+      "bikeVisible": 324,
+      "riderOccludedByBike": 2,
+      "bikeOccludedByRider": 124,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 292.5,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 167,
+      "bikeTotal": 530,
+      "riderVisible": 160,
+      "bikeVisible": 441,
+      "riderOccludedByBike": 7,
+      "bikeOccludedByRider": 89,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 315,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 168,
+      "bikeTotal": 638,
+      "riderVisible": 161,
+      "bikeVisible": 580,
+      "riderOccludedByBike": 7,
+      "bikeOccludedByRider": 58,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 337.5,
+      "mode": "study",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 159,
+      "bikeTotal": 739,
+      "riderVisible": 155,
+      "bikeVisible": 691,
+      "riderOccludedByBike": 4,
+      "bikeOccludedByRider": 48,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 0,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 232,
+      "bikeTotal": 1051,
+      "riderVisible": 227,
+      "bikeVisible": 998,
+      "riderOccludedByBike": 5,
+      "bikeOccludedByRider": 53,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 22.5,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 236,
+      "bikeTotal": 1016,
+      "riderVisible": 220,
+      "bikeVisible": 967,
+      "riderOccludedByBike": 16,
+      "bikeOccludedByRider": 49,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 45,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 246,
+      "bikeTotal": 884,
+      "riderVisible": 225,
+      "bikeVisible": 824,
+      "riderOccludedByBike": 21,
+      "bikeOccludedByRider": 60,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 67.5,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 233,
+      "bikeTotal": 689,
+      "riderVisible": 213,
+      "bikeVisible": 601,
+      "riderOccludedByBike": 20,
+      "bikeOccludedByRider": 88,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 90,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 220,
+      "bikeTotal": 554,
+      "riderVisible": 214,
+      "bikeVisible": 394,
+      "riderOccludedByBike": 6,
+      "bikeOccludedByRider": 160,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 112.5,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 233,
+      "bikeTotal": 690,
+      "riderVisible": 213,
+      "bikeVisible": 602,
+      "riderOccludedByBike": 20,
+      "bikeOccludedByRider": 88,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 135,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 246,
+      "bikeTotal": 884,
+      "riderVisible": 225,
+      "bikeVisible": 824,
+      "riderOccludedByBike": 21,
+      "bikeOccludedByRider": 60,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 157.5,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 237,
+      "bikeTotal": 1016,
+      "riderVisible": 221,
+      "bikeVisible": 967,
+      "riderOccludedByBike": 16,
+      "bikeOccludedByRider": 49,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 180,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 232,
+      "bikeTotal": 1051,
+      "riderVisible": 227,
+      "bikeVisible": 998,
+      "riderOccludedByBike": 5,
+      "bikeOccludedByRider": 53,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 202.5,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 233,
+      "bikeTotal": 1031,
+      "riderVisible": 226,
+      "bikeVisible": 966,
+      "riderOccludedByBike": 7,
+      "bikeOccludedByRider": 65,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 225,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 235,
+      "bikeTotal": 904,
+      "riderVisible": 221,
+      "bikeVisible": 825,
+      "riderOccludedByBike": 14,
+      "bikeOccludedByRider": 79,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 247.5,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 231,
+      "bikeTotal": 705,
+      "riderVisible": 218,
+      "bikeVisible": 596,
+      "riderOccludedByBike": 13,
+      "bikeOccludedByRider": 109,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 270,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 228,
+      "bikeTotal": 540,
+      "riderVisible": 222,
+      "bikeVisible": 374,
+      "riderOccludedByBike": 6,
+      "bikeOccludedByRider": 166,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 292.5,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 231,
+      "bikeTotal": 705,
+      "riderVisible": 218,
+      "bikeVisible": 596,
+      "riderOccludedByBike": 13,
+      "bikeOccludedByRider": 109,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 315,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 236,
+      "bikeTotal": 904,
+      "riderVisible": 222,
+      "bikeVisible": 825,
+      "riderOccludedByBike": 14,
+      "bikeOccludedByRider": 79,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    },
+    {
+      "yaw": 337.5,
+      "mode": "engine",
+      "oneActualDepthTarget": true,
+      "riderHiddenBikePixelsExact": true,
+      "unionAlphaMismatches": 0,
+      "riderTotal": 234,
+      "bikeTotal": 1031,
+      "riderVisible": 227,
+      "bikeVisible": 966,
+      "riderOccludedByBike": 7,
+      "bikeOccludedByRider": 65,
+      "combinedDraws": 4,
+      "independentBikeDraws": 3
+    }
+  ],
+  "paddingParity": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 880
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 764
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 159
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 22.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 849
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 727
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 172
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 743
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 626
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 174
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 67.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 601
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 519
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 165
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 476
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 452
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 160
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 112.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 601
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 519
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 165
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 743
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 626
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 174
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 157.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 849
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 727
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 172
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 180,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 881
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 764
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 160
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 202.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 846
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 739
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 159
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 225,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 741
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 638
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 168
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 247.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 601
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 530
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 166
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 270,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 488
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 448
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 166
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 292.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 601
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 530
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 167
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 315,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 741
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 638
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 168
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "study",
+      "yaw": 337.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 846
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 739
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 159
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1232
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 1051
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 232
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 22.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1195
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 1016
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 236
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1054
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 884
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 246
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 67.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 816
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 689
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 233
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 608
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 554
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 220
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 112.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 817
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 690
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 233
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1054
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 884
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 246
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 157.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1196
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 1016
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 237
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 180,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1232
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 1051
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 232
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 202.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1201
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 1031
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 233
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 225,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1053
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 904
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 235
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 247.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 814
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 705
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 231
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 270,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 596
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 540
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 228
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 292.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 814
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 705
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 231
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 315,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1054
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 904
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 236
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    },
+    {
+      "mode": "engine",
+      "yaw": 337.5,
+      "views": [
+        {
+          "view": "combined",
+          "exactRGBA": true,
+          "occupiedPixels": 1202
+        },
+        {
+          "view": "bike-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 1031
+        },
+        {
+          "view": "rider-alone",
+          "exactRGBA": true,
+          "occupiedPixels": 234
+        }
+      ],
+      "viewport128To224Translation": [
+        48,
+        48
+      ],
+      "scale": 1
+    }
+  ],
+  "signedPhases": [
+    {
+      "phase": 0,
+      "yaw": 45,
+      "mode": "study",
+      "view": "combined",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 743,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 0
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 0
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-study-0.png"
+    },
+    {
+      "phase": 45,
+      "yaw": 45,
+      "mode": "study",
+      "view": "combined",
+      "wire": false,
+      "distance": 5.873412352363526,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 744,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -0.7853981633974482
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -0.7341765440454406
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-study-1.png"
+    },
+    {
+      "phase": 90,
+      "yaw": 45,
+      "mode": "study",
+      "view": "combined",
+      "wire": false,
+      "distance": 11.746824704727052,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 743,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -1.5707963267948963
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -1.4683530880908813
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-study-2.png"
+    },
+    {
+      "phase": 135,
+      "yaw": 45,
+      "mode": "study",
+      "view": "combined",
+      "wire": false,
+      "distance": 17.62023705709058,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 744,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -2.356194490192345
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -2.202529632136322
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-study-3.png"
+    },
+    {
+      "phase": -180,
+      "yaw": 45,
+      "mode": "study",
+      "view": "combined",
+      "wire": false,
+      "distance": -23.493649409454104,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 743,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 3.1415926535897927
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 2.9367061761817626
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-study-4.png"
+    },
+    {
+      "phase": -135,
+      "yaw": 45,
+      "mode": "study",
+      "view": "combined",
+      "wire": false,
+      "distance": -17.62023705709058,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 744,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 2.356194490192345
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 2.202529632136322
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-study-5.png"
+    },
+    {
+      "phase": -90,
+      "yaw": 45,
+      "mode": "study",
+      "view": "combined",
+      "wire": false,
+      "distance": -11.746824704727052,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 743,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 1.5707963267948963
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 1.4683530880908813
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-study-6.png"
+    },
+    {
+      "phase": -45,
+      "yaw": 45,
+      "mode": "study",
+      "view": "combined",
+      "wire": false,
+      "distance": -5.873412352363526,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 744,
+      "bounds": {
+        "minX": 86,
+        "minY": 113,
+        "maxX": 135,
+        "maxY": 154
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 0.7853981633974482
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 0.7341765440454406
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-study-7.png"
+    },
+    {
+      "phase": 0,
+      "yaw": 45,
+      "mode": "engine",
+      "view": "combined",
+      "wire": false,
+      "distance": 0,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 0
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 0
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-engine-0.png"
+    },
+    {
+      "phase": 45,
+      "yaw": 45,
+      "mode": "engine",
+      "view": "combined",
+      "wire": false,
+      "distance": 5.873412352363526,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -0.7853981633974482
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -0.7341765440454406
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-engine-1.png"
+    },
+    {
+      "phase": 90,
+      "yaw": 45,
+      "mode": "engine",
+      "view": "combined",
+      "wire": false,
+      "distance": 11.746824704727052,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -1.5707963267948963
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -1.4683530880908813
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-engine-2.png"
+    },
+    {
+      "phase": 135,
+      "yaw": 45,
+      "mode": "engine",
+      "view": "combined",
+      "wire": false,
+      "distance": 17.62023705709058,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -2.356194490192345
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -2.202529632136322
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-engine-3.png"
+    },
+    {
+      "phase": -180,
+      "yaw": 45,
+      "mode": "engine",
+      "view": "combined",
+      "wire": false,
+      "distance": -23.493649409454104,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 3.1415926535897927
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 2.9367061761817626
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-engine-4.png"
+    },
+    {
+      "phase": -135,
+      "yaw": 45,
+      "mode": "engine",
+      "view": "combined",
+      "wire": false,
+      "distance": -17.62023705709058,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 2.356194490192345
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 2.202529632136322
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-engine-5.png"
+    },
+    {
+      "phase": -90,
+      "yaw": 45,
+      "mode": "engine",
+      "view": "combined",
+      "wire": false,
+      "distance": -11.746824704727052,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 1.5707963267948963
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 1.4683530880908813
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-engine-6.png"
+    },
+    {
+      "phase": -45,
+      "yaw": 45,
+      "mode": "engine",
+      "view": "combined",
+      "wire": false,
+      "distance": -5.873412352363526,
+      "wheelDistances": null,
+      "nativeSize": 224,
+      "drawCalls": 4,
+      "edgePixels": 0,
+      "occupiedPixels": 1054,
+      "bounds": {
+        "minX": 88,
+        "minY": 73,
+        "maxX": 136,
+        "maxY": 130
+      },
+      "wheels": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 0.7853981633974482
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 0.7341765440454406
+        }
+      ],
+      "fixedBikeAndRider": true,
+      "image": "phase-engine-7.png"
+    }
+  ],
+  "equalAnglePhases": [
+    {
+      "mode": "study",
+      "phase": 0,
+      "image": "equal-angle-study-0.png",
+      "wheelDistances": {
+        "F": 0,
+        "R": 0
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 0
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 0
+        }
+      ]
+    },
+    {
+      "mode": "study",
+      "phase": 45,
+      "image": "equal-angle-study-1.png",
+      "wheelDistances": {
+        "F": 5.873412352363528,
+        "R": 6.283185307179588
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -0.7853981633974484
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -0.7853981633974483
+        }
+      ]
+    },
+    {
+      "mode": "study",
+      "phase": 90,
+      "image": "equal-angle-study-2.png",
+      "wheelDistances": {
+        "F": 11.746824704727056,
+        "R": 12.566370614359176
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -1.5707963267948968
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -1.5707963267948966
+        }
+      ]
+    },
+    {
+      "mode": "study",
+      "phase": 135,
+      "image": "equal-angle-study-3.png",
+      "wheelDistances": {
+        "F": 17.62023705709058,
+        "R": 18.849555921538762
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -2.356194490192345
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -2.356194490192345
+        }
+      ]
+    },
+    {
+      "mode": "study",
+      "phase": -180,
+      "image": "equal-angle-study-4.png",
+      "wheelDistances": {
+        "F": -23.49364940945411,
+        "R": -25.132741228718352
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 3.1415926535897936
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 3.141592653589793
+        }
+      ]
+    },
+    {
+      "mode": "study",
+      "phase": -135,
+      "image": "equal-angle-study-5.png",
+      "wheelDistances": {
+        "F": -17.62023705709058,
+        "R": -18.849555921538762
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 2.356194490192345
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 2.356194490192345
+        }
+      ]
+    },
+    {
+      "mode": "study",
+      "phase": -90,
+      "image": "equal-angle-study-6.png",
+      "wheelDistances": {
+        "F": -11.746824704727056,
+        "R": -12.566370614359176
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 1.5707963267948968
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 1.5707963267948966
+        }
+      ]
+    },
+    {
+      "mode": "study",
+      "phase": -45,
+      "image": "equal-angle-study-7.png",
+      "wheelDistances": {
+        "F": -5.873412352363528,
+        "R": -6.283185307179588
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 0.7853981633974484
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 0.7853981633974483
+        }
+      ]
+    },
+    {
+      "mode": "engine",
+      "phase": 0,
+      "image": "equal-angle-engine-0.png",
+      "wheelDistances": {
+        "F": 0,
+        "R": 0
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 0
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 0
+        }
+      ]
+    },
+    {
+      "mode": "engine",
+      "phase": 45,
+      "image": "equal-angle-engine-1.png",
+      "wheelDistances": {
+        "F": 5.873412352363528,
+        "R": 6.283185307179588
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -0.7853981633974484
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -0.7853981633974483
+        }
+      ]
+    },
+    {
+      "mode": "engine",
+      "phase": 90,
+      "image": "equal-angle-engine-2.png",
+      "wheelDistances": {
+        "F": 11.746824704727056,
+        "R": 12.566370614359176
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -1.5707963267948968
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -1.5707963267948966
+        }
+      ]
+    },
+    {
+      "mode": "engine",
+      "phase": 135,
+      "image": "equal-angle-engine-3.png",
+      "wheelDistances": {
+        "F": 17.62023705709058,
+        "R": 18.849555921538762
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": -2.356194490192345
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": -2.356194490192345
+        }
+      ]
+    },
+    {
+      "mode": "engine",
+      "phase": -180,
+      "image": "equal-angle-engine-4.png",
+      "wheelDistances": {
+        "F": -23.49364940945411,
+        "R": -25.132741228718352
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 3.1415926535897936
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 3.141592653589793
+        }
+      ]
+    },
+    {
+      "mode": "engine",
+      "phase": -135,
+      "image": "equal-angle-engine-5.png",
+      "wheelDistances": {
+        "F": -17.62023705709058,
+        "R": -18.849555921538762
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 2.356194490192345
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 2.356194490192345
+        }
+      ]
+    },
+    {
+      "mode": "engine",
+      "phase": -90,
+      "image": "equal-angle-engine-6.png",
+      "wheelDistances": {
+        "F": -11.746824704727056,
+        "R": -12.566370614359176
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 1.5707963267948968
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 1.5707963267948966
+        }
+      ]
+    },
+    {
+      "mode": "engine",
+      "phase": -45,
+      "image": "equal-angle-engine-7.png",
+      "wheelDistances": {
+        "F": -5.873412352363528,
+        "R": -6.283185307179588
+      },
+      "wheelAngles": [
+        {
+          "id": "F",
+          "radiusWorld": 7.478260869565219,
+          "angleRadians": 0.7853981633974484
+        },
+        {
+          "id": "R",
+          "radiusWorld": 8.000000000000002,
+          "angleRadians": 0.7853981633974483
+        }
+      ]
+    }
+  ],
+  "independent": [
+    {
+      "id": "F",
+      "radiusWorld": 7.478260869565219,
+      "forwardChangedChannels": 6,
+      "reverseChangedChannels": 6,
+      "absoluteResetPixelsExact": true,
+      "otherWheelBodyRiderFixed": true,
+      "actualPivotFixed": true,
+      "signedQuaternionTravelExact": true,
+      "images": [
+        "independent-F-0.png",
+        "independent-F-1.png",
+        "independent-F-2.png",
+        "independent-F-3.png"
+      ]
+    },
+    {
+      "id": "R",
+      "radiusWorld": 8.000000000000002,
+      "forwardChangedChannels": 9,
+      "reverseChangedChannels": 9,
+      "absoluteResetPixelsExact": true,
+      "otherWheelBodyRiderFixed": true,
+      "actualPivotFixed": true,
+      "signedQuaternionTravelExact": true,
+      "images": [
+        "independent-R-0.png",
+        "independent-R-1.png",
+        "independent-R-2.png",
+        "independent-R-3.png"
+      ]
+    }
+  ],
+  "bothWireframesForEachAssetMode": true,
+  "all32WireframesEachOfCombinedBareAndRider": true,
+  "wires": [
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 0,
+      "image": "wire-combined-study-0.png",
+      "sha256": "a24fe1aa3d2c653d7e58f338dbebe27aa164fb4011546416bb3e91d2258ec2e8",
+      "changedChannelsFromFilled": 3300,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 22.5,
+      "image": "wire-combined-study-1.png",
+      "sha256": "1cbdc69d9747e1e5e6b055ff09a6371c1a1b0b0ac0b6b2338630e315e57b2583",
+      "changedChannelsFromFilled": 3115,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 45,
+      "image": "wire-combined-study-2.png",
+      "sha256": "34312f99a95d44385ccd34ec995ddd2b562b89375a2b0c7b989c22a52e6f2e8f",
+      "changedChannelsFromFilled": 2734,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 67.5,
+      "image": "wire-combined-study-3.png",
+      "sha256": "910b8816094c0adc202910857318cb0294a6a3aebd054c215acbf6d62be7524f",
+      "changedChannelsFromFilled": 2243,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 90,
+      "image": "wire-combined-study-4.png",
+      "sha256": "c9ced612790ad4147010ad4805b7d996b75ba7f34d976aed756e5aece9083ce0",
+      "changedChannelsFromFilled": 1884,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 112.5,
+      "image": "wire-combined-study-5.png",
+      "sha256": "f8ae2f83bf54ab3631e7cdf4592e0935add76330dc9e841b3384faf4ebeaa930",
+      "changedChannelsFromFilled": 2243,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 135,
+      "image": "wire-combined-study-6.png",
+      "sha256": "a3e2188a8d7deebf2b9dce422d4385dfcc9fb4067c1c89972624ea7802b5077f",
+      "changedChannelsFromFilled": 2734,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 157.5,
+      "image": "wire-combined-study-7.png",
+      "sha256": "1a090633dbb7de01875acf52943d0df9dbf3d68b4639483177c3d19c13b00d2c",
+      "changedChannelsFromFilled": 3116,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 180,
+      "image": "wire-combined-study-8.png",
+      "sha256": "22ca5372a671ab8bf6837313d327fa5230e3fee25174a135c86ea48bcc8e3b75",
+      "changedChannelsFromFilled": 3303,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 202.5,
+      "image": "wire-combined-study-9.png",
+      "sha256": "136394ffa9c3f5a53d0eb6870f04b769ea3c78534cebe844cdb532c3968d88eb",
+      "changedChannelsFromFilled": 3119,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 225,
+      "image": "wire-combined-study-10.png",
+      "sha256": "0101e969e0eb9b1074cb3eac9058d8120eb78f4769424d4cbf7766bd4a6603b1",
+      "changedChannelsFromFilled": 2724,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 247.5,
+      "image": "wire-combined-study-11.png",
+      "sha256": "636e4f1828382c943ed64b2774ae5314da64da8c8c86bbec52c67eb8dcf86160",
+      "changedChannelsFromFilled": 2239,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 270,
+      "image": "wire-combined-study-12.png",
+      "sha256": "81134385fa407cb57456eb24526dfcf3836c1b459fa607ff271c543ffaa8dc60",
+      "changedChannelsFromFilled": 2000,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 292.5,
+      "image": "wire-combined-study-13.png",
+      "sha256": "c1c06f6267b4a5c1404220875c5379cf9f90fd6dbbc0ef26c3cadc2208beb11e",
+      "changedChannelsFromFilled": 2239,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 315,
+      "image": "wire-combined-study-14.png",
+      "sha256": "afcba3263b1a733dad940d659ec352e8525df33683533d285f26d569ad98b6f1",
+      "changedChannelsFromFilled": 2723,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "combined",
+      "yaw": 337.5,
+      "image": "wire-combined-study-15.png",
+      "sha256": "d4066e4b3d82c1d7bc9f5be4ce50af3e67e042da0d26fa09f60ed21a64eaf55d",
+      "changedChannelsFromFilled": 3118,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 0,
+      "image": "wire-bike-alone-study-0.png",
+      "sha256": "bcaa736047301a9665b6b3067336c2945cbe59d142b76dbe81366b66c272b24d",
+      "changedChannelsFromFilled": 2904,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 22.5,
+      "image": "wire-bike-alone-study-1.png",
+      "sha256": "ca72e3d7403ea01ad9ac610d33b1da8cfa28990449d55c5a27015b4f64c9b7a0",
+      "changedChannelsFromFilled": 2705,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 45,
+      "image": "wire-bike-alone-study-2.png",
+      "sha256": "c406a4ae1a459bd45dc9594354ee65792e90f897e593cde62a86a63054cc8e86",
+      "changedChannelsFromFilled": 2371,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 67.5,
+      "image": "wire-bike-alone-study-3.png",
+      "sha256": "969f1eeabaee198fd8580e354a5db476cd191b7c8f6fb7542f65f91613fe8f05",
+      "changedChannelsFromFilled": 2001,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 90,
+      "image": "wire-bike-alone-study-4.png",
+      "sha256": "4a9ac1cfe627de3886a7cb964da5d8d8bff41287e6c28f830c66b4863b9940c9",
+      "changedChannelsFromFilled": 1884,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 112.5,
+      "image": "wire-bike-alone-study-5.png",
+      "sha256": "22ef2a700d8cd15fc8482e0e8806cf057f42ee4ba81d11af54617c08cc836b6f",
+      "changedChannelsFromFilled": 2001,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 135,
+      "image": "wire-bike-alone-study-6.png",
+      "sha256": "02a1b7f732139e309eda2ebdf6bdf71391bf71bb9f1e15b4a2497c94f0882867",
+      "changedChannelsFromFilled": 2371,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 157.5,
+      "image": "wire-bike-alone-study-7.png",
+      "sha256": "d903ee7429dfc9ec74ed65e11238f7daf5662527d982086602519c94f9afadfe",
+      "changedChannelsFromFilled": 2706,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 180,
+      "image": "wire-bike-alone-study-8.png",
+      "sha256": "e637062c8c27ca715022dc5756cc888adf0b79d16f6b94677f1595ae49f13845",
+      "changedChannelsFromFilled": 2904,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 202.5,
+      "image": "wire-bike-alone-study-9.png",
+      "sha256": "a73173e95aa610411b65781148fdd0eea5d1b6799ba180d492f09a438f18d40f",
+      "changedChannelsFromFilled": 2730,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 225,
+      "image": "wire-bike-alone-study-10.png",
+      "sha256": "e51b41ffbc0220e8a477bcd9d4abc64701ddcbd8a5afbbfa48016db72c3f3c05",
+      "changedChannelsFromFilled": 2427,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 247.5,
+      "image": "wire-bike-alone-study-11.png",
+      "sha256": "7ae5907fa2e2d8ed03bc5c694cefc1cb11cf2f519d3d0d1d829839b255654862",
+      "changedChannelsFromFilled": 2066,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 270,
+      "image": "wire-bike-alone-study-12.png",
+      "sha256": "d98fc12352f2c240be85a4229dbe30c1ebf198c4f25b75d1a90f6a5b9d5bfb03",
+      "changedChannelsFromFilled": 1968,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 292.5,
+      "image": "wire-bike-alone-study-13.png",
+      "sha256": "2fd40f767e6bcc0428b3df18ab654b9b2497b0f0d913b16a402bc662b7a7fc8f",
+      "changedChannelsFromFilled": 2066,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 315,
+      "image": "wire-bike-alone-study-14.png",
+      "sha256": "bd03e825d742806da13c95c7ea7a9ddd9ab7edf0d592c231751bec603709d72a",
+      "changedChannelsFromFilled": 2426,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "bike-alone",
+      "yaw": 337.5,
+      "image": "wire-bike-alone-study-15.png",
+      "sha256": "29e0b7a2e293ff60f67283c74e19a97e817e17d028bbd0ff6c505956ae4d0f81",
+      "changedChannelsFromFilled": 2729,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 0,
+      "image": "wire-rider-alone-study-0.png",
+      "sha256": "ee9a5e7713ec8257091634f87c60cc539e3e742d686bb8e9c8954c69421099e5",
+      "changedChannelsFromFilled": 693,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 22.5,
+      "image": "wire-rider-alone-study-1.png",
+      "sha256": "daed98b432fe14a3035402e74afdb516141340ad0d46c261bfe9faeae92596c5",
+      "changedChannelsFromFilled": 700,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 45,
+      "image": "wire-rider-alone-study-2.png",
+      "sha256": "107df1626cd4026fc53c056290d56d5504dc027a112a5c2b03d6aa71382cd1e5",
+      "changedChannelsFromFilled": 678,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 67.5,
+      "image": "wire-rider-alone-study-3.png",
+      "sha256": "1d91c7200758a64ce37383138343346a92d889a6c1987ed55ed6aa769ed5fda7",
+      "changedChannelsFromFilled": 655,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 90,
+      "image": "wire-rider-alone-study-4.png",
+      "sha256": "c5f1182436243ecb77e8bb2c458d4dd857e6ee5601a5359a73d3982b17ad52b2",
+      "changedChannelsFromFilled": 624,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 112.5,
+      "image": "wire-rider-alone-study-5.png",
+      "sha256": "5091b927f8057b25fbde88de8e1d8b5f4a3a8064df20a2796ac9b5f379549588",
+      "changedChannelsFromFilled": 655,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 135,
+      "image": "wire-rider-alone-study-6.png",
+      "sha256": "0419b4b532058fa715daf730a198ae4eea24ae7132aab4ae62e51b3e86c97f8c",
+      "changedChannelsFromFilled": 678,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 157.5,
+      "image": "wire-rider-alone-study-7.png",
+      "sha256": "7b31cbfad69390d90b0d351b8797a9eef2b05443683dd36bcc2ead42549a744c",
+      "changedChannelsFromFilled": 700,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 180,
+      "image": "wire-rider-alone-study-8.png",
+      "sha256": "be9532dc10b570d8164b5618f7afdb6c4a0c28be77b4f3085eb2dbc478c0f8cf",
+      "changedChannelsFromFilled": 696,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 202.5,
+      "image": "wire-rider-alone-study-9.png",
+      "sha256": "4ba1bb50a27242af5f27127e0f4e51edacae05b9f0fd15c2045ed78a4fcad866",
+      "changedChannelsFromFilled": 697,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 225,
+      "image": "wire-rider-alone-study-10.png",
+      "sha256": "29e4e0bfa28370aa91851663a475c053d8ab7ade096384b1ea934669e9bd2b6f",
+      "changedChannelsFromFilled": 628,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 247.5,
+      "image": "wire-rider-alone-study-11.png",
+      "sha256": "7d2142c43d38bc907fec269d9dfb982aa8fe1cd74ba49d1c99ab46ed595cf57a",
+      "changedChannelsFromFilled": 654,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 270,
+      "image": "wire-rider-alone-study-12.png",
+      "sha256": "88f9d1e3ecad7af8473937140d5d8a781cb0fe2a8fa7017a5f464f49117fe2a2",
+      "changedChannelsFromFilled": 682,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 292.5,
+      "image": "wire-rider-alone-study-13.png",
+      "sha256": "9f4532db578c81933158c523093a813dfc00c042f560fcfef838d425333b9963",
+      "changedChannelsFromFilled": 653,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 315,
+      "image": "wire-rider-alone-study-14.png",
+      "sha256": "05157677d952b72525af373eb87720f36751cc7b7e3f0fd8c73e1545f83abcaa",
+      "changedChannelsFromFilled": 628,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "study",
+      "view": "rider-alone",
+      "yaw": 337.5,
+      "image": "wire-rider-alone-study-15.png",
+      "sha256": "318c353c3c2e19c559f1039f6126c7815053ce29f3bf13c836b543b2ccf5782b",
+      "changedChannelsFromFilled": 697,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 0,
+      "image": "wire-combined-engine-0.png",
+      "sha256": "416a38427bb04134831c55221cefbf3542e59ea72f9f2c2e104381b05c771515",
+      "changedChannelsFromFilled": 4373,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 22.5,
+      "image": "wire-combined-engine-1.png",
+      "sha256": "ac49b93570db81d6af8861a100646006f752cff72aa52bf44c7eef02acbe02aa",
+      "changedChannelsFromFilled": 4222,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 45,
+      "image": "wire-combined-engine-2.png",
+      "sha256": "d25f2c28186c440989625e9db2949fd3af09ad359c9a820b93897f28dbac8386",
+      "changedChannelsFromFilled": 3658,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 67.5,
+      "image": "wire-combined-engine-3.png",
+      "sha256": "70f4f71ed2073f6e279654cab8120d876447a6d37098d534892de94f4cebc5b8",
+      "changedChannelsFromFilled": 2988,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 90,
+      "image": "wire-combined-engine-4.png",
+      "sha256": "bd6cad9d4ca9e527fe4fc21c78ee5186931f5afdce58b282a19ff4e6f3a2536f",
+      "changedChannelsFromFilled": 2441,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 112.5,
+      "image": "wire-combined-engine-5.png",
+      "sha256": "f51895c21b6ceea460c3f6ebd05b62c817641d8e28f95da538daf897d09fa4e7",
+      "changedChannelsFromFilled": 2987,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 135,
+      "image": "wire-combined-engine-6.png",
+      "sha256": "33c7ec44cceacd558e620899b67f83d50e19791fd20154aa81f24ad5d46cb2e1",
+      "changedChannelsFromFilled": 3656,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 157.5,
+      "image": "wire-combined-engine-7.png",
+      "sha256": "3b3ebc140c95ae8fb9ae22f6f8a09d1cfcf8691c7fb3900f081cef20e12c77dd",
+      "changedChannelsFromFilled": 4221,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 180,
+      "image": "wire-combined-engine-8.png",
+      "sha256": "225a957168cc1cc8af0b241f78f981d2115347d31d2d00900fe7fd05ce5130cf",
+      "changedChannelsFromFilled": 4374,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 202.5,
+      "image": "wire-combined-engine-9.png",
+      "sha256": "60d90fdaac9575378ddff0d5c314dc034bffb95131808a1c7e21bb96abe0cdde",
+      "changedChannelsFromFilled": 4192,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 225,
+      "image": "wire-combined-engine-10.png",
+      "sha256": "239576315420551dd76977f15506527eef0a382ee3e5c90a5b5e2bce22f923b7",
+      "changedChannelsFromFilled": 3615,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 247.5,
+      "image": "wire-combined-engine-11.png",
+      "sha256": "7d5cc285efd05a3720f8c48bb290562d3925652670640bb75bdf5e6b7f858739",
+      "changedChannelsFromFilled": 2979,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 270,
+      "image": "wire-combined-engine-12.png",
+      "sha256": "fa52066f661689e474f3aa4a15c3144c99de16dbddb3b3ff67da37a610891a25",
+      "changedChannelsFromFilled": 2500,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 292.5,
+      "image": "wire-combined-engine-13.png",
+      "sha256": "b6a85acf4b5def1be93fed7f4cdb43f7a6193933514a4d52104fb3997d919483",
+      "changedChannelsFromFilled": 2979,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 315,
+      "image": "wire-combined-engine-14.png",
+      "sha256": "18028838b4266f868ac63b1c73da13f2b38686105f9ce238162c45f10f09a904",
+      "changedChannelsFromFilled": 3613,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "combined",
+      "yaw": 337.5,
+      "image": "wire-combined-engine-15.png",
+      "sha256": "cb67cc4a55b93ec70d752472df9ec39d2db86386d768cfd82cfc3cc30ac15509",
+      "changedChannelsFromFilled": 4186,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 0,
+      "image": "wire-bike-alone-engine-0.png",
+      "sha256": "a881103390dca45ec7a07a1a012bb6599792eb2d9d9f34d7549309087f57a0a1",
+      "changedChannelsFromFilled": 3814,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 22.5,
+      "image": "wire-bike-alone-engine-1.png",
+      "sha256": "a3042fe5cac52b78911bebd6520a65f0b2a27b78a6dced20955dfd3af7a4509c",
+      "changedChannelsFromFilled": 3625,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 45,
+      "image": "wire-bike-alone-engine-2.png",
+      "sha256": "5f9067cd29155103e620fb5320fb8f04e7ba37616ff973f78a94c24711850f6c",
+      "changedChannelsFromFilled": 3120,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 67.5,
+      "image": "wire-bike-alone-engine-3.png",
+      "sha256": "a3b80e45a3f5c33014fbb7fd47cd491604547613ede21c22e85c0aad07652683",
+      "changedChannelsFromFilled": 2611,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 90,
+      "image": "wire-bike-alone-engine-4.png",
+      "sha256": "5cef6d4b66f3b60c50548c20d4f5105f0aae95bb0135baf63e5fdc9f76aaa91f",
+      "changedChannelsFromFilled": 2463,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 112.5,
+      "image": "wire-bike-alone-engine-5.png",
+      "sha256": "3aa280902e5bf3b7dc823d55ea77c3804b2fe3d0f3ff1c23ec4782b70ca8cf0a",
+      "changedChannelsFromFilled": 2610,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 135,
+      "image": "wire-bike-alone-engine-6.png",
+      "sha256": "e8b3015d3a14b8e81e33e0a3688100d0069b29df7b9c3f738744c5859fcf7b99",
+      "changedChannelsFromFilled": 3118,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 157.5,
+      "image": "wire-bike-alone-engine-7.png",
+      "sha256": "0392faab191060b958145b730c82d4d06de39a7475725813daaacf23aefec2fd",
+      "changedChannelsFromFilled": 3625,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 180,
+      "image": "wire-bike-alone-engine-8.png",
+      "sha256": "0c5f419884052843509962dc99eab463db64e7fb3ba8164ca27ad58ff68e3c0f",
+      "changedChannelsFromFilled": 3815,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 202.5,
+      "image": "wire-bike-alone-engine-9.png",
+      "sha256": "5df9ce3e4b0a299ed47fe18a3c96e6646afa372b3ac979a5564582563626319a",
+      "changedChannelsFromFilled": 3623,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 225,
+      "image": "wire-bike-alone-engine-10.png",
+      "sha256": "1507c948f7f234e7ea2d4e7011ac299f2b3aa086585b0c07663640f9911f0308",
+      "changedChannelsFromFilled": 3161,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 247.5,
+      "image": "wire-bike-alone-engine-11.png",
+      "sha256": "4a287cf53fdd5958d55650e013fa01841c7339e27d39ce070f7925c84c1ce1ed",
+      "changedChannelsFromFilled": 2696,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 270,
+      "image": "wire-bike-alone-engine-12.png",
+      "sha256": "3bb323da951a698ebc8ee422691d4c2fb721f66b227761cc8ceddecda6e123f8",
+      "changedChannelsFromFilled": 2396,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 292.5,
+      "image": "wire-bike-alone-engine-13.png",
+      "sha256": "b82d0c0e213e37684eb0b210ac2e373abaec05acfe64c8b04a638efe33a71de8",
+      "changedChannelsFromFilled": 2696,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 315,
+      "image": "wire-bike-alone-engine-14.png",
+      "sha256": "b371b58241d1745867503dfc36a032007cb894a6f7b7a33142b0d2891cf54213",
+      "changedChannelsFromFilled": 3159,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "bike-alone",
+      "yaw": 337.5,
+      "image": "wire-bike-alone-engine-15.png",
+      "sha256": "909f3b535987ea0e95401b13916d1873c42fbe4613ed96bbb032d42bbe8c0a10",
+      "changedChannelsFromFilled": 3621,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 0,
+      "image": "wire-rider-alone-engine-0.png",
+      "sha256": "cc9228bee6e43d710c6f50ab87b2a9c924739003ec24db9c02b277bd0cf5299c",
+      "changedChannelsFromFilled": 876,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 22.5,
+      "image": "wire-rider-alone-engine-1.png",
+      "sha256": "37ba632504b7149b4fad8ce02608803177f4e066b18c898bbdbeb680ada60e1f",
+      "changedChannelsFromFilled": 960,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 45,
+      "image": "wire-rider-alone-engine-2.png",
+      "sha256": "daa7c238e1ddcbb9bb6eedaefbd33b01b490a89bd677ffe5c754b693e3c4eead",
+      "changedChannelsFromFilled": 942,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 67.5,
+      "image": "wire-rider-alone-engine-3.png",
+      "sha256": "040f11615b123dbe91e57ac108486b1152fc2bf29d852503f32b17d3f925b9eb",
+      "changedChannelsFromFilled": 915,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 90,
+      "image": "wire-rider-alone-engine-4.png",
+      "sha256": "a80f767ea03e7aa28c8a1db9096f6b31d38e62f7b0e2bc075f96af95b650dd51",
+      "changedChannelsFromFilled": 876,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 112.5,
+      "image": "wire-rider-alone-engine-5.png",
+      "sha256": "7b95eb728812ba05603fef0e44d4e5b89c4c4e4ea6fa4f72e9316572cccba649",
+      "changedChannelsFromFilled": 915,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 135,
+      "image": "wire-rider-alone-engine-6.png",
+      "sha256": "c052028c3da4913d9ef1bb7a46f4945fcb73eb26fef9ac0d71a48f87158ef027",
+      "changedChannelsFromFilled": 942,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 157.5,
+      "image": "wire-rider-alone-engine-7.png",
+      "sha256": "3b6626d7a4928ac663438a223c256f90e32c08a9fdd129be51dd7037425fc6b2",
+      "changedChannelsFromFilled": 959,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 180,
+      "image": "wire-rider-alone-engine-8.png",
+      "sha256": "8662134f1640fdbc09747bdac32dd8ef028f3814924bdd4500109e9048dbb7a3",
+      "changedChannelsFromFilled": 876,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 202.5,
+      "image": "wire-rider-alone-engine-9.png",
+      "sha256": "5b7ced923a1b62d860b4c103d916c22dafb51f0d7127ca8f242a122ee47f058e",
+      "changedChannelsFromFilled": 939,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 225,
+      "image": "wire-rider-alone-engine-10.png",
+      "sha256": "09b2feb84877f1ef57592024ce384a77ce1f6005112da3aaf5487edb04179059",
+      "changedChannelsFromFilled": 889,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 247.5,
+      "image": "wire-rider-alone-engine-11.png",
+      "sha256": "b906f7283bb92f0b8083247b6b7c60f4a127dc704d6626046ae5163856fb44d5",
+      "changedChannelsFromFilled": 905,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 270,
+      "image": "wire-rider-alone-engine-12.png",
+      "sha256": "2a2f223139b2245ec90f0028c844dc19ef643fa5211efa801b802bea5829f619",
+      "changedChannelsFromFilled": 932,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 292.5,
+      "image": "wire-rider-alone-engine-13.png",
+      "sha256": "07441c892cbc0d941d8a63a3f9bd89b9f341fc5087f2e26ac1cae7dd5cf240e6",
+      "changedChannelsFromFilled": 905,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 315,
+      "image": "wire-rider-alone-engine-14.png",
+      "sha256": "42e00906663334768ce909b39aa200ee24263a77262f59e9b496ec93cc7641e1",
+      "changedChannelsFromFilled": 888,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    },
+    {
+      "mode": "engine",
+      "view": "rider-alone",
+      "yaw": 337.5,
+      "image": "wire-rider-alone-engine-15.png",
+      "sha256": "6b1d4a96f40f81755065ecf5a0d1679c80080d8ffc409e93980db2e3ab5dd9bd",
+      "changedChannelsFromFilled": 934,
+      "actualMeshWireframe": true,
+      "nativeSize": 224,
+      "postOutlineSkippedForTopologyReadability": true
+    }
+  ],
+  "riderHidden32ViewsPixelExact": true,
+  "desktopMobile": {
+    "bundledFullChromium": true,
+    "version": "153.0.8010.12",
+    "mobileNoOverflow": true
+  },
+  "offline": {
+    "noNetworkRequests": true,
+    "requests": [],
+    "embeddedExactModelHash": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+    "embeddedExactRiderHash": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "all32CombinedPixelsExact": [
+      {
+        "mode": "study",
+        "yaw": 0,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 22.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 45,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 67.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 90,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 112.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 135,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 157.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 180,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 202.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 225,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 247.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 270,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 292.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 315,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "study",
+        "yaw": 337.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 0,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 22.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 45,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 67.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 90,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 112.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 135,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 157.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 180,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 202.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 225,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 247.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 270,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 292.5,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 315,
+        "combinedPixelsExact": true
+      },
+      {
+        "mode": "engine",
+        "yaw": 337.5,
+        "combinedPixelsExact": true
+      }
+    ]
+  },
+  "errors": []
+}

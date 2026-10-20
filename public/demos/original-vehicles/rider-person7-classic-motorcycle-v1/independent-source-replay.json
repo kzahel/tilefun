@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 17,
+  "glbSha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/rider-person7-classic-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/rider-person7-classic-motorcycle/replay/public/atlas.png",
+    "companion-atlas.png": "data/vehicle-bake/rider-person7-classic-motorcycle/replay/public/companion-atlas.png",
+    "recipe.json": "data/vehicle-bake/rider-person7-classic-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/rider-person7-classic-motorcycle-qa/retained-replay-tzj0m929",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

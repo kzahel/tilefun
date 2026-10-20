@@ -1,0 +1,44 @@
+{
+  "status": "agent-inspected-original-source-pilot",
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "immutableExplorerSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "fixedDensity": 17.39130434782609,
+  "native224Radius112": true,
+  "all32Each": [
+    "combined",
+    "bike-alone",
+    "rider-alone",
+    "depth-masks"
+  ],
+  "all96ActualNativeWires": true,
+  "ordinaryDistanceAndEqualAngleSignedPhaseSets": true,
+  "inspectionSheetHashes": {
+    "inspection-detail-combined-study.png": "3ee6a7d3b26f8a15d92293aa19b95cf6a8a929295d6ecd51600448b3803e7350",
+    "inspection-detail-bike-alone-study.png": "20863dc835e39cf2c8eebbf71a9ee8f88b964efd089217627842ca7bfddaeda5",
+    "inspection-detail-rider-alone-study.png": "7f6fcd6f51882381a01d0cd69b61e56b6aa7daaf9139a5ae2d7e79f09c4d195a",
+    "inspection-detail-ownership-mask-study.png": "f4f3c64df0e2695db24061e6055535bbe17bdf6006d48ec97ca2bde8bc1c4887",
+    "inspection-detail-combined-engine.png": "24971606bf4e74fc0c3dac5cd57b24ac1363a678a3e4778cdd0f9007f77b1acf",
+    "inspection-detail-bike-alone-engine.png": "fcdd3df1fdf876f3bb7648cafcc51ac530cf65b701c21d912cbf0761d48d3d4f",
+    "inspection-detail-rider-alone-engine.png": "61613cb8d64ad23bf7659899614aaccb5a9cdb818a0e09c877cf154bb225ede3",
+    "inspection-detail-ownership-mask-engine.png": "aef08efa1c57094b6b5f76122b465a4d4b1d93d86429158bb129a68cea141d06",
+    "inspection-phases.png": "e1dd0dbb27bb73c17799cf1a01f35249ebc3698c5cdc199616e06c6e3bcd4b64",
+    "inspection-equal-angle.png": "4188dcfdc4cb0a95208115ba18a160b4cd1de6443a1a57b396424c4102a0f66d",
+    "inspection-independent.png": "be3cb5bf758325b6a069bd903ab7833da279bf4fa41c721063e025c54eabbcb5",
+    "inspection-wires.png": "6d95a9dc843d5aff6e69bba95b1710604c282503d7acd334df15781cb11aa771"
+  },
+  "findings": [
+    "Low long maroon/cream cruiser is recognizable at native density; actual broad low tank and long saddle differ from classic topology/layout",
+    "Raked front fork, long wheelbase, broad actual V-engine/crankcase and twin low exhausts read consistently in side/oblique views",
+    "Actual Explorer identity/palette preserved, arms/boots on connected mechanical controls, no apparent engine penetration after single-mount refinement",
+    "Cream curved fenders cover far crowns in elevated/game headings; road tires remain visible in profile",
+    "Single real depth ownership changes coherently with heading; hidden-rider bike pixels match independent bare-bike load",
+    "Different front/rear radii use different ordinary-distance angles and identical equal-angle phases; independent wheel/pivot/reset checks retained",
+    "Dense native wire edges merge at subpixel scale; packed61component master and actual triangle/UV audit preserve detailed topology evidence"
+  ],
+  "formalHumanApproval": false,
+  "actualSharedCycleFamilyCaptureLoaderQualification": "pending parent",
+  "limits": [
+    "Only fixed unchanged Explorer upright; no all-avatar/AI/fallback/normal availability or rider animation claim",
+    "Parent shared unit/old-native regressions are not this family qualification"
+  ]
+}

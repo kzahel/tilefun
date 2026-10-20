@@ -1,0 +1,592 @@
+{
+  "status": "prototype-not-production",
+  "humanApproval": false,
+  "template": "Own compact cream cat anatomy, pointed ears/broad head/tiny torso, fixed short paw chains; no Explorer anatomy or recolor",
+  "contactFitStatus": "passed-profile-contacts",
+  "actualContactsSource": {
+    "hip_saddle": [
+      0.0,
+      0.0,
+      -0.03999999910593033
+    ],
+    "hand_left_grip": [
+      -0.17000000178813934,
+      -0.18000000715255737,
+      -0.005000002682209015
+    ],
+    "foot_left_support": [
+      -0.03500000014901161,
+      -0.18000000715255737,
+      -0.1850000023841858
+    ],
+    "hand_right_grip": [
+      -0.17000000178813934,
+      0.18000000715255737,
+      -0.005000002682209015
+    ],
+    "foot_right_support": [
+      -0.03500000014901161,
+      0.18000000715255737,
+      -0.1850000023841858
+    ]
+  },
+  "targetMissWorld": {
+    "hip_saddle": 6.478765736455504e-08,
+    "hand_left_grip": 4.04922858528469e-08,
+    "foot_left_support": 0.0,
+    "hand_right_grip": 4.04922858528469e-08,
+    "foot_right_support": 0.0
+  },
+  "fixedLengthIK": [
+    {
+      "limb": "arm_left",
+      "fixedBoneLengthsSource": [
+        0.09,
+        0.105
+      ],
+      "rootSource": [
+        -0.02500000037252903,
+        -0.17000000178813934,
+        0.07000000029802322
+      ],
+      "targetJointSource": [
+        -0.17000000178813934,
+        -0.18000000715255737,
+        -0.005000000353902578
+      ],
+      "actualJointSource": [
+        -0.17000000178813934,
+        -0.18000000715255737,
+        -0.005000002682209015
+      ],
+      "unclampedTargetDistanceSource": 0.1635542680811367,
+      "maximumChainLengthSource": 0.195,
+      "unreachableBeyondChainWorld": 0.0,
+      "jointSource": [
+        -0.0892878845334053,
+        -0.22692617774009705,
+        0.0430467464029789
+      ],
+      "actualLengthsSource": [
+        0.08999999955037816,
+        0.10500000616624224
+      ]
+    },
+    {
+      "limb": "leg_left",
+      "fixedBoneLengthsSource": [
+        0.095,
+        0.11
+      ],
+      "rootSource": [
+        0.0,
+        -0.11999999731779099,
+        -0.02500000037252903
+      ],
+      "targetJointSource": [
+        -0.019999999552965164,
+        -0.18000000715255737,
+        -0.15000000596046448
+      ],
+      "actualJointSource": [
+        -0.019999999552965164,
+        -0.18000000715255737,
+        -0.15000000596046448
+      ],
+      "unclampedTargetDistanceSource": 0.14008926115947842,
+      "maximumChainLengthSource": 0.20500000000000002,
+      "unreachableBeyondChainWorld": 0.0,
+      "jointSource": [
+        -0.07741522043943405,
+        -0.164472296833992,
+        -0.05746685713529587
+      ],
+      "actualLengthsSource": [
+        0.09499999283567828,
+        0.11000000248006965
+      ]
+    },
+    {
+      "limb": "arm_right",
+      "fixedBoneLengthsSource": [
+        0.09,
+        0.105
+      ],
+      "rootSource": [
+        -0.02500000037252903,
+        0.17000000178813934,
+        0.07000000029802322
+      ],
+      "targetJointSource": [
+        -0.17000000178813934,
+        0.18000000715255737,
+        -0.005000000353902578
+      ],
+      "actualJointSource": [
+        -0.17000000178813934,
+        0.18000000715255737,
+        -0.005000002682209015
+      ],
+      "unclampedTargetDistanceSource": 0.1635542680811367,
+      "maximumChainLengthSource": 0.195,
+      "unreachableBeyondChainWorld": 0.0,
+      "jointSource": [
+        -0.0892878845334053,
+        0.22692617774009705,
+        0.0430467464029789
+      ],
+      "actualLengthsSource": [
+        0.08999999955037816,
+        0.10500000616624224
+      ]
+    },
+    {
+      "limb": "leg_right",
+      "fixedBoneLengthsSource": [
+        0.095,
+        0.11
+      ],
+      "rootSource": [
+        0.0,
+        0.11999999731779099,
+        -0.02500000037252903
+      ],
+      "targetJointSource": [
+        -0.019999999552965164,
+        0.18000000715255737,
+        -0.15000000596046448
+      ],
+      "actualJointSource": [
+        -0.019999999552965164,
+        0.18000000715255737,
+        -0.15000000596046448
+      ],
+      "unclampedTargetDistanceSource": 0.14008926115947842,
+      "maximumChainLengthSource": 0.20500000000000002,
+      "unreachableBeyondChainWorld": 0.0,
+      "jointSource": [
+        -0.07741522043943405,
+        0.164472296833992,
+        -0.05746685713529587
+      ],
+      "actualLengthsSource": [
+        0.09499999283567828,
+        0.11000000248006965
+      ]
+    }
+  ],
+  "anatomicalJointsSource": {
+    "left": {
+      "shoulder": [
+        -0.02500000037252903,
+        -0.17000000178813934,
+        0.07000000029802322
+      ],
+      "elbow": [
+        -0.0892878845334053,
+        -0.22692617774009705,
+        0.0430467464029789
+      ],
+      "wrist": [
+        -0.15078282356262207,
+        -0.19117289781570435,
+        0.006439699791371822
+      ],
+      "palm": [
+        -0.17000000178813934,
+        -0.18000000715255737,
+        -0.005000002682209015
+      ],
+      "hip": [
+        0.0,
+        -0.11999999731779099,
+        -0.02500000037252903
+      ],
+      "knee": [
+        -0.07741522043943405,
+        -0.164472296833992,
+        -0.05746685713529587
+      ],
+      "ankle": [
+        -0.019999999552965164,
+        -0.18000000715255737,
+        -0.15000000596046448
+      ],
+      "sole": [
+        -0.03500000014901161,
+        -0.18000000715255737,
+        -0.1850000023841858
+      ]
+    },
+    "right": {
+      "shoulder": [
+        -0.02500000037252903,
+        0.17000000178813934,
+        0.07000000029802322
+      ],
+      "elbow": [
+        -0.0892878845334053,
+        0.22692617774009705,
+        0.0430467464029789
+      ],
+      "wrist": [
+        -0.15078282356262207,
+        0.19117289781570435,
+        0.006439699791371822
+      ],
+      "palm": [
+        -0.17000000178813934,
+        0.18000000715255737,
+        -0.005000002682209015
+      ],
+      "hip": [
+        0.0,
+        0.11999999731779099,
+        -0.02500000037252903
+      ],
+      "knee": [
+        -0.07741522043943405,
+        0.164472296833992,
+        -0.05746685713529587
+      ],
+      "ankle": [
+        -0.019999999552965164,
+        0.18000000715255737,
+        -0.15000000596046448
+      ],
+      "sole": [
+        -0.03500000014901161,
+        0.18000000715255737,
+        -0.1850000023841858
+      ]
+    }
+  },
+  "config": {
+    "id": "classic-upright-v3",
+    "status": "source-pilot-not-production",
+    "humanApproval": false,
+    "worldScale": 17.39130434782609,
+    "hipSocketSource": [
+      0,
+      0,
+      0
+    ],
+    "contactProfile": {
+      "source": "art-source/vehicle-riders/classic-upright/v3/classic-upright-v1.json",
+      "ownCopy": "classic-upright-v1.json",
+      "sha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b"
+    },
+    "identityInputs": {
+      "public/assets/sprites/player.png": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb"
+    },
+    "anatomy": {
+      "pelvisDimensions": [
+        0.16,
+        0.24,
+        0.08
+      ],
+      "torsoCenter": [
+        0,
+        0,
+        0.075
+      ],
+      "torsoDimensions": [
+        0.18,
+        0.3,
+        0.15
+      ],
+      "shoulderSource": [
+        -0.025,
+        0.17,
+        0.07
+      ],
+      "armLengthsSource": [
+        0.09,
+        0.105
+      ],
+      "wristInsetFromPalmSource": 0.025,
+      "hipJointSource": [
+        0,
+        0.12,
+        -0.025
+      ],
+      "legLengthsSource": [
+        0.095,
+        0.11
+      ],
+      "ankleFromSoleSource": [
+        0.015,
+        0,
+        0.035
+      ],
+      "palmRadii": [
+        0.04,
+        0.035,
+        0.035
+      ],
+      "bootDimensions": [
+        0.13,
+        0.12,
+        0.065
+      ],
+      "headCenter": [
+        0.005,
+        0,
+        0.35
+      ],
+      "headDimensions": [
+        0.56,
+        0.78,
+        0.42
+      ],
+      "headTopSource": 0.56,
+      "earTipSource": 0.82,
+      "earBaseSource": 0.44,
+      "headRingsSource": [
+        {
+          "z": 0.14,
+          "halfDepth": 0.105,
+          "halfWidth": 0.15
+        },
+        {
+          "z": 0.175,
+          "halfDepth": 0.21,
+          "halfWidth": 0.29
+        },
+        {
+          "z": 0.2625,
+          "halfDepth": 0.28,
+          "halfWidth": 0.39
+        },
+        {
+          "z": 0.385,
+          "halfDepth": 0.26833333333333337,
+          "halfWidth": 0.38
+        },
+        {
+          "z": 0.49000000000000005,
+          "halfDepth": 0.22166666666666668,
+          "halfWidth": 0.33
+        },
+        {
+          "z": 0.55125,
+          "halfDepth": 0.12833333333333335,
+          "halfWidth": 0.21
+        }
+      ],
+      "earCenterHalfSpacingSource": 0.2
+    },
+    "render": {
+      "nativeSize": 224,
+      "radius": 112,
+      "worldDensity": "80/4.6 unchanged",
+      "origin": "Local pelvis, not bike mount",
+      "studyDegrees": 50
+    },
+    "fixture": {
+      "gripRadiusWorld": 0.2,
+      "gripLengthWorld": 0.8
+    },
+    "inference": {
+      "meaning": "Own compact nonhuman cat template; broad head/pointed ears/tiny torso and short limbs. Every palette color is from actual standing PNG. Fixed limb lengths chosen before own short-reach fixture. No Explorer anatomy scaling.",
+      "standingRuler": "Common80/4.6 scale unchanged; head width.78source/13.565world remains close to original14px. V3 ear tip.82 versus v2.73 raises maximum by.09source/~1.565world. Head+ear Zspan11.826world versus original11head rows, total seated17.478world versus original16px, not exact sprite parity. No avatar/camera/view scaling.",
+      "tail": "No separate tail visible in all16frames; none invented",
+      "headRefinement": "Exact v2 rounded head, face charts, collar, lower body and contact profile retained. V2 is an immutable diagnostic, not appearance-qualified. Only the two actual ear volumes/UV change for v3.",
+      "eyeUV": "Original normalized eye X spacing and seven-color palette retained. Native-sized front eye clusters on actual upper front cheek skin, side eye clusters on matching cheek height; foreground roof no longer substitutes for forehead. Eye-only removal and both outlines verify interior landmarks.",
+      "ears": "Inspected v3 broad compact cat ears: baseYhalfwidth.13, shoulderYhalfwidth.09 atZ.70, inset centers+/-.20 and short pointed.12fore/aft tip ridge atZ.82. Actual front silhouette has two one-pixel apices widening to3px, each contributing4alpha pixels in study and7in game; both nearfront ears survive. All32 actual semantic-removal/index-reset controls preserve every other triangle/attribute/camera. Not mere metadata/outline paint.",
+      "visibleCollar": "V1 peer measured zero n/l native pixels from hidden torso. V2 adds a closed flared neck collar attached within finite torso/neck join only, with broad forward rim skin painted by unchanged original n/l chart. Hip/arms/legs/palms/feet/torso remain exact. Front/near-front real native n/l cues survive both outlines; some side/rear cues remain occluded. No mouth/nose or repainted head-bottom substitute.",
+      "nativeIdentityLimits": "V3 source agentQA only, pending parent independent inspection. V2 is an immutable unqualified diagnostic, not approval. V2 head/eyes/collar/profile exact. Some side/rear collar cues remain occluded and seated volumetric profiles differ from standing2D. Actual-bike fit, normal, human approval, all27, AI and occupied fallback remain blocked."
+    },
+    "scaleControls": [
+      {
+        "id": "explorer-upright",
+        "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+        "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+        "viewerFile": "explorer-upright-control.glb",
+        "screenHorizontalOffsetWorld": -40,
+        "role": "Read-only common-world-ruler diagnostic, never construction input"
+      }
+    ],
+    "limits": [
+      "Classic static source pilot only",
+      "Synthetic contact fixture; no actual-bike/production/all27/AI/occupied fallback qualification"
+    ]
+  },
+  "palette": {
+    "k": "#5c4e92",
+    "c": "#f3f2c0",
+    "p": "#e8b5ac",
+    "v": "#ddd5de",
+    "y": "#f3d8c5",
+    "n": "#766daa",
+    "l": "#eae178"
+  },
+  "components": [
+    {
+      "name": "RiderClassic seated pelvis",
+      "triangles": 108,
+      "semanticOwner": "RiderClassic seated pelvis"
+    },
+    {
+      "name": "RiderClassic upper arm left",
+      "triangles": 28,
+      "semanticOwner": "RiderClassic upper arm left"
+    },
+    {
+      "name": "RiderClassic elbow left",
+      "triangles": 100,
+      "semanticOwner": "RiderClassic elbow left"
+    },
+    {
+      "name": "RiderClassic forearm left",
+      "triangles": 28,
+      "semanticOwner": "RiderClassic forearm left"
+    },
+    {
+      "name": "RiderClassic gripping palm left",
+      "triangles": 144,
+      "semanticOwner": "RiderClassic gripping palm left"
+    },
+    {
+      "name": "RiderClassic bent thigh left",
+      "triangles": 28,
+      "semanticOwner": "RiderClassic bent thigh left"
+    },
+    {
+      "name": "RiderClassic knee left",
+      "triangles": 100,
+      "semanticOwner": "RiderClassic knee left"
+    },
+    {
+      "name": "RiderClassic short shin left",
+      "triangles": 28,
+      "semanticOwner": "RiderClassic short shin left"
+    },
+    {
+      "name": "RiderClassic boot left",
+      "triangles": 108,
+      "semanticOwner": "RiderClassic boot left"
+    },
+    {
+      "name": "RiderClassic upper arm right",
+      "triangles": 28,
+      "semanticOwner": "RiderClassic upper arm right"
+    },
+    {
+      "name": "RiderClassic elbow right",
+      "triangles": 100,
+      "semanticOwner": "RiderClassic elbow right"
+    },
+    {
+      "name": "RiderClassic forearm right",
+      "triangles": 28,
+      "semanticOwner": "RiderClassic forearm right"
+    },
+    {
+      "name": "RiderClassic gripping palm right",
+      "triangles": 144,
+      "semanticOwner": "RiderClassic gripping palm right"
+    },
+    {
+      "name": "RiderClassic bent thigh right",
+      "triangles": 28,
+      "semanticOwner": "RiderClassic bent thigh right"
+    },
+    {
+      "name": "RiderClassic knee right",
+      "triangles": 100,
+      "semanticOwner": "RiderClassic knee right"
+    },
+    {
+      "name": "RiderClassic short shin right",
+      "triangles": 28,
+      "semanticOwner": "RiderClassic short shin right"
+    },
+    {
+      "name": "RiderClassic boot right",
+      "triangles": 108,
+      "semanticOwner": "RiderClassic boot right"
+    },
+    {
+      "name": "RiderClassic tiny torso collar UV owner",
+      "triangles": 188,
+      "semanticOwner": "RiderClassic tiny torso collar UV owner"
+    },
+    {
+      "name": "RiderClassic neck collar visible skin",
+      "triangles": 88,
+      "semanticOwner": "RiderClassic neck collar visible skin"
+    },
+    {
+      "name": "RiderClassic broad face UV owner",
+      "triangles": 190,
+      "semanticOwner": "RiderClassic broad face UV owner"
+    },
+    {
+      "name": "RiderClassic pointed ear left",
+      "triangles": 32,
+      "semanticOwner": "RiderClassic pointed ear left"
+    },
+    {
+      "name": "RiderClassic pointed ear right",
+      "triangles": 32,
+      "semanticOwner": "RiderClassic pointed ear right"
+    }
+  ],
+  "semanticUV": "Own semantic charts from original Classic seven-color forehead/eyes/cheeks and torso collar clusters, without transferred sprite exterior contours, painted on actual volumetric skin; pink front ear triangles and violet underside/sole owners; no sprite billboard or painted silhouette.",
+  "masterMeaning": "Editable named semantic components at runtime topology; no skeletal animation/high-to-low claim",
+  "sourceDependencies": [
+    "build.py",
+    "rider.json",
+    "identity.json",
+    "classic-upright-v1.json"
+  ],
+  "scratchInputDependencies": [],
+  "immutableContactProfile": {
+    "schema": "tilefun-seated-rider-profile-v1",
+    "id": "classic-compact-upright-measured-v1",
+    "status": "source-pilot-proposed-profile-not-bike-qualified",
+    "units": "World logical pixels at unchanged80/4.6",
+    "forwardBlender": "-X",
+    "upBlender": "+Z",
+    "origin": "Local pelvis center",
+    "contacts": {
+      "hip_saddle": [
+        0,
+        0,
+        -0.6956521739130436
+      ],
+      "hand_left_grip": [
+        -2.9565217391304355,
+        -3.130434782608696,
+        -0.08695652173913045
+      ],
+      "hand_right_grip": [
+        -2.9565217391304355,
+        3.130434782608696,
+        -0.08695652173913045
+      ],
+      "foot_left_support": [
+        -0.6086956521739132,
+        -3.130434782608696,
+        -3.2173913043478266
+      ],
+      "foot_right_support": [
+        -0.6086956521739132,
+        3.130434782608696,
+        -3.2173913043478266
+      ]
+    },
+    "semantics": {
+      "hip_saddle": "Pelvis bottom on exact fixture top",
+      "hands": "Center inside closed forepaw around synthetic grip",
+      "feet": "Sole tangent to actual support top"
+    },
+    "limits": [
+      "Own Classic compact anatomy; not Explorer profile or universal fit",
+      "Synthetic fixture only; actual bike fit and authority/AI/fallback/all27 blocked"
+    ]
+  },
+  "profileSha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+  "deterministicIndexOrder": "Winding-preserving cyclic-start and triangle-order canonicalization after export; vertex/normal/UV/image buffers untouched. Opaque static single mesh; geometry unchanged."
+}

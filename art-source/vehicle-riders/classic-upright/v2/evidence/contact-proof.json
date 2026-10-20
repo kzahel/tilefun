@@ -1,0 +1,1142 @@
+{
+  "headEarNeckClosedSurfaceControls": [
+    {
+      "owner": "RiderClassic broad face UV owner",
+      "actualDecodedTriangles": 190,
+      "closedSurface": true,
+      "removedActualTriangleBoundaryEdges": 3,
+      "negativeRejected": true,
+      "resetExact": true
+    },
+    {
+      "owner": "RiderClassic pointed ear left",
+      "actualDecodedTriangles": 32,
+      "closedSurface": true,
+      "removedActualTriangleBoundaryEdges": 3,
+      "negativeRejected": true,
+      "resetExact": true
+    },
+    {
+      "owner": "RiderClassic pointed ear right",
+      "actualDecodedTriangles": 32,
+      "closedSurface": true,
+      "removedActualTriangleBoundaryEdges": 3,
+      "negativeRejected": true,
+      "resetExact": true
+    },
+    {
+      "owner": "RiderClassic neck collar visible skin",
+      "actualDecodedTriangles": 88,
+      "closedSurface": true,
+      "removedActualTriangleBoundaryEdges": 3,
+      "negativeRejected": true,
+      "resetExact": true
+    }
+  ],
+  "status": "passed",
+  "presentationStatus": "prototype-not-production",
+  "humanApproval": false,
+  "actualBikePresent": false,
+  "riderSha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+  "profileSha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+  "fixtureSha256": "b577f988fe4612b858e16f4a769717a07babe5d978e9ce4450ae3183186b368e",
+  "packedSources": {
+    "master.blend": {
+      "sha256": "36212343c1220f232c558a5f9e22362e6a43fdd4ebda80d68e311deb174fe083",
+      "meshes": 22,
+      "packedImages": 1,
+      "semanticUV": true
+    },
+    "low.blend": {
+      "sha256": "4de551526146697cf6c968e4667c4ba5921875c6671c101ffc5f6aabe3253abf",
+      "meshes": 1,
+      "packedImages": 1,
+      "semanticUV": true
+    }
+  },
+  "contactLandmarks": [
+    {
+      "name": "hip_saddle",
+      "actualGLBAnchorWorld": [
+        0.0,
+        0.0,
+        -0.6956521272659302
+      ],
+      "profileTargetWorld": [
+        0.0,
+        0.0,
+        -0.695652186870575
+      ],
+      "profileErrorWorld": 5.960464477539063e-08,
+      "actualRiderContactOwner": "RiderClassic seated pelvis",
+      "closestRiderSurfaceWorld": [
+        0.0,
+        0.0,
+        -0.6956521272659302
+      ],
+      "closestRiderSurfaceDistanceWorld": 0.0,
+      "handCenterErrorWorld": null,
+      "closestFixtureSurfaceWorld": [
+        0.0,
+        0.0,
+        -0.695652186870575
+      ],
+      "closestFixtureSurfaceDistanceWorld": 5.960464477539063e-08,
+      "contactSemantics": "Pelvis bottom / boot sole on actual top of synthetic contact patch"
+    },
+    {
+      "name": "hand_left_grip",
+      "actualGLBAnchorWorld": [
+        -2.956521987915039,
+        -3.13043475151062,
+        -0.08695657551288605
+      ],
+      "profileTargetWorld": [
+        -2.95652174949646,
+        -3.13043475151062,
+        -0.08695652335882187
+      ],
+      "profileErrorWorld": 2.4405627480386493e-07,
+      "actualRiderContactOwner": "RiderClassic gripping palm left",
+      "closestRiderSurfaceWorld": [
+        -3.088406562805176,
+        -3.6929478645324707,
+        -0.08695657551288605
+      ],
+      "closestRiderSurfaceDistanceWorld": 0.5777668356895447,
+      "handCenterErrorWorld": 2.388837865275353e-07,
+      "closestFixtureSurfaceWorld": [
+        -3.0931241512298584,
+        -3.13043475151062,
+        -0.22355908155441284
+      ],
+      "closestFixtureSurfaceDistanceWorld": 0.19318488240242004,
+      "contactSemantics": "Grip center inside closed palm; deliberate palm wrapping"
+    },
+    {
+      "name": "hand_right_grip",
+      "actualGLBAnchorWorld": [
+        -2.956521987915039,
+        3.13043475151062,
+        -0.08695657551288605
+      ],
+      "profileTargetWorld": [
+        -2.95652174949646,
+        3.13043475151062,
+        -0.08695652335882187
+      ],
+      "profileErrorWorld": 2.4405627480386493e-07,
+      "actualRiderContactOwner": "RiderClassic gripping palm right",
+      "closestRiderSurfaceWorld": [
+        -3.0884060859680176,
+        2.5679216384887695,
+        -0.08695657551288605
+      ],
+      "closestRiderSurfaceDistanceWorld": 0.5777667164802551,
+      "handCenterErrorWorld": 3.375038997204937e-07,
+      "closestFixtureSurfaceWorld": [
+        -3.0931241512298584,
+        3.13043475151062,
+        -0.22355908155441284
+      ],
+      "closestFixtureSurfaceDistanceWorld": 0.19318488240242004,
+      "contactSemantics": "Grip center inside closed palm; deliberate palm wrapping"
+    },
+    {
+      "name": "foot_left_support",
+      "actualGLBAnchorWorld": [
+        -0.6086956262588501,
+        -3.13043475151062,
+        -3.2173914909362793
+      ],
+      "profileTargetWorld": [
+        -0.6086956262588501,
+        -3.13043475151062,
+        -3.2173912525177
+      ],
+      "profileErrorWorld": 2.384185791015625e-07,
+      "actualRiderContactOwner": "RiderClassic boot left",
+      "closestRiderSurfaceWorld": [
+        -0.6086955666542053,
+        -3.13043475151062,
+        -3.2173912525177
+      ],
+      "closestRiderSurfaceDistanceWorld": 2.4575624024691933e-07,
+      "handCenterErrorWorld": null,
+      "closestFixtureSurfaceWorld": [
+        -0.6086956262588501,
+        -3.130434513092041,
+        -3.2173912525177
+      ],
+      "closestFixtureSurfaceDistanceWorld": 3.3717478231665154e-07,
+      "contactSemantics": "Pelvis bottom / boot sole on actual top of synthetic contact patch"
+    },
+    {
+      "name": "foot_right_support",
+      "actualGLBAnchorWorld": [
+        -0.6086956262588501,
+        3.13043475151062,
+        -3.2173914909362793
+      ],
+      "profileTargetWorld": [
+        -0.6086956262588501,
+        3.13043475151062,
+        -3.2173912525177
+      ],
+      "profileErrorWorld": 2.384185791015625e-07,
+      "actualRiderContactOwner": "RiderClassic boot right",
+      "closestRiderSurfaceWorld": [
+        -0.6086955666542053,
+        3.13043475151062,
+        -3.2173912525177
+      ],
+      "closestRiderSurfaceDistanceWorld": 2.4575624024691933e-07,
+      "handCenterErrorWorld": null,
+      "closestFixtureSurfaceWorld": [
+        -0.6086955070495605,
+        3.130434989929199,
+        -3.2173912525177
+      ],
+      "closestFixtureSurfaceDistanceWorld": 3.5762786865234375e-07,
+      "contactSemantics": "Pelvis bottom / boot sole on actual top of synthetic contact patch"
+    }
+  ],
+  "actualFixedBoneLengthChecks": [
+    {
+      "owner": "RiderClassic upper arm left",
+      "actualGLBRingCentersWorld": [
+        [
+          -0.4347827434539795,
+          -2.95652174949646,
+          1.217391014099121
+        ],
+        [
+          -1.552832841873169,
+          -3.9465420246124268,
+          0.7486390471458435
+        ]
+      ],
+      "actualLengthWorld": 1.5652170970963695,
+      "fixedAuthoredLengthWorld": 1.565217391304348,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 2.9420797842405477e-07
+    },
+    {
+      "owner": "RiderClassic forearm left",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.5528326034545898,
+          -3.9465417861938477,
+          0.7486389875411987
+        ],
+        [
+          -2.622309923171997,
+          -3.3247461318969727,
+          0.11199499666690826
+        ]
+      ],
+      "actualLengthWorld": 1.3913041395944914,
+      "fixedAuthoredLengthWorld": 1.391304347826087,
+      "forepawCenterBeyondWristWorld": 0.4347826086956523,
+      "errorWorld": 2.0823159552207926e-07
+    },
+    {
+      "owner": "RiderClassic bent thigh left",
+      "actualGLBRingCentersWorld": [
+        [
+          0.0,
+          -2.08695650100708,
+          -0.43478286266326904
+        ],
+        [
+          -1.3463516235351562,
+          -2.8603873252868652,
+          -0.999423623085022
+        ]
+      ],
+      "actualLengthWorld": 1.652173468651237,
+      "fixedAuthoredLengthWorld": 1.6521739130434785,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 4.4439224144987577e-07
+    },
+    {
+      "owner": "RiderClassic short shin left",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.3463516235351562,
+          -2.8603878021240234,
+          -0.9994237422943115
+        ],
+        [
+          -0.3478260040283203,
+          -3.130434989929199,
+          -2.6086959838867188
+        ]
+      ],
+      "actualLengthWorld": 1.9130436676948168,
+      "fixedAuthoredLengthWorld": 1.9130434782608698,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 1.8943394697323868e-07
+    },
+    {
+      "owner": "RiderClassic upper arm right",
+      "actualGLBRingCentersWorld": [
+        [
+          -0.4347827434539795,
+          2.956521987915039,
+          1.217391014099121
+        ],
+        [
+          -1.552832841873169,
+          3.946542263031006,
+          0.7486389875411987
+        ]
+      ],
+      "actualLengthWorld": 1.5652171161367456,
+      "fixedAuthoredLengthWorld": 1.565217391304348,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 2.751676022594296e-07
+    },
+    {
+      "owner": "RiderClassic forearm right",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.5528326034545898,
+          3.946542263031006,
+          0.7486390471458435
+        ],
+        [
+          -2.622309684753418,
+          3.3247458934783936,
+          0.11199499666690826
+        ]
+      ],
+      "actualLengthWorld": 1.39130426811702,
+      "fixedAuthoredLengthWorld": 1.391304347826087,
+      "forepawCenterBeyondWristWorld": 0.4347826086956523,
+      "errorWorld": 7.970906690246693e-08
+    },
+    {
+      "owner": "RiderClassic bent thigh right",
+      "actualGLBRingCentersWorld": [
+        [
+          1.862645149230957e-09,
+          2.08695650100708,
+          -0.43478286266326904
+        ],
+        [
+          -1.3463513851165771,
+          2.8603878021240234,
+          -0.9994236826896667
+        ]
+      ],
+      "actualLengthWorld": 1.6521734866894897,
+      "fixedAuthoredLengthWorld": 1.6521739130434785,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 4.2635398878054787e-07
+    },
+    {
+      "owner": "RiderClassic short shin right",
+      "actualGLBRingCentersWorld": [
+        [
+          -1.3463517427444458,
+          2.8603875637054443,
+          -0.9994237422943115
+        ],
+        [
+          -0.3478260040283203,
+          3.130434989929199,
+          -2.6086955070495605
+        ]
+      ],
+      "actualLengthWorld": 1.9130433269154234,
+      "fixedAuthoredLengthWorld": 1.9130434782608698,
+      "forepawCenterBeyondWristWorld": 0,
+      "errorWorld": 1.5134544639749947e-07
+    }
+  ],
+  "selfIntersectionPairs": [
+    {
+      "partA": "RiderClassic bent thigh left",
+      "partB": "RiderClassic knee left",
+      "trianglePairs": 73,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07741522043943405,
+          -0.164472296833992,
+          -0.05746685713529587
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.576255333844671,
+        "actualIntersectionPointCount": 146
+      }
+    },
+    {
+      "partA": "RiderClassic bent thigh left",
+      "partB": "RiderClassic seated pelvis",
+      "trianglePairs": 21,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.0,
+          -0.11999999731779099,
+          -0.02500000037252903
+        ],
+        "radiusWorld": 1.0434782608695654,
+        "maximumActualIntersectionDistanceWorld": 0.9306201198927404,
+        "actualIntersectionPointCount": 42
+      }
+    },
+    {
+      "partA": "RiderClassic bent thigh left",
+      "partB": "RiderClassic short shin left",
+      "trianglePairs": 31,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07741522043943405,
+          -0.164472296833992,
+          -0.05746685713529587
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.7659275736723918,
+        "actualIntersectionPointCount": 62
+      }
+    },
+    {
+      "partA": "RiderClassic bent thigh left",
+      "partB": "RiderClassic tiny torso collar UV owner",
+      "trianglePairs": 10,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.0,
+          -0.11999999731779099,
+          -0.02500000037252903
+        ],
+        "radiusWorld": 1.0434782608695654,
+        "maximumActualIntersectionDistanceWorld": 0.6574061716553579,
+        "actualIntersectionPointCount": 20
+      }
+    },
+    {
+      "partA": "RiderClassic bent thigh right",
+      "partB": "RiderClassic knee right",
+      "trianglePairs": 74,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07741522043943405,
+          0.164472296833992,
+          -0.05746685713529587
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5762553521275152,
+        "actualIntersectionPointCount": 148
+      }
+    },
+    {
+      "partA": "RiderClassic bent thigh right",
+      "partB": "RiderClassic seated pelvis",
+      "trianglePairs": 22,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.0,
+          0.11999999731779099,
+          -0.02500000037252903
+        ],
+        "radiusWorld": 1.0434782608695654,
+        "maximumActualIntersectionDistanceWorld": 0.9306201198927404,
+        "actualIntersectionPointCount": 44
+      }
+    },
+    {
+      "partA": "RiderClassic bent thigh right",
+      "partB": "RiderClassic short shin right",
+      "trianglePairs": 30,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07741522043943405,
+          0.164472296833992,
+          -0.05746685713529587
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.7659276174462588,
+        "actualIntersectionPointCount": 60
+      }
+    },
+    {
+      "partA": "RiderClassic bent thigh right",
+      "partB": "RiderClassic tiny torso collar UV owner",
+      "trianglePairs": 10,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.0,
+          0.11999999731779099,
+          -0.02500000037252903
+        ],
+        "radiusWorld": 1.0434782608695654,
+        "maximumActualIntersectionDistanceWorld": 0.6574061716553579,
+        "actualIntersectionPointCount": 20
+      }
+    },
+    {
+      "partA": "RiderClassic boot left",
+      "partB": "RiderClassic short shin left",
+      "trianglePairs": 18,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.019999999552965164,
+          -0.18000000715255737,
+          -0.15000000596046448
+        ],
+        "radiusWorld": 1.3043478260869568,
+        "maximumActualIntersectionDistanceWorld": 1.0607668681847744,
+        "actualIntersectionPointCount": 36
+      }
+    },
+    {
+      "partA": "RiderClassic boot right",
+      "partB": "RiderClassic short shin right",
+      "trianglePairs": 18,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.019999999552965164,
+          0.18000000715255737,
+          -0.15000000596046448
+        ],
+        "radiusWorld": 1.3043478260869568,
+        "maximumActualIntersectionDistanceWorld": 1.0607668681847744,
+        "actualIntersectionPointCount": 36
+      }
+    },
+    {
+      "partA": "RiderClassic broad face UV owner",
+      "partB": "RiderClassic pointed ear left",
+      "trianglePairs": 26,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.005,
+          -0.2,
+          0.5
+        ],
+        "radiusWorld": 2.8096685950266984,
+        "maximumActualIntersectionDistanceWorld": 1.7897711770352343,
+        "actualIntersectionPointCount": 56
+      }
+    },
+    {
+      "partA": "RiderClassic broad face UV owner",
+      "partB": "RiderClassic pointed ear right",
+      "trianglePairs": 26,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0.005,
+          0.2,
+          0.5
+        ],
+        "radiusWorld": 2.8096685950266984,
+        "maximumActualIntersectionDistanceWorld": 1.7897711770352343,
+        "actualIntersectionPointCount": 56
+      }
+    },
+    {
+      "partA": "RiderClassic broad face UV owner",
+      "partB": "RiderClassic tiny torso collar UV owner",
+      "trianglePairs": 63,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.012,
+          0,
+          0.145
+        ],
+        "radiusWorld": 3.304347826086957,
+        "maximumActualIntersectionDistanceWorld": 2.793292154922922,
+        "actualIntersectionPointCount": 126
+      }
+    },
+    {
+      "partA": "RiderClassic elbow left",
+      "partB": "RiderClassic forearm left",
+      "trianglePairs": 47,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.0892878845334053,
+          -0.22692617774009705,
+          0.0430467464029789
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5724905153395319,
+        "actualIntersectionPointCount": 94
+      }
+    },
+    {
+      "partA": "RiderClassic elbow left",
+      "partB": "RiderClassic upper arm left",
+      "trianglePairs": 45,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.0892878845334053,
+          -0.22692617774009705,
+          0.0430467464029789
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5735431231895253,
+        "actualIntersectionPointCount": 90
+      }
+    },
+    {
+      "partA": "RiderClassic elbow right",
+      "partB": "RiderClassic forearm right",
+      "trianglePairs": 44,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.0892878845334053,
+          0.22692617774009705,
+          0.0430467464029789
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5724905153395319,
+        "actualIntersectionPointCount": 88
+      }
+    },
+    {
+      "partA": "RiderClassic elbow right",
+      "partB": "RiderClassic upper arm right",
+      "trianglePairs": 46,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.0892878845334053,
+          0.22692617774009705,
+          0.0430467464029789
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5735431229833781,
+        "actualIntersectionPointCount": 92
+      }
+    },
+    {
+      "partA": "RiderClassic forearm left",
+      "partB": "RiderClassic gripping palm left",
+      "trianglePairs": 35,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.17000000178813934,
+          -0.18000000715255737,
+          -0.005000002682209015
+        ],
+        "radiusWorld": 1.1304347826086958,
+        "maximumActualIntersectionDistanceWorld": 0.6896599034168246,
+        "actualIntersectionPointCount": 70
+      }
+    },
+    {
+      "partA": "RiderClassic forearm left",
+      "partB": "RiderClassic upper arm left",
+      "trianglePairs": 27,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.0892878845334053,
+          -0.22692617774009705,
+          0.0430467464029789
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5893913914289386,
+        "actualIntersectionPointCount": 54
+      }
+    },
+    {
+      "partA": "RiderClassic forearm right",
+      "partB": "RiderClassic gripping palm right",
+      "trianglePairs": 33,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.17000000178813934,
+          0.18000000715255737,
+          -0.005000002682209015
+        ],
+        "radiusWorld": 1.1304347826086958,
+        "maximumActualIntersectionDistanceWorld": 0.6896599034168246,
+        "actualIntersectionPointCount": 66
+      }
+    },
+    {
+      "partA": "RiderClassic forearm right",
+      "partB": "RiderClassic upper arm right",
+      "trianglePairs": 27,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.0892878845334053,
+          0.22692617774009705,
+          0.0430467464029789
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5893913612087064,
+        "actualIntersectionPointCount": 54
+      }
+    },
+    {
+      "partA": "RiderClassic knee left",
+      "partB": "RiderClassic short shin left",
+      "trianglePairs": 48,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07741522043943405,
+          -0.164472296833992,
+          -0.05746685713529587
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5867789653467295,
+        "actualIntersectionPointCount": 96
+      }
+    },
+    {
+      "partA": "RiderClassic knee right",
+      "partB": "RiderClassic short shin right",
+      "trianglePairs": 44,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.07741522043943405,
+          0.164472296833992,
+          -0.05746685713529587
+        ],
+        "radiusWorld": 0.8695652173913045,
+        "maximumActualIntersectionDistanceWorld": 0.5867789618499782,
+        "actualIntersectionPointCount": 88
+      }
+    },
+    {
+      "partA": "RiderClassic neck collar visible skin",
+      "partB": "RiderClassic tiny torso collar UV owner",
+      "trianglePairs": 81,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0,
+          0,
+          0.1
+        ],
+        "radiusWorld": 3.304347826086957,
+        "maximumActualIntersectionDistanceWorld": 3.027285933403929,
+        "actualIntersectionPointCount": 162
+      }
+    },
+    {
+      "partA": "RiderClassic seated pelvis",
+      "partB": "RiderClassic tiny torso collar UV owner",
+      "trianglePairs": 42,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          0,
+          0,
+          0.035
+        ],
+        "radiusWorld": 2.9565217391304355,
+        "maximumActualIntersectionDistanceWorld": 2.433866347817071,
+        "actualIntersectionPointCount": 84
+      }
+    },
+    {
+      "partA": "RiderClassic tiny torso collar UV owner",
+      "partB": "RiderClassic upper arm left",
+      "trianglePairs": 11,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.02500000037252903,
+          -0.17000000178813934,
+          0.07000000029802322
+        ],
+        "radiusWorld": 1.2173913043478264,
+        "maximumActualIntersectionDistanceWorld": 0.6229391593482703,
+        "actualIntersectionPointCount": 22
+      }
+    },
+    {
+      "partA": "RiderClassic tiny torso collar UV owner",
+      "partB": "RiderClassic upper arm right",
+      "trianglePairs": 7,
+      "declaredLocalAnatomicalJoin": true,
+      "boundedJointRegion": {
+        "centerSource": [
+          -0.02500000037252903,
+          0.17000000178813934,
+          0.07000000029802322
+        ],
+        "radiusWorld": 1.2173913043478264,
+        "maximumActualIntersectionDistanceWorld": 0.6229391501911147,
+        "actualIntersectionPointCount": 14
+      }
+    }
+  ],
+  "inappropriateSelfIntersectionPairs": [],
+  "inappropriateFixtureIntersectionPairs": [],
+  "straddleOpening": {
+    "allLegTrianglesOutsideCentralYStrip": true,
+    "minimumLegInnerHalfGapWorld": 1.5591522455215454,
+    "certifiedFiniteEmptyStripWidthWorld": 2,
+    "excludesPelvisAndFixture": true,
+    "notBikeClearance": true
+  },
+  "negativeControls": {
+    "displacedSocketDistancesWorld": {
+      "hip_saddle": 3.605551275463989,
+      "hand_left_grip": 3.605551077087735,
+      "hand_right_grip": 3.605551077087735,
+      "foot_left_support": 3.6055511432131544,
+      "foot_right_support": 3.6055511432131544
+    },
+    "allDisplacedSocketsRejected": true,
+    "collapsedRightLegIntoLeftTrianglePairs": 462,
+    "collapsedLegsRejected": true,
+    "baselineRestored": true,
+    "closedPalmSoleControls": [
+      {
+        "owner": "RiderClassic boot left",
+        "removedActualTriangleRejected": true,
+        "boundaryEdges": 3,
+        "resetClosed": true
+      },
+      {
+        "owner": "RiderClassic boot right",
+        "removedActualTriangleRejected": true,
+        "boundaryEdges": 3,
+        "resetClosed": true
+      },
+      {
+        "owner": "RiderClassic gripping palm left",
+        "removedActualTriangleRejected": true,
+        "boundaryEdges": 3,
+        "resetClosed": true
+      },
+      {
+        "owner": "RiderClassic gripping palm right",
+        "removedActualTriangleRejected": true,
+        "boundaryEdges": 3,
+        "resetClosed": true
+      }
+    ],
+    "translatedPalmIntoHeadRejected": {
+      "actualTrianglePairs": 38,
+      "resetPairs": 0,
+      "boundedJoinExceptionAllowed": false
+    },
+    "straddleResetIntersectionPairs": 0
+  },
+  "actualPartBoundsWorld": {
+    "RiderClassic bent thigh left": {
+      "min": [
+        -1.658988356590271,
+        -3.342951536178589,
+        -1.522436261177063
+      ],
+      "max": [
+        0.34194642305374146,
+        -1.5591522455215454,
+        0.13726259768009186
+      ]
+    },
+    "RiderClassic bent thigh right": {
+      "min": [
+        -1.658988356590271,
+        1.5591522455215454,
+        -1.522436261177063
+      ],
+      "max": [
+        0.34194642305374146,
+        3.342951536178589,
+        0.13726259768009186
+      ]
+    },
+    "RiderClassic boot left": {
+      "min": [
+        -1.7391302585601807,
+        -4.17391300201416,
+        -3.2173912525177
+      ],
+      "max": [
+        0.5217390656471252,
+        -2.08695650100708,
+        -2.08695650100708
+      ]
+    },
+    "RiderClassic boot right": {
+      "min": [
+        -1.7391302585601807,
+        2.08695650100708,
+        -3.2173912525177
+      ],
+      "max": [
+        0.5217390656471252,
+        4.17391300201416,
+        -2.08695650100708
+      ]
+    },
+    "RiderClassic broad face UV owner": {
+      "min": [
+        -4.782608509063721,
+        -6.782608509063721,
+        2.4347825050354004
+      ],
+      "max": [
+        4.956521511077881,
+        6.782608509063721,
+        9.739130020141602
+      ]
+    },
+    "RiderClassic elbow left": {
+      "min": [
+        -2.09865665435791,
+        -4.5204548835754395,
+        0.17472602427005768
+      ],
+      "max": [
+        -1.0070090293884277,
+        -3.372629165649414,
+        1.32255220413208
+      ]
+    },
+    "RiderClassic elbow right": {
+      "min": [
+        -2.09865665435791,
+        3.372628927230835,
+        0.17472602427005768
+      ],
+      "max": [
+        -1.0070090293884277,
+        4.5204548835754395,
+        1.32255220413208
+      ]
+    },
+    "RiderClassic forearm left": {
+      "min": [
+        -2.865316867828369,
+        -4.3825531005859375,
+        -0.22820718586444855
+      ],
+      "max": [
+        -1.2325055599212646,
+        -2.993978977203369,
+        1.197087049484253
+      ]
+    },
+    "RiderClassic forearm right": {
+      "min": [
+        -2.865316867828369,
+        2.993978977203369,
+        -0.22820718586444855
+      ],
+      "max": [
+        -1.2325055599212646,
+        4.3825531005859375,
+        1.197087049484253
+      ]
+    },
+    "RiderClassic gripping palm left": {
+      "min": [
+        -3.634732484817505,
+        -3.7238690853118896,
+        -0.695652186870575
+      ],
+      "max": [
+        -2.278311014175415,
+        -2.5370004177093506,
+        0.5217390656471252
+      ]
+    },
+    "RiderClassic gripping palm right": {
+      "min": [
+        -3.634732484817505,
+        2.5370006561279297,
+        -0.695652186870575
+      ],
+      "max": [
+        -2.278311014175415,
+        3.7238693237304688,
+        0.5217390656471252
+      ]
+    },
+    "RiderClassic knee left": {
+      "min": [
+        -1.9087156057357788,
+        -3.4516921043395996,
+        -1.5733366012573242
+      ],
+      "max": [
+        -0.7839877009391785,
+        -2.2690834999084473,
+        -0.42551055550575256
+      ]
+    },
+    "RiderClassic knee right": {
+      "min": [
+        -1.9087156057357788,
+        2.269083261489868,
+        -1.5733366012573242
+      ],
+      "max": [
+        -0.7839877009391785,
+        3.4516918659210205,
+        -0.42551055550575256
+      ]
+    },
+    "RiderClassic neck collar visible skin": {
+      "min": [
+        -4.6086955070495605,
+        -2.95652174949646,
+        0.782608687877655
+      ],
+      "max": [
+        2.6086957454681396,
+        2.95652174949646,
+        2.3478262424468994
+      ]
+    },
+    "RiderClassic pointed ear left": {
+      "min": [
+        -2.0,
+        -5.043478012084961,
+        7.6521735191345215
+      ],
+      "max": [
+        2.17391300201416,
+        -1.9130433797836304,
+        12.69565200805664
+      ]
+    },
+    "RiderClassic pointed ear right": {
+      "min": [
+        -2.0,
+        1.9130433797836304,
+        7.6521735191345215
+      ],
+      "max": [
+        2.17391300201416,
+        5.043478012084961,
+        12.69565200805664
+      ]
+    },
+    "RiderClassic seated pelvis": {
+      "min": [
+        -1.3913042545318604,
+        -2.08695650100708,
+        -0.6956521272659302
+      ],
+      "max": [
+        1.3913042545318604,
+        2.08695650100708,
+        0.6956521272659302
+      ]
+    },
+    "RiderClassic short shin left": {
+      "min": [
+        -1.7841459512710571,
+        -3.566927671432495,
+        -2.853189706802368
+      ],
+      "max": [
+        0.01935628429055214,
+        -2.339953899383545,
+        -0.7079115509986877
+      ]
+    },
+    "RiderClassic short shin right": {
+      "min": [
+        -1.7841459512710571,
+        2.339953899383545,
+        -2.853189706802368
+      ],
+      "max": [
+        0.01935628429055214,
+        3.566927671432495,
+        -0.7079115509986877
+      ]
+    },
+    "RiderClassic tiny torso collar UV owner": {
+      "min": [
+        -1.56521737575531,
+        -2.6086957454681396,
+        0.0
+      ],
+      "max": [
+        1.56521737575531,
+        2.6086957454681396,
+        2.6086957454681396
+      ]
+    },
+    "RiderClassic upper arm left": {
+      "min": [
+        -1.910244107246399,
+        -4.3501739501953125,
+        0.2342534363269806
+      ],
+      "max": [
+        -0.03125366196036339,
+        -2.5008082389831543,
+        1.7981492280960083
+      ]
+    },
+    "RiderClassic upper arm right": {
+      "min": [
+        -1.910244107246399,
+        2.5008082389831543,
+        0.2342534363269806
+      ],
+      "max": [
+        -0.03125366196036339,
+        4.3501739501953125,
+        1.7981492280960083
+      ]
+    }
+  },
+  "handFootGeometry": {
+    "actualClosedSolidChecks": [
+      {
+        "owner": "RiderClassic boot left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 4.775228218485911
+      },
+      {
+        "owner": "RiderClassic boot right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 4.775230413923661
+      },
+      {
+        "owner": "RiderClassic gripping palm left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 0.9799351918433482
+      },
+      {
+        "owner": "RiderClassic gripping palm right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 0.9799355258001015
+      }
+    ],
+    "closedVolumetricPalmsBoots": true
+  },
+  "limits": [
+    "Body depth/joint positions inferred from2D; not unique observed anatomy",
+    "Only declared bounded anatomical joins and matching fixture contacts excepted",
+    "Finite triangle surface and central opening checks do not prove any bike/frame/wheel/animation or other-avatar fit"
+  ]
+}

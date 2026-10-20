@@ -1,0 +1,452 @@
+{
+  "status": "passed",
+  "glbSha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+  "sourceInputHashes": {
+    "master.blend": "dfb2c5255b8828057bce7f5ca84f9529502516d75d2d9016582d839ca9f6ecf4",
+    "car.blend": "b82062629114249c5947356cc2b0d4786417b5b2b7ddf66fd0522566a0b2a76c",
+    "atlas.png": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+    "model.glb": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb"
+  },
+  "packedScenes": [
+    {
+      "path": "master.blend",
+      "sha256": "dfb2c5255b8828057bce7f5ca84f9529502516d75d2d9016582d839ca9f6ecf4",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 56,
+      "triangles": 2496,
+      "semanticUV": true
+    },
+    {
+      "path": "car.blend",
+      "sha256": "b82062629114249c5947356cc2b0d4786417b5b2b7ddf66fd0522566a0b2a76c",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 3,
+      "triangles": 2496,
+      "semanticUV": true
+    }
+  ],
+  "semanticOwners": [
+    {
+      "owner": "TOURING broad cream edged front fairing",
+      "triangles": 60,
+      "vertices": 32
+    },
+    {
+      "owner": "TOURING larger shouldered navy fuel tank",
+      "triangles": 76,
+      "vertices": 40
+    },
+    {
+      "owner": "TOURING tall cool blue framed screen actual skin",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "TOURING closed deep pannier -1",
+      "triangles": 60,
+      "vertices": 32
+    },
+    {
+      "owner": "TOURING pannier lid -1",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "TOURING pannier attached carrier -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING closed deep pannier 1",
+      "triangles": 60,
+      "vertices": 32
+    },
+    {
+      "owner": "TOURING pannier lid 1",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "TOURING pannier attached carrier 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING rear luggage deck",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "TOURING comfortable raised pillion saddle",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual dark saddle central hip tangent",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual narrow saddle nose",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "TOURING concealed broad crankcase",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "TOURING lower dark undertray",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "TOURING internal chassis member 0",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING internal chassis member 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING internal chassis member 2",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING internal chassis member 3",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING internal chassis member 4",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING internal chassis member 5",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING front fork -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING rear swingarm -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING rear fixed shock -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING fixed axle stops short of hub F-1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING fixed axle stops short of hub R-1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING short upswept exhaust -1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "TOURING front fork 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING rear swingarm 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING rear fixed shock 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING fixed axle stops short of hub F1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING fixed axle stops short of hub R1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING short upswept exhaust 1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "TOURING grip riser",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "TOURING connected handlebar",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "TOURING close curved road fender F",
+      "triangles": 100,
+      "vertices": 52
+    },
+    {
+      "owner": "TOURING close curved road fender R",
+      "triangles": 100,
+      "vertices": 52
+    },
+    {
+      "owner": "TOURING integrated tail ruby lamp",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "True motorcycle rounded tire F",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim F -1",
+      "triangles": 48,
+      "vertices": 33
+    },
+    {
+      "owner": "Chrome wheel hub F -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index F -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim F 1",
+      "triangles": 48,
+      "vertices": 33
+    },
+    {
+      "owner": "Chrome wheel hub F 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index F 1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "True motorcycle rounded tire R",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim R -1",
+      "triangles": 48,
+      "vertices": 33
+    },
+    {
+      "owner": "Chrome wheel hub R -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index R -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim R 1",
+      "triangles": 48,
+      "vertices": 33
+    },
+    {
+      "owner": "Chrome wheel hub R 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index R 1",
+      "triangles": 22,
+      "vertices": 16
+    }
+  ],
+  "touringGeometry": {
+    "tank": {
+      "owner": "TOURING larger shouldered navy fuel tank",
+      "vertices": 40,
+      "minSource": [
+        -0.7799999713897705,
+        -0.17000000178813934,
+        0.9100000262260437
+      ],
+      "maxSource": [
+        -0.18000000715255737,
+        0.17000000178813934,
+        1.2400000095367432
+      ],
+      "actualDepthSource": [
+        0.5999999642372131,
+        0.3400000035762787,
+        0.32999998331069946
+      ],
+      "closedVolume": true
+    },
+    "fairing": {
+      "owner": "TOURING broad cream edged front fairing",
+      "vertices": 32,
+      "minSource": [
+        -1.2999999523162842,
+        -0.3199999928474426,
+        0.9599999785423279
+      ],
+      "maxSource": [
+        -0.6600000262260437,
+        0.3199999928474426,
+        1.3899999856948853
+      ],
+      "actualDepthSource": [
+        0.6399999260902405,
+        0.6399999856948853,
+        0.4300000071525574
+      ],
+      "closedVolume": true
+    },
+    "screen": {
+      "owner": "TOURING tall cool blue framed screen actual skin",
+      "vertices": 8,
+      "minSource": [
+        -0.9919999837875366,
+        -0.25999999046325684,
+        1.2999999523162842
+      ],
+      "maxSource": [
+        -0.7179999947547913,
+        0.25999999046325684,
+        1.7799999713897705
+      ],
+      "actualDepthSource": [
+        0.27399998903274536,
+        0.5199999809265137,
+        0.48000001907348633
+      ],
+      "closedVolume": false
+    },
+    "pannierLeft": {
+      "owner": "TOURING closed deep pannier -1",
+      "vertices": 32,
+      "minSource": [
+        0.47999998927116394,
+        -0.5099999904632568,
+        0.699999988079071
+      ],
+      "maxSource": [
+        1.2999999523162842,
+        -0.23999999463558197,
+        1.0199999809265137
+      ],
+      "actualDepthSource": [
+        0.8199999630451202,
+        0.26999999582767487,
+        0.3199999928474426
+      ],
+      "closedVolume": true
+    },
+    "pannierRight": {
+      "owner": "TOURING closed deep pannier 1",
+      "vertices": 32,
+      "minSource": [
+        0.47999998927116394,
+        0.23999999463558197,
+        0.699999988079071
+      ],
+      "maxSource": [
+        1.2999999523162842,
+        0.5099999904632568,
+        1.0199999809265137
+      ],
+      "actualDepthSource": [
+        0.8199999630451202,
+        0.26999999582767487,
+        0.3199999928474426
+      ],
+      "closedVolume": true
+    }
+  },
+  "actualTireWidthsSource": {
+    "F": 0.2199999988079071,
+    "R": 0.30000001192092896
+  },
+  "rearTireWider": true,
+  "actualTriangleUVMatches": 2496,
+  "actualCornerPositionAndUVMatches": 7488,
+  "allActualGLBTrianglesMatchedToOwnSourceUV": true,
+  "method": "Original semantic component master at runtime topology; no high-to-low or bitmap transfer claim",
+  "readonlySourceUnchanged": true
+}

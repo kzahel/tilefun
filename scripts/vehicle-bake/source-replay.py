@@ -74,7 +74,9 @@ def main():
     except ValueError as error:
         # Preserve this CLI's existing rejection contract for callers/controls.
         raise AssertionError(str(error)) from error
-    (scratch / "AGENTS.md").write_bytes(b"# Isolated retained-input source replay root.\n")
+    # Never overwrite a declared input while adding the minimal root scaffold.
+    if "AGENTS.md" not in pins:
+        (scratch / "AGENTS.md").write_bytes(b"# Isolated retained-input source replay root.\n")
     (scratch / "public").mkdir(exist_ok=True)
     arguments = receipt.get("arguments", ["--scratch"])
     assert isinstance(arguments, list) and all(isinstance(value, str) for value in arguments)

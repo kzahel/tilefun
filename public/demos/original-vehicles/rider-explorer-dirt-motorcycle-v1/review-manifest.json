@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-dirt-motorcycle-v1",
+      "name": "explorer-upright \u00b7 dirt-motorcycle fit pilot",
+      "title": "explorer-upright \u00b7 dirt-motorcycle \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact dirt-motorcycle and unchanged explorer-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 5080,
+        "vertices": 10261,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 371472,
+        "sha256": "8290844ce734800c47f1c07c9328fc74763e23d0f46e6cedcba5a62cfcd0f360",
+        "wheels": {
+          "F": {
+            "wheel_radius": 8.173913043478262,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.652173913043479,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/atlas.png",
+          "sha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/composition.json",
+          "sha256": "a79b820904f02a26f0522799c193168155327075e95e5b6d8dbea64915580e25"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/model.glb",
+          "sha256": "8290844ce734800c47f1c07c9328fc74763e23d0f46e6cedcba5a62cfcd0f360"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/recipe.json",
+          "sha256": "12bce4fc08ffedab4b3165b8f70d753887100e297ac71de6dbb7ed63f4a7fdf4"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/report.json",
+          "sha256": "49cc1aaf3245e79dd3f2b62583674f9142b78dff9407f85210429ba025f2ae4f"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "toolchain": "motorcycle-v1",
+          "wheelIds": [
+            "F",
+            "R"
+          ],
+          "inputBytesUnchanged": true,
+          "id": "rider-explorer-dirt-motorcycle--v1",
+          "glbSha256": "8290844ce734800c47f1c07c9328fc74763e23d0f46e6cedcba5a62cfcd0f360",
+          "triangles": 5080,
+          "clearance": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "radius": 8.173914171926675,
+              "minimumGap": 3.6047265630360403,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "radius": 7.652174609283137,
+              "minimumGap": 2.350228911301593,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "perWheelCollisionControls": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            }
+          ],
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "F",
+              "radius": 8.173913043478262,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "R",
+              "radius": 7.652173913043479,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/browser-qa.json",
+          "sha256": "e4ac580a2209d6ee73d2505196e93dcfd26b08abc2e816a39ee0ebf399b0f2d4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/candidate.json",
+          "sha256": "022d40332b52d4856893fbd14c18868a02ceffa50909f0463637a98b4b69e7b4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/capture.json",
+          "sha256": "2df009fe10a6ca40227fab9064cee416e6fa6128796f16926c654cbf42d71a9e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/contact-sheet.png",
+          "sha256": "be2e8bd9af10295ce67d9225931ee64c04e9899a6ae90b194cd8059bf8eba17c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-0.png",
+          "sha256": "d71b9a827704f4d7f1adac0667b07722d960dc0b48bd68cc833238308d542e10"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-1.png",
+          "sha256": "b1c2bafc3ab5bf91d8c370f07f2c3e336ede8e725532294f679cb06464219be4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-10.png",
+          "sha256": "a5eb8f2deda66f93b98e9423ad21081890b7e3fdf95e4e0c855e4d16117f2546"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-11.png",
+          "sha256": "d454a1674e780a92db79b9c37c6465706cef36c8ef897c2755d5083d98cf4c6a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-12.png",
+          "sha256": "de2a9ea05a7dd1f23240ad3f9da5b50ba453703e683bf01b185d66c8a087fb52"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-13.png",
+          "sha256": "4e3923bc34a730a55e158f2a9c8b7775c9fbe85dbcc45dd5138c096181f11151"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-14.png",
+          "sha256": "d4bc0869910d26f14573890f05e7bb7bf6b272c8ca0f30d929a3d5bb0e552337"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-15.png",
+          "sha256": "da137b1ba483382a67e591c0c255a680e1ed0ae63a3e27b82896a9653d074dcc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-1x.png",
+          "sha256": "97d336ac7b9ab6928643816592dcca42e47d70c6eb3bd9886dd34af61e73c71e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-2.png",
+          "sha256": "e43c1931ee118aa2258417be92a86f5da48b5261b9c61cced51a30ffbdd2ed56"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-2x.png",
+          "sha256": "a021b5e2afd0ae50a3653163ac34e85d90df155b8690d95583d7b76d34412ac6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-3.png",
+          "sha256": "c733819c495e4c0e9d635190d7197aef659a1b4807fe2d9e12d9e240018482c4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-3x.png",
+          "sha256": "8a921c035799c97536cf8fa07448fc00202b0b1840257ad40ad7829a05cd4934"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-4.png",
+          "sha256": "3f53f18a758b67acdc0a2ba0a7ce1db2206e51f2c3e49bee28d78a0326a2cac2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-5.png",
+          "sha256": "f34aae73d7f3c941643c143edb1181ff90eb1685bbb9bbc64b83549943bdddf4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-6.png",
+          "sha256": "0ea576ae8dba4955966c1bc3a9914a178d306f81a9577ad6070a6ffd99a8dbd7"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-7.png",
+          "sha256": "1f983616e80668856f3e1bf7b27ef15b0e4151231723ed3541316a359bbdb1da"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-8.png",
+          "sha256": "4f099e6f53d1c5d0a6d053b366ea8aff311b857ade975ed2452a0b6a520f2e2f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/engine-9.png",
+          "sha256": "e41fde45bd9ee1177a4b48310870aef116363e173bd93b4b0e5c45c6dfde3cd0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-roll-0.png",
+          "sha256": "e43c1931ee118aa2258417be92a86f5da48b5261b9c61cced51a30ffbdd2ed56"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-roll-1.png",
+          "sha256": "a14f0f7f263e5aa4083d770a7dbeaaa72ab0cebd2968217ad3c69d0dbb341f8f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-roll-2.png",
+          "sha256": "e80321396f0a12f686dfadbae25281da933e50f51d72dacf167b1defbcfae113"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-roll-3.png",
+          "sha256": "195f79ea3bee8cd792a6c7dc9ff14892c61d0f35a9046cd6c4b0499656cd5a37"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-roll-4.png",
+          "sha256": "ad07d1370a0f042803463a20e7b1c0e52ea9b01f4616bff61086a3f054177554"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-roll-5.png",
+          "sha256": "97a791b5de46d244d1110f2566bbba68698344c8eea259ed2c6ad4d38cdf17e3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-roll-6.png",
+          "sha256": "22735cad3eb94628754e1692fadf7e996353a94470d10631119f5374213a65a0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-roll-7.png",
+          "sha256": "0c31dc9f89fa2af8f0d9f35b16c9e3057534a8d45ceb5b0228e5b3f50890c88d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/game-turntable.gif",
+          "sha256": "ca5caf241ae9f8087314e4ef787e38b7165e46a7454ea88bab151c9d929355ed"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/roll-0.png",
+          "sha256": "72f069de7e0a040a34eb4c638b58f477b9c20ecb8d743cffd54fb674682e383c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/roll-1.png",
+          "sha256": "43824d97a1c7aba4ff28964c5a45fe6840952ec761d36f1f28f629c3c15c70ce"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/roll-2.png",
+          "sha256": "6a535e7008fc6fd2948ff523865c2bdc5e5fe123decc2e2750d92c849bffc592"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/roll-3.png",
+          "sha256": "3b38f3cde59365490f576e2367fce69d0314f3a0e520ccd9654f410a1ff5b624"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/roll-4.png",
+          "sha256": "9cf26a3d2dbf55c790dac5d59346b0433998462379d342006b712d0729e1bcc4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/roll-5.png",
+          "sha256": "2f843bef7fd5098eaa949efe96146d22ef33439472b0be600fac991976a6fe95"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/roll-6.png",
+          "sha256": "a998fae5060cefe91fc7ed9dcf1fe6140a1677f4d0b2b2bf91a369012174d364"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/roll-7.png",
+          "sha256": "f08cc8c5a869cced4460e73841580a9e09d911fbccb49ee792d98a389da5db9b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-0.png",
+          "sha256": "dbbc7dbe5162c02f03804f08e2f413dcefef6e8952939e2bb431c255b933d177"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-1.png",
+          "sha256": "0d788cf1dbde0f910e53922d65ace5209c4ca70367e3be35581eaff4ef720686"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-10.png",
+          "sha256": "617e81d0aff2fecf1c9507b88d8fadad48ed55798b666c3691cb478fca7f5882"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-11.png",
+          "sha256": "8935ce83a909dcae497c1f466b18250e2643b6fb721a29d4092dff07efe689b2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-12.png",
+          "sha256": "a9501167fcdbe34ae37f48ed4f61843dfb6b995680d4e96d4b5abe8616944b5d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-13.png",
+          "sha256": "0988f28af388a63357f77ea2accd2e1a111705ac1f445860abb2c1274a1edee1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-14.png",
+          "sha256": "8eb3c154cf1689007280cf8c918509dc7a7e40d5a0623e2f6c0d9fa98a1b668d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-15.png",
+          "sha256": "0d0b0e711da05c33fa50a5b41d703a639344307ebb804fbb57261039e9a47010"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-1x.png",
+          "sha256": "eb262c36e89837d8ddd73dfaddd5a255d72ea1a806e6db433c7c5e740bfdfad3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-2.png",
+          "sha256": "72f069de7e0a040a34eb4c638b58f477b9c20ecb8d743cffd54fb674682e383c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-2x.png",
+          "sha256": "6f6388521f2223544696fc21cdfbe2a1dfe0b1c228460374c5e9fdf1c71f5e88"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-3.png",
+          "sha256": "5885d0c50f485744b05a9b298ade9fff8263b18b07e7874b91a5de1aaf6a35f3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-3x.png",
+          "sha256": "41f52be4cd1351df1927329e06c1bbab14d5871662d113828ba451e312f0eedd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-4.png",
+          "sha256": "425ecc2a6c544fe0054d8c24f50a4b87d7a3052f2cefd27522ef8f960ff9b7a4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-5.png",
+          "sha256": "c495d42ef78c07d4d36fb8b7d10c0002368f1c006bd38283eb768de1d81faca1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-6.png",
+          "sha256": "c16e2f36c6096eb6b54285897079e3f9ae75c8b3c4c65583d513d9ebbd1ad3e7"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-7.png",
+          "sha256": "0e366f88d39aa624419758c1e02cd4c66ca5d071a343ea99976cf2ae3cf508ff"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-8.png",
+          "sha256": "63c1e34201594234f4ca33845273351f3ec5a5d509f028b7e05ae52ff4c5c4de"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/study-9.png",
+          "sha256": "f9c8e2f378d0ff2ce7443e5303392e64833c744993318f1d597e4ddbce28edcc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/turntable.gif",
+          "sha256": "d3b0065a79f5ceb673a71d430423c73d548501317798c75bdd54d44ab88f5038"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/viewer-desktop.png",
+          "sha256": "2e90239530418a6ad95d036bfc8568acd48f68794855fb399ad0f786a9aaccda"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/viewer-mobile.png",
+          "sha256": "057ab6e1e51dc1ad124320806cc71e7460ada31ebb068fae859b5586c4d960d2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/wheel-phases.png",
+          "sha256": "257c2d933ca92f8632c8e56f314f13cc566892995a0b997aa19dfd5dce47d1aa"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/wire-engine.png",
+          "sha256": "a520af5c0cf6208661cfa69c17aa7165615576aa34822580c18358f192ca85ec"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/captures/wire-study.png",
+          "sha256": "ae0e47ad3818b023ea4a1b784e600ba71781811819ea5af400265c10d65a4e0a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/clearance.json",
+          "sha256": "ab47746b3b4ce8e6c2883f91fc29d5d4a20422a7bbb300bacc418241449ec33c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/independent-source-replay.json",
+          "sha256": "1be0ed2e03a1c5e61557df0dfa0bd6632817d1401b9fd7529530cb1a7d6d138c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/atlas.png",
+          "sha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/composition.json",
+          "sha256": "a79b820904f02a26f0522799c193168155327075e95e5b6d8dbea64915580e25"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/model.glb",
+          "sha256": "8290844ce734800c47f1c07c9328fc74763e23d0f46e6cedcba5a62cfcd0f360"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/recipe.json",
+          "sha256": "12bce4fc08ffedab4b3165b8f70d753887100e297ac71de6dbb7ed63f4a7fdf4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/report.json",
+          "sha256": "49cc1aaf3245e79dd3f2b62583674f9142b78dff9407f85210429ba025f2ae4f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/viewer.js",
+          "sha256": "bd64d254a6f8eac0d8fc5bc86bd85fb414db1a694fc5e72c7b2fc6ae9408a949"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/visual-inspection.json",
+          "sha256": "b5543b09062fdffd9a621ee61e14af89c65b2d755ea8b38c7d31b0fc27dd1ce2"
+        }
+      ]
+    }
+  ]
+}

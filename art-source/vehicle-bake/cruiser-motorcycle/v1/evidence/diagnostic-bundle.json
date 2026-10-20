@@ -1,0 +1,12 @@
+{
+  "status": "built-read-only-shared-projection-outline",
+  "helperHashes": {
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26"
+  },
+  "bundleSha256": "6a99a9e1b6997628eb934a56d8db41f1166f349464687f6d5d1bb96c40e82920",
+  "offlineSha256": "f60b7cdf6716dcff78a8c74ff8f6226b66c02b1f39a90589f382aec9b0cf5e60",
+  "inputRiderSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "actualSharedMotorcycleLoaderUsed": false,
+  "normalActivation": false
+}

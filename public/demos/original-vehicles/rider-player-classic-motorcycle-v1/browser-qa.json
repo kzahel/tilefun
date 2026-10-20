@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "toolchain": "motorcycle-v1",
+  "sharedLoaderQualification": "passed-actual-shared-CarMeshAsset",
+  "glbSha256": "5dd8f8c38f13b6983ecf63feaf2c750270e52c4dc317ca98f35dc92f809a0d2e",
+  "browser": "bundled full Chromium",
+  "version": "153.0.8010.12",
+  "fullChromiumRequested": true,
+  "desktop": [
+    1200,
+    1050
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "controls": [
+    "heading",
+    "study/game",
+    "wireframe",
+    "rotate+roll",
+    "native/2x/3x"
+  ],
+  "nativeCardActualPixels": 224,
+  "mobileNoPageOverflowAllScales": true,
+  "offline": {
+    "exactGlbSha256": "5dd8f8c38f13b6983ecf63feaf2c750270e52c4dc317ca98f35dc92f809a0d2e",
+    "networkRequests": []
+  },
+  "errors": []
+}

@@ -1,0 +1,273 @@
+{
+  "status": "passed-raw-rig-diagnostic",
+  "glbSha256": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+  "frames": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "angleRadians": -0.2,
+      "image": "steer-study-0--0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 0,
+      "angleRadians": 0.2,
+      "image": "steer-study-0-0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 0,
+      "angleRadians": 0,
+      "image": "steer-study-0-0.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "angleRadians": -0.2,
+      "image": "steer-study-45--0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "angleRadians": 0.2,
+      "image": "steer-study-45-0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "angleRadians": 0,
+      "image": "steer-study-45-0.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "angleRadians": -0.2,
+      "image": "steer-study-90--0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "angleRadians": 0.2,
+      "image": "steer-study-90-0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "angleRadians": 0,
+      "image": "steer-study-90-0.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "angleRadians": -0.2,
+      "image": "steer-study-135--0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "angleRadians": 0.2,
+      "image": "steer-study-135-0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "angleRadians": 0,
+      "image": "steer-study-135-0.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "angleRadians": -0.2,
+      "image": "steer-engine-0--0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "angleRadians": 0.2,
+      "image": "steer-engine-0-0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "angleRadians": 0,
+      "image": "steer-engine-0-0.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "angleRadians": -0.2,
+      "image": "steer-engine-45--0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "angleRadians": 0.2,
+      "image": "steer-engine-45-0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "angleRadians": 0,
+      "image": "steer-engine-45-0.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "angleRadians": -0.2,
+      "image": "steer-engine-90--0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "angleRadians": 0.2,
+      "image": "steer-engine-90-0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "angleRadians": 0,
+      "image": "steer-engine-90-0.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "angleRadians": -0.2,
+      "image": "steer-engine-135--0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "angleRadians": 0.2,
+      "image": "steer-engine-135-0.2.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "angleRadians": 0,
+      "image": "steer-engine-135-0.png",
+      "actualPivotFixed": true,
+      "bodyRiderRearWheelFixed": true,
+      "signedAngleExact": true,
+      "rollUnchanged": true,
+      "absoluteResetPixelsExact": true
+    }
+  ],
+  "rawGLTFOnly": true,
+  "nonzeroSteeringClearanceQualified": false,
+  "operatingForkControlAnimationClaimed": false
+}

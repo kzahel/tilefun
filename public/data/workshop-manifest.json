@@ -14989,6 +14989,94 @@
       "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
     },
     {
+      "id": "projection:original-vehicle-rider-bear-classic-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "bear-upright · classic-motorcycle-bear-fit · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-bear-classic-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "53894ce73abf1d9e2bd21e75b240bf67757d454646e0602fba0652cfc2ac83a5",
+      "sourceFingerprint": "53894ce73abf1d9e2bd21e75b240bf67757d454646e0602fba0652cfc2ac83a5",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-person7-classic-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "person7-upright · classic-motorcycle-person7-fit · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-person7-classic-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "8fd04e20dfc0e7205e81a1a8d9d7b4ff9d88e395af4700ce3e138d972ade395f",
+      "sourceFingerprint": "8fd04e20dfc0e7205e81a1a8d9d7b4ff9d88e395af4700ce3e138d972ade395f",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-explorer-sport-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "explorer-upright · sport-motorcycle · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-explorer-sport-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "a5a36f4ef58e48320cd1ffcff16fffec594b334a1488d093dfacd02515565a66",
+      "sourceFingerprint": "a5a36f4ef58e48320cd1ffcff16fffec594b334a1488d093dfacd02515565a66",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-explorer-cruiser-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "explorer-upright · cruiser-motorcycle · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-explorer-cruiser-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "a9e10fd4ee92cb25bddba60df1908d8f36cd5fb624bc7ed630cc5b08c4355dff",
+      "sourceFingerprint": "a9e10fd4ee92cb25bddba60df1908d8f36cd5fb624bc7ed630cc5b08c4355dff",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-explorer-dirt-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "explorer-upright · dirt-motorcycle · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "c86de8bcf4c0f81b689ee6a0096bc62260cb8c1f2d30d0521cae5cf90944b654",
+      "sourceFingerprint": "c86de8bcf4c0f81b689ee6a0096bc62260cb8c1f2d30d0521cae5cf90944b654",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-explorer-retro-scooter-v1",
+      "batchId": "original-vehicles",
+      "name": "explorer-upright · retro-scooter · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-explorer-retro-scooter-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "23a2cc6c44165b589ba680e9df5db327c08d8d36d9834a890bd471c2b3b4b9f5",
+      "sourceFingerprint": "23a2cc6c44165b589ba680e9df5db327c08d8d36d9834a890bd471c2b3b4b9f5",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-explorer-touring-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "explorer-upright · touring-motorcycle · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-explorer-touring-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "4f3fc14d4e80e03e3f72977374e4f72e1548b4658e4bb639b0827270d2d87f14",
+      "sourceFingerprint": "4f3fc14d4e80e03e3f72977374e4f72e1548b4658e4bb639b0827270d2d87f14",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-rider-player-classic-motorcycle-v1",
+      "batchId": "original-vehicles",
+      "name": "Classic default player · fitted classic bike · shared-loader pilot",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/rider-player-classic-motorcycle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "f9328c3b0365f7cb2b79da2018a4123ea281c7ba09f62b8156a6e254c0f974c9",
+      "sourceFingerprint": "f9328c3b0365f7cb2b79da2018a4123ea281c7ba09f62b8156a6e254c0f974c9",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
       "id": "projection:original-vehicle-explorer-boat-v1",
       "batchId": "original-vehicles",
       "name": "Explorer motorboat · hollow hull and outboard v1",
@@ -47284,5 +47372,5 @@
       }
     }
   ],
-  "inputDigest": "ed9c4176e815576a542f5b189b1e8b2bf08ef23d0b5202e23124e7aaba464cc9"
+  "inputDigest": "a89bd73078d14b41088b13b436a993df03ff74d9ea6a98db7e5f55e5e3ccd896"
 }

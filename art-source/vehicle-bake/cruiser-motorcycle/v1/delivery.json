@@ -1,0 +1,20 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "sourceImmutable": true,
+  "sourcePilot": true,
+  "ready": true,
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "atlasSha256": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c",
+  "recipeSha256": "db45601c6ffbb597df871f2a388eaae00959bd8b8637b3609808c74d9163e8a5",
+  "riderSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "triangles": 3056,
+  "vertices": 5652,
+  "draws": 3,
+  "atlases": 1,
+  "normalActivation": false,
+  "productionQualified": false,
+  "humanApproval": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "parentNext": "Independent actual shared-cycle family review/composition/freeze; preserve source bytes."
+}

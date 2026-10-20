@@ -17,7 +17,9 @@ evidence and summary counts at every authoring/delivery/integration checkpoint.
 
 For original vehicles beyond the sprite bank, first read
 `docs/topics/original-vehicles.md`, `docs/vehicle-status.md` and
-`docs/vehicle-authoring-pipeline.md`. The current red-coupe pilot owns the
+`docs/vehicle-authoring-pipeline.md`. Read
+`docs/vehicle-texture-authoring.md` for surface ownership, direct semantic UV paint,
+actual bake boundaries and exported texture/geometry costs. The red-coupe pilot owns the
 high-detail master → authored pixel target → low-poly UV transfer route. Check
 the owner's expansion gate before another family. Reuse its shared export,
 actual-GLB render and wheel-envelope checks; source component/UV ownership and
@@ -91,6 +93,9 @@ prior qualification; it does not perform that qualification or authorize normal
 activation. Direct `family-capture-cycle.mjs CONFIG --loader-qualified` uses the
 actual shared loader; without the flag it exits 2 with pending status. Preserve
 all pinned old and cycle helpers. Read the pipeline's two/three-wheel section.
+For rider composition, follow `docs/vehicle-component-assembly.md`: keep both
+child masters and independent replay proofs, measured mounts and exact paired
+pixel references; source finalization and review registration are separate steps.
 
 Frozen Explorer classic-bike (4,390 triangles) and sidecar (5,374 triangles)
 prototypes qualify exact 32 bare + 32 combined views each, 4,315 decoded rider

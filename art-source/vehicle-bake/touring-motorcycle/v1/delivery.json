@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "sourcePilot": true,
+  "productionQualified": false,
+  "ready": true,
+  "sourceImmutable": true,
+  "glbSha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+  "atlasSha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+  "recipeSha256": "e80a2140aff86e45e2974f741f63d0fc47d49d1f03847329f8e91f6b1b6daab3",
+  "report": "public/demos/vehicle-bake/touring-motorcycle/v1/report.json",
+  "normalActivation": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "proofCommands": [
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/touring-motorcycle/prove-fit.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/touring-motorcycle/audit-source.py",
+    "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/touring-motorcycle/prove-coverage.py",
+    "node scripts/vehicle-bake/touring-motorcycle/capture-raw.mjs",
+    "python scripts/vehicle-bake/touring-motorcycle/assess-pixels.py",
+    "python scripts/vehicle-bake/touring-motorcycle/fresh-replay.py --name parent-fresh-replay --blender BLENDER"
+  ],
+  "replayInputs": "Six declared files: own build/geometry/family/raw-audit, stable catalog-cycle and immutable upright profile; no master/scratch input",
+  "parentNext": "Independent review/replay and eventual actual shared cycle loader/browser qualification; no normal activation"
+}

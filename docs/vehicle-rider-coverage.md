@@ -1,8 +1,8 @@
-# Remaining26 appearances - read-only rider coverage proposal
+# Rider appearance inventory and fitting proposal
 
 The initial inventory made no new character art/code/registration or runtime changes. All26 actual source sheets were read and visually inspected in four directions. This is an inventory and bounded proposal only, prepared after the Explorer upright source was frozen. At that inventory checkpoint none of these26 had a seated3D or bike qualification. Existing standing approvals do not transfer to a new seated mesh.
 
-2026-10-20 checkpoint: Brown Bear and Person7 now have distinct immutable upright source meshes and measured classic-bike control variants; Explorer has actual shared-loader classic/sidecar reviews. These three identity pilots leave24 picker appearances without seated source, and normal identity/AI/occupied fallback behavior remains unqualified. See [rider status](topics/vehicle-riders.md). This preserves the original inventory/proposal below.
+2026-10-20 checkpoint: Explorer, Brown Bear, Person7 and Classic v3 now have distinct immutable seated source and isolated shared-renderer classic-bike prototypes. Explorer also has frozen reviews across all seven cycle styles. These four identity pilots leave 23 picker appearances without seated source; normal identity/AI/occupied fallback behavior remains unqualified for all 27. See [rider status](topics/vehicle-riders.md). This preserves the original inventory/proposal below.
 
 The picker contains Classic,20 legacy people, and6 promoted characters; Explorer is excluded here. [retained identity inventory](../art-source/vehicle-riders/appearance-inventory-v1.json) pins the actual PNGs, source records, current picker/promoted snapshot/EntityDefs, every native frame bound and full palette. Inspection sheets retain one common4x nearest scale; Classic remains physically smaller in those sheets. Bounds are native opaque sprite spans, not inferred3D dimensions. Classic frame is16x16; legacy people16x32 with6frames per direction; promoted32x32 with4.
 
@@ -47,4 +47,4 @@ Each later appearance/profile/bike combination would need packed editable semant
 
 Explorer source prototype is complete; these remaining identities are not production coverage. See [rider prerequisites](topics/vehicle-riders.md).
 
-Current upright Explorer final GLB SHA256: `5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500`. Its source/public/scripts and every earlier pinned bundle remain immutable. Await parent QA and next bike/pose instruction.
+Current upright Explorer final GLB SHA256: `5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500`. Its source/public/scripts and every earlier pinned bundle remain immutable. Follow the current rider topic and owner gate for further coverage.

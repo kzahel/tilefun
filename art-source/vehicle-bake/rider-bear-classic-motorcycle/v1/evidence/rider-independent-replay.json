@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 5,
+  "glbSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "exactOutputs": {
+    "rider.glb": "data/vehicle-riders/bear-upright/replay-final/public/rider.glb",
+    "atlas.png": "data/vehicle-riders/bear-upright/replay-final/public/atlas.png",
+    "recipe.json": "data/vehicle-riders/bear-upright/replay-final/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-riders/bear-upright-parent/retained-replay-roiooodw",
+  "scratchInputDependencies": []
+}

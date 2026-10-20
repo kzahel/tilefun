@@ -1,0 +1,203 @@
+{
+  "status": "passed",
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "masterSha256": "b7409605b3eb238241ddda1c79ebded249966d982ac76c86163446e2f58a79bf",
+  "route": "Own family fixed-body geometry and semantic UV charts; reused generic primitives/export/contact diagnostics only",
+  "geometryOnlyPaletteChange": false,
+  "ownMasterMeshComponents": 61,
+  "tank": {
+    "rings": 7,
+    "verticesPerRing": 16,
+    "actualBounds": {
+      "minSource": [
+        -0.9800000190734863,
+        -0.20000000298023224,
+        0.7400000095367432
+      ],
+      "maxSource": [
+        -0.10000000149011612,
+        0.20000000298023224,
+        1.0199999809265137
+      ],
+      "spanSource": [
+        0.8800000175833702,
+        0.4000000059604645,
+        0.2799999713897705
+      ]
+    },
+    "actualMaxCrownZSource": 1.0199999809265137
+  },
+  "fork": {
+    "actualTubeRingCentersSource": [
+      [
+        -0.64000004529953,
+        0.2200000137090683,
+        1.0799999237060547
+      ],
+      [
+        -1.399999976158142,
+        0.2200000137090683,
+        0.43000003695487976
+      ]
+    ],
+    "rakeDegreesFromVertical": 49.460851912302914
+  },
+  "saddle": {
+    "main": {
+      "minSource": [
+        -0.06999999284744263,
+        -0.07999999821186066,
+        0.8264999985694885
+      ],
+      "maxSource": [
+        0.7900000214576721,
+        0.07999999821186066,
+        0.9204999804496765
+      ],
+      "spanSource": [
+        0.8600000143051147,
+        0.1599999964237213,
+        0.09399998188018799
+      ]
+    },
+    "raisedPillion": {
+      "minSource": [
+        0.5199999809265137,
+        -0.14000000059604645,
+        0.8804999589920044
+      ],
+      "maxSource": [
+        0.9800000190734863,
+        0.14000000059604645,
+        0.9804999828338623
+      ],
+      "spanSource": [
+        0.46000003814697266,
+        0.2800000011920929,
+        0.10000002384185791
+      ]
+    },
+    "combinedLongitudinalSpanSource": 1.050000011920929
+  },
+  "VEngineActualSeparateSlantedCylinderGeometry": [
+    {
+      "owner": "Cruiser V cylinder front",
+      "actualBounds": {
+        "minSource": [
+          -0.6359785795211792,
+          -0.14499999582767487,
+          0.4621891975402832
+        ],
+        "maxSource": [
+          -0.1740213930606842,
+          0.14499999582767487,
+          0.8678107261657715
+        ],
+        "spanSource": [
+          0.461957186460495,
+          0.28999999165534973,
+          0.4056215286254883
+        ]
+      },
+      "principalAxis": [
+        -0.8077909461496022,
+        0.0,
+        0.5894690724022171
+      ],
+      "leanDegreesFromVertical": 53.88065898434825
+    },
+    {
+      "owner": "Cruiser V cylinder rear",
+      "actualBounds": {
+        "minSource": [
+          -0.272378534078598,
+          -0.14499998092651367,
+          0.47067469358444214
+        ],
+        "maxSource": [
+          0.15237852931022644,
+          0.14499998092651367,
+          0.8793252110481262
+        ],
+        "spanSource": [
+          0.42475706338882446,
+          0.28999996185302734,
+          0.4086505174636841
+        ]
+      },
+      "principalAxis": [
+        0.7409869570687224,
+        -2.220446049250313e-16,
+        0.6715194185234223
+      ],
+      "leanDegreesFromVertical": 47.815557164811196
+    }
+  ],
+  "crankcaseActualBounds": {
+    "minSource": [
+      -0.4099999964237213,
+      -0.15000000596046448,
+      0.3349999785423279
+    ],
+    "maxSource": [
+      0.10999998450279236,
+      0.15000000596046448,
+      0.6050000190734863
+    ],
+    "spanSource": [
+      0.5199999809265137,
+      0.30000001192092896,
+      0.27000004053115845
+    ]
+  },
+  "exhausts": [
+    {
+      "owner": "Cruiser long low chrome exhaust -1",
+      "actualBounds": {
+        "minSource": [
+          -0.20000000298023224,
+          -0.35500001907348633,
+          0.2149999886751175
+        ],
+        "maxSource": [
+          1.4500000476837158,
+          -0.26499998569488525,
+          0.3050000071525574
+        ],
+        "spanSource": [
+          1.650000050663948,
+          0.09000003337860107,
+          0.09000001847743988
+        ]
+      }
+    },
+    {
+      "owner": "Cruiser long low chrome exhaust 1",
+      "actualBounds": {
+        "minSource": [
+          -0.20000000298023224,
+          0.26499998569488525,
+          0.2149999886751175
+        ],
+        "maxSource": [
+          1.4500000476837158,
+          0.35500001907348633,
+          0.3050000071525574
+        ],
+        "spanSource": [
+          1.650000050663948,
+          0.09000003337860107,
+          0.09000001847743988
+        ]
+      }
+    }
+  ],
+  "wheelbaseSource": 2.5999999999999996,
+  "independentDifferentRadiiSource": {
+    "F": 0.43,
+    "R": 0.46
+  },
+  "noAvatarGeometryOrScaleChange": true,
+  "sourceMasterUnchanged": true,
+  "limits": "Source shape and geometry evidence only; native silhouette review, actual contacts/cylinders and parent shared loader remain separate."
+}

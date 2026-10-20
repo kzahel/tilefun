@@ -1,0 +1,59 @@
+{
+  "status": "agent-source-inspection-complete",
+  "exportedPixelsInspected": true,
+  "glbSha256": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+  "riderSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "all16StudyAnd16GameHeadingsEach": [
+    "combined",
+    "bare",
+    "rider",
+    "depth-ownership-mask"
+  ],
+  "all32WireHeadingsEach": [
+    "combined",
+    "bare",
+    "rider"
+  ],
+  "signedPhasesAndIndependentWheelViewsInspected": true,
+  "desktopMobileInspected": true,
+  "actualShared58StrokeUnchanged": true,
+  "nativeFenderCrownsInspectedAll32": true,
+  "notes": [
+    "Classic pointed ears and front/nearfront face remain recognizable in combined native views; side/rear occlusion remains honest. No standing parity claimed.",
+    "Small cream-cat anatomy and exact v3 palette/geometry retained; lower-body body/limbs naturally small and partly obscured on actual bike.",
+    "Swept offset stem is a thin connected fixed assembly; no floating peg ends. Tank/controls separated by actual triangle diagnostics.",
+    "Native wire lines are dense and can fill tiny triangles; each frame renders actual wire material with outline skipped, while source/UV topology audit is separate.",
+    "Empty-bike/rider-hidden masks and diagnostic nonzero steering are not normal occupancy or operating animation claims."
+  ],
+  "inspectedSheets": {
+    "inspection-detail-combined-study.png": "e9d1280315374ffe8563b4e580f8457dad06bd6e235fbcf3dc343109f338b4de",
+    "inspection-detail-combined-engine.png": "1db6402e7166593fadb069e1b40d7d513cc44e76ea3e5bae4b1eb5951d1d14bc",
+    "inspection-detail-bike-alone-study.png": "51d500d6781338a48be5181edbd6ed44516b571dacb87af0013b3b14c3c0a10f",
+    "inspection-detail-bike-alone-engine.png": "264e0f576ffa82c2b7b7a570a8c7512050c9b1ad86ac493acb959e3e2f45989f",
+    "inspection-detail-rider-alone-study.png": "6962e6909cf9ee1c5935554735fb3ce3ef868121d423f6f32dfe737ee5019802",
+    "inspection-detail-rider-alone-engine.png": "fe16bc5029b06668dc1ac4b9f12c4b04bf4ded4f13e90f71ba4a57c687a6e1fe",
+    "inspection-detail-ownership-mask-study.png": "28a330aa484ddde09a2592feb5b046dfe0dec749075d4a901751f3a1b81904cb",
+    "inspection-detail-ownership-mask-engine.png": "f4877e9794e372818d10927c61a8086cb0520070fa53f4428f0f5ddf22a56acf",
+    "inspection-detail-wire-combined-study.png": "921f6da1b936f44152a19701d50b47920e0d18831d3bde8eaaa7c35e4c41f826",
+    "inspection-detail-wire-combined-engine.png": "70de54482ac8fd49929b9ad74036fcffc343d194011e31175fb465508b09019b",
+    "inspection-detail-wire-bike-alone-study.png": "aece40e4251caddb5dcbbab416ac9d3f0c087f40c83b9202bab2cfcd9819c4c9",
+    "inspection-detail-wire-bike-alone-engine.png": "801c64904562548b020c6411ae3e4b9449675e4699866124abe30c7f03d67187",
+    "inspection-detail-wire-rider-alone-study.png": "b2c2fe7c88a72f5637c2ee7b93aa02852be7f54c27694f6bc35d52ccaf747c1d",
+    "inspection-detail-wire-rider-alone-engine.png": "5653ca611b62df47aa4df394d24da70624da460f90af59470bad154279b413cf",
+    "inspection-phases.png": "9f79e6752367010a8358a03b4cb78accad5379663ce0b11d23a769a09ef20cd0",
+    "inspection-independent.png": "ad02cbfc7f1316411bd41e8b336002fce796f10be74da316c0b702450f9e28fd"
+  },
+  "desktopMobile": {
+    "desktop.png": "d574d7edfa15db78b7e2c2f61637c0f94bb64bc7eaa661734b9832330336a705",
+    "mobile.png": "181b3d5600acfa5b87c28919eb5a11c4898c9e892560367dd382e88c9bfdde2b"
+  },
+  "independentV3Peer": {
+    "blockingFinding": false,
+    "retainedReport": "art-source/vehicle-riders/classic-comparison/v2/report.md",
+    "scope": "source identity only; no actual-bike/shared-loader qualification"
+  },
+  "humanApproval": false,
+  "normalActivation": false,
+  "CarMeshAssetUsed": false,
+  "sourceOnly": true
+}

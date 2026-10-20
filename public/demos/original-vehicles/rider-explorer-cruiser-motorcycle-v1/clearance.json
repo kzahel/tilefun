@@ -1,0 +1,44 @@
+[
+  {
+    "status": "passed",
+    "toolchain": "motorcycle-v1",
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "inputBytesUnchanged": true,
+    "id": "rider-explorer-cruiser-motorcycle--v1",
+    "glbSha256": "7aa2d37360049a94e052e264f2c813f78f7cd78e2ce1b440b02f01f394d11103",
+    "triangles": 5012,
+    "clearance": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "radius": 7.4782609939575195,
+        "minimumGap": 1.0233441755653558,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "radius": 8.000000305263706,
+        "minimumGap": 0.4637818253893755,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "perWheelCollisionControls": [
+      {
+        "wheel": "Wheel_F_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      },
+      {
+        "wheel": "Wheel_R_Roll",
+        "collidingBodyRejected": true,
+        "baselineRestored": true
+      }
+    ],
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

@@ -21,6 +21,7 @@ type TestGame = {
   nextRequestId: number;
   tapMovement: Pick<TapMovement, "target" | "resolve"> & { view: RenderView; plane: number };
   camera: Camera;
+  touchButtons: { enabled: boolean };
   debugPanel: { zoom: number; paused: boolean };
   stateView: {
     invincibilityTimer: number;
@@ -571,6 +572,15 @@ test("gesture rejection, claimed Jump, resize targeting and menu cancellation us
   await page.getByTestId("main-menu-toggle").tap();
   expect((await state(page)).target).toBeNull();
   await page.getByTestId("main-menu-toggle").tap();
+  // Menu DOM closure precedes the PlayScene frame that enables canvas controls.
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+        return g.touchButtons.enabled;
+      }),
+    )
+    .toBe(true);
   const jump = await page.evaluate(() => {
     const c = document.querySelector("#game") as HTMLCanvasElement;
     const r = c.getBoundingClientRect();

@@ -1,0 +1,134 @@
+{
+  "method": "Original high-fender dirt motorcycle: narrow orange tank/shrouds, tall charcoal saddle, long exposed fork, plain framed white front plate, high separate mudguards and actual staggered chunky tread blocks. True F/R source pilot with unchanged Explorer anatomy, single measured raised mount and no offroad physics or suspension animation claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      32,
+      35,
+      45
+    ],
+    "tireLight": [
+      64,
+      68,
+      78
+    ],
+    "paintDeep": [
+      113,
+      52,
+      35
+    ],
+    "paintShadow": [
+      158,
+      68,
+      34
+    ],
+    "paintMid": [
+      191,
+      84,
+      35
+    ],
+    "paint": [
+      225,
+      110,
+      43
+    ],
+    "paintLight": [
+      245,
+      156,
+      75
+    ],
+    "cream": [
+      242,
+      237,
+      220
+    ],
+    "creamShadow": [
+      185,
+      185,
+      176
+    ],
+    "white": [
+      248,
+      247,
+      230
+    ],
+    "seat": [
+      43,
+      45,
+      54
+    ],
+    "seatLight": [
+      70,
+      73,
+      80
+    ],
+    "frame": [
+      63,
+      71,
+      84
+    ],
+    "frameLight": [
+      103,
+      116,
+      128
+    ],
+    "engine": [
+      111,
+      119,
+      130
+    ],
+    "engineLight": [
+      151,
+      162,
+      173
+    ],
+    "chrome": [
+      198,
+      210,
+      217
+    ],
+    "rim": [
+      127,
+      139,
+      151
+    ],
+    "ruby": [
+      181,
+      50,
+      70
+    ],
+    "amber": [
+      236,
+      164,
+      77
+    ],
+    "dark": [
+      47,
+      52,
+      63
+    ],
+    "glass": [
+      53,
+      108,
+      143
+    ],
+    "glassLight": [
+      90,
+      157,
+      184
+    ]
+  },
+  "ownership": "Own tank/shroud actual X/Z skin chart, mudguard top/end owners, plain white plate front/back skin with ink frame, seat/engine/frame swatches and real knob tyre geometry. Opaque512 nearest unlit atlas; no source bitmap camera projection, exterior ink or logos/letters.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "High orange mudguards, narrow raised tank, tall seat, long fork, plain white front plate, exposed engine/frame and actual staggered tread blocks with distinct true outer radii. Exactly two independent road wheels F/R; opaque bikeatlas512; Explorer loaded separately readonly for measured fit/depth diagnostics.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

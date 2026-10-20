@@ -1,0 +1,344 @@
+{
+  "schema": "tilefun-normal-vehicle-budget-v1",
+  "catalogSha256": "66aec189f1a0c7b1eb33932ac2badd46cc8ca3271543df0fdceae8e752e53d33",
+  "measurement": "Actual retained GLB triangle indices, POSITION accessor vertices and source primitives; excludes dynamic contact-shadow/outline passes and does not estimate total GPU cost",
+  "summary": {
+    "models": 33,
+    "minTriangles": 2299,
+    "maxTriangles": 4030,
+    "totalTriangles": 98734,
+    "glbFileBytes": 7012016
+  },
+  "vehicles": [
+    {
+      "id": "rosso-coupe",
+      "path": "assets/models/vehicles/rosso-coupe-v3.glb",
+      "glbSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+      "triangles": 2299,
+      "uvSplitVertices": 2982,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 149324,
+      "textures": 1
+    },
+    {
+      "id": "beetle",
+      "path": "assets/models/vehicles/beetle-v1.glb",
+      "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+      "triangles": 2554,
+      "uvSplitVertices": 5462,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 198312,
+      "textures": 1
+    },
+    {
+      "id": "school-bus",
+      "path": "assets/models/vehicles/school-bus-v1.glb",
+      "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+      "triangles": 2564,
+      "uvSplitVertices": 4986,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 182232,
+      "textures": 1
+    },
+    {
+      "id": "pickup",
+      "path": "assets/models/vehicles/pickup-v1.glb",
+      "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+      "triangles": 2984,
+      "uvSplitVertices": 5722,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 207472,
+      "textures": 1
+    },
+    {
+      "id": "classic-roadster",
+      "path": "assets/models/vehicles/classic-roadster-v1.glb",
+      "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+      "triangles": 3092,
+      "uvSplitVertices": 6173,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 222216,
+      "textures": 1
+    },
+    {
+      "id": "offroad-jeep",
+      "path": "assets/models/vehicles/offroad-jeep-v1.glb",
+      "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+      "triangles": 3146,
+      "uvSplitVertices": 5972,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 216488,
+      "textures": 1
+    },
+    {
+      "id": "delivery-van",
+      "path": "assets/models/vehicles/delivery-van-v1.glb",
+      "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+      "triangles": 2426,
+      "uvSplitVertices": 4758,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 173600,
+      "textures": 1
+    },
+    {
+      "id": "race-coupe",
+      "path": "assets/models/vehicles/race-coupe-v1.glb",
+      "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+      "triangles": 2431,
+      "uvSplitVertices": 3302,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 159872,
+      "textures": 1
+    },
+    {
+      "id": "woody-wagon",
+      "path": "assets/models/vehicles/woody-wagon-v1.glb",
+      "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
+      "triangles": 2792,
+      "uvSplitVertices": 5442,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 198016,
+      "textures": 1
+    },
+    {
+      "id": "microcar",
+      "path": "assets/models/vehicles/microcar-v1.glb",
+      "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
+      "triangles": 2596,
+      "uvSplitVertices": 5314,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 192480,
+      "textures": 1
+    },
+    {
+      "id": "stretch-limousine",
+      "path": "assets/models/vehicles/stretch-limousine-v1.glb",
+      "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
+      "triangles": 2956,
+      "uvSplitVertices": 5768,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 209072,
+      "textures": 1
+    },
+    {
+      "id": "hot-rod",
+      "path": "assets/models/vehicles/hot-rod-v1.glb",
+      "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
+      "triangles": 3194,
+      "uvSplitVertices": 6335,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 231608,
+      "textures": 1
+    },
+    {
+      "id": "rally-hatchback",
+      "path": "assets/models/vehicles/rally-hatchback-v1.glb",
+      "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+      "triangles": 2900,
+      "uvSplitVertices": 5551,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 201980,
+      "textures": 1
+    },
+    {
+      "id": "open-wheel-racer",
+      "path": "assets/models/vehicles/open-wheel-racer-v1.glb",
+      "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
+      "triangles": 2652,
+      "uvSplitVertices": 5208,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 191584,
+      "textures": 1
+    },
+    {
+      "id": "monster-truck",
+      "path": "assets/models/vehicles/monster-truck-v1.glb",
+      "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
+      "triangles": 3534,
+      "uvSplitVertices": 7772,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 273568,
+      "textures": 1
+    },
+    {
+      "id": "beach-buggy",
+      "path": "assets/models/vehicles/beach-buggy-v1.glb",
+      "glbSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
+      "triangles": 3290,
+      "uvSplitVertices": 6630,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 237592,
+      "textures": 1
+    },
+    {
+      "id": "go-kart",
+      "path": "assets/models/vehicles/go-kart-v1.glb",
+      "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
+      "triangles": 2686,
+      "uvSplitVertices": 5642,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 205460,
+      "textures": 1
+    },
+    {
+      "id": "golf-cart",
+      "path": "assets/models/vehicles/golf-cart-v1.glb",
+      "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
+      "triangles": 2682,
+      "uvSplitVertices": 5102,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 185488,
+      "textures": 1
+    },
+    {
+      "id": "ice-cream-van",
+      "path": "assets/models/vehicles/ice-cream-van-v1.glb",
+      "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
+      "triangles": 2710,
+      "uvSplitVertices": 5329,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 193804,
+      "textures": 1
+    },
+    {
+      "id": "food-truck",
+      "path": "assets/models/vehicles/food-truck-v1.glb",
+      "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
+      "triangles": 2934,
+      "uvSplitVertices": 5545,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 200124,
+      "textures": 1
+    },
+    {
+      "id": "camper-van",
+      "path": "assets/models/vehicles/camper-van-v1.glb",
+      "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
+      "triangles": 2784,
+      "uvSplitVertices": 5596,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 202544,
+      "textures": 1
+    },
+    {
+      "id": "motorhome",
+      "path": "assets/models/vehicles/motorhome-v1.glb",
+      "glbSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
+      "triangles": 2858,
+      "uvSplitVertices": 5698,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 206328,
+      "textures": 1
+    },
+    {
+      "id": "retro-taxi",
+      "path": "assets/models/vehicles/retro-taxi-v1.glb",
+      "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
+      "triangles": 2970,
+      "uvSplitVertices": 5792,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 209576,
+      "textures": 1
+    },
+    {
+      "id": "tow-truck",
+      "path": "assets/models/vehicles/tow-truck-v1.glb",
+      "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
+      "triangles": 3394,
+      "uvSplitVertices": 6374,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 229568,
+      "textures": 1
+    },
+    {
+      "id": "flatbed-truck",
+      "path": "assets/models/vehicles/flatbed-truck-v1.glb",
+      "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
+      "triangles": 2534,
+      "uvSplitVertices": 4964,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 180064,
+      "textures": 1
+    },
+    {
+      "id": "semi-truck",
+      "path": "assets/models/vehicles/semi-truck-v1.glb",
+      "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
+      "triangles": 3748,
+      "uvSplitVertices": 7426,
+      "sourcePrimitives": 7,
+      "glbFileBytes": 264932,
+      "textures": 1
+    },
+    {
+      "id": "dump-truck",
+      "path": "assets/models/vehicles/dump-truck-v1.glb",
+      "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
+      "triangles": 3720,
+      "uvSplitVertices": 7066,
+      "sourcePrimitives": 7,
+      "glbFileBytes": 251984,
+      "textures": 1
+    },
+    {
+      "id": "cement-mixer",
+      "path": "assets/models/vehicles/cement-mixer-v1.glb",
+      "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
+      "triangles": 3842,
+      "uvSplitVertices": 7264,
+      "sourcePrimitives": 7,
+      "glbFileBytes": 259728,
+      "textures": 1
+    },
+    {
+      "id": "mobile-crane",
+      "path": "assets/models/vehicles/mobile-crane-v1.glb",
+      "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
+      "triangles": 4030,
+      "uvSplitVertices": 7814,
+      "sourcePrimitives": 7,
+      "glbFileBytes": 279528,
+      "textures": 1
+    },
+    {
+      "id": "street-sweeper",
+      "path": "assets/models/vehicles/street-sweeper-v1.glb",
+      "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
+      "triangles": 3236,
+      "uvSplitVertices": 6094,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 219336,
+      "textures": 1
+    },
+    {
+      "id": "snowplow",
+      "path": "assets/models/vehicles/snowplow-v1.glb",
+      "glbSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
+      "triangles": 2870,
+      "uvSplitVertices": 5724,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 206484,
+      "textures": 1
+    },
+    {
+      "id": "farm-tractor",
+      "path": "assets/models/vehicles/farm-tractor-v1.glb",
+      "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
+      "triangles": 3386,
+      "uvSplitVertices": 7122,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 258024,
+      "textures": 1
+    },
+    {
+      "id": "forklift",
+      "path": "assets/models/vehicles/forklift-v1.glb",
+      "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
+      "triangles": 2940,
+      "uvSplitVertices": 5844,
+      "sourcePrimitives": 5,
+      "glbFileBytes": 213628,
+      "textures": 1
+    }
+  ]
+}

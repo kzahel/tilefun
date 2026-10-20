@@ -1,0 +1,151 @@
+{
+  "id": "classic-upright-v2",
+  "status": "source-pilot-not-production",
+  "humanApproval": false,
+  "worldScale": 17.39130434782609,
+  "hipSocketSource": [
+    0,
+    0,
+    0
+  ],
+  "contactProfile": {
+    "source": "art-source/vehicle-riders/classic-upright/v2/classic-upright-v1.json",
+    "ownCopy": "classic-upright-v1.json",
+    "sha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b"
+  },
+  "identityInputs": {
+    "public/assets/sprites/player.png": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb"
+  },
+  "anatomy": {
+    "pelvisDimensions": [
+      0.16,
+      0.24,
+      0.08
+    ],
+    "torsoCenter": [
+      0,
+      0,
+      0.075
+    ],
+    "torsoDimensions": [
+      0.18,
+      0.3,
+      0.15
+    ],
+    "shoulderSource": [
+      -0.025,
+      0.17,
+      0.07
+    ],
+    "armLengthsSource": [
+      0.09,
+      0.105
+    ],
+    "wristInsetFromPalmSource": 0.025,
+    "hipJointSource": [
+      0,
+      0.12,
+      -0.025
+    ],
+    "legLengthsSource": [
+      0.095,
+      0.11
+    ],
+    "ankleFromSoleSource": [
+      0.015,
+      0,
+      0.035
+    ],
+    "palmRadii": [
+      0.04,
+      0.035,
+      0.035
+    ],
+    "bootDimensions": [
+      0.13,
+      0.12,
+      0.065
+    ],
+    "headCenter": [
+      0.005,
+      0,
+      0.35
+    ],
+    "headDimensions": [
+      0.56,
+      0.78,
+      0.42
+    ],
+    "headTopSource": 0.56,
+    "earTipSource": 0.73,
+    "earBaseSource": 0.44,
+    "headRingsSource": [
+      {
+        "z": 0.14,
+        "halfDepth": 0.105,
+        "halfWidth": 0.15
+      },
+      {
+        "z": 0.175,
+        "halfDepth": 0.21,
+        "halfWidth": 0.29
+      },
+      {
+        "z": 0.2625,
+        "halfDepth": 0.28,
+        "halfWidth": 0.39
+      },
+      {
+        "z": 0.385,
+        "halfDepth": 0.26833333333333337,
+        "halfWidth": 0.38
+      },
+      {
+        "z": 0.49000000000000005,
+        "halfDepth": 0.22166666666666668,
+        "halfWidth": 0.33
+      },
+      {
+        "z": 0.55125,
+        "halfDepth": 0.12833333333333335,
+        "halfWidth": 0.21
+      }
+    ],
+    "earCenterHalfSpacingSource": 0.2
+  },
+  "render": {
+    "nativeSize": 224,
+    "radius": 112,
+    "worldDensity": "80/4.6 unchanged",
+    "origin": "Local pelvis, not bike mount",
+    "studyDegrees": 50
+  },
+  "fixture": {
+    "gripRadiusWorld": 0.2,
+    "gripLengthWorld": 0.8
+  },
+  "inference": {
+    "meaning": "Own compact nonhuman cat template; broad head/pointed ears/tiny torso and short limbs. Every palette color is from actual standing PNG. Fixed limb lengths chosen before own short-reach fixture. No Explorer anatomy scaling.",
+    "standingRuler": "Original Classic16px standing vs promoted25px. At unchanged80/4.6 ruler: actual head width13.565world, head+ear Zspan10.261world, seated total Zspan15.913world. Native projections also include volumetric depth; no per-angle image fitting or unique inferred standing skeleton claimed.",
+    "tail": "No separate tail visible in all16frames; none invented",
+    "headRefinement": "Actual inspected v2: ring-shaped rounded cheeks/forehead, front face height.42 (v1.32), max cheek depth.56 with tapered upper roof depth.2567 (v1boxdepth.48), width.78, head bottom.14 and ear tip.73. V2 head/ear source Zspan.59 exact. No avatar/world/camera scaling. Taller.48face drafts hid ears at front and were rejected; final allocation chosen by actual native views.",
+    "eyeUV": "Original normalized eye X spacing and seven-color palette retained. Native-sized front eye clusters on actual upper front cheek skin, side eye clusters on matching cheek height; foreground roof no longer substitutes for forehead. Eye-only removal and both outlines verify interior landmarks.",
+    "ears": "Original front ear centers correspond to about+/-.195source inside width.78; v2 centers+/-.20 replace v1+/-.29 bases and+/-.324 tips. Compact solid shoulders, short.12fore-aft tip ridge (v1.265), pointed YZ profile; maximum tip.73 and head width.78 retained. Actual both-camera tips/pink skins inspected; no billboard caps.",
+    "visibleCollar": "V1 peer measured zero n/l native pixels from hidden torso. V2 adds a closed flared neck collar attached within finite torso/neck join only, with broad forward rim skin painted by unchanged original n/l chart. Hip/arms/legs/palms/feet/torso remain exact. Front/near-front real native n/l cues survive both outlines; some side/rear cues remain occluded. No mouth/nose or repainted head-bottom substitute.",
+    "nativeIdentityLimits": "Agent-QA interpretation of standing sprite, not exact standing-to-seated profile parity or human approval. Shared projection means volumetric side images remain taller than original standing art; actual same-ruler comparisons retained. Parent independent v2 review precedes any actual-bike fit."
+  },
+  "scaleControls": [
+    {
+      "id": "explorer-upright",
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "viewerFile": "explorer-upright-control.glb",
+      "screenHorizontalOffsetWorld": -40,
+      "role": "Read-only common-world-ruler diagnostic, never construction input"
+    }
+  ],
+  "limits": [
+    "Classic static source pilot only",
+    "Synthetic contact fixture; no actual-bike/production/all27/AI/occupied fallback qualification"
+  ]
+}

@@ -1,0 +1,418 @@
+{
+  "status": "passed",
+  "humanApproval": false,
+  "actualBikePresent": false,
+  "riderSha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+  "identitySource": {
+    "path": "public/assets/sprites/player.png",
+    "sha256": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb"
+  },
+  "exactOriginalPalette": {
+    "k": "#5c4e92",
+    "c": "#f3f2c0",
+    "p": "#e8b5ac",
+    "v": "#ddd5de",
+    "y": "#f3d8c5",
+    "n": "#766daa",
+    "l": "#eae178"
+  },
+  "actualGLBUVInteriorPaletteSamples": {
+    "c": 49473,
+    "k": 1527,
+    "v": 5675,
+    "y": 266,
+    "p": 366,
+    "n": 6128,
+    "l": 141
+  },
+  "sourceChartsExact": true,
+  "commonRuler": {
+    "allImagesSame4xNearest": true,
+    "noIndependentFitOrResize": true,
+    "sourceHipRow13RegistrationIsInferred": true,
+    "worldScale": 17.39130434782609,
+    "decodedHeadWidthWorld": 13.565217018127441,
+    "standingHeadWidthPixels": 14,
+    "decodedHeadWidthToSourceRatio": 0.9689440727233887,
+    "decodedHeadAndEarHeightWorld": 10.26086950302124,
+    "decodedTotalSeatedHeightWorld": 15.91304326057434,
+    "sourceVisibleHeightPixels": 16,
+    "sourceHeadIncludingEarsRows": 11,
+    "sourceBodyFeetRows": 5,
+    "decodedPartBoundsWorld": {
+      "RiderClassic bent thigh left": {
+        "min": [
+          -1.658988356590271,
+          -3.342951536178589,
+          -1.522436261177063
+        ],
+        "max": [
+          0.34194642305374146,
+          -1.5591522455215454,
+          0.13726259768009186
+        ]
+      },
+      "RiderClassic bent thigh right": {
+        "min": [
+          -1.658988356590271,
+          1.5591522455215454,
+          -1.522436261177063
+        ],
+        "max": [
+          0.34194642305374146,
+          3.342951536178589,
+          0.13726259768009186
+        ]
+      },
+      "RiderClassic boot left": {
+        "min": [
+          -1.7391302585601807,
+          -4.17391300201416,
+          -3.2173912525177
+        ],
+        "max": [
+          0.5217390656471252,
+          -2.08695650100708,
+          -2.08695650100708
+        ]
+      },
+      "RiderClassic boot right": {
+        "min": [
+          -1.7391302585601807,
+          2.08695650100708,
+          -3.2173912525177
+        ],
+        "max": [
+          0.5217390656471252,
+          4.17391300201416,
+          -2.08695650100708
+        ]
+      },
+      "RiderClassic broad face UV owner": {
+        "min": [
+          -4.782608509063721,
+          -6.782608509063721,
+          2.4347825050354004
+        ],
+        "max": [
+          4.956521511077881,
+          6.782608509063721,
+          9.739130020141602
+        ]
+      },
+      "RiderClassic elbow left": {
+        "min": [
+          -2.09865665435791,
+          -4.5204548835754395,
+          0.17472602427005768
+        ],
+        "max": [
+          -1.0070090293884277,
+          -3.372629165649414,
+          1.32255220413208
+        ]
+      },
+      "RiderClassic elbow right": {
+        "min": [
+          -2.09865665435791,
+          3.372628927230835,
+          0.17472602427005768
+        ],
+        "max": [
+          -1.0070090293884277,
+          4.5204548835754395,
+          1.32255220413208
+        ]
+      },
+      "RiderClassic forearm left": {
+        "min": [
+          -2.865316867828369,
+          -4.3825531005859375,
+          -0.22820718586444855
+        ],
+        "max": [
+          -1.2325055599212646,
+          -2.993978977203369,
+          1.197087049484253
+        ]
+      },
+      "RiderClassic forearm right": {
+        "min": [
+          -2.865316867828369,
+          2.993978977203369,
+          -0.22820718586444855
+        ],
+        "max": [
+          -1.2325055599212646,
+          4.3825531005859375,
+          1.197087049484253
+        ]
+      },
+      "RiderClassic gripping palm left": {
+        "min": [
+          -3.634732484817505,
+          -3.7238690853118896,
+          -0.695652186870575
+        ],
+        "max": [
+          -2.278311014175415,
+          -2.5370004177093506,
+          0.5217390656471252
+        ]
+      },
+      "RiderClassic gripping palm right": {
+        "min": [
+          -3.634732484817505,
+          2.5370006561279297,
+          -0.695652186870575
+        ],
+        "max": [
+          -2.278311014175415,
+          3.7238693237304688,
+          0.5217390656471252
+        ]
+      },
+      "RiderClassic knee left": {
+        "min": [
+          -1.9087156057357788,
+          -3.4516921043395996,
+          -1.5733366012573242
+        ],
+        "max": [
+          -0.7839877009391785,
+          -2.2690834999084473,
+          -0.42551055550575256
+        ]
+      },
+      "RiderClassic knee right": {
+        "min": [
+          -1.9087156057357788,
+          2.269083261489868,
+          -1.5733366012573242
+        ],
+        "max": [
+          -0.7839877009391785,
+          3.4516918659210205,
+          -0.42551055550575256
+        ]
+      },
+      "RiderClassic neck collar visible skin": {
+        "min": [
+          -4.6086955070495605,
+          -2.95652174949646,
+          0.782608687877655
+        ],
+        "max": [
+          2.6086957454681396,
+          2.95652174949646,
+          2.3478262424468994
+        ]
+      },
+      "RiderClassic pointed ear left": {
+        "min": [
+          -2.0,
+          -5.043478012084961,
+          7.6521735191345215
+        ],
+        "max": [
+          2.17391300201416,
+          -1.9130433797836304,
+          12.69565200805664
+        ]
+      },
+      "RiderClassic pointed ear right": {
+        "min": [
+          -2.0,
+          1.9130433797836304,
+          7.6521735191345215
+        ],
+        "max": [
+          2.17391300201416,
+          5.043478012084961,
+          12.69565200805664
+        ]
+      },
+      "RiderClassic seated pelvis": {
+        "min": [
+          -1.3913042545318604,
+          -2.08695650100708,
+          -0.6956521272659302
+        ],
+        "max": [
+          1.3913042545318604,
+          2.08695650100708,
+          0.6956521272659302
+        ]
+      },
+      "RiderClassic short shin left": {
+        "min": [
+          -1.7841459512710571,
+          -3.566927671432495,
+          -2.853189706802368
+        ],
+        "max": [
+          0.01935628429055214,
+          -2.339953899383545,
+          -0.7079115509986877
+        ]
+      },
+      "RiderClassic short shin right": {
+        "min": [
+          -1.7841459512710571,
+          2.339953899383545,
+          -2.853189706802368
+        ],
+        "max": [
+          0.01935628429055214,
+          3.566927671432495,
+          -0.7079115509986877
+        ]
+      },
+      "RiderClassic tiny torso collar UV owner": {
+        "min": [
+          -1.56521737575531,
+          -2.6086957454681396,
+          0.0
+        ],
+        "max": [
+          1.56521737575531,
+          2.6086957454681396,
+          2.6086957454681396
+        ]
+      },
+      "RiderClassic upper arm left": {
+        "min": [
+          -1.910244107246399,
+          -4.3501739501953125,
+          0.2342534363269806
+        ],
+        "max": [
+          -0.03125366196036339,
+          -2.5008082389831543,
+          1.7981492280960083
+        ]
+      },
+      "RiderClassic upper arm right": {
+        "min": [
+          -1.910244107246399,
+          2.5008082389831543,
+          0.2342534363269806
+        ],
+        "max": [
+          -0.03125366196036339,
+          4.3501739501953125,
+          1.7981492280960083
+        ]
+      }
+    }
+  },
+  "directions": [
+    {
+      "direction": "front",
+      "sourceRow": 0,
+      "actualYaw": 90.0,
+      "sourceBounds": [
+        1,
+        0,
+        15,
+        16
+      ],
+      "actualBounds": {
+        "study": [
+          105,
+          131,
+          119,
+          143
+        ],
+        "engine": [
+          105,
+          98,
+          119,
+          117
+        ]
+      }
+    },
+    {
+      "direction": "back",
+      "sourceRow": 1,
+      "actualYaw": 270.0,
+      "sourceBounds": [
+        1,
+        0,
+        15,
+        16
+      ],
+      "actualBounds": {
+        "study": [
+          105,
+          131,
+          119,
+          142
+        ],
+        "engine": [
+          105,
+          98,
+          119,
+          116
+        ]
+      }
+    },
+    {
+      "direction": "left",
+      "sourceRow": 2,
+      "actualYaw": 0.0,
+      "sourceBounds": [
+        3,
+        0,
+        13,
+        16
+      ],
+      "actualBounds": {
+        "study": [
+          107,
+          129,
+          117,
+          145
+        ],
+        "engine": [
+          107,
+          96,
+          117,
+          119
+        ]
+      }
+    },
+    {
+      "direction": "right",
+      "sourceRow": 3,
+      "actualYaw": 180.0,
+      "sourceBounds": [
+        3,
+        0,
+        13,
+        16
+      ],
+      "actualBounds": {
+        "study": [
+          107,
+          129,
+          117,
+          145
+        ],
+        "engine": [
+          107,
+          96,
+          117,
+          119
+        ]
+      }
+    }
+  ],
+  "tail": "No distinct tail in all16sourceframes; none invented",
+  "uncertainty": [
+    "2D standing art does not determine a unique3D skeleton or depth",
+    "Short bent limbs and head depth are inferred; common scale is fixed, not an exact per-view sprite reconstruction",
+    "Own short-reach profile is not an actual-bike mount or universal fit",
+    "Raw GLTF source viewer; no CarMeshAsset or authority/AI/fallback qualification"
+  ]
+}

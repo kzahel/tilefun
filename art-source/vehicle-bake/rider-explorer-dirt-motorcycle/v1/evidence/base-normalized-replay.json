@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "independent": true,
+  "glbSha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+  "atlasSha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175",
+  "recipeSha256": "5303df2547415a8226ae230f7c84aa2424db1a460f9cd82417dc78b294734683",
+  "scratchInputDependencies": [],
+  "originalSourceReceipt": {
+    "path": "art-source/vehicle-bake/dirt-motorcycle/v1/evidence/replay-verification.json",
+    "sha256": "49de07d6407a313c1138bd62a4d998b076d39ab4ae083e49152bae637880fd64"
+  },
+  "independentReplayReceipt": {
+    "path": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/evidence/base-independent-replay.json",
+    "sha256": "fca7e8a3aac60e0567873be1939c9c0f2011753166bcc94a4ce08a2864868a8b"
+  },
+  "meaning": "Normalized immutable child aliases; independently reproduced source outputs; not human approval or normal availability"
+}

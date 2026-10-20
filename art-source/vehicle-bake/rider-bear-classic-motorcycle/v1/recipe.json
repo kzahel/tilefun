@@ -1,0 +1,119 @@
+{
+  "method": "Exact static GLB component graph/buffer assembly; child authored master/constructor proofs retained separately",
+  "config": {
+    "id": "rider-bear-classic-motorcycle-v1",
+    "canonicalConfig": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/assembly.json",
+    "retained": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1",
+    "public": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1",
+    "scratch": "data/vehicle-bake/rider-bear-classic-motorcycle/replay/public",
+    "qa": "data/vehicle-bake/rider-bear-classic-motorcycle-qa",
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "base": {
+      "model": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/model.glb",
+      "atlas": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/atlas.png",
+      "master": "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/master.blend",
+      "replay": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/base-normalized-replay.json"
+    },
+    "component": {
+      "model": "art-source/vehicle-riders/bear-upright/v1/rider.glb",
+      "atlas": "art-source/vehicle-riders/bear-upright/v1/atlas.png",
+      "master": "art-source/vehicle-riders/bear-upright/v1/master.blend",
+      "replay": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/rider-normalized-replay.json"
+    },
+    "additionalInputs": [
+      "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/evidence/replay-verification.json",
+      "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/base-independent-replay.json",
+      "art-source/vehicle-riders/bear-upright/v1/evidence/replay-verification.json",
+      "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/rider-independent-replay.json"
+    ],
+    "mountBlenderWorldPixels": [
+      2.0869565217391304,
+      0.0,
+      19.48695652173913
+    ],
+    "prefix": "RiderBear",
+    "nativeSize": 224,
+    "method": "ISOLATED SOURCE PROTOTYPE: exact classic-motorcycle-bear-fit and unchanged bear-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+    "limits": [
+      "One static measured identity/bike fit only",
+      "No normal activation, AI, occupied fallback, all27 or animation qualification",
+      "Editable geometry remains in two child packed masters plus explicit placement recipe"
+    ]
+  },
+  "inputs": {
+    "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/assembly.json": "5a36af57e21e64160b5b868da2a0da40a8b02e991c8989bee9f8cb0c976665f6",
+    "scripts/vehicle-bake/component-package-cycle.py": "d770b66e08a76cf914f58685776f1ee69bb86c9dc5d87dda519c80d0ae7e464d",
+    "scripts/vehicle-bake/compose-component.py": "6659e9d078ed6a317049ed50606551239c494c156cd6ef55586a7fe2f9ce7df4",
+    "scripts/vehicle-bake/compose-component-cycle.py": "cf7020b2e5e4d6a9bb81b8615040aadfc49a539dc453ca434ad3c909937f268d",
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/evidence/replay-verification.json": "95a6216a2125eb65a5a482879ebd764b311b199d4582e2389431b086f3cdd91e",
+    "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/base-independent-replay.json": "d5e9d63f8fc8559356ad414559c6c84c1964f31a18d80599c2dfc30e843b512b",
+    "art-source/vehicle-riders/bear-upright/v1/evidence/replay-verification.json": "bb6b0b3092b43aa583a77823632e114612696596543aaba13601908f861e2314",
+    "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/rider-independent-replay.json": "3b394c410d155c2823ac90520f2a80b15bd1dff63be6a6f1872f0414a94719dd",
+    "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/model.glb": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+    "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/atlas.png": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+    "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/master.blend": "56419a6c9c69e5a324e30845eadd350636ee661055fe1890b21c4efb616b5232",
+    "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/base-normalized-replay.json": "cbb4f437be9f7cf6428f4c73bd344d47ea6512b7c4640d02db537d8f433fc207",
+    "art-source/vehicle-riders/bear-upright/v1/rider.glb": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+    "art-source/vehicle-riders/bear-upright/v1/atlas.png": "1f46d5d4d66b41a817f8cb5e34fb0f5955f11eb762ae38615f4d0ec42ae27bd2",
+    "art-source/vehicle-riders/bear-upright/v1/master.blend": "bece89367aa6aff98ea303ffe63d49a8725b4eb71b57fcdc771d0f9b790300ae",
+    "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/rider-normalized-replay.json": "e8788ad0f7e10f2c3e518482cf84d09730bcbdf670b6562fbad9293107616137"
+  },
+  "preservation": {
+    "baseSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+    "componentSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+    "baseArraysPreserved": [
+      "bufferViews",
+      "accessors",
+      "samplers",
+      "images",
+      "textures",
+      "materials",
+      "meshes"
+    ],
+    "baseBinaryPrefixExact": true,
+    "mountBlenderWorldPixels": [
+      2.0869565217391304,
+      0.0,
+      19.48695652173913
+    ],
+    "componentPrefix": "RiderBear",
+    "baseNodesPreservedExceptRootChildAppend": true,
+    "rootAttachment": {
+      "node": 13,
+      "name": "Motorcycle_Root",
+      "appendedMount": 21
+    },
+    "componentWorldSocketPreserved": true,
+    "cycleRootWorldMatrix": [
+      [
+        17.39130401611328,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        17.39130401611328,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        17.39130401611328,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "method": "Append companion inside existing marked root, compensating its uniform rigid transform; original geometry/paint buffers and all other node data unchanged"
+  }
+}

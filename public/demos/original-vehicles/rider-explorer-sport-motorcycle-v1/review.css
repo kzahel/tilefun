@@ -1,0 +1,242 @@
+:root {
+  color-scheme: dark;
+  --zoom: 2;
+  --native-size: 128px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color: #eee9df;
+  background: #121c22;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at 75% 0, #243b40, transparent 65%);
+}
+main {
+  max-width: 1080px;
+  margin: auto;
+  padding: 30px 28px 24px;
+}
+nav,
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+}
+nav,
+.eyebrow,
+.card-title span {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #a5c6c0;
+}
+.badge {
+  border: 1px solid #83764b;
+  color: #f1d48e;
+  border-radius: 4px;
+  padding: 7px 10px;
+}
+header {
+  margin: 44px 0 28px;
+}
+h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  margin: 10px 0 16px;
+}
+.intro {
+  max-width: 590px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #becdcb;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #3c5358;
+  border-radius: 10px;
+  background: #1a2a30;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  color: #c4d4d0;
+}
+select,
+button {
+  font: inherit;
+  color: #edf4ee;
+  border: 1px solid #567073;
+  background: #243c41;
+  border-radius: 5px;
+  min-height: 42px;
+  padding: 8px 12px;
+}
+button {
+  cursor: pointer;
+  background: #42695e;
+}
+.heading {
+  flex: 1;
+  min-width: 170px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.heading input {
+  grid-row: 2;
+  grid-column: 1 / 3;
+  width: 100%;
+  min-height: 25px;
+  margin: 0;
+  accent-color: #e0bb76;
+}
+.heading output {
+  grid-row: 1;
+  grid-column: 2;
+}
+.check {
+  flex-direction: row;
+  align-items: center;
+  min-height: 42px;
+}
+#status {
+  font-size: 12px;
+  color: #afc8bf;
+  margin: 18px 2px;
+}
+.comparison {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 1fr);
+  gap: 18px;
+}
+article {
+  background: #1e3037;
+  border: 1px solid #3a535b;
+  border-radius: 10px;
+  padding: 18px;
+  min-width: 0;
+}
+h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.card-title span {
+  font-size: 9px;
+  white-space: nowrap;
+  color: #dfbd7b;
+}
+article p,
+.note,
+footer {
+  color: #a5bcb9;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: safe center;
+  background-color: #30443e;
+  background-image:
+    linear-gradient(45deg, #344a43 25%, transparent 25%, transparent 75%, #344a43 75%),
+    linear-gradient(45deg, #344a43 25%, transparent 25%, transparent 75%, #344a43 75%);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    12px 12px;
+  border-radius: 6px;
+  margin-top: 16px;
+}
+.enlarged {
+  min-height: 410px;
+  overflow: auto;
+}
+canvas,
+img {
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+#low {
+  width: calc(var(--native-size) * var(--zoom));
+  height: calc(var(--native-size) * var(--zoom));
+}
+.native {
+  min-height: calc(var(--native-size) + 16px);
+}
+.native canvas {
+  width: var(--native-size);
+  height: var(--native-size);
+}
+.native img {
+  width: 128px;
+  height: 128px;
+}
+#style-card .native {
+  min-height: 144px;
+}
+.side {
+  display: grid;
+  gap: 18px;
+}
+.details {
+  margin-top: 28px;
+  border-top: 1px solid #3a535b;
+  padding: 24px 0;
+}
+.details p {
+  color: #b4c9c3;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  font-size: 13px;
+}
+a {
+  color: #f0cf8d;
+  text-underline-offset: 4px;
+}
+footer {
+  border-top: 1px solid #3a535b;
+  padding-top: 18px;
+}
+@media (max-width: 650px) {
+  main {
+    padding: 20px 14px;
+  }
+  nav {
+    align-items: start;
+  }
+  header {
+    margin: 30px 0 22px;
+  }
+  .comparison {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .enlarged {
+    min-height: 300px;
+    justify-content: safe center;
+  }
+  .controls {
+    padding: 14px;
+    gap: 12px;
+  }
+  .badge {
+    font-size: 8px;
+  }
+}

@@ -163,3 +163,97 @@ Explorer's unchanged classic and sidecar assemblies are frozen diagnostic review
 decoded rider geometry and explicit measured mounts. All-wheel clearance,
 negative/reset, mobile/offline and source-only replay pass. No normal motorcycle,
 all-27-appearance, AI occupant or occupied fallback qualification is implied.
+
+## Checkpoint 4 — complete ordinary fleet published
+
+Commit `8f2aea6e` is pushed. Linux CI run `39352227458` passes the check job,
+all sixteen browser shards and deployment. The published GitHub Pages build
+serves all 33 original models and their 33 fallback sheets byte-identically,
+and its OriginalVehicles catalog bundle matches the validated local build.
+[Deployment evidence](../../art-source/vehicle-bake/deployment-153.json) records
+the exact URLs and hashes. The separate shared graehlarts human review host runs
+an older Vite checkout; updating Pages does not update its source or inbox.
+
+The final bounded local unit run (`npm test -- --maxWorkers=4`) records
+**6,007 passed, five known Windows failures, ten skipped** across 6,022 cases
+and 334 files in 692.19s. The remaining failures concern Windows symlink
+privileges and SQLite SIGKILL behavior; Linux CI's complete check job passes.
+Earlier unbounded runs also hit two varying five-second timing cases under
+load. Preserve those results rather than claiming the Windows suite is clean.
+The independent 1,697-case Windows browser run continues against stable inputs;
+all 180 authored gameplay cases have already passed.
+
+All seven distinct cycle sources and Explorer compositions now have independent
+source replay, real shared two/three-wheel capture, 32 bare/32 combined pixel and
+decoded-geometry parity, full-body/all-wheel negative/reset controls and parent
+native visual inspection. Brown Bear and Person7 mechanically fitted assemblies
+also pass those shared checks. Seven new diagnostic review registrations wait
+for the stable Windows browser snapshot to finish. Normal motorcycle activation
+remains deferred for all-appearance identity, AI occupancy and occupied fallback.
+
+The source budget audit measures 2,299–4,030 triangles per ordinary original;
+all 33 GLBs total 7,012,016 bytes. Each uses one opaque 512² atlas. The texture
+guide distinguishes the coupe's high-to-low transfer from directly authored
+semantic UV skins and records actual sampler/runtime behavior. A new read-only
+retained-source auditor checks declarations and exact bytes, with 49 negative/
+positive controls; this static check does not replace fresh constructor replay.
+Fresh source replay now preserves a declared root marker exactly instead of
+overwriting it with an empty scaffold; a constructor-sensitive red/green control
+and all eleven helper tests pass.
+
+Default Classic rider v1 fails agent identity inspection despite correct contacts.
+V2 restores eyes/collar, but the real elevated front projection loses pointed
+ear silhouette. Both remain immutable diagnostic revisions; a separate v3 is
+being corrected before actual-bike fitting. No human approval is synthesized.
+
+V3 now restores distinct ears through actual semantic-ear removal/reset controls
+at front and both near-front headings in both cameras. It retains v2's atlas,
+all twenty other component signatures and the original measured profile. Parent
+inspection of all 32 native views, a fresh four-input exact replay and a static
+998-pin/source-public check pass. A separate peer inspection and mechanically
+fitted actual-bike pilot continue; this is isolated agent qualification, with
+normal occupancy and human review gates unchanged.
+
+## Checkpoint 5 — final source packages and validation
+
+All 33 ordinary originals are integrated; the seven cycle styles have retained
+source and isolated shared-renderer reviews, with normal activation deferred.
+Explorer, Bear, Person7 and Classic now have measured source/shared bike pilots;
+23 picker appearances still lack seated source, and actual all-27 runtime
+occupancy, AI drivers, occupied fallback and authority/resource contracts remain.
+The corrected Classic v3 and mechanically fitted bike form a 4,368-triangle,
+four-primitive/two-atlas prototype. Its 17-input fresh replay, actual shared loader,
+32 bare/32 combined RGBA views, 4,038 rider vertices/32,304 attribute channels,
+wheel negatives/reset and native/mobile/offline inspection pass.
+
+The second Windows full browser run finishes **1,695 passed, one failed, one
+skipped** of 1,697; all **246 authored gameplay and steering checks passed**.
+The touch failure reproduces in isolation. Controlled frame-boundary evidence
+shows the menu DOM closes before the next PlayScene frame enables canvas controls;
+the test sends a valid Jump touch too soon. A readiness-only test correction passes
+three actual repeated runs. Coordinates and production input code remain unchanged.
+[The retained diagnostic](../../art-source/vehicle-bake/validation-153/tap-readiness.json)
+keeps the cause distinct from the unchanged earlier failures.
+
+The vehicle test file now opts its independent cases into parallel grouping.
+Collection retains all 180 vehicle identities and all 1,697 global identities;
+other files and global parallel settings remain unchanged. A final common-config
+two-worker run passes **194/194** cases: all 180 authored vehicle cases and all
+fourteen touch cases, with no skips, retries or flaky outcomes, in 14.1 minutes.
+This focused result does not replace the original full-run result.
+
+Final typechecks, **216** focused vehicle/asset/replay unit tests, repository
+check (7,028 files, zero errors, 120 existing warnings/37 infos), inventories and
+build pass. The final root contains **43 frozen reviews and 1,810 Workshop
+identities**, preserving all 1,802 preceding records exactly. The staged audit
+verifies 63 source maps and 17,137 source/review pins; the normal 33-model catalog,
+45-port bank and current engine bytes remain unchanged. Exact compiled offline
+viewer copies retain bundled third-party shader whitespace under the same narrow
+generated-artifact exclusions as public viewers; no frozen bytes are reformatted.
+[Final validation](../../art-source/vehicle-bake/validation-153/final-checks.json)
+records scope and limits; full execution logs and intermediate/session data remain ignored.
+
+The [texture guide](../vehicle-texture-authoring.md) and
+[component runbook](../vehicle-component-assembly.md) document the repeatable steps.
+Further art production follows the owner gate; this delivered batch's appearance
+pause waiver does not become a standing authorization.

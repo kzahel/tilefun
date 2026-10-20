@@ -1,0 +1,276 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "normalActivation": false,
+  "sharedTwoWheelQualification": "pending parent actual shared loader/browser review",
+  "sharedStaticCycleCatalog": {
+    "triangles": 2280,
+    "vertices": 4294,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 159216,
+    "sha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+    "wheels": {
+      "F": {
+        "wheel_radius": 5.391304347826088,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 5.73913043478261,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "CarMeshAssetUsed": false,
+  "rawGLTFDiagnostic": true,
+  "artReviewStatus": "awaiting-owner-review",
+  "family": "retro-scooter",
+  "route": "retro-scooter",
+  "revision": "v1",
+  "method": "Original mint/cream retro scooter: own rounded transverse legshield, open step-through continuous floor and edge rails, broad rear cowling cut with real wheel arch, long rear saddle and headlamp nacelle. True smaller F/R wheels. Unchanged Explorer is separately mounted; soles contact floor, no pegs.",
+  "geometry": {
+    "triangles": 2280,
+    "vertices": 4294,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 159216,
+    "sha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "wheels": {
+      "F": {
+        "wheel_radius": 5.391304347826088,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 5.73913043478261,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "rootMarker": {
+      "tilefun_motorcycle": 1,
+      "wheel_ids": [
+        "F",
+        "R"
+      ],
+      "presentation_stage": "source-prototype-not-production"
+    },
+    "qualification": "own raw source inventory; stable cycle catalog audited separately; actual shared loader/browser pending"
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "F",
+      "centerBlender": [
+        -0.9800000190734863,
+        0.0,
+        0.3100000023841858
+      ],
+      "centerExport": [
+        -17.043478592582375,
+        5.391304389290188,
+        -0.0
+      ],
+      "radiusBlender": 0.31,
+      "wheel_radius": 5.391304347826088
+    },
+    {
+      "id": "R",
+      "centerBlender": [
+        0.949999988079071,
+        0.0,
+        0.33000001311302185
+      ],
+      "centerExport": [
+        16.52173892311428,
+        5.739130662835163,
+        -0.0
+      ],
+      "radiusBlender": 0.33,
+      "wheel_radius": 5.73913043478261
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/retro-scooter/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/retro-scooter/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/retro-scooter/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "sourceImmutable": true,
+  "sourcePilot": true,
+  "productionQualified": false,
+  "humanApproval": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "riderComposition": {
+    "status": "source-pilot-only",
+    "bike": {
+      "path": "public/demos/vehicle-bake/retro-scooter/v1/model.glb",
+      "sha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+      "triangles": 2280,
+      "draws": 3,
+      "atlases": 1
+    },
+    "rider": {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "triangles": 1956,
+      "draws": 1,
+      "atlases": 1,
+      "immutable": true,
+      "reexported": false
+    },
+    "singleMountSource": [
+      0.05,
+      0,
+      0.93
+    ],
+    "gltfMountTransform": "S*[x,z,-y], S=80/4.6; rider GLB already carries export scale",
+    "combined": {
+      "triangles": 4236,
+      "draws": 4,
+      "atlases": 2,
+      "oneActualDepthTarget": true,
+      "combinedGLBExported": false
+    },
+    "normalActivation": false,
+    "productionQualified": false,
+    "humanApproval": false
+  },
+  "actualBounds": {
+    "minWorld": [
+      -23.472509384155273,
+      -6.26086950302124,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      23.304346084594727,
+      6.26086950302124,
+      22.69565200805664
+    ],
+    "spanSource": [
+      2.6896691894531246,
+      0.7199999928474425,
+      1.3049999630451201
+    ],
+    "centeredHorizontalCeilWorld": [
+      47,
+      13
+    ],
+    "noRescaleRecenter": true
+  },
+  "combinedBounds": {
+    "minWorld": [
+      -23.472509384155273,
+      -6.26086950302124,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      23.304346084594727,
+      6.26086950302124,
+      32.956520080566406
+    ],
+    "spanSource": [
+      2.6896691894531246,
+      0.7199999928474425,
+      1.8949998772144314
+    ]
+  },
+  "sourceQA": {
+    "ownScooterMorphology": true,
+    "packedMaster40Components": true,
+    "actualAll2280TriangleUVMatches": true,
+    "realOpenStepThroughFloorRaysAndDeckRemovalNegativesReset": true,
+    "trueFRDifferentRadii": true,
+    "actual5ContactsOnSaddleGripsFloor": true,
+    "narrowSemanticPairs": true,
+    "bothFullRollCylindersAndNegativeResets": true,
+    "intoShieldNegativeReset": true,
+    "immutableRiderSelfClosedSolidStraddleControls": true,
+    "ownCrown25EachControls": true,
+    "actual32EachCombinedBareRiderMasks": true,
+    "native96Wireframes": true,
+    "signedOrdinaryDistanceAndEqualAnglePhases": true,
+    "independentPivotsReset": true,
+    "riderHidden32PixelExact": true,
+    "native128224FixedDensityParity": true,
+    "desktopMobileOffline": true,
+    "exactSixInputAndGenericScratchReplay": true,
+    "parameterAPIConfigAndPinNegativesReset": true,
+    "scopedChecks": true
+  },
+  "sourceInputHashes": {
+    "scripts/vehicle-bake/retro-scooter/build.py": "1e28bcdd39e0f2347b8572b09dfea54b151e395cf84762b8ba1768d556f70a9a",
+    "scripts/vehicle-bake/retro-scooter/geometry.py": "6bb0aae4eafc65686745aca1f4f1ca28805ca8e170a207ce037aa9c10d9fe48d",
+    "scripts/vehicle-bake/retro-scooter/family.json": "74a3beb6df3d9fd2fb370ebd39e0b2f88a2db0ed8554d4288b06d561f2d4ab74",
+    "scripts/vehicle-bake/retro-scooter/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/source-replay.py": "b1477d5adcaa5eaa42c4807e524bc25729fd455cf243e38b801d537b0623375e",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "scripts/vehicle-riders/explorer-upright/rider.json": "a4e6fb37e0200bb9642302527b229824f4f5b67d10a3f69a21bc21f6109d64b6",
+    "scripts/vehicle-riders/explorer-upright/profile.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016",
+    "art-source/vehicle-riders/explorer-upright/v1/master.blend": "b453ca55e4bf7d2bb6adc0ea2de4685402c886111204300e10442b8acf9fb980",
+    "art-source/vehicle-riders/explorer-upright/v1/low.blend": "ac36f7aea5434aa7a09ef14a92078ac5d3ae05a3b3f26ed2244cbf9c69764a2c"
+  },
+  "limitations": [
+    "Source complete only; actual parent shared-cycle family capture/loader qualification pending",
+    "Unchanged Explorer upright only; soles on floor retain accepted straddle pose, no scooter-specific knees-together pose",
+    "No other avatar/normal availability/AI/fallback/steering/suspension/rider/equipment animation claim",
+    "Corresponding closed palm/grip wrap, sole/floor and pelvis/saddle are finite declared contact exceptions",
+    "Dense native wire pixels can merge; packed semantic master and numeric topology/UV evidence retained",
+    "Bike and immutable rider stay separate; no combined GLB or normal driver activation"
+  ]
+}

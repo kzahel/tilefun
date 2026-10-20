@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "v1ControlNotApproval": true,
+  "v1ModelSha256": "9c1829fde13cf105739ba7b203873b24b2ae6d7d966c9bf66c1d15b147e4b597",
+  "v2ModelSha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+  "onlyChangedOwners": [
+    "RiderClassic broad face UV owner",
+    "RiderClassic pointed ear left",
+    "RiderClassic pointed ear right"
+  ],
+  "addedActualNeckSkin": [
+    "RiderClassic neck collar visible skin"
+  ],
+  "exactLowerBodyGeometryFacesUV": [
+    "RiderClassic seated pelvis",
+    "RiderClassic upper arm left",
+    "RiderClassic elbow left",
+    "RiderClassic forearm left",
+    "RiderClassic gripping palm left",
+    "RiderClassic bent thigh left",
+    "RiderClassic knee left",
+    "RiderClassic short shin left",
+    "RiderClassic boot left",
+    "RiderClassic upper arm right",
+    "RiderClassic elbow right",
+    "RiderClassic forearm right",
+    "RiderClassic gripping palm right",
+    "RiderClassic bent thigh right",
+    "RiderClassic knee right",
+    "RiderClassic short shin right",
+    "RiderClassic boot right",
+    "RiderClassic tiny torso collar UV owner"
+  ],
+  "unchangedLowerBodyPaintSampleChecks": {
+    "RiderClassic seated pelvis": 133,
+    "RiderClassic upper arm left": 158,
+    "RiderClassic elbow left": 143,
+    "RiderClassic forearm left": 158,
+    "RiderClassic gripping palm left": 143,
+    "RiderClassic bent thigh left": 158,
+    "RiderClassic knee left": 143,
+    "RiderClassic short shin left": 158,
+    "RiderClassic boot left": 147,
+    "RiderClassic upper arm right": 158,
+    "RiderClassic elbow right": 143,
+    "RiderClassic forearm right": 158,
+    "RiderClassic gripping palm right": 143,
+    "RiderClassic bent thigh right": 158,
+    "RiderClassic knee right": 143,
+    "RiderClassic short shin right": 158,
+    "RiderClassic boot right": 147,
+    "RiderClassic tiny torso collar UV owner": 976
+  },
+  "profileBytesExact": true,
+  "profileSha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+  "hipOriginUnchanged": [
+    0,
+    0,
+    0
+  ],
+  "headBoundsV1": {
+    "min": [
+      -0.2149999886751175,
+      -0.38999998569488525,
+      0.14000001549720764
+    ],
+    "max": [
+      0.26499998569488525,
+      0.38999998569488525,
+      0.7300000190734863
+    ]
+  },
+  "headBoundsV2": {
+    "min": [
+      -0.2750000059604645,
+      -0.38999998569488525,
+      0.14000000059604645
+    ],
+    "max": [
+      0.2849999964237213,
+      0.38999998569488525,
+      0.7300000190734863
+    ]
+  },
+  "maximumHeadWidthAndTotalHeightExactWithinExportFloatNoise": true,
+  "commonWorldScale": 17.39130434782609,
+  "noAvatarScaling": true,
+  "headSurfaceFiniteJoinMeaning": "Only existing finite torso/head join and v2 measured head/ear attachment region. Other body contact forbidden; actual palm into measured GLB head surface negative/reset separately retained."
+}

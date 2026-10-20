@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "runner": "blender",
+  "invokedBuilder": "scripts/vehicle-bake/cruiser-motorcycle/build.py",
+  "arguments": [
+    "--scratch"
+  ],
+  "args": [
+    "--scratch"
+  ],
+  "inputHashes": {
+    "scripts/vehicle-bake/cruiser-motorcycle/build.py": "c42183cead0792e6e396b6d1f7ae8bf25344f5695df50d95c19c3bb9c41e6bd0",
+    "scripts/vehicle-bake/cruiser-motorcycle/geometry.py": "296ce4d7ba979342c3444a9de85c090895f2b910291518772de0042c609e0b11",
+    "scripts/vehicle-bake/cruiser-motorcycle/family.json": "92cf225bd3606c3bff47c8cb55a33ed236faa159e2cd9114e94d101a19fa66f6",
+    "scripts/vehicle-bake/cruiser-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "scratchInputDependencies": [],
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "atlasSha256": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c",
+  "recipeSha256": "db45601c6ffbb597df871f2a388eaae00959bd8b8637b3609808c74d9163e8a5",
+  "outputHashes": {
+    "model.glb": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+    "atlas.png": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c",
+    "recipe.json": "db45601c6ffbb597df871f2a388eaae00959bd8b8637b3609808c74d9163e8a5"
+  },
+  "freshSixInputProof": "evidence/source-only-replay.json",
+  "meaning": "Normalized portable constructor receipt; --scratch outputs only under fresh data. Four own construction files plus stable catalog-cycle and unchanged configured rider profile. No master, ignored or rider-model construction inputs."
+}

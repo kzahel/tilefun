@@ -1,0 +1,111 @@
+{
+  "family": "orange-white-charcoal-high-fender-knobby-dirt-motorcycle",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [3.35, 0.62, 1.6],
+  "riderMountSource": [0, 0, 1.28],
+  "constructionSharedInputs": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733"
+  },
+  "riderProfile": {
+    "path": "art-source/vehicle-riders/profiles/upright-v1.json",
+    "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "riderInputs": {
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "wheelSpecs": {
+    "F": {
+      "axle": -1.2,
+      "halfTrack": 0,
+      "radius": 0.47,
+      "width": 0.18,
+      "segments": 20,
+      "coreRadius": 0.425
+    },
+    "R": {
+      "axle": 1.1,
+      "halfTrack": 0,
+      "radius": 0.44,
+      "width": 0.22,
+      "segments": 20,
+      "coreRadius": 0.395
+    }
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [32, 35, 45],
+    "tireLight": [64, 68, 78],
+    "paintDeep": [113, 52, 35],
+    "paintShadow": [158, 68, 34],
+    "paintMid": [191, 84, 35],
+    "paint": [225, 110, 43],
+    "paintLight": [245, 156, 75],
+    "cream": [242, 237, 220],
+    "creamShadow": [185, 185, 176],
+    "white": [248, 247, 230],
+    "seat": [43, 45, 54],
+    "seatLight": [70, 73, 80],
+    "frame": [63, 71, 84],
+    "frameLight": [103, 116, 128],
+    "engine": [111, 119, 130],
+    "engineLight": [151, 162, 173],
+    "chrome": [198, 210, 217],
+    "rim": [127, 139, 151],
+    "ruby": [181, 50, 70],
+    "amber": [236, 164, 77],
+    "dark": [47, 52, 63],
+    "glass": [53, 108, 143],
+    "glassLight": [90, 157, 184]
+  },
+  "paintMethod": "Original high-fender dirt motorcycle: narrow orange tank/shrouds, tall charcoal saddle, long exposed fork, plain framed white front plate, high separate mudguards and actual staggered chunky tread blocks. True F/R source pilot with unchanged Explorer anatomy, single measured raised mount and no offroad physics or suspension animation claim.",
+  "paintOwnership": "Own tank/shroud actual X/Z skin chart, mudguard top/end owners, plain white plate front/back skin with ink frame, seat/engine/frame swatches and real knob tyre geometry. Opaque512 nearest unlit atlas; no source bitmap camera projection, exterior ink or logos/letters.",
+  "sourceStatus": "source pilot; actual shared vehicle capture pending parent",
+  "contactPolicy": {
+    "profilePlusOneMountOnly": true,
+    "hip": "actual dark saddle top tangent",
+    "hands": "actual grip centerlines, local closed palm wrap only",
+    "feet": "actual peg TOP sole tangent, not peg center",
+    "exceptions": "Local saddle tangent/hand grip wrap/sole tangent only; no thigh/calf/tank/frame intersections allowed."
+  },
+  "fenders": {
+    "F": {
+      "style": "high thin crowned beak",
+      "topMax": 1.24
+    },
+    "R": {
+      "style": "high upswept thin mudguard",
+      "topMax": 1.38
+    }
+  },
+  "limits": [
+    "No normalactivation/AI/occupiedfallback/allavatars qualification",
+    "No nonzero steering/suspension/rideranimation claim",
+    "RawGLTF diagnostics are separate from parent actualsharedreview"
+  ],
+  "wheelIds": ["F", "R"],
+  "originPolicy": "Authored ground origin0, source forward-X/+Zup and80/4.6 unchanged. F axle-1.20/R+1.10 and total knob radii.47/.44. Single Explorer mount(0,0,1.28) raises actual saddle top1.2005, grips1.55, peg TOPs.75. No post-export recenter/fit scale.",
+  "sourceMethodDistinction": "New dirt-family geometry/tread and surface charts. Common primitive/rig/proof helper conventions only; no color-only variation or high-to-low claim.",
+  "tread": {
+    "stationsPerRow": 12,
+    "rows": 2,
+    "blockAngularHalfSpan": 0.1,
+    "blockRadialDepth": 0.05,
+    "blockHalfWidthFraction": 0.22,
+    "noTextureOnlyTread": true
+  }
+}

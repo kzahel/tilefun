@@ -1,0 +1,134 @@
+{
+  "method": "Original navy/cream upright touring motorcycle: broad faired headlamp nose, tall blue framed windscreen, larger shaped tank, stepped saddle and two real closed side panniers. Actual surface UV graphics, true F/R wheels and immutable Explorer profile.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      40,
+      43,
+      54
+    ],
+    "tireLight": [
+      65,
+      70,
+      82
+    ],
+    "paintDeep": [
+      32,
+      45,
+      70
+    ],
+    "paintShadow": [
+      38,
+      56,
+      85
+    ],
+    "paintMid": [
+      46,
+      66,
+      99
+    ],
+    "paint": [
+      52,
+      77,
+      114
+    ],
+    "paintLight": [
+      86,
+      113,
+      145
+    ],
+    "cream": [
+      233,
+      224,
+      196
+    ],
+    "creamShadow": [
+      181,
+      175,
+      158
+    ],
+    "white": [
+      248,
+      247,
+      230
+    ],
+    "seat": [
+      42,
+      44,
+      56
+    ],
+    "seatLight": [
+      69,
+      71,
+      82
+    ],
+    "frame": [
+      63,
+      71,
+      84
+    ],
+    "frameLight": [
+      103,
+      116,
+      128
+    ],
+    "engine": [
+      111,
+      119,
+      130
+    ],
+    "engineLight": [
+      151,
+      162,
+      173
+    ],
+    "chrome": [
+      198,
+      210,
+      217
+    ],
+    "rim": [
+      127,
+      139,
+      151
+    ],
+    "ruby": [
+      181,
+      50,
+      70
+    ],
+    "amber": [
+      236,
+      164,
+      77
+    ],
+    "dark": [
+      47,
+      52,
+      63
+    ],
+    "glass": [
+      87,
+      149,
+      174
+    ],
+    "glassLight": [
+      142,
+      194,
+      208
+    ]
+  },
+  "ownership": "Independent tank/top, fairing/side, headlamp/front, framed screen/front-back and pannier side/lid surface charts. Constant role swatches for chassis, saddle and wheel parts; no camera projection or glass overlays.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Tall framed screen, broad headlamp fairing, larger tank, stepped saddle and real closed pannier boxes. Exactly two independent road wheels F/R; opaque bikeatlas512; Explorer loaded separately readonly for measured fit/depth diagnostics.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "normalActivation": false,
+  "sharedCycleQualification": "pending parent actual shared loader/browser review",
+  "sharedStaticCycleCatalog": {
+    "triangles": 3124,
+    "vertices": 5946,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 217440,
+    "sha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+    "wheels": {
+      "F": {
+        "wheel_radius": 8.173913043478262,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.652173913043479,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "CarMeshAssetUsed": false,
+  "rawGLTFDiagnostic": true,
+  "artReviewStatus": "agent-QA; parent independent review pending; no formal human approval",
+  "family": "dirt-motorcycle",
+  "route": "dirt-motorcycle",
+  "revision": "v1",
+  "method": "Original high-fender dirt motorcycle: narrow orange tank/shrouds, tall charcoal saddle, long exposed fork, plain framed white front plate, high separate mudguards and actual staggered chunky tread blocks. True F/R source pilot with unchanged Explorer anatomy, single measured raised mount and no offroad physics or suspension animation claim.",
+  "geometry": {
+    "triangles": 3124,
+    "vertices": 5946,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 217440,
+    "sha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+    "wheels": {
+      "F": {
+        "wheel_radius": 8.173913043478262,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.652173913043479,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "F",
+      "centerBlender": [
+        -1.2000000476837158,
+        0.0,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        -20.86956604667332,
+        8.173913022746211,
+        -0.0
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    },
+    {
+      "id": "R",
+      "centerBlender": [
+        1.100000023841858,
+        0.0,
+        0.4399999976158142
+      ],
+      "centerExport": [
+        19.130435197249707,
+        7.652173871579379,
+        -0.0
+      ],
+      "radiusBlender": 0.44,
+      "wheel_radius": 7.652173913043479
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/dirt-motorcycle/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/dirt-motorcycle/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/dirt-motorcycle/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "sourceImmutable": true,
+  "sourcePilot": true,
+  "productionQualified": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "riderComposition": {
+    "immutable": true,
+    "mountSource": [
+      0,
+      0,
+      1.28
+    ],
+    "contacts": 5,
+    "combinedTriangles": 5080,
+    "combinedDraws": 4,
+    "combinedAtlases": 2
+  },
+  "actualBounds": {
+    "minWorld": [
+      -29.565217971801758,
+      -5.3913044929504395,
+      0.0
+    ],
+    "maxWorld": [
+      28.69565200805664,
+      5.3913044929504395,
+      27.826086044311523
+    ],
+    "spanSource": [
+      3.3500000238418575,
+      0.6200000166893005,
+      1.5999999475479123
+    ],
+    "centeredHorizontalCeilWorld": [
+      60,
+      11
+    ],
+    "noRescaleRecenter": true
+  },
+  "combinedBounds": {
+    "minWorld": [
+      -29.565217971801758,
+      -6.08550500869751,
+      0.0
+    ],
+    "maxWorld": [
+      28.69565200805664,
+      6.08550500869751,
+      39.04347610473633
+    ],
+    "spanSource": [
+      3.3500000238418575,
+      0.6998330760002135,
+      2.2449998760223386
+    ],
+    "centeredHorizontalCeilWorld": [
+      60,
+      13
+    ],
+    "noRescaleRecenter": true
+  },
+  "sourceQA": {
+    "exactFreshReplay": true,
+    "packedSourceAudit": true,
+    "allTriangleUVMatches": 3124,
+    "actualKnobbyTreadGeometry": {
+      "blocks": 48,
+      "triangles": 960,
+      "outerRadiiIncludeTread": true
+    },
+    "wholeBikeRiderRoll": true,
+    "twoCollisionNegativeResets": true,
+    "displacedRiderNegativeReset": true,
+    "fenderCoverageEach": 25,
+    "actual32HeadingsEach": [
+      "bike",
+      "rider",
+      "combined"
+    ],
+    "hiddenRider32Exact": true,
+    "depthMasks": true,
+    "paddingDensity32Exact": true,
+    "standardCardinalPlacementExact": true,
+    "desktopMobileOffline": true,
+    "scopedChecks": true
+  },
+  "sourceInputHashes": {
+    "scripts/vehicle-bake/dirt-motorcycle/build.py": "8670530069e87427a56b4bd960a464f7b9eb7487d5a27d3a62c30a90977ab3a6",
+    "scripts/vehicle-bake/dirt-motorcycle/geometry.py": "b30e0fa2090e0bf320785c3a481c9be58818c83b76bf353ae2c1b932e48c286d",
+    "scripts/vehicle-bake/dirt-motorcycle/family.json": "6e250f0709b866a6eef2929e05c42b98d09976fe51f7000cdcde05d6a94ec6a7",
+    "scripts/vehicle-bake/dirt-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "limitations": [
+    "Source pilot only. Actual shared CarMeshAsset loader/browser review remains pending parent",
+    "Only immutable Explorer upright/profile measured and fitted; no all-avatar rider identity/AI or occupied fallback qualification",
+    "Neutral steering; no suspension, rider pose animation or normal activation claim",
+    "Raw GLTF viewer reuses shared camera and outline math, not a copied/forked engine loader",
+    "Editable runtime-topology component master; no high-to-low decimation claim",
+    "Static dirt-bike equipment only; no offroad physics, suspension articulation or gameplay feature qualification"
+  ]
+}

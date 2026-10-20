@@ -1,0 +1,492 @@
+{
+  "status": "passed",
+  "pairs": [
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/classic-motorcycle/v1/model.glb",
+      "sha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/classic-motorcycle/v1/recipe.json",
+      "sha256": "9b055a5bb4adc44b60258936ce6d7171c632d8f6fca21b43e253928a06babf01",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/sidecar-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/sidecar-motorcycle/v1/model.glb",
+      "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/sidecar-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/sidecar-motorcycle/v1/atlas.png",
+      "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/sidecar-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/sidecar-motorcycle/v1/recipe.json",
+      "sha256": "091f455c0a7fed73f8f3c94aec08e23affec0a2c488b361c07ff5e7000bc0296",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/sport-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/sport-motorcycle/v1/model.glb",
+      "sha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/sport-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/sport-motorcycle/v1/atlas.png",
+      "sha256": "3538c7e7d14926a4ffb9bef798cfe6d04b0231fb7fb6533f65c15c80eece4069",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/sport-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/sport-motorcycle/v1/recipe.json",
+      "sha256": "ac3225d69649e8af3a6e9de6f48bb405755b46ffd630de7ca25031dab10c9f62",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/cruiser-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/cruiser-motorcycle/v1/model.glb",
+      "sha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/cruiser-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/cruiser-motorcycle/v1/atlas.png",
+      "sha256": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/cruiser-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/cruiser-motorcycle/v1/recipe.json",
+      "sha256": "db45601c6ffbb597df871f2a388eaae00959bd8b8637b3609808c74d9163e8a5",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/retro-scooter/v1/model.glb",
+      "public": "public/demos/vehicle-bake/retro-scooter/v1/model.glb",
+      "sha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/retro-scooter/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/retro-scooter/v1/atlas.png",
+      "sha256": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/retro-scooter/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/retro-scooter/v1/recipe.json",
+      "sha256": "75105422444d59842b723ff0bd6653a0b521b3c022bddd0a80d47de5d5acb38b",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/dirt-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/dirt-motorcycle/v1/model.glb",
+      "sha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/dirt-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/dirt-motorcycle/v1/atlas.png",
+      "sha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/dirt-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/dirt-motorcycle/v1/recipe.json",
+      "sha256": "5303df2547415a8226ae230f7c84aa2424db1a460f9cd82417dc78b294734683",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/touring-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/touring-motorcycle/v1/model.glb",
+      "sha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/touring-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/touring-motorcycle/v1/atlas.png",
+      "sha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/touring-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/touring-motorcycle/v1/recipe.json",
+      "sha256": "e80a2140aff86e45e2974f741f63d0fc47d49d1f03847329f8e91f6b1b6daab3",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/model.glb",
+      "sha256": "98820ac0014a0afbf8018abae55436d0c9f4889a880431ac7113f08144e9f1e8",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/recipe.json",
+      "sha256": "8d20926d25447e08e6fa5247fd63e1f8dee82b7930546366bdbf74ae77351ad4",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/model.glb",
+      "sha256": "04d5e6a5b79d57cb1d8511826fb57e8aa40adbc3acf2e8d3ac606836f4b31dfc",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/atlas.png",
+      "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/recipe.json",
+      "sha256": "fdcc76b49efe158a3803aa9356820cdb3b72797271053ec11c876ebbe8256888",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-sport-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-explorer-sport-motorcycle/v1/model.glb",
+      "sha256": "3f7a572939629bb474ae8698e93bcd69f2ed9f9bf9b5de56e19bfc979d2306e2",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-sport-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-sport-motorcycle/v1/atlas.png",
+      "sha256": "3538c7e7d14926a4ffb9bef798cfe6d04b0231fb7fb6533f65c15c80eece4069",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-sport-motorcycle/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-sport-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-sport-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-explorer-sport-motorcycle/v1/recipe.json",
+      "sha256": "cc68ef59efc465167b4a44bba30d5e07eb1795e5e9573ecd603b9947957b8f34",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/model.glb",
+      "sha256": "7aa2d37360049a94e052e264f2c813f78f7cd78e2ce1b440b02f01f394d11103",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/atlas.png",
+      "sha256": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/recipe.json",
+      "sha256": "07d2f3067773965c252b63852430b5a47e0d67bec00433b342657f2a6198e430",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-retro-scooter/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-explorer-retro-scooter/v1/model.glb",
+      "sha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-retro-scooter/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-retro-scooter/v1/atlas.png",
+      "sha256": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-retro-scooter/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-retro-scooter/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-retro-scooter/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-explorer-retro-scooter/v1/recipe.json",
+      "sha256": "2c52a34bbd1eff9a7906badcc6321413e3697c83d65f7eab239f4c0ce624129f",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/model.glb",
+      "sha256": "8290844ce734800c47f1c07c9328fc74763e23d0f46e6cedcba5a62cfcd0f360",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/atlas.png",
+      "sha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/recipe.json",
+      "sha256": "12bce4fc08ffedab4b3165b8f70d753887100e297ac71de6dbb7ed63f4a7fdf4",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-touring-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/model.glb",
+      "sha256": "773afa2b30863c7561bee970f8de709e3cd0de22e1d9a382170992ebcf7d9b33",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-touring-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/atlas.png",
+      "sha256": "46a753b743c301e4212263a23565f8e4fb1b718cc3101003285fb6729bf58423",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-touring-motorcycle/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-explorer-touring-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-explorer-touring-motorcycle/v1/recipe.json",
+      "sha256": "1e6b7781121449ef150bbadc292a04aeb5cbf5a1cc8388d20eeaa88c3c04c0fd",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1/model.glb",
+      "sha256": "1668ee4341aba50c66f36753e1fb425ad5acf0fd7a460c8b6ac6e8cb73b4058f",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1/companion-atlas.png",
+      "sha256": "1f46d5d4d66b41a817f8cb5e34fb0f5955f11eb762ae38615f4d0ec42ae27bd2",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1/recipe.json",
+      "sha256": "508540c80ef21323b820a80a6ba23da312328daa4c89fc9efdcef31ab5f12a2f",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-person7-classic-motorcycle/v1/model.glb",
+      "public": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1/model.glb",
+      "sha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-person7-classic-motorcycle/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-person7-classic-motorcycle/v1/companion-atlas.png",
+      "public": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1/companion-atlas.png",
+      "sha256": "5ceba48f52d25f94f02949502ee8e64057f90ce1c9798af9164d34132a8cc519",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/rider-person7-classic-motorcycle/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1/recipe.json",
+      "sha256": "0e5394a7b0297de6449619ed9177287bd0ee64c3ff7f27dd0dca95b49f12c9dc",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/model.glb",
+      "public": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/model.glb",
+      "sha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/recipe.json",
+      "sha256": "0718d20fbefe828f10883d4cbb58e61cd1ea952a4f4aaae777df80e9fc2f1e37",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/model.glb",
+      "public": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1/model.glb",
+      "sha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/atlas.png",
+      "public": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/recipe.json",
+      "public": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1/recipe.json",
+      "sha256": "ad685b16018ae8fda16d1aead8dd0b2810a22cc5d4162113263d310f74d2f9e8",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/explorer/v1/rider.glb",
+      "public": "public/demos/vehicle-riders/explorer/v1/rider.glb",
+      "sha256": "519b5d27183ab71692a1b3247ca59cc408cf7feb8dba0cee702f38a37736d642",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/explorer/v1/atlas.png",
+      "public": "public/demos/vehicle-riders/explorer/v1/atlas.png",
+      "sha256": "25475a94f315ee5af51ea830786bbe30435f01d4ddd00f32a0a7ce2719345007",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/explorer/v1/recipe.json",
+      "public": "public/demos/vehicle-riders/explorer/v1/recipe.json",
+      "sha256": "3c77490694143f4c76d372905c589f7afb41c739b152f43b7dfc7bcc37e7663d",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "public": "public/demos/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/explorer-upright/v1/atlas.png",
+      "public": "public/demos/vehicle-riders/explorer-upright/v1/atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/explorer-upright/v1/recipe.json",
+      "public": "public/demos/vehicle-riders/explorer-upright/v1/recipe.json",
+      "sha256": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/bear-upright/v1/rider.glb",
+      "public": "public/demos/vehicle-riders/bear-upright/v1/rider.glb",
+      "sha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/bear-upright/v1/atlas.png",
+      "public": "public/demos/vehicle-riders/bear-upright/v1/atlas.png",
+      "sha256": "1f46d5d4d66b41a817f8cb5e34fb0f5955f11eb762ae38615f4d0ec42ae27bd2",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/bear-upright/v1/recipe.json",
+      "public": "public/demos/vehicle-riders/bear-upright/v1/recipe.json",
+      "sha256": "bdd7345064b750ce8413fa2eeaab379390ad6fb96da6c3612500e72342ac2fcd",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/person7-upright/v1/rider.glb",
+      "public": "public/demos/vehicle-riders/person7-upright/v1/rider.glb",
+      "sha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/person7-upright/v1/atlas.png",
+      "public": "public/demos/vehicle-riders/person7-upright/v1/atlas.png",
+      "sha256": "5ceba48f52d25f94f02949502ee8e64057f90ce1c9798af9164d34132a8cc519",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/person7-upright/v1/recipe.json",
+      "public": "public/demos/vehicle-riders/person7-upright/v1/recipe.json",
+      "sha256": "738def6948c16042d3153c6c97d2c3af4b362189f5f848fd95c8ceb75633b740",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/classic-upright/v1/rider.glb",
+      "public": "public/demos/vehicle-riders/classic-upright/v1/rider.glb",
+      "sha256": "9c1829fde13cf105739ba7b203873b24b2ae6d7d966c9bf66c1d15b147e4b597",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/classic-upright/v1/atlas.png",
+      "public": "public/demos/vehicle-riders/classic-upright/v1/atlas.png",
+      "sha256": "e1ffa24495478043e0ef638e43e12efa1e5bd735ae3df66d29687fafa3a66845",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/classic-upright/v1/recipe.json",
+      "public": "public/demos/vehicle-riders/classic-upright/v1/recipe.json",
+      "sha256": "1e01a6d811e0879fa8be82e57e0c557c1f12abd7d4e7fe2ebae40b24dab501a5",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/classic-upright/v2/rider.glb",
+      "public": "public/demos/vehicle-riders/classic-upright/v2/rider.glb",
+      "sha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/classic-upright/v2/atlas.png",
+      "public": "public/demos/vehicle-riders/classic-upright/v2/atlas.png",
+      "sha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+      "byteExact": true
+    },
+    {
+      "source": "art-source/vehicle-riders/classic-upright/v2/recipe.json",
+      "public": "public/demos/vehicle-riders/classic-upright/v2/recipe.json",
+      "sha256": "59154d224c73de6ed6130be7bea55e2b7db364303b6a151928c2b8f32dc4f477",
+      "byteExact": true
+    }
+  ],
+  "freshConstructionPerformed": false
+}

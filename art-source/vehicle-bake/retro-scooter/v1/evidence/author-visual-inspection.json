@@ -1,0 +1,52 @@
+{
+  "status": "agent-inspected-original-source-pilot",
+  "glbSha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+  "immutableExplorerSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "fixedDensity": 17.39130434782609,
+  "native224Radius112": true,
+  "all32Each": [
+    "combined",
+    "bike-alone",
+    "rider-alone",
+    "depth-masks"
+  ],
+  "all96ActualNativeWires": true,
+  "ordinaryDistanceAndEqualAngleSignedPhaseSets": true,
+  "inspectionSheetHashes": {
+    "inspection-detail-combined-study.png": "b08775f06bb931f9a692458abb806a2d35d15571bc2254272ef91dcd1d1f08cd",
+    "inspection-detail-bike-alone-study.png": "b0b1fe45b891d483c1eed3b9d932d7b9da3e3b2235eba93fe524388ee07279a0",
+    "inspection-detail-rider-alone-study.png": "6a29027c4bb5c1a7471f44548b6e519fc62bb8f37c602e00fb9d6272ec3abd64",
+    "inspection-detail-ownership-mask-study.png": "51e948239ccd55e6165215b5398d2bee781879a150006607a5d01bf6d770db45",
+    "inspection-detail-combined-engine.png": "634bec59ba8013c20245c7089e0d358d4c278df7b7528d49d608bda6eb466a0e",
+    "inspection-detail-bike-alone-engine.png": "680ab3eb88fe785570726bebc2afacdab1a2f23189935c098977e50337f63cfa",
+    "inspection-detail-rider-alone-engine.png": "498c2e04fdc908a6d428de8eeef03ecfffee8252b96ae3787ad0f5ba261b131d",
+    "inspection-detail-ownership-mask-engine.png": "e3f6bd46319adeb0b838a531fb6d7330ea02461a430356f892047e4446dc05b2",
+    "inspection-all-wires-combined-study.png": "1b6e25fb76326563164db869865a9b8c63ffcaa4ef7ad504139e31831c0f4166",
+    "inspection-all-wires-bike-alone-study.png": "d569b32f3381185e239a1de34d1516051332d691fb92900bd3444c33838aa685",
+    "inspection-all-wires-rider-alone-study.png": "4b7c4e9be625356c5821fb5469de4c73be5e4549e39c5b4d30dfcca908459a17",
+    "inspection-all-wires-combined-engine.png": "92de8f8e285baa7963b21240a7f5c56a7ce9776fe2e056585221e09b1de7ec26",
+    "inspection-all-wires-bike-alone-engine.png": "975ae26a4b22b77edeeccb16b74e3f016dbe8722c463a0a8fdcf2e9e660ec0ba",
+    "inspection-all-wires-rider-alone-engine.png": "ed2d9610b9029833a73ea53bfd6534bdb1eea0b9b2d20d7e0be9430f1ec4f524",
+    "inspection-phases.png": "ce06a94dc80dff19bb4c682b0f4db6191e3d5c81a3177a9a004efb279495a340",
+    "inspection-equal-angle.png": "eab835449df72de8071049539e6607fde131e8c78f83847b6b9aa1164cd529d8",
+    "inspection-independent.png": "0aebc57a016d1c510774ec4166a523431925be5f1f19737f25bfc54b37720b72",
+    "inspection-wires.png": "b6288f4824232ca4a0a5f53b7cb8e80d30bb8d6e7cfd016b7719ea21ac65fd48"
+  },
+  "findings": [
+    "Distinct small rounded scooter: broad rear saddle/cowling, smaller wheels, real step-through floor and transverse curved shield read at native density",
+    "Mint/cream continuous skin charts, curved front fender and rounded headlamp nacelle remain coherent across study/game headings",
+    "Rear actual arch/cowling and curved front fender cover crowns in elevated/game views while lower tires remain visible",
+    "Unchanged Explorer identity/palette/relative anatomy preserved; soles rest on actual floor, palms grip connected handlebars, hip contacts saddle",
+    "Explorer keeps accepted straddle stance rather than a new knees-together scooter pose; explicitly limited to this one immutable pose/mount",
+    "Single-depth ownership reverses coherently around headings, far limbs occlude behind shield/body; no apparent body penetration",
+    "Native wires are actual active-mesh wireframes, but dense edges merge at this small scale; packed40component master and all2280triangle UV proof retain readable source topology",
+    "Signed distance/equal-angle phases and independent F/R pivot/reset preserve fixed body/rider; no steering/suspension animation claim",
+    "Desktop and narrow mobile controls/readout fit without overflow; standalone offline file has exact32combined pixels with zero network"
+  ],
+  "formalHumanApproval": false,
+  "actualSharedCycleFamilyCaptureLoaderQualification": "pending parent",
+  "limits": [
+    "Only raw source diagnostics; actual shared loader is separately qualified by parent",
+    "No all-avatar/AI/fallback/normal availability/rider animation claim"
+  ]
+}

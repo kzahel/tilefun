@@ -1,0 +1,164 @@
+{
+  "status": "complete-readonly-source-fit-peer-inspection",
+  "completedUTC": "2026-10-20T03:04:55.839027+00:00",
+  "sourceOnly": true,
+  "agentQAOnly": true,
+  "blockingGeometryIdentityOrContactIssueObserved": false,
+  "assessment": "Existing frozen native captures show coherent Classic v3 seating, recognizable pointed ears/front-nearfront face, connected controls and plausible depth ownership. Reviewed five-contact/strict-pair/mechanical/neutral-roll receipts support the fit. No blocking source fit issue observed.",
+  "bikeSha256": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+  "riderSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "triangles": {
+    "bike": 2602,
+    "rider": 1766,
+    "combined": 4368
+  },
+  "immutableRiderGeometryProfileExact": true,
+  "mountSource": [
+    0.1,
+    0,
+    1.0605
+  ],
+  "mountSemantics": "Translation only; no rider re-export, rescale or repose.",
+  "baseChanges": {
+    "unchangedExactFloatOwners": 49,
+    "modified": [
+      "Headstock to actual grip riser",
+      "Actual connected handlebar centerline",
+      "Actual palm wrapped grip left",
+      "Actual sole tangent foot peg left",
+      "Actual palm wrapped grip right",
+      "Actual sole tangent foot peg right"
+    ],
+    "connectedAdded": [
+      "Swept control riser segment 1",
+      "Swept control riser segment 2",
+      "Swept control riser segment 3",
+      "Swept control riser segment 4",
+      "Connected high peg bracket left",
+      "Connected high peg bracket right"
+    ],
+    "baseReexportedAsNewVariant": true,
+    "binaryBasePreservationClaimed": false
+  },
+  "inspection": {
+    "existingNative224CapturesOnly": true,
+    "presentation": "Existing2x full frames and4x nearest fixed-crop sheets; no new rasterization or per-model fit.",
+    "all32Each": [
+      "bare",
+      "combined",
+      "rider",
+      "depth ownership mask"
+    ],
+    "all32WireEach": [
+      "bare",
+      "combined",
+      "rider"
+    ],
+    "signedRollPhases": 16,
+    "independentWheelStatesInspected": [
+      "F",
+      "R"
+    ],
+    "inspectedSheetCount": 20,
+    "captureSHARecordsChecked": 288,
+    "inspectedSheetHashes": {
+      "inspection-detail-combined-study.png": "e9d1280315374ffe8563b4e580f8457dad06bd6e235fbcf3dc343109f338b4de",
+      "inspection-detail-combined-engine.png": "1db6402e7166593fadb069e1b40d7d513cc44e76ea3e5bae4b1eb5951d1d14bc",
+      "inspection-detail-bike-alone-study.png": "51d500d6781338a48be5181edbd6ed44516b571dacb87af0013b3b14c3c0a10f",
+      "inspection-detail-bike-alone-engine.png": "264e0f576ffa82c2b7b7a570a8c7512050c9b1ad86ac493acb959e3e2f45989f",
+      "inspection-detail-rider-alone-study.png": "6962e6909cf9ee1c5935554735fb3ce3ef868121d423f6f32dfe737ee5019802",
+      "inspection-detail-rider-alone-engine.png": "fe16bc5029b06668dc1ac4b9f12c4b04bf4ded4f13e90f71ba4a57c687a6e1fe",
+      "inspection-detail-ownership-mask-study.png": "28a330aa484ddde09a2592feb5b046dfe0dec749075d4a901751f3a1b81904cb",
+      "inspection-detail-ownership-mask-engine.png": "f4877e9794e372818d10927c61a8086cb0520070fa53f4428f0f5ddf22a56acf",
+      "inspection-detail-wire-combined-study.png": "921f6da1b936f44152a19701d50b47920e0d18831d3bde8eaaa7c35e4c41f826",
+      "inspection-detail-wire-combined-engine.png": "70de54482ac8fd49929b9ad74036fcffc343d194011e31175fb465508b09019b",
+      "inspection-detail-wire-bike-alone-study.png": "aece40e4251caddb5dcbbab416ac9d3f0c087f40c83b9202bab2cfcd9819c4c9",
+      "inspection-detail-wire-bike-alone-engine.png": "801c64904562548b020c6411ae3e4b9449675e4699866124abe30c7f03d67187",
+      "inspection-detail-wire-rider-alone-study.png": "b2c2fe7c88a72f5637c2ee7b93aa02852be7f54c27694f6bc35d52ccaf747c1d",
+      "inspection-detail-wire-rider-alone-engine.png": "5653ca611b62df47aa4df394d24da70624da460f90af59470bad154279b413cf",
+      "inspection-phases.png": "9f79e6752367010a8358a03b4cb78accad5379663ce0b11d23a769a09ef20cd0",
+      "inspection-independent.png": "ad02cbfc7f1316411bd41e8b336002fce796f10be74da316c0b702450f9e28fd",
+      "inspection-combined-study.png": "5b65267238ad6ee1e624fa51864d25a33b4ff5b04db9d84d8f3e41493c72e972",
+      "inspection-combined-engine.png": "533dbc903c3a39f9f4a4ba41ea0c78ecea0b5e483bfbda996ca1f216f3ea582f",
+      "inspection-rider-alone-study.png": "6597199e5ed2ec3583c5961144d338e02f451ba5b80168f7a34c40f9cb4496c6",
+      "inspection-rider-alone-engine.png": "0a1ae5804533d6f7a99172fe83cadaf7f66400f4613cd833925d86dfb0852723"
+    }
+  },
+  "retainedProofsReviewedNotRerun": {
+    "fiveActualSurfaceContacts": true,
+    "maximumActualBikeRiderSocketErrorWorld": 3.814697265625e-06,
+    "hipAndSoles": "Surface tangencies; both foot surface distances zero.",
+    "palms": "Grip centerlines inside closed palms; nonzero anchor-to-surface distances are intentional wrap, not anchor misses.",
+    "strictInappropriatePairs": 0,
+    "allowedIntersectingPairs": 4,
+    "leftSoleNoCrossing": "Exact tangent supported by its own surface-ray/contact-removal negative; zero intersection pairs is not a missing contact.",
+    "allFiveContactGeometryNegativesAndReset": true,
+    "tankDisplacementNegativeAndReset": true,
+    "mechanicalRiserAndPegConnections": true,
+    "mechanicalTankContainmentNegativeReset": {
+      "translationSource": [
+        0,
+        -0.19,
+        -0.18
+      ],
+      "surfaceTrianglePairs": 0,
+      "containedVertices": 16,
+      "rejected": true,
+      "resetExact": true
+    },
+    "wholeFixedBikeRiderNeutralRollGapsWorld": {
+      "Wheel_F_Roll": 1.0207844658522651,
+      "Wheel_R_Roll": 0.8340051958843757
+    },
+    "bothWheelCollisionNegativeReset": true,
+    "fenderCrownSamples": {
+      "F": 25,
+      "R": 25,
+      "samplesEach": 25,
+      "actualControlsPassed": true
+    },
+    "all32RiderHiddenBikePixelParityReported": true,
+    "immutableSelfJoinInappropriatePairs": 0
+  },
+  "limitations": [
+    "Read-only inspection of frozen outputs/reports; this peer did not rerun numerical constructors, contact solvers, browser or source replay. Parent reports fresh six-input replay and733-pin/public audit pass.",
+    "Tiny anatomy and seated projection leave most limbs partly hidden. Tall game-side head remains different from standing sprite; no standing pixel parity claim.",
+    "Native wire lines fill many tiny triangles and read nearly as solid silhouettes; they do not independently reveal all topology. Semantic source/UV and strict-pair reports provide the detailed evidence.",
+    "Independent wheel pixel changes are subtle (3 forward/6 reverse channels per wheel); numeric signed/pivot/reset receipts are stronger evidence than animation visibility in these still sheets.",
+    "Neutral steer/full-roll clearance is covered. Nonzero steering clearance and operating control animation are explicitly unqualified.",
+    "Raw GLTF source captures are not actual shared-loader/component qualification; parent prepares rider-player-classic-motorcycle separately."
+  ],
+  "humanApproval": false,
+  "formalHumanVerdict": null,
+  "normalActivation": false,
+  "productionQualified": false,
+  "actualSharedComponentQualifiedByThisPeer": false,
+  "all27Qualified": false,
+  "aiOccupantsQualified": false,
+  "occupiedFallbackQualified": false,
+  "newSourceAdapterOrCodeOrBrowserCreated": false,
+  "sourceArtEdited": false,
+  "comparisonV2PackageUnchanged": true,
+  "SRCOrCatalogOrReviewOrInventoryOrGitChanges": false,
+  "globalChecksRun": false,
+  "owningTopicUpdated": "docs/topics/vehicle-riders.md",
+  "topicSha256AtHandoff": "7663016188ea84cc6b18a4b41d35fb16f9e1e5e082bc107e34686797307a53b5",
+  "reportHashes": {
+    "fit-proof.json": "c5c90494a51d69b33b1c3682921e8ba79cbddb7370d0920b61973991dfcbc89d",
+    "contact-pairs-proof.json": "fcb262042f879fb87a8e0cadc3b99dae5bc7015120b4a71d274b79386acb6381",
+    "contact-rays-proof.json": "986dde27ce8d3c5a9799615d6673b5b525a1450bd6213f5ba478c1723f771c80",
+    "mechanics-proof.json": "638b3c78a3c068a4399bb1ad7618c21aa4f9fc6faa86ddf8f0d810b49110b50c",
+    "base-component-comparison.json": "73b52d6e727d463af1a3e8f5329c1025998e8a6a9566bb9e6f1fc39592957fe6",
+    "rider-self-contact-proof.json": "de6ae92613ce89e358a02c0b1d6758cd6a3d5106f7f3ee4e06b706899d8819bc",
+    "raw-capture.json": "62a02bda31d78fff809c60b1fb012c63468c3516ba7c7a35cbe27e47381dccf4",
+    "steer-diagnostic.json": "6807df00ba7318e1b438f402af262287f0ff6588e7e9f1deab08a0c053b63118",
+    "coverage.json": "59941fafe771171f0267692cb6ab9cd458c5563f905f83190de8f34846a4686d",
+    "pixel-assessment.json": "1487628b6305d742b5053af57ae5cfa0e52c6200bceefc1e8b7c0275d7aaf24a",
+    "source-audit.json": "9bc5038d581a6f0c71511d55324e2f5c0fd5ad11c1a7da944d9e8caf5a9c68d0",
+    "unchanged-controls-fit.json": "8f14afe49beabb9174048bb6695b6a90345d3ea1950a2451c13e6c50a47b7ce9",
+    "replay-verification.json": "43da2eab94da318dc277ee7317c7aa37611bf9fb3bbc0e9f27e34c8991c7576c",
+    "author-visual-inspection.json": "0db1b9fccd20d82972490b04856e1e06fd5f1f004e3b2aac7487eebe22337dd9"
+  },
+  "sourceRetainedFilesManifestSha256": "4a6505586609223270e4b39aef33c635199b2e035fa0b845000ad8f60bd9e2dd",
+  "next": "Stand by; parent owns actual shared component review/freeze and normal/AI/fallback gates."
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "tilefun-seated-rider-profile-v1",
+  "id": "classic-compact-upright-measured-v1",
+  "status": "source-pilot-proposed-profile-not-bike-qualified",
+  "units": "World logical pixels at unchanged80/4.6",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "origin": "Local pelvis center",
+  "contacts": {
+    "hip_saddle": [
+      0,
+      0,
+      -0.6956521739130436
+    ],
+    "hand_left_grip": [
+      -2.9565217391304355,
+      -3.130434782608696,
+      -0.08695652173913045
+    ],
+    "hand_right_grip": [
+      -2.9565217391304355,
+      3.130434782608696,
+      -0.08695652173913045
+    ],
+    "foot_left_support": [
+      -0.6086956521739132,
+      -3.130434782608696,
+      -3.2173913043478266
+    ],
+    "foot_right_support": [
+      -0.6086956521739132,
+      3.130434782608696,
+      -3.2173913043478266
+    ]
+  },
+  "semantics": {
+    "hip_saddle": "Pelvis bottom on exact fixture top",
+    "hands": "Center inside closed forepaw around synthetic grip",
+    "feet": "Sole tangent to actual support top"
+  },
+  "limits": [
+    "Own Classic compact anatomy; not Explorer profile or universal fit",
+    "Synthetic fixture only; actual bike fit and authority/AI/fallback/all27 blocked"
+  ]
+}

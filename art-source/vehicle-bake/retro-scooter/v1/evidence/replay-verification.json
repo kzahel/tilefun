@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "runner": "blender",
+  "invokedBuilder": "scripts/vehicle-bake/retro-scooter/build.py",
+  "arguments": [
+    "--scratch"
+  ],
+  "args": [
+    "--scratch"
+  ],
+  "inputHashes": {
+    "scripts/vehicle-bake/retro-scooter/build.py": "1e28bcdd39e0f2347b8572b09dfea54b151e395cf84762b8ba1768d556f70a9a",
+    "scripts/vehicle-bake/retro-scooter/geometry.py": "6bb0aae4eafc65686745aca1f4f1ca28805ca8e170a207ce037aa9c10d9fe48d",
+    "scripts/vehicle-bake/retro-scooter/family.json": "74a3beb6df3d9fd2fb370ebd39e0b2f88a2db0ed8554d4288b06d561f2d4ab74",
+    "scripts/vehicle-bake/retro-scooter/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "scratchInputDependencies": [],
+  "glbSha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+  "atlasSha256": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372",
+  "recipeSha256": "75105422444d59842b723ff0bd6653a0b521b3c022bddd0a80d47de5d5acb38b",
+  "outputHashes": {
+    "model.glb": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+    "atlas.png": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372",
+    "recipe.json": "75105422444d59842b723ff0bd6653a0b521b3c022bddd0a80d47de5d5acb38b"
+  },
+  "freshSixInputProof": "evidence/source-only-replay.json",
+  "meaning": "Normalized portable constructor receipt; --scratch outputs only under fresh data. Four own construction files plus stable catalog-cycle and unchanged configured rider profile. No master, ignored or rider-model construction inputs."
+}

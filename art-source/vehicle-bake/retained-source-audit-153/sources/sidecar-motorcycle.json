@@ -1,0 +1,1746 @@
+{
+  "status": "passed",
+  "auditKind": "static-hash-declaration",
+  "auditorSha256": "c800a704af6f3a0ffb3554f9188a19597406eec5c99dab38af1c2ef6c633ebf0",
+  "receipt": "art-source/vehicle-bake/sidecar-motorcycle/v1/source-replay.json",
+  "receiptSha256": "e250b1322a4c052bc8921d9790d5930a624074ed0f44e73241a1be461f5e0959",
+  "retained": "art-source/vehicle-bake/sidecar-motorcycle/v1",
+  "public": "public/demos/vehicle-bake/sidecar-motorcycle/v1",
+  "inputRoot": null,
+  "explicitModelName": "model.glb",
+  "declaredInputPins": 6,
+  "auditedReceiptPinMaps": [
+    "inputHashes",
+    "sharedInputHashes"
+  ],
+  "supplementalReceiptHashMapsNotAudited": [
+    "diagnosticSharedInputHashes"
+  ],
+  "inputs": [
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/build.py",
+      "sha256": "2725eccb276aa8093a199d60b6323fd3917b73121bf011de45bb388bb1cf7c83",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/geometry.py",
+      "sha256": "70b2f2b88b7abe552c5ec8218cd40dbd235a8c8d0db364407200d325803afe4a",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/family.json",
+      "sha256": "80349aaf3e37e5fb589fe3d7eb659134cd3ef882e0c0ad5135d13a9e5977fa08",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/raw-audit.py",
+      "sha256": "874e36b0a489e54a56ad1b6225bf429a96f8f068ced924986b69e303395793c0",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/catalog-cycle.py",
+      "sha256": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/profiles/upright-v1.json",
+      "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+      "resolution": "current"
+    }
+  ],
+  "normalizedOutputs": {
+    "model.glb": {
+      "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+      "bytes": 234316,
+      "byteExact": true
+    },
+    "atlas.png": {
+      "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+      "bytes": 3207,
+      "byteExact": true
+    },
+    "recipe.json": {
+      "sha256": "091f455c0a7fed73f8f3c94aec08e23affec0a2c488b361c07ff5e7000bc0296",
+      "bytes": 22051,
+      "byteExact": true
+    }
+  },
+  "checkedOutputs": [
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/model.glb",
+      "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+      "bytes": 234316
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/atlas.png",
+      "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+      "bytes": 3207
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/recipe.json",
+      "sha256": "091f455c0a7fed73f8f3c94aec08e23affec0a2c488b361c07ff5e7000bc0296",
+      "bytes": 22051
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/model.glb",
+      "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+      "bytes": 234316
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/atlas.png",
+      "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+      "bytes": 3207
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/recipe.json",
+      "sha256": "091f455c0a7fed73f8f3c94aec08e23affec0a2c488b361c07ff5e7000bc0296",
+      "bytes": 22051
+    }
+  ],
+  "retainedFilePins": 324,
+  "retainedFilesSha256": "f2c24dc5aac31b09041904ead776ef131acf3e87503d217eacc5cc63518b9bb1",
+  "retainedFiles": [
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/assess-pixels.py",
+      "sha256": "376f6754beec5846814a5820bb122635647ed41a3f6c8297d8aebb5b061c6298",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/audit-source.py",
+      "sha256": "ae4976fa3673b19070f48c76b5fee144d8029cd9740c001c60d2e34fcb837c55",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/build-view.mjs",
+      "sha256": "6616099a5d4d593e6547922970d2062680484115f4260f07dd099530fa2dec6b",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/build.py",
+      "sha256": "2725eccb276aa8093a199d60b6323fd3917b73121bf011de45bb388bb1cf7c83",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/capture-raw.mjs",
+      "sha256": "665b5ba2d4829c781811b036554662011d51c733625ac59f8cbd63075df4aca6",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/coverage-region.json",
+      "sha256": "734893baf357dac4b49fc193572034d87be8d327f89c91e6f4c2dfe640a7d5a2",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/family.json",
+      "sha256": "80349aaf3e37e5fb589fe3d7eb659134cd3ef882e0c0ad5135d13a9e5977fa08",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/finalize.py",
+      "sha256": "65f27b40812cf42a91859e328c3b02066e51479a7f8eec69ca3ba1cdfc25ba6e",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/fresh-replay.py",
+      "sha256": "8334cff67ba203f824d5c9393844aa164b29cb1f34cfe106a474e09ec526e898",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/geometry.py",
+      "sha256": "70b2f2b88b7abe552c5ec8218cd40dbd235a8c8d0db364407200d325803afe4a",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/inspect-rider.py",
+      "sha256": "cdec36fc9276c584856460cfb4e9f1e3b921caebe654c582c826afe0040570ad",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/prove-fit.py",
+      "sha256": "4422b7f8c3e1b3d6828524208e1d15623a42e5b1e01dbfe5932f3bea4cd3de84",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/prove-pod.py",
+      "sha256": "681a8a2e81c909d684650840a1dc44f0fb2b8a5c4266a0de899656ef9e6668db",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/raw-audit.py",
+      "sha256": "874e36b0a489e54a56ad1b6225bf429a96f8f068ced924986b69e303395793c0",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/raw-diagnostic.html",
+      "sha256": "45bdab03843996fe965c1c709b31dbae94a464da1571df2be4c833cf736355cd",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/raw-viewer.mjs",
+      "sha256": "e5d4894135ed376cccb94c4a4bf76b41ff9157a9ae8ef6cf3b801c958ead8cbf",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/sidecar-motorcycle/sheets.py",
+      "sha256": "2a18d33165c529787f481a1d2a3389ee02c5cc9092ad70391938e929f072d6aa",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/assembly.json",
+      "sha256": "6fdffe5f330ac63de803ff5461f71d02d7038aec63661b4fc2ebe2a66463fbed",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/assess-pixels.py",
+      "sha256": "376f6754beec5846814a5820bb122635647ed41a3f6c8297d8aebb5b061c6298",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/atlas.png",
+      "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/audit-source.py",
+      "sha256": "ae4976fa3673b19070f48c76b5fee144d8029cd9740c001c60d2e34fcb837c55",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/build-view.mjs",
+      "sha256": "6616099a5d4d593e6547922970d2062680484115f4260f07dd099530fa2dec6b",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/build.py",
+      "sha256": "2725eccb276aa8093a199d60b6323fd3917b73121bf011de45bb388bb1cf7c83",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/capture-raw.mjs",
+      "sha256": "665b5ba2d4829c781811b036554662011d51c733625ac59f8cbd63075df4aca6",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/car.blend",
+      "sha256": "0db143b369d00210b22d8490bff8bb92ed3f14e7fbcff803e26795be41071af1",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/coverage-region.json",
+      "sha256": "734893baf357dac4b49fc193572034d87be8d327f89c91e6f4c2dfe640a7d5a2",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/delivery.json",
+      "sha256": "5d4a2011553c8f300c0bf304837693752aa9139c3df5dc57e84cb681f1f8f87d",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/author-visual-inspection.json",
+      "sha256": "5efdd7dbb349b87b73b65d05812196cb45691db9fe0b3361d4cecd54c21c1e56",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/coverage.json",
+      "sha256": "13fa7154ddd4fb7bb72aa2627e1ec87d9d740337d22bcac2d7ebdfa802605257",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/desktop.png",
+      "sha256": "8b85e182eb81f7a4fe8f3056279b8ac8466143c8c9119a696e7383dfc2efddc4",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/fit-proof.json",
+      "sha256": "f76aabe260aa1aeb412c170523b8889c061390463cd1c5ddff40da9e79537b0e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/mobile.png",
+      "sha256": "b63601ccef2da00fe7c43a0e9979a38d2b0c15a7e04b4275a4f91f17d938c099",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/pixel-assessment.json",
+      "sha256": "3a10a2d78a6fc17512c035815aa7e9faca28f202ea78d7578163fed5160f1bf2",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/pod-depth-proof.json",
+      "sha256": "d2f224d2077979348c7589702f286823c54d8faad4d3338ec127f6242d8af05c",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/raw-capture.json",
+      "sha256": "914bda28c66d35c7af6195f40b5f9c895cadfc68f026b42f3e16c488953f5fdc",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/replay-verification.json",
+      "sha256": "732af64ce890d4654a152105e45a8d43604eb49f81300d474a9c265305b8f031",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/rider-measurements.json",
+      "sha256": "0a76f29f183ca073147cf6a4c0560efc5f1b95c74ef1e0a7a8aaa8d46b1e987e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/scoped-checks.json",
+      "sha256": "662d14620b06d6c3e52ef44fcef62bbe9d4cfded47f74c041e65b9a85e52fd57",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/source-audit.json",
+      "sha256": "6991225343c21083afcf0d2cb9d54e9f5695369459258ae7daf18e4ddf239e70",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/evidence/source-only-replay.json",
+      "sha256": "944b54044e6545049b3c7cdd8554b03a23c5c07575e178ee71c1fe945847fb90",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/family.json",
+      "sha256": "80349aaf3e37e5fb589fe3d7eb659134cd3ef882e0c0ad5135d13a9e5977fa08",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/finalize.py",
+      "sha256": "65f27b40812cf42a91859e328c3b02066e51479a7f8eec69ca3ba1cdfc25ba6e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/fresh-replay.py",
+      "sha256": "8334cff67ba203f824d5c9393844aa164b29cb1f34cfe106a474e09ec526e898",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/geometry.py",
+      "sha256": "70b2f2b88b7abe552c5ec8218cd40dbd235a8c8d0db364407200d325803afe4a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/inspect-rider.py",
+      "sha256": "cdec36fc9276c584856460cfb4e9f1e3b921caebe654c582c826afe0040570ad",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/master.blend",
+      "sha256": "2cc2ff00ea3bbcd02023d9b901168a5bb225a7fa2121a0cc56832ef1a915720a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/model.glb",
+      "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/paint-ownership.json",
+      "sha256": "8da2e75d57dc816848663c2eba851c14e31d78b47af188e461bad6ae20bc76e4",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/palette-draft.png",
+      "sha256": "4c32c18120fd8d0dc66a211513d2bb6d2bb3463aa1fc3f3e0bb68a003807e945",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/proof-inputs.json",
+      "sha256": "5ca6fa959320d35874d439aae9e549d808b619e21d47201bdc2f554ec68e6496",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/prove-fit.py",
+      "sha256": "4422b7f8c3e1b3d6828524208e1d15623a42e5b1e01dbfe5932f3bea4cd3de84",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/prove-pod.py",
+      "sha256": "681a8a2e81c909d684650840a1dc44f0fb2b8a5c4266a0de899656ef9e6668db",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/raw-audit.py",
+      "sha256": "874e36b0a489e54a56ad1b6225bf429a96f8f068ced924986b69e303395793c0",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/raw-diagnostic.html",
+      "sha256": "45bdab03843996fe965c1c709b31dbae94a464da1571df2be4c833cf736355cd",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/raw-viewer.mjs",
+      "sha256": "e5d4894135ed376cccb94c4a4bf76b41ff9157a9ae8ef6cf3b801c958ead8cbf",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/recipe.json",
+      "sha256": "091f455c0a7fed73f8f3c94aec08e23affec0a2c488b361c07ff5e7000bc0296",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/report.json",
+      "sha256": "edf22a0344beb6297b16e4c3f03cc7ccc0228f71ef425e4555d91c5e48890052",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/sheets.py",
+      "sha256": "2a18d33165c529787f481a1d2a3389ee02c5cc9092ad70391938e929f072d6aa",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/sidecar-motorcycle/v1/source-replay.json",
+      "sha256": "e250b1322a4c052bc8921d9790d5930a624074ed0f44e73241a1be461f5e0959",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/atlas.png",
+      "sha256": "fe2cb4ec3efbaf42294d73eaa6903cb372ddd907e67b96b529b488490b4a1163",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/model.glb",
+      "sha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/offline-raw.html",
+      "sha256": "1288f18e546bde3937f3baffe0ac9c283ed9fdbf1694a71e3a01dd3441f1cb4a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-0.png",
+      "sha256": "7d75c671d78f2092e3088fe7d0bdd12f6e95f24068b63c71319ff37e188eb1b9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-1.png",
+      "sha256": "9d40c3b99f097f3ffc760e2c20ab06ee4d26c38f6c684a10e91b023a49e62b83",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-10.png",
+      "sha256": "ea36388bce82d348d06c95b4c1559ce8eb1414f2e8710e17dd416028604b3da2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-11.png",
+      "sha256": "2da4070bfc8e1b6c556e8b77410a16f709310bc580433e13b1d2c6e10e0b8ace",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-12.png",
+      "sha256": "35e2bd1b825fbf96b45d1678b9171422b0715c1da8702dc9dd1e5d29743dfc16",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-13.png",
+      "sha256": "48ea90ecc0b969d8f3e2d270c9dead4ac72c7de9c0cc8b4b0cca420d155359fe",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-14.png",
+      "sha256": "839d550a29273c545bfcd6e9150b418118d598a6d36b9ed68db60a704ade0cc7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-15.png",
+      "sha256": "9639eaf2dad15d00d30742087b9e0aeeaad233e8d4395074c47000c8b801ef45",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-2.png",
+      "sha256": "4f7bd1a73b2c6336c0a18c9e0d413da2c847cb33245bcbaf7e166bbf5a6339d4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-3.png",
+      "sha256": "ef8bf86752e251c7c0f8da9f835cb9d492b56d09482621078d212279e49a794b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-4.png",
+      "sha256": "e99bff5c31ccb4dd58e8c12b9d865e2a4f5d0bec4354ba2b1242aca830d008b6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-5.png",
+      "sha256": "3132c92ea9942da51c5e54907ac81bf49b9b6d2563662da5cd721b91389fa886",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-6.png",
+      "sha256": "687d3a7b82b5984e2c60cd82446ed30f115ba247a7d789032f8e8ebb462f964b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-7.png",
+      "sha256": "db67005e6aa1269f922de83dffbbe7758e864157726820b43051ebc3eedff6b8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-8.png",
+      "sha256": "e04599ce7ad9ca92b3dfd598eeb8ff84e88ad62fdceb01d92c398ee84bd61ba9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-engine-9.png",
+      "sha256": "eb92a54eb75b180c50e086f2ace36288cab6da957e12f7f47a0c4e097a34c93e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-0.png",
+      "sha256": "7049ebd05fe4f969e72643add63bbb9c87aa0961894af3e3e2b6afa114e831e2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-1.png",
+      "sha256": "a2bcfb825f332d24d41e2a04d5fa64bcbb3f53be0386b7b48e656d079801ad17",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-10.png",
+      "sha256": "006f1c7c7c1c97a3b16f0e05c4b4043877a1af982547ea963a862d7a5b6da4b0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-11.png",
+      "sha256": "8369033c204c6e86360d1995843836574f69360d298fc422ff173685465d6f82",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-12.png",
+      "sha256": "fa03efdde563c19e2215ae51436e0126490709951758f16a87f304987e18561d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-13.png",
+      "sha256": "167129f4847b8acdf9b3ce0129958cab432c3352a5639d816b833c9d9406ddc9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-14.png",
+      "sha256": "a8e0c4c45d84dd665d605e9b7215469854a67d1e93bd58c50b47d9ab39af9dd4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-15.png",
+      "sha256": "d9cfce032b73f01eb3bce30a56ae7a27f0b3ac8c23173cb1f214a93406aff6fe",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-2.png",
+      "sha256": "135715bcf14733135c68c15f1c196c1e85b91681c4de5ea3ce8f19c753fc7145",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-3.png",
+      "sha256": "ad28a4cd13a42aa3febe6297ee42d6f526b903d3672c51e21de424b08b2b1626",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-4.png",
+      "sha256": "9508d9551e7dfe4dcb8359376774c5c100c9fe3ca050019693b50f616e78b732",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-5.png",
+      "sha256": "3e856412e63d39fdec5221e3dd631c86b62e12109f5c0ca38d76e2a0a7f20246",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-6.png",
+      "sha256": "9edd0b7a5d3c12613956e213d7fce4b785b2366d7f49b209a729c0c10274d370",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-7.png",
+      "sha256": "74bb4cd071fe1ac23498c2b810b8e12f947dd8f632902934144051ee5f41ed5a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-8.png",
+      "sha256": "9908d7c5ecc71bfada7ce9700da899528b039fcfc15c7a9e2c470832f491ea9e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/bike-alone-study-9.png",
+      "sha256": "94695739381bd8ecf1f4752c13d867285a35eb3c1dfd1e55ab353853b1d92aa7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-0.png",
+      "sha256": "8d1f0bbfba430d4b99062b9f0bbde52d27802df9243d123681240ff05e1721fa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-1.png",
+      "sha256": "545201c544502ed33fa183f02d8290c8f6d96b570dd4da4b72a4f1f1142c2ce8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-10.png",
+      "sha256": "832e23a46f6e5a033972ff940ba37250ea801ea206b40cbde75fdb4bc06e0691",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-11.png",
+      "sha256": "b6d788c320ab5769031e380e607de63d6a117dab63b3f3e336b9ddf14c42cd9c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-12.png",
+      "sha256": "79f88fd73a0672e1ee096b342e770669574fb6d59135d8811313eea237d61606",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-13.png",
+      "sha256": "2c387c7babd55529d954a155fc229acae33c27b11d9c4cbd76dd7da85ec85693",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-14.png",
+      "sha256": "d41bfe8709ee4eb885c2567fd262c3a1840088f10123a91249c66c92f7124847",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-15.png",
+      "sha256": "75bd8e22ea61d25ed953cbf32ff6b1031c68de30e01649b7eb505fddef70fb3b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-2.png",
+      "sha256": "6f81a614aa3db6ac28bd5ac96f3c0719968e284d527be95f70647186058d33b6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-3.png",
+      "sha256": "f4017df890899cb48e7f63525722b2993ae8ccea44081d0f35813c842d1bbe94",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-4.png",
+      "sha256": "a13555ef7298286dcd2c1e33b4c105528b218de9ae4c00a2c9a7092d2268d9c2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-5.png",
+      "sha256": "b53520bd7a1c83b6d369dfd75a9c2ba10486f25d9a92c5c33d4709d9ff907124",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-6.png",
+      "sha256": "2e01d41008f82f5341cae83d4dc9b5f1812ef251136daf6a1f4f3b05ca6c275f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-7.png",
+      "sha256": "2196264e86161201c72aee8baeababecb52fed7a4ff1a49f674213990ef0838d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-8.png",
+      "sha256": "a9483791e2f0c02e3851d81971e211b16fa4fc1d1a1ef8de79196501ab16a3e1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-engine-9.png",
+      "sha256": "637f54e7bac8bc241df65fb0af7fdf6a3a48cae06167b3739c0b1642b43e4f2b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-0.png",
+      "sha256": "10d9c7d4f85dcc552a683fed191d8d33cc91ac8b96d9b3160320f9d47c3424a5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-1.png",
+      "sha256": "d0c199ca54144f0f7fd90c569ca65d4cf1c1c88af2fda41fa21cd99e570ca798",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-10.png",
+      "sha256": "31d2106019b4713a44bea3901679937fd29f66f7c07a8eaea28162faf3c6e943",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-11.png",
+      "sha256": "0ed38c9927485146e1565d9196b8ab3e5b228080e0f7ad6bea19e63472cc4209",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-12.png",
+      "sha256": "74d87d05ac431dd121b53f8002251e3d52a183dc08274bed8389a72da77f4669",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-13.png",
+      "sha256": "b000c09b97961cd2e1ef36c30efbc5e37659947e99ec0c963410d6f7de223c9e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-14.png",
+      "sha256": "f6b07c2b79fa468c5a5bab170cf4ba98d676ff821b5cd9befd9609c59bdc5547",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-15.png",
+      "sha256": "8daed0efe334a99defd8a74476e686e22a9b7cf1893262e154d5d20b2479e309",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-2.png",
+      "sha256": "dc8764e77b337d297382721ecc96c07f1e07ef18a82af559d20381abab11e861",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-3.png",
+      "sha256": "c50604853cd332405efe688c14cca12107222c85912425e30083c7e56f013ce7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-4.png",
+      "sha256": "707e1a1b84e0ad43922c0d0bae96cb0c71854d4ec7fa2eebd6e8f442f17fedbf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-5.png",
+      "sha256": "6cf795944d9a3a4188912993172677d839583bcf5f164dec07cfdf0562ccc12a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-6.png",
+      "sha256": "fcc7a219492845c6f8f6a7bcc6087eae5f1f3fa8ada02d8d068f308763feeeec",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-7.png",
+      "sha256": "bf61023fa73333e5a33be21fffacd92490ca60fbf291ad285fb225654bbca044",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-8.png",
+      "sha256": "adc54e06277778a2dd33c43b05941031ff6860bf85014fbe8f56de5e309ad117",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/combined-study-9.png",
+      "sha256": "bfa884c710cb3ecb3432ddbd4c01ac6e78306f308bf79b77f733fc7063e8a995",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-F-0.png",
+      "sha256": "8d1f0bbfba430d4b99062b9f0bbde52d27802df9243d123681240ff05e1721fa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-F-1.png",
+      "sha256": "c4eda7f0943135af32a030f23d8b383e76ace51659ca2d301a7d468710d3157d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-F-2.png",
+      "sha256": "1f6c2d6dedc69650943ba0edf021fefab0f4e3fcce232476e656605be01a356c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-F-3.png",
+      "sha256": "8d1f0bbfba430d4b99062b9f0bbde52d27802df9243d123681240ff05e1721fa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-R-0.png",
+      "sha256": "8d1f0bbfba430d4b99062b9f0bbde52d27802df9243d123681240ff05e1721fa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-R-1.png",
+      "sha256": "ce39e65ed06e6f678e14c2e27934f3cb7b40f3a83aad0c1f2beceb9ac1ab7d12",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-R-2.png",
+      "sha256": "f4bce8debe918f1ff471fa306c6d6668174c8cc4a5ee9509bd009818e9bcf608",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-R-3.png",
+      "sha256": "8d1f0bbfba430d4b99062b9f0bbde52d27802df9243d123681240ff05e1721fa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-SC-0.png",
+      "sha256": "a9483791e2f0c02e3851d81971e211b16fa4fc1d1a1ef8de79196501ab16a3e1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-SC-1.png",
+      "sha256": "cacc4a686c49ee64bfd91b2c65c0585391991a69b132d2b9eb6770a00b71be1c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-SC-2.png",
+      "sha256": "9ed58179044e59cf2214859898a225c69627fded6d6b9f81937216d076f3ac4b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/independent-SC-3.png",
+      "sha256": "a9483791e2f0c02e3851d81971e211b16fa4fc1d1a1ef8de79196501ab16a3e1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-bike-alone-engine.png",
+      "sha256": "21279993cd4ce9f9f2e5b6123f18d11c6e2d74df28ade13de7f3b650ce8476bb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-bike-alone-study.png",
+      "sha256": "d6f58c490a0a9f335a14728f5d5ebce75e397fed70de9bfaedcb3e1e8e13aee8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-combined-engine.png",
+      "sha256": "e96a04df852a2c63ed827ef62323515ef4333b070dcc7e7ba0c85d523900644f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-combined-study.png",
+      "sha256": "5086a7a8b387fc1472808c43fad74906ca09440cc6a50fee3446f369fc88fa59",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-detail-bike-alone-engine.png",
+      "sha256": "342d8ffdf0baf135503a63d51ddf9f1faa5659c82d98e32cc33430b68a11f14b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-detail-bike-alone-study.png",
+      "sha256": "886ffb3850d7e1538f5b22bb0964bf264af157044094bc083f6ba24a8bf92a75",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-detail-combined-engine.png",
+      "sha256": "fe1234f0a32529e8241604d27fae59fbc0e2ef5d02e07a3de49ef2525420287a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-detail-combined-study.png",
+      "sha256": "d295a7fb59c7e762add5e6451b726e59134935358fa524e2ce1c3158ea0fc23a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-detail-ownership-mask-engine.png",
+      "sha256": "f5310d80824b4fb2a3545146abc8599938701f0b277628da4ddd562ed42860d0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-detail-ownership-mask-study.png",
+      "sha256": "9f3e439ef8c150ccaa89a69e27e3c4409144eab9af77beaa914353ace42f9c3a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-detail-rider-alone-engine.png",
+      "sha256": "cdd10815410a1be21a20f673fddeaa2466d2cf80f2b0fed6f4bb6dacf1850319",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-detail-rider-alone-study.png",
+      "sha256": "bd5d0f8e66fc961586cfa09b8727fc2a938b23f5873af53eec8d878c0bfea59d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-independent.png",
+      "sha256": "34f2f64e68d379a0f422a51d2db62bc681d447ff7f2ab50bb715e484795d21d9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-ownership-mask-engine.png",
+      "sha256": "47a24b504c17401b7e4a943cc1dba3a70dabaf3aff7d22bc4a812ec42fe7291e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-ownership-mask-study.png",
+      "sha256": "a06ccc54153ac3237bedf6806b7b333d852285dcb6608221564515ef581f85ad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-phases.png",
+      "sha256": "b13b5c7a0bb4413adf519205c1c72564485586fbf7944a90798216da726bcf89",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-rider-alone-engine.png",
+      "sha256": "9889d4743cde63a489544576079ab41d49ec477f3d53145dbf1318a570eb9c70",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-rider-alone-study.png",
+      "sha256": "9dc0dcce580d90c95a01f6733b821cd096a26a5cc7ebc79e21f290c63a649417",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/inspection-wires.png",
+      "sha256": "aa7d5868c789ffcbb810108de975212400c75bf92574c5a0ae889a0a3091efec",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-0.png",
+      "sha256": "1d502bc423b9cf024c380c6b748395b02c8dbbe7b08e9ad6ef80ef3a9e0dbf32",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-1.png",
+      "sha256": "f59303cbd2ffc64800480c3b65b2f4369036688836c402200ece66dd72005051",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-10.png",
+      "sha256": "76bcc401ecbd91973936ba27c86a3dc4bad2033401c948bef63013c0f0ef849e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-11.png",
+      "sha256": "829e99d0ef2f2f1bf866c11dba2709550b9e7883d6c54e3eda0fa6b7f4baf907",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-12.png",
+      "sha256": "0bcb93b2b86fd42041f89be467138e48c1b1fc12747fe04791dc0a078f3f266e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-13.png",
+      "sha256": "9213248df6cabc25ae65d3ff0cebba223047037019a4b4dea84bb8834f3e7111",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-14.png",
+      "sha256": "bd8ccdd9a542b79d73db6ebba9eed7c36037aed340eb053e8596575f9ddc5d8a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-15.png",
+      "sha256": "2776aff89143bb4bdf9ec34c678ee8be0f320932f23f8b05e1270ef2e1a1d834",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-2.png",
+      "sha256": "8c1e8bdd1d06d75bee170e7730067c7b0709f9b08dddaa2bbd39d586d132c8af",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-3.png",
+      "sha256": "2c2c38751dd5278baf96e3852ed48fefaa854b78896c9932d66671de5a793a43",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-4.png",
+      "sha256": "8817001349645038a9910a54e3ef7ee50a9df32106cd707fea47a80625b05297",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-5.png",
+      "sha256": "84aeb8ca3e094ee219e672e625bfe3c3bcc0d53aa7c86f76ab61fdd13f1d3828",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-6.png",
+      "sha256": "9269d38b25e922abe01fdb26f1b82a65079d39e55ffa2edb4a04ba831ae2a57d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-7.png",
+      "sha256": "4b803ebd3627719175aaf895d276b05e154bb3bddfea963ebe2bc6cc80cca01a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-8.png",
+      "sha256": "ded398fdfb662f381383589f3e738f483c7a63d996863f50a0cb075c7610f5a7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-engine-9.png",
+      "sha256": "a44ed0f21a2fcd0a627428736a62b41e4af8d6f198cbba171145bbe403690ca9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-0.png",
+      "sha256": "c72bf6f5fd465ede2d7d2048a075d0c8d1df5773ea4c57dc0d9e707e084bd5e5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-1.png",
+      "sha256": "b0063b50cd9758a6fd68084a7b263730e8574b6d5108c17ba188f181522e0b8c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-10.png",
+      "sha256": "23672fba1e864a7f428f65df7ae7ce93738a2efc3f745a5c36a9f2d9e11fdced",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-11.png",
+      "sha256": "b0e68a017c2b2619a86bdcacc2026fbaea75c91d30c91a7d980d08dd0bb35a8a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-12.png",
+      "sha256": "e66b035585283d9adf2a8ee9da2a1e25702a8d45eac8d82599a0da76d487070e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-13.png",
+      "sha256": "18da70f98c0b3c36c6df44058502130f8ca632cb19c6edccff0357e1e42dcf55",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-14.png",
+      "sha256": "bb7290e5c7576c9a24c795642bc712acf17ea03c85c5da7972a6eeb6681e0ec9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-15.png",
+      "sha256": "a36a5d4ee3cb53e832a1eaa327ebbab454ed1897c6563002c39b29c4a8cb5394",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-2.png",
+      "sha256": "75f7fb67fb101195ed8d17966536170c5b01c91e05c007f5687eb9f71d33e953",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-3.png",
+      "sha256": "cfcfd7191dafef3827ba120263fb5f29ed819fec782ff859f048686082d231ed",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-4.png",
+      "sha256": "78b2d612d36e89fff1af87ddee78a3fc62606089597e0827a18fbc9b845cceb4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-5.png",
+      "sha256": "e41736c784696cb759799ebc112760820c4d31b94ee817bbe00490e8a2f0273a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-6.png",
+      "sha256": "29173fd721db04e8512f53d55c4a4f4f5ae84ebd188a4c30713bb24d895ee27d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-7.png",
+      "sha256": "852a903ed4eff4f7ed4962447a1f2899124be4a20c4521d82c1b4a8979c27774",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-8.png",
+      "sha256": "47668c5bca16a85ab35e064d2a49a0babaea287798534f9123fd16d3efbf1d21",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/ownership-mask-study-9.png",
+      "sha256": "a4f9613432d4e7e1df7bba2877fbe04bc00e4a28ee25188efb53e2e17cf5bcf0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-engine-0.png",
+      "sha256": "6f81a614aa3db6ac28bd5ac96f3c0719968e284d527be95f70647186058d33b6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-engine-1.png",
+      "sha256": "f166625e32c070e8816799182a2328359dc8130cdc2b340b48c09564caf07720",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-engine-2.png",
+      "sha256": "f1ae1f0aa0d65d2d68e7b20bfb51cc152177f32d167d4c071e14f882c77fc9d6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-engine-3.png",
+      "sha256": "796b69c69a344c513e413c038403516497644a60d3f5478b31409d6cdd7c3663",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-engine-4.png",
+      "sha256": "7bf1f7f01af9bc985347c896025bd69cc33bf07e7ed0a693e585992cef9190bb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-engine-5.png",
+      "sha256": "5facff4da6a3e57f1ea74876a4e49779777d1b3102c172f60dee7c48bdecd3d8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-engine-6.png",
+      "sha256": "3c8eaf2c0ab499fbe87bbe8c20e0c4c653b1452fb412d738ab1b3866114a6587",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-engine-7.png",
+      "sha256": "38b2a8ccab0624bdff756cfde644db349d134eae93854ed7526f450822c9dfc6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-study-0.png",
+      "sha256": "dc8764e77b337d297382721ecc96c07f1e07ef18a82af559d20381abab11e861",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-study-1.png",
+      "sha256": "7d34edd7c499bae09e1a5003361a2050821eaf4843977346250642f608f92f33",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-study-2.png",
+      "sha256": "4d7714973f5c5a97e3c8d9e3787f709c98c374f8b425f37cb3d9cc263d2dc203",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-study-3.png",
+      "sha256": "14e71d4b6059fbdaec22bcfb0c08608496828422b7860193d582fec0612f94e6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-study-4.png",
+      "sha256": "7abb9543af0da7eab760847cb6f65c7547b9dca92d4756b4ce076d606be8993a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-study-5.png",
+      "sha256": "14e71d4b6059fbdaec22bcfb0c08608496828422b7860193d582fec0612f94e6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-study-6.png",
+      "sha256": "526b1bec0ae21b229ea74d38f344496117d32d0d7c36fb09e16ab8adfd891a46",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/phase-study-7.png",
+      "sha256": "4cabe36cf4c32cd9ae1c63222f1029c971c91a2282604ec8b0939b17fe32d30a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-bike-alone-0.png",
+      "sha256": "3779ddbcb536ff481a14181fa6c5f2193b7d1777df1581fa0ddca746688fba42",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-bike-alone-1.png",
+      "sha256": "ddc521ad64451e17d814c74ea7bedac72f0ae9463b3ad5c1f528178638707973",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-bike-alone-2.png",
+      "sha256": "e4dedb52780a3cee809cee75218c2ba7a7ea4d244f9c5edb89067a4d8b863322",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-bike-alone-3.png",
+      "sha256": "3e73c5a6a273ddbf9d3fe87c177730f87d9ca502ff441b1385d8ceceb0afb7be",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-combined-0.png",
+      "sha256": "38c54edc90f3352387e8be4fc764133e637cbf035d2cef6dd13063bc22d793ec",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-combined-1.png",
+      "sha256": "a78ecfb6746b489cae9f3ce9ddf1eae476148b6c420c684afc946fcbed3496e9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-combined-2.png",
+      "sha256": "c8eb1c79f2601b9ab160d9b441ae02942c83ee179870c182140991598284d7ae",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-combined-3.png",
+      "sha256": "86e4fb3dfc8ad5b64385cfc81f5f2f3388e6fbc3ba7dab934da38a0b13b633ab",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-rider-alone-0.png",
+      "sha256": "d7e18544a34304a0d6f2821e8702b2e16e61e11e874bd2f9a340ba122870c8cc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-rider-alone-1.png",
+      "sha256": "b523c14b47a869201cf5c11de9d1a96b9d6ce1326115a3d14ee529fe0e6d8f5a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-rider-alone-2.png",
+      "sha256": "404d72b40cc3342e8ce9ddb2b90c70081487dc1e34bb0b49b2e446fa4090ad83",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/placement-cardinal-rider-alone-3.png",
+      "sha256": "0cb1e880a01c40b82f806419d7121e9bb6d75dea415c845b03fdab3c3af81eee",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-0.png",
+      "sha256": "d9fb6111bbfccbf7a216225a1c5bd4b64951b279e86c0fa8faf5ca184a662263",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-1.png",
+      "sha256": "c5e02fc9a64a1176ff2b3e12cec7b52d27ab7c609cd0b7548cf0884037a4de1d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-10.png",
+      "sha256": "02c1de8c424f993b59d64e16bed76b3b08638c25eedb647727ef3d0a3314a227",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-11.png",
+      "sha256": "6d493c4e82161656ca422910bfc5a3489a77c01ce27903b6eec23aee9c6c81bd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-12.png",
+      "sha256": "a0c23d8f91d9330b5aae30e1fdc43071a9a2f46f1f22729981ddb678d10e67f4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-13.png",
+      "sha256": "5d94fa5590031f7c8682915eb43453350c283183853d420ccf9da103385626d9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-14.png",
+      "sha256": "d864437a40f40ed0056e30ccd17ff093149449f3c96e91f988327c66acaf8d56",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-15.png",
+      "sha256": "db2d9ec473236dfe66a1fdf5dc26f07ba444b6bf55fefc59f93ba8f1aff5d465",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-2.png",
+      "sha256": "643ea9a436ce6cd1b885b827b19809dc87e720f730162f6ca4a473745b43ec5a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-3.png",
+      "sha256": "eff6ec3d13368473f537833a937c7417473c3251f52bfd4e26f17d03870550e8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-4.png",
+      "sha256": "a575062fe72b4a2399939d193ebfb3402a1896ad4e2f02a0fc9f50809c50ee7e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-5.png",
+      "sha256": "15f77d30ee43acf43538d3097d8b51e97834e9b42eb69111232b01e203a4d4f0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-6.png",
+      "sha256": "daba659a3b158e4c39b85010fde6cfc1d6b81132e25b61dfb06a62751fbec6ce",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-7.png",
+      "sha256": "1046d868da3e41a249f5b7e18fe84bb468bbefee9cb2f8a40ebdbad6daccb0f8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-8.png",
+      "sha256": "ddb001eb246200a411a652821f05c0c9fb6e91dfebda195fc551fcf9fede1148",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-engine-9.png",
+      "sha256": "4286be1d21b235e77e90e6359447d0474fc3f6a0eb61b846d146e2f76a8a3ce0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-0.png",
+      "sha256": "98be36df224ef7651302382bfc68a23aa84029377df62919c7230f0fee20a798",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-1.png",
+      "sha256": "ec4d191672d455a4295d2b5a71771a2fd11e1bfe3723e5f7fdcf6adeb8f4f614",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-10.png",
+      "sha256": "a32b53e81f11bfe2bbd89ef25d2dc9ac1b2139558c207c96d8f9b057dd7242f0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-11.png",
+      "sha256": "1c165bccff5620358f2198f0eeb86f5f10fa34f6cada0f75138c090b226406ad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-12.png",
+      "sha256": "49191a907071fcc9479f28cb45b101b059b8008aed18588cae7a1a5e3d1cec1a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-13.png",
+      "sha256": "022561ecfd7ba89c63c8cbedf578b75d1f6e58ebce3861ce468b386ff9285b33",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-14.png",
+      "sha256": "072bdf5fe94ff91b76b7980c67d98d4e81558fb2b04f8ae56109fa421f92ed30",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-15.png",
+      "sha256": "069a3fe751740f9859488832ea46b475268521646bc2736e7c84a6fbbe75e73b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-2.png",
+      "sha256": "601739d9d846ca272a825fa9f68a05995565497911876058f617f3d163eb0896",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-3.png",
+      "sha256": "39661c49fbdabfd1f174978c505be76bc49fa664004128803273e5e36d76267f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-4.png",
+      "sha256": "04ceeba8591ed0b281ed7ca8b68bca936850fc664acbd6d65e955b15ca9ff04a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-5.png",
+      "sha256": "d59b071cdafcb7300297e851db97605f5a2fef6680327be0a42050030f2d531c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-6.png",
+      "sha256": "2ba951346630a39b0cff9965252566ceb36e2d705c1833aa284ce844fa91eb69",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-7.png",
+      "sha256": "5d94dc8753415e14b31214bb06a48b742753205da32e479ee47b5db2b2121fdf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-8.png",
+      "sha256": "22d41697412aceb9fce272b32f7292146f7c65a5ecc80c614e70e89b3e431ca4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-alone-study-9.png",
+      "sha256": "ad30cc63d7b4726ab02922e9e776f707f604e3c961603df8e43e1ed3ec5e96d4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-0.png",
+      "sha256": "7d75c671d78f2092e3088fe7d0bdd12f6e95f24068b63c71319ff37e188eb1b9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-1.png",
+      "sha256": "9d40c3b99f097f3ffc760e2c20ab06ee4d26c38f6c684a10e91b023a49e62b83",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-10.png",
+      "sha256": "ea36388bce82d348d06c95b4c1559ce8eb1414f2e8710e17dd416028604b3da2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-11.png",
+      "sha256": "2da4070bfc8e1b6c556e8b77410a16f709310bc580433e13b1d2c6e10e0b8ace",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-12.png",
+      "sha256": "35e2bd1b825fbf96b45d1678b9171422b0715c1da8702dc9dd1e5d29743dfc16",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-13.png",
+      "sha256": "48ea90ecc0b969d8f3e2d270c9dead4ac72c7de9c0cc8b4b0cca420d155359fe",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-14.png",
+      "sha256": "839d550a29273c545bfcd6e9150b418118d598a6d36b9ed68db60a704ade0cc7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-15.png",
+      "sha256": "9639eaf2dad15d00d30742087b9e0aeeaad233e8d4395074c47000c8b801ef45",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-2.png",
+      "sha256": "4f7bd1a73b2c6336c0a18c9e0d413da2c847cb33245bcbaf7e166bbf5a6339d4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-3.png",
+      "sha256": "ef8bf86752e251c7c0f8da9f835cb9d492b56d09482621078d212279e49a794b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-4.png",
+      "sha256": "e99bff5c31ccb4dd58e8c12b9d865e2a4f5d0bec4354ba2b1242aca830d008b6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-5.png",
+      "sha256": "3132c92ea9942da51c5e54907ac81bf49b9b6d2563662da5cd721b91389fa886",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-6.png",
+      "sha256": "687d3a7b82b5984e2c60cd82446ed30f115ba247a7d789032f8e8ebb462f964b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-7.png",
+      "sha256": "db67005e6aa1269f922de83dffbbe7758e864157726820b43051ebc3eedff6b8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-8.png",
+      "sha256": "e04599ce7ad9ca92b3dfd598eeb8ff84e88ad62fdceb01d92c398ee84bd61ba9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-engine-9.png",
+      "sha256": "eb92a54eb75b180c50e086f2ace36288cab6da957e12f7f47a0c4e097a34c93e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-0.png",
+      "sha256": "7049ebd05fe4f969e72643add63bbb9c87aa0961894af3e3e2b6afa114e831e2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-1.png",
+      "sha256": "a2bcfb825f332d24d41e2a04d5fa64bcbb3f53be0386b7b48e656d079801ad17",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-10.png",
+      "sha256": "006f1c7c7c1c97a3b16f0e05c4b4043877a1af982547ea963a862d7a5b6da4b0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-11.png",
+      "sha256": "8369033c204c6e86360d1995843836574f69360d298fc422ff173685465d6f82",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-12.png",
+      "sha256": "fa03efdde563c19e2215ae51436e0126490709951758f16a87f304987e18561d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-13.png",
+      "sha256": "167129f4847b8acdf9b3ce0129958cab432c3352a5639d816b833c9d9406ddc9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-14.png",
+      "sha256": "a8e0c4c45d84dd665d605e9b7215469854a67d1e93bd58c50b47d9ab39af9dd4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-15.png",
+      "sha256": "d9cfce032b73f01eb3bce30a56ae7a27f0b3ac8c23173cb1f214a93406aff6fe",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-2.png",
+      "sha256": "135715bcf14733135c68c15f1c196c1e85b91681c4de5ea3ce8f19c753fc7145",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-3.png",
+      "sha256": "ad28a4cd13a42aa3febe6297ee42d6f526b903d3672c51e21de424b08b2b1626",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-4.png",
+      "sha256": "9508d9551e7dfe4dcb8359376774c5c100c9fe3ca050019693b50f616e78b732",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-5.png",
+      "sha256": "3e856412e63d39fdec5221e3dd631c86b62e12109f5c0ca38d76e2a0a7f20246",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-6.png",
+      "sha256": "9edd0b7a5d3c12613956e213d7fce4b785b2366d7f49b209a729c0c10274d370",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-7.png",
+      "sha256": "74bb4cd071fe1ac23498c2b810b8e12f947dd8f632902934144051ee5f41ed5a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-8.png",
+      "sha256": "9908d7c5ecc71bfada7ce9700da899528b039fcfc15c7a9e2c470832f491ea9e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/rider-hidden-study-9.png",
+      "sha256": "94695739381bd8ecf1f4752c13d867285a35eb3c1dfd1e55ab353853b1d92aa7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-0.png",
+      "sha256": "f9805340510fc3d081679209df8922b16cef05fafc0fdcaf8a6b2e8c5aa2ce4f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-1.png",
+      "sha256": "cf16001ffeccebe3efccb4fe834f41b649fd7c89f490bbeb64a4ee79af781811",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-10.png",
+      "sha256": "488e5629c2c7c1a2614867268cf8d6e10202822a3ab0f6343ddcdafaab96e46a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-11.png",
+      "sha256": "53e6ec62536f3d010ad3f9e4f4f1f845f4e4be677ce1db15cba159ce713d808c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-12.png",
+      "sha256": "03216c754d73ad7a9392da7f2e624f604ceba957889bf8ebf103860e7e6a33a8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-13.png",
+      "sha256": "57cb2f58c99f864d85e9a50a5a31994731eda155d212da4f8905aa312f72d919",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-14.png",
+      "sha256": "bea4d75935ba99cf5f40b69c7e13a101ffa8caab70f3cb130a895c6788c2e628",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-15.png",
+      "sha256": "830fa3e964653d185fb55048dcc37fedd81cb1505bfa56d3f2ae5893086363c7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-2.png",
+      "sha256": "158496f4d53863c6530b98e61347d77adb4910bb2768d0a1793e9d27c42cc2a9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-3.png",
+      "sha256": "b036eb3aed71103c12f562e8df0113b647eb5c383db7981d6422b879ce70c7d2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-4.png",
+      "sha256": "52ce8d891eb9feebef73c2dcd531b767a17fb4ae8e324172192fbf8ad93c3136",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-5.png",
+      "sha256": "b5524fff175aea25b60344cd10927aef9b648e4f06f200e5002cbaf3433b4961",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-6.png",
+      "sha256": "924e4e36b4661e48a9f7372ed01725abdf47169e9cb80037a1f2f308ab7f2ebd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-7.png",
+      "sha256": "f453221a69241c8006ea087e3e566932c7b8ffea96e4f5b4f31cda8e1fe4f586",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-8.png",
+      "sha256": "4cde88849c7d1f79a8d890a5b29f31a6d1e73711b76276d3b62f9111878bffe9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-engine-9.png",
+      "sha256": "4f3910fbfd978336977da1fa8da9afceddafef036f775c961e56d7030d087910",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-0.png",
+      "sha256": "bc56c06dff592822316a28a766b896c483c1d9cc0c17f5cf948e392b06ee0823",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-1.png",
+      "sha256": "284ea111324d7e4d1849db9f76ed240a85e100970daa8cce14d5a3942244687a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-10.png",
+      "sha256": "6619029c5bc746a61a86d2749e85bbff0e780b205c1b4d1c0f117bf48815f60d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-11.png",
+      "sha256": "875ceda460278f6d5b80e89a84dd6aa87028b0ff8f65d697935e54620d556dc3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-12.png",
+      "sha256": "49191a907071fcc9479f28cb45b101b059b8008aed18588cae7a1a5e3d1cec1a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-13.png",
+      "sha256": "c02a0e8dd328b02ae8816787b120a006da196786e05b4f24897b80ca35619e76",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-14.png",
+      "sha256": "de514a9578e5071a21eefbbb9ae6a33cf9e622cd4cc01df2036e7d1671cd259e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-15.png",
+      "sha256": "bb06e3a7171615df4161ec73490d4ba277afead3aa116a713ca75c5a26bee147",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-2.png",
+      "sha256": "c4a0c42b77044d5a3e8d1715e1a029353da7c9f7b976937d13e4846079a71f98",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-3.png",
+      "sha256": "5a79e42731f35402e26d04adb0054344f06fb822fa5e537274d16dc44c02d8bd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-4.png",
+      "sha256": "cdd09d494633a7274a1b7eab270824654afd6db0302807586b126b85d1497627",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-5.png",
+      "sha256": "d20af695df33fc48e367eae13e5af619fe8d71d9c8372ad09d29691bca53ad92",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-6.png",
+      "sha256": "dbce6500a08f9b093035e514f6daf1c9fceaa1de30f7dfa32550c696d3723cef",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-7.png",
+      "sha256": "7e37594d4e7083b96f7d5d0fcc2d0ad132e24ad452f9664b94b48f8b1bc88c74",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-8.png",
+      "sha256": "9e969821756dd851ed4a2f931d6daeefa195c815479895983d0a65c41c1c2e4e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/visible-rider-mask-study-9.png",
+      "sha256": "0e049a2a04c562a8ba4d984ea8f7b962d0d23dd32c4988edc32a01bc12d25cd6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/wire-bike-alone-engine.png",
+      "sha256": "d1bf7153522f6454154d54814851a9ec27e79997892b8233d32f3ab6266f7cd1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/wire-bike-alone-study.png",
+      "sha256": "a97683343091a138d5ba89f9a4d1b3370ea20030f9f6024fe51d7bbf0a7fba72",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/wire-combined-engine.png",
+      "sha256": "8c1479d4e381faed1b63581665695324023f9ffac3404a64f1a19c9860bc9a12",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/wire-combined-study.png",
+      "sha256": "6bac59a8681e88cdb2e305adf3e9ff9c526d3746a93d12f8adf712b2f4f2c8bf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/wire-rider-alone-engine.png",
+      "sha256": "914c6a72d68bc68bf0f7165d9440d0c7edbdf338aa3bc56000a482154d8aaba8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-captures/wire-rider-alone-study.png",
+      "sha256": "55c37802313dfaea7abdae025ad8a71d3e1167bf1e722eb9b647a4a85cb6b13e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-diagnostic.html",
+      "sha256": "45bdab03843996fe965c1c709b31dbae94a464da1571df2be4c833cf736355cd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/raw-viewer.js",
+      "sha256": "5f7e9ce817199b5501b5ec35e276e0b83e9d43ddf868bec5059a34b3d8a7ca9a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/recipe.json",
+      "sha256": "091f455c0a7fed73f8f3c94aec08e23affec0a2c488b361c07ff5e7000bc0296",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/report.json",
+      "sha256": "edf22a0344beb6297b16e4c3f03cc7ccc0228f71ef425e4555d91c5e48890052",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/sidecar-motorcycle/v1/rider-reference.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "resolution": "current"
+    }
+  ],
+  "historicalResolutions": [],
+  "ignoreRuleHashes": {
+    ".gitignore": "5fa6141ba0b839177666f8dac1909601fee97d9daaa627622b6326bec53f49b1"
+  },
+  "resolverSha256": "f9505c413e0d51e85a52cbbb4cc2be78d302f52e2b4d4220b947d2f9c0609542",
+  "freshConstructionPerformed": false,
+  "qualificationGranted": false,
+  "limits": [
+    "STATIC HASH/DECLARATION audit only; no constructor or imported builder executed",
+    "Fresh declared-input construction with source-replay.py remains mandatory separately",
+    "No hidden-import, mesh, contact, pixel, human-approval or normal-activation qualification",
+    "Repository .gitignore rules checked; Git index, global ignores and tracked exceptions not consulted",
+    "Only declared retained-files entries audited; no assertion that the map inventories every unlisted file",
+    "Receipt byteExact/status fields are historical metadata, not fresh replay evidence",
+    "Supplemental diagnostic hash maps are not constructor declarations and are listed separately as unaudited"
+  ]
+}

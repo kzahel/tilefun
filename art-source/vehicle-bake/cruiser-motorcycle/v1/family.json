@@ -1,0 +1,174 @@
+{
+  "family": "original-low-maroon-cream-cruiser",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSourceApprox": [3.631, 0.71, 1.294],
+  "riderMountSource": [0.32, 0, 1.0],
+  "constructionSharedInputs": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733"
+  },
+  "riderProfile": {
+    "path": "art-source/vehicle-riders/profiles/upright-v1.json",
+    "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "riderInputs": {
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "wheelSpecs": {
+    "F": {
+      "axle": -1.4,
+      "halfTrack": 0,
+      "radius": 0.43,
+      "width": 0.22,
+      "segments": 20
+    },
+    "R": {
+      "axle": 1.2,
+      "halfTrack": 0,
+      "radius": 0.46,
+      "width": 0.28,
+      "segments": 24
+    }
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [40, 43, 54],
+    "tireLight": [65, 70, 82],
+    "paintDeep": [79, 39, 56],
+    "paintShadow": [103, 37, 60],
+    "paintMid": [121, 43, 63],
+    "paint": [139, 50, 70],
+    "paintLight": [173, 83, 95],
+    "cream": [244, 225, 185],
+    "creamShadow": [193, 168, 139],
+    "white": [248, 247, 230],
+    "seat": [62, 57, 62],
+    "seatLight": [89, 80, 79],
+    "frame": [63, 71, 84],
+    "frameLight": [103, 116, 128],
+    "engine": [111, 119, 130],
+    "engineLight": [151, 162, 173],
+    "chrome": [198, 210, 217],
+    "rim": [127, 139, 151],
+    "ruby": [181, 50, 70],
+    "amber": [236, 164, 77],
+    "dark": [47, 52, 63]
+  },
+  "paintMethod": "Original low broad maroon/cream cruiser: own seven-ring tank with continuous skin charts, long stepped saddle, strongly raked twin fork, V-twin gray engine/crankcase and long low outboard chrome exhausts. True F/R wheels with different radii; unchanged Explorer separately composed.",
+  "paintOwnership": "Own low maroon tank side/top/end charts with broad cream inset; actual V-engine facets, curved cream/maroon fenders, dark long saddle and broad gray/chrome swatch UV owners. One opaque512nearestunlit bikeatlas; immutable Explorer atlas separate. No glass/exterior-outline projection or overlays.",
+  "sourceStatus": "prototype-source-only; generic cycle static audit used; parent actual shared family capture pending",
+  "contactPolicy": {
+    "profilePlusOneMountOnly": true,
+    "hip": "actual dark saddle top tangent",
+    "hands": "actual grip centerlines, local closed palm wrap only",
+    "feet": "actual peg TOP sole tangent, not peg center",
+    "exceptions": "Only config-named pelvis against saddle top footprint; corresponding closed palm/grip and boot sole/peg pairs within explicit config bounds. No whole-body contact exception."
+  },
+  "fenders": {
+    "F": {
+      "innerRadius": 0.49,
+      "outerRadius": 0.54,
+      "halfWidth": 0.17,
+      "angularLimit": 1.1,
+      "segments": 16
+    },
+    "R": {
+      "innerRadius": 0.53,
+      "outerRadius": 0.585,
+      "halfWidth": 0.2,
+      "angularLimit": 1.22,
+      "segments": 18
+    }
+  },
+  "limits": [
+    "No normalactivation/AI/occupiedfallback/allavatars qualification",
+    "No nonzero steering/suspension/rideranimation claim",
+    "RawGLTF diagnostics are separate from parent actualsharedreview"
+  ],
+  "controlVariant": {
+    "saddleCenterX": 0.36,
+    "saddleLength": 0.86,
+    "saddleWidth": 0.16,
+    "pillionCenterX": 0.75,
+    "pillionLength": 0.46,
+    "pillionWidth": 0.28,
+    "pillionRise": 0.06,
+    "gripHalfLength": 0.075,
+    "gripRadius": 0.024,
+    "pegRadius": 0.025,
+    "pegInnerY": 0.1,
+    "pegOuterY": 0.33,
+    "headstock": [-0.64, 0, 1.08]
+  },
+  "id": "cruiser-motorcycle",
+  "rider": {
+    "id": "explorer-upright",
+    "label": "Explorer",
+    "sourceDirectory": "art-source/vehicle-riders/explorer-upright/v1",
+    "glbPath": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+    "glbSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "rootName": "Explorer_HipOrigin_forward_minus_X",
+    "meshName": "Explorer_static_seated",
+    "triangles": 1956,
+    "semanticContacts": {
+      "hip_saddle": "Upright seated trouser pelvis",
+      "hand_left_grip": "Warm gripping hand left",
+      "hand_right_grip": "Warm gripping hand right",
+      "foot_left_support": "Boot sole left",
+      "foot_right_support": "Boot sole right"
+    }
+  },
+  "contactBoundsSource": {
+    "hipHalfExtentXY": [0.17, 0.14],
+    "surfaceZTolerance": 0.002,
+    "palmRadius": 0.085,
+    "soleRadius": 0.12
+  },
+  "negativeRiderTranslationSource": [-0.28, 0, -0.22],
+  "tank": {
+    "stations": [
+      [-0.98, 0.22],
+      [-0.86, 0.7],
+      [-0.7, 1],
+      [-0.49, 1],
+      [-0.29, 0.76],
+      [-0.16, 0.35],
+      [-0.1, 0.12]
+    ],
+    "segments": 16,
+    "centerZ": 0.88,
+    "heightRadius": 0.14,
+    "halfWidth": 0.2,
+    "chartX": [-1.0, -0.08],
+    "chartZ": [0.7, 1.05],
+    "creamCenter": [-0.57, 0.89],
+    "creamRadii": [0.3, 0.065]
+  },
+  "geometryOwners": {
+    "tank": "Low broad maroon cruiser tank cream skin UV",
+    "saddle": "Actual dark saddle central hip tangent",
+    "grips": "Actual palm wrapped grip",
+    "pegs": "Actual sole tangent foot peg"
+  },
+  "fitRefinement": "Initial actual GLB thigh/boot intersections with wide engine retained under ignored draft01. Single mount and connected controls move .20source rearward; avatar and engine unchanged.",
+  "displayName": "Maroon and cream cruiser",
+  "authoringLimits": [
+    "New family own geometry; generic primitive/export/fit utilities reused in owned paths only",
+    "Unchanged Explorer upright only; no avatar animation or scaling",
+    "Parent shared cycle unit/regression successes do not qualify this raw actual family capture"
+  ]
+}

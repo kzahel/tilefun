@@ -1,0 +1,32 @@
+{
+  "schema": "tilefun-seated-rider-profile-v1",
+  "id": "upright-motorcycle-v1",
+  "status": "prototype-contract-not-production",
+  "units": "World logical pixels, before game rigid basis conversion",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "origin": "Local pelvis/hip center; bike supplies a separately measured mount translation",
+  "contacts": {
+    "hip_saddle": [0, 0, -1.382608695652174],
+    "hand_left_grip": [-9.565217391304348, -4, 4.695652173913044],
+    "hand_right_grip": [-9.565217391304348, 4, 4.695652173913044],
+    "foot_left_support": [-1.217391304347826, -4, -9.217391304347826],
+    "foot_right_support": [-1.217391304347826, 4, -9.217391304347826]
+  },
+  "semantics": {
+    "hip_saddle": "Pelvis bottom contact on actual saddle surface",
+    "hands": "Grip centerline anchors; deliberate palm wrap is a declared contact exception",
+    "feet": "Sole tangent points on actual top of foot support, not peg centerline"
+  },
+  "requirements": [
+    "True straddled bent legs and bent arms, not an upright walking sprite",
+    "One depth target for rider and bike; same interpolated pose and yaw",
+    "Actual body, wheel envelope and contact checks on each bike/profile/avatar combination",
+    "Existing avatar identity and frozen standing approvals remain unchanged"
+  ],
+  "limits": [
+    "Initial Explorer prototype only; not universal avatar fit",
+    "No normal activation, AI occupancy, failure fallback or animation qualified",
+    "Body dimensions and mounts must be measured; this contract does not prove clearance"
+  ]
+}

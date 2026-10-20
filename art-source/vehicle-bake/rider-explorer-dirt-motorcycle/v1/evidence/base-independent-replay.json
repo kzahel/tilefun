@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 6,
+  "glbSha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/dirt-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/dirt-motorcycle/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/dirt-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/dirt-motorcycle-qa/retained-replay-dyvoj6w4",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

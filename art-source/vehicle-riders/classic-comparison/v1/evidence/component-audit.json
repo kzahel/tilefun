@@ -1,0 +1,655 @@
+{
+  "status": "passed-readonly-peer-audit",
+  "inputHashes": {
+    "art-source/vehicle-riders/classic-upright/v1/master.blend": "ae9a7d51233738191a8d0529b94e7a8a3d05f6caf09e4229d9b61fb36f137f81",
+    "art-source/vehicle-riders/classic-upright/v1/rider.glb": "9c1829fde13cf105739ba7b203873b24b2ae6d7d966c9bf66c1d15b147e4b597",
+    "art-source/vehicle-riders/classic-upright/v1/rider.json": "955bc5d2e298dda6b974add4f07a78b69eca2c4084e506fe3a1278d968c0c6a9",
+    "art-source/vehicle-riders/classic-upright/v1/classic-upright-v1.json": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+    "art-source/vehicle-riders/classic-upright/v1/atlas.png": "e1ffa24495478043e0ef638e43e12efa1e5bd735ae3df66d29687fafa3a66845",
+    "art-source/vehicle-riders/classic-upright/v2/master.blend": "36212343c1220f232c558a5f9e22362e6a43fdd4ebda80d68e311deb174fe083",
+    "art-source/vehicle-riders/classic-upright/v2/rider.glb": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+    "art-source/vehicle-riders/classic-upright/v2/rider.json": "f7ea4250d40a5b026a031ea908aa1cccb6a25a9c7ec35f9f924d3535428959f8",
+    "art-source/vehicle-riders/classic-upright/v2/classic-upright-v1.json": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+    "art-source/vehicle-riders/classic-upright/v2/atlas.png": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252"
+  },
+  "unchangedOwners": [
+    "RiderClassic seated pelvis",
+    "RiderClassic upper arm left",
+    "RiderClassic elbow left",
+    "RiderClassic forearm left",
+    "RiderClassic gripping palm left",
+    "RiderClassic bent thigh left",
+    "RiderClassic knee left",
+    "RiderClassic short shin left",
+    "RiderClassic boot left",
+    "RiderClassic upper arm right",
+    "RiderClassic elbow right",
+    "RiderClassic forearm right",
+    "RiderClassic gripping palm right",
+    "RiderClassic bent thigh right",
+    "RiderClassic knee right",
+    "RiderClassic short shin right",
+    "RiderClassic boot right",
+    "RiderClassic tiny torso collar UV owner"
+  ],
+  "changedOwners": [
+    "RiderClassic broad face UV owner",
+    "RiderClassic pointed ear left",
+    "RiderClassic pointed ear right"
+  ],
+  "addedOwners": [
+    "RiderClassic neck collar visible skin"
+  ],
+  "removedOwners": [],
+  "profileBytesExact": true,
+  "snapshots": {
+    "v1": {
+      "RiderClassic seated pelvis": {
+        "sha256": "f3d54d488cdc54ccdb11c7ec2770fc08321a4dbbc24189814fcbca49bfc3656a",
+        "vertices": 56,
+        "minSource": [
+          -0.07999999821186066,
+          -0.11999999731779099,
+          -0.03999999910593033
+        ],
+        "maxSource": [
+          0.07999999821186066,
+          0.11999999731779099,
+          0.03999999910593033
+        ]
+      },
+      "RiderClassic upper arm left": {
+        "sha256": "453260c77aea8ff20be481350b152f7544991a5e6e16257386fd67b7e66a7f78",
+        "vertices": 16,
+        "minSource": [
+          -0.10983903706073761,
+          -0.25013500452041626,
+          0.013469573110342026
+        ],
+        "maxSource": [
+          -0.001797085627913475,
+          -0.14379647374153137,
+          0.10339358448982239
+        ]
+      },
+      "RiderClassic elbow left": {
+        "sha256": "f4dbf9791e1bd7a66d0c954cafc6267bd0fb2be3e16880be5d89c7e230c4d2da",
+        "vertices": 52,
+        "minSource": [
+          -0.12067275494337082,
+          -0.2599261701107025,
+          0.010046746581792831
+        ],
+        "maxSource": [
+          -0.05790301784873009,
+          -0.19392618536949158,
+          0.07604674994945526
+        ]
+      },
+      "RiderClassic forearm left": {
+        "sha256": "3272107d49178380d269b127381d4fce9b9da459240c5dbd5415afa014b910a7",
+        "vertices": 16,
+        "minSource": [
+          -0.164755716919899,
+          -0.25199681520462036,
+          -0.013121913187205791
+        ],
+        "maxSource": [
+          -0.0708690732717514,
+          -0.1721538007259369,
+          0.06883250921964645
+        ]
+      },
+      "RiderClassic gripping palm left": {
+        "sha256": "86ecd56e940018e3e78d72f53c863f92e9562e96ecd7bcb11cdd4b6b578a84bb",
+        "vertices": 74,
+        "minSource": [
+          -0.20899711549282074,
+          -0.214122474193573,
+          -0.04000000283122063
+        ],
+        "maxSource": [
+          -0.13100288808345795,
+          -0.14587752521038055,
+          0.029999997466802597
+        ]
+      },
+      "RiderClassic bent thigh left": {
+        "sha256": "e085737ed6ce2b495ad51ae949c5ecddcb99a418c55a4255b21a743b027828af",
+        "vertices": 16,
+        "minSource": [
+          -0.09539183229207993,
+          -0.19221971929073334,
+          -0.08754009008407593
+        ],
+        "maxSource": [
+          0.019661920145154,
+          -0.08965125679969788,
+          0.007892599329352379
+        ]
+      },
+      "RiderClassic knee left": {
+        "sha256": "b87a96cb90a896c1f12cde032f2e162051c077c37d1619913ccfad3944169bac",
+        "vertices": 52,
+        "minSource": [
+          -0.1097511500120163,
+          -0.1984723061323166,
+          -0.09046685695648193
+        ],
+        "maxSource": [
+          -0.045079294592142105,
+          -0.1304723024368286,
+          -0.024466857314109802
+        ]
+      },
+      "RiderClassic short shin left": {
+        "sha256": "9c06ee44c827e281367a82aef5c2dd4739d4f858ad7d7e78a06f3198140ede5d",
+        "vertices": 16,
+        "minSource": [
+          -0.10258839279413223,
+          -0.20509834587574005,
+          -0.16405841708183289
+        ],
+        "maxSource": [
+          0.0011129863560199738,
+          -0.13454735279083252,
+          -0.040704913437366486
+        ]
+      },
+      "RiderClassic boot left": {
+        "sha256": "4383d8c78cc1dd9d275c398bff82e02b82099f13a1920494b8a8b41be125f38c",
+        "vertices": 56,
+        "minSource": [
+          -0.09999999403953552,
+          -0.24000000953674316,
+          -0.1850000023841858
+        ],
+        "maxSource": [
+          0.029999997466802597,
+          -0.12000000476837158,
+          -0.12000000476837158
+        ]
+      },
+      "RiderClassic upper arm right": {
+        "sha256": "b23176ce20a376f6f327682136304c4945d1c1a6c5b45a2221101554dca08864",
+        "vertices": 16,
+        "minSource": [
+          -0.10983903706073761,
+          0.14379647374153137,
+          0.013469573110342026
+        ],
+        "maxSource": [
+          -0.001797085627913475,
+          0.25013500452041626,
+          0.10339358448982239
+        ]
+      },
+      "RiderClassic elbow right": {
+        "sha256": "151eb3662f9f03ddad06e7acf1c0a40453f8d8aa0a8ceb80f470b1d4b57e9eeb",
+        "vertices": 52,
+        "minSource": [
+          -0.12067275494337082,
+          0.19392617046833038,
+          0.010046746581792831
+        ],
+        "maxSource": [
+          -0.05790301784873009,
+          0.2599261701107025,
+          0.07604674994945526
+        ]
+      },
+      "RiderClassic forearm right": {
+        "sha256": "cfe3ed463e0d72cfb9431bfb552d9996a52712629754da35e7220fe5bca41a81",
+        "vertices": 16,
+        "minSource": [
+          -0.164755716919899,
+          0.1721538007259369,
+          -0.013121913187205791
+        ],
+        "maxSource": [
+          -0.0708690732717514,
+          0.25199681520462036,
+          0.06883250921964645
+        ]
+      },
+      "RiderClassic gripping palm right": {
+        "sha256": "39e7a3a52097095270793366936daf9140df5c573e6c939122cc4411ce1e27f6",
+        "vertices": 74,
+        "minSource": [
+          -0.20899711549282074,
+          0.14587754011154175,
+          -0.04000000283122063
+        ],
+        "maxSource": [
+          -0.13100288808345795,
+          0.2141224890947342,
+          0.029999997466802597
+        ]
+      },
+      "RiderClassic bent thigh right": {
+        "sha256": "b6bcd95a7fa8c39bf99053fa99ee97b52a3f4eb69691bc1a712fcf9c67c5e215",
+        "vertices": 16,
+        "minSource": [
+          -0.09539183229207993,
+          0.08965125679969788,
+          -0.08754009008407593
+        ],
+        "maxSource": [
+          0.019661920145154,
+          0.19221971929073334,
+          0.007892599329352379
+        ]
+      },
+      "RiderClassic knee right": {
+        "sha256": "3a8b184c18e83332bea96d9a109277e192e4533be7d02e74425abfcb5cf67d0e",
+        "vertices": 52,
+        "minSource": [
+          -0.1097511500120163,
+          0.13047228753566742,
+          -0.09046685695648193
+        ],
+        "maxSource": [
+          -0.045079294592142105,
+          0.1984722912311554,
+          -0.024466857314109802
+        ]
+      },
+      "RiderClassic short shin right": {
+        "sha256": "54236e493d5f43ea292104e1480b23148d626d7c4331c5d9f3827ea50be23699",
+        "vertices": 16,
+        "minSource": [
+          -0.10258839279413223,
+          0.13454735279083252,
+          -0.16405841708183289
+        ],
+        "maxSource": [
+          0.0011129863560199738,
+          0.20509834587574005,
+          -0.040704913437366486
+        ]
+      },
+      "RiderClassic boot right": {
+        "sha256": "6bb2eb23bfb71898be81dd1587ff45ffb1ab4d6b60d5d0b3ea9e0a8063df8dfc",
+        "vertices": 56,
+        "minSource": [
+          -0.09999999403953552,
+          0.12000000476837158,
+          -0.1850000023841858
+        ],
+        "maxSource": [
+          0.029999997466802597,
+          0.24000000953674316,
+          -0.12000000476837158
+        ]
+      },
+      "RiderClassic tiny torso collar UV owner": {
+        "sha256": "4e68ce5523add09e28e15b54364a201ee543d9ba131ff9b153a9190d72797bb9",
+        "vertices": 96,
+        "minSource": [
+          -0.09000000357627869,
+          -0.15000000596046448,
+          0.0
+        ],
+        "maxSource": [
+          0.09000000357627869,
+          0.15000000596046448,
+          0.15000000596046448
+        ]
+      },
+      "RiderClassic broad face UV owner": {
+        "sha256": "55e9bcd95765f7e2ab4b8a01b2d0e85058d472454a3548ac15ffcd907b723628",
+        "vertices": 152,
+        "minSource": [
+          -0.2149999886751175,
+          -0.38999998569488525,
+          0.14000001549720764
+        ],
+        "maxSource": [
+          0.26499998569488525,
+          0.38999998569488525,
+          0.46000000834465027
+        ]
+      },
+      "RiderClassic pointed ear left": {
+        "sha256": "27c429148bf11a5097da49fb4305386eb6f1e4eff4b8b207514b4723f4f56f4d",
+        "vertices": 6,
+        "minSource": [
+          -0.14499999582767487,
+          -0.3799999952316284,
+          0.4050000011920929
+        ],
+        "maxSource": [
+          0.11999999731779099,
+          -0.20000000298023224,
+          0.7300000190734863
+        ]
+      },
+      "RiderClassic pointed ear right": {
+        "sha256": "934a07b6034d7d13356590312ece6130f5a669cefa1c2ba6a9515045cdcf68c5",
+        "vertices": 6,
+        "minSource": [
+          -0.14499999582767487,
+          0.20000000298023224,
+          0.4050000011920929
+        ],
+        "maxSource": [
+          0.11999999731779099,
+          0.3799999952316284,
+          0.7300000190734863
+        ]
+      }
+    },
+    "v2": {
+      "RiderClassic seated pelvis": {
+        "sha256": "f3d54d488cdc54ccdb11c7ec2770fc08321a4dbbc24189814fcbca49bfc3656a",
+        "vertices": 56,
+        "minSource": [
+          -0.07999999821186066,
+          -0.11999999731779099,
+          -0.03999999910593033
+        ],
+        "maxSource": [
+          0.07999999821186066,
+          0.11999999731779099,
+          0.03999999910593033
+        ]
+      },
+      "RiderClassic upper arm left": {
+        "sha256": "453260c77aea8ff20be481350b152f7544991a5e6e16257386fd67b7e66a7f78",
+        "vertices": 16,
+        "minSource": [
+          -0.10983903706073761,
+          -0.25013500452041626,
+          0.013469573110342026
+        ],
+        "maxSource": [
+          -0.001797085627913475,
+          -0.14379647374153137,
+          0.10339358448982239
+        ]
+      },
+      "RiderClassic elbow left": {
+        "sha256": "f4dbf9791e1bd7a66d0c954cafc6267bd0fb2be3e16880be5d89c7e230c4d2da",
+        "vertices": 52,
+        "minSource": [
+          -0.12067275494337082,
+          -0.2599261701107025,
+          0.010046746581792831
+        ],
+        "maxSource": [
+          -0.05790301784873009,
+          -0.19392618536949158,
+          0.07604674994945526
+        ]
+      },
+      "RiderClassic forearm left": {
+        "sha256": "3272107d49178380d269b127381d4fce9b9da459240c5dbd5415afa014b910a7",
+        "vertices": 16,
+        "minSource": [
+          -0.164755716919899,
+          -0.25199681520462036,
+          -0.013121913187205791
+        ],
+        "maxSource": [
+          -0.0708690732717514,
+          -0.1721538007259369,
+          0.06883250921964645
+        ]
+      },
+      "RiderClassic gripping palm left": {
+        "sha256": "86ecd56e940018e3e78d72f53c863f92e9562e96ecd7bcb11cdd4b6b578a84bb",
+        "vertices": 74,
+        "minSource": [
+          -0.20899711549282074,
+          -0.214122474193573,
+          -0.04000000283122063
+        ],
+        "maxSource": [
+          -0.13100288808345795,
+          -0.14587752521038055,
+          0.029999997466802597
+        ]
+      },
+      "RiderClassic bent thigh left": {
+        "sha256": "e085737ed6ce2b495ad51ae949c5ecddcb99a418c55a4255b21a743b027828af",
+        "vertices": 16,
+        "minSource": [
+          -0.09539183229207993,
+          -0.19221971929073334,
+          -0.08754009008407593
+        ],
+        "maxSource": [
+          0.019661920145154,
+          -0.08965125679969788,
+          0.007892599329352379
+        ]
+      },
+      "RiderClassic knee left": {
+        "sha256": "b87a96cb90a896c1f12cde032f2e162051c077c37d1619913ccfad3944169bac",
+        "vertices": 52,
+        "minSource": [
+          -0.1097511500120163,
+          -0.1984723061323166,
+          -0.09046685695648193
+        ],
+        "maxSource": [
+          -0.045079294592142105,
+          -0.1304723024368286,
+          -0.024466857314109802
+        ]
+      },
+      "RiderClassic short shin left": {
+        "sha256": "9c06ee44c827e281367a82aef5c2dd4739d4f858ad7d7e78a06f3198140ede5d",
+        "vertices": 16,
+        "minSource": [
+          -0.10258839279413223,
+          -0.20509834587574005,
+          -0.16405841708183289
+        ],
+        "maxSource": [
+          0.0011129863560199738,
+          -0.13454735279083252,
+          -0.040704913437366486
+        ]
+      },
+      "RiderClassic boot left": {
+        "sha256": "4383d8c78cc1dd9d275c398bff82e02b82099f13a1920494b8a8b41be125f38c",
+        "vertices": 56,
+        "minSource": [
+          -0.09999999403953552,
+          -0.24000000953674316,
+          -0.1850000023841858
+        ],
+        "maxSource": [
+          0.029999997466802597,
+          -0.12000000476837158,
+          -0.12000000476837158
+        ]
+      },
+      "RiderClassic upper arm right": {
+        "sha256": "b23176ce20a376f6f327682136304c4945d1c1a6c5b45a2221101554dca08864",
+        "vertices": 16,
+        "minSource": [
+          -0.10983903706073761,
+          0.14379647374153137,
+          0.013469573110342026
+        ],
+        "maxSource": [
+          -0.001797085627913475,
+          0.25013500452041626,
+          0.10339358448982239
+        ]
+      },
+      "RiderClassic elbow right": {
+        "sha256": "151eb3662f9f03ddad06e7acf1c0a40453f8d8aa0a8ceb80f470b1d4b57e9eeb",
+        "vertices": 52,
+        "minSource": [
+          -0.12067275494337082,
+          0.19392617046833038,
+          0.010046746581792831
+        ],
+        "maxSource": [
+          -0.05790301784873009,
+          0.2599261701107025,
+          0.07604674994945526
+        ]
+      },
+      "RiderClassic forearm right": {
+        "sha256": "cfe3ed463e0d72cfb9431bfb552d9996a52712629754da35e7220fe5bca41a81",
+        "vertices": 16,
+        "minSource": [
+          -0.164755716919899,
+          0.1721538007259369,
+          -0.013121913187205791
+        ],
+        "maxSource": [
+          -0.0708690732717514,
+          0.25199681520462036,
+          0.06883250921964645
+        ]
+      },
+      "RiderClassic gripping palm right": {
+        "sha256": "39e7a3a52097095270793366936daf9140df5c573e6c939122cc4411ce1e27f6",
+        "vertices": 74,
+        "minSource": [
+          -0.20899711549282074,
+          0.14587754011154175,
+          -0.04000000283122063
+        ],
+        "maxSource": [
+          -0.13100288808345795,
+          0.2141224890947342,
+          0.029999997466802597
+        ]
+      },
+      "RiderClassic bent thigh right": {
+        "sha256": "b6bcd95a7fa8c39bf99053fa99ee97b52a3f4eb69691bc1a712fcf9c67c5e215",
+        "vertices": 16,
+        "minSource": [
+          -0.09539183229207993,
+          0.08965125679969788,
+          -0.08754009008407593
+        ],
+        "maxSource": [
+          0.019661920145154,
+          0.19221971929073334,
+          0.007892599329352379
+        ]
+      },
+      "RiderClassic knee right": {
+        "sha256": "3a8b184c18e83332bea96d9a109277e192e4533be7d02e74425abfcb5cf67d0e",
+        "vertices": 52,
+        "minSource": [
+          -0.1097511500120163,
+          0.13047228753566742,
+          -0.09046685695648193
+        ],
+        "maxSource": [
+          -0.045079294592142105,
+          0.1984722912311554,
+          -0.024466857314109802
+        ]
+      },
+      "RiderClassic short shin right": {
+        "sha256": "54236e493d5f43ea292104e1480b23148d626d7c4331c5d9f3827ea50be23699",
+        "vertices": 16,
+        "minSource": [
+          -0.10258839279413223,
+          0.13454735279083252,
+          -0.16405841708183289
+        ],
+        "maxSource": [
+          0.0011129863560199738,
+          0.20509834587574005,
+          -0.040704913437366486
+        ]
+      },
+      "RiderClassic boot right": {
+        "sha256": "6bb2eb23bfb71898be81dd1587ff45ffb1ab4d6b60d5d0b3ea9e0a8063df8dfc",
+        "vertices": 56,
+        "minSource": [
+          -0.09999999403953552,
+          0.12000000476837158,
+          -0.1850000023841858
+        ],
+        "maxSource": [
+          0.029999997466802597,
+          0.24000000953674316,
+          -0.12000000476837158
+        ]
+      },
+      "RiderClassic tiny torso collar UV owner": {
+        "sha256": "4e68ce5523add09e28e15b54364a201ee543d9ba131ff9b153a9190d72797bb9",
+        "vertices": 96,
+        "minSource": [
+          -0.09000000357627869,
+          -0.15000000596046448,
+          0.0
+        ],
+        "maxSource": [
+          0.09000000357627869,
+          0.15000000596046448,
+          0.15000000596046448
+        ]
+      },
+      "RiderClassic neck collar visible skin": {
+        "sha256": "e32b7ba012d7ad8679dfa7499777029c5eac11946b633bf5a4894cd2e7ea789e",
+        "vertices": 44,
+        "minSource": [
+          -0.26499998569488525,
+          -0.17000000178813934,
+          0.04500000178813934
+        ],
+        "maxSource": [
+          0.15000000596046448,
+          0.17000000178813934,
+          0.13500000536441803
+        ]
+      },
+      "RiderClassic broad face UV owner": {
+        "sha256": "2b7eaef790a51ac5af43c426b11866b71a355941728c3791ede2c5c51e24edb0",
+        "vertices": 97,
+        "minSource": [
+          -0.2750000059604645,
+          -0.38999998569488525,
+          0.14000000059604645
+        ],
+        "maxSource": [
+          0.2849999964237213,
+          0.38999998569488525,
+          0.5600000023841858
+        ]
+      },
+      "RiderClassic pointed ear left": {
+        "sha256": "8ceb84691891ca176a963e013d77b24db6fe3a74b90ced1130c8eec50d009cef",
+        "vertices": 18,
+        "minSource": [
+          -0.11500000208616257,
+          -0.28999999165534973,
+          0.4399999976158142
+        ],
+        "maxSource": [
+          0.125,
+          -0.10999999940395355,
+          0.7300000190734863
+        ]
+      },
+      "RiderClassic pointed ear right": {
+        "sha256": "9971992856380f010dbeb3ad6040c87e4e23df5ec0584a2aaa065af690dd5c49",
+        "vertices": 18,
+        "minSource": [
+          -0.11500000208616257,
+          0.10999999940395355,
+          0.4399999976158142
+        ],
+        "maxSource": [
+          0.125,
+          0.28999999165534973,
+          0.7300000190734863
+        ]
+      }
+    }
+  },
+  "allSourceBytesUnchanged": true,
+  "limits": "Semantic source geometry/UV evidence only; no actual bike or normal/human qualification."
+}

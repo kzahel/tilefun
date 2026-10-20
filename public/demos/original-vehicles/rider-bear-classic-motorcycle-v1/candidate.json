@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-bear-classic-motorcycle-v1",
+      "name": "bear-upright \u00b7 classic-motorcycle-bear-fit fit pilot",
+      "title": "bear-upright \u00b7 classic-motorcycle-bear-fit \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact classic-motorcycle-bear-fit and unchanged bear-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 4546,
+        "vertices": 9136,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 329892,
+        "sha256": "1668ee4341aba50c66f36753e1fb425ad5acf0fd7a460c8b6ac6e8cb73b4058f",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/atlas.png",
+          "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "1f46d5d4d66b41a817f8cb5e34fb0f5955f11eb762ae38615f4d0ec42ae27bd2"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/composition.json",
+          "sha256": "498f05b3f563c322428acb0410dd4f2b4f6061bdf07f9084687c2dd52c7d09ec"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/model.glb",
+          "sha256": "1668ee4341aba50c66f36753e1fb425ad5acf0fd7a460c8b6ac6e8cb73b4058f"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/recipe.json",
+          "sha256": "508540c80ef21323b820a80a6ba23da312328daa4c89fc9efdcef31ab5f12a2f"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/report.json",
+          "sha256": "c18deb75498f3da9b67377749292fa368589828e6a17997555b7e8e69b983a89"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "status": "passed",
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "sourceInputHashes": {
+    "master.blend": "b7409605b3eb238241ddda1c79ebded249966d982ac76c86163446e2f58a79bf",
+    "car.blend": "857e3b794907a256327271ab6649baf0004922448080a82e933fcd94a8c010a7",
+    "atlas.png": "499365159e17c9e06df957c9644c0637959fbf64c5245492a7d2453064ba0e3c",
+    "model.glb": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a"
+  },
+  "packedScenes": [
+    {
+      "path": "master.blend",
+      "sha256": "b7409605b3eb238241ddda1c79ebded249966d982ac76c86163446e2f58a79bf",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 61,
+      "triangles": 3056,
+      "semanticUV": true
+    },
+    {
+      "path": "car.blend",
+      "sha256": "857e3b794907a256327271ab6649baf0004922448080a82e933fcd94a8c010a7",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 3,
+      "triangles": 3056,
+      "semanticUV": true
+    }
+  ],
+  "semanticOwners": [
+    {
+      "owner": "Low broad maroon cruiser tank cream skin UV",
+      "triangles": 220,
+      "vertices": 112
+    },
+    {
+      "owner": "Actual dark saddle central hip tangent",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser long raised pillion pad",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser broad V engine dark crankcase",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser V cylinder front",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser broad cylinder fin front 0",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser broad cylinder fin front 1",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser broad cylinder fin front 2",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser V cylinder rear",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser broad cylinder fin rear 0",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser broad cylinder fin rear 1",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser broad cylinder fin rear 2",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser large rounded crankcase face -1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Cruiser exhaust downpipe -1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Cruiser long low chrome exhaust -1",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser cream exhaust heat shield -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser extended rear swingarm -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser rear shock broad tube -1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Cruiser laidback long front fork -1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Cruiser fixed axle stub stop short F -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser fixed axle stub stop short R -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser large rounded crankcase face 1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Cruiser exhaust downpipe 1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Cruiser long low chrome exhaust 1",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser cream exhaust heat shield 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser extended rear swingarm 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser rear shock broad tube 1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Cruiser laidback long front fork 1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Cruiser fixed axle stub stop short F 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser fixed axle stub stop short R 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser long low frame member 0",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser long low frame member 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser long low frame member 2",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser long low frame member 3",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser long low frame member 4",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser long low frame member 5",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Headstock to actual grip riser",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Actual connected handlebar centerline",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser actual curved cream maroon fender F",
+      "triangles": 132,
+      "vertices": 68
+    },
+    {
+      "owner": "Cruiser actual curved cream maroon fender R",
+      "triangles": 148,
+      "vertices": 76
+    },
+    {
+      "owner": "Cruiser round headlamp dark housing",
+      "triangles": 68,
+      "vertices": 36
+    },
+    {
+      "owner": "Cruiser round cream headlamp lens",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Cruiser rear ruby lamp",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser true rounded road tire F",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Cruiser broad wheel rim F -1",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Cruiser chrome wheel hub F -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser asymmetric phase index F -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser broad wheel rim F 1",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Cruiser chrome wheel hub F 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser asymmetric phase index F 1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser true rounded road tire R",
+      "triangles": 236,
+      "vertices": 120
+    },
+    {
+      "owner": "Cruiser broad wheel rim R -1",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Cruiser chrome wheel hub R -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser asymmetric phase index R -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Cruiser broad wheel rim R 1",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Cruiser chrome wheel hub R 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Cruiser asymmetric phase index R 1",
+      "triangles": 22,
+      "vertices": 16
+    }
+  ],
+  "actualTriangleUVMatches": 3056,
+  "actualCornerPositionAndUVMatches": 9168,
+  "allActualGLBTrianglesMatchedToOwnSourceUV": true,
+  "tank": {
+    "actualRoundedTaperedVolume": true,
+    "rings": [
+      {
+        "xSource": -0.98,
+        "vertices": 16,
+        "widthSource": 0.08799999952316284,
+        "heightSource": 0.0615999698638916
+      },
+      {
+        "xSource": -0.86,
+        "vertices": 16,
+        "widthSource": 0.2800000011920929,
+        "heightSource": 0.19599997997283936
+      },
+      {
+        "xSource": -0.7,
+        "vertices": 16,
+        "widthSource": 0.4000000059604645,
+        "heightSource": 0.2799999713897705
+      },
+      {
+        "xSource": -0.49,
+        "vertices": 16,
+        "widthSource": 0.4000000059604645,
+        "heightSource": 0.2799999713897705
+      },
+      {
+        "xSource": -0.29,
+        "vertices": 16,
+        "widthSource": 0.30399999022483826,
+        "heightSource": 0.2128000259399414
+      },
+      {
+        "xSource": -0.16,
+        "vertices": 16,
+        "widthSource": 0.14000000059604645,
+        "heightSource": 0.09800004959106445
+      },
+      {
+        "xSource": -0.1,
+        "vertices": 16,
+        "widthSource": 0.04800000041723251,
+        "heightSource": 0.03359997272491455
+      }
+    ],
+    "closedEndFaces": 2,
+    "distinctSideTopEndUVCharts": true,
+    "surfaceUVPaintNotCameraProjection": true
+  },
+  "method": "Original semantic component master at runtime topology; no high-to-low or bitmap transfer claim",
+  "readonlySourceUnchanged": true
+}

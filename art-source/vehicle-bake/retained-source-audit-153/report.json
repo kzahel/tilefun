@@ -1,0 +1,306 @@
+{
+  "status": "complete",
+  "auditResult": "passed",
+  "completedAtUtc": "2026-10-20T02:29:51.771561+00:00",
+  "scope": "Final retained cycle/compound/fit/rider sources only; static declarations and source/public duplicate hashes/bytes",
+  "sourcesChecked": 24,
+  "passed": 24,
+  "failed": 0,
+  "pending": 0,
+  "groups": {
+    "bike": {
+      "sources": 7,
+      "passed": 7
+    },
+    "compound": {
+      "sources": 9,
+      "passed": 9
+    },
+    "fit": {
+      "sources": 2,
+      "passed": 2
+    },
+    "rider": {
+      "sources": 6,
+      "passed": 6
+    }
+  },
+  "declaredInputPinChecks": 232,
+  "uniqueDeclaredPathHashPairs": 159,
+  "retainedFilePinChecks": 5545,
+  "uniqueRetainedPathHashPairs": 5441,
+  "retainedAndPublicOutputHashChecks": 162,
+  "exactSourcePublicBytePairs": 81,
+  "declarationAvailabilityFailures": [],
+  "sourcePublicMismatchFailures": [],
+  "retainedPinFailures": [],
+  "classicRiderRevisionsIncluded": [
+    "classic-upright/v1",
+    "classic-upright/v2"
+  ],
+  "perSource": [
+    {
+      "name": "classic-motorcycle",
+      "group": "bike",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 316,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-motorcycle.json"
+    },
+    {
+      "name": "sidecar-motorcycle",
+      "group": "bike",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 324,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/sidecar-motorcycle.json"
+    },
+    {
+      "name": "sport-motorcycle",
+      "group": "bike",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 321,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/sport-motorcycle.json"
+    },
+    {
+      "name": "cruiser-motorcycle",
+      "group": "bike",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 461,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/cruiser-motorcycle.json"
+    },
+    {
+      "name": "retro-scooter",
+      "group": "bike",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 469,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/retro-scooter.json"
+    },
+    {
+      "name": "dirt-motorcycle",
+      "group": "bike",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 321,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/dirt-motorcycle.json"
+    },
+    {
+      "name": "touring-motorcycle",
+      "group": "bike",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 321,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/touring-motorcycle.json"
+    },
+    {
+      "name": "rider-explorer-classic-motorcycle",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-classic-motorcycle.json"
+    },
+    {
+      "name": "rider-explorer-sidecar-motorcycle",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-sidecar-motorcycle.json"
+    },
+    {
+      "name": "rider-explorer-sport-motorcycle",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-sport-motorcycle.json"
+    },
+    {
+      "name": "rider-explorer-cruiser-motorcycle",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-cruiser-motorcycle.json"
+    },
+    {
+      "name": "rider-explorer-retro-scooter",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-retro-scooter.json"
+    },
+    {
+      "name": "rider-explorer-dirt-motorcycle",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-dirt-motorcycle.json"
+    },
+    {
+      "name": "rider-explorer-touring-motorcycle",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-explorer-touring-motorcycle.json"
+    },
+    {
+      "name": "rider-bear-classic-motorcycle",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-bear-classic-motorcycle.json"
+    },
+    {
+      "name": "rider-person7-classic-motorcycle",
+      "group": "compound",
+      "status": "passed",
+      "inputs": 17,
+      "retainedPins": 30,
+      "sourcePublicPairs": 4,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/rider-person7-classic-motorcycle.json"
+    },
+    {
+      "name": "classic-motorcycle-bear-fit",
+      "group": "fit",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 688,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-motorcycle-bear-fit.json"
+    },
+    {
+      "name": "classic-motorcycle-person7-fit",
+      "group": "fit",
+      "status": "passed",
+      "inputs": 6,
+      "retainedPins": 691,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-motorcycle-person7-fit.json"
+    },
+    {
+      "name": "explorer-v1",
+      "group": "rider",
+      "status": "passed",
+      "inputs": 3,
+      "retainedPins": 174,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/explorer-v1.json"
+    },
+    {
+      "name": "explorer-upright-v1",
+      "group": "rider",
+      "status": "passed",
+      "inputs": 4,
+      "retainedPins": 66,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/explorer-upright-v1.json"
+    },
+    {
+      "name": "bear-upright-v1",
+      "group": "rider",
+      "status": "passed",
+      "inputs": 5,
+      "retainedPins": 120,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/bear-upright-v1.json"
+    },
+    {
+      "name": "person7-upright-v1",
+      "group": "rider",
+      "status": "passed",
+      "inputs": 5,
+      "retainedPins": 122,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/person7-upright-v1.json"
+    },
+    {
+      "name": "classic-upright-v1",
+      "group": "rider",
+      "status": "passed",
+      "inputs": 4,
+      "retainedPins": 282,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-upright-v1.json"
+    },
+    {
+      "name": "classic-upright-v2",
+      "group": "rider",
+      "status": "passed",
+      "inputs": 4,
+      "retainedPins": 599,
+      "sourcePublicPairs": 3,
+      "audit": "art-source/vehicle-bake/retained-source-audit-153/sources/classic-upright-v2.json"
+    }
+  ],
+  "freshReplayDistinction": {
+    "freshConstructionRunThisAudit": false,
+    "retainedReplayReceiptsRecordingPassed": 24,
+    "receiptBytesAndCurrentDeclaredInputsVerified": true,
+    "meaning": "Recorded historical fresh-replay receipts are retained evidence, not new construction performed by this static audit. source-replay.py/family recorded fresh replay remains the separate construction proof."
+  },
+  "controls": {
+    "existingAcceptedPassed": 49,
+    "rerun": false,
+    "reason": "Auditor and focused control source hashes unchanged from accepted scalar extension; no new code changes"
+  },
+  "schemaObservations": [
+    "Compound reports retain status:complete/sourceImmutable:true and omit some later sourceStage/activation flags. Their static hash declarations pass; omitted qualification fields are not inferred.",
+    "Historical rider prototype/source-pilot statuses preserved verbatim. No normal availability or human approval is inferred."
+  ],
+  "preserved": {
+    "sourceReceiptsPinnedHelpersAndArtifactsUnmodified": true,
+    "resolverSha256": "f9505c413e0d51e85a52cbbb4cc2be78d302f52e2b4d4220b947d2f9c0609542",
+    "auditorSha256": "c800a704af6f3a0ffb3554f9188a19597406eec5c99dab38af1c2ef6c633ebf0",
+    "parallelPatchApplied": false,
+    "browserRuns": 0,
+    "globalSuitesBuildInventoryGitCatalogSRCOrRootReviewWrites": false
+  },
+  "details": {
+    "sourceIndex": "art-source/vehicle-bake/retained-source-audit-153/source-index.json",
+    "byteComparisons": "art-source/vehicle-bake/retained-source-audit-153/source-public-byte-comparisons.json",
+    "reproductionCommands": "art-source/vehicle-bake/retained-source-audit-153/commands.json",
+    "toolPins": "art-source/vehicle-bake/retained-source-audit-153/tool-pins.json",
+    "controls": "art-source/vehicle-bake/retained-source-audit-153/controls.json"
+  },
+  "limits": [
+    "STATIC HASH/DECLARATION audit only; no new fresh construction, hidden-import, mesh/contact, pixels or runtime validation",
+    "No full normal catalog validation, formal human approval, AI/all-avatar/fallback or normal activation qualification",
+    "Supplemental diagnostic maps retain the helper existing explicit unaudited scope; constructor input maps and complete retained-files maps are checked"
+  ],
+  "parentNext": "Retain current snapshot/CI gate decisions; no source repair indicated by these checks.",
+  "retention": {
+    "retainedAtUtc": "2026-10-20T02:32:07.235543+00:00",
+    "rawPerSourceAuditPayloadsByteUnchanged": true,
+    "sources": 24,
+    "riderClassicRevisions": [
+      "v1",
+      "v2"
+    ],
+    "laterClassicV3Excluded": true,
+    "notFreshConstructionOrQualification": true
+  }
+}

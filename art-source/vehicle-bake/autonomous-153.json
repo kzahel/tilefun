@@ -2,18 +2,10 @@
   "schema": "tilefun-autonomous-vehicle-run-v1",
   "startedAt": "2026-10-19T21:19:36Z",
   "deadline": "2026-10-20T05:19:36Z",
-  "status": "active",
+  "status": "completed-with-deferred-motorcycles",
   "authorization": "Owner requests autonomous authoring, visual QA, game availability, commits and pushes for up to eight hours; per-vehicle appearance pauses waived; no quantity guarantee.",
   "batch": 3,
-  "active": [
-    "sidecar-motorcycle",
-    "classic-motorcycle",
-    "sport-motorcycle",
-    "cruiser-motorcycle",
-    "dirt-motorcycle",
-    "touring-motorcycle",
-    "retro-scooter"
-  ],
+  "active": [],
   "integratedThisRun": [
     {
       "id": "pickup",
@@ -322,210 +314,260 @@
       "candidate": "classic-roadster-v1",
       "triangles": 3092,
       "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "offroad-jeep",
       "candidate": "offroad-jeep-v1",
       "triangles": 3146,
       "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "delivery-van",
       "candidate": "delivery-van-v1",
       "triangles": 2426,
       "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "race-coupe",
       "candidate": "race-coupe-v1",
       "triangles": 2431,
       "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "microcar",
       "candidate": "microcar-v1",
       "glbSha256": "f11caf39b0efb0ce6f7366b34af6c07cac97336606bb9572d17bedd73976bf9c",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "woody-wagon",
       "candidate": "woody-wagon-v1",
       "glbSha256": "8c286b6aab9f3c92c9845038751a85726c49502eb82788af6829b5e195500e53",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "stretch-limousine",
       "candidate": "stretch-limousine-v1",
       "glbSha256": "19f838fb379583ad24718244d525891997d89ebef319f764aeb057ca2745b4b2",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "hot-rod",
       "candidate": "hot-rod-v1",
       "glbSha256": "eac8b494b60caee1ff940aa14b88c18241767e9d1aab3c928377b1ea70261027",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "rally-hatchback",
       "candidate": "rally-hatchback-v1",
       "glbSha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
-      "status": "frozen",
-      "qa": "Independent actual-GLB views, signed phases/wires, body roll controls, fresh declared-input replay and frozen-only verification pass"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "open-wheel-racer",
       "candidate": "open-wheel-racer-v1",
       "glbSha256": "469298d2f5795a92fa1f43fa3de07d5cd0b83865d153e04809cbfa35ee35466c",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "monster-truck",
       "candidate": "monster-truck-v1",
       "glbSha256": "0b97af66b1b4f37718d67b704d86acac3495329aed9edbc14a46c2933d2c6e02",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "beach-buggy",
       "candidate": "beach-buggy-v1",
       "glbSha256": "65b8e7c5061276ec288274b9fa18bdfe90148cdb3f1f3346d07f9191040f1674",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "go-kart",
       "candidate": "go-kart-v1",
       "glbSha256": "c29db239c328e1251b60128c4ce00e1b72d276a211db05a9d5e5d8b6e58da562",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "golf-cart",
       "candidate": "golf-cart-v1",
       "glbSha256": "3a63ffcfade58b13a911eed60b040cbde66bd3fa01e0f422831b3267cf16225c",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "ice-cream-van",
       "candidate": "ice-cream-van-v1",
       "glbSha256": "97044bde4d70f4d6581de0275aad71cacbcc1cb49471b03af67727a03f7ead09",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "food-truck",
       "candidate": "food-truck-v1",
       "glbSha256": "f6bf1396a9855f253b14e382761c2732262504a709d7de8197f73b3aaa558130",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "camper-van",
       "candidate": "camper-van-v1",
       "glbSha256": "e4d3a74d8009221e594e0160a6f183737fb72b55ddba668c06f3d092160b320d",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "motorhome",
       "candidate": "motorhome-v1",
       "glbSha256": "ee43c471a103d9955a6f39533bff33858862bcb503cf8d17e913f1cfb2857509",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "retro-taxi",
       "candidate": "retro-taxi-v1",
       "glbSha256": "31cfca13747042379f1e5efe2536080cf3c9791966db00fe09df8ff0ed79dcda",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "tow-truck",
       "candidate": "tow-truck-v1",
       "glbSha256": "0cb295af0614018885ac2d294dde18859d4b148968a46fbca428233188fbc8d9",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "flatbed-truck",
       "candidate": "flatbed-truck-v1",
       "glbSha256": "eec6fd7d85d2bca6c8c408fec76cc6d47765bbb8efe01e13d89de7094ee0f7b0",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "semi-truck",
       "candidate": "semi-truck-v1",
       "glbSha256": "ebeec362c63fc14521f92e7ff61046eaad1f216397bf8ca9ffce760c4c6e787c",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "dump-truck",
       "candidate": "dump-truck-v1",
       "glbSha256": "eda05b91da120bf76cbb6df9e0e9480cca2706d6d72cc42734a9e3e224201bd3",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "cement-mixer",
       "candidate": "cement-mixer-v1",
       "glbSha256": "a030392b8faa8a04bc57488e02d4e97f1442080ed75437402e196c5bb01f9b63",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "mobile-crane",
       "candidate": "mobile-crane-v1",
       "glbSha256": "7b69cf487ce63bdfac8cb5c7d9d06d7a2c8dd6cf8d0541f90690ae83e690db1a",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "street-sweeper",
       "candidate": "street-sweeper-v1",
       "glbSha256": "8bb7551447089e045d6d93a7b66ee2e41d25b166682d1cef6fd0a80ca1f3513e",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "snowplow",
       "candidate": "snowplow-v1",
       "glbSha256": "da4d180b6646a658d9c614cc883e8220550c93b01f7f3cb918e8828c99c3ae86",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "farm-tractor",
       "candidate": "farm-tractor-v1",
       "glbSha256": "a3404ae0e65579936806c01eb79d99229c7691b11ca479887b318b2e64cac49e",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     },
     {
       "id": "forklift",
       "candidate": "forklift-v1",
       "glbSha256": "bc71a5ba5eef5f417c311bb01f2e906a716b14d71c224196c261df266e44e533",
-      "status": "qa-complete-unregistered",
-      "qa": "Final immutable source; independent replay/native views/rolling/body controls recorded per-family; registration/runtime held stable for full browser validation"
+      "status": "integrated",
+      "qa": "Immutable source and frozen review retained; exact runtime export/source replay/native and gameplay checks pass; included in33-original Linux CI and published Pages build."
     }
   ],
-  "deferred": [],
+  "deferred": [
+    {
+      "id": "sidecar-motorcycle",
+      "normalActivation": false,
+      "sourceComplete": true,
+      "sourceModelSha256": "7c1987eb79423b5ebe7adf89fab2134253f45d94d7352b39a57c9cf5c7178f60",
+      "reason": "Distinct source and isolated shared-renderer Explorer review complete. Normal occupancy remains gated:23 appearances lack seated source; actual runtime identity/AI/stopped occupancy/occupied fallback/authority/pooling remain unqualified."
+    },
+    {
+      "id": "classic-motorcycle",
+      "normalActivation": false,
+      "sourceComplete": true,
+      "sourceModelSha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+      "reason": "Distinct source and isolated shared-renderer Explorer review complete. Normal occupancy remains gated:23 appearances lack seated source; actual runtime identity/AI/stopped occupancy/occupied fallback/authority/pooling remain unqualified."
+    },
+    {
+      "id": "sport-motorcycle",
+      "normalActivation": false,
+      "sourceComplete": true,
+      "sourceModelSha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+      "reason": "Distinct source and isolated shared-renderer Explorer review complete. Normal occupancy remains gated:23 appearances lack seated source; actual runtime identity/AI/stopped occupancy/occupied fallback/authority/pooling remain unqualified."
+    },
+    {
+      "id": "cruiser-motorcycle",
+      "normalActivation": false,
+      "sourceComplete": true,
+      "sourceModelSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+      "reason": "Distinct source and isolated shared-renderer Explorer review complete. Normal occupancy remains gated:23 appearances lack seated source; actual runtime identity/AI/stopped occupancy/occupied fallback/authority/pooling remain unqualified."
+    },
+    {
+      "id": "dirt-motorcycle",
+      "normalActivation": false,
+      "sourceComplete": true,
+      "sourceModelSha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+      "reason": "Distinct source and isolated shared-renderer Explorer review complete. Normal occupancy remains gated:23 appearances lack seated source; actual runtime identity/AI/stopped occupancy/occupied fallback/authority/pooling remain unqualified."
+    },
+    {
+      "id": "touring-motorcycle",
+      "normalActivation": false,
+      "sourceComplete": true,
+      "sourceModelSha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+      "reason": "Distinct source and isolated shared-renderer Explorer review complete. Normal occupancy remains gated:23 appearances lack seated source; actual runtime identity/AI/stopped occupancy/occupied fallback/authority/pooling remain unqualified."
+    },
+    {
+      "id": "retro-scooter",
+      "normalActivation": false,
+      "sourceComplete": true,
+      "sourceModelSha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+      "reason": "Distinct source and isolated shared-renderer Explorer review complete. Normal occupancy remains gated:23 appearances lack seated source; actual runtime identity/AI/stopped occupancy/occupied fallback/authority/pooling remain unqualified."
+    }
+  ],
   "checkpoints": [
     {
       "batch": 1,
@@ -552,9 +594,63 @@
       "runtimeOriginals": 13,
       "retainedOrdinarySourceFamilies": 33,
       "validation": "5808unit passes/5knownWindowsfailures/10skips; fullbrowser1548passed8failed1skipped; all8isolatedretests pass afterpickerboatcount and devreloadharness fixes"
+    },
+    {
+      "commit": "8f2aea6e",
+      "pushed": true,
+      "runtimeOriginals": 33,
+      "frozenReviewCandidates": 35,
+      "workshopIdentities": 1802,
+      "stagedFiles": 5985,
+      "verifiedSourceRuntimeReviewPins": 11837,
+      "historicalRendererPinUses": 19,
+      "priorWorkshopRecordsUnchanged": 1779,
+      "typecheck": "pass all3projects",
+      "build": "pass",
+      "browser": "All16 Linux shards passed; separate1697-case Windows full snapshot still running with no failures at checkpoint.",
+      "unit": "Final bounded4worker local run:6007passed,5knownWindows failures,10skipped;6022total. Linux check job passed.",
+      "ci": "Linux check, all16 e2e shards and deploy passed; run39352227458",
+      "deploymentEvidence": "art-source/vehicle-bake/deployment-153.json"
+    },
+    {
+      "kind": "final-source-and-validation-checkpoint",
+      "previousRuntimeCommit": "8f2aea6e",
+      "runtimeOriginals": 33,
+      "frozenReviewCandidates": 43,
+      "workshopIdentities": 1810,
+      "newDiagnosticReviews": 8,
+      "sourceMapsVerifiedInIndex": 63,
+      "sourceReviewPinsVerifiedInIndex": 17137,
+      "priorWorkshopRecordsUnchanged": 1802,
+      "finalFocusedUnits": 216,
+      "finalFocusedBrowser": 194,
+      "humanApprovalsSynthesized": 0,
+      "normalMotorcycles": 0,
+      "remainingSeatedSourceIdentities": 23
     }
   ],
-  "pendingValidation": {
+  "lastCheckpointAt": "2026-10-20T03:40:35.245770+00:00",
+  "riderPrototypes": {
+    "explorerRoadster": "Source complete; independent replay/contact controls and exact32-view composition parity pass; not normal game occupancy",
+    "explorerUpright": "Source complete and actual unchanged classic/sidecar fit qualified as isolated shared-loader review prototype",
+    "brownBearUpright": "Immutable source and mechanically fitted classic bike; frozen isolated shared-loader review passes32bare32combined pixel/component parity,contacts/bodywheel/mobile/offline and replay; no normal occupancy.",
+    "motorcycleActivation": "Deferred: all27 identity-specific seats, AI stopped occupancy and Canvas/failed-mesh occupied fallback remain unqualified",
+    "next": "Review isolated prototypes, then complete remaining23 seated identities and actual all27 runtime/AI/occupied fallback/authority/resource-lifecycle contracts before normal motorcycle activation.",
+    "person7Upright": "Immutable distinct capped legacy human and mechanically fitted bike; frozen isolated shared-loader review passes32bare32combined pixel/component parity,contacts/bodywheel/mobile/offline and replay; no normal occupancy.",
+    "classicMotorcycle": "Immutable trueF/R classic source plus exact Explorer assembly frozen;4390tri/4draw/2atlas; actualsharedloader32bare+32combinedparity/contact/clearance/browser pass; normalfalse",
+    "sidecarMotorcycle": "Immutable trueF/R/SC source plus exact Explorer assembly frozen;5374tri/5draw/2atlas; actualsharedloader32bare+32combinedparity/contact/clearance/browser pass; normalfalse",
+    "motorcycleStyles": "All7 distinct cycle sources and unchanged Explorer compositions are frozen registered diagnostic reviews; actual2/3wheel shared capture,32bare+32combined pixels/decodedgeometry,allwheel negative/reset,source replay/native inspection pass. Normalactivationfalse.",
+    "classicDefaultPlayer": "V1/v2 remain immutable diagnostic identity failures. V3 restores pointed ears and preserves readable face/collar,profile/atlas/lowerbody. Parent4inputreplay+998pins pass. Its mechanically fitted bike2602tri plus unchanged1766tri rider forms frozen4368tri/4source-primitives/2atlas shared prototype;17inputreplay,32bare/32combinedRGBA,4038vertices/32304attribute channels and actualcontacts/allwheel/mobile/offline/native inspection pass. No normal/all27/AI/fallback/human claim."
+  },
+  "assetBudget": {
+    "report": "art-source/vehicle-bake/fleet-budget-153.json",
+    "models": 33,
+    "minTriangles": 2299,
+    "maxTriangles": 4030,
+    "glbFileBytes": 7012016
+  },
+  "artProductionStoppedAt": "2026-10-20T03:40:35.245770+00:00",
+  "validation": {
     "batch": 3,
     "runtimeOriginals": 33,
     "roadTypes": 78,
@@ -563,20 +659,23 @@
     "focusedOriginalTests": "168passed; 169withsnapshotresolvernegativecontrols",
     "loaderTests": "53passed asset/boat/resolver; finalcurrentengine50PNG +32bare+32combined eachclassic/sidecar exact",
     "typecheck": "pass all3projects finalsource",
-    "unit": "6003passed,7failed,10skipped;5knownWindows plus2harness timings; both45focusedpass afterboundedqueue+case30s integration bound; finalfull rerun active",
-    "browser": "Second full snapshot pending build; first 1557 result retained separately",
-    "workshopIdentitiesExpected": 1802,
-    "build": "pass;1802Workshop identities verified"
-  },
-  "lastCheckpointAt": "2026-10-20T00:56:53.751339+00:00",
-  "riderPrototypes": {
-    "explorerRoadster": "Source complete; independent replay/contact controls and exact32-view composition parity pass; not normal game occupancy",
-    "explorerUpright": "Source complete and actual unchanged classic/sidecar fit qualified as isolated shared-loader review prototype",
-    "brownBearUpright": "Immutable source and actual mechanically fitted classic bike pilot pass; failed unchanged-bike and Explorer-profile fits retained; parent actualsharedreview pending",
-    "motorcycleActivation": "Deferred: all27 identity-specific seats, AI stopped occupancy and Canvas/failed-mesh occupied fallback remain unqualified",
-    "next": "Distinct sport/cruiser bike source families; reusable measured profile control fitting; keep normalcycles gated",
-    "person7Upright": "Immutable distinct capped legacy-human source and actual mechanically fitted bike pilot pass; no anatomical scaling, 6controls changed/49components unchanged; parent actualsharedreview pending",
-    "classicMotorcycle": "Immutable trueF/R classic source plus exact Explorer assembly frozen;4390tri/4draw/2atlas; actualsharedloader32bare+32combinedparity/contact/clearance/browser pass; normalfalse",
-    "sidecarMotorcycle": "Immutable trueF/R/SC source plus exact Explorer assembly frozen;5374tri/5draw/2atlas; actualsharedloader32bare+32combinedparity/contact/clearance/browser pass; normalfalse"
+    "unit": "Bounded4worker full run:6007passed,5knownWindows failures,10skipped;334files/6022cases/692.19s. Known platform failures are FsSecurity/privateDataPlugin symlink permissions and SQLite SIGKILL behavior. Linux CI check job passed. Earlier unbounded timing failures retained separately.",
+    "browser": "OriginalWindowsfull1697:1695pass1fail1skip;all246authoredgameplay/steeringpassed. RealTouchJumpreadiness-onlytestfixpasses3repeats. Finalcommon-configtwo-worker194cases(180authored+14Tap)allpassedwith0retries; fullLinux8fcheck+16shardspassed.",
+    "build": "pass after art:catalog then workshop:manifest; all43reviews/1810identities verified",
+    "lint": "pass7028files;0errors120existingwarnings37infos",
+    "deployment": "GitHub Pages deployment passed;66 runtime file hashes plus OriginalVehicles bundle byte-exact to local fleet. Shared graehlarts Vite review host remains older/separate.",
+    "status": "completed",
+    "focusedFinalVehicleAssetReplayTests": 216,
+    "finalFocusedBrowser": {
+      "passed": 194,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "workers": 2
+    },
+    "workshopIdentities": 1810,
+    "frozenReviewCandidates": 43,
+    "newSourceCheckpointCI": "Not started when this source checkpoint was recorded; runtime8fCI/deploy already passed. Consult commit Actions status for later validation."
   }
 }

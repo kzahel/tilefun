@@ -1,0 +1,3 @@
+# Tested standalone review/audit tooling; normal builds use committed assets.
+Pillow==12.2.0
+pathspec==1.1.1

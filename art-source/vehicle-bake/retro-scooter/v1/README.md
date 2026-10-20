@@ -1,0 +1,13 @@
+# Retro scooter source pilot
+
+Original mint/cream rounded scooter with a transverse closed legshield, actual open step-through floor and raised rails, rounded rear cowling with a cut rear-wheel pocket, broad long saddle and round headlamp nacelle. Fixed source span approximately 2.69 x .72 x1.305. Independent smaller F/R wheels use radii .31/.33source; world scale stays80/4.6.
+
+`master.blend` retains40 editable semantic runtime-topology components and two packed images (runtime atlas and explicitly unused planning palette). `car.blend` is the three-mesh low source. `model.glb` and the opaque unlit nearest512 atlas are the separate bike asset. All actual triangle/corner UV ownership matches the semantic master. This is direct semantic UV paint, not high-to-low transfer or camera-projected artwork.
+
+Explorer upright GLB/profile remain immutable separate inputs. One translation [.05,0,.93]source mounts the unchanged avatar. Profile-derived saddle/grips/floor meet the five measured contacts. Physical closed boot soles rest on the continuous floor atZ.40, below raised rails atZ.48. The rider keeps the accepted straddle pose; this pilot does not author a knees-together scooter pose. Corresponding hip/saddle, palm/grip and sole/floor surfaces are finite contact exceptions; body and limbs must otherwise clear the scooter.
+
+See `FITTING.md` for retained parameterized constructor API and replay commands, `paint-ownership.json` for charts, `assembly.json` for the exact separate-component mount, and `evidence/` for actual contact/intersection/cylinder/floor/crown/native/depth/phase/wire/mobile/offline and replay receipts. Nine actual GLB down-rays, floor removal and opaque-deck negatives prove the open well. Every fixed bike and rider triangle participates in both full-neutral-roll cylinder tests with independent collision/reset controls.
+
+`evidence/replay-verification.json` declares four own construction files plus the immutable upright profile and stable static cycle catalog. Fresh isolated construction reproduces model/atlas/recipe exactly; no ignored files or existing master are construction dependencies. Diagnostic source dependencies and immutable rider evidence are retained separately under `inputs/` and pinned in `proof-inputs.json`.
+
+Source report status `complete` means source finished only. `sourcePilot:true`; `humanApproval`, `normalActivation`, `productionQualified` stayfalse. Actual shared-loader browser review is pending parent. No normal availability, AI, occupied fallback, other-avatar, steering, suspension or rider animation claim. Final v1 files become immutable on sealing; changes require a new revision. Earlier source families remain untouched.

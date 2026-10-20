@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "separateFixtureNotAnAvatarOrFamilyRollout": true,
+  "onlyIgnoredOwnedFreshRootWritten": true,
+  "configArgumentWorks": true,
+  "variantIdArgumentWorks": true,
+  "sourceDependenciesDeclareActualConfigPath": true,
+  "measuredProfileAndAvatarUnchanged": true,
+  "gripHalfLengthControlSource": [
+    0.055,
+    0.065
+  ],
+  "actualGLBChanged": true,
+  "atlasUnchanged": true,
+  "inputFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/classic-upright/v3/classic-upright-v1.json",
+    "configs/explicit-fit-control.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/build.py",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/geometry.py",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/raw-audit.py"
+  ],
+  "fixtureModelSha256": "07cb7728e35601106c48911a59dc21d48be64d857089ac3969b6b2beb089d318"
+}

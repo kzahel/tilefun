@@ -1,0 +1,438 @@
+{
+  "status": "passed",
+  "auditKind": "static-hash-declaration",
+  "auditorSha256": "c800a704af6f3a0ffb3554f9188a19597406eec5c99dab38af1c2ef6c633ebf0",
+  "receipt": "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+  "receiptSha256": "20bdcf085ef11e934a40507a9cbef0cc3262e1a73c9c1d5acd5e45570b3d790a",
+  "retained": "art-source/vehicle-riders/explorer-upright/v1",
+  "public": "public/demos/vehicle-riders/explorer-upright/v1",
+  "inputRoot": "art-source/vehicle-riders/explorer-upright/v1",
+  "explicitModelName": "rider.glb",
+  "declaredInputPins": 4,
+  "auditedReceiptPinMaps": [
+    "inputHashes",
+    "sharedInputHashes"
+  ],
+  "supplementalReceiptHashMapsNotAudited": [],
+  "inputs": [
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/build.py",
+      "sha256": "a6a6a0ca8525ed301a24440ba65b268c403d7fb847c2dfe9fdaf9a63b07a2d4d",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.json",
+      "sha256": "a4e6fb37e0200bb9642302527b229824f4f5b67d10a3f69a21bc21f6109d64b6",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/identity.json",
+      "sha256": "d3cc61aeb2f96910f99f5174023457aee96e69af3800171454647ff0b1ce487e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/profile.json",
+      "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+      "resolution": "current"
+    }
+  ],
+  "normalizedOutputs": {
+    "rider.glb": {
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500"
+    },
+    "atlas.png": {
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+    },
+    "recipe.json": {
+      "sha256": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251"
+    }
+  },
+  "checkedOutputs": [
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "bytes": 153736
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-riders/explorer-upright/v1/atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "bytes": 1318
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-riders/explorer-upright/v1/recipe.json",
+      "sha256": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+      "bytes": 10835
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "bytes": 153736
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "bytes": 1318
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/recipe.json",
+      "sha256": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+      "bytes": 10835
+    }
+  ],
+  "retainedFilePins": 66,
+  "retainedFilesSha256": "b66363d5ccd72ce5c93dea65eb4f1d80da82a8673aad67dddd7333315bafeb05",
+  "retainedFiles": [
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/approved-standing-identity-reference.png",
+      "sha256": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/build-view.mjs",
+      "sha256": "2825a9cefe3b01e2ac3962540fbfc2dc0b27c17c098a37fe94da22b1f9538f5e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/build.py",
+      "sha256": "a6a6a0ca8525ed301a24440ba65b268c403d7fb847c2dfe9fdaf9a63b07a2d4d",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/capture.mjs",
+      "sha256": "6987d46dca5aa5569ae1556eb04df8270623ffaf0457a8ad1f9966a791103a89",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/evidence/capture.json",
+      "sha256": "511e15e382609ac06944fdf70b78deda4c940015fbd5c2b9ac8ffb913d7d1154",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/evidence/contact-proof.json",
+      "sha256": "d2bda021e27988d9a917a0d040aab660c7d18c61d8fda20375beaabf63d0b42a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/evidence/diagnostic-inputs.json",
+      "sha256": "766973042e07fc7a0b0e15aacbf6a69cc325947c8c2fa76a7576a9a9b098f5c6",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+      "sha256": "20bdcf085ef11e934a40507a9cbef0cc3262e1a73c9c1d5acd5e45570b3d790a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/evidence/visual-inspection.json",
+      "sha256": "ff43103028a57571cdd5355c46431e9ec75eb9eda6404b16e31cc6ce058ea4fd",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/finalize.py",
+      "sha256": "287165d729ee59e0c98a9294ea48519be43c7a00c61119a1f07a4324100f7111",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/fixture.py",
+      "sha256": "b9100113d1c40b5cffa6e4ffe385313ba217f2046f6f09ec1d969ad0d54265bf",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/identity.json",
+      "sha256": "d3cc61aeb2f96910f99f5174023457aee96e69af3800171454647ff0b1ce487e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/index.html",
+      "sha256": "72c787d68074836bf53b796472bd20c4c41cdbb37e2b58d2e362eff4270ca250",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/inspect.py",
+      "sha256": "129a98633ddfd3a6232f12a545c5a0706b4a306fecf9bd4de26f594d88953b95",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/low.blend",
+      "sha256": "ac36f7aea5434aa7a09ef14a92078ac5d3ae05a3b3f26ed2244cbf9c69764a2c",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/master.blend",
+      "sha256": "b453ca55e4bf7d2bb6adc0ea2de4685402c886111204300e10442b8acf9fb980",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/profile.json",
+      "sha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/prove.py",
+      "sha256": "aabbc02ee6877c597032c686c5b19d9e8405dfeaf07e75b217e424a5f8bb64e4",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/recipe.json",
+      "sha256": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/report.json",
+      "sha256": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.json",
+      "sha256": "a4e6fb37e0200bb9642302527b229824f4f5b67d10a3f69a21bc21f6109d64b6",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/source-audit.json",
+      "sha256": "50876204dd639c0520952985fa90421d7ffb099f2ad827141dc39bcefc3af5de",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/source-hashes.json",
+      "sha256": "64ff9ffe0618e91049aa14158c6772541e063b7c3b6c5ed61754779e597124e3",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/viewer.mjs",
+      "sha256": "a4362e042c3200efd7c2665ba6b157475b5e74348b9159276c28ad7b4cfc9bba",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-0.png",
+      "sha256": "44ead8b2d85f8cd4b0f38ad701d46e179fb53e59e998e06c51bc917657635470",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-1.png",
+      "sha256": "770f188897666d82004e42d05dbee10cd61f5ce86ee3b975451d2545b82dc988",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-10.png",
+      "sha256": "efaa181eacc34c396e4cab7937821bd763a22a076dd17234aadbfe97391cd2de",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-11.png",
+      "sha256": "29b1850baba144c1e23cc49c56e631da702497a00bea1e08c56ceed960b2ab86",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-12.png",
+      "sha256": "eb6824e2d50c095e578e49edc7cbfde1feadb8769ababcf0cc55be22e0ebe9ae",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-13.png",
+      "sha256": "736f0d566471a81605021f9462fab9623a7cd8e64b39b0717dbc4683eb3fd481",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-14.png",
+      "sha256": "d9f8f42ab9c13c77ec590a3dd532e540525c61c927bae04eebf39d84fc976d54",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-15.png",
+      "sha256": "6a72307ec758e1c706760e1ef742fc51864d78ebe3df32adef5f1d39c12e1cd3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-2.png",
+      "sha256": "a314b769b8415bafd3564f535e1fb83038a29acc45c1efa25699f1036223c11a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-3.png",
+      "sha256": "5ef67da4fcb8f94261e96869ac84980b258c1482ff2f0d1af265fc66b64775f2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-4.png",
+      "sha256": "0b488659314d2aeda3680030324c07d76a6617e86c09a4cff23754a4e0be9b7b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-5.png",
+      "sha256": "f5036ef6a6d091299bf901c56bdeecf309424046a62f82e597a80007b80a6f3d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-6.png",
+      "sha256": "d78754dd53d08bb47224d44d10f505f523c5651dfa81b5c2c60e790d6055ddd2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-7.png",
+      "sha256": "d2b3a4f7f8359592bf347ce2e5aa9fcae35e61071518700c2a22393f73b0cd0b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-8.png",
+      "sha256": "7c2ec23eddf29787dc13776b90d437fff53d82eea3092ccfc9d2a160fc0fc113",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-engine-9.png",
+      "sha256": "d3d353b5f0ccd33c42ea24c3284d304f0f08a0c4ab368d4b5d5a450f8fe29318",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-0.png",
+      "sha256": "00589d6a474cd8281b9c6f6a46128cd06c159750d017cd8ebae1951c9b005c27",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-1.png",
+      "sha256": "377b893acaaae8aa11d52fe4d972969ff29c750619b6fd62fa57f4586da7ac44",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-10.png",
+      "sha256": "d76b5fd0fb3985d81f0b8ce629f12ceefcdec16b5685aa3275f315bed6bbe76c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-11.png",
+      "sha256": "c8f6f135a4ad2a958576ed58c9290b517d4e3b5bc44674f6a485a502fed96337",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-12.png",
+      "sha256": "dc3d5f57cc8e085e448ed4d0ac41e214725b9019f050cec753ed4dc4f004873e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-13.png",
+      "sha256": "8bd4dd71b7a23ab8139af3335c18d2b4ed8faef834ad819c203ca2a34bd86700",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-14.png",
+      "sha256": "6140ed1f75bbbf6f6fdc6883aee84b246580f83fb3ec130b172a42f446c06ed1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-15.png",
+      "sha256": "a437ed4fe407b0c55fa1b7c1fd56bf2513c85f889c3bcf4235875ca4fc635031",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-2.png",
+      "sha256": "8f52f83cbbc0517ed3b4c25eb9e8e683a9497006a2cd57819f8b2dea0518591c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-3.png",
+      "sha256": "a7dfaf94cd9486268b3b01c2538abdf79af412d536c6c083e03268fa8e217c0b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-4.png",
+      "sha256": "11d141960660526043f1e1ea4c831ebad1f68f172b3d4697beb6445f50af2b96",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-5.png",
+      "sha256": "0489718ee5e74928f2db6cc856f58980036b25859936f2b2b721b2c59baf5930",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-6.png",
+      "sha256": "3645d2248a37ef4b4f8dce410e557bdf4ae5206305f936e471bf8c5e0cf8d35a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-7.png",
+      "sha256": "b0b0d05ad710ed5f76774793e71755d582598f6ddcdb8ed779b55e405e4482ea",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-8.png",
+      "sha256": "2482b20af59db38291abaa702293ad3124a8864f8d4b38d43992fabb71f90a13",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/rider-study-9.png",
+      "sha256": "a7ca8b25051a187162fc263a1f7d3f4988a466276b8a4970783a84d347d6c14b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/wire-rider-engine.png",
+      "sha256": "223486fc75e7c58dd773bb88f001566bd3a24fbfd186ec90b4e04c637db0909b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/captures/wire-rider-study.png",
+      "sha256": "feaba2a9adb14a88a38e289259965610098dbb3c9b33e691523fddac0db1938a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/inspection-rider-engine.png",
+      "sha256": "028082ad6de02ba18b7e3a42b9aedad77376ed39381eec3a9f94882c08c524c5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/inspection-rider-study.png",
+      "sha256": "38b1cd502f1b753069ebb460e96b1af0bef4e70eca28f7d6d7c7bc384ab7ea82",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/recipe.json",
+      "sha256": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/report.json",
+      "sha256": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "resolution": "current"
+    }
+  ],
+  "historicalResolutions": [],
+  "ignoreRuleHashes": {
+    ".gitignore": "5fa6141ba0b839177666f8dac1909601fee97d9daaa627622b6326bec53f49b1"
+  },
+  "resolverSha256": "f9505c413e0d51e85a52cbbb4cc2be78d302f52e2b4d4220b947d2f9c0609542",
+  "freshConstructionPerformed": false,
+  "qualificationGranted": false,
+  "limits": [
+    "STATIC HASH/DECLARATION audit only; no constructor or imported builder executed",
+    "Fresh declared-input construction with source-replay.py remains mandatory separately",
+    "No hidden-import, mesh, contact, pixel, human-approval or normal-activation qualification",
+    "Repository .gitignore rules checked; Git index, global ignores and tracked exceptions not consulted",
+    "Only declared retained-files entries audited; no assertion that the map inventories every unlisted file",
+    "Receipt byteExact/status fields are historical metadata, not fresh replay evidence",
+    "Supplemental diagnostic hash maps are not constructor declarations and are listed separately as unaudited"
+  ]
+}

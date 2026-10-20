@@ -1,0 +1,60 @@
+{
+  "script": "scripts/vehicle-riders/compare-outline.mjs",
+  "scriptSha256": "b5b7360c89762628f508b2613199ccf73ba868f999d71a7a83afc0f4b593b9e2",
+  "defaultRevision": "v1",
+  "allowedRevisions": [
+    "v1",
+    "v2"
+  ],
+  "v1Existing96ReferenceRGBAExact": true,
+  "v1All256PNGBytesAnd128PairStatsUnchanged": true,
+  "oldComparisonOutputsPreserved": true,
+  "allSourceInputsReadOnlyUnchanged": true,
+  "negativeAttemptsPreservedV1Outputs": true,
+  "scopedChecks": [
+    {
+      "command": [
+        "node",
+        "--check",
+        "scripts/vehicle-riders/compare-outline.mjs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\node_modules\\.bin\\biome.cmd",
+        "check",
+        "scripts/vehicle-riders/compare-outline.mjs"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "globalChecksRun": false,
+  "unknownArgumentRevisionControls": [
+    {
+      "args": [
+        "--revision",
+        "v3"
+      ],
+      "rejected": true,
+      "exitCode": 1
+    },
+    {
+      "args": [
+        "--unknown"
+      ],
+      "rejected": true,
+      "exitCode": 1
+    },
+    {
+      "args": [
+        "--revision"
+      ],
+      "rejected": true,
+      "exitCode": 1
+    }
+  ],
+  "incompleteV2PreSealRejected": true,
+  "timing": "Historical CLI check before v2 seal; v2 actual completed evidence is retained separately.",
+  "sourceReceiptSha256": "81c74f5237ce28281342f20e5498a1099a8ead68d1f0da7ec88b694436c25219"
+}

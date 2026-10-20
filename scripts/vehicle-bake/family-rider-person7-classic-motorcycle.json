@@ -1,0 +1,32 @@
+{
+  "id": "rider-person7-classic-motorcycle-v1",
+  "clearanceId": "rider-person7-classic-motorcycle--v1",
+  "name": "person7-upright \u00b7 classic-motorcycle-person7-fit fit pilot",
+  "title": "person7-upright \u00b7 classic-motorcycle-person7-fit \u00b7 shared-loader pilot",
+  "source": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1",
+  "glb": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1/report.json",
+  "output": "public/demos/original-vehicles/rider-person7-classic-motorcycle-v1",
+  "qa": "data/vehicle-bake/rider-person7-classic-motorcycle-qa",
+  "offline": "data/vehicle-bake/rider-person7-classic-motorcycle-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "composition": {
+    "component": "art-source/vehicle-riders/person7-upright/v1/rider.glb",
+    "prefix": "RiderPerson7",
+    "mountBlenderWorldPixels": [
+      0.0,
+      0.0,
+      18.791304347826088
+    ],
+    "baseCaptures": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1/raw-captures",
+    "baseCapturePrefix": "bike-alone-",
+    "combinedCaptures": "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1/raw-captures"
+  },
+  "toolchain": "motorcycle-v1",
+  "wheelIds": [
+    "F",
+    "R"
+  ]
+}

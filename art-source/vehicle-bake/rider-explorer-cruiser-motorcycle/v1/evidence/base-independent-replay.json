@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 6,
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/cruiser-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/cruiser-motorcycle/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/cruiser-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/cruiser-motorcycle-qa/retained-replay-i0kiyw2p",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

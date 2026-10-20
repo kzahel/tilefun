@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-retro-scooter-v1",
+      "name": "explorer-upright \u00b7 retro-scooter fit pilot",
+      "title": "explorer-upright \u00b7 retro-scooter \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact retro-scooter and unchanged explorer-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 4236,
+        "vertices": 8609,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 313280,
+        "sha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264",
+        "wheels": {
+          "F": {
+            "wheel_radius": 5.391304347826088,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 5.73913043478261,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/atlas.png",
+          "sha256": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/composition.json",
+          "sha256": "20249c3e54dd17f7640f3ab25c634b29c3f71e3b346f50fced6856a40ee5efaa"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/model.glb",
+          "sha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/recipe.json",
+          "sha256": "2c52a34bbd1eff9a7906badcc6321413e3697c83d65f7eab239f4c0ce624129f"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/report.json",
+          "sha256": "a6bc41edc10b985c9d1215ca33041b18d92783076990b35f921febea2aa88981"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "rider-player-classic-motorcycle-v1",
+  "canonicalConfig": "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/assembly.json",
+  "retained": "art-source/vehicle-bake/rider-player-classic-motorcycle/v1",
+  "public": "public/demos/vehicle-bake/rider-player-classic-motorcycle/v1",
+  "scratch": "data/vehicle-bake/rider-player-classic-motorcycle/replay/public",
+  "qa": "data/vehicle-bake/rider-player-classic-motorcycle-qa",
+  "wheelIds": [
+    "F",
+    "R"
+  ],
+  "base": {
+    "model": "public/demos/vehicle-bake/classic-motorcycle-player-fit/v1/model.glb",
+    "atlas": "public/demos/vehicle-bake/classic-motorcycle-player-fit/v1/atlas.png",
+    "master": "art-source/vehicle-bake/classic-motorcycle-player-fit/v1/master.blend",
+    "replay": "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/base-normalized-replay.json"
+  },
+  "component": {
+    "model": "art-source/vehicle-riders/classic-upright/v3/rider.glb",
+    "atlas": "art-source/vehicle-riders/classic-upright/v3/atlas.png",
+    "master": "art-source/vehicle-riders/classic-upright/v3/master.blend",
+    "replay": "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/rider-normalized-replay.json"
+  },
+  "additionalInputs": [
+    "art-source/vehicle-bake/classic-motorcycle-player-fit/v1/evidence/replay-verification.json",
+    "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/base-independent-replay.json",
+    "art-source/vehicle-riders/classic-upright/v3/evidence/replay-verification.json",
+    "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/rider-independent-replay.json"
+  ],
+  "mountBlenderWorldPixels": [
+    1.7391304347826089,
+    0.0,
+    18.44347826086957
+  ],
+  "prefix": "RiderClassic",
+  "nativeSize": 224,
+  "method": "ISOLATED SOURCE PROTOTYPE: exact mechanically fitted classic bike and unchanged Classic v3 composed at one measured mount, preserving child geometry and paint. No normal occupancy, AI, occupied fallback or all27 qualification.",
+  "limits": [
+    "One static measured identity/bike fit only",
+    "No normal activation, AI, occupied fallback, all27 or animation qualification",
+    "Editable geometry remains in two child packed masters plus explicit placement recipe"
+  ]
+}

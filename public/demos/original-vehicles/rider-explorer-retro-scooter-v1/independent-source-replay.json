@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 17,
+  "glbSha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/rider-explorer-retro-scooter/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/rider-explorer-retro-scooter/replay/public/atlas.png",
+    "companion-atlas.png": "data/vehicle-bake/rider-explorer-retro-scooter/replay/public/companion-atlas.png",
+    "recipe.json": "data/vehicle-bake/rider-explorer-retro-scooter/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/rider-explorer-retro-scooter-qa/retained-replay-jed_b48m",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "separateFixtureNotAnAvatarOrFamilyRollout": true,
+  "onlyIgnoredOwnedFreshRootWritten": true,
+  "configArgumentWorks": true,
+  "variantIdArgumentWorks": true,
+  "sourceDependenciesDeclareActualConfigPath": true,
+  "measuredProfileAndAvatarUnchanged": true,
+  "gripHalfLengthControlSource": [
+    0.075,
+    0.08499999999999999
+  ],
+  "actualGLBChanged": true,
+  "atlasUnchanged": true,
+  "mismatchedVariantIdRejected": true,
+  "corruptProfilePinRejected": true,
+  "negativeAttemptsPreservedPriorOutputs": true,
+  "validResetModelAtlasRecipeExact": true,
+  "inputFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/profiles/upright-v1.json",
+    "configs/explicit-fit-control.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/cruiser-motorcycle/build.py",
+    "scripts/vehicle-bake/cruiser-motorcycle/geometry.py",
+    "scripts/vehicle-bake/cruiser-motorcycle/raw-audit.py"
+  ],
+  "fixtureModelSha256": "659eed5cfcba3680655b9ef527e2d176e105ec77a64586dfffa375c22db861e7"
+}

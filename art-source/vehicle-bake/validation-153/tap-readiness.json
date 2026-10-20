@@ -1,0 +1,168 @@
+{
+  "schema": "tilefun-run153-input-readiness-evidence-v1",
+  "cause": "DOM menu closure races the next PlayScene frame that enables canvas TouchButtons. A valid Jump touch while the cached enabled flag is still false returns early, remains unclaimed, and is not replayed when controls become enabled. The original test assumed DOM close implied canvas input readiness.",
+  "coordinateConclusion": "DPR was not the cause. Measured DPR1 backing/client/rect800x600 and DPR3 backing/client800x600; old and CSS-derived points both748,548. No coordinate change applied. Current hit test is rectangular (32x26 half extents), not radial.",
+  "sourceEvidence": [
+    {
+      "path": "src/client/GameClient.ts",
+      "line": 1487,
+      "observation": "closePanel synchronously clears hamburgerOpen and resets play input."
+    },
+    {
+      "path": "src/scenes/PlayScene.ts",
+      "line": 280,
+      "observation": "The next simulation update derives inputLocked and assigns touchButtons.enabled."
+    },
+    {
+      "path": "src/input/TouchButtons.ts",
+      "line": 239,
+      "observation": "onTouchStart returns immediately if enabled is false."
+    }
+  ],
+  "boundaryProof": {
+    "path": "data/vehicle-bake/autonomous-153/tap-diagnosis/boundary-control.json",
+    "method": "Controlled page clock/event boundary only, actual unchanged dist and CDP touch, real authority Worker. No entity/input-state assignments. Close menu and touch correct Jump before next simulation frame; resume frame, release/repress exact same coordinates.",
+    "beforeFrame": {
+      "dpr": 3,
+      "backing": [
+        800,
+        600
+      ],
+      "client": [
+        800,
+        600
+      ],
+      "rect": {
+        "width": 800,
+        "height": 600
+      },
+      "wrongPoint": {
+        "x": 748,
+        "y": 548
+      },
+      "point": {
+        "x": 748,
+        "y": 548,
+        "id": 1
+      },
+      "menu": false,
+      "blocked": false,
+      "enabled": false,
+      "claimed": [],
+      "jump": false,
+      "z": 0
+    },
+    "firstTouch": {
+      "dpr": 3,
+      "backing": [
+        800,
+        600
+      ],
+      "client": [
+        800,
+        600
+      ],
+      "rect": {
+        "width": 800,
+        "height": 600
+      },
+      "wrongPoint": {
+        "x": 748,
+        "y": 548
+      },
+      "point": {
+        "x": 748,
+        "y": 548,
+        "id": 1
+      },
+      "menu": false,
+      "blocked": false,
+      "enabled": false,
+      "claimed": [],
+      "jump": false,
+      "z": 0
+    },
+    "afterFrame": {
+      "dpr": 3,
+      "backing": [
+        800,
+        600
+      ],
+      "client": [
+        800,
+        600
+      ],
+      "rect": {
+        "width": 800,
+        "height": 600
+      },
+      "wrongPoint": {
+        "x": 748,
+        "y": 548
+      },
+      "point": {
+        "x": 748,
+        "y": 548,
+        "id": 1
+      },
+      "menu": false,
+      "blocked": false,
+      "enabled": true,
+      "claimed": [],
+      "jump": false,
+      "z": 0
+    },
+    "samePointRetouch": {
+      "dpr": 3,
+      "backing": [
+        800,
+        600
+      ],
+      "client": [
+        800,
+        600
+      ],
+      "rect": {
+        "width": 800,
+        "height": 600
+      },
+      "wrongPoint": {
+        "x": 748,
+        "y": 548
+      },
+      "point": {
+        "x": 748,
+        "y": 548,
+        "id": 1
+      },
+      "menu": false,
+      "blocked": false,
+      "enabled": true,
+      "claimed": [
+        1
+      ],
+      "jump": true,
+      "z": 13.623055330725098
+    }
+  },
+  "originalWindowsFullRun": {
+    "passed": 1695,
+    "failed": 1,
+    "skipped": 1,
+    "total": 1697,
+    "authoredGameplayAndSteeringPassed": 246,
+    "tapReadinessCorrectedRepeatsPassed": 3
+  },
+  "correctedTestSha256": "183c532d4c0e69cd7979bba71872b3cb1abbce8d446a92e055fcef0a0fe8a024",
+  "gameSourceUnchanged": {
+    "src/input/TouchButtons.ts": "9bd79ebeb56dde8a7f9b0dfcf693100761977924950cb0a72dbce7a732895ed0",
+    "src/client/GameClient.ts": "483e782622e329764d09800a118cc4d255c87483679d5936497fe8532a47d4b5",
+    "src/scenes/PlayScene.ts": "ce92927dca3b9bf02659b17e02a79e94fda98cb5ba17eeaa98c7b94acd352ac7"
+  },
+  "focusedValidation": {
+    "passed": 3,
+    "failed": 0,
+    "repeatEach": 3
+  },
+  "scope": "Controlled frame-boundary diagnostic and a readiness-only test correction; no production input, render, vehicle or standing sprite pixels changed. Complete traces, failed screenshots and run intermediates remain ignored."
+}

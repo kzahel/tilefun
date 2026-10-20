@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 6,
+  "glbSha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/sport-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/sport-motorcycle/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/sport-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/sport-motorcycle-qa/retained-replay-huwkcdam",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

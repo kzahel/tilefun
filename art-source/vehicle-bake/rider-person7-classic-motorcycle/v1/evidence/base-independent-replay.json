@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 6,
+  "glbSha256": "f9c26d3965c00f1cb1ae63a275b06619846fbd41f17f05645389c2fdb586cd63",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/classic-motorcycle-person7-fit/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/classic-motorcycle-person7-fit/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/classic-motorcycle-person7-fit/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/classic-motorcycle-person7-fit-qa/retained-replay-4zbge4h4",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

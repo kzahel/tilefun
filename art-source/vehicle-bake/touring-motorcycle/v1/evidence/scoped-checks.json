@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\touring-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n11 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\touring-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\fnm_multishells\\24284_1790502943936\\npx.cmd",
+        "biome",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\touring-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "npm warn Unknown env config \"audit-config\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"npm-globalconfig\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"overrides\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"recursive\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"supported-architectures\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nChecked 6 files in 18ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/touring-motorcycle/assess-pixels.py": "ba72e9d4d8439b6cbadf0fd2971aafc682aeeae1e0d642896a2342760e0c8575",
+    "scripts/vehicle-bake/touring-motorcycle/audit-source.py": "7c4d5527780eac16bc2c8416f27ad04fda4faad0692fa35b5dd0654a41387db4",
+    "scripts/vehicle-bake/touring-motorcycle/build-view.mjs": "83307efe98095e0f70859e0dbbcc07b73167793549e07703fcf8294d8b30e685",
+    "scripts/vehicle-bake/touring-motorcycle/build.py": "d75cad0de4024d3aff6e5c57f7d254ea36b3897406a50ebbea2d0994c964a00d",
+    "scripts/vehicle-bake/touring-motorcycle/capture-raw.mjs": "fb285336385b3ad1f3f34704d9b0358e62cc04fdb5a640cef36dbd0fa36dff17",
+    "scripts/vehicle-bake/touring-motorcycle/coverage-region.json": "eb978371bb89d6b4dc5e37de366e5e7fa8144dae3cb6f4cda0300137f499cdb2",
+    "scripts/vehicle-bake/touring-motorcycle/family.json": "f8cbd870c7ba8e50743ee99625c43107085a1dcae30fb33f112d967cdbebb08a",
+    "scripts/vehicle-bake/touring-motorcycle/finalize.py": "f5a6963f97da96d7d187654f4037f22635bc2bb7f62c5ec1a5f4ad6d7ff80e30",
+    "scripts/vehicle-bake/touring-motorcycle/fresh-replay.py": "6faa9015cba3d85449ec4d690b52bde319cdd47fc27c8725dc57ff23144ff134",
+    "scripts/vehicle-bake/touring-motorcycle/geometry.py": "45a07781001bda9eac8ee2689b3b736c7a74ddc3a61f71a27687bdc0e4de45bf",
+    "scripts/vehicle-bake/touring-motorcycle/inspect-rider.py": "608eaa139888aad4d05d04f40c0def17ceb09a4ad845005017b29d8fe17777a6",
+    "scripts/vehicle-bake/touring-motorcycle/prove-coverage.py": "f351e115e8e99c2eee1290df9bd8c57b968e96cf8646bbb394704279503bf747",
+    "scripts/vehicle-bake/touring-motorcycle/prove-fit.py": "8ac09d3206d9218572d4785209356da3ab6a1e417170db72fe8db80c94ab26f6",
+    "scripts/vehicle-bake/touring-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/touring-motorcycle/raw-diagnostic.html": "d1b5b64bb39389014a4343eb4f366e40ec4fc2fe2b429e659a04e1769c2f0a67",
+    "scripts/vehicle-bake/touring-motorcycle/raw-viewer.mjs": "bb611ac0b2eb9f6cea7987b52a88dc8256555885b821ddb545cd1d3109de0177",
+    "scripts/vehicle-bake/touring-motorcycle/sheets.py": "2d6f41dcfd690a4fd12a5fdf87e33a577de6c28639bc09064c322eefb71e0207"
+  }
+}

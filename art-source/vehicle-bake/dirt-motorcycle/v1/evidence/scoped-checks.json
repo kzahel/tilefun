@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\dirt-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n11 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+        "-m",
+        "compileall",
+        "-q",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\dirt-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\AppData\\Local\\fnm_multishells\\24284_1790502943936\\npx.cmd",
+        "biome",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\dirt-motorcycle"
+      ],
+      "exitCode": 0,
+      "output": "npm warn Unknown env config \"audit-config\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"npm-globalconfig\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"overrides\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"recursive\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"supported-architectures\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nChecked 6 files in 18ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/dirt-motorcycle/assess-pixels.py": "e1119aee7fbfa9fd03979861509537df88a98ed73e18aaf87353451e54c7b23a",
+    "scripts/vehicle-bake/dirt-motorcycle/audit-source.py": "c552f5c32ddc0a596f77e57e7c272c0a94c4a4a4676e0f0dc3d48ed65c84c255",
+    "scripts/vehicle-bake/dirt-motorcycle/build-view.mjs": "dcafe175a13b9a8270e9589b1a2ae590b32f980c1c2e9d32b9fcbce19f01b33a",
+    "scripts/vehicle-bake/dirt-motorcycle/build.py": "8670530069e87427a56b4bd960a464f7b9eb7487d5a27d3a62c30a90977ab3a6",
+    "scripts/vehicle-bake/dirt-motorcycle/capture-raw.mjs": "838134b5d1d15074f56f674869bdca28eac6aff99b3df616b105964a657fb2cf",
+    "scripts/vehicle-bake/dirt-motorcycle/coverage-region.json": "61b12786304575d9d4c5981ed29c21b8dcc9e16dc75aad94b3235a96e8f95afe",
+    "scripts/vehicle-bake/dirt-motorcycle/family.json": "6e250f0709b866a6eef2929e05c42b98d09976fe51f7000cdcde05d6a94ec6a7",
+    "scripts/vehicle-bake/dirt-motorcycle/finalize.py": "223f6771b4d4485c0cc396d3b68caf0a5c7e8b9c47564b9e270577a5e141fa04",
+    "scripts/vehicle-bake/dirt-motorcycle/fresh-replay.py": "f85fafcba9f7d7a4d5fc23d8fae419d9253e529db85ffce581bb17264eb1bba4",
+    "scripts/vehicle-bake/dirt-motorcycle/geometry.py": "b30e0fa2090e0bf320785c3a481c9be58818c83b76bf353ae2c1b932e48c286d",
+    "scripts/vehicle-bake/dirt-motorcycle/inspect-rider.py": "abe061609c93f29c43679fd54eb9fcf05e5a49e053861b18165fbd13a7ab8cad",
+    "scripts/vehicle-bake/dirt-motorcycle/prove-coverage.py": "6c01cd3d7ec6a4bb6d19c6c5ad2c5dea5a1795491c27be49fb71b0ab83f9f4ed",
+    "scripts/vehicle-bake/dirt-motorcycle/prove-fit.py": "f8a34c4a00353edfc960354d8e7ab25dd69c39ff18398374002bb43a16e35b68",
+    "scripts/vehicle-bake/dirt-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/dirt-motorcycle/raw-diagnostic.html": "82b8ab66bf5ae844a0bb280f6d211876af053182f9b7c83055dbe2ea7fb46a5b",
+    "scripts/vehicle-bake/dirt-motorcycle/raw-viewer.mjs": "bb611ac0b2eb9f6cea7987b52a88dc8256555885b821ddb545cd1d3109de0177",
+    "scripts/vehicle-bake/dirt-motorcycle/sheets.py": "816fc34743aa9a866a7cdf4eb54c79693ee030aba2191b7cfb72a769dff8edfe"
+  }
+}

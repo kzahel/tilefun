@@ -80,6 +80,22 @@ class ReplayControls(unittest.TestCase):
         self.assertEqual(proof["declaredInputPins"], 1)
         self.assertTrue(all(name.startswith("data/") for name in proof["exactOutputs"].values()))
 
+    def test_declared_root_marker_bytes_reach_constructor_unchanged(self):
+        marker = b"retained constructor marker\n"
+        (self.root / "AGENTS.md").write_bytes(marker)
+        self.source.write_text(
+            self.source.read_text() + "(p/'model.glb').write_bytes(Path('AGENTS.md').read_bytes())\n",
+            encoding="utf-8",
+        )
+        self.receipt["inputHashes"]["art-source/control/build.py"] = self.sha(self.source.read_bytes())
+        self.receipt["inputHashes"]["AGENTS.md"] = self.sha(marker)
+        self.receipt["glbSha256"] = self.sha(marker)
+        self.receipt["outputHashes"]["model.glb"] = self.sha(marker)
+        self.invoke()
+        proof = json.loads((self.root / "data/qa/parent-source-replay.json").read_text())
+        self.assertEqual(proof["declaredInputPins"], 2)
+        self.assertEqual(proof["glbSha256"], self.sha(marker))
+
     def test_stale_retained_input_rejected(self):
         self.source.write_text("raise SystemExit(0)\n", encoding="utf-8")
         with self.assertRaisesRegex(AssertionError, "Missing/stale retained input"):

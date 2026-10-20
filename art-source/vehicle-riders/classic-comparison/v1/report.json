@@ -1,0 +1,135 @@
+{
+  "agentQAOnly": true,
+  "humanApproval": false,
+  "formalHumanVerdict": null,
+  "normalActivation": false,
+  "productionQualified": false,
+  "actualBikeFitQualified": false,
+  "CarMeshAssetQualified": false,
+  "sourceChanged": false,
+  "outlineEvidence": {
+    "rider32": {
+      "rgbChangedPixels": 1336,
+      "sourceVioletPixels": 1462,
+      "sourceVioletChanged": 1336,
+      "sourceVioletToCommonInk": 1336,
+      "sourceVioletRetained": 126,
+      "otherSourceRGBChanged": 0
+    },
+    "alphaMasksIdenticalAll128Comparisons": true,
+    "visibleFixtureOcclusionMask32Identical": true,
+    "originalSourceVioletRiderCombinedRuler96RGBAPixelExact": true,
+    "projectionGeometryYawMountUnchanged": true,
+    "oneSharedRawDepthTargetForBothStrokes": true,
+    "sharedCarPixelOutlineUsedUnchanged": true,
+    "originalSourceBytesUnchanged": true
+  },
+  "eyeControl": {
+    "all32PerRevision": true,
+    "v1EyeOnlyTexelsRemoved": 776,
+    "v2EyeOnlyTexelsRemoved": 944,
+    "ignoredInMemoryTextureOnly": true,
+    "geometryAlphaAndRestoredPixelsExact": true,
+    "projectedFeatureBoundsIncludeOccludedTriangles": true,
+    "projectedRectangleHeightIsNotRasterSurvivalCount": true,
+    "frontStudyInteriorV1V2": [
+      2,
+      4
+    ],
+    "frontGameInteriorV1V2": [
+      2,
+      4
+    ]
+  },
+  "independentGeometryAudit": {
+    "unchangedOwnerCount": 18,
+    "unchangedOwners": [
+      "RiderClassic seated pelvis",
+      "RiderClassic upper arm left",
+      "RiderClassic elbow left",
+      "RiderClassic forearm left",
+      "RiderClassic gripping palm left",
+      "RiderClassic bent thigh left",
+      "RiderClassic knee left",
+      "RiderClassic short shin left",
+      "RiderClassic boot left",
+      "RiderClassic upper arm right",
+      "RiderClassic elbow right",
+      "RiderClassic forearm right",
+      "RiderClassic gripping palm right",
+      "RiderClassic bent thigh right",
+      "RiderClassic knee right",
+      "RiderClassic short shin right",
+      "RiderClassic boot right",
+      "RiderClassic tiny torso collar UV owner"
+    ],
+    "changedOwners": [
+      "RiderClassic broad face UV owner",
+      "RiderClassic pointed ear left",
+      "RiderClassic pointed ear right"
+    ],
+    "addedOwners": [
+      "RiderClassic neck collar visible skin"
+    ],
+    "removedOwners": [],
+    "profileBytesExact": true,
+    "method": "Exact unrounded component position/polygon-UV signatures, insensitive to vertex/face order and cyclic polygon start but preserving winding; actual GLB triangles independently mapped to master semantic owners."
+  },
+  "originalStanding": {
+    "sha256": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb",
+    "frontOccupiedSpan": [
+      14,
+      16
+    ],
+    "sideOccupiedSpan": [
+      10,
+      16
+    ],
+    "eyes": [
+      [
+        4,
+        7
+      ],
+      [
+        11,
+        7
+      ]
+    ],
+    "noVerifiedSeparateMouth": true,
+    "jawCollarCue": "Original row10 N band and yellow center below it, not a separately identified smile.",
+    "registration": "Unscaled16px standing frame pasted at24,19 in fixed64px crop; inferred hip row13. Pose and camera differ."
+  },
+  "limitations": [
+    "Elevated front study v2 ears do not rise above the highest visible face pixel (v1:1px). Four pink inner-ear pixels survive, but the outer head reads rounder and less pointed than the original. Game front retains2px ear rise. Root should judge this identity tradeoff.",
+    "Profile remains taller than the standing16px reference, especially game projection. Actual breadth contributes to vertical screen extent; no per-angle fit or morphology normalization was used.",
+    "Side/rear collar and far eye visibility vary with real occlusion; projected UV rectangle bounds can include hidden surfaces.",
+    "No actual-bike contact, runtime, animation, AI, fallback, all-avatar or human approval claim."
+  ],
+  "status": "complete-source-diagnostic-retention",
+  "sourceOnly": true,
+  "sourceImmutable": true,
+  "normalStatus": "deferred",
+  "actualBikeFitStatus": "held pending root visual review",
+  "v3Status": "authorized new art on runtime worker; pending; not supported by this package/CLI",
+  "sourceModels": {
+    "v1": {
+      "sha256": "9c1829fde13cf105739ba7b203873b24b2ae6d7d966c9bf66c1d15b147e4b597",
+      "triangles": 1740
+    },
+    "v2": {
+      "sha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+      "triangles": 1766
+    }
+  },
+  "assessment": "Substantial native face/collar readability improvement supported by independent eye-removal and surface-owner evidence. Remaining projection/identity differences are visible; this is not standing-silhouette parity or a human verdict.",
+  "residual": "Pointed-ear identity disappears in elevated front/nearfront despite improved face/collar; actual-bike fit held.",
+  "rootOwnsFinalVisualJudgement": true,
+  "canonicalV1V2HelperImmutable": true,
+  "futureV3ToolPolicy": "New separately named adapter/tool or ignored probe after runtime source completion; no extension to pinned v1/v2 CLI.",
+  "scopedLint": {
+    "canonicalAndRetainedCopy": "pass",
+    "historicalSnapshot": "exact executed bytes; narrow exemption pending root",
+    "evidence": "evidence/scoped-biome.json",
+    "biomeConfigEdited": false
+  }
+}

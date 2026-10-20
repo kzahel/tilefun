@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "inputHashes": {
+    "scripts/vehicle-bake/sport-motorcycle/build.py": "757416b73aec5c1307affffe523be7eba149b5602c832c0ee41e6256d702ded4",
+    "scripts/vehicle-bake/sport-motorcycle/geometry.py": "9db1e53d60d784594b38553a0dd176a3f67b49db8067e2ebaece7d49c22bb927",
+    "scripts/vehicle-bake/sport-motorcycle/family.json": "53a02e3a87d0e19a2de1ed5689845addfb6ebe5716452e7fdfc000d8011a4191",
+    "scripts/vehicle-bake/sport-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "initialFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/profiles/upright-v1.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/sport-motorcycle/build.py",
+    "scripts/vehicle-bake/sport-motorcycle/family.json",
+    "scripts/vehicle-bake/sport-motorcycle/geometry.py",
+    "scripts/vehicle-bake/sport-motorcycle/raw-audit.py"
+  ],
+  "noIgnoredMasterOrScratchDependencies": true,
+  "packedMasterNotAConstructionInput": true,
+  "riderGLBRecipeReport": "Separate immutable diagnostic inputs; constructor reads profile only",
+  "freshRoot": "data/vehicle-bake/sport-motorcycle/final-fresh-replay1",
+  "command": [
+    "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe",
+    "--background",
+    "--factory-startup",
+    "--threads",
+    "4",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "C:\\Users\\sox\\Documents\\code\\tilefun\\data\\vehicle-bake\\sport-motorcycle\\final-fresh-replay1\\scripts\\vehicle-bake\\sport-motorcycle\\build.py",
+    "--",
+    "--scratch"
+  ],
+  "invokedBuilder": "scripts/vehicle-bake/sport-motorcycle/build.py",
+  "args": [
+    "--scratch"
+  ],
+  "glbSha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+  "atlasSha256": "3538c7e7d14926a4ffb9bef798cfe6d04b0231fb7fb6533f65c15c80eece4069",
+  "recipeSha256": "ac3225d69649e8af3a6e9de6f48bb405755b46ffd630de7ca25031dab10c9f62",
+  "outputHashes": {
+    "model.glb": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+    "atlas.png": "3538c7e7d14926a4ffb9bef798cfe6d04b0231fb7fb6533f65c15c80eece4069",
+    "recipe.json": "ac3225d69649e8af3a6e9de6f48bb405755b46ffd630de7ca25031dab10c9f62"
+  },
+  "portableCommand": "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/sport-motorcycle/build.py -- --scratch",
+  "outputs": {
+    "model.glb": {
+      "sha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+      "bytes": 158224,
+      "byteExact": true
+    },
+    "atlas.png": {
+      "sha256": "3538c7e7d14926a4ffb9bef798cfe6d04b0231fb7fb6533f65c15c80eece4069",
+      "bytes": 3729,
+      "byteExact": true
+    },
+    "recipe.json": {
+      "sha256": "ac3225d69649e8af3a6e9de6f48bb405755b46ffd630de7ca25031dab10c9f62",
+      "bytes": 16022,
+      "byteExact": true
+    }
+  },
+  "sharedStaticCycleCatalogActuallyUsed": true,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "runtimeActivation": false
+}

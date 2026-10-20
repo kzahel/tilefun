@@ -1,0 +1,30 @@
+{
+  "status": "no-blocking-issues-for-source-pilot",
+  "humanApproval": false,
+  "riderSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "actualBikePresent": false,
+  "peerIdentityReview": "pending root independent v3 inspection",
+  "v2DiagnosticNotAppearanceQualified": true,
+  "inspected": [
+    "All32actual exported rider/fixture combined and32rider/32combined wires",
+    "All32actual source-violet and unchanged shared58stroke native sheets",
+    "Common-ruler original/v2unqualified/v3 front-nearfront-side comparison",
+    "Actual semantic left/right/both ear removal rendered in all32headings with raw/violet/shared masks; front-nearfront alpha-loss sheet",
+    "Actual eye-only/collar-only controls and exact32resets, desktop/mobile/network-free offline"
+  ],
+  "observations": [
+    "V3 front/nearfront silhouette has distinct pointed ears rather than v2 egg contour. Native front ear profiles have one-pixel apices widening to3pixels: study2pixels high and game4high. Actual alpha losses4/7per ear are attributable only to mapped ear triangles.",
+    "Ear shoulders broaden from v2 halfwidth.09 to.13 at base and.05 to.09 at shoulder. Shoulder height.70, tip.82source(+.09source/~1.565world), inset centers+/-.20 and short.12fore/aft ridge; this is compact triangular volume rather than a thin bunny stem or exterior contour repaint.",
+    "Actualv2 head/eyes/collar and18lowerbody owners are geometrically and UV-exact. Existing two separated interior eye landmarks and visible front/nearfront violet/yellow collar retained under both camera/stroke choices. Original seven-color atlas bytes exact. No mouth/nose invented.",
+    "Head width13.565world remains unchanged. Total seated Zheight rises from15.913to17.478world; original standing16px used at same ruler. No overall/avatar/camera scaling; some side projections remain tall because of volumetric depth, not exact sprite parity.",
+    "Pink ear interiors/forehead/cheeks read with the source-violet stroke and the shared darker vehicle stroke. Some side/rear collar cues remain hidden; no all32color-visibility claim."
+  ],
+  "appearanceBasis": "Actual native exported visual inspection plus semantic removal/alpha proof; no appearance success from palette/contact membership alone. Independent parent verdict pending.",
+  "limits": [
+    "Agent native art QA; finite feature controls do not independently award likeness. Actual sheets require visual inspection.",
+    "Some side/rear yellow collar samples remain hidden or consumed by inward stroke; front and near-front cues are proven, not universal color visibility.",
+    "2D standing and seated volumetric profiles differ under fixed projection. No per-view resize or exact sprite silhouette parity claim.",
+    "No actual bike, shared CarMeshAsset, normal availability, human approval, all27, AI or occupied fallback qualification."
+  ],
+  "priorProtectedFilesVerified": 1424
+}

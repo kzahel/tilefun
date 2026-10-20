@@ -1,0 +1,236 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "normalActivation": false,
+  "sharedCycleQualification": "pending parent actual shared loader/browser review",
+  "sharedStaticCycleCatalog": {
+    "triangles": 2256,
+    "vertices": 4244,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 158224,
+    "sha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "CarMeshAssetUsed": false,
+  "rawGLTFDiagnostic": true,
+  "artReviewStatus": "agent-QA; parent independent review pending; no formal human approval",
+  "family": "sport-motorcycle",
+  "route": "sport-motorcycle",
+  "revision": "v1",
+  "method": "Original angular fully faired sport motorcycle, swept blue windscreen/nose, full side fairings, compact upswept tail and wide rear tire. Actual surface UV graphic red/black/white paint, true F/R wheels and unchanged Explorer upright profile source pilot.",
+  "geometry": {
+    "triangles": 2256,
+    "vertices": 4244,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 158224,
+    "sha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "F",
+      "centerBlender": [
+        -1.1200000047683716,
+        0.0,
+        0.41999998688697815
+      ],
+      "centerExport": [
+        -19.47826095249342,
+        7.304347598034404,
+        -0.0
+      ],
+      "radiusBlender": 0.42,
+      "wheel_radius": 7.304347826086957
+    },
+    {
+      "id": "R",
+      "centerBlender": [
+        1.1200000047683716,
+        0.0,
+        0.41999998688697815
+      ],
+      "centerExport": [
+        19.47826095249342,
+        7.304347598034404,
+        -0.0
+      ],
+      "radiusBlender": 0.42,
+      "wheel_radius": 7.304347826086957
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/sport-motorcycle/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/sport-motorcycle/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/sport-motorcycle/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "sourceImmutable": true,
+  "sourcePilot": true,
+  "productionQualified": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "riderComposition": {
+    "immutable": true,
+    "mountSource": [
+      0,
+      0,
+      1.1
+    ],
+    "contacts": 5,
+    "combinedTriangles": 4212,
+    "combinedDraws": 4,
+    "combinedAtlases": 2
+  },
+  "actualBounds": {
+    "minWorld": [
+      -27.247356414794922,
+      -5.3913044929504395,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      26.782608032226562,
+      5.3913044929504395,
+      26.608694076538086
+    ],
+    "spanSource": [
+      3.106722955703735,
+      0.6200000166893005,
+      1.5299998819828031
+    ],
+    "centeredHorizontalCeilWorld": [
+      55,
+      11
+    ],
+    "noRescaleRecenter": true
+  },
+  "combinedBounds": {
+    "minWorld": [
+      -27.247356414794922,
+      -6.08550500869751,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      26.782608032226562,
+      6.08550500869751,
+      35.91304016113281
+    ],
+    "spanSource": [
+      3.106722955703735,
+      0.6998330760002135,
+      2.064999781847
+    ]
+  },
+  "sourceQA": {
+    "exactFreshReplay": true,
+    "packedSourceAudit": true,
+    "allTriangleUVMatches": 2256,
+    "wholeBikeRiderRoll": true,
+    "twoCollisionNegativeResets": true,
+    "displacedRiderNegativeReset": true,
+    "fenderCoverageEach": 25,
+    "actual32HeadingsEach": [
+      "bike",
+      "rider",
+      "combined"
+    ],
+    "hiddenRider32Exact": true,
+    "depthMasks": true,
+    "paddingDensity32Exact": true,
+    "standardCardinalPlacementExact": true,
+    "desktopMobileOffline": true,
+    "scopedChecks": true
+  },
+  "sourceInputHashes": {
+    "scripts/vehicle-bake/sport-motorcycle/build.py": "757416b73aec5c1307affffe523be7eba149b5602c832c0ee41e6256d702ded4",
+    "scripts/vehicle-bake/sport-motorcycle/geometry.py": "9db1e53d60d784594b38553a0dd176a3f67b49db8067e2ebaece7d49c22bb927",
+    "scripts/vehicle-bake/sport-motorcycle/family.json": "53a02e3a87d0e19a2de1ed5689845addfb6ebe5716452e7fdfc000d8011a4191",
+    "scripts/vehicle-bake/sport-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "limitations": [
+    "Source pilot only. Actual shared CarMeshAsset loader/browser review remains pending parent",
+    "Only immutable Explorer upright/profile measured and fitted; no all-avatar rider identity/AI or occupied fallback qualification",
+    "Neutral steering; no suspension, rider pose animation or normal activation claim",
+    "Raw GLTF viewer reuses shared camera and outline math, not a copied/forked engine loader",
+    "Editable runtime-topology component master; no high-to-low decimation claim"
+  ]
+}

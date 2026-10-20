@@ -1,0 +1,3103 @@
+{
+  "status": "passed",
+  "auditKind": "static-hash-declaration",
+  "auditorSha256": "c800a704af6f3a0ffb3554f9188a19597406eec5c99dab38af1c2ef6c633ebf0",
+  "receipt": "art-source/vehicle-riders/classic-upright/v2/evidence/replay-verification.json",
+  "receiptSha256": "9fd9f258fe0d90442041b4caf6c5e7b6608c080c16569ca6e881f6f116651a74",
+  "retained": "art-source/vehicle-riders/classic-upright/v2",
+  "public": "public/demos/vehicle-riders/classic-upright/v2",
+  "inputRoot": null,
+  "explicitModelName": "rider.glb",
+  "declaredInputPins": 4,
+  "auditedReceiptPinMaps": [
+    "inputHashes",
+    "sharedInputHashes"
+  ],
+  "supplementalReceiptHashMapsNotAudited": [],
+  "inputs": [
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/build.py",
+      "sha256": "2ae5ce89ae3f287c76f671c96052ea4b2ba8f2db5b75ca778ad2cfea675ae5fb",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/rider.json",
+      "sha256": "f7ea4250d40a5b026a031ea908aa1cccb6a25a9c7ec35f9f924d3535428959f8",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/identity.json",
+      "sha256": "bd6fe837c1138be80a49d9c677627168da3a4d002d4db59002fa7ee6b5f36317",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/classic-upright-v1.json",
+      "sha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+      "resolution": "current"
+    }
+  ],
+  "normalizedOutputs": {
+    "rider.glb": {
+      "sha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192"
+    },
+    "atlas.png": {
+      "sha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252"
+    },
+    "recipe.json": {
+      "sha256": "59154d224c73de6ed6130be7bea55e2b7db364303b6a151928c2b8f32dc4f477"
+    }
+  },
+  "checkedOutputs": [
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-riders/classic-upright/v2/rider.glb",
+      "sha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+      "bytes": 143668
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-riders/classic-upright/v2/atlas.png",
+      "sha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+      "bytes": 1176
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-riders/classic-upright/v2/recipe.json",
+      "sha256": "59154d224c73de6ed6130be7bea55e2b7db364303b6a151928c2b8f32dc4f477",
+      "bytes": 17934
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-riders/classic-upright/v2/rider.glb",
+      "sha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+      "bytes": 143668
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-riders/classic-upright/v2/atlas.png",
+      "sha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+      "bytes": 1176
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-riders/classic-upright/v2/recipe.json",
+      "sha256": "59154d224c73de6ed6130be7bea55e2b7db364303b6a151928c2b8f32dc4f477",
+      "bytes": 17934
+    }
+  ],
+  "retainedFilePins": 599,
+  "retainedFilesSha256": "31b932329a9b368c639bb9c17524172c5a5d2926cc6bd6862b49f29359187317",
+  "retainedFiles": [
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/build-view.mjs",
+      "sha256": "3628288caab43cbb9eacf2290869b027e104aec1a37bf0218a7f10b7a309a22a",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/build.py",
+      "sha256": "2ae5ce89ae3f287c76f671c96052ea4b2ba8f2db5b75ca778ad2cfea675ae5fb",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/capture.mjs",
+      "sha256": "6a580d27d54d0c660ac81e5a31ee40c850360e0e47566a1bf9667cb75b2a852d",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/classic-upright-v1.json",
+      "sha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/compare-v1.py",
+      "sha256": "cc59127d0e155703eba91bf7c7151836ec859c2ec2b655a4bab6f381f17b6686",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/eye-control.mjs",
+      "sha256": "60c19a99711cb8dc1d0914010236b71ec72b99da2b15b7741fbcb54b90e1d25f",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/finalize.py",
+      "sha256": "d6e9ed547a72f62b122ef9b49d4e018e1fd126730a5f159b096c5089cf327930",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/fixture.py",
+      "sha256": "cd773f68a4baef7323f00cf2048829d81db4dd3143d8c42f92ba91e50e0e24c9",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/identity-inspect.py",
+      "sha256": "fe5fcd81bd37aa4b7e6f65e4eb17d4d9e613896abcee50bfece24c61bc595f08",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/identity.json",
+      "sha256": "bd6fe837c1138be80a49d9c677627168da3a4d002d4db59002fa7ee6b5f36317",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/index.html",
+      "sha256": "0b870e54ce010d3343f2e7ee9a2e4e93cc1e6a27813f4d2881cba9138a9eaa5b",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/inspect.py",
+      "sha256": "6f96392e7e88bdf40a3b20f4b854a8bfeda29d594c4c9d79661a06296f4c08b7",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/native-features.py",
+      "sha256": "d2a91819c7b4d3dfb75e5d6182ddd70c38cfc5015ee45dd08d31f29ee9e25e98",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/outline.ts",
+      "sha256": "5a2b8dcbbd643ac28e2bba5260b31c6911aadf9a7b403a69a1841375c36ca559",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/prove.py",
+      "sha256": "d708e027b5922af530c7f206a851a76855d22bdc7def75ceac75d342422a6bbf",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/README.md",
+      "sha256": "ca234060982e7cdeaff4bbb9d381c984975bd3d0bffff1d42d1048363a395815",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/replay.py",
+      "sha256": "f02796750f281d2185b990adb8a086028fa1a939ca3f240225c42c9183955862",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/rider.json",
+      "sha256": "f7ea4250d40a5b026a031ea908aa1cccb6a25a9c7ec35f9f924d3535428959f8",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-riders/classic-upright-v2/viewer.mjs",
+      "sha256": "5fad029304e90c47901eb6093e7e695f65bab0bb01389f8a189ed51302b23c77",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/atlas.png",
+      "sha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/build-view.mjs",
+      "sha256": "3628288caab43cbb9eacf2290869b027e104aec1a37bf0218a7f10b7a309a22a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/build.py",
+      "sha256": "2ae5ce89ae3f287c76f671c96052ea4b2ba8f2db5b75ca778ad2cfea675ae5fb",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/capture.mjs",
+      "sha256": "6a580d27d54d0c660ac81e5a31ee40c850360e0e47566a1bf9667cb75b2a852d",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/classic-upright-v1.json",
+      "sha256": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/common-world-ruler.png",
+      "sha256": "62e6542544c19eec30d1b5483028e06a5d655fbb3fed9f5ae69a8c0a39512296",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/compare-v1.py",
+      "sha256": "cc59127d0e155703eba91bf7c7151836ec859c2ec2b655a4bab6f381f17b6686",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/desktop.png",
+      "sha256": "8b20cfb03669f188f5a2d64a7592a130a733fad6a75ba3b272fe84e4a2e9839d",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/eye-collar-removal-comparison.png",
+      "sha256": "b710fd4c137771a042a067cc35b98c0a8f460f273f9807453a1fa7e2be69bbe1",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/eye-control.mjs",
+      "sha256": "60c19a99711cb8dc1d0914010236b71ec72b99da2b15b7741fbcb54b90e1d25f",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/features-engine-raw.png",
+      "sha256": "e08b359ecb82f59590f5432c3fe8b0f9ff5be5ed68650208b5041e25e07b0758",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/features-engine-shared.png",
+      "sha256": "865eadea8c74cf61ff95b6538444f383cc5143a76adc749444a8b01ab2c536d0",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/features-engine-violet.png",
+      "sha256": "27d6a96f80682de60d82cea17449728664aece74fafcd482285e6a05a9aeee9c",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/features-study-raw.png",
+      "sha256": "30e23e027e4e1cf93057fe55d38d83661ab28650e860f9299e6eb923141d9c04",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/features-study-shared.png",
+      "sha256": "d31f1473253c929cdaf073293ccbbf3cee9fe12fd98b226b17ff4840290e3a0c",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/features-study-violet.png",
+      "sha256": "7da80e7ac6b58e400c8d121ba319405618a4af4ec491d543fe7daef311d071a8",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/finalize.py",
+      "sha256": "d6e9ed547a72f62b122ef9b49d4e018e1fd126730a5f159b096c5089cf327930",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/fixture.py",
+      "sha256": "cd773f68a4baef7323f00cf2048829d81db4dd3143d8c42f92ba91e50e0e24c9",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/identity-comparison.png",
+      "sha256": "232eaef8053f7fa0f6fe1aa57d526a176f298f30a2bd4aab4dfa7fc820c32f80",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/identity-inspect.py",
+      "sha256": "fe5fcd81bd37aa4b7e6f65e4eb17d4d9e613896abcee50bfece24c61bc595f08",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/identity.json",
+      "sha256": "bd6fe837c1138be80a49d9c677627168da3a4d002d4db59002fa7ee6b5f36317",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/index.html",
+      "sha256": "0b870e54ce010d3343f2e7ee9a2e4e93cc1e6a27813f4d2881cba9138a9eaa5b",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspect.py",
+      "sha256": "6f96392e7e88bdf40a3b20f4b854a8bfeda29d594c4c9d79661a06296f4c08b7",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspection-combined-engine.png",
+      "sha256": "9aa5eb4d4ecbe0f68d6a10570db2add3bf9010cfcf2bdb5f462656a641211c8d",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspection-combined-study.png",
+      "sha256": "bb0b3d330ac062bc5c0505730d4c81287d67fda63adeb11bdb8b4a4f770499a9",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspection-rider-engine.png",
+      "sha256": "aaf50cdc789fd1281141b15dfd582fea540e17b8929b7d5d582a6aff2686d8e7",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspection-rider-study.png",
+      "sha256": "ba5ac2df8ae7f88f269f66c8acf25b8dd68cd458e8a6a4b77bb0f7beff697891",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspection-wire-combined-engine.png",
+      "sha256": "27e0f2b71b9bed9c5cc494131f458b66f1ec419d5f82caa1445966e991341a22",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspection-wire-combined-study.png",
+      "sha256": "86d67517004c7f9a0279befe1c460f696c740d6ba4805d3bc6e5af9fc807a36e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspection-wire-rider-engine.png",
+      "sha256": "f7f50ab2a002abfaa0cc3947dcfa8caf4068553eda0c9439e9434856fead0d84",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/inspection-wire-rider-study.png",
+      "sha256": "b350f9e61755dbdf632dfbb8d312e7f6019f0b6676eaa719610782cd7c264394",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/low.blend",
+      "sha256": "4de551526146697cf6c968e4667c4ba5921875c6671c101ffc5f6aabe3253abf",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/master.blend",
+      "sha256": "36212343c1220f232c558a5f9e22362e6a43fdd4ebda80d68e311deb174fe083",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/mobile.png",
+      "sha256": "612fbdf1b0dacb2f0d745c8e272dd4a8a0829382f9350078311b4d3a9fb68289",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/native-features.py",
+      "sha256": "d2a91819c7b4d3dfb75e5d6182ddd70c38cfc5015ee45dd08d31f29ee9e25e98",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/offline.html",
+      "sha256": "f1f0408b0e104f59a7d154341f4b1969106d56d80617bb142c2190edd8f1798b",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/original-standing-reference.png",
+      "sha256": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/outline.ts",
+      "sha256": "5a2b8dcbbd643ac28e2bba5260b31c6911aadf9a7b403a69a1841375c36ca559",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/prove.py",
+      "sha256": "d708e027b5922af530c7f206a851a76855d22bdc7def75ceac75d342422a6bbf",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/README.md",
+      "sha256": "ca234060982e7cdeaff4bbb9d381c984975bd3d0bffff1d42d1048363a395815",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/recipe.json",
+      "sha256": "59154d224c73de6ed6130be7bea55e2b7db364303b6a151928c2b8f32dc4f477",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/replay.py",
+      "sha256": "f02796750f281d2185b990adb8a086028fa1a939ca3f240225c42c9183955862",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/report.json",
+      "sha256": "0e0f65eea1f0261a93c57cb643987bf30ac3cb8a215c4c55c563a418f8fc07b5",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/rider.glb",
+      "sha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/rider.json",
+      "sha256": "f7ea4250d40a5b026a031ea908aa1cccb6a25a9c7ec35f9f924d3535428959f8",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/v1-failed-control-v2-identity.png",
+      "sha256": "9cb0066c47b4d19a76250c8a7c71c9b8bb0df5e17ff2b7193b3cca81426de735",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/viewer.mjs",
+      "sha256": "5fad029304e90c47901eb6093e7e695f65bab0bb01389f8a189ed51302b23c77",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/capture.json",
+      "sha256": "e68dd09d6033c72ed1b5f01b78980328d822a66c2cc9ae110346516908a436e7",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/contact-proof.json",
+      "sha256": "00bb94301c2f562d3b89f22c6e8fe454f458d8399611d7d090167cdeff6e2e3e",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/diagnostic-build-pins.json",
+      "sha256": "d7f17272b2a68a942bdb185956abf14b99d15f08b40a9d3d5d2a22e75f53ece7",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/diagnostic-inputs.json",
+      "sha256": "2e2c776927abc80ce92614045e2af1bf14c70f0d7d8c6b1b2107688f6819da02",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/eye-collar-controls.json",
+      "sha256": "c1489c16ebff8dd2431ca978a67610c2026dd3ed5da4917d04d3dc7cb361768f",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/fixture-recipe.json",
+      "sha256": "bd2d0a9beb5c2a80da3a9af9aaec4b86f97ae84c11153bdfdfed63f76c2e0ce5",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/identity-inspection.json",
+      "sha256": "8f3559dc6232eddf56c577f74d6672eb2384c1bd9bf216a7f644930f4607b8b7",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/native-feature-proof.json",
+      "sha256": "9257c1818058fb71f9eb7d19e21ed2d725fe53c13d2ab04776df9b075d58fbe8",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/replay-verification.json",
+      "sha256": "9fd9f258fe0d90442041b4caf6c5e7b6608c080c16569ca6e881f6f116651a74",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/v1-geometry-comparison.json",
+      "sha256": "e12a21f7b30b07b45c52c92b51d447a2b96259ada77b35b70cc24e38b9636345",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/classic-upright/v2/evidence/visual-inspection.json",
+      "sha256": "57f68330bcd7d9f2aca136d2099de508c84d854684ebfd01d44fa0ff2f9f05fb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/atlas.png",
+      "sha256": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/common-world-ruler.png",
+      "sha256": "62e6542544c19eec30d1b5483028e06a5d655fbb3fed9f5ae69a8c0a39512296",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/desktop.png",
+      "sha256": "8b20cfb03669f188f5a2d64a7592a130a733fad6a75ba3b272fe84e4a2e9839d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/eye-collar-removal-comparison.png",
+      "sha256": "b710fd4c137771a042a067cc35b98c0a8f460f273f9807453a1fa7e2be69bbe1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/features-engine-raw.png",
+      "sha256": "e08b359ecb82f59590f5432c3fe8b0f9ff5be5ed68650208b5041e25e07b0758",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/features-engine-shared.png",
+      "sha256": "865eadea8c74cf61ff95b6538444f383cc5143a76adc749444a8b01ab2c536d0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/features-engine-violet.png",
+      "sha256": "27d6a96f80682de60d82cea17449728664aece74fafcd482285e6a05a9aeee9c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/features-study-raw.png",
+      "sha256": "30e23e027e4e1cf93057fe55d38d83661ab28650e860f9299e6eb923141d9c04",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/features-study-shared.png",
+      "sha256": "d31f1473253c929cdaf073293ccbbf3cee9fe12fd98b226b17ff4840290e3a0c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/features-study-violet.png",
+      "sha256": "7da80e7ac6b58e400c8d121ba319405618a4af4ec491d543fe7daef311d071a8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/identity-comparison.png",
+      "sha256": "232eaef8053f7fa0f6fe1aa57d526a176f298f30a2bd4aab4dfa7fc820c32f80",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/inspection-combined-engine.png",
+      "sha256": "9aa5eb4d4ecbe0f68d6a10570db2add3bf9010cfcf2bdb5f462656a641211c8d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/inspection-combined-study.png",
+      "sha256": "bb0b3d330ac062bc5c0505730d4c81287d67fda63adeb11bdb8b4a4f770499a9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/inspection-rider-engine.png",
+      "sha256": "aaf50cdc789fd1281141b15dfd582fea540e17b8929b7d5d582a6aff2686d8e7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/inspection-rider-study.png",
+      "sha256": "ba5ac2df8ae7f88f269f66c8acf25b8dd68cd458e8a6a4b77bb0f7beff697891",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/inspection-wire-combined-engine.png",
+      "sha256": "27e0f2b71b9bed9c5cc494131f458b66f1ec419d5f82caa1445966e991341a22",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/inspection-wire-combined-study.png",
+      "sha256": "86d67517004c7f9a0279befe1c460f696c740d6ba4805d3bc6e5af9fc807a36e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/inspection-wire-rider-engine.png",
+      "sha256": "f7f50ab2a002abfaa0cc3947dcfa8caf4068553eda0c9439e9434856fead0d84",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/inspection-wire-rider-study.png",
+      "sha256": "b350f9e61755dbdf632dfbb8d312e7f6019f0b6676eaa719610782cd7c264394",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/mobile.png",
+      "sha256": "612fbdf1b0dacb2f0d745c8e272dd4a8a0829382f9350078311b4d3a9fb68289",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/offline.html",
+      "sha256": "f1f0408b0e104f59a7d154341f4b1969106d56d80617bb142c2190edd8f1798b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/original-standing-reference.png",
+      "sha256": "dda41fa03aca9b432c6bc55f23ad1a80c326529256c08d3585ca788a8a89accb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/recipe.json",
+      "sha256": "59154d224c73de6ed6130be7bea55e2b7db364303b6a151928c2b8f32dc4f477",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/report.json",
+      "sha256": "0e0f65eea1f0261a93c57cb643987bf30ac3cb8a215c4c55c563a418f8fc07b5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/rider.glb",
+      "sha256": "45aa6801f0e19f7e9da31e651a60c3751ca683c457a9d82ca423a262412e8192",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/v1-failed-control-v2-identity.png",
+      "sha256": "9cb0066c47b4d19a76250c8a7c71c9b8bb0df5e17ff2b7193b3cca81426de735",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-0.png",
+      "sha256": "24a25518232735b4252514050030c7e8f28bde908e716248ff4b7fa395471f01",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-1.png",
+      "sha256": "942e0f60f3bb0da5c1f75bd364679f6e10544b1d8cfae9acc28f6c4bcd63bc0e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-10.png",
+      "sha256": "c668720542b1b8bfe25bbd9edda90d484c5dcf0e6b8d5c9e026bce472709d894",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-11.png",
+      "sha256": "d0f6907f6db1b64983d65dc495ac7b273e5453b2c62197bcf1d52e09f98af8bd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-12.png",
+      "sha256": "f5d1c903972d3f2f0ab51dc7d3459e63dd987934620b671ca069df5352e69fbf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-13.png",
+      "sha256": "d26a355711c06ba4122a453ee92bd1fa64ed14f2a4c1854ed26e1b3a6fc04afa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-14.png",
+      "sha256": "863071151e16271f9dc11b1b4833adae346b7a9d7a6253133add80bae849c4bf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-15.png",
+      "sha256": "a25ca72cf5d26b4573f1d1fbfb208dbf84dde6151337944411160196d9753fbe",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-2.png",
+      "sha256": "fa5fa75cf411b62918e1833e3441cb6e425bc05802fb21659e96fefa4f9de489",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-3.png",
+      "sha256": "b006bf6554ca928c2770e6adfe269b1531bba04ff3f98991f397e58dba6b917c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-4.png",
+      "sha256": "3f14ca6db761b036c142a7fea770600dca93dc0c02c1eb7d896fd9fdb1d12409",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-5.png",
+      "sha256": "6ac0f10f3996138758ff110caf3bac31fad9a76cc442af0166f24a15ff6c1f9a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-6.png",
+      "sha256": "d43552a110b30af247400b0e08f8eead3067a7359a474c18e79b16d473884ffb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-7.png",
+      "sha256": "a647c8fc89bdbe8aab97fa1924610a11224c08261db4ea8bcd871181e649166c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-8.png",
+      "sha256": "9cfc8ad5fcdf3ce065b9a7271ea8617d6ee15d6dafee6fcbd1d636aab1d70529",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-engine-9.png",
+      "sha256": "c41d8b2c57b7054103d7312da0635dac17bc3de11faecf038d60b6a94502ddd9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-0.png",
+      "sha256": "bf8cc0a60a085a3a6e9019cdf616f58fde97cdddc2a8dd4fd29c7c514a72fb1c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-1.png",
+      "sha256": "470ba4afc4a27759e357517278dfa29e377b5bab842bba9af6175c793e5f2553",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-10.png",
+      "sha256": "e609a369b0fffcb720ee8db656767613c9424568463c10d5abf6851bf7476743",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-11.png",
+      "sha256": "7efce92de3d31a57835b6d538b70c7bff086fff19c8c44b531716dbf0f6b7a3a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-12.png",
+      "sha256": "cefdfa7bf87144da882a4561252d37e0e83255564f16ccea498012a495e6ef63",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-13.png",
+      "sha256": "9f0e3d32773ca26fed2999159559be32ad14831f89ffd7622da349a7b5fbaf50",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-14.png",
+      "sha256": "1fe93235764d29306851476ecdf41a9cb1c7a356814b60989c395b95cc058c9a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-15.png",
+      "sha256": "90ecf5e02b3a2e9b7b807450e1aa8e1f7c8d5034c34981b4604c619e482f18a4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-2.png",
+      "sha256": "13fd2dc2d405d5ec081d631c6370e0649656091e98308f5f49e567cb03b9c643",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-3.png",
+      "sha256": "2e78690eceb9838d27b8c219a5f5e2a789fc6ec8d7a01024a1e83da413d79926",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-4.png",
+      "sha256": "2cfb5134af9841284227e73e828db4eec944dec8cdd377260130ca1b5c4c8d82",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-5.png",
+      "sha256": "0a9a2abf1f09150885a6d2bb0daa88e4386e0549bdf70a637b4539a0111bd3d8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-6.png",
+      "sha256": "39cfb06c7e1349c9f57cf883c31be1463efc1ab1b336aaf433f529ec0eb45c27",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-7.png",
+      "sha256": "2f016dabc143dae1a34e59bbcec587a9fcc9ec69c2de7f0b0f8d9bef4efcbafa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-8.png",
+      "sha256": "8849cafa870d60cf41b03bc02a3e257a6f993902993a8d6fc1f34374429e8532",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/bare-study-9.png",
+      "sha256": "e21f796b0102c58ae68967663577d56dfa32c0fa9abb7e6cedab9bbe2d0e2f06",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-0.png",
+      "sha256": "b66dd50c61d02f763a65224d3a84805a132a8b4d72a3067630d4e2ed79c8e2e8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-1.png",
+      "sha256": "49106d434683813d141003fe596d08faa890cbdc1c102a7bba7e27cb3e5f18d7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-10.png",
+      "sha256": "a65a695cdb4859cd2473967f9801c864d676e2acc2829d7986d7c3df62a7c4f5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-11.png",
+      "sha256": "89aef1c4ef195d6d0e910a51f73efc95037b1f5db53dceaf1fdd6c0dc1b70f2e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-12.png",
+      "sha256": "1dbbc7850ac15a35de5652851d16e87fb5637fab30eeb111615c8bd079f204c6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-13.png",
+      "sha256": "ac30ea0bd8c8be441cd2ca7c1ab13e7d94cc65da731270cc83c5f4a0c6d944e7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-14.png",
+      "sha256": "f5c417d66a0cbf88fcb9f40f44f97106c91427cc427ce0a569ade3e0720d5363",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-15.png",
+      "sha256": "03ffd492bbdbca3994a8a065ef56f31c213273d419da616dc7249a8700341cb2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-2.png",
+      "sha256": "2126ce81c2a40830485008ccd13b965ca4802fa83219e60f4f6954b9f6f9ea6c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-3.png",
+      "sha256": "525372bb14606c3f166c85bd92b323579416e3cbed0f0fe0050c995e29f84200",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-4.png",
+      "sha256": "06a1dc3a847cde113b883aed3ac5ffa6218fc4da521978fb39bb8d4f2c221cad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-5.png",
+      "sha256": "cd166f5b4a0ee6c76d34485910830e1badb75130cb95b329d8dba2e8971e478a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-6.png",
+      "sha256": "50fc15b9fbd5863b544e098653694ebea8c02f6f919f6db6f2cf5a7081a3bc0e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-7.png",
+      "sha256": "3c63af3d6b8ea9281e710ccb62bdadcf7a6b9efe3ffc705420c92f0874ff0f61",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-8.png",
+      "sha256": "9a0cef5ecac384667797041b67033f46ca05fe110953f2c90aa062382e999e55",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-engine-9.png",
+      "sha256": "e6336f24cd5d5e91665a12f71ee80823b197206f15d1673cf9aa3ec5bebe1d35",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-0.png",
+      "sha256": "9852c1cf2de677364cc7ed3fc9ce3d8f01f0c1c87ca7d88870c0b4559ce38f46",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-1.png",
+      "sha256": "67ae00e96ddada503233aaf354e9a741ffbead25b3681682b31d94615e400b21",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-10.png",
+      "sha256": "43d168ec925d03efdee2e6215989aeacc677a55d77cc81c5dd87ace7e5fdf7da",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-11.png",
+      "sha256": "b6c42e6d6844b769ec194e141df08b527279d6abe1253bde8a8883e9a49e3dd2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-12.png",
+      "sha256": "5077f7c81b24e5e85dff9e5e03de49a9791703f6099f8d5bf0a6b2cb3fd13b0d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-13.png",
+      "sha256": "82e9df1e6b237da225ab2b517cc7299aa1bbf5f383631f6c3104c047cc43d37a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-14.png",
+      "sha256": "c4e1be307d75b9053fdf7f0f8743734d478809646b6944abee12afc3312c2827",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-15.png",
+      "sha256": "383c3a1109738af812eb1f9badf751752449e0bed17dc498ededc241456fb52e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-2.png",
+      "sha256": "6f476eb3c4ee8ab1eb70f8d668b34e91f00202ad5ce89ea9693f5f88adac881c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-3.png",
+      "sha256": "14ee5cb513d4827e43d1f4f8458ff38f765a920f316e761e63f8819566cd08bd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-4.png",
+      "sha256": "92efb8e14f0f8f9685a715eb88644924ed90cb9561f07fd1c978eebb387dcd89",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-5.png",
+      "sha256": "d6c410b062e8d7b067f73ded8c3f176afa516290325ce368262d7c66ce34c787",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-6.png",
+      "sha256": "fba9885ff9374eb45020fa7e8ea693ffedc1cf96f95a7d42c1e95aa052b07124",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-7.png",
+      "sha256": "51f05d5aa89021b9802c4a7248539ffecdac2dc0d197069ecaf49c8d7d0567d6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-8.png",
+      "sha256": "3b3c05900c7ff5095cc53b4f89b38d1d90473987f2dac5778af5a2248f90689d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/combined-study-9.png",
+      "sha256": "43d7a6fa47718023022dc0ccbbedae3e4ca4ab49d3229848b5ae047b04dff006",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-0.png",
+      "sha256": "403fde62e9652da636419816e13e7192d3f48635d324f95147c55f0a60a18db8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-1.png",
+      "sha256": "3795333cb5c259fa7f4674815a2676b43b0984f1a3e6e272d9972558b0e98bad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-10.png",
+      "sha256": "179644cb270a0b0b5b019daf974ca769888222133f1d1a2795038893a5647163",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-11.png",
+      "sha256": "d7c5c5ade11f746bad6e873643065ad682f91bc61fc27273dbffbff96df4b48e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-12.png",
+      "sha256": "19ada71a785594c3683218f0539348e6b38cea99ff959f5ac6ab3d4b07400dc0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-13.png",
+      "sha256": "a2279af8f1e20b03fa5185dae0de0269df0836c731dd885a179c33ab2eddc714",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-14.png",
+      "sha256": "d8a1eff6f55558c6cfb1a5cafdc8b34eff48acac1766e7959a8c3cc8e516ff4c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-15.png",
+      "sha256": "9d7d6a1fdc9148c1393320d795658e7bd44ab52eebc44e3d41dfb1919fa71d44",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-2.png",
+      "sha256": "2af82398737b4a899b0d7518bcfd1a1691ab4f6cfd06dd84376aded3347a0511",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-3.png",
+      "sha256": "def6c7950a120143d88210852c51ad3560040627f4bb0a72b7e812eb782ad0ee",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-4.png",
+      "sha256": "9f34a5663f8d9afd6d694b965a0ae474c8490ade442bb172145d984d0b920bda",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-5.png",
+      "sha256": "f2a7dc2cb4c57faeda4cdd86cb10dcea0e78bcff2d96c535f8db486f6ce464f2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-6.png",
+      "sha256": "5b07c3dfe9847bd8707e6f9e1c74248573c73156884355f03d2256fc85a7179c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-7.png",
+      "sha256": "a78305582df317e85b477fddafda8ae5cc78e7b2ce2b4fb5d203ad790b2951aa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-8.png",
+      "sha256": "ab66c03b7336799367767b4afc7135216b587f9cd81c955a0c2e51cfad9845dc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-engine-9.png",
+      "sha256": "6bcd7ff47f504e1d4260637b662bb1d87258f5f73798e3e5864c54c31979e520",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-0.png",
+      "sha256": "0dc4e415e3e822bda2fb2013e7ae37111a440f90187aeaf5cd51a8ceac8be1be",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-1.png",
+      "sha256": "c75d1687526b0f2b245bfa9ad0f55568b06893708ea162e54f95e6a26cd17d40",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-10.png",
+      "sha256": "01296d33e51ac4c797d59005fcbe40215b5b8b51c7810e70cc2f892c5328d54b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-11.png",
+      "sha256": "ce6a50628af88358c960c65e0f1c6552545568130456e6f7d98246c181f76c97",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-12.png",
+      "sha256": "5e6b7f886bc106111859394be3b3b806ea023c18aedbb33bc296174ccfc5ac2d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-13.png",
+      "sha256": "cd77cac7d46271e3a0d8a964a440adcaf0494fe7b6ef5536a6e1aff5c215a8a6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-14.png",
+      "sha256": "695a66fa322adda83efd0c31c9f9ba21761a8aa52426ac3fc5a16cc3b4366c5c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-15.png",
+      "sha256": "8a529e703d268307f6006538f365752daba7ecde68e6d94d5bec3abc62cf079f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-2.png",
+      "sha256": "7fb9bb32ecde72c89d4215452827ee781d687e164b2f42a1f79cf872dadde276",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-3.png",
+      "sha256": "b7e59e3a8ea033afdbbad0ab4aad15feee085c2f39c0bb5ff5ba69b64d6858d3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-4.png",
+      "sha256": "58fb1879c187eff164b058e15df4f55d30439180a32a3712c4006e4eda345537",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-5.png",
+      "sha256": "8a32acb54f12def8ef28db6dec963705fb5b729c5aa39c2ac98fd96741d36cad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-6.png",
+      "sha256": "39511888df7273960a60d3a401a5ae98a0dfe098e185f5274a483a166b665475",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-7.png",
+      "sha256": "eb488693f3010033690f6082fa75099a6380860549a0681c9c1085cfd8013ec7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-8.png",
+      "sha256": "d5f24e861687cb89efbff0b4e2a55c55fe61dff3824497c43cb9c2c78abc964c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/rider-study-9.png",
+      "sha256": "d9c2d4879281a84f2a7407994f71ccebe8b7f949c8fb1ac4fe2bcd33d05688f7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-0.png",
+      "sha256": "e2304941f822606af3473e8861fd378faf9823e8be8dd867238723c4cde23bdf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-1.png",
+      "sha256": "f86c98d4ba829ccc1ecba40dc5170c459130fc3a9155ac4182f87db75ee64c81",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-10.png",
+      "sha256": "b7529019d74fcd166eb83499b5681c6f92f22cc8abaf2ace73d7b4ec2af48450",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-11.png",
+      "sha256": "28d593e8acb70830207958dc0f6abcba74dde691586c0de324278a602b463b1e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-12.png",
+      "sha256": "4c3c610d52119fb36d15daf8cc5373591900aba8e8987c4fa40f0a7f8454b98d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-13.png",
+      "sha256": "86b70dfda6ae6923b12a191759bfee09ae4ff5acfa8ae4ebebc5ae5c46aed0c3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-14.png",
+      "sha256": "05bdab5f3b3e7fec4c2ac045742f25a73dfcf1102916f16f5863654dc0001103",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-15.png",
+      "sha256": "9caa1ca1a6c3e12cec4becef8a722c693c8a14459ea92544ca040b056346b17c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-2.png",
+      "sha256": "9e550fc5c362ee5bb4c3fa5a5d66f42ae51272758a75e0998c248bf9ab0cdfb0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-3.png",
+      "sha256": "12ba6b5f432634e25607cbc1335d1eabad05cbb27cfdd2db6b33d04a44e01983",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-4.png",
+      "sha256": "44664acc49106f54139a18c74876161ceb17d9bff9ca9bf7796b8386e57b2af8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-5.png",
+      "sha256": "db0fc45a472ed59b05d2e1be95198b1ad7e60c58435673c298fd1871fd8de1a3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-6.png",
+      "sha256": "31c439a827299a7734b45406e8e4cb6f8b88a44368b283b2616a3912098dc33b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-7.png",
+      "sha256": "b46da1f7c20d64ce6e10f7a531fd845625d94f75a73264bd8872d24a24db79b5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-8.png",
+      "sha256": "ec0d61ed8ae59432895585dff328a98f26d04c8c4236842cd69baf3bdfff22b3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-engine-9.png",
+      "sha256": "e92eb5455ef6a904bff0f5189b3808f2a47f4159d148a5c0a5608ac96ef9c64e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-0.png",
+      "sha256": "cb02d371d0d26b57107562c5b9a0f7afc2307ac0f0f7c824387666c71eb40d95",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-1.png",
+      "sha256": "0bbc3fb22637fbfb547b432245aaab44a73bf73fa12ca6d5fdd8420e75a14f88",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-10.png",
+      "sha256": "74d1ba208d0708e93765bb587a1c9d19d72f2111f9c2e002cbfa00de9a4cb32a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-11.png",
+      "sha256": "5cdbf642f7803116b24eddc528f5a7d500800c1a37b8dc69eba96d02a138f19c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-12.png",
+      "sha256": "281e50af2a653905d18cc37da55524f71245cdf5efcfce6bdcaa6e50afa1c67d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-13.png",
+      "sha256": "9a777a2214a3c784a065545a06d83973112aea80fa9697dd8759d802d82b61cf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-14.png",
+      "sha256": "d2cac2458fd7420106885ada9d2e05325c36ce48a4b4bc65afea7f1b97772135",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-15.png",
+      "sha256": "6d5a884687a4c42bc73f8e704ceb8c1e835b0014712b7dafc634f0629bb75c4e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-2.png",
+      "sha256": "67b768656cecb3a8db1ea25ebd81074b86e654383f887ccb3a3e6aa967d7a766",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-3.png",
+      "sha256": "ab1a6a2f60c2ab47a9c4b10c274f6112ea5bb654e23c2ffffd1749681af3dd94",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-4.png",
+      "sha256": "d55833deb015cd6265c29e6d6cf5877cd8f270861fd2647d739955eb3b9bca60",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-5.png",
+      "sha256": "1623fe74f24341149812a12d488d6862401f91e0c3ebcddf36a146c1fc015c05",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-6.png",
+      "sha256": "810a990de6d1c03c4fbd9828d2d0248a2ef79fdec9b7f5c919c41f80be60f744",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-7.png",
+      "sha256": "4a25177b5a940204844f3e3bd6d1d06a7585641e35fbc2be827aafd7c332298c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-8.png",
+      "sha256": "f1fa06a1769e284f009674ee7d1156cd086a7680c02c472a28dd85405951d42a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/ruler-study-9.png",
+      "sha256": "f05a130c52103fb5dfcd133db61b2cfd99079b479c5baced0d0e6712c92679a5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-0.png",
+      "sha256": "c1ae4b24e33210ddd8a4ccd0766afeb73669d062c06e896dbbb0d819a2dd3b29",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-1.png",
+      "sha256": "d17ac50610d603c8917c33cc38d64f7db742202de857788ca292bb26e9223293",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-10.png",
+      "sha256": "e65878575e514cb3be9f64f0637fd4f6518dfbbc764405c7b0090fab90bd5133",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-11.png",
+      "sha256": "71edeaf3701808ef2cf35bc09e6fab63afb6896df4e838623915fc331c875a96",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-12.png",
+      "sha256": "11a7f945d2c4f7e9682ec3f91399014743e01ffe78f2511ace54cd5242e2eb54",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-13.png",
+      "sha256": "49e95d3eff3eb28a1430a81305725848c66def314a94a3e13700f31d0e543de0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-14.png",
+      "sha256": "24e0db555bd1e2ccbb393af09c143f5b3d7406d3317d46059cb3dbc5a09ab360",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-15.png",
+      "sha256": "431c143a4df85897faf33017f0e5f19cceeff13049ef0cee64ca33f42b9862b2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-2.png",
+      "sha256": "0acb70a9f71148452c6a2c34eafdef884a094c4e9db8b2650da03c7371984df9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-3.png",
+      "sha256": "5ae49246946308c8f7c3a3eaceb4d3a5c14f4a10daff856609bb239a56049f49",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-4.png",
+      "sha256": "acd6f477a6cfbb41a294a07da655c9f3a39c06fcae7d437ac1de2e120293830c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-5.png",
+      "sha256": "d8ef03f4d0df723eb4dce110b03d7065c9c4741a09aa339ef87c1e1b58fefb88",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-6.png",
+      "sha256": "db3b7b2c78b1dace69cb00e006f11a81590960462ea0cadfa21216bcc0a28b99",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-7.png",
+      "sha256": "ed752cc43d03309c67392d672b8ea4f4d786b781220758cda7c4c6ae6b9c6ea8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-8.png",
+      "sha256": "c5de7e82def8b8e1654ed61256337cdedcfabf931f2666bb946997626c356597",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine-9.png",
+      "sha256": "3e5a6034f1be0296b728328f4d8bc447f21ba17b94b62437ec28b89ecf929e2d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-engine.png",
+      "sha256": "0acb70a9f71148452c6a2c34eafdef884a094c4e9db8b2650da03c7371984df9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-0.png",
+      "sha256": "9a10268738b7e49ec9bb40d948df2b3af316bc338db32ca72e2ae5ec6729e412",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-1.png",
+      "sha256": "256cc9d6d5a350aeb66d8a09b79ee2634f58c1eacee7dc767235ce3711eb377b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-10.png",
+      "sha256": "e34a37cb107c9a6f23b17fd33347af3d0192ce02f929baa538aa86b3bb5713cd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-11.png",
+      "sha256": "0edcdae2f03ce0893e05133393497a48fc9603f95512aa9c3c61174de8bdd444",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-12.png",
+      "sha256": "a68e29543a5b710cc8be930c5cdcc9a54a2fc81d6c13669bb9d0444a0a0f683e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-13.png",
+      "sha256": "b1fc3b5f09bf53cb3fec15532d8f8bd533a032472bbd8063587917326d976cac",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-14.png",
+      "sha256": "08fa7bd4d177434e10b2d35a32974e8d9a23c4224baea9b12e65926845a0e9e8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-15.png",
+      "sha256": "9df91ecdb3513b7368e2ad68c3416ab72b50c759e63a7bfeca32b181217d30f6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-2.png",
+      "sha256": "c123b3fb38baf84ae8102677c1455f2857bf1ec9c2920b5e56eb7f587d2f7cb4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-3.png",
+      "sha256": "30cad207e4641dd4a097e7c9f0a78ff967b48de34b79f9ca42ec4b55ae128038",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-4.png",
+      "sha256": "3bff49ee9ab6d4593e3f50aa64b7e3e684caf541edb4b56d6aff8df8d12fa5b4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-5.png",
+      "sha256": "e092afd689ae980c044e805cf97e5ae7bc0c9916d83baaee1598b50c67b14600",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-6.png",
+      "sha256": "3d24df9f16007bd817502e88dc89e08b73749aa70bad2d2414d8d80b9fb5d43a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-7.png",
+      "sha256": "8cc1c897c4564007a38be43b950d94f4281c3704433b2f2940ff651fb51c893e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-8.png",
+      "sha256": "296fd696cafbe0d93afcfc5e21b37a198b0b3fdfd6abef0dbb5e5e4ef2af431d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study-9.png",
+      "sha256": "73986d06abf36ea121281e86ce37aa9330cf4cd74e7c039860f430d3adfd5ec9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-combined-study.png",
+      "sha256": "c123b3fb38baf84ae8102677c1455f2857bf1ec9c2920b5e56eb7f587d2f7cb4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-0.png",
+      "sha256": "aa82c8dd3fe61948b154fe4cf89a4d4ff4ac3579573f30dbddb491f0530d8ff1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-1.png",
+      "sha256": "0b2c6e2846878487e782b9be97c524b8ceca558374c8178adf17992b49d78fc9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-10.png",
+      "sha256": "4e4432f6b27340899a82816d8b793271741aaa94699b3e5f5ebc4e40d832d61e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-11.png",
+      "sha256": "9896eb80dbb831b6b2884bd17bbb9d7472d9c5f6cd8c43d3748b6e2067fda566",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-12.png",
+      "sha256": "990cf27f2e22edb444d24cca81ce0e860e8a4376a5df3bdd24a22fa6eb02369c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-13.png",
+      "sha256": "1e3a520b67518ba1c5d71e531ec940921171981a826ed49c740c0428af117d20",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-14.png",
+      "sha256": "34a68ee2bb0f7e3572f86ffadadb5604d9bcef4f824c01cc2619adb2b3580bc5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-15.png",
+      "sha256": "dea63e95e238dbafca45897cf54285334d5704f5f2d63ca0e3ed5cddb6a4df07",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-2.png",
+      "sha256": "92c2d4bef525ee888dd51bbf147b3ecf13386c15864ea343f17e1948cb9efd93",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-3.png",
+      "sha256": "44c193a107b74c99fd62a7a4c9646f9c2747d60a821e2c817fd4c48e700cbde2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-4.png",
+      "sha256": "3bb262a7af7aa041a06574d3700b732ba44591d18fb228ea0b522d0454d276bf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-5.png",
+      "sha256": "085873889eb2b0cebe5233b10f869d0d33016619e347750cd4a8038b2980c7af",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-6.png",
+      "sha256": "daa02f9bbf5c3848ce43ca3291be62cdd4c85522c58105fc5097735196ba8b60",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-7.png",
+      "sha256": "9360f9cb9f8b9fb6a42cd337bfdd0110b8a5416f9aa892ad4f40a952175a06ad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-8.png",
+      "sha256": "a76cfd7cd17d4781953ac26ef89793ec18e330e479c4f3fe917fe72f4bd76536",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine-9.png",
+      "sha256": "94bc1e9314839ca20fc3b6a769926a9efda3612bff63ae567b4c10c89bf1cf51",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-engine.png",
+      "sha256": "92c2d4bef525ee888dd51bbf147b3ecf13386c15864ea343f17e1948cb9efd93",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-0.png",
+      "sha256": "ddb3b3aeaa4ae3c5256bb6be29c1f207025099b6d58864e5b679186b5096e4c7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-1.png",
+      "sha256": "d2daeeb46ef02ebd2e4627297cbe3f3005bf8021c8f7e1879b7f52a6383aa265",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-10.png",
+      "sha256": "d1c2983eb787dfaf875c1ac8631d760343ca9b8550259a8a591d832dda7ebd6f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-11.png",
+      "sha256": "d4726a8f2551af24543de58b148598bec34fb3975e6cc57b7415193813f5f2f3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-12.png",
+      "sha256": "21b9f9e3157f1882ba6b149fb93086584bd2fc1d305ed6dcd0fd092cc151a19e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-13.png",
+      "sha256": "31ad4649b57d4bb9a78e49e5a694d6112fd2fd6e166c77e881ea3ddb2a6fdb04",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-14.png",
+      "sha256": "4e72199400c3961a209e2389d24cc6fc9d1718244b512559dae42a6342747939",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-15.png",
+      "sha256": "8824a3149c038bbb9fd916eddd053d62f4ed6e3fb13b9f4348f680fb4dc3de23",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-2.png",
+      "sha256": "44c3d2726d19bc03bfc5b3578b507cfe177786c3cb6d32e8f3ef23d57020b51a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-3.png",
+      "sha256": "dfec2789b739c0e68f5c3b4d33b677321fd3ea46614dffd6405aacf921859a67",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-4.png",
+      "sha256": "cc0a2f1e8f5794eb8ba1828a563cbdbfe2d31d599944e26f5d32c85568e6e715",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-5.png",
+      "sha256": "81b53d5cfbf7c77cb7359000a5f49b46031076d4c33a9f4d4a42d6b24d6864f4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-6.png",
+      "sha256": "bd2a26abe222498642f120e9c7055e19da4dd14a334ff501fb527bfbfb0a758f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-7.png",
+      "sha256": "a19835843d317e8cf7a5cb5a454ae45135eb510a4fad584952f38b2c5ced7967",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-8.png",
+      "sha256": "3c135f20457d8bb48f3d277dee6a2bc1fc29c98f75c9d433ee59732086dcf57e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study-9.png",
+      "sha256": "62b4da8dcb789019a783ad0f47f85b23368423c615aa6d13844955dd5fa8d06d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/captures/wire-rider-study.png",
+      "sha256": "44c3d2726d19bc03bfc5b3578b507cfe177786c3cb6d32e8f3ef23d57020b51a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/capture.json",
+      "sha256": "e68dd09d6033c72ed1b5f01b78980328d822a66c2cc9ae110346516908a436e7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/contact-proof.json",
+      "sha256": "00bb94301c2f562d3b89f22c6e8fe454f458d8399611d7d090167cdeff6e2e3e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/diagnostic-build-pins.json",
+      "sha256": "d7f17272b2a68a942bdb185956abf14b99d15f08b40a9d3d5d2a22e75f53ece7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/diagnostic-inputs.json",
+      "sha256": "2e2c776927abc80ce92614045e2af1bf14c70f0d7d8c6b1b2107688f6819da02",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/eye-collar-controls.json",
+      "sha256": "c1489c16ebff8dd2431ca978a67610c2026dd3ed5da4917d04d3dc7cb361768f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/fixture-recipe.json",
+      "sha256": "bd2d0a9beb5c2a80da3a9af9aaec4b86f97ae84c11153bdfdfed63f76c2e0ce5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/identity-inspection.json",
+      "sha256": "8f3559dc6232eddf56c577f74d6672eb2384c1bd9bf216a7f644930f4607b8b7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/native-feature-proof.json",
+      "sha256": "9257c1818058fb71f9eb7d19e21ed2d725fe53c13d2ab04776df9b075d58fbe8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/replay-verification.json",
+      "sha256": "9fd9f258fe0d90442041b4caf6c5e7b6608c080c16569ca6e881f6f116651a74",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/v1-geometry-comparison.json",
+      "sha256": "e12a21f7b30b07b45c52c92b51d447a2b96259ada77b35b70cc24e38b9636345",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/evidence/visual-inspection.json",
+      "sha256": "57f68330bcd7d9f2aca136d2099de508c84d854684ebfd01d44fa0ff2f9f05fb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-collar-removed-raw.png",
+      "sha256": "933c7284623237c830412764ef7ecde922d07da9c2702e3394cdcdec0ae35cb3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-collar-removed-shared.png",
+      "sha256": "4ed0d9c897cecc4ea09f583b2ffceecb9dcf49f529d3582e0cb6897882df84b2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-collar-removed-violet.png",
+      "sha256": "58fbb480019b2d3c2be74d81576541b3ced81eedb073a2fc682f422ac14972f7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-original-raw.png",
+      "sha256": "d3b64d2ae4b285771ad61fef361ad62651d702434c418d76c10813cd5fe15782",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-original-shared.png",
+      "sha256": "04cdd1f9e453f467709caae46ae5b68e1ad3aab732a400355cd77a69b4a22f1d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-original-violet.png",
+      "sha256": "403fde62e9652da636419816e13e7192d3f48635d324f95147c55f0a60a18db8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-removed-raw.png",
+      "sha256": "abdfb3d4b83fbdd892f08c8ff8fbbfd8977550969a9291735840ad83869aac97",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-removed-shared.png",
+      "sha256": "04f3814e5c100bce7ef8c0b167aca69ca789c72cf784b76ea0f0adb95963d22b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-0-removed-violet.png",
+      "sha256": "ac339201240dccf1f8190ed1dcadfad40c1e6868f171a9238cd2546ee6f7a78b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-collar-removed-raw.png",
+      "sha256": "273c672831eaa113551bf3aa5fdc7e02b27c55f96e534e93a41331a8ce75e1fb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-collar-removed-shared.png",
+      "sha256": "bd60178dfd070f95a1e2f53f28f043c1db85def922c098b68a177d5330801aae",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-collar-removed-violet.png",
+      "sha256": "d03c2c7985ea50b9806ec64dd5b7517cd6e1b7381d7fef3b1ddce3096dea0567",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-original-raw.png",
+      "sha256": "a4121efbc952f11ea77d6cd208d4c209bfcdf3c326f3a51cc4db9f628af7b3c4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-original-shared.png",
+      "sha256": "65b7ad8dcf28fad55d47751b9d1b67ee58d03d63a8655375d466714b01bcf911",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-original-violet.png",
+      "sha256": "3795333cb5c259fa7f4674815a2676b43b0984f1a3e6e272d9972558b0e98bad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-removed-raw.png",
+      "sha256": "a0edfd31b90b58f63ff9e649505b9ea92e33cd94fa68ebfec3202267d9fbaa6e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-removed-shared.png",
+      "sha256": "904fe0008709372630393c906a2c90764346351f23fe5b9867b7f6158bd3530a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-1-removed-violet.png",
+      "sha256": "c33ea3a87bbb05dcb132d94e7513bd705bd5bb03bf88f6680059d54ad9d5e289",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-collar-removed-raw.png",
+      "sha256": "f8b5afba9a615eee16b2e448e9fe3339b7d44995b9a5b9d195cc530072672084",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-collar-removed-shared.png",
+      "sha256": "743093dd58913155e6888c900da7e311db148ba3d1cb33ff3add0155f5b780f3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-collar-removed-violet.png",
+      "sha256": "2462c70916310db9d2b5c849a65c8f52faea2cd7b453173ec8ce51b6734368fb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-original-raw.png",
+      "sha256": "31b3162e96dc68d3d4d3e1e20a54c401ca069140c579b13199a735b866b05b01",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-original-shared.png",
+      "sha256": "6274467bd44a04ce1485ea69cd6f9c421db5d4fb3ce40e27faaa123bf0d48fcc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-original-violet.png",
+      "sha256": "179644cb270a0b0b5b019daf974ca769888222133f1d1a2795038893a5647163",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-removed-raw.png",
+      "sha256": "afa9983102fa67816718cb0c6906c06d07ced30c011d414686445576fe5c0b3b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-removed-shared.png",
+      "sha256": "b18acf3ec3ad69e14bb279aa1c78837c617393e086dec4bc354ec0c7e0c04437",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-10-removed-violet.png",
+      "sha256": "f124e90d9f71b192abbe7b7c8c52906e6995fc54460d9fb48fb5053e3571011f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-collar-removed-raw.png",
+      "sha256": "c90e4eeab07ef42e07bb0698cd5d4376cb52a5c6a80e2becbddf8d5d0b3f6fb1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-collar-removed-shared.png",
+      "sha256": "a5d4d516c6bca6ec17b3e41ec8722db4cd68f30c793b2b80e294be7358cbbcf3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-collar-removed-violet.png",
+      "sha256": "d7c5c5ade11f746bad6e873643065ad682f91bc61fc27273dbffbff96df4b48e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-original-raw.png",
+      "sha256": "4a4e65a4cb3c6645caea67bc90f781b01f25ecfa69a8ec3ef22553f833131b81",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-original-shared.png",
+      "sha256": "a5d4d516c6bca6ec17b3e41ec8722db4cd68f30c793b2b80e294be7358cbbcf3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-original-violet.png",
+      "sha256": "d7c5c5ade11f746bad6e873643065ad682f91bc61fc27273dbffbff96df4b48e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-removed-raw.png",
+      "sha256": "47a7a944b8e14bf18dab4de39d137a9dce9ef05cde47b282ddd1e0ba734fc4db",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-removed-shared.png",
+      "sha256": "a5d4d516c6bca6ec17b3e41ec8722db4cd68f30c793b2b80e294be7358cbbcf3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-11-removed-violet.png",
+      "sha256": "d7c5c5ade11f746bad6e873643065ad682f91bc61fc27273dbffbff96df4b48e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-collar-removed-raw.png",
+      "sha256": "f7dc343b56fcdf2bf87c8e9733e0a2f34f5aa74f7adc4b87a0312eb4162d6c23",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-collar-removed-shared.png",
+      "sha256": "f3651c9bc121a293a03d0611df496b524a18e7fe56030e0e2c8595668b4aea07",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-collar-removed-violet.png",
+      "sha256": "1a8eed87c33a2c65e4cac08e7018a23d0c86c60bbe8559094a33d11e2a90236c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-original-raw.png",
+      "sha256": "889c6f9b0628f52018751f58f03923ce1d3f943c7c550a063037c55eed6669af",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-original-shared.png",
+      "sha256": "7d9a7882c930ba4d492c921fa321bd107d721a7defd227e1d03a3326027ba613",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-original-violet.png",
+      "sha256": "19ada71a785594c3683218f0539348e6b38cea99ff959f5ac6ab3d4b07400dc0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-removed-raw.png",
+      "sha256": "38ef4c53b1a0eb6b72c22cd96a1e6b879739f1c9109d5c9a355f1eda522aafda",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-removed-shared.png",
+      "sha256": "7d9a7882c930ba4d492c921fa321bd107d721a7defd227e1d03a3326027ba613",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-12-removed-violet.png",
+      "sha256": "19ada71a785594c3683218f0539348e6b38cea99ff959f5ac6ab3d4b07400dc0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-collar-removed-raw.png",
+      "sha256": "94bbf015f126176b62bfdb8dbe2d2285e77d0d0dd9c16677ed188f6b581dafaa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-collar-removed-shared.png",
+      "sha256": "bf662fe1f5057e370521f961a4bbf7f53fe59589dcae08da8146e79465274267",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-collar-removed-violet.png",
+      "sha256": "a2279af8f1e20b03fa5185dae0de0269df0836c731dd885a179c33ab2eddc714",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-original-raw.png",
+      "sha256": "4b7133bed4d7f167f1dfab49542aaacbd01b3553e200f44c1c75f9b17b8552f9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-original-shared.png",
+      "sha256": "bf662fe1f5057e370521f961a4bbf7f53fe59589dcae08da8146e79465274267",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-original-violet.png",
+      "sha256": "a2279af8f1e20b03fa5185dae0de0269df0836c731dd885a179c33ab2eddc714",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-removed-raw.png",
+      "sha256": "b8814681672e4cc5d0d2c91ecff150f2130c37e3b1d4f788691d5d7083147f94",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-removed-shared.png",
+      "sha256": "bf662fe1f5057e370521f961a4bbf7f53fe59589dcae08da8146e79465274267",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-13-removed-violet.png",
+      "sha256": "a2279af8f1e20b03fa5185dae0de0269df0836c731dd885a179c33ab2eddc714",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-collar-removed-raw.png",
+      "sha256": "aaa8e38cbcfe7883ca2d20119b76601b866142aeaf3a86bb17770d23c73531a7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-collar-removed-shared.png",
+      "sha256": "52b55fcf2d5926ae761f501c19d6018258d07a801c49012e018e56206a4cd055",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-collar-removed-violet.png",
+      "sha256": "282a805d591ad66a1bcb49d87618ecf04293398111bab902c817e8ead1fbe276",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-original-raw.png",
+      "sha256": "746a039c7281f09dc57ceca7d22739acda6c4ec81d05fbb328dcee2cbc836c3a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-original-shared.png",
+      "sha256": "79aa11c9ae80f73129938b90de0a9d678b945301bc37ba8595221f33027d4418",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-original-violet.png",
+      "sha256": "d8a1eff6f55558c6cfb1a5cafdc8b34eff48acac1766e7959a8c3cc8e516ff4c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-removed-raw.png",
+      "sha256": "952d9d1311bb5293320219e1f202f92e7fa37e73bbf3f87e164076eedd658ed4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-removed-shared.png",
+      "sha256": "77535d8331475f242161c9510462ce32a235c8f16da8efbfc0f84009aedc545e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-14-removed-violet.png",
+      "sha256": "c7fa7e9f5fabb32a2d1dfdcfaee64aadf99baf044edbd6edb12f91a4db160565",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-collar-removed-raw.png",
+      "sha256": "c8eaa0ccb1aa73c123a303573e8930aa9b6f71bc74249c810a5416c2ad7083df",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-collar-removed-shared.png",
+      "sha256": "542ecb358ee940a1ebd8f4713834071d7ac8412c28775bf28a87cefcd6b586cc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-collar-removed-violet.png",
+      "sha256": "9d7d6a1fdc9148c1393320d795658e7bd44ab52eebc44e3d41dfb1919fa71d44",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-original-raw.png",
+      "sha256": "69d3c3576124f9c7f4ae7be244354acf192452e800c078c7c9a6d265986ea54a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-original-shared.png",
+      "sha256": "542ecb358ee940a1ebd8f4713834071d7ac8412c28775bf28a87cefcd6b586cc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-original-violet.png",
+      "sha256": "9d7d6a1fdc9148c1393320d795658e7bd44ab52eebc44e3d41dfb1919fa71d44",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-removed-raw.png",
+      "sha256": "24686840488fdbe50ab7c803fd2b1e7967a80be4dde192c51e8469dce6225d55",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-removed-shared.png",
+      "sha256": "74bcd7499edd02166cd0577a2e1f9ba50781d5281ac938b7f2848b10a975dad1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-15-removed-violet.png",
+      "sha256": "95cd7ad20f89e364d12cfecd02942e12ba4c3a5ee5105cb30759fe4c44de025f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-collar-removed-raw.png",
+      "sha256": "ebd166d91acb74d90a265b136c168ae576ce8bfcecf486c6c10f862f0c0fe332",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-collar-removed-shared.png",
+      "sha256": "f75a4dbf4d9c9cbd6970946026862ac7badadeaf96b41bc14c243f81b398c1ec",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-collar-removed-violet.png",
+      "sha256": "bb24749b22ece944e8caee37e83b69fcafd874b37778b0600ba7dd7f70b169db",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-original-raw.png",
+      "sha256": "fe9aabfafe836214e9bf3bc62979b6ff1500d69a62dc571fcc4839e4f13fb872",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-original-shared.png",
+      "sha256": "8d53b370a407d4ec35a0c186fdfb02125a669e276c8bfb5ecf4ab4c2003af171",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-original-violet.png",
+      "sha256": "2af82398737b4a899b0d7518bcfd1a1691ab4f6cfd06dd84376aded3347a0511",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-removed-raw.png",
+      "sha256": "fd72d7a2ea3e91224f1605fc7cc74b4931e85398f47c3ed7e17765bd746d426e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-removed-shared.png",
+      "sha256": "6b22a6d58ba7af62ce1e9356d4cc1579906cdb47e6044e4d86f5d28758a6843c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-2-removed-violet.png",
+      "sha256": "ef636fba2b55e9d58b3ab8b30b83ab65603cc9bae08fa0a2ee1bf30511ee31bc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-collar-removed-raw.png",
+      "sha256": "5be55c6e2a0d62d478227d4eb843dd341b9e59830c4a69677e252b58a2a0c1bf",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-collar-removed-shared.png",
+      "sha256": "2fcc6c1da2ca59f7aee848900adfd277a4480c997ef25a45ea4a3bd215d34e70",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-collar-removed-violet.png",
+      "sha256": "81b13379cbb94d5de3d233559eb7d013ef17e98c7bd2f762381e03a2bfe906fa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-original-raw.png",
+      "sha256": "fe7f1a4ce215c631edaa549344c4ba5c6b89d3f5c64f641581097663e94587be",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-original-shared.png",
+      "sha256": "75facd447315fedfffabcc0faf0454ecac1aa47ac5531a33802936dbb741fe04",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-original-violet.png",
+      "sha256": "def6c7950a120143d88210852c51ad3560040627f4bb0a72b7e812eb782ad0ee",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-removed-raw.png",
+      "sha256": "b2a0080c6acd9cc22b268d3fe829e49bef5159306d6ef9db83fb6042fa2d7bb0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-removed-shared.png",
+      "sha256": "110792a098ef0618ffe755f5b60257402be65fc25fab0e121cc50b6017424d67",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-3-removed-violet.png",
+      "sha256": "3de0209480b419d304883b7b132e2c0e64ff54dc64d70c92e82d221731fa4299",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-collar-removed-raw.png",
+      "sha256": "7b593b59fae1e910bc44fb7aa6519d160b08739526302a9187cb904af5939f26",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-collar-removed-shared.png",
+      "sha256": "1027794e48355206abe06e1941dbe7a1e80f321f9dca484deb75ad7070f9375b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-collar-removed-violet.png",
+      "sha256": "f84d98237e04878f5629f9e2d6210b9d52d9c71c66081b0d77ee4cd5fba0ade3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-original-raw.png",
+      "sha256": "60d26a40fbad40cbfa04f60883d634837a56e524d619a931947f1ddec4c9433a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-original-shared.png",
+      "sha256": "b88fa6c41f19d9bca4b300f89d3da71e4b80b8b04cc8fed2ad4a76815988914a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-original-violet.png",
+      "sha256": "9f34a5663f8d9afd6d694b965a0ae474c8490ade442bb172145d984d0b920bda",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-removed-raw.png",
+      "sha256": "c13fd9442fc3a7ed1c70365b024ada1419f29fe16da3d19b5fa99bf5f52e7875",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-removed-shared.png",
+      "sha256": "9a5c0cdbd7652a4ff5b8467756de88cf9520036d089167d6604a342f2660c27d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-4-removed-violet.png",
+      "sha256": "6265a5182abecd5cd0fe0e7e213b7f89d7da5722e79752c3a8082bb5ca714769",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-collar-removed-raw.png",
+      "sha256": "06b631d25b37c46f079d8b50bb7dacc6c1703749057223743390d0a4cebd47ee",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-collar-removed-shared.png",
+      "sha256": "56e8b3448542629d2d3416bc6a2da8b589e86a466f9ccf938bfc7eb764b68354",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-collar-removed-violet.png",
+      "sha256": "e36a110bf030761d241e0329dbc110c6657e2dd8fdac6832126f06f3db6f4884",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-original-raw.png",
+      "sha256": "76622ec3b8f9c3cb049bb9b3b287a9f73f69d70fdfaff882e6bef5737c7c9c23",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-original-shared.png",
+      "sha256": "e4ffea55daec9bbf6eb8b7b2503bb531693d065933e1927926f4872ad9ce22dc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-original-violet.png",
+      "sha256": "f2a7dc2cb4c57faeda4cdd86cb10dcea0e78bcff2d96c535f8db486f6ce464f2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-removed-raw.png",
+      "sha256": "7b6643c5c3e9fe2c724405fd3ec1b7f2a860d061e4bdb93d84101613ae12981d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-removed-shared.png",
+      "sha256": "2057feb07e40b4f42a93a5fd959b067553f6c41e77b46afac59ba654b63d1bbc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-5-removed-violet.png",
+      "sha256": "48545ffc9b7f53e8198320ede16d07dfc87759bd488a6447519a4798595803cb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-collar-removed-raw.png",
+      "sha256": "5a9fead4cc6b15fad541a5e9a4c7a3f4af0c1a4725db42d94439ad5ee02b6c07",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-collar-removed-shared.png",
+      "sha256": "bd211bb288fc19024aee1625c3480a655a1b742fe10ae3a496d53e0c1de409e6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-collar-removed-violet.png",
+      "sha256": "603c5579928bc8ef3b80db68510ab55785f7fe08190ff981a16c55b12db0f063",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-original-raw.png",
+      "sha256": "6b8ff10e3278003f66e49c66b860cbd72f7188d4a4b64419804df8e16f624dc1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-original-shared.png",
+      "sha256": "0570e84129b9feb51d062aee1a01b78bc3db4f984febdbcc78d0e78b849ed221",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-original-violet.png",
+      "sha256": "5b07c3dfe9847bd8707e6f9e1c74248573c73156884355f03d2256fc85a7179c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-removed-raw.png",
+      "sha256": "cec9579c93001e530ab7831a20cf9a531bc665d5ac06169933990436884a60cb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-removed-shared.png",
+      "sha256": "a48ef826e78773922366eca1735eac9113f4684c107c21debbb8b6b10f311f4e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-6-removed-violet.png",
+      "sha256": "ff768462b4191fd829d87aadf58c1b49995739ee925aaece1c2444e5efab667c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-collar-removed-raw.png",
+      "sha256": "efb012f727ac242c62304d122d7b2b67812b1382edfc7274b6228b6303fcac31",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-collar-removed-shared.png",
+      "sha256": "0851d45d7d58b60023774c2d4f6c4b88718a61d356abf7ce406c6bdccd67e89e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-collar-removed-violet.png",
+      "sha256": "7a40b2f2cd96b1e7160cc625d65d922afb85712aeeb9a35406ad3e5e28e91f9c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-original-raw.png",
+      "sha256": "a6639fd02da7f25ecba9bc64c1cea9589b61c70065764c553e140b4db152b045",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-original-shared.png",
+      "sha256": "86c9c480e1359614753bd30b4eda067f53c7af0c7b3d560b6ba1dd1a1cc01f0b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-original-violet.png",
+      "sha256": "a78305582df317e85b477fddafda8ae5cc78e7b2ce2b4fb5d203ad790b2951aa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-removed-raw.png",
+      "sha256": "5fbb2b1689a860e56b7ede8ba2a497cf0044061503ab06d9e3177366cb4302aa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-removed-shared.png",
+      "sha256": "a6851641af3a50c265af28ef0b8e04b9f5b1f301040fe28cc69708b4fd59ed2d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-7-removed-violet.png",
+      "sha256": "ba1acfe5458bf47a86f9a8e250c4c20febdf35efa4d6dfcfaec186f46b0affef",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-collar-removed-raw.png",
+      "sha256": "c19f08acb28acc27d00e371965e5c7f6e820e57350571c96a2d9116ce37ba0cb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-collar-removed-shared.png",
+      "sha256": "b9cf92790e1c8753ce5e524d9f93e6d9bc0ac526a194e934faeaea64e6ed2dcb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-collar-removed-violet.png",
+      "sha256": "18f708c1ced48b3a96fb0552640d8fc03c55b8daf5a29d234550f4e04af6fd63",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-original-raw.png",
+      "sha256": "056ff45168b15fa8513dd682600cf564e1484b06d94dc210c22696b4c1e7c9ca",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-original-shared.png",
+      "sha256": "b338bac99c9fecbafa3a66edcbd5c14a4a7b8bcf003dbb882e7ec4e7563241ae",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-original-violet.png",
+      "sha256": "ab66c03b7336799367767b4afc7135216b587f9cd81c955a0c2e51cfad9845dc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-removed-raw.png",
+      "sha256": "3941d0d85162745f2edd265852baa4425a53a5e66512f806a9c974f8a66cf869",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-removed-shared.png",
+      "sha256": "ca93da7ae94578d196b0d0109d9b3f7d16bfeaf8cf1471bf09a8384c07242841",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-8-removed-violet.png",
+      "sha256": "afe1ddea9039d7b6bd4f6daa6e4169d1722e8d4a83e25f748aa3d83bac727415",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-collar-removed-raw.png",
+      "sha256": "85c999ca8a476f2c6e9bc215472a0320e4b0504cd8d8f899a8062ec74e8e8073",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-collar-removed-shared.png",
+      "sha256": "7d86b8d0d20803101ec368550535f8d2c8c956fa1d7e291163ec855f4e98ff4c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-collar-removed-violet.png",
+      "sha256": "6bcd7ff47f504e1d4260637b662bb1d87258f5f73798e3e5864c54c31979e520",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-original-raw.png",
+      "sha256": "8c46e39ec8d3778c2d6ea61cef6d7acfbcac0197f72e4c0844a53a2e5cfcdfe2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-original-shared.png",
+      "sha256": "7d86b8d0d20803101ec368550535f8d2c8c956fa1d7e291163ec855f4e98ff4c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-original-violet.png",
+      "sha256": "6bcd7ff47f504e1d4260637b662bb1d87258f5f73798e3e5864c54c31979e520",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-removed-raw.png",
+      "sha256": "25142c20b46b36e1d155ce894fc0eaa0092fb57e820271f37c939eef57b30d8d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-removed-shared.png",
+      "sha256": "8a870b2cb2125266053932a14e04c85e965b174fb08a7a4601d6f366b082c9aa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/engine-9-removed-violet.png",
+      "sha256": "ac2f679c027326c01fe3dbfa2982e1e4f11a3094e111c7a84b3a289844bf6e59",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/evidence.json",
+      "sha256": "c1489c16ebff8dd2431ca978a67610c2026dd3ed5da4917d04d3dc7cb361768f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-collar-removed-raw.png",
+      "sha256": "8c851e37c6476d3540a568eb08ebaf0e0fc5b09b3435a6f06b38f2b14077984b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-collar-removed-shared.png",
+      "sha256": "66b78f7c26898e4ba6a5d2051bb6a032ae013f484ed8427e1cafc2a69f7379ff",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-collar-removed-violet.png",
+      "sha256": "ed3cfcd713fea308f4c227e37d061e3acb243660e6a2d4bbc94390df63f7ee5a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-original-raw.png",
+      "sha256": "b2c883784a13a7753feb48fe649e2216c2463941fff5399ce0ce5439005c4e39",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-original-shared.png",
+      "sha256": "07a4accce2ec5592150b0f0737f1f0234cd893309c47b8c84b4d9acf7418a7f7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-original-violet.png",
+      "sha256": "0dc4e415e3e822bda2fb2013e7ae37111a440f90187aeaf5cd51a8ceac8be1be",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-removed-raw.png",
+      "sha256": "3345f5d7617a7a751586049ed156d3be5043c4f3b5d96ed41b124d21b87b7e16",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-removed-shared.png",
+      "sha256": "f8a17433371c525418bc608ab10d90d97b9cf3ecdc61811278eb7808f229e531",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-0-removed-violet.png",
+      "sha256": "faf4391c4f1268c962a0eea2e40047da7bc0e5271ae8e7aced17008decc032fa",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-collar-removed-raw.png",
+      "sha256": "ee5efdec96a7414dc5f97bd8b1a4a4002e57427e4b206e6f54a6d626fd1dd550",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-collar-removed-shared.png",
+      "sha256": "f9542cfba08702b516fde8c4ae306a0401fef1a3f5c4d915df392997df83dc89",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-collar-removed-violet.png",
+      "sha256": "46e30874a812622002941e18b1c660438249196463ba9e6a564884140c99a589",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-original-raw.png",
+      "sha256": "549b3ff64b68b4e623de5ed8bbfe95f10d637930e1df2388b02f74fb40ace604",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-original-shared.png",
+      "sha256": "5173c6bc8146ac23e65d3f8d5d5ea00edb2ae77f0a89c50dbc8dbf357279520a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-original-violet.png",
+      "sha256": "c75d1687526b0f2b245bfa9ad0f55568b06893708ea162e54f95e6a26cd17d40",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-removed-raw.png",
+      "sha256": "18f2921394d955306d722ce2cd6e97a5b1f3aa6cd449ad4692f21f09591c177a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-removed-shared.png",
+      "sha256": "a414e86e40721a503f1de7ddcff0d16e64bf8cb0e8754a9fd75aebbbd76085a0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-1-removed-violet.png",
+      "sha256": "5e8afe3de68af16ca68e74b2c855717ec316a02033064d1b4988aa0d66999828",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-collar-removed-raw.png",
+      "sha256": "2f6d026762545924d7f83cb61f3cb168de657ff6f8bf086da0ac43e57a0d2255",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-collar-removed-shared.png",
+      "sha256": "c6a78b085c00db8d8c048a11fb0688ffef072aa17ffa60023e560c201bb6b89e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-collar-removed-violet.png",
+      "sha256": "01296d33e51ac4c797d59005fcbe40215b5b8b51c7810e70cc2f892c5328d54b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-original-raw.png",
+      "sha256": "2f6d026762545924d7f83cb61f3cb168de657ff6f8bf086da0ac43e57a0d2255",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-original-shared.png",
+      "sha256": "c6a78b085c00db8d8c048a11fb0688ffef072aa17ffa60023e560c201bb6b89e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-original-violet.png",
+      "sha256": "01296d33e51ac4c797d59005fcbe40215b5b8b51c7810e70cc2f892c5328d54b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-removed-raw.png",
+      "sha256": "6107890c84ec9b93d09c792a786e75d7b69ca8a9445b3c6b227f8fa4ab769dbc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-removed-shared.png",
+      "sha256": "f7c04677fb281035e9e6a0c4d541f4e2d7e68c8606e9f4588880403b2d872993",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-10-removed-violet.png",
+      "sha256": "d267adfce068d323b3a0cdd5447fd4204525678ced046411c679cd8c23beb88f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-collar-removed-raw.png",
+      "sha256": "78790004e9d0e19ece2361a82e59e78ce2c4be7a9c7f6c899d45dad83d68f780",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-collar-removed-shared.png",
+      "sha256": "89ee684df06e8aa61a59d5c439afe6a7be5acd631a838c2873df29905939f801",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-collar-removed-violet.png",
+      "sha256": "ce6a50628af88358c960c65e0f1c6552545568130456e6f7d98246c181f76c97",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-original-raw.png",
+      "sha256": "78790004e9d0e19ece2361a82e59e78ce2c4be7a9c7f6c899d45dad83d68f780",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-original-shared.png",
+      "sha256": "89ee684df06e8aa61a59d5c439afe6a7be5acd631a838c2873df29905939f801",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-original-violet.png",
+      "sha256": "ce6a50628af88358c960c65e0f1c6552545568130456e6f7d98246c181f76c97",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-removed-raw.png",
+      "sha256": "78790004e9d0e19ece2361a82e59e78ce2c4be7a9c7f6c899d45dad83d68f780",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-removed-shared.png",
+      "sha256": "89ee684df06e8aa61a59d5c439afe6a7be5acd631a838c2873df29905939f801",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-11-removed-violet.png",
+      "sha256": "ce6a50628af88358c960c65e0f1c6552545568130456e6f7d98246c181f76c97",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-collar-removed-raw.png",
+      "sha256": "139edfa99ac343f4e3f2b6adc37eb519fe585de8e1c6f2b8661d6fe0e381b2c9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-collar-removed-shared.png",
+      "sha256": "54e0b07d78ca5ee787d081a93cd403fa9d7cd2b629f8ea527ad47b78114446e9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-collar-removed-violet.png",
+      "sha256": "5e6b7f886bc106111859394be3b3b806ea023c18aedbb33bc296174ccfc5ac2d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-original-raw.png",
+      "sha256": "139edfa99ac343f4e3f2b6adc37eb519fe585de8e1c6f2b8661d6fe0e381b2c9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-original-shared.png",
+      "sha256": "54e0b07d78ca5ee787d081a93cd403fa9d7cd2b629f8ea527ad47b78114446e9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-original-violet.png",
+      "sha256": "5e6b7f886bc106111859394be3b3b806ea023c18aedbb33bc296174ccfc5ac2d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-removed-raw.png",
+      "sha256": "139edfa99ac343f4e3f2b6adc37eb519fe585de8e1c6f2b8661d6fe0e381b2c9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-removed-shared.png",
+      "sha256": "54e0b07d78ca5ee787d081a93cd403fa9d7cd2b629f8ea527ad47b78114446e9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-12-removed-violet.png",
+      "sha256": "5e6b7f886bc106111859394be3b3b806ea023c18aedbb33bc296174ccfc5ac2d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-collar-removed-raw.png",
+      "sha256": "501521d24d63a9ea34bc4e0f6fd8b3836841f4e9bd5bf847777068893329b880",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-collar-removed-shared.png",
+      "sha256": "6794c39782631782117c40d76413d1de426b50513ad0dfcf3427f799b36e0514",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-collar-removed-violet.png",
+      "sha256": "cd77cac7d46271e3a0d8a964a440adcaf0494fe7b6ef5536a6e1aff5c215a8a6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-original-raw.png",
+      "sha256": "501521d24d63a9ea34bc4e0f6fd8b3836841f4e9bd5bf847777068893329b880",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-original-shared.png",
+      "sha256": "6794c39782631782117c40d76413d1de426b50513ad0dfcf3427f799b36e0514",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-original-violet.png",
+      "sha256": "cd77cac7d46271e3a0d8a964a440adcaf0494fe7b6ef5536a6e1aff5c215a8a6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-removed-raw.png",
+      "sha256": "501521d24d63a9ea34bc4e0f6fd8b3836841f4e9bd5bf847777068893329b880",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-removed-shared.png",
+      "sha256": "6794c39782631782117c40d76413d1de426b50513ad0dfcf3427f799b36e0514",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-13-removed-violet.png",
+      "sha256": "cd77cac7d46271e3a0d8a964a440adcaf0494fe7b6ef5536a6e1aff5c215a8a6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-collar-removed-raw.png",
+      "sha256": "c457fbe87b5b37e94225b54a6404be6be433c5244c613a454304bc3de56785cd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-collar-removed-shared.png",
+      "sha256": "e50264600fbb8e3e9e95586dc258eab225c7345fa2925120d26a915193099449",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-collar-removed-violet.png",
+      "sha256": "695a66fa322adda83efd0c31c9f9ba21761a8aa52426ac3fc5a16cc3b4366c5c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-original-raw.png",
+      "sha256": "c457fbe87b5b37e94225b54a6404be6be433c5244c613a454304bc3de56785cd",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-original-shared.png",
+      "sha256": "e50264600fbb8e3e9e95586dc258eab225c7345fa2925120d26a915193099449",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-original-violet.png",
+      "sha256": "695a66fa322adda83efd0c31c9f9ba21761a8aa52426ac3fc5a16cc3b4366c5c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-removed-raw.png",
+      "sha256": "90832381176d54e7c677aaea589caa6ea02fd911f4f1dcc701c8f04887ca56f8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-removed-shared.png",
+      "sha256": "e7eb9536b75a2d4e878f4462bfcd3a9b4ff9f7baa9229122ba495c62b595544c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-14-removed-violet.png",
+      "sha256": "9ba4634eafb2fe9733f965f5da49d0a30f3db81bd00001acd657cfa9373cd932",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-collar-removed-raw.png",
+      "sha256": "cfad437fec22e75f2911140e8d286c406a8e5ec352587fb244cc8fcb1622bbfe",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-collar-removed-shared.png",
+      "sha256": "e6a503d1f1dc867d6676629ba29b5d8690f5d99536ac042cd08290517e8ec8e5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-collar-removed-violet.png",
+      "sha256": "8a529e703d268307f6006538f365752daba7ecde68e6d94d5bec3abc62cf079f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-original-raw.png",
+      "sha256": "9735c43a927815f78d18d8038e365157559ccc9a9d7f9af154ed0c5c7c90d633",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-original-shared.png",
+      "sha256": "e6a503d1f1dc867d6676629ba29b5d8690f5d99536ac042cd08290517e8ec8e5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-original-violet.png",
+      "sha256": "8a529e703d268307f6006538f365752daba7ecde68e6d94d5bec3abc62cf079f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-removed-raw.png",
+      "sha256": "67d3611c15bd2eef085571d71637861923cd7c9e58e794e9b0ca07cce698ebdc",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-removed-shared.png",
+      "sha256": "4076f28390d1ac74facbc6dad16f7b3d93a7612bb4ad77bc520eadb345bf6017",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-15-removed-violet.png",
+      "sha256": "3ba777aaf2d0b1791c86bd84e514ed8f6e0431e648cf7a8c0b58237a299b03c9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-collar-removed-raw.png",
+      "sha256": "847146f9ddaaeea1c4211959ed19bfaf2fa7e3b72fe5dc8a443938b3e2450e7e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-collar-removed-shared.png",
+      "sha256": "b39036851083b57cf6ad32110c0fef811f9d6fa2f8c7eabf61f44787491399d6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-collar-removed-violet.png",
+      "sha256": "84cf459aab74a562febf7a4c4f78383f739b1df084f7baebbe0e22bf977bce02",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-original-raw.png",
+      "sha256": "ca1ead2146e97f626c53c6eca11934a1aea20671322e56265fa8c720889f97b4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-original-shared.png",
+      "sha256": "82d6886c8242db0a4dcb060a2f8277c36fde686bafd3856bbe0a3d00b266f614",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-original-violet.png",
+      "sha256": "7fb9bb32ecde72c89d4215452827ee781d687e164b2f42a1f79cf872dadde276",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-removed-raw.png",
+      "sha256": "96f935c8c70172777068cc2ca19c2e69de22373dbc8360e21602ac17f7fb3ffe",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-removed-shared.png",
+      "sha256": "9367ac25e693781f87c9359a726a233e9ac1e9b4aba381d631c6889eb28a636d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-2-removed-violet.png",
+      "sha256": "d4b02badf4db1e397f1b9513267b9983f143560202ffed1c9abde23a62b06aa0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-collar-removed-raw.png",
+      "sha256": "6a4fe156e3765cd131ab27e42cb4f7890c9cb1bca2baaf60574b3f608856a095",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-collar-removed-shared.png",
+      "sha256": "000443c1247381e7c00d8ea23899165f3cfe29a1fc6622ce6a735704da8af03b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-collar-removed-violet.png",
+      "sha256": "cf0e0aea170702f3654842fd36279cfd5d39483acaa8b55398f802bcb8ebc2d8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-original-raw.png",
+      "sha256": "c76e262b32cac2442d7a043a48f4626507797962030c9c96b3426bb8ffb91da8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-original-shared.png",
+      "sha256": "6d8403af8661b2b7836bf37188ac92b8c9ae0f4af1eae4c3fcf13257b1ede91a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-original-violet.png",
+      "sha256": "b7e59e3a8ea033afdbbad0ab4aad15feee085c2f39c0bb5ff5ba69b64d6858d3",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-removed-raw.png",
+      "sha256": "16c54b20761a680bfc002c98cec1b92454dea8941fac3c4448094a0c10b785af",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-removed-shared.png",
+      "sha256": "2a1050517409fbc8b9959add2094d6e1d677c484a6c7093475c81e7bdee76f17",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-3-removed-violet.png",
+      "sha256": "68d34374aba278a348d8dca77cfeb18e7099e2680bd19e4f5f7096a2225f6fd0",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-collar-removed-raw.png",
+      "sha256": "1affc1c5c3335e4974863552d6fe2ec573fb4ee936c6f564bce123b3dce3e5c5",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-collar-removed-shared.png",
+      "sha256": "b57748e1789b2d59380dd6e41848fc39f6d4462afdcad4f9b6798a369f8b6605",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-collar-removed-violet.png",
+      "sha256": "40ab8317a0f51e25bed79c7ecde1321feca66ac4dd99377c692f0a9aa63c2c7b",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-original-raw.png",
+      "sha256": "2594a27244e50bba403b5a2404fe861ac8ce61a5d925bfb74b4f6470c6c67582",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-original-shared.png",
+      "sha256": "6d7508d70d8751d756d1d008ed382bb8c7bb12225669323be4739480dc653d6f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-original-violet.png",
+      "sha256": "58fb1879c187eff164b058e15df4f55d30439180a32a3712c4006e4eda345537",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-removed-raw.png",
+      "sha256": "bbf107839eb849ba5aba813b156ce38fe892472d71d59d4ea8255fe814dc13c2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-removed-shared.png",
+      "sha256": "2eaa6ec18c318ca738f8743b1a0190e957098a2d978666ea5fa4d89f6a6d91df",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-4-removed-violet.png",
+      "sha256": "bb2d02be5e3d82e27792acd0215c8ffc4381b742bcda19955c725a6b5190d676",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-collar-removed-raw.png",
+      "sha256": "91e69f8802f89f0f381f7d4ed92f27de0e05c9ee2843a6f9ecdcd189944bdbe1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-collar-removed-shared.png",
+      "sha256": "1e71d1ea942ca525cf5d7c6b6e84377178d2493447e7d30e97e7da3d51df17d4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-collar-removed-violet.png",
+      "sha256": "ad0fa0173bc503ca295e20fba27e6eaa1105d4c78750057dc036f03cee462ac8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-original-raw.png",
+      "sha256": "d26f7f92681913a474b8f3ad54f87d1fbe15dfe49abe2a54e7028669cc244c73",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-original-shared.png",
+      "sha256": "2dc3c2cd709419bb133512030a942918cc574ead6cc415bc2cf143bb59f6b4a1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-original-violet.png",
+      "sha256": "8a32acb54f12def8ef28db6dec963705fb5b729c5aa39c2ac98fd96741d36cad",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-removed-raw.png",
+      "sha256": "4608a281f80e313b87d2e9fd3ae7aa4f0f6c4a9cd801ffa789bf9b63f707e1c4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-removed-shared.png",
+      "sha256": "1e324d2c0fcfb2af10fdf15939878846458bb41299e20aebfef70487c0d416f2",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-5-removed-violet.png",
+      "sha256": "bd09253ff6489991554dcb74a9ff5a19823066364d44421fefefe1d4ee6fcb00",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-collar-removed-raw.png",
+      "sha256": "6f2ce63e0e5f4a12def21b776a8cab98111f55fe0fb9eb28eca7ddfa70aec558",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-collar-removed-shared.png",
+      "sha256": "fe2790286deccb88bfa6c7b544f64fda4d2ddf1a82b466eed1846a492b28768d",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-collar-removed-violet.png",
+      "sha256": "c1c02e5bb3df2b9e70c11a0d2f5356cf63021a1682f9e3d51c064ccb1628691e",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-original-raw.png",
+      "sha256": "a0ac958ae98b9c559eae705a81af5537aca833532cd4af7e912af2b26aa59a28",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-original-shared.png",
+      "sha256": "ed3f4acefefbe6cc939801aae702ca120afbdc49c447e30590ceb00e23f61f97",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-original-violet.png",
+      "sha256": "39511888df7273960a60d3a401a5ae98a0dfe098e185f5274a483a166b665475",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-removed-raw.png",
+      "sha256": "53796b6d1e95197e1c7606b68553ba754bd47684c68c769756eaec5958c10f00",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-removed-shared.png",
+      "sha256": "7ff1e5b94f2c126d9ece523da4b63e9bb540b8aff6af4dd2cab96326e6d7751f",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-6-removed-violet.png",
+      "sha256": "aa683066344a8ddde9b059242b1fcda20585d85f1ec53f913a3ec8efebe0c7b9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-collar-removed-raw.png",
+      "sha256": "ad5d30f41c2fde41524cf2832191584f81a511471de0392d6486c6d196509eae",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-collar-removed-shared.png",
+      "sha256": "2ba3b08973d8d9f9fd5b1712aa862a533c506e7497fc644bb9d780bad2c11d03",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-collar-removed-violet.png",
+      "sha256": "ca6d6492f624db50d01f20cb357bf12e915898fc2ab094bb0ef23809276c22b8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-original-raw.png",
+      "sha256": "41696896224a957bfb6e290b91568489858920fc8bc3c115340d3bfe28380777",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-original-shared.png",
+      "sha256": "fdbb857ba812578972814c4fbaf2600ff529293c09170dca9525506310749890",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-original-violet.png",
+      "sha256": "eb488693f3010033690f6082fa75099a6380860549a0681c9c1085cfd8013ec7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-removed-raw.png",
+      "sha256": "8410befa1b6a82857c24ee6a6c598ac04ca50deba218b666518ed0467ba0d64a",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-removed-shared.png",
+      "sha256": "1272a8162e2af0fe345c324333e532536b149d6eed2de4968ba3bdabdc6c30d6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-7-removed-violet.png",
+      "sha256": "5c433a67a6a56ce887a6a7d8691b8d42533a69fc5e1777407d9b61b1420174f6",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-collar-removed-raw.png",
+      "sha256": "91978b16a7a302f2b7aefdc336acc418d84df563d3fd19c77820c5d150f9aed1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-collar-removed-shared.png",
+      "sha256": "c30ad16be6e7c6b694e46ea96792f797beea91397ae02c20625699d2a98e8279",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-collar-removed-violet.png",
+      "sha256": "67c4a025afb57ced18327ae126db26fd7abbe117cb107e0fbc9f88132b8f5b93",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-original-raw.png",
+      "sha256": "2276f996a40096eaf06fef5c5f5ef81a55480b6ff461c95cfd6f22cf6a47dfff",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-original-shared.png",
+      "sha256": "a3d0830693c2911b0506c77505498080e1bd2bbdb9a3716f8b507e786e0e5ff1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-original-violet.png",
+      "sha256": "d5f24e861687cb89efbff0b4e2a55c55fe61dff3824497c43cb9c2c78abc964c",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-removed-raw.png",
+      "sha256": "c485b3a32a90033dc11e9e9890cce4a478c7328c0da96db468da271785392fae",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-removed-shared.png",
+      "sha256": "d6e3d7b67f4bfe255934a9202777591823fb3493b352d4e48b2a868b8223ce26",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-8-removed-violet.png",
+      "sha256": "8b2084eb8387d4441870595fec6e723b0af6bd61c9c1dee0911c0bdbf4b3f917",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-collar-removed-raw.png",
+      "sha256": "087b98195d82ecc0298cab064172f698610157fe0b1a897f9dfb0355f4cd0d33",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-collar-removed-shared.png",
+      "sha256": "7f44edc7fa894f9c965296962d18d6ff727427cafde51df7e5d059093e6221ea",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-collar-removed-violet.png",
+      "sha256": "d9c2d4879281a84f2a7407994f71ccebe8b7f949c8fb1ac4fe2bcd33d05688f7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-original-raw.png",
+      "sha256": "9a0202380aa00d4aa85100e806bb0cd65a468814a95133319a390b5802a74779",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-original-shared.png",
+      "sha256": "7f44edc7fa894f9c965296962d18d6ff727427cafde51df7e5d059093e6221ea",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-original-violet.png",
+      "sha256": "d9c2d4879281a84f2a7407994f71ccebe8b7f949c8fb1ac4fe2bcd33d05688f7",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-removed-raw.png",
+      "sha256": "ccaaa2361aade7216a9637f330d22bf812d83aff4bbcd0d112a0194d860916f8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-removed-shared.png",
+      "sha256": "a9a5852a2d81ad21a547020d298786f617c0a43a62cc77ed50857555c3427898",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-riders/classic-upright/v2/feature-controls/study-9-removed-violet.png",
+      "sha256": "9caedd9dbf9c94f95bd2fbfdfe87d870a4c8c0c850d472abd2dee0973f6950ec",
+      "resolution": "current"
+    }
+  ],
+  "historicalResolutions": [],
+  "ignoreRuleHashes": {
+    ".gitignore": "5fa6141ba0b839177666f8dac1909601fee97d9daaa627622b6326bec53f49b1"
+  },
+  "resolverSha256": "f9505c413e0d51e85a52cbbb4cc2be78d302f52e2b4d4220b947d2f9c0609542",
+  "freshConstructionPerformed": false,
+  "qualificationGranted": false,
+  "limits": [
+    "STATIC HASH/DECLARATION audit only; no constructor or imported builder executed",
+    "Fresh declared-input construction with source-replay.py remains mandatory separately",
+    "No hidden-import, mesh, contact, pixel, human-approval or normal-activation qualification",
+    "Repository .gitignore rules checked; Git index, global ignores and tracked exceptions not consulted",
+    "Only declared retained-files entries audited; no assertion that the map inventories every unlisted file",
+    "Receipt byteExact/status fields are historical metadata, not fresh replay evidence",
+    "Supplemental diagnostic hash maps are not constructor declarations and are listed separately as unaudited"
+  ]
+}

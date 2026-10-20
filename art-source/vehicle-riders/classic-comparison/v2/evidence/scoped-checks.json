@@ -1,0 +1,34 @@
+{
+  "status": "passed-before-final-pins",
+  "checks": [
+    {
+      "command": [
+        "node_modules/.bin/biome.cmd",
+        "check",
+        "art-source/vehicle-riders/classic-comparison/v2/helpers/compare-classic-v3.mjs",
+        "art-source/vehicle-riders/classic-comparison/v2/helpers/peer-eyes-v3.mjs",
+        "art-source/vehicle-riders/classic-comparison/v2/helpers/peer-ears-v3.mjs"
+      ],
+      "exitCode": 0,
+      "output": "Checked 3 files in 25ms. No fixes applied.\n",
+      "readOnly": true
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "black",
+        "--check",
+        "art-source/vehicle-riders/classic-comparison/v2/helpers/peer-geometry-v3.py",
+        "art-source/vehicle-riders/classic-comparison/v2/helpers/analyze-v3.py",
+        "art-source/vehicle-riders/classic-comparison/v2/helpers/verify.py"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n3 files would be left unchanged.\n",
+      "readOnly": true
+    }
+  ],
+  "globalChecksRun": false,
+  "biomeConfigEdited": false,
+  "noSnapshotExemptionsRequiredForNewV3Helpers": true
+}

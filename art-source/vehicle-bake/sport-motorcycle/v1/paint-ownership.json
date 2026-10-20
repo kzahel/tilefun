@@ -1,0 +1,134 @@
+{
+  "method": "Original angular fully faired sport motorcycle, swept blue windscreen/nose, full side fairings, compact upswept tail and wide rear tire. Actual surface UV graphic red/black/white paint, true F/R wheels and unchanged Explorer upright profile source pilot.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      40,
+      43,
+      54
+    ],
+    "tireLight": [
+      65,
+      70,
+      82
+    ],
+    "paintDeep": [
+      91,
+      33,
+      52
+    ],
+    "paintShadow": [
+      134,
+      40,
+      60
+    ],
+    "paintMid": [
+      169,
+      44,
+      65
+    ],
+    "paint": [
+      205,
+      56,
+      75
+    ],
+    "paintLight": [
+      236,
+      103,
+      106
+    ],
+    "cream": [
+      240,
+      238,
+      224
+    ],
+    "creamShadow": [
+      174,
+      181,
+      186
+    ],
+    "white": [
+      248,
+      247,
+      230
+    ],
+    "seat": [
+      42,
+      44,
+      56
+    ],
+    "seatLight": [
+      69,
+      71,
+      82
+    ],
+    "frame": [
+      63,
+      71,
+      84
+    ],
+    "frameLight": [
+      103,
+      116,
+      128
+    ],
+    "engine": [
+      111,
+      119,
+      130
+    ],
+    "engineLight": [
+      151,
+      162,
+      173
+    ],
+    "chrome": [
+      198,
+      210,
+      217
+    ],
+    "rim": [
+      127,
+      139,
+      151
+    ],
+    "ruby": [
+      181,
+      50,
+      70
+    ],
+    "amber": [
+      236,
+      164,
+      77
+    ],
+    "dark": [
+      47,
+      52,
+      63
+    ],
+    "glass": [
+      53,
+      108,
+      143
+    ],
+    "glassLight": [
+      90,
+      157,
+      184
+    ]
+  },
+  "ownership": "Independent angular fairing X/Z side skin chart, nose headlight front skin, swept windshield blue framed skin, tank/tail top ownership and bounded chassis/wheel/saddle palette swatches. No camera paint, overlays or external outline ink. One opaque512 nearest unlit bike atlas; immutable Explorer separate256 atlas.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Angular full side fairing, faired twin-lamp nose, swept blue screen, shouldered tank, upswept tail and own wider rear tire. Exactly two independent road wheels F/R; opaque bikeatlas512; Explorer loaded separately readonly for measured fit/depth diagnostics.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

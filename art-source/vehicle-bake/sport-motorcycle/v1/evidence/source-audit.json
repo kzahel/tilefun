@@ -1,0 +1,399 @@
+{
+  "status": "passed",
+  "glbSha256": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f",
+  "sourceInputHashes": {
+    "master.blend": "1790f79ba0a4f4cf2efe81c383e473cc4b90e97e6a669866758e734715e8399d",
+    "car.blend": "19985b4e4d87bf157b337459323d949552d2eb5806b57034fb87a980517c2887",
+    "atlas.png": "3538c7e7d14926a4ffb9bef798cfe6d04b0231fb7fb6533f65c15c80eece4069",
+    "model.glb": "b748734ae689ed3e4325ca8b02002ef99cc4433bdf808debe05fba51e7f04a6f"
+  },
+  "packedScenes": [
+    {
+      "path": "master.blend",
+      "sha256": "1790f79ba0a4f4cf2efe81c383e473cc4b90e97e6a669866758e734715e8399d",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 50,
+      "triangles": 2256,
+      "semanticUV": true
+    },
+    {
+      "path": "car.blend",
+      "sha256": "19985b4e4d87bf157b337459323d949552d2eb5806b57034fb87a980517c2887",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 3,
+      "triangles": 2256,
+      "semanticUV": true
+    }
+  ],
+  "semanticOwners": [
+    {
+      "owner": "SPORT continuous angular full side fairing skin",
+      "triangles": 76,
+      "vertices": 40
+    },
+    {
+      "owner": "SPORT angular shouldered red tank",
+      "triangles": 60,
+      "vertices": 32
+    },
+    {
+      "owner": "SPORT pointed faired nose actual twin lamp front skin",
+      "triangles": 60,
+      "vertices": 32
+    },
+    {
+      "owner": "SPORT swept low blue framed windscreen actual skin",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "SPORT compact upswept red tail",
+      "triangles": 60,
+      "vertices": 32
+    },
+    {
+      "owner": "Actual dark saddle central hip tangent",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual narrow saddle nose",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "SPORT concealed broad crankcase",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "SPORT lower dark undertray",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "SPORT internal chassis member 0",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT internal chassis member 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT internal chassis member 2",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT internal chassis member 3",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT internal chassis member 4",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT internal chassis member 5",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT front fork -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT rear swingarm -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT rear fixed shock -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT fixed axle stops short of hub F-1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT fixed axle stops short of hub R-1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT short upswept exhaust -1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "SPORT front fork 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT rear swingarm 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT rear fixed shock 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT fixed axle stops short of hub F1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT fixed axle stops short of hub R1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT short upswept exhaust 1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "SPORT grip riser",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "SPORT connected handlebar",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "SPORT close curved road fender F",
+      "triangles": 100,
+      "vertices": 52
+    },
+    {
+      "owner": "SPORT close curved road fender R",
+      "triangles": 100,
+      "vertices": 52
+    },
+    {
+      "owner": "SPORT integrated tail ruby lamp",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "True motorcycle rounded tire F",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim F -1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub F -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index F -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim F 1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub F 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index F 1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "True motorcycle rounded tire R",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim R -1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub R -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index R -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim R 1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub R 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index R 1",
+      "triangles": 22,
+      "vertices": 16
+    }
+  ],
+  "sportGeometry": {
+    "fairing": {
+      "owner": "SPORT continuous angular full side fairing skin",
+      "vertices": 40,
+      "angularCrossSections": 5,
+      "minSource": [
+        -0.6399999856948853,
+        -0.14000000059604645,
+        0.3199999928474426
+      ],
+      "maxSource": [
+        0.5199999809265137,
+        0.14000000059604645,
+        1.059999942779541
+      ]
+    },
+    "nose": {
+      "owner": "SPORT pointed faired nose actual twin lamp front skin",
+      "vertices": 32,
+      "angularCrossSections": 4,
+      "minSource": [
+        -1.2999999523162842,
+        -0.25999999046325684,
+        0.9900000095367432
+      ],
+      "maxSource": [
+        -0.6399999856948853,
+        0.25999999046325684,
+        1.3200000524520874
+      ]
+    },
+    "tail": {
+      "owner": "SPORT compact upswept red tail",
+      "vertices": 32,
+      "angularCrossSections": 4,
+      "minSource": [
+        0.44999998807907104,
+        -0.18000000715255737,
+        0.9700000286102295
+      ],
+      "maxSource": [
+        1.340000033378601,
+        0.18000000715255737,
+        1.2400000095367432
+      ]
+    }
+  },
+  "actualTireWidthsSource": {
+    "F": 0.2199999988079071,
+    "R": 0.30000001192092896
+  },
+  "rearTireWider": true,
+  "actualTriangleUVMatches": 2256,
+  "actualCornerPositionAndUVMatches": 6768,
+  "allActualGLBTrianglesMatchedToOwnSourceUV": true,
+  "tank": {
+    "actualAngularShoulderedVolume": true,
+    "rings": [
+      {
+        "xSource": -0.6,
+        "vertices": 8,
+        "widthSource": 0.18000000715255737,
+        "heightSource": 0.18000000715255737
+      },
+      {
+        "xSource": -0.44,
+        "vertices": 8,
+        "widthSource": 0.28999999165534973,
+        "heightSource": 0.31000006198883057
+      },
+      {
+        "xSource": -0.3,
+        "vertices": 8,
+        "widthSource": 0.25999999046325684,
+        "heightSource": 0.2699999213218689
+      },
+      {
+        "xSource": -0.18,
+        "vertices": 8,
+        "widthSource": 0.05999999865889549,
+        "heightSource": 0.06999993324279785
+      }
+    ],
+    "closedEndFaces": 2,
+    "distinctSideTopEndUVCharts": true,
+    "surfaceUVPaintNotCameraProjection": true
+  },
+  "method": "Original semantic component master at runtime topology; no high-to-low or bitmap transfer claim",
+  "readonlySourceUnchanged": true
+}

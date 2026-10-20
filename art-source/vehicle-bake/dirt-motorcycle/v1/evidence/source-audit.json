@@ -1,0 +1,678 @@
+{
+  "status": "passed",
+  "glbSha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+  "sourceInputHashes": {
+    "master.blend": "7e220c09c526e45d6ef01ee669a169ac424dad54212d18bc2dfcf3b5f9ba7fb9",
+    "car.blend": "3753431a02f3d5a55508c3d0e391ec6490c4642e22a9ffdb920bebc238d4f774",
+    "atlas.png": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175",
+    "model.glb": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c"
+  },
+  "packedScenes": [
+    {
+      "path": "master.blend",
+      "sha256": "7e220c09c526e45d6ef01ee669a169ac424dad54212d18bc2dfcf3b5f9ba7fb9",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 102,
+      "triangles": 3124,
+      "semanticUV": true
+    },
+    {
+      "path": "car.blend",
+      "sha256": "3753431a02f3d5a55508c3d0e391ec6490c4642e22a9ffdb920bebc238d4f774",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 3,
+      "triangles": 3124,
+      "semanticUV": true
+    }
+  ],
+  "semanticOwners": [
+    {
+      "owner": "DIRT narrow raised orange tank shrouds",
+      "triangles": 60,
+      "vertices": 32
+    },
+    {
+      "owner": "DIRT high thin crowned front mudguard",
+      "triangles": 76,
+      "vertices": 40
+    },
+    {
+      "owner": "DIRT high upswept rear mudguard",
+      "triangles": 76,
+      "vertices": 40
+    },
+    {
+      "owner": "Actual dark saddle central hip tangent",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual narrow saddle nose",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "DIRT long narrow tall rear saddle",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "DIRT exposed gray crankcase",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "DIRT exposed single cylinder",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "DIRT broad engine fin 0.86",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "DIRT broad engine fin 0.93",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "DIRT broad engine fin 1.0",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "DIRT round crankcase face -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "DIRT long front fork -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT lower fork slider -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT rear swingarm -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT static rear shock -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT axle attachment short of hub F-1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT axle attachment short of hub R-1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT round crankcase face 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "DIRT long front fork 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT lower fork slider 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT rear swingarm 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT static rear shock 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT axle attachment short of hub F1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT axle attachment short of hub R1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT narrow frame member 0",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT narrow frame member 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT narrow frame member 2",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT narrow frame member 3",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT narrow frame member 4",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT fixed side exhaust",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "DIRT tall grip riser",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT connected handlebar",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual sole tangent foot peg right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "DIRT plain white front plate actual framed skin",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "DIRT fixed mudguard fork crossbrace",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT fixed plain plate headstock bracket",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "True motorcycle rounded tire F",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim F -1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub F -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index F -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim F 1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub F 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index F 1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "True motorcycle rounded tire R",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Classic broad wheel rim R -1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub R -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index R -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Classic broad wheel rim R 1",
+      "triangles": 46,
+      "vertices": 32
+    },
+    {
+      "owner": "Chrome wheel hub R 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Asymmetric wheel phase index R 1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station0",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station1",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station2",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station3",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station4",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station5",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station6",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station7",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station8",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station9",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station10",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row0 station11",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station0",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station1",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station2",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station3",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station4",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station5",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station6",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station7",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station8",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station9",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station10",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block F row1 station11",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station0",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station1",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station2",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station3",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station4",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station5",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station6",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station7",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station8",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station9",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station10",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row0 station11",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station0",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station1",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station2",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station3",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station4",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station5",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station6",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station7",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station8",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station9",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station10",
+      "triangles": 20,
+      "vertices": 12
+    },
+    {
+      "owner": "DIRT actual tread block R row1 station11",
+      "triangles": 20,
+      "vertices": 12
+    }
+  ],
+  "dirtGeometry": {
+    "frontMudguard": {
+      "owner": "DIRT high thin crowned front mudguard",
+      "vertices": 40,
+      "angularCrossSections": 5,
+      "minSource": [
+        -1.7000000476837158,
+        -0.15000000596046448,
+        1.100000023841858
+      ],
+      "maxSource": [
+        -0.6000000238418579,
+        0.15000000596046448,
+        1.2400000095367432
+      ]
+    },
+    "rearMudguard": {
+      "owner": "DIRT high upswept rear mudguard",
+      "vertices": 40,
+      "angularCrossSections": 5,
+      "minSource": [
+        0.4000000059604645,
+        -0.1599999964237213,
+        1.159999966621399
+      ],
+      "maxSource": [
+        1.649999976158142,
+        0.1599999964237213,
+        1.3799999952316284
+      ]
+    },
+    "tank": {
+      "owner": "DIRT narrow raised orange tank shrouds",
+      "vertices": 32,
+      "angularCrossSections": 4,
+      "minSource": [
+        -0.6399999856948853,
+        -0.12999999523162842,
+        1.0700000524520874
+      ],
+      "maxSource": [
+        -0.18000000715255737,
+        0.12999999523162842,
+        1.3799999952316284
+      ]
+    }
+  },
+  "actualTireWidthsSource": {
+    "F": 0.18000000715255737,
+    "R": 0.2199999988079071
+  },
+  "rearTireWider": true,
+  "actualTreadGeometry": {
+    "blocks": 48,
+    "triangles": 960,
+    "byWheel": {
+      "F": {
+        "blocks": 24,
+        "actualTriangles": 480,
+        "outerRadiusSource": 0.47,
+        "coreRadiusSource": 0.425
+      },
+      "R": {
+        "blocks": 24,
+        "actualTriangles": 480,
+        "outerRadiusSource": 0.44,
+        "coreRadiusSource": 0.395
+      }
+    },
+    "geometryNotTextureOnly": true
+  },
+  "actualTriangleUVMatches": 3124,
+  "actualCornerPositionAndUVMatches": 9372,
+  "allActualGLBTrianglesMatchedToOwnSourceUV": true,
+  "tank": {
+    "actualAngularShoulderedVolume": true,
+    "rings": [
+      {
+        "xSource": -0.64,
+        "vertices": 8,
+        "widthSource": 0.1599999964237213,
+        "heightSource": 0.1799999475479126
+      },
+      {
+        "xSource": -0.44,
+        "vertices": 8,
+        "widthSource": 0.25999999046325684,
+        "heightSource": 0.309999942779541
+      },
+      {
+        "xSource": -0.3,
+        "vertices": 8,
+        "widthSource": 0.23999999463558197,
+        "heightSource": 0.26999998092651367
+      },
+      {
+        "xSource": -0.18,
+        "vertices": 8,
+        "widthSource": 0.05999999865889549,
+        "heightSource": 0.0700000524520874
+      }
+    ],
+    "closedEndFaces": 2,
+    "distinctSideTopEndUVCharts": true,
+    "surfaceUVPaintNotCameraProjection": true
+  },
+  "method": "Original semantic component master at runtime topology; no high-to-low or bitmap transfer claim",
+  "readonlySourceUnchanged": true
+}

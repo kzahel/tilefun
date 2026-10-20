@@ -1,0 +1,32 @@
+{
+  "id": "rider-player-classic-motorcycle-v1",
+  "clearanceId": "rider-player-classic-motorcycle--v1",
+  "name": "Classic \u00b7 fitted classic-bike pilot",
+  "title": "Classic default player \u00b7 fitted classic bike \u00b7 shared-loader pilot",
+  "source": "public/demos/vehicle-bake/rider-player-classic-motorcycle/v1",
+  "glb": "public/demos/vehicle-bake/rider-player-classic-motorcycle/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/rider-player-classic-motorcycle/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/rider-player-classic-motorcycle/v1/report.json",
+  "output": "public/demos/original-vehicles/rider-player-classic-motorcycle-v1",
+  "qa": "data/vehicle-bake/rider-player-classic-motorcycle-qa",
+  "offline": "data/vehicle-bake/rider-player-classic-motorcycle-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "composition": {
+    "component": "art-source/vehicle-riders/classic-upright/v3/rider.glb",
+    "prefix": "RiderClassic",
+    "mountBlenderWorldPixels": [
+      1.7391304347826089,
+      0.0,
+      18.44347826086957
+    ],
+    "baseCaptures": "public/demos/vehicle-bake/classic-motorcycle-player-fit/v1/raw-captures",
+    "baseCapturePrefix": "bike-alone-",
+    "combinedCaptures": "public/demos/vehicle-bake/classic-motorcycle-player-fit/v1/raw-captures"
+  },
+  "toolchain": "motorcycle-v1",
+  "wheelIds": [
+    "F",
+    "R"
+  ]
+}

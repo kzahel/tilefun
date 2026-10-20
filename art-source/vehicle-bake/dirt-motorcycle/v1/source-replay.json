@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "inputHashes": {
+    "scripts/vehicle-bake/dirt-motorcycle/build.py": "8670530069e87427a56b4bd960a464f7b9eb7487d5a27d3a62c30a90977ab3a6",
+    "scripts/vehicle-bake/dirt-motorcycle/geometry.py": "b30e0fa2090e0bf320785c3a481c9be58818c83b76bf353ae2c1b932e48c286d",
+    "scripts/vehicle-bake/dirt-motorcycle/family.json": "6e250f0709b866a6eef2929e05c42b98d09976fe51f7000cdcde05d6a94ec6a7",
+    "scripts/vehicle-bake/dirt-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "initialFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/profiles/upright-v1.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/dirt-motorcycle/build.py",
+    "scripts/vehicle-bake/dirt-motorcycle/family.json",
+    "scripts/vehicle-bake/dirt-motorcycle/geometry.py",
+    "scripts/vehicle-bake/dirt-motorcycle/raw-audit.py"
+  ],
+  "noIgnoredMasterOrScratchDependencies": true,
+  "packedMasterNotAConstructionInput": true,
+  "riderGLBRecipeReport": "Separate immutable diagnostic inputs; constructor reads profile only",
+  "freshRoot": "data/vehicle-bake/dirt-motorcycle/final-fresh-replay1",
+  "command": [
+    "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe",
+    "--background",
+    "--factory-startup",
+    "--threads",
+    "4",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "C:\\Users\\sox\\Documents\\code\\tilefun\\data\\vehicle-bake\\dirt-motorcycle\\final-fresh-replay1\\scripts\\vehicle-bake\\dirt-motorcycle\\build.py",
+    "--",
+    "--scratch"
+  ],
+  "invokedBuilder": "scripts/vehicle-bake/dirt-motorcycle/build.py",
+  "args": [
+    "--scratch"
+  ],
+  "glbSha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+  "atlasSha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175",
+  "recipeSha256": "5303df2547415a8226ae230f7c84aa2424db1a460f9cd82417dc78b294734683",
+  "outputHashes": {
+    "model.glb": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+    "atlas.png": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175",
+    "recipe.json": "5303df2547415a8226ae230f7c84aa2424db1a460f9cd82417dc78b294734683"
+  },
+  "portableCommand": "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/dirt-motorcycle/build.py -- --scratch",
+  "outputs": {
+    "model.glb": {
+      "sha256": "7ca86e345ae8f628d462352d8ebca51d30a98fe87f88b48114928ef2f1fed83c",
+      "bytes": 217440,
+      "byteExact": true
+    },
+    "atlas.png": {
+      "sha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175",
+      "bytes": 3296,
+      "byteExact": true
+    },
+    "recipe.json": {
+      "sha256": "5303df2547415a8226ae230f7c84aa2424db1a460f9cd82417dc78b294734683",
+      "bytes": 25812,
+      "byteExact": true
+    }
+  },
+  "sharedStaticCycleCatalogActuallyUsed": true,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "runtimeActivation": false,
+  "diagnosticSharedInputHashes": {
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "diagnosticsAreNotConstructionInputs": true,
+  "unusedCycleAdaptersNotPinned": true
+}

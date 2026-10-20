@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "runner": "python",
+  "invokedBuilder": "scripts/vehicle-bake/component-package-cycle.py",
+  "arguments": [
+    "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/assembly.json",
+    "--scratch"
+  ],
+  "inputHashes": {
+    "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/assembly.json": "34ef8b32486da2024a1ab8a3a053a446ad4886b40075133b8fae96e286f8d2fa",
+    "scripts/vehicle-bake/component-package-cycle.py": "d770b66e08a76cf914f58685776f1ee69bb86c9dc5d87dda519c80d0ae7e464d",
+    "scripts/vehicle-bake/compose-component.py": "6659e9d078ed6a317049ed50606551239c494c156cd6ef55586a7fe2f9ce7df4",
+    "scripts/vehicle-bake/compose-component-cycle.py": "cf7020b2e5e4d6a9bb81b8615040aadfc49a539dc453ca434ad3c909937f268d",
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-bake/classic-motorcycle-player-fit/v1/evidence/replay-verification.json": "43da2eab94da318dc277ee7317c7aa37611bf9fb3bbc0e9f27e34c8991c7576c",
+    "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/base-independent-replay.json": "0aac0ded4f07a588f2f0637d42d9f5441da3c158a111b4493fdbce7fdbe5987a",
+    "art-source/vehicle-riders/classic-upright/v3/evidence/replay-verification.json": "ce9166b1a265bb2fbe287d1af3a9801936bf2147406a2262973c3475478c3390",
+    "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/rider-independent-replay.json": "4fc85ac8596e4600d30dede7f4e7ae21efe6dd546c9671c09b29c82afa9a191b",
+    "public/demos/vehicle-bake/classic-motorcycle-player-fit/v1/model.glb": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+    "public/demos/vehicle-bake/classic-motorcycle-player-fit/v1/atlas.png": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+    "art-source/vehicle-bake/classic-motorcycle-player-fit/v1/master.blend": "4c096cb62954f09e683f747626599d347a4c211484933e84189ff0cfaef28c59",
+    "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/base-normalized-replay.json": "77b2bdbf909b15747a1a5289ada6a6e690a92548fcad1ed33cddeb63d5383ff0",
+    "art-source/vehicle-riders/classic-upright/v3/rider.glb": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+    "art-source/vehicle-riders/classic-upright/v3/atlas.png": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+    "art-source/vehicle-riders/classic-upright/v3/master.blend": "fc8f5bee94b4a78370d9108fa931d2ac609ffc7cbdaeef5b58dadcc0eb187166",
+    "art-source/vehicle-bake/rider-player-classic-motorcycle/v1/evidence/rider-normalized-replay.json": "252fc7b083857c5b23b8b81ccb62303b0eac672eab5af1f348c67322d33d2591"
+  },
+  "sharedInputHashes": {},
+  "scratchInputDependencies": [],
+  "glbSha256": "5dd8f8c38f13b6983ecf63feaf2c750270e52c4dc317ca98f35dc92f809a0d2e",
+  "atlasSha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+  "recipeSha256": "6200c9c13bfe8ea63c5b39e734588cdd5e2b24aa0b7b8e30e3cdc9e68052a79a",
+  "outputHashes": {
+    "model.glb": "5dd8f8c38f13b6983ecf63feaf2c750270e52c4dc317ca98f35dc92f809a0d2e",
+    "atlas.png": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+    "companion-atlas.png": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252",
+    "recipe.json": "6200c9c13bfe8ea63c5b39e734588cdd5e2b24aa0b7b8e30e3cdc9e68052a79a"
+  }
+}

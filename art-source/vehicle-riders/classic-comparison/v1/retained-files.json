@@ -1,0 +1,21 @@
+{
+  "evidence/cli-regression.json": "f31e1ebecd8e7f9594cdb0cd357aa5bad77e8610061a9bf65ab38dbe7007e3e2",
+  "evidence/component-audit.json": "3ab9b4f0567364ed9fdafd971b09ef1c30d9ec54260bb43b678050d840715182",
+  "evidence/eye-control-results.json": "3b70947449309fb32f90c222bae076f831d6e395d5be034a9d9c0a591de0aa54",
+  "evidence/identity-landmarks.json": "44022e311bd1c4a9ba09b440ea47d45d2480c05dd9770cbde4b194c63c561dda",
+  "evidence/scoped-biome.json": "7e84c0b3a17e25a8133db328e85fd39eb4ca3237658332a78571d2f6d8496c6d",
+  "evidence/v1-outline-comparison.json": "e5c54971272e76d7c18c8d5b5b8cf48fdb826b3f2684b6ac2936addd80db7343",
+  "evidence/v2-outline-comparison.json": "5c77cf6df1dee0ca12b4efe32693fa238ca2dd23996ea561f173fcea03f13be8",
+  "figures/peer-all32.png": "af0d1a0adf2403a545d22dc67ee107627126ae4ceb1cabe6a584cbeb8bbc0597",
+  "figures/peer-native-identity.png": "af9743814439c368f083eb779ad87bc99e13f1331322af91f1e5b685d2b68d73",
+  "figures/peer-world-ruler.png": "f1aae1c608feff8c2a32c50267569ddd9e04de0c637b5c97ef45127e2ffffcb4",
+  "helpers/compare-outline.mjs": "b5b7360c89762628f508b2613199ccf73ba868f999d71a7a83afc0f4b593b9e2",
+  "helpers/peer-analysis.py": "dc5e64b8f77ba81707864d77552edb2a2c0c1b0b0038b7d42bcfef39893d37be",
+  "helpers/peer-eye-probe.mjs": "5a03b35493ab3ff93fa6189ea417cdcf70dab5a2e2b8bedaec7294377fcd4561",
+  "helpers/peer-geometry.py": "237a7521cae94887ef8ac63a758d35827b8116a4392c7213a261d7f913728a58",
+  "helpers/verify.py": "ad5825f95a88d037c4170961d0d5796c7a5cfeded32669e158aad7e77a7dee44",
+  "provenance.json": "bb51e16163ded24280ab20b0d7274d5a05fcf1ea335e3fa416c847cc81d773ca",
+  "README.md": "b525172433878aea99efd3f612007d287bcf6901958a175f8007ee4a7fb7b57f",
+  "report.json": "58ec4e3b23092083b25c2e7f0c727b6aeb84db289113721b5bb69e82d03aa3ec",
+  "report.md": "cf12ae5e61a50ad17ab75acb7d4dfa348c38b3395007062f8751f3ee418153c8"
+}

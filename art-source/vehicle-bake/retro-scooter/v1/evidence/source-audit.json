@@ -1,0 +1,287 @@
+{
+  "status": "passed",
+  "glbSha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+  "sourceInputHashes": {
+    "master.blend": "c895774f3a4d4c5cfde3720db4dd536206c531db0c7bb40392c1ca706625be02",
+    "car.blend": "43536a09fce9e3e0253f01d7ff8c4ab346aca92d39d8fc890d6628a6f6368988",
+    "atlas.png": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372",
+    "model.glb": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65"
+  },
+  "packedScenes": [
+    {
+      "path": "master.blend",
+      "sha256": "c895774f3a4d4c5cfde3720db4dd536206c531db0c7bb40392c1ca706625be02",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 40,
+      "triangles": 2280,
+      "semanticUV": true
+    },
+    {
+      "path": "car.blend",
+      "sha256": "43536a09fce9e3e0253f01d7ff8c4ab346aca92d39d8fc890d6628a6f6368988",
+      "packedImages": [
+        {
+          "name": "atlas.png",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "name": "Unused family palette planning draft",
+          "dimensions": [
+            512,
+            512
+          ]
+        }
+      ],
+      "meshes": 3,
+      "triangles": 2280,
+      "semanticUV": true
+    }
+  ],
+  "semanticOwners": [
+    {
+      "owner": "Rounded mint rear cowling actual arch skin UV",
+      "triangles": 268,
+      "vertices": 136
+    },
+    {
+      "owner": "Rounded transverse mint cream legshield skin UV",
+      "triangles": 164,
+      "vertices": 84
+    },
+    {
+      "owner": "Actual continuous step-through floor",
+      "triangles": 12,
+      "vertices": 8
+    },
+    {
+      "owner": "Step-through raised outer floor rail -1",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Step-through raised outer floor rail 1",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual dark saddle central hip tangent",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter broad long rear saddle",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter front fork -1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Scooter rear arm -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter fixed axle stub F -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter fixed axle stub R -1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter front fork 1",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Scooter rear arm 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter fixed axle stub F 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter fixed axle stub R 1",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter low floor frame",
+      "triangles": 28,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter steering mast",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Headstock to actual grip riser",
+      "triangles": 36,
+      "vertices": 20
+    },
+    {
+      "owner": "Actual connected handlebar centerline",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip left",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Actual palm wrapped grip right",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter rounded handlebar headlamp nacelle",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter gray round headlamp rim",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Scooter cream round headlamp lens",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Scooter small rear red lamp",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter actual curved front fender F",
+      "triangles": 132,
+      "vertices": 68
+    },
+    {
+      "owner": "Scooter true rounded road tire F",
+      "triangles": 196,
+      "vertices": 100
+    },
+    {
+      "owner": "Scooter broad wheel rim F -1",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Scooter chrome wheel hub F -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter asymmetric phase index F -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter broad wheel rim F 1",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Scooter chrome wheel hub F 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter asymmetric phase index F 1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter true rounded road tire R",
+      "triangles": 236,
+      "vertices": 120
+    },
+    {
+      "owner": "Scooter broad wheel rim R -1",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Scooter chrome wheel hub R -1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter asymmetric phase index R -1",
+      "triangles": 22,
+      "vertices": 16
+    },
+    {
+      "owner": "Scooter broad wheel rim R 1",
+      "triangles": 52,
+      "vertices": 36
+    },
+    {
+      "owner": "Scooter chrome wheel hub R 1",
+      "triangles": 34,
+      "vertices": 24
+    },
+    {
+      "owner": "Scooter asymmetric phase index R 1",
+      "triangles": 22,
+      "vertices": 16
+    }
+  ],
+  "actualTriangleUVMatches": 2280,
+  "actualCornerPositionAndUVMatches": 6840,
+  "allActualGLBTrianglesMatchedToOwnSourceUV": true,
+  "scooterSkin": {
+    "parts": {
+      "rearBody": {
+        "owner": "Rounded mint rear cowling actual arch skin UV",
+        "vertices": 136,
+        "faces": 93
+      },
+      "shield": {
+        "owner": "Rounded transverse mint cream legshield skin UV",
+        "vertices": 84,
+        "faces": 82
+      },
+      "floor": {
+        "owner": "Actual continuous step-through floor",
+        "vertices": 8,
+        "faces": 6
+      }
+    },
+    "actualRearWheelArch": true,
+    "distinctRearAndShieldFloorCharts": true,
+    "surfaceUVPaintNotCameraProjection": true
+  },
+  "method": "Original semantic component master at runtime topology; no high-to-low or bitmap transfer claim",
+  "readonlySourceUnchanged": true
+}

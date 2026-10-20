@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-dirt-motorcycle-v1",
+      "name": "explorer-upright \u00b7 dirt-motorcycle fit pilot",
+      "title": "explorer-upright \u00b7 dirt-motorcycle \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact dirt-motorcycle and unchanged explorer-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 5080,
+        "vertices": 10261,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 371472,
+        "sha256": "8290844ce734800c47f1c07c9328fc74763e23d0f46e6cedcba5a62cfcd0f360",
+        "wheels": {
+          "F": {
+            "wheel_radius": 8.173913043478262,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.652173913043479,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/atlas.png",
+          "sha256": "5a018c5cb2da686b4a23617d20843d666e81d47669b6e84fc033962ca46c3175"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/composition.json",
+          "sha256": "a79b820904f02a26f0522799c193168155327075e95e5b6d8dbea64915580e25"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/model.glb",
+          "sha256": "8290844ce734800c47f1c07c9328fc74763e23d0f46e6cedcba5a62cfcd0f360"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/recipe.json",
+          "sha256": "12bce4fc08ffedab4b3165b8f70d753887100e297ac71de6dbb7ed63f4a7fdf4"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-dirt-motorcycle-v1/inputs/report.json",
+          "sha256": "49cc1aaf3245e79dd3f2b62583674f9142b78dff9407f85210429ba025f2ae4f"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

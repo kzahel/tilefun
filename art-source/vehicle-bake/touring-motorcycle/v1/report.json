@@ -1,0 +1,344 @@
+{
+  "status": "complete",
+  "sourceStage": "complete",
+  "normalActivation": false,
+  "sharedCycleQualification": "pending parent actual shared loader/browser review",
+  "sharedStaticCycleCatalog": {
+    "triangles": 2496,
+    "vertices": 4780,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 176016,
+    "sha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "CarMeshAssetUsed": false,
+  "rawGLTFDiagnostic": true,
+  "artReviewStatus": "agent-QA; parent independent review pending; no formal human approval",
+  "family": "touring-motorcycle",
+  "route": "touring-motorcycle",
+  "revision": "v1",
+  "method": "Original navy/cream upright touring motorcycle: broad faired headlamp nose, tall blue framed windscreen, larger shaped tank, stepped saddle and two real closed side panniers. Actual surface UV graphics, true F/R wheels and immutable Explorer profile.",
+  "geometry": {
+    "triangles": 2496,
+    "vertices": 4780,
+    "meshes": 3,
+    "primitives": 3,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 176016,
+    "sha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+    "wheels": {
+      "F": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "R": {
+        "wheel_radius": 7.304347826086957,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    },
+    "wheelIds": [
+      "F",
+      "R"
+    ],
+    "toolchain": "motorcycle-v1",
+    "motorcycleRoot": "Motorcycle_Root"
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "F",
+      "centerBlender": [
+        -1.1200000047683716,
+        0.0,
+        0.41999998688697815
+      ],
+      "centerExport": [
+        -19.47826095249342,
+        7.304347598034404,
+        -0.0
+      ],
+      "radiusBlender": 0.42,
+      "wheel_radius": 7.304347826086957
+    },
+    {
+      "id": "R",
+      "centerBlender": [
+        1.1200000047683716,
+        0.0,
+        0.41999998688697815
+      ],
+      "centerExport": [
+        19.47826095249342,
+        7.304347598034404,
+        -0.0
+      ],
+      "radiusBlender": 0.42,
+      "wheel_radius": 7.304347826086957
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/touring-motorcycle/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/touring-motorcycle/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/touring-motorcycle/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "sourceImmutable": true,
+  "sourcePilot": true,
+  "productionQualified": false,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "riderComposition": {
+    "immutable": true,
+    "mountSource": [
+      0,
+      0,
+      1.1
+    ],
+    "contacts": 5,
+    "combinedTriangles": 4452,
+    "combinedDraws": 4,
+    "combinedAtlases": 2
+  },
+  "actualBounds": {
+    "minWorld": [
+      -27.247356414794922,
+      -8.913043022155762,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      26.782608032226562,
+      8.913043022155762,
+      30.956520080566406
+    ],
+    "spanSource": [
+      3.106722955703735,
+      1.0249999475479123,
+      1.7799998772144314
+    ],
+    "centeredHorizontalCeilWorld": [
+      55,
+      18
+    ],
+    "noRescaleRecenter": true
+  },
+  "combinedBounds": {
+    "minWorld": [
+      -27.247356414794922,
+      -8.913043022155762,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      26.782608032226562,
+      8.913043022155762,
+      35.91304016113281
+    ],
+    "spanSource": [
+      3.106722955703735,
+      1.0249999475479123,
+      2.064999781847
+    ],
+    "centeredHorizontalCeilWorld": [
+      55,
+      18
+    ],
+    "noRescaleRecenter": true
+  },
+  "sourceQA": {
+    "exactFreshReplay": true,
+    "packedSourceAudit": true,
+    "allTriangleUVMatches": 2496,
+    "actualTouringGeometry": {
+      "tank": {
+        "owner": "TOURING larger shouldered navy fuel tank",
+        "vertices": 40,
+        "minSource": [
+          -0.7799999713897705,
+          -0.17000000178813934,
+          0.9100000262260437
+        ],
+        "maxSource": [
+          -0.18000000715255737,
+          0.17000000178813934,
+          1.2400000095367432
+        ],
+        "actualDepthSource": [
+          0.5999999642372131,
+          0.3400000035762787,
+          0.32999998331069946
+        ],
+        "closedVolume": true
+      },
+      "fairing": {
+        "owner": "TOURING broad cream edged front fairing",
+        "vertices": 32,
+        "minSource": [
+          -1.2999999523162842,
+          -0.3199999928474426,
+          0.9599999785423279
+        ],
+        "maxSource": [
+          -0.6600000262260437,
+          0.3199999928474426,
+          1.3899999856948853
+        ],
+        "actualDepthSource": [
+          0.6399999260902405,
+          0.6399999856948853,
+          0.4300000071525574
+        ],
+        "closedVolume": true
+      },
+      "screen": {
+        "owner": "TOURING tall cool blue framed screen actual skin",
+        "vertices": 8,
+        "minSource": [
+          -0.9919999837875366,
+          -0.25999999046325684,
+          1.2999999523162842
+        ],
+        "maxSource": [
+          -0.7179999947547913,
+          0.25999999046325684,
+          1.7799999713897705
+        ],
+        "actualDepthSource": [
+          0.27399998903274536,
+          0.5199999809265137,
+          0.48000001907348633
+        ],
+        "closedVolume": false
+      },
+      "pannierLeft": {
+        "owner": "TOURING closed deep pannier -1",
+        "vertices": 32,
+        "minSource": [
+          0.47999998927116394,
+          -0.5099999904632568,
+          0.699999988079071
+        ],
+        "maxSource": [
+          1.2999999523162842,
+          -0.23999999463558197,
+          1.0199999809265137
+        ],
+        "actualDepthSource": [
+          0.8199999630451202,
+          0.26999999582767487,
+          0.3199999928474426
+        ],
+        "closedVolume": true
+      },
+      "pannierRight": {
+        "owner": "TOURING closed deep pannier 1",
+        "vertices": 32,
+        "minSource": [
+          0.47999998927116394,
+          0.23999999463558197,
+          0.699999988079071
+        ],
+        "maxSource": [
+          1.2999999523162842,
+          0.5099999904632568,
+          1.0199999809265137
+        ],
+        "actualDepthSource": [
+          0.8199999630451202,
+          0.26999999582767487,
+          0.3199999928474426
+        ],
+        "closedVolume": true
+      }
+    },
+    "wholeBikeRiderRoll": true,
+    "twoCollisionNegativeResets": true,
+    "displacedRiderNegativeReset": true,
+    "fenderCoverageEach": 25,
+    "actual32HeadingsEach": [
+      "bike",
+      "rider",
+      "combined"
+    ],
+    "hiddenRider32Exact": true,
+    "depthMasks": true,
+    "paddingDensity32Exact": true,
+    "standardCardinalPlacementExact": true,
+    "desktopMobileOffline": true,
+    "scopedChecks": true
+  },
+  "sourceInputHashes": {
+    "scripts/vehicle-bake/touring-motorcycle/build.py": "d75cad0de4024d3aff6e5c57f7d254ea36b3897406a50ebbea2d0994c964a00d",
+    "scripts/vehicle-bake/touring-motorcycle/geometry.py": "45a07781001bda9eac8ee2689b3b736c7a74ddc3a61f71a27687bdc0e4de45bf",
+    "scripts/vehicle-bake/touring-motorcycle/family.json": "f8cbd870c7ba8e50743ee99625c43107085a1dcae30fb33f112d967cdbebb08a",
+    "scripts/vehicle-bake/touring-motorcycle/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "limitations": [
+    "Source pilot only. Actual shared CarMeshAsset loader/browser review remains pending parent",
+    "Only immutable Explorer upright/profile measured and fitted; no all-avatar rider identity/AI or occupied fallback qualification",
+    "Neutral steering; no suspension, rider pose animation or normal activation claim",
+    "Raw GLTF viewer reuses shared camera and outline math, not a copied/forked engine loader",
+    "Editable runtime-topology component master; no high-to-low decimation claim",
+    "Static touring equipment only; no luggage interaction, suspension articulation or gameplay feature qualification"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "status": "complete-agent-source-peer-review",
+  "sourceOnly": true,
+  "sourceImmutable": true,
+  "humanApproval": false,
+  "formalHumanVerdict": null,
+  "normalActivation": false,
+  "productionQualified": false,
+  "actualBikeQualified": false,
+  "blockingIdentityIssueObserved": false,
+  "rootOwnsActualBikeRelease": true,
+  "assessment": "Pointed ears restored with actual silhouette evidence; v2 eye/collar landmarks preserved. Promising for isolated fit, pending root replay/release. Tall game profile remains a recorded limitation.",
+  "glbSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "triangles": 1766,
+  "unchangedComponentsFromV2": 20,
+  "onlyChangedOwners": [
+    "RiderClassic pointed ear left",
+    "RiderClassic pointed ear right"
+  ],
+  "actualDecodedNonEarAttributesExact": true,
+  "profileAndAtlasExact": true,
+  "all32EyesAndCollarCoordinatesExactToV2": true,
+  "all32EarNegativeAndReset": true,
+  "all32FootprintsInspected": true,
+  "all96V3ReferencesRGBAExact": true,
+  "outlineStrokePairs": 128,
+  "sourceVioletCommonInkRGBParityClaim": false,
+  "oldV1V2PackageAndCLIUnchanged": true,
+  "parentSourceReplayStatus": "Parent owns fresh four-input replay; not independently claimed by this peer diagnostic."
+}

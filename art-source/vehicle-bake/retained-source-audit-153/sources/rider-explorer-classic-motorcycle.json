@@ -1,0 +1,338 @@
+{
+  "status": "passed",
+  "auditKind": "static-hash-declaration",
+  "auditorSha256": "c800a704af6f3a0ffb3554f9188a19597406eec5c99dab38af1c2ef6c633ebf0",
+  "receipt": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/replay-verification.json",
+  "receiptSha256": "3a6ff0a5281f7b62ac0af53be1a33132aaebbfd0c69caa0b3bb493e07a49ddd9",
+  "retained": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1",
+  "public": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1",
+  "inputRoot": null,
+  "explicitModelName": "model.glb",
+  "declaredInputPins": 17,
+  "auditedReceiptPinMaps": [
+    "inputHashes",
+    "sharedInputHashes"
+  ],
+  "supplementalReceiptHashMapsNotAudited": [],
+  "inputs": [
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/assembly.json",
+      "sha256": "3b6b9d1b666b2c8595e74940e4bd46d20aa3f21df720106a32520937c371e776",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/component-package-cycle.py",
+      "sha256": "d770b66e08a76cf914f58685776f1ee69bb86c9dc5d87dda519c80d0ae7e464d",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/compose-component.py",
+      "sha256": "6659e9d078ed6a317049ed50606551239c494c156cd6ef55586a7fe2f9ce7df4",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/compose-component-cycle.py",
+      "sha256": "cf7020b2e5e4d6a9bb81b8615040aadfc49a539dc453ca434ad3c909937f268d",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/catalog-cycle.py",
+      "sha256": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/classic-motorcycle/v1/source-replay.json",
+      "sha256": "56d362eb280a85806e56a520036bf7ef03037bd5f61ad3ccf531c8efc3ec21d5",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/base-independent-replay.json",
+      "sha256": "d61f0b4a3825ac3f6905f510119740dd2c4e1e5ca08939c52ff04e00e2a15c36",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+      "sha256": "20bdcf085ef11e934a40507a9cbef0cc3262e1a73c9c1d5acd5e45570b3d790a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/rider-independent-replay.json",
+      "sha256": "0c5ee33097961dd2254c957aeb112c18ec2e2ebfb65b02b6a8fb4ad2a3a4cebb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/classic-motorcycle/v1/model.glb",
+      "sha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/classic-motorcycle/v1/master.blend",
+      "sha256": "a51bf6b6221deac7a82d6063837a88a3740171f5f3b263bfbedbb355dbc8ce5c",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/base-normalized-replay.json",
+      "sha256": "e0ce00867d29cf3416ccf55d72c99c10af6ea66582291b715e8d10a0a89e7ebe",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/master.blend",
+      "sha256": "b453ca55e4bf7d2bb6adc0ea2de4685402c886111204300e10442b8acf9fb980",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/rider-normalized-replay.json",
+      "sha256": "f1faadea84ba9e094ebbc7c9b6537a8ab2423546dc0236496c1a0bf3915f4034",
+      "resolution": "current"
+    }
+  ],
+  "normalizedOutputs": {
+    "model.glb": {
+      "sha256": "98820ac0014a0afbf8018abae55436d0c9f4889a880431ac7113f08144e9f1e8"
+    },
+    "atlas.png": {
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+    },
+    "companion-atlas.png": {
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+    },
+    "recipe.json": {
+      "sha256": "8d20926d25447e08e6fa5247fd63e1f8dee82b7930546366bdbf74ae77351ad4"
+    }
+  },
+  "checkedOutputs": [
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/model.glb",
+      "sha256": "98820ac0014a0afbf8018abae55436d0c9f4889a880431ac7113f08144e9f1e8",
+      "bytes": 318676
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "bytes": 2987
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "bytes": 1318
+    },
+    {
+      "location": "retained",
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/recipe.json",
+      "sha256": "8d20926d25447e08e6fa5247fd63e1f8dee82b7930546366bdbf74ae77351ad4",
+      "bytes": 6339
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/model.glb",
+      "sha256": "98820ac0014a0afbf8018abae55436d0c9f4889a880431ac7113f08144e9f1e8",
+      "bytes": 318676
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "bytes": 2987
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "bytes": 1318
+    },
+    {
+      "location": "public",
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/recipe.json",
+      "sha256": "8d20926d25447e08e6fa5247fd63e1f8dee82b7930546366bdbf74ae77351ad4",
+      "bytes": 6339
+    }
+  ],
+  "retainedFilePins": 30,
+  "retainedFilesSha256": "aec6063f558760aa326556adffebad38de10027d1238f29971c2d72f167200c5",
+  "retainedFiles": [
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/assembly.json",
+      "sha256": "3b6b9d1b666b2c8595e74940e4bd46d20aa3f21df720106a32520937c371e776",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/component-package-cycle.py",
+      "sha256": "d770b66e08a76cf914f58685776f1ee69bb86c9dc5d87dda519c80d0ae7e464d",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/compose-component.py",
+      "sha256": "6659e9d078ed6a317049ed50606551239c494c156cd6ef55586a7fe2f9ce7df4",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/compose-component-cycle.py",
+      "sha256": "cf7020b2e5e4d6a9bb81b8615040aadfc49a539dc453ca434ad3c909937f268d",
+      "resolution": "current"
+    },
+    {
+      "path": "scripts/vehicle-bake/catalog-cycle.py",
+      "sha256": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/classic-motorcycle/v1/source-replay.json",
+      "sha256": "56d362eb280a85806e56a520036bf7ef03037bd5f61ad3ccf531c8efc3ec21d5",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/base-independent-replay.json",
+      "sha256": "d61f0b4a3825ac3f6905f510119740dd2c4e1e5ca08939c52ff04e00e2a15c36",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+      "sha256": "20bdcf085ef11e934a40507a9cbef0cc3262e1a73c9c1d5acd5e45570b3d790a",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/rider-independent-replay.json",
+      "sha256": "0c5ee33097961dd2254c957aeb112c18ec2e2ebfb65b02b6a8fb4ad2a3a4cebb",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/classic-motorcycle/v1/model.glb",
+      "sha256": "43704c934d2e56ab20e23411737cc989cf70495d362b817c33c41615516bf7b1",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/classic-motorcycle/v1/master.blend",
+      "sha256": "a51bf6b6221deac7a82d6063837a88a3740171f5f3b263bfbedbb355dbc8ce5c",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/base-normalized-replay.json",
+      "sha256": "e0ce00867d29cf3416ccf55d72c99c10af6ea66582291b715e8d10a0a89e7ebe",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+      "sha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-riders/explorer-upright/v1/master.blend",
+      "sha256": "b453ca55e4bf7d2bb6adc0ea2de4685402c886111204300e10442b8acf9fb980",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/rider-normalized-replay.json",
+      "sha256": "f1faadea84ba9e094ebbc7c9b6537a8ab2423546dc0236496c1a0bf3915f4034",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/composition.json",
+      "sha256": "8fd92fc4975585917d86e84ec71cc8c32e4ba4350532f40f47f921379618ca62",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/model.glb",
+      "sha256": "98820ac0014a0afbf8018abae55436d0c9f4889a880431ac7113f08144e9f1e8",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/recipe.json",
+      "sha256": "8d20926d25447e08e6fa5247fd63e1f8dee82b7930546366bdbf74ae77351ad4",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/report.json",
+      "sha256": "8f957b2ccd3be9cfee2c782f8846a55f7b4a9303524ffc06a9130fdc57266f58",
+      "resolution": "current"
+    },
+    {
+      "path": "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/replay-verification.json",
+      "sha256": "3a6ff0a5281f7b62ac0af53be1a33132aaebbfd0c69caa0b3bb493e07a49ddd9",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/atlas.png",
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/companion-atlas.png",
+      "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/composition.json",
+      "sha256": "8fd92fc4975585917d86e84ec71cc8c32e4ba4350532f40f47f921379618ca62",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/model.glb",
+      "sha256": "98820ac0014a0afbf8018abae55436d0c9f4889a880431ac7113f08144e9f1e8",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/recipe.json",
+      "sha256": "8d20926d25447e08e6fa5247fd63e1f8dee82b7930546366bdbf74ae77351ad4",
+      "resolution": "current"
+    },
+    {
+      "path": "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1/report.json",
+      "sha256": "8f957b2ccd3be9cfee2c782f8846a55f7b4a9303524ffc06a9130fdc57266f58",
+      "resolution": "current"
+    }
+  ],
+  "historicalResolutions": [],
+  "ignoreRuleHashes": {
+    ".gitignore": "5fa6141ba0b839177666f8dac1909601fee97d9daaa627622b6326bec53f49b1"
+  },
+  "resolverSha256": "f9505c413e0d51e85a52cbbb4cc2be78d302f52e2b4d4220b947d2f9c0609542",
+  "freshConstructionPerformed": false,
+  "qualificationGranted": false,
+  "limits": [
+    "STATIC HASH/DECLARATION audit only; no constructor or imported builder executed",
+    "Fresh declared-input construction with source-replay.py remains mandatory separately",
+    "No hidden-import, mesh, contact, pixel, human-approval or normal-activation qualification",
+    "Repository .gitignore rules checked; Git index, global ignores and tracked exceptions not consulted",
+    "Only declared retained-files entries audited; no assertion that the map inventories every unlisted file",
+    "Receipt byteExact/status fields are historical metadata, not fresh replay evidence",
+    "Supplemental diagnostic hash maps are not constructor declarations and are listed separately as unaudited"
+  ]
+}

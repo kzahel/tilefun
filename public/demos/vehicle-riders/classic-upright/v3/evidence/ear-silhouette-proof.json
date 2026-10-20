@@ -1,0 +1,98 @@
+{
+  "status": "passed-native-ear-silhouette-controls",
+  "riderSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "semanticMapSha256": "dc2b9b2cb199b186b672da9684dd430c3d4005c599dde68d337377052e44cf51",
+  "all32AttributeBuffersAndExactResets": true,
+  "all32RawSourceSharedAlphaLossIdentical": true,
+  "bothEarsDistinctFrontAndNearFrontBothCameras": true,
+  "nativeFrontPointedNotRoof": true,
+  "frontAndNearFront": [
+    {
+      "camera": "study",
+      "yaw": 67.5,
+      "leftOnlySilhouettePixels": 2,
+      "rightOnlySilhouettePixels": 6,
+      "bothRemovedPixels": 8,
+      "disjointEarLandmarks": true,
+      "nativePointedFrontProfiles": []
+    },
+    {
+      "camera": "study",
+      "yaw": 90,
+      "leftOnlySilhouettePixels": 4,
+      "rightOnlySilhouettePixels": 4,
+      "bothRemovedPixels": 8,
+      "disjointEarLandmarks": true,
+      "nativePointedFrontProfiles": [
+        {
+          "onePixelApex": true,
+          "visibleHeightPixels": 2,
+          "maximumWidthPixels": 3,
+          "alphaPixels": 4
+        },
+        {
+          "onePixelApex": true,
+          "visibleHeightPixels": 2,
+          "maximumWidthPixels": 3,
+          "alphaPixels": 4
+        }
+      ]
+    },
+    {
+      "camera": "study",
+      "yaw": 112.5,
+      "leftOnlySilhouettePixels": 6,
+      "rightOnlySilhouettePixels": 2,
+      "bothRemovedPixels": 8,
+      "disjointEarLandmarks": true,
+      "nativePointedFrontProfiles": []
+    },
+    {
+      "camera": "engine",
+      "yaw": 67.5,
+      "leftOnlySilhouettePixels": 5,
+      "rightOnlySilhouettePixels": 9,
+      "bothRemovedPixels": 14,
+      "disjointEarLandmarks": true,
+      "nativePointedFrontProfiles": []
+    },
+    {
+      "camera": "engine",
+      "yaw": 90,
+      "leftOnlySilhouettePixels": 7,
+      "rightOnlySilhouettePixels": 7,
+      "bothRemovedPixels": 14,
+      "disjointEarLandmarks": true,
+      "nativePointedFrontProfiles": [
+        {
+          "onePixelApex": true,
+          "visibleHeightPixels": 4,
+          "maximumWidthPixels": 3,
+          "alphaPixels": 7
+        },
+        {
+          "onePixelApex": true,
+          "visibleHeightPixels": 4,
+          "maximumWidthPixels": 3,
+          "alphaPixels": 7
+        }
+      ]
+    },
+    {
+      "camera": "engine",
+      "yaw": 112.5,
+      "leftOnlySilhouettePixels": 9,
+      "rightOnlySilhouettePixels": 5,
+      "bothRemovedPixels": 14,
+      "disjointEarLandmarks": true,
+      "nativePointedFrontProfiles": []
+    }
+  ],
+  "meaning": "Only actual mapped32triangles per ear are removed from the actual GLB index buffer; all other triangles, positions, normals, UVs, atlas, materials, transforms and cameras stay exact. Front alpha loss has two separated one-pixel apices widening below; restoring indices restores every pixel. No fake ear tags or silhouette paint.",
+  "humanApproval": false,
+  "CarMeshAssetUsed": false,
+  "limits": [
+    "Finite semantic silhouette evidence supplements required actual image inspection; not human or independent peer appearance approval.",
+    "No normal availability, bike fit, all27, AI or occupied fallback qualification."
+  ]
+}

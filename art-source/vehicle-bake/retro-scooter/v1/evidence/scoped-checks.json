@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "scope": "own family sources only",
+  "commands": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "black",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter"
+      ],
+      "exitCode": 0,
+      "output": "All done! \\u2728 \\U0001f370 \\u2728\n15 files would be left unchanged.\n"
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter\\build-view.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter\\capture-raw.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\node_modules\\.bin\\biome.cmd",
+        "check",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter\\build-view.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter\\capture-raw.mjs",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter\\coverage-region.json",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter\\family.json",
+        "C:\\Users\\sox\\Documents\\code\\tilefun\\scripts\\vehicle-bake\\retro-scooter\\raw-viewer.mjs"
+      ],
+      "exitCode": 0,
+      "output": "Checked 5 files in 14ms. No fixes applied.\n"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-bake/retro-scooter/assess-pixels.py": "c7e09969fd5950b5ea276ec238842b233e1ceaa067ab486557f7436d4af4a74f",
+    "scripts/vehicle-bake/retro-scooter/audit-source.py": "f2d377fe90be958516e5248d1b354ac24f7db67e99cb518c160b00b9be82efb8",
+    "scripts/vehicle-bake/retro-scooter/build-view.mjs": "eef2bbb3b0d93f8709110c08ff112c89c25c06ebe9b9554929dbe1ba0c5abfa3",
+    "scripts/vehicle-bake/retro-scooter/build.py": "1e28bcdd39e0f2347b8572b09dfea54b151e395cf84762b8ba1768d556f70a9a",
+    "scripts/vehicle-bake/retro-scooter/capture-raw.mjs": "021568a1e8870785784e0a9a2bfbcfd8b6869b7041156bbfee0da06c8d1ab029",
+    "scripts/vehicle-bake/retro-scooter/checks.py": "f04155384608eba874851a0e4fb1d8c3f3d74a375e1fd5d048826595852f3af3",
+    "scripts/vehicle-bake/retro-scooter/coverage-region.json": "c57c2de38df37175dbfecd3cb4f5836bf5596d97ad213c2fc4bd1726de978f18",
+    "scripts/vehicle-bake/retro-scooter/family.json": "74a3beb6df3d9fd2fb370ebd39e0b2f88a2db0ed8554d4288b06d561f2d4ab74",
+    "scripts/vehicle-bake/retro-scooter/finalize.py": "79874043dabb763ecdd6ee9acbbff97e04cbc392bd849c04e5fd8f302f0a8ad0",
+    "scripts/vehicle-bake/retro-scooter/FITTING.md": "97b2ad02599184e0fc2a460d511579fb14df51617f0307ef7cd517d139be1642",
+    "scripts/vehicle-bake/retro-scooter/fresh-replay.py": "12b268edc957376482fcb0e88a0713a25a6de8c2c0ef7025e050c78bca7fa430",
+    "scripts/vehicle-bake/retro-scooter/geometry.py": "6bb0aae4eafc65686745aca1f4f1ca28805ca8e170a207ce037aa9c10d9fe48d",
+    "scripts/vehicle-bake/retro-scooter/normalize-replay.py": "c8932d3844c1bae6bd95644b9565df4be573da9c6de395bd981d49965e2ce298",
+    "scripts/vehicle-bake/retro-scooter/parameter-api-proof.py": "0e20ff36d1d333a1080717aae2977be639aedd9f167e0e062712b094ba31e6cb",
+    "scripts/vehicle-bake/retro-scooter/prove-contact-pairs.py": "4cc7c3fe775efbc7d0a2a7d0a4c125ea7f4114914ff9d445ea245a29ada87d6c",
+    "scripts/vehicle-bake/retro-scooter/prove-fit.py": "b120b36b50bd647c7bbbb06018955bd888ed2a8a5abc5901a0980b6919f7f777",
+    "scripts/vehicle-bake/retro-scooter/prove-immutable-rider-self.py": "e01edb25f8618eb83f621eb68ad23e6ee093c25f010d249aedbee3d53281eb35",
+    "scripts/vehicle-bake/retro-scooter/prove-shape.py": "8eef7e53306f8510f88b0fbbb6eb2d813cfcf82ac84921651b34d02d59a5b337",
+    "scripts/vehicle-bake/retro-scooter/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd",
+    "scripts/vehicle-bake/retro-scooter/raw-diagnostic.html": "0acf0b288fc8109eebf2bdf29325ad1fdacdeb7f1721b116f9718f694e9f485b",
+    "scripts/vehicle-bake/retro-scooter/raw-viewer.mjs": "184fd57c3019dee0b987eab22ea31844d1b1ba0b8dcd5dd8504a59f48fcf218b",
+    "scripts/vehicle-bake/retro-scooter/sheets.py": "f6efbe5efa792e5944c806d95815fc29a053614e4579038fd22a2c005c39c833"
+  },
+  "pythonSyntaxCompiledOnlyIntoOwnIgnoredScratch": true,
+  "globalChecksRun": false,
+  "gitUsed": false
+}

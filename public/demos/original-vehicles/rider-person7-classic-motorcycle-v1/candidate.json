@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-person7-classic-motorcycle-v1",
+      "name": "person7-upright \u00b7 classic-motorcycle-person7-fit fit pilot",
+      "title": "person7-upright \u00b7 classic-motorcycle-person7-fit \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact classic-motorcycle-person7-fit and unchanged person7-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 4418,
+        "vertices": 8998,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 324596,
+        "sha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/atlas.png",
+          "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "5ceba48f52d25f94f02949502ee8e64057f90ce1c9798af9164d34132a8cc519"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/composition.json",
+          "sha256": "f017d6e1ad65b6d4d9668e2c4a6f2f1bd83c504fe77dc4ea6275ee6c92eab0c3"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/model.glb",
+          "sha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/recipe.json",
+          "sha256": "0e5394a7b0297de6449619ed9177287bd0ee64c3ff7f27dd0dca95b49f12c9dc"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/report.json",
+          "sha256": "737d9e6b9a705ded26a05070696e8752b95317ab07b140adf5ea3146bd275ad8"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+{
+  "workingDirectory": "repository root",
+  "pythonExecutable": "python",
+  "outputsOnlyUnderIgnoredData": true,
+  "constructionExecuted": false,
+  "commands": [
+    {
+      "source": "classic-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/classic-motorcycle/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/classic-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/classic-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/classic-motorcycle"
+      ]
+    },
+    {
+      "source": "sidecar-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/sidecar-motorcycle/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/sidecar-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/sidecar-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/sidecar-motorcycle"
+      ]
+    },
+    {
+      "source": "sport-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/sport-motorcycle/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/sport-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/sport-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/sport-motorcycle"
+      ]
+    },
+    {
+      "source": "cruiser-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/cruiser-motorcycle/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/cruiser-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/cruiser-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/cruiser-motorcycle"
+      ]
+    },
+    {
+      "source": "retro-scooter",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/retro-scooter/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/retro-scooter/v1",
+        "--public",
+        "public/demos/vehicle-bake/retro-scooter/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/retro-scooter"
+      ]
+    },
+    {
+      "source": "dirt-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/dirt-motorcycle/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/dirt-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/dirt-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/dirt-motorcycle"
+      ]
+    },
+    {
+      "source": "touring-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/touring-motorcycle/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/touring-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/touring-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/touring-motorcycle"
+      ]
+    },
+    {
+      "source": "rider-explorer-classic-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-explorer-classic-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-explorer-classic-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-explorer-classic-motorcycle"
+      ]
+    },
+    {
+      "source": "rider-explorer-sidecar-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-explorer-sidecar-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-explorer-sidecar-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-explorer-sidecar-motorcycle"
+      ]
+    },
+    {
+      "source": "rider-explorer-sport-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-explorer-sport-motorcycle/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-explorer-sport-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-explorer-sport-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-explorer-sport-motorcycle"
+      ]
+    },
+    {
+      "source": "rider-explorer-cruiser-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-explorer-cruiser-motorcycle/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-explorer-cruiser-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-explorer-cruiser-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-explorer-cruiser-motorcycle"
+      ]
+    },
+    {
+      "source": "rider-explorer-retro-scooter",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-explorer-retro-scooter/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-explorer-retro-scooter/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-explorer-retro-scooter/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-explorer-retro-scooter"
+      ]
+    },
+    {
+      "source": "rider-explorer-dirt-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-explorer-dirt-motorcycle"
+      ]
+    },
+    {
+      "source": "rider-explorer-touring-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-explorer-touring-motorcycle/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-explorer-touring-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-explorer-touring-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-explorer-touring-motorcycle"
+      ]
+    },
+    {
+      "source": "rider-bear-classic-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-bear-classic-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-bear-classic-motorcycle"
+      ]
+    },
+    {
+      "source": "rider-person7-classic-motorcycle",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/rider-person7-classic-motorcycle/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-bake/rider-person7-classic-motorcycle/v1",
+        "--public",
+        "public/demos/vehicle-bake/rider-person7-classic-motorcycle/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/rider-person7-classic-motorcycle"
+      ]
+    },
+    {
+      "source": "classic-motorcycle-bear-fit",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/classic-motorcycle-bear-fit/v1",
+        "--public",
+        "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/classic-motorcycle-bear-fit"
+      ]
+    },
+    {
+      "source": "classic-motorcycle-person7-fit",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1/source-replay.json",
+        "--retained",
+        "art-source/vehicle-bake/classic-motorcycle-person7-fit/v1",
+        "--public",
+        "public/demos/vehicle-bake/classic-motorcycle-person7-fit/v1",
+        "--model-name",
+        "model.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/classic-motorcycle-person7-fit"
+      ]
+    },
+    {
+      "source": "explorer-v1",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-riders/explorer/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-riders/explorer/v1",
+        "--public",
+        "public/demos/vehicle-riders/explorer/v1",
+        "--model-name",
+        "rider.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/explorer-v1"
+      ]
+    },
+    {
+      "source": "explorer-upright-v1",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-riders/explorer-upright/v1",
+        "--public",
+        "public/demos/vehicle-riders/explorer-upright/v1",
+        "--model-name",
+        "rider.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/explorer-upright-v1",
+        "--input-root",
+        "art-source/vehicle-riders/explorer-upright/v1"
+      ]
+    },
+    {
+      "source": "bear-upright-v1",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-riders/bear-upright/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-riders/bear-upright/v1",
+        "--public",
+        "public/demos/vehicle-riders/bear-upright/v1",
+        "--model-name",
+        "rider.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/bear-upright-v1",
+        "--input-root",
+        "art-source/vehicle-riders/bear-upright/v1"
+      ]
+    },
+    {
+      "source": "person7-upright-v1",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-riders/person7-upright/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-riders/person7-upright/v1",
+        "--public",
+        "public/demos/vehicle-riders/person7-upright/v1",
+        "--model-name",
+        "rider.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/person7-upright-v1",
+        "--input-root",
+        "art-source/vehicle-riders/person7-upright/v1"
+      ]
+    },
+    {
+      "source": "classic-upright-v1",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-riders/classic-upright/v1/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-riders/classic-upright/v1",
+        "--public",
+        "public/demos/vehicle-riders/classic-upright/v1",
+        "--model-name",
+        "rider.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/classic-upright-v1"
+      ]
+    },
+    {
+      "source": "classic-upright-v2",
+      "argv": [
+        "python",
+        "scripts/vehicle-bake/retained-source-audit.py",
+        "art-source/vehicle-riders/classic-upright/v2/evidence/replay-verification.json",
+        "--retained",
+        "art-source/vehicle-riders/classic-upright/v2",
+        "--public",
+        "public/demos/vehicle-riders/classic-upright/v2",
+        "--model-name",
+        "rider.glb",
+        "--qa",
+        "data/vehicle-bake/retained-source-audit-153-recheck/classic-upright-v2"
+      ]
+    }
+  ]
+}

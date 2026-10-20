@@ -1,0 +1,895 @@
+{
+  "status": "passed",
+  "glbSha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+  "riderSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "inputHashes": {
+    "art-source/vehicle-bake/retro-scooter/v1/master.blend": "c895774f3a4d4c5cfde3720db4dd536206c531db0c7bb40392c1ca706625be02",
+    "art-source/vehicle-bake/retro-scooter/v1/model.glb": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+    "art-source/vehicle-riders/explorer-upright/v1/master.blend": "b453ca55e4bf7d2bb6adc0ea2de4685402c886111204300e10442b8acf9fb980",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500"
+  },
+  "riderTrianglesMatchedToNamedMaster": 1956,
+  "bikeFixedTrianglesMatchedToNamedMaster": 1416,
+  "baseline": {
+    "status": "passed",
+    "pairs": [
+      {
+        "bikeOwner": "Actual continuous step-through floor",
+        "riderOwner": "Boot sole left",
+        "intersectionTrianglePairs": 12,
+        "intersectionPoints": 24,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual continuous step-through floor",
+        "riderOwner": "Boot sole right",
+        "intersectionTrianglePairs": 12,
+        "intersectionPoints": 24,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual dark saddle central hip tangent",
+        "riderOwner": "Upright seated trouser pelvis",
+        "intersectionTrianglePairs": 6,
+        "intersectionPoints": 12,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip left",
+        "riderOwner": "Warm gripping hand left",
+        "intersectionTrianglePairs": 69,
+        "intersectionPoints": 146,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 4,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip right",
+        "riderOwner": "Warm gripping hand right",
+        "intersectionTrianglePairs": 69,
+        "intersectionPoints": 146,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 4,
+        "boundedDeclaredContactOnly": true,
+        "unallowedPoints": 0,
+        "unallowedExamplesWorld": []
+      }
+    ],
+    "inappropriatePairs": []
+  },
+  "negative": {
+    "translationSource": [
+      -0.35,
+      0,
+      -0.22
+    ],
+    "actualConfiguredShieldCollisionDetected": true,
+    "inappropriatePairs": [
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Straddle thigh left",
+        "intersectionTrianglePairs": 50,
+        "intersectionPoints": 100,
+        "bikeVerticesInsideClosedRiderPart": 3,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 103,
+        "unallowedExamplesWorld": [
+          [
+            -8.622453689575195,
+            -5.230386734008789,
+            8.476487159729004
+          ],
+          [
+            -8.652538299560547,
+            -5.328315734863281,
+            8.62632942199707
+          ],
+          [
+            -8.67878532409668,
+            -5.413761615753174,
+            8.757072448730469
+          ],
+          [
+            -8.652536392211914,
+            -5.328314781188965,
+            8.626330375671387
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Bent outboard knee left",
+        "intersectionTrianglePairs": 29,
+        "intersectionPoints": 58,
+        "bikeVerticesInsideClosedRiderPart": 2,
+        "riderVerticesInsideClosedBikePart": 8,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 68,
+        "unallowedExamplesWorld": [
+          [
+            -10.420232772827148,
+            -4.656691551208496,
+            8.957254409790039
+          ],
+          [
+            -10.399539947509766,
+            -4.749556541442871,
+            8.991087913513184
+          ],
+          [
+            -10.399539947509766,
+            -4.749556541442871,
+            8.991087913513184
+          ],
+          [
+            -10.317697525024414,
+            -5.043478012084961,
+            9.057700157165527
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Bent support shin left",
+        "intersectionTrianglePairs": 31,
+        "intersectionPoints": 62,
+        "bikeVerticesInsideClosedRiderPart": 3,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 67,
+        "unallowedExamplesWorld": [
+          [
+            -9.90418529510498,
+            -5.222799301147461,
+            8.198288917541504
+          ],
+          [
+            -10.147574424743652,
+            -4.458040237426758,
+            8.10032844543457
+          ],
+          [
+            -9.812356948852539,
+            -5.299771308898926,
+            8.302058219909668
+          ],
+          [
+            -9.890335083007812,
+            -5.272461414337158,
+            8.201923370361328
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Bent upper teal sleeve left",
+        "intersectionTrianglePairs": 25,
+        "intersectionPoints": 50,
+        "bikeVerticesInsideClosedRiderPart": 2,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 54,
+        "unallowedExamplesWorld": [
+          [
+            -9.788447380065918,
+            -3.4091503620147705,
+            19.038097381591797
+          ],
+          [
+            -9.87562084197998,
+            -3.4158201217651367,
+            18.95908546447754
+          ],
+          [
+            -10.070329666137695,
+            -3.430718183517456,
+            18.782609939575195
+          ],
+          [
+            -9.87562084197998,
+            -3.415820360183716,
+            18.95908546447754
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Actual elbow left",
+        "intersectionTrianglePairs": 47,
+        "intersectionPoints": 94,
+        "bikeVerticesInsideClosedRiderPart": 1,
+        "riderVerticesInsideClosedBikePart": 13,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 108,
+        "unallowedExamplesWorld": [
+          [
+            -9.874788284301758,
+            -4.314157962799072,
+            18.88640022277832
+          ],
+          [
+            -10.192861557006836,
+            -4.153842449188232,
+            18.9665584564209
+          ],
+          [
+            -10.47826099395752,
+            -4.108006954193115,
+            18.98947525024414
+          ],
+          [
+            -10.763660430908203,
+            -4.153842449188232,
+            18.9665584564209
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Raised teal forearm left",
+        "intersectionTrianglePairs": 36,
+        "intersectionPoints": 72,
+        "bikeVerticesInsideClosedRiderPart": 1,
+        "riderVerticesInsideClosedBikePart": 3,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 76,
+        "unallowedExamplesWorld": [
+          [
+            -10.531899452209473,
+            -4.286072254180908,
+            18.90044403076172
+          ],
+          [
+            -10.545278549194336,
+            -4.425601482391357,
+            18.830678939819336
+          ],
+          [
+            -10.523324012756348,
+            -4.196646690368652,
+            18.94515609741211
+          ],
+          [
+            -10.531899452209473,
+            -4.286072254180908,
+            18.90044403076172
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Straddle thigh right",
+        "intersectionTrianglePairs": 50,
+        "intersectionPoints": 100,
+        "bikeVerticesInsideClosedRiderPart": 3,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 103,
+        "unallowedExamplesWorld": [
+          [
+            -10.327593803405762,
+            4.028109073638916,
+            8.287717819213867
+          ],
+          [
+            -10.319352149963379,
+            4.0002055168151855,
+            8.243280410766602
+          ],
+          [
+            -10.386665344238281,
+            4.228113174438477,
+            8.606230735778809
+          ],
+          [
+            -10.327593803405762,
+            4.028109073638916,
+            8.287717819213867
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Bent outboard knee right",
+        "intersectionTrianglePairs": 29,
+        "intersectionPoints": 58,
+        "bikeVerticesInsideClosedRiderPart": 2,
+        "riderVerticesInsideClosedBikePart": 8,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 68,
+        "unallowedExamplesWorld": [
+          [
+            -10.360638618469238,
+            4.247960090637207,
+            8.548011779785156
+          ],
+          [
+            -10.330997467041016,
+            4.096501350402832,
+            8.349322319030762
+          ],
+          [
+            -10.330997467041016,
+            4.096501350402832,
+            8.349322319030762
+          ],
+          [
+            -10.276665687561035,
+            4.0753397941589355,
+            8.180181503295898
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Bent support shin right",
+        "intersectionTrianglePairs": 31,
+        "intersectionPoints": 62,
+        "bikeVerticesInsideClosedRiderPart": 3,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 67,
+        "unallowedExamplesWorld": [
+          [
+            -10.20225715637207,
+            4.114022254943848,
+            8.0
+          ],
+          [
+            -10.226873397827148,
+            4.140987873077393,
+            8.089849472045898
+          ],
+          [
+            -10.226873397827148,
+            4.140987873077393,
+            8.089849472045898
+          ],
+          [
+            -10.210161209106445,
+            4.206381320953369,
+            8.092508316040039
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Bent upper teal sleeve right",
+        "intersectionTrianglePairs": 25,
+        "intersectionPoints": 50,
+        "bikeVerticesInsideClosedRiderPart": 2,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 54,
+        "unallowedExamplesWorld": [
+          [
+            -9.294365882873535,
+            3.3290457725524902,
+            19.378955841064453
+          ],
+          [
+            -9.462007522583008,
+            3.3899271488189697,
+            19.348514556884766
+          ],
+          [
+            -10.035513877868652,
+            3.7550597190856934,
+            19.16594886779785
+          ],
+          [
+            -9.462007522583008,
+            3.3899271488189697,
+            19.348514556884766
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Actual elbow right",
+        "intersectionTrianglePairs": 47,
+        "intersectionPoints": 94,
+        "bikeVerticesInsideClosedRiderPart": 1,
+        "riderVerticesInsideClosedBikePart": 13,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 108,
+        "unallowedExamplesWorld": [
+          [
+            -10.192861557006836,
+            4.153842926025391,
+            18.9665584564209
+          ],
+          [
+            -9.874788284301758,
+            4.3141584396362305,
+            18.88640022277832
+          ],
+          [
+            -9.874788284301758,
+            4.3141584396362305,
+            18.88640022277832
+          ],
+          [
+            -9.817824363708496,
+            4.386280536651611,
+            18.850339889526367
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Rounded transverse mint cream legshield skin UV",
+        "riderOwner": "Raised teal forearm right",
+        "intersectionTrianglePairs": 37,
+        "intersectionPoints": 74,
+        "bikeVerticesInsideClosedRiderPart": 1,
+        "riderVerticesInsideClosedBikePart": 3,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 78,
+        "unallowedExamplesWorld": [
+          [
+            -10.554496765136719,
+            4.5217390060424805,
+            18.782609939575195
+          ],
+          [
+            -10.523324012756348,
+            4.196646690368652,
+            18.94515609741211
+          ],
+          [
+            -10.969341278076172,
+            4.274617671966553,
+            18.906169891357422
+          ],
+          [
+            -10.523324012756348,
+            4.196646690368652,
+            18.94515609741211
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual continuous step-through floor",
+        "riderOwner": "Bent support shin left",
+        "intersectionTrianglePairs": 38,
+        "intersectionPoints": 76,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 76,
+        "unallowedExamplesWorld": [
+          [
+            -6.11686897277832,
+            -4.308587551116943,
+            6.086956977844238
+          ],
+          [
+            -6.044539928436279,
+            -4.128214359283447,
+            6.086956977844238
+          ],
+          [
+            -6.1875104904174805,
+            -3.9965877532958984,
+            6.086956977844238
+          ],
+          [
+            -6.561753749847412,
+            -3.652038097381592,
+            6.086956977844238
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual continuous step-through floor",
+        "riderOwner": "Bent support shin right",
+        "intersectionTrianglePairs": 36,
+        "intersectionPoints": 72,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 72,
+        "unallowedExamplesWorld": [
+          [
+            -7.51545524597168,
+            4.071373462677002,
+            6.956522464752197
+          ],
+          [
+            -7.7235565185546875,
+            3.8797733783721924,
+            6.956522464752197
+          ],
+          [
+            -8.829465866088867,
+            3.8399710655212402,
+            6.956522464752197
+          ],
+          [
+            -8.473464012145996,
+            3.852783679962158,
+            6.956522464752197
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Step-through raised outer floor rail -1",
+        "riderOwner": "Straddle thigh left",
+        "intersectionTrianglePairs": 21,
+        "intersectionPoints": 42,
+        "bikeVerticesInsideClosedRiderPart": 6,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 49,
+        "unallowedExamplesWorld": [
+          [
+            -8.931411743164062,
+            -5.4636688232421875,
+            8.34782600402832
+          ],
+          [
+            -8.928462982177734,
+            -5.460869789123535,
+            8.34782600402832
+          ],
+          [
+            -9.323972702026367,
+            -5.73913049697876,
+            8.139130592346191
+          ],
+          [
+            -9.495461463928223,
+            -5.73913049697876,
+            7.788183212280273
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Step-through raised outer floor rail -1",
+        "riderOwner": "Bent outboard knee left",
+        "intersectionTrianglePairs": 26,
+        "intersectionPoints": 52,
+        "bikeVerticesInsideClosedRiderPart": 9,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 62,
+        "unallowedExamplesWorld": [
+          [
+            -9.16339111328125,
+            -5.462584972381592,
+            8.34782600402832
+          ],
+          [
+            -9.16263484954834,
+            -5.460869789123535,
+            8.34782600402832
+          ],
+          [
+            -9.285211563110352,
+            -5.73913049697876,
+            8.139130592346191
+          ],
+          [
+            -9.285212516784668,
+            -5.73913049697876,
+            7.689714431762695
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Step-through raised outer floor rail -1",
+        "riderOwner": "Bent support shin left",
+        "intersectionTrianglePairs": 24,
+        "intersectionPoints": 48,
+        "bikeVerticesInsideClosedRiderPart": 11,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 59,
+        "unallowedExamplesWorld": [
+          [
+            -9.253103256225586,
+            -5.462165832519531,
+            8.34782600402832
+          ],
+          [
+            -9.252583503723145,
+            -5.460869789123535,
+            8.34782600402832
+          ],
+          [
+            -9.514548301696777,
+            -5.73913049697876,
+            8.139130592346191
+          ],
+          [
+            -9.122053146362305,
+            -5.73913049697876,
+            7.552594184875488
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Step-through raised outer floor rail 1",
+        "riderOwner": "Straddle thigh right",
+        "intersectionTrianglePairs": 22,
+        "intersectionPoints": 44,
+        "bikeVerticesInsideClosedRiderPart": 6,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 51,
+        "unallowedExamplesWorld": [
+          [
+            -8.999224662780762,
+            5.527952671051025,
+            8.34782600402832
+          ],
+          [
+            -9.001846313476562,
+            5.530435085296631,
+            8.34782600402832
+          ],
+          [
+            -9.110315322875977,
+            5.252174377441406,
+            7.627956390380859
+          ],
+          [
+            -9.023080825805664,
+            5.252173900604248,
+            7.703665733337402
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Step-through raised outer floor rail 1",
+        "riderOwner": "Bent outboard knee right",
+        "intersectionTrianglePairs": 29,
+        "intersectionPoints": 58,
+        "bikeVerticesInsideClosedRiderPart": 9,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 68,
+        "unallowedExamplesWorld": [
+          [
+            -9.192584037780762,
+            5.52885627746582,
+            8.34782600402832
+          ],
+          [
+            -9.193278312683105,
+            5.530435085296631,
+            8.34782600402832
+          ],
+          [
+            -9.429305076599121,
+            5.252173900604248,
+            7.1718339920043945
+          ],
+          [
+            -9.434260368347168,
+            5.252173900604248,
+            7.165217876434326
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Step-through raised outer floor rail 1",
+        "riderOwner": "Bent support shin right",
+        "intersectionTrianglePairs": 29,
+        "intersectionPoints": 58,
+        "bikeVerticesInsideClosedRiderPart": 11,
+        "riderVerticesInsideClosedBikePart": 0,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 69,
+        "unallowedExamplesWorld": [
+          [
+            -9.280010223388672,
+            5.5292649269104,
+            8.34782600402832
+          ],
+          [
+            -9.280479431152344,
+            5.530435085296631,
+            8.34782600402832
+          ],
+          [
+            -7.997536659240723,
+            5.252173900604248,
+            7.265501022338867
+          ],
+          [
+            -7.930427551269531,
+            5.252173900604248,
+            7.165217876434326
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual connected handlebar centerline",
+        "riderOwner": "Canvas shoulder strap left",
+        "intersectionTrianglePairs": 7,
+        "intersectionPoints": 14,
+        "bikeVerticesInsideClosedRiderPart": 1,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 16,
+        "unallowedExamplesWorld": [
+          [
+            -8.364302635192871,
+            -2.3095028400421143,
+            20.678260803222656
+          ],
+          [
+            -8.485970497131348,
+            -2.5217390060424805,
+            20.556594848632812
+          ],
+          [
+            -8.386271476745605,
+            -2.6956522464752197,
+            20.656291961669922
+          ],
+          [
+            -8.485970497131348,
+            -2.5217390060424805,
+            20.556594848632812
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual connected handlebar centerline",
+        "riderOwner": "Canvas shoulder strap right",
+        "intersectionTrianglePairs": 8,
+        "intersectionPoints": 16,
+        "bikeVerticesInsideClosedRiderPart": 1,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 18,
+        "unallowedExamplesWorld": [
+          [
+            -8.386271476745605,
+            2.6956522464752197,
+            20.656291961669922
+          ],
+          [
+            -8.485970497131348,
+            2.5217390060424805,
+            20.556594848632812
+          ],
+          [
+            -8.37389850616455,
+            2.3262417316436768,
+            20.668664932250977
+          ],
+          [
+            -8.485970497131348,
+            2.5217390060424805,
+            20.556594848632812
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual connected handlebar centerline",
+        "riderOwner": "Jacket front collar",
+        "intersectionTrianglePairs": 27,
+        "intersectionPoints": 54,
+        "bikeVerticesInsideClosedRiderPart": 0,
+        "riderVerticesInsideClosedBikePart": 2,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 56,
+        "unallowedExamplesWorld": [
+          [
+            -8.504347801208496,
+            1.2608692646026611,
+            20.538217544555664
+          ],
+          [
+            -8.417162895202637,
+            1.3480544090270996,
+            20.62540054321289
+          ],
+          [
+            -8.398831367492676,
+            1.3663853406906128,
+            20.64373207092285
+          ],
+          [
+            -8.417162895202637,
+            1.3480544090270996,
+            20.62540054321289
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip left",
+        "riderOwner": "Canvas shoulder strap left",
+        "intersectionTrianglePairs": 12,
+        "intersectionPoints": 24,
+        "bikeVerticesInsideClosedRiderPart": 1,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 26,
+        "unallowedExamplesWorld": [
+          [
+            -8.386090278625488,
+            -2.6956522464752197,
+            20.630901336669922
+          ],
+          [
+            -8.386520385742188,
+            -2.6956522464752197,
+            20.691089630126953
+          ],
+          [
+            -8.385934829711914,
+            -2.6956522464752197,
+            20.60911750793457
+          ],
+          [
+            -8.338977813720703,
+            -2.7775635719299316,
+            20.65607452392578
+          ]
+        ]
+      },
+      {
+        "bikeOwner": "Actual palm wrapped grip right",
+        "riderOwner": "Canvas shoulder strap right",
+        "intersectionTrianglePairs": 12,
+        "intersectionPoints": 24,
+        "bikeVerticesInsideClosedRiderPart": 1,
+        "riderVerticesInsideClosedBikePart": 1,
+        "boundedDeclaredContactOnly": false,
+        "unallowedPoints": 26,
+        "unallowedExamplesWorld": [
+          [
+            -8.33418083190918,
+            2.78593111038208,
+            20.660871505737305
+          ],
+          [
+            -8.385934829711914,
+            2.6956522464752197,
+            20.60911750793457
+          ],
+          [
+            -8.325151443481445,
+            2.7928426265716553,
+            20.694570541381836
+          ],
+          [
+            -8.325151443481445,
+            2.7897942066192627,
+            20.694570541381836
+          ]
+        ]
+      }
+    ],
+    "resetExact": true
+  },
+  "exceptions": {
+    "hipHalfExtentXY": [
+      0.17,
+      0.14
+    ],
+    "surfaceZTolerance": 0.002,
+    "palmRadius": 0.085,
+    "soleRadius": 0.125
+  },
+  "unchangedRiderSelfJoins": "Immutable accepted configured rider anatomy; separate family-local replay of original self/joint/straddle controls retained."
+}

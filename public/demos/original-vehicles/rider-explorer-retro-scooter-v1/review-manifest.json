@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-explorer-retro-scooter-v1",
+      "name": "explorer-upright \u00b7 retro-scooter fit pilot",
+      "title": "explorer-upright \u00b7 retro-scooter \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact retro-scooter and unchanged explorer-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 4236,
+        "vertices": 8609,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 313280,
+        "sha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264",
+        "wheels": {
+          "F": {
+            "wheel_radius": 5.391304347826088,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 5.73913043478261,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/atlas.png",
+          "sha256": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/composition.json",
+          "sha256": "20249c3e54dd17f7640f3ab25c634b29c3f71e3b346f50fced6856a40ee5efaa"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/model.glb",
+          "sha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/recipe.json",
+          "sha256": "2c52a34bbd1eff9a7906badcc6321413e3697c83d65f7eab239f4c0ce624129f"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-explorer-retro-scooter/v1/report.json",
+          "retained": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/report.json",
+          "sha256": "a6bc41edc10b985c9d1215ca33041b18d92783076990b35f921febea2aa88981"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "toolchain": "motorcycle-v1",
+          "wheelIds": [
+            "F",
+            "R"
+          ],
+          "inputBytesUnchanged": true,
+          "id": "rider-explorer-retro-scooter--v1",
+          "glbSha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264",
+          "triangles": 4236,
+          "clearance": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "radius": 5.391305103149664,
+              "minimumGap": 0.9401285056704465,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "radius": 5.739130991044102,
+              "minimumGap": 0.9358791889080225,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "perWheelCollisionControls": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            }
+          ],
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "F",
+              "radius": 5.391304347826088,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "R",
+              "radius": 5.73913043478261,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/browser-qa.json",
+          "sha256": "9ee3eb43f7736e0f20f15f8013ef4a2767310dec832e6e3b53236b8adf358995"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/candidate.json",
+          "sha256": "caff21826ee50022f094c0df9b83a38beb5542e3aea5011f067a379e0742cd99"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/capture.json",
+          "sha256": "18481ebb65943be2b0e68c8b7380abcd499c7acffad1b506a73d61bfcb62ab39"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/contact-sheet.png",
+          "sha256": "d9a99a0c15da71d893495f1e0a5829a3d8be7b11f2befda096ba5c9a302a9a80"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-0.png",
+          "sha256": "9e9fb9468ddaf15ff47e5d90b753a7706efef003d75437664b8596d9adecad27"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-1.png",
+          "sha256": "f8107db520417d3953719295d67363fba001414e48df0e4e835b41a232d6df68"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-10.png",
+          "sha256": "1801785889820c161e29eee0766e9fae5d910927b2ecf68d09049c2ebe463c0e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-11.png",
+          "sha256": "a5f426ea9981cd1678f2d812dacb90dd74de7822ae25dd3ec081ed7ba9f1c56a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-12.png",
+          "sha256": "26297759bed1a88cc56e0d736a903c77a0e981f2be142847d191a563e5ac28cd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-13.png",
+          "sha256": "c7ab17bcd7818cf017ed171af1964c2fb2afc1cb35a6bb95fe9509164fada651"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-14.png",
+          "sha256": "14cf4017c545745c583e596bcb5408f9a71f65907b50dffffd60321da7079096"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-15.png",
+          "sha256": "0e0708b630ec47df5b37e803b2415dcd8abecb097da198529227c911b968e886"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-1x.png",
+          "sha256": "40f78c509566b08efa518bff10230346e20cc708c462cdc81a681aee495dd7d7"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-2.png",
+          "sha256": "13eb25bffe8887e4cb61ebbcf02db99ea7e4cd17d42b991e847e00554305a107"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-2x.png",
+          "sha256": "1db29ed570d44b83fe58f2634c651d6a4f994d1dc9347bcb0f3874eed59a6edd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-3.png",
+          "sha256": "a165e7ac6d0ba44c08be494b504c9847275203b3d4c5067170e7eec6583892cf"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-3x.png",
+          "sha256": "04594ec07e2cbcc3c9c4c7eecd8f28829f0dfa4a94d347777d8658cc6f1ac131"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-4.png",
+          "sha256": "9a5ea3839cfc2723fd530e66eeaf71eef62d03957b0e7204f55c3a74ccd3c504"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-5.png",
+          "sha256": "1020e3162b51be87671deae9ee8110eb2557242a6c726e6e674700ae52fe07ef"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-6.png",
+          "sha256": "00180d67ec50ca2f962aa39bedc408267f4680173b4bcea47f682153a2ef536b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-7.png",
+          "sha256": "9ba73f7c0d12db871fa28c3ec8996c8c43656f016c611115aea7e6ffbfa4b757"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-8.png",
+          "sha256": "9864bb3c9e9810c55b7eb63593677947427c78d1da6535bd14b9b77e0a1260dd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/engine-9.png",
+          "sha256": "38a32f68d8a8c36a4485102cedded7cc289f36767d8b0ec8faa84a722f29475b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-roll-0.png",
+          "sha256": "13eb25bffe8887e4cb61ebbcf02db99ea7e4cd17d42b991e847e00554305a107"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-roll-1.png",
+          "sha256": "310ba04222f901187f91928f8779ca921fbab1827cea0fa2afcec9a19e046703"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-roll-2.png",
+          "sha256": "536a0549392ba5cecf67e60283f77df4df36e399c0ba608469771441404b9934"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-roll-3.png",
+          "sha256": "88165bbbcf070eb85d1166134bd33cecd9e7de9a4f13699e5684f26177262a5a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-roll-4.png",
+          "sha256": "ca4114d5f67e0a4de50a79b783b7bcabee3230bc5c2bd81d0587952ccedb0a6c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-roll-5.png",
+          "sha256": "0651549a4da1c118ff1efbfa871ed4c559b21e256d5ce5a89b3744875ebfafc5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-roll-6.png",
+          "sha256": "518ffdca1a394ab14504e4a792057de576c6dd7f46996a9bc86ff33d4e1fe7c5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-roll-7.png",
+          "sha256": "88165bbbcf070eb85d1166134bd33cecd9e7de9a4f13699e5684f26177262a5a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/game-turntable.gif",
+          "sha256": "45681cf6a74b5df7f28d607a7915c2e2937726662bec018909cab22fead89e06"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/roll-0.png",
+          "sha256": "0598d9fbdb2a0f3633ac0121fefa3ac154ff8a3f1c8ea1a5e643536a7b3dd04c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/roll-1.png",
+          "sha256": "7996251d34f583d750fd2efac0e3f155ae03ebdf0ba47971b23510cec539d9aa"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/roll-2.png",
+          "sha256": "b6d723b8f9fab737acc747bc675b21811f6fca853ee93f90f917bbe2555d510b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/roll-3.png",
+          "sha256": "53df4870586edebca8eb928f22a303c941cb45bb47c02615f6a7d411d64767a0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/roll-4.png",
+          "sha256": "53df4870586edebca8eb928f22a303c941cb45bb47c02615f6a7d411d64767a0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/roll-5.png",
+          "sha256": "53df4870586edebca8eb928f22a303c941cb45bb47c02615f6a7d411d64767a0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/roll-6.png",
+          "sha256": "53df4870586edebca8eb928f22a303c941cb45bb47c02615f6a7d411d64767a0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/roll-7.png",
+          "sha256": "53df4870586edebca8eb928f22a303c941cb45bb47c02615f6a7d411d64767a0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-0.png",
+          "sha256": "2d098c61cf5069195a87ea807b5ddddf23a6b1fae256424f22bb6c6cf9dcc35c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-1.png",
+          "sha256": "f04fa689e30aa04ce850a55fae7e4e72eb17e70627428e49ad9bb98530e86d66"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-10.png",
+          "sha256": "2ba90ea735a30bedfcf7a207a63bc586546733f2c7b8a0d8aa3b73ab124db356"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-11.png",
+          "sha256": "62447b83c970480677f4ed8e8f0717c88be73c3d1030ed7b13d390f678334c90"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-12.png",
+          "sha256": "37d6034679931193cf8e3a93d012be697027f0a69718f80ccad3c1c0d241fa99"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-13.png",
+          "sha256": "5e6a7507344f55f5f1682943d673c2e503296bcea68cd22cd5285702942a9410"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-14.png",
+          "sha256": "5bd8e16d3e930bebd83a31a25453e6bfe2ff30bc534d4cd1b21136d6e6ae6d82"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-15.png",
+          "sha256": "f9d3d6a41f69d9ff1a07bbb6f199c61d6ddab85d45cd4042f33e1fe32318967e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-1x.png",
+          "sha256": "32faeec0ee8bbde75bede37a3ff6d741b13640dfadd9a46ace58d85a626d6495"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-2.png",
+          "sha256": "0598d9fbdb2a0f3633ac0121fefa3ac154ff8a3f1c8ea1a5e643536a7b3dd04c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-2x.png",
+          "sha256": "f377cddbbcb9648a33e2ef05ddc6d670acd07115281be9df73b890bb05fc2ca2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-3.png",
+          "sha256": "73da009b4b72ca10736755b5c6697379c4cabf654b6159f8da44c14021bb417b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-3x.png",
+          "sha256": "a59089dcc61cad67bdc0ef07420f046e8be5fad988448db12820c5d051a6a10f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-4.png",
+          "sha256": "efbb2725cb26db5d82fa148aefff3ae749d76376363d55cc27c8a5f45d994014"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-5.png",
+          "sha256": "da7108082199d7a6d5caceb91fb8e99d4251933b3118ab8e981b0f4e1e1293eb"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-6.png",
+          "sha256": "eececc3cea9a5fb3fcf5d08aab4b1c591014f23010c96761aa44095cead2b842"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-7.png",
+          "sha256": "22d1d1e51e8236a597f2b47bd3ac358afef04ef42eaf25471ebf805b6bb2fab4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-8.png",
+          "sha256": "9bd163c8c2226a1e8bbe85cf2a88436f983c84b09c564efada79364ca38dffd1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/study-9.png",
+          "sha256": "04247d6ee08ac2d73000e6b7f5593e46e8dc7c16ccc51c22c153646bf9b663b6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/turntable.gif",
+          "sha256": "bc8ae7d8b8540fcf3a6e36ea09ee7f5c3d5c370208c01c8b594fb44fd33d0ff5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/viewer-desktop.png",
+          "sha256": "8c659cff5ca8f1502a5fd20376207b95ccf5429bdfcd55cd340eb0124ee87cd5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/viewer-mobile.png",
+          "sha256": "691a3140dc5f21b253856e07dd1e0c929cc78ecd59ed8dc5e302c3e6be459150"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/wheel-phases.png",
+          "sha256": "19896bf101c38cc335527ff3a473814e1c9053391a4347d28e1c3cd0c92ca177"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/wire-engine.png",
+          "sha256": "1d061fb27208331b28dae7a75d237053730f97658d575f4e834f07b746aec502"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/captures/wire-study.png",
+          "sha256": "b165bcfc9afe6c81918f4beffa452fb7ab7de4103ee62cffecc0b14dd1650aa0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/clearance.json",
+          "sha256": "75aeda3faf0243abe248788416d1a986df072d3fcd835e7845186462f0c89fbe"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/independent-source-replay.json",
+          "sha256": "c3150e45e16ffff9c0b08dc819562a13e63e0f7b6ce45d6944e93a267448eaa5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/atlas.png",
+          "sha256": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/companion-atlas.png",
+          "sha256": "50353e3933104ea6b8b3ef2c8c33f0980d726f5c81ed0c745c037f64b0af8619"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/composition.json",
+          "sha256": "20249c3e54dd17f7640f3ab25c634b29c3f71e3b346f50fced6856a40ee5efaa"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/model.glb",
+          "sha256": "495e5ce1fb9dd6ab957a6530d9a35100db7b8172433e2c37fea169abce088264"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/recipe.json",
+          "sha256": "2c52a34bbd1eff9a7906badcc6321413e3697c83d65f7eab239f4c0ce624129f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/inputs/report.json",
+          "sha256": "a6bc41edc10b985c9d1215ca33041b18d92783076990b35f921febea2aa88981"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/viewer.js",
+          "sha256": "bd64d254a6f8eac0d8fc5bc86bd85fb414db1a694fc5e72c7b2fc6ae9408a949"
+        },
+        {
+          "url": "demos/original-vehicles/rider-explorer-retro-scooter-v1/visual-inspection.json",
+          "sha256": "8cb977eab8fd744a3b06482723a32a03fd302dee6378601b277dba66427f9f90"
+        }
+      ]
+    }
+  ]
+}

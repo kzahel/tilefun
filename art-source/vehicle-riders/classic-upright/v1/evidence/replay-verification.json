@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "independent": true,
+  "freshRepository": true,
+  "onlyFourDeclaredConstructorInputs": true,
+  "inputHashes": {
+    "art-source/vehicle-riders/classic-upright/v1/build.py": "df67e8e10428c6a9fba91dd84d5591a063cbdd97a4e410d947b3f9d57c1c5c18",
+    "art-source/vehicle-riders/classic-upright/v1/rider.json": "955bc5d2e298dda6b974add4f07a78b69eca2c4084e506fe3a1278d968c0c6a9",
+    "art-source/vehicle-riders/classic-upright/v1/identity.json": "bd6fe837c1138be80a49d9c677627168da3a4d002d4db59002fa7ee6b5f36317",
+    "art-source/vehicle-riders/classic-upright/v1/classic-upright-v1.json": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b"
+  },
+  "sharedInputHashes": {},
+  "invokedBuilder": "art-source/vehicle-riders/classic-upright/v1/build.py",
+  "arguments": [
+    "--scratch"
+  ],
+  "outputHashes": {
+    "rider.glb": "9c1829fde13cf105739ba7b203873b24b2ae6d7d966c9bf66c1d15b147e4b597",
+    "atlas.png": "e1ffa24495478043e0ef638e43e12efa1e5bd735ae3df66d29687fafa3a66845",
+    "recipe.json": "1e01a6d811e0879fa8be82e57e0c557c1f12abd7d4e7fe2ebae40b24dab501a5"
+  },
+  "glbSha256": "9c1829fde13cf105739ba7b203873b24b2ae6d7d966c9bf66c1d15b147e4b597",
+  "atlasSha256": "e1ffa24495478043e0ef638e43e12efa1e5bd735ae3df66d29687fafa3a66845",
+  "recipeSha256": "1e01a6d811e0879fa8be82e57e0c557c1f12abd7d4e7fe2ebae40b24dab501a5",
+  "scratchInputDependencies": [],
+  "existingMasterRead": false,
+  "meaning": "Only four retained constructor/config/profile/identity files plus generated empty repository scaffolding. New model/atlas/recipe exact; packed scenes retained without claiming deterministic blend bytes. Standing PNG identity provenance and viewer/fixture diagnostics verified separately."
+}

@@ -1,7 +1,7 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: 33 road originals integrated locally; second full validation underway; motorcycles remain rider prototypes.
+Status: 33 road originals integrated and published; Linux CI passed. Windows full result and corrected touch-readiness reruns are recorded separately; motorcycles remain rider prototypes.
 Updated: 2026-10-20.
 
 The owner separately authorized an original **explorer motorboat** and working
@@ -51,6 +51,29 @@ checked per family. A second full snapshot validates this combined fleet and the
 new strict two/three-wheel loader. The six-wheel semi is rigid; crane, mixer,
 forklift and other work equipment remain static. [Vehicle status](../vehicle-status.md)
 distinguishes completed validation from pending broad checks.
+
+Commit `8f2aea6e` passes the Linux check job and all sixteen browser shards;
+GitHub Pages deployment completed at 02:06 UTC on 2026-10-20. All 66 deployed
+model/fallback files and the OriginalVehicles catalog bundle match the local
+validated fleet exactly; [deployment evidence](../../art-source/vehicle-bake/deployment-153.json)
+records the checks. The separate shared human review host runs a different Vite
+checkout and still needs updating; a Pages deployment does not update that host.
+The final bounded local unit run records 6,007 passes, five known Windows
+failures and ten skips. The independent 1,697-case Windows browser run finished
+with 1,695 passes, one touch-input failure and one skip; all 246 authored gameplay
+and steering checks passed. The touch case sent Jump before the next simulation
+frame re-enabled canvas controls after menu closure. A readiness-only test fix
+passes three real repeated runs; production input code and coordinates remain
+unchanged. Preserve the full result separately from those reruns and passing CI.
+
+The final source checkpoint has 43 frozen original-vehicle review candidates and
+1,810 Workshop identities. Seven bike styles and four rider identities have
+isolated shared-renderer prototypes; normal bikes remain deferred. Final typechecks,
+216 focused vehicle/asset/replay tests, repository check and build pass. Generated
+offline viewers retain their exact bundled code under the same lint exclusions
+as public viewer bundles. The vehicle test file now permits independent cases to
+be sharded; its 180 identities and the complete 1,697-case inventory are unchanged.
+The final two-worker 180-vehicle plus fourteen-touch run is tracked in run 153.
 
 Historical receipts retain their original renderer pins through an explicitly
 registered byte-identical replay snapshot; their constructors/exporters and

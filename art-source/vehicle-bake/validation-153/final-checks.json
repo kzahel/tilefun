@@ -1,0 +1,73 @@
+{
+  "schema": "tilefun-run153-final-validation-v1",
+  "recordedAt": "2026-10-20T03:40:35.245770+00:00",
+  "productionRuntimeCommit": "8f2aea6efe67f02d3a895d003cd72bb7e194d309",
+  "runtimeOriginals": 33,
+  "roadTypes": 78,
+  "ordinaryTrafficTypes": 77,
+  "drivableIncludingBoat": 79,
+  "linuxProductionCI": {
+    "runURL": "https://github.com/kzahel/tilefun/actions/runs/39352227458",
+    "check": "passed",
+    "e2eShardsPassed": 16,
+    "deploy": "passed"
+  },
+  "windowsFullUnits": {
+    "passed": 6007,
+    "failed": 5,
+    "skipped": 10,
+    "workers": 4,
+    "knownPlatformFailures": "FsSecurity/privateDataPlugin symlink privileges and SQLite SIGKILL behavior; Linux check passed."
+  },
+  "windowsFullBrowser": {
+    "passed": 1695,
+    "failed": 1,
+    "skipped": 1,
+    "authoredGameplayAndSteeringPassed": 246,
+    "failure": "Touch Jump test assumed DOM menu close implied next-frame canvas-control readiness; production code unchanged.",
+    "subsequentCorrectedCaseRepeatsPassed": 3
+  },
+  "finalFocusedUnits": {
+    "passed": 216,
+    "files": 3
+  },
+  "finalFocusedBrowser": {
+    "passed": 194,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "retriedCases": 0,
+    "workers": 2,
+    "caseCounts": {
+      "authored-vehicle-gameplay.spec.ts": 180,
+      "tap-movement.spec.ts": 14
+    },
+    "durationMs": 847532.49
+  },
+  "typechecks": "all3projects passed",
+  "lint": {
+    "checkedFiles": 7028,
+    "errors": 0,
+    "existingWarnings": 120,
+    "infos": 37
+  },
+  "inventoriesAndBuild": {
+    "passed": true,
+    "frozenOriginalReviewCandidates": 43,
+    "workshopIdentities": 1810,
+    "priorWorkshopRecordsUnchanged": 1802
+  },
+  "staticSourceAndReplayControls": {
+    "retainedAuditorControlsPassed": 49,
+    "sourceHelperControlsPassed": 11,
+    "static24SourceEvidence": "art-source/vehicle-bake/retained-source-audit-153/report.json",
+    "additionalSourceStaticAudits": "Classicv3,its fitted bike and its combined prototype passed separately; original24-scope proof remains immutable.",
+    "stagedSourceMaps": 63,
+    "stagedSourceReviewPins": 17137
+  },
+  "limits": [
+    "Final194case run is focused, not a rewrite of the original1697 result.",
+    "No human approvals, normal motorcycles, all27 runtime occupancy/AI/occupied fallback or nonzero steering-clearance qualification is inferred.",
+    "Complete browser reports, failed screenshots, caches, auth, run/session/process metadata and intermediate generation remain ignored."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "status": "no-blocking-issues-for-source-pilot",
+  "humanApproval": false,
+  "riderSha256": "9c1829fde13cf105739ba7b203873b24b2ae6d7d966c9bf66c1d15b147e4b597",
+  "actualBikePresent": false,
+  "inspected": [
+    "Original64x64ClassicstandingPNGall16frames and four directions at native/8x/12x nearest scale",
+    "All16study+16game native224 rider and synthetic-fixture combined headings",
+    "All32rider wire and32combined wire headings",
+    "Source-vs-actual front/back/left/right common-ruler sheet, original Explorer/Classic shared-scale ruler",
+    "Desktop and mobile viewer screenshots; actual offline/mobile capture checks"
+  ],
+  "observations": [
+    "Compact cream cat anatomy is separate from human Explorer; solid pointed pink-lined ears, broad head, violet eyes/outline/feet, gray forehead cluster, yellow/violet collar and tiny cream torso",
+    "Own real skin charts use exact seven-color source palette without transferring source exterior contour ink; no standing billboard or framebuffer redraw",
+    "Native depth/projection affects side silhouette; actual head width13.565world and head+ear Zspan10.261world compare with source14x11px head. No independently normalized view",
+    "Short fixed bent arms/legs and closed paws; actual five contacts/finite straddle pass with negatives and reset. Small limbs are naturally occluded at some headings by the broad head",
+    "No separate tail in any of16standingframes; no tail invented"
+  ],
+  "limits": [
+    "One static source pilot only; depth and joints inferred from2D rather than a uniquely observed skeleton",
+    "Actual-bike fit, normal availability, authority/replication, all27 appearances, AI occupants and occupied Canvas/failed-mesh fallback remain blocked",
+    "Raw GLTF viewer uses fixed projection and owned source-violet outline; CarMeshAsset and production vehicle outline not used"
+  ],
+  "priorProtectedFilesVerified": 541
+}

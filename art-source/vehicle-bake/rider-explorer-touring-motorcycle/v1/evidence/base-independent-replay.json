@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 6,
+  "glbSha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/touring-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/touring-motorcycle/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/touring-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/touring-motorcycle-qa/retained-replay-_6sgy33q",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

@@ -1,0 +1,469 @@
+{
+  "status": "passed",
+  "presentationStatus": "prototype-not-production",
+  "humanApproval": false,
+  "actualBikePresent": false,
+  "riderSha256": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+  "profileSha256": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+  "packedSources": {
+    "master.blend": {
+      "sha256": "b453ca55e4bf7d2bb6adc0ea2de4685402c886111204300e10442b8acf9fb980",
+      "meshes": 35,
+      "packedImages": 1,
+      "semanticUV": true
+    },
+    "low.blend": {
+      "sha256": "ac36f7aea5434aa7a09ef14a92078ac5d3ae05a3b3f26ed2244cbf9c69764a2c",
+      "meshes": 1,
+      "packedImages": 1,
+      "semanticUV": true
+    }
+  },
+  "contactLandmarks": [
+    {
+      "name": "hip_saddle",
+      "actualGLBAnchorLocalWorld": [
+        0.0,
+        0.0,
+        -1.3826087713241577
+      ],
+      "profileTargetLocalWorld": [
+        0,
+        0,
+        -1.382608695652174
+      ],
+      "profileErrorWorld": 1.1920928955078125e-07
+    },
+    {
+      "name": "hand_left_grip",
+      "actualGLBAnchorLocalWorld": [
+        -9.565217018127441,
+        -4.000000476837158,
+        4.695651531219482
+      ],
+      "profileTargetLocalWorld": [
+        -9.565217391304348,
+        -4,
+        4.695652173913044
+      ],
+      "profileErrorWorld": 6.743495761743046e-07
+    },
+    {
+      "name": "hand_right_grip",
+      "actualGLBAnchorLocalWorld": [
+        -9.565217018127441,
+        4.000000476837158,
+        4.695651531219482
+      ],
+      "profileTargetLocalWorld": [
+        -9.565217391304348,
+        4,
+        4.695652173913044
+      ],
+      "profileErrorWorld": 6.743495761743046e-07
+    },
+    {
+      "name": "foot_left_support",
+      "actualGLBAnchorLocalWorld": [
+        -1.2173912525177002,
+        -4.000000476837158,
+        -9.217391967773438
+      ],
+      "profileTargetLocalWorld": [
+        -1.217391304347826,
+        -4,
+        -9.217391304347826
+      ],
+      "profileErrorWorld": 1.066240299940009e-06
+    },
+    {
+      "name": "foot_right_support",
+      "actualGLBAnchorLocalWorld": [
+        -1.2173912525177002,
+        4.000000476837158,
+        -9.217391967773438
+      ],
+      "profileTargetLocalWorld": [
+        -1.217391304347826,
+        4,
+        -9.217391304347826
+      ],
+      "profileErrorWorld": 1.066240299940009e-06
+    }
+  ],
+  "selfIntersectionPairs": [
+    {
+      "partA": "Actual elbow left",
+      "partB": "Bent upper teal sleeve left",
+      "trianglePairs": 62,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Actual elbow left",
+      "partB": "Raised teal forearm left",
+      "trianglePairs": 67,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Actual elbow right",
+      "partB": "Bent upper teal sleeve right",
+      "trianglePairs": 64,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Actual elbow right",
+      "partB": "Raised teal forearm right",
+      "trianglePairs": 72,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent outboard knee left",
+      "partB": "Bent support shin left",
+      "trianglePairs": 35,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent outboard knee left",
+      "partB": "Straddle thigh left",
+      "trianglePairs": 45,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent outboard knee right",
+      "partB": "Bent support shin right",
+      "trianglePairs": 37,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent outboard knee right",
+      "partB": "Straddle thigh right",
+      "trianglePairs": 43,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent support shin left",
+      "partB": "Brown boot toe left",
+      "trianglePairs": 17,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent support shin left",
+      "partB": "Straddle thigh left",
+      "trianglePairs": 28,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": {
+        "declaredJoin": "Same-side bent knee, actual triangle intersection points",
+        "maximumIntersectionDistanceWorld": 1.5451804118360506,
+        "pointCount": 56
+      }
+    },
+    {
+      "partA": "Bent support shin right",
+      "partB": "Brown boot toe right",
+      "trianglePairs": 17,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent support shin right",
+      "partB": "Straddle thigh right",
+      "trianglePairs": 32,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": {
+        "declaredJoin": "Same-side bent knee, actual triangle intersection points",
+        "maximumIntersectionDistanceWorld": 1.5451799682286194,
+        "pointCount": 64
+      }
+    },
+    {
+      "partA": "Bent upper teal sleeve left",
+      "partB": "Canvas shoulder strap left",
+      "trianglePairs": 10,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent upper teal sleeve left",
+      "partB": "Raised teal forearm left",
+      "trianglePairs": 28,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent upper teal sleeve left",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 23,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent upper teal sleeve right",
+      "partB": "Canvas shoulder strap right",
+      "trianglePairs": 10,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent upper teal sleeve right",
+      "partB": "Raised teal forearm right",
+      "trianglePairs": 29,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Bent upper teal sleeve right",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 23,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Boot sole left",
+      "partB": "Brown boot toe left",
+      "trianglePairs": 24,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Boot sole right",
+      "partB": "Brown boot toe right",
+      "trianglePairs": 24,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Canvas backpack",
+      "partB": "Canvas backpack dark pocket",
+      "trianglePairs": 18,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Canvas backpack",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 30,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Canvas backpack center seam",
+      "partB": "Canvas backpack dark pocket",
+      "trianglePairs": 15,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Canvas shoulder strap left",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 25,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Canvas shoulder strap right",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 23,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Explorer upright volumetric head UV owner",
+      "partB": "Short brown fringe",
+      "trianglePairs": 18,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Explorer upright volumetric head UV owner",
+      "partB": "Short brown hair crown",
+      "trianglePairs": 108,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Explorer upright volumetric head UV owner",
+      "partB": "Warm ear -1",
+      "trianglePairs": 40,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Explorer upright volumetric head UV owner",
+      "partB": "Warm ear 1",
+      "trianglePairs": 40,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Explorer upright volumetric head UV owner",
+      "partB": "Warm neck",
+      "trianglePairs": 24,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Explorer upright volumetric head UV owner",
+      "partB": "Warm small face nose",
+      "trianglePairs": 12,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Jacket dark front zip",
+      "partB": "Jacket front collar",
+      "trianglePairs": 20,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Jacket dark front zip",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 15,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Jacket dark waist seam",
+      "partB": "Straddle thigh left",
+      "trianglePairs": 5,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": {
+        "declaredJoin": "Waist garment meets proximal thigh at hip",
+        "maximumIntersectionDistanceWorld": 2.756706188795772,
+        "pointCount": 10
+      }
+    },
+    {
+      "partA": "Jacket dark waist seam",
+      "partB": "Straddle thigh right",
+      "trianglePairs": 5,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": {
+        "declaredJoin": "Waist garment meets proximal thigh at hip",
+        "maximumIntersectionDistanceWorld": 2.756706188795772,
+        "pointCount": 10
+      }
+    },
+    {
+      "partA": "Jacket dark waist seam",
+      "partB": "Upright seated trouser pelvis",
+      "trianglePairs": 38,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Jacket dark waist seam",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 48,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Jacket front collar",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 26,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Straddle thigh left",
+      "partB": "Upright seated trouser pelvis",
+      "trianglePairs": 34,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Straddle thigh right",
+      "partB": "Upright seated trouser pelvis",
+      "trianglePairs": 32,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Upright seated trouser pelvis",
+      "partB": "Upright teal jacket torso",
+      "trianglePairs": 40,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    },
+    {
+      "partA": "Upright teal jacket torso",
+      "partB": "Warm neck",
+      "trianglePairs": 23,
+      "declaredAnatomicalOrGarmentJoin": true,
+      "boundedJointRegion": null
+    }
+  ],
+  "inappropriateSelfIntersectionPairs": [],
+  "straddleOpening": {
+    "allLegTrianglesOutsideCentralYStrip": true,
+    "minimumLegInnerHalfGapWorld": 1.1850167512893677,
+    "certifiedFiniteEmptyStripWidthWorld": 1.8,
+    "excludesPelvisAndFixture": true,
+    "notBikeClearance": true
+  },
+  "negativeControls": {
+    "displacedSocketDistancesWorld": {
+      "hip_saddle": 3.6055512093385724,
+      "hand_left_grip": 3.605551010962346,
+      "hand_right_grip": 3.605551010962346,
+      "foot_left_support": 3.6055507464606515,
+      "foot_right_support": 3.6055507464606515
+    },
+    "allDisplacedSocketsRejected": true,
+    "collapsedRightLegIntoLeftTrianglePairs": 401,
+    "collapsedLegsRejected": true,
+    "baselineRestored": true
+  },
+  "footHandGeometry": {
+    "actualClosedSolidChecks": [
+      {
+        "component": "Boot sole left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 6.97930009663105
+      },
+      {
+        "component": "Boot sole right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 6.979300027092298
+      },
+      {
+        "component": "Brown boot toe left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 7.792478238542874
+      },
+      {
+        "component": "Brown boot toe right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 7.792488803466161
+      },
+      {
+        "component": "Warm gripping hand left",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 2.575149643545349
+      },
+      {
+        "component": "Warm gripping hand right",
+        "closedTwoManifoldAfterUVVertexWeld": true,
+        "volumeWorld3": 2.5751718189567327
+      }
+    ],
+    "closedVolumetricHandFootComponents": true,
+    "handsWrapGripCentersAsDeclaredException": true,
+    "soleAnchorsOnSupportTopNotPegCenters": true
+  },
+  "limits": [
+    "No actual bike/frame/wheel geometry exists or is qualified",
+    "Declared joints/garment attachments and palm/grip wrapping are intentional local intersections",
+    "Finite leg opening and static triangle surface diagnostics do not qualify arbitrary mounts, animation, other avatars or production depth"
+  ]
+}

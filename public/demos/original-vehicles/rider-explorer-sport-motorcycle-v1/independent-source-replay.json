@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 17,
+  "glbSha256": "3f7a572939629bb474ae8698e93bcd69f2ed9f9bf9b5de56e19bfc979d2306e2",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/rider-explorer-sport-motorcycle/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/rider-explorer-sport-motorcycle/replay/public/atlas.png",
+    "companion-atlas.png": "data/vehicle-bake/rider-explorer-sport-motorcycle/replay/public/companion-atlas.png",
+    "recipe.json": "data/vehicle-bake/rider-explorer-sport-motorcycle/replay/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-bake/rider-explorer-sport-motorcycle-qa/retained-replay-0y97bgtv",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

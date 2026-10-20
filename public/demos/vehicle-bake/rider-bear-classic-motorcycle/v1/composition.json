@@ -1,0 +1,54 @@
+{
+  "baseSha256": "361b24516a8e76c9aeb60128832a53a38df02b9fa3b990a44bc4178ecc721920",
+  "componentSha256": "26d1a2c44741151d1ee0ddd40b6273518f0d12eb563be20467ed68ccd5a9cd10",
+  "baseArraysPreserved": [
+    "bufferViews",
+    "accessors",
+    "samplers",
+    "images",
+    "textures",
+    "materials",
+    "meshes"
+  ],
+  "baseBinaryPrefixExact": true,
+  "mountBlenderWorldPixels": [
+    2.0869565217391304,
+    0.0,
+    19.48695652173913
+  ],
+  "componentPrefix": "RiderBear",
+  "baseNodesPreservedExceptRootChildAppend": true,
+  "rootAttachment": {
+    "node": 13,
+    "name": "Motorcycle_Root",
+    "appendedMount": 21
+  },
+  "componentWorldSocketPreserved": true,
+  "cycleRootWorldMatrix": [
+    [
+      17.39130401611328,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      17.39130401611328,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      17.39130401611328,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "method": "Append companion inside existing marked root, compensating its uniform rigid transform; original geometry/paint buffers and all other node data unchanged"
+}

@@ -6,6 +6,8 @@ import type { TrafficCanvas } from "../src/workshop/TrafficPage.js";
 import { flushLocalWorld, worldRecords } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium" });
+// Each case owns its page/context; allow CI to shard this growing roster.
+test.describe.configure({ mode: "parallel" });
 
 test("every compact uses its own GLB in the shared traffic presentation", async ({ page }) => {
   test.setTimeout(90_000);

@@ -1,0 +1,32 @@
+{
+  "id": "rider-bear-classic-motorcycle-v1",
+  "clearanceId": "rider-bear-classic-motorcycle--v1",
+  "name": "bear-upright \u00b7 classic-motorcycle-bear-fit fit pilot",
+  "title": "bear-upright \u00b7 classic-motorcycle-bear-fit \u00b7 shared-loader pilot",
+  "source": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1",
+  "glb": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/rider-bear-classic-motorcycle/v1/report.json",
+  "output": "public/demos/original-vehicles/rider-bear-classic-motorcycle-v1",
+  "qa": "data/vehicle-bake/rider-bear-classic-motorcycle-qa",
+  "offline": "data/vehicle-bake/rider-bear-classic-motorcycle-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224,
+  "composition": {
+    "component": "art-source/vehicle-riders/bear-upright/v1/rider.glb",
+    "prefix": "RiderBear",
+    "mountBlenderWorldPixels": [
+      2.0869565217391304,
+      0.0,
+      19.48695652173913
+    ],
+    "baseCaptures": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/raw-captures",
+    "baseCapturePrefix": "bike-alone-",
+    "combinedCaptures": "public/demos/vehicle-bake/classic-motorcycle-bear-fit/v1/raw-captures"
+  },
+  "toolchain": "motorcycle-v1",
+  "wheelIds": [
+    "F",
+    "R"
+  ]
+}

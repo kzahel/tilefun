@@ -1,6 +1,6 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "Owner-authorized eight-hour autonomous vehicle production: 2026-10-19 21:19:36 UTC through 2026-10-20 05:19:36 UTC. Per-vehicle appearance pauses waived; actual asset QA and game validation still apply. Motorcycles need rider presentation.",
+  "gate": "The owner-authorized run153 production batch is complete within its eight-hour limit (2026-10-19 21:19:36 UTC–2026-10-20 05:19:36 UTC). All33 ordinary entries are integrated; seven cycle styles retain diagnostic source/shared reviews but remain deferred for normal rider presentation. Per-family appearance pauses were waived for this delivered batch only; formal review states remain unchanged. Follow the current owner gate before further production.",
   "vehicles": [
     {
       "id": "rosso-coupe",
@@ -9,7 +9,7 @@
       "priority": 1,
       "status": "integrated",
       "authorization": "Current red-car pipeline pilot only",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "a-reduced-projection--mid-fenders-v3",
       "ownerFeedback": "2026-10-19: good looks better; requested final asset commit"
     },
@@ -20,7 +20,7 @@
       "priority": 2,
       "status": "integrated",
       "authorization": "2026-10-19 owner explicitly requested Beetle authoring for review",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "beetle-v1",
       "ownerFeedback": "2026-10-19: looks fine; requested commit, gameplay activation and next vehicle"
     },
@@ -31,7 +31,7 @@
       "priority": 3,
       "status": "integrated",
       "authorization": "2026-10-19 owner requested next vehicle after accepted Beetle gameplay/commit checkpoint",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "school-bus-v1",
       "ownerFeedback": "2026-10-19: looks great; integrate it, commit, then proceed directly with the pickup"
     },
@@ -42,7 +42,7 @@
       "priority": 4,
       "status": "integrated",
       "authorization": "2026-10-19 owner explicitly requested proceeding directly with pickup after approved school-bus integration",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "pickup-v1",
       "ownerFeedback": "2026-10-19: Looks great; asked whether it was already in the world and editor. Informed that runtime integration is pending."
     },
@@ -53,7 +53,7 @@
       "priority": 5,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "classic-roadster-v1"
     },
     {
@@ -63,7 +63,7 @@
       "priority": 6,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "offroad-jeep-v1"
     },
     {
@@ -73,7 +73,7 @@
       "priority": 7,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "delivery-van-v1"
     },
     {
@@ -83,7 +83,7 @@
       "priority": 8,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "race-coupe-v1"
     },
     {
@@ -93,7 +93,7 @@
       "priority": 9,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "microcar-v1"
     },
     {
@@ -103,7 +103,7 @@
       "priority": 10,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "woody-wagon-v1"
     },
     {
@@ -113,7 +113,7 @@
       "priority": 11,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "stretch-limousine-v1"
     },
     {
@@ -123,7 +123,7 @@
       "priority": 12,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "hot-rod-v1"
     },
     {
@@ -133,7 +133,7 @@
       "priority": 13,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact own mesh/cardinal fallback and shared gameplay verified.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "rally-hatchback-v1"
     },
     {
@@ -141,9 +141,9 @@
       "name": "Open-wheel racing car",
       "family": "Formula-style racer",
       "priority": 14,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "open-wheel-racer-v1"
     },
     {
@@ -151,9 +151,9 @@
       "name": "Monster truck",
       "family": "Oversized pickup",
       "priority": 15,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "monster-truck-v1"
     },
     {
@@ -161,9 +161,9 @@
       "name": "Beach dune buggy",
       "family": "Buggy",
       "priority": 16,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "beach-buggy-v1"
     },
     {
@@ -171,9 +171,9 @@
       "name": "Go-kart",
       "family": "Small open racer",
       "priority": 17,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "go-kart-v1"
     },
     {
@@ -181,9 +181,9 @@
       "name": "Golf cart",
       "family": "Small utility cart",
       "priority": 18,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "golf-cart-v1"
     },
     {
@@ -191,9 +191,9 @@
       "name": "Ice cream van",
       "family": "Shop van",
       "priority": 19,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "ice-cream-van-v1"
     },
     {
@@ -201,9 +201,9 @@
       "name": "Food truck",
       "family": "Mobile kitchen",
       "priority": 20,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "food-truck-v1"
     },
     {
@@ -211,9 +211,9 @@
       "name": "Retro camper van",
       "family": "Camper van",
       "priority": 21,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "camper-van-v1"
     },
     {
@@ -221,9 +221,9 @@
       "name": "Family motorhome",
       "family": "Recreational vehicle",
       "priority": 22,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "motorhome-v1"
     },
     {
@@ -231,9 +231,9 @@
       "name": "Checker-style taxi",
       "family": "Taxi",
       "priority": 23,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "retro-taxi-v1"
     },
     {
@@ -241,9 +241,9 @@
       "name": "Tow truck",
       "family": "Recovery truck",
       "priority": 24,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "tow-truck-v1"
     },
     {
@@ -251,9 +251,9 @@
       "name": "Flatbed work truck",
       "family": "Cargo truck",
       "priority": 25,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "flatbed-truck-v1"
     },
     {
@@ -261,9 +261,9 @@
       "name": "Semi truck with trailer",
       "family": "Articulated freight vehicle",
       "priority": 26,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "semi-truck-v1"
     },
     {
@@ -271,9 +271,9 @@
       "name": "Construction dump truck",
       "family": "Tipper truck",
       "priority": 27,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "dump-truck-v1"
     },
     {
@@ -281,9 +281,9 @@
       "name": "Concrete mixer truck",
       "family": "Construction truck",
       "priority": 28,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "cement-mixer-v1"
     },
     {
@@ -291,9 +291,9 @@
       "name": "Mobile crane truck",
       "family": "Crane truck",
       "priority": 29,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "mobile-crane-v1"
     },
     {
@@ -301,9 +301,9 @@
       "name": "Street sweeper",
       "family": "Street maintenance",
       "priority": 30,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "street-sweeper-v1"
     },
     {
@@ -311,9 +311,9 @@
       "name": "Snowplow truck",
       "family": "Winter service truck",
       "priority": 31,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "snowplow-v1"
     },
     {
@@ -321,9 +321,9 @@
       "name": "Farm tractor",
       "family": "Agricultural vehicle",
       "priority": 32,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "farm-tractor-v1"
     },
     {
@@ -331,9 +331,9 @@
       "name": "Forklift",
       "family": "Warehouse vehicle",
       "priority": 33,
-      "status": "integrating",
+      "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Normal editor and eligible road traffic integrated locally; immutable review/runtime replay and focused actual-mesh gameplay checks pass; full 33-original browser run pending.",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
       "candidate": "forklift-v1"
     },
     {
@@ -343,7 +343,7 @@
       "priority": 34,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Immutable source and seated Explorer review pass actual shared two/three-wheel loader, 32 bare/32 combined pixel parity, contacts and per-wheel controls; normal activation waits on rider identity, AI and occupied fallback.",
+      "next": "Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
@@ -353,7 +353,7 @@
       "priority": 35,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Immutable source and seated Explorer review pass actual shared two/three-wheel loader, 32 bare/32 combined pixel parity, contacts and per-wheel controls; normal activation waits on rider identity, AI and occupied fallback.",
+      "next": "Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
@@ -363,7 +363,7 @@
       "priority": 36,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Low streamlined fairings, a small windscreen, broad rear tire and compact tail",
+      "next": "Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
@@ -373,7 +373,7 @@
       "priority": 37,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Long low silhouette, swept handlebars, large front fork and stepped saddle",
+      "next": "Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
@@ -383,7 +383,7 @@
       "priority": 38,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; High fenders, narrow body, knobby tires, long suspension and a front number plate",
+      "next": "Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
@@ -393,7 +393,7 @@
       "priority": 39,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Upright riding position, tall windscreen, broad fairing and matching side panniers",
+      "next": "Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     },
     {
@@ -403,7 +403,7 @@
       "priority": 40,
       "status": "deferred",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Rider presentation prerequisite; Rounded leg shield, step-through frame, small wheels and bright two-tone bodywork",
+      "next": "Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated.",
       "prerequisite": "docs/topics/vehicle-riders.md"
     }
   ]

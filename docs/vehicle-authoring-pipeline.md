@@ -1,12 +1,25 @@
 # Original vehicle authoring pipeline
 
-Owner: [Original vehicles](topics/original-vehicles.md). Current proof is the
+Start with [texture authoring](vehicle-texture-authoring.md) for surface ownership,
+UV paint and the distinction between actual high-to-low transfer and direct
+semantic painting. [Current fleet status](topics/original-vehicles.md) owns normal
+availability and validation; the examples below retain their original decisions.
+
+Standalone Python review tools use
+`python -m pip install -r scripts/vehicle-bake/requirements-review.txt`.
+Constructors run separately in the recorded Blender version; ordinary builds
+load committed assets and do not regenerate them.
+
+Owner: [Original vehicles](topics/original-vehicles.md). The initial proof is the
 red coupe in [142](tactical/142-red-car-low-poly-pipeline.md), derived from the
 owner-preferred approach 3 in [141](tactical/141-sports-car-style-experiments.md).
 These are hand-authored family examples with reusable inspection stages, not a
-validated automatic generator for arbitrary vehicles. The owner accepted corrected v3's appearance on 2026-10-19;
-other families remain queued. [145](tactical/145-original-coupe-gameplay.md)
-integrates the accepted car with shared spawning, traffic and sprite fallback.
+validated automatic generator for arbitrary vehicles. The owner accepted corrected
+v3's appearance on 2026-10-19; [145](tactical/145-original-coupe-gameplay.md)
+integrates it with shared spawning, traffic and sprite fallback. The bounded
+[153](tactical/153-autonomous-vehicle-production.md) run now qualifies 33 ordinary
+originals for those paths under explicit batch authorization. Its seven cycle
+styles remain rider prototypes with separate identity, occupancy and fallback gates.
 
 The owner next authorized the Beetle-style compact in
 [146](tactical/146-beetle-pipeline-review.md). It tests direct semantic UV painting
@@ -25,7 +38,7 @@ The owner accepted that appearance and authorized its gameplay delivery in
 | Runtime geometry | Silhouette, cabin, actual wheel openings, ground contact and independent wheels; spend triangles on visible shape |
 | Surface transfer | A view-independent UV atlas with owned surfaces, coverage/conflict evidence and explicit cleanup |
 | Runtime presentation | Unlit nearest paint and a logical-pixel silhouette outline through shared engine components |
-| Acceptance | Real exported GLB counts, rolling-wheel clearance, native/diagonal visual review, exact retained sources and owner decision |
+| Acceptance | Real exported GLB counts, rolling-wheel clearance, native/diagonal visual review, exact retained sources, explicit authorization and honest review status |
 
 Outer ink is generated from the visible alpha boundary. Interior frames/seams are
 atlas paint or purposeful geometry. A screen silhouette from one view must not
@@ -97,7 +110,7 @@ projection or evidence that high-to-low texture transfer succeeded.
 
 - Export one opaque unlit atlas, preferably one shared material, one consolidated
   fixed body and four independent wheel meshes. Count draw primitives and exported
-  UV-split vertices as well as triangles and compressed GLB bytes.
+  UV-split vertices as well as triangles and GLB file bytes.
 - Inspect the actual glTF JSON for `KHR_materials_unlit`. Naming a Blender material
   "unlit" does not guarantee that extension or correct base-colour texture export.
 - Keep `Wheel_FL/FR/RL/RR_Steer > *_Roll > mesh` and the shared rig metadata contract.
@@ -369,6 +382,13 @@ are unchanged.
 
 ## Offline fleet review
 
+`python scripts/vehicle-bake/fleet-budget.py --check
+art-source/vehicle-bake/fleet-budget-153.json` verifies the measured retained
+normal-fleet budget. All 33 current originals use 2,299–4,030 triangles each;
+their actual GLBs total 7,012,016 bytes. The report distinguishes UV-split vertices
+and source primitives from triangle count. Contact-shadow and outline passes
+are additional work, so primitive count is not a total GPU draw-cost claim.
+
 `python scripts/vehicle-bake/fleet-review.py --output data/vehicle-bake/fleet`
 composes existing exact native captures into a PNG contact sheet and a network-free
 HTML index. Cards link each locally regenerated standalone GLB review. The tool
@@ -376,6 +396,16 @@ does not rerender or change art/review/runtime state. New families keep fixed
 pixel scale; the sheet expands its padding to fit larger models.
 
 ## Independent retained-input replay
+
+`python scripts/vehicle-bake/retained-source-audit.py RECEIPT --retained DIR
+--public PUBLIC_DIR --qa data/vehicle-bake/ID-audit` checks modern input declarations,
+output hashes and the retained-file map without executing the constructor.
+Local-basename receipts require `--input-root DIR`; scalar-only historical modern
+receipts require explicit `--model-name model.glb` or `rider.glb`. It rejects ignored
+dependencies, duplicate/conflicting declarations, stale outputs and unregistered
+historical pins. Install the review requirements above first. The 49 controls and
+actual corpus checks complement fresh replay; static success grants no geometry,
+pixel, hidden-import, appearance, human-approval or normal-activation qualification.
 
 `python scripts/vehicle-bake/source-replay.py RECEIPT --qa data/vehicle-bake/ID-replay
 --blender BLENDER --deadline UTC_ISO` copies only declared retained inputs to a
@@ -438,6 +468,9 @@ separately from synthetic wrapper policy tests. These evidence files document QA
 they are not constructor/runtime input dependencies and are not added to old pins.
 
 ## Static component assemblies
+
+Follow [the component assembly runbook](vehicle-component-assembly.md) for child
+replay aliases, measured placement, exact source replay and shared-loader review.
 
 The isolated Explorer/roadster control demonstrates adding a component without
 re-exporting an immutable car. `compose-component.py` accepts two embedded static

@@ -1,0 +1,1308 @@
+{
+  "status": "passed-actual-source-pilot",
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "riderInputHashes": {
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016"
+  },
+  "profilePlusOneMeasuredMount": true,
+  "mountSource": [
+    0.3199999928474426,
+    0.0,
+    1.0
+  ],
+  "actualMountWorld": [
+    5.565217018127441,
+    0.0,
+    17.391305923461914
+  ],
+  "packedScenes": {
+    "master.blend": {
+      "sha256": "b7409605b3eb238241ddda1c79ebded249966d982ac76c86163446e2f58a79bf",
+      "meshObjects": 61,
+      "triangles": 3056,
+      "oneSemanticUV": true,
+      "packedImages": 2
+    },
+    "car.blend": {
+      "sha256": "857e3b794907a256327271ab6649baf0004922448080a82e933fcd94a8c010a7",
+      "meshObjects": 3,
+      "triangles": 3056,
+      "oneSemanticUV": true,
+      "packedImages": 2
+    }
+  },
+  "contacts": [
+    {
+      "name": "hip_saddle",
+      "profilePlusSingleMountWorld": [
+        5.565217018127441,
+        0.0,
+        16.008695602416992
+      ],
+      "actualRiderSocketWorld": [
+        5.565217018127441,
+        0.0,
+        16.008695602416992
+      ],
+      "actualBikeSocketWorld": [
+        5.565217018127441,
+        0.0,
+        16.008697509765625
+      ],
+      "actualBikeContactOwner": "Actual dark saddle central hip tangent",
+      "actualBikeSurfaceWorld": [
+        5.565217018127441,
+        0.0,
+        16.008695602416992
+      ],
+      "distanceToBikeSurfaceWorld": 0.0,
+      "distanceToRiderSurfaceWorld": 0.0,
+      "semantics": "actual surface tangent"
+    },
+    {
+      "name": "hand_left_grip",
+      "profilePlusSingleMountWorld": [
+        -4.0,
+        -4.0,
+        22.086956024169922
+      ],
+      "actualRiderSocketWorld": [
+        -4.0,
+        -4.000000476837158,
+        22.086956024169922
+      ],
+      "actualBikeSocketWorld": [
+        -4.000000953674316,
+        -4.000000476837158,
+        22.086957931518555
+      ],
+      "actualBikeContactOwner": "Actual palm wrapped grip left",
+      "actualBikeSurfaceWorld": [
+        -3.714916467666626,
+        -4.0,
+        21.8018741607666
+      ],
+      "distanceToBikeSurfaceWorld": 0.40316781401634216,
+      "distanceToRiderSurfaceWorld": 0.7251582741737366,
+      "semantics": "grip centerline inside closed palm; local wrap"
+    },
+    {
+      "name": "hand_right_grip",
+      "profilePlusSingleMountWorld": [
+        -4.0,
+        4.0,
+        22.086956024169922
+      ],
+      "actualRiderSocketWorld": [
+        -4.0,
+        4.000000476837158,
+        22.086956024169922
+      ],
+      "actualBikeSocketWorld": [
+        -4.000000953674316,
+        4.000000476837158,
+        22.086957931518555
+      ],
+      "actualBikeContactOwner": "Actual palm wrapped grip right",
+      "actualBikeSurfaceWorld": [
+        -3.714916467666626,
+        4.0,
+        22.372037887573242
+      ],
+      "distanceToBikeSurfaceWorld": 0.40316781401634216,
+      "distanceToRiderSurfaceWorld": 0.7251582741737366,
+      "semantics": "grip centerline inside closed palm; local wrap"
+    },
+    {
+      "name": "foot_left_support",
+      "profilePlusSingleMountWorld": [
+        4.34782600402832,
+        -4.0,
+        8.17391300201416
+      ],
+      "actualRiderSocketWorld": [
+        4.34782600402832,
+        -4.000000476837158,
+        8.173912048339844
+      ],
+      "actualBikeSocketWorld": [
+        4.3478264808654785,
+        -4.000000476837158,
+        8.17391300201416
+      ],
+      "actualBikeContactOwner": "Actual sole tangent foot peg left",
+      "actualBikeSurfaceWorld": [
+        4.34782600402832,
+        -4.0,
+        8.17391300201416
+      ],
+      "distanceToBikeSurfaceWorld": 0.0,
+      "distanceToRiderSurfaceWorld": 2.384185791015625e-07,
+      "semantics": "actual surface tangent"
+    },
+    {
+      "name": "foot_right_support",
+      "profilePlusSingleMountWorld": [
+        4.34782600402832,
+        4.0,
+        8.17391300201416
+      ],
+      "actualRiderSocketWorld": [
+        4.34782600402832,
+        4.000000476837158,
+        8.173912048339844
+      ],
+      "actualBikeSocketWorld": [
+        4.3478264808654785,
+        4.000000476837158,
+        8.17391300201416
+      ],
+      "actualBikeContactOwner": "Actual sole tangent foot peg right",
+      "actualBikeSurfaceWorld": [
+        4.34782600402832,
+        4.0,
+        8.17391300201416
+      ],
+      "distanceToBikeSurfaceWorld": 0.0,
+      "distanceToRiderSurfaceWorld": 0.0,
+      "semantics": "actual surface tangent"
+    }
+  ],
+  "actualFit": {
+    "status": "passed",
+    "actualRiderTriangles": 1956,
+    "actualBikeFixedTriangles": 2192,
+    "allFixedComponentCount": 47,
+    "actualContactIntersections": [
+      {
+        "bikeComponent": "Actual dark saddle central hip tangent",
+        "actualIntersectionTrianglePairs": 7,
+        "intersectionPoints": 14,
+        "boundedContactOnly": true
+      },
+      {
+        "bikeComponent": "Actual palm wrapped grip left",
+        "actualIntersectionTrianglePairs": 72,
+        "intersectionPoints": 144,
+        "boundedContactOnly": true
+      },
+      {
+        "bikeComponent": "Actual palm wrapped grip right",
+        "actualIntersectionTrianglePairs": 72,
+        "intersectionPoints": 144,
+        "boundedContactOnly": true
+      },
+      {
+        "bikeComponent": "Actual sole tangent foot peg right",
+        "actualIntersectionTrianglePairs": 1,
+        "intersectionPoints": 2,
+        "boundedContactOnly": true
+      }
+    ],
+    "inappropriateIntersections": [],
+    "inappropriateContainments": [],
+    "wholeRiderAndAllFixedBikeTrianglesUsed": true,
+    "closedBikePartContainmentAndRiderParityChecked": true
+  },
+  "displacedRiderNegative": {
+    "translationSource": [
+      -0.28,
+      0,
+      -0.22
+    ],
+    "allFiveSocketDistancesWorld": {
+      "hip_saddle": 6.192867301609509,
+      "hand_left_grip": 6.192867917591897,
+      "hand_right_grip": 6.192867917591897,
+      "foot_left_support": 6.192867917591897,
+      "foot_right_support": 6.192867917591897
+    },
+    "inappropriateIntersections": [
+      {
+        "bikeComponent": "Actual dark saddle central hip tangent",
+        "unallowedPoints": 176,
+        "examplesWorld": [
+          [
+            2.994807243347168,
+            -1.3913042545318604,
+            15.013887405395508
+          ],
+          [
+            3.130434513092041,
+            -1.39130437374115,
+            14.878260612487793
+          ],
+          [
+            3.13043475151062,
+            -1.3913042545318604,
+            14.808694839477539
+          ],
+          [
+            3.130434513092041,
+            -1.391303539276123,
+            14.878260612487793
+          ],
+          [
+            3.1966629028320312,
+            -1.3913042545318604,
+            15.024852752685547
+          ],
+          [
+            3.128743886947632,
+            -1.3913042545318604,
+            14.808694839477539
+          ],
+          [
+            2.5270135402679443,
+            -1.3913042545318604,
+            14.909622192382812
+          ],
+          [
+            2.4347822666168213,
+            -1.3913042545318604,
+            14.94782543182373
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser V cylinder rear",
+        "unallowedPoints": 316,
+        "examplesWorld": [
+          [
+            0.8644016981124878,
+            2.1391303539276123,
+            15.226086616516113
+          ],
+          [
+            0.8553041219711304,
+            2.14587140083313,
+            15.226086616516113
+          ],
+          [
+            1.136160969734192,
+            2.1391303539276123,
+            14.926214218139648
+          ],
+          [
+            1.076097846031189,
+            2.2007856369018555,
+            14.900675773620605
+          ],
+          [
+            1.7312499284744263,
+            2.1391303539276123,
+            14.269564628601074
+          ],
+          [
+            1.5043118000030518,
+            2.30728816986084,
+            14.269564628601074
+          ],
+          [
+            1.6603256464004517,
+            2.1391303539276123,
+            14.34782600402832
+          ],
+          [
+            1.4512109756469727,
+            2.294081211090088,
+            14.34782600402832
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser broad cylinder fin rear 0",
+        "unallowedPoints": 72,
+        "examplesWorld": [
+          [
+            -1.9757399559020996,
+            2.720115900039673,
+            12.105031967163086
+          ],
+          [
+            -1.9573071002960205,
+            2.703502655029297,
+            12.1094331741333
+          ],
+          [
+            -1.7749427556991577,
+            2.539130449295044,
+            12.152978897094727
+          ],
+          [
+            -1.9573079347610474,
+            2.703503131866455,
+            12.109432220458984
+          ],
+          [
+            -0.9006432294845581,
+            2.6215710639953613,
+            11.065465927124023
+          ],
+          [
+            -0.861443281173706,
+            2.539130449295044,
+            11.144977569580078
+          ],
+          [
+            -2.006661891937256,
+            2.615325689315796,
+            11.796979904174805
+          ],
+          [
+            -1.9891657829284668,
+            2.539130449295044,
+            11.664206504821777
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser broad cylinder fin rear 1",
+        "unallowedPoints": 230,
+        "examplesWorld": [
+          [
+            -1.5795321464538574,
+            2.64752459526062,
+            13.923502922058105
+          ],
+          [
+            -1.5930719375610352,
+            2.641916275024414,
+            13.72892951965332
+          ],
+          [
+            -1.6170088052749634,
+            2.5917160511016846,
+            13.964856147766113
+          ],
+          [
+            -1.6001993417739868,
+            2.6322975158691406,
+            13.7224702835083
+          ],
+          [
+            -1.5795321464538574,
+            2.64752459526062,
+            13.923502922058105
+          ],
+          [
+            -1.467745304107666,
+            2.6938281059265137,
+            13.885223388671875
+          ],
+          [
+            -1.4335354566574097,
+            2.707998275756836,
+            13.873509407043457
+          ],
+          [
+            -1.467745304107666,
+            2.6938281059265137,
+            13.885223388671875
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser broad cylinder fin rear 2",
+        "unallowedPoints": 276,
+        "examplesWorld": [
+          [
+            -0.47222185134887695,
+            2.5773472785949707,
+            14.744699478149414
+          ],
+          [
+            -0.489507257938385,
+            2.552208423614502,
+            14.755112648010254
+          ],
+          [
+            -0.49849918484687805,
+            2.539130926132202,
+            14.760528564453125
+          ],
+          [
+            -0.48950695991516113,
+            2.552208423614502,
+            14.755112648010254
+          ],
+          [
+            0.10688209533691406,
+            2.7434685230255127,
+            14.46964168548584
+          ],
+          [
+            0.020431041717529297,
+            2.6403446197509766,
+            14.718605041503906
+          ],
+          [
+            0.11903069913387299,
+            2.539130926132202,
+            14.760528564453125
+          ],
+          [
+            0.020430564880371094,
+            2.6403446197509766,
+            14.718605041503906
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser extended rear swingarm -1",
+        "unallowedPoints": 46,
+        "examplesWorld": [
+          [
+            0.30426692962646484,
+            -4.34782600402832,
+            6.861396312713623
+          ],
+          [
+            0.026500701904296875,
+            -4.671518325805664,
+            6.98651123046875
+          ],
+          [
+            0.2644716501235962,
+            -4.02782678604126,
+            6.992719650268555
+          ],
+          [
+            0.2774784564971924,
+            -4.035615921020508,
+            6.9899139404296875
+          ],
+          [
+            0.284954309463501,
+            -4.122746467590332,
+            6.954048156738281
+          ],
+          [
+            0.27747786045074463,
+            -4.035616397857666,
+            6.989914417266846
+          ],
+          [
+            0.3042621612548828,
+            -4.34782600402832,
+            6.861395835876465
+          ],
+          [
+            0.2849539518356323,
+            -4.122746467590332,
+            6.954048156738281
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser extended rear swingarm 1",
+        "unallowedPoints": 46,
+        "examplesWorld": [
+          [
+            0.2644709348678589,
+            4.02782678604126,
+            6.992719650268555
+          ],
+          [
+            0.24437713623046875,
+            4.015793323516846,
+            6.997053146362305
+          ],
+          [
+            0.0265045166015625,
+            4.671518325805664,
+            6.98651123046875
+          ],
+          [
+            0.025103449821472168,
+            4.673156261444092,
+            6.987144470214844
+          ],
+          [
+            0.010723710060119629,
+            4.679858684539795,
+            6.989454746246338
+          ],
+          [
+            0.025103092193603516,
+            4.673156261444092,
+            6.987144947052002
+          ],
+          [
+            0.02651005983352661,
+            4.671518325805664,
+            6.986511707305908
+          ],
+          [
+            0.30426979064941406,
+            4.34782600402832,
+            6.861396312713623
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser large rounded crankcase face -1",
+        "unallowedPoints": 56,
+        "examplesWorld": [
+          [
+            -1.3661044836044312,
+            -2.969632625579834,
+            10.62401008605957
+          ],
+          [
+            -1.3244024515151978,
+            -2.9169461727142334,
+            10.680694580078125
+          ],
+          [
+            -2.1993138790130615,
+            -2.7289011478424072,
+            11.086647987365723
+          ],
+          [
+            -2.0431079864501953,
+            -2.6608693599700928,
+            11.139482498168945
+          ],
+          [
+            -1.3694920539855957,
+            -2.9739129543304443,
+            10.619404792785645
+          ],
+          [
+            -1.366104006767273,
+            -2.969632625579834,
+            10.624009132385254
+          ],
+          [
+            -2.4347825050354004,
+            -2.831453323364258,
+            11.007003784179688
+          ],
+          [
+            -2.1993141174316406,
+            -2.728900909423828,
+            11.086647987365723
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser large rounded crankcase face 1",
+        "unallowedPoints": 52,
+        "examplesWorld": [
+          [
+            -2.0431065559387207,
+            2.6608693599700928,
+            11.139481544494629
+          ],
+          [
+            -2.1993157863616943,
+            2.728900671005249,
+            11.086648941040039
+          ],
+          [
+            -1.3244024515151978,
+            2.9169464111328125,
+            10.680694580078125
+          ],
+          [
+            -1.366104006767273,
+            2.969632625579834,
+            10.624009132385254
+          ],
+          [
+            -2.1993138790130615,
+            2.7289011478424072,
+            11.086647987365723
+          ],
+          [
+            -2.4347825050354004,
+            2.8314526081085205,
+            11.007004737854004
+          ],
+          [
+            -1.3661044836044312,
+            2.969632625579834,
+            10.62401008605957
+          ],
+          [
+            -1.3694919347763062,
+            2.9739129543304443,
+            10.619404792785645
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser long low chrome exhaust -1",
+        "unallowedPoints": 74,
+        "examplesWorld": [
+          [
+            1.3473236560821533,
+            -5.0,
+            5.199498176574707
+          ],
+          [
+            1.3473281860351562,
+            -4.951828479766846,
+            5.151326656341553
+          ],
+          [
+            -2.0429763793945312,
+            -5.0,
+            5.199498176574707
+          ],
+          [
+            -2.0429763793945312,
+            -4.9856719970703125,
+            5.185170650482178
+          ],
+          [
+            1.521740198135376,
+            -4.713544845581055,
+            4.91304349899292
+          ],
+          [
+            1.565217137336731,
+            -4.701895236968994,
+            4.869565963745117
+          ],
+          [
+            1.5652179718017578,
+            -4.695116996765137,
+            4.844268798828125
+          ],
+          [
+            1.565217137336731,
+            -4.701895236968994,
+            4.869565963745117
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser long low chrome exhaust 1",
+        "unallowedPoints": 78,
+        "examplesWorld": [
+          [
+            1.3217389583587646,
+            4.655295372009277,
+            4.34782600402832
+          ],
+          [
+            1.3629463911056519,
+            4.644253730773926,
+            4.389033317565918
+          ],
+          [
+            1.4956493377685547,
+            4.6086955070495605,
+            4.5217390060424805
+          ],
+          [
+            1.3629463911056519,
+            4.644253730773926,
+            4.389033317565918
+          ],
+          [
+            -2.365217447280884,
+            4.655295372009277,
+            4.34782600402832
+          ],
+          [
+            0.7186407446861267,
+            4.655295372009277,
+            4.34782600402832
+          ],
+          [
+            0.7186405658721924,
+            4.655295372009277,
+            4.34782600402832
+          ],
+          [
+            1.3217389583587646,
+            4.655295372009277,
+            4.34782600402832
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser long low frame member 3",
+        "unallowedPoints": 260,
+        "examplesWorld": [
+          [
+            3.0707168579101562,
+            -0.20789945125579834,
+            14.519322395324707
+          ],
+          [
+            3.101163387298584,
+            -0.029447317123413086,
+            14.445815086364746
+          ],
+          [
+            3.106186866760254,
+            3.30122157641748e-17,
+            14.433685302734375
+          ],
+          [
+            3.101163387298584,
+            -0.029447317123413086,
+            14.445815086364746
+          ],
+          [
+            -0.868678092956543,
+            -0.14874868094921112,
+            14.440855026245117
+          ],
+          [
+            -0.7189102172851562,
+            3.30122157641748e-17,
+            14.38128662109375
+          ],
+          [
+            -1.7423934936523438,
+            3.30122157641748e-17,
+            14.367266654968262
+          ],
+          [
+            -1.7189406156539917,
+            -0.13591456413269043,
+            14.423891067504883
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Low broad maroon cruiser tank cream skin UV",
+        "unallowedPoints": 116,
+        "examplesWorld": [
+          [
+            -1.7819510698318481,
+            0.44641780853271484,
+            15.290964126586914
+          ],
+          [
+            -1.7391303777694702,
+            0.38992518186569214,
+            15.207690238952637
+          ],
+          [
+            -1.8589844703674316,
+            0.4705128073692322,
+            15.440773010253906
+          ],
+          [
+            -1.798349380493164,
+            0.45753347873687744,
+            15.322854042053223
+          ],
+          [
+            -1.788832426071167,
+            0.45549625158309937,
+            15.304347038269043
+          ],
+          [
+            -1.7819511890411377,
+            0.44641774892807007,
+            15.290964126586914
+          ],
+          [
+            -1.8871464729309082,
+            0.3753820061683655,
+            15.56711483001709
+          ],
+          [
+            -1.8786108493804932,
+            0.4491395652294159,
+            15.481758117675781
+          ]
+        ]
+      }
+    ],
+    "inappropriateContainments": [
+      {
+        "bikeComponent": "Actual dark saddle central hip tangent",
+        "bikeVerticesInsideRider": 10,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -0.7826084494590759,
+            -1.3913042545318604,
+            14.808694839477539
+          ],
+          [
+            -1.2173911333084106,
+            -0.9565216898918152,
+            14.808694839477539
+          ],
+          [
+            -0.7826084494590759,
+            -1.3913042545318604,
+            15.573912620544434
+          ],
+          [
+            -0.7826084494590759,
+            -0.9565216898918152,
+            16.008695602416992
+          ],
+          [
+            -1.2173911333084106,
+            -0.9565216898918152,
+            15.573912620544434
+          ],
+          [
+            -1.2173911333084106,
+            0.9565216898918152,
+            14.808694839477539
+          ],
+          [
+            -0.7826084494590759,
+            1.3913042545318604,
+            14.808694839477539
+          ],
+          [
+            -0.7826084494590759,
+            0.9565216898918152,
+            16.008695602416992
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser V cylinder rear",
+        "bikeVerticesInsideRider": 10,
+        "riderVerticesInsideClosedBikePart": 16,
+        "examplesWorld": [
+          [
+            0.828200101852417,
+            -2.1391303539276123,
+            15.266033172607422
+          ],
+          [
+            0.28776273131370544,
+            -2.1391303539276123,
+            15.292612075805664
+          ],
+          [
+            0.828200101852417,
+            2.1391303539276123,
+            15.266033172607422
+          ],
+          [
+            0.28776273131370544,
+            2.1391303539276123,
+            15.292612075805664
+          ],
+          [
+            2.6500613689422607,
+            -2.1391303539276123,
+            13.255703926086426
+          ],
+          [
+            2.3665530681610107,
+            -2.5217387676239014,
+            12.998774528503418
+          ],
+          [
+            2.6234822273254395,
+            -2.1391303539276123,
+            12.715267181396484
+          ],
+          [
+            2.6500613689422607,
+            2.1391303539276123,
+            13.255703926086426
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser broad cylinder fin rear 1",
+        "bikeVerticesInsideRider": 2,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -1.3084065914154053,
+            -2.539130449295044,
+            13.986907958984375
+          ],
+          [
+            -1.3084065914154053,
+            2.539130449295044,
+            13.986907958984375
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser broad cylinder fin rear 2",
+        "bikeVerticesInsideRider": 2,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -0.5005398392677307,
+            -2.539130926132202,
+            14.719036102294922
+          ],
+          [
+            -0.5005398392677307,
+            2.539130926132202,
+            14.719036102294922
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser extended rear swingarm -1",
+        "bikeVerticesInsideRider": 5,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -0.5109469890594482,
+            -4.679858684539795,
+            6.972489833831787
+          ],
+          [
+            -0.52173912525177,
+            -4.817391395568848,
+            7.304347515106201
+          ],
+          [
+            -0.5109469890594482,
+            -4.015793323516846,
+            6.972489833831787
+          ],
+          [
+            -0.5064767599105835,
+            -4.34782600402832,
+            6.835030555725098
+          ],
+          [
+            -0.52173912525177,
+            -3.878260850906372,
+            7.304347515106201
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser extended rear swingarm 1",
+        "bikeVerticesInsideRider": 5,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -0.5109469890594482,
+            4.015793323516846,
+            6.972489833831787
+          ],
+          [
+            -0.52173912525177,
+            3.878260850906372,
+            7.304347515106201
+          ],
+          [
+            -0.5109469890594482,
+            4.679858684539795,
+            6.972489833831787
+          ],
+          [
+            -0.5064767599105835,
+            4.34782600402832,
+            6.835030555725098
+          ],
+          [
+            -0.52173912525177,
+            4.817391395568848,
+            7.304347515106201
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser large rounded crankcase face -1",
+        "bikeVerticesInsideRider": 3,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -1.3512893915176392,
+            -2.9739129543304443,
+            5.384215831756592
+          ],
+          [
+            -1.2035402059555054,
+            -2.6608693599700928,
+            10.972481727600098
+          ],
+          [
+            -2.4347825050354004,
+            -2.9739129543304443,
+            10.831303596496582
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser large rounded crankcase face 1",
+        "bikeVerticesInsideRider": 3,
+        "riderVerticesInsideClosedBikePart": 0,
+        "examplesWorld": [
+          [
+            -1.3512893915176392,
+            2.9739129543304443,
+            5.384215831756592
+          ],
+          [
+            -2.4347825050354004,
+            2.9739129543304443,
+            10.831303596496582
+          ],
+          [
+            -1.2035402059555054,
+            2.6608693599700928,
+            10.972481727600098
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser long low chrome exhaust -1",
+        "bikeVerticesInsideRider": 0,
+        "riderVerticesInsideClosedBikePart": 14,
+        "examplesWorld": [
+          [
+            -2.365217447280884,
+            -4.973913192749023,
+            4.34782600402832
+          ],
+          [
+            1.3217389583587646,
+            -4.973913192749023,
+            4.34782600402832
+          ],
+          [
+            -2.365217447280884,
+            -5.217391490936279,
+            4.591304779052734
+          ],
+          [
+            -2.6086957454681396,
+            -4.973913192749023,
+            4.591304779052734
+          ],
+          [
+            1.3217389583587646,
+            -5.217391490936279,
+            4.591304779052734
+          ],
+          [
+            1.3217389583587646,
+            -5.217391490936279,
+            4.869565963745117
+          ],
+          [
+            -2.365217447280884,
+            -5.217391490936279,
+            4.869565963745117
+          ],
+          [
+            -2.6086957454681396,
+            -4.973913192749023,
+            4.869565963745117
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Cruiser long low chrome exhaust 1",
+        "bikeVerticesInsideRider": 0,
+        "riderVerticesInsideClosedBikePart": 14,
+        "examplesWorld": [
+          [
+            -2.365217447280884,
+            4.973913192749023,
+            4.34782600402832
+          ],
+          [
+            1.3217389583587646,
+            4.973913192749023,
+            4.34782600402832
+          ],
+          [
+            -2.6086957454681396,
+            4.973913192749023,
+            4.591304779052734
+          ],
+          [
+            -2.365217447280884,
+            4.973913192749023,
+            5.113044738769531
+          ],
+          [
+            -2.6086957454681396,
+            4.973913192749023,
+            4.869565963745117
+          ],
+          [
+            -2.365217447280884,
+            5.217391490936279,
+            4.591304779052734
+          ],
+          [
+            1.3217389583587646,
+            5.217391490936279,
+            4.591304779052734
+          ],
+          [
+            -2.365217447280884,
+            5.217391490936279,
+            4.869565963745117
+          ]
+        ]
+      },
+      {
+        "bikeComponent": "Low broad maroon cruiser tank cream skin UV",
+        "bikeVerticesInsideRider": 9,
+        "riderVerticesInsideClosedBikePart": 12,
+        "examplesWorld": [
+          [
+            -1.7391303777694702,
+            0.417391300201416,
+            15.304347038269043
+          ],
+          [
+            -1.7391303777694702,
+            0.38561928272247314,
+            15.416157722473145
+          ],
+          [
+            -1.7391303777694702,
+            0.29514020681381226,
+            15.510945320129395
+          ],
+          [
+            -1.7391303777694702,
+            0.1597287356853485,
+            15.574280738830566
+          ],
+          [
+            -1.7391303777694702,
+            -0.1597287356853485,
+            15.574280738830566
+          ],
+          [
+            -1.7391303777694702,
+            2.555784440922045e-17,
+            15.596521377563477
+          ],
+          [
+            -1.7391303777694702,
+            -0.29514020681381226,
+            15.510945320129395
+          ],
+          [
+            -1.7391303777694702,
+            -0.38561928272247314,
+            15.416157722473145
+          ]
+        ]
+      }
+    ],
+    "rejected": true,
+    "baselineRestoredExact": true
+  },
+  "wholeFixedBikeAndRiderNeutralRoll": [
+    {
+      "wheel": "Wheel_F_Roll",
+      "radiusMeasuredWorld": 7.4782609939575195,
+      "radiusDeclaredWorld": 7.478260869565219,
+      "groundZWorld": 4.76837158203125e-07,
+      "minimumGapWorld": 1.0233441755653558,
+      "nearestFixedOwner": "Cruiser actual curved cream maroon fender F",
+      "allNeutralRollAngles": true,
+      "fixedBikeTriangles": 2192,
+      "fixedRiderTriangles": 1956
+    },
+    {
+      "wheel": "Wheel_R_Roll",
+      "radiusMeasuredWorld": 8.000000305263706,
+      "radiusDeclaredWorld": 8.000000000000002,
+      "groundZWorld": 9.5367431640625e-07,
+      "minimumGapWorld": 0.4637818253893755,
+      "nearestFixedOwner": "Cruiser long raised pillion pad",
+      "allNeutralRollAngles": true,
+      "fixedBikeTriangles": 2192,
+      "fixedRiderTriangles": 1956
+    }
+  ],
+  "perWheelCollisionNegatives": [
+    {
+      "wheel": "Wheel_F_Roll",
+      "collisionRejected": true,
+      "controlledGapWorld": -7.478260116013792,
+      "fixtureTrianglesAdded": 1,
+      "noCandidateTrianglesRemoved": true,
+      "baselineRestoredExact": true
+    },
+    {
+      "wheel": "Wheel_R_Roll",
+      "collisionRejected": true,
+      "controlledGapWorld": -7.9999995557149335,
+      "fixtureTrianglesAdded": 1,
+      "noCandidateTrianglesRemoved": true,
+      "baselineRestoredExact": true
+    }
+  ],
+  "actualBikeBounds": {
+    "minWorld": [
+      -32.71742248535156,
+      -6.173913478851318,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      30.423879623413086,
+      6.173913478851318,
+      22.504348754882812
+    ],
+    "spanSource": [
+      3.630624871253967,
+      0.7100000500679015,
+      1.294000025987625
+    ],
+    "centeredHorizontalCeilWorld": [
+      66,
+      13
+    ],
+    "noRescaleRecenter": true
+  },
+  "actualCombinedBounds": {
+    "minWorld": [
+      -32.71742248535156,
+      -6.173913478851318,
+      4.76837158203125e-07
+    ],
+    "maxWorld": [
+      30.423879623413086,
+      6.173913478851318,
+      34.173912048339844
+    ],
+    "spanSource": [
+      3.630624871253967,
+      0.7100000500679015,
+      1.9649999153614042
+    ]
+  },
+  "contactExceptions": {
+    "boundsSource": {
+      "hipHalfExtentXY": [
+        0.17,
+        0.14
+      ],
+      "surfaceZTolerance": 0.002,
+      "palmRadius": 0.085,
+      "soleRadius": 0.12
+    },
+    "correspondingRiderOwnersOnly": {
+      "hip_saddle": "Upright seated trouser pelvis",
+      "hand_left_grip": "Warm gripping hand left",
+      "hand_right_grip": "Warm gripping hand right",
+      "foot_left_support": "Boot sole left",
+      "foot_right_support": "Boot sole right"
+    },
+    "policy": "Saddle/sole top tangency and closed palm/grip wrapping only; separate semantic-pair proof required. All other pairs rejected."
+  },
+  "CarMeshAssetUsed": false,
+  "sharedCycleQualification": "pending parent actual shared loader/browser review",
+  "normalActivation": false
+}

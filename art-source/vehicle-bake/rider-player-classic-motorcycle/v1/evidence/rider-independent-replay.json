@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 4,
+  "glbSha256": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+  "exactOutputs": {
+    "rider.glb": "data/vehicle-riders/classic-upright-v3/replay-final/public/rider.glb",
+    "atlas.png": "data/vehicle-riders/classic-upright-v3/replay-final/public/atlas.png",
+    "recipe.json": "data/vehicle-riders/classic-upright-v3/replay-final/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-riders/classic-upright-v3-parent/retained-replay-uujlx1o9",
+  "scratchInputDependencies": [],
+  "historicalInputs": [],
+  "snapshotCatalogSha256": null
+}

@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "inputHashes": {
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/build.py": "03e9c26d7af1e0c239d4ddacdc9e20404e5d3559ef065891a9d0189c66eb2291",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/geometry.py": "bc4c1e84b853b36890427499ebcef460fd1f4762052a97b80b72e486e6331683",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/family.json": "b1ddea1fb830acbcb3309124ee1d14257f9b64ff00978fd2dcea1a0f8cbdf3e8",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/classic-upright/v3/classic-upright-v1.json": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b"
+  },
+  "initialFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/classic-upright/v3/classic-upright-v1.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/build.py",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/family.json",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/geometry.py",
+    "scripts/vehicle-bake/classic-motorcycle-player-fit/raw-audit.py"
+  ],
+  "noIgnoredMasterOrScratchDependencies": true,
+  "packedMasterNotAConstructionInput": true,
+  "riderGLBRecipeReport": "Separate immutable diagnostic inputs; constructor reads profile only",
+  "freshRoot": "data/vehicle-bake/classic-motorcycle-player-fit/sealed-inputs-replay",
+  "command": [
+    "BLENDER",
+    "--background",
+    "--factory-startup",
+    "--threads",
+    "4",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "REPOSITORY\\data\\vehicle-bake\\classic-motorcycle-player-fit\\sealed-inputs-replay\\scripts\\vehicle-bake\\classic-motorcycle-player-fit\\build.py",
+    "--",
+    "--scratch"
+  ],
+  "portableCommand": "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/classic-motorcycle-player-fit/build.py -- --scratch",
+  "outputs": {
+    "model.glb": {
+      "sha256": "38d2be5c55aee8c93d3e0c09625b5b6d65fe1441d78b4f93d146ea4103a5bc63",
+      "bytes": 174776,
+      "byteExact": true
+    },
+    "atlas.png": {
+      "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062",
+      "bytes": 2987,
+      "byteExact": true
+    },
+    "recipe.json": {
+      "sha256": "cbe2275464db8b7a6a4c916902ed497da7a93af561801a841ef1796f0954b570",
+      "bytes": 22032,
+      "byteExact": true
+    }
+  },
+  "sharedStaticCycleCatalogActuallyUsed": true,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "runtimeActivation": false,
+  "diagnosticSharedInputHashes": {
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/source-replay.py": "3f88d029d199a31df2be9c10b8bc0f772514fa3cdab6a281ae40122da10f735b",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "art-source/vehicle-riders/classic-upright/v3/classic-upright-v1.json": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+    "art-source/vehicle-riders/classic-upright/v3/rider.glb": "911ee94cf11c2e674eddfe2a09f51ef64e0a05c5d5b7bf0795d364f60f6d132e",
+    "art-source/vehicle-riders/classic-upright/v3/recipe.json": "3de564020167453c221e3fc96c8e4ca726257f2416be20a1adff8682704aafa3",
+    "art-source/vehicle-riders/classic-upright/v3/report.json": "b39be232fb6a143f7474a12a940fdbceff1a0ba06e5df53277bb5ac5768f2059",
+    "scripts/vehicle-riders/classic-upright-v3/rider.json": "c76b114c1cd5314bf4098cdbbb3218cef03b7e3f5104b815669c2863e5b873c7",
+    "scripts/vehicle-riders/classic-upright-v3/classic-upright-v1.json": "978caaa186e56bfb456ad26b8204a24729f88d6419c648600f36cac3b12f192b",
+    "scripts/vehicle-riders/classic-upright-v3/build.py": "56a5c19148b5131c8f4e2b31f83ccebe84a7d9cd6166813b9f1a591bd77343ce",
+    "scripts/vehicle-riders/classic-upright-v3/identity.json": "bd6fe837c1138be80a49d9c677627168da3a4d002d4db59002fa7ee6b5f36317",
+    "art-source/vehicle-riders/classic-upright/v3/master.blend": "fc8f5bee94b4a78370d9108fa931d2ac609ffc7cbdaeef5b58dadcc0eb187166",
+    "art-source/vehicle-riders/classic-upright/v3/low.blend": "1fa5c9929f2b94d40290156caf11c0b9d70a66f776f4646a61aec89bf0e9ea80",
+    "art-source/vehicle-riders/classic-upright/v3/atlas.png": "52646af3c883c6189113938936dbdc44fa765c7b6822da1022a3e3b9fe377252"
+  },
+  "diagnosticsAreNotConstructionInputs": true
+}

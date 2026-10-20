@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-bear-classic-motorcycle-v1",
+      "name": "bear-upright \u00b7 classic-motorcycle-bear-fit fit pilot",
+      "title": "bear-upright \u00b7 classic-motorcycle-bear-fit \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact classic-motorcycle-bear-fit and unchanged bear-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 4546,
+        "vertices": 9136,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 329892,
+        "sha256": "1668ee4341aba50c66f36753e1fb425ad5acf0fd7a460c8b6ac6e8cb73b4058f",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/atlas.png",
+          "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "1f46d5d4d66b41a817f8cb5e34fb0f5955f11eb762ae38615f4d0ec42ae27bd2"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/composition.json",
+          "sha256": "498f05b3f563c322428acb0410dd4f2b4f6061bdf07f9084687c2dd52c7d09ec"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/model.glb",
+          "sha256": "1668ee4341aba50c66f36753e1fb425ad5acf0fd7a460c8b6ac6e8cb73b4058f"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/recipe.json",
+          "sha256": "508540c80ef21323b820a80a6ba23da312328daa4c89fc9efdcef31ab5f12a2f"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-bear-classic-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/report.json",
+          "sha256": "c18deb75498f3da9b67377749292fa368589828e6a17997555b7e8e69b983a89"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "toolchain": "motorcycle-v1",
+          "wheelIds": [
+            "F",
+            "R"
+          ],
+          "inputBytesUnchanged": true,
+          "id": "rider-bear-classic-motorcycle--v1",
+          "glbSha256": "1668ee4341aba50c66f36753e1fb425ad5acf0fd7a460c8b6ac6e8cb73b4058f",
+          "triangles": 4546,
+          "clearance": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "radius": 7.304348315896555,
+              "minimumGap": 1.0207844658522651,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "radius": 7.304348315896555,
+              "minimumGap": 0.8340051958843757,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "perWheelCollisionControls": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            }
+          ],
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "F",
+              "radius": 7.304347826086957,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "R",
+              "radius": 7.304347826086957,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/browser-qa.json",
+          "sha256": "920e8d617c1f57f6dd7896b8bbabc330e708c610b9baba15c80a19bf0336ff77"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/candidate.json",
+          "sha256": "6fa9e0cd30590b489f14a30ccaa934bd276f1ef42aedbb93b9518476aa0698de"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/capture.json",
+          "sha256": "053dc5a7c76a1af6553cea2299ae31625841767a36c9daa8f1c3d6f8ac3b1fdc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/contact-sheet.png",
+          "sha256": "15607db485a2d6f24cafbb7d28d6bb15762ad8e6523e85f574efc854855a0d8c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-0.png",
+          "sha256": "57b02752f619db41164b25601ed9f4168b66c17175392aac6e0185f43963b5df"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-1.png",
+          "sha256": "56465a7f49a41693ec9ca053e57eaac9bb4e4c8333b27638b5276ccc1cd5138c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-10.png",
+          "sha256": "1f87666c886009421b1ee5708083b9ea6df7dcef2b7b1f8361dc11eda629cd65"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-11.png",
+          "sha256": "6713cd464e5d5098eb92ddc955294d6dc0f4d4f7170d94da9921caa0a5855283"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-12.png",
+          "sha256": "75a0044fb9da1b7459d94c5d39ee732d5700e5271e2cded449cc3aa1e7401e0c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-13.png",
+          "sha256": "24e476b716765e7098f03f7cef5ac4ab6d1fb4ffcf0587f8a9755972e617cdcc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-14.png",
+          "sha256": "1a5d6483b56eb91efa151f3316f021b83e9b56ed3b65bffc6144d1b5d7353037"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-15.png",
+          "sha256": "39e33039c112a5c210ef358ae990e13e4c397f6feb217d8f2ff0d0bab563b019"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-1x.png",
+          "sha256": "e4f99ade44ae2b9d9d01bc99723eb7a5834358cc01cfaf244fbcc06c29747c74"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-2.png",
+          "sha256": "08a2d4920fb28951859497fb10595266ca2d00e9cbeb836489565ac9f82370f4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-2x.png",
+          "sha256": "3af9df0b6fa4ca098f0e164dc6f972bd9194e3b8a2c11c3ff3927fc1837e537b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-3.png",
+          "sha256": "0495a70190880b2a706d5ef563b54040286a5b48ee936a30320816d87297b224"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-3x.png",
+          "sha256": "d0a0469e653168a26092972f9c55c702c29a594cdb6fc452cf291d04e26e2a4f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-4.png",
+          "sha256": "72eee3610d5ce8efd1e43144bced3eee97d305b087791eda966d855946552803"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-5.png",
+          "sha256": "de154ed75d1c441a663e9fa67fd2bdeb30e82995cd4b64d34948392c141804fd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-6.png",
+          "sha256": "14597aea13f100a6b559cfc854046b6ce9f32ddba69a260d99ec7eba749481f2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-7.png",
+          "sha256": "5cac023447676cd417b1358a279d8fe9917f95470f7827b5db0c3fc00788d478"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-8.png",
+          "sha256": "fe979d336ff9d05bc4bd3fdcc154025a37fa3671c791f91389ee10596b56b7e4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/engine-9.png",
+          "sha256": "a464c06ea3e43937f0146d63e37005c51392463d89a58f95b6bb0abf360bb053"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-roll-0.png",
+          "sha256": "08a2d4920fb28951859497fb10595266ca2d00e9cbeb836489565ac9f82370f4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-roll-1.png",
+          "sha256": "c2c872b64e90469fe122aac7aa645757f0094a0179b309eb956c918b5c409dde"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-roll-2.png",
+          "sha256": "de5d133335a5bf3cb9f393e817bfbc2b836ed839978e53ced47d45973cd74f48"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-roll-3.png",
+          "sha256": "1e6f61d7ef27f04a2d9623fbf81423bb4a83440cf6156e561849eb96d85c37be"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-roll-4.png",
+          "sha256": "822144799652e7e9306b3d68ca85174a2fff80c39981e6a1ffe60720480b4879"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-roll-5.png",
+          "sha256": "a4c7bc1db041a2ae6ed0a155052b9d3244e3ef05d2294c4315a465ec5e5ceed0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-roll-6.png",
+          "sha256": "37a2e175ae2f83fbb5172aac051801687bcea7736767ee4e5a9451a1f6c308ef"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-roll-7.png",
+          "sha256": "252bebdd2412e8a89f79f920479ecf71f1ed52544de98a6a133f0441951f72ae"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/game-turntable.gif",
+          "sha256": "82027b524c8adadff3c39dd4a2a0bfd2f2660cf939f219cce43769034e627eed"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/roll-0.png",
+          "sha256": "300c2027c05321fa12b37ad5be563fb13e3169820b368ed7f74eb7fc2e496021"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/roll-1.png",
+          "sha256": "24e3b5a3d13baa0f6cd12b6929676b1c930e97ac283355f924d9c0752153ffae"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/roll-2.png",
+          "sha256": "7d4c5f0e03679af295c10417b80055f4ef160028bb1bb5669a2134ce45a83a63"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/roll-3.png",
+          "sha256": "6000ed4d85e0145e83580bcd89560d9c5574eb0cf80bceb8c33de562c410478b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/roll-4.png",
+          "sha256": "faeb6d23638bc0dbf040dd486bb2375cf850464a96b9b4fe7d0fe39da86b1822"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/roll-5.png",
+          "sha256": "a5edea861eb55e7ba8194160412a6ba00d946592d083f05642f7fe901469a352"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/roll-6.png",
+          "sha256": "2053a6ddf61e5a4916efe2fe23009a0637ce227b43f770081aa18f6d9a420318"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/roll-7.png",
+          "sha256": "05997a49e5a4d75d9a402c1c32636318e24089424ed38ec8e6a79ae0bfc93ff0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-0.png",
+          "sha256": "d58400d319b1b41b9d148da953eb1bb84934615dad6980051d94b2ebfce2279b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-1.png",
+          "sha256": "7bd1f0c657e6a4e6f3100c6ddb679dac6fe02e93d95e9a627cbe4b505a23fdd3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-10.png",
+          "sha256": "6f9125256332b1696f6aa2b30e35bf26b6739724d71e22d49133cff49d026842"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-11.png",
+          "sha256": "e11a76d61c603a266a00823e575e61bba99c5eec3eec4939e687c30a5b8430f1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-12.png",
+          "sha256": "177a0ef3b600f19f7cf77f10f85c11ba571bb92d73e15d516262babf4fc80906"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-13.png",
+          "sha256": "6b7cc0cfa558bfc24610dbe10f29089f73f6839e0f992936e2fb8012306825ab"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-14.png",
+          "sha256": "56b4e37d4d17e253583e7f541cc51925d5eb71409c450b2202a14b2582efe8ab"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-15.png",
+          "sha256": "3c6c2b6a2c0869ec5678477057c97e805551f462825486dc946df98dac5e97f1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-1x.png",
+          "sha256": "3cc4374c290c437847f50e3b3bc380d453ccbdfdbc2d18e2877507d68c297d97"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-2.png",
+          "sha256": "300c2027c05321fa12b37ad5be563fb13e3169820b368ed7f74eb7fc2e496021"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-2x.png",
+          "sha256": "d774bece34027e8093c1b47cdd60d5d5e3c636d7c42d65a0b2f6fae1f8b1999d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-3.png",
+          "sha256": "6fcbb8b4c12c104af1b811fd70bbe8c6a6e0dcf7a5333bd6efa1ca2d69cb9877"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-3x.png",
+          "sha256": "c2a293b9a3e0b339a882c086418fe7ecbbd602ca2ed74916f0eff3fa0c560014"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-4.png",
+          "sha256": "c25547778b480afe3760a4b98a3c507f259e6f45a0f1a11e1451077bac52a45d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-5.png",
+          "sha256": "aefe01e7a69d8d7635da79685212113bf0354785c36d74f8336752fb90ba095c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-6.png",
+          "sha256": "4eb917b80593a2bb9eefb532c2533dd1bfac39be04d941c8a025e2720f382f81"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-7.png",
+          "sha256": "06efb3942c0e933338fc7a14073e7de57996dd7c13a587f79df86a28e1b8e93b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-8.png",
+          "sha256": "c45227db06ec7e8b9f9b572f0c0d91aae65cf05dbb44d1b939a15f1489ba64c0"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/study-9.png",
+          "sha256": "2f2501dc831c78e70ed8b607f1a10e9615f4aa69e9b7c849f3ad6c3644fb0e6e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/turntable.gif",
+          "sha256": "8a09ed1b9a2835875661a6cb8eb02264a2e7a90ebc4815a6457d9a5b579a2d93"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/viewer-desktop.png",
+          "sha256": "caef9e25d8ca090975a87634c934ed2f00b3b2982c987fa526213e765a879b12"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/viewer-mobile.png",
+          "sha256": "cf200a185eb0f6784fa0c8838a06ca885ab3167ea04d4d3cc7a780fe3bbe49d6"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/wheel-phases.png",
+          "sha256": "ea8ae94ab6369a1159eace76b7ae0b33d2dfaea9c7b67c32757e9a3c9103ed2e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/wire-engine.png",
+          "sha256": "aa14f8acba6bc62a58a7e3eddfd0102733f51249138ac6923a199b2539f8dc00"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/captures/wire-study.png",
+          "sha256": "1adaf912d14ab0a8fbf800acecfe7f059ad3391832013956ce88f21a3a91244c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/clearance.json",
+          "sha256": "4555678847ad8bc5fa56c8d7a9687415d67f1b713b14f6dbfddc672dfd73e686"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/independent-source-replay.json",
+          "sha256": "6cb56316bdd8ae4804607eece61f80f85710b0aa833311a0b82d1596245eeadc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/atlas.png",
+          "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "1f46d5d4d66b41a817f8cb5e34fb0f5955f11eb762ae38615f4d0ec42ae27bd2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/composition.json",
+          "sha256": "498f05b3f563c322428acb0410dd4f2b4f6061bdf07f9084687c2dd52c7d09ec"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/model.glb",
+          "sha256": "1668ee4341aba50c66f36753e1fb425ad5acf0fd7a460c8b6ac6e8cb73b4058f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/recipe.json",
+          "sha256": "508540c80ef21323b820a80a6ba23da312328daa4c89fc9efdcef31ab5f12a2f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/inputs/report.json",
+          "sha256": "c18deb75498f3da9b67377749292fa368589828e6a17997555b7e8e69b983a89"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/viewer.js",
+          "sha256": "bd64d254a6f8eac0d8fc5bc86bd85fb414db1a694fc5e72c7b2fc6ae9408a949"
+        },
+        {
+          "url": "demos/original-vehicles/rider-bear-classic-motorcycle-v1/visual-inspection.json",
+          "sha256": "a64ca5dd78e2334a2d526e431ffe73fd2d019ead67f6c52f3072c948fb40ef46"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,999 @@
+{
+  "status": "passed",
+  "glbSha256": "da0d617d945ae466a1cf51c070db44d7d81e0310536140b14726d85446e4ad6a",
+  "nativeViewport": [
+    224,
+    224
+  ],
+  "meshRadius": 112,
+  "referenceDensity": 17.39130434782609,
+  "paddingOnly32RGBAParity": true,
+  "standard192x224Translation": [
+    -16,
+    32
+  ],
+  "scale": 1,
+  "views": [
+    {
+      "view": "combined",
+      "yaw": 0.0,
+      "nativeBounds": [
+        82,
+        75,
+        145,
+        114
+      ],
+      "placedBounds": [
+        66,
+        107,
+        129,
+        146
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 22.5,
+      "nativeBounds": [
+        83,
+        74,
+        143,
+        123
+      ],
+      "placedBounds": [
+        67,
+        106,
+        127,
+        155
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 45.0,
+      "nativeBounds": [
+        88,
+        73,
+        137,
+        131
+      ],
+      "placedBounds": [
+        72,
+        105,
+        121,
+        163
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 67.5,
+      "nativeBounds": [
+        97,
+        69,
+        127,
+        137
+      ],
+      "placedBounds": [
+        81,
+        101,
+        111,
+        169
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 90.0,
+      "nativeBounds": [
+        106,
+        68,
+        118,
+        139
+      ],
+      "placedBounds": [
+        90,
+        100,
+        102,
+        171
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 112.5,
+      "nativeBounds": [
+        97,
+        69,
+        127,
+        137
+      ],
+      "placedBounds": [
+        81,
+        101,
+        111,
+        169
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 135.0,
+      "nativeBounds": [
+        87,
+        73,
+        136,
+        131
+      ],
+      "placedBounds": [
+        71,
+        105,
+        120,
+        163
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 157.5,
+      "nativeBounds": [
+        81,
+        74,
+        141,
+        123
+      ],
+      "placedBounds": [
+        65,
+        106,
+        125,
+        155
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 180.0,
+      "nativeBounds": [
+        79,
+        75,
+        142,
+        114
+      ],
+      "placedBounds": [
+        63,
+        107,
+        126,
+        146
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 202.5,
+      "nativeBounds": [
+        81,
+        77,
+        141,
+        123
+      ],
+      "placedBounds": [
+        65,
+        109,
+        125,
+        155
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 225.0,
+      "nativeBounds": [
+        87,
+        74,
+        136,
+        130
+      ],
+      "placedBounds": [
+        71,
+        106,
+        120,
+        162
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 247.5,
+      "nativeBounds": [
+        97,
+        68,
+        127,
+        135
+      ],
+      "placedBounds": [
+        81,
+        100,
+        111,
+        167
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 270.0,
+      "nativeBounds": [
+        106,
+        67,
+        118,
+        136
+      ],
+      "placedBounds": [
+        90,
+        99,
+        102,
+        168
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 292.5,
+      "nativeBounds": [
+        97,
+        68,
+        127,
+        135
+      ],
+      "placedBounds": [
+        81,
+        100,
+        111,
+        167
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 315.0,
+      "nativeBounds": [
+        88,
+        74,
+        137,
+        130
+      ],
+      "placedBounds": [
+        72,
+        106,
+        121,
+        162
+      ],
+      "scale": 1
+    },
+    {
+      "view": "combined",
+      "yaw": 337.5,
+      "nativeBounds": [
+        83,
+        77,
+        143,
+        123
+      ],
+      "placedBounds": [
+        67,
+        109,
+        127,
+        155
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 0.0,
+      "nativeBounds": [
+        82,
+        89,
+        145,
+        114
+      ],
+      "placedBounds": [
+        66,
+        121,
+        129,
+        146
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 22.5,
+      "nativeBounds": [
+        83,
+        82,
+        143,
+        123
+      ],
+      "placedBounds": [
+        67,
+        114,
+        127,
+        155
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 45.0,
+      "nativeBounds": [
+        88,
+        74,
+        137,
+        131
+      ],
+      "placedBounds": [
+        72,
+        106,
+        121,
+        163
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 67.5,
+      "nativeBounds": [
+        97,
+        69,
+        127,
+        137
+      ],
+      "placedBounds": [
+        81,
+        101,
+        111,
+        169
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 90.0,
+      "nativeBounds": [
+        106,
+        68,
+        118,
+        139
+      ],
+      "placedBounds": [
+        90,
+        100,
+        102,
+        171
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 112.5,
+      "nativeBounds": [
+        97,
+        69,
+        127,
+        137
+      ],
+      "placedBounds": [
+        81,
+        101,
+        111,
+        169
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 135.0,
+      "nativeBounds": [
+        87,
+        74,
+        136,
+        131
+      ],
+      "placedBounds": [
+        71,
+        106,
+        120,
+        163
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 157.5,
+      "nativeBounds": [
+        81,
+        82,
+        141,
+        123
+      ],
+      "placedBounds": [
+        65,
+        114,
+        125,
+        155
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 180.0,
+      "nativeBounds": [
+        79,
+        89,
+        142,
+        114
+      ],
+      "placedBounds": [
+        63,
+        121,
+        126,
+        146
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 202.5,
+      "nativeBounds": [
+        81,
+        82,
+        141,
+        123
+      ],
+      "placedBounds": [
+        65,
+        114,
+        125,
+        155
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 225.0,
+      "nativeBounds": [
+        87,
+        74,
+        136,
+        130
+      ],
+      "placedBounds": [
+        71,
+        106,
+        120,
+        162
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 247.5,
+      "nativeBounds": [
+        97,
+        68,
+        127,
+        135
+      ],
+      "placedBounds": [
+        81,
+        100,
+        111,
+        167
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 270.0,
+      "nativeBounds": [
+        106,
+        67,
+        118,
+        136
+      ],
+      "placedBounds": [
+        90,
+        99,
+        102,
+        168
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 292.5,
+      "nativeBounds": [
+        97,
+        68,
+        127,
+        135
+      ],
+      "placedBounds": [
+        81,
+        100,
+        111,
+        167
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 315.0,
+      "nativeBounds": [
+        88,
+        74,
+        137,
+        130
+      ],
+      "placedBounds": [
+        72,
+        106,
+        121,
+        162
+      ],
+      "scale": 1
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 337.5,
+      "nativeBounds": [
+        83,
+        82,
+        143,
+        123
+      ],
+      "placedBounds": [
+        67,
+        114,
+        127,
+        155
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 0.0,
+      "nativeBounds": [
+        101,
+        75,
+        117,
+        109
+      ],
+      "placedBounds": [
+        85,
+        107,
+        101,
+        141
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 22.5,
+      "nativeBounds": [
+        101,
+        74,
+        118,
+        107
+      ],
+      "placedBounds": [
+        85,
+        106,
+        102,
+        139
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 45.0,
+      "nativeBounds": [
+        103,
+        73,
+        118,
+        105
+      ],
+      "placedBounds": [
+        87,
+        105,
+        102,
+        137
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 67.5,
+      "nativeBounds": [
+        105,
+        72,
+        118,
+        103
+      ],
+      "placedBounds": [
+        89,
+        104,
+        102,
+        135
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 90.0,
+      "nativeBounds": [
+        106,
+        72,
+        118,
+        101
+      ],
+      "placedBounds": [
+        90,
+        104,
+        102,
+        133
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 112.5,
+      "nativeBounds": [
+        106,
+        72,
+        119,
+        103
+      ],
+      "placedBounds": [
+        90,
+        104,
+        103,
+        135
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 135.0,
+      "nativeBounds": [
+        106,
+        73,
+        121,
+        105
+      ],
+      "placedBounds": [
+        90,
+        105,
+        105,
+        137
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 157.5,
+      "nativeBounds": [
+        106,
+        74,
+        123,
+        107
+      ],
+      "placedBounds": [
+        90,
+        106,
+        107,
+        139
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 180.0,
+      "nativeBounds": [
+        107,
+        75,
+        123,
+        109
+      ],
+      "placedBounds": [
+        91,
+        107,
+        107,
+        141
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 202.5,
+      "nativeBounds": [
+        106,
+        77,
+        123,
+        111
+      ],
+      "placedBounds": [
+        90,
+        109,
+        107,
+        143
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 225.0,
+      "nativeBounds": [
+        105,
+        79,
+        121,
+        111
+      ],
+      "placedBounds": [
+        89,
+        111,
+        105,
+        143
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 247.5,
+      "nativeBounds": [
+        106,
+        80,
+        119,
+        111
+      ],
+      "placedBounds": [
+        90,
+        112,
+        103,
+        143
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 270.0,
+      "nativeBounds": [
+        106,
+        80,
+        118,
+        110
+      ],
+      "placedBounds": [
+        90,
+        112,
+        102,
+        142
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 292.5,
+      "nativeBounds": [
+        105,
+        80,
+        118,
+        111
+      ],
+      "placedBounds": [
+        89,
+        112,
+        102,
+        143
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 315.0,
+      "nativeBounds": [
+        103,
+        79,
+        119,
+        111
+      ],
+      "placedBounds": [
+        87,
+        111,
+        103,
+        143
+      ],
+      "scale": 1
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 337.5,
+      "nativeBounds": [
+        101,
+        77,
+        118,
+        111
+      ],
+      "placedBounds": [
+        85,
+        109,
+        102,
+        143
+      ],
+      "scale": 1
+    }
+  ],
+  "cardinals": [
+    {
+      "view": "combined",
+      "yaw": 0.0,
+      "image": "placement-cardinal-combined-0.png",
+      "sha256": "0d1c7e8d391ff0a4023dea3ca9843e28a8bedf6b82278fe920c0dd9ab0207ee0",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 1232
+    },
+    {
+      "view": "combined",
+      "yaw": 90.0,
+      "image": "placement-cardinal-combined-1.png",
+      "sha256": "bd97570b613c6c44873194850b88e030ded048bb6a49f109117e7f00b4283ef6",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 608
+    },
+    {
+      "view": "combined",
+      "yaw": 180.0,
+      "image": "placement-cardinal-combined-2.png",
+      "sha256": "09333ee5775494c121a9df6af3961f48d64142b74dcfe301e091bcde67ea86de",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 1232
+    },
+    {
+      "view": "combined",
+      "yaw": 270.0,
+      "image": "placement-cardinal-combined-3.png",
+      "sha256": "a0f18cc380b0a1068ecee16dd321107a04fd89982b3f2e3d4b004750c737990c",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 596
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 0.0,
+      "image": "placement-cardinal-bike-alone-0.png",
+      "sha256": "c6bd64cfa6f15eac28b9bb1cf744dbaa43586052c625f064c0c1a1ec0e6b2975",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 1051
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 90.0,
+      "image": "placement-cardinal-bike-alone-1.png",
+      "sha256": "9231c6be36f50787da41ceadf52d61c1f7fe9e192eae97a839972d4fcc569ae8",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 554
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 180.0,
+      "image": "placement-cardinal-bike-alone-2.png",
+      "sha256": "7ba90bcc2d86faeab853bb57cf0868d23d804a1840103d715d304d3fb683b81a",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 1051
+    },
+    {
+      "view": "bike-alone",
+      "yaw": 270.0,
+      "image": "placement-cardinal-bike-alone-3.png",
+      "sha256": "94c7715fe4367b631b5025acbfc8b17f987704e504f39efa9413ad529832eca4",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 540
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 0.0,
+      "image": "placement-cardinal-rider-alone-0.png",
+      "sha256": "030914d46f47f0c88f16b3c8c933a3161fd17094ed9c9f7e324ab526cd51f56d",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 232
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 90.0,
+      "image": "placement-cardinal-rider-alone-1.png",
+      "sha256": "6f0a3c30c4b8d6a6da0b4f11ea32dacd0ef5f2d36e9078f71c6a5f0e7631ead1",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 220
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 180.0,
+      "image": "placement-cardinal-rider-alone-2.png",
+      "sha256": "b03b5ed6f1ae6669f5741acdff462c7014c95e39269aa2c0276d7e7d3e324a75",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 232
+    },
+    {
+      "view": "rider-alone",
+      "yaw": 270.0,
+      "image": "placement-cardinal-rider-alone-3.png",
+      "sha256": "69d78a28f3e92097a7a6283d00a71d57ea1f5622b6910e96a5a45991b471f8e3",
+      "dimensions": [
+        192,
+        224
+      ],
+      "allOccupiedRGBAExact": true,
+      "opaquePixelsLost": 0,
+      "occupiedPixels": 228
+    }
+  ],
+  "fenderCoverage": {
+    "F": 25,
+    "R": 25,
+    "samplesEach": 25,
+    "actualControlsPassed": true
+  },
+  "limitation": "Raw source geometric placement only. Normal occupied fallback, rider identity, AI and actual shared loader/browser remain separately gated by parent."
+}

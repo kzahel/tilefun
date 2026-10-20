@@ -1,0 +1,38 @@
+{
+  "status": "agent-inspected-source-pilot",
+  "glbSha256": "599f282f80b8a345349f149c1940303b4d9555eef326d84102aaf4995aedc7cb",
+  "actual32StudyGameHeadingsEach": [
+    "combined",
+    "bike-alone",
+    "rider-alone"
+  ],
+  "signedPhases": 16,
+  "wireframes": 6,
+  "independentTrueWheels": [
+    "F",
+    "R"
+  ],
+  "inspectionImages": {
+    "inspection-detail-combined-study.png": "4d11b890cfa2580fb3503ba0ca80cb120985d5e9238c86a1a99376a4342f217a",
+    "inspection-detail-bike-alone-study.png": "3b86caf2773a5a1a3c26aa2033a3d56f9e49babe47a66f8fa0fa8e0ce0091962",
+    "inspection-detail-rider-alone-study.png": "da19808e4a0e17e69e46eecc8964667a91fccc8b765d8719470ee96bc2e6817a",
+    "inspection-detail-ownership-mask-study.png": "d59029ff2f9a0852e45b4bcc131dd001235f31acac9e16dac6ad4bf26bf4ac96",
+    "inspection-detail-combined-engine.png": "d5fb082a777587f80032927734da3580ba40367e95e62240ffe8be8daed80848",
+    "inspection-detail-bike-alone-engine.png": "ca401ac3da53b863fc32aa3d7c996e9b93123c4215aa3cc0c25eba5b08f9036a",
+    "inspection-detail-rider-alone-engine.png": "c25297b04dab6103f33761b79f08359be2bcbddad050ca563c413e5de50e3c2f",
+    "inspection-detail-ownership-mask-engine.png": "8af19b4c4ffad1b88b9fee1e14e5ad6335575896d78239021e63653d2adcabe9",
+    "inspection-phases.png": "2268facc6a3479b6aa12bbad4677c19f083758ce873f1d5ae54083536b895f8e",
+    "inspection-independent.png": "115d0cc758823bee3ca245a3bacd85d8a0cbe0e1f1b24a39d308625c6e47a991",
+    "inspection-wires.png": "1b6e967d4f1d63e682c0e6b5fe4af254be6c161489d4c78e5f0f94d7108413f7"
+  },
+  "findings": [
+    "Recognizable navy/cream upright touring motorcycle; tall framed blue windscreen, broad headlamp fairing, larger tank, comfortable stepped saddle and matching deep geometric panniers read at native density",
+    "Immutable Explorer straddles narrow tank/frame; hands and soles align with measured physical supports",
+    "Fenders follow both tire crowns; side profiles preserve visible tires and frame negative spaces",
+    "Actual depth ownership changes coherently through headings; no screenshot overlays or four-wheel stubs",
+    "Forward/reverse/reset changes own wheel while fixed bike/rider and other wheel remain fixed; rear observed at315 degrees because panniers occlude side-view hub",
+    "Desktop/mobile remain square and readable; offline source diagnostic matches all32 combined frames"
+  ],
+  "formalHumanApproval": false,
+  "actualSharedLoaderBrowserReview": "pending parent"
+}

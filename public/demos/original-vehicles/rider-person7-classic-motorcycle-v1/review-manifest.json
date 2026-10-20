@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "rider-person7-classic-motorcycle-v1",
+      "name": "person7-upright \u00b7 classic-motorcycle-person7-fit fit pilot",
+      "title": "person7-upright \u00b7 classic-motorcycle-person7-fit \u00b7 shared-loader pilot",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "ISOLATED SOURCE PROTOTYPE: exact classic-motorcycle-person7-fit and unchanged person7-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+      "audit": {
+        "triangles": 4418,
+        "vertices": 8998,
+        "meshes": 4,
+        "primitives": 4,
+        "materials": 2,
+        "textures": 2,
+        "glbBytes": 324596,
+        "sha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2",
+        "wheels": {
+          "F": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "R": {
+            "wheel_radius": 7.304347826086957,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        },
+        "wheelIds": [
+          "F",
+          "R"
+        ],
+        "toolchain": "motorcycle-v1",
+        "motorcycleRoot": "Motorcycle_Root"
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/atlas.png",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/atlas.png",
+          "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/companion-atlas.png",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "5ceba48f52d25f94f02949502ee8e64057f90ce1c9798af9164d34132a8cc519"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/composition.json",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/composition.json",
+          "sha256": "f017d6e1ad65b6d4d9668e2c4a6f2f1bd83c504fe77dc4ea6275ee6c92eab0c3"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/model.glb",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/model.glb",
+          "sha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/recipe.json",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/recipe.json",
+          "sha256": "0e5394a7b0297de6449619ed9177287bd0ee64c3ff7f27dd0dca95b49f12c9dc"
+        },
+        {
+          "source": "demos/vehicle-bake/rider-person7-classic-motorcycle/v1/report.json",
+          "retained": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/report.json",
+          "sha256": "737d9e6b9a705ded26a05070696e8752b95317ab07b140adf5ea3146bd275ad8"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "toolchain": "motorcycle-v1",
+          "wheelIds": [
+            "F",
+            "R"
+          ],
+          "inputBytesUnchanged": true,
+          "id": "rider-person7-classic-motorcycle--v1",
+          "glbSha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2",
+          "triangles": 4418,
+          "clearance": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "radius": 7.304348315896555,
+              "minimumGap": 1.0207844658522651,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "radius": 7.304348315896555,
+              "minimumGap": 0.8340051958843757,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "perWheelCollisionControls": [
+            {
+              "wheel": "Wheel_F_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            },
+            {
+              "wheel": "Wheel_R_Roll",
+              "collidingBodyRejected": true,
+              "baselineRestored": true
+            }
+          ],
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "F",
+              "radius": 7.304347826086957,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "R",
+              "radius": 7.304347826086957,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/browser-qa.json",
+          "sha256": "78f6ae58500ad198a6fec8f81f921ba7c51761a01cf29064aa246ba939c4ebb9"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/candidate.json",
+          "sha256": "a8f216bc1f8c46a8e5a37cc979e8416ead08fb9a65c0fe16a672098343800364"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/capture.json",
+          "sha256": "ea676442941522ce696464cac52cd3631fe501af5f93d1260670a7b7e207817a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/contact-sheet.png",
+          "sha256": "b141f09a90eb8215289dc1263b3bcd45b3b34bb826112f4ab2f939b15d5035d5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-0.png",
+          "sha256": "857bdf55ae8d050aa6d6bd0c4c39e73fba83ec31333e0343fb0b475dad679b6e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-1.png",
+          "sha256": "7176cd503639892836ca3b94f45fb7dca4fd6500276f4b2d7c66cc1b754ca63f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-10.png",
+          "sha256": "64bc5a3d63d51d7e39e48c198a2436b9bcf0fc5ae6a84148eb924796bf557b36"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-11.png",
+          "sha256": "30f43dc9d69377fdf761c257dea760ea47844f403ea33d41850bad620c009a23"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-12.png",
+          "sha256": "ce5a6843b4ffb4c71889de70e1dd3955ed6dcbff04e3e48b0ad1b8203ca64f10"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-13.png",
+          "sha256": "0ad7c5059fa1256e9cb83d7d05151114c69d766abe6d81a6f959873201490db5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-14.png",
+          "sha256": "b1920a74f25422fcb26721218b96e0b9aa88b7661df76fcd92edf08294052e70"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-15.png",
+          "sha256": "a8cc1ae9be05def6b3bc69585bab2bab09412352a42e7d01b26aef4c8bbb8380"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-1x.png",
+          "sha256": "196f2afa3c5ffa2b87c3264a68093b40f30235904bd78cbfda2fe47e740296e8"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-2.png",
+          "sha256": "f467f43220213a8dd924814f6dc5f7546e1a1d8422908c963ec7bccf81ffe39a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-2x.png",
+          "sha256": "c3049ee2af7fe2478ceda5cd6c946af9234f975b9d381bc7dc69171ca8e9b9d9"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-3.png",
+          "sha256": "298e770d11258edfdb7927825f7bbb6d0bf56bebca892af71ae607fa2ae1b8bb"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-3x.png",
+          "sha256": "ae4ec6a9efa1b2aaf014d6d4ff242af3e5df3895d9c02a6b28a28c2adebb244d"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-4.png",
+          "sha256": "7b0757fd39bb992c459a7a1c58c4c7840ec0e8f9eb5a276f4498c81101f500c4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-5.png",
+          "sha256": "10d53bea74eb1017d152675c58fdf9a02cd0b7b5c316348931e271e45ccd553c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-6.png",
+          "sha256": "0adb0bb82e6669fef8dfecd3f47e1e9ac4543493c06f6a030f9cfbec75e1eaa2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-7.png",
+          "sha256": "8e0c5b8b26a32e6345af5a593c6311cb63b5c5bc542081dd4f7c6e17de0513d3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-8.png",
+          "sha256": "9012ebc5de689fb464068f6fab1fd3b6eaae1b6364fd82c43cb57549c4a15601"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/engine-9.png",
+          "sha256": "c1535960f3954d2ad69d707c724cb66779c268340bca18665ebe1b7eaa201792"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-roll-0.png",
+          "sha256": "f467f43220213a8dd924814f6dc5f7546e1a1d8422908c963ec7bccf81ffe39a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-roll-1.png",
+          "sha256": "50efe74ae93f7366d299fc924b4c0473cdd4c1cddc76d61140665696e61c76c9"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-roll-2.png",
+          "sha256": "d4a2eca170c0f624d49a57332af0bafdf88fbf3dcd3fbb126c9334d826b4adac"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-roll-3.png",
+          "sha256": "52d9fc005022f832be626d7d72e28754db9c56542c205296592915656e76b50c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-roll-4.png",
+          "sha256": "bdc6df324d0182851f4faf59c9cf48d4ad9506c02e347e5db9c2b2c53ae02e79"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-roll-5.png",
+          "sha256": "c303b601d101a170702fff5a0b9202b9705b8efbe3838cf4347435be27ae8efd"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-roll-6.png",
+          "sha256": "91b66b4620eccf8b7aecee2f9aee955b67314905c7a25eb141d86a77bb75da8f"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-roll-7.png",
+          "sha256": "0385ec0705d6ef492329b6b3bce274145f72fc01b0cc2a0deb1e551e85bf67f4"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/game-turntable.gif",
+          "sha256": "d94aebfd9a80fd91a2ac55e927932efc84123714d13b1ae9056a4623e7cdbece"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/roll-0.png",
+          "sha256": "6d3e385d4bba56c6baa751b5f57ff7bbea9c533742a491eeab9487a0b3809341"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/roll-1.png",
+          "sha256": "6f74da4f958703ab10f3bf4776f7245780c518f72720d91bab7b0484c40c1031"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/roll-2.png",
+          "sha256": "5eacae57558516e59340683886bd50b29f15cfa9b4ad9a5b387dde5ec6cd6b82"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/roll-3.png",
+          "sha256": "df0bc3add3baae87837ca39c472a7bf22ac98c5731e0a9f86088ab0189482768"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/roll-4.png",
+          "sha256": "bc510616847f93737a054ece47f27633520bd79d625e2a4df2b38fb123df43f3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/roll-5.png",
+          "sha256": "480bd2e694c5381342db989f81d4bd2de15d10cd2f165b8e9822a4bb47a16050"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/roll-6.png",
+          "sha256": "cd4bef4e8283843c42c228a8b462c0699b9c6184b509e1d278674a1cf97fb970"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/roll-7.png",
+          "sha256": "663fee0bc709b9202e70c00e1da07ed832fa233a066cd39075054c43b37fed0a"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-0.png",
+          "sha256": "237dc7bcc0a61d4c765d3821bed8bb8b945e8146300aace0a332539811b717c2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-1.png",
+          "sha256": "350ce67e1990703adeb02ca68a02c1bd7cba3c0437f2e3ba615d2911d750e5c3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-10.png",
+          "sha256": "d6d876bb30fa73ec6cfb200ba4054a3f08abfed779cd0ce18c640493947bb771"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-11.png",
+          "sha256": "d91d0e9131054b3d4dc4dcf6da8787e01cb851971408209e1edd3a3b49350fc1"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-12.png",
+          "sha256": "e870f291365bc62a7557d46688852e4c6d29549e1ea15d88eccec7a9944427dc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-13.png",
+          "sha256": "72ea576d51bc46f850a8829c83d71b02ffede8afc1ab2b161a6d945edce00cae"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-14.png",
+          "sha256": "daa773c6bc9b4b23ba5216961a3f2905c5645d0901a232aa7199999c07a05899"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-15.png",
+          "sha256": "163b3c9123b62853932c98e1957eaecb26f7e29dcc8caa600cc67bc79b3cd74b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-1x.png",
+          "sha256": "329f92937bac2dcc294a83385eb696b42e93c5525f48497ddc46417de1a84aaa"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-2.png",
+          "sha256": "6d3e385d4bba56c6baa751b5f57ff7bbea9c533742a491eeab9487a0b3809341"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-2x.png",
+          "sha256": "cb45031749934aa8fc4f9c48217b1223187affc3b3c83b8d361d11d28bb7a009"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-3.png",
+          "sha256": "f57078a709f611069e308f7ef045beccfd905ac226970fd96e645f3d7d242569"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-3x.png",
+          "sha256": "6032d8fb2d9993e3c413ae15475a5483b1dfc432a0ea59c300217e2953a4a47b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-4.png",
+          "sha256": "f0161a2f0473955620c7e882819e623bb570d5e538f4d8e26a912b55328b64c9"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-5.png",
+          "sha256": "ddef3b7b3b5abdacc6ebf3107d8870be88a68c6aaca991a1647ad6fba2fbf41e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-6.png",
+          "sha256": "a732e30dd628ceff8d3e05ee643e59becea6b16f5e0d5979c6b83588b171bfde"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-7.png",
+          "sha256": "8bce1e0f98afabf29d2465270a0a489a7121a9c0671284ccebca1440fc99ecb5"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-8.png",
+          "sha256": "ae05f9da45f3c89551d3a94a671c8d5c2afe9fbeb2bd9000144ca4be46f892b3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/study-9.png",
+          "sha256": "f3cd374b7885f968716449a8ab8d62ad97cf83ed731bc45902fa57980c536186"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/turntable.gif",
+          "sha256": "521bd7127b2a2c11b01e245bc4378279db9d90170ca12db976840b62fc372eba"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/viewer-desktop.png",
+          "sha256": "5afbeb5fc62c4e26ce5331739060c8c7fb07f57616b3ed34a5d0d3f96c09bb77"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/viewer-mobile.png",
+          "sha256": "d5366c95137e9f87e9684a470cc62dd6871d5f8b3117f2df6136f5c77f380001"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/wheel-phases.png",
+          "sha256": "bf95a25f91a5867ed36dee8e2b765b79b4dfaff648c895205fc4777da53ff77e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/wire-engine.png",
+          "sha256": "44ffc690f5b0ef05487096a25d195f00ff6dbe85a7d3df22e29fa885f65f9cde"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/captures/wire-study.png",
+          "sha256": "75fcb1bd902b3c4d3c91ed4ff4fe0d454ced837fb9fb0f3c64ae8be63c882c5b"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/clearance.json",
+          "sha256": "2e327aee812a2e3cc2f556b06151e3851ef4b5b1047786ab0ec781ce8580fa8e"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/independent-source-replay.json",
+          "sha256": "8c113a8c7f67d677109a3e81f44ebbbb951ea29dc0f17167d74efea3aaaa9f7c"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/atlas.png",
+          "sha256": "cb76d7d0282bd153f453a76d37d21258ab14a5dfbb5cba343f73ba76667bb062"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/companion-atlas.png",
+          "sha256": "5ceba48f52d25f94f02949502ee8e64057f90ce1c9798af9164d34132a8cc519"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/composition.json",
+          "sha256": "f017d6e1ad65b6d4d9668e2c4a6f2f1bd83c504fe77dc4ea6275ee6c92eab0c3"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/model.glb",
+          "sha256": "f52953c36d21d82d25d157eaa30ec714efeae65cf2550ba9b7748c9bc904dad2"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/recipe.json",
+          "sha256": "0e5394a7b0297de6449619ed9177287bd0ee64c3ff7f27dd0dca95b49f12c9dc"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/inputs/report.json",
+          "sha256": "737d9e6b9a705ded26a05070696e8752b95317ab07b140adf5ea3146bd275ad8"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/viewer.js",
+          "sha256": "bd64d254a6f8eac0d8fc5bc86bd85fb414db1a694fc5e72c7b2fc6ae9408a949"
+        },
+        {
+          "url": "demos/original-vehicles/rider-person7-classic-motorcycle-v1/visual-inspection.json",
+          "sha256": "a85e099c458a261e9ab67ddfb1ccafeda61f0be323c856a98391e9afdb332cd4"
+        }
+      ]
+    }
+  ]
+}

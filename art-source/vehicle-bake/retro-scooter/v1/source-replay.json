@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "inputHashes": {
+    "scripts/vehicle-bake/retro-scooter/build.py": "1e28bcdd39e0f2347b8572b09dfea54b151e395cf84762b8ba1768d556f70a9a",
+    "scripts/vehicle-bake/retro-scooter/geometry.py": "6bb0aae4eafc65686745aca1f4f1ca28805ca8e170a207ce037aa9c10d9fe48d",
+    "scripts/vehicle-bake/retro-scooter/family.json": "74a3beb6df3d9fd2fb370ebd39e0b2f88a2db0ed8554d4288b06d561f2d4ab74",
+    "scripts/vehicle-bake/retro-scooter/raw-audit.py": "48c73b9cc856078b02f2f24dd7ace7fb84296b7cb58d300ed571f30887fc5bdd"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog-cycle.py": "69a6ac4e186288a7402ad251002d3315d1d55d8c09a1fe27bde5393482964733",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770"
+  },
+  "initialFiles": [
+    "AGENTS.md",
+    "art-source/vehicle-riders/profiles/upright-v1.json",
+    "scripts/vehicle-bake/catalog-cycle.py",
+    "scripts/vehicle-bake/retro-scooter/build.py",
+    "scripts/vehicle-bake/retro-scooter/family.json",
+    "scripts/vehicle-bake/retro-scooter/geometry.py",
+    "scripts/vehicle-bake/retro-scooter/raw-audit.py"
+  ],
+  "noIgnoredMasterOrScratchDependencies": true,
+  "packedMasterNotAConstructionInput": true,
+  "riderGLBRecipeReport": "Separate immutable diagnostic inputs; constructor reads profile only",
+  "freshRoot": "data/vehicle-bake/retro-scooter/final-six-input-replay",
+  "command": [
+    "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe",
+    "--background",
+    "--factory-startup",
+    "--threads",
+    "4",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "C:\\Users\\sox\\Documents\\code\\tilefun\\data\\vehicle-bake\\retro-scooter\\final-six-input-replay\\scripts\\vehicle-bake\\retro-scooter\\build.py"
+  ],
+  "portableCommand": "BLENDER --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/retro-scooter/build.py",
+  "outputs": {
+    "model.glb": {
+      "sha256": "f396885d9651bad31a6276ae9cb131f39b484293c43504d4bfb55804ab6e2b65",
+      "bytes": 159216,
+      "byteExact": true
+    },
+    "atlas.png": {
+      "sha256": "d8254ad231d90eb0cf139695d6e34d9c26f390a919e8fd038784bd257f9f7372",
+      "bytes": 2946,
+      "byteExact": true
+    },
+    "recipe.json": {
+      "sha256": "75105422444d59842b723ff0bd6653a0b521b3c022bddd0a80d47de5d5acb38b",
+      "bytes": 17398,
+      "byteExact": true
+    }
+  },
+  "sharedStaticCycleCatalogActuallyUsed": true,
+  "actualSharedLoaderBrowserReview": "pending parent",
+  "runtimeActivation": false,
+  "diagnosticInputHashes": {
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/source-replay.py": "b1477d5adcaa5eaa42c4807e524bc25729fd455cf243e38b801d537b0623375e",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "package.json": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+    "package-lock.json": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+    "scripts/vehicle-riders/explorer-upright/rider.json": "a4e6fb37e0200bb9642302527b229824f4f5b67d10a3f69a21bc21f6109d64b6",
+    "scripts/vehicle-riders/explorer-upright/profile.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/profiles/upright-v1.json": "7a0a60f5161c16de41ca13e03b2ee049107f26e2ff14f668f84e4ed2e68b7770",
+    "art-source/vehicle-riders/explorer-upright/v1/rider.glb": "5a632bf763f08af447bf25f107cd7634f279cdb40738cfaa20697bd26c5e2500",
+    "art-source/vehicle-riders/explorer-upright/v1/recipe.json": "6a11f23e3a5f20a16d4f4c858507aad830dfff722ac9d41583c9be1757745251",
+    "art-source/vehicle-riders/explorer-upright/v1/report.json": "08d669740db5aef2a72d5cb28f381f393d23a4507f8ebd62fcb61cb48182b016",
+    "art-source/vehicle-riders/explorer-upright/v1/master.blend": "b453ca55e4bf7d2bb6adc0ea2de4685402c886111204300e10442b8acf9fb980",
+    "art-source/vehicle-riders/explorer-upright/v1/low.blend": "ac36f7aea5434aa7a09ef14a92078ac5d3ae05a3b3f26ed2244cbf9c69764a2c"
+  },
+  "diagnosticsAreNotConstructionInputs": true
+}

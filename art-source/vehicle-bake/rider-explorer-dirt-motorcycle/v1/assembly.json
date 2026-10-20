@@ -1,0 +1,43 @@
+{
+  "id": "rider-explorer-dirt-motorcycle-v1",
+  "canonicalConfig": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/assembly.json",
+  "retained": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1",
+  "public": "public/demos/vehicle-bake/rider-explorer-dirt-motorcycle/v1",
+  "scratch": "data/vehicle-bake/rider-explorer-dirt-motorcycle/replay/public",
+  "qa": "data/vehicle-bake/rider-explorer-dirt-motorcycle-qa",
+  "wheelIds": [
+    "F",
+    "R"
+  ],
+  "base": {
+    "model": "public/demos/vehicle-bake/dirt-motorcycle/v1/model.glb",
+    "atlas": "public/demos/vehicle-bake/dirt-motorcycle/v1/atlas.png",
+    "master": "art-source/vehicle-bake/dirt-motorcycle/v1/master.blend",
+    "replay": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/evidence/base-normalized-replay.json"
+  },
+  "component": {
+    "model": "art-source/vehicle-riders/explorer-upright/v1/rider.glb",
+    "atlas": "art-source/vehicle-riders/explorer-upright/v1/atlas.png",
+    "master": "art-source/vehicle-riders/explorer-upright/v1/master.blend",
+    "replay": "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/evidence/rider-normalized-replay.json"
+  },
+  "additionalInputs": [
+    "art-source/vehicle-bake/dirt-motorcycle/v1/evidence/replay-verification.json",
+    "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/evidence/base-independent-replay.json",
+    "art-source/vehicle-riders/explorer-upright/v1/evidence/replay-verification.json",
+    "art-source/vehicle-bake/rider-explorer-dirt-motorcycle/v1/evidence/rider-independent-replay.json"
+  ],
+  "mountBlenderWorldPixels": [
+    0.0,
+    0.0,
+    22.260869565217394
+  ],
+  "prefix": "RiderExplorer",
+  "nativeSize": 224,
+  "method": "ISOLATED SOURCE PROTOTYPE: exact dirt-motorcycle and unchanged explorer-upright composed at one measured mount. Base buffers/transforms retained; companion child appended inside marked cycle root. Independent minimal-input child source replays retained; no normal occupancy/AI/occupiedfallback/all27 qualification.",
+  "limits": [
+    "One static measured identity/bike fit only",
+    "No normal activation, AI, occupied fallback, all27 or animation qualification",
+    "Editable geometry remains in two child packed masters plus explicit placement recipe"
+  ]
+}

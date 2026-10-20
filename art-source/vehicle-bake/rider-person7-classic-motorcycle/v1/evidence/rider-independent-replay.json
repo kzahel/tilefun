@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "independent": true,
+  "declaredInputPins": 5,
+  "glbSha256": "7b9396dfdff8dc8bca9a3d368ac253b2a0ae36e51b8669a254e535b8ff2e4c99",
+  "exactOutputs": {
+    "rider.glb": "data/vehicle-riders/person7-upright/replay-final/public/rider.glb",
+    "atlas.png": "data/vehicle-riders/person7-upright/replay-final/public/atlas.png",
+    "recipe.json": "data/vehicle-riders/person7-upright/replay-final/public/recipe.json"
+  },
+  "scratchRoot": "data/vehicle-riders/person7-upright-parent/retained-replay-zq5x5zhw",
+  "scratchInputDependencies": []
+}
