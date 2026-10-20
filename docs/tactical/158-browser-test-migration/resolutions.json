@@ -27,7 +27,9 @@
       "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
       "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
       "browserCoverage": ["tests/animal-browser.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/animal-browser.spec.ts:103",
@@ -37,7 +39,9 @@
       "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
       "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
       "browserCoverage": ["tests/animal-browser.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/animal-browser.spec.ts:120",
@@ -47,7 +51,9 @@
       "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
       "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
       "browserCoverage": ["tests/animal-browser.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/animal-browser.spec.ts:181",
@@ -57,7 +63,9 @@
       "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
       "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
       "browserCoverage": ["tests/animal-browser.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/animal-browser.spec.ts:239",
@@ -67,7 +75,9 @@
       "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
       "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
       "browserCoverage": ["tests/animal-browser.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/animal-work.spec.ts:18",
@@ -97,7 +107,9 @@
       "resolution": "Filters Animal Browser demonstration cards and opens a selected activity.",
       "nativeCoverage": ["src/wildlife/AnimalWork.test.ts"],
       "browserCoverage": ["tests/animal-work.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/aquatic-hunters.spec.ts:9",
@@ -131,7 +143,9 @@
         "src/explorer/ViewState.test.ts"
       ],
       "browserCoverage": ["tests/art-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/art-workbench.spec.ts:40",
@@ -146,7 +160,9 @@
         "src/explorer/ViewState.test.ts"
       ],
       "browserCoverage": ["tests/art-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/art-workbench.spec.ts:78",
@@ -161,7 +177,9 @@
         "src/explorer/ViewState.test.ts"
       ],
       "browserCoverage": ["tests/art-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/art-workbench.spec.ts:103",
@@ -176,7 +194,9 @@
         "src/explorer/ViewState.test.ts"
       ],
       "browserCoverage": ["tests/art-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/art-workbench.spec.ts:142",
@@ -191,7 +211,9 @@
         "src/explorer/ViewState.test.ts"
       ],
       "browserCoverage": ["tests/art-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/art-workbench.spec.ts:171",
@@ -206,7 +228,9 @@
         "src/explorer/ViewState.test.ts"
       ],
       "browserCoverage": ["tests/art-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-train.spec.ts:11",
@@ -219,7 +243,9 @@
         "src/railway/CurveTrain.test.ts"
       ],
       "browserCoverage": ["tests/authored-train.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-train.spec.ts:93",
@@ -232,7 +258,9 @@
         "src/railway/CurveTrain.test.ts"
       ],
       "browserCoverage": ["tests/authored-train.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-train.spec.ts:122",
@@ -245,7 +273,9 @@
         "src/railway/CurveTrain.test.ts"
       ],
       "browserCoverage": ["tests/authored-train.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-train.spec.ts:139",
@@ -258,7 +288,9 @@
         "src/railway/CurveTrain.test.ts"
       ],
       "browserCoverage": ["tests/authored-train.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-train.spec.ts:180",
@@ -271,7 +303,9 @@
         "src/railway/CurveTrain.test.ts"
       ],
       "browserCoverage": ["tests/authored-train.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-vehicle-gameplay.spec.ts:12",
@@ -285,7 +319,9 @@
         "src/rendering/AuthoredVehicleMeshes.test.ts"
       ],
       "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-vehicle-gameplay.spec.ts:46",
@@ -299,7 +335,9 @@
         "src/rendering/AuthoredVehicleMeshes.test.ts"
       ],
       "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-vehicle-gameplay.spec.ts:77",
@@ -313,7 +351,9 @@
         "src/rendering/AuthoredVehicleMeshes.test.ts"
       ],
       "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-vehicle-gameplay.spec.ts:108",
@@ -327,7 +367,9 @@
         "src/rendering/AuthoredVehicleMeshes.test.ts"
       ],
       "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-vehicle-gameplay.spec.ts:152",
@@ -341,7 +383,9 @@
         "src/rendering/AuthoredVehicleMeshes.test.ts"
       ],
       "browserCoverage": ["tests/authored-vehicle-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/authored-vehicle-gameplay.spec.ts:273",
@@ -401,7 +445,9 @@
       "resolution": "Standalone demo keyboard/pointer routing, mobile layout, image decoding and exact canvas/source pixel equality need the browser.",
       "nativeCoverage": [],
       "browserCoverage": ["tests/blender-tiger.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/blender-tiger.spec.ts:33",
@@ -411,7 +457,9 @@
       "resolution": "Standalone demo keyboard/pointer routing, mobile layout, image decoding and exact canvas/source pixel equality need the browser.",
       "nativeCoverage": [],
       "browserCoverage": ["tests/blender-tiger.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/blender-tiger.spec.ts:75",
@@ -421,7 +469,9 @@
       "resolution": "Standalone demo keyboard/pointer routing, mobile layout, image decoding and exact canvas/source pixel equality need the browser.",
       "nativeCoverage": [],
       "browserCoverage": ["tests/blender-tiger.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/boat-lakes.spec.ts:37",
@@ -483,7 +533,9 @@
         "src/server/RealmBrowser.test.ts"
       ],
       "browserCoverage": ["tests/building-doors.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-doors.spec.ts:94",
@@ -513,7 +565,9 @@
         "src/server/RealmBrowser.test.ts"
       ],
       "browserCoverage": ["tests/building-doors.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-lab.spec.ts:5",
@@ -527,7 +581,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/building-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-lab.spec.ts:38",
@@ -541,7 +597,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/building-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-lab.spec.ts:57",
@@ -555,7 +613,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/building-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-lab.spec.ts:65",
@@ -569,7 +629,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/building-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-lab.spec.ts:133",
@@ -583,7 +645,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/building-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-lab.spec.ts:175",
@@ -597,7 +661,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/building-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-lab.spec.ts:186",
@@ -611,7 +677,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/building-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-lab.spec.ts:250",
@@ -625,7 +693,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/building-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-review.spec.ts:8",
@@ -638,7 +708,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/building-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-review.spec.ts:70",
@@ -651,7 +723,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/building-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-review.spec.ts:106",
@@ -664,7 +738,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/building-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-review.spec.ts:135",
@@ -677,7 +753,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/building-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/building-review.spec.ts:178",
@@ -690,7 +768,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/building-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/car-controls.spec.ts:38",
@@ -717,7 +797,9 @@
       "resolution": "GPU pixel changes/source comparison, orbit pointer controls, WebGL context loss/recovery, teardown and responsive layout require a browser.",
       "nativeCoverage": ["src/projection/CarProxy.test.ts", "src/projection/ProxyTexture.test.ts"],
       "browserCoverage": ["tests/car-projection.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/car-projection.spec.ts:116",
@@ -727,7 +809,9 @@
       "resolution": "GPU pixel changes/source comparison, orbit pointer controls, WebGL context loss/recovery, teardown and responsive layout require a browser.",
       "nativeCoverage": ["src/projection/CarProxy.test.ts", "src/projection/ProxyTexture.test.ts"],
       "browserCoverage": ["tests/car-projection.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/car-steering.spec.ts:6",
@@ -777,7 +861,9 @@
         "src/persistence/RealmRecords.test.ts"
       ],
       "browserCoverage": ["tests/character-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/character-presentation.spec.ts:5",
@@ -791,7 +877,9 @@
         "src/rendering/RenderHost.test.ts"
       ],
       "browserCoverage": ["tests/character-presentation.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/character-rendering.spec.ts:8",
@@ -801,7 +889,9 @@
       "resolution": "Current browser rendering fingerprint and disabled approval on mismatched manifest require canvas/UI.",
       "nativeCoverage": ["src/characters/CharacterCatalog.test.ts", "src/art/ArtCatalog.test.ts"],
       "browserCoverage": ["tests/character-rendering.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/character-rendering.spec.ts:26",
@@ -811,7 +901,9 @@
       "resolution": "Current browser rendering fingerprint and disabled approval on mismatched manifest require canvas/UI.",
       "nativeCoverage": ["src/characters/CharacterCatalog.test.ts", "src/art/ArtCatalog.test.ts"],
       "browserCoverage": ["tests/character-rendering.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/character-workshop.spec.ts:7",
@@ -825,7 +917,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/character-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/character-workshop.spec.ts:66",
@@ -839,7 +933,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/character-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/character-workshop.spec.ts:114",
@@ -853,7 +949,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/character-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/city-places-review.spec.ts:9",
@@ -867,7 +965,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/city-places-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/city-places-review.spec.ts:58",
@@ -881,7 +981,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/city-places-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/city-train-riding.spec.ts:38",
@@ -928,7 +1030,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/commercial-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/commercial-review.spec.ts:71",
@@ -943,7 +1047,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/commercial-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/commercial-review.spec.ts:94",
@@ -958,7 +1064,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/commercial-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/controller-menu.spec.ts:74",
@@ -968,7 +1076,9 @@
       "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
       "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
       "browserCoverage": ["tests/controller-menu.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/controller-menu.spec.ts:114",
@@ -978,7 +1088,9 @@
       "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
       "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
       "browserCoverage": ["tests/controller-menu.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/controller-menu.spec.ts:174",
@@ -988,7 +1100,9 @@
       "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
       "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
       "browserCoverage": ["tests/controller-menu.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/controller-menu.spec.ts:200",
@@ -998,7 +1112,9 @@
       "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
       "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
       "browserCoverage": ["tests/controller-menu.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/controller-menu.spec.ts:271",
@@ -1008,7 +1124,9 @@
       "resolution": "Controller cursor/focus, text keyboard, menu/modal isolation and actual save-failure recovery UI require browser DOM composition.",
       "nativeCoverage": ["src/input/ControllerInput.test.ts", "src/ui/sessionNavigation.test.ts"],
       "browserCoverage": ["tests/controller-menu.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/curved-trains.spec.ts:5",
@@ -1038,7 +1156,9 @@
         "src/scenarios/ScenarioPresentationHost.test.ts"
       ],
       "browserCoverage": ["tests/curved-trains.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/deer-gameplay.spec.ts:8",
@@ -1090,7 +1210,9 @@
         "src/interiors/GameplayInterior.test.ts"
       ],
       "browserCoverage": ["tests/dense-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/dense-review.spec.ts:56",
@@ -1105,7 +1227,9 @@
         "src/interiors/GameplayInterior.test.ts"
       ],
       "browserCoverage": ["tests/dense-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/dense-review.spec.ts:104",
@@ -1120,7 +1244,9 @@
         "src/interiors/GameplayInterior.test.ts"
       ],
       "browserCoverage": ["tests/dense-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/dense-review.spec.ts:126",
@@ -1135,7 +1261,9 @@
         "src/interiors/GameplayInterior.test.ts"
       ],
       "browserCoverage": ["tests/dense-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/dense-review.spec.ts:168",
@@ -1203,7 +1331,9 @@
       "resolution": "Reads actual sprite alpha bounds, CSS button/canvas sizes/contrast and checks the selected label on desktop/phone.",
       "nativeCoverage": ["src/characters/PlayerModels.test.ts", "src/assets/SpriteCatalog.test.ts"],
       "browserCoverage": ["tests/entity-picker.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:65",
@@ -1217,7 +1347,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:134",
@@ -1231,7 +1363,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:151",
@@ -1245,7 +1379,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:181",
@@ -1259,7 +1395,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:228",
@@ -1273,7 +1411,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:299",
@@ -1287,7 +1427,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:318",
@@ -1301,7 +1443,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:336",
@@ -1315,7 +1459,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:359",
@@ -1329,7 +1475,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:408",
@@ -1343,7 +1491,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:464",
@@ -1357,7 +1507,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:507",
@@ -1371,7 +1523,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:518",
@@ -1385,7 +1539,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:602",
@@ -1399,7 +1555,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:794",
@@ -1423,7 +1581,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:884",
@@ -1437,7 +1597,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:919",
@@ -1451,7 +1613,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/family-sheets.spec.ts:958",
@@ -1465,7 +1629,9 @@
         "scripts/build-family-expansion.test.py"
       ],
       "browserCoverage": ["tests/family-sheets.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/fault-reports.spec.ts:15",
@@ -1597,7 +1763,9 @@
         "src/wildlife/GrazerRiding.test.ts"
       ],
       "browserCoverage": ["tests/fauna-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/fierce-creatures.spec.ts:7",
@@ -1724,7 +1892,9 @@
         "src/scenarios/ScenarioSession.test.ts"
       ],
       "browserCoverage": ["tests/furniture-motion.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/furniture-motion.spec.ts:107",
@@ -1754,7 +1924,9 @@
         "src/scenarios/ScenarioSession.test.ts"
       ],
       "browserCoverage": ["tests/furniture-motion.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/furniture-motion.spec.ts:196",
@@ -1768,7 +1940,9 @@
         "src/scenarios/ScenarioSession.test.ts"
       ],
       "browserCoverage": ["tests/furniture-motion.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/furniture-motion.spec.ts:281",
@@ -1782,7 +1956,9 @@
         "src/scenarios/ScenarioSession.test.ts"
       ],
       "browserCoverage": ["tests/furniture-motion.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/furniture-motion.spec.ts:332",
@@ -1796,7 +1972,9 @@
         "src/scenarios/ScenarioSession.test.ts"
       ],
       "browserCoverage": ["tests/furniture-motion.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/furniture-presentation.spec.ts:5",
@@ -1809,7 +1987,9 @@
         "src/rendering/RenderHost.test.ts"
       ],
       "browserCoverage": ["tests/furniture-presentation.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gameplay-interiors.spec.ts:9",
@@ -1869,7 +2049,9 @@
         "src/scenarios/RailCrossingRecipe.test.ts"
       ],
       "browserCoverage": ["tests/generated-crossing.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:5",
@@ -1885,7 +2067,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:22",
@@ -1901,7 +2085,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:40",
@@ -1917,7 +2103,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:72",
@@ -1933,7 +2121,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:145",
@@ -1949,7 +2139,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:196",
@@ -1965,7 +2157,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:261",
@@ -1981,7 +2175,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:278",
@@ -1997,7 +2193,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:301",
@@ -2013,7 +2211,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:323",
@@ -2029,7 +2229,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:380",
@@ -2045,7 +2247,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:400",
@@ -2061,7 +2265,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:434",
@@ -2077,7 +2283,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:457",
@@ -2093,7 +2301,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:471",
@@ -2109,7 +2319,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:544",
@@ -2125,7 +2337,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:600",
@@ -2141,7 +2355,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:658",
@@ -2157,7 +2373,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/gpu-renderer.spec.ts:706",
@@ -2173,7 +2391,9 @@
         "src/rendering/GrassDetail.test.ts"
       ],
       "browserCoverage": ["tests/gpu-renderer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/horse-riding.spec.ts:8",
@@ -2198,7 +2418,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/hotel-signs.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/hotel-signs.spec.ts:123",
@@ -2211,7 +2433,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/hotel-signs.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-approved.spec.ts:13",
@@ -2238,7 +2462,9 @@
         "src/interiors/review/ReviewCases.test.ts"
       ],
       "browserCoverage": ["tests/interior-approved.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-approved.spec.ts:80",
@@ -2252,7 +2478,9 @@
         "src/interiors/review/ReviewCases.test.ts"
       ],
       "browserCoverage": ["tests/interior-approved.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-approved.spec.ts:115",
@@ -2266,7 +2494,9 @@
         "src/interiors/review/ReviewCases.test.ts"
       ],
       "browserCoverage": ["tests/interior-approved.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-approved.spec.ts:133",
@@ -2280,7 +2510,9 @@
         "src/interiors/review/ReviewCases.test.ts"
       ],
       "browserCoverage": ["tests/interior-approved.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-approved.spec.ts:160",
@@ -2294,7 +2526,9 @@
         "src/interiors/review/ReviewCases.test.ts"
       ],
       "browserCoverage": ["tests/interior-approved.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-approved.spec.ts:216",
@@ -2308,7 +2542,9 @@
         "src/interiors/review/ReviewCases.test.ts"
       ],
       "browserCoverage": ["tests/interior-approved.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-approved.spec.ts:258",
@@ -2322,7 +2558,9 @@
         "src/interiors/review/ReviewCases.test.ts"
       ],
       "browserCoverage": ["tests/interior-approved.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-furniture.spec.ts:6",
@@ -2335,7 +2573,9 @@
         "src/interiors/review/ReviewCases.test.ts"
       ],
       "browserCoverage": ["tests/interior-furniture.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-loading.spec.ts:4",
@@ -2348,7 +2588,9 @@
         "src/interiors/MotionReview.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-loading.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-loading.spec.ts:93",
@@ -2361,7 +2603,9 @@
         "src/interiors/MotionReview.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-loading.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-rounds.spec.ts:13",
@@ -2374,7 +2618,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-rounds.spec.ts:53",
@@ -2387,7 +2633,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-rounds.spec.ts:78",
@@ -2400,7 +2648,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-rounds.spec.ts:132",
@@ -2413,7 +2663,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-rounds.spec.ts:188",
@@ -2426,7 +2678,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-rounds.spec.ts:235",
@@ -2439,7 +2693,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-rounds.spec.ts:254",
@@ -2452,7 +2708,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review-rounds.spec.ts:283",
@@ -2465,7 +2723,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/interior-review-rounds.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:9",
@@ -2479,7 +2739,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:56",
@@ -2493,7 +2755,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:95",
@@ -2507,7 +2771,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:140",
@@ -2521,7 +2787,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:191",
@@ -2535,7 +2803,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:232",
@@ -2549,7 +2819,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:250",
@@ -2563,7 +2835,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:313",
@@ -2577,7 +2851,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:353",
@@ -2591,7 +2867,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:400",
@@ -2605,7 +2883,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:462",
@@ -2619,7 +2899,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:517",
@@ -2633,7 +2915,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:701",
@@ -2647,7 +2931,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-review.spec.ts:750",
@@ -2661,7 +2947,9 @@
         "src/interiors/ApartmentWallSurfaces.test.ts"
       ],
       "browserCoverage": ["tests/interior-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-workbench.spec.ts:4",
@@ -2671,7 +2959,9 @@
       "resolution": "Pointer painting, plan/render tab layout, local custom fixtures, undo and exported issue UI require browser integration.",
       "nativeCoverage": ["src/interiors/workbench/WorkbenchDocument.test.ts"],
       "browserCoverage": ["tests/interior-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-workbench.spec.ts:75",
@@ -2681,7 +2971,9 @@
       "resolution": "Pointer painting, plan/render tab layout, local custom fixtures, undo and exported issue UI require browser integration.",
       "nativeCoverage": ["src/interiors/workbench/WorkbenchDocument.test.ts"],
       "browserCoverage": ["tests/interior-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interior-workbench.spec.ts:94",
@@ -2691,7 +2983,9 @@
       "resolution": "Pointer painting, plan/render tab layout, local custom fixtures, undo and exported issue UI require browser integration.",
       "nativeCoverage": ["src/interiors/workbench/WorkbenchDocument.test.ts"],
       "browserCoverage": ["tests/interior-workbench.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/interiors-screenshots.spec.ts:13",
@@ -2776,7 +3070,9 @@
         "src/interiors/FurnitureCatalog.test.ts"
       ],
       "browserCoverage": ["tests/interiors.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/lived-in-interiors.spec.ts:14",
@@ -2806,7 +3102,9 @@
         "src/interiors/InteriorPresentation.test.ts"
       ],
       "browserCoverage": ["tests/lived-in-interiors.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/mall-doors.spec.ts:12",
@@ -2833,7 +3131,9 @@
       "resolution": "Real scroll/tab/header bounds, touch placement, minimization and Atlas modal close/selection routing need browser layout/input.",
       "nativeCoverage": ["src/editor/EditorModel.test.ts", "src/input/TouchButtons.test.ts"],
       "browserCoverage": ["tests/mobile-editor.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/mobile-editor.spec.ts:131",
@@ -2843,7 +3143,9 @@
       "resolution": "Real scroll/tab/header bounds, touch placement, minimization and Atlas modal close/selection routing need browser layout/input.",
       "nativeCoverage": ["src/editor/EditorModel.test.ts", "src/input/TouchButtons.test.ts"],
       "browserCoverage": ["tests/mobile-editor.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/mobile-fullscreen.spec.ts:6",
@@ -2853,7 +3155,9 @@
       "resolution": "Actual requestFullscreen/fullscreenElement and touch/desktop action routing require browser activation/lifecycle semantics.",
       "nativeCoverage": [],
       "browserCoverage": ["tests/mobile-fullscreen.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/mobile-fullscreen.spec.ts:31",
@@ -2863,7 +3167,9 @@
       "resolution": "Actual requestFullscreen/fullscreenElement and touch/desktop action routing require browser activation/lifecycle semantics.",
       "nativeCoverage": [],
       "browserCoverage": ["tests/mobile-fullscreen.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/mobile-fullscreen.spec.ts:66",
@@ -2873,7 +3179,9 @@
       "resolution": "Actual requestFullscreen/fullscreenElement and touch/desktop action routing require browser activation/lifecycle semantics.",
       "nativeCoverage": [],
       "browserCoverage": ["tests/mobile-fullscreen.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/natural-landscapes.spec.ts:5",
@@ -2887,7 +3195,9 @@
         "src/scenarios/TrainRoofRiding.test.ts"
       ],
       "browserCoverage": ["tests/natural-landscapes.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/natural-landscapes.spec.ts:82",
@@ -2933,7 +3243,9 @@
         "src/scenarios/TrainRoofRiding.test.ts"
       ],
       "browserCoverage": ["tests/natural-landscapes.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/natural-landscapes.spec.ts:192",
@@ -2947,7 +3259,9 @@
         "src/scenarios/TrainRoofRiding.test.ts"
       ],
       "browserCoverage": ["tests/natural-landscapes.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/original-vehicle.spec.ts:6",
@@ -2976,7 +3290,9 @@
         "src/rendering/RenderHost.test.ts"
       ],
       "browserCoverage": ["tests/outdoor-presentation.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/outdoor-workshop.spec.ts:5",
@@ -2992,7 +3308,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/outdoor-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/outdoor-workshop.spec.ts:68",
@@ -3008,7 +3326,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/outdoor-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/outdoor-workshop.spec.ts:89",
@@ -3024,7 +3344,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/outdoor-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/outdoor-workshop.spec.ts:153",
@@ -3053,7 +3375,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/outdoor-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/p2p-menu.spec.ts:9",
@@ -3066,7 +3390,9 @@
         "src/ui/sessionNavigation.test.ts"
       ],
       "browserCoverage": ["tests/p2p-menu.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/p2p-recovery.spec.ts:107",
@@ -3080,7 +3406,9 @@
         "src/transport/PeerConnectionDiagnostics.test.ts"
       ],
       "browserCoverage": ["tests/p2p-recovery.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/p2p-recovery.spec.ts:157",
@@ -3094,7 +3422,9 @@
         "src/transport/PeerConnectionDiagnostics.test.ts"
       ],
       "browserCoverage": ["tests/p2p-recovery.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/parking-lab.spec.ts:6",
@@ -3107,7 +3437,9 @@
         "src/road/ParkingSurface.test.ts"
       ],
       "browserCoverage": ["tests/parking-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/parking-lab.spec.ts:43",
@@ -3120,7 +3452,9 @@
         "src/road/ParkingSurface.test.ts"
       ],
       "browserCoverage": ["tests/parking-lab.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/parking-visits.spec.ts:42",
@@ -3217,7 +3551,9 @@
         "src/editor/EditorModel.test.ts"
       ],
       "browserCoverage": ["tests/pattern-studio.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pattern-studio.spec.ts:123",
@@ -3249,7 +3585,9 @@
         "src/editor/EditorModel.test.ts"
       ],
       "browserCoverage": ["tests/pattern-studio.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pinch-zoom.spec.ts:78",
@@ -3263,7 +3601,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/pinch-zoom.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pinch-zoom.spec.ts:150",
@@ -3277,7 +3617,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/pinch-zoom.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pinch-zoom.spec.ts:190",
@@ -3291,7 +3633,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/pinch-zoom.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pixel-characters.spec.ts:5",
@@ -3301,7 +3645,9 @@
       "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
       "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
       "browserCoverage": ["tests/pixel-characters.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pixel-characters.spec.ts:66",
@@ -3311,7 +3657,9 @@
       "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
       "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
       "browserCoverage": ["tests/pixel-characters.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pixel-characters.spec.ts:143",
@@ -3321,7 +3669,9 @@
       "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
       "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
       "browserCoverage": ["tests/pixel-characters.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pixel-characters.spec.ts:183",
@@ -3331,7 +3681,9 @@
       "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
       "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
       "browserCoverage": ["tests/pixel-characters.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pixel-characters.spec.ts:204",
@@ -3341,7 +3693,9 @@
       "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
       "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
       "browserCoverage": ["tests/pixel-characters.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pixel-characters.spec.ts:249",
@@ -3351,7 +3705,9 @@
       "resolution": "Standalone gallery source-pixel equality, image selectors, rAF frames, actual key/touch release and loading-error UI require browser behavior.",
       "nativeCoverage": ["src/characters/CharacterCatalog.test.ts"],
       "browserCoverage": ["tests/pixel-characters.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/play-ideas.spec.ts:146",
@@ -3361,7 +3717,9 @@
       "resolution": "Actual speech-related dialog controls, pointer/focus/fullscreen lifecycle, screenshot capture, local outbox and private review UI require browser integration.",
       "nativeCoverage": ["src/server/playIdeas.test.ts"],
       "browserCoverage": ["tests/play-ideas.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/play-ideas.spec.ts:208",
@@ -3371,7 +3729,9 @@
       "resolution": "Actual speech-related dialog controls, pointer/focus/fullscreen lifecycle, screenshot capture, local outbox and private review UI require browser integration.",
       "nativeCoverage": ["src/server/playIdeas.test.ts"],
       "browserCoverage": ["tests/play-ideas.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/play-ideas.spec.ts:235",
@@ -3393,7 +3753,9 @@
       "resolution": "Actual speech-related dialog controls, pointer/focus/fullscreen lifecycle, screenshot capture, local outbox and private review UI require browser integration.",
       "nativeCoverage": ["src/server/playIdeas.test.ts"],
       "browserCoverage": ["tests/play-ideas.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/play-ideas.spec.ts:291",
@@ -3451,7 +3813,9 @@
       "resolution": "Actual speech-related dialog controls, pointer/focus/fullscreen lifecycle, screenshot capture, local outbox and private review UI require browser integration.",
       "nativeCoverage": ["src/server/playIdeas.test.ts"],
       "browserCoverage": ["tests/play-ideas.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/player-dev-reload.spec.ts:10",
@@ -3465,7 +3829,9 @@
         "src/client/DoorPresentation.test.ts"
       ],
       "browserCoverage": ["tests/player-dev-reload.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/player-dev-reload.spec.ts:120",
@@ -3479,7 +3845,9 @@
         "src/client/DoorPresentation.test.ts"
       ],
       "browserCoverage": ["tests/player-dev-reload.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/player-markers.spec.ts:138",
@@ -3560,7 +3928,9 @@
       "resolution": "Uses Chromium CDP manifest parsing/installability, native image decode and actual serviceWorker registrations under build and Vite serving.",
       "nativeCoverage": [],
       "browserCoverage": ["tests/pwa.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/pwa.spec.ts:12",
@@ -3570,7 +3940,9 @@
       "resolution": "Uses Chromium CDP manifest parsing/installability, native image decode and actual serviceWorker registrations under build and Vite serving.",
       "nativeCoverage": [],
       "browserCoverage": ["tests/pwa.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/rabbit-gameplay.spec.ts:8",
@@ -3650,7 +4022,9 @@
         "src/generation/regional/RacetrackPlanner.test.ts"
       ],
       "browserCoverage": ["tests/racetrack.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/rail-crossing.spec.ts:5",
@@ -3678,7 +4052,9 @@
         "src/railway/RoadRailBridge.test.ts"
       ],
       "browserCoverage": ["tests/rail-crossing.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/rail-map.spec.ts:6",
@@ -3688,7 +4064,9 @@
       "resolution": "Rail-line pixels, station labels/buttons, map navigation and responsive layout need the browser.",
       "nativeCoverage": ["src/railway/Railway.test.ts"],
       "browserCoverage": ["tests/rail-map.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/railway-preview.spec.ts:14",
@@ -3702,7 +4080,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/railway-preview.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/railway-preview.spec.ts:38",
@@ -3716,7 +4096,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/railway-preview.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/railway-preview.spec.ts:64",
@@ -3730,7 +4112,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/railway-preview.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/railway-preview.spec.ts:100",
@@ -3744,7 +4128,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/railway-preview.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/railway.spec.ts:4",
@@ -3803,7 +4189,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/road-geometry.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/road-geometry.spec.ts:79",
@@ -3817,7 +4205,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/road-geometry.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/road-geometry.spec.ts:103",
@@ -3831,7 +4221,9 @@
         "src/art/BuildingReviewQueue.test.ts"
       ],
       "browserCoverage": ["tests/road-geometry.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/roadkill.spec.ts:8",
@@ -3897,7 +4289,9 @@
         "src/scenarios/ScenarioWorkerHost.test.ts"
       ],
       "browserCoverage": ["tests/scenario-lifecycle.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/scenario-scheduling.spec.ts:6",
@@ -3911,7 +4305,9 @@
         "src/transport/OrderedWorkerChannel.test.ts"
       ],
       "browserCoverage": ["tests/scenario-scheduling.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/screenshot.spec.ts:34",
@@ -3945,7 +4341,9 @@
       "resolution": "Checks browser preview frame advancement and Watch AI scene selection.",
       "nativeCoverage": ["src/wildlife/SecretaryBird.test.ts"],
       "browserCoverage": ["tests/secretary-bird.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/server-security.spec.ts:9",
@@ -4135,7 +4533,9 @@
         "src/workshop/WorkshopProjection.test.ts"
       ],
       "browserCoverage": ["tests/source-viewport.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/source-viewport.spec.ts:63",
@@ -4148,7 +4548,9 @@
         "src/workshop/WorkshopProjection.test.ts"
       ],
       "browserCoverage": ["tests/source-viewport.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/source-viewport.spec.ts:116",
@@ -4161,7 +4563,9 @@
         "src/workshop/WorkshopProjection.test.ts"
       ],
       "browserCoverage": ["tests/source-viewport.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/streaming.spec.ts:6",
@@ -4175,7 +4579,9 @@
         "src/rendering/TerrainPreparation.test.ts"
       ],
       "browserCoverage": ["tests/streaming.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/street-review.spec.ts:11",
@@ -4189,7 +4595,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/street-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/street-review.spec.ts:54",
@@ -4203,7 +4611,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/street-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/street-review.spec.ts:97",
@@ -4217,7 +4627,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/street-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/street-review.spec.ts:152",
@@ -4231,7 +4643,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/street-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/street-review.spec.ts:181",
@@ -4245,7 +4659,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/street-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/surface-review.spec.ts:15",
@@ -4260,7 +4676,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/surface-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/surface-review.spec.ts:109",
@@ -4275,7 +4693,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/surface-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/surface-review.spec.ts:162",
@@ -4290,7 +4710,9 @@
         "src/server/artNotesHttp.test.ts"
       ],
       "browserCoverage": ["tests/surface-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tap-movement.spec.ts:166",
@@ -4306,7 +4728,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/tap-movement.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tap-movement.spec.ts:215",
@@ -4322,7 +4746,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/tap-movement.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tap-movement.spec.ts:279",
@@ -4338,7 +4764,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/tap-movement.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tap-movement.spec.ts:314",
@@ -4354,7 +4782,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/tap-movement.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tap-movement.spec.ts:447",
@@ -4370,7 +4800,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/tap-movement.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tap-movement.spec.ts:485",
@@ -4386,7 +4818,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/tap-movement.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tap-movement.spec.ts:537",
@@ -4402,7 +4836,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/tap-movement.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tap-movement.spec.ts:614",
@@ -4418,7 +4854,9 @@
         "src/input/TouchButtons.test.ts"
       ],
       "browserCoverage": ["tests/tap-movement.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/terrain-pacing.spec.ts:21",
@@ -4432,7 +4870,9 @@
         "src/rendering/TerrainFrame.test.ts"
       ],
       "browserCoverage": ["tests/terrain-pacing.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/three-debug.spec.ts:3",
@@ -4442,7 +4882,9 @@
       "resolution": "Creates a real WebGL context and verifies visible debug canvas removal/lifetime.",
       "nativeCoverage": ["src/rendering/RenderingBoundary.test.ts"],
       "browserCoverage": ["tests/three-debug.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tools-index.spec.ts:4",
@@ -4469,7 +4911,9 @@
         "src/explorer/PreviewSettings.test.ts"
       ],
       "browserCoverage": ["tests/tools-index.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/tools-index.spec.ts:96",
@@ -4483,7 +4927,9 @@
         "src/explorer/PreviewSettings.test.ts"
       ],
       "browserCoverage": ["tests/tools-index.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/traffic-rendering.spec.ts:33",
@@ -4498,7 +4944,9 @@
         "src/rendering/PresentationTimeline.test.ts"
       ],
       "browserCoverage": ["tests/traffic-rendering.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/traffic-rendering.spec.ts:93",
@@ -4513,7 +4961,9 @@
         "src/rendering/PresentationTimeline.test.ts"
       ],
       "browserCoverage": ["tests/traffic-rendering.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/traffic-rendering.spec.ts:129",
@@ -4528,7 +4978,9 @@
         "src/rendering/PresentationTimeline.test.ts"
       ],
       "browserCoverage": ["tests/traffic-rendering.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/traffic.spec.ts:6",
@@ -4586,7 +5038,9 @@
       "resolution": "Uses real AudioContext stereo energy and game menu/focus/scene voice cleanup.",
       "nativeCoverage": ["src/audio/TrainAudio.test.ts", "src/audio/AudioManager.test.ts"],
       "browserCoverage": ["tests/train-audio.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/train-call.spec.ts:72",
@@ -4628,7 +5082,9 @@
         "src/scenarios/TrainRoofRiding.test.ts"
       ],
       "browserCoverage": ["tests/train-geometry.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/underground-garage.spec.ts:5",
@@ -4656,7 +5112,9 @@
         "src/physics/TerrainExcavation.test.ts"
       ],
       "browserCoverage": ["tests/underground-garage.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/vehicle-driving.spec.ts:140",
@@ -4730,7 +5188,9 @@
         "src/rendering/VehiclePaintResources.test.ts"
       ],
       "browserCoverage": ["tests/vehicle-paint-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/vehicle-paint-gameplay.spec.ts:60",
@@ -4745,7 +5205,9 @@
         "src/rendering/VehiclePaintResources.test.ts"
       ],
       "browserCoverage": ["tests/vehicle-paint-gameplay.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/vehicle-paint-gameplay.spec.ts:113",
@@ -4772,7 +5234,9 @@
       "resolution": "Standalone comparison image sizing, paint/camera selection and responsive layout need browser image/DOM behavior.",
       "nativeCoverage": ["src/traffic/VehiclePaint.test.ts"],
       "browserCoverage": ["tests/vehicle-paint-study.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/vehicle-placement.spec.ts:62",
@@ -4801,7 +5265,9 @@
         "src/art/ArtCatalog.test.ts"
       ],
       "browserCoverage": ["tests/vehicle-rendering.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/vehicle-rendering.spec.ts:33",
@@ -4814,7 +5280,9 @@
         "src/art/ArtCatalog.test.ts"
       ],
       "browserCoverage": ["tests/vehicle-rendering.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/vehicle-steering.spec.ts:8",
@@ -4848,7 +5316,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/vehicle-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/vehicle-workshop.spec.ts:66",
@@ -4862,7 +5332,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/vehicle-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/vehicle-workshop.spec.ts:103",
@@ -4876,7 +5348,9 @@
         "src/server/workshopService.test.ts"
       ],
       "browserCoverage": ["tests/vehicle-workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/warning-beacon-driving.spec.ts:7",
@@ -4918,7 +5392,9 @@
         "src/transport/webrtcFragment.test.ts"
       ],
       "browserCoverage": ["tests/webrtc-delivery.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/webrtc-delivery.spec.ts:235",
@@ -4932,7 +5408,9 @@
         "src/transport/webrtcFragment.test.ts"
       ],
       "browserCoverage": ["tests/webrtc-delivery.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/wildlife-gameplay.spec.ts:7",
@@ -5010,7 +5488,9 @@
       "resolution": "Exact image/canvas equality, playback controls, source-byte failure UI and disabled approval affordances are browser contracts.",
       "nativeCoverage": ["src/art/WildlifeReview.test.ts", "src/server/workshopService.test.ts"],
       "browserCoverage": ["tests/wildlife-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/wildlife-review.spec.ts:49",
@@ -5020,7 +5500,9 @@
       "resolution": "Exact image/canvas equality, playback controls, source-byte failure UI and disabled approval affordances are browser contracts.",
       "nativeCoverage": ["src/art/WildlifeReview.test.ts", "src/server/workshopService.test.ts"],
       "browserCoverage": ["tests/wildlife-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/wildlife-review.spec.ts:129",
@@ -5030,7 +5512,9 @@
       "resolution": "Exact image/canvas equality, playback controls, source-byte failure UI and disabled approval affordances are browser contracts.",
       "nativeCoverage": ["src/art/WildlifeReview.test.ts", "src/server/workshopService.test.ts"],
       "browserCoverage": ["tests/wildlife-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/wildlife-review.spec.ts:148",
@@ -5040,7 +5524,9 @@
       "resolution": "Exact image/canvas equality, playback controls, source-byte failure UI and disabled approval affordances are browser contracts.",
       "nativeCoverage": ["src/art/WildlifeReview.test.ts", "src/server/workshopService.test.ts"],
       "browserCoverage": ["tests/wildlife-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/worker-server.spec.ts:34",
@@ -5056,7 +5542,9 @@
         "src/scenarios/ScenarioWorkerHost.test.ts"
       ],
       "browserCoverage": ["tests/worker-server.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/worker-server.spec.ts:120",
@@ -5072,7 +5560,9 @@
         "src/scenarios/ScenarioWorkerHost.test.ts"
       ],
       "browserCoverage": ["tests/worker-server.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/worker-server.spec.ts:152",
@@ -5088,7 +5578,9 @@
         "src/scenarios/ScenarioWorkerHost.test.ts"
       ],
       "browserCoverage": ["tests/worker-server.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/worker-server.spec.ts:177",
@@ -5104,7 +5596,9 @@
         "src/scenarios/ScenarioWorkerHost.test.ts"
       ],
       "browserCoverage": ["tests/worker-server.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/worker-server.spec.ts:230",
@@ -5120,7 +5614,9 @@
         "src/scenarios/ScenarioWorkerHost.test.ts"
       ],
       "browserCoverage": ["tests/worker-server.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop-dev-review.spec.ts:6",
@@ -5130,7 +5626,9 @@
       "resolution": "Development-source drift banners and enabling/disabling real review buttons depend on current page-render verification.",
       "nativeCoverage": ["src/server/workshopService.test.ts", "src/art/ArtCatalog.test.ts"],
       "browserCoverage": ["tests/workshop-dev-review.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop-rendering.spec.ts:9",
@@ -5143,7 +5641,9 @@
         "src/art/ArtCatalog.test.ts"
       ],
       "browserCoverage": ["tests/workshop-rendering.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop-standalone.spec.ts:10",
@@ -5169,7 +5669,9 @@
         "src/workshop/WorkshopProjection.test.ts"
       ],
       "browserCoverage": ["tests/workshop-viewport.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop-viewport.spec.ts:115",
@@ -5182,7 +5684,9 @@
         "src/workshop/WorkshopProjection.test.ts"
       ],
       "browserCoverage": ["tests/workshop-viewport.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop.spec.ts:13",
@@ -5197,7 +5701,9 @@
         "src/workshop/SceneReview.test.ts"
       ],
       "browserCoverage": ["tests/workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop.spec.ts:47",
@@ -5212,7 +5718,9 @@
         "src/workshop/SceneReview.test.ts"
       ],
       "browserCoverage": ["tests/workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop.spec.ts:142",
@@ -5227,7 +5735,9 @@
         "src/workshop/SceneReview.test.ts"
       ],
       "browserCoverage": ["tests/workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop.spec.ts:181",
@@ -5242,7 +5752,9 @@
         "src/workshop/SceneReview.test.ts"
       ],
       "browserCoverage": ["tests/workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop.spec.ts:226",
@@ -5257,7 +5769,9 @@
         "src/workshop/SceneReview.test.ts"
       ],
       "browserCoverage": ["tests/workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop.spec.ts:257",
@@ -5272,7 +5786,9 @@
         "src/workshop/SceneReview.test.ts"
       ],
       "browserCoverage": ["tests/workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/workshop.spec.ts:292",
@@ -5287,7 +5803,9 @@
         "src/workshop/SceneReview.test.ts"
       ],
       "browserCoverage": ["tests/workshop.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-explorer.spec.ts:8",
@@ -5303,7 +5821,9 @@
         "src/generation/Generator.test.ts"
       ],
       "browserCoverage": ["tests/world-explorer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-explorer.spec.ts:51",
@@ -5319,7 +5839,9 @@
         "src/generation/Generator.test.ts"
       ],
       "browserCoverage": ["tests/world-explorer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-explorer.spec.ts:94",
@@ -5335,7 +5857,9 @@
         "src/generation/Generator.test.ts"
       ],
       "browserCoverage": ["tests/world-explorer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-explorer.spec.ts:128",
@@ -5351,7 +5875,9 @@
         "src/generation/Generator.test.ts"
       ],
       "browserCoverage": ["tests/world-explorer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-explorer.spec.ts:182",
@@ -5367,7 +5893,9 @@
         "src/generation/Generator.test.ts"
       ],
       "browserCoverage": ["tests/world-explorer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-explorer.spec.ts:194",
@@ -5383,7 +5911,9 @@
         "src/generation/Generator.test.ts"
       ],
       "browserCoverage": ["tests/world-explorer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-explorer.spec.ts:244",
@@ -5412,7 +5942,9 @@
         "src/generation/Generator.test.ts"
       ],
       "browserCoverage": ["tests/world-explorer.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-generation.spec.ts:8",
@@ -5527,7 +6059,9 @@
         "src/rendering/SurfacePresentation.test.ts"
       ],
       "browserCoverage": ["tests/world-geometry.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-geometry.spec.ts:116",
@@ -5541,7 +6075,9 @@
         "src/rendering/SurfacePresentation.test.ts"
       ],
       "browserCoverage": ["tests/world-geometry.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-map.spec.ts:12",
@@ -5555,7 +6091,9 @@
         "src/input/TouchPinch.test.ts"
       ],
       "browserCoverage": ["tests/world-map.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-map.spec.ts:58",
@@ -5569,7 +6107,9 @@
         "src/input/TouchPinch.test.ts"
       ],
       "browserCoverage": ["tests/world-map.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-map.spec.ts:186",
@@ -5583,7 +6123,9 @@
         "src/input/TouchPinch.test.ts"
       ],
       "browserCoverage": ["tests/world-map.spec.ts"],
-      "validation": []
+      "validation": [
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+      ]
     },
     {
       "source": "tests/world-recreation.spec.ts:5",

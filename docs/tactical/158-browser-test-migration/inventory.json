@@ -1,0 +1,705 @@
+{
+  "baselineCommit": "9ae14797e6c9b1848748ee3ec78171ff90949b55",
+  "baselineTemplates": 403,
+  "baselineCases": 1724,
+  "lanes": [
+    {
+      "name": "browser",
+      "cases": 808,
+      "inventorySha256": "d88e2ab6f93743bb61224076e7d674f33de6efd3a3cf36b442e9fdb301932fc0",
+      "files": [
+        {
+          "path": "tests/ambulance-driving.spec.ts",
+          "cases": 8,
+          "sourceSha256": "33e41c757b958180173dd74671c4f7773df9647aa58abd706d2c3886534ff3e3"
+        },
+        {
+          "path": "tests/animal-browser.spec.ts",
+          "cases": 76,
+          "sourceSha256": "5f5e3b9d1b65df957df447be802a77cc0c32a5a5847810ee6bbb702c439b7cff"
+        },
+        {
+          "path": "tests/animal-work.spec.ts",
+          "cases": 9,
+          "sourceSha256": "f218cba60c8350463de12a18d8cf812c058ca6e72c4e99e0864b03fb9b31d071"
+        },
+        {
+          "path": "tests/aquatic-hunters.spec.ts",
+          "cases": 4,
+          "sourceSha256": "c6593ef720993007c2152596335df9ec8ecd44f1316c07a8de271f5a794ab19a"
+        },
+        {
+          "path": "tests/art-workbench.spec.ts",
+          "cases": 6,
+          "sourceSha256": "163dc9acaa51725a96d92aaeb4e04f6cc7557ad3a2a2defb23580228dc605d3d"
+        },
+        {
+          "path": "tests/authored-train.spec.ts",
+          "cases": 9,
+          "sourceSha256": "f2dcef76835bae1ea3a01138931b4a694654477b0f8c722095afa64e53401509"
+        },
+        {
+          "path": "tests/authored-vehicle-gameplay.spec.ts",
+          "cases": 90,
+          "sourceSha256": "33b5a5144b1cfa1f0144f9ea7fa902adba80e38e6cb81ff6b48c88f13c9bcb6b"
+        },
+        {
+          "path": "tests/authored-vehicle-review.spec.ts",
+          "cases": 46,
+          "sourceSha256": "b081b1a8d463f275e3022bb9e13b2cd928221a1a453786e21d7a70d9706fc293"
+        },
+        {
+          "path": "tests/blender-tiger.spec.ts",
+          "cases": 3,
+          "sourceSha256": "8612b6726ca76b4aa63e48279f2b09e9a60af419386f7177ff3811c1bed18ec8"
+        },
+        {
+          "path": "tests/boat-lakes.spec.ts",
+          "cases": 6,
+          "sourceSha256": "fe1a9d4f682bd6b8ba5d5b2dcd0873a69430aeac84a0afcc90e045dd14112747"
+        },
+        {
+          "path": "tests/building-doors.spec.ts",
+          "cases": 6,
+          "sourceSha256": "fd5d6fc7d184b46ec9ef33fcd76e55c368ddcd1602a6c2d0b649dce4164887ab"
+        },
+        {
+          "path": "tests/building-lab.spec.ts",
+          "cases": 10,
+          "sourceSha256": "5502d644cedbb500989894ba4c398a9364b585f9f75cc0dbfc2f14220b3fafa5"
+        },
+        {
+          "path": "tests/building-review.spec.ts",
+          "cases": 5,
+          "sourceSha256": "d25c7a8eb09bd8280aaeebdf5158f46f6dba4df49aafd0b90c3a2ae7cb40c0f7"
+        },
+        {
+          "path": "tests/car-controls.spec.ts",
+          "cases": 2,
+          "sourceSha256": "fa5c82b7fc78a39e4949c4d7e3cce41472e788d929c2c73a4e183a579218dbb0"
+        },
+        {
+          "path": "tests/car-projection.spec.ts",
+          "cases": 2,
+          "sourceSha256": "08abede12d83523f25211aa50ee0eb6c5d2c48511b2ef6aca8a0dad2eb9244e7"
+        },
+        {
+          "path": "tests/car-steering.spec.ts",
+          "cases": 4,
+          "sourceSha256": "7cfd9e93521676de43e0114ba4d36124cc2bdbdf0c808783b347e1db949692ad"
+        },
+        {
+          "path": "tests/character-gameplay.spec.ts",
+          "cases": 2,
+          "sourceSha256": "3b0c7029c88bf4178fe31d9d502a4f57a5a6fe405bad9eef0fe916c0caaf6bd2"
+        },
+        {
+          "path": "tests/character-presentation.spec.ts",
+          "cases": 2,
+          "sourceSha256": "1b09350963cfc9b4ef0ad1c9ee157cfa4816468becbba0528c586272aeb4e889"
+        },
+        {
+          "path": "tests/character-rendering.spec.ts",
+          "cases": 2,
+          "sourceSha256": "997356dd3eed9dc5fdb25a28f8dd17a6f145c71917f8d9ebba09552998fc8480"
+        },
+        {
+          "path": "tests/character-workshop.spec.ts",
+          "cases": 3,
+          "sourceSha256": "3b5408a7bb9902fec56cd318bebc32458d6708867ec5843ecf59935a269f1b41"
+        },
+        {
+          "path": "tests/city-places-review.spec.ts",
+          "cases": 8,
+          "sourceSha256": "3a320e8ed232378d7140bee52cd9e75a4bcb1c40d8714520031ed62996c0cdc3"
+        },
+        {
+          "path": "tests/city-train-riding.spec.ts",
+          "cases": 4,
+          "sourceSha256": "70c4e440e1fc4fb3137420d0c4e89480262a4dbdd164919544bf4492790a75b0"
+        },
+        {
+          "path": "tests/commercial-review.spec.ts",
+          "cases": 3,
+          "sourceSha256": "47c8b7ad72ac496a60ec9835e4d3ee8e71991cccf3c4425b276fcc539d6386a3"
+        },
+        {
+          "path": "tests/controller-menu.spec.ts",
+          "cases": 5,
+          "sourceSha256": "9623dabf2583edf1f831bda8aa36a3983eb30a1e548dc4a6c30c2f1b0a7548e4"
+        },
+        {
+          "path": "tests/curved-trains.spec.ts",
+          "cases": 3,
+          "sourceSha256": "094d0b1f6286084d7a5fdd99e0cdfe19b005085ff4f8698aac3b17b8983f83ab"
+        },
+        {
+          "path": "tests/deer-gameplay.spec.ts",
+          "cases": 3,
+          "sourceSha256": "2cdb206103a3c77cbbcad54be41c34693d2cbba2d39a4dbf220ce46c0ae24ad0"
+        },
+        {
+          "path": "tests/dense-review.spec.ts",
+          "cases": 7,
+          "sourceSha256": "f9c3f871f7fb0f32754b1761651a8e14c1e3b5bb75491aa0b6181cba175c04b4"
+        },
+        {
+          "path": "tests/editor-paint.spec.ts",
+          "cases": 1,
+          "sourceSha256": "f3bad0a927af5c2210b96805922819585c9d0e7556d90db08f9a587649668bd1"
+        },
+        {
+          "path": "tests/entity-picker.spec.ts",
+          "cases": 2,
+          "sourceSha256": "d5a15b8f132dcc00d848491c302f25f8c6b8a2f6bbd2516d5ea3ae66d9d7b330"
+        },
+        {
+          "path": "tests/family-sheets.spec.ts",
+          "cases": 22,
+          "sourceSha256": "4b1084c00f304dedbf6f364d742c50dc679a61db15310b7d3b3a660c680c73a9"
+        },
+        {
+          "path": "tests/fault-reports.spec.ts",
+          "cases": 4,
+          "sourceSha256": "be6d8ced040a20188971c8cd96d598416a08e1db4795e545557ef0330a08ed86"
+        },
+        {
+          "path": "tests/fauna-gameplay.spec.ts",
+          "cases": 20,
+          "sourceSha256": "a134f473c4ae03ecb9b7c6f213a865638e722ccb3a4670e2aad2361018ced2a9"
+        },
+        {
+          "path": "tests/fierce-creatures.spec.ts",
+          "cases": 10,
+          "sourceSha256": "c951bdfe3513b8ebf4d749a2b250e0a2220bf9dfe9c25ca1214b40481a2b2e72"
+        },
+        {
+          "path": "tests/food-chain.spec.ts",
+          "cases": 1,
+          "sourceSha256": "9ba36af77333763c6a3c47e8f0cccafd2c427a398fb2dd5ad87654d4db4f8f51"
+        },
+        {
+          "path": "tests/frog-gameplay.spec.ts",
+          "cases": 4,
+          "sourceSha256": "6719c3360150b09e22c74c8536cf6413fa5b6fec8b1277dd2b02ea55f731fd9e"
+        },
+        {
+          "path": "tests/furniture-motion.spec.ts",
+          "cases": 9,
+          "sourceSha256": "e6d944fa96b17bb8ac1cd9610ba83329dc61aec59cece987fc5b548010330c6f"
+        },
+        {
+          "path": "tests/furniture-presentation.spec.ts",
+          "cases": 2,
+          "sourceSha256": "6c6eadf9d95954106c590ad58bc75e380587f80d9c85d7e419f1b604a58713b2"
+        },
+        {
+          "path": "tests/gameplay-interiors.spec.ts",
+          "cases": 2,
+          "sourceSha256": "6eeb743d3adaaf4ca88281fd45d1c64c73a77259faab15be5b8b289f3def793e"
+        },
+        {
+          "path": "tests/gameplay-room-editing.spec.ts",
+          "cases": 1,
+          "sourceSha256": "0b96a81e859e6c28a92dce7c1676b3676f3ce0b518d31fd8c5984c6f9b5a6f54"
+        },
+        {
+          "path": "tests/generated-crossing.spec.ts",
+          "cases": 3,
+          "sourceSha256": "9cca11271bad4458a4028a5408ff2c8b52bfa947f3b7600232201b91d6f13dd4"
+        },
+        {
+          "path": "tests/gpu-renderer.spec.ts",
+          "cases": 19,
+          "sourceSha256": "08245474dd916209cfbe2a7406032e1793bdafd1548c04e8d47fc7887eb385a7"
+        },
+        {
+          "path": "tests/horse-riding.spec.ts",
+          "cases": 2,
+          "sourceSha256": "17cbaac14240ccf2ae641df2e44cb6ac854d347ab3d421256db90b5248f6cddf"
+        },
+        {
+          "path": "tests/hotel-signs.spec.ts",
+          "cases": 4,
+          "sourceSha256": "c0a2a11273c3b0f76462b0516c4746182a0ab3eb82f2a306ec6ab274058d90d0"
+        },
+        {
+          "path": "tests/interior-approved.spec.ts",
+          "cases": 15,
+          "sourceSha256": "09a5e9f877a7b951304e7685e72e33ad2a6c0f3df20555095526384cfc7f5bb7"
+        },
+        {
+          "path": "tests/interior-furniture.spec.ts",
+          "cases": 1,
+          "sourceSha256": "0a79ff2d37b47352ae930692ccb7d67408a8c921b87e87120cb01b55df1cf5f6"
+        },
+        {
+          "path": "tests/interior-review-loading.spec.ts",
+          "cases": 2,
+          "sourceSha256": "25b396d73fa3f4c8e72915c081205ffb84131d59c809429ec49f73e910befbe6"
+        },
+        {
+          "path": "tests/interior-review-rounds.spec.ts",
+          "cases": 10,
+          "sourceSha256": "904f6ac9c8d006826455c8a49a053ec58837bb27a697c2b9ed2a33a6a927bd85"
+        },
+        {
+          "path": "tests/interior-review.spec.ts",
+          "cases": 31,
+          "sourceSha256": "a1ebdd1d24e1569430bf682beedc92b87b44a9b1af2a03caa286429261c1a937"
+        },
+        {
+          "path": "tests/interior-workbench.spec.ts",
+          "cases": 3,
+          "sourceSha256": "3efa2b2065ad697d703681523f8e4750db99e81035844a992147dc5039b103fe"
+        },
+        {
+          "path": "tests/interiors-screenshots.spec.ts",
+          "cases": 3,
+          "sourceSha256": "540329d2bf122cda972dcef80d593a6aaf8b747e55f6f0a627f31329d2e43e84"
+        },
+        {
+          "path": "tests/interiors.spec.ts",
+          "cases": 1,
+          "sourceSha256": "ef6bf3a65788307d4258fdb9e6937d6c642d672b9eec89b94eaa0cf6a207a8db"
+        },
+        {
+          "path": "tests/lived-in-interiors.spec.ts",
+          "cases": 7,
+          "sourceSha256": "9ff7b3d282d16304927366f3ec0e47f827f9df74b97d2834fdaad5983a1225ea"
+        },
+        {
+          "path": "tests/mall-doors.spec.ts",
+          "cases": 2,
+          "sourceSha256": "92ebbaf9abc5cf6d2a661922a207294d8ea59ac8a026c6b44feba2dff68d5fe7"
+        },
+        {
+          "path": "tests/mobile-editor.spec.ts",
+          "cases": 6,
+          "sourceSha256": "b93679eb5f500e1c0d2fa521e2032724e05a9cc57957a483d819f3fc986969e2"
+        },
+        {
+          "path": "tests/mobile-fullscreen.spec.ts",
+          "cases": 4,
+          "sourceSha256": "afd5379135f51ce807aedb84e96b5eb008472dbb7832cb26149c364ff223359a"
+        },
+        {
+          "path": "tests/natural-landscapes.spec.ts",
+          "cases": 8,
+          "sourceSha256": "da5065ea2cef19dca08c22f4773567a6b9e7b611507755905e2638a1f13291d0"
+        },
+        {
+          "path": "tests/original-vehicle.spec.ts",
+          "cases": 2,
+          "sourceSha256": "19e0cd17b3ab9e6bd8ff56def88f29b4b7d3bc03ee9f4020e0f6e24a3d3ff2f9"
+        },
+        {
+          "path": "tests/outdoor-presentation.spec.ts",
+          "cases": 2,
+          "sourceSha256": "35e90298e7ea7be30f865771145faf94fbe58cc02462b0b6e04a995d8dd49ec5"
+        },
+        {
+          "path": "tests/outdoor-workshop.spec.ts",
+          "cases": 5,
+          "sourceSha256": "d507163f5e9faadc5f0217190ab3e5428369b62848a2cf8ba9c9384c791612c5"
+        },
+        {
+          "path": "tests/p2p-menu.spec.ts",
+          "cases": 1,
+          "sourceSha256": "459e7d8917ebefa3af13b2892ecfafbbbc084cf8f66e843d8117fdc2d999488e"
+        },
+        {
+          "path": "tests/p2p-recovery.spec.ts",
+          "cases": 2,
+          "sourceSha256": "f74530092446cc244f449466eec6f3d72ee2a064205a028ac8a9e8e8af9b39fc"
+        },
+        {
+          "path": "tests/parking-lab.spec.ts",
+          "cases": 2,
+          "sourceSha256": "5bd7066512ead47480f0342d5d14881b57eb2bc789748c1a76dad5cb8b8b1dd7"
+        },
+        {
+          "path": "tests/parking-visits.spec.ts",
+          "cases": 4,
+          "sourceSha256": "c02a05f86cdcd26473c579b15fcbb9cf6e2447a481ac05944b1bc6ff75ccbd48"
+        },
+        {
+          "path": "tests/pattern-studio.spec.ts",
+          "cases": 5,
+          "sourceSha256": "8550c06a118cd761d4bc5f3e013ca18ff6327fdd74cc78cf63aa9ff722d7a50d"
+        },
+        {
+          "path": "tests/pinch-zoom.spec.ts",
+          "cases": 5,
+          "sourceSha256": "f1f5374e5e6d2a5a6c42ba6855e9b2a3e32961f6023d1d7be132da5c6f6c566b"
+        },
+        {
+          "path": "tests/pixel-characters.spec.ts",
+          "cases": 14,
+          "sourceSha256": "2fadc5342884f3b7ff26c05a539192d4e5391a0e18fbdc189747e7e0d4ced6b7"
+        },
+        {
+          "path": "tests/play-ideas.spec.ts",
+          "cases": 14,
+          "sourceSha256": "cee6c3f3e32930ca8e4d9007585d9340446fc25b0e5a3f95d496f6eafc254f48"
+        },
+        {
+          "path": "tests/player-dev-reload.spec.ts",
+          "cases": 2,
+          "sourceSha256": "cea6cc5ecfc3a4b3a557c9500b3e697871d269bbf290a9d620b4ba706d80314b"
+        },
+        {
+          "path": "tests/player-markers.spec.ts",
+          "cases": 2,
+          "sourceSha256": "2c6c1a674245b4821274515c999edb12a2cae8766b17ca5d762d4faa4bddb955"
+        },
+        {
+          "path": "tests/predator-gameplay.spec.ts",
+          "cases": 8,
+          "sourceSha256": "fd11109f090b335373b240cf13b232b4c338ae054507ddcc6c9d0647c074f005"
+        },
+        {
+          "path": "tests/predator-origins.spec.ts",
+          "cases": 1,
+          "sourceSha256": "3fa3eb5e90a195357781db4091b66821865712e89e5107b9d8da37df0c09b765"
+        },
+        {
+          "path": "tests/predator-world.spec.ts",
+          "cases": 3,
+          "sourceSha256": "4921d50e656102d4635d4c24843a6bc7ca2c06bc9a3ea4df08637c9e9f882576"
+        },
+        {
+          "path": "tests/prediction-recovery.spec.ts",
+          "cases": 2,
+          "sourceSha256": "79ceb067b5664cd1b2420f679fad18361920971c88a18ed89437c58c098db56b"
+        },
+        {
+          "path": "tests/pwa.spec.ts",
+          "cases": 2,
+          "sourceSha256": "774bf2414fb9530dfaf1ae8c3a126812a7eeefa0d06f4c32316c473dde211c82"
+        },
+        {
+          "path": "tests/rabbit-gameplay.spec.ts",
+          "cases": 3,
+          "sourceSha256": "68f6be9ac64a4791214acd8d0b56518378e503ada7ef9429796e323428f22ce8"
+        },
+        {
+          "path": "tests/racetrack.spec.ts",
+          "cases": 7,
+          "sourceSha256": "6f1e13d032f3d702683f7427a0dca2774a81b5fbe8263a3a08197c3bb2ef7b22"
+        },
+        {
+          "path": "tests/rail-crossing.spec.ts",
+          "cases": 3,
+          "sourceSha256": "4909a0527dd32e15518bec729232bedad36c012abbb8888c9a903e88486b0336"
+        },
+        {
+          "path": "tests/rail-map.spec.ts",
+          "cases": 2,
+          "sourceSha256": "4463e0b10ecb289deadd76180918eb5c0510cc34c4126baed963955313115298"
+        },
+        {
+          "path": "tests/railway-preview.spec.ts",
+          "cases": 4,
+          "sourceSha256": "4becb2513887d3ab5c96b2ea9d9ecce03a1ce3e713cdcadf46c1cdebae0f94e0"
+        },
+        {
+          "path": "tests/railway.spec.ts",
+          "cases": 1,
+          "sourceSha256": "359cf64212df6c69ae444b80f18e7eeb5a425ba40636e6c9db966039ee7886f7"
+        },
+        {
+          "path": "tests/raptors.spec.ts",
+          "cases": 6,
+          "sourceSha256": "5b72bd5fc65f68c2009b47e7ab960294d755092cef7ebc4a1a7911714beb9f5c"
+        },
+        {
+          "path": "tests/remote-world.spec.ts",
+          "cases": 1,
+          "sourceSha256": "ffa530ebd3dbfa90b11650ac1c540f34b8448da339e0f82a51999d5d6b01707f"
+        },
+        {
+          "path": "tests/road-geometry.spec.ts",
+          "cases": 3,
+          "sourceSha256": "c7c7b12a5b95124735cc7cf5273af2bc426775eaf83a6064e14ffb4da183c34d"
+        },
+        {
+          "path": "tests/roadkill.spec.ts",
+          "cases": 2,
+          "sourceSha256": "bd346b6e4e353a59af13d90df54b6b7c1b6217c2185f8b7fb29275434135e735"
+        },
+        {
+          "path": "tests/robin-gameplay.spec.ts",
+          "cases": 4,
+          "sourceSha256": "d9485189fa0250534d493f85f55c834398fad8bed87ea9b89e24baf5ce9b10b9"
+        },
+        {
+          "path": "tests/scenario-lifecycle.spec.ts",
+          "cases": 1,
+          "sourceSha256": "49f947930d1e8f1e8b23fc49c665207b9a5ac02f98a997016037bb63ba41b7c3"
+        },
+        {
+          "path": "tests/scenario-scheduling.spec.ts",
+          "cases": 2,
+          "sourceSha256": "ad466268fd57ce503c71cb8ea9118f722ad6b1cac44a3493074125f6addbcba5"
+        },
+        {
+          "path": "tests/secretary-bird.spec.ts",
+          "cases": 3,
+          "sourceSha256": "ebc9e7d360bde70adc27c3e6ad9c51a4e77d70aa40186e56eb8eb0c45a26279c"
+        },
+        {
+          "path": "tests/server-security.spec.ts",
+          "cases": 2,
+          "sourceSha256": "3583f22320d114641e9ab50a1a911e6ba572eaa9ab1a9d453e12cc6eb49bcedd"
+        },
+        {
+          "path": "tests/settlement-life.spec.ts",
+          "cases": 8,
+          "sourceSha256": "fd15190e6d3860e850df7cdd2765812bf63eb6422444053ee74ed066515de2f9"
+        },
+        {
+          "path": "tests/smoke.spec.ts",
+          "cases": 3,
+          "sourceSha256": "159bbc78ae3d85ee2a5fca8f0b4bfd956b7f2df0ab2e285f3b3f0d3a7ac09c83"
+        },
+        {
+          "path": "tests/source-viewport.spec.ts",
+          "cases": 3,
+          "sourceSha256": "cabc2cef4dc560567e8e59b099e8af0e904a23a63fc3084ab1ff6b96ff09d475"
+        },
+        {
+          "path": "tests/streaming.spec.ts",
+          "cases": 1,
+          "sourceSha256": "d0354d92369a7ad13a2838fc0b071491c4f99a7a1d0c772a9745599f7f958817"
+        },
+        {
+          "path": "tests/street-review.spec.ts",
+          "cases": 5,
+          "sourceSha256": "aa22587f9849ef7d92bd76bdb3d4cb03137d7fcf47436ee557a7ebdafcb708be"
+        },
+        {
+          "path": "tests/surface-review.spec.ts",
+          "cases": 3,
+          "sourceSha256": "59a63d294b4af14957352bb4b17bd8b45878f6a98f9cf8dfde42eb99aa32be69"
+        },
+        {
+          "path": "tests/tap-movement.spec.ts",
+          "cases": 14,
+          "sourceSha256": "183c532d4c0e69cd7979bba71872b3cb1abbce8d446a92e055fcef0a0fe8a024"
+        },
+        {
+          "path": "tests/terrain-pacing.spec.ts",
+          "cases": 2,
+          "sourceSha256": "f78738ad55bcba2804ee33134583687783b2baf160c53aec4483851f5f7bb6b8"
+        },
+        {
+          "path": "tests/three-debug.spec.ts",
+          "cases": 1,
+          "sourceSha256": "934328cc8c1b31b2495886b313a10855cacbfb9c1ff67a3c8db14d9838fb4323"
+        },
+        {
+          "path": "tests/tools-index.spec.ts",
+          "cases": 3,
+          "sourceSha256": "7a5d696ddf2d17d62f2a8a9421ed7be88cbeae5219cbc155e950effa4f680b62"
+        },
+        {
+          "path": "tests/traffic-rendering.spec.ts",
+          "cases": 5,
+          "sourceSha256": "ece6a7f5753860cdd281f092f9c9eaf0b6db6894fe5cffb8cc63a49d34a1b4aa"
+        },
+        {
+          "path": "tests/traffic.spec.ts",
+          "cases": 3,
+          "sourceSha256": "95db619f7673e04c19981e4d0f3aa16771a947e754d8d647f4b94d57c14a3f15"
+        },
+        {
+          "path": "tests/train-audio.spec.ts",
+          "cases": 1,
+          "sourceSha256": "b67e158271d2f5eb8e17ba8159ed7ffacf9e51be5af7ce2d47b8f97fc9104b41"
+        },
+        {
+          "path": "tests/train-call.spec.ts",
+          "cases": 2,
+          "sourceSha256": "8141576b1a62feaa8dd950ff51d7d4d12035af43936d3cec9028ea9104f04d11"
+        },
+        {
+          "path": "tests/train-geometry.spec.ts",
+          "cases": 3,
+          "sourceSha256": "74b9b55e1f5bc2524a78128a6f550be7abcd4091c3eceebb67f7fb8b497aea64"
+        },
+        {
+          "path": "tests/underground-garage.spec.ts",
+          "cases": 3,
+          "sourceSha256": "d89a4f2a4c3776be66a65e7bf5f27e26f8169d8f6482d179baa0a7704b9a2746"
+        },
+        {
+          "path": "tests/vehicle-driving.spec.ts",
+          "cases": 8,
+          "sourceSha256": "71e24459c3365942a3a8935b14289eacff61ad6cb0e4a315ef844c57b1e0e8a2"
+        },
+        {
+          "path": "tests/vehicle-game-fit.spec.ts",
+          "cases": 1,
+          "sourceSha256": "0ed60fbc6afeca9409d7f1fd0602e37fdd74141d950995d99f3d3f8093b9019e"
+        },
+        {
+          "path": "tests/vehicle-geometry.spec.ts",
+          "cases": 4,
+          "sourceSha256": "fd86181f6001eff3463e05a2ff663ad764c64c99bdc3f97d6017ff692d497085"
+        },
+        {
+          "path": "tests/vehicle-paint-gameplay.spec.ts",
+          "cases": 13,
+          "sourceSha256": "c852ac6b2ab8f3695badbfa22cfa51f4de855921ec8795cb753ff4671e696e2f"
+        },
+        {
+          "path": "tests/vehicle-paint-study.spec.ts",
+          "cases": 2,
+          "sourceSha256": "8854b06fb339acbf50e251975d16c6cf6228382ffba60b8fb850e5904b9cf4a8"
+        },
+        {
+          "path": "tests/vehicle-placement.spec.ts",
+          "cases": 4,
+          "sourceSha256": "b1ca377c3de16947f5dc73b08f83def224a2973f420e964df5a98398e669f6f9"
+        },
+        {
+          "path": "tests/vehicle-rendering.spec.ts",
+          "cases": 2,
+          "sourceSha256": "44507702015df8408a95550b4303c83669edb356b17a61aafe5c04516cf0533a"
+        },
+        {
+          "path": "tests/vehicle-steering.spec.ts",
+          "cases": 6,
+          "sourceSha256": "23fa714999a7b30aa61ecd2d315e830f45d5a9134c101bcd320062af83a77ff9"
+        },
+        {
+          "path": "tests/vehicle-workshop.spec.ts",
+          "cases": 3,
+          "sourceSha256": "043c219cb88729c1330b763877f500b273ec07f23cad2c9d28625ffa554a3d26"
+        },
+        {
+          "path": "tests/warning-beacon-driving.spec.ts",
+          "cases": 4,
+          "sourceSha256": "693344a580f11e862d607fa28fa92b1f9e506789ae1e88666ad294deba8d1659"
+        },
+        {
+          "path": "tests/webrtc-delivery.spec.ts",
+          "cases": 2,
+          "sourceSha256": "b423704edb3888342bc446136b5c6214a59ac4579eb4c45a6ba57f893a52fe54"
+        },
+        {
+          "path": "tests/wildlife-gameplay.spec.ts",
+          "cases": 6,
+          "sourceSha256": "a696527f7320b3570241c510c05d628adea5416f699fce9b2a34a5803bcc344e"
+        },
+        {
+          "path": "tests/wildlife-review.spec.ts",
+          "cases": 4,
+          "sourceSha256": "77f713eebb03324625bba03c70279c7680bb88590d014bd2b9a943c0c5ca4821"
+        },
+        {
+          "path": "tests/worker-server.spec.ts",
+          "cases": 5,
+          "sourceSha256": "25cded4539834223a60c79254cddd292dd769eec5e09a56711f818236727868b"
+        },
+        {
+          "path": "tests/workshop-dev-review.spec.ts",
+          "cases": 2,
+          "sourceSha256": "e60828548b81567d9b3c25e820658d30c2a0639ef86cb82270d2c63382715054"
+        },
+        {
+          "path": "tests/workshop-rendering.spec.ts",
+          "cases": 1,
+          "sourceSha256": "5eace9af31cfb80dd8dc99c13dbe9bd05f5d79700271040ced20586dbfdad40f"
+        },
+        {
+          "path": "tests/workshop-standalone.spec.ts",
+          "cases": 1,
+          "sourceSha256": "233aa00c82671743549514b4715a3ad6768fb8dc4ae827e75a1316c52faa3f9a"
+        },
+        {
+          "path": "tests/workshop-viewport.spec.ts",
+          "cases": 2,
+          "sourceSha256": "24ff769c274839d10dac11f077116d06a1240e196bd0c11adb3d1d7685556089"
+        },
+        {
+          "path": "tests/workshop.spec.ts",
+          "cases": 7,
+          "sourceSha256": "fad3922a1fcf03c55a080cee6646a448604a63dfd3adbc2b579faba436a7ce8f"
+        },
+        {
+          "path": "tests/world-explorer.spec.ts",
+          "cases": 8,
+          "sourceSha256": "953c2b6156d5f27d4f3d6845804cf91d55fc2e92ca5174f99a6616832638371e"
+        },
+        {
+          "path": "tests/world-generation.spec.ts",
+          "cases": 5,
+          "sourceSha256": "32719c4bc35e927cd9fc6ba147a6a939c3cda4ff50ad76ea5125332465299f1d"
+        },
+        {
+          "path": "tests/world-geometry.spec.ts",
+          "cases": 5,
+          "sourceSha256": "95de9fe99ec223b5c03c5dc63b1327431a23d1d0ed59cb157864069c215cebed"
+        },
+        {
+          "path": "tests/world-map.spec.ts",
+          "cases": 5,
+          "sourceSha256": "8a188c175a3fe937e83974ea0a8d5105bb4d793246d05e7419bfc17a87b8f1d5"
+        },
+        {
+          "path": "tests/world-recreation.spec.ts",
+          "cases": 1,
+          "sourceSha256": "34ca6ec4b86cb4d6648354fd1a496cd44999e9879f41478de2b1e0e97723b503"
+        }
+      ]
+    },
+    {
+      "name": "node-comparator",
+      "cases": 1,
+      "inventorySha256": "19188f45c6360e950079168693245b8b0d88fb679f50df1fd8e0b7f65efda318",
+      "files": [
+        {
+          "path": "tests-node/visual-comparison.spec.ts",
+          "cases": 1,
+          "sourceSha256": "167ca7b2ccc005b459c86e413d438bb48e0ac6b1b4b2083e9b9cc1acd1caf6c6"
+        }
+      ]
+    },
+    {
+      "name": "http-ws",
+      "cases": 3,
+      "inventorySha256": "e54b42a32d014f25232f2666b1401c356e9c329bf8cf3ce6c1e91afe2b71d025",
+      "files": [
+        {
+          "path": "tests-http/standalone.spec.ts",
+          "cases": 3,
+          "sourceSha256": "c6debbde056c172c781d52f3db38d1dd30f2f4bdc24eda333d3960330698f7b7"
+        }
+      ]
+    },
+    {
+      "name": "capture",
+      "cases": 6,
+      "inventorySha256": "680ad5da6c801db7b13063f36d6bd00bada7a14e7ba43b9ed3a35c2e2745c092",
+      "files": [
+        {
+          "path": "captures/editor.spec.ts",
+          "cases": 2,
+          "sourceSha256": "49fc9c7b6021cd78fadfa4994063905f2feeb241aa2088ac8948d0aafe765b6b"
+        },
+        {
+          "path": "captures/interiors.spec.ts",
+          "cases": 2,
+          "sourceSha256": "7fbe1bf9d88cccd49fab81714f5ac88550f3e583ee2e56472ccd892a20a30e11"
+        },
+        {
+          "path": "captures/screenshot.spec.ts",
+          "cases": 2,
+          "sourceSha256": "fa25330617f73b37e854698cfef85fc28e79eb29bdb8a3593b534359c1b208e5"
+        }
+      ]
+    }
+  ]
+}
