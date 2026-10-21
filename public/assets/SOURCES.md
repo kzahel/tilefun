@@ -117,3 +117,9 @@ geometry and semantic UV paint. Separate bed/tailgate hinges and extending ram
 poses use a new retained [source bundle](../../art-source/vehicle-bake/dump-truck/v2/).
 The original v1 GLB, source and sprite fallback remain immutable. V2 carries no
 new human art approval; see tactical 167 for gameplay and verification evidence.
+
+Working tow-truck v2 adds original atlas-painted lift geometry to the retained
+v1 body, UVs and wheels. Packed source and recipe: `art-source/vehicle-bake/tow-truck/v2/`.
+Towing fallback banks are actual game-projection captures of the same retained
+models and their existing paint atlases; source snapshots and exact replay:
+`art-source/vehicle-bake/towing-fallbacks/v2/`. No new external artwork.

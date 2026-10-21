@@ -1,0 +1,195 @@
+{
+  "schema": "tilefun-wheel-lift-towing-v1",
+  "date": "2026-10-21",
+  "status": "implemented-validated-awaiting-owner-appearance-inspection",
+  "model": {
+    "path": "public/assets/models/vehicles/tow-truck-v2.glb",
+    "sha256": "cf77b72b33eb76c7303f88641d5682e379485359dcaac0f113672069a32ae180",
+    "bytes": 236536,
+    "triangles": 3466,
+    "meshes": 7,
+    "materials": 1,
+    "images": 1
+  },
+  "qualification": {
+    "loadModels": 26,
+    "paintCombinations": 40,
+    "frontLiftWorldPx": 12,
+    "maximumArticulationDegrees": 70,
+    "humanAppearanceApproval": "pending",
+    "cruiseSpeed": 64,
+    "boostSpeed": 102.4,
+    "reverseSpeed": 32
+  },
+  "sourceReplay": {
+    "stagedConstruction": {
+      "model.glb": {
+        "sha256": "cf77b72b33eb76c7303f88641d5682e379485359dcaac0f113672069a32ae180",
+        "bytes": 236536,
+        "exact": true
+      },
+      "atlas.png": {
+        "sha256": "40889caa55d3cda45a23eefe1460ae4767368f4f5fdbc7edbc52cd533a0f85f2",
+        "bytes": 3483,
+        "exact": true
+      }
+    },
+    "captureReplay": "exact PNG and frames from 68 declared inputs, including 27 frozen mutable source snapshots",
+    "captureBank": "art-source/vehicle-bake/towing-fallbacks/v2/recipe.json",
+    "paddingCorrection": "224px truck frames; unpublished 192px v1 remains ignored; all native frame edges clear"
+  },
+  "validation": {
+    "typecheck": "all three targets passed",
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 121,
+      "existingInfos": 42
+    },
+    "build": "passed final metadata build 13.10s",
+    "fullNative": {
+      "cases": 6552,
+      "passed": 6530,
+      "failed": 12,
+      "skipped": 10,
+      "seconds": 612.02,
+      "log": "data/vehicle-bake/towing-unit-all.log",
+      "notes": [
+        "Five existing Windows symlink/process-death failures; static-file symlink setup/cleanup errors.",
+        "Seven short-deadline timeouts under concurrent native and manifest workload; all pass unchanged serial rerun."
+      ],
+      "epoch": "before final frame-padding correction; final rendering/native subset and metadata guard suites also pass"
+    },
+    "serialRerun": {
+      "files": 4,
+      "passed": 311,
+      "seconds": 203.9,
+      "log": "data/vehicle-bake/towing-timeout-rerun.log"
+    },
+    "nodeComparator": {
+      "passed": 1,
+      "seconds": 0.403
+    },
+    "focusedBrowser": {
+      "passed": 6,
+      "seconds": 43.1,
+      "log": "data/vehicle-bake/towing-browser-complete.log",
+      "scope": "Tow GPU and failed GLB, coupled Worker, existing dump bed, strict standalone review and unchanged GPU pinch-menu rerun"
+    },
+    "fullBrowser": {
+      "state": "all-cases-covered-one-timeout-passes-unchanged-serial-rerun",
+      "uniqueCases": 829,
+      "completedPrefix": 266,
+      "remainingPassed": 562,
+      "remainingFailed": 1,
+      "remainingMinutes": 25.2,
+      "firstLog": "data/vehicle-bake/towing-browser-final-all.log",
+      "secondLog": "data/vehicle-bake/towing-browser-remaining.log",
+      "partitionReceipt": "data/vehicle-bake/towing-browser-partitions.json",
+      "finalRerun": {
+        "passed": 6,
+        "seconds": 43.1,
+        "log": "data/vehicle-bake/towing-browser-complete.log"
+      },
+      "epoch": "Final v2 gameplay; source-freshness metadata addition qualified afterward by final build and six focused cases.",
+      "failure": "Existing GPU pinch-menu options timeout under two workers; unchanged test passes serially."
+    },
+    "streaming": {
+      "state": "passed",
+      "report": "data/3d-investigation/towing-streaming/report.json",
+      "scope": "ordinary GPU-mesh world readiness, not occupied pair/mobile frame budget"
+    },
+    "catalog": {
+      "sheets": 706,
+      "sourceUses": 1396
+    },
+    "workshop": {
+      "verifiedCandidates": 1932,
+      "excluded": 135
+    },
+    "finalNativeSubset": {
+      "files": 4,
+      "passed": 220,
+      "seconds": 3.94,
+      "log": "data/vehicle-bake/towing-padding-native-final.log",
+      "scope": "Final v2 frame bounds, exact runtime copy hashes, coupled physics/prediction/codec and scene collection"
+    },
+    "finalMetadataNative": {
+      "files": 3,
+      "passed": 24,
+      "seconds": 12.46,
+      "log": "data/vehicle-bake/towing-guard-native.log"
+    }
+  },
+  "capture": {
+    "gallery": "data/3d-investigation/towing-ready/index.html",
+    "desktop": "data/3d-investigation/towing-ready/main-game.png",
+    "phone": "data/3d-investigation/towing-ready/mobile-game.png",
+    "pageErrors": [],
+    "sourceHashes": {
+      "art-source/vehicle-bake/roster.json": "6787ae4279090c6ea291014418ed144d9c973a0731d8a2e4d7c038a0720074e6",
+      "biome.json": "d41801260879449e4a21918cd6641ccb178c5f23e1ad486516efa4899a7b24be",
+      "public/assets/models/vehicles/tow-truck-v2.glb": "cf77b72b33eb76c7303f88641d5682e379485359dcaac0f113672069a32ae180",
+      "public/assets/vehicles/towing-cars-v2.png": "1c664e892b28667dbb360a62675fb8445b3ebaf9ae2e356eb96b9068972875de",
+      "public/assets/vehicles/towing-truck-v2.png": "0ab1425c92d9259a3ee73848607d82295085b0e7cfdcc6f44a94c624c112e4e2",
+      "scripts/instrumentation/towing-game.ts": "784b341782f56fecd5aa8e1c55af75a432a0bc27203132f69a8508e5cb348550",
+      "scripts/instrumentation/towing.ts": "c761257021763dcb74123379da0a1a94f0f9be8882a83548836fa104df58494d",
+      "scripts/vehicle-bake/TowingFallbackCapture.ts": "aaba869367674ec08408ec579941fcf7bd2bce999f39c7f2f810f0e5b4bc7f66",
+      "scripts/vehicle-bake/capture-towing-fallbacks.mjs": "881d8351fa319cffbfb12e2e3325983e81af3e5df4a4500fb73ccc7a2df0f83b",
+      "scripts/vehicle-bake/replay-towing-fallbacks.mjs": "1d69fcee0a0973ca0853486a126c00e23318ace6f461fee6440a8247fc311aa9",
+      "scripts/vehicle-bake/towing-profiles.ts": "a5dc00b28845f81aa94fe7048336338b9bb868a60e3386472a1bf846f1a437b5",
+      "src/assets/GameAssets.ts": "ace2f0885a7c997348bf0bc232aede7f9ee12992e64daf80cb7f451865f0b099",
+      "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+      "src/entities/Entity.ts": "0824d3298490b8bc334eac78aa22b8176da7adddd5181b6bd2486978e3d2aecf",
+      "src/rendering/AuthoredVehicleMeshes.test.ts": "66d256e348c4d7a18bc07f1f7fdd91ef28b4d385eb5fbfad9ab4f04d8028db5f",
+      "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+      "src/rendering/Canvas2DRenderer.ts": "c24fc06fe4009f9a94d83c56468a8ff8504557b147d7a8146b2e296a24891353",
+      "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+      "src/rendering/EntityMeshPose.ts": "1baefce40620ee4d145e09cc2addd3d2d0d960b962e75e48dba70e9eec90217b",
+      "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+      "src/rendering/MeshPresentation.ts": "503449a377fd29f5247d46d3388352f464fa87d6bfac44cb219a6de7a9774313",
+      "src/rendering/SceneItem.ts": "ba24cc835a23f77a9ffb2e6ad617affd7e162074dc585abe4a93d22a24bddb60",
+      "src/rendering/TowingFallback.ts": "b45a7f7e95ed668ed1119e11364afd6f01107467a6fec7a37662b0c7cdc8dcc5",
+      "src/rendering/TowingRig.test.ts": "596b559c164bdd2cf4ad0d00ecfbf6b936dd88aea2437fa0e86d0a49d76cb0d3",
+      "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+      "src/rendering/towing-fallbacks.json": "05ad1bef47193a3db3618af059b2b00b8bd680bef358ccdd245e6bbf75740e28",
+      "src/scenarios/ScenarioPresentationHost.ts": "80334d0e6e3b9ef0d6d1b9c7187eda26296dad495d024e1aabae5b699c6675ce",
+      "src/scenarios/ScenarioProtocol.ts": "db64104b87a30f99fd6d5cb06f91b913ed3d02aca5179e942b95fec57d244211",
+      "src/scenarios/ScenarioSession.ts": "9ed593671c3dc7929d0888f255f243284ff8b7c6e2bf4e8811d82f84cdaf22eb",
+      "src/scenarios/Towing.test.ts": "85ea74bed628b04393371c07c8d37b857c1f11fabfaa8ce46c9a1d455f141e89",
+      "src/scenarios/TowingRecipe.ts": "f79f70b2f1ccf8722fe08a9c85cbf4459bdee6122f7b44ee4df4dee45fb7cfcc",
+      "src/server/GameServer.ts": "9c5cc0e558c3079d115c1c809b10afd78da8118d86cbb1cb4dbe4d5893e99240",
+      "src/server/TowControl.ts": "df7ea59e7c5305382f2cc9dcf9d933dabf2c949cd81a243b016e3963d3b12b3e",
+      "src/server/VehicleControl.ts": "8b337cf1370faf7dfb214f417351c83ee576be59f0e8430ff15b0f2cdf4d6f7d",
+      "src/server/workshopManifest.ts": "ec2551ff871c3ff5718f5841df95c2d6e8d6726c865667817f92edfad274673e",
+      "src/shared/binaryCodec.test.ts": "9ca8ccaa314820251a9393d53c69d21b253c69e3fd4cc6b7269d59c9f04f2c2d",
+      "src/shared/binaryCodec.ts": "63cb7f0e2018c9f1d5ad84b51a1f430c259211239208f6216a0c3047fdd1bf30",
+      "src/shared/entityDelta.ts": "36f4c890a7c39903b6f82cd4dd4883484c961ea59424e0e9b639836bd8f39da9",
+      "src/shared/protocol.ts": "b8f8c73ca65119dacf220dd3bd43c250724a6ebbcfa0aeefceafea9c86d6eef0",
+      "src/shared/requests.ts": "2c97eb7284fa8ac4523b0e47965e57a986925356411eea189fcc1fd020e02e25",
+      "src/shared/serialization.ts": "fbd80dc3fc068fb3a50e4895d8aca825bab54db9b8ddb61bb9f0217976e83be1",
+      "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+      "src/traffic/OriginalVehicles.test.ts": "f77a54cb0b714128f9bb82a3767ea09e49cafbea3904b227f9127caab64db199",
+      "src/traffic/Towing.ts": "ed23efa9512a0fd821a152cecd5a71334e13769d3303ebd0dadaf7742074dfa5",
+      "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+      "src/traffic/Vehicle.ts": "ae1b6e56088344b2d0300383b0144586751908f44bf97c56aec77568e38399a1",
+      "src/traffic/VehicleContact.ts": "aab95e90f8ed1b247c48844a5d74eedd88564c3c589ac4a329aeb8d87152b57e",
+      "src/traffic/towing-profiles.json": "124fa55bcf5749fdf2b50a9eda7f2a4cc0f0c60113a3c83a2d2e1a229cd685bd",
+      "src/ui/VehicleControl.ts": "3a16544bd20fa108c9c9aef62a800e26abb2cf87eaf2422af0558e3abf3ace7a",
+      "src/workshop/ToolRegistry.ts": "102ac78111ec44d94423708f959ca30e9b68825ccc53f72ca15a64d96395f05f",
+      "src/workshop/TowingCandidate.ts": "09b141285f4168de3ec3eac5f157c63d72d5669e9acc6eb2857b9e91e2339540",
+      "src/workshop/TowingPage.tsx": "7c4aa7e7e16c2962894b52c48ea5a4cc068c9d44a010b660512aaae0a339d683",
+      "src/workshop/WorldGeometryPage.tsx": "ceb35c8a8c464f99108dff6557751a63a4490c66b8ae2c6fe8b7df29a2cc22dd",
+      "src/workshop/build-manifest.ts": "f9daef61b1f98839aedd493bccd8b14b9d327ed60b45d2a9462135d6b2391dae",
+      "tests/authored-vehicle-gameplay.spec.ts": "8d9712643f2ff3bfc799b5012598edd24801e0f1a4eb8a47bb3ee9045176e8af",
+      "tests/towing.spec.ts": "a2bb5dfca4abc0353048d3891dabb62331c2bb3af1559c3a136aa01bc7cead33"
+    }
+  },
+  "limits": [
+    "Single front-first parked passenger load; no occupied/heavy loads or chains.",
+    "Controlled flat-ground following, not general rigid-body/suspension physics.",
+    "Conservative target body/roof; thin lift has no player support.",
+    "Coupled local depth retains whole-group external-prop ordering limits.",
+    "Cardinal sprites use static rear wheel phase and quantized articulation.",
+    "No mobile frame budget claimed."
+  ]
+}

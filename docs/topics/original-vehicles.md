@@ -4,6 +4,12 @@ Topic: original-vehicles
 Status: 33 road originals integrated and published; Linux CI passed. Windows full result and corrected touch-readiness reruns are recorded separately; motorcycles remain rider prototypes.
 Updated: 2026-10-20.
 
+Owner follow-on [169](../tactical/169-wheel-lift-towing.md) delivers working towing
+with a retained tow-truck v2. Its original v1 body/UVs and four wheel rigs stay
+exact; two new rigid groups telescope the lift. Active registration, controls,
+coupled driving, saves/replicas and captured fallbacks are shared with the game.
+V1 receipts remain frozen; fleet counts are unchanged. New poses await inspection.
+
 The owner's follow-on machinery authorization now extends the existing dump truck
 in [167](../tactical/167-tipping-dump-bed.md). V2 retains its exact rest component
 vertices/UV paint and 3,720 triangles while introducing tub/tailgate hinges and

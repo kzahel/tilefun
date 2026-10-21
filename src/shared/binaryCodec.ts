@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x07 = FrameMessage (u16 entity types, vehicle paint, opt-in bed geometry) (server→client)
+ *   0x08 = FrameMessage (u16 entity types, vehicle paint, opt-in bed geometry) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x80 = player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -26,7 +26,8 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x07;
+const TAG_FRAME = 0x08;
+const TAG_PRE_TOW_FRAME = 0x07;
 const TAG_PRE_TIPPING_FRAME = 0x06;
 const TAG_PRE_BED_FRAME = 0x05;
 const TAG_PRE_PAINT_FRAME = 0x04;
@@ -84,6 +85,7 @@ export function decodeServerMessage(buf: ArrayBuffer): ServerMessage {
     tag === TAG_LEGACY_FRAME ||
     tag === TAG_PRE_PAINT_FRAME ||
     tag === TAG_PRE_BED_FRAME ||
+    tag === TAG_PRE_TOW_FRAME ||
     tag === TAG_PRE_TIPPING_FRAME
   )
     throw new Error("Legacy entity frame: matching updated client and server builds are required");
@@ -126,8 +128,8 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
 // Fixed header, velocity, full sprite/AI, booleans, eleven 32-bit fields and lights.
-const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 13 * 4 + 2;
-const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 13 * 4 + 2;
+const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 15 * 4 + 2;
+const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 15 * 4 + 2;
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -284,6 +286,8 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.vehicleBed) mask |= 1 << BIT_VEHICLE_BED;
   if (snap.vehicleBedTilt !== undefined) mask |= 1 << 19;
   if (snap.vehicleBedTarget !== undefined) mask |= 1 << 20;
+  if (snap.towTargetId !== undefined) mask |= 1 << 21;
+  if (snap.towedBy !== undefined) mask |= 1 << 22;
   view.setUint32(off, mask, true);
   off += 4;
 
@@ -362,6 +366,11 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   for (const key of ["vehicleBedTilt", "vehicleBedTarget"] as const)
     if (snap[key] !== undefined) {
       view.setFloat32(off, snap[key], true);
+      off += 4;
+    }
+  for (const key of ["towTargetId", "towedBy"] as const)
+    if (snap[key] !== undefined) {
+      view.setUint32(off, snap[key], true);
       off += 4;
     }
   return off;
@@ -476,6 +485,14 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
   ] as const)
     if (mask & (1 << bit)) {
       snap[key] = view.getFloat32(off, true);
+      off += 4;
+    }
+  for (const [key, bit] of [
+    ["towTargetId", 21],
+    ["towedBy", 22],
+  ] as const)
+    if (mask & (1 << bit)) {
+      snap[key] = view.getUint32(off, true);
       off += 4;
     }
   return [snap, off];
@@ -595,6 +612,8 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   for (const [key, bit] of [
     ["vehicleBedTilt", 20],
     ["vehicleBedTarget", 21],
+    ["towTargetId", 22],
+    ["towedBy", 23],
   ] as const)
     if (delta[key] !== undefined) {
       changeMask |= 1 << bit;
@@ -692,9 +711,13 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   for (const [key, bit] of [
     ["vehicleBedTilt", 20],
     ["vehicleBedTarget", 21],
+    ["towTargetId", 22],
+    ["towedBy", 23],
   ] as const)
     if (changeMask & (1 << bit) && !(nullMask & (1 << bit))) {
-      view.setFloat32(off, delta[key] as number, true);
+      if (key === "towTargetId" || key === "towedBy")
+        view.setUint32(off, delta[key] as number, true);
+      else view.setFloat32(off, delta[key] as number, true);
       off += 4;
     }
   return off;
@@ -880,11 +903,16 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
   for (const [key, bit] of [
     ["vehicleBedTilt", 20],
     ["vehicleBedTarget", 21],
+    ["towTargetId", 22],
+    ["towedBy", 23],
   ] as const)
     if (changeMask & (1 << bit)) {
       if (nullMask & (1 << bit)) delta[key] = null;
       else {
-        delta[key] = view.getFloat32(off, true);
+        delta[key] =
+          key === "towTargetId" || key === "towedBy"
+            ? view.getUint32(off, true)
+            : view.getFloat32(off, true);
         off += 4;
       }
     }

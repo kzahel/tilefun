@@ -111,6 +111,20 @@ export class GpuMeshBodies {
       return false; // Complete matching sprite while pending/failed.
     }
     if (item.bedGroup && !this.contents.prepare(item, sheets)) return false;
+    const child = item.towGroup,
+      childAsset = child?.mesh ? this.request(child.mesh.assetId)?.value : undefined;
+    const childDefinition = child?.mesh && authoredVehicleForAsset(child.mesh.assetId);
+    const childPaint =
+      childDefinition && vehiclePaint(childDefinition.vehicle, child?.mesh?.paintSchemeId);
+    const childTexture = childPaint && this.paints.request(childPaint);
+    if (
+      child &&
+      (!child.mesh ||
+        !childAsset ||
+        !this.ready.has(child.mesh.assetId) ||
+        (childPaint && !childTexture))
+    )
+      return false;
     const { surface } = this,
       renderer = surface.renderer;
     surface.flush();
@@ -124,16 +138,53 @@ export class GpuMeshBodies {
         Math.abs(bottom - content.spriteHeight * (content.scaleY ?? 1)),
       );
     }
+    if (child?.mesh)
+      radius = Math.max(
+        radius,
+        Math.abs(child.wx - item.wx) + child.mesh.radius,
+        Math.abs(child.wy - item.wy - child.zOffset + item.zOffset) + child.mesh.radius,
+      );
     radius = Math.ceil(radius);
     const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2)));
     if (this.target.width !== resolution || this.target.height !== resolution)
       this.target.setSize(resolution, resolution);
     const object = asset.object;
     object.quaternion.set(...item.mesh.orientation);
-    asset.setTravel(item.mesh.wheelTravel ?? 0);
+    const yaw = 2 * Math.atan2(item.mesh.orientation[2], item.mesh.orientation[3]);
+    if (item.mesh.towPitch)
+      object.quaternion.multiply(
+        new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -item.mesh.towPitch),
+      );
+    object.position.set(
+      (item.mesh.towOffsetX ?? 0) * Math.cos(yaw),
+      (item.mesh.towOffsetX ?? 0) * Math.sin(yaw),
+      item.mesh.towOffsetZ ?? 0,
+    );
+    asset.setTowLift(item.mesh.towActive ?? false);
+    asset.setTravel(item.mesh.wheelTravel ?? 0, !!item.mesh.towPitch);
     asset.setDumpBed(item.mesh.bedTilt ?? 0, item.mesh.bedGateAngle ?? 0);
     asset.setEmergency(item.mesh.emergencyEnabled ?? false, item.mesh.presentationTime ?? 0);
     this.scene.add(object);
+    if (child?.mesh && childAsset) {
+      const mesh = child.mesh,
+        o = childAsset.object,
+        yaw = 2 * Math.atan2(mesh.orientation[2], mesh.orientation[3]);
+      o.quaternion.set(...mesh.orientation);
+      if (mesh.towPitch)
+        o.quaternion.multiply(
+          new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -mesh.towPitch),
+        );
+      o.position.set(
+        child.wx - item.wx + (mesh.towOffsetX ?? 0) * Math.cos(yaw),
+        child.wy - item.wy + (mesh.towOffsetX ?? 0) * Math.sin(yaw),
+        child.zOffset - item.zOffset + (mesh.towOffsetZ ?? 0),
+      );
+      childAsset.setTravel(mesh.wheelTravel ?? 0, !!mesh.towPitch);
+      childAsset.setTowLift(false);
+      childAsset.setDumpBed(0, 0);
+      childAsset.setEmergency(mesh.emergencyEnabled ?? false, mesh.presentationTime ?? 0);
+      this.scene.add(o);
+    }
     if (item.bedGroup) this.scene.add(this.contents.group);
     setCarMeshProjection(this.camera.projectionMatrix, radius);
     this.camera.projectionMatrixInverse.copy(this.camera.projectionMatrix).invert();
@@ -143,6 +194,8 @@ export class GpuMeshBodies {
     let texture = this.target.texture;
     renderer.setScissorTest(false);
     const restorePaint = paintTexture ? this.paints.bind(object, paintTexture) : undefined;
+    const restoreChildPaint =
+      childTexture && childAsset ? this.paints.bind(childAsset.object, childTexture) : undefined;
     try {
       renderer.setRenderTarget(this.target);
       renderer.setClearColor(0, 0);
@@ -153,6 +206,8 @@ export class GpuMeshBodies {
       this.drawCalls += renderer.info.render.calls;
     } finally {
       restorePaint?.();
+      restoreChildPaint?.();
+      if (childAsset) this.scene.remove(childAsset.object);
       renderer.setRenderTarget(previous);
       renderer.setClearColor(this.clearColor, alpha);
       this.scene.remove(object);

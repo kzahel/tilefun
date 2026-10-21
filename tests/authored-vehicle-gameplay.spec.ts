@@ -281,7 +281,13 @@ for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
               modelPath: "assets/models/vehicles/dump-truck-v2.glb",
               meshCount: 11,
             }
-          : family;
+          : family.model === "tow-truck"
+            ? {
+                assetId: "tow-truck-authored-v2",
+                modelPath: "assets/models/vehicles/tow-truck-v2.glb",
+                meshCount: 7,
+              }
+            : family;
       const errors: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
       if (failed) await page.route(`**/${runtime.modelPath}`, (route) => route.abort());

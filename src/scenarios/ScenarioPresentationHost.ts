@@ -139,9 +139,15 @@ export class ScenarioPresentationHost {
             ? { kind: "enter-vehicle", entityId: request.entityId }
             : request.type === "call-train"
               ? { kind: "call-train", benchId: request.benchId }
-              : request.type === "vehicle-bed-action"
-                ? { kind: "vehicle-bed-action", entityId: request.entityId, action: request.action }
-                : { kind: "exit-vehicle" },
+              : request.type === "vehicle-tow-action"
+                ? { kind: "vehicle-tow-action", entityId: request.entityId, action: request.action }
+                : request.type === "vehicle-bed-action"
+                  ? {
+                      kind: "vehicle-bed-action",
+                      entityId: request.entityId,
+                      action: request.action,
+                    }
+                  : { kind: "exit-vehicle" },
         ),
       );
       this.vehicleControl.root.style.position = "absolute";

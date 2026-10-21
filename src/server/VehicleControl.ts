@@ -16,16 +16,21 @@ import {
   isWarningVehicle,
   nextVehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import type { TowAction } from "../traffic/Towing.js";
 import type { VehicleBedAction } from "../traffic/VehicleCargo.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { safeArrival } from "./SafeArrival.js";
+import { controlTow } from "./TowControl.js";
 import { controlVehicleBed } from "./VehicleBedControl.js";
 
 /** Inside seats use ordinary replicated parenting/mount identity. Roof riders are independent. */
 export class VehicleControl {
+  tow(session: PlayerSession, id: number, action: TowAction): void {
+    controlTow(this.realm, session, id, action);
+  }
   bed(session: PlayerSession, id: number, action: VehicleBedAction): void {
     controlVehicleBed(this.realm, session, id, action);
   }
@@ -75,7 +80,7 @@ export class VehicleControl {
   }
   available(id: number): boolean {
     const car = this.realm.traffic?.states.get(id);
-    if (car) return car.driverId === undefined && !car.shopping;
+    if (car) return car.driverId === undefined && !car.shopping && car.entity.towedBy === undefined;
     const train = [...(this.realm.railway?.services.values() ?? [])].find((s) =>
       s.carriages.some((c) => c.id === id),
     );
@@ -100,7 +105,8 @@ export class VehicleControl {
   enter(session: PlayerSession, id: number, restore = false): void {
     const r = this.realm,
       vehicle = r.entityManager.byId.get(id);
-    if (!vehicle || !isDrivable(vehicle) || !vehicle.collider) throw Error("Vehicle unavailable.");
+    if (!vehicle || !isDrivable(vehicle) || !vehicle.collider || vehicle.towedBy !== undefined)
+      throw Error("Vehicle unavailable.");
     const car = r.traffic?.states.get(id);
     const train = [...(r.railway?.services.values() ?? [])].find((s) =>
       s.carriages.includes(vehicle),

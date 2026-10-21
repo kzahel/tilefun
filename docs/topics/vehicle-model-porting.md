@@ -6,6 +6,10 @@ engine integrations (49 exact retained revisions). Production model art review
 remains open; runtime keeps steering neutral and equipment at its authored rest pose.
 Updated: 2026-10-12.
 
+Working original tow-truck equipment in [169](../tactical/169-wheel-lift-towing.md)
+is separate from the 45-source port queue. Active v2 adds a wheel lift while v1
+source, UVs, body and review receipts stay exact. Fleet counts are unchanged.
+
 The original dump truck's articulated v2 equipment extension in
 [167](../tactical/167-tipping-dump-bed.md) is separate from this 45-source port
 queue. It changes no source-port count or frozen sprite/model revision here.

@@ -1,5 +1,12 @@
 # Testing
 
+[169](../tactical/169-wheel-lift-towing.md) adds one distinct Worker/browser towing
+boundary for shared controls, save/reload, coupled depth and backend/failed-model
+fallback. Native tests own axle/contact qualification across 26 models, actor
+ownership, blocked pair movement, chunk arrival order, prediction parity and
+nullable uint32 links. The normal game capture also exercises editor entries,
+actual GameServer requests, driving, reopening a world and phone release.
+
 Topic: testing
 
 Status: browser-suite migration implemented and locally validated, 2026-10-20.

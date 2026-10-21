@@ -4,6 +4,15 @@ Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
 Updated: 2026-10-20.
 
+[169](../tactical/169-wheel-lift-towing.md) adds working wheel-lift towing to the
+existing tow truck. Back up to an unoccupied parked passenger car, Attach car,
+drive/reverse the articulated pair, stop and Release car. Both bodies share
+authority/prediction contact checks; durable partner identities survive reload
+and either chunk arrival order. Game/editor/traffic and the Worker playground
+share controls, actual lift geometry and coupled GPU depth. Twenty-six measured
+four-wheel models and their existing paints qualify. The [towing workflow](../vehicle-towing.md)
+owns operation, authoring and limits.
+
 [167](../tactical/167-tipping-dump-bed.md) adds the articulated v2 dump model,
 normal Tip bed / Lower bed controls, automatic tailgate, extending rams, shared
 inclined collision/support and actual loose cargo/rider discharge. Nearby stopped

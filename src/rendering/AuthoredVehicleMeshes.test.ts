@@ -28,6 +28,13 @@ it("registers every source type exactly once and consumes its latest retained ex
       expect(definition).toEqual({
         vehicle: original.id,
         ...original.mesh,
+        ...(original.id === "tow-truck"
+          ? {
+              assetId: "tow-truck-authored-v2",
+              path: "assets/models/vehicles/tow-truck-v2.glb",
+              radius: 144,
+            }
+          : {}),
         ...(original.id === "dump-truck"
           ? {
               assetId: "dump-truck-authored-v2",

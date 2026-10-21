@@ -1,5 +1,6 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
+import { towMeshOffset, towPitch, towProfile } from "../traffic/Towing.js";
 import { isVehicle } from "../traffic/Vehicle.js";
 import { bedGateAngle, bedTilt } from "../traffic/VehicleBed.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
@@ -20,6 +21,10 @@ interface Pose {
     presentationTime?: number;
     bedTilt?: number;
     bedGateAngle?: number;
+    towActive?: boolean;
+    towPitch?: number;
+    towOffsetX?: number;
+    towOffsetZ?: number;
   };
 }
 export function meshAssetFor(
@@ -89,6 +94,11 @@ export class EntityMeshPose {
     if (!assetId) return undefined;
     const train = this.authoredTrains && !!authoredTrainForType(entity.type);
     const target = train ? trainMeshHeading(entity) : entityHeading(entity);
+    const rear = entity.towedBy !== undefined ? (towProfile(entity)?.rear ?? 0) : 0;
+    position = {
+      wx: position.wx + rear * Math.cos(target),
+      wy: position.wy + rear * Math.sin(target),
+    };
     let pose = this.poses.get(entity.id);
     if (!pose || pose.instance.assetId !== assetId) {
       const orientation: [number, number, number, number] = [
@@ -161,6 +171,11 @@ export class EntityMeshPose {
     pose.instance.presentationTime = time;
     pose.instance.bedTilt = bedTilt(entity);
     pose.instance.bedGateAngle = bedGateAngle(entity);
+    pose.instance.towActive = entity.towTargetId !== undefined;
+    pose.instance.towPitch = towPitch(entity);
+    const offset = towMeshOffset(entity);
+    pose.instance.towOffsetX = offset.x;
+    pose.instance.towOffsetZ = offset.z;
     return pose.instance;
   }
   clear() {

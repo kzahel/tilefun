@@ -5,8 +5,8 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 828,
-      "inventorySha256": "f508ae5fe942351294de87c376fdd1f387d6d8e70e874a15081ca61676f88839",
+      "cases": 829,
+      "inventorySha256": "a37637b8ffefe0f2ef3c1a06b11d2d0ff76b16deec3631a44c208d32a2d68385",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -41,7 +41,7 @@
         {
           "path": "tests/authored-vehicle-gameplay.spec.ts",
           "cases": 90,
-          "sourceSha256": "77f428706aeb0dd960674dcea91952761073284605c77bd69be50f4d03ddeb8d"
+          "sourceSha256": "8d9712643f2ff3bfc799b5012598edd24801e0f1a4eb8a47bb3ee9045176e8af"
         },
         {
           "path": "tests/authored-vehicle-review.spec.ts",
@@ -522,6 +522,11 @@
           "path": "tests/tools-index.spec.ts",
           "cases": 3,
           "sourceSha256": "7a5d696ddf2d17d62f2a8a9421ed7be88cbeae5219cbc155e950effa4f680b62"
+        },
+        {
+          "path": "tests/towing.spec.ts",
+          "cases": 1,
+          "sourceSha256": "a2bb5dfca4abc0353048d3891dabb62331c2bb3af1559c3a136aa01bc7cead33"
         },
         {
           "path": "tests/traffic-rendering.spec.ts",

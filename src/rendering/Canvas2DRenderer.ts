@@ -8,6 +8,7 @@ import type { RasterSurface } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
+import { drawTowingFallback } from "./TowingFallback.js";
 import { drawBedContentsFallback } from "./VehicleBedPresentation.js";
 
 /** Canvas-specific resource resolution stays on the drawing side of the boundary. */
@@ -192,6 +193,10 @@ function drawSprite(
   if (item.flashHidden) return;
   if (ctx.meshBody?.(camera, item)) return;
   if (drawCurveTrain(ctx, camera, item, sheets)) return;
+  if (drawTowingFallback(ctx, camera, item, sheets, drawEmergencyFlash)) {
+    drawEmergencyFlash(ctx, camera, item);
+    return;
+  }
   if (drawDumpTruckFallback(ctx, camera, item, sheets)) {
     drawBedContentsFallback(ctx, camera, item, sheets, drawSprite);
     return;
@@ -251,6 +256,12 @@ function drawSprite(
     );
   }
 
+  drawEmergencyFlash(ctx, camera, item);
+  ctx.restore();
+  drawBedContentsFallback(ctx, camera, item, sheets, drawSprite);
+}
+
+function drawEmergencyFlash(ctx: RasterSurface, camera: Camera, item: SpriteItem) {
   if (item.emergencyFlash) {
     const heading = item.emergencyHeading ?? 0;
     const forward = item.emergencyForward ?? 0;
@@ -270,8 +281,6 @@ function drawSprite(
       2 * camera.scale,
     );
   }
-  ctx.restore();
-  drawBedContentsFallback(ctx, camera, item, sheets, drawSprite);
 }
 
 function drawElevation(

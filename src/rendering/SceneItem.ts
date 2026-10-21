@@ -10,6 +10,8 @@ import type { TerrainResourceId } from "./TerrainPresentation.js";
 export type SceneItem = SpriteItem | ElevationItem | GrassItem | ParticleItem;
 
 export interface SpriteItem {
+  /** A coupled car shares the tow truck depth target; fallbacks draw the same pair. */
+  towGroup?: SpriteItem;
   /** One opt-in truck body and upright sprite planes share its local depth target.
    * Raster fallbacks use the same plain bed profile to clip the contents. */
   bedGroup?: { heading: number; tilt?: number; contents: SpriteItem[] };

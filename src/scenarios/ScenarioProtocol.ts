@@ -4,6 +4,11 @@ import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 export type ScenarioCommand =
   | {
+      kind: "vehicle-tow-action";
+      entityId: number;
+      action: import("../traffic/Towing.js").TowAction;
+    }
+  | {
       kind: "vehicle-bed-action";
       entityId: number;
       action: import("../traffic/VehicleCargo.js").VehicleBedAction;

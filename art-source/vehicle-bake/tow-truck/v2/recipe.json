@@ -1,0 +1,27 @@
+{
+  "revision": "v2",
+  "method": "Retained v1 body, atlas and four wheel rigs plus original two-group telescoping wheel lift",
+  "sourceScale": 17.39130434782609,
+  "hitchGame": [
+    -80,
+    0,
+    12
+  ],
+  "stowedCradleGame": [
+    -51,
+    0,
+    6
+  ],
+  "artReviewStatus": "awaiting-owner-inspection",
+  "inputs": {
+    "art-source/vehicle-bake/tow-truck/v1/car.blend": "7c92746ef676808256346f3237d66356f88128c7c12b659580666b2b94582090",
+    "art-source/vehicle-bake/tow-truck/v1/family.json": "8cc938dc4a4ac5f00eddde11f60a019b118ccf1a230805e568abaecda5df4564",
+    "art-source/vehicle-bake/tow-truck/v1/atlas.png": "40889caa55d3cda45a23eefe1460ae4767368f4f5fdbc7edbc52cd533a0f85f2",
+    "scripts/vehicle-bake/tow-truck/equip.py": "870e319a9539e40a1a01b05a483e339ee4f6d61e51d6f8c7699c6feb8ba6e459"
+  },
+  "outputs": {
+    "model.glb": "cf77b72b33eb76c7303f88641d5682e379485359dcaac0f113672069a32ae180",
+    "car.blend": "768064578d43e58b01af2840b2674d5fd7620b8998a5bd0d4bfc0badbee31175",
+    "atlas.png": "40889caa55d3cda45a23eefe1460ae4767368f4f5fdbc7edbc52cd533a0f85f2"
+  }
+}

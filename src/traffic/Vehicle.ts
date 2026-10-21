@@ -67,7 +67,11 @@ export function vehicleCardinalHeading(direction = Direction.Right): number {
 export function vehicleNoseHeading(entity: Pick<Entity, "vehicleHeading" | "sprite">): number {
   return entity.vehicleHeading ?? vehicleCardinalHeading(entity.sprite?.direction);
 }
-export function vehicleBodySize(type: string, heading: number): { width: number; height: number } {
+export function vehicleBodySize(
+  type: string,
+  heading: number,
+  towed = false,
+): { width: number; height: number } {
   if (type === BOAT_TYPE) return { width: BOAT_SIZE, height: BOAT_SIZE };
   const body = rollingBodies.get(type);
   if (!body) throw Error(`Unknown vehicle body ${type}`);
@@ -76,7 +80,8 @@ export function vehicleBodySize(type: string, heading: number): { width: number;
   // Exact cardinal dimensions avoid microscopic overlap between adjacent lanes.
   const c = cos < 1e-6 ? 0 : cos > 1 - 1e-6 ? 1 : cos;
   const s = sin < 1e-6 ? 0 : sin > 1 - 1e-6 ? 1 : sin;
-  return { width: body.length * c + body.breadth * s, height: body.length * s + body.breadth * c };
+  const length = body.length + (towed ? 24 : 0);
+  return { width: length * c + body.breadth * s, height: length * s + body.breadth * c };
 }
 const roofSizes = new Map(
   DRIVABLE_MODELS.map((id) => [
@@ -145,13 +150,14 @@ export function applyVehicleFacing(
   const { width, height } = vehicleBodySize(
     entity.type,
     entity.vehicleHeading ?? vehicleCardinalHeading(direction),
+    entity.towedBy !== undefined,
   );
   entity.collider = {
     offsetX: 0,
     offsetY: height / 2,
     width,
     height,
-    physicalHeight: c.zHeight,
+    physicalHeight: c.zHeight + (entity.towedBy !== undefined ? 12 : 0),
     clientSolid: true,
   };
   entity.sortOffsetY = view.metadata.depthOffset - (c.offsetY - c.height / 2);

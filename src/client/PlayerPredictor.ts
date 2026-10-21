@@ -778,7 +778,7 @@ export class PlayerPredictor {
       if (serverMount.emergencyState !== undefined)
         this.predictedMount.emergencyState = serverMount.emergencyState;
       else delete this.predictedMount.emergencyState;
-      for (const key of ["vehicleBedTilt", "vehicleBedTarget"] as const) {
+      for (const key of ["vehicleBedTilt", "vehicleBedTarget", "towTargetId", "towedBy"] as const) {
         const value = serverMount[key];
         if (value === undefined) delete this.predictedMount[key];
         else this.predictedMount[key] = value;
@@ -1552,9 +1552,17 @@ export class PlayerPredictor {
             const collider = this.predictedMount.collider;
             if (!collider) break;
             const pushes: VehiclePush[] = [];
-            const bodies = queryEntities(getEntityAABB(this.predictedMount.position, collider)).map(
+            const bounds = getEntityAABB(this.predictedMount.position, collider);
+            if (this.predictedMount.towTargetId !== undefined) {
+              bounds.left -= 240;
+              bounds.right += 240;
+              bounds.top -= 240;
+              bounds.bottom += 240;
+            }
+            const bodies = queryEntities(bounds).map(
               (body) => this.pushedBodies.get(body.id) ?? body,
             );
+            const towPlan: { before: Entity; after: Entity }[] = [];
             const next = drivenCarPose(
               this.predictedMount,
               movement,
@@ -1564,6 +1572,9 @@ export class PlayerPredictor {
               bodies,
               undefined,
               pushes,
+              undefined,
+              false,
+              towPlan,
             );
             if (!next) {
               this.predictedMount.velocity = { vx: 0, vy: 0 };
@@ -1578,6 +1589,7 @@ export class PlayerPredictor {
                 wz: push.z,
                 ...((push.entity.jumpZ ?? 0) <= 0 ? { groundZ: push.z } : {}),
               });
+            for (const tow of towPlan) this.pushedBodies.set(tow.before.id, tow.after);
             this.predictedMount = next;
           }
           continue;
@@ -1670,7 +1682,7 @@ export class PlayerPredictor {
     if (serverPlayer.emergencyState !== undefined)
       clone.emergencyState = serverPlayer.emergencyState;
     if (serverPlayer.paintSchemeId !== undefined) clone.paintSchemeId = serverPlayer.paintSchemeId;
-    for (const key of ["vehicleBedTilt", "vehicleBedTarget"] as const)
+    for (const key of ["vehicleBedTilt", "vehicleBedTarget", "towTargetId", "towedBy"] as const)
       if (serverPlayer[key] !== undefined) clone[key] = serverPlayer[key];
     if (serverPlayer.vehicleBed) clone.vehicleBed = true;
     if (serverPlayer.playerModel !== undefined) clone.playerModel = serverPlayer.playerModel;

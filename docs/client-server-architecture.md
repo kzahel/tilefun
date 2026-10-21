@@ -39,8 +39,8 @@ See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity lim
 ## Transport and requests
 
 Vehicle paint identity adds one optional dictionary byte to entity baselines and
-nullable deltas. Frame tag 0x06 adds the opt-in qualified vehicle-bed bit and
-requires matching endpoints; older 0x01/0x04/0x05 tags are rejected. The authority validates each
+nullable deltas. Frame tag 0x08 adds nullable uint32 towing links after 0x07 tipping angles and
+0x06 qualified bed geometry. Matching endpoints are required; earlier tags are rejected. The authority validates each
 scheme against its model, and local mount prediction preserves the replicated
 choice. [Vehicle paints](vehicle-paint-variants.md) owns the complete contract.
 The [bed prototype](vehicle-bed-prototype.md) owns its plain physical profile,
@@ -68,6 +68,12 @@ are generator-derived metadata, not duplicated durable terrain records.
 response mapping in [requests.ts](../src/shared/requests.ts), checks response
 types, times out after 30 seconds and rejects pending calls on disconnect or
 destruction. Reconnected transports can make fresh requests.
+
+Normal `vehicle-tow-action` requests use the same vehicle-controlled response and
+request-error path. Authority validates the stopped operator, parked unoccupied
+load, bounded alignment and clear pickup/release. Reciprocal durable traffic
+identities restore runtime links in either chunk order; pending links stop the
+pair. See [towing](vehicle-towing.md).
 
 ## Prediction and moving supports
 

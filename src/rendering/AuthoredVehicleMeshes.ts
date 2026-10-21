@@ -22,6 +22,13 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
   ...ORIGINAL_VEHICLES.map((vehicle) => ({
     vehicle: vehicle.id,
     ...vehicle.mesh,
+    ...(vehicle.id === "tow-truck"
+      ? {
+          assetId: "tow-truck-authored-v2",
+          path: "assets/models/vehicles/tow-truck-v2.glb",
+          radius: 144,
+        }
+      : {}),
     ...(vehicle.id === "dump-truck"
       ? {
           assetId: "dump-truck-authored-v2",

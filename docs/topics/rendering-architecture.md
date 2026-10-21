@@ -6,6 +6,14 @@ desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-ca
 GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
 Updated: 2026-10-20.
 
+[169](../tactical/169-wheel-lift-towing.md) groups a tow truck and its car in one
+shared GPU depth target. Per-draw absolute transforms reset both cached assets;
+both must be ready (including paint) before replacing the complete paired
+fallback. Display sampling pins the axle to the displayed hitch after independent
+timelines; authority poses remain untouched. Cardinal fallback captures use the
+same loader/projection/outline and preserve paint. This bounded pair does not
+resolve whole-group ordering against external world props.
+
 [167](../tactical/167-tipping-dump-bed.md) adds absolute per-draw dump tub, gate
 and ram transforms to the existing shared loader. One cached model can render
 level and tipped instances without pose leakage. Upright bed contents retain the

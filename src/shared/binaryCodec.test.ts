@@ -189,6 +189,8 @@ describe("EntitySnapshot binary codec", () => {
       vehicleHeading: Math.fround(-2.13),
       vehicleBedTilt: Math.fround(0.42),
       vehicleBedTarget: Math.fround(0.8),
+      towTargetId: 0xfedcba98,
+      towedBy: 0xfedcba97,
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -225,6 +227,8 @@ describe("EntitySnapshot binary codec", () => {
     expect(result.vehicleHeading).toBe(Math.fround(-2.13));
     expect(result.vehicleBedTilt).toBe(Math.fround(0.42));
     expect(result.vehicleBedTarget).toBe(Math.fround(0.8));
+    expect(result.towTargetId).toBe(0xfedcba98);
+    expect(result.towedBy).toBe(0xfedcba97);
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);
@@ -277,7 +281,7 @@ describe("EntitySnapshot binary codec", () => {
       entityExits: [12, 13],
     };
     const bytes = encodeServerMessage(msg);
-    expect(new DataView(bytes).getUint8(0)).toBe(0x07);
+    expect(new DataView(bytes).getUint8(0)).toBe(0x08);
     expect(roundtripServer(msg)).toEqual(msg);
   });
 
@@ -553,6 +557,8 @@ describe("EntityDelta binary codec", () => {
       vehicleHeading: Math.fround(-2.13),
       vehicleBedTilt: Math.fround(0.42),
       vehicleBedTarget: Math.fround(0.8),
+      towTargetId: 0xfedcba98,
+      towedBy: 0xfedcba97,
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -579,6 +585,8 @@ describe("EntityDelta binary codec", () => {
     expect(result.vehicleHeading).toBe(Math.fround(-2.13));
     expect(result.vehicleBedTilt).toBe(Math.fround(0.42));
     expect(result.vehicleBedTarget).toBe(Math.fround(0.8));
+    expect(result.towTargetId).toBe(0xfedcba98);
+    expect(result.towedBy).toBe(0xfedcba97);
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);

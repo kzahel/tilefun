@@ -323,3 +323,11 @@ without moving fixed body/equipment. Neutral roll proof is separate from steerin
 or animated hinge clearance; runtime keeps those poses at rest. Four siren types
 and two silent warning types have distinct persistent-state limits; asset tags
 must be paired with driver authority, touch/keyboard, save/replica and audio tests.
+
+For wheel-lift equipment, follow `docs/vehicle-towing.md` and tactical 169.
+Preserve v1 body/UVs/wheels, retain an additive equipment revision, measure actual
+per-axle centers/radii and game height fits, and qualify rear contact/front lift.
+Coupled vehicles share one GPU depth target; all eligible paints need connected
+cardinal fallback poses. Retain mutable capture-source snapshots and replay from
+only declared inputs. Authoring a lift does not qualify unmeasured heavier loads,
+rear-first pickup, chain towing or a general trailer/rigid-body system.

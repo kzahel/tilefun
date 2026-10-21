@@ -133,6 +133,9 @@ export interface Entity {
   /** Hinged dump bed angle/target in radians; authority owns the clock. */
   vehicleBedTilt?: number;
   vehicleBedTarget?: number;
+  /** Runtime towing links; zero means durable partner is not resident yet. */
+  towTargetId?: number;
+  towedBy?: number;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;

@@ -420,6 +420,10 @@ export class ScenarioSession {
   }
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
+    if (command.kind === "vehicle-tow-action") {
+      this.realm.vehicles.tow(this.player, command.entityId, command.action);
+      return;
+    }
     if (command.kind === "vehicle-bed-action") {
       this.realm.vehicles.bed(this.player, command.entityId, command.action);
       return;

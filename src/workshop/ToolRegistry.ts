@@ -3,6 +3,13 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "towing",
+    name: "Tow truck playground",
+    description: "Attach, tow and release a real parked car with the shared game controls.",
+    url: "workshop.html?geometry=towing#/tool/world-geometry",
+    mode: "link",
+  },
+  {
     id: "truck-bed",
     name: "Truck bed playground",
     description: "Walk and jump inside a dump-truck bed, ride along and inspect clipping geometry.",

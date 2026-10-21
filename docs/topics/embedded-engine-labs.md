@@ -6,6 +6,12 @@ Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
 Updated: 2026-10-20.
 
+[169](../tactical/169-wheel-lift-towing.md) adds the Tow truck playground using
+ordinary parked-vehicle records, shared Attach/Release controls and coupled
+TrafficSystem/PlayerPredictor steps. The real Worker owns both bodies, collision
+and saved relationships. Pause/step/reload/backend replacement retain the pair;
+the page owns only fixture data, input and camera framing.
+
 [167](../tactical/167-tipping-dump-bed.md) extends those same normal controls and
 fixed-clock authority with tipping/lowering. Inclined support, cargo gravity,
 nullable replica state, renderer pose, debug and Canvas/failed-mesh fallback are

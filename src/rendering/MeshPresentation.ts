@@ -14,6 +14,10 @@ export interface MeshInstance {
   readonly presentationTime?: number;
   readonly bedTilt?: number;
   readonly bedGateAngle?: number;
+  readonly towActive?: boolean;
+  readonly towPitch?: number;
+  readonly towOffsetX?: number;
+  readonly towOffsetZ?: number;
 }
 export const FIRE_TRUCK_MESH = "fire-truck-ladder-1-authored-v2";
 export const AMBULANCE_MESH = "ambulance-authored-v3";

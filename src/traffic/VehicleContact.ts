@@ -13,7 +13,7 @@ export function entityBody(entity: Entity): OrientedBox {
     high = low + (entity.collider.physicalHeight ?? 16);
   if (!orientedCar(entity) || entity.vehicleHeading === undefined)
     return axisBox(getEntityAABB(entity.position, entity.collider), low, high);
-  const size = vehicleBodySize(entity.type, 0);
+  const size = vehicleBodySize(entity.type, 0, entity.towedBy !== undefined);
   return {
     x: entity.position.wx,
     y: entity.position.wy,

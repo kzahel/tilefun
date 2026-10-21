@@ -1,0 +1,266 @@
+{
+  "version": 1,
+  "families": {
+    "beetle": {
+      "defaultWeight": 2,
+      "defaultSwatches": [
+        [
+          241,
+          211,
+          139
+        ]
+      ],
+      "schemes": [
+        {
+          "id": "butter",
+          "name": "Butter yellow",
+          "atlas": "assets/vehicles/paint-v1/beetle-butter-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/beetle-butter.png",
+          "swatches": [
+            [
+              241,
+              211,
+              139
+            ]
+          ],
+          "weight": 3,
+          "reviewId": "paint-beetle-butter-v1"
+        },
+        {
+          "id": "cream",
+          "name": "Warm cream",
+          "atlas": "assets/vehicles/paint-v1/beetle-cream-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/beetle-cream.png",
+          "swatches": [
+            [
+              231,
+              216,
+              185
+            ]
+          ],
+          "weight": 2,
+          "reviewId": "paint-beetle-cream-v1"
+        },
+        {
+          "id": "cherry",
+          "name": "Cherry red",
+          "atlas": "assets/vehicles/paint-v1/beetle-cherry-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/beetle-cherry.png",
+          "swatches": [
+            [
+              208,
+              76,
+              88
+            ]
+          ],
+          "weight": 2,
+          "reviewId": "paint-beetle-cherry-v1"
+        },
+        {
+          "id": "teal",
+          "name": "Lagoon teal",
+          "atlas": "assets/vehicles/paint-v1/beetle-teal-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/beetle-teal.png",
+          "swatches": [
+            [
+              67,
+              166,
+              173
+            ]
+          ],
+          "weight": 2,
+          "reviewId": "paint-beetle-teal-v1"
+        },
+        {
+          "id": "powder-blue",
+          "name": "Powder blue",
+          "atlas": "assets/vehicles/paint-v1/beetle-powder-blue-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/beetle-powder-blue.png",
+          "swatches": [
+            [
+              145,
+              176,
+              205
+            ]
+          ],
+          "weight": 2,
+          "reviewId": "paint-beetle-powder-blue-v1"
+        },
+        {
+          "id": "forest",
+          "name": "Forest green",
+          "atlas": "assets/vehicles/paint-v1/beetle-forest-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/beetle-forest.png",
+          "swatches": [
+            [
+              75,
+              140,
+              103
+            ]
+          ],
+          "weight": 1,
+          "reviewId": "paint-beetle-forest-v1"
+        }
+      ]
+    },
+    "pickup": {
+      "defaultWeight": 2,
+      "defaultSwatches": [
+        [
+          67,
+          166,
+          173
+        ]
+      ],
+      "schemes": [
+        {
+          "id": "teal",
+          "name": "Lagoon teal",
+          "atlas": "assets/vehicles/paint-v1/pickup-teal-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/pickup-teal.png",
+          "swatches": [
+            [
+              67,
+              166,
+              173
+            ]
+          ],
+          "weight": 3,
+          "reviewId": "paint-pickup-teal-v1"
+        },
+        {
+          "id": "cherry",
+          "name": "Farm red",
+          "atlas": "assets/vehicles/paint-v1/pickup-cherry-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/pickup-cherry.png",
+          "swatches": [
+            [
+              208,
+              76,
+              88
+            ]
+          ],
+          "weight": 3,
+          "reviewId": "paint-pickup-cherry-v1"
+        },
+        {
+          "id": "forest-cream",
+          "name": "Forest / cream roof",
+          "atlas": "assets/vehicles/paint-v1/pickup-forest-cream-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/pickup-forest-cream.png",
+          "swatches": [
+            [
+              75,
+              140,
+              103
+            ],
+            [
+              231,
+              216,
+              185
+            ]
+          ],
+          "weight": 2,
+          "reviewId": "paint-pickup-forest-cream-v1"
+        },
+        {
+          "id": "navy-cream",
+          "name": "Navy / cream roof",
+          "atlas": "assets/vehicles/paint-v1/pickup-navy-cream-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/pickup-navy-cream.png",
+          "swatches": [
+            [
+              72,
+              109,
+              138
+            ],
+            [
+              231,
+              216,
+              185
+            ]
+          ],
+          "weight": 2,
+          "reviewId": "paint-pickup-navy-cream-v1"
+        }
+      ]
+    },
+    "rosso-coupe": {
+      "defaultWeight": 4,
+      "defaultSwatches": [
+        [
+          211,
+          68,
+          92
+        ]
+      ],
+      "schemes": [
+        {
+          "id": "cherry",
+          "name": "Cherry red",
+          "atlas": "assets/vehicles/paint-v1/rosso-coupe-cherry-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/rosso-coupe-cherry.png",
+          "swatches": [
+            [
+              208,
+              76,
+              88
+            ]
+          ],
+          "weight": 4,
+          "reviewId": "paint-rosso-coupe-cherry-v1"
+        },
+        {
+          "id": "butter",
+          "name": "Butter yellow",
+          "atlas": "assets/vehicles/paint-v1/rosso-coupe-butter-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/rosso-coupe-butter.png",
+          "swatches": [
+            [
+              241,
+              211,
+              139
+            ]
+          ],
+          "weight": 2,
+          "reviewId": "paint-rosso-coupe-butter-v1"
+        },
+        {
+          "id": "powder-blue",
+          "name": "Powder blue",
+          "atlas": "assets/vehicles/paint-v1/rosso-coupe-powder-blue-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/rosso-coupe-powder-blue.png",
+          "swatches": [
+            [
+              145,
+              176,
+              205
+            ]
+          ],
+          "weight": 2,
+          "reviewId": "paint-rosso-coupe-powder-blue-v1"
+        },
+        {
+          "id": "navy-stripes",
+          "name": "Navy / cream stripes",
+          "atlas": "assets/vehicles/paint-v1/rosso-coupe-navy-stripes-atlas.png",
+          "sprite": "assets/vehicles/paint-v1/rosso-coupe-navy-stripes.png",
+          "swatches": [
+            [
+              72,
+              109,
+              138
+            ],
+            [
+              231,
+              216,
+              185
+            ]
+          ],
+          "weight": 1,
+          "reviewId": "paint-rosso-coupe-navy-stripes-v1"
+        }
+      ]
+    }
+  }
+}

@@ -29,6 +29,7 @@ export class CarMeshAsset {
     rest: THREE.Quaternion;
     axis: THREE.Vector3;
     radius: number;
+    front: boolean;
   }[] = [];
   private readonly rotation = new THREE.Quaternion();
   readonly meshCount: number;
@@ -37,6 +38,10 @@ export class CarMeshAsset {
   private lights?: VehicleEmergencyLights;
   private propeller?: THREE.Object3D;
   private propellerRest?: THREE.Quaternion;
+  private towBoom?: THREE.Object3D;
+  private towCradle?: THREE.Object3D;
+  private towBoomY = 0;
+  private towCradlePosition?: THREE.Vector3;
   private dumpBed?: THREE.Object3D;
   private dumpGate?: THREE.Object3D;
   private dumpBedRest?: THREE.Quaternion;
@@ -70,6 +75,22 @@ export class CarMeshAsset {
     });
     this.meshCount = meshes;
     try {
+      const boom = scene.getObjectByName("Tow_Lift_Boom"),
+        cradle = scene.getObjectByName("Tow_Lift_Cradle");
+      if (boom || cradle) {
+        if (
+          !boom ||
+          !cradle ||
+          boom.parent !== cradle.parent ||
+          boom.userData.tilefun_tow_boom !== 1 ||
+          cradle.userData.tilefun_tow_cradle !== 1
+        )
+          throw Error("Invalid tow lift rig");
+        this.towBoom = boom;
+        this.towCradle = cradle;
+        this.towBoomY = boom.position.y;
+        this.towCradlePosition = cradle.position.clone();
+      }
       const bed = scene.getObjectByName("Dump_Bed_Hinge"),
         gate = scene.getObjectByName("Dump_Tailgate_Hinge");
       if (bed || gate) {
@@ -223,6 +244,7 @@ export class CarMeshAsset {
           rest: roll.quaternion.clone(),
           axis: new THREE.Vector3(axis[0], axis[1], axis[2]).normalize(),
           radius,
+          front: id.startsWith("F"),
         });
       }
       if (options?.batch)
@@ -281,14 +303,28 @@ export class CarMeshAsset {
     }
   }
   /** Absolute pose per draw: a shared resource never carries another car's phase. */
-  setTravel(distance: number) {
+  setTravel(distance: number, liftedFront = false) {
     if (this.propeller && this.propellerRest) {
       this.rotation.setFromAxisAngle(new THREE.Vector3(1, 0, 0), distance / 2);
       this.propeller.quaternion.copy(this.propellerRest).multiply(this.rotation);
     }
     for (const wheel of this.wheels) {
-      this.rotation.setFromAxisAngle(wheel.axis, -distance / wheel.radius);
+      this.rotation.setFromAxisAngle(
+        wheel.axis,
+        wheel.front && liftedFront ? 0 : -distance / wheel.radius,
+      );
       wheel.roll.quaternion.copy(wheel.rest).multiply(this.rotation);
+    }
+  }
+  setTowLift(active = false) {
+    if (!this.towBoom || !this.towCradle || !this.towCradlePosition) return;
+    const scale = 400 / 23;
+    this.towBoom.scale.x = active ? 1 : 7 / 36;
+    this.towBoom.position.y = this.towBoomY - (active ? 0 : 6 / scale);
+    this.towCradle.position.copy(this.towCradlePosition);
+    if (!active) {
+      this.towCradle.position.x -= 29 / scale;
+      this.towCradle.position.y -= 6 / scale;
     }
   }
   setEmergency(enabled: boolean, time: number) {

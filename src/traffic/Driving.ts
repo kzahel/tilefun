@@ -17,6 +17,7 @@ import { separatesContact } from "./ContactRecovery.js";
 import { type DrivingQueries, drivingQueries } from "./DrivingQueries.js";
 import { movingPassengerPosition } from "./MovingSupport.js";
 import { roofSupport } from "./RoofSupport.js";
+import { towedPose } from "./Towing.js";
 import {
   applyVehicleFacing,
   isVehicle,
@@ -79,8 +80,28 @@ export function drivenCarPose(
   pushes?: VehiclePush[],
   contactSpeed?: number,
   straight = false,
+  towPlan?: { before: Entity; after: Entity }[],
 ): Entity | undefined {
   if (![input.dx, input.dy, dt].every(Number.isFinite) || dt <= 0 || dt > 0.1) return;
+  if (car.towedBy !== undefined) return;
+  const trailer =
+    car.towTargetId !== undefined
+      ? entities.find((e) => e.id === car.towTargetId && e.towedBy === car.id)
+      : undefined;
+  if (car.towTargetId !== undefined && !trailer) return;
+  const collisionEntities = trailer ? entities.filter((e) => e.id !== trailer.id) : entities;
+  const collisionQueries =
+    trailer && queries
+      ? {
+          ...queries,
+          ...(queries.bodies
+            ? {
+                bodies: (box: Parameters<NonNullable<DrivingQueries["bodies"]>>[0]) =>
+                  (queries.bodies?.(box) ?? []).filter((e) => e.id !== trailer.id),
+              }
+            : {}),
+        }
+      : queries;
   if (bedDriveLocked(car))
     return {
       ...car,
@@ -89,7 +110,10 @@ export function drivenCarPose(
     };
   const length = Math.hypot(input.dx, input.dy);
   const scale = length > 1 ? 1 / length : 1;
-  const performance = vehiclePerformance(car.type);
+  const basePerformance = vehiclePerformance(car.type);
+  const performance = trailer
+    ? { ...basePerformance, speed: Math.min(64, basePerformance.speed), acceleration: 80 }
+    : basePerformance;
   const previous = car.sprite?.direction ?? Direction.Down;
   // Directional input steers toward a nose bearing. It never supplies sideways
   // velocity: signed rolling distance turns the chassis, including in reverse.
@@ -150,7 +174,19 @@ export function drivenCarPose(
   // escape instead of requiring an impossible turn at rest. All gates still run.
   const retryStraight = () =>
     !straight && Math.abs(turn) > 1e-8
-      ? drivenCarPose(car, input, dt, world, props, entities, queries, pushes, contactSpeed, true)
+      ? drivenCarPose(
+          car,
+          input,
+          dt,
+          world,
+          props,
+          entities,
+          queries,
+          pushes,
+          contactSpeed,
+          true,
+          towPlan,
+        )
       : undefined;
   if (
     !checkedCarPose(
@@ -159,21 +195,46 @@ export function drivenCarPose(
       dt,
       world,
       props,
-      entities,
-      queries,
-      pushes !== undefined && !isBoat(car),
+      collisionEntities,
+      collisionQueries,
+      pushes !== undefined && !isBoat(car) && !trailer,
     )
   )
     return retryStraight();
-  if (pushes && !isBoat(car)) {
+  const towed = trailer && towedPose(trailer, next);
+  if (
+    trailer &&
+    (!towed ||
+      !checkedCarPose(
+        trailer,
+        towed,
+        dt,
+        world,
+        props,
+        entities.filter((e) => e.id !== car.id),
+        queries && {
+          ...queries,
+          ...(queries.bodies
+            ? {
+                bodies: (box: Parameters<NonNullable<DrivingQueries["bodies"]>>[0]) =>
+                  (queries.bodies?.(box) ?? []).filter((e) => e.id !== car.id),
+              }
+            : {}),
+        },
+        false,
+      ) ||
+      Math.abs((towed.wz ?? 0) - (next.wz ?? 0)) > 0.25)
+  )
+    return retryStraight();
+  if (pushes && !isBoat(car) && !trailer) {
     const plan = planVehiclePushes(
       [{ before: car, after: next }],
       dt,
       performance,
       world,
       props,
-      entities,
-      queries,
+      collisionEntities,
+      collisionQueries,
     );
     if (!plan) {
       if (contactSpeed === undefined)
@@ -189,12 +250,14 @@ export function drivenCarPose(
             pushes,
             performance.pushSpeed * 0.98,
             straight,
+            towPlan,
           ) ?? retryStraight()
         );
       return retryStraight();
     }
     pushes.push(...plan);
   }
+  if (trailer && towed) towPlan?.push({ before: trailer, after: towed });
   return next;
 }
 
@@ -231,7 +294,7 @@ export function routedCarPose(
 }
 
 /** Pure full-body validation, shared by driven rolling motion and routed parking. */
-function checkedCarPose(
+export function checkedCarPose(
   car: Entity,
   next: Entity,
   dt: number,

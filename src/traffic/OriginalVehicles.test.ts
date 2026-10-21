@@ -62,7 +62,9 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
     expect(authoredVehicleForType(type)?.path).toBe(
       family.model === "dump-truck"
         ? "assets/models/vehicles/dump-truck-v2.glb"
-        : definition.mesh.path,
+        : family.model === "tow-truck"
+          ? "assets/models/vehicles/tow-truck-v2.glb"
+          : definition.mesh.path,
     );
     expect(VEHICLE_BANK.views).toHaveLength(180);
     expect(TRAFFIC_MODELS).toContain(definition.id);
@@ -128,8 +130,18 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
     const car = createVehicle(family.model, 120, 240, Direction.Down);
     expect(new EntityMeshPose().evaluate(car, 1)).toMatchObject({
       // Historical v1 receipt above stays frozen; active equipment uses the separately qualified v2 rig.
-      assetId: family.model === "dump-truck" ? "dump-truck-authored-v2" : definition.mesh.assetId,
-      radius: family.model === "dump-truck" ? 128 : family.nativeSize / 2,
+      assetId:
+        family.model === "dump-truck"
+          ? "dump-truck-authored-v2"
+          : family.model === "tow-truck"
+            ? "tow-truck-authored-v2"
+            : definition.mesh.assetId,
+      radius:
+        family.model === "dump-truck"
+          ? 128
+          : family.model === "tow-truck"
+            ? 144
+            : family.nativeSize / 2,
     });
   },
 );

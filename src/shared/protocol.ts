@@ -37,6 +37,12 @@ export type VehicleHornMessage = {
 
 export type ClientMessage =
   | {
+      type: "vehicle-tow-action";
+      requestId: number;
+      entityId: number;
+      action: import("../traffic/Towing.js").TowAction;
+    }
+  | {
       type: "vehicle-bed-action";
       requestId: number;
       entityId: number;
@@ -228,6 +234,9 @@ export interface EntitySnapshot {
   /** Hinged dump bed angle/target in radians; authority owns the clock. */
   vehicleBedTilt?: number;
   vehicleBedTarget?: number;
+  /** Runtime towing links; zero means durable partner is not resident yet. */
+  towTargetId?: number;
+  towedBy?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

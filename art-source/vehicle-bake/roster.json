@@ -1,6 +1,6 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "The owner-authorized run153 production batch is complete within its eight-hour limit (2026-10-19 21:19:36 UTC–2026-10-20 05:19:36 UTC). All33 ordinary entries are integrated; seven cycle styles retain diagnostic source/shared reviews but remain deferred for normal rider presentation. Per-family appearance pauses were waived for this delivered batch only; formal review states remain unchanged. Follow the current owner gate before further production.",
+  "gate": "The owner-authorized run153 production batch is complete within its eight-hour limit (2026-10-19 21:19:36 UTC\u20132026-10-20 05:19:36 UTC). All33 ordinary entries are integrated; seven cycle styles retain diagnostic source/shared reviews but remain deferred for normal rider presentation. Per-family appearance pauses were waived for this delivered batch only; formal review states remain unchanged. Follow the current owner gate before further production.",
   "vehicles": [
     {
       "id": "rosso-coupe",
@@ -243,8 +243,16 @@
       "priority": 24,
       "status": "integrated",
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
-      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact mesh/fallback, gameplay and all16 Linux browser shards pass. Published GitHub Pages build verified; separate shared review host needs checkout update.",
-      "candidate": "tow-truck-v1"
+      "next": "Working wheel-lift v2 in normal placements and traffic: Attach/Release a parked passenger car, drive/reverse and reload. Inspect new poses in tactical 169; original v1 review stays frozen.",
+      "candidate": "tow-truck-v1",
+      "equipmentRevision": {
+        "revision": "v2",
+        "source": "art-source/vehicle-bake/tow-truck/v2/recipe.json",
+        "runtime": "public/assets/models/vehicles/tow-truck-v2.glb",
+        "review": "geometry:wheel-lift-towing-v1",
+        "humanAppearanceReview": "pending",
+        "record": "docs/tactical/169-wheel-lift-towing.md"
+      }
     },
     {
       "id": "flatbed-truck",

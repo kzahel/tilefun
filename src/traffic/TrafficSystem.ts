@@ -35,6 +35,7 @@ import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js"
 import { ParkingSystem, type SavedParking } from "./ParkingSystem.js";
 import { roofSupport } from "./RoofSupport.js";
 import { SHOPPING_PARKED_BAYS, type ShoppingCenter, shoppingLot } from "./ShoppingCenter.js";
+import { isTowTruck, towProfile } from "./Towing.js";
 import { bedDriveLocked, hasVehicleBed } from "./VehicleBed.js";
 import { tickVehicleBedEquipment } from "./VehicleBedEquipment.js";
 import { bedInteriorOccupant } from "./VehicleCargo.js";
@@ -80,6 +81,8 @@ function placementLane(identity: string, x: number, y: number): Lane {
 }
 
 export interface SavedTraffic {
+  towTargetIdentity?: string;
+  towTruckIdentity?: string;
   shopping?: { centerId: string; trip: SavedParking };
   shoppingCooldown?: number;
   shoppingTrips?: number;
@@ -115,6 +118,8 @@ export interface SavedTraffic {
   choices: number;
 }
 export interface TrafficState {
+  towTargetIdentity?: string;
+  towTruckIdentity?: string;
   shopping?: ParkingSystem;
   shoppingCooldown?: number;
   shoppingTrips?: number;
@@ -176,6 +181,7 @@ export class TrafficSystem {
     entities.removalListeners.add((entity, destroyed) => {
       const state = this.states.get(entity.id);
       if (!state) return;
+      this.unlinkTow(state, destroyed);
       for (const [node, owner] of this.reservations)
         if (owner === entity.id) this.reservations.delete(node);
       state.shopping?.dispose();
@@ -725,6 +731,7 @@ export class TrafficSystem {
     active?: ReadonlySet<Entity>,
     excludedRiderIds?: ReadonlySet<number>,
   ) {
+    this.syncTows();
     this.time += dt;
     this.spawnClock -= dt;
     if (this.spawnClock <= 0) {
@@ -749,7 +756,13 @@ export class TrafficSystem {
         continue;
       }
       s.shoppingCooldown = Math.max(0, (s.shoppingCooldown ?? 0) - dt);
-      if (s.driverId !== undefined || s.parked) continue;
+      if (
+        s.driverId !== undefined ||
+        s.parked ||
+        s.entity.towedBy !== undefined ||
+        s.entity.towTargetId !== undefined
+      )
+        continue;
       if (this.tryShopping(s)) continue;
       this.choose(s);
       const end = (s.turn ?? s.lane.path).length;
@@ -943,6 +956,7 @@ export class TrafficSystem {
     const steps = Math.max(1, Math.ceil(dt * 60));
     for (let i = 0; i < steps; i++) {
       const pushes: VehiclePush[] = [];
+      const towPlan: { before: Entity; after: Entity }[] = [];
       const next = drivenCarPose(
         s.entity,
         input,
@@ -952,6 +966,9 @@ export class TrafficSystem {
         this.entities.entities,
         this.drivingQueries,
         pushes,
+        undefined,
+        false,
+        towPlan,
       );
       const plan =
         next && planMovingPassengers(s.entity, next, this.entities, this.props, this.world);
@@ -960,7 +977,25 @@ export class TrafficSystem {
         if (s.entity.sprite) s.entity.sprite.moving = false;
         break;
       }
+      const towPassengers = towPlan.map((t) =>
+        planMovingPassengers(t.before, t.after, this.entities, this.props, this.world),
+      );
+      if (towPassengers.some((p) => !p)) {
+        s.entity.velocity = { vx: 0, vy: 0 };
+        if (s.entity.sprite) s.entity.sprite.moving = false;
+        break;
+      }
       commitVehiclePushes(pushes, this.entities);
+      for (let j = 0; j < towPlan.length; j++) {
+        const t = required(towPlan[j]);
+        carryMovingPassengers(required(towPassengers[j]), this.entities);
+        t.before.prevPosition = { ...t.before.position };
+        t.before.prevWz = t.before.wz ?? 0;
+        Object.assign(t.before, t.after);
+        this.entities.spatialHash.update(t.before);
+        const targetState = this.states.get(t.before.id);
+        if (targetState) this.onChange?.(targetState, false);
+      }
       carryMovingPassengers(plan, this.entities);
       Object.assign(s.entity, {
         position: next.position,
@@ -985,6 +1020,8 @@ export class TrafficSystem {
     s.parked = true;
     if (
       resume &&
+      s.entity.towTargetId === undefined &&
+      s.entity.towedBy === undefined &&
       !s.placed &&
       this.roadClear(getEntityAABB(s.entity.position, required(s.entity.collider)), true)
     ) {
@@ -1045,6 +1082,7 @@ export class TrafficSystem {
     this.onChange?.(s, false);
   }
   private remove(s: TrafficState) {
+    this.unlinkTow(s, false);
     for (const [node, owner] of this.reservations)
       if (owner === s.entity.id) this.reservations.delete(node);
     this.retired.set(s.entity.proceduralId ?? "", this.time + 30);
@@ -1053,8 +1091,62 @@ export class TrafficSystem {
     this.states.delete(s.entity.id);
     this.entities.remove(s.entity.id, false);
   }
+  /** Partner records may arrive in either chunk order; pending links stop both vehicles. */
+  syncTows() {
+    let linked = false;
+    for (const s of this.states.values())
+      if (s.towTargetIdentity) {
+        linked = true;
+        break;
+      }
+    if (!linked) return;
+    const byIdentity = new Map([...this.states.values()].map((s) => [s.entity.proceduralId, s]));
+    for (const truck of this.states.values()) {
+      if (!truck.towTargetIdentity) continue;
+      const target = byIdentity.get(truck.towTargetIdentity);
+      if (!target || target.towTruckIdentity !== truck.entity.proceduralId) {
+        truck.entity.towTargetId = 0;
+        continue;
+      }
+      truck.entity.towTargetId = target.entity.id;
+      target.entity.towedBy = truck.entity.id;
+      if (
+        Math.hypot(truck.entity.velocity?.vx ?? 0, truck.entity.velocity?.vy ?? 0) < 0.01 &&
+        Math.hypot(target.entity.velocity?.vx ?? 0, target.entity.velocity?.vy ?? 0) > 0
+      ) {
+        target.entity.velocity = { vx: 0, vy: 0 };
+        if (target.entity.sprite) target.entity.sprite.moving = false;
+        this.onChange?.(target, false);
+      }
+    }
+  }
+  /** Destruction releases a partner; ordinary eviction preserves durable ownership. */
+  private unlinkTow(s: TrafficState, destroyed: boolean) {
+    for (const other of this.states.values()) {
+      if (other === s) continue;
+      if (other.towTruckIdentity === s.entity.proceduralId) {
+        if (destroyed) {
+          delete other.towTruckIdentity;
+          delete other.entity.towedBy;
+          applyVehicleFacing(other.entity);
+          other.entity.velocity = { vx: 0, vy: 0 };
+          this.entities.spatialHash.update(other.entity);
+          this.onChange?.(other, false);
+        } else other.entity.towedBy = 0;
+      }
+      if (other.towTargetIdentity === s.entity.proceduralId) {
+        if (destroyed) {
+          delete other.towTargetIdentity;
+          delete other.entity.towTargetId;
+          this.onChange?.(other, false);
+        } else other.entity.towTargetId = 0;
+      }
+    }
+  }
   snapshot(s: TrafficState): SavedTraffic {
     return {
+      ...(s.towTargetIdentity ? { towTargetIdentity: s.towTargetIdentity } : {}),
+      ...(s.towTruckIdentity ? { towTruckIdentity: s.towTruckIdentity } : {}),
       ...(s.entity.emergencyState !== undefined ? { emergencyState: s.entity.emergencyState } : {}),
       ...(s.placed ? { placed: true } : {}),
       ...(s.shopping
@@ -1100,6 +1192,25 @@ export class TrafficSystem {
     const centers = new Set(
       [...this.states.values()].flatMap((s) => (s.shopping ? [s.shopping.lot.id] : [])),
     );
+    const relationships = new Map<
+      string | undefined,
+      { towTargetIdentity?: string | undefined; towTruckIdentity?: string | undefined }
+    >(
+      [...this.states.values()].map((s) => [
+        s.entity.proceduralId,
+        { towTargetIdentity: s.towTargetIdentity, towTruckIdentity: s.towTruckIdentity },
+      ]),
+    );
+    for (const r of records) relationships.set(r.identity, r);
+    for (const r of records) {
+      const target = r.towTargetIdentity && relationships.get(r.towTargetIdentity),
+        truck = r.towTruckIdentity && relationships.get(r.towTruckIdentity);
+      if (
+        (target && target.towTruckIdentity !== r.identity) ||
+        (truck && truck.towTargetIdentity !== r.identity)
+      )
+        throw Error("Conflicting saved tow relationship");
+    }
     return records.flatMap((r) => {
       if (identities.has(r.identity)) return [];
       if (
@@ -1129,6 +1240,23 @@ export class TrafficSystem {
         !validVehicleLightState({ type: `vehicle-v1:${r.model}` }, r.emergencyState)
       )
         throw new Error("Invalid saved emergency state.");
+      for (const key of ["towTargetIdentity", "towTruckIdentity"] as const)
+        if (
+          r[key] !== undefined &&
+          (typeof r[key] !== "string" ||
+            !r[key] ||
+            r[key].length > 512 ||
+            r[key] === r.identity ||
+            !r.parked ||
+            r.shopping)
+        )
+          throw Error("Invalid saved tow relationship");
+      if (
+        (r.towTargetIdentity &&
+          (!isTowTruck({ type: `vehicle-v1:${r.model}` }) || r.towTruckIdentity)) ||
+        (r.towTruckIdentity && !towProfile({ type: `vehicle-v1:${r.model}` }))
+      )
+        throw Error("Invalid saved tow model");
       if (r.placed !== undefined && typeof r.placed !== "boolean")
         throw new Error("Invalid placed vehicle state.");
       if (
@@ -1252,6 +1380,10 @@ export class TrafficSystem {
         r.wz ?? 0,
       );
       if (r.emergencyState !== undefined) s.entity.emergencyState = r.emergencyState;
+      if (r.towTargetIdentity) s.towTargetIdentity = r.towTargetIdentity;
+      if (r.towTruckIdentity) s.towTruckIdentity = r.towTruckIdentity;
+      if (r.towTargetIdentity) s.entity.towTargetId = 0;
+      if (r.towTruckIdentity) s.entity.towedBy = 0;
       s.placed = r.placed ?? false;
       s.parked = r.parked ?? false;
       if (r.resumePath) s.resumePath = r.resumePath;
@@ -1294,6 +1426,7 @@ export class TrafficSystem {
       }
       this.onRestore?.(s, r);
     }
+    this.syncTows();
   }
   private populate(players: readonly Entity[]) {
     if (!players.length) return;

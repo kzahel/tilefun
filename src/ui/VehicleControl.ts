@@ -6,6 +6,7 @@ import { nearestStationBench } from "../railway/StationBench.js";
 import { isTrain } from "../railway/Train.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/Driving.js";
+import { isTowTruck, towCandidate } from "../traffic/Towing.js";
 import { bedDriveLocked, hasVehicleBed } from "../traffic/VehicleBed.js";
 import {
   bedContents,
@@ -15,6 +16,7 @@ import {
 } from "../traffic/VehicleCargo.js";
 
 type VehicleRequest =
+  | { type: "vehicle-tow-action"; entityId: number; action: "attach" | "release" }
   | { type: "vehicle-bed-action"; entityId: number; action: VehicleBedAction }
   | { type: "enter-vehicle"; entityId: number }
   | { type: "exit-vehicle" }
@@ -29,6 +31,7 @@ export class VehicleControl {
   private targetKey = "";
   private bedActions = document.createElement("div");
   private bedButtons = new Map<VehicleBedAction, HTMLButtonElement>();
+  private towButtons = new Map<"attach" | "release", HTMLButtonElement>();
   constructor(private send: (request: VehicleRequest) => Promise<unknown>) {
     this.root.style.cssText =
       "position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:16px;z-index:80;max-width:min(360px,calc(100vw - 180px));text-align:left;color:white;font:15px sans-serif";
@@ -57,6 +60,18 @@ export class VehicleControl {
       this.bedButtons.set(action, button);
       this.bedActions.append(button);
     }
+    for (const [action, label] of [
+      ["attach", "Attach car"],
+      ["release", "Release car"],
+    ] as const) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = label;
+      button.style.cssText = this.button.style.cssText;
+      button.dataset.towAction = action;
+      this.towButtons.set(action, button);
+      this.bedActions.append(button);
+    }
     this.root.append(this.status, this.button, this.bedActions);
     this.root.hidden = true;
     document.body.append(this.root);
@@ -77,6 +92,7 @@ export class VehicleControl {
         .filter(
           (e) =>
             isDrivable(e) &&
+            e.towedBy === undefined &&
             !entities.some((other) => other.parentId === e.id) &&
             Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 3 &&
             Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <= 12 &&
@@ -98,6 +114,37 @@ export class VehicleControl {
             )
             .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0]
         : undefined;
+    const tow =
+      allowed && !view.editorEnabled
+        ? entities
+            .filter(
+              (e) =>
+                isTowTruck(e) &&
+                boardingDistance(p, e) <= 32 &&
+                Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 0.5 &&
+                (p.parentId === undefined || current?.id === e.id) &&
+                p.jumpVZ === undefined &&
+                Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <= 12 &&
+                !entities.some((other) => other.parentId === e.id && other.id !== p.id),
+            )
+            .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0]
+        : undefined;
+    const readyCar =
+      tow &&
+      towCandidate(
+        tow,
+        entities.filter((e) => !entities.some((other) => other.parentId === e.id)),
+      );
+    for (const [action, button] of this.towButtons) {
+      button.hidden =
+        !tow ||
+        (action === "attach" ? tow.towTargetId !== undefined : tow.towTargetId === undefined);
+      button.style.display = button.hidden ? "none" : "";
+      button.disabled = this.busy || locked || (action === "attach" && !readyCar);
+      button.onclick = () => {
+        if (tow) this.activateRequest({ type: "vehicle-tow-action", entityId: tow.id, action });
+      };
+    }
     const inside = bed && onBedFloor(p, bed);
     for (const [action, button] of this.bedButtons) {
       button.hidden =
@@ -146,7 +193,7 @@ export class VehicleControl {
                 ? { type: "vehicle-bed-action", entityId: bed.id, action: "leave" }
                 : null
         : null;
-    this.root.hidden = !this.request && !bed;
+    this.root.hidden = !this.request && !bed && !tow;
     this.button.hidden = !this.request || this.request.type === "vehicle-bed-action";
     this.button.style.display = this.button.hidden ? "none" : "";
     this.button.disabled = this.busy || locked;
@@ -185,7 +232,9 @@ export class VehicleControl {
                 : "Drag a direction · aim behind to reverse");
       if (this.status.textContent !== hint) this.status.textContent = hint;
     }
-    return !!this.request || !!bed;
+    if (tow && !this.busy && !this.error && !readyCar && tow.towTargetId === undefined)
+      this.status.textContent = "Back up to a parked car’s front wheels to attach it.";
+    return !!this.request || !!bed || !!tow;
   }
   activate(): boolean {
     if (!this.request) return false;

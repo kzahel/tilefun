@@ -310,3 +310,9 @@ data/
 # Retained articulated equipment; scratch and Blender backups remain ignored.
 !/art-source/vehicle-bake/dump-truck/v2/
 /art-source/vehicle-bake/dump-truck/v2/*.blend1
+
+# Retained towing equipment and cardinal fallbacks; scratch stays under data/.
+!/art-source/vehicle-bake/tow-truck/v2/
+/art-source/vehicle-bake/tow-truck/v2/*.blend1
+/art-source/vehicle-bake/towing-fallbacks/*
+!/art-source/vehicle-bake/towing-fallbacks/v2/

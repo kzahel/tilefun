@@ -11,6 +11,7 @@ import {
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
+import { presentedTowPosition, towMeshOffset, towPitch } from "../traffic/Towing.js";
 import {
   bedGateAngle,
   bedHeading,
@@ -101,6 +102,9 @@ export function collectScene(
     (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
   );
   const movingRoofs = entities.filter(hasMovingRoof);
+  const towSprites = entities.some((e) => e.towTargetId !== undefined)
+    ? new Map<number, SpriteItem>()
+    : undefined;
   const bedSprites = movingRoofs.some(hasVehicleBed) ? new Map<number, SpriteItem>() : undefined;
   const vehicleSurfaces = movingRoofs.flatMap((e) =>
     e.collider
@@ -125,7 +129,16 @@ export function collectScene(
   // --- Entities ---
   for (const e of entities) {
     if (!e.sprite || (e.parentId !== undefined && insideParents.has(e.parentId))) continue;
-    const pos = interpolatePosition(e.position, e.prevPosition, alpha);
+    let pos = interpolatePosition(e.position, e.prevPosition, alpha);
+    if (e.towedBy !== undefined) {
+      const truck = entities.find((t) => t.id === e.towedBy && t.towTargetId === e.id);
+      if (truck)
+        pos = presentedTowPosition(
+          e,
+          truck,
+          interpolatePosition(truck.position, truck.prevPosition, alpha),
+        );
+    }
 
     // Compute Z offset in world pixels
     let zOffset: number;
@@ -241,6 +254,10 @@ export function collectScene(
             radius: meshRadius,
             bedTilt: bedTilt(e),
             bedGateAngle: bedGateAngle(e),
+            towActive: e.towTargetId !== undefined,
+            towPitch: towPitch(e),
+            towOffsetX: towMeshOffset(e).x,
+            towOffsetZ: towMeshOffset(e).z,
           }
         : undefined);
     const spriteItem = {
@@ -305,6 +322,7 @@ export function collectScene(
     } satisfies SpriteItem;
     items.push(spriteItem);
     bedSprites?.set(e.id, spriteItem);
+    towSprites?.set(e.id, spriteItem);
     if (visibleGrass && isVehicleSprite(e.type)) grassVehicles.push(spriteItem);
 
     const ghost = ghostByEntityId?.get(e.id);
@@ -454,6 +472,20 @@ export function collectScene(
       content.hasShadow = false;
       body.bedGroup.contents.push(content);
       grouped.add(content);
+    }
+    for (let i = items.length - 1; i >= 0; i--)
+      if (grouped.has(items[i] as SpriteItem)) items.splice(i, 1);
+  }
+  if (towSprites) {
+    const grouped = new Set<SpriteItem>();
+    for (const truck of entities) {
+      if (truck.towTargetId === undefined) continue;
+      const body = towSprites.get(truck.id),
+        car = towSprites.get(truck.towTargetId);
+      if (body && car) {
+        body.towGroup = car;
+        grouped.add(car);
+      }
     }
     for (let i = items.length - 1; i >= 0; i--)
       if (grouped.has(items[i] as SpriteItem)) items.splice(i, 1);
