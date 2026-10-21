@@ -20,7 +20,10 @@ export interface AnimalWork {
     | "hummingbird"
     | "horse"
     | "giraffe"
-    | "beaver";
+    | "beaver"
+    | "cow"
+    | "sheep"
+    | "donkey";
   state:
     | "idle"
     | "seek"
@@ -55,7 +58,12 @@ export interface AnimalWork {
     | "drink"
     | "raise"
     | "build"
-    | "settle";
+    | "settle"
+    | "lie"
+    | "ruminate"
+    | "stand"
+    | "bleat"
+    | "roll";
   elapsed: number;
   cooldown: number;
   targetId?: string;
@@ -87,6 +95,9 @@ export interface AnimalWork {
   guardWarned?: boolean;
   warnings?: number;
   drunk?: number;
+  ruminated?: number;
+  regrouped?: number;
+  dustBaths?: number;
 }
 
 export type FoodKind = "nut" | "fruit" | "root";
@@ -101,7 +112,8 @@ export interface WorkItem {
     | "seed"
     | "nectar"
     | "water"
-    | "lodge";
+    | "lodge"
+    | "dust";
   claimedBy?: string;
   /** Stable player identity for thrown balls, or natural lineage/manual owner for a site. */
   owner?: string;

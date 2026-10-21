@@ -142,14 +142,30 @@ it("assigns each farm animal once to its actual spawn chunk, independently of qu
     new Set(f.actors.map((a) => a.featureId)),
   );
   const supplies = result.filter((a) => !faunaProfile(a.type));
-  expect(supplies).toHaveLength(
+  const pastureSupplies = supplies.filter((a) => a.featureId.endsWith(":pasture-food"));
+  expect(pastureSupplies).toHaveLength(
     f.actors.filter((a) =>
       ["wildlife-goat-provisional-v1", "wildlife-piglet-provisional-v1"].includes(a.type),
     ).length,
   );
+  const cowSupplies = supplies.filter((a) => a.featureId.endsWith(":herd:cow"));
+  const cowCells = new Set(
+    f.actors
+      .filter((a) => a.type === "wildlife-cow-provisional-v1")
+      .map((a) => `${Math.floor(a.wx / 256)},${Math.floor(a.wy / 256)}`),
+  );
+  expect(cowSupplies).toHaveLength(cowCells.size);
+  expect(cowSupplies.every((a) => a.type === "wildlife-resource-growing-plant-v1")).toBe(true);
+  expect(supplies).toHaveLength(pastureSupplies.length + cowSupplies.length);
   expect(new Set(result.map((a) => a.featureId)).size).toBe(result.length);
   for (const supply of supplies) {
-    const owner = required(animals.find((a) => supply.featureId === `${a.featureId}:pasture-food`));
+    const owner = required(
+      animals.find(
+        (a) =>
+          supply.featureId === `${a.featureId}:pasture-food` ||
+          supply.featureId === `${a.featureId}:herd:cow`,
+      ),
+    );
     expect(Math.floor(supply.wx / 256)).toBe(Math.floor(owner.wx / 256));
     expect(Math.floor(supply.wy / 256)).toBe(Math.floor(owner.wy / 256));
   }

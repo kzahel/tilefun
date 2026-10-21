@@ -4,6 +4,7 @@ import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.j
 import { createFauna, faunaType } from "./Fauna.js";
 import { forageType, sourceType } from "./ForageResources.js";
 import { gardenSupplies } from "./GardenHabitat.js";
+import { herdSupplies } from "./HerdHabitat.js";
 import { pastureSite } from "./PastureHabitat.js";
 import { RABBIT_TYPE } from "./Rabbit.js";
 import { rangeSupplies } from "./RangeHabitat.js";
@@ -56,6 +57,7 @@ export function foragePlacements(
   const result: ActorPlacement[] = [
     ...gardenSupplies(actors, nature, cx, cy),
     ...rangeSupplies(actors, nature, cx, cy),
+    ...herdSupplies(actors, nature, cx, cy),
   ];
   let robinFood = false;
   for (const actor of actors) {

@@ -1,0 +1,67 @@
+{
+  "identity": "cow-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "anchor": [
+    32,
+    46
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "ruminate",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 50
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "lower": {
+      "start": 41,
+      "count": 10,
+      "frameDuration": 75,
+      "loop": false
+    },
+    "graze": {
+      "start": 51,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": true
+    },
+    "raise": {
+      "start": 63,
+      "count": 10,
+      "frameDuration": 75,
+      "loop": false
+    },
+    "lie": {
+      "start": 73,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": false
+    },
+    "ruminate": {
+      "start": 85,
+      "count": 16,
+      "frameDuration": 150,
+      "loop": true
+    },
+    "stand": {
+      "start": 101,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": false
+    }
+  },
+  "sheetSha256": "5259b5a703b3ec71b6dbd3b74233763067a6ff7c56aa5bf860f05a6f061f8f40"
+}

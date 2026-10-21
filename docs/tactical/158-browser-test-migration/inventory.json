@@ -5,8 +5,8 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 829,
-      "inventorySha256": "a37637b8ffefe0f2ef3c1a06b11d2d0ff76b16deec3631a44c208d32a2d68385",
+      "cases": 830,
+      "inventorySha256": "eaee4bb04c0dfa5a199eee29e169e065f9d2b11850a691025f0c44c916abeb21",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -21,7 +21,7 @@
         {
           "path": "tests/animal-work.spec.ts",
           "cases": 9,
-          "sourceSha256": "33ce1f80352ee121c54e9e9d06eeb9704aed32ba5054d17b640bebad7b1e86c4"
+          "sourceSha256": "059a060e25db9907f38770b64db1a37b23cd30eed85c69d68ec921479205726f"
         },
         {
           "path": "tests/aquatic-hunters.spec.ts",
@@ -125,8 +125,8 @@
         },
         {
           "path": "tests/controller-menu.spec.ts",
-          "cases": 5,
-          "sourceSha256": "9623dabf2583edf1f831bda8aa36a3983eb30a1e548dc4a6c30c2f1b0a7548e4"
+          "cases": 6,
+          "sourceSha256": "114d271c7bd756553628b3032a3618a2bd8b57f1483c2b72d08865d631663dce"
         },
         {
           "path": "tests/curved-trains.spec.ts",
@@ -281,7 +281,7 @@
         {
           "path": "tests/meadow-work.spec.ts",
           "cases": 7,
-          "sourceSha256": "6cc62bcba2d48d2280e250b5611673d22f41a48fd2d7fdf894528cbf0263d0a8"
+          "sourceSha256": "728d4d54e873fb455852c45547901cc1a3387ab90e951a9503010ef1c0116015"
         },
         {
           "path": "tests/mobile-editor.spec.ts",
@@ -426,7 +426,7 @@
         {
           "path": "tests/range-work.spec.ts",
           "cases": 2,
-          "sourceSha256": "0d2810506c877d4adf53bddc0b5e5bec1939f0df59db301f37482b9d565f6b2f"
+          "sourceSha256": "ad0aa5907bc972ec961bf7aa999c43d45fb7c94aaf966d4d49605a3c2fcb4812"
         },
         {
           "path": "tests/raptors.spec.ts",
@@ -526,7 +526,7 @@
         {
           "path": "tests/towing.spec.ts",
           "cases": 1,
-          "sourceSha256": "a2bb5dfca4abc0353048d3891dabb62331c2bb3af1559c3a136aa01bc7cead33"
+          "sourceSha256": "fceb3f4ed33527b3c790f66034fabdc11d6c141886f6f22fcf390d51ac17b7ad"
         },
         {
           "path": "tests/traffic-rendering.spec.ts",
@@ -556,7 +556,7 @@
         {
           "path": "tests/truck-bed.spec.ts",
           "cases": 1,
-          "sourceSha256": "c5f99f42e4a4f21ee11172284dff19b1450e150ce2dec261c02f4604ce289deb"
+          "sourceSha256": "0d84cd74e254851918f3a09dcb98d134184130e6b0ee1245294673645672257d"
         },
         {
           "path": "tests/underground-garage.spec.ts",

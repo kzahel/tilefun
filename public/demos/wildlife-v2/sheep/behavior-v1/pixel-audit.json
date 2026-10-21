@@ -1,0 +1,22 @@
+{
+  "identity": "sheep-behavior-v1",
+  "poses": 48,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "bleat": 11
+    },
+    "up": {
+      "bleat": 11
+    },
+    "left": {
+      "bleat": 11
+    },
+    "right": {
+      "bleat": 11
+    }
+  },
+  "connectedHeadBodyChecks": 48
+}

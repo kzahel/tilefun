@@ -2,7 +2,7 @@
   "version": 1,
   "id": "wildlife-distinct-behaviors",
   "updated": "2026-10-21",
-  "state": "sixth-batch-automation-verified-human-review-pending",
+  "state": "seventh-batch-automation-verified-human-review-pending",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -243,7 +243,7 @@
       "runtimeType": "wildlife-cow-provisional-v1",
       "family": "Farm & livestock",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -251,27 +251,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Corrected Holstein travel and ear/tail action exist; finite feeding and paid resting rumination are not implemented.",
+            "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/Fauna.ts",
+          "src/wildlife/faunaAI.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Graze finite grass, lie down and chew the paid meal before rising.",
+        "trigger": "Nearby safe finite grass, eligible flock mates or a supported dust patch.",
+        "scenario": "behavior-cow",
+        "tactical": "docs/tactical/170-rumination-flocks-and-dust-baths.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "saved meaningful outcome",
+          "normal travel and home limits",
+          "real support and ready-only clocks",
+          "interruption/companion protections",
+          "natural and editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/HerdWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/cow/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the shared behavior demonstration and exact retained action bank."
     },
     "sheep": {
       "name": "Sheep",
@@ -279,7 +323,7 @@
       "runtimeType": "wildlife-sheep-provisional-v1",
       "family": "Farm & livestock",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -287,27 +331,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Corrected Suffolk travel and ear action exist; native cohesion only scores random wander goals and does not commit a flock reunion.",
+            "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/Fauna.ts",
+          "src/wildlife/faunaAI.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Walk back toward separated flock mates, then visibly bleat on reunion.",
+        "trigger": "Nearby safe finite grass, eligible flock mates or a supported dust patch.",
+        "scenario": "behavior-sheep",
+        "tactical": "docs/tactical/170-rumination-flocks-and-dust-baths.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "saved meaningful outcome",
+          "normal travel and home limits",
+          "real support and ready-only clocks",
+          "interruption/companion protections",
+          "natural and editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/HerdWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/sheep/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the shared behavior demonstration and exact retained action bank."
     },
     "horse": {
       "name": "Horse",
@@ -1311,7 +1399,7 @@
       "runtimeType": "wildlife-donkey-provisional-v1",
       "family": "Farm & livestock",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -1319,27 +1407,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Retained articulated native walking/grazing exists; supported dust sites, rolling and a saved bath outcome are absent.",
+            "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/Fauna.ts",
+          "src/wildlife/faunaAI.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Seek a real dust patch, lie down, roll and leave saved scuffs before rising.",
+        "trigger": "Nearby safe finite grass, eligible flock mates or a supported dust patch.",
+        "scenario": "behavior-donkey",
+        "tactical": "docs/tactical/170-rumination-flocks-and-dust-baths.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "saved meaningful outcome",
+          "normal travel and home limits",
+          "real support and ready-only clocks",
+          "interruption/companion protections",
+          "natural and editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/HerdWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/donkey/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/170-rumination-flocks-and-dust-baths/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the shared behavior demonstration and exact retained action bank."
     },
     "mule": {
       "name": "Brown mule",
@@ -6150,7 +6282,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the ginger coat’s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the ginger coat\u2019s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-ginger",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -6229,7 +6361,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the black coat’s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the black coat\u2019s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-black",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -8405,6 +8537,10 @@
     {
       "date": "2026-10-21",
       "summary": "168: horse grazing/drinking, supported giraffe canopy browsing and conserved beaver branch construction complete. Twenty verified entries/eighteen signatures; four exact art reviews pending. Full 828 browser pass; full native 6524 pass/8 fail/10 skip followed by passing 46 scoped correction checks. Five known Windows failures remain. Types/lint/build/normal-retina 1931 manifest/streaming ready pass; final 5 rendered/lab checks pass."
+    },
+    {
+      "date": "2026-10-21",
+      "summary": "170: paid cow rumination, sheep flock regrouping and donkey dust bathing implemented. Twenty-three verified entries/twenty-one signatures; four exact art reviews pending. 135 affected, 20 final herd and 24 initial fauna checks pass. Full native: 6,561 passed / 7 failed / 10 skipped. Five known Windows failures remain; two outdated assertions corrected with 18 settlement and three grazer checks passing. Full browser: 826 passed / three failed; first sequential recheck eight passed / one train failure. Final isolated checkpoint reproduces the original manifest digest; all 12 production checks pass unchanged: both six-animal Canvas/GPU boundaries, four train, five touch and one standalone review. Types/lint/build, normal-retina 1,948-candidate manifest, streaming readiness, Node 1 / HTTP 3 / Worker 11 plus dry-run pass."
     }
   ]
 }

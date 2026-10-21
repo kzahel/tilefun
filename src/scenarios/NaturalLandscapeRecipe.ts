@@ -16,6 +16,7 @@ import { createRabbit } from "../wildlife/Rabbit.js";
 import { animalWorkRecipe } from "./AnimalWorkRecipe.js";
 import { cityTrainRecipe } from "./CityTrainRecipe.js";
 import { gardenWorkRecipe } from "./GardenWorkRecipe.js";
+import { herdWorkRecipe } from "./HerdWorkRecipe.js";
 import { meadowWorkRecipe } from "./MeadowWorkRecipe.js";
 import { pastureWorkRecipe } from "./PastureWorkRecipe.js";
 import { rangeWorkRecipe } from "./RangeWorkRecipe.js";
@@ -25,6 +26,9 @@ import { woodlandWorkRecipe } from "./WoodlandWorkRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  { id: "behavior-cow", name: "Cow · graze, rest and chew cud", seed: 1, x: 8, y: 11 },
+  { id: "behavior-sheep", name: "Sheep · regroup with the flock and bleat", seed: 1, x: 8, y: 11 },
+  { id: "behavior-donkey", name: "Donkey · roll in a dust bath", seed: 1, x: 8, y: 11 },
   { id: "behavior-horse", name: "Horse · graze grass and drink", seed: 1, x: 8, y: 11 },
   { id: "behavior-giraffe", name: "Giraffe · browse tree-canopy leaves", seed: 1, x: 8, y: 11 },
   { id: "behavior-beaver", name: "Beaver · haul branches and build", seed: 1, x: 8, y: 11 },
@@ -165,6 +169,8 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  if (id === "behavior-cow" || id === "behavior-sheep" || id === "behavior-donkey")
+    return herdWorkRecipe(id.slice("behavior-".length) as "cow" | "sheep" | "donkey");
   if (id === "behavior-horse" || id === "behavior-giraffe" || id === "behavior-beaver")
     return rangeWorkRecipe(id.slice("behavior-".length) as "horse" | "giraffe" | "beaver");
   if (id === "behavior-chicken" || id === "behavior-bee" || id === "behavior-hummingbird")

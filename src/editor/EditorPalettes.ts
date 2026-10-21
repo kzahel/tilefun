@@ -105,6 +105,7 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
     color: "#54834b",
   })),
   { type: forageType("lodge"), label: "Beaver brush shelter foundation", color: "#a77b4c" },
+  { type: forageType("dust"), label: "Donkey dust-bathing patch", color: "#c2a879" },
   ...(["twig", "nut", "fruit", "greens", "seed", "root"] as const).map((kind) => ({
     type: forageType(kind),
     label:

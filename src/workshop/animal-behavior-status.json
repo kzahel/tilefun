@@ -27,22 +27,22 @@
     "review": "pending"
   },
   "cow": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Graze finite grass, lie down and chew the paid meal before rising.",
+    "scene": "behavior-cow",
+    "review": "pending"
   },
   "sheep": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Walk back toward separated flock mates, then visibly bleat on reunion.",
+    "scene": "behavior-sheep",
+    "review": "pending"
   },
   "horse": {
     "phase": "land",
@@ -216,13 +216,13 @@
     "review": "not-requested"
   },
   "donkey": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Seek a real dust patch, lie down, roll and leave saved scuffs before rising.",
+    "scene": "behavior-donkey",
+    "review": "pending"
   },
   "mule": {
     "phase": "unclassified",

@@ -6,19 +6,19 @@ Generated from [the canonical ledger](../art-source/wildlife-v2/behavior-campaig
 
 | Work area | Not audited | Planned | In progress | Verified | Not required |
 | --- | --- | --- | --- | --- | --- |
-| audit | 186 | 0 | 0 | 20 | 0 |
-| design | 186 | 0 | 0 | 20 | 0 |
-| ai | 186 | 0 | 0 | 20 | 0 |
-| animation | 186 | 0 | 0 | 20 | 0 |
-| integration | 186 | 0 | 0 | 20 | 0 |
-| validation | 186 | 0 | 0 | 20 | 0 |
+| audit | 183 | 0 | 0 | 23 | 0 |
+| design | 183 | 0 | 0 | 23 | 0 |
+| ai | 183 | 0 | 0 | 23 | 0 |
+| animation | 183 | 0 | 0 | 23 | 0 |
+| integration | 183 | 0 | 0 | 23 | 0 |
+| validation | 183 | 0 | 0 | 23 | 0 |
 
-Phase assignment: unclassified: 186; land: 15; air: 4; amphibious: 1; aquatic: 0.
+Phase assignment: unclassified: 183; land: 18; air: 4; amphibious: 1; aquatic: 0.
 
 | Human review | Not requested | Pending | Needs changes | Approved |
 | --- | --- | --- | --- | --- |
-| behavior | 186 | 20 | 0 | 0 |
-| animation | 186 | 20 | 0 | 0 |
+| behavior | 183 | 23 | 0 | 0 |
+| animation | 183 | 23 | 0 | 0 |
 
 Requested ideas are proposals, not completed designs: dog ball fetching, crow object carrying, appropriate bird nesting, and visible food/fruit foraging.
 
@@ -27,8 +27,8 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Red fox (fox) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Cat (cat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank. |
 | Dog (dog) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; then audit the next land/air batch. |
-| Pasture cow (cow) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Sheep (sheep) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Pasture cow (cow) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
+| Sheep (sheep) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
 | Horse (horse) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and retained action bank. |
 | Pig (piglet) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained new action bank. |
 | Goat (goat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained new action bank. |
@@ -48,7 +48,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Rust crab (crab) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Rust octopus (octopus) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Moon jellyfish (jellyfish) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Grey donkey (donkey) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Grey donkey (donkey) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
 | Brown mule (mule) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Brown llama (llama) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Cream alpaca (alpaca) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |

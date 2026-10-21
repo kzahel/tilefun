@@ -103,7 +103,9 @@ export class NaturalStrategy extends RailwayStrategy {
             (a) =>
               a.type.startsWith("wildlife-goat-") ||
               a.type.startsWith("wildlife-piglet-") ||
-              a.type.startsWith("wildlife-horse-"),
+              a.type.startsWith("wildlife-horse-") ||
+              a.type.startsWith("wildlife-cow-") ||
+              a.type.startsWith("wildlife-donkey-"),
           ),
         ],
         this.nature,

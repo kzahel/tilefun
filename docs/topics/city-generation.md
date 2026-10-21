@@ -6,6 +6,12 @@ Updated: 2026-10-20.
 
 ## Current generation policy
 
+[170](../tactical/170-rumination-flocks-and-dust-baths.md) adds at most one shared
+grass patch per occupied cow cell and one reusable dust patch per donkey cell,
+including authored farm residents. New IDs derive from existing owners and stay
+inside their actual cells. Existing animals, IDs, RNG and ownership pools remain
+unchanged. Manual animal placement creates no supplies or extra flock mates.
+
 Behavior batch [155](../tactical/155-fetch-nests-and-caches.md) adds finite loose
 twigs/nuts/fruit at existing crow/squirrel homes and ordinary oak nest trees at
 crow clearings. Resource/tree identities derive from existing animal feature IDs;

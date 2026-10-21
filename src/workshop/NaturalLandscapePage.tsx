@@ -34,6 +34,8 @@ import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 
 function animalInspectionZoom(id: string): number | undefined {
+  if (["behavior-cow", "behavior-sheep"].includes(id)) return 2;
+  if (id === "behavior-donkey") return 2.2;
   if (id === "behavior-horse") return 1.6;
   if (id === "behavior-giraffe") return 0.9;
   if (id === "behavior-beaver") return 1.8;
@@ -166,6 +168,8 @@ export default function NaturalLandscapePage() {
       height: 640,
       terrain: true,
       fixedCamera: (player, alpha) => {
+        if (["behavior-cow", "behavior-sheep", "behavior-donkey"].includes(caseId))
+          return { wx: 160, wy: 164 };
         if (caseId === "behavior-horse") return { wx: 160, wy: 176 };
         if (caseId === "behavior-giraffe") return { wx: 176, wy: 104 };
         if (caseId === "behavior-beaver") return { wx: 144, wy: 186 };
@@ -609,41 +613,47 @@ export default function NaturalLandscapePage() {
       {caseId.startsWith("behavior-") && (
         <div className="actions">
           <p>
-            {caseId === "behavior-horse"
-              ? "The horse lowers its head to graze real grass, then drinks from a spring pool. Depleted grass and water slowly replenish during active play."
-              : caseId === "behavior-giraffe"
-                ? "The giraffe reaches leaves on an actual tree canopy, browses one portion and raises its head again. Canopy leaves slowly regrow while the world runs."
-                : caseId === "behavior-beaver"
-                  ? "The beaver takes real branches, carries them to the foundation and builds a small brush shelter in four stages. Fallen branch piles slowly replenish during active play."
-                  : caseId === "behavior-chicken"
-                    ? "The chicken scratches real soil, uncovers one seed and pecks it up to eat. Soil patches slowly replenish during active play."
-                    : caseId === "behavior-bee"
-                      ? "The bee sips finite nectar, carries pollen to a different bloom and helps one nearby depleted crop grow. Golden blooms were recently pollinated."
-                      : caseId === "behavior-hummingbird"
-                        ? "The hummingbird hovers to sip nectar, then briefly guards its flower against other hummingbirds. Empty flowers slowly refill during active play."
-                        : caseId === "behavior-goat"
-                          ? "The goat rears to browse a leafy shrub, lowers again and hops onto a real low rock to rest before jumping down. Shrubs slowly grow new leaves."
-                          : caseId === "behavior-pig"
-                            ? "The pig sniffs a root patch, digs with its snout, uncovers one real root and eats it. Depleted patches slowly replenish while the world runs."
-                            : caseId === "behavior-elephant"
-                              ? "The elephant reaches for actual tree fruit, curls it to its mouth and eats. It can also shake limited fruit loose for other foragers."
-                              : caseId === "behavior-capuchin"
-                                ? "The monkey climbs a real tree, picks one fruit, eats on the crown and climbs down. The crop slowly regrows while the world runs."
-                                : caseId === "behavior-raccoon"
-                                  ? "The raccoon takes actual food from the squirrel’s cache and carries it under a tree to eat. The squirrel gathers nuts to refill its cache."
-                                  : caseId.startsWith("behavior-cat")
-                                    ? "The cat crouches, stalks, pounces and bats a physical ball, then chases it again. After playing it can climb to rest on the tree."
-                                    : caseId === "behavior-dog"
-                                      ? "Throw a ball and wait for it to settle. The dog picks it up, carries it back and drops it near you. Throw again to reuse the returned ball."
-                                      : caseId === "behavior-crow"
-                                        ? "The crow gathers real loose twigs, carries them to a tree perch and builds its nest in four visible stages."
-                                        : caseId === "behavior-rabbit"
-                                          ? "The rabbit hops to an edible plant, nibbles it in three visible stages and checks for danger between bites. Food is finite; reset the scene to replenish it."
-                                          : caseId === "behavior-robin"
-                                            ? "The robin flies down from an actual tree canopy, pecks and eats the ground food, then flies back to its perch."
-                                            : caseId === "behavior-meerkat"
-                                              ? "The group takes turns standing upright to scan. Place a tiger nearby to see the lookout give an alarm and the group escape."
-                                              : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
+            {caseId === "behavior-cow"
+              ? "The cow grazes a real grass portion, lies down to chew its meal, then stands. Grass slowly regrows during active play."
+              : caseId === "behavior-sheep"
+                ? "Separated sheep walk back toward their flock and bleat when reunited. Following companions stay under your control."
+                : caseId === "behavior-donkey"
+                  ? "The donkey lies down and rolls on a dust patch, then rises. Each completed bath leaves lasting scuffs on the patch."
+                  : caseId === "behavior-horse"
+                    ? "The horse lowers its head to graze real grass, then drinks from a spring pool. Depleted grass and water slowly replenish during active play."
+                    : caseId === "behavior-giraffe"
+                      ? "The giraffe reaches leaves on an actual tree canopy, browses one portion and raises its head again. Canopy leaves slowly regrow while the world runs."
+                      : caseId === "behavior-beaver"
+                        ? "The beaver takes real branches, carries them to the foundation and builds a small brush shelter in four stages. Fallen branch piles slowly replenish during active play."
+                        : caseId === "behavior-chicken"
+                          ? "The chicken scratches real soil, uncovers one seed and pecks it up to eat. Soil patches slowly replenish during active play."
+                          : caseId === "behavior-bee"
+                            ? "The bee sips finite nectar, carries pollen to a different bloom and helps one nearby depleted crop grow. Golden blooms were recently pollinated."
+                            : caseId === "behavior-hummingbird"
+                              ? "The hummingbird hovers to sip nectar, then briefly guards its flower against other hummingbirds. Empty flowers slowly refill during active play."
+                              : caseId === "behavior-goat"
+                                ? "The goat rears to browse a leafy shrub, lowers again and hops onto a real low rock to rest before jumping down. Shrubs slowly grow new leaves."
+                                : caseId === "behavior-pig"
+                                  ? "The pig sniffs a root patch, digs with its snout, uncovers one real root and eats it. Depleted patches slowly replenish while the world runs."
+                                  : caseId === "behavior-elephant"
+                                    ? "The elephant reaches for actual tree fruit, curls it to its mouth and eats. It can also shake limited fruit loose for other foragers."
+                                    : caseId === "behavior-capuchin"
+                                      ? "The monkey climbs a real tree, picks one fruit, eats on the crown and climbs down. The crop slowly regrows while the world runs."
+                                      : caseId === "behavior-raccoon"
+                                        ? "The raccoon takes actual food from the squirrel’s cache and carries it under a tree to eat. The squirrel gathers nuts to refill its cache."
+                                        : caseId.startsWith("behavior-cat")
+                                          ? "The cat crouches, stalks, pounces and bats a physical ball, then chases it again. After playing it can climb to rest on the tree."
+                                          : caseId === "behavior-dog"
+                                            ? "Throw a ball and wait for it to settle. The dog picks it up, carries it back and drops it near you. Throw again to reuse the returned ball."
+                                            : caseId === "behavior-crow"
+                                              ? "The crow gathers real loose twigs, carries them to a tree perch and builds its nest in four visible stages."
+                                              : caseId === "behavior-rabbit"
+                                                ? "The rabbit hops to an edible plant, nibbles it in three visible stages and checks for danger between bites. Food is finite; reset the scene to replenish it."
+                                                : caseId === "behavior-robin"
+                                                  ? "The robin flies down from an actual tree canopy, pecks and eats the ground food, then flies back to its perch."
+                                                  : caseId === "behavior-meerkat"
+                                                    ? "The group takes turns standing upright to scan. Place a tiger nearby to see the lookout give an alarm and the group escape."
+                                                    : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
           </p>
           {caseId === "behavior-dog" && (
             <button

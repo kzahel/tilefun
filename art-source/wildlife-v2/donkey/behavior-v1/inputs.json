@@ -1,0 +1,20 @@
+{
+  "blend": "art-source/wildlife-v2/donkey/roster-v2/donkey.blend",
+  "masters": "art-source/wildlife-v2/donkey/roster-v2/masters.json",
+  "metadata": "public/demos/wildlife-v2/donkey/roster-v2/sprite.json",
+  "sheet": "public/demos/wildlife-v2/donkey/roster-v2/sheet.png",
+  "paintHelper": "art-source/wildlife-v2/_families/grazers-140/finish.py",
+  "canvas": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/donkey/roster-v2/donkey.blend": "7feba9ce28f80fe1baa8a8c257cd5e89be1af3cd3ac2a5a2d4234dee5998c6e7",
+    "art-source/wildlife-v2/donkey/roster-v2/masters.json": "a97345a9e1827457e6206daaba0adfa0d2703a73d5a0bba73cce80bc53e8d0e3",
+    "public/demos/wildlife-v2/donkey/roster-v2/sprite.json": "37949fee6fc6d539a5c6c094a48c17db50ae7540d80d0d0529492c6b1eb4ddae",
+    "public/demos/wildlife-v2/donkey/roster-v2/sheet.png": "54e8a43d58036df8f8a20be83bd188cdfe64ed01e32112ee8a9d7562b887538a",
+    "art-source/wildlife-v2/_families/grazers-140/finish.py": "36f2e58bafb2bf4c79f9691619c6e58991e9b4236d88674c17563d3a3bc71126",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9"
+  }
+}

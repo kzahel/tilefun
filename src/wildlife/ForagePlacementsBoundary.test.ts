@@ -8,8 +8,8 @@ const nature = {
   terrain: () => TerrainId.Grass,
   inThicket: () => false,
 } as unknown as NaturalLandscape;
-it.each(["horse", "giraffe", "beaver"] as const)(
-  "%s range supplies share stable owners within both sides of chunk seams",
+it.each(["horse", "giraffe", "beaver", "cow", "donkey"] as const)(
+  "%s supplies share stable owners within both sides of chunk seams",
   (species) => {
     for (const [cx, cy] of [
       [0, 0],
@@ -35,7 +35,7 @@ it.each(["horse", "giraffe", "beaver"] as const)(
           cx ?? 0,
           cy ?? 0,
         );
-        expect(items).toHaveLength(species === "horse" ? 2 : species === "giraffe" ? 1 : 3);
+        expect(items).toHaveLength(species === "horse" ? 2 : species === "beaver" ? 3 : 1);
         expect(new Set(items.map((e) => e.featureId)).size).toBe(items.length);
         for (const item of items) {
           expect(Math.floor(item.wx / 256)).toBe(cx);

@@ -77,7 +77,7 @@ export function createFoodSource(kind: SourceKind, wx: number, wy: number): Enti
 }
 
 export const FORAGE_SHEET = "wildlife-forage-resources-v1";
-export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v6/sheet.png";
+export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v7/sheet.png";
 export const FORAGE_KINDS = [
   "twig",
   "fruit",
@@ -90,6 +90,7 @@ export const FORAGE_KINDS = [
   "nectar",
   "water",
   "lodge",
+  "dust",
 ] as const;
 export type ForageKind = (typeof FORAGE_KINDS)[number];
 export const forageType = (kind: ForageKind) => `wildlife-resource-${kind}-v1`;
@@ -105,6 +106,7 @@ const cells = {
   nectar: [51],
   water: [52],
   lodge: [64, 65, 66, 67, 68],
+  dust: [69, 70, 71, 72],
 };
 export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
   FORAGE_KINDS.map((kind) => [
@@ -128,9 +130,9 @@ export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
       collider: {
         offsetX: 0,
         offsetY: 0,
-        width: kind === "nest" ? 20 : 6,
-        height: 5,
-        physicalHeight: 3,
+        width: kind === "nest" ? 20 : kind === "dust" ? 24 : 6,
+        height: kind === "dust" ? 12 : 5,
+        physicalHeight: kind === "dust" ? 0 : 3,
         solid: false,
       },
       wanderAI: null,
@@ -158,11 +160,13 @@ export function restoreWorkItemPose(e: Entity): void {
     ? Math.max(0, Math.min(3, item.units))
     : item.kind === "greens"
       ? Math.max(0, Math.min(2, 3 - item.units))
-      : item.kind === "nest" || item.kind === "lodge"
-        ? Math.min(4, item.units)
-        : item.kind === "cache" && item.contents.length
-          ? 1
-          : 0;
+      : item.kind === "dust"
+        ? Math.max(0, Math.min(3, item.units))
+        : item.kind === "nest" || item.kind === "lodge"
+          ? Math.min(4, item.units)
+          : item.kind === "cache" && item.contents.length
+            ? 1
+            : 0;
   if (e.sprite) {
     e.sprite.clip =
       stage + (source === "nectar-flower" && (item.pollination?.remaining ?? 0) > 0 ? 4 : 0);

@@ -28,6 +28,7 @@
       "!art-source/vehicle-riders/**/offline.html",
       "!art-source/wildlife-v2/cat/motion-v2/projection.json",
       "!art-source/wildlife-v2/dog/motion-v2/projection.json",
+      "!art-source/wildlife-v2/donkey/behavior-v1/projection.json",
       "!art-source/wildlife-v2/centipede/roster-v3/projection.json",
       "!art-source/wildlife-v2/millipede/roster-v3/projection.json",
       "!docs/tactical/053-semantic-tileset-map/source-files.json"

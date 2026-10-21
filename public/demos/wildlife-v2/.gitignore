@@ -675,3 +675,9 @@
 !giraffe/behavior-v1/*
 !beaver/behavior-v1/*
 !foraging-resources/behavior-v6/*
+
+# Owner-authorized behavior batch 170.
+!cow/behavior-v1/*
+!sheep/behavior-v1/*
+!donkey/behavior-v1/*
+!foraging-resources/behavior-v7/*

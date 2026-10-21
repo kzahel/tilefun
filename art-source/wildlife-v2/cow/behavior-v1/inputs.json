@@ -1,0 +1,20 @@
+{
+  "blend": "art-source/wildlife-v2/cow/motion-v2/cow.blend",
+  "masters": "art-source/wildlife-v2/cow/motion-v2/masters.json",
+  "metadata": "public/demos/wildlife-v2/cow/motion-v2/sprite.json",
+  "sheet": "public/demos/wildlife-v2/cow/motion-v2/sheet.png",
+  "paintHelper": "art-source/wildlife-v2/cow/motion-v2/finish.py",
+  "canvas": 64,
+  "anchor": [
+    32,
+    46
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/cow/motion-v2/cow.blend": "1db8e091290aba0a713b108ab7ecfae4ecc3e9450b1d1c5b6bf2f6fc8edcbf2a",
+    "art-source/wildlife-v2/cow/motion-v2/masters.json": "7f16f43c689421882149557f7011407506d65049f5baf008f0ed0eb6de791370",
+    "public/demos/wildlife-v2/cow/motion-v2/sprite.json": "b279265ada3126493ae5474f7c3b3ab9caabbeae995144e791c40e5451f585ed",
+    "public/demos/wildlife-v2/cow/motion-v2/sheet.png": "9d1e41d2b5cfe5fee11d0e3ada107bfd8d75eae35bea76a4ddd861db5b69a041",
+    "art-source/wildlife-v2/cow/motion-v2/finish.py": "901c3a629f1e9880b831f3e254fd04e10346bd00a2979e9ae1a61284040a4ff5",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9"
+  }
+}

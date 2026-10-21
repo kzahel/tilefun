@@ -1,0 +1,30 @@
+{
+  "identity": "donkey-behavior-v1",
+  "poses": 192,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "lie": 12,
+      "roll": 24,
+      "stand": 12
+    },
+    "up": {
+      "lie": 12,
+      "roll": 24,
+      "stand": 12
+    },
+    "left": {
+      "lie": 12,
+      "roll": 24,
+      "stand": 12
+    },
+    "right": {
+      "lie": 12,
+      "roll": 24,
+      "stand": 12
+    }
+  },
+  "connectedHeadBodyChecks": 192
+}

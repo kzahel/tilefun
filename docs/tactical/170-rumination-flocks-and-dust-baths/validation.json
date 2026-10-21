@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-21",
+  "base": "55df1be7",
+  "state": "automation-verified-human-review-pending",
+  "authority": {
+    "newScenarios": 20,
+    "affectedSuitePassed": 135,
+    "nativeFaunaSubsetPassed": 24,
+    "finalHerdPassed": 20,
+    "restingFlockHeadingRedGreen": true,
+    "donkeyApproachFacingVerified": true
+  },
+  "art": {
+    "pendingIdentities": 4,
+    "pinnedArtifacts": 115,
+    "isolatedReplayArtifacts": 37,
+    "exactNativeAnd3xCrops": 2040,
+    "fixedLengthEndpointChecks": 4064,
+    "plantedFootChecks": 828,
+    "neckAttachmentChecks": 347,
+    "connectedHeadBodyChecks": 528,
+    "priorTravelCellsUnchanged": true,
+    "uniquePins": 88,
+    "priorSixtyNineResourceCellsUnchanged": true,
+    "humanReview": "pending",
+    "hipAttachmentChecks": 1016,
+    "rollingGroundClearanceChecks": 47,
+    "minimumRollingGroundWorldUnits": 0.01999989151954651
+  },
+  "focusedBrowser": {
+    "passed": 2,
+    "seconds": 131.1,
+    "rendererBoundaries": ["Canvas2D", "GPU"],
+    "animalsPerBoundary": 6,
+    "newAnimalsPerBoundary": 3,
+    "contract": "Actual changing action and staged resource pixels, native coat colors, physical reunion, Worker authority and exact full-flock paused save/reload poses"
+  },
+  "manifest": {
+    "candidates": 1948,
+    "inputDigest": "a381f9a7637ab79480b1f7e5c020250056f4a3db47c3b0712a4e25ec96bee31d",
+    "normalRetinaChromiumVerified": true
+  },
+  "fullUnits": {
+    "cases": 6578,
+    "passed": 6561,
+    "failed": 7,
+    "skipped": 10,
+    "seconds": 1078.1,
+    "knownWindowsFailures": 5,
+    "resolvedFarmSupplyAssertion": 1,
+    "resolvedRidingIndexAssertion": 1,
+    "finalSettlementLifePassed": 18,
+    "finalGrazerRidingPassed": 3,
+    "note": "Full sweep loaded older fixture assertions: the farm expectation omitted new cow grass and the donkey test assumed ride clip index 4. Both are corrected; focused 18 farm and 3 grazer cases pass. Five Windows symlink/process failures and ten static-file skips remain; this is a full sweep plus scoped test corrections, not one all-green run."
+  },
+  "fullBrowser": {
+    "cases": 829,
+    "passed": 826,
+    "failed": 3,
+    "flaky": 0,
+    "skipped": 0,
+    "minutes": 40.65,
+    "workingTreeRerun": {
+      "cases": 9,
+      "passed": 8,
+      "failed": 1,
+      "workers": 1,
+      "seconds": 88.43
+    },
+    "failures": [
+      "Canvas train reload displacement: 210.18px versus 192px; first sequential working-tree recheck 198.40px.",
+      "GPU pinch/joystick Options tap: unchanged 30s timeout; complete touch file passes sequential recheck.",
+      "Standalone review disabled after concurrent controller 171 source/catalog changes invalidated the frozen manifest."
+    ],
+    "note": "Frozen original production build passed both expanded six-animal boundaries. Final isolated HEAD+wildlife catalog/normal-retina manifest reproduces the original a381f9a7 digest, and all 12 final production checks pass unchanged."
+  },
+  "integration": {
+    "nodeComparatorPassed": 1,
+    "httpWebSocketPassed": 3,
+    "workerPassed": 11,
+    "workerDryRunBuild": "passed"
+  },
+  "finalProductionBrowser": {
+    "passed": 12,
+    "failed": 0,
+    "workers": 1,
+    "seconds": 227.89,
+    "rangeHerdRendererBoundaries": 2,
+    "animalsPerBoundary": 6,
+    "completeTrainFileCases": 4,
+    "completeTouchFileCases": 5,
+    "standaloneLoginReviewVote": 1,
+    "source": "Isolated 55df1be7 + wildlife; private build, inventories, auth/data and bundled Chromium. Read-only public assets use hardlinks to avoid duplicate payloads."
+  },
+  "finalChecks": {
+    "types": "passed",
+    "lint": "passed with 121 warnings and 42 infos; no errors",
+    "build": "passed in original and isolated source snapshots",
+    "catalogSheets": 710,
+    "catalogSourceUses": 1396,
+    "streamingAssertReady": "passed with final runtime, isolated before broad suites",
+    "migrationBaselineDecisions": 403,
+    "browserInventory": 829,
+    "oldExactReviewsPreserved": 253,
+    "newHumanReviews": "pending",
+    "isolatedTypes": "passed",
+    "isolatedChangedCodeLint": "passed",
+    "stagedManifestInputs": 11546,
+    "uniqueStagedInputs": 9522,
+    "foreignWorkingChanges": "preserved, including separate controller catalogs and shared document hunks"
+  }
+}

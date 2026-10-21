@@ -1,5 +1,6 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
@@ -41,7 +42,9 @@ it.each(["donkey", "mule", "camel"] as const)(
       const x = mount().position.wx;
       for (let i = 0; i < 30; i++) await s.step({ ...idle, dx: 1 });
       expect(mount().position.wx - x).toBeCloseTo(required(profile.rideSpeed) / 2, 1);
-      expect(mount().sprite?.clip).toBe(4);
+      expect(ENTITY_DEFS[mount().type]?.sprite?.clips?.[mount().sprite?.clip ?? 0]?.name).toBe(
+        "ride",
+      );
       await s.step({ ...idle, jump: true });
       expect(s.player.gameplaySession.mountId).toBeNull();
       expect(s.player.player.parentId).toBeUndefined();

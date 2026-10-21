@@ -1,0 +1,37 @@
+{
+  "identity": "sheep-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 48,
+  "frameHeight": 48,
+  "anchor": [
+    24,
+    35
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "bleat",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 30
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "bleat": {
+      "start": 41,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": true
+    }
+  },
+  "sheetSha256": "044c90a53b9cbcf56ff4cd1aead261f4391a6d72e7056b122eb5de72d81169f7"
+}

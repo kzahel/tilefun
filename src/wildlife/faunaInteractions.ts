@@ -14,8 +14,9 @@ export function restoreFaunaPose(animal: Entity): void {
     animal.sprite.direction = p.sideways
       ? directionFromVelocity(dy, -dx)
       : directionFromVelocity(dx, dy);
-    animal.sprite.frameRow = animal.sprite.direction;
-  }
+    ai.facing = animal.sprite.direction;
+  } else if (ai.facing !== undefined) animal.sprite.direction = ai.facing;
+  animal.sprite.frameRow = animal.sprite.direction;
   const swim = p.habitat === "shore" && ai.water;
   const named = (name: string) => p.clips.findIndex((c) => c.name === name);
   setSpriteClip(

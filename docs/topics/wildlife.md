@@ -16,7 +16,7 @@ entries, including all 196 roster entries. [Batch 155](../tactical/155-fetch-nes
 adds dog ball fetching, crow twig collection/nesting and squirrel food caches,
 with real carried objects, saved resource counts and new action clips. Animal
 Browser exposes progress filters and demonstrations from this ledger. The other
-186 animals still need detailed audits; new behavior/art review remains pending.
+183 animals still need detailed audits; new behavior/art review remains pending.
 
 [Batch 159](../tactical/159-foraging-and-lookouts.md) adds finite rabbit plant
 feeding, robin ground-food/perch trips and rotating meerkat lookouts with group
@@ -26,7 +26,7 @@ bird within the existing inspection cap. Editor food supports existing
 worlds and placed animals. Shared lifetime and local predator-sensing corrections
 keep consumed resources removed and actual nearby prey discoverable. The
 [behavior ledger](../../art-source/wildlife-v2/behavior-campaign.json) owns progress
-and pending human review for all eighteen implemented signature mechanics.
+and pending human review for all twenty-one implemented signature mechanics.
 
 [Batch 161](../tactical/161-climbing-raids-and-play.md) adds supported capuchin
 fruit climbing, conserved raccoon cache raids and cat physical toy play/tree rests.
@@ -57,6 +57,13 @@ construction on land. Twenty entries now have targeted verification, with eighte
 signatures and two inherited cat coats. New action banks preserve
 all native travel pixels and retain exact pending review identities. The behavior
 topic owns source renewal, support, building and controlled-actor protections.
+
+[Batch 170](../tactical/170-rumination-flocks-and-dust-baths.md) adds paid cow
+rumination, committed sheep flock regrouping and donkey dust bathing with saved
+scuffs. Twenty-three entries have targeted behavior verification, covering
+twenty-one signatures and two inherited cat coats. New pending action banks retain
+native travel cells. Shared saved facing now preserves resting fauna headings
+across reloads. Broad regression evidence belongs to the tactical.
 
 [Explorer boats and large lakes](boats.md) add four natural fish schools, four
 other water species and one aquatic hunter per new large lake. Existing water

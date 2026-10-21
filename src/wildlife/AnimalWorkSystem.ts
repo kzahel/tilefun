@@ -9,6 +9,7 @@ import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import { GardenWork, isGardenWorker } from "./GardenWork.js";
+import { HerdWork, isHerdWorker } from "./HerdWork.js";
 import { isMeadowWorker, MeadowWork } from "./MeadowWork.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 import { isPastureWorker, PastureWork } from "./PastureWork.js";
@@ -41,12 +42,14 @@ const carrying = (e: Entity) => !!e.animalWork?.heldId;
 
 /** Shared production authority; all durable state lives on ordinary saved actors. */
 export class AnimalWorkSystem {
+  private readonly herd: HerdWork;
   private readonly range: RangeWork;
   private readonly garden: GardenWork;
   private readonly meadow: MeadowWork;
   private readonly woodland: WoodlandWork;
   private readonly pasture: PastureWork;
   constructor(private readonly manager: EntityManager) {
+    this.herd = new HerdWork(manager, this);
     this.range = new RangeWork(manager, this);
     this.garden = new GardenWork(manager, this);
     this.meadow = new MeadowWork(manager);
@@ -261,6 +264,7 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
+    if (isHerdWorker(animal)) return this.herd.update(animal, dt, context, planning);
     if (isRangeWorker(animal)) return this.range.update(animal, dt, context, planning);
     if (isGardenWorker(animal)) return this.garden.update(animal, dt, context, planning);
     if (isPastureWorker(animal)) return this.pasture.update(animal, dt, context, planning);
@@ -562,6 +566,10 @@ export class AnimalWorkSystem {
     }
   }
   syncAll(active: readonly Entity[]): void {
-    for (const animal of active) if (animal.animalWork) this.sync(animal);
+    for (const animal of active) {
+      if (animal.animalWork) this.sync(animal);
+      // Followed and ridden actors can bypass their native brain/pose update.
+      if (animal.fauna && animal.sprite) animal.fauna.facing = animal.sprite.direction;
+    }
   }
 }

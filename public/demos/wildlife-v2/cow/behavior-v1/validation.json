@@ -1,0 +1,18 @@
+{
+  "identity": "cow-behavior-v1",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 113,
+      "exactFacingCrops": 452
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 113,
+      "exactFacingCrops": 452
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

@@ -1413,6 +1413,8 @@ const profilesByType = new Map(FAUNA_PROFILES.map((p) => [faunaType(p.species), 
 export const faunaProfile = (type: string | undefined) =>
   type === undefined ? undefined : profilesByType.get(type);
 export interface FaunaBehavior {
+  /** Last authority-facing direction, including stationary and controlled poses. */
+  facing?: Direction;
   home: PositionComponent;
   shelter: PositionComponent;
   radius: number;

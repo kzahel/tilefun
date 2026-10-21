@@ -1,9 +1,9 @@
 # Distinct animal behaviors and interactions
 
 Topic: wildlife-behaviors
-Status: six batches implemented. Twenty entries have targeted automation
-verification: eighteen distinct signatures and two inherited cat coats. Final168
-broad regressions are running; exact human review remains pending.
+Status: seven batches implemented. Twenty-three entries have targeted automation
+verification: twenty-one distinct signatures and two inherited cat coats. Batch
+170 automation is complete; exact human review remains pending.
 Updated: 2026-10-21.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
@@ -47,7 +47,7 @@ original mallard-duck and bear roster IDs. Preserve completed art ledgers as his
 The [generated progress report](../wildlife-behavior-status.md) derives its counts
 and animal table from this ledger. The same generator writes compact Animal
 Browser progress data. Filter **Behavior progress → Demonstrations** and select
-**Demonstrate behavior** to open a shared authority scene. The other186 animals
+**Demonstrate behavior** to open a shared authority scene. The other183 animals
 still need detailed audits and phase assignment. Existing behavior has not been
 removed or declared absent. Verified stages require recorded evidence.
 
@@ -130,8 +130,8 @@ Use the existing embedded engine hosts, not a separate showcase implementation.
 These are proposed capability groups, not a requirement to finish one entire
 group before starting another. Prefer complete, demonstrable slices. The initial
 inventory/report and first implementation batch are established. Next step:
-review the twenty implemented demonstrations, then audit the next small land/air
-batch against these completion rules. Continue classifying the remaining186
+review the twenty-three implemented demonstrations, then audit the next small land/air
+batch against these completion rules. Continue classifying the remaining183
 entries and record proposed mechanics before expanding production.
 
 ## First batch contracts
@@ -361,3 +361,31 @@ Source-derived standing positions must remain within the animal's saved home
 radius. A resource may be reachable from several facings; range workers reject
 an out-of-home position and try another facing before committing travel. Resource
 proximity alone is insufficient, especially for the giraffe's long reach.
+
+## Rumination, flock regrouping and dust bathing (170)
+
+[170](../tactical/170-rumination-flocks-and-dust-baths.md) adds three existing-species
+signatures. Cow consumes one finite grass portion before lying down to chew it;
+saved eaten/ruminated counts retain an interrupted paid meal without eating twice.
+Sheep commit ordinary ground travel when separated from eligible flock mates,
+then visibly bleat on reunion. Natural group IDs are respected; ungrouped manual
+sheep can associate locally. Attached, ridden and following companions are excluded.
+
+Donkey claims a reusable dust patch, lowers, rolls and rises. A completed roll adds
+one saved bath and a scuff stage, capped visually at three. The patch is a site,
+not food or a consumable charge; it remains usable. A 25-second active cooldown
+separates baths. Rolling needs a clear 40px footprint on dry, flat ground. Moving,
+raising or deleting the patch cancels work without a remote bath or scuff.
+
+Grass uses the existing three-portion/180-ready-second growth contract. Source,
+flock and site work respects home/planning limits, readiness and saved phases.
+Natural cells share bounded supplies; manual placement creates no extra resources
+or animals. Three ordinary Worker demonstrations use the same code. New action
+banks preserve all native locomotion and resource behavior-v7 preserves the earlier
+69 cells. Four new exact review identities remain pending human review.
+
+Generic fauna saves the last authority facing after native motion, action posing
+and controlled movement. Resting flock mates therefore retain their heading on
+reload, including actors whose following/riding bypasses the native brain. Added
+actions can shift ride-clip indices; riding uses the named definition clips, and
+the grazer/horse native checks assert those names rather than fixed indices.

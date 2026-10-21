@@ -2,6 +2,7 @@ import type { Entity } from "../entities/Entity.js";
 import carryingArt from "./behavior-art.json" with { type: "json" };
 import type { FaunaProfile } from "./Fauna.js";
 import gardenArt from "./garden-art.json" with { type: "json" };
+import herdArt from "./herd-art.json" with { type: "json" };
 import meadowArt from "./meadow-art.json" with { type: "json" };
 import pastureArt from "./pasture-art.json" with { type: "json" };
 import rangeArt from "./range-art.json" with { type: "json" };
@@ -21,6 +22,7 @@ const art: Record<string, BehaviorBank> = {
   ...pastureArt,
   ...gardenArt,
   ...rangeArt,
+  ...herdArt,
 };
 
 export function behaviorArt(profile: FaunaProfile): FaunaProfile {
@@ -53,6 +55,9 @@ export function behaviorArt(profile: FaunaProfile): FaunaProfile {
             "graze",
             "drink",
             "settle",
+            "ruminate",
+            "bleat",
+            "roll",
           ].includes(name) ||
           (profile.species === "beaver" && name === "build"),
       })),

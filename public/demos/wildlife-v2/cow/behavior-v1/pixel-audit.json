@@ -1,0 +1,42 @@
+{
+  "identity": "cow-behavior-v1",
+  "poses": 288,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "lower": 10,
+      "graze": 3,
+      "raise": 10,
+      "lie": 11,
+      "ruminate": 16,
+      "stand": 9
+    },
+    "up": {
+      "lower": 10,
+      "graze": 12,
+      "raise": 10,
+      "lie": 12,
+      "ruminate": 15,
+      "stand": 12
+    },
+    "left": {
+      "lower": 10,
+      "graze": 11,
+      "raise": 10,
+      "lie": 12,
+      "ruminate": 16,
+      "stand": 12
+    },
+    "right": {
+      "lower": 10,
+      "graze": 11,
+      "raise": 10,
+      "lie": 12,
+      "ruminate": 16,
+      "stand": 12
+    }
+  },
+  "connectedHeadBodyChecks": 288
+}

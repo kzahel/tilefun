@@ -1,0 +1,18 @@
+{
+  "identity": "sheep-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "ee660bbafcea4ee33c27b705fb1f73482ef15c932183ac607a6a6e1694b8d68c",
+    "index.html": "6ba899847e3408e89ee9e7657d605cc05d9ed5241d3da83fc334bfd1adb1233d",
+    "pixel-audit.json": "02ba7f2c07d1b4407e55eb6ae156648144fc7c7f70ba8897609889a0dda9fe91",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "dee97d245f670bbaf427fc42fb3fc05476524d80a77d7e2f8702a1d50199a17c",
+    "preview.gif": "57b5bcabc9904ffc624d7471becb091edd35d54714b44519a983c266a8cb9f33",
+    "scene-native.png": "fa692ed403f5fad4949d3e91aebaa1aac417b9d07a4d4588a91f48d4dad4c7eb",
+    "sheet.png": "044c90a53b9cbcf56ff4cd1aead261f4391a6d72e7056b122eb5de72d81169f7",
+    "source-audit.json": "53daab24c4cc1f99dec721dde9088d12143ad3ec6f33497447d175c3a1579431",
+    "sprite.json": "10dee589bc09281d19309131b34d1119a3ec53bd6090b95a94c6354d2e5dd10a"
+  }
+}

@@ -90,6 +90,12 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 
 ## Animal browser and natural return timing
 
+[170](../tactical/170-rumination-flocks-and-dust-baths.md) adds cow, sheep and
+donkey demonstrations with ordinary saved grass, actual flock mates and dust
+patches. Shared Realm work owns meal accounting, regrouping, rolling support,
+site claims, scuffs and action clocks. The page supplies fixtures and framing;
+there is no separate lab rumination, flock steering or bathing simulation.
+
 [166](../tactical/166-scratching-and-pollination.md) adds chicken/bee/hummingbird
 activity scenes through ordinary Realm resources, flight/work clocks, clips and
 replicated attachments. Flower contact derives from authored beak sockets. A

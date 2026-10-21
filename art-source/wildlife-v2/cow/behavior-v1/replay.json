@@ -1,0 +1,18 @@
+{
+  "identity": "cow-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "7c4feac5189a52f63350940d8ad9189595e57ff9ab941b7fc26baf53c37e0734",
+    "index.html": "ce58a47f27ca27b8545d8f4e72697dbb1411318602bbe6db67d7040dffc34968",
+    "pixel-audit.json": "2433ea7d50e9974aac07c16bf1e46cbeb652f7795b0fb5328646bcc7aa48ea73",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "1da4687918e036ee3b9b7bdc2ccb18fba5751ff9abca194686aa7888f8e4494c",
+    "preview.gif": "f7d20531c161835ad94efa6c5396c9bf5a3b7cb48fc5ef4447ba327202598317",
+    "scene-native.png": "5b9e21f8f4d936f81e16493764f8b568e369fe2568ce894fef0df0171c36346b",
+    "sheet.png": "5259b5a703b3ec71b6dbd3b74233763067a6ff7c56aa5bf860f05a6f061f8f40",
+    "source-audit.json": "fe25e9f3a398291aefc38c16be0e76c83e725101a9b1bdceccce131ebe4959fd",
+    "sprite.json": "a1f1e40412bfe66d3f79925dd4f827098cba57a8c8d0e35dcc970d0ab0b5e592"
+  }
+}
