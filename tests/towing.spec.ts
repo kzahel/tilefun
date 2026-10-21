@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import type { TowingCanvas } from "../src/workshop/TowingPage.js";
+import { chooseVehicleAction } from "./helpers/context-actions.js";
 
 test.use({ channel: "chromium" });
 test("wheel-lift towing shares Worker controls, reload and sprite fallbacks", async ({
@@ -24,7 +25,7 @@ test("wheel-lift towing shares Worker controls, reload and sprite fallbacks", as
   await expect
     .poll(async () => (await report())?.meshDraws ?? 0, { timeout: 60000 })
     .toBeGreaterThan(0);
-  await page.getByRole("button", { name: "Attach car", exact: true }).click();
+  await chooseVehicleAction(page, "Attach car");
   await expect.poll(async () => (await report())?.truck?.target).toBe((await report())?.car?.id);
   await capture("attached");
   await page.getByRole("button", { name: /Drive car/ }).click();
@@ -36,7 +37,7 @@ test("wheel-lift towing shares Worker controls, reload and sprite fallbacks", as
   } finally {
     await page.keyboard.up("ArrowRight");
   }
-  await expect(page.getByRole("button", { name: "Release car", exact: true })).toBeVisible();
+  await expect(page.locator('[data-tow-action="release"]')).toHaveJSProperty("hidden", false);
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect.poll(async () => (await report())?.authority.clock?.running).toBe(false);
   await capture("towing");
@@ -51,14 +52,14 @@ test("wheel-lift towing shares Worker controls, reload and sprite fallbacks", as
     expect((await report())?.car?.owner).toBe((await report())?.truck?.id);
   }
   await page.getByRole("button", { name: "Resume", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Release car", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Release car", exact: true }).click();
+  await expect(page.locator('[data-tow-action="release"]')).toHaveJSProperty("hidden", false);
+  await chooseVehicleAction(page, "Release car");
   await expect.poll(async () => (await report())?.car?.owner).toBeNull();
   // Reset and force the actual new GLB to fail; the retained wheel-lift fallback remains usable.
   await page.route("**/assets/models/vehicles/tow-truck-v2.glb", (route) => route.abort());
   await page.reload();
   await expect(canvas).toHaveAttribute("data-ready", "true", { timeout: 60000 });
-  await page.getByRole("button", { name: "Attach car", exact: true }).click();
+  await chooseVehicleAction(page, "Attach car");
   await expect.poll(async () => (await report())?.car?.owner).toBe((await report())?.truck?.id);
   await capture("failed-truck-model");
   expect(errors).toEqual([]);

@@ -37,6 +37,12 @@ export type VehicleHornMessage = {
 
 export type ClientMessage =
   | {
+      type: "vehicle-transporter-action";
+      requestId: number;
+      entityId: number;
+      action: import("../traffic/CarTransporter.js").TransporterAction;
+    }
+  | {
       type: "vehicle-tow-action";
       requestId: number;
       entityId: number;
@@ -236,6 +242,9 @@ export interface EntitySnapshot {
   vehicleBedTarget?: number;
   /** Runtime towing links; zero means durable partner is not resident yet. */
   towTargetId?: number;
+  vehicleRamp?: number;
+  transportLoadId?: number;
+  transportedBy?: number;
   towedBy?: number;
   wz?: number;
   parentId?: number;

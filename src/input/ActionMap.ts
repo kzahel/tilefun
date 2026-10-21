@@ -26,6 +26,7 @@ export type ActionName =
   | "paint_unpaint"
   | "toggle_tab"
   // Play mode (discrete)
+  | "context_actions"
   | "enter_place"
   | "throw"
   | "honk"
@@ -83,6 +84,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "vehicle_lights", keys: ["l", "L"] },
   { action: "vehicle_style", keys: ["k", "K"] },
   { action: "enter_place", keys: ["e", "E"] },
+  { action: "context_actions", keys: ["q", "Q"] },
   // Play mode zoom presets
   { action: "zoom_0", keys: ["0"] },
   { action: "zoom_1", keys: ["1"] },

@@ -12,6 +12,7 @@
       "!src/rendering/dump-truck-v2-fallback.json",
       "!art-source/vehicle-bake/dump-truck/v2",
       "!art-source/vehicle-bake/tow-truck/v2",
+      "!art-source/vehicle-bake/car-transporter/v2",
       "!art-source/vehicle-bake/towing-fallbacks/v2",
       "!test-results",
       "!ME complete tileset.tsx",

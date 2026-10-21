@@ -1,4 +1,5 @@
-import { inputHint } from "./InputHints.js";
+import type { ActionName } from "./ActionMap.js";
+import { actionHint } from "./InputHints.js";
 
 /** Named action paddles, shared by touch, mouse, keyboard and controller hints. */
 const BTN_RADIUS = 28;
@@ -149,17 +150,17 @@ export class TouchButtons {
               : "Siren"
             : btn.label;
       ctx.fillText(label, pos.x, pos.y - 5);
-      const hints = [
-        ["Space", "A"],
-        ["B", "X"],
-        ["Shift", "RT"],
-        ["H", "RB"],
-        ["L", "D↑"],
-        ["K", "D→"],
-        ["R", "LT"],
+      const actions: ActionName[] = [
+        "jump",
+        "throw",
+        "sprint",
+        "honk",
+        "vehicle_lights",
+        "vehicle_style",
+        "reverse",
       ];
-      const hint = hints[i];
-      const badge = hint ? inputHint(hint[0] ?? "", hint[1] ?? "") : "";
+      const action = actions[i];
+      const badge = action ? actionHint(action) : "";
       ctx.font = "10px sans-serif";
       ctx.fillText(
         i === 4

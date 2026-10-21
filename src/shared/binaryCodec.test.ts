@@ -281,7 +281,7 @@ describe("EntitySnapshot binary codec", () => {
       entityExits: [12, 13],
     };
     const bytes = encodeServerMessage(msg);
-    expect(new DataView(bytes).getUint8(0)).toBe(0x08);
+    expect(new DataView(bytes).getUint8(0)).toBe(0x09);
     expect(roundtripServer(msg)).toEqual(msg);
   });
 
@@ -292,7 +292,7 @@ describe("EntitySnapshot binary codec", () => {
       lastProcessedInputSeq: 0,
       playerEntityId: 1,
     });
-    for (const tag of [0x01, 0x04, 0x05, 0x06]) {
+    for (const tag of [0x01, 0x04, 0x05, 0x06, 0x07, 0x08]) {
       new DataView(bytes).setUint8(0, tag);
       expect(() => decodeServerMessage(bytes)).toThrow("matching updated client and server");
     }

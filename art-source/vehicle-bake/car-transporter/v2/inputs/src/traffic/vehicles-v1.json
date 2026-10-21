@@ -1,0 +1,5768 @@
+{
+  "version": "vehicles-v1",
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "sheetSize": [192, 224],
+  "groundAnchor": [96, 144],
+  "views": [
+    {
+      "id": "vehicle:compact-1:north",
+      "vehicleId": "compact-1",
+      "direction": "north",
+      "rect": [64, 1152, 32, 64],
+      "metadata": {
+        "name": "Compact 1 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "2169d3f2-7bb4-4adb-8f45-9fafe1c452e9",
+        "createdAt": "2026-10-03T10:49:12.913Z",
+        "candidateFingerprint": "07aab820e6ce8a06592298db822c2a057cb4ea0b390f9cd23647707a5c9e2951",
+        "metadataFingerprint": "876e88518ee38a407e18bb3393369c54274a351257953511219bae4f0e68124b"
+      }
+    },
+    {
+      "id": "vehicle:compact-1:east",
+      "vehicleId": "compact-1",
+      "direction": "east",
+      "rect": [96, 1152, 64, 64],
+      "metadata": {
+        "name": "Compact 1 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [32, 60],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "6690ffa8-9c93-4f0e-8e7d-4b4ebc2037c4",
+        "createdAt": "2026-10-03T10:49:13.798Z",
+        "candidateFingerprint": "ac3e36833f5691f4f443b6d8ca03ca1b6cac2f6096ffcb7b6ccf5d3a4bb2604a",
+        "metadataFingerprint": "1bde75839bd563c37be513313e0a437f08875b5c1e9c77d112559c9d72d0bbae"
+      }
+    },
+    {
+      "id": "vehicle:compact-1:south",
+      "vehicleId": "compact-1",
+      "direction": "south",
+      "rect": [160, 1152, 32, 64],
+      "metadata": {
+        "name": "Compact 1 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "f2e4bc13-c538-42b9-b0bf-11deb0b3e192",
+        "createdAt": "2026-10-03T10:49:17.784Z",
+        "candidateFingerprint": "dce650fcfa30ab50214efb97b4a12caa05413e97456a6023fa42a38886033a65",
+        "metadataFingerprint": "4adc9216de3dc4d4526a407e6421f243990c967fb83a8279cf8e3deba2a9233f"
+      }
+    },
+    {
+      "id": "vehicle:compact-1:west",
+      "vehicleId": "compact-1",
+      "direction": "west",
+      "rect": [0, 1152, 64, 64],
+      "metadata": {
+        "name": "Compact 1 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [32, 61],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "d0ae7fc9-caba-4fc6-a3ce-31b43437f0ec",
+        "createdAt": "2026-10-03T10:47:25.967Z",
+        "candidateFingerprint": "6bfb47db443da242898c5c530752435eff81b6e6567548a63ae2021b772db774",
+        "metadataFingerprint": "2f45766ab574f0bd091183247380f58b76fbfa55055155a917b8fe956e9edaad"
+      }
+    },
+    {
+      "id": "vehicle:compact-2:north",
+      "vehicleId": "compact-2",
+      "direction": "north",
+      "rect": [64, 1216, 32, 64],
+      "metadata": {
+        "name": "Compact 2 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "149e3962-d483-40c1-acdb-e3b5a5dfaa3c",
+        "createdAt": "2026-10-03T10:47:27.364Z",
+        "candidateFingerprint": "2af80624d4a3da8d79d11c50a3571a36a27bbfe4593f8d1f2673b17d00c05169",
+        "metadataFingerprint": "8766030124d1f83a9d5ac269531b40bcaa35d9d55f534d5ea335f043c3dcbaa2"
+      }
+    },
+    {
+      "id": "vehicle:compact-2:east",
+      "vehicleId": "compact-2",
+      "direction": "east",
+      "rect": [96, 1216, 64, 64],
+      "metadata": {
+        "name": "Compact 2 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [32, 60],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "75e993d2-322b-4937-b7f3-2dc342627b1e",
+        "createdAt": "2026-10-03T10:47:28.776Z",
+        "candidateFingerprint": "1eb76afc6744f7f06049d18bb0a9cca7e91b809d7ca2673ce0713c5c4fd17c79",
+        "metadataFingerprint": "e9b156a36104f81b4183473a202ab49a8c0b06ea3165e0df0955114a900322fe"
+      }
+    },
+    {
+      "id": "vehicle:compact-2:south",
+      "vehicleId": "compact-2",
+      "direction": "south",
+      "rect": [160, 1216, 32, 64],
+      "metadata": {
+        "name": "Compact 2 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "24812862-da93-4bec-b089-1d03294076c0",
+        "createdAt": "2026-10-03T10:47:29.577Z",
+        "candidateFingerprint": "52e33f98bf577d7aba390fc6e6d7f904dfff6316f53e3231fb6f11b7226fc865",
+        "metadataFingerprint": "c0d3f25ef0e40b78e8bdad6a24fc77f28f8c8753f7a0dddf7da77288a045afe1"
+      }
+    },
+    {
+      "id": "vehicle:compact-2:west",
+      "vehicleId": "compact-2",
+      "direction": "west",
+      "rect": [0, 1216, 64, 64],
+      "metadata": {
+        "name": "Compact 2 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [32, 61],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "4a240c6e-c9a5-45e2-bf61-b401b5d2e96e",
+        "createdAt": "2026-10-03T10:47:30.815Z",
+        "candidateFingerprint": "5416ed02cbd289f6ce1f58faa9be3524e05807fb16cd8eebe7e88dcf75266fc1",
+        "metadataFingerprint": "1e690c04c658b49cffccb0c2f009d2d98bb7b1a779ff41f196330f34156fe7b8"
+      }
+    },
+    {
+      "id": "vehicle:compact-3:north",
+      "vehicleId": "compact-3",
+      "direction": "north",
+      "rect": [64, 1280, 32, 64],
+      "metadata": {
+        "name": "Compact 3 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "ab72cf8c-95a3-476a-9bf0-40c01ccd1c8a",
+        "createdAt": "2026-10-03T10:47:36.742Z",
+        "candidateFingerprint": "55a7f08fd255d8f137118a760fa18018eb912fd4afac962ec7ee56e24fb81f0b",
+        "metadataFingerprint": "f85c979b994f3cdfe9d1258e159746ed3ab1a664074f3ea7c8be8c73556e8a08"
+      }
+    },
+    {
+      "id": "vehicle:compact-3:east",
+      "vehicleId": "compact-3",
+      "direction": "east",
+      "rect": [96, 1280, 64, 64],
+      "metadata": {
+        "name": "Compact 3 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [32, 60],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "10087481-bf8b-4809-abbc-8508a46ad146",
+        "createdAt": "2026-10-03T10:47:37.577Z",
+        "candidateFingerprint": "9ac761c018233252627e6e70fbe15f9ba9185902bb5075f8288ef9d4c4b15ed8",
+        "metadataFingerprint": "254378171892e8bb4cf6bead4a3b64c05fc193454bceb7567be0a2315f551392"
+      }
+    },
+    {
+      "id": "vehicle:compact-3:south",
+      "vehicleId": "compact-3",
+      "direction": "south",
+      "rect": [160, 1280, 32, 64],
+      "metadata": {
+        "name": "Compact 3 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "bd0a5556-8804-46fc-b641-bab76bc684d0",
+        "createdAt": "2026-10-03T10:47:38.385Z",
+        "candidateFingerprint": "94752a15c7c1aecc75582582581ff210e58d524162dc2cf2dc394e02497fe395",
+        "metadataFingerprint": "7c452547bdbd5b4aee36d46bf04aa3b164dce4d26ca25ff6704167121c42eb7e"
+      }
+    },
+    {
+      "id": "vehicle:compact-3:west",
+      "vehicleId": "compact-3",
+      "direction": "west",
+      "rect": [0, 1280, 64, 64],
+      "metadata": {
+        "name": "Compact 3 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [32, 61],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "80b1efbc-e37b-46c6-97ca-f4ea8a8e029e",
+        "createdAt": "2026-10-03T10:47:39.196Z",
+        "candidateFingerprint": "5bb35418ac01ec8b6d26b7333d858e7292af1b9d819f552fe3f5be6a9f5dbcf7",
+        "metadataFingerprint": "b3d411064110b144ca557373ccae5ac122b38f574c1e152cae6eed2dfd7feb68"
+      }
+    },
+    {
+      "id": "vehicle:compact-4:north",
+      "vehicleId": "compact-4",
+      "direction": "north",
+      "rect": [64, 1344, 32, 64],
+      "metadata": {
+        "name": "Compact 4 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "eef73190-7f20-4551-8078-dc5a095cfdb5",
+        "createdAt": "2026-10-03T10:47:39.855Z",
+        "candidateFingerprint": "3843d33b8324437057c6b9adb85eba418c25ea06cb514fad4edeae61bb979cc0",
+        "metadataFingerprint": "eb56148909783fd8890068ff5a447b675869dfc1af0a00c583cba8199fd9ac34"
+      }
+    },
+    {
+      "id": "vehicle:compact-4:east",
+      "vehicleId": "compact-4",
+      "direction": "east",
+      "rect": [96, 1344, 64, 64],
+      "metadata": {
+        "name": "Compact 4 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [32, 60],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "4ca53d78-213e-44d2-ba57-1e01c81174fc",
+        "createdAt": "2026-10-03T10:47:40.322Z",
+        "candidateFingerprint": "971490d91360df701cfee8d3a07c40c94b05a6b3de5515b2003192ac82bf7c94",
+        "metadataFingerprint": "f20fb14f1c66dc9ceccd95b7fb4e7a24650981a5948de4202c0b325df2c2d4aa"
+      }
+    },
+    {
+      "id": "vehicle:compact-4:south",
+      "vehicleId": "compact-4",
+      "direction": "south",
+      "rect": [160, 1344, 32, 64],
+      "metadata": {
+        "name": "Compact 4 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "601cbe64-0440-47bc-81e2-adf2b418ab97",
+        "createdAt": "2026-10-03T10:47:40.787Z",
+        "candidateFingerprint": "f1382f4bdc2ed1366af3a02bcd7da0e399f720ce69fe814c042051c4658038e4",
+        "metadataFingerprint": "e1be6c27ff9d9efe8d855b6eea770e24dbf61c25e32ff2d4452e71b7c5102510"
+      }
+    },
+    {
+      "id": "vehicle:compact-4:west",
+      "vehicleId": "compact-4",
+      "direction": "west",
+      "rect": [0, 1344, 64, 64],
+      "metadata": {
+        "name": "Compact 4 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [32, 61],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "639cd298-2ccc-4ab4-912d-41b76fbfc1db",
+        "createdAt": "2026-10-03T10:47:41.236Z",
+        "candidateFingerprint": "5618c3c95866538c35adc59ddc3bb50aea67ecd2a4fc54e7098a97a1277912ae",
+        "metadataFingerprint": "cfe6c5aa348001e38c2beb6df180b42fedda745ddaffd1fbfbc42f2d9f47e492"
+      }
+    },
+    {
+      "id": "vehicle:compact-5:north",
+      "vehicleId": "compact-5",
+      "direction": "north",
+      "rect": [64, 1408, 32, 64],
+      "metadata": {
+        "name": "Compact 5 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "e0a1ded5-dc10-4d96-bb08-ed92d2deca81",
+        "createdAt": "2026-10-03T10:47:41.695Z",
+        "candidateFingerprint": "9277dfa424da4100e6019f8b362b56dbe998ba202f27f149bf552997809103bc",
+        "metadataFingerprint": "2f021ff625d9cfbdc38399887984fd07f615f220b49b0f3a3cdb022a044ac859"
+      }
+    },
+    {
+      "id": "vehicle:compact-5:east",
+      "vehicleId": "compact-5",
+      "direction": "east",
+      "rect": [96, 1408, 64, 64],
+      "metadata": {
+        "name": "Compact 5 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [32, 60],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "36bb410a-81d4-4982-99c6-9a2c81b847c2",
+        "createdAt": "2026-10-03T10:47:42.155Z",
+        "candidateFingerprint": "08bb80c075689bc9a70fad2de269c2e9c115f2662377b1642c7242da11d17f89",
+        "metadataFingerprint": "6c5d0123865dc28c0b13d739f69b7a6be0955b7a893b4f2c8bcf05feb7eb1e30"
+      }
+    },
+    {
+      "id": "vehicle:compact-5:south",
+      "vehicleId": "compact-5",
+      "direction": "south",
+      "rect": [160, 1408, 32, 64],
+      "metadata": {
+        "name": "Compact 5 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "5c3d0321-272d-4a87-a9ef-49a51c86f676",
+        "createdAt": "2026-10-03T10:47:42.601Z",
+        "candidateFingerprint": "34267c9405fc7a5461e9bf3ed61b04bd75840cda8b9315b4f8f758aed9386b5f",
+        "metadataFingerprint": "a29ccffaad7cb73c7135b0557167e9753c3d96c80e7225b183716123822a25dd"
+      }
+    },
+    {
+      "id": "vehicle:compact-5:west",
+      "vehicleId": "compact-5",
+      "direction": "west",
+      "rect": [0, 1408, 64, 64],
+      "metadata": {
+        "name": "Compact 5 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [32, 61],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "a2e29884-715c-4807-ad24-40885825e88b",
+        "createdAt": "2026-10-03T10:47:44.424Z",
+        "candidateFingerprint": "c1334efdce85b29e88d0522c0982698696907311cd7de8bff71229abd2d8023a",
+        "metadataFingerprint": "9c41fc7533fed53ca2f96ce54c20b41c4958393f4e3c42a8a4331e65a5ad802b"
+      }
+    },
+    {
+      "id": "vehicle:compact-6:north",
+      "vehicleId": "compact-6",
+      "direction": "north",
+      "rect": [64, 1472, 32, 64],
+      "metadata": {
+        "name": "Compact 6 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "bae5c465-cd2e-49c5-8bda-e4f75b48e58e",
+        "createdAt": "2026-10-03T10:47:44.894Z",
+        "candidateFingerprint": "b06f9838dc6557a35955469dac2914e76632dcc568831ff4707a32fabcce2b68",
+        "metadataFingerprint": "7d40e67781ef89ffcc1f400628c04ce6123e194bd773e8d73abe24e0c959c3b4"
+      }
+    },
+    {
+      "id": "vehicle:compact-6:east",
+      "vehicleId": "compact-6",
+      "direction": "east",
+      "rect": [96, 1472, 64, 64],
+      "metadata": {
+        "name": "Compact 6 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [32, 60],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "6dcdde9a-9bb9-4bba-87d8-bce7f8ea7d1d",
+        "createdAt": "2026-10-03T10:47:45.284Z",
+        "candidateFingerprint": "8961107e2f3b897b6c0afed34927d9a414ad4e50f95caee3ac014e0ae37fdbb8",
+        "metadataFingerprint": "7ee3c270e768d53bfe0229f263625d889c8737d841d0ccfdd1d34f47300c4e26"
+      }
+    },
+    {
+      "id": "vehicle:compact-6:south",
+      "vehicleId": "compact-6",
+      "direction": "south",
+      "rect": [160, 1472, 32, 64],
+      "metadata": {
+        "name": "Compact 6 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 60],
+        "footprint": [-12, -44, 24, 44],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "approval": {
+        "id": "b69eac07-f7af-4007-8429-93927df24eda",
+        "createdAt": "2026-10-03T10:47:45.671Z",
+        "candidateFingerprint": "7dbfb004ce8ec1a5c6c4d364ec25858c5d605fbcc6a535b0157e1a3376e00ef0",
+        "metadataFingerprint": "d9ffe74e954ed6fd48f5e3f8fd3a03d6f8ef5908a2bca4b5bbad38c423a2f8a4"
+      }
+    },
+    {
+      "id": "vehicle:compact-6:west",
+      "vehicleId": "compact-6",
+      "direction": "west",
+      "rect": [0, 1472, 64, 64],
+      "metadata": {
+        "name": "Compact 6 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "compact", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [32, 61],
+        "footprint": [-28, -20, 56, 20],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "approval": {
+        "id": "ea6c36ac-9835-47dc-a459-77c1d133072f",
+        "createdAt": "2026-10-03T10:47:46.059Z",
+        "candidateFingerprint": "262acccd6ad1fce6f880b63749fe248880f6a522551f29221c2b85401bb2a7a5",
+        "metadataFingerprint": "72dbf42a89205b19724097fb7cc76a649058cf640c92ce7d00645a44fe88b94d"
+      }
+    },
+    {
+      "id": "vehicle:bus-1:north",
+      "vehicleId": "bus-1",
+      "direction": "north",
+      "rect": [368, 1136, 48, 112],
+      "metadata": {
+        "name": "Bus 1 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 103],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "c1945688-1933-4871-9251-c3f1afe886ef",
+        "createdAt": "2026-10-03T10:47:46.473Z",
+        "candidateFingerprint": "9b3956fa1a58b1c8c7ba31d6fa4ec9b9a76acb5ca49636975f5f01c8b1201441",
+        "metadataFingerprint": "f70f8c6bfe2f0c7890da89dbb4375aaa05f162173da022e240f4f2130e80d909"
+      }
+    },
+    {
+      "id": "vehicle:bus-1:east",
+      "vehicleId": "bus-1",
+      "direction": "east",
+      "rect": [208, 1200, 112, 64],
+      "metadata": {
+        "name": "Bus 1 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "15a6271a-c85d-4329-95e1-806edccb75df",
+        "createdAt": "2026-10-03T10:47:47.503Z",
+        "candidateFingerprint": "0a9f3bebc96149948de72a07b67477790e31a828d308c6c1f2b8c834157be817",
+        "metadataFingerprint": "173875e49ef5b5c6e041c6529aa04252a2e7c18a4cf0804e1ad84a96768cd02c"
+      }
+    },
+    {
+      "id": "vehicle:bus-1:south",
+      "vehicleId": "bus-1",
+      "direction": "south",
+      "rect": [320, 1136, 48, 112],
+      "metadata": {
+        "name": "Bus 1 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 109],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "50d5042c-0fbc-4200-887e-4280e3f88dae",
+        "createdAt": "2026-10-03T10:48:03.052Z",
+        "candidateFingerprint": "7784dc2414b180b02c94dafbf3a3c11847e4c400f057395c07fb4615d891114d",
+        "metadataFingerprint": "4b187f62a30649ffb00753492aedc5bdd7ab259f6b72cb8ba330f6bdfe7ed88c"
+      }
+    },
+    {
+      "id": "vehicle:bus-1:west",
+      "vehicleId": "bus-1",
+      "direction": "west",
+      "rect": [208, 1136, 112, 64],
+      "metadata": {
+        "name": "Bus 1 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "4c34c48e-e62a-4f6e-a58d-b90fb57bc1c8",
+        "createdAt": "2026-10-03T10:48:10.173Z",
+        "candidateFingerprint": "20727d022ca447f78fce203c266700f476c2c4010e3bc61cf38d26fa50990661",
+        "metadataFingerprint": "14b79fa508b527ddea2e68f47a71667e1823e86c55f4945307bd42429147d794"
+      }
+    },
+    {
+      "id": "vehicle:bus-2:north",
+      "vehicleId": "bus-2",
+      "direction": "north",
+      "rect": [576, 1136, 48, 112],
+      "metadata": {
+        "name": "Bus 2 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 103],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "c5f1a7ab-5a87-4a9b-b30a-73ae129c2456",
+        "createdAt": "2026-10-03T10:48:11.019Z",
+        "candidateFingerprint": "d010b844bf18da882aecaa76ac893bcabc2291e4881a4131ea5a081fa20138a5",
+        "metadataFingerprint": "30078cf26e70d91d7e08901703ccfcdbac2af75aee0aad7d7f3a429fd68751ba"
+      }
+    },
+    {
+      "id": "vehicle:bus-2:east",
+      "vehicleId": "bus-2",
+      "direction": "east",
+      "rect": [416, 1200, 112, 64],
+      "metadata": {
+        "name": "Bus 2 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "c0de1a2e-d8de-4224-8552-e47ba017f4e5",
+        "createdAt": "2026-10-03T10:48:12.302Z",
+        "candidateFingerprint": "c9dc4a1b8fbd3e2165a41713c4c71c778b3f541f806c89a9cfe08ff2b7fd2ff7",
+        "metadataFingerprint": "90144d02e8faebcbf06b738e8e0c535eac9b4943c62daddf93c032d19af58614"
+      }
+    },
+    {
+      "id": "vehicle:bus-2:south",
+      "vehicleId": "bus-2",
+      "direction": "south",
+      "rect": [528, 1136, 48, 112],
+      "metadata": {
+        "name": "Bus 2 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 109],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "fcb0665f-74c4-4feb-935c-9613cecfc935",
+        "createdAt": "2026-10-03T10:48:13.092Z",
+        "candidateFingerprint": "0e7327ace35e46194bb7a598b3f9b593c5fb76db0bb5c6770d923de1adf80244",
+        "metadataFingerprint": "467b8a1f4ddc948a9cc8cc2499f3e01bb3963fe6416e6e99e9f6ab7c175f142d"
+      }
+    },
+    {
+      "id": "vehicle:bus-2:west",
+      "vehicleId": "bus-2",
+      "direction": "west",
+      "rect": [416, 1136, 112, 64],
+      "metadata": {
+        "name": "Bus 2 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "1767158c-0940-46fb-9058-5749ee2b70c3",
+        "createdAt": "2026-10-03T10:48:13.831Z",
+        "candidateFingerprint": "f0e454b7f88a7e6efb8a829b76a91c0499be82e51b04a04a5e922077905784e8",
+        "metadataFingerprint": "c637fb4f09bad8a4c28ae3a44208a1dd1e214dbaf255bcab75393b01f64d80f1"
+      }
+    },
+    {
+      "id": "vehicle:bus-3:north",
+      "vehicleId": "bus-3",
+      "direction": "north",
+      "rect": [368, 1264, 48, 112],
+      "metadata": {
+        "name": "Bus 3 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 103],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "01513845-0713-458a-aed9-6f0d0073064d",
+        "createdAt": "2026-10-03T10:48:14.616Z",
+        "candidateFingerprint": "fa43a7f7e93af57bf45bb04f09a64b9dd79175a1f2123e8343bb3f756a93820d",
+        "metadataFingerprint": "5e620a9ba90561e06d978e979d3b0593211463157873501a1c65acdd1c7e7282"
+      }
+    },
+    {
+      "id": "vehicle:bus-3:east",
+      "vehicleId": "bus-3",
+      "direction": "east",
+      "rect": [208, 1328, 112, 64],
+      "metadata": {
+        "name": "Bus 3 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "c2200ed2-05d1-4ae2-8570-63684a20a43b",
+        "createdAt": "2026-10-03T10:48:15.110Z",
+        "candidateFingerprint": "7335db700ad161019b659bbc5ce1388e2094c69d3d533c4bc45cf01a5b5e1456",
+        "metadataFingerprint": "a57ffa26b28b6eedc0bf4247d533e008fd0ef4e93472137cdede0f1a744da682"
+      }
+    },
+    {
+      "id": "vehicle:bus-3:south",
+      "vehicleId": "bus-3",
+      "direction": "south",
+      "rect": [320, 1264, 48, 112],
+      "metadata": {
+        "name": "Bus 3 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 109],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "8554d36e-fc9a-4570-9e56-a81e5a7cbc98",
+        "createdAt": "2026-10-03T10:48:15.612Z",
+        "candidateFingerprint": "d5cbdcb86d006fa78659b3bf01f31f389e89e6dc6014e99e3d9a0d372a39e4e1",
+        "metadataFingerprint": "6b4e3206b4b3205857cc9335c36ed8567f438d7b8cce2ee6ddcf8c5003961acf"
+      }
+    },
+    {
+      "id": "vehicle:bus-3:west",
+      "vehicleId": "bus-3",
+      "direction": "west",
+      "rect": [208, 1264, 112, 64],
+      "metadata": {
+        "name": "Bus 3 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "1ad91828-cebb-40e4-9256-17174c417cd8",
+        "createdAt": "2026-10-03T10:48:15.988Z",
+        "candidateFingerprint": "490fa09fdadd5601e96b4394662d3c6d45d893e64d909e22ee0596485e79f605",
+        "metadataFingerprint": "2c638ecabd11280ec777868f2023fa5f90eb7f70fc0a29dcb8a46962f71ae0b5"
+      }
+    },
+    {
+      "id": "vehicle:bus-4:north",
+      "vehicleId": "bus-4",
+      "direction": "north",
+      "rect": [576, 1264, 48, 112],
+      "metadata": {
+        "name": "Bus 4 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 103],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "949f0ecd-cbc1-4302-ad85-10fb4e3ffd7f",
+        "createdAt": "2026-10-03T10:48:16.328Z",
+        "candidateFingerprint": "20a8cf64c2661abe3596f0fc8eed4d42069e40da4e7240ee0eca858e92d20645",
+        "metadataFingerprint": "aabd71bae808e44f48595178799c879aa18abc30634fd337d4844d44c33426bc"
+      }
+    },
+    {
+      "id": "vehicle:bus-4:east",
+      "vehicleId": "bus-4",
+      "direction": "east",
+      "rect": [416, 1328, 112, 64],
+      "metadata": {
+        "name": "Bus 4 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "706e1cf4-e2df-4efd-a70b-887a929b2e7a",
+        "createdAt": "2026-10-03T10:48:16.622Z",
+        "candidateFingerprint": "7409e2f7a75d3f2315195e1a0a38c52c7407d3c67bd53c9901e8579f727a90cc",
+        "metadataFingerprint": "9450bdab4dc44e086a56091796e63699804e428bf9dcb05e14e775a0878ad752"
+      }
+    },
+    {
+      "id": "vehicle:bus-4:south",
+      "vehicleId": "bus-4",
+      "direction": "south",
+      "rect": [528, 1264, 48, 112],
+      "metadata": {
+        "name": "Bus 4 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 109],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "240f4681-5310-4389-9ca8-888783b69034",
+        "createdAt": "2026-10-03T10:48:16.926Z",
+        "candidateFingerprint": "6a3a7928ad4426fb7b27f79c798607d55bfb48029aa9e68e7ea48b6fd08b3fdb",
+        "metadataFingerprint": "b2e8620d2fe5fa6b8b517edb203a18ebe87b2bc5d9866af0052b37582ad6db3b"
+      }
+    },
+    {
+      "id": "vehicle:bus-4:west",
+      "vehicleId": "bus-4",
+      "direction": "west",
+      "rect": [416, 1264, 112, 64],
+      "metadata": {
+        "name": "Bus 4 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "82f28bea-7f47-4545-99d0-14e1d8110b3b",
+        "createdAt": "2026-10-03T10:48:17.251Z",
+        "candidateFingerprint": "3e4bf6c628e1d53a94ba30a16f5fda557479697aaa9e20a1a037947ac9869f43",
+        "metadataFingerprint": "ea26223b06316f3911d6b5480b3f81aa373458b9ea24ae4ae2b93556029908f2"
+      }
+    },
+    {
+      "id": "vehicle:bus-5:north",
+      "vehicleId": "bus-5",
+      "direction": "north",
+      "rect": [368, 1392, 48, 112],
+      "metadata": {
+        "name": "Bus 5 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 103],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "dd886229-7e98-418e-b375-4c0b0f18f3bc",
+        "createdAt": "2026-10-03T10:48:17.667Z",
+        "candidateFingerprint": "8e8cbe39ce1dfed0ef6f6cc3719d3eaa4a420193c3d4a55ceec7b4bb3103e318",
+        "metadataFingerprint": "419cc06eabf291a4e01e3e866734db93d4f44f70720ec9e219b020e25058f0e2"
+      }
+    },
+    {
+      "id": "vehicle:bus-5:east",
+      "vehicleId": "bus-5",
+      "direction": "east",
+      "rect": [208, 1456, 112, 64],
+      "metadata": {
+        "name": "Bus 5 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "6c34ae4c-f1e3-45ac-a6a6-8b26f7fbb6c4",
+        "createdAt": "2026-10-03T10:48:18.249Z",
+        "candidateFingerprint": "0155129d472c2c56347cc3807ab8f6ec5ba6e22753371e0f8c1ef51d52af6703",
+        "metadataFingerprint": "05e7b21769d5495327a662e5580c053a41f2015ec4b8704c0edfd39dc81c6695"
+      }
+    },
+    {
+      "id": "vehicle:bus-5:south",
+      "vehicleId": "bus-5",
+      "direction": "south",
+      "rect": [320, 1392, 48, 112],
+      "metadata": {
+        "name": "Bus 5 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 109],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "3d092c2c-de62-463c-8067-152df9397e04",
+        "createdAt": "2026-10-03T10:48:18.883Z",
+        "candidateFingerprint": "b8469c2386b6525329ecb11eb136e6234a42a72428da1c7ab7b32fddc3fd0058",
+        "metadataFingerprint": "54a0c4cfa698734e51449a550ea3b673e7f1254e5987a02f5240984a4dcb89a9"
+      }
+    },
+    {
+      "id": "vehicle:bus-5:west",
+      "vehicleId": "bus-5",
+      "direction": "west",
+      "rect": [208, 1392, 112, 64],
+      "metadata": {
+        "name": "Bus 5 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "0e445f1c-579b-48e5-96f2-f56c9fa670ad",
+        "createdAt": "2026-10-03T10:48:19.350Z",
+        "candidateFingerprint": "cf7afeeb7f889e93a4de2d2597aea58f8711ea73710abea26fafc53923fbdf44",
+        "metadataFingerprint": "6ff7be87e858e613935f027462e4aabeee8df9d9b7cfe19bf415370c3cc69724"
+      }
+    },
+    {
+      "id": "vehicle:bus-6:north",
+      "vehicleId": "bus-6",
+      "direction": "north",
+      "rect": [576, 1392, 48, 112],
+      "metadata": {
+        "name": "Bus 6 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 103],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "b5d70180-f25e-440c-a17b-477067eedd1c",
+        "createdAt": "2026-10-03T10:48:19.799Z",
+        "candidateFingerprint": "8a8f55d1e6d9dcfe38deb9df78f76ea8f19fabf9c368e2653dcce4ec03fcadd3",
+        "metadataFingerprint": "78da7fc41e811421c108037ba372a885a5337afe444985799c32472cb0c4cce2"
+      }
+    },
+    {
+      "id": "vehicle:bus-6:east",
+      "vehicleId": "bus-6",
+      "direction": "east",
+      "rect": [416, 1456, 112, 64],
+      "metadata": {
+        "name": "Bus 6 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "cfb2fcd0-46e9-4c80-b70c-0e01735fc0d0",
+        "createdAt": "2026-10-03T10:48:20.252Z",
+        "candidateFingerprint": "fe625101492852a508a2dd273770f72954dab7e5f061f929ffd033c7ebea45a5",
+        "metadataFingerprint": "4293191460014824e96939ada7e64a0b28b503bd0a9cdf7809a5cd61a5c048d0"
+      }
+    },
+    {
+      "id": "vehicle:bus-6:south",
+      "vehicleId": "bus-6",
+      "direction": "south",
+      "rect": [528, 1392, 48, 112],
+      "metadata": {
+        "name": "Bus 6 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 109],
+        "footprint": [-19, -86, 38, 86],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "approval": {
+        "id": "aa351063-81c5-4cf6-85aa-41cc3f94b28c",
+        "createdAt": "2026-10-03T10:48:20.720Z",
+        "candidateFingerprint": "1918742d97585b3ab3fa8f3fef7d697ff7673ec32e909d95336841078a29d319",
+        "metadataFingerprint": "2bba77cfed22f3c55f222dbf43f38fd0d0272686f5a03a30f151c9903fc04564"
+      }
+    },
+    {
+      "id": "vehicle:bus-6:west",
+      "vehicleId": "bus-6",
+      "direction": "west",
+      "rect": [416, 1392, 112, 64],
+      "metadata": {
+        "name": "Bus 6 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "bus", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [56, 61],
+        "footprint": [-52, -32, 104, 32],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "approval": {
+        "id": "9698e6bc-1e92-45c9-9ef7-44b6b08d7bb6",
+        "createdAt": "2026-10-03T10:48:21.154Z",
+        "candidateFingerprint": "c36f9b364ba84425688188c3f2b84db88960a8dde475415231a59e5069b62119",
+        "metadataFingerprint": "6f5167e9df52d427f2f648c214053d051ae416a9177aac2de35435d30d22e239"
+      }
+    },
+    {
+      "id": "vehicle:sedan-12:north",
+      "vehicleId": "sedan-12",
+      "direction": "north",
+      "rect": [640, 5520, 48, 80],
+      "metadata": {
+        "name": "Car 12 · beige sedan · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "5e64093e-d3f5-4caf-ad93-e567c2a3d525",
+        "createdAt": "2026-10-03T10:48:21.649Z",
+        "candidateFingerprint": "f569bb452bf522f017f44f1d90ead48267b345b417059669b6f80b40dc465023",
+        "metadataFingerprint": "ddce1151bc25cc4e6f9d88ef41a8fc5a7cf6e037e49b7e5c7ad95ddb49544206"
+      }
+    },
+    {
+      "id": "vehicle:sedan-12:east",
+      "vehicleId": "sedan-12",
+      "direction": "east",
+      "rect": [512, 5504, 80, 48],
+      "metadata": {
+        "name": "Car 12 · beige sedan · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "ac327268-1eaf-4478-8ce7-2ade03affe87",
+        "createdAt": "2026-10-03T10:48:22.344Z",
+        "candidateFingerprint": "c8931d6f537217119106d31a30d989b8d8d8299db4d00402af997f02809801d3",
+        "metadataFingerprint": "bcd4f115d0b609b1e8940a5cfd0fae1cf0979ddaee6023c8eab173ef07172d6c"
+      }
+    },
+    {
+      "id": "vehicle:sedan-12:south",
+      "vehicleId": "sedan-12",
+      "direction": "south",
+      "rect": [592, 5520, 48, 80],
+      "metadata": {
+        "name": "Car 12 · beige sedan · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "61886de2-ed5f-4b0b-a5a8-5313f52ed1bf",
+        "createdAt": "2026-10-03T10:48:22.761Z",
+        "candidateFingerprint": "cb7fe4da5130a00f6d2e3779a01b4d5bc7083e683f70af21d3ad9fcfef5faf00",
+        "metadataFingerprint": "89b86cd33c03795d64d50d835bcf91ac80cdb826e4b697dc54d150b327cd845d"
+      }
+    },
+    {
+      "id": "vehicle:sedan-12:west",
+      "vehicleId": "sedan-12",
+      "direction": "west",
+      "rect": [512, 5552, 80, 48],
+      "metadata": {
+        "name": "Car 12 · beige sedan · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "3c33e01e-073b-475d-9c1b-2ad070376e9f",
+        "createdAt": "2026-10-03T10:48:23.097Z",
+        "candidateFingerprint": "342bbf69a79c715b1eed01fda7231d8c79082bffad8e4762ab62a17b9824eb74",
+        "metadataFingerprint": "95ea0832093be7bbac7bd7a8578efd3de2bf42925d60affebf0bd850ff5d3cc5"
+      }
+    },
+    {
+      "id": "vehicle:car-7:north",
+      "vehicleId": "car-7",
+      "direction": "north",
+      "rect": [992, 5520, 48, 80],
+      "metadata": {
+        "name": "Car 7 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "b0bac773-209e-4b7a-9cd7-7bc0aaa093eb",
+        "createdAt": "2026-10-03T10:48:23.449Z",
+        "candidateFingerprint": "a10ecd897e521bfffc5e73569c84e54deeeb7b63ec17c0b93f0bc987413d94a9",
+        "metadataFingerprint": "ec364b7b9adc2d187557f322b97b1130be6c5e007f9f032955fb5cfed791dc9b"
+      }
+    },
+    {
+      "id": "vehicle:car-7:east",
+      "vehicleId": "car-7",
+      "direction": "east",
+      "rect": [864, 5504, 80, 48],
+      "metadata": {
+        "name": "Car 7 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "c0d00e2d-889b-4e24-86e2-ad73222af890",
+        "createdAt": "2026-10-03T10:48:23.743Z",
+        "candidateFingerprint": "b83fc73c80f88954a6d0768f80db257bb84ed254de5a3d9bb0c6bc4a1c517cfe",
+        "metadataFingerprint": "edf6e9f7bb75076c0bacabb2255120f31f64cfb26da8b0789eddc4f20ceb7971"
+      }
+    },
+    {
+      "id": "vehicle:car-7:south",
+      "vehicleId": "car-7",
+      "direction": "south",
+      "rect": [944, 5520, 48, 80],
+      "metadata": {
+        "name": "Car 7 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "ad64cc31-8c37-4b99-9790-b34d568d4c4b",
+        "createdAt": "2026-10-03T10:48:24.059Z",
+        "candidateFingerprint": "73ab3ca10b8289d0a1a8e2a8a91b43a47392983c8f935f87774841a7d67e85d4",
+        "metadataFingerprint": "3301978d4c92d88de8084e644a3ee12456308f27bd412476c5657aab80391c57"
+      }
+    },
+    {
+      "id": "vehicle:car-7:west",
+      "vehicleId": "car-7",
+      "direction": "west",
+      "rect": [864, 5552, 80, 48],
+      "metadata": {
+        "name": "Car 7 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "8aef7688-037d-488a-9869-6494afaaf58e",
+        "createdAt": "2026-10-03T10:48:24.528Z",
+        "candidateFingerprint": "f75357c788c5308c9476fcfda6bb8d6a530f066e552f43aa2ad6ebad524f0ffe",
+        "metadataFingerprint": "02ca2c52bfc1acc78f35bf516f882e474284b655e8827a072edd4d90f45bace4"
+      }
+    },
+    {
+      "id": "vehicle:car-8:north",
+      "vehicleId": "car-8",
+      "direction": "north",
+      "rect": [992, 5616, 48, 80],
+      "metadata": {
+        "name": "Car 8 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "c83d816b-a33c-4e82-b650-84b41d4ab18a",
+        "createdAt": "2026-10-03T10:48:24.946Z",
+        "candidateFingerprint": "2345e6dce0d20a7aa6d574b6f0fa53fae396b434e0e46a477028ba3ed56d9fe0",
+        "metadataFingerprint": "cc7dc81cb0e8718120d028c9ad6690f46c191f16a8243bab88b07fefd7083c5b"
+      }
+    },
+    {
+      "id": "vehicle:car-8:east",
+      "vehicleId": "car-8",
+      "direction": "east",
+      "rect": [864, 5600, 80, 48],
+      "metadata": {
+        "name": "Car 8 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "9229d173-68bf-47e4-980b-38481fc1f4ad",
+        "createdAt": "2026-10-03T10:48:25.282Z",
+        "candidateFingerprint": "27e3179dcf6efc421c0cdee7a8119be7fa3706fc5dba53174f68d4380d5e5cc8",
+        "metadataFingerprint": "7c67755dba576a37943bcabc3fe66910d184d16ffe9e41e117d36b9f4c805541"
+      }
+    },
+    {
+      "id": "vehicle:car-8:south",
+      "vehicleId": "car-8",
+      "direction": "south",
+      "rect": [944, 5616, 48, 80],
+      "metadata": {
+        "name": "Car 8 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "061e1ad4-66c3-41d4-92e4-0e16e0532078",
+        "createdAt": "2026-10-03T10:48:25.502Z",
+        "candidateFingerprint": "f1f53a10f45dac6b736233f179aacefcec9617cf4d378767fde0ca157a87ce64",
+        "metadataFingerprint": "83cfde9fa5374794efcf1b0cee06bdb196a82d7672ddb2e74ce0a484179d5aeb"
+      }
+    },
+    {
+      "id": "vehicle:car-8:west",
+      "vehicleId": "car-8",
+      "direction": "west",
+      "rect": [864, 5648, 80, 48],
+      "metadata": {
+        "name": "Car 8 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "77f45078-d670-4469-963c-f28f0d98a00c",
+        "createdAt": "2026-10-03T10:48:25.901Z",
+        "candidateFingerprint": "336e90ec5c9c3e436d955285fa952cd34d66fe1dfbd61c03e650930a3c05cb92",
+        "metadataFingerprint": "29c9ce4b5d8031e835a063a1c1e9f9c402f887ad314aae666a7b5e3594d50570"
+      }
+    },
+    {
+      "id": "vehicle:car-9:north",
+      "vehicleId": "car-9",
+      "direction": "north",
+      "rect": [992, 5712, 48, 80],
+      "metadata": {
+        "name": "Car 9 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "e80c0ee1-728a-4b99-b702-5e23f19d51e4",
+        "createdAt": "2026-10-03T10:48:26.223Z",
+        "candidateFingerprint": "f5077b8847dea5d323efc42f89cb63f5fb6e60fc94eb97ecc306a150bb035fe9",
+        "metadataFingerprint": "afb6593a018280c13b08038ffa73d59f88f606ffc5b637d7594440d86eab83af"
+      }
+    },
+    {
+      "id": "vehicle:car-9:east",
+      "vehicleId": "car-9",
+      "direction": "east",
+      "rect": [864, 5696, 80, 48],
+      "metadata": {
+        "name": "Car 9 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "a51e4f76-f28c-4eaa-a56f-d8d2acbf39ec",
+        "createdAt": "2026-10-03T10:48:26.590Z",
+        "candidateFingerprint": "3404935ff37a42eef2111a8f01ff03213de010e36096be78e86debcfa414b722",
+        "metadataFingerprint": "3d37fb70486db7e410869cee6ca6714d50a0fa50eaa2208c519c3fec7d768ff5"
+      }
+    },
+    {
+      "id": "vehicle:car-9:south",
+      "vehicleId": "car-9",
+      "direction": "south",
+      "rect": [944, 5712, 48, 80],
+      "metadata": {
+        "name": "Car 9 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "bc6e7adc-bcfb-4403-a35a-cbaccd2740b4",
+        "createdAt": "2026-10-03T10:48:26.900Z",
+        "candidateFingerprint": "32529d80ff0977f814ae804275310914724ca40dd522b9203f9bdc9f607cd37e",
+        "metadataFingerprint": "df4b900e060c9fd115a45ee498f712df03618ed198b850a237b0f48989dfddf2"
+      }
+    },
+    {
+      "id": "vehicle:car-9:west",
+      "vehicleId": "car-9",
+      "direction": "west",
+      "rect": [864, 5744, 80, 48],
+      "metadata": {
+        "name": "Car 9 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "5e33e232-92f4-44b0-9bf5-ba2aa2ddbf6e",
+        "createdAt": "2026-10-03T10:48:27.297Z",
+        "candidateFingerprint": "604782742fd65b7b4d3bdb5dece2c94639731be45751b0cf8e365ee2df27985f",
+        "metadataFingerprint": "36e9600c4cf0ece84ff811c6f9389d7cf3f359178b1a96da800396b38704209c"
+      }
+    },
+    {
+      "id": "vehicle:car-10:north",
+      "vehicleId": "car-10",
+      "direction": "north",
+      "rect": [992, 5808, 48, 80],
+      "metadata": {
+        "name": "Car 10 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "a3248d9d-7634-499f-8eab-6e03614fa62b",
+        "createdAt": "2026-10-03T10:48:27.733Z",
+        "candidateFingerprint": "c92f1b8d250d6fdd5ddc13d514814bf0bd65a42989fd433d36c3008b4e68f291",
+        "metadataFingerprint": "029018f7167948acdb9334c89612db3d2a3aefa74ac7b38fdfe959a659cd5237"
+      }
+    },
+    {
+      "id": "vehicle:car-10:east",
+      "vehicleId": "car-10",
+      "direction": "east",
+      "rect": [864, 5792, 80, 48],
+      "metadata": {
+        "name": "Car 10 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "e26892de-62f4-417b-932b-9f15553290fa",
+        "createdAt": "2026-10-03T10:48:28.087Z",
+        "candidateFingerprint": "55e06b113c522fb534bd0bfb6dee6e98516ff256fd12fcc3164a57a62ee71e0f",
+        "metadataFingerprint": "90875180aaff56e91a1893780355edf915a5cfa381be0831897267be11b798ec"
+      }
+    },
+    {
+      "id": "vehicle:car-10:south",
+      "vehicleId": "car-10",
+      "direction": "south",
+      "rect": [944, 5808, 48, 80],
+      "metadata": {
+        "name": "Car 10 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "09e3a8d1-2535-4311-b016-0b957158ade7",
+        "createdAt": "2026-10-03T10:48:28.518Z",
+        "candidateFingerprint": "656d6026eae8f48c05a87994e033a0b83c347df338af21a1b6f338f2d038d5d0",
+        "metadataFingerprint": "ee669c3ac10023887b5f8112534b41c3e86a536a26e49579df73080504dcf6e2"
+      }
+    },
+    {
+      "id": "vehicle:car-10:west",
+      "vehicleId": "car-10",
+      "direction": "west",
+      "rect": [864, 5840, 80, 48],
+      "metadata": {
+        "name": "Car 10 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "d4e7d530-6ace-4d14-9791-c585e4573a21",
+        "createdAt": "2026-10-03T10:48:28.869Z",
+        "candidateFingerprint": "790fbdb88e861aa2a603f7d475a6672f3936892cd28609a83b4003f2b8b6d238",
+        "metadataFingerprint": "3ea44459b7b2ef430d5ba9a516cf21b12c165ce80bd1eaf28b6e8f31be138af3"
+      }
+    },
+    {
+      "id": "vehicle:car-11:north",
+      "vehicleId": "car-11",
+      "direction": "north",
+      "rect": [992, 5904, 48, 80],
+      "metadata": {
+        "name": "Car 11 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "17071d3b-32c2-4f14-be14-1bb94f5179a8",
+        "createdAt": "2026-10-03T10:48:29.240Z",
+        "candidateFingerprint": "67aa434e776f1d1753dbddcfb8811b20e3b8b15f855d8270559f1100c374a467",
+        "metadataFingerprint": "caf6ba6f32f8e6a08f17dc59873a95221296fd0a59ee05beb7d9c8e299b45761"
+      }
+    },
+    {
+      "id": "vehicle:car-11:east",
+      "vehicleId": "car-11",
+      "direction": "east",
+      "rect": [864, 5888, 80, 48],
+      "metadata": {
+        "name": "Car 11 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "6cc15d89-87f6-405b-8156-d829c66a838b",
+        "createdAt": "2026-10-03T10:48:29.626Z",
+        "candidateFingerprint": "ad4f3e11b464b14fb6ec0bd444139131831b066821eca65165d0ae7a3ae2a30a",
+        "metadataFingerprint": "77a90585a4eb08bdc028d3ec515aadff7ac4e54c4080f1b51c26997994c8e526"
+      }
+    },
+    {
+      "id": "vehicle:car-11:south",
+      "vehicleId": "car-11",
+      "direction": "south",
+      "rect": [944, 5904, 48, 80],
+      "metadata": {
+        "name": "Car 11 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "eead34a4-ec55-4508-9ad7-c263163931c9",
+        "createdAt": "2026-10-03T10:48:30.083Z",
+        "candidateFingerprint": "59731bf4dea205d2c1a51af6a8c8ee57f87a8d90cd7bf821c7112d6dbabf11ad",
+        "metadataFingerprint": "3473ba87fcd738048d32b2360e2b235c4fb0233a469a091b4dfd63a8e4653660"
+      }
+    },
+    {
+      "id": "vehicle:car-11:west",
+      "vehicleId": "car-11",
+      "direction": "west",
+      "rect": [864, 5936, 80, 48],
+      "metadata": {
+        "name": "Car 11 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "eee33cd6-7fda-495f-aa3f-08564cdee78b",
+        "createdAt": "2026-10-03T10:48:30.429Z",
+        "candidateFingerprint": "15067996348e31f15a45d0b9619a2dafe2ae22492e81a67a97fd65c56cdf0dd0",
+        "metadataFingerprint": "41709ab8d4a1e8d48897ccd34a526d510da320f005addf89fd3dbb82dc1d6b9b"
+      }
+    },
+    {
+      "id": "vehicle:car-13:north",
+      "vehicleId": "car-13",
+      "direction": "north",
+      "rect": [640, 5616, 48, 80],
+      "metadata": {
+        "name": "Car 13 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "c2e34e96-b2b2-40ca-8118-16aff88ebacd",
+        "createdAt": "2026-10-03T10:48:30.808Z",
+        "candidateFingerprint": "940e61ee063a1290fcb19570c75d75e0e30949955a01003c55b4c180afcd11b1",
+        "metadataFingerprint": "ad7a2ee9020486ade7af2ea914b691395f1c7d1439b69d2524819d1c7a016607"
+      }
+    },
+    {
+      "id": "vehicle:car-13:east",
+      "vehicleId": "car-13",
+      "direction": "east",
+      "rect": [512, 5600, 80, 48],
+      "metadata": {
+        "name": "Car 13 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "e1c25787-aecc-4ed8-bbce-be000bd9a256",
+        "createdAt": "2026-10-03T10:48:31.240Z",
+        "candidateFingerprint": "39fe7e0589b692a512452396a28d809d7bb294a51fc921f159f76846774681b2",
+        "metadataFingerprint": "483d3a63e8fe088f4fc2beca3de860e611e93fb336186915481cc4b8265a9f97"
+      }
+    },
+    {
+      "id": "vehicle:car-13:south",
+      "vehicleId": "car-13",
+      "direction": "south",
+      "rect": [592, 5616, 48, 80],
+      "metadata": {
+        "name": "Car 13 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 74],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "3b30a6ea-d5af-4108-8797-bcb77bbf9f27",
+        "createdAt": "2026-10-03T10:48:31.706Z",
+        "candidateFingerprint": "72648db6badb1928e06bcce057a932452f5b1eee1233c15bbc34ae496158c6b7",
+        "metadataFingerprint": "24db8d57ff8ce98f8af2e1e7ccd774d87999ee6be366857fb0d317a23145507f"
+      }
+    },
+    {
+      "id": "vehicle:car-13:west",
+      "vehicleId": "car-13",
+      "direction": "west",
+      "rect": [512, 5648, 80, 48],
+      "metadata": {
+        "name": "Car 13 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "98c0fef7-b99a-40f2-8213-184c3952c231",
+        "createdAt": "2026-10-03T10:48:32.157Z",
+        "candidateFingerprint": "174db9c5e8dab73e6990440a5f4c2ea3209e84ff7a5a2d4831c8eca8b0ce42e0",
+        "metadataFingerprint": "4b288aec90499843d2e42666cb43ea4d3a4e8f37a1c8db49c3e1cedb8b4cfdf0"
+      }
+    },
+    {
+      "id": "vehicle:car-14:north",
+      "vehicleId": "car-14",
+      "direction": "north",
+      "rect": [1168, 5520, 48, 64],
+      "metadata": {
+        "name": "Car 14 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "34d464cd-3bff-4e30-b11e-df39e662829b",
+        "createdAt": "2026-10-03T10:48:32.587Z",
+        "candidateFingerprint": "c96a506c4296bdf089629bc6d1719e31924a77d4b926965ea9ed00aa020d79a0",
+        "metadataFingerprint": "bdd83aded34f67956a117678eba4ca6d0356e261b1f8889a06d8bd59a8c3d3c7"
+      }
+    },
+    {
+      "id": "vehicle:car-14:east",
+      "vehicleId": "car-14",
+      "direction": "east",
+      "rect": [1040, 5504, 80, 48],
+      "metadata": {
+        "name": "Car 14 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "3f99bc0b-6d41-4367-971a-65a8aab30088",
+        "createdAt": "2026-10-03T10:48:32.970Z",
+        "candidateFingerprint": "a9cbba6c3c9e3c44078d93ffc4493150e06c4214eabbc789f9ad918dcf65c5a3",
+        "metadataFingerprint": "2cece372dd11db0bfcc70ae8135f8d72aa4c2f121eea3977a894f4f956684d2a"
+      }
+    },
+    {
+      "id": "vehicle:car-14:south",
+      "vehicleId": "car-14",
+      "direction": "south",
+      "rect": [1120, 5520, 48, 64],
+      "metadata": {
+        "name": "Car 14 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "ae9301c1-ce61-4399-8241-735109e3fe14",
+        "createdAt": "2026-10-03T10:48:33.318Z",
+        "candidateFingerprint": "e8a8e3a912209e9423cf5f3bf4715abb0eb1a3fac2171bd8583662465cf68cff",
+        "metadataFingerprint": "11ab24588bd154b199f7faaad349bc2a2baf42089f12122b4c803f92dc36b686"
+      }
+    },
+    {
+      "id": "vehicle:car-14:west",
+      "vehicleId": "car-14",
+      "direction": "west",
+      "rect": [1040, 5552, 80, 48],
+      "metadata": {
+        "name": "Car 14 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "80c98979-894f-4a7b-918a-d7fdfe29c66f",
+        "createdAt": "2026-10-03T10:48:33.629Z",
+        "candidateFingerprint": "3bdbd1b8b5dfd0236b638dc2c6307e85340137111870e9e5411f77431ab35cc9",
+        "metadataFingerprint": "82b1a2b085b5d231c661b076f070aa72b7898753cbe721c0aea41d2854355985"
+      }
+    },
+    {
+      "id": "vehicle:car-15:north",
+      "vehicleId": "car-15",
+      "direction": "north",
+      "rect": [1168, 5616, 48, 64],
+      "metadata": {
+        "name": "Car 15 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "642cecdc-883b-428e-9c0a-9868ed248dfc",
+        "createdAt": "2026-10-03T10:48:34.002Z",
+        "candidateFingerprint": "8f32d008c858fa91742a74ef3e5ca450ebf1fdf3eaea1d17bc73716d2c69d0c6",
+        "metadataFingerprint": "de26aa219148689b68219f982fbe45681d81c5aa2da6a9b6fd690ab1e53acaec"
+      }
+    },
+    {
+      "id": "vehicle:car-15:east",
+      "vehicleId": "car-15",
+      "direction": "east",
+      "rect": [1040, 5600, 80, 48],
+      "metadata": {
+        "name": "Car 15 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "c67ddfb5-b218-4213-9640-dfa462237316",
+        "createdAt": "2026-10-03T10:48:34.325Z",
+        "candidateFingerprint": "9b22269923c016fb03f99c179477773d117fc2f3865416506b16dcc5f89b92a8",
+        "metadataFingerprint": "33addbfc8298f2b9a587df76b2c5ef1c51761221604f95fbfd586501fd3d4ec2"
+      }
+    },
+    {
+      "id": "vehicle:car-15:south",
+      "vehicleId": "car-15",
+      "direction": "south",
+      "rect": [1120, 5616, 48, 64],
+      "metadata": {
+        "name": "Car 15 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "fbc116d3-f8db-43f5-9ebc-2c5c755c4b9b",
+        "createdAt": "2026-10-03T10:48:34.729Z",
+        "candidateFingerprint": "7d8fae3d0d60760cd0b1963d4ff2cee51efca3cc5f8ec13cc197b12bbdb7e934",
+        "metadataFingerprint": "49036a140e4334a57136255c29c89514c94261d12745917968c81818ff62b245"
+      }
+    },
+    {
+      "id": "vehicle:car-15:west",
+      "vehicleId": "car-15",
+      "direction": "west",
+      "rect": [1040, 5648, 80, 48],
+      "metadata": {
+        "name": "Car 15 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "e4155c45-6fe9-46b3-9a6b-7621202e7008",
+        "createdAt": "2026-10-03T10:48:35.061Z",
+        "candidateFingerprint": "dc4aa893515442ad0df75230c835ac399c2ededa0cffa3c25e77f1ebf20c5293",
+        "metadataFingerprint": "4672fb0eb9ed09326d1132d771702fd62b8ac5e6c735b29dce9fe4a656d85459"
+      }
+    },
+    {
+      "id": "vehicle:car-16:north",
+      "vehicleId": "car-16",
+      "direction": "north",
+      "rect": [1168, 5712, 48, 64],
+      "metadata": {
+        "name": "Car 16 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "65a717cc-070b-498b-81d0-e45251d22a4a",
+        "createdAt": "2026-10-03T10:48:35.377Z",
+        "candidateFingerprint": "3186df7a679b9e816ad23e40f8d4813acb5635ad8361c39909f7f3275f3f348a",
+        "metadataFingerprint": "da85fc3ed9fe9d1f84af087fa0bae9375dd43ecaf660b8113c78f2f94a914f11"
+      }
+    },
+    {
+      "id": "vehicle:car-16:east",
+      "vehicleId": "car-16",
+      "direction": "east",
+      "rect": [1040, 5696, 80, 48],
+      "metadata": {
+        "name": "Car 16 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "31ece62f-b8fc-4b3d-bcb4-0b8ce828c8b2",
+        "createdAt": "2026-10-03T10:48:35.713Z",
+        "candidateFingerprint": "677cf817bda945cd1c8864b9668ef4f7bdb4f71b55bd4b9c9d568e0accfb462f",
+        "metadataFingerprint": "caf4ea56456dfed1a0243de1ca4f7d9fd5e7d7c49faccc7166d2804c8c23973f"
+      }
+    },
+    {
+      "id": "vehicle:car-16:south",
+      "vehicleId": "car-16",
+      "direction": "south",
+      "rect": [1120, 5712, 48, 64],
+      "metadata": {
+        "name": "Car 16 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "03d4372b-e8c5-472b-8080-ebab9dd64e9b",
+        "createdAt": "2026-10-03T10:48:38.036Z",
+        "candidateFingerprint": "4cf2716147779faba3a7effcef23bc86ca8fa7cd820c5d026ef7cbd4a89f21ed",
+        "metadataFingerprint": "3bb26435bedf4eccabaac8f5c85cd76e24d69d06dfa2b5e5a80eaa36ce5c4dd2"
+      }
+    },
+    {
+      "id": "vehicle:car-16:west",
+      "vehicleId": "car-16",
+      "direction": "west",
+      "rect": [1040, 5744, 80, 48],
+      "metadata": {
+        "name": "Car 16 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "20083d69-328c-446e-853b-f32aadc3d50a",
+        "createdAt": "2026-10-03T10:48:38.368Z",
+        "candidateFingerprint": "9ddca517a497af184400e90a4a1ce5cad48a8e227eb8d3fa4510cfc81cbb7e2b",
+        "metadataFingerprint": "a8f88c949c2ba900aecd0d8f1ececcf0eb925d701c63dcfc373ff3df8e69de3d"
+      }
+    },
+    {
+      "id": "vehicle:car-17:north",
+      "vehicleId": "car-17",
+      "direction": "north",
+      "rect": [1168, 5808, 48, 64],
+      "metadata": {
+        "name": "Car 17 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "b8d5def1-03fb-4fdd-84b4-61b4974b8388",
+        "createdAt": "2026-10-03T10:48:38.750Z",
+        "candidateFingerprint": "12e194dfd19f72111288852d8eaa6099ffe6335dfcf599ec0cd3d7c27ec0b6f8",
+        "metadataFingerprint": "865350ea11e3eb41979685f5af8826c6bbc604d10745b3b71917f549729b4684"
+      }
+    },
+    {
+      "id": "vehicle:car-17:east",
+      "vehicleId": "car-17",
+      "direction": "east",
+      "rect": [1040, 5792, 80, 48],
+      "metadata": {
+        "name": "Car 17 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "e5569343-a773-49dd-baf3-8215f2bdf6e2",
+        "createdAt": "2026-10-03T10:48:38.936Z",
+        "candidateFingerprint": "d984307be0f44d9010a547d0e8212c8090858e1b562d7e3f7798970002c3dcdc",
+        "metadataFingerprint": "71b2882e99e7b937882dd5eda3386ecb5c895ba5d900283d1039dfcd1ed5db5a"
+      }
+    },
+    {
+      "id": "vehicle:car-17:south",
+      "vehicleId": "car-17",
+      "direction": "south",
+      "rect": [1120, 5808, 48, 64],
+      "metadata": {
+        "name": "Car 17 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "d297d476-8333-4f81-9ff0-2742375ecbfd",
+        "createdAt": "2026-10-03T10:48:39.094Z",
+        "candidateFingerprint": "cfde06d65239e3255746e8258a2f8a87d774c5f0f96502ea2741bce103c4170c",
+        "metadataFingerprint": "1e11f7de106ef3775df802f6e56dfe1cac338c65a82edc623863e6a4a00c0d4d"
+      }
+    },
+    {
+      "id": "vehicle:car-17:west",
+      "vehicleId": "car-17",
+      "direction": "west",
+      "rect": [1040, 5840, 80, 48],
+      "metadata": {
+        "name": "Car 17 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "1e5004b3-439e-4db3-812e-a74a5fdfda8d",
+        "createdAt": "2026-10-03T10:48:39.268Z",
+        "candidateFingerprint": "febe246946246bead4cc432d33e786bb3b1476499f4863d9650eb5f0807c414b",
+        "metadataFingerprint": "74d787e9de5cd72378fe6341d74b6ff9524677ea4fc4b2d6f32d0ab7b50f151e"
+      }
+    },
+    {
+      "id": "vehicle:car-18:north",
+      "vehicleId": "car-18",
+      "direction": "north",
+      "rect": [1168, 5904, 48, 64],
+      "metadata": {
+        "name": "Car 18 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "b3e1f1d0-98c8-4d46-bdea-6901b2cc9db4",
+        "createdAt": "2026-10-03T10:48:39.443Z",
+        "candidateFingerprint": "dfacaaf18168fb4f4cb0b786a9882750c9f4edb9b195a0377e03dcabc59c4134",
+        "metadataFingerprint": "faa090bdbebde0e4e62c77f8a76b98968fc4bb88d7667d2133d035aee6921c04"
+      }
+    },
+    {
+      "id": "vehicle:car-18:east",
+      "vehicleId": "car-18",
+      "direction": "east",
+      "rect": [1040, 5888, 80, 48],
+      "metadata": {
+        "name": "Car 18 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "20393e70-ac06-4da2-931c-2374489fa1f4",
+        "createdAt": "2026-10-03T10:48:39.621Z",
+        "candidateFingerprint": "61ea1ab4bb6658b6b73a0396507719fed8a8dc918013aa9690fb7866711294af",
+        "metadataFingerprint": "2f348b21f9ce8c998a5f24bb4f93cd1a24740d49811e860931507f012009cb5d"
+      }
+    },
+    {
+      "id": "vehicle:car-18:south",
+      "vehicleId": "car-18",
+      "direction": "south",
+      "rect": [1120, 5904, 48, 64],
+      "metadata": {
+        "name": "Car 18 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "fcec8c0f-0182-4e25-886a-aaa4642b2736",
+        "createdAt": "2026-10-03T10:48:39.799Z",
+        "candidateFingerprint": "27a49d73d3bbc0c304a5bf48ae4aeed693034e2f1ea9a919726307c1bfc35e21",
+        "metadataFingerprint": "a05e1554f1d8abf39610ed9144d9f9dc79feb42bf99781fa77c7ab2647567d0c"
+      }
+    },
+    {
+      "id": "vehicle:car-18:west",
+      "vehicleId": "car-18",
+      "direction": "west",
+      "rect": [1040, 5936, 80, 48],
+      "metadata": {
+        "name": "Car 18 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "d1f320f3-2ae1-4514-a4f8-3afd4e174019",
+        "createdAt": "2026-10-03T10:48:39.983Z",
+        "candidateFingerprint": "2f336a496d02f4235364ba2033e771cdd205ffa211027472d1dfbdc04bc0f387",
+        "metadataFingerprint": "d6044241948110f5c1389368634254b2dda02c197366565793aeeea22f511542"
+      }
+    },
+    {
+      "id": "vehicle:car-19:north",
+      "vehicleId": "car-19",
+      "direction": "north",
+      "rect": [816, 5520, 48, 64],
+      "metadata": {
+        "name": "Car 19 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "d46ca795-eab4-4a9c-9a1d-44ade651b6ea",
+        "createdAt": "2026-10-03T10:48:40.192Z",
+        "candidateFingerprint": "17f8641b9112490d7897b0736c5720f857432c08dcc32b65675c27b25b46635e",
+        "metadataFingerprint": "307dde288f1a50f39366e1e09dcf72ede0b73edfc7a016e7765bf2d92e0c8e1c"
+      }
+    },
+    {
+      "id": "vehicle:car-19:east",
+      "vehicleId": "car-19",
+      "direction": "east",
+      "rect": [688, 5504, 80, 48],
+      "metadata": {
+        "name": "Car 19 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "a35caf2c-d125-4b23-936a-f1ab326d1b24",
+        "createdAt": "2026-10-03T10:48:40.413Z",
+        "candidateFingerprint": "1dee2b97c6ec2ab29d14a77d38761fc583f9ed0e85cd3ab0d3188038ebdd57aa",
+        "metadataFingerprint": "14226086d9f4bbf6cb27648faf92e02d68b94cb98646d234f7a43a786653807b"
+      }
+    },
+    {
+      "id": "vehicle:car-19:south",
+      "vehicleId": "car-19",
+      "direction": "south",
+      "rect": [768, 5520, 48, 64],
+      "metadata": {
+        "name": "Car 19 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "0a6c4fbb-7d96-46b5-803c-15480aaf29fb",
+        "createdAt": "2026-10-03T10:48:40.626Z",
+        "candidateFingerprint": "2f8a8d206543b6edbd08651d91c5dd57d537076673b893e36ec11879e9269d24",
+        "metadataFingerprint": "41beb39e51517dbc7e4318341981711c183770e47dee8e71cd6a6bc429d14c0f"
+      }
+    },
+    {
+      "id": "vehicle:car-19:west",
+      "vehicleId": "car-19",
+      "direction": "west",
+      "rect": [688, 5552, 80, 48],
+      "metadata": {
+        "name": "Car 19 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "70da1205-9bfe-4567-ae38-abf8dd3293e2",
+        "createdAt": "2026-10-03T10:48:40.846Z",
+        "candidateFingerprint": "ab96ba71723f5fafe5db475dd5925e72fe370f9f2ae11a60a02273719e32ec6c",
+        "metadataFingerprint": "53af27d930a5336ae3593412eeca8a3b137532fae1077c01fb2b32ea6c58db79"
+      }
+    },
+    {
+      "id": "vehicle:car-20:north",
+      "vehicleId": "car-20",
+      "direction": "north",
+      "rect": [816, 5616, 48, 64],
+      "metadata": {
+        "name": "Car 20 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "d593e64e-b340-4892-99ee-f0fc86234166",
+        "createdAt": "2026-10-03T10:48:41.051Z",
+        "candidateFingerprint": "86590bc3b7db18a0bf8be578354ae031e789dee7286a93e1ec6c35a3187e2a6b",
+        "metadataFingerprint": "526aa128c1d802df5294528f6736e5a3e352df2dff7bf86c9a5d1688764d06d2"
+      }
+    },
+    {
+      "id": "vehicle:car-20:east",
+      "vehicleId": "car-20",
+      "direction": "east",
+      "rect": [688, 5600, 80, 48],
+      "metadata": {
+        "name": "Car 20 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "ce931a53-121b-469e-a0c1-18e7ae1985d8",
+        "createdAt": "2026-10-03T10:48:41.266Z",
+        "candidateFingerprint": "c527e8156e653e7f151ef37ecf08760c4a449bc6a28bddd62f58b4ccc0e8a0c0",
+        "metadataFingerprint": "f514a5510f339f89f69a0464cd6616d1c14ee7922c99b1cc84d2fcbb0442d988"
+      }
+    },
+    {
+      "id": "vehicle:car-20:south",
+      "vehicleId": "car-20",
+      "direction": "south",
+      "rect": [768, 5616, 48, 64],
+      "metadata": {
+        "name": "Car 20 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 60],
+        "footprint": [-20, -52, 40, 52],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "approval": {
+        "id": "cf7a5a19-746a-4d6c-b67a-4a532ad2fa71",
+        "createdAt": "2026-10-03T10:48:41.469Z",
+        "candidateFingerprint": "5bb4ef77fbc65953d28cfea3c006618fccb5e34563790442a633392e9e3c2dee",
+        "metadataFingerprint": "e218ccf10a11a78159be53926fbb7e419efc5e37f1332e1b4b2a67d2672f657d"
+      }
+    },
+    {
+      "id": "vehicle:car-20:west",
+      "vehicleId": "car-20",
+      "direction": "west",
+      "rect": [688, 5648, 80, 48],
+      "metadata": {
+        "name": "Car 20 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "8a65bc19-448e-45c2-bc8f-b29fb6f0b005",
+        "createdAt": "2026-10-03T10:48:41.720Z",
+        "candidateFingerprint": "e6c79b138ef3f190bfbe007b748f80a1775bef3a6101c828d4b7c4466340aca3",
+        "metadataFingerprint": "9ecac9c4644576aa110d1292c1acb58d0210f92844f49e6dae5a1f5712829ae1"
+      }
+    },
+    {
+      "id": "vehicle:car-21:north",
+      "vehicleId": "car-21",
+      "direction": "north",
+      "rect": [640, 5712, 48, 80],
+      "metadata": {
+        "name": "Car 21 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 72],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "af94cb02-6147-4c38-8265-6e232691d5f3",
+        "createdAt": "2026-10-03T10:48:41.926Z",
+        "candidateFingerprint": "02800248c57d706531bede4ea0f78dd809d172c81d1ce416dd59dfd8fa3c218c",
+        "metadataFingerprint": "bdde5485a15775a63209e485406e34760a28326bbc3914b66822f0227fcb63e6"
+      }
+    },
+    {
+      "id": "vehicle:car-21:east",
+      "vehicleId": "car-21",
+      "direction": "east",
+      "rect": [512, 5696, 80, 48],
+      "metadata": {
+        "name": "Car 21 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "0501bccf-6819-40b5-b187-7e62fb873d25",
+        "createdAt": "2026-10-03T10:48:42.195Z",
+        "candidateFingerprint": "eac822ba68fe93e8ca3e31799954679e0a26d59e2d8cd565ddcee6080d53ebee",
+        "metadataFingerprint": "044ebaaa0b66403dbb581391f53bb652e3432ada463ae553d57e70d2645080b5"
+      }
+    },
+    {
+      "id": "vehicle:car-21:south",
+      "vehicleId": "car-21",
+      "direction": "south",
+      "rect": [592, 5712, 48, 80],
+      "metadata": {
+        "name": "Car 21 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 71],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "24bfea4b-c329-4e70-b9f0-db72e31c69a4",
+        "createdAt": "2026-10-03T10:48:42.469Z",
+        "candidateFingerprint": "4ad6e7847db11dcb4c628baa98e2bcb49c985fd55b5ee7ca083c38fdb9bb956a",
+        "metadataFingerprint": "1d0a7942bc0c0901a6811e1a78d1a92820f7e7cb95fe60c961682759cb863f06"
+      }
+    },
+    {
+      "id": "vehicle:car-21:west",
+      "vehicleId": "car-21",
+      "direction": "west",
+      "rect": [512, 5744, 80, 48],
+      "metadata": {
+        "name": "Car 21 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "ccb30f8b-07f9-4e7d-9a16-840e5157600e",
+        "createdAt": "2026-10-03T10:48:42.763Z",
+        "candidateFingerprint": "7eff579dc30a309a8931b90d67a1a125de8f81211a9a8ac7c0118344041fc342",
+        "metadataFingerprint": "e7d0d7243e10500ce82c158c452458f095655e9313189215a684412e00b2f8a8"
+      }
+    },
+    {
+      "id": "vehicle:car-22:north",
+      "vehicleId": "car-22",
+      "direction": "north",
+      "rect": [640, 5808, 48, 80],
+      "metadata": {
+        "name": "Car 22 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 72],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "7ca4e10d-5a20-44a7-a522-9a4c99952440",
+        "createdAt": "2026-10-03T10:48:42.960Z",
+        "candidateFingerprint": "747e2e8076651bbc3a1cc85a0b03cb1abd2dfd4826b5fc012131e271cb2d660d",
+        "metadataFingerprint": "09071e255fbdff227f95c953c492ec45e6cd0dcc2c60155e93d5b0938cc945eb"
+      }
+    },
+    {
+      "id": "vehicle:car-22:east",
+      "vehicleId": "car-22",
+      "direction": "east",
+      "rect": [512, 5792, 80, 48],
+      "metadata": {
+        "name": "Car 22 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "1a9d7299-372a-4e02-a5be-2ea74795e88d",
+        "createdAt": "2026-10-03T10:48:43.157Z",
+        "candidateFingerprint": "847692de6392a95bdb3c63a36f963058013224ef16818cb8b32673b4dee5dab3",
+        "metadataFingerprint": "fd9a6055e050cdcbbe9456630abfea1006d1a9009867a5a9d2a1c01757da5afc"
+      }
+    },
+    {
+      "id": "vehicle:car-22:south",
+      "vehicleId": "car-22",
+      "direction": "south",
+      "rect": [592, 5808, 48, 80],
+      "metadata": {
+        "name": "Car 22 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 71],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "0a2fc5ad-c02d-43e5-8aa9-5f713601d535",
+        "createdAt": "2026-10-03T10:48:43.353Z",
+        "candidateFingerprint": "696490e6dbc7c8d6d1a428cff20b7b9defee8304bae62ce4de581a296ce36c06",
+        "metadataFingerprint": "e17969ae58930b140bec92350df1d482c0cf57f695a15dd6590952d6fa76d7f8"
+      }
+    },
+    {
+      "id": "vehicle:car-22:west",
+      "vehicleId": "car-22",
+      "direction": "west",
+      "rect": [512, 5840, 80, 48],
+      "metadata": {
+        "name": "Car 22 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "76741aa9-bbe9-4743-bc8d-87771462b489",
+        "createdAt": "2026-10-03T10:48:43.544Z",
+        "candidateFingerprint": "6d5a46dd2fb92cc94b710670c9d701e19709072ccf7437bb3801f51e90b2f116",
+        "metadataFingerprint": "9aecba2889ef678df983c99988ce47bcfe5662fdd10e042b160a2ce9216ffbe4"
+      }
+    },
+    {
+      "id": "vehicle:car-23:north",
+      "vehicleId": "car-23",
+      "direction": "north",
+      "rect": [640, 5904, 48, 80],
+      "metadata": {
+        "name": "Car 23 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 72],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "c242f15c-c396-4905-9ce6-b8fa6883f9da",
+        "createdAt": "2026-10-03T10:48:43.712Z",
+        "candidateFingerprint": "3699e54c3bcb0205bf043341e717fde629605b149c9469b6d11a553c7a2fabc9",
+        "metadataFingerprint": "17821170b3b1cc93978f9808db2647581fea67849fcbae25852cb8a226847afa"
+      }
+    },
+    {
+      "id": "vehicle:car-23:east",
+      "vehicleId": "car-23",
+      "direction": "east",
+      "rect": [512, 5888, 80, 48],
+      "metadata": {
+        "name": "Car 23 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "3951fab5-01aa-4990-89ae-f78d4c1d5073",
+        "createdAt": "2026-10-03T10:48:43.898Z",
+        "candidateFingerprint": "91a99c22574112dadcc30a7f97196237abdec9d944b672968e81fd69c0648dde",
+        "metadataFingerprint": "20d415b8005190b889c4e050962a5c215d96210dfd9fd1ec80d96fd8d75054ee"
+      }
+    },
+    {
+      "id": "vehicle:car-23:south",
+      "vehicleId": "car-23",
+      "direction": "south",
+      "rect": [592, 5904, 48, 80],
+      "metadata": {
+        "name": "Car 23 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 71],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "7c869fc0-a04f-4f2b-985e-546aa294cd8c",
+        "createdAt": "2026-10-03T10:48:44.085Z",
+        "candidateFingerprint": "3ee654cd9f639c112ba521d43e5c20e8e023ee0a6bf60948e93c453a94eb1aa7",
+        "metadataFingerprint": "a079b0ce11523094acbe4d39a93f9f2f0d30697dde602a2502044240d8bfd5c4"
+      }
+    },
+    {
+      "id": "vehicle:car-23:west",
+      "vehicleId": "car-23",
+      "direction": "west",
+      "rect": [512, 5936, 80, 48],
+      "metadata": {
+        "name": "Car 23 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "42d50241-7b4c-4651-8ef3-9904ac6ac3a4",
+        "createdAt": "2026-10-03T10:48:44.284Z",
+        "candidateFingerprint": "e4f0e3236b3e85c51a8b617c931ae0ec6a4dbd0237ba5cf28f342eebaf211c26",
+        "metadataFingerprint": "a3ca56801310123e5772d073d2506e7dac7d6868ba9824f7f6163b2302007973"
+      }
+    },
+    {
+      "id": "vehicle:car-24:north",
+      "vehicleId": "car-24",
+      "direction": "north",
+      "rect": [816, 5712, 48, 80],
+      "metadata": {
+        "name": "Car 24 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 72],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "340a6c61-f960-4353-9424-2c8c3ee3fb5e",
+        "createdAt": "2026-10-03T10:48:44.479Z",
+        "candidateFingerprint": "8d7ec64c4946d17a924c06da718cfe6362c3e77082e3a00f035e7698a20aace2",
+        "metadataFingerprint": "bf32ae26777c072ed8d3b94615533bdb4e021215a695d91d267965d47423ea52"
+      }
+    },
+    {
+      "id": "vehicle:car-24:east",
+      "vehicleId": "car-24",
+      "direction": "east",
+      "rect": [688, 5696, 80, 48],
+      "metadata": {
+        "name": "Car 24 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "52b67f9e-6f33-4732-b216-1211c80f067e",
+        "createdAt": "2026-10-03T10:48:44.666Z",
+        "candidateFingerprint": "8e3297a0c9b6d7949c080de34bd9ef72f81f9377ee9f3608692f3625d052ceb8",
+        "metadataFingerprint": "66ed0e2b0efab5cda47be2d0793bc2b6e2e1dd1ff3ec821ab01ac88b003a033b"
+      }
+    },
+    {
+      "id": "vehicle:car-24:south",
+      "vehicleId": "car-24",
+      "direction": "south",
+      "rect": [768, 5712, 48, 80],
+      "metadata": {
+        "name": "Car 24 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 71],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "804b345e-b7e3-4f66-953c-736f8e3c937a",
+        "createdAt": "2026-10-03T10:48:44.867Z",
+        "candidateFingerprint": "3c0a2c9d5e2c398decd1b6ff1d6326828bbdc19a97008e3f557df7933a7f842c",
+        "metadataFingerprint": "948a5775a14af0980ec002a48c41390f087c291a8069babceab8b3de52e8c159"
+      }
+    },
+    {
+      "id": "vehicle:car-24:west",
+      "vehicleId": "car-24",
+      "direction": "west",
+      "rect": [688, 5744, 80, 48],
+      "metadata": {
+        "name": "Car 24 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "0620025e-9b38-43ee-8082-821d949dd141",
+        "createdAt": "2026-10-03T10:48:45.077Z",
+        "candidateFingerprint": "a83c01d0f67e80bc6b54c583e3b195db774f7ac1596d43b2c675b2bc27bc25f9",
+        "metadataFingerprint": "40bcbec7122e57a53851983e3bd74caff0f7502561604b2f256ee6173215c4ac"
+      }
+    },
+    {
+      "id": "vehicle:car-25:north",
+      "vehicleId": "car-25",
+      "direction": "north",
+      "rect": [816, 5808, 48, 80],
+      "metadata": {
+        "name": "Car 25 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 72],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "cdd91f6e-b197-41ea-99a0-54382a39c2e9",
+        "createdAt": "2026-10-03T10:48:45.294Z",
+        "candidateFingerprint": "362d45ca023a15849e1213210d38978c9504e7a7b043198f18ac219efa19496c",
+        "metadataFingerprint": "6fd489e9e15c76cf15bac671b212078c73ace3699914e0d7329b9821f2fc8e75"
+      }
+    },
+    {
+      "id": "vehicle:car-25:east",
+      "vehicleId": "car-25",
+      "direction": "east",
+      "rect": [688, 5792, 80, 48],
+      "metadata": {
+        "name": "Car 25 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "356648c0-49fd-401c-a432-a36cf0b607a1",
+        "createdAt": "2026-10-03T10:48:45.730Z",
+        "candidateFingerprint": "193173aeaeb202e747e7b20b16c1f105f5ce8cd68c227f0c30352b14c7c164bc",
+        "metadataFingerprint": "499c2564f8f8538bf8f229383bf7adaa2a8ae1f51793a0dac3420cf2c1a1e6ac"
+      }
+    },
+    {
+      "id": "vehicle:car-25:south",
+      "vehicleId": "car-25",
+      "direction": "south",
+      "rect": [768, 5808, 48, 80],
+      "metadata": {
+        "name": "Car 25 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 71],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "281d123d-0f1c-42f2-a7e9-6e53d3714c13",
+        "createdAt": "2026-10-03T10:48:45.935Z",
+        "candidateFingerprint": "e883ee4f7f6558e4d6c82030531a0a04b1b74a9144abb736b86940225216a8c8",
+        "metadataFingerprint": "dccde5cdfb360a90c80d7345a352bf15e124ce03d3a84bd5f2ef76c765b73807"
+      }
+    },
+    {
+      "id": "vehicle:car-25:west",
+      "vehicleId": "car-25",
+      "direction": "west",
+      "rect": [688, 5840, 80, 48],
+      "metadata": {
+        "name": "Car 25 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "12274c05-409c-48c7-8e23-c0b1b9931664",
+        "createdAt": "2026-10-03T10:48:46.119Z",
+        "candidateFingerprint": "41f8373807fd506f585f27da06d42c40202697cb12421a91611a1c34722bf3b5",
+        "metadataFingerprint": "436058361ffacbb4f1b4aeffdd4d9af6ca0a79dff8a1c5a9793de5b6d9ad80f7"
+      }
+    },
+    {
+      "id": "vehicle:car-26:north",
+      "vehicleId": "car-26",
+      "direction": "north",
+      "rect": [816, 5904, 48, 80],
+      "metadata": {
+        "name": "Car 26 · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 72],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "6a69dd76-e707-4689-99d3-2e5eb504670a",
+        "createdAt": "2026-10-03T10:48:46.319Z",
+        "candidateFingerprint": "c49d8e1003f71e3eb8b526a9342634185e007e03a7e564fd1843e3092d61c557",
+        "metadataFingerprint": "997308aa12cef82cfa74170f4ca7c1c11de85ebd5f2b2013935ccadad48671e5"
+      }
+    },
+    {
+      "id": "vehicle:car-26:east",
+      "vehicleId": "car-26",
+      "direction": "east",
+      "rect": [688, 5888, 80, 48],
+      "metadata": {
+        "name": "Car 26 · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "374e5735-00ef-4943-92d8-37f8a50e5b93",
+        "createdAt": "2026-10-03T10:48:46.523Z",
+        "candidateFingerprint": "254207b3e445da5c65e525e3cab4ddd45f3832870d03d116474892cde78d0690",
+        "metadataFingerprint": "20c8329583715b91e020edd9dd7fa04a9f23568e2187afe8b5bbbe80c35a8874"
+      }
+    },
+    {
+      "id": "vehicle:car-26:south",
+      "vehicleId": "car-26",
+      "direction": "south",
+      "rect": [768, 5904, 48, 80],
+      "metadata": {
+        "name": "Car 26 · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 71],
+        "footprint": [-20, -56, 40, 56],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 56,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -28
+      },
+      "approval": {
+        "id": "7f0df7b6-28e8-41c1-a4b1-bba133bc915a",
+        "createdAt": "2026-10-03T10:48:46.725Z",
+        "candidateFingerprint": "665642dd3c45b2d8a1376ae802af94a3aa8c860ec27879498d3c12f2d728bc94",
+        "metadataFingerprint": "14d98aa6a870bd6ac2a2d8ea4b4b6fb5c9c82ec54fe9035771adf0a4fce658f6"
+      }
+    },
+    {
+      "id": "vehicle:car-26:west",
+      "vehicleId": "car-26",
+      "direction": "west",
+      "rect": [688, 5936, 80, 48],
+      "metadata": {
+        "name": "Car 26 · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "car", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "84f8b8ca-ccc0-43d4-8bca-7d84d3d3b2e8",
+        "createdAt": "2026-10-03T10:48:46.939Z",
+        "candidateFingerprint": "c52392372e0fdb58193435b5e6aaa1e0eec5daf373e9cbdbf36c7300110c735a",
+        "metadataFingerprint": "8abfd5eda6db05462b59a1bf34a2ffdee963c1711f9678104079271644f9b79e"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-red:north",
+      "vehicleId": "unindexed-sedan-red",
+      "direction": "north",
+      "rect": [1024, 1568, 32, 80],
+      "metadata": {
+        "name": "Sedan · red · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "66c9967f-dbac-4f4b-b499-67d5a229c884",
+        "createdAt": "2026-10-03T10:48:47.171Z",
+        "candidateFingerprint": "4d27864aac208c00f224c311b7747a8a4c4558d9f31acb6b773ebbdd3213e2ec",
+        "metadataFingerprint": "87f1ea6e32b4e7a43625876c30031942e00c8b1f663e0f60a40b04e846cfc887"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-red:east",
+      "vehicleId": "unindexed-sedan-red",
+      "direction": "east",
+      "rect": [1056, 1600, 80, 48],
+      "metadata": {
+        "name": "Sedan · red · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "a6856aaa-1551-4253-b4cb-f3f6dcd2459b",
+        "createdAt": "2026-10-03T10:48:47.400Z",
+        "candidateFingerprint": "0b71d8dc2edbae101f6dbbf6ab1fe52db26cb87e76bfd1815d4f56c8ff302ba9",
+        "metadataFingerprint": "d119d62d148cfb16d49fa085eed047c98f2ac78b3468a6873d3f2e983e6c53e1"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-red:south",
+      "vehicleId": "unindexed-sedan-red",
+      "direction": "south",
+      "rect": [992, 1568, 32, 80],
+      "metadata": {
+        "name": "Sedan · red · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "95e1cd6b-43f6-4db1-b5a9-5c660ec8019f",
+        "createdAt": "2026-10-03T10:48:47.898Z",
+        "candidateFingerprint": "7957dfe00acfe6916013e66a86b7f98d05fa90d85005d86ab0e96673bbff2aa2",
+        "metadataFingerprint": "28b2101efbc25a3ba49b6bddd1398d83d3cb6fc84ccffeb5ca15f609a6cfaf95"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-red:west",
+      "vehicleId": "unindexed-sedan-red",
+      "direction": "west",
+      "rect": [1056, 1552, 80, 48],
+      "metadata": {
+        "name": "Sedan · red · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "04b7ce68-670a-4552-9dd9-9ba65cdb48c7",
+        "createdAt": "2026-10-03T10:48:48.108Z",
+        "candidateFingerprint": "30c6103975d688cdd5b0565bbcb0afbf7f35f38a54ce1b88640f7f2c1beb4645",
+        "metadataFingerprint": "2c8376abfa7f0127b4466b2a8c79a51a35a95e0ac277993344f0d87064bb3b9f"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-beige:north",
+      "vehicleId": "unindexed-sedan-beige",
+      "direction": "north",
+      "rect": [1168, 1568, 32, 80],
+      "metadata": {
+        "name": "Sedan · beige · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "f8d6db23-b646-4004-81f0-f2ef0aff63af",
+        "createdAt": "2026-10-03T10:48:48.478Z",
+        "candidateFingerprint": "52de06426a01328b8866a880b7570bd8cf7232d3ce7015819f734200d6473e15",
+        "metadataFingerprint": "b058977799186b997f5bf0e9f0fb8979fd998e215076280e3ab3cb54840208bd"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-beige:east",
+      "vehicleId": "unindexed-sedan-beige",
+      "direction": "east",
+      "rect": [1200, 1600, 80, 48],
+      "metadata": {
+        "name": "Sedan · beige · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "f620e272-e550-476c-a545-892c08f47ed8",
+        "createdAt": "2026-10-03T10:48:48.681Z",
+        "candidateFingerprint": "6149866c42c48c63f2c5da183b2f867f686aaab59c1250edb9ca8f01fbf336cd",
+        "metadataFingerprint": "b9cbf208cf292ee3f9b1a6510d276321717e415155aaed8e75cdd9357c40f93c"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-beige:south",
+      "vehicleId": "unindexed-sedan-beige",
+      "direction": "south",
+      "rect": [1136, 1568, 32, 80],
+      "metadata": {
+        "name": "Sedan · beige · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "c6416f8e-5dcf-4b8d-aafe-15e0d12867ba",
+        "createdAt": "2026-10-03T10:48:49.006Z",
+        "candidateFingerprint": "c36089750e94c6d5e6f088531be6be636dd38968c74dcce9721f6214c58f1bfa",
+        "metadataFingerprint": "a9857882b39442fbdf7e1f9c10025dc3c149e997afcaf115d49ed48e5d05e084"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-beige:west",
+      "vehicleId": "unindexed-sedan-beige",
+      "direction": "west",
+      "rect": [1200, 1552, 80, 48],
+      "metadata": {
+        "name": "Sedan · beige · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "b14c7c19-0e5e-4347-85e4-c208af793244",
+        "createdAt": "2026-10-03T10:48:49.149Z",
+        "candidateFingerprint": "ea4ed2d9556d830f8e0f79c21d5de86fcc58a0dd360eaf725c8d11e1f80c7ac6",
+        "metadataFingerprint": "7d4d98528f80b4110f1f6686838dbafb9e5a0dc5c202d91478e0a9a9c341072e"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-cyan:north",
+      "vehicleId": "unindexed-sedan-cyan",
+      "direction": "north",
+      "rect": [1312, 1568, 32, 80],
+      "metadata": {
+        "name": "Sedan · cyan · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "82894991-2b5f-47b9-9061-22477181c3c7",
+        "createdAt": "2026-10-03T10:48:49.374Z",
+        "candidateFingerprint": "83f586ddfa50cc5c017665698d2d83f217d5d0602ed954577984aa22e543b367",
+        "metadataFingerprint": "5d6fd6bcaea053ed781703e500d4d35c2a736c345aea58b2c37c6d7acdbdff26"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-cyan:east",
+      "vehicleId": "unindexed-sedan-cyan",
+      "direction": "east",
+      "rect": [1344, 1600, 80, 48],
+      "metadata": {
+        "name": "Sedan · cyan · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "fd8c2649-b148-45cf-9afe-63ceab4ae376",
+        "createdAt": "2026-10-03T10:48:49.521Z",
+        "candidateFingerprint": "6a86f79db12c8cea1ce5ae341a941dd98000575c3edebde5273446af98fdf23a",
+        "metadataFingerprint": "4dde167e11acf9eacf536895019dd2f8988df52dcc174fb4919acdb6482c8c4e"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-cyan:south",
+      "vehicleId": "unindexed-sedan-cyan",
+      "direction": "south",
+      "rect": [1280, 1568, 32, 80],
+      "metadata": {
+        "name": "Sedan · cyan · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "b1f55f82-d312-4f71-bd74-b54ac65f91a3",
+        "createdAt": "2026-10-03T10:48:49.721Z",
+        "candidateFingerprint": "8dea52120af7e8b432806fb7cd56210ae80e55ad397a4cafa19dbb6c722049a9",
+        "metadataFingerprint": "6ad2b51f2b65512ddfac94894e00e1ca0d624d6bf58f1835b25f4b88964fbc85"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-cyan:west",
+      "vehicleId": "unindexed-sedan-cyan",
+      "direction": "west",
+      "rect": [1344, 1552, 80, 48],
+      "metadata": {
+        "name": "Sedan · cyan · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "39f3b008-54da-4e21-9245-de3af0adb64c",
+        "createdAt": "2026-10-03T10:48:49.872Z",
+        "candidateFingerprint": "fe422fc22dacddf6a335cc756895b4f801ed9c3af03abbee99ea27efd8677d51",
+        "metadataFingerprint": "b9cef3f000236750936b7f5c22b950a40ddb9a827635683922b5dcbfabbdfb26"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-orange:north",
+      "vehicleId": "unindexed-sedan-orange",
+      "direction": "north",
+      "rect": [880, 1664, 32, 80],
+      "metadata": {
+        "name": "Sedan · orange · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "39afbeff-0134-494e-9a9c-7bf5eb19be62",
+        "createdAt": "2026-10-03T10:48:50.093Z",
+        "candidateFingerprint": "9de3e932d411413efa1c41e65293ab8a646e220c33198a5785f94b10b5901d4f",
+        "metadataFingerprint": "39ae8ff55263d994748df887af5cc609a6f4950be0ec34369efb67f6b32fffc3"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-orange:east",
+      "vehicleId": "unindexed-sedan-orange",
+      "direction": "east",
+      "rect": [912, 1696, 80, 48],
+      "metadata": {
+        "name": "Sedan · orange · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "d7d6f931-b62c-499b-8fee-a0db5373538e",
+        "createdAt": "2026-10-03T10:48:50.248Z",
+        "candidateFingerprint": "920c9d17b5293ab025552ef037d8765410a4257de88b272a62e8250112915b98",
+        "metadataFingerprint": "888141f1a8458d231d7368c43cd57cc0efcbb5ffd2e1ac78b1d6410577816b9f"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-orange:south",
+      "vehicleId": "unindexed-sedan-orange",
+      "direction": "south",
+      "rect": [848, 1664, 32, 80],
+      "metadata": {
+        "name": "Sedan · orange · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "b2ac0cb8-5ab8-440a-bebd-e34d4c8b76b1",
+        "createdAt": "2026-10-03T10:48:50.500Z",
+        "candidateFingerprint": "c13a982de0ab99451896be8c6c1a632fdab4a97f14c5815f290a62b246990078",
+        "metadataFingerprint": "ec89739b9190a9509ee41c7bbbba680c8f5014ee7532d985cd6b3401c3a848be"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-orange:west",
+      "vehicleId": "unindexed-sedan-orange",
+      "direction": "west",
+      "rect": [912, 1648, 80, 48],
+      "metadata": {
+        "name": "Sedan · orange · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "b23b2463-05b2-420a-b5b0-faf4ebc0fb58",
+        "createdAt": "2026-10-03T10:48:50.647Z",
+        "candidateFingerprint": "0f7d5e8234772d1c8be6613afe1dc701ccd20c905f80a2a4397c989384e41384",
+        "metadataFingerprint": "a6b73027be7e48c2f7c0a5d962b96d8ffeb1ff6012ac218cdc6badfe80ab1e7c"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-silver:north",
+      "vehicleId": "unindexed-sedan-silver",
+      "direction": "north",
+      "rect": [1024, 1664, 32, 80],
+      "metadata": {
+        "name": "Sedan · silver · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "70c5d830-6948-4fb7-b4bf-ad0a4ba91e09",
+        "createdAt": "2026-10-03T10:48:50.910Z",
+        "candidateFingerprint": "83190d4f75e828c28e64228085503f5abeef1d436c365712931096a15b11c34f",
+        "metadataFingerprint": "66557f9c7b006fe6e664ce5c9747af482915a3110fa9fafb8e66baafcc0e4013"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-silver:east",
+      "vehicleId": "unindexed-sedan-silver",
+      "direction": "east",
+      "rect": [1056, 1696, 80, 48],
+      "metadata": {
+        "name": "Sedan · silver · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "a9cae9b5-6ae2-41d2-87ef-1f7586db6190",
+        "createdAt": "2026-10-03T10:48:51.051Z",
+        "candidateFingerprint": "7f43cd886b9d9dda2dd3918bf70c576ce07d4e5c07967ac987993d1ea1becfd0",
+        "metadataFingerprint": "b1562f899aca4575e338bcf9a3383b9f4b7ea942b481e1446cd70c33623f73be"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-silver:south",
+      "vehicleId": "unindexed-sedan-silver",
+      "direction": "south",
+      "rect": [992, 1664, 32, 80],
+      "metadata": {
+        "name": "Sedan · silver · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "02465aff-9c62-4f0e-9609-56231ba1e151",
+        "createdAt": "2026-10-03T10:48:51.360Z",
+        "candidateFingerprint": "e44044fd40c6ebf37943c1b73f0425cb22b50d944f7ce7dd1901aea6c0148cd0",
+        "metadataFingerprint": "d7fa09e7190f2e999c03cd7b22429afaf6c8ae8eaea42ab1ad40c2565eac54de"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-silver:west",
+      "vehicleId": "unindexed-sedan-silver",
+      "direction": "west",
+      "rect": [1056, 1648, 80, 48],
+      "metadata": {
+        "name": "Sedan · silver · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "07e9af3f-6fef-4420-b225-7e0e64551858",
+        "createdAt": "2026-10-03T10:48:51.603Z",
+        "candidateFingerprint": "e495fe2f9c2b655fe8a0d75a2deadd77767fd0988960054e339e3cca697ce9c9",
+        "metadataFingerprint": "4f685a26b6dd05fd6c65503a5331410e22d391f248caf19c89faf567b72451b4"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-olive:north",
+      "vehicleId": "unindexed-sedan-olive",
+      "direction": "north",
+      "rect": [1168, 1664, 32, 80],
+      "metadata": {
+        "name": "Sedan · olive · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "bec89a97-52cc-4206-a963-bab7c0c27525",
+        "createdAt": "2026-10-03T10:48:51.768Z",
+        "candidateFingerprint": "b9114ee4cae021bec37a5fbeffd50a5f55bb7cc7baed3c7986f64abea9a5845f",
+        "metadataFingerprint": "1ae5c8c18c731d84c4550c98215f31842f8bf2fe60f1b287a6e0e29cf421a5f1"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-olive:east",
+      "vehicleId": "unindexed-sedan-olive",
+      "direction": "east",
+      "rect": [1200, 1696, 80, 48],
+      "metadata": {
+        "name": "Sedan · olive · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "39508245-94f3-4523-9677-8f04fc6e59ad",
+        "createdAt": "2026-10-03T10:48:51.929Z",
+        "candidateFingerprint": "6e839ae951b2aa223697b354ce9d2e64d2ec8aec2e5fcf3a7790e86353b8115d",
+        "metadataFingerprint": "97a6d93d07ab54084c53a80d060458d3a1a2b9dd5e26933b3daff45954d9f93a"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-olive:south",
+      "vehicleId": "unindexed-sedan-olive",
+      "direction": "south",
+      "rect": [1136, 1664, 32, 80],
+      "metadata": {
+        "name": "Sedan · olive · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 72],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "edf67bd2-cd57-47c6-acbf-30e57a30fe85",
+        "createdAt": "2026-10-03T10:48:52.177Z",
+        "candidateFingerprint": "8afbe77096b86a2de66a4e3fd82285937dbf1e0c7f3d4872ad15fc19ed13eeb4",
+        "metadataFingerprint": "0fabd8868e94641398a158a04c9439a0fa19855266943a90b931e3262d8df1f6"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-olive:west",
+      "vehicleId": "unindexed-sedan-olive",
+      "direction": "west",
+      "rect": [1200, 1648, 80, 48],
+      "metadata": {
+        "name": "Sedan · olive · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "2c86ad6b-b49d-4fd8-9d4a-19aa7a41801b",
+        "createdAt": "2026-10-03T10:48:52.457Z",
+        "candidateFingerprint": "779ed94273722d4e722e896c5722855ed94184269208d349a8e4e467e4a30001",
+        "metadataFingerprint": "ed7d958b1e57bd4644d78368cbaea079532c569c7278c24159d96c1dee686524"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-dark:north",
+      "vehicleId": "unindexed-sedan-dark",
+      "direction": "north",
+      "rect": [1312, 1664, 32, 80],
+      "metadata": {
+        "name": "Sedan · dark · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 73],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "135cdcd6-895d-402f-a7b7-38e2c2e22b07",
+        "createdAt": "2026-10-03T10:48:52.781Z",
+        "candidateFingerprint": "d2ee7c6f41a05eb0ffa583d0459422de1099c48a5b144601f7623aef05ef5cd5",
+        "metadataFingerprint": "98ed9673add1cb180a04dca84b58af3e179e22529a655153ab5b5e327e67fadd"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-dark:east",
+      "vehicleId": "unindexed-sedan-dark",
+      "direction": "east",
+      "rect": [1344, 1696, 80, 48],
+      "metadata": {
+        "name": "Sedan · dark · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 39],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "b965b2bf-dff9-486d-b067-13b42af36de6",
+        "createdAt": "2026-10-03T10:48:52.950Z",
+        "candidateFingerprint": "159a944d8ff813bb5e450a67c2267cff76eb3da4fb8c662a7fcdf8343b2993b7",
+        "metadataFingerprint": "7cf988e5e517e54c23b96492f98c171d1649da7549655abf4681314fee948280"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-dark:south",
+      "vehicleId": "unindexed-sedan-dark",
+      "direction": "south",
+      "rect": [1280, 1664, 32, 80],
+      "metadata": {
+        "name": "Sedan · dark · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 73],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "4a2cc480-1407-45dd-9ea7-0bce93a7d149",
+        "createdAt": "2026-10-03T10:48:53.496Z",
+        "candidateFingerprint": "c50bac7aed77fbe42912c53faf5b6bf4319c276b7842552604c624e5c0a6759f",
+        "metadataFingerprint": "2dcf7caa953a7e34c894f7ea230fb95fa09f9f1f21904fcd701523957f56e8c9"
+      }
+    },
+    {
+      "id": "vehicle:unindexed-sedan-dark:west",
+      "vehicleId": "unindexed-sedan-dark",
+      "direction": "west",
+      "rect": [1344, 1648, 80, 48],
+      "metadata": {
+        "name": "Sedan · dark · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "sedan", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 39],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "ddd1ef05-e1e2-4f7f-b4b4-a58fe660b0f0",
+        "createdAt": "2026-10-03T10:48:53.727Z",
+        "candidateFingerprint": "5551ebaa19a92e4cd346f938fd3b42ff6530f463b95580659360317346a281b0",
+        "metadataFingerprint": "b4e4a3ed1646936c7c2a93be06e01cfce75684f53c702d693047c629cd5dc4c9"
+      }
+    },
+    {
+      "id": "vehicle:police-car:north",
+      "vehicleId": "police-car",
+      "direction": "north",
+      "rect": [1904, 1744, 32, 80],
+      "metadata": {
+        "name": "Police car · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "police", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [16, 73],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "dfa5f408-5b0e-48f4-a613-d295e6564173",
+        "createdAt": "2026-10-03T10:48:53.876Z",
+        "candidateFingerprint": "520146fa62146a15f1f79be03857a52ad3ee1323ad5a55a59a631d57f6239de1",
+        "metadataFingerprint": "834d5b1d109db6f3b8a171312c0af4a461b7b36d81295242847bea74f92f3cb2"
+      }
+    },
+    {
+      "id": "vehicle:police-car:east",
+      "vehicleId": "police-car",
+      "direction": "east",
+      "rect": [1792, 1744, 80, 48],
+      "metadata": {
+        "name": "Police car · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "police", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [40, 45],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "86bccfa4-3bef-4504-9c3c-4ecf4547628a",
+        "createdAt": "2026-10-03T10:48:54.021Z",
+        "candidateFingerprint": "8142493cacb5541737ec2400084216143b20253cdfe46a504f75ab036fa46dbe",
+        "metadataFingerprint": "b3c7f5964dc6027a1c51404b4971820239b76ec83df90a90cdddef84469f3dc7"
+      }
+    },
+    {
+      "id": "vehicle:police-car:south",
+      "vehicleId": "police-car",
+      "direction": "south",
+      "rect": [1872, 1744, 32, 80],
+      "metadata": {
+        "name": "Police car · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "police", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [16, 73],
+        "footprint": [-13, -54, 26, 54],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "approval": {
+        "id": "a4ed510c-b5f6-419c-86b9-b3232c3cb9c9",
+        "createdAt": "2026-10-03T10:48:54.291Z",
+        "candidateFingerprint": "e7b607136781851da5673259b5ef494bc8ed9d5237cdf0ecfbe2fc0088f7f927",
+        "metadataFingerprint": "a30d7c225067d595ae2e3db862fe9fee4dc60748a178c478f1ae68e3552981de"
+      }
+    },
+    {
+      "id": "vehicle:police-car:west",
+      "vehicleId": "police-car",
+      "direction": "west",
+      "rect": [1712, 1745, 80, 47],
+      "metadata": {
+        "name": "Police car · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "police", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [40, 44],
+        "footprint": [-36, -24, 72, 24],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "approval": {
+        "id": "76f22630-ae74-4db0-a88f-27f58e1e6935",
+        "createdAt": "2026-10-03T10:48:54.466Z",
+        "candidateFingerprint": "ad7f87afe484c73de10486e8d1d04fd09df45994bb4ce7d51fa4a9d2ea3bb548",
+        "metadataFingerprint": "a748963cda65ef2b6b91ea04f82eb66e6c947a91e345d37481270ada363758ad"
+      }
+    },
+    {
+      "id": "vehicle:ambulance:north",
+      "vehicleId": "ambulance",
+      "direction": "north",
+      "rect": [352, 1792, 48, 112],
+      "metadata": {
+        "name": "Ambulance · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "ambulance", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 100],
+        "footprint": [-20, -82, 40, 82],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 82,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -41
+      },
+      "approval": {
+        "id": "2ed969d1-ade1-474b-a092-46edbdbb9780",
+        "createdAt": "2026-10-03T10:48:54.610Z",
+        "candidateFingerprint": "f52113af9ef8f1574f3808153afcc422f40f4503d8886da7a405622a2429cdc9",
+        "metadataFingerprint": "e599cbb9803ea9a881e7dab404c133a65d5962a4cf93997fc4d4b5d6f65ba20a"
+      }
+    },
+    {
+      "id": "vehicle:ambulance:east",
+      "vehicleId": "ambulance",
+      "direction": "east",
+      "rect": [224, 1825, 128, 79],
+      "metadata": {
+        "name": "Ambulance · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "ambulance", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [64, 76],
+        "footprint": [-56, -36, 112, 36],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 112,
+            "height": 36,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -18
+      },
+      "approval": {
+        "id": "f2ebee52-46de-4300-9331-fa28821d8049",
+        "createdAt": "2026-10-03T10:48:57.022Z",
+        "candidateFingerprint": "8fbba9b314bbf3ab4521b9f5bc5a15902ba5533357d31fd6dd8455056303401a",
+        "metadataFingerprint": "077dc5e09c41cb7da71c58807009d3c835761082b76a1d2152439cf832c6af45"
+      }
+    },
+    {
+      "id": "vehicle:ambulance:south",
+      "vehicleId": "ambulance",
+      "direction": "south",
+      "rect": [48, 1792, 48, 112],
+      "metadata": {
+        "name": "Ambulance · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "ambulance", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 109],
+        "footprint": [-20, -82, 40, 82],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 82,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -41
+      },
+      "approval": {
+        "id": "6449c392-d7b8-48ac-8a5e-6f5f4da5ec10",
+        "createdAt": "2026-10-03T10:48:57.851Z",
+        "candidateFingerprint": "ca662e0330629020b7f43edcf02d9913ff53fcf3529f1d4d6979aaf03d8a8b30",
+        "metadataFingerprint": "a8f79d1535e558b575d3c6c3515c54e0b903c0c1194c9541b327f9fe2e111204"
+      }
+    },
+    {
+      "id": "vehicle:ambulance:west",
+      "vehicleId": "ambulance",
+      "direction": "west",
+      "rect": [96, 1825, 128, 79],
+      "metadata": {
+        "name": "Ambulance · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "ambulance", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [64, 76],
+        "footprint": [-56, -36, 112, 36],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 112,
+            "height": 36,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -18
+      },
+      "approval": {
+        "id": "d79a4596-74b7-4da6-bd5a-e79bf24e116b",
+        "createdAt": "2026-10-03T10:48:59.249Z",
+        "candidateFingerprint": "f8ca90cb276af45ccfdff6abb70fbeec7ef85272b837c3d2fc4775e51aac1879",
+        "metadataFingerprint": "11716e9e6ead0bd6c4dfedb6a256350176cae6b20502c703f584e27418d77482"
+      }
+    },
+    {
+      "id": "vehicle:garbage-truck-green:north",
+      "vehicleId": "garbage-truck-green",
+      "direction": "north",
+      "rect": [1456, 4144, 48, 128],
+      "metadata": {
+        "name": "Garbage truck green · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "garbage", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 121],
+        "footprint": [-20, -96, 40, 96],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 96,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -48
+      },
+      "approval": {
+        "id": "fad514eb-31a6-4caf-afaf-c9987c420b5d",
+        "createdAt": "2026-10-03T10:49:00.313Z",
+        "candidateFingerprint": "5af210e348579412cf90ef6552f5c4e4942920816149ec44a8b70eca943e6d38",
+        "metadataFingerprint": "f7ae1d8e5643725a63ea01183ac624d1afa8c00c10ab95fb7a9f00aebfb39213"
+      }
+    },
+    {
+      "id": "vehicle:garbage-truck-green:east",
+      "vehicleId": "garbage-truck-green",
+      "direction": "east",
+      "rect": [1280, 4128, 128, 80],
+      "metadata": {
+        "name": "Garbage truck green · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "garbage", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [64, 77],
+        "footprint": [-58, -40, 116, 40],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 116,
+            "height": 40,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -20
+      },
+      "approval": {
+        "id": "fbb606f3-6ebc-434c-950d-14773abf3852",
+        "createdAt": "2026-10-03T10:49:00.966Z",
+        "candidateFingerprint": "494b8afcf61281846fab918bec48bd9889223be596ed3bc2bb047e375186026d",
+        "metadataFingerprint": "99e7b658280ee564ddf51f94008884d3d1049f32af65957e433661fc407578a4"
+      }
+    },
+    {
+      "id": "vehicle:garbage-truck-green:south",
+      "vehicleId": "garbage-truck-green",
+      "direction": "south",
+      "rect": [1408, 4144, 48, 128],
+      "metadata": {
+        "name": "Garbage truck green · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "garbage", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 121],
+        "footprint": [-20, -96, 40, 96],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 96,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -48
+      },
+      "approval": {
+        "id": "46b6d90f-fddb-4483-9f7a-9905c6e7ccc4",
+        "createdAt": "2026-10-03T10:49:01.539Z",
+        "candidateFingerprint": "14772ae08ed87421d69e2755743afc8c1e0b9ce56e626d5b76c04b0bee045ca3",
+        "metadataFingerprint": "41de6bc553adc634987b67c5449d273a0552f56a9813524ec58d98bc4a610dc2"
+      }
+    },
+    {
+      "id": "vehicle:garbage-truck-green:west",
+      "vehicleId": "garbage-truck-green",
+      "direction": "west",
+      "rect": [1280, 4208, 128, 80],
+      "metadata": {
+        "name": "Garbage truck green · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "garbage", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [64, 77],
+        "footprint": [-58, -40, 116, 40],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 116,
+            "height": 40,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -20
+      },
+      "approval": {
+        "id": "662566f3-70cc-4555-9ea5-283a7c9b3d5f",
+        "createdAt": "2026-10-03T10:49:02.093Z",
+        "candidateFingerprint": "0866b6d7357d44325eec42e00a8216d41583e170243cc14ca5f020ead9278634",
+        "metadataFingerprint": "289f897b83123f0572ce1f9296df34d60968b077f19566ce42105e8536651027"
+      }
+    },
+    {
+      "id": "vehicle:garbage-truck-orange:north",
+      "vehicleId": "garbage-truck-orange",
+      "direction": "north",
+      "rect": [1680, 4144, 48, 128],
+      "metadata": {
+        "name": "Garbage truck orange · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "garbage", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [24, 121],
+        "footprint": [-20, -96, 40, 96],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 96,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -48
+      },
+      "approval": {
+        "id": "7d1caf07-02d2-489e-81bc-78f5fcc02c32",
+        "createdAt": "2026-10-03T10:49:02.776Z",
+        "candidateFingerprint": "f0b231208fefffcf0ea7ba64b4fe5b2b577c2fe6d18b237ee6e2ff86012b0091",
+        "metadataFingerprint": "84084d2f118da0b56c449986dc4d5b9019baf7448d4389ba7b4572a0ac5470a8"
+      }
+    },
+    {
+      "id": "vehicle:garbage-truck-orange:east",
+      "vehicleId": "garbage-truck-orange",
+      "direction": "east",
+      "rect": [1504, 4128, 128, 80],
+      "metadata": {
+        "name": "Garbage truck orange · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "garbage", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [64, 77],
+        "footprint": [-58, -40, 116, 40],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 116,
+            "height": 40,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -20
+      },
+      "approval": {
+        "id": "eb6c509b-9344-4c11-b0a3-1726f26f511f",
+        "createdAt": "2026-10-03T10:49:03.126Z",
+        "candidateFingerprint": "41d1bd7cf0f543b19e2611fee9967abbdc29f88c5171d9ab18a705c58c62cf72",
+        "metadataFingerprint": "155df4d368380ca044b6ae8209113db81745b5bd052cedc9d13adbe4e32fa36e"
+      }
+    },
+    {
+      "id": "vehicle:garbage-truck-orange:south",
+      "vehicleId": "garbage-truck-orange",
+      "direction": "south",
+      "rect": [1632, 4144, 48, 128],
+      "metadata": {
+        "name": "Garbage truck orange · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "garbage", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [24, 121],
+        "footprint": [-20, -96, 40, 96],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 96,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -48
+      },
+      "approval": {
+        "id": "5f28df49-b034-4e64-93d0-b29a351079b2",
+        "createdAt": "2026-10-03T10:49:03.501Z",
+        "candidateFingerprint": "e63e4cbc4c192733766216695648f656bb4028d5c1ca8ba81b44188ca4a84742",
+        "metadataFingerprint": "a2a4a5da59509d972d78e5e92430f422730d4133136c0cbc4cbc8b4f2774336d"
+      }
+    },
+    {
+      "id": "vehicle:garbage-truck-orange:west",
+      "vehicleId": "garbage-truck-orange",
+      "direction": "west",
+      "rect": [1504, 4208, 128, 80],
+      "metadata": {
+        "name": "Garbage truck orange · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "garbage", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [64, 77],
+        "footprint": [-58, -40, 116, 40],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 116,
+            "height": 40,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -20
+      },
+      "approval": {
+        "id": "8f7f9640-e6cd-4f14-9b52-75318d38c542",
+        "createdAt": "2026-10-03T10:49:03.986Z",
+        "candidateFingerprint": "cbcd267f860d81a95e553f23705812ebf0eba78b56932a0952b24db435cf91c6",
+        "metadataFingerprint": "a5932c634d073bdec6e887fe8cde21e62eeb42b2d2de954f1039899dd2df273c"
+      }
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-1:north",
+      "vehicleId": "fire-truck-ladder-1",
+      "direction": "north",
+      "rect": [2624, 4016, 64, 160],
+      "metadata": {
+        "name": "Fire truck · stowed ladder · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "fire", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [32, 156],
+        "footprint": [-26, -128, 52, 128],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 52,
+            "height": 128,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -64
+      },
+      "approval": {
+        "id": "b149d188-9d2f-46f2-92a2-464157be4d14",
+        "createdAt": "2026-10-03T10:49:04.552Z",
+        "candidateFingerprint": "c97431f252516a1964bdecd70aaad759330aecea0ec6624feebda2645c807456",
+        "metadataFingerprint": "292bf2d7daae67b481ffd61958e25e34b2c7cd62e6b3e2e85befa70e8cf422f2"
+      }
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-1:east",
+      "vehicleId": "fire-truck-ladder-1",
+      "direction": "east",
+      "rect": [2416, 4096, 144, 80],
+      "metadata": {
+        "name": "Fire truck · stowed ladder · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "fire", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [72, 77],
+        "footprint": [-66, -40, 132, 40],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 132,
+            "height": 40,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -20
+      },
+      "approval": {
+        "id": "28b1e7b9-73e7-4e10-ba5e-61a83639523b",
+        "createdAt": "2026-10-03T10:49:05.340Z",
+        "candidateFingerprint": "e6595566ea75ece7d031f17468559d79b781869d96a18c33b2e13d9ac5d69ec5",
+        "metadataFingerprint": "fd42560d9ca0873c94aac9e3c73af63aba996ff41e27a4905546d87fde349da2"
+      }
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-1:south",
+      "vehicleId": "fire-truck-ladder-1",
+      "direction": "south",
+      "rect": [2560, 4016, 64, 160],
+      "metadata": {
+        "name": "Fire truck · stowed ladder · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "fire", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [32, 156],
+        "footprint": [-26, -128, 52, 128],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 52,
+            "height": 128,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -64
+      },
+      "approval": {
+        "id": "9b6753b8-d80f-4a5f-b169-884d5a96e410",
+        "createdAt": "2026-10-03T10:49:05.898Z",
+        "candidateFingerprint": "47c1ae9d9ed5af5b93d2fbb2b0687fc611298de8f1f4881e2b5e08611fb3a270",
+        "metadataFingerprint": "f424fca613962dc6c6d846faa18a4b9557764f052fd9f74a61e6b942b47609c5"
+      }
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-1:west",
+      "vehicleId": "fire-truck-ladder-1",
+      "direction": "west",
+      "rect": [2416, 4016, 144, 80],
+      "metadata": {
+        "name": "Fire truck · stowed ladder · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "fire", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [72, 77],
+        "footprint": [-66, -40, 132, 40],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 132,
+            "height": 40,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -20
+      },
+      "approval": {
+        "id": "b2b4ae6e-041d-4808-8e11-78fb01c3b58b",
+        "createdAt": "2026-10-03T10:49:06.424Z",
+        "candidateFingerprint": "616817e73e6068f416dba8b48cd9c36ebe5513ffd980d7a259991eeb7b863df2",
+        "metadataFingerprint": "671d1fda2588286da06c6c37d1aa2f1093cbfc6aa10f7a6f0b7a03238adf9344"
+      }
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-2:north",
+      "vehicleId": "fire-truck-ladder-2",
+      "direction": "north",
+      "rect": [2624, 4176, 64, 160],
+      "metadata": {
+        "name": "Fire truck · raised ladder · north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "fire", "review proposal"],
+        "settings": ["road"],
+        "facing": "north",
+        "anchor": [32, 156],
+        "footprint": [-26, -128, 52, 128],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 52,
+            "height": 128,
+            "zHeight": 64
+          }
+        ],
+        "depthOffset": -64
+      },
+      "approval": {
+        "id": "1262dcc4-3076-4274-b131-1f81d228b6ed",
+        "createdAt": "2026-10-03T10:49:07.119Z",
+        "candidateFingerprint": "7dfcd9e9ef6f16d7c6a7f2e71eea99edb32bf1eb7ee94c06c4267a79f7613205",
+        "metadataFingerprint": "f3413d852b75d0ada1bc376f5237dea0490c547d2b8e7f07ba32196ce0814680"
+      }
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-2:east",
+      "vehicleId": "fire-truck-ladder-2",
+      "direction": "east",
+      "rect": [2416, 4256, 144, 80],
+      "metadata": {
+        "name": "Fire truck · raised ladder · east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "fire", "review proposal"],
+        "settings": ["road"],
+        "facing": "east",
+        "anchor": [72, 77],
+        "footprint": [-66, -40, 132, 40],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 132,
+            "height": 40,
+            "zHeight": 64
+          }
+        ],
+        "depthOffset": -20
+      },
+      "approval": {
+        "id": "800d1505-cda2-4365-9ef0-4370f8b82627",
+        "createdAt": "2026-10-03T10:49:07.769Z",
+        "candidateFingerprint": "8202bbd09eeef5a58de7330457ce9f87385d8dad0a68a96ac6602c51c206c7fa",
+        "metadataFingerprint": "a10c468cdc8a1750001410f379e312b9084ccae468f6478370bb5a063c86de12"
+      }
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-2:south",
+      "vehicleId": "fire-truck-ladder-2",
+      "direction": "south",
+      "rect": [2560, 4176, 64, 160],
+      "metadata": {
+        "name": "Fire truck · raised ladder · south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "fire", "review proposal"],
+        "settings": ["road"],
+        "facing": "south",
+        "anchor": [32, 156],
+        "footprint": [-26, -128, 52, 128],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 52,
+            "height": 128,
+            "zHeight": 64
+          }
+        ],
+        "depthOffset": -64
+      },
+      "approval": {
+        "id": "e7b44001-3f56-470e-93a4-b167a069b73f",
+        "createdAt": "2026-10-03T10:49:11.282Z",
+        "candidateFingerprint": "f3f3d591f6cf251f48a87e589279002f6134529c8c114e4799a833457463b4f8",
+        "metadataFingerprint": "68c47f35fc1025e52aa2bd0a16b5473b74ab69395322bd705bc5a92b44b871e2"
+      }
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-2:west",
+      "vehicleId": "fire-truck-ladder-2",
+      "direction": "west",
+      "rect": [2416, 4176, 144, 80],
+      "metadata": {
+        "name": "Fire truck · raised ladder · west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": ["vehicle", "fire", "review proposal"],
+        "settings": ["road"],
+        "facing": "west",
+        "anchor": [72, 77],
+        "footprint": [-66, -40, 132, 40],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 132,
+            "height": 40,
+            "zHeight": 64
+          }
+        ],
+        "depthOffset": -20
+      },
+      "approval": {
+        "id": "d560885e-f498-4fdc-a140-a2e9b7b5e633",
+        "createdAt": "2026-10-03T10:49:12.153Z",
+        "candidateFingerprint": "025a25e1e28489eb8f9595ff2d6c7e3a062437b41b8a512535bc67b41c1b47d3",
+        "metadataFingerprint": "6ee247e6b8bbcd3c8345c4c9dfd1092aae0133b9d31131ff309fd522c655df15"
+      }
+    }
+  ]
+}

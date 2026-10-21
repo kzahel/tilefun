@@ -607,9 +607,16 @@ export class GameClient {
           : "";
       }
     });
-    this.vehicleControl = new VehicleControl(async (request) => {
-      this.clearPlayInput();
-      return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
+    this.vehicleControl = new VehicleControl(
+      async (request) => {
+        this.clearPlayInput();
+        return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
+      },
+      () => this.clearPlayInput(),
+    );
+    this.actions.on("context_actions", () => {
+      if (!(this.scenes.current instanceof PlayScene) || this.playInputBlocked) return;
+      this.vehicleControl.openActions();
     });
     this.actions.on("enter_place", () => {
       if (!(this.scenes.current instanceof PlayScene) || this.playInputBlocked) return;
@@ -653,7 +660,7 @@ export class GameClient {
         const vehiclePrompt = this.vehicleControl.update(
           this.stateView,
           this.initDone && ready && this.scenes.current instanceof PlayScene,
-          this.doorPresentation.busy || this.playInputBlocked || this.storagePaused,
+          this.doorPresentation.busy || this.playUIBlocked || this.storagePaused,
           this.movementMode,
           this.carDriving,
         );
@@ -1782,6 +1789,9 @@ export class GameClient {
   }
 
   private get playInputBlocked(): boolean {
+    return this.playUIBlocked || !!this.vehicleControl?.actionsOpen;
+  }
+  private get playUIBlocked(): boolean {
     return this.hamburgerOpen || this.optionsDialog.visible || this.focusPaused || document.hidden;
   }
   private clearPlayInput(sendNeutral = true): void {

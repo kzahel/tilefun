@@ -46,6 +46,12 @@ async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
   }
 }
 export const SPRITE_MANIFEST: SpriteAsset[] = [
+  {
+    key: "car-transporter-ramp-v2",
+    path: "assets/vehicles/car-transporter-ramp-v2.png",
+    w: 384,
+    h: 384,
+  },
   { key: "towing-cars-v2", path: "assets/vehicles/towing-cars-v2.png", w: 160, h: 160 },
   { key: "towing-truck-v2", path: "assets/vehicles/towing-truck-v2.png", w: 224, h: 224 },
   { key: "dump-truck-v2-atlas", path: "assets/vehicles/dump-truck-v2-atlas.png", w: 512, h: 512 },

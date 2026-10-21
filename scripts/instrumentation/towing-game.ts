@@ -4,6 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 import { chromium, expect } from "@playwright/test";
 import type { GameClient } from "../../src/client/GameClient.js";
+import { chooseVehicleAction } from "../../tests/helpers/context-actions.js";
 import { flushLocalWorld, stopLocalWorld } from "../../tests/helpers/local-world.js";
 
 const base = process.argv.find((a) => a.startsWith("--base-url="))?.slice(11);
@@ -120,7 +121,7 @@ try {
     g.camera.zoom = 1;
     g.camera.requestSnap();
   }, point);
-  await page.getByRole("button", { name: "Attach car", exact: true }).click();
+  await chooseVehicleAction(page, "Attach car");
   await expect.poll(async () => (await facts()).car?.owner).toBe((await facts()).truck?.id);
   await page.getByRole("button", { name: /Drive car/ }).click();
   await page.locator("#game").focus();
@@ -131,7 +132,7 @@ try {
   } finally {
     await page.keyboard.up("ArrowRight");
   }
-  await expect(page.getByRole("button", { name: "Release car", exact: true })).toBeVisible();
+  await expect(page.locator('[data-tow-action="release"]')).toHaveJSProperty("hidden", false);
   await page.screenshot({ path: resolve(output, "main-game.png") });
   await flushLocalWorld(page);
   await stopLocalWorld(page);
@@ -143,9 +144,9 @@ try {
       return !!f.truck && !!f.car && f.car.owner === f.truck.id && f.truck.target === f.car.id;
     })
     .toBe(true);
-  await expect(page.getByRole("button", { name: "Release car", exact: true })).toBeVisible();
+  await expect(page.locator('[data-tow-action="release"]')).toHaveJSProperty("hidden", false);
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect(page.getByRole("button", { name: "Release car", exact: true })).toBeVisible();
+  await expect(page.locator('[data-tow-action="release"]')).toHaveJSProperty("hidden", false);
   await page.screenshot({ path: resolve(output, "mobile-game.png") });
   const controls = await page.locator("[data-vehicle-control]").boundingBox();
   assert.ok(
@@ -155,7 +156,7 @@ try {
       controls.y >= 0 &&
       controls.y + controls.height <= 844,
   );
-  await page.getByRole("button", { name: "Release car", exact: true }).tap();
+  await chooseVehicleAction(page, "Release car", true);
   await expect.poll(async () => (await facts()).car?.owner).toBeNull();
   await writeFile(
     resolve(output, "main-game.json"),

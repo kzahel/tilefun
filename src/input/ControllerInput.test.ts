@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ControllerInput, controllerAxes } from "./ControllerInput.js";
+import { CONTROLLER_ACTIONS, ControllerInput, controllerAxes } from "./ControllerInput.js";
 
 function pad(buttons: number[] = [], axes = [0, 0, 0, 0], index = 0): Gamepad {
   return {
@@ -15,6 +15,17 @@ function pad(buttons: number[] = [], axes = [0, 0, 0, 0], index = 0): Gamepad {
   } as unknown as Gamepad;
 }
 describe("controller session", () => {
+  it("maps gameplay B to contextual actions while preserving menu back and release fences", () => {
+    const session = new ControllerInput();
+    session.sample([pad()], 0);
+    expect(session.sample([pad([1])], 1)).toEqual(["back"]);
+    expect(CONTROLLER_ACTIONS.back).toBe("context_actions");
+    session.uiActive = () => true;
+    expect(session.sample([pad([1])], 2)).toEqual([]);
+    session.sample([pad()], 3);
+    expect(session.sample([pad([1])], 4)).toEqual(["back"]);
+    expect([...session.held]).toEqual([]);
+  });
   it("uses a radial dead zone and preserves browser/world Y direction", () => {
     expect(controllerAxes(0.1, 0.1)).toEqual({ dx: 0, dy: 0 });
     expect(controllerAxes(0, -1)).toEqual({ dx: 0, dy: -1 });

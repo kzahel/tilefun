@@ -101,6 +101,8 @@ export function towCandidate(truck: Entity, entities: readonly Entity[]) {
     .filter((car) => {
       if (
         !towProfile(car) ||
+        car.transportedBy !== undefined ||
+        car.transportLoadId !== undefined ||
         car.towedBy !== undefined ||
         car.towTargetId !== undefined ||
         Math.hypot(car.velocity?.vx ?? 0, car.velocity?.vy ?? 0) > 0.5 ||

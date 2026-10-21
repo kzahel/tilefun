@@ -1,41 +1,14 @@
 import type { ActionName } from "./ActionMap.js";
+import {
+  CONTROLLER_BUTTONS,
+  CONTROLLER_HELD_ACTIONS,
+  type ControllerCommand,
+} from "./ControllerBindings.js";
 import { controllerPointer } from "./ControllerPointer.js";
 import { noteInputSource } from "./InputHints.js";
 
-export type ControllerCommand =
-  | "up"
-  | "down"
-  | "left"
-  | "right"
-  | "confirm"
-  | "back"
-  | "menu"
-  | "interact"
-  | "throw"
-  | "edit"
-  | "map";
+export { CONTROLLER_ACTIONS, type ControllerCommand } from "./ControllerBindings.js";
 export const CONTROLLER_EVENT = "tilefun-controller";
-const BUTTONS: Record<number, ControllerCommand> = {
-  0: "confirm",
-  1: "back",
-  2: "throw",
-  3: "interact",
-  4: "edit",
-  8: "map",
-  9: "menu",
-  12: "up",
-  13: "down",
-  14: "left",
-  15: "right",
-};
-export const CONTROLLER_ACTIONS: Partial<Record<ControllerCommand, ActionName>> = {
-  menu: "toggle_menu",
-  confirm: "jump",
-  throw: "throw",
-  interact: "enter_place",
-  edit: "toggle_editor",
-  map: "toggle_world_map",
-};
 
 export function controllerAxes(x: number, y: number): { dx: number; dy: number } {
   const magnitude = Math.hypot(x, y);
@@ -144,13 +117,8 @@ export class ControllerInput {
     this.erase = !ui && !!buttons[6]?.pressed;
     this.held.clear();
     if (!ui) {
-      if (buttons[0]?.pressed) this.held.add("jump");
-      if (buttons[2]?.pressed) this.held.add("throw");
-      if (buttons[5]?.pressed) this.held.add("honk");
-      if (buttons[7]?.pressed) this.held.add("sprint");
-      if (buttons[6]?.pressed) this.held.add("reverse");
-      if (buttons[12]?.pressed) this.held.add("vehicle_lights");
-      if (buttons[15]?.pressed) this.held.add("vehicle_style");
+      for (const [index, action] of Object.entries(CONTROLLER_HELD_ACTIONS))
+        if (buttons[Number(index)]?.pressed && action) this.held.add(action);
     }
     this.movement = {
       ...(!ui ? axes : { dx: 0, dy: 0 }),
@@ -158,7 +126,7 @@ export class ControllerInput {
       jump: this.held.has("jump"),
     };
     const commands = new Set<ControllerCommand>();
-    for (const [index, command] of Object.entries(BUTTONS))
+    for (const [index, command] of Object.entries(CONTROLLER_BUTTONS))
       if (buttons[Number(index)]?.pressed && !(command === "confirm" && pointerSelected))
         commands.add(command);
     if (ui) {

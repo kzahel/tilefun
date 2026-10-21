@@ -1,10 +1,12 @@
 # Embedded engine labs
 
+[173](../tactical/173-single-car-transporter.md) adds the Car transporter playground as another ScenarioPresentationHost consumer. The page supplies parked fixtures, framing and diagnostic teleports; shared authority/driving, secure/release, replica/prediction, persistence and GPU/fallback own the actual loading cycle.
+
 Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-20.
+Updated: 2026-10-21.
 
 [169](../tactical/169-wheel-lift-towing.md) adds the Tow truck playground using
 ordinary parked-vehicle records, shared Attach/Release controls and coupled
@@ -959,6 +961,11 @@ branch attachments and ordinary animation replication. Mounted/attached/followin
 actors cancel work during shared synchronization when normal brain updates are
 skipped, preserving controlled poses and releasing claims. There is no lab-only
 grazing, growth or shelter-building simulation.
+
+[171](../tactical/171-contextual-controller-actions.md) moves equipment into the
+shared contextual menu. Embedded vehicle hosts retain canvas-relative primary
+controls, Q/B Actions, neutral input while open and scoped controller sampling.
+The normal game uses the same menu, focus/back semantics and authority requests.
 
 ## Wildlife defenses and physical ambushes (174)
 

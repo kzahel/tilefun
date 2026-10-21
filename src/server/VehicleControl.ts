@@ -10,6 +10,7 @@ import { createPlayer } from "../entities/Player.js";
 import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { isTrain } from "../railway/Train.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
+import { supportingTransporter, type TransporterAction } from "../traffic/CarTransporter.js";
 import { boardingDistance, isDrivable } from "../traffic/Driving.js";
 import {
   hasVehicleLights,
@@ -24,10 +25,14 @@ import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { safeArrival } from "./SafeArrival.js";
 import { controlTow } from "./TowControl.js";
+import { controlTransporter } from "./TransporterControl.js";
 import { controlVehicleBed } from "./VehicleBedControl.js";
 
 /** Inside seats use ordinary replicated parenting/mount identity. Roof riders are independent. */
 export class VehicleControl {
+  transporter(session: PlayerSession, id: number, action: TransporterAction): void {
+    controlTransporter(this.realm, session, id, action);
+  }
   tow(session: PlayerSession, id: number, action: TowAction): void {
     controlTow(this.realm, session, id, action);
   }
@@ -80,7 +85,13 @@ export class VehicleControl {
   }
   available(id: number): boolean {
     const car = this.realm.traffic?.states.get(id);
-    if (car) return car.driverId === undefined && !car.shopping && car.entity.towedBy === undefined;
+    if (car)
+      return (
+        car.driverId === undefined &&
+        !car.shopping &&
+        car.entity.towedBy === undefined &&
+        car.entity.transportedBy === undefined
+      );
     const train = [...(this.realm.railway?.services.values() ?? [])].find((s) =>
       s.carriages.some((c) => c.id === id),
     );
@@ -105,7 +116,13 @@ export class VehicleControl {
   enter(session: PlayerSession, id: number, restore = false): void {
     const r = this.realm,
       vehicle = r.entityManager.byId.get(id);
-    if (!vehicle || !isDrivable(vehicle) || !vehicle.collider || vehicle.towedBy !== undefined)
+    if (
+      !vehicle ||
+      !isDrivable(vehicle) ||
+      !vehicle.collider ||
+      vehicle.towedBy !== undefined ||
+      vehicle.transportedBy !== undefined
+    )
       throw Error("Vehicle unavailable.");
     const car = r.traffic?.states.get(id);
     const train = [...(r.railway?.services.values() ?? [])].find((s) =>
@@ -122,7 +139,8 @@ export class VehicleControl {
         session.retired ||
         session.gameplaySession.mountId !== null ||
         boardingDistance(session.player, vehicle) > 32 ||
-        Math.abs((session.player.wz ?? 0) - (vehicle.wz ?? 0)) > 12)
+        Math.abs((session.player.wz ?? 0) - (vehicle.wz ?? 0)) >
+          (supportingTransporter(vehicle, r.entityManager.entities) ? 32 : 12))
     )
       throw Error("Stand beside the vehicle to enter.");
     if (!restore && Math.hypot(vehicle.velocity?.vx ?? 0, vehicle.velocity?.vy ?? 0) > 3)
@@ -346,7 +364,8 @@ export class VehicleControl {
           [],
         );
         if (
-          Math.abs(z - (vehicle.wz ?? 0)) > 16 ||
+          Math.abs(z - (vehicle.wz ?? 0)) >
+            (supportingTransporter(vehicle, r.entityManager.entities) ? 32 : 16) ||
           props.some((p) =>
             aabbOverlapsPropWalls(box, p.position, p, z, collider.physicalHeight ?? 16),
           )

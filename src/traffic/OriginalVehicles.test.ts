@@ -29,6 +29,7 @@ import { verifyOriginalWheelGeometryAndTravel } from "./AutonomousOriginalVehicl
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
 import { readRetainedReplayInput } from "./RetainedReplayInputs.test-helper.js";
 import { TrafficTestHarness } from "./TrafficTestHarness.js";
+import { TRANSPORTER_EXPECTATIONS } from "./Transporter.fixture.js";
 import {
   applyVehicleFacing,
   createVehicle,
@@ -148,7 +149,10 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
 
 it("covers every active original with independent frozen expectations", () => {
   expect(ORIGINAL_VEHICLES.map((vehicle) => vehicle.id).sort()).toEqual(
-    AUTONOMOUS_ORIGINAL_VEHICLES.map((family) => family.model).sort(),
+    [
+      ...AUTONOMOUS_ORIGINAL_VEHICLES.map((family) => family.model),
+      TRANSPORTER_EXPECTATIONS.model,
+    ].sort(),
   );
   for (const key of ["assetId", "modelPath", "spritePath", "modelSha256"] as const) {
     expect(new Set(AUTONOMOUS_ORIGINAL_VEHICLES.map((family) => family[key])).size).toBe(
@@ -172,7 +176,7 @@ it("registers every combined model exactly once across editor, assets, traffic a
   }
 });
 
-it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
+it.each([...AUTONOMOUS_ORIGINAL_VEHICLES, TRANSPORTER_EXPECTATIONS])(
   "admits $model through ordinary generated-road traffic selection",
   ({ model, bounds }) => {
     const roadWidth = bounds[1] * 2 + 12;

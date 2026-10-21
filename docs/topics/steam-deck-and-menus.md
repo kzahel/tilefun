@@ -2,7 +2,25 @@
 
 Topic: steam-deck-and-menus
 Status: shared controller/touch UX and reverse driving delivered; hands-on tuning next.
-Updated: 2026-10-19.
+Updated: 2026-10-21.
+
+## Contextual gameplay actions
+
+[171](../tactical/171-contextual-controller-actions.md) adds **B / Q / Actions**
+for nearby vehicle equipment: attach/release, ride/climb out, cargo and tip/lower.
+The focused menu uses D-pad/stick and A to select, B to return; keyboard uses
+arrows, Enter and Escape. Y/E remains primary interaction (board/exit/talk).
+Touch has separate right-side Interact and Actions paddles, above the existing
+action cluster. The left-side status sits above the movement area.
+
+The shared menu names one equipment target, preserves authority eligibility and
+disabled actions, and closes on target/seat changes, editing, locks, blur and
+page hiding. Gameplay input is neutral while open; closing requires a fresh pad
+press. Normal game and embedded truck/towing hosts use the same VehicleControl
+and ContextActions. Physical hints derive from the same semantic bindings the
+input reader consumes. Primary actions require a standard-controller path;
+secondary settings/views may remain in controller-accessible menus.
+
 
 ## Direction and ownership
 
@@ -38,7 +56,7 @@ or credentials in this repository.
 - Standard gamepad snapshots feed semantic gameplay/menu commands. One active
   source, radial dead zone, press edges and bounded UI repeat; neutral input is
   required after blur, reconnect and context changes to prevent action leakage.
-- A jump/confirm; B back; X throw; Y interact; RT sprint; RB horn; LB build/play;
+- A jump/confirm; B contextual actions/back; X throw; Y interact; RT sprint; RB horn; LB build/play;
   View map; Menu pause. In editing, Y opens controller tools, left stick pans,
   right stick positions the cursor, RT places/paints and LT erases.
   The same screen cursor reaches DOM tools and map controls: A/RT selects, with

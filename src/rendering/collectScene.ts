@@ -4,6 +4,12 @@ import { getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { terrainBaseZ } from "../physics/TerrainExcavation.js";
+import {
+  isTransporter,
+  supportingTransporter,
+  TRANSPORTER,
+  transporterWorld,
+} from "../traffic/CarTransporter.js";
 import { isDrivable } from "../traffic/Driving.js";
 import {
   hasVehicleLights,
@@ -102,7 +108,8 @@ export function collectScene(
     (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
   );
   const movingRoofs = entities.filter(hasMovingRoof);
-  const towSprites = entities.some((e) => e.towTargetId !== undefined)
+  const transporters = entities.filter(isTransporter);
+  const towSprites = entities.some((e) => e.towTargetId !== undefined || isTransporter(e))
     ? new Map<number, SpriteItem>()
     : undefined;
   const bedSprites = movingRoofs.some(hasVehicleBed) ? new Map<number, SpriteItem>() : undefined;
@@ -140,6 +147,14 @@ export function collectScene(
         );
     }
 
+    if (e.transportedBy !== undefined) {
+      const truck = entities.find((t) => t.id === e.transportedBy);
+      if (truck)
+        pos = transporterWorld(
+          { ...truck, position: interpolatePosition(truck.position, truck.prevPosition, alpha) },
+          TRANSPORTER.loadX,
+        );
+    }
     // Compute Z offset in world pixels
     let zOffset: number;
     const displayedWz = interpolateWz(e, alpha);
@@ -243,7 +258,7 @@ export function collectScene(
             depthSurfaces,
           );
 
-    const mesh =
+    const baseMesh =
       frame?.meshPoses.evaluate(e, poseTime, pos) ??
       (meshAsset
         ? {
@@ -260,6 +275,10 @@ export function collectScene(
             towOffsetZ: towMeshOffset(e).z,
           }
         : undefined);
+    const grade = supportingTransporter(e, transporters);
+    const mesh = baseMesh
+      ? { ...baseMesh, transportRamp: e.vehicleRamp === 1, gradePitch: grade?.pitch ?? 0 }
+      : undefined;
     const spriteItem = {
       ...(mesh ? { mesh } : {}),
       ...(meshRoofSupport ? { meshRoofSupport } : {}),
@@ -479,9 +498,15 @@ export function collectScene(
   if (towSprites) {
     const grouped = new Set<SpriteItem>();
     for (const truck of entities) {
-      if (truck.towTargetId === undefined) continue;
+      const loadId =
+        truck.towTargetId ??
+        truck.transportLoadId ??
+        (isTransporter(truck)
+          ? entities.find((e) => supportingTransporter(e, transporters)?.truck.id === truck.id)?.id
+          : undefined);
+      if (loadId === undefined) continue;
       const body = towSprites.get(truck.id),
-        car = towSprites.get(truck.towTargetId);
+        car = towSprites.get(loadId);
       if (body && car) {
         body.towGroup = car;
         grouped.add(car);

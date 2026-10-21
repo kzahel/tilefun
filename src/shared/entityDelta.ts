@@ -45,6 +45,9 @@ export interface EntityDelta {
   vehicleBedTarget?: number | null;
   towedBy?: number | null;
   towTargetId?: number | null;
+  vehicleRamp?: number | null;
+  transportLoadId?: number | null;
+  transportedBy?: number | null;
   wz?: number | null;
   parentId?: number | null;
   localOffsetX?: number | null;
@@ -107,6 +110,10 @@ export function diffEntitySnapshots(
   diffOptionalNum("vehicleBedTarget", prev, curr, ensure);
   diffOptionalNum("towedBy", prev, curr, ensure);
   diffOptionalNum("towTargetId", prev, curr, ensure);
+  diffOptionalNum("vehicleRamp", prev, curr, ensure);
+  diffOptionalNum("transportLoadId", prev, curr, ensure);
+  diffOptionalNum("transportedBy", prev, curr, ensure);
+
   if (prev.vehicleBed !== curr.vehicleBed) ensure().vehicleBed = curr.vehicleBed ?? null;
   if (prev.paintSchemeId !== curr.paintSchemeId)
     ensure().paintSchemeId = curr.paintSchemeId ?? null;
@@ -159,6 +166,9 @@ type OptionalNumField =
   | "vehicleBedTarget"
   | "towedBy"
   | "towTargetId"
+  | "vehicleRamp"
+  | "transportLoadId"
+  | "transportedBy"
   | "wz"
   | "parentId"
   | "localOffsetX"
@@ -340,6 +350,10 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "vehicleBedTarget");
   applyOptionalNum(entity, delta, "towedBy");
   applyOptionalNum(entity, delta, "towTargetId");
+  applyOptionalNum(entity, delta, "vehicleRamp");
+  applyOptionalNum(entity, delta, "transportLoadId");
+  applyOptionalNum(entity, delta, "transportedBy");
+
   if (delta.vehicleBed === null) delete entity.vehicleBed;
   else if (delta.vehicleBed) entity.vehicleBed = true;
   if (delta.paintSchemeId === null) delete entity.paintSchemeId;

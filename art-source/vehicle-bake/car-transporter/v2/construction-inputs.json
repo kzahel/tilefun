@@ -1,0 +1,16 @@
+{
+  "inputs": {
+    "art-source/vehicle-bake/flatbed-truck/v1/car.blend": "5adb1ece29d05b568e43c00e0a9fb862f1ba5141733ff6b06b0e64b4c5df9e82",
+    "art-source/vehicle-bake/flatbed-truck/v1/family.json": "ca13d209d7920a465314e6b2c8d53ee1bccfd783cd44fd8f0f801a3ab9bf0887",
+    "art-source/vehicle-bake/flatbed-truck/v1/atlas.png": "b7ff20cc00dc3946e2692fd43a529b8c3d1526db62a90e71c3c5d9dbfeb82d71",
+    "scripts/vehicle-bake/transporter/author-v2.py": "523d2833b832a778fa9d36b5db09988049724aae8816a8d2e6c61d1551736b55",
+    "AGENTS.md": "b6feb24cefaccb5cd7094603913ca8a71602e530ed8a0692fe0519e81046fc04"
+  },
+  "snapshots": {
+    "art-source/vehicle-bake/flatbed-truck/v1/car.blend": "construction-inputs/art-source/vehicle-bake/flatbed-truck/v1/car.blend",
+    "art-source/vehicle-bake/flatbed-truck/v1/family.json": "construction-inputs/art-source/vehicle-bake/flatbed-truck/v1/family.json",
+    "art-source/vehicle-bake/flatbed-truck/v1/atlas.png": "construction-inputs/art-source/vehicle-bake/flatbed-truck/v1/atlas.png",
+    "scripts/vehicle-bake/transporter/author-v2.py": "construction-inputs/scripts/vehicle-bake/transporter/author-v2.py",
+    "AGENTS.md": "construction-inputs/AGENTS.md"
+  }
+}

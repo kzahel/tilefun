@@ -4,6 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 import { chromium, expect } from "@playwright/test";
 import type { GameClient } from "../../src/client/GameClient.js";
+import { chooseVehicleAction } from "../../tests/helpers/context-actions.js";
 
 const base = process.argv.find((arg) => arg.startsWith("--base-url="))?.slice(11);
 assert.ok(base, "Provide --base-url=http://127.0.0.1:PORT for an isolated server");
@@ -104,8 +105,8 @@ try {
       command: `tp ${wx - 20} ${wy + 43}`,
     });
   }, point);
-  await page.getByRole("button", { name: "Load cargo", exact: true }).click();
-  await page.getByRole("button", { name: "Ride in bed", exact: true }).click();
+  await chooseVehicleAction(page, "Load cargo");
+  await chooseVehicleAction(page, "Ride in bed");
   const state = () =>
     page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
@@ -170,8 +171,8 @@ try {
   assert.equal(facts.cargo?.parent, undefined);
   assert.ok(Math.abs((facts.cargo?.wz ?? 0) - (facts.playerZ ?? 0)) < 0.1);
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.getByRole("button", { name: "Climb out", exact: true }).tap();
-  await page.getByRole("button", { name: "Ride in bed", exact: true }).tap();
+  await chooseVehicleAction(page, "Climb out", true);
+  await chooseVehicleAction(page, "Ride in bed", true);
   await expect.poll(async () => (await state()).playerZ).toBeCloseTo((400 / 23) * 1.25);
   const controls = await page.locator("[data-vehicle-control]").boundingBox();
   assert.ok(
@@ -182,10 +183,10 @@ try {
       controls.y + controls.height <= 844,
   );
   await page.screenshot({ path: resolve(output, "mobile-game.png") });
-  await page.getByRole("button", { name: "Tip bed", exact: true }).tap();
+  await chooseVehicleAction(page, "Tip bed", true);
   await expect.poll(async () => (await state()).truck?.tilt ?? 0).toBeGreaterThan(0.28);
   await page.screenshot({ path: resolve(output, "mobile-game-tipping.png") });
-  await page.getByRole("button", { name: "Lower bed", exact: true }).tap();
+  await chooseVehicleAction(page, "Lower bed", true);
   await expect.poll(async () => (await state()).truck?.tilt ?? 99).toBe(0);
   assert.deepEqual(errors, []);
   await writeFile(

@@ -135,6 +135,9 @@ export interface Entity {
   vehicleBedTarget?: number;
   /** Runtime towing links; zero means durable partner is not resident yet. */
   towTargetId?: number;
+  vehicleRamp?: number;
+  transportLoadId?: number;
+  transportedBy?: number;
   towedBy?: number;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;

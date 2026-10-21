@@ -209,3 +209,20 @@ it("uses the shared driven heading at rest, in reverse, and on a fresh view afte
   const restored = poses.evaluate(car, 2);
   expect(restored?.orientation).toEqual(mesh.orientation);
 });
+
+it("holds a secured load's wheel phase through truck motion and resumes after release", () => {
+  const car = createVehicle("beetle", 0, 0, Direction.Right),
+    poses = new EntityMeshPose();
+  car.vehicleHeading = 0;
+  const pose = poses.evaluate(car, 1);
+  poses.evaluate(car, 1.1, { wx: 4, wy: 0 });
+  expect(pose?.wheelTravel).toBeCloseTo(4);
+  car.transportedBy = 99;
+  poses.evaluate(car, 1.2, { wx: 8, wy: 0 });
+  expect(pose?.wheelTravel).toBeCloseTo(4);
+  poses.evaluate(car, 1.3, { wx: 12, wy: 0 });
+  expect(pose?.wheelTravel).toBeCloseTo(4);
+  delete car.transportedBy;
+  poses.evaluate(car, 1.4, { wx: 10, wy: 0 });
+  expect(pose?.wheelTravel).toBeCloseTo(2);
+});

@@ -21,6 +21,7 @@ interface Pose {
     presentationTime?: number;
     bedTilt?: number;
     bedGateAngle?: number;
+    transportRamp?: boolean;
     towActive?: boolean;
     towPitch?: number;
     towOffsetX?: number;
@@ -130,7 +131,8 @@ export class EntityMeshPose {
       // rather than spinning wheels through an unseen displacement.
       const distance = Math.hypot(dx, dy);
       if (elapsed > 0 && elapsed <= 0.25 && distance <= 32) {
-        pose.travel += dx * Math.cos(target) + dy * Math.sin(target);
+        if (entity.transportedBy === undefined)
+          pose.travel += dx * Math.cos(target) + dy * Math.sin(target);
         if (distance > 0.001 && !train) {
           const moving =
             entity.velocity && Math.hypot(entity.velocity.vx, entity.velocity.vy) > 0.01;
@@ -171,6 +173,7 @@ export class EntityMeshPose {
     pose.instance.presentationTime = time;
     pose.instance.bedTilt = bedTilt(entity);
     pose.instance.bedGateAngle = bedGateAngle(entity);
+    pose.instance.transportRamp = entity.vehicleRamp === 1;
     pose.instance.towActive = entity.towTargetId !== undefined;
     pose.instance.towPitch = towPitch(entity);
     const offset = towMeshOffset(entity);

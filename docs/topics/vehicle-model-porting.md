@@ -1,10 +1,12 @@
 # Vehicle model porting checklist
 
+The new original Car transporter in [173](../tactical/173-single-car-transporter.md) is outside the 45-source port queue. Its source, independent wheel/ramp qualification and pending appearance inspection belong to [original vehicles](original-vehicles.md) and the [transporter workflow](../vehicle-transporter.md). Source-port counts and old asset revisions are unchanged.
+
 Topic: vehicle-model-porting
 Status: all 45 source sets have retained own Blender/UV models and shared
 engine integrations (49 exact retained revisions). Production model art review
 remains open; runtime keeps steering neutral and equipment at its authored rest pose.
-Updated: 2026-10-12.
+Updated: 2026-10-21.
 
 Working original tow-truck equipment in [169](../tactical/169-wheel-lift-towing.md)
 is separate from the 45-source port queue. Active v2 adds a wheel lift while v1

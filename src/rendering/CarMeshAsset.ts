@@ -38,6 +38,8 @@ export class CarMeshAsset {
   private lights?: VehicleEmergencyLights;
   private propeller?: THREE.Object3D;
   private propellerRest?: THREE.Quaternion;
+  private transportRamp?: THREE.Object3D;
+  private transportRampRest?: THREE.Quaternion;
   private towBoom?: THREE.Object3D;
   private towCradle?: THREE.Object3D;
   private towBoomY = 0;
@@ -75,6 +77,12 @@ export class CarMeshAsset {
     });
     this.meshCount = meshes;
     try {
+      const ramp = scene.getObjectByName("Transport_Loading_Ramp");
+      if (ramp) {
+        if (ramp.userData.tilefun_transport_ramp !== 1) throw Error("Invalid transporter ramp");
+        this.transportRamp = ramp;
+        this.transportRampRest = ramp.quaternion.clone();
+      }
       const boom = scene.getObjectByName("Tow_Lift_Boom"),
         cradle = scene.getObjectByName("Tow_Lift_Cradle");
       if (boom || cradle) {
@@ -315,6 +323,17 @@ export class CarMeshAsset {
       );
       wheel.roll.quaternion.copy(wheel.rest).multiply(this.rotation);
     }
+  }
+  setTransportRamp(deployed = false) {
+    if (!this.transportRamp || !this.transportRampRest) return;
+    this.transportRamp.quaternion
+      .copy(this.transportRampRest)
+      .multiply(
+        this.rotation.setFromAxisAngle(
+          new THREE.Vector3(0, 0, 1),
+          deployed ? Math.PI - Math.atan2(24.65, 76) : 0,
+        ),
+      );
   }
   setTowLift(active = false) {
     if (!this.towBoom || !this.towCradle || !this.towCradlePosition) return;

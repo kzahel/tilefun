@@ -13,6 +13,14 @@ import { isTrain } from "../railway/Train.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
+import {
+  hasUnsecuredTransportLoad,
+  isTransporter,
+  TRANSPORTER,
+  transportedPose,
+  transporterRampBounds,
+  transporterSupport,
+} from "./CarTransporter.js";
 import { separatesContact } from "./ContactRecovery.js";
 import { type DrivingQueries, drivingQueries } from "./DrivingQueries.js";
 import { movingPassengerPosition } from "./MovingSupport.js";
@@ -83,21 +91,35 @@ export function drivenCarPose(
   towPlan?: { before: Entity; after: Entity }[],
 ): Entity | undefined {
   if (![input.dx, input.dy, dt].every(Number.isFinite) || dt <= 0 || dt > 0.1) return;
-  if (car.towedBy !== undefined) return;
+  if (car.towedBy !== undefined || car.transportedBy !== undefined) return;
+  const load =
+    car.transportLoadId !== undefined
+      ? entities.find((e) => e.id === car.transportLoadId && e.transportedBy === car.id)
+      : undefined;
+  if (car.transportLoadId !== undefined && !load) return;
+  if (isTransporter(car) && (car.vehicleRamp === 1 || hasUnsecuredTransportLoad(car, entities)))
+    return {
+      ...car,
+      velocity: { vx: 0, vy: 0 },
+      sprite: car.sprite && { ...car.sprite, moving: false },
+    };
   const trailer =
     car.towTargetId !== undefined
       ? entities.find((e) => e.id === car.towTargetId && e.towedBy === car.id)
       : undefined;
   if (car.towTargetId !== undefined && !trailer) return;
-  const collisionEntities = trailer ? entities.filter((e) => e.id !== trailer.id) : entities;
+  const rampOwner = entities.find((e) => transporterSupport(car, e));
+  const collisionEntities = entities.filter((e) => e.id !== trailer?.id && e.id !== load?.id);
   const collisionQueries =
-    trailer && queries
+    (trailer || load) && queries
       ? {
           ...queries,
           ...(queries.bodies
             ? {
                 bodies: (box: Parameters<NonNullable<DrivingQueries["bodies"]>>[0]) =>
-                  (queries.bodies?.(box) ?? []).filter((e) => e.id !== trailer.id),
+                  (queries.bodies?.(box) ?? []).filter(
+                    (e) => e.id !== trailer?.id && e.id !== load?.id,
+                  ),
               }
             : {}),
         }
@@ -111,9 +133,10 @@ export function drivenCarPose(
   const length = Math.hypot(input.dx, input.dy);
   const scale = length > 1 ? 1 / length : 1;
   const basePerformance = vehiclePerformance(car.type);
-  const performance = trailer
-    ? { ...basePerformance, speed: Math.min(64, basePerformance.speed), acceleration: 80 }
-    : basePerformance;
+  const performance =
+    trailer || load
+      ? { ...basePerformance, speed: Math.min(64, basePerformance.speed), acceleration: 80 }
+      : basePerformance;
   const previous = car.sprite?.direction ?? Direction.Down;
   // Directional input steers toward a nose bearing. It never supplies sideways
   // velocity: signed rolling distance turns the chassis, including in reverse.
@@ -197,10 +220,28 @@ export function drivenCarPose(
       props,
       collisionEntities,
       collisionQueries,
-      pushes !== undefined && !isBoat(car) && !trailer,
+      pushes !== undefined && !isBoat(car) && !trailer && !load,
     )
   )
     return retryStraight();
+  if (load) {
+    const carried = transportedPose(load, next);
+    if (
+      !checkedCarPose(
+        load,
+        carried,
+        dt,
+        world,
+        props,
+        entities.filter((e) => e.id !== car.id),
+        undefined,
+        false,
+        carried.wz,
+      )
+    )
+      return retryStraight();
+    towPlan?.push({ before: load, after: carried });
+  }
   const towed = trailer && towedPose(trailer, next);
   if (
     trailer &&
@@ -226,15 +267,15 @@ export function drivenCarPose(
       Math.abs((towed.wz ?? 0) - (next.wz ?? 0)) > 0.25)
   )
     return retryStraight();
-  if (pushes && !isBoat(car) && !trailer) {
+  if (pushes && !isBoat(car) && !trailer && !load) {
     const plan = planVehiclePushes(
       [{ before: car, after: next }],
       dt,
       performance,
       world,
       props,
-      collisionEntities,
-      collisionQueries,
+      collisionEntities.filter((e) => e.id !== rampOwner?.id),
+      rampOwner ? undefined : collisionQueries,
     );
     if (!plan) {
       if (contactSpeed === undefined)
@@ -303,6 +344,7 @@ export function checkedCarPose(
   entities: readonly Entity[],
   queries?: DrivingQueries,
   planPushes = false,
+  supportedZ?: number,
 ): Entity | undefined {
   const velocity = next.velocity ?? { vx: 0, vy: 0 };
   if (!car.collider || !next.collider) return;
@@ -352,9 +394,40 @@ export function checkedCarPose(
     bottom: Math.max(swept.bottom, next.position.wy),
   };
   const localProps = queries?.props(bounds) ?? props;
-  const z = resolveGroundZForTracking(next, (x, y) => world.getHeightAt(x, y), localProps, []);
+  const support = entities
+    .map((e) => transporterSupport(next, e))
+    .find(
+      (s) =>
+        s !== undefined &&
+        Math.abs(s.z - (car.wz ?? 0)) <= Math.hypot(velocity.vx, velocity.vy) * dt * 0.5 + 0.001,
+    );
+  for (const truck of entities) {
+    if (
+      truck.id === car.id ||
+      truck.id === car.transportedBy ||
+      truck.id === support?.truck.id ||
+      !isTransporter(truck) ||
+      truck.vehicleRamp !== 1
+    )
+      continue;
+    const base = truck.wz ?? 0;
+    if (
+      (car.wz ?? 0) < base + TRANSPORTER.height &&
+      (car.wz ?? 0) + (car.collider.physicalHeight ?? 24) > base &&
+      aabbsOverlap(swept, transporterRampBounds(truck))
+    )
+      return;
+  }
+  const z =
+    supportedZ ??
+    support?.z ??
+    resolveGroundZForTracking(next, (x, y) => world.getHeightAt(x, y), localProps, []);
   const beforeZ = car.wz ?? 0;
-  if (Math.abs(z - beforeZ) > Math.hypot(velocity.vx, velocity.vy) * dt * 0.5 + 0.001) return;
+  if (
+    supportedZ === undefined &&
+    Math.abs(z - beforeZ) > Math.hypot(velocity.vx, velocity.vy) * dt * 0.5 + 0.001
+  )
+    return;
   next.wz = next.groundZ = z;
   if (motion) motion = carBodyMotion(car, next);
   const height = next.collider.physicalHeight ?? 24;
@@ -398,6 +471,7 @@ export function checkedCarPose(
   for (const other of planPushes ? [] : (queries?.bodies?.(swept) ?? entities)) {
     if (
       other.id === car.id ||
+      other.id === support?.truck.id ||
       other.parentId === car.id ||
       roofSupport(other, [car])?.id === car.id ||
       (bedInteriorOccupant(car, other) && bedInteriorOccupant(next, other)) ||

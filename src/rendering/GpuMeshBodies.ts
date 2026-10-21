@@ -151,15 +151,19 @@ export class GpuMeshBodies {
     const object = asset.object;
     object.quaternion.set(...item.mesh.orientation);
     const yaw = 2 * Math.atan2(item.mesh.orientation[2], item.mesh.orientation[3]);
-    if (item.mesh.towPitch)
+    if (item.mesh.towPitch || item.mesh.gradePitch)
       object.quaternion.multiply(
-        new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -item.mesh.towPitch),
+        new THREE.Quaternion().setFromAxisAngle(
+          new THREE.Vector3(0, 1, 0),
+          -(item.mesh.towPitch || item.mesh.gradePitch || 0),
+        ),
       );
     object.position.set(
       (item.mesh.towOffsetX ?? 0) * Math.cos(yaw),
       (item.mesh.towOffsetX ?? 0) * Math.sin(yaw),
       item.mesh.towOffsetZ ?? 0,
     );
+    asset.setTransportRamp(item.mesh.transportRamp ?? false);
     asset.setTowLift(item.mesh.towActive ?? false);
     asset.setTravel(item.mesh.wheelTravel ?? 0, !!item.mesh.towPitch);
     asset.setDumpBed(item.mesh.bedTilt ?? 0, item.mesh.bedGateAngle ?? 0);
@@ -170,9 +174,12 @@ export class GpuMeshBodies {
         o = childAsset.object,
         yaw = 2 * Math.atan2(mesh.orientation[2], mesh.orientation[3]);
       o.quaternion.set(...mesh.orientation);
-      if (mesh.towPitch)
+      if (mesh.towPitch || mesh.gradePitch)
         o.quaternion.multiply(
-          new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -mesh.towPitch),
+          new THREE.Quaternion().setFromAxisAngle(
+            new THREE.Vector3(0, 1, 0),
+            -(mesh.towPitch || mesh.gradePitch || 0),
+          ),
         );
       o.position.set(
         child.wx - item.wx + (mesh.towOffsetX ?? 0) * Math.cos(yaw),
@@ -180,6 +187,7 @@ export class GpuMeshBodies {
         child.zOffset - item.zOffset + (mesh.towOffsetZ ?? 0),
       );
       childAsset.setTravel(mesh.wheelTravel ?? 0, !!mesh.towPitch);
+      childAsset.setTransportRamp(false);
       childAsset.setTowLift(false);
       childAsset.setDumpBed(0, 0);
       childAsset.setEmergency(mesh.emergencyEnabled ?? false, mesh.presentationTime ?? 0);

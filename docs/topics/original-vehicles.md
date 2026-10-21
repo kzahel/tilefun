@@ -1,8 +1,10 @@
 # Original vehicle authoring
 
+[173](../tactical/173-single-car-transporter.md) adds an owner-authorized original Car transporter after run153: 2,822 triangles, six draw groups, retained cab/independent wheels plus its own longer platform and ramp. Normal editor/traffic integration and source/pixel replay are delivered locally; appearance awaits inspection. Current fleet is **34 originals / 79 road types / 45 source ports**; earlier batch counts below remain historical.
+
 Topic: original-vehicles
 Status: 33 road originals integrated and published; Linux CI passed. Windows full result and corrected touch-readiness reruns are recorded separately; motorcycles remain rider prototypes.
-Updated: 2026-10-20.
+Updated: 2026-10-21.
 
 Owner follow-on [169](../tactical/169-wheel-lift-towing.md) delivers working towing
 with a retained tow-truck v2. Its original v1 body/UVs and four wheel rigs stay

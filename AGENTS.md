@@ -59,6 +59,15 @@ Normal builds use committed assets. Keep credentials, owner/session files,
 NDJSON histories and local state out of Git. Server logs do not include browser
 drafts, outboxes or worlds. See [setup and local data](docs/setup-and-local-data.md).
 
+## Controller-friendly gameplay
+
+Primary on-screen gameplay actions must be usable with a standard controller
+(including Steam Deck), with visible button hints and reachable focus/confirm/back
+behavior. Give touch, keyboard and controller access to the same actions; a mouse
+cursor alone is not sufficient. Secondary settings and views, such as control
+schemes and minimap options, may live in controller-accessible menus. Follow
+[Steam Deck and menus](docs/topics/steam-deck-and-menus.md) for the shared scheme.
+
 ## Human review
 
 Before art/review work, read [art review](docs/topics/art-review.md).

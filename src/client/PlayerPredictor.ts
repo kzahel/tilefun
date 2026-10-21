@@ -778,7 +778,15 @@ export class PlayerPredictor {
       if (serverMount.emergencyState !== undefined)
         this.predictedMount.emergencyState = serverMount.emergencyState;
       else delete this.predictedMount.emergencyState;
-      for (const key of ["vehicleBedTilt", "vehicleBedTarget", "towTargetId", "towedBy"] as const) {
+      for (const key of [
+        "vehicleBedTilt",
+        "vehicleBedTarget",
+        "towTargetId",
+        "towedBy",
+        "vehicleRamp",
+        "transportLoadId",
+        "transportedBy",
+      ] as const) {
         const value = serverMount[key];
         if (value === undefined) delete this.predictedMount[key];
         else this.predictedMount[key] = value;
@@ -1553,7 +1561,11 @@ export class PlayerPredictor {
             if (!collider) break;
             const pushes: VehiclePush[] = [];
             const bounds = getEntityAABB(this.predictedMount.position, collider);
-            if (this.predictedMount.towTargetId !== undefined) {
+            if (
+              this.predictedMount.towTargetId !== undefined ||
+              this.predictedMount.transportLoadId !== undefined ||
+              this.predictedMount.transportedBy !== undefined
+            ) {
               bounds.left -= 240;
               bounds.right += 240;
               bounds.top -= 240;
@@ -1682,7 +1694,15 @@ export class PlayerPredictor {
     if (serverPlayer.emergencyState !== undefined)
       clone.emergencyState = serverPlayer.emergencyState;
     if (serverPlayer.paintSchemeId !== undefined) clone.paintSchemeId = serverPlayer.paintSchemeId;
-    for (const key of ["vehicleBedTilt", "vehicleBedTarget", "towTargetId", "towedBy"] as const)
+    for (const key of [
+      "vehicleBedTilt",
+      "vehicleBedTarget",
+      "towTargetId",
+      "towedBy",
+      "vehicleRamp",
+      "transportLoadId",
+      "transportedBy",
+    ] as const)
       if (serverPlayer[key] !== undefined) clone[key] = serverPlayer[key];
     if (serverPlayer.vehicleBed) clone.vehicleBed = true;
     if (serverPlayer.playerModel !== undefined) clone.playerModel = serverPlayer.playerModel;

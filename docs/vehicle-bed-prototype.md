@@ -131,7 +131,8 @@ the hollow volume for crossing/push checks, with actual wall motion still checke
 before committing the vehicle step. They retain world momentum during a jump.
 
 The flag travels through snapshots, nullable deltas, hydration and `SavedTraffic`.
-Frame tag `0x07` adds nullable `vehicleBedTilt`/`vehicleBedTarget`; it requires matching endpoints and rejects older tags. A supported
+Current frame tag `0x09` carries nullable `vehicleBedTilt`/`vehicleBedTarget`
+(introduced in 0x07); matching endpoints are required and older tags are rejected. A supported
 player's `roofRide` save includes relative `height`; older records without it
 retain roof-height semantics. Loose contents remain ordinary durable actor records
 at their actual world positions/heights. Shared moving support carries loose

@@ -8,6 +8,7 @@ import { chromium, expect } from "@playwright/test";
 import react from "@vitejs/plugin-react";
 import { createServer } from "vite";
 import type { TowingCanvas } from "../../src/workshop/TowingPage.js";
+import { chooseVehicleAction } from "../../tests/helpers/context-actions.js";
 
 const output = resolve(
   process.argv.find((a) => a.startsWith("--output="))?.slice(9) ?? "data/3d-investigation/towing",
@@ -61,7 +62,7 @@ try {
     states[id] = await report();
   };
   await capture("parked");
-  await page.getByRole("button", { name: "Attach car", exact: true }).click();
+  await chooseVehicleAction(page, "Attach car");
   await expect.poll(async () => (await report())?.car?.owner).toBe((await report())?.truck?.id);
   await capture("attached");
   await page.getByRole("button", { name: /Drive car/ }).click();
@@ -81,7 +82,7 @@ try {
   } finally {
     await page.keyboard.up("ArrowDown");
   }
-  await expect(page.getByRole("button", { name: "Release car", exact: true })).toBeVisible();
+  await expect(page.locator('[data-tow-action="release"]')).toHaveJSProperty("hidden", false);
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect.poll(async () => (await report())?.authority.clock?.running).toBe(false);
   await capture("turning");

@@ -2,7 +2,7 @@
 
 Generated from [the roster](../art-source/vehicle-bake/roster.json) by `node scripts/vehicle-bake/status.mjs`.
 
-**33 integrated · 7 deferred · 12 idea.**
+**34 integrated · 7 deferred · 11 idea.**
 
 The owner-authorized run153 production batch is complete within its eight-hour limit (2026-10-19 21:19:36 UTC–2026-10-20 05:19:36 UTC). All33 ordinary entries are integrated; seven cycle styles retain diagnostic source/shared reviews but remain deferred for normal rider presentation. Per-family appearance pauses were waived for this delivered batch only; formal review states remain unchanged. Follow the current owner gate before further production.
 
@@ -59,7 +59,7 @@ The owner-authorized run153 production batch is complete within its eight-hour l
 | 47 | Desert trophy truck | Off-road racing truck | idea | Choose an authoring batch and appearance direction. |
 | 48 | Armored bank truck | Armored utility truck | idea | Choose an authoring batch and appearance direction. |
 | 49 | Vintage steam-powered car | Steam carriage | idea | Choose an authoring batch and appearance direction. |
-| 50 | Car transporter carrying miniature existing cars | Vehicle carrier | idea | Choose an authoring batch; plan miniature cargo reuse, total mesh budget and road clearance. |
+| 50 | Single-car transporter | Vehicle carrier | integrated | Available locally in Edit > Vehicles and eligible traffic; deploy ramp, drive a real car aboard, secure and carry it. Owner appearance/loading playtest pending; see tactical 173. |
 | 51 | Ice resurfacer | Ice maintenance vehicle | idea | Choose an authoring batch and appearance direction. |
 | 52 | Giant duck advertising van | Novelty advertising vehicle | idea | Choose an authoring batch; plan the giant duck silhouette and vehicle clearance. |
 

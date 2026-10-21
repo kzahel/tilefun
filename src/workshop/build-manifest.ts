@@ -21,6 +21,7 @@ import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import { buildTowingCandidate } from "./TowingCandidate.js";
+import { buildTransporterCandidate } from "./TransporterCandidate.js";
 import { buildTruckBedCandidate } from "./TruckBedCandidate.js";
 import { buildVehicleBakeCandidates } from "./VehicleBakeCandidates.js";
 import { buildVehicleCandidates } from "./VehicleCandidates.js";
@@ -75,6 +76,7 @@ try {
     await buildWorldGeometryCandidate("train-grades"),
     await buildTruckBedCandidate(),
     await buildTowingCandidate(),
+    await buildTransporterCandidate(),
     await buildCurvedTrainCandidate(true),
     await buildCurvedTrainCandidate(false),
     await buildCityTrainCandidate(),

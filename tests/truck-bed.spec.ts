@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import type { TruckBedCanvas } from "../src/workshop/TruckBedPage.js";
+import { chooseVehicleAction } from "./helpers/context-actions.js";
 
 test.use({ channel: "chromium" });
 
@@ -81,10 +82,10 @@ test("bed occupant clips in the shared host and survives backend changes and pau
   await page.getByRole("button", { name: "Stand beside truck", exact: true }).click();
   await page.getByRole("button", { name: "Resume", exact: true }).click();
   for (let count = 1; count <= 2; count++) {
-    await page.getByRole("button", { name: "Load cargo", exact: true }).click();
+    await chooseVehicleAction(page, "Load cargo");
     await expect.poll(async () => (await report())?.cargoCount).toBe(count);
   }
-  await page.getByRole("button", { name: "Ride in bed", exact: true }).click();
+  await chooseVehicleAction(page, "Ride in bed");
   await expect.poll(async () => (await report())?.supportId).toBe(initial?.truckId);
   const boarded = await report();
   await testInfo.attach("loaded-bed", { body: await capture(), contentType: "image/png" });
@@ -109,7 +110,7 @@ test("bed occupant clips in the shared host and survives backend changes and pau
   await page.getByLabel("Truck renderer", { exact: true }).selectOption("gpu-mesh");
   await expect(page.getByLabel("Truck renderer", { exact: true })).toBeEnabled();
   await page.getByRole("button", { name: "Resume", exact: true }).click();
-  await page.getByRole("button", { name: "Tip bed", exact: true }).click();
+  await chooseVehicleAction(page, "Tip bed");
   await expect.poll(async () => (await report())?.bedTilt ?? 0).toBeGreaterThan(0.28);
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect.poll(async () => (await report())?.authority.clock?.running).toBe(false);
@@ -140,7 +141,7 @@ test("bed occupant clips in the shared host and survives backend changes and pau
   await expect.poll(async () => (await report())?.playerZ ?? 99).toBeLessThan(0.1);
   await expect.poll(async () => (await report())?.cargoCount ?? 99).toBe(0);
   await page.getByRole("button", { name: "Stand beside truck", exact: true }).click();
-  await page.getByRole("button", { name: "Lower bed", exact: true }).click();
+  await chooseVehicleAction(page, "Lower bed");
   await expect.poll(async () => (await report())?.bedTilt ?? 99).toBe(0);
   expect(errors).toEqual([]);
   // The named canvas itself remains the keyboard surface after GPU replacement.

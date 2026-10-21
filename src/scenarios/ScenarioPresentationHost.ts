@@ -3,6 +3,11 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
+import {
+  CONTROLLER_EVENT,
+  type ControllerCommand,
+  controllerInput,
+} from "../input/ControllerInput.js";
 import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
@@ -139,19 +144,29 @@ export class ScenarioPresentationHost {
             ? { kind: "enter-vehicle", entityId: request.entityId }
             : request.type === "call-train"
               ? { kind: "call-train", benchId: request.benchId }
-              : request.type === "vehicle-tow-action"
-                ? { kind: "vehicle-tow-action", entityId: request.entityId, action: request.action }
-                : request.type === "vehicle-bed-action"
+              : request.type === "vehicle-transporter-action"
+                ? {
+                    kind: "vehicle-transporter-action",
+                    entityId: request.entityId,
+                    action: request.action,
+                  }
+                : request.type === "vehicle-tow-action"
                   ? {
-                      kind: "vehicle-bed-action",
+                      kind: "vehicle-tow-action",
                       entityId: request.entityId,
                       action: request.action,
                     }
-                  : { kind: "exit-vehicle" },
+                  : request.type === "vehicle-bed-action"
+                    ? {
+                        kind: "vehicle-bed-action",
+                        entityId: request.entityId,
+                        action: request.action,
+                      }
+                    : { kind: "exit-vehicle" },
         ),
       );
-      this.vehicleControl.root.style.position = "absolute";
-      canvas.parentElement?.append(this.vehicleControl.root);
+      if (canvas.parentElement) this.vehicleControl.mountEmbedded(canvas.parentElement);
+      window.addEventListener(CONTROLLER_EVENT, this.vehiclePad);
       canvas.addEventListener("keydown", this.vehicleKey);
     }
     this.snapCamera();
@@ -200,8 +215,21 @@ export class ScenarioPresentationHost {
     return typeof fixed === "function" ? fixed(player, alpha) : fixed;
   }
 
+  private get vehicleInputFocused(): boolean {
+    return document.activeElement === this.canvas || !!this.vehicleControl?.actionsOpen;
+  }
+  private vehiclePad = (event: Event) => {
+    if (!this.vehicleInputFocused || event.defaultPrevented || this.paused) return;
+    const command = (event as CustomEvent<ControllerCommand>).detail;
+    if (command === "back") this.vehicleControl?.openActions();
+    else if (command === "interact") this.vehicleControl?.activate();
+  };
+
   private vehicleKey = (event: KeyboardEvent) => {
-    if (event.key.toLowerCase() === "e" && this.vehicleControl?.activate()) {
+    if (
+      (event.key.toLowerCase() === "e" && this.vehicleControl?.activate()) ||
+      (event.key.toLowerCase() === "q" && this.vehicleControl?.openActions())
+    ) {
       event.preventDefault();
       event.stopPropagation();
     }
@@ -217,6 +245,11 @@ export class ScenarioPresentationHost {
       return;
     }
     this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
+    if (this.vehicleControls && this.vehicleInputFocused)
+      controllerInput.sample(
+        typeof navigator.getGamepads === "function" ? navigator.getGamepads() : [],
+        performance.now(),
+      );
     this.vehicleControl?.update(this.session.view, true, this.paused);
     if (this.paused) return;
     this.lightSeconds += dt;
@@ -228,10 +261,26 @@ export class ScenarioPresentationHost {
         this.camera.x = fixed.wx;
         this.camera.y = fixed.wy;
       }
-      const raw = this.options.input();
+      const raw: Movement = this.vehicleControl?.actionsOpen
+        ? { dx: 0, dy: 0, jump: false, sprinting: false }
+        : this.options.input();
+      const merged =
+        controllerInput.connected &&
+        this.vehicleInputFocused &&
+        !this.vehicleControl?.actionsOpen &&
+        !raw.dx &&
+        !raw.dy
+          ? {
+              ...raw,
+              ...controllerInput.movement,
+              jump: raw.jump || controllerInput.movement.jump,
+              sprinting: raw.sprinting || controllerInput.movement.sprinting,
+              reversing: raw.reversing || controllerInput.held.has("reverse"),
+            }
+          : raw;
       const input = occupiedVehicle(this.session.view.playerEntity, this.session.view.entities)
-        ? { ...raw, jump: false }
-        : raw;
+        ? { ...merged, jump: false }
+        : merged;
       this.interpolate = this.session.submitInput(input, dt, this.camera.getVisibleChunkRange());
       if (this.interpolate) {
         this.steps++;
@@ -469,6 +518,8 @@ export class ScenarioPresentationHost {
     document.removeEventListener("visibilitychange", this.visibilityChanged);
     if (this.vehicleControl) {
       this.vehicleControl.destroy();
+      window.removeEventListener(CONTROLLER_EVENT, this.vehiclePad);
+      controllerInput.reset();
       this.canvas.removeEventListener("keydown", this.vehicleKey);
     }
     this.host?.dispose();

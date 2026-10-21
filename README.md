@@ -51,7 +51,7 @@ saves first. Online play requires signaling and a working peer connection.
 | Control | Action |
 | --- | --- |
 | Left stick | Move; pan while building |
-| A / B | Jump or select / back |
+| A / B | Jump or select / contextual actions or back |
 | Menu / View | Pause menu / world map |
 | Y / X | Interact or editor tools / throw |
 | LB / RB | Build–Play / horn |
@@ -63,7 +63,9 @@ saves first. Online play requires signaling and a working peer connection.
 D-pad/stick focus, A select, B back and an on-screen text keyboard cover game
 menus and editor tools. **Save and quit** flushes the authority before closing.
 The right-stick cursor also selects visible tools and map controls with A or RT.
-Named action paddles show the current keyboard/controller hints; vehicle controls
+Vehicle equipment (tow, cargo and dump bed) opens through **B / Q / Actions**,
+with D-pad/stick selection, A confirmation and B back. Named action paddles show
+the current keyboard/controller hints; vehicle controls
 never reuse Jump and Throw. Touch maps support two-finger pan and zoom.
 Browser saves and packaged saves are separate. See
 [Steam Deck and menus](docs/topics/steam-deck-and-menus.md) for runtime, installation
@@ -120,6 +122,8 @@ tap is required. Jump/Throw/Sprint touches do not take over steering. The same
 menu, travel and focus changes cancel the hold, requiring a fresh finger-down.
 See [touch movement](docs/topics/touch-movement.md) and [tap movement and Options](docs/tactical/086-tap-to-move-and-options.md)
 for the behavior and remaining device trial.
+
+**Car transporter** in Edit → Vehicles has working loading equipment. Open **Actions (B / Q / touch)** to deploy the ramp, drive a passenger car aboard, get out and secure it, then stow the ramp before driving the truck. Stop, deploy and release to reverse the same car off. See [operation and authoring](docs/vehicle-transporter.md).
 
 **Edit → Vehicles** lets you choose any of the 45 vehicles and click/tap clear dry
 ground to place it parked, including in existing worlds without roads. **Vehicles

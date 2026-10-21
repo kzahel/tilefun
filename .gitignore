@@ -316,3 +316,10 @@ data/
 /art-source/vehicle-bake/tow-truck/v2/*.blend1
 /art-source/vehicle-bake/towing-fallbacks/*
 !/art-source/vehicle-bake/towing-fallbacks/v2/
+
+# Unpublished transporter UV-join prototype; final revision is retained separately.
+/art-source/vehicle-bake/car-transporter/v1/
+/scripts/vehicle-bake/transporter/author.py
+/public/assets/models/vehicles/car-transporter-v1.glb
+/public/assets/vehicles/car-transporter-v1.png
+/public/assets/vehicles/car-transporter-ramp-v1.png

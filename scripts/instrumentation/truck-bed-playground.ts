@@ -9,6 +9,7 @@ import { chromium, expect } from "@playwright/test";
 import react from "@vitejs/plugin-react";
 import { createServer } from "vite";
 import type { TruckBedCanvas } from "../../src/workshop/TruckBedPage.js";
+import { chooseVehicleAction } from "../../tests/helpers/context-actions.js";
 
 const output = resolve(
   process.argv.find((arg) => arg.startsWith("--output="))?.slice(9) ??
@@ -163,10 +164,10 @@ try {
   await page.getByRole("button", { name: "Stand beside truck", exact: true }).click();
   await page.getByRole("button", { name: "Resume", exact: true }).click();
   for (let count = 1; count <= 2; count++) {
-    await page.getByRole("button", { name: "Load cargo", exact: true }).click();
+    await chooseVehicleAction(page, "Load cargo");
     await expect.poll(async () => (await report())?.cargoCount).toBe(count);
   }
-  await page.getByRole("button", { name: "Ride in bed", exact: true }).click();
+  await chooseVehicleAction(page, "Ride in bed");
   await expect.poll(async () => (await report())?.supportId).toBe((await report())?.truckId);
   await pause();
   await capture("loaded-bed", "Game controls: rider and two real cargo identities");
@@ -178,7 +179,7 @@ try {
     await page.getByLabel("Truck renderer", { exact: true }).selectOption("gpu-mesh");
     await ready();
     await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await page.getByRole("button", { name: "Tip bed", exact: true }).click();
+    await chooseVehicleAction(page, "Tip bed");
     await expect.poll(async () => (await report())?.bedTilt ?? 0).toBeGreaterThan(0.26);
     await pause();
     await capture("tip-loaded", "Tipping with rider, ball and fruit");
@@ -199,7 +200,7 @@ try {
     await capture("tip-discharged", "Raised bed after actual discharge");
     await page.getByRole("button", { name: "Stand beside truck", exact: true }).click();
     await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await page.getByRole("button", { name: "Lower bed", exact: true }).click();
+    await chooseVehicleAction(page, "Lower bed");
     await expect.poll(async () => (await report())?.bedTilt ?? 99).toBe(0);
     await pause();
     await capture("tip-lowered", "Lowered and ready to drive/load again");

@@ -1,6 +1,8 @@
 # Vehicle towing
 
 Working wheel-lift towing is shared by the game and Tow truck playground.
+Open **Actions (B on controller, Q on keyboard)** to choose Attach/Release;
+D-pad/stick chooses, A confirms and B returns. Touch uses the Actions paddle.
 [Vehicles](topics/vehicles.md) owns current status; [169](tactical/169-wheel-lift-towing.md)
 records implementation and validation. The previous v1 art and receipts stay frozen.
 
@@ -41,8 +43,8 @@ hitch without changing simulation.
 
 `TowControl.ts` validates normal `vehicle-tow-action` requests; the shared vehicle
 panel owns Attach/Release. The game and real Worker lab use that same authority.
-Current partner IDs replicate in nullable uint32 fields (frame tag **0x08**, old
-endpoints rejected). Save records store reciprocal **procedural identities**,
+Current partner IDs replicate in nullable uint32 fields (current frame tag
+**0x09**, old endpoints rejected; towing introduced these fields in 0x08). Save records store reciprocal **procedural identities**,
 not transient numeric IDs. Chunk records can arrive in either order: zero-valued
 runtime links preserve a stopped pending relationship until both are resident.
 Unloading preserves it; deleting either body releases the remaining partner.

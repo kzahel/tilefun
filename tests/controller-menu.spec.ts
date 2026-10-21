@@ -1,6 +1,7 @@
 import { expect, type Locator, type Page, test } from "@playwright/test";
+import type { GameClient } from "../src/client/GameClient.js";
 
-test.use({ channel: "chromium" });
+test.use({ channel: "chromium", hasTouch: true });
 
 async function press(page: Page, button: number) {
   // Observe actual render frames so a busy GPU cannot miss a press/release.
@@ -293,4 +294,112 @@ test("failed saving keeps the session open and the recovery dialog works with B"
   await expect(recovery).toBeHidden();
   await expect(page).not.toHaveURL(/host=/);
   await expect(page.getByTestId("world-menu")).toHaveAttribute("data-page", "multiplayer");
+});
+
+test("B opens normal vehicle actions, A confirms and back never leaks driving or jump", async ({
+  page,
+}, testInfo) => {
+  test.setTimeout(60000);
+  await page.goto("/tilefun/?desktop=1");
+  await expect(page.getByTestId("world-menu")).toBeVisible();
+  await press(page, 0);
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await page.evaluate(async () => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
+    const created = await g.gcSendRequest({
+      type: "create-world",
+      requestId: g.nextRequestId++,
+      name: "Controller towing",
+      generation,
+    });
+    await g.gcSendRequest({
+      type: "join-realm",
+      requestId: g.nextRequestId++,
+      worldId: created.meta.id,
+      arrival: { x: 0, y: 40 / 16, generation },
+    });
+  });
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        return (
+          Math.abs(g.remoteView.serverPlayerEntity.position.wy - 40) < 1 &&
+          [-1, 0].every((x) => [-1, 0].every((y) => !!g.stateView.world.getChunkIfLoaded(x, y)))
+        );
+      }),
+    )
+    .toBe(true);
+  await page.evaluate(() => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    g.transport.send({ type: "set-editor-mode", enabled: true });
+    for (const e of g.remoteView.serverEntities)
+      if (e.type !== "player") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
+    g.transport.send({ type: "edit-spawn", entityType: "vehicle-v1:tow-truck", wx: 0, wy: 0 });
+    g.transport.send({ type: "edit-spawn", entityType: "vehicle-v1:beetle", wx: -104, wy: 0 });
+    g.transport.send({ type: "set-editor-mode", enabled: false });
+  });
+  const facts = () =>
+    page.evaluate(() => {
+      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const p = g.remoteView.serverPlayerEntity;
+      const truck = g.remoteView.serverEntities.find((e) => e.type === "vehicle-v1:tow-truck");
+      return {
+        target: truck?.towTargetId ?? null,
+        parent: p.parentId ?? null,
+        z: p.wz ?? 0,
+        x: p.position.wx,
+        y: p.position.wy,
+      };
+    });
+  const launcher = page.locator("[data-context-actions]");
+  const menu = page.getByTestId("context-actions");
+  await expect(launcher).toBeVisible();
+  await expect(page.getByRole("button", { name: "Attach car", exact: true })).toBeHidden();
+  await press(page, 1);
+  await expect(menu).toBeVisible();
+  await expect(launcher).toContainText("B");
+  await expect(menu.getByRole("button", { name: "Attach car", exact: true })).toBeFocused();
+  await press(page, 1);
+  await expect(menu).toBeHidden();
+  expect((await facts()).target).toBeNull();
+  // Exercise the same menu with keyboard and touch-sized mouse access too.
+  await page.keyboard.press("q");
+  await expect(menu).toBeVisible();
+  await page.keyboard.press("Escape");
+  await press(page, 1);
+  await press(page, 0);
+  await expect(menu).toBeHidden();
+  await expect.poll(async () => (await facts()).target).not.toBeNull();
+  expect((await facts()).z).toBe(0);
+  await press(page, 3); // Y still boards, B does not exit.
+  await expect.poll(async () => (await facts()).parent).not.toBeNull();
+  await press(page, 1);
+  await expect(menu).toBeVisible();
+  const stopped = await facts();
+  await page.evaluate(() => {
+    (window as unknown as { testPad: Gamepad }).testPad.axes[0] = 1;
+  });
+  await page.waitForTimeout(150);
+  expect((await facts()).x).toBeCloseTo(stopped.x, 1);
+  await page.evaluate(() => {
+    (window as unknown as { testPad: Gamepad }).testPad.axes[0] = 0;
+  });
+  await press(page, 1);
+  await expect(menu).toBeHidden();
+  expect((await facts()).parent).toBe(stopped.parent);
+  // Resize the actual HUD: both interaction buttons stay clear of the movement area.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await launcher.tap();
+  await expect(menu.getByRole("button", { name: "Release car", exact: true })).toBeVisible();
+  const actionsImage = testInfo.outputPath("phone-actions.png");
+  await page.screenshot({ path: actionsImage });
+  await testInfo.attach("phone-actions", { path: actionsImage, contentType: "image/png" });
+  await menu.getByRole("button", { name: "Release car", exact: true }).tap();
+  await expect.poll(async () => (await facts()).target).toBeNull();
+  await expect(launcher).toHaveText("Actions");
+  const hudImage = testInfo.outputPath("phone-hud.png");
+  await page.screenshot({ path: hudImage });
+  await testInfo.attach("phone-hud", { path: hudImage, contentType: "image/png" });
 });

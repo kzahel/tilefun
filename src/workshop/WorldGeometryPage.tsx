@@ -27,6 +27,7 @@ import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometry
 import { drawCurvedRailLayout } from "./CurvedTrainPreview.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 import TowingPage from "./TowingPage.js";
+import TransporterPage from "./TransporterPage.js";
 import TruckBedPage from "./TruckBedPage.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
@@ -34,6 +35,8 @@ export type GeometryCanvas = HTMLCanvasElement & {
 };
 
 export default function WorldGeometryPage() {
+  if (new URLSearchParams(location.search).get("geometry") === "transporter")
+    return <TransporterPage />;
   if (new URLSearchParams(location.search).get("geometry") === "towing") return <TowingPage />;
   if (new URLSearchParams(location.search).get("geometry") === "truck-bed") return <TruckBedPage />;
   return new URLSearchParams(location.search).get("geometry")?.startsWith("nature-") ? (

@@ -13,7 +13,9 @@ Several early plans contain original unchecked lists superseded by later work.
 | Plan | Recorded state / continuing owner |
 | --- | --- |
 | [174 Curling, quills and fox pounces](174-curling-quills-and-fox-pounces.md) | Implemented and automation verified: hedgehog, porcupine and fox; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
+| [173 Single-car transporter](173-single-car-transporter.md) | Implemented and validated locally; owner playtest pending; real ramp loading, secured cars, shared controls and saved identity; [vehicles](../topics/vehicles.md) |
 | [172 Browsing, courtship and collecting](172-browsing-courtship-and-collecting.md) | Implemented and automation verified: deer, peacock and raven; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
+| [171 Contextual controller actions](171-contextual-controller-actions.md) | Implemented and validated: B/Q/touch equipment menu and controller-first primary actions; [Steam Deck](../topics/steam-deck-and-menus.md) |
 | [170 Rumination, flocks and dust baths](170-rumination-flocks-and-dust-baths.md) | Implemented and automation verified; cow, sheep and donkey; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [169 Wheel-lift towing](169-wheel-lift-towing.md) | Implemented and validated; appearance awaits owner inspection: real coupled cars, retained lift rig, controls, saves and matching fallbacks; [vehicles](../topics/vehicles.md) |
 | [168 Grazing, browsing and building](168-grazing-browsing-and-building.md) | Implemented and automation verified; horse, giraffe and beaver; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |

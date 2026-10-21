@@ -68,6 +68,9 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.paintSchemeId !== undefined) result.paintSchemeId = e.paintSchemeId;
   if (e.vehicleBed) result.vehicleBed = true;
   if (e.vehicleBedTilt !== undefined) result.vehicleBedTilt = e.vehicleBedTilt;
+  if (e.vehicleRamp !== undefined) result.vehicleRamp = e.vehicleRamp;
+  if (e.transportLoadId !== undefined) result.transportLoadId = e.transportLoadId;
+  if (e.transportedBy !== undefined) result.transportedBy = e.transportedBy;
   if (e.towTargetId !== undefined) result.towTargetId = e.towTargetId;
   if (e.towedBy !== undefined) result.towedBy = e.towedBy;
   if (e.vehicleBedTarget !== undefined) result.vehicleBedTarget = e.vehicleBedTarget;
@@ -104,6 +107,9 @@ function entitySnapshotMatches(e: Entity, s: EntitySnapshot): boolean {
     e.paintSchemeId !== s.paintSchemeId ||
     e.vehicleBed !== s.vehicleBed ||
     e.vehicleBedTilt !== s.vehicleBedTilt ||
+    e.vehicleRamp !== s.vehicleRamp ||
+    e.transportLoadId !== s.transportLoadId ||
+    e.transportedBy !== s.transportedBy ||
     e.towTargetId !== s.towTargetId ||
     e.towedBy !== s.towedBy ||
     e.vehicleBedTarget !== s.vehicleBedTarget ||
@@ -232,6 +238,9 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.paintSchemeId !== undefined) result.paintSchemeId = s.paintSchemeId;
   if (s.vehicleBed) result.vehicleBed = true;
   if (s.vehicleBedTilt !== undefined) result.vehicleBedTilt = s.vehicleBedTilt;
+  if (s.vehicleRamp !== undefined) result.vehicleRamp = s.vehicleRamp;
+  if (s.transportLoadId !== undefined) result.transportLoadId = s.transportLoadId;
+  if (s.transportedBy !== undefined) result.transportedBy = s.transportedBy;
   if (s.towTargetId !== undefined) result.towTargetId = s.towTargetId;
   if (s.towedBy !== undefined) result.towedBy = s.towedBy;
   if (s.vehicleBedTarget !== undefined) result.vehicleBedTarget = s.vehicleBedTarget;

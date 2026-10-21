@@ -1,8 +1,10 @@
 # Vehicles: traffic, driving and roof riding
 
+[173](../tactical/173-single-car-transporter.md) adds the normal single-car transporter, rear loading ramp, axle-following support/pitch, secure/release and saved coupled cars. The shared Actions menu and real Worker playground use ordinary authority/prediction and GPU/cardinal fallback. [Operation and authoring](../vehicle-transporter.md) own the contract and limitations.
+
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-20.
+Updated: 2026-10-21.
 
 [169](../tactical/169-wheel-lift-towing.md) adds working wheel-lift towing to the
 existing tow truck. Back up to an unoccupied parked passenger car, Attach car,

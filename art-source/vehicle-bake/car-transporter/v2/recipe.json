@@ -1,0 +1,32 @@
+{
+  "model": "car-transporter",
+  "revision": "v2",
+  "method": "Retained orange flatbed cab and independent wheel rigs; extended/recentered platform and sliding ramp",
+  "deckGame": [
+    -76,
+    34,
+    -24,
+    24,
+    24.65
+  ],
+  "rampGame": [
+    -152,
+    -76,
+    -24,
+    24,
+    0,
+    24.65
+  ],
+  "artReviewStatus": "awaiting-owner-inspection",
+  "inputs": {
+    "art-source/vehicle-bake/flatbed-truck/v1/car.blend": "5adb1ece29d05b568e43c00e0a9fb862f1ba5141733ff6b06b0e64b4c5df9e82",
+    "art-source/vehicle-bake/flatbed-truck/v1/family.json": "ca13d209d7920a465314e6b2c8d53ee1bccfd783cd44fd8f0f801a3ab9bf0887",
+    "art-source/vehicle-bake/flatbed-truck/v1/atlas.png": "b7ff20cc00dc3946e2692fd43a529b8c3d1526db62a90e71c3c5d9dbfeb82d71",
+    "scripts/vehicle-bake/transporter/author-v2.py": "523d2833b832a778fa9d36b5db09988049724aae8816a8d2e6c61d1551736b55"
+  },
+  "outputs": {
+    "model.glb": "7f7c4571cd4e44a7fe9c9d805f65fa83982371aebbd36bf6a419841224ab1200",
+    "car.blend": "a6052a98f12296a08d8633bfb0e6988e05d3b50c3fee0b4828c7a437b1d85614",
+    "atlas.png": "b7ff20cc00dc3946e2692fd43a529b8c3d1526db62a90e71c3c5d9dbfeb82d71"
+  }
+}

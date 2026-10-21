@@ -9,6 +9,7 @@ import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 import { drawTowingFallback } from "./TowingFallback.js";
+import { drawTransporterFallback } from "./TransporterFallback.js";
 import { drawBedContentsFallback } from "./VehicleBedPresentation.js";
 
 /** Canvas-specific resource resolution stays on the drawing side of the boundary. */
@@ -193,6 +194,7 @@ function drawSprite(
   if (item.flashHidden) return;
   if (ctx.meshBody?.(camera, item)) return;
   if (drawCurveTrain(ctx, camera, item, sheets)) return;
+  if (drawTransporterFallback(ctx, camera, item, sheets, drawSprite)) return;
   if (drawTowingFallback(ctx, camera, item, sheets, drawEmergencyFlash)) {
     drawEmergencyFlash(ctx, camera, item);
     return;

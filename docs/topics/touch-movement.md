@@ -67,6 +67,13 @@ prediction/replay and authority submission. No physics, transport, generator or
 embedded lab simulation contract changes. The optional game context input owner
 keeps labs using their existing controls.
 
+## Contextual actions
+
+Vehicle equipment choices now open through **Actions / B / Q**, with controller
+focus and explicit confirmation, rather than separate bottom-left buttons.
+The primary Y/E interaction and Actions paddles sit above the right-side cluster;
+status stays clear of the movement area. See [the shared control contract](steam-deck-and-menus.md#contextual-gameplay-actions).
+
 ## Driving buttons
 
 [140](../tactical/140-shared-input-ux-and-reverse.md) replaces A/B/R circles with

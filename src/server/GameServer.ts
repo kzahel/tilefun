@@ -1531,6 +1531,7 @@ export class GameServer {
           );
         return;
       }
+      case "vehicle-transporter-action":
       case "vehicle-tow-action":
       case "vehicle-bed-action":
       case "enter-vehicle":
@@ -1539,7 +1540,9 @@ export class GameServer {
           const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
           if (!realm || session.transitioning || realm.saveManager?.pressured)
             throw Error("Vehicle control is unavailable right now.");
-          if (msg.type === "vehicle-tow-action") {
+          if (msg.type === "vehicle-transporter-action") {
+            realm.vehicles.transporter(session, msg.entityId, msg.action);
+          } else if (msg.type === "vehicle-tow-action") {
             if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
             realm.vehicles.tow(session, msg.entityId, msg.action);
           } else if (msg.type === "vehicle-bed-action") {

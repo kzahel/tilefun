@@ -3,6 +3,7 @@ import prediction from "../client/PlayerPredictor.ts?raw";
 import remotePresentation from "../client/RemotePresentation.ts?raw";
 import collisionIndex from "../entities/CollisionIndex.ts?raw";
 import spatialHash from "../entities/SpatialHash.ts?raw";
+import controllerBindings from "../input/ControllerBindings.ts?raw";
 import balls from "../physics/BallPhysics.ts?raw";
 import collision from "../physics/SimulationEnvironment.ts?raw";
 import surfaces from "../physics/surfaceHeight.ts?raw";
@@ -37,6 +38,7 @@ import equipment from "../traffic/VehicleBedEquipment.ts?raw";
 import slide from "../traffic/VehicleBedSlide.ts?raw";
 import cargo from "../traffic/VehicleCargo.ts?raw";
 import pushes from "../traffic/VehiclePush.ts?raw";
+import contextActions from "../ui/ContextActions.ts?raw";
 import vehicleControls from "../ui/VehicleControl.ts?raw";
 import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
 import page from "./TruckBedPage.tsx?raw";
@@ -54,6 +56,8 @@ export async function buildTruckBedCandidate(): Promise<WorkshopCandidate> {
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
+          contextActions,
+          controllerBindings,
           solids,
           spatialHash,
           collisionIndex,

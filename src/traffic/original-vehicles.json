@@ -4059,6 +4059,129 @@
           }
         }
       ]
+    },
+    {
+      "id": "car-transporter",
+      "name": "Car transporter",
+      "sprite": "assets/vehicles/car-transporter-v2.png",
+      "mesh": {
+        "assetId": "car-transporter-authored-v2",
+        "path": "assets/models/vehicles/car-transporter-v2.glb",
+        "radius": 192,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 72,
+        "acceleration": 96,
+        "pushSpeed": 48,
+        "pushWeight": 650
+      },
+      "views": [
+        {
+          "id": "original-vehicle:car-transporter:south",
+          "vehicleId": "car-transporter",
+          "direction": "south",
+          "rect": [0, 0, 192, 224],
+          "metadata": {
+            "name": "Car transporter · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "car transporter"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [96, 222.0],
+            "footprint": [-26.5, -156, 53, 156],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 53,
+                "height": 156,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -78.0
+          }
+        },
+        {
+          "id": "original-vehicle:car-transporter:north",
+          "vehicleId": "car-transporter",
+          "direction": "north",
+          "rect": [0, 224, 192, 224],
+          "metadata": {
+            "name": "Car transporter · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "car transporter"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [96, 222.0],
+            "footprint": [-26.5, -156, 53, 156],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 53,
+                "height": 156,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -78.0
+          }
+        },
+        {
+          "id": "original-vehicle:car-transporter:west",
+          "vehicleId": "car-transporter",
+          "direction": "west",
+          "rect": [0, 448, 192, 224],
+          "metadata": {
+            "name": "Car transporter · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "car transporter"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [96, 170.5],
+            "footprint": [-78.0, -53, 156, 53],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 156,
+                "height": 53,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -26.5
+          }
+        },
+        {
+          "id": "original-vehicle:car-transporter:east",
+          "vehicleId": "car-transporter",
+          "direction": "east",
+          "rect": [0, 672, 192, 224],
+          "metadata": {
+            "name": "Car transporter · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "car transporter"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [96, 170.5],
+            "footprint": [-78.0, -53, 156, 53],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 156,
+                "height": 53,
+                "zHeight": 42
+              }
+            ],
+            "depthOffset": -26.5
+          }
+        }
+      ]
     }
   ]
 }

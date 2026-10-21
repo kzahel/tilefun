@@ -505,12 +505,13 @@
     },
     {
       "id": "car-transporter",
-      "name": "Car transporter carrying miniature existing cars",
+      "name": "Single-car transporter",
       "family": "Vehicle carrier",
       "priority": 50,
-      "status": "idea",
-      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
-      "next": "Choose an authoring batch; plan miniature cargo reuse, total mesh budget and road clearance."
+      "status": "integrated",
+      "authorization": "2026-10-21 owner explicitly authorized the single-car flatbed transporter after investigation of existing ramps.",
+      "next": "Available locally in Edit > Vehicles and eligible traffic; deploy ramp, drive a real car aboard, secure and carry it. Owner appearance/loading playtest pending; see tactical 173.",
+      "candidate": "geometry:car-transporter-v2"
     },
     {
       "id": "ice-resurfacer",
