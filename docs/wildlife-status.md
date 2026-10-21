@@ -4,7 +4,7 @@
 
 ## Distinct animal behaviors
 
-17/206 entries game/lab verified; 0 in progress. Inherited coat entries count as coverage, not additional distinct mechanics. Human behavior/art review remains separate.
+20/206 entries game/lab verified; 0 in progress. Inherited coat entries count as coverage, not additional distinct mechanics. Human behavior/art review remains separate.
 
 [Current behavior ledger and progress](wildlife-behavior-status.md) · [Planning and completion rules](topics/wildlife-behaviors.md)
 
@@ -101,7 +101,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-20T19:47:32.716Z (20/10/2026, 21:47:32 Berlin).
+Snapshot: 2026-10-21T05:47:00.753Z (21/10/2026, 07:47:00 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

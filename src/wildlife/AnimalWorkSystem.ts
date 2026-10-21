@@ -12,6 +12,7 @@ import { GardenWork, isGardenWorker } from "./GardenWork.js";
 import { isMeadowWorker, MeadowWork } from "./MeadowWork.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 import { isPastureWorker, PastureWork } from "./PastureWork.js";
+import { isRangeWorker, RangeWork } from "./RangeWork.js";
 import { isWoodlandWorker, WoodlandWork } from "./WoodlandWork.js";
 
 const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
@@ -40,11 +41,13 @@ const carrying = (e: Entity) => !!e.animalWork?.heldId;
 
 /** Shared production authority; all durable state lives on ordinary saved actors. */
 export class AnimalWorkSystem {
+  private readonly range: RangeWork;
   private readonly garden: GardenWork;
   private readonly meadow: MeadowWork;
   private readonly woodland: WoodlandWork;
   private readonly pasture: PastureWork;
   constructor(private readonly manager: EntityManager) {
+    this.range = new RangeWork(manager, this);
     this.garden = new GardenWork(manager, this);
     this.meadow = new MeadowWork(manager);
     this.woodland = new WoodlandWork(manager, this);
@@ -95,11 +98,17 @@ export class AnimalWorkSystem {
     const target = this.find(task.targetId);
     if (target?.workItem && target.workItem.claimedBy === animal.persistentId)
       delete target.workItem.claimedBy;
+    const site = this.find(task.siteId);
+    if (site?.workItem && site.workItem.claimedBy === animal.persistentId)
+      delete site.workItem.claimedBy;
     delete task.targetId;
     task.cooldown = cooldown;
     this.enter(task, "idle");
     // A current scare retains its existing physical escape instead of being reset.
-    if (animal.fauna && !animal.fauna.alarmFrom) settleFauna(animal);
+    if (animal.fauna && !animal.fauna.alarmFrom) {
+      if (animal.wanderAI?.state === "ridden") restoreFaunaPose(animal);
+      else settleFauna(animal);
+    }
   }
   private site(
     animal: Entity,
@@ -212,7 +221,7 @@ export class AnimalWorkSystem {
       )
         return false;
       const food = item.workItem.growth.food;
-      if (food !== "fruit" && food !== "nut") return false;
+      if (food !== "fruit" && food !== "nut" && food !== "twig") return false;
       const loose = createForageItem(food, item.position.wx, item.position.wy);
       loose.wz = item.wz ?? 0;
       this.manager.spawn(loose);
@@ -252,6 +261,7 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
+    if (isRangeWorker(animal)) return this.range.update(animal, dt, context, planning);
     if (isGardenWorker(animal)) return this.garden.update(animal, dt, context, planning);
     if (isPastureWorker(animal)) return this.pasture.update(animal, dt, context, planning);
     if (isWoodlandWorker(animal)) return this.woodland.update(animal, dt, context, planning);
@@ -516,6 +526,15 @@ export class AnimalWorkSystem {
       p = faunaProfile(animal.type);
     if (!task || !animal.sprite || (animal.fauna ?? animal.rabbit ?? animal.robin)?.alarmFrom)
       return;
+    // Mounted/attached actors can skip their brain update; cancel before posing them.
+    if (
+      animal.parentId !== undefined ||
+      animal.wanderAI?.following ||
+      animal.wanderAI?.state === "ridden"
+    ) {
+      if (task.state !== "idle" || task.heldId || task.targetId) this.cancel(animal, 3);
+      return;
+    }
     restoreAnimalWorkPose(animal);
     if (!p) return;
     const item = this.find(task.heldId);

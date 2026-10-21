@@ -8,6 +8,46 @@ const nature = {
   terrain: () => TerrainId.Grass,
   inThicket: () => false,
 } as unknown as NaturalLandscape;
+it.each(["horse", "giraffe", "beaver"] as const)(
+  "%s range supplies share stable owners within both sides of chunk seams",
+  (species) => {
+    for (const [cx, cy] of [
+      [0, 0],
+      [-2, -1],
+      [2, 3],
+    ])
+      for (const [dx, dy] of [
+        [1, 1],
+        [254, 1],
+        [1, 254],
+        [254, 254],
+      ]) {
+        const actor = {
+          type: faunaType(species),
+          featureId: `wildlife:${species}:edge`,
+          wx: (cx ?? 0) * 256 + (dx ?? 0),
+          wy: (cy ?? 0) * 256 + (dy ?? 0),
+          route: [],
+        };
+        const items = foragePlacements(
+          [actor, { ...actor, featureId: `${actor.featureId}:peer` }],
+          nature,
+          cx ?? 0,
+          cy ?? 0,
+        );
+        expect(items).toHaveLength(species === "horse" ? 2 : species === "giraffe" ? 1 : 3);
+        expect(new Set(items.map((e) => e.featureId)).size).toBe(items.length);
+        for (const item of items) {
+          expect(Math.floor(item.wx / 256)).toBe(cx);
+          expect(Math.floor(item.wy / 256)).toBe(cy);
+        }
+        if (species === "giraffe")
+          expect(
+            Math.hypot((items[0]?.wx ?? 0) - actor.wx, (items[0]?.wy ?? 0) - actor.wy),
+          ).toBeGreaterThanOrEqual(64);
+      }
+  },
+);
 it.each(["capuchin-monkey", "red-squirrel"] as const)(
   "%s crops are born in their requested cell and within binding reach of their real tree",
   (species) => {

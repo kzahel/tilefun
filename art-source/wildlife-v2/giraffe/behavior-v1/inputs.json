@@ -1,0 +1,19 @@
+{
+  "blend": "art-source/wildlife-v2/giraffe/motion-v2/giraffe.blend",
+  "metadata": "public/demos/wildlife-v2/giraffe/motion-v2/sprite.json",
+  "sheet": "public/demos/wildlife-v2/giraffe/motion-v2/sheet.png",
+  "masters": "art-source/wildlife-v2/giraffe/draft-v1/masters.json",
+  "canvas": 144,
+  "anchor": [
+    72,
+    120
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/giraffe/motion-v2/giraffe.blend": "93477bf756c3b6555bb72fcc71945230b342dcf94712eb678da76f038425a0ab",
+    "public/demos/wildlife-v2/giraffe/motion-v2/sprite.json": "2f3cceec1ad429f1e7d4aa08ce30579816e51e321484787a3a41a69e1ff863b5",
+    "public/demos/wildlife-v2/giraffe/motion-v2/sheet.png": "c13a30249649add57b76ab875a57ee25bf2a9f751774ab67773ed6a8da836341",
+    "art-source/wildlife-v2/giraffe/draft-v1/masters.json": "c6e247c65d484a48634e5e2f5ae80cb6077493599eb40486674d80277ffc7e25",
+    "art-source/wildlife-v2/giraffe/motion-v2/finish.py": "ac023fac9a72940709d2d01b9da63fef7f6c4c97c5d4b70289ebfc66514cdb5e"
+  },
+  "paintHelper": "art-source/wildlife-v2/giraffe/motion-v2/finish.py"
+}

@@ -81,23 +81,30 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
   ...SOURCE_KINDS.map((kind) => ({
     type: sourceType(kind),
     label:
-      kind === "fruit-tree"
-        ? "Tree fruit crop (place beside a tree)"
-        : kind === "nut-tree"
-          ? "Tree nut supply (place beside a tree)"
-          : kind === "seed-plant"
-            ? "Seed-bearing plant"
-            : kind === "browse-shrub"
-              ? "Leafy browsing shrub"
-              : kind === "scratch-patch"
-                ? "Chicken scratching patch"
-                : kind === "nectar-flower"
-                  ? "Nectar flower"
-                  : kind === "root-patch"
-                    ? "Rooting patch"
-                    : "Growing edible plant",
+      kind === "spring-pool"
+        ? "Drinking spring pool"
+        : kind === "branch-pile"
+          ? "Fallen branch pile"
+          : kind === "canopy-leaves"
+            ? "Canopy leaves (place beside a tree)"
+            : kind === "fruit-tree"
+              ? "Tree fruit crop (place beside a tree)"
+              : kind === "nut-tree"
+                ? "Tree nut supply (place beside a tree)"
+                : kind === "seed-plant"
+                  ? "Seed-bearing plant"
+                  : kind === "browse-shrub"
+                    ? "Leafy browsing shrub"
+                    : kind === "scratch-patch"
+                      ? "Chicken scratching patch"
+                      : kind === "nectar-flower"
+                        ? "Nectar flower"
+                        : kind === "root-patch"
+                          ? "Rooting patch"
+                          : "Growing edible plant",
     color: "#54834b",
   })),
+  { type: forageType("lodge"), label: "Beaver brush shelter foundation", color: "#a77b4c" },
   ...(["twig", "nut", "fruit", "greens", "seed", "root"] as const).map((kind) => ({
     type: forageType(kind),
     label:

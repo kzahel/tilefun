@@ -11,6 +11,9 @@ export const SOURCE_KINDS = [
   "root-patch",
   "scratch-patch",
   "nectar-flower",
+  "spring-pool",
+  "branch-pile",
+  "canopy-leaves",
 ] as const;
 export type SourceKind = (typeof SOURCE_KINDS)[number];
 export const sourceType = (kind: SourceKind) => `wildlife-resource-${kind}-v1`;
@@ -23,6 +26,9 @@ export const SOURCE_FOOD = {
   "root-patch": "root",
   "scratch-patch": "seed",
   "nectar-flower": "nectar",
+  "spring-pool": "water",
+  "branch-pile": "twig",
+  "canopy-leaves": "greens",
 } as const;
 const sourceStart: Record<SourceKind, number> = {
   "growing-plant": 14,
@@ -33,6 +39,9 @@ const sourceStart: Record<SourceKind, number> = {
   "root-patch": 34,
   "scratch-patch": 39,
   "nectar-flower": 43,
+  "spring-pool": 52,
+  "branch-pile": 56,
+  "canopy-leaves": 60,
 };
 export function createFoodSource(kind: SourceKind, wx: number, wy: number): Entity {
   const food = SOURCE_FOOD[kind],
@@ -45,8 +54,22 @@ export function createFoodSource(kind: SourceKind, wx: number, wy: number): Enti
     e.workItem.growth = {
       food,
       capacity: 3,
-      interval: food === "fruit" ? 240 : food === "nut" || food === "root" ? 300 : 180,
-      remaining: food === "fruit" ? 240 : food === "nut" || food === "root" ? 300 : 180,
+      interval:
+        food === "twig"
+          ? 360
+          : food === "fruit"
+            ? 240
+            : food === "nut" || food === "root"
+              ? 300
+              : 180,
+      remaining:
+        food === "twig"
+          ? 360
+          : food === "fruit"
+            ? 240
+            : food === "nut" || food === "root"
+              ? 300
+              : 180,
     };
   }
   restoreWorkItemPose(e);
@@ -54,7 +77,7 @@ export function createFoodSource(kind: SourceKind, wx: number, wy: number): Enti
 }
 
 export const FORAGE_SHEET = "wildlife-forage-resources-v1";
-export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v5/sheet.png";
+export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v6/sheet.png";
 export const FORAGE_KINDS = [
   "twig",
   "fruit",
@@ -65,6 +88,8 @@ export const FORAGE_KINDS = [
   "seed",
   "root",
   "nectar",
+  "water",
+  "lodge",
 ] as const;
 export type ForageKind = (typeof FORAGE_KINDS)[number];
 export const forageType = (kind: ForageKind) => `wildlife-resource-${kind}-v1`;
@@ -78,6 +103,8 @@ const cells = {
   seed: [13],
   root: [38],
   nectar: [51],
+  water: [52],
+  lodge: [64, 65, 66, 67, 68],
 };
 export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
   FORAGE_KINDS.map((kind) => [
@@ -131,7 +158,7 @@ export function restoreWorkItemPose(e: Entity): void {
     ? Math.max(0, Math.min(3, item.units))
     : item.kind === "greens"
       ? Math.max(0, Math.min(2, 3 - item.units))
-      : item.kind === "nest"
+      : item.kind === "nest" || item.kind === "lodge"
         ? Math.min(4, item.units)
         : item.kind === "cache" && item.contents.length
           ? 1

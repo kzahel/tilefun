@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [168 Grazing, browsing and building](168-grazing-browsing-and-building.md) | Implemented and automation verified; horse, giraffe and beaver; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [167 Tipping dump bed](167-tipping-dump-bed.md) | Implemented and validated; appearance awaits owner inspection: articulated retained truck revision, shared inclined contacts and actual discharge; [vehicles](../topics/vehicles.md) |
 | [166 Scratching and pollination](166-scratching-and-pollination.md) | Implemented, automation verified; exact review pending: chicken, bee and hummingbird; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [165 Truck bed gameplay](165-truck-bed-gameplay.md) | Normal dump-bed activation, safe game controls, independent riders and persistent loose toys/food; [vehicles](../topics/vehicles.md) |

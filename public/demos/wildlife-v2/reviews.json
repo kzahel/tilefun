@@ -22727,5 +22727,329 @@
         "sha256": "86511b53161aa722246f177f1985d0bbb373523bdd73f20d4650c1d04adfd570"
       }
     ]
+  },
+  {
+    "id": "horse-behavior-v1",
+    "animalId": "horse",
+    "revision": "behavior-v1",
+    "name": "Horse grazing and drinking",
+    "batchId": "wildlife-v2-behaviors-168",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/horse/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-horse-behavior-v1",
+      "name": "Horse grazing and drinking sheet",
+      "image": "demos/wildlife-v2/horse/behavior-v1/sheet.png",
+      "width": 6800,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "1db306ded3bf8aa8075e2c5f85d740a56a7309073fe4f9a4192da66027520c68",
+      "source": "art-source/wildlife-v2/horse/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-horse-behavior-v1-scene",
+      "name": "Horse grazing and drinking scene",
+      "image": "demos/wildlife-v2/horse/behavior-v1/scene-native.png",
+      "width": 512,
+      "height": 120,
+      "tileSize": 16,
+      "fingerprint": "680e9392786e0689a1ecf2305c46f1f75346eca7f080b6ea113132af00e2f998",
+      "source": "art-source/wildlife-v2/horse/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-horse-behavior-v1-contact",
+      "name": "Horse grazing and drinking contact",
+      "image": "demos/wildlife-v2/horse/behavior-v1/contact-sheet-native.png",
+      "width": 3520,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "4066a2ed21f28b5e2a044740ac4dd7bddbc45b25496a7c661099a6402cab3c8c",
+      "source": "art-source/wildlife-v2/horse/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/horse/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/contact-sheet-native.png",
+        "sha256": "4066a2ed21f28b5e2a044740ac4dd7bddbc45b25496a7c661099a6402cab3c8c"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/index.html",
+        "sha256": "28972ffc8f21705c8794d097c1a7d900cf70f4de16577e21fcc3326e1f8b31ff"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/pixel-audit.json",
+        "sha256": "423a0893547072c9ad752d70d45a968d750ee52e0dc80a0db1a0afe535a002de"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/preview-native.gif",
+        "sha256": "098d5e72db623404b34e558fca86285b9416c32cfd6af75ad5ea0cf8b1868e07"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/preview.gif",
+        "sha256": "7d1a090c0967e993ab1db71c7570a3164457f0bf40cf487ca6a33f24a73021f8"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/scene-native.png",
+        "sha256": "680e9392786e0689a1ecf2305c46f1f75346eca7f080b6ea113132af00e2f998"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/sheet.png",
+        "sha256": "1db306ded3bf8aa8075e2c5f85d740a56a7309073fe4f9a4192da66027520c68"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/source-audit.json",
+        "sha256": "7775a122309e644a8a61062ad9ad4304787ba2e49d925e6fc0c86fa92b722331"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/sprite.json",
+        "sha256": "0b8eca817339489c9c2c1191d4150b8e8c6e352171c13a10dea7b2fa9dd54358"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/behavior-v1/validation.json",
+        "sha256": "bae618e70fc30590e0f63b0cfe3ab40ea5eec2136c9f30472b6aeabc77d115b5"
+      }
+    ]
+  },
+  {
+    "id": "giraffe-behavior-v1",
+    "animalId": "giraffe",
+    "revision": "behavior-v1",
+    "name": "Giraffe tree-canopy browsing",
+    "batchId": "wildlife-v2-behaviors-168",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/giraffe/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-giraffe-behavior-v1",
+      "name": "Giraffe tree-canopy browsing sheet",
+      "image": "demos/wildlife-v2/giraffe/behavior-v1/sheet.png",
+      "width": 11664,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "949a518d2a8a7c0d1e1948b7a68108a72ae6bb62ffe285547101ccab210c2bf3",
+      "source": "art-source/wildlife-v2/giraffe/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-giraffe-behavior-v1-scene",
+      "name": "Giraffe tree-canopy browsing scene",
+      "image": "demos/wildlife-v2/giraffe/behavior-v1/scene-native.png",
+      "width": 768,
+      "height": 184,
+      "tileSize": 16,
+      "fingerprint": "5a035b0e6d20b96bf4c1c356f36dc8c17a83a43b182236fd826136c75d9a0445",
+      "source": "art-source/wildlife-v2/giraffe/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-giraffe-behavior-v1-contact",
+      "name": "Giraffe tree-canopy browsing contact",
+      "image": "demos/wildlife-v2/giraffe/behavior-v1/contact-sheet-native.png",
+      "width": 5760,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "54939786a7e9799ba58a6e6e30618031ceda2d605971126d94f72f3a3fcdca79",
+      "source": "art-source/wildlife-v2/giraffe/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/giraffe/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/contact-sheet-native.png",
+        "sha256": "54939786a7e9799ba58a6e6e30618031ceda2d605971126d94f72f3a3fcdca79"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/index.html",
+        "sha256": "0d2c2b7fcb39f7022fcf32a6cddd6e1eb93632a84b651c31459579d635411f44"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/pixel-audit.json",
+        "sha256": "6527d788f111616f0c68f51494999e44daac064de703235c78448ddb26cc49c5"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/preview-native.gif",
+        "sha256": "003f60ff76e6751a870c4582d8835ac715df22b3e36465672afe63093385646d"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/preview.gif",
+        "sha256": "ba3436e98dcf94f2226090b2a2aef2340401065b263ef6c559346a2fb955e8d1"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/scene-native.png",
+        "sha256": "5a035b0e6d20b96bf4c1c356f36dc8c17a83a43b182236fd826136c75d9a0445"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/sheet.png",
+        "sha256": "949a518d2a8a7c0d1e1948b7a68108a72ae6bb62ffe285547101ccab210c2bf3"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/source-audit.json",
+        "sha256": "aec53d06e9dd52b732cf655532f42210a29d58f11c1e3af357e66733d85f7f48"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/sprite.json",
+        "sha256": "3425ac773955f0561f40978a02de3a4f00c009cdd8c110323dc3045aef4ab672"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/behavior-v1/validation.json",
+        "sha256": "4d25bae2325db74f1475c8c9d9562d7b4aed94262c41b227c3aa4b1aa9858925"
+      }
+    ]
+  },
+  {
+    "id": "beaver-behavior-v1",
+    "animalId": "beaver",
+    "revision": "behavior-v1",
+    "name": "Beaver branch hauling and brush shelter building",
+    "batchId": "wildlife-v2-behaviors-168",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/beaver/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-beaver-behavior-v1",
+      "name": "Beaver branch hauling and brush shelter building sheet",
+      "image": "demos/wildlife-v2/beaver/behavior-v1/sheet.png",
+      "width": 5056,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "0a407a47f578cfc83219fc436c67bd37b657cad794355a030ab867e5f734c1bb",
+      "source": "art-source/wildlife-v2/beaver/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-beaver-behavior-v1-scene",
+      "name": "Beaver branch hauling and brush shelter building scene",
+      "image": "demos/wildlife-v2/beaver/behavior-v1/scene-native.png",
+      "width": 448,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "4c4808cb6940b8a455d49cc90df21635c16e7dd2292718b203ab1a47a76d2a76",
+      "source": "art-source/wildlife-v2/beaver/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-beaver-behavior-v1-contact",
+      "name": "Beaver branch hauling and brush shelter building contact",
+      "image": "demos/wildlife-v2/beaver/behavior-v1/contact-sheet-native.png",
+      "width": 2432,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "6b2184a74d9650b3e59966607e45e3352beba43635fcd2e5cd5ab8dcc96f0ec3",
+      "source": "art-source/wildlife-v2/beaver/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/beaver/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/contact-sheet-native.png",
+        "sha256": "6b2184a74d9650b3e59966607e45e3352beba43635fcd2e5cd5ab8dcc96f0ec3"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/index.html",
+        "sha256": "c018223060733f8c10fdf8bcb33bef58d3a15f9c0177686ce0aacebc0cad8a32"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/pixel-audit.json",
+        "sha256": "81dbd4a972db15357ada45093dd5a1f9fb82ca12643add1a9c81472d858ecd56"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/preview-native.gif",
+        "sha256": "cdc6e76034a5998ecab98fdecc3e4fd960970366e6830d6689f508aa8d8fb6bb"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/preview.gif",
+        "sha256": "e6adecb9e5d952848c33775b2fb83335455b1ea6b075b08dc00b4ff824b23116"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/scene-native.png",
+        "sha256": "4c4808cb6940b8a455d49cc90df21635c16e7dd2292718b203ab1a47a76d2a76"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/sheet.png",
+        "sha256": "0a407a47f578cfc83219fc436c67bd37b657cad794355a030ab867e5f734c1bb"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/source-audit.json",
+        "sha256": "e4f090e4a24161e913a864fe10f23acdc98d67cac2fb2990ecd42968ffd7a731"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/sprite.json",
+        "sha256": "18acaef3e3215738846dd72b7dda478d568450f1167409b310ebcbb65603c9b5"
+      },
+      {
+        "path": "demos/wildlife-v2/beaver/behavior-v1/validation.json",
+        "sha256": "d8476b91f550f0fa1c93436e577a3f89b66c389882580e34de7ba0773df610e9"
+      }
+    ]
+  },
+  {
+    "id": "foraging-resources-behavior-v6",
+    "animalId": "foraging-resources",
+    "revision": "behavior-v6",
+    "name": "Finite grazing and building supplies",
+    "batchId": "wildlife-v2-behaviors-168",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/foraging-resources/behavior-v6/",
+    "sheet": {
+      "id": "wildlife-v2-foraging-resources-behavior-v6",
+      "name": "Finite grazing and building supplies sheet",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v6/sheet.png",
+      "width": 2208,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "480406229a79ae0bda1e6c750c0b95eb9514c5e40032f65c278fd5a0916740bd",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v6"
+    },
+    "scene": {
+      "id": "wildlife-v2-foraging-resources-behavior-v6-scene",
+      "name": "Finite grazing and building supplies scene",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v6/scene-native.png",
+      "width": 544,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "83bc95bcba060b634a3e9b9cb35a786f643b0b243664f24aa699b70bec31794e",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v6"
+    },
+    "contact": {
+      "id": "wildlife-v2-foraging-resources-behavior-v6-contact",
+      "name": "Finite grazing and building supplies contact",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v6/contact-sheet-native.png",
+      "width": 544,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "eb874d8ac9bb3fce021b3226356d19deabaccce08e1915164759c8ee733e649e",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v6"
+    },
+    "preview": "demos/wildlife-v2/foraging-resources/behavior-v6/preview.png",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v6/contact-sheet-native.png",
+        "sha256": "eb874d8ac9bb3fce021b3226356d19deabaccce08e1915164759c8ee733e649e"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v6/index.html",
+        "sha256": "521befaedf2f099516c345792e67c449630507b7d91b08272a9b3bad3cec87c6"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v6/pixel-audit.json",
+        "sha256": "565374744c0c2cc7ec602c1cd739be9f906fef03a7fd0e820fbe271732118c95"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v6/preview.png",
+        "sha256": "83bc95bcba060b634a3e9b9cb35a786f643b0b243664f24aa699b70bec31794e"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v6/scene-native.png",
+        "sha256": "83bc95bcba060b634a3e9b9cb35a786f643b0b243664f24aa699b70bec31794e"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v6/sheet.png",
+        "sha256": "480406229a79ae0bda1e6c750c0b95eb9514c5e40032f65c278fd5a0916740bd"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v6/sprite.json",
+        "sha256": "4f51c5b8df839e7f5d16081a36b76279a2d0eca0d67fc1f4b0a69c9d0c365c96"
+      }
+    ]
   }
 ]

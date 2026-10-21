@@ -100,10 +100,10 @@ test("animal browser exposes all behavior demonstrations", async ({ page }) => {
   await page.goto("/tilefun/workshop.html?geometry=nature-behavior-rabbit#/tool/world-geometry");
   await page.getByLabel("Behavior progress").selectOption("demonstrations");
   await expect(page.getByRole("button", { name: "Demonstrate behavior", exact: true })).toHaveCount(
-    17,
+    20,
   );
   await page.getByLabel("Behavior progress").selectOption("verified");
   await expect(page.getByRole("button", { name: "Demonstrate behavior", exact: true })).toHaveCount(
-    17,
+    20,
   );
 });

@@ -1,0 +1,34 @@
+{
+  "identity": "horse-behavior-v1",
+  "poses": 176,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "lower": 10,
+      "graze": 3,
+      "drink": 3,
+      "raise": 10
+    },
+    "up": {
+      "lower": 9,
+      "graze": 12,
+      "drink": 12,
+      "raise": 9
+    },
+    "left": {
+      "lower": 10,
+      "graze": 12,
+      "drink": 12,
+      "raise": 10
+    },
+    "right": {
+      "lower": 10,
+      "graze": 12,
+      "drink": 12,
+      "raise": 10
+    }
+  },
+  "connectedHeadBodyChecks": 176
+}

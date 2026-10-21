@@ -7,6 +7,7 @@ import {
   raccoonForagers,
 } from "../../wildlife/ForagePlacements.js";
 import { pastureHabitatProps } from "../../wildlife/PastureHabitat.js";
+import { rangeHabitatProps } from "../../wildlife/RangeHabitat.js";
 import type { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
 import { insideDenseBounds } from "./DenseDistrictPlanner.js";
@@ -95,11 +96,16 @@ export class NaturalStrategy extends RailwayStrategy {
       ...pets,
       ...this.spectators(cx, cy),
       ...wildlife,
-      ...foragePlacements(wildlife, this.nature, cx, cy),
       ...foragePlacements(
-        residents.filter(
-          (a) => a.type.startsWith("wildlife-goat-") || a.type.startsWith("wildlife-piglet-"),
-        ),
+        [
+          ...wildlife,
+          ...residents.filter(
+            (a) =>
+              a.type.startsWith("wildlife-goat-") ||
+              a.type.startsWith("wildlife-piglet-") ||
+              a.type.startsWith("wildlife-horse-"),
+          ),
+        ],
         this.nature,
         cx,
         cy,
@@ -121,6 +127,7 @@ export class NaturalStrategy extends RailwayStrategy {
       ...this.nature.placements(cx, cy),
       ...crowNestTrees(this.nature, cx, cy),
       ...pastureHabitatProps(this.nature, cx, cy),
+      ...rangeHabitatProps(this.nature, cx, cy),
       ...this.racetracks
         .query({
           minX: bounds.minX - 4,

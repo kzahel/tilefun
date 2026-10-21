@@ -1,0 +1,30 @@
+{
+  "identity": "giraffe-behavior-v1",
+  "poses": 160,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "reach": 12,
+      "browse": 5,
+      "lower": 12
+    },
+    "up": {
+      "reach": 12,
+      "browse": 5,
+      "lower": 12
+    },
+    "left": {
+      "reach": 12,
+      "browse": 5,
+      "lower": 12
+    },
+    "right": {
+      "reach": 12,
+      "browse": 5,
+      "lower": 12
+    }
+  },
+  "connectedHeadBodyChecks": 160
+}

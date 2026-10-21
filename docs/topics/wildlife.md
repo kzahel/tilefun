@@ -4,7 +4,7 @@ Topic: wildlife
 Status: all 196 roster animals implemented and available in the animated lab.
 New exact art remains pending human review; specialist behavior limits are
 recorded in the individual checkpoints.
-Updated: 2026-10-20.
+Updated: 2026-10-21.
 
 Owner requested planning for distinct behavior and suitable animation for every
 animal on 2026-10-20, starting with land and air animals. The
@@ -16,7 +16,7 @@ entries, including all 196 roster entries. [Batch 155](../tactical/155-fetch-nes
 adds dog ball fetching, crow twig collection/nesting and squirrel food caches,
 with real carried objects, saved resource counts and new action clips. Animal
 Browser exposes progress filters and demonstrations from this ledger. The other
-189 animals still need detailed audits; new behavior/art review remains pending.
+186 animals still need detailed audits; new behavior/art review remains pending.
 
 [Batch 159](../tactical/159-foraging-and-lookouts.md) adds finite rabbit plant
 feeding, robin ground-food/perch trips and rotating meerkat lookouts with group
@@ -26,7 +26,7 @@ bird within the existing inspection cap. Editor food supports existing
 worlds and placed animals. Shared lifetime and local predator-sensing corrections
 keep consumed resources removed and actual nearby prey discoverable. The
 [behavior ledger](../../art-source/wildlife-v2/behavior-campaign.json) owns progress
-and pending human review for all fifteen implemented signature mechanics.
+and pending human review for all eighteen implemented signature mechanics.
 
 [Batch 161](../tactical/161-climbing-raids-and-play.md) adds supported capuchin
 fruit climbing, conserved raccoon cache raids and cat physical toy play/tree rests.
@@ -50,6 +50,13 @@ hovering/territorial warnings. Seventeen entries have targeted automation
 verification, with fifteen distinct signatures and two inherited cat coats.
 Finite saved soil/nectar resources, bounded crop-timer advancement and cell-owned
 natural supplies use shared Realm/Worker authority. Exact new art remains pending.
+
+[Batch 168](../tactical/168-grazing-browsing-and-building.md) adds horse
+grazing/drinking, giraffe actual canopy browsing and beaver conserved branch
+construction on land. Twenty entries now have targeted verification, with eighteen
+signatures and two inherited cat coats. New action banks preserve
+all native travel pixels and retain exact pending review identities. The behavior
+topic owns source renewal, support, building and controlled-actor protections.
 
 [Explorer boats and large lakes](boats.md) add four natural fish schools, four
 other water species and one aquatic hunter per new large lake. Existing water

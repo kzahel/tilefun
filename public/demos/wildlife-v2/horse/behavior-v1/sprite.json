@@ -1,0 +1,55 @@
+{
+  "identity": "horse-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 80,
+  "frameHeight": 80,
+  "anchor": [
+    40,
+    61
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "lower",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 50
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 50
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 50
+    },
+    "lower": {
+      "start": 41,
+      "count": 10,
+      "frameDuration": 75,
+      "loop": false
+    },
+    "graze": {
+      "start": 51,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": true
+    },
+    "drink": {
+      "start": 63,
+      "count": 12,
+      "frameDuration": 125,
+      "loop": true
+    },
+    "raise": {
+      "start": 75,
+      "count": 10,
+      "frameDuration": 75,
+      "loop": false
+    }
+  },
+  "sheetSha256": "1db306ded3bf8aa8075e2c5f85d740a56a7309073fe4f9a4192da66027520c68"
+}

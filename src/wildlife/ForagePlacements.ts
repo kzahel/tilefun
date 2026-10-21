@@ -6,6 +6,7 @@ import { forageType, sourceType } from "./ForageResources.js";
 import { gardenSupplies } from "./GardenHabitat.js";
 import { pastureSite } from "./PastureHabitat.js";
 import { RABBIT_TYPE } from "./Rabbit.js";
+import { rangeSupplies } from "./RangeHabitat.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
 /** Natural crow homes are clearings: give each crow an ordinary supported tree. */
@@ -52,7 +53,10 @@ export function foragePlacements(
   cx: number,
   cy: number,
 ): ActorPlacement[] {
-  const result: ActorPlacement[] = gardenSupplies(actors, nature, cx, cy);
+  const result: ActorPlacement[] = [
+    ...gardenSupplies(actors, nature, cx, cy),
+    ...rangeSupplies(actors, nature, cx, cy),
+  ];
   let robinFood = false;
   for (const actor of actors) {
     const rabbit = actor.type === RABBIT_TYPE,

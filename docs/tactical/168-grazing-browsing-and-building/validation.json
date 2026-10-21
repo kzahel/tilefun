@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-21",
+  "base": "aa77a14f",
+  "state": "automation-verified-human-review-pending",
+  "authority": {
+    "newScenarios": 22,
+    "affectedSuitePassed": 108,
+    "finalRangeBoundaryPassed": 33,
+    "mountedCancellationRedGreen": true,
+    "actualCanopyFootprintVerified": true,
+    "finalRangeBoundaryAndRidingPassed": 38,
+    "finalGiraffeAuthorityPassed": 8,
+    "homeRadiusRegressionResolved": true,
+    "ridingAssertionsUseNamedClips": true
+  },
+  "art": {
+    "pendingIdentities": 4,
+    "artifactAssertions": 115,
+    "uniquePins": 88,
+    "isolatedReplayArtifacts": 37,
+    "exactNativeAnd3xCrops": 1960,
+    "fixedLengthChecks": 1952,
+    "plantedFootChecks": 456,
+    "neckAttachmentChecks": 168,
+    "connectedHeadBodyChecks": 488,
+    "priorTravelCellsUnchanged": true,
+    "priorFiftyTwoResourceCellsUnchanged": true,
+    "humanReview": "pending"
+  },
+  "focusedBrowser": {
+    "passed": 2,
+    "seconds": 81.18,
+    "rendererBoundaries": ["Canvas2D", "GPU"],
+    "animalsPerBoundary": 3,
+    "contract": "Changing stationary action pixels, native coat and staged stock/shelter pixels, ordinary Worker attachments and exact paused saved poses",
+    "finalScopedPassed": 5,
+    "finalScopedSeconds": 86.58
+  },
+  "manifest": {
+    "candidates": 1931,
+    "inputDigest": "6aa805ef63792385b49c97ea09f4e9870700f656208b39d02915f13b88e40e47",
+    "normalRetinaChromiumVerified": true
+  },
+  "integration": {
+    "nodeComparatorPassed": 1,
+    "httpWebSocketPassed": 3,
+    "workerPassed": 11,
+    "workerDryRunBuild": "passed"
+  },
+  "fullUnits": {
+    "cases": 6542,
+    "passed": 6524,
+    "failed": 8,
+    "skipped": 10,
+    "seconds": 830.67,
+    "knownWindowsFailures": 5,
+    "resolvedGiraffeRadiusRegression": 1,
+    "resolvedHardCodedRidingAssertions": 2,
+    "note": "Full sweep preceded the radius correction and named riding assertions. Final 38 range/boundary/riding and 8 giraffe authority checks pass. Five Windows symlink/process failures and ten static-file skips remain; this is full coverage plus scoped corrections, not one all-green full run."
+  },
+  "fullBrowser": {
+    "cases": 828,
+    "passed": 828,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "minutes": 38.17,
+    "note": "Frozen pre-radius-correction build. Final corrected source passes both range renderer boundaries, both native scene-switching boundaries and the Animal Browser demonstration boundary."
+  },
+  "finalChecks": {
+    "types": "passed",
+    "lint": "passed with 121 warnings and 42 infos; no errors",
+    "build": "passed",
+    "catalogSheets": 704,
+    "catalogSourceUses": 1394,
+    "streamingAssertReady": "passed after radius correction",
+    "migrationBaselineDecisions": 403,
+    "browserInventory": 828,
+    "oldExactReviewsPreserved": 249,
+    "newHumanReviews": "pending"
+  }
+}

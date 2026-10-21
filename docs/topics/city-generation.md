@@ -265,3 +265,12 @@ records 2,048 passing units and 485/487 browser checks; the remaining two are
 recorded immutable wildlife-preview failures. Native farms/pets/cities, exact
 actor tombstones, both complete train journeys and streaming readiness pass.
 Next: playtest farm spacing, lane approaches and city density in a fresh world.
+
+
+[168](../tactical/168-grazing-browsing-and-building.md) enriches existing horse,
+giraffe and beaver homes with bounded cell-owned resources. One shared set per
+occupied species/cell serves original owners; farm and natural resources use one
+combined placement pass. Giraffe leaves bind to a real ordinary palm. Stable IDs,
+original animal placements, pools and random ordering remain unchanged. Source
+birth points stay in their owning cells at negative and positive seams; manual
+animal placement creates no resources. Beaver shelters do not edit water/terrain.

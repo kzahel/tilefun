@@ -1,0 +1,19 @@
+{
+  "blend": "art-source/wildlife-v2/beaver/roster-v2/beaver.blend",
+  "metadata": "public/demos/wildlife-v2/beaver/roster-v2/sprite.json",
+  "sheet": "public/demos/wildlife-v2/beaver/roster-v2/sheet.png",
+  "masters": "art-source/wildlife-v2/beaver/roster-v2/masters.json",
+  "canvas": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/beaver/roster-v2/beaver.blend": "628d39dfd3dec51131da01a812340b5715bf13181d4222b6e0384201c4362e5f",
+    "public/demos/wildlife-v2/beaver/roster-v2/sprite.json": "03c89fc037a6ef620f9dc55a918dab47dbfdf14946b9b49d1a8492a00d49d205",
+    "public/demos/wildlife-v2/beaver/roster-v2/sheet.png": "8899a9b7bab6af621e67530c38032dcefbf0e5aa47305ec06c81ba2922604564",
+    "art-source/wildlife-v2/beaver/roster-v2/masters.json": "cda878726006506a7cdce2f415ac9aeec61fa9460fc196d21becb46cda912caf",
+    "art-source/wildlife-v2/_families/forest-herbivores-140/finish.py": "f390b7696ec8309a2cbc0db9f794a56bc16b0e45f8df84e1a15ec789d41541ea"
+  },
+  "paintHelper": "art-source/wildlife-v2/_families/forest-herbivores-140/finish.py"
+}

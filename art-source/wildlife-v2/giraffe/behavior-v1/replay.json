@@ -1,0 +1,18 @@
+{
+  "identity": "giraffe-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "54939786a7e9799ba58a6e6e30618031ceda2d605971126d94f72f3a3fcdca79",
+    "index.html": "0d2c2b7fcb39f7022fcf32a6cddd6e1eb93632a84b651c31459579d635411f44",
+    "pixel-audit.json": "6527d788f111616f0c68f51494999e44daac064de703235c78448ddb26cc49c5",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "003f60ff76e6751a870c4582d8835ac715df22b3e36465672afe63093385646d",
+    "preview.gif": "ba3436e98dcf94f2226090b2a2aef2340401065b263ef6c559346a2fb955e8d1",
+    "scene-native.png": "5a035b0e6d20b96bf4c1c356f36dc8c17a83a43b182236fd826136c75d9a0445",
+    "sheet.png": "949a518d2a8a7c0d1e1948b7a68108a72ae6bb62ffe285547101ccab210c2bf3",
+    "source-audit.json": "aec53d06e9dd52b732cf655532f42210a29d58f11c1e3af357e66733d85f7f48",
+    "sprite.json": "3425ac773955f0561f40978a02de3a4f00c009cdd8c110323dc3045aef4ab672"
+  }
+}

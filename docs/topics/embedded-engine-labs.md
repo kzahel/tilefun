@@ -934,3 +934,11 @@ Same-tick resource consumption also exercises the shared EntityManager lifetime
 contract: actors removed by AI are filtered out of the admitted physics list
 before it can update spatial interest. Game clients and labs therefore both
 observe the removal instead of retaining an indexed resource ghost.
+
+
+[168](../tactical/168-grazing-browsing-and-building.md) adds horse, giraffe and
+beaver scenes through shared Realm resource/work authority, native props, saved
+branch attachments and ordinary animation replication. Mounted/attached/following
+actors cancel work during shared synchronization when normal brain updates are
+skipped, preserving controlled poses and releasing claims. There is no lab-only
+grazing, growth or shelter-building simulation.

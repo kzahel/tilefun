@@ -1,10 +1,10 @@
 # Distinct animal behaviors and interactions
 
 Topic: wildlife-behaviors
-Status: five behavior batches implemented. Seventeen entries have targeted automation
-verification: fifteen distinct signatures and two inherited cat coats. Broad and
-focused automation results are recorded in166; exact human review remains pending.
-Updated: 2026-10-20.
+Status: six batches implemented. Twenty entries have targeted automation
+verification: eighteen distinct signatures and two inherited cat coats. Final168
+broad regressions are running; exact human review remains pending.
+Updated: 2026-10-21.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
 where needed, starting with land and air animals. The completed 196-entry art
@@ -47,7 +47,7 @@ original mallard-duck and bear roster IDs. Preserve completed art ledgers as his
 The [generated progress report](../wildlife-behavior-status.md) derives its counts
 and animal table from this ledger. The same generator writes compact Animal
 Browser progress data. Filter **Behavior progress → Demonstrations** and select
-**Demonstrate behavior** to open a shared authority scene. The other 189 animals
+**Demonstrate behavior** to open a shared authority scene. The other186 animals
 still need detailed audits and phase assignment. Existing behavior has not been
 removed or declared absent. Verified stages require recorded evidence.
 
@@ -130,8 +130,8 @@ Use the existing embedded engine hosts, not a separate showcase implementation.
 These are proposed capability groups, not a requirement to finish one entire
 group before starting another. Prefer complete, demonstrable slices. The initial
 inventory/report and first implementation batch are established. Next step:
-review the seventeen implemented demonstrations, then audit the next small land/air
-batch against these completion rules. Continue classifying the remaining 189
+review the twenty implemented demonstrations, then audit the next small land/air
+batch against these completion rules. Continue classifying the remaining186
 entries and record proposed mechanics before expanding production.
 
 ## First batch contracts
@@ -331,3 +331,33 @@ Committed scratching, sipping and guarding revalidate current source contact and
 height before taking stock or warning rivals. Moving a patch/bloom releases its
 claim; a seed already uncovered remains a real held item. Approach points use
 actual surface height and reject unsupported differences beyond normal reach.
+
+
+## Grazing, canopy leaves and branch construction (168)
+
+[168](../tactical/168-grazing-browsing-and-building.md) adds horse grass grazing
+and spring-pool drinking, giraffe supported canopy-leaf browsing, and beaver real
+branch hauling into a four-branch brush shelter. Beaver scope is amphibious with
+explicit land/shore interactions; water-flow engineering and swimming remain later
+work. These are ordinary Realm resources and actions in the world and shared lab.
+
+Spring pools, plant patches and canopy leaves each hold three portions and renew
+one per180 admitted ready seconds; branch piles renew one per360. No offline time
+is accumulated. Shelters retain their four actual deposited branches, stay visible
+and stop accepting material when full. They do not refill themselves or breed animals.
+Manual animals create no hidden supplies; the editor exposes pools, branch piles,
+canopy leaves and a brush shelter foundation. Crows can also take a real twig from
+a stocked fallen-branch pile through the shared conserved source transfer.
+
+Canopy leaf crops bind to actual oak/palm support and disappear when that exact
+support moves or is removed. Feeding and building revalidate current contact,
+source/site height and claims. A moved shelter drops the carried branch instead
+of allowing remote construction. Source/site claims release on interruption.
+Mounted actors skip normal brains, so shared pose sync now cancels active work
+before applying an action pose; cancellation preserves ridden status. Following
+and attached actors retain the same protection. New exact art remains pending review.
+
+Source-derived standing positions must remain within the animal's saved home
+radius. A resource may be reachable from several facings; range workers reject
+an out-of-home position and try another facing before committing travel. Resource
+proximity alone is insufficient, especially for the giraffe's long reach.

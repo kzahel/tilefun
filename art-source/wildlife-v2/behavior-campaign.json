@@ -1,8 +1,8 @@
 {
   "version": 1,
   "id": "wildlife-distinct-behaviors",
-  "updated": "2026-10-20",
-  "state": "fifth-batch-automation-verified-human-review-pending",
+  "updated": "2026-10-21",
+  "state": "sixth-batch-automation-verified-human-review-pending",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -315,7 +315,7 @@
       "runtimeType": "wildlife-horse-provisional-v1",
       "family": "Farm & livestock",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -323,27 +323,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Native travel/action inspected; current behavior has no finite grazing/drinking, canopy-leaf or branch-building interaction. Retain native travel bank unchanged.",
+            "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Graze finite grass, then lower the head to drink from a finite spring pool.",
+        "trigger": "Nearby appropriate finite resources and safe actual support.",
+        "scenario": "behavior-horse",
+        "tactical": "docs/tactical/168-grazing-browsing-and-building.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "conserved finite sources and attachments",
+          "real height/support/contact",
+          "interruption and companion/player protections",
+          "ready-only saved clocks",
+          "natural supplies and shared Worker/lab"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/RangeWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/horse/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/168-grazing-browsing-and-building/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the shared behavior demonstration and retained action bank."
     },
     "piglet": {
       "name": "Pig",
@@ -591,7 +634,7 @@
       "runtimeType": "wildlife-giraffe-provisional-v1",
       "family": "Hoofed & large herbivores",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -599,27 +642,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Native travel/action inspected; current behavior has no finite grazing/drinking, canopy-leaf or branch-building interaction. Retain native travel bank unchanged.",
+            "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Reach real supported tree-canopy leaves and visibly browse finite stock.",
+        "trigger": "Nearby appropriate finite resources and safe actual support.",
+        "scenario": "behavior-giraffe",
+        "tactical": "docs/tactical/168-grazing-browsing-and-building.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "conserved finite sources and attachments",
+          "real height/support/contact",
+          "interruption and companion/player protections",
+          "ready-only saved clocks",
+          "natural supplies and shared Worker/lab"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/RangeWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/giraffe/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/168-grazing-browsing-and-building/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the shared behavior demonstration and retained action bank."
     },
     "kangaroo": {
       "name": "Kangaroo",
@@ -5371,7 +5457,7 @@
       "runtimeType": "wildlife-beaver-provisional-v1",
       "family": "Small & exotic mammals",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "amphibious",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -5379,27 +5465,70 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Native travel/action inspected; current behavior has no finite grazing/drinking, canopy-leaf or branch-building interaction. Retain native travel bank unchanged.",
+            "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Gather actual branches, carry them and build a four-branch shelter on land.",
+        "trigger": "Nearby appropriate finite resources and safe actual support.",
+        "scenario": "behavior-beaver",
+        "tactical": "docs/tactical/168-grazing-browsing-and-building.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "conserved finite sources and attachments",
+          "real height/support/contact",
+          "interruption and companion/player protections",
+          "ready-only saved clocks",
+          "natural supplies and shared Worker/lab"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/168-grazing-browsing-and-building.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/RangeWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/beaver/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/168-grazing-browsing-and-building/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the shared behavior demonstration and retained action bank."
     },
     "capybara": {
       "name": "Capybara",
@@ -8272,6 +8401,10 @@
     {
       "date": "2026-10-20",
       "summary": "163: three new signatures, fourteen verified entries/twelve distinct mechanics total. Thirteen current pasture authority scenarios, both production renderer boundaries and four exact art identities verified; broad regression sweep and final two edge rechecks pending completion. New art remains pending human review."
+    },
+    {
+      "date": "2026-10-21",
+      "summary": "168: horse grazing/drinking, supported giraffe canopy browsing and conserved beaver branch construction complete. Twenty verified entries/eighteen signatures; four exact art reviews pending. Full 828 browser pass; full native 6524 pass/8 fail/10 skip followed by passing 46 scoped correction checks. Five known Windows failures remain. Types/lint/build/normal-retina 1931 manifest/streaming ready pass; final 5 rendered/lab checks pass."
     }
   ]
 }

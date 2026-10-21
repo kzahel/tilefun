@@ -1,0 +1,19 @@
+{
+  "blend": "art-source/wildlife-v2/horse/motion-v2/horse.blend",
+  "metadata": "public/demos/wildlife-v2/horse/motion-v2/sprite.json",
+  "sheet": "public/demos/wildlife-v2/horse/motion-v2/sheet.png",
+  "masters": "art-source/wildlife-v2/horse/draft-v1/masters.json",
+  "canvas": 80,
+  "anchor": [
+    40,
+    61
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/horse/motion-v2/horse.blend": "7212c76af9ff4c369da59ee6288b166605a1163056aa4e1e49cc39857c2d6dff",
+    "public/demos/wildlife-v2/horse/motion-v2/sprite.json": "83aa9fee9367e230b331994491375ace18092a5e0491c930f786e7e3a361d187",
+    "public/demos/wildlife-v2/horse/motion-v2/sheet.png": "20de0a97c9ed1a6e925fcca09cacac6a083fc7588dad6315f5783e2961c8b809",
+    "art-source/wildlife-v2/horse/draft-v1/masters.json": "d69c4737a357f854f0c01c31a281d12f76369409f44f788bbb5fbd2dbfefe562",
+    "art-source/wildlife-v2/horse/motion-v2/finish.py": "6e40288a595adc5ced145c304dd51a818263496efe5ea05b491644022abee651"
+  },
+  "paintHelper": "art-source/wildlife-v2/horse/motion-v2/finish.py"
+}

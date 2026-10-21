@@ -156,3 +156,7 @@ scripts/wildlife/register-garden-166.mjs -text whitespace=blank-at-eol,blank-at-
 scripts/vehicle-bake/dump-truck/articulate.py -text
 art-source/vehicle-bake/dump-truck/v2/** -text
 src/rendering/dump-truck-v2-fallback.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Exact retained wildlife action helpers for batch 168.
+scripts/wildlife/range-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/wildlife/register-range-168.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

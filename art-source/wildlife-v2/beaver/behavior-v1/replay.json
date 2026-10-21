@@ -1,0 +1,18 @@
+{
+  "identity": "beaver-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "6b2184a74d9650b3e59966607e45e3352beba43635fcd2e5cd5ab8dcc96f0ec3",
+    "index.html": "c018223060733f8c10fdf8bcb33bef58d3a15f9c0177686ce0aacebc0cad8a32",
+    "pixel-audit.json": "81dbd4a972db15357ada45093dd5a1f9fb82ca12643add1a9c81472d858ecd56",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "cdc6e76034a5998ecab98fdecc3e4fd960970366e6830d6689f508aa8d8fb6bb",
+    "preview.gif": "e6adecb9e5d952848c33775b2fb83335455b1ea6b075b08dc00b4ff824b23116",
+    "scene-native.png": "4c4808cb6940b8a455d49cc90df21635c16e7dd2292718b203ab1a47a76d2a76",
+    "sheet.png": "0a407a47f578cfc83219fc436c67bd37b657cad794355a030ab867e5f734c1bb",
+    "source-audit.json": "e4f090e4a24161e913a864fe10f23acdc98d67cac2fb2990ecd42968ffd7a731",
+    "sprite.json": "18acaef3e3215738846dd72b7dda478d568450f1167409b310ebcbb65603c9b5"
+  }
+}

@@ -45,6 +45,10 @@ export function sameTree(a: ClimbTree, b: ClimbTree) {
     a.gripY === b.gripY
   );
 }
+/** Visible near edge, within the ordinary oak/palm crown's actual width and depth. */
+export function canopyLeafPoint(tree: ClimbTree) {
+  return { wx: tree.wx + 8, wy: tree.wy - 4 };
+}
 /** Continuous vertical grip followed by a short step onto the crown, reversed to descend. */
 export function treeClimbPoint(tree: ClimbTree, fraction: number, down: boolean) {
   const t = Math.max(0, Math.min(1, down ? 1 - fraction : fraction));

@@ -1,0 +1,49 @@
+{
+  "identity": "giraffe-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 144,
+  "frameHeight": 144,
+  "anchor": [
+    72,
+    120
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "reach",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 100
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "reach": {
+      "start": 41,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": false
+    },
+    "browse": {
+      "start": 53,
+      "count": 16,
+      "frameDuration": 100,
+      "loop": true
+    },
+    "lower": {
+      "start": 69,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": false
+    }
+  },
+  "sheetSha256": "949a518d2a8a7c0d1e1948b7a68108a72ae6bb62ffe285547101ccab210c2bf3"
+}

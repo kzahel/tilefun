@@ -4,6 +4,7 @@ import type { FaunaProfile } from "./Fauna.js";
 import gardenArt from "./garden-art.json" with { type: "json" };
 import meadowArt from "./meadow-art.json" with { type: "json" };
 import pastureArt from "./pasture-art.json" with { type: "json" };
+import rangeArt from "./range-art.json" with { type: "json" };
 import woodlandArt from "./woodland-art.json" with { type: "json" };
 
 interface BehaviorBank {
@@ -19,6 +20,7 @@ const art: Record<string, BehaviorBank> = {
   ...woodlandArt,
   ...pastureArt,
   ...gardenArt,
+  ...rangeArt,
 };
 
 export function behaviorArt(profile: FaunaProfile): FaunaProfile {
@@ -37,17 +39,22 @@ export function behaviorArt(profile: FaunaProfile): FaunaProfile {
       ...extras.map(([name, clip]) => ({
         ...clip,
         name,
-        loop: [
-          "scan",
-          "climb",
-          "eat",
-          "sit",
-          "stalk",
-          "browse",
-          "scratch",
-          "sip",
-          "guard",
-        ].includes(name),
+        loop:
+          [
+            "scan",
+            "climb",
+            "eat",
+            "sit",
+            "stalk",
+            "browse",
+            "scratch",
+            "sip",
+            "guard",
+            "graze",
+            "drink",
+            "settle",
+          ].includes(name) ||
+          (profile.species === "beaver" && name === "build"),
       })),
     ],
   };

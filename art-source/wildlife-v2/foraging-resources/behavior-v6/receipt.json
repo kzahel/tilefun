@@ -1,0 +1,45 @@
+{
+  "identity": "foraging-resources-behavior-v6",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/168-grazing-browsing-and-building.md",
+  "replay": {
+    "identity": "foraging-resources-behavior-v6",
+    "status": "byte-identical",
+    "isolation": "minimal retained inputs only",
+    "artifacts": 7,
+    "sha256": {
+      "contact-sheet-native.png": "eb874d8ac9bb3fce021b3226356d19deabaccce08e1915164759c8ee733e649e",
+      "index.html": "521befaedf2f099516c345792e67c449630507b7d91b08272a9b3bad3cec87c6",
+      "pixel-audit.json": "565374744c0c2cc7ec602c1cd739be9f906fef03a7fd0e820fbe271732118c95",
+      "preview.png": "83bc95bcba060b634a3e9b9cb35a786f643b0b243664f24aa699b70bec31794e",
+      "scene-native.png": "83bc95bcba060b634a3e9b9cb35a786f643b0b243664f24aa699b70bec31794e",
+      "sheet.png": "480406229a79ae0bda1e6c750c0b95eb9514c5e40032f65c278fd5a0916740bd",
+      "sprite.json": "4f51c5b8df839e7f5d16081a36b76279a2d0eca0d67fc1f4b0a69c9d0c365c96"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/foraging-resources/behavior-v6/inputs.json": "7d8bfb734553d68e1e226c3bbfe4e702817b53290ab6e304d900e808e9a5bc91",
+    "art-source/wildlife-v2/foraging-resources/behavior-v6/paint.json": "3783288aa371cab208a9a39a79bf4d94bdf6c0730b1a08d29418680be8f147fa",
+    "art-source/wildlife-v2/foraging-resources/behavior-v6/README.md": "02559e123c32cfcc33092bc2372b65997df8375b97d819055a0b60d7a094d1a4",
+    "art-source/wildlife-v2/foraging-resources/behavior-v6/replay.json": "a36f57fb7c2172c1aaf3e619ccad25dba3a2e3171cae9dc69a1b977f297d235d",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v6/contact-sheet-native.png": "eb874d8ac9bb3fce021b3226356d19deabaccce08e1915164759c8ee733e649e",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v6/index.html": "521befaedf2f099516c345792e67c449630507b7d91b08272a9b3bad3cec87c6",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v6/pixel-audit.json": "565374744c0c2cc7ec602c1cd739be9f906fef03a7fd0e820fbe271732118c95",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v6/preview.png": "83bc95bcba060b634a3e9b9cb35a786f643b0b243664f24aa699b70bec31794e",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v6/scene-native.png": "83bc95bcba060b634a3e9b9cb35a786f643b0b243664f24aa699b70bec31794e",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v6/sheet.png": "480406229a79ae0bda1e6c750c0b95eb9514c5e40032f65c278fd5a0916740bd",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v6/sprite.json": "4f51c5b8df839e7f5d16081a36b76279a2d0eca0d67fc1f4b0a69c9d0c365c96",
+    "scripts/wildlife/range-build.py": "c3c52807d63e5f226dfb0c6e7f188307e0f28fa2e10602d15661f505aa8b3907",
+    "scripts/wildlife/range-finish.py": "61ca26ce0f0fa071a86977c6281967c9291191457018a8cd242a2d9b65fcbc4a",
+    "scripts/wildlife/range-replay.py": "4a1bbd027c395e2a04ac1fddee35af8c3360375386424f823dd635d4cc602618",
+    "scripts/wildlife/range-resources.py": "315480aec6eb65ce7332bc83be92e77a8e7f529c00cccff252f752259a496697",
+    "scripts/wildlife/range-art.mjs": "165dcfa0a975ede6f8340451f022ed2c4b0c99c11139fb1cea6ecfe3c3ff794d",
+    "scripts/wildlife/register-range-168.mjs": "1f1e99299d843fe72bed4f25afe1cc28ea73ec09d0c3863259275b03c1b7a821",
+    "scripts/wildlife/capture-behavior-155.mjs": "4cba4172d32bd77168b8929743c1b133e8ee6f22ec4285f0f3c71867beb1e6f8",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/sheet.png": "0ed2417421390816125ea8594e40e73d12f003e7fe43c709697d18adeb5db551",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v5/sprite.json": "86511b53161aa722246f177f1985d0bbb373523bdd73f20d4650c1d04adfd570"
+  }
+}

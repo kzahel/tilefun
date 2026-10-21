@@ -2,7 +2,7 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { restoreWorkItemPose, sourceType } from "./ForageResources.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
-import { sameTree } from "./TreeClimbing.js";
+import { canopyLeafPoint, sameTree } from "./TreeClimbing.js";
 
 const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 /** No offline catch-up or loose-item spawning. Only admitted, ready sources grow. */
@@ -20,7 +20,11 @@ export function tickFoodSources(
       item.pollination.remaining = Math.max(0, item.pollination.remaining - dt);
       restoreWorkItemPose(e);
     }
-    if (e.type === sourceType("fruit-tree") || e.type === sourceType("nut-tree")) {
+    if (
+      e.type === sourceType("fruit-tree") ||
+      e.type === sourceType("nut-tree") ||
+      e.type === sourceType("canopy-leaves")
+    ) {
       const trees = env.climbTrees?.(e.position, 64) ?? [];
       if (growth.tree) {
         const supportedTree = growth.tree;
@@ -34,11 +38,14 @@ export function tickFoodSources(
           .sort((a, b) => gap(a, e.position) - gap(b, e.position))[0];
         if (!tree) continue;
         growth.tree = { ...tree };
+        const canopy = e.type !== sourceType("nut-tree");
         e.position =
-          e.type === sourceType("fruit-tree")
-            ? { wx: tree.wx, wy: tree.wy }
-            : { wx: tree.gripX, wy: tree.gripY };
-        e.wz = e.type === sourceType("fruit-tree") ? tree.z : tree.ground;
+          e.type === sourceType("canopy-leaves")
+            ? canopyLeafPoint(tree)
+            : canopy
+              ? { wx: tree.wx, wy: tree.wy }
+              : { wx: tree.gripX, wy: tree.gripY };
+        e.wz = canopy ? tree.z : tree.ground;
       }
     }
     if (item.units >= growth.capacity) {

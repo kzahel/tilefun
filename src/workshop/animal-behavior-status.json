@@ -45,13 +45,13 @@
     "review": "not-requested"
   },
   "horse": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Graze finite grass, then lower the head to drink from a finite spring pool.",
+    "scene": "behavior-horse",
+    "review": "pending"
   },
   "piglet": {
     "phase": "land",
@@ -81,13 +81,13 @@
     "review": "pending"
   },
   "giraffe": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Reach real supported tree-canopy leaves and visibly browse finite stock.",
+    "scene": "behavior-giraffe",
+    "review": "pending"
   },
   "kangaroo": {
     "phase": "unclassified",
@@ -1197,13 +1197,13 @@
     "review": "not-requested"
   },
   "beaver": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "amphibious",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Gather actual branches, carry them and build a four-branch shelter on land.",
+    "scene": "behavior-beaver",
+    "review": "pending"
   },
   "capybara": {
     "phase": "unclassified",

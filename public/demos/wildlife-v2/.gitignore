@@ -669,3 +669,9 @@
 !bee/behavior-v1/*
 !ruby-throated-hummingbird/behavior-v1/*
 !foraging-resources/behavior-v5/*
+
+# Owner-authorized behavior batch 168.
+!horse/behavior-v1/*
+!giraffe/behavior-v1/*
+!beaver/behavior-v1/*
+!foraging-resources/behavior-v6/*

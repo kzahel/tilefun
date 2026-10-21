@@ -1,0 +1,30 @@
+{
+  "identity": "beaver-behavior-v1",
+  "poses": 152,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "pickup": 5,
+      "build": 8,
+      "settle": 5
+    },
+    "up": {
+      "pickup": 4,
+      "build": 3,
+      "settle": 3
+    },
+    "left": {
+      "pickup": 5,
+      "build": 9,
+      "settle": 7
+    },
+    "right": {
+      "pickup": 5,
+      "build": 9,
+      "settle": 7
+    }
+  },
+  "connectedHeadBodyChecks": 152
+}

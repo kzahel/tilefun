@@ -1,0 +1,49 @@
+{
+  "identity": "beaver-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "pickup",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 40
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "pickup": {
+      "start": 41,
+      "count": 10,
+      "frameDuration": 100,
+      "loop": false
+    },
+    "build": {
+      "start": 51,
+      "count": 16,
+      "frameDuration": 100,
+      "loop": true
+    },
+    "settle": {
+      "start": 67,
+      "count": 12,
+      "frameDuration": 125,
+      "loop": true
+    }
+  },
+  "sheetSha256": "0a407a47f578cfc83219fc436c67bd37b657cad794355a030ab867e5f734c1bb"
+}

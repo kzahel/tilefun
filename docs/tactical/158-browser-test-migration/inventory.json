@@ -5,8 +5,8 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 826,
-      "inventorySha256": "81a508c5b75696a9738278cf2cca365d96b54f6678bfd3635f12fcf7b6671d12",
+      "cases": 828,
+      "inventorySha256": "f508ae5fe942351294de87c376fdd1f387d6d8e70e874a15081ca61676f88839",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -21,7 +21,7 @@
         {
           "path": "tests/animal-work.spec.ts",
           "cases": 9,
-          "sourceSha256": "7ee93169fbcf54db4e844f1efe269d21cd18ecf24b33632b20438f4bb52b5e71"
+          "sourceSha256": "33ce1f80352ee121c54e9e9d06eeb9704aed32ba5054d17b640bebad7b1e86c4"
         },
         {
           "path": "tests/aquatic-hunters.spec.ts",
@@ -281,7 +281,7 @@
         {
           "path": "tests/meadow-work.spec.ts",
           "cases": 7,
-          "sourceSha256": "70055dff5d7c1c3405b78ed5630c3cd95622101b1f391ddcff0ea3c0dc7b8a5c"
+          "sourceSha256": "6cc62bcba2d48d2280e250b5611673d22f41a48fd2d7fdf894528cbf0263d0a8"
         },
         {
           "path": "tests/mobile-editor.spec.ts",
@@ -422,6 +422,11 @@
           "path": "tests/railway.spec.ts",
           "cases": 1,
           "sourceSha256": "359cf64212df6c69ae444b80f18e7eeb5a425ba40636e6c9db966039ee7886f7"
+        },
+        {
+          "path": "tests/range-work.spec.ts",
+          "cases": 2,
+          "sourceSha256": "0d2810506c877d4adf53bddc0b5e5bec1939f0df59db301f37482b9d565f6b2f"
         },
         {
           "path": "tests/raptors.spec.ts",
