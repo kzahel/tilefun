@@ -5,8 +5,10 @@ import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import type { AnimalWork, FoodKind } from "./AnimalWork.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import { carrySocket } from "./BehaviorArt.js";
+import { settleDeer } from "./deerInteractions.js";
 import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
+import { ForestWork, isForestWorker } from "./ForestWork.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import { GardenWork, isGardenWorker } from "./GardenWork.js";
 import { HerdWork, isHerdWorker } from "./HerdWork.js";
@@ -43,6 +45,7 @@ const carrying = (e: Entity) => !!e.animalWork?.heldId;
 /** Shared production authority; all durable state lives on ordinary saved actors. */
 export class AnimalWorkSystem {
   private readonly herd: HerdWork;
+  private readonly forest: ForestWork;
   private readonly range: RangeWork;
   private readonly garden: GardenWork;
   private readonly meadow: MeadowWork;
@@ -50,6 +53,7 @@ export class AnimalWorkSystem {
   private readonly pasture: PastureWork;
   constructor(private readonly manager: EntityManager) {
     this.herd = new HerdWork(manager, this);
+    this.forest = new ForestWork(manager, this);
     this.range = new RangeWork(manager, this);
     this.garden = new GardenWork(manager, this);
     this.meadow = new MeadowWork(manager);
@@ -97,6 +101,7 @@ export class AnimalWorkSystem {
   cancel(animal: Entity, cooldown: number) {
     const task = animal.animalWork;
     if (!task) return;
+    this.forest.releasePartner(animal, cooldown);
     this.drop(animal);
     const target = this.find(task.targetId);
     if (target?.workItem && target.workItem.claimedBy === animal.persistentId)
@@ -105,8 +110,10 @@ export class AnimalWorkSystem {
     if (site?.workItem && site.workItem.claimedBy === animal.persistentId)
       delete site.workItem.claimedBy;
     delete task.targetId;
+    delete task.sourcePosition;
     task.cooldown = cooldown;
     this.enter(task, "idle");
+    if (animal.deer && !animal.deer.alarmFrom) settleDeer(animal);
     // A current scare retains its existing physical escape instead of being reset.
     if (animal.fauna && !animal.fauna.alarmFrom) {
       if (animal.wanderAI?.state === "ridden") restoreFaunaPose(animal);
@@ -182,8 +189,10 @@ export class AnimalWorkSystem {
       startZ = animal.wz ?? 0;
     const samples = Math.max(1, Math.ceil(distance / 4));
     if (samples > 96 || (planning && !planning.path(animal, samples))) return false;
-    const flight = ["crow", "bee", "hummingbird"].includes(animal.animalWork?.kind ?? "");
-    const lift = animal.animalWork?.kind === "crow" ? 24 : (p.hop?.height ?? 0);
+    const flight = ["crow", "raven", "bee", "hummingbird"].includes(animal.animalWork?.kind ?? "");
+    const lift = ["crow", "raven"].includes(animal.animalWork?.kind ?? "")
+      ? 24
+      : (p.hop?.height ?? 0);
     for (let i = 1; i <= samples; i++) {
       const t = i / samples,
         pos = {
@@ -264,6 +273,7 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
+    if (isForestWorker(animal)) return this.forest.update(animal, dt, context, planning);
     if (isHerdWorker(animal)) return this.herd.update(animal, dt, context, planning);
     if (isRangeWorker(animal)) return this.range.update(animal, dt, context, planning);
     if (isGardenWorker(animal)) return this.garden.update(animal, dt, context, planning);
@@ -570,6 +580,8 @@ export class AnimalWorkSystem {
       if (animal.animalWork) this.sync(animal);
       // Followed and ridden actors can bypass their native brain/pose update.
       if (animal.fauna && animal.sprite) animal.fauna.facing = animal.sprite.direction;
+      if (animal.deer && animal.sprite) animal.deer.facing = animal.sprite.direction;
     }
+    this.forest.syncCaches(active);
   }
 }

@@ -77,7 +77,7 @@ export function createFoodSource(kind: SourceKind, wx: number, wy: number): Enti
 }
 
 export const FORAGE_SHEET = "wildlife-forage-resources-v1";
-export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v7/sheet.png";
+export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v8/sheet.png";
 export const FORAGE_KINDS = [
   "twig",
   "fruit",
@@ -91,6 +91,8 @@ export const FORAGE_KINDS = [
   "water",
   "lodge",
   "dust",
+  "shiny",
+  "hoard",
 ] as const;
 export type ForageKind = (typeof FORAGE_KINDS)[number];
 export const forageType = (kind: ForageKind) => `wildlife-resource-${kind}-v1`;
@@ -107,6 +109,8 @@ const cells = {
   water: [52],
   lodge: [64, 65, 66, 67, 68],
   dust: [69, 70, 71, 72],
+  shiny: [73],
+  hoard: [74, 75, 76, 77],
 };
 export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
   FORAGE_KINDS.map((kind) => [
@@ -130,9 +134,9 @@ export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
       collider: {
         offsetX: 0,
         offsetY: 0,
-        width: kind === "nest" ? 20 : kind === "dust" ? 24 : 6,
+        width: kind === "nest" ? 20 : kind === "dust" || kind === "hoard" ? 24 : 6,
         height: kind === "dust" ? 12 : 5,
-        physicalHeight: kind === "dust" ? 0 : 3,
+        physicalHeight: kind === "dust" || kind === "hoard" ? 0 : 3,
         solid: false,
       },
       wanderAI: null,
@@ -145,6 +149,10 @@ export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
 export function restoreWorkItemPose(e: Entity): void {
   const item = e.workItem;
   if (!item || item.kind === "ball") return;
+  if (item.kind === "shiny") {
+    e.flashHidden = !!item.cachedIn;
+    e.noShadow = !!item.cachedIn;
+  }
   const source = SOURCE_KINDS.find((kind) => e.type === sourceType(kind));
   const sourceCells =
     item.growth && source
@@ -160,7 +168,7 @@ export function restoreWorkItemPose(e: Entity): void {
     ? Math.max(0, Math.min(3, item.units))
     : item.kind === "greens"
       ? Math.max(0, Math.min(2, 3 - item.units))
-      : item.kind === "dust"
+      : item.kind === "dust" || item.kind === "hoard"
         ? Math.max(0, Math.min(3, item.units))
         : item.kind === "nest" || item.kind === "lodge"
           ? Math.min(4, item.units)
@@ -235,7 +243,7 @@ export const FORAGE_FACTORIES = {
 };
 export const isCarryable = (e: Entity) =>
   e.type === "ball" ||
-  (["twig", "fruit", "nut", "root"] as const).some((kind) => e.type === forageType(kind));
+  (["twig", "fruit", "nut", "root", "shiny"] as const).some((kind) => e.type === forageType(kind));
 export function freshBallWork(owner: string, returnPosition: Entity["position"]): WorkItem {
   return { kind: "ball", owner, returnPosition: { ...returnPosition }, units: 0, contents: [] };
 }

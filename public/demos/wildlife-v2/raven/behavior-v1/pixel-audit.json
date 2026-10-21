@@ -1,0 +1,26 @@
+{
+  "identity": "raven-behavior-v1",
+  "poses": 104,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "pickup": 6,
+      "bury": 7
+    },
+    "up": {
+      "pickup": 6,
+      "bury": 5
+    },
+    "left": {
+      "pickup": 6,
+      "bury": 7
+    },
+    "right": {
+      "pickup": 6,
+      "bury": 7
+    }
+  },
+  "connectedHeadBodyChecks": 104
+}

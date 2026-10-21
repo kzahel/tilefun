@@ -1,0 +1,18 @@
+{
+  "identity": "deer-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "de21fac648b6426f538fd0373676d22a351a7fff8e0336f12498c0c39a77f762",
+    "index.html": "dcb2a02c07cd17e7964dc22a9dd3518222beed546f83d55948dfa58643674df4",
+    "pixel-audit.json": "ea401205d03755b06ecd43f9df5dff6b14b34dd7f0243f1bb8b43c86d5d4a346",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "4e6fe8a89dcdfe551edb54cac1a4a9b0e6c4988e73133be7c332d24015b37f54",
+    "preview.gif": "e25bb70a62af90adf4cf25ceae1c50e6e6511ebffac4247d3c73946214f48ce3",
+    "scene-native.png": "ad0006ed49a5053361df271607ae08eb39e7f82fdf0c5c60937ea93b99357806",
+    "sheet.png": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816",
+    "source-audit.json": "e485b3b566f7f164cf3c7315acc5a97ab5fc0111738c378399be639b8cf965a5",
+    "sprite.json": "c700a0c3e58510346cf5f17b2d122cf506cc64eee9161dfc084be3d226932652"
+  }
+}

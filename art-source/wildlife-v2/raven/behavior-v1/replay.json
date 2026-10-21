@@ -1,0 +1,18 @@
+{
+  "identity": "raven-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "2067efd5c3efc0f02643f6fca08031e92afde304759a50fcaec760779cfefacd",
+    "index.html": "d04b12fe1f95389faf01ecd02f61c8f62d3aef5c14e01c20b82c14c7355123fb",
+    "pixel-audit.json": "975863aef599c3aec0023bddbf02292a6e0700787a48b4d1d6c9860832e31737",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "6e9d26e6c325f208551ad03b481d74143b0ac642d140a0b8546d87f499d67787",
+    "preview.gif": "0ca7c7f39ea837585564232558c7e5fbccfa57f8bebebb65093287d371b9fa8a",
+    "scene-native.png": "214470e60c6e9e9bb8c46c0e16153d2634b971c82d70cf0843722f467f00223f",
+    "sheet.png": "aa700a8768a5913d156a8ca221299ef5c5c91fea7fb53108d60803e0f644f2af",
+    "source-audit.json": "6909cd75c90817c44b6856d62961b09b3f9e94632f58ac13992c1bab712b822c",
+    "sprite.json": "64705f261f395bce54ee06f18f333c92eb544b76d6692d1c0537807a909a6136"
+  }
+}

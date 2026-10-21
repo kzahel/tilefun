@@ -1,0 +1,18 @@
+{
+  "identity": "peacock-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "de3d531ebf254b67d202ef29438912d9834789755dde15f7906e4fe94848dece",
+    "index.html": "6dd7bbe7db9f3d8a285b45460a63bdf62299fcfe2923f74502f663bfaf3b02ed",
+    "pixel-audit.json": "bc4f965b285b97c4999b743fbfdb389c887d704fcc48b748d679bcafd22e1914",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "dbb28d057743f4e0dfe5abcd6aff478698aee7992843471847614b62bb0f5cd6",
+    "preview.gif": "42c982315512dba56ffcfcfb40f2ce261cc5ad11ce8cc4ebbde9c74b3ec0b32f",
+    "scene-native.png": "1f0fedc387d5648a2c3a01cef116fc107dd8423f47dadaef5ad4cb90a8113324",
+    "sheet.png": "728f088cfcad7e9b902026f929777e1b692f6fb6c869e7a524419e2fa807dcd2",
+    "source-audit.json": "ab7c809a4f57e42caaeb6518ef97c7848abc55f13bac7c8b577e738fddcfd34e",
+    "sprite.json": "11c129517c828bf24cae2636745e3a226486d8446e8a1f3e215fcd9717facfb5"
+  }
+}

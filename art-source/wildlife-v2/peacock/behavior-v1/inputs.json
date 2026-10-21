@@ -1,0 +1,18 @@
+{
+  "blend": "art-source/wildlife-v2/peacock/roster-v2/peacock.blend",
+  "masters": "art-source/wildlife-v2/peacock/roster-v2/masters.json",
+  "sheet": "public/demos/wildlife-v2/peacock/roster-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/peacock/roster-v2/sprite.json",
+  "canvas": 96,
+  "anchor": [
+    48,
+    72
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/peacock/roster-v2/peacock.blend": "4f18a743f08037f73bf4d24b7cf2a85d4a427fe9c52bb23286bb6cae3cbcbeae",
+    "art-source/wildlife-v2/peacock/roster-v2/masters.json": "2f9df8dc8a8171be843076883ce62ae22af25240f76dbea3b8c8cc9e8d25d400",
+    "public/demos/wildlife-v2/peacock/roster-v2/sheet.png": "80f2d5cffc3b686d3c93baec71132da287733d7403cd6e8c0cbae9c2da88cc34",
+    "public/demos/wildlife-v2/peacock/roster-v2/sprite.json": "684ab4c722c63883a375c9e2116af11f7df2ed995990ce8bfd32af0f5300cd76",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9"
+  }
+}

@@ -1,6 +1,7 @@
 import type { Entity } from "../entities/Entity.js";
 import carryingArt from "./behavior-art.json" with { type: "json" };
 import type { FaunaProfile } from "./Fauna.js";
+import forestArt from "./forest-art.json" with { type: "json" };
 import gardenArt from "./garden-art.json" with { type: "json" };
 import herdArt from "./herd-art.json" with { type: "json" };
 import meadowArt from "./meadow-art.json" with { type: "json" };
@@ -23,6 +24,7 @@ const art: Record<string, BehaviorBank> = {
   ...gardenArt,
   ...rangeArt,
   ...herdArt,
+  ...forestArt,
 };
 
 export function behaviorArt(profile: FaunaProfile): FaunaProfile {
@@ -58,6 +60,7 @@ export function behaviorArt(profile: FaunaProfile): FaunaProfile {
             "ruminate",
             "bleat",
             "roll",
+            "display",
           ].includes(name) ||
           (profile.species === "beaver" && name === "build"),
       })),
@@ -72,7 +75,9 @@ export function actionSocket(
   frame: number,
   direction = animal.sprite?.direction ?? 0,
 ): readonly number[] | undefined {
-  const species = animal.type.replace(/^wildlife-/, "").replace(/-provisional-v1$/, "");
+  const species = animal.deer
+    ? "deer"
+    : animal.type.replace(/^wildlife-/, "").replace(/-provisional-v1$/, "");
   const bank = art[species],
     clip = bank?.clips[name];
   if (!bank || !clip) return;

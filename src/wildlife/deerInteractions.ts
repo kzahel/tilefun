@@ -14,6 +14,9 @@ export function restoreDeerPose(deer: Entity): void {
       ai.target.wy - deer.position.wy,
     );
     deer.sprite.frameRow = deer.sprite.direction;
+    ai.facing = deer.sprite.direction;
+  } else if (ai.facing !== undefined) {
+    deer.sprite.direction = deer.sprite.frameRow = ai.facing;
   }
   setSpriteClip(
     deer,
@@ -46,6 +49,10 @@ export function prepareDeerTravel(deer: Entity, dt: number): void {
   const ai = deer.deer,
     motion = ai?.motion;
   if (!ai || !motion || !deer.velocity || dt <= 0) return;
+  if (motion.workPaused) {
+    deer.velocity.vx = deer.velocity.vy = 0;
+    return;
+  }
   motion.elapsed = Math.min(motion.duration, motion.elapsed + dt);
   const dx = ai.target.wx - deer.position.wx,
     dy = ai.target.wy - deer.position.wy;

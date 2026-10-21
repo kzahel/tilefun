@@ -1,0 +1,30 @@
+{
+  "identity": "peacock-behavior-v1",
+  "poses": 160,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "open": 12,
+      "display": 15,
+      "close": 12
+    },
+    "up": {
+      "open": 12,
+      "display": 15,
+      "close": 12
+    },
+    "left": {
+      "open": 12,
+      "display": 15,
+      "close": 12
+    },
+    "right": {
+      "open": 12,
+      "display": 15,
+      "close": 12
+    }
+  },
+  "connectedHeadBodyChecks": 160
+}

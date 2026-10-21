@@ -61,7 +61,7 @@ export function updateFaunaAI(
   }
   const escaping = ai.state === "startle";
   if (planning && !planning.claim(animal, escaping)) return;
-  if (!escaping && ++ai.activity % 3 === 0) {
+  if (!escaping && ++ai.activity % 3 === 0 && animal.animalWork?.kind !== "peacock") {
     ai.state = "action";
     ai.actionElapsed = 0;
     const action = p.clips.find((c) => c.name === "action");

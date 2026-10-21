@@ -448,11 +448,11 @@
     {
       "id": "wildlife-forage-resources-v1",
       "name": "wildlife forage resources v1",
-      "image": "demos/wildlife-v2/foraging-resources/behavior-v7/sheet.png",
-      "width": 2336,
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v8/sheet.png",
+      "width": 2496,
       "height": 128,
       "tileSize": 16,
-      "fingerprint": "4d3bfb754510cf548ebecdf63521946ce5ac97343f2582f19e5da34e9b8acdf1",
+      "fingerprint": "efac7b507e499662e0de13f3ac260bc9e43ac86d0d3be1ed130b34edea4a0da4",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -1598,11 +1598,11 @@
     {
       "id": "wildlife-peacock-provisional-v1",
       "name": "wildlife peacock provisional v1",
-      "image": "demos/wildlife-v2/peacock/roster-v2/sheet.png",
-      "width": 3936,
+      "image": "demos/wildlife-v2/peacock/behavior-v1/sheet.png",
+      "width": 7776,
       "height": 384,
       "tileSize": 16,
-      "fingerprint": "80f2d5cffc3b686d3c93baec71132da287733d7403cd6e8c0cbae9c2da88cc34",
+      "fingerprint": "728f088cfcad7e9b902026f929777e1b692f6fb6c869e7a524419e2fa807dcd2",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -1708,11 +1708,11 @@
     {
       "id": "wildlife-raven-provisional-v1",
       "name": "wildlife raven provisional v1",
-      "image": "demos/wildlife-v2/raven/roster-v3/sheet.png",
-      "width": 2624,
+      "image": "demos/wildlife-v2/raven/behavior-v1/sheet.png",
+      "width": 4288,
       "height": 256,
       "tileSize": 16,
-      "fingerprint": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9",
+      "fingerprint": "aa700a8768a5913d156a8ca221299ef5c5c91fea7fb53108d60803e0f644f2af",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2508,11 +2508,11 @@
     {
       "id": "wildlife-deer-v1",
       "name": "wildlife deer v1",
-      "image": "demos/wildlife-v2/deer/motion-v2/sheet.png",
-      "width": 1968,
+      "image": "demos/wildlife-v2/deer/behavior-v1/sheet.png",
+      "width": 4080,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "b3b3dcf5e46b8c7b4132481effb763dfa43c481e51526639c387c24ebf613286",
+      "fingerprint": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -6646,6 +6646,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-deer-behavior-v1",
+      "name": "wildlife v2 deer behavior v1",
+      "image": "demos/wildlife-v2/deer/behavior-v1/sheet.png",
+      "width": 4080,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-peacock-behavior-v1",
+      "name": "wildlife v2 peacock behavior v1",
+      "image": "demos/wildlife-v2/peacock/behavior-v1/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "728f088cfcad7e9b902026f929777e1b692f6fb6c869e7a524419e2fa807dcd2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-raven-behavior-v1",
+      "name": "wildlife v2 raven behavior v1",
+      "image": "demos/wildlife-v2/raven/behavior-v1/sheet.png",
+      "width": 4288,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "aa700a8768a5913d156a8ca221299ef5c5c91fea7fb53108d60803e0f644f2af",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-foraging-resources-behavior-v8",
+      "name": "wildlife v2 foraging resources behavior v8",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v8/sheet.png",
+      "width": 2496,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "efac7b507e499662e0de13f3ac260bc9e43ac86d0d3be1ed130b34edea4a0da4",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -8093,7 +8133,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:256"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:262"
         },
         {
           "system": "Gameplay",
@@ -9155,7 +9195,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:44"
+          "source": "src/wildlife/ForagePlacements.ts:45"
         },
         {
           "system": "Gameplay",
@@ -28177,7 +28217,7 @@
       "rect": [
         0,
         0,
-        2336,
+        2496,
         128
       ],
       "label": "wildlife-forage-resources-v1 · registered 32×32 frames",
@@ -28233,7 +28273,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:256"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:262"
         },
         {
           "system": "Gameplay",
@@ -30279,7 +30319,7 @@
       "rect": [
         0,
         0,
-        3936,
+        7776,
         384
       ],
       "label": "wildlife-peacock-provisional-v1 · registered 96×96 frames",
@@ -30477,7 +30517,7 @@
       "rect": [
         0,
         0,
-        2624,
+        4288,
         256
       ],
       "label": "wildlife-raven-provisional-v1 · registered 64×64 frames",
@@ -31921,7 +31961,7 @@
       "rect": [
         0,
         0,
-        1968,
+        4080,
         192
       ],
       "label": "wildlife-deer-v1 · registered 48×48 frames",
@@ -31933,7 +31973,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Deer.ts:5"
+          "source": "src/wildlife/Deer.ts:6"
         }
       ]
     },
@@ -34037,7 +34077,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:138"
+          "source": "src/editor/EditorPalettes.ts:140"
         },
         {
           "system": "Gameplay",
@@ -34069,7 +34109,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:177"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:183"
         },
         {
           "system": "Gameplay",
@@ -34085,7 +34125,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:18"
+          "source": "src/wildlife/AnimalWorkPose.ts:19"
         },
         {
           "system": "Gameplay",
@@ -34175,7 +34215,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:139"
+          "source": "src/editor/EditorPalettes.ts:141"
         },
         {
           "system": "Gameplay",
@@ -34211,7 +34251,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:173"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:179"
         },
         {
           "system": "Gameplay",
@@ -34219,7 +34259,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:20"
+          "source": "src/wildlife/AnimalWorkPose.ts:21"
         },
         {
           "system": "Gameplay",
@@ -34317,7 +34357,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:140"
+          "source": "src/editor/EditorPalettes.ts:142"
         },
         {
           "system": "Gameplay",
@@ -34391,7 +34431,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:141"
+          "source": "src/editor/EditorPalettes.ts:143"
         },
         {
           "system": "Gameplay",
@@ -34433,7 +34473,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:144"
+          "source": "src/editor/EditorPalettes.ts:146"
         },
         {
           "system": "Gameplay",
@@ -34479,7 +34519,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:145"
+          "source": "src/editor/EditorPalettes.ts:147"
         },
         {
           "system": "Gameplay",
@@ -34525,7 +34565,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:146"
+          "source": "src/editor/EditorPalettes.ts:148"
         },
         {
           "system": "Gameplay",
@@ -34575,7 +34615,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:147"
+          "source": "src/editor/EditorPalettes.ts:149"
         },
         {
           "system": "Gameplay",
@@ -34625,7 +34665,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:148"
+          "source": "src/editor/EditorPalettes.ts:150"
         },
         {
           "system": "Gameplay",
@@ -34671,7 +34711,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:142"
+          "source": "src/editor/EditorPalettes.ts:144"
         },
         {
           "system": "Gameplay",
@@ -34703,7 +34743,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:187"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:193"
         },
         {
           "system": "Gameplay",
@@ -34711,51 +34751,51 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:88"
+          "source": "src/wildlife/AnimalWorkPose.ts:98"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:34"
+          "source": "src/wildlife/AnimalWorkSystem.ts:36"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:35"
+          "source": "src/wildlife/AnimalWorkSystem.ts:37"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:126"
+          "source": "src/wildlife/AnimalWorkSystem.ts:133"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:136"
+          "source": "src/wildlife/AnimalWorkSystem.ts:143"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:185"
+          "source": "src/wildlife/AnimalWorkSystem.ts:192"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:186"
+          "source": "src/wildlife/AnimalWorkSystem.ts:193"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:288"
+          "source": "src/wildlife/AnimalWorkSystem.ts:298"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:460"
+          "source": "src/wildlife/AnimalWorkSystem.ts:470"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:503"
+          "source": "src/wildlife/AnimalWorkSystem.ts:513"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:548"
+          "source": "src/wildlife/AnimalWorkSystem.ts:558"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:557"
+          "source": "src/wildlife/AnimalWorkSystem.ts:567"
         },
         {
           "system": "Gameplay",
@@ -34779,15 +34819,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:19"
+          "source": "src/wildlife/ForagePlacements.ts:20"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:27"
+          "source": "src/wildlife/ForagePlacements.ts:28"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:67"
+          "source": "src/wildlife/ForagePlacements.ts:69"
         },
         {
           "system": "Gameplay",
@@ -34817,7 +34857,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:143"
+          "source": "src/editor/EditorPalettes.ts:145"
         },
         {
           "system": "Gameplay",
@@ -34867,7 +34907,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:149"
+          "source": "src/editor/EditorPalettes.ts:151"
         },
         {
           "system": "Gameplay",
@@ -34897,7 +34937,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:150"
+          "source": "src/editor/EditorPalettes.ts:152"
         },
         {
           "system": "Gameplay",
@@ -34927,7 +34967,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:151"
+          "source": "src/editor/EditorPalettes.ts:153"
         },
         {
           "system": "Gameplay",
@@ -34957,7 +34997,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:152"
+          "source": "src/editor/EditorPalettes.ts:154"
         },
         {
           "system": "Gameplay",
@@ -35039,31 +35079,31 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWork.ts:106"
+          "source": "src/wildlife/AnimalWork.ts:121"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:95"
+          "source": "src/wildlife/AnimalWorkSystem.ts:99"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:496"
+          "source": "src/wildlife/AnimalWorkSystem.ts:506"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:554"
+          "source": "src/wildlife/AnimalWorkSystem.ts:564"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForageResources.ts:147"
+          "source": "src/wildlife/ForageResources.ts:151"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForageResources.ts:237"
+          "source": "src/wildlife/ForageResources.ts:245"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForageResources.ts:240"
+          "source": "src/wildlife/ForageResources.ts:248"
         },
         {
           "system": "Gameplay",
@@ -35105,7 +35145,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:153"
+          "source": "src/editor/EditorPalettes.ts:155"
         },
         {
           "system": "Gameplay",
@@ -35155,7 +35195,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:154"
+          "source": "src/editor/EditorPalettes.ts:156"
         },
         {
           "system": "Gameplay",
@@ -36019,7 +36059,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:44"
+          "source": "src/wildlife/ForagePlacements.ts:45"
         },
         {
           "system": "Gameplay",

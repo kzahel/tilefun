@@ -170,3 +170,7 @@ scripts/wildlife/register-range-168.mjs -text whitespace=blank-at-eol,blank-at-e
 # Exact retained wildlife action helpers for batch 170.
 scripts/wildlife/herd-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 scripts/wildlife/register-herd-170.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Exact retained wildlife action helpers for batch 172.
+scripts/wildlife/forest-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/wildlife/register-forest-172.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

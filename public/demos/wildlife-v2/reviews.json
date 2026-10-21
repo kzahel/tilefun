@@ -23375,5 +23375,329 @@
         "sha256": "3ae534bd6fc5b4d2d8b3a5959ccdda0c51661ee58b02ed6e6d01a2805ab26d32"
       }
     ]
+  },
+  {
+    "id": "deer-behavior-v1",
+    "animalId": "deer",
+    "revision": "behavior-v1",
+    "name": "Deer finite browsing and forefoot alarm stamp",
+    "batchId": "wildlife-v2-behaviors-172",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/deer/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-deer-behavior-v1",
+      "name": "Deer finite browsing and forefoot alarm stamp sheet",
+      "image": "demos/wildlife-v2/deer/behavior-v1/sheet.png",
+      "width": 4080,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816",
+      "source": "art-source/wildlife-v2/deer/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-deer-behavior-v1-scene",
+      "name": "Deer finite browsing and forefoot alarm stamp scene",
+      "image": "demos/wildlife-v2/deer/behavior-v1/scene-native.png",
+      "width": 384,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "ad0006ed49a5053361df271607ae08eb39e7f82fdf0c5c60937ea93b99357806",
+      "source": "art-source/wildlife-v2/deer/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-deer-behavior-v1-contact",
+      "name": "Deer finite browsing and forefoot alarm stamp contact",
+      "image": "demos/wildlife-v2/deer/behavior-v1/contact-sheet-native.png",
+      "width": 2112,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "de21fac648b6426f538fd0373676d22a351a7fff8e0336f12498c0c39a77f762",
+      "source": "art-source/wildlife-v2/deer/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/deer/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/contact-sheet-native.png",
+        "sha256": "de21fac648b6426f538fd0373676d22a351a7fff8e0336f12498c0c39a77f762"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/index.html",
+        "sha256": "dcb2a02c07cd17e7964dc22a9dd3518222beed546f83d55948dfa58643674df4"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/pixel-audit.json",
+        "sha256": "ea401205d03755b06ecd43f9df5dff6b14b34dd7f0243f1bb8b43c86d5d4a346"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/preview-native.gif",
+        "sha256": "4e6fe8a89dcdfe551edb54cac1a4a9b0e6c4988e73133be7c332d24015b37f54"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/preview.gif",
+        "sha256": "e25bb70a62af90adf4cf25ceae1c50e6e6511ebffac4247d3c73946214f48ce3"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/scene-native.png",
+        "sha256": "ad0006ed49a5053361df271607ae08eb39e7f82fdf0c5c60937ea93b99357806"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/sheet.png",
+        "sha256": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/source-audit.json",
+        "sha256": "e485b3b566f7f164cf3c7315acc5a97ab5fc0111738c378399be639b8cf965a5"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/sprite.json",
+        "sha256": "c700a0c3e58510346cf5f17b2d122cf506cc64eee9161dfc084be3d226932652"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/behavior-v1/validation.json",
+        "sha256": "2d3edc7d285d0365879bdede16c94393fff1f3213858a66f74074a7e84048c89"
+      }
+    ]
+  },
+  {
+    "id": "peacock-behavior-v1",
+    "animalId": "peacock",
+    "revision": "behavior-v1",
+    "name": "Peacock reciprocal partner courtship",
+    "batchId": "wildlife-v2-behaviors-172",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/peacock/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-peacock-behavior-v1",
+      "name": "Peacock reciprocal partner courtship sheet",
+      "image": "demos/wildlife-v2/peacock/behavior-v1/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "728f088cfcad7e9b902026f929777e1b692f6fb6c869e7a524419e2fa807dcd2",
+      "source": "art-source/wildlife-v2/peacock/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-peacock-behavior-v1-scene",
+      "name": "Peacock reciprocal partner courtship scene",
+      "image": "demos/wildlife-v2/peacock/behavior-v1/scene-native.png",
+      "width": 576,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "1f0fedc387d5648a2c3a01cef116fc107dd8423f47dadaef5ad4cb90a8113324",
+      "source": "art-source/wildlife-v2/peacock/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-peacock-behavior-v1-contact",
+      "name": "Peacock reciprocal partner courtship contact",
+      "image": "demos/wildlife-v2/peacock/behavior-v1/contact-sheet-native.png",
+      "width": 3840,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "de3d531ebf254b67d202ef29438912d9834789755dde15f7906e4fe94848dece",
+      "source": "art-source/wildlife-v2/peacock/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/peacock/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/contact-sheet-native.png",
+        "sha256": "de3d531ebf254b67d202ef29438912d9834789755dde15f7906e4fe94848dece"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/index.html",
+        "sha256": "6dd7bbe7db9f3d8a285b45460a63bdf62299fcfe2923f74502f663bfaf3b02ed"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/pixel-audit.json",
+        "sha256": "bc4f965b285b97c4999b743fbfdb389c887d704fcc48b748d679bcafd22e1914"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/preview-native.gif",
+        "sha256": "dbb28d057743f4e0dfe5abcd6aff478698aee7992843471847614b62bb0f5cd6"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/preview.gif",
+        "sha256": "42c982315512dba56ffcfcfb40f2ce261cc5ad11ce8cc4ebbde9c74b3ec0b32f"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/scene-native.png",
+        "sha256": "1f0fedc387d5648a2c3a01cef116fc107dd8423f47dadaef5ad4cb90a8113324"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/sheet.png",
+        "sha256": "728f088cfcad7e9b902026f929777e1b692f6fb6c869e7a524419e2fa807dcd2"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/source-audit.json",
+        "sha256": "ab7c809a4f57e42caaeb6518ef97c7848abc55f13bac7c8b577e738fddcfd34e"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/sprite.json",
+        "sha256": "11c129517c828bf24cae2636745e3a226486d8446e8a1f3e215fcd9717facfb5"
+      },
+      {
+        "path": "demos/wildlife-v2/peacock/behavior-v1/validation.json",
+        "sha256": "8c419f02b006a6dd45c9f3fe51781b6843e15ffd9a8dede6a8cc72d9eab83dba"
+      }
+    ]
+  },
+  {
+    "id": "raven-behavior-v1",
+    "animalId": "raven",
+    "revision": "behavior-v1",
+    "name": "Raven bill pickup and conserved pebble caching",
+    "batchId": "wildlife-v2-behaviors-172",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/raven/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-raven-behavior-v1",
+      "name": "Raven bill pickup and conserved pebble caching sheet",
+      "image": "demos/wildlife-v2/raven/behavior-v1/sheet.png",
+      "width": 4288,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "aa700a8768a5913d156a8ca221299ef5c5c91fea7fb53108d60803e0f644f2af",
+      "source": "art-source/wildlife-v2/raven/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-raven-behavior-v1-scene",
+      "name": "Raven bill pickup and conserved pebble caching scene",
+      "image": "demos/wildlife-v2/raven/behavior-v1/scene-native.png",
+      "width": 448,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "214470e60c6e9e9bb8c46c0e16153d2634b971c82d70cf0843722f467f00223f",
+      "source": "art-source/wildlife-v2/raven/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-raven-behavior-v1-contact",
+      "name": "Raven bill pickup and conserved pebble caching contact",
+      "image": "demos/wildlife-v2/raven/behavior-v1/contact-sheet-native.png",
+      "width": 1664,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "2067efd5c3efc0f02643f6fca08031e92afde304759a50fcaec760779cfefacd",
+      "source": "art-source/wildlife-v2/raven/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/raven/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/contact-sheet-native.png",
+        "sha256": "2067efd5c3efc0f02643f6fca08031e92afde304759a50fcaec760779cfefacd"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/index.html",
+        "sha256": "d04b12fe1f95389faf01ecd02f61c8f62d3aef5c14e01c20b82c14c7355123fb"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/pixel-audit.json",
+        "sha256": "975863aef599c3aec0023bddbf02292a6e0700787a48b4d1d6c9860832e31737"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/preview-native.gif",
+        "sha256": "6e9d26e6c325f208551ad03b481d74143b0ac642d140a0b8546d87f499d67787"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/preview.gif",
+        "sha256": "0ca7c7f39ea837585564232558c7e5fbccfa57f8bebebb65093287d371b9fa8a"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/scene-native.png",
+        "sha256": "214470e60c6e9e9bb8c46c0e16153d2634b971c82d70cf0843722f467f00223f"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/sheet.png",
+        "sha256": "aa700a8768a5913d156a8ca221299ef5c5c91fea7fb53108d60803e0f644f2af"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/source-audit.json",
+        "sha256": "6909cd75c90817c44b6856d62961b09b3f9e94632f58ac13992c1bab712b822c"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/sprite.json",
+        "sha256": "64705f261f395bce54ee06f18f333c92eb544b76d6692d1c0537807a909a6136"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/behavior-v1/validation.json",
+        "sha256": "b7a0320036bc9e406eab2092f943deebb87db21f16cf51b765fad926c3bf927f"
+      }
+    ]
+  },
+  {
+    "id": "foraging-resources-behavior-v8",
+    "animalId": "foraging-resources",
+    "revision": "behavior-v8",
+    "name": "Shiny pebbles and saved raven hoards",
+    "batchId": "wildlife-v2-behaviors-172",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/foraging-resources/behavior-v8/",
+    "sheet": {
+      "id": "wildlife-v2-foraging-resources-behavior-v8",
+      "name": "Shiny pebbles and saved raven hoards sheet",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v8/sheet.png",
+      "width": 2496,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "efac7b507e499662e0de13f3ac260bc9e43ac86d0d3be1ed130b34edea4a0da4",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v8"
+    },
+    "scene": {
+      "id": "wildlife-v2-foraging-resources-behavior-v8-scene",
+      "name": "Shiny pebbles and saved raven hoards scene",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v8/scene-native.png",
+      "width": 160,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "229de3a6074fcb5eeb6425b716685ed07a039a7a6c226f4b680b927f9c86c23b",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v8"
+    },
+    "contact": {
+      "id": "wildlife-v2-foraging-resources-behavior-v8-contact",
+      "name": "Shiny pebbles and saved raven hoards contact",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v8/contact-sheet-native.png",
+      "width": 160,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "82e2506c06c9f09032984ea68f44768af87044549757ace767ccf21e78a354d9",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v8"
+    },
+    "preview": "demos/wildlife-v2/foraging-resources/behavior-v8/preview.png",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v8/contact-sheet-native.png",
+        "sha256": "82e2506c06c9f09032984ea68f44768af87044549757ace767ccf21e78a354d9"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v8/index.html",
+        "sha256": "2bf626ebe2168970446a993b2f24a346ab9817a7aad5f6768cb8f8d9967a8b92"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v8/pixel-audit.json",
+        "sha256": "d163f1004e43b1f50a495bfc21afc4230f0dd8be06c60de46f047eb3e940a8dd"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v8/preview.png",
+        "sha256": "229de3a6074fcb5eeb6425b716685ed07a039a7a6c226f4b680b927f9c86c23b"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v8/scene-native.png",
+        "sha256": "229de3a6074fcb5eeb6425b716685ed07a039a7a6c226f4b680b927f9c86c23b"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v8/sheet.png",
+        "sha256": "efac7b507e499662e0de13f3ac260bc9e43ac86d0d3be1ed130b34edea4a0da4"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v8/sprite.json",
+        "sha256": "71effb0708dc674b05f4c828529fa988a728fb47b410a87e7addc5960b4e7625"
+      }
+    ]
   }
 ]

@@ -1,0 +1,89 @@
+{
+  "identity": "deer-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 48,
+  "frameHeight": 48,
+  "anchor": [
+    24,
+    36
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "browse",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 30
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "lower": {
+      "start": 41,
+      "count": 10,
+      "frameDuration": 75,
+      "loop": false
+    },
+    "browse": {
+      "start": 51,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": true
+    },
+    "raise": {
+      "start": 63,
+      "count": 10,
+      "frameDuration": 75,
+      "loop": false
+    },
+    "stamp": {
+      "start": 73,
+      "count": 12,
+      "frameDuration": 50,
+      "loop": false
+    }
+  },
+  "sheetSha256": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816",
+  "rootTravelPixelsPerCycle": 17.28,
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  }
+}

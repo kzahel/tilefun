@@ -1,0 +1,18 @@
+{
+  "blend": "art-source/wildlife-v2/deer/motion-v2/deer.blend",
+  "masters": "art-source/wildlife-v2/deer/motion-v2/masters.json",
+  "sheet": "public/demos/wildlife-v2/deer/motion-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/deer/motion-v2/sprite.json",
+  "canvas": 48,
+  "anchor": [
+    24,
+    36
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/deer/motion-v2/deer.blend": "fb44ce6f34853bb50427c77ca520ad05a25c551dd105524f144e6e75874f1011",
+    "art-source/wildlife-v2/deer/motion-v2/masters.json": "fafc300cc6c18d7fe43632167e802e6dd18999b8f8e44e83d8cec6e84be7035a",
+    "public/demos/wildlife-v2/deer/motion-v2/sheet.png": "b3b3dcf5e46b8c7b4132481effb763dfa43c481e51526639c387c24ebf613286",
+    "public/demos/wildlife-v2/deer/motion-v2/sprite.json": "b4fdf0ec3a9fd6cb6596d3ca5fe58bb4362d568adadabcc0e081da5e978e5f25",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9"
+  }
+}

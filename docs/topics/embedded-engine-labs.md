@@ -90,6 +90,11 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 
 ## Animal browser and natural return timing
 
+[172](../tactical/172-browsing-courtship-and-collecting.md) adds deer, peacock and
+raven scenes using ordinary Realm work, native deer/fauna travel and saved real
+resources/partners. The page supplies fixtures and camera framing. A normal placed
+tiger triggers deer warning/escape; there is no lab-only alarm, courtship or cache AI.
+
 [170](../tactical/170-rumination-flocks-and-dust-baths.md) adds cow, sheep and
 donkey demonstrations with ordinary saved grass, actual flock mates and dust
 patches. Shared Realm work owns meal accounting, regrouping, rolling support,

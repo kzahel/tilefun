@@ -2,7 +2,7 @@
   "version": 1,
   "id": "wildlife-distinct-behaviors",
   "updated": "2026-10-21",
-  "state": "seventh-batch-automation-verified-human-review-pending",
+  "state": "eighth-batch-automation-verified",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -2890,7 +2890,7 @@
       "runtimeType": "wildlife-peacock-provisional-v1",
       "family": "Birds",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -2898,27 +2898,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing planted bird has a fan action; ambient gestures had no real partner or encounter outcome.",
+            "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/Fauna.ts",
+          "src/wildlife/ForestWork.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Meet an eligible partner, open the fan and complete a reciprocal courtship display.",
+        "trigger": "Safe finite shrub, eligible actual partner or unowned loose shiny pebble.",
+        "scenario": "behavior-peacock",
+        "tactical": "docs/tactical/172-browsing-courtship-and-collecting.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "saved meaningful outcome",
+          "native travel, heading and home bounds",
+          "real objects or reciprocal partner",
+          "readiness and companion protections",
+          "natural/editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/ForestWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/peacock/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the real behavior demonstration and exact retained action bank."
     },
     "whale-shark": {
       "name": "Whale shark",
@@ -3286,7 +3330,7 @@
       "runtimeType": "wildlife-raven-provisional-v1",
       "family": "Birds",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "air",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "open",
@@ -3294,27 +3338,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing raven has bounded native flights and bill/throat gesture; shiny-object collection and conserved cache storage were absent.",
+            "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/Fauna.ts",
+          "src/wildlife/ForestWork.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Pick up real shiny pebbles, carry them in the bill and conserve those actors in a saved cache.",
+        "trigger": "Safe finite shrub, eligible actual partner or unowned loose shiny pebble.",
+        "scenario": "behavior-raven",
+        "tactical": "docs/tactical/172-browsing-courtship-and-collecting.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "saved meaningful outcome",
+          "native travel, heading and home bounds",
+          "real objects or reciprocal partner",
+          "readiness and companion protections",
+          "natural/editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/ForestWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/raven/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the real behavior demonstration and exact retained action bank."
     },
     "crow": {
       "name": "Carrion crow",
@@ -6282,7 +6370,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the ginger coat\u2019s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the ginger coat’s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-ginger",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -6361,7 +6449,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the black coat\u2019s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the black coat’s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-black",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -8209,7 +8297,7 @@
       "runtimeType": "wildlife-deer-v1",
       "family": "Hoofed & large herbivores",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "deer",
         "habitat": null,
@@ -8217,27 +8305,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing doe has separate grounded native travel, herd alarms and tail flags; feeding and contextual forefoot stamping were absent.",
+            "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+          }
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/wildlife/Deer.ts",
+          "src/wildlife/ForestWork.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Browse real shrub portions; stamp on alarm before native escape.",
+        "trigger": "Safe finite shrub, eligible actual partner or unowned loose shiny pebble.",
+        "scenario": "behavior-deer",
+        "tactical": "docs/tactical/172-browsing-courtship-and-collecting.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "saved meaningful outcome",
+          "native travel, heading and home bounds",
+          "real objects or reciprocal partner",
+          "readiness and companion protections",
+          "natural/editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/ForestWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/deer/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/172-browsing-courtship-and-collecting/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the real behavior demonstration and exact retained action bank."
     },
     "frog": {
       "name": "Frog",
@@ -8541,6 +8673,14 @@
     {
       "date": "2026-10-21",
       "summary": "170: paid cow rumination, sheep flock regrouping and donkey dust bathing implemented. Twenty-three verified entries/twenty-one signatures; four exact art reviews pending. 135 affected, 20 final herd and 24 initial fauna checks pass. Full native: 6,561 passed / 7 failed / 10 skipped. Five known Windows failures remain; two outdated assertions corrected with 18 settlement and three grazer checks passing. Full browser: 826 passed / three failed; first sequential recheck eight passed / one train failure. Final isolated checkpoint reproduces the original manifest digest; all 12 production checks pass unchanged: both six-animal Canvas/GPU boundaries, four train, five touch and one standalone review. Types/lint/build, normal-retina 1,948-candidate manifest, streaming readiness, Node 1 / HTTP 3 / Worker 11 plus dry-run pass."
+    },
+    {
+      "date": "2026-10-21",
+      "summary": "172: deer browse/stamp, reciprocal peacock courtship and conserved raven object caches pass 108 affected native checks, 16 raven/peacock fauna cases and both expanded nine-animal Canvas/GPU Worker boundaries. Four exact pending art identities; 37 byte-identical replays, 1,864 native/enlarged crops, 2,260 endpoints, 567 planted feet and 440 head/body connections. Full regressions follow."
+    },
+    {
+      "date": "2026-10-21",
+      "summary": "172: deer finite browsing/alarm stamping, reciprocal peacock courtship and conserved raven object caches implemented. Final isolated 115 authority and 249 profile checks pass; both nine-animal Canvas/GPU Worker boundaries pass. Four exact art identities remain pending human review. Full native 6592 pass/6 fail/10 skip: five known Windows restrictions and one native-deer assertion corrected by the final profile recheck. Full browser 828 pass/one unchanged train startup allowance. Final six-case rendered recheck: five pass/one alternate train backend exceeds the same allowance; both animal boundaries pass. Final types/build, normal-retina 1964 manifest, streaming readiness, HTTP 3, prior Node 1/Worker 11 plus dry-run and 403 migration decisions pass. Cold train result is retained in tactical validation. All four unchanged train checks subsequently pass cold without concurrent benchmark."
     }
   ]
 }

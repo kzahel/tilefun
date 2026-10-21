@@ -1,13 +1,57 @@
 import { expect, it } from "vitest";
 import { TerrainId } from "../autotile/TerrainId.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
+import { DEER_TYPE } from "./Deer.js";
 import { faunaType } from "./Fauna.js";
 import { foragePlacements } from "./ForagePlacements.js";
+import { forestSupplies } from "./ForestHabitat.js";
 
 const nature = {
   terrain: () => TerrainId.Grass,
   inThicket: () => false,
 } as unknown as NaturalLandscape;
+it.each([DEER_TYPE, faunaType("raven")])(
+  "%s forest supplies are bounded, cell-owned and independent of actor query order",
+  (type) => {
+    for (const [cx, cy] of [
+      [0, 0],
+      [-2, -1],
+      [2, 3],
+    ])
+      for (const [dx, dy] of [
+        [1, 1],
+        [254, 1],
+        [1, 254],
+        [254, 254],
+      ]) {
+        const a = {
+          type,
+          featureId: `forest:${type}:a`,
+          wx: (cx ?? 0) * 256 + (dx ?? 0),
+          wy: (cy ?? 0) * 256 + (dy ?? 0),
+          route: [],
+        };
+        const b = { ...a, featureId: `forest:${type}:b`, wx: a.wx + 1 };
+        const first = forestSupplies([a, b], nature, cx ?? 0, cy ?? 0);
+        expect(first).toEqual(forestSupplies([b, a], nature, cx ?? 0, cy ?? 0));
+        expect(first).toHaveLength(type === DEER_TYPE ? 1 : 3);
+        expect(new Set(first.map((e) => e.featureId)).size).toBe(first.length);
+        for (const item of first) {
+          expect(Math.floor(item.wx / 256)).toBe(cx);
+          expect(Math.floor(item.wy / 256)).toBe(cy);
+          expect(item.featureId.startsWith(a.featureId)).toBe(true);
+        }
+        expect(
+          forestSupplies(
+            [a],
+            { ...nature, terrain: () => TerrainId.ShallowWater } as unknown as NaturalLandscape,
+            cx ?? 0,
+            cy ?? 0,
+          ),
+        ).toEqual([]);
+      }
+  },
+);
 it.each(["horse", "giraffe", "beaver", "cow", "donkey"] as const)(
   "%s supplies share stable owners within both sides of chunk seams",
   (species) => {

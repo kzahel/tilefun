@@ -36,6 +36,7 @@ export function updateDeerAI(
     : undefined;
   if (ai.state !== "recover" && (nearby || herdAlarm))
     startleDeer(deer, nearby ?? herdAlarm ?? deer.position);
+  if (environment.animalWork?.(deer, dt, planning)) return;
   if (ai.motion) return;
   velocity.vx = velocity.vy = 0;
   ai.timer -= dt;

@@ -304,7 +304,11 @@ it("runs native ground cycles in production Realm and retains group/manual ident
         ).toBe(0);
       }
     }
-    expect([...clips].filter((c) => c !== 3).sort()).toEqual([0, 1, 2]);
+    const names = new Set([...clips].map((c) => DEER_CLIPS[c]?.name));
+    expect(names.has("idle")).toBe(true);
+    expect(names.has("walk")).toBe(true);
+    if (names.has("browse")) expect(deer().some((e) => (e.animalWork?.eaten ?? 0) > 0)).toBe(true);
+    else expect(names.has("action")).toBe(true);
     const removed = required(deer()[0]),
       retained = required(deer()[1]);
     s.realm.entityManager.remove(removed.id);

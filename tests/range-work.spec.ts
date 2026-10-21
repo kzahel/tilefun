@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { PNG } from "pngjs";
+import { required } from "../src/art/ArtCatalog.js";
 
 test.use({ channel: "chromium", deviceScaleFactor: 1 });
 type Pose = {
@@ -36,26 +37,44 @@ function spritePixels(png: PNG, pose: Pose, color: number[]) {
   return { painted, pixels: Buffer.concat(rows).toString("base64") };
 }
 for (const renderer of ["canvas", "gpu"]) {
-  test(`range and herd activities animate through the Worker (${renderer})`, async ({ page }) => {
+  test(`range, herd and forest activities animate through the Worker (${renderer})`, async ({
+    page,
+  }) => {
     test.setTimeout(180000);
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    for (const kind of ["horse", "giraffe", "beaver", "cow", "sheep", "donkey"] as const) {
+    for (const kind of [
+      "horse",
+      "giraffe",
+      "beaver",
+      "cow",
+      "sheep",
+      "donkey",
+      "deer",
+      "peacock",
+      "raven",
+    ] as const) {
       const meta = JSON.parse(
         readFileSync(`public/demos/wildlife-v2/${kind}/behavior-v1/sprite.json`, "utf8"),
       );
       const action = meta.clips[
-        kind === "horse"
-          ? "graze"
-          : kind === "giraffe"
-            ? "browse"
-            : kind === "cow"
-              ? "ruminate"
-              : kind === "sheep"
-                ? "bleat"
-                : kind === "donkey"
-                  ? "roll"
-                  : "build"
+        kind === "deer"
+          ? "browse"
+          : kind === "peacock"
+            ? "display"
+            : kind === "raven"
+              ? "bury"
+              : kind === "horse"
+                ? "graze"
+                : kind === "giraffe"
+                  ? "browse"
+                  : kind === "cow"
+                    ? "ruminate"
+                    : kind === "sheep"
+                      ? "bleat"
+                      : kind === "donkey"
+                        ? "roll"
+                        : "build"
       ] as { start: number; count: number };
       await page.goto(
         `/tilefun/workshop.html?geometry=nature-behavior-${kind}&renderer=${renderer}#/tool/world-geometry`,
@@ -67,20 +86,29 @@ for (const renderer of ["canvas", "gpu"]) {
         JSON.parse((await canvas.getAttribute("data-work-actors")) ?? "[]");
       const subject = (all: Pose[]) =>
         all
-          .filter((a) => a.type === `wildlife-${kind}-provisional-v1`)
+          .filter(
+            (a) =>
+              a.type === (kind === "deer" ? "wildlife-deer-v1" : `wildlife-${kind}-provisional-v1`),
+          )
           .sort((a, b) => a.id - b.id)[0];
       const color =
-        kind === "horse"
-          ? [199, 137, 73]
-          : kind === "giraffe"
-            ? [196, 154, 92]
-            : kind === "cow"
-              ? [219, 222, 203]
-              : kind === "sheep"
-                ? [217, 221, 191]
-                : kind === "donkey"
-                  ? [167, 170, 161]
-                  : [118, 88, 61];
+        kind === "deer"
+          ? [173, 128, 80]
+          : kind === "peacock"
+            ? [61, 108, 126]
+            : kind === "raven"
+              ? [38, 51, 61]
+              : kind === "horse"
+                ? [199, 137, 73]
+                : kind === "giraffe"
+                  ? [196, 154, 92]
+                  : kind === "cow"
+                    ? [219, 222, 203]
+                    : kind === "sheep"
+                      ? [217, 221, 191]
+                      : kind === "donkey"
+                        ? [167, 170, 161]
+                        : [118, 88, 61];
       const active = (p?: Pose) =>
         p?.visible && p.column >= action.start && p.column < action.start + action.count;
       await expect
@@ -89,7 +117,9 @@ for (const renderer of ["canvas", "gpu"]) {
             const all = await poses(),
               a = subject(all);
             return (
-              !!active(a) && (kind !== "beaver" || all.some((e) => e.parent === a?.id && e.visible))
+              !!active(a) &&
+              (!["beaver", "raven"].includes(kind) ||
+                all.some((e) => e.parent === a?.id && e.visible))
             );
           },
           { timeout: 45000, intervals: [30] },
@@ -107,7 +137,13 @@ for (const renderer of ["canvas", "gpu"]) {
               a.screen,
               all
                 .filter((e) => e !== a && e.parent !== a.id)
-                .map((e) => [e.type, e.x, e.y, e.z, e.column]),
+                .map((e) => [
+                  e.type,
+                  e.x,
+                  e.y,
+                  e.z,
+                  kind === "peacock" && e.type === a.type ? null : e.column,
+                ]),
             ])
           : undefined;
       };
@@ -136,7 +172,7 @@ for (const renderer of ["canvas", "gpu"]) {
         a = subject(before);
       expect(a).toBeDefined();
       const png = PNG.sync.read(
-        await canvas.screenshot({ path: `data/wildlife-170-${kind}-${renderer}.png` }),
+        await canvas.screenshot({ path: `data/wildlife-172-${kind}-${renderer}.png` }),
       );
       expect(a ? spritePixels(png, a, color).painted : 0).toBeGreaterThan(10);
       const stable = (all: Pose[]) =>
@@ -167,26 +203,54 @@ for (const renderer of ["canvas", "gpu"]) {
         ).toBeLessThanOrEqual(64);
         continue;
       }
+      if (kind === "peacock") {
+        const pair = before.filter((e) => e.type === a?.type);
+        expect(pair).toHaveLength(2);
+        expect(
+          Math.hypot(
+            required(pair[0]).x - required(pair[1]).x,
+            required(pair[0]).y - required(pair[1]).y,
+          ),
+        ).toBeLessThanOrEqual(42);
+        await expect
+          .poll(
+            async () =>
+              (await poses())
+                .filter((e) => e.type === a?.type)
+                .every((e) => e.column < meta.clips.open.start),
+            { timeout: 15000 },
+          )
+          .toBe(true);
+        continue;
+      }
       const type =
-        kind === "horse"
-          ? "spring-pool"
-          : kind === "giraffe"
-            ? "canopy-leaves"
-            : kind === "cow"
-              ? "growing-plant"
-              : kind === "donkey"
-                ? "dust"
-                : "lodge";
+        kind === "deer"
+          ? "browse-shrub"
+          : kind === "raven"
+            ? "hoard"
+            : kind === "horse"
+              ? "spring-pool"
+              : kind === "giraffe"
+                ? "canopy-leaves"
+                : kind === "cow"
+                  ? "growing-plant"
+                  : kind === "donkey"
+                    ? "dust"
+                    : "lodge";
       const column =
-        kind === "horse"
-          ? 54
-          : kind === "giraffe"
-            ? 62
-            : kind === "cow"
-              ? 16
-              : kind === "donkey"
-                ? 70
-                : 65;
+        kind === "deer"
+          ? 32
+          : kind === "raven"
+            ? 75
+            : kind === "horse"
+              ? 54
+              : kind === "giraffe"
+                ? 62
+                : kind === "cow"
+                  ? 16
+                  : kind === "donkey"
+                    ? 70
+                    : 65;
       await expect
         .poll(
           async () =>
@@ -202,22 +266,50 @@ for (const renderer of ["canvas", "gpu"]) {
       const resource = (await poses()).find((e) => e.type.includes(type) && e.column === column);
       expect(resource).toBeDefined();
       const outcome = PNG.sync.read(
-        await canvas.screenshot({ path: `data/wildlife-170-${kind}-outcome-${renderer}.png` }),
+        await canvas.screenshot({ path: `data/wildlife-172-${kind}-outcome-${renderer}.png` }),
       );
       const resourceColor =
-        kind === "horse"
-          ? [69, 110, 138]
-          : kind === "giraffe"
-            ? [115, 147, 74]
-            : kind === "cow"
-              ? [144, 175, 88]
-              : kind === "donkey"
-                ? [211, 186, 138]
-                : [161, 129, 82];
+        kind === "deer"
+          ? [97, 144, 77]
+          : kind === "raven"
+            ? [146, 121, 86]
+            : kind === "horse"
+              ? [69, 110, 138]
+              : kind === "giraffe"
+                ? [115, 147, 74]
+                : kind === "cow"
+                  ? [144, 175, 88]
+                  : kind === "donkey"
+                    ? [211, 186, 138]
+                    : [161, 129, 82];
       expect(
         resource ? spritePixels(outcome, resource, resourceColor).painted : 0,
         `${kind} resource outcome must draw actual staged pixels`,
       ).toBeGreaterThan(3);
+      if (kind === "deer") {
+        await page.getByRole("button", { name: "Resume", exact: true }).click();
+        await page.getByRole("button", { name: "Place tiger nearby", exact: true }).click();
+        await expect
+          .poll(
+            async () => {
+              const p = subject(await poses());
+              return (
+                !!p?.visible &&
+                p.column >= meta.clips.stamp.start &&
+                p.column < meta.clips.stamp.start + meta.clips.stamp.count
+              );
+            },
+            { timeout: 15000, intervals: [30] },
+          )
+          .toBe(true);
+        await page.getByRole("button", { name: "Pause", exact: true }).click();
+        const stamping = subject(await poses());
+        expect(stamping?.column).toBeGreaterThanOrEqual(meta.clips.stamp.start);
+        const warning = PNG.sync.read(
+          await canvas.screenshot({ path: `data/wildlife-172-deer-stamp-${renderer}.png` }),
+        );
+        expect(stamping ? spritePixels(warning, stamping, color).painted : 0).toBeGreaterThan(10);
+      }
     }
     expect(errors).toEqual([]);
   });

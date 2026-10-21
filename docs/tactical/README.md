@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [172 Browsing, courtship and collecting](172-browsing-courtship-and-collecting.md) | Implemented and automation verified: deer, peacock and raven; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [170 Rumination, flocks and dust baths](170-rumination-flocks-and-dust-baths.md) | Implemented and automation verified; cow, sheep and donkey; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [169 Wheel-lift towing](169-wheel-lift-towing.md) | Implemented and validated; appearance awaits owner inspection: real coupled cars, retained lift rig, controls, saves and matching fallbacks; [vehicles](../topics/vehicles.md) |
 | [168 Grazing, browsing and building](168-grazing-browsing-and-building.md) | Implemented and automation verified; horse, giraffe and beaver; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |

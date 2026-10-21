@@ -49,7 +49,7 @@ it.each(NATURAL_CASES)("$id keeps its explicit generation and landscape profile"
     expect(r.generation.type).toBe("flat");
     expect(r.landscape).toBeUndefined();
     if (c.id.startsWith("behavior-"))
-      expect(r.actors?.some((e) => e.fauna || e.rabbit || e.robin)).toBe(true);
+      expect(r.actors?.some((e) => e.fauna || e.rabbit || e.robin || e.deer)).toBe(true);
     else expect(r.actors?.some((e) => e.predator)).toBe(true);
   }
   expect(r.generation.seed).toBe(c.seed);

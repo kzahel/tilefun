@@ -681,3 +681,9 @@
 !sheep/behavior-v1/*
 !donkey/behavior-v1/*
 !foraging-resources/behavior-v7/*
+
+# Owner-authorized behavior batch 172.
+!deer/behavior-v1/*
+!peacock/behavior-v1/*
+!raven/behavior-v1/*
+!foraging-resources/behavior-v8/*

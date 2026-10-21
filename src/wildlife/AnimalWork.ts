@@ -23,7 +23,10 @@ export interface AnimalWork {
     | "beaver"
     | "cow"
     | "sheep"
-    | "donkey";
+    | "donkey"
+    | "deer"
+    | "peacock"
+    | "raven";
   state:
     | "idle"
     | "seek"
@@ -63,7 +66,13 @@ export interface AnimalWork {
     | "ruminate"
     | "stand"
     | "bleat"
-    | "roll";
+    | "roll"
+    | "stamp"
+    | "wait"
+    | "open"
+    | "display"
+    | "close"
+    | "bury";
   elapsed: number;
   cooldown: number;
   targetId?: string;
@@ -98,6 +107,12 @@ export interface AnimalWork {
   ruminated?: number;
   regrouped?: number;
   dustBaths?: number;
+  stampedAlarm?: boolean;
+  partnerId?: string;
+  displayLeader?: boolean;
+  courted?: number;
+  cacheFacing?: number;
+  sourcePosition?: PositionComponent;
 }
 
 export type FoodKind = "nut" | "fruit" | "root";
@@ -113,7 +128,9 @@ export interface WorkItem {
     | "nectar"
     | "water"
     | "lodge"
-    | "dust";
+    | "dust"
+    | "shiny"
+    | "hoard";
   claimedBy?: string;
   /** Stable player identity for thrown balls, or natural lineage/manual owner for a site. */
   owner?: string;
@@ -121,6 +138,9 @@ export interface WorkItem {
   returned?: boolean;
   units: number;
   contents: FoodKind[];
+  /** Real conserved actors stored in a raven hoard, never edible food counts. */
+  storedIds?: string[];
+  cachedIn?: string;
   ballOrder?: number;
   pollination?: { remaining: number; count: number };
   growth?: {

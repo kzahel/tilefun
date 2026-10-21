@@ -1,0 +1,21 @@
+{
+  "blend": "art-source/wildlife-v2/raven/roster-v3/raven.blend",
+  "masters": "art-source/wildlife-v2/raven/roster-v3/masters.json",
+  "sheet": "public/demos/wildlife-v2/raven/roster-v3/sheet.png",
+  "metadata": "public/demos/wildlife-v2/raven/roster-v3/sprite.json",
+  "canvas": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "beakLength": 0.34,
+  "motionMs": 25,
+  "sha256": {
+    "art-source/wildlife-v2/raven/roster-v3/raven.blend": "4ecc257c16ac858fe39181557a9de467ba87c4af7657dc17aebf71379e189616",
+    "art-source/wildlife-v2/raven/roster-v3/masters.json": "f63ffb8f4b216ee7a29017bd0b3f004e7b5f969ac918ecafd32d8a216b0a11e1",
+    "public/demos/wildlife-v2/raven/roster-v3/sheet.png": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9",
+    "public/demos/wildlife-v2/raven/roster-v3/sprite.json": "b49e2743852c64b3b2675883500d3a42fe11a128f1d10483b2d07e8479319245",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/flying-birds-147/profiles.json": "47ca7c671b2530e0124026add6cfdf0915a071ae0193f4c97c8cf6d95343182d"
+  }
+}

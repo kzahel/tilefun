@@ -1,0 +1,44 @@
+{
+  "identity": "foraging-resources-behavior-v8",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/172-browsing-courtship-and-collecting.md",
+  "replay": {
+    "identity": "foraging-resources-behavior-v8",
+    "status": "byte-identical",
+    "isolation": "minimal retained inputs only",
+    "artifacts": 7,
+    "sha256": {
+      "contact-sheet-native.png": "82e2506c06c9f09032984ea68f44768af87044549757ace767ccf21e78a354d9",
+      "index.html": "2bf626ebe2168970446a993b2f24a346ab9817a7aad5f6768cb8f8d9967a8b92",
+      "pixel-audit.json": "d163f1004e43b1f50a495bfc21afc4230f0dd8be06c60de46f047eb3e940a8dd",
+      "preview.png": "229de3a6074fcb5eeb6425b716685ed07a039a7a6c226f4b680b927f9c86c23b",
+      "scene-native.png": "229de3a6074fcb5eeb6425b716685ed07a039a7a6c226f4b680b927f9c86c23b",
+      "sheet.png": "efac7b507e499662e0de13f3ac260bc9e43ac86d0d3be1ed130b34edea4a0da4",
+      "sprite.json": "71effb0708dc674b05f4c828529fa988a728fb47b410a87e7addc5960b4e7625"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/foraging-resources/behavior-v8/inputs.json": "590c7daa451dcff7aa4970b1f7c5234d2dd929500d9f0a70ad91529704336784",
+    "art-source/wildlife-v2/foraging-resources/behavior-v8/paint.json": "eba6b4e578d759225e1f6d0c50cb447b0294928bedfdf919fa36a8d3a08f9df2",
+    "art-source/wildlife-v2/foraging-resources/behavior-v8/README.md": "f45cd41b994ecea9467188134babd8c95d7abd9f88f95120106b632c9412172c",
+    "art-source/wildlife-v2/foraging-resources/behavior-v8/replay.json": "1758ecfabf1a98cce2c004d61990ecfb3bbc4a023d117d8081fc1d2e7b93ddbe",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v8/contact-sheet-native.png": "82e2506c06c9f09032984ea68f44768af87044549757ace767ccf21e78a354d9",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v8/index.html": "2bf626ebe2168970446a993b2f24a346ab9817a7aad5f6768cb8f8d9967a8b92",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v8/pixel-audit.json": "d163f1004e43b1f50a495bfc21afc4230f0dd8be06c60de46f047eb3e940a8dd",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v8/preview.png": "229de3a6074fcb5eeb6425b716685ed07a039a7a6c226f4b680b927f9c86c23b",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v8/scene-native.png": "229de3a6074fcb5eeb6425b716685ed07a039a7a6c226f4b680b927f9c86c23b",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v8/sheet.png": "efac7b507e499662e0de13f3ac260bc9e43ac86d0d3be1ed130b34edea4a0da4",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v8/sprite.json": "71effb0708dc674b05f4c828529fa988a728fb47b410a87e7addc5960b4e7625",
+    "scripts/wildlife/forest-build.py": "e07fffe8b29b89de9fd69be505f626c636889d5f9d80fb514465ba0c8e5a1f27",
+    "scripts/wildlife/forest-finish.py": "7dc169649099ba1d8dd3573fa6669337d56ca51915b96d1a7a8d08b7de4b4408",
+    "scripts/wildlife/forest-replay.py": "f2a5d488277691672a3c652d9a749def57913133642bdb9505096f028681a2cf",
+    "scripts/wildlife/forest-resources.py": "b1663bed516633562adf81e83383ac2e420c14c0ca10e19676b97a11e158a1cc",
+    "scripts/wildlife/forest-art.mjs": "936f1a70efc1f69cdf4a3600d7a7760617d85e573490ec6726cd8961524bbd54",
+    "scripts/wildlife/register-forest-172.mjs": "3127dc068a70162858f3434171f4d82758e756ba75f61368f907e09d57e70ea2",
+    "scripts/wildlife/capture-behavior-155.mjs": "4cba4172d32bd77168b8929743c1b133e8ee6f22ec4285f0f3c71867beb1e6f8",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/foraging-resources/behavior-v7/sheet.png": "4d3bfb754510cf548ebecdf63521946ce5ac97343f2582f19e5da34e9b8acdf1"
+  }
+}

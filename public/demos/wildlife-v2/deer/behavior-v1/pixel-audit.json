@@ -1,0 +1,34 @@
+{
+  "identity": "deer-behavior-v1",
+  "poses": 176,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "lower": 10,
+      "browse": 3,
+      "raise": 10,
+      "stamp": 6
+    },
+    "up": {
+      "lower": 9,
+      "browse": 3,
+      "raise": 9,
+      "stamp": 6
+    },
+    "left": {
+      "lower": 10,
+      "browse": 3,
+      "raise": 10,
+      "stamp": 6
+    },
+    "right": {
+      "lower": 10,
+      "browse": 3,
+      "raise": 10,
+      "stamp": 6
+    }
+  },
+  "connectedHeadBodyChecks": 176
+}

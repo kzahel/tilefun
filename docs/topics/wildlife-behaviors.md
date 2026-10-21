@@ -1,9 +1,10 @@
 # Distinct animal behaviors and interactions
 
 Topic: wildlife-behaviors
-Status: seven batches implemented. Twenty-three entries have targeted automation
-verification: twenty-one distinct signatures and two inherited cat coats. Batch
-170 automation is complete; exact human review remains pending.
+Status: eight batches implemented. Twenty-six entries have targeted automation
+verification: twenty-four distinct signatures and two inherited cat coats. Batch
+172 final animal automation is verified; broad-suite platform/timing limits are
+recorded in the tactical. Human review remains pending.
 Updated: 2026-10-21.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
@@ -47,7 +48,7 @@ original mallard-duck and bear roster IDs. Preserve completed art ledgers as his
 The [generated progress report](../wildlife-behavior-status.md) derives its counts
 and animal table from this ledger. The same generator writes compact Animal
 Browser progress data. Filter **Behavior progress → Demonstrations** and select
-**Demonstrate behavior** to open a shared authority scene. The other183 animals
+**Demonstrate behavior** to open a shared authority scene. The other 180 animals
 still need detailed audits and phase assignment. Existing behavior has not been
 removed or declared absent. Verified stages require recorded evidence.
 
@@ -389,3 +390,31 @@ and controlled movement. Resting flock mates therefore retain their heading on
 reload, including actors whose following/riding bypasses the native brain. Added
 actions can shift ride-clip indices; riding uses the named definition clips, and
 the grazer/horse native checks assert those names rather than fixed indices.
+
+## Browsing, courtship and conserved objects (172)
+
+[172](../tactical/172-browsing-courtship-and-collecting.md) integrates the separate
+native deer brain with real finite shrub browsing and a forefoot stamp before
+native alarm escape. The muzzle reaches the authored leaf crown. Readiness fences
+precede support probes; distant resource candidates are checked before terrain
+queries. Interrupted feeding releases its claim without taking a
+remote portion. Native recovery and companion control retain priority.
+
+Peacocks reserve an actual eligible partner, walk to a real rendezvous, face one
+another, open their fans, display and close them. Both count one completed social
+encounter only while the reciprocal partner remains present, supported and safe.
+Following/attached/ridden actors and other natural groups are excluded. Cancellation
+releases both partners; no breeding or companion creation is added.
+
+Ravens collect actual unowned shiny pebble actors and carry them at source bill
+sockets into an owned cache of at most three objects. Stored durable IDs and parent
+attachments conserve the objects across saves and residency. Cached objects remain
+inside the cache; deleting it releases its actual contents. A placed unowned cache
+can be adopted. Hoards are separate from edible food caches, have no renewal timer
+and manufacture no objects. Native occupied raven cells receive three finite loose
+pebbles; deer cells share one finite browse shrub. Manual animals create no supplies.
+
+Three ordinary Worker demonstrations expose these outcomes in both renderers.
+Retained new action scenes start at frame500; native locomotion cells come from
+their separate untouched source scenes. Four new exact identities await human
+review; earlier native cells and all73 previous resource cells remain unchanged.

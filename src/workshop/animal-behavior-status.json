@@ -567,13 +567,13 @@
     "review": "not-requested"
   },
   "peacock": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Meet an eligible partner, open the fan and complete a reciprocal courtship display.",
+    "scene": "behavior-peacock",
+    "review": "pending"
   },
   "whale-shark": {
     "phase": "unclassified",
@@ -666,13 +666,13 @@
     "review": "not-requested"
   },
   "raven": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "air",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Pick up real shiny pebbles, carry them in the bill and conserve those actors in a saved cache.",
+    "scene": "behavior-raven",
+    "review": "pending"
   },
   "crow": {
     "phase": "air",
@@ -1809,13 +1809,13 @@
     "review": "not-requested"
   },
   "deer": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Browse real shrub portions; stamp on alarm before native escape.",
+    "scene": "behavior-deer",
+    "review": "pending"
   },
   "frog": {
     "phase": "unclassified",

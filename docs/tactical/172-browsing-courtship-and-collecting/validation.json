@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-21",
+  "base": "fcc95ce0",
+  "state": "implemented-and-automation-verified",
+  "authority": {
+    "newScenarios": 28,
+    "affectedPassed": 115,
+    "nativeFaunaPassed": 16,
+    "foodContactUsesVisibleLeafCrown": true,
+    "cacheConservationAndReciprocalPartners": true,
+    "standingFootprintRedGreen": 3,
+    "blockedPartnerVerified": true,
+    "distantCandidateReadinessRedGreen": 3,
+    "workingSourceRegressionSubsetPassed": 115,
+    "explicitProfileAndReadinessPassed": 252,
+    "frozenBroadSweepPreReadinessOrderingCorrection": true,
+    "unreadyClaimsPreservationRedGreen": 2,
+    "isolatedFinalAffectedPassed": 115,
+    "isolatedExplicitProfilesPassed": 249
+  },
+  "art": {
+    "pendingIdentities": 4,
+    "pinnedArtifacts": 112,
+    "isolatedReplayArtifacts": 37,
+    "exactNativeAnd3xCrops": 1864,
+    "fixedLengthEndpointChecks": 2260,
+    "plantedFootChecks": 567,
+    "neckAttachmentChecks": 288,
+    "connectedHeadBodyChecks": 440,
+    "priorTravelCellsUnchanged": true,
+    "uniquePins": 85,
+    "hipAttachmentChecks": 590,
+    "featherRootChecks": 1232,
+    "priorSeventyThreeResourceCellsUnchanged": true,
+    "humanReview": "pending"
+  },
+  "focusedBrowser": {
+    "passed": 2,
+    "seconds": 188.76,
+    "rendererBoundaries": ["Canvas2D", "GPU"],
+    "animalsPerBoundary": 9,
+    "newAnimalsPerBoundary": 3,
+    "contract": "Changing stationary action pixels, physical rendezvous, held objects and staged cache/shrub pixels, real predator-triggered deer stamping and exact paused save/reload poses.",
+    "preStandingFootprintGuard": true
+  },
+  "manifest": {
+    "candidates": 1964,
+    "normalRetinaChromiumVerified": true,
+    "note": "Final isolated baseline plus wildlife source, with controller 171 excluded; main working inventory remains separately combined.",
+    "frozenBroadSweepDigest": "6674badbe3a3bbe141c97588a958863d6489f4ab9c8dfbc8ddeee5a1aea13e83",
+    "inputDigest": "942abd709595acbe2fed0005334d26bcd08a851202dac1b03cae471eee099032"
+  },
+  "fullUnits": {
+    "passed": 6592,
+    "failed": 6,
+    "skipped": 10,
+    "total": 6608,
+    "seconds": 1126.07,
+    "knownWindowsSymlinkFailures": 5,
+    "resolvedDeerLabComponentAssertion": true,
+    "correctionEvidence": "All 249 explicit generation/profile checks pass on the final isolated source; 115 affected authority checks also pass."
+  },
+  "fullBrowser": {
+    "startTime": "2026-10-21T15:22:58.789Z",
+    "duration": 2394071.482,
+    "expected": 828,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0,
+    "cases": 829,
+    "failure": "Unchanged gpu&meshes city train reload startup travel: 204.19140625 pixels versus <192.",
+    "nineAnimalRendererBoundariesPassed": 2
+  },
+  "nodeComparator": {
+    "passed": 1
+  },
+  "httpIntegration": {
+    "passed": 3,
+    "initialHarnessFailure": "Isolated dist static files were not linked; 3 unchanged checks pass after linking.",
+    "finalSourcePassed": 3
+  },
+  "worker": {
+    "passed": 11,
+    "dryRun": "passed"
+  },
+  "migration": {
+    "baselineDecisions": 403,
+    "browserCases": 829,
+    "nodeComparatorCases": 1,
+    "httpCases": 3,
+    "captureCases": 6
+  },
+  "streaming": {
+    "stages": 6,
+    "assertReady": "passed",
+    "finalSource": true,
+    "allFinalMissingIncompleteStaleZero": true
+  },
+  "finalBrowser": {
+    "startTime": "2026-10-21T16:06:51.599Z",
+    "duration": 240395.372,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0,
+    "animalRendererBoundariesPassed": 2,
+    "animalsPerBoundary": 9,
+    "unchangedTrainPassed": 3,
+    "failure": "Canvas train reload startup allowance: 205.1015625 pixels versus <192 during concurrent readiness benchmark; all four unchanged train checks subsequently pass without benchmark."
+  },
+  "checks": {
+    "typecheck": "passed",
+    "strictProductionBuild": "passed",
+    "catalogSheets": 714,
+    "catalogSourceUses": 1396,
+    "lint": "passed; 121 existing warnings and 42 infos"
+  },
+  "coldTrainRecheck": {
+    "startTime": "2026-10-21T16:12:41.332Z",
+    "duration": 55774.508,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "testSourceChanged": false,
+    "concurrentBenchmark": false
+  }
+}

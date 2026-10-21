@@ -6,6 +6,12 @@ Updated: 2026-10-20.
 
 ## Current generation policy
 
+[172](../tactical/172-browsing-courtship-and-collecting.md) adds one bounded browse
+shrub per occupied deer cell and three finite shiny pebbles per raven cell. Stable
+resource IDs derive from existing owners, independent of input query order; old
+animal identities, groups and RNG remain unchanged. Natural peacock groups already
+contain real partners. Manual animal placement creates no supplies or companions.
+
 [170](../tactical/170-rumination-flocks-and-dust-baths.md) adds at most one shared
 grass patch per occupied cow cell and one reusable dust patch per donkey cell,
 including authored farm residents. New IDs derive from existing owners and stay
