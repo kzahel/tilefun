@@ -23699,5 +23699,260 @@
         "sha256": "71effb0708dc674b05f4c828529fa988a728fb47b410a87e7addc5960b4e7625"
       }
     ]
+  },
+  {
+    "id": "hedgehog-behavior-v1",
+    "animalId": "hedgehog",
+    "revision": "behavior-v1",
+    "name": "Hedgehog grounded defensive curling",
+    "batchId": "wildlife-v2-behaviors-174",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/hedgehog/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-hedgehog-behavior-v1",
+      "name": "Hedgehog grounded defensive curling sheet",
+      "image": "demos/wildlife-v2/hedgehog/behavior-v1/sheet.png",
+      "width": 5440,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "73482e3fc9e719afd1d19f9612270bb9600f9dfa9e99ec880dfeb2ab3a55593e",
+      "source": "art-source/wildlife-v2/hedgehog/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-hedgehog-behavior-v1-scene",
+      "name": "Hedgehog grounded defensive curling scene",
+      "image": "demos/wildlife-v2/hedgehog/behavior-v1/scene-native.png",
+      "width": 448,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "4d1836502bd2014ea20e9672816facdbdc3280fe82bd00a794e294a74f10cfb8",
+      "source": "art-source/wildlife-v2/hedgehog/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-hedgehog-behavior-v1-contact",
+      "name": "Hedgehog grounded defensive curling contact",
+      "image": "demos/wildlife-v2/hedgehog/behavior-v1/contact-sheet-native.png",
+      "width": 2816,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "223ecce40f3e0d3a2a3b7c2bc25d344ac3838c88ec699ce58a06386b9f11b99c",
+      "source": "art-source/wildlife-v2/hedgehog/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/hedgehog/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/contact-sheet-native.png",
+        "sha256": "223ecce40f3e0d3a2a3b7c2bc25d344ac3838c88ec699ce58a06386b9f11b99c"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/index.html",
+        "sha256": "2d8d38668f1a15d33271849146c47d06252404f31dbcae7fd3984d20b9033c6f"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/pixel-audit.json",
+        "sha256": "f6985f3d0213d77ba9677f7fbc01b29cfab899b68d5c7c6919927de8543ff708"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/preview-native.gif",
+        "sha256": "f92378e4f0ed47956d799267da9aed53dc55688460f774f0075999b1b16c2c80"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/preview.gif",
+        "sha256": "c44d16b1dfb89c301fe9caeb5ff7f7fa8118253f4ecf5758ca1e79b55f07e0f3"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/scene-native.png",
+        "sha256": "4d1836502bd2014ea20e9672816facdbdc3280fe82bd00a794e294a74f10cfb8"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/sheet.png",
+        "sha256": "73482e3fc9e719afd1d19f9612270bb9600f9dfa9e99ec880dfeb2ab3a55593e"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/source-audit.json",
+        "sha256": "bbcd53b321935439aace3a38152efa83682db0009dfd5beb1e2a85f4ec1a49da"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/sprite.json",
+        "sha256": "63cc9c06c627716d9f4a7105db8f0e8b415a8e932bda51de5dabcb8e8eeb596f"
+      },
+      {
+        "path": "demos/wildlife-v2/hedgehog/behavior-v1/validation.json",
+        "sha256": "8a7cd39b2cc86edcf383d8b33effd0a86889fefdc9c241f0498b63346dce7644"
+      }
+    ]
+  },
+  {
+    "id": "porcupine-behavior-v1",
+    "animalId": "porcupine",
+    "revision": "behavior-v1",
+    "name": "Porcupine attached quill warning and deterrence",
+    "batchId": "wildlife-v2-behaviors-174",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/porcupine/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-porcupine-behavior-v1",
+      "name": "Porcupine attached quill warning and deterrence sheet",
+      "image": "demos/wildlife-v2/porcupine/behavior-v1/sheet.png",
+      "width": 5440,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c1920e783bae806e7ec7969eb73a6df195eaa6d316214e0b79e3b66a8e6816f5",
+      "source": "art-source/wildlife-v2/porcupine/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-porcupine-behavior-v1-scene",
+      "name": "Porcupine attached quill warning and deterrence scene",
+      "image": "demos/wildlife-v2/porcupine/behavior-v1/scene-native.png",
+      "width": 448,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "726936c462a5e2f3be05afdd1e8e59462c95a79517bb3d3c613de173636c9edc",
+      "source": "art-source/wildlife-v2/porcupine/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-porcupine-behavior-v1-contact",
+      "name": "Porcupine attached quill warning and deterrence contact",
+      "image": "demos/wildlife-v2/porcupine/behavior-v1/contact-sheet-native.png",
+      "width": 2816,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "cbe46ebb20a638e271f722820566063ff6c3bb71720b70ba5229490e2b748dac",
+      "source": "art-source/wildlife-v2/porcupine/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/porcupine/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/contact-sheet-native.png",
+        "sha256": "cbe46ebb20a638e271f722820566063ff6c3bb71720b70ba5229490e2b748dac"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/index.html",
+        "sha256": "6dace6100e82fb63a484d6b16221a4c2c08395ac216c18e92b6bc34acc14b205"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/pixel-audit.json",
+        "sha256": "49829e9c5e6c130919fbe0f518a1c259b825d39d2a3f2fe9b0b4196a778c043c"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/preview-native.gif",
+        "sha256": "76bf11e87af86fabfd1fccf0ed0f808bd469f5a2685b716d53fdfbfcb20b5d99"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/preview.gif",
+        "sha256": "425e8815f4a28a4af46be6638bbc087a533c2d89c36bc78eff371c8d052e1639"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/scene-native.png",
+        "sha256": "726936c462a5e2f3be05afdd1e8e59462c95a79517bb3d3c613de173636c9edc"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/sheet.png",
+        "sha256": "c1920e783bae806e7ec7969eb73a6df195eaa6d316214e0b79e3b66a8e6816f5"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/source-audit.json",
+        "sha256": "65f0d2fc4446121b46810006ed56f7658cc4f9048ee2b75b8eb857b8d01f87df"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/sprite.json",
+        "sha256": "fbed304b3b2299f3efd6b642ba4e1355671062eadb8c8fd6997f73128c9ab076"
+      },
+      {
+        "path": "demos/wildlife-v2/porcupine/behavior-v1/validation.json",
+        "sha256": "3fb927827a2ce1618e0f1fce9575eee3f2ab45d7e776b1bc76272695e31a4526"
+      }
+    ]
+  },
+  {
+    "id": "fox-behavior-v1",
+    "animalId": "fox",
+    "revision": "behavior-v1",
+    "name": "Fox listening, stalking and physical prey pounces",
+    "batchId": "wildlife-v2-behaviors-174",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/fox/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-fox-behavior-v1",
+      "name": "Fox listening, stalking and physical prey pounces sheet",
+      "image": "demos/wildlife-v2/fox/behavior-v1/sheet.png",
+      "width": 4560,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ae13a95740fc418d30bf5a6e61ef3f10c04f5bdd0df815a94447a4f2bd908be3",
+      "source": "art-source/wildlife-v2/fox/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-fox-behavior-v1-scene",
+      "name": "Fox listening, stalking and physical prey pounces scene",
+      "image": "demos/wildlife-v2/fox/behavior-v1/scene-native.png",
+      "width": 384,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "a43a1b55baed3009124f26d5865c7831d026e2b16db44a59b37164a6c50712ad",
+      "source": "art-source/wildlife-v2/fox/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-fox-behavior-v1-contact",
+      "name": "Fox listening, stalking and physical prey pounces contact",
+      "image": "demos/wildlife-v2/fox/behavior-v1/contact-sheet-native.png",
+      "width": 2592,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "bccfe7cc4aa3fa363629d09f702940bad8359a1229647a891c89b58937740c5b",
+      "source": "art-source/wildlife-v2/fox/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/fox/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/contact-sheet-native.png",
+        "sha256": "bccfe7cc4aa3fa363629d09f702940bad8359a1229647a891c89b58937740c5b"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/index.html",
+        "sha256": "08c26a50544fb76ba3dc1b5fc5680a5a14af5f34470fc4060762ddbaf8b9dee0"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/pixel-audit.json",
+        "sha256": "565c7dba6cb5c04a684eb159f8b408d28267ac15c38bd1cf0d588a8b9b456677"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/preview-native.gif",
+        "sha256": "9f9deb72cd47ad54d52498fdb4666754f7116ac15d635ae554df3513d4d08139"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/preview.gif",
+        "sha256": "61abe8ca9425d8da08b65264f88f87a1af59218e470459c2fe733f0f98417f32"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/scene-native.png",
+        "sha256": "a43a1b55baed3009124f26d5865c7831d026e2b16db44a59b37164a6c50712ad"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/sheet.png",
+        "sha256": "ae13a95740fc418d30bf5a6e61ef3f10c04f5bdd0df815a94447a4f2bd908be3"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/source-audit.json",
+        "sha256": "9a171b5323f5100df4e323da1101239223c6e65fd123c3c2a0c2450272f89c12"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/sprite.json",
+        "sha256": "2590702c2bbb060ab25227c72d8784dd9597c0584e8a2dd5630ec7749a00ce0f"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/behavior-v1/validation.json",
+        "sha256": "4c60e12805cc26c9fedb2d2be8253b559ffef2e616161015d348540a16af4524"
+      }
+    ]
   }
 ]

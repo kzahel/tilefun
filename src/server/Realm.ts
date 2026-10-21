@@ -1246,6 +1246,11 @@ export class Realm {
 
         tickWildlifeRespawns(this.entityManager, stepDt, wildlifeEnvironment, playerPositions);
         resolvePredatorCatches(this.entityManager, active, wildlifeEnvironment, playerPositions);
+        this.animalWork.resolveCatches(active, {
+          environment: wildlifeEnvironment,
+          players: workPlayers,
+          ready: workReady,
+        });
 
         this.traffic?.tick(
           stepDt,

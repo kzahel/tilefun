@@ -1,0 +1,18 @@
+{
+  "identity": "porcupine-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "cbe46ebb20a638e271f722820566063ff6c3bb71720b70ba5229490e2b748dac",
+    "index.html": "6dace6100e82fb63a484d6b16221a4c2c08395ac216c18e92b6bc34acc14b205",
+    "pixel-audit.json": "49829e9c5e6c130919fbe0f518a1c259b825d39d2a3f2fe9b0b4196a778c043c",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "76bf11e87af86fabfd1fccf0ed0f808bd469f5a2685b716d53fdfbfcb20b5d99",
+    "preview.gif": "425e8815f4a28a4af46be6638bbc087a533c2d89c36bc78eff371c8d052e1639",
+    "scene-native.png": "726936c462a5e2f3be05afdd1e8e59462c95a79517bb3d3c613de173636c9edc",
+    "sheet.png": "c1920e783bae806e7ec7969eb73a6df195eaa6d316214e0b79e3b66a8e6816f5",
+    "source-audit.json": "65f0d2fc4446121b46810006ed56f7658cc4f9048ee2b75b8eb857b8d01f87df",
+    "sprite.json": "fbed304b3b2299f3efd6b642ba4e1355671062eadb8c8fd6997f73128c9ab076"
+  }
+}

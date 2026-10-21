@@ -1,0 +1,30 @@
+{
+  "identity": "porcupine-behavior-v1",
+  "poses": 176,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "quills": 13,
+      "rattle": 12,
+      "relax": 14
+    },
+    "up": {
+      "quills": 13,
+      "rattle": 9,
+      "relax": 13
+    },
+    "left": {
+      "quills": 12,
+      "rattle": 12,
+      "relax": 12
+    },
+    "right": {
+      "quills": 14,
+      "rattle": 12,
+      "relax": 13
+    }
+  },
+  "connectedHeadBodyChecks": 176
+}

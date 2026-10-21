@@ -387,10 +387,22 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
         const animal = () => s.realm.entityManager.entities.filter((e) => e.type === TYPE);
         expect(animal().length).toBeGreaterThanOrEqual(p.group);
         const clips = new Set<number>();
+        let defended = false;
         for (let i = 0; i < 750; i++) {
           await s.step(idle, 0.1);
           for (const d of animal()) {
             clips.add(d.sprite?.clip ?? 0);
+            if (
+              ["hedgehog", "porcupine"].includes(d.animalWork?.kind ?? "") &&
+              d.animalWork?.defenseReady
+            ) {
+              defended = true;
+              const anchor = required(d.animalWork.sitePosition);
+              expect(
+                Math.hypot(anchor.wx - d.position.wx, anchor.wy - d.position.wy),
+              ).toBeLessThanOrEqual(2);
+              expect(Math.abs((d.wz ?? 0) - anchor.z)).toBeLessThanOrEqual(1);
+            }
             const rockWork =
               d.animalWork?.kind === "goat" &&
               ["hop", "perch"].includes(d.animalWork.state) &&
@@ -406,6 +418,17 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
               expect(d.wz ?? 0).toBeGreaterThanOrEqual(rockWork.ground);
               expect(d.wz ?? 0).toBeLessThanOrEqual(rockWork.z + 14);
               if (d.animalWork?.state === "perch") expect(d.wz).toBe(rockWork.z);
+              expect(d.jumpVZ).toBeUndefined();
+            } else if (
+              d.animalWork?.kind === "fox" &&
+              d.animalWork.state === "pounce" &&
+              d.fauna?.motion
+            ) {
+              const m = d.fauna.motion;
+              expect(m.lift).toBe(7);
+              expect(d.wz ?? 0).toBeCloseTo(
+                (m.startZ ?? 0) + Math.sin((Math.PI * m.elapsed) / m.duration) * 7,
+              );
               expect(d.jumpVZ).toBeUndefined();
             } else {
               if (p.hop) expect(d.wz ?? 0).toBeGreaterThanOrEqual(0);
@@ -426,7 +449,14 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
             ).toBe(0);
           }
         }
-        if ([...clips].some((c) => c >= 4)) {
+        if (defended) {
+          // A nearby threat can keep a defender planted for the whole sample.
+          // Native free walking is independently checked for every profile above.
+          expect(
+            [...clips].some((c) => ["curled", "rattle"].includes(p.clips[c]?.name ?? "")),
+          ).toBe(true);
+          expect([...clips].every((c) => c < p.clips.length)).toBe(true);
+        } else if ([...clips].some((c) => c >= 4)) {
           // Resource work can replace a generic idle action in natural homes.
           expect(clips.has(0) && clips.has(1)).toBe(true);
           expect([...clips].every((c) => c < p.clips.length)).toBe(true);

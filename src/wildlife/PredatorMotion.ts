@@ -6,6 +6,7 @@ import { predatorProfile } from "./Predator.js";
 export function restorePredatorPose(e: Entity): void {
   const ai = e.predator;
   if (!ai || !e.sprite) return;
+  if (ai.facing !== undefined) e.sprite.frameRow = e.sprite.direction = ai.facing;
   const profile = predatorProfile(e.type),
     fierce = profile?.fierce;
   const chasePounce = !!(fierce || profile?.art);
@@ -64,7 +65,10 @@ export function preparePredatorFlight(e: Entity, dt: number): void {
   f.previousZ = e.wz ?? f.startZ;
   e.wz = predatorFlightZ(f.startZ, f.endZ, t, f.lift);
   e.jumpZ = Math.sin(Math.PI * t) * f.lift;
-  if (e.sprite && d > 0.001) e.sprite.frameRow = e.sprite.direction = directionFromVelocity(dx, dy);
+  if (e.sprite && d > 0.001) {
+    ai.facing = directionFromVelocity(dx, dy);
+    e.sprite.frameRow = e.sprite.direction = ai.facing;
+  }
   restorePredatorPose(e);
 }
 export function settlePredatorFlight(e: Entity, groundZ: number): void {

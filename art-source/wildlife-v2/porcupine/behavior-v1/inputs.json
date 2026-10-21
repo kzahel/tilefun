@@ -1,0 +1,20 @@
+{
+  "identity": "porcupine-behavior-v1",
+  "blend": "art-source/wildlife-v2/porcupine/roster-v2/porcupine.blend",
+  "masters": "art-source/wildlife-v2/porcupine/roster-v2/masters.json",
+  "sheet": "public/demos/wildlife-v2/porcupine/roster-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/porcupine/roster-v2/sprite.json",
+  "canvas": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/porcupine/roster-v2/porcupine.blend": "92fcc5a171bed7c0795af379ff552d2bc03f3d6d2fd54f5371364699eeef5c0b",
+    "art-source/wildlife-v2/porcupine/roster-v2/masters.json": "3245dbea6aefecc467b6c06b42a4b61917eff6c0e66a47a4c83e1867c37ec517",
+    "public/demos/wildlife-v2/porcupine/roster-v2/sheet.png": "83d051517b292a9e80fc033148b819d62ccb36b72a1a644a6c02a814af4d720e",
+    "public/demos/wildlife-v2/porcupine/roster-v2/sprite.json": "e3fd1d97ec96716bb01173c2bb6d76320a014af4b7c877ff3a0aebf65faaf5c3",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae"
+  }
+}

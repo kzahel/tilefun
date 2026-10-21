@@ -23,10 +23,14 @@ import { pastureWorkRecipe } from "./PastureWorkRecipe.js";
 import { rangeWorkRecipe } from "./RangeWorkRecipe.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
+import { threatWorkRecipe } from "./ThreatWorkRecipe.js";
 import { woodlandWorkRecipe } from "./WoodlandWorkRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  { id: "behavior-hedgehog", name: "Hedgehog · curling defense", seed: 1, x: 8, y: 11 },
+  { id: "behavior-porcupine", name: "Porcupine · quill warning and retreat", seed: 1, x: 8, y: 11 },
+  { id: "behavior-fox", name: "Fox · listen, stalk and pounce", seed: 1, x: 8, y: 11 },
   { id: "behavior-deer", name: "Deer · shrub browsing and alarm stamping", seed: 1, x: 8, y: 11 },
   { id: "behavior-peacock", name: "Peacock · partner courtship display", seed: 1, x: 8, y: 11 },
   { id: "behavior-raven", name: "Raven · collect and cache shiny pebbles", seed: 1, x: 8, y: 11 },
@@ -173,6 +177,8 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  if (id === "behavior-hedgehog" || id === "behavior-porcupine" || id === "behavior-fox")
+    return threatWorkRecipe(id.slice(9) as "hedgehog" | "porcupine" | "fox");
   if (id === "behavior-deer" || id === "behavior-peacock" || id === "behavior-raven")
     return forestWorkRecipe(id.slice("behavior-".length) as "deer" | "peacock" | "raven");
   if (id === "behavior-cow" || id === "behavior-sheep" || id === "behavior-donkey")

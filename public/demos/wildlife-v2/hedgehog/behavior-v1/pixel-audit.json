@@ -1,0 +1,30 @@
+{
+  "identity": "hedgehog-behavior-v1",
+  "poses": 176,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "curl-in": 11,
+      "curled": 6,
+      "uncurl": 11
+    },
+    "up": {
+      "curl-in": 12,
+      "curled": 4,
+      "uncurl": 12
+    },
+    "left": {
+      "curl-in": 13,
+      "curled": 4,
+      "uncurl": 13
+    },
+    "right": {
+      "curl-in": 13,
+      "curled": 4,
+      "uncurl": 13
+    }
+  },
+  "connectedHeadBodyChecks": 176
+}

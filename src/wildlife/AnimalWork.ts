@@ -26,7 +26,10 @@ export interface AnimalWork {
     | "donkey"
     | "deer"
     | "peacock"
-    | "raven";
+    | "raven"
+    | "hedgehog"
+    | "porcupine"
+    | "fox";
   state:
     | "idle"
     | "seek"
@@ -72,7 +75,14 @@ export interface AnimalWork {
     | "open"
     | "display"
     | "close"
-    | "bury";
+    | "bury"
+    | "curl-in"
+    | "curled"
+    | "uncurl"
+    | "quills"
+    | "rattle"
+    | "relax"
+    | "listen";
   elapsed: number;
   cooldown: number;
   targetId?: string;
@@ -113,6 +123,11 @@ export interface AnimalWork {
   courted?: number;
   cacheFacing?: number;
   sourcePosition?: PositionComponent;
+  defenseReady?: boolean;
+  quietFor?: number;
+  curls?: number;
+  pounces?: number;
+  repelled?: number;
 }
 
 export type FoodKind = "nut" | "fruit" | "root";

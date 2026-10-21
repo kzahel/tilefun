@@ -1,0 +1,22 @@
+{
+  "identity": "fox-behavior-v1",
+  "blend": "art-source/wildlife-v2/fox/motion-v2/fox.blend",
+  "masters": "art-source/wildlife-v2/fox/motion-v2/masters.json",
+  "sheet": "public/demos/wildlife-v2/fox/motion-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/fox/motion-v2/sprite.json",
+  "canvas": 48,
+  "anchor": [
+    24,
+    31
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/fox/motion-v2/fox.blend": "c26762140f9e9435505ebd8ee4800670ad623ef9c9de6dd65fad757c2e504cca",
+    "art-source/wildlife-v2/fox/motion-v2/masters.json": "30e5d6e124b06072d3136286bc13456bf6572dce4b0292ebe891f2d916fe7e34",
+    "public/demos/wildlife-v2/fox/motion-v2/sheet.png": "dd107117861ab59fef3da9b64e326ba73c21f27d7f4825953391312ae3f31098",
+    "public/demos/wildlife-v2/fox/motion-v2/sprite.json": "2e50d32858cb4f1ab33fec84aa9a63ef4649a7e8a94f63dca9b703f946e88ef3",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "art-source/wildlife-v2/fox/motion-v2/projection.json": "1f9a767a12bf8f63b372cbd6651169b7e8fa3233f9ace63c1f8022d9141de378",
+    "art-source/wildlife-v2/fox/motion-v2/finish.py": "843609dbe2899fc282e188a5369c4191ada0f565a34cd3b21b0c936af90537cc"
+  }
+}

@@ -176,18 +176,31 @@ describe.each(FAUNA_PROFILES)("$species ordinary wildlife body", (p) => {
           expect(s.player.player.parentId).toBe(restored.id);
           return;
         }
-        expect(animal.wanderAI?.state).toBe("scared");
-        for (let i = 0; i < 40 && animal.fauna?.state !== "flee"; i++) await s.step(idle, 1 / 60);
-        expect(animal.fauna?.state).toBe("flee");
-        // Capture an active phase even for a short butterfly flight.
-        for (let i = 0; i < 5; i++) await s.step(idle, 1 / 60);
-        expect(animal.fauna?.state).toBe("flee");
-        expect(animal.fauna?.motion?.elapsed).toBeGreaterThan(0);
+        const defensive = p.species === "hedgehog" || p.species === "porcupine";
+        if (defensive) {
+          for (let i = 0; i < 90 && !animal.animalWork?.defenseReady; i++)
+            await s.step(idle, 1 / 60);
+          expect(animal.animalWork?.defenseReady).toBe(true);
+          expect(animal.animalWork?.state).toBe(p.species === "hedgehog" ? "curled" : "rattle");
+          expect(animal.fauna?.motion).toBeUndefined();
+          expect(animal.wz ?? 0).toBe(0);
+          expect(s.player.gameplaySession.mountId).toBeNull();
+          expect(s.player.player.deathTimer).toBeUndefined();
+        } else {
+          expect(animal.wanderAI?.state).toBe("scared");
+          for (let i = 0; i < 40 && animal.fauna?.state !== "flee"; i++) await s.step(idle, 1 / 60);
+          expect(animal.fauna?.state).toBe("flee");
+          // Capture an active phase even for a short butterfly flight.
+          for (let i = 0; i < 5; i++) await s.step(idle, 1 / 60);
+          expect(animal.fauna?.state).toBe("flee");
+          expect(animal.fauna?.motion?.elapsed).toBeGreaterThan(0);
+        }
         const saved = encodeActor(animal);
         await s.reload();
         const restored = required(s.realm.entityManager.entities.find((e) => e.type === TYPE));
         expect(restored.persistentId).toBe("durable-animal");
         expect(restored.fauna).toEqual(saved.state.fauna);
+        if (defensive) expect(restored.animalWork).toEqual(saved.state.animalWork);
       } finally {
         await s.close();
       }

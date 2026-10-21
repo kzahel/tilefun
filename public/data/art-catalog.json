@@ -968,11 +968,11 @@
     {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
-      "image": "demos/wildlife-v2/fox/motion-v2/sheet.png",
-      "width": 1968,
+      "image": "demos/wildlife-v2/fox/behavior-v1/sheet.png",
+      "width": 4560,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "dd107117861ab59fef3da9b64e326ba73c21f27d7f4825953391312ae3f31098",
+      "fingerprint": "ae13a95740fc418d30bf5a6e61ef3f10c04f5bdd0df815a94447a4f2bd908be3",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -1488,21 +1488,21 @@
     {
       "id": "wildlife-hedgehog-provisional-v1",
       "name": "wildlife hedgehog provisional v1",
-      "image": "demos/wildlife-v2/hedgehog/roster-v2/sheet.png",
-      "width": 2624,
+      "image": "demos/wildlife-v2/hedgehog/behavior-v1/sheet.png",
+      "width": 5440,
       "height": 256,
       "tileSize": 16,
-      "fingerprint": "4c9309bfd972f31b0e26f1259b1777f644df8d828fed75aec76f01fa3f590c36",
+      "fingerprint": "73482e3fc9e719afd1d19f9612270bb9600f9dfa9e99ec880dfeb2ab3a55593e",
       "source": "public/assets/SOURCES.md"
     },
     {
       "id": "wildlife-porcupine-provisional-v1",
       "name": "wildlife porcupine provisional v1",
-      "image": "demos/wildlife-v2/porcupine/roster-v2/sheet.png",
-      "width": 2624,
+      "image": "demos/wildlife-v2/porcupine/behavior-v1/sheet.png",
+      "width": 5440,
       "height": 256,
       "tileSize": 16,
-      "fingerprint": "83d051517b292a9e80fc033148b819d62ccb36b72a1a644a6c02a814af4d720e",
+      "fingerprint": "c1920e783bae806e7ec7969eb73a6df195eaa6d316214e0b79e3b66a8e6816f5",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -6686,6 +6686,36 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-hedgehog-behavior-v1",
+      "name": "wildlife v2 hedgehog behavior v1",
+      "image": "demos/wildlife-v2/hedgehog/behavior-v1/sheet.png",
+      "width": 5440,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "73482e3fc9e719afd1d19f9612270bb9600f9dfa9e99ec880dfeb2ab3a55593e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-porcupine-behavior-v1",
+      "name": "wildlife v2 porcupine behavior v1",
+      "image": "demos/wildlife-v2/porcupine/behavior-v1/sheet.png",
+      "width": 5440,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c1920e783bae806e7ec7969eb73a6df195eaa6d316214e0b79e3b66a8e6816f5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-fox-behavior-v1",
+      "name": "wildlife v2 fox behavior v1",
+      "image": "demos/wildlife-v2/fox/behavior-v1/sheet.png",
+      "width": 4560,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ae13a95740fc418d30bf5a6e61ef3f10c04f5bdd0df815a94447a4f2bd908be3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -8133,7 +8163,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:262"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:268"
         },
         {
           "system": "Gameplay",
@@ -9195,7 +9225,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:45"
+          "source": "src/wildlife/ForagePlacements.ts:46"
         },
         {
           "system": "Gameplay",
@@ -28273,7 +28303,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:262"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:268"
         },
         {
           "system": "Gameplay",
@@ -29177,7 +29207,7 @@
       "rect": [
         0,
         0,
-        1968,
+        4560,
         192
       ],
       "label": "wildlife-fox-provisional-v1 · registered 48×48 frames",
@@ -30121,7 +30151,7 @@
       "rect": [
         0,
         0,
-        2624,
+        5440,
         256
       ],
       "label": "wildlife-hedgehog-provisional-v1 · registered 64×64 frames",
@@ -30139,7 +30169,7 @@
       "rect": [
         0,
         0,
-        2624,
+        5440,
         256
       ],
       "label": "wildlife-porcupine-provisional-v1 · registered 64×64 frames",
@@ -32295,7 +32325,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:720"
+          "source": "src/wildlife/FoodWeb.ts:722"
         }
       ]
     },
@@ -33971,19 +34001,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1564"
+          "source": "src/server/Realm.ts:1569"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1749"
+          "source": "src/server/Realm.ts:1754"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2455"
+          "source": "src/server/Realm.ts:2460"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2675"
+          "source": "src/server/Realm.ts:2680"
         },
         {
           "system": "Gameplay",
@@ -34039,7 +34069,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:751"
+          "source": "src/wildlife/FoodWeb.ts:753"
         },
         {
           "system": "Gameplay",
@@ -34109,7 +34139,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:183"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:189"
         },
         {
           "system": "Gameplay",
@@ -34125,7 +34155,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:19"
+          "source": "src/wildlife/AnimalWorkPose.ts:21"
         },
         {
           "system": "Gameplay",
@@ -34137,19 +34167,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:38"
+          "source": "src/wildlife/FoodWeb.ts:39"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:321"
+          "source": "src/wildlife/FoodWeb.ts:166"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:529"
+          "source": "src/wildlife/FoodWeb.ts:323"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:717"
+          "source": "src/wildlife/FoodWeb.ts:531"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:719"
         },
         {
           "system": "Gameplay",
@@ -34251,7 +34285,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:179"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:185"
         },
         {
           "system": "Gameplay",
@@ -34259,7 +34293,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:21"
+          "source": "src/wildlife/AnimalWorkPose.ts:23"
         },
         {
           "system": "Gameplay",
@@ -34271,31 +34305,31 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:217"
+          "source": "src/wildlife/FoodWeb.ts:219"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:584"
+          "source": "src/wildlife/FoodWeb.ts:586"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:602"
+          "source": "src/wildlife/FoodWeb.ts:604"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:620"
+          "source": "src/wildlife/FoodWeb.ts:622"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:661"
+          "source": "src/wildlife/FoodWeb.ts:663"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:690"
+          "source": "src/wildlife/FoodWeb.ts:692"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:717"
+          "source": "src/wildlife/FoodWeb.ts:719"
         },
         {
           "system": "Gameplay",
@@ -34381,27 +34415,31 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:39"
+          "source": "src/wildlife/FoodWeb.ts:40"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:301"
+          "source": "src/wildlife/FoodWeb.ts:166"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:322"
+          "source": "src/wildlife/FoodWeb.ts:303"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:530"
+          "source": "src/wildlife/FoodWeb.ts:324"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:717"
+          "source": "src/wildlife/FoodWeb.ts:532"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:721"
+          "source": "src/wildlife/FoodWeb.ts:719"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:723"
         },
         {
           "system": "Gameplay",
@@ -34447,7 +34485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:721"
+          "source": "src/wildlife/FoodWeb.ts:723"
         }
       ]
     },
@@ -34493,7 +34531,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:722"
+          "source": "src/wildlife/FoodWeb.ts:724"
         }
       ]
     },
@@ -34539,7 +34577,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:723"
+          "source": "src/wildlife/FoodWeb.ts:725"
         }
       ]
     },
@@ -34585,7 +34623,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:724"
+          "source": "src/wildlife/FoodWeb.ts:726"
         }
       ]
     },
@@ -34743,7 +34781,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:193"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:199"
         },
         {
           "system": "Gameplay",
@@ -34751,51 +34789,51 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:98"
+          "source": "src/wildlife/AnimalWorkPose.ts:127"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:36"
+          "source": "src/wildlife/AnimalWorkSystem.ts:38"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:37"
+          "source": "src/wildlife/AnimalWorkSystem.ts:39"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:133"
+          "source": "src/wildlife/AnimalWorkSystem.ts:146"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:143"
+          "source": "src/wildlife/AnimalWorkSystem.ts:156"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:192"
+          "source": "src/wildlife/AnimalWorkSystem.ts:205"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:193"
+          "source": "src/wildlife/AnimalWorkSystem.ts:206"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:298"
+          "source": "src/wildlife/AnimalWorkSystem.ts:312"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:470"
+          "source": "src/wildlife/AnimalWorkSystem.ts:484"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:513"
+          "source": "src/wildlife/AnimalWorkSystem.ts:527"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:558"
+          "source": "src/wildlife/AnimalWorkSystem.ts:575"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:567"
+          "source": "src/wildlife/AnimalWorkSystem.ts:584"
         },
         {
           "system": "Gameplay",
@@ -34807,27 +34845,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:40"
+          "source": "src/wildlife/FoodWeb.ts:41"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:324"
+          "source": "src/wildlife/FoodWeb.ts:326"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:717"
+          "source": "src/wildlife/FoodWeb.ts:719"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:20"
+          "source": "src/wildlife/ForagePlacements.ts:21"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:28"
+          "source": "src/wildlife/ForagePlacements.ts:29"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:69"
+          "source": "src/wildlife/ForagePlacements.ts:71"
         },
         {
           "system": "Gameplay",
@@ -34873,11 +34911,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:41"
+          "source": "src/wildlife/FoodWeb.ts:42"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:717"
+          "source": "src/wildlife/FoodWeb.ts:719"
         },
         {
           "system": "Gameplay",
@@ -35059,11 +35097,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1660"
+          "source": "src/server/Realm.ts:1665"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2639"
+          "source": "src/server/Realm.ts:2644"
         },
         {
           "system": "Gameplay",
@@ -35079,19 +35117,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWork.ts:121"
+          "source": "src/wildlife/AnimalWork.ts:136"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:99"
+          "source": "src/wildlife/AnimalWorkSystem.ts:110"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:506"
+          "source": "src/wildlife/AnimalWorkSystem.ts:520"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:564"
+          "source": "src/wildlife/AnimalWorkSystem.ts:581"
         },
         {
           "system": "Gameplay",
@@ -36059,7 +36097,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:45"
+          "source": "src/wildlife/ForagePlacements.ts:46"
         },
         {
           "system": "Gameplay",

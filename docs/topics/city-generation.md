@@ -2,9 +2,16 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-10-20.
+Updated: 2026-10-21.
 
 ## Current generation policy
+
+[174](../tactical/174-curling-quills-and-fox-pounces.md) adds at most one actual
+mouse per occupied natural fox cell. Its stable ID derives from the existing fox
+owner; placement checks dry supported ground and stays within the owning cell,
+including negative-coordinate seams. Existing animal IDs, groups and RNG remain
+unchanged. Manual fox placement creates no prey. Only actual natural prey meals
+use the shared delayed/distant replacement policy.
 
 [172](../tactical/172-browsing-courtship-and-collecting.md) adds one bounded browse
 shrub per occupied deer cell and three finite shiny pebbles per raven cell. Stable

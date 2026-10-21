@@ -83,6 +83,8 @@ export const predatorType = (species: string) => `wildlife-${species}-predator-v
 const profilesByType = new Map(PREDATOR_PROFILES.map((p) => [predatorType(p.species), p]));
 export const predatorProfile = (type: string) => profilesByType.get(type);
 export interface PredatorBehavior {
+  /** Semantic heading retained across saves and residency. */
+  facing?: number;
   home: PositionComponent;
   radius: number;
   state:

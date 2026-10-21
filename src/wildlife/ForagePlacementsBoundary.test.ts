@@ -5,6 +5,7 @@ import { DEER_TYPE } from "./Deer.js";
 import { faunaType } from "./Fauna.js";
 import { foragePlacements } from "./ForagePlacements.js";
 import { forestSupplies } from "./ForestHabitat.js";
+import { foxPrey } from "./ThreatHabitat.js";
 
 const nature = {
   terrain: () => TerrainId.Grass,
@@ -201,3 +202,48 @@ it.each(["chicken", "bee", "ruby-throated-hummingbird"] as const)(
       }
   },
 );
+
+it("natural fox prey is bounded, query-order stable, finite and excludes unsafe ground", () => {
+  for (const [cx = 0, cy = 0] of [
+    [0, 0],
+    [-2, -1],
+    [2, 3],
+  ])
+    for (const [dx = 0, dy = 0] of [
+      [1, 1],
+      [254, 1],
+      [1, 254],
+      [254, 254],
+    ]) {
+      const a = {
+        type: faunaType("fox"),
+        featureId: "fox:a",
+        wx: cx * 256 + dx,
+        wy: cy * 256 + dy,
+        route: [],
+      };
+      const b = { ...a, featureId: "fox:b" };
+      const mice = foxPrey([a, b], nature, cx, cy);
+      expect(mice).toEqual(foxPrey([b, a], nature, cx, cy));
+      expect(mice).toHaveLength(1);
+      expect(Math.floor(requiredMouse(mice).wx / 256)).toBe(cx);
+      expect(Math.floor(requiredMouse(mice).wy / 256)).toBe(cy);
+      expect(mice[0]?.featureId).toBe("fox:a:hunt-mouse");
+      expect(
+        foxPrey(
+          [a],
+          { ...nature, terrain: () => TerrainId.ShallowWater } as unknown as NaturalLandscape,
+          cx,
+          cy,
+        ),
+      ).toEqual([]);
+      expect(
+        foxPrey([a], { ...nature, inThicket: () => true } as unknown as NaturalLandscape, cx, cy),
+      ).toEqual([]);
+    }
+  expect(foxPrey([], nature, 0, 0)).toEqual([]);
+});
+function requiredMouse<T>(a: T[]): T {
+  if (!a[0]) throw Error("missing mouse");
+  return a[0];
+}

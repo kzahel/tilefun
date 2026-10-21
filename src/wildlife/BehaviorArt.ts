@@ -7,6 +7,7 @@ import herdArt from "./herd-art.json" with { type: "json" };
 import meadowArt from "./meadow-art.json" with { type: "json" };
 import pastureArt from "./pasture-art.json" with { type: "json" };
 import rangeArt from "./range-art.json" with { type: "json" };
+import threatArt from "./threat-art.json" with { type: "json" };
 import woodlandArt from "./woodland-art.json" with { type: "json" };
 
 interface BehaviorBank {
@@ -25,6 +26,7 @@ const art: Record<string, BehaviorBank> = {
   ...rangeArt,
   ...herdArt,
   ...forestArt,
+  ...threatArt,
 };
 
 export function behaviorArt(profile: FaunaProfile): FaunaProfile {
@@ -61,6 +63,8 @@ export function behaviorArt(profile: FaunaProfile): FaunaProfile {
             "bleat",
             "roll",
             "display",
+            "curled",
+            "rattle",
           ].includes(name) ||
           (profile.species === "beaver" && name === "build"),
       })),

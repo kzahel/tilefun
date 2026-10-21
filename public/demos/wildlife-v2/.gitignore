@@ -687,3 +687,8 @@
 !peacock/behavior-v1/*
 !raven/behavior-v1/*
 !foraging-resources/behavior-v8/*
+
+# Owner-authorized behavior batch 174.
+!hedgehog/behavior-v1/*
+!porcupine/behavior-v1/*
+!fox/behavior-v1/*

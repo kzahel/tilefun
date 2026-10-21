@@ -1,0 +1,34 @@
+{
+  "identity": "fox-behavior-v1",
+  "poses": 216,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "listen": 9,
+      "stalk": 11,
+      "pounce": 5,
+      "eat": 7
+    },
+    "up": {
+      "listen": 9,
+      "stalk": 11,
+      "pounce": 5,
+      "eat": 5
+    },
+    "left": {
+      "listen": 9,
+      "stalk": 11,
+      "pounce": 6,
+      "eat": 7
+    },
+    "right": {
+      "listen": 12,
+      "stalk": 11,
+      "pounce": 6,
+      "eat": 7
+    }
+  },
+  "connectedHeadBodyChecks": 216
+}

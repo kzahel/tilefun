@@ -1,0 +1,20 @@
+{
+  "identity": "hedgehog-behavior-v1",
+  "blend": "art-source/wildlife-v2/hedgehog/roster-v2/hedgehog.blend",
+  "masters": "art-source/wildlife-v2/hedgehog/roster-v2/masters.json",
+  "sheet": "public/demos/wildlife-v2/hedgehog/roster-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/hedgehog/roster-v2/sprite.json",
+  "canvas": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/hedgehog/roster-v2/hedgehog.blend": "34f3b11e0070b6b3592aa15e8b6912f960b159183a9e45e463eb374f0c581292",
+    "art-source/wildlife-v2/hedgehog/roster-v2/masters.json": "d501e20f626622ec095bd665ae08e5adedbe88a9e4042e14897f5c8acbbe1695",
+    "public/demos/wildlife-v2/hedgehog/roster-v2/sheet.png": "4c9309bfd972f31b0e26f1259b1777f644df8d828fed75aec76f01fa3f590c36",
+    "public/demos/wildlife-v2/hedgehog/roster-v2/sprite.json": "eb82cdb76596d7408201bf21fad60fd5feba8eb61bbb53eed63c3bdbc93b7495",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae"
+  }
+}

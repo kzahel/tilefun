@@ -6,25 +6,25 @@ Generated from [the canonical ledger](../art-source/wildlife-v2/behavior-campaig
 
 | Work area | Not audited | Planned | In progress | Verified | Not required |
 | --- | --- | --- | --- | --- | --- |
-| audit | 180 | 0 | 0 | 26 | 0 |
-| design | 180 | 0 | 0 | 26 | 0 |
-| ai | 180 | 0 | 0 | 26 | 0 |
-| animation | 180 | 0 | 0 | 26 | 0 |
-| integration | 180 | 0 | 0 | 26 | 0 |
-| validation | 180 | 0 | 0 | 26 | 0 |
+| audit | 177 | 0 | 0 | 29 | 0 |
+| design | 177 | 0 | 0 | 29 | 0 |
+| ai | 177 | 0 | 0 | 29 | 0 |
+| animation | 177 | 0 | 0 | 29 | 0 |
+| integration | 177 | 0 | 0 | 29 | 0 |
+| validation | 177 | 0 | 0 | 29 | 0 |
 
-Phase assignment: unclassified: 180; land: 20; air: 5; amphibious: 1; aquatic: 0.
+Phase assignment: unclassified: 177; land: 23; air: 5; amphibious: 1; aquatic: 0.
 
 | Human review | Not requested | Pending | Needs changes | Approved |
 | --- | --- | --- | --- | --- |
-| behavior | 180 | 26 | 0 | 0 |
-| animation | 180 | 26 | 0 | 0 |
+| behavior | 177 | 29 | 0 | 0 |
+| animation | 177 | 29 | 0 | 0 |
 
 Requested ideas are proposals, not completed designs: dog ball fetching, crow object carrying, appropriate bird nesting, and visible food/fruit foraging.
 
 | Animal | Phase | Audit | Design | AI | Animation | Integration | Validation | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Red fox (fox) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Red fox (fox) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization. |
 | Cat (cat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank. |
 | Dog (dog) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; then audit the next land/air batch. |
 | Pasture cow (cow) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
@@ -76,8 +76,8 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Hamster (hamster) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Guinea pig (guinea-pig) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Chinchilla (chinchilla) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Hedgehog (hedgehog) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Porcupine (porcupine) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
+| Hedgehog (hedgehog) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization. |
+| Porcupine (porcupine) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization. |
 | Raccoon (raccoon) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank. |
 | Skunk (skunk) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Red panda (red-panda) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |

@@ -959,3 +959,14 @@ branch attachments and ordinary animation replication. Mounted/attached/followin
 actors cancel work during shared synchronization when normal brain updates are
 skipped, preserving controlled poses and releasing claims. There is no lab-only
 grazing, growth or shelter-building simulation.
+
+## Wildlife defenses and physical ambushes (174)
+
+[174](../tactical/174-curling-quills-and-fox-pounces.md) adds three ordinary
+ScenarioPresentationHost scenes for hedgehog curling, porcupine quill warnings and
+fox small-prey ambushes. Shared Realm/AnimalWork authority owns sensing, actual
+catch protection, native predator retreat and physical fox landings/meals. The
+page supplies fixtures, descriptions and framing only. Saved phase/motion and
+source-derived named action poses survive Worker pause and scene reload. The
+existing Canvas/GPU boundary checks visible animation and actual actor outcomes;
+exhaustive interruption/readiness/replacement cases remain native tests.

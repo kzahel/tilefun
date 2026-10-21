@@ -6,7 +6,7 @@
     {
       "name": "browser",
       "cases": 829,
-      "inventorySha256": "9ccdaae8f3f7eb2d2e6f1bbf78782b6df01c6011c95c9f5154639bb206a6ac33",
+      "inventorySha256": "af7193b29f71dad00ce56f79fcb97e3c8e48a35338d13026258236b8c157141d",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -21,7 +21,7 @@
         {
           "path": "tests/animal-work.spec.ts",
           "cases": 9,
-          "sourceSha256": "20d4c73ef1314301f4e82409fafa373b29f8e3fef5ccf593502795fe0c7a42ec"
+          "sourceSha256": "8095d638ecb3c7047db667ce4faed6d830ccbd8c58a72884eb57a6e8a3a51587"
         },
         {
           "path": "tests/aquatic-hunters.spec.ts",
@@ -281,7 +281,7 @@
         {
           "path": "tests/meadow-work.spec.ts",
           "cases": 7,
-          "sourceSha256": "f12a2b68c9dfa29963b7f088ee74e01543c2a2a6063d3a8de3159db69632b477"
+          "sourceSha256": "b753c4b4fc024b4eab1be736db758dab1eba5e7dd8db9fa9d61efab68cd7ddb6"
         },
         {
           "path": "tests/mobile-editor.spec.ts",
@@ -426,7 +426,7 @@
         {
           "path": "tests/range-work.spec.ts",
           "cases": 2,
-          "sourceSha256": "e701774cd5f32e26009e3dbcfb28c147af6cdceff84520f1356f3a81aa5a0bdf"
+          "sourceSha256": "92afd21d527683d2101ca18872d538e98d94fc43b9180cdaf828304941ffde6b"
         },
         {
           "path": "tests/raptors.spec.ts",

@@ -1,0 +1,165 @@
+{
+  "date": "2026-10-21",
+  "base": "a30fbb54",
+  "state": "implemented-and-automation-verified",
+  "authority": {
+    "affectedPassed": 441,
+    "newThreatCases": 23,
+    "newPlacementBoundaryCases": 1,
+    "hunterHeadingAndPhaseRedGreen": true,
+    "committedMissRedGreenCases": 4,
+    "finalAffectedPassed": 598,
+    "nativeThreatProfilesPassed": 25,
+    "defenderBodyCasesPassed": 8,
+    "emptySurveyNativePlanningRedGreen": 2
+  },
+  "art": {
+    "pendingIdentities": 3,
+    "pinnedArtifacts": 89,
+    "isolatedReplayArtifacts": 30,
+    "exactNativeAnd3xCrops": 2120,
+    "fixedLengthEndpointChecks": 4384,
+    "plantedFootChecks": 834,
+    "neckAttachmentChecks": 274,
+    "connectedHeadBodyChecks": 568,
+    "priorTravelCellsUnchanged": true,
+    "uniquePins": 73,
+    "hipAttachmentChecks": 1096,
+    "quillRootChecks": 5015,
+    "humanReview": "pending"
+  },
+  "focusedBrowser": {
+    "passed": 2,
+    "newAnimalsPerBoundary": 3,
+    "finalBroadAnimalsPerBoundary": 12,
+    "seconds": 23.54,
+    "rendererBoundaries": ["Canvas2D", "GPU"],
+    "exactPausedSaveReload": true,
+    "actualFoxMealAndPredatorRetreat": true
+  },
+  "manifest": {
+    "candidates": 1979,
+    "normalRetinaChromiumVerified": true,
+    "inputDigest": "289233c7b006584bc2cee486ec2bfdc7c018b6b9b9aa9056d0fdf974ef9c57e3"
+  },
+  "fullUnits": {
+    "passed": 6623,
+    "failed": 5,
+    "skipped": 10,
+    "total": 6638,
+    "seconds": 1051.98,
+    "knownWindowsFailures": 5,
+    "newWildlifeFailures": 0,
+    "note": "Existing static-files symlink fixture also retains its setup/cleanup hook failures; no new diagnostics."
+  },
+  "fullBrowser": {
+    "startTime": "2026-10-21T19:11:50.670Z",
+    "duration": 2397488.869,
+    "expected": 828,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0,
+    "cases": 829,
+    "twelveAnimalRendererBoundariesPassed": 2,
+    "onlyFailure": "Unchanged mobile editor 844x390 palette tap selected Red Flower instead of Slide during full-run load."
+  },
+  "worker": {
+    "passed": 11,
+    "dryRun": "passed"
+  },
+  "typecheck": "passed",
+  "lint": "passed (existing warnings)",
+  "humanReview": "pending",
+  "migration": {
+    "baselineDecisions": 403,
+    "browserCases": 829,
+    "nodeCases": 1,
+    "httpCases": 3,
+    "captureCases": 6
+  },
+  "nodeComparator": {
+    "passed": 1
+  },
+  "httpIntegration": {
+    "passed": 3
+  },
+  "dateInventory": {
+    "addedDatesRetained": 206,
+    "behaviorUpdatedDatesRefreshed": 29,
+    "source": "scripts/build-animal-browser-dates.ts",
+    "finalBrowserCheck": "passed: first3 Recently updated are Hedgehog, Porcupine and Red fox; four final desktop/mobile/filter checks pass",
+    "workerBundlesByteIdentical": 4,
+    "fullSweepPreDatesRefresh": true
+  },
+  "coldMobileRecheck": {
+    "startTime": "2026-10-21T19:52:28.930Z",
+    "duration": 36963.006,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "sourceAndAssertionsUnchanged": true
+  },
+  "finalDateAndFilterChecks": {
+    "startTime": "2026-10-21T19:55:54.427Z",
+    "duration": 14285.679,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "streaming": {
+    "assertReady": "passed",
+    "stages": [
+      {
+        "name": "cold",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "firstReadyFrame": 1
+      },
+      {
+        "name": "standing",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "firstReadyFrame": 1
+      },
+      {
+        "name": "walk",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "firstReadyFrame": 1
+      },
+      {
+        "name": "sprint",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "firstReadyFrame": 1
+      },
+      {
+        "name": "reverse",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "firstReadyFrame": 1
+      },
+      {
+        "name": "zoom-out",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "firstReadyFrame": 1
+      }
+    ],
+    "note": "The unchanged runner first spent time collecting untracked Git metadata, then completed the actual six-stage readiness measurement successfully."
+  },
+  "delivery": {
+    "branch": "main",
+    "baseline": "a30fbb54",
+    "isolatedWildlifeOnly": true,
+    "humanReview": "pending"
+  }
+}

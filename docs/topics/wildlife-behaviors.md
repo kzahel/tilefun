@@ -1,10 +1,10 @@
 # Distinct animal behaviors and interactions
 
 Topic: wildlife-behaviors
-Status: eight batches implemented. Twenty-six entries have targeted automation
-verification: twenty-four distinct signatures and two inherited cat coats. Batch
-172 final animal automation is verified; broad-suite platform/timing limits are
-recorded in the tactical. Human review remains pending.
+Status: nine batches implemented. Twenty-nine entries have targeted automation
+verification: twenty-seven distinct signatures and two inherited cat coats. Batch
+174 final animal automation is verified; broad-suite evidence is recorded in the
+tactical. Human review remains pending.
 Updated: 2026-10-21.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
@@ -418,3 +418,28 @@ Three ordinary Worker demonstrations expose these outcomes in both renderers.
 Retained new action scenes start at frame500; native locomotion cells come from
 their separate untouched source scenes. Four new exact identities await human
 review; earlier native cells and all73 previous resource cells remain unchanged.
+
+## Curling, quill warning and physical ambush (174)
+
+[174](../tactical/174-curling-quills-and-fox-pounces.md) adds grounded hedgehog
+curling, directional porcupine quill deterrence and fox listening/stalking/pouncing.
+The first two change actual catch eligibility for an explicit terrestrial hunter
+set; giant fantasy hunters and aerial hunters retain their food-web rules. A
+porcupine faces its rear toward danger and makes an eligible actual predator use
+native escape. Quills remain fixed-length attached meshes. Neither defense hurts
+players. Moving/raising the defender invalidates its saved grounded anchor.
+
+Foxes retain their fauna identity and native travel. They choose actual small
+prey, listen, make short stalking legs and commit a physical low leap. At landing,
+the shared physical meal transaction checks live actors, eligibility, support,
+height, collision and clear reach. Moved, carried, airborne or removed prey cannot
+produce a remote meal. A committed leap finishes even if its target disappears;
+its saved trajectory survives reload. Native alarm recovery and companion control
+retain priority. Shared delayed/distant replacement applies only to natural prey;
+manual animals never create hidden prey or replacements.
+
+An occupied natural fox cell supplies at most one actual mouse with a stable
+owner-derived ID on bounded dry ground. Existing animal IDs, groups and RNG are
+unchanged. Three Worker scenes demonstrate the same authority in both renderers.
+The new action banks preserve earlier native cells exactly and remain pending
+human review; automated validation does not imply approval.

@@ -1,0 +1,18 @@
+{
+  "identity": "fox-behavior-v1",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 95,
+      "exactFacingCrops": 380
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 95,
+      "exactFacingCrops": 380
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

@@ -32,6 +32,9 @@
       "!art-source/wildlife-v2/deer/behavior-v1/projection.json",
       "!art-source/wildlife-v2/peacock/behavior-v1/projection.json",
       "!art-source/wildlife-v2/raven/behavior-v1/projection.json",
+      "!art-source/wildlife-v2/fox/behavior-v1/projection.json",
+      "!art-source/wildlife-v2/hedgehog/behavior-v1/projection.json",
+      "!art-source/wildlife-v2/porcupine/behavior-v1/projection.json",
       "!art-source/wildlife-v2/centipede/roster-v3/projection.json",
       "!art-source/wildlife-v2/millipede/roster-v3/projection.json",
       "!docs/tactical/053-semantic-tileset-map/source-files.json"

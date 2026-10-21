@@ -1,12 +1,12 @@
 {
   "fox": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Listen, stalk and physically pounce on real small prey; eat only actual catches.",
+    "scene": "behavior-fox",
+    "review": "pending"
   },
   "cat": {
     "phase": "land",
@@ -468,22 +468,22 @@
     "review": "not-requested"
   },
   "hedgehog": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Curl against actual threats; deter ground hunters, then safely uncurl.",
+    "scene": "behavior-hedgehog",
+    "review": "pending"
   },
   "porcupine": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Present attached quills and make a real ground hunter retreat.",
+    "scene": "behavior-porcupine",
+    "review": "pending"
   },
   "raccoon": {
     "phase": "land",

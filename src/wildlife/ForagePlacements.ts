@@ -10,6 +10,7 @@ import { pastureSite } from "./PastureHabitat.js";
 import { RABBIT_TYPE } from "./Rabbit.js";
 import { rangeSupplies } from "./RangeHabitat.js";
 import { ROBIN_TYPE } from "./Robin.js";
+import { foxPrey } from "./ThreatHabitat.js";
 
 /** Natural crow homes are clearings: give each crow an ordinary supported tree. */
 export function crowNestTrees(nature: NaturalLandscape, cx: number, cy: number) {
@@ -60,6 +61,7 @@ export function foragePlacements(
     ...rangeSupplies(actors, nature, cx, cy),
     ...herdSupplies(actors, nature, cx, cy),
     ...forestSupplies(actors, nature, cx, cy),
+    ...foxPrey(actors, nature, cx, cy),
   ];
   let robinFood = false;
   for (const actor of actors) {

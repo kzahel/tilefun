@@ -5,6 +5,7 @@ import { FROG_TYPE } from "./Frog.js";
 import { MALLARD_TYPE } from "./Mallard.js";
 import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
+import { spineDefenseBlocks } from "./SpineDefense.js";
 
 const birds = [
   "flamingo",
@@ -162,6 +163,7 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter eats prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  fox: ["mouse", "rat", "rabbit", "robin", "sparrow", "pigeon", "chicken"],
   "coconut-crab": ["ant", "cricket", "snail", "worm"],
   lobster: ["fish", "crab", "shrimp"],
   "mantis-shrimp": ["fish", "crab", "shrimp", "lobster"],
@@ -754,6 +756,7 @@ export function canEat(hunter: Entity, prey: Entity): boolean {
     hunter !== prey &&
     species !== predator &&
     !companions.has(species) &&
+    !spineDefenseBlocks(prey, hunter, predator) &&
     prey.deathTimer === undefined &&
     hunter.deathTimer === undefined &&
     prey.parentId === undefined &&

@@ -1,0 +1,18 @@
+{
+  "identity": "fox-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "bccfe7cc4aa3fa363629d09f702940bad8359a1229647a891c89b58937740c5b",
+    "index.html": "08c26a50544fb76ba3dc1b5fc5680a5a14af5f34470fc4060762ddbaf8b9dee0",
+    "pixel-audit.json": "565c7dba6cb5c04a684eb159f8b408d28267ac15c38bd1cf0d588a8b9b456677",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "9f9deb72cd47ad54d52498fdb4666754f7116ac15d635ae554df3513d4d08139",
+    "preview.gif": "61abe8ca9425d8da08b65264f88f87a1af59218e470459c2fe733f0f98417f32",
+    "scene-native.png": "a43a1b55baed3009124f26d5865c7831d026e2b16db44a59b37164a6c50712ad",
+    "sheet.png": "ae13a95740fc418d30bf5a6e61ef3f10c04f5bdd0df815a94447a4f2bd908be3",
+    "source-audit.json": "9a171b5323f5100df4e323da1101239223c6e65fd123c3c2a0c2450272f89c12",
+    "sprite.json": "2590702c2bbb060ab25227c72d8784dd9597c0584e8a2dd5630ec7749a00ce0f"
+  }
+}

@@ -16,7 +16,7 @@ entries, including all 196 roster entries. [Batch 155](../tactical/155-fetch-nes
 adds dog ball fetching, crow twig collection/nesting and squirrel food caches,
 with real carried objects, saved resource counts and new action clips. Animal
 Browser exposes progress filters and demonstrations from this ledger. The other
-180 animals still need detailed audits; new behavior/art review remains pending.
+177 animals still need detailed audits; new behavior/art review remains pending.
 
 [Batch 159](../tactical/159-foraging-and-lookouts.md) adds finite rabbit plant
 feeding, robin ground-food/perch trips and rotating meerkat lookouts with group
@@ -26,7 +26,7 @@ bird within the existing inspection cap. Editor food supports existing
 worlds and placed animals. Shared lifetime and local predator-sensing corrections
 keep consumed resources removed and actual nearby prey discoverable. The
 [behavior ledger](../../art-source/wildlife-v2/behavior-campaign.json) owns progress
-and pending human review for all twenty-four implemented signature mechanics.
+and pending human review for all twenty-seven implemented signature mechanics.
 
 [Batch 161](../tactical/161-climbing-raids-and-play.md) adds supported capuchin
 fruit climbing, conserved raccoon cache raids and cat physical toy play/tree rests.
@@ -71,6 +71,15 @@ shiny-object caches. Twenty-six entries have targeted verification: twenty-four
 signatures and two inherited cat coats. World/editor resources, native travel,
 readiness and saved attachments remain shared with the three Worker lab scenes.
 Four new exact action/resource identities remain pending human review.
+
+[Batch174](../tactical/174-curling-quills-and-fox-pounces.md) adds hedgehog
+curling, directional porcupine quill deterrence and fox listening/stalking with
+physical small-prey pounces. Defenses affect real catch eligibility; quill warnings
+make actual predators retreat. Fox meals share delayed/distant natural-only
+replacement with the existing hunters. Twenty-nine entries now have targeted verification, with twenty-seven signatures
+and two inherited cat coats. Three new retained action banks preserve
+native travel pixels and await human review. The behavior topic owns these
+contracts; the tactical records exact validation.
 
 [Explorer boats and large lakes](boats.md) add four natural fish schools, four
 other water species and one aquatic hunter per new large lake. Existing water

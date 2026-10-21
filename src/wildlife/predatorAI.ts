@@ -42,7 +42,7 @@ function enter(e: Entity, state: NonNullable<Entity["predator"]>["state"], timer
   restorePredatorPose(e);
 }
 /** Cancel a smaller predator's own hunt before it escapes a larger hunter. */
-function alarmPrey(prey: Entity, from: PositionComponent): void {
+export function alarmPrey(prey: Entity, from: PositionComponent): void {
   if (prey.predator) {
     if (prey.predator.alarmFrom) return;
     enter(prey, "evade", 2.5);
@@ -215,6 +215,7 @@ export function updatePredatorAI(
         visitor.wy - e.position.wy,
       );
       e.sprite.frameRow = e.sprite.direction;
+      ai.facing = e.sprite.direction;
       restorePredatorPose(e);
       return;
     }
@@ -247,6 +248,7 @@ export function updatePredatorAI(
         v.vy = (dy / d) * speed;
         e.sprite.direction = directionFromVelocity(dx, dy);
         e.sprite.frameRow = e.sprite.direction;
+        ai.facing = e.sprite.direction;
       }
     }
     restorePredatorPose(e);
@@ -392,6 +394,7 @@ export function updatePredatorAI(
             nearest.position.wy - e.position.wy,
           );
           e.sprite.frameRow = e.sprite.direction;
+          ai.facing = e.sprite.direction;
           alarmPrey(nearest, e.position);
           for (let i = 0; i < Math.min(48, candidates.length); i++) {
             if (planning && !planning.candidate(e)) break;
@@ -469,9 +472,42 @@ export function updatePredatorAI(
       v.vy = (dy / d) * speed;
       e.sprite.direction = directionFromVelocity(dx, dy);
       e.sprite.frameRow = e.sprite.direction;
+      ai.facing = e.sprite.direction;
     }
   }
   restorePredatorPose(e);
+}
+
+/** Shared physical meal transaction for native predators and fauna fox pounces. */
+export function consumeWildlifePrey(
+  manager: EntityManager,
+  hunter: Entity,
+  prey: Entity,
+  env: WildlifeEnvironment,
+  randomValue: () => number,
+): boolean {
+  if (
+    !manager.byId.has(hunter.id) ||
+    !manager.byId.has(prey.id) ||
+    !canEat(hunter, prey) ||
+    !hunter.collider ||
+    !prey.collider ||
+    (Math.abs((hunter.wz ?? 0) - (prey.wz ?? 0)) > 4 && !raptorOnPrey(hunter, prey)) ||
+    (prey.jumpZ ?? 0) > 1 ||
+    (prey.rabbit?.state === "hop" && (prey.wz ?? 0) > (env.surfaceZ?.(prey.position) ?? 0) + 1)
+  )
+    return false;
+  const approach = raptorOnPrey(hunter, prey) ? { ...hunter, wz: prey.wz ?? 0 } : hunter;
+  if (bodyGap(hunter, prey) > 3 || !clearPath(approach, prey.position, env)) return false;
+  const naturalSpawnId = prey.naturalSpawnId ?? prey.proceduralId;
+  if (
+    naturalSpawnId &&
+    creatureSpecies(prey) !== "person" &&
+    !scheduleWildlifeRespawn(manager, prey, randomValue)
+  )
+    return false;
+  manager.remove(prey.id);
+  return true;
 }
 
 /** Called after collision resolution. Only world-origin animals receive a new
@@ -494,23 +530,7 @@ export function resolvePredatorCatches(
     const prey = active.find(
       (e) => e.persistentId === ai.targetId && manager.byId.has(e.id) && canEat(hunter, e),
     );
-    if (
-      !prey?.collider ||
-      (Math.abs((hunter.wz ?? 0) - (prey.wz ?? 0)) > 4 && !raptorOnPrey(hunter, prey)) ||
-      (prey.jumpZ ?? 0) > 1 ||
-      (prey.rabbit?.state === "hop" && (prey.wz ?? 0) > (env.surfaceZ?.(prey.position) ?? 0) + 1)
-    )
-      continue;
-    const approach = raptorOnPrey(hunter, prey) ? { ...hunter, wz: prey.wz ?? 0 } : hunter;
-    if (bodyGap(hunter, prey) > 3 || !clearPath(approach, prey.position, env)) continue;
-    const naturalSpawnId = prey.naturalSpawnId ?? prey.proceduralId;
-    if (
-      naturalSpawnId &&
-      creatureSpecies(prey) !== "person" &&
-      !scheduleWildlifeRespawn(manager, prey, () => random(hunter))
-    )
-      continue;
-    manager.remove(prey.id);
+    if (!prey || !consumeWildlifePrey(manager, hunter, prey, env, () => random(hunter))) continue;
     ai.meals++;
     ai.cooldown = 35 + random(hunter) * 20;
     enter(hunter, "feed", 3.84);

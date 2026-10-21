@@ -15,7 +15,9 @@ import { HerdWork, isHerdWorker } from "./HerdWork.js";
 import { isMeadowWorker, MeadowWork } from "./MeadowWork.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 import { isPastureWorker, PastureWork } from "./PastureWork.js";
+import { restorePredatorPose } from "./PredatorMotion.js";
 import { isRangeWorker, RangeWork } from "./RangeWork.js";
+import { isThreatWorker, ThreatWork } from "./ThreatWork.js";
 import { isWoodlandWorker, WoodlandWork } from "./WoodlandWork.js";
 
 const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
@@ -46,6 +48,7 @@ const carrying = (e: Entity) => !!e.animalWork?.heldId;
 export class AnimalWorkSystem {
   private readonly herd: HerdWork;
   private readonly forest: ForestWork;
+  private readonly threats: ThreatWork;
   private readonly range: RangeWork;
   private readonly garden: GardenWork;
   private readonly meadow: MeadowWork;
@@ -54,6 +57,7 @@ export class AnimalWorkSystem {
   constructor(private readonly manager: EntityManager) {
     this.herd = new HerdWork(manager, this);
     this.forest = new ForestWork(manager, this);
+    this.threats = new ThreatWork(manager, this);
     this.range = new RangeWork(manager, this);
     this.garden = new GardenWork(manager, this);
     this.meadow = new MeadowWork(manager);
@@ -65,7 +69,14 @@ export class AnimalWorkSystem {
       for (const animal of manager.entities) {
         const task = animal.animalWork;
         if (!task) continue;
-        if (task.targetId === removed.persistentId || task.heldId === removed.persistentId)
+        if (
+          task.targetId === removed.persistentId &&
+          task.kind === "fox" &&
+          task.state === "pounce" &&
+          animal.fauna?.motion
+        ) {
+          delete task.targetId; // Finish the physical leap, then miss; never snap from the air.
+        } else if (task.targetId === removed.persistentId || task.heldId === removed.persistentId)
           this.cancel(animal, 2);
         if (task.siteId === removed.persistentId) {
           this.cancel(animal, 4);
@@ -111,6 +122,8 @@ export class AnimalWorkSystem {
       delete site.workItem.claimedBy;
     delete task.targetId;
     delete task.sourcePosition;
+    delete task.defenseReady;
+    delete task.quietFor;
     task.cooldown = cooldown;
     this.enter(task, "idle");
     if (animal.deer && !animal.deer.alarmFrom) settleDeer(animal);
@@ -273,6 +286,7 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
+    if (isThreatWorker(animal)) return this.threats.update(animal, dt, context, planning);
     if (isForestWorker(animal)) return this.forest.update(animal, dt, context, planning);
     if (isHerdWorker(animal)) return this.herd.update(animal, dt, context, planning);
     if (isRangeWorker(animal)) return this.range.update(animal, dt, context, planning);
@@ -534,6 +548,9 @@ export class AnimalWorkSystem {
     task.cooldown = 1;
     return false;
   }
+  resolveCatches(active: readonly Entity[], context: WorkContext): void {
+    this.threats.resolveCatches(active, context);
+  }
   /** Shared attachment pose and sprite clips; client receives ordinary binary fields. */
   sync(animal: Entity): void {
     const task = animal.animalWork,
@@ -581,6 +598,11 @@ export class AnimalWorkSystem {
       // Followed and ridden actors can bypass their native brain/pose update.
       if (animal.fauna && animal.sprite) animal.fauna.facing = animal.sprite.direction;
       if (animal.deer && animal.sprite) animal.deer.facing = animal.sprite.direction;
+      if (animal.predator && animal.sprite) {
+        // Align saved semantic phase with the final authoritative snapshot, after physics.
+        animal.predator.facing = animal.sprite.direction;
+        restorePredatorPose(animal);
+      }
     }
     this.forest.syncCaches(active);
   }

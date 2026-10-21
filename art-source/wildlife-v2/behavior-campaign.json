@@ -2,7 +2,7 @@
   "version": 1,
   "id": "wildlife-distinct-behaviors",
   "updated": "2026-10-21",
-  "state": "eighth-batch-automation-verified",
+  "state": "nine-batches-automation-verified",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -42,7 +42,7 @@
       "runtimeType": "wildlife-fox-provisional-v1",
       "family": "Canids (wild)",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -50,27 +50,69 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          "Existing shared fauna/native locomotion retained. Signature defense/ambush was absent; source anatomy and explicit food-web inspected."
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/workshop/AnimalBrowserData.ts",
+          "src/wildlife/ThreatWork.ts",
+          "src/wildlife/FoodWeb.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Listen, stalk and physically pounce on real small prey; eat only actual catches.",
+        "trigger": "Actual eligible nearby hunter/player threat or finite actual small prey.",
+        "scenario": "behavior-fox",
+        "tactical": "docs/tactical/174-curling-quills-and-fox-pounces.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "actual threat/contact outcome",
+          "saved phases and native travel",
+          "ready supported space and companion protections",
+          "world/editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/174-curling-quills-and-fox-pounces.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/topics/wildlife-behaviors.md#curling-quill-warning-and-physical-ambush-174"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/ThreatWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/fox/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/174-curling-quills-and-fox-pounces/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization.",
+      "updatedUtc": "2026-10-21T18:49:45.035137+00:00"
     },
     "cat": {
       "name": "Cat",
@@ -2451,7 +2493,7 @@
       "runtimeType": "wildlife-hedgehog-provisional-v1",
       "family": "Small & exotic mammals",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -2459,27 +2501,69 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          "Existing shared fauna/native locomotion retained. Signature defense/ambush was absent; source anatomy and explicit food-web inspected."
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/workshop/AnimalBrowserData.ts",
+          "src/wildlife/ThreatWork.ts",
+          "src/wildlife/FoodWeb.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Curl against actual threats; deter ground hunters, then safely uncurl.",
+        "trigger": "Actual eligible nearby hunter/player threat or finite actual small prey.",
+        "scenario": "behavior-hedgehog",
+        "tactical": "docs/tactical/174-curling-quills-and-fox-pounces.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "actual threat/contact outcome",
+          "saved phases and native travel",
+          "ready supported space and companion protections",
+          "world/editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/174-curling-quills-and-fox-pounces.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/topics/wildlife-behaviors.md#curling-quill-warning-and-physical-ambush-174"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/ThreatWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/hedgehog/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/174-curling-quills-and-fox-pounces/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization.",
+      "updatedUtc": "2026-10-21T18:49:45.035137+00:00"
     },
     "porcupine": {
       "name": "Porcupine",
@@ -2487,7 +2571,7 @@
       "runtimeType": "wildlife-porcupine-provisional-v1",
       "family": "Small & exotic mammals",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "woodland",
@@ -2495,27 +2579,69 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          "Existing shared fauna/native locomotion retained. Signature defense/ambush was absent; source anatomy and explicit food-web inspected."
+        ],
         "sourceRefs": [
-          "src/workshop/AnimalBrowserData.ts"
+          "src/workshop/AnimalBrowserData.ts",
+          "src/wildlife/ThreatWork.ts",
+          "src/wildlife/FoodWeb.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Present attached quills and make a real ground hunter retreat.",
+        "trigger": "Actual eligible nearby hunter/player threat or finite actual small prey.",
+        "scenario": "behavior-porcupine",
+        "tactical": "docs/tactical/174-curling-quills-and-fox-pounces.md",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "actual threat/contact outcome",
+          "saved phases and native travel",
+          "ready supported space and companion protections",
+          "world/editor/lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/174-curling-quills-and-fox-pounces.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/topics/wildlife-behaviors.md#curling-quill-warning-and-physical-ambush-174"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/ThreatWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/porcupine/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "tests/range-work.spec.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/174-curling-quills-and-fox-pounces/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization.",
+      "updatedUtc": "2026-10-21T18:49:45.035137+00:00"
     },
     "raccoon": {
       "name": "Raccoon",
