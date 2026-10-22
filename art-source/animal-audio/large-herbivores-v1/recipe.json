@@ -1,0 +1,26 @@
+{
+  "elephant": {
+    "ranges": [[4.8, 5.8]],
+    "filters": "highpass=f=100,lowpass=f=6000"
+  },
+  "elk": {
+    "ranges": [[2.65, 4.95]],
+    "filters": "highpass=f=150,lowpass=f=5000"
+  },
+  "deer": {
+    "ranges": [[39.95, 40.95], [43.9, 44.9]],
+    "filters": "highpass=f=180,lowpass=f=4000"
+  },
+  "moose": {
+    "ranges": [[60.8, 65.5]],
+    "filters": "highpass=f=100,lowpass=f=1500"
+  },
+  "zebra": {
+    "ranges": [[0, 3.37]],
+    "filters": "highpass=f=150,lowpass=f=6000"
+  },
+  "hippopotamus": {
+    "ranges": [[1.1, 2.05], [7.2, 9.4]],
+    "filters": "highpass=f=100,lowpass=f=5000"
+  }
+}

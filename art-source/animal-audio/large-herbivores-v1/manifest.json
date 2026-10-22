@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "id": "large-herbivores-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "elephant",
+      "creator": "ikbenraar",
+      "soundId": 819668,
+      "sourcePage": "https://freesound.org/people/ikbenraar/sounds/819668/",
+      "download": "https://cdn.freesound.org/previews/819/819668_754558-hq.mp3",
+      "sourceFile": "elephant-source.mp3",
+      "bytes": 148512,
+      "sha256": "35377ebab5e773539e089b93dbcd1cfd7693939040357c02eb0710cb4cd84d5a",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "elephant",
+      "sourceSpecies": "elephant",
+      "notes": "Zoo elephant recording; selected a complete short trumpet. Upright elephant explicitly inherits this voice.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/large-herbivores-v1/elephant-1.ogg",
+          "sha256": "27430a0ad0d5c3481c08c54c4be45c9d3b27a7d4748bf33a2933e4801047e455",
+          "trim": [4.8, 5.8],
+          "filters": "atrim=start=4.8:end=5.8,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=6000,volume=0.791448000,afade=t=in:d=0.02,afade=t=out:st=0.960000:d=0.04",
+          "duration": 1.0,
+          "peak": 0.5778540372848511,
+          "rms": 0.15950185361100405
+        }
+      ]
+    },
+    {
+      "id": "elk",
+      "creator": "lwdickens",
+      "soundId": 263489,
+      "sourcePage": "https://freesound.org/people/lwdickens/sounds/263489/",
+      "download": "https://cdn.freesound.org/previews/263/263489_2663250-hq.mp3",
+      "sourceFile": "elk-source.mp3",
+      "bytes": 316704,
+      "sha256": "c87efe4d1cf20f4f088e29bc1500b5007ef7dd448be55b96dc0b576a1a783996",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "elk",
+      "sourceSpecies": "elk",
+      "notes": "Banff mating-season elk field recording. Selected the main bugle.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/large-herbivores-v1/elk-1.ogg",
+          "sha256": "dbd47887838c534483bd469e411a80d59acbe2a471c9d5ca44f5da6dcd74681b",
+          "trim": [2.65, 4.95],
+          "filters": "atrim=start=2.65:end=4.95,asetpts=PTS-STARTPTS,highpass=f=150,lowpass=f=5000,volume=7.986842852,afade=t=in:d=0.02,afade=t=out:st=2.260000:d=0.04",
+          "duration": 2.3,
+          "peak": 0.46583691239356995,
+          "rms": 0.16008787874836003
+        }
+      ]
+    },
+    {
+      "id": "deer",
+      "creator": "kvgarlic",
+      "soundId": 816601,
+      "sourcePage": "https://freesound.org/people/kvgarlic/sounds/816601/",
+      "download": "https://cdn.freesound.org/previews/816/816601_1050391-hq.mp3",
+      "sourceFile": "deer-source.mp3",
+      "bytes": 1531728,
+      "sha256": "3601b4b7e1127849c8d4d2ac1229aa7161292b06afcb370919d0a60e79625c50",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "deer",
+      "sourceSpecies": "deer, recorded in southern Illinois",
+      "notes": "Male deer alarm snorts identified by uploader at 40/44 seconds. White-tailed identification inferred from the refuge location; no roe-deer or fawn substitute.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/large-herbivores-v1/deer-1.ogg",
+          "sha256": "f2fd7c944f744f65665a223e20596972d907927d45d47578e05b82d68837183f",
+          "trim": [39.95, 40.95],
+          "filters": "atrim=start=39.95:end=40.95,asetpts=PTS-STARTPTS,highpass=f=180,lowpass=f=4000,volume=15.751346551,afade=t=in:d=0.02,afade=t=out:st=0.960000:d=0.04",
+          "duration": 1.0,
+          "peak": 0.8168138265609741,
+          "rms": 0.09844213142780855
+        },
+        {
+          "path": "assets/audio/animals/large-herbivores-v1/deer-2.ogg",
+          "sha256": "2f0960785936ff0853be0ff4216e5449bb61f2bdc6a007733dbcbe7d1a240ea3",
+          "trim": [43.9, 44.9],
+          "filters": "atrim=start=43.9:end=44.9,asetpts=PTS-STARTPTS,highpass=f=180,lowpass=f=4000,volume=15.472480989,afade=t=in:d=0.02,afade=t=out:st=0.960000:d=0.04",
+          "duration": 1.0,
+          "peak": 0.7307910323143005,
+          "rms": 0.1091956338613036
+        }
+      ]
+    },
+    {
+      "id": "moose",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Moose_mate.ogg",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Moose_mate.ogg",
+      "sourceKind": "original distributed Wikimedia Commons audio file",
+      "sourceFile": "moose-source.ogg",
+      "bytes": 2176737,
+      "sha256": "c4b1ba2dd33854bfa2876e9e9a5b192cb94a274cebd4d04d03164e5053a25de2",
+      "creator": "Bwells",
+      "license": "Public-domain-self",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/File:Moose_mate.ogg#Licensing",
+      "species": "moose",
+      "sourceSpecies": "moose",
+      "notes": "Remote-camera moose recording distributed by its creator under a worldwide public-domain dedication; filtered low grunt phrase retains forest ambience.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/large-herbivores-v1/moose-1.ogg",
+          "sha256": "0e52260fea35a9e010787844dd2ac06b25c823ca9e596490807a9895d62c552e",
+          "trim": [60.8, 65.5],
+          "filters": "atrim=start=60.8:end=65.5,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=1500,volume=0.597138499,afade=t=in:d=0.02,afade=t=out:st=4.660000:d=0.04",
+          "duration": 4.706666666666667,
+          "peak": 0.7416226863861084,
+          "rms": 0.07854069141459832
+        }
+      ]
+    },
+    {
+      "id": "zebra",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 850661,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/850661/",
+      "download": "https://cdn.freesound.org/previews/850/850661_15895934-hq.mp3",
+      "sourceFile": "zebra-source.mp3",
+      "bytes": 77184,
+      "sha256": "27676ec134bbb99e047872f65d474387f628a5c4a9366a716845c82847403633",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "zebra",
+      "sourceSpecies": "Grant's zebra",
+      "notes": "Real Grant zebra braying; not a horse whinny.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/large-herbivores-v1/zebra-1.ogg",
+          "sha256": "79823fab46940bcafd309ace6bf8b48d2911cdb169adae940f2240de59269151",
+          "trim": [0, 3.37],
+          "filters": "atrim=start=0:end=3.37,asetpts=PTS-STARTPTS,highpass=f=150,lowpass=f=6000,volume=7.018528140,afade=t=in:d=0.02,afade=t=out:st=3.330000:d=0.04",
+          "duration": 3.37,
+          "peak": 0.7155607342720032,
+          "rms": 0.10023624901255866
+        }
+      ]
+    },
+    {
+      "id": "hippopotamus",
+      "creator": "YleArkisto",
+      "soundId": 253082,
+      "sourcePage": "https://freesound.org/people/YleArkisto/sounds/253082/",
+      "download": "https://cdn.freesound.org/previews/253/253082_4415905-hq.mp3",
+      "sourceFile": "hippopotamus-source.mp3",
+      "bytes": 1395456,
+      "sha256": "81303ec1cec79f7b4cebacc8152860e49dbaec651c09b085cfddbfe36a577f41",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "license": "CC-BY-4.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "hippopotamus",
+      "sourceSpecies": "hippopotamus",
+      "notes": "Yle archive field recording of hippos in Luangwa National Park, Zambia, 1976; calls retain water ambience.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/large-herbivores-v1/hippopotamus-1.ogg",
+          "sha256": "fcb2931bc595a2bd7f7953f20daa4626bebe3ae17b184295c00977e76140ba30",
+          "trim": [1.1, 2.05],
+          "filters": "atrim=start=1.1:end=2.05,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=5000,volume=1.030825444,afade=t=in:d=0.02,afade=t=out:st=0.910000:d=0.04",
+          "duration": 0.9653333333333334,
+          "peak": 0.7703985571861267,
+          "rms": 0.0760936851466987
+        },
+        {
+          "path": "assets/audio/animals/large-herbivores-v1/hippopotamus-2.ogg",
+          "sha256": "251d109d844e2053dc1c96cc2dace304cc995b2799760898f6c3fb587bed576d",
+          "trim": [7.2, 9.4],
+          "filters": "atrim=start=7.2:end=9.4,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=5000,volume=0.671452334,afade=t=in:d=0.02,afade=t=out:st=2.160000:d=0.04",
+          "duration": 2.2,
+          "peak": 0.7712990045547485,
+          "rms": 0.12100704791855195
+        }
+      ]
+    }
+  ]
+}

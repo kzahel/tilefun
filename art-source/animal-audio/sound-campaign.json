@@ -140,28 +140,52 @@
       "trigger": "Fresh display/warning pose only; no idle howl or growl"
     },
     "elephant": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "elephant",
+      "bank": "large-herbivores-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary idle; generic action cue only where appropriate"
     },
     "elk": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "elk",
+      "bank": "large-herbivores-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary idle; generic action cue only where appropriate"
     },
     "deer": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "deer",
+      "bank": "large-herbivores-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Fresh alarm stamp only; never idle/browse"
     },
     "moose": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "moose",
+      "bank": "large-herbivores-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary idle; generic action cue only where appropriate"
     },
     "zebra": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "zebra",
+      "bank": "large-herbivores-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary idle; generic action cue only where appropriate"
     },
     "hippopotamus": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "hippopotamus",
+      "bank": "large-herbivores-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary idle; generic action cue only where appropriate"
     },
     "peacock": {
       "state": "queued",

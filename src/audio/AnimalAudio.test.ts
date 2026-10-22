@@ -10,6 +10,7 @@ import { createBall } from "../entities/Ball.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { createPlayer } from "../entities/Player.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
+import { createDeer } from "../wildlife/Deer.js";
 import { createFauna } from "../wildlife/Fauna.js";
 import { createForageItem } from "../wildlife/ForageResources.js";
 import { createPredator } from "../wildlife/Predator.js";
@@ -142,7 +143,13 @@ it("maps recorded browser identities, preserves inheritance and pins every retai
   );
   const credits = readFileSync("public/assets/audio/animals/CREDITS.txt", "utf8");
   for (const [bank, source] of banks.flatMap((r) => r.sources.map((s) => [r.id, s] as const))) {
-    expect(["CC0-1.0", "CC-BY-3.0", "CC-BY-4.0"]).toContain(source.license);
+    expect([
+      "CC0-1.0",
+      "CC-BY-3.0",
+      "CC-BY-4.0",
+      "Public-domain-self",
+      "Public-domain-USGov",
+    ]).toContain(source.license);
     expect(credits).toContain(source.sourcePage);
     expect(credits).toContain(source.creator);
     expect(credits).toContain(source.licenseUrl);
@@ -205,6 +212,36 @@ it("admits fresh replicated predator displays, keeps resting hunters quiet and n
     manager.stopCreatureCalls();
     expect(manager.creatureAudioDiagnostics.active).toBe(0);
   }
+});
+
+it("keeps deer browsing/resting silent and sounds only its fresh serialized alarm stamp", async () => {
+  const h = harness(),
+    deer = createDeer(20, 0);
+  deer.id = 2;
+  const replica = () => [deserializeEntity(serializeEntity(deer))];
+  setPose(deer, "stamp");
+  h.audio.update(replica(), h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(0);
+  setPose(deer, "idle");
+  h.audio.update(replica(), h.listener, true);
+  h.ctx.currentTime = 100;
+  h.audio.update(replica(), h.listener, true);
+  setPose(deer, "browse");
+  h.audio.update(replica(), h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(0);
+  setPose(deer, "stamp");
+  required(deer.wanderAI).state = "scared";
+  h.audio.update(replica(), h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining("large-herbivores-v1/deer-"));
+  h.audio.update(replica(), h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  h.audio.stop();
+  expect(h.audio.diagnostics.active).toBe(0);
 });
 
 it("keeps piglet squeals out of calm ambience and plays only a fresh replicated flee onset", async () => {

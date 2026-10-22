@@ -1,0 +1,18 @@
+{
+  "id": "elk",
+  "creator": "lwdickens",
+  "soundId": 263489,
+  "sourcePage": "https://freesound.org/people/lwdickens/sounds/263489/",
+  "download": "https://cdn.freesound.org/previews/263/263489_2663250-hq.mp3",
+  "sourceFile": "elk-source.mp3",
+  "bytes": 316704,
+  "sha256": "c87efe4d1cf20f4f088e29bc1500b5007ef7dd448be55b96dc0b576a1a783996",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "elk",
+  "sourceSpecies": "elk",
+  "notes": "Banff mating-season elk field recording. Selected the main bugle.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

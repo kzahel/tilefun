@@ -146,6 +146,24 @@ export const ANIMAL_VOICES: Record<
     ambient: false,
     alarmCue: "display",
   },
+  elephant: {
+    label: "Trumpet",
+    animals: ["elephant", "elephant-upright"],
+    cues: ["action"],
+    cooldown: 50,
+  },
+  elk: { label: "Bugle", animals: ["elk"], cues: ["action"], cooldown: 75 },
+  deer: {
+    label: "Alarm snort",
+    animals: ["deer"],
+    cues: [],
+    cooldown: 15,
+    ambient: false,
+    alarmCue: "stamp",
+  },
+  moose: { label: "Low grunt", animals: ["moose"], cues: [], cooldown: 50 },
+  zebra: { label: "Bray", animals: ["zebra"], cues: ["action"], cooldown: 40 },
+  hippopotamus: { label: "Grunt", animals: ["hippopotamus"], cues: [], cooldown: 45 },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(
@@ -163,6 +181,7 @@ export function animalVoiceForType(type: string): AnimalVoice | undefined {
   // Only registered authored identities may select voices; never infer from tags or appearance.
   if (type === "cow" || type === "chicken") return type;
   if (!ENTITY_DEFS[type]) return;
+  if (type === "wildlife-deer-v1") return "deer";
   const hunter = predatorProfile(type);
   if (hunter) return animalVoiceForSpecies(hunter.species);
   if (!type.startsWith("wildlife-") || !type.endsWith("-provisional-v1")) return;

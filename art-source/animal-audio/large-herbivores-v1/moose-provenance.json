@@ -1,0 +1,17 @@
+{
+  "id": "moose",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Moose_mate.ogg",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Moose_mate.ogg",
+  "sourceKind": "original distributed Wikimedia Commons audio file",
+  "sourceFile": "moose-source.ogg",
+  "bytes": 2176737,
+  "sha256": "c4b1ba2dd33854bfa2876e9e9a5b192cb94a274cebd4d04d03164e5053a25de2",
+  "creator": "Bwells",
+  "license": "Public-domain-self",
+  "licenseUrl": "https://commons.wikimedia.org/wiki/File:Moose_mate.ogg#Licensing",
+  "species": "moose",
+  "sourceSpecies": "moose",
+  "notes": "Remote-camera moose recording distributed by its creator under a worldwide public-domain dedication; filtered low grunt phrase retains forest ambience.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

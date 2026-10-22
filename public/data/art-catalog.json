@@ -32069,6 +32069,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/audio/AnimalVoice.ts:184"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/wildlife/Deer.ts:6"
         }
       ]
@@ -34219,7 +34223,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:164"
+          "source": "src/audio/AnimalVoice.ts:182"
         },
         {
           "system": "Gameplay",
@@ -34373,7 +34377,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:164"
+          "source": "src/audio/AnimalVoice.ts:182"
         },
         {
           "system": "Gameplay",

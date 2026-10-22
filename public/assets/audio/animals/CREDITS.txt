@@ -106,6 +106,36 @@ Creator: ClaudeDebussy
 Source: https://freesound.org/people/ClaudeDebussy/sounds/428679/
 License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
 
+elephant (large-herbivores-v1)
+Creator: ikbenraar
+Source: https://freesound.org/people/ikbenraar/sounds/819668/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+elk (large-herbivores-v1)
+Creator: lwdickens
+Source: https://freesound.org/people/lwdickens/sounds/263489/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+deer (large-herbivores-v1)
+Creator: kvgarlic
+Source: https://freesound.org/people/kvgarlic/sounds/816601/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+moose (large-herbivores-v1)
+Creator: Bwells
+Source: https://commons.wikimedia.org/wiki/File:Moose_mate.ogg
+License: Public-domain-self — https://commons.wikimedia.org/wiki/File:Moose_mate.ogg#Licensing
+
+zebra (large-herbivores-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/850661/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+hippopotamus (large-herbivores-v1)
+Creator: YleArkisto
+Source: https://freesound.org/people/YleArkisto/sounds/253082/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
 wolf (other-hunters-v1)
 Creator: betchkal
 Source: https://freesound.org/people/betchkal/sounds/500646/

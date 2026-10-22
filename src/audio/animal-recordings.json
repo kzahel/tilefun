@@ -66,5 +66,17 @@
   "cheetah": [
     "assets/audio/animals/other-hunters-v1/cheetah-1.ogg",
     "assets/audio/animals/other-hunters-v1/cheetah-2.ogg"
+  ],
+  "elephant": ["assets/audio/animals/large-herbivores-v1/elephant-1.ogg"],
+  "elk": ["assets/audio/animals/large-herbivores-v1/elk-1.ogg"],
+  "deer": [
+    "assets/audio/animals/large-herbivores-v1/deer-1.ogg",
+    "assets/audio/animals/large-herbivores-v1/deer-2.ogg"
+  ],
+  "moose": ["assets/audio/animals/large-herbivores-v1/moose-1.ogg"],
+  "zebra": ["assets/audio/animals/large-herbivores-v1/zebra-1.ogg"],
+  "hippopotamus": [
+    "assets/audio/animals/large-herbivores-v1/hippopotamus-1.ogg",
+    "assets/audio/animals/large-herbivores-v1/hippopotamus-2.ogg"
   ]
 }

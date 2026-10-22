@@ -75,3 +75,23 @@ normal/retina manifest and production build pass. All 1,980 prior review objects
 remain exact. Input digest: `31ce80aa273968afe611e9fe64df621be985334b1766ba529794ef94a6383f39`.
 Ignored evidence: `data/overnight-audio-hunters-{native,browser,types,lint,catalog,
 manifest,build}.log`. No broad suites run; owner listening remains pending.
+
+## Batch 3: large herbivores
+
+Elephant, elk, deer, moose, zebra and hippopotamus: six sources/eight excerpts.
+Upright elephant explicitly inherits elephant; there are seven newly recorded
+browser entries. Deer alarm snorts are restricted to a fresh replicated stamp,
+with no browsing/idle audio. Its existing dedicated runtime type is mapped
+explicitly. Elephant/elk/zebra have sparse stationary calls and generic action
+cues, excluding actual eating/trunk work. Moose/hippo use sparse stationary
+calls. Public-domain self dedication is distinct from CC0 in the moose receipt.
+Deer identification/recording noise qualifications are explicit in the source bank.
+Current coverage is 66/206 (38 recorded, 28 synthesized), 140 unwired, with 32
+recordings/52 excerpts. Owner listening review remains pending.
+
+Validation: 61 targeted native audio checks and both existing Chromium audio
+boundaries pass (31.3 seconds). Typechecks, targeted lint, strict catalog,
+normal/retina manifest and production build pass; all 1,980 prior candidate objects
+remain exact. Input digest: `66e0b6b2baa42229cd46bb614b116572490cc92c32ad72735cf39be37e5fea82`.
+Evidence: `data/overnight-audio-herbivores-{native,browser,types,lint,catalog,
+manifest,build}.log`. No broad suites run; listening review remains pending.

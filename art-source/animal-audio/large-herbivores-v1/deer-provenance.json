@@ -1,0 +1,18 @@
+{
+  "id": "deer",
+  "creator": "kvgarlic",
+  "soundId": 816601,
+  "sourcePage": "https://freesound.org/people/kvgarlic/sounds/816601/",
+  "download": "https://cdn.freesound.org/previews/816/816601_1050391-hq.mp3",
+  "sourceFile": "deer-source.mp3",
+  "bytes": 1531728,
+  "sha256": "3601b4b7e1127849c8d4d2ac1229aa7161292b06afcb370919d0a60e79625c50",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "deer",
+  "sourceSpecies": "deer, recorded in southern Illinois",
+  "notes": "Male deer alarm snorts identified by uploader at 40/44 seconds. White-tailed identification inferred from the refuge location; no roe-deer or fawn substitute.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

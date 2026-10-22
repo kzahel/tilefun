@@ -1,0 +1,18 @@
+{
+  "id": "zebra",
+  "creator": "TheKingOfGeeks360",
+  "soundId": 850661,
+  "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/850661/",
+  "download": "https://cdn.freesound.org/previews/850/850661_15895934-hq.mp3",
+  "sourceFile": "zebra-source.mp3",
+  "bytes": 77184,
+  "sha256": "27676ec134bbb99e047872f65d474387f628a5c4a9366a716845c82847403633",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "zebra",
+  "sourceSpecies": "Grant's zebra",
+  "notes": "Real Grant zebra braying; not a horse whinny.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

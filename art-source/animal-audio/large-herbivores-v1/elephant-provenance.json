@@ -1,0 +1,18 @@
+{
+  "id": "elephant",
+  "creator": "ikbenraar",
+  "soundId": 819668,
+  "sourcePage": "https://freesound.org/people/ikbenraar/sounds/819668/",
+  "download": "https://cdn.freesound.org/previews/819/819668_754558-hq.mp3",
+  "sourceFile": "elephant-source.mp3",
+  "bytes": 148512,
+  "sha256": "35377ebab5e773539e089b93dbcd1cfd7693939040357c02eb0710cb4cd84d5a",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "elephant",
+  "sourceSpecies": "elephant",
+  "notes": "Zoo elephant recording; selected a complete short trumpet. Upright elephant explicitly inherits this voice.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

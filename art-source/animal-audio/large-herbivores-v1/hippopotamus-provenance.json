@@ -1,0 +1,18 @@
+{
+  "id": "hippopotamus",
+  "creator": "YleArkisto",
+  "soundId": 253082,
+  "sourcePage": "https://freesound.org/people/YleArkisto/sounds/253082/",
+  "download": "https://cdn.freesound.org/previews/253/253082_4415905-hq.mp3",
+  "sourceFile": "hippopotamus-source.mp3",
+  "bytes": 1395456,
+  "sha256": "81303ec1cec79f7b4cebacc8152860e49dbaec651c09b085cfddbfe36a577f41",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "license": "CC-BY-4.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "hippopotamus",
+  "sourceSpecies": "hippopotamus",
+  "notes": "Yle archive field recording of hippos in Luangwa National Park, Zambia, 1976; calls retain water ambience.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}
