@@ -1,0 +1,18 @@
+{
+  "id": "jaguar",
+  "species": "jaguar",
+  "sourceSpecies": "jaguar",
+  "creator": "About Zoos; excerpt prepared by AntumDeluge",
+  "sourcePage": "https://opengameart.org/content/jaguar-saw",
+  "upstream": "https://www.youtube.com/watch?v=VJ0RCZXu0v4",
+  "download": "https://opengameart.org/sites/default/files/jaguar_saw.zip",
+  "sourceKind": "lossless FLAC excerpt distributed in original source archive",
+  "license": "CC-BY-3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "jaguar-source.flac",
+  "sha256": "50f48a45e9d98c93365f6d81da983e7d9fd90216141475fb0873b1a40e885627",
+  "bytes": 50666,
+  "category": "vocalization",
+  "notes": "Two saw pulses in one phrase; no human-imitation substitute."
+}

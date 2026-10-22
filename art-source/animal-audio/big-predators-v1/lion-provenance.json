@@ -1,0 +1,18 @@
+{
+  "id": "lion",
+  "species": "lion",
+  "sourceSpecies": "lion",
+  "creator": "Bidone",
+  "soundId": 69572,
+  "sourcePage": "https://freesound.org/people/Bidone/sounds/69572/",
+  "download": "https://cdn.freesound.org/previews/69/69572_706955-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "lion-source.mp3",
+  "sha256": "1b6e4260bad31e3c690974cd61679c535bb29c9e42502675a51edea08c9d85c2",
+  "bytes": 838689,
+  "category": "vocalization",
+  "notes": "Field recording; raven and water are audible elsewhere in the source."
+}

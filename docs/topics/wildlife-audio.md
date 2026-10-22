@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: fifteen recorded sets plus shared robin/frog/duck synthesis implemented and automation verified; owner listening review pending.
+Status: overnight 36-animal sound campaign in progress; twenty recorded sets integrated, owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -10,14 +10,29 @@ coverage and listening review. The [animal-by-animal audit](../wildlife-audio-au
 records all 206 current Animal Browser entries. The
 [behavior topic](wildlife-behaviors.md) continues to own AI and animation progress.
 
+## Overnight campaign
+
+Owner authorized the full 36-animal queue and additional suitable animals, up to
+11 hours, with incremental commits/pushes and **targeted tests only**. Follow the
+[canonical per-animal sound ledger](../../art-source/animal-audio/sound-campaign.json)
+and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable or
+poorly identified sources remain documented gaps rather than invented recordings.
+
+First six entries: tiger/lion display roars, brown-bear warning growls, leopard
+cough calls and jaguar saw calls; panther inherits leopard. All are display-only,
+with no idle roar, and suppress the older synthesized fallback. Five real sources,
+seven excerpts; public CC0/CC BY credits are linked from Animal Browser. Current
+source coverage is 25 recorded +33 synthesized, zero game-only and 148 unwired;
+28 entries support auditions. Listening review remains pending.
+
 ## Current coverage
 
-Source inspection finds call wiring for **54/206 entries (26.2%)**, using **29
-effective sound designs**: fifteen recorded sound sets covering nineteen entries, eleven
+Source inspection finds call wiring for **58/206 entries (28.2%)**, using **34
+effective sound designs**: twenty recorded sound sets covering twenty-five entries, eleven
 shared synthesized hunter designs and three shared small-animal synthesized calls. Before
 recorded-voice work, 35 entries shared thirteen synthesized designs. The 73 existing OGG files cover
 footsteps (30), impacts (25), jumps (4), UI/ghosts (11) and campfire crackle (3).
-The four recorded banks add twenty-nine OGG excerpts, including mechanical bee
+The five recorded banks add thirty-six OGG excerpts, including mechanical bee
 wingbeats and cricket stridulation. These are source-level coverage counts, not a listening approval or live-deployment
 check. Related animals sharing a voice count as covered entries, not unique sounds.
 
@@ -100,8 +115,9 @@ mechanical sounds; other movement/interaction Foley remains separately audited.
 
 ### Important gaps and corrections
 
-- **Tiger, lion, panther and brown bear have no call routing.** Their display
-  animations alone do not produce roars or growls.
+- Tiger, lion, panther and brown bear now have recorded display calls in
+  [185](../tactical/185-overnight-animal-voices.md). Leopard/jaguar recordings replace
+  their generic cat placeholder; panther explicitly inherits leopard.
 - Goat, donkey and piglet voices are implemented in [177](../tactical/177-farm-animal-voices.md). The hunter `cat` synthesis and
   new domestic-cat recording are separate voice sets; coats explicitly inherit.
 - Owl routing is corrected: explicit `callKind` now takes precedence over the

@@ -1,7 +1,7 @@
 import type { Entity } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { predatorProfile } from "../wildlife/Predator.js";
-import recordings from "./animal-recordings.json";
+import recordings from "./animal-recordings.json" with { type: "json" };
 import { smallAnimalCallForSpecies, smallAnimalCallForType } from "./SmallAnimalCall.js";
 
 export type AnimalVoice = keyof typeof recordings;
@@ -66,6 +66,46 @@ export const ANIMAL_VOICES: Record<
     insect: true,
   },
   cricket: { label: "Chirp", animals: ["cricket"], cues: [], cooldown: 25, insect: true },
+  tiger: {
+    label: "Roar",
+    animals: ["tiger"],
+    cues: ["display"],
+    cooldown: 20,
+    ambient: false,
+    alarmCue: "display",
+  },
+  lion: {
+    label: "Roar",
+    animals: ["lion"],
+    cues: ["display"],
+    cooldown: 25,
+    ambient: false,
+    alarmCue: "display",
+  },
+  leopard: {
+    label: "Cough call",
+    animals: ["leopard", "panther"],
+    cues: ["display"],
+    cooldown: 20,
+    ambient: false,
+    alarmCue: "display",
+  },
+  "brown-bear": {
+    label: "Warning growl",
+    animals: ["brown-bear"],
+    cues: ["display"],
+    cooldown: 25,
+    ambient: false,
+    alarmCue: "display",
+  },
+  jaguar: {
+    label: "Saw call",
+    animals: ["jaguar"],
+    cues: ["display"],
+    cooldown: 20,
+    ambient: false,
+    alarmCue: "display",
+  },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(
@@ -80,8 +120,11 @@ export function animalAuditionLabel(species: string): string | undefined {
   return recorded ? ANIMAL_VOICES[recorded].label : smallAnimalCallForSpecies(species)?.label;
 }
 export function animalVoiceForType(type: string): AnimalVoice | undefined {
-  // Explicitly admit only the known authored types and the two legacy farm actors.
+  // Only registered authored identities may select voices; never infer from tags or appearance.
   if (type === "cow" || type === "chicken") return type;
+  if (!ENTITY_DEFS[type]) return;
+  const hunter = predatorProfile(type);
+  if (hunter) return animalVoiceForSpecies(hunter.species);
   if (!type.startsWith("wildlife-") || !type.endsWith("-provisional-v1")) return;
   return animalVoiceForSpecies(type.slice(9, -15));
 }

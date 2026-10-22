@@ -1,0 +1,22 @@
+{
+  "tiger": {
+    "ranges": [[0.95, 2.3]],
+    "filters": "highpass=f=90,lowpass=f=6000"
+  },
+  "lion": {
+    "ranges": [[8.1, 9.85], [27.65, 28.85]],
+    "filters": "highpass=f=70,lowpass=f=5000"
+  },
+  "leopard": {
+    "ranges": [[0, 0.4476]],
+    "filters": "highpass=f=100,lowpass=f=5000"
+  },
+  "brown-bear": {
+    "ranges": [[2.65, 3.9], [18.1, 20.8]],
+    "filters": "highpass=f=80,lowpass=f=6000"
+  },
+  "jaguar": {
+    "ranges": [[0, 1.39]],
+    "filters": "highpass=f=80,lowpass=f=6000"
+  }
+}

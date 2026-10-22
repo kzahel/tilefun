@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { createPredator } from "../wildlife/Predator.js";
+import { animalVoiceForSpecies } from "./AnimalVoice.js";
 import { AudioManager } from "./AudioManager.js";
 import { creatureCallSamples } from "./CreatureCall.js";
 
@@ -29,21 +30,25 @@ describe("creature calls", () => {
       0.05,
     );
   });
-  it.each([
-    "t-rex",
-    "owl",
-    "eagle",
-    "hawk",
-    "wolf",
-    "coyote",
-    "spotted-hyena",
-    "jaguar",
-    "leopard",
-    "cheetah",
-    "lynx",
-    "bobcat",
-    "polar-bear",
-  ] as const)(
+  it.each(
+    (
+      [
+        "t-rex",
+        "owl",
+        "eagle",
+        "hawk",
+        "wolf",
+        "coyote",
+        "spotted-hyena",
+        "jaguar",
+        "leopard",
+        "cheetah",
+        "lynx",
+        "bobcat",
+        "polar-bear",
+      ] as const
+    ).filter((species) => !animalVoiceForSpecies(species)),
+  )(
     "%s plays one spatial call per display, suppresses late/muted calls and stops on pause/removal",
     (species) => {
       const sources: {

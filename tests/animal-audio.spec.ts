@@ -1,6 +1,11 @@
 import { expect, test } from "@playwright/test";
+import { animalSoundCoverage } from "../src/audio/AnimalVoice.js";
 import type { GameClient } from "../src/client/GameClient.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
+import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
+
+const coverageCount = (coverage: ReturnType<typeof animalSoundCoverage>) =>
+  ANIMAL_BROWSER_ENTRIES.filter((a) => animalSoundCoverage(a.type) === coverage).length;
 
 test.use({ channel: "chromium" });
 
@@ -24,13 +29,16 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
   await page.goto("/tilefun/workshop.html?geometry=nature-behavior-dog#/tool/world-geometry");
   await page.getByLabel("Animal sound coverage", { exact: true }).selectOption("recorded");
   const results = page.getByRole("region", { name: "Animal results" });
-  await expect(results.locator("article")).toHaveCount(19);
+  await expect(results.locator("article")).toHaveCount(coverageCount("recorded"));
   const button = results
-    .locator('[data-animal="cricket"]')
+    .locator('[data-animal="tiger"]')
     .getByRole("button", { name: /Audition .* voice/ });
   await button.focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("status").filter({ hasText: "Cricket: Chirp" })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: /tiger: Roar/i })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Animal recording credits and licenses" }),
+  ).toHaveAttribute("href", "/tilefun/assets/audio/animals/CREDITS.txt");
   const energy = await page.evaluate(async () => {
     const buffer = (
       window as unknown as { __voiceTest: { buffers: AudioBuffer[] } }
@@ -49,7 +57,7 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
   expect(energy[0]).toBeGreaterThan(1);
   expect(energy[1]).toBeGreaterThan((energy[0] ?? 0) * 4);
   await page.getByLabel("Animal sound coverage", { exact: true }).selectOption("synthesized");
-  await expect(results.locator("article")).toHaveCount(35);
+  await expect(results.locator("article")).toHaveCount(coverageCount("synthesized"));
   await results
     .locator('[data-animal="robin"]')
     .getByRole("button", { name: /Audition .* voice/ })
@@ -93,7 +101,7 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
     )
     .toBe(0);
   await page.getByLabel("Animal sound coverage", { exact: true }).selectOption("missing");
-  await expect(results.locator("article")).toHaveCount(152);
+  await expect(results.locator("article")).toHaveCount(coverageCount("missing"));
   expect(errors).toEqual([]);
 });
 

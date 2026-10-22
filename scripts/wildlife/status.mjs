@@ -324,6 +324,22 @@ export function writeStatus() {
       "",
     );
   }
+  if (existsSync(resolve(ROOT, "art-source/animal-audio/sound-campaign.json"))) {
+    const campaign = read("art-source/animal-audio/sound-campaign.json");
+    const animals = Object.values(campaign.animals);
+    const integrated = animals.filter((a) => a.state === "integrated").length;
+    const gaps = animals.filter((a) => a.state === "source-gap").length;
+    lines.splice(
+      4,
+      0,
+      "## Animal sounds",
+      "",
+      `${integrated}/${animals.length} campaign animals integrated; ${gaps} documented source gaps. Listening review remains pending.`,
+      "",
+      "[Sound audit and coverage](wildlife-audio-audit.md) · [Current sound campaign](../art-source/animal-audio/sound-campaign.json) · [Sound plan](topics/wildlife-audio.md)",
+      "",
+    );
+  }
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));
   renameSync(temporary, output);

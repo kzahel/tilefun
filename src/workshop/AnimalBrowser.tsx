@@ -254,6 +254,11 @@ export default function AnimalBrowser({
         variants
       </summary>
       <p>Browse their animations, then watch the selected animal in the playground below.</p>
+      <p>
+        <a href={`${import.meta.env.BASE_URL}assets/audio/animals/CREDITS.txt`}>
+          Animal recording credits and licenses
+        </a>
+      </p>
       <div className="actions" style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
         <label>
           Find animal{" "}

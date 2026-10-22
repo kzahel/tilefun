@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { afterEach, expect, it, vi } from "vitest";
 import receipt from "../../art-source/animal-audio/familiar-v1/manifest.json";
 import farmReceipt from "../../art-source/animal-audio/farm-v1/manifest.json";
@@ -12,6 +12,7 @@ import { createPlayer } from "../entities/Player.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createFauna } from "../wildlife/Fauna.js";
 import { createForageItem } from "../wildlife/ForageResources.js";
+import { createPredator } from "../wildlife/Predator.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../workshop/AnimalBrowserData.js";
 import { AnimalAudio } from "./AnimalAudio.js";
 import {
@@ -90,30 +91,47 @@ function harness() {
   return { audio, ctx, sources, gains, pans, fetcher, sheep, listener, pose, flush };
 }
 
-it("maps nineteen browser entries, preserves coats and pins fifteen sources/twenty-nine exported clips", () => {
+it("maps recorded browser identities, preserves inheritance and pins every retained source/export", () => {
   const covered = ANIMAL_BROWSER_ENTRIES.filter((a) => animalVoiceForType(a.type));
-  expect(covered).toHaveLength(19);
+  expect(covered.map((a) => a.id).sort()).toEqual(
+    Object.values(ANIMAL_VOICES)
+      .flatMap((v) => v.animals)
+      .sort(),
+  );
   for (const a of covered) expect(animalVoiceForType(a.type)).toBe(animalVoiceForSpecies(a.id));
   expect(animalVoiceForSpecies("dog-golden")).toBe("dog");
   expect(animalVoiceForSpecies("cat-black")).toBe("cat");
   for (const type of [
     "player",
-    "wildlife-tiger-predator-v1",
+    "wildlife-tiger-provisional-v1",
     "wildlife-cow-made-up",
     "constructor",
-    "wildlife-fox-provisional-v1",
+    "wildlife-lion-made-up",
   ])
     expect(animalVoiceForType(type)).toBeUndefined();
-  expect(Object.keys(ANIMAL_VOICES)).toHaveLength(15);
+  expect(Object.keys(ANIMAL_VOICES).sort()).toEqual(Object.keys(ANIMAL_RECORDINGS).sort());
   expect(receipt.sources.flatMap((s) => s.variants)).toHaveLength(11);
   expect(farmReceipt.sources.flatMap((s) => s.variants)).toHaveLength(5);
   expect(birdReceipt.sources.flatMap((s) => s.variants)).toHaveLength(7);
   expect(gardenReceipt.sources.flatMap((s) => s.variants)).toHaveLength(6);
   const hash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
-  for (const [bank, source] of [receipt, farmReceipt, birdReceipt, gardenReceipt].flatMap((r) =>
-    r.sources.map((s) => [r.id, s] as const),
-  )) {
-    expect(source.license).toBe("CC0-1.0");
+  const banks = readdirSync("art-source/animal-audio", { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map(
+      (entry) =>
+        JSON.parse(
+          readFileSync(`art-source/animal-audio/${entry.name}/manifest.json`, "utf8"),
+        ) as typeof receipt,
+    );
+  expect(banks.flatMap((b) => b.sources.map((s) => s.id)).sort()).toEqual(
+    Object.keys(ANIMAL_RECORDINGS).sort(),
+  );
+  const credits = readFileSync("public/assets/audio/animals/CREDITS.txt", "utf8");
+  for (const [bank, source] of banks.flatMap((r) => r.sources.map((s) => [r.id, s] as const))) {
+    expect(["CC0-1.0", "CC-BY-3.0", "CC-BY-4.0"]).toContain(source.license);
+    expect(credits).toContain(source.sourcePage);
+    expect(credits).toContain(source.creator);
+    expect(credits).toContain(source.licenseUrl);
     expect(hash(`art-source/animal-audio/${bank}/${source.sourceFile}`)).toBe(source.sha256);
     expect(ANIMAL_RECORDINGS[source.id as keyof typeof ANIMAL_RECORDINGS]).toEqual(
       source.variants.map((v) => v.path),
@@ -123,6 +141,49 @@ it("maps nineteen browser entries, preserves coats and pins fifteen sources/twen
       expect(variant.peak).toBeLessThan(0.9);
       expect(variant.rms).toBeGreaterThan(0.025);
     }
+  }
+});
+
+it("admits fresh replicated predator displays, keeps resting hunters quiet and never layers a placeholder", async () => {
+  for (const species of ["tiger", "lion", "panther", "brown-bear", "leopard", "jaguar"] as const) {
+    const h = harness();
+    vi.stubGlobal(
+      "AudioContext",
+      class {
+        constructor() {
+          Object.assign(this, h.ctx);
+        }
+      },
+    );
+    const manager = new AudioManager();
+    manager.ensureContext();
+    const synthetic = vi.spyOn(manager, "playCreatureCall");
+    const hunter = createPredator(species, 20, 0);
+    hunter.id = 2;
+    const replica = () => [deserializeEntity(serializeEntity(hunter))];
+    setPose(hunter, "display");
+    manager.updateCreatureCalls(replica(), h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(0); // Joining mid-display is silent.
+    setPose(hunter, "idle");
+    manager.updateCreatureCalls(replica(), h.listener, true);
+    h.ctx.currentTime = 100;
+    manager.updateCreatureCalls(replica(), h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(0);
+    setPose(hunter, "display");
+    manager.updateCreatureCalls(replica(), h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+    expect(h.fetcher).toHaveBeenCalledWith(
+      expect.stringContaining(`big-predators-v1/${species === "panther" ? "leopard" : species}-`),
+    );
+    manager.updateCreatureCalls(replica(), h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+    expect(synthetic).not.toHaveBeenCalled();
+    manager.stopCreatureCalls();
+    expect(manager.creatureAudioDiagnostics.active).toBe(0);
   }
 });
 

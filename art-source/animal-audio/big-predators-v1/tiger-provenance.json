@@ -1,0 +1,18 @@
+{
+  "id": "tiger",
+  "species": "tiger",
+  "sourceSpecies": "tiger",
+  "creator": "lauramellis",
+  "soundId": 263115,
+  "sourcePage": "https://freesound.org/people/lauramellis/sounds/263115/",
+  "download": "https://cdn.freesound.org/previews/263/263115_672090-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "tiger-source.mp3",
+  "sha256": "38a0c9603e5dd819f8140dd637d0521d52609c2304654a28dedd481fd36f974a",
+  "bytes": 199800,
+  "category": "vocalization",
+  "notes": "Louisville Zoo field recording; one short roar."
+}

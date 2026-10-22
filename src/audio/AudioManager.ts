@@ -3,7 +3,7 @@ import type { VehicleHornMessage } from "../shared/protocol.js";
 import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/EmergencyVehicle.js";
 import { predatorProfile } from "../wildlife/Predator.js";
 import { AnimalAudio } from "./AnimalAudio.js";
-import { animalAudioPose, animalVoiceForSpecies } from "./AnimalVoice.js";
+import { animalAudioPose, animalVoiceForSpecies, animalVoiceForType } from "./AnimalVoice.js";
 import { creatureCallSamples } from "./CreatureCall.js";
 import { smallAnimalCallForSpecies, smallAnimalCallForType } from "./SmallAnimalCall.js";
 import { TrainAudio } from "./TrainAudio.js";
@@ -64,6 +64,9 @@ export class AudioManager {
       state?: { next: number };
     }[] = [];
     for (const entity of entities) {
+      // A recorded species owns its voice, including quiet poses and failed loads.
+      // Do not layer the older generic hunter design under the selected recording.
+      if (animalVoiceForType(entity.type)) continue;
       const local = smallAnimalCallForType(entity.type);
       if (local) {
         small.add(entity.id);

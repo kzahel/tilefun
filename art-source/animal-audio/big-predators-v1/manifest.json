@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "id": "big-predators-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "tiger",
+      "species": "tiger",
+      "sourceSpecies": "tiger",
+      "creator": "lauramellis",
+      "soundId": 263115,
+      "sourcePage": "https://freesound.org/people/lauramellis/sounds/263115/",
+      "download": "https://cdn.freesound.org/previews/263/263115_672090-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "tiger-source.mp3",
+      "sha256": "38a0c9603e5dd819f8140dd637d0521d52609c2304654a28dedd481fd36f974a",
+      "bytes": 199800,
+      "category": "vocalization",
+      "notes": "Louisville Zoo field recording; one short roar.",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-predators-v1/tiger-1.ogg",
+          "sha256": "fb8dc3dccbe8c6db38efa3f270ba672c5049af39b5383a70e6f83efaa7df7d3b",
+          "trim": [0.95, 2.3],
+          "filters": "atrim=start=0.95:end=2.3,asetpts=PTS-STARTPTS,highpass=f=90,lowpass=f=6000,volume=1.657610148,afade=t=in:d=0.02,afade=t=out:st=1.310000:d=0.04",
+          "duration": 1.35,
+          "peak": 0.7440442442893982,
+          "rms": 0.13619780341463714
+        }
+      ]
+    },
+    {
+      "id": "lion",
+      "species": "lion",
+      "sourceSpecies": "lion",
+      "creator": "Bidone",
+      "soundId": 69572,
+      "sourcePage": "https://freesound.org/people/Bidone/sounds/69572/",
+      "download": "https://cdn.freesound.org/previews/69/69572_706955-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "lion-source.mp3",
+      "sha256": "1b6e4260bad31e3c690974cd61679c535bb29c9e42502675a51edea08c9d85c2",
+      "bytes": 838689,
+      "category": "vocalization",
+      "notes": "Field recording; raven and water are audible elsewhere in the source.",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-predators-v1/lion-1.ogg",
+          "sha256": "c4901e4ecd693b01654029662daa15b2d9245d8908239519d33adf89201df42b",
+          "trim": [8.1, 9.85],
+          "filters": "atrim=start=8.1:end=9.85,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5000,volume=1.168534647,afade=t=in:d=0.02,afade=t=out:st=1.710000:d=0.04",
+          "duration": 1.75,
+          "peak": 0.4767454266548157,
+          "rms": 0.15993419779272608
+        },
+        {
+          "path": "assets/audio/animals/big-predators-v1/lion-2.ogg",
+          "sha256": "a3e51dc5489150dcb01c0babd019328c79a9c8c96cfe9c9431e1e3723b5bada2",
+          "trim": [27.65, 28.85],
+          "filters": "atrim=start=27.65:end=28.85,asetpts=PTS-STARTPTS,highpass=f=70,lowpass=f=5000,volume=1.131728931,afade=t=in:d=0.02,afade=t=out:st=1.160000:d=0.04",
+          "duration": 1.2,
+          "peak": 0.7020689845085144,
+          "rms": 0.15651512964589048
+        }
+      ]
+    },
+    {
+      "id": "leopard",
+      "species": "leopard",
+      "sourceSpecies": "leopard",
+      "creator": "drobiumdesign",
+      "soundId": 346402,
+      "sourcePage": "https://freesound.org/people/drobiumdesign/sounds/346402/",
+      "download": "https://cdn.freesound.org/previews/346/346402_5481596-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "leopard-source.mp3",
+      "sha256": "a2dbde4dfced00c8c852cd69ed40f1d6cebbe0367a67c4cf7d0acbc10e963bb0",
+      "bytes": 12213,
+      "category": "vocalization",
+      "notes": "Wild leopard cough recorded by phone in Pilanesberg; panther explicitly inherits this leopard voice.",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-predators-v1/leopard-1.ogg",
+          "sha256": "90b1ae16e815b06c66f87c255110e7ed58cb1205e6bc64250fbbe46597c5660a",
+          "trim": [0, 0.4476],
+          "filters": "atrim=start=0:end=0.4476,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=5000,volume=3.837873639,afade=t=in:d=0.02,afade=t=out:st=0.407600:d=0.04",
+          "duration": 0.4369166666666667,
+          "peak": 0.7925922274589539,
+          "rms": 0.13230894355323541
+        }
+      ]
+    },
+    {
+      "id": "brown-bear",
+      "species": "brown-bear",
+      "sourceSpecies": "brown bear",
+      "creator": "YleArkisto",
+      "soundId": 249441,
+      "sourcePage": "https://freesound.org/people/YleArkisto/sounds/249441/",
+      "download": "https://cdn.freesound.org/previews/249/249441_4415905-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "brown-bear-source.mp3",
+      "sha256": "8903db82adfee0d2565fbdcd29c72209ddc38954ecf55bfee5fd8c4c2f6f9bdd",
+      "bytes": 781728,
+      "category": "vocalization",
+      "notes": "Archive field recording of two bears, Ahtari zoo, Finland, 1975. Threat growls, not resting ambience.",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-predators-v1/brown-bear-1.ogg",
+          "sha256": "7bd3ff82de5e6ac0f001430566cfe77c51645f13ef7fc3a9415434b8a1058697",
+          "trim": [2.65, 3.9],
+          "filters": "atrim=start=2.65:end=3.9,asetpts=PTS-STARTPTS,highpass=f=80,lowpass=f=6000,volume=1.016592312,afade=t=in:d=0.02,afade=t=out:st=1.210000:d=0.04",
+          "duration": 1.25,
+          "peak": 0.7346097230911255,
+          "rms": 0.15020172949503427
+        },
+        {
+          "path": "assets/audio/animals/big-predators-v1/brown-bear-2.ogg",
+          "sha256": "d94b7c5af5537d7734a53b30259494b715d6bae29790b6fedd844e75feeebfa7",
+          "trim": [18.1, 20.8],
+          "filters": "atrim=start=18.1:end=20.8,asetpts=PTS-STARTPTS,highpass=f=80,lowpass=f=6000,volume=1.442753988,afade=t=in:d=0.02,afade=t=out:st=2.660000:d=0.04",
+          "duration": 2.7,
+          "peak": 0.7472543716430664,
+          "rms": 0.16087638467674792
+        }
+      ]
+    },
+    {
+      "id": "jaguar",
+      "species": "jaguar",
+      "sourceSpecies": "jaguar",
+      "creator": "About Zoos; excerpt prepared by AntumDeluge",
+      "sourcePage": "https://opengameart.org/content/jaguar-saw",
+      "upstream": "https://www.youtube.com/watch?v=VJ0RCZXu0v4",
+      "download": "https://opengameart.org/sites/default/files/jaguar_saw.zip",
+      "sourceKind": "lossless FLAC excerpt distributed in original source archive",
+      "license": "CC-BY-3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "jaguar-source.flac",
+      "sha256": "50f48a45e9d98c93365f6d81da983e7d9fd90216141475fb0873b1a40e885627",
+      "bytes": 50666,
+      "category": "vocalization",
+      "notes": "Two saw pulses in one phrase; no human-imitation substitute.",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-predators-v1/jaguar-1.ogg",
+          "sha256": "966666c3476f368b879249a8b912583ac32f6d27e2b108c68b7df06c26a7ea1a",
+          "trim": [0, 1.39],
+          "filters": "atrim=start=0:end=1.39,asetpts=PTS-STARTPTS,highpass=f=80,lowpass=f=6000,volume=1.234525837,afade=t=in:d=0.02,afade=t=out:st=1.350000:d=0.04",
+          "duration": 1.39,
+          "peak": 0.7268195748329163,
+          "rms": 0.04204520548807707
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "version": 1,
+  "authorized": "2026-10-22",
+  "scope": "36 land/air animal voices; additional suitable animals if time remains, up to eleven hours. Targeted tests only. Commit and push completed batches.",
+  "listeningReview": "pending-owner",
+  "batches": [
+    {
+      "id": 1,
+      "animals": ["tiger", "lion", "panther", "brown-bear", "leopard", "jaguar"]
+    },
+    {
+      "id": 2,
+      "animals": ["wolf", "coyote", "spotted-hyena", "fox", "cheetah", "lynx"]
+    },
+    {
+      "id": 3,
+      "animals": ["elephant", "elk", "deer", "moose", "zebra", "hippopotamus"]
+    },
+    {
+      "id": 4,
+      "animals": ["peacock", "parrot", "wild-turkey", "sparrow", "flamingo", "penguin"]
+    },
+    {
+      "id": 5,
+      "animals": [
+        "gorilla",
+        "chimpanzee",
+        "orangutan",
+        "capuchin-monkey",
+        "ring-tailed-lemur",
+        "japanese-macaque"
+      ]
+    },
+    {
+      "id": 6,
+      "animals": ["guinea-pig", "meerkat", "raccoon", "river-otter", "alpaca", "llama"]
+    }
+  ],
+  "animals": {
+    "tiger": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "tiger",
+      "bank": "big-predators-v1",
+      "trigger": "Fresh display/warning pose only; no idle roar.",
+      "validation": "65 focused native audio checks and 2 Chromium audio boundaries passed; typechecks, targeted lint, strict inventories and production build passed.",
+      "inheritance": null
+    },
+    "lion": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "lion",
+      "bank": "big-predators-v1",
+      "trigger": "Fresh display/warning pose only; no idle roar.",
+      "validation": "65 focused native audio checks and 2 Chromium audio boundaries passed; typechecks, targeted lint, strict inventories and production build passed.",
+      "inheritance": null
+    },
+    "panther": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "leopard",
+      "bank": "big-predators-v1",
+      "trigger": "Fresh display/warning pose only; no idle roar.",
+      "validation": "65 focused native audio checks and 2 Chromium audio boundaries passed; typechecks, targeted lint, strict inventories and production build passed.",
+      "inheritance": "Melanistic leopard shares leopard source; not a distinct recording."
+    },
+    "brown-bear": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "brown-bear",
+      "bank": "big-predators-v1",
+      "trigger": "Fresh display/warning pose only; no idle roar.",
+      "validation": "65 focused native audio checks and 2 Chromium audio boundaries passed; typechecks, targeted lint, strict inventories and production build passed.",
+      "inheritance": null
+    },
+    "leopard": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "leopard",
+      "bank": "big-predators-v1",
+      "trigger": "Fresh display/warning pose only; no idle roar.",
+      "validation": "65 focused native audio checks and 2 Chromium audio boundaries passed; typechecks, targeted lint, strict inventories and production build passed.",
+      "inheritance": null
+    },
+    "jaguar": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "jaguar",
+      "bank": "big-predators-v1",
+      "trigger": "Fresh display/warning pose only; no idle roar.",
+      "validation": "65 focused native audio checks and 2 Chromium audio boundaries passed; typechecks, targeted lint, strict inventories and production build passed.",
+      "inheritance": null
+    },
+    "wolf": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "coyote": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "spotted-hyena": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "fox": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "cheetah": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "lynx": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "elephant": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "elk": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "deer": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "moose": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "zebra": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "hippopotamus": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "peacock": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "parrot": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "wild-turkey": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "sparrow": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "flamingo": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "penguin": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "gorilla": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "chimpanzee": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "orangutan": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "capuchin-monkey": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "ring-tailed-lemur": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "japanese-macaque": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "guinea-pig": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "meerkat": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "raccoon": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "river-otter": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "alpaca": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    },
+    "llama": {
+      "state": "queued",
+      "listeningReview": "pending-owner"
+    }
+  },
+  "stopByUtc": "2026-10-23T06:40:00Z"
+}

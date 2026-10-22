@@ -1,0 +1,18 @@
+{
+  "id": "leopard",
+  "species": "leopard",
+  "sourceSpecies": "leopard",
+  "creator": "drobiumdesign",
+  "soundId": 346402,
+  "sourcePage": "https://freesound.org/people/drobiumdesign/sounds/346402/",
+  "download": "https://cdn.freesound.org/previews/346/346402_5481596-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC-BY-3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "leopard-source.mp3",
+  "sha256": "a2dbde4dfced00c8c852cd69ed40f1d6cebbe0367a67c4cf7d0acbc10e963bb0",
+  "bytes": 12213,
+  "category": "vocalization",
+  "notes": "Wild leopard cough recorded by phone in Pilanesberg; panther explicitly inherits this leopard voice."
+}

@@ -1,0 +1,107 @@
+Tilefun animal recording credits
+
+Recordings are trimmed, filtered, gain-adjusted, faded and converted to mono OGG/Vorbis.
+No endorsement by the creators is implied. Exact edits, source/export hashes and
+license receipts are retained in art-source/animal-audio/<bank>/manifest.json.
+CC0 sources also retain creator credit. Listening review is separate from licensing.
+
+tiger (big-predators-v1)
+Creator: lauramellis
+Source: https://freesound.org/people/lauramellis/sounds/263115/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+lion (big-predators-v1)
+Creator: Bidone
+Source: https://freesound.org/people/Bidone/sounds/69572/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+leopard (big-predators-v1)
+Creator: drobiumdesign
+Source: https://freesound.org/people/drobiumdesign/sounds/346402/
+License: CC-BY-3.0 — https://creativecommons.org/licenses/by/3.0/
+
+brown-bear (big-predators-v1)
+Creator: YleArkisto
+Source: https://freesound.org/people/YleArkisto/sounds/249441/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
+jaguar (big-predators-v1)
+Creator: About Zoos; excerpt prepared by AntumDeluge
+Source: https://opengameart.org/content/jaguar-saw
+License: CC-BY-3.0 — https://creativecommons.org/licenses/by/3.0/
+Upstream: https://www.youtube.com/watch?v=VJ0RCZXu0v4
+
+dog (familiar-v1)
+Creator: krissyeliot
+Source: https://freesound.org/people/krissyeliot/sounds/125523/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+cat (familiar-v1)
+Creator: Sadiquecat
+Source: https://freesound.org/people/Sadiquecat/sounds/689324/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+cow (familiar-v1)
+Creator: JarredGibb
+Source: https://freesound.org/people/JarredGibb/sounds/233145/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+sheep (familiar-v1)
+Creator: Gitanki
+Source: https://freesound.org/people/Gitanki/sounds/172712/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+chicken (familiar-v1)
+Creator: Breviceps
+Source: https://freesound.org/people/Breviceps/sounds/456803/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+horse (familiar-v1)
+Creator: 3bagbrew
+Source: https://freesound.org/people/3bagbrew/sounds/59569/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+goat (farm-v1)
+Creator: aisselles
+Source: https://freesound.org/people/aisselles/sounds/722658/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+donkey (farm-v1)
+Creator: felix.blume
+Source: https://freesound.org/people/felix.blume/sounds/152907/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+piglet (farm-v1)
+Creator: wwstudioswastaken
+Source: https://freesound.org/people/wwstudioswastaken/sounds/618483/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+crow (garden-birds-v1)
+Creator: nigelcoop
+Source: https://freesound.org/people/nigelcoop/sounds/75162/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+raven (garden-birds-v1)
+Creator: KiddoFish86
+Source: https://freesound.org/people/KiddoFish86/sounds/274439/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+pigeon (garden-birds-v1)
+Creator: 5ro4
+Source: https://freesound.org/people/5ro4/sounds/701282/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+dove (garden-v1)
+Creator: nathankwright
+Source: https://freesound.org/people/nathankwright/sounds/456930/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+bee (garden-v1)
+Creator: Department64
+Source: https://freesound.org/people/Department64/sounds/103047/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+cricket (garden-v1)
+Creator: ClaudeDebussy
+Source: https://freesound.org/people/ClaudeDebussy/sounds/428679/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
