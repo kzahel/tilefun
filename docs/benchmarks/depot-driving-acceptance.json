@@ -1,0 +1,4897 @@
+{
+  "schema": "tilefun-depot-driving-acceptance/v1",
+  "date": "2026-10-22",
+  "source": "7833a8062e366a79f429c3cb8deac3663ae403e7",
+  "device": "Pixel 7a, native Chrome, API 37; 411x789 CSS, DPR 2.625",
+  "saveDiscovery": {
+    "liveSite": {
+      "registeredWorlds": 1,
+      "saveFormat": 3,
+      "generatorVersion": "regional-v4",
+      "currentGeneratorVersion": "regional-v13",
+      "savedVehicleEntities": 0,
+      "eligibleForCurrentExactDepotAcceptance": false
+    },
+    "previousLoopbackSite": {
+      "registeredWorlds": 0
+    },
+    "recordsReadOnly": true,
+    "rawRecordsRetainedPrivately": true
+  },
+  "limits": [
+    "Fresh generated seed-2026 city, not the owner saved depot. One native horizontal-route car is replaced one-for-one by compact-1; later movement uses ordinary native touch input.",
+    "The out-and-back fixture reverses held direction at about 20 sample seconds. It traverses fresh then revisited terrain and retains a different traffic workload from an uninterrupted straight route.",
+    "Callback intervals and inclusive CPU elapsed timers are not displayed-frame, hardware GPU, battery-power or long-term thermal capacity measurements. Device background activity is not globally controlled.",
+    "CPU sampling, render census and tracing are separate attribution lanes; do not compare their timing to clean controls as before/after gains.",
+    "No production renderer, simulation, ordering, shader or art changes in this slice.",
+    "GPU-process trace aggregates include other hidden browser targets. Main-thread trace events belong to the owned page. GPU/raster overlap is correlation; source-specific tags are still needed."
+  ],
+  "straightCharacterization": [
+    {
+      "label": "driving-acceptance-1",
+      "source": "7833a8062e366a79f429c3cb8deac3663ae403e7",
+      "parameters": {
+        "arrivalKind": "core",
+        "overviewZoom": 0.1,
+        "driveModel": "compact-1",
+        "meshImageCache": true,
+        "batchTextures": 8,
+        "deferCachedImages": true,
+        "meshTargetReuse": false,
+        "parkedFleet": false
+      },
+      "physical": true,
+      "renderer": "gpu",
+      "meshes": true,
+      "touch": true,
+      "browser": "155.0.8059.79",
+      "seconds": 60,
+      "warmSeconds": 12,
+      "driveReverseAt": 0,
+      "cpu": false,
+      "renderProfile": false,
+      "trace": false,
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "e66330da29935cedb6686ddf41a59b8a6030176aee24d84589a793c6a234952f",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "9a1ac88c7e8e8a53517d0dec814b39f64fa364cded90268dd17b92e22d54550f",
+        "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "d808c29fc23859111983a2e3488a4804a8557f0b8e3002c8138eaf789586113f",
+        "city-audit-profile.mjs": "f6eeebec41218f937e8127c314440e327590559585d39d3b80b7c80df2cad106",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "cases": [
+        {
+          "stage": "overview-drive",
+          "elapsedMs": 60000.7,
+          "frames": {
+            "count": 3536,
+            "mean": 16.9653,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 33.3,
+            "max": 66.8
+          },
+          "framesOver25": 49,
+          "render": {
+            "count": 3537,
+            "mean": 5.492593,
+            "p50": 5.2,
+            "p95": 7.9,
+            "p99": 10.6,
+            "max": 46.6
+          },
+          "update": {
+            "count": 3600,
+            "mean": 2.374694,
+            "p50": 2.3,
+            "p95": 3.4,
+            "p99": 6.2,
+            "max": 28.8
+          },
+          "ack": {
+            "count": 3044,
+            "mean": 41.788502,
+            "p50": 35.9,
+            "p95": 53.4,
+            "p99": 85.4,
+            "max": 223.9
+          },
+          "maxReplay": 17,
+          "maxResim": 0.000829,
+          "maxTravel": 4145.285346,
+          "viewport": {
+            "width": 411,
+            "height": 789,
+            "dpr": 2.625
+          },
+          "canvas": {
+            "width": 411,
+            "height": 789
+          },
+          "zoom": 0.1,
+          "thermalStart": {
+            "batteryC": 24.5,
+            "thermalStatus": 0
+          },
+          "thermalEnd": {
+            "batteryC": 24.5,
+            "thermalStatus": 0
+          },
+          "errors": [],
+          "fps": 58.943845,
+          "driver": {
+            "model": "vehicle-v1:compact-1",
+            "originalModel": "vehicle-v1:offroad-jeep",
+            "replacement": true,
+            "key": "ArrowRight"
+          },
+          "inputChanges": [],
+          "begin": {
+            "resident": 150,
+            "props": 293,
+            "active": 36,
+            "residentPeople": 12,
+            "activePeople": 6,
+            "cars": 30,
+            "activeCars": 25,
+            "carsWithNonzeroVelocity": 11,
+            "movingPeople": 6,
+            "trafficWaiting": {
+              "": 10,
+              "starting": 20
+            },
+            "inputQueue": 0
+          },
+          "end": {
+            "resident": 335,
+            "props": 810,
+            "active": 101,
+            "residentPeople": 30,
+            "activePeople": 12,
+            "cars": 8,
+            "activeCars": 5,
+            "carsWithNonzeroVelocity": 2,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "starting": 2,
+              "traffic": 5,
+              "": 1
+            },
+            "inputQueue": 0
+          },
+          "authorityHz": 60.000563,
+          "authorityTiming": {
+            "streaming": {
+              "count": 7252,
+              "mean": 0.542126,
+              "p50": 0.5,
+              "p95": 0.9,
+              "p99": 1.7,
+              "max": 8.4
+            },
+            "driving": {
+              "count": 3627,
+              "mean": 0.251558,
+              "p50": 0.2,
+              "p95": 0.5,
+              "p99": 0.6,
+              "max": 6.7
+            },
+            "selection": {
+              "count": 3626,
+              "mean": 0.471594,
+              "p50": 0.5,
+              "p95": 0.8,
+              "p99": 1,
+              "max": 6.3
+            },
+            "decision-selection": {
+              "count": 3626,
+              "mean": 0.119305,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "max": 6.1
+            },
+            "prop-selection": {
+              "count": 3626,
+              "mean": 0.123883,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.4,
+              "max": 2.4
+            },
+            "ai": {
+              "count": 3626,
+              "mean": 0.413045,
+              "p50": 0.3,
+              "p95": 0.9,
+              "p99": 1.4,
+              "max": 6.6
+            },
+            "npc-physics": {
+              "count": 3626,
+              "mean": 1.600717,
+              "p50": 1.5,
+              "p95": 3.1,
+              "p99": 3.7,
+              "max": 8.8
+            },
+            "traffic": {
+              "count": 3626,
+              "mean": 1.023359,
+              "p50": 0.7,
+              "p95": 2.4,
+              "p99": 3.6,
+              "max": 7.6
+            },
+            "railway": {
+              "count": 3626,
+              "mean": 0.044815,
+              "p50": 0,
+              "p95": 0.2,
+              "p99": 1,
+              "max": 2.8
+            },
+            "tags": {
+              "count": 3626,
+              "mean": 0.001131,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "max": 0.1
+            },
+            "overlap": {
+              "count": 3626,
+              "mean": 0.020381,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "max": 1.6
+            },
+            "replication": {
+              "count": 3626,
+              "mean": 1.265279,
+              "p50": 1.2,
+              "p95": 2.1,
+              "p99": 3.9,
+              "max": 7.8
+            },
+            "tick": {
+              "count": 3626,
+              "mean": 7.732901,
+              "p50": 7.7,
+              "p95": 11.9,
+              "p99": 15.4,
+              "max": 29.4
+            }
+          },
+          "gpuPerFrame": {
+            "drawCalls": 20.025431,
+            "frames": 1.0,
+            "uploadedBytes": 23177.347273,
+            "vertexUploadedBytes": 84536.341339,
+            "meshDrawCalls": 28.042102,
+            "meshDraws": 7.821418,
+            "meshImageHits": 4.63549,
+            "meshImageMisses": 3.185928
+          },
+          "gpuResidency": {
+            "meshImageCount": 7,
+            "meshImageBytes": 679936,
+            "targetBytes": 987136,
+            "textureBytes": 30032448
+          },
+          "tenSecondFrameWindows": [
+            {
+              "startSecond": 0,
+              "count": 587,
+              "mean": 17.036627,
+              "p95": 16.8,
+              "over25": 11
+            },
+            {
+              "startSecond": 10,
+              "count": 580,
+              "mean": 17.244828,
+              "p95": 16.8,
+              "over25": 17
+            },
+            {
+              "startSecond": 20,
+              "count": 583,
+              "mean": 17.153173,
+              "p95": 16.8,
+              "over25": 15
+            },
+            {
+              "startSecond": 30,
+              "count": 587,
+              "mean": 17.036627,
+              "p95": 16.8,
+              "over25": 6
+            },
+            {
+              "startSecond": 40,
+              "count": 600,
+              "mean": 16.669,
+              "p95": 16.8,
+              "over25": 0
+            },
+            {
+              "startSecond": 50,
+              "count": 599,
+              "mean": 16.668781,
+              "p95": 16.8,
+              "over25": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "driving-acceptance-2-retry",
+      "source": "7833a8062e366a79f429c3cb8deac3663ae403e7",
+      "parameters": {
+        "arrivalKind": "core",
+        "overviewZoom": 0.1,
+        "driveModel": "compact-1",
+        "meshImageCache": true,
+        "batchTextures": 8,
+        "deferCachedImages": true,
+        "meshTargetReuse": false,
+        "parkedFleet": false
+      },
+      "physical": true,
+      "renderer": "gpu",
+      "meshes": true,
+      "touch": true,
+      "browser": "155.0.8059.79",
+      "seconds": 60,
+      "warmSeconds": 12,
+      "driveReverseAt": 0,
+      "cpu": false,
+      "renderProfile": false,
+      "trace": false,
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "e66330da29935cedb6686ddf41a59b8a6030176aee24d84589a793c6a234952f",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "9a1ac88c7e8e8a53517d0dec814b39f64fa364cded90268dd17b92e22d54550f",
+        "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "d808c29fc23859111983a2e3488a4804a8557f0b8e3002c8138eaf789586113f",
+        "city-audit-profile.mjs": "2a7362b49526f58cb381ba6b6c38f6467ed17f273162d0dd2146cfa0e010276b",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "cases": [
+        {
+          "stage": "drive",
+          "elapsedMs": 60012.1,
+          "frames": {
+            "count": 3598,
+            "mean": 16.676042,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 16.8,
+            "max": 33.4
+          },
+          "framesOver25": 2,
+          "render": {
+            "count": 3599,
+            "mean": 2.567741,
+            "p50": 2.5,
+            "p95": 3.8,
+            "p99": 5.2,
+            "max": 12.4
+          },
+          "update": {
+            "count": 3601,
+            "mean": 2.143516,
+            "p50": 2.1,
+            "p95": 3.4,
+            "p99": 4,
+            "max": 10.9
+          },
+          "ack": {
+            "count": 3376,
+            "mean": 35.542921,
+            "p50": 34.8,
+            "p95": 38.3,
+            "p99": 54.5,
+            "max": 167.4
+          },
+          "maxReplay": 9,
+          "maxResim": 0.000829,
+          "maxTravel": 4145.285346,
+          "viewport": {
+            "width": 411,
+            "height": 789,
+            "dpr": 2.625
+          },
+          "canvas": {
+            "width": 411,
+            "height": 789
+          },
+          "zoom": 1,
+          "thermalStart": {
+            "batteryC": 26.2,
+            "thermalStatus": 0
+          },
+          "thermalEnd": {
+            "batteryC": 26.2,
+            "thermalStatus": 0
+          },
+          "errors": [],
+          "fps": 59.966267,
+          "driver": {
+            "model": "vehicle-v1:compact-1",
+            "originalModel": "vehicle-v1:offroad-jeep",
+            "replacement": true,
+            "key": "ArrowRight"
+          },
+          "inputChanges": [],
+          "begin": {
+            "resident": 78,
+            "props": 158,
+            "active": 20,
+            "residentPeople": 12,
+            "activePeople": 6,
+            "cars": 13,
+            "activeCars": 9,
+            "carsWithNonzeroVelocity": 10,
+            "movingPeople": 6,
+            "trafficWaiting": {
+              "": 10,
+              "junction": 1,
+              "starting": 2
+            },
+            "inputQueue": 0
+          },
+          "end": {
+            "resident": 258,
+            "props": 625,
+            "active": 77,
+            "residentPeople": 22,
+            "activePeople": 12,
+            "cars": 1,
+            "activeCars": 1,
+            "carsWithNonzeroVelocity": 0,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "starting": 1
+            },
+            "inputQueue": 0
+          },
+          "authorityHz": 60.000397,
+          "authorityTiming": {
+            "streaming": {
+              "count": 7262,
+              "mean": 0.587758,
+              "p50": 0.6,
+              "p95": 0.9,
+              "p99": 1.4,
+              "max": 6.6
+            },
+            "driving": {
+              "count": 3631,
+              "mean": 0.312145,
+              "p50": 0.3,
+              "p95": 0.5,
+              "p99": 0.7,
+              "max": 1.5
+            },
+            "selection": {
+              "count": 3631,
+              "mean": 0.617764,
+              "p50": 0.6,
+              "p95": 1.1,
+              "p99": 1.3,
+              "max": 6.1
+            },
+            "decision-selection": {
+              "count": 3631,
+              "mean": 0.161195,
+              "p50": 0.2,
+              "p95": 0.3,
+              "p99": 0.4,
+              "max": 2.8
+            },
+            "prop-selection": {
+              "count": 3631,
+              "mean": 0.100991,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "max": 1
+            },
+            "ai": {
+              "count": 3631,
+              "mean": 0.391297,
+              "p50": 0.4,
+              "p95": 0.8,
+              "p99": 1.3,
+              "max": 6.7
+            },
+            "npc-physics": {
+              "count": 3631,
+              "mean": 1.845139,
+              "p50": 1.8,
+              "p95": 3.4,
+              "p99": 3.9,
+              "max": 9.8
+            },
+            "traffic": {
+              "count": 3631,
+              "mean": 0.458386,
+              "p50": 0.1,
+              "p95": 1.7,
+              "p99": 2.2,
+              "max": 6.3
+            },
+            "railway": {
+              "count": 3631,
+              "mean": 0.035059,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.8,
+              "max": 2.4
+            },
+            "tags": {
+              "count": 3631,
+              "mean": 0.002313,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "max": 0.1
+            },
+            "overlap": {
+              "count": 3631,
+              "mean": 0.030543,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "max": 2.2
+            },
+            "replication": {
+              "count": 3631,
+              "mean": 0.486092,
+              "p50": 0.5,
+              "p95": 0.8,
+              "p99": 1.4,
+              "max": 6.5
+            },
+            "tick": {
+              "count": 3631,
+              "mean": 6.991573,
+              "p50": 7,
+              "p95": 10.7,
+              "p99": 12.2,
+              "max": 20.3
+            }
+          },
+          "gpuPerFrame": {
+            "drawCalls": 4.22827,
+            "frames": 1.0,
+            "uploadedBytes": 3905.768398,
+            "vertexUploadedBytes": 12692.114413,
+            "meshDrawCalls": 6.21494,
+            "meshDraws": 1.0,
+            "meshImageHits": 0.378506,
+            "meshImageMisses": 0.621494
+          },
+          "gpuResidency": {
+            "meshImageCount": 1,
+            "meshImageBytes": 65536,
+            "targetBytes": 262144,
+            "textureBytes": 541696
+          },
+          "tenSecondFrameWindows": [
+            {
+              "startSecond": 0,
+              "count": 599,
+              "mean": 16.694825,
+              "p95": 16.8,
+              "over25": 1
+            },
+            {
+              "startSecond": 10,
+              "count": 601,
+              "mean": 16.666057,
+              "p95": 16.8,
+              "over25": 0
+            },
+            {
+              "startSecond": 20,
+              "count": 599,
+              "mean": 16.694324,
+              "p95": 16.8,
+              "over25": 1
+            },
+            {
+              "startSecond": 30,
+              "count": 600,
+              "mean": 16.667,
+              "p95": 16.8,
+              "over25": 0
+            },
+            {
+              "startSecond": 40,
+              "count": 599,
+              "mean": 16.66778,
+              "p95": 16.8,
+              "over25": 0
+            },
+            {
+              "startSecond": 50,
+              "count": 600,
+              "mean": 16.666333,
+              "p95": 16.7,
+              "over25": 0
+            }
+          ],
+          "motion": {
+            "sampleCount": 61,
+            "intervals": [
+              {
+                "elapsedMs": 1000.1,
+                "durationMs": 1000.1,
+                "distance": 91.396857
+              },
+              {
+                "elapsedMs": 2000.1,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 3000.1,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 4000.2,
+                "durationMs": 1000.1,
+                "distance": 112.022507
+              },
+              {
+                "elapsedMs": 5000.4,
+                "durationMs": 1000.2,
+                "distance": 112.022415
+              },
+              {
+                "elapsedMs": 6017,
+                "durationMs": 1016.6,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 7033.6,
+                "durationMs": 1016.6,
+                "distance": 113.889796
+              },
+              {
+                "elapsedMs": 8033.6,
+                "durationMs": 1000.0,
+                "distance": 112.022313
+              },
+              {
+                "elapsedMs": 9050.2,
+                "durationMs": 1016.6,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 10050.2,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 11050.2,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 12050.3,
+                "durationMs": 1000.1,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 13050.4,
+                "durationMs": 1000.1,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 14066.9,
+                "durationMs": 1016.5,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 15083.5,
+                "durationMs": 1016.6,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 16100.1,
+                "durationMs": 1016.6,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 17116.7,
+                "durationMs": 1016.6,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 18133.2,
+                "durationMs": 1016.5,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 19133.2,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 20133.2,
+                "durationMs": 1000.0,
+                "distance": 112.021973
+              },
+              {
+                "elapsedMs": 21133.3,
+                "durationMs": 1000.1,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 22133.3,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 23133.3,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 24133.3,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 25150,
+                "durationMs": 1016.7,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 26150,
+                "durationMs": 1000,
+                "distance": 112.021973
+              },
+              {
+                "elapsedMs": 27166.6,
+                "durationMs": 1016.6,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 28183.1,
+                "durationMs": 1016.5,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 29199.7,
+                "durationMs": 1016.6,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 30199.7,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 31216.3,
+                "durationMs": 1016.6,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 32216.3,
+                "durationMs": 1000.0,
+                "distance": 112.021973
+              },
+              {
+                "elapsedMs": 33232.8,
+                "durationMs": 1016.5,
+                "distance": 113.889501
+              },
+              {
+                "elapsedMs": 34232.8,
+                "durationMs": 1000.0,
+                "distance": 112.02212
+              },
+              {
+                "elapsedMs": 35233,
+                "durationMs": 1000.2,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 36233,
+                "durationMs": 1000,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 37233.2,
+                "durationMs": 1000.2,
+                "distance": 106.452317
+              },
+              {
+                "elapsedMs": 38249.9,
+                "durationMs": 1016.7,
+                "distance": 0.000126
+              },
+              {
+                "elapsedMs": 39249.9,
+                "durationMs": 1000.0,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 40266.5,
+                "durationMs": 1016.6,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 41266.7,
+                "durationMs": 1000.2,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 42266.9,
+                "durationMs": 1000.2,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 43267,
+                "durationMs": 1000.1,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 44267.1,
+                "durationMs": 1000.1,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 45267.1,
+                "durationMs": 1000.0,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 46283.6,
+                "durationMs": 1016.5,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 47283.8,
+                "durationMs": 1000.2,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 48300.4,
+                "durationMs": 1016.6,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 49300.5,
+                "durationMs": 1000.1,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 50300.6,
+                "durationMs": 1000.1,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 51300.8,
+                "durationMs": 1000.2,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 52300.8,
+                "durationMs": 1000.0,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 53300.8,
+                "durationMs": 1000.0,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 54317.4,
+                "durationMs": 1016.6,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 55334,
+                "durationMs": 1016.6,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 56350.5,
+                "durationMs": 1016.5,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 57350.5,
+                "durationMs": 1000.0,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 58367.1,
+                "durationMs": 1016.6,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 59383.7,
+                "durationMs": 1016.6,
+                "distance": 0.0
+              },
+              {
+                "elapsedMs": 60012.1,
+                "durationMs": 628.4,
+                "distance": 0.0
+              }
+            ],
+            "sampledPathDistance": 4144.771663,
+            "observedMovingMs": 37233.2,
+            "method": "Net position change in approximately one-second intervals; >1px counts a moving interval. Subsecond stops and curved path length are unresolved."
+          }
+        }
+      ]
+    }
+  ],
+  "movingAcceptance": {
+    "label": "driving-acceptance-outback",
+    "source": "7833a8062e366a79f429c3cb8deac3663ae403e7",
+    "parameters": {
+      "arrivalKind": "core",
+      "overviewZoom": 0.1,
+      "driveModel": "compact-1",
+      "meshImageCache": true,
+      "batchTextures": 8,
+      "deferCachedImages": true,
+      "meshTargetReuse": false,
+      "parkedFleet": false
+    },
+    "physical": true,
+    "renderer": "gpu",
+    "meshes": true,
+    "touch": true,
+    "browser": "155.0.8059.79",
+    "seconds": 60,
+    "warmSeconds": 12,
+    "driveReverseAt": 20,
+    "cpu": false,
+    "renderProfile": false,
+    "trace": false,
+    "sourcesSHA256": {
+      "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+      "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+      "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+      "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+      "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+      "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+      "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+      "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+      "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+      "src/rendering/GpuMeshBodies.ts": "e66330da29935cedb6686ddf41a59b8a6030176aee24d84589a793c6a234952f",
+      "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+      "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+      "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+      "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+      "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+      "src/rendering/GpuRasterSurface.ts": "9a1ac88c7e8e8a53517d0dec814b39f64fa364cded90268dd17b92e22d54550f",
+      "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+      "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+      "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+      "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+      "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+    },
+    "probesSHA256": {
+      "city-audit.mjs": "32db504566455c33b7dffb96ea459ef06857a9f8aac18e461023967510f76956",
+      "city-audit-profile.mjs": "2a7362b49526f58cb381ba6b6c38f6467ed17f273162d0dd2146cfa0e010276b",
+      "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+    },
+    "cases": [
+      {
+        "stage": "drive",
+        "elapsedMs": 60013.1,
+        "frames": {
+          "count": 3584,
+          "mean": 16.742355,
+          "p50": 16.7,
+          "p95": 16.8,
+          "p99": 16.8,
+          "max": 50
+        },
+        "framesOver25": 16,
+        "render": {
+          "count": 3585,
+          "mean": 2.398215,
+          "p50": 2.2,
+          "p95": 3.8,
+          "p99": 5.2,
+          "max": 15.5
+        },
+        "update": {
+          "count": 3602,
+          "mean": 1.454164,
+          "p50": 1.4,
+          "p95": 2.2,
+          "p99": 2.7,
+          "max": 4.7
+        },
+        "ack": {
+          "count": 3298,
+          "mean": 35.836416,
+          "p50": 34.4,
+          "p95": 51.1,
+          "p99": 53.8,
+          "max": 199.2
+        },
+        "maxReplay": 11,
+        "maxResim": 0.000444,
+        "maxTravel": 2246.001993,
+        "viewport": {
+          "width": 411,
+          "height": 789,
+          "dpr": 2.625
+        },
+        "canvas": {
+          "width": 411,
+          "height": 789
+        },
+        "zoom": 1,
+        "thermalStart": {
+          "batteryC": 27.4,
+          "thermalStatus": 0
+        },
+        "thermalEnd": {
+          "batteryC": 28,
+          "thermalStatus": 0
+        },
+        "errors": [],
+        "fps": 59.728754,
+        "driver": {
+          "model": "vehicle-v1:compact-1",
+          "originalModel": "vehicle-v1:offroad-jeep",
+          "replacement": true,
+          "key": "ArrowRight"
+        },
+        "inputChanges": [
+          {
+            "afterSeconds": 20,
+            "key": "ArrowLeft"
+          }
+        ],
+        "begin": {
+          "resident": 78,
+          "props": 158,
+          "active": 20,
+          "residentPeople": 12,
+          "activePeople": 6,
+          "cars": 13,
+          "activeCars": 9,
+          "carsWithNonzeroVelocity": 10,
+          "movingPeople": 6,
+          "trafficWaiting": {
+            "": 10,
+            "junction": 1,
+            "starting": 2
+          },
+          "inputQueue": 0
+        },
+        "end": {
+          "resident": 88,
+          "props": 158,
+          "active": 30,
+          "residentPeople": 10,
+          "activePeople": 6,
+          "cars": 25,
+          "activeCars": 19,
+          "carsWithNonzeroVelocity": 16,
+          "movingPeople": 4,
+          "trafficWaiting": {
+            "starting": 6,
+            "junction": 6,
+            "": 10,
+            "traffic": 3
+          },
+          "inputQueue": 1
+        },
+        "authorityHz": 59.999901,
+        "authorityTiming": {
+          "streaming": {
+            "count": 7250,
+            "mean": 0.516193,
+            "p50": 0.5,
+            "p95": 0.8,
+            "p99": 1.1,
+            "max": 7.3
+          },
+          "driving": {
+            "count": 3626,
+            "mean": 0.344319,
+            "p50": 0.3,
+            "p95": 0.6,
+            "p99": 0.9,
+            "max": 1.8
+          },
+          "selection": {
+            "count": 3625,
+            "mean": 0.373986,
+            "p50": 0.4,
+            "p95": 0.6,
+            "p99": 0.8,
+            "max": 7.6
+          },
+          "decision-selection": {
+            "count": 3625,
+            "mean": 0.100138,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3,
+            "max": 5
+          },
+          "prop-selection": {
+            "count": 3625,
+            "mean": 0.084772,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3,
+            "max": 2.5
+          },
+          "ai": {
+            "count": 3625,
+            "mean": 0.222759,
+            "p50": 0.2,
+            "p95": 0.4,
+            "p99": 0.5,
+            "max": 6.2
+          },
+          "npc-physics": {
+            "count": 3625,
+            "mean": 0.851917,
+            "p50": 0.8,
+            "p95": 1.5,
+            "p99": 1.9,
+            "max": 8
+          },
+          "traffic": {
+            "count": 3625,
+            "mean": 1.6328,
+            "p50": 1.6,
+            "p95": 2.9,
+            "p99": 3.9,
+            "max": 9.5
+          },
+          "railway": {
+            "count": 3625,
+            "mean": 0.024083,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.4,
+            "max": 1.3
+          },
+          "tags": {
+            "count": 3625,
+            "mean": 0.001959,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1,
+            "max": 0.1
+          },
+          "overlap": {
+            "count": 3625,
+            "mean": 0.023669,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1,
+            "max": 0.2
+          },
+          "replication": {
+            "count": 3625,
+            "mean": 0.276552,
+            "p50": 0.3,
+            "p95": 0.4,
+            "p99": 0.7,
+            "max": 4.8
+          },
+          "tick": {
+            "count": 3625,
+            "mean": 5.883283,
+            "p50": 5.7,
+            "p95": 8.9,
+            "p99": 10.8,
+            "max": 15.6
+          }
+        },
+        "gpuPerFrame": {
+          "drawCalls": 5.302481,
+          "frames": 1.0,
+          "uploadedBytes": 3102.902704,
+          "vertexUploadedBytes": 10055.02983,
+          "meshDrawCalls": 12.407862,
+          "meshDraws": 1.458322,
+          "meshImageHits": 0.16058,
+          "meshImageMisses": 1.297742
+        },
+        "gpuResidency": {
+          "meshImageCount": 0,
+          "meshImageBytes": 0,
+          "targetBytes": 196608,
+          "textureBytes": 1049600
+        },
+        "tenSecondFrameWindows": [
+          {
+            "startSecond": 0,
+            "count": 601,
+            "mean": 16.662562,
+            "p95": 16.7,
+            "over25": 0
+          },
+          {
+            "startSecond": 10,
+            "count": 598,
+            "mean": 16.718395,
+            "p95": 16.7,
+            "over25": 2
+          },
+          {
+            "startSecond": 20,
+            "count": 599,
+            "mean": 16.691486,
+            "p95": 16.8,
+            "over25": 1
+          },
+          {
+            "startSecond": 30,
+            "count": 598,
+            "mean": 16.719732,
+            "p95": 16.7,
+            "over25": 2
+          },
+          {
+            "startSecond": 40,
+            "count": 596,
+            "mean": 16.776007,
+            "p95": 16.8,
+            "over25": 4
+          },
+          {
+            "startSecond": 50,
+            "count": 592,
+            "mean": 16.888007,
+            "p95": 16.8,
+            "over25": 7
+          }
+        ],
+        "motion": {
+          "sampleCount": 61,
+          "intervals": [
+            {
+              "elapsedMs": 1016.5,
+              "durationMs": 1016.5,
+              "distance": 93.263998
+            },
+            {
+              "elapsedMs": 2032.8,
+              "durationMs": 1016.3,
+              "distance": 113.889501
+            },
+            {
+              "elapsedMs": 3049.3,
+              "durationMs": 1016.5,
+              "distance": 113.889796
+            },
+            {
+              "elapsedMs": 4065.6,
+              "durationMs": 1016.3,
+              "distance": 113.889252
+            },
+            {
+              "elapsedMs": 5082.1,
+              "durationMs": 1016.5,
+              "distance": 113.889557
+            },
+            {
+              "elapsedMs": 6098.6,
+              "durationMs": 1016.5,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 7115.1,
+              "durationMs": 1016.5,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 8131.5,
+              "durationMs": 1016.4,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 9147.9,
+              "durationMs": 1016.4,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 10164.3,
+              "durationMs": 1016.4,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 11180.7,
+              "durationMs": 1016.4,
+              "distance": 113.889013
+            },
+            {
+              "elapsedMs": 12197.3,
+              "durationMs": 1016.6,
+              "distance": 113.889796
+            },
+            {
+              "elapsedMs": 13213.7,
+              "durationMs": 1016.4,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 14230,
+              "durationMs": 1016.3,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 15246.2,
+              "durationMs": 1016.2,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 16262.6,
+              "durationMs": 1016.4,
+              "distance": 113.889501
+            },
+            {
+              "elapsedMs": 17279.1,
+              "durationMs": 1016.5,
+              "distance": 113.889796
+            },
+            {
+              "elapsedMs": 18295.5,
+              "durationMs": 1016.4,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 19311.9,
+              "durationMs": 1016.4,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 20328.4,
+              "durationMs": 1016.5,
+              "distance": 99.836902
+            },
+            {
+              "elapsedMs": 21344.9,
+              "durationMs": 1016.5,
+              "distance": 39.403842
+            },
+            {
+              "elapsedMs": 22361.4,
+              "durationMs": 1016.5,
+              "distance": 56.94475
+            },
+            {
+              "elapsedMs": 23377.8,
+              "durationMs": 1016.4,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 24394.3,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 25410.9,
+              "durationMs": 1016.6,
+              "distance": 56.944898
+            },
+            {
+              "elapsedMs": 26427.4,
+              "durationMs": 1016.5,
+              "distance": 56.94475
+            },
+            {
+              "elapsedMs": 27443.9,
+              "durationMs": 1016.5,
+              "distance": 56.94441
+            },
+            {
+              "elapsedMs": 28460.3,
+              "durationMs": 1016.4,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 29476.8,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 30493.3,
+              "durationMs": 1016.5,
+              "distance": 56.944677
+            },
+            {
+              "elapsedMs": 31509.8,
+              "durationMs": 1016.5,
+              "distance": 56.94441
+            },
+            {
+              "elapsedMs": 32509.9,
+              "durationMs": 1000.1,
+              "distance": 56.011304
+            },
+            {
+              "elapsedMs": 33526.5,
+              "durationMs": 1016.6,
+              "distance": 56.94475
+            },
+            {
+              "elapsedMs": 34542.9,
+              "durationMs": 1016.4,
+              "distance": 56.944898
+            },
+            {
+              "elapsedMs": 35559.2,
+              "durationMs": 1016.3,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 36575.8,
+              "durationMs": 1016.6,
+              "distance": 56.944336
+            },
+            {
+              "elapsedMs": 37592.1,
+              "durationMs": 1016.3,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 38608.5,
+              "durationMs": 1016.4,
+              "distance": 56.944898
+            },
+            {
+              "elapsedMs": 39625,
+              "durationMs": 1016.5,
+              "distance": 56.944603
+            },
+            {
+              "elapsedMs": 40625,
+              "durationMs": 1000,
+              "distance": 56.011378
+            },
+            {
+              "elapsedMs": 41641.5,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 42658,
+              "durationMs": 1016.5,
+              "distance": 56.944336
+            },
+            {
+              "elapsedMs": 43674.4,
+              "durationMs": 1016.4,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 44690.9,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 45690.9,
+              "durationMs": 1000.0,
+              "distance": 56.01123
+            },
+            {
+              "elapsedMs": 46707.4,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 47723.9,
+              "durationMs": 1016.5,
+              "distance": 56.944336
+            },
+            {
+              "elapsedMs": 48740.5,
+              "durationMs": 1016.6,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 49756.9,
+              "durationMs": 1016.4,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 50773.4,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 51789.8,
+              "durationMs": 1016.4,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 52806.4,
+              "durationMs": 1016.6,
+              "distance": 56.944336
+            },
+            {
+              "elapsedMs": 53822.9,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 54839.3,
+              "durationMs": 1016.4,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 55855.8,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 56872.1,
+              "durationMs": 1016.3,
+              "distance": 56.944336
+            },
+            {
+              "elapsedMs": 57888.5,
+              "durationMs": 1016.4,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 58904.8,
+              "durationMs": 1016.3,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 59921.3,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 60013.1,
+              "durationMs": 91.8,
+              "distance": 4.66748
+            }
+          ],
+          "sampledPathDistance": 4448.281598,
+          "observedMovingMs": 60013.1,
+          "method": "Net position change in approximately one-second intervals; >1px counts a moving interval. Subsecond stops and curved path length are unresolved."
+        }
+      },
+      {
+        "stage": "overview-drive",
+        "elapsedMs": 60001.1,
+        "frames": {
+          "count": 3405,
+          "mean": 17.618502,
+          "p50": 16.7,
+          "p95": 33.2,
+          "p99": 33.4,
+          "max": 66.6
+        },
+        "framesOver25": 176,
+        "render": {
+          "count": 3406,
+          "mean": 5.326395,
+          "p50": 5.1,
+          "p95": 7.8,
+          "p99": 9.5,
+          "max": 23
+        },
+        "update": {
+          "count": 3601,
+          "mean": 1.910914,
+          "p50": 1.9,
+          "p95": 2.7,
+          "p99": 4.1,
+          "max": 7.4
+        },
+        "ack": {
+          "count": 2948,
+          "mean": 46.40848,
+          "p50": 50.3,
+          "p95": 65.8,
+          "p99": 83.8,
+          "max": 223.4
+        },
+        "maxReplay": 12,
+        "maxResim": 0.000443,
+        "maxTravel": 2246.002516,
+        "viewport": {
+          "width": 411,
+          "height": 789,
+          "dpr": 2.625
+        },
+        "canvas": {
+          "width": 411,
+          "height": 789
+        },
+        "zoom": 0.1,
+        "thermalStart": {
+          "batteryC": 28.5,
+          "thermalStatus": 0
+        },
+        "thermalEnd": {
+          "batteryC": 28.5,
+          "thermalStatus": 0
+        },
+        "errors": [],
+        "fps": 56.758514,
+        "driver": {
+          "model": "vehicle-v1:compact-1",
+          "originalModel": "vehicle-v1:offroad-jeep",
+          "replacement": true,
+          "key": "ArrowRight"
+        },
+        "inputChanges": [
+          {
+            "afterSeconds": 20,
+            "key": "ArrowLeft"
+          }
+        ],
+        "begin": {
+          "resident": 150,
+          "props": 293,
+          "active": 36,
+          "residentPeople": 12,
+          "activePeople": 6,
+          "cars": 30,
+          "activeCars": 25,
+          "carsWithNonzeroVelocity": 11,
+          "movingPeople": 6,
+          "trafficWaiting": {
+            "": 10,
+            "starting": 20
+          },
+          "inputQueue": 1
+        },
+        "end": {
+          "resident": 160,
+          "props": 293,
+          "active": 45,
+          "residentPeople": 10,
+          "activePeople": 6,
+          "cars": 42,
+          "activeCars": 34,
+          "carsWithNonzeroVelocity": 19,
+          "movingPeople": 5,
+          "trafficWaiting": {
+            "starting": 24,
+            "": 13,
+            "junction": 3,
+            "traffic": 2
+          },
+          "inputQueue": 0
+        },
+        "authorityHz": 60,
+        "authorityTiming": {
+          "streaming": {
+            "count": 7250,
+            "mean": 0.478414,
+            "p50": 0.5,
+            "p95": 0.7,
+            "p99": 1,
+            "max": 7.7
+          },
+          "driving": {
+            "count": 3626,
+            "mean": 0.276475,
+            "p50": 0.3,
+            "p95": 0.5,
+            "p99": 0.6,
+            "max": 1.6
+          },
+          "selection": {
+            "count": 3625,
+            "mean": 0.29851,
+            "p50": 0.3,
+            "p95": 0.5,
+            "p99": 0.6,
+            "max": 2.8
+          },
+          "decision-selection": {
+            "count": 3625,
+            "mean": 0.074041,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2,
+            "max": 0.6
+          },
+          "prop-selection": {
+            "count": 3625,
+            "mean": 0.097793,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3,
+            "max": 2.4
+          },
+          "ai": {
+            "count": 3625,
+            "mean": 0.162234,
+            "p50": 0.2,
+            "p95": 0.3,
+            "p99": 0.4,
+            "max": 1
+          },
+          "npc-physics": {
+            "count": 3625,
+            "mean": 0.672138,
+            "p50": 0.6,
+            "p95": 1.1,
+            "p99": 1.3,
+            "max": 6.5
+          },
+          "traffic": {
+            "count": 3625,
+            "mean": 1.225572,
+            "p50": 1.2,
+            "p95": 2.3,
+            "p99": 2.9,
+            "max": 15.7
+          },
+          "railway": {
+            "count": 3625,
+            "mean": 0.020938,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.4,
+            "max": 2.6
+          },
+          "tags": {
+            "count": 3625,
+            "mean": 0.002014,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1,
+            "max": 0.1
+          },
+          "overlap": {
+            "count": 3625,
+            "mean": 0.016441,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1,
+            "max": 0.4
+          },
+          "replication": {
+            "count": 3625,
+            "mean": 0.897821,
+            "p50": 0.8,
+            "p95": 1.3,
+            "p99": 2.3,
+            "max": 8.4
+          },
+          "tick": {
+            "count": 3625,
+            "mean": 5.522703,
+            "p50": 5.4,
+            "p95": 7.9,
+            "p99": 9.9,
+            "max": 20.4
+          }
+        },
+        "gpuPerFrame": {
+          "drawCalls": 22.527876,
+          "frames": 1.0,
+          "uploadedBytes": 27116.065728,
+          "vertexUploadedBytes": 52524.338028,
+          "meshDrawCalls": 56.570716,
+          "meshDraws": 11.740023,
+          "meshImageHits": 5.943075,
+          "meshImageMisses": 5.796948
+        },
+        "gpuResidency": {
+          "meshImageCount": 17,
+          "meshImageBytes": 2064384,
+          "targetBytes": 2371584,
+          "textureBytes": 43860128
+        },
+        "tenSecondFrameWindows": [
+          {
+            "startSecond": 0,
+            "count": 588,
+            "mean": 17.030102,
+            "p95": 16.8,
+            "over25": 10
+          },
+          {
+            "startSecond": 10,
+            "count": 580,
+            "mean": 17.24,
+            "p95": 16.8,
+            "over25": 17
+          },
+          {
+            "startSecond": 20,
+            "count": 583,
+            "mean": 17.151286,
+            "p95": 16.8,
+            "over25": 17
+          },
+          {
+            "startSecond": 30,
+            "count": 566,
+            "mean": 17.666608,
+            "p95": 33.3,
+            "over25": 33
+          },
+          {
+            "startSecond": 40,
+            "count": 552,
+            "mean": 18.112681,
+            "p95": 33.3,
+            "over25": 42
+          },
+          {
+            "startSecond": 50,
+            "count": 536,
+            "mean": 18.622015,
+            "p95": 33.4,
+            "over25": 57
+          }
+        ],
+        "motion": {
+          "sampleCount": 61,
+          "intervals": [
+            {
+              "elapsedMs": 1016.5,
+              "durationMs": 1016.5,
+              "distance": 93.263998
+            },
+            {
+              "elapsedMs": 2032.8,
+              "durationMs": 1016.3,
+              "distance": 113.889501
+            },
+            {
+              "elapsedMs": 3049.2,
+              "durationMs": 1016.4,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 4065.4,
+              "durationMs": 1016.2,
+              "distance": 113.889308
+            },
+            {
+              "elapsedMs": 5098.5,
+              "durationMs": 1033.1,
+              "distance": 115.756541
+            },
+            {
+              "elapsedMs": 6115,
+              "durationMs": 1016.5,
+              "distance": 113.889308
+            },
+            {
+              "elapsedMs": 7131.4,
+              "durationMs": 1016.4,
+              "distance": 113.889308
+            },
+            {
+              "elapsedMs": 8147.6,
+              "durationMs": 1016.2,
+              "distance": 113.889501
+            },
+            {
+              "elapsedMs": 9163.9,
+              "durationMs": 1016.3,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 10180.3,
+              "durationMs": 1016.4,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 11180.3,
+              "durationMs": 1000.0,
+              "distance": 112.022461
+            },
+            {
+              "elapsedMs": 12196.9,
+              "durationMs": 1016.6,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 13196.9,
+              "durationMs": 1000.0,
+              "distance": 112.022461
+            },
+            {
+              "elapsedMs": 14213.4,
+              "durationMs": 1016.5,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 15213.4,
+              "durationMs": 1000.0,
+              "distance": 112.022461
+            },
+            {
+              "elapsedMs": 16230,
+              "durationMs": 1016.6,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 17246.6,
+              "durationMs": 1016.6,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 18263.1,
+              "durationMs": 1016.5,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 19279.7,
+              "durationMs": 1016.6,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 20296.2,
+              "durationMs": 1016.5,
+              "distance": 102.358499
+            },
+            {
+              "elapsedMs": 21312.8,
+              "durationMs": 1016.6,
+              "distance": 36.324218
+            },
+            {
+              "elapsedMs": 22329.4,
+              "durationMs": 1016.6,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 23346,
+              "durationMs": 1016.6,
+              "distance": 56.944677
+            },
+            {
+              "elapsedMs": 24362.6,
+              "durationMs": 1016.6,
+              "distance": 56.944898
+            },
+            {
+              "elapsedMs": 25379.1,
+              "durationMs": 1016.5,
+              "distance": 56.944336
+            },
+            {
+              "elapsedMs": 26395.7,
+              "durationMs": 1016.6,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 27412.2,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 28412.2,
+              "durationMs": 1000.0,
+              "distance": 56.01123
+            },
+            {
+              "elapsedMs": 29428.8,
+              "durationMs": 1016.6,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 30445.5,
+              "durationMs": 1016.7,
+              "distance": 56.944336
+            },
+            {
+              "elapsedMs": 31462.0,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 32462.2,
+              "durationMs": 1000.2,
+              "distance": 56.01123
+            },
+            {
+              "elapsedMs": 33462.2,
+              "durationMs": 1000.0,
+              "distance": 56.01123
+            },
+            {
+              "elapsedMs": 34478.7,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 35495.2,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 36495.2,
+              "durationMs": 1000.0,
+              "distance": 56.01123
+            },
+            {
+              "elapsedMs": 37528.4,
+              "durationMs": 1033.2,
+              "distance": 57.87827
+            },
+            {
+              "elapsedMs": 38528.4,
+              "durationMs": 1000.0,
+              "distance": 56.01089
+            },
+            {
+              "elapsedMs": 39544.8,
+              "durationMs": 1016.4,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 40561.2,
+              "durationMs": 1016.4,
+              "distance": 56.944898
+            },
+            {
+              "elapsedMs": 41594.4,
+              "durationMs": 1033.2,
+              "distance": 57.87827
+            },
+            {
+              "elapsedMs": 42611.0,
+              "durationMs": 1016.6,
+              "distance": 56.94441
+            },
+            {
+              "elapsedMs": 43627.5,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 44644.0,
+              "durationMs": 1016.5,
+              "distance": 56.944677
+            },
+            {
+              "elapsedMs": 45660.6,
+              "durationMs": 1016.6,
+              "distance": 56.944557
+            },
+            {
+              "elapsedMs": 46677.1,
+              "durationMs": 1016.5,
+              "distance": 56.945165
+            },
+            {
+              "elapsedMs": 47693.5,
+              "durationMs": 1016.4,
+              "distance": 56.94441
+            },
+            {
+              "elapsedMs": 48709.9,
+              "durationMs": 1016.4,
+              "distance": 56.944898
+            },
+            {
+              "elapsedMs": 49726.3,
+              "durationMs": 1016.4,
+              "distance": 56.94475
+            },
+            {
+              "elapsedMs": 50759.4,
+              "durationMs": 1033.1,
+              "distance": 57.878344
+            },
+            {
+              "elapsedMs": 51775.9,
+              "durationMs": 1016.5,
+              "distance": 56.94441
+            },
+            {
+              "elapsedMs": 52792.4,
+              "durationMs": 1016.5,
+              "distance": 56.944898
+            },
+            {
+              "elapsedMs": 53808.9,
+              "durationMs": 1016.5,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 54825.3,
+              "durationMs": 1016.4,
+              "distance": 56.94475
+            },
+            {
+              "elapsedMs": 55841.7,
+              "durationMs": 1016.4,
+              "distance": 56.944262
+            },
+            {
+              "elapsedMs": 56858.1,
+              "durationMs": 1016.4,
+              "distance": 56.944972
+            },
+            {
+              "elapsedMs": 57874.7,
+              "durationMs": 1016.6,
+              "distance": 56.944824
+            },
+            {
+              "elapsedMs": 58891.2,
+              "durationMs": 1016.5,
+              "distance": 56.94475
+            },
+            {
+              "elapsedMs": 59924.4,
+              "durationMs": 1033.2,
+              "distance": 57.87827
+            },
+            {
+              "elapsedMs": 60001.1,
+              "durationMs": 76.7,
+              "distance": 3.73396
+            }
+          ],
+          "sampledPathDistance": 4444.922494,
+          "observedMovingMs": 60001.1,
+          "method": "Net position change in approximately one-second intervals; >1px counts a moving interval. Subsecond stops and curved path length are unresolved."
+        }
+      }
+    ]
+  },
+  "attribution": [
+    {
+      "label": "driving-cpu-cooled",
+      "source": "7833a8062e366a79f429c3cb8deac3663ae403e7",
+      "parameters": {
+        "arrivalKind": "core",
+        "overviewZoom": 0.1,
+        "driveModel": "compact-1",
+        "meshImageCache": true,
+        "batchTextures": 8,
+        "deferCachedImages": true,
+        "meshTargetReuse": false,
+        "parkedFleet": false
+      },
+      "physical": true,
+      "renderer": "gpu",
+      "meshes": true,
+      "touch": true,
+      "browser": "155.0.8059.79",
+      "seconds": 20,
+      "warmSeconds": 12,
+      "driveReverseAt": 0,
+      "cpu": true,
+      "renderProfile": false,
+      "trace": false,
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "e66330da29935cedb6686ddf41a59b8a6030176aee24d84589a793c6a234952f",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "9a1ac88c7e8e8a53517d0dec814b39f64fa364cded90268dd17b92e22d54550f",
+        "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "32db504566455c33b7dffb96ea459ef06857a9f8aac18e461023967510f76956",
+        "city-audit-profile.mjs": "2a7362b49526f58cb381ba6b6c38f6467ed17f273162d0dd2146cfa0e010276b",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "cases": [
+        {
+          "stage": "overview-drive",
+          "elapsedMs": 20006.1,
+          "frames": {
+            "count": 1161,
+            "mean": 17.224031,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 33.4,
+            "max": 50
+          },
+          "framesOver25": 36,
+          "render": {
+            "count": 1162,
+            "mean": 5.046386,
+            "p50": 4.9,
+            "p95": 7.7,
+            "p99": 9.9,
+            "max": 20.2
+          },
+          "update": {
+            "count": 1201,
+            "mean": 1.799667,
+            "p50": 1.7,
+            "p95": 2.7,
+            "p99": 4.4,
+            "max": 7.2
+          },
+          "ack": {
+            "count": 1013,
+            "mean": 37.591214,
+            "p50": 34.6,
+            "p95": 52.3,
+            "p99": 83.6,
+            "max": 185.8
+          },
+          "maxReplay": 10,
+          "maxResim": 0.000387,
+          "maxTravel": 2247.916304,
+          "viewport": {
+            "width": 411,
+            "height": 789,
+            "dpr": 2.625
+          },
+          "canvas": {
+            "width": 411,
+            "height": 789
+          },
+          "zoom": 0.1,
+          "thermalStart": {
+            "batteryC": 28.3,
+            "thermalStatus": 0
+          },
+          "thermalEnd": {
+            "batteryC": 28.3,
+            "thermalStatus": 0
+          },
+          "errors": [],
+          "fps": 58.058418,
+          "driver": {
+            "model": "vehicle-v1:compact-1",
+            "originalModel": "vehicle-v1:offroad-jeep",
+            "replacement": true,
+            "key": "ArrowRight"
+          },
+          "inputChanges": [],
+          "begin": {
+            "resident": 150,
+            "props": 293,
+            "active": 36,
+            "residentPeople": 12,
+            "activePeople": 6,
+            "cars": 30,
+            "activeCars": 25,
+            "carsWithNonzeroVelocity": 11,
+            "movingPeople": 6,
+            "trafficWaiting": {
+              "": 10,
+              "starting": 20
+            },
+            "inputQueue": 0
+          },
+          "end": {
+            "resident": 214,
+            "props": 473,
+            "active": 44,
+            "residentPeople": 45,
+            "activePeople": 20,
+            "cars": 7,
+            "activeCars": 6,
+            "carsWithNonzeroVelocity": 6,
+            "movingPeople": 2,
+            "trafficWaiting": {
+              "": 5,
+              "starting": 2
+            },
+            "inputQueue": 0
+          },
+          "authorityHz": 59.998857,
+          "authorityTiming": {
+            "streaming": {
+              "count": 2522,
+              "mean": 0.485408,
+              "p50": 0.4,
+              "p95": 0.8,
+              "p99": 1.4,
+              "max": 5.9
+            },
+            "driving": {
+              "count": 1251,
+              "mean": 0.278177,
+              "p50": 0.3,
+              "p95": 0.4,
+              "p99": 0.8,
+              "max": 1.8
+            },
+            "selection": {
+              "count": 1261,
+              "mean": 0.270817,
+              "p50": 0.3,
+              "p95": 0.5,
+              "p99": 0.6,
+              "max": 2.5
+            },
+            "decision-selection": {
+              "count": 1261,
+              "mean": 0.062569,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.2,
+              "max": 0.4
+            },
+            "prop-selection": {
+              "count": 1261,
+              "mean": 0.103093,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.4,
+              "max": 1.2
+            },
+            "ai": {
+              "count": 1261,
+              "mean": 0.174544,
+              "p50": 0.2,
+              "p95": 0.3,
+              "p99": 0.4,
+              "max": 1.6
+            },
+            "npc-physics": {
+              "count": 1261,
+              "mean": 0.666693,
+              "p50": 0.6,
+              "p95": 1.2,
+              "p99": 1.7,
+              "max": 3.7
+            },
+            "traffic": {
+              "count": 1261,
+              "mean": 0.684377,
+              "p50": 0.5,
+              "p95": 1.6,
+              "p99": 2.5,
+              "max": 5.4
+            },
+            "railway": {
+              "count": 1261,
+              "mean": 0.02609,
+              "p50": 0,
+              "p95": 0.2,
+              "p99": 0.5,
+              "max": 1.8
+            },
+            "tags": {
+              "count": 1261,
+              "mean": 0.001269,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "max": 0.1
+            },
+            "overlap": {
+              "count": 1261,
+              "mean": 0.017288,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "max": 0.2
+            },
+            "replication": {
+              "count": 1261,
+              "mean": 0.905789,
+              "p50": 0.8,
+              "p95": 1.8,
+              "p99": 3.3,
+              "max": 6.8
+            },
+            "tick": {
+              "count": 1261,
+              "mean": 5.213878,
+              "p50": 4.6,
+              "p95": 8.3,
+              "p99": 10.7,
+              "max": 227.2
+            }
+          },
+          "gpuPerFrame": {
+            "drawCalls": 20.135622,
+            "frames": 1.0,
+            "uploadedBytes": 36330.959657,
+            "vertexUploadedBytes": 52163.474678,
+            "meshDrawCalls": 41.230901,
+            "meshDraws": 8.549356,
+            "meshImageHits": 4.474678,
+            "meshImageMisses": 4.074678
+          },
+          "gpuResidency": {
+            "meshImageCount": 1,
+            "meshImageBytes": 102400,
+            "targetBytes": 409600,
+            "textureBytes": 40310496
+          },
+          "tenSecondFrameWindows": [
+            {
+              "startSecond": 0,
+              "count": 581,
+              "mean": 17.239415,
+              "p95": 16.8,
+              "over25": 18
+            },
+            {
+              "startSecond": 10,
+              "count": 580,
+              "mean": 17.208621,
+              "p95": 16.8,
+              "over25": 18
+            }
+          ],
+          "motion": {
+            "sampleCount": 21,
+            "intervals": [
+              {
+                "elapsedMs": 1016.3,
+                "durationMs": 1016.3,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 2016.3,
+                "durationMs": 1000.0,
+                "distance": 112.022166
+              },
+              {
+                "elapsedMs": 3016.3,
+                "durationMs": 1000.0,
+                "distance": 112.022608
+              },
+              {
+                "elapsedMs": 4016.3,
+                "durationMs": 1000.0,
+                "distance": 112.022608
+              },
+              {
+                "elapsedMs": 5016.3,
+                "durationMs": 1000.0,
+                "distance": 112.021973
+              },
+              {
+                "elapsedMs": 6016.3,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 7032.7,
+                "durationMs": 1016.4,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 8032.8,
+                "durationMs": 1000.1,
+                "distance": 112.022359
+              },
+              {
+                "elapsedMs": 9032.9,
+                "durationMs": 1000.1,
+                "distance": 112.022268
+              },
+              {
+                "elapsedMs": 10049.5,
+                "durationMs": 1016.6,
+                "distance": 113.889455
+              },
+              {
+                "elapsedMs": 11049.5,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 12049.5,
+                "durationMs": 1000.0,
+                "distance": 112.022461
+              },
+              {
+                "elapsedMs": 13066,
+                "durationMs": 1016.5,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 14082.3,
+                "durationMs": 1016.3,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 15098.5,
+                "durationMs": 1016.2,
+                "distance": 113.889353
+              },
+              {
+                "elapsedMs": 16114.7,
+                "durationMs": 1016.2,
+                "distance": 113.889455
+              },
+              {
+                "elapsedMs": 17131,
+                "durationMs": 1016.3,
+                "distance": 113.889353
+              },
+              {
+                "elapsedMs": 18164.2,
+                "durationMs": 1033.2,
+                "distance": 115.756495
+              },
+              {
+                "elapsedMs": 19180.5,
+                "durationMs": 1016.3,
+                "distance": 113.889796
+              },
+              {
+                "elapsedMs": 20006.1,
+                "durationMs": 825.6,
+                "distance": 91.484863
+              }
+            ],
+            "sampledPathDistance": 2240.448242,
+            "observedMovingMs": 20006.1,
+            "method": "Net position change in approximately one-second intervals; >1px counts a moving interval. Subsecond stops and curved path length are unresolved."
+          },
+          "cpu": {
+            "intervalUs": 1000,
+            "samples": 17595,
+            "sampledMs": 20494.474,
+            "idleMs": 12278.673,
+            "activeMs": 8215.801,
+            "topSelf": [
+              {
+                "name": "demand",
+                "source": "src/server/InterestManager.ts",
+                "line": 34,
+                "sampledMs": 748.352
+              },
+              {
+                "name": "build",
+                "source": "src/server/RealmReplicator.ts",
+                "line": 37,
+                "sampledMs": 456.967
+              },
+              {
+                "name": "(garbage collector)",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 339.99
+              },
+              {
+                "name": "entitySnapshotMatches",
+                "source": "src/shared/serialization.ts",
+                "line": 72,
+                "sampledMs": 320.869
+              },
+              {
+                "name": "get",
+                "source": "src/persistence/ActorRecords.ts",
+                "line": 126,
+                "sampledMs": 258.249
+              },
+              {
+                "name": "start",
+                "source": "src/diagnostics/PerformanceMetrics.ts",
+                "line": 6,
+                "sampledMs": 229.657
+              },
+              {
+                "name": "queryRange",
+                "source": "src/entities/SpatialHash.ts",
+                "line": 103,
+                "sampledMs": 203.073
+              },
+              {
+                "name": "fbm",
+                "source": "src/generation/noise.ts",
+                "line": 32,
+                "sampledMs": 194.912
+              },
+              {
+                "name": "update",
+                "source": "src/entities/EntityManager.ts",
+                "line": 85,
+                "sampledMs": 158.55
+              },
+              {
+                "name": "tick",
+                "source": "src/server/Realm.ts",
+                "line": 485,
+                "sampledMs": 155.453
+              },
+              {
+                "name": "owner.<computed>",
+                "source": "runtime",
+                "line": 20,
+                "sampledMs": 153.484
+              },
+              {
+                "name": "get",
+                "source": "src/persistence/ActorRecords.ts",
+                "line": 154,
+                "sampledMs": 140.678
+              },
+              {
+                "name": "settlementForOwner",
+                "source": "src/generation/regional/RegionalPlanner.ts",
+                "line": 57,
+                "sampledMs": 130.262
+              },
+              {
+                "name": "update",
+                "source": "src/server/RealmStreaming.ts",
+                "line": 124,
+                "sampledMs": 127.367
+              },
+              {
+                "name": "recordBytes",
+                "source": "src/persistence/RecordStore.ts",
+                "line": 11,
+                "sampledMs": 124.942
+              },
+              {
+                "name": "select",
+                "source": "src/server/RealmPropActivity.ts",
+                "line": 20,
+                "sampledMs": 124.734
+              },
+              {
+                "name": "blocked",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 312,
+                "sampledMs": 124.056
+              },
+              {
+                "name": "tick",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 444,
+                "sampledMs": 111.749
+              },
+              {
+                "name": "tick",
+                "source": "src/server/GameServer.ts",
+                "line": 472,
+                "sampledMs": 111.3
+              },
+              {
+                "name": "encodeActor",
+                "source": "src/persistence/ActorRecords.ts",
+                "line": 48,
+                "sampledMs": 104.148
+              },
+              {
+                "name": "roadClear",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 227,
+                "sampledMs": 102.215
+              },
+              {
+                "name": "getEntityAABB",
+                "source": "src/entities/collision.ts",
+                "line": 7,
+                "sampledMs": 90.906
+              },
+              {
+                "name": "checkedCarPose",
+                "source": "src/traffic/Driving.ts",
+                "line": 178,
+                "sampledMs": 90.248
+              },
+              {
+                "name": "select",
+                "source": "src/server/RealmActivity.ts",
+                "line": 20,
+                "sampledMs": 89.136
+              },
+              {
+                "name": "port.onmessage",
+                "source": "src/server/local-server.worker.ts",
+                "line": 12,
+                "sampledMs": 87.861
+              },
+              {
+                "name": "computeGroundZ",
+                "source": "src/entities/EntityManager.ts",
+                "line": 281,
+                "sampledMs": 78.208
+              },
+              {
+                "name": "supported",
+                "source": "src/server/RealmStreaming.ts",
+                "line": 202,
+                "sampledMs": 74.108
+              },
+              {
+                "name": "serializeEntity",
+                "source": "src/shared/serialization.ts",
+                "line": 8,
+                "sampledMs": 68.8
+              },
+              {
+                "name": "updateRouteAI",
+                "source": "src/entities/routeAI.ts",
+                "line": 3,
+                "sampledMs": 68.498
+              },
+              {
+                "name": "(program)",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 66.711
+              },
+              {
+                "name": "setTimeout",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 63.767
+              },
+              {
+                "name": "getPropsInChunkRange",
+                "source": "src/entities/PropManager.ts",
+                "line": 159,
+                "sampledMs": 59.953
+              },
+              {
+                "name": "postMessage",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 57.512
+              },
+              {
+                "name": "markRecordDirty",
+                "source": "src/persistence/SaveManager.ts",
+                "line": 66,
+                "sampledMs": 57.246
+              },
+              {
+                "name": "copyDemand",
+                "source": "src/server/InterestManager.ts",
+                "line": 77,
+                "sampledMs": 54.767
+              },
+              {
+                "name": "tickFoodSources",
+                "source": "src/wildlife/FoodGrowth.ts",
+                "line": 5,
+                "sampledMs": 52.03
+              },
+              {
+                "name": "replicate",
+                "source": "src/server/Realm.ts",
+                "line": 873,
+                "sampledMs": 51.646
+              },
+              {
+                "name": "computeEntityTickDtsMulti",
+                "source": "src/server/Realm.ts",
+                "line": 1715,
+                "sampledMs": 50.028
+              },
+              {
+                "name": "planMovingPassengers",
+                "source": "src/traffic/MovingSupport.ts",
+                "line": 56,
+                "sampledMs": 46.217
+              },
+              {
+                "name": "reconcile",
+                "source": "src/server/ChunkResidency.ts",
+                "line": 55,
+                "sampledMs": 44.441
+              }
+            ],
+            "topInclusive": [
+              {
+                "name": "(anonymous)",
+                "source": "src/server/ServerLoop.ts",
+                "line": 34,
+                "sampledMs": 6316.691
+              },
+              {
+                "name": "pump",
+                "source": "src/server/ServerLoop.ts",
+                "line": 36,
+                "sampledMs": 6303.188
+              },
+              {
+                "name": "server.tick",
+                "source": "runtime",
+                "line": 130,
+                "sampledMs": 6227.208
+              },
+              {
+                "name": "tick",
+                "source": "src/server/GameServer.ts",
+                "line": 472,
+                "sampledMs": 6215.619
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/server/GameServer.ts",
+                "line": 421,
+                "sampledMs": 6003.322
+              },
+              {
+                "name": "tick",
+                "source": "src/server/Realm.ts",
+                "line": 485,
+                "sampledMs": 5773.291
+              },
+              {
+                "name": "owner.<computed>",
+                "source": "runtime",
+                "line": 20,
+                "sampledMs": 4782.47
+              },
+              {
+                "name": "update",
+                "source": "src/server/RealmStreaming.ts",
+                "line": 124,
+                "sampledMs": 1219.302
+              },
+              {
+                "name": "replicate",
+                "source": "src/server/Realm.ts",
+                "line": 873,
+                "sampledMs": 1061.206
+              },
+              {
+                "name": "build",
+                "source": "src/server/RealmReplicator.ts",
+                "line": 37,
+                "sampledMs": 1008.432
+              },
+              {
+                "name": "demand",
+                "source": "src/server/InterestManager.ts",
+                "line": 34,
+                "sampledMs": 860.25
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/server/ChunkResidency.ts",
+                "line": 91,
+                "sampledMs": 859.368
+              },
+              {
+                "name": "publish",
+                "source": "src/server/RealmStreaming.ts",
+                "line": 72,
+                "sampledMs": 794.124
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/server/RealmStreaming.ts",
+                "line": 77,
+                "sampledMs": 780.038
+              },
+              {
+                "name": "publishing",
+                "source": "src/persistence/SaveManager.ts",
+                "line": 54,
+                "sampledMs": 780.038
+              },
+              {
+                "name": "update",
+                "source": "src/entities/EntityManager.ts",
+                "line": 85,
+                "sampledMs": 762.513
+              },
+              {
+                "name": "tick",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 444,
+                "sampledMs": 754.714
+              },
+              {
+                "name": "updateVisibleChunks",
+                "source": "src/server/Realm.ts",
+                "line": 890,
+                "sampledMs": 687.31
+              },
+              {
+                "name": "blocked",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 312,
+                "sampledMs": 502.996
+              },
+              {
+                "name": "admit",
+                "source": "src/world/ChunkManager.ts",
+                "line": 82,
+                "sampledMs": 469.651
+              },
+              {
+                "name": "generate",
+                "source": "src/world/ChunkManager.ts",
+                "line": 155,
+                "sampledMs": 460.933
+              },
+              {
+                "name": "generate",
+                "source": "src/generation/regional/NaturalStrategy.ts",
+                "line": 19,
+                "sampledMs": 459.823
+              },
+              {
+                "name": "entitySnapshotMatches",
+                "source": "src/shared/serialization.ts",
+                "line": 72,
+                "sampledMs": 409.353
+              },
+              {
+                "name": "generate",
+                "source": "src/railway/RailwayStrategy.ts",
+                "line": 52,
+                "sampledMs": 370.375
+              },
+              {
+                "name": "generate",
+                "source": "src/generation/regional/DenseDistrictStrategy.ts",
+                "line": 25,
+                "sampledMs": 369.261
+              },
+              {
+                "name": "input",
+                "source": "src/server/VehicleControl.ts",
+                "line": 119,
+                "sampledMs": 350.208
+              },
+              {
+                "name": "(garbage collector)",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 339.99
+              },
+              {
+                "name": "generate",
+                "source": "src/generation/regional/RegionalStrategy.ts",
+                "line": 19,
+                "sampledMs": 337.846
+              },
+              {
+                "name": "drive",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 628,
+                "sampledMs": 332.954
+              },
+              {
+                "name": "recordBytes",
+                "source": "src/persistence/RecordStore.ts",
+                "line": 11,
+                "sampledMs": 313.645
+              },
+              {
+                "name": "realm.computeEntityTickDtsMulti",
+                "source": "runtime",
+                "line": 85,
+                "sampledMs": 303.76
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/server/Realm.ts",
+                "line": 1284,
+                "sampledMs": 300.1
+              },
+              {
+                "name": "computeEntityTickDtsMulti",
+                "source": "src/server/Realm.ts",
+                "line": 1715,
+                "sampledMs": 295.875
+              },
+              {
+                "name": "queryRange",
+                "source": "src/entities/SpatialHash.ts",
+                "line": 103,
+                "sampledMs": 262.823
+              },
+              {
+                "name": "regionalQuerySteps",
+                "source": "src/generation/regional/RegionalPlanner.ts",
+                "line": 241,
+                "sampledMs": 260.75
+              },
+              {
+                "name": "computeGroundZ",
+                "source": "src/entities/EntityManager.ts",
+                "line": 281,
+                "sampledMs": 259.781
+              },
+              {
+                "name": "get",
+                "source": "src/persistence/ActorRecords.ts",
+                "line": 126,
+                "sampledMs": 258.249
+              },
+              {
+                "name": "connectionForOwner",
+                "source": "src/generation/regional/RegionalPlanner.ts",
+                "line": 163,
+                "sampledMs": 250.018
+              },
+              {
+                "name": "drivenCarPose",
+                "source": "src/traffic/Driving.ts",
+                "line": 40,
+                "sampledMs": 248.58
+              },
+              {
+                "name": "corridorIsDry",
+                "source": "src/generation/regional/RegionalPlanner.ts",
+                "line": 141,
+                "sampledMs": 242.867
+              }
+            ]
+          },
+          "mainCpu": {
+            "intervalUs": 1000,
+            "samples": 17962,
+            "sampledMs": 20956.463,
+            "idleMs": 10019.512,
+            "activeMs": 10936.951,
+            "topSelf": [
+              {
+                "name": "(program)",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 2035.678
+              },
+              {
+                "name": "drawImage",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 614.535
+              },
+              {
+                "name": "collectScene",
+                "source": "src/rendering/collectScene.ts",
+                "line": 38,
+                "sampledMs": 420.652
+              },
+              {
+                "name": "drawGemHUD",
+                "source": "src/scenes/PlayScene.ts",
+                "line": 853,
+                "sampledMs": 393.798
+              },
+              {
+                "name": "(garbage collector)",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 355.935
+              },
+              {
+                "name": "checkedCarPose",
+                "source": "src/traffic/Driving.ts",
+                "line": 178,
+                "sampledMs": 148.247
+              },
+              {
+                "name": "drivenCarPose",
+                "source": "src/traffic/Driving.ts",
+                "line": 40,
+                "sampledMs": 129.082
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/traffic/RoofSupport.ts",
+                "line": 18,
+                "sampledMs": 124.973
+              },
+              {
+                "name": "planVehiclePushes",
+                "source": "src/traffic/VehiclePush.ts",
+                "line": 46,
+                "sampledMs": 120.169
+              },
+              {
+                "name": "get",
+                "source": "src/world/ChunkManager.ts",
+                "line": 98,
+                "sampledMs": 115.081
+              },
+              {
+                "name": "sampleMotion",
+                "source": "src/rendering/PresentationTimeline.ts",
+                "line": 18,
+                "sampledMs": 114.25
+              },
+              {
+                "name": "depthAboveProps",
+                "source": "src/rendering/propDepth.ts",
+                "line": 96,
+                "sampledMs": 114.147
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/client/RemotePresentation.ts",
+                "line": 61,
+                "sampledMs": 113.514
+              },
+              {
+                "name": "flush",
+                "source": "src/rendering/GpuRasterSurface.ts",
+                "line": 462,
+                "sampledMs": 111.693
+              },
+              {
+                "name": "update",
+                "source": "src/ui/VehicleControl.ts",
+                "line": 61,
+                "sampledMs": 110.961
+              },
+              {
+                "name": "get presentationPlayer",
+                "source": "src/client/PlayerPredictor.ts",
+                "line": 873,
+                "sampledMs": 106.427
+              },
+              {
+                "name": "size",
+                "source": "src/rendering/GpuRasterSurface.ts",
+                "line": 21,
+                "sampledMs": 105.91
+              },
+              {
+                "name": "bufferSubData",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 105.506
+              },
+              {
+                "name": "postMessage",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 102.807
+              },
+              {
+                "name": "getHeightAt",
+                "source": "src/world/World.ts",
+                "line": 61,
+                "sampledMs": 99.799
+              },
+              {
+                "name": "updateMatrixWorld",
+                "source": "runtime",
+                "line": 10046,
+                "sampledMs": 91.032
+              },
+              {
+                "name": "drawImage",
+                "source": "src/rendering/GpuRasterSurface.ts",
+                "line": 357,
+                "sampledMs": 89.997
+              },
+              {
+                "name": "record",
+                "source": "src/client/RemotePresentation.ts",
+                "line": 26,
+                "sampledMs": 89.472
+              },
+              {
+                "name": "roofSupport",
+                "source": "src/traffic/RoofSupport.ts",
+                "line": 15,
+                "sampledMs": 88.624
+              },
+              {
+                "name": "needsUpdate",
+                "source": "runtime",
+                "line": 42958,
+                "sampledMs": 87.729
+              },
+              {
+                "name": "applyFrame",
+                "source": "src/client/ClientStateView.ts",
+                "line": 237,
+                "sampledMs": 86.558
+              },
+              {
+                "name": "renderEntities",
+                "source": "src/scenes/renderWorld.ts",
+                "line": 29,
+                "sampledMs": 79.912
+              },
+              {
+                "name": "record",
+                "source": "src/client/PredictionCollisionTimeline.ts",
+                "line": 16,
+                "sampledMs": 77.838
+              },
+              {
+                "name": "collect",
+                "source": "src/rendering/propDepth.ts",
+                "line": 34,
+                "sampledMs": 76.552
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/client/PredictionCollisionTimeline.ts",
+                "line": 44,
+                "sampledMs": 73.959
+              },
+              {
+                "name": "bindTexture",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 73.317
+              },
+              {
+                "name": "setup",
+                "source": "runtime",
+                "line": 42887,
+                "sampledMs": 72.073
+              },
+              {
+                "name": "WebGLRenderer.render",
+                "source": "runtime",
+                "line": 51996,
+                "sampledMs": 71.863
+              },
+              {
+                "name": "applyMessage",
+                "source": "src/client/ClientStateView.ts",
+                "line": 205,
+                "sampledMs": 69.995
+              },
+              {
+                "name": "WebGLRenderer.renderBufferDirect",
+                "source": "runtime",
+                "line": 51786,
+                "sampledMs": 68.727
+              },
+              {
+                "name": "update",
+                "source": "src/scenes/PlayScene.ts",
+                "line": 205,
+                "sampledMs": 63.352
+              },
+              {
+                "name": "setProgram",
+                "source": "runtime",
+                "line": 52328,
+                "sampledMs": 58.762
+              },
+              {
+                "name": "bindVertexArray",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 52.546
+              },
+              {
+                "name": "upload",
+                "source": "runtime",
+                "line": 45414,
+                "sampledMs": 50.039
+              },
+              {
+                "name": "projectObject",
+                "source": "runtime",
+                "line": 52080,
+                "sampledMs": 46.424
+              }
+            ],
+            "topInclusive": [
+              {
+                "name": "tick",
+                "source": "src/core/GameLoop.ts",
+                "line": 59,
+                "sampledMs": 8308.86
+              },
+              {
+                "name": "externalTick",
+                "source": "src/core/GameLoop.ts",
+                "line": 42,
+                "sampledMs": 8236.589
+              },
+              {
+                "name": "render",
+                "source": "src/client/GameClient.ts",
+                "line": 504,
+                "sampledMs": 5887.386
+              },
+              {
+                "name": "render",
+                "source": "src/core/SceneManager.ts",
+                "line": 70,
+                "sampledMs": 5865.136
+              },
+              {
+                "name": "callbacks.render",
+                "source": "runtime",
+                "line": 48,
+                "sampledMs": 5864.057
+              },
+              {
+                "name": "render",
+                "source": "src/scenes/PlayScene.ts",
+                "line": 517,
+                "sampledMs": 5862.914
+              },
+              {
+                "name": "renderEntities",
+                "source": "src/scenes/renderWorld.ts",
+                "line": 29,
+                "sampledMs": 3238.377
+              },
+              {
+                "name": "submit",
+                "source": "src/rendering/RasterRenderBackend.ts",
+                "line": 73,
+                "sampledMs": 2484.17
+              },
+              {
+                "name": "update",
+                "source": "src/client/GameClient.ts",
+                "line": 476,
+                "sampledMs": 2170.994
+              },
+              {
+                "name": "submit",
+                "source": "src/rendering/GpuRenderBackend.ts",
+                "line": 51,
+                "sampledMs": 2162.888
+              },
+              {
+                "name": "callbacks.update",
+                "source": "runtime",
+                "line": 27,
+                "sampledMs": 2146.565
+              },
+              {
+                "name": "(program)",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 2035.678
+              },
+              {
+                "name": "presentSurfaceScene",
+                "source": "src/rendering/presentSurfaceScene.ts",
+                "line": 52,
+                "sampledMs": 1953.566
+              },
+              {
+                "name": "drawScenePass2D",
+                "source": "src/rendering/Canvas2DRenderer.ts",
+                "line": 21,
+                "sampledMs": 1879.37
+              },
+              {
+                "name": "drawSceneEntry2D",
+                "source": "src/rendering/Canvas2DRenderer.ts",
+                "line": 38,
+                "sampledMs": 1860.098
+              },
+              {
+                "name": "drawSprite",
+                "source": "src/rendering/Canvas2DRenderer.ts",
+                "line": 98,
+                "sampledMs": 1792.665
+              },
+              {
+                "name": "renderWorld",
+                "source": "src/scenes/renderWorld.ts",
+                "line": 9,
+                "sampledMs": 1645.32
+              },
+              {
+                "name": "GpuRenderBackend.surface.meshBody",
+                "source": "src/rendering/GpuRenderBackend.ts",
+                "line": 39,
+                "sampledMs": 1553.03
+              },
+              {
+                "name": "draw",
+                "source": "src/rendering/GpuMeshBodies.ts",
+                "line": 95,
+                "sampledMs": 1534.842
+              },
+              {
+                "name": "WebGLRenderer.render",
+                "source": "runtime",
+                "line": 51996,
+                "sampledMs": 1515.518
+              },
+              {
+                "name": "presentTerrain",
+                "source": "src/rendering/OutdoorPresentation.ts",
+                "line": 3,
+                "sampledMs": 1395.37
+              },
+              {
+                "name": "update",
+                "source": "src/core/SceneManager.ts",
+                "line": 64,
+                "sampledMs": 1327.8
+              },
+              {
+                "name": "update",
+                "source": "src/scenes/PlayScene.ts",
+                "line": 205,
+                "sampledMs": 1304.824
+              },
+              {
+                "name": "collectScene",
+                "source": "src/rendering/collectScene.ts",
+                "line": 38,
+                "sampledMs": 1186.448
+              },
+              {
+                "name": "renderScene",
+                "source": "runtime",
+                "line": 52125,
+                "sampledMs": 1030.015
+              },
+              {
+                "name": "renderObjects",
+                "source": "runtime",
+                "line": 52200,
+                "sampledMs": 1009.837
+              },
+              {
+                "name": "WebGLRenderer.renderBufferDirect",
+                "source": "runtime",
+                "line": 51786,
+                "sampledMs": 974.188
+              },
+              {
+                "name": "flush",
+                "source": "src/rendering/GpuRasterSurface.ts",
+                "line": 462,
+                "sampledMs": 934.944
+              },
+              {
+                "name": "projectObject",
+                "source": "runtime",
+                "line": 52080,
+                "sampledMs": 915.172
+              },
+              {
+                "name": "drawImage",
+                "source": "src/rendering/GpuRasterSurface.ts",
+                "line": 357,
+                "sampledMs": 753.573
+              },
+              {
+                "name": "applyInput",
+                "source": "src/client/PlayerPredictor.ts",
+                "line": 1152,
+                "sampledMs": 714.87
+              },
+              {
+                "name": "prepareTerrain",
+                "source": "src/rendering/RasterRenderBackend.ts",
+                "line": 57,
+                "sampledMs": 712.387
+              },
+              {
+                "name": "prepareTerrain",
+                "source": "src/rendering/TileRenderer.ts",
+                "line": 72,
+                "sampledMs": 705.705
+              },
+              {
+                "name": "drawImage",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 614.535
+              },
+              {
+                "name": "reconcile",
+                "source": "src/client/PlayerPredictor.ts",
+                "line": 302,
+                "sampledMs": 614.442
+              },
+              {
+                "name": "drivenCarPose",
+                "source": "src/traffic/Driving.ts",
+                "line": 40,
+                "sampledMs": 563.506
+              },
+              {
+                "name": "advanceCacheBuild",
+                "source": "src/rendering/TileRenderer.ts",
+                "line": 287,
+                "sampledMs": 534.708
+              },
+              {
+                "name": "updateMatrixWorld",
+                "source": "runtime",
+                "line": 10046,
+                "sampledMs": 512.937
+              },
+              {
+                "name": "startReplay",
+                "source": "src/client/PlayerPredictor.ts",
+                "line": 454,
+                "sampledMs": 510.18
+              },
+              {
+                "name": "drawCacheRows",
+                "source": "src/rendering/TileRenderer.ts",
+                "line": 355,
+                "sampledMs": 497.207
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "driving-trace-cooled",
+      "source": "7833a8062e366a79f429c3cb8deac3663ae403e7",
+      "parameters": {
+        "arrivalKind": "core",
+        "overviewZoom": 0.1,
+        "driveModel": "compact-1",
+        "meshImageCache": true,
+        "batchTextures": 8,
+        "deferCachedImages": true,
+        "meshTargetReuse": false,
+        "parkedFleet": false
+      },
+      "physical": true,
+      "renderer": "gpu",
+      "meshes": true,
+      "touch": true,
+      "browser": "155.0.8059.79",
+      "seconds": 20,
+      "warmSeconds": 12,
+      "driveReverseAt": 0,
+      "cpu": false,
+      "renderProfile": false,
+      "trace": true,
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "e66330da29935cedb6686ddf41a59b8a6030176aee24d84589a793c6a234952f",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "9a1ac88c7e8e8a53517d0dec814b39f64fa364cded90268dd17b92e22d54550f",
+        "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "32db504566455c33b7dffb96ea459ef06857a9f8aac18e461023967510f76956",
+        "city-audit-profile.mjs": "2a7362b49526f58cb381ba6b6c38f6467ed17f273162d0dd2146cfa0e010276b",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "cases": [
+        {
+          "stage": "overview-drive",
+          "elapsedMs": 20002.4,
+          "frames": {
+            "count": 1171,
+            "mean": 17.073698,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 33.3,
+            "max": 50
+          },
+          "framesOver25": 25,
+          "render": {
+            "count": 1172,
+            "mean": 4.994369,
+            "p50": 4.8,
+            "p95": 7.5,
+            "p99": 9.4,
+            "max": 22
+          },
+          "update": {
+            "count": 1201,
+            "mean": 1.927144,
+            "p50": 1.9,
+            "p95": 2.9,
+            "p99": 4.6,
+            "max": 10
+          },
+          "ack": {
+            "count": 1077,
+            "mean": 43.632683,
+            "p50": 37.1,
+            "p95": 53.8,
+            "p99": 85.9,
+            "max": 221.5
+          },
+          "maxReplay": 12,
+          "maxResim": 0.000443,
+          "maxTravel": 2223.790292,
+          "viewport": {
+            "width": 411,
+            "height": 789,
+            "dpr": 2.625
+          },
+          "canvas": {
+            "width": 411,
+            "height": 789
+          },
+          "zoom": 0.1,
+          "thermalStart": {
+            "batteryC": 28.3,
+            "thermalStatus": 0
+          },
+          "thermalEnd": {
+            "batteryC": 28.3,
+            "thermalStatus": 0
+          },
+          "errors": [],
+          "fps": 58.569621,
+          "driver": {
+            "model": "vehicle-v1:compact-1",
+            "originalModel": "vehicle-v1:offroad-jeep",
+            "replacement": true,
+            "key": "ArrowRight"
+          },
+          "inputChanges": [],
+          "begin": {
+            "resident": 150,
+            "props": 293,
+            "active": 36,
+            "residentPeople": 12,
+            "activePeople": 6,
+            "cars": 30,
+            "activeCars": 25,
+            "carsWithNonzeroVelocity": 11,
+            "movingPeople": 6,
+            "trafficWaiting": {
+              "": 10,
+              "starting": 20
+            },
+            "inputQueue": 1
+          },
+          "end": {
+            "resident": 216,
+            "props": 490,
+            "active": 44,
+            "residentPeople": 45,
+            "activePeople": 20,
+            "cars": 7,
+            "activeCars": 6,
+            "carsWithNonzeroVelocity": 6,
+            "movingPeople": 2,
+            "trafficWaiting": {
+              "": 5,
+              "starting": 2
+            },
+            "inputQueue": 6
+          },
+          "authorityHz": 59.930204,
+          "authorityTiming": {
+            "streaming": {
+              "count": 2444,
+              "mean": 0.48126,
+              "p50": 0.4,
+              "p95": 0.8,
+              "p99": 1.4,
+              "max": 6.3
+            },
+            "driving": {
+              "count": 1217,
+              "mean": 0.2765,
+              "p50": 0.3,
+              "p95": 0.4,
+              "p99": 0.7,
+              "max": 6.1
+            },
+            "selection": {
+              "count": 1222,
+              "mean": 0.238216,
+              "p50": 0.2,
+              "p95": 0.4,
+              "p99": 0.5,
+              "max": 2.8
+            },
+            "decision-selection": {
+              "count": 1222,
+              "mean": 0.062193,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.2,
+              "max": 0.3
+            },
+            "prop-selection": {
+              "count": 1222,
+              "mean": 0.090262,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.4,
+              "max": 1.2
+            },
+            "ai": {
+              "count": 1222,
+              "mean": 0.170049,
+              "p50": 0.2,
+              "p95": 0.3,
+              "p99": 0.5,
+              "max": 4
+            },
+            "npc-physics": {
+              "count": 1222,
+              "mean": 0.619804,
+              "p50": 0.6,
+              "p95": 1,
+              "p99": 1.4,
+              "max": 6.4
+            },
+            "traffic": {
+              "count": 1222,
+              "mean": 0.658511,
+              "p50": 0.6,
+              "p95": 1.2,
+              "p99": 2.8,
+              "max": 6.4
+            },
+            "railway": {
+              "count": 1222,
+              "mean": 0.025859,
+              "p50": 0,
+              "p95": 0.2,
+              "p99": 0.5,
+              "max": 0.8
+            },
+            "tags": {
+              "count": 1222,
+              "mean": 0.001391,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "max": 0.1
+            },
+            "overlap": {
+              "count": 1222,
+              "mean": 0.014239,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "max": 0.2
+            },
+            "replication": {
+              "count": 1222,
+              "mean": 0.770949,
+              "p50": 0.7,
+              "p95": 1.2,
+              "p99": 2.6,
+              "max": 6.5
+            },
+            "tick": {
+              "count": 1222,
+              "mean": 4.72725,
+              "p50": 4.5,
+              "p95": 7.2,
+              "p99": 9.8,
+              "max": 12.4
+            }
+          },
+          "gpuPerFrame": {
+            "drawCalls": 20.108177,
+            "frames": 1.0,
+            "uploadedBytes": 36052.44293,
+            "vertexUploadedBytes": 52268.074957,
+            "meshDrawCalls": 40.584327,
+            "meshDraws": 9.063032,
+            "meshImageHits": 5.030664,
+            "meshImageMisses": 4.032368
+          },
+          "gpuResidency": {
+            "meshImageCount": 1,
+            "meshImageBytes": 102400,
+            "targetBytes": 409600,
+            "textureBytes": 40310496
+          },
+          "tenSecondFrameWindows": [
+            {
+              "startSecond": 0,
+              "count": 590,
+              "mean": 16.972542,
+              "p95": 16.8,
+              "over25": 9
+            },
+            {
+              "startSecond": 10,
+              "count": 581,
+              "mean": 17.17642,
+              "p95": 16.8,
+              "over25": 16
+            }
+          ],
+          "motion": {
+            "sampleCount": 21,
+            "intervals": [
+              {
+                "elapsedMs": 1016.4,
+                "durationMs": 1016.4,
+                "distance": 96.344645
+              },
+              {
+                "elapsedMs": 2032.8,
+                "durationMs": 1016.4,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 3049.4,
+                "durationMs": 1016.6,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 4065.8,
+                "durationMs": 1016.4,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 5082.2,
+                "durationMs": 1016.4,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 6098.5,
+                "durationMs": 1016.3,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 7114.7,
+                "durationMs": 1016.2,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 8131,
+                "durationMs": 1016.3,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 9147.3,
+                "durationMs": 1016.3,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 10163.7,
+                "durationMs": 1016.4,
+                "distance": 113.889501
+              },
+              {
+                "elapsedMs": 11179.9,
+                "durationMs": 1016.2,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 12196.1,
+                "durationMs": 1016.2,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 13212.4,
+                "durationMs": 1016.3,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 14228.8,
+                "durationMs": 1016.4,
+                "distance": 113.889501
+              },
+              {
+                "elapsedMs": 15245,
+                "durationMs": 1016.2,
+                "distance": 113.889603
+              },
+              {
+                "elapsedMs": 16294.7,
+                "durationMs": 1049.7,
+                "distance": 117.623433
+              },
+              {
+                "elapsedMs": 17311,
+                "durationMs": 1016.3,
+                "distance": 113.889455
+              },
+              {
+                "elapsedMs": 18327.3,
+                "durationMs": 1016.3,
+                "distance": 113.88916
+              },
+              {
+                "elapsedMs": 19343.6,
+                "durationMs": 1016.3,
+                "distance": 113.889648
+              },
+              {
+                "elapsedMs": 20002.4,
+                "durationMs": 658.8,
+                "distance": 72.814499
+              }
+            ],
+            "sampledPathDistance": 2222.903137,
+            "observedMovingMs": 20002.4,
+            "method": "Net position change in approximately one-second intervals; >1px counts a moving interval. Subsecond stops and curved path length are unresolved."
+          }
+        }
+      ]
+    }
+  ],
+  "excludedAttempts": [
+    {
+      "kind": "background-browser setup timeout",
+      "sampledCases": 0
+    },
+    {
+      "kind": "overview setup interrupted during connection cleanup",
+      "sampledOverviewCases": 0,
+      "retainedNormalCase": "straightCharacterization[1]"
+    },
+    {
+      "kind": "owned-page/writer collision after interrupted setup; pages closed and fresh isolated origin used",
+      "admittedCases": 0
+    },
+    {
+      "kind": "initial attribution entry gate timeout",
+      "batteryC": 29.4,
+      "thermalStatus": 0,
+      "sampledCases": 0
+    },
+    {
+      "kind": "native render census rejected during setup",
+      "batteryC": 28.8,
+      "thermalStatus": 1,
+      "sampledCases": 0
+    }
+  ],
+  "decision": {
+    "nextExperiment": "Attribute movement-time terrain/source-canvas raster and texture-upload bursts, then compare bounded preparation/upload admission with visible-readiness and travel checks. Preserve complete prior terrain surfaces during replacement.",
+    "secondaryControl": "Bounded scratch render-target size reuse for changing cars. Desktop census: 10.235 size changes per frame at 128/224/288px; those three color/depth/outline target pairs total 1794048 bytes. No established native speedup.",
+    "conditionalLaterWork": [
+      "outline fusion after native changing-body evidence",
+      "scene allocation reuse after allocation attribution",
+      "traffic headroom for racing scenes",
+      "shared depth remains a separate correctness project"
+    ],
+    "productionPolicyChanged": false
+  },
+  "validation": {
+    "typecheck": "pass, all three configurations",
+    "lint": "pass, 121 existing warnings / 42 infos",
+    "unitFullRun": {
+      "passed": 6638,
+      "failed": 2,
+      "total": 6640,
+      "failures": "Unchanged swordfish/orca recipe cases hit their existing 5s limits."
+    },
+    "focusedRetry": {
+      "passed": 2,
+      "skipped": 46,
+      "seconds": 3.53,
+      "sourceAndTimeoutsUnchanged": true
+    },
+    "nodeIntegration": "pass",
+    "nativeProbe": "timed touch reverse and one-second position sampling exercised in both minute-long out-and-back captures",
+    "runtimeQualification": "Production runtime/assets unchanged from 176 qualification (829 browser cases and native/desktop exact pixels); no new renderer test matrix."
+  },
+  "cleanup": {
+    "originalTabsAndUrlsPreserved": true,
+    "remainingOwnedTargets": 0,
+    "originalRoutesPreserved": true,
+    "ownedRoutesRemoved": true,
+    "foregroundRestored": true,
+    "originalRegistryAndWorldRecordsUnchanged": true,
+    "doctorReady": true,
+    "interaction": "unlocked",
+    "thermalEnd": {
+      "batteryC": 30.1,
+      "thermalStatus": 0
+    }
+  },
+  "desktopStructuralCensus": {
+    "label": "tilefun-driving-desktop-census",
+    "source": "7833a8062e366a79f429c3cb8deac3663ae403e7",
+    "parameters": {
+      "arrivalKind": "core",
+      "overviewZoom": 0.1,
+      "driveModel": "compact-1",
+      "meshImageCache": true,
+      "batchTextures": 8,
+      "deferCachedImages": true,
+      "meshTargetReuse": false,
+      "parkedFleet": false
+    },
+    "physical": false,
+    "renderer": "gpu",
+    "meshes": true,
+    "touch": false,
+    "browser": "153.0.8010.12",
+    "seconds": 12,
+    "warmSeconds": 12,
+    "driveReverseAt": 0,
+    "cpu": false,
+    "renderProfile": true,
+    "trace": false,
+    "sourcesSHA256": {
+      "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+      "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+      "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+      "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+      "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+      "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+      "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+      "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+      "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+      "src/rendering/GpuMeshBodies.ts": "e66330da29935cedb6686ddf41a59b8a6030176aee24d84589a793c6a234952f",
+      "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+      "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+      "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+      "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+      "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+      "src/rendering/GpuRasterSurface.ts": "9a1ac88c7e8e8a53517d0dec814b39f64fa364cded90268dd17b92e22d54550f",
+      "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+      "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+      "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+      "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+      "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+    },
+    "probesSHA256": {
+      "city-audit.mjs": "32db504566455c33b7dffb96ea459ef06857a9f8aac18e461023967510f76956",
+      "city-audit-profile.mjs": "2a7362b49526f58cb381ba6b6c38f6467ed17f273162d0dd2146cfa0e010276b",
+      "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+    },
+    "cases": [
+      {
+        "stage": "overview-drive",
+        "elapsedMs": 12002.2,
+        "frames": {
+          "count": 720,
+          "mean": 16.665972,
+          "p50": 16.7,
+          "p95": 16.8,
+          "p99": 16.8,
+          "max": 16.8
+        },
+        "framesOver25": 0,
+        "render": {
+          "count": 721,
+          "mean": 1.180444,
+          "p50": 1.1,
+          "p95": 2.1,
+          "p99": 3.4,
+          "max": 5.1
+        },
+        "update": {
+          "count": 721,
+          "mean": 0.391817,
+          "p50": 0.4,
+          "p95": 0.6,
+          "p99": 0.6,
+          "max": 1
+        },
+        "ack": {
+          "count": 717,
+          "mean": 33.567085,
+          "p50": 33.6,
+          "p95": 33.8,
+          "p99": 34.8,
+          "max": 35.2
+        },
+        "maxReplay": 2,
+        "maxResim": 0.00046,
+        "maxTravel": 1322.336619,
+        "viewport": {
+          "width": 411,
+          "height": 789,
+          "dpr": 1
+        },
+        "canvas": {
+          "width": 411,
+          "height": 789
+        },
+        "zoom": 0.1,
+        "errors": [],
+        "fps": 60.0025,
+        "driver": {
+          "model": "vehicle-v1:compact-1",
+          "originalModel": "vehicle-v1:car-23",
+          "replacement": true,
+          "key": "ArrowRight"
+        },
+        "inputChanges": [],
+        "begin": {
+          "resident": 53,
+          "props": 89,
+          "active": 22,
+          "residentPeople": 17,
+          "activePeople": 10,
+          "cars": 16,
+          "activeCars": 11,
+          "carsWithNonzeroVelocity": 10,
+          "movingPeople": 10,
+          "trafficWaiting": {
+            "": 10,
+            "starting": 5,
+            "junction": 1
+          },
+          "inputQueue": 1
+        },
+        "end": {
+          "resident": 41,
+          "props": 45,
+          "active": 26,
+          "residentPeople": 26,
+          "activePeople": 16,
+          "cars": 10,
+          "activeCars": 9,
+          "carsWithNonzeroVelocity": 10,
+          "movingPeople": 12,
+          "trafficWaiting": {
+            "": 9,
+            "starting": 1
+          },
+          "inputQueue": 1
+        },
+        "authorityHz": 60.010098,
+        "authorityTiming": {
+          "streaming": {
+            "count": 1452,
+            "mean": 0.130716,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3,
+            "max": 0.4
+          },
+          "driving": {
+            "count": 726,
+            "mean": 0.069421,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2,
+            "max": 0.3
+          },
+          "selection": {
+            "count": 726,
+            "mean": 0.050964,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2,
+            "max": 0.2
+          },
+          "decision-selection": {
+            "count": 726,
+            "mean": 0.014463,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1,
+            "max": 0.1
+          },
+          "prop-selection": {
+            "count": 726,
+            "mean": 0.013361,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1,
+            "max": 0.1
+          },
+          "ai": {
+            "count": 726,
+            "mean": 0.056474,
+            "p50": 0.1,
+            "p95": 0.1,
+            "p99": 0.2,
+            "max": 0.3
+          },
+          "npc-physics": {
+            "count": 726,
+            "mean": 0.107713,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2,
+            "max": 0.3
+          },
+          "traffic": {
+            "count": 726,
+            "mean": 0.2,
+            "p50": 0.2,
+            "p95": 0.3,
+            "p99": 0.4,
+            "max": 0.9
+          },
+          "railway": {
+            "count": 726,
+            "mean": 0.001515,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1,
+            "max": 0.2
+          },
+          "tags": {
+            "count": 726,
+            "mean": 0.000689,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0.1
+          },
+          "overlap": {
+            "count": 726,
+            "mean": 0.002479,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1,
+            "max": 0.1
+          },
+          "replication": {
+            "count": 726,
+            "mean": 0.11832,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.4,
+            "max": 0.8
+          },
+          "tick": {
+            "count": 726,
+            "mean": 1.060193,
+            "p50": 1,
+            "p95": 1.5,
+            "p99": 1.7,
+            "max": 2.3
+          }
+        },
+        "gpuPerFrame": {
+          "drawCalls": 23.77455,
+          "frames": 1.0,
+          "uploadedBytes": 31975.192254,
+          "vertexUploadedBytes": 43142.639004,
+          "meshDrawCalls": 62.414938,
+          "meshDraws": 7.351314,
+          "meshImageHits": 0.392808,
+          "meshImageMisses": 6.958506
+        },
+        "gpuResidency": {
+          "meshImageCount": 0,
+          "meshImageBytes": 0,
+          "targetBytes": 602112,
+          "textureBytes": 48316880
+        },
+        "tenSecondFrameWindows": [
+          {
+            "startSecond": 0,
+            "count": 601,
+            "mean": 16.66589,
+            "p95": 16.8,
+            "over25": 0
+          },
+          {
+            "startSecond": 10,
+            "count": 119,
+            "mean": 16.666387,
+            "p95": 16.8,
+            "over25": 0
+          }
+        ],
+        "motion": {
+          "sampleCount": 13,
+          "intervals": [
+            {
+              "elapsedMs": 1016.6,
+              "durationMs": 1016.6,
+              "distance": 91.630238
+            },
+            {
+              "elapsedMs": 2033.2,
+              "durationMs": 1016.6,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 3033.2,
+              "durationMs": 1000.0,
+              "distance": 112.022461
+            },
+            {
+              "elapsedMs": 4049.8,
+              "durationMs": 1016.6,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 5049.8,
+              "durationMs": 1000.0,
+              "distance": 112.022461
+            },
+            {
+              "elapsedMs": 6066.4,
+              "durationMs": 1016.6,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 7083,
+              "durationMs": 1016.6,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 8099.7,
+              "durationMs": 1016.7,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 9116.2,
+              "durationMs": 1016.5,
+              "distance": 113.88916
+            },
+            {
+              "elapsedMs": 10116.2,
+              "durationMs": 1000.0,
+              "distance": 112.022461
+            },
+            {
+              "elapsedMs": 11132.9,
+              "durationMs": 1016.7,
+              "distance": 113.889648
+            },
+            {
+              "elapsedMs": 12002.2,
+              "durationMs": 869.3,
+              "distance": 97.085938
+            }
+          ],
+          "sampledPathDistance": 1322.009632,
+          "observedMovingMs": 12002.2,
+          "method": "Net position change in approximately one-second intervals; >1px counts a moving interval. Subsecond stops and curved path length are unresolved."
+        },
+        "renderProfile": {
+          "totals": {
+            "beginFrame": {
+              "calls": 720,
+              "ms": 17.3
+            },
+            "pass:clear": {
+              "calls": 720,
+              "items": 0
+            },
+            "flush": {
+              "calls": 19051,
+              "ms": 118.699999
+            },
+            "submit": {
+              "calls": 2160,
+              "ms": 498.299999
+            },
+            "prepareTerrain": {
+              "calls": 720,
+              "ms": 96.4
+            },
+            "collectTerrain": {
+              "calls": 720,
+              "ms": 6.8
+            },
+            "pass:terrain": {
+              "calls": 720,
+              "items": 55092
+            },
+            "page": {
+              "calls": 209578,
+              "ms": 42.6
+            },
+            "collectElevationItems": {
+              "calls": 720,
+              "ms": 8.000001
+            },
+            "pass:scene": {
+              "calls": 720,
+              "items": 133027
+            },
+            "mesh": {
+              "calls": 133027,
+              "ms": 256.8
+            },
+            "resize:body": {
+              "calls": 3700,
+              "ms": 7.8
+            },
+            "resize:outline": {
+              "calls": 5022,
+              "ms": 3.8
+            }
+          },
+          "targetSizes": {
+            "body:224x224": 1303,
+            "outline:224x224": 1303,
+            "body:128x128": 1799,
+            "outline:128x128": 1799,
+            "body:288x288": 598,
+            "outline:288x288": 598
+          },
+          "assets": {
+            "flatbed-truck-authored-v1": 863,
+            "microcar-authored-v1": 438,
+            "compact-1-authored-v7": 1775,
+            "tow-truck-authored-v2": 993,
+            "compact-4-authored-v1": 498,
+            "golf-cart-authored-v1": 375,
+            "compact-5-authored-v1": 364
+          },
+          "batchCensus": {
+            "quads": 215601,
+            "textureSwitches": 112851,
+            "barriers": 10372
+          },
+          "orderedTextureBatches": {
+            "1": 123223,
+            "2": 44060,
+            "4": 25741,
+            "8": 17132
+          }
+        }
+      }
+    ]
+  },
+  "traceSummary": {
+    "schema": "tilefun-streaming-trace/v2",
+    "cadenceMs": 16.7,
+    "slowThresholdMs": 25.05,
+    "framesOver25Ms": 25,
+    "durationMs": 19992.9,
+    "frameIntervals": {
+      "count": 1171,
+      "totalMs": 19993.3,
+      "p50Ms": 16.7,
+      "p95Ms": 16.8,
+      "maxMs": 50
+    },
+    "mainThreadTasks": {
+      "count": 10686,
+      "totalMs": 11627.662,
+      "p50Ms": 0.028,
+      "p95Ms": 9.127,
+      "maxMs": 38.937
+    },
+    "mainThreadGC": {
+      "count": 178,
+      "totalMs": 372.232,
+      "p50Ms": 1.765,
+      "p95Ms": 2.837,
+      "maxMs": 38.604
+    },
+    "gpuProcessRequests": {
+      "count": 4336,
+      "totalMs": 12429.58,
+      "p50Ms": 1.37,
+      "p95Ms": 9.171,
+      "maxMs": 20.354
+    },
+    "gpuProcessRequestCpu": {
+      "count": 4336,
+      "totalMs": 9919.581,
+      "p50Ms": 1.309,
+      "p95Ms": 6.837,
+      "maxMs": 24.452
+    },
+    "rasterBatchCount": 10387,
+    "slowFrames": [
+      {
+        "index": 152,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 2523.31,
+        "intervalMs": 33.4,
+        "overlappingMainTaskMaxMs": 16.704,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 6.896,
+        "overlappingGpuRequestCpuMaxMs": 6.067
+      },
+      {
+        "index": 157,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 2623.41,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 9.903,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 17.613,
+        "overlappingGpuRequestCpuMaxMs": 15.711
+      },
+      {
+        "index": 161,
+        "rasterBatchesInLongestRequest": 38,
+        "rasterEndMsInLongestRequest": 5.578,
+        "startMs": 2706.71,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 9.657,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 11.06,
+        "overlappingGpuRequestCpuMaxMs": 10.575
+      },
+      {
+        "index": 166,
+        "rasterBatchesInLongestRequest": 32,
+        "rasterEndMsInLongestRequest": 5.18,
+        "startMs": 2806.61,
+        "intervalMs": 33.4,
+        "overlappingMainTaskMaxMs": 12.105,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 9.763,
+        "overlappingGpuRequestCpuMaxMs": 9.305
+      },
+      {
+        "index": 190,
+        "rasterBatchesInLongestRequest": 56,
+        "rasterEndMsInLongestRequest": 8.64,
+        "startMs": 3223.21,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 8.69,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 16.968,
+        "overlappingGpuRequestCpuMaxMs": 16.459
+      },
+      {
+        "index": 284,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 4806.21,
+        "intervalMs": 50,
+        "overlappingMainTaskMaxMs": 12.852,
+        "overlappingMainGcMaxMs": 2.526,
+        "overlappingGpuRequestMaxMs": 5.371,
+        "overlappingGpuRequestCpuMaxMs": 4.354
+      },
+      {
+        "index": 420,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 7105.31,
+        "intervalMs": 33.4,
+        "overlappingMainTaskMaxMs": 15.519,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 4.842,
+        "overlappingGpuRequestCpuMaxMs": 2.883
+      },
+      {
+        "index": 431,
+        "rasterBatchesInLongestRequest": 40,
+        "rasterEndMsInLongestRequest": 6.432,
+        "startMs": 7305.31,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 9.004,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 13.083,
+        "overlappingGpuRequestCpuMaxMs": 12.61
+      },
+      {
+        "index": 555,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 9387.91,
+        "intervalMs": 50,
+        "overlappingMainTaskMaxMs": 14.27,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 7.827,
+        "overlappingGpuRequestCpuMaxMs": 4.895
+      },
+      {
+        "index": 691,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 11686.91,
+        "intervalMs": 49.9,
+        "overlappingMainTaskMaxMs": 12.656,
+        "overlappingMainGcMaxMs": 1.798,
+        "overlappingGpuRequestMaxMs": 7.882,
+        "overlappingGpuRequestCpuMaxMs": 4.232
+      },
+      {
+        "index": 824,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 13936.21,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 12.582,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 5.984,
+        "overlappingGpuRequestCpuMaxMs": 3.644
+      },
+      {
+        "index": 831,
+        "rasterBatchesInLongestRequest": 38,
+        "rasterEndMsInLongestRequest": 6.384,
+        "startMs": 14069.41,
+        "intervalMs": 33.4,
+        "overlappingMainTaskMaxMs": 12.136,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 12.95,
+        "overlappingGpuRequestCpuMaxMs": 12.537
+      },
+      {
+        "index": 837,
+        "rasterBatchesInLongestRequest": 48,
+        "rasterEndMsInLongestRequest": 7.588,
+        "startMs": 14186.11,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 9.468,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 14.945,
+        "overlappingGpuRequestCpuMaxMs": 14.411
+      },
+      {
+        "index": 877,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 14869.11,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 38.937,
+        "overlappingMainGcMaxMs": 38.604,
+        "overlappingGpuRequestMaxMs": 12.009,
+        "overlappingGpuRequestCpuMaxMs": 8.532
+      },
+      {
+        "index": 958,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 16235.41,
+        "intervalMs": 49.9,
+        "overlappingMainTaskMaxMs": 6.501,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 6.412,
+        "overlappingGpuRequestCpuMaxMs": 4.153
+      },
+      {
+        "index": 966,
+        "rasterBatchesInLongestRequest": 48,
+        "rasterEndMsInLongestRequest": 8.748,
+        "startMs": 16402.01,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 8.991,
+        "overlappingMainGcMaxMs": 2.012,
+        "overlappingGpuRequestMaxMs": 16.949,
+        "overlappingGpuRequestCpuMaxMs": 15.794
+      },
+      {
+        "index": 969,
+        "rasterBatchesInLongestRequest": 48,
+        "rasterEndMsInLongestRequest": 7.889,
+        "startMs": 16468.61,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 9.064,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 15.257,
+        "overlappingGpuRequestCpuMaxMs": 14.695
+      },
+      {
+        "index": 990,
+        "rasterBatchesInLongestRequest": 32,
+        "rasterEndMsInLongestRequest": 5.953,
+        "startMs": 16835.11,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 10.355,
+        "overlappingMainGcMaxMs": 3.734,
+        "overlappingGpuRequestMaxMs": 11.218,
+        "overlappingGpuRequestCpuMaxMs": 10.848
+      },
+      {
+        "index": 999,
+        "rasterBatchesInLongestRequest": 37,
+        "rasterEndMsInLongestRequest": 6.5,
+        "startMs": 17001.81,
+        "intervalMs": 33.2,
+        "overlappingMainTaskMaxMs": 10.359,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 12.255,
+        "overlappingGpuRequestCpuMaxMs": 11.843
+      },
+      {
+        "index": 1089,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 18517.91,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 12.126,
+        "overlappingMainGcMaxMs": 1.844,
+        "overlappingGpuRequestMaxMs": 6.636,
+        "overlappingGpuRequestCpuMaxMs": 4.158
+      },
+      {
+        "index": 1096,
+        "rasterBatchesInLongestRequest": 48,
+        "rasterEndMsInLongestRequest": 8.301,
+        "startMs": 18651.21,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 10.166,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 15.918,
+        "overlappingGpuRequestCpuMaxMs": 15.35
+      },
+      {
+        "index": 1100,
+        "rasterBatchesInLongestRequest": 48,
+        "rasterEndMsInLongestRequest": 8.299,
+        "startMs": 18734.51,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 9.641,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 15.746,
+        "overlappingGpuRequestCpuMaxMs": 15.172
+      },
+      {
+        "index": 1109,
+        "rasterBatchesInLongestRequest": 0,
+        "rasterEndMsInLongestRequest": 0,
+        "startMs": 18901.11,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 9.955,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 12.57,
+        "overlappingGpuRequestCpuMaxMs": 10.053
+      },
+      {
+        "index": 1124,
+        "rasterBatchesInLongestRequest": 48,
+        "rasterEndMsInLongestRequest": 8.048,
+        "startMs": 19167.61,
+        "intervalMs": 33.3,
+        "overlappingMainTaskMaxMs": 9.712,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 15.64,
+        "overlappingGpuRequestCpuMaxMs": 14.977
+      },
+      {
+        "index": 1130,
+        "rasterBatchesInLongestRequest": 48,
+        "rasterEndMsInLongestRequest": 7.953,
+        "startMs": 19284.21,
+        "intervalMs": 33.4,
+        "overlappingMainTaskMaxMs": 12.572,
+        "overlappingMainGcMaxMs": 0,
+        "overlappingGpuRequestMaxMs": 15.406,
+        "overlappingGpuRequestCpuMaxMs": 14.993
+      }
+    ],
+    "rasterBatchesPerSecond": [
+      {
+        "second": 0,
+        "count": 61
+      },
+      {
+        "second": 1,
+        "count": 60
+      },
+      {
+        "second": 2,
+        "count": 825
+      },
+      {
+        "second": 3,
+        "count": 551
+      },
+      {
+        "second": 4,
+        "count": 297
+      },
+      {
+        "second": 5,
+        "count": 986
+      },
+      {
+        "second": 6,
+        "count": 66
+      },
+      {
+        "second": 7,
+        "count": 1483
+      },
+      {
+        "second": 8,
+        "count": 62
+      },
+      {
+        "second": 9,
+        "count": 1009
+      },
+      {
+        "second": 10,
+        "count": 208
+      },
+      {
+        "second": 11,
+        "count": 465
+      },
+      {
+        "second": 12,
+        "count": 513
+      },
+      {
+        "second": 13,
+        "count": 116
+      },
+      {
+        "second": 14,
+        "count": 999
+      },
+      {
+        "second": 15,
+        "count": 63
+      },
+      {
+        "second": 16,
+        "count": 1111
+      },
+      {
+        "second": 17,
+        "count": 164
+      },
+      {
+        "second": 18,
+        "count": 707
+      },
+      {
+        "second": 19,
+        "count": 641
+      }
+    ]
+  }
+}

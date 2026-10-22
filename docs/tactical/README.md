@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [181 Depot and driving acceptance](181-depot-and-driving-acceptance.md) | Measured: moving Pixel 7a normal/overview 59.7/56.8 FPS; raster/GC attribution; terrain raster/upload admission next; exact depot location open; [performance](../topics/performance.md) |
 | [180 Ordered texture batches](180-ordered-texture-batches.md) | Delivered: Pixel 7a wide track/fleet about 40–41→60 FPS; native/desktop exact pixels; 829 browser cases pass; [rendering](../topics/rendering-architecture.md), [performance](../topics/performance.md) |
 | [179 Cached car images](179-cached-car-images.md) | Implemented: exact-pixel bounded reuse; Pixel 7a fleet +30–33% FPS / −51% render CPU; wide-view submission remains; intermittent Canvas deer test caveat; [rendering](../topics/rendering-architecture.md), [performance](../topics/performance.md) |
 | [178 Garden bird voices](178-garden-bird-voices.md) | Three distinct CC0 voices/seven takes for crow, raven and pigeon; shared resting calls and carrying silence; automation verified, listening review pending |

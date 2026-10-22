@@ -201,6 +201,13 @@ exercise actual authored GLB draws without increasing the car count; it is an
 explicit fixture variant. Subsequent motion uses native input. Travel and actual
 mesh draw counters distinguish blocked/unused-model runs. Captures retain timings,
 counts, server/frame timelines, input acknowledgement delay and correction error.
+The client sampler also records player position about once per second (`motion`),
+so a long driving capture can distinguish moving intervals from a blocked tail;
+`maxTravel` alone is maximum displacement, not continuous-motion evidence.
+`--drive-reverse-at=20` switches the held horizontal direction after about 20
+sample seconds using the same touch/keyboard input. It is an explicit out-and-back
+fixture variant, useful when a straight long drive eventually blocks. It does not
+teleport or reset the vehicle; check `motion` and `inputChanges` for actual travel.
 `--deep=true` adds indexed authority driving candidate counts when available,
 per-query/traffic counters and per-car/per-tick distinct terrain
 cells; `--cpu=true` samples only the owned Worker and main page at 1ms. Run these
@@ -211,7 +218,10 @@ native touch joystick input (`--touch=false` selects keyboard). The default entr
 and post-setup gate is <=32°C/status zero; `--cooldown-seconds=60` is bounded.
 A changed end thermal status retains that capture and stops subsequent cases.
 Use machine-control's Android guide for owned USB routes, preserve original routes
-and foreground state, then remove only task-owned routes. The runner closes its
+and foreground state, then remove only task-owned routes. If cooldown uses the
+launcher, explicitly launch Chrome again before attaching: Android may freeze a
+background browser even while its forwarded debugging socket still exists.
+The runner closes its
 own tabs/Workers/server and clears only its isolated origin; it disconnects CDP
 without closing the user's Chrome. Task-local private/raw reports remain outside
 Git. `--root=PATH --revision=LABEL` profiles a frozen Git archive; source/probe hashes

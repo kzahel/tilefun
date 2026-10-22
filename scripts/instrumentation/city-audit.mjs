@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, open, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { setTimeout as delay } from "node:timers/promises";
 import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
@@ -36,6 +37,9 @@ const viewport = option("viewport", "411x789").split("x").map(Number);
 if (viewport.length !== 2 || viewport.some((v) => !Number.isInteger(v) || v < 200 || v > 3840))
   throw Error("Invalid viewport: expected WIDTHxHEIGHT, 200–3840 pixels per side");
 const driveModel = option("drive-model", "native");
+const driveReverseAt = Number(option("drive-reverse-at", "0"));
+if (!Number.isFinite(driveReverseAt) || driveReverseAt < 0 || driveReverseAt >= seconds)
+  throw Error("Drive reverse time must be zero (disabled) or within the sampling window");
 if (!["native", "compact-1"].includes(driveModel)) throw Error("Invalid drive model");
 if (
   !["gateway", "core", "racetrack", "racetrack-north", "racetrack-center"].includes(arrivalKind) ||
@@ -115,6 +119,7 @@ const report = {
   parkedFleet,
   viewport,
   driveModel,
+  driveReverseAt,
   limits:
     "Native game Worker/IndexedDB/current seed-2026 city; normal traffic/pedestrians. Inclusive opt-in timers add overhead. Driver setup boards an existing native car (or an explicit one-for-one production-factory model replacement) after a diagnostic pose/stop; subsequent input is native. CPU and deep census are attribution lanes, not clean timing controls. rAF measures callback cadence, not displayed GPU presentation.",
   probesSHA256: {},
@@ -412,6 +417,7 @@ try {
     await worker.evaluate(() => globalThis.__cityReset());
     let points;
     const key = driver?.key ?? "ArrowRight";
+    let heldKey = key;
     const moving = ["walk", "drive", "overview-drive"].includes(stage);
     if (moving) {
       if (touch) {
@@ -451,7 +457,29 @@ try {
         window.__cityTrace = true;
       });
     }
-    const data = await page.evaluate(sampleCityClient, seconds);
+    const inputAbort = new AbortController();
+    const inputChanges = [];
+    const reverseInput = async () => {
+      if (!driver || !driveReverseAt) return;
+      await delay(driveReverseAt * 1000, undefined, { signal: inputAbort.signal });
+      heldKey = key === "ArrowRight" ? "ArrowLeft" : "ArrowRight";
+      if (touch)
+        await cdp.send("Input.dispatchTouchEvent", {
+          type: "touchMove",
+          touchPoints: [{ ...points, x: points.x + (heldKey === "ArrowRight" ? 50 : -50) }],
+        });
+      else {
+        await page.keyboard.up(key);
+        await page.keyboard.down(heldKey);
+      }
+      inputChanges.push({ afterSeconds: driveReverseAt, key: heldKey });
+    };
+    let data;
+    try {
+      [data] = await Promise.all([page.evaluate(sampleCityClient, seconds), reverseInput()]);
+    } finally {
+      inputAbort.abort();
+    }
     const authority = await worker.evaluate(() => globalThis.__cityRead());
     let cpuSummary, mainCpu;
     if (profiler) {
@@ -473,7 +501,7 @@ try {
     }
     if (moving) {
       if (touch) await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-      else await page.keyboard.up(key);
+      else await page.keyboard.up(heldKey);
     }
     const thermalEnd = androidCli ? readAndroidThermals(androidCli) : undefined;
     if (meshTargetReuse)
@@ -505,6 +533,7 @@ try {
       stage,
       arrival,
       driver,
+      inputChanges,
       fleet,
       gate,
       thermalStart,

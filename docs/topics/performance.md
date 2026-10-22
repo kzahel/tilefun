@@ -216,6 +216,39 @@ meshes streaming readiness pass. The same backend serves game and embedded labs.
 Next qualify the actual saved depot and moving/driving overview, then profile
 any remaining bottleneck before choosing another shader or atlas change.
 
+### Moving overview acceptance · 181
+
+[181](../tactical/181-depot-and-driving-acceptance.md) follows up on native Pixel
+7a with minute-long generated-city driving. Straight input blocks after about
+39 seconds; the diagnostic now records one-second positions and supports an
+explicit timed native reverse. The out-and-back normal/0.1 overview runs cover
+about 4,448/4,445 sampled path pixels with no stationary tail at that resolution:
+**59.73 / 56.76 FPS**, **16 / 176 intervals over 25ms**, and frame p95
+**16.8 / 33.2ms**. Authority remains 60Hz, tick p95 8.9/7.9ms, with zero page
+errors and thermal status zero at both boundaries. This is current generated
+workload characterization, not a before/after gain or exact saved-depot result.
+
+Separate cooled phone CPU/trace lanes show distributed mesh, terrain and scene
+collection cost. Of 25 traced slow intervals, 16 overlap GPU-service requests
+over 10ms and six overlap main GC; 14 include raster batches in the longest
+overlapping GPU request. Source uploads total 40.36 MiB in about 20 seconds.
+These are correlation and process-thread timings, not hardware GPU counters or
+proof of one cause; GPU-process totals include the browser's other hidden tabs.
+A subsequent native census is rejected at status one during
+setup and admits no sample. Desktop structural census still finds about ten
+body/outline target size changes/frame; its speed effect needs a native A/B.
+
+Next prioritize movement-time terrain raster/source-upload attribution and a
+bounded admission experiment, with visible-readiness/travel checks alongside
+frame tails. Preserve complete terrain during replacements; previous smaller
+batches traded lower bursts for slower fill. Scratch-target reuse is a separate
+small control for changing cars; shader fusion, depth locality and server traffic
+remain conditional on matched evidence. This slice changes diagnostics only.
+The live-site phone save is retired regional-v4, and the old loopback origin has
+no registered world; the owner's depot location remains open. Original saves are
+read-only. [Receipt](../benchmarks/depot-driving-acceptance.json) owns exact scope,
+hashes, thermal exclusions, cleanup and the two unchanged unit-timeout reruns.
+
 ## Evidence and validation
 
 The streaming browser regression retains at least 210 sampled display frames per

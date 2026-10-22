@@ -175,6 +175,7 @@ export async function sampleCityClient(seconds) {
     updates = [],
     ackTimes = [],
     timeline = [],
+    motion = [],
     acks = new Map();
   let lastFrame = performance.now(),
     lastAck = g.stateView.lastProcessedInputSeq,
@@ -227,6 +228,12 @@ export async function sampleCityClient(seconds) {
   performance.mark("tilefun.sample.start");
   window.__cityRenderProfile?.reset();
   lastFrame = start;
+  const recordMotion = (now) => {
+    const p = g.stateView.playerEntity.position;
+    motion.push({ elapsedMs: now - start, wx: p.wx, wy: p.wy });
+  };
+  recordMotion(start);
+  let nextMotion = start + 1000;
   let renderProfile;
   try {
     while (performance.now() - start < seconds * 1000) {
@@ -236,6 +243,10 @@ export async function sampleCityClient(seconds) {
       if (window.__cityTrace) performance.measure("tilefun.frame", { start: lastFrame, end: now });
       timeline.push({ kind: "frame", start: performance.timeOrigin + lastFrame, ms });
       lastFrame = now;
+      if (now >= nextMotion) {
+        recordMotion(now);
+        nextMotion = now + 1000;
+      }
     }
   } finally {
     performance.mark("tilefun.sample.end");
@@ -256,6 +267,7 @@ export async function sampleCityClient(seconds) {
       max: s.at(-1) ?? 0,
     };
   };
+  recordMotion(performance.now());
   return {
     ...(renderProfile ? { renderProfile } : {}),
     elapsedMs: performance.now() - start,
@@ -291,6 +303,7 @@ export async function sampleCityClient(seconds) {
     },
     host: await g.transport.getDiagnostics(),
     timeline,
+    motion,
     viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio },
     zoom: g.camera.zoom,
   };

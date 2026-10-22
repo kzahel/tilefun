@@ -123,3 +123,7 @@ change. The measured standing wide/fleet cases now reach the phone's 60Hz cadenc
 Profile any remaining cost in those acceptance scenes before choosing a deeper
 atlas, car outline-fusion or shared-depth change. Preserve 162's separate world-
 depth correctness work; this slice changes no world-depth or simulation policy.
+
+[181](181-depot-and-driving-acceptance.md) records the subsequent moving-city phone
+acceptance and CPU/trace attribution. Exact saved-depot location remains open;
+the next selected experiment concerns movement-time terrain/source-upload work.

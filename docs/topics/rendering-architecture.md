@@ -343,8 +343,13 @@ Optimization sequence and next work:
    Unsupported groups retain their current renderer.
 2. **Ordered multi-texture submission is delivered in 180.** It avoids atlas
    copies/gutters while addressing car, terrain, sprite and white-fill switches.
-   First qualify the actual saved depot and moving/driving overview: measured
-   standing wide/fleet cases now reach 60Hz, so profile before another change.
+   Standing wide/fleet cases now reach 60Hz. Follow-up
+   [181](../tactical/181-depot-and-driving-acceptance.md) measures
+   moving normal/overview at 59.7/56.8 FPS on Pixel 7a; the exact saved depot remains
+   open. Mixed raster servicing/GC evidence selects movement-time source-upload
+   and terrain preparation admission as the next experiment. A desktop census
+   still finds about ten scratch body/outline size changes per frame, but a size
+   pool's phone benefit is unproven. No new shader/order/runtime policy is shipped.
 3. **If new profiles justify it, measure outline fusion for changing bodies**,
    including the extra fragment
    work at close zoom. Add the missing composition/rig/lifecycle qualification
