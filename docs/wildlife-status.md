@@ -101,7 +101,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-22T06:28:24.192Z (22/10/2026, 08:28:24 Berlin).
+Snapshot: 2026-10-22T10:46:33.131Z (22/10/2026, 12:46:33 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

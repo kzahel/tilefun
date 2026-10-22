@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: first six recorded voices implemented and automation verified; owner listening review pending.
+Status: nine recorded voices implemented and automation verified; owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -12,12 +12,12 @@ records all 206 current Animal Browser entries. The
 
 ## Current coverage
 
-Source inspection finds call wiring for **45/206 entries (21.8%)**, using **20
-effective sound designs**: six recorded voices covering ten entries, eleven
+Source inspection finds call wiring for **48/206 entries (23.3%)**, using **23
+effective sound designs**: nine recorded voices covering thirteen entries, eleven
 shared synthesized hunter designs and three game-only synthesized calls. Before
-this slice, 35 entries shared thirteen synthesized designs. The 73 existing OGG files cover
+recorded-voice work, 35 entries shared thirteen synthesized designs. The 73 existing OGG files cover
 footsteps (30), impacts (25), jumps (4), UI/ghosts (11) and campfire crackle (3).
-The new bank adds eleven short OGG excerpts. These are source-level coverage counts, not a listening approval or live-deployment
+The two recorded banks add sixteen short OGG excerpts. These are source-level coverage counts, not a listening approval or live-deployment
 check. Related animals sharing a voice count as covered entries, not unique sounds.
 
 | Effective design | Animals currently routed to it | Trigger / consumer |
@@ -28,6 +28,9 @@ check. Related animals sharing a voice count as covered entries, not unique soun
 | Recorded bleat | Sheep | Actual flock-regroup bleat onset, sparse idle; shared game/lab |
 | Recorded cluck | Chicken (also legacy chicken) | Peck onset, sparse idle; shared game/lab |
 | Recorded whinny | Horse | Sparse idle; shared game/lab |
+| Recorded goat bleat | Goat | Sparse idle, excluding browse/hop; shared game/lab |
+| Recorded bray | Grey donkey | Sparse idle, excluding dust bath; shared game/lab |
+| Recorded piglet squeal | Pig | Fresh flee onset only, no idle/feeding calls; shared game/lab |
 | Robin chirp | Robin | Enter calling clip 3, or become scared; ordinary PlayScene only |
 | Frog croak | Frog | Enter croaking clip 3, or become scared; ordinary PlayScene only |
 | Duck quack | Mallard duck | Become scared; ordinary PlayScene only |
@@ -70,13 +73,15 @@ Animal Browser has Recorded / Synthesized / Game-only / No call wired filters,
 plus keyboard/touch/native-button **Audition voice**. Auditions explicitly unlock
 their own audio context and cycle actual recorded takes without enabling world
 ambience. Dog/cow/chicken have multiple excerpts; cat/sheep/horse currently use
-one complete take each. No artificial pitch variants are counted.
+one complete take each. Goat/donkey have two excerpts each; piglet has one alarm
+squeal. Piglet explicitly disables idle ambience and admits its named flee onset
+through the normal scared-actor rejection. No artificial pitch variants are counted.
 
 ### Important gaps and corrections
 
 - **Tiger, lion, panther and brown bear have no call routing.** Their display
   animations alone do not produce roars or growls.
-- Goats and donkeys still have no vocalizations. The hunter `cat` synthesis and
+- Goat, donkey and piglet voices are implemented in [177](../tactical/177-farm-animal-voices.md). The hunter `cat` synthesis and
   new domestic-cat recording are separate voice sets; coats explicitly inherit.
 - Owl routing is corrected: explicit `callKind` now takes precedence over the
   locomotion/behavior `fierce.kind`. A native test asserts the selected hoot.
@@ -87,7 +92,7 @@ one complete take each. No artificial pitch variants are counted.
   terrestrial predator profiles and legacy `chicken`/`cow` types, but not authored
   provisional chicken/cow or generic fauna such as horse. Vocalization coverage
   must remain separate from footsteps, wingbeats, splashes and interaction sounds.
-- The 161 entries without calls have not been classified as intentionally quiet.
+- The 158 entries without calls have not been classified as intentionally quiet.
   Silence can be correct; adding a constant voice to every animal is not the goal.
 
 ## Recommended delivery order
@@ -98,12 +103,13 @@ No new art, elaborate mimicry AI or animal production is needed to prove it.
 | Slice | Animals / scope | Audible result |
 | --- | --- | --- |
 | 1: familiar voices | Dog and two coats; cat and two coats; cow, sheep, chicken, horse | Implemented in [176](../tactical/176-familiar-animal-voices.md); six voice sets cover ten entries. Shared action/idle playback and auditions; owner listening review pending. |
-| 2: farm and garden | Goat, donkey, piglet; crow, raven, pigeon, dove; bee, cricket | Species-specific calls/buzzes; distinguish crow and raven, pigeon and dove. Buzz only while the bee flies; insect ambience must not multiply into a swarm of loops. |
+| 2: farm and garden | Goat, donkey, piglet; crow, raven, pigeon, dove; bee, cricket | First three implemented in [177](../tactical/177-farm-animal-voices.md): resting bleat/bray and context-specific piglet alarm. Birds/insects remain next; distinguish crow/raven and pigeon/dove. Buzz only while flying and bound swarm ambience. |
 | 3: existing-call corrections and predators | Connect robin/frog/duck in lab; tiger, lion, panther, brown bear; review hunter placeholders | Owl routing completed in slice 1. Remaining work: game/lab parity, recognizable large predators, quieter and more appropriate small hunters. |
 | 4: specialist land/air | Peacock, parrot, elephant, primates, other birds and mammals | Fill prioritized gaps with explicit species/context choices. Parrot starts with its own call; imitation remains a separate proposed behavior. |
 | 5: aquatic and deliberate silence | Marine mammals, amphibious animals, quiet species | Decide surface/listener context before whale/dolphin playback. Document quiet animals and appropriate incidental sounds without inventing roars for fish or insects. |
 
-Slice 1 raises raw call coverage from 35 to **45/206 (21.8%)**. Improving existing
+Slice 1 raised raw call coverage from 35 to 45/206; the three farm voices raise
+it to **48/206 (23.3%)**. Improving existing
 voices and classifying deliberate silence are useful even when that count stays
 unchanged. Track entries, voice sets, appropriate contexts and listening approval
 separately.
@@ -119,9 +125,12 @@ matched perceived loudness. Keep runtime decoding lazy and buffers shared.
 
 Six first-slice recordings are retained in the
 [source bank and exact receipts](../../art-source/animal-audio/familiar-v1/README.md).
+The next three sources and five excerpts are retained in the
+[farm bank](../../art-source/animal-audio/farm-v1/README.md).
 These are public HQ MP3 previews, not lossless original downloads. Source/signal
-inspection is complete; **owner listening approval remains pending**. Other
-entries below remain researched candidates and have not been integrated:
+inspection is complete; **owner listening approval remains pending**. The six familiar rows below are integrated; the Baby Animals pack supplied the
+piglet source lead, but the exact original preview was downloaded directly. Other
+rows remain researched candidates:
 
 | Candidate | Declared source/license | Possible use / qualification |
 | --- | --- | --- |
@@ -194,7 +203,8 @@ NaturalLandscapePage and the 206-entry behavior ledger. All calls above were
 resolved using the actual routing precedence, now corrected to `callKind ??
 fierce.kind`. [176](../tactical/176-familiar-animal-voices.md) records new playback,
 source pins, UI and validation. Animation, AI and artwork review identities are
-unchanged. Next: owner listening review, then farm/garden or predator voices.
+unchanged. [177](../tactical/177-farm-animal-voices.md) adds the three farm voices. Next:
+owner listening review, then remaining garden birds/insects or predator voices.
 
 Initial audit validation: all 206 IDs match Animal Browser exactly, with no duplicates;
 the original 35 call routes / 13 designs and named missing routes were checked against live
@@ -211,3 +221,10 @@ Implementation [176](../tactical/176-familiar-animal-voices.md) subsequently pas
 1,980-candidate retina raster verification. Final native: 6,691 passed, five known
 Windows failures, ten skipped. Final browser: 834 passed, one GPU pinch Options
 timeout; that exact unchanged case passes cold. All audio/browser boundaries pass.
+
+Farm voices [177](../tactical/177-farm-animal-voices.md) pass 49 focused audio cases,
+typecheck, lint and strict inventories/build; all 1,980 prior review objects remain
+exact. Native regression: 6,693 passed, five known Windows failures, ten skipped.
+Browser: 834 passed, one Canvas pinch Options timeout; the exact unchanged case
+passes cold. Both audio boundaries pass. Nine recorded voices cover thirteen
+entries with sixteen takes; owner listening review remains pending.

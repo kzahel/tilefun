@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-22",
+  "state": "implemented-and-automation-verified",
+  "humanListeningReview": "pending-owner",
+  "audio": {
+    "newVoices": ["goat", "donkey", "piglet"],
+    "newSources": 3,
+    "newTakes": 5,
+    "totalVoices": 9,
+    "totalTakes": 16,
+    "recordedEntries": 13,
+    "callRoutes": 48,
+    "totalEntries": 206
+  },
+  "typecheck": "pass",
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 121,
+    "existingInfos": 42
+  },
+  "focusedAudioTests": 49,
+  "native": {
+    "total": 6708,
+    "passed": 6693,
+    "knownWindowsFailures": 5,
+    "skipped": 10,
+    "seconds": 876.31
+  },
+  "nativeLimitations": "FsSecurity dangling symlink cases (3), SqliteRecordStore process-death/WAL (1), privateDataPlugin symlink (1). staticFiles retains existing Windows symlink setup/cleanup errors.",
+  "browser": {
+    "total": 835,
+    "passed": 834,
+    "failed": 1,
+    "minutes": 40.5
+  },
+  "browserFailure": "Canvas pinch preference case timed out waiting for Joystick while Options was absent, matching the prior checkpoint symptom. Exact unchanged single-case cold rerun passed in 8.1 seconds (11.2 seconds including setup). No assertions, timeouts or pinch code changed.",
+  "audioBrowserBoundariesPassed": 2,
+  "nodeComparatorPassed": 1,
+  "allExportsHashPinnedDecodedAndMeasured": true,
+  "build": "pass",
+  "workshopCandidates": 1980,
+  "priorCandidateObjectsUnchanged": true,
+  "normalChromiumRetinaParity": "pass",
+  "inputDigest": "728fb3711eca3f116eb1d7cc895e9dcca2ae08b914db7533fddd8e449c6b4437"
+}

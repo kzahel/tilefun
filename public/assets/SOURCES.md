@@ -1,5 +1,14 @@
 # Asset Sources
 
+## Farm animal recordings
+
+`audio/animals/farm-v1/` contains five edited excerpts from three CC0-1.0
+recordings: goat by aisselles, donkey by felix.blume, and piglet by
+wwstudioswastaken (formerly Foleyhaven), published on Freesound. Source-page and
+license links, exact public HQ MP3 previews, original/export hashes and offline
+recipe: [`art-source/animal-audio/farm-v1/`](../../art-source/animal-audio/farm-v1/README.md).
+The piglet is a startled squeal, not calm idle ambience.
+
 ## Familiar animal recordings
 
 `audio/animals/familiar-v1/` contains eleven edited excerpts from six CC0-1.0

@@ -24,13 +24,13 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
   await page.goto("/tilefun/workshop.html?geometry=nature-behavior-dog#/tool/world-geometry");
   await page.getByLabel("Animal sound coverage", { exact: true }).selectOption("recorded");
   const results = page.getByRole("region", { name: "Animal results" });
-  await expect(results.locator("article")).toHaveCount(10);
+  await expect(results.locator("article")).toHaveCount(13);
   const button = results
-    .locator('[data-animal="sheep"]')
+    .locator('[data-animal="piglet"]')
     .getByRole("button", { name: /Audition .* voice/ });
   await button.focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("status").filter({ hasText: "Sheep: Bleat" })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "Pig: Startled squeal" })).toBeVisible();
   const energy = await page.evaluate(async () => {
     const buffer = (
       window as unknown as { __voiceTest: { buffers: AudioBuffer[] } }
@@ -75,7 +75,7 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
     )
     .toBe(0);
   await page.getByLabel("Animal sound coverage", { exact: true }).selectOption("missing");
-  await expect(results.locator("article")).toHaveCount(161);
+  await expect(results.locator("article")).toHaveCount(158);
   expect(errors).toEqual([]);
 });
 

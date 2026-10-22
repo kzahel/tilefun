@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [177 Farm animal voices](177-farm-animal-voices.md) | Goat/donkey resting calls and piglet alarm squeal, three CC0 sources/five takes; automation verified, listening review pending |
 | [176 Familiar animal voices](176-familiar-animal-voices.md) | Implemented and automation verified: six recorded voices, ten entries including coats, shared playback and lab audition; listening review pending; [animal sounds](../topics/wildlife-audio.md) |
 | [175 Vehicle depot and walkable ramps](175-vehicle-depot-and-walkable-ramps.md) | Implemented and validated locally; owner playtest pending: mapped infield depot, saved vehicles, practice bridge and shared pedestrian transporter support; [vehicles](../topics/vehicles.md) |
 | [174 Curling, quills and fox pounces](174-curling-quills-and-fox-pounces.md) | Implemented and automation verified: hedgehog, porcupine and fox; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |

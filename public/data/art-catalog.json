@@ -32039,7 +32039,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:48"
+          "source": "src/audio/AnimalVoice.ts:65"
         },
         {
           "system": "Gameplay",
@@ -32087,7 +32087,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:48"
+          "source": "src/audio/AnimalVoice.ts:65"
         },
         {
           "system": "Gameplay",
@@ -32135,7 +32135,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:48"
+          "source": "src/audio/AnimalVoice.ts:65"
         },
         {
           "system": "Gameplay",
@@ -34203,11 +34203,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:21"
+          "source": "src/audio/AnimalVoice.ts:28"
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:34"
+          "source": "src/audio/AnimalVoice.ts:51"
         },
         {
           "system": "Gameplay",
@@ -34357,11 +34357,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:19"
+          "source": "src/audio/AnimalVoice.ts:26"
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:34"
+          "source": "src/audio/AnimalVoice.ts:51"
         },
         {
           "system": "Gameplay",

@@ -1,0 +1,14 @@
+{
+  "id": "donkey",
+  "creator": "felix.blume",
+  "soundId": 152907,
+  "sourcePage": "https://freesound.org/people/felix.blume/sounds/152907/",
+  "download": "https://cdn.freesound.org/previews/152/152907_1661766-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "donkey-source.mp3",
+  "sha256": "8d028530b16833528689502ffc1a574b11fc943c6cd2dee30c2e9ca6ff3cebf5",
+  "bytes": 367296
+}

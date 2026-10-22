@@ -120,9 +120,13 @@ export class AnimalAudio {
           !!returnedBall ||
           (previous !== undefined &&
             previous !== pose &&
-            profile.cues.includes(pose) &&
+            (profile.cues.includes(pose) || profile.alarmCue === pose) &&
             (actor.sprite?.clipElapsedMs ?? 0) <= 180),
-        idle = pose === "idle" && !actor.sprite?.moving && actor.wanderAI?.state !== "scared";
+        idle =
+          profile.ambient !== false &&
+          pose === "idle" &&
+          !actor.sprite?.moving &&
+          actor.wanderAI?.state !== "scared";
       if (
         now >= state.cooldown &&
         (action || (idle && now >= state.next && now >= this.nextAmbient))
@@ -207,7 +211,7 @@ export class AnimalAudio {
       this.states.get(actor.id) !== state ||
       state.request !== request ||
       !current ||
-      current.wanderAI?.state === "scared" ||
+      (current.wanderAI?.state === "scared" && ANIMAL_VOICES[voice].alarmCue !== pose) ||
       this.ctx.currentTime - requestedAt > 0.6 ||
       (ballId !== undefined
         ? !ball ||

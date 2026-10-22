@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { afterEach, expect, it, vi } from "vitest";
 import receipt from "../../art-source/animal-audio/familiar-v1/manifest.json";
+import farmReceipt from "../../art-source/animal-audio/farm-v1/manifest.json";
 import { required } from "../art/ArtCatalog.js";
 import { createBall } from "../entities/Ball.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
@@ -86,9 +87,9 @@ function harness() {
   return { audio, ctx, sources, gains, pans, fetcher, sheep, listener, pose, flush };
 }
 
-it("maps exactly ten browser entries, preserves coats and pins all six sources/eleven exported clips", () => {
+it("maps thirteen browser entries, preserves coats and pins all nine sources/sixteen exported clips", () => {
   const covered = ANIMAL_BROWSER_ENTRIES.filter((a) => animalVoiceForType(a.type));
-  expect(covered).toHaveLength(10);
+  expect(covered).toHaveLength(13);
   for (const a of covered) expect(animalVoiceForType(a.type)).toBe(animalVoiceForSpecies(a.id));
   expect(animalVoiceForSpecies("dog-golden")).toBe("dog");
   expect(animalVoiceForSpecies("cat-black")).toBe("cat");
@@ -100,12 +101,15 @@ it("maps exactly ten browser entries, preserves coats and pins all six sources/e
     "wildlife-fox-provisional-v1",
   ])
     expect(animalVoiceForType(type)).toBeUndefined();
-  expect(Object.keys(ANIMAL_VOICES)).toHaveLength(6);
+  expect(Object.keys(ANIMAL_VOICES)).toHaveLength(9);
   expect(receipt.sources.flatMap((s) => s.variants)).toHaveLength(11);
+  expect(farmReceipt.sources.flatMap((s) => s.variants)).toHaveLength(5);
   const hash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
-  for (const source of receipt.sources) {
+  for (const [bank, source] of [receipt, farmReceipt].flatMap((r) =>
+    r.sources.map((s) => [r.id, s] as const),
+  )) {
     expect(source.license).toBe("CC0-1.0");
-    expect(hash(`art-source/animal-audio/familiar-v1/${source.sourceFile}`)).toBe(source.sha256);
+    expect(hash(`art-source/animal-audio/${bank}/${source.sourceFile}`)).toBe(source.sha256);
     expect(ANIMAL_RECORDINGS[source.id as keyof typeof ANIMAL_RECORDINGS]).toEqual(
       source.variants.map((v) => v.path),
     );
@@ -115,6 +119,66 @@ it("maps exactly ten browser entries, preserves coats and pins all six sources/e
       expect(variant.rms).toBeGreaterThan(0.025);
     }
   }
+});
+
+it("keeps piglet squeals out of calm ambience and plays only a fresh replicated flee onset", async () => {
+  const h = harness(),
+    pig = createFauna("piglet", 20, 0);
+  pig.id = 2;
+  const pose = (name: string) => {
+    required(pig.sprite).clip = required(ENTITY_DEFS[pig.type]?.sprite?.clips).findIndex(
+      (c) => c.name === name,
+    );
+    required(pig.sprite).clipElapsedMs = 0;
+  };
+  pose("idle");
+  h.audio.update([pig], h.listener, true);
+  h.ctx.currentTime = 100;
+  h.audio.update([pig], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(0);
+  pose("flee");
+  required(pig.wanderAI).state = "scared";
+  const replica = deserializeEntity(serializeEntity(pig));
+  h.audio.update([replica], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining("farm-v1/piglet-1.ogg"));
+  h.audio.update([replica], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  h.audio.stop();
+  h.audio.update([replica], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+});
+
+it("admits resting goat/donkey calls but keeps a dust-bathing donkey quiet", async () => {
+  const h = harness(),
+    goat = createFauna("goat", 20, 0),
+    donkey = createFauna("donkey", 20, 0);
+  goat.id = 2;
+  donkey.id = 3;
+  h.audio.update([goat], h.listener, true);
+  h.ctx.currentTime = 25;
+  h.audio.update([goat], h.listener, true);
+  await h.flush();
+  expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining("farm-v1/goat-"));
+  h.audio.stop();
+  required(donkey.sprite).clip = required(ENTITY_DEFS[donkey.type]?.sprite?.clips).findIndex(
+    (c) => c.name === "roll",
+  );
+  expect(donkey.sprite?.clip).toBeGreaterThan(0);
+  h.audio.update([donkey], h.listener, true);
+  h.ctx.currentTime = 100;
+  h.audio.update([donkey], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  required(donkey.sprite).clip = 0;
+  h.audio.update([donkey], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(2);
+  expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining("farm-v1/donkey-"));
 });
 
 it("plays an actual replicated bleat onset once, spatially, and never replays a late join or rapid repeat", async () => {

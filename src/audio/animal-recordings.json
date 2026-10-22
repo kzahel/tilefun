@@ -15,5 +15,11 @@
     "assets/audio/animals/familiar-v1/chicken-2.ogg",
     "assets/audio/animals/familiar-v1/chicken-3.ogg"
   ],
-  "horse": ["assets/audio/animals/familiar-v1/horse-1.ogg"]
+  "horse": ["assets/audio/animals/familiar-v1/horse-1.ogg"],
+  "goat": ["assets/audio/animals/farm-v1/goat-1.ogg", "assets/audio/animals/farm-v1/goat-2.ogg"],
+  "donkey": [
+    "assets/audio/animals/farm-v1/donkey-1.ogg",
+    "assets/audio/animals/farm-v1/donkey-2.ogg"
+  ],
+  "piglet": ["assets/audio/animals/farm-v1/piglet-1.ogg"]
 }

@@ -7,7 +7,14 @@ export type AnimalVoice = keyof typeof recordings;
 export { recordings as ANIMAL_RECORDINGS };
 export const ANIMAL_VOICES: Record<
   AnimalVoice,
-  { label: string; animals: readonly string[]; cues: readonly string[]; cooldown: number }
+  {
+    label: string;
+    animals: readonly string[];
+    cues: readonly string[];
+    cooldown: number;
+    ambient?: boolean;
+    alarmCue?: string;
+  }
 > = {
   dog: {
     label: "Bark",
@@ -20,6 +27,16 @@ export const ANIMAL_VOICES: Record<
   sheep: { label: "Bleat", animals: ["sheep"], cues: ["bleat"], cooldown: 8 },
   chicken: { label: "Cluck", animals: ["chicken"], cues: ["peck"], cooldown: 10 },
   horse: { label: "Whinny", animals: ["horse"], cues: [], cooldown: 30 },
+  goat: { label: "Bleat", animals: ["goat"], cues: [], cooldown: 20 },
+  donkey: { label: "Bray", animals: ["donkey"], cues: [], cooldown: 30 },
+  piglet: {
+    label: "Startled squeal",
+    animals: ["piglet"],
+    cues: [],
+    cooldown: 15,
+    ambient: false,
+    alarmCue: "flee",
+  },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(

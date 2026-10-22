@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "id": "farm-v1",
+  "license": "CC0-1.0",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "goat",
+      "creator": "aisselles",
+      "soundId": 722658,
+      "sourcePage": "https://freesound.org/people/aisselles/sounds/722658/",
+      "download": "https://cdn.freesound.org/previews/722/722658_3200333-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "goat-source.mp3",
+      "sha256": "26ac04544ffbc23bc1717144d2f8ba64e0d6a1e797aae15e7e907aa3ebc1cb83",
+      "bytes": 875952,
+      "variants": [
+        {
+          "path": "assets/audio/animals/farm-v1/goat-1.ogg",
+          "sha256": "58aa483bd842443f3dc4b8ae517be3b304d48b60928fecc37bff7aeca310aed2",
+          "trim": [0.85, 2.2],
+          "filters": "atrim=start=0.85:end=2.2,asetpts=PTS-STARTPTS,highpass=f=45,volume=11.258600787,afade=t=in:d=0.02,afade=t=out:st=1.310000:d=0.04",
+          "duration": 1.35,
+          "peak": 0.7367233037948608,
+          "rms": 0.1401721132943091
+        },
+        {
+          "path": "assets/audio/animals/farm-v1/goat-2.ogg",
+          "sha256": "6d5e1c37789f830e31142be2f04d108acd0729ffdf62f0f07153bdb7636fc8df",
+          "trim": [3.35, 4.25],
+          "filters": "atrim=start=3.35:end=4.25,asetpts=PTS-STARTPTS,highpass=f=45,volume=10.396278366,afade=t=in:d=0.02,afade=t=out:st=0.860000:d=0.04",
+          "duration": 0.8893333333333333,
+          "peak": 0.7461552619934082,
+          "rms": 0.13308591185899155
+        }
+      ]
+    },
+    {
+      "id": "donkey",
+      "creator": "felix.blume",
+      "soundId": 152907,
+      "sourcePage": "https://freesound.org/people/felix.blume/sounds/152907/",
+      "download": "https://cdn.freesound.org/previews/152/152907_1661766-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "donkey-source.mp3",
+      "sha256": "8d028530b16833528689502ffc1a574b11fc943c6cd2dee30c2e9ca6ff3cebf5",
+      "bytes": 367296,
+      "variants": [
+        {
+          "path": "assets/audio/animals/farm-v1/donkey-1.ogg",
+          "sha256": "e260ee8f423f7b40f69e60a674d29e0e871a8bf627b246c90f6248ebd2787607",
+          "trim": [4.8, 6.8],
+          "filters": "atrim=start=4.8:end=6.8,asetpts=PTS-STARTPTS,highpass=f=45,volume=0.721424857,afade=t=in:d=0.02,afade=t=out:st=1.960000:d=0.04",
+          "duration": 2.0,
+          "peak": 0.7507921457290649,
+          "rms": 0.10182533373505297
+        },
+        {
+          "path": "assets/audio/animals/farm-v1/donkey-2.ogg",
+          "sha256": "482e6c9bb83782eadda481559d763887bcc06eb19dbc323b2ccd638d2db75196",
+          "trim": [8.2, 9.4],
+          "filters": "atrim=start=8.2:end=9.4,asetpts=PTS-STARTPTS,highpass=f=45,volume=0.935205273,afade=t=in:d=0.02,afade=t=out:st=1.160000:d=0.04",
+          "duration": 1.2,
+          "peak": 0.7530146241188049,
+          "rms": 0.13329665567276117
+        }
+      ]
+    },
+    {
+      "id": "piglet",
+      "creator": "wwstudioswastaken",
+      "soundId": 618483,
+      "sourcePage": "https://freesound.org/people/wwstudioswastaken/sounds/618483/",
+      "download": "https://cdn.freesound.org/previews/618/618483_13582756-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "piglet-source.mp3",
+      "sha256": "bc8db3e3b5f3a8a1a68a6cd892e77fcbbc1325fb9f42333e0818e5d9c4514f6d",
+      "bytes": 35856,
+      "variants": [
+        {
+          "path": "assets/audio/animals/farm-v1/piglet-1.ogg",
+          "sha256": "2f86dea97e5999c22c2d4c2f08fa9703cd3503f8f1a16ce19c2f9104e7520cee",
+          "trim": [0, 1.429],
+          "filters": "atrim=start=0:end=1.429,asetpts=PTS-STARTPTS,highpass=f=45,volume=0.754769513,afade=t=in:d=0.02,afade=t=out:st=1.389000:d=0.04",
+          "duration": 1.429,
+          "peak": 0.754036545753479,
+          "rms": 0.10936465708244743
+        }
+      ]
+    }
+  ]
+}
