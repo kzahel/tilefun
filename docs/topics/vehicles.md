@@ -20,6 +20,11 @@ transporter page, scenario client/presentation host and test are unchanged.
 Investigate the pause/reload snapshot alignment before claiming clean browser
 acceptance. No test tolerance or runtime behavior was changed during this check.
 
+The later [184 renderer qualification](../tactical/184-ground-rendering-and-moving-racetrack.md)
+passes all 836 browser checks, including this transporter flow. This is a fresh
+green checkpoint; no pause/reload alignment fix or test tolerance change was made,
+so the earlier intermittent failure remains recorded.
+
 [169](../tactical/169-wheel-lift-towing.md) adds working wheel-lift towing to the
 existing tow truck. Back up to an unoccupied parked passenger car, Attach car,
 drive/reverse the articulated pair, stop and Release car. Both bodies share

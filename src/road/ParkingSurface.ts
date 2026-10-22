@@ -1,4 +1,4 @@
-import { isParkingObject, parkingLayout } from "../generation/regional/ParkingLayout.js";
+import { parkingLayout } from "../generation/regional/ParkingLayout.js";
 import type { SurfacePiece } from "./CitySurfaceRecipes.js";
 import { RoadType } from "./RoadType.js";
 import { surfaceCell, surfaceCellKey } from "./SurfaceCells.js";
@@ -6,7 +6,7 @@ import { surfaceCell, surfaceCellKey } from "./SurfaceCells.js";
 // Like commercial city surfaces, save the selected source cell in roadGrid.
 // These are current, unpromoted generation cells; existing road IDs stay fixed.
 const layout = parkingLayout("shopping");
-const ground = layout.pieces.filter((p) => !isParkingObject(p.label));
+const ground = layout.pieces.filter((p) => p.layer === "terrain");
 const cells: { pieces: SurfacePiece[]; road: boolean }[] = [];
 const indices = new Map<string, number>();
 const grid: number[] = [];

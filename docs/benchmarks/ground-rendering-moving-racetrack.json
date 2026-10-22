@@ -1,0 +1,2324 @@
+{
+  "date": "2026-10-22",
+  "status": "qualified-with-documented-wide-view-pacing-limits",
+  "base": "1c17ce8483813b06fbe07d1d12ffd1383784e9d7",
+  "method": {
+    "device": "Pixel 7a",
+    "native": true,
+    "viewportEmulation": false,
+    "cpuEmulation": false,
+    "authority": "ordinary dedicated game Worker",
+    "input": "native touch joystick; circuit aims ahead on the native closed lane polyline every 100ms",
+    "control": "saved original GpuRenderBackend and presentSurfaceScene substituted together; other current engine sources retained",
+    "isolation": "owned loopback origins, tabs and USB routes; no storage API requests to original origins",
+    "timing": "sequential, no host validation or deep profiling during clean samples; thermal status zero required at both boundaries",
+    "readiness": "visible chunk checks alongside once-per-second positions; separate full streaming readiness gate"
+  },
+  "limits": [
+    "Fresh seed-2026 generated venue, not the owner's saved world.",
+    "Callback cadence is not hardware GPU/display presentation or a sustained power guarantee.",
+    "Native admission and traffic can vary slightly; retain populations, driver pose and travel.",
+    "The first two exploratory controls predate coordinate rebasing and the sampled terrain counters; use the source-verified repeat and cooled depot pair for final comparisons.",
+    "Continuous cruise uses native analog throttle 0.6 to avoid catching racers; it is a different workload from the full-throttle matched gain comparisons.",
+    "Long full-throttle captures have blocked tails and are not continuous-driving acceptance.",
+    "Terrain counts sum once-per-second chunk observations, not unique chunks or per-frame readiness; wide-view stale/incomplete observations remain."
+  ],
+  "cases": [
+    {
+      "name": "phone-before",
+      "course": "racetrack",
+      "stage": "overview-drive",
+      "seconds": 20,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 0.1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 21.66559923144664,
+      "frame": {
+        "count": 433,
+        "mean": 46.15612009237875,
+        "p50": 50,
+        "p95": 66.79999999999563,
+        "p99": 100,
+        "max": 133.40000000000146
+      },
+      "framesOver25": 397,
+      "render": {
+        "count": 434,
+        "mean": 13.123271887752868,
+        "p50": 12.299999952316284,
+        "p95": 21.700000047683716,
+        "p99": 28.5,
+        "max": 35
+      },
+      "authorityHz": 60.00204372266757,
+      "authorityTick": {
+        "count": 1234,
+        "mean": 7.924959482791165,
+        "p50": 7.600000023841858,
+        "p95": 12,
+        "p99": 15.5,
+        "max": 24.100000023841858
+      },
+      "travel": {
+        "maximumDisplacement": 1401.5829197813964,
+        "sampledPath": 3083.8960626358353,
+        "samples": 21,
+        "minSampleStep": 103.73070225310603,
+        "firstSampleMs": 0,
+        "lastSampleMs": 20002.799999928473
+      },
+      "thermalStart": {
+        "batteryC": 24.7,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 24.8,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 257,
+        "props": 561,
+        "active": 67,
+        "residentPeople": 44,
+        "activePeople": 18,
+        "cars": 15,
+        "activeCars": 13,
+        "carsWithNonzeroVelocity": 4,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 5,
+          "traffic": 3
+        },
+        "views": [
+          {
+            "minCx": 28,
+            "minCy": 21,
+            "maxCx": 33,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 0
+      },
+      "populationEnd": {
+        "resident": 180,
+        "props": 320,
+        "active": 46,
+        "residentPeople": 48,
+        "activePeople": 18,
+        "cars": 18,
+        "activeCars": 17,
+        "carsWithNonzeroVelocity": 11,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 11
+        },
+        "views": [
+          {
+            "minCx": 24,
+            "minCy": 21,
+            "maxCx": 29,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 3
+      },
+      "driver": {
+        "course": "racetrack",
+        "model": "vehicle-v1:car-21",
+        "position": {
+          "wx": 7930.855566869274,
+          "wy": 6911.255688556609
+        },
+        "lane": "settlement:0:0:current-dense-district-v1:racetrack:ring:0:quarter:0"
+      },
+      "sampledTerrain": null,
+      "gpu": {
+        "rasterCallsPerFrame": 169.5635103926097,
+        "sourceUploadedBytes": 1774403536,
+        "meshCallsPerFrame": 49.92147806004619,
+        "overlayBuilds": null,
+        "overlayHits": null,
+        "overlayCulls": null,
+        "overlayResidentBytes": null
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "9a1ac88c7e8e8a53517d0dec814b39f64fa364cded90268dd17b92e22d54550f",
+        "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "4a504a577e1f4b43f02b0d3677e8d238c737e67bf91253f05c3d7b4d8970e2f5",
+        "city-audit-profile.mjs": "98d581820b5d185552c1cd01968f986fc2bdbe91a6a7e687e83b2a611c86147e",
+        "city-course.mjs": "d817ec3334972444a5c9a7804fe384bc44a7201f047cced9f6d2c62bee8032b1",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    },
+    {
+      "name": "phone-after",
+      "course": "racetrack",
+      "stage": "overview-drive",
+      "seconds": 20,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 0.1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 54.54836354909353,
+      "frame": {
+        "count": 1091,
+        "mean": 18.332355637030247,
+        "p50": 16.69999999999709,
+        "p95": 33.30000000000291,
+        "p99": 33.400000000001455,
+        "max": 83.30000000000291
+      },
+      "framesOver25": 99,
+      "render": {
+        "count": 1092,
+        "mean": 6.875549450789616,
+        "p50": 6.600000023841858,
+        "p95": 10.399999976158142,
+        "p99": 14.300000071525574,
+        "max": 81.20000004768372
+      },
+      "authorityHz": 59.995767032401574,
+      "authorityTick": {
+        "count": 1220,
+        "mean": 8.64147540878077,
+        "p50": 8.200000047683716,
+        "p95": 12.800000071525574,
+        "p99": 15.799999952316284,
+        "max": 44.89999997615814
+      },
+      "travel": {
+        "maximumDisplacement": 1386.1755066823678,
+        "sampledPath": 3072.6067786733893,
+        "samples": 21,
+        "minSampleStep": 123.1901676681357,
+        "firstSampleMs": 0,
+        "lastSampleMs": 20011.100000023842
+      },
+      "thermalStart": {
+        "batteryC": 25.2,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 25.7,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 257,
+        "props": 561,
+        "active": 68,
+        "residentPeople": 44,
+        "activePeople": 18,
+        "cars": 15,
+        "activeCars": 13,
+        "carsWithNonzeroVelocity": 5,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 5,
+          "traffic": 3
+        },
+        "views": [
+          {
+            "minCx": 28,
+            "minCy": 21,
+            "maxCx": 33,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 0
+      },
+      "populationEnd": {
+        "resident": 181,
+        "props": 320,
+        "active": 46,
+        "residentPeople": 48,
+        "activePeople": 18,
+        "cars": 19,
+        "activeCars": 17,
+        "carsWithNonzeroVelocity": 12,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 12
+        },
+        "views": [
+          {
+            "minCx": 24,
+            "minCy": 21,
+            "maxCx": 29,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 1
+      },
+      "driver": {
+        "course": "racetrack",
+        "model": "vehicle-v1:car-21",
+        "position": {
+          "wx": 7913.468636768747,
+          "wy": 6904.574980181534
+        },
+        "lane": "settlement:0:0:current-dense-district-v1:racetrack:ring:0:quarter:0"
+      },
+      "sampledTerrain": null,
+      "gpu": {
+        "rasterCallsPerFrame": 30.2089825847846,
+        "sourceUploadedBytes": 75367896,
+        "meshCallsPerFrame": 47.03024747937672,
+        "overlayBuilds": null,
+        "overlayHits": null,
+        "overlayCulls": null,
+        "overlayResidentBytes": 27540
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/GpuOverlayResources.ts": "3f62851bf8f7552df849410be933589910c6e94e7ca32eb9e5d65c01ba15f4d5",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "3371e3ea474243f99b1a816cf2d963c9ea733916a795ccc1637671d44e418ef3",
+        "city-audit-profile.mjs": "1207a681650103bdd1136a69f96251af617ee132ccfbb9a4301024d2c11deeda",
+        "city-course.mjs": "e75f296ef96c7253cf9d305faecc254181b3c7660fe07f86ad67a054271b4afa",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    },
+    {
+      "name": "track-after-repeat",
+      "course": "racetrack",
+      "stage": "overview-drive",
+      "seconds": 20,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 0.1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 54.45789639497726,
+      "frame": {
+        "count": 1089,
+        "mean": 18.362809917355374,
+        "p50": 16.69999999999709,
+        "p95": 33.30000000000291,
+        "p99": 33.400000000001455,
+        "max": 100
+      },
+      "framesOver25": 100,
+      "render": {
+        "count": 1090,
+        "mean": 6.848073394254807,
+        "p50": 6.399999976158142,
+        "p95": 10.5,
+        "p99": 13.399999976158142,
+        "max": 109.79999995231628
+      },
+      "authorityHz": 59.98900393994724,
+      "authorityTick": {
+        "count": 1223,
+        "mean": 9.00327064546521,
+        "p50": 8.599999904632568,
+        "p95": 13.599999904632568,
+        "p99": 18.399999976158142,
+        "max": 30.100000023841858
+      },
+      "travel": {
+        "maximumDisplacement": 1388.382486876942,
+        "sampledPath": 3076.1777729593837,
+        "samples": 21,
+        "minSampleStep": 106.25528629289582,
+        "firstSampleMs": 0,
+        "lastSampleMs": 20006.899999928475
+      },
+      "thermalStart": {
+        "batteryC": 26.6,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 26.6,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 257,
+        "props": 561,
+        "active": 68,
+        "residentPeople": 44,
+        "activePeople": 18,
+        "cars": 15,
+        "activeCars": 13,
+        "carsWithNonzeroVelocity": 5,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 5,
+          "traffic": 3
+        },
+        "views": [
+          {
+            "minCx": 28,
+            "minCy": 21,
+            "maxCx": 33,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 1
+      },
+      "populationEnd": {
+        "resident": 180,
+        "props": 320,
+        "active": 46,
+        "residentPeople": 48,
+        "activePeople": 18,
+        "cars": 18,
+        "activeCars": 17,
+        "carsWithNonzeroVelocity": 11,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 11
+        },
+        "views": [
+          {
+            "minCx": 24,
+            "minCy": 21,
+            "maxCx": 29,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 0
+      },
+      "driver": {
+        "course": "racetrack",
+        "model": "vehicle-v1:car-21",
+        "position": {
+          "wx": 7916.819179986538,
+          "wy": 6905.8360353530925
+        },
+        "lane": "settlement:0:0:current-dense-district-v1:racetrack:ring:0:quarter:0"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 0,
+        "stale": 10
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 30.33884297520661,
+        "sourceUploadedBytes": 75417048,
+        "meshCallsPerFrame": 47.264462809917354,
+        "overlayBuilds": 0,
+        "overlayHits": 2294,
+        "overlayCulls": 988,
+        "overlayResidentBytes": 27540
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    },
+    {
+      "name": "track-before-repeat",
+      "course": "racetrack",
+      "stage": "overview-drive",
+      "seconds": 20,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 0.1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 19.403977815452166,
+      "frame": {
+        "count": 388,
+        "mean": 51.53582474226805,
+        "p50": 50,
+        "p95": 66.79999999999563,
+        "p99": 99.90000000000146,
+        "max": 133.3000000000029
+      },
+      "framesOver25": 382,
+      "render": {
+        "count": 389,
+        "mean": 14.159640108098714,
+        "p50": 13.699999928474426,
+        "p95": 22.100000023841858,
+        "p99": 28.799999952316284,
+        "max": 44
+      },
+      "authorityHz": 59.99893650215559,
+      "authorityTick": {
+        "count": 1242,
+        "mean": 9.323188405010052,
+        "p50": 8.699999928474426,
+        "p95": 14.399999976158142,
+        "p99": 19.399999976158142,
+        "max": 28.5
+      },
+      "travel": {
+        "maximumDisplacement": 1396.1686020897828,
+        "sampledPath": 3087.4506652605523,
+        "samples": 21,
+        "minSampleStep": 62.137432490158254,
+        "firstSampleMs": 0,
+        "lastSampleMs": 20014.899999952315
+      },
+      "thermalStart": {
+        "batteryC": 26.7,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 26.9,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 257,
+        "props": 561,
+        "active": 67,
+        "residentPeople": 44,
+        "activePeople": 18,
+        "cars": 15,
+        "activeCars": 13,
+        "carsWithNonzeroVelocity": 4,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 4,
+          "traffic": 4
+        },
+        "views": [
+          {
+            "minCx": 28,
+            "minCy": 21,
+            "maxCx": 33,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 0
+      },
+      "populationEnd": {
+        "resident": 180,
+        "props": 320,
+        "active": 46,
+        "residentPeople": 48,
+        "activePeople": 18,
+        "cars": 18,
+        "activeCars": 17,
+        "carsWithNonzeroVelocity": 11,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 11
+        },
+        "views": [
+          {
+            "minCx": 24,
+            "minCy": 21,
+            "maxCx": 29,
+            "maxCy": 31
+          }
+        ],
+        "inputQueue": 0
+      },
+      "driver": {
+        "course": "racetrack",
+        "model": "vehicle-v1:car-21",
+        "position": {
+          "wx": 7922.40653836928,
+          "wy": 6907.938968139182
+        },
+        "lane": "settlement:0:0:current-dense-district-v1:racetrack:ring:0:quarter:0"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 11,
+        "stale": 4
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 177.14175257731958,
+        "sourceUploadedBytes": 1604683148,
+        "meshCallsPerFrame": 48.18814432989691,
+        "overlayBuilds": 0,
+        "overlayHits": 0,
+        "overlayCulls": 0,
+        "overlayResidentBytes": null
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "6e5db937b903d945b1515586fbcd7a94c3556283849b74917466ef3ab85282dd",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    },
+    {
+      "name": "depot-before",
+      "course": "depot",
+      "stage": "overview-drive",
+      "seconds": 16,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 0.1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 17.13099584854699,
+      "frame": {
+        "count": 274,
+        "mean": 58.37372262773723,
+        "p50": 50,
+        "p95": 83.40000000000146,
+        "p99": 116.70000000000437,
+        "max": 133.3000000000029
+      },
+      "framesOver25": 268,
+      "render": {
+        "count": 275,
+        "mean": 15.848727273507551,
+        "p50": 14.900000095367432,
+        "p95": 24.600000023841858,
+        "p99": 28.399999976158142,
+        "max": 39.89999997615814
+      },
+      "authorityHz": 59.90570640888277,
+      "authorityTick": {
+        "count": 987,
+        "mean": 11.160486320473382,
+        "p50": 10.300000071525574,
+        "p95": 18,
+        "p99": 22.699999928474426,
+        "max": 34.5
+      },
+      "travel": {
+        "maximumDisplacement": 1274.0462964899798,
+        "sampledPath": 1339.007068121835,
+        "samples": 17,
+        "minSampleStep": 0.0,
+        "firstSampleMs": 0,
+        "lastSampleMs": 16015.600000023842
+      },
+      "thermalStart": {
+        "batteryC": 27,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 140,
+        "props": 221,
+        "active": 63,
+        "residentPeople": 48,
+        "activePeople": 42,
+        "cars": 16,
+        "activeCars": 14,
+        "carsWithNonzeroVelocity": 8,
+        "movingPeople": 24,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 8,
+          "traffic": 1
+        },
+        "views": [
+          {
+            "minCx": 24,
+            "minCy": 22,
+            "maxCx": 29,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 2
+      },
+      "populationEnd": {
+        "resident": 249,
+        "props": 572,
+        "active": 94,
+        "residentPeople": 42,
+        "activePeople": 42,
+        "cars": 15,
+        "activeCars": 12,
+        "carsWithNonzeroVelocity": 5,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "traffic": 5,
+          "": 2,
+          "starting": 1
+        },
+        "views": [
+          {
+            "minCx": 29,
+            "minCy": 22,
+            "maxCx": 34,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 0
+      },
+      "driver": {
+        "course": "depot",
+        "model": "vehicle-v1:rosso-coupe",
+        "position": {
+          "wx": 6960,
+          "wy": 7104
+        },
+        "lane": "placed-vehicle-v1:settlement:0:0:current-dense-district-v1:racetrack:vehicle-depot:bridge-car"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 0,
+        "stale": 0
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 272.6094890510949,
+        "sourceUploadedBytes": 1101776452,
+        "meshCallsPerFrame": 35.86861313868613,
+        "overlayBuilds": 0,
+        "overlayHits": 0,
+        "overlayCulls": 0,
+        "overlayResidentBytes": null
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "6e5db937b903d945b1515586fbcd7a94c3556283849b74917466ef3ab85282dd",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "mixed moving/stationary characterization",
+      "stoppedFullMotionIntervals": [
+        {
+          "fromMs": 10513.400000000001,
+          "toMs": 11546.300000000003
+        },
+        {
+          "fromMs": 11546.300000000003,
+          "toMs": 12595.800000000003
+        },
+        {
+          "fromMs": 12595.800000000003,
+          "toMs": 13645.400000000001
+        },
+        {
+          "fromMs": 13645.400000000001,
+          "toMs": 14678.199999999997
+        },
+        {
+          "fromMs": 14678.199999999997,
+          "toMs": 15744.5
+        }
+      ]
+    },
+    {
+      "name": "depot-before-cooled",
+      "course": "depot",
+      "stage": "overview-drive",
+      "seconds": 16,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 0.1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 19.39293846808298,
+      "frame": {
+        "count": 310,
+        "mean": 51.56516129032257,
+        "p50": 50,
+        "p95": 83.30000000000291,
+        "p99": 100,
+        "max": 133.40000000000146
+      },
+      "framesOver25": 296,
+      "render": {
+        "count": 311,
+        "mean": 14.689710613615643,
+        "p50": 13.799999952316284,
+        "p95": 22.700000047683716,
+        "p99": 26.100000023841858,
+        "max": 117.60000002384186
+      },
+      "authorityHz": 59.99987745900662,
+      "authorityTick": {
+        "count": 986,
+        "mean": 9.883265721024172,
+        "p50": 9.5,
+        "p95": 14.300000071525574,
+        "p99": 18.799999952316284,
+        "max": 37
+      },
+      "travel": {
+        "maximumDisplacement": 1271.4461462997242,
+        "sampledPath": 1796.0830448519746,
+        "samples": 17,
+        "minSampleStep": 20.00071243875209,
+        "firstSampleMs": 0,
+        "lastSampleMs": 16004.199999999997
+      },
+      "thermalStart": {
+        "batteryC": 26,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 26,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 140,
+        "props": 221,
+        "active": 63,
+        "residentPeople": 48,
+        "activePeople": 42,
+        "cars": 16,
+        "activeCars": 14,
+        "carsWithNonzeroVelocity": 9,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 9
+        },
+        "views": [
+          {
+            "minCx": 24,
+            "minCy": 22,
+            "maxCx": 29,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 1
+      },
+      "populationEnd": {
+        "resident": 203,
+        "props": 343,
+        "active": 74,
+        "residentPeople": 48,
+        "activePeople": 44,
+        "cars": 19,
+        "activeCars": 15,
+        "carsWithNonzeroVelocity": 13,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 8,
+          "starting": 4
+        },
+        "views": [
+          {
+            "minCx": 27,
+            "minCy": 22,
+            "maxCx": 32,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 0
+      },
+      "driver": {
+        "course": "depot",
+        "model": "vehicle-v1:rosso-coupe",
+        "position": {
+          "wx": 6960,
+          "wy": 7104
+        },
+        "lane": "placed-vehicle-v1:settlement:0:0:current-dense-district-v1:racetrack:vehicle-depot:bridge-car"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 0,
+        "stale": 0
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 243.64193548387098,
+        "sourceUploadedBytes": 1250571880,
+        "meshCallsPerFrame": 43.41935483870968,
+        "overlayBuilds": 0,
+        "overlayHits": 0,
+        "overlayCulls": 0,
+        "overlayResidentBytes": null
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "b71ac6ed5276048a27c872f374fdb61cf14e7df9e99a4345c6f11c19390cb879",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "6e5db937b903d945b1515586fbcd7a94c3556283849b74917466ef3ab85282dd",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    },
+    {
+      "name": "depot-after",
+      "course": "depot",
+      "stage": "overview-drive",
+      "seconds": 16,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 0.1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 52.6822919925419,
+      "frame": {
+        "count": 842,
+        "mean": 18.98171021377672,
+        "p50": 16.69999999999709,
+        "p95": 33.39999999999418,
+        "p99": 50,
+        "max": 66.70000000000437
+      },
+      "framesOver25": 103,
+      "render": {
+        "count": 843,
+        "mean": 8.424911032792089,
+        "p50": 8,
+        "p95": 12.800000071525574,
+        "p99": 17.699999928474426,
+        "max": 36.89999997615814
+      },
+      "authorityHz": 59.622697413966385,
+      "authorityTick": {
+        "count": 970,
+        "mean": 12.92175257660679,
+        "p50": 12.199999928474426,
+        "p95": 20.100000023841858,
+        "p99": 28.100000023841858,
+        "max": 46.10000002384186
+      },
+      "travel": {
+        "maximumDisplacement": 1181.1562879012508,
+        "sampledPath": 1709.2010680148733,
+        "samples": 17,
+        "minSampleStep": 29.139575083745513,
+        "firstSampleMs": 0,
+        "lastSampleMs": 16000.300000023839
+      },
+      "thermalStart": {
+        "batteryC": 26.1,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 26.1,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 142,
+        "props": 221,
+        "active": 65,
+        "residentPeople": 48,
+        "activePeople": 42,
+        "cars": 18,
+        "activeCars": 16,
+        "carsWithNonzeroVelocity": 10,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 10,
+          "traffic": 1
+        },
+        "views": [
+          {
+            "minCx": 24,
+            "minCy": 22,
+            "maxCx": 29,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 1
+      },
+      "populationEnd": {
+        "resident": 207,
+        "props": 351,
+        "active": 76,
+        "residentPeople": 48,
+        "activePeople": 46,
+        "cars": 19,
+        "activeCars": 15,
+        "carsWithNonzeroVelocity": 13,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 8,
+          "starting": 4
+        },
+        "views": [
+          {
+            "minCx": 26,
+            "minCy": 22,
+            "maxCx": 32,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 1
+      },
+      "driver": {
+        "course": "depot",
+        "model": "vehicle-v1:rosso-coupe",
+        "position": {
+          "wx": 6960,
+          "wy": 7104
+        },
+        "lane": "placed-vehicle-v1:settlement:0:0:current-dense-district-v1:racetrack:vehicle-depot:bridge-car"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 0,
+        "stale": 0
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 32.195961995249405,
+        "sourceUploadedBytes": 26738912,
+        "meshCallsPerFrame": 47.90142517814727,
+        "overlayBuilds": 0,
+        "overlayHits": 2535,
+        "overlayCulls": 0,
+        "overlayResidentBytes": 27540
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    },
+    {
+      "name": "track-normal-after",
+      "course": "racetrack",
+      "stage": "drive",
+      "seconds": 40,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 59.40846570636313,
+      "frame": {
+        "count": 2376,
+        "mean": 16.832617845117852,
+        "p50": 16.69999999999709,
+        "p95": 16.799999999995634,
+        "p99": 16.80000000000291,
+        "max": 66.70000000000437
+      },
+      "framesOver25": 22,
+      "render": {
+        "count": 2377,
+        "mean": 2.5320151446494528,
+        "p50": 2.399999976158142,
+        "p95": 4.200000047683716,
+        "p99": 5.299999952316284,
+        "max": 8.600000023841858
+      },
+      "authorityHz": 59.998862201476875,
+      "authorityTick": {
+        "count": 2427,
+        "mean": 8.597981046883717,
+        "p50": 8.5,
+        "p95": 11.699999928474426,
+        "p99": 13.400000095367432,
+        "max": 25.100000023841858
+      },
+      "travel": {
+        "maximumDisplacement": 1509.419189884505,
+        "sampledPath": 3962.685328992577,
+        "samples": 41,
+        "minSampleStep": 0.0,
+        "firstSampleMs": 0,
+        "lastSampleMs": 40005.099999976155
+      },
+      "thermalStart": {
+        "batteryC": 27.5,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 27.5,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 207,
+        "props": 469,
+        "active": 83,
+        "residentPeople": 42,
+        "activePeople": 42,
+        "cars": 14,
+        "activeCars": 11,
+        "carsWithNonzeroVelocity": 5,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 6,
+          "traffic": 1
+        },
+        "views": [
+          {
+            "minCx": 31,
+            "minCy": 26,
+            "maxCx": 31,
+            "maxCy": 27
+          }
+        ],
+        "inputQueue": 1
+      },
+      "populationEnd": {
+        "resident": 206,
+        "props": 469,
+        "active": 83,
+        "residentPeople": 42,
+        "activePeople": 42,
+        "cars": 13,
+        "activeCars": 11,
+        "carsWithNonzeroVelocity": 2,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 3,
+          "traffic": 3
+        },
+        "views": [
+          {
+            "minCx": 31,
+            "minCy": 26,
+            "maxCx": 31,
+            "maxCy": 27
+          }
+        ],
+        "inputQueue": 1
+      },
+      "driver": {
+        "course": "racetrack",
+        "model": "vehicle-v1:car-21",
+        "position": {
+          "wx": 8080.589693280965,
+          "wy": 7020.957506644381
+        },
+        "lane": "settlement:0:0:current-dense-district-v1:racetrack:ring:0:quarter:0"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 0,
+        "stale": 0
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 4.841750841750842,
+        "sourceUploadedBytes": 17301504,
+        "meshCallsPerFrame": 9.228535353535353,
+        "overlayBuilds": 0,
+        "overlayHits": 0,
+        "overlayCulls": 6069,
+        "overlayResidentBytes": 2225152
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "mixed moving/stationary characterization",
+      "stoppedFullMotionIntervals": [
+        {
+          "fromMs": 26329.3,
+          "toMs": 27345.8
+        },
+        {
+          "fromMs": 27345.8,
+          "toMs": 28362.399999999998
+        },
+        {
+          "fromMs": 28362.399999999998,
+          "toMs": 29378.899999999998
+        },
+        {
+          "fromMs": 29378.899999999998,
+          "toMs": 30378.899999999998
+        },
+        {
+          "fromMs": 30378.899999999998,
+          "toMs": 31395.3
+        },
+        {
+          "fromMs": 31395.3,
+          "toMs": 32411.899999999998
+        },
+        {
+          "fromMs": 32411.899999999998,
+          "toMs": 33428.3
+        },
+        {
+          "fromMs": 33428.3,
+          "toMs": 34444.8
+        },
+        {
+          "fromMs": 34444.8,
+          "toMs": 35461.3
+        },
+        {
+          "fromMs": 35461.3,
+          "toMs": 36477.8
+        },
+        {
+          "fromMs": 36477.8,
+          "toMs": 37494.399999999994
+        },
+        {
+          "fromMs": 37494.399999999994,
+          "toMs": 38510.899999999994
+        },
+        {
+          "fromMs": 38510.899999999994,
+          "toMs": 39510.899999999994
+        }
+      ]
+    },
+    {
+      "name": "track-long-after",
+      "course": "racetrack",
+      "stage": "overview-drive",
+      "seconds": 60,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 0.1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 54.07937531986691,
+      "frame": {
+        "count": 3244,
+        "mean": 18.49133785450059,
+        "p50": 16.69999999999709,
+        "p95": 33.30000000000291,
+        "p99": 50,
+        "max": 150
+      },
+      "framesOver25": 300,
+      "render": {
+        "count": 3245,
+        "mean": 7.319322034794671,
+        "p50": 6.800000071525574,
+        "p95": 11.599999904632568,
+        "p99": 15.399999976158142,
+        "max": 72.90000009536743
+      },
+      "authorityHz": 59.36887096279674,
+      "authorityTick": {
+        "count": 3591,
+        "mean": 11.218212197265794,
+        "p50": 10.299999952316284,
+        "p95": 18.5,
+        "p99": 26.100000023841858,
+        "max": 80.09999990463257
+      },
+      "travel": {
+        "maximumDisplacement": 1522.5597228674237,
+        "sampledPath": 4514.092415986214,
+        "samples": 60,
+        "minSampleStep": 0.0,
+        "firstSampleMs": 0,
+        "lastSampleMs": 60000.3
+      },
+      "thermalStart": {
+        "batteryC": 27.5,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 27.5,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 251,
+        "props": 573,
+        "active": 93,
+        "residentPeople": 42,
+        "activePeople": 42,
+        "cars": 14,
+        "activeCars": 11,
+        "carsWithNonzeroVelocity": 5,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 6,
+          "traffic": 1
+        },
+        "views": [
+          {
+            "minCx": 28,
+            "minCy": 22,
+            "maxCx": 34,
+            "maxCy": 32
+          }
+        ],
+        "inputQueue": 0
+      },
+      "populationEnd": {
+        "resident": 230,
+        "props": 532,
+        "active": 84,
+        "residentPeople": 42,
+        "activePeople": 42,
+        "cars": 14,
+        "activeCars": 11,
+        "carsWithNonzeroVelocity": 3,
+        "movingPeople": 2,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 4,
+          "traffic": 3
+        },
+        "views": [
+          {
+            "minCx": 29,
+            "minCy": 24,
+            "maxCx": 34,
+            "maxCy": 34
+          }
+        ],
+        "inputQueue": 1
+      },
+      "driver": {
+        "course": "racetrack",
+        "model": "vehicle-v1:car-21",
+        "position": {
+          "wx": 8099.6609089494905,
+          "wy": 7045.314382071407
+        },
+        "lane": "settlement:0:0:current-dense-district-v1:racetrack:ring:0:quarter:0"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 1,
+        "stale": 16
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 27.932182490752158,
+        "sourceUploadedBytes": 106999852,
+        "meshCallsPerFrame": 25.117139334155365,
+        "overlayBuilds": 0,
+        "overlayHits": 8828,
+        "overlayCulls": 913,
+        "overlayResidentBytes": 27540
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "mixed moving/stationary characterization",
+      "stoppedFullMotionIntervals": [
+        {
+          "fromMs": 31593.2,
+          "toMs": 32609.499999999996
+        },
+        {
+          "fromMs": 32609.499999999996,
+          "toMs": 33625.899999999994
+        },
+        {
+          "fromMs": 33625.899999999994,
+          "toMs": 34642.2
+        },
+        {
+          "fromMs": 34642.2,
+          "toMs": 35658.600000000006
+        },
+        {
+          "fromMs": 35658.600000000006,
+          "toMs": 36675
+        },
+        {
+          "fromMs": 36675,
+          "toMs": 37691.5
+        },
+        {
+          "fromMs": 37691.5,
+          "toMs": 38708
+        },
+        {
+          "fromMs": 38708,
+          "toMs": 39724.5
+        },
+        {
+          "fromMs": 39724.5,
+          "toMs": 40741.100000000006
+        },
+        {
+          "fromMs": 40741.100000000006,
+          "toMs": 41757.600000000006
+        },
+        {
+          "fromMs": 41757.600000000006,
+          "toMs": 42774
+        },
+        {
+          "fromMs": 42774,
+          "toMs": 43790.2
+        },
+        {
+          "fromMs": 43790.2,
+          "toMs": 44806.7
+        },
+        {
+          "fromMs": 44806.7,
+          "toMs": 45823
+        },
+        {
+          "fromMs": 45823,
+          "toMs": 46839.5
+        },
+        {
+          "fromMs": 46839.5,
+          "toMs": 47855.8
+        },
+        {
+          "fromMs": 47855.8,
+          "toMs": 48872.3
+        },
+        {
+          "fromMs": 48872.3,
+          "toMs": 49888.7
+        },
+        {
+          "fromMs": 49888.7,
+          "toMs": 50905.100000000006
+        },
+        {
+          "fromMs": 50905.100000000006,
+          "toMs": 51921.40000000001
+        },
+        {
+          "fromMs": 51921.40000000001,
+          "toMs": 52937.7
+        },
+        {
+          "fromMs": 52937.7,
+          "toMs": 53954.2
+        },
+        {
+          "fromMs": 53954.2,
+          "toMs": 54970.600000000006
+        },
+        {
+          "fromMs": 54970.600000000006,
+          "toMs": 55987.100000000006
+        },
+        {
+          "fromMs": 55987.100000000006,
+          "toMs": 57003.5
+        },
+        {
+          "fromMs": 57003.5,
+          "toMs": 58019.90000000001
+        },
+        {
+          "fromMs": 58019.90000000001,
+          "toMs": 59036.2
+        },
+        {
+          "fromMs": 59036.2,
+          "toMs": 60000.3
+        }
+      ]
+    },
+    {
+      "name": "depot-walk-after",
+      "course": "depot",
+      "stage": "walk",
+      "seconds": 16,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 59.2666687505861,
+      "frame": {
+        "count": 948,
+        "mean": 16.87289029535865,
+        "p50": 16.69999999999709,
+        "p95": 16.799999999995634,
+        "p99": 33.299999999995634,
+        "max": 33.5
+      },
+      "framesOver25": 12,
+      "render": {
+        "count": 949,
+        "mean": 2.5394099055150536,
+        "p50": 2.3000000715255737,
+        "p95": 4.300000071525574,
+        "p99": 5.200000047683716,
+        "max": 7.399999976158142
+      },
+      "authorityHz": 60.00049148384295,
+      "authorityTick": {
+        "count": 978,
+        "mean": 9.463292434415447,
+        "p50": 9.5,
+        "p95": 12.300000071525574,
+        "p99": 14.299999952316284,
+        "max": 22.5
+      },
+      "travel": {
+        "maximumDisplacement": 591.3714432500001,
+        "sampledPath": 1153.2974301249997,
+        "samples": 17,
+        "minSampleStep": 50.303289499999664,
+        "firstSampleMs": 0,
+        "lastSampleMs": 16004.79999997616
+      },
+      "thermalStart": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 114,
+        "props": 177,
+        "active": 67,
+        "residentPeople": 48,
+        "activePeople": 42,
+        "cars": 18,
+        "activeCars": 18,
+        "carsWithNonzeroVelocity": 10,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 10,
+          "road unavailable": 1
+        },
+        "views": [
+          {
+            "minCx": 26,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 28
+          }
+        ],
+        "inputQueue": 0
+      },
+      "populationEnd": {
+        "resident": 114,
+        "props": 177,
+        "active": 65,
+        "residentPeople": 48,
+        "activePeople": 42,
+        "cars": 18,
+        "activeCars": 16,
+        "carsWithNonzeroVelocity": 11,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 11
+        },
+        "views": [
+          {
+            "minCx": 26,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 28
+          }
+        ],
+        "inputQueue": 0
+      },
+      "driver": {},
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 0,
+        "stale": 0
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 4.725738396624473,
+        "sourceUploadedBytes": 9024192,
+        "meshCallsPerFrame": 3.827004219409283,
+        "overlayBuilds": 1,
+        "overlayHits": 429,
+        "overlayCulls": 2426,
+        "overlayResidentBytes": 1356480
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    },
+    {
+      "name": "depot-normal-after",
+      "course": "depot",
+      "stage": "drive",
+      "seconds": 16,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 58.96388462066982,
+      "frame": {
+        "count": 944,
+        "mean": 16.95953389830509,
+        "p50": 16.69999999999709,
+        "p95": 16.799999999995634,
+        "p99": 33.30000000000291,
+        "max": 33.400000000001455
+      },
+      "framesOver25": 17,
+      "render": {
+        "count": 945,
+        "mean": 2.662539681303438,
+        "p50": 2.5,
+        "p95": 4.5,
+        "p99": 5.5,
+        "max": 6.099999904632568
+      },
+      "authorityHz": 59.99975471089275,
+      "authorityTick": {
+        "count": 978,
+        "mean": 9.789059304996014,
+        "p50": 9.700000047683716,
+        "p95": 13.100000023841858,
+        "p99": 15.799999952316284,
+        "max": 19.200000047683716
+      },
+      "travel": {
+        "maximumDisplacement": 1255.9883861405897,
+        "sampledPath": 1791.5085488325449,
+        "samples": 17,
+        "minSampleStep": 20.571874037585076,
+        "firstSampleMs": 0,
+        "lastSampleMs": 16016
+      },
+      "thermalStart": {
+        "batteryC": 28.7,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 28.7,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 115,
+        "props": 177,
+        "active": 67,
+        "residentPeople": 48,
+        "activePeople": 42,
+        "cars": 19,
+        "activeCars": 18,
+        "carsWithNonzeroVelocity": 11,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 11,
+          "road unavailable": 1
+        },
+        "views": [
+          {
+            "minCx": 26,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 28
+          }
+        ],
+        "inputQueue": 1
+      },
+      "populationEnd": {
+        "resident": 167,
+        "props": 281,
+        "active": 76,
+        "residentPeople": 48,
+        "activePeople": 46,
+        "cars": 19,
+        "activeCars": 15,
+        "carsWithNonzeroVelocity": 13,
+        "movingPeople": 2,
+        "trafficWaiting": {
+          "parked": 7,
+          "traffic": 2,
+          "": 6,
+          "starting": 4
+        },
+        "views": [
+          {
+            "minCx": 29,
+            "minCy": 27,
+            "maxCx": 30,
+            "maxCy": 28
+          }
+        ],
+        "inputQueue": 0
+      },
+      "driver": {
+        "course": "depot",
+        "model": "vehicle-v1:rosso-coupe",
+        "position": {
+          "wx": 6960,
+          "wy": 7104
+        },
+        "lane": "placed-vehicle-v1:settlement:0:0:current-dense-district-v1:racetrack:vehicle-depot:bridge-car"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 0,
+        "stale": 0
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 5.727754237288136,
+        "sourceUploadedBytes": 7251648,
+        "meshCallsPerFrame": 9.901483050847459,
+        "overlayBuilds": 2,
+        "overlayHits": 482,
+        "overlayCulls": 2357,
+        "overlayResidentBytes": 2225152
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "14460ddc02cf31101b9db562956d10cbc724eaf1e6883f02aeb260da3f20f28d",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 1,
+      "assertMoving": false,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    },
+    {
+      "name": "track-cruise-normal",
+      "course": "racetrack",
+      "stage": "drive",
+      "seconds": 60,
+      "warmSeconds": 8,
+      "browser": "155.0.8059.79",
+      "zoom": 1,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "fps": 59.41042857166669,
+      "frame": {
+        "count": 3565,
+        "mean": 16.83206171107993,
+        "p50": 16.69999999999709,
+        "p95": 16.79999999998836,
+        "p99": 33.19999999999709,
+        "max": 33.40000000000873
+      },
+      "framesOver25": 37,
+      "render": {
+        "count": 3566,
+        "mean": 2.582361188719798,
+        "p50": 2.5,
+        "p95": 4.099999904632568,
+        "p99": 5.099999904632568,
+        "max": 7
+      },
+      "authorityHz": 59.99957015945861,
+      "authorityTick": {
+        "count": 3629,
+        "mean": 8.992284375171288,
+        "p50": 9,
+        "p95": 12.300000071525574,
+        "p99": 14.199999928474426,
+        "max": 18.600000023841858
+      },
+      "travel": {
+        "maximumDisplacement": 1520.089324266961,
+        "sampledPath": 5597.600068397967,
+        "samples": 61,
+        "minSampleStep": 3.112304687585902,
+        "firstSampleMs": 0,
+        "lastSampleMs": 60016.80000002384
+      },
+      "thermalStart": {
+        "batteryC": 28.4,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 28.3,
+        "thermalStatus": 0
+      },
+      "populationBegin": {
+        "resident": 207,
+        "props": 469,
+        "active": 83,
+        "residentPeople": 42,
+        "activePeople": 42,
+        "cars": 14,
+        "activeCars": 11,
+        "carsWithNonzeroVelocity": 5,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 6,
+          "traffic": 1
+        },
+        "views": [
+          {
+            "minCx": 31,
+            "minCy": 27,
+            "maxCx": 31,
+            "maxCy": 28
+          }
+        ],
+        "inputQueue": 0
+      },
+      "populationEnd": {
+        "resident": 105,
+        "props": 117,
+        "active": 58,
+        "residentPeople": 51,
+        "activePeople": 30,
+        "cars": 20,
+        "activeCars": 19,
+        "carsWithNonzeroVelocity": 13,
+        "movingPeople": 0,
+        "trafficWaiting": {
+          "parked": 7,
+          "": 13
+        },
+        "views": [
+          {
+            "minCx": 27,
+            "minCy": 29,
+            "maxCx": 28,
+            "maxCy": 30
+          }
+        ],
+        "inputQueue": 0
+      },
+      "driver": {
+        "course": "racetrack",
+        "model": "vehicle-v1:car-21",
+        "position": {
+          "wx": 8098.731857022986,
+          "wy": 7044.017891609483
+        },
+        "lane": "settlement:0:0:current-dense-district-v1:racetrack:ring:0:quarter:0"
+      },
+      "sampledTerrain": {
+        "missing": 0,
+        "incomplete": 0,
+        "stale": 0
+      },
+      "gpu": {
+        "rasterCallsPerFrame": 5.400280504908836,
+        "sourceUploadedBytes": 24903680,
+        "meshCallsPerFrame": 12.656661991584853,
+        "overlayBuilds": 0,
+        "overlayHits": 0,
+        "overlayCulls": 8931,
+        "overlayResidentBytes": 2225152
+      },
+      "pageErrors": [],
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "463b30b15c5172faac8bc0001d623b04d1ea965809d8f94ba72b3eda8d6b93ff",
+        "src/traffic/TrafficSystem.ts": "27c7c079afa18c61eeace2d97d6b052deb457144587f80fbd0d71f29b2cfd53c",
+        "src/traffic/MovingSupport.ts": "ebdf5d6905fa84728d0f02c94e6e26cc3f5dafc6f0f852857a412d342ad81806",
+        "src/traffic/Driving.ts": "f44eaf7085ff2fca4892fd961aa38b1048c351f1897c24bb3511e63cbdcc5924",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "00b4786ce379cde00331218bd89f061ae16cbe7cbbf3eac369041c164a4eef8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/TileRenderer.ts": "de6599573abcb300fa95ee534b76239461a4f02c157e11da83ab67e23f7de5db",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "ce0e17d1122f523f2b36c4edf2193f41e8ee79d9f37f32e666a23ce51819ee64",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "probesSHA256": {
+        "city-audit.mjs": "5c943459cb21c9a1515c82e6297582f19aa2dbd3258629480222521d0ecaf18a",
+        "city-audit-profile.mjs": "fb1fe8f58867774df2c467360f3036a815e5e720eec4dd146fb235fdce5d751f",
+        "city-course.mjs": "61b3027c6ea73d6b125331c64e98e827af846728a58c1b1e294190580950c009",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "courseStrength": 0.6,
+      "assertMoving": true,
+      "classification": "moving at sampled resolution",
+      "stoppedFullMotionIntervals": []
+    }
+  ],
+  "excluded": [
+    {
+      "name": "depot-after-thermal-excluded",
+      "reason": "Error: Thermal status changed; stopping after retained case",
+      "cases": 1,
+      "thermalStart": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 27.9,
+        "thermalStatus": 1
+      },
+      "timingAccepted": false,
+      "motionOnly": {
+        "samples": 17,
+        "firstMs": 0,
+        "lastMs": 16025.600000071528,
+        "sampledPath": 1726.8865675036259,
+        "stoppedFullMotionIntervals": 0
+      }
+    },
+    {
+      "name": "track-cruise-gate-excluded",
+      "reason": "Error: Android cooldown gate timed out",
+      "cases": 0,
+      "thermalStart": null,
+      "thermalEnd": null,
+      "timingAccepted": false
+    },
+    {
+      "name": "track-cruise-wide-thermal-excluded",
+      "reason": "Error: Thermal status changed; stopping after retained case",
+      "cases": 1,
+      "thermalStart": {
+        "batteryC": 28.3,
+        "thermalStatus": 0
+      },
+      "thermalEnd": {
+        "batteryC": 28.5,
+        "thermalStatus": 1
+      },
+      "timingAccepted": false,
+      "motionOnly": {
+        "samples": 60,
+        "firstMs": 0,
+        "lastMs": 60011.39999992847,
+        "sampledPath": 5481.2247718942235,
+        "stoppedFullMotionIntervals": 0
+      }
+    }
+  ],
+  "pixelQualification": {
+    "desktop": {
+      "pairs": 18,
+      "totalMismatchingPixels": 0,
+      "maxChannelError": 0,
+      "legacyMaxChannelError": 2,
+      "reused": 4,
+      "culled": 3,
+      "bounded": true,
+      "browser": "153.0.8010.12",
+      "physical": false,
+      "errors": [],
+      "hashes": {
+        "scripts/instrumentation/fused-outline-composite.mjs": "1098ade0df6b466b8c470bedab3b74baa2032aa1cd5718ea8fec08eb44da23f5",
+        "scripts/instrumentation/surface-overlay-entry.mjs": "95357307c6082deb5767abe9ad9fb0346320da639d4357607ee09da7cc28b01d",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e"
+      }
+    },
+    "phone": {
+      "pairs": 18,
+      "totalMismatchingPixels": 0,
+      "maxChannelError": 0,
+      "legacyMaxChannelError": 1,
+      "reused": 4,
+      "culled": 3,
+      "bounded": true,
+      "browser": "155.0.8059.79",
+      "physical": true,
+      "errors": [],
+      "hashes": {
+        "scripts/instrumentation/fused-outline-composite.mjs": "1098ade0df6b466b8c470bedab3b74baa2032aa1cd5718ea8fec08eb44da23f5",
+        "scripts/instrumentation/surface-overlay-entry.mjs": "95357307c6082deb5767abe9ad9fb0346320da639d4357607ee09da7cc28b01d",
+        "src/rendering/GpuMeshBodies.ts": "a47b99705afe508245f9df0688048074861cf15465ed32491cdf9905e2ce99f2",
+        "src/rendering/CarBodyImageCache.ts": "aa0d12c5de6e15efbe1de905c60f1860ae0ca8f8e473ab6c4d867f1a293e04d2",
+        "src/rendering/GpuRasterSurface.ts": "2d742f4ea6608efcab5af2b758edc4800bb9ed88acaaffc8a5ed151b1d21b858",
+        "src/rendering/GpuOverlayResources.ts": "5825274b7d9c1ea3cc9fb023aab1b40fad394116514d670b8baba31040742616",
+        "src/rendering/GpuRenderBackend.ts": "359c12975c0c6283916629716285873c0dbc3e030ebae2b6d34291629400d443",
+        "src/rendering/presentSurfaceScene.ts": "1262533447bd7d9655fc21382627a370c70afcdccf06722313dc833e594025a4",
+        "src/rendering/CarPixelOutline.ts": "ea352186934e430cd500e2be5140545db6621bee948de18cff3ed5a468cd51cc",
+        "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+        "src/rendering/CarMeshAsset.ts": "72bd5aa0419cedcfdaf595dfa1e97104efb4f663088d0222467458fd472f8969",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e"
+      }
+    }
+  },
+  "validation": {
+    "typechecks": "pass: client/server/worker",
+    "units": "6715 passed in 373 files",
+    "nodeIntegration": "pass",
+    "lint": "pass: existing 121 warnings / 42 infos",
+    "catalog": "719 sheets / 1398 source uses",
+    "manifest": "1980 identities, 136 compiler exclusions; three static parking pixel fingerprints unchanged",
+    "build": "pass",
+    "focusedGpuRegression": "pass",
+    "streaming": "pass: GPU + meshes, all six samples; zero missing/incomplete/stale frames",
+    "browserSuite": "836 passed (36.3 minutes), including current transporter reload; no tolerance changes"
+  },
+  "cleanup": {
+    "originalTabsPreserved": 7,
+    "ownedTargetsRemaining": 0,
+    "taskUsbRoutesRemoved": true,
+    "originalUsbRoutesPreserved": true,
+    "relayStopped": true,
+    "handsetHome": true,
+    "originalOriginStorageAccessed": false,
+    "canonicalAndroidDoctor": "pass after owned routes removed"
+  },
+  "next": "Owner reload/playtest; investigate route-specific wide-view frame spikes and terrain publication if still noticeable. Sustained wide-view thermal/power acceptance remains open."
+}

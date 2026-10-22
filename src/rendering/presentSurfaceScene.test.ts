@@ -5,8 +5,10 @@ import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import type { World } from "../world/World.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
-import { surfaceSceneOrder } from "./presentSurfaceScene.js";
+import { presentSurfaceScene, surfaceSceneOrder } from "./presentSurfaceScene.js";
+import { SceneFrame } from "./SceneFrame.js";
 import type { TerrainPresentation } from "./TerrainPresentation.js";
+import { RecordingBackend } from "./testing/RecordingBackend.js";
 
 it("places the bridge between a lower train and upper pedestrian regardless of observer height", () => {
   const props = railCrossingRecipe().props;
@@ -35,5 +37,24 @@ it("places the bridge between a lower train and upper pedestrian regardless of o
     const order = surfaceSceneOrder(items, props, observer, "all", 1);
     expect(order.indexOf(trainIndex)).toBeLessThan(order.indexOf("road-bridge"));
     expect(order.indexOf(playerIndex)).toBeGreaterThan(order.indexOf("road-bridge"));
+    const backend = new RecordingBackend(new Map());
+    presentSurfaceScene(backend, camera, new SceneFrame(), items, props, observer, "all", 1);
+    const flattened = backend.passes.flatMap<number | string>((p) =>
+      p.kind === "scene" ? [...p.order] : p.kind === "overlay" ? [p.cacheKey ?? ""] : [],
+    );
+    const expected = order.flatMap((node) => {
+      const item = typeof node === "number" ? items[node] : undefined;
+      return typeof node === "number" &&
+        item?.kind === "sprite" &&
+        item.hasShadow &&
+        !item.flashHidden
+        ? [-node - 1, node]
+        : [node];
+    });
+    expect(flattened).toEqual(expected);
+    const overlays = backend.passes.filter((p) => p.kind === "overlay").length;
+    const runs = backend.passes.filter((p) => p.kind === "scene");
+    expect(runs.length).toBeLessThanOrEqual(overlays + 1);
+    expect(runs.some((p) => p.kind === "scene" && p.order.length > 1)).toBe(true);
   }
 });

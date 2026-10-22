@@ -230,7 +230,25 @@ export async function sampleCityClient(seconds) {
   lastFrame = start;
   const recordMotion = (now) => {
     const p = g.stateView.playerEntity.position;
-    motion.push({ elapsedMs: now - start, wx: p.wx, wy: p.wy });
+    const r = g.camera.getVisibleChunkRange();
+    const terrain = { missing: 0, incomplete: 0, stale: 0 };
+    for (let cy = r.minCy; cy <= r.maxCy; cy++)
+      for (let cx = r.minCx; cx <= r.maxCx; cx++) {
+        const screen = g.camera.worldToScreen(cx * 256, cy * 256),
+          size = 256 * g.camera.scale;
+        if (
+          screen.sx + size <= 0 ||
+          screen.sy + size <= 0 ||
+          screen.sx >= g.canvas.width ||
+          screen.sy >= g.canvas.height
+        )
+          continue;
+        const chunk = g.stateView.world.getChunkIfLoaded(cx, cy);
+        if (!chunk) terrain.missing++;
+        else if (!g.renderer.hasTerrain(chunk)) terrain.incomplete++;
+        else if (!g.renderer.isTerrainReady(chunk)) terrain.stale++;
+      }
+    motion.push({ elapsedMs: now - start, wx: p.wx, wy: p.wy, terrain });
   };
   recordMotion(start);
   let nextMotion = start + 1000;
@@ -293,6 +311,10 @@ export async function sampleCityClient(seconds) {
         "meshDraws",
         "meshImageHits",
         "meshImageMisses",
+        "overlayRasterBuilds",
+        "overlayRasterHits",
+        "overlayRasterCulls",
+        "uploads",
       ].map((k) => [k, (g.renderer.getDiagnostics().gpu?.[k] ?? 0) - (gpuBefore[k] ?? 0)]),
     ),
     canvas: { width: g.canvas.width, height: g.canvas.height },
@@ -315,7 +337,9 @@ export function installCityRenderProfile() {
   const backend = document.querySelector("#game").__game.renderer;
   const totals = {},
     targetSizes = {},
-    assets = {};
+    assets = {},
+    sourceUploads = {};
+  let pass = "setup";
   const restores = [];
   // Attribution only: replay the unchanged quad order through bounded texture sets.
   const batchCensus = { quads: 0, textureSwitches: 0, barriers: 0 };
@@ -378,6 +402,7 @@ export function installCityRenderProfile() {
   for (const method of ["beginFrame", "prepareTerrain", "collectTerrain", "collectElevationItems"])
     wrap(backend, method, method);
   wrap(backend, "submit", "submit", (_, args) => {
+    pass = args[1].kind;
     const key = `pass:${args[1].kind}`;
     totals[key] ??= { calls: 0, items: 0 };
     const row = totals[key];
@@ -386,6 +411,26 @@ export function installCityRenderProfile() {
   });
   wrap(backend.surface, "flush", "flush");
   wrap(backend.surface, "page", "page");
+  const page = surface.page;
+  surface.page = function (...args) {
+    const before = this.stats.uploadedBytes;
+    const result = page.apply(this, args);
+    const bytes = this.stats.uploadedBytes - before;
+    if (bytes) {
+      const image = args[0];
+      const shadow = [...this.ellipses.values()].includes(image);
+      const kind = shadow ? "shadow" : pass;
+      const key = `${kind}:${image.width ?? image.naturalWidth}x${image.height ?? image.naturalHeight}`;
+      sourceUploads[key] ??= { uploads: 0, bytes: 0 };
+      const row = sourceUploads[key];
+      row.uploads++;
+      row.bytes += bytes;
+    }
+    return result;
+  };
+  restores.push(() => {
+    surface.page = page;
+  });
   wrap(backend.meshes, "draw", "mesh", (_, args) => {
     const id = args[1].mesh?.assetId;
     if (id) assets[id] = (assets[id] ?? 0) + 1;
@@ -407,6 +452,7 @@ export function installCityRenderProfile() {
       totals,
       targetSizes,
       assets,
+      sourceUploads,
       batchCensus,
       orderedTextureBatches: Object.fromEntries(lanes.map((lane) => [lane.limit, lane.draws])),
     };
@@ -417,7 +463,7 @@ export function installCityRenderProfile() {
       finish(lane);
       lane.draws = 0;
     }
-    for (const records of [totals, targetSizes, assets])
+    for (const records of [totals, targetSizes, assets, sourceUploads])
       for (const key of Object.keys(records)) delete records[key];
   };
 }

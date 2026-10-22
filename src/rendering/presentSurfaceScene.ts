@@ -95,22 +95,24 @@ export function presentSurfaceScene(
     });
     return;
   }
+  const order = frame.drawOrder;
+  order.length = 0;
+  const submitRun = () => {
+    if (!order.length) return;
+    renderer.submit(camera, { kind: "scene", items, order, pixelExactShadows });
+    order.length = 0;
+  };
   for (const node of surfaceSceneOrder(items, props, observer, mode, alpha)) {
     if (typeof node === "string") {
+      submitRun();
       frame.overlays.begin();
       collectSurfacePresentation(frame.overlays, camera, props, observer, mode, "all", alpha, node);
-      renderer.submit(camera, { kind: "overlay", items: frame.overlays.items });
+      renderer.submit(camera, { kind: "overlay", items: frame.overlays.items, cacheKey: node });
     } else {
       const item = items[node];
-      renderer.submit(camera, {
-        kind: "scene",
-        items,
-        order:
-          item?.kind === "sprite" && item.hasShadow && !item.flashHidden
-            ? [-node - 1, node]
-            : [node],
-        pixelExactShadows,
-      });
+      if (item?.kind === "sprite" && item.hasShadow && !item.flashHidden) order.push(-node - 1);
+      order.push(node);
     }
   }
+  submitRun();
 }

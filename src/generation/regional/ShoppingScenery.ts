@@ -3,14 +3,14 @@ import type { ShoppingCenter } from "../../traffic/ShoppingCenter.js";
 import type { BuildingRecipe } from "./BuildingRecipes.js";
 import { denseDoorThresholds } from "./DenseDoorThresholds.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
-import { isParkingObject, parkingLayout } from "./ParkingLayout.js";
+import { parkingLayout } from "./ParkingLayout.js";
 
 /** Reconstructible generated props: durable records store type and anchor. */
 export const shoppingScenery: readonly Prop[] = buildScenery();
 function buildScenery(): Prop[] {
   const props: Prop[] = [];
   for (const p of parkingLayout("shopping").pieces) {
-    if (!isParkingObject(p.label)) continue;
+    if (p.layer === "terrain") continue;
     const [sx, sy, w, h] = p.rect;
     props.push({
       id: props.length,

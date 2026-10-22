@@ -41,7 +41,12 @@ export type RenderPass =
       readonly contentId: number;
       readonly draws: readonly InteriorDraw[];
     }
-  | { readonly kind: "overlay"; readonly items: readonly OverlayDraw[] }
+  | {
+      readonly kind: "overlay";
+      readonly items: readonly OverlayDraw[];
+      /** Stable semantic surface identity; backends may reuse its local raster. */
+      readonly cacheKey?: string;
+    }
   | { readonly kind: "clear"; readonly color: string }
   | { readonly kind: "terrain"; readonly draws: readonly TerrainDraw[] }
   | {

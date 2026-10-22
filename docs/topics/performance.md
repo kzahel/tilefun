@@ -249,6 +249,43 @@ no registered world; the owner's depot location remains open. Original saves are
 read-only. [Receipt](../benchmarks/depot-driving-acceptance.json) owns exact scope,
 hashes, thermal exclusions, cleanup and the two unchanged unit-timeout reruns.
 
+### Moving racetrack and ground ownership · 184
+
+The owner's follow-up identifies driving through the infield and around the
+circuit, with walking also in scope. [184](../tactical/184-ground-rendering-and-moving-racetrack.md)
+finds a different workload from 181's nearby street drive: resident depot bridge
+slabs cause three full-screen overlay uploads per frame and split scene submission
+into individual actors. A native moving circuit fixture reproduces about 19–22
+FPS with those paths. Initial and opposite-order source-verified controls with
+local slab images and coalesced scene runs measure about 54.5 FPS. A cooled infield
+driving/reverse pair measures 19.39 → 52.68 FPS; close-up infield driving and walking
+each reach about 59 FPS. These are fresh generated venue captures, not the owner's
+saved world or a display/power guarantee.
+
+Flat depot/track ground already uses native terrain. Mixed parking artwork now
+explicitly routes terrain/object pieces; ground cache regressions cover parking,
+track and depot across pan/zoom/resize. Elevated surfaces preserve actor/shadow
+order and use bounded GPU-local imagery rather than full-screen images per slab.
+[Rendering architecture](rendering-architecture.md#ground-pattern-ownership)
+owns the guardrails and resource contracts.
+
+The [receipt](../benchmarks/ground-rendering-moving-racetrack.json) retains accepted
+controls, source hashes and excluded thermal captures. Desktop and native phone
+cache output exactly matches independently rebuilt local imagery in 18 cases;
+legacy full-screen AA differs by at most 2/1 channel values respectively, within
+the existing overlay reference allowance. Required units/typechecks/lint/build
+pass, as do all **836 browser checks** and the six-case GPU streaming readiness
+gate. The matched moving controls contain no stopped full motion intervals;
+longer full-throttle circuit samples stop behind racers and retain that limitation.
+A separate sixty-second normal-zoom lap at ordinary analog throttle 0.6 remains
+moving at 59.41 FPS with no sampled terrain debt. The following wide analog lap
+keeps moving but crosses the thermal gate, so its timing is excluded; sustained
+wide-view power/thermal acceptance remains open.
+Native wide-view captures still show occasional stale/incomplete terrain
+observations and frame spikes; the separate readiness gate does not prove zero
+debt on every phone frame. Next, owner playtesting should identify any remaining
+route-specific pacing before another terrain-admission policy change.
+
 ## Evidence and validation
 
 The streaming browser regression retains at least 210 sampled display frames per

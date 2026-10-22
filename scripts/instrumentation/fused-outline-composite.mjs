@@ -15,11 +15,14 @@ if (endpoint && !port)
   throw Error("Physical pixel probes require an owned --port and USB reverse route");
 const cacheProbe = process.argv.includes("--probe=cache");
 const batchProbe = process.argv.includes("--probe=batch");
-const entry = batchProbe
-  ? "ordered-texture-batch-entry.mjs"
-  : cacheProbe
-    ? "car-body-cache-entry.mjs"
-    : "fused-outline-composite-entry.mjs";
+const surfaceProbe = process.argv.includes("--probe=surface");
+const entry = surfaceProbe
+  ? "surface-overlay-entry.mjs"
+  : batchProbe
+    ? "ordered-texture-batch-entry.mjs"
+    : cacheProbe
+      ? "car-body-cache-entry.mjs"
+      : "fused-outline-composite-entry.mjs";
 const output = path.resolve(
   process.argv.find((arg) => arg.startsWith("--output="))?.slice(9) ??
     path.join(os.tmpdir(), "tilefun-fused-outline-composite"),
@@ -100,6 +103,9 @@ try {
     "src/rendering/GpuMeshBodies.ts",
     "src/rendering/CarBodyImageCache.ts",
     "src/rendering/GpuRasterSurface.ts",
+    "src/rendering/GpuOverlayResources.ts",
+    "src/rendering/GpuRenderBackend.ts",
+    "src/rendering/presentSurfaceScene.ts",
     "src/rendering/CarPixelOutline.ts",
     "src/rendering/CarMeshProjection.ts",
     "src/rendering/CarMeshAsset.ts",
@@ -120,7 +126,13 @@ try {
   await writeFile(path.join(output, "preview.png"), Buffer.from(preview.split(",")[1], "base64"));
   console.log(JSON.stringify(result));
   assert.deepEqual(errors, []);
-  assert.equal(result.pairs, batchProbe ? 18 : cacheProbe ? 144 : 72);
+  if (surfaceProbe) {
+    assert.ok(result.pairs >= 12);
+    assert.ok(result.reused > 0);
+    assert.ok(result.culled > 0);
+    assert.ok(result.bounded);
+    assert.ok(result.legacyMaxChannelError <= 2);
+  } else assert.equal(result.pairs, batchProbe ? 18 : cacheProbe ? 144 : 72);
   if (cacheProbe) {
     assert.equal(result.cachedRenderCalls, 0);
     assert.equal(result.bypassVerified, 3);

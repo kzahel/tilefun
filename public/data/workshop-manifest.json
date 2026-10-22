@@ -4903,7 +4903,7 @@
         "scene": "pattern",
         "caseId": "parking-v1-shopping",
         "prefabIds": [],
-        "revision": "a0b1d8cef6f7a0c72fdd6816f619398f692b6653cd4645a4952dcb30151513d2",
+        "revision": "ef454096f0231870e8ab25f356687c97dcb39fe236c608564019d8a1f5ebe886",
         "renderFingerprint": "40efb1917bfb1d647d31d1abc67350628e05745283e89428938670b97e2224c0",
         "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-shopping"
       },
@@ -4926,7 +4926,7 @@
           "scene": "pattern",
           "caseId": "parking-v1-shopping",
           "prefabIds": [],
-          "revision": "a0b1d8cef6f7a0c72fdd6816f619398f692b6653cd4645a4952dcb30151513d2",
+          "revision": "ef454096f0231870e8ab25f356687c97dcb39fe236c608564019d8a1f5ebe886",
           "renderFingerprint": "40efb1917bfb1d647d31d1abc67350628e05745283e89428938670b97e2224c0",
           "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-shopping"
         }
@@ -4945,7 +4945,7 @@
         "scene": "pattern",
         "caseId": "parking-v1-town",
         "prefabIds": [],
-        "revision": "7d5927e3d5accc7fd07072dbb01eec345f5ea2fe860dc69d1498adc532a83e1d",
+        "revision": "727170facc8b83ef1cdb805d3538094ff62e91e84e092619a12f0646a2a440b8",
         "renderFingerprint": "4eac64779e1b9a7d1aa73d8ec5d9b929e3bd6455994ebaf57c39c063fdbfd207",
         "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-town"
       },
@@ -4968,7 +4968,7 @@
           "scene": "pattern",
           "caseId": "parking-v1-town",
           "prefabIds": [],
-          "revision": "7d5927e3d5accc7fd07072dbb01eec345f5ea2fe860dc69d1498adc532a83e1d",
+          "revision": "727170facc8b83ef1cdb805d3538094ff62e91e84e092619a12f0646a2a440b8",
           "renderFingerprint": "4eac64779e1b9a7d1aa73d8ec5d9b929e3bd6455994ebaf57c39c063fdbfd207",
           "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-town"
         }
@@ -4987,7 +4987,7 @@
         "scene": "pattern",
         "caseId": "parking-v1-parallel",
         "prefabIds": [],
-        "revision": "58a773efba473cf8d6538443b9ab6f47a2a33b2095a80146d3a5358bcd0091a3",
+        "revision": "4e45958b78e0b09041322f698e2677de415ac0f4443c269d3eeed3274fd8ae41",
         "renderFingerprint": "894e0a896500ce1a6555f1b7735a7a0f131ebbf9104138e4b3fdcc90f585333e",
         "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-parallel"
       },
@@ -5010,7 +5010,7 @@
           "scene": "pattern",
           "caseId": "parking-v1-parallel",
           "prefabIds": [],
-          "revision": "58a773efba473cf8d6538443b9ab6f47a2a33b2095a80146d3a5358bcd0091a3",
+          "revision": "4e45958b78e0b09041322f698e2677de415ac0f4443c269d3eeed3274fd8ae41",
           "renderFingerprint": "894e0a896500ce1a6555f1b7735a7a0f131ebbf9104138e4b3fdcc90f585333e",
           "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-parallel"
         }
@@ -5107,7 +5107,7 @@
       "name": "Shopping center · parking and shoppers",
       "prompt": "Watch the normal generated city shopping trip, with native road arrival, return, obstruction waits and paused save/reload. Pavement and markings use the ordinary terrain chunk renderer.",
       "url": "/tilefun/workshop.html#/tool/parking-lab?play=1",
-      "fingerprint": "3fe772aa7e9e1a49b85020040958fd7e955c6bb68acbcbd2b1233a7de7452149",
+      "fingerprint": "e6826b7b048c58231e5f5f125055a6d5079f2f5f03c07f13a1fff5a6a5dc8bb1",
       "excluded": "Playable behavior study; static parking-pattern review snapshots retain their own identities."
     },
     {
@@ -5117,7 +5117,7 @@
       "name": "Generated city · road to shopping center",
       "prompt": "Follow the same native road car into the generated shopping center, watch its shopper visit and return, then follow its checked merge back onto the boulevard. One visitor per center; no entrance or exit teleport.",
       "url": "/tilefun/workshop.html#/tool/parking-lab?play=1&city=1",
-      "fingerprint": "3fe772aa7e9e1a49b85020040958fd7e955c6bb68acbcbd2b1233a7de7452149",
+      "fingerprint": "e6826b7b048c58231e5f5f125055a6d5079f2f5f03c07f13a1fff5a6a5dc8bb1",
       "excluded": "Playable behavior study; static parking-pattern review snapshots retain their own identities."
     },
     {
@@ -16526,7 +16526,7 @@
       "name": "Ramp, raised deck and lower passage",
       "prompt": "Walk above and below the deck, jump into its underside and switch cutaway visibility. Schematic engine proof; no art promotion.",
       "url": "/tilefun/workshop.html#/tool/world-geometry",
-      "fingerprint": "ee2e351d08305a354ceda2134a7ca44332aad475d3b3b39b1c3fc55e08c62605",
+      "fingerprint": "697ca126a4369a1dd8a76b239c5a80c8885bf620162bd09b443c218b7cf1146b",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -16536,7 +16536,7 @@
       "name": "Underground garage, entrance and usable street",
       "prompt": "Walk down through an opening in terrain into a covered garage, return continuously, and compare street/garage space identity and reload.",
       "url": "/tilefun/workshop.html?geometry=garage#/tool/world-geometry",
-      "fingerprint": "a8f6ab12326f7f1c274e5478712e4498f0d1dc6e0ffd484f9ba45d353019ee85",
+      "fingerprint": "a9bfc7dbf24db1d935a467bff54946dd701a9852e791e5fb761c850214bff18f",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -16546,7 +16546,7 @@
       "name": "Road bridge over a moving train",
       "prompt": "Walk both road approaches while the production train service passes beneath; inspect clearance, ordering and save/reload. Schematic engine proof.",
       "url": "/tilefun/workshop.html?geometry=crossing#/tool/world-geometry",
-      "fingerprint": "185090c0bde356795729a2738d6ce9985f1ef8616ac126148680d28c8d983af9",
+      "fingerprint": "d6deb89af301436a460996ffc3904d57b06e6c1e640bd244f6ad6acb45e72ea3",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -16556,7 +16556,7 @@
       "name": "Car crossing the railway bridge",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-bridge#/tool/world-geometry",
-      "fingerprint": "3c6e46416d2e4c1f8ff59ebc799dd3758142275886bd9ed31fe3212c9bc858e5",
+      "fingerprint": "80b7a02cc845601357ef258e02b91c3467c1342bea6d634ab71fc970c1d75057",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -16566,7 +16566,7 @@
       "name": "Car entering an underground garage",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-garage#/tool/world-geometry",
-      "fingerprint": "5802d51758a1ebbf6023262b5cd9d0078d47e4cabd7518dfeb72514d5f8561b1",
+      "fingerprint": "9b9d7de0d6f8b6631b522a95c3a5b5c7f52b88c56abf23cdc42076167c02c1df",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -16576,7 +16576,7 @@
       "name": "Train grades, bridge and tunnel",
       "prompt": "Follow three independent carriage heights across ramps, bridge and tunnel, reverse at both termini and reload on a slope. Schematic proof with horizontal native art and visible slope-join limitations.",
       "url": "/tilefun/workshop.html?geometry=train-grades#/tool/world-geometry",
-      "fingerprint": "1f001de880a88723478695d284623b752afa98c0bafefb35a2232f0195aa0f2b",
+      "fingerprint": "a95fd21d795903535306ca351d832bf2693471a52b5275bb7fd6345027dd89ee",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -16636,7 +16636,7 @@
       "name": "Ride trains between generated cities",
       "prompt": "Jump from Willowhaven station onto the train roof, ride the curved route to Willowbridge and jump off. Save/reload during the ride. Production towns, tracks, stations, streaming and train authority; extra road traffic is disabled in this temporary scene.",
       "url": "/tilefun/workshop.html?geometry=city-trains#/tool/world-geometry",
-      "fingerprint": "48ac5627611807f49db78c047d874968594412ff3d01c41ead19f1b094833f01",
+      "fingerprint": "f4303d80090908d348726a6a09dd04fe30c0fb05f42c69e720d3d89334a63ce5",
       "excluded": "Interactive generated-world experiment; no immutable art bank promotion."
     },
     {
@@ -16646,7 +16646,7 @@
       "name": "Generated road bridge · seed 100",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-100#/tool/world-geometry",
-      "fingerprint": "e7847daab33cf8ec2ac34180c2c811bead4b2f0344a365332dc4b221f6e97be7",
+      "fingerprint": "43e2b6f43666b7662d0f8df6878f348d53ed97da86cb37595ce04cfee6321d03",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -16656,7 +16656,7 @@
       "name": "Generated road bridge · seed 42",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-42#/tool/world-geometry",
-      "fingerprint": "c5fd80133b849f8cc4b6748be8b11dab495a168b73cd4bddbb3627f63db95502",
+      "fingerprint": "5c1c259c6108b899a1baed5f92af95e6026882ede3e0e5927a4530dde90c1e24",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -16666,7 +16666,7 @@
       "name": "Generated road bridge · seed 3",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-3#/tool/world-geometry",
-      "fingerprint": "7f8c495da4ec64ab2de3dc17a8cc806a30d87b791b37577e09c1778437c7e96a",
+      "fingerprint": "b64909c2bf9d8e0be0172380765aaad3fe899e1dbce0cd71491bdf222ff37b99",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -50345,5 +50345,5 @@
       }
     }
   ],
-  "inputDigest": "1470f26fdfe73e16db32b17c3d90fa42475c008b3259dac07d18a5781c9b5d81"
+  "inputDigest": "85385a8d32bcc3b9f2e437adf58d7871bb2f175eecaf6dda4fa462f2ccd1e7c5"
 }

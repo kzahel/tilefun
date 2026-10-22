@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { createProp } from "../entities/PropFactories.js";
-import { isParkingObject, parkingLayout } from "../generation/regional/ParkingLayout.js";
+import { parkingLayout } from "../generation/regional/ParkingLayout.js";
 import { shoppingScenery } from "../generation/regional/ShoppingScenery.js";
 import { applyChunkSnapshot, serializeChunk } from "../shared/serialization.js";
 import { Chunk } from "../world/Chunk.js";
@@ -13,7 +13,7 @@ import {
 import { surfaceCell, surfaceCellKey } from "./SurfaceCells.js";
 
 it("persists native ground cells with paint/curb layers across chunk boundaries", () => {
-  const ground = parkingLayout("shopping").pieces.filter((p) => !isParkingObject(p.label));
+  const ground = parkingLayout("shopping").pieces.filter((p) => p.layer === "terrain");
   expect(PARKING_SURFACE_COUNT).toBeLessThanOrEqual(256 - 79);
   for (const [x, y] of [
     [0, 0],
@@ -44,6 +44,16 @@ it("persists native ground cells with paint/curb layers across chunk boundaries"
   }
 });
 it("generates only object props and makes retired pavement records inert", () => {
+  const pieces = parkingLayout("shopping").pieces;
+  const objects = pieces.filter((p) => p.layer === "object");
+  expect(objects).toHaveLength(shoppingScenery.length);
+  expect(pieces.filter((p) => p.layer === "terrain").length).toBeGreaterThan(1000);
+  expect(shoppingScenery.map((p) => p.position)).toEqual(
+    objects.map((p) => ({
+      wx: p.x + p.rect[2] / 2,
+      wy: p.y + p.rect[3],
+    })),
+  );
   expect(shoppingScenery).toHaveLength(20);
   expect(shoppingScenery.every((p) => !p.sprite.parts && p.sortOffsetY === undefined)).toBe(true);
   for (let i = 20; i < 40; i++) {

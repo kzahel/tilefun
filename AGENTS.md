@@ -55,6 +55,11 @@ Promoted asset banks and exact review snapshots remain immutable; never regenera
 them during builds. Read [city generation](docs/topics/city-generation.md) before
 changing generation or promotions.
 
+Large flat ground patterns must compile to cached terrain cells, with explicit
+ground/object ownership. Preserve scene batching around elevated surfaces and
+cache their GPU raster overlays in bounded local images; see
+[rendering architecture](docs/topics/rendering-architecture.md#ground-pattern-ownership).
+
 Normal builds use committed assets. Keep credentials, owner/session files,
 NDJSON histories and local state out of Git. Server logs do not include browser
 drafts, outboxes or worlds. See [setup and local data](docs/setup-and-local-data.md).

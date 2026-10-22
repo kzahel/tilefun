@@ -1,5 +1,42 @@
 # Diagnostic probes
 
+## Elevated surface overlays and actual venue driving
+
+`node scripts/instrumentation/fused-outline-composite.mjs --probe=surface --output=/tmp/tilefun-surface-overlays`
+qualifies the shared production overlay backend with the real three-part depot
+bridge. Eighteen comparisons cover zoom, integer/fractional pans, slab edits,
+source/reset/recovery, culling and bounded eviction. Cached output must exactly
+match freshly rebuilt local images. The old full-screen Canvas path must remain
+within the existing overlay AA allowance of two channel values; reports retain
+all nonzero differences rather than calling that comparison exact. Add the same
+owned `--cdp` / `--port` route used by the other pixel probes for native Android.
+
+`city-audit.mjs --arrival=racetrack-center --course=racetrack --touch=true --stages=overview-drive`
+boards an actual inner-ring racer and steers ahead on its native closed lane
+polyline through CDP joystick input every 100ms. It does not change physics or
+autonomously move the car. `--course=depot` selects the generated sports car,
+explicitly stages it on the clear northern infield lane, and then uses native
+straight input; `--drive-reverse-at=8` provides an out-and-back. With `--stages=walk`
+the depot option stages the ordinary player on that same lane and timed reverse
+also applies. This is a fresh seed-2026 venue fixture, not an owner's saved world.
+The default `street` course retains the earlier nearby-street control. Normal
+and overview driving are separate stages; inspect the sampled motion for blocked
+tails. Once-per-second visible terrain checks accompany motion, not every frame.
+For continuous circuit qualification, `--course-strength=0.6 --assert-moving=true`
+uses ordinary analog throttle below the native racers' speed. Full throttle can
+catch and stop behind a racer; a stationary tail is workload characterization,
+not continuous-driving acceptance. The optional gate rejects a retained sample
+with any >=500ms motion interval advancing no more than one pixel. It does not
+change collision, traffic or simulation cadence.
+
+`--render-profile=true` now groups source uploads by terrain, scene, overlay and
+shadow, with source dimensions. Keep this attribution lane separate from shallow
+timing. `--backend-reference=PATH --surface-scene-reference=PATH` substitute saved
+pre-change presentation modules while retaining the current rest of the engine;
+the report hashes the actual substituted sources, without publishing private
+paths. [184](../../docs/tactical/184-ground-rendering-and-moving-racetrack.md)
+owns acceptance and limitations.
+
 ## Ordered texture batches
 
 `node scripts/instrumentation/fused-outline-composite.mjs --probe=batch --output=/tmp/tilefun-ordered-texture-batches`

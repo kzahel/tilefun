@@ -212,6 +212,13 @@ export class GpuRasterSurface implements RasterSurface {
       if (!list.length) this.pages.delete(page.image);
     }
   }
+  /** Retire a backend-owned source only after its queued quads are consumed. */
+  releaseImage(image: CanvasImageSource) {
+    const pages = this.pages.get(image);
+    if (!pages) return;
+    this.flush();
+    for (const page of [...pages]) this.remove(page);
+  }
   clearResources() {
     this.count = 0;
     this.texture = null;

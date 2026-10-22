@@ -320,6 +320,80 @@ test("shared room and editor passes match the native reference", async ({ page }
   expect((overlay as { maxError: number }).maxError).toBeLessThanOrEqual(2);
 });
 
+test("separate surface passes reuse local rasters through camera movement", async ({ page }) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const result = await page.evaluate(() => {
+    const backend = (
+      window as unknown as {
+        rendererLab: { gpu: import("../src/rendering/GpuRenderBackend.js").GpuRenderBackend };
+      }
+    ).rendererLab.gpu;
+    const view = { x: 0, y: 0, zoom: 1, viewportWidth: 384, viewportHeight: 288 };
+    const rect = (
+      i: number,
+      dx: number,
+    ): import("../src/rendering/OverlayFrame.js").OverlayDraw => ({
+      kind: "rect",
+      x: 25 + i * 90 + dx,
+      y: 45 + i * 20,
+      width: 64,
+      height: 35,
+      fill: ["#58736c", "#62676b", "#735b44"][i] ?? "black",
+      stroke: "#b9c9ca",
+      lineWidth: 1.5,
+      text: "",
+      font: "",
+      centered: false,
+      sheetKey: "",
+      srcX: 0,
+      srcY: 0,
+      srcWidth: 0,
+      srcHeight: 0,
+      alpha: 0.8,
+    });
+    const draw = (dx: number) => {
+      backend.beginFrame();
+      backend.submit(view, { kind: "clear", color: "#243245" });
+      for (let i = 0; i < 3; i++)
+        backend.submit(view, { kind: "overlay", cacheKey: `slab:${i}`, items: [rect(i, dx)] });
+    };
+    const pixels = () => {
+      const image = document.createElement("canvas");
+      image.width = 384;
+      image.height = 288;
+      const ctx = image.getContext("2d", { willReadFrequently: true });
+      if (!ctx) throw Error("No readback");
+      ctx.drawImage(backend.surface.canvas, 0, 0);
+      return ctx.getImageData(0, 0, 384, 288).data;
+    };
+    backend.clear();
+    draw(0);
+    const before = backend.getDiagnostics().gpu;
+    draw(11);
+    const after = backend.getDiagnostics().gpu,
+      warm = pixels();
+    backend.clear();
+    draw(11);
+    const rebuilt = pixels();
+    draw(1000);
+    const culled = backend.getDiagnostics().gpu.overlayRasterCulls;
+    backend.clear();
+    return {
+      uploads: after.uploads - before.uploads,
+      builds: after.overlayRasterBuilds - before.overlayRasterBuilds,
+      hits: after.overlayRasterHits - before.overlayRasterHits,
+      bytes: after.overlayRasterBytes,
+      exact: warm.every((value, i) => value === rebuilt[i]),
+      culled,
+      cleared: backend.getDiagnostics().gpu.overlayRasterBytes === 0,
+    };
+  });
+  expect(result).toMatchObject({ uploads: 0, builds: 0, hits: 3, exact: true, cleared: true });
+  expect(result.bytes).toBeLessThan(64 * 1024);
+  expect(result.culled).toBeGreaterThanOrEqual(3);
+});
+
 test("real graphics loss recovers resources without restarting gameplay", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));

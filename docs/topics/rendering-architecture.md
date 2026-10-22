@@ -183,6 +183,33 @@ replaces the cache introduced in 132 and records regression/performance evidence
 The playable parking lab uses production city planning and the same terrain path.
 Static art reference views retain their independent exact review pixels.
 
+### Ground pattern ownership
+
+Large flat artwork (pavement, parking bays, paint, plazas and similar decoration)
+must compile to ordinary terrain cells/chunks. Source sprite sheets and authored
+multi-piece patterns are supported; their authoring representation does not
+justify per-piece gameplay props or camera-dependent screen composites. Mixed
+patterns explicitly identify `terrain` and `object` pieces. The parking compiler
+uses this metadata rather than English labels to route ground to saved cells and
+objects to ordinary props. Ground cache regressions cover parking, track and depot
+through pan/zoom/resize, with content edits still invalidating affected chunks.
+
+An independent ground decoration layer, when required by content, must share the
+same world-aligned chunk culling, bounded residency and content/source/lifecycle
+invalidation. Bake layers sharing ground order into existing chunks where possible;
+do not allocate a whole-world image or rebuild on camera movement.
+
+Elevated slabs retain their per-surface painter placement. [184](../tactical/184-ground-rendering-and-moving-racetrack.md)
+coalesces adjacent actor/shadow runs between slabs. Its GPU backend rasterizes
+rect/line surface commands into local images, preserving Canvas raster phase and
+reusing unchanged geometry across integer screen translations. Cache keys are
+semantic surface IDs; no graphics resources escape the backend. Residency is
+capped at 32 images / 8 MiB, eviction releases GPU pages, and invisible surfaces
+submit no image. Fractional raster-phase changes, geometry/style changes and
+normal source/reset/recovery lifecycle rebuild as needed. Other overlay kinds
+retain the existing general path. Never merge elevated surfaces into ground or
+group objects across a surface ordering boundary for speed.
+
 ## Invalidation and lifecycle
 
 Replicated `revision` and local `visualRevision` are distinct. Snapshot application,

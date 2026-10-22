@@ -16,6 +16,7 @@ import {
   installCityRenderProfile,
   sampleCityClient,
 } from "./city-audit-profile.mjs";
+import { courseDirection, prepareCityCourse, prepareDepotWalk } from "./city-course.mjs";
 import { startWorkerCpu, summarizeWorkerCpu } from "./worker-cpu.mjs";
 
 const option = (key, fallback) =>
@@ -37,6 +38,16 @@ const viewport = option("viewport", "411x789").split("x").map(Number);
 if (viewport.length !== 2 || viewport.some((v) => !Number.isInteger(v) || v < 200 || v > 3840))
   throw Error("Invalid viewport: expected WIDTHxHEIGHT, 200–3840 pixels per side");
 const driveModel = option("drive-model", "native");
+const course = option("course", "street");
+const courseStrength = Number(option("course-strength", "1"));
+const assertMoving = option("assert-moving", "false") === "true";
+if (!Number.isFinite(courseStrength) || courseStrength < 0.1 || courseStrength > 1)
+  throw Error("Course strength must be 0.1–1");
+if (course !== "racetrack" && courseStrength !== 1)
+  throw Error("Course strength applies only to the circuit");
+if (!["street", "depot", "racetrack"].includes(course)) throw Error("Invalid driving course");
+if (course !== "street" && (!arrivalKind.startsWith("racetrack") || driveModel !== "native"))
+  throw Error("Depot/racetrack courses require a racetrack arrival and native vehicle");
 const driveReverseAt = Number(option("drive-reverse-at", "0"));
 if (!Number.isFinite(driveReverseAt) || driveReverseAt < 0 || driveReverseAt >= seconds)
   throw Error("Drive reverse time must be zero (disabled) or within the sampling window");
@@ -64,11 +75,21 @@ if (rasterReference && (batchTextures !== 1 || deferCachedImages))
 const rasterReferenceSHA256 = rasterReference
   ? createHash("sha256").update(rasterReference).digest("hex")
   : null;
+const presentationReferences = new Map();
+for (const [optionName, file] of [
+  ["backend-reference", "src/rendering/GpuRenderBackend.ts"],
+  ["surface-scene-reference", "src/rendering/presentSurfaceScene.ts"],
+]) {
+  const source = option(optionName, "");
+  if (source) presentationReferences.set(file, await readFile(path.resolve(source), "utf8"));
+}
 const meshTargetReuse = option("mesh-target-reuse", "false") === "true";
 if (meshTargetReuse && (renderer !== "gpu" || !meshes))
   throw Error("Mesh target reuse requires GPU meshes");
 if (trace && cpu) throw Error("Trace and CPU sampling must use separate attribution captures");
 const touch = option("touch", endpoint ? "true" : "false") === "true";
+if (course === "racetrack" && (!touch || driveReverseAt))
+  throw Error("Circuit steering requires touch and no timed reverse");
 const androidCli = option("android-device-cli", ""),
   maxC = Number(option("max-battery-c", "32"));
 const cooldown = Number(option("cooldown-seconds", "60"));
@@ -119,13 +140,21 @@ const report = {
   parkedFleet,
   viewport,
   driveModel,
+  course,
+  courseStrength,
+  assertMoving,
   driveReverseAt,
   limits:
     "Native game Worker/IndexedDB/current seed-2026 city; normal traffic/pedestrians. Inclusive opt-in timers add overhead. Driver setup boards an existing native car (or an explicit one-for-one production-factory model replacement) after a diagnostic pose/stop; subsequent input is native. CPU and deep census are attribution lanes, not clean timing controls. rAF measures callback cadence, not displayed GPU presentation.",
   probesSHA256: {},
   cases: [],
 };
-for (const file of ["city-audit.mjs", "city-audit-profile.mjs", "worker-cpu.mjs"])
+for (const file of [
+  "city-audit.mjs",
+  "city-audit-profile.mjs",
+  "city-course.mjs",
+  "worker-cpu.mjs",
+])
   report.probesSHA256[file] = createHash("sha256")
     .update(await readFile(path.join(import.meta.dirname, file)))
     .digest("hex");
@@ -148,6 +177,9 @@ for (const file of [
   "src/rendering/CarPixelOutline.ts",
   "src/rendering/GpuRasterSurface.ts",
   "src/rendering/GpuRenderBackend.ts",
+  "src/rendering/GpuOverlayResources.ts",
+  "src/rendering/presentSurfaceScene.ts",
+  "src/rendering/TileRenderer.ts",
   "src/rendering/RasterRenderBackend.ts",
   "src/rendering/collectScene.ts",
   "src/scenarios/NaturalLandscapeRecipe.ts",
@@ -158,7 +190,7 @@ for (const file of [
       .update(
         file === "src/rendering/GpuRasterSurface.ts" && rasterReference
           ? rasterReference
-          : await readFile(path.join(root, file)),
+          : (presentationReferences.get(file) ?? (await readFile(path.join(root, file)))),
       )
       .digest("hex");
   } catch (error) {
@@ -182,6 +214,8 @@ const server = await createServer({
       enforce: "pre",
       transform(code, id) {
         const file = id.split("?")[0];
+        for (const [module, source] of presentationReferences)
+          if (file.endsWith(`/${module}`) && !id.includes("?raw")) return source;
         if (
           rasterReference &&
           file.endsWith("/src/rendering/GpuRasterSurface.ts") &&
@@ -315,7 +349,26 @@ try {
         );
     }
     let driver;
-    if (stage.includes("drive")) {
+    if (stage === "walk" && course === "depot") await worker.evaluate(prepareDepotWalk);
+    if (stage.includes("drive") && course !== "street") {
+      // Admit the real circuit/depot before selecting its native vehicle.
+      await page.evaluate(() => document.querySelector("#game").__game.debugPanel.setZoom(0.1));
+      await page.waitForFunction(cityReady, null, { timeout: 60000 });
+      await worker.evaluate(async (course) => {
+        const end = performance.now() + 10000;
+        while (
+          ![...globalThis.__diagnosticAuthority.activeRealm.traffic.states.values()].some((s) =>
+            course === "racetrack"
+              ? s.lane.race
+              : s.entity.proceduralId?.includes(":vehicle-depot:bridge-car"),
+          )
+        ) {
+          if (performance.now() > end) throw Error("Native course vehicles did not populate");
+          await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+      }, course);
+      driver = await worker.evaluate(prepareCityCourse, course);
+    } else if (stage.includes("drive")) {
       await worker.evaluate(async () => {
         const deadline = performance.now() + 10000;
         for (;;) {
@@ -460,7 +513,7 @@ try {
     const inputAbort = new AbortController();
     const inputChanges = [];
     const reverseInput = async () => {
-      if (!driver || !driveReverseAt) return;
+      if (!moving || !driveReverseAt) return;
       await delay(driveReverseAt * 1000, undefined, { signal: inputAbort.signal });
       heldKey = key === "ArrowRight" ? "ArrowLeft" : "ArrowRight";
       if (touch)
@@ -474,9 +527,35 @@ try {
       }
       inputChanges.push({ afterSeconds: driveReverseAt, key: heldKey });
     };
+    const steerCourse = async () => {
+      if (!driver || course !== "racetrack") return;
+      const end = Date.now() + seconds * 1000;
+      while (!inputAbort.signal.aborted && Date.now() < end) {
+        const position = await page.evaluate(
+          () => document.querySelector("#game").__game.stateView.playerEntity.position,
+        );
+        const direction = courseDirection(driver.points, position);
+        await cdp.send("Input.dispatchTouchEvent", {
+          type: "touchMove",
+          touchPoints: [
+            {
+              ...points,
+              x: points.x + direction.x * 50 * courseStrength,
+              y: points.y + direction.y * 50 * courseStrength,
+            },
+          ],
+        });
+        inputChanges.push({ elapsedMs: seconds * 1000 - (end - Date.now()), ...direction });
+        await delay(100, undefined, { signal: inputAbort.signal });
+      }
+    };
     let data;
     try {
-      [data] = await Promise.all([page.evaluate(sampleCityClient, seconds), reverseInput()]);
+      [data] = await Promise.all([
+        page.evaluate(sampleCityClient, seconds),
+        reverseInput(),
+        steerCourse(),
+      ]);
     } finally {
       inputAbort.abort();
     }
@@ -581,6 +660,17 @@ try {
     if (errors.length) throw Error("Page errors captured");
     if (thermalEnd && thermalEnd.thermalStatus !== 0)
       throw Error("Thermal status changed; stopping after retained case");
+    if (assertMoving && moving) {
+      const stopped = data.motion.slice(1).filter((point, i) => {
+        const previous = data.motion[i];
+        return (
+          point.elapsedMs - previous.elapsedMs >= 500 &&
+          Math.hypot(point.wx - previous.wx, point.wy - previous.wy) <= 1
+        );
+      });
+      if (stopped.length)
+        throw Error(`Driving course stopped in ${stopped.length} motion intervals`);
+    }
   }
 } catch (error) {
   report.failure = { message: String(error), errors: [...errors] };

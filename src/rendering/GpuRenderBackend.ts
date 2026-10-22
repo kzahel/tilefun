@@ -1,5 +1,6 @@
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
 import { GpuMeshBodies } from "./GpuMeshBodies.js";
+import { GpuOverlayResources } from "./GpuOverlayResources.js";
 import { GpuRasterSurface } from "./GpuRasterSurface.js";
 import { COMPACT_CAR_MESH } from "./MeshPresentation.js";
 import type { OverlayDraw } from "./OverlayFrame.js";
@@ -30,6 +31,7 @@ const overlayFields: (keyof OverlayDraw)[] = [
 export class GpuRenderBackend extends RasterRenderBackend {
   readonly surface: GpuRasterSurface;
   readonly meshes: GpuMeshBodies;
+  private readonly surfaceOverlays: GpuOverlayResources;
   private readonly overlay = document.createElement("canvas");
   private readonly overlayItems: OverlayDraw[] = [];
   private overlayValid = false;
@@ -38,6 +40,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
     const surface = new GpuRasterSurface(canvas);
     super(surface, new Map());
     this.surface = surface;
+    this.surfaceOverlays = new GpuOverlayResources((image) => surface.releaseImage(image));
     this.meshes = new GpuMeshBodies(surface);
     surface.meshBody = (camera, item) => this.meshes.draw(camera, item, this.sheets);
     surface.meshReady = this.meshes.ready;
@@ -59,6 +62,19 @@ export class GpuRenderBackend extends RasterRenderBackend {
   }
   protected override drawOverlay(pass: Extract<RenderPass, { kind: "overlay" }>) {
     if (!pass.items.length) return;
+    if (pass.cacheKey) {
+      const image = this.surfaceOverlays.get(
+        pass.cacheKey,
+        pass.items,
+        this.surface.canvas.width,
+        this.surface.canvas.height,
+        this.sheets,
+      );
+      if (image !== undefined) {
+        if (image) this.surface.drawImage(image.image, image.x, image.y);
+        return;
+      }
+    }
     const ctx = this.overlayContext;
     const unchanged =
       this.overlayValid &&
@@ -93,6 +109,11 @@ export class GpuRenderBackend extends RasterRenderBackend {
       ...super.getDiagnostics(),
       gpu: {
         ...this.surface.stats,
+        overlayRasterBuilds: this.surfaceOverlays.builds,
+        overlayRasterHits: this.surfaceOverlays.hits,
+        overlayRasterCulls: this.surfaceOverlays.culled,
+        overlayRasterBytes: this.surfaceOverlays.bytes,
+        overlayRasterCount: this.surfaceOverlays.size,
         meshDraws: this.meshes.draws,
         vehicleBedDraws: this.meshes.bedDraws,
         meshDrawCalls: this.meshes.drawCalls,
@@ -117,6 +138,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
   }
   override invalidateAssets() {
     super.invalidateAssets();
+    this.surfaceOverlays.clear();
     this.overlayValid = false;
     this.overlayItems.length = 0;
     this.surface.clearResources();
@@ -125,6 +147,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
   }
   override clear() {
     super.clear();
+    this.surfaceOverlays.clear();
     this.overlayValid = false;
     this.overlayItems.length = 0;
     this.surface.clearResources();
@@ -138,6 +161,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
   }
   override dispose() {
     super.dispose();
+    this.surfaceOverlays.clear();
     this.meshes.dispose();
     this.surface.dispose();
   }
