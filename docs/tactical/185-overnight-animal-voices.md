@@ -18,9 +18,11 @@ This is an audio campaign; existing art and AI approval identities remain intact
 5. Gorilla, chimpanzee, orangutan, capuchin, ring-tailed lemur, Japanese macaque.
 6. Guinea pig, meerkat, raccoon, river otter, alpaca, llama.
 7. Extra: owl, eagle, hawk, camel, warthog, American bison.
+8. Extra: ostrich, emu, cassowary, toucan, great blue heron, Atlantic puffin.
 
-Real animal recordings only: CC0 preferred; CC BY 3.0/4.0 permitted with exact
-creator/source/license and public edit credits. Human imitations, unidentified
+Real animal recordings only: CC0 preferred; CC BY 3.0/4.0 and CC BY-SA 4.0 use
+exact creator/source/license and public edit credits. ShareAlike audio derivatives
+retain that license explicitly in their receipts and public credits. Human imitations, unidentified
 mixed-species scenes and transformed other-species sounds do not establish real
 species coverage. Source gaps remain explicit and do not block independent work.
 No owner listening approval is inferred from source descriptions or signal checks.
@@ -170,4 +172,25 @@ boundaries pass (30.8s). Typechecks, targeted lint, strict catalog,
 normal/retina inventory and build pass; all 1,980 prior candidate objects remain
 exact. Input digest: `7a956d2828ec3269588f47184a1997a27956eb8f34b35c67b011da0fee7d3d63`.
 Evidence: `data/overnight-audio-raptors-{native,browser,types,lint,catalog,
+manifest,build}.log`. Broad suites excluded; listening review pending.
+
+## Batch 8: further distinctive birds
+
+Ostrich, emu, cassowary, toucan, great blue heron and Atlantic puffin: six sources,
+ten excerpts. All use sparse stationary playback; toucan/puffin have carrying
+silence. Ostrich nasal breath is explicitly non-vocal. Generic toucan is qualified
+as keel-billed; heron excerpts use the uploader-identified window with field noise
+retained. Puffin's British Library CC BY-SA 4.0 recording and edited excerpts
+retain that license explicitly, with native checks of each derivative's metadata.
+The exporter now writes a source license/URL on new excerpts; no old bank changed.
+A very faint great-hornbill candidate is deferred for source quality.
+
+48 campaign animals are integrated. Coverage is 93/206 (68 recorded, 25
+synthesized), 113 unwired, with 62 recordings/104 excerpts. Listening pending.
+
+Validation: 58 targeted native checks and both existing Chromium audio
+boundaries pass (31.9s). Typechecks, targeted lint, strict catalog,
+normal/retina inventory and build pass; all 1,980 prior candidate objects remain
+exact. Input digest: `6a3c4e16f5c4917004a381e683884af1d9393b4b094dfc5687c9a488900784af`.
+Evidence: `data/overnight-audio-bigbirds-{native,browser,types,lint,catalog,
 manifest,build}.log`. Broad suites excluded; listening review pending.

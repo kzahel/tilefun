@@ -5,6 +5,40 @@ No endorsement by the creators is implied. Exact edits, source/export hashes and
 license receipts are retained in art-source/animal-audio/<bank>/manifest.json.
 CC0 sources also retain creator credit. Listening review is separate from licensing.
 
+ostrich (big-birds-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/867550/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+emu (big-birds-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/861137/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+cassowary (big-birds-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/867853/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+toucan (big-birds-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/845715/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+great-blue-heron (big-birds-v1)
+Creator: Robert.Crosley
+Source: https://freesound.org/people/Robert.Crosley/sounds/638763/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
+atlantic-puffin (big-birds-v1)
+Creator: Lawrence Shove / The British Library Board
+Source: https://commons.wikimedia.org/wiki/File:Atlantic_Puffin_(Fratercula_arctica)_(W1CDR0001416_BD3).ogg
+License: CC-BY-SA-4.0 — https://creativecommons.org/licenses/by-sa/4.0/
+Title: Atlantic Puffin (Fratercula arctica), W1CDR0001416 BD3
+Derived audio excerpts: CC-BY-SA-4.0 — https://creativecommons.org/licenses/by-sa/4.0/
+  assets/audio/animals/big-birds-v1/atlantic-puffin-1.ogg
+  assets/audio/animals/big-birds-v1/atlantic-puffin-2.ogg
+
 tiger (big-predators-v1)
 Creator: lauramellis
 Source: https://freesound.org/people/lauramellis/sounds/263115/

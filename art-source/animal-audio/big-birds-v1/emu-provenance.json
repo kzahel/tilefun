@@ -1,0 +1,18 @@
+{
+  "id": "emu",
+  "creator": "TheKingOfGeeks360",
+  "soundId": 861137,
+  "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/861137/",
+  "download": "https://cdn.freesound.org/previews/861/861137_15895934-hq.mp3",
+  "sourceFile": "emu-source.mp3",
+  "bytes": 11232,
+  "sha256": "f3c8fc334fe11bc927c9aff56531363357d9fcc22089655f6fcbe3b6e742d233",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "emu",
+  "sourceSpecies": "Emu",
+  "notes": "Emu rumble take 2; uploader identifies emu, LG Stylus 2022 recording.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

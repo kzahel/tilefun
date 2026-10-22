@@ -156,5 +156,23 @@
   "american-bison": [
     "assets/audio/animals/raptors-and-grazers-v1/american-bison-1.ogg",
     "assets/audio/animals/raptors-and-grazers-v1/american-bison-2.ogg"
+  ],
+  "ostrich": ["assets/audio/animals/big-birds-v1/ostrich-1.ogg"],
+  "emu": ["assets/audio/animals/big-birds-v1/emu-1.ogg"],
+  "cassowary": [
+    "assets/audio/animals/big-birds-v1/cassowary-1.ogg",
+    "assets/audio/animals/big-birds-v1/cassowary-2.ogg"
+  ],
+  "toucan": [
+    "assets/audio/animals/big-birds-v1/toucan-1.ogg",
+    "assets/audio/animals/big-birds-v1/toucan-2.ogg"
+  ],
+  "great-blue-heron": [
+    "assets/audio/animals/big-birds-v1/great-blue-heron-1.ogg",
+    "assets/audio/animals/big-birds-v1/great-blue-heron-2.ogg"
+  ],
+  "atlantic-puffin": [
+    "assets/audio/animals/big-birds-v1/atlantic-puffin-1.ogg",
+    "assets/audio/animals/big-birds-v1/atlantic-puffin-2.ogg"
   ]
 }

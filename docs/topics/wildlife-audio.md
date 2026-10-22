@@ -19,14 +19,14 @@ and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable o
 poorly identified sources remain documented gaps rather than invented recordings.
 
 All 36 initial campaign animals are committed and pushed, plus upright elephant
-inheritance. Six further animals add distinct owl/eagle/hawk recordings and camel,
-warthog and bison sounds. Per-animal sources, triggers and validation live in the
+inheritance. Twelve further animals add raptor, grazing mammal and distinctive
+bird recordings. Per-animal sources, triggers and validation live in the
 ledger and delivery record. Owner listening review remains pending.
 
 ## Current coverage
 
-**87/206 entries have sound routes: 62 recorded, 25 synthesized, zero game-only;
-119 remain unwired.** Fifty-six real recorded sets supply ninety-four excerpts.
+**93/206 entries have sound routes: 68 recorded, 25 synthesized, zero game-only;
+113 remain unwired.** Sixty-two real recorded sets supply 104 excerpts.
 The [generated animal-by-animal audit](../wildlife-audio-audit.md) owns exact current
 routing, shared designs and missing entries. This is source coverage, not owner
 listening approval or a live deployment check. Inherited coats/panther count as
@@ -55,6 +55,10 @@ Owl, eagle and hawk now use tawny owl, bald eagle and red-tailed hawk recordings
 on fresh existing displays; the former synthesized shared raptor route is suppressed.
 Bison's nasal huff is an explicit non-vocal breath sound. Warthog grunts and
 camel groans are sparse, with camel also using its existing generic action.
+Ostrich, emu, cassowary, toucan, great blue heron and puffin have sparse stationary
+sounds. Ostrich is a nasal snort; toucan/puffin stop while carrying. Puffin source
+and derived excerpts retain CC BY-SA 4.0 with explicit public attribution and edit
+credits. A very faint hornbill candidate remains a documented source-quality gap.
 
 Deer snorts only at fresh alarm stamps, never while browsing. Elephant trunk work
 and animal feeding remain quiet. Elk bugles have a 75-second cooldown.

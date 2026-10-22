@@ -87,6 +87,23 @@
         "build": "pass",
         "listeningReview": "pending-owner"
       }
+    },
+    {
+      "id": 8,
+      "name": "Further distinctive birds",
+      "animals": ["ostrich", "emu", "cassowary", "toucan", "great-blue-heron", "atlantic-puffin"],
+      "validation": {
+        "native": 58,
+        "browser": 2,
+        "browserDuration": "31.9s",
+        "inputDigest": "6a3c4e16f5c4917004a381e683884af1d9393b4b094dfc5687c9a488900784af",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     }
   ],
   "animals": {
@@ -431,7 +448,62 @@
       "bank": "raptors-and-grazers-v1",
       "trigger": "Sparse stationary sound; bison is non-vocal breath",
       "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "ostrich": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "ostrich",
+      "bank": "big-birds-v1",
+      "trigger": "Sparse stationary calls; carrying silence for toucan/puffin; ostrich is non-vocal nasal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "emu": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "emu",
+      "bank": "big-birds-v1",
+      "trigger": "Sparse stationary calls; carrying silence for toucan/puffin; ostrich is non-vocal nasal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "cassowary": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "cassowary",
+      "bank": "big-birds-v1",
+      "trigger": "Sparse stationary calls; carrying silence for toucan/puffin; ostrich is non-vocal nasal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "toucan": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "toucan",
+      "bank": "big-birds-v1",
+      "trigger": "Sparse stationary calls; carrying silence for toucan/puffin; ostrich is non-vocal nasal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "great-blue-heron": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "great-blue-heron",
+      "bank": "big-birds-v1",
+      "trigger": "Sparse stationary calls; carrying silence for toucan/puffin; ostrich is non-vocal nasal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "atlantic-puffin": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "atlantic-puffin",
+      "bank": "big-birds-v1",
+      "trigger": "Sparse stationary calls; carrying silence for toucan/puffin; ostrich is non-vocal nasal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
     }
   },
-  "stopByUtc": "2026-10-23T06:40:00Z"
+  "stopByUtc": "2026-10-23T06:40:00Z",
+  "sourceGaps": {
+    "great-hornbill": {
+      "state": "deferred-source-quality",
+      "candidate": "https://commons.wikimedia.org/wiki/File:Great_hornbill_call_recording.wav",
+      "reason": "Very low recording gain and substantial background relative to calls; retain a gap pending a clearer source or listening review. No runtime wiring or distributed asset."
+    }
+  }
 }

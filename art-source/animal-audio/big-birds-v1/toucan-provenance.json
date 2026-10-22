@@ -1,0 +1,18 @@
+{
+  "id": "toucan",
+  "creator": "TheKingOfGeeks360",
+  "soundId": 845715,
+  "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/845715/",
+  "download": "https://cdn.freesound.org/previews/845/845715_15895934-hq.mp3",
+  "sourceFile": "toucan-source.mp3",
+  "bytes": 48288,
+  "sha256": "a99db99e3c172df77e87f524e11597d2ff3cf4421b24654186cfdeccaddaeca2",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "toucan",
+  "sourceSpecies": "Keel-billed toucan",
+  "notes": "Uploader identifies keel-billed toucan croaks; explicit interpretation of the game's generic toucan. Recorded with LG Stylus 2022.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

@@ -272,6 +272,24 @@ export const ANIMAL_VOICES: Record<
   camel: { label: "Groan", animals: ["camel"], cues: ["action"], cooldown: 45 },
   warthog: { label: "Grunt", animals: ["warthog"], cues: [], cooldown: 35 },
   "american-bison": { label: "Nasal huff", animals: ["american-bison"], cues: [], cooldown: 45 },
+  ostrich: { label: "Nasal snort", animals: ["ostrich"], cues: [], cooldown: 40 },
+  emu: { label: "Rumble", animals: ["emu"], cues: [], cooldown: 40 },
+  cassowary: { label: "Grunt", animals: ["cassowary"], cues: [], cooldown: 40 },
+  toucan: {
+    label: "Keel-billed toucan croak",
+    animals: ["toucan"],
+    cues: [],
+    cooldown: 30,
+    quietWhileCarrying: true,
+  },
+  "great-blue-heron": { label: "Croak", animals: ["great-blue-heron"], cues: [], cooldown: 40 },
+  "atlantic-puffin": {
+    label: "Low growling call",
+    animals: ["atlantic-puffin"],
+    cues: [],
+    cooldown: 40,
+    quietWhileCarrying: true,
+  },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(

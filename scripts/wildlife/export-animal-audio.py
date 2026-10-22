@@ -70,6 +70,7 @@ def export(bank):
                        "rms": math.sqrt(sum(x*x for x in output) / len(output))}
             assert metrics["peak"] < 0.9 and metrics["rms"] > 0.025, (kind, metrics)
             variants.append({"path": path.relative_to(ROOT / "public").as_posix(), "sha256": sha(path),
+                             "license": provenance["license"], "licenseUrl": provenance["licenseUrl"],
                              "trim": [start, end], "filters": filters, **metrics})
         records.append({**provenance, "variants": variants})
     write(source / "manifest.json", {"version": 1, "id": bank, "sampleRate": 24000,

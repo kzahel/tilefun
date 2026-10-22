@@ -21,9 +21,14 @@ for (const bank of readdirSync(root, { withFileTypes: true })
       `Source: ${source.sourcePage}`,
       `License: ${source.license} — ${source.licenseUrl}`,
     );
+    if (source.title) lines.push(`Title: ${source.title}`);
     if (source.upstream) lines.push(`Upstream: ${source.upstream}`);
     if (source.license === "Public-domain-USGov")
       lines.push("No claim to original U.S. Government works.");
+    if (source.license === "CC-BY-SA-4.0") {
+      lines.push(`Derived audio excerpts: CC-BY-SA-4.0 — ${source.licenseUrl}`);
+      for (const variant of source.variants) lines.push(`  ${variant.path}`);
+    }
     lines.push("");
   }
 }

@@ -1,0 +1,18 @@
+{
+  "id": "great-blue-heron",
+  "creator": "Robert.Crosley",
+  "soundId": 638763,
+  "sourcePage": "https://freesound.org/people/Robert.Crosley/sounds/638763/",
+  "download": "https://cdn.freesound.org/previews/638/638763_14006003-hq.mp3",
+  "sourceFile": "great-blue-heron-source.mp3",
+  "bytes": 1829640,
+  "sha256": "b53951ddce063a56404ef81046e4e143805dbbab7fe21c6283b91b9ba23a2f77",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "great-blue-heron",
+  "sourceSpecies": "Great blue heron",
+  "notes": "MacLean Pond, Alberta, June 2 2022. Uploader identifies heron calls at -48 to -44 seconds (about 33.17 to 37.17 seconds from start). Two short croaks selected within that window, excluding larger sharp transients; nearby goose/blackbird/pond background remains.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

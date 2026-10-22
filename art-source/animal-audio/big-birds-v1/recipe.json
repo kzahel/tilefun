@@ -1,0 +1,26 @@
+{
+  "ostrich": {
+    "ranges": [[0.02, 0.43]],
+    "filters": "highpass=f=100,lowpass=f=5000"
+  },
+  "emu": {
+    "ranges": [[0.03, 0.4]],
+    "filters": "highpass=f=60,lowpass=f=2500"
+  },
+  "cassowary": {
+    "ranges": [[0.02, 0.7], [1.48, 1.95]],
+    "filters": "highpass=f=60,lowpass=f=3000"
+  },
+  "toucan": {
+    "ranges": [[0.13, 0.52], [0.74, 1.11]],
+    "filters": "highpass=f=200,lowpass=f=5000"
+  },
+  "great-blue-heron": {
+    "ranges": [[33.45, 34.05], [34.9, 35.5]],
+    "filters": "highpass=f=200,lowpass=f=3500"
+  },
+  "atlantic-puffin": {
+    "ranges": [[1.0, 2.8], [8.0, 9.8]],
+    "filters": "highpass=f=100,lowpass=f=2500"
+  }
+}

@@ -147,6 +147,7 @@ it("maps recorded browser identities, preserves inheritance and pins every retai
       "CC0-1.0",
       "CC-BY-3.0",
       "CC-BY-4.0",
+      "CC-BY-SA-4.0",
       "Public-domain-self",
       "Public-domain-USGov",
     ]).toContain(source.license);
@@ -160,6 +161,8 @@ it("maps recorded browser identities, preserves inheritance and pins every retai
       source.variants.map((v) => v.path),
     );
     for (const variant of source.variants) {
+      if (source.license === "CC-BY-SA-4.0")
+        expect(variant).toMatchObject({ license: source.license, licenseUrl: source.licenseUrl });
       expect(hash(`public/${variant.path}`)).toBe(variant.sha256);
       expect(variant.peak).toBeLessThan(0.9);
       expect(variant.rms).toBeGreaterThan(0.025);

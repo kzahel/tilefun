@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "id": "big-birds-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "ostrich",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 867550,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/867550/",
+      "download": "https://cdn.freesound.org/previews/867/867550_15895934-hq.mp3",
+      "sourceFile": "ostrich-source.mp3",
+      "bytes": 13872,
+      "sha256": "f196447a61aaa66b5b08e3540e33f9352e5989d944bbf4d898e1d2745d73190e",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "ostrich",
+      "sourceSpecies": "Male ostrich",
+      "notes": "Male ostrich snort; nasal breath sound, explicitly non-vocal. Recorded with LG Stylus 2022.",
+      "category": "non-vocal",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-birds-v1/ostrich-1.ogg",
+          "sha256": "eee88d20d837534ab171320313ba33e6bbb17df0f0cf606935a57b5ccbf88713",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [0.02, 0.43],
+          "filters": "atrim=start=0.02:end=0.43,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=5000,volume=2.683705032,afade=t=in:d=0.02,afade=t=out:st=0.370000:d=0.04",
+          "duration": 0.42133333333333334,
+          "peak": 0.8033148050308228,
+          "rms": 0.13089319081240605
+        }
+      ]
+    },
+    {
+      "id": "emu",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 861137,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/861137/",
+      "download": "https://cdn.freesound.org/previews/861/861137_15895934-hq.mp3",
+      "sourceFile": "emu-source.mp3",
+      "bytes": 11232,
+      "sha256": "f3c8fc334fe11bc927c9aff56531363357d9fcc22089655f6fcbe3b6e742d233",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "emu",
+      "sourceSpecies": "Emu",
+      "notes": "Emu rumble take 2; uploader identifies emu, LG Stylus 2022 recording.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-birds-v1/emu-1.ogg",
+          "sha256": "ee26abc0687f48f51216bdaf458dc7b05ea1e227eb7df810703f5b638595dc84",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [0.03, 0.4],
+          "filters": "atrim=start=0.03:end=0.4,asetpts=PTS-STARTPTS,highpass=f=60,lowpass=f=2500,volume=3.792655972,afade=t=in:d=0.02,afade=t=out:st=0.330000:d=0.04",
+          "duration": 0.35933333333333334,
+          "peak": 0.7085407972335815,
+          "rms": 0.16188554810362846
+        }
+      ]
+    },
+    {
+      "id": "cassowary",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 867853,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/867853/",
+      "download": "https://cdn.freesound.org/previews/867/867853_15895934-hq.mp3",
+      "sourceFile": "cassowary-source.mp3",
+      "bytes": 94752,
+      "sha256": "65259bf130bc7a2d9aabf8660a7e7c175a8589b6e3af0913e29db43148de53c4",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "cassowary",
+      "sourceSpecies": "Cassowary",
+      "notes": "Cassowary grunts; uploader identifies species, LG Stylus 2022 recording.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-birds-v1/cassowary-1.ogg",
+          "sha256": "ad41d5cbe79ff85356daeea14c6a9dcb0a9ad41a4e58d3c3e6b8bf44077344ae",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [0.02, 0.7],
+          "filters": "atrim=start=0.02:end=0.7,asetpts=PTS-STARTPTS,highpass=f=60,lowpass=f=3000,volume=0.741640353,afade=t=in:d=0.02,afade=t=out:st=0.640000:d=0.04",
+          "duration": 0.6693333333333333,
+          "peak": 0.7416872382164001,
+          "rms": 0.10590345931337544
+        },
+        {
+          "path": "assets/audio/animals/big-birds-v1/cassowary-2.ogg",
+          "sha256": "668c53b80537c81b917b3c7b12a34d93d0716e5c7bf0c54627545b452184299b",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [1.48, 1.95],
+          "filters": "atrim=start=1.48:end=1.95,asetpts=PTS-STARTPTS,highpass=f=60,lowpass=f=3000,volume=1.116258670,afade=t=in:d=0.02,afade=t=out:st=0.430000:d=0.04",
+          "duration": 0.48533333333333334,
+          "peak": 0.751270592212677,
+          "rms": 0.08136674266376694
+        }
+      ]
+    },
+    {
+      "id": "toucan",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 845715,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/845715/",
+      "download": "https://cdn.freesound.org/previews/845/845715_15895934-hq.mp3",
+      "sourceFile": "toucan-source.mp3",
+      "bytes": 48288,
+      "sha256": "a99db99e3c172df77e87f524e11597d2ff3cf4421b24654186cfdeccaddaeca2",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "toucan",
+      "sourceSpecies": "Keel-billed toucan",
+      "notes": "Uploader identifies keel-billed toucan croaks; explicit interpretation of the game's generic toucan. Recorded with LG Stylus 2022.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-birds-v1/toucan-1.ogg",
+          "sha256": "a0b52f0b7a723f7b65f4a2ac254c2d82adae70a2c9801401e61fd7d38be1c8cf",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [0.13, 0.52],
+          "filters": "atrim=start=0.13:end=0.52,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=5000,volume=1.377429182,afade=t=in:d=0.02,afade=t=out:st=0.350000:d=0.04",
+          "duration": 0.37933333333333336,
+          "peak": 0.7554418444633484,
+          "rms": 0.09570976804592488
+        },
+        {
+          "path": "assets/audio/animals/big-birds-v1/toucan-2.ogg",
+          "sha256": "d97be2068030dc24049e4f250c444761b315dd6bdcfa6db2e5c0369013a57adf",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [0.74, 1.11],
+          "filters": "atrim=start=0.74:end=1.11,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=5000,volume=1.258762984,afade=t=in:d=0.02,afade=t=out:st=0.330000:d=0.04",
+          "duration": 0.35933333333333334,
+          "peak": 0.7617594003677368,
+          "rms": 0.08807266313869203
+        }
+      ]
+    },
+    {
+      "id": "great-blue-heron",
+      "creator": "Robert.Crosley",
+      "soundId": 638763,
+      "sourcePage": "https://freesound.org/people/Robert.Crosley/sounds/638763/",
+      "download": "https://cdn.freesound.org/previews/638/638763_14006003-hq.mp3",
+      "sourceFile": "great-blue-heron-source.mp3",
+      "bytes": 1829640,
+      "sha256": "b53951ddce063a56404ef81046e4e143805dbbab7fe21c6283b91b9ba23a2f77",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "great-blue-heron",
+      "sourceSpecies": "Great blue heron",
+      "notes": "MacLean Pond, Alberta, June 2 2022. Uploader identifies heron calls at -48 to -44 seconds (about 33.17 to 37.17 seconds from start). Two short croaks selected within that window, excluding larger sharp transients; nearby goose/blackbird/pond background remains.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-birds-v1/great-blue-heron-1.ogg",
+          "sha256": "3e2e016bf0651d5c760656b3fc6e831f18dcc2a8eb57838c0ac4eb133d5d60be",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [33.45, 34.05],
+          "filters": "atrim=start=33.45:end=34.05,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=3500,volume=3.724734208,afade=t=in:d=0.02,afade=t=out:st=0.560000:d=0.04",
+          "duration": 0.6133333333333333,
+          "peak": 0.7416355609893799,
+          "rms": 0.11144678389033721
+        },
+        {
+          "path": "assets/audio/animals/big-birds-v1/great-blue-heron-2.ogg",
+          "sha256": "c839e37db533481a58d7acadc4b9d1d3c6e0a778c82ca0dd919e442ff65c7fa9",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [34.9, 35.5],
+          "filters": "atrim=start=34.9:end=35.5,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=3500,volume=4.051075198,afade=t=in:d=0.02,afade=t=out:st=0.560000:d=0.04",
+          "duration": 0.5893333333333334,
+          "peak": 0.7984355092048645,
+          "rms": 0.10543104632038978
+        }
+      ]
+    },
+    {
+      "id": "atlantic-puffin",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Atlantic_Puffin_(Fratercula_arctica)_(W1CDR0001416_BD3).ogg",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/3/33/Atlantic_Puffin_%28Fratercula_arctica%29_%28W1CDR0001416_BD3%29.ogg",
+      "sourceKind": "original distributed Wikimedia Commons audio file",
+      "sourceFile": "atlantic-puffin-source.ogg",
+      "bytes": 1675578,
+      "sha256": "909c3e23fd9e682fdc0722b6d91730690c7ffbb02fa28ea4776a424a40e71b5c",
+      "creator": "Lawrence Shove / The British Library Board",
+      "title": "Atlantic Puffin (Fratercula arctica), W1CDR0001416 BD3",
+      "license": "CC-BY-SA-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "species": "atlantic-puffin",
+      "sourceSpecies": "Atlantic puffin",
+      "notes": "Lawrence Shove, Skokholm Island, Pembrokeshire, Wales, 1965; British Library Board shelfmark W1CDR0001416 BD3. Commons VRT permission ticket 2015111010010706. Trimmed/filtered/gain-adjusted/faded mono excerpts remain CC-BY-SA-4.0, like their source.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/big-birds-v1/atlantic-puffin-1.ogg",
+          "sha256": "dcb2b3f42174c7d20ebcbe12ecb19517ac8739087296bff4c65c1534900593c3",
+          "license": "CC-BY-SA-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trim": [1.0, 2.8],
+          "filters": "atrim=start=1.0:end=2.8,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=2500,volume=4.307762568,afade=t=in:d=0.02,afade=t=out:st=1.760000:d=0.04",
+          "duration": 1.8,
+          "peak": 0.7531136274337769,
+          "rms": 0.15431063346065269
+        },
+        {
+          "path": "assets/audio/animals/big-birds-v1/atlantic-puffin-2.ogg",
+          "sha256": "2df64768686fbd51411b0acec0983658b865a867328c0a757d4e57526156b333",
+          "license": "CC-BY-SA-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trim": [8.0, 9.8],
+          "filters": "atrim=start=8.0:end=9.8,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=2500,volume=2.447051685,afade=t=in:d=0.02,afade=t=out:st=1.760000:d=0.04",
+          "duration": 1.8,
+          "peak": 0.7244086861610413,
+          "rms": 0.16037348102800245
+        }
+      ]
+    }
+  ]
+}

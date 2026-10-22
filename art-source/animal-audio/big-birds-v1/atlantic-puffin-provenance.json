@@ -1,0 +1,18 @@
+{
+  "id": "atlantic-puffin",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Atlantic_Puffin_(Fratercula_arctica)_(W1CDR0001416_BD3).ogg",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/3/33/Atlantic_Puffin_%28Fratercula_arctica%29_%28W1CDR0001416_BD3%29.ogg",
+  "sourceKind": "original distributed Wikimedia Commons audio file",
+  "sourceFile": "atlantic-puffin-source.ogg",
+  "bytes": 1675578,
+  "sha256": "909c3e23fd9e682fdc0722b6d91730690c7ffbb02fa28ea4776a424a40e71b5c",
+  "creator": "Lawrence Shove / The British Library Board",
+  "title": "Atlantic Puffin (Fratercula arctica), W1CDR0001416 BD3",
+  "license": "CC-BY-SA-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "species": "atlantic-puffin",
+  "sourceSpecies": "Atlantic puffin",
+  "notes": "Lawrence Shove, Skokholm Island, Pembrokeshire, Wales, 1965; British Library Board shelfmark W1CDR0001416 BD3. Commons VRT permission ticket 2015111010010706. Trimmed/filtered/gain-adjusted/faded mono excerpts remain CC-BY-SA-4.0, like their source.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}
