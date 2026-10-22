@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: twelve recorded voices implemented and automation verified; owner listening review pending.
+Status: fifteen recorded sound sets implemented and automation verified; owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -12,12 +12,13 @@ records all 206 current Animal Browser entries. The
 
 ## Current coverage
 
-Source inspection finds call wiring for **51/206 entries (24.8%)**, using **26
-effective sound designs**: twelve recorded voices covering sixteen entries, eleven
+Source inspection finds call wiring for **54/206 entries (26.2%)**, using **29
+effective sound designs**: fifteen recorded sound sets covering nineteen entries, eleven
 shared synthesized hunter designs and three game-only synthesized calls. Before
 recorded-voice work, 35 entries shared thirteen synthesized designs. The 73 existing OGG files cover
 footsteps (30), impacts (25), jumps (4), UI/ghosts (11) and campfire crackle (3).
-The three recorded banks add twenty-three short OGG excerpts. These are source-level coverage counts, not a listening approval or live-deployment
+The four recorded banks add twenty-nine OGG excerpts, including mechanical bee
+wingbeats and cricket stridulation. These are source-level coverage counts, not a listening approval or live-deployment
 check. Related animals sharing a voice count as covered entries, not unique sounds.
 
 | Effective design | Animals currently routed to it | Trigger / consumer |
@@ -34,6 +35,9 @@ check. Related animals sharing a voice count as covered entries, not unique soun
 | Recorded crow caw | Carrion crow | Sparse stationary idle, quiet while carrying twigs; shared game/lab |
 | Recorded raven croak | Raven | Sparse stationary idle, quiet while carrying shiny objects; shared game/lab |
 | Recorded pigeon coo | Rock pigeon | Sparse stationary idle, quiet during flight/action; shared game/lab |
+| Recorded dove coo | Dove | Sparse stationary idle; own mourning-dove recording, shared game/lab |
+| Recorded flight buzz | Bee | Moving fly pose only; finite bursts, cancelled on landing/sipping; shared game/lab |
+| Recorded cricket chirp | Cricket | Sparse stationary idle stridulation; group spacing, quiet while hopping; shared game/lab |
 | Robin chirp | Robin | Enter calling clip 3, or become scared; ordinary PlayScene only |
 | Frog croak | Frog | Enter croaking clip 3, or become scared; ordinary PlayScene only |
 | Duck quack | Mallard duck | Become scared; ordinary PlayScene only |
@@ -58,7 +62,7 @@ PlayScene path with a 300-pixel radius. Lab sounds default off behind **Enable
 creature sounds**; enabling them does not connect that separate three-animal path.
 
 Recorded calls use shared `AnimalAudio` under `AudioManager.updateCreatureCalls`:
-300-pixel attenuation/pan, per-animal cooldowns (8–30 seconds), initial idle delay
+300-pixel attenuation/pan, per-animal cooldowns (4–30 seconds), initial idle delay
 8–20 seconds, subsequent idle spacing 24–42 seconds and at least three seconds
 between ambient admissions. Named replicated clips identify action onsets; no
 new authority or save fields are needed. Six voices is the combined recorded/
@@ -82,7 +86,12 @@ through the normal scared-actor rejection. Crow/pigeon have two excerpts each;
 raven has three. Corvid beak occupancy is observed from replicated child-parent
 attachments: pickup stops active voices and invalidates pending loads. No call is
 attached to nest-building, burying or other beak work. No artificial pitch variants
-are counted.
+are counted. Dove/bee/cricket each have two excerpts. Bee uses finite flight-only
+bursts every 4–7 seconds, with no initial idle delay when flight is observed.
+Landing/sipping cancels active/pending buzz. Cricket admits a phrase at most once
+per twelve seconds across a group and stops on movement. Only one world insect
+source plays at once, within the combined six-voice cap. These are explicit
+mechanical sounds; other movement/interaction Foley remains separately audited.
 
 ### Important gaps and corrections
 
@@ -98,8 +107,9 @@ are counted.
 - Most authored fauna lack movement Foley as well. `FootstepSystem` admits
   terrestrial predator profiles and legacy `chicken`/`cow` types, but not authored
   provisional chicken/cow or generic fauna such as horse. Vocalization coverage
-  must remain separate from footsteps, wingbeats, splashes and interaction sounds.
-- The 155 entries without calls have not been classified as intentionally quiet.
+  remains separate from those movement/interaction gaps; bee wing buzz is now
+  explicitly counted as a mechanical sound in the broader sound audit.
+- The 152 entries without calls have not been classified as intentionally quiet.
   Silence can be correct; adding a constant voice to every animal is not the goal.
 
 ## Recommended delivery order
@@ -110,13 +120,14 @@ No new art, elaborate mimicry AI or animal production is needed to prove it.
 | Slice | Animals / scope | Audible result |
 | --- | --- | --- |
 | 1: familiar voices | Dog and two coats; cat and two coats; cow, sheep, chicken, horse | Implemented in [176](../tactical/176-familiar-animal-voices.md); six voice sets cover ten entries. Shared action/idle playback and auditions; owner listening review pending. |
-| 2: farm and garden | Goat, donkey, piglet; crow, raven, pigeon, dove; bee, cricket | First three implemented in [177](../tactical/177-farm-animal-voices.md): resting bleat/bray and context-specific piglet alarm. Crow/raven/pigeon implemented in [178](../tactical/178-garden-bird-voices.md); dove/bee/cricket remain next. Pigeon is not inherited by dove. Buzz only while flying and bound swarm ambience. |
+| 2: farm and garden | Goat, donkey, piglet; crow, raven, pigeon, dove; bee, cricket | First three implemented in [177](../tactical/177-farm-animal-voices.md): resting bleat/bray and context-specific piglet alarm. Crow/raven/pigeon implemented in [178](../tactical/178-garden-bird-voices.md); dove/bee/cricket implemented in [182](../tactical/182-dove-and-insect-sounds.md). Separate dove coos, flight-only buzz and bounded cricket groups. |
 | 3: existing-call corrections and predators | Connect robin/frog/duck in lab; tiger, lion, panther, brown bear; review hunter placeholders | Owl routing completed in slice 1. Remaining work: game/lab parity, recognizable large predators, quieter and more appropriate small hunters. |
 | 4: specialist land/air | Peacock, parrot, elephant, primates, other birds and mammals | Fill prioritized gaps with explicit species/context choices. Parrot starts with its own call; imitation remains a separate proposed behavior. |
 | 5: aquatic and deliberate silence | Marine mammals, amphibious animals, quiet species | Decide surface/listener context before whale/dolphin playback. Document quiet animals and appropriate incidental sounds without inventing roars for fish or insects. |
 
 Slice 1 raised raw call coverage from 35 to 45/206; the three farm voices raise
-it to 48/206; three bird voices now bring it to **51/206 (24.8%)**. Improving existing
+it to 48/206; three bird voices brought it to 51/206; dove/bee/cricket now bring it to
+**54/206 (26.2%)**. Improving existing
 voices and classifying deliberate silence are useful even when that count stays
 unchanged. Track entries, voice sets, appropriate contexts and listening approval
 separately.
@@ -136,6 +147,8 @@ The next three sources and five excerpts are retained in the
 [farm bank](../../art-source/animal-audio/farm-v1/README.md).
 Crow/raven/pigeon sources and seven excerpts are retained in the
 [garden bird bank](../../art-source/animal-audio/garden-birds-v1/README.md).
+Dove/bee/cricket and six excerpts are retained in the
+[dove and insect bank](../../art-source/animal-audio/garden-v1/README.md).
 These are public HQ MP3 previews, not lossless original downloads. Source/signal
 inspection is complete; **owner listening approval remains pending**. The six familiar rows below are integrated; the Baby Animals pack supplied the
 piglet source lead, but the exact original preview was downloaded directly. Other
@@ -214,7 +227,7 @@ resolved using the actual routing precedence, now corrected to `callKind ??
 fierce.kind`. [176](../tactical/176-familiar-animal-voices.md) records new playback,
 source pins, UI and validation. Animation, AI and artwork review identities are
 unchanged. [177](../tactical/177-farm-animal-voices.md) adds the three farm voices. Next:
-owner listening review, then dove/bee/cricket or predator voices. Bird delivery
+owner listening review, then existing game/lab parity and predator voices. Bird delivery
 is tracked in [178](../tactical/178-garden-bird-voices.md).
 
 Initial audit validation: all 206 IDs match Animal Browser exactly, with no duplicates;
@@ -246,3 +259,18 @@ objects remain exact. Native: 6,696 passed, five known Windows failures, ten
 skipped. All 835 browser cases pass, including the new raven audition and both
 shared Web Audio boundaries. Twelve recorded sets cover sixteen entries with
 twenty-three takes; owner listening review remains pending.
+
+Dove/insect sounds [182](../tactical/182-dove-and-insect-sounds.md) add three CC0
+recordings/six takes, with flight-only bee buzz and group-limited cricket chirps.
+All 56 focused audio checks, typecheck, lint and strict inventories/build pass.
+All 1,980 prior review objects are exact. Native regression: 6,700 passed, five
+known Windows failures and ten skipped. All 835 browser cases pass, including
+cricket audition and real Worker bee flight audio. Fifteen recorded sound sets
+cover nineteen entries with twenty-nine takes; owner listening review remains pending.
+
+Delivery was rebased onto the incoming renderer-performance checkpoint
+`26597576`. Full regression counts above refer to base `6f2915de`; combined-source
+verification passes 58 focused native and 23 audio/GPU/vehicle-review browser
+checks, types, lint, strict inventories and build. All 1,980 incoming review
+objects remain exact. Sound source/export bytes are unchanged; current evidence
+is in [182](../tactical/182-dove-and-insect-sounds.md).

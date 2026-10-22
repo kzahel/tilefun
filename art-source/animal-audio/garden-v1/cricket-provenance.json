@@ -1,0 +1,17 @@
+{
+  "id": "cricket",
+  "species": "cricket",
+  "creator": "ClaudeDebussy",
+  "soundId": 428679,
+  "sourcePage": "https://freesound.org/people/ClaudeDebussy/sounds/428679/",
+  "download": "https://cdn.freesound.org/previews/428/428679_5736710-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "cricket-source.mp3",
+  "sha256": "43e0b17687da18dfe99e7e3940bf89f1ffff8b9263a5b9fef3c2f8ff6eaa6618",
+  "bytes": 480960,
+  "category": "stridulation",
+  "sourceSpecies": "cricket; species unspecified"
+}

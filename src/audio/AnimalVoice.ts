@@ -15,6 +15,8 @@ export const ANIMAL_VOICES: Record<
     ambient?: boolean;
     alarmCue?: string;
     quietWhileCarrying?: boolean;
+    flightBuzz?: boolean;
+    insect?: boolean;
   }
 > = {
   dog: {
@@ -53,6 +55,16 @@ export const ANIMAL_VOICES: Record<
     quietWhileCarrying: true,
   },
   pigeon: { label: "Coo", animals: ["pigeon"], cues: [], cooldown: 25 },
+  dove: { label: "Coo", animals: ["dove"], cues: [], cooldown: 30 },
+  bee: {
+    label: "Flight buzz",
+    animals: ["bee"],
+    cues: [],
+    cooldown: 4,
+    flightBuzz: true,
+    insect: true,
+  },
+  cricket: { label: "Chirp", animals: ["cricket"], cues: [], cooldown: 25, insect: true },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(

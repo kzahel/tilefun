@@ -4,6 +4,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import receipt from "../../art-source/animal-audio/familiar-v1/manifest.json";
 import farmReceipt from "../../art-source/animal-audio/farm-v1/manifest.json";
 import birdReceipt from "../../art-source/animal-audio/garden-birds-v1/manifest.json";
+import gardenReceipt from "../../art-source/animal-audio/garden-v1/manifest.json";
 import { required } from "../art/ArtCatalog.js";
 import { createBall } from "../entities/Ball.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
@@ -89,9 +90,9 @@ function harness() {
   return { audio, ctx, sources, gains, pans, fetcher, sheep, listener, pose, flush };
 }
 
-it("maps sixteen browser entries, preserves coats and pins all twelve sources/twenty-three exported clips", () => {
+it("maps nineteen browser entries, preserves coats and pins fifteen sources/twenty-nine exported clips", () => {
   const covered = ANIMAL_BROWSER_ENTRIES.filter((a) => animalVoiceForType(a.type));
-  expect(covered).toHaveLength(16);
+  expect(covered).toHaveLength(19);
   for (const a of covered) expect(animalVoiceForType(a.type)).toBe(animalVoiceForSpecies(a.id));
   expect(animalVoiceForSpecies("dog-golden")).toBe("dog");
   expect(animalVoiceForSpecies("cat-black")).toBe("cat");
@@ -103,12 +104,13 @@ it("maps sixteen browser entries, preserves coats and pins all twelve sources/tw
     "wildlife-fox-provisional-v1",
   ])
     expect(animalVoiceForType(type)).toBeUndefined();
-  expect(Object.keys(ANIMAL_VOICES)).toHaveLength(12);
+  expect(Object.keys(ANIMAL_VOICES)).toHaveLength(15);
   expect(receipt.sources.flatMap((s) => s.variants)).toHaveLength(11);
   expect(farmReceipt.sources.flatMap((s) => s.variants)).toHaveLength(5);
   expect(birdReceipt.sources.flatMap((s) => s.variants)).toHaveLength(7);
+  expect(gardenReceipt.sources.flatMap((s) => s.variants)).toHaveLength(6);
   const hash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
-  for (const [bank, source] of [receipt, farmReceipt, birdReceipt].flatMap((r) =>
+  for (const [bank, source] of [receipt, farmReceipt, birdReceipt, gardenReceipt].flatMap((r) =>
     r.sources.map((s) => [r.id, s] as const),
   )) {
     expect(source.license).toBe("CC0-1.0");
@@ -200,7 +202,7 @@ it.each(["crow", "raven"] as const)(
 
 it("uses distinct bird voices only at rest, leaving flight and feeding quiet", async () => {
   const h = harness();
-  for (const [index, species] of (["crow", "raven", "pigeon"] as const).entries()) {
+  for (const [index, species] of (["crow", "raven", "pigeon", "dove"] as const).entries()) {
     const bird = createFauna(species, 20, 0);
     bird.id = index + 2;
     const pose = (name: string) => {
@@ -225,7 +227,11 @@ it("uses distinct bird voices only at rest, leaving flight and feeding quiet", a
     h.audio.update([bird], h.listener, true);
     await h.flush();
     expect(h.sources).toHaveLength(index + 1);
-    expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining(`garden-birds-v1/${species}-`));
+    expect(h.fetcher).toHaveBeenCalledWith(
+      expect.stringContaining(
+        `${species === "dove" ? "garden-v1" : "garden-birds-v1"}/${species}-`,
+      ),
+    );
   }
 });
 
@@ -472,4 +478,112 @@ it("does not replay a carry/drop across a scene reset with reused actor IDs", as
   h.audio.update([dog, player, ball], h.listener, true);
   await h.flush();
   expect(h.sources).toHaveLength(0);
+});
+
+function setPose(actor: ReturnType<typeof createFauna>, name: string, moving = false) {
+  required(actor.sprite).clip = required(ENTITY_DEFS[actor.type]?.sprite?.clips).findIndex(
+    (c) => c.name === name,
+  );
+  expect(actor.sprite?.clip).toBeGreaterThanOrEqual(0);
+  required(actor.sprite).moving = moving;
+}
+
+it("buzzes only for replicated bee flight and stops immediately on flower contact", async () => {
+  const h = harness(),
+    bee = createFauna("bee", 20, 0);
+  bee.id = 2;
+  const replicas = () => [deserializeEntity(serializeEntity(bee))];
+  h.audio.update(replicas(), h.listener, true);
+  h.ctx.currentTime = 25;
+  setPose(bee, "sip");
+  h.audio.update(replicas(), h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(0);
+  setPose(bee, "fly", true);
+  h.audio.update(replicas(), h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining("garden-v1/bee-"));
+  setPose(bee, "sip");
+  h.audio.update(replicas(), h.listener, true);
+  expect(h.sources[0]?.stop).toHaveBeenCalledOnce();
+  expect(h.audio.diagnostics.active).toBe(0);
+  h.ctx.currentTime = 50;
+  setPose(bee, "fly"); // A named clip alone cannot establish movement.
+  h.audio.update(replicas(), h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+});
+
+it("does not start a pending buzz after landing and taking off again", async () => {
+  const h = harness(),
+    bee = createFauna("bee", 20, 0);
+  bee.id = 2;
+  let resolve!: (v: { ok: boolean; arrayBuffer: () => Promise<ArrayBuffer> }) => void;
+  h.fetcher.mockImplementation(
+    () =>
+      new Promise((r) => {
+        resolve = r;
+      }),
+  );
+  setPose(bee, "fly", true);
+  h.audio.update([bee], h.listener, true);
+  setPose(bee, "sip");
+  h.audio.update([bee], h.listener, true);
+  setPose(bee, "fly", true);
+  h.audio.update([bee], h.listener, true);
+  resolve({ ok: true, arrayBuffer: async () => new ArrayBuffer(8) });
+  await h.flush();
+  expect(h.sources).toHaveLength(0);
+});
+
+it("spaces cricket groups by twelve seconds and stops chirping when they hop", async () => {
+  const h = harness();
+  const group = Array.from({ length: 20 }, (_, i) => {
+    const a = createFauna("cricket", 200 - i * 5, 0);
+    a.id = i + 1;
+    return a;
+  });
+  h.audio.update(group, h.listener, true);
+  h.ctx.currentTime = 25;
+  h.audio.update(group, h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  expect(h.pans[0]).toBeCloseTo(105 / 240);
+  h.sources[0]?.onended?.();
+  h.ctx.currentTime = 28;
+  h.audio.update(group, h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  h.ctx.currentTime = 37;
+  h.audio.update(group, h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(2);
+  for (const a of group) setPose(a, "hop", true);
+  h.audio.update(group, h.listener, true);
+  expect(h.audio.diagnostics.active).toBe(0);
+});
+
+it("shares one insect emitter between bee buzz and cricket calls and releases it on removal", async () => {
+  const h = harness(),
+    cricket = createFauna("cricket", 20, 0),
+    bee = createFauna("bee", 10, 0);
+  cricket.id = 2;
+  bee.id = 3;
+  h.audio.update([cricket], h.listener, true);
+  h.ctx.currentTime = 25;
+  h.audio.update([cricket], h.listener, true);
+  await h.flush();
+  setPose(bee, "fly", true);
+  h.ctx.currentTime = 28;
+  h.audio.update([bee, cricket], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  h.audio.update([bee], h.listener, true); // Retire the cricket and its emitter slot.
+  h.audio.update([bee], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(2);
+  expect(h.audio.diagnostics.active).toBe(1);
+  h.audio.stop();
+  expect(h.audio.diagnostics.active).toBe(0);
 });

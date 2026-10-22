@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "id": "garden-v1",
+  "license": "CC0-1.0",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "dove",
+      "species": "dove",
+      "creator": "nathankwright",
+      "soundId": 456930,
+      "sourcePage": "https://freesound.org/people/nathankwright/sounds/456930/",
+      "download": "https://cdn.freesound.org/previews/456/456930_5948823-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "dove-source.mp3",
+      "sha256": "4ae7aab2aa077949aec772dd6e8b70882f02e83119409661f8d413625cc72d9f",
+      "bytes": 1724151,
+      "variants": [
+        {
+          "path": "assets/audio/animals/garden-v1/dove-1.ogg",
+          "sha256": "8fcda56d975ea5d076df9f477b930cd6794335853ff3f30253fb491b60ae3979",
+          "trim": [3.35, 7.75],
+          "filters": "atrim=start=3.35:end=7.75,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=2000,volume=106.174360104,afade=t=in:d=0.02,afade=t=out:st=4.360000:d=0.04",
+          "duration": 4.4,
+          "peak": 0.6005096435546875,
+          "rms": 0.16016571501466817
+        },
+        {
+          "path": "assets/audio/animals/garden-v1/dove-2.ogg",
+          "sha256": "143ee6723930731793278b677dc8196652fe10e9b02a2f70c5bb247b8e5ecbdd",
+          "trim": [17.0, 21.45],
+          "filters": "atrim=start=17.0:end=21.45,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=2000,volume=107.832093707,afade=t=in:d=0.02,afade=t=out:st=4.410000:d=0.04",
+          "duration": 4.45,
+          "peak": 0.5846866965293884,
+          "rms": 0.16002636625176694
+        }
+      ],
+      "category": "vocalization",
+      "sourceSpecies": "mourning dove"
+    },
+    {
+      "id": "bee",
+      "species": "bee",
+      "creator": "Department64",
+      "soundId": 103047,
+      "sourcePage": "https://freesound.org/people/Department64/sounds/103047/",
+      "download": "https://cdn.freesound.org/previews/103/103047_861714-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "bee-source.mp3",
+      "sha256": "bdc9eebf51d4528d701098298fa7e4ad8b4f4e14e47c53aea092d4a237777f07",
+      "bytes": 67488,
+      "variants": [
+        {
+          "path": "assets/audio/animals/garden-v1/bee-1.ogg",
+          "sha256": "271030c386d8c27d449b902f0bcec5d09c217f947d5390ac212f474cf630ad0a",
+          "trim": [0.4, 1.45],
+          "filters": "atrim=start=0.4:end=1.45,asetpts=PTS-STARTPTS,highpass=f=80,volume=14.433170486,afade=t=in:d=0.02,afade=t=out:st=1.010000:d=0.04",
+          "duration": 1.05,
+          "peak": 0.7291375994682312,
+          "rms": 0.13138724603532972
+        },
+        {
+          "path": "assets/audio/animals/garden-v1/bee-2.ogg",
+          "sha256": "ec2d281e433be84afcb1ae6f9c5e31c124e228c1a919e06d139c2a8003aa800c",
+          "trim": [1.55, 2.6],
+          "filters": "atrim=start=1.55:end=2.6,asetpts=PTS-STARTPTS,highpass=f=80,volume=3.035402136,afade=t=in:d=0.02,afade=t=out:st=1.010000:d=0.04",
+          "duration": 1.05,
+          "peak": 0.7481449842453003,
+          "rms": 0.0874030686456508
+        }
+      ],
+      "category": "wingbeat",
+      "sourceSpecies": "bumblebee"
+    },
+    {
+      "id": "cricket",
+      "species": "cricket",
+      "creator": "ClaudeDebussy",
+      "soundId": 428679,
+      "sourcePage": "https://freesound.org/people/ClaudeDebussy/sounds/428679/",
+      "download": "https://cdn.freesound.org/previews/428/428679_5736710-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "cricket-source.mp3",
+      "sha256": "43e0b17687da18dfe99e7e3940bf89f1ffff8b9263a5b9fef3c2f8ff6eaa6618",
+      "bytes": 480960,
+      "variants": [
+        {
+          "path": "assets/audio/animals/garden-v1/cricket-1.ogg",
+          "sha256": "13e6b2a0ebc0bbada275df1eaefcd3f248c6e207aa285884e34c0a27579c3e0f",
+          "trim": [6.02, 7.18],
+          "filters": "atrim=start=6.02:end=7.18,asetpts=PTS-STARTPTS,highpass=f=2500,volume=25.875825936,afade=t=in:d=0.02,afade=t=out:st=1.120000:d=0.04",
+          "duration": 1.16,
+          "peak": 0.7365814447402954,
+          "rms": 0.06718836735966033
+        },
+        {
+          "path": "assets/audio/animals/garden-v1/cricket-2.ogg",
+          "sha256": "d34f27952f4a37f889431afebc1dbc90fc19f4c9fd8057110de4161067c509f5",
+          "trim": [17.9, 19.08],
+          "filters": "atrim=start=17.9:end=19.08,asetpts=PTS-STARTPTS,highpass=f=2500,volume=9.860538196,afade=t=in:d=0.02,afade=t=out:st=1.140000:d=0.04",
+          "duration": 1.18,
+          "peak": 0.7519786953926086,
+          "rms": 0.06977107515717892
+        }
+      ],
+      "category": "stridulation",
+      "sourceSpecies": "cricket; species unspecified"
+    }
+  ]
+}

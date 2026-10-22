@@ -1,0 +1,17 @@
+{
+  "id": "bee",
+  "species": "bee",
+  "creator": "Department64",
+  "soundId": 103047,
+  "sourcePage": "https://freesound.org/people/Department64/sounds/103047/",
+  "download": "https://cdn.freesound.org/previews/103/103047_861714-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "bee-source.mp3",
+  "sha256": "bdc9eebf51d4528d701098298fa7e4ad8b4f4e14e47c53aea092d4a237777f07",
+  "bytes": 67488,
+  "category": "wingbeat",
+  "sourceSpecies": "bumblebee"
+}

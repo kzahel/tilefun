@@ -32039,7 +32039,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:81"
+          "source": "src/audio/AnimalVoice.ts:93"
         },
         {
           "system": "Gameplay",
@@ -32087,7 +32087,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:81"
+          "source": "src/audio/AnimalVoice.ts:93"
         },
         {
           "system": "Gameplay",
@@ -32135,7 +32135,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:81"
+          "source": "src/audio/AnimalVoice.ts:93"
         },
         {
           "system": "Gameplay",
@@ -33969,7 +33969,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalAudio.ts:62"
+          "source": "src/audio/AnimalAudio.ts:64"
         },
         {
           "system": "Gameplay",
@@ -34203,11 +34203,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:29"
+          "source": "src/audio/AnimalVoice.ts:31"
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:67"
+          "source": "src/audio/AnimalVoice.ts:79"
         },
         {
           "system": "Gameplay",
@@ -34357,11 +34357,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:27"
+          "source": "src/audio/AnimalVoice.ts:29"
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:67"
+          "source": "src/audio/AnimalVoice.ts:79"
         },
         {
           "system": "Gameplay",
@@ -34511,7 +34511,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:55"
+          "source": "src/audio/AnimalVoice.ts:57"
         },
         {
           "system": "Editor",
@@ -34873,7 +34873,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:43"
+          "source": "src/audio/AnimalVoice.ts:45"
         },
         {
           "system": "Editor",
@@ -35193,7 +35193,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalAudio.ts:58"
+          "source": "src/audio/AnimalAudio.ts:60"
         },
         {
           "system": "Gameplay",

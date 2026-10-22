@@ -34,5 +34,14 @@
   "pigeon": [
     "assets/audio/animals/garden-birds-v1/pigeon-1.ogg",
     "assets/audio/animals/garden-birds-v1/pigeon-2.ogg"
+  ],
+  "dove": [
+    "assets/audio/animals/garden-v1/dove-1.ogg",
+    "assets/audio/animals/garden-v1/dove-2.ogg"
+  ],
+  "bee": ["assets/audio/animals/garden-v1/bee-1.ogg", "assets/audio/animals/garden-v1/bee-2.ogg"],
+  "cricket": [
+    "assets/audio/animals/garden-v1/cricket-1.ogg",
+    "assets/audio/animals/garden-v1/cricket-2.ogg"
   ]
 }

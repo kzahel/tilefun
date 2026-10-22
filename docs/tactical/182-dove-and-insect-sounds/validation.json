@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-22",
+  "state": "implemented-and-automation-verified",
+  "humanListeningReview": "pending-owner",
+  "audio": {
+    "newSounds": ["dove", "bee", "cricket"],
+    "newSources": 3,
+    "newTakes": 6,
+    "totalSoundSets": 15,
+    "totalTakes": 29,
+    "recordedEntries": 19,
+    "callRoutes": 54,
+    "totalEntries": 206,
+    "mechanicalSounds": ["bee wingbeat", "cricket stridulation"],
+    "bee": "finite flight-only bursts; 4–7 seconds spacing; stop on land/sip",
+    "insectWorldVoiceCap": 1,
+    "cricketGroupAdmissionSeconds": 12
+  },
+  "typecheck": "pass",
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 121,
+    "existingInfos": 42
+  },
+  "focusedAudioTests": 56,
+  "native": {
+    "total": 6715,
+    "passed": 6700,
+    "knownWindowsFailures": 5,
+    "skipped": 10,
+    "seconds": 907.03
+  },
+  "browser": {
+    "total": 835,
+    "passed": 835,
+    "failed": 0,
+    "minutes": 40.5
+  },
+  "audioBrowserBoundariesPassed": 2,
+  "nodeComparatorPassed": 1,
+  "allExportsHashPinnedDecodedAndMeasured": true,
+  "build": "pass",
+  "workshopCandidates": 1980,
+  "priorCandidateObjectsUnchanged": true,
+  "normalChromiumRetinaParity": "pass",
+  "inputDigest": "d44a62cc670650a37b43d00f0e5c9b2c857cbbb835225945768aa605e475b1e5",
+  "nativeLimitations": "FsSecurity dangling symlink cases (3), SqliteRecordStore process-death/WAL (1), privateDataPlugin symlink (1). staticFiles retains existing Windows symlink setup/cleanup errors.",
+  "fullRegressionBase": "6f2915de311ab543ac8d2d7d114d17a383451910",
+  "rebasedOn": "265975760e94a43a12f559427889d6c8c459af00",
+  "originalValidationInputDigest": "076b85c0fe9d54a0571d19fa1613d3d5b78a9011cc2968f5de069d27417e182f",
+  "postRebase": {
+    "state": "pass",
+    "focusedNativeTests": 58,
+    "audioNativeTests": 56,
+    "carCacheNativeTests": 2,
+    "browserPassed": 23,
+    "browserFailed": 0,
+    "browserSeconds": 31.5,
+    "browserFiles": [
+      "tests/animal-audio.spec.ts",
+      "tests/gpu-renderer.spec.ts",
+      "tests/vehicle-rendering.spec.ts"
+    ],
+    "typecheck": "pass",
+    "lint": "pass-with-existing-warnings",
+    "build": "pass",
+    "normalChromiumRetinaParity": "pass",
+    "all1980UpstreamCandidateObjectsUnchanged": true
+  },
+  "priorCandidateBaseline": "265975760e94a43a12f559427889d6c8c459af00"
+}

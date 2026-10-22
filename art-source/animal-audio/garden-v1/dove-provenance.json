@@ -1,0 +1,17 @@
+{
+  "id": "dove",
+  "species": "dove",
+  "creator": "nathankwright",
+  "soundId": 456930,
+  "sourcePage": "https://freesound.org/people/nathankwright/sounds/456930/",
+  "download": "https://cdn.freesound.org/previews/456/456930_5948823-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "dove-source.mp3",
+  "sha256": "4ae7aab2aa077949aec772dd6e8b70882f02e83119409661f8d413625cc72d9f",
+  "bytes": 1724151,
+  "category": "vocalization",
+  "sourceSpecies": "mourning dove"
+}

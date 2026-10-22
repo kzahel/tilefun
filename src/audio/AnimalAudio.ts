@@ -29,6 +29,8 @@ export class AnimalAudio {
   private enabled = false;
   private epoch = 0;
   private nextAmbient = 0;
+  private nextCricket = 0;
+  private insects = new Set<number>();
   private auditionSerial = 0;
   private played = 0;
   private auditionVariant = new Map<AnimalVoice, number>();
@@ -82,7 +84,7 @@ export class AnimalAudio {
         state = {
           type: actor.type,
           pose,
-          next: now + 8 + (((actor.id * 7) >>> 0) % 13),
+          next: profile.flightBuzz ? now : now + 8 + (((actor.id * 7) >>> 0) % 13),
           cooldown: 0,
           variant: actor.id >>> 0,
           request: 0,
@@ -115,11 +117,13 @@ export class AnimalAudio {
       if (
         !this.enabled ||
         distance >= 300 ||
-        (profile.quietWhileCarrying && this.carriers.has(actor.id))
+        (profile.quietWhileCarrying && this.carriers.has(actor.id)) ||
+        (profile.insect && !this.ambientEligible(actor, voice))
       ) {
-        state.next = now + 8 + (((actor.id * 7) >>> 0) % 13);
+        state.next = profile.flightBuzz ? now : now + 8 + (((actor.id * 7) >>> 0) % 13);
         this.voices.get(actor.id)?.stop();
         this.voices.delete(actor.id);
+        this.insects.delete(actor.id);
         state.request++;
         continue;
       }
@@ -129,11 +133,7 @@ export class AnimalAudio {
             previous !== pose &&
             (profile.cues.includes(pose) || profile.alarmCue === pose) &&
             (actor.sprite?.clipElapsedMs ?? 0) <= 180),
-        idle =
-          profile.ambient !== false &&
-          pose === "idle" &&
-          !actor.sprite?.moving &&
-          actor.wanderAI?.state !== "scared";
+        idle = this.ambientEligible(actor, voice);
       if (
         now >= state.cooldown &&
         (action || (idle && now >= state.next && now >= this.nextAmbient))
@@ -155,10 +155,15 @@ export class AnimalAudio {
     for (const candidate of candidates) {
       const { actor, state, voice, action } = candidate;
       if (!action && now < this.nextAmbient) continue;
+      if (ANIMAL_VOICES[voice].insect && this.insects.size) continue;
+      if (voice === "cricket" && now < this.nextCricket) continue;
       if (this.voices.size >= this.slots()) break;
       state.cooldown = now + ANIMAL_VOICES[voice].cooldown;
-      state.next = now + 24 + (((actor.id + state.variant * 11) >>> 0) % 19);
+      state.next = ANIMAL_VOICES[voice].flightBuzz
+        ? now + 4 + (((actor.id + state.variant) >>> 0) % 4)
+        : now + 24 + (((actor.id + state.variant * 11) >>> 0) % 19);
       if (!action) this.nextAmbient = now + 3;
+      if (voice === "cricket") this.nextCricket = now + 12;
       void this.requestVoice(actor, state, voice, action, candidate.ball);
     }
     for (const id of this.states.keys()) if (!this.actors.has(id)) this.states.delete(id);
@@ -166,7 +171,16 @@ export class AnimalAudio {
       if (!this.actors.has(id)) {
         source.stop();
         this.voices.delete(id);
+        this.insects.delete(id);
       }
+  }
+
+  private ambientEligible(actor: Entity, voice: AnimalVoice): boolean {
+    const profile = ANIMAL_VOICES[voice];
+    if (profile.ambient === false || actor.wanderAI?.state === "scared") return false;
+    return profile.flightBuzz
+      ? animalAudioPose(actor) === "fly" && !!actor.sprite?.moving
+      : animalAudioPose(actor) === "idle" && !actor.sprite?.moving;
   }
 
   private async load(path: string): Promise<AudioBuffer | undefined> {
@@ -231,7 +245,8 @@ export class AnimalAudio {
           ) > 40
         : action
           ? animalAudioPose(current) !== pose
-          : animalAudioPose(current) !== "idle" || current.sprite?.moving)
+          : !this.ambientEligible(current, voice)) ||
+      (ANIMAL_VOICES[voice].insect && this.insects.size > 0)
     )
       return;
     const distance = Math.hypot(
@@ -244,12 +259,20 @@ export class AnimalAudio {
       buffer,
       (action ? 0.32 : 0.22) * (1 - distance / 300) ** 2,
       Math.max(-0.8, Math.min(0.8, (current.position.wx - this.listener.wx) / 240)),
+      ANIMAL_VOICES[voice].insect,
     );
   }
 
-  private play(id: number, buffer: AudioBuffer, volume: number, pan: number): boolean {
+  private play(
+    id: number,
+    buffer: AudioBuffer,
+    volume: number,
+    pan: number,
+    insect = false,
+  ): boolean {
     if (this.ctx.state !== "running" || this.voices.size >= this.slots()) return false;
     this.voices.get(id)?.stop();
+    this.insects.delete(id);
     const source = this.ctx.createBufferSource(),
       gain = this.ctx.createGain(),
       panner = this.ctx.createStereoPanner();
@@ -260,12 +283,16 @@ export class AnimalAudio {
     gain.connect(panner);
     panner.connect(this.destination);
     source.onended = () => {
-      if (this.voices.get(id) === source) this.voices.delete(id);
+      if (this.voices.get(id) === source) {
+        this.voices.delete(id);
+        this.insects.delete(id);
+      }
       source.disconnect();
       gain.disconnect();
       panner.disconnect();
     };
     this.voices.set(id, source);
+    if (insect) this.insects.add(id);
     source.start();
     this.played++;
     return true;
@@ -298,5 +325,6 @@ export class AnimalAudio {
     this.carriers.clear();
     for (const source of this.voices.values()) source.stop();
     this.voices.clear();
+    this.insects.clear();
   }
 }
