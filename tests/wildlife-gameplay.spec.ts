@@ -38,13 +38,13 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
       }
     ).__game;
     const canvas = document.querySelector("#game") as HTMLCanvasElement;
-    const audio = (
-      g as unknown as { audioManager: { playDuckQuack(volume?: number, pan?: number): void } }
-    ).audioManager;
-    const original = audio.playDuckQuack.bind(audio);
-    audio.playDuckQuack = (volume, pan) => {
-      canvas.dataset.quacks = String(Number(canvas.dataset.quacks ?? 0) + 1);
-      original(volume, pan);
+    const audio = g.audioManager;
+    const original = audio.playCreatureCall.bind(audio);
+    audio.playCreatureCall = (id, kind, volume, pan) => {
+      const played = original(id, kind, volume, pan);
+      if (played && kind === "duck")
+        canvas.dataset.quacks = String(Number(canvas.dataset.quacks ?? 0) + 1);
+      return played;
     };
   });
   const duck = () =>

@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [183 Small-animal sound parity](183-small-animal-sound-parity.md) | Robin/frog/duck shared playback, bounded action/alarm cues and synthesized auditions; automation verified, listening review pending |
 | [182 Dove and insect sounds](182-dove-and-insect-sounds.md) | Three CC0 recordings/six excerpts; flight-only bee buzz, bounded cricket groups and separate dove coos; automation verified, listening review pending |
 | [181 Depot and driving acceptance](181-depot-and-driving-acceptance.md) | Measured: moving Pixel 7a normal/overview 59.7/56.8 FPS; raster/GC attribution; terrain raster/upload admission next; exact depot location open; [performance](../topics/performance.md) |
 | [180 Ordered texture batches](180-ordered-texture-batches.md) | Delivered: Pixel 7a wide track/fleet about 40–41→60 FPS; native/desktop exact pixels; 829 browser cases pass; [rendering](../topics/rendering-architecture.md), [performance](../topics/performance.md) |

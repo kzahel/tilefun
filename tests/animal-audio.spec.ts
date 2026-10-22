@@ -48,6 +48,24 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
   });
   expect(energy[0]).toBeGreaterThan(1);
   expect(energy[1]).toBeGreaterThan((energy[0] ?? 0) * 4);
+  await page.getByLabel("Animal sound coverage", { exact: true }).selectOption("synthesized");
+  await expect(results.locator("article")).toHaveCount(35);
+  await results
+    .locator('[data-animal="robin"]')
+    .getByRole("button", { name: /Audition .* voice/ })
+    .focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("status").filter({ hasText: "Robin: Chirp" })).toBeVisible();
+  const chirp = await page.evaluate(() => {
+    const b = (
+      window as unknown as { __voiceTest: { buffers: AudioBuffer[] } }
+    ).__voiceTest.buffers.at(-1);
+    return b
+      ? { duration: b.duration, energy: b.getChannelData(0).reduce((s, v) => s + v * v, 0) }
+      : undefined;
+  });
+  expect(chirp?.duration).toBeCloseTo(0.36, 3);
+  expect(chirp?.energy).toBeGreaterThan(1);
   await page.evaluate(() => window.dispatchEvent(new Event("blur")));
   await expect
     .poll(() =>
@@ -58,7 +76,7 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
     )
     .toBe(0);
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
-  await page.getByLabel("Landscape scene", { exact: true }).selectOption("behavior-bee");
+  await page.getByLabel("Landscape scene", { exact: true }).selectOption("robins");
   const canvas = page.getByLabel("Natural landscape playground");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await page.getByRole("button", { name: "Enable creature sounds", exact: true }).click();

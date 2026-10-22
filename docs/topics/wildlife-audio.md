@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: fifteen recorded sound sets implemented and automation verified; owner listening review pending.
+Status: fifteen recorded sets plus shared robin/frog/duck synthesis implemented and automation verified; owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -14,7 +14,7 @@ records all 206 current Animal Browser entries. The
 
 Source inspection finds call wiring for **54/206 entries (26.2%)**, using **29
 effective sound designs**: fifteen recorded sound sets covering nineteen entries, eleven
-shared synthesized hunter designs and three game-only synthesized calls. Before
+shared synthesized hunter designs and three shared small-animal synthesized calls. Before
 recorded-voice work, 35 entries shared thirteen synthesized designs. The 73 existing OGG files cover
 footsteps (30), impacts (25), jumps (4), UI/ghosts (11) and campfire crackle (3).
 The four recorded banks add twenty-nine OGG excerpts, including mechanical bee
@@ -38,9 +38,9 @@ check. Related animals sharing a voice count as covered entries, not unique soun
 | Recorded dove coo | Dove | Sparse stationary idle; own mourning-dove recording, shared game/lab |
 | Recorded flight buzz | Bee | Moving fly pose only; finite bursts, cancelled on landing/sipping; shared game/lab |
 | Recorded cricket chirp | Cricket | Sparse stationary idle stridulation; group spacing, quiet while hopping; shared game/lab |
-| Robin chirp | Robin | Enter calling clip 3, or become scared; ordinary PlayScene only |
-| Frog croak | Frog | Enter croaking clip 3, or become scared; ordinary PlayScene only |
-| Duck quack | Mallard duck | Become scared; ordinary PlayScene only |
+| Robin chirp | Robin | Fresh named action pose or observed alarm; shared game/lab |
+| Frog croak | Frog | Fresh named action pose (provisional blink/startle cue) or observed alarm; shared game/lab |
+| Duck quack | Mallard duck | Fresh quack/action pose or observed alarm; shared game/lab |
 | `wolf` | Grey wolf, dire wolf | Enter clip 3; game and Natural landscapes lab |
 | `coyote` | Coyote | Enter clip 3; game and lab |
 | `hyena` | Spotted hyena | Enter clip 3; game and lab |
@@ -57,17 +57,19 @@ The shared synthesized calls use a 1.28-second buffer, distance attenuation to
 480 world pixels, stereo pan and a six-voice limit. Calls are keyed from replicated
 sprite transitions, with an onset-age check to avoid replaying old displays on
 join/reload. Clip 3 also represents scared poses for predators; the trigger is not
-restricted to a semantic vocalization event. Robin/frog/duck use a separate
-PlayScene path with a 300-pixel radius. Lab sounds default off behind **Enable
-creature sounds**; enabling them does not connect that separate three-animal path.
+restricted to a semantic vocalization event. Robin/frog/duck now share that mixer
+with a 300-pixel radius and their original short provisional contours. First
+snapshots stay silent; action onsets use named poses with a 180 ms age guard.
+Fresh observed alarm transitions can interrupt older committed hops. Their
+two-second cooldown, nearest-first admission and combined six-voice cap prevent
+flock bursts. Lab sounds default off behind **Enable creature sounds**.
 
 Recorded calls use shared `AnimalAudio` under `AudioManager.updateCreatureCalls`:
 300-pixel attenuation/pan, per-animal cooldowns (4–30 seconds), initial idle delay
 8–20 seconds, subsequent idle spacing 24–42 seconds and at least three seconds
 between ambient admissions. Named replicated clips identify action onsets; no
 new authority or save fields are needed. Six voices is the combined recorded/
-hunter-synthesis cap; the three older game-only oscillator calls retain their
-separate path until the parity slice. Action candidates precede ambience and
+synthesis cap, including robin/frog/duck. Action candidates precede ambience and
 nearest actors win.
 The older golden/shepherd banks lack a release clip, so a real replicated
 carried-ball drop beside a player also supplies the dog return cue. Deletion,
@@ -76,10 +78,13 @@ Loads and decoded buffers are shared per take. Late requests, first-observed
 mid-action poses, removed/carried/dead actors and out-of-range actors stay quiet.
 Pause/mute/focus/scene exit cancel pending starts and stop active recorded voices.
 
-Animal Browser has Recorded / Synthesized / Game-only / No call wired filters,
+Animal Browser has Recorded / Synthesized / Game-only / No call wired filters
+(the Game-only count is now zero),
 plus keyboard/touch/native-button **Audition voice**. Auditions explicitly unlock
 their own audio context and cycle actual recorded takes without enabling world
-ambience. Dog/cow/chicken have multiple excerpts; cat/sheep/horse currently use
+ambience. The three small-animal synthesized calls also have explicit auditions;
+22 entries are auditionable. New gestures supersede older recorded or synthesized
+auditions, including pending browser unlock/decode requests. Dog/cow/chicken have multiple excerpts; cat/sheep/horse currently use
 one complete take each. Goat/donkey have two excerpts each; piglet has one alarm
 squeal. Piglet explicitly disables idle ambience and admits its named flee onset
 through the normal scared-actor rejection. Crow/pigeon have two excerpts each;
@@ -121,7 +126,7 @@ No new art, elaborate mimicry AI or animal production is needed to prove it.
 | --- | --- | --- |
 | 1: familiar voices | Dog and two coats; cat and two coats; cow, sheep, chicken, horse | Implemented in [176](../tactical/176-familiar-animal-voices.md); six voice sets cover ten entries. Shared action/idle playback and auditions; owner listening review pending. |
 | 2: farm and garden | Goat, donkey, piglet; crow, raven, pigeon, dove; bee, cricket | First three implemented in [177](../tactical/177-farm-animal-voices.md): resting bleat/bray and context-specific piglet alarm. Crow/raven/pigeon implemented in [178](../tactical/178-garden-bird-voices.md); dove/bee/cricket implemented in [182](../tactical/182-dove-and-insect-sounds.md). Separate dove coos, flight-only buzz and bounded cricket groups. |
-| 3: existing-call corrections and predators | Connect robin/frog/duck in lab; tiger, lion, panther, brown bear; review hunter placeholders | Owl routing completed in slice 1. Remaining work: game/lab parity, recognizable large predators, quieter and more appropriate small hunters. |
+| 3: existing-call corrections and predators | Connect robin/frog/duck in lab; tiger, lion, panther, brown bear; review hunter placeholders | Owl routing completed in slice 1. Robin/frog/duck parity implemented in [183](../tactical/183-small-animal-sound-parity.md). Remaining: recognizable large predators, quieter and more appropriate small hunters. |
 | 4: specialist land/air | Peacock, parrot, elephant, primates, other birds and mammals | Fill prioritized gaps with explicit species/context choices. Parrot starts with its own call; imitation remains a separate proposed behavior. |
 | 5: aquatic and deliberate silence | Marine mammals, amphibious animals, quiet species | Decide surface/listener context before whale/dolphin playback. Document quiet animals and appropriate incidental sounds without inventing roars for fish or insects. |
 
@@ -274,3 +279,15 @@ verification passes 58 focused native and 23 audio/GPU/vehicle-review browser
 checks, types, lint, strict inventories and build. All 1,980 incoming review
 objects remain exact. Sound source/export bytes are unchanged; current evidence
 is in [182](../tactical/182-dove-and-insect-sounds.md).
+
+Small-animal parity [183](../tactical/183-small-animal-sound-parity.md) moves the
+three original provisional synthesized designs into shared game/lab playback and
+adds auditions. Coverage remains 54/206 and 29 designs, now 19 recorded /35 shared
+synthesized /0 game-only, with 152 unwired. The fifteen recordings/twenty-nine
+exports are unchanged. All 66 focused audio checks and sixteen targeted browser
+checks pass, plus typecheck, lint, strict inventories/build and the comparator.
+All 1,980 prior review objects remain exact. Native regression: 6,712 passed,
+five known Windows failures, ten skipped. Full browser run: 833/835 passed;
+a train startup-travel boundary and GPU pinch/Joystick timeout both pass unchanged
+in a fresh serial rerun. These original full-run failures remain recorded in
+[183](../tactical/183-small-animal-sound-parity.md). Listening approval is pending.

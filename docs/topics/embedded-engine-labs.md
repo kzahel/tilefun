@@ -113,6 +113,11 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 
 ## Animal browser and natural return timing
 
+[183](../tactical/183-small-animal-sound-parity.md) moves robin/frog/mallard calls
+into shared AudioManager presentation. Game and lab consume the same replicated
+action/alarm transitions; the lab supplies only opt-in and explicit auditions.
+
+
 [172](../tactical/172-browsing-courtship-and-collecting.md) adds deer, peacock and
 raven scenes using ordinary Realm work, native deer/fauna travel and saved real
 resources/partners. The page supplies fixtures and camera framing. A normal placed

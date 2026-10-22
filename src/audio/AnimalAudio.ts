@@ -313,6 +313,12 @@ export class AnimalAudio {
     return this.play(-1, buffer, 0.35, 0);
   }
 
+  cancelAudition(): void {
+    this.auditionSerial++;
+    this.voices.get(-1)?.stop();
+    this.voices.delete(-1);
+  }
+
   stop(): void {
     this.enabled = false;
     this.epoch++;

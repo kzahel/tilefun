@@ -2,6 +2,7 @@ import type { Entity } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { predatorProfile } from "../wildlife/Predator.js";
 import recordings from "./animal-recordings.json";
+import { smallAnimalCallForSpecies, smallAnimalCallForType } from "./SmallAnimalCall.js";
 
 export type AnimalVoice = keyof typeof recordings;
 export { recordings as ANIMAL_RECORDINGS };
@@ -74,6 +75,10 @@ const voicesBySpecies = new Map(
 export function animalVoiceForSpecies(species: string): AnimalVoice | undefined {
   return voicesBySpecies.get(species);
 }
+export function animalAuditionLabel(species: string): string | undefined {
+  const recorded = animalVoiceForSpecies(species);
+  return recorded ? ANIMAL_VOICES[recorded].label : smallAnimalCallForSpecies(species)?.label;
+}
 export function animalVoiceForType(type: string): AnimalVoice | undefined {
   // Explicitly admit only the known authored types and the two legacy farm actors.
   if (type === "cow" || type === "chicken") return type;
@@ -88,9 +93,8 @@ export function animalSoundCoverage(
   type: string,
 ): "recorded" | "synthesized" | "game-only" | "missing" {
   if (animalVoiceForType(type)) return "recorded";
+  if (smallAnimalCallForType(type)) return "synthesized";
   const profile = predatorProfile(type);
   if (profile?.callKind ?? profile?.fierce?.kind) return "synthesized";
-  if (["wildlife-robin-v1", "wildlife-frog-v1", "wildlife-mallard-v1"].includes(type))
-    return "game-only";
   return "missing";
 }

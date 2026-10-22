@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-22",
+  "state": "implemented-and-automation-verified",
+  "humanListeningReview": "pending-owner",
+  "audio": {
+    "animals": ["robin", "frog", "mallard"],
+    "provisionalSynthesizedDesignsMoved": 3,
+    "recordedSets": 15,
+    "recordedTakes": 29,
+    "recordedEntries": 19,
+    "sharedSynthesizedEntries": 35,
+    "gameOnlyEntries": 0,
+    "callRoutes": 54,
+    "totalEntries": 206,
+    "effectiveDesigns": 29,
+    "auditionableEntries": 22,
+    "sharedVoiceCap": 6,
+    "smallAnimalCooldownSeconds": 2,
+    "smallAnimalRadiusPixels": 300
+  },
+  "typecheck": "pass",
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 121,
+    "existingInfos": 42
+  },
+  "focusedAudioTests": 66,
+  "focusedBrowser": {
+    "passed": 16,
+    "failed": 0,
+    "minutes": 1.4
+  },
+  "native": {
+    "total": 6727,
+    "passed": 6712,
+    "knownWindowsFailures": 5,
+    "skipped": 10,
+    "seconds": 885.8
+  },
+  "browser": {
+    "total": 835,
+    "passed": 833,
+    "failed": 2,
+    "minutes": 41.0
+  },
+  "nodeComparatorPassed": 1,
+  "recordedSourcesAndExportsUnchanged": true,
+  "build": "pass",
+  "workshopCandidates": 1980,
+  "priorCandidateObjectsUnchanged": true,
+  "normalChromiumRetinaParity": "pass",
+  "inputDigest": "1470f26fdfe73e16db32b17c3d90fa42475c008b3259dac07d18a5781c9b5d81",
+  "validationBase": "2613be1c990c53c2e65f0470773f05e71929a293",
+  "nativeLimitations": "FsSecurity dangling database symlink cases (3), SqliteRecordStore process-death/WAL (1), privateDataPlugin symlink (1). staticFiles retains its existing Windows symlink setup/cleanup errors.",
+  "coldRecheck": {
+    "passed": 2,
+    "failed": 0,
+    "seconds": 28.3,
+    "sourceAndAssertionsUnchanged": true,
+    "cases": [
+      "city-train-riding: generated train reload startup travel (gpu&meshes)",
+      "pinch-zoom: preference/world zoom/button protection (gpu)"
+    ]
+  },
+  "browserLimitations": "Full run train startup-travel assertion received exactly 192px against <192; GPU pinch flow timed out waiting for Joystick. Both exact unchanged cases pass in a fresh serial run. Failure context/screenshots retained in ignored data/parity-audio-{train,pinch}-failure."
+}

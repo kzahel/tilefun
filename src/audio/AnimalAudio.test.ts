@@ -404,7 +404,7 @@ it("keeps the combined recorded/synthesized voice budget at six even when many a
 });
 
 it("selects the configured owl hoot ahead of its raptor locomotion kind", () => {
-  const spy = vi.spyOn(AudioManager.prototype, "playCreatureCall").mockImplementation(() => {});
+  const spy = vi.spyOn(AudioManager.prototype, "playCreatureCall").mockReturnValue(true);
   const audio = new AudioManager();
   const owl = {
     id: 1,

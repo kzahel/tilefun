@@ -3,8 +3,9 @@ import type { VehicleHornMessage } from "../shared/protocol.js";
 import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/EmergencyVehicle.js";
 import { predatorProfile } from "../wildlife/Predator.js";
 import { AnimalAudio } from "./AnimalAudio.js";
-import { animalVoiceForSpecies } from "./AnimalVoice.js";
+import { animalAudioPose, animalVoiceForSpecies } from "./AnimalVoice.js";
 import { creatureCallSamples } from "./CreatureCall.js";
+import { smallAnimalCallForSpecies, smallAnimalCallForType } from "./SmallAnimalCall.js";
 import { TrainAudio } from "./TrainAudio.js";
 
 /**
@@ -27,6 +28,11 @@ export class AudioManager {
   private creatureVoices = new Map<number, AudioBufferSourceNode>();
   private creatureBuffers = new Map<string, AudioBuffer>();
   private creatureCallsPlayed = 0;
+  private smallCalls = new Map<
+    number,
+    { type: string; pose: string; scared: boolean; next: number }
+  >();
+  private auditionSerial = 0;
   private animals: AnimalAudio | null = null;
   private horns = new Map<
     number,
@@ -46,12 +52,60 @@ export class AudioManager {
   ): void {
     if (!enabled) this.stopCreatureCalls();
     if (this.ctx) this.recordedAnimals().update(entities, listener, enabled);
-    const live = new Set<number>();
+    const live = new Set<number>(),
+      hunters = new Set<number>(),
+      small = new Set<number>();
+    const candidates: {
+      id: number;
+      kind: Parameters<typeof creatureCallSamples>[0];
+      distance: number;
+      volume: number;
+      pan: number;
+      state?: { next: number };
+    }[] = [];
     for (const entity of entities) {
+      const local = smallAnimalCallForType(entity.type);
+      if (local) {
+        small.add(entity.id);
+        const pose = animalAudioPose(entity),
+          scared = entity.wanderAI?.state === "scared";
+        const prior = this.smallCalls.get(entity.id);
+        const previous = prior?.type === entity.type ? prior : undefined;
+        const state = { type: entity.type, pose, scared, next: previous?.next ?? 0 };
+        this.smallCalls.set(entity.id, state);
+        const distance = Math.hypot(
+          entity.position.wx - listener.wx,
+          entity.position.wy - listener.wy,
+        );
+        if (entity.deathTimer !== undefined || entity.parentId !== undefined || distance >= 300)
+          continue;
+        live.add(entity.id);
+        // The legacy action pose is provisional (frog blink/robin action/duck quack).
+        // Alarm transitions have no independent replicated clock: require an observed
+        // prior state rather than using the age of an unrelated committed hop.
+        const onset =
+          previous &&
+          ((!previous.scared && scared) ||
+            (!scared &&
+              previous.pose !== pose &&
+              pose === "action" &&
+              (entity.sprite?.clipElapsedMs ?? 0) <= 180));
+        if (enabled && onset && (this.ctx?.currentTime ?? 0) >= state.next)
+          candidates.push({
+            id: entity.id,
+            kind: local.kind,
+            distance,
+            volume: local.volume * (1 - distance / 300) ** 2,
+            pan: Math.max(-0.8, Math.min(0.8, (entity.position.wx - listener.wx) / 240)),
+            state,
+          });
+        continue;
+      }
       const profile = predatorProfile(entity.type),
         kind = profile?.callKind ?? profile?.fierce?.kind;
       if (!kind) continue;
       live.add(entity.id);
+      hunters.add(entity.id);
       const previous = this.creatureClips.get(entity.id),
         clip = entity.sprite?.clip;
       this.creatureClips.set(entity.id, clip);
@@ -68,14 +122,24 @@ export class AudioManager {
         distance >= 480
       )
         continue;
-      this.playCreatureCall(
-        entity.id,
+      candidates.push({
+        id: entity.id,
         kind,
-        0.15 * (1 - distance / 480) ** 2,
-        Math.max(-0.8, Math.min(0.8, (entity.position.wx - listener.wx) / 320)),
-      );
+        distance,
+        volume: 0.15 * (1 - distance / 480) ** 2,
+        pan: Math.max(-0.8, Math.min(0.8, (entity.position.wx - listener.wx) / 320)),
+      });
     }
-    for (const id of this.creatureClips.keys()) if (!live.has(id)) this.creatureClips.delete(id);
+    candidates.sort((a, b) => a.distance - b.distance || a.id - b.id);
+    for (const candidate of candidates) {
+      if (
+        this.playCreatureCall(candidate.id, candidate.kind, candidate.volume, candidate.pan) &&
+        candidate.state
+      )
+        candidate.state.next = (this.ctx?.currentTime ?? 0) + 2;
+    }
+    for (const id of this.creatureClips.keys()) if (!hunters.has(id)) this.creatureClips.delete(id);
+    for (const id of this.smallCalls.keys()) if (!small.has(id)) this.smallCalls.delete(id);
     for (const [id, source] of this.creatureVoices)
       if (!live.has(id)) {
         source.stop();
@@ -88,9 +152,9 @@ export class AudioManager {
     kind: Parameters<typeof creatureCallSamples>[0],
     volume: number,
     pan: number,
-  ): void {
+  ): boolean {
     const ctx = this.ctx;
-    if (ctx?.state !== "running" || this.creatureAudioDiagnostics.active >= 6) return;
+    if (ctx?.state !== "running" || this.creatureAudioDiagnostics.active >= 6) return false;
     let buffer = this.creatureBuffers.get(kind);
     if (!buffer) {
       const samples = creatureCallSamples(kind, ctx.sampleRate);
@@ -117,9 +181,12 @@ export class AudioManager {
     this.creatureVoices.set(id, source);
     this.creatureCallsPlayed++;
     source.start();
+    return true;
   }
 
   stopCreatureCalls(): void {
+    this.auditionSerial++;
+    this.smallCalls.clear();
     this.animals?.stop();
     for (const source of this.creatureVoices.values()) source.stop();
     this.creatureVoices.clear();
@@ -143,10 +210,24 @@ export class AudioManager {
 
   /** Call directly from a button gesture to preserve browser audio unlock. */
   async auditionAnimalVoice(species: string): Promise<boolean> {
-    const voice = animalVoiceForSpecies(species);
-    if (!voice) return false;
-    this.tryResume();
-    return this.recordedAnimals().audition(voice);
+    const voice = animalVoiceForSpecies(species),
+      local = smallAnimalCallForSpecies(species);
+    if (!voice && !local) return false;
+    const serial = ++this.auditionSerial;
+    this.animals?.cancelAudition();
+    this.creatureVoices.get(-1)?.stop();
+    this.creatureVoices.delete(-1);
+    const ctx = this.ensureContext();
+    if (ctx.state !== "running") {
+      try {
+        await ctx.resume();
+      } catch {
+        return false;
+      }
+    }
+    if (serial !== this.auditionSerial || ctx !== this.ctx || ctx.state !== "running") return false;
+    if (voice) return this.recordedAnimals().audition(voice);
+    return !!local && this.playCreatureCall(-1, local.kind, local.volume, 0);
   }
 
   /** Release a lab-owned manager; main-game scenes only stop their borrowed voices. */
@@ -379,102 +460,6 @@ export class AudioManager {
 
   stopHorns(): void {
     for (const id of this.horns.keys()) this.stopHorn(id);
-  }
-
-  /** Short provisional three-note robin call, using the existing spatial audio path. */
-  playRobinChirp(volume = 0.1, pan = 0): void {
-    if (this.ctx?.state !== "running") return;
-    const now = this.ctx.currentTime;
-    const voice = this.ctx.createOscillator();
-    voice.type = "sine";
-    for (const [offset, pitch] of [
-      [0, 2200],
-      [0.12, 2900],
-      [0.24, 2500],
-    ]) {
-      voice.frequency.setValueAtTime(pitch ?? 2200, now + (offset ?? 0));
-      voice.frequency.exponentialRampToValueAtTime(1800, now + (offset ?? 0) + 0.09);
-    }
-    const gain = this.ctx.createGain();
-    gain.gain.setValueAtTime(0, now);
-    for (const offset of [0, 0.12, 0.24]) {
-      gain.gain.linearRampToValueAtTime(volume, now + offset + 0.015);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.1);
-    }
-    const panner = this.ctx.createStereoPanner();
-    panner.pan.value = pan;
-    voice.connect(gain);
-    gain.connect(panner);
-    panner.connect(this.master ?? this.ctx.destination);
-    voice.onended = () => {
-      voice.disconnect();
-      gain.disconnect();
-      panner.disconnect();
-    };
-    voice.start(now);
-    voice.stop(now + 0.36);
-  }
-
-  /** Short provisional two-pulse croak, using the existing spatial audio path. */
-  playFrogCroak(volume = 0.15, pan = 0): void {
-    if (this.ctx?.state !== "running") return;
-    const now = this.ctx.currentTime;
-    const voice = this.ctx.createOscillator();
-    voice.type = "triangle";
-    voice.frequency.setValueAtTime(160, now);
-    voice.frequency.linearRampToValueAtTime(95, now + 0.12);
-    voice.frequency.setValueAtTime(145, now + 0.17);
-    voice.frequency.linearRampToValueAtTime(90, now + 0.3);
-    const gain = this.ctx.createGain();
-    gain.gain.setValueAtTime(0, now);
-    for (const offset of [0, 0.17]) {
-      gain.gain.linearRampToValueAtTime(volume, now + offset + 0.015);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.13);
-    }
-    const panner = this.ctx.createStereoPanner();
-    panner.pan.value = pan;
-    voice.connect(gain);
-    gain.connect(panner);
-    panner.connect(this.master ?? this.ctx.destination);
-    voice.onended = () => {
-      voice.disconnect();
-      gain.disconnect();
-      panner.disconnect();
-    };
-    voice.start(now);
-    voice.stop(now + 0.32);
-  }
-
-  /** Provisional nasal quack, synthesized without adding or promoting art assets. */
-  playDuckQuack(volume = 0.2, pan = 0): void {
-    if (this.ctx?.state !== "running") return;
-    const now = this.ctx.currentTime;
-    const voice = this.ctx.createOscillator();
-    voice.type = "sawtooth";
-    voice.frequency.setValueAtTime(230, now);
-    voice.frequency.exponentialRampToValueAtTime(145, now + 0.18);
-    const filter = this.ctx.createBiquadFilter();
-    filter.type = "bandpass";
-    filter.frequency.value = 950;
-    filter.Q.value = 1.5;
-    const gain = this.ctx.createGain();
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(volume, now + 0.015);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-    const panner = this.ctx.createStereoPanner();
-    panner.pan.value = pan;
-    voice.connect(filter);
-    filter.connect(gain);
-    gain.connect(panner);
-    panner.connect(this.master ?? this.ctx.destination);
-    voice.onended = () => {
-      voice.disconnect();
-      filter.disconnect();
-      gain.disconnect();
-      panner.disconnect();
-    };
-    voice.start(now);
-    voice.stop(now + 0.21);
   }
 
   /**

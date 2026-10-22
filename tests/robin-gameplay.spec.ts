@@ -99,10 +99,12 @@ test("robin ball contact dispatches client chirps through the live Worker", asyn
     g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 100, wy: p.wy });
     const canvas = document.querySelector("#game") as HTMLCanvasElement;
     const audio = g.audioManager;
-    const original = audio.playRobinChirp.bind(audio);
-    audio.playRobinChirp = (volume, pan) => {
-      canvas.dataset.chirps = String(Number(canvas.dataset.chirps ?? 0) + 1);
-      original(volume, pan);
+    const original = audio.playCreatureCall.bind(audio);
+    audio.playCreatureCall = (id, kind, volume, pan) => {
+      const played = original(id, kind, volume, pan);
+      if (played && kind === "robin")
+        canvas.dataset.chirps = String(Number(canvas.dataset.chirps ?? 0) + 1);
+      return played;
     };
   }, ROBIN_TYPE);
   const robin = () =>

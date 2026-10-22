@@ -1,7 +1,9 @@
 import type { FierceBehaviorProfile } from "../wildlife/FierceCreatures.js";
+import { type SmallAnimalCallKind, smallAnimalCallSamples } from "./SmallAnimalCall.js";
 
 export type CreatureCallKind =
   | FierceBehaviorProfile["kind"]
+  | SmallAnimalCallKind
   | "coyote"
   | "hyena"
   | "cat"
@@ -10,6 +12,8 @@ export type CreatureCallKind =
 
 /** Short, bounded original synthesized calls; no downloaded animal recordings. */
 export function creatureCallSamples(kind: CreatureCallKind, sampleRate: number): Float32Array {
+  if (kind === "robin" || kind === "frog" || kind === "duck")
+    return smallAnimalCallSamples(kind, sampleRate);
   const duration = 1.28;
   const output = new Float32Array(Math.ceil(sampleRate * duration));
   let phase = 0,

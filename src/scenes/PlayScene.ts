@@ -23,9 +23,6 @@ import {
 } from "../traffic/EmergencyVehicle.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
-import { FROG_TYPE } from "../wildlife/Frog.js";
-import { MALLARD_TYPE } from "../wildlife/Mallard.js";
-import { ROBIN_TYPE } from "../wildlife/Robin.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderEntities, renderWorld } from "./renderWorld.js";
 
@@ -105,7 +102,6 @@ export class PlayScene implements GameScene {
   /** Ball IDs that had a deathTimer last frame (despawning, not water-killed). */
   private ballDying: Set<number> | undefined;
   /** Previous wander AI state per entity ID (for detecting scared transitions). */
-  private prevWildlifeClips = new Map<number, number | undefined>();
   private prevWanderStates = new Map<number, string>();
   /** Reconciliation telemetry counters (for cl_log_reconcile summaries). */
   private reconcileSamples = 0;
@@ -909,21 +905,10 @@ export class PlayScene implements GameScene {
       const prevState = this.prevWanderStates.get(e.id);
       this.prevWanderStates.set(e.id, currentState);
 
-      const previousClip = this.prevWildlifeClips.get(e.id);
-      if (e.type === FROG_TYPE || e.type === ROBIN_TYPE)
-        this.prevWildlifeClips.set(e.id, e.sprite?.clip);
-      const robinCall =
-        e.type === ROBIN_TYPE &&
-        previousClip !== undefined &&
-        previousClip !== 3 &&
-        e.sprite?.clip === 3;
-      const frogCall =
-        e.type === FROG_TYPE &&
-        previousClip !== undefined &&
-        previousClip !== 3 &&
-        e.sprite?.clip === 3;
-      if (!robinCall && !frogCall && (currentState !== "scared" || prevState === "scared"))
+      // Species calls are owned by shared AudioManager in both game and lab.
+      if (["wildlife-robin-v1", "wildlife-frog-v1", "wildlife-mallard-v1"].includes(e.type))
         continue;
+      if (currentState !== "scared" || prevState === "scared") continue;
 
       // Newly scared — play spatial impact sound
       const dx = e.position.wx - player.position.wx;
@@ -939,18 +924,6 @@ export class PlayScene implements GameScene {
       const pan = Math.max(-0.5, Math.min(0.5, normalizedX * 0.5));
 
       // Pitch based on entity weight: lighter = higher pitch
-      if (e.type === ROBIN_TYPE) {
-        gc.audioManager.playRobinChirp(0.1 * distFactor, pan);
-        continue;
-      }
-      if (e.type === FROG_TYPE) {
-        gc.audioManager.playFrogCroak(0.18 * distFactor, pan);
-        continue;
-      }
-      if (e.type === MALLARD_TYPE) {
-        gc.audioManager.playDuckQuack(0.25 * distFactor, pan);
-        continue;
-      }
       const weight = e.weight ?? ENTITY_DEFS[e.type]?.weight ?? 10;
       const pitch =
         weight < 5
@@ -973,9 +946,6 @@ export class PlayScene implements GameScene {
     }
 
     // Prune stale entries for entities that no longer exist
-    for (const id of this.prevWildlifeClips.keys()) {
-      if (!liveIds.has(id)) this.prevWildlifeClips.delete(id);
-    }
     for (const id of this.prevWanderStates.keys()) {
       if (!liveIds.has(id)) this.prevWanderStates.delete(id);
     }

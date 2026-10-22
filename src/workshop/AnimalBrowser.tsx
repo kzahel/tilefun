@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ANIMAL_VOICES, animalSoundCoverage, animalVoiceForSpecies } from "../audio/AnimalVoice.js";
+import { animalAuditionLabel, animalSoundCoverage } from "../audio/AnimalVoice.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { ANIMAL_BROWSER_ENTRIES, type AnimalBrowserEntry } from "./AnimalBrowserData.js";
 import retainedBehaviors from "./animal-behavior-status.json";
@@ -394,7 +394,7 @@ export default function AnimalBrowser({
                 {a.scene === selected ? "Watch again" : "Watch AI"}
               </button>
             </p>
-            {animalVoiceForSpecies(a.id) ? (
+            {animalAuditionLabel(a.id) ? (
               <p>
                 <button
                   type="button"
@@ -407,7 +407,7 @@ export default function AnimalBrowser({
                       if (request === auditionRequest.current)
                         setAudioStatus(
                           played
-                            ? `${a.name}: ${ANIMAL_VOICES[animalVoiceForSpecies(a.id) ?? "dog"].label}`
+                            ? `${a.name}: ${animalAuditionLabel(a.id)}`
                             : `Could not play ${a.name}. Try again to enable sound.`,
                         );
                     });

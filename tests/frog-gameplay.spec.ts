@@ -101,13 +101,13 @@ test("frog ball contact dispatches client croaks through the live Worker", async
     const p = g.stateView.playerEntity.position;
     g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 100, wy: p.wy });
     const canvas = document.querySelector("#game") as HTMLCanvasElement;
-    const audio = (
-      g as unknown as { audioManager: { playFrogCroak(volume?: number, pan?: number): void } }
-    ).audioManager;
-    const original = audio.playFrogCroak.bind(audio);
-    audio.playFrogCroak = (volume, pan) => {
-      canvas.dataset.croaks = String(Number(canvas.dataset.croaks ?? 0) + 1);
-      original(volume, pan);
+    const audio = g.audioManager;
+    const original = audio.playCreatureCall.bind(audio);
+    audio.playCreatureCall = (id, kind, volume, pan) => {
+      const played = original(id, kind, volume, pan);
+      if (played && kind === "frog")
+        canvas.dataset.croaks = String(Number(canvas.dataset.croaks ?? 0) + 1);
+      return played;
     };
   }, FROG_TYPE);
   const frog = () =>
