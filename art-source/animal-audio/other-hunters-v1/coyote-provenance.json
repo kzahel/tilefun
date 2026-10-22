@@ -1,0 +1,18 @@
+{
+  "id": "coyote",
+  "creator": "Danjocross",
+  "soundId": 164268,
+  "sourcePage": "https://freesound.org/people/Danjocross/sounds/164268/",
+  "download": "https://cdn.freesound.org/previews/164/164268_2977885-hq.mp3",
+  "sourceFile": "coyote-source.mp3",
+  "bytes": 88848,
+  "sha256": "257cab748b63b781b9cc2c06dae42aecaba4439469702c9ab63a5006f338a904",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "coyote",
+  "sourceSpecies": "coyote",
+  "category": "vocalization",
+  "notes": "Solitary coyote howl recorded in southern Illinois; source already has ambient noise removal.",
+  "verified": "2026-10-22"
+}

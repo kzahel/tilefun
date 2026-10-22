@@ -55,7 +55,7 @@ def export(bank):
         assert sha(original) == provenance["sha256"], f"Changed source: {kind}"
         variants = []
         for index, (start, end) in enumerate(definition["ranges"], 1):
-            assert 0 <= start < end and end - start <= 6
+            assert 0 <= start < end and end - start <= 12
             trim = f"atrim=start={start}:end={end},asetpts=PTS-STARTPTS,{definition['filters']}"
             samples = pcm(original, trim)
             peak = max(abs(x) for x in samples)

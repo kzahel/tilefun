@@ -1,0 +1,18 @@
+{
+  "id": "spotted-hyena",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Spotted_Hyaena_(Crocuta_crocuta)_(W1CDR0000381_BD12).ogg",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/0/07/Spotted_Hyaena_%28Crocuta_crocuta%29_%28W1CDR0000381_BD12%29.ogg",
+  "sourceKind": "original distributed Wikimedia Commons audio file",
+  "sourceFile": "spotted-hyena-source.ogg",
+  "bytes": 425772,
+  "sha256": "375a597512b26ed16a1a77d9b80830b810338f93b3832497f2891faabb30a976",
+  "creator": "David Watts / British Library",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "upstream": "https://sounds.bl.uk/Environment/Listen-to-Nature/022M-W1CDR0000381-0500V0",
+  "species": "spotted-hyena",
+  "sourceSpecies": "spotted hyena",
+  "category": "vocalization",
+  "notes": "David Watts field recording from Hluhluwe-Imfolozi, 1980; British Library collection, Wikimedia VRT license confirmation.",
+  "verified": "2026-10-22"
+}

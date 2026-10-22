@@ -1,0 +1,18 @@
+{
+  "id": "wolf",
+  "creator": "betchkal",
+  "soundId": 500646,
+  "sourcePage": "https://freesound.org/people/betchkal/sounds/500646/",
+  "download": "https://cdn.freesound.org/previews/500/500646_339183-hq.mp3",
+  "sourceFile": "wolf-source.mp3",
+  "bytes": 1219277,
+  "sha256": "e2d2eb3f8d16d2b34b8beb8a66ca14bdd5cde9c4fa039d0924578346fddd0c19",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "wolf",
+  "sourceSpecies": "grey wolf",
+  "category": "vocalization",
+  "notes": "Solitary wolf field recording in Wrangell-St Elias National Park; selected one complete howl.",
+  "verified": "2026-10-22"
+}

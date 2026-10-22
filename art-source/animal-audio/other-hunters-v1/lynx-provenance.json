@@ -1,0 +1,18 @@
+{
+  "id": "lynx",
+  "creator": "TheKingOfGeeks360",
+  "soundId": 844316,
+  "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/844316/",
+  "download": "https://cdn.freesound.org/previews/844/844316_15895934-hq.mp3",
+  "sourceFile": "lynx-source.mp3",
+  "bytes": 58656,
+  "sha256": "e2bf3ed6a74fd0bd9360245becc7158e7096564823a596eacc73ce5226d0c20d",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "lynx",
+  "sourceSpecies": "Siberian lynx",
+  "category": "vocalization",
+  "notes": "Short real lynx huff, recorded at Hope Ranch GVS. Generic lynx inherits this identified subspecies.",
+  "verified": "2026-10-22"
+}

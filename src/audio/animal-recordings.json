@@ -54,5 +54,17 @@
     "assets/audio/animals/big-predators-v1/brown-bear-1.ogg",
     "assets/audio/animals/big-predators-v1/brown-bear-2.ogg"
   ],
-  "jaguar": ["assets/audio/animals/big-predators-v1/jaguar-1.ogg"]
+  "jaguar": ["assets/audio/animals/big-predators-v1/jaguar-1.ogg"],
+  "wolf": ["assets/audio/animals/other-hunters-v1/wolf-1.ogg"],
+  "coyote": ["assets/audio/animals/other-hunters-v1/coyote-1.ogg"],
+  "fox": ["assets/audio/animals/other-hunters-v1/fox-1.ogg"],
+  "lynx": ["assets/audio/animals/other-hunters-v1/lynx-1.ogg"],
+  "spotted-hyena": [
+    "assets/audio/animals/other-hunters-v1/spotted-hyena-1.ogg",
+    "assets/audio/animals/other-hunters-v1/spotted-hyena-2.ogg"
+  ],
+  "cheetah": [
+    "assets/audio/animals/other-hunters-v1/cheetah-1.ogg",
+    "assets/audio/animals/other-hunters-v1/cheetah-2.ogg"
+  ]
 }

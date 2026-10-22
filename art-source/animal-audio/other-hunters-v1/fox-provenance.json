@@ -1,0 +1,18 @@
+{
+  "id": "fox",
+  "creator": "Setzilla",
+  "soundId": 173208,
+  "sourcePage": "https://freesound.org/people/Setzilla/sounds/173208/",
+  "download": "https://cdn.freesound.org/previews/173/173208_3230528-hq.mp3",
+  "sourceFile": "fox-source.mp3",
+  "bytes": 53427,
+  "sha256": "7776d9ef68eed3173cda5dfb395975fe6b7b33ab7b3c64f904248f640cfe665c",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "fox",
+  "sourceSpecies": "red fox",
+  "category": "vocalization",
+  "notes": "One fox barking phrase. No calls while listening, stalking or pouncing.",
+  "verified": "2026-10-22"
+}

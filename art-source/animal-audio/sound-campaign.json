@@ -92,28 +92,52 @@
       "inheritance": null
     },
     "wolf": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "wolf",
+      "bank": "other-hunters-v1",
+      "validation": "60 focused native checks, 2 Chromium audio boundaries, static/inventory/build passed",
+      "trigger": "Fresh display/warning pose only; no idle howl or growl"
     },
     "coyote": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "coyote",
+      "bank": "other-hunters-v1",
+      "validation": "60 focused native checks, 2 Chromium audio boundaries, static/inventory/build passed",
+      "trigger": "Fresh display/warning pose only; no idle howl or growl"
     },
     "spotted-hyena": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "spotted-hyena",
+      "bank": "other-hunters-v1",
+      "validation": "60 focused native checks, 2 Chromium audio boundaries, static/inventory/build passed",
+      "trigger": "Fresh display/warning pose only; no idle howl or growl"
     },
     "fox": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "fox",
+      "bank": "other-hunters-v1",
+      "validation": "60 focused native checks, 2 Chromium audio boundaries, static/inventory/build passed",
+      "trigger": "Sparse stationary idle; silent during hunting actions"
     },
     "cheetah": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "cheetah",
+      "bank": "other-hunters-v1",
+      "validation": "60 focused native checks, 2 Chromium audio boundaries, static/inventory/build passed",
+      "trigger": "Stationary idle/contact display"
     },
     "lynx": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "lynx",
+      "bank": "other-hunters-v1",
+      "validation": "60 focused native checks, 2 Chromium audio boundaries, static/inventory/build passed",
+      "trigger": "Fresh display/warning pose only; no idle howl or growl"
     },
     "elephant": {
       "state": "queued",

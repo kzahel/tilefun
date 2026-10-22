@@ -98,7 +98,21 @@ it("maps recorded browser identities, preserves inheritance and pins every retai
       .flatMap((v) => v.animals)
       .sort(),
   );
-  for (const a of covered) expect(animalVoiceForType(a.type)).toBe(animalVoiceForSpecies(a.id));
+  for (const a of covered) {
+    const voice = required(animalVoiceForType(a.type));
+    expect(voice).toBe(animalVoiceForSpecies(a.id));
+    const profile = ANIMAL_VOICES[voice],
+      poses = required(ENTITY_DEFS[a.type]?.sprite?.clips).map((c) => c.name);
+    for (const cue of [...profile.cues, ...(profile.alarmCue ? [profile.alarmCue] : [])]) {
+      // These preserved coats use the separately tested replicated ball-drop cue.
+      if (voice === "dog" && a.id !== "dog" && cue === "release") continue;
+      expect(poses).toContain(cue);
+    }
+    if (profile.ambient !== false) expect(poses).toContain(profile.flightBuzz ? "fly" : "idle");
+    expect(
+      profile.cues.length > 0 || profile.alarmCue !== undefined || profile.ambient !== false,
+    ).toBe(true);
+  }
   expect(animalVoiceForSpecies("dog-golden")).toBe("dog");
   expect(animalVoiceForSpecies("cat-black")).toBe("cat");
   for (const type of [
@@ -145,13 +159,19 @@ it("maps recorded browser identities, preserves inheritance and pins every retai
 });
 
 it("admits fresh replicated predator displays, keeps resting hunters quiet and never layers a placeholder", async () => {
-  for (const species of ["tiger", "lion", "panther", "brown-bear", "leopard", "jaguar"] as const) {
+  for (const entry of ANIMAL_BROWSER_ENTRIES.filter(
+    (a) => a.hunter && animalVoiceForType(a.type),
+  )) {
+    const species = entry.id as Parameters<typeof createPredator>[0],
+      voice = required(animalVoiceForSpecies(species)),
+      profile = ANIMAL_VOICES[voice];
     const h = harness();
     vi.stubGlobal(
       "AudioContext",
       class {
         constructor() {
           Object.assign(this, h.ctx);
+          Object.defineProperty(this, "currentTime", { get: () => h.ctx.currentTime });
         }
       },
     );
@@ -167,7 +187,7 @@ it("admits fresh replicated predator displays, keeps resting hunters quiet and n
     expect(h.sources).toHaveLength(0); // Joining mid-display is silent.
     setPose(hunter, "idle");
     manager.updateCreatureCalls(replica(), h.listener, true);
-    h.ctx.currentTime = 100;
+    if (profile.ambient === false) h.ctx.currentTime = 100;
     manager.updateCreatureCalls(replica(), h.listener, true);
     await h.flush();
     expect(h.sources).toHaveLength(0);
@@ -176,7 +196,7 @@ it("admits fresh replicated predator displays, keeps resting hunters quiet and n
     await h.flush();
     expect(h.sources).toHaveLength(1);
     expect(h.fetcher).toHaveBeenCalledWith(
-      expect.stringContaining(`big-predators-v1/${species === "panther" ? "leopard" : species}-`),
+      expect.stringContaining(required(ANIMAL_RECORDINGS[voice][0]).replace(/-\d+\.ogg$/, "-")),
     );
     manager.updateCreatureCalls(replica(), h.listener, true);
     await h.flush();

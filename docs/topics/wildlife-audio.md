@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: overnight 36-animal sound campaign in progress; twenty recorded sets integrated, owner listening review pending.
+Status: overnight 36-animal sound campaign in progress; twenty-six recorded sets integrated, owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -18,140 +18,50 @@ Owner authorized the full 36-animal queue and additional suitable animals, up to
 and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable or
 poorly identified sources remain documented gaps rather than invented recordings.
 
-First six entries: tiger/lion display roars, brown-bear warning growls, leopard
-cough calls and jaguar saw calls; panther inherits leopard. All are display-only,
-with no idle roar, and suppress the older synthesized fallback. Five real sources,
-seven excerpts; public CC0/CC BY credits are linked from Animal Browser. Current
-source coverage is 25 recorded +33 synthesized, zero game-only and 148 unwired;
-28 entries support auditions. Listening review remains pending.
+First twelve campaign entries are integrated: six big predators, then wolf,
+coyote, hyena, fox, cheetah and lynx. Per-animal sources/triggers and validation
+live in the ledger and delivery record. Listening review remains pending.
 
 ## Current coverage
 
-Source inspection finds call wiring for **58/206 entries (28.2%)**, using **34
-effective sound designs**: twenty recorded sound sets covering twenty-five entries, eleven
-shared synthesized hunter designs and three shared small-animal synthesized calls. Before
-recorded-voice work, 35 entries shared thirteen synthesized designs. The 73 existing OGG files cover
-footsteps (30), impacts (25), jumps (4), UI/ghosts (11) and campfire crackle (3).
-The five recorded banks add thirty-six OGG excerpts, including mechanical bee
-wingbeats and cricket stridulation. These are source-level coverage counts, not a listening approval or live-deployment
-check. Related animals sharing a voice count as covered entries, not unique sounds.
+**59/206 entries have sound routes: 31 recorded, 28 synthesized, zero game-only;
+147 remain unwired.** Twenty-six real recorded sets supply forty-four excerpts.
+The [generated animal-by-animal audit](../wildlife-audio-audit.md) owns exact current
+routing, shared designs and missing entries. This is source coverage, not owner
+listening approval or a live deployment check. Inherited coats/panther count as
+covered entries, not additional recordings.
 
-| Effective design | Animals currently routed to it | Trigger / consumer |
-| --- | --- | --- |
-| Recorded bark | Dog, golden retriever, pointed-ear shepherd | Actual carried-ball return near a player (also base release pose), sparse idle; shared game/lab |
-| Recorded meow | Cat, ginger tabby, black cat | Perch-rest sit onset, sparse idle; shared game/lab |
-| Recorded moo | Cow (also legacy cow) | Sparse idle, excluding grazing/rumination; shared game/lab |
-| Recorded bleat | Sheep | Actual flock-regroup bleat onset, sparse idle; shared game/lab |
-| Recorded cluck | Chicken (also legacy chicken) | Peck onset, sparse idle; shared game/lab |
-| Recorded whinny | Horse | Sparse idle; shared game/lab |
-| Recorded goat bleat | Goat | Sparse idle, excluding browse/hop; shared game/lab |
-| Recorded bray | Grey donkey | Sparse idle, excluding dust bath; shared game/lab |
-| Recorded piglet squeal | Pig | Fresh flee onset only, no idle/feeding calls; shared game/lab |
-| Recorded crow caw | Carrion crow | Sparse stationary idle, quiet while carrying twigs; shared game/lab |
-| Recorded raven croak | Raven | Sparse stationary idle, quiet while carrying shiny objects; shared game/lab |
-| Recorded pigeon coo | Rock pigeon | Sparse stationary idle, quiet during flight/action; shared game/lab |
-| Recorded dove coo | Dove | Sparse stationary idle; own mourning-dove recording, shared game/lab |
-| Recorded flight buzz | Bee | Moving fly pose only; finite bursts, cancelled on landing/sipping; shared game/lab |
-| Recorded cricket chirp | Cricket | Sparse stationary idle stridulation; group spacing, quiet while hopping; shared game/lab |
-| Robin chirp | Robin | Fresh named action pose or observed alarm; shared game/lab |
-| Frog croak | Frog | Fresh named action pose (provisional blink/startle cue) or observed alarm; shared game/lab |
-| Duck quack | Mallard duck | Fresh quack/action pose or observed alarm; shared game/lab |
-| `wolf` | Grey wolf, dire wolf | Enter clip 3; game and Natural landscapes lab |
-| `coyote` | Coyote | Enter clip 3; game and lab |
-| `hyena` | Spotted hyena | Enter clip 3; game and lab |
-| `cat` | Jaguar, leopard, cheetah, lynx, bobcat, mongoose, fossa, white-nosed coati | Enter clip 3; game and lab |
-| `bear` | Polar bear, honey badger, Tasmanian devil | Enter clip 3; game and lab |
-| `owl` | Tawny owl | Enter clip 3; game and lab |
-| `raptor` | Bald eagle, red-tailed hawk, secretary bird | Enter clip 3; game and lab |
-| `rex` | T. rex, Nile crocodile, American alligator | Enter clip 3; game and lab |
-| `spider` | Giant spider, Komodo dragon, Gaboon viper, wolf spider, praying mantis, scorpion, centipede, coconut crab | Enter clip 3; game and lab |
-| `griffin` | Griffin | Enter clip 3; game and lab |
-| `dragon` | Small dragon | Enter clip 3; game and lab |
+Game and embedded labs share `AudioManager` / `AnimalAudio`. Recorded voices use
+300-pixel squared attenuation, stereo pan, per-species cooldowns and a combined
+six-source cap with synthesis. Ambient admissions are globally separated by at
+least three seconds; initial stationary calls wait 8–20 seconds, later calls wait
+24–42 seconds plus the species cooldown. Named replicated action onsets have a
+180 ms freshness guard. First-observed mid-action snapshots stay silent. No new
+authority/save fields or AI subsystems are introduced for audio.
 
-The shared synthesized calls use a 1.28-second buffer, distance attenuation to
-480 world pixels, stereo pan and a six-voice limit. Calls are keyed from replicated
-sprite transitions, with an onset-age check to avoid replaying old displays on
-join/reload. Clip 3 also represents scared poses for predators; the trigger is not
-restricted to a semantic vocalization event. Robin/frog/duck now share that mixer
-with a 300-pixel radius and their original short provisional contours. First
-snapshots stay silent; action onsets use named poses with a 180 ms age guard.
-Fresh observed alarm transitions can interrupt older committed hops. Their
-two-second cooldown, nearest-first admission and combined six-voice cap prevent
-flock bursts. Lab sounds default off behind **Enable creature sounds**.
+Resting contact calls are separate from display-only roars/howls/growls and
+alarm-only piglet squeals. Recorded species suppress their old synthesized
+placeholder, including when a recording fails to load. Wolf/coyote/hyena/lynx and
+big predators do not emit idle roars while hunting. Fox remains quiet through
+listening/stalking/pounce/eat. Cheetah has real contact meows. Dire wolf and other
+fantasy creatures keep separate synthesized designs.
 
-Recorded calls use shared `AnimalAudio` under `AudioManager.updateCreatureCalls`:
-300-pixel attenuation/pan, per-animal cooldowns (4–30 seconds), initial idle delay
-8–20 seconds, subsequent idle spacing 24–42 seconds and at least three seconds
-between ambient admissions. Named replicated clips identify action onsets; no
-new authority or save fields are needed. Six voices is the combined recorded/
-synthesis cap, including robin/frog/duck. Action candidates precede ambience and
-nearest actors win.
-The older golden/shepherd banks lack a release clip, so a real replicated
-carried-ball drop beside a player also supplies the dog return cue. Deletion,
-transfer, alarm and distant drops are excluded; no animation or save data changes.
-Loads and decoded buffers are shared per take. Late requests, first-observed
-mid-action poses, removed/carried/dead actors and out-of-range actors stay quiet.
-Pause/mute/focus/scene exit cancel pending starts and stop active recorded voices.
+Existing dog ball-return and cat perch cues remain shared. Corvid voices stop
+while beaks carry objects. Bee buzz is finite flight-only playback, cancelled on
+landing/sipping; cricket phrases require stationary idle and group spacing.
+Only one world insect source sounds at a time. Removal, distance, carried/dead
+actors, late loads, pause/mute/focus and teardown have explicit silence/cleanup.
 
-Animal Browser has Recorded / Synthesized / Game-only / No call wired filters
-(the Game-only count is now zero),
-plus keyboard/touch/native-button **Audition voice**. Auditions explicitly unlock
-their own audio context and cycle actual recorded takes without enabling world
-ambience. The three small-animal synthesized calls also have explicit auditions;
-22 entries are auditionable. New gestures supersede older recorded or synthesized
-auditions, including pending browser unlock/decode requests. Dog/cow/chicken have multiple excerpts; cat/sheep/horse currently use
-one complete take each. Goat/donkey have two excerpts each; piglet has one alarm
-squeal. Piglet explicitly disables idle ambience and admits its named flee onset
-through the normal scared-actor rejection. Crow/pigeon have two excerpts each;
-raven has three. Corvid beak occupancy is observed from replicated child-parent
-attachments: pickup stops active voices and invalidates pending loads. No call is
-attached to nest-building, burying or other beak work. No artificial pitch variants
-are counted. Dove/bee/cricket each have two excerpts. Bee uses finite flight-only
-bursts every 4–7 seconds, with no initial idle delay when flight is observed.
-Landing/sipping cancels active/pending buzz. Cricket admits a phrase at most once
-per twelve seconds across a group and stops on movement. Only one world insect
-source plays at once, within the combined six-voice cap. These are explicit
-mechanical sounds; other movement/interaction Foley remains separately audited.
+Animal Browser filters recorded/synthesized/missing coverage. Native buttons
+support keyboard/controller/touch audition without enabling world ambience.
+Repeated auditions cycle actual excerpts and supersede pending earlier gestures.
+Public recording credits/licenses are linked there. Lab ambience remains opt-in.
 
-### Important gaps and corrections
-
-- Tiger, lion, panther and brown bear now have recorded display calls in
-  [185](../tactical/185-overnight-animal-voices.md). Leopard/jaguar recordings replace
-  their generic cat placeholder; panther explicitly inherits leopard.
-- Goat, donkey and piglet voices are implemented in [177](../tactical/177-farm-animal-voices.md). The hunter `cat` synthesis and
-  new domestic-cat recording are separate voice sets; coats explicitly inherit.
-- Owl routing is corrected: explicit `callKind` now takes precedence over the
-  locomotion/behavior `fierce.kind`. A native test asserts the selected hoot.
-- Several species have broad placeholder voices: crocodiles share the rex
-  design; coati/mongoose share the cat design; small arthropods share the giant
-  spider design. Review these independently of whether a sound technically plays.
-- Most authored fauna lack movement Foley as well. `FootstepSystem` admits
-  terrestrial predator profiles and legacy `chicken`/`cow` types, but not authored
-  provisional chicken/cow or generic fauna such as horse. Vocalization coverage
-  remains separate from those movement/interaction gaps; bee wing buzz is now
-  explicitly counted as a mechanical sound in the broader sound audit.
-- The 152 entries without calls have not been classified as intentionally quiet.
-  Silence can be correct; adding a constant voice to every animal is not the goal.
-
-## Recommended delivery order
-
-Keep the first slice about audible animals and reuse their existing behavior.
-No new art, elaborate mimicry AI or animal production is needed to prove it.
-
-| Slice | Animals / scope | Audible result |
-| --- | --- | --- |
-| 1: familiar voices | Dog and two coats; cat and two coats; cow, sheep, chicken, horse | Implemented in [176](../tactical/176-familiar-animal-voices.md); six voice sets cover ten entries. Shared action/idle playback and auditions; owner listening review pending. |
-| 2: farm and garden | Goat, donkey, piglet; crow, raven, pigeon, dove; bee, cricket | First three implemented in [177](../tactical/177-farm-animal-voices.md): resting bleat/bray and context-specific piglet alarm. Crow/raven/pigeon implemented in [178](../tactical/178-garden-bird-voices.md); dove/bee/cricket implemented in [182](../tactical/182-dove-and-insect-sounds.md). Separate dove coos, flight-only buzz and bounded cricket groups. |
-| 3: existing-call corrections and predators | Connect robin/frog/duck in lab; tiger, lion, panther, brown bear; review hunter placeholders | Owl routing completed in slice 1. Robin/frog/duck parity implemented in [183](../tactical/183-small-animal-sound-parity.md). Remaining: recognizable large predators, quieter and more appropriate small hunters. |
-| 4: specialist land/air | Peacock, parrot, elephant, primates, other birds and mammals | Fill prioritized gaps with explicit species/context choices. Parrot starts with its own call; imitation remains a separate proposed behavior. |
-| 5: aquatic and deliberate silence | Marine mammals, amphibious animals, quiet species | Decide surface/listener context before whale/dolphin playback. Document quiet animals and appropriate incidental sounds without inventing roars for fish or insects. |
-
-Slice 1 raised raw call coverage from 35 to 45/206; the three farm voices raise
-it to 48/206; three bird voices brought it to 51/206; dove/bee/cricket now bring it to
-**54/206 (26.2%)**. Improving existing
-voices and classifying deliberate silence are useful even when that count stays
-unchanged. Track entries, voice sets, appropriate contexts and listening approval
-separately.
+The [overnight delivery record](../tactical/185-overnight-animal-voices.md) and
+[per-animal ledger](../../art-source/animal-audio/sound-campaign.json) track the
+36-animal queue. Aquatic listener context, movement Foley and deliberate silence
+classification remain separate follow-ups. Broad placeholders still present in
+small arthropods/crocodiles should be reviewed rather than treated as unique voices.
 
 ## Source strategy
 

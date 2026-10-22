@@ -106,6 +106,46 @@ export const ANIMAL_VOICES: Record<
     ambient: false,
     alarmCue: "display",
   },
+  wolf: {
+    label: "Howl",
+    animals: ["wolf"],
+    cues: ["display"],
+    cooldown: 45,
+    ambient: false,
+    alarmCue: "display",
+  },
+  coyote: {
+    label: "Howl",
+    animals: ["coyote"],
+    cues: ["display"],
+    cooldown: 35,
+    ambient: false,
+    alarmCue: "display",
+  },
+  "spotted-hyena": {
+    label: "Whoop",
+    animals: ["spotted-hyena"],
+    cues: ["display"],
+    cooldown: 30,
+    ambient: false,
+    alarmCue: "display",
+  },
+  fox: { label: "Bark", animals: ["fox"], cues: [], cooldown: 35 },
+  cheetah: {
+    label: "Contact meow",
+    animals: ["cheetah"],
+    cues: ["display"],
+    cooldown: 25,
+    alarmCue: "display",
+  },
+  lynx: {
+    label: "Warning huff",
+    animals: ["lynx"],
+    cues: ["display"],
+    cooldown: 25,
+    ambient: false,
+    alarmCue: "display",
+  },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(

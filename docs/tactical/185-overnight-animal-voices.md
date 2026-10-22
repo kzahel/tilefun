@@ -57,3 +57,21 @@ catalog, normal/retina manifest and production build pass. All 1,980 incoming
 candidate objects remain exactly equal to the incoming renderer checkpoint.
 Combined input digest: `e47ef5703f6100e7b49c396c86e451f4cf02bbbf2db097c7b4d68dd075db0133`.
 No recording bytes changed during rebase. Broad suites were not run.
+
+## Batch 2: other hunters
+
+Wolf, coyote, spotted hyena, fox, cheetah and lynx: six sources/eight excerpts.
+Wolf/coyote/hyena/lynx are display-only; fox calls at sparse stationary idle and
+stays quiet through listening/stalking/pouncing/feeding. Cheetah uses real contact
+meows rather than its old generic cat sound. Dire wolf retains separate fantasy
+synthesis. One complete natural wolf howl is 7.7 seconds; the explicit exporter
+allows up to twelve seconds, with per-species cooldowns still bounded. All existing
+banks remain unchanged. Current source coverage: 59/206 (31 recorded, 28 synthesized,
+zero game-only), 147 unwired. Owner listening review remains pending.
+
+Validation: all 60 focused native checks and both existing Chromium audio
+boundaries pass (31.9 seconds); typechecks, targeted lint, strict catalog,
+normal/retina manifest and production build pass. All 1,980 prior review objects
+remain exact. Input digest: `31ce80aa273968afe611e9fe64df621be985334b1766ba529794ef94a6383f39`.
+Ignored evidence: `data/overnight-audio-hunters-{native,browser,types,lint,catalog,
+manifest,build}.log`. No broad suites run; owner listening remains pending.

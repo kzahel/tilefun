@@ -1,0 +1,18 @@
+{
+  "id": "cheetah",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Acoustic-Structure-and-Contextual-Use-of-Calls-by-Captive-Male-and-Female-Cheetahs-(Acinonyx-pone.0158546.s001.oga",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Acoustic-Structure-and-Contextual-Use-of-Calls-by-Captive-Male-and-Female-Cheetahs-%28Acinonyx-pone.0158546.s001.oga",
+  "sourceKind": "original distributed Wikimedia Commons audio file",
+  "sourceFile": "cheetah-source.oga",
+  "bytes": 96159,
+  "sha256": "b7c128e4965435c1a2a4f54b19d503aecbd254719e1bdc53519d42b90841805b",
+  "creator": "Darya S. Smirnova, Ilya A. Volodin, Tatyana S. Demina, Elena V. Volodina",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "upstream": "https://doi.org/10.1371/journal.pone.0158546",
+  "species": "cheetah",
+  "sourceSpecies": "cheetah",
+  "category": "vocalization",
+  "notes": "Adult cheetah call examples from Smirnova et al. (2016), PLOS ONE. Selected two meows identified by the study spectrogram; no generic big-cat roar.",
+  "verified": "2026-10-22"
+}

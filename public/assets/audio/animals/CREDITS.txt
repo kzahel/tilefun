@@ -105,3 +105,35 @@ cricket (garden-v1)
 Creator: ClaudeDebussy
 Source: https://freesound.org/people/ClaudeDebussy/sounds/428679/
 License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+wolf (other-hunters-v1)
+Creator: betchkal
+Source: https://freesound.org/people/betchkal/sounds/500646/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+coyote (other-hunters-v1)
+Creator: Danjocross
+Source: https://freesound.org/people/Danjocross/sounds/164268/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+fox (other-hunters-v1)
+Creator: Setzilla
+Source: https://freesound.org/people/Setzilla/sounds/173208/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+lynx (other-hunters-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/844316/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+spotted-hyena (other-hunters-v1)
+Creator: David Watts / British Library
+Source: https://commons.wikimedia.org/wiki/File:Spotted_Hyaena_(Crocuta_crocuta)_(W1CDR0000381_BD12).ogg
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Upstream: https://sounds.bl.uk/Environment/Listen-to-Nature/022M-W1CDR0000381-0500V0
+
+cheetah (other-hunters-v1)
+Creator: Darya S. Smirnova, Ilya A. Volodin, Tatyana S. Demina, Elena V. Volodina
+Source: https://commons.wikimedia.org/wiki/File:Acoustic-Structure-and-Contextual-Use-of-Calls-by-Captive-Male-and-Female-Cheetahs-(Acinonyx-pone.0158546.s001.oga
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Upstream: https://doi.org/10.1371/journal.pone.0158546
