@@ -9,6 +9,13 @@ actual GameServer requests, driving, reopening a world and phone release.
 
 Topic: testing
 
+[176](../tactical/176-familiar-animal-voices.md) adds two browser boundaries:
+real recording decode/render, keyboard audition and shared lab action playback;
+ordinary Worker placement/playback and menu/focus silence. Species/coat coverage,
+source/export hashes, voice selection, cooldowns, spatial gain, late-load cleanup
+and combined voice limits are covered natively. The current browser collection is
+835 cases, with no per-species audio browser matrix or extra CI shards.
+
 Status: browser-suite migration implemented and locally validated, 2026-10-20.
 
 Choose test scope from the failure being prevented. Check existing assertions

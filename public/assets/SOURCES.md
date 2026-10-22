@@ -1,5 +1,15 @@
 # Asset Sources
 
+## Familiar animal recordings
+
+`audio/animals/familiar-v1/` contains eleven edited excerpts from six CC0-1.0
+recordings: dog by krissyeliot, cat by Sadiquecat, cow by JarredGibb, sheep by
+Gitanki, chicken by Breviceps and horse by 3bagbrew, published on Freesound.
+Exact public HQ MP3 source previews, source-page URLs, creator/license evidence,
+hashes and the offline export recipe are retained in
+[`art-source/animal-audio/familiar-v1/`](../../art-source/animal-audio/familiar-v1/README.md).
+These are recorded voices; the existing fantasy/hunter synthesis is separate.
+
 Explorer motorboat v1 is original Tilefun Blender geometry and palette UV paint.
 Its hull, seating, helm and outboard use no third-party vehicle artwork.
 Editable source and provenance: `art-source/vehicle-models/explorer-boat/v1/`.

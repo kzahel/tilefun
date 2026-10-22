@@ -1,0 +1,14 @@
+{
+  "id": "dog",
+  "creator": "krissyeliot",
+  "soundId": 125523,
+  "sourcePage": "https://freesound.org/people/krissyeliot/sounds/125523/",
+  "download": "https://cdn.freesound.org/previews/125/125523_2273305-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "dog-source.mp3",
+  "sha256": "90cb88a3cc155817d4a3727c59cf16f15a41ede11cffba03cd4a25f3e6dc9992",
+  "bytes": 747696
+}

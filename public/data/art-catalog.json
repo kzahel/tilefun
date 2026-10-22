@@ -32039,6 +32039,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/audio/AnimalVoice.ts:48"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/wildlife/Frog.ts:5"
         }
       ]
@@ -32083,6 +32087,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/audio/AnimalVoice.ts:48"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/wildlife/Robin.ts:5"
         }
       ]
@@ -32124,6 +32132,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/audio/AnimalVoice.ts:48"
         },
         {
           "system": "Gameplay",
@@ -33957,6 +33969,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/audio/AnimalAudio.ts:59"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/audio/FootstepSystem.ts:32"
         },
         {
@@ -34187,6 +34203,14 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/audio/AnimalVoice.ts:21"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/audio/AnimalVoice.ts:34"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/audio/FootstepSystem.ts:34"
         },
         {
@@ -34330,6 +34354,14 @@
         {
           "system": "Gameplay",
           "source": "src/assets/GameAssets.ts:127"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/audio/AnimalVoice.ts:19"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/audio/AnimalVoice.ts:34"
         },
         {
           "system": "Gameplay",
@@ -35150,6 +35182,10 @@
         {
           "system": "Gameplay",
           "source": "src/assets/GameAssets.ts:141"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/audio/AnimalAudio.ts:55"
         },
         {
           "system": "Gameplay",

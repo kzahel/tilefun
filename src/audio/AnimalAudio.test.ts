@@ -1,0 +1,335 @@
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { afterEach, expect, it, vi } from "vitest";
+import receipt from "../../art-source/animal-audio/familiar-v1/manifest.json";
+import { required } from "../art/ArtCatalog.js";
+import { createBall } from "../entities/Ball.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
+import { createPlayer } from "../entities/Player.js";
+import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
+import { createFauna } from "../wildlife/Fauna.js";
+import { ANIMAL_BROWSER_ENTRIES } from "../workshop/AnimalBrowserData.js";
+import { AnimalAudio } from "./AnimalAudio.js";
+import {
+  ANIMAL_RECORDINGS,
+  ANIMAL_VOICES,
+  animalVoiceForSpecies,
+  animalVoiceForType,
+} from "./AnimalVoice.js";
+import { AudioManager } from "./AudioManager.js";
+
+afterEach(() => vi.unstubAllGlobals());
+
+function harness() {
+  const node = () => ({ connect: vi.fn(), disconnect: vi.fn() });
+  const sources: {
+    buffer: unknown;
+    start: ReturnType<typeof vi.fn>;
+    stop: ReturnType<typeof vi.fn>;
+    onended: null | (() => void);
+  }[] = [];
+  const gains: number[] = [],
+    pans: number[] = [];
+  const ctx = {
+    state: "running",
+    currentTime: 0,
+    destination: node(),
+    createBufferSource() {
+      const source = {
+        ...node(),
+        buffer: null as unknown,
+        start: vi.fn(),
+        stop: vi.fn(),
+        onended: null as null | (() => void),
+      };
+      source.stop.mockImplementation(() => source.onended?.());
+      sources.push(source);
+      return source;
+    },
+    createGain: () => ({
+      ...node(),
+      gain: {
+        set value(v: number) {
+          gains.push(v);
+        },
+      },
+    }),
+    createStereoPanner: () => ({
+      ...node(),
+      pan: {
+        set value(v: number) {
+          pans.push(v);
+        },
+      },
+    }),
+    decodeAudioData: vi.fn(async () => ({ duration: 1 })),
+  };
+  const fetcher = vi.fn(async () => ({ ok: true, arrayBuffer: async () => new ArrayBuffer(8) }));
+  vi.stubGlobal("fetch", fetcher);
+  const audio = new AnimalAudio(
+    ctx as unknown as AudioContext,
+    ctx.destination as unknown as AudioNode,
+    () => 6,
+  );
+  const sheep = createFauna("sheep", 120, 0);
+  sheep.id = 1;
+  const listener = { wx: 0, wy: 0 };
+  const pose = (name: string, elapsed = 0) => {
+    required(sheep.sprite).clip = required(ENTITY_DEFS[sheep.type]?.sprite?.clips).findIndex(
+      (c) => c.name === name,
+    );
+    required(sheep.sprite).clipElapsedMs = elapsed;
+  };
+  const flush = async () => {
+    for (let i = 0; i < 12; i++) await Promise.resolve();
+  };
+  return { audio, ctx, sources, gains, pans, fetcher, sheep, listener, pose, flush };
+}
+
+it("maps exactly ten browser entries, preserves coats and pins all six sources/eleven exported clips", () => {
+  const covered = ANIMAL_BROWSER_ENTRIES.filter((a) => animalVoiceForType(a.type));
+  expect(covered).toHaveLength(10);
+  for (const a of covered) expect(animalVoiceForType(a.type)).toBe(animalVoiceForSpecies(a.id));
+  expect(animalVoiceForSpecies("dog-golden")).toBe("dog");
+  expect(animalVoiceForSpecies("cat-black")).toBe("cat");
+  for (const type of [
+    "player",
+    "wildlife-tiger-predator-v1",
+    "wildlife-cow-made-up",
+    "constructor",
+    "wildlife-fox-provisional-v1",
+  ])
+    expect(animalVoiceForType(type)).toBeUndefined();
+  expect(Object.keys(ANIMAL_VOICES)).toHaveLength(6);
+  expect(receipt.sources.flatMap((s) => s.variants)).toHaveLength(11);
+  const hash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
+  for (const source of receipt.sources) {
+    expect(source.license).toBe("CC0-1.0");
+    expect(hash(`art-source/animal-audio/familiar-v1/${source.sourceFile}`)).toBe(source.sha256);
+    expect(ANIMAL_RECORDINGS[source.id as keyof typeof ANIMAL_RECORDINGS]).toEqual(
+      source.variants.map((v) => v.path),
+    );
+    for (const variant of source.variants) {
+      expect(hash(`public/${variant.path}`)).toBe(variant.sha256);
+      expect(variant.peak).toBeLessThan(0.9);
+      expect(variant.rms).toBeGreaterThan(0.025);
+    }
+  }
+});
+
+it("plays an actual replicated bleat onset once, spatially, and never replays a late join or rapid repeat", async () => {
+  const h = harness();
+  h.audio.update([h.sheep], h.listener, true);
+  h.pose("bleat");
+  const replica = deserializeEntity(serializeEntity(h.sheep));
+  h.audio.update([replica], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  expect(h.gains[0]).toBeCloseTo(0.32 * 0.6 ** 2);
+  expect(h.pans[0]).toBe(0.5);
+  h.audio.update([replica], h.listener, true);
+  await h.flush();
+  h.pose("idle");
+  h.audio.update([h.sheep], h.listener, true);
+  h.pose("bleat");
+  h.audio.update([h.sheep], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  h.ctx.currentTime = 10;
+  h.pose("idle");
+  h.audio.update([h.sheep], h.listener, true);
+  h.pose("bleat", 900);
+  h.audio.update([h.sheep], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  h.audio.update([], h.listener, true);
+  expect(h.sources[0]?.stop).toHaveBeenCalledOnce();
+  h.pose("bleat");
+  h.audio.update([h.sheep], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+});
+
+it("spreads sparse ambient calls, chooses nearby actors, bounds voices, stops on range/pause and does not burst on resume", async () => {
+  const h = harness();
+  const herd = Array.from({ length: 20 }, (_, i) => {
+    const a = createFauna("cow", 280 - i * 10, 0);
+    a.id = i + 1;
+    return a;
+  });
+  h.audio.update(herd, h.listener, true);
+  h.ctx.currentTime = 25;
+  h.audio.update(herd, h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  for (let i = 0; i < 50; i++) h.audio.update(herd, h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  expect(h.pans[0]).toBeCloseTo(90 / 240);
+  h.audio.update(herd, { wx: -500, wy: 0 }, true);
+  expect(h.audio.diagnostics.active).toBe(0);
+  h.ctx.currentTime = 100;
+  h.audio.update(herd, h.listener, false);
+  h.audio.update(herd, h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(1);
+  h.audio.update([], h.listener, true);
+  expect(h.audio.diagnostics.active).toBe(0);
+});
+
+it.each(["pause", "remove", "range", "pose", "suspended"])(
+  "cancels a decoded request after %s",
+  async (reason) => {
+    const h = harness();
+    let resolve!: (v: { ok: boolean; arrayBuffer: () => Promise<ArrayBuffer> }) => void;
+    h.fetcher.mockImplementation(
+      () =>
+        new Promise((r) => {
+          resolve = r;
+        }),
+    );
+    h.audio.update([h.sheep], h.listener, true);
+    h.pose("bleat");
+    h.audio.update([h.sheep], h.listener, true);
+    if (reason === "suspended") h.ctx.state = "suspended";
+    if (reason === "pose") h.pose("idle");
+    h.audio.update(
+      reason === "remove" ? [] : [h.sheep],
+      reason === "range" ? { wx: -500, wy: 0 } : h.listener,
+      reason !== "pause",
+    );
+    resolve({ ok: true, arrayBuffer: async () => new ArrayBuffer(8) });
+    await h.flush();
+    expect(h.sources).toHaveLength(0);
+  },
+);
+
+it("deduplicates loads, rotates real takes, drops stale auditions and respects stop/dispose epoch", async () => {
+  const h = harness();
+  await h.audio.audition("dog");
+  await h.audio.audition("dog");
+  await h.audio.audition("dog");
+  await h.audio.audition("dog");
+  expect(h.fetcher).toHaveBeenCalledTimes(3);
+  expect(h.sources).toHaveLength(4);
+  expect(h.audio.diagnostics.active).toBe(1);
+  h.audio.stop();
+  expect(h.audio.diagnostics.active).toBe(0);
+  const a = h.audio.audition("cat"),
+    b = h.audio.audition("sheep");
+  expect(await a).toBe(false);
+  expect(await b).toBe(true);
+  const pending = h.audio.audition("horse");
+  h.audio.stop();
+  expect(await pending).toBe(false);
+});
+
+it("keeps the combined recorded/synthesized voice budget at six even when many action loads resolve together", async () => {
+  const h = harness();
+  vi.stubGlobal(
+    "AudioContext",
+    class {
+      constructor() {
+        Object.assign(this, h.ctx);
+      }
+    },
+  );
+  const manager = new AudioManager();
+  manager.ensureContext();
+  const herd = Array.from({ length: 20 }, (_, i) => {
+    const a = createFauna("sheep", i, 0);
+    a.id = i + 1;
+    return a;
+  });
+  manager.updateCreatureCalls(herd, h.listener, true);
+  for (const a of herd) {
+    required(a.sprite).clip = required(ENTITY_DEFS[a.type]?.sprite?.clips).findIndex(
+      (c) => c.name === "bleat",
+    );
+    required(a.sprite).clipElapsedMs = 0;
+  }
+  manager.updateCreatureCalls(herd, h.listener, true);
+  await h.flush();
+  expect(manager.creatureAudioDiagnostics).toEqual({ active: 6, played: 6 });
+  manager.playCreatureCall(500, "rex", 0.15, 0);
+  expect(manager.creatureAudioDiagnostics.active).toBe(6);
+  manager.stopCreatureCalls();
+  expect(manager.creatureAudioDiagnostics.active).toBe(0);
+});
+
+it("selects the configured owl hoot ahead of its raptor locomotion kind", () => {
+  const spy = vi.spyOn(AudioManager.prototype, "playCreatureCall").mockImplementation(() => {});
+  const audio = new AudioManager();
+  const owl = {
+    id: 1,
+    type: "wildlife-owl-predator-v1",
+    position: { wx: 0, wy: 0 },
+    sprite: { clip: 3, clipElapsedMs: 0 },
+  };
+  audio.updateCreatureCalls([owl as ReturnType<typeof createFauna>], { wx: 0, wy: 0 }, true);
+  expect(spy).toHaveBeenCalledWith(1, "owl", 0.15, 0);
+  spy.mockRestore();
+});
+
+it.each(["dog-golden", "dog-shepherd"] as const)(
+  "%s barks for a real replicated fetch drop without requiring a missing release clip",
+  async (species) => {
+    const h = harness(),
+      dog = createFauna(species, 20, 0),
+      player = createPlayer(0, 0),
+      ball = createBall(24, 0);
+    dog.id = 2;
+    player.id = 3;
+    ball.id = 4;
+    ball.parentId = dog.id;
+    const replica = () => [dog, player, ball].map((e) => deserializeEntity(serializeEntity(e)));
+    expect(ENTITY_DEFS[dog.type]?.sprite?.clips?.some((c) => c.name === "release")).toBe(false);
+    h.audio.update(replica(), h.listener, true);
+    delete ball.parentId;
+    h.audio.update(replica(), h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+    h.audio.update(replica(), h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+  },
+);
+
+it.each(["deleted", "transferred", "far", "alarm"])(
+  "does not mistake a %s carried ball for a returned toy",
+  async (reason) => {
+    const h = harness(),
+      dog = createFauna("dog-golden", 20, 0),
+      player = createPlayer(0, 0),
+      ball = createBall(24, 0);
+    dog.id = 2;
+    player.id = 3;
+    ball.id = 4;
+    ball.parentId = dog.id;
+    h.audio.update([dog, player, ball], h.listener, true);
+    delete ball.parentId;
+    if (reason === "transferred") ball.parentId = 99;
+    if (reason === "far") ball.position.wx = 200;
+    if (reason === "alarm") required(dog.wanderAI).state = "scared";
+    h.audio.update(reason === "deleted" ? [dog, player] : [dog, player, ball], h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(0);
+  },
+);
+
+it("does not replay a carry/drop across a scene reset with reused actor IDs", async () => {
+  const h = harness(),
+    dog = createFauna("dog-golden", 20, 0),
+    player = createPlayer(0, 0),
+    ball = createBall(24, 0);
+  dog.id = 2;
+  player.id = 3;
+  ball.id = 4;
+  ball.parentId = dog.id;
+  h.audio.update([dog, player, ball], h.listener, true);
+  h.audio.stop();
+  delete ball.parentId;
+  h.audio.update([dog, player, ball], h.listener, true);
+  await h.flush();
+  expect(h.sources).toHaveLength(0);
+});

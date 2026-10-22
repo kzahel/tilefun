@@ -1,0 +1,14 @@
+{
+  "id": "cow",
+  "creator": "JarredGibb",
+  "soundId": 233145,
+  "sourcePage": "https://freesound.org/people/JarredGibb/sounds/233145/",
+  "download": "https://cdn.freesound.org/previews/233/233145_4056007-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "cow-source.mp3",
+  "sha256": "92754e5f600aebd677128b414da52830c167fd8db6fdbb198346750a29fb4ef8",
+  "bytes": 177960
+}

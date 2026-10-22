@@ -36,6 +36,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |
 | [Wildlife](wildlife.md) | Completed 196-entry art roster, shared ecology and hunting, pending exact-art review |
 | [Distinct animal behaviors](wildlife-behaviors.md) | 206-entry behavior audit ledger and generated progress report; land/air first, observable mechanics and game/lab verification |
+| [Animal sounds](wildlife-audio.md) | Current 206-entry SFX audit, synthesized call routing, source candidates and phased coverage plan |
 | [Art review](art-review.md) | Exact-source feedback, human approvals, Workshop authentication and outdoor metadata |
 | [Semantic tileset map](semantic-tileset-map.md) | Whole-sheet thematic mapping, autonomous asset hypotheses and independent review for Modern Exteriors and Interiors |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |

@@ -5,13 +5,18 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 833,
-      "inventorySha256": "37326a12e6e51d51cd3e90491283043f5327a6e6f57fb73a639b2b2796e0a326",
+      "cases": 835,
+      "inventorySha256": "30c5c14a94417db1250889bfac023ece70948e0ea761d094852164448b816aa5",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
           "cases": 8,
           "sourceSha256": "33e41c757b958180173dd74671c4f7773df9647aa58abd706d2c3886534ff3e3"
+        },
+        {
+          "path": "tests/animal-audio.spec.ts",
+          "cases": 2,
+          "sourceSha256": "b7a28f1da4a47dc348e6fd04a4a84440b08ee5be984d6c4ecbc47d428fb23836"
         },
         {
           "path": "tests/animal-browser.spec.ts",

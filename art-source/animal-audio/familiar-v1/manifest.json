@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "id": "familiar-v1",
+  "license": "CC0-1.0",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "dog",
+      "creator": "krissyeliot",
+      "soundId": 125523,
+      "sourcePage": "https://freesound.org/people/krissyeliot/sounds/125523/",
+      "download": "https://cdn.freesound.org/previews/125/125523_2273305-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "dog-source.mp3",
+      "sha256": "90cb88a3cc155817d4a3727c59cf16f15a41ede11cffba03cd4a25f3e6dc9992",
+      "bytes": 747696,
+      "variants": [
+        {
+          "path": "assets/audio/animals/familiar-v1/dog-1.ogg",
+          "sha256": "d5737106a055c87faab4de48e119e95dacd98d82276ca7e623a240bae25baa4c",
+          "trim": [1.55, 1.9],
+          "filters": "atrim=start=1.55:end=1.9,asetpts=PTS-STARTPTS,highpass=f=45,volume=2.771178921,afade=t=in:d=0.02,afade=t=out:st=0.310000:d=0.04",
+          "duration": 0.3393333333333333,
+          "peak": 0.7334726452827454,
+          "rms": 0.14067452580801368
+        },
+        {
+          "path": "assets/audio/animals/familiar-v1/dog-2.ogg",
+          "sha256": "ced743d2c2962ffad1c844798e10fe9f1b33ccc51c0e25413f8406bc1e1d165f",
+          "trim": [2.7, 3.08],
+          "filters": "atrim=start=2.7:end=3.08,asetpts=PTS-STARTPTS,highpass=f=45,volume=3.518156041,afade=t=in:d=0.02,afade=t=out:st=0.340000:d=0.04",
+          "duration": 0.4,
+          "peak": 0.7718443870544434,
+          "rms": 0.1483848724496194
+        },
+        {
+          "path": "assets/audio/animals/familiar-v1/dog-3.ogg",
+          "sha256": "2709686faa231103990a2fb3844db4d4d161eff1aecafef2b2594dc572abb450",
+          "trim": [6.24, 6.6],
+          "filters": "atrim=start=6.24:end=6.6,asetpts=PTS-STARTPTS,highpass=f=45,volume=3.729741122,afade=t=in:d=0.02,afade=t=out:st=0.320000:d=0.04",
+          "duration": 0.37866666666666665,
+          "peak": 0.7378727793693542,
+          "rms": 0.15093040978471253
+        }
+      ]
+    },
+    {
+      "id": "cat",
+      "creator": "Sadiquecat",
+      "soundId": 689324,
+      "sourcePage": "https://freesound.org/people/Sadiquecat/sounds/689324/",
+      "download": "https://cdn.freesound.org/previews/689/689324_5287430-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "cat-source.mp3",
+      "sha256": "5c65de44ce25de57450aa08d32d8cd05f69ce686e3ebc0a3b1570b6a3442ddd1",
+      "bytes": 23664,
+      "variants": [
+        {
+          "path": "assets/audio/animals/familiar-v1/cat-1.ogg",
+          "sha256": "784aebf2f8bd81554e14211e490ae0559dc4c7855d7069eaf8c129b0520f112f",
+          "trim": [0, 0.877],
+          "filters": "atrim=start=0:end=0.877,asetpts=PTS-STARTPTS,highpass=f=45,volume=0.955152929,afade=t=in:d=0.02,afade=t=out:st=0.837000:d=0.04",
+          "duration": 0.8663333333333333,
+          "peak": 0.731992244720459,
+          "rms": 0.16119656608929228
+        }
+      ]
+    },
+    {
+      "id": "cow",
+      "creator": "JarredGibb",
+      "soundId": 233145,
+      "sourcePage": "https://freesound.org/people/JarredGibb/sounds/233145/",
+      "download": "https://cdn.freesound.org/previews/233/233145_4056007-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "cow-source.mp3",
+      "sha256": "92754e5f600aebd677128b414da52830c167fd8db6fdbb198346750a29fb4ef8",
+      "bytes": 177960,
+      "variants": [
+        {
+          "path": "assets/audio/animals/familiar-v1/cow-1.ogg",
+          "sha256": "971cf9b3d108f9c10a262ee785d818eb93e9710696477deae6151f9af617bc87",
+          "trim": [0.9, 2.12],
+          "filters": "atrim=start=0.9:end=2.12,asetpts=PTS-STARTPTS,highpass=f=45,volume=0.909003116,afade=t=in:d=0.02,afade=t=out:st=1.180000:d=0.04",
+          "duration": 1.22,
+          "peak": 0.7396038770675659,
+          "rms": 0.14869753580898887
+        },
+        {
+          "path": "assets/audio/animals/familiar-v1/cow-2.ogg",
+          "sha256": "8751925214925e97651f14e26e5894939bc47fee581c5aa57061ec479c4bdf2a",
+          "trim": [3.1, 4.98],
+          "filters": "atrim=start=3.1:end=4.98,asetpts=PTS-STARTPTS,highpass=f=45,volume=0.772807833,afade=t=in:d=0.02,afade=t=out:st=1.840000:d=0.04",
+          "duration": 1.88,
+          "peak": 0.7738752961158752,
+          "rms": 0.13566717396795483
+        }
+      ]
+    },
+    {
+      "id": "sheep",
+      "creator": "Gitanki",
+      "soundId": 172712,
+      "sourcePage": "https://freesound.org/people/Gitanki/sounds/172712/",
+      "download": "https://cdn.freesound.org/previews/172/172712_3223402-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "sheep-source.mp3",
+      "sha256": "9d314c3b22d6021dce3077e9ba5d1cfe8fac36d987c9cbbad02391e4ae3ccbb2",
+      "bytes": 62880,
+      "variants": [
+        {
+          "path": "assets/audio/animals/familiar-v1/sheep-1.ogg",
+          "sha256": "391bcdf5b2125a5917e04d38eb24c5996c8196970db4ae02a2edac3fb69c1386",
+          "trim": [0.58, 1.96],
+          "filters": "atrim=start=0.58:end=1.96,asetpts=PTS-STARTPTS,highpass=f=45,volume=1.138742587,afade=t=in:d=0.02,afade=t=out:st=1.340000:d=0.04",
+          "duration": 1.38,
+          "peak": 0.7401970028877258,
+          "rms": 0.12430342025621993
+        }
+      ]
+    },
+    {
+      "id": "chicken",
+      "creator": "Breviceps",
+      "soundId": 456803,
+      "sourcePage": "https://freesound.org/people/Breviceps/sounds/456803/",
+      "download": "https://cdn.freesound.org/previews/456/456803_9159316-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "chicken-source.mp3",
+      "sha256": "4d4bbffa4297df2c4a61afc9acb348567e59a3b32ac819a1494a3897097cfff0",
+      "bytes": 199656,
+      "variants": [
+        {
+          "path": "assets/audio/animals/familiar-v1/chicken-1.ogg",
+          "sha256": "1463266a93ef907824aa3cf6e921dbcfee0b2bea771aae0b038b50484b0891b0",
+          "trim": [1.16, 1.76],
+          "filters": "atrim=start=1.16:end=1.76,asetpts=PTS-STARTPTS,highpass=f=45,volume=1.204417003,afade=t=in:d=0.02,afade=t=out:st=0.560000:d=0.04",
+          "duration": 0.6133333333333333,
+          "peak": 0.45054638385772705,
+          "rms": 0.158732054121379
+        },
+        {
+          "path": "assets/audio/animals/familiar-v1/chicken-2.ogg",
+          "sha256": "cafff8309c9b36e7e3e2b9dc52d646768fb2caf10366a4697f9aa18ef0cfef93",
+          "trim": [4.5, 5.48],
+          "filters": "atrim=start=4.5:end=5.48,asetpts=PTS-STARTPTS,highpass=f=45,volume=1.256083367,afade=t=in:d=0.02,afade=t=out:st=0.940000:d=0.04",
+          "duration": 0.9693333333333334,
+          "peak": 0.5798231959342957,
+          "rms": 0.16093590185043669
+        },
+        {
+          "path": "assets/audio/animals/familiar-v1/chicken-3.ogg",
+          "sha256": "0013aceea02c0fe3374501a3c54356b575837457207306e982df1602a679704a",
+          "trim": [7.24, 8.08],
+          "filters": "atrim=start=7.24:end=8.08,asetpts=PTS-STARTPTS,highpass=f=45,volume=1.069259674,afade=t=in:d=0.02,afade=t=out:st=0.800000:d=0.04",
+          "duration": 0.8293333333333334,
+          "peak": 0.5996765494346619,
+          "rms": 0.1610932256251621
+        }
+      ]
+    },
+    {
+      "id": "horse",
+      "creator": "3bagbrew",
+      "soundId": 59569,
+      "sourcePage": "https://freesound.org/people/3bagbrew/sounds/59569/",
+      "download": "https://cdn.freesound.org/previews/59/59569_571436-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "horse-source.mp3",
+      "sha256": "71cdc764b1a93ab3277e4b0b44bf08c1d0fa2179c20fb522d11128a93999154b",
+      "bytes": 209716,
+      "variants": [
+        {
+          "path": "assets/audio/animals/familiar-v1/horse-1.ogg",
+          "sha256": "1aa567a44803c3de750a652e15b690073a12dc7b337a9854206144138e76ec85",
+          "trim": [0.08, 2.06],
+          "filters": "atrim=start=0.08:end=2.06,asetpts=PTS-STARTPTS,highpass=f=45,volume=1.211429124,afade=t=in:d=0.02,afade=t=out:st=1.940000:d=0.04",
+          "duration": 1.98,
+          "peak": 0.7872635126113892,
+          "rms": 0.13558715527172602
+        }
+      ]
+    }
+  ]
+}

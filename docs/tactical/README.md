@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [176 Familiar animal voices](176-familiar-animal-voices.md) | Implemented and automation verified: six recorded voices, ten entries including coats, shared playback and lab audition; listening review pending; [animal sounds](../topics/wildlife-audio.md) |
 | [175 Vehicle depot and walkable ramps](175-vehicle-depot-and-walkable-ramps.md) | Implemented and validated locally; owner playtest pending: mapped infield depot, saved vehicles, practice bridge and shared pedestrian transporter support; [vehicles](../topics/vehicles.md) |
 | [174 Curling, quills and fox pounces](174-curling-quills-and-fox-pounces.md) | Implemented and automation verified: hedgehog, porcupine and fox; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [173 Single-car transporter](173-single-car-transporter.md) | Implemented and validated locally; owner playtest pending; real ramp loading, secured cars, shared controls and saved identity; [vehicles](../topics/vehicles.md) |

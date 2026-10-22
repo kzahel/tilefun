@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ANIMAL_VOICES, animalSoundCoverage, animalVoiceForSpecies } from "../audio/AnimalVoice.js";
+import { AudioManager } from "../audio/AudioManager.js";
 import { ANIMAL_BROWSER_ENTRIES, type AnimalBrowserEntry } from "./AnimalBrowserData.js";
 import retainedBehaviors from "./animal-behavior-status.json";
 import retainedDates from "./animal-browser-dates.json";
@@ -190,9 +192,26 @@ export default function AnimalBrowser({
   const [search, setSearch] = useState(""),
     [family, setFamily] = useState("all"),
     [behavior, setBehavior] = useState("all"),
+    [audioFilter, setAudioFilter] = useState("all"),
     [sort, setSort] = useState("newest"),
     [motion, setMotion] = useState("walk"),
     [direction, setDirection] = useState(2);
+  const audio = useRef<AudioManager | null>(null);
+  const auditionRequest = useRef(0);
+  const [audioStatus, setAudioStatus] = useState("");
+  useEffect(() => {
+    const quiet = () => {
+      auditionRequest.current++;
+      audio.current?.stopCreatureCalls();
+    };
+    window.addEventListener("blur", quiet);
+    document.addEventListener("visibilitychange", quiet);
+    return () => {
+      window.removeEventListener("blur", quiet);
+      document.removeEventListener("visibilitychange", quiet);
+      audio.current?.dispose();
+    };
+  }, []);
   const [animate, setAnimate] = useState(
     () => !matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
@@ -205,6 +224,7 @@ export default function AnimalBrowser({
       ANIMAL_BROWSER_ENTRIES.filter(
         (a) =>
           (family === "all" || a.family === family) &&
+          (audioFilter === "all" || audioFilter === animalSoundCoverage(a.type)) &&
           (behavior === "all" ||
             (behavior === "demonstrations"
               ? !!behaviors[a.id]?.scene
@@ -225,7 +245,7 @@ export default function AnimalBrowser({
           a.name.localeCompare(b.name)
         );
       }),
-    [search, family, sort, behavior],
+    [search, family, sort, behavior, audioFilter],
   );
   return (
     <details open className="animal-browser" style={{ margin: "16px 0" }}>
@@ -281,6 +301,20 @@ export default function AnimalBrowser({
           </select>
         </label>
         <label>
+          Sounds{" "}
+          <select
+            aria-label="Animal sound coverage"
+            value={audioFilter}
+            onChange={(e) => setAudioFilter(e.target.value)}
+          >
+            <option value="all">All sound coverage</option>
+            <option value="recorded">Recorded voices</option>
+            <option value="synthesized">Synthesized calls</option>
+            <option value="game-only">Game-only calls</option>
+            <option value="missing">No call wired</option>
+          </select>
+        </label>
+        <label>
           Animation{" "}
           <select
             aria-label="Preview animation"
@@ -311,6 +345,11 @@ export default function AnimalBrowser({
         </label>
       </div>
       <p role="status">{rows.length} animals shown</p>
+      {audioStatus && (
+        <p role="status" aria-live="polite">
+          {audioStatus}
+        </p>
+      )}
       <section
         aria-label="Animal results"
         style={{
@@ -355,6 +394,38 @@ export default function AnimalBrowser({
                 {a.scene === selected ? "Watch again" : "Watch AI"}
               </button>
             </p>
+            {animalVoiceForSpecies(a.id) ? (
+              <p>
+                <button
+                  type="button"
+                  aria-label={`Audition ${a.name} voice`}
+                  onClick={() => {
+                    const request = ++auditionRequest.current;
+                    audio.current ??= new AudioManager();
+                    setAudioStatus(`Loading ${a.name} voice…`);
+                    void audio.current.auditionAnimalVoice(a.id).then((played) => {
+                      if (request === auditionRequest.current)
+                        setAudioStatus(
+                          played
+                            ? `${a.name}: ${ANIMAL_VOICES[animalVoiceForSpecies(a.id) ?? "dog"].label}`
+                            : `Could not play ${a.name}. Try again to enable sound.`,
+                        );
+                    });
+                  }}
+                >
+                  Audition voice
+                </button>
+                {a.id.includes("-") && <small> Shared with its base animal.</small>}
+              </p>
+            ) : (
+              <small>
+                {animalSoundCoverage(a.type) === "synthesized"
+                  ? "Synthesized call · enable playground sounds."
+                  : animalSoundCoverage(a.type) === "game-only"
+                    ? "Call currently plays in the game only."
+                    : "No call wired yet."}
+              </small>
+            )}
             {behaviors[a.id]?.description && <p>{behaviors[a.id]?.description}</p>}
             <small>
               Behavior: {behaviors[a.id]?.ai.replaceAll("-", " ") ?? "not audited"}

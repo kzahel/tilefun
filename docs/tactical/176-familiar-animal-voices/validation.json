@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-22",
+  "state": "implemented-and-automation-verified",
+  "humanListeningReview": "pending-owner",
+  "audio": {
+    "voices": 6,
+    "takes": 11,
+    "recordedEntries": 10,
+    "callRoutes": 45,
+    "totalEntries": 206
+  },
+  "typecheck": "pass",
+  "lint": { "errors": 0, "existingWarnings": 121, "existingInfos": 42 },
+  "focusedAudioTests": 47,
+  "native": {
+    "total": 6706,
+    "passed": 6691,
+    "knownWindowsFailures": 5,
+    "skipped": 10,
+    "seconds": 894.05
+  },
+  "nativeLimitations": "FsSecurity symlink cases (3), SqliteRecordStore process-death/WAL (1), privateDataPlugin symlink (1); staticFiles has existing Windows symlink setup/cleanup errors.",
+  "browser": { "total": 835, "passed": 834, "failed": 1, "minutes": 40.6 },
+  "browserFailure": "GPU pinch-zoom preference timed out waiting for Joystick in Options; unchanged exact cold rerun passed in 8.1 seconds, 11.4 seconds including setup. No assertions/timeouts/code changed for that test.",
+  "priorAffectedBrowserPassed": 89,
+  "nodeComparatorPassed": 1,
+  "migrationDecisions": 403,
+  "sourceFilesPinned": 6,
+  "exportFilesPinned": 11,
+  "allExportsDecodedAndMeasured": true,
+  "build": "pass",
+  "workshopCandidates": 1980,
+  "priorCandidateObjectsUnchanged": true,
+  "normalChromiumRetinaParity": "pass",
+  "inputDigest": "24a2ebbf7db9284e76dfa65b1f9feb65bb4ee2056aac5846fd350e1894aa0df4"
+}

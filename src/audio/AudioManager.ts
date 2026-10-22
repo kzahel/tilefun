@@ -2,6 +2,8 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
 import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/EmergencyVehicle.js";
 import { predatorProfile } from "../wildlife/Predator.js";
+import { AnimalAudio } from "./AnimalAudio.js";
+import { animalVoiceForSpecies } from "./AnimalVoice.js";
 import { creatureCallSamples } from "./CreatureCall.js";
 import { TrainAudio } from "./TrainAudio.js";
 
@@ -25,6 +27,7 @@ export class AudioManager {
   private creatureVoices = new Map<number, AudioBufferSourceNode>();
   private creatureBuffers = new Map<string, AudioBuffer>();
   private creatureCallsPlayed = 0;
+  private animals: AnimalAudio | null = null;
   private horns = new Map<
     number,
     {
@@ -42,10 +45,11 @@ export class AudioManager {
     enabled: boolean,
   ): void {
     if (!enabled) this.stopCreatureCalls();
+    if (this.ctx) this.recordedAnimals().update(entities, listener, enabled);
     const live = new Set<number>();
     for (const entity of entities) {
       const profile = predatorProfile(entity.type),
-        kind = profile?.fierce?.kind ?? profile?.callKind;
+        kind = profile?.callKind ?? profile?.fierce?.kind;
       if (!kind) continue;
       live.add(entity.id);
       const previous = this.creatureClips.get(entity.id),
@@ -86,7 +90,7 @@ export class AudioManager {
     pan: number,
   ): void {
     const ctx = this.ctx;
-    if (ctx?.state !== "running" || this.creatureVoices.size >= 6) return;
+    if (ctx?.state !== "running" || this.creatureAudioDiagnostics.active >= 6) return;
     let buffer = this.creatureBuffers.get(kind);
     if (!buffer) {
       const samples = creatureCallSamples(kind, ctx.sampleRate);
@@ -116,12 +120,33 @@ export class AudioManager {
   }
 
   stopCreatureCalls(): void {
+    this.animals?.stop();
     for (const source of this.creatureVoices.values()) source.stop();
     this.creatureVoices.clear();
   }
 
   get creatureAudioDiagnostics(): { active: number; played: number } {
-    return { active: this.creatureVoices.size, played: this.creatureCallsPlayed };
+    return {
+      active: this.creatureVoices.size + (this.animals?.diagnostics.active ?? 0),
+      played: this.creatureCallsPlayed + (this.animals?.diagnostics.played ?? 0),
+    };
+  }
+
+  private recordedAnimals(): AnimalAudio {
+    this.animals ??= new AnimalAudio(
+      this.ensureContext(),
+      this.master ?? this.ensureContext().destination,
+      () => 6 - this.creatureVoices.size,
+    );
+    return this.animals;
+  }
+
+  /** Call directly from a button gesture to preserve browser audio unlock. */
+  async auditionAnimalVoice(species: string): Promise<boolean> {
+    const voice = animalVoiceForSpecies(species);
+    if (!voice) return false;
+    this.tryResume();
+    return this.recordedAnimals().audition(voice);
   }
 
   /** Release a lab-owned manager; main-game scenes only stop their borrowed voices. */
@@ -132,6 +157,7 @@ export class AudioManager {
     this.stopTrains();
     this.creatureClips.clear();
     if (this.ctx) void this.ctx.close();
+    this.animals = null;
     this.ctx = null;
   }
 

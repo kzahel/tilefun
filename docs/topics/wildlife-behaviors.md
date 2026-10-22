@@ -14,6 +14,9 @@ game-active animals and fantasy creatures must also appear in the scope audit.
 The [wildlife topic](wildlife.md) owns existing art/ecology contracts; this topic
 owns the proposed behavior campaign, completion criteria and delivery sequence.
 
+The [animal sound audit and plan](wildlife-audio.md) tracks audible coverage
+separately. An animation named bleat/call does not establish that sound plays.
+
 ## What counts
 
 Each animal needs a signature mechanic: an observable trigger, a decision or

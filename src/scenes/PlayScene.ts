@@ -339,7 +339,7 @@ export class PlayScene implements GameScene {
     gc.audioManager.updateCreatureCalls(
       gc.stateView.entities,
       gc.stateView.playerEntity.position,
-      !inputLocked && !gc.debugPanel.paused,
+      !inputLocked && !gc.debugPanel.paused && !document.hidden,
     );
     if (vehicle) rawMovement = { ...rawMovement, jump: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };

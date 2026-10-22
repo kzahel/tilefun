@@ -1,0 +1,19 @@
+{
+  "dog": [
+    "assets/audio/animals/familiar-v1/dog-1.ogg",
+    "assets/audio/animals/familiar-v1/dog-2.ogg",
+    "assets/audio/animals/familiar-v1/dog-3.ogg"
+  ],
+  "cat": ["assets/audio/animals/familiar-v1/cat-1.ogg"],
+  "cow": [
+    "assets/audio/animals/familiar-v1/cow-1.ogg",
+    "assets/audio/animals/familiar-v1/cow-2.ogg"
+  ],
+  "sheep": ["assets/audio/animals/familiar-v1/sheep-1.ogg"],
+  "chicken": [
+    "assets/audio/animals/familiar-v1/chicken-1.ogg",
+    "assets/audio/animals/familiar-v1/chicken-2.ogg",
+    "assets/audio/animals/familiar-v1/chicken-3.ogg"
+  ],
+  "horse": ["assets/audio/animals/familiar-v1/horse-1.ogg"]
+}

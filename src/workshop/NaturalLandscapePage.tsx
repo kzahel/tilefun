@@ -80,6 +80,7 @@ export default function NaturalLandscapePage() {
   const audio = useRef<AudioManager | null>(null),
     footsteps = useRef<FootstepSystem | null>(null);
   const audioTime = useRef(0);
+  const audioFocused = useRef(true);
   useEffect(() => () => audio.current?.dispose(), []);
   const [zoom, setZoom] = useState(
       animalInspectionZoom(caseId) ??
@@ -246,7 +247,11 @@ export default function NaturalLandscapePage() {
         const sound = audio.current,
           viewForAudio = h.session.view;
         if (sound) {
-          const enabled = settings.current.sounds && !settings.current.paused && !document.hidden;
+          const enabled =
+            settings.current.sounds &&
+            !settings.current.paused &&
+            !document.hidden &&
+            audioFocused.current;
           sound.updateCreatureCalls(
             viewForAudio.entities,
             viewForAudio.playerEntity.position,
@@ -524,8 +529,16 @@ export default function NaturalLandscapePage() {
       .catch((e) => {
         if (active) setError(String(e));
       });
-    const release = () => keys.current.clear();
+    const release = () => {
+      keys.current.clear();
+      audioFocused.current = false;
+      audio.current?.stopCreatureCalls();
+    };
+    const focus = () => {
+      audioFocused.current = true;
+    };
     window.addEventListener("blur", release);
+    window.addEventListener("focus", focus);
     return () => {
       active = false;
       h.dispose();
@@ -536,6 +549,7 @@ export default function NaturalLandscapePage() {
       keys.current.clear();
       delete c.dataset.ready;
       window.removeEventListener("blur", release);
+      window.removeEventListener("focus", focus);
     };
   }, [prepared, reset]);
   function change(nextCase: string, nextProfile: typeof profile) {

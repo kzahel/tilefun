@@ -1,0 +1,14 @@
+{
+  "id": "cat",
+  "creator": "Sadiquecat",
+  "soundId": 689324,
+  "sourcePage": "https://freesound.org/people/Sadiquecat/sounds/689324/",
+  "download": "https://cdn.freesound.org/previews/689/689324_5287430-hq.mp3",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "verified": "2026-10-22",
+  "sourceFile": "cat-source.mp3",
+  "sha256": "5c65de44ce25de57450aa08d32d8cd05f69ce686e3ebc0a3b1570b6a3442ddd1",
+  "bytes": 23664
+}
