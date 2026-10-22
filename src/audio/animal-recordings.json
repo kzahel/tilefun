@@ -78,5 +78,26 @@
   "hippopotamus": [
     "assets/audio/animals/large-herbivores-v1/hippopotamus-1.ogg",
     "assets/audio/animals/large-herbivores-v1/hippopotamus-2.ogg"
-  ]
+  ],
+  "peacock": [
+    "assets/audio/animals/distinctive-birds-v1/peacock-1.ogg",
+    "assets/audio/animals/distinctive-birds-v1/peacock-2.ogg"
+  ],
+  "parrot": [
+    "assets/audio/animals/distinctive-birds-v1/parrot-1.ogg",
+    "assets/audio/animals/distinctive-birds-v1/parrot-2.ogg"
+  ],
+  "wild-turkey": [
+    "assets/audio/animals/distinctive-birds-v1/wild-turkey-1.ogg",
+    "assets/audio/animals/distinctive-birds-v1/wild-turkey-2.ogg"
+  ],
+  "sparrow": [
+    "assets/audio/animals/distinctive-birds-v1/sparrow-1.ogg",
+    "assets/audio/animals/distinctive-birds-v1/sparrow-2.ogg"
+  ],
+  "flamingo": [
+    "assets/audio/animals/distinctive-birds-v1/flamingo-1.ogg",
+    "assets/audio/animals/distinctive-birds-v1/flamingo-2.ogg"
+  ],
+  "penguin": ["assets/audio/animals/distinctive-birds-v1/penguin-1.ogg"]
 }

@@ -1,0 +1,18 @@
+{
+  "id": "penguin",
+  "creator": "Vortichez",
+  "soundId": 545415,
+  "sourcePage": "https://freesound.org/people/Vortichez/sounds/545415/",
+  "download": "https://cdn.freesound.org/previews/545/545415_5497893-hq.mp3",
+  "sourceFile": "penguin-source.mp3",
+  "bytes": 140352,
+  "sha256": "f104b165c85ffdd16e5f0a1d53f5472daf58efeac9642c1d3b7661552d2732b1",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "license": "CC-BY-4.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "penguin",
+  "sourceSpecies": "African penguin",
+  "notes": "African penguins recorded at Boulders Beach, South Africa. Generic game penguin uses this explicit species interpretation, retaining colony ambience.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

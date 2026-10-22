@@ -1,0 +1,18 @@
+{
+  "id": "sparrow",
+  "creator": "George Papargyris (George_Papargyris)",
+  "soundId": 831661,
+  "sourcePage": "https://freesound.org/people/George_Papargyris/sounds/831661/",
+  "download": "https://cdn.freesound.org/previews/831/831661_2550221-hq.mp3",
+  "sourceFile": "sparrow-source.mp3",
+  "bytes": 677184,
+  "sha256": "fe5447a7394353d915d886987572d056f91e6f33282ca2008cf34e675f216316",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "license": "CC-BY-4.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "sparrow",
+  "sourceSpecies": "sparrow, exact species unspecified by uploader",
+  "notes": "Close sparrow chirps; other distant sparrows remain in the source.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

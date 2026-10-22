@@ -1,0 +1,18 @@
+{
+  "id": "flamingo",
+  "creator": "Breviceps",
+  "soundId": 535778,
+  "sourcePage": "https://freesound.org/people/Breviceps/sounds/535778/",
+  "download": "https://cdn.freesound.org/previews/535/535778_9159316-hq.mp3",
+  "sourceFile": "flamingo-source.mp3",
+  "bytes": 408632,
+  "sha256": "a8e925ae24ff8ddefd2ab690319bcc064a5231ee9372dfdb2a20e1fa6ab1ee76",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "flamingo",
+  "sourceSpecies": "flamingo, exact species unspecified by uploader",
+  "notes": "Phone field recording with multiple flamingo calls; not a transformed squeaky toy.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

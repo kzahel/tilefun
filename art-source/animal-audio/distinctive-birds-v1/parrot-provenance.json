@@ -1,0 +1,18 @@
+{
+  "id": "parrot",
+  "creator": "felix.blume",
+  "soundId": 504988,
+  "sourcePage": "https://freesound.org/people/felix.blume/sounds/504988/",
+  "download": "https://cdn.freesound.org/previews/504/504988_1661766-hq.mp3",
+  "sourceFile": "parrot-source.mp3",
+  "bytes": 340512,
+  "sha256": "b297ec883a949973e1e3e598ab6177f68fe3e7fae204ff7b568e06219ccc6bea",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "parrot",
+  "sourceSpecies": "macaw (Ara)",
+  "notes": "Two macaws recorded in Sao Paulo; selected individual close calls, no human speech imitation.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

@@ -18,7 +18,19 @@
     },
     {
       "id": 4,
-      "animals": ["peacock", "parrot", "wild-turkey", "sparrow", "flamingo", "penguin"]
+      "animals": ["peacock", "parrot", "wild-turkey", "sparrow", "flamingo", "penguin"],
+      "validation": {
+        "native": 61,
+        "browser": 2,
+        "browserDuration": "32.0s",
+        "inputDigest": "26be25c9d605738df5b4707e45aac52fa5354e75a9e129e7ec312440dd2ee061",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     },
     {
       "id": 5,
@@ -188,28 +200,52 @@
       "trigger": "Sparse stationary idle; generic action cue only where appropriate"
     },
     "peacock": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "peacock",
+      "bank": "distinctive-birds-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Fresh courtship display only"
     },
     "parrot": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "parrot",
+      "bank": "distinctive-birds-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; travel and feeding quiet"
     },
     "wild-turkey": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "wild-turkey",
+      "bank": "distinctive-birds-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; travel and feeding quiet"
     },
     "sparrow": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "sparrow",
+      "bank": "distinctive-birds-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; travel and feeding quiet"
     },
     "flamingo": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "flamingo",
+      "bank": "distinctive-birds-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; travel and feeding quiet"
     },
     "penguin": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "penguin",
+      "bank": "distinctive-birds-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; travel and feeding quiet"
     },
     "gorilla": {
       "state": "queued",

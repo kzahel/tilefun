@@ -164,6 +164,30 @@ export const ANIMAL_VOICES: Record<
   moose: { label: "Low grunt", animals: ["moose"], cues: [], cooldown: 50 },
   zebra: { label: "Bray", animals: ["zebra"], cues: ["action"], cooldown: 40 },
   hippopotamus: { label: "Grunt", animals: ["hippopotamus"], cues: [], cooldown: 45 },
+  peacock: {
+    label: "Display call",
+    animals: ["peacock"],
+    cues: ["display"],
+    cooldown: 30,
+    ambient: false,
+  },
+  parrot: {
+    label: "Macaw call",
+    animals: ["parrot"],
+    cues: [],
+    cooldown: 35,
+    quietWhileCarrying: true,
+  },
+  "wild-turkey": { label: "Gobble", animals: ["wild-turkey"], cues: ["action"], cooldown: 45 },
+  sparrow: {
+    label: "Chirp",
+    animals: ["sparrow"],
+    cues: [],
+    cooldown: 25,
+    quietWhileCarrying: true,
+  },
+  flamingo: { label: "Honk", animals: ["flamingo"], cues: [], cooldown: 35 },
+  penguin: { label: "African penguin call", animals: ["penguin"], cues: [], cooldown: 40 },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(

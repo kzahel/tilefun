@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "id": "distinctive-birds-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "peacock",
+      "creator": "Kinoton",
+      "soundId": 688203,
+      "sourcePage": "https://freesound.org/people/Kinoton/sounds/688203/",
+      "download": "https://cdn.freesound.org/previews/688/688203_2247456-hq.mp3",
+      "sourceFile": "peacock-source.mp3",
+      "bytes": 117658,
+      "sha256": "af3702350e7215ed232216f2637ed6cc071e7e108876c3c75fa2a0dcbdc9e87c",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "peacock",
+      "sourceSpecies": "Indian peafowl",
+      "notes": "Isolated male peacock phrase; uploader already applied denoise, EQ and reverb.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/peacock-1.ogg",
+          "sha256": "7bb670121fbb45adc1d8e96f9b06ecff73cbd01fdf5e6df077cb7d629630bfd6",
+          "trim": [0.22, 2.0],
+          "filters": "atrim=start=0.22:end=2.0,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=6000,volume=1.071831743,afade=t=in:d=0.02,afade=t=out:st=1.740000:d=0.04",
+          "duration": 1.78,
+          "peak": 0.7053344249725342,
+          "rms": 0.16000005172704745
+        },
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/peacock-2.ogg",
+          "sha256": "735040c2aeab199924a286abcb3f7d676dd6ad4f85a2fc060c573131ae840688",
+          "trim": [2.55, 4.2],
+          "filters": "atrim=start=2.55:end=4.2,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=6000,volume=1.172499431,afade=t=in:d=0.02,afade=t=out:st=1.610000:d=0.04",
+          "duration": 1.65,
+          "peak": 0.6930537223815918,
+          "rms": 0.16047714907626234
+        }
+      ]
+    },
+    {
+      "id": "parrot",
+      "creator": "felix.blume",
+      "soundId": 504988,
+      "sourcePage": "https://freesound.org/people/felix.blume/sounds/504988/",
+      "download": "https://cdn.freesound.org/previews/504/504988_1661766-hq.mp3",
+      "sourceFile": "parrot-source.mp3",
+      "bytes": 340512,
+      "sha256": "b297ec883a949973e1e3e598ab6177f68fe3e7fae204ff7b568e06219ccc6bea",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "parrot",
+      "sourceSpecies": "macaw (Ara)",
+      "notes": "Two macaws recorded in Sao Paulo; selected individual close calls, no human speech imitation.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/parrot-1.ogg",
+          "sha256": "624ac93f493dfbeb3ff5237eedc8b9187f0202640decfdd13c5fc797817fe5e9",
+          "trim": [5.75, 6.3],
+          "filters": "atrim=start=5.75:end=6.3,asetpts=PTS-STARTPTS,highpass=f=350,lowpass=f=6000,volume=1.141960692,afade=t=in:d=0.02,afade=t=out:st=0.510000:d=0.04",
+          "duration": 0.5393333333333333,
+          "peak": 0.7987112998962402,
+          "rms": 0.10065417624005467
+        },
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/parrot-2.ogg",
+          "sha256": "24bc96794243a06203a034fecfba1bedab9f3e9fac641b3bbf7d4bd55210f780",
+          "trim": [8.4, 9.1],
+          "filters": "atrim=start=8.4:end=9.1,asetpts=PTS-STARTPTS,highpass=f=350,lowpass=f=6000,volume=0.663613415,afade=t=in:d=0.02,afade=t=out:st=0.660000:d=0.04",
+          "duration": 0.6893333333333334,
+          "peak": 0.8699191808700562,
+          "rms": 0.10332624646127472
+        }
+      ]
+    },
+    {
+      "id": "wild-turkey",
+      "creator": "itinerantmonk108",
+      "soundId": 684815,
+      "sourcePage": "https://freesound.org/people/itinerantmonk108/sounds/684815/",
+      "download": "https://cdn.freesound.org/previews/684/684815_2397507-hq.mp3",
+      "sourceFile": "wild-turkey-source.mp3",
+      "bytes": 222192,
+      "sha256": "c226ca71db5cf6fe456dbcc33fd1317c43bd088426302c5455305ee15bb786c8",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "wild-turkey",
+      "sourceSpecies": "wild turkey",
+      "notes": "Wild turkey field recording on Cape Cod, spring 2023.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/wild-turkey-1.ogg",
+          "sha256": "c54724c0c536c6b701b0cc7822c337237a1b025e9e34b1b4996a8e9df6c5d9b0",
+          "trim": [1.3, 2.8],
+          "filters": "atrim=start=1.3:end=2.8,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=6000,volume=2.266748416,afade=t=in:d=0.02,afade=t=out:st=1.460000:d=0.04",
+          "duration": 1.5,
+          "peak": 0.738368034362793,
+          "rms": 0.07176021815656024
+        },
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/wild-turkey-2.ogg",
+          "sha256": "95aef16148564d74038ef05a1681b5c5667c1374037b43e9b137c0ef90c6d29c",
+          "trim": [7.9, 9.8],
+          "filters": "atrim=start=7.9:end=9.8,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=6000,volume=2.835621268,afade=t=in:d=0.02,afade=t=out:st=1.860000:d=0.04",
+          "duration": 1.9,
+          "peak": 0.7515206933021545,
+          "rms": 0.06476603627025963
+        }
+      ]
+    },
+    {
+      "id": "sparrow",
+      "creator": "George Papargyris (George_Papargyris)",
+      "soundId": 831661,
+      "sourcePage": "https://freesound.org/people/George_Papargyris/sounds/831661/",
+      "download": "https://cdn.freesound.org/previews/831/831661_2550221-hq.mp3",
+      "sourceFile": "sparrow-source.mp3",
+      "bytes": 677184,
+      "sha256": "fe5447a7394353d915d886987572d056f91e6f33282ca2008cf34e675f216316",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "license": "CC-BY-4.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "sparrow",
+      "sourceSpecies": "sparrow, exact species unspecified by uploader",
+      "notes": "Close sparrow chirps; other distant sparrows remain in the source.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/sparrow-1.ogg",
+          "sha256": "cb8b97a5729edd902c247c829f1ae47a304f15dd2c0c7e63315e9b9a502eba45",
+          "trim": [0.38, 0.82],
+          "filters": "atrim=start=0.38:end=0.82,asetpts=PTS-STARTPTS,highpass=f=1700,lowpass=f=8000,volume=12.147290426,afade=t=in:d=0.02,afade=t=out:st=0.400000:d=0.04",
+          "duration": 0.4533333333333333,
+          "peak": 0.7757106423377991,
+          "rms": 0.1262966267116731
+        },
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/sparrow-2.ogg",
+          "sha256": "0593a19309d5088a45d0d86152650accb7daeb0ab3208b53cb2485262db6dab0",
+          "trim": [2.65, 3.03],
+          "filters": "atrim=start=2.65:end=3.03,asetpts=PTS-STARTPTS,highpass=f=1700,lowpass=f=8000,volume=9.941386258,afade=t=in:d=0.02,afade=t=out:st=0.340000:d=0.04",
+          "duration": 0.36933333333333335,
+          "peak": 0.7662116885185242,
+          "rms": 0.1246057148835245
+        }
+      ]
+    },
+    {
+      "id": "flamingo",
+      "creator": "Breviceps",
+      "soundId": 535778,
+      "sourcePage": "https://freesound.org/people/Breviceps/sounds/535778/",
+      "download": "https://cdn.freesound.org/previews/535/535778_9159316-hq.mp3",
+      "sourceFile": "flamingo-source.mp3",
+      "bytes": 408632,
+      "sha256": "a8e925ae24ff8ddefd2ab690319bcc064a5231ee9372dfdb2a20e1fa6ab1ee76",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "flamingo",
+      "sourceSpecies": "flamingo, exact species unspecified by uploader",
+      "notes": "Phone field recording with multiple flamingo calls; not a transformed squeaky toy.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/flamingo-1.ogg",
+          "sha256": "f56375b00ecdfc35f0661570737d6a104c5cd3e2bedf37c44e62a44b62ecb614",
+          "trim": [0.25, 2.5],
+          "filters": "atrim=start=0.25:end=2.5,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=5000,volume=1.874969518,afade=t=in:d=0.02,afade=t=out:st=2.210000:d=0.04",
+          "duration": 2.25,
+          "peak": 0.7493041157722473,
+          "rms": 0.11132143290638272
+        },
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/flamingo-2.ogg",
+          "sha256": "a5eb55f25f9528b23a50fff2a0049f76f10e9df9fb3ba84d418ccd6992ad4de4",
+          "trim": [4.7, 5.7],
+          "filters": "atrim=start=4.7:end=5.7,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=5000,volume=1.824337129,afade=t=in:d=0.02,afade=t=out:st=0.960000:d=0.04",
+          "duration": 1.0,
+          "peak": 0.7342589497566223,
+          "rms": 0.1310931789379451
+        }
+      ]
+    },
+    {
+      "id": "penguin",
+      "creator": "Vortichez",
+      "soundId": 545415,
+      "sourcePage": "https://freesound.org/people/Vortichez/sounds/545415/",
+      "download": "https://cdn.freesound.org/previews/545/545415_5497893-hq.mp3",
+      "sourceFile": "penguin-source.mp3",
+      "bytes": 140352,
+      "sha256": "f104b165c85ffdd16e5f0a1d53f5472daf58efeac9642c1d3b7661552d2732b1",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "license": "CC-BY-4.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "penguin",
+      "sourceSpecies": "African penguin",
+      "notes": "African penguins recorded at Boulders Beach, South Africa. Generic game penguin uses this explicit species interpretation, retaining colony ambience.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/distinctive-birds-v1/penguin-1.ogg",
+          "sha256": "b37b8341f0ac5621284951ff999ae081578b192117262f506a3b4cdcc3420a56",
+          "trim": [4.0, 5.6],
+          "filters": "atrim=start=4.0:end=5.6,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=6000,volume=1.126496817,afade=t=in:d=0.02,afade=t=out:st=1.560000:d=0.04",
+          "duration": 1.6,
+          "peak": 0.7377957105636597,
+          "rms": 0.138364601220173
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "wild-turkey",
+  "creator": "itinerantmonk108",
+  "soundId": 684815,
+  "sourcePage": "https://freesound.org/people/itinerantmonk108/sounds/684815/",
+  "download": "https://cdn.freesound.org/previews/684/684815_2397507-hq.mp3",
+  "sourceFile": "wild-turkey-source.mp3",
+  "bytes": 222192,
+  "sha256": "c226ca71db5cf6fe456dbcc33fd1317c43bd088426302c5455305ee15bb786c8",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "wild-turkey",
+  "sourceSpecies": "wild turkey",
+  "notes": "Wild turkey field recording on Cape Cod, spring 2023.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

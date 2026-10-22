@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: overnight 36-animal sound campaign in progress; thirty-two recorded sets integrated, owner listening review pending.
+Status: overnight 36-animal sound campaign in progress; thirty-eight recorded sets integrated, owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -18,14 +18,14 @@ Owner authorized the full 36-animal queue and additional suitable animals, up to
 and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable or
 poorly identified sources remain documented gaps rather than invented recordings.
 
-First eighteen campaign entries are integrated: big predators, other hunters
-and six large herbivores. Upright elephant also inherits elephant calls. Per-animal sources/triggers and validation
+First twenty-four campaign entries are integrated: predators, other hunters,
+large herbivores and six distinctive birds. Upright elephant also inherits calls. Per-animal sources/triggers and validation
 live in the ledger and delivery record. Listening review remains pending.
 
 ## Current coverage
 
-**66/206 entries have sound routes: 38 recorded, 28 synthesized, zero game-only;
-140 remain unwired.** Thirty-two real recorded sets supply fifty-two excerpts.
+**72/206 entries have sound routes: 44 recorded, 28 synthesized, zero game-only;
+134 remain unwired.** Thirty-eight real recorded sets supply sixty-three excerpts.
 The [generated animal-by-animal audit](../wildlife-audio-audit.md) owns exact current
 routing, shared designs and missing entries. This is source coverage, not owner
 listening approval or a live deployment check. Inherited coats/panther count as
@@ -45,6 +45,9 @@ placeholder, including when a recording fails to load. Wolf/coyote/hyena/lynx an
 big predators do not emit idle roars while hunting. Fox remains quiet through
 listening/stalking/pounce/eat. Cheetah has real contact meows. Dire wolf and other
 fantasy creatures keep separate synthesized designs.
+
+Peacock calls only on its existing courtship display; other bird contact calls
+are sparse. Macaw/African-penguin source interpretations remain explicit.
 
 Deer snorts only at fresh alarm stamps, never while browsing. Elephant trunk work
 and animal feeding remain quiet. Elk bugles have a 75-second cooldown.

@@ -31,6 +31,36 @@ Source: https://opengameart.org/content/jaguar-saw
 License: CC-BY-3.0 — https://creativecommons.org/licenses/by/3.0/
 Upstream: https://www.youtube.com/watch?v=VJ0RCZXu0v4
 
+peacock (distinctive-birds-v1)
+Creator: Kinoton
+Source: https://freesound.org/people/Kinoton/sounds/688203/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+parrot (distinctive-birds-v1)
+Creator: felix.blume
+Source: https://freesound.org/people/felix.blume/sounds/504988/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+wild-turkey (distinctive-birds-v1)
+Creator: itinerantmonk108
+Source: https://freesound.org/people/itinerantmonk108/sounds/684815/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+sparrow (distinctive-birds-v1)
+Creator: George Papargyris (George_Papargyris)
+Source: https://freesound.org/people/George_Papargyris/sounds/831661/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
+flamingo (distinctive-birds-v1)
+Creator: Breviceps
+Source: https://freesound.org/people/Breviceps/sounds/535778/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+penguin (distinctive-birds-v1)
+Creator: Vortichez
+Source: https://freesound.org/people/Vortichez/sounds/545415/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
 dog (familiar-v1)
 Creator: krissyeliot
 Source: https://freesound.org/people/krissyeliot/sounds/125523/

@@ -95,3 +95,20 @@ normal/retina manifest and production build pass; all 1,980 prior candidate obje
 remain exact. Input digest: `66e0b6b2baa42229cd46bb614b116572490cc92c32ad72735cf39be37e5fea82`.
 Evidence: `data/overnight-audio-herbivores-{native,browser,types,lint,catalog,
 manifest,build}.log`. No broad suites run; listening review remains pending.
+
+## Batch 4: distinctive birds
+
+Peacock, parrot, wild turkey, sparrow, flamingo and penguin: six sources/eleven
+excerpts. Peacock uses fresh existing courtship displays only; turkey also uses
+its generic action. Other calls are sparse stationary ambience. Parrot/sparrow
+have explicit carrying silence. Macaw and African penguin interpretations and
+sources with group/background/reverb are qualified in the source bank. The source
+coverage is 72/206 (44 recorded, 28 synthesized), 134 unwired, with 38 recordings/
+63 excerpts. Owner listening review remains pending.
+
+Validation: 61 targeted native checks and both existing Chromium audio
+boundaries pass (32.0s). Typechecks, targeted lint, strict catalog,
+normal/retina inventory and build pass; all 1,980 prior candidate objects remain
+exact. Input digest: `26be25c9d605738df5b4707e45aac52fa5354e75a9e129e7ec312440dd2ee061`.
+Evidence: `data/overnight-audio-birds-{native,browser,types,lint,catalog,
+manifest,build}.log`. Broad suites excluded; listening review pending.

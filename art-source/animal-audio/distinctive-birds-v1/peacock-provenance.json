@@ -1,0 +1,18 @@
+{
+  "id": "peacock",
+  "creator": "Kinoton",
+  "soundId": 688203,
+  "sourcePage": "https://freesound.org/people/Kinoton/sounds/688203/",
+  "download": "https://cdn.freesound.org/previews/688/688203_2247456-hq.mp3",
+  "sourceFile": "peacock-source.mp3",
+  "bytes": 117658,
+  "sha256": "af3702350e7215ed232216f2637ed6cc071e7e108876c3c75fa2a0dcbdc9e87c",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "peacock",
+  "sourceSpecies": "Indian peafowl",
+  "notes": "Isolated male peacock phrase; uploader already applied denoise, EQ and reverb.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}
