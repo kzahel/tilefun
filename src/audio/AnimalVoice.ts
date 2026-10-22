@@ -302,6 +302,34 @@ export const ANIMAL_VOICES: Record<
     ambient: false,
     alarmCue: "display",
   },
+  mule: { label: "Neigh and short bray", animals: ["mule"], cues: [], cooldown: 45 },
+  rat: {
+    label: "Squeak",
+    animals: ["rat"],
+    cues: [],
+    cooldown: 20,
+    ambient: false,
+    alarmCue: "flee",
+  },
+  chinchilla: {
+    label: "Short squeak",
+    animals: ["chinchilla"],
+    cues: [],
+    cooldown: 20,
+    ambient: false,
+    alarmCue: "flee",
+  },
+  "red-squirrel": {
+    label: "Chatter",
+    animals: ["red-squirrel"],
+    cues: [],
+    cooldown: 25,
+    ambient: false,
+    alarmCue: "flee",
+    quietWhileCarrying: true,
+  },
+  gecko: { label: "Tokay call", animals: ["gecko"], cues: [], cooldown: 45 },
+  kinkajou: { label: "Young kinkajou chirp", animals: ["kinkajou"], cues: [], cooldown: 45 },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(

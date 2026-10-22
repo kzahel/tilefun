@@ -251,7 +251,15 @@ it("keeps deer browsing/resting silent and sounds only its fresh serialized alar
 });
 
 it("keeps alarm-only mammal sounds out of calm ambience and plays only fresh replicated warnings", async () => {
-  for (const species of ["piglet", "meerkat", "raccoon", "llama"] as const) {
+  for (const species of [
+    "piglet",
+    "meerkat",
+    "raccoon",
+    "llama",
+    "rat",
+    "chinchilla",
+    "red-squirrel",
+  ] as const) {
     const h = harness(),
       actor = createFauna(species, 20, 0),
       voice = required(animalVoiceForSpecies(species)),

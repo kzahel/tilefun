@@ -182,5 +182,20 @@
   ],
   "giraffe": ["assets/audio/animals/further-mammals-v1/giraffe-1.ogg"],
   "water-buffalo": ["assets/audio/animals/further-mammals-v1/water-buffalo-1.ogg"],
-  "tasmanian-devil": ["assets/audio/animals/further-mammals-v1/tasmanian-devil-1.ogg"]
+  "tasmanian-devil": ["assets/audio/animals/further-mammals-v1/tasmanian-devil-1.ogg"],
+  "mule": ["assets/audio/animals/quiet-neighbors-v1/mule-1.ogg"],
+  "rat": [
+    "assets/audio/animals/quiet-neighbors-v1/rat-1.ogg",
+    "assets/audio/animals/quiet-neighbors-v1/rat-2.ogg"
+  ],
+  "chinchilla": ["assets/audio/animals/quiet-neighbors-v1/chinchilla-1.ogg"],
+  "red-squirrel": [
+    "assets/audio/animals/quiet-neighbors-v1/red-squirrel-1.ogg",
+    "assets/audio/animals/quiet-neighbors-v1/red-squirrel-2.ogg"
+  ],
+  "gecko": [
+    "assets/audio/animals/quiet-neighbors-v1/gecko-1.ogg",
+    "assets/audio/animals/quiet-neighbors-v1/gecko-2.ogg"
+  ],
+  "kinkajou": ["assets/audio/animals/quiet-neighbors-v1/kinkajou-1.ogg"]
 }

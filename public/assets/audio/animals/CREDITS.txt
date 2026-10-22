@@ -291,6 +291,36 @@ Source: https://commons.wikimedia.org/wiki/File:Role-of-vocal-tract-characterist
 License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
 Upstream: https://doi.org/10.1038/srep32042
 
+mule (quiet-neighbors-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/868304/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+rat (quiet-neighbors-v1)
+Creator: Zabuhailo
+Source: https://freesound.org/people/Zabuhailo/sounds/143125/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+chinchilla (quiet-neighbors-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/860985/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+red-squirrel (quiet-neighbors-v1)
+Creator: vincauc
+Source: https://freesound.org/people/vincauc/sounds/856659/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
+gecko (quiet-neighbors-v1)
+Creator: Neil Francis Tribucio / kevp888
+Source: https://freesound.org/people/kevp888/sounds/587213/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
+kinkajou (quiet-neighbors-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/852086/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
 owl (raptors-and-grazers-v1)
 Creator: Patrick_Corra
 Source: https://freesound.org/people/Patrick_Corra/sounds/745208/

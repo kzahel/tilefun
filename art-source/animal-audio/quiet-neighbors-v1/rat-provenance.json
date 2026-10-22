@@ -1,0 +1,18 @@
+{
+  "id": "rat",
+  "creator": "Zabuhailo",
+  "soundId": 143125,
+  "sourcePage": "https://freesound.org/people/Zabuhailo/sounds/143125/",
+  "download": "https://cdn.freesound.org/previews/143/143125_2580450-hq.mp3",
+  "sourceFile": "rat-source.mp3",
+  "bytes": 243936,
+  "sha256": "2f6d2447616474a89617db231600ed1d3947da499cde8a2304ba127667491937",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "rat",
+  "sourceSpecies": "Pet rat",
+  "notes": "Uploader identifies a pet rat, recorded with Pro Audio VT-7 and M-Audio Fast Track Ultra 8R. No source behavioral context is given; game playback is restricted to fresh flee warnings rather than calm idle.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

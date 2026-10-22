@@ -20,6 +20,7 @@ This is an audio campaign; existing art and AI approval identities remain intact
 7. Extra: owl, eagle, hawk, camel, warthog, American bison.
 8. Extra: ostrich, emu, cassowary, toucan, great blue heron, Atlantic puffin.
 9. Extra: panda, koala, giraffe, upright giraffe, water buffalo, Tasmanian devil.
+10. Extra: mule, rat, chinchilla, red squirrel, gecko, kinkajou.
 
 Real animal recordings only: CC0 preferred; CC BY 2.5/3.0/4.0 and CC BY-SA 4.0 use
 exact creator/source/license and public edit credits. ShareAlike audio derivatives
@@ -220,4 +221,25 @@ boundaries pass (32.7s). Typechecks, targeted lint, strict catalog,
 normal/retina inventory and build pass; all 1,980 prior candidate objects remain
 exact. Input digest: `006c07c4646ef77ebe1ec4945ede605532e35e06a4fe53061cb0b4253a035f2d`.
 Evidence: `data/overnight-audio-further-{native,browser,types,lint,catalog,
+manifest,build}.log`. Broad suites excluded; listening review pending.
+
+## Batch 10: quiet neighbors
+
+Mule, rat, chinchilla, red squirrel, gecko and kinkajou: six sources/nine excerpts.
+Mule uses its own neigh/short bray. Rat/chinchilla/squirrel play only at fresh
+existing flee warnings, with calm idle/feeding/cache work quiet; squirrel also
+stops while carrying. The existing native alarm case checks these serialized
+warnings without expanding the browser matrix. Gecko's tokay interpretation and
+actual recordist Neil Francis Tribucio are explicit. Kinkajou source age is
+explicit; no age AI is added. Short chinchilla and low-gain squirrel source
+qualifications remain listening concerns.
+
+60 campaign animals are integrated. Coverage is 104/206 (80 recorded, 24
+synthesized), 102 unwired, with 73 recordings/119 excerpts. Listening pending.
+
+Validation: 58 targeted native checks and both existing Chromium audio
+boundaries pass (31.7s). Typechecks, targeted lint, strict catalog,
+normal/retina inventory and build pass; all 1,980 prior candidate objects remain
+exact. Input digest: `8c19d626a9a5bad694a84f0e9204f88f1e7536820ecd7aace4fe1a1e5b1762ec`.
+Evidence: `data/overnight-audio-neighbors-{native,browser,types,lint,catalog,
 manifest,build}.log`. Broad suites excluded; listening review pending.

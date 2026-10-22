@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "id": "quiet-neighbors-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "mule",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 868304,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/868304/",
+      "download": "https://cdn.freesound.org/previews/868/868304_15895934-hq.mp3",
+      "sourceFile": "mule-source.mp3",
+      "bytes": 72816,
+      "sha256": "839ca7eb79993c63a84b195ac3746908f1d696aa02e0ca8201d4a3086607997a",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "mule",
+      "sourceSpecies": "Mule",
+      "notes": "Uploader identifies a mule neigh followed by a short bray, LG Stylus 2022; no donkey/horse sound is substituted.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/mule-1.ogg",
+          "sha256": "784218bec94563ae281abc53eba52f0c323374729f5f940f022ade025c7294af",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [0.05, 2.25],
+          "filters": "atrim=start=0.05:end=2.25,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=5000,volume=0.944537621,afade=t=in:d=0.02,afade=t=out:st=2.160000:d=0.04",
+          "duration": 2.2,
+          "peak": 0.7066366076469421,
+          "rms": 0.16017754584333058
+        }
+      ]
+    },
+    {
+      "id": "rat",
+      "creator": "Zabuhailo",
+      "soundId": 143125,
+      "sourcePage": "https://freesound.org/people/Zabuhailo/sounds/143125/",
+      "download": "https://cdn.freesound.org/previews/143/143125_2580450-hq.mp3",
+      "sourceFile": "rat-source.mp3",
+      "bytes": 243936,
+      "sha256": "2f6d2447616474a89617db231600ed1d3947da499cde8a2304ba127667491937",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "rat",
+      "sourceSpecies": "Pet rat",
+      "notes": "Uploader identifies a pet rat, recorded with Pro Audio VT-7 and M-Audio Fast Track Ultra 8R. No source behavioral context is given; game playback is restricted to fresh flee warnings rather than calm idle.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/rat-1.ogg",
+          "sha256": "e910e0ada2a65aa45135fe38a91eef868dd5a30d588a34d3058f1770b2781193",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [6.36, 6.66],
+          "filters": "atrim=start=6.36:end=6.66,asetpts=PTS-STARTPTS,highpass=f=800,lowpass=f=8000,volume=17.467832213,afade=t=in:d=0.02,afade=t=out:st=0.260000:d=0.04",
+          "duration": 0.31466666666666665,
+          "peak": 0.6425408720970154,
+          "rms": 0.15655120020232038
+        },
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/rat-2.ogg",
+          "sha256": "8dd54f1efe643124bab52e4b80ddfd613eda2beb355d69a68a5a885a75eda892",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [7.31, 7.6],
+          "filters": "atrim=start=7.31:end=7.6,asetpts=PTS-STARTPTS,highpass=f=800,lowpass=f=8000,volume=10.896449621,afade=t=in:d=0.02,afade=t=out:st=0.250000:d=0.04",
+          "duration": 0.304,
+          "peak": 0.5882387161254883,
+          "rms": 0.15645961376650763
+        }
+      ]
+    },
+    {
+      "id": "chinchilla",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 860985,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/860985/",
+      "download": "https://cdn.freesound.org/previews/860/860985_15895934-hq.mp3",
+      "sourceFile": "chinchilla-source.mp3",
+      "bytes": 6144,
+      "sha256": "a3133cd0972f8ab4e5f712b15c476af5c24ab1d8285e02c9f3faf463bb6ebdff",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "chinchilla",
+      "sourceSpecies": "Chinchilla",
+      "notes": "Uploader identifies a single chinchilla sound, LG Stylus 2022. The entire source is only about 0.117 seconds; retain one short excerpt, no pitch-made variants. Fresh flee only, not calm idle.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/chinchilla-1.ogg",
+          "sha256": "ac7efaa3d63f0befe139268259b1221517ed4f18c2bb4f7f855e0168fd723c75",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [0.0, 0.116],
+          "filters": "atrim=start=0.0:end=0.116,asetpts=PTS-STARTPTS,highpass=f=300,lowpass=f=7000,volume=6.259967764,afade=t=in:d=0.02,afade=t=out:st=0.076000:d=0.04",
+          "duration": 0.10533333333333333,
+          "peak": 0.5034030079841614,
+          "rms": 0.16768298918776975
+        }
+      ]
+    },
+    {
+      "id": "red-squirrel",
+      "creator": "vincauc",
+      "soundId": 856659,
+      "sourcePage": "https://freesound.org/people/vincauc/sounds/856659/",
+      "download": "https://cdn.freesound.org/previews/856/856659_17775677-hq.mp3",
+      "sourceFile": "red-squirrel-source.mp3",
+      "bytes": 514560,
+      "sha256": "b797f69a45ba0a0ab6ab846348d7884b57f6bb9565df6bd516b7bb2a21a157f0",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "red-squirrel",
+      "sourceSpecies": "Red squirrel / Ecureuil roux",
+      "notes": "Uploader identifies red squirrel / Ecureuil roux, Zoom H1essential, 2026-05-24. Low original gain and background remain listening-review concerns; narrow short chatter excerpts, fresh flee only and carrying silence.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/red-squirrel-1.ogg",
+          "sha256": "637bbeb586accfa74b37b5960771bda8115665813156edf3d5a13066dbd57047",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [1.48, 1.85],
+          "filters": "atrim=start=1.48:end=1.85,asetpts=PTS-STARTPTS,highpass=f=500,lowpass=f=7000,volume=544.237161988,afade=t=in:d=0.02,afade=t=out:st=0.330000:d=0.04",
+          "duration": 0.37333333333333335,
+          "peak": 0.7699019312858582,
+          "rms": 0.07919307583088177
+        },
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/red-squirrel-2.ogg",
+          "sha256": "084483f48197f9d82747ffb37f8c849ef8647b0d7f27183b5567cab37fdcbf6c",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [2.55, 2.95],
+          "filters": "atrim=start=2.55:end=2.95,asetpts=PTS-STARTPTS,highpass=f=500,lowpass=f=7000,volume=338.726977510,afade=t=in:d=0.02,afade=t=out:st=0.360000:d=0.04",
+          "duration": 0.3893333333333333,
+          "peak": 0.7576273083686829,
+          "rms": 0.061582651104759766
+        }
+      ]
+    },
+    {
+      "id": "gecko",
+      "creator": "Neil Francis Tribucio / kevp888",
+      "soundId": 587213,
+      "sourcePage": "https://freesound.org/people/kevp888/sounds/587213/",
+      "download": "https://cdn.freesound.org/previews/587/587213_9034501-hq.mp3",
+      "sourceFile": "gecko-source.mp3",
+      "bytes": 120000,
+      "sha256": "f17fec4bc36db6acb2e47d87cc083a2add9ed6655c86194ed89aa0157fd5c497",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "gecko",
+      "sourceSpecies": "Tokay gecko",
+      "notes": "Recorded in the Philippines in September 2021 by Neil Francis Tribucio, uploaded by kevp888; source already has light noise removal and fades in Audacity. Generic game gecko explicitly uses a tokay gecko voice.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/gecko-1.ogg",
+          "sha256": "de494b73258e03239def9d46084efd3e821d30bcf664a0b465e4f883f4bd5f46",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [2.0, 2.92],
+          "filters": "atrim=start=2.0:end=2.92,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=5500,volume=2.633647505,afade=t=in:d=0.02,afade=t=out:st=0.880000:d=0.04",
+          "duration": 0.9093333333333333,
+          "peak": 0.7522895336151123,
+          "rms": 0.12986664894201297
+        },
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/gecko-2.ogg",
+          "sha256": "af021b756324f7d6c0ae32481aad9075ed51fddf33b59c57ba787b10cf52b907",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [3.65, 4.85],
+          "filters": "atrim=start=3.65:end=4.85,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=5500,volume=1.723712785,afade=t=in:d=0.02,afade=t=out:st=1.160000:d=0.04",
+          "duration": 1.2,
+          "peak": 0.802760899066925,
+          "rms": 0.08649321158996698
+        }
+      ]
+    },
+    {
+      "id": "kinkajou",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 852086,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/852086/",
+      "download": "https://cdn.freesound.org/previews/852/852086_15895934-hq.mp3",
+      "sourceFile": "kinkajou-source.mp3",
+      "bytes": 51291,
+      "sha256": "1918ce343b59dab6ddbd17f182afd2850131de2c6f4f910b40e0502b4787793a",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "kinkajou",
+      "sourceSpecies": "Young kinkajou",
+      "notes": "Uploader identifies a baby kinkajou chirp; human speech was edited out by uploader. LG Stylus 2022. Source age is explicit in the audition label; no new age/baby AI is introduced.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/quiet-neighbors-v1/kinkajou-1.ogg",
+          "sha256": "a1e455f3f769b684b467f104d980d6452c371014848f1ae3523e5a00d87f4db2",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [1.28, 1.58],
+          "filters": "atrim=start=1.28:end=1.58,asetpts=PTS-STARTPTS,highpass=f=600,lowpass=f=7500,volume=1.652496353,afade=t=in:d=0.02,afade=t=out:st=0.260000:d=0.04",
+          "duration": 0.31466666666666665,
+          "peak": 0.784450888633728,
+          "rms": 0.08759419526285842
+        }
+      ]
+    }
+  ]
+}

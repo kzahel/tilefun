@@ -1,0 +1,18 @@
+{
+  "id": "chinchilla",
+  "creator": "TheKingOfGeeks360",
+  "soundId": 860985,
+  "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/860985/",
+  "download": "https://cdn.freesound.org/previews/860/860985_15895934-hq.mp3",
+  "sourceFile": "chinchilla-source.mp3",
+  "bytes": 6144,
+  "sha256": "a3133cd0972f8ab4e5f712b15c476af5c24ab1d8285e02c9f3faf463bb6ebdff",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "chinchilla",
+  "sourceSpecies": "Chinchilla",
+  "notes": "Uploader identifies a single chinchilla sound, LG Stylus 2022. The entire source is only about 0.117 seconds; retain one short excerpt, no pitch-made variants. Fresh flee only, not calm idle.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

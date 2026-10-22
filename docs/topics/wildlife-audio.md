@@ -19,14 +19,14 @@ and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable o
 poorly identified sources remain documented gaps rather than invented recordings.
 
 All 36 initial campaign animals are committed and pushed, plus upright elephant
-inheritance. Eighteen further animals add raptor, grazing mammal, distinctive
+inheritance. Twenty-four further animals add raptor, grazing mammal, distinctive
 bird and further mammal recordings. Per-animal sources, triggers and validation live in the
 ledger and delivery record. Owner listening review remains pending.
 
 ## Current coverage
 
-**98/206 entries have sound routes: 74 recorded, 24 synthesized, zero game-only;
-108 remain unwired.** Sixty-seven real recorded sets supply 110 excerpts.
+**104/206 entries have sound routes: 80 recorded, 24 synthesized, zero game-only;
+102 remain unwired.** Seventy-three real recorded sets supply 119 excerpts.
 The [generated animal-by-animal audit](../wildlife-audio-audit.md) owns exact current
 routing, shared designs and missing entries. This is source coverage, not owner
 listening approval or a live deployment check. Inherited coats/panther count as
@@ -67,6 +67,12 @@ circadian or social AI. Water buffalo is non-vocal nasal breath; Tasmanian devil
 cries only at fresh displays. The koala source's original video container is
 retained for provenance, with audio-only shipped exports. Indian-rhino material
 does not cover the registered white rhinoceros.
+
+Mule has its own neigh/short bray; gecko explicitly uses tokay gecko recordings,
+with the actual recordist credited. Kinkajou's young source is labeled. Rat,
+chinchilla and red squirrel use fresh flee warnings only, never calm idle; source
+context/short-call/low-gain qualifications remain in the source bank. Squirrel
+also stops while carrying.
 
 Deer snorts only at fresh alarm stamps, never while browsing. Elephant trunk work
 and animal feeding remain quiet. Elk bugles have a 75-second cooldown.

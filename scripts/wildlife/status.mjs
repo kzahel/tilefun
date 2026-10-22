@@ -328,7 +328,12 @@ export function writeStatus() {
     const campaign = read("art-source/animal-audio/sound-campaign.json");
     const animals = Object.values(campaign.animals);
     const integrated = animals.filter((a) => a.state === "integrated").length;
-    const gaps = animals.filter((a) => a.state === "source-gap").length;
+    const gaps = new Set([
+      ...Object.entries(campaign.animals)
+        .filter(([, a]) => a.state === "source-gap")
+        .map(([id]) => id),
+      ...Object.keys(campaign.sourceGaps ?? {}),
+    ]).size;
     lines.splice(
       4,
       0,

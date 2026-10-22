@@ -6,15 +6,51 @@
   "batches": [
     {
       "id": 1,
-      "animals": ["tiger", "lion", "panther", "brown-bear", "leopard", "jaguar"]
+      "animals": ["tiger", "lion", "panther", "brown-bear", "leopard", "jaguar"],
+      "validation": {
+        "native": 65,
+        "browser": 2,
+        "browserDuration": "31.5s",
+        "inputDigest": "e47ef5703f6100e7b49c396c86e451f4cf02bbbf2db097c7b4d68dd075db0133",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     },
     {
       "id": 2,
-      "animals": ["wolf", "coyote", "spotted-hyena", "fox", "cheetah", "lynx"]
+      "animals": ["wolf", "coyote", "spotted-hyena", "fox", "cheetah", "lynx"],
+      "validation": {
+        "native": 60,
+        "browser": 2,
+        "browserDuration": "31.9s",
+        "inputDigest": "31ce80aa273968afe611e9fe64df621be985334b1766ba529794ef94a6383f39",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     },
     {
       "id": 3,
-      "animals": ["elephant", "elk", "deer", "moose", "zebra", "hippopotamus"]
+      "animals": ["elephant", "elk", "deer", "moose", "zebra", "hippopotamus"],
+      "validation": {
+        "native": 61,
+        "browser": 2,
+        "browserDuration": "31.3s",
+        "inputDigest": "66e0b6b2baa42229cd46bb614b116572490cc92c32ad72735cf39be37e5fea82",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     },
     {
       "id": 4,
@@ -121,6 +157,23 @@
         "browser": 2,
         "browserDuration": "32.7s",
         "inputDigest": "006c07c4646ef77ebe1ec4945ede605532e35e06a4fe53061cb0b4253a035f2d",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Quiet neighbors",
+      "animals": ["mule", "rat", "chinchilla", "red-squirrel", "gecko", "kinkajou"],
+      "validation": {
+        "native": 58,
+        "browser": 2,
+        "browserDuration": "31.7s",
+        "inputDigest": "8c19d626a9a5bad694a84f0e9204f88f1e7536820ecd7aace4fe1a1e5b1762ec",
         "candidates": 1980,
         "priorObjectsExact": true,
         "types": "pass",
@@ -567,6 +620,54 @@
       "voice": "tasmanian-devil",
       "bank": "further-mammals-v1",
       "trigger": "Fresh display only; idle quiet",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "mule": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "mule",
+      "bank": "quiet-neighbors-v1",
+      "trigger": "Sparse stationary calls",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "rat": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "rat",
+      "bank": "quiet-neighbors-v1",
+      "trigger": "Fresh flee warning only; calm idle quiet",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "chinchilla": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "chinchilla",
+      "bank": "quiet-neighbors-v1",
+      "trigger": "Fresh flee warning only; calm idle quiet",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "red-squirrel": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "red-squirrel",
+      "bank": "quiet-neighbors-v1",
+      "trigger": "Fresh flee warning only; calm idle quiet",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "gecko": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "gecko",
+      "bank": "quiet-neighbors-v1",
+      "trigger": "Sparse stationary calls",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "kinkajou": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "kinkajou",
+      "bank": "quiet-neighbors-v1",
+      "trigger": "Sparse stationary calls",
       "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
     }
   },

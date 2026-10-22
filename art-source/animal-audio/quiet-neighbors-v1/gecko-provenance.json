@@ -1,0 +1,18 @@
+{
+  "id": "gecko",
+  "creator": "Neil Francis Tribucio / kevp888",
+  "soundId": 587213,
+  "sourcePage": "https://freesound.org/people/kevp888/sounds/587213/",
+  "download": "https://cdn.freesound.org/previews/587/587213_9034501-hq.mp3",
+  "sourceFile": "gecko-source.mp3",
+  "bytes": 120000,
+  "sha256": "f17fec4bc36db6acb2e47d87cc083a2add9ed6655c86194ed89aa0157fd5c497",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "gecko",
+  "sourceSpecies": "Tokay gecko",
+  "notes": "Recorded in the Philippines in September 2021 by Neil Francis Tribucio, uploaded by kevp888; source already has light noise removal and fades in Audacity. Generic game gecko explicitly uses a tokay gecko voice.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

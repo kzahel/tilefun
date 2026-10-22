@@ -1,0 +1,26 @@
+{
+  "mule": {
+    "ranges": [[0.05, 2.25]],
+    "filters": "highpass=f=100,lowpass=f=5000"
+  },
+  "rat": {
+    "ranges": [[6.36, 6.66], [7.31, 7.6]],
+    "filters": "highpass=f=800,lowpass=f=8000"
+  },
+  "chinchilla": {
+    "ranges": [[0.0, 0.116]],
+    "filters": "highpass=f=300,lowpass=f=7000"
+  },
+  "red-squirrel": {
+    "ranges": [[1.48, 1.85], [2.55, 2.95]],
+    "filters": "highpass=f=500,lowpass=f=7000"
+  },
+  "gecko": {
+    "ranges": [[2.0, 2.92], [3.65, 4.85]],
+    "filters": "highpass=f=250,lowpass=f=5500"
+  },
+  "kinkajou": {
+    "ranges": [[1.28, 1.58]],
+    "filters": "highpass=f=600,lowpass=f=7500"
+  }
+}
