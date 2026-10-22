@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-22",
+  "state": "implemented-and-automation-verified",
+  "humanListeningReview": "pending-owner",
+  "audio": {
+    "newVoices": ["crow", "raven", "pigeon"],
+    "newSources": 3,
+    "newTakes": 7,
+    "totalVoices": 12,
+    "totalTakes": 23,
+    "recordedEntries": 16,
+    "callRoutes": 51,
+    "totalEntries": 206
+  },
+  "typecheck": "pass",
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 121,
+    "existingInfos": 42
+  },
+  "focusedAudioTests": 52,
+  "native": {
+    "total": 6711,
+    "passed": 6696,
+    "knownWindowsFailures": 5,
+    "skipped": 10,
+    "seconds": 882.38
+  },
+  "nativeLimitations": "FsSecurity dangling symlink cases (3), SqliteRecordStore process-death/WAL (1), privateDataPlugin symlink (1). staticFiles retains existing Windows symlink setup/cleanup errors.",
+  "browser": {
+    "total": 835,
+    "passed": 835,
+    "failed": 0,
+    "minutes": 40.6
+  },
+  "audioBrowserBoundariesPassed": 2,
+  "nodeComparatorPassed": 1,
+  "allExportsHashPinnedDecodedAndMeasured": true,
+  "build": "pass",
+  "workshopCandidates": 1980,
+  "priorCandidateObjectsUnchanged": true,
+  "normalChromiumRetinaParity": "pass",
+  "inputDigest": "5c9a734cc0b0039bded2f6998d27622f69ee3e05ee1d2e5d901b9fcec50d7f02"
+}

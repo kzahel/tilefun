@@ -21,6 +21,7 @@ export class AnimalAudio {
   private states = new Map<number, AnimalSoundState>();
   private actors = new Map<number, Entity>();
   private balls = new Map<number, Entity>();
+  private carriers = new Set<number>();
   private voices = new Map<number, AudioBufferSourceNode>();
   private buffers = new Map<string, AudioBuffer>();
   private loading = new Map<string, Promise<AudioBuffer | undefined>>();
@@ -49,9 +50,11 @@ export class AnimalAudio {
     const now = this.ctx.currentTime;
     this.actors.clear();
     this.balls.clear();
+    this.carriers.clear();
     const heldBalls = new Map<number, number>(),
       players: Entity[] = [];
     for (const entity of entities) {
+      if (entity.parentId !== undefined) this.carriers.add(entity.parentId);
       if (entity.type === "ball") {
         this.balls.set(entity.id, entity);
         if (entity.parentId !== undefined) heldBalls.set(entity.parentId, entity.id);
@@ -69,6 +72,7 @@ export class AnimalAudio {
     for (const actor of entities) {
       const voice = animalVoiceForType(actor.type);
       if (!voice || actor.deathTimer !== undefined || actor.parentId !== undefined) continue;
+      const profile = ANIMAL_VOICES[voice];
       this.actors.set(actor.id, actor);
       const pose = animalAudioPose(actor),
         distance = Math.hypot(actor.position.wx - listener.wx, actor.position.wy - listener.wy);
@@ -108,15 +112,18 @@ export class AnimalAudio {
             Math.hypot(p.position.wx - actor.position.wx, p.position.wy - actor.position.wy) <=
               48 && Math.abs((p.wz ?? 0) - (actor.wz ?? 0)) <= 6,
         );
-      if (!this.enabled || distance >= 300) {
+      if (
+        !this.enabled ||
+        distance >= 300 ||
+        (profile.quietWhileCarrying && this.carriers.has(actor.id))
+      ) {
         state.next = now + 8 + (((actor.id * 7) >>> 0) % 13);
         this.voices.get(actor.id)?.stop();
         this.voices.delete(actor.id);
         state.request++;
         continue;
       }
-      const profile = ANIMAL_VOICES[voice],
-        action =
+      const action =
           !!returnedBall ||
           (previous !== undefined &&
             previous !== pose &&
@@ -211,6 +218,7 @@ export class AnimalAudio {
       this.states.get(actor.id) !== state ||
       state.request !== request ||
       !current ||
+      (ANIMAL_VOICES[voice].quietWhileCarrying && this.carriers.has(actor.id)) ||
       (current.wanderAI?.state === "scared" && ANIMAL_VOICES[voice].alarmCue !== pose) ||
       this.ctx.currentTime - requestedAt > 0.6 ||
       (ballId !== undefined
@@ -287,6 +295,7 @@ export class AnimalAudio {
     this.states.clear();
     this.actors.clear();
     this.balls.clear();
+    this.carriers.clear();
     for (const source of this.voices.values()) source.stop();
     this.voices.clear();
   }

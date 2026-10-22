@@ -66,7 +66,7 @@ const lines = [
   "",
   "Recorded calls share AnimalAudio in game and lab, using replicated named action poses and sparse local idle ambience. Shared hunter synthesis uses `callKind ?? fierce.kind` and clip transitions. Robin/frog/mallard remain in the ordinary PlayScene path. Lab sounds require opt-in; recorded auditions are separate explicit button gestures.",
   "",
-  "Evidence: [recorded voice mapping](../src/audio/AnimalVoice.ts), [shared recorded playback](../src/audio/AnimalAudio.ts), [shared synthesis](../src/audio/AudioManager.ts), [game-only calls](../src/scenes/PlayScene.ts), [familiar receipts](../art-source/animal-audio/familiar-v1/manifest.json), [farm receipts](../art-source/animal-audio/farm-v1/manifest.json).",
+  "Evidence: [recorded voice mapping](../src/audio/AnimalVoice.ts), [shared recorded playback](../src/audio/AnimalAudio.ts), [shared synthesis](../src/audio/AudioManager.ts), [game-only calls](../src/scenes/PlayScene.ts), [familiar receipts](../art-source/animal-audio/familiar-v1/manifest.json), [farm receipts](../art-source/animal-audio/farm-v1/manifest.json), [bird receipts](../art-source/animal-audio/garden-birds-v1/manifest.json).",
   "",
   "| Animal ID | Animal | Runtime type | Effective call | Coverage | Audit note |",
   "| --- | --- | --- | --- | --- | --- |",

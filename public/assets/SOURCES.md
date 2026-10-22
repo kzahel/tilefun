@@ -1,5 +1,14 @@
 # Asset Sources
 
+## Garden bird recordings
+
+`audio/animals/garden-birds-v1/` contains seven edited excerpts from three CC0-1.0
+Freesound recordings: crow by nigelcoop, raven by KiddoFish86, and pigeon by
+Alva Majo / 5ro4. Creator/license links, exact public HQ MP3 previews, source and
+export hashes, and the offline recipe are retained in
+[`art-source/animal-audio/garden-birds-v1/`](../../art-source/animal-audio/garden-birds-v1/README.md).
+These are separate recorded voices; pigeon is not assigned to dove.
+
 ## Farm animal recordings
 
 `audio/animals/farm-v1/` contains five edited excerpts from three CC0-1.0

@@ -21,5 +21,18 @@
     "assets/audio/animals/farm-v1/donkey-1.ogg",
     "assets/audio/animals/farm-v1/donkey-2.ogg"
   ],
-  "piglet": ["assets/audio/animals/farm-v1/piglet-1.ogg"]
+  "piglet": ["assets/audio/animals/farm-v1/piglet-1.ogg"],
+  "crow": [
+    "assets/audio/animals/garden-birds-v1/crow-1.ogg",
+    "assets/audio/animals/garden-birds-v1/crow-2.ogg"
+  ],
+  "raven": [
+    "assets/audio/animals/garden-birds-v1/raven-1.ogg",
+    "assets/audio/animals/garden-birds-v1/raven-2.ogg",
+    "assets/audio/animals/garden-birds-v1/raven-3.ogg"
+  ],
+  "pigeon": [
+    "assets/audio/animals/garden-birds-v1/pigeon-1.ogg",
+    "assets/audio/animals/garden-birds-v1/pigeon-2.ogg"
+  ]
 }

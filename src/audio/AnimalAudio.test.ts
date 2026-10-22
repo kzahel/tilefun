@@ -3,12 +3,14 @@ import { readFileSync } from "node:fs";
 import { afterEach, expect, it, vi } from "vitest";
 import receipt from "../../art-source/animal-audio/familiar-v1/manifest.json";
 import farmReceipt from "../../art-source/animal-audio/farm-v1/manifest.json";
+import birdReceipt from "../../art-source/animal-audio/garden-birds-v1/manifest.json";
 import { required } from "../art/ArtCatalog.js";
 import { createBall } from "../entities/Ball.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { createPlayer } from "../entities/Player.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createFauna } from "../wildlife/Fauna.js";
+import { createForageItem } from "../wildlife/ForageResources.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../workshop/AnimalBrowserData.js";
 import { AnimalAudio } from "./AnimalAudio.js";
 import {
@@ -87,9 +89,9 @@ function harness() {
   return { audio, ctx, sources, gains, pans, fetcher, sheep, listener, pose, flush };
 }
 
-it("maps thirteen browser entries, preserves coats and pins all nine sources/sixteen exported clips", () => {
+it("maps sixteen browser entries, preserves coats and pins all twelve sources/twenty-three exported clips", () => {
   const covered = ANIMAL_BROWSER_ENTRIES.filter((a) => animalVoiceForType(a.type));
-  expect(covered).toHaveLength(13);
+  expect(covered).toHaveLength(16);
   for (const a of covered) expect(animalVoiceForType(a.type)).toBe(animalVoiceForSpecies(a.id));
   expect(animalVoiceForSpecies("dog-golden")).toBe("dog");
   expect(animalVoiceForSpecies("cat-black")).toBe("cat");
@@ -101,11 +103,12 @@ it("maps thirteen browser entries, preserves coats and pins all nine sources/six
     "wildlife-fox-provisional-v1",
   ])
     expect(animalVoiceForType(type)).toBeUndefined();
-  expect(Object.keys(ANIMAL_VOICES)).toHaveLength(9);
+  expect(Object.keys(ANIMAL_VOICES)).toHaveLength(12);
   expect(receipt.sources.flatMap((s) => s.variants)).toHaveLength(11);
   expect(farmReceipt.sources.flatMap((s) => s.variants)).toHaveLength(5);
+  expect(birdReceipt.sources.flatMap((s) => s.variants)).toHaveLength(7);
   const hash = (p: string) => createHash("sha256").update(readFileSync(p)).digest("hex");
-  for (const [bank, source] of [receipt, farmReceipt].flatMap((r) =>
+  for (const [bank, source] of [receipt, farmReceipt, birdReceipt].flatMap((r) =>
     r.sources.map((s) => [r.id, s] as const),
   )) {
     expect(source.license).toBe("CC0-1.0");
@@ -151,6 +154,79 @@ it("keeps piglet squeals out of calm ambience and plays only a fresh replicated 
   h.audio.update([replica], h.listener, true);
   await h.flush();
   expect(h.sources).toHaveLength(1);
+});
+
+it.each(["crow", "raven"] as const)(
+  "%s keeps its beak quiet while carrying and cancels active or pending calls on pickup",
+  async (species) => {
+    const h = harness(),
+      bird = createFauna(species, 20, 0),
+      item = createForageItem(species === "crow" ? "twig" : "shiny", 20, 0);
+    bird.id = 2;
+    item.id = 3;
+    item.parentId = bird.id;
+    const replicas = () => [bird, item].map((e) => deserializeEntity(serializeEntity(e)));
+    h.audio.update(replicas(), h.listener, true);
+    h.ctx.currentTime = 25;
+    h.audio.update(replicas(), h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(0);
+    delete item.parentId;
+    h.ctx.currentTime = 50;
+    h.audio.update(replicas(), h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+    expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining(`garden-birds-v1/${species}-`));
+    item.parentId = bird.id;
+    h.audio.update(replicas(), h.listener, true);
+    expect(h.audio.diagnostics.active).toBe(0);
+    delete item.parentId;
+    let resolve!: (v: { ok: boolean; arrayBuffer: () => Promise<ArrayBuffer> }) => void;
+    h.fetcher.mockImplementation(
+      () =>
+        new Promise((r) => {
+          resolve = r;
+        }),
+    );
+    h.ctx.currentTime = 100;
+    h.audio.update(replicas(), h.listener, true);
+    item.parentId = bird.id;
+    h.audio.update(replicas(), h.listener, true);
+    resolve({ ok: true, arrayBuffer: async () => new ArrayBuffer(8) });
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+  },
+);
+
+it("uses distinct bird voices only at rest, leaving flight and feeding quiet", async () => {
+  const h = harness();
+  for (const [index, species] of (["crow", "raven", "pigeon"] as const).entries()) {
+    const bird = createFauna(species, 20, 0);
+    bird.id = index + 2;
+    const pose = (name: string) => {
+      required(bird.sprite).clip = required(ENTITY_DEFS[bird.type]?.sprite?.clips).findIndex(
+        (c) => c.name === name,
+      );
+      expect(bird.sprite?.clip).toBeGreaterThanOrEqual(0);
+    };
+    h.audio.stop();
+    h.ctx.currentTime = index * 100;
+    pose("fly");
+    h.audio.update([bird], h.listener, true);
+    h.ctx.currentTime += 25;
+    h.audio.update([bird], h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(index);
+    pose(species === "raven" ? "bury" : species === "crow" ? "build" : "action");
+    h.audio.update([bird], h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(index);
+    pose("idle");
+    h.audio.update([bird], h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(index + 1);
+    expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining(`garden-birds-v1/${species}-`));
+  }
 });
 
 it("admits resting goat/donkey calls but keeps a dust-bathing donkey quiet", async () => {

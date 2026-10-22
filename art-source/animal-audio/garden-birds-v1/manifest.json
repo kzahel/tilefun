@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "id": "garden-birds-v1",
+  "license": "CC0-1.0",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "crow",
+      "creator": "nigelcoop",
+      "soundId": 75162,
+      "sourcePage": "https://freesound.org/people/nigelcoop/sounds/75162/",
+      "download": "https://cdn.freesound.org/previews/75/75162_1088850-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "crow-source.mp3",
+      "sha256": "4f7b6f567171efd3c976a2a02f61bde7511c760a8c595b651067d6872d70274c",
+      "bytes": 93982,
+      "variants": [
+        {
+          "path": "assets/audio/animals/garden-birds-v1/crow-1.ogg",
+          "sha256": "3e76c0efe26108020d0a945abd40d23b2b77dd4c97c12453eadce6099a8236ab",
+          "trim": [0.04, 0.9],
+          "filters": "atrim=start=0.04:end=0.9,asetpts=PTS-STARTPTS,highpass=f=45,volume=2.486677224,afade=t=in:d=0.02,afade=t=out:st=0.820000:d=0.04",
+          "duration": 0.8693333333333333,
+          "peak": 0.6673477292060852,
+          "rms": 0.16339991581541025
+        },
+        {
+          "path": "assets/audio/animals/garden-birds-v1/crow-2.ogg",
+          "sha256": "36f82437e5a429eb95e77a660a99fe0297ff8b257eb0eed0eb8cd8ecc970377e",
+          "trim": [1.13, 1.81],
+          "filters": "atrim=start=1.13:end=1.81,asetpts=PTS-STARTPTS,highpass=f=45,volume=2.706145453,afade=t=in:d=0.02,afade=t=out:st=0.640000:d=0.04",
+          "duration": 0.6693333333333333,
+          "peak": 0.8390648365020752,
+          "rms": 0.1569621191150445
+        }
+      ]
+    },
+    {
+      "id": "raven",
+      "creator": "KiddoFish86",
+      "soundId": 274439,
+      "sourcePage": "https://freesound.org/people/KiddoFish86/sounds/274439/",
+      "download": "https://cdn.freesound.org/previews/274/274439_3363151-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "raven-source.mp3",
+      "sha256": "22904686200732d64c10e88cbfb69737c1e1ea47380246d9afd227457165f56b",
+      "bytes": 1619400,
+      "variants": [
+        {
+          "path": "assets/audio/animals/garden-birds-v1/raven-1.ogg",
+          "sha256": "8cb31f5b433ffca855e09e9e391ea9b73966c6b7c3776508496cb1fd15790a3e",
+          "trim": [1.8, 2.5],
+          "filters": "atrim=start=1.8:end=2.5,asetpts=PTS-STARTPTS,highpass=f=45,volume=0.919770160,afade=t=in:d=0.02,afade=t=out:st=0.660000:d=0.04",
+          "duration": 0.6893333333333334,
+          "peak": 0.7733367681503296,
+          "rms": 0.10689066211598161
+        },
+        {
+          "path": "assets/audio/animals/garden-birds-v1/raven-2.ogg",
+          "sha256": "dd48c320bf2a6403fc21287cecc52505f634ee532bbba7d6699b09eadf3b92e7",
+          "trim": [3.2, 4.1],
+          "filters": "atrim=start=3.2:end=4.1,asetpts=PTS-STARTPTS,highpass=f=45,volume=0.789622073,afade=t=in:d=0.02,afade=t=out:st=0.860000:d=0.04",
+          "duration": 0.912,
+          "peak": 0.7655766010284424,
+          "rms": 0.11322773181223061
+        },
+        {
+          "path": "assets/audio/animals/garden-birds-v1/raven-3.ogg",
+          "sha256": "47b7463de7db703f9262fd8e59bb2597615c3d837b985c16e570f24b4092f317",
+          "trim": [6.8, 7.5],
+          "filters": "atrim=start=6.8:end=7.5,asetpts=PTS-STARTPTS,highpass=f=45,volume=1.359657472,afade=t=in:d=0.02,afade=t=out:st=0.660000:d=0.04",
+          "duration": 0.72,
+          "peak": 0.8201996088027954,
+          "rms": 0.0906854045137774
+        }
+      ]
+    },
+    {
+      "id": "pigeon",
+      "creator": "5ro4",
+      "soundId": 701282,
+      "sourcePage": "https://freesound.org/people/5ro4/sounds/701282/",
+      "download": "https://cdn.freesound.org/previews/701/701282_1629501-hq.mp3",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verified": "2026-10-22",
+      "sourceFile": "pigeon-source.mp3",
+      "sha256": "419bad5bb0498eeeeea740fd1095a6620d483d2c3d1983347e4877048f189820",
+      "bytes": 881212,
+      "variants": [
+        {
+          "path": "assets/audio/animals/garden-birds-v1/pigeon-1.ogg",
+          "sha256": "30c8283ca77e8d7602265d17da5448b50c7aec550df3dcc0f36b3a8bed2fab7d",
+          "trim": [2.0, 3.25],
+          "filters": "atrim=start=2.0:end=3.25,asetpts=PTS-STARTPTS,highpass=f=45,volume=1.703807576,afade=t=in:d=0.02,afade=t=out:st=1.210000:d=0.04",
+          "duration": 1.25,
+          "peak": 0.7505248188972473,
+          "rms": 0.10010980576569702
+        },
+        {
+          "path": "assets/audio/animals/garden-birds-v1/pigeon-2.ogg",
+          "sha256": "efce85ba32cb10f6fa488bf06fed5e5260732b76d633d1acb1377686d6e7511c",
+          "trim": [6.05, 7.6],
+          "filters": "atrim=start=6.05:end=7.6,asetpts=PTS-STARTPTS,highpass=f=45,volume=1.276141873,afade=t=in:d=0.02,afade=t=out:st=1.510000:d=0.04",
+          "duration": 1.55,
+          "peak": 0.7539682984352112,
+          "rms": 0.07864942565810787
+        }
+      ]
+    }
+  ]
+}
