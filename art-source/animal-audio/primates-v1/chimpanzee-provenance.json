@@ -1,0 +1,18 @@
+{
+  "id": "chimpanzee",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Pant-hoot_call_made_by_a_male_chimpanzee.ogg",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/5/56/Pant-hoot_call_made_by_a_male_chimpanzee.ogg",
+  "sourceKind": "original distributed Wikimedia Commons audio file",
+  "sourceFile": "chimpanzee-source.ogg",
+  "bytes": 141536,
+  "sha256": "14bb11683f3180dafcda15c8b1e73af5e6e6f2b54578e9a01f9edfa236fa07b5",
+  "creator": "Pawel Fedurek et al.",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "upstream": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5674848/",
+  "species": "chimpanzee",
+  "sourceSpecies": "chimpanzee",
+  "notes": "Natural male pant-hoot from Fedurek et al. research recording; selected a short phrase, not a complete call or a human imitation.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

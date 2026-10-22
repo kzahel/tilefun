@@ -41,7 +41,19 @@
         "capuchin-monkey",
         "ring-tailed-lemur",
         "japanese-macaque"
-      ]
+      ],
+      "validation": {
+        "native": 61,
+        "browser": 2,
+        "browserDuration": "30.8s",
+        "inputDigest": "21a72efd1e63019f17e5b595c4f8e6b0225d772c36a29d84429fc9c4114a17b8",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     },
     {
       "id": 6,
@@ -248,28 +260,52 @@
       "trigger": "Sparse stationary calls; travel and feeding quiet"
     },
     "gorilla": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "gorilla",
+      "bank": "primates-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Fresh generic action/display only; idle quiet"
     },
     "chimpanzee": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "chimpanzee",
+      "bank": "primates-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Fresh generic action/display only; idle quiet"
     },
     "orangutan": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "orangutan",
+      "bank": "primates-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; unrelated work and capuchin carrying quiet"
     },
     "capuchin-monkey": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "capuchin-monkey",
+      "bank": "primates-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; unrelated work and capuchin carrying quiet"
     },
     "ring-tailed-lemur": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "ring-tailed-lemur",
+      "bank": "primates-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; unrelated work and capuchin carrying quiet"
     },
     "japanese-macaque": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "japanese-macaque",
+      "bank": "primates-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls; unrelated work and capuchin carrying quiet"
     },
     "guinea-pig": {
       "state": "queued",

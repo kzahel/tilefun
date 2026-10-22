@@ -1,0 +1,18 @@
+{
+  "id": "japanese-macaque",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Role-of-vocal-tract-characteristics-in-individual-discrimination-by-Japanese-macaques-(Macaca-srep32042-s3.oga",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/5/57/Role-of-vocal-tract-characteristics-in-individual-discrimination-by-Japanese-macaques-%28Macaca-srep32042-s3.oga",
+  "sourceKind": "original distributed Wikimedia Commons audio file",
+  "sourceFile": "japanese-macaque-source.oga",
+  "bytes": 22257,
+  "sha256": "3127a269a9cb93619f594d23462117a1d9045db86f321d729a504678fe512c43",
+  "creator": "Takafumi Furuyama, Kohta I. Kobayasi, Hiroshi Riquimaroux",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "upstream": "https://doi.org/10.1038/srep32042",
+  "species": "japanese-macaque",
+  "sourceSpecies": "Japanese macaque",
+  "notes": "Two distinct original cooB examples from Supplemental Audio 2 of Furuyama et al. (2016). Paper identifies seven recorded calls per individual. Not the synthesized cross-individual stimuli in Audio 3/4.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

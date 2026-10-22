@@ -99,5 +99,23 @@
     "assets/audio/animals/distinctive-birds-v1/flamingo-1.ogg",
     "assets/audio/animals/distinctive-birds-v1/flamingo-2.ogg"
   ],
-  "penguin": ["assets/audio/animals/distinctive-birds-v1/penguin-1.ogg"]
+  "penguin": ["assets/audio/animals/distinctive-birds-v1/penguin-1.ogg"],
+  "gorilla": ["assets/audio/animals/primates-v1/gorilla-1.ogg"],
+  "chimpanzee": ["assets/audio/animals/primates-v1/chimpanzee-1.ogg"],
+  "orangutan": [
+    "assets/audio/animals/primates-v1/orangutan-1.ogg",
+    "assets/audio/animals/primates-v1/orangutan-2.ogg"
+  ],
+  "capuchin-monkey": [
+    "assets/audio/animals/primates-v1/capuchin-monkey-1.ogg",
+    "assets/audio/animals/primates-v1/capuchin-monkey-2.ogg"
+  ],
+  "ring-tailed-lemur": [
+    "assets/audio/animals/primates-v1/ring-tailed-lemur-1.ogg",
+    "assets/audio/animals/primates-v1/ring-tailed-lemur-2.ogg"
+  ],
+  "japanese-macaque": [
+    "assets/audio/animals/primates-v1/japanese-macaque-1.ogg",
+    "assets/audio/animals/primates-v1/japanese-macaque-2.ogg"
+  ]
 }

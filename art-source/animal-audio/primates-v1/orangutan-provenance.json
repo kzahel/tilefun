@@ -1,0 +1,18 @@
+{
+  "id": "orangutan",
+  "creator": "Adriano R. Lameira et al.",
+  "sourcePage": "https://elifesciences.org/articles/88348/figures#supp2",
+  "upstream": "https://doi.org/10.7554/eLife.88348",
+  "download": "https://cdn.elifesciences.org/articles/88348/elife-88348-supp2-v1.wav",
+  "sourceKind": "original WAV supplementary recording, example male orangutan grumbles",
+  "sourceFile": "orangutan-source.wav",
+  "sha256": "5c33e248fbc760d7b594fe9dd64e560b5313b6936102d15d987d2215a7faee28",
+  "bytes": 707894,
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "notes": "Natural male long-call grumbles from Lameira et al. Supplementary File 2; individual natural examples.",
+  "species": "orangutan",
+  "sourceSpecies": "orangutan",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

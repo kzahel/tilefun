@@ -1,0 +1,26 @@
+{
+  "gorilla": {
+    "ranges": [[0.1, 1.05]],
+    "filters": "highpass=f=100,lowpass=f=6000"
+  },
+  "chimpanzee": {
+    "ranges": [[7.1, 9.6]],
+    "filters": "highpass=f=150,lowpass=f=6000"
+  },
+  "orangutan": {
+    "ranges": [[0.25, 1.45], [2.05, 2.85]],
+    "filters": "highpass=f=100,lowpass=f=4000"
+  },
+  "capuchin-monkey": {
+    "ranges": [[45.3, 46.15], [67.3, 69.9]],
+    "filters": "highpass=f=400,lowpass=f=5000"
+  },
+  "ring-tailed-lemur": {
+    "ranges": [[2.35, 3.5], [6.55, 7.4]],
+    "filters": "highpass=f=250,lowpass=f=6000"
+  },
+  "japanese-macaque": {
+    "ranges": [[0.22, 0.85], [1.1, 1.68]],
+    "filters": "highpass=f=200,lowpass=f=5000"
+  }
+}

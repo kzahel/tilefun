@@ -1,0 +1,18 @@
+{
+  "id": "gorilla",
+  "creator": "J0ck0",
+  "soundId": 397054,
+  "sourcePage": "https://freesound.org/people/J0ck0/sounds/397054/",
+  "download": "https://cdn.freesound.org/previews/397/397054_2884295-hq.mp3",
+  "sourceFile": "gorilla-source.mp3",
+  "bytes": 60240,
+  "sha256": "12536da60cb87a07200ba19c8856aa0d981d187a6ed7f962c24d52b91dec8611",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "gorilla",
+  "sourceSpecies": "gorilla",
+  "notes": "Zoo recording in Germany; a short adult male display roar, not human chest-beating Foley.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

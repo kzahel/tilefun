@@ -112,3 +112,20 @@ normal/retina inventory and build pass; all 1,980 prior candidate objects remain
 exact. Input digest: `26be25c9d605738df5b4707e45aac52fa5354e75a9e129e7ec312440dd2ee061`.
 Evidence: `data/overnight-audio-birds-{native,browser,types,lint,catalog,
 manifest,build}.log`. Broad suites excluded; listening review pending.
+
+## Batch 5: primates
+
+Gorilla, chimpanzee, orangutan, capuchin, ring-tailed lemur and Japanese macaque:
+six sources/ten excerpts. Gorilla/chimpanzee use fresh existing generic action
+poses only; other voices are sparse stationary calls. Capuchin carrying stops
+playback. Research sources establish chimpanzee/ape/macaque identities; macaque
+uses original recorded coos rather than the study's manipulated stimuli. Source
+sex/group/forest qualifications remain explicit. Coverage is 78/206 (50 recorded,
+28 synthesized), 128 unwired, with 44 recordings/73 excerpts. Listening pending.
+
+Validation: 61 targeted native checks and both existing Chromium audio
+boundaries pass (30.8s). Typechecks, targeted lint, strict catalog,
+normal/retina inventory and build pass; all 1,980 prior candidate objects remain
+exact. Input digest: `21a72efd1e63019f17e5b595c4f8e6b0225d772c36a29d84429fc9c4114a17b8`.
+Evidence: `data/overnight-audio-primates-{native,browser,types,lint,catalog,
+manifest,build}.log`. Broad suites excluded; listening review pending.

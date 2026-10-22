@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "id": "primates-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "gorilla",
+      "creator": "J0ck0",
+      "soundId": 397054,
+      "sourcePage": "https://freesound.org/people/J0ck0/sounds/397054/",
+      "download": "https://cdn.freesound.org/previews/397/397054_2884295-hq.mp3",
+      "sourceFile": "gorilla-source.mp3",
+      "bytes": 60240,
+      "sha256": "12536da60cb87a07200ba19c8856aa0d981d187a6ed7f962c24d52b91dec8611",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "gorilla",
+      "sourceSpecies": "gorilla",
+      "notes": "Zoo recording in Germany; a short adult male display roar, not human chest-beating Foley.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/primates-v1/gorilla-1.ogg",
+          "sha256": "8550286783239c37c56f60dae3b172b0fd1e704df3a5b680c39d20b3b9eb1850",
+          "trim": [0.1, 1.05],
+          "filters": "atrim=start=0.1:end=1.05,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=6000,volume=0.379068797,afade=t=in:d=0.02,afade=t=out:st=0.910000:d=0.04",
+          "duration": 0.9393333333333334,
+          "peak": 0.8092750310897827,
+          "rms": 0.15624591284226183
+        }
+      ]
+    },
+    {
+      "id": "chimpanzee",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pant-hoot_call_made_by_a_male_chimpanzee.ogg",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/5/56/Pant-hoot_call_made_by_a_male_chimpanzee.ogg",
+      "sourceKind": "original distributed Wikimedia Commons audio file",
+      "sourceFile": "chimpanzee-source.ogg",
+      "bytes": 141536,
+      "sha256": "14bb11683f3180dafcda15c8b1e73af5e6e6f2b54578e9a01f9edfa236fa07b5",
+      "creator": "Pawel Fedurek et al.",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "upstream": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5674848/",
+      "species": "chimpanzee",
+      "sourceSpecies": "chimpanzee",
+      "notes": "Natural male pant-hoot from Fedurek et al. research recording; selected a short phrase, not a complete call or a human imitation.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/primates-v1/chimpanzee-1.ogg",
+          "sha256": "e517865d8e0505a2e57fa9645b6d223e0c8f8a92d99e41c7d3c93c13662587b7",
+          "trim": [7.1, 9.6],
+          "filters": "atrim=start=7.1:end=9.6,asetpts=PTS-STARTPTS,highpass=f=150,lowpass=f=6000,volume=0.732841113,afade=t=in:d=0.02,afade=t=out:st=2.460000:d=0.04",
+          "duration": 2.5,
+          "peak": 0.7090402245521545,
+          "rms": 0.15943002147560179
+        }
+      ]
+    },
+    {
+      "id": "orangutan",
+      "creator": "Adriano R. Lameira et al.",
+      "sourcePage": "https://elifesciences.org/articles/88348/figures#supp2",
+      "upstream": "https://doi.org/10.7554/eLife.88348",
+      "download": "https://cdn.elifesciences.org/articles/88348/elife-88348-supp2-v1.wav",
+      "sourceKind": "original WAV supplementary recording, example male orangutan grumbles",
+      "sourceFile": "orangutan-source.wav",
+      "sha256": "5c33e248fbc760d7b594fe9dd64e560b5313b6936102d15d987d2215a7faee28",
+      "bytes": 707894,
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "notes": "Natural male long-call grumbles from Lameira et al. Supplementary File 2; individual natural examples.",
+      "species": "orangutan",
+      "sourceSpecies": "orangutan",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/primates-v1/orangutan-1.ogg",
+          "sha256": "8d5338a44f0b93f6231496b7752ae70b43a93858540b4aea69a6e2e8e8930d95",
+          "trim": [0.25, 1.45],
+          "filters": "atrim=start=0.25:end=1.45,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=4000,volume=14.923887995,afade=t=in:d=0.02,afade=t=out:st=1.160000:d=0.04",
+          "duration": 1.2,
+          "peak": 0.7174192667007446,
+          "rms": 0.14638736972599678
+        },
+        {
+          "path": "assets/audio/animals/primates-v1/orangutan-2.ogg",
+          "sha256": "83dcf15d0fcb07b7c6361c808abb4e7cdf4e51841defe7559b34a16b236c1200",
+          "trim": [2.05, 2.85],
+          "filters": "atrim=start=2.05:end=2.85,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=4000,volume=11.945933899,afade=t=in:d=0.02,afade=t=out:st=0.760000:d=0.04",
+          "duration": 0.7893333333333333,
+          "peak": 0.6910631656646729,
+          "rms": 0.1289488196209285
+        }
+      ]
+    },
+    {
+      "id": "capuchin-monkey",
+      "creator": "R. L. Araujo (ricardoemfield)",
+      "soundId": 795413,
+      "sourcePage": "https://freesound.org/people/ricardoemfield/sounds/795413/",
+      "download": "https://cdn.freesound.org/previews/795/795413_14157557-hq.mp3",
+      "sourceFile": "capuchin-monkey-source.mp3",
+      "bytes": 3412848,
+      "sha256": "947f5261e000c874760c5b6a9151ca1ecc8a601307bedb0f6152e0bbd78de585",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "license": "CC-BY-4.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "capuchin-monkey",
+      "sourceSpecies": "capuchin monkey",
+      "notes": "R. L. Araujo Atlantic Rainforest family field recording; selected short call phrases retain birds/forest background, not a studio-isolated animal.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/primates-v1/capuchin-monkey-1.ogg",
+          "sha256": "4fab37f732c8f1c3a6b797c1502e270792d9bcad4a97e9e53d7669ff4eab7a13",
+          "trim": [45.3, 46.15],
+          "filters": "atrim=start=45.3:end=46.15,asetpts=PTS-STARTPTS,highpass=f=400,lowpass=f=5000,volume=13.418555925,afade=t=in:d=0.02,afade=t=out:st=0.810000:d=0.04",
+          "duration": 0.8533333333333334,
+          "peak": 0.7358213663101196,
+          "rms": 0.08925482619968438
+        },
+        {
+          "path": "assets/audio/animals/primates-v1/capuchin-monkey-2.ogg",
+          "sha256": "e1dc30ce9a0d9c3f4172e2bdd0cac71a92cbf58bc7a4aa3414c9b0963ae725df",
+          "trim": [67.3, 69.9],
+          "filters": "atrim=start=67.3:end=69.9,asetpts=PTS-STARTPTS,highpass=f=400,lowpass=f=5000,volume=6.989088464,afade=t=in:d=0.02,afade=t=out:st=2.560000:d=0.04",
+          "duration": 2.6,
+          "peak": 0.7854162454605103,
+          "rms": 0.052150887667347504
+        }
+      ]
+    },
+    {
+      "id": "ring-tailed-lemur",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 874273,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/874273/",
+      "download": "https://cdn.freesound.org/previews/874/874273_15895934-hq.mp3",
+      "sourceFile": "ring-tailed-lemur-source.mp3",
+      "bytes": 184848,
+      "sha256": "0fe93f622a51dda49883158f6d051161165800db21251b5dcbb740181c057efd",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "ring-tailed-lemur",
+      "sourceSpecies": "ring-tailed lemur",
+      "notes": "Recorded group vocalizations; selected short phrases retain group background.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/primates-v1/ring-tailed-lemur-1.ogg",
+          "sha256": "58f195d6c5e670c497eca92c152b2ff73aa62a556b3e57753bee9098f634a9ba",
+          "trim": [2.35, 3.5],
+          "filters": "atrim=start=2.35:end=3.5,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=6000,volume=1.254586406,afade=t=in:d=0.02,afade=t=out:st=1.110000:d=0.04",
+          "duration": 1.15,
+          "peak": 0.7846611738204956,
+          "rms": 0.14648451248797228
+        },
+        {
+          "path": "assets/audio/animals/primates-v1/ring-tailed-lemur-2.ogg",
+          "sha256": "a08140e59fe1923cd2eb57993e71034fe0feee44abccffbf85acc0a844ae33f0",
+          "trim": [6.55, 7.4],
+          "filters": "atrim=start=6.55:end=7.4,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=6000,volume=0.850132537,afade=t=in:d=0.02,afade=t=out:st=0.810000:d=0.04",
+          "duration": 0.8393333333333334,
+          "peak": 0.7534344792366028,
+          "rms": 0.157071887505577
+        }
+      ]
+    },
+    {
+      "id": "japanese-macaque",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Role-of-vocal-tract-characteristics-in-individual-discrimination-by-Japanese-macaques-(Macaca-srep32042-s3.oga",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/5/57/Role-of-vocal-tract-characteristics-in-individual-discrimination-by-Japanese-macaques-%28Macaca-srep32042-s3.oga",
+      "sourceKind": "original distributed Wikimedia Commons audio file",
+      "sourceFile": "japanese-macaque-source.oga",
+      "bytes": 22257,
+      "sha256": "3127a269a9cb93619f594d23462117a1d9045db86f321d729a504678fe512c43",
+      "creator": "Takafumi Furuyama, Kohta I. Kobayasi, Hiroshi Riquimaroux",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "upstream": "https://doi.org/10.1038/srep32042",
+      "species": "japanese-macaque",
+      "sourceSpecies": "Japanese macaque",
+      "notes": "Two distinct original cooB examples from Supplemental Audio 2 of Furuyama et al. (2016). Paper identifies seven recorded calls per individual. Not the synthesized cross-individual stimuli in Audio 3/4.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/primates-v1/japanese-macaque-1.ogg",
+          "sha256": "c5ef1d983a47ae7dda788810d3b5453cb3b606beef3070051264387c4468cd49",
+          "trim": [0.22, 0.85],
+          "filters": "atrim=start=0.22:end=0.85,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=5000,volume=1.361401543,afade=t=in:d=0.02,afade=t=out:st=0.590000:d=0.04",
+          "duration": 0.619375,
+          "peak": 0.6008796691894531,
+          "rms": 0.1616408699207771
+        },
+        {
+          "path": "assets/audio/animals/primates-v1/japanese-macaque-2.ogg",
+          "sha256": "96a188888251d00656e0e889b6a7041082707266569aaa9f19d88af9c7281b94",
+          "trim": [1.1, 1.68],
+          "filters": "atrim=start=1.1:end=1.68,asetpts=PTS-STARTPTS,highpass=f=200,lowpass=f=5000,volume=1.365887691,afade=t=in:d=0.02,afade=t=out:st=0.540000:d=0.04",
+          "duration": 0.592,
+          "peak": 0.3976912498474121,
+          "rms": 0.1589617594824246
+        }
+      ]
+    }
+  ]
+}

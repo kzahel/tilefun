@@ -188,6 +188,35 @@ export const ANIMAL_VOICES: Record<
   },
   flamingo: { label: "Honk", animals: ["flamingo"], cues: [], cooldown: 35 },
   penguin: { label: "African penguin call", animals: ["penguin"], cues: [], cooldown: 40 },
+  gorilla: {
+    label: "Display roar",
+    animals: ["gorilla"],
+    cues: ["action"],
+    cooldown: 45,
+    ambient: false,
+  },
+  chimpanzee: {
+    label: "Pant-hoot phrase",
+    animals: ["chimpanzee"],
+    cues: ["action"],
+    cooldown: 60,
+    ambient: false,
+  },
+  orangutan: { label: "Male long-call grumble", animals: ["orangutan"], cues: [], cooldown: 70 },
+  "capuchin-monkey": {
+    label: "Capuchin calls",
+    animals: ["capuchin-monkey"],
+    cues: [],
+    cooldown: 35,
+    quietWhileCarrying: true,
+  },
+  "ring-tailed-lemur": {
+    label: "Contact calls",
+    animals: ["ring-tailed-lemur"],
+    cues: [],
+    cooldown: 35,
+  },
+  "japanese-macaque": { label: "Coo", animals: ["japanese-macaque"], cues: [], cooldown: 30 },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(
