@@ -15,6 +15,7 @@ import {
 } from "../traffic/CarTransporter.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/Driving.js";
 import { isTowTruck, towCandidate } from "../traffic/Towing.js";
+import { transporterRampOccupied } from "../traffic/TransporterSurface.js";
 import { bedDriveLocked, hasVehicleBed } from "../traffic/VehicleBed.js";
 import {
   bedContents,
@@ -232,7 +233,10 @@ export class VehicleControl {
         this.busy ||
         locked ||
         (action === "secure" && !readyLoad) ||
-        (action === "stow" && !!transport && hasUnsecuredTransportLoad(transport, entities)) ||
+        (action === "stow" &&
+          !!transport &&
+          (hasUnsecuredTransportLoad(transport, entities) ||
+            transporterRampOccupied(transport, entities))) ||
         (action === "release" && transport?.vehicleRamp !== 1);
       button.onclick = () => {
         this.actions.close();

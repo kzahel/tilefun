@@ -168,6 +168,7 @@ export function collectSurfacePresentation(
       }
       // Thin strips approximate a projected plane without introducing a separate
       // GPU renderer. All collision queries use the exact plane, not these strips.
+      const depotRoad = prop.type.startsWith("prop-depot-bridge-");
       const step = 2;
       for (let x = bounds.left; x < bounds.right; x += step) {
         const width = Math.min(step, bounds.right - x);
@@ -183,15 +184,39 @@ export function collectSurfacePresentation(
           north.sy,
           width * camera.scale + 0.5,
           south.sy - north.sy,
-          patch.riseX || patch.riseY ? "#d4ad73" : patch.excavation ? "#c7cbb9" : "#98bec6",
+          depotRoad
+            ? "#62676b"
+            : patch.riseX || patch.riseY
+              ? "#d4ad73"
+              : patch.excavation
+                ? "#c7cbb9"
+                : "#98bec6",
         );
         frame.rect(
           south.sx,
           south.sy,
           width * camera.scale + 0.5,
           patch.thickness * camera.scale,
-          "#547780",
+          depotRoad ? "#3d4854" : "#547780",
         );
+      }
+      if (depotRoad) {
+        for (const y of [bounds.top + 6, bounds.bottom - 6, (bounds.top + bounds.bottom) / 2]) {
+          const center = y === (bounds.top + bounds.bottom) / 2;
+          for (let x = bounds.left; x < bounds.right; x += center ? 32 : c.width) {
+            const end = Math.min(bounds.right, x + (center ? 16 : c.width));
+            const a = projectWorld(camera, x, y, surfaceZAt(patch, bounds, x, y));
+            const b = projectWorld(camera, end, y, surfaceZAt(patch, bounds, end, y));
+            const mark = frame.next("line");
+            mark.x = a.sx;
+            mark.y = a.sy;
+            mark.width = b.sx;
+            mark.height = b.sy;
+            mark.stroke = center ? "#e5bf59" : "#e0dfd6";
+            mark.lineWidth = Math.max(1, camera.scale);
+          }
+        }
+        continue;
       }
       for (let x = bounds.left; x <= bounds.right; x += 16) {
         const a = projectWorld(camera, x, bounds.top, surfaceZAt(patch, bounds, x, bounds.top));

@@ -12,6 +12,7 @@ import {
 } from "../traffic/CarTransporter.js";
 import { boardingDistance, checkedCarPose } from "../traffic/Driving.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
+import { transporterRampOccupied } from "../traffic/TransporterSurface.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -92,6 +93,8 @@ export function controlTransporter(
       throw Error("Clear the space behind the loading ramp first.");
     truck.vehicleRamp = 1;
   } else if (action === "stow") {
+    if (transporterRampOccupied(truck, entities))
+      throw Error("Clear the loading ramp before stowing it.");
     if (hasUnsecuredTransportLoad(truck, entities))
       throw Error("Secure the car on the deck or drive it off before stowing the ramp.");
     delete truck.vehicleRamp;

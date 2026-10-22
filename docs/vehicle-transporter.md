@@ -104,4 +104,7 @@ RGBA pixels; no physical-device frame-budget claim is made.
 
 Next: owner playtest of loading alignment and ramp appearance. Multiple decks,
 reversed loading, a towed carrier trailer, visible straps, articulated deployment
-and general pedestrian ramp/deck support are separate follow-ons.
+are separate follow-ons. [175](tactical/175-vehicle-depot-and-walkable-ramps.md)
+adds ordinary pedestrian support on the measured deck and both steel ramp tracks,
+including local-depth fallback clips, standing passengers and occupied-ramp locks.
+See [vehicle depots](vehicle-depot.md) for a generated place to play with it.

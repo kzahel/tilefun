@@ -73,6 +73,12 @@ and acceptance details.
 
 ## Features
 
+City speedways now have a **Vehicle depot** in the infield: a transporter, tow
+truck, dump truck, cars and a practice bridge. Look for the **orange truck icon**
+and named destination button in **Map · G / controller View**. Transporter steel
+ramps and decks support ordinary walking and standing passengers.
+[Depot controls and generation](docs/vehicle-depot.md).
+
 Regional worlds now include large wildlife lakes with an explorer motorboat
 beside the northern shore. Press **E / Drive boat** to board, steer with ordinary
 vehicle controls, and return beside a clear shore to get out. Boats are also in

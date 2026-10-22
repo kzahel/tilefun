@@ -26,6 +26,7 @@ import {
   regionalQuerySteps,
   validateRequest,
 } from "./regional/RegionalPlanner.js";
+import { type VehicleDepot, vehicleDepot } from "./regional/VehicleDepotPlanner.js";
 import { type RegionalWorld, regionalWorld, validateWorld } from "./regional/WorldDescriptor.js";
 
 export type OverviewResult = Omit<RegionalResult, "world"> & {
@@ -35,6 +36,7 @@ export type OverviewResult = Omit<RegionalResult, "world"> & {
   /** Current generated routes; station coordinates are tiles, optional paths are world pixels. */
   railways?: RailLine[];
   racetracks?: Pick<Racetrack, "id" | "name" | "center" | "bounds" | "access">[];
+  vehicleDepots?: Pick<VehicleDepot, "id" | "name" | "center" | "arrival" | "bounds">[];
   landscape?: LandscapeProfile;
   ponds?: NaturalPond[];
 };
@@ -70,15 +72,26 @@ export function* overviewSteps(
       }
     }
     const racetracks: NonNullable<OverviewResult["racetracks"]> = [];
+    const vehicleDepots: NonNullable<OverviewResult["vehicleDepots"]> = [];
     if (result.detail === "region") {
       const tracks = yield* new RacetrackSource(regionalWorld(descriptor.seed)).querySteps(
         request.bounds,
         request.limits.maxOwners,
       );
-      if (result.stats.features + tracks.length <= request.limits.maxFeatures) {
-        for (const { id, name, center, bounds, access } of tracks)
+      if (result.stats.features + tracks.length * 2 <= request.limits.maxFeatures) {
+        for (const track of tracks) {
+          const { id, name, center, bounds, access } = track;
           racetracks.push({ id, name, center, bounds, access });
-        result.stats.features += tracks.length;
+          const depot = vehicleDepot(track);
+          vehicleDepots.push({
+            id: depot.id,
+            name: depot.name,
+            center: depot.center,
+            arrival: depot.arrival,
+            bounds: depot.bounds,
+          });
+        }
+        result.stats.features += tracks.length * 2;
       }
     }
     const source = new DenseDistrictSource(regionalWorld(descriptor.seed), true);
@@ -164,6 +177,7 @@ export function* overviewSteps(
       countryside,
       railways,
       racetracks,
+      vehicleDepots,
       ...(landscape ? { landscape, ponds } : {}),
     };
   }
@@ -209,6 +223,7 @@ export function* overviewSteps(
     connections: [],
     railways: [],
     racetracks: [],
+    vehicleDepots: [],
     stats: { samples: count, owners: 0, features: 0, detailedChunks: 0 },
   };
 }

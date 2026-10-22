@@ -10,6 +10,7 @@ import {
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
+import type { DepotVehicle } from "../generation/regional/VehicleDepotPlanner.js";
 import { actorScope } from "../persistence/ActorRecords.js";
 import { querySurfacePatch } from "../physics/SurfacePatch.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
@@ -46,6 +47,7 @@ import { commitVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 export interface TrafficRouteSource {
   trafficNetwork(wx: number, wy: number): LaneGraph;
   shoppingCenters?(wx: number, wy: number): readonly ShoppingCenter[];
+  depotVehicles?(cx: number, cy: number): readonly DepotVehicle[];
   boats?(cx: number, cy: number): readonly BoatPlacement[];
 }
 
@@ -332,6 +334,45 @@ export class TrafficSystem {
             s.entity.proceduralId = p.identity;
             s.placed = s.parked = true;
             s.waiting = "moored";
+            this.onChange?.(s, false);
+          }
+  }
+  /** Generated depot cars use stable identities and ordinary parked persistence.
+   * Wait for the full footprint; moved/deleted records veto their original slot. */
+  private populateDepots(): void {
+    if (!this.strategy.depotVehicles) return;
+    for (const range of this.visibleRanges)
+      for (let cy = range.minCy; cy <= range.maxCy; cy++)
+        for (let cx = range.minCx; cx <= range.maxCx; cx++)
+          for (const p of this.strategy.depotVehicles(cx, cy)) {
+            if (this.states.size >= 1024) return;
+            if (
+              [...this.states.values()].some((s) => s.entity.proceduralId === p.identity) ||
+              !this.canSpawn(p.identity, p.wx, p.wy)
+            )
+              continue;
+            const candidate = createVehicle(p.model, p.wx, p.wy, p.facing);
+            candidate.id = -1;
+            if (
+              !drivenCarPose(
+                candidate,
+                { dx: 0, dy: 0 },
+                1 / 60,
+                this.world,
+                this.props.props,
+                this.entities.entities,
+                this.drivingQueries,
+              )
+            )
+              continue;
+            const s = this.add(p.model, placementLane(p.identity, p.wx, p.wy), 0, false, {
+              x: p.wx,
+              y: p.wy,
+              direction: p.facing,
+            });
+            s.entity.proceduralId = p.identity;
+            s.placed = s.parked = true;
+            s.waiting = "parked";
             this.onChange?.(s, false);
           }
   }
@@ -744,6 +785,7 @@ export class TrafficSystem {
     this.spawnClock -= dt;
     if (this.spawnClock <= 0) {
       this.populateBoats();
+      this.populateDepots();
       this.populateRacers(players);
       this.populateShopping();
       this.populate(players);

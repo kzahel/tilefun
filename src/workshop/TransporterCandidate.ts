@@ -9,6 +9,7 @@ import control from "../server/TransporterControl.ts?raw";
 import geometry from "../traffic/CarTransporter.ts?raw";
 import driving from "../traffic/Driving.ts?raw";
 import traffic from "../traffic/TrafficSystem.ts?raw";
+import surface from "../traffic/TransporterSurface.ts?raw";
 import actions from "../ui/ContextActions.ts?raw";
 import ui from "../ui/VehicleControl.ts?raw";
 import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
@@ -35,6 +36,7 @@ export async function buildTransporterCandidate(): Promise<WorkshopCandidate> {
           recipe,
           control,
           geometry,
+          surface,
           driving,
           traffic,
           actions,

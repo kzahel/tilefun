@@ -154,6 +154,9 @@ it("keeps the cardinal carrier and loaded car aligned through a heading-switch b
     globalAlpha: 1,
     save() {},
     restore() {},
+    beginPath() {},
+    rect() {},
+    clip() {},
     drawImage(...args: unknown[]) {
       sourceX = args[1] as number;
     },
@@ -168,4 +171,24 @@ it("keeps the cardinal carrier and loaded car aligned through a heading-switch b
   expect(shown?.frameRow).toBe(3);
   expect(shown?.wx).toBeCloseTo(-21, 6);
   expect(shown?.wy).toBeCloseTo(0, 6);
+  const walker: SpriteItem = {
+    ...item,
+    wx: -40 * Math.cos(yaw),
+    wy: -40 * Math.sin(yaw),
+    zOffset: 24.65,
+    sheetKey: "walker",
+    spriteWidth: 8,
+    spriteHeight: 16,
+    drawOffsetY: 0,
+  };
+  delete walker.mesh;
+  delete walker.towGroup;
+  item.bedGroup = { vehicle: "transporter", heading: yaw, contents: [walker] };
+  const contents: SpriteItem[] = [];
+  drawTransporterFallback(surface, new Camera(), item, sheets, (_ctx, _camera, content) =>
+    contents.push(content),
+  );
+  expect(contents.map((c) => c.sheetKey)).toEqual(["vehicle-v1:beetle", "walker"]);
+  expect(contents[1]?.wx).toBeCloseTo(-40, 6);
+  expect(contents[1]?.wy).toBeCloseTo(0, 6);
 });

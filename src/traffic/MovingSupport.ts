@@ -6,7 +6,9 @@ import type { PropManager } from "../entities/PropManager.js";
 import { isCurveTrain } from "../railway/CurveTrain.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
 import type { World } from "../world/World.js";
+import { transporterLocal, transporterWorld } from "./CarTransporter.js";
 import { roofSupport } from "./RoofSupport.js";
+import { isTransporterSurface } from "./TransporterSurface.js";
 import { isVehicle } from "./Vehicle.js";
 import {
   bedFloorOffset,
@@ -14,6 +16,7 @@ import {
   bedFramePoint,
   bedLocalPoint,
   bedWorldPoint,
+  hasDetailedVehicleSurface,
   hasVehicleBed,
   movingSupportZ,
   vehicleBedBlocks,
@@ -36,6 +39,7 @@ export function roofOffset(
   support: Entity,
   bedFloor = false,
 ): RoofOffset {
+  if (isTransporterSurface(support)) return transporterLocal(support, position);
   if (hasVehicleBed(support))
     return bedFloor
       ? { ...bedFloorOffset(support, position), bedFloor: true }
@@ -50,6 +54,7 @@ export function roofOffset(
   };
 }
 export function roofPosition(offset: RoofOffset, support: Entity): Entity["position"] {
+  if (isTransporterSurface(support)) return transporterWorld(support, offset.x, offset.y);
   if (hasVehicleBed(support))
     return offset.bedFloor
       ? bedFramePoint(support, offset.x, offset.y)
@@ -127,7 +132,7 @@ export function planMovingPassengers(
     const current = getEntityAABB(rider.position, required(rider.collider));
     const next = getEntityAABB(position, required(rider.collider));
     if (
-      hasVehicleBed(after) &&
+      hasDetailedVehicleSurface(after) &&
       vehicleBedBlocks(after, next, z, rider.collider?.physicalHeight ?? 16)
     )
       return;

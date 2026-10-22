@@ -1,5 +1,12 @@
 # Vehicles: traffic, driving and roof riding
 
+[175](../tactical/175-vehicle-depot-and-walkable-ramps.md) adds city speedway infield
+vehicle depots: seven saved parked vehicles, loading/recovery lanes and a small
+drive-over/under bridge. Named orange-truck map markers and controller-accessible
+destination buttons use the same generated plan. Transporter deck/dual-track
+ramps now support ordinary walking, jumping and standing passengers through the
+shared engine. [Depot use and limits](../vehicle-depot.md) own the play contract.
+
 [173](../tactical/173-single-car-transporter.md) adds the normal single-car transporter, rear loading ramp, axle-following support/pitch, secure/release and saved coupled cars. The shared Actions menu and real Worker playground use ordinary authority/prediction and GPU/cardinal fallback. [Operation and authoring](../vehicle-transporter.md) own the contract and limitations.
 
 Topic: vehicles

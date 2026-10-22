@@ -6,6 +6,13 @@ Updated: 2026-10-21.
 
 ## Current generation policy
 
+[175](../tactical/175-vehicle-depot-and-walkable-ramps.md) composes a vehicle depot
+inside each admitted speedway's existing dry reserved infield. The racing loop,
+spectators, upstream reservations and wildlife owner pools retain their identity.
+Normal terrain paint, full-footprint bridge props, saved parked vehicles and
+bounded overview/map markers consume that same plan. Use fresh/same-seed
+recreated regional terrain for the complete layout; saved terrain is not repainted.
+
 [174](../tactical/174-curling-quills-and-fox-pounces.md) adds at most one actual
 mouse per occupied natural fox cell. Its stable ID derives from the existing fox
 owner; placement checks dry supported ground and stays within the owning cell,

@@ -7,7 +7,11 @@ import type { SpriteItem } from "./SceneItem.js";
 export function bedItemPose(item: SpriteItem) {
   return {
     id: 0,
-    type: "vehicle-v1:dump-truck",
+    type:
+      item.bedGroup?.vehicle === "transporter"
+        ? "vehicle-v1:car-transporter"
+        : "vehicle-v1:dump-truck",
+    vehicleRamp: item.bedGroup?.ramp ? 1 : 0,
     vehicleBed: true as const,
     vehicleHeading: item.bedGroup?.heading ?? 0,
     vehicleBedTilt: item.bedGroup?.tilt ?? 0,

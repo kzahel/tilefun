@@ -4,6 +4,7 @@ import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import { buildingRecipe, buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
 import { COMMERCIAL_STREET_PROPS } from "../generation/regional/CommercialCityAssets.js";
+import { depotBridgeProp } from "../generation/regional/DepotBridge.js";
 import { shoppingScenery, shoppingSceneryProp } from "../generation/regional/ShoppingScenery.js";
 import { STREET_PROP_RECIPES } from "../generation/regional/StreetRecipes.js";
 import {
@@ -600,7 +601,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
   if (shopping) return shopping;
   const forest = forestRowProp(type, wx, wy);
   if (forest) return forest;
-  const bridge = roadRailBridgeProp(type, wx, wy);
+  const bridge = roadRailBridgeProp(type, wx, wy) ?? depotBridgeProp(type, wx, wy);
   if (bridge) return bridge;
   const length = treeRunLength(type);
   if (length !== null) return treeRunProp(length, wx, wy);
@@ -673,7 +674,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 export function isPropType(type: string): boolean {
   if (shoppingScenery.some((p) => p.type === type)) return true;
   if (forestRowDefinition(type)) return true;
-  if (bridgePart(type)) return true;
+  if (bridgePart(type) || depotBridgeProp(type, 0, 0)) return true;
   if (treeRunLength(type) !== null) return true;
   if (outdoorRuntimeAsset(type)) return true;
   if (type === INTERIOR_WALL_TYPE || furnitureAsset(type)) return true;

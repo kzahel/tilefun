@@ -1,4 +1,5 @@
 import type { Entity } from "../entities/Entity.js";
+import type { EntitySurface } from "../physics/surfaceHeight.js";
 import { towProfile } from "./Towing.js";
 import { applyVehicleFacing, vehicleBodySize, vehicleNoseHeading } from "./Vehicle.js";
 
@@ -17,7 +18,7 @@ export type TransporterAction = "deploy" | "stow" | "secure" | "release";
 export function isTransporter(e: Pick<Entity, "type">) {
   return e.type === TRANSPORTER.type;
 }
-export function transporterLocal(truck: Entity, position: Entity["position"]) {
+export function transporterLocal(truck: EntitySurface, position: Entity["position"]) {
   const h = vehicleNoseHeading(truck),
     c = Math.cos(h),
     s = Math.sin(h);
@@ -25,7 +26,7 @@ export function transporterLocal(truck: Entity, position: Entity["position"]) {
     y = position.wy - truck.position.wy;
   return { x: x * c + y * s, y: -x * s + y * c };
 }
-export function transporterWorld(truck: Entity, x: number, y = 0) {
+export function transporterWorld(truck: EntitySurface, x: number, y = 0) {
   const h = vehicleNoseHeading(truck),
     c = Math.cos(h),
     s = Math.sin(h);

@@ -1,4 +1,4 @@
-import { bedQueryBounds, hasVehicleBed } from "../traffic/VehicleBed.js";
+import { bedQueryBounds, hasDetailedVehicleSurface } from "../traffic/VehicleBed.js";
 import type { AABB } from "./collision.js";
 import type { Entity } from "./Entity.js";
 
@@ -57,7 +57,7 @@ export class CollisionIndex {
       return;
     }
     const { wx, wy } = entity.position;
-    const bed = hasVehicleBed(entity) ? bedQueryBounds(entity) : undefined;
+    const bed = hasDetailedVehicleSurface(entity) ? bedQueryBounds(entity) : undefined;
     const minX = Math.floor(
       (bed?.left ?? wx + collider.offsetX - collider.width / 2) / this.cellSize,
     );

@@ -28,6 +28,7 @@ export class WorldMap {
   private readonly title = document.createElement("h2");
   private readonly status = document.createElement("p");
   private readonly roster = document.createElement("div");
+  private readonly depots = document.createElement("div");
   private readonly tracks = document.createElement("div");
   private readonly stops = document.createElement("div");
   private readonly count = document.createElement("span");
@@ -115,12 +116,19 @@ export class WorldMap {
     this.tracks.setAttribute("aria-label", "Racetracks");
     const trackLegend = document.createElement("small");
     trackLegend.textContent = "Red ovals / checkered flags: racetracks";
+    this.depots.className = "world-map-roster";
+    this.depots.setAttribute("role", "group");
+    this.depots.setAttribute("aria-label", "Vehicle depots");
+    const depotLegend = document.createElement("small");
+    depotLegend.textContent = "Orange trucks: vehicle depots · select a depot, then Travel";
     footer.append(
       hint,
       legend,
       this.stops,
       trackLegend,
       this.tracks,
+      depotLegend,
+      this.depots,
       this.roster,
       this.status,
       note,
@@ -259,6 +267,21 @@ export class WorldMap {
                 button.dataset.trackId = track.id;
                 this.tracks.append(button);
               }
+              this.depots.replaceChildren();
+              for (const depot of this.result.vehicleDepots ?? []) {
+                const button = this.button(depot.name, () => {
+                  this.view.x = depot.arrival.x;
+                  this.view.y = depot.arrival.y;
+                  this.target = { ...depot.arrival };
+                  this.changed();
+                });
+                button.dataset.testid = "world-map-depot";
+                button.dataset.depotId = depot.id;
+                button.dataset.x = String(depot.arrival.x);
+                button.dataset.y = String(depot.arrival.y);
+                this.depots.append(button);
+              }
+              this.root.dataset.vehicleDepots = String(this.result.vehicleDepots?.length ?? 0);
               this.root.dataset.racetracks = String(this.result.racetracks?.length ?? 0);
               this.root.dataset.railLines = String(this.result.railways?.length ?? 0);
               this.root.dataset.settled = "true";

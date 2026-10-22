@@ -64,7 +64,10 @@ export function vehicleCardinalHeading(direction = Direction.Right): number {
       return 0;
   }
 }
-export function vehicleNoseHeading(entity: Pick<Entity, "vehicleHeading" | "sprite">): number {
+export function vehicleNoseHeading(entity: {
+  vehicleHeading?: number;
+  sprite?: { direction: number } | null;
+}): number {
   return entity.vehicleHeading ?? vehicleCardinalHeading(entity.sprite?.direction);
 }
 export function vehicleBodySize(

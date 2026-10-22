@@ -25,7 +25,13 @@ it.each(VEHICLE_MODELS)(
     car.wz = 16;
     const player = createPlayer(200, 150);
     player.id = 2;
-    player.wz = 16 + (hasVehicleBed(car) ? DUMP_BED.floorZ : (car.collider?.physicalHeight ?? 0));
+    player.wz =
+      16 +
+      (model === "car-transporter"
+        ? 24.65
+        : hasVehicleBed(car)
+          ? DUMP_BED.floorZ
+          : (car.collider?.physicalHeight ?? 0));
     const before = structuredClone(player);
     const camera = new Camera();
     camera.setViewport(600, 400);

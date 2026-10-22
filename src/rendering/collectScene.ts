@@ -23,7 +23,7 @@ import {
   bedHeading,
   bedTilt,
   bedVisualOwner,
-  hasVehicleBed,
+  hasDetailedVehicleSurface,
 } from "../traffic/VehicleBed.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
@@ -112,7 +112,9 @@ export function collectScene(
   const towSprites = entities.some((e) => e.towTargetId !== undefined || isTransporter(e))
     ? new Map<number, SpriteItem>()
     : undefined;
-  const bedSprites = movingRoofs.some(hasVehicleBed) ? new Map<number, SpriteItem>() : undefined;
+  const bedSprites = movingRoofs.some(hasDetailedVehicleSurface)
+    ? new Map<number, SpriteItem>()
+    : undefined;
   const vehicleSurfaces = movingRoofs.flatMap((e) =>
     e.collider
       ? [
@@ -487,7 +489,14 @@ export function collectScene(
       const body = owner && bedSprites.get(owner.id),
         content = bedSprites.get(actor.id);
       if (!body || !content) continue;
-      body.bedGroup ??= { heading: bedHeading(owner), tilt: bedTilt(owner), contents: [] };
+      body.bedGroup ??= {
+        heading: bedHeading(owner),
+        tilt: bedTilt(owner),
+        ...(isTransporter(owner)
+          ? { vehicle: "transporter" as const, ramp: owner.vehicleRamp === 1 }
+          : {}),
+        contents: [],
+      };
       content.hasShadow = false;
       body.bedGroup.contents.push(content);
       grouped.add(content);

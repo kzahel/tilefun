@@ -5,8 +5,8 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 832,
-      "inventorySha256": "d6c0a8f96e1136a093c5e0ff246bcabe020e173732e23c9936f2f51b44472e1f",
+      "cases": 833,
+      "inventorySha256": "37326a12e6e51d51cd3e90491283043f5327a6e6f57fb73a639b2b2796e0a326",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -572,6 +572,11 @@
           "path": "tests/underground-garage.spec.ts",
           "cases": 3,
           "sourceSha256": "d89a4f2a4c3776be66a65e7bf5f27e26f8169d8f6482d179baa0a7704b9a2746"
+        },
+        {
+          "path": "tests/vehicle-depot.spec.ts",
+          "cases": 1,
+          "sourceSha256": "7d590649e931bf645fd997120628bf499ed90d4328657442dfcc1371db0f0bc2"
         },
         {
           "path": "tests/vehicle-driving.spec.ts",

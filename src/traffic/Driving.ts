@@ -29,6 +29,7 @@ import { towedPose } from "./Towing.js";
 import {
   applyVehicleFacing,
   isVehicle,
+  vehicleBodySize,
   vehicleNoseHeading,
   vehicleTurningRadius,
 } from "./Vehicle.js";
@@ -434,6 +435,51 @@ export function checkedCarPose(
   for (const prop of localProps)
     for (const wall of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
       const part = { collider: wall, walls: null };
+      if (wall.surface) {
+        // A rising slab intersects the union of old/new body boxes at the old
+        // foot height. Check the actual admitted poses instead: each footprint
+        // follows its own foot height, while ceilings/undersides remain solid.
+        const angle = Math.atan2(
+          Math.sin(vehicleNoseHeading(next) - vehicleNoseHeading(car)),
+          Math.cos(vehicleNoseHeading(next) - vehicleNoseHeading(car)),
+        );
+        const radius = Math.max(before.right - before.left, before.bottom - before.top);
+        const count = Math.max(
+          1,
+          Math.ceil(
+            (Math.hypot(next.position.wx - car.position.wx, next.position.wy - car.position.wy) +
+              Math.abs(angle) * radius) /
+              2,
+          ),
+        );
+        if (count > 64) return;
+        for (let i = 0; i <= count; i++) {
+          const t = i / count;
+          const size = vehicleBodySize(
+            car.type,
+            vehicleNoseHeading(car) + angle * t,
+            car.towedBy !== undefined,
+          );
+          const wx = car.position.wx + (next.position.wx - car.position.wx) * t;
+          const wy = car.position.wy + (next.position.wy - car.position.wy) * t;
+          if (
+            aabbOverlapsPropWalls(
+              {
+                left: wx - size.width / 2,
+                right: wx + size.width / 2,
+                top: wy - size.height / 2,
+                bottom: wy + size.height / 2,
+              },
+              prop.position,
+              part,
+              beforeZ + (z - beforeZ) * t,
+              height,
+            )
+          )
+            return;
+        }
+        continue;
+      }
       const wasBlocked = aabbOverlapsPropWalls(before, prop.position, part, beforeZ, height);
       const blocked = aabbOverlapsPropWalls(
         swept,

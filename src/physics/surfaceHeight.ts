@@ -3,7 +3,7 @@ import type { AABB } from "../entities/collision.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { ColliderComponent } from "../entities/Entity.js";
 import type { PropCollider } from "../entities/Prop.js";
-import { entitySupportTops, hasVehicleBed } from "../traffic/VehicleBed.js";
+import { entitySupportTops, hasDetailedVehicleSurface } from "../traffic/VehicleBed.js";
 import { querySurfacePatch } from "./SurfacePatch.js";
 import { terrainBaseZ } from "./TerrainExcavation.js";
 
@@ -234,6 +234,7 @@ export function applyGroundTracking(
 export interface EntitySurface {
   type?: string;
   vehicleBed?: true;
+  vehicleRamp?: number;
   /** Hinged dump bed angle/target in radians; authority owns the clock. */
   vehicleBedTilt?: number;
   vehicleBedTarget?: number;
@@ -373,7 +374,7 @@ export function getHighestWalkableEntitySurfaceZ(
     if (physH === undefined) continue;
     const eWz = e.wz ?? 0;
     if (eWz > selfWz) continue; // entity's feet are above ours — we're below it
-    if (hasVehicleBed(e)) {
+    if (hasDetailedVehicleSurface(e)) {
       for (const topZ of entitySupportTops(e, aabb)) {
         if (prevWz !== undefined && topZ > prevWz + 0.001) continue;
         if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
@@ -406,7 +407,7 @@ export function getWalkableEntitySurfaceZ(
     if (physH === undefined) continue;
     const eWz = e.wz ?? 0;
     if (eWz > entityWz) continue; // entity's feet are above ours — we're below it
-    if (hasVehicleBed(e)) {
+    if (hasDetailedVehicleSurface(e)) {
       for (const topZ of entitySupportTops(e, aabb)) {
         if (entityWz + STEP_UP_THRESHOLD < topZ || entityWz > topZ + STEP_UP_THRESHOLD) continue;
         if (maxZ === undefined || topZ > maxZ) maxZ = topZ;

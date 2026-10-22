@@ -2,6 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { Camera } from "./Camera.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type { SpriteItem } from "./SceneItem.js";
+import { drawBedContentsFallback } from "./VehicleBedPresentation.js";
 
 /** Actual GLB cardinal captures, independent of WebGL/model request success.
  * The loaded car keeps its own painted sprite. As with world-grade sprites,
@@ -56,6 +57,33 @@ export function drawTransporterFallback(
     };
     delete sprite.mesh;
     draw(ctx, camera, sprite, sheets);
+  }
+  if (item.bedGroup) {
+    const shown = [Math.PI / 2, -Math.PI / 2, Math.PI, 0][col] ?? 0;
+    drawBedContentsFallback(
+      ctx,
+      camera,
+      {
+        ...item,
+        bedGroup: {
+          ...item.bedGroup,
+          heading: shown,
+          contents: item.bedGroup.contents.map((content) => {
+            const dx = content.wx - item.wx,
+              dy = content.wy - item.wy;
+            const x = dx * Math.cos(heading) + dy * Math.sin(heading);
+            const y = -dx * Math.sin(heading) + dy * Math.cos(heading);
+            return {
+              ...content,
+              wx: item.wx + x * Math.cos(shown) - y * Math.sin(shown),
+              wy: item.wy + x * Math.sin(shown) + y * Math.cos(shown),
+            };
+          }),
+        },
+      },
+      sheets,
+      draw,
+    );
   }
   return true;
 }

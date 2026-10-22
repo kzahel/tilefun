@@ -3,6 +3,14 @@ import { type AABB, aabbsOverlap, getEntityAABB } from "../entities/collision.js
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntitySurface } from "../physics/surfaceHeight.js";
 import { type BedVertex, solidOccludes, solidOverlaps, solidTop } from "./BedSolid.js";
+import {
+  isTransporterSurface,
+  transporterBlocks,
+  transporterBounds,
+  transporterOccludes,
+  transporterStepZ,
+  transporterSurfaceTops,
+} from "./TransporterSurface.js";
 
 /** Plain physics geometry; opt-in per vehicle, shared by authority/prediction/debug.
  * Source: retained dump-truck/v1/geometry.py and family.json, scale 400/23.
@@ -86,6 +94,7 @@ const queryBounds = new WeakMap<
 /** Pedestrian/support/visual broad phase, separate from road admission. Includes
  * continuous yaw and the articulated overhang; the road-size policy stays fixed. */
 export function bedQueryBounds(e: EntitySurface): AABB {
+  if (isTransporterSurface(e)) return transporterBounds(e);
   const heading = bedHeading(e),
     tilt = bedTilt(e),
     wx = e.position.wx,
@@ -186,6 +195,7 @@ export function vehicleBedMovementBlocks(e: EntitySurface, footprint: AABB, acto
   );
 }
 export function vehicleBedStepZ(e: EntitySurface, footprint: AABB, actor: Entity) {
+  if (isTransporterSurface(e)) return transporterStepZ(e, footprint, actor);
   let z = actor.wz ?? 0;
   if (actor.jumpVZ === undefined && actor.collider && bedTilt(e) > 0) {
     const current = bedFloorSupport(e, getEntityAABB(actor.position, actor.collider)),
@@ -201,6 +211,9 @@ export function vehicleBedStepZ(e: EntitySurface, footprint: AABB, actor: Entity
   return z;
 }
 
+export function hasDetailedVehicleSurface(e: EntitySurface): boolean {
+  return hasVehicleBed(e) || isTransporterSurface(e);
+}
 export function hasVehicleBed(e: Pick<EntitySurface, "type" | "vehicleBed">): boolean {
   return e.vehicleBed === true && e.type === "vehicle-v1:dump-truck";
 }
@@ -267,6 +280,7 @@ export function vehicleBedBlocks(
   wz: number,
   height: number,
 ): boolean {
+  if (isTransporterSurface(e)) return transporterBlocks(e, footprint, wz, height);
   if (bedTilt(e) > 0)
     return DUMP_BED.parts.some((part) =>
       solidOverlaps(bedPartVertices(e, part), footprint, wz, height),
@@ -296,6 +310,7 @@ export function vehicleBedBlocks(
 }
 /** Ray toward the fixed camera (+world Y,+Z); used only by sprite fallback clips. */
 export function bedOccludesPoint(e: EntitySurface, wx: number, wy: number, wz: number): boolean {
+  if (isTransporterSurface(e)) return transporterOccludes(e, wx, wy, wz);
   if (bedTilt(e) > 0)
     return DUMP_BED.parts.some((part) =>
       solidOccludes(bedPartVertices(e, part), { x: wx, y: wy, z: wz }),
@@ -341,6 +356,7 @@ export function bedOccludesPoint(e: EntitySurface, wx: number, wy: number, wz: n
 /** All actual support tops under the foot, including the recessed floor. */
 export function entitySupportTops(e: EntitySurface, footprint: AABB): number[] {
   if (!e.collider) return [];
+  if (isTransporterSurface(e)) return transporterSurfaceTops(e, footprint);
   if (hasVehicleBed(e) && bedTilt(e) > 0)
     return DUMP_BED.parts.flatMap((part) => {
       const z = solidTop(bedPartVertices(e, part), footprint);
@@ -359,7 +375,7 @@ export function movingSupportZ(
   support: EntitySurface,
   rider: Pick<Entity, "collider" | "position" | "wz">,
 ): number {
-  if (hasVehicleBed(support) && rider.collider) {
+  if (hasDetailedVehicleSurface(support) && rider.collider) {
     const tops = entitySupportTops(support, getEntityAABB(rider.position, rider.collider)).filter(
       (z) => z <= (rider.wz ?? 0) + 0.1,
     );
@@ -373,6 +389,6 @@ export function bedVisualOwner(actor: Entity, vehicles: readonly Entity[]): Enti
   if (!actor.collider || actor.parentId !== undefined) return;
   const footprint = getEntityAABB(actor.position, actor.collider);
   return vehicles.find(
-    (e) => hasVehicleBed(e) && e.collider && aabbsOverlap(footprint, bedQueryBounds(e)),
+    (e) => hasDetailedVehicleSurface(e) && e.collider && aabbsOverlap(footprint, bedQueryBounds(e)),
   );
 }

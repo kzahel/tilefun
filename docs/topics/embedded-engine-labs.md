@@ -1,5 +1,10 @@
 # Embedded engine labs
 
+[175](../tactical/175-vehicle-depot-and-walkable-ramps.md) extends the same shared
+transporter support/collision and local-depth presentation with walkable steel
+tracks and decks. Both the existing Worker playground and normal game consume it;
+the generated depot uses ordinary regional planning, saved vehicles and props.
+
 [173](../tactical/173-single-car-transporter.md) adds the Car transporter playground as another ScenarioPresentationHost consumer. The page supplies parked fixtures, framing and diagnostic teleports; shared authority/driving, secure/release, replica/prediction, persistence and GPU/fallback own the actual loading cycle.
 
 Topic: embedded-engine-labs

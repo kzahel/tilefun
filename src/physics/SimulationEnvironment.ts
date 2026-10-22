@@ -7,7 +7,11 @@ import {
 } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
-import { hasVehicleBed, vehicleBedMovementBlocks, vehicleBedStepZ } from "../traffic/VehicleBed.js";
+import {
+  hasDetailedVehicleSurface,
+  vehicleBedMovementBlocks,
+  vehicleBedStepZ,
+} from "../traffic/VehicleBed.js";
 import { zRangesOverlap } from "./AABB3D.js";
 import type { MovementContext } from "./MovementContext.js";
 import { querySurfacePatch } from "./SurfacePatch.js";
@@ -52,7 +56,7 @@ export function createMovementContext(options: CreateMovementContextOptions): Mo
       for (const other of options.queryEntities(aabb)) {
         if (options.excludeIds.has(other.id) || !other.collider || !shouldEntityBlock(other))
           continue;
-        if (hasVehicleBed(other)) {
+        if (hasDetailedVehicleSurface(other)) {
           if (vehicleBedMovementBlocks(other, aabb, options.movingEntity)) return true;
           continue;
         }
@@ -68,7 +72,7 @@ export function createMovementContext(options: CreateMovementContextOptions): Mo
       let supportZ = entityWz;
       if (stepUp > 0 && props.length)
         for (const other of options.queryEntities(aabb))
-          if (hasVehicleBed(other))
+          if (hasDetailedVehicleSurface(other))
             supportZ = Math.max(supportZ, vehicleBedStepZ(other, aabb, options.movingEntity));
       // Resolve the proposed foot height before testing overhead clearance. This
       // permits a small continuous climb without passing through a low ceiling.

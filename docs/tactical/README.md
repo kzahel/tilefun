@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [175 Vehicle depot and walkable ramps](175-vehicle-depot-and-walkable-ramps.md) | Implemented and validated locally; owner playtest pending: mapped infield depot, saved vehicles, practice bridge and shared pedestrian transporter support; [vehicles](../topics/vehicles.md) |
 | [174 Curling, quills and fox pounces](174-curling-quills-and-fox-pounces.md) | Implemented and automation verified: hedgehog, porcupine and fox; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [173 Single-car transporter](173-single-car-transporter.md) | Implemented and validated locally; owner playtest pending; real ramp loading, secured cars, shared controls and saved identity; [vehicles](../topics/vehicles.md) |
 | [172 Browsing, courtship and collecting](172-browsing-courtship-and-collecting.md) | Implemented and automation verified: deer, peacock and raven; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |

@@ -16,6 +16,12 @@ future building recipes.
 
 ## In-game world map
 
+**Orange truck icons** and named **Vehicle depot** buttons locate city speedway
+playgrounds. Select a depot with touch, keyboard or controller, then use
+**Travel to selected point** to arrive beside its loading lanes. The marker stays
+visible when road overlays are hidden. Broad overview scales omit bounded regional
+landmarks; zoom in to see them. See [vehicle depots](vehicle-depot.md).
+
 While playing, click **Map · G** in the top right or press **G**. The overlay
 stays on the current game connection. Drag (or use arrow keys) to pan, pinch or
 scroll to zoom, and use **Find me** to recenter. Player dots and name buttons

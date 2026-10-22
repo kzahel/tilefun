@@ -14,6 +14,7 @@ import { insideDenseBounds } from "./DenseDistrictPlanner.js";
 import { type LandscapeProfile, NaturalLandscape } from "./NaturalLandscape.js";
 import { racetrackReserved, racetrackSurface } from "./RacetrackPlanner.js";
 import { settlementPets } from "./SettlementPets.js";
+import { depotPlacements, depotSurface, vehicleDepot } from "./VehicleDepotPlanner.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
 /** Regional natural cover composed with production rail/traffic route sources. */
@@ -62,7 +63,8 @@ export class NaturalStrategy extends RailwayStrategy {
           y = cy * 16 + ly;
         for (const track of tracks)
           if (racetrackReserved(track, x + 0.5, y + 0.5)) {
-            const surface = racetrackSurface(track, x, y);
+            const surface =
+              depotSurface(vehicleDepot(track), x, y) ?? racetrackSurface(track, x, y);
             // Keep any pre-existing city/outbound road at the access junction.
             const existing = chunk.getRoad(lx, ly);
             if (
@@ -75,6 +77,12 @@ export class NaturalStrategy extends RailwayStrategy {
             chunk.setHeight(lx, ly, 0);
           }
       }
+  }
+  depotVehicles(cx: number, cy: number) {
+    return this.racetracks
+      .query({ minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 })
+      .flatMap((t) => vehicleDepot(t).vehicles)
+      .filter((p) => Math.floor(p.wx / 256) === cx && Math.floor(p.wy / 256) === cy);
   }
   boats(cx: number, cy: number) {
     return this.nature.boats(cx, cy);
@@ -130,6 +138,7 @@ export class NaturalStrategy extends RailwayStrategy {
       ...crowNestTrees(this.nature, cx, cy),
       ...pastureHabitatProps(this.nature, cx, cy),
       ...rangeHabitatProps(this.nature, cx, cy),
+      ...this.racetracks.query(bounds).flatMap((t) => depotPlacements(vehicleDepot(t), bounds)),
       ...this.racetracks
         .query({
           minX: bounds.minX - 4,

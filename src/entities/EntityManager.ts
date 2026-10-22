@@ -12,7 +12,11 @@ import {
   resolveGroundZForLanding,
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
-import { hasVehicleBed, vehicleBedMovementBlocks } from "../traffic/VehicleBed.js";
+import {
+  hasDetailedVehicleSurface,
+  hasVehicleBed,
+  vehicleBedMovementBlocks,
+} from "../traffic/VehicleBed.js";
 import { isLooseCargo } from "../traffic/VehicleCargo.js";
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
@@ -216,7 +220,7 @@ export class EntityManager {
             continue;
           const eWz = e.wz ?? 0;
           const eHeight = e.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-          if (hasVehicleBed(e)) {
+          if (hasDetailedVehicleSurface(e)) {
             if (vehicleBedMovementBlocks(e, aabb, self)) return true;
             continue;
           }
