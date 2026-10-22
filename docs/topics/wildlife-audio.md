@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: overnight 36-animal sound campaign in progress; fifty recorded sets integrated, owner listening review pending.
+Status: initial 36-animal sound queue delivered; additional voices in progress, owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -18,14 +18,15 @@ Owner authorized the full 36-animal queue and additional suitable animals, up to
 and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable or
 poorly identified sources remain documented gaps rather than invented recordings.
 
-All 36 initial campaign animals are wired, plus upright elephant inheritance.
-Final targeted verification is in progress; listening review remains pending. Per-animal sources/triggers and validation
-live in the ledger and delivery record. Listening review remains pending.
+All 36 initial campaign animals are committed and pushed, plus upright elephant
+inheritance. Six further animals add distinct owl/eagle/hawk recordings and camel,
+warthog and bison sounds. Per-animal sources, triggers and validation live in the
+ledger and delivery record. Owner listening review remains pending.
 
 ## Current coverage
 
-**84/206 entries have sound routes: 56 recorded, 28 synthesized, zero game-only;
-122 remain unwired.** Fifty real recorded sets supply eighty-three excerpts.
+**87/206 entries have sound routes: 62 recorded, 25 synthesized, zero game-only;
+119 remain unwired.** Fifty-six real recorded sets supply ninety-four excerpts.
 The [generated animal-by-animal audit](../wildlife-audio-audit.md) owns exact current
 routing, shared designs and missing entries. This is source coverage, not owner
 listening approval or a live deployment check. Inherited coats/panther count as
@@ -50,6 +51,10 @@ fantasy creatures keep separate synthesized designs.
 
 Peacock calls only on its existing courtship display; other bird contact calls
 are sparse. Macaw/African-penguin source interpretations remain explicit.
+Owl, eagle and hawk now use tawny owl, bald eagle and red-tailed hawk recordings
+on fresh existing displays; the former synthesized shared raptor route is suppressed.
+Bison's nasal huff is an explicit non-vocal breath sound. Warthog grunts and
+camel groans are sparse, with camel also using its existing generic action.
 
 Deer snorts only at fresh alarm stamps, never while browsing. Elephant trunk work
 and animal feeding remain quiet. Elk bugles have a 75-second cooldown.

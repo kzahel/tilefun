@@ -70,6 +70,23 @@
         "build": "pass",
         "listeningReview": "pending-owner"
       }
+    },
+    {
+      "id": 7,
+      "animals": ["owl", "eagle", "hawk", "camel", "warthog", "american-bison"],
+      "scope": "Owner-authorized additional animals after completion of the initial 36",
+      "validation": {
+        "native": 58,
+        "browser": 2,
+        "browserDuration": "30.8s",
+        "inputDigest": "7a956d2828ec3269588f47184a1997a27956eb8f34b35c67b011da0fee7d3d63",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     }
   ],
   "animals": {
@@ -366,6 +383,54 @@
       "bank": "small-mammals-v1",
       "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
       "trigger": "Fresh threat/alarm pose only; idle quiet"
+    },
+    "owl": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "owl",
+      "bank": "raptors-and-grazers-v1",
+      "trigger": "Fresh existing display only; idle quiet",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "eagle": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "eagle",
+      "bank": "raptors-and-grazers-v1",
+      "trigger": "Fresh existing display only; idle quiet",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "hawk": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "hawk",
+      "bank": "raptors-and-grazers-v1",
+      "trigger": "Fresh existing display only; idle quiet",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "camel": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "camel",
+      "bank": "raptors-and-grazers-v1",
+      "trigger": "Sparse stationary calls and existing generic action",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "warthog": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "warthog",
+      "bank": "raptors-and-grazers-v1",
+      "trigger": "Sparse stationary sound; bison is non-vocal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "american-bison": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "american-bison",
+      "bank": "raptors-and-grazers-v1",
+      "trigger": "Sparse stationary sound; bison is non-vocal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
     }
   },
   "stopByUtc": "2026-10-23T06:40:00Z"

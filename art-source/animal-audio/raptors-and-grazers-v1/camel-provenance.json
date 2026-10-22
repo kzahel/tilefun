@@ -1,0 +1,18 @@
+{
+  "id": "camel",
+  "creator": "Pól",
+  "soundId": 385912,
+  "sourcePage": "https://freesound.org/people/P%C3%B3l/sounds/385912/",
+  "download": "https://cdn.freesound.org/previews/385/385912_7097737-hq.mp3",
+  "sourceFile": "camel-source.mp3",
+  "bytes": 327168,
+  "sha256": "66b178f1abcbbef2450a7187fa163bd0832116525abeb09b9fec945a874fc4c0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "camel",
+  "sourceSpecies": "camel",
+  "notes": "Camel groans/moans; exact camel species not specified by uploader.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

@@ -523,18 +523,10 @@ it("keeps the combined recorded/synthesized voice budget at six even when many a
   expect(manager.creatureAudioDiagnostics.active).toBe(0);
 });
 
-it("selects the configured owl hoot ahead of its raptor locomotion kind", () => {
-  const spy = vi.spyOn(AudioManager.prototype, "playCreatureCall").mockReturnValue(true);
-  const audio = new AudioManager();
-  const owl = {
-    id: 1,
-    type: "wildlife-owl-predator-v1",
-    position: { wx: 0, wy: 0 },
-    sprite: { clip: 3, clipElapsedMs: 0 },
-  };
-  audio.updateCreatureCalls([owl as ReturnType<typeof createFauna>], { wx: 0, wy: 0 }, true);
-  expect(spy).toHaveBeenCalledWith(1, "owl", 0.15, 0);
-  spy.mockRestore();
+it("selects each recorded raptor species ahead of shared locomotion/call placeholders", () => {
+  expect(animalVoiceForType("wildlife-owl-predator-v1")).toBe("owl");
+  expect(animalVoiceForType("wildlife-eagle-predator-v1")).toBe("eagle");
+  expect(animalVoiceForType("wildlife-hawk-predator-v1")).toBe("hawk");
 });
 
 it.each(["dog-golden", "dog-shepherd"] as const)(

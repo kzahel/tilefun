@@ -17,6 +17,7 @@ This is an audio campaign; existing art and AI approval identities remain intact
 4. Peacock, parrot, wild turkey, sparrow, flamingo, penguin.
 5. Gorilla, chimpanzee, orangutan, capuchin, ring-tailed lemur, Japanese macaque.
 6. Guinea pig, meerkat, raccoon, river otter, alpaca, llama.
+7. Extra: owl, eagle, hawk, camel, warthog, American bison.
 
 Real animal recordings only: CC0 preferred; CC BY 3.0/4.0 permitted with exact
 creator/source/license and public edit credits. Human imitations, unidentified
@@ -149,4 +150,24 @@ boundaries pass (32.0s). Typechecks, targeted lint, strict catalog,
 normal/retina inventory and build pass; all 1,980 prior candidate objects remain
 exact. Input digest: `f7c7ed45f730bbd34dd92cf7131c19e2176f4dc2cf7582772baee32d32861565`.
 Evidence: `data/overnight-audio-small-{native,browser,types,lint,catalog,
+manifest,build}.log`. Broad suites excluded; listening review pending.
+
+## Batch 7: raptors and grazing mammals
+
+Owl, eagle and hawk now have distinct tawny owl, bald eagle and red-tailed hawk
+recordings at fresh existing display poses. Native checks assert the independent
+voice identities and exercise actual serialized displays without a synthesized
+layer. The source bank explicitly identifies the hawk as archival USC material.
+Camel groans, warthog grunts and bison nasal huffs add sparse stationary sound;
+camel also uses its existing generic action. Bison breath is explicitly non-vocal.
+All six CC0 sources and eleven excerpts retain exact provenance and processing.
+
+42 campaign animals are integrated. Coverage is 87/206 (62 recorded, 25
+synthesized), 119 unwired, with 56 recordings/94 excerpts. Listening pending.
+
+Validation: 58 targeted native checks and both existing Chromium audio
+boundaries pass (30.8s). Typechecks, targeted lint, strict catalog,
+normal/retina inventory and build pass; all 1,980 prior candidate objects remain
+exact. Input digest: `7a956d2828ec3269588f47184a1997a27956eb8f34b35c67b011da0fee7d3d63`.
+Evidence: `data/overnight-audio-raptors-{native,browser,types,lint,catalog,
 manifest,build}.log`. Broad suites excluded; listening review pending.

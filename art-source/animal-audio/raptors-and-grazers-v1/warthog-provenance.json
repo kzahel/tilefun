@@ -1,0 +1,18 @@
+{
+  "id": "warthog",
+  "creator": "TheKingOfGeeks360",
+  "soundId": 864329,
+  "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/864329/",
+  "download": "https://cdn.freesound.org/previews/864/864329_15895934-hq.mp3",
+  "sourceFile": "warthog-source.mp3",
+  "bytes": 88896,
+  "sha256": "b2c0ef78fb802090da801c58b2c6df6a49f868a0c7749ab1425087e9f599c9f3",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "warthog",
+  "sourceSpecies": "warthog",
+  "notes": "Close sniff/grunt phrase; selected vocal grunt with nearby breath context.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

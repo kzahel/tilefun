@@ -135,5 +135,26 @@
     "assets/audio/animals/small-mammals-v1/alpaca-1.ogg",
     "assets/audio/animals/small-mammals-v1/alpaca-2.ogg"
   ],
-  "llama": ["assets/audio/animals/small-mammals-v1/llama-1.ogg"]
+  "llama": ["assets/audio/animals/small-mammals-v1/llama-1.ogg"],
+  "owl": [
+    "assets/audio/animals/raptors-and-grazers-v1/owl-1.ogg",
+    "assets/audio/animals/raptors-and-grazers-v1/owl-2.ogg"
+  ],
+  "eagle": [
+    "assets/audio/animals/raptors-and-grazers-v1/eagle-1.ogg",
+    "assets/audio/animals/raptors-and-grazers-v1/eagle-2.ogg"
+  ],
+  "hawk": [
+    "assets/audio/animals/raptors-and-grazers-v1/hawk-1.ogg",
+    "assets/audio/animals/raptors-and-grazers-v1/hawk-2.ogg"
+  ],
+  "camel": [
+    "assets/audio/animals/raptors-and-grazers-v1/camel-1.ogg",
+    "assets/audio/animals/raptors-and-grazers-v1/camel-2.ogg"
+  ],
+  "warthog": ["assets/audio/animals/raptors-and-grazers-v1/warthog-1.ogg"],
+  "american-bison": [
+    "assets/audio/animals/raptors-and-grazers-v1/american-bison-1.ogg",
+    "assets/audio/animals/raptors-and-grazers-v1/american-bison-2.ogg"
+  ]
 }

@@ -1,0 +1,18 @@
+{
+  "id": "hawk",
+  "creator": "craigsmith",
+  "soundId": 479610,
+  "sourcePage": "https://freesound.org/people/craigsmith/sounds/479610/",
+  "download": "https://cdn.freesound.org/previews/479/479610_2524442-hq.mp3",
+  "sourceFile": "hawk-source.mp3",
+  "bytes": 335520,
+  "sha256": "1f1b0ca4b15d11c930243a52e799613dae1c5e23a86235b825016264d5280a86",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "hawk",
+  "sourceSpecies": "red-tailed hawk",
+  "notes": "Three archival red-tailed hawk calls, digitized by craigsmith from USC vintage optical/magnetic materials under the page CC0 declaration; archival noise remains.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

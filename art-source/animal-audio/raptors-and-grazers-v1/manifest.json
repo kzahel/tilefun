@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "id": "raptors-and-grazers-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "owl",
+      "creator": "Patrick_Corra",
+      "soundId": 745208,
+      "sourcePage": "https://freesound.org/people/Patrick_Corra/sounds/745208/",
+      "download": "https://cdn.freesound.org/previews/745/745208_8711646-hq.mp3",
+      "sourceFile": "owl-source.mp3",
+      "bytes": 930672,
+      "sha256": "b0964fd40d099ac3d4e000a6dd3ee76c75bca44edd329382fda04dfa3673d242",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "owl",
+      "sourceSpecies": "tawny owl",
+      "notes": "Night field recording at Marostica, Italy; natural hoot phrases, not human imitation.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/owl-1.ogg",
+          "sha256": "180426ae9a996d0eea69f859ce4f859d18c31b761cdde486dc465032da36d060",
+          "trim": [22.2, 23.2],
+          "filters": "atrim=start=22.2:end=23.2,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=3000,volume=2.481001077,afade=t=in:d=0.02,afade=t=out:st=0.960000:d=0.04",
+          "duration": 1.0,
+          "peak": 0.6022358536720276,
+          "rms": 0.1610742048253481
+        },
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/owl-2.ogg",
+          "sha256": "7fb11aa188bd810ae3c08c53f249ca5f4b7873602bab083d6b770cea4b2440ec",
+          "trim": [26.65, 28.4],
+          "filters": "atrim=start=26.65:end=28.4,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=3000,volume=1.510680365,afade=t=in:d=0.02,afade=t=out:st=1.710000:d=0.04",
+          "duration": 1.75,
+          "peak": 0.4944838881492615,
+          "rms": 0.1607724481556533
+        }
+      ]
+    },
+    {
+      "id": "eagle",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 751269,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/751269/",
+      "download": "https://cdn.freesound.org/previews/751/751269_15895934-hq.mp3",
+      "sourceFile": "eagle-source.mp3",
+      "bytes": 196872,
+      "sha256": "eb221b21fe673c90fee3df38ea6e1be8b9f151c3d899a8e37ca3b8246fe8b082",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "eagle",
+      "sourceSpecies": "bald eagle",
+      "notes": "Close chirps of Freedom at the Georgia Southern wildlife education center; not a red-tailed-hawk movie substitute.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/eagle-1.ogg",
+          "sha256": "662ce2001a455cdaee06f3b4ede12e81ff2a73cb662481621b3af67b967be784",
+          "trim": [3.9, 4.5],
+          "filters": "atrim=start=3.9:end=4.5,asetpts=PTS-STARTPTS,highpass=f=650,lowpass=f=7000,volume=0.727547489,afade=t=in:d=0.02,afade=t=out:st=0.560000:d=0.04",
+          "duration": 0.6133333333333333,
+          "peak": 0.7674741148948669,
+          "rms": 0.10567962660934294
+        },
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/eagle-2.ogg",
+          "sha256": "bcbf47f1c0b185ff38919c02a4cc8038ae3fe34ab1e820e2921ad11a63f3269b",
+          "trim": [6.5, 7.15],
+          "filters": "atrim=start=6.5:end=7.15,asetpts=PTS-STARTPTS,highpass=f=650,lowpass=f=7000,volume=0.828166684,afade=t=in:d=0.02,afade=t=out:st=0.610000:d=0.04",
+          "duration": 0.6666666666666666,
+          "peak": 0.7752735614776611,
+          "rms": 0.1150605337180465
+        }
+      ]
+    },
+    {
+      "id": "hawk",
+      "creator": "craigsmith",
+      "soundId": 479610,
+      "sourcePage": "https://freesound.org/people/craigsmith/sounds/479610/",
+      "download": "https://cdn.freesound.org/previews/479/479610_2524442-hq.mp3",
+      "sourceFile": "hawk-source.mp3",
+      "bytes": 335520,
+      "sha256": "1f1b0ca4b15d11c930243a52e799613dae1c5e23a86235b825016264d5280a86",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "hawk",
+      "sourceSpecies": "red-tailed hawk",
+      "notes": "Three archival red-tailed hawk calls, digitized by craigsmith from USC vintage optical/magnetic materials under the page CC0 declaration; archival noise remains.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/hawk-1.ogg",
+          "sha256": "4809bb0e2bfda11d38c5e9a1190c70bbe3088f04baa1375a55b4d5fb8d1af24a",
+          "trim": [2.55, 4.4],
+          "filters": "atrim=start=2.55:end=4.4,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=6500,volume=2.998581961,afade=t=in:d=0.02,afade=t=out:st=1.810000:d=0.04",
+          "duration": 1.85,
+          "peak": 0.7641940116882324,
+          "rms": 0.14867345537865728
+        },
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/hawk-2.ogg",
+          "sha256": "c7b3433b5e046ee1f63d7b2c45d0d76a4a295a502885cbf8a394cfe7220488b6",
+          "trim": [7.4, 9.4],
+          "filters": "atrim=start=7.4:end=9.4,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=6500,volume=4.404227627,afade=t=in:d=0.02,afade=t=out:st=1.960000:d=0.04",
+          "duration": 2.0,
+          "peak": 0.6670318841934204,
+          "rms": 0.16121067858962243
+        }
+      ]
+    },
+    {
+      "id": "camel",
+      "creator": "Pól",
+      "soundId": 385912,
+      "sourcePage": "https://freesound.org/people/P%C3%B3l/sounds/385912/",
+      "download": "https://cdn.freesound.org/previews/385/385912_7097737-hq.mp3",
+      "sourceFile": "camel-source.mp3",
+      "bytes": 327168,
+      "sha256": "66b178f1abcbbef2450a7187fa163bd0832116525abeb09b9fec945a874fc4c0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "camel",
+      "sourceSpecies": "camel",
+      "notes": "Camel groans/moans; exact camel species not specified by uploader.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/camel-1.ogg",
+          "sha256": "476e38e339b6d6eeadb0ce54b8322222e61209d0dd686eb46a8eacaafb9fecc3",
+          "trim": [0.1, 3.5],
+          "filters": "atrim=start=0.1:end=3.5,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=5000,volume=1.633717739,afade=t=in:d=0.02,afade=t=out:st=3.360000:d=0.04",
+          "duration": 3.4,
+          "peak": 0.7506862282752991,
+          "rms": 0.14628396512578398
+        },
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/camel-2.ogg",
+          "sha256": "1d63cf8472ee70d141a3711db7257476b2417e991b971e04bf1fbeeaa09b7579",
+          "trim": [5.1, 8.35],
+          "filters": "atrim=start=5.1:end=8.35,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=5000,volume=1.889221169,afade=t=in:d=0.02,afade=t=out:st=3.210000:d=0.04",
+          "duration": 3.25,
+          "peak": 0.7582390308380127,
+          "rms": 0.15134171216786338
+        }
+      ]
+    },
+    {
+      "id": "warthog",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 864329,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/864329/",
+      "download": "https://cdn.freesound.org/previews/864/864329_15895934-hq.mp3",
+      "sourceFile": "warthog-source.mp3",
+      "bytes": 88896,
+      "sha256": "b2c0ef78fb802090da801c58b2c6df6a49f868a0c7749ab1425087e9f599c9f3",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "warthog",
+      "sourceSpecies": "warthog",
+      "notes": "Close sniff/grunt phrase; selected vocal grunt with nearby breath context.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/warthog-1.ogg",
+          "sha256": "64b209548880a84b971ba80c098abf133d75f99944465c1014a6bf0a59ed0f7a",
+          "trim": [0.7, 1.5],
+          "filters": "atrim=start=0.7:end=1.5,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=5000,volume=2.714584755,afade=t=in:d=0.02,afade=t=out:st=0.760000:d=0.04",
+          "duration": 0.7893333333333333,
+          "peak": 0.773560643196106,
+          "rms": 0.07121518623065842
+        }
+      ]
+    },
+    {
+      "id": "american-bison",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 867549,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/867549/",
+      "download": "https://cdn.freesound.org/previews/867/867549_15895934-hq.mp3",
+      "sourceFile": "american-bison-source.mp3",
+      "bytes": 86592,
+      "sha256": "81a98f3d7a98618a8101382b733be4491b706fecb64a9f32991785ba4f7a15df",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "american-bison",
+      "sourceSpecies": "American bison",
+      "notes": "Close nasal huffs; explicit breath sounds rather than a generic cow moo.",
+      "verified": "2026-10-22",
+      "category": "nasal breath huff",
+      "variants": [
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/american-bison-1.ogg",
+          "sha256": "a1bd9f377edd0457a438442c940eef0e7402cc1d4a8b5964040da11d11ef8cc0",
+          "trim": [0.05, 1.05],
+          "filters": "atrim=start=0.05:end=1.05,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=4000,volume=8.785676803,afade=t=in:d=0.02,afade=t=out:st=0.960000:d=0.04",
+          "duration": 0.9893333333333333,
+          "peak": 0.593112051486969,
+          "rms": 0.15829082631989477
+        },
+        {
+          "path": "assets/audio/animals/raptors-and-grazers-v1/american-bison-2.ogg",
+          "sha256": "f2140aa841f958ac77ac74c192332adfc29400379f85a1545a345d139db2c965",
+          "trim": [1.6, 2.4],
+          "filters": "atrim=start=1.6:end=2.4,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=4000,volume=7.050373148,afade=t=in:d=0.02,afade=t=out:st=0.760000:d=0.04",
+          "duration": 0.816,
+          "peak": 0.7567435503005981,
+          "rms": 0.13778971438274754
+        }
+      ]
+    }
+  ]
+}

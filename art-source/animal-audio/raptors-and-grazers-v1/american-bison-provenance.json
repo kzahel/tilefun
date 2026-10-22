@@ -1,0 +1,18 @@
+{
+  "id": "american-bison",
+  "creator": "TheKingOfGeeks360",
+  "soundId": 867549,
+  "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/867549/",
+  "download": "https://cdn.freesound.org/previews/867/867549_15895934-hq.mp3",
+  "sourceFile": "american-bison-source.mp3",
+  "bytes": 86592,
+  "sha256": "81a98f3d7a98618a8101382b733be4491b706fecb64a9f32991785ba4f7a15df",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "american-bison",
+  "sourceSpecies": "American bison",
+  "notes": "Close nasal huffs; explicit breath sounds rather than a generic cow moo.",
+  "verified": "2026-10-22",
+  "category": "nasal breath huff"
+}
