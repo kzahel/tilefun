@@ -1,0 +1,24 @@
+{
+  "id": "shoebill",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Shoebill_bill-clattering.ogg",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Shoebill_bill-clattering.ogg",
+  "sourceKind": "complete original Vorbis audio stream remuxed from CC0 video; no audio re-encoding",
+  "sourceFile": "shoebill-audio-source.ogg",
+  "bytes": 326489,
+  "sha256": "97b53aae49c66eb6a2791528d22af90d8c8ff090bb8d4b08c1d72453b413d38e",
+  "originalMedia": {
+    "bytes": 58094481,
+    "sha256": "fbca68880c14b87fe9932b0b9bc6b16f8d9b0d592ff812188d5e6336ab39ce46",
+    "decodedMono48kFloatSha256": "c173970b5c0c5f742b7a7d7034bae24f2c8317386262adffab6e3d79db2b1852"
+  },
+  "sourcePreparation": "ffmpeg -i <download> -map 0:a:0 -c:a copy -map_metadata -1 shoebill-audio-source.ogg; decoded mono 48 kHz float PCM is byte-identical to the original video audio",
+  "creator": "Peter Handke",
+  "upstream": "https://www.flickr.com/photos/144218922@N07/41292829755/",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "species": "shoebill",
+  "sourceSpecies": "Shoebill",
+  "notes": "Peter Handke CC0 video, sourced via Commons from Flickr. Complete original Vorbis audio stream retained by lossless stream remux; original video hash/bytes and exact audio PCM equivalence retained. Brief actual bill-clatter sequence is explicitly non-vocal. No clattering animation or greeting/nesting AI is added.",
+  "category": "non-vocal",
+  "verified": "2026-10-22"
+}

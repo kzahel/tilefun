@@ -140,6 +140,31 @@ Creator: wwstudioswastaken
 Source: https://freesound.org/people/wwstudioswastaken/sounds/618483/
 License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
 
+kiwi (further-calls-v1)
+Creator: Department of Conservation (NZ)
+Source: https://commons.wikimedia.org/wiki/File:Male-ni-brown-kiwi.wav
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Copyright: Crown Copyright / Department of Conservation (NZ)
+Upstream: https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/
+
+kakapo (further-calls-v1)
+Creator: Department of Conservation (NZ)
+Source: https://commons.wikimedia.org/wiki/File:Kakapo-bill-ching-1.wav
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Copyright: Crown Copyright / Department of Conservation (NZ)
+Upstream: https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/
+
+shoebill (further-calls-v1)
+Creator: Peter Handke
+Source: https://commons.wikimedia.org/wiki/File:Shoebill_bill-clattering.ogg
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+Upstream: https://www.flickr.com/photos/144218922@N07/41292829755/
+
+impala (further-calls-v1)
+Creator: G de Courtivron / roubignolle
+Source: https://freesound.org/people/roubignolle/sounds/35138/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
 panda (further-mammals-v1)
 Creator: Benjamin D Charlton, Megan A Owen, Xiaoping Zhou, Hemin Zhang, Ronald R Swaisgood
 Source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0225772

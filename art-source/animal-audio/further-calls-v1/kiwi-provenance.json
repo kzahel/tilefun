@@ -1,0 +1,19 @@
+{
+  "id": "kiwi",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Male-ni-brown-kiwi.wav",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/1/18/Male-ni-brown-kiwi.wav",
+  "sourceKind": "original distributed Wikimedia Commons audio file",
+  "sourceFile": "kiwi-source.wav",
+  "bytes": 6308430,
+  "sha256": "7c7f5dbf7db89266c57e0de3002d13c3d6f9316356dc13d36cae115b686e33e1",
+  "creator": "Department of Conservation (NZ)",
+  "copyright": "Crown Copyright / Department of Conservation (NZ)",
+  "upstream": "https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "species": "kiwi",
+  "sourceSpecies": "Male North Island brown kiwi",
+  "notes": "Generic kiwi uses the DOC male North Island brown kiwi whistle sequence. Short phrases rather than a full 36-second bout; source describes mate calling, without adding mating/age/sex AI.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

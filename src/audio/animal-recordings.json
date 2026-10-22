@@ -197,5 +197,18 @@
     "assets/audio/animals/quiet-neighbors-v1/gecko-1.ogg",
     "assets/audio/animals/quiet-neighbors-v1/gecko-2.ogg"
   ],
-  "kinkajou": ["assets/audio/animals/quiet-neighbors-v1/kinkajou-1.ogg"]
+  "kinkajou": ["assets/audio/animals/quiet-neighbors-v1/kinkajou-1.ogg"],
+  "kiwi": [
+    "assets/audio/animals/further-calls-v1/kiwi-1.ogg",
+    "assets/audio/animals/further-calls-v1/kiwi-2.ogg"
+  ],
+  "kakapo": [
+    "assets/audio/animals/further-calls-v1/kakapo-1.ogg",
+    "assets/audio/animals/further-calls-v1/kakapo-2.ogg"
+  ],
+  "shoebill": ["assets/audio/animals/further-calls-v1/shoebill-1.ogg"],
+  "impala": [
+    "assets/audio/animals/further-calls-v1/impala-1.ogg",
+    "assets/audio/animals/further-calls-v1/impala-2.ogg"
+  ]
 }

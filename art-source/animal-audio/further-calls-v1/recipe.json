@@ -1,0 +1,18 @@
+{
+  "kiwi": {
+    "ranges": [[12.1, 15.8], [20.8, 24.2]],
+    "filters": "highpass=f=600,lowpass=f=6000"
+  },
+  "kakapo": {
+    "ranges": [[3.35, 5.7], [7.5, 9.7]],
+    "filters": "highpass=f=250,lowpass=f=5000"
+  },
+  "shoebill": {
+    "ranges": [[15.4, 17.25]],
+    "filters": "highpass=f=350,lowpass=f=7500"
+  },
+  "impala": {
+    "ranges": [[0.95, 1.58], [2.12, 2.95]],
+    "filters": "highpass=f=100,lowpass=f=3500"
+  }
+}

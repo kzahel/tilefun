@@ -181,6 +181,23 @@
         "build": "pass",
         "listeningReview": "pending-owner"
       }
+    },
+    {
+      "id": 11,
+      "name": "Further calls and bill percussion",
+      "animals": ["kiwi", "kakapo", "shoebill", "impala"],
+      "validation": {
+        "native": 58,
+        "browser": 2,
+        "browserDuration": "30.9s",
+        "inputDigest": "2b523a44be1f48e4a8b099d767dfa07d37ea7844bb4afd9cee74a1d4e17e87c4",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     }
   ],
   "animals": {
@@ -669,6 +686,38 @@
       "bank": "quiet-neighbors-v1",
       "trigger": "Sparse stationary calls",
       "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "kiwi": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "kiwi",
+      "bank": "further-calls-v1",
+      "trigger": "Sparse stationary call; shoebill is explicitly non-vocal bill percussion",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "kakapo": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "kakapo",
+      "bank": "further-calls-v1",
+      "trigger": "Sparse stationary call; shoebill is explicitly non-vocal bill percussion",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "shoebill": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "shoebill",
+      "bank": "further-calls-v1",
+      "trigger": "Sparse stationary call; shoebill is explicitly non-vocal bill percussion",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "impala": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "impala",
+      "bank": "further-calls-v1",
+      "trigger": "Sparse stationary call; shoebill is explicitly non-vocal bill percussion",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
     }
   },
   "stopByUtc": "2026-10-23T06:40:00Z",
@@ -683,5 +732,23 @@
       "candidate": "https://freesound.org/people/Breviceps/sounds/535810/",
       "reason": "Candidate is identified as Indian rhinoceros; registered game identity is white rhinoceros. No cross-species substitution."
     }
+  },
+  "status": "complete",
+  "completedUtc": "2026-10-22T21:21:08.764765+00:00",
+  "completion": {
+    "initialAnimals": 36,
+    "extraAnimals": 28,
+    "campaignAnimals": 64,
+    "additionalInheritedEntry": "elephant-upright",
+    "newSourceSets": 62,
+    "newExcerpts": 97,
+    "totalRecordedEntries": 84,
+    "totalSynthesizedEntries": 24,
+    "totalCallRoutes": 108,
+    "unwiredEntries": 98,
+    "totalSourceSets": 77,
+    "totalExcerpts": 126,
+    "listeningReview": "pending-owner",
+    "next": "Animal Browser listening/balance pass; retain explicit gaps rather than inventing sounds."
   }
 }

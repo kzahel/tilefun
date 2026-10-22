@@ -4,7 +4,7 @@
 
 ## Animal sounds
 
-60/60 campaign animals integrated; 2 documented source gaps. Listening review remains pending.
+64/64 campaign animals integrated; 2 documented source gaps. Listening review remains pending.
 
 [Sound audit and coverage](wildlife-audio-audit.md) · [Current sound campaign](../art-source/animal-audio/sound-campaign.json) · [Sound plan](topics/wildlife-audio.md)
 
@@ -107,7 +107,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-22T21:12:35.048Z (22/10/2026, 23:12:35 Berlin).
+Snapshot: 2026-10-22T21:21:13.193Z (22/10/2026, 23:21:13 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

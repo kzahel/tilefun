@@ -330,6 +330,10 @@ export const ANIMAL_VOICES: Record<
   },
   gecko: { label: "Tokay call", animals: ["gecko"], cues: [], cooldown: 45 },
   kinkajou: { label: "Young kinkajou chirp", animals: ["kinkajou"], cues: [], cooldown: 45 },
+  kiwi: { label: "Male brown kiwi whistles", animals: ["kiwi"], cues: [], cooldown: 65 },
+  kakapo: { label: "Male chinging phrase", animals: ["kakapo"], cues: [], cooldown: 75 },
+  shoebill: { label: "Bill-clatter", animals: ["shoebill"], cues: [], cooldown: 75 },
+  impala: { label: "Male rutting grunt", animals: ["impala"], cues: [], cooldown: 80 },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(

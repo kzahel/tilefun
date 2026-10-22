@@ -1,7 +1,7 @@
 # Overnight animal voices
 
 Topic: wildlife-audio
-Status: executing the owner-authorized queue, 2026-10-22.
+Status: completed the initial queue plus 28 extra animals; owner listening pending, 2026-10-22.
 
 Owner authorized all 36 proposed land/air animals, additional suitable animals if
 finished, up to eleven hours, incremental commits/pushes and targeted tests only.
@@ -21,6 +21,7 @@ This is an audio campaign; existing art and AI approval identities remain intact
 8. Extra: ostrich, emu, cassowary, toucan, great blue heron, Atlantic puffin.
 9. Extra: panda, koala, giraffe, upright giraffe, water buffalo, Tasmanian devil.
 10. Extra: mule, rat, chinchilla, red squirrel, gecko, kinkajou.
+11. Extra: kiwi, kakapo, shoebill, impala.
 
 Real animal recordings only: CC0 preferred; CC BY 2.5/3.0/4.0 and CC BY-SA 4.0 use
 exact creator/source/license and public edit credits. ShareAlike audio derivatives
@@ -243,3 +244,51 @@ normal/retina inventory and build pass; all 1,980 prior candidate objects remain
 exact. Input digest: `8c19d626a9a5bad694a84f0e9204f88f1e7536820ecd7aace4fe1a1e5b1762ec`.
 Evidence: `data/overnight-audio-neighbors-{native,browser,types,lint,catalog,
 manifest,build}.log`. Broad suites excluded; listening review pending.
+
+## Batch 11: further calls and bill percussion
+
+Kiwi, kakapo, shoebill and impala: four sources/seven excerpts, with sparse
+stationary playback. DOC kiwi/kakapo required credit and Crown Copyright notices
+are preserved; a native check covers retained copyright notices. Source
+sex/courtship contexts remain explicit, without new mating/circadian AI. Impala
+credits field recordist G de Courtivron and uploader roubignolle.
+
+Shoebill's explicitly non-vocal bill-clatter comes from Peter Handke's CC0 video.
+The entire original audio stream is retained by lossless stream copy, avoiding
+55 MB of unneeded video. Original download hash/bytes, extraction command and
+byte-identical decoded PCM proof remain in provenance. No bill-clatter animation
+or nesting/greeting behavior is implied by sparse sound playback.
+
+64 campaign animals are integrated. Coverage is 108/206 (84 recorded, 24
+synthesized), 98 unwired, with 77 recordings/126 excerpts. Listening pending.
+
+Validation: 58 targeted native checks and both existing Chromium audio
+boundaries pass (30.9s). Typechecks, targeted lint, strict catalog,
+normal/retina inventory and build pass; all 1,980 prior candidate objects remain
+exact. Input digest: `2b523a44be1f48e4a8b099d767dfa07d37ea7844bb4afd9cee74a1d4e17e87c4`.
+Evidence: `data/overnight-audio-calls-{native,browser,types,lint,catalog,
+manifest,build}.log`. Broad suites excluded; listening review pending.
+
+## Completion and next work
+
+The original 36-animal queue plus 28 extras are delivered across eleven batches.
+Upright elephant also inherits the new elephant recording, so 65 browser entries
+gain or upgrade recorded sound routes. This run adds 62 real source sets and 97
+excerpts; the previous fifteen source sets/twenty-nine excerpts stay exact.
+Total coverage doubles from 54/206 to 108/206: 84 recorded and 24 synthesized,
+with 98 entries still unwired. All 126 shipped excerpts are verified audio-only
+mono 24 kHz Vorbis. No broad native/browser suites ran during this campaign.
+
+The existing art review identities and bytes are preserved. Owner listening
+approval is pending throughout; source identification, license and signal checks
+do not constitute perceptual review. The two optional deferred candidates are a
+very faint hornbill and an Indian rhino that cannot cover the game's white rhino.
+Neither blocks the completed 64-animal queue. Remaining missing entries are not
+automatically classified as intentionally silent.
+
+Next: listen through the recorded filter/audition buttons in Animal Browser,
+check perceived volume, field noise, short takes and trigger context, and record
+per-animal listening decisions before a further large sound run. The public
+credits link retains each source, license and edit trail. Deployment is owned by
+the remote host; the 2026-10-22T21:10Z live inventory was still older, so a push
+alone must not be reported as proof of live sound availability.

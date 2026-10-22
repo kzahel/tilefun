@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: initial 36-animal sound queue delivered; additional voices in progress, owner listening review pending.
+Status: 64-animal sound campaign delivered; owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -19,14 +19,21 @@ and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable o
 poorly identified sources remain documented gaps rather than invented recordings.
 
 All 36 initial campaign animals are committed and pushed, plus upright elephant
-inheritance. Twenty-four further animals add raptor, grazing mammal, distinctive
+inheritance. Twenty-eight further animals add raptor, grazing mammal, distinctive
 bird and further mammal recordings. Per-animal sources, triggers and validation live in the
 ledger and delivery record. Owner listening review remains pending.
 
+This run adds 62 real source sets/97 excerpts and upgrades 65 browser entries
+including upright elephant inheritance. Coverage doubles from 54 to 108 entries.
+Next is a listening/balance pass in Animal Browser, particularly field noise,
+short calls and trigger contexts. Source gaps and missing routes remain explicit;
+none is silently classified as intentionally quiet. Live availability must be
+checked against the remote deployment separately from pushed source.
+
 ## Current coverage
 
-**104/206 entries have sound routes: 80 recorded, 24 synthesized, zero game-only;
-102 remain unwired.** Seventy-three real recorded sets supply 119 excerpts.
+**108/206 entries have sound routes: 84 recorded, 24 synthesized, zero game-only;
+98 remain unwired.** Seventy-seven real recorded sets supply 126 excerpts.
 The [generated animal-by-animal audit](../wildlife-audio-audit.md) owns exact current
 routing, shared designs and missing entries. This is source coverage, not owner
 listening approval or a live deployment check. Inherited coats/panther count as
@@ -73,6 +80,13 @@ with the actual recordist credited. Kinkajou's young source is labeled. Rat,
 chinchilla and red squirrel use fresh flee warnings only, never calm idle; source
 context/short-call/low-gain qualifications remain in the source bank. Squirrel
 also stops while carrying.
+
+Kiwi whistles, kakapo chinging and impala rutting-call phrases retain explicit
+male/courtship source contexts without new mating/circadian AI. Shoebill has
+explicit non-vocal bill-clatter; its complete source audio was retained by lossless
+stream copy from a CC0 video, with identical decoded PCM and original-media hashes.
+DOC attribution/Crown Copyright notices remain in public credits. These four
+voices use sparse stationary playback, quiet through feeding and unrelated work.
 
 Deer snorts only at fresh alarm stamps, never while browsing. Elephant trunk work
 and animal feeding remain quiet. Elk bugles have a 75-second cooldown.

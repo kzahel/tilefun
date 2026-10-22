@@ -155,6 +155,7 @@ it("maps recorded browser identities, preserves inheritance and pins every retai
     expect(credits).toContain(source.sourcePage);
     expect(credits).toContain(source.creator);
     expect(credits).toContain(source.licenseUrl);
+    if ("copyright" in source) expect(credits).toContain(source.copyright);
     if (source.license === "Public-domain-USGov")
       expect(credits).toContain("No claim to original U.S. Government works.");
     expect(hash(`art-source/animal-audio/${bank}/${source.sourceFile}`)).toBe(source.sha256);

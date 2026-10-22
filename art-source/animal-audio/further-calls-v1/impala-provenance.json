@@ -1,0 +1,18 @@
+{
+  "id": "impala",
+  "creator": "G de Courtivron / roubignolle",
+  "soundId": 35138,
+  "sourcePage": "https://freesound.org/people/roubignolle/sounds/35138/",
+  "download": "https://cdn.freesound.org/previews/35/35138_328279-hq.mp3",
+  "sourceFile": "impala-source.mp3",
+  "bytes": 124512,
+  "sha256": "e0afcac7c3bb8f8c9994ef1643bc522411f555af43d271f24879382bf6651f6c",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "species": "impala",
+  "sourceSpecies": "Male impala",
+  "notes": "Recorded in Tanzania by G de Courtivron using Tascam DAP-1 DAT and Sennheiser ME66; uploaded by roubignolle. Source describes a male seeking a female; sparse stationary rutting-call phrases, not an alarm or new mating AI.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

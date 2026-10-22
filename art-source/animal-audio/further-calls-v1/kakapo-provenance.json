@@ -1,0 +1,19 @@
+{
+  "id": "kakapo",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Kakapo-bill-ching-1.wav",
+  "download": "https://upload.wikimedia.org/wikipedia/commons/6/64/Kakapo-bill-ching-1.wav",
+  "sourceKind": "original distributed Wikimedia Commons audio file",
+  "sourceFile": "kakapo-source.wav",
+  "bytes": 1944654,
+  "sha256": "19bf3ee5125b955860a18ad2591c73c9590bec5631358615aff2c9ff4b030c47",
+  "creator": "Department of Conservation (NZ)",
+  "copyright": "Crown Copyright / Department of Conservation (NZ)",
+  "upstream": "https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "species": "kakapo",
+  "sourceSpecies": "Adult male kakapo",
+  "notes": "DOC adult male chinging to attract females; source name bill-ching does not mean this is bill percussion. Selected real chinging phrases without pitching low booms up. Sparse stationary playback adds no courtship AI.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

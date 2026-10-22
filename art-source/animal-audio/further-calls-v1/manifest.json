@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "id": "further-calls-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "kiwi",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Male-ni-brown-kiwi.wav",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/1/18/Male-ni-brown-kiwi.wav",
+      "sourceKind": "original distributed Wikimedia Commons audio file",
+      "sourceFile": "kiwi-source.wav",
+      "bytes": 6308430,
+      "sha256": "7c7f5dbf7db89266c57e0de3002d13c3d6f9316356dc13d36cae115b686e33e1",
+      "creator": "Department of Conservation (NZ)",
+      "copyright": "Crown Copyright / Department of Conservation (NZ)",
+      "upstream": "https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "species": "kiwi",
+      "sourceSpecies": "Male North Island brown kiwi",
+      "notes": "Generic kiwi uses the DOC male North Island brown kiwi whistle sequence. Short phrases rather than a full 36-second bout; source describes mate calling, without adding mating/age/sex AI.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-calls-v1/kiwi-1.ogg",
+          "sha256": "57ae6ac83a92f97771e6530d39ad1ece8ff00752af00410284a8d8ae9ba76c18",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [12.1, 15.8],
+          "filters": "atrim=start=12.1:end=15.8,asetpts=PTS-STARTPTS,highpass=f=600,lowpass=f=6000,volume=2.255042766,afade=t=in:d=0.02,afade=t=out:st=3.660000:d=0.04",
+          "duration": 3.7,
+          "peak": 0.7892715930938721,
+          "rms": 0.13500699460344695
+        },
+        {
+          "path": "assets/audio/animals/further-calls-v1/kiwi-2.ogg",
+          "sha256": "3f89e879fc30578e60e1a8d2717d16c4b32c363c667bf81192981fcf997fdacb",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [20.8, 24.2],
+          "filters": "atrim=start=20.8:end=24.2,asetpts=PTS-STARTPTS,highpass=f=600,lowpass=f=6000,volume=2.132278444,afade=t=in:d=0.02,afade=t=out:st=3.360000:d=0.04",
+          "duration": 3.4,
+          "peak": 0.756783127784729,
+          "rms": 0.1200707561703046
+        }
+      ]
+    },
+    {
+      "id": "kakapo",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kakapo-bill-ching-1.wav",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/6/64/Kakapo-bill-ching-1.wav",
+      "sourceKind": "original distributed Wikimedia Commons audio file",
+      "sourceFile": "kakapo-source.wav",
+      "bytes": 1944654,
+      "sha256": "19bf3ee5125b955860a18ad2591c73c9590bec5631358615aff2c9ff4b030c47",
+      "creator": "Department of Conservation (NZ)",
+      "copyright": "Crown Copyright / Department of Conservation (NZ)",
+      "upstream": "https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "species": "kakapo",
+      "sourceSpecies": "Adult male kakapo",
+      "notes": "DOC adult male chinging to attract females; source name bill-ching does not mean this is bill percussion. Selected real chinging phrases without pitching low booms up. Sparse stationary playback adds no courtship AI.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-calls-v1/kakapo-1.ogg",
+          "sha256": "dcc410b600f19bf5d5969bed401299d4c2aa5e2bc03078979e01d62e6305a38c",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [3.35, 5.7],
+          "filters": "atrim=start=3.35:end=5.7,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=5000,volume=1.007886771,afade=t=in:d=0.02,afade=t=out:st=2.310000:d=0.04",
+          "duration": 2.35,
+          "peak": 0.7928130626678467,
+          "rms": 0.07859011915902206
+        },
+        {
+          "path": "assets/audio/animals/further-calls-v1/kakapo-2.ogg",
+          "sha256": "b41e644b926e31ee39d77790a41ea7bac4cade6fc6d1467898f85da966f89af9",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [7.5, 9.7],
+          "filters": "atrim=start=7.5:end=9.7,asetpts=PTS-STARTPTS,highpass=f=250,lowpass=f=5000,volume=0.853415691,afade=t=in:d=0.02,afade=t=out:st=2.160000:d=0.04",
+          "duration": 2.2,
+          "peak": 0.7941724061965942,
+          "rms": 0.07257186666444956
+        }
+      ]
+    },
+    {
+      "id": "shoebill",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shoebill_bill-clattering.ogg",
+      "download": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Shoebill_bill-clattering.ogg",
+      "sourceKind": "complete original Vorbis audio stream remuxed from CC0 video; no audio re-encoding",
+      "sourceFile": "shoebill-audio-source.ogg",
+      "bytes": 326489,
+      "sha256": "97b53aae49c66eb6a2791528d22af90d8c8ff090bb8d4b08c1d72453b413d38e",
+      "originalMedia": {
+        "bytes": 58094481,
+        "sha256": "fbca68880c14b87fe9932b0b9bc6b16f8d9b0d592ff812188d5e6336ab39ce46",
+        "decodedMono48kFloatSha256": "c173970b5c0c5f742b7a7d7034bae24f2c8317386262adffab6e3d79db2b1852"
+      },
+      "sourcePreparation": "ffmpeg -i <download> -map 0:a:0 -c:a copy -map_metadata -1 shoebill-audio-source.ogg; decoded mono 48 kHz float PCM is byte-identical to the original video audio",
+      "creator": "Peter Handke",
+      "upstream": "https://www.flickr.com/photos/144218922@N07/41292829755/",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "species": "shoebill",
+      "sourceSpecies": "Shoebill",
+      "notes": "Peter Handke CC0 video, sourced via Commons from Flickr. Complete original Vorbis audio stream retained by lossless stream remux; original video hash/bytes and exact audio PCM equivalence retained. Brief actual bill-clatter sequence is explicitly non-vocal. No clattering animation or greeting/nesting AI is added.",
+      "category": "non-vocal",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-calls-v1/shoebill-1.ogg",
+          "sha256": "7bf7adaa393460a2eeb5858520ddf32ffd9807c8a1478947532390f4039e3be0",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [15.4, 17.25],
+          "filters": "atrim=start=15.4:end=17.25,asetpts=PTS-STARTPTS,highpass=f=350,lowpass=f=7500,volume=2.605503546,afade=t=in:d=0.02,afade=t=out:st=1.810000:d=0.04",
+          "duration": 1.8613333333333333,
+          "peak": 0.7317507863044739,
+          "rms": 0.052097462548651254
+        }
+      ]
+    },
+    {
+      "id": "impala",
+      "creator": "G de Courtivron / roubignolle",
+      "soundId": 35138,
+      "sourcePage": "https://freesound.org/people/roubignolle/sounds/35138/",
+      "download": "https://cdn.freesound.org/previews/35/35138_328279-hq.mp3",
+      "sourceFile": "impala-source.mp3",
+      "bytes": 124512,
+      "sha256": "e0afcac7c3bb8f8c9994ef1643bc522411f555af43d271f24879382bf6651f6c",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "species": "impala",
+      "sourceSpecies": "Male impala",
+      "notes": "Recorded in Tanzania by G de Courtivron using Tascam DAP-1 DAT and Sennheiser ME66; uploaded by roubignolle. Source describes a male seeking a female; sparse stationary rutting-call phrases, not an alarm or new mating AI.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-calls-v1/impala-1.ogg",
+          "sha256": "626b49497aba3a4d7ea4b963682e5fadbc12e46e333715c2e0a6e1f17d0df5b3",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [0.95, 1.58],
+          "filters": "atrim=start=0.95:end=1.58,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=3500,volume=11.673645885,afade=t=in:d=0.02,afade=t=out:st=0.590000:d=0.04",
+          "duration": 0.6193333333333333,
+          "peak": 0.751742422580719,
+          "rms": 0.12522481909775598
+        },
+        {
+          "path": "assets/audio/animals/further-calls-v1/impala-2.ogg",
+          "sha256": "a107acd249561225f8373f8c42b54eec529fd29b80bde2ef3df4a929bbe1765f",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [2.12, 2.95],
+          "filters": "atrim=start=2.12:end=2.95,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=3500,volume=6.585747538,afade=t=in:d=0.02,afade=t=out:st=0.790000:d=0.04",
+          "duration": 0.8193333333333334,
+          "peak": 0.7825667262077332,
+          "rms": 0.095324920754987
+        }
+      ]
+    }
+  ]
+}
