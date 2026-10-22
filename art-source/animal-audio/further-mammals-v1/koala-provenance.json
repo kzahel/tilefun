@@ -1,0 +1,18 @@
+{
+  "id": "koala",
+  "creator": "Benjamin D. Charlton, William A. H. Ellis, Allan J. McKinnon, Jacqui Brumm, Karen Nilsson, W. Tecumseh Fitch",
+  "sourcePage": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0020329",
+  "download": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0020329.s001",
+  "sourceKind": "original supplementary Movie S1, unmodified container with natural audio",
+  "sourceFile": "koala-source.mov",
+  "bytes": 16782086,
+  "sha256": "c760c5934decb0ea2a419a74c080e1e48fa9b655f320ad6c0c9aeddc5972e8ea",
+  "license": "CC-BY-2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+  "upstream": "https://commons.wikimedia.org/wiki/File:Perception-of-Male-Caller-Identity-in-Koalas-(Phascolarctos-cinereus)-Acoustic-Analysis-and-pone.0020329.s001.ogv",
+  "species": "koala",
+  "sourceSpecies": "Male koala",
+  "notes": "Charlton et al. 2011, Movie S1, Andy at Lone Pine Koala Sanctuary. Two inhalation/exhalation phrases from the long bellow, not two complete bellows. Primary publisher notice says CC Attribution; its Commons Open Access Media Importer copy explicitly identifies CC-BY-2.5. No mating AI is implied.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

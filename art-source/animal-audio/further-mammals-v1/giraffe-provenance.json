@@ -1,0 +1,17 @@
+{
+  "id": "giraffe",
+  "creator": "Anton Baotic, Florian Sicks, Angela S Stoeger",
+  "sourcePage": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4565008/",
+  "download": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/55a3/4565008/b8385fb9d5b8/13104_2015_1394_MOESM5_ESM-pmcvs_normal.mp3",
+  "sourceKind": "official PMC-distributed MP3 stream of Additional file 5; not original lossless media",
+  "sourceFile": "giraffe-source.mp3",
+  "bytes": 199291,
+  "sha256": "129bce8cc7b08f744514da4904f0638dda7d90be3798a01cc56731d4375ec153",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "species": "giraffe",
+  "sourceSpecies": "Giraffe",
+  "notes": "Baotic, Sicks and Stoeger 2015, Additional file 5, hum example of Fig 3a. Recorded during nocturnal zoo sessions; function/caller sleep state is not established. Sparse local stationary playback shares one voice across both giraffe forms; no circadian or communication AI is added.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

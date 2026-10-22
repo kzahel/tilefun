@@ -19,8 +19,9 @@ This is an audio campaign; existing art and AI approval identities remain intact
 6. Guinea pig, meerkat, raccoon, river otter, alpaca, llama.
 7. Extra: owl, eagle, hawk, camel, warthog, American bison.
 8. Extra: ostrich, emu, cassowary, toucan, great blue heron, Atlantic puffin.
+9. Extra: panda, koala, giraffe, upright giraffe, water buffalo, Tasmanian devil.
 
-Real animal recordings only: CC0 preferred; CC BY 3.0/4.0 and CC BY-SA 4.0 use
+Real animal recordings only: CC0 preferred; CC BY 2.5/3.0/4.0 and CC BY-SA 4.0 use
 exact creator/source/license and public edit credits. ShareAlike audio derivatives
 retain that license explicitly in their receipts and public credits. Human imitations, unidentified
 mixed-species scenes and transformed other-species sounds do not establish real
@@ -193,4 +194,30 @@ boundaries pass (31.9s). Typechecks, targeted lint, strict catalog,
 normal/retina inventory and build pass; all 1,980 prior candidate objects remain
 exact. Input digest: `6a3c4e16f5c4917004a381e683884af1d9393b4b094dfc5687c9a488900784af`.
 Evidence: `data/overnight-audio-bigbirds-{native,browser,types,lint,catalog,
+manifest,build}.log`. Broad suites excluded; listening review pending.
+
+## Batch 9: further mammals
+
+Panda, koala, both giraffe forms, water buffalo and Tasmanian devil: five sources,
+six excerpts. Panda uses the study's male honk, koala uses two bellow phrases,
+and both giraffe forms share the study's nocturnally recorded hum. This adds sparse
+local calls without mating/circadian AI or a claim about humming's function.
+Water buffalo uses explicit non-vocal nasal breath. Devil cries are display-only,
+with the bear placeholder suppressed. The Indian-rhino candidate remains unwired
+because the game's registered identity is a white rhinoceros.
+
+The new koala source is a video container. An initial unpublished export retained
+video; it was caught before commit, quarantined under ignored data, and replaced
+with audio-only exports. The exporter now excludes video/subtitle/data and asserts
+one audio stream with ffprobe. No prior committed bank changed. An inventory run
+that overlapped this correction rejected changing inputs; fresh validation follows.
+
+54 campaign animals are integrated. Coverage is 98/206 (74 recorded, 24
+synthesized), 108 unwired, with 67 recordings/110 excerpts. Listening pending.
+
+Validation: 58 targeted native checks and both existing Chromium audio
+boundaries pass (32.7s). Typechecks, targeted lint, strict catalog,
+normal/retina inventory and build pass; all 1,980 prior candidate objects remain
+exact. Input digest: `006c07c4646ef77ebe1ec4945ede605532e35e06a4fe53061cb0b4253a035f2d`.
+Evidence: `data/overnight-audio-further-{native,browser,types,lint,catalog,
 manifest,build}.log`. Broad suites excluded; listening review pending.

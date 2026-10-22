@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "id": "further-mammals-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "panda",
+      "creator": "Benjamin D Charlton, Megan A Owen, Xiaoping Zhou, Hemin Zhang, Ronald R Swaisgood",
+      "sourcePage": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0225772",
+      "download": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0225772.s006",
+      "sourceKind": "original study supplementary S6 Audio WAV",
+      "sourceFile": "giant-panda-source.wav",
+      "bytes": 153764,
+      "sha256": "ab640a54b6085bcde7d90b5341768c3bfb61cc9d0b31cd068fa57cffb82dc060",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "species": "panda",
+      "sourceSpecies": "Male giant panda",
+      "notes": "Charlton et al. 2019, S6 Audio: real male giant panda honk. Source describes honks with and without nearby conspecifics; this is a sparse stationary call, not a new frustration or social AI system.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-mammals-v1/panda-1.ogg",
+          "sha256": "fc3a025b136331df96a58aba5c78bffea8edf3a7144999cc1dba3f6629deb273",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [0.0, 1.58],
+          "filters": "atrim=start=0.0:end=1.58,asetpts=PTS-STARTPTS,highpass=f=100,lowpass=f=4500,volume=0.804902294,afade=t=in:d=0.02,afade=t=out:st=1.540000:d=0.04",
+          "duration": 1.58,
+          "peak": 0.7543218731880188,
+          "rms": 0.1418593237150679
+        }
+      ]
+    },
+    {
+      "id": "koala",
+      "creator": "Benjamin D. Charlton, William A. H. Ellis, Allan J. McKinnon, Jacqui Brumm, Karen Nilsson, W. Tecumseh Fitch",
+      "sourcePage": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0020329",
+      "download": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0020329.s001",
+      "sourceKind": "original supplementary Movie S1, unmodified container with natural audio",
+      "sourceFile": "koala-source.mov",
+      "bytes": 16782086,
+      "sha256": "c760c5934decb0ea2a419a74c080e1e48fa9b655f320ad6c0c9aeddc5972e8ea",
+      "license": "CC-BY-2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+      "upstream": "https://commons.wikimedia.org/wiki/File:Perception-of-Male-Caller-Identity-in-Koalas-(Phascolarctos-cinereus)-Acoustic-Analysis-and-pone.0020329.s001.ogv",
+      "species": "koala",
+      "sourceSpecies": "Male koala",
+      "notes": "Charlton et al. 2011, Movie S1, Andy at Lone Pine Koala Sanctuary. Two inhalation/exhalation phrases from the long bellow, not two complete bellows. Primary publisher notice says CC Attribution; its Commons Open Access Media Importer copy explicitly identifies CC-BY-2.5. No mating AI is implied.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-mammals-v1/koala-1.ogg",
+          "sha256": "09a075bfab167e75ae79d2d0274c74ae2715877c8f09f038006c77bd5dc2d61e",
+          "license": "CC-BY-2.5",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+          "trim": [20.2, 24.6],
+          "filters": "atrim=start=20.2:end=24.6,asetpts=PTS-STARTPTS,highpass=f=50,lowpass=f=3000,volume=1.255974931,afade=t=in:d=0.02,afade=t=out:st=4.360000:d=0.04",
+          "duration": 4.4,
+          "peak": 0.7608537673950195,
+          "rms": 0.08575197643522676
+        },
+        {
+          "path": "assets/audio/animals/further-mammals-v1/koala-2.ogg",
+          "sha256": "5bb189a22c919716a21fb013f1d7cb1c941d09440a2fd0080372bd23fe4ec7c6",
+          "license": "CC-BY-2.5",
+          "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+          "trim": [26.1, 29.8],
+          "filters": "atrim=start=26.1:end=29.8,asetpts=PTS-STARTPTS,highpass=f=50,lowpass=f=3000,volume=1.487968690,afade=t=in:d=0.02,afade=t=out:st=3.660000:d=0.04",
+          "duration": 3.7,
+          "peak": 0.7362862825393677,
+          "rms": 0.09577291383430876
+        }
+      ]
+    },
+    {
+      "id": "giraffe",
+      "creator": "Anton Baotic, Florian Sicks, Angela S Stoeger",
+      "sourcePage": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4565008/",
+      "download": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/55a3/4565008/b8385fb9d5b8/13104_2015_1394_MOESM5_ESM-pmcvs_normal.mp3",
+      "sourceKind": "official PMC-distributed MP3 stream of Additional file 5; not original lossless media",
+      "sourceFile": "giraffe-source.mp3",
+      "bytes": 199291,
+      "sha256": "129bce8cc7b08f744514da4904f0638dda7d90be3798a01cc56731d4375ec153",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "species": "giraffe",
+      "sourceSpecies": "Giraffe",
+      "notes": "Baotic, Sicks and Stoeger 2015, Additional file 5, hum example of Fig 3a. Recorded during nocturnal zoo sessions; function/caller sleep state is not established. Sparse local stationary playback shares one voice across both giraffe forms; no circadian or communication AI is added.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-mammals-v1/giraffe-1.ogg",
+          "sha256": "07a98683019881842f77a2d759724329bf4d3c7e56c88c86c08ba39c35f42b83",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [2.0, 6.8],
+          "filters": "atrim=start=2.0:end=6.8,asetpts=PTS-STARTPTS,highpass=f=55,lowpass=f=1000,volume=3.304355876,afade=t=in:d=0.02,afade=t=out:st=4.760000:d=0.04",
+          "duration": 4.8,
+          "peak": 0.7516418099403381,
+          "rms": 0.13398769719896864
+        }
+      ]
+    },
+    {
+      "id": "water-buffalo",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 844327,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/844327/",
+      "download": "https://cdn.freesound.org/previews/844/844327_15895934-hq.mp3",
+      "sourceFile": "water-buffalo-source.mp3",
+      "bytes": 59040,
+      "sha256": "a08bcbe9b6afff2123344e0f9dcd06bea42a4f6ceeb05b53928bbfc32f2ca233",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "water-buffalo",
+      "sourceSpecies": "Domestic Asian water buffalo",
+      "notes": "Uploader identifies a domestic Asian water buffalo snort; selected first nasal-breath phrase. Explicitly non-vocal. LG Stylus 2022 recording.",
+      "category": "non-vocal",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-mammals-v1/water-buffalo-1.ogg",
+          "sha256": "09d4ba44e9e13648b71d5eedf77d469cd1c7d4064b549e2b425828508828b97c",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "trim": [0.2, 0.67],
+          "filters": "atrim=start=0.2:end=0.67,asetpts=PTS-STARTPTS,highpass=f=80,lowpass=f=4000,volume=11.846008811,afade=t=in:d=0.02,afade=t=out:st=0.430000:d=0.04",
+          "duration": 0.4593333333333333,
+          "peak": 0.760323703289032,
+          "rms": 0.12325525088168703
+        }
+      ]
+    },
+    {
+      "id": "tasmanian-devil",
+      "creator": "digifishmusic",
+      "soundId": 53682,
+      "sourcePage": "https://freesound.org/people/digifishmusic/sounds/53682/",
+      "download": "https://cdn.freesound.org/previews/53/53682_29541-hq.mp3",
+      "sourceFile": "tasmanian-devil-source.mp3",
+      "bytes": 39655,
+      "sha256": "2f98c794f535c622f7ebfaf6ca2200985533a138997c3e4d7f226f0c8f8f907a",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "tasmanian-devil",
+      "sourceSpecies": "Tasmanian devil",
+      "notes": "Single natural cry recorded by digifishmusic at Tasmanian Devil Conservation Park using Panasonic WM61-A microphones and Edirol R09. Display-onset only; no idle/feeding cries or layered bear placeholder.",
+      "category": "vocalization",
+      "verified": "2026-10-22",
+      "variants": [
+        {
+          "path": "assets/audio/animals/further-mammals-v1/tasmanian-devil-1.ogg",
+          "sha256": "36c2fbe4220ed27c09ebb88676eecdbe7dc6d321d1d5a018ebc0206c0dc7c53c",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "trim": [0.03, 1.52],
+          "filters": "atrim=start=0.03:end=1.52,asetpts=PTS-STARTPTS,highpass=f=180,lowpass=f=6000,volume=2.223636522,afade=t=in:d=0.02,afade=t=out:st=1.450000:d=0.04",
+          "duration": 1.49,
+          "peak": 0.7794331908226013,
+          "rms": 0.1007586785358415
+        }
+      ]
+    }
+  ]
+}

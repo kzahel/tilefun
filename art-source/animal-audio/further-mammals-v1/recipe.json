@@ -1,0 +1,22 @@
+{
+  "panda": {
+    "ranges": [[0.0, 1.58]],
+    "filters": "highpass=f=100,lowpass=f=4500"
+  },
+  "koala": {
+    "ranges": [[20.2, 24.6], [26.1, 29.8]],
+    "filters": "highpass=f=50,lowpass=f=3000"
+  },
+  "giraffe": {
+    "ranges": [[2.0, 6.8]],
+    "filters": "highpass=f=55,lowpass=f=1000"
+  },
+  "water-buffalo": {
+    "ranges": [[0.2, 0.67]],
+    "filters": "highpass=f=80,lowpass=f=4000"
+  },
+  "tasmanian-devil": {
+    "ranges": [[0.03, 1.52]],
+    "filters": "highpass=f=180,lowpass=f=6000"
+  }
+}

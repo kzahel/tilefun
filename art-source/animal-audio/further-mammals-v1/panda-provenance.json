@@ -1,0 +1,17 @@
+{
+  "id": "panda",
+  "creator": "Benjamin D Charlton, Megan A Owen, Xiaoping Zhou, Hemin Zhang, Ronald R Swaisgood",
+  "sourcePage": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0225772",
+  "download": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0225772.s006",
+  "sourceKind": "original study supplementary S6 Audio WAV",
+  "sourceFile": "giant-panda-source.wav",
+  "bytes": 153764,
+  "sha256": "ab640a54b6085bcde7d90b5341768c3bfb61cc9d0b31cd068fa57cffb82dc060",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "species": "panda",
+  "sourceSpecies": "Male giant panda",
+  "notes": "Charlton et al. 2019, S6 Audio: real male giant panda honk. Source describes honks with and without nearby conspecifics; this is a sparse stationary call, not a new frustration or social AI system.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

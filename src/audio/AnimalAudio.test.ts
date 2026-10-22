@@ -145,6 +145,7 @@ it("maps recorded browser identities, preserves inheritance and pins every retai
   for (const [bank, source] of banks.flatMap((r) => r.sources.map((s) => [r.id, s] as const))) {
     expect([
       "CC0-1.0",
+      "CC-BY-2.5",
       "CC-BY-3.0",
       "CC-BY-4.0",
       "CC-BY-SA-4.0",

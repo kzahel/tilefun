@@ -32,7 +32,7 @@ def pcm(path, filters=None):
     command = ["ffmpeg", "-v", "error", "-i", str(path)]
     if filters:
         command += ["-af", filters]
-    return array.array("f", subprocess.check_output(command + ["-ac", "1", "-ar", "24000", "-f", "f32le", "-"]))
+    return array.array("f", subprocess.check_output(command + ["-vn", "-sn", "-dn", "-ac", "1", "-ar", "24000", "-f", "f32le", "-"]))
 
 
 def export(bank):
@@ -64,7 +64,9 @@ def export(bank):
             filters = f"{trim},volume={gain:.9f},afade=t=in:d=0.02,afade=t=out:st={end-start-0.04:.6f}:d=0.04"
             path = destination / f"{kind}-{index}.ogg"
             subprocess.run(["ffmpeg", "-v", "error", "-i", str(original), "-af", filters,
-                            "-ac", "1", "-ar", "24000", "-c:a", "libvorbis", "-q:a", "4", "-map_metadata", "-1", str(path)], check=True)
+                            "-vn", "-sn", "-dn", "-ac", "1", "-ar", "24000", "-c:a", "libvorbis", "-q:a", "4", "-map_metadata", "-1", str(path)], check=True)
+            streams = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_streams", "-of", "json", str(path)]))["streams"]
+            assert len(streams) == 1 and streams[0]["codec_type"] == "audio", f"Expected audio-only export: {path}"
             output = pcm(path)
             metrics = {"duration": len(output) / 24000, "peak": max(abs(x) for x in output),
                        "rms": math.sqrt(sum(x*x for x in output) / len(output))}

@@ -19,14 +19,14 @@ and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable o
 poorly identified sources remain documented gaps rather than invented recordings.
 
 All 36 initial campaign animals are committed and pushed, plus upright elephant
-inheritance. Twelve further animals add raptor, grazing mammal and distinctive
-bird recordings. Per-animal sources, triggers and validation live in the
+inheritance. Eighteen further animals add raptor, grazing mammal, distinctive
+bird and further mammal recordings. Per-animal sources, triggers and validation live in the
 ledger and delivery record. Owner listening review remains pending.
 
 ## Current coverage
 
-**93/206 entries have sound routes: 68 recorded, 25 synthesized, zero game-only;
-113 remain unwired.** Sixty-two real recorded sets supply 104 excerpts.
+**98/206 entries have sound routes: 74 recorded, 24 synthesized, zero game-only;
+108 remain unwired.** Sixty-seven real recorded sets supply 110 excerpts.
 The [generated animal-by-animal audit](../wildlife-audio-audit.md) owns exact current
 routing, shared designs and missing entries. This is source coverage, not owner
 listening approval or a live deployment check. Inherited coats/panther count as
@@ -59,6 +59,14 @@ Ostrich, emu, cassowary, toucan, great blue heron and puffin have sparse station
 sounds. Ostrich is a nasal snort; toucan/puffin stop while carrying. Puffin source
 and derived excerpts retain CC BY-SA 4.0 with explicit public attribution and edit
 credits. A very faint hornbill candidate remains a documented source-quality gap.
+
+Panda honks, koala bellow phrases and giraffe humming use published research
+recordings. Both giraffe forms share one voice. The nocturnal recording does not
+establish the hum's function or sleep state; sparse local playback adds no
+circadian or social AI. Water buffalo is non-vocal nasal breath; Tasmanian devil
+cries only at fresh displays. The koala source's original video container is
+retained for provenance, with audio-only shipped exports. Indian-rhino material
+does not cover the registered white rhinoceros.
 
 Deer snorts only at fresh alarm stamps, never while browsing. Elephant trunk work
 and animal feeding remain quiet. Elk bugles have a 75-second cooldown.

@@ -1,0 +1,18 @@
+{
+  "id": "tasmanian-devil",
+  "creator": "digifishmusic",
+  "soundId": 53682,
+  "sourcePage": "https://freesound.org/people/digifishmusic/sounds/53682/",
+  "download": "https://cdn.freesound.org/previews/53/53682_29541-hq.mp3",
+  "sourceFile": "tasmanian-devil-source.mp3",
+  "bytes": 39655,
+  "sha256": "2f98c794f535c622f7ebfaf6ca2200985533a138997c3e4d7f226f0c8f8f907a",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "tasmanian-devil",
+  "sourceSpecies": "Tasmanian devil",
+  "notes": "Single natural cry recorded by digifishmusic at Tasmanian Devil Conservation Park using Panasonic WM61-A microphones and Edirol R09. Display-onset only; no idle/feeding cries or layered bear placeholder.",
+  "category": "vocalization",
+  "verified": "2026-10-22"
+}

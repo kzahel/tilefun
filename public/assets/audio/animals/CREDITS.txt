@@ -140,6 +140,32 @@ Creator: wwstudioswastaken
 Source: https://freesound.org/people/wwstudioswastaken/sounds/618483/
 License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
 
+panda (further-mammals-v1)
+Creator: Benjamin D Charlton, Megan A Owen, Xiaoping Zhou, Hemin Zhang, Ronald R Swaisgood
+Source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0225772
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
+koala (further-mammals-v1)
+Creator: Benjamin D. Charlton, William A. H. Ellis, Allan J. McKinnon, Jacqui Brumm, Karen Nilsson, W. Tecumseh Fitch
+Source: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0020329
+License: CC-BY-2.5 — https://creativecommons.org/licenses/by/2.5/
+Upstream: https://commons.wikimedia.org/wiki/File:Perception-of-Male-Caller-Identity-in-Koalas-(Phascolarctos-cinereus)-Acoustic-Analysis-and-pone.0020329.s001.ogv
+
+giraffe (further-mammals-v1)
+Creator: Anton Baotic, Florian Sicks, Angela S Stoeger
+Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC4565008/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
+water-buffalo (further-mammals-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/844327/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+tasmanian-devil (further-mammals-v1)
+Creator: digifishmusic
+Source: https://freesound.org/people/digifishmusic/sounds/53682/
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+
 crow (garden-birds-v1)
 Creator: nigelcoop
 Source: https://freesound.org/people/nigelcoop/sounds/75162/

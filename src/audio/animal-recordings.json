@@ -174,5 +174,13 @@
   "atlantic-puffin": [
     "assets/audio/animals/big-birds-v1/atlantic-puffin-1.ogg",
     "assets/audio/animals/big-birds-v1/atlantic-puffin-2.ogg"
-  ]
+  ],
+  "panda": ["assets/audio/animals/further-mammals-v1/panda-1.ogg"],
+  "koala": [
+    "assets/audio/animals/further-mammals-v1/koala-1.ogg",
+    "assets/audio/animals/further-mammals-v1/koala-2.ogg"
+  ],
+  "giraffe": ["assets/audio/animals/further-mammals-v1/giraffe-1.ogg"],
+  "water-buffalo": ["assets/audio/animals/further-mammals-v1/water-buffalo-1.ogg"],
+  "tasmanian-devil": ["assets/audio/animals/further-mammals-v1/tasmanian-devil-1.ogg"]
 }

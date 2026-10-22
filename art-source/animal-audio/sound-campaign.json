@@ -104,6 +104,30 @@
         "build": "pass",
         "listeningReview": "pending-owner"
       }
+    },
+    {
+      "id": 9,
+      "name": "Further mammal voices",
+      "animals": [
+        "panda",
+        "koala",
+        "giraffe",
+        "giraffe-upright",
+        "water-buffalo",
+        "tasmanian-devil"
+      ],
+      "validation": {
+        "native": 58,
+        "browser": 2,
+        "browserDuration": "32.7s",
+        "inputDigest": "006c07c4646ef77ebe1ec4945ede605532e35e06a4fe53061cb0b4253a035f2d",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     }
   ],
   "animals": {
@@ -496,6 +520,54 @@
       "bank": "big-birds-v1",
       "trigger": "Sparse stationary calls; carrying silence for toucan/puffin; ostrich is non-vocal nasal breath",
       "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "panda": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "panda",
+      "bank": "further-mammals-v1",
+      "trigger": "Sparse stationary calls; water buffalo is non-vocal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "koala": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "koala",
+      "bank": "further-mammals-v1",
+      "trigger": "Sparse stationary calls; water buffalo is non-vocal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "giraffe": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "giraffe",
+      "bank": "further-mammals-v1",
+      "trigger": "Sparse stationary calls; water buffalo is non-vocal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "giraffe-upright": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "giraffe",
+      "bank": "further-mammals-v1",
+      "trigger": "Sparse stationary calls; water buffalo is non-vocal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "water-buffalo": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "water-buffalo",
+      "bank": "further-mammals-v1",
+      "trigger": "Sparse stationary calls; water buffalo is non-vocal breath",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
+    },
+    "tasmanian-devil": {
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "tasmanian-devil",
+      "bank": "further-mammals-v1",
+      "trigger": "Fresh display only; idle quiet",
+      "validation": "58 targeted native and 2 Chromium audio checks, static/inventory/build passed"
     }
   },
   "stopByUtc": "2026-10-23T06:40:00Z",
@@ -504,6 +576,11 @@
       "state": "deferred-source-quality",
       "candidate": "https://commons.wikimedia.org/wiki/File:Great_hornbill_call_recording.wav",
       "reason": "Very low recording gain and substantial background relative to calls; retain a gap pending a clearer source or listening review. No runtime wiring or distributed asset."
+    },
+    "rhinoceros": {
+      "state": "deferred-species-mismatch",
+      "candidate": "https://freesound.org/people/Breviceps/sounds/535810/",
+      "reason": "Candidate is identified as Indian rhinoceros; registered game identity is white rhinoceros. No cross-species substitution."
     }
   }
 }

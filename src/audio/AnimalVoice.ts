@@ -290,6 +290,18 @@ export const ANIMAL_VOICES: Record<
     cooldown: 40,
     quietWhileCarrying: true,
   },
+  panda: { label: "Male honk", animals: ["panda"], cues: [], cooldown: 50 },
+  koala: { label: "Male bellow phrase", animals: ["koala"], cues: [], cooldown: 75 },
+  giraffe: { label: "Low hum", animals: ["giraffe", "giraffe-upright"], cues: [], cooldown: 80 },
+  "water-buffalo": { label: "Nasal snort", animals: ["water-buffalo"], cues: [], cooldown: 45 },
+  "tasmanian-devil": {
+    label: "Cry",
+    animals: ["tasmanian-devil"],
+    cues: ["display"],
+    cooldown: 30,
+    ambient: false,
+    alarmCue: "display",
+  },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(
