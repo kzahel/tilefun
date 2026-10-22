@@ -12,6 +12,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [180 Ordered texture batches](180-ordered-texture-batches.md) | Delivered: Pixel 7a wide track/fleet about 40–41→60 FPS; native/desktop exact pixels; 829 browser cases pass; [rendering](../topics/rendering-architecture.md), [performance](../topics/performance.md) |
+| [179 Cached car images](179-cached-car-images.md) | Implemented: exact-pixel bounded reuse; Pixel 7a fleet +30–33% FPS / −51% render CPU; wide-view submission remains; intermittent Canvas deer test caveat; [rendering](../topics/rendering-architecture.md), [performance](../topics/performance.md) |
 | [178 Garden bird voices](178-garden-bird-voices.md) | Three distinct CC0 voices/seven takes for crow, raven and pigeon; shared resting calls and carrying silence; automation verified, listening review pending |
 | [177 Farm animal voices](177-farm-animal-voices.md) | Goat/donkey resting calls and piglet alarm squeal, three CC0 sources/five takes; automation verified, listening review pending |
 | [176 Familiar animal voices](176-familiar-animal-voices.md) | Implemented and automation verified: six recorded voices, ten entries including coats, shared playback and lab audition; listening review pending; [animal sounds](../topics/wildlife-audio.md) |

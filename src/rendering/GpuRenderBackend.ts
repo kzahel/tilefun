@@ -96,6 +96,10 @@ export class GpuRenderBackend extends RasterRenderBackend {
         meshDraws: this.meshes.draws,
         vehicleBedDraws: this.meshes.bedDraws,
         meshDrawCalls: this.meshes.drawCalls,
+        meshImageHits: this.meshes.images.hits,
+        meshImageMisses: this.meshes.images.misses,
+        meshImageCount: this.meshes.images.size,
+        meshImageBytes: this.meshes.images.bytes,
         meshState: this.meshes.car.state,
         meshAsset: this.meshes.car.value ? COMPACT_CAR_MESH : null,
         meshParts: this.meshes.car.value?.meshCount ?? 0,
@@ -117,6 +121,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
     this.overlayItems.length = 0;
     this.surface.clearResources();
     this.meshes.contents.clear();
+    this.meshes.images.clear();
   }
   override clear() {
     super.clear();
@@ -124,6 +129,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
     this.overlayItems.length = 0;
     this.surface.clearResources();
     this.meshes.contents.clear();
+    this.meshes.images.clear();
   }
   override recover() {
     super.recover();

@@ -615,9 +615,21 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
     reference.height = surface.canvas.height;
     const ctx = reference.getContext("2d");
     if (!ctx) throw Error("Missing reference context");
+    ctx.imageSmoothingEnabled = false;
+    const images = ["#2c85b7", "#e4a64c", "#6742a1"].map((color) => {
+      const image = document.createElement("canvas");
+      image.width = image.height = 3;
+      const paint = image.getContext("2d");
+      if (!paint) throw Error("Missing source context");
+      paint.fillStyle = color;
+      paint.fillRect(0, 0, 3, 3);
+      surface.drawImage(image, 0, 0);
+      return image;
+    });
+    surface.flush();
     const before = { ...surface.stats };
     surface.beginFrame();
-    // One texture, more than two full batches. Overlap and changing tint/alpha
+    // Four textures, more than two full batches. Overlap and changing tint/alpha
     // expose index order errors; the final partial batch must not draw stale quads.
     for (const target of [ctx, surface]) {
       target.save();
@@ -628,7 +640,11 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
         // Use a representable 8-bit alpha, keeping the one-channel tolerance
         // independent of Canvas/WebGL rounding exactly halfway between bytes.
         target.globalAlpha = i % 3 ? 1 : 128 / 255;
-        target.fillRect((i * 7) % 160, (i * 11) % 120, 4, 5);
+        const x = (i * 7) % 160,
+          y = (i * 11) % 120;
+        const image = images[i % images.length];
+        if (i % 4 && image) target.drawImage(image, x, y, 4, 5);
+        else target.fillRect(x, y, 4, 5);
       }
       target.restore();
     }
@@ -652,7 +668,7 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
   });
   expect(result.maxError).toBeLessThanOrEqual(1);
   expect(result.draws).toBe(3);
-  expect(result.uploaded).toBe(4101 * 4 * 8 * 4);
+  expect(result.uploaded).toBe(4101 * 4 * 9 * 4);
 });
 
 test("shared grass LOD fades consistently in Canvas and GPU and returns at ordinary zoom", async ({

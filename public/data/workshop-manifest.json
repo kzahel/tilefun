@@ -16586,7 +16586,7 @@
       "name": "Tipping dump-truck bed",
       "prompt": "Use ordinary game controls to board, carry loose toys/food, ride and reload. Inspect floor/wall contacts and upright sprite depth. Tip/lower the articulated bed and inspect real cargo/rider discharge.",
       "url": "/tilefun/workshop.html?geometry=truck-bed#/tool/world-geometry",
-      "fingerprint": "b002be4b1fdba1f99f2dfc1cdb1225894b66aed0d79afa3ae4723ee47ce209b3",
+      "fingerprint": "711090fe7aba77dd65392a680df79b4c1ce7a47e21452a127a6c84edf2909986",
       "excluded": "Interactive articulated-equipment engine review; v1 source preserved, changed v2 poses await human inspection. Not an immutable art approval snapshot."
     },
     {
@@ -16596,7 +16596,7 @@
       "name": "Wheel-lift tow truck",
       "prompt": "Attach a parked car using normal controls; drive, reverse, save/reload and release. Inspect the raised front axle and rolling rear wheels.",
       "url": "/tilefun/workshop.html?geometry=towing#/tool/world-geometry",
-      "fingerprint": "64f89647db7c9a9413b413a2af1182a217291569ca4a261a1271a3d251b27c2b",
+      "fingerprint": "2d17ca6d35e833bfa5e986ab406ae6b9580007187af001590e2c72192fae74d5",
       "excluded": "Interactive shared-engine towing qualification; new equipment poses await human inspection. Not an immutable art approval snapshot."
     },
     {
@@ -16606,7 +16606,7 @@
       "name": "Single-car transporter",
       "prompt": "Deploy the ramp, drive a car aboard, get out and secure it. Stow, drive, reload, then deploy/release and reverse off. Inspect axle support and shared depth.",
       "url": "/tilefun/workshop.html?geometry=transporter#/tool/world-geometry",
-      "fingerprint": "95fc826c32a5531aecef917fc9f326297e0b44caa5a701792e65c694f86cce70",
+      "fingerprint": "46e1b842f5acc1b32b2ea32665db088f8c67f66e26f2bcde220a5073d71d8d96",
       "excluded": "Interactive shared-engine machinery qualification; new original appearance awaits human inspection. This is not a promoted art approval snapshot."
     },
     {
@@ -50345,5 +50345,5 @@
       }
     }
   ],
-  "inputDigest": "5c9a734cc0b0039bded2f6998d27622f69ee3e05ee1d2e5d901b9fcec50d7f02"
+  "inputDigest": "338a1467197b3c139458b0a7a1491736bbeb9e0844985dbd2e82e5adac3c8f2b"
 }

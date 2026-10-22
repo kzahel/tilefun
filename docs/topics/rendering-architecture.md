@@ -4,7 +4,8 @@ Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-car presentation delivered;
 GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
-Updated: 2026-10-20.
+Bounded unchanged car images and ordered multi-texture GPU batches are delivered.
+Updated: 2026-10-22.
 
 [169](../tactical/169-wheel-lift-towing.md) groups a tow truck and its car in one
 shared GPU depth target. Per-draw absolute transforms reset both cached assets;
@@ -225,6 +226,150 @@ removed. The small native reference adapters above are permanent, explicit
 composition choices, not hidden alternative gameplay pipelines.
 
 ## Evidence and limits
+
+### Car pipeline audit and optimization direction · 2026-10-22
+
+The [current-source audit](../benchmarks/car-render-pipeline-audit.json) follows
+the [Pixel 7a depot/track investigation](../research/depot-racetrack-performance.md).
+Production cars already use actual GLB geometry. Their image production and world
+ordering are separate stages:
+
+```text
+read-only interpolated car/wheel/light/paint/bed/tow state
+  → batched GLB meshes in a native-world-pixel RGBA + local-depth target
+  → one-pixel inward silhouette outline into another RGBA target
+  → nearest-sampled quad in the existing ordered sprite/prop/grass scene
+```
+
+`CarMeshAsset` owns loaded geometry, palette textures and absolute rig transforms.
+`EntityMeshPose` supplies presentation state; `GpuMeshBodies` borrows the shared
+asset and applies every pose before drawing. Truck contents are alpha-tested
+upright sprite planes in the same local depth target; a towed car shares that
+target too. Local depth resolves mesh parts and these bounded groups. External
+world ordering remains the shared collector/painter sequence, including shadows,
+surface slabs, props and grass; the final raster shader does not write depth.
+
+Target resolution is `2 × radius`, capped at 1024, independent of camera zoom.
+For example, a 160px body target still renders at 160px when displayed about
+48px wide at scale 0.3. This preserves the native pixel grid but retains offscreen
+work when zoomed out. Textures use nearest sampling/no mipmaps; the main GPU path
+disables antialiasing. `CarPixelOutline` tests source alpha >=128/255 and four
+cardinal neighbors, darkening bright inward edge pixels to the retained ink
+color. Internal window/body ink also lives in authored textures; it is not a
+normal/depth Sobel outline. A scene-wide alpha outline would lose individual
+boundaries where opaque objects touch, and opaque ground would hide silhouettes.
+
+Current mode inventory:
+
+| Surface | Available behavior | Boundary |
+| --- | --- | --- |
+| Main game/labs | Canvas sprites, GPU sprites, GPU + 3D car | Shared fixed camera/painter ordering; only the last uses GLB bodies |
+| `r_show3d 1` | Orbitable perspective split-screen | Collider/terrain geometry, not a complete textured vehicle/world renderer |
+| Retained vehicle viewers | Study 50° / shared game camera, wheel motion, wireframe | Actual GLBs, still using native pixel targets and the shared outline |
+| Renderer lab | Mesh/sprite, pose, foreground/clip/recovery controls | Same production body adapter; useful for composition and fallback checks |
+| Renderer lab asset probe | WebGPU selection or forced WebGL2, raw body render | Portable-asset proof; no gameplay sprite shader/order/outline port |
+| 160/162 diagnostics | Isolated, local group depth and shared world depth | Standalone GPU proofs; not a selectable full-game world-depth mode |
+
+There is no production raw/unoutlined car shader selector or global world-depth
+toggle. Debug's Base `depth`/`nw` selection concerns terrain base picking, not a
+GPU depth-buffer mode. The current registry has 79 models/80 opaque source
+materials: 34 use `KHR_materials_unlit`, 46 use emissive paint. Runtime contact
+shadows and emergency-lens clones are additional. This is mostly flat painted
+appearance, not an expensive dynamic lighting/shadow-map stack. Geometry batching
+is already shipped; do not propose merging the original 32–56 parts as new work.
+
+The new diagnostic
+[`fused-outline-composite.mjs`](../../scripts/instrumentation/fused-outline-composite.mjs)
+copies the same alpha-neighbor/ink rule into the final raster composite and skips
+the intermediate outline target/pass. **72/72 full RGBA comparisons are exact**:
+compact-1, fire-truck-ladder-2 and current dump-truck-v2; four headings; scales
+0.3/0.75/3; opacity 1/0.65; rear band and translucent foreground in the same painter
+sequence. It uses production loading, projection, outline and raster shader,
+rejects empty bodies/GL errors and pins source/asset hashes. It changes no game
+defaults. Cargo, towing, alternate paints, clips, context recovery and complete
+game/lab/phone performance are not qualified by this small proof.
+
+Fusion is a candidate, not a measured speedup: at scale 3 it repeats neighbor
+tests for more display fragments, while the old native outline image is reused
+by upscaling. Compare near and far views; a hybrid or cached outlined image may
+win. Existing exact-size target reuse is diagnostic-only and showed only a small
+desktop improvement in the depot investigation.
+
+[179](../tactical/179-cached-car-images.md) implements the first slice through
+the shared backend. `CarBodyImageCache` retains finished outlined RGBA targets,
+keyed by the loaded asset generation, exact local rig pose and paint texture
+identity/version. Camera, world position and composite alpha remain external.
+Only poses recurring across consecutive frames qualify; cargo groups, towed
+pairs and enabled emergency lights bypass reuse. Retention is bounded to
+64 images / 16 MiB and 120 unused frames, with explicit reset/invalidation/
+recovery/disposal cleanup. Each quad retains its original painter position.
+The original outline source is retained byte-for-byte in the historical replay
+catalog; no historical art receipt or approved raster is rewritten.
+
+The production-adapter probe has **144/144 exact RGBA pairs** covering four
+models, two alternate paints, fractional scale, opacity and clips. Each warm hit
+issues zero body/outline calls; recovery reproduces the reference. Three explicit
+unsupported-group checks bypass reuse and match the reference. The
+[receipt](../benchmarks/cached-car-images.json) owns source hashes and the ten
+native Pixel 7a controls. Fleet pairs gain 30–33% callback FPS and halve render
+CPU; warm body/outline calls fall 449→0/frame. The 51 images occupy 6.55 MiB.
+Wide racing records no hits and remains about 44 FPS; 168–212 raster submissions
+per frame remain the next bottleneck. Full validation and its intermittent
+Canvas deer timeout/repeat results are recorded in 179. Manifest regeneration
+preserves the other 1,977 candidate fingerprints; the two excluded interactive
+truck/towing engine identities change because they hash the current adapter.
+
+[180](../tactical/180-ordered-texture-batches.md) delivers the next submission
+slice. Up to eight existing textures share an indexed batch, with one sampler
+slot value per vertex and constant GLSL sampler indices. Quad/index order and
+per-source raw/sRGB conversion remain unchanged. Cached car quads can join the
+batch; dirty mesh/outline target writes, uploads, clips, capacity, pass endings
+and resource retirement still drain it. Texture budgets stay unchanged; vertex
+records grow eight→nine floats, adding 32 KiB of reusable storage. This is ordered
+multi-texture submission, not a spatial atlas or a new depth/outline policy.
+
+Native Pixel 7a source-verified original/new pairs measure **41.01→60.02 FPS**
+wide and **40.27→59.98 FPS** in the cached fleet. Submissions fall about
+168→25 / 212→24 per frame. Desktop and native phone each pass 18 exact mixed-
+texture and 144 exact car-image RGBA pairs, including queued-image lifetimes.
+All 829 browser cases and GPU streaming readiness pass; details and thermal
+exclusions are in the [receipt](../benchmarks/ordered-texture-batches.json).
+The earlier 179 ceiling above is historical evidence for this delivered slice.
+
+Optimization sequence and next work:
+
+1. **Unchanged simple body image reuse is delivered in 179**, with exact pose/
+   paint/asset keys, bounded lifetime and existing world/alpha composition.
+   Unsupported groups retain their current renderer.
+2. **Ordered multi-texture submission is delivered in 180.** It avoids atlas
+   copies/gutters while addressing car, terrain, sprite and white-fill switches.
+   First qualify the actual saved depot and moving/driving overview: measured
+   standing wide/fleet cases now reach 60Hz, so profile before another change.
+3. **If new profiles justify it, measure outline fusion for changing bodies**,
+   including the extra fragment
+   work at close zoom. Add the missing composition/rig/lifecycle qualification
+   through existing game/lab consumers before any production selection. The
+   new measurements put broad submission ahead of this narrower pass reduction.
+4. **Keep shared world depth as a separate correctness/rendering experiment.**
+   Fresh replay still matches five ordinary poses, while the wall corner differs
+   by seven pixels and no whole-object permutation fixes the last three. The
+   independent ray oracle passes all 1,517 overlap checks. Global depth needs
+   explicit sprite/terrain depth and transparency rules; retaining individual
+   outlines needs object/depth-aware treatment. The common final outline in 162
+   does not establish production per-car outline parity or a speed advantage.
+
+The replay also corrected a diagnostic provenance bug: 162's browser follows
+the current registry (dump-truck-v2), but its host formerly checked/hashed the
+hard-coded v1 GLB. It now reports, checks opacity and hashes the actual loaded
+asset declarations. Historical retained reports remain immutable. New replay
+assets/hashes and visibility results are in the audit receipt above.
+
+Validation: all three typechecks, 6,638 unit tests in 365 files, the Node visual
+comparison integration and lint pass (existing 121 warnings / 42 infos). The
+72-pair GPU proof and six-scene depth replay pass in owned bundled full Chromium;
+all browsers/servers are reaped. No production render/recipe/asset input changed,
+so this slice does not rerun the full production build/browser suite or regenerate
+art inventories.
 
 [127](../tactical/127-wide-view-investigation.md) profiles native phone wide views.
 Per-car body/outline passes retain native-world resolution and resize their shared

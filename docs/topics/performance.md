@@ -8,8 +8,9 @@ reused; static prop depth and elevation metadata cached; Canvas terrain resource
 removed from world chunks; neutral frame/backend separation delivered, with raster
 scheduling and cold-entry presentation remaining as separate performance work.
 Wildlife sleep, shared bounded planning across all native families and ambient
-wander, and local predicted animation are delivered.
-Updated: 2026-10-18.
+wander, local predicted animation, bounded unchanged car image reuse and ordered
+multi-texture GPU batches are delivered.
+Updated: 2026-10-22.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend
@@ -111,6 +112,109 @@ roughly 20 FPS with repeated screen composites versus 44 FPS with that cache byp
 These samples identify avoidable rendering work, not physical phone performance
 or a reproduction of the owner's exact desktop configuration. Tactical 134 records
 the replacement measurements and their limits.
+
+## Depot and racetrack investigation (2026-10-22)
+
+The [depot/track profile](../research/depot-racetrack-performance.md) separates
+native racetrack authority, wide-view drawing and a synthetic 45-car parked fleet.
+Fresh desktop scenes retain approximately 60Hz; the owner's exact device/save
+slowdown is not reproduced. Ordinary racetrack server ticks average about 2ms;
+AI decisions average about 0.07ms. Traffic lookahead is the largest measured
+simulation phase: a separate deep capture counts about 303 obstruction probes
+and 3,414 returned body candidates per tick for eight racers. These are repeated
+probe candidates, not distinct actors, and deep timers add overhead.
+
+The parked-fleet controls measure about 2.1ms render CPU with meshes versus
+0.82ms with sprites; parked meshes are redrawn every frame. A census finds about
+14 body/outline target reallocations per frame. Diagnostic exact-size target reuse
+retains about 3.7MiB and saves only about 0.15ms in one shallow comparison, without
+an FPS change. Target reuse alone is not an established remedy.
+
+The attached Pixel 7a follow-up reproduces the slowdown in fresh scenes: normal
+view/touch walking stays about 60 FPS, but a 0.1 track overview averages 44.8 FPS
+with meshes and 44.2 with sprites. The synthetic parked fleet averages 29.0 FPS
+with meshes versus 38.4 with sprites; render CPU falls 13.02→4.53ms. All six clean
+captures retain 59.99–60.00Hz authority at thermal status zero (24.8–27.2°C).
+Wide track AI averages 0.21ms/tick, while traffic averages 5.03ms. Sprite controls
+still submit 166–212 raster calls/frame. A further attribution trace ends at
+thermal status one and stops subsequent captures; it is excluded from clean
+pacing comparisons. [Phone evidence](../benchmarks/depot-racetrack-pixel7a.json)
+and the owning research record retain the exact controls, native viewport,
+protocol setup, trace limits and cleanup.
+
+Prioritize unchanged parked-body raster reuse and wide-view raster submission/
+depth locality, then conservative per-sweep traffic candidate reuse for server
+headroom; preserve lights, cargo, roof contacts and edits. Exact saved-depot and
+moving/driving-overview acceptance remain open. The initial investigation ships
+no runtime optimization or AI/collision cadence change; 179 below implements its
+first rendering follow-up.
+
+The follow-up [car pipeline audit](rendering-architecture.md#car-pipeline-audit-and-optimization-direction--2026-10-22)
+documents existing gameplay/3D/depth modes and orders the rendering work: unchanged
+body-image reuse, a measured fused outline/composite candidate, and atlas-backed
+ordered submission. Its bounded desktop shader proof has 72 exact RGBA pairs;
+it is not a phone speedup or a production renderer switch. Shared-world depth
+remains a separate correctness experiment with unresolved whole-scene outline,
+sprite/terrain and lifecycle integration.
+
+### Delivered unchanged car image reuse · 179
+
+[179](../tactical/179-cached-car-images.md) adds bounded exact-pose finished-image
+reuse to the shared game/lab GPU backend. It preserves the current outline,
+native resolution and painter order, bypassing cargo, towing pairs and flashing
+lights. **144 exact RGBA comparisons** cover the production adapter, alternate
+paints, fractional scale, opacity, clips and recovery. Retained images are capped
+at 64 / 16 MiB and cleared on reset, invalidation, recovery and disposal.
+
+Ten clean native Pixel 7a captures use the same current source with caching
+off/on. Opposite-order fleet pairs measure **29.24→38.03 FPS** and
+**24.75→32.92 FPS** (30–33% gain), with render CPU **12.89→6.32ms** and
+**15.66→7.62ms** (about 51% reduction). Mesh/outline calls fall **449→0/frame**;
+51 images use 6.55 MiB. Authority remains about 60Hz, all sample boundaries have
+thermal status zero at 23.6–28.1°C, and page errors are zero. The synthetic fleet
+blocks racers; this is not exact saved-depot or marginal unchanged-race evidence.
+Absolute timings drift despite thermal status zero; these are short repeated
+callback-cadence samples, not sustained display/GPU timing guarantees.
+
+Normal view/walking stay about 60 FPS. Wide racing is **44.61 off / 43.73 on**,
+with no hits: no established improvement there. Raster submission remains
+about **168 calls/frame** wide and exactly **212** in the cached fleet. The
+[receipt](../benchmarks/cached-car-images.json) retains all ten controls, source
+hashes and validation, including one intermittent Canvas deer timeout (828/829
+full-run passes, unchanged current build then 3/3 repeat passes; no test/AI change).
+Prioritize atlas/submission work while preserving order and native pixels;
+measure outline fusion separately for changing bodies at near/far zoom. The
+cache eliminates offscreen work for unchanged bodies but does not solve the
+wide-view raster ceiling or alter server AI.
+
+### Delivered ordered texture batches · 180
+
+[180](../tactical/180-ordered-texture-batches.md) addresses the submission ceiling
+remaining after 179. `GpuRasterSurface` now samples up to eight individual textures
+in each indexed draw, retaining the exact quad/index order, source UVs, nearest
+sampling, per-source color conversion and blending. Cached cars join adjacent
+raster work; dirty target writes and resource retirement drain queued pixels.
+No atlas copies or source-image changes are needed. Existing texture budgets
+remain, with 32 KiB added to the reusable vertex buffer.
+
+Source-verified original-raster controls on the Pixel 7a measure **41.01→60.02 FPS**
+wide and **40.27→59.98 FPS** for the cached synthetic fleet. Raster calls fall
+**167.88→25.15** and **212.00→23.75/frame** (85% / 89%); frame p95 falls
+33.4→16.7/16.8ms. Inclusive main render elapsed time falls 5.25→4.37ms and
+5.74→4.61ms. Normal view and native touch walking remain about 60 FPS.
+Authority remains about 60Hz, with zero page errors and thermal status zero
+at every accepted boundary. A thermal-status-one fleet setup abort is excluded;
+remaining captures resume after cooldown. These are short rAF samples of fresh
+generated scenes, not sustained display/GPU/power measurements or the exact save.
+
+The [receipt](../benchmarks/ordered-texture-batches.json) retains all controls,
+source hashes, excluded setup and limits. Both full desktop Chromium and native
+phone Chrome pass **18 exact mixed-texture plus 144 exact car-image RGBA pairs**,
+including queued-image eviction/disable. All three typechecks, 6,640 units,
+Node integration, lint, catalog/manifest, build, **829 browser tests** and GPU +
+meshes streaming readiness pass. The same backend serves game and embedded labs.
+Next qualify the actual saved depot and moving/driving overview, then profile
+any remaining bottleneck before choosing another shader or atlas change.
 
 ## Evidence and validation
 

@@ -279,6 +279,8 @@ export async function sampleCityClient(seconds) {
         "vertexUploadedBytes",
         "meshDrawCalls",
         "meshDraws",
+        "meshImageHits",
+        "meshImageMisses",
       ].map((k) => [k, (g.renderer.getDiagnostics().gpu?.[k] ?? 0) - (gpuBefore[k] ?? 0)]),
     ),
     canvas: { width: g.canvas.width, height: g.canvas.height },
@@ -302,6 +304,45 @@ export function installCityRenderProfile() {
     targetSizes = {},
     assets = {};
   const restores = [];
+  // Attribution only: replay the unchanged quad order through bounded texture sets.
+  const batchCensus = { quads: 0, textureSwitches: 0, barriers: 0 };
+  const lanes = [1, 2, 4, 8].map((limit) => ({ limit, draws: 0, quads: 0, textures: new Set() }));
+  const finish = (lane) => {
+    if (lane.quads) lane.draws++;
+    lane.quads = 0;
+    lane.textures.clear();
+  };
+  const surface = backend.surface,
+    quad = surface.quad,
+    flush = surface.flush;
+  let insideQuad = 0;
+  surface.quad = function (...args) {
+    batchCensus.quads++;
+    if (this.count && this.texture !== args[0]) batchCensus.textureSwitches++;
+    for (const lane of lanes) {
+      if (lane.quads === 2048 || (!lane.textures.has(args[0]) && lane.textures.size === lane.limit))
+        finish(lane);
+      lane.textures.add(args[0]);
+      lane.quads++;
+    }
+    insideQuad++;
+    try {
+      return quad.apply(this, args);
+    } finally {
+      insideQuad--;
+    }
+  };
+  surface.flush = function (...args) {
+    if (!insideQuad) {
+      if (this.count) batchCensus.barriers++;
+      for (const lane of lanes) finish(lane);
+    }
+    return flush.apply(this, args);
+  };
+  restores.push(() => {
+    surface.quad = quad;
+    surface.flush = flush;
+  });
   const wrap = (owner, method, label, census) => {
     if (!owner || typeof owner[method] !== "function") return;
     const original = owner[method];
@@ -348,9 +389,21 @@ export function installCityRenderProfile() {
   window.__cityRenderProfile = () => {
     for (const restore of restores.reverse()) restore();
     delete window.__cityRenderProfile;
-    return { totals, targetSizes, assets };
+    for (const lane of lanes) finish(lane);
+    return {
+      totals,
+      targetSizes,
+      assets,
+      batchCensus,
+      orderedTextureBatches: Object.fromEntries(lanes.map((lane) => [lane.limit, lane.draws])),
+    };
   };
   window.__cityRenderProfile.reset = () => {
+    for (const key of Object.keys(batchCensus)) batchCensus[key] = 0;
+    for (const lane of lanes) {
+      finish(lane);
+      lane.draws = 0;
+    }
     for (const records of [totals, targetSizes, assets])
       for (const key of Object.keys(records)) delete records[key];
   };

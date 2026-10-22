@@ -1,0 +1,4395 @@
+{
+  "schema": "tilefun-depot-racetrack-profile/v1",
+  "date": "2026-10-22",
+  "machine": "Apple M4 Pro / macOS arm64",
+  "method": "Sequential isolated full bundled headless Chromium; real Worker authority and IndexedDB, seed 2026, 1440x900/dpr1. Ordinary policies except explicit synthetic parked grid and diagnostic exact-size target reuse. Deep/census/CPU captures add overhead. Callback cadence is not displayed GPU timing or owner-device reproduction. Synthetic grid can obstruct racers; fleet comparisons characterize rendering, not unchanged race simulation.",
+  "runs": [
+    {
+      "date": "2026-10-22T02:08:36.376Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": true,
+      "deep": false,
+      "cpu": false,
+      "renderProfile": false,
+      "meshTargetReuse": false,
+      "seconds": 8,
+      "warmSeconds": 4,
+      "overviewZoom": 0.25,
+      "arrivalKind": "racetrack",
+      "probesSHA256": {
+        "city-audit.mjs": "95d65fc3ec74a0a3c67c459dbeca2f814a9912bb07922864cdd05f4fae7b3240",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "track-mesh",
+      "cases": [
+        {
+          "stage": "standing",
+          "arrival": {
+            "x": 462,
+            "y": 492,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 107,
+            "props": 153,
+            "active": 55,
+            "residentPeople": 48,
+            "activePeople": 36,
+            "cars": 7,
+            "activeCars": 7,
+            "carsWithNonzeroVelocity": 7,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "": 7
+            },
+            "views": [
+              {
+                "minCx": 27,
+                "minCy": 30,
+                "maxCx": 29,
+                "maxCy": 31
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8001.899999982119,
+          "frames": {
+            "count": 480,
+            "mean": 16.66604166666667,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 0.6498960488303536,
+            "p50": 0.5,
+            "p95": 1,
+            "p99": 1.7999999821186066,
+            "max": 27.899999976158142
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.4201663196582556,
+            "p50": 0.4000000059604645,
+            "p95": 0.699999988079071,
+            "p99": 1.300000011920929,
+            "max": 1.300000011920929
+          },
+          "ack": {
+            "count": 399,
+            "mean": 29.26165413490513,
+            "p50": 33.19999998807907,
+            "p95": 34.5,
+            "p99": 35,
+            "max": 61.70000001788139
+          },
+          "maxReplay": 2,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 36,
+          "gpuDelta": {
+            "drawCalls": 15826,
+            "frames": 483,
+            "uploadedBytes": 688128,
+            "vertexUploadedBytes": 7280768,
+            "meshDrawCalls": 2583,
+            "meshDraws": 369
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 3,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 1,
+          "errors": [],
+          "terrain": {
+            "resident": 20,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.03508230476590341,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.5
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.11069958819528666,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.3999999761581421,
+                "max": 0.9000000059604645
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.03251028784508568,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.10000002384185791,
+                "max": 0.19999998807907104
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.017489712302086284,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.0763374484860848,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.20000001788139343,
+                "max": 0.5
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.4234567903319504,
+                "p50": 0.4000000059604645,
+                "p95": 0.699999988079071,
+                "p99": 0.9000000059604645,
+                "max": 1.100000023841858
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 0.8236625512808929,
+                "p50": 0.7999999821186066,
+                "p95": 1.300000011920929,
+                "p99": 1.7000000178813934,
+                "max": 2
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.002263374534654029,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0.001028806523040489,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.09999999403953552
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.004732510251272853,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.09670781843946795,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.29999998211860657,
+                "max": 0.4000000059604645
+              },
+              "tick": {
+                "count": 486,
+                "mean": 1.952263374755412,
+                "p50": 1.899999976158142,
+                "p95": 2.9000000059604645,
+                "p99": 4.4000000059604645,
+                "max": 4.9000000059604645
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 110,
+              "props": 153,
+              "active": 57,
+              "residentPeople": 48,
+              "activePeople": 36,
+              "cars": 10,
+              "activeCars": 9,
+              "carsWithNonzeroVelocity": 10,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "": 10
+              },
+              "views": [
+                {
+                  "minCx": 27,
+                  "minCy": 30,
+                  "maxCx": 29,
+                  "maxCy": 31
+                }
+              ],
+              "inputQueue": 1
+            },
+            "hz": 60.00173128384604,
+            "maxMovingPeople": 0,
+            "maxActive": 58
+          }
+        },
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 462,
+            "y": 492,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 108,
+            "props": 153,
+            "active": 56,
+            "residentPeople": 48,
+            "activePeople": 36,
+            "cars": 8,
+            "activeCars": 8,
+            "carsWithNonzeroVelocity": 8,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "": 8
+            },
+            "views": [
+              {
+                "minCx": 25,
+                "minCy": 28,
+                "maxCx": 32,
+                "maxCy": 33
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8003.199999988079,
+          "frames": {
+            "count": 480,
+            "mean": 16.665833333333335,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 0.9018711016480492,
+            "p50": 0.800000011920929,
+            "p95": 1.2999999821186066,
+            "p99": 1.4000000059604645,
+            "max": 3.0999999940395355
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.5515592510883625,
+            "p50": 0.5,
+            "p95": 0.7999999821186066,
+            "p99": 0.800000011920929,
+            "max": 1.2999999821186066
+          },
+          "ack": {
+            "count": 470,
+            "mean": 33.81617021268987,
+            "p50": 33.69999998807907,
+            "p95": 35.5,
+            "p99": 50.5,
+            "max": 51.69999998807907
+          },
+          "maxReplay": 2,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 96,
+          "gpuDelta": {
+            "drawCalls": 49668,
+            "frames": 483,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 10669440,
+            "meshDrawCalls": 12096,
+            "meshDraws": 1728
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.75,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.25,
+          "errors": [],
+          "terrain": {
+            "resident": 80,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 20971520
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.03816872421238157,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.10514403260293811,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.02654320988880754,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.020164609016704953,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.07016460934784187,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.37716049397433243,
+                "p50": 0.3999999761581421,
+                "p95": 0.5999999940395355,
+                "p99": 0.699999988079071,
+                "max": 1.5999999940395355
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 0.9259259264164992,
+                "p50": 0.800000011920929,
+                "p95": 1.800000011920929,
+                "p99": 2.0999999940395355,
+                "max": 2.300000011920929
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.0032921811803378197,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.005349794103775496,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.16790123467828022,
+                "p50": 0.19999998807907104,
+                "p95": 0.30000001192092896,
+                "p99": 0.30000001192092896,
+                "max": 0.4000000059604645
+              },
+              "tick": {
+                "count": 486,
+                "mean": 2.056995884933099,
+                "p50": 1.9000000059604645,
+                "p95": 3.2000000178813934,
+                "p99": 3.7000000178813934,
+                "max": 4.9000000059604645
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 111,
+              "props": 153,
+              "active": 58,
+              "residentPeople": 48,
+              "activePeople": 36,
+              "cars": 11,
+              "activeCars": 10,
+              "carsWithNonzeroVelocity": 11,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "": 11
+              },
+              "views": [
+                {
+                  "minCx": 25,
+                  "minCy": 28,
+                  "maxCx": 32,
+                  "maxCy": 33
+                }
+              ],
+              "inputQueue": 1
+            },
+            "hz": 60.00618620476338,
+            "maxMovingPeople": 0,
+            "maxActive": 59
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22T02:09:19.171Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": false,
+      "deep": false,
+      "cpu": false,
+      "renderProfile": false,
+      "meshTargetReuse": false,
+      "seconds": 8,
+      "warmSeconds": 4,
+      "overviewZoom": 0.25,
+      "arrivalKind": "racetrack",
+      "probesSHA256": {
+        "city-audit.mjs": "95d65fc3ec74a0a3c67c459dbeca2f814a9912bb07922864cdd05f4fae7b3240",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "track-sprites",
+      "cases": [
+        {
+          "stage": "standing",
+          "arrival": {
+            "x": 462,
+            "y": 492,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 105,
+            "props": 153,
+            "active": 53,
+            "residentPeople": 48,
+            "activePeople": 36,
+            "cars": 5,
+            "activeCars": 5,
+            "carsWithNonzeroVelocity": 5,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "": 5
+            },
+            "views": [
+              {
+                "minCx": 27,
+                "minCy": 30,
+                "maxCx": 29,
+                "maxCy": 31
+              }
+            ],
+            "inputQueue": 0
+          },
+          "elapsedMs": 8001.0000000238415,
+          "frames": {
+            "count": 480,
+            "mean": 16.666041666666665,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 0.4126819133015036,
+            "p50": 0.4000000059604645,
+            "p95": 0.7000000178813934,
+            "p99": 1.300000011920929,
+            "max": 1.5999999940395355
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.38357588314216995,
+            "p50": 0.3999999761581421,
+            "p95": 0.6000000238418579,
+            "p99": 1.2000000178813934,
+            "max": 1.300000011920929
+          },
+          "ack": {
+            "count": 473,
+            "mean": 33.59704016838971,
+            "p50": 33.599999994039536,
+            "p95": 35.30000001192093,
+            "p99": 35.69999998807907,
+            "max": 35.80000001192093
+          },
+          "maxReplay": 2,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 35,
+          "gpuDelta": {
+            "drawCalls": 15456,
+            "frames": 483,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 7233408,
+            "meshDrawCalls": 0,
+            "meshDraws": 0
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 3,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 1,
+          "errors": [],
+          "terrain": {
+            "resident": 20,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.0407407407652694,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.12736625442043745,
+                "p50": 0.09999999403953552,
+                "p95": 0.29999998211860657,
+                "p99": 0.4000000059604645,
+                "max": 0.699999988079071
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.029423868705215767,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.024074074172188716,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.08065843680267962,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.4061728396410805,
+                "p50": 0.4000000059604645,
+                "p95": 0.7000000178813934,
+                "p99": 0.9000000059604645,
+                "max": 1.4000000059604645
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 0.3358024688046656,
+                "p50": 0.30000001192092896,
+                "p95": 0.6000000238418579,
+                "p99": 0.9000000059604645,
+                "max": 2.0999999940395355
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.001851851864116182,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0.00020576130460809778,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.09999999403953552
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.005555555714991848,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.08209876501511154,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "tick": {
+                "count": 486,
+                "mean": 1.4730452676246195,
+                "p50": 1.300000011920929,
+                "p95": 2.4000000059604645,
+                "p99": 3.7000000178813934,
+                "max": 4.300000011920929
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 108,
+              "props": 153,
+              "active": 55,
+              "residentPeople": 48,
+              "activePeople": 36,
+              "cars": 8,
+              "activeCars": 7,
+              "carsWithNonzeroVelocity": 8,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "": 8
+              },
+              "views": [
+                {
+                  "minCx": 27,
+                  "minCy": 30,
+                  "maxCx": 29,
+                  "maxCy": 31
+                }
+              ],
+              "inputQueue": 0
+            },
+            "hz": 59.98317924981048,
+            "maxMovingPeople": 0,
+            "maxActive": 56
+          }
+        },
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 462,
+            "y": 492,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 108,
+            "props": 153,
+            "active": 56,
+            "residentPeople": 48,
+            "activePeople": 36,
+            "cars": 8,
+            "activeCars": 8,
+            "carsWithNonzeroVelocity": 8,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "": 8
+            },
+            "views": [
+              {
+                "minCx": 25,
+                "minCy": 28,
+                "maxCx": 32,
+                "maxCy": 33
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8003.000000011921,
+          "frames": {
+            "count": 480,
+            "mean": 16.666041666666665,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 0.6130977135438186,
+            "p50": 0.5999999940395355,
+            "p95": 0.800000011920929,
+            "p99": 1,
+            "max": 1.0999999940395355
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.4725571727058744,
+            "p50": 0.5,
+            "p95": 0.6000000238418579,
+            "p99": 0.7999999821186066,
+            "max": 1.0999999940395355
+          },
+          "ack": {
+            "count": 479,
+            "mean": 33.659081418541625,
+            "p50": 33.69999998807907,
+            "p95": 34.400000005960464,
+            "p99": 35.20000001788139,
+            "max": 35.80000001192093
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 96,
+          "gpuDelta": {
+            "drawCalls": 49668,
+            "frames": 483,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 10669440,
+            "meshDrawCalls": 0,
+            "meshDraws": 0
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.75,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.25,
+          "errors": [],
+          "terrain": {
+            "resident": 80,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 20971520
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.039197530674100416,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.11193415718804661,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.30000001192092896,
+                "max": 0.30000001192092896
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.027572016043918124,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.19999998807907104
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.018518518150588612,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.07716049425641205,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.3590534975744569,
+                "p50": 0.30000001192092896,
+                "p95": 0.5,
+                "p99": 0.6000000238418579,
+                "max": 0.7000000178813934
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 0.8843621396969376,
+                "p50": 0.9000000059604645,
+                "p95": 1.4000000059604645,
+                "p99": 1.7000000178813934,
+                "max": 2.5999999940395355
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.001028806523040489,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.09999999403953552
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.0053497942264187975,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.17572016560246426,
+                "p50": 0.19999998807907104,
+                "p95": 0.30000001192092896,
+                "p99": 0.30000001192092896,
+                "max": 0.4000000059604645
+              },
+              "tick": {
+                "count": 486,
+                "mean": 2.020987654787032,
+                "p50": 2,
+                "p95": 2.9000000059604645,
+                "p99": 3.300000011920929,
+                "max": 4
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 111,
+              "props": 153,
+              "active": 58,
+              "residentPeople": 48,
+              "activePeople": 36,
+              "cars": 11,
+              "activeCars": 10,
+              "carsWithNonzeroVelocity": 11,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "": 11
+              },
+              "views": [
+                {
+                  "minCx": 25,
+                  "minCy": 28,
+                  "maxCx": 32,
+                  "maxCy": 33
+                }
+              ],
+              "inputQueue": 1
+            },
+            "hz": 60.00544488034297,
+            "maxMovingPeople": 0,
+            "maxActive": 59
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22T02:10:04.499Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": true,
+      "deep": true,
+      "cpu": true,
+      "renderProfile": true,
+      "meshTargetReuse": false,
+      "seconds": 8,
+      "warmSeconds": 4,
+      "overviewZoom": 0.1,
+      "arrivalKind": "racetrack",
+      "probesSHA256": {
+        "city-audit.mjs": "c8a23b61c5b7c96b094625ee93be5df6b85e2d1d841751d6a8a9b5552a275f8f",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "track-deep",
+      "cases": [
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 462,
+            "y": 492,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 389,
+            "props": 961,
+            "active": 56,
+            "residentPeople": 56,
+            "activePeople": 36,
+            "cars": 8,
+            "activeCars": 8,
+            "carsWithNonzeroVelocity": 8,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "": 8
+            },
+            "views": [
+              {
+                "minCx": 19,
+                "minCy": 24,
+                "maxCx": 38,
+                "maxCy": 36
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8007.70000000596,
+          "frames": {
+            "count": 480,
+            "mean": 16.66583333333333,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 4.517463617476009,
+            "p50": 4.5,
+            "p95": 5,
+            "p99": 5.200000017881393,
+            "max": 5.5999999940395355
+          },
+          "update": {
+            "count": 481,
+            "mean": 1.1064449064201227,
+            "p50": 1.0999999940395355,
+            "p95": 1.2000000178813934,
+            "p99": 1.300000011920929,
+            "max": 1.4000000059604645
+          },
+          "ack": {
+            "count": 479,
+            "mean": 34.170772442240306,
+            "p50": 34.19999998807907,
+            "p95": 35.70000001788139,
+            "p99": 36.099999994039536,
+            "max": 36.20000001788139
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 389,
+          "gpuDelta": {
+            "drawCalls": 367655,
+            "frames": 484,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 97512448,
+            "meshDrawCalls": 27104,
+            "meshDraws": 3872
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.30000000000000004,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.1,
+          "errors": [],
+          "renderProfile": {
+            "totals": {
+              "beginFrame": {
+                "calls": 480,
+                "ms": 10.899999916553497
+              },
+              "pass:clear": {
+                "calls": 480,
+                "items": 0
+              },
+              "flush": {
+                "calls": 373535,
+                "ms": 663.8999995589256
+              },
+              "submit": {
+                "calls": 1440,
+                "ms": 1197.599999576807
+              },
+              "prepareTerrain": {
+                "calls": 480,
+                "ms": 50.50000038743019
+              },
+              "collectTerrain": {
+                "calls": 480,
+                "ms": 14.199999988079071
+              },
+              "pass:terrain": {
+                "calls": 480,
+                "items": 124800
+              },
+              "page": {
+                "calls": 751200,
+                "ms": 85.69999971985817
+              },
+              "collectElevationItems": {
+                "calls": 480,
+                "ms": 17.399999797344208
+              },
+              "pass:scene": {
+                "calls": 480,
+                "items": 506400
+              },
+              "mesh": {
+                "calls": 506400,
+                "ms": 163.10000085830688
+              },
+              "resize:outline": {
+                "calls": 3840,
+                "ms": 0.6000000238418579
+              }
+            },
+            "targetSizes": {},
+            "assets": {
+              "car-21-authored-v1": 960,
+              "car-24-authored-v1": 960,
+              "car-23-authored-v1": 480,
+              "car-26-authored-v1": 480,
+              "car-22-authored-v1": 480,
+              "car-25-authored-v1": 480
+            }
+          },
+          "terrain": {
+            "resident": 330,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 86507520
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 1010,
+                "mean": 0.07118811890630439,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.30000001192092896,
+                "max": 0.4000000059604645
+              },
+              "selection": {
+                "count": 505,
+                "mean": 0.0790099006478149,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "decision-selection": {
+                "count": 505,
+                "mean": 0.024554455280303956,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "prop-selection": {
+                "count": 505,
+                "mean": 0.06079207918431499,
+                "p50": 0.09999999403953552,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "ai": {
+                "count": 505,
+                "mean": 0.06495049572227025,
+                "p50": 0.09999999403953552,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "npc-physics": {
+                "count": 505,
+                "mean": 0.43544554421217135,
+                "p50": 0.4000000059604645,
+                "p95": 0.5,
+                "p99": 0.6000000238418579,
+                "max": 1
+              },
+              "traffic.choose": {
+                "count": 4040,
+                "mean": 0.00012376238361443622,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.10000002384185791
+              },
+              "traffic.blocked": {
+                "count": 152761,
+                "mean": 0.006046700405104219,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.30000001192092896
+              },
+              "traffic.reserve": {
+                "count": 868,
+                "mean": 0.03168202771843853,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "traffic": {
+                "count": 505,
+                "mean": 2.031485148644683,
+                "p50": 2,
+                "p95": 2.5,
+                "p99": 2.5999999940395355,
+                "max": 5.0999999940395355
+              },
+              "railway": {
+                "count": 505,
+                "mean": 0.002376237600156576,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 505,
+                "mean": 0.00039603958035459613,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.09999999403953552
+              },
+              "overlap": {
+                "count": 505,
+                "mean": 0.004356435856016556,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 505,
+                "mean": 0.6635643567189131,
+                "p50": 0.699999988079071,
+                "p95": 0.800000011920929,
+                "p99": 0.9000000059604645,
+                "max": 2.0999999940395355
+              },
+              "tick": {
+                "count": 505,
+                "mean": 4.072079207519494,
+                "p50": 3.899999976158142,
+                "p95": 4.5,
+                "p99": 4.899999976158142,
+                "max": 102.90000000596046
+              },
+              "traffic.populate": {
+                "count": 4,
+                "mean": 0.125,
+                "p50": 0.19999998807907104,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              }
+            },
+            "counts": {
+              "outside:prop-query": {
+                "calls": 3109,
+                "candidates": 70116,
+                "maxCandidates": 23
+              },
+              "outside:body-query": {
+                "calls": 3047,
+                "candidates": 70768,
+                "maxCandidates": 24
+              },
+              "outside:road-read": {
+                "calls": 521,
+                "candidates": 0,
+                "maxCandidates": 0,
+                "uniqueCellsThisTick": 505,
+                "repeatedCellsThisTick": 16
+              },
+              "outside:height-read": {
+                "calls": 3535,
+                "candidates": 0,
+                "maxCandidates": 0,
+                "uniqueCellsThisTick": 1467,
+                "repeatedCellsThisTick": 2068
+              },
+              "npc-physics:prop-query": {
+                "calls": 29023,
+                "candidates": 114404,
+                "maxCandidates": 9
+              },
+              "npc-physics:height-read": {
+                "calls": 101699,
+                "candidates": 0,
+                "maxCandidates": 0,
+                "uniqueCellsThisTick": 48782,
+                "repeatedCellsThisTick": 52917
+              },
+              "npc-physics:body-query": {
+                "calls": 29023,
+                "candidates": 130770,
+                "maxCandidates": 9
+              },
+              "traffic.blocked:road-read": {
+                "calls": 263943,
+                "candidates": 0,
+                "maxCandidates": 0,
+                "uniqueCellsThisTick": 263943
+              },
+              "traffic.blocked:height-read": {
+                "calls": 263943,
+                "candidates": 0,
+                "maxCandidates": 0,
+                "uniqueCellsThisTick": 263943
+              },
+              "traffic.blocked:prop-query": {
+                "calls": 152761,
+                "candidates": 100180,
+                "maxCandidates": 6
+              },
+              "traffic.blocked:body-query": {
+                "calls": 152761,
+                "candidates": 1723829,
+                "maxCandidates": 27
+              },
+              "replication:body-query": {
+                "calls": 505,
+                "candidates": 196445,
+                "maxCandidates": 389
+              }
+            },
+            "population": {
+              "resident": 389,
+              "props": 961,
+              "active": 56,
+              "residentPeople": 56,
+              "activePeople": 36,
+              "cars": 8,
+              "activeCars": 8,
+              "carsWithNonzeroVelocity": 8,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "": 8
+              },
+              "views": [
+                {
+                  "minCx": 19,
+                  "minCy": 24,
+                  "maxCx": 38,
+                  "maxCy": 36
+                }
+              ],
+              "inputQueue": 1
+            },
+            "hz": 59.9942876532752,
+            "maxMovingPeople": 0,
+            "maxActive": 56
+          },
+          "cpu": {
+            "intervalUs": 1000,
+            "samples": 5534,
+            "sampledMs": 8241.284,
+            "idleMs": 6475.082,
+            "activeMs": 1766.202,
+            "topSelf": [
+              {
+                "name": "owner.<computed>",
+                "source": "runtime",
+                "line": 20,
+                "sampledMs": 486.60699999999997
+              },
+              {
+                "name": "get",
+                "source": "src/persistence/ActorRecords.ts",
+                "line": 126,
+                "sampledMs": 137.313
+              },
+              {
+                "name": "queryRange",
+                "source": "src/entities/SpatialHash.ts",
+                "line": 103,
+                "sampledMs": 134.388
+              },
+              {
+                "name": "build",
+                "source": "src/server/RealmReplicator.ts",
+                "line": 37,
+                "sampledMs": 106.559
+              },
+              {
+                "name": "getEntityAABB",
+                "source": "src/entities/collision.ts",
+                "line": 7,
+                "sampledMs": 106.501
+              },
+              {
+                "name": "hasVehicleBed",
+                "source": "src/traffic/VehicleBed.ts",
+                "line": 180,
+                "sampledMs": 98.613
+              },
+              {
+                "name": "(program)",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 49.751
+              },
+              {
+                "name": "now",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 46.263000000000005
+              },
+              {
+                "name": "entitySnapshotMatches",
+                "source": "src/shared/serialization.ts",
+                "line": 72,
+                "sampledMs": 42.619
+              },
+              {
+                "name": "roofSupport",
+                "source": "src/traffic/RoofSupport.ts",
+                "line": 15,
+                "sampledMs": 41.37500000000001
+              },
+              {
+                "name": "blocked",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 312,
+                "sampledMs": 29.976
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/traffic/RoofSupport.ts",
+                "line": 18,
+                "sampledMs": 24.824
+              },
+              {
+                "name": "roadClear",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 227,
+                "sampledMs": 24.473
+              },
+              {
+                "name": "tick",
+                "source": "src/server/Realm.ts",
+                "line": 485,
+                "sampledMs": 22.623
+              },
+              {
+                "name": "demand",
+                "source": "src/server/InterestManager.ts",
+                "line": 34,
+                "sampledMs": 22.239
+              }
+            ],
+            "topInclusive": [
+              {
+                "name": "owner.<computed>",
+                "source": "runtime",
+                "line": 20,
+                "sampledMs": 2969.898000000001
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/server/ServerLoop.ts",
+                "line": 34,
+                "sampledMs": 1658.771
+              },
+              {
+                "name": "pump",
+                "source": "src/server/ServerLoop.ts",
+                "line": 36,
+                "sampledMs": 1655.779
+              },
+              {
+                "name": "server.tick",
+                "source": "runtime",
+                "line": 130,
+                "sampledMs": 1633.666
+              },
+              {
+                "name": "tick",
+                "source": "src/server/GameServer.ts",
+                "line": 472,
+                "sampledMs": 1630.661
+              },
+              {
+                "name": "tick",
+                "source": "src/server/Realm.ts",
+                "line": 485,
+                "sampledMs": 1591.535
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/server/GameServer.ts",
+                "line": 421,
+                "sampledMs": 1534.927
+              },
+              {
+                "name": "tick",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 444,
+                "sampledMs": 1096.753
+              },
+              {
+                "name": "blocked",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 312,
+                "sampledMs": 824.341
+              },
+              {
+                "name": "roadClear",
+                "source": "src/traffic/TrafficSystem.ts",
+                "line": 227,
+                "sampledMs": 210.19899999999998
+              },
+              {
+                "name": "replicate",
+                "source": "src/server/Realm.ts",
+                "line": 873,
+                "sampledMs": 190.821
+              },
+              {
+                "name": "queryRange",
+                "source": "src/entities/SpatialHash.ts",
+                "line": 103,
+                "sampledMs": 180.83100000000002
+              },
+              {
+                "name": "build",
+                "source": "src/server/RealmReplicator.ts",
+                "line": 37,
+                "sampledMs": 180.681
+              },
+              {
+                "name": "getEntityAABB",
+                "source": "src/entities/collision.ts",
+                "line": 7,
+                "sampledMs": 165.862
+              },
+              {
+                "name": "roofSupport",
+                "source": "src/traffic/RoofSupport.ts",
+                "line": 15,
+                "sampledMs": 164.681
+              },
+              {
+                "name": "get",
+                "source": "src/persistence/ActorRecords.ts",
+                "line": 126,
+                "sampledMs": 137.313
+              },
+              {
+                "name": "tickBallPhysics",
+                "source": "src/physics/BallPhysics.ts",
+                "line": 23,
+                "sampledMs": 104.639
+              },
+              {
+                "name": "hasVehicleBed",
+                "source": "src/traffic/VehicleBed.ts",
+                "line": 180,
+                "sampledMs": 98.613
+              },
+              {
+                "name": "updateVisibleChunks",
+                "source": "src/server/Realm.ts",
+                "line": 890,
+                "sampledMs": 68.878
+              },
+              {
+                "name": "entitySnapshotMatches",
+                "source": "src/shared/serialization.ts",
+                "line": 72,
+                "sampledMs": 59.411
+              }
+            ]
+          },
+          "mainCpu": {
+            "intervalUs": 1000,
+            "samples": 6573,
+            "sampledMs": 8427.701,
+            "idleMs": 5071.022,
+            "activeMs": 3356.679,
+            "topSelf": [
+              {
+                "name": "needsUpdate",
+                "source": "runtime",
+                "line": 42958,
+                "sampledMs": 702.3580000000001
+              },
+              {
+                "name": "(program)",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 416.156
+              },
+              {
+                "name": "depthAboveProps",
+                "source": "src/rendering/propDepth.ts",
+                "line": 96,
+                "sampledMs": 315.27
+              },
+              {
+                "name": "collectScene",
+                "source": "src/rendering/collectScene.ts",
+                "line": 38,
+                "sampledMs": 203.167
+              },
+              {
+                "name": "owner.<computed>",
+                "source": "runtime",
+                "line": 10,
+                "sampledMs": 165.606
+              },
+              {
+                "name": "WebGLRenderer.render",
+                "source": "runtime",
+                "line": 51996,
+                "sampledMs": 66.62700000000001
+              },
+              {
+                "name": "WebGLRenderer.renderBufferDirect",
+                "source": "runtime",
+                "line": 51786,
+                "sampledMs": 58.379999999999995
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/client/PredictionCollisionTimeline.ts",
+                "line": 44,
+                "sampledMs": 53.917
+              },
+              {
+                "name": "renderEntities",
+                "source": "src/scenes/renderWorld.ts",
+                "line": 29,
+                "sampledMs": 48.754000000000005
+              },
+              {
+                "name": "bufferSubData",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 37.662
+              },
+              {
+                "name": "now",
+                "source": "runtime",
+                "line": 0,
+                "sampledMs": 36.495000000000005
+              },
+              {
+                "name": "isPropBlocked",
+                "source": "src/physics/SimulationEnvironment.ts",
+                "line": 36,
+                "sampledMs": 33.926
+              },
+              {
+                "name": "record",
+                "source": "src/client/PredictionCollisionTimeline.ts",
+                "line": 16,
+                "sampledMs": 33.66
+              },
+              {
+                "name": "isBlocked",
+                "source": "src/physics/PlayerMovement.ts",
+                "line": 571,
+                "sampledMs": 31.915
+              },
+              {
+                "name": "(anonymous)",
+                "source": "src/client/RemotePresentation.ts",
+                "line": 61,
+                "sampledMs": 29.633
+              }
+            ],
+            "topInclusive": [
+              {
+                "name": "owner.<computed>",
+                "source": "runtime",
+                "line": 10,
+                "sampledMs": 2925.6639999999998
+              },
+              {
+                "name": "tick",
+                "source": "src/core/GameLoop.ts",
+                "line": 59,
+                "sampledMs": 2892.55
+              },
+              {
+                "name": "externalTick",
+                "source": "src/core/GameLoop.ts",
+                "line": 42,
+                "sampledMs": 2886.282
+              },
+              {
+                "name": "render",
+                "source": "src/core/SceneManager.ts",
+                "line": 70,
+                "sampledMs": 2353.2340000000004
+              },
+              {
+                "name": "render",
+                "source": "src/scenes/PlayScene.ts",
+                "line": 517,
+                "sampledMs": 2351.7240000000006
+              },
+              {
+                "name": "render",
+                "source": "src/client/GameClient.ts",
+                "line": 504,
+                "sampledMs": 2308.148
+              },
+              {
+                "name": "callbacks.render",
+                "source": "runtime",
+                "line": 47,
+                "sampledMs": 2287.368
+              },
+              {
+                "name": "renderEntities",
+                "source": "src/scenes/renderWorld.ts",
+                "line": 29,
+                "sampledMs": 1741.8190000000002
+              },
+              {
+                "name": "submit",
+                "source": "src/rendering/GpuRenderBackend.ts",
+                "line": 51,
+                "sampledMs": 1464.584
+              },
+              {
+                "name": "submit",
+                "source": "src/rendering/RasterRenderBackend.ts",
+                "line": 73,
+                "sampledMs": 1356.1340000000002
+              },
+              {
+                "name": "WebGLRenderer.render",
+                "source": "runtime",
+                "line": 51996,
+                "sampledMs": 1162.218
+              },
+              {
+                "name": "drawImage",
+                "source": "src/rendering/GpuRasterSurface.ts",
+                "line": 332,
+                "sampledMs": 1141.268
+              },
+              {
+                "name": "flush",
+                "source": "src/rendering/GpuRasterSurface.ts",
+                "line": 429,
+                "sampledMs": 1089.139
+              },
+              {
+                "name": "presentSurfaceScene",
+                "source": "src/rendering/presentSurfaceScene.ts",
+                "line": 52,
+                "sampledMs": 1034.257
+              },
+              {
+                "name": "drawScenePass2D",
+                "source": "src/rendering/Canvas2DRenderer.ts",
+                "line": 21,
+                "sampledMs": 1013.675
+              },
+              {
+                "name": "drawSceneEntry2D",
+                "source": "src/rendering/Canvas2DRenderer.ts",
+                "line": 38,
+                "sampledMs": 1011.348
+              },
+              {
+                "name": "quad",
+                "source": "src/rendering/GpuRasterSurface.ts",
+                "line": 412,
+                "sampledMs": 1011.112
+              },
+              {
+                "name": "renderScene",
+                "source": "runtime",
+                "line": 52125,
+                "sampledMs": 922.457
+              },
+              {
+                "name": "renderObjects",
+                "source": "runtime",
+                "line": 52200,
+                "sampledMs": 904.392
+              },
+              {
+                "name": "WebGLRenderer.renderBufferDirect",
+                "source": "runtime",
+                "line": 51786,
+                "sampledMs": 898.8020000000001
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22T02:10:55.864Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": true,
+      "deep": false,
+      "cpu": false,
+      "renderProfile": true,
+      "meshTargetReuse": false,
+      "seconds": 8,
+      "warmSeconds": 4,
+      "overviewZoom": 0.25,
+      "arrivalKind": "racetrack-center",
+      "probesSHA256": {
+        "city-audit.mjs": "a5b5bc2c2c978b7638e07025116d25829c026096fcda4b4a57771e77fcd8b39b",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "fleet-mesh",
+      "cases": [
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 462,
+            "y": 455,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 162,
+            "props": 186,
+            "active": 112,
+            "residentPeople": 48,
+            "activePeople": 48,
+            "cars": 56,
+            "activeCars": 56,
+            "carsWithNonzeroVelocity": 10,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "traffic": 3,
+              "": 8,
+              "parked": 45
+            },
+            "views": [
+              {
+                "minCx": 25,
+                "minCy": 26,
+                "maxCx": 32,
+                "maxCy": 30
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8002.900000017882,
+          "frames": {
+            "count": 480,
+            "mean": 16.66583333333334,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 2.147193347527926,
+            "p50": 2.100000023841858,
+            "p95": 2.300000011920929,
+            "p99": 2.5,
+            "max": 2.7999999821186066
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.519542618625625,
+            "p50": 0.5,
+            "p95": 0.6000000238418579,
+            "p99": 0.699999988079071,
+            "max": 0.7000000178813934
+          },
+          "ack": {
+            "count": 479,
+            "mean": 33.682254697933075,
+            "p50": 33.69999998807907,
+            "p95": 35.30000001192093,
+            "p99": 35.599999994039536,
+            "max": 35.70000001788139
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 146,
+          "gpuDelta": {
+            "drawCalls": 48783,
+            "frames": 483,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 6553344,
+            "meshDrawCalls": 223629,
+            "meshDraws": 25599
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.75,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.25,
+          "errors": [],
+          "fleet": {
+            "requested": 45,
+            "placed": [
+              "compact-1",
+              "compact-2",
+              "compact-3",
+              "compact-4",
+              "compact-5",
+              "compact-6",
+              "bus-1",
+              "bus-2",
+              "bus-3",
+              "bus-4",
+              "bus-5",
+              "bus-6",
+              "sedan-12",
+              "car-7",
+              "car-8",
+              "car-9",
+              "car-10",
+              "car-11",
+              "car-13",
+              "car-14",
+              "car-15",
+              "car-16",
+              "car-17",
+              "car-18",
+              "car-19",
+              "car-20",
+              "car-21",
+              "car-22",
+              "car-23",
+              "car-24",
+              "car-25",
+              "car-26",
+              "unindexed-sedan-red",
+              "unindexed-sedan-beige",
+              "unindexed-sedan-cyan",
+              "unindexed-sedan-orange",
+              "unindexed-sedan-silver",
+              "unindexed-sedan-olive",
+              "unindexed-sedan-dark",
+              "police-car",
+              "ambulance",
+              "garbage-truck-green",
+              "garbage-truck-orange",
+              "fire-truck-ladder-1",
+              "fire-truck-ladder-2"
+            ]
+          },
+          "renderProfile": {
+            "totals": {
+              "beginFrame": {
+                "calls": 480,
+                "ms": 7.199999749660492
+              },
+              "pass:clear": {
+                "calls": 480,
+                "items": 0
+              },
+              "flush": {
+                "calls": 77280,
+                "ms": 131.59999957680702
+              },
+              "submit": {
+                "calls": 1440,
+                "ms": 774.4000001847744
+              },
+              "prepareTerrain": {
+                "calls": 480,
+                "ms": 10.799999982118607
+              },
+              "collectTerrain": {
+                "calls": 480,
+                "ms": 3.299999952316284
+              },
+              "pass:terrain": {
+                "calls": 480,
+                "items": 19200
+              },
+              "page": {
+                "calls": 24960,
+                "ms": 4.500000178813934
+              },
+              "collectElevationItems": {
+                "calls": 480,
+                "ms": 3.200000047683716
+              },
+              "pass:scene": {
+                "calls": 480,
+                "items": 28800
+              },
+              "resize:outline": {
+                "calls": 25440,
+                "ms": 5.799999892711639
+              },
+              "mesh": {
+                "calls": 28800,
+                "ms": 679.7999997138977
+              },
+              "resize:body": {
+                "calls": 3466,
+                "ms": 5.900000035762787
+              }
+            },
+            "targetSizes": {
+              "body:128x128": 480,
+              "outline:128x128": 480,
+              "body:224x224": 1013,
+              "outline:224x224": 1013,
+              "body:160x160": 1013,
+              "outline:160x160": 1013,
+              "body:288x288": 480,
+              "outline:288x288": 480,
+              "body:384x384": 480,
+              "outline:384x384": 480
+            },
+            "assets": {
+              "car-21-authored-v1": 1440,
+              "car-24-authored-v1": 1440,
+              "compact-1-authored-v7": 480,
+              "compact-2-authored-v7": 480,
+              "compact-3-authored-v1": 480,
+              "compact-4-authored-v1": 480,
+              "compact-5-authored-v1": 480,
+              "compact-6-authored-v1": 480,
+              "bus-1-authored-v1": 480,
+              "bus-2-authored-v1": 480,
+              "bus-3-authored-v1": 480,
+              "bus-4-authored-v1": 480,
+              "bus-5-authored-v1": 480,
+              "bus-6-authored-v1": 480,
+              "sedan-12-authored-v1": 480,
+              "car-7-authored-v1": 480,
+              "car-8-authored-v1": 480,
+              "car-9-authored-v1": 480,
+              "car-10-authored-v1": 480,
+              "car-11-authored-v1": 480,
+              "car-13-authored-v1": 480,
+              "car-14-authored-v1": 480,
+              "car-15-authored-v1": 480,
+              "car-16-authored-v1": 480,
+              "car-17-authored-v1": 480,
+              "car-18-authored-v1": 480,
+              "car-19-authored-v1": 480,
+              "car-20-authored-v1": 480,
+              "car-22-authored-v1": 960,
+              "car-23-authored-v1": 960,
+              "car-25-authored-v1": 960,
+              "car-26-authored-v1": 960,
+              "unindexed-sedan-red-authored-v1": 480,
+              "unindexed-sedan-beige-authored-v1": 480,
+              "unindexed-sedan-cyan-authored-v1": 480,
+              "unindexed-sedan-orange-authored-v1": 480,
+              "unindexed-sedan-silver-authored-v1": 480,
+              "unindexed-sedan-olive-authored-v1": 480,
+              "unindexed-sedan-dark-authored-v1": 480,
+              "police-car-authored-v2": 480,
+              "ambulance-authored-v3": 480,
+              "garbage-truck-green-authored-v1": 480,
+              "garbage-truck-orange-authored-v1": 480,
+              "fire-truck-ladder-1-authored-v2": 480,
+              "fire-truck-ladder-2-authored-v1": 480
+            }
+          },
+          "terrain": {
+            "resident": 70,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 18350080
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.10483539150452909,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.11604938260567041,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.03621399126670979,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.019547324918915705,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.029012345605426364,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.4290123463535505,
+                "p50": 0.4000000059604645,
+                "p95": 0.5,
+                "p99": 0.5999999940395355,
+                "max": 0.6000000238418579
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 1.3580246908674516,
+                "p50": 1.4000000059604645,
+                "p95": 1.800000011920929,
+                "p99": 1.9000000059604645,
+                "max": 2
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.002674897143870224,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.006378601178710843,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.16851851804020965,
+                "p50": 0.19999998807907104,
+                "p95": 0.30000001192092896,
+                "p99": 0.30000001192092896,
+                "max": 0.30000001192092896
+              },
+              "tick": {
+                "count": 486,
+                "mean": 2.6372427982680593,
+                "p50": 2.699999988079071,
+                "p95": 3.100000023841858,
+                "p99": 3.2999999821186066,
+                "max": 3.5
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 163,
+              "props": 186,
+              "active": 113,
+              "residentPeople": 48,
+              "activePeople": 48,
+              "cars": 57,
+              "activeCars": 57,
+              "carsWithNonzeroVelocity": 7,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "traffic": 6,
+                "": 6,
+                "parked": 45
+              },
+              "views": [
+                {
+                  "minCx": 25,
+                  "minCy": 26,
+                  "maxCx": 32,
+                  "maxCy": 30
+                }
+              ],
+              "inputQueue": 1
+            },
+            "hz": 59.99727883636882,
+            "maxMovingPeople": 0,
+            "maxActive": 113
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22T02:11:20.119Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": false,
+      "deep": false,
+      "cpu": false,
+      "renderProfile": false,
+      "meshTargetReuse": false,
+      "seconds": 8,
+      "warmSeconds": 4,
+      "overviewZoom": 0.25,
+      "arrivalKind": "racetrack-center",
+      "probesSHA256": {
+        "city-audit.mjs": "a5b5bc2c2c978b7638e07025116d25829c026096fcda4b4a57771e77fcd8b39b",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "fleet-sprites",
+      "cases": [
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 462,
+            "y": 455,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 162,
+            "props": 186,
+            "active": 112,
+            "residentPeople": 48,
+            "activePeople": 48,
+            "cars": 56,
+            "activeCars": 56,
+            "carsWithNonzeroVelocity": 11,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "parked": 45,
+              "": 11
+            },
+            "views": [
+              {
+                "minCx": 25,
+                "minCy": 26,
+                "maxCx": 32,
+                "maxCy": 30
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8001.700000011921,
+          "frames": {
+            "count": 480,
+            "mean": 16.666041666666665,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 0.8241164250582023,
+            "p50": 0.800000011920929,
+            "p95": 1.0999999940395355,
+            "p99": 1.2000000178813934,
+            "max": 1.2999999821186066
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.5282744275185274,
+            "p50": 0.5,
+            "p95": 0.699999988079071,
+            "p99": 0.7000000178813934,
+            "max": 0.9000000059604645
+          },
+          "ack": {
+            "count": 479,
+            "mean": 33.71002087644097,
+            "p50": 33.69999998807907,
+            "p95": 35.30000001192093,
+            "p99": 35.599999994039536,
+            "max": 35.70000001788139
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 146,
+          "gpuDelta": {
+            "drawCalls": 48627,
+            "frames": 483,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 6553344,
+            "meshDrawCalls": 0,
+            "meshDraws": 0
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.75,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.25,
+          "errors": [],
+          "fleet": {
+            "requested": 45,
+            "placed": [
+              "compact-1",
+              "compact-2",
+              "compact-3",
+              "compact-4",
+              "compact-5",
+              "compact-6",
+              "bus-1",
+              "bus-2",
+              "bus-3",
+              "bus-4",
+              "bus-5",
+              "bus-6",
+              "sedan-12",
+              "car-7",
+              "car-8",
+              "car-9",
+              "car-10",
+              "car-11",
+              "car-13",
+              "car-14",
+              "car-15",
+              "car-16",
+              "car-17",
+              "car-18",
+              "car-19",
+              "car-20",
+              "car-21",
+              "car-22",
+              "car-23",
+              "car-24",
+              "car-25",
+              "car-26",
+              "unindexed-sedan-red",
+              "unindexed-sedan-beige",
+              "unindexed-sedan-cyan",
+              "unindexed-sedan-orange",
+              "unindexed-sedan-silver",
+              "unindexed-sedan-olive",
+              "unindexed-sedan-dark",
+              "police-car",
+              "ambulance",
+              "garbage-truck-green",
+              "garbage-truck-orange",
+              "fire-truck-ladder-1",
+              "fire-truck-ladder-2"
+            ]
+          },
+          "terrain": {
+            "resident": 70,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 18350080
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.10030864200596946,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.14135802466682937,
+                "p50": 0.10000002384185791,
+                "p95": 0.20000001788139343,
+                "p99": 0.30000001192092896,
+                "max": 0.30000001192092896
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.0409465020698775,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.02057613174856445,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.033127571942874925,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.48333333322295435,
+                "p50": 0.5,
+                "p95": 0.699999988079071,
+                "p99": 0.7000000178813934,
+                "max": 0.7999999821186066
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 1.5121399178917025,
+                "p50": 1.5,
+                "p95": 2.399999976158142,
+                "p99": 2.600000023841858,
+                "max": 3
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.001851851925437833,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0.00041152260921619555,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.09999999403953552
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.006790123419997133,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.19320987698472578,
+                "p50": 0.19999998807907104,
+                "p95": 0.30000001192092896,
+                "p99": 0.3999999761581421,
+                "max": 0.4000000059604645
+              },
+              "tick": {
+                "count": 486,
+                "mean": 2.914814814557264,
+                "p50": 2.9000000059604645,
+                "p95": 4,
+                "p99": 4.300000011920929,
+                "max": 4.600000023841858
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 163,
+              "props": 186,
+              "active": 113,
+              "residentPeople": 48,
+              "activePeople": 48,
+              "cars": 57,
+              "activeCars": 57,
+              "carsWithNonzeroVelocity": 9,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "parked": 45,
+                "traffic": 4,
+                "": 8
+              },
+              "views": [
+                {
+                  "minCx": 25,
+                  "minCy": 26,
+                  "maxCx": 32,
+                  "maxCy": 30
+                }
+              ],
+              "inputQueue": 0
+            },
+            "hz": 59.99134145587235,
+            "maxMovingPeople": 0,
+            "maxActive": 113
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22T02:11:51.770Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": true,
+      "deep": false,
+      "cpu": false,
+      "renderProfile": false,
+      "meshTargetReuse": true,
+      "seconds": 8,
+      "warmSeconds": 4,
+      "overviewZoom": 0.25,
+      "arrivalKind": "racetrack-center",
+      "probesSHA256": {
+        "city-audit.mjs": "a5b5bc2c2c978b7638e07025116d25829c026096fcda4b4a57771e77fcd8b39b",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "fleet-reuse",
+      "cases": [
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 462,
+            "y": 455,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 162,
+            "props": 186,
+            "active": 112,
+            "residentPeople": 48,
+            "activePeople": 48,
+            "cars": 56,
+            "activeCars": 56,
+            "carsWithNonzeroVelocity": 11,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "parked": 45,
+              "": 11
+            },
+            "views": [
+              {
+                "minCx": 25,
+                "minCy": 26,
+                "maxCx": 32,
+                "maxCy": 30
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8002.899999994039,
+          "frames": {
+            "count": 480,
+            "mean": 16.66604166666667,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 1.9403326400476286,
+            "p50": 1.9000000059604645,
+            "p95": 2.100000023841858,
+            "p99": 2.2000000178813934,
+            "max": 2.4000000059604645
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.5195426191212977,
+            "p50": 0.5,
+            "p95": 0.6000000238418579,
+            "p99": 0.7000000178813934,
+            "max": 0.800000011920929
+          },
+          "ack": {
+            "count": 479,
+            "mean": 33.69248434235507,
+            "p50": 33.69999998807907,
+            "p95": 35.400000005960464,
+            "p99": 35.69999998807907,
+            "max": 35.900000005960464
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 146,
+          "gpuDelta": {
+            "drawCalls": 48783,
+            "frames": 483,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 6553344,
+            "meshDrawCalls": 223629,
+            "meshDraws": 25599
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.75,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.25,
+          "errors": [],
+          "fleet": {
+            "requested": 45,
+            "placed": [
+              "compact-1",
+              "compact-2",
+              "compact-3",
+              "compact-4",
+              "compact-5",
+              "compact-6",
+              "bus-1",
+              "bus-2",
+              "bus-3",
+              "bus-4",
+              "bus-5",
+              "bus-6",
+              "sedan-12",
+              "car-7",
+              "car-8",
+              "car-9",
+              "car-10",
+              "car-11",
+              "car-13",
+              "car-14",
+              "car-15",
+              "car-16",
+              "car-17",
+              "car-18",
+              "car-19",
+              "car-20",
+              "car-21",
+              "car-22",
+              "car-23",
+              "car-24",
+              "car-25",
+              "car-26",
+              "unindexed-sedan-red",
+              "unindexed-sedan-beige",
+              "unindexed-sedan-cyan",
+              "unindexed-sedan-orange",
+              "unindexed-sedan-silver",
+              "unindexed-sedan-olive",
+              "unindexed-sedan-dark",
+              "police-car",
+              "ambulance",
+              "garbage-truck-green",
+              "garbage-truck-orange",
+              "fire-truck-ladder-1",
+              "fire-truck-ladder-2"
+            ]
+          },
+          "meshTargetReuse": {
+            "sizes": [128, 160, 224, 288, 384],
+            "bytes": 3870720
+          },
+          "terrain": {
+            "resident": 70,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 18350080
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.10390946535784522,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.1339506176396162,
+                "p50": 0.10000002384185791,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.29999998211860657
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.03374485579537757,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.01872428012973487,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.19999998807907104
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.034567901136453257,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.10000002384185791,
+                "max": 0.19999998807907104
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.428395061949153,
+                "p50": 0.4000000059604645,
+                "p95": 0.5,
+                "p99": 0.5999999940395355,
+                "max": 0.6000000238418579
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 1.319341563148263,
+                "p50": 1.399999976158142,
+                "p95": 1.800000011920929,
+                "p99": 1.9000000059604645,
+                "max": 2
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.002674897021226922,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0.00041152260921619555,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.09999999403953552
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.006995884785926882,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.1358024685839076,
+                "p50": 0.10000002384185791,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "tick": {
+                "count": 486,
+                "mean": 2.5874485589962437,
+                "p50": 2.699999988079071,
+                "p95": 3.199999988079071,
+                "p99": 3.300000011920929,
+                "max": 3.4000000059604645
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 163,
+              "props": 186,
+              "active": 113,
+              "residentPeople": 48,
+              "activePeople": 48,
+              "cars": 57,
+              "activeCars": 57,
+              "carsWithNonzeroVelocity": 8,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "parked": 45,
+                "traffic": 5,
+                "": 7
+              },
+              "views": [
+                {
+                  "minCx": 25,
+                  "minCy": 26,
+                  "maxCx": 32,
+                  "maxCy": 30
+                }
+              ],
+              "inputQueue": 1
+            },
+            "hz": 59.98837230054061,
+            "maxMovingPeople": 0,
+            "maxActive": 113
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22T02:12:15.752Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": true,
+      "deep": false,
+      "cpu": false,
+      "renderProfile": false,
+      "meshTargetReuse": false,
+      "seconds": 8,
+      "warmSeconds": 4,
+      "overviewZoom": 0.25,
+      "arrivalKind": "racetrack-center",
+      "probesSHA256": {
+        "city-audit.mjs": "a5b5bc2c2c978b7638e07025116d25829c026096fcda4b4a57771e77fcd8b39b",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "fleet-mesh-repeat",
+      "cases": [
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 462,
+            "y": 455,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 162,
+            "props": 186,
+            "active": 112,
+            "residentPeople": 48,
+            "activePeople": 48,
+            "cars": 56,
+            "activeCars": 56,
+            "carsWithNonzeroVelocity": 11,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "parked": 45,
+              "": 11
+            },
+            "views": [
+              {
+                "minCx": 25,
+                "minCy": 26,
+                "maxCx": 32,
+                "maxCy": 30
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8004.5,
+          "frames": {
+            "count": 480,
+            "mean": 16.66604166666667,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 2.087110185883397,
+            "p50": 2.0999999940395355,
+            "p95": 2.2999999821186066,
+            "p99": 2.300000011920929,
+            "max": 2.4000000059604645
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.5397089395726297,
+            "p50": 0.5,
+            "p95": 0.6000000238418579,
+            "p99": 0.7000000178813934,
+            "max": 0.7000000178813934
+          },
+          "ack": {
+            "count": 479,
+            "mean": 33.702505220388815,
+            "p50": 33.70000001788139,
+            "p95": 35,
+            "p99": 35.5,
+            "max": 35.70000001788139
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 146,
+          "gpuDelta": {
+            "drawCalls": 48783,
+            "frames": 483,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 6553344,
+            "meshDrawCalls": 223629,
+            "meshDraws": 25599
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.75,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.25,
+          "errors": [],
+          "fleet": {
+            "requested": 45,
+            "placed": [
+              "compact-1",
+              "compact-2",
+              "compact-3",
+              "compact-4",
+              "compact-5",
+              "compact-6",
+              "bus-1",
+              "bus-2",
+              "bus-3",
+              "bus-4",
+              "bus-5",
+              "bus-6",
+              "sedan-12",
+              "car-7",
+              "car-8",
+              "car-9",
+              "car-10",
+              "car-11",
+              "car-13",
+              "car-14",
+              "car-15",
+              "car-16",
+              "car-17",
+              "car-18",
+              "car-19",
+              "car-20",
+              "car-21",
+              "car-22",
+              "car-23",
+              "car-24",
+              "car-25",
+              "car-26",
+              "unindexed-sedan-red",
+              "unindexed-sedan-beige",
+              "unindexed-sedan-cyan",
+              "unindexed-sedan-orange",
+              "unindexed-sedan-silver",
+              "unindexed-sedan-olive",
+              "unindexed-sedan-dark",
+              "police-car",
+              "ambulance",
+              "garbage-truck-green",
+              "garbage-truck-orange",
+              "fire-truck-ladder-1",
+              "fire-truck-ladder-2"
+            ]
+          },
+          "terrain": {
+            "resident": 70,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 18350080
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.10462962888150548,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.12798354017391125,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.5
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.04115226398770211,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.017283950690869933,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.19999998807907104
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.032510287661120726,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.4456790122107714,
+                "p50": 0.4000000059604645,
+                "p95": 0.5,
+                "p99": 0.5999999940395355,
+                "max": 0.7999999821186066
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 1.4232510283528041,
+                "p50": 1.4000000059604645,
+                "p95": 2.0999999940395355,
+                "p99": 2.300000011920929,
+                "max": 2.4000000059604645
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.0024691358392621263,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0.00020576130460809778,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.09999999403953552
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.00905349789332951,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.16728395021256107,
+                "p50": 0.19999998807907104,
+                "p95": 0.30000001192092896,
+                "p99": 0.30000001192092896,
+                "max": 0.800000011920929
+              },
+              "tick": {
+                "count": 486,
+                "mean": 2.7553497934292372,
+                "p50": 2.7000000178813934,
+                "p95": 3.4000000059604645,
+                "p99": 3.699999988079071,
+                "max": 4.199999988079071
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 163,
+              "props": 186,
+              "active": 113,
+              "residentPeople": 48,
+              "activePeople": 48,
+              "cars": 57,
+              "activeCars": 57,
+              "carsWithNonzeroVelocity": 8,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "parked": 45,
+                "traffic": 5,
+                "": 7
+              },
+              "views": [
+                {
+                  "minCx": 25,
+                  "minCy": 26,
+                  "maxCx": 32,
+                  "maxCy": 30
+                }
+              ],
+              "inputQueue": 1
+            },
+            "hz": 59.99801995903043,
+            "maxMovingPeople": 0,
+            "maxActive": 113
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22T02:12:42.885Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": true,
+      "deep": false,
+      "cpu": false,
+      "renderProfile": false,
+      "meshTargetReuse": false,
+      "seconds": 8,
+      "warmSeconds": 4,
+      "overviewZoom": 0.1,
+      "arrivalKind": "core",
+      "probesSHA256": {
+        "city-audit.mjs": "ebc51fe7593ce940690c89601ffc2980bed63f26013759e65ba1a4eaac8095bb",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "city-control",
+      "cases": [
+        {
+          "stage": "standing",
+          "arrival": {
+            "x": 300,
+            "y": 449,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 33,
+            "props": 40,
+            "active": 26,
+            "residentPeople": 17,
+            "activePeople": 13,
+            "cars": 12,
+            "activeCars": 12,
+            "carsWithNonzeroVelocity": 12,
+            "movingPeople": 13,
+            "trafficWaiting": {
+              "": 12
+            },
+            "views": [
+              {
+                "minCx": 17,
+                "minCy": 27,
+                "maxCx": 19,
+                "maxCy": 28
+              }
+            ],
+            "inputQueue": 0
+          },
+          "elapsedMs": 8002.19999999404,
+          "frames": {
+            "count": 480,
+            "mean": 16.66604166666667,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 0.44449064494914176,
+            "p50": 0.4000000059604645,
+            "p95": 0.699999988079071,
+            "p99": 1.199999988079071,
+            "max": 1.5999999940395355
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.29438669387862987,
+            "p50": 0.29999998211860657,
+            "p95": 0.4000000059604645,
+            "p99": 0.699999988079071,
+            "max": 1
+          },
+          "ack": {
+            "count": 479,
+            "mean": 33.51002087666495,
+            "p50": 33.5,
+            "p95": 33.70000001788139,
+            "p99": 34.10000002384186,
+            "max": 34.599999994039536
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 16,
+          "gpuDelta": {
+            "drawCalls": 10894,
+            "frames": 483,
+            "uploadedBytes": 688128,
+            "vertexUploadedBytes": 17635968,
+            "meshDrawCalls": 2863,
+            "meshDraws": 409
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 3,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 1,
+          "errors": [],
+          "terrain": {
+            "resident": 20,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 970,
+                "mean": 0.02556701010649966,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.19999998807907104
+              },
+              "selection": {
+                "count": 485,
+                "mean": 0.05690721549938634,
+                "p50": 0.09999999403953552,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "decision-selection": {
+                "count": 485,
+                "mean": 0.015257731971052504,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "prop-selection": {
+                "count": 485,
+                "mean": 0.013814432842215311,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "ai": {
+                "count": 485,
+                "mean": 0.0529896904512779,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.29999998211860657
+              },
+              "npc-physics": {
+                "count": 485,
+                "mean": 0.11896907336933096,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.4000000059604645,
+                "max": 0.8999999761581421
+              },
+              "traffic": {
+                "count": 485,
+                "mean": 0.30103092740491494,
+                "p50": 0.29999998211860657,
+                "p95": 0.5,
+                "p99": 0.800000011920929,
+                "max": 1.199999988079071
+              },
+              "railway": {
+                "count": 485,
+                "mean": 0.0012371134512203256,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 485,
+                "mean": 0.0006185566641620754,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.09999999403953552
+              },
+              "overlap": {
+                "count": 485,
+                "mean": 0.004123711278758099,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 485,
+                "mean": 0.06082474275962594,
+                "p50": 0.09999999403953552,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "tick": {
+                "count": 485,
+                "mean": 0.8802061845961305,
+                "p50": 0.800000011920929,
+                "p95": 1.4000000059604645,
+                "p99": 2,
+                "max": 3.5
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 33,
+              "props": 40,
+              "active": 26,
+              "residentPeople": 17,
+              "activePeople": 13,
+              "cars": 12,
+              "activeCars": 12,
+              "carsWithNonzeroVelocity": 9,
+              "movingPeople": 13,
+              "trafficWaiting": {
+                "": 9,
+                "junction": 3
+              },
+              "views": [
+                {
+                  "minCx": 17,
+                  "minCy": 27,
+                  "maxCx": 19,
+                  "maxCy": 28
+                }
+              ],
+              "inputQueue": 0
+            },
+            "hz": 59.99380229315153,
+            "maxMovingPeople": 13,
+            "maxActive": 26
+          }
+        },
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 300,
+            "y": 449,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 180,
+            "props": 272,
+            "active": 19,
+            "residentPeople": 54,
+            "activePeople": 13,
+            "cars": 27,
+            "activeCars": 5,
+            "carsWithNonzeroVelocity": 5,
+            "movingPeople": 13,
+            "trafficWaiting": {
+              "": 5,
+              "starting": 22
+            },
+            "views": [
+              {
+                "minCx": 9,
+                "minCy": 22,
+                "maxCx": 28,
+                "maxCy": 33
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 8003.89999998808,
+          "frames": {
+            "count": 480,
+            "mean": 16.66604166666667,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 481,
+            "mean": 2.1993762989549777,
+            "p50": 2.199999988079071,
+            "p95": 2.4000000059604645,
+            "p99": 2.5999999940395355,
+            "max": 2.9000000059604645
+          },
+          "update": {
+            "count": 481,
+            "mean": 0.6355509360218247,
+            "p50": 0.6000000238418579,
+            "p95": 0.7000000178813934,
+            "p99": 0.800000011920929,
+            "max": 1.199999988079071
+          },
+          "ack": {
+            "count": 479,
+            "mean": 33.78956158704947,
+            "p50": 33.80000001192093,
+            "p95": 34,
+            "p99": 34.400000005960464,
+            "max": 34.69999998807907
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 180,
+          "gpuDelta": {
+            "drawCalls": 225561,
+            "frames": 483,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 45378816,
+            "meshDrawCalls": 119784,
+            "meshDraws": 13041
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.30000000000000004,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.1,
+          "errors": [],
+          "terrain": {
+            "resident": 308,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 80740352
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 972,
+                "mean": 0.05308642008422333,
+                "p50": 0.09999999403953552,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "selection": {
+                "count": 486,
+                "mean": 0.05658436232388265,
+                "p50": 0.09999999403953552,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.20000001788139343
+              },
+              "decision-selection": {
+                "count": 486,
+                "mean": 0.013374485412742866,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "prop-selection": {
+                "count": 486,
+                "mean": 0.02489711908401285,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "ai": {
+                "count": 486,
+                "mean": 0.05493827145776631,
+                "p50": 0.09999999403953552,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.20000001788139343
+              },
+              "npc-physics": {
+                "count": 486,
+                "mean": 0.13477366169293722,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.29999998211860657,
+                "max": 0.30000001192092896
+              },
+              "traffic": {
+                "count": 486,
+                "mean": 0.17469135895678045,
+                "p50": 0.19999998807907104,
+                "p95": 0.30000001192092896,
+                "p99": 0.3999999761581421,
+                "max": 0.6000000238418579
+              },
+              "railway": {
+                "count": 486,
+                "mean": 0.0012345679502918888,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 486,
+                "mean": 0.0008230452797540421,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.10000002384185791
+              },
+              "overlap": {
+                "count": 486,
+                "mean": 0.0030864197530864196,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 486,
+                "mean": 0.4028806582767777,
+                "p50": 0.4000000059604645,
+                "p95": 0.5,
+                "p99": 0.5,
+                "max": 0.5999999940395355
+              },
+              "tick": {
+                "count": 486,
+                "mean": 1.205555556978218,
+                "p50": 1.199999988079071,
+                "p95": 1.4000000059604645,
+                "p99": 1.5,
+                "max": 1.800000011920929
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 180,
+              "props": 272,
+              "active": 19,
+              "residentPeople": 54,
+              "activePeople": 13,
+              "cars": 27,
+              "activeCars": 5,
+              "carsWithNonzeroVelocity": 5,
+              "movingPeople": 13,
+              "trafficWaiting": {
+                "": 5,
+                "starting": 22
+              },
+              "views": [
+                {
+                  "minCx": 9,
+                  "minCy": 22,
+                  "maxCx": 28,
+                  "maxCy": 33
+                }
+              ],
+              "inputQueue": 0
+            },
+            "hz": 60.002474328838304,
+            "maxMovingPeople": 13,
+            "maxActive": 19
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22T02:13:28.996Z",
+      "source": "e1884392fac54350af8cd74ba4dcccdbda3e59e0",
+      "browser": "153.0.8010.12",
+      "renderer": "gpu",
+      "meshes": true,
+      "deep": false,
+      "cpu": false,
+      "renderProfile": false,
+      "meshTargetReuse": false,
+      "seconds": 20,
+      "warmSeconds": 12,
+      "overviewZoom": 0.1,
+      "arrivalKind": "racetrack",
+      "probesSHA256": {
+        "city-audit.mjs": "ebc51fe7593ce940690c89601ffc2980bed63f26013759e65ba1a4eaac8095bb",
+        "city-audit-profile.mjs": "69be157a2d02c6404fec0a9975c00a6cb58cbeead4b9d86caab11c156c87289c",
+        "worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+      },
+      "sourcesSHA256": {
+        "src/server/Realm.ts": "7c997ace6949e104a67503e1475b0d8d9c28f854f16599c8d327f6dc896a61c2",
+        "src/server/RealmActivity.ts": "d102be884651b52760230541489d02b4617203fbad0acecd828c6781870936f8",
+        "src/entities/EntityManager.ts": "9e6728b0259df376860b69789ad98f9eef19439f3a76f361c4c7f871a8b6d190",
+        "src/traffic/TrafficSystem.ts": "6dc528621144ce3b2736fd57435571b8c0fc1b3351d86b6209be1d3aee10c35b",
+        "src/traffic/MovingSupport.ts": "256d2526308ca16694304215ccfd2bcd50f471ee904e764e3416530c6014f9be",
+        "src/traffic/Driving.ts": "617933253e16fc125ea95edb4fda2af476084d693717c000f77fafea0bc95972",
+        "src/traffic/DrivingQueries.ts": "4c9d7d83a0d4cd6d3979d6c8e50aebbe978363a0be794b3d7495e6f062029716",
+        "src/client/PlayerPredictor.ts": "89f7299189cd2fdc2a84166a8ba9fa71cab74072675e2e461f0bbe44ff6e4d8e",
+        "src/client/ClientStateView.ts": "248c5a213c412196df1126ff0a2dddac1f18d5a534f5e8b03b301644669e1e32",
+        "src/rendering/GpuMeshBodies.ts": "c8cd780f7263df23cba90e58adb5c4ea26c8cf8ef5e644dc3d8d45a47d22b6d9",
+        "src/rendering/CarMeshAsset.ts": "a6b36169b2962132c5d9eddec1afb5d704f7c996b84d68754ad81804d1149e8a",
+        "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+        "src/rendering/AuthoredVehicleMeshes.ts": "08da418152de1f03ecdb4b4dc6884b7fefb9de4f2d09f27a7e4721791528a14e",
+        "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+        "src/rendering/GpuRasterSurface.ts": "0fd9178f505bc79b1fb496e7ec499000ff24bd957dad21d67e203e7fd02917db",
+        "src/rendering/GpuRenderBackend.ts": "dc384c7c25274e13ee1b535d1e891f523d17fc84823d9741939f9eebff0781fe",
+        "src/rendering/RasterRenderBackend.ts": "e95c4bfa2a985bbbd3437a18d59d3afa034c4264f9f802d87d7997cc55205dbe",
+        "src/rendering/collectScene.ts": "d53433bdfae036cd49e0d4503a8633986556ebcee43c5a901e9f649856bf38d8",
+        "src/scenarios/NaturalLandscapeRecipe.ts": "4cac33a8d1d70938efac718676db5c4eba66f04e56ea4ababe381099b7d50768",
+        "src/generation/regional/DenseDistrictPlanner.ts": "1f1f011c8b9f16f56151e955ec5f3cea897b3ed8e73e1aa1424e56ca7f7b3e28"
+      },
+      "name": "track-long",
+      "cases": [
+        {
+          "stage": "standing",
+          "arrival": {
+            "x": 462,
+            "y": 492,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 110,
+            "props": 153,
+            "active": 57,
+            "residentPeople": 48,
+            "activePeople": 36,
+            "cars": 10,
+            "activeCars": 9,
+            "carsWithNonzeroVelocity": 10,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "": 10
+            },
+            "views": [
+              {
+                "minCx": 27,
+                "minCy": 30,
+                "maxCx": 29,
+                "maxCy": 31
+              }
+            ],
+            "inputQueue": 1
+          },
+          "elapsedMs": 20001.700000011922,
+          "frames": {
+            "count": 1200,
+            "mean": 16.666083333333336,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999995634,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 1201,
+            "mean": 0.47910074980233136,
+            "p50": 0.4000000059604645,
+            "p95": 0.9000000059604645,
+            "p99": 1.5,
+            "max": 2
+          },
+          "update": {
+            "count": 1201,
+            "mean": 0.3775187341696416,
+            "p50": 0.30000001192092896,
+            "p95": 0.7000000178813934,
+            "p99": 1.0999999940395355,
+            "max": 1.300000011920929
+          },
+          "ack": {
+            "count": 1199,
+            "mean": 33.58598832337433,
+            "p50": 33.599999994039536,
+            "p95": 34,
+            "p99": 34.599999994039536,
+            "max": 36.10000002384186
+          },
+          "maxReplay": 1,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 38,
+          "gpuDelta": {
+            "drawCalls": 39032,
+            "frames": 1203,
+            "uploadedBytes": 1376256,
+            "vertexUploadedBytes": 18066048,
+            "meshDrawCalls": 2716,
+            "meshDraws": 388
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 3,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 1,
+          "errors": [],
+          "terrain": {
+            "resident": 20,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 2414,
+                "mean": 0.039188069431072635,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.20000001788139343,
+                "max": 0.4000000059604645
+              },
+              "selection": {
+                "count": 1207,
+                "mean": 0.11019055462614405,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.5,
+                "max": 2.199999988079071
+              },
+              "decision-selection": {
+                "count": 1207,
+                "mean": 0.027671913840895165,
+                "p50": 0,
+                "p95": 0.10000002384185791,
+                "p99": 0.19999998807907104,
+                "max": 0.4000000059604645
+              },
+              "prop-selection": {
+                "count": 1207,
+                "mean": 0.01375310701976261,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.20000001788139343
+              },
+              "ai": {
+                "count": 1207,
+                "mean": 0.07903893984539408,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.30000001192092896,
+                "max": 0.7999999821186066
+              },
+              "npc-physics": {
+                "count": 1207,
+                "mean": 0.4148301574545847,
+                "p50": 0.3999999761581421,
+                "p95": 0.7000000178813934,
+                "p99": 1.199999988079071,
+                "max": 1.9000000059604645
+              },
+              "traffic": {
+                "count": 1207,
+                "mean": 0.9405965204315928,
+                "p50": 0.7999999821186066,
+                "p95": 2,
+                "p99": 2.5,
+                "max": 3
+              },
+              "railway": {
+                "count": 1207,
+                "mean": 0.001822700901473961,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "tags": {
+                "count": 1207,
+                "mean": 0.00041425020712510354,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.10000002384185791
+              },
+              "overlap": {
+                "count": 1207,
+                "mean": 0.006462303191645638,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 1207,
+                "mean": 0.08376139165353656,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "tick": {
+                "count": 1207,
+                "mean": 2.0424192209281307,
+                "p50": 1.699999988079071,
+                "p95": 4,
+                "p99": 5,
+                "max": 6.5999999940395355
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 110,
+              "props": 153,
+              "active": 55,
+              "residentPeople": 48,
+              "activePeople": 36,
+              "cars": 10,
+              "activeCars": 7,
+              "carsWithNonzeroVelocity": 8,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "": 8,
+                "junction": 2
+              },
+              "views": [
+                {
+                  "minCx": 27,
+                  "minCy": 30,
+                  "maxCx": 29,
+                  "maxCy": 31
+                }
+              ],
+              "inputQueue": 1
+            },
+            "hz": 60.00208947924607,
+            "maxMovingPeople": 24,
+            "maxActive": 57
+          }
+        },
+        {
+          "stage": "overview",
+          "arrival": {
+            "x": 462,
+            "y": 492,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v13",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "begin": {
+            "resident": 389,
+            "props": 961,
+            "active": 56,
+            "residentPeople": 56,
+            "activePeople": 36,
+            "cars": 8,
+            "activeCars": 8,
+            "carsWithNonzeroVelocity": 8,
+            "movingPeople": 0,
+            "trafficWaiting": {
+              "": 8
+            },
+            "views": [
+              {
+                "minCx": 19,
+                "minCy": 24,
+                "maxCx": 38,
+                "maxCy": 36
+              }
+            ],
+            "inputQueue": 0
+          },
+          "elapsedMs": 20005.800000005962,
+          "frames": {
+            "count": 1200,
+            "mean": 16.666000000000004,
+            "p50": 16.69999999999709,
+            "p95": 16.700000000004366,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "framesOver25": 0,
+          "render": {
+            "count": 1201,
+            "mean": 3.5339716900447127,
+            "p50": 3.5,
+            "p95": 3.9000000059604645,
+            "p99": 4.100000023841858,
+            "max": 4.4000000059604645
+          },
+          "update": {
+            "count": 1201,
+            "mean": 1.0343880094804931,
+            "p50": 1,
+            "p95": 1.2000000178813934,
+            "p99": 1.399999976158142,
+            "max": 1.9000000059604645
+          },
+          "ack": {
+            "count": 1198,
+            "mean": 34.113939899733545,
+            "p50": 34.099999994039536,
+            "p95": 34.69999998807907,
+            "p99": 34.900000005960464,
+            "max": 35.5
+          },
+          "maxReplay": 2,
+          "maxResim": 0,
+          "maxTravel": 0,
+          "replicated": 389,
+          "gpuDelta": {
+            "drawCalls": 913008,
+            "frames": 1203,
+            "uploadedBytes": 0,
+            "vertexUploadedBytes": 242370816,
+            "meshDrawCalls": 67368,
+            "meshDraws": 9624
+          },
+          "canvas": {
+            "width": 1440,
+            "height": 900
+          },
+          "camera": {
+            "scale": 0.30000000000000004,
+            "viewportWidth": 1440,
+            "viewportHeight": 900
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 900,
+            "dpr": 1
+          },
+          "zoom": 0.1,
+          "errors": [],
+          "terrain": {
+            "resident": 330,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 86507520
+          },
+          "authority": {
+            "timing": {
+              "streaming": {
+                "count": 2414,
+                "mean": 0.08206296600432265,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.30000001192092896,
+                "max": 0.5
+              },
+              "selection": {
+                "count": 1207,
+                "mean": 0.0873239436175276,
+                "p50": 0.09999999403953552,
+                "p95": 0.20000001788139343,
+                "p99": 0.20000001788139343,
+                "max": 0.29999998211860657
+              },
+              "decision-selection": {
+                "count": 1207,
+                "mean": 0.018972659392503043,
+                "p50": 0,
+                "p95": 0.09999999403953552,
+                "p99": 0.10000002384185791,
+                "max": 0.19999998807907104
+              },
+              "prop-selection": {
+                "count": 1207,
+                "mean": 0.0664457333364463,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.20000001788139343,
+                "max": 0.30000001192092896
+              },
+              "ai": {
+                "count": 1207,
+                "mean": 0.06727423357785785,
+                "p50": 0.09999999403953552,
+                "p95": 0.19999998807907104,
+                "p99": 0.20000001788139343,
+                "max": 0.4000000059604645
+              },
+              "npc-physics": {
+                "count": 1207,
+                "mean": 0.34846727395709526,
+                "p50": 0.30000001192092896,
+                "p95": 0.5,
+                "p99": 0.5,
+                "max": 0.7000000178813934
+              },
+              "traffic": {
+                "count": 1207,
+                "mean": 1.7338028173359743,
+                "p50": 1.7000000178813934,
+                "p95": 2.199999988079071,
+                "p99": 2.300000011920929,
+                "max": 2.5
+              },
+              "railway": {
+                "count": 1207,
+                "mean": 0.0024026512803375574,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.20000001788139343
+              },
+              "tags": {
+                "count": 1207,
+                "mean": 8.285006117800986e-5,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0,
+                "max": 0.10000002384185791
+              },
+              "overlap": {
+                "count": 1207,
+                "mean": 0.004473902266580602,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.09999999403953552,
+                "max": 0.10000002384185791
+              },
+              "replication": {
+                "count": 1207,
+                "mean": 0.595194697701052,
+                "p50": 0.5999999940395355,
+                "p95": 0.7000000178813934,
+                "p99": 0.800000011920929,
+                "max": 0.9000000059604645
+              },
+              "tick": {
+                "count": 1207,
+                "mean": 3.4537696771218744,
+                "p50": 3.4000000059604645,
+                "p95": 4,
+                "p99": 4.300000011920929,
+                "max": 5
+              }
+            },
+            "counts": {},
+            "population": {
+              "resident": 389,
+              "props": 961,
+              "active": 56,
+              "residentPeople": 56,
+              "activePeople": 36,
+              "cars": 8,
+              "activeCars": 8,
+              "carsWithNonzeroVelocity": 8,
+              "movingPeople": 0,
+              "trafficWaiting": {
+                "": 8
+              },
+              "views": [
+                {
+                  "minCx": 19,
+                  "minCy": 24,
+                  "maxCx": 38,
+                  "maxCy": 36
+                }
+              ],
+              "inputQueue": 0
+            },
+            "hz": 60.0038809937895,
+            "maxMovingPeople": 24,
+            "maxActive": 56
+          }
+        }
+      ]
+    }
+  ]
+}

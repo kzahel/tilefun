@@ -1,5 +1,63 @@
 # Diagnostic probes
 
+## Ordered texture batches
+
+`node scripts/instrumentation/fused-outline-composite.mjs --probe=batch --output=/tmp/tilefun-ordered-texture-batches`
+compares one-texture submission with four/eight textures through the production
+GPU surface. Eighteen full RGBA pairs cover mixed raw/sRGB textures, translucent
+overlap, nested union clips, 4,101-quads/capacity, source uploads, page seams,
+transforms, reset/recovery and a shader-limit change. Every channel must match;
+the capacity case must use three batches and three reused sources one batch.
+The car probe also checks queued-image eviction and disable/drain lifetimes.
+
+`city-audit.mjs --batch-textures=1 --defer-cached-images=false` keeps the new
+layout but selects diagnostic one-texture/immediate car submission. Four/eight
+samplers use `--batch-textures=4|8 --defer-cached-images=true`. For a strict
+pre-change comparison, save the old `GpuRasterSurface.ts` first and add
+`--raster-reference=PATH` to the one-texture/immediate control. The report hashes
+the actually substituted source; the private path is not published. It changes
+only that production module and retains the same current Worker/scene sources.
+
+`--render-profile=true` includes a separate desktop quad/texture-switch census
+and hypothetical one/two/four/eight-texture batches, keeping all hard barriers.
+These counters add overhead and do not establish phone timing. Native timing
+runs without attribution or validation and retains thermal aborts separately.
+The pixel host also accepts `--cdp=URL --port=PORT` after creating owned USB
+forward/reverse routes. It opens/closes only its own page on the native context,
+uses `noDefaults` to avoid emulation, and disconnects without closing user Chrome.
+Fixed 512px canvas readback qualifies the device shader; it is not an FPS sample.
+[180](../../docs/tactical/180-ordered-texture-batches.md) owns decisions/evidence.
+
+## Finished car image reuse
+
+`node scripts/instrumentation/fused-outline-composite.mjs --probe=cache --output=/tmp/tilefun-car-cache`
+uses the production `GpuMeshBodies` adapter with reuse disabled and warm. It checks
+144 exact RGBA pairs across four models, two alternate paints, fractional scales,
+opacity and clips. Warm hits must issue zero mesh/outline calls; recovery must
+reproduce the reference. Cargo groups, a towed pair and enabled emergency lights
+must bypass reuse and retain exact pixels. The host pins production/probe/asset
+hashes, captures a preview and reaps bundled full Chromium and its local server.
+
+For clean native game comparisons, run `city-audit.mjs` sequentially with
+`--mesh-image-cache=false` and `--mesh-image-cache=true`, keeping all other options
+the same. This is a diagnostic control on the same current backend, not a player
+setting. Reports include hit/miss deltas and resident image bytes/count. Do not
+run validation during timing. [179](../../docs/tactical/179-cached-car-images.md)
+owns the delivery and its measured limits.
+
+## Fused vehicle outline/composite pixel proof
+
+`node scripts/instrumentation/fused-outline-composite.mjs --output=/tmp/tilefun-fused-outline-composite`
+compares the production body → outline → quad path with the same outline rule
+inside the final quad shader. It uses three actual GLBs (compact, long firetruck,
+hinged dump truck), four headings, three scales and two alpha values, retaining
+the same rear/foreground painter sequence. All 72 RGBA pairs must match exactly;
+empty-body and GL-error guards fail closed. The report pins source/model hashes
+and retains a native preview. It owns/reaps its static server and bundled full
+Chromium. This qualifies a bounded shader idea, not a production mode, cache,
+complete rig/fallback coverage or phone speedup. See
+[rendering architecture](../../docs/topics/rendering-architecture.md#car-pipeline-audit-and-optimization-direction--2026-10-22).
+
 ## Vehicle game-camera fit
 
 `node scripts/instrumentation/vehicle-fit-probe.mjs OUTPUT` compares all 45 retained
@@ -122,6 +180,18 @@ repeated stage names are allowed. `--arrival=gateway` uses the existing city-cen
 inspection; `core` uses the same plan's central north/south extent. Overview zooms
 are 0.05/0.1/0.25. Default GPU/mesh mode still has sprite fallbacks for native models.
 `--renderer=canvas` or `--meshes=false` changes the renderer control explicitly.
+
+Use `--arrival=racetrack` for the south spectator entrance,
+`racetrack-north` for the north spectators, or `racetrack-center` for the infield.
+`--viewport=1440x900` selects a desktop viewport (the default remains 411×789).
+`--parked-fleet=true --arrival=racetrack-center --stages=overview --overview-zoom=0.25`
+adds the first 45 registered road models through native parked placement in an
+track-centered grid. Placement must succeed for every model; the report retains
+the actual list. Some placements obstruct racers; use this for rendering density,
+not an unchanged-race simulation comparison or a saved-depot reproduction.
+Compare `--meshes=false` and the existing `--mesh-target-reuse=true` intervention
+separately. The latter changes diagnostic target retention only;
+it is not a production optimization or a pixel-parity acceptance result.
 
 Native driving setup stops and boards an existing horizontal-route car. Record its
 actual model, lane and pose: load/spawn timing can select different neighborhoods

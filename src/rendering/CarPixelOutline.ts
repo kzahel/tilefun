@@ -46,13 +46,13 @@ export class CarPixelOutline {
     this.target.texture.generateMipmaps = false;
     this.scene.add(new THREE.Mesh(this.geometry, this.material));
   }
-  render(renderer: THREE.WebGLRenderer, source: THREE.WebGLRenderTarget) {
-    this.target.setSize(source.width, source.height);
+  render(renderer: THREE.WebGLRenderer, source: THREE.WebGLRenderTarget, target = this.target) {
+    target.setSize(source.width, source.height);
     this.uniforms.painted.value = source.texture;
     this.uniforms.imageSize.value.set(source.width, source.height);
-    renderer.setRenderTarget(this.target);
+    renderer.setRenderTarget(target);
     renderer.render(this.scene, this.camera);
-    return this.target.texture;
+    return target.texture;
   }
   recover() {
     this.target.dispose();

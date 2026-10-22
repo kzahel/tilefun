@@ -17,17 +17,6 @@ await mkdir(output, { recursive: true });
 const fixturePath = resolve("data/3d-investigation/shared-world/fixture.json");
 const fixture = JSON.parse(await readFile(fixturePath, "utf8"));
 const vehicleMaterials = {};
-for (const name of ["dump-truck", "pickup"]) {
-  const bytes = await readFile(`public/assets/models/vehicles/${name}-v1.glb`);
-  assert.equal(bytes.readUInt32LE(16), 0x4e4f534a);
-  const document = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString("utf8"));
-  const modes = document.materials.map((material) => material.alphaMode ?? "OPAQUE");
-  assert.ok(
-    modes.every((mode) => mode === "OPAQUE"),
-    "The label oracle requires opaque vehicle materials",
-  );
-  vehicleMaterials[name] = modes;
-}
 await build({
   configFile: false,
   publicDir: false,
@@ -205,6 +194,20 @@ try {
   await page.goto(`http://127.0.0.1:${server.address().port}/`);
   await page.waitForFunction(() => window.sharedWorld?.ready || window.sharedWorldError);
   assert.equal(await page.evaluate(() => window.sharedWorldError), undefined);
+  const vehicleAssets = await page.evaluate(() => window.sharedWorld.vehicleAssets);
+  assert.equal(vehicleAssets.length, 2);
+  for (const asset of vehicleAssets) {
+    assert.match(asset.path, /^assets\/models\/vehicles\/[\w-]+\.glb$/);
+    const bytes = await readFile(`public/${asset.path}`);
+    assert.equal(bytes.readUInt32LE(16), 0x4e4f534a);
+    const document = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString("utf8"));
+    const modes = document.materials.map((material) => material.alphaMode ?? "OPAQUE");
+    assert.ok(
+      modes.every((mode) => mode === "OPAQUE"),
+      "The label oracle requires opaque vehicle materials",
+    );
+    vehicleMaterials[asset.assetId] = modes;
+  }
   const results = [],
     pictures = [];
   for (const snapshot of fixture.cases) {
@@ -252,8 +255,7 @@ try {
     "src/rendering/CarMeshProjection.ts",
     "src/rendering/CarMeshAsset.ts",
     "src/rendering/collectScene.ts",
-    "public/assets/models/vehicles/dump-truck-v1.glb",
-    "public/assets/models/vehicles/pickup-v1.glb",
+    ...vehicleAssets.map((asset) => `public/${asset.path}`),
     "public/demos/pixel-characters/person-32.png",
     "public/demos/pixel-characters/cat-32.png",
   ];
@@ -269,7 +271,7 @@ try {
   );
   await writeFile(
     resolve(output, "report.json"),
-    `${JSON.stringify({ schema: "tilefun-shared-world-depth-v1", fixtureSource: fixture.source, worker: false, viewport: fixture.viewport, vehicleMaterials, hashes, results, limits: ["Standalone GPU harness using authority snapshots, not a Worker or RenderHost integration", "Unchanged character billboards provide planar artwork depth, not anatomical geometry", "Same end-of-scene outline on both modes; visibility measured before outlines", "Flat background has no terrain depth; both vehicle GLBs verified OPAQUE"] }, null, 2)}\n`,
+    `${JSON.stringify({ schema: "tilefun-shared-world-depth-v1", fixtureSource: fixture.source, worker: false, viewport: fixture.viewport, vehicleAssets, vehicleMaterials, hashes, results, limits: ["Standalone GPU harness using authority snapshots, not a Worker or RenderHost integration", "Unchanged character billboards provide planar artwork depth, not anatomical geometry", "Same end-of-scene outline on both modes; visibility measured before outlines", "Flat background has no terrain depth; both vehicle GLBs verified OPAQUE"] }, null, 2)}\n`,
   );
   const gallery = `<!doctype html><meta charset="utf-8"><title>Shared world depth comparison</title><style>body{font:16px system-ui;background:#17232c;color:#eff4f8;margin:24px}h1{font-size:24px}select,button{font:inherit;padding:6px}figure{margin:0}img{width:512px;height:448px;image-rendering:pixelated;background:#88a77b}.grid{display:flex;gap:20px;margin-top:18px}figcaption{margin:8px 0}p{max-width:1080px;line-height:1.5}.close{width:264px;height:264px}.heat{width:256px;height:192px}small{color:#bbcedb}</style><h1>Vehicle groups vs shared world depth</h1><p>Actual dump truck and pickup; unchanged Explorer and cat sprites. Normal authority positions and scene ordering. Blue: physical bodies; green: wall bodies; yellow: sprite planes.</p><select id="which"></select> <button id="debug">Show clipping geometry</button><p id="stats"></p><div class="grid"><figure><figcaption>Local depth, then whole objects in scene order</figcaption><img id="local"></figure><figure><figcaption>Shared world depth</figcaption><img id="world"></figure></div><p id="finding"></p><div class="grid"><figure><figcaption>Local close-up (6x)</figcaption><img class="close" id="localClose"></figure><figure><figcaption>Shared-depth close-up (6x)</figcaption><img class="close" id="worldClose"></figure></div><p></p><small>Visibility comparison uses opaque labels before a common final outline. Experimental renderer; game rendering is unchanged. Sprites are upright planes, not 3D characters.</small><script>const cases=${JSON.stringify(pictures).replaceAll("<", "\\u003c")};let debug=false;const selector=document.querySelector('#which');for(const c of cases)selector.add(new Option(c.name,c.id));selector.value='wall-corner';function draw(){const c=cases.find(c=>c.id===selector.value);document.querySelector('#localClose').src=c.closeups.local;document.querySelector('#worldClose').src=c.closeups.world;document.querySelector('#local').src=c.captures[debug?'localDebug':'local'];document.querySelector('#world').src=c.captures[debug?'worldDebug':'world'];document.querySelector('#stats').textContent='Native 256 x 224 | player height '+c.playerZ.toFixed(2)+' | '+c.metrics.differentPixels+' pixels differ | best of all 720 whole-object orders: '+c.metrics.bestWholeGroupError+' incorrect pixels';document.querySelector('#finding').textContent=c.metrics.bestWholeGroupError?'Whole-object reordering cannot reproduce this shared-depth view. '+c.metrics.twoWayConstraints.map(p=>p.a+' / '+p.b+': '+p.aInFront+' pixels one way, '+p.bInFront+' the other').join('; '):'A whole-object order can reproduce this view. Shared depth is not required for this pose.'}selector.onchange=draw;document.querySelector('#debug').onclick=()=>{debug=!debug;draw()};draw();</script>`;
   await writeFile(resolve(output, "index.html"), gallery);

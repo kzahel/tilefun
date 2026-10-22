@@ -29,15 +29,37 @@ const renderer = option("renderer", "gpu"),
   meshes = option("meshes", "true") === "true";
 const overviewZoom = Number(option("overview-zoom", "0.1"));
 const arrivalKind = option("arrival", "gateway");
+const parkedFleet = option("parked-fleet", "false") === "true";
+if (parkedFleet && !arrivalKind.startsWith("racetrack"))
+  throw Error("Synthetic parked fleet requires a racetrack arrival");
+const viewport = option("viewport", "411x789").split("x").map(Number);
+if (viewport.length !== 2 || viewport.some((v) => !Number.isInteger(v) || v < 200 || v > 3840))
+  throw Error("Invalid viewport: expected WIDTHxHEIGHT, 200–3840 pixels per side");
 const driveModel = option("drive-model", "native");
 if (!["native", "compact-1"].includes(driveModel)) throw Error("Invalid drive model");
-if (!["gateway", "core"].includes(arrivalKind) || ![0.05, 0.1, 0.25].includes(overviewZoom))
+if (
+  !["gateway", "core", "racetrack", "racetrack-north", "racetrack-center"].includes(arrivalKind) ||
+  ![0.05, 0.1, 0.25].includes(overviewZoom)
+)
   throw Error("Invalid arrival/overview zoom");
 const jobs = option("stages", "standing,walk,drive,overview,overview-drive").split(",");
 const deep = option("deep", "false") === "true",
   cpu = option("cpu", "false") === "true";
 const trace = option("trace", "false") === "true",
   renderProfile = option("render-profile", "false") === "true";
+const meshImageCache = option("mesh-image-cache", "true") === "true";
+const batchTextures = Number(option("batch-textures", "8"));
+const deferCachedImages = option("defer-cached-images", "true") === "true";
+if (![1, 2, 4, 8].includes(batchTextures)) throw Error("Invalid batch texture limit");
+const rasterReferencePath = option("raster-reference", "");
+const rasterReference = rasterReferencePath
+  ? await readFile(path.resolve(rasterReferencePath), "utf8")
+  : null;
+if (rasterReference && (batchTextures !== 1 || deferCachedImages))
+  throw Error("Original raster control requires --batch-textures=1 --defer-cached-images=false");
+const rasterReferenceSHA256 = rasterReference
+  ? createHash("sha256").update(rasterReference).digest("hex")
+  : null;
 const meshTargetReuse = option("mesh-target-reuse", "false") === "true";
 if (meshTargetReuse && (renderer !== "gpu" || !meshes))
   throw Error("Mesh target reuse requires GPU meshes");
@@ -82,10 +104,16 @@ const report = {
   trace,
   renderProfile,
   meshTargetReuse,
+  meshImageCache,
+  batchTextures,
+  deferCachedImages,
+  rasterReferenceSHA256,
   seconds,
   warmSeconds,
   overviewZoom,
   arrivalKind,
+  parkedFleet,
+  viewport,
   driveModel,
   limits:
     "Native game Worker/IndexedDB/current seed-2026 city; normal traffic/pedestrians. Inclusive opt-in timers add overhead. Driver setup boards an existing native car (or an explicit one-for-one production-factory model replacement) after a diagnostic pose/stop; subsequent input is native. CPU and deep census are attribution lanes, not clean timing controls. rAF measures callback cadence, not displayed GPU presentation.",
@@ -108,6 +136,7 @@ for (const file of [
   "src/client/PlayerPredictor.ts",
   "src/client/ClientStateView.ts",
   "src/rendering/GpuMeshBodies.ts",
+  "src/rendering/CarBodyImageCache.ts",
   "src/rendering/CarMeshAsset.ts",
   "src/rendering/VehicleGeometryBatches.ts",
   "src/rendering/AuthoredVehicleMeshes.ts",
@@ -121,7 +150,11 @@ for (const file of [
 ])
   try {
     report.sourcesSHA256[file] = createHash("sha256")
-      .update(await readFile(path.join(root, file)))
+      .update(
+        file === "src/rendering/GpuRasterSurface.ts" && rasterReference
+          ? rasterReference
+          : await readFile(path.join(root, file)),
+      )
       .digest("hex");
   } catch (error) {
     if (
@@ -144,6 +177,12 @@ const server = await createServer({
       enforce: "pre",
       transform(code, id) {
         const file = id.split("?")[0];
+        if (
+          rasterReference &&
+          file.endsWith("/src/rendering/GpuRasterSurface.ts") &&
+          !id.includes("?raw")
+        )
+          return rasterReference;
         const replace = (from, to) => {
           if (code.split(from).length !== 2) throw Error(`City probe marker changed: ${file}`);
           code = code.replace(from, to);
@@ -159,8 +198,8 @@ const server = await createServer({
             "        const __cityAIStart = performance.now();\n        tickAllAI(",
           );
           replace(
-            "        // ── TickService.preSimulation",
-            '        globalThis.__cityPhase?.("ai", performance.now() - __cityAIStart);\n        // ── TickService.preSimulation',
+            "        for (const [entity, elapsed] of entityTickDts)\n          if (entity.resident)",
+            '        globalThis.__cityPhase?.("ai", performance.now() - __cityAIStart);\n        for (const [entity, elapsed] of entityTickDts)\n          if (entity.resident)',
           );
         }
         if (deep && file.endsWith("/src/traffic/Driving.ts")) {
@@ -190,7 +229,10 @@ try {
     const gate = androidCli ? await waitForAndroidCool(androidCli, maxC, cooldown) : undefined;
     context = endpoint
       ? browser.contexts()[0]
-      : await browser.newContext({ viewport: { width: 411, height: 789 }, hasTouch: touch });
+      : await browser.newContext({
+          viewport: { width: viewport[0], height: viewport[1] },
+          hasTouch: touch,
+        });
     page = await context.newPage();
     await page.bringToFront();
     cdp = await context.newCDPSession(page);
@@ -205,7 +247,12 @@ try {
       const { naturalLandscapeRecipe } = await import(
         "/tilefun/src/scenarios/NaturalLandscapeRecipe.ts"
       );
-      const r = naturalLandscapeRecipe("city-center", "thicket");
+      const r = naturalLandscapeRecipe(
+        kind.startsWith("racetrack") ? "racetrack" : "city-center",
+        "thicket",
+      );
+      if (kind === "racetrack-north") return { x: 462, y: 412, generation: r.generation };
+      if (kind === "racetrack-center") return { x: 462, y: 455, generation: r.generation };
       let y = r.player.position.wy / 16;
       if (kind === "core") {
         const { DenseDistrictSource } = await import(
@@ -238,6 +285,30 @@ try {
     const worker = page.workers().find((w) => w.url().includes("local-server.worker"));
     if (!worker) throw Error("Missing authority Worker");
     await worker.evaluate(installCityAuthority, { deep });
+    let fleet;
+    if (parkedFleet) {
+      const models = await page.evaluate(async () => {
+        const { VEHICLE_MODELS } = await import("/tilefun/src/traffic/Vehicle.ts");
+        return VEHICLE_MODELS.slice(0, 45);
+      });
+      // Explicit diagnostic fixture: native parked placements around the track center.
+      // The grid can obstruct racers. This characterizes rendering density,
+      // not an owner's saved depot or unchanged race-simulation costs.
+      fleet = await worker.evaluate((models) => {
+        const r = globalThis.__diagnosticAuthority.activeRealm;
+        const placed = [];
+        for (const [index, model] of models.entries()) {
+          const x = 462 * 16 + ((index % 9) - 4) * 176;
+          const y = 455 * 16 + (Math.floor(index / 9) - 2) * 112 + 56;
+          if (r.traffic.place(model, x, y, 3)) placed.push(model);
+        }
+        return { requested: models.length, placed };
+      }, models);
+      if (fleet.placed.length !== models.length)
+        throw Error(
+          `Incomplete synthetic fleet placement: ${fleet.placed.length}/${models.length}`,
+        );
+    }
     let driver;
     if (stage.includes("drive")) {
       await worker.evaluate(async () => {
@@ -310,6 +381,19 @@ try {
         };
       }, driveModel);
     }
+    await page.evaluate(
+      ({ enabled, limit, defer }) => {
+        const backend = document.querySelector("#game").__game.renderer;
+        backend.surface?.setBatchTextureLimit?.(limit);
+        const meshes = backend.meshes;
+        if (meshes?.images) {
+          meshes.images.clear();
+          meshes.images.enabled = enabled;
+          meshes.deferCachedImages = defer;
+        }
+      },
+      { enabled: meshImageCache, limit: batchTextures, defer: deferCachedImages },
+    );
     if (meshTargetReuse) await page.evaluate(installCityMeshTargetReuse);
     const zoom = stage.startsWith("overview") ? overviewZoom : 1;
     await page.evaluate((z) => document.querySelector("#game").__game.debugPanel.setZoom(z), zoom);
@@ -421,6 +505,7 @@ try {
       stage,
       arrival,
       driver,
+      fleet,
       gate,
       thermalStart,
       thermalEnd,

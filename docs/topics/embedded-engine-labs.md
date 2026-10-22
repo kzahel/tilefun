@@ -37,6 +37,22 @@ client animation lead from changing the frozen frame after pause/reload.
 The [scenario topic](gameplay-scenarios.md) owns that clock contract and the
 replacement-host error guard used by furniture playtest.
 
+[179](../tactical/179-cached-car-images.md) adds bounded unchanged car image reuse
+through the same `GpuMeshBodies` backend in game and labs. Finished local-depth/
+outlined images stay backend-owned; scene frames and authority gain no graphics
+resources or cache policy. Scene reset, asset invalidation, renderer replacement
+and context recovery retire them. Cargo/towed groups and flashing lights bypass
+reuse. Exact-pixel, shared game/lab and native phone qualification are recorded in
+179; there is no lab-specific shader, ordering or simulation branch.
+
+[180](../tactical/180-ordered-texture-batches.md) shares up to eight textures in
+one ordered indexed GPU batch across the same hosts. Cached car quads can remain
+queued with surrounding sprites, while dirty target writes and retirement drain
+them before mutation/disposal. Frames still lend only synchronous drawing data;
+all GPU references remain backend-owned. Desktop/native exact-pixel checks,
+all 829 browser cases and GPU streaming readiness pass. There is no lab-specific
+batch policy, authority change or world-depth/outline change.
+
 [162](../tactical/162-shared-world-depth-comparison.md) is a standalone rendering
 experiment fed by normal headless scenario authority, binary replication and
 scene collection. It reuses production vehicle assets/loading without adding a

@@ -4,6 +4,7 @@ import { vehiclePaint } from "../traffic/VehiclePaint.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
+import { CarBodyImageCache, carBodyImageKey } from "./CarBodyImageCache.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
@@ -20,8 +21,9 @@ import { ResourceSlot } from "./ResourceSlot.js";
 import type { SpriteItem } from "./SceneItem.js";
 import { VehiclePaintResources } from "./VehiclePaintResources.js";
 
-/** One target reused synchronously; a body and its opt-in sprite contents share depth. */
+/** Exact finished-image reuse; dirty bodies and opt-in contents share scratch depth. */
 export class GpuMeshBodies {
+  readonly images = new CarBodyImageCache();
   readonly paints = new VehiclePaintResources();
   readonly contents = new GpuVehicleContents();
   readonly car = new ResourceSlot<CarMeshAsset>();
@@ -44,12 +46,18 @@ export class GpuMeshBodies {
   drawCalls = 0;
   paintDraws = 0;
   paintFallbacks = 0;
+  /** Diagnostic baseline keeps the old immediate cached-image submission. */
+  deferCachedImages = true;
   constructor(private readonly surface: GpuRasterSurface) {
     this.target.texture.colorSpace = THREE.SRGBColorSpace;
     this.target.texture.magFilter = this.target.texture.minFilter = THREE.NearestFilter;
     this.target.texture.generateMipmaps = false;
   }
   setEnabled(value: boolean) {
+    if (!value) {
+      this.surface.flush();
+      this.images.clear();
+    }
     this.enabled = value;
     if (value)
       for (const assetId of [COMPACT_CAR_MESH, AMBULANCE_MESH, FIRE_TRUCK_MESH])
@@ -91,6 +99,7 @@ export class GpuMeshBodies {
   }
   /** Called once before submissions; promise completions only become visible here. */
   beginFrame() {
+    this.images.beginFrame();
     this.paints.beginFrame();
     this.ready.clear();
     if (this.enabled)
@@ -125,6 +134,16 @@ export class GpuMeshBodies {
         (childPaint && !childTexture))
     )
       return false;
+    const key =
+      this.images.enabled && !item.bedGroup && !child && !item.mesh.emergencyEnabled
+        ? carBodyImageKey(item.mesh, asset.object.id, paintTexture || undefined)
+        : undefined;
+    const cached = key === undefined ? undefined : this.images.get(key);
+    if (cached) {
+      this.composite(camera, item, cached, Math.ceil(item.mesh.radius), !this.deferCachedImages);
+      if (paintTexture) this.paintDraws++;
+      return true;
+    }
     const { surface } = this,
       renderer = surface.renderer;
     surface.flush();
@@ -210,7 +229,11 @@ export class GpuMeshBodies {
       renderer.clear();
       renderer.render(this.scene, this.camera);
       this.drawCalls += renderer.info.render.calls;
-      texture = this.outline.render(renderer, this.target);
+      texture = this.outline.render(
+        renderer,
+        this.target,
+        key === undefined ? undefined : this.images.admit(key, resolution),
+      );
       this.drawCalls += renderer.info.render.calls;
     } finally {
       restorePaint?.();
@@ -221,6 +244,19 @@ export class GpuMeshBodies {
       this.scene.remove(object);
       this.scene.remove(this.contents.group);
     }
+    this.composite(camera, item, texture, radius);
+    if (item.bedGroup) this.bedDraws++;
+    if (paintTexture) this.paintDraws++;
+    return true;
+  }
+  private composite(
+    camera: Camera,
+    item: SpriteItem,
+    texture: THREE.Texture,
+    radius: number,
+    immediate = true,
+  ) {
+    const { surface } = this;
     const anchor = projectWorld(camera, item.wx, item.wy, item.zOffset);
     surface.save();
     surface.globalAlpha = item.alpha ?? 1;
@@ -231,18 +267,19 @@ export class GpuMeshBodies {
       radius * 2 * camera.scale,
       radius * 2 * camera.scale,
     );
-    surface.flush();
+    if (immediate) surface.flush();
     surface.restore();
     this.draws++;
-    if (item.bedGroup) this.bedDraws++;
-    if (paintTexture) this.paintDraws++;
-    return true;
   }
   recover() {
+    this.surface.flush();
+    this.images.clear();
     this.outline.recover();
     this.target.dispose();
   }
   dispose() {
+    this.surface.flush();
+    this.images.clear();
     this.paints.dispose();
     this.contents.clear();
     this.ready.clear();
@@ -252,6 +289,7 @@ export class GpuMeshBodies {
   }
   get targetBytes() {
     return (
+      this.images.bytes +
       this.target.width * this.target.height * 8 +
       this.outline.target.width * this.outline.target.height * 4
     );

@@ -51,12 +51,18 @@ async function initialize() {
   const labelValues = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff];
   const owned = new Set();
   const assets = [];
+  const vehicleAssets = [];
   const alphaData = new Map();
   for (const record of fixture.cases[0].objects) {
     const item = record.item;
     let root, asset, texture;
     if (item.mesh) {
       const definition = authoredVehicleForType(record.entity.type);
+      vehicleAssets.push({
+        type: record.entity.type,
+        assetId: definition.assetId,
+        path: definition.path,
+      });
       asset = await loadCarMesh(definition.path, definition.lateralScale, {
         batch: true,
         heightScale: vehicleMeshHeightScale(definition.vehicle),
@@ -330,6 +336,7 @@ async function initialize() {
   }
   window.sharedWorld = {
     ready: true,
+    vehicleAssets,
     async capture(id) {
       const snapshot = fixture.cases.find((entry) => entry.id === id);
       apply(snapshot);
