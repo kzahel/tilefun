@@ -1,0 +1,18 @@
+{
+  "id": "guinea-pig",
+  "creator": "Breviceps",
+  "soundId": 583078,
+  "sourcePage": "https://freesound.org/people/Breviceps/sounds/583078/",
+  "download": "https://cdn.freesound.org/previews/583/583078_9159316-hq.mp3",
+  "sourceFile": "guinea-pig-source.mp3",
+  "bytes": 1039433,
+  "sha256": "cb6938a341bd8bad13c8cd22beb7a4110bcb4837a7ddd7e643c87bffe257e6e1",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "guinea-pig",
+  "sourceSpecies": "guinea pig",
+  "notes": "Real guinea-pig squeaks; sparse stationary contact calls, not artificial pitch variants.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

@@ -62,7 +62,7 @@ const lines = [
   "",
   `There are ${new Set(rows.filter((a) => a.design).map((a) => a.design)).size} effective voice designs. Coats/shared voices count as entry coverage, not unique designs. Recorded voices are integrated; owner listening approval remains pending.`,
   "",
-  "No call route means no species call wiring was found, not that the actor can never make generic collision/ball-hit audio. It does not classify the animal as intentionally quiet. Bee wingbeats and cricket stridulation are explicit recorded mechanical sounds; other movement/interaction Foley remains separate.",
+  "No call route means no species sound wiring was found, not that the actor can never make generic collision/ball-hit audio. It does not classify the animal as intentionally quiet. Bee wingbeats, cricket stridulation and llama defensive air bursts are explicit recorded non-vocal sounds; other movement/interaction Foley remains separate.",
   "",
   "Recorded calls share AnimalAudio in game and lab, using replicated named action poses and sparse local ambience (bee buzz is flight-only; insect playback is bounded). Shared hunter synthesis uses `callKind ?? fierce.kind` and clip transitions. Robin/frog/mallard synthesis now uses the same shared mixer, with observed action/alarm transitions and explicit auditions. Lab sounds require opt-in; recorded auditions are separate explicit button gestures.",
   "",

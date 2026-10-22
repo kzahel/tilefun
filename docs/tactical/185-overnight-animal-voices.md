@@ -129,3 +129,24 @@ normal/retina inventory and build pass; all 1,980 prior candidate objects remain
 exact. Input digest: `21a72efd1e63019f17e5b595c4f8e6b0225d772c36a29d84429fc9c4114a17b8`.
 Evidence: `data/overnight-audio-primates-{native,browser,types,lint,catalog,
 manifest,build}.log`. Broad suites excluded; listening review pending.
+
+## Batch 6: smaller mammals
+
+Guinea pig, meerkat, raccoon, river otter, alpaca and llama: six sources/ten
+excerpts. Guinea pig/alpaca/otter have sparse stationary calls. Adult meerkat
+recruitment calls use existing threat-warning poses; raccoon defensive sounds and
+llama's explicit non-vocal defensive air burst use fresh flee onsets only. Calm
+rest, cache raids, feeding and unrelated work remain quiet. The existing piglet
+native case now checks all warning-only mammal profiles without a browser matrix.
+NPS otter public-domain attribution retains the original-work copyright notice.
+
+All 36 initial campaign animals are wired, plus upright elephant inheritance.
+Coverage is 84/206 (56 recorded, 28 synthesized), 122 unwired, with 50 recordings/
+83 excerpts. Owner listening review remains pending.
+
+Validation: 61 targeted native checks and both existing Chromium audio
+boundaries pass (32.0s). Typechecks, targeted lint, strict catalog,
+normal/retina inventory and build pass; all 1,980 prior candidate objects remain
+exact. Input digest: `f7c7ed45f730bbd34dd92cf7131c19e2176f4dc2cf7582772baee32d32861565`.
+Evidence: `data/overnight-audio-small-{native,browser,types,lint,catalog,
+manifest,build}.log`. Broad suites excluded; listening review pending.

@@ -1,7 +1,7 @@
 # Animal sounds
 
 Topic: wildlife-audio
-Status: overnight 36-animal sound campaign in progress; forty-four recorded sets integrated, owner listening review pending.
+Status: overnight 36-animal sound campaign in progress; fifty recorded sets integrated, owner listening review pending.
 Updated: 2026-10-22.
 
 Owner asked to catalogue current animal SFX and plan wider coverage before more
@@ -18,14 +18,14 @@ Owner authorized the full 36-animal queue and additional suitable animals, up to
 and [delivery record](../tactical/185-overnight-animal-voices.md). Unavailable or
 poorly identified sources remain documented gaps rather than invented recordings.
 
-First thirty campaign entries are integrated, including six primates.
-Upright elephant also inherits calls. Per-animal sources/triggers and validation
+All 36 initial campaign animals are wired, plus upright elephant inheritance.
+Final targeted verification is in progress; listening review remains pending. Per-animal sources/triggers and validation
 live in the ledger and delivery record. Listening review remains pending.
 
 ## Current coverage
 
-**78/206 entries have sound routes: 50 recorded, 28 synthesized, zero game-only;
-128 remain unwired.** Forty-four real recorded sets supply seventy-three excerpts.
+**84/206 entries have sound routes: 56 recorded, 28 synthesized, zero game-only;
+122 remain unwired.** Fifty real recorded sets supply eighty-three excerpts.
 The [generated animal-by-animal audit](../wildlife-audio-audit.md) owns exact current
 routing, shared designs and missing entries. This is source coverage, not owner
 listening approval or a live deployment check. Inherited coats/panther count as
@@ -40,7 +40,9 @@ least three seconds; initial stationary calls wait 8–20 seconds, later calls w
 authority/save fields or AI subsystems are introduced for audio.
 
 Resting contact calls are separate from display-only roars/howls/growls and
-alarm-only piglet squeals. Recorded species suppress their old synthesized
+warning-only piglet/meerkat/raccoon/llama sounds. Llama is an explicit non-vocal
+defensive air burst. NPS river-otter chirps use stationary surface ambience; no
+underwater listener contract is introduced. Recorded species suppress their old synthesized
 placeholder, including when a recording fails to load. Wolf/coyote/hyena/lynx and
 big predators do not emit idle roars while hunting. Fox remains quiet through
 listening/stalking/pounce/eat. Cheetah has real contact meows. Dire wolf and other

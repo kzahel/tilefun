@@ -57,7 +57,19 @@
     },
     {
       "id": 6,
-      "animals": ["guinea-pig", "meerkat", "raccoon", "river-otter", "alpaca", "llama"]
+      "animals": ["guinea-pig", "meerkat", "raccoon", "river-otter", "alpaca", "llama"],
+      "validation": {
+        "native": 61,
+        "browser": 2,
+        "browserDuration": "32.0s",
+        "inputDigest": "f7c7ed45f730bbd34dd92cf7131c19e2176f4dc2cf7582772baee32d32861565",
+        "candidates": 1980,
+        "priorObjectsExact": true,
+        "types": "pass",
+        "targetedLint": "pass",
+        "build": "pass",
+        "listeningReview": "pending-owner"
+      }
     }
   ],
   "animals": {
@@ -308,28 +320,52 @@
       "trigger": "Sparse stationary calls; unrelated work and capuchin carrying quiet"
     },
     "guinea-pig": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "guinea-pig",
+      "bank": "small-mammals-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls"
     },
     "meerkat": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "meerkat",
+      "bank": "small-mammals-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Fresh threat/alarm pose only; idle quiet"
     },
     "raccoon": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "raccoon",
+      "bank": "small-mammals-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Fresh threat/alarm pose only; idle quiet"
     },
     "river-otter": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "river-otter",
+      "bank": "small-mammals-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls"
     },
     "alpaca": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "alpaca",
+      "bank": "small-mammals-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Sparse stationary calls"
     },
     "llama": {
-      "state": "queued",
-      "listeningReview": "pending-owner"
+      "state": "integrated",
+      "listeningReview": "pending-owner",
+      "voice": "llama",
+      "bank": "small-mammals-v1",
+      "validation": "61 targeted native and 2 Chromium audio checks, static/inventory/build passed",
+      "trigger": "Fresh threat/alarm pose only; idle quiet"
     }
   },
   "stopByUtc": "2026-10-23T06:40:00Z"

@@ -1,0 +1,18 @@
+{
+  "id": "raccoon",
+  "creator": "TRP",
+  "soundId": 571212,
+  "sourcePage": "https://freesound.org/people/TRP/sounds/571212/",
+  "download": "https://cdn.freesound.org/previews/571/571212_97550-hq.mp3",
+  "sourceFile": "raccoon-source.mp3",
+  "bytes": 1579584,
+  "sha256": "f8a3dcc5cc9b333ec615637f423f660fdc9c2f3b8586f7c3c6a6563ac334ce82",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "raccoon",
+  "sourceSpecies": "raccoon",
+  "notes": "Close defensive growl/hiss phrases from a Toronto field recording; never calm cache-raiding ambience.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

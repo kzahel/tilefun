@@ -32069,7 +32069,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:237"
+          "source": "src/audio/AnimalVoice.ts:265"
         },
         {
           "system": "Gameplay",
@@ -34223,7 +34223,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:235"
+          "source": "src/audio/AnimalVoice.ts:263"
         },
         {
           "system": "Gameplay",
@@ -34377,7 +34377,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/AnimalVoice.ts:235"
+          "source": "src/audio/AnimalVoice.ts:263"
         },
         {
           "system": "Gameplay",

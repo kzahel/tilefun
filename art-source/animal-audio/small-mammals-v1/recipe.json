@@ -1,0 +1,26 @@
+{
+  "guinea-pig": {
+    "ranges": [[9.8, 10.6], [11.35, 12.1]],
+    "filters": "highpass=f=500,lowpass=f=6500"
+  },
+  "meerkat": {
+    "ranges": [[13.55, 15.7]],
+    "filters": "highpass=f=350,lowpass=f=6000"
+  },
+  "raccoon": {
+    "ranges": [[4.8, 6.9], [73.3, 76.0]],
+    "filters": "highpass=f=150,lowpass=f=5000"
+  },
+  "river-otter": {
+    "ranges": [[4.7, 5.3], [6.8, 7.35]],
+    "filters": "highpass=f=1400,lowpass=f=7000"
+  },
+  "alpaca": {
+    "ranges": [[5.65, 6.6], [8.0, 8.95]],
+    "filters": "highpass=f=150,lowpass=f=5000"
+  },
+  "llama": {
+    "ranges": [[0, 0.24]],
+    "filters": "highpass=f=180,lowpass=f=6000"
+  }
+}

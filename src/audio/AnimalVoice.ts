@@ -217,6 +217,34 @@ export const ANIMAL_VOICES: Record<
     cooldown: 35,
   },
   "japanese-macaque": { label: "Coo", animals: ["japanese-macaque"], cues: [], cooldown: 30 },
+  "guinea-pig": { label: "Squeak", animals: ["guinea-pig"], cues: [], cooldown: 25 },
+  meerkat: {
+    label: "Recruitment warning",
+    animals: ["meerkat"],
+    cues: [],
+    cooldown: 18,
+    ambient: false,
+    alarmCue: "alarm",
+  },
+  raccoon: {
+    label: "Defensive growl",
+    animals: ["raccoon"],
+    cues: [],
+    cooldown: 25,
+    ambient: false,
+    alarmCue: "flee",
+    quietWhileCarrying: true,
+  },
+  "river-otter": { label: "Chirp", animals: ["river-otter"], cues: [], cooldown: 30 },
+  alpaca: { label: "Soft call", animals: ["alpaca"], cues: [], cooldown: 35 },
+  llama: {
+    label: "Defensive air burst",
+    animals: ["llama"],
+    cues: [],
+    cooldown: 20,
+    ambient: false,
+    alarmCue: "flee",
+  },
 };
 const voicesBySpecies = new Map(
   (Object.entries(ANIMAL_VOICES) as [AnimalVoice, (typeof ANIMAL_VOICES)[AnimalVoice]][]).flatMap(

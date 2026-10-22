@@ -1,0 +1,17 @@
+{
+  "id": "river-otter",
+  "creator": "National Park Service / Canyonlands National Park",
+  "sourcePage": "https://www.nps.gov/subjects/sound/sounds-otter.htm",
+  "download": "https://www.nps.gov/nps-audiovideo/audiovideo/99323aab-cdd5-432a-bd33-08e8826b41de.mp3",
+  "sourceFile": "river-otter-source.mp3",
+  "sourceKind": "original distributed NPS MP3 sound gallery excerpt",
+  "bytes": 109100,
+  "sha256": "87996a26e8dd8a46799b1df8604a82b03933b5baceea179f3883f92aa68da13d",
+  "license": "Public-domain-USGov",
+  "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
+  "notes": "NPS-authored Canyonlands calls/splashes. High chirps selected from the gallery excerpt. No claim to original U.S. Government works.",
+  "species": "river-otter",
+  "sourceSpecies": "North American river otter",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

@@ -22,6 +22,8 @@ for (const bank of readdirSync(root, { withFileTypes: true })
       `License: ${source.license} — ${source.licenseUrl}`,
     );
     if (source.upstream) lines.push(`Upstream: ${source.upstream}`);
+    if (source.license === "Public-domain-USGov")
+      lines.push("No claim to original U.S. Government works.");
     lines.push("");
   }
 }

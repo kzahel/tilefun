@@ -230,3 +230,35 @@ Creator: Takafumi Furuyama, Kohta I. Kobayasi, Hiroshi Riquimaroux
 Source: https://commons.wikimedia.org/wiki/File:Role-of-vocal-tract-characteristics-in-individual-discrimination-by-Japanese-macaques-(Macaca-srep32042-s3.oga
 License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
 Upstream: https://doi.org/10.1038/srep32042
+
+guinea-pig (small-mammals-v1)
+Creator: Breviceps
+Source: https://freesound.org/people/Breviceps/sounds/583078/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+meerkat (small-mammals-v1)
+Creator: Lily Johnson-Ulrich, Vlad Demartsev, Laurie Johnson, Emma Brown, Ariana Strandburg-Peshkin, Marta B. Manser
+Source: https://zenodo.org/records/7831997
+License: CC-BY-4.0 — https://creativecommons.org/licenses/by/4.0/
+Upstream: https://doi.org/10.1098/rsos.230489
+
+raccoon (small-mammals-v1)
+Creator: TRP
+Source: https://freesound.org/people/TRP/sounds/571212/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+river-otter (small-mammals-v1)
+Creator: National Park Service / Canyonlands National Park
+Source: https://www.nps.gov/subjects/sound/sounds-otter.htm
+License: Public-domain-USGov — https://www.nps.gov/aboutus/disclaimer.htm
+No claim to original U.S. Government works.
+
+alpaca (small-mammals-v1)
+Creator: mayanespirit
+Source: https://freesound.org/people/mayanespirit/sounds/201983/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/
+
+llama (small-mammals-v1)
+Creator: TheKingOfGeeks360
+Source: https://freesound.org/people/TheKingOfGeeks360/sounds/871455/
+License: CC0-1.0 — https://creativecommons.org/publicdomain/zero/1.0/

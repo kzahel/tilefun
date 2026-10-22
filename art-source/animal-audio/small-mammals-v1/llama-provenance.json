@@ -1,0 +1,18 @@
+{
+  "id": "llama",
+  "creator": "TheKingOfGeeks360",
+  "soundId": 871455,
+  "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/871455/",
+  "download": "https://cdn.freesound.org/previews/871/871455_15895934-hq.mp3",
+  "sourceFile": "llama-source.mp3",
+  "bytes": 7968,
+  "sha256": "d013227c322b8b19fb15952fd8937fb97df25b82beca7790a5870bccd6230012",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "llama",
+  "sourceSpecies": "llama",
+  "notes": "A 0.24-second defensive air burst while spitting at a goat. Explicit non-vocal sound, not a calm hum. Warning onset only; this adds no spit projectile or new AI.",
+  "verified": "2026-10-22",
+  "category": "defensive non-vocal burst"
+}

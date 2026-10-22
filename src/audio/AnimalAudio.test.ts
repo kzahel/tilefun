@@ -153,6 +153,8 @@ it("maps recorded browser identities, preserves inheritance and pins every retai
     expect(credits).toContain(source.sourcePage);
     expect(credits).toContain(source.creator);
     expect(credits).toContain(source.licenseUrl);
+    if (source.license === "Public-domain-USGov")
+      expect(credits).toContain("No claim to original U.S. Government works.");
     expect(hash(`art-source/animal-audio/${bank}/${source.sourceFile}`)).toBe(source.sha256);
     expect(ANIMAL_RECORDINGS[source.id as keyof typeof ANIMAL_RECORDINGS]).toEqual(
       source.variants.map((v) => v.path),
@@ -244,36 +246,36 @@ it("keeps deer browsing/resting silent and sounds only its fresh serialized alar
   expect(h.audio.diagnostics.active).toBe(0);
 });
 
-it("keeps piglet squeals out of calm ambience and plays only a fresh replicated flee onset", async () => {
-  const h = harness(),
-    pig = createFauna("piglet", 20, 0);
-  pig.id = 2;
-  const pose = (name: string) => {
-    required(pig.sprite).clip = required(ENTITY_DEFS[pig.type]?.sprite?.clips).findIndex(
-      (c) => c.name === name,
+it("keeps alarm-only mammal sounds out of calm ambience and plays only fresh replicated warnings", async () => {
+  for (const species of ["piglet", "meerkat", "raccoon", "llama"] as const) {
+    const h = harness(),
+      actor = createFauna(species, 20, 0),
+      voice = required(animalVoiceForSpecies(species)),
+      alarm = required(ANIMAL_VOICES[voice].alarmCue);
+    actor.id = 2;
+    setPose(actor, "idle");
+    h.audio.update([actor], h.listener, true);
+    h.ctx.currentTime = 100;
+    h.audio.update([actor], h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(0);
+    setPose(actor, alarm);
+    required(actor.wanderAI).state = "scared";
+    const replica = deserializeEntity(serializeEntity(actor));
+    h.audio.update([replica], h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+    expect(h.fetcher).toHaveBeenCalledWith(
+      expect.stringContaining(required(ANIMAL_RECORDINGS[voice][0]).replace(/-\d+\.ogg$/, "-")),
     );
-    required(pig.sprite).clipElapsedMs = 0;
-  };
-  pose("idle");
-  h.audio.update([pig], h.listener, true);
-  h.ctx.currentTime = 100;
-  h.audio.update([pig], h.listener, true);
-  await h.flush();
-  expect(h.sources).toHaveLength(0);
-  pose("flee");
-  required(pig.wanderAI).state = "scared";
-  const replica = deserializeEntity(serializeEntity(pig));
-  h.audio.update([replica], h.listener, true);
-  await h.flush();
-  expect(h.sources).toHaveLength(1);
-  expect(h.fetcher).toHaveBeenCalledWith(expect.stringContaining("farm-v1/piglet-1.ogg"));
-  h.audio.update([replica], h.listener, true);
-  await h.flush();
-  expect(h.sources).toHaveLength(1);
-  h.audio.stop();
-  h.audio.update([replica], h.listener, true);
-  await h.flush();
-  expect(h.sources).toHaveLength(1);
+    h.audio.update([replica], h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+    h.audio.stop();
+    h.audio.update([replica], h.listener, true);
+    await h.flush();
+    expect(h.sources).toHaveLength(1);
+  }
 });
 
 it.each(["crow", "raven"] as const)(

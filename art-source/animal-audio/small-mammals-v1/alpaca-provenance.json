@@ -1,0 +1,18 @@
+{
+  "id": "alpaca",
+  "creator": "mayanespirit",
+  "soundId": 201983,
+  "sourcePage": "https://freesound.org/people/mayanespirit/sounds/201983/",
+  "download": "https://cdn.freesound.org/previews/201/201983_2568677-hq.mp3",
+  "sourceFile": "alpaca-source.mp3",
+  "bytes": 517105,
+  "sha256": "dadad2cf8bf77d2e83b3908728d03c68bc1a1c36b35530658000d26a330910b7",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "CC0-1.0",
+  "sourceKind": "public HQ MP3 preview; not original lossless download",
+  "species": "alpaca",
+  "sourceSpecies": "alpaca",
+  "notes": "Soft calls from an actual alpaca; larger throat-scratching/noisy interruptions excluded.",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "meerkat",
+  "creator": "Lily Johnson-Ulrich, Vlad Demartsev, Laurie Johnson, Emma Brown, Ariana Strandburg-Peshkin, Marta B. Manser",
+  "sourcePage": "https://zenodo.org/records/7831997",
+  "upstream": "https://doi.org/10.1098/rsos.230489",
+  "download": "https://zenodo.org/api/records/7831997/files/FileS1_Recruitment_calls_sample_playback_track.wav/content",
+  "sourceKind": "original WAV supplementary playback track from field-recorded adult meerkat recruitment calls",
+  "sourceFile": "meerkat-source.wav",
+  "sha256": "fe774d82493fadf4be05ff6593f39625ab905dbe9d171891026e7645ecea2383",
+  "bytes": 3151700,
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "notes": "Adult recruitment calls from supplementary playback File S1, not the parametric-speaker rerecording; used only in the existing threat-warning pose, with no new mobbing AI.",
+  "species": "meerkat",
+  "sourceSpecies": "adult meerkat",
+  "verified": "2026-10-22",
+  "category": "vocalization"
+}

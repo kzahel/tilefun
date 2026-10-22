@@ -117,5 +117,23 @@
   "japanese-macaque": [
     "assets/audio/animals/primates-v1/japanese-macaque-1.ogg",
     "assets/audio/animals/primates-v1/japanese-macaque-2.ogg"
-  ]
+  ],
+  "guinea-pig": [
+    "assets/audio/animals/small-mammals-v1/guinea-pig-1.ogg",
+    "assets/audio/animals/small-mammals-v1/guinea-pig-2.ogg"
+  ],
+  "meerkat": ["assets/audio/animals/small-mammals-v1/meerkat-1.ogg"],
+  "raccoon": [
+    "assets/audio/animals/small-mammals-v1/raccoon-1.ogg",
+    "assets/audio/animals/small-mammals-v1/raccoon-2.ogg"
+  ],
+  "river-otter": [
+    "assets/audio/animals/small-mammals-v1/river-otter-1.ogg",
+    "assets/audio/animals/small-mammals-v1/river-otter-2.ogg"
+  ],
+  "alpaca": [
+    "assets/audio/animals/small-mammals-v1/alpaca-1.ogg",
+    "assets/audio/animals/small-mammals-v1/alpaca-2.ogg"
+  ],
+  "llama": ["assets/audio/animals/small-mammals-v1/llama-1.ogg"]
 }

@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "id": "small-mammals-v1",
+  "sampleRate": 24000,
+  "channels": 1,
+  "listeningReview": "pending-owner",
+  "sources": [
+    {
+      "id": "guinea-pig",
+      "creator": "Breviceps",
+      "soundId": 583078,
+      "sourcePage": "https://freesound.org/people/Breviceps/sounds/583078/",
+      "download": "https://cdn.freesound.org/previews/583/583078_9159316-hq.mp3",
+      "sourceFile": "guinea-pig-source.mp3",
+      "bytes": 1039433,
+      "sha256": "cb6938a341bd8bad13c8cd22beb7a4110bcb4837a7ddd7e643c87bffe257e6e1",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "guinea-pig",
+      "sourceSpecies": "guinea pig",
+      "notes": "Real guinea-pig squeaks; sparse stationary contact calls, not artificial pitch variants.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/small-mammals-v1/guinea-pig-1.ogg",
+          "sha256": "cf6073d8fe435ab0d891b6d2ca3c133b451d796c43313060890819bcfe47a901",
+          "trim": [9.8, 10.6],
+          "filters": "atrim=start=9.8:end=10.6,asetpts=PTS-STARTPTS,highpass=f=500,lowpass=f=6500,volume=1.259744820,afade=t=in:d=0.02,afade=t=out:st=0.760000:d=0.04",
+          "duration": 0.7893333333333333,
+          "peak": 0.726171612739563,
+          "rms": 0.1612031296828872
+        },
+        {
+          "path": "assets/audio/animals/small-mammals-v1/guinea-pig-2.ogg",
+          "sha256": "b2411abc34d3b387a52817ab2bb0bae190b214a4d1ef2184f3984d9df0905da5",
+          "trim": [11.35, 12.1],
+          "filters": "atrim=start=11.35:end=12.1,asetpts=PTS-STARTPTS,highpass=f=500,lowpass=f=6500,volume=0.973321631,afade=t=in:d=0.02,afade=t=out:st=0.710000:d=0.04",
+          "duration": 0.7626666666666667,
+          "peak": 0.6812288761138916,
+          "rms": 0.15311299179784751
+        }
+      ]
+    },
+    {
+      "id": "meerkat",
+      "creator": "Lily Johnson-Ulrich, Vlad Demartsev, Laurie Johnson, Emma Brown, Ariana Strandburg-Peshkin, Marta B. Manser",
+      "sourcePage": "https://zenodo.org/records/7831997",
+      "upstream": "https://doi.org/10.1098/rsos.230489",
+      "download": "https://zenodo.org/api/records/7831997/files/FileS1_Recruitment_calls_sample_playback_track.wav/content",
+      "sourceKind": "original WAV supplementary playback track from field-recorded adult meerkat recruitment calls",
+      "sourceFile": "meerkat-source.wav",
+      "sha256": "fe774d82493fadf4be05ff6593f39625ab905dbe9d171891026e7645ecea2383",
+      "bytes": 3151700,
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "notes": "Adult recruitment calls from supplementary playback File S1, not the parametric-speaker rerecording; used only in the existing threat-warning pose, with no new mobbing AI.",
+      "species": "meerkat",
+      "sourceSpecies": "adult meerkat",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/small-mammals-v1/meerkat-1.ogg",
+          "sha256": "9f4a35f0429343e6a0d7c877cb4c74cbfa3cf9b4f930e62487f4bfaa0c2c076d",
+          "trim": [13.55, 15.7],
+          "filters": "atrim=start=13.55:end=15.7,asetpts=PTS-STARTPTS,highpass=f=350,lowpass=f=6000,volume=3.192562088,afade=t=in:d=0.02,afade=t=out:st=2.110000:d=0.04",
+          "duration": 2.15,
+          "peak": 0.7453882694244385,
+          "rms": 0.11368193666292867
+        }
+      ]
+    },
+    {
+      "id": "raccoon",
+      "creator": "TRP",
+      "soundId": 571212,
+      "sourcePage": "https://freesound.org/people/TRP/sounds/571212/",
+      "download": "https://cdn.freesound.org/previews/571/571212_97550-hq.mp3",
+      "sourceFile": "raccoon-source.mp3",
+      "bytes": 1579584,
+      "sha256": "f8a3dcc5cc9b333ec615637f423f660fdc9c2f3b8586f7c3c6a6563ac334ce82",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "raccoon",
+      "sourceSpecies": "raccoon",
+      "notes": "Close defensive growl/hiss phrases from a Toronto field recording; never calm cache-raiding ambience.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/small-mammals-v1/raccoon-1.ogg",
+          "sha256": "9b5d3aa64fa09ebb5ededb46c831bca6712ecb750566c164d9b2bc178d5b4da3",
+          "trim": [4.8, 6.9],
+          "filters": "atrim=start=4.8:end=6.9,asetpts=PTS-STARTPTS,highpass=f=150,lowpass=f=5000,volume=5.868243419,afade=t=in:d=0.02,afade=t=out:st=2.060000:d=0.04",
+          "duration": 2.1,
+          "peak": 0.725997805595398,
+          "rms": 0.11393700789879428
+        },
+        {
+          "path": "assets/audio/animals/small-mammals-v1/raccoon-2.ogg",
+          "sha256": "4d0fbb72f96eed5471ae2c77cb1dbf413993a437ab42800426a680f184a815b0",
+          "trim": [73.3, 76.0],
+          "filters": "atrim=start=73.3:end=76.0,asetpts=PTS-STARTPTS,highpass=f=150,lowpass=f=5000,volume=1.094771431,afade=t=in:d=0.02,afade=t=out:st=2.660000:d=0.04",
+          "duration": 2.7,
+          "peak": 0.8172871470451355,
+          "rms": 0.05778644924984388
+        }
+      ]
+    },
+    {
+      "id": "river-otter",
+      "creator": "National Park Service / Canyonlands National Park",
+      "sourcePage": "https://www.nps.gov/subjects/sound/sounds-otter.htm",
+      "download": "https://www.nps.gov/nps-audiovideo/audiovideo/99323aab-cdd5-432a-bd33-08e8826b41de.mp3",
+      "sourceFile": "river-otter-source.mp3",
+      "sourceKind": "original distributed NPS MP3 sound gallery excerpt",
+      "bytes": 109100,
+      "sha256": "87996a26e8dd8a46799b1df8604a82b03933b5baceea179f3883f92aa68da13d",
+      "license": "Public-domain-USGov",
+      "licenseUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "notes": "NPS-authored Canyonlands calls/splashes. High chirps selected from the gallery excerpt. No claim to original U.S. Government works.",
+      "species": "river-otter",
+      "sourceSpecies": "North American river otter",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/small-mammals-v1/river-otter-1.ogg",
+          "sha256": "46945be4520974d95fb95ae4abe78af9f91ceba89cb9ecf4dd07f415220a1819",
+          "trim": [4.7, 5.3],
+          "filters": "atrim=start=4.7:end=5.3,asetpts=PTS-STARTPTS,highpass=f=1400,lowpass=f=7000,volume=11.228832681,afade=t=in:d=0.02,afade=t=out:st=0.560000:d=0.04",
+          "duration": 0.5893333333333334,
+          "peak": 0.7515836358070374,
+          "rms": 0.0826745945871495
+        },
+        {
+          "path": "assets/audio/animals/small-mammals-v1/river-otter-2.ogg",
+          "sha256": "da3d04152b0e348d2ec2227e515fbeedbafc181c6d66d197b353bc88bfc87cb8",
+          "trim": [6.8, 7.35],
+          "filters": "atrim=start=6.8:end=7.35,asetpts=PTS-STARTPTS,highpass=f=1400,lowpass=f=7000,volume=9.483682495,afade=t=in:d=0.02,afade=t=out:st=0.510000:d=0.04",
+          "duration": 0.5706666666666667,
+          "peak": 0.7339379787445068,
+          "rms": 0.08351728104910028
+        }
+      ]
+    },
+    {
+      "id": "alpaca",
+      "creator": "mayanespirit",
+      "soundId": 201983,
+      "sourcePage": "https://freesound.org/people/mayanespirit/sounds/201983/",
+      "download": "https://cdn.freesound.org/previews/201/201983_2568677-hq.mp3",
+      "sourceFile": "alpaca-source.mp3",
+      "bytes": 517105,
+      "sha256": "dadad2cf8bf77d2e83b3908728d03c68bc1a1c36b35530658000d26a330910b7",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "alpaca",
+      "sourceSpecies": "alpaca",
+      "notes": "Soft calls from an actual alpaca; larger throat-scratching/noisy interruptions excluded.",
+      "verified": "2026-10-22",
+      "category": "vocalization",
+      "variants": [
+        {
+          "path": "assets/audio/animals/small-mammals-v1/alpaca-1.ogg",
+          "sha256": "06e5aa3f93891bd3a639df55e94e56d531401e56b66a69fb9a220c6e8edc632b",
+          "trim": [5.65, 6.6],
+          "filters": "atrim=start=5.65:end=6.6,asetpts=PTS-STARTPTS,highpass=f=150,lowpass=f=5000,volume=4.624166762,afade=t=in:d=0.02,afade=t=out:st=0.910000:d=0.04",
+          "duration": 0.9653333333333334,
+          "peak": 0.7069592475891113,
+          "rms": 0.1588716017554607
+        },
+        {
+          "path": "assets/audio/animals/small-mammals-v1/alpaca-2.ogg",
+          "sha256": "ff84c6a2cd59ebb0f5077a1037bd4b81a5656184073b607be43731067c0d51f5",
+          "trim": [8.0, 8.95],
+          "filters": "atrim=start=8.0:end=8.95,asetpts=PTS-STARTPTS,highpass=f=150,lowpass=f=5000,volume=4.752213912,afade=t=in:d=0.02,afade=t=out:st=0.910000:d=0.04",
+          "duration": 0.9653333333333334,
+          "peak": 0.6845495700836182,
+          "rms": 0.15902888882188235
+        }
+      ]
+    },
+    {
+      "id": "llama",
+      "creator": "TheKingOfGeeks360",
+      "soundId": 871455,
+      "sourcePage": "https://freesound.org/people/TheKingOfGeeks360/sounds/871455/",
+      "download": "https://cdn.freesound.org/previews/871/871455_15895934-hq.mp3",
+      "sourceFile": "llama-source.mp3",
+      "bytes": 7968,
+      "sha256": "d013227c322b8b19fb15952fd8937fb97df25b82beca7790a5870bccd6230012",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license": "CC0-1.0",
+      "sourceKind": "public HQ MP3 preview; not original lossless download",
+      "species": "llama",
+      "sourceSpecies": "llama",
+      "notes": "A 0.24-second defensive air burst while spitting at a goat. Explicit non-vocal sound, not a calm hum. Warning onset only; this adds no spit projectile or new AI.",
+      "verified": "2026-10-22",
+      "category": "defensive non-vocal burst",
+      "variants": [
+        {
+          "path": "assets/audio/animals/small-mammals-v1/llama-1.ogg",
+          "sha256": "91edb8c06fd6f22883dc1535cbd8523e429846bd2ada3df1a3330f80f829f2ed",
+          "trim": [0, 0.24],
+          "filters": "atrim=start=0:end=0.24,asetpts=PTS-STARTPTS,highpass=f=180,lowpass=f=6000,volume=5.085968341,afade=t=in:d=0.02,afade=t=out:st=0.200000:d=0.04",
+          "duration": 0.25066666666666665,
+          "peak": 0.7240085601806641,
+          "rms": 0.1260100076991545
+        }
+      ]
+    }
+  ]
+}
