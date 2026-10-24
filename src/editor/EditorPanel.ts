@@ -272,15 +272,12 @@ export class EditorPanel {
 
     for (const entry of ENTITY_PALETTE) {
       const btn = document.createElement("button");
-      btn.style.cssText = `
-        width: 64px; height: 44px; padding: 0; box-sizing: border-box;
-        border: 2px solid #555; border-radius: 4px;
-        background: ${entry.color}; color: #fff; font: bold 9px monospace;
-        cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-        display: flex; align-items: center; justify-content: center;
-      `;
-      btn.textContent = entry.label;
+      btn.className = "editor-entity-button";
+      btn.type = "button";
+      btn.style.background = entry.color;
+      this.appendEntityLabel(btn, entry.label);
       btn.title = `Place ${entry.label} (click map)`;
+      btn.setAttribute("aria-label", btn.title);
       btn.addEventListener("click", () => {
         this.model.selectedEntityType = entry.type;
         this.model.deleteMode = false;
@@ -349,6 +346,7 @@ export class EditorPanel {
       `;
       btn.textContent = entry.label;
       btn.title = `Place ${entry.label} (click map)`;
+      btn.setAttribute("aria-label", btn.title);
       btn.addEventListener("click", () => {
         this.model.selectedPropType = entry.type;
         this.model.deleteMode = false;
@@ -1134,18 +1132,20 @@ export class EditorPanel {
       const sprite = ENTITY_DEFS[entry.type]?.sprite;
       const sheet = sheets.get(sprite?.sheetKey ?? entry.type);
       if (sheet) {
-        const row = entry.previewRow ?? 0;
+        const facing = entry.previewRow ?? Direction.Down;
+        const row = facing < sheet.rows ? facing : 0;
         const col = sprite?.clips?.[0]?.start ?? 0;
         this.renderPreviewCanvas(
           btn,
           sheet,
           col,
           row,
-          64,
-          44,
+          84,
+          52,
           this.entityPreviewRegion(sheet, row, col),
         );
         btn.style.background = "#4b5563";
+        this.appendEntityLabel(btn, entry.label);
       }
     }
 
@@ -1191,6 +1191,15 @@ export class EditorPanel {
         }
       }
     }
+  }
+
+  private appendEntityLabel(button: HTMLButtonElement, label: string): void {
+    button.querySelector(".editor-entity-name")?.remove();
+    const caption = document.createElement("span");
+    caption.className = "editor-entity-name";
+    caption.textContent = label;
+    caption.setAttribute("aria-hidden", "true");
+    button.append(caption);
   }
 
   /** Find visible pixels in the initial pose without changing the gameplay sheet. */

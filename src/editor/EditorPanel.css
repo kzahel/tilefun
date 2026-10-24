@@ -66,6 +66,44 @@
   touch-action: pan-y;
 }
 
+.editor-entity-button {
+  display: flex;
+  flex: 0 0 88px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 88px;
+  height: 76px;
+  box-sizing: border-box;
+  padding: 2px;
+  border: 2px solid #555;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.editor-entity-button canvas {
+  flex: 0 0 auto;
+}
+
+.editor-entity-name {
+  flex: 0 0 16px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0 2px;
+  border-radius: 2px;
+  background: #1f2937;
+  font:
+    600 11px / 16px system-ui,
+    sans-serif;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
 .editor-panel[data-minimized="true"] .editor-tabs,
 .editor-panel[data-minimized="true"] .editor-palette-scroll {
   display: none;

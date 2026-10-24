@@ -850,24 +850,27 @@ This supersedes the unconditional meal-replacement contract from 132.
 
 ## Entity picker visibility
 
-The Entities palette fits each first-frame visible silhouette into its 60 × 40px
-preview, trimming transparent animation/anchor margins only in the thumbnail.
-A neutral slate background keeps dark animals visible, and zero button padding
-prevents CSS from squeezing the canvas. Source sheets, world size and anchors
-retain their existing contracts. Desktop (1280px) and phone (390px) browser checks
-cover every entity's visible fill and button bounds, plus enlarged silhouettes'
-centering and proportions;
-both reproduce the old undersized previews and pass with the fix. All six existing
-mobile-editor scrolling/minimizing/placement checks also pass.
+The Entities placement palette uses **88 × 76px named tiles**, with an **80 ×
+48px side-view preview** above an 11px caption. Four-direction animal sheets use
+the right-facing row; older one/two-row animals, resources and legacy people keep
+their existing first-row poses.
+Transparent animation/anchor margins are trimmed only in the thumbnail, and a
+slate background keeps dark animals visible. Names remain visible after assets
+load and truncate with ellipses when long. Existing full `Place … (click map)`
+accessible action names and hover titles remain stable. Tile wrapping stays inside the existing scrollable half-screen panel;
+mouse, touch and controller selection keep the same placement action. Source
+sheets, world facing, world size and anchors retain their existing contracts.
+Desktop (1280px) and phone (390px) browser checks cover every entity's visible
+fill, side-facing proportions, readable name placement, ellipsis styling and
+button bounds, plus actual selection. Existing mobile-editor checks cover
+scrolling/minimizing and placement.
 
-Validation after rebasing onto the upstream traffic fix: typechecks, lint, build,
-catalog and all 839 Workshop candidate identities pass. Full units: 2,720 pass,
-five existing Windows symlink/WAL failures and ten skipped tests. All eight
-focused picker/mobile browser checks pass. The broader browser run uses
-`--max-failures=1`: 45 pass, then the previously recorded GPU city-train reload
-distance failure (223px versus the 192px limit); one in-flight deer test is
-interrupted and 614 do not run. The prior predator full-run log records the same
-train assertion at 228px. This is not a full browser-suite pass.
+Validation, 2026-10-24: all **6,821 native tests**, Node integration and **838
+full-Chromium browser tests** pass. The 11 focused picker, mobile-editor and deer
+creation/deletion/reload checks pass. Typechecking, lint (existing warnings),
+production build, refreshed art catalog and all **1,980 Workshop candidate
+identities** pass. Desktop and phone captures were visually inspected. Source
+images and exact artwork identities are unchanged.
 
 ## Authorized predators and eaten-prey replacement
 

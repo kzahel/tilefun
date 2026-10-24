@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { SPRITE_MANIFEST } from "../src/assets/GameAssets.js";
 import { ENTITY_PALETTE } from "../src/editor/EditorPalettes.js";
+import { Direction } from "../src/entities/Entity.js";
 import { ENTITY_DEFS } from "../src/entities/EntityDefs.js";
 
 // Exercise the same compositor used by the actual picker, including phone sizing.
@@ -10,7 +11,7 @@ for (const viewport of [
   { width: 1280, height: 800 },
   { width: 390, height: 844 },
 ]) {
-  test(`entity thumbnails fill their buttons without stretching at ${viewport.width}px`, async ({
+  test(`named side-view entity thumbnails fit their tiles at ${viewport.width}px`, async ({
     page,
   }, testInfo) => {
     await page.setViewportSize(viewport);
@@ -28,10 +29,23 @@ for (const viewport of [
         path: asset.path,
         width: asset.w,
         height: asset.h,
-        row: previewRow ?? 0,
+        row: previewRow ?? Direction.Down,
         col: sprite?.clips?.[0]?.start ?? 0,
       };
     });
+    for (const label of [
+      "Wild tiger",
+      "Tuxedo Cat",
+      "Mallard duck",
+      "Common frog",
+      "Deer",
+      "Rabbit",
+      "Crow",
+    ]) {
+      expect(entries.find((entry) => entry.label === label)?.row, `${label} side view`).toBe(
+        Direction.Right,
+      );
+    }
     const measurements = await page.evaluate(async (entries) => {
       function bounds(canvas: HTMLCanvasElement) {
         const ctx = canvas.getContext("2d");
@@ -69,7 +83,7 @@ for (const viewport of [
           ctx.drawImage(
             image,
             entry.col * entry.width,
-            entry.row * entry.height,
+            (entry.row < image.height / entry.height ? entry.row : 0) * entry.height,
             entry.width,
             entry.height,
             0,
@@ -82,8 +96,22 @@ for (const viewport of [
           const scale = Math.min(preview.width / source.width, preview.height / source.height);
           const rect = preview.getBoundingClientRect(),
             buttonRect = button.getBoundingClientRect();
+          const caption = button.querySelector<HTMLElement>(".editor-entity-name");
+          if (!caption) throw Error(`Missing visible name: ${entry.label}`);
+          const nameRect = caption.getBoundingClientRect();
+          const nameStyle = getComputedStyle(caption);
           return {
             label: entry.label,
+            name: caption.textContent,
+            accessibleName: button.getAttribute("aria-label"),
+            nameFits:
+              nameRect.left >= buttonRect.left + 2 &&
+              nameRect.right <= buttonRect.right - 2 &&
+              nameRect.top >= rect.bottom &&
+              nameRect.bottom <= buttonRect.bottom - 2,
+            fontSize: Number.parseFloat(nameStyle.fontSize),
+            overflow: nameStyle.textOverflow,
+
             visible,
             scale,
             expected: { width: source.width * scale, height: source.height * scale },
@@ -104,6 +132,13 @@ for (const viewport of [
       .getByTestId("editor-panel")
       .screenshot({ path: testInfo.outputPath("entities.png") });
     for (const m of measurements) {
+      expect(m.name, `${m.label} visible name`).toBe(m.label);
+      expect(m.accessibleName, `${m.label} full accessible action`).toBe(
+        `Place ${m.label} (click map)`,
+      );
+      expect(m.nameFits, `${m.label} caption below preview within tile`).toBe(true);
+      expect(m.fontSize, `${m.label} readable caption`).toBeGreaterThanOrEqual(11);
+      expect(m.overflow, `${m.label} long names truncate`).toBe("ellipsis");
       expect(m.visible.width, m.label).toBeGreaterThan(0);
       expect(
         Math.max(m.visible.width / m.canvas.width, m.visible.height / m.canvas.height),
