@@ -5,8 +5,8 @@
   "lanes": [
     {
       "name": "browser",
-      "cases": 835,
-      "inventorySha256": "30c5c14a94417db1250889bfac023ece70948e0ea761d094852164448b816aa5",
+      "cases": 836,
+      "inventorySha256": "c0cabb3064be681967dc7984ee443d6489a9f6ba8430d3d74893221247f445fb",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -16,7 +16,7 @@
         {
           "path": "tests/animal-audio.spec.ts",
           "cases": 2,
-          "sourceSha256": "b7a28f1da4a47dc348e6fd04a4a84440b08ee5be984d6c4ecbc47d428fb23836"
+          "sourceSha256": "cdc95da421a34cf85f705f228e6adfb4335c189b3612394d25bcd162d3c7ee69"
         },
         {
           "path": "tests/animal-browser.spec.ts",
@@ -66,7 +66,7 @@
         {
           "path": "tests/building-doors.spec.ts",
           "cases": 6,
-          "sourceSha256": "fd5d6fc7d184b46ec9ef33fcd76e55c368ddcd1602a6c2d0b649dce4164887ab"
+          "sourceSha256": "6adcc02626a283cad9d285c0160ad4ff4d03b43f04b487d55d5b3545c3536cf2"
         },
         {
           "path": "tests/building-lab.spec.ts",
@@ -131,7 +131,7 @@
         {
           "path": "tests/controller-menu.spec.ts",
           "cases": 6,
-          "sourceSha256": "114d271c7bd756553628b3032a3618a2bd8b57f1483c2b72d08865d631663dce"
+          "sourceSha256": "5a04a162a3380d3e4a50b08d9cd4a580f256df45d0ec976dff35653354706be8"
         },
         {
           "path": "tests/curved-trains.spec.ts",
@@ -141,7 +141,7 @@
         {
           "path": "tests/deer-gameplay.spec.ts",
           "cases": 3,
-          "sourceSha256": "2cdb206103a3c77cbbcad54be41c34693d2cbba2d39a4dbf220ce46c0ae24ad0"
+          "sourceSha256": "b020376e966e8d9780d0bff65beafb2dba25cc70b023a323e78f827e70f32da6"
         },
         {
           "path": "tests/dense-review.spec.ts",
@@ -186,7 +186,7 @@
         {
           "path": "tests/frog-gameplay.spec.ts",
           "cases": 4,
-          "sourceSha256": "6719c3360150b09e22c74c8536cf6413fa5b6fec8b1277dd2b02ea55f731fd9e"
+          "sourceSha256": "8b4564a42be632967f09facd4b5afc8af709051bed41abf3485320b658db0ac5"
         },
         {
           "path": "tests/furniture-motion.spec.ts",
@@ -220,8 +220,8 @@
         },
         {
           "path": "tests/gpu-renderer.spec.ts",
-          "cases": 19,
-          "sourceSha256": "08245474dd916209cfbe2a7406032e1793bdafd1548c04e8d47fc7887eb385a7"
+          "cases": 20,
+          "sourceSha256": "ae8ca0474a233df6cca174c4a15ccc08e97e8895c4e7f767467d28ba0353e0fc"
         },
         {
           "path": "tests/horse-riding.spec.ts",
@@ -431,7 +431,7 @@
         {
           "path": "tests/range-work.spec.ts",
           "cases": 2,
-          "sourceSha256": "92afd21d527683d2101ca18872d538e98d94fc43b9180cdaf828304941ffde6b"
+          "sourceSha256": "1f85c0a42483f52fa6e3b259404c2b79fbba31605f3ab1f4652a325c06cf5d51"
         },
         {
           "path": "tests/raptors.spec.ts",
@@ -456,7 +456,7 @@
         {
           "path": "tests/robin-gameplay.spec.ts",
           "cases": 4,
-          "sourceSha256": "d9485189fa0250534d493f85f55c834398fad8bed87ea9b89e24baf5ce9b10b9"
+          "sourceSha256": "d460d567fb0fc8b5048772b01ed03b1920ccf0c86207decc2f83ddf7d0d87f24"
         },
         {
           "path": "tests/scenario-lifecycle.spec.ts",
@@ -566,7 +566,7 @@
         {
           "path": "tests/transporter.spec.ts",
           "cases": 1,
-          "sourceSha256": "88286618c00b8c676c989253f7fc10f3b410b8d697ba0928efc821ae279d5c40"
+          "sourceSha256": "bb2939f6354a6f10766f0acc1c65da10dc5dbcf4187d0c065747fa398d7000b9"
         },
         {
           "path": "tests/truck-bed.spec.ts",
@@ -641,7 +641,7 @@
         {
           "path": "tests/wildlife-gameplay.spec.ts",
           "cases": 6,
-          "sourceSha256": "a696527f7320b3570241c510c05d628adea5416f699fce9b2a34a5803bcc344e"
+          "sourceSha256": "58f78f952511bf998221bcc3486d2e7c2281f785977406b40ce22b25983dcbf3"
         },
         {
           "path": "tests/wildlife-review.spec.ts",

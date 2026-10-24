@@ -59,9 +59,13 @@ test("loads, carries and unloads through shared Worker controls with mesh/fallba
     await page.keyboard.up("ArrowRight");
   }
   await page.getByRole("button", { name: "Pause", exact: true }).click();
+  // The button requests a Worker clock fence; exact saved coordinates must be
+  // sampled after that acknowledgement, not during a final in-flight tick.
+  await expect.poll(async () => (await report())?.authority.clock?.running).toBe(false);
   await capture("loaded-driving");
   const before = await report();
   await page.getByRole("button", { name: "Reload", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Reload", exact: true })).toBeEnabled();
   await expect.poll(async () => (await report())?.car?.owner).toBe((await report())?.truck?.id);
   expect((await report())?.car?.wx).toBeCloseTo(before?.car?.wx ?? 0, 3);
   for (const mode of ["canvas", "gpu", "gpu-mesh"]) {

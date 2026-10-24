@@ -140,7 +140,7 @@ for (const renderer of ["canvas", "gpu"]) {
           { timeout: 45000, intervals: [30] },
         )
         .toBe(true);
-      const samples = new Map<string, Set<string>>();
+      const samples = new Map<string, Map<number, string>>();
       const key = (all: Pose[]) => {
         const a = subject(all);
         return active(a) && a
@@ -171,18 +171,26 @@ for (const renderer of ["canvas", "gpu"]) {
       await expect
         .poll(
           async () => {
-            const before = key(await poses());
-            if (!before) return false;
-            const png = PNG.sync.read(await canvas.screenshot()),
-              all = await poses(),
-              a = subject(all);
-            if (!a || key(all) !== before) return false;
-            const crop = spritePixels(png, a, color);
-            if (crop.painted <= 10) return false;
-            const group = samples.get(before) ?? new Set<string>();
-            group.add(crop.pixels);
-            samples.set(before, group);
-            return group.size >= 2;
+            // Fence the real Worker before each GPU readback. The screenshot
+            // may take longer than an animation frame on software-rendered CI.
+            await page.getByRole("button", { name: "Pause", exact: true }).click();
+            await expect(canvas).toHaveAttribute("data-authority-running", "false");
+            try {
+              const all = await poses(),
+                before = key(all),
+                a = subject(all);
+              if (!a || !before) return false;
+              const png = PNG.sync.read(await canvas.screenshot());
+              expect(key(await poses())).toBe(before);
+              const crop = spritePixels(png, a, color);
+              if (crop.painted <= 10) return false;
+              const group = samples.get(before) ?? new Map<number, string>();
+              group.set(a.column, crop.pixels);
+              samples.set(before, group);
+              return group.size >= 2 && new Set(group.values()).size >= 2;
+            } finally {
+              await page.getByRole("button", { name: "Resume", exact: true }).click();
+            }
           },
           { timeout: 25000, intervals: [50] },
         )

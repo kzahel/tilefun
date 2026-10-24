@@ -9,8 +9,8 @@ export default defineConfig({
   // Hosted CI uses software GPU rendering; two full Chromium workers can
   // starve the authority Worker and miss short-lived gameplay phases.
   workers: process.env.CI ? 1 : 2,
-  // GitHub exposes job logs after completion; surface a failed shard promptly.
-  maxFailures: process.env.CI ? 1 : 0,
+  // Full nightly/manual runs collect all failures instead of abandoning a shard.
+  globalTimeout: process.env.CI ? 45 * 60_000 : 0,
   reporter: [["list"], ["html", { open: "never" }]],
   snapshotPathTemplate: "{testDir}/fixtures/interior-approved/{arg}{ext}",
   // New/changed visual references require human review, never an automatic write.
@@ -18,6 +18,7 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:4174",
     screenshot: "only-on-failure",
+    trace: "retain-on-failure",
     storageState: "test-results/workshop-session.json",
   },
   webServer: {

@@ -15,6 +15,16 @@
       "path": "src/rendering/CarPixelOutline.ts",
       "sha256": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
       "snapshot": "art-source/vehicle-bake/replay-inputs/e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26/src/rendering/CarPixelOutline.ts"
+    },
+    {
+      "path": "package.json",
+      "sha256": "b53dd1e8f66765bf8cc051715a8209ab859142382451c153d1d9ad3049264daf",
+      "snapshot": "art-source/vehicle-bake/replay-inputs/b53dd1e8f66765bf8cc051715a8209ab859142382451c153d1d9ad3049264daf/package.json"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
+      "snapshot": "art-source/vehicle-bake/replay-inputs/c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235/package-lock.json"
     }
   ]
 }

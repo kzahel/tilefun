@@ -58,12 +58,15 @@ Playwright uses its own Chromium and an isolated preview on port 4174. Its
 feedback goes under `test-results/`, not the human review inbox. On Linux,
 Chromium may also need the system dependencies installed by
 `npx playwright install --with-deps chromium`.
-With `CI` set, browser tests use one worker and a 60-second overall deadline:
+With `CI` set, browser tests use one worker and a 60-second per-test deadline:
 hosted software GPU rendering can otherwise starve the simulation Worker.
-CI splits the suite across sixteen independent runners, each with isolated auth/data
-and one browser worker. The 1,474-case suite outgrew four shards; an eight-runner
-checkpoint still took over 34 minutes before the longest wildlife shards finished.
-Sixteen reduce wall time while preserving the same per-runner CPU/GPU budget and full coverage.
+Push/PR CI runs `npm run test:smoke`: 27 existing browser cases covering essential
+game, Worker/save, input, editing, vehicle and multiplayer boundaries, with a
+ten-minute suite deadline. The full browser suite runs nightly at 02:17 UTC or
+through **Actions → CI → Run workflow**, using eight independent runners with
+isolated auth/data and a 45-minute per-shard suite deadline. Only push validation
+on main deploys. Superseded runs for the same event/ref are cancelled. See
+[testing](topics/testing.md#ci-and-deployment) for the current gate and scope.
 Individual assertion deadlines remain explicit. Long
 headless scenario tests have bounded tick counts and separate wall-time allowances for hosted CPUs.
 Wildlife contact checks retry a grounded landing after any existing alarm finishes,
@@ -92,8 +95,8 @@ contact and release together through the shared short-tap helper.
 Review tests wait for intercepted feedback requests before inspecting their
 payloads: optimistic approval counts and pending-save text can appear before
 the request reaches the test route.
-Each CI shard stops at its first test failure so GitHub publishes its job logs
-promptly; other shards continue independently. Local runs collect all failures.
+The push/PR browser gate stops at its first failure. Full scheduled/manual and
+local runs collect all failures; failure artifacts include Playwright traces.
 The raster verification renders every Workshop candidate in headless-shell and
 full Chromium, checks the committed fingerprints and leaves the manifest intact.
 CI runs it on Ubuntu x64 so CPU-specific blending differences cannot hide behind

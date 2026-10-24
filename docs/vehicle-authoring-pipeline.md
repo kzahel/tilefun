@@ -434,6 +434,11 @@ Keep those receipts and v1/v2/v3 exporters byte-identical. The retained
 `{path, sha256, snapshot}` entries under schema `{version: 1, inputs: [...]}`.
 Snapshot files live under that same `replay-inputs/` directory.
 
+The 2026-10-23 dependency security update also retains the exact `package.json`
+and `package-lock.json` bytes from `66263da7` under their SHA256 directories.
+Existing receipts keep their original dependency pins while the live checkout
+uses patched tools. These registrations do not regenerate or approve assets.
+
 `replay_inputs.py` first checks current bytes at the original path. Only an exact
 registered path **and** hash permits historical fallback. It validates canonical
 relative paths, resolved containment, snapshot SHA256 and duplicate registrations;

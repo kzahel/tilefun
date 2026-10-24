@@ -56,12 +56,19 @@ for (const kind of ["butcher", "condo-bay"]) {
     await expect.poll(async () => (await state()).player).toEqual(entry.arrival);
     await page.screenshot({ path: `/tmp/tilefun-building-${kind}-interior.png` });
     // Traverse the shared hall with real input and collision; no teleporting across walls.
-    const direction = exit.arrival.wx > entry.arrival.wx ? "ArrowRight" : "ArrowLeft";
-    await page.keyboard.down(direction);
+    // Use released input pulses so a slow screenshot/replica round trip cannot
+    // leave movement held past the doorway and hide its contextual action.
     await expect
-      .poll(async () => Math.abs((await state()).player.wx - exit.arrival.wx))
-      .toBeLessThan(15);
-    await page.keyboard.up(direction);
+      .poll(
+        async () => {
+          const delta = exit.arrival.wx - (await state()).player.wx;
+          if (Math.abs(delta) < 15) return true;
+          await page.keyboard.press(delta > 0 ? "ArrowRight" : "ArrowLeft", { delay: 75 });
+          return false;
+        },
+        { timeout: 15000, intervals: [50] },
+      )
+      .toBe(true);
     await page.getByRole("button", { name: /Return to street/ }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
     await expect

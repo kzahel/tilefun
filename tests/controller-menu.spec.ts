@@ -115,6 +115,9 @@ test("right-stick cursor selects editor tools and map controls with A and RT", a
 test("Deck-sized menu, worlds, text keyboard, character and Options are controller complete", async ({
   page,
 }) => {
+  // This multi-view flow waits six real render frames for every pad press.
+  // Software GPU CI needs its own budget; individual assertions keep theirs.
+  test.setTimeout(process.env.CI ? 120000 : 30000);
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/tilefun/?desktop=1");
   const menu = page.getByTestId("world-menu");

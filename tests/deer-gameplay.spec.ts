@@ -64,8 +64,18 @@ for (const renderer of ["canvas", "gpu"]) {
         { intervals: [30] },
       )
       .toBe(true);
+    // Leave the alarm radius after the landing. Remaining beside the herd can
+    // start a fresh scare before a slow renderer observes the recovery.
+    await c.focus();
+    await page.keyboard.press("ArrowDown", { delay: 750 });
     await expect
-      .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
+      .poll(
+        async () => {
+          const current = await poses();
+          return current.length >= original.length && current.every((f) => f.state !== "scared");
+        },
+        { timeout: 15000 },
+      )
       .toBe(true);
     await expect(c).toHaveAttribute("data-player-max-vz", "0");
     expect(errors).toEqual([]);

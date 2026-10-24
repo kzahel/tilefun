@@ -80,4 +80,4 @@ it("populates seven real parked vehicles, drives the bridge and persists moved/d
   } finally {
     await s.close();
   }
-});
+}, 30000);

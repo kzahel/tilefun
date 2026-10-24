@@ -5,6 +5,15 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+
+# A newer revision replaces validation of the same event/ref. Nightly and manual
+# full-suite runs remain independent of the push deployment gate.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -27,15 +36,15 @@ jobs:
       - run: npm ci
       - run: npx biome check .
       - run: npm ci --prefix worker
+      - run: npm audit --audit-level=high
+      - run: npm audit --prefix worker --audit-level=high
       - run: npm run typecheck
       - run: npm test
       - run: npm run check:worker
-      - run: npm audit --audit-level=high
-      - run: npm audit --prefix worker --audit-level=high
       - run: npm run build
       - run: npm run test:http-integration
 
-  # All shards use the same committed candidate bank. Verify its pixels once.
+  # Verify the committed candidate bank once, independently of browser coverage.
   raster:
     runs-on: ubuntu-latest
     steps:
@@ -52,7 +61,32 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run workshop:manifest -- --verify-raster
 
+  smoke:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm install --global npm@11.19.0
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:smoke
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: failure()
+        with:
+          name: playwright-smoke-report
+          path: |
+            playwright-report/
+            test-results/
+
   e2e:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -83,8 +117,8 @@ jobs:
             test-results/
 
   deploy:
-    needs: [check, raster, e2e]
-    if: github.ref == 'refs/heads/main'
+    needs: [check, raster, smoke]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: read

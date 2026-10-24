@@ -1,5 +1,28 @@
 # Testing
 
+## CI and deployment
+
+[186](../tactical/186-ci-reliability-and-deployment-gate.md) owns the 2026-10-23
+repair and simplification. Pushes and PRs require lint, types, all native and
+HTTP/WS tests, dependency audits, the production build, raster verification, and
+27 existing browser cases selected by `playwright.smoke.config.ts`. These cover
+launch/pixels, keyboard/controller/touch controls, Worker lifecycle and saves,
+mobile editing, vehicle driving/persistence, multiplayer and launcher assets.
+Run them with `npm run test:smoke`; no browser tests are deleted.
+
+The full browser suite runs at 02:17 UTC daily and through **Actions → CI → Run
+workflow**, using eight independent shards. It collects all failures and retains
+failure traces/screenshots. Only push validation on main deploys; scheduled and
+manual runs never deploy. New revisions cancel superseded runs for the same
+event/ref. Full local validation remains `npm run build && npx playwright test`.
+
+The old run spent 16.2 minutes in `src/wildlife/Fauna.test.ts` alone; its per-species
+production Realm samples and habitat generation are the next native performance
+target. Keep semantic coverage while measuring fixture reuse or distribution;
+do not add more browser shards to address a native test bottleneck.
+
+## Coverage and test scope
+
 [169](../tactical/169-wheel-lift-towing.md) adds one distinct Worker/browser towing
 boundary for shared controls, save/reload, coupled depth and backend/failed-model
 fallback. Native tests own axle/contact qualification across 26 models, actor
@@ -14,7 +37,8 @@ real recording decode/render, keyboard audition and shared lab action playback;
 ordinary Worker placement/playback and menu/focus silence. Species/coat coverage,
 source/export hashes, voice selection, cooldowns, spatial gain, late-load cleanup
 and combined voice limits are covered natively. The current browser collection is
-835 cases, with no per-species audio browser matrix or extra CI shards.
+836 cases after [184](../tactical/184-ground-rendering-and-moving-racetrack.md),
+with no per-species audio browser matrix or extra CI shards.
 
 Status: browser-suite migration implemented and locally validated, 2026-10-20.
 
@@ -38,6 +62,11 @@ rule variants below the browser where possible, retaining distinct browser
 boundaries and required asset-load coverage. Screenshot artifacts without an
 expectation are captures, not image regression tests.
 
+Exact paused-scene samples await the host's `authority.clock.running === false`
+acknowledgement. Saved-pose comparisons also await reload completion. Fence the
+Worker around GPU pixel readbacks so slow screenshots retain the sampled pose;
+compare distinct native animation columns and actual changed pixels.
+
 [Audit 157](../tactical/157-browser-test-audit.md) accounts for all 1,724 registered
 Playwright cases across 131 files and 403 templates at its source snapshot. It
 identifies 162 fully portable cases, 1,105 mixed cases requiring a split, 451 browser
@@ -54,8 +83,9 @@ Migration 158 resolves all 403 baseline templates. The default browser lane now
 contains 808 cases (53.1% fewer); exhaustive semantic coverage uses existing native
 owners with only demonstrated parity gaps added. The other lanes contain one
 browser-free comparator, three real HTTP/WS integration cases, and six opt-in
-captures. CI uses eight browser shards and verifies registered art rasters once
-in a separate required job. Keep those boundaries when extending coverage.
+captures. Full CI uses eight browser shards and verifies registered art rasters
+once in a separate job. The deployment gate above selects a bounded browser
+subset; keep the native/browser boundaries when extending coverage.
 
 Wildlife [159](../tactical/159-foraging-and-lookouts.md) adds seven focused
 browser cases, bringing the current browser lane to 815. Six check three new
