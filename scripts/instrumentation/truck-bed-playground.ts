@@ -216,7 +216,7 @@ try {
     "src/workshop/TruckBedPage.tsx",
     "src/rendering/GpuVehicleContents.ts",
     "src/rendering/VehicleBedPresentation.ts",
-    "src/rendering/VehicleBedDebug.ts",
+    "src/rendering/CollisionDebug.ts",
     "public/assets/models/vehicles/dump-truck-v1.glb",
     "public/assets/models/vehicles/dump-truck-v2.glb",
     "src/traffic/VehicleBedEquipment.ts",

@@ -16586,7 +16586,7 @@
       "name": "Tipping dump-truck bed",
       "prompt": "Use ordinary game controls to board, carry loose toys/food, ride and reload. Inspect floor/wall contacts and upright sprite depth. Tip/lower the articulated bed and inspect real cargo/rider discharge.",
       "url": "/tilefun/workshop.html?geometry=truck-bed#/tool/world-geometry",
-      "fingerprint": "711090fe7aba77dd65392a680df79b4c1ce7a47e21452a127a6c84edf2909986",
+      "fingerprint": "6b8964a155ee3caf1e54b0c8e3a82f829e47cbd6d2455de93a6d93f76ca13386",
       "excluded": "Interactive articulated-equipment engine review; v1 source preserved, changed v2 poses await human inspection. Not an immutable art approval snapshot."
     },
     {
@@ -50345,5 +50345,5 @@
       }
     }
   ],
-  "inputDigest": "2b523a44be1f48e4a8b099d767dfa07d37ea7844bb4afd9cee74a1d4e17e87c4"
+  "inputDigest": "235d283575472fdb1a80277589864437921531f707cef166d297ffcd07087902"
 }

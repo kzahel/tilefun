@@ -11,7 +11,15 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-21.
+Updated: 2026-10-24.
+
+The F3 collision inspector and Truck bed playground now use the same read-only
+`CollisionDebug` geometry collector, named layer colors and optional shape/height
+labels. It reads the production car, bed, transporter and prop-support helpers;
+neither host owns alternative collision geometry. Displayed XY/Z interpolation is
+shared with ordinary presentation. The legacy orbit view still shows enclosing
+boxes. [Vehicle inspection](vehicles.md#bed-geometry-and-debug-inspection) owns the
+layer meanings, focused validation and remaining terrain/contact diagnostics.
 
 [169](../tactical/169-wheel-lift-towing.md) adds the Tow truck playground using
 ordinary parked-vehicle records, shared Attach/Release controls and coupled

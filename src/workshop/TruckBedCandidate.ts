@@ -14,13 +14,13 @@ import {
 } from "../rendering/AuthoredVehicleMeshes.js";
 import assetLoader from "../rendering/CarMeshAsset.ts?raw";
 import outline from "../rendering/CarPixelOutline.ts?raw";
+import debug from "../rendering/CollisionDebug.ts?raw";
 import collection from "../rendering/collectScene.ts?raw";
 import cpuFallback from "../rendering/DumpTruckFallback.ts?raw";
 import cpuGeometry from "../rendering/dump-truck-v2-fallback.json?raw";
 import meshBodies from "../rendering/GpuMeshBodies.ts?raw";
 import contents from "../rendering/GpuVehicleContents.ts?raw";
 import timeline from "../rendering/PresentationTimeline.ts?raw";
-import debug from "../rendering/VehicleBedDebug.ts?raw";
 import fallback from "../rendering/VehicleBedPresentation.ts?raw";
 import recipe from "../scenarios/TruckBedRecipe.ts?raw";
 import cargoControl from "../server/VehicleBedControl.ts?raw";

@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { getEntityAABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
-import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
+import {
+  COLLISION_LAYERS,
+  defaultCollisionDebugOptions,
+  drawCollisionDebug,
+} from "../rendering/CollisionDebug.js";
+import { interpolatePosition } from "../rendering/EntityInterpolation.js";
 import type { RendererMode } from "../rendering/RenderHost.js";
-import { drawVehicleBedDebug } from "../rendering/VehicleBedDebug.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import type { ScenarioCommand } from "../scenarios/ScenarioProtocol.js";
 import { truckBedRecipe } from "../scenarios/TruckBedRecipe.js";
@@ -35,6 +39,12 @@ export default function TruckBedPage() {
   const [direction, setDirection] = useState(Direction.Right);
   const [paused, setPaused] = useState(false),
     [debug, setDebug] = useState(false);
+  const [geometry, setGeometry] = useState(() => {
+    const options = defaultCollisionDebugOptions();
+    options.layers.driving = false;
+    options.layers.support = options.layers.sprites = true;
+    return options;
+  });
   const [status, setStatus] = useState("Loading truck…"),
     [error, setError] = useState("");
   const [moving, setMoving] = useState(false),
@@ -47,8 +57,8 @@ export default function TruckBedPage() {
         ? "gpu"
         : "gpu-mesh";
   });
-  const settings = useRef({ paused, debug });
-  settings.current = { paused, debug };
+  const settings = useRef({ paused, debug, geometry });
+  settings.current = { paused, debug, geometry };
   useEffect(() => {
     const c = canvas.current;
     if (!c) return;
@@ -86,17 +96,14 @@ export default function TruckBedPage() {
         if (!settings.current.debug) return;
         const truck = h.session.view.entities.find((e) => e.vehicleBed);
         if (!truck) return;
-        const alpha = h.presentationAlpha;
-        drawVehicleBedDebug(
+        drawCollisionDebug(
           frame,
           h.camera,
-          {
-            ...truck,
-            position: interpolatePosition(truck.position, truck.prevPosition, alpha),
-            wz: interpolateWz(truck, alpha) ?? 0,
-          },
+          h.session.view.entities,
+          h.session.view.props,
           h.presentedPlayer,
-          bedContents(truck, h.session.view.entities),
+          settings.current.geometry,
+          h.presentationAlpha,
         );
       },
       onFrame: (h) => {
@@ -340,10 +347,39 @@ export default function TruckBedPage() {
         {hold(" ", "Jump")}
       </fieldset>
       {debug && (
-        <p>
-          Green: floor. Red: sloped walls and closed tailgate. Blue: player body. Yellow: upright
-          sprite plane. White: feet. Gray: cab/chassis.
-        </p>
+        <fieldset aria-label="Collision layers">
+          <legend>Collision layers · lines show through artwork</legend>
+          {Object.entries(COLLISION_LAYERS).map(([key, layer]) => {
+            const id = key as keyof typeof COLLISION_LAYERS;
+            return (
+              <label key={key} style={{ display: "block" }} title={layer.hint}>
+                <input
+                  type="checkbox"
+                  checked={geometry.layers[id]}
+                  onChange={(e) =>
+                    setGeometry({
+                      ...geometry,
+                      layers: { ...geometry.layers, [id]: e.target.checked },
+                    })
+                  }
+                />
+                <span style={{ color: layer.color }}> ━ </span>
+                {layer.label} — {layer.hint}
+              </label>
+            );
+          })}
+          <label>
+            <input
+              type="checkbox"
+              checked={geometry.labels}
+              onChange={(e) => setGeometry({ ...geometry, labels: e.target.checked })}
+            />{" "}
+            Shape names & heights
+          </label>
+          <p>
+            Green tops can support feet. White cross: your feet. Terrain collision is not shown.
+          </p>
+        </fieldset>
       )}
       <p>
         Stand beside the stopped truck to load nearby loose balls or food with the game controls.

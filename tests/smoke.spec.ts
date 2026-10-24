@@ -85,7 +85,7 @@ test("arrow and WASD input keep the game rendering without console or page error
   expect(errors).toEqual([]);
 });
 
-test("F3 toggles debug overlay", async ({ page }) => {
+test("F3 toggles debug overlay", async ({ page }, testInfo) => {
   await page.goto("/tilefun/");
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await page.waitForTimeout(200);
@@ -108,6 +108,48 @@ test("F3 toggles debug overlay", async ({ page }) => {
 
   // Toggle debug overlay via F3
   await page.keyboard.press("F3");
+  const panel = page.getByLabel("Debug panel", { exact: true });
+  await expect(panel).toBeVisible();
+  await expect(panel.getByLabel("Driving bodies", { exact: true })).toBeChecked();
+  await expect(panel.getByLabel("Search bounds", { exact: true })).not.toBeChecked();
+  await expect(
+    panel.getByRole("option", { name: "GPU + 3D car (default)", exact: true }),
+  ).toHaveCount(1);
+  const bluePixels = () =>
+    page.evaluate(() => {
+      const canvas = document.querySelector("#game") as HTMLCanvasElement & {
+        __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+      };
+      const image = canvas.__game.renderHost.captureFrame?.() ?? canvas;
+      const data = image.getContext("2d")?.getImageData(0, 0, image.width, image.height).data;
+      let count = 0;
+      if (data)
+        for (let i = 0; i < data.length; i += 4) {
+          // The blue debug body edges, including antialiasing against the ground.
+          if (
+            (data[i] ?? 0) >= 65 &&
+            (data[i] ?? 0) <= 120 &&
+            (data[i + 1] ?? 0) >= 145 &&
+            (data[i + 1] ?? 0) <= 200 &&
+            (data[i + 2] ?? 0) >= 220
+          )
+            count++;
+        }
+      return count;
+    });
+  await expect.poll(bluePixels).toBeGreaterThan(0);
+  const withBodies = await bluePixels();
+  await panel.getByLabel("People & objects", { exact: true }).uncheck();
+  await expect.poll(bluePixels).toBeLessThan(withBodies);
+  const withoutBodies = await bluePixels();
+  await panel.getByLabel("People & objects", { exact: true }).check();
+  await expect.poll(bluePixels).toBeGreaterThan(withoutBodies);
+  await testInfo.attach("collision-layers", {
+    body: await page.screenshot(),
+    contentType: "image/png",
+  });
+  await panel.getByText("Other diagnostics", { exact: true }).click();
+  await panel.getByLabel("Performance & network", { exact: true }).check();
   await page.waitForTimeout(200);
 
   // Check that top-left area changed (dark background + green text drawn)
@@ -130,4 +172,8 @@ test("F3 toggles debug overlay", async ({ page }) => {
   expect(pixelsBefore).not.toBeNull();
   expect(pixelsAfter).not.toBeNull();
   expect(pixelsAfter).not.toBe(pixelsBefore);
+  // F3 still closes the panel while one of its controls has keyboard focus.
+  await panel.getByLabel("People & objects", { exact: true }).focus();
+  await page.keyboard.press("F3");
+  await expect(panel).toBeHidden();
 });

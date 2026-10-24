@@ -5,7 +5,7 @@ Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-car presentation delivered;
 GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
 Bounded unchanged car images and ordered multi-texture GPU batches are delivered.
-Updated: 2026-10-22.
+Updated: 2026-10-24.
 
 [169](../tactical/169-wheel-lift-towing.md) groups a tow truck and its car in one
 shared GPU depth target. Per-draw absolute transforms reset both cached assets;
@@ -291,6 +291,7 @@ Current mode inventory:
 | Surface | Available behavior | Boundary |
 | --- | --- | --- |
 | Main game/labs | Canvas sprites, GPU sprites, GPU + 3D car | Shared fixed camera/painter ordering; only the last uses GLB bodies |
+| F3 collision overlay | Independently colored driving, walking, actor, support, query and sprite geometry; optional shape labels | Shared physics-derived collector on Canvas/GPU, also used by the Truck bed playground; [vehicle inspection](vehicles.md#bed-geometry-and-debug-inspection) owns usage and limits |
 | `r_show3d 1` | Orbitable perspective split-screen | Collider/terrain geometry, not a complete textured vehicle/world renderer |
 | Retained vehicle viewers | Study 50° / shared game camera, wheel motion, wireframe | Actual GLBs, still using native pixel targets and the shared outline |
 | Renderer lab | Mesh/sprite, pose, foreground/clip/recovery controls | Same production body adapter; useful for composition and fallback checks |

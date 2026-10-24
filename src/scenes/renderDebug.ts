@@ -2,10 +2,8 @@ import { TILE_SIZE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { drawCollisionDebug } from "../rendering/CollisionDebug.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
-import { drawVehicleBedDebug } from "../rendering/VehicleBedDebug.js";
-import { hasVehicleBed } from "../traffic/VehicleBed.js";
-import { bedContents } from "../traffic/VehicleCargo.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 
 // ── 3D debug renderer (lazy-loaded) ──
@@ -57,7 +55,7 @@ let lastBytesReceived = 0;
 let currentNetKbps = 0;
 
 /** Update FPS counter and render the debug overlay if enabled. */
-export function renderDebugOverlay(gc: GameContext): void {
+export function renderDebugOverlay(gc: GameContext, alpha = 1): void {
   // FPS tracking
   frameCount++;
   const now = performance.now() / 1000;
@@ -83,19 +81,23 @@ export function renderDebugOverlay(gc: GameContext): void {
   if (!gc.debugEnabled && !anyCvar) return;
 
   const { ctx, camera, stateView } = gc;
-  if (gc.debugEnabled || showBboxes) {
+  const entities = stateView.entities;
+  const observer =
+    entities.find((e) => e.id === stateView.playerEntity.id) ?? stateView.playerEntity;
+  gc.debugPanel.setCollisionContext(observer);
+  if ((gc.debugEnabled || showBboxes) && gc.debugPanel.showGeometry && !stateView.interior) {
     const overlay = gc.sceneFrame.overlays;
     overlay.begin();
     try {
-      for (const truck of stateView.entities)
-        if (hasVehicleBed(truck))
-          drawVehicleBedDebug(
-            overlay,
-            camera,
-            truck,
-            stateView.playerEntity,
-            bedContents(truck, stateView.entities),
-          );
+      drawCollisionDebug(
+        overlay,
+        camera,
+        entities,
+        stateView.props,
+        observer,
+        gc.debugPanel.collision,
+        alpha,
+      );
       gc.renderer.submit(camera, { kind: "overlay", items: overlay.items });
     } finally {
       overlay.release();
@@ -143,15 +145,13 @@ export function renderDebugOverlay(gc: GameContext): void {
       extrapolationStats: stateView.extrapolationStats,
     },
     camera.getVisibleChunkRange(),
-    gc.debugEnabled
-      ? undefined // legacy path: show all
-      : {
-          showInfoPanel: showFps,
-          showChunkBorders: showChunks,
-          showBboxes,
-          showGrid,
-          showPlayerNames: false,
-        },
+    {
+      showInfoPanel: showFps || (gc.debugEnabled && gc.debugPanel.showStats),
+      showChunkBorders: showChunks || (gc.debugEnabled && gc.debugPanel.showChunks),
+      showBboxes: false,
+      showGrid: showGrid || (gc.debugEnabled && gc.debugPanel.showGrid),
+      showPlayerNames: false,
+    },
     stateView.playerNames,
     stateView.world,
   );

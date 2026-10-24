@@ -4,6 +4,8 @@ import {
   setBaseSelectionMode,
   setForceConvex,
 } from "../autotile/TerrainId.js";
+import type { Entity } from "../entities/Entity.js";
+import { COLLISION_LAYERS, defaultCollisionDebugOptions } from "./CollisionDebug.js";
 import { TERRAIN_PACING, type TerrainPacing, ZOOM_PRESETS } from "./PresentationSettings.js";
 import type { RendererMode, RenderHost } from "./RenderHost.js";
 
@@ -19,8 +21,14 @@ const PANEL_STYLE = `
 const ROW_STYLE = "margin: 4px 0; display: flex; align-items: center; gap: 6px;";
 
 export class DebugPanel {
+  readonly collision = defaultCollisionDebugOptions();
+  showGeometry = true;
+  showStats = false;
+  showChunks = false;
+  showGrid = false;
   private readonly container: HTMLDivElement;
   private readonly playerInfoEl: HTMLDivElement;
+  private readonly collisionContext: HTMLDivElement;
   private readonly zoomPreset: HTMLSelectElement;
   private readonly terrainPacingSelect: HTMLSelectElement;
   private readonly zoomSlider: HTMLInputElement;
@@ -36,15 +44,100 @@ export class DebugPanel {
 
   constructor() {
     this.container = document.createElement("div");
+    this.container.setAttribute("role", "region");
+    this.container.setAttribute("aria-label", "Debug panel");
     this.container.style.cssText = PANEL_STYLE;
     // Focused controls own their keys; selecting a preset must not move the player.
-    this.container.addEventListener("keydown", (event) => event.stopPropagation());
+    this.container.addEventListener("keydown", (event) => {
+      if (event.key !== "F3") event.stopPropagation();
+    });
 
     // Player info row (updated externally)
     this.playerInfoEl = document.createElement("div");
     this.playerInfoEl.style.cssText =
       "margin: 4px 0 8px; font-size: 11px; color: #8cf; border-bottom: 1px solid #444; padding-bottom: 6px; word-break: break-all;";
     this.container.appendChild(this.playerInfoEl);
+    this.collisionContext = document.createElement("div");
+    this.collisionContext.style.cssText = "font:12px/1.4 monospace;max-width:330px;color:#d7e5f5;";
+    this.container.append(this.collisionContext);
+
+    const geometry = document.createElement("fieldset");
+    geometry.style.cssText = "margin:8px 0;padding:8px;max-width:330px;border:1px solid #667;";
+    const legend = document.createElement("legend");
+    legend.textContent = "Collision overlay";
+    geometry.append(legend);
+    const checkbox = (
+      parent: HTMLElement,
+      name: string,
+      checked: boolean,
+      change: (v: boolean) => void,
+      hint?: string,
+      color?: string,
+    ) => {
+      const label = document.createElement("label");
+      label.style.cssText = `${ROW_STYLE}cursor:pointer;`;
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.checked = checked;
+      input.onchange = () => change(input.checked);
+      label.append(input);
+      if (color) {
+        const swatch = document.createElement("span");
+        swatch.style.cssText = `width:14px;height:3px;background:${color};flex-shrink:0;`;
+        label.append(swatch);
+      }
+      label.append(name);
+      parent.append(label);
+      if (hint) {
+        const description = document.createElement("div");
+        description.textContent = hint;
+        description.style.cssText = "color:#bcc4ce;font:11px/1.35 monospace;margin:0 0 6px 24px;";
+        parent.append(description);
+      }
+    };
+    checkbox(geometry, "Show collision geometry", this.showGeometry, (v) => {
+      this.showGeometry = v;
+    });
+    for (const [key, layer] of Object.entries(COLLISION_LAYERS)) {
+      const id = key as keyof typeof COLLISION_LAYERS;
+      checkbox(
+        geometry,
+        layer.label,
+        this.collision.layers[id],
+        (v) => {
+          this.collision.layers[id] = v;
+        },
+        layer.hint,
+        layer.color,
+      );
+    }
+    checkbox(geometry, "Shape names & heights", this.collision.labels, (v) => {
+      this.collision.labels = v;
+    });
+    checkbox(geometry, "Only nearby geometry", this.collision.nearbyOnly, (v) => {
+      this.collision.nearbyOnly = v;
+    });
+    const explanation = document.createElement("div");
+    explanation.style.cssText = "color:#ccc;font:11px/1.4 monospace;";
+    explanation.textContent =
+      "Lines show through artwork. One vehicle can have different driving and walking shapes. Green means a possible standing surface, not current contact. White cross: your feet. Terrain collision is not shown.";
+    geometry.append(explanation);
+    this.container.append(geometry);
+
+    const diagnostics = document.createElement("details");
+    const diagnosticsTitle = document.createElement("summary");
+    diagnosticsTitle.textContent = "Other diagnostics";
+    diagnostics.append(diagnosticsTitle);
+    checkbox(diagnostics, "Performance & network", this.showStats, (v) => {
+      this.showStats = v;
+    });
+    checkbox(diagnostics, "Chunk borders", this.showChunks, (v) => {
+      this.showChunks = v;
+    });
+    checkbox(diagnostics, "Tile grid", this.showGrid, (v) => {
+      this.showGrid = v;
+    });
+    this.container.append(diagnostics);
 
     const presetRow = document.createElement("label");
     presetRow.style.cssText = ROW_STYLE;
@@ -163,11 +256,11 @@ export class DebugPanel {
     const show3dRow = document.createElement("div");
     show3dRow.style.cssText = ROW_STYLE;
     const show3dLbl = document.createElement("label");
-    show3dLbl.textContent = "3D View";
+    show3dLbl.textContent = "Legacy box view";
     this.show3dCheckbox = document.createElement("input");
     this.show3dCheckbox.type = "checkbox";
     const show3dHint = document.createElement("span");
-    show3dHint.textContent = "split-screen";
+    show3dHint.textContent = "split-screen · enclosing boxes";
     show3dHint.style.cssText = "color: #999; font-size: 11px;";
     show3dRow.append(show3dLbl, this.show3dCheckbox, show3dHint);
 
@@ -193,9 +286,9 @@ export class DebugPanel {
     const select = document.createElement("select");
     select.setAttribute("aria-label", "Renderer");
     for (const [value, label] of [
-      ["canvas", "Canvas (default)"],
-      ["gpu", "GPU sprites (experimental)"],
-      ["gpu-mesh", "GPU + 3D car (experimental)"],
+      ["canvas", "Canvas sprites"],
+      ["gpu", "GPU sprites"],
+      ["gpu-mesh", "GPU + 3D car (default)"],
     ] as const) {
       const option = document.createElement("option");
       option.value = value;
@@ -206,7 +299,7 @@ export class DebugPanel {
     const status = document.createElement("div");
     status.setAttribute("role", "status");
     status.style.cssText = "font-size:11px;color:#ccc;max-width:280px";
-    status.textContent = "Switches live. 3D car artwork is unfinished.";
+    status.textContent = "Switches live. Collision geometry stays the same.";
     select.onchange = async () => {
       const requested = select.value as RendererMode;
       select.disabled = true;
@@ -217,7 +310,7 @@ export class DebugPanel {
         status.textContent =
           actual !== requested
             ? "GPU unavailable; using Canvas."
-            : "Switched live. 3D car artwork is unfinished.";
+            : "Switched live. Collision geometry stays the same.";
       } catch (error) {
         select.value = control.mode;
         status.textContent = `Renderer change failed: ${String(error)}`;
@@ -231,6 +324,14 @@ export class DebugPanel {
 
   destroy(): void {
     this.container.remove();
+  }
+
+  setCollisionContext(player: Entity): void {
+    const text =
+      player.parentId !== undefined
+        ? `Riding with #${player.parentId}. Your separate walking body is inactive.`
+        : `Your object: #${player.id}. White cross marks your feet.`;
+    if (this.collisionContext.textContent !== text) this.collisionContext.textContent = text;
   }
 
   get visible(): boolean {

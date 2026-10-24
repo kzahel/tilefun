@@ -611,7 +611,7 @@ export class PlayScene implements GameScene {
       drawPlayerMarkers(gc, alpha);
       drawGemHUD(gc);
       gc.chatHUD.render(gc.ctx);
-      renderDebugOverlay(gc);
+      renderDebugOverlay(gc, alpha);
       render3DDebug(gc);
       if (!gc.xrActive) {
         this.drawDestination(gc);

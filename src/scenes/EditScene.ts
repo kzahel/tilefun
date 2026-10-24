@@ -315,7 +315,7 @@ export class EditScene implements GameScene {
 
     if (!gc.stateView.interior) renderEntities(gc, alpha);
     drawPlayerMarkers(gc, alpha);
-    renderDebugOverlay(gc);
+    renderDebugOverlay(gc, alpha);
     render3DDebug(gc);
     gc.camera.restoreActual();
   }

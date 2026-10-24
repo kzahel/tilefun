@@ -48,10 +48,16 @@ separate diagnostic teleport. WASD/arrows move and Space jumps. **Drive truck**
 uses ordinary autonomous traffic on the bounded road. Heading selection resets
 the fixture; actual driven turning is separately qualified in native scenarios.
 
-**Show clipping geometry** draws the actual physical floor in green, walls in red,
-player/cargo bodies in blue, upright sprite planes in yellow and feet in white.
-Cab/chassis prisms are gray. The game exposes the same overlay with
-`r_showbboxes 1` or its existing debug view. Pause and step inspect contacts;
+**Show clipping geometry** opens the shared collision layer controls. Orange shows
+physical walking obstacles (floor, walls, cab/chassis and tire clips), green their
+standing tops, blue active player/cargo bodies, yellow upright sprite planes and
+white your feet. Red driving bodies and gray search bounds are separate optional
+layers. **Shape names & heights** adds object IDs, part names and Z ranges for
+screenshots. The game exposes the same collector and color key through **F3 →
+Collision overlay** or `r_showbboxes 1`. The game initially hides standing tops,
+sprite planes and search bounds; the bed playground starts with its standing and
+sprite layers enabled. Green shows possible support, not a current contact.
+Pause and step inspect contacts;
 paused game controls are locked. Renderer switches preserve the Worker/world.
 Reload retains truck, cargo identities and the recessed rider height. The fixture's
 traffic target resets to stopped; a saved residual velocity still brakes normally.

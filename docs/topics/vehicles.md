@@ -11,7 +11,7 @@ shared engine. [Depot use and limits](../vehicle-depot.md) own the play contract
 
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-22.
+Updated: 2026-10-24.
 
 2026-10-22 integration verification: `tests/transporter.spec.ts:66` fails its strict
 paused/reload car-position equality, with a 0.72–1.82 world-pixel difference.
@@ -137,6 +137,62 @@ this request does not select a general rigid-body engine or change terrain rules
 
 ### Bed geometry and debug inspection
 
+The 2026-10-24 F3 overlay separates six named, independently selectable views:
+red driving bodies, orange walking obstacles, blue people/objects, green standing
+surfaces, gray search bounds and yellow sprite planes. The panel explains each
+color and can add shape names, object IDs and height ranges to screenshots.
+Nearby-only filtering is the default; support, query bounds and sprite planes
+start hidden to reduce clutter. Performance/network text, chunk borders and tile
+grid have separate controls. No additional keyboard shortcut is assigned.
+
+`rendering/CollisionDebug.ts` supplies the same geometry and colors to the game
+and Truck bed playground. It reads `VehicleContact.entityBody`, dump-bed convex
+parts, transporter solids and prop surface planes. XY/Z placement follows shared
+presentation interpolation without mutating simulation. A driver whose separate
+body is inactive does not acquire a diagnostic body; the panel explains that
+attachment. Replica hydration restores type-defined collider metadata even for
+drivers, so the inspector also checks parenting rather than treating every
+non-null collider description as an active independent body. Shape names/heights
+identify objects, not collision outcomes.
+
+Driving and pedestrian queries deliberately have separate layers: an ordinary
+car can have a rotated driving body and a conservative axis-aligned walking/roof
+footprint. Dump beds and transporter ramps have detailed pedestrian shapes while
+retaining their broader vehicle-movement body. Green faces show possible support,
+not a current contact or guaranteed reachable platform. Gray search bounds are
+XY query envelopes, not extra solids. Infinite prop walls are drawn to a bounded
+inspection height and labelled unlimited when shape labels are enabled. Sprite
+planes describe flat actor artwork, not anatomical geometry. Terrain collision,
+contact normals, rejected movement sweeps and authoritative-server comparisons
+are not included. The existing split-screen inspector is labelled **Legacy box
+view** because it still draws enclosing boxes.
+
+For a screenshot, enable the relevant layer(s), turn on **Shape names & heights**
+when useful and keep the panel's color key visible. Start with driving/walking
+comparison for vehicle contact, or standing surfaces/people for bed passengers.
+Normal pickups still lack the dump truck's hollow-bed profile. The next useful
+extension is a selected-object/contact readout, followed by terrain diagnostics.
+
+Validation: all 6,727 native tests and the Node integration check pass. Six focused
+native checks cover rotated versus axis-aligned bodies,
+posed hollow beds, separate ramp tracks, sloped/passable surfaces, inactive
+colliders/layer filtering and interpolation without mutation. Six focused browser checks
+pass the F3 controls and visible body-layer switch, game startup/movement, legacy
+inspector teardown, standalone review login/voting and the shared bed's
+Worker/GPU/Canvas/pause lifecycle. Types,
+lint (existing warnings), the production build and 1,980 regenerated candidate
+identities in both browser modes pass. Only the mutable bed diagnostic fingerprint
+and broad input digest change; retained artwork and approvals are untouched.
+An isolated current-source full-Chromium capture also reproduces a mounted
+person's retained static collider metadata, verifies the inactive riding label,
+and inspects the rotated driving body beside the walking envelope in the real
+Worker game.
+The full browser run records 835 passes and one standalone-review failure: the
+final riding-state correction changed source after the run's manifest was built,
+so that new server correctly disabled voting on stale inputs. Regenerating all
+1,980 identities and rebuilding resolves it; the standalone boundary and all five
+inspector/startup/lifecycle checks pass together on the final build (6/6).
+
 [160](../tactical/160-live-3d-and-shared-depth-investigation.md) now owns the
 cross-asset rendering/source-readiness investigation. Its schematic GPU proof
 qualifies bed-wall occlusion of an existing sprite plane at level/tilted poses;
@@ -165,11 +221,10 @@ and pose:
   does not describe a character's visible silhouette or per-pixel anatomical
   depth; keep the sprite-plane approximation visible in the diagnostic view.
 
-Desired shared game/lab debug modes:
+Remaining shared game/lab diagnostic directions (beyond the layers above):
 
-- Normal art with translucent wireframes: green supporting floor, red blocking
-  bed walls, blue player/object collider, marked foot contact and bed hinge.
-- Geometry-only and x-ray views, including the original whole-body vehicle box,
+- Geometry-only views and a marked bed hinge, extending the current wireframes.
+  Include the original whole-body vehicle box,
   so an unintended solid box spanning the hollow bed is immediately visible.
 - Sprite plane and visual-depth view, with hidden sprite pixels highlighted in a
   separate overlay. This distinguishes physical penetration from wrong visual
