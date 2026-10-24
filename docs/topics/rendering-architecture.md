@@ -559,6 +559,14 @@ acquire different gameplay or presentation rules.
    shared presentation inputs, not a renderer-local controller. Existing discrete
    facing cannot magically provide authoritative continuous steering. Physical
    orientation is a separately specified change, not a side effect of a mesh.
+   The compact-1 grade pilot uses measured wheel contacts in shared
+   `VehicleGroundPose`, then supplies `gradePitch`, `gradeRoll` and `gradeOffsetZ`
+   through `collectScene`. The GPU composes yaw, negative local-Y pitch, local-X
+   roll, and visual Z translation; each draw resets the reused asset's pose.
+   These inputs also invalidate cached body images. Physical body/roof support
+   stays upright. A rider's existing mesh-ready height correction includes the
+   fitted tilted roof plane; fallback remains at authoritative height. See
+   [vehicles](vehicles.md#turning-and-the-compact-ramp-pose-pilot--2026-10-24).
 
 6. **One projection and viewport contract.** The initial mode preserves current
    ground placement and the vertical screen displacement from world height,

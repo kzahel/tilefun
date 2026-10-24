@@ -392,7 +392,7 @@ function GeometryFixtures() {
               : trainGrade
                 ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Carriages stay horizontal, so slope joins are a visible limitation of this proof."
                 : vehicle
-                  ? "Watch the car follow the ramp with full-body clearance. It stops at the far end. Run the opposite direction to start a fresh return trip. The chassis stays level in this first proof."
+                  ? "Watch the car follow the ramp with upright body clearance. GPU + meshes tilts this compact to its wheel contacts; sprite views stay level. It stops at the far end. Run the opposite direction to start a fresh return trip."
                   : crossing
                     ? "Walk north over the road bridge and down the far ramp. The train passes east/west below, stops at each end for eight seconds, then reverses. Use trackside to inspect clearance from below."
                     : garage

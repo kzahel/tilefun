@@ -25,6 +25,7 @@ import {
   bedVisualOwner,
   hasDetailedVehicleSurface,
 } from "../traffic/VehicleBed.js";
+import { gradeRoofOffset, vehicleGroundPose } from "../traffic/VehicleGroundPose.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
 import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../wildlife/Roadkill.js";
@@ -109,6 +110,24 @@ export function collectScene(
   );
   const movingRoofs = entities.filter(hasMovingRoof);
   const transporters = entities.filter(isTransporter);
+  const groundPoses = new Map<number, ReturnType<typeof vehicleGroundPose>>();
+  const groundPoseFor = (entity: Entity) => {
+    if (supportingTransporter(entity, transporters)) return undefined;
+    if (!groundPoses.has(entity.id))
+      groundPoses.set(
+        entity.id,
+        vehicleGroundPose(
+          {
+            ...entity,
+            position: interpolatePosition(entity.position, entity.prevPosition, alpha),
+            wz: interpolateWz(entity, alpha) ?? 0,
+          },
+          (x, y) => world.getHeightAt(x, y),
+          props,
+        ),
+      );
+    return groundPoses.get(entity.id);
+  };
   const towSprites = entities.some((e) => e.towTargetId !== undefined || isTransporter(e))
     ? new Map<number, SpriteItem>()
     : undefined;
@@ -176,15 +195,31 @@ export function collectScene(
     // extends below their ground-center anchor. Preserve conservative mesh
     // bounds as well, so either the mesh or its sprite fallback can enter view.
     const effectiveWy = pos.wy - zOffset;
-    const support = !hasMovingRoof(e) ? roofSupport(e, movingRoofs) : undefined;
+    const supportId = !hasMovingRoof(e) ? roofSupport(e, movingRoofs)?.id : undefined;
+    const support =
+      supportId === undefined ? undefined : movingRoofs.find((e) => e.id === supportId);
     const supportMesh = support ? authoredVehicleForType(support.type ?? "") : undefined;
+    const supportGround = support ? groundPoseFor(support) : undefined;
+    const supportPosition = support
+      ? interpolatePosition(support.position, support.prevPosition, alpha)
+      : undefined;
     const meshRoofSupport =
       supportMesh && support?.collider
         ? {
             assetId: supportMesh.assetId,
             heightDelta:
               (support.collider.physicalHeight ?? 0) *
-              (1 - vehicleMeshHeightScale(supportMesh.vehicle)),
+                (1 - vehicleMeshHeightScale(supportMesh.vehicle)) -
+              (supportGround && supportPosition
+                ? gradeRoofOffset(
+                    supportGround,
+                    entityHeading(support),
+                    pos.wx - supportPosition.wx,
+                    pos.wy - supportPosition.wy,
+                    (support.collider.physicalHeight ?? 0) *
+                      vehicleMeshHeightScale(supportMesh.vehicle),
+                  )
+                : 0),
           }
         : undefined;
     const remains = isRoadkill(e.type);
@@ -192,8 +227,9 @@ export function collectScene(
     const drawOffsetY = (e.sprite.drawOffsetY ?? 0) * scaleY;
     const spriteBottom = effectiveWy + drawOffsetY;
     const meshAsset = frame ? frame.meshPoses.assetFor(e) : meshAssetFor(e);
+    const ground = meshAsset ? groundPoseFor(e) : undefined;
     const meshRadius = meshAsset
-      ? vehicleMeshRadius(meshAsset)
+      ? vehicleMeshRadius(meshAsset) + Math.abs(ground?.offsetZ ?? 0)
       : e.type.startsWith("train-curve-proof-v1")
         ? 96
         : 0;
@@ -279,7 +315,18 @@ export function collectScene(
         : undefined);
     const grade = supportingTransporter(e, transporters);
     const mesh = baseMesh
-      ? { ...baseMesh, transportRamp: e.vehicleRamp === 1, gradePitch: grade?.pitch ?? 0 }
+      ? {
+          ...baseMesh,
+          transportRamp: e.vehicleRamp === 1,
+          gradePitch: grade?.pitch ?? ground?.pitch ?? 0,
+          ...(ground
+            ? {
+                gradeRoll: ground.roll,
+                gradeOffsetZ: ground.offsetZ,
+                radius: Math.ceil(baseMesh.radius + Math.abs(ground.offsetZ)),
+              }
+            : {}),
+        }
       : undefined;
     const spriteItem = {
       ...(mesh ? { mesh } : {}),

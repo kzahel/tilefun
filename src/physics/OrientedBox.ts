@@ -133,6 +133,7 @@ export function boxMotion(start: OrientedBox, end: OrientedBox, rolling = false)
   };
   return {
     bounds,
+    poseAt: at,
     contact(target: OrientedBox, recover = false): boolean {
       const escaping = recover && boxDepth(start, target) > EPSILON;
       const initial = boxDepth(start, target, true);

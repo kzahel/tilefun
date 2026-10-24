@@ -424,14 +424,19 @@ export function checkedCarPose(
     support?.z ??
     resolveGroundZForTracking(next, (x, y) => world.getHeightAt(x, y), localProps, []);
   const beforeZ = car.wz ?? 0;
-  if (
-    supportedZ === undefined &&
-    Math.abs(z - beforeZ) > Math.hypot(velocity.vx, velocity.vy) * dt * 0.5 + 0.001
-  )
-    return;
+  const turnAngle = Math.atan2(
+    Math.sin(vehicleNoseHeading(next) - vehicleNoseHeading(car)),
+    Math.cos(vehicleNoseHeading(next) - vehicleNoseHeading(car)),
+  );
+  const cornerRadius = Math.hypot(before.right - before.left, before.bottom - before.top) / 2;
+  const gradeTravel =
+    Math.hypot(velocity.vx, velocity.vy) * dt + cornerRadius * Math.abs(turnAngle);
+  if (supportedZ === undefined && Math.abs(z - beforeZ) > gradeTravel * 0.5 + 0.001) return;
   next.wz = next.groundZ = z;
   if (motion) motion = carBodyMotion(car, next);
   const height = next.collider.physicalHeight ?? 24;
+  let minimumSupportZ = Math.min(beforeZ, z),
+    maximumSupportZ = Math.max(beforeZ, z);
   for (const prop of localProps)
     for (const wall of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
       const part = { collider: wall, walls: null };
@@ -460,23 +465,39 @@ export function checkedCarPose(
             vehicleNoseHeading(car) + angle * t,
             car.towedBy !== undefined,
           );
-          const wx = car.position.wx + (next.position.wx - car.position.wx) * t;
-          const wy = car.position.wy + (next.position.wy - car.position.wy) * t;
-          if (
-            aabbOverlapsPropWalls(
-              {
-                left: wx - size.width / 2,
-                right: wx + size.width / 2,
-                top: wy - size.height / 2,
-                bottom: wy + size.height / 2,
-              },
-              prop.position,
-              part,
-              beforeZ + (z - beforeZ) * t,
-              height,
-            )
-          )
-            return;
+          const bodyPose = motion?.poseAt(t);
+          const wx = bodyPose?.x ?? car.position.wx + (next.position.wx - car.position.wx) * t;
+          const wy = bodyPose?.y ?? car.position.wy + (next.position.wy - car.position.wy) * t;
+          const footprint = {
+            left: wx - size.width / 2,
+            right: wx + size.width / 2,
+            top: wy - size.height / 2,
+            bottom: wy + size.height / 2,
+          };
+          const sampleZ =
+            supportedZ !== undefined || support
+              ? beforeZ + (z - beforeZ) * t
+              : resolveGroundZForTracking(
+                  {
+                    id: car.id,
+                    position: { wx, wy },
+                    collider: {
+                      ...next.collider,
+                      width: size.width,
+                      height: size.height,
+                      offsetX: 0,
+                      offsetY: size.height / 2,
+                    },
+                    wz: beforeZ + (z - beforeZ) * t,
+                  },
+                  (x, y) => world.getHeightAt(x, y),
+                  localProps,
+                  [],
+                );
+          if (Math.abs(sampleZ - beforeZ) > gradeTravel * t * 0.5 + 0.001) return;
+          minimumSupportZ = Math.min(minimumSupportZ, sampleZ);
+          maximumSupportZ = Math.max(maximumSupportZ, sampleZ);
+          if (aabbOverlapsPropWalls(footprint, prop.position, part, sampleZ, height)) return;
         }
         continue;
       }
@@ -557,14 +578,17 @@ export function checkedCarPose(
       bottom: Math.max(a.bottom, b.bottom),
     };
     const roofZ = z + movingSupportZ(car, rider) - (car.wz ?? 0);
+    const roofOffset = roofZ - z;
     if (
       (queries?.props(sweep) ?? props).some((p) =>
         aabbOverlapsPropWalls(
           sweep,
           p.position,
           p,
-          Math.min(rider.wz ?? roofZ, roofZ),
-          (rider.collider?.physicalHeight ?? 16) + Math.abs((rider.wz ?? roofZ) - roofZ),
+          Math.min(rider.wz ?? roofZ, minimumSupportZ + roofOffset),
+          (rider.collider?.physicalHeight ?? 16) +
+            Math.max(rider.wz ?? roofZ, maximumSupportZ + roofOffset) -
+            Math.min(rider.wz ?? roofZ, minimumSupportZ + roofOffset),
         ),
       )
     )

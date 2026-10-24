@@ -685,7 +685,11 @@ The [vehicle grade fixtures](../tactical/064-vehicle-grade-proof.md) inject auth
 traffic lanes through RealmOptions and seed bounded road areas once. Their cars
 use the same TrafficSystem, actor replication and TrafficRecords as generated
 traffic, including height and route restoration. The lab owns recipe selection
-and observer controls only; it has no car movement loop.
+and observer controls only; it has no car movement loop. The compact-1 ramp-pose
+pilot derives tyre contacts through shared `VehicleGroundPose`/`collectScene`,
+so game and lab receive the same pitch, roll, height and fitted-roof correction.
+See [vehicles](vehicles.md#turning-and-the-compact-ramp-pose-pilot--2026-10-24) for
+the upright collision boundary and qualification scope.
 
 
 [Train grades](../tactical/061-train-grade-proof.md) use the same RailwaySystem,

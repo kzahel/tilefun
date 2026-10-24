@@ -33195,11 +33195,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:293"
+          "source": "src/rendering/collectScene.ts:340"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:303"
+          "source": "src/rendering/collectScene.ts:350"
         },
         {
           "system": "Gameplay",
@@ -34089,7 +34089,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:487"
+          "source": "src/rendering/collectScene.ts:534"
         },
         {
           "system": "Gameplay",
@@ -34157,7 +34157,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:545"
+          "source": "src/traffic/Driving.ts:566"
         },
         {
           "system": "Gameplay",

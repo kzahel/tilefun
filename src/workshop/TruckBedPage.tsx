@@ -104,6 +104,7 @@ export default function TruckBedPage() {
           h.presentedPlayer,
           settings.current.geometry,
           h.presentationAlpha,
+          (x, y) => h.session.view.world.getHeightAt(x, y),
         );
       },
       onFrame: (h) => {

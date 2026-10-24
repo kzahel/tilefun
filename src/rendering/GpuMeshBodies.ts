@@ -177,10 +177,14 @@ export class GpuMeshBodies {
           -(item.mesh.towPitch || item.mesh.gradePitch || 0),
         ),
       );
+    if (item.mesh.gradeRoll)
+      object.quaternion.multiply(
+        new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), item.mesh.gradeRoll),
+      );
     object.position.set(
       (item.mesh.towOffsetX ?? 0) * Math.cos(yaw),
       (item.mesh.towOffsetX ?? 0) * Math.sin(yaw),
-      item.mesh.towOffsetZ ?? 0,
+      (item.mesh.towOffsetZ ?? 0) + (item.mesh.gradeOffsetZ ?? 0),
     );
     asset.setTransportRamp(item.mesh.transportRamp ?? false);
     asset.setTowLift(item.mesh.towActive ?? false);
@@ -200,10 +204,14 @@ export class GpuMeshBodies {
             -(mesh.towPitch || mesh.gradePitch || 0),
           ),
         );
+      if (mesh.gradeRoll)
+        o.quaternion.multiply(
+          new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), mesh.gradeRoll),
+        );
       o.position.set(
         child.wx - item.wx + (mesh.towOffsetX ?? 0) * Math.cos(yaw),
         child.wy - item.wy + (mesh.towOffsetX ?? 0) * Math.sin(yaw),
-        child.zOffset - item.zOffset + (mesh.towOffsetZ ?? 0),
+        child.zOffset - item.zOffset + (mesh.towOffsetZ ?? 0) + (mesh.gradeOffsetZ ?? 0),
       );
       childAsset.setTravel(mesh.wheelTravel ?? 0, !!mesh.towPitch);
       childAsset.setTransportRamp(false);

@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import type { GeometryCanvas } from "../src/workshop/WorldGeometryPage.js";
 
 test.use({ channel: "chromium" });
 for (const renderer of ["canvas", "gpu"])
@@ -8,7 +9,7 @@ for (const renderer of ["canvas", "gpu"])
       const errors: string[] = [];
       page.on("pageerror", (e) => errors.push(e.message));
       await page.goto(
-        `/tilefun/workshop.html?geometry=car-${garage ? "garage" : "bridge"}&renderer=${renderer}#/tool/world-geometry`,
+        `/tilefun/workshop.html?geometry=car-${garage ? "garage" : "bridge"}&renderer=${renderer}${renderer === "gpu" ? "&meshes" : ""}#/tool/world-geometry`,
       );
       const c = page.getByLabel("World geometry scene");
       await expect(c).toHaveAttribute("data-ready", "true");
@@ -30,6 +31,14 @@ for (const renderer of ["canvas", "gpu"])
           { intervals: [100] },
         )
         .toBeGreaterThanOrEqual(3);
+      if (renderer === "gpu")
+        await expect
+          .poll(() =>
+            c.evaluate(
+              (canvas: GeometryCanvas) => canvas.__presentationDiagnostics?.().meshDraws ?? 0,
+            ),
+          )
+          .toBeGreaterThan(0);
       const z = last;
       await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
       await expect(c).toHaveAttribute("data-car-z", z ?? "");

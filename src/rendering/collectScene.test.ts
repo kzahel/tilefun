@@ -7,8 +7,10 @@ import { createPlayer } from "../entities/Player.js";
 import { createCurveTrain } from "../railway/CurveTrain.js";
 import { RailAlignment } from "../railway/RailPath.js";
 import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
+import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { createVehicle, VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { DUMP_BED, hasVehicleBed } from "../traffic/VehicleBed.js";
+import { gradeRoofOffset, vehicleGroundPose } from "../traffic/VehicleGroundPose.js";
 import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
@@ -66,6 +68,65 @@ it.each(VEHICLE_MODELS)(
     expect(player).toEqual(before);
   },
 );
+
+it("collects the ramp pilot and its roof rider from the same interpolated wheel pose", () => {
+  const car = createVehicle("compact-1", 200, 150, Direction.Right);
+  car.id = 1;
+  car.wz = 90;
+  car.prevWz = 88;
+  car.prevPosition = { wx: 192, wy: 150 };
+  const player = createPlayer(200, 150);
+  player.id = 2;
+  player.wz = 90 + (car.collider?.physicalHeight ?? 0);
+  player.prevWz = player.wz - 2;
+  player.prevPosition = { wx: 192, wy: 150 };
+  const ramp = surfaceProp(
+    { left: -100, right: 500, top: -150, bottom: 450 },
+    { id: "ramp", spaceId: "outside", z: 0, riseX: 150, riseY: 0, thickness: 8, connectsTo: [] },
+  );
+  const camera = new Camera();
+  camera.zoom = 1 / 3;
+  camera.setViewport(600, 400);
+  camera.snapTo(200, 150);
+  const before = structuredClone([car, player]);
+  const items = collectScene(
+    [car, player],
+    [ramp],
+    world,
+    camera,
+    camera.getVisibleChunkRange(),
+    0.5,
+    terrain,
+    [],
+    false,
+    undefined,
+    undefined,
+    new SceneFrame(),
+  );
+  const body = items.find(
+    (item) => item.kind === "sprite" && item.sheetKey === car.sprite?.sheetKey,
+  );
+  const rider = items.find(
+    (item) => item.kind === "sprite" && item.sheetKey === player.sprite?.sheetKey,
+  );
+  const pose = vehicleGroundPose({ ...car, position: { wx: 196, wy: 150 }, wz: 89 }, () => 0, [
+    ramp,
+  ]);
+  if (body?.kind !== "sprite" || rider?.kind !== "sprite" || !pose)
+    throw Error("Missing grade scene");
+  expect(body.mesh?.gradePitch).toBeCloseTo(Math.atan(0.25));
+  expect(body.mesh?.gradeRoll).toBe(0);
+  expect(body.mesh?.gradeOffsetZ).toBeCloseTo(pose.offsetZ);
+  // Sprite fallback and authority stay at their original upright heights.
+  expect(body.zOffset).toBe(89);
+  expect(rider.zOffset).toBe(player.wz - 1);
+  const height = car.collider?.physicalHeight ?? 0;
+  const fit = vehicleMeshHeightScale("compact-1");
+  expect(rider.meshRoofSupport?.heightDelta).toBeCloseTo(
+    height * (1 - fit) - gradeRoofOffset(pose, 0, 0, 0, height * fit),
+  );
+  expect([car, player]).toEqual(before);
+});
 
 function collect(entity: Entity, alpha = 1, zoom = 1 / 3, frame?: SceneFrame, height = 0) {
   const camera = new Camera();

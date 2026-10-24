@@ -14,8 +14,8 @@ export const VEHICLE_BRIDGE_STARTS = {
   trackside: { position: { wx: 80, wy: 40 }, z: 0 },
 };
 
-/** Straight, terminal production traffic routes. The chassis stays level;
- * shared footprint support supplies height and checks the whole body envelope. */
+/** Straight, terminal production traffic routes. Shared footprint support checks
+ * the upright body envelope; the compact visual pose follows measured wheels. */
 export function vehicleGeometryRecipe(garage: boolean, reverse = false): ScenarioRecipe {
   const base = garage ? undergroundGarageRecipe() : railCrossingRecipe();
   const a = garage ? { x: reverse ? 80 : -272, y: 0 } : { x: 0, y: reverse ? -384 : 384 };

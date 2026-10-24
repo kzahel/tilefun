@@ -3,12 +3,13 @@ import { type AABB, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { surfaceZAt } from "../physics/SurfacePatch.js";
-import { TRANSPORTER, transporterWorld } from "../traffic/CarTransporter.js";
+import { supportingTransporter, TRANSPORTER, transporterWorld } from "../traffic/CarTransporter.js";
 import { hasMovingRoof } from "../traffic/RoofSupport.js";
 import { presentedTowPosition } from "../traffic/Towing.js";
 import { isTransporterSurface, transporterSolids } from "../traffic/TransporterSurface.js";
 import { bedPartVertices, bedQueryBounds, DUMP_BED, hasVehicleBed } from "../traffic/VehicleBed.js";
 import { entityBody } from "../traffic/VehicleContact.js";
+import { vehicleGroundPose } from "../traffic/VehicleGroundPose.js";
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import type { OverlayFrame } from "./OverlayFrame.js";
@@ -34,7 +35,7 @@ export const COLLISION_LAYERS = {
   support: {
     color: "#64ff8a",
     label: "Standing surfaces",
-    hint: "Where feet can stand; ordinary car roofs use a whole rectangle.",
+    hint: "Where feet can stand; green dots mark measured wheel contacts on the ramp-tilt pilot.",
   },
   bounds: {
     color: "#abb6c4",
@@ -237,6 +238,7 @@ export function drawCollisionDebug(
   observer: Entity,
   options: CollisionDebugOptions,
   alpha = 1,
+  getHeight: (x: number, y: number) => number = () => 0,
 ): void {
   const focus = collisionDebugPose(observer, entities, alpha).position;
   const labels: { x: number; y: number; width: number }[] = [];
@@ -305,6 +307,37 @@ export function drawCollisionDebug(
   for (const e of entities)
     draw(e, entityCollisionDebugShapes(collisionDebugPose(e, entities, alpha)));
   for (const p of props) draw(p, propCollisionDebugShapes(p));
+  if (options.layers.support)
+    for (const entity of entities) {
+      if (supportingTransporter(entity, entities)) continue;
+      const e = collisionDebugPose(entity, entities, alpha);
+      const ground = vehicleGroundPose(e, getHeight, props);
+      for (const wheel of ground?.contacts ?? []) {
+        if (
+          options.nearbyOnly &&
+          (Math.abs(wheel.x - focus.wx) > 180 || Math.abs(wheel.y - focus.wy) > 180)
+        )
+          continue;
+        const p = projectWorld(camera, wheel.x, wheel.y, wheel.z);
+        if (p.sx < 0 || p.sy < 0 || p.sx > camera.viewportWidth || p.sy > camera.viewportHeight)
+          continue;
+        const dot = frame.next("circle");
+        dot.x = p.sx;
+        dot.y = p.sy;
+        dot.width = 3;
+        dot.fill = COLLISION_LAYERS.support.color;
+        const floor = projectWorld(camera, wheel.x, wheel.y, wheel.surfaceZ);
+        frame.line(p.sx, p.sy, floor.sx, floor.sy, COLLISION_LAYERS.support.color);
+        if (options.labels)
+          frame.label(
+            `#${e.id} wheel ${wheel.name}`,
+            p.sx + 5,
+            p.sy + 10,
+            COLLISION_LAYERS.support.color,
+            "10px monospace",
+          );
+      }
+    }
   if (
     options.layers.actors &&
     observer.parentId === undefined &&

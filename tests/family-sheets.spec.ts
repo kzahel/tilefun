@@ -603,6 +603,11 @@ test("door source demonstrations stay paused and expose every frame independentl
   page,
 }) => {
   const events = await mockDiscussions(page);
+  const pauseClock = async () => {
+    // Date.now() itself can be in the past by the next browser round trip.
+    // Fast-forward to a future instant; this does not wait a real minute.
+    await page.clock.pauseAt(await page.evaluate(() => Date.now() + 60_000));
+  };
   await page.emulateMedia({ reducedMotion: "reduce" });
   const family = required(catalog.families.find((item) => item.id === "animated-doors"));
   const members = family.groups.flatMap((group) => group.members);
@@ -610,7 +615,7 @@ test("door source demonstrations stay paused and expose every frame independentl
   await page.goto(`${URL}?family=animated-doors&member=${member.id}&variant=frame-3`);
   await ready(page, 2);
   await page.clock.install();
-  await page.clock.pauseAt(await page.evaluate(() => Date.now()));
+  await pauseClock();
   const frameSelect = page.getByLabel("Frame", { exact: true });
   await expect(frameSelect).toHaveValue("frame-3");
   const selectedCanvas = page
@@ -684,7 +689,7 @@ test("door source demonstrations stay paused and expose every frame independentl
   await page.clock.resume();
   await page.goto(link);
   await ready(page, 2);
-  await page.clock.pauseAt(await page.evaluate(() => Date.now()));
+  await pauseClock();
   await expect(frameSelect).toHaveValue("frame-3");
   expect(await pixels(selectedCanvas)).toBe(selectedPixels);
   await page.getByText("Discuss this piece", { exact: true }).click();
@@ -754,7 +759,7 @@ test("door source demonstrations stay paused and expose every frame independentl
   await page.clock.resume();
   await page.reload();
   await ready(page, 2);
-  await page.clock.pauseAt(await page.evaluate(() => Date.now()));
+  await pauseClock();
   await expect(
     demonstrations.first().getByRole("button", { name: "Play", exact: true }),
   ).toBeVisible();

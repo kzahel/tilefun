@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
 import type { TrafficCanvas } from "../src/workshop/TrafficPage.js";
 
 test.use({ channel: "chromium" });
@@ -191,6 +192,83 @@ test("optional mesh body rotates, composes in order and falls back atomically", 
   expect(after.meshDraws).toBe(before.meshDraws);
   expect(after.mismatches).toBe(0);
   expect(after.targetBytes).toBeLessThanOrEqual(1024 * 1024 * 8);
+});
+
+test("grade pitch, roll and height reach the GPU and reset on a reused car asset", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const result = await page.evaluate(async () => {
+    const lab = (
+      window as unknown as {
+        rendererLab: {
+          gpu: GpuRenderBackend;
+          setMesh(value: boolean): Promise<unknown>;
+          setYaw(value: number): unknown;
+          setPose(yaw: number, pitch: number, roll: number): unknown;
+          draw(): unknown;
+        };
+      }
+    ).rendererLab;
+    await lab.setMesh(true);
+    lab.setYaw(0.5);
+    const canvas = document.querySelector<HTMLCanvasElement>("#gpu");
+    if (!canvas) throw Error("Missing GPU canvas");
+    const flat = canvas.toDataURL();
+    const submit = lab.gpu.submit.bind(lab.gpu);
+    let grade = { gradePitch: 0, gradeRoll: 0, gradeOffsetZ: 0 };
+    lab.gpu.submit = (view, pass) =>
+      submit(
+        view,
+        pass.kind === "scene"
+          ? {
+              ...pass,
+              items: pass.items.map((item) =>
+                item.kind === "sprite" && item.mesh
+                  ? {
+                      ...item,
+                      mesh: { ...item.mesh, ...grade },
+                    }
+                  : item,
+              ),
+            }
+          : pass,
+      );
+    const samples = [];
+    for (const [pitch, roll, offset] of [
+      [0.24, 0, 0],
+      [0, -0.21, 0],
+      [0.2, 0.1, -8],
+    ]) {
+      grade = { gradePitch: pitch ?? 0, gradeRoll: roll ?? 0, gradeOffsetZ: offset ?? 0 };
+      lab.draw();
+      const tilted = canvas.toDataURL();
+      const object = lab.gpu.meshes.car.value?.object;
+      if (!object) throw Error("Missing loaded car");
+      const position = object.position.toArray();
+      const actual = object.quaternion.toArray();
+      grade = { gradePitch: 0, gradeRoll: 0, gradeOffsetZ: 0 };
+      lab.setPose(0.5, -(pitch ?? 0), roll ?? 0);
+      const expected = object.quaternion.toArray();
+      lab.setYaw(0.5);
+      samples.push({
+        changed: tilted !== flat,
+        reset: canvas.toDataURL() === flat,
+        actual,
+        expected,
+        position,
+        offset,
+      });
+    }
+    return samples;
+  });
+  for (const sample of result) {
+    expect(sample.changed).toBe(true);
+    expect(sample.reset).toBe(true);
+    expect(sample.position).toEqual([0, 0, sample.offset]);
+    for (let i = 0; i < 4; i++) expect(sample.actual[i]).toBeCloseTo(sample.expected[i] ?? 0, 10);
+  }
 });
 
 test("authored car retains its fixed width registration across headings and zoom", async ({

@@ -16,6 +16,8 @@ export interface MeshInstance {
   readonly bedGateAngle?: number;
   readonly transportRamp?: boolean;
   readonly gradePitch?: number;
+  readonly gradeRoll?: number;
+  readonly gradeOffsetZ?: number;
   readonly towActive?: boolean;
   readonly towPitch?: number;
   readonly towOffsetX?: number;

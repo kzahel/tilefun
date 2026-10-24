@@ -784,9 +784,60 @@ following to the production TrafficSystem. World geometry offers car bridge and
 underground garage fixtures, both directions and slope save/reload. Full collider
 footprints use shared terrain/excavation support; vertical body clearance includes
 roof passengers. Height is persisted in traffic records (older records default to
-zero). Generated traffic keeps its existing flat-road behavior. This is a level
-chassis proof on straight terminal lanes, not pitched car art or multi-level
-junction routing. Human review is pending; train grades are the next consumer.
+zero). Generated traffic keeps its existing flat-road behavior. The physical
+chassis stays level on these straight terminal lanes; the compact visual pilot
+below adds wheel-based tilt. This does not establish multi-level junction routing.
+Human review is pending.
+
+### Turning and the compact ramp-pose pilot · 2026-10-24
+
+`checkedCarPose` now resolves support at each sampled rolling-turn footprint,
+using the actual arc rather than a straight chord and linearly interpolated Z.
+The step-height budget includes the corner travel caused by rotation. Clearance
+still checks the upright physical body and the full sampled roof-passenger height
+interval. This repairs the wide-bridge steering rejection: previously a 0.25-grade
+30Hz turn falsely penetrated its slab by 0.004111px at the midpoint, so driving
+silently fell back to straight movement. Native regression cases cover uphill and
+downhill turns at 30Hz/50Hz and blocked roof-passenger headroom.
+
+`VehicleGroundPose` adds a shared, read-only **compact-1 visual pilot** for authored
+ramps/decks, including the ordinary game, world-geometry fixtures and scene hosts.
+Four tyre-bottom contacts are measured from the registered committed GLB; the
+checked-in metadata includes its SHA-256. Run
+`npx tsx scripts/vehicle-ground-contacts.ts --check` to verify the retained input,
+or run without `--check` explicitly to remeasure. Builds never modify model assets.
+The helper samples the occupied floor beneath the wheels, fits pitch/roll, and
+adjusts chassis height; upper ceilings are excluded. Ramp/deck transitions use
+mixed contacts and prevent tyre penetration. A rigid chassis can leave a small
+wheel gap across a nonplanar crest; there is no suspension simulation or extra
+animation clock. Grades above 0.5 and unsupported/missing deck edges retain the
+existing level presentation. Towing and transporter loading keep their existing
+specialized poses.
+
+The physical body and roof remain upright/conservative. This is not pitched body
+collision, and the lower visible body is not a new obstacle shape. Roof riders use
+the existing mesh-ready fitted-roof correction at their interpolated location;
+loading/failed meshes and sprite renderers retain the upright fallback heights.
+GPU pose inputs participate in the body-image cache and reset on reused assets.
+F3 → Standing surfaces shows green measured tyre contacts and their ground lines;
+the green/red boxes still show the actual physical support/body contracts.
+
+Transporter loading separately requires forward alignment within 15 degrees and
+full-body fit inside its 48px-wide deck. That intentional constraint is unchanged.
+
+Validation: 6,733 native tests and the Node integration check pass, as do
+`typecheck`, `check`, `build`, measured-contact `--check` and
+`streaming:bench -- --assert-ready`. Catalog/Workshop inventories were regenerated;
+bridge/garage GPU screenshots were inspected. The five focused grade/GPU browser
+cases pass. The full Chromium run completed with 835/837 passes: the character
+negative-manifest check hit its fetch timeout and passed on rerun; an unrelated
+door-review test raced `pauseAt(Date.now())` against the next browser round trip.
+That test now pauses at a future clock instant, and both complete affected browser
+files pass (24/24). No game behavior was changed by the clock correction.
+
+Next: owner bridge playtest of compact-1, especially steering, crests and roof
+riders, before measuring/qualifying the remaining vehicle families. Fully pitched
+physical collision and independent suspension would require separate contracts.
 
 ## Shared prediction checkpoint (2026-10-05)
 
