@@ -15,8 +15,12 @@ export const VEHICLE_BRIDGE_STARTS = {
 };
 
 /** Straight, terminal production traffic routes. Shared footprint support checks
- * the upright body envelope; the compact visual pose follows measured wheels. */
-export function vehicleGeometryRecipe(garage: boolean, reverse = false): ScenarioRecipe {
+ * the upright body envelope; vehicle meshes follow their measured wheel contacts. */
+export function vehicleGeometryRecipe(
+  garage: boolean,
+  reverse = false,
+  model = "compact-1",
+): ScenarioRecipe {
   const base = garage ? undergroundGarageRecipe() : railCrossingRecipe();
   const a = garage ? { x: reverse ? 80 : -272, y: 0 } : { x: 0, y: reverse ? -384 : 384 };
   const b = garage ? { x: reverse ? -320 : 128, y: 0 } : { x: 0, y: reverse ? 416 : -416 };
@@ -54,7 +58,7 @@ export function vehicleGeometryRecipe(garage: boolean, reverse = false): Scenari
     traffic: [
       {
         name: "car",
-        model: "compact-1",
+        model,
         laneId: lane.id,
         x: a.x,
         y: a.y,

@@ -46,6 +46,25 @@ for (const renderer of ["canvas", "gpu"])
         path: `/tmp/tilefun-car-${garage ? "garage" : "bridge"}-${renderer}.png`,
         fullPage: true,
       });
+      if (renderer === "gpu" && !garage) {
+        await page.getByLabel("Grade vehicle", { exact: true }).selectOption("pickup");
+        await expect(c).toHaveAttribute("data-car-model", "pickup");
+        await expect
+          .poll(async () => Number(await c.getAttribute("data-car-z")), { timeout: 15000 })
+          .toBeGreaterThan(12);
+        await page.getByRole("button", { name: "Pause", exact: true }).click();
+        await expect
+          .poll(() =>
+            c.evaluate(
+              (canvas: GeometryCanvas) =>
+                canvas
+                  .__presentationDiagnostics?.()
+                  .meshEligibleVehicleTypes?.includes("vehicle-v1:pickup") ?? false,
+            ),
+          )
+          .toBe(true);
+        await page.screenshot({ path: "/tmp/tilefun-fleet-pickup-bridge.png", fullPage: true });
+      }
       // Full forward/reverse grade routes are stepped in VehicleGeometryRecipe.test.
       await page.getByRole("button", { name: "Run opposite direction", exact: true }).click();
       await expect(c).toHaveAttribute("data-ready", "true");

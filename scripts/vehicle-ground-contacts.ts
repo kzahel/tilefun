@@ -1,21 +1,20 @@
-/** Explicit, read-only measurement of the retained grade pilot. Never run by builds. */
+/** Measures retained models into contact metadata; never modifies assets or runs in builds. */
 import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import * as THREE from "three";
+import { BOAT_MODEL } from "../src/boats/Boat.js";
 import {
   AUTHORED_VEHICLE_MESHES,
   vehicleMeshHeightScale,
 } from "../src/rendering/AuthoredVehicleMeshes.js";
 
-// Expand only after the bridge pilot's contacts, clearance and rider checks qualify.
-const pilots = new Set(["compact-1"]);
 const profiles: Record<
   string,
   { sha256: string; contacts: { name: string; x: number; y: number; z: number }[] }
 > = {};
 const rounded = (n: number) => (Math.abs(n) < 0.00001 ? 0 : Number(n.toFixed(6)));
 for (const mesh of AUTHORED_VEHICLE_MESHES) {
-  if (!pilots.has(mesh.vehicle)) continue;
+  if (mesh.vehicle === BOAT_MODEL) continue;
   const bytes = readFileSync(`public/${mesh.path}`);
   const doc = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString());
   const registration = new THREE.Matrix4()
@@ -51,8 +50,8 @@ for (const mesh of AUTHORED_VEHICLE_MESHES) {
     for (const child of node.children ?? []) visit(child, matrix);
   }
   for (const root of doc.scenes[doc.scene ?? 0].nodes) visit(root, registration);
-  if (contacts.length !== 4 || contacts.some((p) => Math.abs(p.z) > 0.001))
-    throw Error("Unqualified pilot wheel contacts");
+  if (contacts.length < 4 || contacts.length % 2 || contacts.some((p) => Math.abs(p.z) > 0.001))
+    throw Error(`Unqualified wheel contacts for ${mesh.vehicle}: ${JSON.stringify(contacts)}`);
   profiles[mesh.vehicle] = {
     sha256: createHash("sha256").update(bytes).digest("hex"),
     contacts: contacts.sort((a, b) => a.name.localeCompare(b.name)),
@@ -63,4 +62,4 @@ const json = `${JSON.stringify(profiles, null, 2)}\n`;
 if (process.argv.includes("--check")) {
   if (readFileSync(path, "utf8") !== json) throw Error("Vehicle ground contacts are stale");
 } else writeFileSync(path, json);
-console.log(`Verified ${Object.keys(profiles).length} grade pilot's measured wheel contacts.`);
+console.log(`Verified ${Object.keys(profiles).length} road vehicles’ measured wheel contacts.`);

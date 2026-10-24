@@ -785,11 +785,11 @@ underground garage fixtures, both directions and slope save/reload. Full collide
 footprints use shared terrain/excavation support; vertical body clearance includes
 roof passengers. Height is persisted in traffic records (older records default to
 zero). Generated traffic keeps its existing flat-road behavior. The physical
-chassis stays level on these straight terminal lanes; the compact visual pilot
+chassis stays level on these straight terminal lanes; the fleet presentation
 below adds wheel-based tilt. This does not establish multi-level junction routing.
 Human review is pending.
 
-### Turning and the compact ramp-pose pilot · 2026-10-24
+### Turning and fleet ramp poses · 2026-10-24
 
 `checkedCarPose` now resolves support at each sampled rolling-turn footprint,
 using the actual arc rather than a straight chord and linearly interpolated Z.
@@ -800,19 +800,40 @@ interval. This repairs the wide-bridge steering rejection: previously a 0.25-gra
 silently fell back to straight movement. Native regression cases cover uphill and
 downhill turns at 30Hz/50Hz and blocked roof-passenger headroom.
 
-`VehicleGroundPose` adds a shared, read-only **compact-1 visual pilot** for authored
-ramps/decks, including the ordinary game, world-geometry fixtures and scene hosts.
-Four tyre-bottom contacts are measured from the registered committed GLB; the
-checked-in metadata includes its SHA-256. Run
-`npx tsx scripts/vehicle-ground-contacts.ts --check` to verify the retained input,
-or run without `--check` explicitly to remeasure. Builds never modify model assets.
+`VehicleGroundPose` supplies a shared, read-only ramp/deck pose for **all 79 road
+models** in the current authored bank. The compact-1 pilot has been expanded to
+every car, pickup, bus, emergency vehicle, tractor and truck. All four or six tyre
+contacts are measured from each registered committed GLB, including lateral and
+height registration; metadata pins every model's SHA-256. Boats keep their water
+behavior. Run `npx tsx scripts/vehicle-ground-contacts.ts --check` to verify the
+retained inputs, or run without `--check` explicitly to remeasure. Builds never
+modify model assets.
+
 The helper samples the occupied floor beneath the wheels, fits pitch/roll, and
-adjusts chassis height; upper ceilings are excluded. Ramp/deck transitions use
-mixed contacts and prevent tyre penetration. A rigid chassis can leave a small
-wheel gap across a nonplanar crest; there is no suspension simulation or extra
-animation clock. Grades above 0.5 and unsupported/missing deck edges retain the
-existing level presentation. Towing and transporter loading keep their existing
-specialized poses.
+adjusts chassis height; upper ceilings are excluded. Six-wheel rigs use every
+axle in the same fit. Ramp/deck transitions use mixed contacts and prevent tyre
+penetration. A rigid chassis can leave wheel gaps across a nonplanar crest;
+there is no suspension simulation or extra animation clock. Grades above 0.5 and
+abrupt unsupported edges retain the existing level presentation. The collector
+filters support props once per frame and uses the displayed heading, including
+continuous traffic headings without authoritative yaw. Game, grade fixtures and
+all shared scene hosts consume the same pose.
+
+Towed and carried cars keep their existing relative lift/loading pose and inherit
+the carrier's grade rotation and vertical offset. Supported detailed-bed occupants
+move their feet with the chassis while their sprite planes remain upright; loose
+airborne/below-body actors keep their physical world positions. Existing articulated
+dump-bed tilt composes inside the chassis pose. A rider on a carried car's roof
+inherits the carrier correction as well; both supporting models must be ready
+before its mesh-only XY/Z attachment applies. Group target bounds include the
+transformed occupants and child vehicle. Sprite fallback keeps authoritative feet,
+clips and load placement. This adds no hollow pickup-bed physics: pickups retain
+their existing rectangular support profile.
+
+The World geometry lab's bridge/garage fixtures now have a **Vehicle** selector
+covering the fleet (`?geometry=car-bridge&vehicle=pickup`). Selection replaces the
+ordinary temporary Worker scene; it does not create a separate movement loop or
+saved world. Oversize vehicles can still be stopped by real garage headroom.
 
 The physical body and roof remain upright/conservative. This is not pitched body
 collision, and the lower visible body is not a new obstacle shape. Roof riders use
@@ -825,19 +846,25 @@ the green/red boxes still show the actual physical support/body contracts.
 Transporter loading separately requires forward alignment within 15 degrees and
 full-body fit inside its 48px-wide deck. That intentional constraint is unchanged.
 
-Validation: 6,733 native tests and the Node integration check pass, as do
-`typecheck`, `check`, `build`, measured-contact `--check` and
-`streaming:bench -- --assert-ready`. Catalog/Workshop inventories were regenerated;
-bridge/garage GPU screenshots were inspected. The five focused grade/GPU browser
-cases pass. The full Chromium run completed with 835/837 passes: the character
-negative-manifest check hit its fetch timeout and passed on rerun; an unrelated
-door-review test raced `pauseAt(Date.now())` against the next browser round trip.
-That test now pauses at a future clock instant, and both complete affected browser
-files pass (24/24). No game behavior was changed by the clock correction.
+Fleet validation: all **6,821 native tests**, the Node integration check and
+**838 full-Chromium browser tests** pass. The six focused bridge/garage and GPU
+pose/group cases also pass, including the pickup selector, compound bounds and
+flat-pose reset. Typechecking, lint (existing warnings), production build,
+measured-contact `--check` and `streaming:bench -- --assert-ready` pass. Catalog and
+Workshop inventories were regenerated and all 1,980 candidate identities verified
+in both browser modes. The real pickup bridge capture was visually inspected.
+Retained GLBs and approved artwork are unchanged.
 
-Next: owner bridge playtest of compact-1, especially steering, crests and roof
-riders, before measuring/qualifying the remaining vehicle families. Fully pitched
-physical collision and independent suspension would require separate contracts.
+Fleet qualification covers each registered model's immutable wheel identities,
+uphill/downhill/cross-slope/diagonal contact fit, and nonpenetrating continuous
+ramp crests in Node. Shared collector tests qualify detailed-bed support versus
+air/underbody actors, carried-car roof riders and sprite fallback readiness. One
+compound GPU boundary covers inherited child rotation, upright sprite feet and
+return to flat poses; the real bridge case switches to a pickup through the lab.
+
+Next: owner bridge/crest playtest across the fleet, using F3 Standing surfaces to
+compare measured tyres and physical support. Fully pitched physical collision
+and independent suspension require separate contracts.
 
 ## Shared prediction checkpoint (2026-10-05)
 

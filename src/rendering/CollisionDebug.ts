@@ -12,6 +12,7 @@ import { entityBody } from "../traffic/VehicleContact.js";
 import { vehicleGroundPose } from "../traffic/VehicleGroundPose.js";
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
+import { entityHeading } from "./EntityMeshPose.js";
 import type { OverlayFrame } from "./OverlayFrame.js";
 import { projectWorld } from "./Projection.js";
 
@@ -35,7 +36,7 @@ export const COLLISION_LAYERS = {
   support: {
     color: "#64ff8a",
     label: "Standing surfaces",
-    hint: "Where feet can stand; green dots mark measured wheel contacts on the ramp-tilt pilot.",
+    hint: "Where feet can stand; green dots mark measured tyre contacts used to tilt 3D vehicles.",
   },
   bounds: {
     color: "#abb6c4",
@@ -311,7 +312,7 @@ export function drawCollisionDebug(
     for (const entity of entities) {
       if (supportingTransporter(entity, entities)) continue;
       const e = collisionDebugPose(entity, entities, alpha);
-      const ground = vehicleGroundPose(e, getHeight, props);
+      const ground = vehicleGroundPose(e, getHeight, props, entityHeading(e));
       for (const wheel of ground?.contacts ?? []) {
         if (
           options.nearbyOnly &&

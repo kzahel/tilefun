@@ -14,6 +14,7 @@ export interface WheelContact {
   surfaceZ: number;
 }
 export interface VehicleGroundPose {
+  heading: number;
   pitch: number;
   roll: number;
   /** Visual translation relative to the unchanged conservative physics base. */
@@ -47,7 +48,7 @@ function groundAt(
   return z;
 }
 
-/** Read-only, measured-wheel grade pilot. Authority keeps its upright body and
+/** Read-only, measured-wheel ground pose. Authority keeps its upright body and
  * level conservative roof. Presentation fits the visible rigid chassis to tyre
  * contacts; no pitched collision hull, suspension or independent animation clock.
  */
@@ -55,6 +56,7 @@ export function vehicleGroundPose(
   e: Entity,
   getHeight: (x: number, y: number) => number,
   props: readonly PropSurface[],
+  heading = vehicleNoseHeading(e),
 ): VehicleGroundPose | undefined {
   if (!e.collider || e.towedBy !== undefined || e.transportedBy !== undefined) return;
   const profile = profiles[e.type.slice(11) as keyof typeof profiles];
@@ -73,11 +75,10 @@ export function vehicleGroundPose(
     };
     return p.walls ? p.walls.some(supports) : p.collider ? supports(p.collider) : false;
   });
-  // This pilot follows authored slabs. An unsupported/restored body or a flat
+  // Follow authored slabs. An unsupported/restored body or a flat
   // terrain plateau keeps the established level presentation and rider datum.
   if (!nearby.length) return;
-  const heading = vehicleNoseHeading(e),
-    c = Math.cos(heading),
+  const c = Math.cos(heading),
     s = Math.sin(heading);
   let pitch = 0,
     roll = 0,
@@ -155,7 +156,7 @@ export function vehicleGroundPose(
     contacts.push({ name: wheel.name, x: wx, y: wy, z, surfaceZ });
   }
   for (const p of contacts) p.z += centerZ;
-  return { pitch, roll, riseX, riseY, offsetZ: nearZero(centerZ - (e.wz ?? 0)), contacts };
+  return { heading, pitch, roll, riseX, riseY, offsetZ: nearZero(centerZ - (e.wz ?? 0)), contacts };
 }
 
 /** Visible roof plane at the rider, using the existing fitted-roof datum. */

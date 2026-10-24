@@ -33195,11 +33195,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:340"
+          "source": "src/rendering/collectScene.ts:387"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:350"
+          "source": "src/rendering/collectScene.ts:397"
         },
         {
           "system": "Gameplay",
@@ -34089,7 +34089,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:534"
+          "source": "src/rendering/collectScene.ts:581"
         },
         {
           "system": "Gameplay",

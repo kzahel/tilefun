@@ -271,6 +271,135 @@ test("grade pitch, roll and height reach the GPU and reset on a reused car asset
   }
 });
 
+test("a graded mesh group carries its child and supported feet while sprite planes stay upright", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const samples = await page.evaluate(async () => {
+    const lab = (
+      window as unknown as {
+        rendererLab: {
+          gpu: GpuRenderBackend;
+          setMesh(value: boolean): Promise<unknown>;
+          setYaw(value: number): unknown;
+          draw(): unknown;
+        };
+      }
+    ).rendererLab;
+    await lab.setMesh(true);
+    while (lab.gpu.meshes.ambulance.state === "loading")
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    lab.setYaw(0.5);
+    const submit = lab.gpu.submit.bind(lab.gpu);
+    let tilted = false;
+    lab.gpu.submit = (view, pass) =>
+      submit(
+        view,
+        pass.kind !== "scene"
+          ? pass
+          : {
+              ...pass,
+              items: pass.items.map((item) => {
+                if (item.kind !== "sprite" || !item.mesh) return item;
+                const foot = {
+                  ...item,
+                  wx: item.wx - 20,
+                  wy: item.wy + 3,
+                  zOffset: item.zOffset + 12,
+                  sheetKey: "fixture",
+                  frameCol: 0,
+                  frameRow: 0,
+                  spriteWidth: 8,
+                  spriteHeight: 16,
+                  drawOffsetY: 0,
+                  meshBedSupport: true,
+                };
+                delete foot.mesh;
+                return {
+                  ...item,
+                  mesh: {
+                    ...item.mesh,
+                    radius: 160,
+                    gradePitch: tilted ? 0.2 : 0,
+                    gradeRoll: tilted ? -0.1 : 0,
+                    gradeOffsetZ: tilted ? -8 : 0,
+                  },
+                  bedGroup: { heading: 0.5, contents: [foot] },
+                  towGroup: {
+                    ...item,
+                    wy: item.wy - 150,
+                    zOffset: item.zOffset + 30,
+                    mesh: { ...item.mesh, assetId: "ambulance-authored-v3", radius: 112 },
+                  },
+                };
+              }),
+            },
+      );
+    const canvas = document.querySelector<HTMLCanvasElement>("#gpu");
+    if (!canvas) throw Error("Missing GPU canvas");
+    const results = [];
+    let flat = "";
+    for (const active of [false, true, false]) {
+      tilted = active;
+      lab.draw();
+      const parent = lab.gpu.meshes.car.value?.object,
+        child = lab.gpu.meshes.ambulance.value?.object,
+        plane = lab.gpu.meshes.contents.group.children[0];
+      if (!parent || !child || !plane) throw Error("Missing compound draw");
+      const yaw = parent.quaternion.clone().set(0, 0, Math.sin(0.25), Math.cos(0.25));
+      const q = parent.quaternion.clone().multiply(yaw.clone().invert());
+      const childPosition = parent.position
+        .clone()
+        .set(0, -150, 30)
+        .applyQuaternion(q)
+        .add(parent.position);
+      const footPosition = parent.position
+        .clone()
+        .set(-20, 3, 12)
+        .applyQuaternion(q)
+        .add(parent.position);
+      footPosition.z += 8;
+      const picture = canvas.toDataURL();
+      if (!flat) flat = picture;
+      results.push({
+        active,
+        sameAsFlat: picture === flat,
+        childPosition: child.position.toArray(),
+        expectedChildPosition: childPosition.toArray(),
+        childRotation: child.quaternion.toArray(),
+        expectedChildRotation: parent.quaternion.toArray(),
+        footPosition: plane.position.toArray(),
+        expectedFootPosition: footPosition.toArray(),
+        planeRotation: plane.quaternion.toArray(),
+        targetBytes: lab.gpu.meshes.targetBytes - lab.gpu.meshes.images.bytes,
+        minimumRadius: Math.max(
+          160,
+          Math.abs(childPosition.x) + 112,
+          Math.abs(childPosition.y - childPosition.z) + 112,
+        ),
+      });
+    }
+    return results;
+  });
+  for (const sample of samples) {
+    expect(sample.sameAsFlat).toBe(!sample.active);
+    expect(sample.targetBytes).toBeGreaterThanOrEqual(
+      Math.ceil(sample.minimumRadius * 2) ** 2 * 12,
+    );
+    for (let i = 0; i < 3; i++) {
+      expect(sample.childPosition[i]).toBeCloseTo(sample.expectedChildPosition[i] ?? 0, 8);
+      expect(sample.footPosition[i]).toBeCloseTo(sample.expectedFootPosition[i] ?? 0, 8);
+    }
+    for (let i = 0; i < 4; i++)
+      expect(sample.childRotation[i]).toBeCloseTo(sample.expectedChildRotation[i] ?? 0, 8);
+    expect(sample.planeRotation[0]).toBeCloseTo(Math.SQRT1_2, 10);
+    expect(sample.planeRotation[1]).toBe(0);
+    expect(sample.planeRotation[2]).toBe(0);
+    expect(sample.planeRotation[3]).toBeCloseTo(Math.SQRT1_2, 10);
+  }
+});
+
 test("authored car retains its fixed width registration across headings and zoom", async ({
   page,
 }) => {

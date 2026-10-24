@@ -42,6 +42,7 @@ import {
   trainMeshHeading,
 } from "./EntityMeshPose.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
+import { meshGradePoint } from "./MeshGradePose.js";
 import { vehicleMeshRadius, yawOrientation } from "./MeshPresentation.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
@@ -110,22 +111,33 @@ export function collectScene(
   );
   const movingRoofs = entities.filter(hasMovingRoof);
   const transporters = entities.filter(isTransporter);
+  const gradeProps = props.filter((p) =>
+    (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface || c.walkableTop),
+  );
   const groundPoses = new Map<number, ReturnType<typeof vehicleGroundPose>>();
   const groundPoseFor = (entity: Entity) => {
     if (supportingTransporter(entity, transporters)) return undefined;
-    if (!groundPoses.has(entity.id))
-      groundPoses.set(
-        entity.id,
-        vehicleGroundPose(
-          {
-            ...entity,
-            position: interpolatePosition(entity.position, entity.prevPosition, alpha),
-            wz: interpolateWz(entity, alpha) ?? 0,
-          },
-          (x, y) => world.getHeightAt(x, y),
-          props,
-        ),
-      );
+    if (!groundPoses.has(entity.id)) {
+      const displayed = {
+        ...entity,
+        position: interpolatePosition(entity.position, entity.prevPosition, alpha),
+        wz: interpolateWz(entity, alpha) ?? 0,
+      };
+      const height = (x: number, y: number) => world.getHeightAt(x, y);
+      let ground = vehicleGroundPose(displayed, height, gradeProps, entityHeading(entity));
+      // Traffic can have a continuous displayed heading without a physical yaw.
+      // Only grade-supported cars need this early evaluation; flat offscreen cars
+      // retain the collector's existing lazy presentation/culling behavior.
+      if (ground && frame) {
+        const mesh = frame.meshPoses.evaluate(entity, poseTime, displayed.position);
+        const heading = mesh
+          ? 2 * Math.atan2(mesh.orientation[2], mesh.orientation[3])
+          : ground.heading;
+        if (Math.abs(heading - ground.heading) > 1e-8)
+          ground = vehicleGroundPose(displayed, height, gradeProps, heading);
+      }
+      groundPoses.set(entity.id, ground);
+    }
     return groundPoses.get(entity.id);
   };
   const towSprites = entities.some((e) => e.towTargetId !== undefined || isTransporter(e))
@@ -203,7 +215,7 @@ export function collectScene(
     const supportPosition = support
       ? interpolatePosition(support.position, support.prevPosition, alpha)
       : undefined;
-    const meshRoofSupport =
+    const meshRoofSupport: SpriteItem["meshRoofSupport"] =
       supportMesh && support?.collider
         ? {
             assetId: supportMesh.assetId,
@@ -213,7 +225,7 @@ export function collectScene(
               (supportGround && supportPosition
                 ? gradeRoofOffset(
                     supportGround,
-                    entityHeading(support),
+                    supportGround.heading,
                     pos.wx - supportPosition.wx,
                     pos.wy - supportPosition.wy,
                     (support.collider.physicalHeight ?? 0) *
@@ -222,6 +234,35 @@ export function collectScene(
                 : 0),
           }
         : undefined;
+    const carrierId =
+      support?.towedBy ??
+      support?.transportedBy ??
+      (support ? supportingTransporter(support, transporters)?.truck.id : undefined);
+    const carrier =
+      carrierId === undefined ? undefined : movingRoofs.find((e) => e.id === carrierId);
+    const carrierGround = carrier ? groundPoseFor(carrier) : undefined;
+    const carrierMesh = carrier ? authoredVehicleForType(carrier.type) : undefined;
+    if (meshRoofSupport && carrierMesh) meshRoofSupport.ownerAssetId = carrierMesh.assetId;
+    if (meshRoofSupport && carrier && carrierGround && carrierMesh) {
+      const origin = interpolatePosition(carrier.position, carrier.prevPosition, alpha),
+        baseZ = interpolateWz(carrier, alpha) ?? 0;
+      const point = meshGradePoint(
+        {
+          assetId: carrierMesh.assetId,
+          radius: 0,
+          orientation: yawOrientation(carrierGround.heading),
+          gradePitch: carrierGround.pitch,
+          gradeRoll: carrierGround.roll,
+          gradeOffsetZ: carrierGround.offsetZ,
+        },
+        pos.wx - origin.wx,
+        pos.wy - origin.wy,
+        zOffset - meshRoofSupport.heightDelta - baseZ,
+      );
+      meshRoofSupport.offsetX = origin.wx + point.x - pos.wx;
+      meshRoofSupport.offsetY = origin.wy + point.y - pos.wy;
+      meshRoofSupport.heightDelta = zOffset - baseZ - point.z;
+    }
     const remains = isRoadkill(e.type);
     const scaleY = remains ? ROADKILL_SCALE_Y : 1;
     const drawOffsetY = (e.sprite.drawOffsetY ?? 0) * scaleY;
@@ -233,16 +274,22 @@ export function collectScene(
       : e.type.startsWith("train-curve-proof-v1")
         ? 96
         : 0;
-    const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
-    const top = meshRadius
+    const halfW =
+      Math.max(e.sprite.spriteWidth / 2, meshRadius) + Math.abs(meshRoofSupport?.offsetX ?? 0);
+    let top = meshRadius
       ? Math.min(
           spriteBottom - e.sprite.spriteHeight * scaleY,
           effectiveWy - meshRadius * Math.SQRT2,
         )
       : spriteBottom - e.sprite.spriteHeight * scaleY;
-    const bottom = meshRadius
+    let bottom = meshRadius
       ? Math.max(spriteBottom, effectiveWy + meshRadius * Math.SQRT2)
       : spriteBottom + (meshRoofSupport?.heightDelta ?? 0);
+    if (meshRoofSupport) {
+      const shift = (meshRoofSupport.offsetY ?? 0) + meshRoofSupport.heightDelta;
+      top = Math.min(top, spriteBottom - e.sprite.spriteHeight * scaleY + shift);
+      bottom = Math.max(bottom, spriteBottom, spriteBottom + shift);
+    }
     if (
       pos.wx + halfW < vpTL.wx - M ||
       pos.wx - halfW > vpBR.wx + M ||
@@ -544,6 +591,12 @@ export function collectScene(
           : {}),
         contents: [],
       };
+      if (roofSupport(actor, movingRoofs)?.id === owner.id) {
+        content.meshBedSupport = true;
+        // Detailed floors/cab roofs use a full mesh-only foot transform below.
+        // Their fallback must retain the authoritative, unpitched bed datum.
+        delete content.meshRoofSupport;
+      }
       content.hasShadow = false;
       body.bedGroup.contents.push(content);
       grouped.add(content);

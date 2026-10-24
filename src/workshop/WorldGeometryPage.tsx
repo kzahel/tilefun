@@ -24,6 +24,8 @@ import {
   vehicleGeometryRecipe,
 } from "../scenarios/VehicleGeometryRecipe.js";
 import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
+import { originalVehicle } from "../traffic/OriginalVehicles.js";
+import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { drawCurvedRailLayout } from "./CurvedTrainPreview.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 import TowingPage from "./TowingPage.js";
@@ -51,6 +53,10 @@ function GeometryFixtures() {
   const [fixture, setFixture] = useState(
     () => new URLSearchParams(location.search).get("geometry") ?? "deck",
   );
+  const [vehicleModel, setVehicleModel] = useState(() => {
+    const model = new URLSearchParams(location.search).get("vehicle") ?? "compact-1";
+    return VEHICLE_MODELS.includes(model) ? model : "compact-1";
+  });
   const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
   const trainPrototype = fixture.startsWith("train-authored-");
   const authoredTrains = !new URLSearchParams(location.search).has("nativeTrains");
@@ -105,7 +111,7 @@ function GeometryFixtures() {
           : trainGrade
             ? trainGeometryRecipe(reverse)
             : vehicle
-              ? vehicleGeometryRecipe(garage, reverse)
+              ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
               : crossing
                 ? railCrossingRecipe()
                 : garage
@@ -314,6 +320,7 @@ function GeometryFixtures() {
           }
           const car = h.session.view.entities.find((e) => e.type.startsWith("vehicle-v1:"));
           if (car) {
+            c.dataset.carModel = car.type.slice(11);
             c.dataset.carX = String(car.position.wx);
             c.dataset.carY = String(car.position.wy);
             c.dataset.carZ = String(car.wz ?? 0);
@@ -355,6 +362,7 @@ function GeometryFixtures() {
     garage,
     crossing,
     vehicle,
+    vehicleModel,
     reverse,
     trainGrade,
     trainCurve,
@@ -392,7 +400,7 @@ function GeometryFixtures() {
               : trainGrade
                 ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Carriages stay horizontal, so slope joins are a visible limitation of this proof."
                 : vehicle
-                  ? "Watch the car follow the ramp with upright body clearance. GPU + meshes tilts this compact to its wheel contacts; sprite views stay level. It stops at the far end. Run the opposite direction to start a fresh return trip."
+                  ? "Watch the vehicle follow the ramp with upright body clearance. GPU + meshes tilts each vehicle to its wheel contacts; sprite views stay level. It stops at the far end. Run the opposite direction to start a fresh return trip."
                   : crossing
                     ? "Walk north over the road bridge and down the far ramp. The train passes east/west below, stops at each end for eight seconds, then reverses. Use trackside to inspect clearance from below."
                     : garage
@@ -437,6 +445,28 @@ function GeometryFixtures() {
           <option value="train-grades">Train over bridge and through tunnel</option>
         </select>
       </label>
+      {vehicle && (
+        <label>
+          Vehicle{" "}
+          <select
+            aria-label="Grade vehicle"
+            value={vehicleModel}
+            onChange={(e) => {
+              keys.current.clear();
+              setVehicleModel(e.target.value);
+              const url = new URL(location.href);
+              url.searchParams.set("vehicle", e.target.value);
+              history.replaceState(null, "", url);
+            }}
+          >
+            {VEHICLE_MODELS.map((model) => (
+              <option key={model} value={model}>
+                {originalVehicle(model)?.name ?? model.replaceAll("-", " ")}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       <div className="actions geometry-controls">
         {(vehicle || trainGrade || trainCurve || generated) && !cityTrains && (
           <button

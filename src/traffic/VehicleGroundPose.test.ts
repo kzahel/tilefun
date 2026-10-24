@@ -1,17 +1,23 @@
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { getEntityAABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { surfaceZAt } from "../physics/SurfacePatch.js";
-import { vehicleMeshHeightScale } from "../rendering/AuthoredVehicleMeshes.js";
+import {
+  AUTHORED_VEHICLE_MESHES,
+  vehicleMeshHeightScale,
+} from "../rendering/AuthoredVehicleMeshes.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { World } from "../world/World.js";
 import { drivenCarPose } from "./Driving.js";
-import { applyVehicleFacing, createVehicle } from "./Vehicle.js";
+import { applyVehicleFacing, createVehicle, VEHICLE_MODELS } from "./Vehicle.js";
 import { gradeRoofOffset, vehicleGroundPose } from "./VehicleGroundPose.js";
+import profiles from "./vehicle-ground-contacts.json" with { type: "json" };
 
-function fixture(a = 0.25, b = 0, heading = 0) {
+function fixture(a = 0.25, b = 0, heading = 0, model = "compact-1") {
   const world = new World(new FlatStrategy());
   for (let y = -3; y <= 3; y++) for (let x = -3; x <= 3; x++) world.getChunk(x, y);
   const ramp = surfaceProp(
@@ -26,7 +32,7 @@ function fixture(a = 0.25, b = 0, heading = 0) {
       connectsTo: [],
     },
   );
-  const car = createVehicle("compact-1", 0, 0, Direction.Right);
+  const car = createVehicle(model, 0, 0, Direction.Right);
   car.id = 1;
   car.vehicleHeading = heading;
   car.velocity = { vx: 72 * Math.cos(heading), vy: 72 * Math.sin(heading) };
@@ -113,7 +119,7 @@ it("keeps flat and unsupported presentation unchanged and excludes unrelated upp
   expect(pose?.offsetZ).toBe(0);
   expect(pose?.contacts.every((p) => p.z === -48)).toBe(true);
   expect(
-    vehicleGroundPose({ ...car, type: "vehicle-v1:compact-2" }, () => 0, [floor]),
+    vehicleGroundPose({ ...car, type: "vehicle-v1:explorer-boat" }, () => 0, [floor]),
   ).toBeUndefined();
 });
 
@@ -188,4 +194,78 @@ it("admits real uphill/downhill rolling turns at 30/50Hz while retaining slab an
         5,
       );
     }
+});
+
+it("covers every road model with contacts pinned to its registered immutable model bytes", () => {
+  expect(Object.keys(profiles).sort()).toEqual([...VEHICLE_MODELS].sort());
+  for (const [model, profile] of Object.entries(profiles)) {
+    const mesh = AUTHORED_VEHICLE_MESHES.find((m) => m.vehicle === model);
+    if (!mesh) throw Error(`Missing registration: ${model}`);
+    expect(
+      createHash("sha256")
+        .update(readFileSync(`public/${mesh.path}`))
+        .digest("hex"),
+      model,
+    ).toBe(profile.sha256);
+    const bytes = readFileSync(`public/${mesh.path}`);
+    const doc = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString());
+    const wheels = doc.nodes.flatMap((node: { name?: string }) => {
+      const name = /^Wheel_(.+)_Roll$/.exec(node.name ?? "");
+      return name?.[1] ? [name[1]] : [];
+    });
+    expect(profile.contacts.map((p) => p.name).sort(), model).toEqual(wheels.sort());
+    expect(
+      profile.contacts.every((p) => p.z === 0),
+      model,
+    ).toBe(true);
+  }
+});
+
+it.each(VEHICLE_MODELS)(
+  "fits %s to uphill, downhill, diagonal and cross-slope wheel contacts",
+  (model) => {
+    for (const heading of [0, Math.PI, Math.PI / 2, Math.PI / 4]) {
+      const { car, height, props } = fixture(0.25, 0.125, heading, model);
+      const before = structuredClone(car);
+      const pose = vehicleGroundPose(car, height, props);
+      if (!pose) throw Error(`Missing ground pose for ${model}`);
+      expect(pose.riseX).toBeCloseTo(0.25 * Math.cos(heading) + 0.125 * Math.sin(heading), 6);
+      expect(pose.riseY).toBeCloseTo(-0.25 * Math.sin(heading) + 0.125 * Math.cos(heading), 6);
+      for (const wheel of pose.contacts) expect(wheel.z).toBeCloseTo(wheel.surfaceZ, 5);
+      expect(car).toEqual(before);
+      expect(vehicleGroundPose({ ...car, towedBy: 7 }, height, props)).toBeUndefined();
+      expect(vehicleGroundPose({ ...car, transportedBy: 7 }, height, props)).toBeUndefined();
+    }
+  },
+);
+
+it("keeps every wheel above the ramp/deck crest with continuous chassis height across the fleet", () => {
+  const ramp = surfaceProp(
+    { left: -256, right: 0, top: -256, bottom: 256 },
+    { id: "ramp", spaceId: "upper", z: -32, riseX: 64, riseY: 0, thickness: 8, connectsTo: [] },
+  );
+  const deck = surfaceProp(
+    { left: 0, right: 256, top: -256, bottom: 256 },
+    { id: "deck", spaceId: "upper", z: 32, riseX: 0, riseY: 0, thickness: 8, connectsTo: [] },
+  );
+  for (const model of VEHICLE_MODELS) {
+    let previous: number | undefined;
+    for (let x = -60; x <= 60; x += 4) {
+      const car = createVehicle(model, x, 0, Direction.Right);
+      if (!car.collider) throw Error("Missing body");
+      car.wz = Math.max(0, Math.min(32, 32 + (x + car.collider.width / 2) / 4));
+      const pose = vehicleGroundPose(car, () => 0, [ramp, deck]);
+      if (!pose) throw Error(`Missing ${model} crest pose at ${x}`);
+      const center = car.wz + pose.offsetZ;
+      if (previous !== undefined)
+        expect(Math.abs(center - previous), `${model} at ${x}`).toBeLessThan(2.01);
+      previous = center;
+      expect(pose.pitch, model).toBeGreaterThanOrEqual(-1e-6);
+      expect(pose.pitch, model).toBeLessThanOrEqual(Math.atan(0.25) + 1e-6);
+      for (const wheel of pose.contacts)
+        expect(wheel.z, `${model} ${wheel.name} at ${x}`).toBeGreaterThanOrEqual(
+          wheel.surfaceZ - 1e-6,
+        );
+    }
+  }
 });

@@ -10,6 +10,7 @@ import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
 import { GpuVehicleContents } from "./GpuVehicleContents.js";
+import { meshBedFoot, meshChildPoint } from "./MeshGradePose.js";
 import {
   AMBULANCE_MESH,
   COMPACT_CAR_MESH,
@@ -149,19 +150,21 @@ export class GpuMeshBodies {
     surface.flush();
     let radius = item.mesh.radius;
     for (const content of item.bedGroup?.contents ?? []) {
-      const bottom = content.wy - item.wy - content.zOffset + item.zOffset + content.drawOffsetY;
+      const foot = meshBedFoot(item, content);
+      const bottom = foot.y - foot.z + content.drawOffsetY;
       radius = Math.max(
         radius,
-        Math.abs(content.wx - item.wx) + content.spriteWidth / 2,
+        Math.abs(foot.x) + content.spriteWidth / 2,
         Math.abs(bottom),
         Math.abs(bottom - content.spriteHeight * (content.scaleY ?? 1)),
       );
     }
-    if (child?.mesh)
+    const childPoint = child?.mesh ? meshChildPoint(item, child) : undefined;
+    if (child?.mesh && childPoint)
       radius = Math.max(
         radius,
-        Math.abs(child.wx - item.wx) + child.mesh.radius,
-        Math.abs(child.wy - item.wy - child.zOffset + item.zOffset) + child.mesh.radius,
+        Math.abs(childPoint.x) + child.mesh.radius,
+        Math.abs(childPoint.y - childPoint.z) + child.mesh.radius,
       );
     radius = Math.ceil(radius);
     const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2)));
@@ -194,8 +197,7 @@ export class GpuMeshBodies {
     this.scene.add(object);
     if (child?.mesh && childAsset) {
       const mesh = child.mesh,
-        o = childAsset.object,
-        yaw = 2 * Math.atan2(mesh.orientation[2], mesh.orientation[3]);
+        o = childAsset.object;
       o.quaternion.set(...mesh.orientation);
       if (mesh.towPitch || mesh.gradePitch)
         o.quaternion.multiply(
@@ -208,11 +210,13 @@ export class GpuMeshBodies {
         o.quaternion.multiply(
           new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), mesh.gradeRoll),
         );
-      o.position.set(
-        child.wx - item.wx + (mesh.towOffsetX ?? 0) * Math.cos(yaw),
-        child.wy - item.wy + (mesh.towOffsetX ?? 0) * Math.sin(yaw),
-        child.zOffset - item.zOffset + (mesh.towOffsetZ ?? 0) + (mesh.gradeOffsetZ ?? 0),
-      );
+      if (childPoint) o.position.set(childPoint.x, childPoint.y, childPoint.z);
+      if (item.mesh.gradePitch || item.mesh.gradeRoll) {
+        const parentGrade = object.quaternion
+          .clone()
+          .multiply(new THREE.Quaternion(...item.mesh.orientation).invert());
+        o.quaternion.premultiply(parentGrade);
+      }
       childAsset.setTravel(mesh.wheelTravel ?? 0, !!mesh.towPitch);
       childAsset.setTransportRamp(false);
       childAsset.setTowLift(false);

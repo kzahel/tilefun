@@ -211,13 +211,16 @@ function drawSprite(
   // and extends upward from feet.
   const halfW = item.spriteWidth / 2;
   const support = item.meshRoofSupport;
-  const roofDelta = support && ctx.meshReady?.has(support.assetId) ? support.heightDelta : 0;
-  const bottom = item.wy - item.zOffset + roofDelta + item.drawOffsetY;
-  const screen = camera.worldToScreen(
-    item.wx - halfW,
-    bottom - item.spriteHeight * (item.scaleY ?? 1),
-  );
-  const end = camera.worldToScreen(item.wx + halfW, bottom);
+  const attached =
+    support &&
+    ctx.meshReady?.has(support.assetId) &&
+    (!support.ownerAssetId || ctx.meshReady.has(support.ownerAssetId));
+  const roofDelta = attached ? support.heightDelta : 0;
+  const wx = item.wx + (attached ? (support.offsetX ?? 0) : 0);
+  const bottom =
+    item.wy + (attached ? (support.offsetY ?? 0) : 0) - item.zOffset + roofDelta + item.drawOffsetY;
+  const screen = camera.worldToScreen(wx - halfW, bottom - item.spriteHeight * (item.scaleY ?? 1));
+  const end = camera.worldToScreen(wx + halfW, bottom);
   const region = sheet.getRegion(item.frameCol, item.frameRow);
   const dx = Math.floor(screen.sx);
   const dy = Math.floor(screen.sy);

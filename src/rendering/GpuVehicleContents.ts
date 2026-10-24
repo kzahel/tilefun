@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import { meshBedFoot } from "./MeshGradePose.js";
 import type { SpriteItem } from "./SceneItem.js";
 
 /** Backend-owned bounded pool; the collector only supplies neutral sprite data. */
@@ -63,11 +64,8 @@ export class GpuVehicleContents {
       uv.setXY(3, u1, v0);
       uv.needsUpdate = true;
       const height = item.spriteHeight * (item.scaleY ?? 1);
-      plane.position.set(
-        item.wx - owner.wx,
-        item.wy - owner.wy,
-        item.zOffset - owner.zOffset + height / 2 - item.drawOffsetY,
-      );
+      const foot = meshBedFoot(owner, item);
+      plane.position.set(foot.x, foot.y, foot.z + height / 2 - item.drawOffsetY);
       plane.scale.set((item.flipX ? -1 : 1) * item.spriteWidth, height, 1);
     }
     return true;

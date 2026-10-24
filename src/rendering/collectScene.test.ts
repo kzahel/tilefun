@@ -9,11 +9,12 @@ import { RailAlignment } from "../railway/RailPath.js";
 import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { createVehicle, VEHICLE_MODELS } from "../traffic/Vehicle.js";
-import { DUMP_BED, hasVehicleBed } from "../traffic/VehicleBed.js";
+import { DUMP_BED, hasDetailedVehicleSurface, hasVehicleBed } from "../traffic/VehicleBed.js";
 import { gradeRoofOffset, vehicleGroundPose } from "../traffic/VehicleGroundPose.js";
 import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
+import { meshBedFoot, meshGradePoint } from "./MeshGradePose.js";
 import { SceneFrame } from "./SceneFrame.js";
 
 const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoadAt: () => 0 };
@@ -61,10 +62,14 @@ it.each(VEHICLE_MODELS)(
     );
     if (rider?.kind !== "sprite") throw Error("Missing rider");
     expect(rider.zOffset).toBe(player.wz);
-    expect(rider.meshRoofSupport).toEqual({
-      assetId: authoredVehicleForType(car.type)?.assetId,
-      heightDelta: (car.collider?.physicalHeight ?? 0) * (1 - vehicleMeshHeightScale(model)),
-    });
+    if (hasDetailedVehicleSurface(car)) {
+      expect(rider.meshBedSupport).toBe(true);
+      expect(rider.meshRoofSupport).toBeUndefined();
+    } else
+      expect(rider.meshRoofSupport).toEqual({
+        assetId: authoredVehicleForType(car.type)?.assetId,
+        heightDelta: (car.collider?.physicalHeight ?? 0) * (1 - vehicleMeshHeightScale(model)),
+      });
     expect(player).toEqual(before);
   },
 );
@@ -126,6 +131,155 @@ it("collects the ramp pilot and its roof rider from the same interpolated wheel 
     height * (1 - fit) - gradeRoofOffset(pose, 0, 0, 0, height * fit),
   );
   expect([car, player]).toEqual(before);
+});
+
+it.each(["dump-truck", "car-transporter"])(
+  "attaches %s supported bed feet to its grade without shifting air/underbody actors or fallbacks",
+  (model) => {
+    const car = createVehicle(model, 200, 150, Direction.Right);
+    car.id = 1;
+    car.wz = 120;
+    const floor = model === "dump-truck" ? DUMP_BED.floorZ : 24.65;
+    const player = createPlayer(180, 153);
+    player.id = 2;
+    player.wz = 120 + floor;
+    const below = { ...createPlayer(180, 153), id: 3, wz: 0 };
+    const jumping = { ...createPlayer(180, 153), id: 4, wz: player.wz + 20, jumpVZ: 1 };
+    const before = structuredClone([car, player, below, jumping]);
+    const ramp = surfaceProp(
+      { left: 0, right: 400, top: 0, bottom: 300 },
+      {
+        id: "ramp",
+        spaceId: "outside",
+        z: 65.625,
+        riseX: 50,
+        riseY: 18.75,
+        thickness: 8,
+        connectsTo: [],
+      },
+    );
+    const camera = new Camera();
+    camera.zoom = 1 / 3;
+    camera.setViewport(600, 400);
+    camera.snapTo(200, 150);
+    const items = collectScene(
+      [car, player, below, jumping],
+      [ramp],
+      world,
+      camera,
+      camera.getVisibleChunkRange(),
+      1,
+      terrain,
+      [],
+      false,
+      undefined,
+      undefined,
+      new SceneFrame(),
+    );
+    const body = items.find((i) => i.kind === "sprite" && i.mesh);
+    if (body?.kind !== "sprite" || !body.bedGroup || !body.mesh)
+      throw Error("Missing detailed bed");
+    expect(body.mesh.gradePitch).toBeGreaterThan(0);
+    expect(body.mesh.gradeRoll).toBeGreaterThan(0);
+    const [supported, underneath, airborne] = body.bedGroup.contents;
+    expect(supported?.meshBedSupport).toBe(true);
+    expect(supported?.meshRoofSupport).toBeUndefined();
+    expect(supported?.zOffset).toBe(player.wz);
+    expect(underneath?.meshBedSupport).toBeUndefined();
+    expect(underneath?.zOffset).toBe(0);
+    expect(airborne?.meshBedSupport).toBeUndefined();
+    expect(airborne?.zOffset).toBe(jumping.wz);
+    expect([car, player, below, jumping]).toEqual(before);
+  },
+);
+
+it("inherits a transporter's grade for a passenger on the carried car's fitted roof", () => {
+  const truck = createVehicle("car-transporter", 200, 150, Direction.Right);
+  truck.id = 1;
+  truck.wz = 120;
+  truck.transportLoadId = 2;
+  const car = createVehicle("compact-1", 179, 150, Direction.Right);
+  car.id = 2;
+  car.transportedBy = 1;
+  car.wz = 144.65;
+  const player = createPlayer(179, 150);
+  player.id = 3;
+  player.wz = car.wz + (car.collider?.physicalHeight ?? 0);
+  const before = structuredClone([truck, car, player]);
+  const ramp = surfaceProp(
+    { left: 0, right: 400, top: 0, bottom: 300 },
+    {
+      id: "ramp",
+      spaceId: "outside",
+      z: 65.625,
+      riseX: 50,
+      riseY: 18.75,
+      thickness: 8,
+      connectsTo: [],
+    },
+  );
+  const camera = new Camera();
+  camera.zoom = 1 / 3;
+  camera.setViewport(600, 400);
+  camera.snapTo(200, 150);
+  const items = collectScene(
+    [truck, car, player],
+    [ramp],
+    world,
+    camera,
+    camera.getVisibleChunkRange(),
+    1,
+    terrain,
+    [],
+    false,
+    undefined,
+    undefined,
+    new SceneFrame(),
+  );
+  const body = items.find(
+    (i) => i.kind === "sprite" && i.mesh?.assetId === "car-transporter-authored-v2",
+  );
+  if (body?.kind !== "sprite" || !body.mesh) throw Error("Missing carrier");
+  const rider = body.bedGroup?.contents[0];
+  if (!rider) throw Error("Missing load's roof rider");
+  expect(body.towGroup?.mesh?.gradeOffsetZ).toBeUndefined();
+  expect(rider.meshBedSupport).toBeUndefined();
+  expect(rider.meshRoofSupport?.ownerAssetId).toBe(body.mesh.assetId);
+  const expected = meshGradePoint(
+    body.mesh,
+    -21,
+    0,
+    24.65 + (car.collider?.physicalHeight ?? 0) * vehicleMeshHeightScale("compact-1"),
+  );
+  const foot = meshBedFoot(body, rider);
+  expect(foot.x).toBeCloseTo(expected.x, 8);
+  expect(foot.y).toBeCloseTo(expected.y, 8);
+  expect(foot.z).toBeCloseTo(expected.z, 8);
+  expect(rider.zOffset).toBe(player.wz);
+  const flat = collectScene(
+    [truck, car, player],
+    [],
+    world,
+    camera,
+    camera.getVisibleChunkRange(),
+    1,
+    terrain,
+    [],
+    false,
+    undefined,
+    undefined,
+    new SceneFrame(),
+  );
+  const flatBody = flat.find((i) => i.kind === "sprite" && i.mesh?.assetId === body.mesh?.assetId);
+  if (flatBody?.kind !== "sprite" || !flatBody.bedGroup?.contents[0])
+    throw Error("Missing flat carried rider");
+  const flatRider = flatBody.bedGroup.contents[0];
+  expect(flatRider.meshRoofSupport?.ownerAssetId).toBe(body.mesh.assetId);
+  expect(meshBedFoot(flatBody, flatRider).z).toBeCloseTo(
+    24.65 + (car.collider?.physicalHeight ?? 0) * vehicleMeshHeightScale("compact-1"),
+    8,
+  );
+  expect([truck, car, player]).toEqual(before);
 });
 
 function collect(entity: Entity, alpha = 1, zoom = 1 / 3, frame?: SceneFrame, height = 0) {

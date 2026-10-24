@@ -24,7 +24,15 @@ export interface SpriteItem {
   /** Optional representation; all sprite fields remain the complete fallback. */
   mesh?: MeshInstance;
   /** Sprite rider's visual attachment, applied only while its supporting mesh is ready. */
-  meshRoofSupport?: { assetId: string; heightDelta: number };
+  meshRoofSupport?: {
+    assetId: string;
+    heightDelta: number;
+    ownerAssetId?: string;
+    offsetX?: number;
+    offsetY?: number;
+  };
+  /** Detailed-bed foot follows its owner’s mesh tilt; sprite fallback stays physical. */
+  meshBedSupport?: boolean;
   emergencyFlash?: number;
   emergencyColors?: readonly [string, string];
   emergencySide?: number;
