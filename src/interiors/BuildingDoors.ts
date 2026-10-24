@@ -110,6 +110,16 @@ export function withLivedInLayout(
   identity: InteriorIdentity,
   position: Prop["position"],
 ): InteriorIdentity {
+  if (identity.buildingType === "prop-shed")
+    return {
+      ...identity,
+      layout: "outbuilding-v1",
+      doors: exteriorDoors({ type: identity.buildingType, position }).map((door) => ({
+        ...door,
+        inside: { wx: 48, wy: 112 },
+        arrival: { wx: 48, wy: 88 },
+      })),
+    };
   const base = withBuildingLayout(identity, position);
   if (!base.layout) return base;
   return {

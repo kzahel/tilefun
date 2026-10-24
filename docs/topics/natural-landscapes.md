@@ -31,6 +31,10 @@ The old unused CountrySource woodland loop remains disconnected. No new art,
 generator version or saved-chunk backfill is introduced. Inspect seed 2026 at
 380,897 through **Countryside · connected farmstead**. Final validation is in 083.
 
+Farmhouse and small outbuilding doors are enterable, including on existing farms.
+[Interiors](patterns-and-interiors.md#player-location-reload-and-building-connections)
+owns their saved identities, tiny outbuilding room and normal return connections.
+
 ## Durable pond wildlife
 
 The owner authorized provisional existing-art wildlife gameplay on 2026-10-09.

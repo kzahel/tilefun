@@ -3,9 +3,14 @@ import type { InteriorIdentity } from "./GameplayInterior.js";
 import { isLivedIn, type LivedInLayout, livedInLayout } from "./LivedInLayouts.js";
 
 /** Saved identities pin these recipes. Changes require a new layout ID. */
-export type BuildingLayout = "shop-v2" | "apartment-v2" | LivedInLayout;
+export type BuildingLayout = "shop-v2" | "apartment-v2" | "outbuilding-v1" | LivedInLayout;
 export function buildingLayout(identity: InteriorIdentity) {
   if (isLivedIn(identity)) return livedInLayout(identity);
+  if (identity.layout === "outbuilding-v1")
+    return {
+      sketch: "###\n#T#\n#T#\n#+#",
+      furniture: [{ id: "seat", asset: "stool", x: 48, y: 56 }],
+    };
   const apartment = identity.layout === "apartment-v2";
   if (identity.layout !== "shop-v2" && !apartment) throw new Error("Unknown building layout");
   const rows = apartment

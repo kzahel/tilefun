@@ -2065,6 +2065,92 @@ it("restaurant visitor walks out and returns with one durable identity while the
   }
 }, 30000);
 
+it("enters the generated farmhouse and tiny outbuilding, exits and restores the saved farm interior", async () => {
+  const setup = await createTestSetup();
+  const { server, transport, registry } = setup;
+  const { FarmsteadSource } = await import("../generation/regional/FarmsteadPlanner.js");
+  const { regionalWorld } = await import("../generation/regional/WorldDescriptor.js");
+  const { buildingDoor, exteriorDoors } = await import("../interiors/BuildingDoors.js");
+  const { interiorRealmId } = await import("../interiors/GameplayInterior.js");
+  const generation = createDescriptor("regional", 2026);
+  const farm = new FarmsteadSource(regionalWorld(2026)).owner(0, 0, "south");
+  if (!farm) throw Error("Missing farm fixture");
+  transport.connect("local", restoreProfile);
+  await server.settle();
+  const meta = await registry.createWorld(
+    "Farm doors",
+    undefined,
+    undefined,
+    undefined,
+    generation,
+  );
+  const buildings = farm.props.filter(
+    (p) => p.propType === "prop-country-house" || p.propType === "prop-shed",
+  );
+  const rooms = new Set<string>();
+  try {
+    expect(buildings).toHaveLength(2);
+    for (const [i, prop] of buildings.entries()) {
+      const outside = exteriorDoors({
+        type: prop.propType,
+        position: { wx: prop.wx, wy: prop.wy },
+      })[0]?.outside;
+      if (!outside) throw Error("Missing farm entrance");
+      await server.loadWorld(meta.id, { x: outside.wx / 16, y: outside.wy / 16, generation });
+      expect(server.propManager.props.some((p) => p.proceduralId === prop.featureId)).toBe(true);
+      transport.clientSend("local", {
+        type: "enter-building",
+        requestId: 9300 + i,
+        featureId: prop.featureId,
+      });
+      await server.settle();
+      const interior = server.worldInterior;
+      expect(interior?.featureId).toBe(prop.featureId);
+      expect(interior?.buildingType).toBe(prop.propType);
+      if (!interior) throw Error("Farm entry failed");
+      const door = buildingDoor(interior);
+      rooms.add(door.insideRealmId);
+      expect(server.getLocalSession().player.position).toEqual(door.arrival);
+      if (prop.propType === "prop-shed") {
+        expect(interior.layout).toBe("outbuilding-v1");
+        break;
+      }
+      server.getLocalSession().player.position = { ...door.inside };
+      transport.clientSend("local", { type: "exit-building", requestId: 9400 + i });
+      await server.settle();
+      expect(server.worldInterior).toBeNull();
+      expect(server.getLocalSession().player.position).toEqual(outside);
+    }
+    expect(rooms.size).toBe(2);
+    const interior = server.worldInterior;
+    await server.flushAsync();
+    await server.destroy();
+    const resumedTransport = new TestTransport();
+    const resumed = new GameServer(resumedTransport, { registry, createStore: setup.createStore });
+    try {
+      await resumed.init();
+      resumedTransport.connect("local", restoreProfile);
+      await resumed.settle();
+      expect(resumed.worldInterior).toEqual(interior);
+      if (!interior) throw Error("Missing saved farm interior");
+      const door = buildingDoor(interior);
+      resumed.getLocalSession().player.position = { ...door.inside };
+      resumedTransport.clientSend("local", { type: "exit-building", requestId: 9500 });
+      await resumed.settle();
+      expect(resumed.worldInterior).toBeNull();
+      expect(resumed.getLocalSession().player.position).toEqual(door.outside);
+      // A syntactically valid farm ID still has to name a real generated owner.
+      await expect(
+        resumed.loadWorld(interiorRealmId(meta.id, "farmstead:0:0:east:house")),
+      ).rejects.toThrow("absent from the generated plan");
+    } finally {
+      await resumed.destroy();
+    }
+  } finally {
+    await server.destroy();
+  }
+});
+
 it("enters every mall shop, exits at its own facade and restores a saved mall interior", async () => {
   const setup = await createTestSetup();
   const { server, transport, registry } = setup;

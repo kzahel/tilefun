@@ -11,7 +11,7 @@ import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight
 import { isTrain } from "../railway/Train.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
 import { supportingTransporter, type TransporterAction } from "../traffic/CarTransporter.js";
-import { boardingDistance, isDrivable } from "../traffic/Driving.js";
+import { boardingDistance, boardingRange, isDrivable } from "../traffic/Driving.js";
 import {
   hasVehicleLights,
   isWarningVehicle,
@@ -138,7 +138,7 @@ export class VehicleControl {
         session.transitioning ||
         session.retired ||
         session.gameplaySession.mountId !== null ||
-        boardingDistance(session.player, vehicle) > 32 ||
+        boardingDistance(session.player, vehicle) > boardingRange(vehicle) ||
         Math.abs((session.player.wz ?? 0) - (vehicle.wz ?? 0)) >
           (supportingTransporter(vehicle, r.entityManager.entities) ? 32 : 12))
     )

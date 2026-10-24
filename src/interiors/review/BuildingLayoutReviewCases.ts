@@ -80,3 +80,27 @@ export function livedInReviewCases(): ReviewCase[] {
     };
   });
 }
+
+export function outbuildingReviewCases(): ReviewCase[] {
+  const identity = withLivedInLayout(
+    {
+      version: "interior-v1",
+      parentWorldId: "review",
+      featureId: "farmstead:0:0:south:shed",
+      buildingType: "prop-shed",
+      floor: 0,
+      returnX: 0,
+      returnY: 0,
+    },
+    { wx: 0, wy: 0 },
+  );
+  return [
+    {
+      id: "farm-outbuilding-v1",
+      name: "Farm outbuilding · tiny room with wooden seat",
+      stage: 18,
+      building: identity,
+      ...buildingLayout(identity),
+    },
+  ];
+}

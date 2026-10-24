@@ -9384,6 +9384,22 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/FarmsteadPlanner.ts:184"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingDoors.ts:113"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/GameplayInterior.ts:41"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:90"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/ui/DoorControl.ts:82"
         }
       ]
     },
@@ -25393,7 +25409,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:40"
+          "source": "src/interiors/BuildingLayouts.ts:45"
         },
         {
           "system": "Interiors",
@@ -25543,15 +25559,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:41"
+          "source": "src/interiors/BuildingLayouts.ts:46"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:41"
+          "source": "src/interiors/BuildingLayouts.ts:46"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:49"
+          "source": "src/interiors/BuildingLayouts.ts:54"
         },
         {
           "system": "Interiors",
@@ -25649,11 +25665,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:42"
+          "source": "src/interiors/BuildingLayouts.ts:47"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:42"
+          "source": "src/interiors/BuildingLayouts.ts:47"
         },
         {
           "system": "Interiors",
@@ -25719,15 +25735,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:43"
-        },
-        {
-          "system": "Interiors",
           "source": "src/interiors/BuildingLayouts.ts:48"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:50"
+          "source": "src/interiors/BuildingLayouts.ts:53"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:55"
         },
         {
           "system": "Interiors",
@@ -25793,15 +25809,19 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:44"
+          "source": "src/interiors/BuildingLayouts.ts:12"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:51"
+          "source": "src/interiors/BuildingLayouts.ts:49"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:51"
+          "source": "src/interiors/BuildingLayouts.ts:56"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:56"
         },
         {
           "system": "Interiors",
@@ -25903,11 +25923,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:45"
+          "source": "src/interiors/BuildingLayouts.ts:50"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:52"
+          "source": "src/interiors/BuildingLayouts.ts:57"
         },
         {
           "system": "Interiors",
@@ -34157,7 +34177,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:566"
+          "source": "src/traffic/Driving.ts:570"
         },
         {
           "system": "Gameplay",
@@ -36396,6 +36416,22 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/FarmsteadPlanner.ts:184"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingDoors.ts:113"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/GameplayInterior.ts:41"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:90"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/ui/DoorControl.ts:82"
         }
       ]
     },

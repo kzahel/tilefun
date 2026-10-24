@@ -79,9 +79,11 @@ export class DoorControl {
             label =
               prop.type === "prop-country-house"
                 ? "Enter home · E"
-                : buildingRecipe(prop.type)?.kind === "shop"
-                  ? "Enter shop · E"
-                  : "Enter apartment · E";
+                : prop.type === "prop-shed"
+                  ? "Enter outbuilding · E"
+                  : buildingRecipe(prop.type)?.kind === "shop"
+                    ? "Enter shop · E"
+                    : "Enter apartment · E";
           }
         }
       }

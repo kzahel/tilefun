@@ -23,6 +23,7 @@ import {
 import { createGenerator } from "../generation/Generator.js";
 import { districtBuilding } from "../generation/regional/DistrictBuildings.js";
 import { DistrictStrategy } from "../generation/regional/DistrictStrategy.js";
+import { FarmsteadSource } from "../generation/regional/FarmsteadPlanner.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import { buildingDoor, exteriorDoors, withLivedInLayout } from "../interiors/BuildingDoors.js";
 import {
@@ -967,17 +968,40 @@ export class GameServer {
     const generation = descriptorFromMetadata(parent);
     if (generation.type !== "regional")
       throw new Error("This generator has no enterable building plans.");
-    const match = /^settlement:(-?\d+):(-?\d+):/.exec(parsed.featureId);
-    if (!match) throw new Error("Invalid building owner.");
     const terrain = createGenerator(generation).terrain;
     if (!(terrain instanceof DistrictStrategy))
       throw new Error("World has no enterable districts.");
-    const source = terrain.districts;
-    const lot = districtBuilding(
-      source.owner(Number(match[1]), Number(match[2])),
-      parsed.featureId,
-    );
-    if (!lot) throw new Error("Building is absent from the pinned district plan.");
+    const farm = /^farmstead:(-?\d+):(-?\d+):(east|south):(?:house|shed)$/.exec(parsed.featureId);
+    const lot = (() => {
+      if (farm) {
+        const plan = new FarmsteadSource(terrain.world).owner(
+          Number(farm[1]),
+          Number(farm[2]),
+          farm[3] as "east" | "south",
+        );
+        const prop = plan?.props.find((p) => p.featureId === parsed.featureId);
+        const entrance =
+          prop &&
+          exteriorEntrance({
+            type: prop.propType,
+            position: { wx: prop.wx, wy: prop.wy },
+          });
+        return prop && entrance
+          ? {
+              buildingType: prop.propType,
+              anchor: { x: prop.wx / TILE_SIZE, y: prop.wy / TILE_SIZE },
+              entrance: { x: entrance.wx / TILE_SIZE, y: entrance.wy / TILE_SIZE },
+            }
+          : undefined;
+      }
+      const match = /^settlement:(-?\d+):(-?\d+):/.exec(parsed.featureId);
+      if (!match) throw new Error("Invalid building owner.");
+      return districtBuilding(
+        terrain.districts.owner(Number(match[1]), Number(match[2])),
+        parsed.featureId,
+      );
+    })();
+    if (!lot) throw new Error("Building is absent from the generated plan.");
     const interior: InteriorIdentity = withLivedInLayout(
       {
         version: "interior-v1",

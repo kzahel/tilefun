@@ -2,7 +2,7 @@
 
 Topic: boats
 Status: implemented and validated; original appearance pending human review.
-Updated: 2026-10-19.
+Updated: 2026-10-24.
 
 Owner requested a working boat, naturally generated larger lakes, boats beside
 shores and varied water creatures in [152](../tactical/152-explorer-boat-and-lakes.md).
@@ -23,11 +23,23 @@ to the open seat. Return beside a clear dry shore to get out. Open-water exit
 is refused. Boats stay parked, save their position/heading and occupied seat,
 and retain deletion through normal streaming and reload.
 
+Placement outlines are centered on the actual vehicle collision footprint. The
+previous outline extended downward from the cursor, misleading south-shore
+placement by 40px. Boats now offer **Drive boat** within 64px of their hull,
+matching the maximum shore exit gap; the prompt and authority share that range.
+This makes boats placed a short distance offshore reachable from dry land on
+every side. Cars and trains retain their 32px boarding range. Boat water clearance
+and safe dry-land exit checks still apply.
+
+The shoreline correction passes native placement/overlay regressions and all
+seven boat browser checks. The broader browser run was stopped at the owner's
+request; it is not a completed full-suite result.
+
 The shared authority/prediction driving step uses gentler acceleration and
 braking, forward rolling turns and a conservative 80px square hull clearance
 covering every heading. Swept bounds require loaded water and reject solid
 terrain, props and other bodies. Boats never use road routing, traffic model
-selection, pushing or roadkill. Road catalogs remain 48 types; the shared
+selection, pushing or roadkill. Road catalogs remain road-only; the shared
 drivable/editor/asset catalog additionally includes this one boat. No new wire
 fields or separate lab simulation are introduced.
 

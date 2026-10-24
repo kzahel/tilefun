@@ -1,11 +1,13 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
+import { BOAT_MODEL } from "../boats/Boat.js";
 import { VEHICLE_PALETTE } from "../editor/EditorPalettes.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { DRIVABLE_MODELS, VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { boardingDistance, boardingRange } from "../traffic/Driving.js";
+import { createVehicle, DRIVABLE_MODELS, VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { around } from "./InterestManager.js";
 
@@ -67,6 +69,46 @@ it("rejects player/body/prop overlap, water, unloaded terrain and invalid coordi
     expect(traffic.place("compact-1", 160, 0)).toBeUndefined();
     expect(traffic.states.size).toBe(1);
     expect(vehicle.entity.position).toEqual({ wx: 160, wy: 0 });
+  } finally {
+    await s.close();
+  }
+});
+it("boards an editor boat across a short water gap from every shore and exits onto dry land", async () => {
+  const s = await ScenarioSession.create(recipe());
+  try {
+    for (const [dx, dy] of [
+      [0, 1],
+      [0, -1],
+      [1, 0],
+      [-1, 0],
+    ] as const) {
+      // A boat placed 40px away from the bank used to strand the south-shore
+      // player: the misplaced preview encouraged exactly this water gap.
+      s.realm.world.getCollisionIfLoaded = (x, y) =>
+        (dx ? dx * (x * 16 + 8) : dy * (y * 16 + 8)) >= 80
+          ? CollisionFlag.None
+          : CollisionFlag.Water;
+      s.player.player.position = { wx: dx * 105, wy: dy * 105 };
+      const state = required(place(s, BOAT_MODEL, 0, 0));
+      expect(state.placed).toBe(true);
+      s.player.editorEnabled = false;
+      expect(boardingDistance(s.player.player, state.entity)).toBe(65);
+      expect(() => s.realm.vehicles.enter(s.player, state.entity.id)).toThrow("Stand beside");
+      s.player.player.position = { wx: dx * 104, wy: dy * 104 };
+      expect(boardingDistance(s.player.player, state.entity)).toBe(boardingRange(state.entity));
+      s.realm.vehicles.enter(s.player, state.entity.id);
+      expect(s.player.player.parentId).toBe(state.entity.id);
+      s.realm.vehicles.exit(s.player);
+      expect(s.player.player.parentId).toBeUndefined();
+      expect(
+        s.realm.world.getCollisionIfLoaded(
+          Math.floor(s.player.player.position.wx / 16),
+          Math.floor(s.player.player.position.wy / 16),
+        ) & CollisionFlag.Water,
+      ).toBe(0);
+      s.realm.entityManager.remove(state.entity.id);
+    }
+    expect(boardingRange(createVehicle("compact-1", 0, 0))).toBe(32);
   } finally {
     await s.close();
   }

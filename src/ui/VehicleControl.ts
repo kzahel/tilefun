@@ -13,7 +13,12 @@ import {
   transportCandidate,
   transporterLocal,
 } from "../traffic/CarTransporter.js";
-import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/Driving.js";
+import {
+  boardingDistance,
+  boardingRange,
+  isDrivable,
+  occupiedVehicle,
+} from "../traffic/Driving.js";
 import { isTowTruck, towCandidate } from "../traffic/Towing.js";
 import { transporterRampOccupied } from "../traffic/TransporterSurface.js";
 import { bedDriveLocked, hasVehicleBed } from "../traffic/VehicleBed.js";
@@ -145,7 +150,7 @@ export class VehicleControl {
             Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 3 &&
             Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <=
               (supportingTransporter(e, transporters) ? 32 : 12) &&
-            boardingDistance(p, e) <= 32,
+            boardingDistance(p, e) <= boardingRange(e),
         )
         .sort(
           (a, b) =>

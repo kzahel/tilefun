@@ -2,9 +2,11 @@ import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import { createSpriteCatalog } from "../assets/SpriteCatalog.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { getEntityAABB } from "../entities/collision.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawOverlayGeometry } from "../rendering/CanvasOverlayRenderer.js";
 import { OverlayFrame } from "../rendering/OverlayFrame.js";
+import { createVehicle, DRIVABLE_MODELS } from "../traffic/Vehicle.js";
 import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
 import { collectEditorOverlay, collectRemoteCursors } from "./collectEditorOverlay.js";
@@ -113,6 +115,42 @@ const cases = [
 ];
 
 describe("editor overlay geometry parity", () => {
+  it("centers vehicle placement outlines on the actual spawned footprint", () => {
+    const model = new EditorModel();
+    model.editorTab = "vehicles";
+    const camera = new Camera();
+    camera.setViewport(600, 800);
+    camera.zoom = 0.25;
+    const editor = { cursorWorldX: 96, cursorWorldY: 128 } as EditorMode;
+    const world = { getHeightAt: () => 0 } as unknown as World;
+    const assets = createSpriteCatalog(new Map());
+    const frame = new OverlayFrame();
+    for (const vehicle of DRIVABLE_MODELS) {
+      model.selectedVehicleType = `vehicle-v1:${vehicle}`;
+      frame.begin();
+      collectEditorOverlay(
+        frame,
+        camera,
+        editor,
+        model,
+        { minCx: 0, minCy: 0, maxCx: 0, maxCy: 0 },
+        world,
+        assets,
+      );
+      const body = createVehicle(vehicle, 96, 128);
+      if (!body.collider) throw Error("Missing vehicle body");
+      const bounds = getEntityAABB(body.position, body.collider);
+      const p = camera.worldToScreen(bounds.left, bounds.top);
+      expect(frame.items[0], vehicle).toMatchObject({
+        kind: "rect",
+        x: p.sx,
+        y: p.sy,
+        width: (bounds.right - bounds.left) * camera.scale,
+        height: (bounds.bottom - bounds.top) * camera.scale,
+      });
+    }
+  });
+
   for (const name of cases)
     it(name, () => {
       const model = new EditorModel();

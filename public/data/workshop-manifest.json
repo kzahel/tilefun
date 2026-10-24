@@ -531,6 +531,12 @@
       "toolId": "rooms"
     },
     {
+      "id": "rooms-18",
+      "name": "Farm outbuildings",
+      "description": "Generated interior cases rendered with the shared room compiler.",
+      "toolId": "rooms"
+    },
+    {
       "id": "wildlife-v2-supervised-01",
       "name": "Wildlife · supervised-01",
       "description": "Fresh elevated-view animal art and motion; human approval pending.",
@@ -5107,7 +5113,7 @@
       "name": "Shopping center · parking and shoppers",
       "prompt": "Watch the normal generated city shopping trip, with native road arrival, return, obstruction waits and paused save/reload. Pavement and markings use the ordinary terrain chunk renderer.",
       "url": "/tilefun/workshop.html#/tool/parking-lab?play=1",
-      "fingerprint": "d0237e9df5453386127a24d2e27d9a3d1c532fd6c5ae82edb3940bf2eed038d4",
+      "fingerprint": "c51e8f05b5c620f5f690c43e3085a8e5fcbe34968129440176e831058d3ed27e",
       "excluded": "Playable behavior study; static parking-pattern review snapshots retain their own identities."
     },
     {
@@ -5117,7 +5123,7 @@
       "name": "Generated city · road to shopping center",
       "prompt": "Follow the same native road car into the generated shopping center, watch its shopper visit and return, then follow its checked merge back onto the boulevard. One visitor per center; no entrance or exit teleport.",
       "url": "/tilefun/workshop.html#/tool/parking-lab?play=1&city=1",
-      "fingerprint": "d0237e9df5453386127a24d2e27d9a3d1c532fd6c5ae82edb3940bf2eed038d4",
+      "fingerprint": "c51e8f05b5c620f5f690c43e3085a8e5fcbe34968129440176e831058d3ed27e",
       "excluded": "Playable behavior study; static parking-pattern review snapshots retain their own identities."
     },
     {
@@ -16586,7 +16592,7 @@
       "name": "Tipping dump-truck bed",
       "prompt": "Use ordinary game controls to board, carry loose toys/food, ride and reload. Inspect floor/wall contacts and upright sprite depth. Tip/lower the articulated bed and inspect real cargo/rider discharge.",
       "url": "/tilefun/workshop.html?geometry=truck-bed#/tool/world-geometry",
-      "fingerprint": "70ec6ad418c06855af069a54a6415ea1ba0461c6b669827245c1c84f82edfb9a",
+      "fingerprint": "65af25e25ab0d72ac7d36ed7bea393ee690512da2d4f6a3eaa5cae65dba02b86",
       "excluded": "Interactive articulated-equipment engine review; v1 source preserved, changed v2 poses await human inspection. Not an immutable art approval snapshot."
     },
     {
@@ -16596,7 +16602,7 @@
       "name": "Wheel-lift tow truck",
       "prompt": "Attach a parked car using normal controls; drive, reverse, save/reload and release. Inspect the raised front axle and rolling rear wheels.",
       "url": "/tilefun/workshop.html?geometry=towing#/tool/world-geometry",
-      "fingerprint": "dec3898d317f6eca6716de603567edff3a625cf35cc0265d3118597967b27cd7",
+      "fingerprint": "562328bf4533cd736eda142412387715aa6dfd3f5ab81c59be21828664477642",
       "excluded": "Interactive shared-engine towing qualification; new equipment poses await human inspection. Not an immutable art approval snapshot."
     },
     {
@@ -16606,7 +16612,7 @@
       "name": "Single-car transporter",
       "prompt": "Deploy the ramp, drive a car aboard, get out and secure it. Stow, drive, reload, then deploy/release and reverse off. Inspect axle support and shared depth.",
       "url": "/tilefun/workshop.html?geometry=transporter#/tool/world-geometry",
-      "fingerprint": "88b722910cfa70c72d0d81996ede06289c1d538dd494ac54d00f0032bd6d6801",
+      "fingerprint": "31ca450edd4624b14564fc5c2156d47316b9f15c71352b54f975733e8feeebef",
       "excluded": "Interactive shared-engine machinery qualification; new original appearance awaits human inspection. This is not a promoted art approval snapshot."
     },
     {
@@ -24801,6 +24807,30 @@
             "asset": "rug",
             "x": 264,
             "y": 252
+          }
+        ],
+        "furnitureCatalogVersion": 1
+      }
+    },
+    {
+      "id": "farm-outbuilding-v1",
+      "batchId": "rooms-18",
+      "name": "Farm outbuilding · tiny room with wooden seat",
+      "prompt": "Review the room and doorway joins. Tap the render to pin a problem.",
+      "url": "/tilefun/interior-review.html?stage=18&unchecked=0&case=farm-outbuilding-v1",
+      "kind": "interior",
+      "fingerprint": "91774c0a06ab227e7a379a06a0ac3bf88f654e9093d1f613d20828957223d314",
+      "interior": {
+        "caseId": "farm-outbuilding-v1",
+        "name": "Farm outbuilding · tiny room with wooden seat",
+        "sketch": "###\n#T#\n#T#\n#+#",
+        "fingerprint": "91774c0a06ab227e7a379a06a0ac3bf88f654e9093d1f613d20828957223d314",
+        "furniture": [
+          {
+            "id": "seat",
+            "asset": "stool",
+            "x": 48,
+            "y": 56
           }
         ],
         "furnitureCatalogVersion": 1
@@ -50345,5 +50375,5 @@
       }
     }
   ],
-  "inputDigest": "3d6cd57930de74e8fab2282a60d82b899c187b2c0ab2a04e3447c78df847d36b"
+  "inputDigest": "35e5beaacd9a94e44e2b12b31e30cddf9d28980f5912a6f13d03c9d5e442fcdf"
 }

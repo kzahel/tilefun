@@ -55,6 +55,10 @@ export function boardingDistance(player: Entity, vehicle: Entity): number {
     Math.max(box.top - player.position.wy, 0, player.position.wy - box.bottom),
   );
 }
+/** Boats need a short shore-to-hull gap, matching the safe shore exit search. */
+export function boardingRange(vehicle: Entity): number {
+  return isBoat(vehicle) ? 64 : 32;
+}
 function facing(dx: number, dy: number, previous: Direction): Direction {
   if (!dx && !dy) return previous;
   const horizontal = previous === Direction.Left || previous === Direction.Right;

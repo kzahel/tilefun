@@ -5,7 +5,7 @@ import { compileTreeRun } from "../patterns/FencedTrees.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import type { RemoteEditorCursor } from "../shared/protocol.js";
-import { vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
+import { vehicleBodySize, vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
 import { vehiclePaintSheet } from "../traffic/VehiclePaint.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
@@ -161,8 +161,8 @@ function collectCursor(
   if (model.editorTab === "vehicles") {
     if (![editor.cursorWorldX, editor.cursorWorldY].every(Number.isFinite)) return;
     const view = vehicleView(model.selectedVehicleType, Direction.Right);
-    const collider = view?.metadata.colliders[0];
-    if (!collider) return;
+    if (!view) return;
+    const size = vehicleBodySize(model.selectedVehicleType, 0);
     const z =
       world.getHeightAt(
         Math.floor(editor.cursorWorldX / 16),
@@ -170,10 +170,10 @@ function collectCursor(
       ) * ELEVATION_PX;
     const p = camera.worldToScreen(editor.cursorWorldX, editor.cursorWorldY - z);
     out.rect(
-      p.sx - (collider.width / 2) * scale,
-      p.sy,
-      collider.width * scale,
-      collider.height * scale,
+      p.sx - (size.width / 2) * scale,
+      p.sy - (size.height / 2) * scale,
+      size.width * scale,
+      size.height * scale,
       model.deleteMode ? "rgba(255,80,80,0.2)" : "rgba(255,255,255,0.15)",
       model.deleteMode ? "#f55" : "#fff",
       1,

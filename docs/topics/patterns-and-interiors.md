@@ -3,7 +3,7 @@
 Topic: patterns-and-interiors
 Status: Workshop/game pattern drawing and persistent gameplay room editing
 implemented; tree-kit review/promotion and Workshop-to-game prefab import remain.
-Updated: 2026-10-18.
+Updated: 2026-10-24.
 
 Owns the shared semantic editing contract and current interior direction.
 [Tactical 011](../tactical/011-shared-pattern-brushes-and-room-drawing.md) records
@@ -83,6 +83,17 @@ verified; pinned exterior art and reviewed static compositions are unchanged.
 
 Older regional/country-house recipes retain their original compact interiors.
 Upper floors and per-building authored variants remain future work.
+
+Generated farmhouses and their small `prop-shed` outbuildings now resolve through
+the actual farm owner's plan as well as the interior identity validator. This
+fixes “Invalid building identity” on farmhouse entry, including existing worlds.
+The outbuilding has its own saved `outbuilding-v1` room: one narrow space with a
+wooden seat and a clear doorway. Enter/return controls and location restoration
+use the ordinary shared building connections. Its new, unapproved composition is
+registered as `farm-outbuilding-v1` in **Farm outbuildings**; source art is reused.
+Focused identity, room-access and server save/return regressions pass, as does one
+real Worker/browser check of entering and leaving both farm buildings. Typechecks,
+changed-file lint, the production build and 1,981-candidate raster parity pass.
 
 The [world geometry direction](world-geometry.md#visibility-and-seamless-interiors)
 also targets seamless connected indoor levels with cutaways and level/sector

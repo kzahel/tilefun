@@ -1,6 +1,8 @@
 import { expect, type Page, test } from "@playwright/test";
+import { TerrainId } from "../src/autotile/TerrainId.js";
 import { BOAT_MESH } from "../src/boats/Boat.js";
 import type { ClientStateView, RemoteStateView } from "../src/client/ClientStateView.js";
+import type { GameClient } from "../src/client/GameClient.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
 import type { RequestMessage } from "../src/shared/requests.js";
@@ -33,6 +35,84 @@ async function read(page: Page) {
     };
   });
 }
+test("a boat placed from the south shore offers boarding across the water gap", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/?nogamepad&renderer=gpu&meshes");
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await page.evaluate(async () => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
+    const created = await g.gcSendRequest({
+      type: "create-world",
+      requestId: g.nextRequestId++,
+      name: "South shore boat",
+      generation,
+    });
+    await g.gcSendRequest({
+      type: "join-realm",
+      requestId: g.nextRequestId++,
+      worldId: created.meta.id,
+      arrival: { x: 0, y: 1, generation },
+    });
+  });
+  await page.getByTestId("main-menu-toggle").click();
+  await page.getByRole("button", { name: "Edit", exact: true }).click();
+  await page.locator('[data-editor-tab="vehicles"]').click();
+  await page.getByRole("button", { name: "Explorer motorboat", exact: true }).click();
+  await page.evaluate((water) => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    for (let ty = -10; ty <= -1; ty++)
+      for (let tx = -5; tx <= 5; tx++)
+        g.transport.send({
+          type: "edit-terrain-tile",
+          tx,
+          ty,
+          terrainId: water,
+          paintMode: "positive",
+          bridgeDepth: 0,
+        });
+  }, TerrainId.ShallowWater);
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        return g.stateView.world.getCollisionIfLoaded(0, -1);
+      }),
+    )
+    .toBe(2);
+  const point = await page.evaluate(() => {
+    const canvas = document.querySelector("#game") as HTMLCanvasElement;
+    const g = (canvas as unknown as { __game: GameClient }).__game;
+    g.camera.zoom = 1 / 3;
+    g.camera.snapTo(0, 80);
+    const p = g.camera.worldToScreen(0, -88);
+    const bounds = canvas.getBoundingClientRect();
+    return {
+      x: bounds.left + (p.sx * bounds.width) / canvas.width,
+      y: bounds.top + (p.sy * bounds.height) / canvas.height,
+    };
+  });
+  await page.mouse.move(point.x, point.y);
+  await page.screenshot({ path: "/tmp/tilefun-boat-south-placement.png" });
+  await page.mouse.click(point.x, point.y);
+  await expect.poll(async () => (await read(page)).boat).toBeDefined();
+  const placed = (await read(page)).boat;
+  expect(placed?.x).toBeCloseTo(0, 0);
+  expect(placed?.y).toBeCloseTo(-88, 0);
+  await page.getByRole("button", { name: "Exit editor", exact: true }).click();
+  await page.evaluate(async () => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    await g.gcSendRequest({ type: "rcon", requestId: g.nextRequestId++, command: "tp 0 12" });
+  });
+  await expect(page.getByRole("button", { name: /^Drive boat/ })).toBeVisible();
+  await page.screenshot({ path: "/tmp/tilefun-boat-south-shore.png" });
+  await page.getByRole("button", { name: /^Drive boat/ }).click();
+  await expect.poll(async () => (await read(page)).parent).toBe(placed?.id);
+  await page.getByRole("button", { name: /^Get out/ }).click();
+  await expect.poll(async () => (await read(page)).parent).toBe(-1);
+  await stopLocalWorld(page);
+});
 for (const renderer of ["canvas", "gpu", "gpu&meshes"]) {
   test(`natural boat drives and retains its open seat and parked pose (${renderer})`, async ({
     page,
