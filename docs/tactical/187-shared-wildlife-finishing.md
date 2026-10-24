@@ -106,3 +106,31 @@ was run separately and passes. Local logs are in ignored `data/wildlife-187/`.
 
 Full browser validation and delivery are in progress. Human review remains
 pending; the next art step is owner review of these exact correction identities.
+
+## Deployment gate follow-up
+
+Implementation pushed as `dded5c0f2`. `origin/main` is current after fetch/rebase;
+all 2,118 hosted raster identities pass. The previous main run
+[40106872694](https://github.com/kzahel/tilefun/actions/runs/40106872694) already
+fails the dependency audit and smoke stages. The first delivery's check job also
+fails, with only its exit code available through the public job API.
+
+Local audit reproduction finds existing advisories fixed by Electron
+[44.9.1](https://github.com/advisories/GHSA-jr5w-w6x2-84p9), body-parser
+[1.20.9](https://github.com/advisories/GHSA-27r3-jxmh-p828), and Worker Miniflare's
+Undici [7.30.1](https://github.com/advisories/GHSA-xjj6-f33q-929c).
+Update the two root lock entries and Electron's minimum patch version; scope the
+Undici override to Miniflare instead of downgrading Wrangler. Both dependency
+audits now return zero vulnerabilities. Preserve both prior root package files
+byte-exact in the existing vehicle replay catalog, without changing receipts.
+All 48 replay-resolver/mesh checks pass. Worker tooling installed with patched
+Undici passes eleven tests and its actual dry-run build. These dependency
+changes do not alter runtime art or registered pixels.
+
+A fresh `npm ci --prefix worker --ignore-scripts` confirms the locked Wrangler
+4.149.0 and patched Undici 7.30.1 on disk; all eleven Worker tests and the
+dry-run build pass from that clean install. Types, lint and production build
+pass after the lockfile changes. During that rebuild, the first browser run's
+preview temporarily lost `dist`, causing page-load 404s. Stop that run, retain
+its 328 passing cases, and resume the exact remaining 512 with Playwright's
+`--test-list-invert`; do not weaken or omit the interrupted assertions.

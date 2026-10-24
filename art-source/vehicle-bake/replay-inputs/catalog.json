@@ -25,6 +25,16 @@
       "path": "package-lock.json",
       "sha256": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235",
       "snapshot": "art-source/vehicle-bake/replay-inputs/c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235/package-lock.json"
+    },
+    {
+      "path": "package.json",
+      "sha256": "8f40f8e1b5c13313a05922ee117fcfc135e7b0a545e3bb37a582c63f12224090",
+      "snapshot": "art-source/vehicle-bake/replay-inputs/8f40f8e1b5c13313a05922ee117fcfc135e7b0a545e3bb37a582c63f12224090/package.json"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "22d5460c1a31530ed240ee88903c0c928063014e905ffa2e028c22d3fc02bfcd",
+      "snapshot": "art-source/vehicle-bake/replay-inputs/22d5460c1a31530ed240ee88903c0c928063014e905ffa2e028c22d3fc02bfcd/package-lock.json"
     }
   ]
 }

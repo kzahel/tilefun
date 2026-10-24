@@ -61,7 +61,7 @@
     "@types/ws": "^8.18.2",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "@vitejs/plugin-react": "^6.1.1",
-    "electron": "^44.9.0",
+    "electron": "^44.9.1",
     "peer": "^1.0.2",
     "pngjs": "^7.0.0",
     "tsx": "^4.23.15",

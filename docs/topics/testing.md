@@ -10,6 +10,15 @@ launch/pixels, keyboard/controller/touch controls, Worker lifecycle and saves,
 mobile editing, vehicle driving/persistence, multiplayer and launcher assets.
 Run them with `npm run test:smoke`; no browser tests are deleted.
 
+The 2026-10-24 wildlife delivery follow-up patches Electron to 44.9.1 and
+transitive body-parser to 1.20.9 after the existing dependency audit gate fails.
+Worker Miniflare pins vulnerable Undici 7.29.1; a scoped `miniflare.undici`
+override selects patched 7.30.1 until upstream updates that pin. Both audits
+return zero vulnerabilities. Exact pre-upgrade package files remain registered
+in the historical replay catalog; 48 replay/mesh checks and eleven Worker tests
+plus its dry-run build pass. See [187](../tactical/187-shared-wildlife-finishing.md)
+for delivery evidence. Keep the high-severity gate enabled.
+
 The full browser suite runs at 02:17 UTC daily and through **Actions → CI → Run
 workflow**, using eight independent shards. It collects all failures and retains
 failure traces/screenshots. Only push validation on main deploys; scheduled and
