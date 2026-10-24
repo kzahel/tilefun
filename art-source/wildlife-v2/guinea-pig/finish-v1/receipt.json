@@ -1,0 +1,53 @@
+{
+  "identity": "guinea-pig-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "guinea-pig-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "2698e74c53e5e8f59feda876a130a6e80af66764419338829d770122dc59e51b",
+      "index.html": "9396a5643b507d2768382de57d3be5a1852b8d0a3b08176f19e1de7fd5b164ca",
+      "pixel-audit.json": "e71a7e719df19965cf3d8e7503d49dae81fe6da7b627005680ac03f40b068845",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "addd8cf231aeb5e9fae31d3f4b1ed9408e12bf14c71a8043ed086e58b2ab45b8",
+      "preview.gif": "90a56b7cb6332208917f1743a98f5c05f94e47d9986092c3548840c944768c95",
+      "scene-native.png": "3af7c4d39be1b0c52d3fbd043b042c4a3444fca152cc3e546a965a27187cfdbe",
+      "sheet.png": "94958764d86a46eedec48a7c120f4b491f41139bc9435773f48d184b71d46b6d",
+      "source-audit.json": "cbbd990498a472d46f46825ffcb5d83e97c16512cc8b04797c974c39b3d23724",
+      "sprite.json": "e5bd297f5f8f12f47229d0ff8fc243bf1da89b1e7d707eb0319979352eca505f"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/guinea-pig/finish-v1/README.md": "b474bcd48010944aa50ba4aad6616d9ba72c6892e6169571aef4cfd26e73834f",
+    "art-source/wildlife-v2/guinea-pig/finish-v1/inputs.json": "a0ed644a8265a8c525e138cabc50381eab24d17fbaab007306cfd8ac21b70ded",
+    "art-source/wildlife-v2/guinea-pig/finish-v1/replay.json": "795b6c76028f9015e55933eaa57409d7ef9b8333194ef8d9b32a24eb0f5f700d",
+    "art-source/wildlife-v2/guinea-pig/roster-v2/guinea-pig.blend": "b637b2f73aacd538827c47b2f29f7b071170fe04e80c406adf212a4bcd6928b6",
+    "art-source/wildlife-v2/guinea-pig/roster-v2/inputs.json": "4acbe965594cafea79cf77a81d7619d503df3b884ea4a4f9ecca422fe09eb35f",
+    "art-source/wildlife-v2/guinea-pig/roster-v2/projection.json": "2bcc189b360c814a8750f391e206ebdcb383aa7b07a275ab0a1c9c805e461618",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/contact-sheet-native.png": "2698e74c53e5e8f59feda876a130a6e80af66764419338829d770122dc59e51b",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/index.html": "9396a5643b507d2768382de57d3be5a1852b8d0a3b08176f19e1de7fd5b164ca",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/pixel-audit.json": "e71a7e719df19965cf3d8e7503d49dae81fe6da7b627005680ac03f40b068845",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/preview-native.gif": "addd8cf231aeb5e9fae31d3f4b1ed9408e12bf14c71a8043ed086e58b2ab45b8",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/preview.gif": "90a56b7cb6332208917f1743a98f5c05f94e47d9986092c3548840c944768c95",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/scene-native.png": "3af7c4d39be1b0c52d3fbd043b042c4a3444fca152cc3e546a965a27187cfdbe",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/sheet.png": "94958764d86a46eedec48a7c120f4b491f41139bc9435773f48d184b71d46b6d",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/source-audit.json": "cbbd990498a472d46f46825ffcb5d83e97c16512cc8b04797c974c39b3d23724",
+    "public/demos/wildlife-v2/guinea-pig/finish-v1/sprite.json": "e5bd297f5f8f12f47229d0ff8fc243bf1da89b1e7d707eb0319979352eca505f",
+    "public/demos/wildlife-v2/guinea-pig/roster-v2/sheet.png": "90822f106d85d953f7794d0589c702aec526bed7150aea1e2f4aff28518b45da",
+    "public/demos/wildlife-v2/guinea-pig/roster-v2/sprite.json": "6e11fbe59eb84952f1c9461710d232bcf7e2de59aba0a36decbdabb1c811e4a5",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "red-panda-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/red-panda/roster-v2/red-panda.blend": "14d2f0b27f22a95c67ac620144a6772e0e0359c2dbce9da1a33c04eab295a63f"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

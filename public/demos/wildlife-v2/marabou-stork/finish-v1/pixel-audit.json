@@ -1,0 +1,12 @@
+{
+  "identity": "marabou-stork-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "56d55c6f7e4c4b6b82d5d1fc53e72e3b349a16ed5d7e69b71303c885c8c48ed8"
+}

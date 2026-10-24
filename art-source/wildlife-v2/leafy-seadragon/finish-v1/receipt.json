@@ -1,0 +1,53 @@
+{
+  "identity": "leafy-seadragon-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "leafy-seadragon-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "57c7a11cadb828e6b43f500865abc58d6429ea30637074183867a4a9bbb2819e",
+      "index.html": "e2852242b5413be12b42bc9f3fd6c42610282ee9f9ec1bc3d024fddd363d633f",
+      "pixel-audit.json": "5a58875445e35b25e6970d2e749cb74086fa0ab469f9200d6b03a2f5eb1eb7fa",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "fda477b39ce230ade47f7b4a4e76da234a2c52642e54d351f752048079b857e8",
+      "preview.gif": "ea1f656ee62ba2f23d32ddee60edbc0916a2e50b8a30ec5311217b82e3ec2b5c",
+      "scene-native.png": "eb0370e621e1b986d6d21dc6d1849da43ee3b41700922b589a5d4a706f19cfca",
+      "sheet.png": "3f55b2af310b1fc190436b80f27750f1ca5f7f21e4324d9ee348b0f35dbd62b1",
+      "source-audit.json": "54ff2e6c45fffaf890e0d605811daf0f0862e407019503f4568cc943edc72ca2",
+      "sprite.json": "59eb245227c0815fc579a4277e5833399123d70a15496d30ad0311f227e86615"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/leafy-seadragon/finish-v1/README.md": "ce6880dcd5aed503a25dcd899e7bb5012fd30f56922f42597d6dc12b90d19b62",
+    "art-source/wildlife-v2/leafy-seadragon/finish-v1/inputs.json": "f39d818be19d8915081877aafe57542e849183e73f3cd83ec11f3345097f6c1c",
+    "art-source/wildlife-v2/leafy-seadragon/finish-v1/replay.json": "10f5e1df2457d44b641675b1a8b704f44e90ade1523870b5101486d60a8d16d0",
+    "art-source/wildlife-v2/leafy-seadragon/roster-v3/inputs.json": "78fea8d80af9f767c2c4557744bdc3c6b6b207163aa70a6290d53414535f65ab",
+    "art-source/wildlife-v2/leafy-seadragon/roster-v3/leafy-seadragon.blend": "95256d3334b393141f2f76075278db7790e0dc6f1bdbb01a056737ca8fbe02c2",
+    "art-source/wildlife-v2/leafy-seadragon/roster-v3/projection.json": "b46131a78ae4fc41be6feb8559014fab429507bd4e695cf2c56f2ad5de444665",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/contact-sheet-native.png": "57c7a11cadb828e6b43f500865abc58d6429ea30637074183867a4a9bbb2819e",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/index.html": "e2852242b5413be12b42bc9f3fd6c42610282ee9f9ec1bc3d024fddd363d633f",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/pixel-audit.json": "5a58875445e35b25e6970d2e749cb74086fa0ab469f9200d6b03a2f5eb1eb7fa",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/preview-native.gif": "fda477b39ce230ade47f7b4a4e76da234a2c52642e54d351f752048079b857e8",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/preview.gif": "ea1f656ee62ba2f23d32ddee60edbc0916a2e50b8a30ec5311217b82e3ec2b5c",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/scene-native.png": "eb0370e621e1b986d6d21dc6d1849da43ee3b41700922b589a5d4a706f19cfca",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/sheet.png": "3f55b2af310b1fc190436b80f27750f1ca5f7f21e4324d9ee348b0f35dbd62b1",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/source-audit.json": "54ff2e6c45fffaf890e0d605811daf0f0862e407019503f4568cc943edc72ca2",
+    "public/demos/wildlife-v2/leafy-seadragon/finish-v1/sprite.json": "59eb245227c0815fc579a4277e5833399123d70a15496d30ad0311f227e86615",
+    "public/demos/wildlife-v2/leafy-seadragon/roster-v3/sheet.png": "5bae591742955e8cadac4470c6b913049271084288acf5eaae0e0d7081d38e61",
+    "public/demos/wildlife-v2/leafy-seadragon/roster-v3/sprite.json": "dbc3b5b8de6447c7956c487a0bcf25d782a1acf55602dd61424af978637acaa1",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

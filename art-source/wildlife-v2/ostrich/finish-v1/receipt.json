@@ -1,0 +1,53 @@
+{
+  "identity": "ostrich-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "ostrich-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "ac52cd3e1ab70a46adf605920ab890ace1252f134437f773dd75d8570d408b7c",
+      "index.html": "1755e1d7f35567b08dd7d8924c5a1f53aaeaf55b5cb0a12812305606946f410a",
+      "pixel-audit.json": "1316ad3d06cfd4fc59488850fbcf17fd01ff3d3f46e52d60df99db01e60ecaf6",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "661f73b974eafbd36152969fc76eb037e060a07b32cf658230cfefef5b3710b5",
+      "preview.gif": "dc81ae7599d388c9db4ffea96b0603ae77a8df5f314e44dcbd1723364fe34b30",
+      "scene-native.png": "7cb825761b21c8d194e586d46c8be2fecad9c03127263835e7987cf868265e6a",
+      "sheet.png": "808d73583224aac5f9d354c5fa4711e5a06c8b08e898e1b4a3d533e232532731",
+      "source-audit.json": "96dec2bcbb339146cde35d3c5d8df267098dd03e6edb01e1bcca8530858fb090",
+      "sprite.json": "0b5b0782c240701c5b901f9f229043614bb202127c320a29fa2bc1023cf7e88e"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/ostrich/finish-v1/README.md": "41d736cdc56ecef7e713d411ef66fa602c41f0a80e5cb1cd0d741095db37cceb",
+    "art-source/wildlife-v2/ostrich/finish-v1/inputs.json": "b3a5db7bda2021877b2803e2e5cc022d8adea5d0fd5a5bfd2ab35de2475eee04",
+    "art-source/wildlife-v2/ostrich/finish-v1/replay.json": "1cefa82625a6ec8b4b1df6733b9298c722452460202d8075851b11c5055479ee",
+    "art-source/wildlife-v2/ostrich/roster-v2/inputs.json": "9537ee74e2c3be8c16b3b8acf49fde310db194c7c289d362811301267944d803",
+    "art-source/wildlife-v2/ostrich/roster-v2/ostrich.blend": "cf52365cc603fd7368ede1d9a7d90e795abfbe0df5c38792901a91b343039818",
+    "art-source/wildlife-v2/ostrich/roster-v2/projection.json": "2ecb4957b99e12e8615f205d13431af45598189372dbba2e091a004ba2d50bd2",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/ostrich/finish-v1/contact-sheet-native.png": "ac52cd3e1ab70a46adf605920ab890ace1252f134437f773dd75d8570d408b7c",
+    "public/demos/wildlife-v2/ostrich/finish-v1/index.html": "1755e1d7f35567b08dd7d8924c5a1f53aaeaf55b5cb0a12812305606946f410a",
+    "public/demos/wildlife-v2/ostrich/finish-v1/pixel-audit.json": "1316ad3d06cfd4fc59488850fbcf17fd01ff3d3f46e52d60df99db01e60ecaf6",
+    "public/demos/wildlife-v2/ostrich/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/ostrich/finish-v1/preview-native.gif": "661f73b974eafbd36152969fc76eb037e060a07b32cf658230cfefef5b3710b5",
+    "public/demos/wildlife-v2/ostrich/finish-v1/preview.gif": "dc81ae7599d388c9db4ffea96b0603ae77a8df5f314e44dcbd1723364fe34b30",
+    "public/demos/wildlife-v2/ostrich/finish-v1/scene-native.png": "7cb825761b21c8d194e586d46c8be2fecad9c03127263835e7987cf868265e6a",
+    "public/demos/wildlife-v2/ostrich/finish-v1/sheet.png": "808d73583224aac5f9d354c5fa4711e5a06c8b08e898e1b4a3d533e232532731",
+    "public/demos/wildlife-v2/ostrich/finish-v1/source-audit.json": "96dec2bcbb339146cde35d3c5d8df267098dd03e6edb01e1bcca8530858fb090",
+    "public/demos/wildlife-v2/ostrich/finish-v1/sprite.json": "0b5b0782c240701c5b901f9f229043614bb202127c320a29fa2bc1023cf7e88e",
+    "public/demos/wildlife-v2/ostrich/roster-v2/sheet.png": "a1fa35a3ae6eda5a4e135c891d13fce20637b30a94d49cb71b1a455adf7837a0",
+    "public/demos/wildlife-v2/ostrich/roster-v2/sprite.json": "ab698dff678f7dfd13349cbfea4830392502e0d143e1160240bd5a695dde759f",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

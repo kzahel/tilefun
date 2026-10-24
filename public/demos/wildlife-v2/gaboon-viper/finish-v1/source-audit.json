@@ -1,0 +1,10 @@
+{
+  "identity": "gaboon-viper-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/gaboon-viper/roster-v3/gaboon-viper.blend": "8b9d79065549456d3d3a9881c334f3a56779263693b2e86293c47a5472520200"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

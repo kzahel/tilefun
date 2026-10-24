@@ -1,0 +1,17 @@
+{
+  "identity": "ladybug-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "f28a4202e290d2f6124371d820b9a25d48a624b8c58926636c9cb754f5f092b2",
+    "index.html": "93d3d90b752bdb995149c220901cc164e0b74304a5f3d46ed6bd6519e5a94083",
+    "pixel-audit.json": "a98bb8870abbd99db53a96a50fac380eaa8ec5a1fc0d0b40631c5b8405829867",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "a0ccba64d6a4c2b2b318473faf4093d326c8d0ab2315abc09d4400ad6659c944",
+    "preview.gif": "72ed64dfc5d1a1a347912a5e2b4bbfb005b9edcb870b79971c7f68ffefa91812",
+    "scene-native.png": "e66b9686aa64f4492f9fef5b3f4e32611d8a8a56d003e1ed9fc62fd43491e164",
+    "sheet.png": "9a2561c24cb3d4846d1541d5ce7f872d77d5294c226780e9f56ca9f554bc31fe",
+    "source-audit.json": "575cc0a06bd0bacf1b1006fd61e1179e5b6efa1ba9708db2336128d3d3d33020",
+    "sprite.json": "63baf895440a785062f8c33ce5d93f66855657fd5164d34a3d46e065bc625f17"
+  }
+}

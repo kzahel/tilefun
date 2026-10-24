@@ -1,0 +1,12 @@
+{
+  "identity": "seahorse-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "74d05bfbff619b26d3f671a7fec80f4cf791faac31297cec15fbaf32df3746c2"
+}

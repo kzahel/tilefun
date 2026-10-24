@@ -1,0 +1,12 @@
+{
+  "identity": "raccoon-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 244,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 244,
+  "sheetSha256": "b73d2715cfcf5131e24913416c2d02a9e5b76cc0ae8be09eb8a8648fa2ce3503"
+}

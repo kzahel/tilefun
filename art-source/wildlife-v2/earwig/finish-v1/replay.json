@@ -1,0 +1,17 @@
+{
+  "identity": "earwig-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "53091e37b4d4c03e7d96e04c835af5206acc089b98567e756b14c04a173c07ea",
+    "index.html": "24240b5cb0b58026d42c0fd40b93892e9e3d6618b1cee8af401ea1cf6b104ab1",
+    "pixel-audit.json": "0d26d43baedfe972a39d5de1821d7ca20942cc61591a05476e4d55e621235b43",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "58d01c85b32a87079c82c637da9a8b65118ecc7a4df018652c3c20320980d8bd",
+    "preview.gif": "3d44a341602b9ca14becab18a6d2ced5ab29bdeb7afb33f4113fb1b9b6918616",
+    "scene-native.png": "f9f03e0a3533ff29b18789c11fe599068fc289c717e113a31e72ccafd82a99a1",
+    "sheet.png": "90ef4544996bebcaf0c68ea6ae21cb8683678a1c1610fb7eb792e063a5c6623c",
+    "source-audit.json": "1b26b83507085d1979e261ec429700f6642831be31c11ef1d7e2a43b527bc7b4",
+    "sprite.json": "093a31f6a271448b1613f364d24cc9d6da6c3f0b9ab6e94a946a40722d38c56a"
+  }
+}

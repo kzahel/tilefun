@@ -1,0 +1,41 @@
+{
+  "identity": "raccoon-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "raccoon",
+    "name": "Raccoon",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/raccoon/behavior-v1/sheet.png",
+    "sourceSha256": "c9a9f77230d75cc5f04ae69c2f9522fa28f13f0421a5db46fb3d715fc542db7d",
+    "source": "art-source/wildlife-v2/raccoon/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#272f34",
+    "B": "#8c8c80",
+    "H": "#b8b7a5",
+    "C": "#d8d4bd",
+    "M": "#414849",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/raccoon/behavior-v1/inputs.json": "4c7b4c69407c23780bc1bd166f898985feec805ea4166c0505c83295890a926a",
+    "art-source/wildlife-v2/raccoon/behavior-v1/projection.json": "96eeaa029c5567cb122aae34a10869886600c370eb271c2aebd4b79aa7d53219",
+    "art-source/wildlife-v2/raccoon/behavior-v1/raccoon.blend": "eafb2e3d529ac9100ab9833c3ddc46079643687c8f1ee8e3f76ce8ee06fe149f",
+    "art-source/wildlife-v2/raccoon/roster-v2/inputs.json": "4acbe965594cafea79cf77a81d7619d503df3b884ea4a4f9ecca422fe09eb35f",
+    "art-source/wildlife-v2/raccoon/roster-v2/projection.json": "6caedc958d2dc159d145155d2cb3ace45e9c5e88fe36482c956de9fbce3d0864",
+    "art-source/wildlife-v2/raccoon/roster-v2/raccoon.blend": "6682e68c925847c7c1f528bde653bcc5d79d48d2de91be98844647e578dbdd64",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/raccoon/behavior-v1/sheet.png": "c9a9f77230d75cc5f04ae69c2f9522fa28f13f0421a5db46fb3d715fc542db7d",
+    "public/demos/wildlife-v2/raccoon/behavior-v1/sprite.json": "16cd63ddb614a63a6ee51fece081d1c85ce40e7dcf03877ed51c83d31dee5a67",
+    "public/demos/wildlife-v2/raccoon/roster-v2/sheet.png": "85626535162b313521b0a7a75ac832a11722e7e0bea1dae38b124f49212c8525",
+    "public/demos/wildlife-v2/raccoon/roster-v2/sprite.json": "0e6fd181ad6bc1ec34cece447aaf763863e1023f5bbd4d7c7d8c596490e6e8c0",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

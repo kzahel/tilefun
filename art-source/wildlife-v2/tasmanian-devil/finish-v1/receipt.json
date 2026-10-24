@@ -1,0 +1,53 @@
+{
+  "identity": "tasmanian-devil-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "tasmanian-devil-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "f1908df5a342946bedf258fdb573a3146550b4755aca4fdd12fa122f2ac794bc",
+      "index.html": "fd0f0975e6f8357376e3c82cd6d89ee8644846d2be97c84e8f77e4e6516c89a3",
+      "pixel-audit.json": "8b7d1ddda1cda597bcbc8a1d071c6b6dffd845273ff03470863eb8b27bc7fc19",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "826b33b134064bb31b49db8239a54c26a2f5cf28baf09770f49d213d952ab222",
+      "preview.gif": "f149543a03814cbb6bbf942124fdac5e2e9e31b711694f637d9c42f94229096a",
+      "scene-native.png": "abf869f36ab6e581a8048993447e28d22ec4579186f15404d3edb450422648a6",
+      "sheet.png": "1d08a44721a4a568afae9b18f80b4f3f48ab7d98aa5a2b2b04a16b51e67ad52a",
+      "source-audit.json": "4c3ea8fd2cef0265ff5c824b43c676924aecdb43f1b702d796bf05fd3a461890",
+      "sprite.json": "975f850eb4fc4d8f43b3cb27283c101987e196daacdef0f7e83cb3df3be4e318"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/tasmanian-devil/finish-v1/README.md": "11eff7dbc91e7f0b25995113a0a94b9729da860690c2b4b76ca175e10156503f",
+    "art-source/wildlife-v2/tasmanian-devil/finish-v1/inputs.json": "02ae3cd684adecbd4818b4b49b1bbcce68df1b29f5de7258c73f6d2301770e84",
+    "art-source/wildlife-v2/tasmanian-devil/finish-v1/replay.json": "5d2bd0a0e35c5c2d801c3d686590a8aa30c57e3528332078d03c463f7a2c58f7",
+    "art-source/wildlife-v2/tasmanian-devil/roster-v3/inputs.json": "a45de3ff8304e985a1713856fea0ae04e239b30c255778ba857a6a1029d15513",
+    "art-source/wildlife-v2/tasmanian-devil/roster-v3/projection.json": "f359a9bae83fa517421b4fdfa7a058cd2e59c7344d886eec8c97ced6dfa86d2f",
+    "art-source/wildlife-v2/tasmanian-devil/roster-v3/tasmanian-devil.blend": "c030b3482379c5ce83c209018c92e16bc4746d3c5ae4a9a47c5f29e37c751508",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/contact-sheet-native.png": "f1908df5a342946bedf258fdb573a3146550b4755aca4fdd12fa122f2ac794bc",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/index.html": "fd0f0975e6f8357376e3c82cd6d89ee8644846d2be97c84e8f77e4e6516c89a3",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/pixel-audit.json": "8b7d1ddda1cda597bcbc8a1d071c6b6dffd845273ff03470863eb8b27bc7fc19",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/preview-native.gif": "826b33b134064bb31b49db8239a54c26a2f5cf28baf09770f49d213d952ab222",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/preview.gif": "f149543a03814cbb6bbf942124fdac5e2e9e31b711694f637d9c42f94229096a",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/scene-native.png": "abf869f36ab6e581a8048993447e28d22ec4579186f15404d3edb450422648a6",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/sheet.png": "1d08a44721a4a568afae9b18f80b4f3f48ab7d98aa5a2b2b04a16b51e67ad52a",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/source-audit.json": "4c3ea8fd2cef0265ff5c824b43c676924aecdb43f1b702d796bf05fd3a461890",
+    "public/demos/wildlife-v2/tasmanian-devil/finish-v1/sprite.json": "975f850eb4fc4d8f43b3cb27283c101987e196daacdef0f7e83cb3df3be4e318",
+    "public/demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
+    "public/demos/wildlife-v2/tasmanian-devil/roster-v3/sprite.json": "1551a457efce42baa316f1afb587918d7ea99c957a9fa0873cbd5a681c1b6f41",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

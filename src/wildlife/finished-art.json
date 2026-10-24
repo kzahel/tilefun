@@ -1,0 +1,961 @@
+{
+  "cat": {
+    "identity": "cat-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/cat/finish-v1/sheet.png",
+    "sha256": "bba324df1ecdfe17b61dc4e24bcb43664b540fb2f3dc15b1ae7479f5944ef061",
+    "policy": "retained-parts"
+  },
+  "donkey": {
+    "identity": "donkey-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/donkey/finish-v1/sheet.png",
+    "sha256": "67f3d3ad44bb0ac715b6c439b4a2bc8f95d98cbd366c0f64eb6fd89e4fcfeb90",
+    "policy": "retained-parts"
+  },
+  "mouse": {
+    "identity": "mouse-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/mouse/finish-v1/sheet.png",
+    "sha256": "9d3e1c64db4a854b0779b03e525fefd7ce3fd9bef6d17caaf64e50baf47c7330",
+    "policy": "material-surfaces"
+  },
+  "rat": {
+    "identity": "rat-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/rat/finish-v1/sheet.png",
+    "sha256": "18f16510b56d26951d1cc5ab64e8108307138d732605c21e92c476a22983477b",
+    "policy": "material-surfaces"
+  },
+  "hamster": {
+    "identity": "hamster-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/hamster/finish-v1/sheet.png",
+    "sha256": "b80078d18fe832c9c07d0d3ce8ebec8619a1508f9729b97ca4a9e85657cb0b64",
+    "policy": "material-surfaces"
+  },
+  "guinea-pig": {
+    "identity": "guinea-pig-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/guinea-pig/finish-v1/sheet.png",
+    "sha256": "94958764d86a46eedec48a7c120f4b491f41139bc9435773f48d184b71d46b6d",
+    "policy": "material-surfaces"
+  },
+  "chinchilla": {
+    "identity": "chinchilla-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/chinchilla/finish-v1/sheet.png",
+    "sha256": "f2e2a60abbc63dc0244e63efe3bae71e461a2b9fcd24bf79e10051fa81c1b7e5",
+    "policy": "material-surfaces"
+  },
+  "hedgehog": {
+    "identity": "hedgehog-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/hedgehog/finish-v1/sheet.png",
+    "sha256": "9a5c144d23e5391d55fc0da226587f8bdddfa6b92adc9f1e1c311af76631e540",
+    "policy": "material-surfaces"
+  },
+  "porcupine": {
+    "identity": "porcupine-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/porcupine/finish-v1/sheet.png",
+    "sha256": "817b195d035bbb57fd55267934fd1dd67719f66e4f7f832edc6fa7130edf0dbc",
+    "policy": "material-surfaces"
+  },
+  "raccoon": {
+    "identity": "raccoon-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/raccoon/finish-v1/sheet.png",
+    "sha256": "b73d2715cfcf5131e24913416c2d02a9e5b76cc0ae8be09eb8a8648fa2ce3503",
+    "policy": "material-surfaces"
+  },
+  "skunk": {
+    "identity": "skunk-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/skunk/finish-v1/sheet.png",
+    "sha256": "f23dc12ca0367145d4618cfeb2a4e6253c8386913c9cd829297f9d45477b56c0",
+    "policy": "material-surfaces"
+  },
+  "red-panda": {
+    "identity": "red-panda-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/red-panda/finish-v1/sheet.png",
+    "sha256": "6751e538f855b3c0d719c21103bc808a2193d05231d57923c3aa273e4eb8a7e1",
+    "policy": "material-surfaces"
+  },
+  "ostrich": {
+    "identity": "ostrich-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/ostrich/finish-v1/sheet.png",
+    "sha256": "808d73583224aac5f9d354c5fa4711e5a06c8b08e898e1b4a3d533e232532731",
+    "policy": "material-surfaces"
+  },
+  "emu": {
+    "identity": "emu-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/emu/finish-v1/sheet.png",
+    "sha256": "0d674598da8c23a040b9b17f3d37d0a94f0a1fb0fd5759b863f9118961d92334",
+    "policy": "material-surfaces"
+  },
+  "cassowary": {
+    "identity": "cassowary-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/cassowary/finish-v1/sheet.png",
+    "sha256": "cc55ce6673abeaeedfda4267ace4c6b92dab772c1abd73b0988bd7b7c15085c3",
+    "policy": "material-surfaces"
+  },
+  "kiwi": {
+    "identity": "kiwi-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/kiwi/finish-v1/sheet.png",
+    "sha256": "09be38eae9167ee6fa5d78c019ff61f261465d75c5f0592e1d6fcea125a254b9",
+    "policy": "material-surfaces"
+  },
+  "kakapo": {
+    "identity": "kakapo-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/kakapo/finish-v1/sheet.png",
+    "sha256": "2947f6a3cf58ee13fc59a8a34b3a24dcedd56d333822c6456cf8c9075262e2f9",
+    "policy": "material-surfaces"
+  },
+  "wild-turkey": {
+    "identity": "wild-turkey-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/wild-turkey/finish-v1/sheet.png",
+    "sha256": "f741f9c7332d5bb6e14655c6c05e7305840325a16f69fcf1e9dacf441d979566",
+    "policy": "material-surfaces"
+  },
+  "peacock": {
+    "identity": "peacock-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/peacock/finish-v1/sheet.png",
+    "sha256": "7f755210bc7872ecd5658939d617570d7ec00c2143a80942ab7053ba337fa98c",
+    "policy": "material-surfaces"
+  },
+  "whale-shark": {
+    "identity": "whale-shark-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/whale-shark/finish-v1/sheet.png",
+    "sha256": "b9187d9bdc05cab6c70f8de72443def3e04f5141728a0251cb760798b968c74b",
+    "policy": "material-surfaces"
+  },
+  "humpback-whale": {
+    "identity": "humpback-whale-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/humpback-whale/finish-v1/sheet.png",
+    "sha256": "e0be9de074f6546f87d086c8b2ebeaf95b04c0416c267a3cdecae0096662e07a",
+    "policy": "material-surfaces"
+  },
+  "blue-whale": {
+    "identity": "blue-whale-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/blue-whale/finish-v1/sheet.png",
+    "sha256": "c95f9c04c1ddf15edb47e0ce7b0379e4f0743ce8d693d4242c44477d1c5d3154",
+    "policy": "material-surfaces"
+  },
+  "sea-turtle": {
+    "identity": "sea-turtle-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/sea-turtle/finish-v1/sheet.png",
+    "sha256": "4a98b9498abfe20a17d78b44ba77585196d311be27d1f8f95152442afe0cb2f4",
+    "policy": "material-surfaces"
+  },
+  "pigeon": {
+    "identity": "pigeon-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/pigeon/finish-v1/sheet.png",
+    "sha256": "3680a52e7b76d225454ed12d697dc47803316c4988881c702db68e39dd8794c7",
+    "policy": "material-surfaces"
+  },
+  "dove": {
+    "identity": "dove-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/dove/finish-v1/sheet.png",
+    "sha256": "36cabd4c7698e1f86e1121bf8ae4ebbcb24faaf4ea00c8cdecdce39e8fa96233",
+    "policy": "material-surfaces"
+  },
+  "sparrow": {
+    "identity": "sparrow-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/sparrow/finish-v1/sheet.png",
+    "sha256": "3e995376f1f4b80ca2738358b83f898641a40348cd854c5e899e6d303305f0bb",
+    "policy": "material-surfaces"
+  },
+  "parrot": {
+    "identity": "parrot-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/parrot/finish-v1/sheet.png",
+    "sha256": "9f891640c11b33dea40274e17a58893bc3abd42f690d1b8677b143e72e1b7af7",
+    "policy": "material-surfaces"
+  },
+  "toucan": {
+    "identity": "toucan-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/toucan/finish-v1/sheet.png",
+    "sha256": "bdbf9c226a003e2871e33e3dfd9a6be6c757a7b9467a7f4ecf63e26d92a385ef",
+    "policy": "material-surfaces"
+  },
+  "great-hornbill": {
+    "identity": "great-hornbill-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/great-hornbill/finish-v1/sheet.png",
+    "sha256": "cf1c8728fc6375007a36e04bbb5572badfa7afec51a04119df43aa509199d059",
+    "policy": "material-surfaces"
+  },
+  "raven": {
+    "identity": "raven-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/raven/finish-v1/sheet.png",
+    "sha256": "d17ac5128eeb18585076a3ad8523b137ee2869b82dcd3a3adb92b9d1f6838d09",
+    "policy": "material-surfaces"
+  },
+  "crow": {
+    "identity": "crow-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/crow/finish-v1/sheet.png",
+    "sha256": "74ac36c40befcc85ce5012d0e6ecea7ef779f52cd04c53cf894ab5e35abb4f2c",
+    "policy": "material-surfaces"
+  },
+  "atlantic-puffin": {
+    "identity": "atlantic-puffin-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/atlantic-puffin/finish-v1/sheet.png",
+    "sha256": "206b67b587dab64215ebd5d94c65b2b740a1c3ce898f0d2325f9e0b2ed9dd17e",
+    "policy": "material-surfaces"
+  },
+  "chimpanzee": {
+    "identity": "chimpanzee-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/chimpanzee/finish-v1/sheet.png",
+    "sha256": "a38af62b60120ff131ac549b864de147d2e8dfcb469f54b5e1a2e3bc7ce36480",
+    "policy": "material-surfaces"
+  },
+  "orangutan": {
+    "identity": "orangutan-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/orangutan/finish-v1/sheet.png",
+    "sha256": "dbd5188573f6759516ed036c8fe437aa82821f0d023c3ade2f6643b8b28fd615",
+    "policy": "material-surfaces"
+  },
+  "capuchin-monkey": {
+    "identity": "capuchin-monkey-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/capuchin-monkey/finish-v1/sheet.png",
+    "sha256": "45cf92d0bf0f10646023700c4b0f4d4432cdb7edb806eb1b374c1c77b0fa4410",
+    "policy": "material-surfaces"
+  },
+  "ring-tailed-lemur": {
+    "identity": "ring-tailed-lemur-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/ring-tailed-lemur/finish-v1/sheet.png",
+    "sha256": "9b69f11f08899ad66819d010a4317865bb5de3e285fdca60d8df12f549868818",
+    "policy": "material-surfaces"
+  },
+  "mandrill": {
+    "identity": "mandrill-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/mandrill/finish-v1/sheet.png",
+    "sha256": "bbe6042bdfeb4fb01eee2653d3e910d5ea375ba6746f4062e7b44727026740e4",
+    "policy": "material-surfaces"
+  },
+  "proboscis-monkey": {
+    "identity": "proboscis-monkey-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/proboscis-monkey/finish-v1/sheet.png",
+    "sha256": "4fa04680bfa7c40f162e970c3e4214b4223a816a10c7c9092813e1bc34f96fca",
+    "policy": "material-surfaces"
+  },
+  "japanese-macaque": {
+    "identity": "japanese-macaque-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/japanese-macaque/finish-v1/sheet.png",
+    "sha256": "be984e5fdd5f2f151a37f4c148ea94dc8a7cb969d764cb6c2b0d0688e5ce0bdb",
+    "policy": "material-surfaces"
+  },
+  "ocean-sunfish": {
+    "identity": "ocean-sunfish-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/ocean-sunfish/finish-v1/sheet.png",
+    "sha256": "f1d730399b7369102289cb2ed3f1f37a9f255299beebabaea578f9c959ac393c",
+    "policy": "material-surfaces"
+  },
+  "pufferfish": {
+    "identity": "pufferfish-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/pufferfish/finish-v1/sheet.png",
+    "sha256": "36f635112b9186efee8c4dca6126b774a77012027eb9d9c1ef725598408aed5a",
+    "policy": "material-surfaces"
+  },
+  "meerkat": {
+    "identity": "meerkat-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/meerkat/finish-v1/sheet.png",
+    "sha256": "12224e3cc4725c8f45c49b3bd2801f4b57e89a4fa02a0cd036f12152763ffb9f",
+    "policy": "material-surfaces"
+  },
+  "giant-anteater": {
+    "identity": "giant-anteater-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/giant-anteater/finish-v1/sheet.png",
+    "sha256": "265ef289e32b69993f105b9bda6604f5ff30e6761b87c6453901aadf1e723842",
+    "policy": "material-surfaces"
+  },
+  "aardvark": {
+    "identity": "aardvark-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/aardvark/finish-v1/sheet.png",
+    "sha256": "5e0e4cb6ce36b7749ef6ec2bb429ead11e102cca726081b8ddc2f8c0d592f76e",
+    "policy": "material-surfaces"
+  },
+  "armadillo": {
+    "identity": "armadillo-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/armadillo/finish-v1/sheet.png",
+    "sha256": "de15095bbf1c1e7fc13fad50b1ce2edb7200c9922cee0175ce12cc45995aaceb",
+    "policy": "material-surfaces"
+  },
+  "pangolin": {
+    "identity": "pangolin-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/pangolin/finish-v1/sheet.png",
+    "sha256": "13edc8ae6d96a4833b7488ea01021a179ba0dca4335d8f9206cab639b80f288a",
+    "policy": "material-surfaces"
+  },
+  "pelican": {
+    "identity": "pelican-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/pelican/finish-v1/sheet.png",
+    "sha256": "1804ab3d96ca0839cae98d6d14afee080a9bea687bc190be9588509779aeb4e4",
+    "policy": "material-surfaces"
+  },
+  "blue-footed-booby": {
+    "identity": "blue-footed-booby-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/blue-footed-booby/finish-v1/sheet.png",
+    "sha256": "23bf7a1d9fcbbb7274653906246d03947153e36ec3a469a707b3d39ce081e30f",
+    "policy": "material-surfaces"
+  },
+  "great-frigatebird": {
+    "identity": "great-frigatebird-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/great-frigatebird/finish-v1/sheet.png",
+    "sha256": "ed52be33eeef1b0111ec72e6cf362fa873d842390414a1874f8e27a02da7e45c",
+    "policy": "material-surfaces"
+  },
+  "ruby-throated-hummingbird": {
+    "identity": "ruby-throated-hummingbird-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/ruby-throated-hummingbird/finish-v1/sheet.png",
+    "sha256": "975900f9d142bd02de4f1002a1e77b8dfc04f51e1b65d65437bf1f8a4988aa46",
+    "policy": "material-surfaces"
+  },
+  "flamingo": {
+    "identity": "flamingo-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/flamingo/finish-v1/sheet.png",
+    "sha256": "cc57d82488c22428a0f457517a28a3007da201e1a677348163f5bc015670d217",
+    "policy": "material-surfaces"
+  },
+  "shoebill": {
+    "identity": "shoebill-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/shoebill/finish-v1/sheet.png",
+    "sha256": "2bc52d21794ddbe097afc1f98968b96abe31a43786e7767c36e09d8050755253",
+    "policy": "material-surfaces"
+  },
+  "marabou-stork": {
+    "identity": "marabou-stork-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/marabou-stork/finish-v1/sheet.png",
+    "sha256": "56d55c6f7e4c4b6b82d5d1fc53e72e3b349a16ed5d7e69b71303c885c8c48ed8",
+    "policy": "material-surfaces"
+  },
+  "great-blue-heron": {
+    "identity": "great-blue-heron-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/great-blue-heron/finish-v1/sheet.png",
+    "sha256": "460139ed5b2b43927b43a663df97dba9df1edbde19667ef9d41746f18079069a",
+    "policy": "material-surfaces"
+  },
+  "sloth": {
+    "identity": "sloth-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/sloth/finish-v1/sheet.png",
+    "sha256": "d69c46030f9556889b97371984fc6ae10ed3399922dee75eb5a45f2e6c29dc86",
+    "policy": "material-surfaces"
+  },
+  "binturong": {
+    "identity": "binturong-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/binturong/finish-v1/sheet.png",
+    "sha256": "2215761d8a2ef5cb3649ce496287820e1e50aae2f2ac4517c939d0997117dc08",
+    "policy": "material-surfaces"
+  },
+  "aye-aye": {
+    "identity": "aye-aye-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/aye-aye/finish-v1/sheet.png",
+    "sha256": "2844b12f9ee76f5c8773fcf8f3949f2efcbea419abb32fc6bb26ef396bc78c0c",
+    "policy": "material-surfaces"
+  },
+  "kinkajou": {
+    "identity": "kinkajou-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/kinkajou/finish-v1/sheet.png",
+    "sha256": "a9c5f8f1d7fc01ddf9c9630ebe4dae3da4b0d8be3b13c59702de5f1f477c186b",
+    "policy": "material-surfaces"
+  },
+  "opossum": {
+    "identity": "opossum-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/opossum/finish-v1/sheet.png",
+    "sha256": "128773fa838f065f9d4afc33e397a0238862b02e4707540159a11a958354288b",
+    "policy": "material-surfaces"
+  },
+  "echidna": {
+    "identity": "echidna-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/echidna/finish-v1/sheet.png",
+    "sha256": "6516d657e9f130a84ee01d7bfc3d9ca95122c086626c7079706022f3b936f3b4",
+    "policy": "material-surfaces"
+  },
+  "bat": {
+    "identity": "bat-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/bat/finish-v1/sheet.png",
+    "sha256": "1b66a9091abbde60c584b6703346af6688ee33392002d9a1a2c05111f8cdb97f",
+    "policy": "material-surfaces"
+  },
+  "wallaby": {
+    "identity": "wallaby-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/wallaby/finish-v1/sheet.png",
+    "sha256": "55014b5607e6aa406d81fa765ba900d5c640547140f1c8217c7a113888eeb4b9",
+    "policy": "material-surfaces"
+  },
+  "manatee": {
+    "identity": "manatee-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/manatee/finish-v1/sheet.png",
+    "sha256": "b259c93d8dfbeac5e32d809fb5f3ef10053a4845587808a38a46a87a99c8bbc3",
+    "policy": "material-surfaces"
+  },
+  "dugong": {
+    "identity": "dugong-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/dugong/finish-v1/sheet.png",
+    "sha256": "01c98f65c555f3cec7545e35362fe24e77219df8c14feb3a76a1e1a931978b95",
+    "policy": "material-surfaces"
+  },
+  "river-otter": {
+    "identity": "river-otter-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/river-otter/finish-v1/sheet.png",
+    "sha256": "27feefc4e6b60664ca38d5476562100fceca74e78dfb24b1a91d8c285a4e133a",
+    "policy": "material-surfaces"
+  },
+  "platypus": {
+    "identity": "platypus-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/platypus/finish-v1/sheet.png",
+    "sha256": "b1be37e45672a97901700eb54dd5b5f9d2ccbdd835bb29df2299ded4fd8c31be",
+    "policy": "material-surfaces"
+  },
+  "sea-lion": {
+    "identity": "sea-lion-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/sea-lion/finish-v1/sheet.png",
+    "sha256": "04f1eaf208d52614108c41cd632a0b7cd3ac557a94ff571d709199d226ff0f2e",
+    "policy": "material-surfaces"
+  },
+  "walrus": {
+    "identity": "walrus-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/walrus/finish-v1/sheet.png",
+    "sha256": "9640ad6c3f1b5216a0497a60209616eb219a65fbbba63dfc0cc9e5a5c1843406",
+    "policy": "material-surfaces"
+  },
+  "snail": {
+    "identity": "snail-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/snail/finish-v1/sheet.png",
+    "sha256": "86136b5a04f796645f5fe63f4a3656987dd82cfe63173579df757d559b634a42",
+    "policy": "material-surfaces"
+  },
+  "worm": {
+    "identity": "worm-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/worm/finish-v1/sheet.png",
+    "sha256": "c366db933f1d1d8249279d13b8f23996029fd57682eb071e09a762a7e5088e93",
+    "policy": "material-surfaces"
+  },
+  "leaf-insect": {
+    "identity": "leaf-insect-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/leaf-insect/finish-v1/sheet.png",
+    "sha256": "b3d88867d302277a22665feeb3aee0632bb7e9e5008109d43f7043f5d053310e",
+    "policy": "material-surfaces"
+  },
+  "roly-poly": {
+    "identity": "roly-poly-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/roly-poly/finish-v1/sheet.png",
+    "sha256": "d323c62bb7fd2c9cbec30944437a33c2ee6848e5c433ea96433f2489061bb63d",
+    "policy": "material-surfaces"
+  },
+  "earwig": {
+    "identity": "earwig-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/earwig/finish-v1/sheet.png",
+    "sha256": "90ef4544996bebcaf0c68ea6ae21cb8683678a1c1610fb7eb792e063a5c6623c",
+    "policy": "material-surfaces"
+  },
+  "millipede": {
+    "identity": "millipede-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/millipede/finish-v1/sheet.png",
+    "sha256": "10ad0d6bbacb9b6464b33d72ce617b298a4ba303cab63c5023cc040d1ca8e5f1",
+    "policy": "material-surfaces"
+  },
+  "seahorse": {
+    "identity": "seahorse-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/seahorse/finish-v1/sheet.png",
+    "sha256": "74d05bfbff619b26d3f671a7fec80f4cf791faac31297cec15fbaf32df3746c2",
+    "policy": "material-surfaces"
+  },
+  "nautilus": {
+    "identity": "nautilus-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/nautilus/finish-v1/sheet.png",
+    "sha256": "bf54f3bfa148690002615ef27cfb4b4c722b1e9795c661557ca371aca1f4f9ad",
+    "policy": "material-surfaces"
+  },
+  "leafy-seadragon": {
+    "identity": "leafy-seadragon-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/leafy-seadragon/finish-v1/sheet.png",
+    "sha256": "3f55b2af310b1fc190436b80f27750f1ca5f7f21e4324d9ee348b0f35dbd62b1",
+    "policy": "material-surfaces"
+  },
+  "starfish": {
+    "identity": "starfish-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/starfish/finish-v1/sheet.png",
+    "sha256": "0621b14ba6c86987eb1f028268c62e035e933f303d7bf091e37f1c3dd6a2f76f",
+    "policy": "material-surfaces"
+  },
+  "horseshoe-crab": {
+    "identity": "horseshoe-crab-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/horseshoe-crab/finish-v1/sheet.png",
+    "sha256": "0a3d81299f299d966fc50cea0c29d6c9fc571d524357d201a9e90598f29baae6",
+    "policy": "material-surfaces"
+  },
+  "shrimp": {
+    "identity": "shrimp-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/shrimp/finish-v1/sheet.png",
+    "sha256": "55270441e89848296cb82e8ac32279300924baaf92969d8923530725e95ba46a",
+    "policy": "material-surfaces"
+  },
+  "elephant-upright": {
+    "identity": "elephant-upright-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/elephant-upright/finish-v1/sheet.png",
+    "sha256": "71581783ac9aecdd8f1faa66c5a803a5e947b6dba4b2d5005ea4f2ef56362d4e",
+    "policy": "material-surfaces"
+  },
+  "giraffe-upright": {
+    "identity": "giraffe-upright-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/giraffe-upright/finish-v1/sheet.png",
+    "sha256": "57e0901e56adef1fd938478fabcda6e1fd64eeabc67cf6092de316d52969ed06",
+    "policy": "material-surfaces"
+  },
+  "salamander": {
+    "identity": "salamander-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/salamander/finish-v1/sheet.png",
+    "sha256": "83292f920a1b285e1661d314d23bcbf864f9e17739f7b2cb693d5f0f1d3c1da0",
+    "policy": "material-surfaces"
+  },
+  "newt": {
+    "identity": "newt-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/newt/finish-v1/sheet.png",
+    "sha256": "5c645624c1af980a96030a352a820bb27b0ffd7864fa98995f313b13ae10cba6",
+    "policy": "material-surfaces"
+  },
+  "axolotl": {
+    "identity": "axolotl-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/axolotl/finish-v1/sheet.png",
+    "sha256": "b2bc69a5e55868c5ad3656d7aafb602be31959c52ad84cc721d80d220a0b3055",
+    "policy": "material-surfaces"
+  },
+  "frilled-neck-lizard": {
+    "identity": "frilled-neck-lizard-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/frilled-neck-lizard/finish-v1/sheet.png",
+    "sha256": "74cc16b3c99f9fd4106825187b4a31e83fba594f8327836fd951b700705a4b89",
+    "policy": "material-surfaces"
+  },
+  "land-tortoise": {
+    "identity": "land-tortoise-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/land-tortoise/finish-v1/sheet.png",
+    "sha256": "ff515b54d10bf69176e839b89bd959a92eec70911b0fe5ab9a4e29f191b9b1b7",
+    "policy": "material-surfaces"
+  },
+  "pond-turtle": {
+    "identity": "pond-turtle-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/pond-turtle/finish-v1/sheet.png",
+    "sha256": "b40fff88c785c23d9aa7480b47afcfa9727dde19c2d0e68b4572d418ef3c5360",
+    "policy": "material-surfaces"
+  },
+  "beaver": {
+    "identity": "beaver-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/beaver/finish-v1/sheet.png",
+    "sha256": "518dd28cb8b05ddbc388761fd994af33d904c4a903ed810f98d93b96c05ba0a8",
+    "policy": "material-surfaces"
+  },
+  "capybara": {
+    "identity": "capybara-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/capybara/finish-v1/sheet.png",
+    "sha256": "fd3d9017ba3dce4a08274f0489c3565b8f668e473bd955472b665a382ce5f30b",
+    "policy": "material-surfaces"
+  },
+  "koala": {
+    "identity": "koala-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/koala/finish-v1/sheet.png",
+    "sha256": "632fa4e625a9ad7e037c6a59b326e52b48164a2c4dd2853bd99d12756b137a1f",
+    "policy": "material-surfaces"
+  },
+  "wombat": {
+    "identity": "wombat-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/wombat/finish-v1/sheet.png",
+    "sha256": "201ba6c2271f90d7b5e8090ed16d198cb40d16b486cda580e6f1f8f29a8715a2",
+    "policy": "material-surfaces"
+  },
+  "quokka": {
+    "identity": "quokka-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/quokka/finish-v1/sheet.png",
+    "sha256": "f761176ffe280e1fa710504c6578e31562e1fbcd2c4df2f65eebddfb95b0adeb",
+    "policy": "material-surfaces"
+  },
+  "malayan-tapir": {
+    "identity": "malayan-tapir-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/malayan-tapir/finish-v1/sheet.png",
+    "sha256": "a6c46589bdc7a0084a723dce45a2adc776af39b2dbe232ef047a80c13504e63d",
+    "policy": "material-surfaces"
+  },
+  "gecko": {
+    "identity": "gecko-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/gecko/finish-v1/sheet.png",
+    "sha256": "753a668d01d656886c56dd875f4143bf8e29b0ae92060356c3179a76cd331762",
+    "policy": "material-surfaces"
+  },
+  "iguana": {
+    "identity": "iguana-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/iguana/finish-v1/sheet.png",
+    "sha256": "75a37c15d233d7d8c2dfcbe483fa747aa10495a33196be89c63902c023448679",
+    "policy": "material-surfaces"
+  },
+  "chameleon": {
+    "identity": "chameleon-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/chameleon/finish-v1/sheet.png",
+    "sha256": "971ff8b85a84a9100b34047ca2d96cb9d756d70c2614601a9e0eeaec7aafabb2",
+    "policy": "material-surfaces"
+  },
+  "texas-horned-lizard": {
+    "identity": "texas-horned-lizard-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/texas-horned-lizard/finish-v1/sheet.png",
+    "sha256": "efb2526430447952bac109c05ebce8a3dd23dd96e90c7760a19f71a17956f6f2",
+    "policy": "material-surfaces"
+  },
+  "bee": {
+    "identity": "bee-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/bee/finish-v1/sheet.png",
+    "sha256": "c761ad52b364cd7350ab16097c54493ef1be942cfbdb7081f3e6c2478c34934d",
+    "policy": "material-surfaces"
+  },
+  "ladybug": {
+    "identity": "ladybug-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/ladybug/finish-v1/sheet.png",
+    "sha256": "9a2561c24cb3d4846d1541d5ce7f872d77d5294c226780e9f56ca9f554bc31fe",
+    "policy": "material-surfaces"
+  },
+  "dragonfly": {
+    "identity": "dragonfly-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/dragonfly/finish-v1/sheet.png",
+    "sha256": "38fe8d0d5142a07486e47c7a3957aa3622b43d950308b33b4e61813bc493dfff",
+    "policy": "material-surfaces"
+  },
+  "stag-beetle": {
+    "identity": "stag-beetle-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/stag-beetle/finish-v1/sheet.png",
+    "sha256": "f27320f520ef0fee6e98502aad99c759f17007bb37b3f6b7446d173f1a889d63",
+    "policy": "material-surfaces"
+  },
+  "grasshopper": {
+    "identity": "grasshopper-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/grasshopper/finish-v1/sheet.png",
+    "sha256": "c22a6c18590ef56b14322538406080124fe7ae3f4ae4ccab2594c4f7efc33ca4",
+    "policy": "material-surfaces"
+  },
+  "cricket": {
+    "identity": "cricket-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/cricket/finish-v1/sheet.png",
+    "sha256": "47a7782554ddd8a3fc73ad0fd9f3bb9a9904cbdeda3a8f3712ae054f131f94ee",
+    "policy": "material-surfaces"
+  },
+  "cat-ginger": {
+    "identity": "cat-ginger-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/cat-ginger/finish-v1/sheet.png",
+    "sha256": "57e556fbc3d1bfbcc1ff75f3d1f169972a6b9d9fa6c7284833d51a0f8a09b2e1",
+    "policy": "retained-parts"
+  },
+  "cat-black": {
+    "identity": "cat-black-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/cat-black/finish-v1/sheet.png",
+    "sha256": "a8606f386cd149f83d34999a00412b57ab6b35e31c8c32ee0125c2a2dc4b3587",
+    "policy": "retained-parts"
+  },
+  "mongoose": {
+    "identity": "mongoose-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/mongoose/finish-v1/sheet.png",
+    "sha256": "4551543794667674e3415c14d6ff5ae905617516acf2a8b7b5e0d2ea7eb8bd1a",
+    "policy": "material-surfaces"
+  },
+  "honey-badger": {
+    "identity": "honey-badger-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/honey-badger/finish-v1/sheet.png",
+    "sha256": "c93b0a4a66eaf43363882046fba9c788d9eb4dc83bed9801d1edcd69f29b5d9a",
+    "policy": "material-surfaces"
+  },
+  "fossa": {
+    "identity": "fossa-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/fossa/finish-v1/sheet.png",
+    "sha256": "0dc26bf4796fcc76680b2f257d39802ef1d0ac6e192f958fb6fae977dbfdf938",
+    "policy": "material-surfaces"
+  },
+  "white-nosed-coati": {
+    "identity": "white-nosed-coati-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/white-nosed-coati/finish-v1/sheet.png",
+    "sha256": "66c171538e6e4950de2cc590011f5875fb73f69d87ee5190053f78ba2c4acca8",
+    "policy": "material-surfaces"
+  },
+  "owl": {
+    "identity": "owl-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/owl/finish-v1/sheet.png",
+    "sha256": "0cbcaac683d034eba470e33a015261bd400f8cce8d831df1c11dd9a83272a092",
+    "policy": "material-surfaces"
+  },
+  "eagle": {
+    "identity": "eagle-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/eagle/finish-v1/sheet.png",
+    "sha256": "c43936cce3bd817b0ddaa1323e2630ba3ff4781bc2175f85816aa6a6ede261c3",
+    "policy": "material-surfaces"
+  },
+  "hawk": {
+    "identity": "hawk-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/hawk/finish-v1/sheet.png",
+    "sha256": "32938f8297d9b04f8f0fd0b916097f82fd3fc51ccf3d10e06a8e12e3b6ed4e4e",
+    "policy": "material-surfaces"
+  },
+  "secretary-bird": {
+    "identity": "secretary-bird-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/secretary-bird/finish-v1/sheet.png",
+    "sha256": "14a4e62ffd1e025bacb3c58e00b79fc8d5b98e224c41b2e35ae9653a465fa4ca",
+    "policy": "material-surfaces"
+  },
+  "crocodile": {
+    "identity": "crocodile-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/crocodile/finish-v1/sheet.png",
+    "sha256": "f0d9188123452920481574eec3b9ff3d3c3a1e3c0bf22d775b72409300f682b7",
+    "policy": "material-surfaces"
+  },
+  "alligator": {
+    "identity": "alligator-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/alligator/finish-v1/sheet.png",
+    "sha256": "306fb252ccded667f04ef5120917d59871556e7141469236984497783449b1d9",
+    "policy": "material-surfaces"
+  },
+  "komodo-dragon": {
+    "identity": "komodo-dragon-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/komodo-dragon/finish-v1/sheet.png",
+    "sha256": "2e8444285934ca8fc48351a397054f7564d3df1711b8f7c26add79c605e29cf4",
+    "policy": "material-surfaces"
+  },
+  "gaboon-viper": {
+    "identity": "gaboon-viper-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/gaboon-viper/finish-v1/sheet.png",
+    "sha256": "2633e351f08302e94a338ff346cfba346992e435bca9379e4aedb4d7171560ef",
+    "policy": "material-surfaces"
+  },
+  "spider": {
+    "identity": "spider-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/spider/finish-v1/sheet.png",
+    "sha256": "cd656666c0a6d7ca532e3d52e9d0ce0fe8fe260a2ea9f21511711c5110d37655",
+    "policy": "material-surfaces"
+  },
+  "praying-mantis": {
+    "identity": "praying-mantis-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/praying-mantis/finish-v1/sheet.png",
+    "sha256": "ecd3f24b9ebed705c348a33f1e78beb74dffb4e0866e281b050b94d9c1371a84",
+    "policy": "material-surfaces"
+  },
+  "scorpion": {
+    "identity": "scorpion-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/scorpion/finish-v1/sheet.png",
+    "sha256": "1b7f6b8a211cdd3de288673e74f288b0edc270535b31576a6aa7127314aa09b3",
+    "policy": "material-surfaces"
+  },
+  "centipede": {
+    "identity": "centipede-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/centipede/finish-v1/sheet.png",
+    "sha256": "ea60bd93425b9e206d973ddb8f0f92469a1594f46f37ec434de83f9744adf9cd",
+    "policy": "material-surfaces"
+  },
+  "coconut-crab": {
+    "identity": "coconut-crab-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/coconut-crab/finish-v1/sheet.png",
+    "sha256": "2bf24b96dac30d909e5b992b815f630c760703b359b575668a68feeac9a8e96c",
+    "policy": "material-surfaces"
+  },
+  "tasmanian-devil": {
+    "identity": "tasmanian-devil-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/tasmanian-devil/finish-v1/sheet.png",
+    "sha256": "1d08a44721a4a568afae9b18f80b4f3f48ab7d98aa5a2b2b04a16b51e67ad52a",
+    "policy": "material-surfaces"
+  },
+  "swordfish": {
+    "identity": "swordfish-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/swordfish/finish-v1/sheet.png",
+    "sha256": "7ffce487787616404445b682ddb4b120b83ce85685728e3d04f70c1e1e204f18",
+    "policy": "material-surfaces"
+  },
+  "anglerfish": {
+    "identity": "anglerfish-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/anglerfish/finish-v1/sheet.png",
+    "sha256": "4a2436a1d134cc097f2736d2c1030e9d7e32394e6f9f6cc40db3f79efc11b441",
+    "policy": "material-surfaces"
+  },
+  "moray-eel": {
+    "identity": "moray-eel-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/moray-eel/finish-v1/sheet.png",
+    "sha256": "0c117c981786580800adb3ae0018472fa5b89f927c1e8f3fbd80affc071e6eb5",
+    "policy": "material-surfaces"
+  },
+  "electric-eel": {
+    "identity": "electric-eel-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/electric-eel/finish-v1/sheet.png",
+    "sha256": "62c0de490f64b67f2f9e94f53cc59ceca506ef5862046cd29ca9ee6d3d4a2c8f",
+    "policy": "material-surfaces"
+  },
+  "cuttlefish": {
+    "identity": "cuttlefish-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/cuttlefish/finish-v1/sheet.png",
+    "sha256": "8efec7d1a4954aa46520cc7ebaa5c25321e40a2ed9030fab48b669b46ec469ae",
+    "policy": "material-surfaces"
+  },
+  "lobster": {
+    "identity": "lobster-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/lobster/finish-v1/sheet.png",
+    "sha256": "a4df00836a9e8971dbe98b8f981a26d2ccfe7cec75d9aa3909254be30af7ec70",
+    "policy": "material-surfaces"
+  },
+  "mantis-shrimp": {
+    "identity": "mantis-shrimp-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/mantis-shrimp/finish-v1/sheet.png",
+    "sha256": "474b783c8d34a6d681f55fae17d7fef6310ea940e388c6ca5c3ac87022048dcc",
+    "policy": "material-surfaces"
+  },
+  "shark": {
+    "identity": "shark-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/shark/finish-v1/sheet.png",
+    "sha256": "389263c48ffa549413dbe4d1fe5673cd95b3261346516a9ee0743b656107c775",
+    "policy": "material-surfaces"
+  },
+  "hammerhead-shark": {
+    "identity": "hammerhead-shark-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/hammerhead-shark/finish-v1/sheet.png",
+    "sha256": "160a862938ed9428c1bb0df7cb22a60da34dca3bfab8115f2d3ae31549b6906d",
+    "policy": "material-surfaces"
+  },
+  "orca": {
+    "identity": "orca-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/orca/finish-v1/sheet.png",
+    "sha256": "f3ac0b5af70447c27782a1b2d55d2b573bb81f7b2de7439bc40a8f4c9a1ba28e",
+    "policy": "material-surfaces"
+  },
+  "dolphin": {
+    "identity": "dolphin-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/dolphin/finish-v1/sheet.png",
+    "sha256": "fc6ddbc6c296a6a256ca3ed4e3641b6ffcbd16306b20fe44382eb602a1fbbd8e",
+    "policy": "material-surfaces"
+  },
+  "narwhal": {
+    "identity": "narwhal-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/narwhal/finish-v1/sheet.png",
+    "sha256": "b4ee7db94f76dfd8c7e17fa3f29a0d0f0dab2c2fb0cfda17d64ab8aa1da845d2",
+    "policy": "material-surfaces"
+  },
+  "deer": {
+    "identity": "deer-finish-v1",
+    "revision": "finish-v1",
+    "image": "demos/wildlife-v2/deer/finish-v1/sheet.png",
+    "sha256": "c8cc35dd28680764995843672f4cfa00045367579ee05522879cfa57ded2c41d",
+    "policy": "retained-parts"
+  }
+}

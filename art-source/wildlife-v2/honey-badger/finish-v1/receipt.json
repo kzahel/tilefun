@@ -1,0 +1,53 @@
+{
+  "identity": "honey-badger-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "honey-badger-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "688e315e054cd5eaad7205185c175a39ab41b67a7d9faee077140dd4fd073a56",
+      "index.html": "bb62e8435c21b8a234d5508a4cd511d45c0eca4f37c189a94fe26c9d075b3d49",
+      "pixel-audit.json": "06599f0b25298eb23f4134c813f2363179c75929f648f25ae151136e4d437b2b",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "ac68c985a81762eb2125d13c9a60184e0342c601bb3f86b9b2b4b339b30bc98a",
+      "preview.gif": "5aba46fcc46a593e2d59e77c380649cb35e5ac06513c348892cb3a059d6a4390",
+      "scene-native.png": "5cbed3f0ddfeee118ac81bbee5f9982a5ccc56dd365f6b23365e42634535ff40",
+      "sheet.png": "c93b0a4a66eaf43363882046fba9c788d9eb4dc83bed9801d1edcd69f29b5d9a",
+      "source-audit.json": "76a470cc7bb1289991e22081b9883e3a6ed29508d8b49498c6ed99f40c5a879c",
+      "sprite.json": "dedfe7feeb1ad3400ef8dff1969bfe9b2c2ea9a0582895a9c33e7e19c6869081"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/honey-badger/finish-v1/README.md": "0248da078bc98db896dea811f815a5de2df4e7165fbf2865175655d5f5e906f5",
+    "art-source/wildlife-v2/honey-badger/finish-v1/inputs.json": "db684e639ef67b284685703d0f61cd5641c561d8411fbcfc61d5b88643dd19ca",
+    "art-source/wildlife-v2/honey-badger/finish-v1/replay.json": "3d7d4eb5d9bb161bf5201091b7986e29e395291d8e02414420ad950562221703",
+    "art-source/wildlife-v2/honey-badger/roster-v2/honey-badger.blend": "fcda2ec0dcf6ce72a3720a57084a0ed6ec5b5cefcdafd33b87b02696dfba0dc9",
+    "art-source/wildlife-v2/honey-badger/roster-v2/inputs.json": "a0859954e6fcd5f2e0b775df5c4a83d70e6573b4ab1f6c9e00c9c7575f115fe3",
+    "art-source/wildlife-v2/honey-badger/roster-v2/projection.json": "3e0eb937776db1f11b066bb1615abebb52f0cbb069b16a6c8330f88c800a2a19",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/contact-sheet-native.png": "688e315e054cd5eaad7205185c175a39ab41b67a7d9faee077140dd4fd073a56",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/index.html": "bb62e8435c21b8a234d5508a4cd511d45c0eca4f37c189a94fe26c9d075b3d49",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/pixel-audit.json": "06599f0b25298eb23f4134c813f2363179c75929f648f25ae151136e4d437b2b",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/preview-native.gif": "ac68c985a81762eb2125d13c9a60184e0342c601bb3f86b9b2b4b339b30bc98a",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/preview.gif": "5aba46fcc46a593e2d59e77c380649cb35e5ac06513c348892cb3a059d6a4390",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/scene-native.png": "5cbed3f0ddfeee118ac81bbee5f9982a5ccc56dd365f6b23365e42634535ff40",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/sheet.png": "c93b0a4a66eaf43363882046fba9c788d9eb4dc83bed9801d1edcd69f29b5d9a",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/source-audit.json": "76a470cc7bb1289991e22081b9883e3a6ed29508d8b49498c6ed99f40c5a879c",
+    "public/demos/wildlife-v2/honey-badger/finish-v1/sprite.json": "dedfe7feeb1ad3400ef8dff1969bfe9b2c2ea9a0582895a9c33e7e19c6869081",
+    "public/demos/wildlife-v2/honey-badger/roster-v2/sheet.png": "6f12d854c407b3d06eeb19b7188935e02c12eb67f755aef4b2ad0752411ae0b8",
+    "public/demos/wildlife-v2/honey-badger/roster-v2/sprite.json": "2664578456cf17524c24f0d754fc8af0152c5b7b689a388104a5824a6cfd0fbb",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

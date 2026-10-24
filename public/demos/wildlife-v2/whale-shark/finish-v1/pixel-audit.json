@@ -1,0 +1,12 @@
+{
+  "identity": "whale-shark-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "b9187d9bdc05cab6c70f8de72443def3e04f5141728a0251cb760798b968c74b"
+}

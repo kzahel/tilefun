@@ -1,0 +1,36 @@
+{
+  "identity": "sea-turtle-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "sea-turtle",
+    "name": "Sea turtle",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/sea-turtle/roster-v2/sheet.png",
+    "sourceSha256": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6",
+    "source": "art-source/wildlife-v2/sea-turtle/roster-v2",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#65805a",
+    "H": "#a5ad71",
+    "W": "#d4c48f",
+    "M": "#415747",
+    "E": "#202e35",
+    "T": "#e8dfbf",
+    "G": "#c0b57a"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/sea-turtle/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/sea-turtle/roster-v2/projection.json": "50a213df208db533515cdb101687e6bb5352154da6ffd8db45ff290fe44b3e30",
+    "art-source/wildlife-v2/sea-turtle/roster-v2/sea-turtle.blend": "3dee930b16dc59aaec984c84c271b3bd701cd20fdc2c6f61b7023e2f1667cf56",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/sea-turtle/roster-v2/sheet.png": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6",
+    "public/demos/wildlife-v2/sea-turtle/roster-v2/sprite.json": "40bc0860a2df3f7764c5d133eb0f0b1cb792cdc04434176ddacecdbcd5237759",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

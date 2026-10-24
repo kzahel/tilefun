@@ -1,0 +1,17 @@
+{
+  "identity": "sea-lion-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "a0ce8b55aa34668f7868febedf859cda066f5efaa2e8a4e3f6019330d1b861be",
+    "index.html": "848fbfd67e9e5cfe2f64c27c6efb29eda18c9e327138cf600c36f2c6975d9eff",
+    "pixel-audit.json": "47671513c6bc42b933bc536c1753452d8c123f7973fb2d79f2daf4f9ef24b82c",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "491f23e776dd5a4b32f705eab80355ff0a3d5aff35e92c7645733d57a26344ac",
+    "preview.gif": "ee1bfa0df725bf16f0443be3145dd64da31358fa2bf007d7853c02666077c1c6",
+    "scene-native.png": "ca74ad7cd744e0107de0ed62f5cbe14846a19f912b7edc1360eabeab9f86c355",
+    "sheet.png": "04f1eaf208d52614108c41cd632a0b7cd3ac557a94ff571d709199d226ff0f2e",
+    "source-audit.json": "9f058cb738cfc994313532dc20d1a27af2c94ad1f2f30ef46dd539b503051741",
+    "sprite.json": "9f6c279c8e7124b928fcc3a5a39b53092d1e5eb53338dfd0a1124366a03b7486"
+  }
+}

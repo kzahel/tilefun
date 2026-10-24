@@ -1,0 +1,12 @@
+{
+  "identity": "roly-poly-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "d323c62bb7fd2c9cbec30944437a33c2ee6848e5c433ea96433f2489061bb63d"
+}

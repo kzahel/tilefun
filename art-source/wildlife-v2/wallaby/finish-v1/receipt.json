@@ -1,0 +1,53 @@
+{
+  "identity": "wallaby-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "wallaby-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "b2f9cbdad0397c91ac4851c3d8b3224e6a4b4a75d83dc3f31b5eae1de2babf36",
+      "index.html": "81ccb1a90cfa4bc474df46fa43c9211747a601e7e8d03ac27548a1fe7059fa95",
+      "pixel-audit.json": "2032b6a489614db309284c92af3608c30184837167df3a29d9e85a9c4f1c5b85",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "e378de0092e9eaed87b7989a072399ad99a2eefdbac43c01e51d27bfb15cfcac",
+      "preview.gif": "7b890fdabf5a0b279b7ffc0f29d5847c930afa869ce368210b3753763e5106eb",
+      "scene-native.png": "7d3d022027693d40a93006afbdd561754907aa8edc56b243e518394e021a7e28",
+      "sheet.png": "55014b5607e6aa406d81fa765ba900d5c640547140f1c8217c7a113888eeb4b9",
+      "source-audit.json": "ae6979859507f9de2b0fbb3edaec3eca9f67df34372df837195991ea14387c10",
+      "sprite.json": "471c9712dfbe00921917b44e985af12387a7ecd8d509d8b4a0546f714daef611"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/wallaby/finish-v1/README.md": "2b1674014f1cbf43c49badb8577d333d5effc130d7607c114cbce8df0f812a39",
+    "art-source/wildlife-v2/wallaby/finish-v1/inputs.json": "26f5e6229e737e276814ad2f937b113d0e8d4ac12eec4147ea8fc15d8bd54f9a",
+    "art-source/wildlife-v2/wallaby/finish-v1/replay.json": "f290acf4a77cce3af9e3db0b1914ac81274b498f2639da17cb5615829c8dd933",
+    "art-source/wildlife-v2/wallaby/roster-v3/inputs.json": "fc6607c884c9a1308217c17a4bda5bf7705c1f60c138f2bf2d8505424cd274e3",
+    "art-source/wildlife-v2/wallaby/roster-v3/projection.json": "50fa3447676dbd48028f7ac546007f6f693e2bb6fe4fbfa5c7ee9d7ed2e44e01",
+    "art-source/wildlife-v2/wallaby/roster-v3/wallaby.blend": "958838ecf28965cc7b02d60fd4d511b06c3c56139fbc8125cd7ac224182c5db5",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/wallaby/finish-v1/contact-sheet-native.png": "b2f9cbdad0397c91ac4851c3d8b3224e6a4b4a75d83dc3f31b5eae1de2babf36",
+    "public/demos/wildlife-v2/wallaby/finish-v1/index.html": "81ccb1a90cfa4bc474df46fa43c9211747a601e7e8d03ac27548a1fe7059fa95",
+    "public/demos/wildlife-v2/wallaby/finish-v1/pixel-audit.json": "2032b6a489614db309284c92af3608c30184837167df3a29d9e85a9c4f1c5b85",
+    "public/demos/wildlife-v2/wallaby/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/wallaby/finish-v1/preview-native.gif": "e378de0092e9eaed87b7989a072399ad99a2eefdbac43c01e51d27bfb15cfcac",
+    "public/demos/wildlife-v2/wallaby/finish-v1/preview.gif": "7b890fdabf5a0b279b7ffc0f29d5847c930afa869ce368210b3753763e5106eb",
+    "public/demos/wildlife-v2/wallaby/finish-v1/scene-native.png": "7d3d022027693d40a93006afbdd561754907aa8edc56b243e518394e021a7e28",
+    "public/demos/wildlife-v2/wallaby/finish-v1/sheet.png": "55014b5607e6aa406d81fa765ba900d5c640547140f1c8217c7a113888eeb4b9",
+    "public/demos/wildlife-v2/wallaby/finish-v1/source-audit.json": "ae6979859507f9de2b0fbb3edaec3eca9f67df34372df837195991ea14387c10",
+    "public/demos/wildlife-v2/wallaby/finish-v1/sprite.json": "471c9712dfbe00921917b44e985af12387a7ecd8d509d8b4a0546f714daef611",
+    "public/demos/wildlife-v2/wallaby/roster-v3/sheet.png": "642bde4eb5e1a239636c605add6815720a99931875fb6019fbbe3f7ad0fdf5b9",
+    "public/demos/wildlife-v2/wallaby/roster-v3/sprite.json": "284ffe9999b26197ad2771420f35a327455fa3e1e4f81db489d5370cebe01f63",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

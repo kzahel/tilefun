@@ -1,0 +1,17 @@
+{
+  "identity": "humpback-whale-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "aff5d2d9a64320475e5c0b43d035ab97b7750f2af336d9be16944734d29b9a92",
+    "index.html": "65c856285390d5f5728dd8835d4977d7ef109d84c2ba9a37835dc9af371ec578",
+    "pixel-audit.json": "0982272a65dda35c070c3fbab5174d4810a3c4969172cb55ce13006c054998e1",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "d9d7df3d02b92dd7bfa3917a27614331c4072373eb55f7752cbc3f09aab35e9b",
+    "preview.gif": "b856c1e1f81e2e7371516033c93303ff905b6683a40795c90cdefcfb96b99b3a",
+    "scene-native.png": "e8cf4fee0c9a5fbb146a2a0140e4de1b7cf4fd572860b4b3750fb3c8fbfc8e21",
+    "sheet.png": "e0be9de074f6546f87d086c8b2ebeaf95b04c0416c267a3cdecae0096662e07a",
+    "source-audit.json": "5b65716d9195560b4abaebdf292831dbb6ffa35ba7ff9904b201280b8c506814",
+    "sprite.json": "3e5f08119b9ecc4fbe3fe7c5cabe67eb792ffdb047b74b24d7ef68b28e2daabd"
+  }
+}

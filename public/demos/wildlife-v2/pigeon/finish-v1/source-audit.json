@@ -1,0 +1,10 @@
+{
+  "identity": "pigeon-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/pigeon/roster-v2/pigeon.blend": "44f136580ee79ab7c641770d42b4f586ad1b4c0bd6050c10717d34a99a9101a1"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

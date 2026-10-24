@@ -1,0 +1,10 @@
+{
+  "identity": "pufferfish-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/pufferfish/roster-v3/pufferfish.blend": "fac2020248e63c0f0bf5a5350388c3924473d4d02d6645d8ec5cd3b2490042b7"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

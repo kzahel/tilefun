@@ -1,0 +1,12 @@
+{
+  "identity": "platypus-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 292,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 292,
+  "sheetSha256": "b1be37e45672a97901700eb54dd5b5f9d2ccbdd835bb29df2299ded4fd8c31be"
+}

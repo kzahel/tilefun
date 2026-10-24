@@ -1,0 +1,12 @@
+{
+  "identity": "mouse-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "9d3e1c64db4a854b0779b03e525fefd7ce3fd9bef6d17caaf64e50baf47c7330"
+}

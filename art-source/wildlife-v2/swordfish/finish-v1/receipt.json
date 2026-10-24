@@ -1,0 +1,53 @@
+{
+  "identity": "swordfish-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "swordfish-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "6b49cf299e3fb9bfe4e074f05ea29d4a00a8c29d3c69f4b4084e74ac0c39e5ef",
+      "index.html": "4d1855f4f088711d1f0e3246c9155a75359d192ab7d83b3813bfab4b1ed3ecce",
+      "pixel-audit.json": "05425fc3d0153d65dcce5588dfb0a0364a963dd395c4d4363a7bd2e4a7c91607",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "c7c6d53bbb3eb6773eef0485a935f22919f7070034ceff97a218636628e25365",
+      "preview.gif": "ed6a040b688b4ad7116b01a4d1da279a9ccf8985bb63465a3a540f503b820014",
+      "scene-native.png": "2c089440e6d5792cb1c20eaddb5bbee5c08fa630d5ae386491f8c44ab6b5a8c3",
+      "sheet.png": "7ffce487787616404445b682ddb4b120b83ce85685728e3d04f70c1e1e204f18",
+      "source-audit.json": "2d84f96e57894e19d8fa66ff0a14cc99555eb38beb7bdbcc58b29dd3ca05359c",
+      "sprite.json": "b42c8a5f5ff8ae60543280d269bb1fe7c0b21a73260992e7fedd10eb3f3380e1"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/swordfish/finish-v1/README.md": "3b7118f5418e570644d95dd36acf9b5f3de15a0153363c9aa5cba6ed3bbeca63",
+    "art-source/wildlife-v2/swordfish/finish-v1/inputs.json": "1729d7bb4f3d53b421791fbeb64940d4b8047383ed4eea67a28ba8673a1acc4b",
+    "art-source/wildlife-v2/swordfish/finish-v1/replay.json": "7aa00d6f588e3beaaad0c0480f8d5dae201e3bebe812922c239525bfb073335e",
+    "art-source/wildlife-v2/swordfish/roster-v3/inputs.json": "3b14f2c3a54c37fff814eafc63f54f16f1669c4b9b6e1d1e495ac2c62e3635f2",
+    "art-source/wildlife-v2/swordfish/roster-v3/projection.json": "0cea2687fc925455eb76e29d6ab939a17e3b3f67978698de9f5d403d31ef39a6",
+    "art-source/wildlife-v2/swordfish/roster-v3/swordfish.blend": "c45615d960d7f2c261784383922a635fabb49e08c24593c239563e625666e492",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/swordfish/finish-v1/contact-sheet-native.png": "6b49cf299e3fb9bfe4e074f05ea29d4a00a8c29d3c69f4b4084e74ac0c39e5ef",
+    "public/demos/wildlife-v2/swordfish/finish-v1/index.html": "4d1855f4f088711d1f0e3246c9155a75359d192ab7d83b3813bfab4b1ed3ecce",
+    "public/demos/wildlife-v2/swordfish/finish-v1/pixel-audit.json": "05425fc3d0153d65dcce5588dfb0a0364a963dd395c4d4363a7bd2e4a7c91607",
+    "public/demos/wildlife-v2/swordfish/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/swordfish/finish-v1/preview-native.gif": "c7c6d53bbb3eb6773eef0485a935f22919f7070034ceff97a218636628e25365",
+    "public/demos/wildlife-v2/swordfish/finish-v1/preview.gif": "ed6a040b688b4ad7116b01a4d1da279a9ccf8985bb63465a3a540f503b820014",
+    "public/demos/wildlife-v2/swordfish/finish-v1/scene-native.png": "2c089440e6d5792cb1c20eaddb5bbee5c08fa630d5ae386491f8c44ab6b5a8c3",
+    "public/demos/wildlife-v2/swordfish/finish-v1/sheet.png": "7ffce487787616404445b682ddb4b120b83ce85685728e3d04f70c1e1e204f18",
+    "public/demos/wildlife-v2/swordfish/finish-v1/source-audit.json": "2d84f96e57894e19d8fa66ff0a14cc99555eb38beb7bdbcc58b29dd3ca05359c",
+    "public/demos/wildlife-v2/swordfish/finish-v1/sprite.json": "b42c8a5f5ff8ae60543280d269bb1fe7c0b21a73260992e7fedd10eb3f3380e1",
+    "public/demos/wildlife-v2/swordfish/roster-v3/sheet.png": "135b26b1ef3c9f52775dee6fc85997b89f69efb04de06e55257c0e3f1436caf7",
+    "public/demos/wildlife-v2/swordfish/roster-v3/sprite.json": "58085bf16f57c4d8088557b7bd71e7eef1afb7476a3585ba07bc433c58c99541",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

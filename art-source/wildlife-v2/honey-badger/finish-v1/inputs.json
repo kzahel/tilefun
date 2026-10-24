@@ -1,0 +1,36 @@
+{
+  "identity": "honey-badger-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "honey-badger",
+    "name": "Honey badger",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/honey-badger/roster-v2/sheet.png",
+    "sourceSha256": "6f12d854c407b3d06eeb19b7188935e02c12eb67f755aef4b2ad0752411ae0b8",
+    "source": "art-source/wildlife-v2/honey-badger/roster-v2",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#272f34",
+    "B": "#343e40",
+    "H": "#d5d3b9",
+    "C": "#ded0a8",
+    "M": "#222c30",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/honey-badger/roster-v2/honey-badger.blend": "fcda2ec0dcf6ce72a3720a57084a0ed6ec5b5cefcdafd33b87b02696dfba0dc9",
+    "art-source/wildlife-v2/honey-badger/roster-v2/inputs.json": "a0859954e6fcd5f2e0b775df5c4a83d70e6573b4ab1f6c9e00c9c7575f115fe3",
+    "art-source/wildlife-v2/honey-badger/roster-v2/projection.json": "3e0eb937776db1f11b066bb1615abebb52f0cbb069b16a6c8330f88c800a2a19",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/honey-badger/roster-v2/sheet.png": "6f12d854c407b3d06eeb19b7188935e02c12eb67f755aef4b2ad0752411ae0b8",
+    "public/demos/wildlife-v2/honey-badger/roster-v2/sprite.json": "2664578456cf17524c24f0d754fc8af0152c5b7b689a388104a5824a6cfd0fbb",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

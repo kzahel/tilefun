@@ -1,0 +1,17 @@
+{
+  "identity": "land-tortoise-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "136464c180b7c8517322766ecf09d9cbdd36d68b8f73fc0626e8b0f6efb9f168",
+    "index.html": "33c00190c778d64c3fc6bd82ff19e81f132473df13a3950da1c44decb4792694",
+    "pixel-audit.json": "83e0a3527d1c8ba222be22bea98445e78854e10b60829785bed6a5d04836cc28",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "439430d15e095020fcaaf69ecfdae15f4628899d2f438f725487e990f82becaf",
+    "preview.gif": "26a829c1e71fff92f5dd58b9be18eb4021caf41b06e0776e6bf3ab415f4162c4",
+    "scene-native.png": "f760f34f37925ddfef85d5c46d8f4faa2ca33400fb7e3f03bacfb3f87cc3e5c4",
+    "sheet.png": "ff515b54d10bf69176e839b89bd959a92eec70911b0fe5ab9a4e29f191b9b1b7",
+    "source-audit.json": "fe9476911832521fa38c62fa54d7c1eee0bc40ab1d73ff1714f059c2abda4c40",
+    "sprite.json": "6fd7e691ea6d2b65f6af98aba887c070701da2e57b4d112b855d53ea458b78cc"
+  }
+}

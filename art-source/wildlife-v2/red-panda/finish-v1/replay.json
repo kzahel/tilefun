@@ -1,0 +1,17 @@
+{
+  "identity": "red-panda-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "3e193f09e608b2b3e27ea3620d173d0db02ebf29a2cfea03787203079336a0ce",
+    "index.html": "247a9d5a923350427b267ed18a9d7c8bb01b78ed0f62c088b578b26d1a89f2a4",
+    "pixel-audit.json": "c6449c9bc9335864bd82937bc75f5faad659ef88b07f1d7c6d021fc24e967913",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "9849a7c560733bd841d3aa8533905b1e0ae392b30dd0834f8d858905d9dc2b86",
+    "preview.gif": "173ac3fbe3d8afb45b75e014e54f96724e7a158f71b931456ec615be2417ba5f",
+    "scene-native.png": "b50eb6a4cf3d2be021ad75e411f93fdd0919c99766c1cd33a966cf31b7dbc56a",
+    "sheet.png": "6751e538f855b3c0d719c21103bc808a2193d05231d57923c3aa273e4eb8a7e1",
+    "source-audit.json": "a7947eded4e2ced0a7d243f85ec5596389a3bb86569116a021a201b065983bf9",
+    "sprite.json": "9dbc777500590f158fdcaed5a37b454af4f6a95849a85da0c161dd3cff1f7be5"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "alligator-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/alligator/roster-v3/alligator.blend": "aece2d82faf9c2ce4af37b722f37e5f8c10c0d0b40b29ce0d4a4681feafd75bb"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "great-frigatebird-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "great-frigatebird-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "ad540a66aeb1333e5d742582bec101694c0041f796360580fa3f50bca09bd9c9",
+      "index.html": "cabc2da55c38861dcccde6e467d70f7f1254a62160fb1cc48e2152df36ca9dcb",
+      "pixel-audit.json": "6730ddefae033cbfd3114076f4d43f4e06dfbd82aed8219a08cbf6d87dee18df",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "6d526f1d6a97bf1a674fb8eb6c3b7c201abe94661d162b6d6a855aed869aa91c",
+      "preview.gif": "5a25691eb5e574c1fb0d4d4ad37fbea051f70516f9d35efc652e664e22b7af84",
+      "scene-native.png": "511a339d3472cd6736fc903a899481e131e8262e24a6851a629e424fc4afb69c",
+      "sheet.png": "ed52be33eeef1b0111ec72e6cf362fa873d842390414a1874f8e27a02da7e45c",
+      "source-audit.json": "8880d63d8a558843e7be7a82bffd15d3697490ced598af446ee0ef1142eb6755",
+      "sprite.json": "efa73dd9b054da8bae7347678f2b2f7ec1e73a2fa6f934c4c7d4d8f2469f5e0a"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/great-frigatebird/finish-v1/README.md": "eefcb2468b73dc228ef25ab273ac6e28a6bd80ceae75790039f2b601367df50d",
+    "art-source/wildlife-v2/great-frigatebird/finish-v1/inputs.json": "fb6145ca5ee0ad9e3d94228b7c3c86cb3681577137813f0fec2430497446f698",
+    "art-source/wildlife-v2/great-frigatebird/finish-v1/replay.json": "89888cbb1b903cd4b37bfa9c28aafdc2c4bf0da96ff1f6a76a39cc0cc28ec028",
+    "art-source/wildlife-v2/great-frigatebird/roster-v3/great-frigatebird.blend": "31288018f74f18166b26b987a14c00225edc5b613d706fd9e5d0b0d3fec7df24",
+    "art-source/wildlife-v2/great-frigatebird/roster-v3/inputs.json": "7c2eafc0ceafc9c3e4dc245e9ed298efa6d1c00ec14a626fe5d95b47a9f46ae1",
+    "art-source/wildlife-v2/great-frigatebird/roster-v3/projection.json": "8471e2f34682cda486fd391f6ff12511052315811836f93665c26851a95ab29b",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/contact-sheet-native.png": "ad540a66aeb1333e5d742582bec101694c0041f796360580fa3f50bca09bd9c9",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/index.html": "cabc2da55c38861dcccde6e467d70f7f1254a62160fb1cc48e2152df36ca9dcb",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/pixel-audit.json": "6730ddefae033cbfd3114076f4d43f4e06dfbd82aed8219a08cbf6d87dee18df",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/preview-native.gif": "6d526f1d6a97bf1a674fb8eb6c3b7c201abe94661d162b6d6a855aed869aa91c",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/preview.gif": "5a25691eb5e574c1fb0d4d4ad37fbea051f70516f9d35efc652e664e22b7af84",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/scene-native.png": "511a339d3472cd6736fc903a899481e131e8262e24a6851a629e424fc4afb69c",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/sheet.png": "ed52be33eeef1b0111ec72e6cf362fa873d842390414a1874f8e27a02da7e45c",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/source-audit.json": "8880d63d8a558843e7be7a82bffd15d3697490ced598af446ee0ef1142eb6755",
+    "public/demos/wildlife-v2/great-frigatebird/finish-v1/sprite.json": "efa73dd9b054da8bae7347678f2b2f7ec1e73a2fa6f934c4c7d4d8f2469f5e0a",
+    "public/demos/wildlife-v2/great-frigatebird/roster-v3/sheet.png": "a00635f391e0740aa89534208bdfb4738653c17df46495c9f62daaea8e24ad8f",
+    "public/demos/wildlife-v2/great-frigatebird/roster-v3/sprite.json": "78b0f3d476ba6d26597e6806d5470196faf7077423a550daf8acfc16c099736b",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

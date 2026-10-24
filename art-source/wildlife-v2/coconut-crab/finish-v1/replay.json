@@ -1,0 +1,17 @@
+{
+  "identity": "coconut-crab-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "d7d1c44e2261c7cb27ff692ecec8ff7172ed9e4d88d0312f80fa31a9eef0d834",
+    "index.html": "f652cd3b1df9489402b157ec560ea0bb9391f5d6b100af8e1eacee2391db174b",
+    "pixel-audit.json": "44b9f1e8a3e341d73507902852b7ea408e1f34510c27023edf3e822ad4207b0b",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "8148c1f9f66cd239ed28924cacb60c5ba7207978b28209bdb595f855f3310df1",
+    "preview.gif": "626d97e4d93836b9b01d2e7d222c1cd8dc76858b3f49f66f0b87bd6ec7b55455",
+    "scene-native.png": "8edbfabeab0b6ac0cb7197c29e1091de0be4dfbbc79c0cadbf14e0398043fc2a",
+    "sheet.png": "2bf24b96dac30d909e5b992b815f630c760703b359b575668a68feeac9a8e96c",
+    "source-audit.json": "78d49b81c78f6368c82e2cd7197a2cd80a5f8f5a80abf06713ffe4888b828cb5",
+    "sprite.json": "07dfe9943f6692ea0c27106fb9c898ad8063f97f93c43605e1b39a058d4187eb"
+  }
+}

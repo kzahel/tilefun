@@ -1,0 +1,10 @@
+{
+  "identity": "swordfish-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/swordfish/roster-v3/swordfish.blend": "c45615d960d7f2c261784383922a635fabb49e08c24593c239563e625666e492"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

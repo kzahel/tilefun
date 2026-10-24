@@ -1,0 +1,38 @@
+{
+  "identity": "blue-footed-booby-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "blue-footed-booby",
+    "name": "Blue-footed booby",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+    "sourceSha256": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+    "source": "art-source/wildlife-v2/blue-footed-booby/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#e2e4d5",
+    "H": "#8b7f67",
+    "C": "#f0ead7",
+    "M": "#5e574c",
+    "T": "#67abc1",
+    "R": "#c5bca0",
+    "N": "#192b30",
+    "K": "#23323a",
+    "E": "#e0d4a5"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/blue-footed-booby/roster-v3/blue-footed-booby.blend": "b9b8336312c8d00b4e0526f6e0071c4672c6531bc686e58f708796b773b3b263",
+    "art-source/wildlife-v2/blue-footed-booby/roster-v3/inputs.json": "7c2eafc0ceafc9c3e4dc245e9ed298efa6d1c00ec14a626fe5d95b47a9f46ae1",
+    "art-source/wildlife-v2/blue-footed-booby/roster-v3/projection.json": "48d5eb3767e3892ed734c7ed8a0e45623d8b29d2cb639d44f7e4dee2fc8d8634",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+    "public/demos/wildlife-v2/blue-footed-booby/roster-v3/sprite.json": "c842b3e7435ee1405862284942bd803003c52a31b027dd41decc3a706c6b0b50",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

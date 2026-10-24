@@ -1,0 +1,10 @@
+{
+  "identity": "ostrich-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/ostrich/roster-v2/ostrich.blend": "cf52365cc603fd7368ede1d9a7d90e795abfbe0df5c38792901a91b343039818"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

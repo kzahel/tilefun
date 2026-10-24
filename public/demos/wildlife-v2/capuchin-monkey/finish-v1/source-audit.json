@@ -1,0 +1,11 @@
+{
+  "identity": "capuchin-monkey-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/capuchin-monkey/behavior-v1/capuchin-monkey.blend": "159afa225952249b28a601b1827e17aea2a3d2b01802c7fd90fa879ab19f846c",
+    "art-source/wildlife-v2/capuchin-monkey/roster-v3/capuchin-monkey.blend": "1bd4d070ddf9283b7bbc0ecfb4d70b6956cf6fbeddabf11ce8d46696fb65b09d"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

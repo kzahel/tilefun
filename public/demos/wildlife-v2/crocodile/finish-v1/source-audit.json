@@ -1,0 +1,10 @@
+{
+  "identity": "crocodile-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/crocodile/roster-v3/crocodile.blend": "0f7ae56ff642c8c38ae4f20196b38c116e9faa534b1080e618506f0858df51f4"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

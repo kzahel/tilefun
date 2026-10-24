@@ -1,0 +1,12 @@
+{
+  "identity": "electric-eel-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "62c0de490f64b67f2f9e94f53cc59ceca506ef5862046cd29ca9ee6d3d4a2c8f"
+}

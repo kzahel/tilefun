@@ -1,0 +1,17 @@
+{
+  "identity": "wallaby-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "b2f9cbdad0397c91ac4851c3d8b3224e6a4b4a75d83dc3f31b5eae1de2babf36",
+    "index.html": "81ccb1a90cfa4bc474df46fa43c9211747a601e7e8d03ac27548a1fe7059fa95",
+    "pixel-audit.json": "2032b6a489614db309284c92af3608c30184837167df3a29d9e85a9c4f1c5b85",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "e378de0092e9eaed87b7989a072399ad99a2eefdbac43c01e51d27bfb15cfcac",
+    "preview.gif": "7b890fdabf5a0b279b7ffc0f29d5847c930afa869ce368210b3753763e5106eb",
+    "scene-native.png": "7d3d022027693d40a93006afbdd561754907aa8edc56b243e518394e021a7e28",
+    "sheet.png": "55014b5607e6aa406d81fa765ba900d5c640547140f1c8217c7a113888eeb4b9",
+    "source-audit.json": "ae6979859507f9de2b0fbb3edaec3eca9f67df34372df837195991ea14387c10",
+    "sprite.json": "471c9712dfbe00921917b44e985af12387a7ecd8d509d8b4a0546f714daef611"
+  }
+}

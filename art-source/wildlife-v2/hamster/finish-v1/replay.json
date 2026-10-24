@@ -1,0 +1,17 @@
+{
+  "identity": "hamster-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "1fcfb95844c87f7305c5f4cc1ceb7f1e408a2060eb617de74a68ed0327d30d53",
+    "index.html": "f90336bb23ec8aea91a8c9091f9477acd701bd7f9da99a89ba6422296cb6af41",
+    "pixel-audit.json": "823a9e1a3d06b46e1aa955c55683164023f9cb554e860fad48af4c77c0fe2bc5",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "3deadd4e006481788fb7f3f98851a7002c5fd6bcb23372494472948fda1eaea1",
+    "preview.gif": "a4dbb20f4b4bda1ea9e1361d89ac118b38b23a0b03cab3a2e48ce0a4694a5eec",
+    "scene-native.png": "f79b3fc4e2d520f2841358035b9b390504bccef2a9aabaaa1860acfb3018e381",
+    "sheet.png": "b80078d18fe832c9c07d0d3ce8ebec8619a1508f9729b97ca4a9e85657cb0b64",
+    "source-audit.json": "65b2ff51fdd1025531c4cd3b5c1041b4524980817e4ddc0a69a9c1a51070f050",
+    "sprite.json": "081b307e61ec05f8b53097bbdc32b99526c16a75f97298b7b74bb21b301cc581"
+  }
+}

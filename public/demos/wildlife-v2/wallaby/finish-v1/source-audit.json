@@ -1,0 +1,10 @@
+{
+  "identity": "wallaby-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/wallaby/roster-v3/wallaby.blend": "958838ecf28965cc7b02d60fd4d511b06c3c56139fbc8125cd7ac224182c5db5"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,11 @@
+{
+  "identity": "peacock-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/peacock/behavior-v1/peacock.blend": "a44901bf704470f6665a0bb4bd6e2bb63c93e417e05bfb9ae726c785c948a119",
+    "art-source/wildlife-v2/peacock/roster-v2/peacock.blend": "4f18a743f08037f73bf4d24b7cf2a85d4a427fe9c52bb23286bb6cae3cbcbeae"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

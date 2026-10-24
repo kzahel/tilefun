@@ -1,0 +1,17 @@
+{
+  "identity": "orangutan-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "fe72188754bcf012e974c0b441135a3a4642112864e6b998b158d8e274283945",
+    "index.html": "44e5b09435515b8d4a9388c87e72873274af0220223d7c4afab6584ffb4416c7",
+    "pixel-audit.json": "4ba9cf5d498fed71a022247a4ffc8038318b14f29835a8dedd2fd1647416fc58",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "29535298a9a27729aa9ce73b598ecc2c46629d0d89cbecb4587e0565b89f2891",
+    "preview.gif": "9ad1d5042bd5e6d8d8c4d53b1dc4f0017dc7ad2fd18f48bd5fc73f0329141212",
+    "scene-native.png": "b844709b0decdb2d8941e437d98baea9ed6e4834944f9c34f62cc60b52fa7b7f",
+    "sheet.png": "dbd5188573f6759516ed036c8fe437aa82821f0d023c3ade2f6643b8b28fd615",
+    "source-audit.json": "428a5e7bafb3430fe471a3bce5a53b0a72818a5b8896e695551646241bd36292",
+    "sprite.json": "e6dffa55bdfafb8c724c4b730a36193885af6e18be2f7fc8afbef4bff33020d0"
+  }
+}

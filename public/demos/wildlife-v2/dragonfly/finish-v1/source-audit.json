@@ -1,0 +1,10 @@
+{
+  "identity": "dragonfly-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/dragonfly/roster-v2/dragonfly.blend": "3d5d53e3da4bc9dfed60573ff804f59537ca095317b4dae66e8df37494232b82"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

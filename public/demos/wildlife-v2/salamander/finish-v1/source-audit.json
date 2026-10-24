@@ -1,0 +1,10 @@
+{
+  "identity": "salamander-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/salamander/roster-v2/salamander.blend": "68416508e3ef9a355957095a9e6d80a8a657de5096c2e40ed7e1e2f6fad8636f"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

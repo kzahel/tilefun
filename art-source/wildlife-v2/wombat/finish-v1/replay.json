@@ -1,0 +1,17 @@
+{
+  "identity": "wombat-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "07ac3ab5be78b3e51416523ff6def4855bd40d16fbaf3815c24efe1e6cd735b9",
+    "index.html": "c3e5fcc64921b8cffbbd6d69ed25adb8ecd6c9a4716bb52170f8ce460b7b493e",
+    "pixel-audit.json": "1a888b6798d3a88b8cc287d379a8d1d88efde7cbacdd6d0018f2d4e0428cf272",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "53e5788e4e4c0e14f348ff7bafc12a3cdb5136da70b59caa9906a1424b997515",
+    "preview.gif": "fb301edc9f62f84548becb3bff063e035c72f37262f928d25e8d6543ef071a2e",
+    "scene-native.png": "39f1d93758292dcdfecbeecc294d47e7bd7608b0d625e2d97ba18d75e66812b1",
+    "sheet.png": "201ba6c2271f90d7b5e8090ed16d198cb40d16b486cda580e6f1f8f29a8715a2",
+    "source-audit.json": "7589fb41606dd28a2d012353b4991e8607d652a4f21ecf07174f6d9a49136f9c",
+    "sprite.json": "6c4f809207a284da397679087791cf07860e6e6f2f667e7e81720e65f2467dcd"
+  }
+}

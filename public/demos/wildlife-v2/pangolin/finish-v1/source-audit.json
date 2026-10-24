@@ -1,0 +1,10 @@
+{
+  "identity": "pangolin-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/pangolin/roster-v3/pangolin.blend": "0809553fedf573ae0630e5404f8cb4018fc372f11cb3c39d548e61b312641474"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

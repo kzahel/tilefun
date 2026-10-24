@@ -1,0 +1,17 @@
+{
+  "identity": "deer-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "3ecbeda29cbd7873611bfb19a790743213bfb1facb31f70fe3511055b109da56",
+    "index.html": "d3704b7604d64f54c796679641743fb7ff55445e8896fa840876d537047fb7d1",
+    "pixel-audit.json": "0c885bad35de2120066fb8c65077c624d0a1a7cacd181c74900ed44621af4c25",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "9d41576908a6d6b98a00be94ecfb892f22218f8808994753be5e38fb23049526",
+    "preview.gif": "e7d53b3345cb33862e36a5454f7edf53cfce262e2088597c64e91b51999061d0",
+    "scene-native.png": "419a0154caf10e2d9c34e80327a462eacb66e556173f2ff79711d12007d4f018",
+    "sheet.png": "c8cc35dd28680764995843672f4cfa00045367579ee05522879cfa57ded2c41d",
+    "source-audit.json": "d54df43ecaca9015ec40ac6e7a13aa3d1eeb8586c2dfe8a99666bc42640625ea",
+    "sprite.json": "3979b1d930df729e5385a8e3e67023db11ad64486ab5835adb285662bd5ef4d1"
+  }
+}

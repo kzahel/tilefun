@@ -1,0 +1,72 @@
+{
+  "identity": "aardvark-finish-v1",
+  "reviewStatus": "pending human review",
+  "image": "sheet.png",
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "anchor": [
+    48,
+    72
+  ],
+  "rootMotion": false,
+  "defaultClip": "walk",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 40
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    }
+  },
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  },
+  "sheetSha256": "5e0e4cb6ce36b7749ef6ec2bb429ead11e102cca726081b8ddc2f8c0d592f76e",
+  "finishing": {
+    "policy": "wildlife-paint-v1",
+    "method": "material-surfaces",
+    "contract": "aardvark-finish-v1",
+    "predecessorImage": "demos/wildlife-v2/aardvark/roster-v3/sheet.png",
+    "predecessorSha256": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865",
+    "source": "art-source/wildlife-v2/aardvark/roster-v3"
+  }
+}

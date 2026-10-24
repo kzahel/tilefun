@@ -1,0 +1,53 @@
+{
+  "identity": "great-hornbill-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "great-hornbill-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "2444b734488892f4dc04623ffedab5eb8888999d31656b05ba5533aab1ac0917",
+      "index.html": "190a82c8a260594357534474b312ad9d8a5bdcf64fdf4cc9d6dcf01c1facfb99",
+      "pixel-audit.json": "4ac9e16a79ed15f638559a31097129af7a5a60861411d38b3cf7e55c09d7e739",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "d13eb98b3839936d33785f465f4c191bd5aa2d1cf33ab73a5c99c358bdeef7dd",
+      "preview.gif": "c18369327254828f7d55b47be610af5c6898f08fb0191ebca71237ea8775cbc0",
+      "scene-native.png": "ecd5ceb7057e30ab606ebe1ea540a5504167d67ff29e592d163ff50bdb725de9",
+      "sheet.png": "cf1c8728fc6375007a36e04bbb5572badfa7afec51a04119df43aa509199d059",
+      "source-audit.json": "5a65e196dbec37b02a8470b869773cbd5295880bca186c70e4a440d82a9324ec",
+      "sprite.json": "25330338e7ff209889fa681fae187406ced3555cb94f9617a08f0b24007ad1ca"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/great-hornbill/finish-v1/README.md": "89d5499335c21e00bdafede6834237e2525efdc709598aa1d3c8ca3d5077d632",
+    "art-source/wildlife-v2/great-hornbill/finish-v1/inputs.json": "c2d5186114fceb05f97260b022c6a8d6b41f44b808f66b76e5182fc13516f3d3",
+    "art-source/wildlife-v2/great-hornbill/finish-v1/replay.json": "9c88946874a285ab3649ee2adf3c74a62f571a3e86498648c165e50bc66d33d3",
+    "art-source/wildlife-v2/great-hornbill/roster-v2/great-hornbill.blend": "b00899c30569ce6f0fbcfe6efeb733e4d26212a7b24678d9674489bd18c4c455",
+    "art-source/wildlife-v2/great-hornbill/roster-v2/inputs.json": "36bc3b4f0a4e6607f8179b29e4179e56934d9fb3e4915fac575764d0c51e549d",
+    "art-source/wildlife-v2/great-hornbill/roster-v2/projection.json": "53e433d40759d72bc8b6dda45caaf47877d6d8a8d36d59ffa62aed62739533be",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/contact-sheet-native.png": "2444b734488892f4dc04623ffedab5eb8888999d31656b05ba5533aab1ac0917",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/index.html": "190a82c8a260594357534474b312ad9d8a5bdcf64fdf4cc9d6dcf01c1facfb99",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/pixel-audit.json": "4ac9e16a79ed15f638559a31097129af7a5a60861411d38b3cf7e55c09d7e739",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/preview-native.gif": "d13eb98b3839936d33785f465f4c191bd5aa2d1cf33ab73a5c99c358bdeef7dd",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/preview.gif": "c18369327254828f7d55b47be610af5c6898f08fb0191ebca71237ea8775cbc0",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/scene-native.png": "ecd5ceb7057e30ab606ebe1ea540a5504167d67ff29e592d163ff50bdb725de9",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/sheet.png": "cf1c8728fc6375007a36e04bbb5572badfa7afec51a04119df43aa509199d059",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/source-audit.json": "5a65e196dbec37b02a8470b869773cbd5295880bca186c70e4a440d82a9324ec",
+    "public/demos/wildlife-v2/great-hornbill/finish-v1/sprite.json": "25330338e7ff209889fa681fae187406ced3555cb94f9617a08f0b24007ad1ca",
+    "public/demos/wildlife-v2/great-hornbill/roster-v2/sheet.png": "28238b91fbe75430af2c9369b1d4cccfa5d9b558a58681e59f8326e1e61070c3",
+    "public/demos/wildlife-v2/great-hornbill/roster-v2/sprite.json": "89a7f96dc06c18b2ddb596021f87c5b67605188b519e6eac1d8a08dc85c9315c",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

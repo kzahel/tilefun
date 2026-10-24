@@ -1,0 +1,47 @@
+{
+  "updated": "2026-10-24",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "state": "browser-validation",
+  "policies": 206,
+  "corrected": 137,
+  "retained": 69,
+  "poseCells": 30468,
+  "isolatedReplays": 137,
+  "priorReviewObjectsUnchanged": 264,
+  "humanReview": "pending",
+  "nativeFocused": {
+    "passed": 95
+  },
+  "paintContracts": {
+    "passed": 4
+  },
+  "painterTests": {
+    "passed": 7
+  },
+  "browserPreview": {
+    "identities": [
+      "deer-finish-v1",
+      "red-panda-finish-v1"
+    ],
+    "exactNativeAndEnlargedCrops": 1008
+  },
+  "broadValidation": {
+    "typecheck": "passed",
+    "lint": "passed; baseline 121 warnings / 42 infos",
+    "build": "passed",
+    "native": {
+      "passed": 6808,
+      "failed": 12,
+      "skipped": 10,
+      "preExistingWindowsTestFailures": 5,
+      "preExistingWindowsSuiteErrors": 1,
+      "parallelLoadTimeouts": 7,
+      "targetedRerunPassed": 8
+    },
+    "nodeIntegrationPassed": 1,
+    "httpIntegrationPassed": 3,
+    "workerTestsPassed": 11,
+    "workerBuild": "passed",
+    "browser": "in-progress"
+  }
+}

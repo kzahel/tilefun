@@ -1,0 +1,10 @@
+{
+  "identity": "echidna-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/echidna/roster-v3/echidna.blend": "2ba2ea9f361ec60fcb6492e06869ca6f401969731cb0da2728ce7cece75a1160"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

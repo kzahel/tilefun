@@ -1,0 +1,42 @@
+{
+  "identity": "hedgehog-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "hedgehog",
+    "name": "Hedgehog",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/hedgehog/behavior-v1/sheet.png",
+    "sourceSha256": "73482e3fc9e719afd1d19f9612270bb9600f9dfa9e99ec880dfeb2ab3a55593e",
+    "source": "art-source/wildlife-v2/hedgehog/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#272f34",
+    "B": "#8d7455",
+    "H": "#b09a75",
+    "C": "#d0b895",
+    "M": "#554d42",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/hedgehog/behavior-v1/hedgehog.blend": "ae2c3816b600ca39029c140d60bd9c3cee7453477838a14db06a86d03b311629",
+    "art-source/wildlife-v2/hedgehog/behavior-v1/inputs.json": "1dc0370e298a3948da0c91c67d9d05be5ed91e536652482233d521b5eaa59a1b",
+    "art-source/wildlife-v2/hedgehog/behavior-v1/projection.json": "a092d5d5f55f4f438359e71638188d2705efbae2569f86177c0b785242787591",
+    "art-source/wildlife-v2/hedgehog/roster-v2/hedgehog.blend": "34f3b11e0070b6b3592aa15e8b6912f960b159183a9e45e463eb374f0c581292",
+    "art-source/wildlife-v2/hedgehog/roster-v2/inputs.json": "4acbe965594cafea79cf77a81d7619d503df3b884ea4a4f9ecca422fe09eb35f",
+    "art-source/wildlife-v2/hedgehog/roster-v2/masters.json": "d501e20f626622ec095bd665ae08e5adedbe88a9e4042e14897f5c8acbbe1695",
+    "art-source/wildlife-v2/hedgehog/roster-v2/projection.json": "0d38e58334445e402c4937c85f2b4cc28faf4a618bb579876227188af312d589",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/hedgehog/behavior-v1/sheet.png": "73482e3fc9e719afd1d19f9612270bb9600f9dfa9e99ec880dfeb2ab3a55593e",
+    "public/demos/wildlife-v2/hedgehog/behavior-v1/sprite.json": "63cc9c06c627716d9f4a7105db8f0e8b415a8e932bda51de5dabcb8e8eeb596f",
+    "public/demos/wildlife-v2/hedgehog/roster-v2/sheet.png": "4c9309bfd972f31b0e26f1259b1777f644df8d828fed75aec76f01fa3f590c36",
+    "public/demos/wildlife-v2/hedgehog/roster-v2/sprite.json": "eb82cdb76596d7408201bf21fad60fd5feba8eb61bbb53eed63c3bdbc93b7495",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

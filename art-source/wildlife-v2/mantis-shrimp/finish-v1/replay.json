@@ -1,0 +1,17 @@
+{
+  "identity": "mantis-shrimp-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "6899aceed7281a70a4a920e6584b866a116eff10488eacca9e7abc65ee7c153d",
+    "index.html": "6e2ae27a3c7bf08ce0d581d5039eed74afdd7e5980f0753c182c8b7b44432b48",
+    "pixel-audit.json": "b942e44f4f06ef00929927f46de1cad82e89df29ab8e3d29ac549c2712291ada",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "15a7dbe14c96cc6aa804473364e63265c9a042614bd1f620a4d8a5f048dcecb2",
+    "preview.gif": "b59e2b4f3ae22225608787e267ee2f171086c970ecca531bd2c61220758a19ae",
+    "scene-native.png": "d74ce8880329575492ab8e5cbfd98c2420c2c2fc7e8fa932be793da732e1e59e",
+    "sheet.png": "474b783c8d34a6d681f55fae17d7fef6310ea940e388c6ca5c3ac87022048dcc",
+    "source-audit.json": "cc466892ab8fd46f13db79104df630fba2266f48e7eea0273b36f65280062732",
+    "sprite.json": "bdbe7beecec4b56af0cbd0d66fd141d057e6e4b0dffd52a18df977c204c15759"
+  }
+}

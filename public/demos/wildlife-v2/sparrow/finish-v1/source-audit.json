@@ -1,0 +1,10 @@
+{
+  "identity": "sparrow-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/sparrow/roster-v2/sparrow.blend": "c264a56d681f2987a0c6802f09b825da1deae74b1f72ae0c80ae00af6a2d2f42"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

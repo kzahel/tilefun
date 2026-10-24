@@ -1,0 +1,10 @@
+{
+  "identity": "shoebill-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/shoebill/roster-v3/shoebill.blend": "36d03976a042a0449d5d0f806a3ae107a98345183b79e48aa60c71e30712b615"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

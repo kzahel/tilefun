@@ -1,0 +1,10 @@
+{
+  "identity": "spider-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/spider/roster-v3/spider.blend": "ca2f9e8b8fe817eb4cf29e2928aa33974e727de35eb28072d94dd380adb15e54"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "starfish-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/starfish/roster-v3/starfish.blend": "0469d8074bdd451288fca7ce0f4d9599cf8e4beee07885601c72fbfef457ffc6"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

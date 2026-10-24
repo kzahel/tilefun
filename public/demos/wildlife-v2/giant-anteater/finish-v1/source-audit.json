@@ -1,0 +1,10 @@
+{
+  "identity": "giant-anteater-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/giant-anteater/roster-v3/giant-anteater.blend": "84902b58970b1781efd9d23dc2328bc2877ca4ceca1bff68f9c4936c0d6ddb0f"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

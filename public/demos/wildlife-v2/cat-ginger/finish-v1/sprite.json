@@ -1,0 +1,69 @@
+{
+  "identity": "cat-ginger-finish-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 48,
+  "frameHeight": 48,
+  "anchor": [
+    24,
+    34
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "stalk",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 160
+    },
+    "walk": {
+      "start": 1,
+      "count": 12,
+      "frameDuration": 80
+    },
+    "action": {
+      "start": 13,
+      "count": 8,
+      "frameDuration": 160
+    },
+    "stalk": {
+      "start": 21,
+      "count": 8,
+      "frameDuration": 125,
+      "loop": true
+    },
+    "pounce": {
+      "start": 29,
+      "count": 8,
+      "frameDuration": 80,
+      "loop": false
+    },
+    "bat": {
+      "start": 37,
+      "count": 8,
+      "frameDuration": 90,
+      "loop": false
+    },
+    "climb": {
+      "start": 45,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": true
+    },
+    "sit": {
+      "start": 57,
+      "count": 8,
+      "frameDuration": 150,
+      "loop": true
+    }
+  },
+  "sheetSha256": "57e556fbc3d1bfbcc1ff75f3d1f169972a6b9d9fa6c7284833d51a0f8a09b2e1",
+  "finishing": {
+    "policy": "wildlife-paint-v1",
+    "method": "retained-parts",
+    "contract": "cat-ginger-finish-v1",
+    "predecessorImage": "demos/wildlife-v2/cat-ginger/behavior-v1/sheet.png",
+    "predecessorSha256": "dac6b1ac6a1e8ec7098dff205b653b2432762700c3e7bd0ac1bcbcf7661faa64",
+    "source": "art-source/wildlife-v2/cat-ginger/behavior-v1"
+  }
+}

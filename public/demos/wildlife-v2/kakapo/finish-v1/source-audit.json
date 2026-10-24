@@ -1,0 +1,10 @@
+{
+  "identity": "kakapo-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/kakapo/roster-v2/kakapo.blend": "299b746d5661bebce7456baa8552bf55c1b9a6eaa5e50d16e0c29b6c429dbcd4"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

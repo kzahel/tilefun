@@ -1,0 +1,17 @@
+{
+  "identity": "roly-poly-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "e9a10349249f802c436a12b7beda03ef21ba431355fc31a93cf2e18dd8914a3e",
+    "index.html": "9230fc7a28c1078381993a0a4c730a26990b7ca71f1075aab0d7b4361e34ba5d",
+    "pixel-audit.json": "cb9a5762ed7d80bd404e1330a03e66deaf2d15d788058508e1a53c99f70428c4",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "aff68fd3e7c9dcd312bf093920633ae8a77bf686bcd7e009b8ac2b5ec516c930",
+    "preview.gif": "073b7d9fe085a6b86432f6921e3e2463473048a64def82f16f4df078cbccbf64",
+    "scene-native.png": "f973a6318794156bd52317e76c31a0f7adec191cad69acae79d28f182c7a1789",
+    "sheet.png": "d323c62bb7fd2c9cbec30944437a33c2ee6848e5c433ea96433f2489061bb63d",
+    "source-audit.json": "eb81df87aa51da2e42f8e7a7ab1e2809135623591a51839c7f5d95d14c3e78fc",
+    "sprite.json": "63f5ceb6ca023e824e57cf49a34f6a983905e118bd80fb771ae8ec01b6902e54"
+  }
+}

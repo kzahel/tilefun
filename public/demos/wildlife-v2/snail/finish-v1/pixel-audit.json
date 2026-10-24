@@ -1,0 +1,12 @@
+{
+  "identity": "snail-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "86136b5a04f796645f5fe63f4a3656987dd82cfe63173579df757d559b634a42"
+}

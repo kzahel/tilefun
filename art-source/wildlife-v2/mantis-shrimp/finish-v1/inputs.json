@@ -1,0 +1,36 @@
+{
+  "identity": "mantis-shrimp-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "mantis-shrimp",
+    "name": "Peacock mantis shrimp",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/mantis-shrimp/roster-v3/sheet.png",
+    "sourceSha256": "e7c1714c9e10ff00fc0ecf92b5f7889ce64aeb852035cad1c9ba7b9618c45c5e",
+    "source": "art-source/wildlife-v2/mantis-shrimp/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#26322b",
+    "N": "#141d18",
+    "B": "#638b62",
+    "C": "#dfad6e",
+    "M": "#487e9f",
+    "H": "#da8151",
+    "T": "#e3cfab"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/mantis-shrimp/roster-v3/inputs.json": "5fb44238331246d8d4219ef247554112457243cfab6ee1a04e441a6638985c72",
+    "art-source/wildlife-v2/mantis-shrimp/roster-v3/mantis-shrimp.blend": "46f44c29d7972b70efadd211483bcca9ea86be8666ad1d57ac01de8d04a4cab4",
+    "art-source/wildlife-v2/mantis-shrimp/roster-v3/projection.json": "d18e308e5435edd50dd91fd3eb450960a94397cd8fe8f81b3942479391b6d10a",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/mantis-shrimp/roster-v3/sheet.png": "e7c1714c9e10ff00fc0ecf92b5f7889ce64aeb852035cad1c9ba7b9618c45c5e",
+    "public/demos/wildlife-v2/mantis-shrimp/roster-v3/sprite.json": "76177b33bcdb73c49bf5e5363edfaf9bd88c51f33041a2b2d89839dc8b9da1c7",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

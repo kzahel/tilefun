@@ -1,0 +1,12 @@
+{
+  "identity": "dove-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "36cabd4c7698e1f86e1121bf8ae4ebbcb24faaf4ea00c8cdecdce39e8fa96233"
+}

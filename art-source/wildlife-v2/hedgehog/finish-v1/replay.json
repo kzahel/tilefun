@@ -1,0 +1,17 @@
+{
+  "identity": "hedgehog-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "68d741d6e9de3982549ceaa74378af560600cbafb84e028afef54513ea5ced03",
+    "index.html": "78a1c3ddfef5adacbe12ff4c896f677f9971ff3ec0852a5eb9d03e808c743abf",
+    "pixel-audit.json": "24547ef6de14c7caffe8f6fd47347bc90ac52e9801fe4b88c4f92e704561779f",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "4e2692fcb95064ac6a15924a9621d49b3b4bbfacd486178d3bbaae3cbea40be7",
+    "preview.gif": "31c0bfcf1bb14fdab1376b2862de1a8f7fbbd01e440d07b2466d3196bab7f97b",
+    "scene-native.png": "5adf2c8394109a7d9c2b181376130b39a97c8a265b5319a6f71413930ddc4b33",
+    "sheet.png": "9a5c144d23e5391d55fc0da226587f8bdddfa6b92adc9f1e1c311af76631e540",
+    "source-audit.json": "7a4da10e1c296c22e9da89bd1e79decced9eccdb26cfa13b83f2c461f58639c7",
+    "sprite.json": "289f71e4ef3e67e0a4415c57c336ae32510e3774564a124b2a2a412e7b10aeb9"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "identity": "beaver-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 316,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 316,
+  "sheetSha256": "518dd28cb8b05ddbc388761fd994af33d904c4a903ed810f98d93b96c05ba0a8"
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "proboscis-monkey-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "proboscis-monkey-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "4ae6ec0aa8590fbb29452e928b0795b402c325307cfdd7e3e1e2a320fd61cc0d",
+      "index.html": "1e57202b1c48d3d004ff4730aa913ccccc3e68cb486b5049041ecf8a0bd47cbf",
+      "pixel-audit.json": "46b239bd3b219b4b98c0b30b2d412d06dd429b1fc08a6a69431e91cea0448755",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "903f15cac44f273534d2e14c9cac11f3e6a1945541f2585e9d3cb23cd0270509",
+      "preview.gif": "5402c527e7cf6addb261dff762b45851016db9d44f433ec62ac15d453ef700e5",
+      "scene-native.png": "7c8cf1701c4074b1c47a3dbf881d446be8a9d0347307088ac8a6a59c74617397",
+      "sheet.png": "4fa04680bfa7c40f162e970c3e4214b4223a816a10c7c9092813e1bc34f96fca",
+      "source-audit.json": "ce9e83e7e8b3c43f56d57e4b1f6d4e5214d791e08d588c302c83c1d1eb656290",
+      "sprite.json": "a85e19f27b8ccf542bd57827273c008f0618b3e4e0138a81c882eecc6aaa967a"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/proboscis-monkey/finish-v1/README.md": "222c31b87b9045d93793821a0305d978cffcf9bb9de41215ec8ec02e4979d35d",
+    "art-source/wildlife-v2/proboscis-monkey/finish-v1/inputs.json": "c0584f74b2269abf1d6a8b05bfc22e557ba83c4a45ac4e12899e6237cd658fdd",
+    "art-source/wildlife-v2/proboscis-monkey/finish-v1/replay.json": "53a86613cc6550f70dde1dcd51454f953e18b00d28ba2c1dd5d0769ad37f442d",
+    "art-source/wildlife-v2/proboscis-monkey/roster-v3/inputs.json": "fae2aadba82380eb543281be2bc1943711a5dc9d680f37fff6edddcd82e2edcf",
+    "art-source/wildlife-v2/proboscis-monkey/roster-v3/proboscis-monkey.blend": "f40f1668638aca4b63c76e239611d00aaa85495f27823f8c0d2af90c72916bcd",
+    "art-source/wildlife-v2/proboscis-monkey/roster-v3/projection.json": "bd1188355d6af524b6c4462b384782288a442fb99e5c4ffcd8f3ad214f261cf7",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/contact-sheet-native.png": "4ae6ec0aa8590fbb29452e928b0795b402c325307cfdd7e3e1e2a320fd61cc0d",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/index.html": "1e57202b1c48d3d004ff4730aa913ccccc3e68cb486b5049041ecf8a0bd47cbf",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/pixel-audit.json": "46b239bd3b219b4b98c0b30b2d412d06dd429b1fc08a6a69431e91cea0448755",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/preview-native.gif": "903f15cac44f273534d2e14c9cac11f3e6a1945541f2585e9d3cb23cd0270509",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/preview.gif": "5402c527e7cf6addb261dff762b45851016db9d44f433ec62ac15d453ef700e5",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/scene-native.png": "7c8cf1701c4074b1c47a3dbf881d446be8a9d0347307088ac8a6a59c74617397",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/sheet.png": "4fa04680bfa7c40f162e970c3e4214b4223a816a10c7c9092813e1bc34f96fca",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/source-audit.json": "ce9e83e7e8b3c43f56d57e4b1f6d4e5214d791e08d588c302c83c1d1eb656290",
+    "public/demos/wildlife-v2/proboscis-monkey/finish-v1/sprite.json": "a85e19f27b8ccf542bd57827273c008f0618b3e4e0138a81c882eecc6aaa967a",
+    "public/demos/wildlife-v2/proboscis-monkey/roster-v3/sheet.png": "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3",
+    "public/demos/wildlife-v2/proboscis-monkey/roster-v3/sprite.json": "2269bd9974f7caf89124f45b465cebbb5aaa3befca8ea6366977e4963e985a0f",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

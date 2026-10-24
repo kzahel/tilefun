@@ -1,0 +1,36 @@
+{
+  "identity": "crocodile-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "crocodile",
+    "name": "Nile crocodile",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/crocodile/roster-v3/sheet.png",
+    "sourceSha256": "a2a27c8c6f012e8a99c457d1564e39641e0a7d476fc4722f8ca6f17386b65a26",
+    "source": "art-source/wildlife-v2/crocodile/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#26302c",
+    "B": "#657653",
+    "H": "#8a9565",
+    "C": "#c8bf8d",
+    "M": "#3c4e38",
+    "E": "#c4a25b",
+    "N": "#182523"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/crocodile/roster-v3/crocodile.blend": "0f7ae56ff642c8c38ae4f20196b38c116e9faa534b1080e618506f0858df51f4",
+    "art-source/wildlife-v2/crocodile/roster-v3/inputs.json": "f48301375f1437a82e941c7a67c238f3d9f4e479c07901034018691a19e62638",
+    "art-source/wildlife-v2/crocodile/roster-v3/projection.json": "a394a3a139d1b5e44908d4239f6ee7b06419dbe56f96e889c3c4c3d469f91788",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/crocodile/roster-v3/sheet.png": "a2a27c8c6f012e8a99c457d1564e39641e0a7d476fc4722f8ca6f17386b65a26",
+    "public/demos/wildlife-v2/crocodile/roster-v3/sprite.json": "9f0005ba76ba2e6b1830f7f5a8cc13cd2fd2d0310c31eb81fb73882187c73f4d",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

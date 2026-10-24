@@ -1,0 +1,12 @@
+{
+  "identity": "white-nosed-coati-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "66c171538e6e4950de2cc590011f5875fb73f69d87ee5190053f78ba2c4acca8"
+}

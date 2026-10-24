@@ -1,0 +1,12 @@
+{
+  "identity": "spider-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "cd656666c0a6d7ca532e3d52e9d0ce0fe8fe260a2ea9f21511711c5110d37655"
+}

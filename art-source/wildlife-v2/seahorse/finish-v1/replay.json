@@ -1,0 +1,17 @@
+{
+  "identity": "seahorse-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "dbbb9638516e322f475f88025989de716e4adb62f85d9f2be5233e368ff1ea82",
+    "index.html": "18ef76501c8bff88d18c0182e08260ed2a9f44b08964829a764dc8a8f8ae65d5",
+    "pixel-audit.json": "9c7eaa6e7f5f39396415e452d1150ee6c22079f2d6ab3fa6b3624827539442d4",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "267a06aec387141f112bbdc7cf13f6525b3d01906857ba8701d9167602db0596",
+    "preview.gif": "e3a1237774e48f82fb30ea17edcc62de8c6b7c9083c9a6c5fbb1f6a89b52a71e",
+    "scene-native.png": "736ce32beb316c6ecf17720038f8900a8e99ae34b29684420769501500040918",
+    "sheet.png": "74d05bfbff619b26d3f671a7fec80f4cf791faac31297cec15fbaf32df3746c2",
+    "source-audit.json": "21689d900b98744b214a0eaba37139647e91cbdca0aa3a49a6f1034b183dab8e",
+    "sprite.json": "ed3fcaf8c140e1977568b21daf6e67ee04b59faecddc6eed0400417d3119ab9c"
+  }
+}

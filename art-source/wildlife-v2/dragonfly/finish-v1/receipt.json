@@ -1,0 +1,53 @@
+{
+  "identity": "dragonfly-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "dragonfly-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "56e73ffd296672ca4661478d26e754758e5834502ce99dda8c0dbf4b31010b3f",
+      "index.html": "e77bde53a902dfda016da92cfca294ec320eda4108f5cf3c66eaf9198646b8e5",
+      "pixel-audit.json": "57df27be2131710965a89180e67fde88cc0cf53c97cddd9013a3f7e7e7d8d10c",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "dc8bd1fbcfda3292293ccffa0e60c5653b7a9214ee6d366b74361b9c9f91cbae",
+      "preview.gif": "edb37287b092693f22fdd2dcc529d385a81398b22a3050f7de954e3b2e137987",
+      "scene-native.png": "eb5499ba84be6a060e76d3926f0ebb2e55466f33dd0a83e009c86d77e88c2a24",
+      "sheet.png": "38fe8d0d5142a07486e47c7a3957aa3622b43d950308b33b4e61813bc493dfff",
+      "source-audit.json": "d39188737a1adeb11cdcd1dab6499420d8ed8c92905beade7f28e35a8e1fe75f",
+      "sprite.json": "bb5f995013afacffc14f0051ace05b5ed928ee86518d230bc18c330b943c767b"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/dragonfly/finish-v1/README.md": "499ebf55bad8400cdbddf52f4af52e31049820bd587bb86f5adf3b387ef1ddd9",
+    "art-source/wildlife-v2/dragonfly/finish-v1/inputs.json": "523827fe91f22a1226b234359864adefa936cbfbd5fb6a42b2a40a320d877baf",
+    "art-source/wildlife-v2/dragonfly/finish-v1/replay.json": "27e587fb68bfcaddcead062b75f3bc07fb9043a7bc3201a0e5a10d20fecd7b45",
+    "art-source/wildlife-v2/dragonfly/roster-v2/dragonfly.blend": "3d5d53e3da4bc9dfed60573ff804f59537ca095317b4dae66e8df37494232b82",
+    "art-source/wildlife-v2/dragonfly/roster-v2/inputs.json": "dc32cda3d25005467a209a8428424d9be900ad2cd6e1a4e5b71d1ac0d4e9ee7c",
+    "art-source/wildlife-v2/dragonfly/roster-v2/projection.json": "09064ac9c648c991a1c778ed4c48e4780539017d476acf51a18b16cac7ff3125",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/contact-sheet-native.png": "56e73ffd296672ca4661478d26e754758e5834502ce99dda8c0dbf4b31010b3f",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/index.html": "e77bde53a902dfda016da92cfca294ec320eda4108f5cf3c66eaf9198646b8e5",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/pixel-audit.json": "57df27be2131710965a89180e67fde88cc0cf53c97cddd9013a3f7e7e7d8d10c",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/preview-native.gif": "dc8bd1fbcfda3292293ccffa0e60c5653b7a9214ee6d366b74361b9c9f91cbae",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/preview.gif": "edb37287b092693f22fdd2dcc529d385a81398b22a3050f7de954e3b2e137987",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/scene-native.png": "eb5499ba84be6a060e76d3926f0ebb2e55466f33dd0a83e009c86d77e88c2a24",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/sheet.png": "38fe8d0d5142a07486e47c7a3957aa3622b43d950308b33b4e61813bc493dfff",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/source-audit.json": "d39188737a1adeb11cdcd1dab6499420d8ed8c92905beade7f28e35a8e1fe75f",
+    "public/demos/wildlife-v2/dragonfly/finish-v1/sprite.json": "bb5f995013afacffc14f0051ace05b5ed928ee86518d230bc18c330b943c767b",
+    "public/demos/wildlife-v2/dragonfly/roster-v2/sheet.png": "6a65758eac3aa6864b25f376846ee8b36deea28a3e17bdda455818300069bfcb",
+    "public/demos/wildlife-v2/dragonfly/roster-v2/sprite.json": "34df6d273cc696a09b9e957170fbc3a6b0ef67f4a79583e0e520c948022eaade",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

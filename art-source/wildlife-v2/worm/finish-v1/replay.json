@@ -1,0 +1,17 @@
+{
+  "identity": "worm-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "b5c22d631f90a6695b335450bff33b85346f95c10124b0bfc8380b63a18affa5",
+    "index.html": "162f149b3c2c616bf4d3067e3b19eefe124d71b9a079cd459259d948096ac6aa",
+    "pixel-audit.json": "5bd7f9591c87ad7cf2b016bb058b99d89014fe73feb92cb90b1542fabe0a6030",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "f5da72aa87f8e9e3f887eeed27b10ec6ffd4e87b2bf800855fbaef5d422c5aea",
+    "preview.gif": "522dc4b5c7d373dc7c8accf8ad763eaa05d20765aa34ddcb9c62e6105b8b0df9",
+    "scene-native.png": "0646a3b1a96f9e2306977b45c07cc799d4c53d987c7a9fb075dcbcb5c2fad959",
+    "sheet.png": "c366db933f1d1d8249279d13b8f23996029fd57682eb071e09a762a7e5088e93",
+    "source-audit.json": "4b35940fcc0436696514551785978701ed796272ce9d99008ebeb48dac4dc79b",
+    "sprite.json": "54381f8764176afa759a5ab7e9fca9a5fe9287c5725084ed6446febf0c26d170"
+  }
+}

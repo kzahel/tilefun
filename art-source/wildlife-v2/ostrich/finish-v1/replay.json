@@ -1,0 +1,17 @@
+{
+  "identity": "ostrich-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "ac52cd3e1ab70a46adf605920ab890ace1252f134437f773dd75d8570d408b7c",
+    "index.html": "1755e1d7f35567b08dd7d8924c5a1f53aaeaf55b5cb0a12812305606946f410a",
+    "pixel-audit.json": "1316ad3d06cfd4fc59488850fbcf17fd01ff3d3f46e52d60df99db01e60ecaf6",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "661f73b974eafbd36152969fc76eb037e060a07b32cf658230cfefef5b3710b5",
+    "preview.gif": "dc81ae7599d388c9db4ffea96b0603ae77a8df5f314e44dcbd1723364fe34b30",
+    "scene-native.png": "7cb825761b21c8d194e586d46c8be2fecad9c03127263835e7987cf868265e6a",
+    "sheet.png": "808d73583224aac5f9d354c5fa4711e5a06c8b08e898e1b4a3d533e232532731",
+    "source-audit.json": "96dec2bcbb339146cde35d3c5d8df267098dd03e6edb01e1bcca8530858fb090",
+    "sprite.json": "0b5b0782c240701c5b901f9f229043614bb202127c320a29fa2bc1023cf7e88e"
+  }
+}

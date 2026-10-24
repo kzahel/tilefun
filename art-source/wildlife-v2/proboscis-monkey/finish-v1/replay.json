@@ -1,0 +1,17 @@
+{
+  "identity": "proboscis-monkey-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "4ae6ec0aa8590fbb29452e928b0795b402c325307cfdd7e3e1e2a320fd61cc0d",
+    "index.html": "1e57202b1c48d3d004ff4730aa913ccccc3e68cb486b5049041ecf8a0bd47cbf",
+    "pixel-audit.json": "46b239bd3b219b4b98c0b30b2d412d06dd429b1fc08a6a69431e91cea0448755",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "903f15cac44f273534d2e14c9cac11f3e6a1945541f2585e9d3cb23cd0270509",
+    "preview.gif": "5402c527e7cf6addb261dff762b45851016db9d44f433ec62ac15d453ef700e5",
+    "scene-native.png": "7c8cf1701c4074b1c47a3dbf881d446be8a9d0347307088ac8a6a59c74617397",
+    "sheet.png": "4fa04680bfa7c40f162e970c3e4214b4223a816a10c7c9092813e1bc34f96fca",
+    "source-audit.json": "ce9e83e7e8b3c43f56d57e4b1f6d4e5214d791e08d588c302c83c1d1eb656290",
+    "sprite.json": "a85e19f27b8ccf542bd57827273c008f0618b3e4e0138a81c882eecc6aaa967a"
+  }
+}

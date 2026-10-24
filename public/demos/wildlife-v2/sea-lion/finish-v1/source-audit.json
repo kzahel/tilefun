@@ -1,0 +1,10 @@
+{
+  "identity": "sea-lion-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/sea-lion/roster-v3/sea-lion.blend": "9324d6a9988d56ccdebf0407dea4978dab21c3e4482f453c0a1ebde1c61433e8"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

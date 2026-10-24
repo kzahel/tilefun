@@ -1,0 +1,53 @@
+{
+  "identity": "land-tortoise-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "land-tortoise-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "136464c180b7c8517322766ecf09d9cbdd36d68b8f73fc0626e8b0f6efb9f168",
+      "index.html": "33c00190c778d64c3fc6bd82ff19e81f132473df13a3950da1c44decb4792694",
+      "pixel-audit.json": "83e0a3527d1c8ba222be22bea98445e78854e10b60829785bed6a5d04836cc28",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "439430d15e095020fcaaf69ecfdae15f4628899d2f438f725487e990f82becaf",
+      "preview.gif": "26a829c1e71fff92f5dd58b9be18eb4021caf41b06e0776e6bf3ab415f4162c4",
+      "scene-native.png": "f760f34f37925ddfef85d5c46d8f4faa2ca33400fb7e3f03bacfb3f87cc3e5c4",
+      "sheet.png": "ff515b54d10bf69176e839b89bd959a92eec70911b0fe5ab9a4e29f191b9b1b7",
+      "source-audit.json": "fe9476911832521fa38c62fa54d7c1eee0bc40ab1d73ff1714f059c2abda4c40",
+      "sprite.json": "6fd7e691ea6d2b65f6af98aba887c070701da2e57b4d112b855d53ea458b78cc"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/land-tortoise/finish-v1/README.md": "46928cf700ebaff656aec383f5d29b986aadc31fe876297af084afda23cd3d12",
+    "art-source/wildlife-v2/land-tortoise/finish-v1/inputs.json": "ea052c3914460eeb1caa1d5081c8e882ffc9e6170340d118f045a14d66bd2cbf",
+    "art-source/wildlife-v2/land-tortoise/finish-v1/replay.json": "af80d53ebb29240a7d13395dedf980590e0eadba7e197553bb361ba2eb24fda4",
+    "art-source/wildlife-v2/land-tortoise/roster-v2/inputs.json": "09d46df614b4173c9a6ab56cdb853ac0edfaa219e73fd03026c4bc89fa323455",
+    "art-source/wildlife-v2/land-tortoise/roster-v2/land-tortoise.blend": "bbb2f3af7e54a0c1e1610d03e5d5aad64d1052a30f6bcc66cdc35372150085e8",
+    "art-source/wildlife-v2/land-tortoise/roster-v2/projection.json": "5c0878a8b1ad9d49b9c8f7291ae37cb811693d61031a6eb0ab70251008ea39fb",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/contact-sheet-native.png": "136464c180b7c8517322766ecf09d9cbdd36d68b8f73fc0626e8b0f6efb9f168",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/index.html": "33c00190c778d64c3fc6bd82ff19e81f132473df13a3950da1c44decb4792694",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/pixel-audit.json": "83e0a3527d1c8ba222be22bea98445e78854e10b60829785bed6a5d04836cc28",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/preview-native.gif": "439430d15e095020fcaaf69ecfdae15f4628899d2f438f725487e990f82becaf",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/preview.gif": "26a829c1e71fff92f5dd58b9be18eb4021caf41b06e0776e6bf3ab415f4162c4",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/scene-native.png": "f760f34f37925ddfef85d5c46d8f4faa2ca33400fb7e3f03bacfb3f87cc3e5c4",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/sheet.png": "ff515b54d10bf69176e839b89bd959a92eec70911b0fe5ab9a4e29f191b9b1b7",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/source-audit.json": "fe9476911832521fa38c62fa54d7c1eee0bc40ab1d73ff1714f059c2abda4c40",
+    "public/demos/wildlife-v2/land-tortoise/finish-v1/sprite.json": "6fd7e691ea6d2b65f6af98aba887c070701da2e57b4d112b855d53ea458b78cc",
+    "public/demos/wildlife-v2/land-tortoise/roster-v2/sheet.png": "87a83ff502ed705b70afe26ed91e42093c50882fc93dfd8f8827b94b2a89ee8f",
+    "public/demos/wildlife-v2/land-tortoise/roster-v2/sprite.json": "68d4d98e4ce7990ecfbcf781f904c702c6c8261b35c7e0e414316808d2ff80af",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

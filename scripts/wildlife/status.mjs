@@ -345,6 +345,19 @@ export function writeStatus() {
       "",
     );
   }
+  if (existsSync(resolve(ROOT, "art-source/wildlife-v2/finishing-progress.json"))) {
+    const finishing = read("art-source/wildlife-v2/finishing-progress.json");
+    lines.splice(
+      4,
+      0,
+      "## Consistent wildlife paint",
+      "",
+      `${finishing.corrected} corrected whole-bank revisions; ${finishing.retained} retained paint policies across ${finishing.policies} active entries. State: ${clean(finishing.state)}. Exact human review remains ${clean(finishing.humanReview)}.`,
+      "",
+      `${finishing.isolatedReplays} isolated byte-identical replays cover ${finishing.poseCells.toLocaleString("en-US")} pose cells. [Correction and validation](tactical/187-shared-wildlife-finishing.md) · [Finishing contracts](../art-source/wildlife-v2/finishing.json).`,
+      "",
+    );
+  }
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));
   renameSync(temporary, output);

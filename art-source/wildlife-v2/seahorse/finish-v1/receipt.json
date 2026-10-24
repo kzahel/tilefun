@@ -1,0 +1,53 @@
+{
+  "identity": "seahorse-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "seahorse-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "dbbb9638516e322f475f88025989de716e4adb62f85d9f2be5233e368ff1ea82",
+      "index.html": "18ef76501c8bff88d18c0182e08260ed2a9f44b08964829a764dc8a8f8ae65d5",
+      "pixel-audit.json": "9c7eaa6e7f5f39396415e452d1150ee6c22079f2d6ab3fa6b3624827539442d4",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "267a06aec387141f112bbdc7cf13f6525b3d01906857ba8701d9167602db0596",
+      "preview.gif": "e3a1237774e48f82fb30ea17edcc62de8c6b7c9083c9a6c5fbb1f6a89b52a71e",
+      "scene-native.png": "736ce32beb316c6ecf17720038f8900a8e99ae34b29684420769501500040918",
+      "sheet.png": "74d05bfbff619b26d3f671a7fec80f4cf791faac31297cec15fbaf32df3746c2",
+      "source-audit.json": "21689d900b98744b214a0eaba37139647e91cbdca0aa3a49a6f1034b183dab8e",
+      "sprite.json": "ed3fcaf8c140e1977568b21daf6e67ee04b59faecddc6eed0400417d3119ab9c"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/seahorse/finish-v1/README.md": "134f8be29a0245b89bb9cbf80190b95893c473c27d94635569738484aadff3f8",
+    "art-source/wildlife-v2/seahorse/finish-v1/inputs.json": "0c1b2c6b07ba569fd00e810a979b521368448d7bebe2c11754f46c40a9066a0a",
+    "art-source/wildlife-v2/seahorse/finish-v1/replay.json": "2c27d4e3d04c0ecd6f35f105fdfe1157f0bfa567d03d0dba008441d6e7de95af",
+    "art-source/wildlife-v2/seahorse/roster-v3/inputs.json": "78fea8d80af9f767c2c4557744bdc3c6b6b207163aa70a6290d53414535f65ab",
+    "art-source/wildlife-v2/seahorse/roster-v3/projection.json": "85c36b3d2e6e663f9d7057f4a765abc4470ffd5ad1d4046d5afdb6eb13d6e726",
+    "art-source/wildlife-v2/seahorse/roster-v3/seahorse.blend": "c9cb587b59d854d73d17d5fa123065d5e32bca57ecc1ce7bf053fa3049151ad8",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/seahorse/finish-v1/contact-sheet-native.png": "dbbb9638516e322f475f88025989de716e4adb62f85d9f2be5233e368ff1ea82",
+    "public/demos/wildlife-v2/seahorse/finish-v1/index.html": "18ef76501c8bff88d18c0182e08260ed2a9f44b08964829a764dc8a8f8ae65d5",
+    "public/demos/wildlife-v2/seahorse/finish-v1/pixel-audit.json": "9c7eaa6e7f5f39396415e452d1150ee6c22079f2d6ab3fa6b3624827539442d4",
+    "public/demos/wildlife-v2/seahorse/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/seahorse/finish-v1/preview-native.gif": "267a06aec387141f112bbdc7cf13f6525b3d01906857ba8701d9167602db0596",
+    "public/demos/wildlife-v2/seahorse/finish-v1/preview.gif": "e3a1237774e48f82fb30ea17edcc62de8c6b7c9083c9a6c5fbb1f6a89b52a71e",
+    "public/demos/wildlife-v2/seahorse/finish-v1/scene-native.png": "736ce32beb316c6ecf17720038f8900a8e99ae34b29684420769501500040918",
+    "public/demos/wildlife-v2/seahorse/finish-v1/sheet.png": "74d05bfbff619b26d3f671a7fec80f4cf791faac31297cec15fbaf32df3746c2",
+    "public/demos/wildlife-v2/seahorse/finish-v1/source-audit.json": "21689d900b98744b214a0eaba37139647e91cbdca0aa3a49a6f1034b183dab8e",
+    "public/demos/wildlife-v2/seahorse/finish-v1/sprite.json": "ed3fcaf8c140e1977568b21daf6e67ee04b59faecddc6eed0400417d3119ab9c",
+    "public/demos/wildlife-v2/seahorse/roster-v3/sheet.png": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+    "public/demos/wildlife-v2/seahorse/roster-v3/sprite.json": "bb4719f21319c28847aaee71dbbff08fdaaa009ce1e36f8838320d9f55edf7eb",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

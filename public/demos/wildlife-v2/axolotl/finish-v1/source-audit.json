@@ -1,0 +1,10 @@
+{
+  "identity": "axolotl-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/axolotl/roster-v2/axolotl.blend": "443927da44e8133f7231bb25ad8ca4b495632dad91a3c5fc3f255edb6d8223a8"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

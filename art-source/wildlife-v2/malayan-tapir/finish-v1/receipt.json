@@ -1,0 +1,53 @@
+{
+  "identity": "malayan-tapir-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "malayan-tapir-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "bef9ba08ace775b75fcc58b9fe902cffbe24da455c596c07ff3dc820fa696c2a",
+      "index.html": "c24af3960e19f9eb87a722e459c71eb0de4023d5a0496b992e6e0815eef4753b",
+      "pixel-audit.json": "ed6989f56a5e34aef0f41c19ad766490c1f22323e6247c33b3fe09b6368380d2",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "6eca03e47bbc79779a9f8c18d34d650f7fff524f22a28221c2a506c6b93412b0",
+      "preview.gif": "8a9bcde46c623d5195441496abcf2c258b6a4feb461d3b049af6580fa3c00844",
+      "scene-native.png": "1cf864c50e482e201f62bacfa4c444374d9d0722bf9d5908287e0312b41707fa",
+      "sheet.png": "a6c46589bdc7a0084a723dce45a2adc776af39b2dbe232ef047a80c13504e63d",
+      "source-audit.json": "fd66d2c39b9e9455c61026d92e56c7ad1add231bd5b76fa67a99bab411390f1a",
+      "sprite.json": "258dc57420438a867184d12770355a7dc6a7dbb70fc8dfd4b8051a88d94e7147"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/malayan-tapir/finish-v1/README.md": "c8758cfacf7001ee5a58f365361f9ac65cba9281da13a398f058052f48ad1001",
+    "art-source/wildlife-v2/malayan-tapir/finish-v1/inputs.json": "7db7d9287f46ec3572721099d921bcf8a4430cc076afba4e13f64c103f0e720d",
+    "art-source/wildlife-v2/malayan-tapir/finish-v1/replay.json": "b70fcfa410094a03833021d48d243808b1052178be04d9d72fa5fe0dea7af3ca",
+    "art-source/wildlife-v2/malayan-tapir/roster-v2/inputs.json": "fff0ed6166a45d60a89f76b70af7579e253e87877485373a5854945a75290eac",
+    "art-source/wildlife-v2/malayan-tapir/roster-v2/malayan-tapir.blend": "b857288965f40572773bf75ef814d1e01bb1ccc355e21246e8a3b523d3f84750",
+    "art-source/wildlife-v2/malayan-tapir/roster-v2/projection.json": "7befb4006363bc7cb0762054111dcaa94c2a286089a4fb4072d633636c7618ad",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/contact-sheet-native.png": "bef9ba08ace775b75fcc58b9fe902cffbe24da455c596c07ff3dc820fa696c2a",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/index.html": "c24af3960e19f9eb87a722e459c71eb0de4023d5a0496b992e6e0815eef4753b",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/pixel-audit.json": "ed6989f56a5e34aef0f41c19ad766490c1f22323e6247c33b3fe09b6368380d2",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/preview-native.gif": "6eca03e47bbc79779a9f8c18d34d650f7fff524f22a28221c2a506c6b93412b0",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/preview.gif": "8a9bcde46c623d5195441496abcf2c258b6a4feb461d3b049af6580fa3c00844",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/scene-native.png": "1cf864c50e482e201f62bacfa4c444374d9d0722bf9d5908287e0312b41707fa",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/sheet.png": "a6c46589bdc7a0084a723dce45a2adc776af39b2dbe232ef047a80c13504e63d",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/source-audit.json": "fd66d2c39b9e9455c61026d92e56c7ad1add231bd5b76fa67a99bab411390f1a",
+    "public/demos/wildlife-v2/malayan-tapir/finish-v1/sprite.json": "258dc57420438a867184d12770355a7dc6a7dbb70fc8dfd4b8051a88d94e7147",
+    "public/demos/wildlife-v2/malayan-tapir/roster-v2/sheet.png": "a6f11968b3f386b0f564b711889967c9d23a1738d1c6ba4f97d3fa6f00eb73f6",
+    "public/demos/wildlife-v2/malayan-tapir/roster-v2/sprite.json": "3d7ff729a1624b0f2af7ace4c38756d86e93bf2cb5c12967dee5fbddac1b76ad",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

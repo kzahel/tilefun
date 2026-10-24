@@ -1,0 +1,10 @@
+{
+  "identity": "armadillo-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/armadillo/roster-v3/armadillo.blend": "00206065b4940ffc5aedba373ad15bff4e2109ed4901a8e0b5e28aa6bc8f4a70"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

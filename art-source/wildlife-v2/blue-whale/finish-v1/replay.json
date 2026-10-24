@@ -1,0 +1,17 @@
+{
+  "identity": "blue-whale-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "f45c369da87a84dde7c50e385c25c7cb55d5683150c683baa3d22a1afdec5859",
+    "index.html": "252da995abcab2fa379fb5ba4fcb340fa856dd77c2081c001211c76304478d25",
+    "pixel-audit.json": "b417242c971a6f80bbc937e660aa9f156f6f4992f97d393f344cc34db87f3a4b",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "e556bba0a1e235baececa2da1361b660b63b5eaefd3a273edd710ea82738fd72",
+    "preview.gif": "c87c14a7413377ee7c67620e355dc983b1f1f7da2026c4b70559b3af60e4e515",
+    "scene-native.png": "05324ca0ea883b24f0d3e582d17a32c3099aa1f8cfe6066eb5886f4ac60c25f2",
+    "sheet.png": "c95f9c04c1ddf15edb47e0ce7b0379e4f0743ce8d693d4242c44477d1c5d3154",
+    "source-audit.json": "db8cbcf2625ee97fe27b6aedb04404fd7e670bbdb14909bcf942326e340910a9",
+    "sprite.json": "b245c2874be092ca17dfc2b3363a364da538066038f67bbd2c743688c900434a"
+  }
+}

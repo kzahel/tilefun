@@ -1,0 +1,38 @@
+{
+  "identity": "hawk-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "hawk",
+    "name": "Red-tailed hawk",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/hawk/roster-v3/sheet.png",
+    "sourceSha256": "ffaa104b652f30a9653bfab0d7a7ba9efa9aec8006d7fae50efa1e81af742774",
+    "source": "art-source/wildlife-v2/hawk/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#7c6049",
+    "H": "#ac8b62",
+    "C": "#ddc89c",
+    "M": "#9c7954",
+    "N": "#27302f",
+    "E": "#e3bf61",
+    "K": "#27302f",
+    "T": "#d4ad51",
+    "R": "#b75c3b"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/hawk/roster-v3/hawk.blend": "48cc1a712b5cc2d095f179276dc7e3c3d2568ddab6dd6d9907c651130a395017",
+    "art-source/wildlife-v2/hawk/roster-v3/inputs.json": "e2912baf8f6983ea765af264a08db79bb88d9e71249fe9c055a215a50e20d7e8",
+    "art-source/wildlife-v2/hawk/roster-v3/projection.json": "dcd5810132ec168b230f825652f453101631f8f9e71855ddf757fb58a28c0c7c",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/hawk/roster-v3/sheet.png": "ffaa104b652f30a9653bfab0d7a7ba9efa9aec8006d7fae50efa1e81af742774",
+    "public/demos/wildlife-v2/hawk/roster-v3/sprite.json": "cba8fcb2d9e73488311cc4f63f1caaef123d1e47c675543e1b76ba060118d336",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

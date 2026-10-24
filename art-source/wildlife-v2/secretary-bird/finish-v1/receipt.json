@@ -1,0 +1,53 @@
+{
+  "identity": "secretary-bird-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "secretary-bird-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "a17ed4a45b5fac9fcffd89dc29326b09e1d42455d637ce0943b898e655288b6e",
+      "index.html": "228e8dc708fa3b69df8b9657c745e48a47bd29fdf1b3c80ba5ffe3c86a4f2dc2",
+      "pixel-audit.json": "005ebe09be0c33027fb29b7525edfd12aa7cf80ef5ac57e4d473f79071906ba8",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "7acbf227691aeeed6e662e1e8ed2ade8af29c0ba1661b405b38f2de9ec9bd8f2",
+      "preview.gif": "be27458e435632933e488ce31f1f0fa0f1dcb3761ed8bdf8354cc876a2f36044",
+      "scene-native.png": "364d34d574ae7aee7afa1788ad318050e4c2d7f9fe8cfb8bb40435c0aaa5eac7",
+      "sheet.png": "14a4e62ffd1e025bacb3c58e00b79fc8d5b98e224c41b2e35ae9653a465fa4ca",
+      "source-audit.json": "39f14b3600ea1e4c0a098998b6b7e67f048d43b73487d438630d23376a01afb0",
+      "sprite.json": "31e2efbaab4cde742717656696657a847c5e3e34344274a84ba03de95a1936de"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/secretary-bird/finish-v1/README.md": "532b4417119f11fd777b29bee4686460bc3acafb12f34c6490209bfcfc3e0942",
+    "art-source/wildlife-v2/secretary-bird/finish-v1/inputs.json": "1fa4eefbc649af95574a7e3643e981ddeeddf8d006db6c731b4a714d11098aeb",
+    "art-source/wildlife-v2/secretary-bird/finish-v1/replay.json": "6fdc442aeb5e2c378fabb23ea414bf7f1616d98a1e21d8f118f1d24073aa4bbc",
+    "art-source/wildlife-v2/secretary-bird/roster-v3/inputs.json": "ad9c3e5782b6b66d2f674df589f8ddf65304ac4668015daa2b3facd79d82bd4f",
+    "art-source/wildlife-v2/secretary-bird/roster-v3/projection.json": "0ca42175a2669aef1e15ea67722824ee8bdee35b9cb074adaf55e4fed08f5881",
+    "art-source/wildlife-v2/secretary-bird/roster-v3/secretary-bird.blend": "d514043789e01667eb3a19eb66fad874d411bdd208a8b81c57e475a5ac194dcd",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/contact-sheet-native.png": "a17ed4a45b5fac9fcffd89dc29326b09e1d42455d637ce0943b898e655288b6e",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/index.html": "228e8dc708fa3b69df8b9657c745e48a47bd29fdf1b3c80ba5ffe3c86a4f2dc2",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/pixel-audit.json": "005ebe09be0c33027fb29b7525edfd12aa7cf80ef5ac57e4d473f79071906ba8",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/preview-native.gif": "7acbf227691aeeed6e662e1e8ed2ade8af29c0ba1661b405b38f2de9ec9bd8f2",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/preview.gif": "be27458e435632933e488ce31f1f0fa0f1dcb3761ed8bdf8354cc876a2f36044",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/scene-native.png": "364d34d574ae7aee7afa1788ad318050e4c2d7f9fe8cfb8bb40435c0aaa5eac7",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/sheet.png": "14a4e62ffd1e025bacb3c58e00b79fc8d5b98e224c41b2e35ae9653a465fa4ca",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/source-audit.json": "39f14b3600ea1e4c0a098998b6b7e67f048d43b73487d438630d23376a01afb0",
+    "public/demos/wildlife-v2/secretary-bird/finish-v1/sprite.json": "31e2efbaab4cde742717656696657a847c5e3e34344274a84ba03de95a1936de",
+    "public/demos/wildlife-v2/secretary-bird/roster-v3/sheet.png": "52ad465c2849528d2c42068af327f576506d1b36e18afa0dcd98c327ad867ae6",
+    "public/demos/wildlife-v2/secretary-bird/roster-v3/sprite.json": "54c39aff1e1f6d11d1ef60552bd2a66c48b1c00416aee8276f91fe014b981325",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "owl-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/owl/roster-v4/owl.blend": "131dba7b7f75ce7b12dfffadc3f2d812fb62bc6b9faeddfee63eae9627b96332"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

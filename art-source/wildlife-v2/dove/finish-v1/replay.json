@@ -1,0 +1,17 @@
+{
+  "identity": "dove-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "4de7177c7a02e69b0d984bd81bc968a54a9319d555bf6a2fc23869481fa9aedc",
+    "index.html": "743a7b230c208110f44401fa487bca9d2fa8f74c5cc4f41b69cfa87aa0dc1979",
+    "pixel-audit.json": "1ac630af777fa06a9de2ead9573db7442a4edb931a333aaf5e093751bdb8808a",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "299d00e4e08a99e81136587814ac1db6885b7999aa087fbdab8f7d4eec585885",
+    "preview.gif": "ad269c9867faa7f2736656c68a280a31264c4f1e536063c75f023282ac7aee39",
+    "scene-native.png": "e9cf5ac2194534d3260d7e0e0ba956c8479f017e7b1239fa7591860e831e3572",
+    "sheet.png": "36cabd4c7698e1f86e1121bf8ae4ebbcb24faaf4ea00c8cdecdce39e8fa96233",
+    "source-audit.json": "f4f25566c89d86ccf4e16f538e933b56b0273f9220c4f8caaa06a70370ee6d0b",
+    "sprite.json": "65089b62106af963bdfdb44af18f1c11b119c647e40e70c7424a1333c75c605b"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "leafy-seadragon-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "57c7a11cadb828e6b43f500865abc58d6429ea30637074183867a4a9bbb2819e",
+    "index.html": "e2852242b5413be12b42bc9f3fd6c42610282ee9f9ec1bc3d024fddd363d633f",
+    "pixel-audit.json": "5a58875445e35b25e6970d2e749cb74086fa0ab469f9200d6b03a2f5eb1eb7fa",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "fda477b39ce230ade47f7b4a4e76da234a2c52642e54d351f752048079b857e8",
+    "preview.gif": "ea1f656ee62ba2f23d32ddee60edbc0916a2e50b8a30ec5311217b82e3ec2b5c",
+    "scene-native.png": "eb0370e621e1b986d6d21dc6d1849da43ee3b41700922b589a5d4a706f19cfca",
+    "sheet.png": "3f55b2af310b1fc190436b80f27750f1ca5f7f21e4324d9ee348b0f35dbd62b1",
+    "source-audit.json": "54ff2e6c45fffaf890e0d605811daf0f0862e407019503f4568cc943edc72ca2",
+    "sprite.json": "59eb245227c0815fc579a4277e5833399123d70a15496d30ad0311f227e86615"
+  }
+}

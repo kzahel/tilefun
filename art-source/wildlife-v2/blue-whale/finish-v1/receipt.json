@@ -1,0 +1,53 @@
+{
+  "identity": "blue-whale-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "blue-whale-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "f45c369da87a84dde7c50e385c25c7cb55d5683150c683baa3d22a1afdec5859",
+      "index.html": "252da995abcab2fa379fb5ba4fcb340fa856dd77c2081c001211c76304478d25",
+      "pixel-audit.json": "b417242c971a6f80bbc937e660aa9f156f6f4992f97d393f344cc34db87f3a4b",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "e556bba0a1e235baececa2da1361b660b63b5eaefd3a273edd710ea82738fd72",
+      "preview.gif": "c87c14a7413377ee7c67620e355dc983b1f1f7da2026c4b70559b3af60e4e515",
+      "scene-native.png": "05324ca0ea883b24f0d3e582d17a32c3099aa1f8cfe6066eb5886f4ac60c25f2",
+      "sheet.png": "c95f9c04c1ddf15edb47e0ce7b0379e4f0743ce8d693d4242c44477d1c5d3154",
+      "source-audit.json": "db8cbcf2625ee97fe27b6aedb04404fd7e670bbdb14909bcf942326e340910a9",
+      "sprite.json": "b245c2874be092ca17dfc2b3363a364da538066038f67bbd2c743688c900434a"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/blue-whale/finish-v1/README.md": "31771eda1401445e82506f7598f55c7a61b7f10fb0d11d0ce2a913fa1c0b6542",
+    "art-source/wildlife-v2/blue-whale/finish-v1/inputs.json": "97ef14bb9805c9c7b0ff7c1b550a3d47864f40d891033e950ae65383bfb8c6b3",
+    "art-source/wildlife-v2/blue-whale/finish-v1/replay.json": "1496e66df507d46ed02740e28820866b7f92a9352b5961fcf726b01088b40084",
+    "art-source/wildlife-v2/blue-whale/roster-v2/blue-whale.blend": "e0ee081e1df87387665141c6c5e7752ad8af3fb0f24afa45c7dabd82f642cee5",
+    "art-source/wildlife-v2/blue-whale/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/blue-whale/roster-v2/projection.json": "a91d56c1711d67d55636d5ec92a957c9921725cbf7a9d702e54b3a1ff9e4b924",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/contact-sheet-native.png": "f45c369da87a84dde7c50e385c25c7cb55d5683150c683baa3d22a1afdec5859",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/index.html": "252da995abcab2fa379fb5ba4fcb340fa856dd77c2081c001211c76304478d25",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/pixel-audit.json": "b417242c971a6f80bbc937e660aa9f156f6f4992f97d393f344cc34db87f3a4b",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/preview-native.gif": "e556bba0a1e235baececa2da1361b660b63b5eaefd3a273edd710ea82738fd72",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/preview.gif": "c87c14a7413377ee7c67620e355dc983b1f1f7da2026c4b70559b3af60e4e515",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/scene-native.png": "05324ca0ea883b24f0d3e582d17a32c3099aa1f8cfe6066eb5886f4ac60c25f2",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/sheet.png": "c95f9c04c1ddf15edb47e0ce7b0379e4f0743ce8d693d4242c44477d1c5d3154",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/source-audit.json": "db8cbcf2625ee97fe27b6aedb04404fd7e670bbdb14909bcf942326e340910a9",
+    "public/demos/wildlife-v2/blue-whale/finish-v1/sprite.json": "b245c2874be092ca17dfc2b3363a364da538066038f67bbd2c743688c900434a",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/sheet.png": "15641849a3c5bf3a9d66694629ab00467a717fb5699204b1bf796a2c0950b875",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/sprite.json": "d4a0d7cdf1443650cf21269110c30cb3ecd2cfe0daaba9bd03503fb71ddc0af9",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

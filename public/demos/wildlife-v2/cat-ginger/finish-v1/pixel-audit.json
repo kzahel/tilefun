@@ -1,0 +1,13 @@
+{
+  "identity": "cat-ginger-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "retained-parts",
+  "surfaceCells": 0,
+  "retainedPartCells": 176,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "nativeCellsUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 260,
+  "sheetSha256": "57e556fbc3d1bfbcc1ff75f3d1f169972a6b9d9fa6c7284833d51a0f8a09b2e1"
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "praying-mantis-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "a768d4265fe45672a1f0366652ce1f409243c80be9ab67a6a0f400444feffe41",
+    "index.html": "ad38c3158419e0d0c1ee2e0759881d328f8689317d17cf6f052d2e30301c9c47",
+    "pixel-audit.json": "677e7f4ff4940d82752630e139200b9119449d1b89da7424cf5eaf0151cdd4b9",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "fe02b9cb47d044c26c94cb4e1e0cdeff7c94b340599637e02209387c2bf5e2b1",
+    "preview.gif": "9189719f4661de93d6a6395083e8e0c5c639e1f53d59ac1848bd1b87a399b83f",
+    "scene-native.png": "b85c6f4b21032adcd1414fcf14d1514e9427cdb118a5fc6494f8d6f4d19ee6fc",
+    "sheet.png": "ecd3f24b9ebed705c348a33f1e78beb74dffb4e0866e281b050b94d9c1371a84",
+    "source-audit.json": "0581cd17c20a7ee482e510070ae7fca1eea3d476a08898bc87148b7dab93150d",
+    "sprite.json": "b99541b69834df8fbf07347b101b287f359b7ec59bd1ff36cae3ecc5a89c179a"
+  }
+}

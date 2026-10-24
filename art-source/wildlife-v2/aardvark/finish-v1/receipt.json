@@ -1,0 +1,53 @@
+{
+  "identity": "aardvark-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "aardvark-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "3b0598c215d8662d3cffa6a13267f1a7120a912b4e50a5e3520e9b1a82e44cf5",
+      "index.html": "8aecba8c0404b31e5bf694ca6737ddfe5496b8360e3dce5eeb7dcd70aac2baad",
+      "pixel-audit.json": "ec9af289f523f98e42e5fb08f3fcf6eb642085bad70b83e34411952d0dd1fc13",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "f3dc70a06d53a36b4d8f61edad4dbe6dd263e400c26d2c4754dfbd7d8cfdc0fc",
+      "preview.gif": "ab356f0fe0f8fccc41991aa4e7e0b30a4b2941c80a99bae5c9b02ca28fe29981",
+      "scene-native.png": "0b0c6a3b9034de5fe2dcc2f018eac1c53a2a46fbeb94ad27c997e6d9866f026f",
+      "sheet.png": "5e0e4cb6ce36b7749ef6ec2bb429ead11e102cca726081b8ddc2f8c0d592f76e",
+      "source-audit.json": "b978246a281992bb5a81cd15db7bdd2f583bdd36dcd6aba39d9e40f35a8273bb",
+      "sprite.json": "c4a1e24bcec66eed466ceaf0ba831250ffb005f3c30b496bed6a81c5fa32bbb6"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/aardvark/finish-v1/README.md": "db8c7fd109ee915bc6fc0a74b3e6eb1726aa70cf32ecf14cd31eaa441ddd14d5",
+    "art-source/wildlife-v2/aardvark/finish-v1/inputs.json": "b2e7535bb9f7958f48eef4b5bf4fe0f9c699da151c09a192bb57aad708820800",
+    "art-source/wildlife-v2/aardvark/finish-v1/replay.json": "0a8a1cc626d8271b7596d3ef4c9ae49e15b5a33b9c29445f97879caaccde8043",
+    "art-source/wildlife-v2/aardvark/roster-v3/aardvark.blend": "8976ec817323ea4da2b7756d6193cfb77553bba2ca3ab3219b3299dade4de742",
+    "art-source/wildlife-v2/aardvark/roster-v3/inputs.json": "bf9832259995311caccb5306e0f755e90bcd7746cb47ff601b9e97a181776ee4",
+    "art-source/wildlife-v2/aardvark/roster-v3/projection.json": "021f88b16696a30745871b5c80af38a62648085b72ae585b6811f295af80effc",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/aardvark/finish-v1/contact-sheet-native.png": "3b0598c215d8662d3cffa6a13267f1a7120a912b4e50a5e3520e9b1a82e44cf5",
+    "public/demos/wildlife-v2/aardvark/finish-v1/index.html": "8aecba8c0404b31e5bf694ca6737ddfe5496b8360e3dce5eeb7dcd70aac2baad",
+    "public/demos/wildlife-v2/aardvark/finish-v1/pixel-audit.json": "ec9af289f523f98e42e5fb08f3fcf6eb642085bad70b83e34411952d0dd1fc13",
+    "public/demos/wildlife-v2/aardvark/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/aardvark/finish-v1/preview-native.gif": "f3dc70a06d53a36b4d8f61edad4dbe6dd263e400c26d2c4754dfbd7d8cfdc0fc",
+    "public/demos/wildlife-v2/aardvark/finish-v1/preview.gif": "ab356f0fe0f8fccc41991aa4e7e0b30a4b2941c80a99bae5c9b02ca28fe29981",
+    "public/demos/wildlife-v2/aardvark/finish-v1/scene-native.png": "0b0c6a3b9034de5fe2dcc2f018eac1c53a2a46fbeb94ad27c997e6d9866f026f",
+    "public/demos/wildlife-v2/aardvark/finish-v1/sheet.png": "5e0e4cb6ce36b7749ef6ec2bb429ead11e102cca726081b8ddc2f8c0d592f76e",
+    "public/demos/wildlife-v2/aardvark/finish-v1/source-audit.json": "b978246a281992bb5a81cd15db7bdd2f583bdd36dcd6aba39d9e40f35a8273bb",
+    "public/demos/wildlife-v2/aardvark/finish-v1/sprite.json": "c4a1e24bcec66eed466ceaf0ba831250ffb005f3c30b496bed6a81c5fa32bbb6",
+    "public/demos/wildlife-v2/aardvark/roster-v3/sheet.png": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865",
+    "public/demos/wildlife-v2/aardvark/roster-v3/sprite.json": "8f142b3c80d25eb91c2768b22465792e8906cec8f2d7a3bcaf459f81bb4da217",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

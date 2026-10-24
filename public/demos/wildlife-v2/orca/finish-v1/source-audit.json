@@ -1,0 +1,10 @@
+{
+  "identity": "orca-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/orca/roster-v2/orca.blend": "b78abbf2f93439758ce593d8387403e9fb578de9ceadd9826eb26b8df60f09d6"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

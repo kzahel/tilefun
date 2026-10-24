@@ -1,0 +1,17 @@
+{
+  "identity": "platypus-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "e8c0b442bb6accf2ef445ee8d11bd8e02a3f8e3ce176bc18edf7b86aef1012f5",
+    "index.html": "e0f7835c9a09fefdae40e6e11f378e05077cd6b9f71f25cb107f65b8baa2e944",
+    "pixel-audit.json": "ee063d5dae64ed00ff332893c68227461d1e58c9ad25ca6d1aa79d15e0b2623f",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "1444afc70c0f3057e43d0ce91c2e26ac6ad56a595bd09fbfb2bb495e64af3383",
+    "preview.gif": "e06828dc5af9c4d9d21ed064ed06ee4bfac8ada909654eebb50e8391af0c98a3",
+    "scene-native.png": "18a179961c0ae1c9afb8528ed86a77b9a773debf9ff9e780f4ad95f854c00058",
+    "sheet.png": "b1be37e45672a97901700eb54dd5b5f9d2ccbdd835bb29df2299ded4fd8c31be",
+    "source-audit.json": "5bef4102fe7aba14dd952ac60787399ac43937450a9fa7f43f94832a74063805",
+    "sprite.json": "effb459c93a557660588558d744ea92a1e0eb9bee25ae5434974a7fb1089e397"
+  }
+}

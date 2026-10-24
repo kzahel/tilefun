@@ -1,0 +1,10 @@
+{
+  "identity": "sea-turtle-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/sea-turtle/roster-v2/sea-turtle.blend": "3dee930b16dc59aaec984c84c271b3bd701cd20fdc2c6f61b7023e2f1667cf56"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

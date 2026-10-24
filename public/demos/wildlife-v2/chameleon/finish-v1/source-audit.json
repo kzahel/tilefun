@@ -1,0 +1,10 @@
+{
+  "identity": "chameleon-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/chameleon/roster-v2/chameleon.blend": "4659fb76722568f5dc16241c93a65e6d18a8ff290f0511f41029141e5998cc14"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

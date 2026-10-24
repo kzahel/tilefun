@@ -1,0 +1,38 @@
+{
+  "identity": "pelican-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "pelican",
+    "name": "Pelican",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/pelican/roster-v3/sheet.png",
+    "sourceSha256": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e",
+    "source": "art-source/wildlife-v2/pelican/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#e4e2cc",
+    "H": "#aaa996",
+    "C": "#efead4",
+    "M": "#454b4a",
+    "T": "#d6bd7e",
+    "R": "#a78653",
+    "N": "#192b30",
+    "K": "#23323a",
+    "E": "#e0d4a5"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/pelican/roster-v3/inputs.json": "7c2eafc0ceafc9c3e4dc245e9ed298efa6d1c00ec14a626fe5d95b47a9f46ae1",
+    "art-source/wildlife-v2/pelican/roster-v3/pelican.blend": "091b786f60acb141bcb8692929ed47ad1e7c3f08dbf3357034a9ec5570d0a336",
+    "art-source/wildlife-v2/pelican/roster-v3/projection.json": "607ecc3dca65d67cb6d445a003687c3b782fb8e47ef6b24d86f88061e43fc287",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/pelican/roster-v3/sheet.png": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e",
+    "public/demos/wildlife-v2/pelican/roster-v3/sprite.json": "8ea93471f6884fbbda9b6bcd7d85a6a61f7eb074f79417765308d1efd0e57ea1",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

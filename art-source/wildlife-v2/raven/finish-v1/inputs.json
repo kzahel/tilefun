@@ -1,0 +1,44 @@
+{
+  "identity": "raven-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "raven",
+    "name": "Raven",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/raven/behavior-v1/sheet.png",
+    "sourceSha256": "aa700a8768a5913d156a8ca221299ef5c5c91fea7fb53108d60803e0f644f2af",
+    "source": "art-source/wildlife-v2/raven/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#26333d",
+    "H": "#536373",
+    "C": "#344452",
+    "M": "#25313d",
+    "N": "#141b25",
+    "E": "#d2b77b",
+    "K": "#141b25",
+    "T": "#43515b",
+    "R": "#737a7b"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/raven/behavior-v1/inputs.json": "ebc07f0571cca8af12ab3a6f2a97fd13997fc677dca93ddda1adbe4be0360bab",
+    "art-source/wildlife-v2/raven/behavior-v1/projection.json": "c54fa5bb1f661199b4136aa963665e98dd30dca5af399ddc197ed170e04dd8ce",
+    "art-source/wildlife-v2/raven/behavior-v1/raven.blend": "ebcb6459feda5c2391b58e70cfb7054e60dd75b33ee5357572c1ba17e194cea9",
+    "art-source/wildlife-v2/raven/roster-v3/inputs.json": "5448129dc271fdfab2e09ac453cb23f336e0b7280dbbb22658b8c910ec9d0f12",
+    "art-source/wildlife-v2/raven/roster-v3/masters.json": "f63ffb8f4b216ee7a29017bd0b3f004e7b5f969ac918ecafd32d8a216b0a11e1",
+    "art-source/wildlife-v2/raven/roster-v3/projection.json": "16e20109760800aae9566ac7b8bfe93f8b51811d9cadf31fd112292bf38b18a5",
+    "art-source/wildlife-v2/raven/roster-v3/raven.blend": "4ecc257c16ac858fe39181557a9de467ba87c4af7657dc17aebf71379e189616",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/raven/behavior-v1/sheet.png": "aa700a8768a5913d156a8ca221299ef5c5c91fea7fb53108d60803e0f644f2af",
+    "public/demos/wildlife-v2/raven/behavior-v1/sprite.json": "64705f261f395bce54ee06f18f333c92eb544b76d6692d1c0537807a909a6136",
+    "public/demos/wildlife-v2/raven/roster-v3/sheet.png": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9",
+    "public/demos/wildlife-v2/raven/roster-v3/sprite.json": "b49e2743852c64b3b2675883500d3a42fe11a128f1d10483b2d07e8479319245",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

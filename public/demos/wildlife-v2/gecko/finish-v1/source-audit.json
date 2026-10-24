@@ -1,0 +1,10 @@
+{
+  "identity": "gecko-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/gecko/roster-v2/gecko.blend": "cb0b906be5b2cc30613baeed8c29896c0b138ce75d63ee3d5ac9e7467b93c060"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,12 @@
+{
+  "identity": "echidna-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "6516d657e9f130a84ee01d7bfc3d9ca95122c086626c7079706022f3b936f3b4"
+}

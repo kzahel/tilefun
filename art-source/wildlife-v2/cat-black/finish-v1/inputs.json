@@ -1,0 +1,41 @@
+{
+  "identity": "cat-black-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "cat-black",
+    "name": "Black cat",
+    "policy": "retained-parts",
+    "sourceImage": "demos/wildlife-v2/cat-black/behavior-v1/sheet.png",
+    "sourceSha256": "0e7dbc7f232119c7586529fab856ba3145888c36a67e8a46f7e6a554b71a6955",
+    "source": "art-source/wildlife-v2/cat-black/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "k": "#171e28",
+    "s": "#2b3341",
+    "c": "#454e5e",
+    "h": "#677083",
+    "w": "#3b4352",
+    "g": "#303849",
+    "e": "#dfc36d",
+    "p": "#bc828d"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/cat-black/behavior-v1/inputs.json": "f2280b8d4cceeb836beab0003e93e763c0fe8f9b7fa3dbd733b45b1ba9e2eb91",
+    "art-source/wildlife-v2/cat-black/draft-v1/animal.blend": "752ec6c1fc8f5c2496932453115344855455b0900db2ddb439e7aff79cb9dee1",
+    "art-source/wildlife-v2/cat-black/draft-v1/masters.json": "19775fb09b482a91b55db7fb39f46d39a8d7a555b6a6127e3226e317720f4535",
+    "art-source/wildlife-v2/cat-black/finish-v1/paint-projection.json": "60e3f3e819c6e7483e8ff33c59a7eaaa1f21fac386c1841058482007c8b9464e",
+    "art-source/wildlife-v2/cat/behavior-v1/cat.blend": "9f890894247530c0065857eca715a46b469202e151181bcbd58f6ab9b24a2167",
+    "art-source/wildlife-v2/cat/behavior-v1/projection.json": "4879670898ac1c44413fcaf582a5eace44aed78970413fab3b06220b1b9b258e",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/cat-black/behavior-v1/sheet.png": "0e7dbc7f232119c7586529fab856ba3145888c36a67e8a46f7e6a554b71a6955",
+    "public/demos/wildlife-v2/cat-black/behavior-v1/sprite.json": "58c4d4a74b5a233e09e02d25ced22766418fbd30d2513a993739afc23f2dc2b1",
+    "public/demos/wildlife-v2/cat-black/draft-v1/sheet.png": "ada428cfca901ba8bc2283e2f7dec2ae5c13a4ba66df493294b7a4cd78e7fc5c",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

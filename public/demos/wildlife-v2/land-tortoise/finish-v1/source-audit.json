@@ -1,0 +1,10 @@
+{
+  "identity": "land-tortoise-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/land-tortoise/roster-v2/land-tortoise.blend": "bbb2f3af7e54a0c1e1610d03e5d5aad64d1052a30f6bcc66cdc35372150085e8"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

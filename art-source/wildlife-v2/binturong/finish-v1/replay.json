@@ -1,0 +1,17 @@
+{
+  "identity": "binturong-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "c2b220033451d47b14222d9279640346ba4665c8ffc6ffa861d878c7a11196f9",
+    "index.html": "642594628ddaa8f93e1f39c78bfbfeccd6e241a0521f420f20331d2e643eef20",
+    "pixel-audit.json": "8b308ce75cb396ae2aef7bd3be06ee945c48770f3f36f25dac0f658924213e77",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "79908082a209f1ad6139de6ef04a5071fa08f6f04b103e18ca88b714f77f41bd",
+    "preview.gif": "7869e10e15e195fff3046aa49c618762100aa79bfe960f396f19a11f56ab0cdf",
+    "scene-native.png": "af3214e83e5bfb9097bf6d930f1272d4ac253aef8d0d1ecaa68c0ad05da935bb",
+    "sheet.png": "2215761d8a2ef5cb3649ce496287820e1e50aae2f2ac4517c939d0997117dc08",
+    "source-audit.json": "ddc5385cd3706fa41f385bcf72ae842d1fa9f94b25c4c6661b4cb4bd98d64e83",
+    "sprite.json": "b30336e662b200d6bdb3bbd194e84181511b9e60ca3fa5912ed2bb7cf4727b07"
+  }
+}

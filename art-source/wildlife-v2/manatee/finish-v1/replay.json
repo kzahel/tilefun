@@ -1,0 +1,17 @@
+{
+  "identity": "manatee-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "c225192187869da15e67e1cac0d0fc1c3795a26be6a199f5b32d15d1577814b9",
+    "index.html": "b95ecf03ec15bbc141bba32a4a658dbabe4a3c92c5efced2f5bb4123654a3e4a",
+    "pixel-audit.json": "0f3d7a90cff8aff934e0eaa34a58d37d81cc20bd05de68726fc0de7e7ead66b0",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "6eb9bb851492714ac8fb28a25f8c9549257923f60dfc54e2b7187e26ed054aee",
+    "preview.gif": "a6661de0f0619a7acc3ba2f2ab183179f596e8368accf84b9e0d58733a666d38",
+    "scene-native.png": "238e89d1f061536cbd26ffa92faf875bde2634f9bba1e74f005609215e682868",
+    "sheet.png": "b259c93d8dfbeac5e32d809fb5f3ef10053a4845587808a38a46a87a99c8bbc3",
+    "source-audit.json": "c3e7551e048c47b5e1c16cdda3a49edea02d9f93a06ff4940188e4f75e5cc4b2",
+    "sprite.json": "87ca106face4cfab0b2aa6036d4050b4ba87777fe6cab00f267b575fc4f5d4c8"
+  }
+}

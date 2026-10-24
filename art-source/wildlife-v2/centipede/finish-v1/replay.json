@@ -1,0 +1,17 @@
+{
+  "identity": "centipede-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "5d682f2ce6d7bc7b18a259808c9aeec2822eab1a9940f7104fc19292dfeef5a8",
+    "index.html": "c2067fc72d39e0a1b18ac1af11ef4ed6f78e32951d81d75d39b9e5d1954c53fe",
+    "pixel-audit.json": "3ecec27d2a186e07c70de71f5e6f7c48beabdfdd891e57f7016c2f65dc73236e",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "e989fb4b6c8d570adfdc01294ec80c87daf369fd077d3cd6dda805a2e7d37b0f",
+    "preview.gif": "45071f22548be2336cd69ccb2a2483d4212c0eda47ff79b7420099ed4944455c",
+    "scene-native.png": "ea45309879cb74c78363308bec15752839e5548a2669c166bde039efe63cdd4b",
+    "sheet.png": "ea60bd93425b9e206d973ddb8f0f92469a1594f46f37ec434de83f9744adf9cd",
+    "source-audit.json": "2da6d487e7553702358ed29a3e88284c202c734db2626503d3449d2a7e997a79",
+    "sprite.json": "939772b6288a159a07b95b19b04767cb66fe2f1a821184f7f98fc601946f28ff"
+  }
+}

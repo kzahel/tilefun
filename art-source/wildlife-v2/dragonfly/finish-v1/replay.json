@@ -1,0 +1,17 @@
+{
+  "identity": "dragonfly-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "56e73ffd296672ca4661478d26e754758e5834502ce99dda8c0dbf4b31010b3f",
+    "index.html": "e77bde53a902dfda016da92cfca294ec320eda4108f5cf3c66eaf9198646b8e5",
+    "pixel-audit.json": "57df27be2131710965a89180e67fde88cc0cf53c97cddd9013a3f7e7e7d8d10c",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "dc8bd1fbcfda3292293ccffa0e60c5653b7a9214ee6d366b74361b9c9f91cbae",
+    "preview.gif": "edb37287b092693f22fdd2dcc529d385a81398b22a3050f7de954e3b2e137987",
+    "scene-native.png": "eb5499ba84be6a060e76d3926f0ebb2e55466f33dd0a83e009c86d77e88c2a24",
+    "sheet.png": "38fe8d0d5142a07486e47c7a3957aa3622b43d950308b33b4e61813bc493dfff",
+    "source-audit.json": "d39188737a1adeb11cdcd1dab6499420d8ed8c92905beade7f28e35a8e1fe75f",
+    "sprite.json": "bb5f995013afacffc14f0051ace05b5ed928ee86518d230bc18c330b943c767b"
+  }
+}

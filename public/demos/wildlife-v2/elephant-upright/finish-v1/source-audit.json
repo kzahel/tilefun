@@ -1,0 +1,10 @@
+{
+  "identity": "elephant-upright-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/elephant-upright/roster-v3/elephant-upright.blend": "6e90dea00282f3ebc0244bcba207a45e6a7c4b8457399a44b9f73172c4b0d146"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

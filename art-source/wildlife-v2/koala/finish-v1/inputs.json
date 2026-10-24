@@ -1,0 +1,36 @@
+{
+  "identity": "koala-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "koala",
+    "name": "Koala",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/koala/roster-v2/sheet.png",
+    "sourceSha256": "b347c16c73220abdea9260e1630f21ef3cfe9d3e9c0532d0a2dd70df08bfc1bf",
+    "source": "art-source/wildlife-v2/koala/roster-v2",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#272f34",
+    "B": "#8c9693",
+    "H": "#bac2b9",
+    "C": "#ded8be",
+    "M": "#5f6866",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/koala/roster-v2/inputs.json": "fff0ed6166a45d60a89f76b70af7579e253e87877485373a5854945a75290eac",
+    "art-source/wildlife-v2/koala/roster-v2/koala.blend": "8d392a31db3f054ea2e8a0c9f04165bf8df850ee7695521ae150cade30ac9c38",
+    "art-source/wildlife-v2/koala/roster-v2/projection.json": "eced7deae1436e273b1679a80fb881f1010a06e1996073f723f47ff3ad28d3fc",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/koala/roster-v2/sheet.png": "b347c16c73220abdea9260e1630f21ef3cfe9d3e9c0532d0a2dd70df08bfc1bf",
+    "public/demos/wildlife-v2/koala/roster-v2/sprite.json": "f5d1b8b9123fbd25c510a4152fc3237523ce71907fdc99d90413d81fb554ed00",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

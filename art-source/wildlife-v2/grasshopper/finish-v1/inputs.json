@@ -1,0 +1,36 @@
+{
+  "identity": "grasshopper-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "grasshopper",
+    "name": "Grasshopper",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/grasshopper/roster-v2/sheet.png",
+    "sourceSha256": "c2fd6af6adff938c92831d3d62fddccac72ee6c41e1707388fc9e91841fcec45",
+    "source": "art-source/wildlife-v2/grasshopper/roster-v2",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#29332d",
+    "B": "#79994b",
+    "H": "#b1b86d",
+    "M": "#4d6840",
+    "E": "#3b4538",
+    "W": "#dbd4aa",
+    "G": "#8d9b6f"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/grasshopper/roster-v2/grasshopper.blend": "aeb80d84cfea46f529daad596c0a4f10c63c8db28bc19883b0967fc0bbd9aa12",
+    "art-source/wildlife-v2/grasshopper/roster-v2/inputs.json": "dc32cda3d25005467a209a8428424d9be900ad2cd6e1a4e5b71d1ac0d4e9ee7c",
+    "art-source/wildlife-v2/grasshopper/roster-v2/projection.json": "56b714ccfcad9a5f6f1d1f1d0f7526b8e3772c5af5cbc07eaca0f4a285f48f86",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/grasshopper/roster-v2/sheet.png": "c2fd6af6adff938c92831d3d62fddccac72ee6c41e1707388fc9e91841fcec45",
+    "public/demos/wildlife-v2/grasshopper/roster-v2/sprite.json": "f915be9ad482a6d0d11c868bbd92005e553fe1d5fa52f8e22a96f2d15b45ddca",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

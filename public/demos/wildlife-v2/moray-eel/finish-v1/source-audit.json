@@ -1,0 +1,10 @@
+{
+  "identity": "moray-eel-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/moray-eel/roster-v3/moray-eel.blend": "eb3d5d76d97bc5553c797f158309bb189d870fa1ca2022c27803d5fca787200d"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

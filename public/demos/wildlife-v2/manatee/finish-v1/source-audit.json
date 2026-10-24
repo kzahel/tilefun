@@ -1,0 +1,10 @@
+{
+  "identity": "manatee-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/manatee/roster-v3/manatee.blend": "93fbb150e0dd8b9f8a71a386a399d857a39b84343ff3c86a2e638639163eecb2"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

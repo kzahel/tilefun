@@ -1,0 +1,17 @@
+{
+  "identity": "wild-turkey-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "1f1f417e879d90a6cb68a7e3b9d40b91a2ee71be0d5bdf62b69c207d7976b503",
+    "index.html": "852493ca1e40ed98a88b5f2e293717a153a701e8d2cf4a282296bed85f7069aa",
+    "pixel-audit.json": "b30fa6b04626d0602b2dafa0edff81e90d770dd25e6cc02b561d888a8f0e70a3",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "e18601eb6b391296c7b91661349cca6ebe039d08d16386539bfff7a4b03de88f",
+    "preview.gif": "51256579807acfdad3d2712a2b68d3d591b2e458fb6a8ba5227971ec049b3927",
+    "scene-native.png": "dd255759398020140cbfd9c3a4beea752dd00cf2524c77f57f5668a0ef30c608",
+    "sheet.png": "f741f9c7332d5bb6e14655c6c05e7305840325a16f69fcf1e9dacf441d979566",
+    "source-audit.json": "7dee5460a544971e81da0c5a51feb43e725124e03d19ab484241c6dfec5a60d3",
+    "sprite.json": "0dd15f3525dead7932ee13914e639438f682d4c4211fa4e3f3e3e29533f02c5a"
+  }
+}

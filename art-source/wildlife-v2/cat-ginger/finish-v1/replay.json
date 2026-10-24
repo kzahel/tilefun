@@ -1,0 +1,17 @@
+{
+  "identity": "cat-ginger-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "98be49d62b9fb550f20ba3a1424d4fcaea2021c8925de12c3efdc01330f81819",
+    "index.html": "fdd3e173ef50f1621c8b3e6bb5bfb9d2926076956ce38aa04078137b56ff5fdd",
+    "pixel-audit.json": "45ad826acfe962443f7391edcf0971a4995d20b0134e955159170aa433a1e839",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "40900f649499af8458a6b7904c0661f381320db7d3f9bff47e7eb8f07f70afee",
+    "preview.gif": "ea8b0a2375db65ba196e6fac4541a503dcd23758612481c93db05b45efab03b2",
+    "scene-native.png": "07e0e56e78b946c4ee9b3a6e1294d3fecebc49ef75377db8075c5322135da05d",
+    "sheet.png": "57e556fbc3d1bfbcc1ff75f3d1f169972a6b9d9fa6c7284833d51a0f8a09b2e1",
+    "source-audit.json": "892605f6b6302c6742c13d9b9a6ae10b318b3e2c222b7cfb17717f188249e590",
+    "sprite.json": "0b850afe35a0761c7b12c0e2e4e369d64c15e9b369255981de9611fde7fbc697"
+  }
+}

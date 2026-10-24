@@ -1,0 +1,51 @@
+{
+  "identity": "ruby-throated-hummingbird-finish-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "sip",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "fly": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 25
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "sip": {
+      "start": 41,
+      "count": 16,
+      "frameDuration": 40,
+      "loop": true
+    },
+    "guard": {
+      "start": 57,
+      "count": 16,
+      "frameDuration": 40,
+      "loop": true
+    }
+  },
+  "sheetSha256": "975900f9d142bd02de4f1002a1e77b8dfc04f51e1b65d65437bf1f8a4988aa46",
+  "finishing": {
+    "policy": "wildlife-paint-v1",
+    "method": "material-surfaces",
+    "contract": "ruby-throated-hummingbird-finish-v1",
+    "predecessorImage": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/sheet.png",
+    "predecessorSha256": "5b24feb59e4abd62bfa287a4243cc5a83335ceeb3d75f2197b88679e25fecc52",
+    "source": "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1"
+  }
+}

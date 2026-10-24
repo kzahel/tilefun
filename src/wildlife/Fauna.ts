@@ -7,6 +7,7 @@ import { CONTINUATION_BIRD_PROFILES } from "./ContinuationBirds.js";
 import { CRUSTACEAN_FAUNA_PROFILES } from "./Crustaceans.js";
 import { DISTINCT_FISH_FAUNA_PROFILES } from "./DistinctFish.js";
 import type { FAUNA_EXPANSION_ROSTER, UPRIGHT_COMPANION_SPECIES } from "./FaunaExpansion.js";
+import { finishedFaunaArt } from "./FinishedArt.js";
 import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
 import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
 import { FOREST_SPECIALIST_PROFILES } from "./ForestSpecialists.js";
@@ -1399,7 +1400,9 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
       ],
     };
   }),
-].map(behaviorArt);
+]
+  .map(behaviorArt)
+  .map(finishedFaunaArt);
 /** Same cat/dog habitat owner, independent deterministic coat choice. */
 export function petCoat(species: "cat" | "dog", roll: number): FaunaSpecies {
   const coats: FaunaSpecies[] = [

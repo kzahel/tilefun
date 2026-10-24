@@ -1,0 +1,10 @@
+{
+  "identity": "platypus-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/platypus/roster-v3/platypus.blend": "0ced139ce683c3bbc34e9a043729403214ff0b90306f3b54edb34ee3abe0e3c3"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

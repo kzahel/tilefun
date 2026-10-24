@@ -1,0 +1,53 @@
+{
+  "identity": "great-blue-heron-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "great-blue-heron-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "16b8df15e0ae19ce45a1048692a9e554bcaeca49e030fa0aff2ceb7f2cee290d",
+      "index.html": "9ead198cc333f5a70dd959cb23312aa1e442841b07883bf5bac27165e0ff6f8f",
+      "pixel-audit.json": "cac5c4cc5595f2801ba83b0c58e4b0ef35c4040b4fed85c33cf0667a9e371bff",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "462fa8350f1ba4c72b7b3fff5ce7b1d4de550b739caab364a39c62151f7f582b",
+      "preview.gif": "c8748db5f400f7640b7a28f6886642c8f0fe64f1447389ff0039f119ad70c0f0",
+      "scene-native.png": "945f6db2729f98b28788bd76512438e0df8a5c995d097c0a0347e3b09817f590",
+      "sheet.png": "460139ed5b2b43927b43a663df97dba9df1edbde19667ef9d41746f18079069a",
+      "source-audit.json": "eff43916817dc42f1c7f0875373c173ce2277926ee96aa476a8395f9a1a7e9d0",
+      "sprite.json": "fec2edcd1e19098027ed1d428685c5b3e603cf0f0db496cf7a5ea118e557e061"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/great-blue-heron/finish-v1/README.md": "ade781308184dd011b9365c89011db8a955cc0cf8719beb48fe71610be41f700",
+    "art-source/wildlife-v2/great-blue-heron/finish-v1/inputs.json": "59d175e84612c5fea073d966e996f9097611d413f83c7ffd7fe7b2b24dfb2fe1",
+    "art-source/wildlife-v2/great-blue-heron/finish-v1/replay.json": "f01d4adf291a14b5e5453afeb0b263aa44c819781f5a32df888e4b7a087c07dc",
+    "art-source/wildlife-v2/great-blue-heron/roster-v3/great-blue-heron.blend": "7ba8a0d12510269d7dbf2a8b46c00932014ed2f03ef7710caef8fb4b0f53e729",
+    "art-source/wildlife-v2/great-blue-heron/roster-v3/inputs.json": "ad9c3e5782b6b66d2f674df589f8ddf65304ac4668015daa2b3facd79d82bd4f",
+    "art-source/wildlife-v2/great-blue-heron/roster-v3/projection.json": "dfe972d7aac8216906df3d914842b9fc6135966f94ae0f3ecd3b5971cf2f7877",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/contact-sheet-native.png": "16b8df15e0ae19ce45a1048692a9e554bcaeca49e030fa0aff2ceb7f2cee290d",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/index.html": "9ead198cc333f5a70dd959cb23312aa1e442841b07883bf5bac27165e0ff6f8f",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/pixel-audit.json": "cac5c4cc5595f2801ba83b0c58e4b0ef35c4040b4fed85c33cf0667a9e371bff",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/preview-native.gif": "462fa8350f1ba4c72b7b3fff5ce7b1d4de550b739caab364a39c62151f7f582b",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/preview.gif": "c8748db5f400f7640b7a28f6886642c8f0fe64f1447389ff0039f119ad70c0f0",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/scene-native.png": "945f6db2729f98b28788bd76512438e0df8a5c995d097c0a0347e3b09817f590",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/sheet.png": "460139ed5b2b43927b43a663df97dba9df1edbde19667ef9d41746f18079069a",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/source-audit.json": "eff43916817dc42f1c7f0875373c173ce2277926ee96aa476a8395f9a1a7e9d0",
+    "public/demos/wildlife-v2/great-blue-heron/finish-v1/sprite.json": "fec2edcd1e19098027ed1d428685c5b3e603cf0f0db496cf7a5ea118e557e061",
+    "public/demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
+    "public/demos/wildlife-v2/great-blue-heron/roster-v3/sprite.json": "9c7a9962aa7097c18b4ebc40eea876158143e7aace952712345d50b294905736",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

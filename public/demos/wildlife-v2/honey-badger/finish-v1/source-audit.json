@@ -1,0 +1,10 @@
+{
+  "identity": "honey-badger-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/honey-badger/roster-v2/honey-badger.blend": "fcda2ec0dcf6ce72a3720a57084a0ed6ec5b5cefcdafd33b87b02696dfba0dc9"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

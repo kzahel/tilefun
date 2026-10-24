@@ -1,0 +1,44 @@
+{
+  "identity": "ruby-throated-hummingbird-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "ruby-throated-hummingbird",
+    "name": "Ruby-throated hummingbird",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/sheet.png",
+    "sourceSha256": "5b24feb59e4abd62bfa287a4243cc5a83335ceeb3d75f2197b88679e25fecc52",
+    "source": "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#437b58",
+    "H": "#78a176",
+    "C": "#c7cdb3",
+    "M": "#3e7054",
+    "T": "#53635a",
+    "R": "#be5c56",
+    "N": "#192b30",
+    "K": "#23323a",
+    "E": "#e0d4a5"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1/inputs.json": "66b5d64a9b00f2293b5098e2b82ee87ca5888d3515a7130738fcf3cd338ccc80",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1/projection.json": "98e064cfd6f1f2e8eddc6a28d9e0785d1eeafe377ab96fd2c465141185f4c690",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1/ruby-throated-hummingbird.blend": "4cfd8ea1d65cccde6da55610504790aaadc27bf300e150f46a939e6b2e861f50",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/inputs.json": "7c2eafc0ceafc9c3e4dc245e9ed298efa6d1c00ec14a626fe5d95b47a9f46ae1",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/masters.json": "7ef6fc053bfaad2f3a4ff255e57bade1f2687aa4cab650c907490f023f49ae1a",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/projection.json": "a3d087b5a4ef1ef629faad21eab52b72a16d313c90b45c262437d734fe8efa96",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/ruby-throated-hummingbird.blend": "bf8cd3bcd5f86fa4d80b0e79b02075d2f3c3d24bf55ec6273e048e34aa2558c7",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/sheet.png": "5b24feb59e4abd62bfa287a4243cc5a83335ceeb3d75f2197b88679e25fecc52",
+    "public/demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/sprite.json": "c1c9c43a7614cd742f349f6c593d565c5b4621a049e745cc1e877486219317f8",
+    "public/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75",
+    "public/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sprite.json": "54332e55b23826699f485f5941a985544a2fe962f2204acc8f18ae182d7d00c2",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "komodo-dragon-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "e531a2d05a45a1ed49bcc596838d088dcf5eb537b1cd5c79d1e36c4600012c48",
+    "index.html": "484cc56c2ac3d4d91ca623aab42687fbfcab7ba44070e98543b56f848c903e8e",
+    "pixel-audit.json": "6121c024850083f7435bc8f72a1ef1086c9390f9c833542e649445592edd9643",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "5bf90dfa04b92e652e6bdb21c836e1c4777b14acdf189e9c6f554f50216b73aa",
+    "preview.gif": "7cdca664ead2f6c653cd89adaf2890c7c14ebaedb936e62704c6b6ead80772a6",
+    "scene-native.png": "531db22674f1b6ac58062055021075ca5249763a0a4eb6424f47ee35bb8c7bb8",
+    "sheet.png": "2e8444285934ca8fc48351a397054f7564d3df1711b8f7c26add79c605e29cf4",
+    "source-audit.json": "7a3a41574bcad7bf8722c08a2c019d4bfb4565f0e2e4b05a9f4183438622fbc6",
+    "sprite.json": "53f2f03f88697c9dc0515793a3de8ef1ae81bdc72949a47e531d15ccda44017b"
+  }
+}

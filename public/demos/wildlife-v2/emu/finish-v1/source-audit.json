@@ -1,0 +1,10 @@
+{
+  "identity": "emu-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/emu/roster-v2/emu.blend": "998ff4d79edbeee4369c59232d05fe409e579afc40943b8091a09336accae4b8"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

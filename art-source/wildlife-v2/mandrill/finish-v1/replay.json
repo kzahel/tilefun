@@ -1,0 +1,17 @@
+{
+  "identity": "mandrill-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "6424be90aa086e968351320b8a2bb9350b540495bd010c96dbea1a05e757e7ed",
+    "index.html": "5848085fb34142c6c4a8c950ef0fec084423a342a353746652ab36e73b953dce",
+    "pixel-audit.json": "f455ec6e05aa5bafe4edf1bdb5cf0b062545a50a9aa5afe0bae2d00b47e7a23c",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "4ba262df47b0afbfa5942f111b44c37ed3764262d7886d144ac17cb48b6996b7",
+    "preview.gif": "09db756a2c56c8768761d0a987107203bc5dc7214b0c3f504269cbb0f246457e",
+    "scene-native.png": "82c65094e4f5201e85924d7f724f12083c784dcab74450d43e6b651addaa4160",
+    "sheet.png": "bbe6042bdfeb4fb01eee2653d3e910d5ea375ba6746f4062e7b44727026740e4",
+    "source-audit.json": "3e4fe5be01bd7baf43c0e681324f9e77dcdc77816f51d95449a47809f6c5f1e7",
+    "sprite.json": "fe8b7ed9bc9d548ff8c98ab0a16f49ff76f95bd6f95aa41cd87e64395795bc1b"
+  }
+}

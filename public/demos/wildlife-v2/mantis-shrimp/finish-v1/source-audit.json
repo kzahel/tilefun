@@ -1,0 +1,10 @@
+{
+  "identity": "mantis-shrimp-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/mantis-shrimp/roster-v3/mantis-shrimp.blend": "46f44c29d7972b70efadd211483bcca9ea86be8666ad1d57ac01de8d04a4cab4"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

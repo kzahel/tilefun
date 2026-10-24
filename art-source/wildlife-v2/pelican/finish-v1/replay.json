@@ -1,0 +1,17 @@
+{
+  "identity": "pelican-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "df144ef77690bc405f7c9283503852a6567dc5ab4afeabe129fd60071df4c203",
+    "index.html": "d55348f051077ac7a1ed7d9e338a073a9175537c8f22cf300e4f1f55e2c38a4f",
+    "pixel-audit.json": "c6c3a75c3e7ff16ebf3c120543f0fb40639ba08f17e531bdea3c9407dba0f5c3",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "cbff8fe993f35c11090983c69d5d347452ee5b5273a5b909e88b5261c40a5982",
+    "preview.gif": "093069350122c5ba829f4da22735566ca99306e2d8dc4e11ef98afcf26f914df",
+    "scene-native.png": "a9b80c3db6e1d588f8116b9106a1ea36c4a4f4e25b6ef61332262846ddabe283",
+    "sheet.png": "1804ab3d96ca0839cae98d6d14afee080a9bea687bc190be9588509779aeb4e4",
+    "source-audit.json": "6d983aa35dc673a0ee9339ac0627a3b09381548badb0404b6961c52ec16a9c1e",
+    "sprite.json": "9b2a9671b7883375b515fe3ca58034b35d17d5ba4c858ef6df52009535ff5c1c"
+  }
+}

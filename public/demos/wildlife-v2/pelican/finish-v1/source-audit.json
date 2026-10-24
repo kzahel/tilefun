@@ -1,0 +1,10 @@
+{
+  "identity": "pelican-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/pelican/roster-v3/pelican.blend": "091b786f60acb141bcb8692929ed47ad1e7c3f08dbf3357034a9ec5570d0a336"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

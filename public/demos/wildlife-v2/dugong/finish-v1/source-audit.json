@@ -1,0 +1,10 @@
+{
+  "identity": "dugong-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/dugong/roster-v3/dugong.blend": "23bde2b7bfa283b7db8d6b1e0a4c2983a93d2b52619fe4b37c4efc8c8594d088"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

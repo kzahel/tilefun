@@ -1,0 +1,17 @@
+{
+  "identity": "white-nosed-coati-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "b1b783d58b0cf2a1baa9a177d124f4c8430a2b909640f6439d44af09b239c8cf",
+    "index.html": "a57cc20fcd52ba3d93ae6776b40babe7080993bfefba95395b36fac4590142b1",
+    "pixel-audit.json": "97e8dd563c56230a68e15d83b3f5f871b242e3df6e4910da0095e15bdeed7f33",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "31e906ede281201c10b8de8673d0b3e129cc810a06e8cc6c4445ea559de48bd4",
+    "preview.gif": "eb5df45bea5fd3e964578427d6a11a769eea5e7a0320dcdd43f2484c60c6c977",
+    "scene-native.png": "335bf4db61423c4d423ee418245b80c9fe1a0600f9c82d66b95538d94f0d7583",
+    "sheet.png": "66c171538e6e4950de2cc590011f5875fb73f69d87ee5190053f78ba2c4acca8",
+    "source-audit.json": "0ae0620bdf3170dbe7dea2d51ecd6e4612690a3fcb608de25635d1ce3a60035c",
+    "sprite.json": "5db8bfe38d21aecb7cfe54640edbc40382665a91981d47255a4e99fbeffcd6ff"
+  }
+}

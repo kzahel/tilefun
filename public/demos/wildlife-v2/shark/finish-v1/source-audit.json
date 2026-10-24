@@ -1,0 +1,10 @@
+{
+  "identity": "shark-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/shark/roster-v2/shark.blend": "43391c390bf53be98c95d5fbbbd60ab0e00f5d0f3bfe893dbfdc38dd9efe2e8e"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

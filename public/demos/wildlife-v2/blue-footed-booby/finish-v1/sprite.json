@@ -1,0 +1,72 @@
+{
+  "identity": "blue-footed-booby-finish-v1",
+  "reviewStatus": "pending human review",
+  "image": "sheet.png",
+  "frameWidth": 80,
+  "frameHeight": 80,
+  "anchor": [
+    40,
+    60
+  ],
+  "rootMotion": false,
+  "defaultClip": "fly",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "fly": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 25
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    }
+  },
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  },
+  "sheetSha256": "23bf7a1d9fcbbb7274653906246d03947153e36ec3a469a707b3d39ce081e30f",
+  "finishing": {
+    "policy": "wildlife-paint-v1",
+    "method": "material-surfaces",
+    "contract": "blue-footed-booby-finish-v1",
+    "predecessorImage": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+    "predecessorSha256": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+    "source": "art-source/wildlife-v2/blue-footed-booby/roster-v3"
+  }
+}

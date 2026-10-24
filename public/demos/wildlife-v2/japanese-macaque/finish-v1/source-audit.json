@@ -1,0 +1,10 @@
+{
+  "identity": "japanese-macaque-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/japanese-macaque/roster-v3/japanese-macaque.blend": "94bbdc61211d3733132c1513ccb98a63fe0bad59371eef190ec73f53568abf25"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

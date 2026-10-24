@@ -1,0 +1,10 @@
+{
+  "identity": "river-otter-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/river-otter/roster-v3/river-otter.blend": "4de8d3e8ae7b4755703f2ae18ddbb5b8121cfb950e2ca50b857fd8a0a6a0edd6"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

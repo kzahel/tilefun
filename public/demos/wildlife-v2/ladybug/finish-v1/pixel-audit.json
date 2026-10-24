@@ -1,0 +1,12 @@
+{
+  "identity": "ladybug-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "9a2561c24cb3d4846d1541d5ce7f872d77d5294c226780e9f56ca9f554bc31fe"
+}

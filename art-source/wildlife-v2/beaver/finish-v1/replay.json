@@ -1,0 +1,17 @@
+{
+  "identity": "beaver-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "71d164a5cf313d5157bf63102c64632eec0552fe0b4f1a90fda15e6055f00077",
+    "index.html": "b8755a27f7e36ec12d75ae3502fedaaafe3a5843d6b11084ffeda274fd286945",
+    "pixel-audit.json": "ca1e43344e0ed28b1815a6e828227b417c1ab370f391c48f5ef42da696493e4b",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "a7fa673422e68f68889b3f54c4259ff0008cd298c0db10a9a2270ffdbf249850",
+    "preview.gif": "192e412d9fa3c68176e81d9c235e1c97cf7dad905e1766c7339e96ec4f59b137",
+    "scene-native.png": "d3596fc0ff98bd21179d749c6c0b2d0ff05bfb9b913506bce82dd5734e0120d7",
+    "sheet.png": "518dd28cb8b05ddbc388761fd994af33d904c4a903ed810f98d93b96c05ba0a8",
+    "source-audit.json": "7d8522587c6f62df01a8b4eba62ded0cf7822a265947daed605c6d740314165a",
+    "sprite.json": "44f9cd6e13cabe93473034bb16ab5fd87155b3a519b21f141b62617055f3431b"
+  }
+}

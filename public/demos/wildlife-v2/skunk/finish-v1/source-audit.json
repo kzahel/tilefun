@@ -1,0 +1,10 @@
+{
+  "identity": "skunk-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/skunk/roster-v2/skunk.blend": "d2d05c5d7970dd2cff50a69278be1e62246621bc1060f8f2f66ce62eabdbf523"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

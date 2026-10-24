@@ -1,0 +1,10 @@
+{
+  "identity": "parrot-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/parrot/roster-v2/parrot.blend": "dec268d5adfdcbde7fa475b1f842b65f9648c89106f6a64fe48d0c3b032a30dc"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

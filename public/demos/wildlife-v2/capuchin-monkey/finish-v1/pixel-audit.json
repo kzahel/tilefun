@@ -1,0 +1,12 @@
+{
+  "identity": "capuchin-monkey-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "45cf92d0bf0f10646023700c4b0f4d4432cdb7edb806eb1b374c1c77b0fa4410"
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "blue-whale-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/blue-whale/roster-v2/blue-whale.blend": "e0ee081e1df87387665141c6c5e7752ad8af3fb0f24afa45c7dabd82f642cee5"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

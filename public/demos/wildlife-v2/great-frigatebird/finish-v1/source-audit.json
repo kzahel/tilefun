@@ -1,0 +1,10 @@
+{
+  "identity": "great-frigatebird-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/great-frigatebird/roster-v3/great-frigatebird.blend": "31288018f74f18166b26b987a14c00225edc5b613d706fd9e5d0b0d3fec7df24"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

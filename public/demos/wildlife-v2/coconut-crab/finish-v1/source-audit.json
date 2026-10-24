@@ -1,0 +1,10 @@
+{
+  "identity": "coconut-crab-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/coconut-crab/roster-v3/coconut-crab.blend": "bab21347857a1ebf25e53e302c5f3e350fb8a0bf57160cfe4215958ca05ae43c"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

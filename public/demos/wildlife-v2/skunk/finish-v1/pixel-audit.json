@@ -1,0 +1,12 @@
+{
+  "identity": "skunk-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "f23dc12ca0367145d4618cfeb2a4e6253c8386913c9cd829297f9d45477b56c0"
+}

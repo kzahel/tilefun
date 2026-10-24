@@ -1,0 +1,11 @@
+{
+  "identity": "beaver-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/beaver/behavior-v1/beaver.blend": "dd9296a2643cc83a66cd7cc7b205040701665cc9f10603254e42260629581051",
+    "art-source/wildlife-v2/beaver/roster-v2/beaver.blend": "628d39dfd3dec51131da01a812340b5715bf13181d4222b6e0384201c4362e5f"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

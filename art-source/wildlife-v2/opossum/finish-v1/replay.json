@@ -1,0 +1,17 @@
+{
+  "identity": "opossum-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "7bf1327487bb2e72a59ac32a19f222cdc23a292c18e67344b0ea7b9bbfcfbcb1",
+    "index.html": "6c8773fb56572450dc3e0fdd42d014cb3680a9495f0aa8593a64d55d134d226e",
+    "pixel-audit.json": "18e4f37dd17af93deb2b9e8fea20b306eb9d9b89426be0f5005af947801d2eec",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "24af6f1c5884c65b62eeecc8b1b2589d4644554a7c8e51ccf3e6a2795ffcc37d",
+    "preview.gif": "6794a4651390235e670af800d47538e3e6987cee6f039403c9c0ab1219495a67",
+    "scene-native.png": "91777b54574fd713b134283d9c4b203c0fb34d227eb1eacf7bca8f231e6acc98",
+    "sheet.png": "128773fa838f065f9d4afc33e397a0238862b02e4707540159a11a958354288b",
+    "source-audit.json": "1345ffd3188f4077f21cddfb6019cbf79cb8e15d86c6368a7950379ce322c41b",
+    "sprite.json": "3bb3541367a45f4700fd6beca86a36d6dae6b839801b428d2e464fa04564d05d"
+  }
+}

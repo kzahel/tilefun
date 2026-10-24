@@ -1,0 +1,10 @@
+{
+  "identity": "flamingo-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/flamingo/roster-v3/flamingo.blend": "fb9e8b55fd24bb415517da412142684da603dd367cacd072124de553827da627"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

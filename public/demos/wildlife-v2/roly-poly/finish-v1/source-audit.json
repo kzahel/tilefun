@@ -1,0 +1,10 @@
+{
+  "identity": "roly-poly-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/roly-poly/roster-v3/roly-poly.blend": "774d6abbe1a58c2ce773cb00bf1846cb67419690e605cce7be712ae849efedb2"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

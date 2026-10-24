@@ -1,7 +1,7 @@
 {
   "version": 1,
   "id": "wildlife-distinct-behaviors",
-  "updated": "2026-10-21",
+  "updated": "2026-10-24",
   "state": "nine-batches-automation-verified",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
@@ -156,7 +156,7 @@
         "scenario": "behavior-cat",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
         "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "supported tree movement",
           "save/reload",
@@ -187,10 +187,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/cat/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained action bank.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-20T14:07:29.399361+00:00"
     },
     "dog": {
@@ -1477,7 +1481,7 @@
         "trigger": "Nearby safe finite grass, eligible flock mates or a supported dust patch.",
         "scenario": "behavior-donkey",
         "tactical": "docs/tactical/170-rumination-flocks-and-dust-baths.md",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "saved meaningful outcome",
           "normal travel and home limits",
@@ -1510,10 +1514,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/170-rumination-flocks-and-dust-baths/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/donkey/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the shared behavior demonstration and exact retained action bank."
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187."
     },
     "mule": {
       "name": "Brown mule",
@@ -2527,7 +2535,7 @@
         "trigger": "Actual eligible nearby hunter/player threat or finite actual small prey.",
         "scenario": "behavior-hedgehog",
         "tactical": "docs/tactical/174-curling-quills-and-fox-pounces.md",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "actual threat/contact outcome",
           "saved phases and native travel",
@@ -2559,10 +2567,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/174-curling-quills-and-fox-pounces/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/hedgehog/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-21T18:49:45.035137+00:00"
     },
     "porcupine": {
@@ -2605,7 +2617,7 @@
         "trigger": "Actual eligible nearby hunter/player threat or finite actual small prey.",
         "scenario": "behavior-porcupine",
         "tactical": "docs/tactical/174-curling-quills-and-fox-pounces.md",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "actual threat/contact outcome",
           "saved phases and native travel",
@@ -2637,10 +2649,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/174-curling-quills-and-fox-pounces/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/porcupine/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-21T18:49:45.035137+00:00"
     },
     "raccoon": {
@@ -2685,7 +2701,7 @@
         "scenario": "behavior-raccoon",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
         "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "cache transfer",
           "save/reload",
@@ -2716,10 +2732,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/raccoon/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained action bank.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-20T14:07:29.399359+00:00"
     },
     "skunk": {
@@ -3052,7 +3072,7 @@
         "trigger": "Safe finite shrub, eligible actual partner or unowned loose shiny pebble.",
         "scenario": "behavior-peacock",
         "tactical": "docs/tactical/172-browsing-courtship-and-collecting.md",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "saved meaningful outcome",
           "native travel, heading and home bounds",
@@ -3085,10 +3105,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/172-browsing-courtship-and-collecting/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/peacock/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the real behavior demonstration and exact retained action bank."
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187."
     },
     "whale-shark": {
       "name": "Whale shark",
@@ -3492,7 +3516,7 @@
         "trigger": "Safe finite shrub, eligible actual partner or unowned loose shiny pebble.",
         "scenario": "behavior-raven",
         "tactical": "docs/tactical/172-browsing-courtship-and-collecting.md",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "saved meaningful outcome",
           "native travel, heading and home bounds",
@@ -3525,10 +3549,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/172-browsing-courtship-and-collecting/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/raven/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the real behavior demonstration and exact retained action bank."
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187."
     },
     "crow": {
       "name": "Carrion crow",
@@ -3575,7 +3603,7 @@
         "scenario": "behavior-crow",
         "tactical": "docs/tactical/155-fetch-nests-and-caches.md",
         "resourceRules": "Claim one actual unheld item; transfer/consume it once; release on interruption.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "pickup",
           "carrying-flight",
@@ -3606,10 +3634,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/155-fetch-nests-and-caches/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/crow/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and new action bank; then audit the next land/air batch.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-20T06:58:00.000Z"
     },
     "atlantic-puffin": {
@@ -3762,7 +3794,7 @@
         "scenario": "behavior-capuchin",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
         "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "supported tree movement",
           "save/reload",
@@ -3793,10 +3825,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/capuchin-monkey/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained action bank.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-20T14:07:29.399343+00:00"
     },
     "ring-tailed-lemur": {
@@ -4059,7 +4095,7 @@
         "scenario": "behavior-meerkat",
         "tactical": "docs/tactical/159-foraging-and-lookouts.md",
         "resourceRules": "Real saved resources; no automatic food creation for placed animals. Native alarm/escape interrupts tasks.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "rear",
           "scan",
@@ -4092,10 +4128,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/159-foraging-and-lookouts/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/meerkat/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained action bank; then audit the next land/air batch.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-20T11:33:51.281796+00:00"
     },
     "giant-anteater": {
@@ -4392,7 +4432,7 @@
         "scenario": "behavior-hummingbird",
         "tactical": "docs/tactical/166-scratching-and-pollination.md",
         "resourceRules": "Finite saved stock with ready active growth only; pollen transfers have a saved 60-second destination cap and cannot create instant food.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "resource conservation",
           "interruption and protections",
@@ -4424,10 +4464,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/166-scratching-and-pollination/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/ruby-throated-hummingbird/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained new action bank."
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187."
     },
     "flamingo": {
       "name": "Flamingo",
@@ -5838,7 +5882,7 @@
         "trigger": "Nearby appropriate finite resources and safe actual support.",
         "scenario": "behavior-beaver",
         "tactical": "docs/tactical/168-grazing-browsing-and-building.md",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "conserved finite sources and attachments",
           "real height/support/contact",
@@ -5871,10 +5915,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/168-grazing-browsing-and-building/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/beaver/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the shared behavior demonstration and retained action bank."
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187."
     },
     "capybara": {
       "name": "Capybara",
@@ -6242,7 +6290,7 @@
         "scenario": "behavior-bee",
         "tactical": "docs/tactical/166-scratching-and-pollination.md",
         "resourceRules": "Finite saved stock with ready active growth only; pollen transfers have a saved 60-second destination cap and cannot create instant food.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "resource conservation",
           "interruption and protections",
@@ -6274,10 +6322,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/166-scratching-and-pollination/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/bee/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained new action bank."
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187."
     },
     "ladybug": {
       "name": "Ladybug",
@@ -6496,12 +6548,12 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the ginger coat’s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the ginger coat\u00e2\u20ac\u2122s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-ginger",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
         "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "supported tree movement",
           "save/reload",
@@ -6532,10 +6584,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/cat-ginger/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained action bank.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-20T14:07:29.399363+00:00"
     },
     "cat-black": {
@@ -6575,12 +6631,12 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the black coat’s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the black coat\u00e2\u20ac\u2122s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-black",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
         "resourceRules": "Finite item transfers; only explicit saved sources renew, capped at three units; toys retain ownership and age.",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "supported tree movement",
           "save/reload",
@@ -6611,10 +6667,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/161-climbing-raids-and-play/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/cat-black/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and retained action bank.",
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
       "updatedUtc": "2026-10-20T14:07:29.399364+00:00"
     },
     "dog-golden": {
@@ -8459,7 +8519,7 @@
         "trigger": "Safe finite shrub, eligible actual partner or unowned loose shiny pebble.",
         "scenario": "behavior-deer",
         "tactical": "docs/tactical/172-browsing-courtship-and-collecting.md",
-        "animationRevision": "behavior-v1",
+        "animationRevision": "finish-v1",
         "requirements": [
           "saved meaningful outcome",
           "native travel, heading and home bounds",
@@ -8492,10 +8552,14 @@
         {
           "area": "validation",
           "ref": "docs/tactical/172-browsing-courtship-and-collecting/validation.json"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/deer/finish-v1/receipt.json"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the real behavior demonstration and exact retained action bank."
+      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187."
     },
     "frog": {
       "name": "Frog",

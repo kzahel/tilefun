@@ -1,0 +1,10 @@
+{
+  "identity": "dove-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/dove/roster-v2/dove.blend": "ee20f0dcf064217b179205149156d3acecd6c01d93b49894511d92d28fd04f33"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

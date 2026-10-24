@@ -1,0 +1,10 @@
+{
+  "identity": "newt-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/newt/roster-v2/newt.blend": "8f71ce8c7e264ed929191e438412672dfb05f44a73d3deee579ddaec9fcb64f9"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

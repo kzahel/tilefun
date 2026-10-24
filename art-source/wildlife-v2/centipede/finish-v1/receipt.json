@@ -1,0 +1,53 @@
+{
+  "identity": "centipede-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "centipede-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "5d682f2ce6d7bc7b18a259808c9aeec2822eab1a9940f7104fc19292dfeef5a8",
+      "index.html": "c2067fc72d39e0a1b18ac1af11ef4ed6f78e32951d81d75d39b9e5d1954c53fe",
+      "pixel-audit.json": "3ecec27d2a186e07c70de71f5e6f7c48beabdfdd891e57f7016c2f65dc73236e",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "e989fb4b6c8d570adfdc01294ec80c87daf369fd077d3cd6dda805a2e7d37b0f",
+      "preview.gif": "45071f22548be2336cd69ccb2a2483d4212c0eda47ff79b7420099ed4944455c",
+      "scene-native.png": "ea45309879cb74c78363308bec15752839e5548a2669c166bde039efe63cdd4b",
+      "sheet.png": "ea60bd93425b9e206d973ddb8f0f92469a1594f46f37ec434de83f9744adf9cd",
+      "source-audit.json": "2da6d487e7553702358ed29a3e88284c202c734db2626503d3449d2a7e997a79",
+      "sprite.json": "939772b6288a159a07b95b19b04767cb66fe2f1a821184f7f98fc601946f28ff"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/centipede/finish-v1/README.md": "08346fe56489d43e827a03ffa70429db2d53ccf8719eb65684582ffcfd6c4538",
+    "art-source/wildlife-v2/centipede/finish-v1/inputs.json": "6c404ab199c5508cf46853718119335a0250d2c4b7d6982df594cb2907f6d8ee",
+    "art-source/wildlife-v2/centipede/finish-v1/replay.json": "015eaeac4e12bfa9633724ba09134c16b638f2b5057edd8606d6ea616c3a7c99",
+    "art-source/wildlife-v2/centipede/roster-v3/centipede.blend": "a7801c6873767137c49ed0a2ccedfeb35499144ed7a785567d24213bfa76dc01",
+    "art-source/wildlife-v2/centipede/roster-v3/inputs.json": "602be003e925ee8b5e44b457e443478301fb1c7d773ea57ac46d406171261055",
+    "art-source/wildlife-v2/centipede/roster-v3/projection.json": "6e62140850bf4ed7955ce6ad1b15837871241076baef5976e358f7cedeaffe99",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/centipede/finish-v1/contact-sheet-native.png": "5d682f2ce6d7bc7b18a259808c9aeec2822eab1a9940f7104fc19292dfeef5a8",
+    "public/demos/wildlife-v2/centipede/finish-v1/index.html": "c2067fc72d39e0a1b18ac1af11ef4ed6f78e32951d81d75d39b9e5d1954c53fe",
+    "public/demos/wildlife-v2/centipede/finish-v1/pixel-audit.json": "3ecec27d2a186e07c70de71f5e6f7c48beabdfdd891e57f7016c2f65dc73236e",
+    "public/demos/wildlife-v2/centipede/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/centipede/finish-v1/preview-native.gif": "e989fb4b6c8d570adfdc01294ec80c87daf369fd077d3cd6dda805a2e7d37b0f",
+    "public/demos/wildlife-v2/centipede/finish-v1/preview.gif": "45071f22548be2336cd69ccb2a2483d4212c0eda47ff79b7420099ed4944455c",
+    "public/demos/wildlife-v2/centipede/finish-v1/scene-native.png": "ea45309879cb74c78363308bec15752839e5548a2669c166bde039efe63cdd4b",
+    "public/demos/wildlife-v2/centipede/finish-v1/sheet.png": "ea60bd93425b9e206d973ddb8f0f92469a1594f46f37ec434de83f9744adf9cd",
+    "public/demos/wildlife-v2/centipede/finish-v1/source-audit.json": "2da6d487e7553702358ed29a3e88284c202c734db2626503d3449d2a7e997a79",
+    "public/demos/wildlife-v2/centipede/finish-v1/sprite.json": "939772b6288a159a07b95b19b04767cb66fe2f1a821184f7f98fc601946f28ff",
+    "public/demos/wildlife-v2/centipede/roster-v3/sheet.png": "d7a8b710c72005364166068ddb4ea86d4d60a1311f1d0fe3bb8951bf1539e6bf",
+    "public/demos/wildlife-v2/centipede/roster-v3/sprite.json": "773c5d701252ccb2a2f061abcf04717fbbc2e93ef5914cf7c952929a7390271e",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

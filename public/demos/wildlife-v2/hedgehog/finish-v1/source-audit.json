@@ -1,0 +1,11 @@
+{
+  "identity": "hedgehog-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/hedgehog/behavior-v1/hedgehog.blend": "ae2c3816b600ca39029c140d60bd9c3cee7453477838a14db06a86d03b311629",
+    "art-source/wildlife-v2/hedgehog/roster-v2/hedgehog.blend": "34f3b11e0070b6b3592aa15e8b6912f960b159183a9e45e463eb374f0c581292"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "dugong-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "dugong-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "56afea646131c6d80812b3c10c7ec71ff0eef1c49fb0e914f037a9b714c657b1",
+      "index.html": "9536e027369f0d5c69c37d12bf2b65862034807f4f6829d482f9c2194dec0743",
+      "pixel-audit.json": "bfa6e912cef975290ed3fbfd6405762d058788fbf2d79ced02cde8308e277923",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "b2e0d7a60c12aa926316c1a3101a8788536f4fc70ae06647ef7b11499269c3b3",
+      "preview.gif": "f5f0be51557f893d521fa22bd759b82c8a33e307176b97f383ce54bbc4ce73c4",
+      "scene-native.png": "e34830aa1d1a53c66bae54745ba9480d7c12eb05d9d74024819ee5e4fa55541e",
+      "sheet.png": "01c98f65c555f3cec7545e35362fe24e77219df8c14feb3a76a1e1a931978b95",
+      "source-audit.json": "0230f40433bb3b31e843661611d33f96c8adc41be34b25e8e8e21808d7c9a3de",
+      "sprite.json": "46abe8e47d49ad35b82a82bd7990bbd9dbeeeaa38423629d6de73f685eb8746f"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/dugong/finish-v1/README.md": "8ede1a49a6f124bb5962e5907fbba5ea7973b5ce3f7c6eb776391f8d16ad5f93",
+    "art-source/wildlife-v2/dugong/finish-v1/inputs.json": "edbc1e9ae3f4b0f0f5f9319de7a9ac2e73388e7a7ab63163386a8d737dcaa3ae",
+    "art-source/wildlife-v2/dugong/finish-v1/replay.json": "a63c1855c243fc12219e938e343b6477084010ff7f2c596028f745ea263e6139",
+    "art-source/wildlife-v2/dugong/roster-v3/dugong.blend": "23bde2b7bfa283b7db8d6b1e0a4c2983a93d2b52619fe4b37c4efc8c8594d088",
+    "art-source/wildlife-v2/dugong/roster-v3/inputs.json": "e1a64e752c14d0d0a03afdd29329ca4e6ffaba2fba29926327b4b5a827c8d3df",
+    "art-source/wildlife-v2/dugong/roster-v3/projection.json": "2d8fa2630b5bdf19bcf385c4bdbfdff5ebb6f163a7011af4306f1050e84e2f46",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/dugong/finish-v1/contact-sheet-native.png": "56afea646131c6d80812b3c10c7ec71ff0eef1c49fb0e914f037a9b714c657b1",
+    "public/demos/wildlife-v2/dugong/finish-v1/index.html": "9536e027369f0d5c69c37d12bf2b65862034807f4f6829d482f9c2194dec0743",
+    "public/demos/wildlife-v2/dugong/finish-v1/pixel-audit.json": "bfa6e912cef975290ed3fbfd6405762d058788fbf2d79ced02cde8308e277923",
+    "public/demos/wildlife-v2/dugong/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/dugong/finish-v1/preview-native.gif": "b2e0d7a60c12aa926316c1a3101a8788536f4fc70ae06647ef7b11499269c3b3",
+    "public/demos/wildlife-v2/dugong/finish-v1/preview.gif": "f5f0be51557f893d521fa22bd759b82c8a33e307176b97f383ce54bbc4ce73c4",
+    "public/demos/wildlife-v2/dugong/finish-v1/scene-native.png": "e34830aa1d1a53c66bae54745ba9480d7c12eb05d9d74024819ee5e4fa55541e",
+    "public/demos/wildlife-v2/dugong/finish-v1/sheet.png": "01c98f65c555f3cec7545e35362fe24e77219df8c14feb3a76a1e1a931978b95",
+    "public/demos/wildlife-v2/dugong/finish-v1/source-audit.json": "0230f40433bb3b31e843661611d33f96c8adc41be34b25e8e8e21808d7c9a3de",
+    "public/demos/wildlife-v2/dugong/finish-v1/sprite.json": "46abe8e47d49ad35b82a82bd7990bbd9dbeeeaa38423629d6de73f685eb8746f",
+    "public/demos/wildlife-v2/dugong/roster-v3/sheet.png": "ac8b13d934787273415cb1ee3b7451fa30487225d7b96dc35d05c90987ba302b",
+    "public/demos/wildlife-v2/dugong/roster-v3/sprite.json": "47c1963c9dd8750c3a088c29f562253fad4bfbef82bc5c27b7efa481b0eb9b0d",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

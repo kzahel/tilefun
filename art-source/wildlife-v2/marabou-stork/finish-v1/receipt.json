@@ -1,0 +1,53 @@
+{
+  "identity": "marabou-stork-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "marabou-stork-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "1e4272a9ac2ac11c67f6524101a3f67f12534746945c2012a668e40c93bdcb20",
+      "index.html": "0d47c499fa4c4ccb48321e2b9e5ee02536de69d723a3a99bbcb5f20bba43d54c",
+      "pixel-audit.json": "2171efd59365f68d9772e1dd802dc1f867325dd35499a25616846485fc75bbdf",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "6e78da3d8037d3034fa007d22198e5a78c654c337d368f64fabf52951628b738",
+      "preview.gif": "b5f7f89241e9eeab567365112820ff2569efbd2e131c31ffba5e0c1d473dfd28",
+      "scene-native.png": "50c632fc2042a7a37158006bf207f49936e7a8fa94e75a5a27edd5b16c49bfda",
+      "sheet.png": "56d55c6f7e4c4b6b82d5d1fc53e72e3b349a16ed5d7e69b71303c885c8c48ed8",
+      "source-audit.json": "3b8897720c4efbce8bc71e5479fa838123037a6f42d525049370905bb7e92dd7",
+      "sprite.json": "e0dd3496798fd4fd76ae2463476ed0126b10128e0e9bd491c0c1220a228c5cea"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/marabou-stork/finish-v1/README.md": "9b2fbfb1c92f40b96f0c01477013294f229f148d36f4cb478abc4bfc98648311",
+    "art-source/wildlife-v2/marabou-stork/finish-v1/inputs.json": "67f143af82fb7812193a59b3a6272e35f52c5f040f6607fa8715c115f598752a",
+    "art-source/wildlife-v2/marabou-stork/finish-v1/replay.json": "1f564097d8467e0bd47e38c505a4fc4c5ff52552e3d06a91a23a7f02b2530f8e",
+    "art-source/wildlife-v2/marabou-stork/roster-v3/inputs.json": "ad9c3e5782b6b66d2f674df589f8ddf65304ac4668015daa2b3facd79d82bd4f",
+    "art-source/wildlife-v2/marabou-stork/roster-v3/marabou-stork.blend": "33ac1793c0dc3627ecb2b68de987d0da3a58343c671bb15e8ef28f757fb32a6d",
+    "art-source/wildlife-v2/marabou-stork/roster-v3/projection.json": "9bb60bff5276e51e82cddba4fd1100475437ca3c0711debb0c0dc21e988645ed",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/contact-sheet-native.png": "1e4272a9ac2ac11c67f6524101a3f67f12534746945c2012a668e40c93bdcb20",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/index.html": "0d47c499fa4c4ccb48321e2b9e5ee02536de69d723a3a99bbcb5f20bba43d54c",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/pixel-audit.json": "2171efd59365f68d9772e1dd802dc1f867325dd35499a25616846485fc75bbdf",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/preview-native.gif": "6e78da3d8037d3034fa007d22198e5a78c654c337d368f64fabf52951628b738",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/preview.gif": "b5f7f89241e9eeab567365112820ff2569efbd2e131c31ffba5e0c1d473dfd28",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/scene-native.png": "50c632fc2042a7a37158006bf207f49936e7a8fa94e75a5a27edd5b16c49bfda",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/sheet.png": "56d55c6f7e4c4b6b82d5d1fc53e72e3b349a16ed5d7e69b71303c885c8c48ed8",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/source-audit.json": "3b8897720c4efbce8bc71e5479fa838123037a6f42d525049370905bb7e92dd7",
+    "public/demos/wildlife-v2/marabou-stork/finish-v1/sprite.json": "e0dd3496798fd4fd76ae2463476ed0126b10128e0e9bd491c0c1220a228c5cea",
+    "public/demos/wildlife-v2/marabou-stork/roster-v3/sheet.png": "dbc3f358167c8909cf3b5814e7a90b45582fb0454032db9f8554f51e0f0caabb",
+    "public/demos/wildlife-v2/marabou-stork/roster-v3/sprite.json": "a478d004ca5589fc487dbab1f0e2fd2822640b558cb0d13537af089d7aa7b9ba",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

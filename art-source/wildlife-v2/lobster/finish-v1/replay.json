@@ -1,0 +1,17 @@
+{
+  "identity": "lobster-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "d1922db4e66346330e4de96906a76a12c467390461f3a1411af975311bfe9fdc",
+    "index.html": "fd14c41d85d6114a870bcaedbcea5cacb7eae12f3c7be955fa5957d1070dcede",
+    "pixel-audit.json": "c7b822729e0596d858bf242da65164a2ff8480838796c6c2ec6f64a51f31e302",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "b5a4b1e77bc2b378f1520064778c4668d2f9fb421ff753cc5e7ea87283731cac",
+    "preview.gif": "581f56a8e9cd84fd85c007e84cd527d7ea5eb6bfd7931eb2f0bc73ed3728b5a5",
+    "scene-native.png": "d58e22cc7c741d9ce0696fb14b921ec0a0e51d875fb8a84048cc61c478bd6d35",
+    "sheet.png": "a4df00836a9e8971dbe98b8f981a26d2ccfe7cec75d9aa3909254be30af7ec70",
+    "source-audit.json": "cd1895dff9f91278284654c684f816d058101bf1e094ba77baf37c2366dc8820",
+    "sprite.json": "17a91791631ceaf243954ce071f31c004605a6bae1885746a66ccfaa8735f166"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "leaf-insect-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/leaf-insect/roster-v3/leaf-insect.blend": "f33ad6a2627aaaca300d28a4313ac3bec564c1c83f506c0a7b535fc48188c93e"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

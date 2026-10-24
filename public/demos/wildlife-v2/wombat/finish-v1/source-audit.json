@@ -1,0 +1,10 @@
+{
+  "identity": "wombat-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/wombat/roster-v2/wombat.blend": "9d7100179157fd3bd7eb3f8e551c85a9b2731a5311a45701c9c73d6a645dae22"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

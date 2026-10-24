@@ -1,0 +1,12 @@
+{
+  "identity": "ruby-throated-hummingbird-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 292,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 292,
+  "sheetSha256": "975900f9d142bd02de4f1002a1e77b8dfc04f51e1b65d65437bf1f8a4988aa46"
+}

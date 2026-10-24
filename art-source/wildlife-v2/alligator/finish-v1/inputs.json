@@ -1,0 +1,36 @@
+{
+  "identity": "alligator-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "alligator",
+    "name": "American alligator",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/alligator/roster-v3/sheet.png",
+    "sourceSha256": "53a020bb5fa35846ecc1cea0dc1c19b4873e6d626831bedba918d33023ecd1d6",
+    "source": "art-source/wildlife-v2/alligator/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#222d2c",
+    "B": "#46564e",
+    "H": "#6b7965",
+    "C": "#b7b28b",
+    "M": "#2d3e38",
+    "E": "#bca65e",
+    "N": "#192523"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/alligator/roster-v3/alligator.blend": "aece2d82faf9c2ce4af37b722f37e5f8c10c0d0b40b29ce0d4a4681feafd75bb",
+    "art-source/wildlife-v2/alligator/roster-v3/inputs.json": "f48301375f1437a82e941c7a67c238f3d9f4e479c07901034018691a19e62638",
+    "art-source/wildlife-v2/alligator/roster-v3/projection.json": "f750ab2e8f13ff6a4b434245d63e71fec405686c29bcc974276e538c01dbb840",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/alligator/roster-v3/sheet.png": "53a020bb5fa35846ecc1cea0dc1c19b4873e6d626831bedba918d33023ecd1d6",
+    "public/demos/wildlife-v2/alligator/roster-v3/sprite.json": "39a3acac63919a959c96fed4e19d0d83041bca6c9d2fce90681496d5d7309eaa",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "identity": "crocodile-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "f0d9188123452920481574eec3b9ff3d3c3a1e3c0bf22d775b72409300f682b7"
+}

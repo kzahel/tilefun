@@ -1,0 +1,53 @@
+{
+  "identity": "kakapo-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "kakapo-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "9bf088f9fc4dca23d9f56597d4c25c28b8ca5b2ba0e91158c11267e448c1eed1",
+      "index.html": "ed91e7548e5b0b4d0041a85dfa2b23193d48f68761024961cde0d85b125a3480",
+      "pixel-audit.json": "a98bcb41163fdb8c3ed5a48438f1cb877ca152149fb9fddab559df8254277a39",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "16ee9076ef861ffe60025489cef30a0f638f4fe65a9ff1dbf1d87330df4628f0",
+      "preview.gif": "f3ba2ff4696292ec3170733df424a51de2b7a4e788e5eaeccf7f5dd33fcadb5b",
+      "scene-native.png": "01cf74d0d03bb2bca0fa896084a1d15ab87bbf356f06e65c222128fb43ef83c0",
+      "sheet.png": "2947f6a3cf58ee13fc59a8a34b3a24dcedd56d333822c6456cf8c9075262e2f9",
+      "source-audit.json": "b66a97c33455927a4d8cdf660edeef3cddfa5fa34e7091fda9209e79601706b3",
+      "sprite.json": "4b6f4aa4a798e7f10e915e1f552eaade508c631d3408968ee7c0710ec377a54a"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/kakapo/finish-v1/README.md": "a94c093a55d128d8182e65b7e89e8ffbc6af5145d3f33c4c8696d7f414808e2a",
+    "art-source/wildlife-v2/kakapo/finish-v1/inputs.json": "82e8fa2d3db7e8c82bf2dd60cd17f2c08e518cabca73ca4f8746b10e1b896dfa",
+    "art-source/wildlife-v2/kakapo/finish-v1/replay.json": "6fe7efa04c4305b26bb349b5b5d0a8525e0926d16a6e393221a9961819c811da",
+    "art-source/wildlife-v2/kakapo/roster-v2/inputs.json": "9537ee74e2c3be8c16b3b8acf49fde310db194c7c289d362811301267944d803",
+    "art-source/wildlife-v2/kakapo/roster-v2/kakapo.blend": "299b746d5661bebce7456baa8552bf55c1b9a6eaa5e50d16e0c29b6c429dbcd4",
+    "art-source/wildlife-v2/kakapo/roster-v2/projection.json": "b6dbd8baf2fa43342c8a9ea88d8399954344b74dc23d36eeb7f8e6380b21d5b4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/kakapo/finish-v1/contact-sheet-native.png": "9bf088f9fc4dca23d9f56597d4c25c28b8ca5b2ba0e91158c11267e448c1eed1",
+    "public/demos/wildlife-v2/kakapo/finish-v1/index.html": "ed91e7548e5b0b4d0041a85dfa2b23193d48f68761024961cde0d85b125a3480",
+    "public/demos/wildlife-v2/kakapo/finish-v1/pixel-audit.json": "a98bcb41163fdb8c3ed5a48438f1cb877ca152149fb9fddab559df8254277a39",
+    "public/demos/wildlife-v2/kakapo/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/kakapo/finish-v1/preview-native.gif": "16ee9076ef861ffe60025489cef30a0f638f4fe65a9ff1dbf1d87330df4628f0",
+    "public/demos/wildlife-v2/kakapo/finish-v1/preview.gif": "f3ba2ff4696292ec3170733df424a51de2b7a4e788e5eaeccf7f5dd33fcadb5b",
+    "public/demos/wildlife-v2/kakapo/finish-v1/scene-native.png": "01cf74d0d03bb2bca0fa896084a1d15ab87bbf356f06e65c222128fb43ef83c0",
+    "public/demos/wildlife-v2/kakapo/finish-v1/sheet.png": "2947f6a3cf58ee13fc59a8a34b3a24dcedd56d333822c6456cf8c9075262e2f9",
+    "public/demos/wildlife-v2/kakapo/finish-v1/source-audit.json": "b66a97c33455927a4d8cdf660edeef3cddfa5fa34e7091fda9209e79601706b3",
+    "public/demos/wildlife-v2/kakapo/finish-v1/sprite.json": "4b6f4aa4a798e7f10e915e1f552eaade508c631d3408968ee7c0710ec377a54a",
+    "public/demos/wildlife-v2/kakapo/roster-v2/sheet.png": "6481f458ee7d9da0807ade14d6c3996ee27d32afc077dbc1c52c9fe90fec79d7",
+    "public/demos/wildlife-v2/kakapo/roster-v2/sprite.json": "56631c0f5a996d1e485b2e318552f1482a98f9a552166d6c9cb0ff31250ff4eb",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

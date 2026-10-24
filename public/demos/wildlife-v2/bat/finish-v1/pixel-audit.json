@@ -1,0 +1,12 @@
+{
+  "identity": "bat-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "1b66a9091abbde60c584b6703346af6688ee33392002d9a1a2c05111f8cdb97f"
+}

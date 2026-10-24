@@ -1,0 +1,42 @@
+{
+  "identity": "porcupine-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "porcupine",
+    "name": "Porcupine",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/porcupine/behavior-v1/sheet.png",
+    "sourceSha256": "c1920e783bae806e7ec7969eb73a6df195eaa6d316214e0b79e3b66a8e6816f5",
+    "source": "art-source/wildlife-v2/porcupine/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#272f34",
+    "B": "#695c4f",
+    "H": "#99856c",
+    "C": "#d2c7a6",
+    "M": "#3f3d38",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/porcupine/behavior-v1/inputs.json": "9705a0fe8d439005624a5bc9327af1edefd50edd8ae30b5d0fb63467533b85cd",
+    "art-source/wildlife-v2/porcupine/behavior-v1/porcupine.blend": "5abaaadb939471c257542c3ff20aa8214e02ff3ac488e09a88173cc244ae902d",
+    "art-source/wildlife-v2/porcupine/behavior-v1/projection.json": "307f8d232ab182d81db7321d45e44d3f7378ae5239fb36b461ab5a91327f50a2",
+    "art-source/wildlife-v2/porcupine/roster-v2/inputs.json": "4acbe965594cafea79cf77a81d7619d503df3b884ea4a4f9ecca422fe09eb35f",
+    "art-source/wildlife-v2/porcupine/roster-v2/masters.json": "3245dbea6aefecc467b6c06b42a4b61917eff6c0e66a47a4c83e1867c37ec517",
+    "art-source/wildlife-v2/porcupine/roster-v2/porcupine.blend": "92fcc5a171bed7c0795af379ff552d2bc03f3d6d2fd54f5371364699eeef5c0b",
+    "art-source/wildlife-v2/porcupine/roster-v2/projection.json": "197a1a5a51a9815c893d82e5f5e930575ff5ffe0bae9d9e69c120f89781f2777",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/porcupine/behavior-v1/sheet.png": "c1920e783bae806e7ec7969eb73a6df195eaa6d316214e0b79e3b66a8e6816f5",
+    "public/demos/wildlife-v2/porcupine/behavior-v1/sprite.json": "fbed304b3b2299f3efd6b642ba4e1355671062eadb8c8fd6997f73128c9ab076",
+    "public/demos/wildlife-v2/porcupine/roster-v2/sheet.png": "83d051517b292a9e80fc033148b819d62ccb36b72a1a644a6c02a814af4d720e",
+    "public/demos/wildlife-v2/porcupine/roster-v2/sprite.json": "e3fd1d97ec96716bb01173c2bb6d76320a014af4b7c877ff3a0aebf65faaf5c3",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

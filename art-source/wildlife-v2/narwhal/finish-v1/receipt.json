@@ -1,0 +1,53 @@
+{
+  "identity": "narwhal-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "narwhal-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "9bd3a376d78b5a9f4f91394abdc1b0a270375e6856fc648581a86627dd12d21e",
+      "index.html": "bd915a6fc1b48dd875f9ccaeb711e215b3a2762f6d5baf51844f0672150e7b80",
+      "pixel-audit.json": "82b1f068da9608e847bba54ea163e3055e4d2c6fef9e1df266295494cbd0c334",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "809066816c5d562357ff455014086c7c12a646be07e28af1471e053f6a498140",
+      "preview.gif": "82b9fd177d319f09dd1ebbb17d7ad65b609d2e45ea1f1085b34977be6d4cb68f",
+      "scene-native.png": "53d92d3630be299779df9b3219603f448bbee41d35fa1dd6e3e19f8bb9637fb5",
+      "sheet.png": "b4ee7db94f76dfd8c7e17fa3f29a0d0f0dab2c2fb0cfda17d64ab8aa1da845d2",
+      "source-audit.json": "e4b71e16b19fa083f7ad9bcf8b4458d8345f55a0686905e44f02780b0396f678",
+      "sprite.json": "c64862d04f45f256680ccd18191d36cabc1ee6d3daf7847ba99df14cdd62afce"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/narwhal/finish-v1/README.md": "1f0e523b615e227a89af2644609d4be87012e301aae000272b05447d579a1071",
+    "art-source/wildlife-v2/narwhal/finish-v1/inputs.json": "34135c3c5ada14ee9ee441506bc592b80b59c02e248a8fd0541888409f8dd1fa",
+    "art-source/wildlife-v2/narwhal/finish-v1/replay.json": "410dae123cc4891081b0c8b732764725cb05a0f810aad31a209bcd5554b9af21",
+    "art-source/wildlife-v2/narwhal/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/narwhal/roster-v2/narwhal.blend": "0259c5743785ef603df548cc9ffa5fc9183d2fe2467f5c1e0c6aac34d8c65455",
+    "art-source/wildlife-v2/narwhal/roster-v2/projection.json": "97a4bbf520f945a9815a827963e8312dbbb37238d82322d0c929623c943e3f1e",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/narwhal/finish-v1/contact-sheet-native.png": "9bd3a376d78b5a9f4f91394abdc1b0a270375e6856fc648581a86627dd12d21e",
+    "public/demos/wildlife-v2/narwhal/finish-v1/index.html": "bd915a6fc1b48dd875f9ccaeb711e215b3a2762f6d5baf51844f0672150e7b80",
+    "public/demos/wildlife-v2/narwhal/finish-v1/pixel-audit.json": "82b1f068da9608e847bba54ea163e3055e4d2c6fef9e1df266295494cbd0c334",
+    "public/demos/wildlife-v2/narwhal/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/narwhal/finish-v1/preview-native.gif": "809066816c5d562357ff455014086c7c12a646be07e28af1471e053f6a498140",
+    "public/demos/wildlife-v2/narwhal/finish-v1/preview.gif": "82b9fd177d319f09dd1ebbb17d7ad65b609d2e45ea1f1085b34977be6d4cb68f",
+    "public/demos/wildlife-v2/narwhal/finish-v1/scene-native.png": "53d92d3630be299779df9b3219603f448bbee41d35fa1dd6e3e19f8bb9637fb5",
+    "public/demos/wildlife-v2/narwhal/finish-v1/sheet.png": "b4ee7db94f76dfd8c7e17fa3f29a0d0f0dab2c2fb0cfda17d64ab8aa1da845d2",
+    "public/demos/wildlife-v2/narwhal/finish-v1/source-audit.json": "e4b71e16b19fa083f7ad9bcf8b4458d8345f55a0686905e44f02780b0396f678",
+    "public/demos/wildlife-v2/narwhal/finish-v1/sprite.json": "c64862d04f45f256680ccd18191d36cabc1ee6d3daf7847ba99df14cdd62afce",
+    "public/demos/wildlife-v2/narwhal/roster-v2/sheet.png": "978f2e21c6f22dd6b59a00b05dcbfce1090b832abf43fa3959903083515a855c",
+    "public/demos/wildlife-v2/narwhal/roster-v2/sprite.json": "f7336c50d95402e07b3785c29b67c78022c582578942e438f1564fff431f1ff4",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "horseshoe-crab-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "horseshoe-crab-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "8865ae391c9a402b755d693bd1cf48038ca68cad357fc6b715420713fd5632c7",
+      "index.html": "d5f8e6053cc6d1f8ef805b63c15c91d59399782dc59bc7852eae6ef4ae9a0dde",
+      "pixel-audit.json": "a7f0410ecc7289f3c45ec39e96039d1d6b2e1007205a954a5eb71a233c087cd9",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "62b098076cd26396f3d46d9500a08a319d51c9b4ff37a55a726e1d598eaa1b67",
+      "preview.gif": "29f3e7cf1751b203be34ffbe93d53712ab1a1d4266c7efd53387a9cb664cbe33",
+      "scene-native.png": "72a49f60d62045fe045d46daaca64ab8699a890a2d9f5ae6be468ee0501b74b2",
+      "sheet.png": "0a3d81299f299d966fc50cea0c29d6c9fc571d524357d201a9e90598f29baae6",
+      "source-audit.json": "56a8f96f9423eeaf744243e5a49cc69c06a425c656fb09951e13af93320be772",
+      "sprite.json": "09a515c6e52d72b1f2872f4dbb3c0409d92f86ebff83414565030b643ecfb7e3"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/horseshoe-crab/finish-v1/README.md": "4f77d884229b3774b908cb2b6fbecf241a754575eca892cb19c2fb0989a24f43",
+    "art-source/wildlife-v2/horseshoe-crab/finish-v1/inputs.json": "211f2a747bf9cefcf20a18625c7167889112e36d32596e7f1c94bc98ebca385b",
+    "art-source/wildlife-v2/horseshoe-crab/finish-v1/replay.json": "64ffc18aa996b1afea757bfeb118a267c836606dc5379760a30792dc7c795294",
+    "art-source/wildlife-v2/horseshoe-crab/roster-v3/horseshoe-crab.blend": "0d82c1eadc5ccf1ca1c137cfd1b989d61311746a45419e11b2ac9c871fa96484",
+    "art-source/wildlife-v2/horseshoe-crab/roster-v3/inputs.json": "5fb44238331246d8d4219ef247554112457243cfab6ee1a04e441a6638985c72",
+    "art-source/wildlife-v2/horseshoe-crab/roster-v3/projection.json": "064cdebf94c232f6a3dc05273930fbb68bee8ffe2d9ad0e7453985103d706065",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/contact-sheet-native.png": "8865ae391c9a402b755d693bd1cf48038ca68cad357fc6b715420713fd5632c7",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/index.html": "d5f8e6053cc6d1f8ef805b63c15c91d59399782dc59bc7852eae6ef4ae9a0dde",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/pixel-audit.json": "a7f0410ecc7289f3c45ec39e96039d1d6b2e1007205a954a5eb71a233c087cd9",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/preview-native.gif": "62b098076cd26396f3d46d9500a08a319d51c9b4ff37a55a726e1d598eaa1b67",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/preview.gif": "29f3e7cf1751b203be34ffbe93d53712ab1a1d4266c7efd53387a9cb664cbe33",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/scene-native.png": "72a49f60d62045fe045d46daaca64ab8699a890a2d9f5ae6be468ee0501b74b2",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/sheet.png": "0a3d81299f299d966fc50cea0c29d6c9fc571d524357d201a9e90598f29baae6",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/source-audit.json": "56a8f96f9423eeaf744243e5a49cc69c06a425c656fb09951e13af93320be772",
+    "public/demos/wildlife-v2/horseshoe-crab/finish-v1/sprite.json": "09a515c6e52d72b1f2872f4dbb3c0409d92f86ebff83414565030b643ecfb7e3",
+    "public/demos/wildlife-v2/horseshoe-crab/roster-v3/sheet.png": "eabec44f8f79a58a98cedbfc8c09b19a8cc06d9e8534f2845a656018c9457d9d",
+    "public/demos/wildlife-v2/horseshoe-crab/roster-v3/sprite.json": "e6b3747b1f9993b68e0a548718f6a8ec23c8750dae908b24a533b61ff5be4add",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "stag-beetle-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/stag-beetle/roster-v2/stag-beetle.blend": "4cc6cad9aae2ede75aade037ce119f065700485ba4f10f0455773f4ef32d7926"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

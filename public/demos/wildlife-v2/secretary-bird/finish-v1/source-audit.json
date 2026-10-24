@@ -1,0 +1,10 @@
+{
+  "identity": "secretary-bird-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/secretary-bird/roster-v3/secretary-bird.blend": "d514043789e01667eb3a19eb66fad874d411bdd208a8b81c57e475a5ac194dcd"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

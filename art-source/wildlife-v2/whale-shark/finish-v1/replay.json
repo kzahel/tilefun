@@ -1,0 +1,17 @@
+{
+  "identity": "whale-shark-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "1fb8a0d58d8d8bf8407094c35c1f28794c47ef5a2c051e540365347de258e0cc",
+    "index.html": "5e8f7af67c4017204dfa4c5c28d410271b99c0fdac16472766dffcf05573f191",
+    "pixel-audit.json": "a4ff8b7cd4b8352d9973bcdfbe64bad5700a4b940c8d85a4bb26164837b0e448",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "6d0d47382c261b6ddf4d36df7925c3b403814e343cf3ec19a81c55bdee6b6534",
+    "preview.gif": "48a6f4ebce19eb90ac7245b9adcff5f52c740f0fea37cbdf61e9179328b9ca40",
+    "scene-native.png": "27e68e9c05889bcf43b0994938a886b706a99425c9115489dfb4a7cd48bf026e",
+    "sheet.png": "b9187d9bdc05cab6c70f8de72443def3e04f5141728a0251cb760798b968c74b",
+    "source-audit.json": "c8e7e663e430115af3f6ace4f424dc5686bd9826a8e34f20c924424ba829af25",
+    "sprite.json": "6f7f0747049db64df77785d79bb137a47b084e596ecc2824ab9ecae97e406184"
+  }
+}

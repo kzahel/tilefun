@@ -1,0 +1,11 @@
+{
+  "identity": "ruby-throated-hummingbird-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1/ruby-throated-hummingbird.blend": "4cfd8ea1d65cccde6da55610504790aaadc27bf300e150f46a939e6b2e861f50",
+    "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/ruby-throated-hummingbird.blend": "bf8cd3bcd5f86fa4d80b0e79b02075d2f3c3d24bf55ec6273e048e34aa2558c7"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,12 @@
+{
+  "identity": "meerkat-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 308,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 308,
+  "sheetSha256": "12224e3cc4725c8f45c49b3bd2801f4b57e89a4fa02a0cd036f12152763ffb9f"
+}

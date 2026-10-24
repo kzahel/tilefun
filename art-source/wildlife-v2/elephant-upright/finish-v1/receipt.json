@@ -1,0 +1,53 @@
+{
+  "identity": "elephant-upright-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "elephant-upright-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "5081489f4ce31b51848a924597226e6668c2c9f3ed2dc3a0b2b58387d341701f",
+      "index.html": "e1fb4ba540f9cf03ed75ef6a8eddfc466b63637807b773a8bd6996f3906db2fb",
+      "pixel-audit.json": "ec5d04fcf0558ff7970af1e1ccda18a637a8059adb528021c7d29971f634c049",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "9279c8ecf0c5e5c559321d976418c14007bd208070fd6bc4919e3b61973af8a6",
+      "preview.gif": "aa52e1a34478a5c05ca05513ed865cf1460aca4c2c82153e09414cddcdd9a3ae",
+      "scene-native.png": "7ac4ef04bacafa5b3b9c32b09058960e3db1a66265b680d4bcde7be4eb568d0b",
+      "sheet.png": "71581783ac9aecdd8f1faa66c5a803a5e947b6dba4b2d5005ea4f2ef56362d4e",
+      "source-audit.json": "a7ecccbdbde859ecdf3029a4a8387836227d48b81bdc6fbca9ebd78279332be9",
+      "sprite.json": "f3c7be84158f69447a1110bf044c5ae9d7a64f4ab39d577f906b06bf2805fe5e"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/elephant-upright/finish-v1/README.md": "95bc3f76afdf6918936c4a881a91ee8b39eecca7d3690595e3b7564e53c6e4e7",
+    "art-source/wildlife-v2/elephant-upright/finish-v1/inputs.json": "422df3736e84c87962b58f65771a8033d2593de0d0fa8ea3232d4001c3a0b591",
+    "art-source/wildlife-v2/elephant-upright/finish-v1/replay.json": "a46c2a51097ddc9052eac4147b9496464fd521a24f7cab4df00cb1e7a247af99",
+    "art-source/wildlife-v2/elephant-upright/roster-v3/elephant-upright.blend": "6e90dea00282f3ebc0244bcba207a45e6a7c4b8457399a44b9f73172c4b0d146",
+    "art-source/wildlife-v2/elephant-upright/roster-v3/inputs.json": "0d4c2b5e64cd00d1ba7ce1668ad4c657650b9d081cbb756992f15ed39025291a",
+    "art-source/wildlife-v2/elephant-upright/roster-v3/projection.json": "4240be3440a0f94fbd155d96c9959087307ae38d94e149b687a0395be39e4917",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/contact-sheet-native.png": "5081489f4ce31b51848a924597226e6668c2c9f3ed2dc3a0b2b58387d341701f",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/index.html": "e1fb4ba540f9cf03ed75ef6a8eddfc466b63637807b773a8bd6996f3906db2fb",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/pixel-audit.json": "ec5d04fcf0558ff7970af1e1ccda18a637a8059adb528021c7d29971f634c049",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/preview-native.gif": "9279c8ecf0c5e5c559321d976418c14007bd208070fd6bc4919e3b61973af8a6",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/preview.gif": "aa52e1a34478a5c05ca05513ed865cf1460aca4c2c82153e09414cddcdd9a3ae",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/scene-native.png": "7ac4ef04bacafa5b3b9c32b09058960e3db1a66265b680d4bcde7be4eb568d0b",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/sheet.png": "71581783ac9aecdd8f1faa66c5a803a5e947b6dba4b2d5005ea4f2ef56362d4e",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/source-audit.json": "a7ecccbdbde859ecdf3029a4a8387836227d48b81bdc6fbca9ebd78279332be9",
+    "public/demos/wildlife-v2/elephant-upright/finish-v1/sprite.json": "f3c7be84158f69447a1110bf044c5ae9d7a64f4ab39d577f906b06bf2805fe5e",
+    "public/demos/wildlife-v2/elephant-upright/roster-v3/sheet.png": "737d409fbff268a748f6d08cacb9dd3cde7304fdf2ca546007a88cefa9f892d3",
+    "public/demos/wildlife-v2/elephant-upright/roster-v3/sprite.json": "9f11a528e5de119fe0624db92263915fd3e737f876416336f92e370bdccb9e30",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

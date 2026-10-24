@@ -1,0 +1,17 @@
+{
+  "identity": "quokka-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "1eb90b9cb2aed06dee77a98081a8f3b8640621ed36b376dbd6a89519c7e6912a",
+    "index.html": "75e39673cbbd9345e960d1a2fb1170e7422b3c233582c4fadb87b9fce3ee4af0",
+    "pixel-audit.json": "bfd311a22749b66c8c9478fb886e2961ee1612913e95fd773cae82c0cea0571e",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "793cd33f7287f158be0c72c231e9fb9ab2def5a66a495126b03428b33f632bea",
+    "preview.gif": "767505f58c3200f9e2c15eb375d728509af9e2255f15bdbaf5e72d3c4ee49503",
+    "scene-native.png": "6bf2e2198819381dd891d4bdb87fa323842ee822718e8fd1f1a48a42b39c3749",
+    "sheet.png": "f761176ffe280e1fa710504c6578e31562e1fbcd2c4df2f65eebddfb95b0adeb",
+    "source-audit.json": "77e4732eef993eb9c454f92c8b77459add1fd07e65e25b3c06f52a3d112161eb",
+    "sprite.json": "f5e1fac240dce9a1ae71ee7f9dd07bbcbaed867a35b245b5b3448a6e2c814c30"
+  }
+}

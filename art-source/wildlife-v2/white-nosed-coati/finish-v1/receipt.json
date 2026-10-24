@@ -1,0 +1,53 @@
+{
+  "identity": "white-nosed-coati-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "white-nosed-coati-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "b1b783d58b0cf2a1baa9a177d124f4c8430a2b909640f6439d44af09b239c8cf",
+      "index.html": "a57cc20fcd52ba3d93ae6776b40babe7080993bfefba95395b36fac4590142b1",
+      "pixel-audit.json": "97e8dd563c56230a68e15d83b3f5f871b242e3df6e4910da0095e15bdeed7f33",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "31e906ede281201c10b8de8673d0b3e129cc810a06e8cc6c4445ea559de48bd4",
+      "preview.gif": "eb5df45bea5fd3e964578427d6a11a769eea5e7a0320dcdd43f2484c60c6c977",
+      "scene-native.png": "335bf4db61423c4d423ee418245b80c9fe1a0600f9c82d66b95538d94f0d7583",
+      "sheet.png": "66c171538e6e4950de2cc590011f5875fb73f69d87ee5190053f78ba2c4acca8",
+      "source-audit.json": "0ae0620bdf3170dbe7dea2d51ecd6e4612690a3fcb608de25635d1ce3a60035c",
+      "sprite.json": "5db8bfe38d21aecb7cfe54640edbc40382665a91981d47255a4e99fbeffcd6ff"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/white-nosed-coati/finish-v1/README.md": "05fa3f02a5f6b304b15a70ee093b6057a0b80e7b71e62f2c0fbc0c366666f550",
+    "art-source/wildlife-v2/white-nosed-coati/finish-v1/inputs.json": "b7f0b8a0c23c045ac204c3a5de72e24d5c4a4115abda7112b005ba543ffeb387",
+    "art-source/wildlife-v2/white-nosed-coati/finish-v1/replay.json": "3b4bf563d4e8cc58471a1ff37cddcb64b8a98b8e8205d4551d9c403c9fe2e02e",
+    "art-source/wildlife-v2/white-nosed-coati/roster-v2/inputs.json": "a0859954e6fcd5f2e0b775df5c4a83d70e6573b4ab1f6c9e00c9c7575f115fe3",
+    "art-source/wildlife-v2/white-nosed-coati/roster-v2/projection.json": "f353ab1523925565183cfc8f8efe2cef52687645861c3186570e378c5004d309",
+    "art-source/wildlife-v2/white-nosed-coati/roster-v2/white-nosed-coati.blend": "80ae01cd767101cf9c4fb0798e05c5cf1157201eee463146d8b3bc385c63ac6e",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/contact-sheet-native.png": "b1b783d58b0cf2a1baa9a177d124f4c8430a2b909640f6439d44af09b239c8cf",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/index.html": "a57cc20fcd52ba3d93ae6776b40babe7080993bfefba95395b36fac4590142b1",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/pixel-audit.json": "97e8dd563c56230a68e15d83b3f5f871b242e3df6e4910da0095e15bdeed7f33",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/preview-native.gif": "31e906ede281201c10b8de8673d0b3e129cc810a06e8cc6c4445ea559de48bd4",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/preview.gif": "eb5df45bea5fd3e964578427d6a11a769eea5e7a0320dcdd43f2484c60c6c977",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/scene-native.png": "335bf4db61423c4d423ee418245b80c9fe1a0600f9c82d66b95538d94f0d7583",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/sheet.png": "66c171538e6e4950de2cc590011f5875fb73f69d87ee5190053f78ba2c4acca8",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/source-audit.json": "0ae0620bdf3170dbe7dea2d51ecd6e4612690a3fcb608de25635d1ce3a60035c",
+    "public/demos/wildlife-v2/white-nosed-coati/finish-v1/sprite.json": "5db8bfe38d21aecb7cfe54640edbc40382665a91981d47255a4e99fbeffcd6ff",
+    "public/demos/wildlife-v2/white-nosed-coati/roster-v2/sheet.png": "7ed3f520413c64e6e5c1fe3238e8c6989764b72d77a233113c38dcc2cea2c19d",
+    "public/demos/wildlife-v2/white-nosed-coati/roster-v2/sprite.json": "90a13fd5f8a40bad16e9534d8d472549958bf178b074a46070e284de45b5fe2a",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

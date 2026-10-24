@@ -1,0 +1,53 @@
+{
+  "identity": "toucan-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "toucan-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "f631318a4dcdedd4b3d71fdf1c2b9d5ec1dd902181125cc78d3d273f3382b801",
+      "index.html": "3d1f1566820b472f6288b82c6a52921bd113c193f2a1ec03312b9b7e1a01333c",
+      "pixel-audit.json": "fe35676f04285c4adae195643dd38b635c87f392aca5fc3e70f7dbea7597cc6f",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "c9ede445590edd3f64d902021a1c2d9017b39ab5accfe6b797cb99cf27f5d467",
+      "preview.gif": "8b26b6ae11a768dcbce00e717e7642adafb196e4d9b45ad2ebdc05d2a83a31fa",
+      "scene-native.png": "5ef5a1bd2cf2839680105ebc1580e17e541d5f08e5af9376619f7dfec8cf4966",
+      "sheet.png": "bdbf9c226a003e2871e33e3dfd9a6be6c757a7b9467a7f4ecf63e26d92a385ef",
+      "source-audit.json": "d4c2cee76e83f17a9cef4f48ba301d3ed4b27bc94d67b1cbb822787ee8136fab",
+      "sprite.json": "b9a7a54127e6a88afc5c0c3d899a69bb790f1744dec6246b3ca8bc221aaed4db"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/toucan/finish-v1/README.md": "f433677320709986634f2b1f7d449a35094edf055d57e840dd5b8d250f17e7a9",
+    "art-source/wildlife-v2/toucan/finish-v1/inputs.json": "4eb994381ad409f37f55a01f3d2d8f123215d28502643a2df462541662844284",
+    "art-source/wildlife-v2/toucan/finish-v1/replay.json": "087aa28cd7ab2453e896c7678e4e981d58de0cb34f73c58f7710d1bed782c8c6",
+    "art-source/wildlife-v2/toucan/roster-v2/inputs.json": "36bc3b4f0a4e6607f8179b29e4179e56934d9fb3e4915fac575764d0c51e549d",
+    "art-source/wildlife-v2/toucan/roster-v2/projection.json": "de547a6e4039801d9d4c24dd8a6a34521f3da4f40fecaffd9c74da3b79db3e05",
+    "art-source/wildlife-v2/toucan/roster-v2/toucan.blend": "43098cb7aba405c05b72e9f87cf43fe2e48624f21f17200c093a7447946feda5",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/toucan/finish-v1/contact-sheet-native.png": "f631318a4dcdedd4b3d71fdf1c2b9d5ec1dd902181125cc78d3d273f3382b801",
+    "public/demos/wildlife-v2/toucan/finish-v1/index.html": "3d1f1566820b472f6288b82c6a52921bd113c193f2a1ec03312b9b7e1a01333c",
+    "public/demos/wildlife-v2/toucan/finish-v1/pixel-audit.json": "fe35676f04285c4adae195643dd38b635c87f392aca5fc3e70f7dbea7597cc6f",
+    "public/demos/wildlife-v2/toucan/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/toucan/finish-v1/preview-native.gif": "c9ede445590edd3f64d902021a1c2d9017b39ab5accfe6b797cb99cf27f5d467",
+    "public/demos/wildlife-v2/toucan/finish-v1/preview.gif": "8b26b6ae11a768dcbce00e717e7642adafb196e4d9b45ad2ebdc05d2a83a31fa",
+    "public/demos/wildlife-v2/toucan/finish-v1/scene-native.png": "5ef5a1bd2cf2839680105ebc1580e17e541d5f08e5af9376619f7dfec8cf4966",
+    "public/demos/wildlife-v2/toucan/finish-v1/sheet.png": "bdbf9c226a003e2871e33e3dfd9a6be6c757a7b9467a7f4ecf63e26d92a385ef",
+    "public/demos/wildlife-v2/toucan/finish-v1/source-audit.json": "d4c2cee76e83f17a9cef4f48ba301d3ed4b27bc94d67b1cbb822787ee8136fab",
+    "public/demos/wildlife-v2/toucan/finish-v1/sprite.json": "b9a7a54127e6a88afc5c0c3d899a69bb790f1744dec6246b3ca8bc221aaed4db",
+    "public/demos/wildlife-v2/toucan/roster-v2/sheet.png": "a1c67aa763f95c9e4e4c97504520ac4420793bd52e6c7f3700160e3b84ac5517",
+    "public/demos/wildlife-v2/toucan/roster-v2/sprite.json": "a22cbd9bf6dbe7bbd159ef05fb5869cb44ca51b896a2eb18240d04c82638f437",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "guinea-pig-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "2698e74c53e5e8f59feda876a130a6e80af66764419338829d770122dc59e51b",
+    "index.html": "9396a5643b507d2768382de57d3be5a1852b8d0a3b08176f19e1de7fd5b164ca",
+    "pixel-audit.json": "e71a7e719df19965cf3d8e7503d49dae81fe6da7b627005680ac03f40b068845",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "addd8cf231aeb5e9fae31d3f4b1ed9408e12bf14c71a8043ed086e58b2ab45b8",
+    "preview.gif": "90a56b7cb6332208917f1743a98f5c05f94e47d9986092c3548840c944768c95",
+    "scene-native.png": "3af7c4d39be1b0c52d3fbd043b042c4a3444fca152cc3e546a965a27187cfdbe",
+    "sheet.png": "94958764d86a46eedec48a7c120f4b491f41139bc9435773f48d184b71d46b6d",
+    "source-audit.json": "cbbd990498a472d46f46825ffcb5d83e97c16512cc8b04797c974c39b3d23724",
+    "sprite.json": "e5bd297f5f8f12f47229d0ff8fc243bf1da89b1e7d707eb0319979352eca505f"
+  }
+}

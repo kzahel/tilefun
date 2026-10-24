@@ -1,0 +1,53 @@
+{
+  "identity": "walrus-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "walrus-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "95a99273ae1885c4d37236b3f718043fa44ec0cd00669fac8ed708c62cba8e6a",
+      "index.html": "2d379865a9d5cb85e2ddace37f846f379ddf97f682b3e2caf808d661c1549d00",
+      "pixel-audit.json": "05ef136a3e6970f8426bca5fa16a28e80f5760e794d05fdfaae459aacfd92997",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "c7788bdabf20a6c2485bce246fdaff3b0bb63fe083d903f5b94c566e428683ef",
+      "preview.gif": "e1a308c8d021e7f84ce89bf7b0a0905749832d8922ae68413b4d86c931580424",
+      "scene-native.png": "a7ed08c0bd2dbe88cc2887670ceda671fb2845fe78489d2bdd055cc4aeae1d04",
+      "sheet.png": "9640ad6c3f1b5216a0497a60209616eb219a65fbbba63dfc0cc9e5a5c1843406",
+      "source-audit.json": "2ea953a84536007963ffa69a0867d2e9f2ff9bee71a6d2a77884129cfadf4cba",
+      "sprite.json": "01864e0f1f9da08636431ebbc088ae4496699af53ada55d30e68fae1a27904ea"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/walrus/finish-v1/README.md": "d624515b2a53f54b3d5d8852ae2e52535cf3c173c2238dad9491c25143c63ef9",
+    "art-source/wildlife-v2/walrus/finish-v1/inputs.json": "c496ded5b893947735393da819c6176e55cd10c83b68a2dcaa98f3c3ff4ea845",
+    "art-source/wildlife-v2/walrus/finish-v1/replay.json": "09615b22c9fa701372f9d8d71041f3f32bb1b732b436660d142134402f438df3",
+    "art-source/wildlife-v2/walrus/roster-v3/inputs.json": "dc75cf896c7219444a9522888dcf5e9f0c6598ea1eeb1bcaa09a316239f91486",
+    "art-source/wildlife-v2/walrus/roster-v3/projection.json": "ec3fb4a61c9d32c3a5879171624c93c1f981667693cf43f22013390a2b43d342",
+    "art-source/wildlife-v2/walrus/roster-v3/walrus.blend": "ebc0ddf43df40caf83c42a86622fc93829f0748e1a5ccf8b718e61dd299e2ee9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/walrus/finish-v1/contact-sheet-native.png": "95a99273ae1885c4d37236b3f718043fa44ec0cd00669fac8ed708c62cba8e6a",
+    "public/demos/wildlife-v2/walrus/finish-v1/index.html": "2d379865a9d5cb85e2ddace37f846f379ddf97f682b3e2caf808d661c1549d00",
+    "public/demos/wildlife-v2/walrus/finish-v1/pixel-audit.json": "05ef136a3e6970f8426bca5fa16a28e80f5760e794d05fdfaae459aacfd92997",
+    "public/demos/wildlife-v2/walrus/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/walrus/finish-v1/preview-native.gif": "c7788bdabf20a6c2485bce246fdaff3b0bb63fe083d903f5b94c566e428683ef",
+    "public/demos/wildlife-v2/walrus/finish-v1/preview.gif": "e1a308c8d021e7f84ce89bf7b0a0905749832d8922ae68413b4d86c931580424",
+    "public/demos/wildlife-v2/walrus/finish-v1/scene-native.png": "a7ed08c0bd2dbe88cc2887670ceda671fb2845fe78489d2bdd055cc4aeae1d04",
+    "public/demos/wildlife-v2/walrus/finish-v1/sheet.png": "9640ad6c3f1b5216a0497a60209616eb219a65fbbba63dfc0cc9e5a5c1843406",
+    "public/demos/wildlife-v2/walrus/finish-v1/source-audit.json": "2ea953a84536007963ffa69a0867d2e9f2ff9bee71a6d2a77884129cfadf4cba",
+    "public/demos/wildlife-v2/walrus/finish-v1/sprite.json": "01864e0f1f9da08636431ebbc088ae4496699af53ada55d30e68fae1a27904ea",
+    "public/demos/wildlife-v2/walrus/roster-v3/sheet.png": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3",
+    "public/demos/wildlife-v2/walrus/roster-v3/sprite.json": "1ca06a5e8f3136360eac248742a8f68e621cf3102fe83bf5413b2f43e5e6e615",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

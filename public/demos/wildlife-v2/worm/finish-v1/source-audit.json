@@ -1,0 +1,10 @@
+{
+  "identity": "worm-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/worm/roster-v3/worm.blend": "a74b4f7fbb2c791907229cc035ba934be8ee25972c1a09e85a0dce83823cb767"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

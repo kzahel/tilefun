@@ -1,0 +1,17 @@
+{
+  "identity": "blue-footed-booby-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "76156b56fe5fd51c6778ceca1a21daa8b045ca284f8b92c6cecc169f872b2e21",
+    "index.html": "1ead3c23647a4d544089a3201b14eee03bb9fb258b3b4c4dc1a1c0341ef697b8",
+    "pixel-audit.json": "b38c051de90b8f390b38280124fd3c91120a95b383b545de11228e80460bf8a3",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "35167125584127f9ff690d6c9d9a1c1a5a64cc827491d3469163c80bd09abaa6",
+    "preview.gif": "b4b53b4abb6e41f0293dcd1870ea9545b24290a2228496a900178059f228911b",
+    "scene-native.png": "6bcab981f18aba8662cb78148ee58066696cc95abc9fc1b4775df02431082ff3",
+    "sheet.png": "23bf7a1d9fcbbb7274653906246d03947153e36ec3a469a707b3d39ce081e30f",
+    "source-audit.json": "621b7e38b41075583b1fe91aeb509a0a0a1edc7e4291b5f7eae87de42019816c",
+    "sprite.json": "7d373586926a47147485d5a552b0757bbfa8609079c808c8a98bb12b6c4edea8"
+  }
+}

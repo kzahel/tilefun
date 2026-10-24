@@ -1,0 +1,12 @@
+{
+  "identity": "pufferfish-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "36f635112b9186efee8c4dca6126b774a77012027eb9d9c1ef725598408aed5a"
+}

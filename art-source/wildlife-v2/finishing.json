@@ -1,0 +1,1799 @@
+{
+  "version": 1,
+  "policy": "wildlife-paint-v1",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "rules": [
+    "An animal has one explicit finishing contract for every clip.",
+    "Geometry or authored part paint owns alpha; exterior dilation is forbidden.",
+    "Native canvas, anchor, clip columns/timing and sockets remain source-owned.",
+    "Registered predecessors remain immutable.",
+    "New pixels require new pending review identities."
+  ],
+  "animals": [
+    {
+      "id": "fox",
+      "name": "Red fox",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/fox/behavior-v1/sheet.png",
+      "sourceSha256": "ae13a95740fc418d30bf5a6e61ef3f10c04f5bdd0df815a94447a4f2bd908be3",
+      "source": "art-source/wildlife-v2/fox/behavior-v1"
+    },
+    {
+      "id": "cat",
+      "name": "Cat",
+      "policy": "retained-parts",
+      "sourceImage": "demos/wildlife-v2/cat/behavior-v1/sheet.png",
+      "sourceSha256": "4702f4bfba2f5c83f9e1ebbb5169927cf19a5702767391609e81571198afc994",
+      "source": "art-source/wildlife-v2/cat/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "dog",
+      "name": "Dog",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/dog/behavior-v1/sheet.png",
+      "sourceSha256": "e73713252efb76dab0ca9788e209af7bb6c784808b0837e6c07333a7f84a5a1e",
+      "source": "art-source/wildlife-v2/dog/behavior-v1"
+    },
+    {
+      "id": "cow",
+      "name": "Pasture cow",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/cow/behavior-v1/sheet.png",
+      "sourceSha256": "5259b5a703b3ec71b6dbd3b74233763067a6ff7c56aa5bf860f05a6f061f8f40",
+      "source": "art-source/wildlife-v2/cow/behavior-v1"
+    },
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/sheep/behavior-v1/sheet.png",
+      "sourceSha256": "044c90a53b9cbcf56ff4cd1aead261f4391a6d72e7056b122eb5de72d81169f7",
+      "source": "art-source/wildlife-v2/sheep/behavior-v1"
+    },
+    {
+      "id": "horse",
+      "name": "Horse",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/horse/behavior-v1/sheet.png",
+      "sourceSha256": "1db306ded3bf8aa8075e2c5f85d740a56a7309073fe4f9a4192da66027520c68",
+      "source": "art-source/wildlife-v2/horse/behavior-v1"
+    },
+    {
+      "id": "piglet",
+      "name": "Pig",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/piglet/behavior-v1/sheet.png",
+      "sourceSha256": "dcf3d7c84b222a5797deb23ecf3158814fd2a75af26dc7fc3f70a65745f07b40",
+      "source": "art-source/wildlife-v2/piglet/behavior-v1"
+    },
+    {
+      "id": "goat",
+      "name": "Goat",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/goat/behavior-v1/sheet.png",
+      "sourceSha256": "c3db8cf9b28a67f7e3c8c2a0e31dd79e4d3a42f8557a7ec49ab58c5f6b605967",
+      "source": "art-source/wildlife-v2/goat/behavior-v1"
+    },
+    {
+      "id": "elephant",
+      "name": "Elephant",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/elephant/behavior-v1/sheet.png",
+      "sourceSha256": "09dbbece84aab75cccfe0bac0d2c9dc44921bbad65cac7a2c9dfcb5bc4b50cde",
+      "source": "art-source/wildlife-v2/elephant/behavior-v1"
+    },
+    {
+      "id": "giraffe",
+      "name": "Giraffe",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/giraffe/behavior-v1/sheet.png",
+      "sourceSha256": "949a518d2a8a7c0d1e1948b7a68108a72ae6bb62ffe285547101ccab210c2bf3",
+      "source": "art-source/wildlife-v2/giraffe/behavior-v1"
+    },
+    {
+      "id": "kangaroo",
+      "name": "Kangaroo",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/kangaroo/draft-v1/sheet.png",
+      "sourceSha256": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+      "source": "art-source/wildlife-v2/kangaroo/draft-v1"
+    },
+    {
+      "id": "king-cobra",
+      "name": "King cobra",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/king-cobra/draft-v1/sheet.png",
+      "sourceSha256": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+      "source": "art-source/wildlife-v2/king-cobra/draft-v1"
+    },
+    {
+      "id": "ant",
+      "name": "Ant",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/ant/draft-v2/sheet.png",
+      "sourceSha256": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "source": "art-source/wildlife-v2/ant/draft-v2"
+    },
+    {
+      "id": "fish",
+      "name": "Pond fish",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/fish/draft-v2/sheet.png",
+      "sourceSha256": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "source": "art-source/wildlife-v2/fish/draft-v2"
+    },
+    {
+      "id": "penguin",
+      "name": "Penguin",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/penguin/draft-v1/sheet.png",
+      "sourceSha256": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+      "source": "art-source/wildlife-v2/penguin/draft-v1"
+    },
+    {
+      "id": "harbor-seal",
+      "name": "Harbor seal",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/harbor-seal/draft-v1/sheet.png",
+      "sourceSha256": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+      "source": "art-source/wildlife-v2/harbor-seal/draft-v1"
+    },
+    {
+      "id": "manta-ray",
+      "name": "Manta ray",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/manta-ray/draft-v1/sheet.png",
+      "sourceSha256": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+      "source": "art-source/wildlife-v2/manta-ray/draft-v1"
+    },
+    {
+      "id": "chicken",
+      "name": "Buff hen",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/chicken/behavior-v1/sheet.png",
+      "sourceSha256": "b82e728eaaa059b53ca06d82356ed6374348f50ccfd6fe2b35ecc6db77f62acd",
+      "source": "art-source/wildlife-v2/chicken/behavior-v1"
+    },
+    {
+      "id": "butterfly",
+      "name": "Orange butterfly",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/butterfly/roster-v2/sheet.png",
+      "sourceSha256": "480839ec7e39795e12275c3607b52d19647876d1881e2e35ea00e0e7b2fd8f8d",
+      "source": "art-source/wildlife-v2/butterfly/roster-v2"
+    },
+    {
+      "id": "red-squirrel",
+      "name": "Red squirrel",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/red-squirrel/behavior-v1/sheet.png",
+      "sourceSha256": "b503373982d721e8f10d583016de0f3abe569abccc8df77425754e7d23bae356",
+      "source": "art-source/wildlife-v2/red-squirrel/behavior-v1"
+    },
+    {
+      "id": "gorilla",
+      "name": "Silverback gorilla",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/gorilla/roster-v2/sheet.png",
+      "sourceSha256": "4ea2ebb49becdcb64612ce98f18f18d73898ba9866b882dae8f826884e4f39b7",
+      "source": "art-source/wildlife-v2/gorilla/roster-v2"
+    },
+    {
+      "id": "crab",
+      "name": "Rust crab",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/crab/roster-v2/sheet.png",
+      "sourceSha256": "3b74d8d4b721a04fdc5c3f2305b7d278cc649867608fe736a8ea9adcb354e2f2",
+      "source": "art-source/wildlife-v2/crab/roster-v2"
+    },
+    {
+      "id": "octopus",
+      "name": "Rust octopus",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/octopus/roster-v2/sheet.png",
+      "sourceSha256": "22e92eb63172d89587318666f6330fb87722498c7478ed7ac4b7f33102bfda43",
+      "source": "art-source/wildlife-v2/octopus/roster-v2"
+    },
+    {
+      "id": "jellyfish",
+      "name": "Moon jellyfish",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/jellyfish/roster-v2/sheet.png",
+      "sourceSha256": "14b0cf9552e46d876a7e3d6795d12ccd3573b8a8222b7e2d677f85d7f7ca7d0b",
+      "source": "art-source/wildlife-v2/jellyfish/roster-v2"
+    },
+    {
+      "id": "donkey",
+      "name": "Grey donkey",
+      "policy": "retained-parts",
+      "sourceImage": "demos/wildlife-v2/donkey/behavior-v1/sheet.png",
+      "sourceSha256": "686bb36f677c943aad9c7a7cd6ede4b7b2d09f36ed681b9cad31ea709c7e8aaf",
+      "source": "art-source/wildlife-v2/donkey/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "mule",
+      "name": "Brown mule",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/mule/roster-v2/sheet.png",
+      "sourceSha256": "5387006bb25fc9d122cfa477a1bb1ea87842ee3474e789dda21ee522b7c058bd",
+      "source": "art-source/wildlife-v2/mule/roster-v2"
+    },
+    {
+      "id": "llama",
+      "name": "Brown llama",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/llama/roster-v2/sheet.png",
+      "sourceSha256": "3b563909383f39b1e499aeec44fdb0cc885d872f2081de66980a22ddfefbc72e",
+      "source": "art-source/wildlife-v2/llama/roster-v2"
+    },
+    {
+      "id": "alpaca",
+      "name": "Cream alpaca",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/alpaca/roster-v2/sheet.png",
+      "sourceSha256": "ee03f6099f75673aab4031da211b98137618800e70832ac78c0b83914ddeae2b",
+      "source": "art-source/wildlife-v2/alpaca/roster-v2"
+    },
+    {
+      "id": "gemsbok-oryx",
+      "name": "Gemsbok",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/gemsbok-oryx/roster-v2/sheet.png",
+      "sourceSha256": "56f54e80ae0f4274d9d1a7e481ddd120f6238dbcca3ec0a0d62eb18617fa0967",
+      "source": "art-source/wildlife-v2/gemsbok-oryx/roster-v2"
+    },
+    {
+      "id": "gazelle",
+      "name": "Gazelle",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/gazelle/roster-v2/sheet.png",
+      "sourceSha256": "1315a5ab4f3c3f36cd30c9ad867c14869b65043230d171b68840942de07e68d3",
+      "source": "art-source/wildlife-v2/gazelle/roster-v2"
+    },
+    {
+      "id": "impala",
+      "name": "Impala",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/impala/roster-v2/sheet.png",
+      "sourceSha256": "ac59e7fcd5ee4ae0bbccf588b549fb9a20188799ce368f56cd98447864dea11e",
+      "source": "art-source/wildlife-v2/impala/roster-v2"
+    },
+    {
+      "id": "springbok",
+      "name": "Springbok",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/springbok/roster-v2/sheet.png",
+      "sourceSha256": "d174b7f5fc2a0199b6eeaf0ce978fd9adbaf324c7ff95afc63c3fa1e82f08a3d",
+      "source": "art-source/wildlife-v2/springbok/roster-v2"
+    },
+    {
+      "id": "saiga-antelope",
+      "name": "Saiga antelope",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/saiga-antelope/roster-v2/sheet.png",
+      "sourceSha256": "27e53d854fc82174d1e40ddae42598f272d4d3b304d0900dd3f98ce8d0a7fa8a",
+      "source": "art-source/wildlife-v2/saiga-antelope/roster-v2"
+    },
+    {
+      "id": "gerenuk",
+      "name": "Gerenuk",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/gerenuk/roster-v2/sheet.png",
+      "sourceSha256": "d103ec48ead32eadc6a62617f2320935244c574f543f4453806c0bd1ab474fb7",
+      "source": "art-source/wildlife-v2/gerenuk/roster-v2"
+    },
+    {
+      "id": "american-bison",
+      "name": "American bison",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/american-bison/roster-v2/sheet.png",
+      "sourceSha256": "84210ee6dc321b1803f4b6a2a56546f1cc8d3de5ece8d7b04ea0e2422f0f4f1e",
+      "source": "art-source/wildlife-v2/american-bison/roster-v2"
+    },
+    {
+      "id": "water-buffalo",
+      "name": "Water buffalo",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/water-buffalo/roster-v2/sheet.png",
+      "sourceSha256": "b8466f9936621a7617b79f29d572c9f7d523cf09f6f6b4fadf78acedd3a580e9",
+      "source": "art-source/wildlife-v2/water-buffalo/roster-v2"
+    },
+    {
+      "id": "musk-ox",
+      "name": "Musk ox",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/musk-ox/roster-v2/sheet.png",
+      "sourceSha256": "b629739ae88acb5024894f96ef5582c1441a00cc752cde352f29387ba06a694d",
+      "source": "art-source/wildlife-v2/musk-ox/roster-v2"
+    },
+    {
+      "id": "wildebeest",
+      "name": "Wildebeest",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/wildebeest/roster-v2/sheet.png",
+      "sourceSha256": "7ee9e6551cab1f5a03208668f26e59dc1b1f6990a843e338717bae69e738416f",
+      "source": "art-source/wildlife-v2/wildebeest/roster-v2"
+    },
+    {
+      "id": "zebra",
+      "name": "Zebra",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/zebra/roster-v2/sheet.png",
+      "sourceSha256": "a097f5f1bd2e15e6d852c3a816555aae49a6865a1d81594775aab6dacae4b69e",
+      "source": "art-source/wildlife-v2/zebra/roster-v2"
+    },
+    {
+      "id": "okapi",
+      "name": "Okapi",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/okapi/roster-v2/sheet.png",
+      "sourceSha256": "11033686947a6fa9a27aef1da20dbbac204b459bc7e276fcd520b64cdcdf7644",
+      "source": "art-source/wildlife-v2/okapi/roster-v2"
+    },
+    {
+      "id": "camel",
+      "name": "Dromedary camel",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/camel/roster-v2/sheet.png",
+      "sourceSha256": "7447703104520e03331c42297a96238c11559063f4e0a7339433c2ddafc9526d",
+      "source": "art-source/wildlife-v2/camel/roster-v2"
+    },
+    {
+      "id": "panda",
+      "name": "Panda",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/panda/roster-v2/sheet.png",
+      "sourceSha256": "eaf32465fcf406013586b6aa906bc7b1a7b407f4aa1a7304764235c126395f47",
+      "source": "art-source/wildlife-v2/panda/roster-v2"
+    },
+    {
+      "id": "moose",
+      "name": "Moose",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/moose/roster-v2/sheet.png",
+      "sourceSha256": "53583c75dd451bf3967fe7e79d064d988a6a86a96a77b2b44077fca4bf05fda0",
+      "source": "art-source/wildlife-v2/moose/roster-v2"
+    },
+    {
+      "id": "elk",
+      "name": "Elk",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/elk/roster-v2/sheet.png",
+      "sourceSha256": "0e9a14ef554a58ec32a92f65c2b91d396441ac974054cb44453a754348620e9c",
+      "source": "art-source/wildlife-v2/elk/roster-v2"
+    },
+    {
+      "id": "rhinoceros",
+      "name": "White rhinoceros",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/rhinoceros/roster-v2/sheet.png",
+      "sourceSha256": "8c60a8aab5b7c9819805a1aaaf3b91278b63ec778cebdc9132baf28dc7c34386",
+      "source": "art-source/wildlife-v2/rhinoceros/roster-v2"
+    },
+    {
+      "id": "warthog",
+      "name": "Warthog",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/warthog/roster-v2/sheet.png",
+      "sourceSha256": "22e0cd678c897f9bcf7adfb6c0c64c54952c5abfd9387be6850c4e19c42ecb32",
+      "source": "art-source/wildlife-v2/warthog/roster-v2"
+    },
+    {
+      "id": "hippopotamus",
+      "name": "Hippopotamus",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/hippopotamus/roster-v2/sheet.png",
+      "sourceSha256": "9b37d39010704e8ce3e08aee464d7f5b22d5cbcd813fb2cf3fa38ab211c30c22",
+      "source": "art-source/wildlife-v2/hippopotamus/roster-v2"
+    },
+    {
+      "id": "mouse",
+      "name": "Mouse",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/mouse/roster-v2/sheet.png",
+      "sourceSha256": "3699dc4a8ec5013a587b1ac36780cea429f74d3c35bf2176c9709162d6cff821",
+      "source": "art-source/wildlife-v2/mouse/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "rat",
+      "name": "Rat",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/rat/roster-v2/sheet.png",
+      "sourceSha256": "a3d35eaae787e25923d2fe7abb289f30bafb11fc3a78691f7bfcba74689643fe",
+      "source": "art-source/wildlife-v2/rat/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "hamster",
+      "name": "Hamster",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/hamster/roster-v2/sheet.png",
+      "sourceSha256": "f602031c52ede76cca9cb83d5ec1b455213d2f0617f0777f2670e53f89664fb2",
+      "source": "art-source/wildlife-v2/hamster/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "guinea-pig",
+      "name": "Guinea pig",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/guinea-pig/roster-v2/sheet.png",
+      "sourceSha256": "90822f106d85d953f7794d0589c702aec526bed7150aea1e2f4aff28518b45da",
+      "source": "art-source/wildlife-v2/guinea-pig/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "chinchilla",
+      "name": "Chinchilla",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/chinchilla/roster-v2/sheet.png",
+      "sourceSha256": "8cc6fe2013df49602e25474dda199bcdb4aabb185f5e643310c5724028761ca2",
+      "source": "art-source/wildlife-v2/chinchilla/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "hedgehog",
+      "name": "Hedgehog",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/hedgehog/behavior-v1/sheet.png",
+      "sourceSha256": "73482e3fc9e719afd1d19f9612270bb9600f9dfa9e99ec880dfeb2ab3a55593e",
+      "source": "art-source/wildlife-v2/hedgehog/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "porcupine",
+      "name": "Porcupine",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/porcupine/behavior-v1/sheet.png",
+      "sourceSha256": "c1920e783bae806e7ec7969eb73a6df195eaa6d316214e0b79e3b66a8e6816f5",
+      "source": "art-source/wildlife-v2/porcupine/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "raccoon",
+      "name": "Raccoon",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/raccoon/behavior-v1/sheet.png",
+      "sourceSha256": "c9a9f77230d75cc5f04ae69c2f9522fa28f13f0421a5db46fb3d715fc542db7d",
+      "source": "art-source/wildlife-v2/raccoon/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "skunk",
+      "name": "Skunk",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/skunk/roster-v2/sheet.png",
+      "sourceSha256": "e248fc77c572c7d82725a622042095fa5043b535085ab25bba5514d9bc269de9",
+      "source": "art-source/wildlife-v2/skunk/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "red-panda",
+      "name": "Red panda",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/red-panda/roster-v2/sheet.png",
+      "sourceSha256": "819fa414c4507ade6a29474f3036088d2376eeb6a4a0c2f8bfe43a289f4e8d82",
+      "source": "art-source/wildlife-v2/red-panda/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "ostrich",
+      "name": "Ostrich",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/ostrich/roster-v2/sheet.png",
+      "sourceSha256": "a1fa35a3ae6eda5a4e135c891d13fce20637b30a94d49cb71b1a455adf7837a0",
+      "source": "art-source/wildlife-v2/ostrich/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "emu",
+      "name": "Emu",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/emu/roster-v2/sheet.png",
+      "sourceSha256": "75168bb671db0dc788738a964d6d749ceaca8fa0cde910c7c87b88a6a635e915",
+      "source": "art-source/wildlife-v2/emu/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "cassowary",
+      "name": "Cassowary",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/cassowary/roster-v2/sheet.png",
+      "sourceSha256": "191d501b42b8537b9995f9586fb583c976c8b7cea20bf03ec66c441ac89cf42f",
+      "source": "art-source/wildlife-v2/cassowary/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "kiwi",
+      "name": "Kiwi",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/kiwi/roster-v2/sheet.png",
+      "sourceSha256": "851fbcb2c641484a9dd9f306f4703c0e6750aa7fea6ce63d4c4e1099e830bf75",
+      "source": "art-source/wildlife-v2/kiwi/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "kakapo",
+      "name": "Kakapo",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/kakapo/roster-v2/sheet.png",
+      "sourceSha256": "6481f458ee7d9da0807ade14d6c3996ee27d32afc077dbc1c52c9fe90fec79d7",
+      "source": "art-source/wildlife-v2/kakapo/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "wild-turkey",
+      "name": "Wild turkey",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/wild-turkey/roster-v2/sheet.png",
+      "sourceSha256": "3e40859523ef6f55737a82089419e0267089a1970ebac4ee21f649d0658e5178",
+      "source": "art-source/wildlife-v2/wild-turkey/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "peacock",
+      "name": "Peacock",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/peacock/behavior-v1/sheet.png",
+      "sourceSha256": "728f088cfcad7e9b902026f929777e1b692f6fb6c869e7a524419e2fa807dcd2",
+      "source": "art-source/wildlife-v2/peacock/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "whale-shark",
+      "name": "Whale shark",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/whale-shark/roster-v2/sheet.png",
+      "sourceSha256": "fc331cb0298856f6be72c68430bc1788ce65a292245a7fa57bf3b55ae33fcdad",
+      "source": "art-source/wildlife-v2/whale-shark/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "humpback-whale",
+      "name": "Humpback whale",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/humpback-whale/roster-v2/sheet.png",
+      "sourceSha256": "0a0d557222242fc58dca238f1311d9031f57c4e7e05339052a19c91e0645fde0",
+      "source": "art-source/wildlife-v2/humpback-whale/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "blue-whale",
+      "name": "Blue whale",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/blue-whale/roster-v2/sheet.png",
+      "sourceSha256": "15641849a3c5bf3a9d66694629ab00467a717fb5699204b1bf796a2c0950b875",
+      "source": "art-source/wildlife-v2/blue-whale/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "sea-turtle",
+      "name": "Sea turtle",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/sea-turtle/roster-v2/sheet.png",
+      "sourceSha256": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6",
+      "source": "art-source/wildlife-v2/sea-turtle/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "pigeon",
+      "name": "Rock pigeon",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/pigeon/roster-v2/sheet.png",
+      "sourceSha256": "90409d6ac0f04629e22e295339e94642ba73710e9e682d8d4c07c0573067a813",
+      "source": "art-source/wildlife-v2/pigeon/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "dove",
+      "name": "Dove",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/dove/roster-v2/sheet.png",
+      "sourceSha256": "61c8bb9ceb3c9f9eed03b8b5f84cf61ece0f6667b88c6924b680a40f2bc99ac7",
+      "source": "art-source/wildlife-v2/dove/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "sparrow",
+      "name": "Sparrow",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/sparrow/roster-v2/sheet.png",
+      "sourceSha256": "d96b72f60e4762565fa782bd3f60673be019463757197b6d7a55113c599f7ff6",
+      "source": "art-source/wildlife-v2/sparrow/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "parrot",
+      "name": "Parrot",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/parrot/roster-v2/sheet.png",
+      "sourceSha256": "029a3c66268f63cf55b85f2b1aa8237c10de629c35303f7fa65600a5103d7488",
+      "source": "art-source/wildlife-v2/parrot/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "toucan",
+      "name": "Toucan",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/toucan/roster-v2/sheet.png",
+      "sourceSha256": "a1c67aa763f95c9e4e4c97504520ac4420793bd52e6c7f3700160e3b84ac5517",
+      "source": "art-source/wildlife-v2/toucan/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "great-hornbill",
+      "name": "Great hornbill",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/great-hornbill/roster-v2/sheet.png",
+      "sourceSha256": "28238b91fbe75430af2c9369b1d4cccfa5d9b558a58681e59f8326e1e61070c3",
+      "source": "art-source/wildlife-v2/great-hornbill/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "raven",
+      "name": "Raven",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/raven/behavior-v1/sheet.png",
+      "sourceSha256": "aa700a8768a5913d156a8ca221299ef5c5c91fea7fb53108d60803e0f644f2af",
+      "source": "art-source/wildlife-v2/raven/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "crow",
+      "name": "Carrion crow",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/crow/behavior-v1/sheet.png",
+      "sourceSha256": "63886d849149c4f0ed4aaf3c29b43f56d7c498f5e6e25fa49fb87c2c2bbf60ad",
+      "source": "art-source/wildlife-v2/crow/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "atlantic-puffin",
+      "name": "Atlantic puffin",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/atlantic-puffin/roster-v3/sheet.png",
+      "sourceSha256": "92f5eab133575b182d418b356e162c40506475ec5c70bbec4da4d5718c9bebed",
+      "source": "art-source/wildlife-v2/atlantic-puffin/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "chimpanzee",
+      "name": "Chimpanzee",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/chimpanzee/roster-v3/sheet.png",
+      "sourceSha256": "a354ba2ffd1f006234ba9fd42f3a3e08a75b703210319773cf93de142c9beeed",
+      "source": "art-source/wildlife-v2/chimpanzee/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "orangutan",
+      "name": "Orangutan",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/orangutan/roster-v3/sheet.png",
+      "sourceSha256": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e",
+      "source": "art-source/wildlife-v2/orangutan/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "capuchin-monkey",
+      "name": "Capuchin monkey",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/capuchin-monkey/behavior-v1/sheet.png",
+      "sourceSha256": "ee5a78b0fafe8211f6287c3d0bf0340028ef4aca7f861d08420f5f42e4b4272a",
+      "source": "art-source/wildlife-v2/capuchin-monkey/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "ring-tailed-lemur",
+      "name": "Ring-tailed lemur",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/sheet.png",
+      "sourceSha256": "2d7a78a2bb2352e249f4648641d25e4f2dea4ab0464e60b0aea51b8a7b31dd0f",
+      "source": "art-source/wildlife-v2/ring-tailed-lemur/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "mandrill",
+      "name": "Mandrill",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/mandrill/roster-v3/sheet.png",
+      "sourceSha256": "f18c948dc2e4801d060ac7ab8e550890984d902c74e99546896ede26c0d74dc5",
+      "source": "art-source/wildlife-v2/mandrill/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "proboscis-monkey",
+      "name": "Proboscis monkey",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/proboscis-monkey/roster-v3/sheet.png",
+      "sourceSha256": "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3",
+      "source": "art-source/wildlife-v2/proboscis-monkey/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "japanese-macaque",
+      "name": "Japanese macaque",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/japanese-macaque/roster-v3/sheet.png",
+      "sourceSha256": "8d88989bdcb0c2126b8493271342a9980c1e7a9faaa9b9ce164eae193e302ba7",
+      "source": "art-source/wildlife-v2/japanese-macaque/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "ocean-sunfish",
+      "name": "Ocean sunfish",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/ocean-sunfish/roster-v3/sheet.png",
+      "sourceSha256": "6bec15ed654d1d21c5ad021dc2b5f823f457d9bab2044b9f0949f5fd2bb95037",
+      "source": "art-source/wildlife-v2/ocean-sunfish/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "pufferfish",
+      "name": "Pufferfish",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/pufferfish/roster-v3/sheet.png",
+      "sourceSha256": "ab1d201605b7cd0b56ed974d768b9114b27cf4d3956c0d779ea2dd92f63811bd",
+      "source": "art-source/wildlife-v2/pufferfish/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "meerkat",
+      "name": "Meerkat",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/meerkat/behavior-v1/sheet.png",
+      "sourceSha256": "0e94f1ae11b9933cacf7c7580da1c8f745cdbba89ed39aca79c2ac6f54b5c24d",
+      "source": "art-source/wildlife-v2/meerkat/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "giant-anteater",
+      "name": "Giant anteater",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/giant-anteater/roster-v3/sheet.png",
+      "sourceSha256": "047aa986f5f3a16712cd79cf8b6d40f8d3408179f1cb8653d7403a7b35b8cadb",
+      "source": "art-source/wildlife-v2/giant-anteater/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "aardvark",
+      "name": "Aardvark",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/aardvark/roster-v3/sheet.png",
+      "sourceSha256": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865",
+      "source": "art-source/wildlife-v2/aardvark/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "armadillo",
+      "name": "Armadillo",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/armadillo/roster-v3/sheet.png",
+      "sourceSha256": "93b141e8ab5bba76b13c5b511b28d1124b65e1dc2e2e85bf42df786aa57d7efe",
+      "source": "art-source/wildlife-v2/armadillo/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "pangolin",
+      "name": "Pangolin",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/pangolin/roster-v3/sheet.png",
+      "sourceSha256": "cf1e29524928e54e5a0c83a2fc2c7e26e2931f5cb5742cf198b22a34c7f0d580",
+      "source": "art-source/wildlife-v2/pangolin/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "pelican",
+      "name": "Pelican",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/pelican/roster-v3/sheet.png",
+      "sourceSha256": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e",
+      "source": "art-source/wildlife-v2/pelican/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "blue-footed-booby",
+      "name": "Blue-footed booby",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+      "sourceSha256": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+      "source": "art-source/wildlife-v2/blue-footed-booby/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "great-frigatebird",
+      "name": "Great frigatebird",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/great-frigatebird/roster-v3/sheet.png",
+      "sourceSha256": "a00635f391e0740aa89534208bdfb4738653c17df46495c9f62daaea8e24ad8f",
+      "source": "art-source/wildlife-v2/great-frigatebird/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "ruby-throated-hummingbird",
+      "name": "Ruby-throated hummingbird",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/ruby-throated-hummingbird/behavior-v1/sheet.png",
+      "sourceSha256": "5b24feb59e4abd62bfa287a4243cc5a83335ceeb3d75f2197b88679e25fecc52",
+      "source": "art-source/wildlife-v2/ruby-throated-hummingbird/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "flamingo",
+      "name": "Flamingo",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/flamingo/roster-v3/sheet.png",
+      "sourceSha256": "4c682366aeda93bc2e3a4b6d402fb891c66db26931c88a1e211de2d956918342",
+      "source": "art-source/wildlife-v2/flamingo/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "shoebill",
+      "name": "Shoebill",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/shoebill/roster-v3/sheet.png",
+      "sourceSha256": "a2b633bebe9a195db2e5698a2dc5272d88b3fd3e0010157352e31f0678d1f8a9",
+      "source": "art-source/wildlife-v2/shoebill/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "marabou-stork",
+      "name": "Marabou stork",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/marabou-stork/roster-v3/sheet.png",
+      "sourceSha256": "dbc3f358167c8909cf3b5814e7a90b45582fb0454032db9f8554f51e0f0caabb",
+      "source": "art-source/wildlife-v2/marabou-stork/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "great-blue-heron",
+      "name": "Great blue heron",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png",
+      "sourceSha256": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
+      "source": "art-source/wildlife-v2/great-blue-heron/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "sloth",
+      "name": "Three-toed sloth",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/sloth/roster-v3/sheet.png",
+      "sourceSha256": "e59fa504936feafc5ba04794be5c1100dc806e764b6b8677afff52803eb26076",
+      "source": "art-source/wildlife-v2/sloth/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "binturong",
+      "name": "Binturong",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/binturong/roster-v3/sheet.png",
+      "sourceSha256": "81e0884e88368b320317f41e7fd1ab50d9aeb30eb0475f8aae013b63fe6610da",
+      "source": "art-source/wildlife-v2/binturong/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "aye-aye",
+      "name": "Aye-aye",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/aye-aye/roster-v3/sheet.png",
+      "sourceSha256": "687e800452aff98c369c9befdd6a0b3bf07355af9c4cc361b7fc3be79bae00eb",
+      "source": "art-source/wildlife-v2/aye-aye/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "kinkajou",
+      "name": "Kinkajou",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/kinkajou/roster-v3/sheet.png",
+      "sourceSha256": "675e2a6ca29ba3c7a7e9045fc632faba5a077bd0aa353e8cd429b37d879ce831",
+      "source": "art-source/wildlife-v2/kinkajou/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "opossum",
+      "name": "Virginia opossum",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/opossum/roster-v3/sheet.png",
+      "sourceSha256": "dfcafe6ea8b32edf0b51ffb5680f453838a32e53e5c5086deb8d95f613730c58",
+      "source": "art-source/wildlife-v2/opossum/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "echidna",
+      "name": "Short-beaked echidna",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/echidna/roster-v3/sheet.png",
+      "sourceSha256": "bfabb023be800d6d3db9684e0fda209eaf1abecea828d025cfeecb9f8cc7c89e",
+      "source": "art-source/wildlife-v2/echidna/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "bat",
+      "name": "Bat",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/bat/roster-v3/sheet.png",
+      "sourceSha256": "c3df8641d60c6fe475edc1d9240e360efdf6709dfdb29e0b78214d7673ba19d1",
+      "source": "art-source/wildlife-v2/bat/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "wallaby",
+      "name": "Red-necked wallaby",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/wallaby/roster-v3/sheet.png",
+      "sourceSha256": "642bde4eb5e1a239636c605add6815720a99931875fb6019fbbe3f7ad0fdf5b9",
+      "source": "art-source/wildlife-v2/wallaby/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "manatee",
+      "name": "West Indian manatee",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/manatee/roster-v3/sheet.png",
+      "sourceSha256": "0806d311c9127a29d0ea09a50232fc1f4e3d3181e133933c6efd9effe2218a6c",
+      "source": "art-source/wildlife-v2/manatee/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "dugong",
+      "name": "Dugong",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/dugong/roster-v3/sheet.png",
+      "sourceSha256": "ac8b13d934787273415cb1ee3b7451fa30487225d7b96dc35d05c90987ba302b",
+      "source": "art-source/wildlife-v2/dugong/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "river-otter",
+      "name": "River otter",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/river-otter/roster-v3/sheet.png",
+      "sourceSha256": "0fefb6c140a3cb7fd4ea25423eabbbb0bfcdaa6c6ce64095aa2bf88b0f62b35b",
+      "source": "art-source/wildlife-v2/river-otter/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "platypus",
+      "name": "Platypus",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/platypus/roster-v3/sheet.png",
+      "sourceSha256": "692d391cc6b7acb85f95a518a7379fd65c25ba68f628943c3f5d29a35b80e2e3",
+      "source": "art-source/wildlife-v2/platypus/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "sea-lion",
+      "name": "California sea lion",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/sea-lion/roster-v3/sheet.png",
+      "sourceSha256": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292",
+      "source": "art-source/wildlife-v2/sea-lion/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "walrus",
+      "name": "Walrus",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/walrus/roster-v3/sheet.png",
+      "sourceSha256": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3",
+      "source": "art-source/wildlife-v2/walrus/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "snail",
+      "name": "Garden snail",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/snail/roster-v3/sheet.png",
+      "sourceSha256": "056f428708bf0a5c42776b806098ca9245dd8b532f391c3f308ff3443bd7a031",
+      "source": "art-source/wildlife-v2/snail/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "worm",
+      "name": "Earthworm",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/worm/roster-v3/sheet.png",
+      "sourceSha256": "cb8c743f62624d0b87725efb5b8de18041282d4458023ea1a3094a68f006fee2",
+      "source": "art-source/wildlife-v2/worm/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "leaf-insect",
+      "name": "Leaf insect",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/leaf-insect/roster-v3/sheet.png",
+      "sourceSha256": "602103f049966e82bc592abbf3c909607595df95718c0cd3325a4d9dd35117a0",
+      "source": "art-source/wildlife-v2/leaf-insect/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "roly-poly",
+      "name": "Roly-poly",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/roly-poly/roster-v3/sheet.png",
+      "sourceSha256": "071dbc5bb046bf4397ef3cd7f0dad2e9d1262adf22583366ca51e153b5513397",
+      "source": "art-source/wildlife-v2/roly-poly/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "earwig",
+      "name": "Earwig",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/earwig/roster-v3/sheet.png",
+      "sourceSha256": "cf9e15cb3601322e75d950839cc82062110279aa4d6c41939b6688a0a088d900",
+      "source": "art-source/wildlife-v2/earwig/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "millipede",
+      "name": "Millipede",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/millipede/roster-v3/sheet.png",
+      "sourceSha256": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3",
+      "source": "art-source/wildlife-v2/millipede/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "seahorse",
+      "name": "Seahorse",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/seahorse/roster-v3/sheet.png",
+      "sourceSha256": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+      "source": "art-source/wildlife-v2/seahorse/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "nautilus",
+      "name": "Nautilus",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/nautilus/roster-v3/sheet.png",
+      "sourceSha256": "e603f625a53b8c33ad06604303fe96ad48defd6e10ccbede9c68326f5dceafad",
+      "source": "art-source/wildlife-v2/nautilus/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "leafy-seadragon",
+      "name": "Leafy seadragon",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/leafy-seadragon/roster-v3/sheet.png",
+      "sourceSha256": "5bae591742955e8cadac4470c6b913049271084288acf5eaae0e0d7081d38e61",
+      "source": "art-source/wildlife-v2/leafy-seadragon/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "starfish",
+      "name": "Starfish",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/starfish/roster-v3/sheet.png",
+      "sourceSha256": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
+      "source": "art-source/wildlife-v2/starfish/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "horseshoe-crab",
+      "name": "Horseshoe crab",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/horseshoe-crab/roster-v3/sheet.png",
+      "sourceSha256": "eabec44f8f79a58a98cedbfc8c09b19a8cc06d9e8534f2845a656018c9457d9d",
+      "source": "art-source/wildlife-v2/horseshoe-crab/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "shrimp",
+      "name": "Shrimp",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/shrimp/roster-v3/sheet.png",
+      "sourceSha256": "0c434135d380fde40b80b7bd15bf27a8e8f472880a8794158f609b63bbd97915",
+      "source": "art-source/wildlife-v2/shrimp/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "elephant-upright",
+      "name": "Upright elephant",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/elephant-upright/roster-v3/sheet.png",
+      "sourceSha256": "737d409fbff268a748f6d08cacb9dd3cde7304fdf2ca546007a88cefa9f892d3",
+      "source": "art-source/wildlife-v2/elephant-upright/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "giraffe-upright",
+      "name": "Upright giraffe",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/giraffe-upright/roster-v3/sheet.png",
+      "sourceSha256": "54bccc660cf970c44637ed1a87f0928555b62f180e80fa306ada157955d80372",
+      "source": "art-source/wildlife-v2/giraffe-upright/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "salamander",
+      "name": "Salamander",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
+      "sourceSha256": "999e19d0f1998ffe21a471cd27e3b26d84480eb8f694436bbcf18454c8e692bc",
+      "source": "art-source/wildlife-v2/salamander/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "newt",
+      "name": "Newt",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/newt/roster-v2/sheet.png",
+      "sourceSha256": "1c3cae01de1dd671f136669762a1eb840885cbc9b0e4501205770bacfddd94f9",
+      "source": "art-source/wildlife-v2/newt/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "axolotl",
+      "name": "Axolotl",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/axolotl/roster-v2/sheet.png",
+      "sourceSha256": "1f29280f5494f555903ed11823704c9891e9433763d86beb7633171d205565ef",
+      "source": "art-source/wildlife-v2/axolotl/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "frilled-neck-lizard",
+      "name": "Frilled-neck lizard",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/frilled-neck-lizard/roster-v2/sheet.png",
+      "sourceSha256": "aaa68522dfe4bde20691c3697a1b4df0a2aff8ba3c049364b87eb800eb7a3d5c",
+      "source": "art-source/wildlife-v2/frilled-neck-lizard/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "land-tortoise",
+      "name": "Land tortoise",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/land-tortoise/roster-v2/sheet.png",
+      "sourceSha256": "87a83ff502ed705b70afe26ed91e42093c50882fc93dfd8f8827b94b2a89ee8f",
+      "source": "art-source/wildlife-v2/land-tortoise/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "pond-turtle",
+      "name": "Pond turtle",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/pond-turtle/roster-v2/sheet.png",
+      "sourceSha256": "1b247b1bd46bfe690c58403877f19a6b1e488cb827fdfe9cd010c4570fa454d4",
+      "source": "art-source/wildlife-v2/pond-turtle/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "beaver",
+      "name": "Beaver",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/beaver/behavior-v1/sheet.png",
+      "sourceSha256": "0a407a47f578cfc83219fc436c67bd37b657cad794355a030ab867e5f734c1bb",
+      "source": "art-source/wildlife-v2/beaver/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "capybara",
+      "name": "Capybara",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/capybara/roster-v2/sheet.png",
+      "sourceSha256": "e971e51aef9936fd1db0f81fd044fbc0bce0af670df74988f0f6ccc8233773db",
+      "source": "art-source/wildlife-v2/capybara/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "koala",
+      "name": "Koala",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/koala/roster-v2/sheet.png",
+      "sourceSha256": "b347c16c73220abdea9260e1630f21ef3cfe9d3e9c0532d0a2dd70df08bfc1bf",
+      "source": "art-source/wildlife-v2/koala/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "wombat",
+      "name": "Wombat",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/wombat/roster-v2/sheet.png",
+      "sourceSha256": "9983a99d6d724558ed0ef11f7704255a9edaa1b58d6508ef493c1fb8564bb5bc",
+      "source": "art-source/wildlife-v2/wombat/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "quokka",
+      "name": "Quokka",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/quokka/roster-v2/sheet.png",
+      "sourceSha256": "2e1b2507d0476b88e422112de470712d3b121e716f6c22ee4b66681658496ed5",
+      "source": "art-source/wildlife-v2/quokka/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "malayan-tapir",
+      "name": "Malayan tapir",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/malayan-tapir/roster-v2/sheet.png",
+      "sourceSha256": "a6f11968b3f386b0f564b711889967c9d23a1738d1c6ba4f97d3fa6f00eb73f6",
+      "source": "art-source/wildlife-v2/malayan-tapir/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "gecko",
+      "name": "Gecko",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/gecko/roster-v2/sheet.png",
+      "sourceSha256": "e2d363560f957fab15f6e6a9fc37ceafd9ad226eba141d7c1dcf71c61cf0ab8b",
+      "source": "art-source/wildlife-v2/gecko/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "iguana",
+      "name": "Iguana",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/iguana/roster-v2/sheet.png",
+      "sourceSha256": "3a934cf83eea115ccef1f0d18c3b8bf33482c9b6f34fc956d71fa0731cc00d07",
+      "source": "art-source/wildlife-v2/iguana/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "chameleon",
+      "name": "Chameleon",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/chameleon/roster-v2/sheet.png",
+      "sourceSha256": "1763f6f6e9ff5104d51e1479e019ae6636bc6cbfd8a958cf8bb829b5d64c0d23",
+      "source": "art-source/wildlife-v2/chameleon/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "texas-horned-lizard",
+      "name": "Texas horned lizard",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/texas-horned-lizard/roster-v2/sheet.png",
+      "sourceSha256": "7db9bdb4ef1af2537be5962d8c2b1c5fc9fbd089ee118b809e635580754fd384",
+      "source": "art-source/wildlife-v2/texas-horned-lizard/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "bee",
+      "name": "Bee",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/bee/behavior-v1/sheet.png",
+      "sourceSha256": "404b5b6a67a391d67ee9bf6c6951eadd92bd1c5cbe58aa0060b2603352981e36",
+      "source": "art-source/wildlife-v2/bee/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "ladybug",
+      "name": "Ladybug",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/ladybug/roster-v2/sheet.png",
+      "sourceSha256": "4567a3a82dfe96a6a96f5aff9d2edd44bc9e89813e6efff765e2108d2cd96901",
+      "source": "art-source/wildlife-v2/ladybug/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "dragonfly",
+      "name": "Dragonfly",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/dragonfly/roster-v2/sheet.png",
+      "sourceSha256": "6a65758eac3aa6864b25f376846ee8b36deea28a3e17bdda455818300069bfcb",
+      "source": "art-source/wildlife-v2/dragonfly/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "stag-beetle",
+      "name": "Stag beetle",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/stag-beetle/roster-v2/sheet.png",
+      "sourceSha256": "b4b08ef2ef8e92e1ebdf153b9682b63267384892b12728acbae32834a65db11e",
+      "source": "art-source/wildlife-v2/stag-beetle/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "grasshopper",
+      "name": "Grasshopper",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/grasshopper/roster-v2/sheet.png",
+      "sourceSha256": "c2fd6af6adff938c92831d3d62fddccac72ee6c41e1707388fc9e91841fcec45",
+      "source": "art-source/wildlife-v2/grasshopper/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "cricket",
+      "name": "Cricket",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/cricket/roster-v2/sheet.png",
+      "sourceSha256": "c924bcd4d12b8c1034a4354343cf584b1cb35e8d4fae86e5dc6ff28d49b0aef5",
+      "source": "art-source/wildlife-v2/cricket/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "cat-ginger",
+      "name": "Ginger tabby",
+      "policy": "retained-parts",
+      "sourceImage": "demos/wildlife-v2/cat-ginger/behavior-v1/sheet.png",
+      "sourceSha256": "dac6b1ac6a1e8ec7098dff205b653b2432762700c3e7bd0ac1bcbcf7661faa64",
+      "source": "art-source/wildlife-v2/cat-ginger/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "cat-black",
+      "name": "Black cat",
+      "policy": "retained-parts",
+      "sourceImage": "demos/wildlife-v2/cat-black/behavior-v1/sheet.png",
+      "sourceSha256": "0e7dbc7f232119c7586529fab856ba3145888c36a67e8a46f7e6a554b71a6955",
+      "source": "art-source/wildlife-v2/cat-black/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "dog-golden",
+      "name": "Golden retriever",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/dog-golden/draft-v1/sheet.png",
+      "sourceSha256": "0e70432f51e60f2e84a32c8a33784f329c5f72d665e374027bd4207b42b23ca9",
+      "source": "art-source/wildlife-v2/dog-golden/draft-v1"
+    },
+    {
+      "id": "dog-shepherd",
+      "name": "Pointed-ear shepherd",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/dog-shepherd/draft-v1/sheet.png",
+      "sourceSha256": "8bf182f58c62fe9f027773ff114182460bf46f976b46eda743c8a63bb071eb3e",
+      "source": "art-source/wildlife-v2/dog-shepherd/draft-v1"
+    },
+    {
+      "id": "panther",
+      "name": "Panther",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/panther/hunt-v1/sheet.png",
+      "sourceSha256": "af9e96f36744dc75212192046821327f51cfe8324cdb6036ee28666f855aae13",
+      "source": "art-source/wildlife-v2/panther/hunt-v1"
+    },
+    {
+      "id": "tiger",
+      "name": "Wild tiger",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/tiger/pilot-v1/sheet.png",
+      "sourceSha256": "af254ecb451ace421d44ea7b6e8040aa0da49199cc946c7ed63030bc977d540e",
+      "source": "art-source/wildlife-v2/tiger/pilot-v1"
+    },
+    {
+      "id": "lion",
+      "name": "Lion",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/lion/hunt-v1/sheet.png",
+      "sourceSha256": "0e30d887ca6df4b14a3ed496839b0590bf216c1645e998711e153800a01dded5",
+      "source": "art-source/wildlife-v2/lion/hunt-v1"
+    },
+    {
+      "id": "brown-bear",
+      "name": "Brown bear",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/brown-bear/hunt-v1/sheet.png",
+      "sourceSha256": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc",
+      "source": "art-source/wildlife-v2/brown-bear/hunt-v1"
+    },
+    {
+      "id": "giant-spider",
+      "name": "Giant spider",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/giant-spider/fierce-v1/sheet.png",
+      "sourceSha256": "11ab7244ae66500619ab2e13d5fdb9f25e7153f20f619251615cd44f5d80f5f1",
+      "source": "art-source/wildlife-v2/giant-spider/fierce-v1"
+    },
+    {
+      "id": "griffin",
+      "name": "Griffin",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/griffin/fierce-v1/sheet.png",
+      "sourceSha256": "5baef5e4bb1100bf2d96fe9a0adcf3cdeae278d551cb4c0a01670ce03b1ee947",
+      "source": "art-source/wildlife-v2/griffin/fierce-v1"
+    },
+    {
+      "id": "dire-wolf",
+      "name": "Dire wolf",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/dire-wolf/fierce-v1/sheet.png",
+      "sourceSha256": "aac78a8cd07bac2966f200d00be1b5a6f9da41c03d137526996106331fa12c96",
+      "source": "art-source/wildlife-v2/dire-wolf/fierce-v1"
+    },
+    {
+      "id": "t-rex",
+      "name": "T. rex",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/t-rex/fierce-v1/sheet.png",
+      "sourceSha256": "fa04eafaab71449ded331ea46e2247082a537f0e68e639c0accf316fe328a43a",
+      "source": "art-source/wildlife-v2/t-rex/fierce-v1"
+    },
+    {
+      "id": "small-dragon",
+      "name": "Small dragon",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/small-dragon/fierce-v1/sheet.png",
+      "sourceSha256": "506038f4757b8eb0c9ab27077e213dc9e664fae462087dfa3a3add44ff26e4e2",
+      "source": "art-source/wildlife-v2/small-dragon/fierce-v1"
+    },
+    {
+      "id": "wolf",
+      "name": "Grey wolf",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/wolf/roster-v2/sheet.png",
+      "sourceSha256": "88eea535d49696ced338823c40bf31c7d010454785909a49f9e57e6565fce341",
+      "source": "art-source/wildlife-v2/wolf/roster-v2"
+    },
+    {
+      "id": "coyote",
+      "name": "Coyote",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/coyote/roster-v2/sheet.png",
+      "sourceSha256": "e179275885056a5fb04548ec517adcb663cadd7d6ac183d28e57432677b3da71",
+      "source": "art-source/wildlife-v2/coyote/roster-v2"
+    },
+    {
+      "id": "spotted-hyena",
+      "name": "Spotted hyena",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/spotted-hyena/roster-v2/sheet.png",
+      "sourceSha256": "2bb072d95d260481f413e7e4dd0269fa41d2d91a1ae39c2787cd7bc319bdb3e2",
+      "source": "art-source/wildlife-v2/spotted-hyena/roster-v2"
+    },
+    {
+      "id": "jaguar",
+      "name": "Jaguar",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/jaguar/roster-v2/sheet.png",
+      "sourceSha256": "e55e3128ebcf09869507b0c2370d695c1819eda59d922596a029a0189fdc8963",
+      "source": "art-source/wildlife-v2/jaguar/roster-v2"
+    },
+    {
+      "id": "leopard",
+      "name": "Leopard",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/leopard/roster-v2/sheet.png",
+      "sourceSha256": "161a1294936a47f7d4e0c2623b4cb7c8e6cd83e765fa0ac3694548612aaeb567",
+      "source": "art-source/wildlife-v2/leopard/roster-v2"
+    },
+    {
+      "id": "cheetah",
+      "name": "Cheetah",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/cheetah/roster-v2/sheet.png",
+      "sourceSha256": "c7beb1dc8ea3b83bcf3e7056adb974fece5d81f0f4044e0cf7fed92dd6b86b65",
+      "source": "art-source/wildlife-v2/cheetah/roster-v2"
+    },
+    {
+      "id": "lynx",
+      "name": "Eurasian lynx",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/lynx/roster-v2/sheet.png",
+      "sourceSha256": "d41012160813994f285e2a101c27ae019f136562a026536cab68c6d31ae600a7",
+      "source": "art-source/wildlife-v2/lynx/roster-v2"
+    },
+    {
+      "id": "bobcat",
+      "name": "Bobcat",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/bobcat/roster-v2/sheet.png",
+      "sourceSha256": "4fe6620c0187671c79ccf4b56d5d28a89dc95cdac3428f6a9481c750136d5355",
+      "source": "art-source/wildlife-v2/bobcat/roster-v2"
+    },
+    {
+      "id": "polar-bear",
+      "name": "Polar bear",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/polar-bear/roster-v2/sheet.png",
+      "sourceSha256": "7ccd05f7397e19c7fac25e22a752d5ba44e1a67f1dddf2061674745080eac2de",
+      "source": "art-source/wildlife-v2/polar-bear/roster-v2"
+    },
+    {
+      "id": "mongoose",
+      "name": "Mongoose",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/mongoose/roster-v2/sheet.png",
+      "sourceSha256": "8b5614a869c9f5c26bbbafc9d89e101fda8510a043b05a640b77faaeb696a6e3",
+      "source": "art-source/wildlife-v2/mongoose/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "honey-badger",
+      "name": "Honey badger",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/honey-badger/roster-v2/sheet.png",
+      "sourceSha256": "6f12d854c407b3d06eeb19b7188935e02c12eb67f755aef4b2ad0752411ae0b8",
+      "source": "art-source/wildlife-v2/honey-badger/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "fossa",
+      "name": "Fossa",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/fossa/roster-v2/sheet.png",
+      "sourceSha256": "742b8c07253c025be941afc06f1efb1b75a085bfcca97386cbd91dc4778f9f6a",
+      "source": "art-source/wildlife-v2/fossa/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "white-nosed-coati",
+      "name": "White-nosed coati",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/white-nosed-coati/roster-v2/sheet.png",
+      "sourceSha256": "7ed3f520413c64e6e5c1fe3238e8c6989764b72d77a233113c38dcc2cea2c19d",
+      "source": "art-source/wildlife-v2/white-nosed-coati/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "owl",
+      "name": "Tawny owl",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/owl/roster-v4/sheet.png",
+      "sourceSha256": "7eee624a33170f91269f9c77123e28a1de411f58de205ce9d50fd2e61d93ffc9",
+      "source": "art-source/wildlife-v2/owl/roster-v4",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "eagle",
+      "name": "Bald eagle",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/eagle/roster-v3/sheet.png",
+      "sourceSha256": "5a1338aa40193197c28a850c45b1fd37f8a4bb3d80dd52a61148fa2b12e75540",
+      "source": "art-source/wildlife-v2/eagle/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "hawk",
+      "name": "Red-tailed hawk",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/hawk/roster-v3/sheet.png",
+      "sourceSha256": "ffaa104b652f30a9653bfab0d7a7ba9efa9aec8006d7fae50efa1e81af742774",
+      "source": "art-source/wildlife-v2/hawk/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "secretary-bird",
+      "name": "Secretary bird",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/secretary-bird/roster-v3/sheet.png",
+      "sourceSha256": "52ad465c2849528d2c42068af327f576506d1b36e18afa0dcd98c327ad867ae6",
+      "source": "art-source/wildlife-v2/secretary-bird/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "crocodile",
+      "name": "Nile crocodile",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/crocodile/roster-v3/sheet.png",
+      "sourceSha256": "a2a27c8c6f012e8a99c457d1564e39641e0a7d476fc4722f8ca6f17386b65a26",
+      "source": "art-source/wildlife-v2/crocodile/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "alligator",
+      "name": "American alligator",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/alligator/roster-v3/sheet.png",
+      "sourceSha256": "53a020bb5fa35846ecc1cea0dc1c19b4873e6d626831bedba918d33023ecd1d6",
+      "source": "art-source/wildlife-v2/alligator/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "komodo-dragon",
+      "name": "Komodo dragon",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/komodo-dragon/roster-v3/sheet.png",
+      "sourceSha256": "12fdc2f63b9a42b96ecae5e0bded804314139eb9fca51987f74e682622f68ce4",
+      "source": "art-source/wildlife-v2/komodo-dragon/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "gaboon-viper",
+      "name": "Gaboon viper",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/gaboon-viper/roster-v3/sheet.png",
+      "sourceSha256": "cee144235212ad79da58fe460f03cb54ec08b1b93fe46bd05e36430dc8ab8816",
+      "source": "art-source/wildlife-v2/gaboon-viper/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "spider",
+      "name": "Wolf spider",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/spider/roster-v3/sheet.png",
+      "sourceSha256": "8519c509f243d1c5b7fa174e1d6545ea5087e72ea517475b88b26bf348796296",
+      "source": "art-source/wildlife-v2/spider/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "praying-mantis",
+      "name": "Praying mantis",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/praying-mantis/roster-v3/sheet.png",
+      "sourceSha256": "c461f6b1410ec5d944455b580b6f7adb2b45e0ebdccb0c497805bd4e5b434475",
+      "source": "art-source/wildlife-v2/praying-mantis/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "scorpion",
+      "name": "Scorpion",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/scorpion/roster-v3/sheet.png",
+      "sourceSha256": "35270f46170ceb79dc6b5448b7afbdb7ae31021f5738bf37220e02c19749987e",
+      "source": "art-source/wildlife-v2/scorpion/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "centipede",
+      "name": "Centipede",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/centipede/roster-v3/sheet.png",
+      "sourceSha256": "d7a8b710c72005364166068ddb4ea86d4d60a1311f1d0fe3bb8951bf1539e6bf",
+      "source": "art-source/wildlife-v2/centipede/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "coconut-crab",
+      "name": "Coconut crab",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/coconut-crab/roster-v3/sheet.png",
+      "sourceSha256": "b2b0241855de963e1786f66bb7ebd17cdb678a4e5d127c8cdb519e632cfdf168",
+      "source": "art-source/wildlife-v2/coconut-crab/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "tasmanian-devil",
+      "name": "Tasmanian devil",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
+      "sourceSha256": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
+      "source": "art-source/wildlife-v2/tasmanian-devil/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "swordfish",
+      "name": "Swordfish",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/swordfish/roster-v3/sheet.png",
+      "sourceSha256": "135b26b1ef3c9f52775dee6fc85997b89f69efb04de06e55257c0e3f1436caf7",
+      "source": "art-source/wildlife-v2/swordfish/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "anglerfish",
+      "name": "Anglerfish",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/anglerfish/roster-v3/sheet.png",
+      "sourceSha256": "f51ba066ba24eaeb23acca9897f8069ac1e534c1cebcdba9e6b5cb532f5291db",
+      "source": "art-source/wildlife-v2/anglerfish/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "moray-eel",
+      "name": "Moray eel",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/moray-eel/roster-v3/sheet.png",
+      "sourceSha256": "f7598cf1f6a8470960c7cfb41ab43d0734a87b8aff0d44ff27cd7b35d4acadcd",
+      "source": "art-source/wildlife-v2/moray-eel/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "electric-eel",
+      "name": "Electric eel",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/electric-eel/roster-v3/sheet.png",
+      "sourceSha256": "eca8c537aa94bf61196937f3984077db7d145b82c8344f3ad5ed21c74e5e8433",
+      "source": "art-source/wildlife-v2/electric-eel/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "cuttlefish",
+      "name": "Cuttlefish",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/cuttlefish/roster-v3/sheet.png",
+      "sourceSha256": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+      "source": "art-source/wildlife-v2/cuttlefish/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "lobster",
+      "name": "Lobster",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/lobster/roster-v3/sheet.png",
+      "sourceSha256": "88b6d06ddbd5d171b3e77d3e6df8aef0904f2d957650d73b02c2e813b725c6e6",
+      "source": "art-source/wildlife-v2/lobster/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "mantis-shrimp",
+      "name": "Peacock mantis shrimp",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/mantis-shrimp/roster-v3/sheet.png",
+      "sourceSha256": "e7c1714c9e10ff00fc0ecf92b5f7889ce64aeb852035cad1c9ba7b9618c45c5e",
+      "source": "art-source/wildlife-v2/mantis-shrimp/roster-v3",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "shark",
+      "name": "Shark",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/shark/roster-v2/sheet.png",
+      "sourceSha256": "c02561fe0470068cc99c33c51b518e6214f75ad30b4f08a9d14ee4fd78823fae",
+      "source": "art-source/wildlife-v2/shark/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "hammerhead-shark",
+      "name": "Hammerhead shark",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/hammerhead-shark/roster-v2/sheet.png",
+      "sourceSha256": "3ed82957fdcc77380bc20e4ffa20eb740b017c74cca456fc2ff1f5e43d6590ea",
+      "source": "art-source/wildlife-v2/hammerhead-shark/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "orca",
+      "name": "Orca",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/orca/roster-v2/sheet.png",
+      "sourceSha256": "643a7041db730a1e3d3387ee7bb70b00a02c6c3e3ef5689b37e2adae4269e0fc",
+      "source": "art-source/wildlife-v2/orca/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "dolphin",
+      "name": "Dolphin",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/dolphin/roster-v2/sheet.png",
+      "sourceSha256": "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7",
+      "source": "art-source/wildlife-v2/dolphin/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "narwhal",
+      "name": "Narwhal",
+      "policy": "material-surfaces",
+      "sourceImage": "demos/wildlife-v2/narwhal/roster-v2/sheet.png",
+      "sourceSha256": "978f2e21c6f22dd6b59a00b05dcbfce1090b832abf43fa3959903083515a855c",
+      "source": "art-source/wildlife-v2/narwhal/roster-v2",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "deer",
+      "name": "White-tailed deer",
+      "policy": "retained-parts",
+      "sourceImage": "demos/wildlife-v2/deer/behavior-v1/sheet.png",
+      "sourceSha256": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816",
+      "source": "art-source/wildlife-v2/deer/behavior-v1",
+      "revision": "finish-v1"
+    },
+    {
+      "id": "frog",
+      "name": "Frog",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/frog/draft-v1/sheet.png",
+      "sourceSha256": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919",
+      "source": "art-source/wildlife-v2/frog/draft-v1"
+    },
+    {
+      "id": "mallard",
+      "name": "Mallard duck",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/mallard-duck/draft-v1/sheet.png",
+      "sourceSha256": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e",
+      "source": "art-source/wildlife-v2/mallard-duck/draft-v1"
+    },
+    {
+      "id": "robin",
+      "name": "Robin",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/robin/behavior-v1/sheet.png",
+      "sourceSha256": "bd9d7ad12c02a8f0779992b217ffea9a2fb458504983585b09b0efc9a8a0fe8b",
+      "source": "art-source/wildlife-v2/robin/behavior-v1"
+    },
+    {
+      "id": "rabbit",
+      "name": "Rabbit",
+      "policy": "retained-bank",
+      "sourceImage": "demos/wildlife-v2/rabbit/behavior-v1/sheet.png",
+      "sourceSha256": "8562cf6309f06b942e3c41e34af5571690743aec4012fb506e61d526b18a23c0",
+      "source": "art-source/wildlife-v2/rabbit/behavior-v1"
+    }
+  ]
+}

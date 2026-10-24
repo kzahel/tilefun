@@ -1,0 +1,11 @@
+{
+  "identity": "cat-black-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/cat-black/draft-v1/animal.blend": "752ec6c1fc8f5c2496932453115344855455b0900db2ddb439e7aff79cb9dee1",
+    "art-source/wildlife-v2/cat/behavior-v1/cat.blend": "9f890894247530c0065857eca715a46b469202e151181bcbd58f6ab9b24a2167"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "retained-parts"
+}

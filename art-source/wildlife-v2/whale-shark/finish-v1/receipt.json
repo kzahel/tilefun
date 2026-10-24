@@ -1,0 +1,53 @@
+{
+  "identity": "whale-shark-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "whale-shark-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "1fb8a0d58d8d8bf8407094c35c1f28794c47ef5a2c051e540365347de258e0cc",
+      "index.html": "5e8f7af67c4017204dfa4c5c28d410271b99c0fdac16472766dffcf05573f191",
+      "pixel-audit.json": "a4ff8b7cd4b8352d9973bcdfbe64bad5700a4b940c8d85a4bb26164837b0e448",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "6d0d47382c261b6ddf4d36df7925c3b403814e343cf3ec19a81c55bdee6b6534",
+      "preview.gif": "48a6f4ebce19eb90ac7245b9adcff5f52c740f0fea37cbdf61e9179328b9ca40",
+      "scene-native.png": "27e68e9c05889bcf43b0994938a886b706a99425c9115489dfb4a7cd48bf026e",
+      "sheet.png": "b9187d9bdc05cab6c70f8de72443def3e04f5141728a0251cb760798b968c74b",
+      "source-audit.json": "c8e7e663e430115af3f6ace4f424dc5686bd9826a8e34f20c924424ba829af25",
+      "sprite.json": "6f7f0747049db64df77785d79bb137a47b084e596ecc2824ab9ecae97e406184"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/whale-shark/finish-v1/README.md": "54c80d28229ba52411170ca594e8c0bbbaed5c2f6159edd45071b84bbaa93e7d",
+    "art-source/wildlife-v2/whale-shark/finish-v1/inputs.json": "7d94a56dba25956f5b85df0688f0b6abbb3aaaa17128d6c90065e613b4d23133",
+    "art-source/wildlife-v2/whale-shark/finish-v1/replay.json": "6b6340e497a4c45030bf285ed5922f37ddae3a8eb4bca43707ca3569a3305ac8",
+    "art-source/wildlife-v2/whale-shark/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/whale-shark/roster-v2/projection.json": "090d08eed04ce7e2d0c91637a4a6258420a51b0476eca25814cdb6dd31c5a2fd",
+    "art-source/wildlife-v2/whale-shark/roster-v2/whale-shark.blend": "453fb8c26c3586f614d7adce522206ef1e916c7e5e2da75d9eece440c89cff14",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/contact-sheet-native.png": "1fb8a0d58d8d8bf8407094c35c1f28794c47ef5a2c051e540365347de258e0cc",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/index.html": "5e8f7af67c4017204dfa4c5c28d410271b99c0fdac16472766dffcf05573f191",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/pixel-audit.json": "a4ff8b7cd4b8352d9973bcdfbe64bad5700a4b940c8d85a4bb26164837b0e448",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/preview-native.gif": "6d0d47382c261b6ddf4d36df7925c3b403814e343cf3ec19a81c55bdee6b6534",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/preview.gif": "48a6f4ebce19eb90ac7245b9adcff5f52c740f0fea37cbdf61e9179328b9ca40",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/scene-native.png": "27e68e9c05889bcf43b0994938a886b706a99425c9115489dfb4a7cd48bf026e",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/sheet.png": "b9187d9bdc05cab6c70f8de72443def3e04f5141728a0251cb760798b968c74b",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/source-audit.json": "c8e7e663e430115af3f6ace4f424dc5686bd9826a8e34f20c924424ba829af25",
+    "public/demos/wildlife-v2/whale-shark/finish-v1/sprite.json": "6f7f0747049db64df77785d79bb137a47b084e596ecc2824ab9ecae97e406184",
+    "public/demos/wildlife-v2/whale-shark/roster-v2/sheet.png": "fc331cb0298856f6be72c68430bc1788ce65a292245a7fa57bf3b55ae33fcdad",
+    "public/demos/wildlife-v2/whale-shark/roster-v2/sprite.json": "321818bff8c6dede4d9ff00f682f4bf1aae29341fd7bfc9bd780b129fca32167",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

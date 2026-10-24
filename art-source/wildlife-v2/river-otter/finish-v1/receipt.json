@@ -1,0 +1,53 @@
+{
+  "identity": "river-otter-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "river-otter-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "b7fc560bcee2f776388940723950087e76d47688357c1e3339e867161d246676",
+      "index.html": "74e81d10935ad3914a4e28d107fc916a1db20eff35de3b90cdec4b5ce66e8466",
+      "pixel-audit.json": "75a386025933eacab437f9e9b5ced7a6a59c01e4316f6fb28f63d93067484bcf",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "0849470a90245d4dc0a5180208de551c165bd3a63295aa6fcb0706e683c84684",
+      "preview.gif": "b99f94206d52c79c37476a65c30d1402561cf35f61e5beb25888c320d4c32a46",
+      "scene-native.png": "db072ff8ecc7c2e55cb764fe995ea31ecc2282c5107b8067b66c9d80d3f7a17e",
+      "sheet.png": "27feefc4e6b60664ca38d5476562100fceca74e78dfb24b1a91d8c285a4e133a",
+      "source-audit.json": "de578feddc612bf923eb6c4001b81b77b983a3d35c83901302092256cb0ebae9",
+      "sprite.json": "5ceb4d7f897c2eb3ed048cd96e6eed74fc1aa9101b190e656e05ca88ddb86bf6"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/river-otter/finish-v1/README.md": "8dfb3a3defb0bf95e3497d344810664c35de2fa46d9f40d6a9d5a3d35767b22b",
+    "art-source/wildlife-v2/river-otter/finish-v1/inputs.json": "9335757e09cb4f8c12ee6c9ce502602285b1f1527874ad918058756858e0ed0e",
+    "art-source/wildlife-v2/river-otter/finish-v1/replay.json": "2111cb4771e5e890bb837969027d3154c526ffbf78d147bb6c9efa38b9a9e985",
+    "art-source/wildlife-v2/river-otter/roster-v3/inputs.json": "dc75cf896c7219444a9522888dcf5e9f0c6598ea1eeb1bcaa09a316239f91486",
+    "art-source/wildlife-v2/river-otter/roster-v3/projection.json": "c6c120c17d19db843207004853824af640e9b7815d5ea8f996df0320654a6e1f",
+    "art-source/wildlife-v2/river-otter/roster-v3/river-otter.blend": "4de8d3e8ae7b4755703f2ae18ddbb5b8121cfb950e2ca50b857fd8a0a6a0edd6",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/river-otter/finish-v1/contact-sheet-native.png": "b7fc560bcee2f776388940723950087e76d47688357c1e3339e867161d246676",
+    "public/demos/wildlife-v2/river-otter/finish-v1/index.html": "74e81d10935ad3914a4e28d107fc916a1db20eff35de3b90cdec4b5ce66e8466",
+    "public/demos/wildlife-v2/river-otter/finish-v1/pixel-audit.json": "75a386025933eacab437f9e9b5ced7a6a59c01e4316f6fb28f63d93067484bcf",
+    "public/demos/wildlife-v2/river-otter/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/river-otter/finish-v1/preview-native.gif": "0849470a90245d4dc0a5180208de551c165bd3a63295aa6fcb0706e683c84684",
+    "public/demos/wildlife-v2/river-otter/finish-v1/preview.gif": "b99f94206d52c79c37476a65c30d1402561cf35f61e5beb25888c320d4c32a46",
+    "public/demos/wildlife-v2/river-otter/finish-v1/scene-native.png": "db072ff8ecc7c2e55cb764fe995ea31ecc2282c5107b8067b66c9d80d3f7a17e",
+    "public/demos/wildlife-v2/river-otter/finish-v1/sheet.png": "27feefc4e6b60664ca38d5476562100fceca74e78dfb24b1a91d8c285a4e133a",
+    "public/demos/wildlife-v2/river-otter/finish-v1/source-audit.json": "de578feddc612bf923eb6c4001b81b77b983a3d35c83901302092256cb0ebae9",
+    "public/demos/wildlife-v2/river-otter/finish-v1/sprite.json": "5ceb4d7f897c2eb3ed048cd96e6eed74fc1aa9101b190e656e05ca88ddb86bf6",
+    "public/demos/wildlife-v2/river-otter/roster-v3/sheet.png": "0fefb6c140a3cb7fd4ea25423eabbbb0bfcdaa6c6ce64095aa2bf88b0f62b35b",
+    "public/demos/wildlife-v2/river-otter/roster-v3/sprite.json": "357a81a6cacf11fdc9709c0950dfac864bb2c8a20ef405bc1ed17c22349b3b77",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

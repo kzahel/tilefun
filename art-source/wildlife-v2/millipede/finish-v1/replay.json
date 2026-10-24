@@ -1,0 +1,17 @@
+{
+  "identity": "millipede-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "9ad7a7feeee5069aa331a209f7d03c1e9a9721e1e93bf2b9fd047d70f678ab07",
+    "index.html": "81b4dd5a2a67723ee3a1ef2711e0c33704c22b2201ac1774eebac83b9928e301",
+    "pixel-audit.json": "29e5e79a11dd2a1c0ea004c80b1fce7546f06d73e7660884ad24ba4b62aaa5f5",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "b7c348b8dfed6b0fc43021e947edc1191e6d70a649470abc9d86e4910069dd22",
+    "preview.gif": "f194bcf20ab82d5fadee6c3fad1f06b37fdbf31e83457195df28e314f3781f98",
+    "scene-native.png": "89388ae7a0257d91fb4a69073d7a62b47d4d34445ce824355e8d65d23d49cf17",
+    "sheet.png": "10ad0d6bbacb9b6464b33d72ce617b298a4ba303cab63c5023cc040d1ca8e5f1",
+    "source-audit.json": "630973bf004d753f5d34b3090f09d689c8519fe9ea3a67c27eb633421b6a0e1e",
+    "sprite.json": "fa0635146e5f9eec9024b92a2ad76275a8574e2f3c33f6c2d818c4c6d751523f"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "leaf-insect-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "73bf943497ba7aa397da5ce22dcd21c67eb908c84a3e94800a54c693a49de992",
+    "index.html": "1211b7e200c1cb1ed0fcaebcb8009bc5f0eeef65129bbb9861993fd9d8194969",
+    "pixel-audit.json": "7d91a14007b12e0eeecdae7df33f008cdb44d288c0b720e61d1266cf334c5864",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "08ee3cd7bba6123ac597f5cb291acfd30c8c96ea34224d22f10993e6e27b82e7",
+    "preview.gif": "3c4d2bc19f8a637fcc0feb4fea9b5b165e8868c3a1b7b64ca173b1d525a99d72",
+    "scene-native.png": "71b03073b00e920d318099b4e5f77e478f3bbaeafb3f2baa9b2273194a6a3ed9",
+    "sheet.png": "b3d88867d302277a22665feeb3aee0632bb7e9e5008109d43f7043f5d053310e",
+    "source-audit.json": "eff1f63d681b4bc3e917f63f75397d8e921ebcf1cb87251f8e3f4359f907d109",
+    "sprite.json": "5f65ff55ce1b6390457d4d1c38667e6aea2da09c9a248cf42621024e93bd2486"
+  }
+}

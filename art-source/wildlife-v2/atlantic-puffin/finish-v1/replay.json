@@ -1,0 +1,17 @@
+{
+  "identity": "atlantic-puffin-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "96b4de67afd43f67f19a43d113f25355dbd563fe304ab21e857dc6b26a41166c",
+    "index.html": "534327e2f6be11ef13d7ed7597468896141e758eeb6ab2c0a116bf646369ea16",
+    "pixel-audit.json": "bacbb120f268d50987e5e7ab6c61a348f7c2745c676fef193f31a1472b4c9793",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "bdda6ab24125fc5b132fc15ed250bfdd8ca7e9905f3c27f557f9945eae0de7e4",
+    "preview.gif": "77059f08d21429dfaa42c18bbad13e668cf12dbe2ba69096b1b898008acb8dba",
+    "scene-native.png": "43a17ce63542896653f3b7013fa13ed34e39977334b57bd1b38dd24835f6107f",
+    "sheet.png": "206b67b587dab64215ebd5d94c65b2b740a1c3ce898f0d2325f9e0b2ed9dd17e",
+    "source-audit.json": "c35ca988a1c9cd3bc886dac80c732b62b4785038c5d250ede1aadf9a38fd2ca0",
+    "sprite.json": "484939fc1f7b0fa5ef58c0b236d3a88a891acaef501c5e2e39e355f41050884a"
+  }
+}

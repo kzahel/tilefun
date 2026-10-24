@@ -1,0 +1,53 @@
+{
+  "identity": "axolotl-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "axolotl-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "9101a2a2d0e0c51eb4a60f07c720e1cce31366148910f5635763f571374b38e3",
+      "index.html": "920e953b1b3a600a5c10e88fa855a2f65bbf398200796471cca39cf3338ba633",
+      "pixel-audit.json": "b4e3d65275557e8867b4fcc9dcf9ba51e2764b9155f175edecb73a4daacd16b3",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "b3aab149b54c96caada3f593aaa4cd69236e772a242a8bc8c100d6112916a645",
+      "preview.gif": "c5d75fa361845e33aa8d314bbe71039a5e5e61c3038705f9109be707fcdfe681",
+      "scene-native.png": "31bf26d5268e5f65f32016f04773ecfec8acfa32cfda28a728745332d5fa7f45",
+      "sheet.png": "b2bc69a5e55868c5ad3656d7aafb602be31959c52ad84cc721d80d220a0b3055",
+      "source-audit.json": "7709f83d6bb17499f3efd8bcaa77e72e99a5626cfdecbd79b0bc91bf9ce01ef1",
+      "sprite.json": "c651df5b14b0773f0cbc5bd5809dd47766150b982fdbc39d376dcd6ca1627965"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/axolotl/finish-v1/README.md": "2dddf2bcc708d078c2933d04b1fba421cd9e7105c82371b9d9d73123ad9f6438",
+    "art-source/wildlife-v2/axolotl/finish-v1/inputs.json": "371ca7a3aa7c8ab9be093dc430f8ec0d6907d0ca0bf1836de0d44efbab7f9780",
+    "art-source/wildlife-v2/axolotl/finish-v1/replay.json": "248ad1828bd190f1cd9e16dc9bf1c053ff0514fd479804f5b7e2b8296f380c01",
+    "art-source/wildlife-v2/axolotl/roster-v2/axolotl.blend": "443927da44e8133f7231bb25ad8ca4b495632dad91a3c5fc3f255edb6d8223a8",
+    "art-source/wildlife-v2/axolotl/roster-v2/inputs.json": "09d46df614b4173c9a6ab56cdb853ac0edfaa219e73fd03026c4bc89fa323455",
+    "art-source/wildlife-v2/axolotl/roster-v2/projection.json": "826256dd5006c37e8881edd0eab710c7039e42c33b469b0452bc853e6fc8a4db",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/axolotl/finish-v1/contact-sheet-native.png": "9101a2a2d0e0c51eb4a60f07c720e1cce31366148910f5635763f571374b38e3",
+    "public/demos/wildlife-v2/axolotl/finish-v1/index.html": "920e953b1b3a600a5c10e88fa855a2f65bbf398200796471cca39cf3338ba633",
+    "public/demos/wildlife-v2/axolotl/finish-v1/pixel-audit.json": "b4e3d65275557e8867b4fcc9dcf9ba51e2764b9155f175edecb73a4daacd16b3",
+    "public/demos/wildlife-v2/axolotl/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/axolotl/finish-v1/preview-native.gif": "b3aab149b54c96caada3f593aaa4cd69236e772a242a8bc8c100d6112916a645",
+    "public/demos/wildlife-v2/axolotl/finish-v1/preview.gif": "c5d75fa361845e33aa8d314bbe71039a5e5e61c3038705f9109be707fcdfe681",
+    "public/demos/wildlife-v2/axolotl/finish-v1/scene-native.png": "31bf26d5268e5f65f32016f04773ecfec8acfa32cfda28a728745332d5fa7f45",
+    "public/demos/wildlife-v2/axolotl/finish-v1/sheet.png": "b2bc69a5e55868c5ad3656d7aafb602be31959c52ad84cc721d80d220a0b3055",
+    "public/demos/wildlife-v2/axolotl/finish-v1/source-audit.json": "7709f83d6bb17499f3efd8bcaa77e72e99a5626cfdecbd79b0bc91bf9ce01ef1",
+    "public/demos/wildlife-v2/axolotl/finish-v1/sprite.json": "c651df5b14b0773f0cbc5bd5809dd47766150b982fdbc39d376dcd6ca1627965",
+    "public/demos/wildlife-v2/axolotl/roster-v2/sheet.png": "1f29280f5494f555903ed11823704c9891e9433763d86beb7633171d205565ef",
+    "public/demos/wildlife-v2/axolotl/roster-v2/sprite.json": "b8b6b4c33fe6451456a072377008c1aaafb52f8c61728fb9575c0fe1102ec14f",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

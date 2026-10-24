@@ -1,0 +1,17 @@
+{
+  "identity": "river-otter-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "b7fc560bcee2f776388940723950087e76d47688357c1e3339e867161d246676",
+    "index.html": "74e81d10935ad3914a4e28d107fc916a1db20eff35de3b90cdec4b5ce66e8466",
+    "pixel-audit.json": "75a386025933eacab437f9e9b5ced7a6a59c01e4316f6fb28f63d93067484bcf",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "0849470a90245d4dc0a5180208de551c165bd3a63295aa6fcb0706e683c84684",
+    "preview.gif": "b99f94206d52c79c37476a65c30d1402561cf35f61e5beb25888c320d4c32a46",
+    "scene-native.png": "db072ff8ecc7c2e55cb764fe995ea31ecc2282c5107b8067b66c9d80d3f7a17e",
+    "sheet.png": "27feefc4e6b60664ca38d5476562100fceca74e78dfb24b1a91d8c285a4e133a",
+    "source-audit.json": "de578feddc612bf923eb6c4001b81b77b983a3d35c83901302092256cb0ebae9",
+    "sprite.json": "5ceb4d7f897c2eb3ed048cd96e6eed74fc1aa9101b190e656e05ca88ddb86bf6"
+  }
+}

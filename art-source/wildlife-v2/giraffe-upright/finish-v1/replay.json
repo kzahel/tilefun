@@ -1,0 +1,17 @@
+{
+  "identity": "giraffe-upright-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "93ff90c21bccb5f97b9599bbd20041904e79c446f30d7ca5d6e5e9c801f84cdd",
+    "index.html": "07899a16b71baaca686cc0abe7c61434d0ef5fd1623358052ddae045ee2a8bd7",
+    "pixel-audit.json": "52839fc83bb178b6c169a3bedad5979a6a9b91a76a757ef885d74aad3dfa7185",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "aab2efa1fa3a6f3adc0b07466132866cbe6aa287ec65c7c7ca5c2de806e17316",
+    "preview.gif": "cb8ad46bac337aad82a6b65d8758e271b3d4dfab72bb4ec64d8623df2a088f43",
+    "scene-native.png": "6535c08331db630085002b239f23b1af80b65a0776376fa5a307e7e8308355ed",
+    "sheet.png": "57e0901e56adef1fd938478fabcda6e1fd64eeabc67cf6092de316d52969ed06",
+    "source-audit.json": "8d57d7da5bb65c25ad746baeec53de2b1f2ba0f53ddc006f5d4f4743c5d3ba07",
+    "sprite.json": "6ee12bd6b57199352301c83579701e2e6f906c422e882dfc0c8bd9e3ca2a0178"
+  }
+}

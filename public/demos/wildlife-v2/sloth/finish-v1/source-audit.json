@@ -1,0 +1,10 @@
+{
+  "identity": "sloth-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/sloth/roster-v3/sloth.blend": "7a318ec7d690e4498d7b57c2cc3ea13fefd9a8b14175295d1c6342762f1fbd51"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

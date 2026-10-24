@@ -1,0 +1,12 @@
+{
+  "identity": "hawk-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 484,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 484,
+  "sheetSha256": "32938f8297d9b04f8f0fd0b916097f82fd3fc51ccf3d10e06a8e12e3b6ed4e4e"
+}

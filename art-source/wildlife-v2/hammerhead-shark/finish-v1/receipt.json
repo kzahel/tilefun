@@ -1,0 +1,53 @@
+{
+  "identity": "hammerhead-shark-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "hammerhead-shark-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "dc09c390eb88c1235f765b035f6bd866004438658d0a187f5383a8ce1fc3c847",
+      "index.html": "0dd16e6704b70590966841037e478c010b1367d028424a4e4d89285b112afc24",
+      "pixel-audit.json": "525f3b33817d6d74e4755f199bad755cae521cb9507eec4ff647ccc9fa92e313",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "c78828672d8cdbc160efc5b2e7271d32ab3b5c85b66a63daa72e5a3849f441f6",
+      "preview.gif": "9b8bb08e0276723052b7a41ea8257389d2e58ce0287c2dd31087b3741b269b7c",
+      "scene-native.png": "ad11d225876f1fa4ec5af64bd27f7fd847d60c1381fbc7454d6c3bb3acfdd184",
+      "sheet.png": "160a862938ed9428c1bb0df7cb22a60da34dca3bfab8115f2d3ae31549b6906d",
+      "source-audit.json": "505e52861d00e32f73e2e52b0853298dfd406f0bb969b9a8455fc6fcbd0e5b2b",
+      "sprite.json": "695716949bb313ea66e50077961d71e4608d8561b0768b4d5af9340c4d821564"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/hammerhead-shark/finish-v1/README.md": "cd6027fc94865ab685867970cf484a7e30b6fd20dcb529a3a8229ea0538f1db0",
+    "art-source/wildlife-v2/hammerhead-shark/finish-v1/inputs.json": "1fa587c3866a64d795f244218f699f6f439403bc9cf9010dafd02c6a7eb8cabe",
+    "art-source/wildlife-v2/hammerhead-shark/finish-v1/replay.json": "fa25a21b16f5203cd9f210b8b99fac81aae9c11fd6c863b4a5b9abc396c06b74",
+    "art-source/wildlife-v2/hammerhead-shark/roster-v2/hammerhead-shark.blend": "97eceb1ab2476259a4a913e86fa5d15a78ac014307f44840d1b268cded8fc1f0",
+    "art-source/wildlife-v2/hammerhead-shark/roster-v2/inputs.json": "f9f9344380b710cd29d1ad8b6f8b5b517d5582d8444e8f5a87fbdfa38a754dfe",
+    "art-source/wildlife-v2/hammerhead-shark/roster-v2/projection.json": "e74e23d15ffd5a75c3cc3f0cd76180ec758ebef03e1c881da1a5d8c5035275b3",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/contact-sheet-native.png": "dc09c390eb88c1235f765b035f6bd866004438658d0a187f5383a8ce1fc3c847",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/index.html": "0dd16e6704b70590966841037e478c010b1367d028424a4e4d89285b112afc24",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/pixel-audit.json": "525f3b33817d6d74e4755f199bad755cae521cb9507eec4ff647ccc9fa92e313",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/preview-native.gif": "c78828672d8cdbc160efc5b2e7271d32ab3b5c85b66a63daa72e5a3849f441f6",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/preview.gif": "9b8bb08e0276723052b7a41ea8257389d2e58ce0287c2dd31087b3741b269b7c",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/scene-native.png": "ad11d225876f1fa4ec5af64bd27f7fd847d60c1381fbc7454d6c3bb3acfdd184",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/sheet.png": "160a862938ed9428c1bb0df7cb22a60da34dca3bfab8115f2d3ae31549b6906d",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/source-audit.json": "505e52861d00e32f73e2e52b0853298dfd406f0bb969b9a8455fc6fcbd0e5b2b",
+    "public/demos/wildlife-v2/hammerhead-shark/finish-v1/sprite.json": "695716949bb313ea66e50077961d71e4608d8561b0768b4d5af9340c4d821564",
+    "public/demos/wildlife-v2/hammerhead-shark/roster-v2/sheet.png": "3ed82957fdcc77380bc20e4ffa20eb740b017c74cca456fc2ff1f5e43d6590ea",
+    "public/demos/wildlife-v2/hammerhead-shark/roster-v2/sprite.json": "10b0a8679ab2c5497c53bd596b16bd5e4f52769b487d8417ca6a99221c3b1ec3",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

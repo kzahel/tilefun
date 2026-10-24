@@ -1,0 +1,17 @@
+{
+  "identity": "pufferfish-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "2e4b68e8062c71833b7093517f4519efaa634c1e5f360e0311d164ad2d32f547",
+    "index.html": "1049af4d9c6b6dee55d44eac80320ac3b192867dceed2a79a7411d2f066ff512",
+    "pixel-audit.json": "6e4825e02c2a296030ea956c87019103dd11b8c3d13bdad2d2840d944bb51af8",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "6b15dab8e16c30cc3871aade0e980d4dbf60125912bc619344970532b0e053fd",
+    "preview.gif": "4c8b79ad0926a16d446fbd1fc0760347593bbe6db6cab4c9ef826f1383f35e9b",
+    "scene-native.png": "4eccf6ffa1936a68874242e2b6d397ab0fdaacae91e695be4e77db63ccb19603",
+    "sheet.png": "36f635112b9186efee8c4dca6126b774a77012027eb9d9c1ef725598408aed5a",
+    "source-audit.json": "7ce38b5cfce9c4ffb46da8de8b54109b9726d68b7433017377946956e9b21609",
+    "sprite.json": "03103cdf8b92a0213e3da4abcb972178d1cd1004aa9319b05a6b602e94f9e3ee"
+  }
+}

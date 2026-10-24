@@ -1,0 +1,12 @@
+{
+  "identity": "proboscis-monkey-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "4fa04680bfa7c40f162e970c3e4214b4223a816a10c7c9092813e1bc34f96fca"
+}

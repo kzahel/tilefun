@@ -1,0 +1,53 @@
+{
+  "identity": "parrot-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "parrot-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "71845182302f46c2301356166de40ef00ad3fac8c1c43c06515c0beaba56788b",
+      "index.html": "4e22e83405117b4665cfdafdc55d34a573905b2ea7316e20a7e39abbbb3102f0",
+      "pixel-audit.json": "31fd1369a6eba11d60f24dc6c0b1c2ec134e3f289fd20d81533cdead28e195bc",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "efcb0c36a13ebbdc7807f91263162137de29acc221da3e7f58e665f18a18c549",
+      "preview.gif": "cd113c0eabba2e3438bd99abcc80e9b69e4a917fafde55f311d42bf897b5fcb9",
+      "scene-native.png": "b06d693f2652a34fc06bddc2aadeb4ad8f49a9db76958ee622bed8b5b7902593",
+      "sheet.png": "9f891640c11b33dea40274e17a58893bc3abd42f690d1b8677b143e72e1b7af7",
+      "source-audit.json": "4d98b65249a384153b45112e9edcbee9daccd7488f88d98aa76e8764b84e1feb",
+      "sprite.json": "6956bd63ec110cb93b48ca783eebc88851a92f029e283663abfcf4cd0ecf80be"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/parrot/finish-v1/README.md": "cb699df40cec5551fd46e1e4a95a9bc64c2c78f7fe1d9d4a854c17d6d4e2d7e8",
+    "art-source/wildlife-v2/parrot/finish-v1/inputs.json": "7dbf4b2977aaedeec9d9f2cd1d0ec70a92b124f685039b59cacda0b5c6aa7748",
+    "art-source/wildlife-v2/parrot/finish-v1/replay.json": "5061e8e5e1a118534e178cb092cbb4242f9ec1cdce18f12d9543e2b6fc7ec153",
+    "art-source/wildlife-v2/parrot/roster-v2/inputs.json": "36bc3b4f0a4e6607f8179b29e4179e56934d9fb3e4915fac575764d0c51e549d",
+    "art-source/wildlife-v2/parrot/roster-v2/parrot.blend": "dec268d5adfdcbde7fa475b1f842b65f9648c89106f6a64fe48d0c3b032a30dc",
+    "art-source/wildlife-v2/parrot/roster-v2/projection.json": "571a3139db4847b997bf6b5fab30bf2e36dc3f5055232c83cf5f625826f5b8cd",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/parrot/finish-v1/contact-sheet-native.png": "71845182302f46c2301356166de40ef00ad3fac8c1c43c06515c0beaba56788b",
+    "public/demos/wildlife-v2/parrot/finish-v1/index.html": "4e22e83405117b4665cfdafdc55d34a573905b2ea7316e20a7e39abbbb3102f0",
+    "public/demos/wildlife-v2/parrot/finish-v1/pixel-audit.json": "31fd1369a6eba11d60f24dc6c0b1c2ec134e3f289fd20d81533cdead28e195bc",
+    "public/demos/wildlife-v2/parrot/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/parrot/finish-v1/preview-native.gif": "efcb0c36a13ebbdc7807f91263162137de29acc221da3e7f58e665f18a18c549",
+    "public/demos/wildlife-v2/parrot/finish-v1/preview.gif": "cd113c0eabba2e3438bd99abcc80e9b69e4a917fafde55f311d42bf897b5fcb9",
+    "public/demos/wildlife-v2/parrot/finish-v1/scene-native.png": "b06d693f2652a34fc06bddc2aadeb4ad8f49a9db76958ee622bed8b5b7902593",
+    "public/demos/wildlife-v2/parrot/finish-v1/sheet.png": "9f891640c11b33dea40274e17a58893bc3abd42f690d1b8677b143e72e1b7af7",
+    "public/demos/wildlife-v2/parrot/finish-v1/source-audit.json": "4d98b65249a384153b45112e9edcbee9daccd7488f88d98aa76e8764b84e1feb",
+    "public/demos/wildlife-v2/parrot/finish-v1/sprite.json": "6956bd63ec110cb93b48ca783eebc88851a92f029e283663abfcf4cd0ecf80be",
+    "public/demos/wildlife-v2/parrot/roster-v2/sheet.png": "029a3c66268f63cf55b85f2b1aa8237c10de629c35303f7fa65600a5103d7488",
+    "public/demos/wildlife-v2/parrot/roster-v2/sprite.json": "70aa963afd07ef525e5446872acdc1f7b69e33b600da31c6c729ef3136f8b1a0",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

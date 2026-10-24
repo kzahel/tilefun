@@ -9,6 +9,7 @@ import {
   type FierceBehaviorProfile,
   type FierceSpecies,
 } from "./FierceCreatures.js";
+import { finishedPredatorArt } from "./FinishedArt.js";
 import { NATURAL_HUNTER_PROFILES, type NaturalHunterSpecies } from "./NaturalHunters.js";
 
 const ORIGINAL_PREDATORS = [
@@ -78,7 +79,7 @@ export const PREDATOR_PROFILES: readonly PredatorProfile[] = [
   ...FIERCE_PROFILES,
   ...NATURAL_HUNTER_PROFILES,
   ...AQUATIC_HUNTER_PROFILES,
-];
+].map(finishedPredatorArt);
 export const predatorType = (species: string) => `wildlife-${species}-predator-v1`;
 const profilesByType = new Map(PREDATOR_PROFILES.map((p) => [predatorType(p.species), p]));
 export const predatorProfile = (type: string) => profilesByType.get(type);

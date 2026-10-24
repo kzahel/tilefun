@@ -1,0 +1,53 @@
+{
+  "identity": "capybara-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "capybara-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "8f6a7c324af7d6da7cd2055e42aeab4a4b50010c30b27f5dd66ee53e6dc59a65",
+      "index.html": "75bfa419518dbeaf0cd9fadbc826e67ded6036f17014e683c7a77dbd07a85194",
+      "pixel-audit.json": "d8c2ac1156c78e54440450110481e3a53eda512d1b4db4ef6a72ba730b7c79dd",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "404291da39a209da9b21b566cf2be5032bfd4d99c5069eea08033be4f764135a",
+      "preview.gif": "5aec0249ae4467820576e832d41b5c89c3cd61b3cfcf19c673030f8fc59c5308",
+      "scene-native.png": "c8aec603e3b1b9034cdb76e577e450070914d0b0b2eae0189cfe28a11c7681ea",
+      "sheet.png": "fd3d9017ba3dce4a08274f0489c3565b8f668e473bd955472b665a382ce5f30b",
+      "source-audit.json": "f7e7ed417eb089360eab7c597bf6cbcc7df23221fbf6a38c3f653532d3964686",
+      "sprite.json": "91216a7804abb814d54dbf2723e21083fa17c1014c000419a0b340a499a715db"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/capybara/finish-v1/README.md": "0c66b4f30bb5bc4651ead6ea57f94c1063e4ff0d3ec89386f3ecf512329dcecc",
+    "art-source/wildlife-v2/capybara/finish-v1/inputs.json": "a0eac601e0a551c17f46840c9a4488c1b111a7b184fc51f6e64a430f7852b516",
+    "art-source/wildlife-v2/capybara/finish-v1/replay.json": "0a0ae64432d49a8f02b631bbc2b90d06716e9095bf9d1f4bdeeab8ab19fcf396",
+    "art-source/wildlife-v2/capybara/roster-v2/capybara.blend": "c7d6a75105f3187ce73a222a0d8efaf5cbb8c030b769d78229931b6f16025238",
+    "art-source/wildlife-v2/capybara/roster-v2/inputs.json": "fff0ed6166a45d60a89f76b70af7579e253e87877485373a5854945a75290eac",
+    "art-source/wildlife-v2/capybara/roster-v2/projection.json": "c092548e31a7833be0fa541d2152cc1d8ba675bc58ef0fce5792288877615a2a",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/capybara/finish-v1/contact-sheet-native.png": "8f6a7c324af7d6da7cd2055e42aeab4a4b50010c30b27f5dd66ee53e6dc59a65",
+    "public/demos/wildlife-v2/capybara/finish-v1/index.html": "75bfa419518dbeaf0cd9fadbc826e67ded6036f17014e683c7a77dbd07a85194",
+    "public/demos/wildlife-v2/capybara/finish-v1/pixel-audit.json": "d8c2ac1156c78e54440450110481e3a53eda512d1b4db4ef6a72ba730b7c79dd",
+    "public/demos/wildlife-v2/capybara/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/capybara/finish-v1/preview-native.gif": "404291da39a209da9b21b566cf2be5032bfd4d99c5069eea08033be4f764135a",
+    "public/demos/wildlife-v2/capybara/finish-v1/preview.gif": "5aec0249ae4467820576e832d41b5c89c3cd61b3cfcf19c673030f8fc59c5308",
+    "public/demos/wildlife-v2/capybara/finish-v1/scene-native.png": "c8aec603e3b1b9034cdb76e577e450070914d0b0b2eae0189cfe28a11c7681ea",
+    "public/demos/wildlife-v2/capybara/finish-v1/sheet.png": "fd3d9017ba3dce4a08274f0489c3565b8f668e473bd955472b665a382ce5f30b",
+    "public/demos/wildlife-v2/capybara/finish-v1/source-audit.json": "f7e7ed417eb089360eab7c597bf6cbcc7df23221fbf6a38c3f653532d3964686",
+    "public/demos/wildlife-v2/capybara/finish-v1/sprite.json": "91216a7804abb814d54dbf2723e21083fa17c1014c000419a0b340a499a715db",
+    "public/demos/wildlife-v2/capybara/roster-v2/sheet.png": "e971e51aef9936fd1db0f81fd044fbc0bce0af670df74988f0f6ccc8233773db",
+    "public/demos/wildlife-v2/capybara/roster-v2/sprite.json": "f3802356296a77b1aa294f1388483daa61e3ed4b0e2934553b87122d82f1de3f",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

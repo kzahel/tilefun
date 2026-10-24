@@ -1,0 +1,17 @@
+{
+  "identity": "rat-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "721a4ced411581006613ee4bdac56651e8aac6e81a494351c2b5535c1ceab40a",
+    "index.html": "6515902d5160e3a332277ca706dd020f40505c510e90f40b2d0b4b1dbb0bec92",
+    "pixel-audit.json": "9e7f56433fdd22d072638e6ee574773d5605612c237ae22150362d48b1fefb27",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "c727c4e3cba53d30ab44bf1a508c1fb0de555b46dc5674b7efc390f3709e82bb",
+    "preview.gif": "15e4dd1edbaea4eafe3183f848e5a0d225b06b482c5ec035f503b938dcd6518c",
+    "scene-native.png": "493af9fa4a1e6c88c9b8ef09b737e4e6551edfed8f3044225904ac7af41298fa",
+    "sheet.png": "18f16510b56d26951d1cc5ab64e8108307138d732605c21e92c476a22983477b",
+    "source-audit.json": "e6072e996817f42387b4faec6b5691fc6b302457a2b4b4f87e228c9ac1b4c005",
+    "sprite.json": "0530fc89f56db13c8cae11a3ee99f425fcda3771cbfc5c82669e8b99f1a3528e"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "chimpanzee-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "b544486873c1ecf52421ea9168ba8bb611a84558e405de6a6a93eea84387163a",
+    "index.html": "002dd7ad4e64001b4847247dfee65a91b2f794f0b16f713885459e565f909391",
+    "pixel-audit.json": "ba9074a4617bc7fdf399f7132a935131a7f436eecfc00b9219cc2cc3ff41011f",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "d594180e246cd56fe98e86b5e2f9a72bf7f16eff052f3439d90cca2f1c2bfbfe",
+    "preview.gif": "f88d773cf456d15f892f8d009701e3dfb7399671a9520c8b8af64fb5d3cbf1fc",
+    "scene-native.png": "f7d60b2087b6d64b946aa5e6f9f57b1983be0ab85307290a5d8c92772d7ec2b7",
+    "sheet.png": "a38af62b60120ff131ac549b864de147d2e8dfcb469f54b5e1a2e3bc7ce36480",
+    "source-audit.json": "3291c9b69d3c8de096b9dd64f81d10e2f41ed9dee55282b0f8bc1182364b1215",
+    "sprite.json": "d831aeeb1f0e39ab80a74388f864f81719e2f2994cedae10f613296a2a397259"
+  }
+}

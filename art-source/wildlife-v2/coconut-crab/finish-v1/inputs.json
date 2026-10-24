@@ -1,0 +1,36 @@
+{
+  "identity": "coconut-crab-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "coconut-crab",
+    "name": "Coconut crab",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/coconut-crab/roster-v3/sheet.png",
+    "sourceSha256": "b2b0241855de963e1786f66bb7ebd17cdb678a4e5d127c8cdb519e632cfdf168",
+    "source": "art-source/wildlife-v2/coconut-crab/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#26322b",
+    "N": "#141d18",
+    "B": "#8d6a4d",
+    "C": "#dec5a0",
+    "M": "#614b38",
+    "H": "#ab7a50",
+    "T": "#e3cfab"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/coconut-crab/roster-v3/coconut-crab.blend": "bab21347857a1ebf25e53e302c5f3e350fb8a0bf57160cfe4215958ca05ae43c",
+    "art-source/wildlife-v2/coconut-crab/roster-v3/inputs.json": "5fb44238331246d8d4219ef247554112457243cfab6ee1a04e441a6638985c72",
+    "art-source/wildlife-v2/coconut-crab/roster-v3/projection.json": "245bfcf6165d3777558fcc7445ab28463097844412bf84d43ff2db7b1d927122",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/coconut-crab/roster-v3/sheet.png": "b2b0241855de963e1786f66bb7ebd17cdb678a4e5d127c8cdb519e632cfdf168",
+    "public/demos/wildlife-v2/coconut-crab/roster-v3/sprite.json": "b8a1e78d6c30520e1067ac922ec5018acbfff1c6e38d57b6d3592cec678ac022",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

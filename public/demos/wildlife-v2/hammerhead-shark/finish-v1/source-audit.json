@@ -1,0 +1,10 @@
+{
+  "identity": "hammerhead-shark-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/hammerhead-shark/roster-v2/hammerhead-shark.blend": "97eceb1ab2476259a4a913e86fa5d15a78ac014307f44840d1b268cded8fc1f0"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

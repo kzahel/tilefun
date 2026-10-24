@@ -1,0 +1,53 @@
+{
+  "identity": "chameleon-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "chameleon-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "9d1053073312aeba7068810bb5c9b5bda3055408cbd10742152f9de4cd91b937",
+      "index.html": "1036d5ccb958f18ee63f498b797ff8b0b563d3a38f7d07fae5dc77f414d08323",
+      "pixel-audit.json": "7a3d640a403a73dab19a705c481d2378af0697b49052753f0dbbeba00f1d989d",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "72c486bcd20c0ae9650841b4d79228f2c12e17901423cdaa697135c1960b998f",
+      "preview.gif": "40130d7b87bfe3aaafe2cf42848ffbfdb09040dbdc7dc6ef08d7e58bb363acae",
+      "scene-native.png": "2949863d2509656163bbb077a6e32f9a1ed3d7c2b9fe080f820076a902c8f906",
+      "sheet.png": "971ff8b85a84a9100b34047ca2d96cb9d756d70c2614601a9e0eeaec7aafabb2",
+      "source-audit.json": "997c555f2fbe38f76e2e2a5767789c8a1b5c87dccc62bfbdb61fd4629827a8d7",
+      "sprite.json": "300c83ce4aa4db7078fddb3dd96e2167182b4e1a9469039cf402575923a459b5"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/chameleon/finish-v1/README.md": "9662cf262653807669f263de01bbe826c875e4beb1241cf5e0ee7717023e07ca",
+    "art-source/wildlife-v2/chameleon/finish-v1/inputs.json": "42c930eda4ebccffc5e0bf920cc00fb19d0f7a9600fca23eca55e5ac816a2f5f",
+    "art-source/wildlife-v2/chameleon/finish-v1/replay.json": "a18576e64162e9f569fa4fa72173b14ff34ee8c0426bef0ecbf9deb58e3518f9",
+    "art-source/wildlife-v2/chameleon/roster-v2/chameleon.blend": "4659fb76722568f5dc16241c93a65e6d18a8ff290f0511f41029141e5998cc14",
+    "art-source/wildlife-v2/chameleon/roster-v2/inputs.json": "b0c40ee2e383e1c36c91f5da9151668a9803a907783f188954c98b7a03051391",
+    "art-source/wildlife-v2/chameleon/roster-v2/projection.json": "e66457bf2139e72abdc80651ae49f4e70893feecf6647849d09a74b6f08498d7",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/chameleon/finish-v1/contact-sheet-native.png": "9d1053073312aeba7068810bb5c9b5bda3055408cbd10742152f9de4cd91b937",
+    "public/demos/wildlife-v2/chameleon/finish-v1/index.html": "1036d5ccb958f18ee63f498b797ff8b0b563d3a38f7d07fae5dc77f414d08323",
+    "public/demos/wildlife-v2/chameleon/finish-v1/pixel-audit.json": "7a3d640a403a73dab19a705c481d2378af0697b49052753f0dbbeba00f1d989d",
+    "public/demos/wildlife-v2/chameleon/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/chameleon/finish-v1/preview-native.gif": "72c486bcd20c0ae9650841b4d79228f2c12e17901423cdaa697135c1960b998f",
+    "public/demos/wildlife-v2/chameleon/finish-v1/preview.gif": "40130d7b87bfe3aaafe2cf42848ffbfdb09040dbdc7dc6ef08d7e58bb363acae",
+    "public/demos/wildlife-v2/chameleon/finish-v1/scene-native.png": "2949863d2509656163bbb077a6e32f9a1ed3d7c2b9fe080f820076a902c8f906",
+    "public/demos/wildlife-v2/chameleon/finish-v1/sheet.png": "971ff8b85a84a9100b34047ca2d96cb9d756d70c2614601a9e0eeaec7aafabb2",
+    "public/demos/wildlife-v2/chameleon/finish-v1/source-audit.json": "997c555f2fbe38f76e2e2a5767789c8a1b5c87dccc62bfbdb61fd4629827a8d7",
+    "public/demos/wildlife-v2/chameleon/finish-v1/sprite.json": "300c83ce4aa4db7078fddb3dd96e2167182b4e1a9469039cf402575923a459b5",
+    "public/demos/wildlife-v2/chameleon/roster-v2/sheet.png": "1763f6f6e9ff5104d51e1479e019ae6636bc6cbfd8a958cf8bb829b5d64c0d23",
+    "public/demos/wildlife-v2/chameleon/roster-v2/sprite.json": "d92bfeb78471027412223fa3aac09f7354b2530f9899c898a2a10a7a9dbb837e",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

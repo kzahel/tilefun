@@ -1,0 +1,10 @@
+{
+  "identity": "lobster-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/lobster/roster-v3/lobster.blend": "dfe34191f932fe1b639b6de5aa590ede05fb3b1d8b69b4735a1b2ce011fe0ed1"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

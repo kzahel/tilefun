@@ -1,0 +1,10 @@
+{
+  "identity": "whale-shark-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/whale-shark/roster-v2/whale-shark.blend": "453fb8c26c3586f614d7adce522206ef1e916c7e5e2da75d9eece440c89cff14"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

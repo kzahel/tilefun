@@ -1,0 +1,17 @@
+{
+  "identity": "honey-badger-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "688e315e054cd5eaad7205185c175a39ab41b67a7d9faee077140dd4fd073a56",
+    "index.html": "bb62e8435c21b8a234d5508a4cd511d45c0eca4f37c189a94fe26c9d075b3d49",
+    "pixel-audit.json": "06599f0b25298eb23f4134c813f2363179c75929f648f25ae151136e4d437b2b",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "ac68c985a81762eb2125d13c9a60184e0342c601bb3f86b9b2b4b339b30bc98a",
+    "preview.gif": "5aba46fcc46a593e2d59e77c380649cb35e5ac06513c348892cb3a059d6a4390",
+    "scene-native.png": "5cbed3f0ddfeee118ac81bbee5f9982a5ccc56dd365f6b23365e42634535ff40",
+    "sheet.png": "c93b0a4a66eaf43363882046fba9c788d9eb4dc83bed9801d1edcd69f29b5d9a",
+    "source-audit.json": "76a470cc7bb1289991e22081b9883e3a6ed29508d8b49498c6ed99f40c5a879c",
+    "sprite.json": "dedfe7feeb1ad3400ef8dff1969bfe9b2c2ea9a0582895a9c33e7e19c6869081"
+  }
+}

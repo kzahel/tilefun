@@ -1,0 +1,10 @@
+{
+  "identity": "shrimp-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/shrimp/roster-v3/shrimp.blend": "2283fc47bbab2b9e27c4e2b7a2957de31537104f2166ea48c0a5bf3ca7ef6ed5"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

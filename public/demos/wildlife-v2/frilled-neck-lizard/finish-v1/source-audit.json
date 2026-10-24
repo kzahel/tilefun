@@ -1,0 +1,10 @@
+{
+  "identity": "frilled-neck-lizard-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/frilled-neck-lizard/roster-v2/frilled-neck-lizard.blend": "d0ac0c4771d58061fb14e4a126b05c1f311eed4a87e9b3380a7fc44181805274"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

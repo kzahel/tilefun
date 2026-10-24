@@ -1,0 +1,53 @@
+{
+  "identity": "atlantic-puffin-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "atlantic-puffin-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "96b4de67afd43f67f19a43d113f25355dbd563fe304ab21e857dc6b26a41166c",
+      "index.html": "534327e2f6be11ef13d7ed7597468896141e758eeb6ab2c0a116bf646369ea16",
+      "pixel-audit.json": "bacbb120f268d50987e5e7ab6c61a348f7c2745c676fef193f31a1472b4c9793",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "bdda6ab24125fc5b132fc15ed250bfdd8ca7e9905f3c27f557f9945eae0de7e4",
+      "preview.gif": "77059f08d21429dfaa42c18bbad13e668cf12dbe2ba69096b1b898008acb8dba",
+      "scene-native.png": "43a17ce63542896653f3b7013fa13ed34e39977334b57bd1b38dd24835f6107f",
+      "sheet.png": "206b67b587dab64215ebd5d94c65b2b740a1c3ce898f0d2325f9e0b2ed9dd17e",
+      "source-audit.json": "c35ca988a1c9cd3bc886dac80c732b62b4785038c5d250ede1aadf9a38fd2ca0",
+      "sprite.json": "484939fc1f7b0fa5ef58c0b236d3a88a891acaef501c5e2e39e355f41050884a"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/atlantic-puffin/finish-v1/README.md": "abc74ea4514ec3d2d44e6a635c788a41f621ffcfecb62c6bc5a2b87718daad93",
+    "art-source/wildlife-v2/atlantic-puffin/finish-v1/inputs.json": "efef8636ebe2544326274379060b84e4a598a32bef665818820fa1e51bce12ed",
+    "art-source/wildlife-v2/atlantic-puffin/finish-v1/replay.json": "9420862201a3ceaaec2bdeeaddfc144581c52211d7b590adf42b05005df26693",
+    "art-source/wildlife-v2/atlantic-puffin/roster-v3/atlantic-puffin.blend": "927d91202accb0d1729b2aba3300a98e78962022dd573a5d01f7e4d00ecad325",
+    "art-source/wildlife-v2/atlantic-puffin/roster-v3/inputs.json": "5448129dc271fdfab2e09ac453cb23f336e0b7280dbbb22658b8c910ec9d0f12",
+    "art-source/wildlife-v2/atlantic-puffin/roster-v3/projection.json": "7e32cbc48172fa576fdb177f6c3e60c01143ce4aa4acbfe85f801c688bfcba0a",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/contact-sheet-native.png": "96b4de67afd43f67f19a43d113f25355dbd563fe304ab21e857dc6b26a41166c",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/index.html": "534327e2f6be11ef13d7ed7597468896141e758eeb6ab2c0a116bf646369ea16",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/pixel-audit.json": "bacbb120f268d50987e5e7ab6c61a348f7c2745c676fef193f31a1472b4c9793",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/preview-native.gif": "bdda6ab24125fc5b132fc15ed250bfdd8ca7e9905f3c27f557f9945eae0de7e4",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/preview.gif": "77059f08d21429dfaa42c18bbad13e668cf12dbe2ba69096b1b898008acb8dba",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/scene-native.png": "43a17ce63542896653f3b7013fa13ed34e39977334b57bd1b38dd24835f6107f",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/sheet.png": "206b67b587dab64215ebd5d94c65b2b740a1c3ce898f0d2325f9e0b2ed9dd17e",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/source-audit.json": "c35ca988a1c9cd3bc886dac80c732b62b4785038c5d250ede1aadf9a38fd2ca0",
+    "public/demos/wildlife-v2/atlantic-puffin/finish-v1/sprite.json": "484939fc1f7b0fa5ef58c0b236d3a88a891acaef501c5e2e39e355f41050884a",
+    "public/demos/wildlife-v2/atlantic-puffin/roster-v3/sheet.png": "92f5eab133575b182d418b356e162c40506475ec5c70bbec4da4d5718c9bebed",
+    "public/demos/wildlife-v2/atlantic-puffin/roster-v3/sprite.json": "8ecf46bb83a5919be7a9662e4d54e9a339a841138fb1fe98874de13c93c1a8a5",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

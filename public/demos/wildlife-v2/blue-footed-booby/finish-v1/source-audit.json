@@ -1,0 +1,10 @@
+{
+  "identity": "blue-footed-booby-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/blue-footed-booby/roster-v3/blue-footed-booby.blend": "b9b8336312c8d00b4e0526f6e0071c4672c6531bc686e58f708796b773b3b263"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,36 @@
+{
+  "identity": "hammerhead-shark-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "hammerhead-shark",
+    "name": "Hammerhead shark",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/hammerhead-shark/roster-v2/sheet.png",
+    "sourceSha256": "3ed82957fdcc77380bc20e4ffa20eb740b017c74cca456fc2ff1f5e43d6590ea",
+    "source": "art-source/wildlife-v2/hammerhead-shark/roster-v2",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#998b78",
+    "H": "#afa18a",
+    "W": "#e3dcc7",
+    "M": "#665d52",
+    "E": "#22282b",
+    "T": "#f5ecd6",
+    "G": "#c4b99e"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/hammerhead-shark/roster-v2/hammerhead-shark.blend": "97eceb1ab2476259a4a913e86fa5d15a78ac014307f44840d1b268cded8fc1f0",
+    "art-source/wildlife-v2/hammerhead-shark/roster-v2/inputs.json": "f9f9344380b710cd29d1ad8b6f8b5b517d5582d8444e8f5a87fbdfa38a754dfe",
+    "art-source/wildlife-v2/hammerhead-shark/roster-v2/projection.json": "e74e23d15ffd5a75c3cc3f0cd76180ec758ebef03e1c881da1a5d8c5035275b3",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/hammerhead-shark/roster-v2/sheet.png": "3ed82957fdcc77380bc20e4ffa20eb740b017c74cca456fc2ff1f5e43d6590ea",
+    "public/demos/wildlife-v2/hammerhead-shark/roster-v2/sprite.json": "10b0a8679ab2c5497c53bd596b16bd5e4f52769b487d8417ca6a99221c3b1ec3",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

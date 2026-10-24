@@ -1,0 +1,10 @@
+{
+  "identity": "guinea-pig-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/guinea-pig/roster-v2/guinea-pig.blend": "b637b2f73aacd538827c47b2f29f7b071170fe04e80c406adf212a4bcd6928b6"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

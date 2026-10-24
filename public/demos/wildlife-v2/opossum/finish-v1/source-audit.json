@@ -1,0 +1,10 @@
+{
+  "identity": "opossum-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/opossum/roster-v3/opossum.blend": "10cf859adf01973a411ca0a2907f4eedfdf328df6c21a90f8f02074c5be2983d"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

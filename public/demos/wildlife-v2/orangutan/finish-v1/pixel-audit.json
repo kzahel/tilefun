@@ -1,0 +1,12 @@
+{
+  "identity": "orangutan-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 196,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 196,
+  "sheetSha256": "dbd5188573f6759516ed036c8fe437aa82821f0d023c3ade2f6643b8b28fd615"
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "giant-anteater-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "giant-anteater-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "bc329a57fefe550f352b7e0f8fc8e149aaf0a2929add3448c7d40488f9e30e3f",
+      "index.html": "94367da91d7e55d5ccec99304cfcbfd9c22eb8b16f32995f8636b4b4a03739d5",
+      "pixel-audit.json": "69fd0d4c61579d4007ad05642f1e5a5a06309678dce7e6a9f887f23693d0ac2b",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "9462fa2d971a553ee7faef27141da3128b44c1a40aec9aa192ac76db19f02e8f",
+      "preview.gif": "1e1bcbaaff71408192b2cf7c2c14cb4f311768952a6106dffa0de68ee0968c5f",
+      "scene-native.png": "29cef6bc2146afed793df6b720196b7cedcd0f6ce2f2e46358733549293c6d6e",
+      "sheet.png": "265ef289e32b69993f105b9bda6604f5ff30e6761b87c6453901aadf1e723842",
+      "source-audit.json": "60decb4a19c696c524179c45fc5c1b0e980115737408eb63473ed5158048cb80",
+      "sprite.json": "b6c6e96743dda6bd04c2bcf7209df82fcc553bf1990da90edf9492a3fb193ad0"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/giant-anteater/finish-v1/README.md": "fef2e77880c65a5dfbb5675e5b0df93677e5c2a9d8a660fb69831d8444342ed4",
+    "art-source/wildlife-v2/giant-anteater/finish-v1/inputs.json": "0013e27e7951d2a2cda95020a9273fbeb17eb72d9c3c071a282451ff950f0c84",
+    "art-source/wildlife-v2/giant-anteater/finish-v1/replay.json": "288f9ec301cd3e01ad5f96b4dffbab4f1ed33d777ce71c3a7959449344879b58",
+    "art-source/wildlife-v2/giant-anteater/roster-v3/giant-anteater.blend": "84902b58970b1781efd9d23dc2328bc2877ca4ceca1bff68f9c4936c0d6ddb0f",
+    "art-source/wildlife-v2/giant-anteater/roster-v3/inputs.json": "bf9832259995311caccb5306e0f755e90bcd7746cb47ff601b9e97a181776ee4",
+    "art-source/wildlife-v2/giant-anteater/roster-v3/projection.json": "7bc337dbf7a8c661c2730c48feb8764a12303fe103e228fabbe82bca71afee25",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/contact-sheet-native.png": "bc329a57fefe550f352b7e0f8fc8e149aaf0a2929add3448c7d40488f9e30e3f",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/index.html": "94367da91d7e55d5ccec99304cfcbfd9c22eb8b16f32995f8636b4b4a03739d5",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/pixel-audit.json": "69fd0d4c61579d4007ad05642f1e5a5a06309678dce7e6a9f887f23693d0ac2b",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/preview-native.gif": "9462fa2d971a553ee7faef27141da3128b44c1a40aec9aa192ac76db19f02e8f",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/preview.gif": "1e1bcbaaff71408192b2cf7c2c14cb4f311768952a6106dffa0de68ee0968c5f",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/scene-native.png": "29cef6bc2146afed793df6b720196b7cedcd0f6ce2f2e46358733549293c6d6e",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/sheet.png": "265ef289e32b69993f105b9bda6604f5ff30e6761b87c6453901aadf1e723842",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/source-audit.json": "60decb4a19c696c524179c45fc5c1b0e980115737408eb63473ed5158048cb80",
+    "public/demos/wildlife-v2/giant-anteater/finish-v1/sprite.json": "b6c6e96743dda6bd04c2bcf7209df82fcc553bf1990da90edf9492a3fb193ad0",
+    "public/demos/wildlife-v2/giant-anteater/roster-v3/sheet.png": "047aa986f5f3a16712cd79cf8b6d40f8d3408179f1cb8653d7403a7b35b8cadb",
+    "public/demos/wildlife-v2/giant-anteater/roster-v3/sprite.json": "ae76d699a702a8d7291dbc81016082e8963e2e1e9024fa2d82004de719184a87",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

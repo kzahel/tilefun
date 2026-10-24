@@ -1,0 +1,17 @@
+{
+  "identity": "capybara-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "8f6a7c324af7d6da7cd2055e42aeab4a4b50010c30b27f5dd66ee53e6dc59a65",
+    "index.html": "75bfa419518dbeaf0cd9fadbc826e67ded6036f17014e683c7a77dbd07a85194",
+    "pixel-audit.json": "d8c2ac1156c78e54440450110481e3a53eda512d1b4db4ef6a72ba730b7c79dd",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "404291da39a209da9b21b566cf2be5032bfd4d99c5069eea08033be4f764135a",
+    "preview.gif": "5aec0249ae4467820576e832d41b5c89c3cd61b3cfcf19c673030f8fc59c5308",
+    "scene-native.png": "c8aec603e3b1b9034cdb76e577e450070914d0b0b2eae0189cfe28a11c7681ea",
+    "sheet.png": "fd3d9017ba3dce4a08274f0489c3565b8f668e473bd955472b665a382ce5f30b",
+    "source-audit.json": "f7e7ed417eb089360eab7c597bf6cbcc7df23221fbf6a38c3f653532d3964686",
+    "sprite.json": "91216a7804abb814d54dbf2723e21083fa17c1014c000419a0b340a499a715db"
+  }
+}

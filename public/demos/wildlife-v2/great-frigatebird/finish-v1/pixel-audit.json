@@ -1,0 +1,12 @@
+{
+  "identity": "great-frigatebird-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "ed52be33eeef1b0111ec72e6cf362fa873d842390414a1874f8e27a02da7e45c"
+}

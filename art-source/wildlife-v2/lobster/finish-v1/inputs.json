@@ -1,0 +1,36 @@
+{
+  "identity": "lobster-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "lobster",
+    "name": "Lobster",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/lobster/roster-v3/sheet.png",
+    "sourceSha256": "88b6d06ddbd5d171b3e77d3e6df8aef0904f2d957650d73b02c2e813b725c6e6",
+    "source": "art-source/wildlife-v2/lobster/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#26322b",
+    "N": "#141d18",
+    "B": "#b96546",
+    "C": "#dec5a0",
+    "M": "#614b38",
+    "H": "#ab7a50",
+    "T": "#e3cfab"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/lobster/roster-v3/inputs.json": "5fb44238331246d8d4219ef247554112457243cfab6ee1a04e441a6638985c72",
+    "art-source/wildlife-v2/lobster/roster-v3/lobster.blend": "dfe34191f932fe1b639b6de5aa590ede05fb3b1d8b69b4735a1b2ce011fe0ed1",
+    "art-source/wildlife-v2/lobster/roster-v3/projection.json": "958e5b7af13669d1e168e9b0f3e3cecc25e6bdc89eb19f6202646ae819806cdc",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/lobster/roster-v3/sheet.png": "88b6d06ddbd5d171b3e77d3e6df8aef0904f2d957650d73b02c2e813b725c6e6",
+    "public/demos/wildlife-v2/lobster/roster-v3/sprite.json": "83cbc0a310057a53bd4be09cff4e041fc09168e9d300eaae814c7c12ef1971f6",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

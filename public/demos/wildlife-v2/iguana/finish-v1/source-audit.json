@@ -1,0 +1,10 @@
+{
+  "identity": "iguana-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/iguana/roster-v2/iguana.blend": "27cd03dfe70a3767c7902b966c496265ffa5ec5390aaec1eb873ae479bda68a9"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,12 @@
+{
+  "identity": "praying-mantis-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "ecd3f24b9ebed705c348a33f1e78beb74dffb4e0866e281b050b94d9c1371a84"
+}

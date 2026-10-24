@@ -1,0 +1,17 @@
+{
+  "identity": "malayan-tapir-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "bef9ba08ace775b75fcc58b9fe902cffbe24da455c596c07ff3dc820fa696c2a",
+    "index.html": "c24af3960e19f9eb87a722e459c71eb0de4023d5a0496b992e6e0815eef4753b",
+    "pixel-audit.json": "ed6989f56a5e34aef0f41c19ad766490c1f22323e6247c33b3fe09b6368380d2",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "6eca03e47bbc79779a9f8c18d34d650f7fff524f22a28221c2a506c6b93412b0",
+    "preview.gif": "8a9bcde46c623d5195441496abcf2c258b6a4feb461d3b049af6580fa3c00844",
+    "scene-native.png": "1cf864c50e482e201f62bacfa4c444374d9d0722bf9d5908287e0312b41707fa",
+    "sheet.png": "a6c46589bdc7a0084a723dce45a2adc776af39b2dbe232ef047a80c13504e63d",
+    "source-audit.json": "fd66d2c39b9e9455c61026d92e56c7ad1add231bd5b76fa67a99bab411390f1a",
+    "sprite.json": "258dc57420438a867184d12770355a7dc6a7dbb70fc8dfd4b8051a88d94e7147"
+  }
+}

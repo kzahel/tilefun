@@ -1,0 +1,10 @@
+{
+  "identity": "tasmanian-devil-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/tasmanian-devil/roster-v3/tasmanian-devil.blend": "c030b3482379c5ce83c209018c92e16bc4746d3c5ae4a9a47c5f29e37c751508"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

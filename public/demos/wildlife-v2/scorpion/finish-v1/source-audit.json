@@ -1,0 +1,10 @@
+{
+  "identity": "scorpion-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/scorpion/roster-v3/scorpion.blend": "c840fbad036317ff8f65daca05bdb66cda05cde792b9d97a9dbe019d6c77c220"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "humpback-whale-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/humpback-whale/roster-v2/humpback-whale.blend": "698afe823881a31eb2c9db688be8e08b5a4ac15eb6255e20a1181f91f27292c3"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

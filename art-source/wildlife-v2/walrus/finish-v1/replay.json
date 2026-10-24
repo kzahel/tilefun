@@ -1,0 +1,17 @@
+{
+  "identity": "walrus-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "95a99273ae1885c4d37236b3f718043fa44ec0cd00669fac8ed708c62cba8e6a",
+    "index.html": "2d379865a9d5cb85e2ddace37f846f379ddf97f682b3e2caf808d661c1549d00",
+    "pixel-audit.json": "05ef136a3e6970f8426bca5fa16a28e80f5760e794d05fdfaae459aacfd92997",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "c7788bdabf20a6c2485bce246fdaff3b0bb63fe083d903f5b94c566e428683ef",
+    "preview.gif": "e1a308c8d021e7f84ce89bf7b0a0905749832d8922ae68413b4d86c931580424",
+    "scene-native.png": "a7ed08c0bd2dbe88cc2887670ceda671fb2845fe78489d2bdd055cc4aeae1d04",
+    "sheet.png": "9640ad6c3f1b5216a0497a60209616eb219a65fbbba63dfc0cc9e5a5c1843406",
+    "source-audit.json": "2ea953a84536007963ffa69a0867d2e9f2ff9bee71a6d2a77884129cfadf4cba",
+    "sprite.json": "01864e0f1f9da08636431ebbc088ae4496699af53ada55d30e68fae1a27904ea"
+  }
+}

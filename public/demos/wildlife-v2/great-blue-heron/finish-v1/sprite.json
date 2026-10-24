@@ -1,0 +1,72 @@
+{
+  "identity": "great-blue-heron-finish-v1",
+  "reviewStatus": "pending human review",
+  "image": "sheet.png",
+  "frameWidth": 112,
+  "frameHeight": 112,
+  "anchor": [
+    56,
+    84
+  ],
+  "rootMotion": false,
+  "defaultClip": "walk",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 40
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    }
+  },
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  },
+  "sheetSha256": "460139ed5b2b43927b43a663df97dba9df1edbde19667ef9d41746f18079069a",
+  "finishing": {
+    "policy": "wildlife-paint-v1",
+    "method": "material-surfaces",
+    "contract": "great-blue-heron-finish-v1",
+    "predecessorImage": "demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png",
+    "predecessorSha256": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
+    "source": "art-source/wildlife-v2/great-blue-heron/roster-v3"
+  }
+}

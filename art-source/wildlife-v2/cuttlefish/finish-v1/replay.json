@@ -1,0 +1,17 @@
+{
+  "identity": "cuttlefish-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "b6376db244f0f6c12e6090413bafcd3b909d977a1953547b3d882463b6c4a8c9",
+    "index.html": "fe2a040625de50161efb3288c2b55fb7ad0b7587bedb63550d7f377b281cfab5",
+    "pixel-audit.json": "fa0adad3fdeafaafb3095935c7c2a54e90c61457e2472eed88ffb6db1fd3cdcf",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "d8f3f00e88f3977fdaa4d7bd19284bc7b610e6b2ee1c231628b86c35cea1853d",
+    "preview.gif": "2cbf13944aa978c7ca671de649dbb85376089c24ffd111ca1435084e8311ae58",
+    "scene-native.png": "092f2b9d1f63918dad28776ce8e9b5b10cadce3e2626ccc5bca362e9b0d619cb",
+    "sheet.png": "8efec7d1a4954aa46520cc7ebaa5c25321e40a2ed9030fab48b669b46ec469ae",
+    "source-audit.json": "ece7891c6b846375ddf94db7bf07c3f3587929c59a463ccb234c1dfd3b4fcc7d",
+    "sprite.json": "85edcdd05d9cb3cb03324305a37094a74a4fb11001ae755029981d540bc9da28"
+  }
+}

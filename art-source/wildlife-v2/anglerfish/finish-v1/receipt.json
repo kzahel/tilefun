@@ -1,0 +1,53 @@
+{
+  "identity": "anglerfish-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "anglerfish-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "c43363ac8034f31626d85c14836a6f24ea42dbe5827e76ffcfad2e5222c56abf",
+      "index.html": "324a46028ef179915c848810a8456198ca6a73001a42c409d67086e3408aa37c",
+      "pixel-audit.json": "18238b14e691d13ba3a83d23038af575b5127fb6e00d8187d255a792e69c3ed0",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "15f03c2c83bc42dcc76a0fa97b3612ac1c6a7dbb904187069233e1d7a31e4753",
+      "preview.gif": "9f568ffa97f445b5bb7e97144a5a91fd62c2e2c4f2834ad4cbbc7d80166682dc",
+      "scene-native.png": "90b8251271f2154fb100221b673646721daaa936b0466489c6e8a41d619810e3",
+      "sheet.png": "4a2436a1d134cc097f2736d2c1030e9d7e32394e6f9f6cc40db3f79efc11b441",
+      "source-audit.json": "a149460f3fa3a6053bd170c9efce5f95b051b3fe313eaa8cc5ec79fd7ce6972f",
+      "sprite.json": "fef17f058650955125ca829d7e9114bcf61d4492ac76f23e29d6a398ba9a02b6"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/anglerfish/finish-v1/README.md": "03d82dbc9f1a7279d982b425b7be37f92e040475d9ccf8839d1b6fe332500d2a",
+    "art-source/wildlife-v2/anglerfish/finish-v1/inputs.json": "aaf09c270bdcd42104f4d5063f6ccce4830890da3d123145c963f30994fcd64e",
+    "art-source/wildlife-v2/anglerfish/finish-v1/replay.json": "f8ffd0b326776753feb5b52d49993b76e2fa6755fec7ec908c140f12fca34965",
+    "art-source/wildlife-v2/anglerfish/roster-v3/anglerfish.blend": "3aab23e4117b93485dd18e71f85bfdfe7a7fe6848039cc526dec286a61dc51fb",
+    "art-source/wildlife-v2/anglerfish/roster-v3/inputs.json": "3b14f2c3a54c37fff814eafc63f54f16f1669c4b9b6e1d1e495ac2c62e3635f2",
+    "art-source/wildlife-v2/anglerfish/roster-v3/projection.json": "b2bb665415f6f9a1140ca23966ca44d5b2b0438a3d9d08af21ec44c5ab464470",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/contact-sheet-native.png": "c43363ac8034f31626d85c14836a6f24ea42dbe5827e76ffcfad2e5222c56abf",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/index.html": "324a46028ef179915c848810a8456198ca6a73001a42c409d67086e3408aa37c",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/pixel-audit.json": "18238b14e691d13ba3a83d23038af575b5127fb6e00d8187d255a792e69c3ed0",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/preview-native.gif": "15f03c2c83bc42dcc76a0fa97b3612ac1c6a7dbb904187069233e1d7a31e4753",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/preview.gif": "9f568ffa97f445b5bb7e97144a5a91fd62c2e2c4f2834ad4cbbc7d80166682dc",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/scene-native.png": "90b8251271f2154fb100221b673646721daaa936b0466489c6e8a41d619810e3",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/sheet.png": "4a2436a1d134cc097f2736d2c1030e9d7e32394e6f9f6cc40db3f79efc11b441",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/source-audit.json": "a149460f3fa3a6053bd170c9efce5f95b051b3fe313eaa8cc5ec79fd7ce6972f",
+    "public/demos/wildlife-v2/anglerfish/finish-v1/sprite.json": "fef17f058650955125ca829d7e9114bcf61d4492ac76f23e29d6a398ba9a02b6",
+    "public/demos/wildlife-v2/anglerfish/roster-v3/sheet.png": "f51ba066ba24eaeb23acca9897f8069ac1e534c1cebcdba9e6b5cb532f5291db",
+    "public/demos/wildlife-v2/anglerfish/roster-v3/sprite.json": "2bc0f5ad4483a6fa66a94148b5012eed1362cb5ce44e2cd0f0f5a6a191d486f7",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

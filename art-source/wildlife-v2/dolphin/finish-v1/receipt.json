@@ -1,0 +1,53 @@
+{
+  "identity": "dolphin-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "dolphin-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "07ba521facb1631f3668d025c07e7dc8145261490325dd728a66d649f16b1ee7",
+      "index.html": "d66a40912bc7456f5a7f08961ab134fb88b8ce4d877f0dfb3167184ffd1ff32e",
+      "pixel-audit.json": "d31ec05b01f3a01e5939c9507c7333984ec3fb869c441215dbead2c943fd377f",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "69f3f15648bf205bc77f3cc2d6bdef8407fd28307fc86934a89a0389fc807bd6",
+      "preview.gif": "9e0054a078b5f09cd17d32195c141d48cc9f6069deaa5ec8f34129846903fae8",
+      "scene-native.png": "96e54dd76823ba0f871ff43609b500e4aec66dc004cd38b108835443f744a494",
+      "sheet.png": "fc6ddbc6c296a6a256ca3ed4e3641b6ffcbd16306b20fe44382eb602a1fbbd8e",
+      "source-audit.json": "23782b0d93936fd24985d724d3fe8f402af272ebbde0fcf08f147dc4d3e67ee7",
+      "sprite.json": "e746dc691f6f82c9e8d27820c1ba7171076d8551504eeae30dee800489e5e02c"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/dolphin/finish-v1/README.md": "05df273850d02d31c92a81d4285b1a814c6ba76ac7850808d5e424f33bc62e87",
+    "art-source/wildlife-v2/dolphin/finish-v1/inputs.json": "a1f0749d64bc9e459efef39aac1e0cf67c710a659379d25adf5de492dc197307",
+    "art-source/wildlife-v2/dolphin/finish-v1/replay.json": "ff2f2c94b70a4198aaa0f11c51822ef12f08e82c1243643bd05fc5867db28a83",
+    "art-source/wildlife-v2/dolphin/roster-v2/dolphin.blend": "5005ae1ad8afc07c232c81becc433cc32c18f771d4a1e7725e43fa4c46908b6b",
+    "art-source/wildlife-v2/dolphin/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/dolphin/roster-v2/projection.json": "79a6eb75151596a736bda6aaa312eca685290346ec4b7f05d88270a4b03a654f",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/dolphin/finish-v1/contact-sheet-native.png": "07ba521facb1631f3668d025c07e7dc8145261490325dd728a66d649f16b1ee7",
+    "public/demos/wildlife-v2/dolphin/finish-v1/index.html": "d66a40912bc7456f5a7f08961ab134fb88b8ce4d877f0dfb3167184ffd1ff32e",
+    "public/demos/wildlife-v2/dolphin/finish-v1/pixel-audit.json": "d31ec05b01f3a01e5939c9507c7333984ec3fb869c441215dbead2c943fd377f",
+    "public/demos/wildlife-v2/dolphin/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/dolphin/finish-v1/preview-native.gif": "69f3f15648bf205bc77f3cc2d6bdef8407fd28307fc86934a89a0389fc807bd6",
+    "public/demos/wildlife-v2/dolphin/finish-v1/preview.gif": "9e0054a078b5f09cd17d32195c141d48cc9f6069deaa5ec8f34129846903fae8",
+    "public/demos/wildlife-v2/dolphin/finish-v1/scene-native.png": "96e54dd76823ba0f871ff43609b500e4aec66dc004cd38b108835443f744a494",
+    "public/demos/wildlife-v2/dolphin/finish-v1/sheet.png": "fc6ddbc6c296a6a256ca3ed4e3641b6ffcbd16306b20fe44382eb602a1fbbd8e",
+    "public/demos/wildlife-v2/dolphin/finish-v1/source-audit.json": "23782b0d93936fd24985d724d3fe8f402af272ebbde0fcf08f147dc4d3e67ee7",
+    "public/demos/wildlife-v2/dolphin/finish-v1/sprite.json": "e746dc691f6f82c9e8d27820c1ba7171076d8551504eeae30dee800489e5e02c",
+    "public/demos/wildlife-v2/dolphin/roster-v2/sheet.png": "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7",
+    "public/demos/wildlife-v2/dolphin/roster-v2/sprite.json": "485c2167e414efe8310f8782b8e04d7673214207454d9a8430d9d3fce9dff6d6",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

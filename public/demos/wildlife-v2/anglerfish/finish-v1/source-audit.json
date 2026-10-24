@@ -1,0 +1,10 @@
+{
+  "identity": "anglerfish-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/anglerfish/roster-v3/anglerfish.blend": "3aab23e4117b93485dd18e71f85bfdfe7a7fe6848039cc526dec286a61dc51fb"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,12 @@
+{
+  "identity": "hedgehog-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 340,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 340,
+  "sheetSha256": "9a5c144d23e5391d55fc0da226587f8bdddfa6b92adc9f1e1c311af76631e540"
+}

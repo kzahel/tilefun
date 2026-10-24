@@ -1,0 +1,10 @@
+{
+  "identity": "aardvark-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/aardvark/roster-v3/aardvark.blend": "8976ec817323ea4da2b7756d6193cfb77553bba2ca3ab3219b3299dade4de742"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

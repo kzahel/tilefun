@@ -1,0 +1,17 @@
+{
+  "identity": "cricket-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "f78b1791e02c7c84f5876534a42cad57dbba6723270b81dfa0765d9795ac2816",
+    "index.html": "ba5614fff1aca2988dd1bb16a64772a898ba881cec7942c41246760fb79db04d",
+    "pixel-audit.json": "5dce204142d0b47ddb204295e7cf93fc23a38dca2e3e99d1ddc4125af9f52702",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "137e6b167b341257752a0878090d7138fc7fe94421c27e78e67933c37e649ffa",
+    "preview.gif": "7083a8e9a5cb0216a24d21b90b356e63c64139f59ccb49e310c0bc3c03a22e30",
+    "scene-native.png": "5ce6cb0a38cdb1013f09ebc612c399eb900698b51b5839b756e542e44a8e570d",
+    "sheet.png": "47a7782554ddd8a3fc73ad0fd9f3bb9a9904cbdeda3a8f3712ae054f131f94ee",
+    "source-audit.json": "ad28daf97b20abb66fc697d83c3cda72e21d93d81b86a6881b4cc7a604c7bff5",
+    "sprite.json": "ec160879317b68133a80bb69784e6b9874506e5e492c88842e8e300d154b9f02"
+  }
+}

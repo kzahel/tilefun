@@ -1,0 +1,10 @@
+{
+  "identity": "rat-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/rat/roster-v2/rat.blend": "1f7e686bd8ac8c421b08107c046f1f8f6b4eccb27863195f8e64a88c93da7ea6"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

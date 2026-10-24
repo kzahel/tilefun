@@ -25,7 +25,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Animal | Phase | Audit | Design | AI | Animation | Integration | Validation | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Red fox (fox) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization. |
-| Cat (cat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank. |
+| Cat (cat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Dog (dog) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; then audit the next land/air batch. |
 | Pasture cow (cow) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
 | Sheep (sheep) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
@@ -48,7 +48,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Rust crab (crab) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Rust octopus (octopus) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Moon jellyfish (jellyfish) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Grey donkey (donkey) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
+| Grey donkey (donkey) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Brown mule (mule) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Brown llama (llama) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Cream alpaca (alpaca) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -76,9 +76,9 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Hamster (hamster) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Guinea pig (guinea-pig) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Chinchilla (chinchilla) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Hedgehog (hedgehog) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization. |
-| Porcupine (porcupine) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization. |
-| Raccoon (raccoon) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank. |
+| Hedgehog (hedgehog) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
+| Porcupine (porcupine) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
+| Raccoon (raccoon) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Skunk (skunk) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Red panda (red-panda) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Ostrich (ostrich) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -87,7 +87,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Kiwi (kiwi) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Kakapo (kakapo) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Wild turkey (wild-turkey) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Peacock (peacock) | land | verified | verified | verified | verified | verified | verified | Human review of the real behavior demonstration and exact retained action bank. |
+| Peacock (peacock) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Whale shark (whale-shark) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Humpback whale (humpback-whale) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Blue whale (blue-whale) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -98,19 +98,19 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Parrot (parrot) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Toucan (toucan) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Great hornbill (great-hornbill) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Raven (raven) | air | verified | verified | verified | verified | verified | verified | Human review of the real behavior demonstration and exact retained action bank. |
-| Carrion crow (crow) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; then audit the next land/air batch. |
+| Raven (raven) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
+| Carrion crow (crow) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Atlantic puffin (atlantic-puffin) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Chimpanzee (chimpanzee) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Orangutan (orangutan) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Capuchin monkey (capuchin-monkey) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank. |
+| Capuchin monkey (capuchin-monkey) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Ring-tailed lemur (ring-tailed-lemur) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Mandrill (mandrill) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Proboscis monkey (proboscis-monkey) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Japanese macaque (japanese-macaque) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Ocean sunfish (ocean-sunfish) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Pufferfish (pufferfish) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Meerkat (meerkat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank; then audit the next land/air batch. |
+| Meerkat (meerkat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Giant anteater (giant-anteater) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Aardvark (aardvark) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Armadillo (armadillo) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -118,7 +118,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Pelican (pelican) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Blue-footed booby (blue-footed-booby) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Great frigatebird (great-frigatebird) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Ruby-throated hummingbird (ruby-throated-hummingbird) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained new action bank. |
+| Ruby-throated hummingbird (ruby-throated-hummingbird) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Flamingo (flamingo) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Shoebill (shoebill) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Marabou stork (marabou-stork) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -157,7 +157,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Frilled-neck lizard (frilled-neck-lizard) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Land tortoise (land-tortoise) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Pond turtle (pond-turtle) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Beaver (beaver) | amphibious | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and retained action bank. |
+| Beaver (beaver) | amphibious | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Capybara (capybara) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Koala (koala) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Wombat (wombat) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -167,14 +167,14 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Iguana (iguana) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Chameleon (chameleon) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Texas horned lizard (texas-horned-lizard) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Bee (bee) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained new action bank. |
+| Bee (bee) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Ladybug (ladybug) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Dragonfly (dragonfly) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Stag beetle (stag-beetle) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Grasshopper (grasshopper) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Cricket (cricket) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Ginger tabby (cat-ginger) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank. |
-| Black cat (cat-black) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank. |
+| Ginger tabby (cat-ginger) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
+| Black cat (cat-black) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Golden retriever (dog-golden) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Pointed-ear shepherd (dog-shepherd) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Panther (panther) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -225,7 +225,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Orca (orca) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Dolphin (dolphin) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Narwhal (narwhal) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| White-tailed deer (deer) | land | verified | verified | verified | verified | verified | verified | Human review of the real behavior demonstration and exact retained action bank. |
+| White-tailed deer (deer) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
 | Frog (frog) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Mallard duck (mallard) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Robin (robin) | air | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and retained action bank; then audit the next land/air batch. |

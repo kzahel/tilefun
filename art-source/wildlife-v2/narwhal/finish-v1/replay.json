@@ -1,0 +1,17 @@
+{
+  "identity": "narwhal-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "9bd3a376d78b5a9f4f91394abdc1b0a270375e6856fc648581a86627dd12d21e",
+    "index.html": "bd915a6fc1b48dd875f9ccaeb711e215b3a2762f6d5baf51844f0672150e7b80",
+    "pixel-audit.json": "82b1f068da9608e847bba54ea163e3055e4d2c6fef9e1df266295494cbd0c334",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "809066816c5d562357ff455014086c7c12a646be07e28af1471e053f6a498140",
+    "preview.gif": "82b9fd177d319f09dd1ebbb17d7ad65b609d2e45ea1f1085b34977be6d4cb68f",
+    "scene-native.png": "53d92d3630be299779df9b3219603f448bbee41d35fa1dd6e3e19f8bb9637fb5",
+    "sheet.png": "b4ee7db94f76dfd8c7e17fa3f29a0d0f0dab2c2fb0cfda17d64ab8aa1da845d2",
+    "source-audit.json": "e4b71e16b19fa083f7ad9bcf8b4458d8345f55a0686905e44f02780b0396f678",
+    "sprite.json": "c64862d04f45f256680ccd18191d36cabc1ee6d3daf7847ba99df14cdd62afce"
+  }
+}

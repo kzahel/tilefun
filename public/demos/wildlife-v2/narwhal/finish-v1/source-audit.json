@@ -1,0 +1,10 @@
+{
+  "identity": "narwhal-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/narwhal/roster-v2/narwhal.blend": "0259c5743785ef603df548cc9ffa5fc9183d2fe2467f5c1e0c6aac34d8c65455"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

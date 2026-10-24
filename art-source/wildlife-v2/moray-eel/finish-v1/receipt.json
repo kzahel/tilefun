@@ -1,0 +1,53 @@
+{
+  "identity": "moray-eel-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "moray-eel-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "e14a5c6e68ff2a80f001087b680b5a46770748abff485fb1ec7336c1e1ee3150",
+      "index.html": "b0c5fd9b075c457c4691e510adc6f41d0d8e463fa557ffbbcc37325f3b43aa5b",
+      "pixel-audit.json": "a59e2d7dafc49f9792377af0701aff01348844c9f40445c64e79832774b70b04",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "3d03829714f11591f22e069e76915b350bcbb2e036dcbf5f38037a54c83c32d2",
+      "preview.gif": "2549e8c8a66f727c1ce3b5d72cbdaf4aa7471b441862d58ba13e15aec7194586",
+      "scene-native.png": "b664404ce0bdc14e3aed85d03052b9504460e108331c4c6ab9c096878d87e34d",
+      "sheet.png": "0c117c981786580800adb3ae0018472fa5b89f927c1e8f3fbd80affc071e6eb5",
+      "source-audit.json": "7cfdff8036e8cedfd4909850ff35fdde5ec3ef74a15dfb9777f126ae2a9ac8fb",
+      "sprite.json": "68e0de472e0258ebf46b76f298b09a695303e2cd3252d4f92335aa7253637a54"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/moray-eel/finish-v1/README.md": "d360af29771b01145ec7f82ce65c5f404d05b16033efaa62ea784bab2d043acd",
+    "art-source/wildlife-v2/moray-eel/finish-v1/inputs.json": "9326fb707f04d542bc6e8a42dcdbfb8e30606d6a9739f3aaa6da5ed7956f24aa",
+    "art-source/wildlife-v2/moray-eel/finish-v1/replay.json": "2f1ff6e0e53c7a1be56982d4dba0ca845272b093e2e5aac887673ee2e80e42b2",
+    "art-source/wildlife-v2/moray-eel/roster-v3/inputs.json": "5d8e58f0455cd11b7be03c42daabd00ffb4e2d35719d4513dd21a85b6c06e209",
+    "art-source/wildlife-v2/moray-eel/roster-v3/moray-eel.blend": "eb3d5d76d97bc5553c797f158309bb189d870fa1ca2022c27803d5fca787200d",
+    "art-source/wildlife-v2/moray-eel/roster-v3/projection.json": "65610e1da7bd09123c54c5e36a19911c3edf8d1743a395e0f7dac8d9f687b3f1",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/contact-sheet-native.png": "e14a5c6e68ff2a80f001087b680b5a46770748abff485fb1ec7336c1e1ee3150",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/index.html": "b0c5fd9b075c457c4691e510adc6f41d0d8e463fa557ffbbcc37325f3b43aa5b",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/pixel-audit.json": "a59e2d7dafc49f9792377af0701aff01348844c9f40445c64e79832774b70b04",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/preview-native.gif": "3d03829714f11591f22e069e76915b350bcbb2e036dcbf5f38037a54c83c32d2",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/preview.gif": "2549e8c8a66f727c1ce3b5d72cbdaf4aa7471b441862d58ba13e15aec7194586",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/scene-native.png": "b664404ce0bdc14e3aed85d03052b9504460e108331c4c6ab9c096878d87e34d",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/sheet.png": "0c117c981786580800adb3ae0018472fa5b89f927c1e8f3fbd80affc071e6eb5",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/source-audit.json": "7cfdff8036e8cedfd4909850ff35fdde5ec3ef74a15dfb9777f126ae2a9ac8fb",
+    "public/demos/wildlife-v2/moray-eel/finish-v1/sprite.json": "68e0de472e0258ebf46b76f298b09a695303e2cd3252d4f92335aa7253637a54",
+    "public/demos/wildlife-v2/moray-eel/roster-v3/sheet.png": "f7598cf1f6a8470960c7cfb41ab43d0734a87b8aff0d44ff27cd7b35d4acadcd",
+    "public/demos/wildlife-v2/moray-eel/roster-v3/sprite.json": "46c5e137f3e3273664542cd8695f509e2094b755617b2ddc692a0e9107c07af1",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

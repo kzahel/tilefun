@@ -1,0 +1,53 @@
+{
+  "identity": "stag-beetle-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "stag-beetle-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "de588c2787a24676c94b0d11851618d387e4df8196a0706205edbeb3a7d40ffb",
+      "index.html": "6edc6517e669ae533e8b720e5617acf379d3de083f2718edfc97547f47768ae6",
+      "pixel-audit.json": "da87bfb0d4a77c27655968d9636ca5a531c4db01d1590e9b9511cfb794f8deb3",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "c191157177fdadb0148fa17a6dd067516ec9bb5188178d6b44ac5a86667e779a",
+      "preview.gif": "29d5569b6c0b33f5a7608221c685274dfa79cf60e4ad25cecbec2c94acca918e",
+      "scene-native.png": "b986ee763bc1c0355b69050be41a220e65889cc6cb203f690674692293a3b50e",
+      "sheet.png": "f27320f520ef0fee6e98502aad99c759f17007bb37b3f6b7446d173f1a889d63",
+      "source-audit.json": "728981876f907574fe9c6c59d528513b15e9362d719922178a6b0ae80f620fe0",
+      "sprite.json": "9b8c474cae8a1ea5b85beab04ba7ab2b219569478b2625aa77b1a3640898db0e"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/stag-beetle/finish-v1/README.md": "827cf6fc9ccd26788718f5069e9bfd579cdd51da1e54a55568bd4748ce2e47b5",
+    "art-source/wildlife-v2/stag-beetle/finish-v1/inputs.json": "c14cf0ba5179f04db4cc50b2ad6ffc44e0d5998be7d9e667e4325942d39d41e1",
+    "art-source/wildlife-v2/stag-beetle/finish-v1/replay.json": "c69011224d41c7334712302f593fe656798b7c324b95e92ad32a39c2e15ff575",
+    "art-source/wildlife-v2/stag-beetle/roster-v2/inputs.json": "dc32cda3d25005467a209a8428424d9be900ad2cd6e1a4e5b71d1ac0d4e9ee7c",
+    "art-source/wildlife-v2/stag-beetle/roster-v2/projection.json": "ffe1675e82e58bedb66440aa539c1206776d9245fc8a30b6c0b2f3b774b42d80",
+    "art-source/wildlife-v2/stag-beetle/roster-v2/stag-beetle.blend": "4cc6cad9aae2ede75aade037ce119f065700485ba4f10f0455773f4ef32d7926",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/contact-sheet-native.png": "de588c2787a24676c94b0d11851618d387e4df8196a0706205edbeb3a7d40ffb",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/index.html": "6edc6517e669ae533e8b720e5617acf379d3de083f2718edfc97547f47768ae6",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/pixel-audit.json": "da87bfb0d4a77c27655968d9636ca5a531c4db01d1590e9b9511cfb794f8deb3",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/preview-native.gif": "c191157177fdadb0148fa17a6dd067516ec9bb5188178d6b44ac5a86667e779a",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/preview.gif": "29d5569b6c0b33f5a7608221c685274dfa79cf60e4ad25cecbec2c94acca918e",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/scene-native.png": "b986ee763bc1c0355b69050be41a220e65889cc6cb203f690674692293a3b50e",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/sheet.png": "f27320f520ef0fee6e98502aad99c759f17007bb37b3f6b7446d173f1a889d63",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/source-audit.json": "728981876f907574fe9c6c59d528513b15e9362d719922178a6b0ae80f620fe0",
+    "public/demos/wildlife-v2/stag-beetle/finish-v1/sprite.json": "9b8c474cae8a1ea5b85beab04ba7ab2b219569478b2625aa77b1a3640898db0e",
+    "public/demos/wildlife-v2/stag-beetle/roster-v2/sheet.png": "b4b08ef2ef8e92e1ebdf153b9682b63267384892b12728acbae32834a65db11e",
+    "public/demos/wildlife-v2/stag-beetle/roster-v2/sprite.json": "7ffdfb6d7e245633fc5aaa7e2e670564843836ea0840bbb9650cc87556017470",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

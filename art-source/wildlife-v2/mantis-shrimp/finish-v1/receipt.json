@@ -1,0 +1,53 @@
+{
+  "identity": "mantis-shrimp-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "mantis-shrimp-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "6899aceed7281a70a4a920e6584b866a116eff10488eacca9e7abc65ee7c153d",
+      "index.html": "6e2ae27a3c7bf08ce0d581d5039eed74afdd7e5980f0753c182c8b7b44432b48",
+      "pixel-audit.json": "b942e44f4f06ef00929927f46de1cad82e89df29ab8e3d29ac549c2712291ada",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "15a7dbe14c96cc6aa804473364e63265c9a042614bd1f620a4d8a5f048dcecb2",
+      "preview.gif": "b59e2b4f3ae22225608787e267ee2f171086c970ecca531bd2c61220758a19ae",
+      "scene-native.png": "d74ce8880329575492ab8e5cbfd98c2420c2c2fc7e8fa932be793da732e1e59e",
+      "sheet.png": "474b783c8d34a6d681f55fae17d7fef6310ea940e388c6ca5c3ac87022048dcc",
+      "source-audit.json": "cc466892ab8fd46f13db79104df630fba2266f48e7eea0273b36f65280062732",
+      "sprite.json": "bdbe7beecec4b56af0cbd0d66fd141d057e6e4b0dffd52a18df977c204c15759"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/mantis-shrimp/finish-v1/README.md": "a994f064a4588dc36e013b117bec4085e4c839a99766c243fcf30489ec872478",
+    "art-source/wildlife-v2/mantis-shrimp/finish-v1/inputs.json": "1d74932134e37d571a19bbda44f12f20c6c11c1159d52977eaa9826bb59af135",
+    "art-source/wildlife-v2/mantis-shrimp/finish-v1/replay.json": "b04512e92f5bb34b67825e3c040de69fd1c9ce93daabb2765a8785ebdd0f4670",
+    "art-source/wildlife-v2/mantis-shrimp/roster-v3/inputs.json": "5fb44238331246d8d4219ef247554112457243cfab6ee1a04e441a6638985c72",
+    "art-source/wildlife-v2/mantis-shrimp/roster-v3/mantis-shrimp.blend": "46f44c29d7972b70efadd211483bcca9ea86be8666ad1d57ac01de8d04a4cab4",
+    "art-source/wildlife-v2/mantis-shrimp/roster-v3/projection.json": "d18e308e5435edd50dd91fd3eb450960a94397cd8fe8f81b3942479391b6d10a",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/contact-sheet-native.png": "6899aceed7281a70a4a920e6584b866a116eff10488eacca9e7abc65ee7c153d",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/index.html": "6e2ae27a3c7bf08ce0d581d5039eed74afdd7e5980f0753c182c8b7b44432b48",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/pixel-audit.json": "b942e44f4f06ef00929927f46de1cad82e89df29ab8e3d29ac549c2712291ada",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/preview-native.gif": "15a7dbe14c96cc6aa804473364e63265c9a042614bd1f620a4d8a5f048dcecb2",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/preview.gif": "b59e2b4f3ae22225608787e267ee2f171086c970ecca531bd2c61220758a19ae",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/scene-native.png": "d74ce8880329575492ab8e5cbfd98c2420c2c2fc7e8fa932be793da732e1e59e",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/sheet.png": "474b783c8d34a6d681f55fae17d7fef6310ea940e388c6ca5c3ac87022048dcc",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/source-audit.json": "cc466892ab8fd46f13db79104df630fba2266f48e7eea0273b36f65280062732",
+    "public/demos/wildlife-v2/mantis-shrimp/finish-v1/sprite.json": "bdbe7beecec4b56af0cbd0d66fd141d057e6e4b0dffd52a18df977c204c15759",
+    "public/demos/wildlife-v2/mantis-shrimp/roster-v3/sheet.png": "e7c1714c9e10ff00fc0ecf92b5f7889ce64aeb852035cad1c9ba7b9618c45c5e",
+    "public/demos/wildlife-v2/mantis-shrimp/roster-v3/sprite.json": "76177b33bcdb73c49bf5e5363edfaf9bd88c51f33041a2b2d89839dc8b9da1c7",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

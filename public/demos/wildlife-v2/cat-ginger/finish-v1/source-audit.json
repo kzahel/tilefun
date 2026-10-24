@@ -1,0 +1,11 @@
+{
+  "identity": "cat-ginger-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/cat-ginger/draft-v1/animal.blend": "152e032714174b91009e282b2285dfc91fd638b4562b03b11314e2b4fc37a88c",
+    "art-source/wildlife-v2/cat/behavior-v1/cat.blend": "9f890894247530c0065857eca715a46b469202e151181bcbd58f6ab9b24a2167"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "retained-parts"
+}

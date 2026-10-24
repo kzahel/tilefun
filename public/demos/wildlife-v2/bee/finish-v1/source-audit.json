@@ -1,0 +1,11 @@
+{
+  "identity": "bee-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/bee/behavior-v1/bee.blend": "8ced6bc804c04587245ff5f6f9af2a9edca2058d4a3c8cc73adc5e63cb0c9708",
+    "art-source/wildlife-v2/bee/roster-v2/bee.blend": "8ea09b1040d3f62049a5e7c3776dd758bebc14111efed4a7041197c2e5cdd77d"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

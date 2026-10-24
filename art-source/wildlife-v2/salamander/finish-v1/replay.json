@@ -1,0 +1,17 @@
+{
+  "identity": "salamander-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "e3e46176547dd0faa17538dee6ab2ffa28d5a800691f4f7bc8d9ed317c8e7088",
+    "index.html": "99b55ce591d6db76d5177b0cb76aab81c71e585a5c55215493c807b1ca147c63",
+    "pixel-audit.json": "cc51d233cd9a29040392c90d11c7ea4b5935c0c68f1f6e4b8ba080ca0a5d8aa3",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "27fe68f3f0fac3f9d5c106000c861530df2879e067c7a679e75e6a78ebedba40",
+    "preview.gif": "b54931b34207a74ab951ecf27d0c4d30f3a1ef77c4bc5a6c4a04c4caea0d8f5c",
+    "scene-native.png": "3716d83ebebdf78b7bf0802fe5c79f177ce1779706c69b1934eda9a87f87a008",
+    "sheet.png": "83292f920a1b285e1661d314d23bcbf864f9e17739f7b2cb693d5f0f1d3c1da0",
+    "source-audit.json": "707c3c62a1b976774b58f6926a9b55eb9b581f67b2bb8a5e868a51d9fb8629c9",
+    "sprite.json": "016fa67a5d54e300e503261885cd1d4b4b7bcdee755ed8dd6e06e7ca7e732821"
+  }
+}

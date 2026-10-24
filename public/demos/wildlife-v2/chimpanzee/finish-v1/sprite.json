@@ -1,0 +1,74 @@
+{
+  "identity": "chimpanzee-finish-v1",
+  "reviewStatus": "pending human review",
+  "image": "sheet.png",
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "anchor": [
+    48,
+    72
+  ],
+  "rootMotion": false,
+  "defaultClip": "walk",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 35.0
+    },
+    "action": {
+      "start": 33,
+      "count": 16,
+      "frameDuration": 50
+    }
+  },
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  },
+  "rootTravelPixelsPerCycle": 15.68,
+  "chaseRootTravelPixelsPerCycle": 15.68,
+  "sheetSha256": "a38af62b60120ff131ac549b864de147d2e8dfcb469f54b5e1a2e3bc7ce36480",
+  "finishing": {
+    "policy": "wildlife-paint-v1",
+    "method": "material-surfaces",
+    "contract": "chimpanzee-finish-v1",
+    "predecessorImage": "demos/wildlife-v2/chimpanzee/roster-v3/sheet.png",
+    "predecessorSha256": "a354ba2ffd1f006234ba9fd42f3a3e08a75b703210319773cf93de142c9beeed",
+    "source": "art-source/wildlife-v2/chimpanzee/roster-v3"
+  }
+}

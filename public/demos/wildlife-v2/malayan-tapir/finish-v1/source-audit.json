@@ -1,0 +1,10 @@
+{
+  "identity": "malayan-tapir-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/malayan-tapir/roster-v2/malayan-tapir.blend": "b857288965f40572773bf75ef814d1e01bb1ccc355e21246e8a3b523d3f84750"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "wild-turkey-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/wild-turkey/roster-v2/wild-turkey.blend": "7a072b9f38f4275061567e65ea8762898af7cc43602eb9d6775ee39e79bb11e4"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

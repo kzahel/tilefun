@@ -1,0 +1,10 @@
+{
+  "identity": "earwig-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/earwig/roster-v3/earwig.blend": "f4266dec5ccb501df9827c83ef8fa5abd3a904ae10e7d8bd3c44fed1e5191cee"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

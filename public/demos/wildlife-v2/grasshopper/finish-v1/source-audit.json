@@ -1,0 +1,10 @@
+{
+  "identity": "grasshopper-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/grasshopper/roster-v2/grasshopper.blend": "aeb80d84cfea46f529daad596c0a4f10c63c8db28bc19883b0967fc0bbd9aa12"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

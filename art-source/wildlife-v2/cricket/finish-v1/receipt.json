@@ -1,0 +1,53 @@
+{
+  "identity": "cricket-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "cricket-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "f78b1791e02c7c84f5876534a42cad57dbba6723270b81dfa0765d9795ac2816",
+      "index.html": "ba5614fff1aca2988dd1bb16a64772a898ba881cec7942c41246760fb79db04d",
+      "pixel-audit.json": "5dce204142d0b47ddb204295e7cf93fc23a38dca2e3e99d1ddc4125af9f52702",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "137e6b167b341257752a0878090d7138fc7fe94421c27e78e67933c37e649ffa",
+      "preview.gif": "7083a8e9a5cb0216a24d21b90b356e63c64139f59ccb49e310c0bc3c03a22e30",
+      "scene-native.png": "5ce6cb0a38cdb1013f09ebc612c399eb900698b51b5839b756e542e44a8e570d",
+      "sheet.png": "47a7782554ddd8a3fc73ad0fd9f3bb9a9904cbdeda3a8f3712ae054f131f94ee",
+      "source-audit.json": "ad28daf97b20abb66fc697d83c3cda72e21d93d81b86a6881b4cc7a604c7bff5",
+      "sprite.json": "ec160879317b68133a80bb69784e6b9874506e5e492c88842e8e300d154b9f02"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/cricket/finish-v1/README.md": "d0f1acf24cf510ec33e50353bfc2352042e9053f063e3ec47146fc0835d94ecf",
+    "art-source/wildlife-v2/cricket/finish-v1/inputs.json": "cd31f662752dd9ba1a56b4bb8f836213de1707fc5b8adf2409596a05653679b0",
+    "art-source/wildlife-v2/cricket/finish-v1/replay.json": "bf7dc9fd4bd7e531043dab2ac7abd7460a29d3b7674b4ca856db0269f9cc8604",
+    "art-source/wildlife-v2/cricket/roster-v2/cricket.blend": "a778f2bde7497c9262771d781f563cda9d492382801ee237a346787959636c52",
+    "art-source/wildlife-v2/cricket/roster-v2/inputs.json": "dc32cda3d25005467a209a8428424d9be900ad2cd6e1a4e5b71d1ac0d4e9ee7c",
+    "art-source/wildlife-v2/cricket/roster-v2/projection.json": "8b0523d44bd7c68335054a59585f65d455cf445f31f16cb722559ad097071cfe",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/cricket/finish-v1/contact-sheet-native.png": "f78b1791e02c7c84f5876534a42cad57dbba6723270b81dfa0765d9795ac2816",
+    "public/demos/wildlife-v2/cricket/finish-v1/index.html": "ba5614fff1aca2988dd1bb16a64772a898ba881cec7942c41246760fb79db04d",
+    "public/demos/wildlife-v2/cricket/finish-v1/pixel-audit.json": "5dce204142d0b47ddb204295e7cf93fc23a38dca2e3e99d1ddc4125af9f52702",
+    "public/demos/wildlife-v2/cricket/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/cricket/finish-v1/preview-native.gif": "137e6b167b341257752a0878090d7138fc7fe94421c27e78e67933c37e649ffa",
+    "public/demos/wildlife-v2/cricket/finish-v1/preview.gif": "7083a8e9a5cb0216a24d21b90b356e63c64139f59ccb49e310c0bc3c03a22e30",
+    "public/demos/wildlife-v2/cricket/finish-v1/scene-native.png": "5ce6cb0a38cdb1013f09ebc612c399eb900698b51b5839b756e542e44a8e570d",
+    "public/demos/wildlife-v2/cricket/finish-v1/sheet.png": "47a7782554ddd8a3fc73ad0fd9f3bb9a9904cbdeda3a8f3712ae054f131f94ee",
+    "public/demos/wildlife-v2/cricket/finish-v1/source-audit.json": "ad28daf97b20abb66fc697d83c3cda72e21d93d81b86a6881b4cc7a604c7bff5",
+    "public/demos/wildlife-v2/cricket/finish-v1/sprite.json": "ec160879317b68133a80bb69784e6b9874506e5e492c88842e8e300d154b9f02",
+    "public/demos/wildlife-v2/cricket/roster-v2/sheet.png": "c924bcd4d12b8c1034a4354343cf584b1cb35e8d4fae86e5dc6ff28d49b0aef5",
+    "public/demos/wildlife-v2/cricket/roster-v2/sprite.json": "f14b046b07e1f2e20a3aa69fe02308b1db7c4ecfdf1b950c22294f551d7631b2",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "leaf-insect-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "leaf-insect-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "73bf943497ba7aa397da5ce22dcd21c67eb908c84a3e94800a54c693a49de992",
+      "index.html": "1211b7e200c1cb1ed0fcaebcb8009bc5f0eeef65129bbb9861993fd9d8194969",
+      "pixel-audit.json": "7d91a14007b12e0eeecdae7df33f008cdb44d288c0b720e61d1266cf334c5864",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "08ee3cd7bba6123ac597f5cb291acfd30c8c96ea34224d22f10993e6e27b82e7",
+      "preview.gif": "3c4d2bc19f8a637fcc0feb4fea9b5b165e8868c3a1b7b64ca173b1d525a99d72",
+      "scene-native.png": "71b03073b00e920d318099b4e5f77e478f3bbaeafb3f2baa9b2273194a6a3ed9",
+      "sheet.png": "b3d88867d302277a22665feeb3aee0632bb7e9e5008109d43f7043f5d053310e",
+      "source-audit.json": "eff1f63d681b4bc3e917f63f75397d8e921ebcf1cb87251f8e3f4359f907d109",
+      "sprite.json": "5f65ff55ce1b6390457d4d1c38667e6aea2da09c9a248cf42621024e93bd2486"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/leaf-insect/finish-v1/README.md": "907760e8d8f17e22eed172d71f84792306f16805cb0f7ab632599437cadf0562",
+    "art-source/wildlife-v2/leaf-insect/finish-v1/inputs.json": "3ba46da5a7a77454a1641f279902c30e631e47232266f10b38dd3a9c12856694",
+    "art-source/wildlife-v2/leaf-insect/finish-v1/replay.json": "a96ac48d51e4bbd885f26ad13378e96cf7923805fe805b80b43b762d7ff3c4ea",
+    "art-source/wildlife-v2/leaf-insect/roster-v3/inputs.json": "602be003e925ee8b5e44b457e443478301fb1c7d773ea57ac46d406171261055",
+    "art-source/wildlife-v2/leaf-insect/roster-v3/leaf-insect.blend": "f33ad6a2627aaaca300d28a4313ac3bec564c1c83f506c0a7b535fc48188c93e",
+    "art-source/wildlife-v2/leaf-insect/roster-v3/projection.json": "46406efc82f1145b9b1fc06efde47ed76e77f19d9c5797af42fb8eb40e7e48d2",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/contact-sheet-native.png": "73bf943497ba7aa397da5ce22dcd21c67eb908c84a3e94800a54c693a49de992",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/index.html": "1211b7e200c1cb1ed0fcaebcb8009bc5f0eeef65129bbb9861993fd9d8194969",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/pixel-audit.json": "7d91a14007b12e0eeecdae7df33f008cdb44d288c0b720e61d1266cf334c5864",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/preview-native.gif": "08ee3cd7bba6123ac597f5cb291acfd30c8c96ea34224d22f10993e6e27b82e7",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/preview.gif": "3c4d2bc19f8a637fcc0feb4fea9b5b165e8868c3a1b7b64ca173b1d525a99d72",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/scene-native.png": "71b03073b00e920d318099b4e5f77e478f3bbaeafb3f2baa9b2273194a6a3ed9",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/sheet.png": "b3d88867d302277a22665feeb3aee0632bb7e9e5008109d43f7043f5d053310e",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/source-audit.json": "eff1f63d681b4bc3e917f63f75397d8e921ebcf1cb87251f8e3f4359f907d109",
+    "public/demos/wildlife-v2/leaf-insect/finish-v1/sprite.json": "5f65ff55ce1b6390457d4d1c38667e6aea2da09c9a248cf42621024e93bd2486",
+    "public/demos/wildlife-v2/leaf-insect/roster-v3/sheet.png": "602103f049966e82bc592abbf3c909607595df95718c0cd3325a4d9dd35117a0",
+    "public/demos/wildlife-v2/leaf-insect/roster-v3/sprite.json": "e8e18c47ce2cfcb9f5e74c8c4ef2ccb1a86932de753b1fadb89c74a1f4aea97b",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

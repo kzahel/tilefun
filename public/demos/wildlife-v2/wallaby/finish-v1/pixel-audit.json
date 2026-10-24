@@ -1,0 +1,12 @@
+{
+  "identity": "wallaby-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "55014b5607e6aa406d81fa765ba900d5c640547140f1c8217c7a113888eeb4b9"
+}

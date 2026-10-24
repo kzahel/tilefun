@@ -1,0 +1,10 @@
+{
+  "identity": "giraffe-upright-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/giraffe-upright/roster-v3/giraffe-upright.blend": "e3d966ed60153271b332325a9aa0e7f350bcfcf11e0e77e35095e8a4fef47c11"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

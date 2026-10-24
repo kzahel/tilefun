@@ -1,0 +1,17 @@
+{
+  "identity": "swordfish-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "6b49cf299e3fb9bfe4e074f05ea29d4a00a8c29d3c69f4b4084e74ac0c39e5ef",
+    "index.html": "4d1855f4f088711d1f0e3246c9155a75359d192ab7d83b3813bfab4b1ed3ecce",
+    "pixel-audit.json": "05425fc3d0153d65dcce5588dfb0a0364a963dd395c4d4363a7bd2e4a7c91607",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "c7c6d53bbb3eb6773eef0485a935f22919f7070034ceff97a218636628e25365",
+    "preview.gif": "ed6a040b688b4ad7116b01a4d1da279a9ccf8985bb63465a3a540f503b820014",
+    "scene-native.png": "2c089440e6d5792cb1c20eaddb5bbee5c08fa630d5ae386491f8c44ab6b5a8c3",
+    "sheet.png": "7ffce487787616404445b682ddb4b120b83ce85685728e3d04f70c1e1e204f18",
+    "source-audit.json": "2d84f96e57894e19d8fa66ff0a14cc99555eb38beb7bdbcc58b29dd3ca05359c",
+    "sprite.json": "b42c8a5f5ff8ae60543280d269bb1fe7c0b21a73260992e7fedd10eb3f3380e1"
+  }
+}

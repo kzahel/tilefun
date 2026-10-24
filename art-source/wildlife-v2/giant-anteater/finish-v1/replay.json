@@ -1,0 +1,17 @@
+{
+  "identity": "giant-anteater-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "bc329a57fefe550f352b7e0f8fc8e149aaf0a2929add3448c7d40488f9e30e3f",
+    "index.html": "94367da91d7e55d5ccec99304cfcbfd9c22eb8b16f32995f8636b4b4a03739d5",
+    "pixel-audit.json": "69fd0d4c61579d4007ad05642f1e5a5a06309678dce7e6a9f887f23693d0ac2b",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "9462fa2d971a553ee7faef27141da3128b44c1a40aec9aa192ac76db19f02e8f",
+    "preview.gif": "1e1bcbaaff71408192b2cf7c2c14cb4f311768952a6106dffa0de68ee0968c5f",
+    "scene-native.png": "29cef6bc2146afed793df6b720196b7cedcd0f6ce2f2e46358733549293c6d6e",
+    "sheet.png": "265ef289e32b69993f105b9bda6604f5ff30e6761b87c6453901aadf1e723842",
+    "source-audit.json": "60decb4a19c696c524179c45fc5c1b0e980115737408eb63473ed5158048cb80",
+    "sprite.json": "b6c6e96743dda6bd04c2bcf7209df82fcc553bf1990da90edf9492a3fb193ad0"
+  }
+}

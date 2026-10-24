@@ -5,7 +5,11 @@ Status: nine batches implemented. Twenty-nine entries have targeted automation
 verification: twenty-seven distinct signatures and two inherited cat coats. Batch
 174 final animal automation is verified; broad-suite evidence is recorded in the
 tactical. Human review remains pending.
-Updated: 2026-10-21.
+Outline audit covers all 206 entries: five action-painter discontinuities and
+136 entries using an automatic outward border. [187](../tactical/187-shared-wildlife-finishing.md)
+replaces 137 complete banks with one explicit finishing policy per animal;
+new exact art remains pending human review.
+Updated: 2026-10-24.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
 where needed, starting with land and air animals. The completed 196-entry art
@@ -51,7 +55,7 @@ original mallard-duck and bear roster IDs. Preserve completed art ledgers as his
 The [generated progress report](../wildlife-behavior-status.md) derives its counts
 and animal table from this ledger. The same generator writes compact Animal
 Browser progress data. Filter **Behavior progress → Demonstrations** and select
-**Demonstrate behavior** to open a shared authority scene. The other 180 animals
+**Demonstrate behavior** to open a shared authority scene. The other 177 animals
 still need detailed audits and phase assignment. Existing behavior has not been
 removed or declared absent. Verified stages require recorded evidence.
 
@@ -108,6 +112,108 @@ connected limbs, body weight/motion, ground contact and no unexplained sliding.
 Changed art uses a new retained source/review identity; old banks stay immutable.
 Follow [art review](art-review.md) and existing wildlife motion instructions.
 Human approval is an independent recorded outcome, not an inferred test result.
+
+### Action paint consistency investigation, 2026-10-24
+
+Owner reports that deer becomes heavily outlined and looks like a different
+animal while feeding, with similar style changes on other animals. Inspection
+confirms this in the committed source PNG, independently of browser/GPU rendering.
+This is an asset-finishing discontinuity; the existing automation verification
+does not establish visual consistency between travel and behavior clips.
+
+`Deer.ts` loads `forest-art.json`'s `deer/behavior-v1/sheet.png` for every clip.
+Columns 0–40 are byte-identical to `deer/motion-v2/sheet.png`; columns 41–84
+append lower/browse/raise/stamp. All cells remain 48×48 with anchor (24,36)
+and the pinned original camera. There is no animation-specific image replacement
+needed to reproduce the change: idle and lower pose 0 already disagree within
+the same sheet, before the head begins its feeding movement.
+
+The original `deer/motion-v2/finish.py` transforms palette-letter body/head
+paint and draws thin joint-driven legs and painted hooves. In contrast,
+`scripts/wildlife/forest-finish.py:35` fills projected mesh hulls using flat
+material colors and adds a K-colored outer ring using `MaxFilter(3)`.
+It reads the masters' palette but never uses their body/head/hoof pixel patterns.
+`forest-build.py` maps the source material `nose hoof eye` to E, also exposing
+the dark lower-leg meshes that the original finisher paints as thin coat-colored
+lines. The combination changes silhouette, markings, face detail and leg weight;
+removing only the outer ring would leave the different underlying paint.
+
+For the left-facing idle → lower pose 0 transition, opaque pixels increase
+288 → 516, K-colored pixels 79 → 169, E-colored pixels 4 → 59, and visible
+palette colors decrease 8 → 5. These are exact native-pixel counts, not
+screen-size measurements or a general threshold for unrelated poses.
+All 176 new action cells reproduce exactly from the retained projected hulls
+and border after normal sheet compositing. All five pinned source hashes match.
+`python scripts/wildlife/forest-replay.py deer --check` also successfully
+rebuilds all ten public artifacts byte-for-byte, including the saved-scene audit.
+Both `deer/motion-v2/deer.blend` and `deer/behavior-v1/deer.blend`, masters,
+projections and exporter scripts are retained. Source loss is not the cause.
+
+Other scope to audit: forest finishing also serves peacock/raven; woodland
+finishing adds the same ring for capuchin, raccoon and all three cat coats;
+meadow does so for meerkat; garden for bee/hummingbird; threat for
+hedgehog/porcupine. A side-by-side inspection confirms a conspicuous cat
+idle/sit change too. Shared code alone does not establish equal severity for
+every animal: raccoon/meerkat/peacock/raven already have outlined native art.
+Chicken explicitly avoids the outer ring. Rabbit/robin, pasture animals,
+horse/giraffe/beaver, cow/sheep and fox reuse retained paint helpers, while
+donkey has an inner-border variant; do not apply a blanket border removal.
+The [full active-roster audit](../wildlife-outline-audit.md) confirms 136
+outward-border entries, including beaver's inherited forest-herbivore paint
+helper. Five clear action-painter changes affect deer, the three cat coats and
+donkey (which uses an inward border). Red panda, chinchilla and guinea pig use
+the heavy border throughout their existing roster banks; hedgehog keeps that
+same method for both its roster and appended curling frames. These reports
+therefore include a broader whole-bank style concern alongside the original
+deer transition bug. The audit lists every entry, exact source paths/hashes,
+sampled border contribution and repair order; no approvals or assets change.
+
+Current audits cover exact replay, source geometry/contact, binary alpha,
+padding, unchanged old cells, distinct action frames and browser crop parity.
+Those checks can all pass while appending inconsistent new art. The audit proposed
+a deer-first new revision reusing the original coat/face/hoof painter with
+separate neck/jaw ownership, followed by an idle → lower → browse → raise → idle
+comparison at native scale in all four facings. Review unchanging torso paint,
+leg thickness, facial marks and transition endpoints alongside the mechanical
+checks. Register corrected pixels under a new pending identity, then audit the
+other hull-based action banks. This investigation changes no runtime art or
+human review decisions. Local comparison PNGs and pixel-count evidence are in
+`data/wildlife-render-consistency-20261024/` (ignored).
+
+Historical investigation validation: typecheck and lint pass (existing warnings); all 28
+`ForestWork.test.ts` checks pass. The complete 589.87s native run finishes with
+6,805 passed / six failed / ten skipped, plus the static-server suite's Windows
+symlink setup/cleanup failure. Five failed tests are the documented Windows
+filesystem/process cases; the sixth is the orca recipe's five-second timeout,
+which passes unchanged in isolation. The failed native stage prevents npm's
+subsequent Node integration stage from running. Logs are retained with the local
+evidence. No runtime, exporter or registered-bank file was changed by that audit.
+
+## Shared finishing correction (187)
+
+[187](../tactical/187-shared-wildlife-finishing.md) implements the owner-authorized
+correction across the active roster. The
+[contract manifest](../../art-source/wildlife-v2/finishing.json) declares one
+whole-bank policy for each of 206 entries. Five retained-part painters carry the
+native deer, cat-coat and donkey paint into new actions; 132 material-surface
+banks remove automatic exterior alpha growth while retaining actual dark
+features. Sixty-nine banks retain their existing declared paint method.
+
+The versioned shared painter and checksum-pinned sources reproduce all 137 new
+`finish-v1` banks, 30,468 pose cells, in isolated workspaces containing only
+declared inputs. Native cells in the five retained-part banks remain exact.
+Game, Animal Browser and review metadata share whole-bank identities; behavior
+timing, sockets, geometry and physics remain unchanged. New contract tests cover
+all active entries, input hashes, predecessor immutability, metadata and the
+deer idle-to-lower transition. Pure painter tests check thin limbs, actual dark
+markings, rigid paint transforms and alpha bounds.
+
+Every new correction is registered as pending human review. The previous 264
+review objects and all historical banks remain unchanged. For a future action,
+reuse the animal's declared painter; new clips must not append an independent
+flat-hull finishing pass. See the
+[authoring contract](../../art-source/wildlife-v2/finishing-v1/README.md) for
+explicit replay/registration commands and frozen-version rules.
 
 Every signature mechanic needs a reproducible lab scenario that exposes its
 trigger and outcome, plus appropriate automated evidence. Animal Browser should

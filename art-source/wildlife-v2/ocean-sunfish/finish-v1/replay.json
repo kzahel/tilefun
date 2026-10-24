@@ -1,0 +1,17 @@
+{
+  "identity": "ocean-sunfish-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "11dfd7dec137e0ba65891d022f2df6240e95982eee8e1cbe6a7a797dfd501020",
+    "index.html": "543305812608b093cf5c1f775b1f8128001b3574562ef0507d455f07b2006402",
+    "pixel-audit.json": "f7eb29003a64413a876a8b1c662afdd177de4fbae6d16815e649dabd895363c1",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "07fc9f216d4b2acb3bf1b3c184803fed5888855ac0467db1383b4abba4c4cef2",
+    "preview.gif": "03e7c3b926d71ae21c7a025041e80aafbfe5904074ff35151e9c4bf31aa24cc2",
+    "scene-native.png": "f2e6afe7a66b046a74056e5fc04c78a48b85a7662dc90aaf98eeb069b49d439e",
+    "sheet.png": "f1d730399b7369102289cb2ed3f1f37a9f255299beebabaea578f9c959ac393c",
+    "source-audit.json": "1352b2c735d6d60e2e70b122abda2f3c629476199a2686a4053c94e8694b6450",
+    "sprite.json": "9de3f446f78f51568bb3923cd35cf3a7b560f67d5530a99e5fb4465ce235a5b8"
+  }
+}

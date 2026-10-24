@@ -1,0 +1,17 @@
+{
+  "identity": "dugong-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "56afea646131c6d80812b3c10c7ec71ff0eef1c49fb0e914f037a9b714c657b1",
+    "index.html": "9536e027369f0d5c69c37d12bf2b65862034807f4f6829d482f9c2194dec0743",
+    "pixel-audit.json": "bfa6e912cef975290ed3fbfd6405762d058788fbf2d79ced02cde8308e277923",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "b2e0d7a60c12aa926316c1a3101a8788536f4fc70ae06647ef7b11499269c3b3",
+    "preview.gif": "f5f0be51557f893d521fa22bd759b82c8a33e307176b97f383ce54bbc4ce73c4",
+    "scene-native.png": "e34830aa1d1a53c66bae54745ba9480d7c12eb05d9d74024819ee5e4fa55541e",
+    "sheet.png": "01c98f65c555f3cec7545e35362fe24e77219df8c14feb3a76a1e1a931978b95",
+    "source-audit.json": "0230f40433bb3b31e843661611d33f96c8adc41be34b25e8e8e21808d7c9a3de",
+    "sprite.json": "46abe8e47d49ad35b82a82bd7990bbd9dbeeeaa38423629d6de73f685eb8746f"
+  }
+}

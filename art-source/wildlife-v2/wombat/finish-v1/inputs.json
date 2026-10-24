@@ -1,0 +1,36 @@
+{
+  "identity": "wombat-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "wombat",
+    "name": "Wombat",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/wombat/roster-v2/sheet.png",
+    "sourceSha256": "9983a99d6d724558ed0ef11f7704255a9edaa1b58d6508ef493c1fb8564bb5bc",
+    "source": "art-source/wildlife-v2/wombat/roster-v2",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#272f34",
+    "B": "#8e7b61",
+    "H": "#b39d79",
+    "C": "#ded8be",
+    "M": "#655b4a",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/wombat/roster-v2/inputs.json": "fff0ed6166a45d60a89f76b70af7579e253e87877485373a5854945a75290eac",
+    "art-source/wildlife-v2/wombat/roster-v2/projection.json": "faedd842e0c184d6dad86c9c85ac54891c79f4ee85ded2a5fe7229559252d9f4",
+    "art-source/wildlife-v2/wombat/roster-v2/wombat.blend": "9d7100179157fd3bd7eb3f8e551c85a9b2731a5311a45701c9c73d6a645dae22",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/wombat/roster-v2/sheet.png": "9983a99d6d724558ed0ef11f7704255a9edaa1b58d6508ef493c1fb8564bb5bc",
+    "public/demos/wildlife-v2/wombat/roster-v2/sprite.json": "bfd436947765946d4dfc1d4c7887289dc6212cc2672c8d42f3ce46bbf52abc37",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

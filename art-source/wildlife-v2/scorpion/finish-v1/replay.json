@@ -1,0 +1,17 @@
+{
+  "identity": "scorpion-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "e703b59f4ea938f87b40b9fe01d571c565e897dab72d03d636cbf5c12837f554",
+    "index.html": "f95504a4c394793dbd635cf6afe59c145d7be2c17a837b44f7d369c9d550799f",
+    "pixel-audit.json": "5bcf977f344a851314fb3387e9526df2d1d450475de2ac6365d717d8b0ea1fcb",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "46c2907c4d7ed6f8618f1cf14f6575e6527780f65c684afe8994770c42721ea9",
+    "preview.gif": "4b2f7c88b11d6c24543ac84e02b40bc5f6ce7ffd0af6fd2eb3b742bc3b419193",
+    "scene-native.png": "356b46eab8cd62a0b053973d7bdcd8113f7c631fc4bc95d2da38de894355a8d2",
+    "sheet.png": "1b7f6b8a211cdd3de288673e74f288b0edc270535b31576a6aa7127314aa09b3",
+    "source-audit.json": "770db367396eacc572ddd72f683155c608f15e52326d99eefe0002bc3fd890c3",
+    "sprite.json": "6eb0e94e95e47b9900ac7260ee6e7bac531ca68fc0d415bbe89bf4a36503c21f"
+  }
+}

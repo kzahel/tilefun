@@ -1,0 +1,37 @@
+{
+  "identity": "tasmanian-devil-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "tasmanian-devil",
+    "name": "Tasmanian devil",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
+    "sourceSha256": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
+    "source": "art-source/wildlife-v2/tasmanian-devil/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#343b37",
+    "H": "#535c50",
+    "C": "#d5d1b5",
+    "M": "#242c28",
+    "K": "#282e2b",
+    "E": "#caaf65",
+    "N": "#1e2826",
+    "T": "#c69487"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/tasmanian-devil/roster-v3/inputs.json": "a45de3ff8304e985a1713856fea0ae04e239b30c255778ba857a6a1029d15513",
+    "art-source/wildlife-v2/tasmanian-devil/roster-v3/projection.json": "f359a9bae83fa517421b4fdfa7a058cd2e59c7344d886eec8c97ced6dfa86d2f",
+    "art-source/wildlife-v2/tasmanian-devil/roster-v3/tasmanian-devil.blend": "c030b3482379c5ce83c209018c92e16bc4746d3c5ae4a9a47c5f29e37c751508",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
+    "public/demos/wildlife-v2/tasmanian-devil/roster-v3/sprite.json": "1551a457efce42baa316f1afb587918d7ea99c957a9fa0873cbd5a681c1b6f41",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

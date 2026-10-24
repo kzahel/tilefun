@@ -1,0 +1,10 @@
+{
+  "identity": "bat-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/bat/roster-v3/bat.blend": "39bbde2acaff4d2948ec4e1f44e3e04092f15dbaad5bc3f79b9bbac25735fcc8"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

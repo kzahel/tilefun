@@ -1,0 +1,10 @@
+{
+  "identity": "cricket-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/cricket/roster-v2/cricket.blend": "a778f2bde7497c9262771d781f563cda9d492382801ee237a346787959636c52"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

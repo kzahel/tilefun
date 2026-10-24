@@ -1,0 +1,17 @@
+{
+  "identity": "pond-turtle-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "1019a57870439c53861f289285f672b67f9c5e73741ef047fedff486ce3f821f",
+    "index.html": "bfd98ff57ff921a5841ccac4217c4cbcd5765856eb38b04c3f2e43f538febcd4",
+    "pixel-audit.json": "8ba2272115563ddc3a0ac050acdfcf1e0e386cda9a605bf4a3d35aa100a18efe",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "9c42f23902228ba5464697b3d7d0a95b511e51640d27ffcb6a16c48d4bc426f3",
+    "preview.gif": "103162649dbed7138c1815573df4b0af64642e8a315b68061e9b21898193bea3",
+    "scene-native.png": "05ce5808ba0388ee64816a80bfc59bb9a5d17c6c3dc714e4614a2ecec0e0a031",
+    "sheet.png": "b40fff88c785c23d9aa7480b47afcfa9727dde19c2d0e68b4572d418ef3c5360",
+    "source-audit.json": "dc1e9fb4fec098f61c6a0c65896aafce2f26ab3453913a0dfab98132a28cabce",
+    "sprite.json": "f9e3305cb1b1694b8217c75e5b463aa86a52be798766bd512cc177b26ddfafa4"
+  }
+}

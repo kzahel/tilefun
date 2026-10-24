@@ -1,0 +1,10 @@
+{
+  "identity": "binturong-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/binturong/roster-v3/binturong.blend": "25df2d6c6c1142529f61dcdd037fd6c41b384d7a057ffeca6843a46b976c2ef4"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

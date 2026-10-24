@@ -1,0 +1,12 @@
+{
+  "identity": "salamander-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "83292f920a1b285e1661d314d23bcbf864f9e17739f7b2cb693d5f0f1d3c1da0"
+}

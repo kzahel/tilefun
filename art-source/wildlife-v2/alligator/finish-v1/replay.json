@@ -1,0 +1,17 @@
+{
+  "identity": "alligator-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "440349d751080ec3b5ca3c61251d5a1d70f6fdabee4c3e82ff641c693181f571",
+    "index.html": "bb367b003e8d4d9da7aa903f2fffb3a8bae54297903cfb10de95ddb732b5e1f5",
+    "pixel-audit.json": "27886e9e958326f7e24905b5eec9d10ec02d6cf0082cb0d34f50aeaf04b54ff4",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "c76b16583027c8d1ed2ca5311e0c481025477c4c2532c8c50bb692c9391d99f3",
+    "preview.gif": "04dacc796c331dc5dba0f224b6412371c696ced30e44f08a1e7338ae78870d79",
+    "scene-native.png": "41caee6c4628f120194566b25b8450adb8cd396921b76b370ec27e20ab476414",
+    "sheet.png": "306fb252ccded667f04ef5120917d59871556e7141469236984497783449b1d9",
+    "source-audit.json": "b478b127699ccea6e3889a070651b27306d8f91f27b6ed53c2b0af91d96cd718",
+    "sprite.json": "82a1089cce2df6f9a3e538fe60554cac192cdc7df4c5287387c2b878e5259f45"
+  }
+}

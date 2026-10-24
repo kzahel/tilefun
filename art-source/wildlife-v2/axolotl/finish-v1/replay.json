@@ -1,0 +1,17 @@
+{
+  "identity": "axolotl-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "9101a2a2d0e0c51eb4a60f07c720e1cce31366148910f5635763f571374b38e3",
+    "index.html": "920e953b1b3a600a5c10e88fa855a2f65bbf398200796471cca39cf3338ba633",
+    "pixel-audit.json": "b4e3d65275557e8867b4fcc9dcf9ba51e2764b9155f175edecb73a4daacd16b3",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "b3aab149b54c96caada3f593aaa4cd69236e772a242a8bc8c100d6112916a645",
+    "preview.gif": "c5d75fa361845e33aa8d314bbe71039a5e5e61c3038705f9109be707fcdfe681",
+    "scene-native.png": "31bf26d5268e5f65f32016f04773ecfec8acfa32cfda28a728745332d5fa7f45",
+    "sheet.png": "b2bc69a5e55868c5ad3656d7aafb602be31959c52ad84cc721d80d220a0b3055",
+    "source-audit.json": "7709f83d6bb17499f3efd8bcaa77e72e99a5626cfdecbd79b0bc91bf9ce01ef1",
+    "sprite.json": "c651df5b14b0773f0cbc5bd5809dd47766150b982fdbc39d376dcd6ca1627965"
+  }
+}

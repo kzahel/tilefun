@@ -1,0 +1,12 @@
+{
+  "identity": "porcupine-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 340,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 340,
+  "sheetSha256": "817b195d035bbb57fd55267934fd1dd67719f66e4f7f832edc6fa7130edf0dbc"
+}

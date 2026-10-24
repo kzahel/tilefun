@@ -1,0 +1,17 @@
+{
+  "identity": "frilled-neck-lizard-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "e7b978db92f5c8feb2b60857776cb649cafe4794643ebac2220605fd79b4675a",
+    "index.html": "ae9ca17dccd4278499f73b67b230b4b54c54bbf9bd4cff025fd2708ce0c541b7",
+    "pixel-audit.json": "f3a7ef40e8bed080543447d994c069ce57cd251b0facaa742523dd2d495cfa29",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "34d02af26029b8365787644377d595fd429a0fd6316504a8bf552b0f754a460e",
+    "preview.gif": "c6dd31446918aa9635ccc6c1224456d27dfe11c198426dc85518f0952bf30a6a",
+    "scene-native.png": "8f6d41f54db7cd85ea9c5daf02bdc16cd298147192c454aa995a7f97af149dd7",
+    "sheet.png": "74cc16b3c99f9fd4106825187b4a31e83fba594f8327836fd951b700705a4b89",
+    "source-audit.json": "b230480e312e0d3e266ac7511a40b7f9db8b035d131e0b283ad61de8b3e7f8a7",
+    "sprite.json": "49f8f36696986026d0b097133e8c4d4db438730f41a0c27299110a97acd035b6"
+  }
+}

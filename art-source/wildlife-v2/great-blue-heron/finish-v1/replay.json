@@ -1,0 +1,17 @@
+{
+  "identity": "great-blue-heron-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "16b8df15e0ae19ce45a1048692a9e554bcaeca49e030fa0aff2ceb7f2cee290d",
+    "index.html": "9ead198cc333f5a70dd959cb23312aa1e442841b07883bf5bac27165e0ff6f8f",
+    "pixel-audit.json": "cac5c4cc5595f2801ba83b0c58e4b0ef35c4040b4fed85c33cf0667a9e371bff",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "462fa8350f1ba4c72b7b3fff5ce7b1d4de550b739caab364a39c62151f7f582b",
+    "preview.gif": "c8748db5f400f7640b7a28f6886642c8f0fe64f1447389ff0039f119ad70c0f0",
+    "scene-native.png": "945f6db2729f98b28788bd76512438e0df8a5c995d097c0a0347e3b09817f590",
+    "sheet.png": "460139ed5b2b43927b43a663df97dba9df1edbde19667ef9d41746f18079069a",
+    "source-audit.json": "eff43916817dc42f1c7f0875373c173ce2277926ee96aa476a8395f9a1a7e9d0",
+    "sprite.json": "fec2edcd1e19098027ed1d428685c5b3e603cf0f0db496cf7a5ea118e557e061"
+  }
+}

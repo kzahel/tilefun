@@ -1,0 +1,12 @@
+{
+  "identity": "elephant-upright-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "71581783ac9aecdd8f1faa66c5a803a5e947b6dba4b2d5005ea4f2ef56362d4e"
+}

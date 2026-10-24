@@ -1,0 +1,39 @@
+{
+  "identity": "kakapo-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "kakapo",
+    "name": "Kakapo",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/kakapo/roster-v2/sheet.png",
+    "sourceSha256": "6481f458ee7d9da0807ade14d6c3996ee27d32afc077dbc1c52c9fe90fec79d7",
+    "source": "art-source/wildlife-v2/kakapo/roster-v2",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#293338",
+    "B": "#71824b",
+    "H": "#a3ad65",
+    "C": "#c8be87",
+    "M": "#515c3c",
+    "N": "#232d32",
+    "E": "#c2ad74",
+    "U": "#477d9b",
+    "R": "#ad554c",
+    "T": "#66834f"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/kakapo/roster-v2/inputs.json": "9537ee74e2c3be8c16b3b8acf49fde310db194c7c289d362811301267944d803",
+    "art-source/wildlife-v2/kakapo/roster-v2/kakapo.blend": "299b746d5661bebce7456baa8552bf55c1b9a6eaa5e50d16e0c29b6c429dbcd4",
+    "art-source/wildlife-v2/kakapo/roster-v2/projection.json": "b6dbd8baf2fa43342c8a9ea88d8399954344b74dc23d36eeb7f8e6380b21d5b4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/kakapo/roster-v2/sheet.png": "6481f458ee7d9da0807ade14d6c3996ee27d32afc077dbc1c52c9fe90fec79d7",
+    "public/demos/wildlife-v2/kakapo/roster-v2/sprite.json": "56631c0f5a996d1e485b2e318552f1482a98f9a552166d6c9cb0ff31250ff4eb",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

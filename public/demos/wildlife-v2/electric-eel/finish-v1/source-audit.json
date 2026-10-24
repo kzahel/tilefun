@@ -1,0 +1,10 @@
+{
+  "identity": "electric-eel-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/electric-eel/roster-v3/electric-eel.blend": "d4aa162ec89f8b7ef8ef8c6087ecbcb2ddbea696928b69845236f3734b714841"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

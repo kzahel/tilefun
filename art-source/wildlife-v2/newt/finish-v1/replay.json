@@ -1,0 +1,17 @@
+{
+  "identity": "newt-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "fcb55147079807a3906f998d83aeed12e956dab7b0ae43c32c792690d14730d0",
+    "index.html": "093a7788bc8d04be50f814a286d905e8175f171f7c6e084818d227e1c2fa2d07",
+    "pixel-audit.json": "16dd4f1e001f98b586b4e5231463814a9bbc56b84de3417330ca445e5bef5c44",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "22f45b37c762ff3df9ad011e15758856ccd989ccf5d53fafb389554bd755639f",
+    "preview.gif": "a7272ccc2f0ab0414d75f65ed3a576844d8a212892f1402610318cd0435492c6",
+    "scene-native.png": "50f6de4f6c4a5224354375d0ac250381a4dd1176e071d5c25c182b02ff1863e3",
+    "sheet.png": "5c645624c1af980a96030a352a820bb27b0ffd7864fa98995f313b13ae10cba6",
+    "source-audit.json": "a0ce4392053c7da16fcf5ba773203da4739af9599f0c8f5cded61a8686bbfb52",
+    "sprite.json": "a28ef4756224a9950b9b475a696a206e8d228cc7a05ba8bdcab23f95e16d22d1"
+  }
+}

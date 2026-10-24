@@ -1,0 +1,17 @@
+{
+  "identity": "gecko-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "2c18cb3f6ef9d59caeb6c802f397aba38dae715b1bf242cbfc621aef2d8d160c",
+    "index.html": "82e9a5cc9b12d756a289336cbbe6bdd3a836e0704f6f5d0407efaae03c7db9ec",
+    "pixel-audit.json": "16fe4870242da458d49e90243cf8ce08b978776d3a83a2dca9d643489d52f03c",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "b69b0c346a8d0e24d6815494ee8e2aa77161c4632ca5a4dd0e88934eac25feb3",
+    "preview.gif": "7358290e2df262cbcdb64620676c8d5a3fce6a78a5cb226893bc7b9282ed485c",
+    "scene-native.png": "a243c69ae4f8e2d11b54b7460f574d6a26901dd08a6826b9ec3ed7d2162b95ed",
+    "sheet.png": "753a668d01d656886c56dd875f4143bf8e29b0ae92060356c3179a76cd331762",
+    "source-audit.json": "d5490eb755278669af53816236a2fb723cb34b83e736a90ce8109e69851cfa9b",
+    "sprite.json": "4b7ce46451f36d8d4d458a75afdef4a80575015a83e3220763411ff196cdeff5"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "giraffe-upright-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "giraffe-upright-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "93ff90c21bccb5f97b9599bbd20041904e79c446f30d7ca5d6e5e9c801f84cdd",
+      "index.html": "07899a16b71baaca686cc0abe7c61434d0ef5fd1623358052ddae045ee2a8bd7",
+      "pixel-audit.json": "52839fc83bb178b6c169a3bedad5979a6a9b91a76a757ef885d74aad3dfa7185",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "aab2efa1fa3a6f3adc0b07466132866cbe6aa287ec65c7c7ca5c2de806e17316",
+      "preview.gif": "cb8ad46bac337aad82a6b65d8758e271b3d4dfab72bb4ec64d8623df2a088f43",
+      "scene-native.png": "6535c08331db630085002b239f23b1af80b65a0776376fa5a307e7e8308355ed",
+      "sheet.png": "57e0901e56adef1fd938478fabcda6e1fd64eeabc67cf6092de316d52969ed06",
+      "source-audit.json": "8d57d7da5bb65c25ad746baeec53de2b1f2ba0f53ddc006f5d4f4743c5d3ba07",
+      "sprite.json": "6ee12bd6b57199352301c83579701e2e6f906c422e882dfc0c8bd9e3ca2a0178"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/giraffe-upright/finish-v1/README.md": "09d86706e3647a11922789abfebe4d6f783faf1c152a278c8f5d4f763b0a6e6d",
+    "art-source/wildlife-v2/giraffe-upright/finish-v1/inputs.json": "d323662c6fed73dddee510e7f3fd92653378ab75ad779ef8dec29ebb6f8323b9",
+    "art-source/wildlife-v2/giraffe-upright/finish-v1/replay.json": "10cbfd8800388dce589cfc27d25d29b4f592dc13e66c6c957e54d90fcb19d04e",
+    "art-source/wildlife-v2/giraffe-upright/roster-v3/giraffe-upright.blend": "e3d966ed60153271b332325a9aa0e7f350bcfcf11e0e77e35095e8a4fef47c11",
+    "art-source/wildlife-v2/giraffe-upright/roster-v3/inputs.json": "0d4c2b5e64cd00d1ba7ce1668ad4c657650b9d081cbb756992f15ed39025291a",
+    "art-source/wildlife-v2/giraffe-upright/roster-v3/projection.json": "4828ad67701dec89ef4360d309dc22c552037db636f978436cfdbca48c15c85d",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/contact-sheet-native.png": "93ff90c21bccb5f97b9599bbd20041904e79c446f30d7ca5d6e5e9c801f84cdd",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/index.html": "07899a16b71baaca686cc0abe7c61434d0ef5fd1623358052ddae045ee2a8bd7",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/pixel-audit.json": "52839fc83bb178b6c169a3bedad5979a6a9b91a76a757ef885d74aad3dfa7185",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/preview-native.gif": "aab2efa1fa3a6f3adc0b07466132866cbe6aa287ec65c7c7ca5c2de806e17316",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/preview.gif": "cb8ad46bac337aad82a6b65d8758e271b3d4dfab72bb4ec64d8623df2a088f43",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/scene-native.png": "6535c08331db630085002b239f23b1af80b65a0776376fa5a307e7e8308355ed",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/sheet.png": "57e0901e56adef1fd938478fabcda6e1fd64eeabc67cf6092de316d52969ed06",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/source-audit.json": "8d57d7da5bb65c25ad746baeec53de2b1f2ba0f53ddc006f5d4f4743c5d3ba07",
+    "public/demos/wildlife-v2/giraffe-upright/finish-v1/sprite.json": "6ee12bd6b57199352301c83579701e2e6f906c422e882dfc0c8bd9e3ca2a0178",
+    "public/demos/wildlife-v2/giraffe-upright/roster-v3/sheet.png": "54bccc660cf970c44637ed1a87f0928555b62f180e80fa306ada157955d80372",
+    "public/demos/wildlife-v2/giraffe-upright/roster-v3/sprite.json": "19a9503437e1a6071b6bbf6bbda21b8ef237c5d2b0909ffb1d9edb8c4c7d2218",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

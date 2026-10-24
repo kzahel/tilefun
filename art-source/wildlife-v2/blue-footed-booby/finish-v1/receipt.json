@@ -1,0 +1,53 @@
+{
+  "identity": "blue-footed-booby-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "blue-footed-booby-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "76156b56fe5fd51c6778ceca1a21daa8b045ca284f8b92c6cecc169f872b2e21",
+      "index.html": "1ead3c23647a4d544089a3201b14eee03bb9fb258b3b4c4dc1a1c0341ef697b8",
+      "pixel-audit.json": "b38c051de90b8f390b38280124fd3c91120a95b383b545de11228e80460bf8a3",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "35167125584127f9ff690d6c9d9a1c1a5a64cc827491d3469163c80bd09abaa6",
+      "preview.gif": "b4b53b4abb6e41f0293dcd1870ea9545b24290a2228496a900178059f228911b",
+      "scene-native.png": "6bcab981f18aba8662cb78148ee58066696cc95abc9fc1b4775df02431082ff3",
+      "sheet.png": "23bf7a1d9fcbbb7274653906246d03947153e36ec3a469a707b3d39ce081e30f",
+      "source-audit.json": "621b7e38b41075583b1fe91aeb509a0a0a1edc7e4291b5f7eae87de42019816c",
+      "sprite.json": "7d373586926a47147485d5a552b0757bbfa8609079c808c8a98bb12b6c4edea8"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/blue-footed-booby/finish-v1/README.md": "96353fc0d56c39696f01932b3ab713d142a36297f0d96dcca7722291f25b51a4",
+    "art-source/wildlife-v2/blue-footed-booby/finish-v1/inputs.json": "64b59c3103df0b4785cbb8b410bd7826f803eb3fa154605831597dda93ed8ac6",
+    "art-source/wildlife-v2/blue-footed-booby/finish-v1/replay.json": "5161fa092d6c4489b3887d4406be55a3b7e5cbe2708d1b518aa300f82777c638",
+    "art-source/wildlife-v2/blue-footed-booby/roster-v3/blue-footed-booby.blend": "b9b8336312c8d00b4e0526f6e0071c4672c6531bc686e58f708796b773b3b263",
+    "art-source/wildlife-v2/blue-footed-booby/roster-v3/inputs.json": "7c2eafc0ceafc9c3e4dc245e9ed298efa6d1c00ec14a626fe5d95b47a9f46ae1",
+    "art-source/wildlife-v2/blue-footed-booby/roster-v3/projection.json": "48d5eb3767e3892ed734c7ed8a0e45623d8b29d2cb639d44f7e4dee2fc8d8634",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/contact-sheet-native.png": "76156b56fe5fd51c6778ceca1a21daa8b045ca284f8b92c6cecc169f872b2e21",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/index.html": "1ead3c23647a4d544089a3201b14eee03bb9fb258b3b4c4dc1a1c0341ef697b8",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/pixel-audit.json": "b38c051de90b8f390b38280124fd3c91120a95b383b545de11228e80460bf8a3",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/preview-native.gif": "35167125584127f9ff690d6c9d9a1c1a5a64cc827491d3469163c80bd09abaa6",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/preview.gif": "b4b53b4abb6e41f0293dcd1870ea9545b24290a2228496a900178059f228911b",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/scene-native.png": "6bcab981f18aba8662cb78148ee58066696cc95abc9fc1b4775df02431082ff3",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/sheet.png": "23bf7a1d9fcbbb7274653906246d03947153e36ec3a469a707b3d39ce081e30f",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/source-audit.json": "621b7e38b41075583b1fe91aeb509a0a0a1edc7e4291b5f7eae87de42019816c",
+    "public/demos/wildlife-v2/blue-footed-booby/finish-v1/sprite.json": "7d373586926a47147485d5a552b0757bbfa8609079c808c8a98bb12b6c4edea8",
+    "public/demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+    "public/demos/wildlife-v2/blue-footed-booby/roster-v3/sprite.json": "c842b3e7435ee1405862284942bd803003c52a31b027dd41decc3a706c6b0b50",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

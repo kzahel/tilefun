@@ -1,0 +1,17 @@
+{
+  "identity": "grasshopper-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "27481f24fbbffbcb90c5140f1acbc65bf78e638f55375b40581824accc3414c9",
+    "index.html": "33d27166472209e4b829acc78fb102f51d90d9e3c376582731aa7486487ab42e",
+    "pixel-audit.json": "80f2f3a83b49ed3c976af1675d19a3ec0a86d36219970e173cab0970060aeee4",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "682c73281fd3f1412d9b3059cab5d15f9a11998bedd480d514bda33cff6b0726",
+    "preview.gif": "9c84be449b80fdeff5ac464c71df531a07e2142cb3a692841be7d65039856897",
+    "scene-native.png": "ba800a0f76ee76dfc89ae0375262adcafbdb05e89d24b44c85bebde2649191f0",
+    "sheet.png": "c22a6c18590ef56b14322538406080124fe7ae3f4ae4ccab2594c4f7efc33ca4",
+    "source-audit.json": "cf3ad95d8cb0e7e665c73556ef6e549b59da6dc13a5603d10e4be910c0a63981",
+    "sprite.json": "152458101d1df74a3b7abafb708356205db81dada64637ed439f39076f3e493b"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "identity": "river-otter-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 292,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 292,
+  "sheetSha256": "27feefc4e6b60664ca38d5476562100fceca74e78dfb24b1a91d8c285a4e133a"
+}

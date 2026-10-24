@@ -1,0 +1,10 @@
+{
+  "identity": "cassowary-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/cassowary/roster-v2/cassowary.blend": "8b1d344277bc8408f87738a216d98c042eb5e28772c059865af13c1e6cc7c4af"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "dolphin-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/dolphin/roster-v2/dolphin.blend": "5005ae1ad8afc07c232c81becc433cc32c18f771d4a1e7725e43fa4c46908b6b"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

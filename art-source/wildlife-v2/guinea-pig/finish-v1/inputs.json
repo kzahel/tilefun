@@ -1,0 +1,36 @@
+{
+  "identity": "guinea-pig-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "guinea-pig",
+    "name": "Guinea pig",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/guinea-pig/roster-v2/sheet.png",
+    "sourceSha256": "90822f106d85d953f7794d0589c702aec526bed7150aea1e2f4aff28518b45da",
+    "source": "art-source/wildlife-v2/guinea-pig/roster-v2",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#272f34",
+    "B": "#d3a05b",
+    "H": "#e8c07d",
+    "C": "#eee4c9",
+    "M": "#815239",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/guinea-pig/roster-v2/guinea-pig.blend": "b637b2f73aacd538827c47b2f29f7b071170fe04e80c406adf212a4bcd6928b6",
+    "art-source/wildlife-v2/guinea-pig/roster-v2/inputs.json": "4acbe965594cafea79cf77a81d7619d503df3b884ea4a4f9ecca422fe09eb35f",
+    "art-source/wildlife-v2/guinea-pig/roster-v2/projection.json": "2bcc189b360c814a8750f391e206ebdcb383aa7b07a275ab0a1c9c805e461618",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/guinea-pig/roster-v2/sheet.png": "90822f106d85d953f7794d0589c702aec526bed7150aea1e2f4aff28518b45da",
+    "public/demos/wildlife-v2/guinea-pig/roster-v2/sprite.json": "6e11fbe59eb84952f1c9461710d232bcf7e2de59aba0a36decbdabb1c811e4a5",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

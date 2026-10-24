@@ -1,0 +1,10 @@
+{
+  "identity": "orangutan-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/orangutan/roster-v3/orangutan.blend": "36c2a7674bb3f305376d1fa60940a7bdf94f28e8f74e6832b2eb0e8192307110"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

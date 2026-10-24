@@ -1,0 +1,10 @@
+{
+  "identity": "proboscis-monkey-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/proboscis-monkey/roster-v3/proboscis-monkey.blend": "f40f1668638aca4b63c76e239611d00aaa85495f27823f8c0d2af90c72916bcd"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

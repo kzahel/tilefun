@@ -1,0 +1,11 @@
+{
+  "identity": "raven-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/raven/behavior-v1/raven.blend": "ebcb6459feda5c2391b58e70cfb7054e60dd75b33ee5357572c1ba17e194cea9",
+    "art-source/wildlife-v2/raven/roster-v3/raven.blend": "4ecc257c16ac858fe39181557a9de467ba87c4af7657dc17aebf71379e189616"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

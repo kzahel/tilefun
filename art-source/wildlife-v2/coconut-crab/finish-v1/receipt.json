@@ -1,0 +1,53 @@
+{
+  "identity": "coconut-crab-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "coconut-crab-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "d7d1c44e2261c7cb27ff692ecec8ff7172ed9e4d88d0312f80fa31a9eef0d834",
+      "index.html": "f652cd3b1df9489402b157ec560ea0bb9391f5d6b100af8e1eacee2391db174b",
+      "pixel-audit.json": "44b9f1e8a3e341d73507902852b7ea408e1f34510c27023edf3e822ad4207b0b",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "8148c1f9f66cd239ed28924cacb60c5ba7207978b28209bdb595f855f3310df1",
+      "preview.gif": "626d97e4d93836b9b01d2e7d222c1cd8dc76858b3f49f66f0b87bd6ec7b55455",
+      "scene-native.png": "8edbfabeab0b6ac0cb7197c29e1091de0be4dfbbc79c0cadbf14e0398043fc2a",
+      "sheet.png": "2bf24b96dac30d909e5b992b815f630c760703b359b575668a68feeac9a8e96c",
+      "source-audit.json": "78d49b81c78f6368c82e2cd7197a2cd80a5f8f5a80abf06713ffe4888b828cb5",
+      "sprite.json": "07dfe9943f6692ea0c27106fb9c898ad8063f97f93c43605e1b39a058d4187eb"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/coconut-crab/finish-v1/README.md": "03a8f2de60239a47ebb64c87bd55f4d934cca74177dcb04fb766d891da4fc9b4",
+    "art-source/wildlife-v2/coconut-crab/finish-v1/inputs.json": "623739facd49745c41aa68b27c1a078cb0762928717fd3546379963ff90848a2",
+    "art-source/wildlife-v2/coconut-crab/finish-v1/replay.json": "80a34521567928a8be5d55b4111732453a73cbb82dd3cf60396c4c031a7f4d50",
+    "art-source/wildlife-v2/coconut-crab/roster-v3/coconut-crab.blend": "bab21347857a1ebf25e53e302c5f3e350fb8a0bf57160cfe4215958ca05ae43c",
+    "art-source/wildlife-v2/coconut-crab/roster-v3/inputs.json": "5fb44238331246d8d4219ef247554112457243cfab6ee1a04e441a6638985c72",
+    "art-source/wildlife-v2/coconut-crab/roster-v3/projection.json": "245bfcf6165d3777558fcc7445ab28463097844412bf84d43ff2db7b1d927122",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/contact-sheet-native.png": "d7d1c44e2261c7cb27ff692ecec8ff7172ed9e4d88d0312f80fa31a9eef0d834",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/index.html": "f652cd3b1df9489402b157ec560ea0bb9391f5d6b100af8e1eacee2391db174b",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/pixel-audit.json": "44b9f1e8a3e341d73507902852b7ea408e1f34510c27023edf3e822ad4207b0b",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/preview-native.gif": "8148c1f9f66cd239ed28924cacb60c5ba7207978b28209bdb595f855f3310df1",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/preview.gif": "626d97e4d93836b9b01d2e7d222c1cd8dc76858b3f49f66f0b87bd6ec7b55455",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/scene-native.png": "8edbfabeab0b6ac0cb7197c29e1091de0be4dfbbc79c0cadbf14e0398043fc2a",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/sheet.png": "2bf24b96dac30d909e5b992b815f630c760703b359b575668a68feeac9a8e96c",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/source-audit.json": "78d49b81c78f6368c82e2cd7197a2cd80a5f8f5a80abf06713ffe4888b828cb5",
+    "public/demos/wildlife-v2/coconut-crab/finish-v1/sprite.json": "07dfe9943f6692ea0c27106fb9c898ad8063f97f93c43605e1b39a058d4187eb",
+    "public/demos/wildlife-v2/coconut-crab/roster-v3/sheet.png": "b2b0241855de963e1786f66bb7ebd17cdb678a4e5d127c8cdb519e632cfdf168",
+    "public/demos/wildlife-v2/coconut-crab/roster-v3/sprite.json": "b8a1e78d6c30520e1067ac922ec5018acbfff1c6e38d57b6d3592cec678ac022",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -38,6 +38,11 @@
       "!art-source/wildlife-v2/porcupine/behavior-v1/projection.json",
       "!art-source/wildlife-v2/centipede/roster-v3/projection.json",
       "!art-source/wildlife-v2/millipede/roster-v3/projection.json",
+      "!art-source/wildlife-v2/deer/finish-v1/paint-projection.json",
+      "!art-source/wildlife-v2/cat/finish-v1/paint-projection.json",
+      "!art-source/wildlife-v2/cat-ginger/finish-v1/paint-projection.json",
+      "!art-source/wildlife-v2/cat-black/finish-v1/paint-projection.json",
+      "!art-source/wildlife-v2/donkey/finish-v1/paint-projection.json",
       "!docs/tactical/053-semantic-tileset-map/source-files.json"
     ]
   },

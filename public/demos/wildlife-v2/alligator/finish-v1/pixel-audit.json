@@ -1,0 +1,12 @@
+{
+  "identity": "alligator-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "306fb252ccded667f04ef5120917d59871556e7141469236984497783449b1d9"
+}

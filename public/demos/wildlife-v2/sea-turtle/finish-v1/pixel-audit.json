@@ -1,0 +1,12 @@
+{
+  "identity": "sea-turtle-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "4a98b9498abfe20a17d78b44ba77585196d311be27d1f8f95152442afe0cb2f4"
+}

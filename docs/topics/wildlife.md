@@ -4,7 +4,17 @@ Topic: wildlife
 Status: all 196 roster animals implemented and available in the animated lab.
 New exact art remains pending human review; specialist behavior limits are
 recorded in the individual checkpoints.
-Updated: 2026-10-21.
+Updated: 2026-10-24.
+
+[Shared finishing correction 187](../tactical/187-shared-wildlife-finishing.md)
+audits all 206 active entries and introduces 137 complete `finish-v1` banks.
+Deer, three cat coats and donkey retain original painted parts through their
+new actions; the other 132 corrected banks use source material surfaces without
+an automatic exterior dark halo. The 69 other banks retain explicit policies.
+[Finishing contracts](../../art-source/wildlife-v2/finishing.json) and the
+[versioned painter](../../art-source/wildlife-v2/finishing-v1/README.md) own this
+contract. Game and Animal Browser share the same identities. Historical sources
+and 264 review objects remain unchanged; all new art awaits human review.
 
 Owner requested planning for distinct behavior and suitable animation for every
 animal on 2026-10-20, starting with land and air animals. The

@@ -1,0 +1,17 @@
+{
+  "identity": "tasmanian-devil-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "f1908df5a342946bedf258fdb573a3146550b4755aca4fdd12fa122f2ac794bc",
+    "index.html": "fd0f0975e6f8357376e3c82cd6d89ee8644846d2be97c84e8f77e4e6516c89a3",
+    "pixel-audit.json": "8b7d1ddda1cda597bcbc8a1d071c6b6dffd845273ff03470863eb8b27bc7fc19",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "826b33b134064bb31b49db8239a54c26a2f5cf28baf09770f49d213d952ab222",
+    "preview.gif": "f149543a03814cbb6bbf942124fdac5e2e9e31b711694f637d9c42f94229096a",
+    "scene-native.png": "abf869f36ab6e581a8048993447e28d22ec4579186f15404d3edb450422648a6",
+    "sheet.png": "1d08a44721a4a568afae9b18f80b4f3f48ab7d98aa5a2b2b04a16b51e67ad52a",
+    "source-audit.json": "4c3ea8fd2cef0265ff5c824b43c676924aecdb43f1b702d796bf05fd3a461890",
+    "sprite.json": "975f850eb4fc4d8f43b3cb27283c101987e196daacdef0f7e83cb3df3be4e318"
+  }
+}

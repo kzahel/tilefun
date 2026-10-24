@@ -1,0 +1,45 @@
+{
+  "identity": "peacock-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "peacock",
+    "name": "Peacock",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/peacock/behavior-v1/sheet.png",
+    "sourceSha256": "728f088cfcad7e9b902026f929777e1b692f6fb6c869e7a524419e2fa807dcd2",
+    "source": "art-source/wildlife-v2/peacock/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#293338",
+    "B": "#3d6c7e",
+    "H": "#587e62",
+    "C": "#e5ddbf",
+    "M": "#77765d",
+    "N": "#232d32",
+    "E": "#c2ad74",
+    "U": "#477d9b",
+    "R": "#ad554c",
+    "T": "#66834f"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/peacock/behavior-v1/inputs.json": "93b5ebaa5e40e9785c10082dfe917e6e3f55ac013fcbf5adfee3fa976e5f7b22",
+    "art-source/wildlife-v2/peacock/behavior-v1/peacock.blend": "a44901bf704470f6665a0bb4bd6e2bb63c93e417e05bfb9ae726c785c948a119",
+    "art-source/wildlife-v2/peacock/behavior-v1/projection.json": "9eddb441800435742f7e224816b821befa5c6b536e4c076eee89eea00b9d9ba8",
+    "art-source/wildlife-v2/peacock/roster-v2/inputs.json": "9537ee74e2c3be8c16b3b8acf49fde310db194c7c289d362811301267944d803",
+    "art-source/wildlife-v2/peacock/roster-v2/masters.json": "2f9df8dc8a8171be843076883ce62ae22af25240f76dbea3b8c8cc9e8d25d400",
+    "art-source/wildlife-v2/peacock/roster-v2/peacock.blend": "4f18a743f08037f73bf4d24b7cf2a85d4a427fe9c52bb23286bb6cae3cbcbeae",
+    "art-source/wildlife-v2/peacock/roster-v2/projection.json": "97ccccec1317e9c2b4ebf4dd49887cd0cdbd621df0b59dc3bb7b4031ca9e5a1e",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/peacock/behavior-v1/sheet.png": "728f088cfcad7e9b902026f929777e1b692f6fb6c869e7a524419e2fa807dcd2",
+    "public/demos/wildlife-v2/peacock/behavior-v1/sprite.json": "11c129517c828bf24cae2636745e3a226486d8446e8a1f3e215fcd9717facfb5",
+    "public/demos/wildlife-v2/peacock/roster-v2/sheet.png": "80f2d5cffc3b686d3c93baec71132da287733d7403cd6e8c0cbae9c2da88cc34",
+    "public/demos/wildlife-v2/peacock/roster-v2/sprite.json": "684ab4c722c63883a375c9e2116af11f7df2ed995990ce8bfd32af0f5300cd76",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

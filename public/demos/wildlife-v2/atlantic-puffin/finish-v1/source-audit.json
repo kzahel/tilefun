@@ -1,0 +1,10 @@
+{
+  "identity": "atlantic-puffin-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/atlantic-puffin/roster-v3/atlantic-puffin.blend": "927d91202accb0d1729b2aba3300a98e78962022dd573a5d01f7e4d00ecad325"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

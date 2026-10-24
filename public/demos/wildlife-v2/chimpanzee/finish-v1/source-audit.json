@@ -1,0 +1,10 @@
+{
+  "identity": "chimpanzee-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/chimpanzee/roster-v3/chimpanzee.blend": "cd5740845b0bd4759026be1a8202f35a99ad53d1521473312fe3cb89e8c56f0f"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

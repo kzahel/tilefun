@@ -1,0 +1,10 @@
+{
+  "identity": "kinkajou-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/kinkajou/roster-v3/kinkajou.blend": "05ff5ff82144f75102162ea92c7bc9c17eba65decd989e9aac4121f3839b8067"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

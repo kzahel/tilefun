@@ -1,0 +1,10 @@
+{
+  "identity": "fossa-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/fossa/roster-v2/fossa.blend": "c8b6ed2c9936f00eb5bc71bfba9e4a671bcd5e4ef7275e3879fdfddcfede1d2b"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

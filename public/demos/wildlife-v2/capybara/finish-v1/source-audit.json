@@ -1,0 +1,10 @@
+{
+  "identity": "capybara-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/capybara/roster-v2/capybara.blend": "c7d6a75105f3187ce73a222a0d8efaf5cbb8c030b769d78229931b6f16025238"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

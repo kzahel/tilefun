@@ -1,0 +1,10 @@
+{
+  "identity": "great-hornbill-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/great-hornbill/roster-v2/great-hornbill.blend": "b00899c30569ce6f0fbcfe6efeb733e4d26212a7b24678d9674489bd18c4c455"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

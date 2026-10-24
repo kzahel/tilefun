@@ -1,0 +1,42 @@
+{
+  "identity": "cat-ginger-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "cat-ginger",
+    "name": "Ginger tabby",
+    "policy": "retained-parts",
+    "sourceImage": "demos/wildlife-v2/cat-ginger/behavior-v1/sheet.png",
+    "sourceSha256": "dac6b1ac6a1e8ec7098dff205b653b2432762700c3e7bd0ac1bcbcf7661faa64",
+    "source": "art-source/wildlife-v2/cat-ginger/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "k": "#5c382a",
+    "s": "#be7843",
+    "c": "#deaa68",
+    "h": "#efc88b",
+    "w": "#f3ead6",
+    "g": "#c8b493",
+    "e": "#a8c76a",
+    "p": "#d78e88",
+    "t": "#965632"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/cat-ginger/behavior-v1/inputs.json": "c9353366edf3df9a532b4adcb19dce73ee45f570616b78209d517c1b9f040871",
+    "art-source/wildlife-v2/cat-ginger/draft-v1/animal.blend": "152e032714174b91009e282b2285dfc91fd638b4562b03b11314e2b4fc37a88c",
+    "art-source/wildlife-v2/cat-ginger/draft-v1/masters.json": "bdc5045ce6a14cbb13218f25b712cc74654aaef06c6aa9aba61789eff8f03be9",
+    "art-source/wildlife-v2/cat-ginger/finish-v1/paint-projection.json": "251c05049b43369a5507d5e7eff2cc72164a258b2e602f91a49603f6068d6aed",
+    "art-source/wildlife-v2/cat/behavior-v1/cat.blend": "9f890894247530c0065857eca715a46b469202e151181bcbd58f6ab9b24a2167",
+    "art-source/wildlife-v2/cat/behavior-v1/projection.json": "4879670898ac1c44413fcaf582a5eace44aed78970413fab3b06220b1b9b258e",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/cat-ginger/behavior-v1/sheet.png": "dac6b1ac6a1e8ec7098dff205b653b2432762700c3e7bd0ac1bcbcf7661faa64",
+    "public/demos/wildlife-v2/cat-ginger/behavior-v1/sprite.json": "7eca97a71a299ddecddbad6dc8d16f64d0e2319f7ef9e7a77fc4ee29ea37c5cd",
+    "public/demos/wildlife-v2/cat-ginger/draft-v1/sheet.png": "ca117325a2aa18929c4dfbfb0bfd1e125a7dda18ee052af87b34715ecc2f42b9",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

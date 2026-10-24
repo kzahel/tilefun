@@ -1,0 +1,53 @@
+{
+  "identity": "kinkajou-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "kinkajou-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "dbd0e54a6f742ee32afe9f58ac6b61ccb8e8b2a4e8aa0564c6b4be4974777bea",
+      "index.html": "94c3762437ab2abc909d14cdec4f1ba904dd40364bc125d00e45d77f81150540",
+      "pixel-audit.json": "c73afef834650107f9d19115c308042448d68fb648ca2521102f86f2ddb1bb78",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "915ef7742a9ac078e94b1b7d4d9972d61c03ab7b9ffde91904cdd3cc6569037e",
+      "preview.gif": "7ea9aad90320ccaff1a03faad5aae866ec353425b31570873a747accd52016bd",
+      "scene-native.png": "e91eaa8009889672e37c0a0f128b4dc9142137031c36fa515fdba232bbcd1e19",
+      "sheet.png": "a9c5f8f1d7fc01ddf9c9630ebe4dae3da4b0d8be3b13c59702de5f1f477c186b",
+      "source-audit.json": "779ef3457ac286d90ab4e40cd678d78507e4506d8db0970998893b30dcf1788c",
+      "sprite.json": "f7fd3ba17c8308816b3ee0d629bbbd15f3caf839702351d8773e54da01b55c25"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/kinkajou/finish-v1/README.md": "be3dae4dc337f0aecb700cee2902a9a528bc3ffe5e40ba3bace697cbd5da7a99",
+    "art-source/wildlife-v2/kinkajou/finish-v1/inputs.json": "e84a677ee513b8cb8a1166614a9a04bb5246e214048f1b646ab2a4e647b04c6f",
+    "art-source/wildlife-v2/kinkajou/finish-v1/replay.json": "3af57a796398fe6aca4ac7c63569a4c2df0e27118329ca06fcb7f7954a43b4cf",
+    "art-source/wildlife-v2/kinkajou/roster-v3/inputs.json": "a45de3ff8304e985a1713856fea0ae04e239b30c255778ba857a6a1029d15513",
+    "art-source/wildlife-v2/kinkajou/roster-v3/kinkajou.blend": "05ff5ff82144f75102162ea92c7bc9c17eba65decd989e9aac4121f3839b8067",
+    "art-source/wildlife-v2/kinkajou/roster-v3/projection.json": "5651ec11002e4a2654e7f0978e6ecf93cb109c351edabd8fa156386f424fb2f4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/contact-sheet-native.png": "dbd0e54a6f742ee32afe9f58ac6b61ccb8e8b2a4e8aa0564c6b4be4974777bea",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/index.html": "94c3762437ab2abc909d14cdec4f1ba904dd40364bc125d00e45d77f81150540",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/pixel-audit.json": "c73afef834650107f9d19115c308042448d68fb648ca2521102f86f2ddb1bb78",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/preview-native.gif": "915ef7742a9ac078e94b1b7d4d9972d61c03ab7b9ffde91904cdd3cc6569037e",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/preview.gif": "7ea9aad90320ccaff1a03faad5aae866ec353425b31570873a747accd52016bd",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/scene-native.png": "e91eaa8009889672e37c0a0f128b4dc9142137031c36fa515fdba232bbcd1e19",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/sheet.png": "a9c5f8f1d7fc01ddf9c9630ebe4dae3da4b0d8be3b13c59702de5f1f477c186b",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/source-audit.json": "779ef3457ac286d90ab4e40cd678d78507e4506d8db0970998893b30dcf1788c",
+    "public/demos/wildlife-v2/kinkajou/finish-v1/sprite.json": "f7fd3ba17c8308816b3ee0d629bbbd15f3caf839702351d8773e54da01b55c25",
+    "public/demos/wildlife-v2/kinkajou/roster-v3/sheet.png": "675e2a6ca29ba3c7a7e9045fc632faba5a077bd0aa353e8cd429b37d879ce831",
+    "public/demos/wildlife-v2/kinkajou/roster-v3/sprite.json": "a1dd87a9db08f21c1ef4f9b49cb664e71f3f5ff5b3689539b240f4503f872e7b",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

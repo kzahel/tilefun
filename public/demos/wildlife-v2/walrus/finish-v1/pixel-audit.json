@@ -1,0 +1,12 @@
+{
+  "identity": "walrus-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 292,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 292,
+  "sheetSha256": "9640ad6c3f1b5216a0497a60209616eb219a65fbbba63dfc0cc9e5a5c1843406"
+}

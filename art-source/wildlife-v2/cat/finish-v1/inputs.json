@@ -1,0 +1,41 @@
+{
+  "identity": "cat-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "cat",
+    "name": "Cat",
+    "policy": "retained-parts",
+    "sourceImage": "demos/wildlife-v2/cat/behavior-v1/sheet.png",
+    "sourceSha256": "4702f4bfba2f5c83f9e1ebbb5169927cf19a5702767391609e81571198afc994",
+    "source": "art-source/wildlife-v2/cat/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "k": "#191f2b",
+    "s": "#303846",
+    "c": "#4b5663",
+    "h": "#69747e",
+    "w": "#f3f1df",
+    "g": "#b5c5bf",
+    "e": "#a8d56c",
+    "p": "#d88d92"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/cat/behavior-v1/cat.blend": "9f890894247530c0065857eca715a46b469202e151181bcbd58f6ab9b24a2167",
+    "art-source/wildlife-v2/cat/behavior-v1/inputs.json": "4aa689bcaa0372309e20812eb6398284fcc3b5048e4519794ad60b2a2cd6ab6e",
+    "art-source/wildlife-v2/cat/behavior-v1/projection.json": "4879670898ac1c44413fcaf582a5eace44aed78970413fab3b06220b1b9b258e",
+    "art-source/wildlife-v2/cat/finish-v1/paint-projection.json": "6f5366a66a97f8f92c8427962a7c9f151fa4bc45ed784c9f1b8af47ca13867c7",
+    "art-source/wildlife-v2/cat/motion-v2/cat.blend": "841d22cb2470363751e3d89c87adea53e475b20975a768308e69944f5beb2d6f",
+    "art-source/wildlife-v2/cat/motion-v2/masters.json": "0ac2a31286cb2ccbdb3cec4de56108a0c45397a57913d94eb2778792b02235e0",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/cat/behavior-v1/sheet.png": "4702f4bfba2f5c83f9e1ebbb5169927cf19a5702767391609e81571198afc994",
+    "public/demos/wildlife-v2/cat/behavior-v1/sprite.json": "c60ebc02caceb9c25cc4f0c2791e29f9b2b4e12abcbb131735bcd880968ec742",
+    "public/demos/wildlife-v2/cat/motion-v2/sheet.png": "fd883fcafa02ccb624ce732ed2e490ffce40ad51f65549365c4817320a2fd50e",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

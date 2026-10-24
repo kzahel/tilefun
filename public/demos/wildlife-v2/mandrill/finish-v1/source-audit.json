@@ -1,0 +1,10 @@
+{
+  "identity": "mandrill-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/mandrill/roster-v3/mandrill.blend": "53f2721ad8c29e6ee1917050e74400f967ee9991f66355e14897dc3ba3629431"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,12 @@
+{
+  "identity": "scorpion-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "1b7f6b8a211cdd3de288673e74f288b0edc270535b31576a6aa7127314aa09b3"
+}

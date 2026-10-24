@@ -1,0 +1,10 @@
+{
+  "identity": "komodo-dragon-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/komodo-dragon/roster-v3/komodo-dragon.blend": "f8436728238f7114f94b9b7c8bdd2087293eced63f03206c93c33e962940dfff"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

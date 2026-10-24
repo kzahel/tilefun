@@ -1,0 +1,11 @@
+{
+  "identity": "porcupine-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/porcupine/behavior-v1/porcupine.blend": "5abaaadb939471c257542c3ff20aa8214e02ff3ac488e09a88173cc244ae902d",
+    "art-source/wildlife-v2/porcupine/roster-v2/porcupine.blend": "92fcc5a171bed7c0795af379ff552d2bc03f3d6d2fd54f5371364699eeef5c0b"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

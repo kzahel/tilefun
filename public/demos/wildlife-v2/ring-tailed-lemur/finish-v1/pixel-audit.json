@@ -1,0 +1,12 @@
+{
+  "identity": "ring-tailed-lemur-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "9b69f11f08899ad66819d010a4317865bb5de3e285fdca60d8df12f549868818"
+}

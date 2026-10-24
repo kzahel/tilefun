@@ -1,0 +1,10 @@
+{
+  "identity": "quokka-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/quokka/roster-v2/quokka.blend": "ce9b926ffd6669ab568f9276b1e1472aff176446a3c270338652356174510a00"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

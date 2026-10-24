@@ -1,0 +1,10 @@
+{
+  "identity": "mongoose-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/mongoose/roster-v2/mongoose.blend": "120e3142f356292990b33d10c7d31a31b88e6f19974e73fac884c7f4c78e205e"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

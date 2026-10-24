@@ -1,0 +1,11 @@
+{
+  "identity": "raccoon-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/raccoon/behavior-v1/raccoon.blend": "eafb2e3d529ac9100ab9833c3ddc46079643687c8f1ee8e3f76ce8ee06fe149f",
+    "art-source/wildlife-v2/raccoon/roster-v2/raccoon.blend": "6682e68c925847c7c1f528bde653bcc5d79d48d2de91be98844647e578dbdd64"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

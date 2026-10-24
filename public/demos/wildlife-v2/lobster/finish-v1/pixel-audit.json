@@ -1,0 +1,12 @@
+{
+  "identity": "lobster-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "a4df00836a9e8971dbe98b8f981a26d2ccfe7cec75d9aa3909254be30af7ec70"
+}

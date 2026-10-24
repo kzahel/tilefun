@@ -1,0 +1,10 @@
+{
+  "identity": "great-blue-heron-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/great-blue-heron/roster-v3/great-blue-heron.blend": "7ba8a0d12510269d7dbf2a8b46c00932014ed2f03ef7710caef8fb4b0f53e729"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

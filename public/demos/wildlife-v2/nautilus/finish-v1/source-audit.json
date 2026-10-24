@@ -1,0 +1,10 @@
+{
+  "identity": "nautilus-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/nautilus/roster-v3/nautilus.blend": "4f59b11e6234354087f8c5c184020a5772a0b5ff4e8f30f117cb113a2029af5a"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

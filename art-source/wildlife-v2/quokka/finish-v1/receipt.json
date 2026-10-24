@@ -1,0 +1,53 @@
+{
+  "identity": "quokka-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "quokka-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "1eb90b9cb2aed06dee77a98081a8f3b8640621ed36b376dbd6a89519c7e6912a",
+      "index.html": "75e39673cbbd9345e960d1a2fb1170e7422b3c233582c4fadb87b9fce3ee4af0",
+      "pixel-audit.json": "bfd311a22749b66c8c9478fb886e2961ee1612913e95fd773cae82c0cea0571e",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "793cd33f7287f158be0c72c231e9fb9ab2def5a66a495126b03428b33f632bea",
+      "preview.gif": "767505f58c3200f9e2c15eb375d728509af9e2255f15bdbaf5e72d3c4ee49503",
+      "scene-native.png": "6bf2e2198819381dd891d4bdb87fa323842ee822718e8fd1f1a48a42b39c3749",
+      "sheet.png": "f761176ffe280e1fa710504c6578e31562e1fbcd2c4df2f65eebddfb95b0adeb",
+      "source-audit.json": "77e4732eef993eb9c454f92c8b77459add1fd07e65e25b3c06f52a3d112161eb",
+      "sprite.json": "f5e1fac240dce9a1ae71ee7f9dd07bbcbaed867a35b245b5b3448a6e2c814c30"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/quokka/finish-v1/README.md": "87ea166de6e249952065d7ca4c506634350a12cc3b8a648058d06b3bbc3a1c94",
+    "art-source/wildlife-v2/quokka/finish-v1/inputs.json": "60b4a1342c8fb85c3c20d7df7e2fbe804dd5e3e7bf8fcce242995479cd07e491",
+    "art-source/wildlife-v2/quokka/finish-v1/replay.json": "08f2618efb8f415360594e8a252c488681fc26cd7fd1e4a64b946d6c70153cbf",
+    "art-source/wildlife-v2/quokka/roster-v2/inputs.json": "fff0ed6166a45d60a89f76b70af7579e253e87877485373a5854945a75290eac",
+    "art-source/wildlife-v2/quokka/roster-v2/projection.json": "450a6c1a892b55db07e862fbbedf57ead808885f473369fba0d311a6f73f2868",
+    "art-source/wildlife-v2/quokka/roster-v2/quokka.blend": "ce9b926ffd6669ab568f9276b1e1472aff176446a3c270338652356174510a00",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/quokka/finish-v1/contact-sheet-native.png": "1eb90b9cb2aed06dee77a98081a8f3b8640621ed36b376dbd6a89519c7e6912a",
+    "public/demos/wildlife-v2/quokka/finish-v1/index.html": "75e39673cbbd9345e960d1a2fb1170e7422b3c233582c4fadb87b9fce3ee4af0",
+    "public/demos/wildlife-v2/quokka/finish-v1/pixel-audit.json": "bfd311a22749b66c8c9478fb886e2961ee1612913e95fd773cae82c0cea0571e",
+    "public/demos/wildlife-v2/quokka/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/quokka/finish-v1/preview-native.gif": "793cd33f7287f158be0c72c231e9fb9ab2def5a66a495126b03428b33f632bea",
+    "public/demos/wildlife-v2/quokka/finish-v1/preview.gif": "767505f58c3200f9e2c15eb375d728509af9e2255f15bdbaf5e72d3c4ee49503",
+    "public/demos/wildlife-v2/quokka/finish-v1/scene-native.png": "6bf2e2198819381dd891d4bdb87fa323842ee822718e8fd1f1a48a42b39c3749",
+    "public/demos/wildlife-v2/quokka/finish-v1/sheet.png": "f761176ffe280e1fa710504c6578e31562e1fbcd2c4df2f65eebddfb95b0adeb",
+    "public/demos/wildlife-v2/quokka/finish-v1/source-audit.json": "77e4732eef993eb9c454f92c8b77459add1fd07e65e25b3c06f52a3d112161eb",
+    "public/demos/wildlife-v2/quokka/finish-v1/sprite.json": "f5e1fac240dce9a1ae71ee7f9dd07bbcbaed867a35b245b5b3448a6e2c814c30",
+    "public/demos/wildlife-v2/quokka/roster-v2/sheet.png": "2e1b2507d0476b88e422112de470712d3b121e716f6c22ee4b66681658496ed5",
+    "public/demos/wildlife-v2/quokka/roster-v2/sprite.json": "ece0c877e59e917b9da7165ae51ecb882cae9cea26a2985c2f0ed26ddd8a0443",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "great-hornbill-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "2444b734488892f4dc04623ffedab5eb8888999d31656b05ba5533aab1ac0917",
+    "index.html": "190a82c8a260594357534474b312ad9d8a5bdcf64fdf4cc9d6dcf01c1facfb99",
+    "pixel-audit.json": "4ac9e16a79ed15f638559a31097129af7a5a60861411d38b3cf7e55c09d7e739",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "d13eb98b3839936d33785f465f4c191bd5aa2d1cf33ab73a5c99c358bdeef7dd",
+    "preview.gif": "c18369327254828f7d55b47be610af5c6898f08fb0191ebca71237ea8775cbc0",
+    "scene-native.png": "ecd5ceb7057e30ab606ebe1ea540a5504167d67ff29e592d163ff50bdb725de9",
+    "sheet.png": "cf1c8728fc6375007a36e04bbb5572badfa7afec51a04119df43aa509199d059",
+    "source-audit.json": "5a65e196dbec37b02a8470b869773cbd5295880bca186c70e4a440d82a9324ec",
+    "sprite.json": "25330338e7ff209889fa681fae187406ced3555cb94f9617a08f0b24007ad1ca"
+  }
+}

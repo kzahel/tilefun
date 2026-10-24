@@ -1,0 +1,10 @@
+{
+  "identity": "hawk-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/hawk/roster-v3/hawk.blend": "48cc1a712b5cc2d095f179276dc7e3c3d2568ddab6dd6d9907c651130a395017"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "sea-turtle-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "sea-turtle-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "5db1e127e82ddb0380b1a6bca2faab6f7e1b7b262a7c37b9ee0c79abfa445289",
+      "index.html": "c522ac052bd73c7717d59191e9286e6eff9510aad002ae40d8ba6733411a7583",
+      "pixel-audit.json": "ac66be83c3790004c330f91a13b037b125ac9f613b2f33d699c5962e80080f49",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "4fdaffca92f9df6f0f6216b55ec2ef3aa02d6526e73c2dea4dc1939a79bdc41a",
+      "preview.gif": "038e23a6a4dfb90a605f6ff5a80d3f356a07b0162c594dd6bc514babeac23e5c",
+      "scene-native.png": "fd7be0ef11417a27ad9ca3e1ab9c58618c03a8e72b94621d7056a92e449f8a68",
+      "sheet.png": "4a98b9498abfe20a17d78b44ba77585196d311be27d1f8f95152442afe0cb2f4",
+      "source-audit.json": "662622e7a57b1c46887dc6bd48531106a0d268d1bf89542c4c04056f9324adef",
+      "sprite.json": "b73f60980315ebf9f443d01340b2e61ca396395a53fb09537d533af189dab360"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/sea-turtle/finish-v1/README.md": "4188126f9d783f8e6132224de4328a7db60ed935177160f9b517733e14263d36",
+    "art-source/wildlife-v2/sea-turtle/finish-v1/inputs.json": "f99dbbb3f1234ef812387bc2f1ea746209919de3bde6fd3a62d17938e79ca228",
+    "art-source/wildlife-v2/sea-turtle/finish-v1/replay.json": "2c09897d3c690c1e6f3d27eab79e3ef37f1435b1ec675a5bc76dec3bc72fd972",
+    "art-source/wildlife-v2/sea-turtle/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/sea-turtle/roster-v2/projection.json": "50a213df208db533515cdb101687e6bb5352154da6ffd8db45ff290fe44b3e30",
+    "art-source/wildlife-v2/sea-turtle/roster-v2/sea-turtle.blend": "3dee930b16dc59aaec984c84c271b3bd701cd20fdc2c6f61b7023e2f1667cf56",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/contact-sheet-native.png": "5db1e127e82ddb0380b1a6bca2faab6f7e1b7b262a7c37b9ee0c79abfa445289",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/index.html": "c522ac052bd73c7717d59191e9286e6eff9510aad002ae40d8ba6733411a7583",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/pixel-audit.json": "ac66be83c3790004c330f91a13b037b125ac9f613b2f33d699c5962e80080f49",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/preview-native.gif": "4fdaffca92f9df6f0f6216b55ec2ef3aa02d6526e73c2dea4dc1939a79bdc41a",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/preview.gif": "038e23a6a4dfb90a605f6ff5a80d3f356a07b0162c594dd6bc514babeac23e5c",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/scene-native.png": "fd7be0ef11417a27ad9ca3e1ab9c58618c03a8e72b94621d7056a92e449f8a68",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/sheet.png": "4a98b9498abfe20a17d78b44ba77585196d311be27d1f8f95152442afe0cb2f4",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/source-audit.json": "662622e7a57b1c46887dc6bd48531106a0d268d1bf89542c4c04056f9324adef",
+    "public/demos/wildlife-v2/sea-turtle/finish-v1/sprite.json": "b73f60980315ebf9f443d01340b2e61ca396395a53fb09537d533af189dab360",
+    "public/demos/wildlife-v2/sea-turtle/roster-v2/sheet.png": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6",
+    "public/demos/wildlife-v2/sea-turtle/roster-v2/sprite.json": "40bc0860a2df3f7764c5d133eb0f0b1cb792cdc04434176ddacecdbcd5237759",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

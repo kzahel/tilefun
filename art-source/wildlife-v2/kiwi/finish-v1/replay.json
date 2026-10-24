@@ -1,0 +1,17 @@
+{
+  "identity": "kiwi-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "dcc3c41ab61a3cc93abc9d8e446866affaaa08e9be0c1f5a8c6c82603864700a",
+    "index.html": "14118580e973f82ab79b46280bc3f78f67d377f24b3e88e01f83c6930b10868b",
+    "pixel-audit.json": "98a2e976c97bf7deb13354779de7b0c757a8e5607d424145f9613eda6e4e8dc7",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "917349a9ee5529acdc1cab336a6afcdada3b92288ea13790e53a38dce0fd21ac",
+    "preview.gif": "06f986bfb3264490e2bd304da73ab963980d7dd5956ba614d71f3ee36a61703e",
+    "scene-native.png": "13582795c931936433c710dae6e97b8a660b16e36e548fd01e02bd46917addc5",
+    "sheet.png": "09be38eae9167ee6fa5d78c019ff61f261465d75c5f0592e1d6fcea125a254b9",
+    "source-audit.json": "daa53e16baf320cddabe6a63a933efbc0173d606444581b861e73d5888d3bb5a",
+    "sprite.json": "119bee9a47025a4cac42a4f3d60115d0a21e003ef22b3c65b47e43a77fd9abc2"
+  }
+}

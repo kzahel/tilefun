@@ -1,0 +1,12 @@
+{
+  "identity": "kiwi-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "09be38eae9167ee6fa5d78c019ff61f261465d75c5f0592e1d6fcea125a254b9"
+}

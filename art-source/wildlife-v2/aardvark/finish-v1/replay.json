@@ -1,0 +1,17 @@
+{
+  "identity": "aardvark-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "3b0598c215d8662d3cffa6a13267f1a7120a912b4e50a5e3520e9b1a82e44cf5",
+    "index.html": "8aecba8c0404b31e5bf694ca6737ddfe5496b8360e3dce5eeb7dcd70aac2baad",
+    "pixel-audit.json": "ec9af289f523f98e42e5fb08f3fcf6eb642085bad70b83e34411952d0dd1fc13",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "f3dc70a06d53a36b4d8f61edad4dbe6dd263e400c26d2c4754dfbd7d8cfdc0fc",
+    "preview.gif": "ab356f0fe0f8fccc41991aa4e7e0b30a4b2941c80a99bae5c9b02ca28fe29981",
+    "scene-native.png": "0b0c6a3b9034de5fe2dcc2f018eac1c53a2a46fbeb94ad27c997e6d9866f026f",
+    "sheet.png": "5e0e4cb6ce36b7749ef6ec2bb429ead11e102cca726081b8ddc2f8c0d592f76e",
+    "source-audit.json": "b978246a281992bb5a81cd15db7bdd2f583bdd36dcd6aba39d9e40f35a8273bb",
+    "sprite.json": "c4a1e24bcec66eed466ceaf0ba831250ffb005f3c30b496bed6a81c5fa32bbb6"
+  }
+}

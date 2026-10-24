@@ -1,0 +1,17 @@
+{
+  "identity": "ring-tailed-lemur-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "feb3da8c5472a148b23667b674f731fbf0a0c119351c8d044045ec08272654f4",
+    "index.html": "b2467e14d357dd731c25ee983a3eb22f3bd3e0b05366dfb037c41b00c814d907",
+    "pixel-audit.json": "e291f0af591766d4093d9217a6af5ffe38a38f7b03d57b466e6c5104baac08e2",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "0c8aabee3a0cde2fcb79b586ab838ab03740e87cfefdfbf77f1a7ab03eba9fdd",
+    "preview.gif": "d1f116720a22f9b499a902e2cfe049c5f0c451db34756c931099e84c4673fb14",
+    "scene-native.png": "64f67c6f65aea5085d6c60567353083a35428cc4ee76c57e9690f76f1c1ed2c5",
+    "sheet.png": "9b69f11f08899ad66819d010a4317865bb5de3e285fdca60d8df12f549868818",
+    "source-audit.json": "5ed04aa8313b93b146fd910e0474451772fc897da28d9d2130f25f7a1c5c790e",
+    "sprite.json": "185afc57bbf7d6d59351d64b166c0d6dbfe77fce15fc60f6e40a690671e25844"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "texas-horned-lizard-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "90b69c2f20613c6cee37ef16a9ae17ad7ea63be7aafd980737aa537a857099d1",
+    "index.html": "eed052b27be8579fef6dfd1dd6e322e7e13ea80472934190732a4f82eeb77652",
+    "pixel-audit.json": "682217ee28f7a8adccffbd8238738745057a8f3f1b3a6f699352f1594b48a39e",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "49d4bfdafe32d0ee0c9876703d23d56179a45ea8b493bcbc4a6fb8efb660bd1b",
+    "preview.gif": "f86730a6710bcbb9aef417c07c15a2f218a8efd7f53256f58e7ac4017c6afb9d",
+    "scene-native.png": "6c3aaad06b8e771308192320137f08383e00fa3fdc315f1b1c65ef3882c823c5",
+    "sheet.png": "efb2526430447952bac109c05ebce8a3dd23dd96e90c7760a19f71a17956f6f2",
+    "source-audit.json": "116aa78e1d841e62f57a084aa82248fb2a063519af3a8215580e06c5ab75393f",
+    "sprite.json": "6abef0384dce8c3947c2ba29e9fe95636b7a28d000d43a7ad5d65b1b7c8a11e7"
+  }
+}

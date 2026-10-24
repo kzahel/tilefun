@@ -1,0 +1,10 @@
+{
+  "identity": "mouse-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/mouse/roster-v2/mouse.blend": "b802fe94c3c2deef142728d1050616de3eefb1ec4214e1d6b87f34c3f6684200"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

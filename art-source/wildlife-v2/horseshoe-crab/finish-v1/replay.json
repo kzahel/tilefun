@@ -1,0 +1,17 @@
+{
+  "identity": "horseshoe-crab-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "8865ae391c9a402b755d693bd1cf48038ca68cad357fc6b715420713fd5632c7",
+    "index.html": "d5f8e6053cc6d1f8ef805b63c15c91d59399782dc59bc7852eae6ef4ae9a0dde",
+    "pixel-audit.json": "a7f0410ecc7289f3c45ec39e96039d1d6b2e1007205a954a5eb71a233c087cd9",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "62b098076cd26396f3d46d9500a08a319d51c9b4ff37a55a726e1d598eaa1b67",
+    "preview.gif": "29f3e7cf1751b203be34ffbe93d53712ab1a1d4266c7efd53387a9cb664cbe33",
+    "scene-native.png": "72a49f60d62045fe045d46daaca64ab8699a890a2d9f5ae6be468ee0501b74b2",
+    "sheet.png": "0a3d81299f299d966fc50cea0c29d6c9fc571d524357d201a9e90598f29baae6",
+    "source-audit.json": "56a8f96f9423eeaf744243e5a49cc69c06a425c656fb09951e13af93320be772",
+    "sprite.json": "09a515c6e52d72b1f2872f4dbb3c0409d92f86ebff83414565030b643ecfb7e3"
+  }
+}

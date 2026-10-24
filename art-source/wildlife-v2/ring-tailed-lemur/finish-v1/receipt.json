@@ -1,0 +1,53 @@
+{
+  "identity": "ring-tailed-lemur-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "ring-tailed-lemur-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "feb3da8c5472a148b23667b674f731fbf0a0c119351c8d044045ec08272654f4",
+      "index.html": "b2467e14d357dd731c25ee983a3eb22f3bd3e0b05366dfb037c41b00c814d907",
+      "pixel-audit.json": "e291f0af591766d4093d9217a6af5ffe38a38f7b03d57b466e6c5104baac08e2",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "0c8aabee3a0cde2fcb79b586ab838ab03740e87cfefdfbf77f1a7ab03eba9fdd",
+      "preview.gif": "d1f116720a22f9b499a902e2cfe049c5f0c451db34756c931099e84c4673fb14",
+      "scene-native.png": "64f67c6f65aea5085d6c60567353083a35428cc4ee76c57e9690f76f1c1ed2c5",
+      "sheet.png": "9b69f11f08899ad66819d010a4317865bb5de3e285fdca60d8df12f549868818",
+      "source-audit.json": "5ed04aa8313b93b146fd910e0474451772fc897da28d9d2130f25f7a1c5c790e",
+      "sprite.json": "185afc57bbf7d6d59351d64b166c0d6dbfe77fce15fc60f6e40a690671e25844"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/ring-tailed-lemur/finish-v1/README.md": "d6eec92c212c86dd910cd54ba65fa0e1fe9f52982cf4aa16cfe2599fdf2f0f81",
+    "art-source/wildlife-v2/ring-tailed-lemur/finish-v1/inputs.json": "14367e6881dcb06f158556d70bf9705abf0515954d5fa5183658630a866a7460",
+    "art-source/wildlife-v2/ring-tailed-lemur/finish-v1/replay.json": "5b61b655742bf30da5d43511d698a7d10c878fe9178bce25ed803a89c7edfb2d",
+    "art-source/wildlife-v2/ring-tailed-lemur/roster-v3/inputs.json": "fae2aadba82380eb543281be2bc1943711a5dc9d680f37fff6edddcd82e2edcf",
+    "art-source/wildlife-v2/ring-tailed-lemur/roster-v3/projection.json": "eb2faac5f561ccaa145db8606cf1c57d8d971a8b8b045cd78bef11a505feb045",
+    "art-source/wildlife-v2/ring-tailed-lemur/roster-v3/ring-tailed-lemur.blend": "b5a191bfca3303d3b47dbb76b0bde0ee59ddb94e17a6ff03bdbd56021275ebd7",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/contact-sheet-native.png": "feb3da8c5472a148b23667b674f731fbf0a0c119351c8d044045ec08272654f4",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/index.html": "b2467e14d357dd731c25ee983a3eb22f3bd3e0b05366dfb037c41b00c814d907",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/pixel-audit.json": "e291f0af591766d4093d9217a6af5ffe38a38f7b03d57b466e6c5104baac08e2",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/preview-native.gif": "0c8aabee3a0cde2fcb79b586ab838ab03740e87cfefdfbf77f1a7ab03eba9fdd",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/preview.gif": "d1f116720a22f9b499a902e2cfe049c5f0c451db34756c931099e84c4673fb14",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/scene-native.png": "64f67c6f65aea5085d6c60567353083a35428cc4ee76c57e9690f76f1c1ed2c5",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/sheet.png": "9b69f11f08899ad66819d010a4317865bb5de3e285fdca60d8df12f549868818",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/source-audit.json": "5ed04aa8313b93b146fd910e0474451772fc897da28d9d2130f25f7a1c5c790e",
+    "public/demos/wildlife-v2/ring-tailed-lemur/finish-v1/sprite.json": "185afc57bbf7d6d59351d64b166c0d6dbfe77fce15fc60f6e40a690671e25844",
+    "public/demos/wildlife-v2/ring-tailed-lemur/roster-v3/sheet.png": "2d7a78a2bb2352e249f4648641d25e4f2dea4ab0464e60b0aea51b8a7b31dd0f",
+    "public/demos/wildlife-v2/ring-tailed-lemur/roster-v3/sprite.json": "5d3f057769d09c3d35e0f19001ce0167fd04a28407533e0a1d024d226dbf6b67",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

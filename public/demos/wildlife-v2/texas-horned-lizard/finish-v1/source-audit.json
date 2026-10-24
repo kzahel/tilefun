@@ -1,0 +1,10 @@
+{
+  "identity": "texas-horned-lizard-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/texas-horned-lizard/roster-v2/texas-horned-lizard.blend": "35c06e16f8a1cd3c167eb473462a89bc001dde9ea2965c3967809cd4ed71c4ba"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

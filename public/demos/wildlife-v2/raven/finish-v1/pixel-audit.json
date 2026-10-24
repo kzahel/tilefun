@@ -1,0 +1,12 @@
+{
+  "identity": "raven-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 268,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 268,
+  "sheetSha256": "d17ac5128eeb18585076a3ad8523b137ee2869b82dcd3a3adb92b9d1f6838d09"
+}

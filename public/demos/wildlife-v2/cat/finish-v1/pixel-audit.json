@@ -1,0 +1,13 @@
+{
+  "identity": "cat-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "retained-parts",
+  "surfaceCells": 0,
+  "retainedPartCells": 176,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "nativeCellsUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 340,
+  "sheetSha256": "bba324df1ecdfe17b61dc4e24bcb43664b540fb2f3dc15b1ae7479f5944ef061"
+}

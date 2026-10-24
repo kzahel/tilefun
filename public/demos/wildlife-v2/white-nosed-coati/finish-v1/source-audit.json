@@ -1,0 +1,10 @@
+{
+  "identity": "white-nosed-coati-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/white-nosed-coati/roster-v2/white-nosed-coati.blend": "80ae01cd767101cf9c4fb0798e05c5cf1157201eee463146d8b3bc385c63ac6e"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

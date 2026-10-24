@@ -1,0 +1,53 @@
+{
+  "identity": "komodo-dragon-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "komodo-dragon-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "e531a2d05a45a1ed49bcc596838d088dcf5eb537b1cd5c79d1e36c4600012c48",
+      "index.html": "484cc56c2ac3d4d91ca623aab42687fbfcab7ba44070e98543b56f848c903e8e",
+      "pixel-audit.json": "6121c024850083f7435bc8f72a1ef1086c9390f9c833542e649445592edd9643",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "5bf90dfa04b92e652e6bdb21c836e1c4777b14acdf189e9c6f554f50216b73aa",
+      "preview.gif": "7cdca664ead2f6c653cd89adaf2890c7c14ebaedb936e62704c6b6ead80772a6",
+      "scene-native.png": "531db22674f1b6ac58062055021075ca5249763a0a4eb6424f47ee35bb8c7bb8",
+      "sheet.png": "2e8444285934ca8fc48351a397054f7564d3df1711b8f7c26add79c605e29cf4",
+      "source-audit.json": "7a3a41574bcad7bf8722c08a2c019d4bfb4565f0e2e4b05a9f4183438622fbc6",
+      "sprite.json": "53f2f03f88697c9dc0515793a3de8ef1ae81bdc72949a47e531d15ccda44017b"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/komodo-dragon/finish-v1/README.md": "ed21c5fa89ce433a1074d324a08f1b142ff00d40e641d446e5cb1fb3fb226810",
+    "art-source/wildlife-v2/komodo-dragon/finish-v1/inputs.json": "037af0d0a82d10e8528d3ed1b3079bc4705951f5593e981d5f5ce76f0b9f7c7d",
+    "art-source/wildlife-v2/komodo-dragon/finish-v1/replay.json": "c0c6093da19cf2427bb447101287bb76929c31ce46d22cf52de8315090f47e81",
+    "art-source/wildlife-v2/komodo-dragon/roster-v3/inputs.json": "f48301375f1437a82e941c7a67c238f3d9f4e479c07901034018691a19e62638",
+    "art-source/wildlife-v2/komodo-dragon/roster-v3/komodo-dragon.blend": "f8436728238f7114f94b9b7c8bdd2087293eced63f03206c93c33e962940dfff",
+    "art-source/wildlife-v2/komodo-dragon/roster-v3/projection.json": "39dec3f021724cb68a4a27e9eaae41e774d044a2d3416c82a24b5998883a39df",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/contact-sheet-native.png": "e531a2d05a45a1ed49bcc596838d088dcf5eb537b1cd5c79d1e36c4600012c48",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/index.html": "484cc56c2ac3d4d91ca623aab42687fbfcab7ba44070e98543b56f848c903e8e",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/pixel-audit.json": "6121c024850083f7435bc8f72a1ef1086c9390f9c833542e649445592edd9643",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/preview-native.gif": "5bf90dfa04b92e652e6bdb21c836e1c4777b14acdf189e9c6f554f50216b73aa",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/preview.gif": "7cdca664ead2f6c653cd89adaf2890c7c14ebaedb936e62704c6b6ead80772a6",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/scene-native.png": "531db22674f1b6ac58062055021075ca5249763a0a4eb6424f47ee35bb8c7bb8",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/sheet.png": "2e8444285934ca8fc48351a397054f7564d3df1711b8f7c26add79c605e29cf4",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/source-audit.json": "7a3a41574bcad7bf8722c08a2c019d4bfb4565f0e2e4b05a9f4183438622fbc6",
+    "public/demos/wildlife-v2/komodo-dragon/finish-v1/sprite.json": "53f2f03f88697c9dc0515793a3de8ef1ae81bdc72949a47e531d15ccda44017b",
+    "public/demos/wildlife-v2/komodo-dragon/roster-v3/sheet.png": "12fdc2f63b9a42b96ecae5e0bded804314139eb9fca51987f74e682622f68ce4",
+    "public/demos/wildlife-v2/komodo-dragon/roster-v3/sprite.json": "fb2877c45463e60e745e25e251b7f878ac7ebebc4bf60b20d1561a6dab9656f2",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

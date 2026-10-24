@@ -1,0 +1,12 @@
+{
+  "identity": "bee-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 228,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 228,
+  "sheetSha256": "c761ad52b364cd7350ab16097c54493ef1be942cfbdb7081f3e6c2478c34934d"
+}

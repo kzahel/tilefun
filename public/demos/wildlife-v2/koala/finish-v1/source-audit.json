@@ -1,0 +1,10 @@
+{
+  "identity": "koala-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/koala/roster-v2/koala.blend": "8d392a31db3f054ea2e8a0c9f04165bf8df850ee7695521ae150cade30ac9c38"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

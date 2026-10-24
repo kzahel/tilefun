@@ -1,0 +1,53 @@
+{
+  "identity": "gaboon-viper-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "gaboon-viper-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "d62490e09db3920f1c3c42e79cd644febb55cf37125f31e9356f3e3fb5ec6842",
+      "index.html": "14485c794680d2c86943db200a826b19e91ec027746ad8b2f73b9b1168e0b36a",
+      "pixel-audit.json": "a30474b1f9f3991d8633a829dc5dd0e2966390be380dd3b51bcdd2461052cbce",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "2ec9fee114eab07311416ba547cd8c8346c4d820674f00037ad3a93c43ea17c7",
+      "preview.gif": "dc87edd1c4e54a8b9f5b26c2ae9503ca865155a52fb7c8f8fed483df09969fe8",
+      "scene-native.png": "0d6a7a1eb081dd51cf3bfea54321ba264dde69e526a084220b5afd6706bd5f04",
+      "sheet.png": "2633e351f08302e94a338ff346cfba346992e435bca9379e4aedb4d7171560ef",
+      "source-audit.json": "1e91438a1946ab9e485924e41a2fe7f3bb19d61d478df787bf085debcfe40d6a",
+      "sprite.json": "118ecfd4293e12de2e93737cda77c00562e029af2387fdd7786b6f4bac0ff696"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/gaboon-viper/finish-v1/README.md": "900b08831d4722e490e08916241b69730ba184f1a80ea95eb9e3dd3305d6b288",
+    "art-source/wildlife-v2/gaboon-viper/finish-v1/inputs.json": "fdc8e544dff9623273be820531f60983184af3c159c252ba8174e0a086680b5d",
+    "art-source/wildlife-v2/gaboon-viper/finish-v1/replay.json": "9d9267d9c87b91ddcd6c215d3ca9ac45eaba4b8dfd67224398b2ac6f8233b0e4",
+    "art-source/wildlife-v2/gaboon-viper/roster-v3/gaboon-viper.blend": "8b9d79065549456d3d3a9881c334f3a56779263693b2e86293c47a5472520200",
+    "art-source/wildlife-v2/gaboon-viper/roster-v3/inputs.json": "5d8e58f0455cd11b7be03c42daabd00ffb4e2d35719d4513dd21a85b6c06e209",
+    "art-source/wildlife-v2/gaboon-viper/roster-v3/projection.json": "c8ae7610cb4f39b792f40d1618c08e6381ab2ec9a0b62ae22a56f5f7934d1b66",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/contact-sheet-native.png": "d62490e09db3920f1c3c42e79cd644febb55cf37125f31e9356f3e3fb5ec6842",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/index.html": "14485c794680d2c86943db200a826b19e91ec027746ad8b2f73b9b1168e0b36a",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/pixel-audit.json": "a30474b1f9f3991d8633a829dc5dd0e2966390be380dd3b51bcdd2461052cbce",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/preview-native.gif": "2ec9fee114eab07311416ba547cd8c8346c4d820674f00037ad3a93c43ea17c7",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/preview.gif": "dc87edd1c4e54a8b9f5b26c2ae9503ca865155a52fb7c8f8fed483df09969fe8",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/scene-native.png": "0d6a7a1eb081dd51cf3bfea54321ba264dde69e526a084220b5afd6706bd5f04",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/sheet.png": "2633e351f08302e94a338ff346cfba346992e435bca9379e4aedb4d7171560ef",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/source-audit.json": "1e91438a1946ab9e485924e41a2fe7f3bb19d61d478df787bf085debcfe40d6a",
+    "public/demos/wildlife-v2/gaboon-viper/finish-v1/sprite.json": "118ecfd4293e12de2e93737cda77c00562e029af2387fdd7786b6f4bac0ff696",
+    "public/demos/wildlife-v2/gaboon-viper/roster-v3/sheet.png": "cee144235212ad79da58fe460f03cb54ec08b1b93fe46bd05e36430dc8ab8816",
+    "public/demos/wildlife-v2/gaboon-viper/roster-v3/sprite.json": "88d4641dabd622aca50fd59160cb99729500af29da0337cc4d00c3f638d5fc77",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

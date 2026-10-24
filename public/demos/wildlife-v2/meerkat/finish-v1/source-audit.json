@@ -1,0 +1,11 @@
+{
+  "identity": "meerkat-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/meerkat/behavior-v1/meerkat.blend": "84064901565662d96bcf3529dd49b08d0782ed9efb3efa56864cc536d914009f",
+    "art-source/wildlife-v2/meerkat/roster-v3/meerkat.blend": "709c6866fd87675e4e01545710c2958f54348fcaf43efcb71395012eaf31ffb5"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

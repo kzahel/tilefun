@@ -1,0 +1,17 @@
+{
+  "identity": "starfish-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "0f18d951512f28d2aa0cad647ea9a83280dd7e74c043b0e1b4d6f45eb399cb2e",
+    "index.html": "1c0a497bd050a798e9ccf9d964b31ed64080985ea2215e8d192ec1a34bd2027a",
+    "pixel-audit.json": "19287c290f8704b28d6738e73374ebfad626aafca11545c860be9a5375d667d6",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "d111e657df74db122b14edc4148c5c058f4bde5bc0c8ca103ed3cb7f2dc8b0b4",
+    "preview.gif": "04b8d3406818a7310cd35ce76bef27dd59e5b56e9a650f038fc0d776b92e85c5",
+    "scene-native.png": "7459b4e6942804bd2e460be9cb07c094c70d2457c43b417857960562e120040c",
+    "sheet.png": "0621b14ba6c86987eb1f028268c62e035e933f303d7bf091e37f1c3dd6a2f76f",
+    "source-audit.json": "f59f9f822c14e7fcf71e879914821b9a8e318a9890a8a86f03db73a56a3c4b24",
+    "sprite.json": "ed18dd1131f3a4cb4dad4f201c5c610624fe8930592bf79833b59b4a9738cdbd"
+  }
+}

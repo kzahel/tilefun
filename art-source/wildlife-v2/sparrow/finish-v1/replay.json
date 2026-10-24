@@ -1,0 +1,17 @@
+{
+  "identity": "sparrow-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "676667fe892b7a6ac55b87a05a0f059d0e3f9e898649a5da864ea496f729315e",
+    "index.html": "cad6bfb331eb5ce34f01a64215134b6d7b90b7f3b119097a59c3fccb655c6da4",
+    "pixel-audit.json": "f96d7b1021f6f60e3d9ff4cef6c54aee1a6a580cc2dc68b192c2593e09890501",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "cc4b6b23203bcc7bee3fd124d809947b3c343ddbb14ad2f79d63b16c10ec0403",
+    "preview.gif": "08463dd387e16f6d0046a321375235adb105ab927ea9b2c79629dd3eaf216feb",
+    "scene-native.png": "cf032fcd904e32d0bb4459518cd7dff219ae8689e4d5523a11c0682cb49997eb",
+    "sheet.png": "3e995376f1f4b80ca2738358b83f898641a40348cd854c5e899e6d303305f0bb",
+    "source-audit.json": "63d7f3a9ec3f54409ac989c772192c49b67e2b627596bf1ea9638bdcb6a16540",
+    "sprite.json": "71a971c3817dbed8271151776a7069abf6f4dcb8a9863d9ee6bce5a09c54a6a7"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "identity": "capuchin-monkey-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "capuchin-monkey",
+    "name": "Capuchin monkey",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/capuchin-monkey/behavior-v1/sheet.png",
+    "sourceSha256": "ee5a78b0fafe8211f6287c3d0bf0340028ef4aca7f861d08420f5f42e4b4272a",
+    "source": "art-source/wildlife-v2/capuchin-monkey/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#67503a",
+    "H": "#a58b60",
+    "C": "#e7d9b5",
+    "M": "#4e4034",
+    "E": "#d8be94",
+    "K": "#292d2c",
+    "N": "#252927",
+    "T": "#bf6052"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/capuchin-monkey/behavior-v1/capuchin-monkey.blend": "159afa225952249b28a601b1827e17aea2a3d2b01802c7fd90fa879ab19f846c",
+    "art-source/wildlife-v2/capuchin-monkey/behavior-v1/inputs.json": "9c1ae55c96d3cd46279fa39b30f383358b940c58e91f47cd89971e619b4c53f5",
+    "art-source/wildlife-v2/capuchin-monkey/behavior-v1/projection.json": "abb58429ff0504967bb7d184e86b072b3d385140c79592650cd3dc074673c6d4",
+    "art-source/wildlife-v2/capuchin-monkey/roster-v3/capuchin-monkey.blend": "1bd4d070ddf9283b7bbc0ecfb4d70b6956cf6fbeddabf11ce8d46696fb65b09d",
+    "art-source/wildlife-v2/capuchin-monkey/roster-v3/inputs.json": "fae2aadba82380eb543281be2bc1943711a5dc9d680f37fff6edddcd82e2edcf",
+    "art-source/wildlife-v2/capuchin-monkey/roster-v3/projection.json": "b6d3b454516e89053a8ae5f21653bb2a0542c0cb6e80fd5cf8ed0543f8e7bddb",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/capuchin-monkey/behavior-v1/sheet.png": "ee5a78b0fafe8211f6287c3d0bf0340028ef4aca7f861d08420f5f42e4b4272a",
+    "public/demos/wildlife-v2/capuchin-monkey/behavior-v1/sprite.json": "72845213c25bf63cfbd9591a075a67fa2386f81eefbd06a32423aee62ae3357e",
+    "public/demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png": "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26",
+    "public/demos/wildlife-v2/capuchin-monkey/roster-v3/sprite.json": "fa3b784a4fa11b7b1980301b29644f5cf893c50660968073f95d020709e0bccc",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

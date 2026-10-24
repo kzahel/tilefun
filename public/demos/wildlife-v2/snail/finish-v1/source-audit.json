@@ -1,0 +1,10 @@
+{
+  "identity": "snail-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/snail/roster-v3/snail.blend": "8e31b00ac17068af8e3f3a8e4dea297875fde126d76ad7fb297ac8eadef38f64"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "hamster-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/hamster/roster-v2/hamster.blend": "f7066fd5f42bb3d34052e67fd1d56be278af37affa244916de2dd8b12040159c"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "eagle-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/eagle/roster-v3/eagle.blend": "bc579e65c678d5f270b8bc03976cbf943cb892367c7614e84f81b895ddb83618"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

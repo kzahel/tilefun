@@ -1,0 +1,10 @@
+{
+  "identity": "praying-mantis-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/praying-mantis/roster-v3/praying-mantis.blend": "8bd916f0126c4a678641fd3856acbdf5ba59a9d59c86ced3be241837f452d9a6"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

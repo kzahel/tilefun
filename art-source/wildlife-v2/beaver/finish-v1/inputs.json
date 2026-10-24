@@ -1,0 +1,44 @@
+{
+  "identity": "beaver-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "beaver",
+    "name": "Beaver",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/beaver/behavior-v1/sheet.png",
+    "sourceSha256": "0a407a47f578cfc83219fc436c67bd37b657cad794355a030ab867e5f734c1bb",
+    "source": "art-source/wildlife-v2/beaver/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#272f34",
+    "B": "#76583d",
+    "H": "#a47e50",
+    "C": "#ded8be",
+    "M": "#4b4136",
+    "E": "#d3b066",
+    "N": "#242c31",
+    "T": "#d39a4e"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/_families/forest-herbivores-140/finish.py": "f390b7696ec8309a2cbc0db9f794a56bc16b0e45f8df84e1a15ec789d41541ea",
+    "art-source/wildlife-v2/beaver/behavior-v1/beaver.blend": "dd9296a2643cc83a66cd7cc7b205040701665cc9f10603254e42260629581051",
+    "art-source/wildlife-v2/beaver/behavior-v1/inputs.json": "947a4b80e47bbc68acce06947399d449a8109db5be2d203bea0b82e00e8fe75f",
+    "art-source/wildlife-v2/beaver/behavior-v1/projection.json": "5692c44e03f047645ad2ae15f8cf8843bbd8c284bc553caebc413236e9b18785",
+    "art-source/wildlife-v2/beaver/roster-v2/beaver.blend": "628d39dfd3dec51131da01a812340b5715bf13181d4222b6e0384201c4362e5f",
+    "art-source/wildlife-v2/beaver/roster-v2/inputs.json": "fff0ed6166a45d60a89f76b70af7579e253e87877485373a5854945a75290eac",
+    "art-source/wildlife-v2/beaver/roster-v2/masters.json": "cda878726006506a7cdce2f415ac9aeec61fa9460fc196d21becb46cda912caf",
+    "art-source/wildlife-v2/beaver/roster-v2/projection.json": "acf0cef8341b552a7aa392f5547bf642eb1b2e760f88dd3827812c04a1d4d02d",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/beaver/behavior-v1/sheet.png": "0a407a47f578cfc83219fc436c67bd37b657cad794355a030ab867e5f734c1bb",
+    "public/demos/wildlife-v2/beaver/behavior-v1/sprite.json": "18acaef3e3215738846dd72b7dda478d568450f1167409b310ebcbb65603c9b5",
+    "public/demos/wildlife-v2/beaver/roster-v2/sheet.png": "8899a9b7bab6af621e67530c38032dcefbf0e5aa47305ec06c81ba2922604564",
+    "public/demos/wildlife-v2/beaver/roster-v2/sprite.json": "03c89fc037a6ef620f9dc55a918dab47dbfdf14946b9b49d1a8492a00d49d205",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

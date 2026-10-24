@@ -1,0 +1,17 @@
+{
+  "identity": "moray-eel-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "e14a5c6e68ff2a80f001087b680b5a46770748abff485fb1ec7336c1e1ee3150",
+    "index.html": "b0c5fd9b075c457c4691e510adc6f41d0d8e463fa557ffbbcc37325f3b43aa5b",
+    "pixel-audit.json": "a59e2d7dafc49f9792377af0701aff01348844c9f40445c64e79832774b70b04",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "3d03829714f11591f22e069e76915b350bcbb2e036dcbf5f38037a54c83c32d2",
+    "preview.gif": "2549e8c8a66f727c1ce3b5d72cbdaf4aa7471b441862d58ba13e15aec7194586",
+    "scene-native.png": "b664404ce0bdc14e3aed85d03052b9504460e108331c4c6ab9c096878d87e34d",
+    "sheet.png": "0c117c981786580800adb3ae0018472fa5b89f927c1e8f3fbd80affc071e6eb5",
+    "source-audit.json": "7cfdff8036e8cedfd4909850ff35fdde5ec3ef74a15dfb9777f126ae2a9ac8fb",
+    "sprite.json": "68e0de472e0258ebf46b76f298b09a695303e2cd3252d4f92335aa7253637a54"
+  }
+}

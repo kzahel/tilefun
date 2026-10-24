@@ -1,0 +1,10 @@
+{
+  "identity": "aye-aye-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/aye-aye/roster-v3/aye-aye.blend": "49a50db52938feff66a3f9889f4ae831a9a6dc84d3184320ec1d3be0e53bdb3a"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

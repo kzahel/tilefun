@@ -1,0 +1,53 @@
+{
+  "identity": "frilled-neck-lizard-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "frilled-neck-lizard-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "e7b978db92f5c8feb2b60857776cb649cafe4794643ebac2220605fd79b4675a",
+      "index.html": "ae9ca17dccd4278499f73b67b230b4b54c54bbf9bd4cff025fd2708ce0c541b7",
+      "pixel-audit.json": "f3a7ef40e8bed080543447d994c069ce57cd251b0facaa742523dd2d495cfa29",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "34d02af26029b8365787644377d595fd429a0fd6316504a8bf552b0f754a460e",
+      "preview.gif": "c6dd31446918aa9635ccc6c1224456d27dfe11c198426dc85518f0952bf30a6a",
+      "scene-native.png": "8f6d41f54db7cd85ea9c5daf02bdc16cd298147192c454aa995a7f97af149dd7",
+      "sheet.png": "74cc16b3c99f9fd4106825187b4a31e83fba594f8327836fd951b700705a4b89",
+      "source-audit.json": "b230480e312e0d3e266ac7511a40b7f9db8b035d131e0b283ad61de8b3e7f8a7",
+      "sprite.json": "49f8f36696986026d0b097133e8c4d4db438730f41a0c27299110a97acd035b6"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/frilled-neck-lizard/finish-v1/README.md": "709c4ce483740d0181d922a770ac5bcb45151492605b66db30d0d48d80169d41",
+    "art-source/wildlife-v2/frilled-neck-lizard/finish-v1/inputs.json": "648f0e0e279ea6c65a036fa1ba9c50695bb3e5627cc3d6be215481bbed615d0f",
+    "art-source/wildlife-v2/frilled-neck-lizard/finish-v1/replay.json": "1ce88d22899a40fdee07ad28bff546c8141a9440e23b3d7d4d0075c1beac88bb",
+    "art-source/wildlife-v2/frilled-neck-lizard/roster-v2/frilled-neck-lizard.blend": "d0ac0c4771d58061fb14e4a126b05c1f311eed4a87e9b3380a7fc44181805274",
+    "art-source/wildlife-v2/frilled-neck-lizard/roster-v2/inputs.json": "09d46df614b4173c9a6ab56cdb853ac0edfaa219e73fd03026c4bc89fa323455",
+    "art-source/wildlife-v2/frilled-neck-lizard/roster-v2/projection.json": "9c5869628702bc28621626217a4fe067eb4cc845afc68ee1ba4ce66bf748fa02",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/contact-sheet-native.png": "e7b978db92f5c8feb2b60857776cb649cafe4794643ebac2220605fd79b4675a",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/index.html": "ae9ca17dccd4278499f73b67b230b4b54c54bbf9bd4cff025fd2708ce0c541b7",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/pixel-audit.json": "f3a7ef40e8bed080543447d994c069ce57cd251b0facaa742523dd2d495cfa29",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/preview-native.gif": "34d02af26029b8365787644377d595fd429a0fd6316504a8bf552b0f754a460e",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/preview.gif": "c6dd31446918aa9635ccc6c1224456d27dfe11c198426dc85518f0952bf30a6a",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/scene-native.png": "8f6d41f54db7cd85ea9c5daf02bdc16cd298147192c454aa995a7f97af149dd7",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/sheet.png": "74cc16b3c99f9fd4106825187b4a31e83fba594f8327836fd951b700705a4b89",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/source-audit.json": "b230480e312e0d3e266ac7511a40b7f9db8b035d131e0b283ad61de8b3e7f8a7",
+    "public/demos/wildlife-v2/frilled-neck-lizard/finish-v1/sprite.json": "49f8f36696986026d0b097133e8c4d4db438730f41a0c27299110a97acd035b6",
+    "public/demos/wildlife-v2/frilled-neck-lizard/roster-v2/sheet.png": "aaa68522dfe4bde20691c3697a1b4df0a2aff8ba3c049364b87eb800eb7a3d5c",
+    "public/demos/wildlife-v2/frilled-neck-lizard/roster-v2/sprite.json": "2cdb34a63880e5a57c5462f2d4d22f027146a5520237b679d9853be93d02b5e5",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "cuttlefish-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "cuttlefish-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "b6376db244f0f6c12e6090413bafcd3b909d977a1953547b3d882463b6c4a8c9",
+      "index.html": "fe2a040625de50161efb3288c2b55fb7ad0b7587bedb63550d7f377b281cfab5",
+      "pixel-audit.json": "fa0adad3fdeafaafb3095935c7c2a54e90c61457e2472eed88ffb6db1fd3cdcf",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "d8f3f00e88f3977fdaa4d7bd19284bc7b610e6b2ee1c231628b86c35cea1853d",
+      "preview.gif": "2cbf13944aa978c7ca671de649dbb85376089c24ffd111ca1435084e8311ae58",
+      "scene-native.png": "092f2b9d1f63918dad28776ce8e9b5b10cadce3e2626ccc5bca362e9b0d619cb",
+      "sheet.png": "8efec7d1a4954aa46520cc7ebaa5c25321e40a2ed9030fab48b669b46ec469ae",
+      "source-audit.json": "ece7891c6b846375ddf94db7bf07c3f3587929c59a463ccb234c1dfd3b4fcc7d",
+      "sprite.json": "85edcdd05d9cb3cb03324305a37094a74a4fb11001ae755029981d540bc9da28"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/cuttlefish/finish-v1/README.md": "5f58c38f7e38606a3326aa32026149f697c7a2599094a41edf3a59949ab1d5a4",
+    "art-source/wildlife-v2/cuttlefish/finish-v1/inputs.json": "1243e0899455e7d94a5699d7ee6c1292acabcc0210c490fac33f7d4227eec8f1",
+    "art-source/wildlife-v2/cuttlefish/finish-v1/replay.json": "9b56a7d8696072b2ebc556166c35b4b253d45219b8a339aa9e4bf3de4c67be2a",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/cuttlefish.blend": "c80af5938319a67464931e345a23e7e86ef4629e33aa09590f53f13d02fb39bb",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/inputs.json": "78fea8d80af9f767c2c4557744bdc3c6b6b207163aa70a6290d53414535f65ab",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/projection.json": "5f514c1268f3b14e5a8df29ff82dc2e75452ca1899173c2c252b556e13b07b8f",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/contact-sheet-native.png": "b6376db244f0f6c12e6090413bafcd3b909d977a1953547b3d882463b6c4a8c9",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/index.html": "fe2a040625de50161efb3288c2b55fb7ad0b7587bedb63550d7f377b281cfab5",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/pixel-audit.json": "fa0adad3fdeafaafb3095935c7c2a54e90c61457e2472eed88ffb6db1fd3cdcf",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/preview-native.gif": "d8f3f00e88f3977fdaa4d7bd19284bc7b610e6b2ee1c231628b86c35cea1853d",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/preview.gif": "2cbf13944aa978c7ca671de649dbb85376089c24ffd111ca1435084e8311ae58",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/scene-native.png": "092f2b9d1f63918dad28776ce8e9b5b10cadce3e2626ccc5bca362e9b0d619cb",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/sheet.png": "8efec7d1a4954aa46520cc7ebaa5c25321e40a2ed9030fab48b669b46ec469ae",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/source-audit.json": "ece7891c6b846375ddf94db7bf07c3f3587929c59a463ccb234c1dfd3b4fcc7d",
+    "public/demos/wildlife-v2/cuttlefish/finish-v1/sprite.json": "85edcdd05d9cb3cb03324305a37094a74a4fb11001ae755029981d540bc9da28",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/sheet.png": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/sprite.json": "e84f2f8a9f9af1af07488a73b62d13005685ec63aa3f07dfea5991ff659442ac",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

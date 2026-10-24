@@ -1,0 +1,37 @@
+{
+  "identity": "sloth-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "sloth",
+    "name": "Three-toed sloth",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/sloth/roster-v3/sheet.png",
+    "sourceSha256": "e59fa504936feafc5ba04794be5c1100dc806e764b6b8677afff52803eb26076",
+    "source": "art-source/wildlife-v2/sloth/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#9b8c6f",
+    "H": "#b8a88a",
+    "C": "#e0d4bc",
+    "M": "#514b40",
+    "K": "#282e2b",
+    "E": "#caaf65",
+    "N": "#1e2826",
+    "T": "#c69487"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/sloth/roster-v3/inputs.json": "a45de3ff8304e985a1713856fea0ae04e239b30c255778ba857a6a1029d15513",
+    "art-source/wildlife-v2/sloth/roster-v3/projection.json": "9289a7f0f22f3fe17f67a1904664b3e953830588408bc1391427be0a91e772d5",
+    "art-source/wildlife-v2/sloth/roster-v3/sloth.blend": "7a318ec7d690e4498d7b57c2cc3ea13fefd9a8b14175295d1c6342762f1fbd51",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/sloth/roster-v3/sheet.png": "e59fa504936feafc5ba04794be5c1100dc806e764b6b8677afff52803eb26076",
+    "public/demos/wildlife-v2/sloth/roster-v3/sprite.json": "b05e6ad968d17a66d106743aa11beece6790c6555da06747c7512e52f4ecafca",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

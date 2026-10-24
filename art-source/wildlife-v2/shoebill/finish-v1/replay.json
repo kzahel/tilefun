@@ -1,0 +1,17 @@
+{
+  "identity": "shoebill-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "ea99385103a4a5278dca3eda7444ccd326c785a2e4b0472a99179c4c6f8b4225",
+    "index.html": "48396b40b1996b5c84faac746ca7dc28d9189a22e696681520c1af2c5ea691fd",
+    "pixel-audit.json": "72ebc78ec8e80e1056b36e88ab2254d83c2a3245833572a3f0e9e77e1eb1bfc1",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "2ce9778d5f78ef164d7c9c0915a69100f828e42407c64817ad9c77185748c21e",
+    "preview.gif": "bcc8e1e53ebeab51f18f3569a5d63a6ba361c3579a277482c475af60f401c7b6",
+    "scene-native.png": "1ccd992548fae6d1daf22ce776fc3de1bb5f7f170591d6d5e027aab44f957a1f",
+    "sheet.png": "2bc52d21794ddbe097afc1f98968b96abe31a43786e7767c36e09d8050755253",
+    "source-audit.json": "e8f3b5780b8e925b1e8c7dc2d1a8e4655c32f166a63de7062ae6b06b4947c437",
+    "sprite.json": "9ee7dee60f6c11041fa6b8efbbdd1ab185b81ebbf63b5a213b309bc6111c6481"
+  }
+}

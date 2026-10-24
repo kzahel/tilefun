@@ -1,0 +1,10 @@
+{
+  "identity": "kiwi-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/kiwi/roster-v2/kiwi.blend": "9c0a5152abf0082aceda756f256cc91d7af91e8c89c24dfa6b442937373eaef0"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

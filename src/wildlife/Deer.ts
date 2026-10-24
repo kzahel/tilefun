@@ -1,10 +1,11 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import { finishedBank } from "./FinishedArt.js";
 import forestArt from "./forest-art.json" with { type: "json" };
 
 /** Repaired adult doe motion; exact finished pixels remain pending human review. */
 export const DEER_TYPE = "wildlife-deer-v1";
-export const DEER_IMAGE = forestArt.deer.image;
+export const DEER_IMAGE = finishedBank("deer")?.image ?? forestArt.deer.image;
 export const DEER_CLIPS = [
   { name: "idle", start: 0, count: 1, frameDuration: 100, loop: true },
   { name: "walk", start: 1, count: 32, frameDuration: 30, loop: true },

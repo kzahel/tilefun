@@ -1,0 +1,10 @@
+{
+  "identity": "chinchilla-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/chinchilla/roster-v2/chinchilla.blend": "043fb9e9f984bc1e22050c47500bb727f104f5e552450eaa525e97df3eab4335"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

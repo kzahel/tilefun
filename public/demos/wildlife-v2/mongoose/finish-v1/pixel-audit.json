@@ -1,0 +1,12 @@
+{
+  "identity": "mongoose-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 324,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 324,
+  "sheetSha256": "4551543794667674e3415c14d6ff5ae905617516acf2a8b7b5e0d2ea7eb8bd1a"
+}

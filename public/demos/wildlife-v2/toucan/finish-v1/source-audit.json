@@ -1,0 +1,10 @@
+{
+  "identity": "toucan-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/toucan/roster-v2/toucan.blend": "43098cb7aba405c05b72e9f87cf43fe2e48624f21f17200c093a7447946feda5"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

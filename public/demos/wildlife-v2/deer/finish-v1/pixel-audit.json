@@ -1,0 +1,13 @@
+{
+  "identity": "deer-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "retained-parts",
+  "surfaceCells": 0,
+  "retainedPartCells": 176,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "nativeCellsUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 340,
+  "sheetSha256": "c8cc35dd28680764995843672f4cfa00045367579ee05522879cfa57ded2c41d"
+}

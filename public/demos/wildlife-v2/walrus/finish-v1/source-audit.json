@@ -1,0 +1,10 @@
+{
+  "identity": "walrus-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/walrus/roster-v3/walrus.blend": "ebc0ddf43df40caf83c42a86622fc93829f0748e1a5ccf8b718e61dd299e2ee9"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

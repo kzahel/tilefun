@@ -1,0 +1,17 @@
+{
+  "identity": "koala-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "44573e173e6ff80acc5c0e593bd40d8e9a5e656d4414783f0c7a7e02571b83c4",
+    "index.html": "4abae0c869b8f0f0eeabc3b133d72f6a2c3a77fb44dd076a4fc6e901a2a1085a",
+    "pixel-audit.json": "0ac0a5cd5fc785cf14ee1fb908885ab3bb85b9efad75ce91304ab84ad02d3f00",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "a4a1c329b2119006e4a46e677f68505e688350fcb5f2515c067c33a0ddc7dda9",
+    "preview.gif": "944f05b8132c83074e49f2c6c778eda04c5c011e6e3eb3dfd775e47651c19e0c",
+    "scene-native.png": "b57cf0112b7443b6026c45538a63c3befdf3432b85dd519d5de41d9a02f614fa",
+    "sheet.png": "632fa4e625a9ad7e037c6a59b326e52b48164a2c4dd2853bd99d12756b137a1f",
+    "source-audit.json": "db912f1d6f7d23581ae517ce2243cbd8e93f5babed7843587a169800facf8126",
+    "sprite.json": "f26659c3f955b7810b3efbb5dc9976a5761c6c3f070ff429610f0c583cd3f864"
+  }
+}

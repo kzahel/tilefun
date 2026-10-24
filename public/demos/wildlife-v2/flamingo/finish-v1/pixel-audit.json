@@ -1,0 +1,12 @@
+{
+  "identity": "flamingo-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 164,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 164,
+  "sheetSha256": "cc57d82488c22428a0f457517a28a3007da201e1a677348163f5bc015670d217"
+}

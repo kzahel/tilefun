@@ -1,0 +1,17 @@
+{
+  "identity": "nautilus-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "6806dc9d8d39993353e8f3493211460b82ca726a0589e8628d73954620a1da53",
+    "index.html": "472537b84ba258286ede05dd279df977cbee576c66794aba013b02a5bbb1c9a9",
+    "pixel-audit.json": "0ca377e602a8518402c1f765445a832a127393236212f4f38002e3d66669972f",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "438f9945f2e7fb3c659867f719ecb5c912719106f3959f3d53ca8bf2fc592bee",
+    "preview.gif": "ec1f583de4bcc23c742d87d42295c67e945ece55a716503a9e260cc596b0aee0",
+    "scene-native.png": "e2fe7db0a5ae96bcb02febfd87b3ce5d4adae87fc1c8fe25ee3ae3106c81d32f",
+    "sheet.png": "bf54f3bfa148690002615ef27cfb4b4c722b1e9795c661557ca371aca1f4f9ad",
+    "source-audit.json": "ba092f3b72677bbb9f34a178680c6df4ba2f9966c1c01ecf8f099dfaa83e541e",
+    "sprite.json": "9597673e74c9f70c798b3c01896adbf107d0215a63dc478c896c24af23a10db1"
+  }
+}

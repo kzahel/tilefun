@@ -1,0 +1,53 @@
+{
+  "identity": "crocodile-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "crocodile-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "7d432e8f745f1a5a87e3076278091eeb03d0639a4c050342239e217a2c36c6b1",
+      "index.html": "738ac85d76009d63da125fda350662fbab1298fb36f8a246e319d1f1b9482a7b",
+      "pixel-audit.json": "d754ed8ae4df533902229e419ffcb4d037afcc6beef8dd6fec61bdcb841f0f99",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "e6185f04b4a012f244c9ea647317316048dd677f3a88287204c285032f2d4238",
+      "preview.gif": "eed6a1ee8995d1f02e572c4cf897a42d99a8ca2c1aec6fb882de8c775ef2a6c2",
+      "scene-native.png": "e25460ea44b688884720f147805e3065794d1ce80abe2233142f0aa91972eb44",
+      "sheet.png": "f0d9188123452920481574eec3b9ff3d3c3a1e3c0bf22d775b72409300f682b7",
+      "source-audit.json": "51f5b87110403161131d9fee6588ce346340f3e9b040e906cd800953c79dedb3",
+      "sprite.json": "f7b4655476adfffcd09d23ea1f08043cbd11c439d3343069cf90af57e4440568"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/crocodile/finish-v1/README.md": "3f66e6c45a174d6b379d12521c48076888a7ef2ee366f8b50d6bbf187b108126",
+    "art-source/wildlife-v2/crocodile/finish-v1/inputs.json": "036e024be725b110dade9836230c978f3be7d10a4d008496fea76e3c0c0d0434",
+    "art-source/wildlife-v2/crocodile/finish-v1/replay.json": "a953451685ad8bba5859b7134a54fa08fedeca410d8fa29a64d6d2f6f21afe4b",
+    "art-source/wildlife-v2/crocodile/roster-v3/crocodile.blend": "0f7ae56ff642c8c38ae4f20196b38c116e9faa534b1080e618506f0858df51f4",
+    "art-source/wildlife-v2/crocodile/roster-v3/inputs.json": "f48301375f1437a82e941c7a67c238f3d9f4e479c07901034018691a19e62638",
+    "art-source/wildlife-v2/crocodile/roster-v3/projection.json": "a394a3a139d1b5e44908d4239f6ee7b06419dbe56f96e889c3c4c3d469f91788",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/crocodile/finish-v1/contact-sheet-native.png": "7d432e8f745f1a5a87e3076278091eeb03d0639a4c050342239e217a2c36c6b1",
+    "public/demos/wildlife-v2/crocodile/finish-v1/index.html": "738ac85d76009d63da125fda350662fbab1298fb36f8a246e319d1f1b9482a7b",
+    "public/demos/wildlife-v2/crocodile/finish-v1/pixel-audit.json": "d754ed8ae4df533902229e419ffcb4d037afcc6beef8dd6fec61bdcb841f0f99",
+    "public/demos/wildlife-v2/crocodile/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/crocodile/finish-v1/preview-native.gif": "e6185f04b4a012f244c9ea647317316048dd677f3a88287204c285032f2d4238",
+    "public/demos/wildlife-v2/crocodile/finish-v1/preview.gif": "eed6a1ee8995d1f02e572c4cf897a42d99a8ca2c1aec6fb882de8c775ef2a6c2",
+    "public/demos/wildlife-v2/crocodile/finish-v1/scene-native.png": "e25460ea44b688884720f147805e3065794d1ce80abe2233142f0aa91972eb44",
+    "public/demos/wildlife-v2/crocodile/finish-v1/sheet.png": "f0d9188123452920481574eec3b9ff3d3c3a1e3c0bf22d775b72409300f682b7",
+    "public/demos/wildlife-v2/crocodile/finish-v1/source-audit.json": "51f5b87110403161131d9fee6588ce346340f3e9b040e906cd800953c79dedb3",
+    "public/demos/wildlife-v2/crocodile/finish-v1/sprite.json": "f7b4655476adfffcd09d23ea1f08043cbd11c439d3343069cf90af57e4440568",
+    "public/demos/wildlife-v2/crocodile/roster-v3/sheet.png": "a2a27c8c6f012e8a99c457d1564e39641e0a7d476fc4722f8ca6f17386b65a26",
+    "public/demos/wildlife-v2/crocodile/roster-v3/sprite.json": "9f0005ba76ba2e6b1830f7f5a8cc13cd2fd2d0310c31eb81fb73882187c73f4d",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

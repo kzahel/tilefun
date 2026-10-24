@@ -1,0 +1,69 @@
+{
+  "identity": "cat-finish-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 48,
+  "frameHeight": 48,
+  "anchor": [
+    24,
+    34
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "stalk",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 160
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 20
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 160
+    },
+    "stalk": {
+      "start": 41,
+      "count": 8,
+      "frameDuration": 125,
+      "loop": true
+    },
+    "pounce": {
+      "start": 49,
+      "count": 8,
+      "frameDuration": 80,
+      "loop": false
+    },
+    "bat": {
+      "start": 57,
+      "count": 8,
+      "frameDuration": 90,
+      "loop": false
+    },
+    "climb": {
+      "start": 65,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": true
+    },
+    "sit": {
+      "start": 77,
+      "count": 8,
+      "frameDuration": 150,
+      "loop": true
+    }
+  },
+  "sheetSha256": "bba324df1ecdfe17b61dc4e24bcb43664b540fb2f3dc15b1ae7479f5944ef061",
+  "finishing": {
+    "policy": "wildlife-paint-v1",
+    "method": "retained-parts",
+    "contract": "cat-finish-v1",
+    "predecessorImage": "demos/wildlife-v2/cat/behavior-v1/sheet.png",
+    "predecessorSha256": "4702f4bfba2f5c83f9e1ebbb5169927cf19a5702767391609e81571198afc994",
+    "source": "art-source/wildlife-v2/cat/behavior-v1"
+  }
+}

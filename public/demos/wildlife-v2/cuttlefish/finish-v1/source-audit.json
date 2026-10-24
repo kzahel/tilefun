@@ -1,0 +1,10 @@
+{
+  "identity": "cuttlefish-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/cuttlefish/roster-v3/cuttlefish.blend": "c80af5938319a67464931e345a23e7e86ef4629e33aa09590f53f13d02fb39bb"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

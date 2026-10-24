@@ -1,0 +1,10 @@
+{
+  "identity": "centipede-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/centipede/roster-v3/centipede.blend": "a7801c6873767137c49ed0a2ccedfeb35499144ed7a785567d24213bfa76dc01"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

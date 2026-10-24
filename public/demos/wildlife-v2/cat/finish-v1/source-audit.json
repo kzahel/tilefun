@@ -1,0 +1,11 @@
+{
+  "identity": "cat-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/cat/behavior-v1/cat.blend": "9f890894247530c0065857eca715a46b469202e151181bcbd58f6ab9b24a2167",
+    "art-source/wildlife-v2/cat/motion-v2/cat.blend": "841d22cb2470363751e3d89c87adea53e475b20975a768308e69944f5beb2d6f"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "retained-parts"
+}

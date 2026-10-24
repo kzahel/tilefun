@@ -1,0 +1,41 @@
+{
+  "identity": "deer-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "deer",
+    "name": "White-tailed deer",
+    "policy": "retained-parts",
+    "sourceImage": "demos/wildlife-v2/deer/behavior-v1/sheet.png",
+    "sourceSha256": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816",
+    "source": "art-source/wildlife-v2/deer/behavior-v1",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "K": "#574031",
+    "S": "#806044",
+    "B": "#ad8050",
+    "H": "#cfa16b",
+    "L": "#dfc69b",
+    "C": "#efe2c2",
+    "E": "#28241f",
+    "P": "#423b32"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/deer/behavior-v1/deer.blend": "8584427ed833931c28b62138ed168293c8a9a23786754359c4f86fbdf4813a97",
+    "art-source/wildlife-v2/deer/behavior-v1/inputs.json": "1557b446c319bf6135865aa15f24bb5ca524bc9f3e41f5a513c089dd43c14783",
+    "art-source/wildlife-v2/deer/behavior-v1/projection.json": "13f886ad3204a45b7b34151bb3375b7585727908828279e3407056df2956d59e",
+    "art-source/wildlife-v2/deer/finish-v1/paint-projection.json": "a56ad409524b3862289f937da5e296ea8f2807fa6dd96b8ef397287456ba4c68",
+    "art-source/wildlife-v2/deer/motion-v2/deer.blend": "fb44ce6f34853bb50427c77ca520ad05a25c551dd105524f144e6e75874f1011",
+    "art-source/wildlife-v2/deer/motion-v2/masters.json": "fafc300cc6c18d7fe43632167e802e6dd18999b8f8e44e83d8cec6e84be7035a",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/deer/behavior-v1/sheet.png": "b8f5ba6ddb9037e21023ec2bcdc80e8b92f94b47120eab5a731534375a548816",
+    "public/demos/wildlife-v2/deer/behavior-v1/sprite.json": "c700a0c3e58510346cf5f17b2d122cf506cc64eee9161dfc084be3d226932652",
+    "public/demos/wildlife-v2/deer/motion-v2/sheet.png": "b3b3dcf5e46b8c7b4132481effb763dfa43c481e51526639c387c24ebf613286",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

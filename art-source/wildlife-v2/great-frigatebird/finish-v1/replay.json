@@ -1,0 +1,17 @@
+{
+  "identity": "great-frigatebird-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "ad540a66aeb1333e5d742582bec101694c0041f796360580fa3f50bca09bd9c9",
+    "index.html": "cabc2da55c38861dcccde6e467d70f7f1254a62160fb1cc48e2152df36ca9dcb",
+    "pixel-audit.json": "6730ddefae033cbfd3114076f4d43f4e06dfbd82aed8219a08cbf6d87dee18df",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "6d526f1d6a97bf1a674fb8eb6c3b7c201abe94661d162b6d6a855aed869aa91c",
+    "preview.gif": "5a25691eb5e574c1fb0d4d4ad37fbea051f70516f9d35efc652e664e22b7af84",
+    "scene-native.png": "511a339d3472cd6736fc903a899481e131e8262e24a6851a629e424fc4afb69c",
+    "sheet.png": "ed52be33eeef1b0111ec72e6cf362fa873d842390414a1874f8e27a02da7e45c",
+    "source-audit.json": "8880d63d8a558843e7be7a82bffd15d3697490ced598af446ee0ef1142eb6755",
+    "sprite.json": "efa73dd9b054da8bae7347678f2b2f7ec1e73a2fa6f934c4c7d4d8f2469f5e0a"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "emu-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "01b3723f301b414e36aa14c5fd2dd01c6540e7059753ff52a3765ce66915b7a8",
+    "index.html": "610660f5b88899987509e0b189f9b643209dd0853f7e38140d11a77bc8bd7b6e",
+    "pixel-audit.json": "a4be837bf5a7378e9ac6929ad0676d42ab813015fee00d32584368388644f0b6",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "f5e72f6ae4d522005bc45eae01041f41e8da3518815e06f332722bd1ef2394a2",
+    "preview.gif": "6dea310d7e97d41adb9484f6728e9307da18b06f1e601b92c59773477e5f237b",
+    "scene-native.png": "a1a07bc047e278002b5fb666f88b48149770022361b1a125659d1daa7eccc31c",
+    "sheet.png": "0d674598da8c23a040b9b17f3d37d0a94f0a1fb0fd5759b863f9118961d92334",
+    "source-audit.json": "5e5f7474342ba6e254aa15d4186cdcb2941fb0918abb1c97ac6bc8bc5f6cd2cc",
+    "sprite.json": "c1ed0a60c4f98a2671e4f8d6fa9ba6f87b09ae913edd7727a312a5c87963c55d"
+  }
+}

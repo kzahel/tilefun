@@ -1,0 +1,12 @@
+{
+  "identity": "chimpanzee-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "surfaceCells": 196,
+  "retainedPartCells": 0,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 196,
+  "sheetSha256": "a38af62b60120ff131ac549b864de147d2e8dfcb469f54b5e1a2e3bc7ce36480"
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "flamingo-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "ec37f9063652c1b232d34087db77c7d329fa3297070b8ee027fc111c0b074f63",
+    "index.html": "fadfb07e653c9d166d7ed89296141d9c36b4622dab46a303480b7d9673e526b2",
+    "pixel-audit.json": "ee4f901f28e59834fb57950d99392a8d309118834c9b638dae6d58617502988e",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "09d0e9885b38c30af2a1d9df7c3de21e4c8f4306c88ce6e2cc54ea494f68d59c",
+    "preview.gif": "1826231790bb9b05a46574b2a88bf52a5323221023ca2bd5e1f3bac32ef8dd73",
+    "scene-native.png": "26ce581f31b270bdaa95486a87f13abd86c0301fd262e723974ba42d7071c1d5",
+    "sheet.png": "cc57d82488c22428a0f457517a28a3007da201e1a677348163f5bc015670d217",
+    "source-audit.json": "bc45852130070a73188ce65d93869ff2f5087610e83555a1c75183ebb8de37eb",
+    "sprite.json": "b3c34f2d33d8a43772c23bd95b96d2aece0851044d1295c53788b620062d339b"
+  }
+}

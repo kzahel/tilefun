@@ -1,0 +1,10 @@
+{
+  "identity": "horseshoe-crab-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/horseshoe-crab/roster-v3/horseshoe-crab.blend": "0d82c1eadc5ccf1ca1c137cfd1b989d61311746a45419e11b2ac9c871fa96484"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

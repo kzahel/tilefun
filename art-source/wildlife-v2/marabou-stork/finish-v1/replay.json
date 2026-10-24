@@ -1,0 +1,17 @@
+{
+  "identity": "marabou-stork-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "1e4272a9ac2ac11c67f6524101a3f67f12534746945c2012a668e40c93bdcb20",
+    "index.html": "0d47c499fa4c4ccb48321e2b9e5ee02536de69d723a3a99bbcb5f20bba43d54c",
+    "pixel-audit.json": "2171efd59365f68d9772e1dd802dc1f867325dd35499a25616846485fc75bbdf",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "6e78da3d8037d3034fa007d22198e5a78c654c337d368f64fabf52951628b738",
+    "preview.gif": "b5f7f89241e9eeab567365112820ff2569efbd2e131c31ffba5e0c1d473dfd28",
+    "scene-native.png": "50c632fc2042a7a37158006bf207f49936e7a8fa94e75a5a27edd5b16c49bfda",
+    "sheet.png": "56d55c6f7e4c4b6b82d5d1fc53e72e3b349a16ed5d7e69b71303c885c8c48ed8",
+    "source-audit.json": "3b8897720c4efbce8bc71e5479fa838123037a6f42d525049370905bb7e92dd7",
+    "sprite.json": "e0dd3496798fd4fd76ae2463476ed0126b10128e0e9bd491c0c1220a228c5cea"
+  }
+}

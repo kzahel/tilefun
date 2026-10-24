@@ -1,0 +1,13 @@
+{
+  "identity": "donkey-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "method": "retained-parts",
+  "surfaceCells": 0,
+  "retainedPartCells": 192,
+  "noExteriorAlphaGrowth": true,
+  "geometryAndMotionUnchanged": true,
+  "nativeCellsUnchanged": true,
+  "binaryAlpha": true,
+  "poses": 356,
+  "sheetSha256": "67f3d3ad44bb0ac715b6c439b4a2bc8f95d98cbd366c0f64eb6fd89e4fcfeb90"
+}

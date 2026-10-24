@@ -1,0 +1,53 @@
+{
+  "identity": "orangutan-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "orangutan-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "fe72188754bcf012e974c0b441135a3a4642112864e6b998b158d8e274283945",
+      "index.html": "44e5b09435515b8d4a9388c87e72873274af0220223d7c4afab6584ffb4416c7",
+      "pixel-audit.json": "4ba9cf5d498fed71a022247a4ffc8038318b14f29835a8dedd2fd1647416fc58",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "29535298a9a27729aa9ce73b598ecc2c46629d0d89cbecb4587e0565b89f2891",
+      "preview.gif": "9ad1d5042bd5e6d8d8c4d53b1dc4f0017dc7ad2fd18f48bd5fc73f0329141212",
+      "scene-native.png": "b844709b0decdb2d8941e437d98baea9ed6e4834944f9c34f62cc60b52fa7b7f",
+      "sheet.png": "dbd5188573f6759516ed036c8fe437aa82821f0d023c3ade2f6643b8b28fd615",
+      "source-audit.json": "428a5e7bafb3430fe471a3bce5a53b0a72818a5b8896e695551646241bd36292",
+      "sprite.json": "e6dffa55bdfafb8c724c4b730a36193885af6e18be2f7fc8afbef4bff33020d0"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/orangutan/finish-v1/README.md": "ae572ea69d683f75afa20666a635bbe83acd7e2527b888abbcc3bf2b93ea51e2",
+    "art-source/wildlife-v2/orangutan/finish-v1/inputs.json": "bd5cb531a05694bc63a8634b854fda6a7545bfc55163a5f5daa10741071878f8",
+    "art-source/wildlife-v2/orangutan/finish-v1/replay.json": "a6806c79e9db6550427f0e63fff660673c157bda3aadbddfa3444d0483143910",
+    "art-source/wildlife-v2/orangutan/roster-v3/inputs.json": "4348e255e0974f3e8ad5ac94de20c144bb2df3f8b1913438cf77b90d7c754fa4",
+    "art-source/wildlife-v2/orangutan/roster-v3/orangutan.blend": "36c2a7674bb3f305376d1fa60940a7bdf94f28e8f74e6832b2eb0e8192307110",
+    "art-source/wildlife-v2/orangutan/roster-v3/projection.json": "9e8940d80d24dd04ad9c45fdadc9ef873fd82bab026a82ad80bb92909a935f68",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/orangutan/finish-v1/contact-sheet-native.png": "fe72188754bcf012e974c0b441135a3a4642112864e6b998b158d8e274283945",
+    "public/demos/wildlife-v2/orangutan/finish-v1/index.html": "44e5b09435515b8d4a9388c87e72873274af0220223d7c4afab6584ffb4416c7",
+    "public/demos/wildlife-v2/orangutan/finish-v1/pixel-audit.json": "4ba9cf5d498fed71a022247a4ffc8038318b14f29835a8dedd2fd1647416fc58",
+    "public/demos/wildlife-v2/orangutan/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/orangutan/finish-v1/preview-native.gif": "29535298a9a27729aa9ce73b598ecc2c46629d0d89cbecb4587e0565b89f2891",
+    "public/demos/wildlife-v2/orangutan/finish-v1/preview.gif": "9ad1d5042bd5e6d8d8c4d53b1dc4f0017dc7ad2fd18f48bd5fc73f0329141212",
+    "public/demos/wildlife-v2/orangutan/finish-v1/scene-native.png": "b844709b0decdb2d8941e437d98baea9ed6e4834944f9c34f62cc60b52fa7b7f",
+    "public/demos/wildlife-v2/orangutan/finish-v1/sheet.png": "dbd5188573f6759516ed036c8fe437aa82821f0d023c3ade2f6643b8b28fd615",
+    "public/demos/wildlife-v2/orangutan/finish-v1/source-audit.json": "428a5e7bafb3430fe471a3bce5a53b0a72818a5b8896e695551646241bd36292",
+    "public/demos/wildlife-v2/orangutan/finish-v1/sprite.json": "e6dffa55bdfafb8c724c4b730a36193885af6e18be2f7fc8afbef4bff33020d0",
+    "public/demos/wildlife-v2/orangutan/roster-v3/sheet.png": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e",
+    "public/demos/wildlife-v2/orangutan/roster-v3/sprite.json": "a84e31910337ae5a98073b5cb74a07cd8b6cbde6b5266313327fe3fb878145b4",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

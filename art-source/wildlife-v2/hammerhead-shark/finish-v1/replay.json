@@ -1,0 +1,17 @@
+{
+  "identity": "hammerhead-shark-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "dc09c390eb88c1235f765b035f6bd866004438658d0a187f5383a8ce1fc3c847",
+    "index.html": "0dd16e6704b70590966841037e478c010b1367d028424a4e4d89285b112afc24",
+    "pixel-audit.json": "525f3b33817d6d74e4755f199bad755cae521cb9507eec4ff647ccc9fa92e313",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "c78828672d8cdbc160efc5b2e7271d32ab3b5c85b66a63daa72e5a3849f441f6",
+    "preview.gif": "9b8bb08e0276723052b7a41ea8257389d2e58ce0287c2dd31087b3741b269b7c",
+    "scene-native.png": "ad11d225876f1fa4ec5af64bd27f7fd847d60c1381fbc7454d6c3bb3acfdd184",
+    "sheet.png": "160a862938ed9428c1bb0df7cb22a60da34dca3bfab8115f2d3ae31549b6906d",
+    "source-audit.json": "505e52861d00e32f73e2e52b0853298dfd406f0bb969b9a8455fc6fcbd0e5b2b",
+    "sprite.json": "695716949bb313ea66e50077961d71e4608d8561b0768b4d5af9340c4d821564"
+  }
+}

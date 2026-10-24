@@ -1,0 +1,53 @@
+{
+  "identity": "humpback-whale-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "humpback-whale-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "aff5d2d9a64320475e5c0b43d035ab97b7750f2af336d9be16944734d29b9a92",
+      "index.html": "65c856285390d5f5728dd8835d4977d7ef109d84c2ba9a37835dc9af371ec578",
+      "pixel-audit.json": "0982272a65dda35c070c3fbab5174d4810a3c4969172cb55ce13006c054998e1",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "d9d7df3d02b92dd7bfa3917a27614331c4072373eb55f7752cbc3f09aab35e9b",
+      "preview.gif": "b856c1e1f81e2e7371516033c93303ff905b6683a40795c90cdefcfb96b99b3a",
+      "scene-native.png": "e8cf4fee0c9a5fbb146a2a0140e4de1b7cf4fd572860b4b3750fb3c8fbfc8e21",
+      "sheet.png": "e0be9de074f6546f87d086c8b2ebeaf95b04c0416c267a3cdecae0096662e07a",
+      "source-audit.json": "5b65716d9195560b4abaebdf292831dbb6ffa35ba7ff9904b201280b8c506814",
+      "sprite.json": "3e5f08119b9ecc4fbe3fe7c5cabe67eb792ffdb047b74b24d7ef68b28e2daabd"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/humpback-whale/finish-v1/README.md": "2d8ef7a1bbc12b96cc01643a019a737e97a348a9dc9cf76580ba615cbcad7f35",
+    "art-source/wildlife-v2/humpback-whale/finish-v1/inputs.json": "91d2cee1e5e69970dd7ef2551358241a3a3c5b34a76161f6b1bc8ed45110c47c",
+    "art-source/wildlife-v2/humpback-whale/finish-v1/replay.json": "055958e158d710ac191878972c775ea7dcd2eaf41d061f971e533ddfb7744a1e",
+    "art-source/wildlife-v2/humpback-whale/roster-v2/humpback-whale.blend": "698afe823881a31eb2c9db688be8e08b5a4ac15eb6255e20a1181f91f27292c3",
+    "art-source/wildlife-v2/humpback-whale/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/humpback-whale/roster-v2/projection.json": "011324d60ecbda6402a262d85f03c03914e4448149267b64d2f6a7caa4f0a224",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/contact-sheet-native.png": "aff5d2d9a64320475e5c0b43d035ab97b7750f2af336d9be16944734d29b9a92",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/index.html": "65c856285390d5f5728dd8835d4977d7ef109d84c2ba9a37835dc9af371ec578",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/pixel-audit.json": "0982272a65dda35c070c3fbab5174d4810a3c4969172cb55ce13006c054998e1",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/preview-native.gif": "d9d7df3d02b92dd7bfa3917a27614331c4072373eb55f7752cbc3f09aab35e9b",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/preview.gif": "b856c1e1f81e2e7371516033c93303ff905b6683a40795c90cdefcfb96b99b3a",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/scene-native.png": "e8cf4fee0c9a5fbb146a2a0140e4de1b7cf4fd572860b4b3750fb3c8fbfc8e21",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/sheet.png": "e0be9de074f6546f87d086c8b2ebeaf95b04c0416c267a3cdecae0096662e07a",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/source-audit.json": "5b65716d9195560b4abaebdf292831dbb6ffa35ba7ff9904b201280b8c506814",
+    "public/demos/wildlife-v2/humpback-whale/finish-v1/sprite.json": "3e5f08119b9ecc4fbe3fe7c5cabe67eb792ffdb047b74b24d7ef68b28e2daabd",
+    "public/demos/wildlife-v2/humpback-whale/roster-v2/sheet.png": "0a0d557222242fc58dca238f1311d9031f57c4e7e05339052a19c91e0645fde0",
+    "public/demos/wildlife-v2/humpback-whale/roster-v2/sprite.json": "3132299d62f6077b94dd24d1a3fda66e2245e54d4a58654d80b3e6e5ad78df0f",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

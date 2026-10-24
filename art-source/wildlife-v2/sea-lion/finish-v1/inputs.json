@@ -1,0 +1,37 @@
+{
+  "identity": "sea-lion-finish-v1",
+  "policy": "wildlife-paint-v1",
+  "contract": {
+    "id": "sea-lion",
+    "name": "California sea lion",
+    "policy": "material-surfaces",
+    "sourceImage": "demos/wildlife-v2/sea-lion/roster-v3/sheet.png",
+    "sourceSha256": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292",
+    "source": "art-source/wildlife-v2/sea-lion/roster-v3",
+    "revision": "finish-v1"
+  },
+  "palette": {
+    "B": "#8e7750",
+    "H": "#b09565",
+    "C": "#ccb480",
+    "M": "#564c39",
+    "K": "#343832",
+    "E": "#d1b98b",
+    "N": "#26302b",
+    "T": "#dbd1b7"
+  },
+  "sha256": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/sea-lion/roster-v3/inputs.json": "dc75cf896c7219444a9522888dcf5e9f0c6598ea1eeb1bcaa09a316239f91486",
+    "art-source/wildlife-v2/sea-lion/roster-v3/projection.json": "3a69821f43be61cdf0eca4d63cc2de04f0b9073c8cf56a838e1624e8dae7f2d7",
+    "art-source/wildlife-v2/sea-lion/roster-v3/sea-lion.blend": "9324d6a9988d56ccdebf0407dea4978dab21c3e4482f453c0a1ebde1c61433e8",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/sea-lion/roster-v3/sheet.png": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292",
+    "public/demos/wildlife-v2/sea-lion/roster-v3/sprite.json": "fee51d454b91fbf59a8c31f51bdd735e67cae2a34c48faf9db2b0ce330f45204",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "identity": "marabou-stork-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/marabou-stork/roster-v3/marabou-stork.blend": "33ac1793c0dc3627ecb2b68de987d0da3a58343c671bb15e8ef28f757fb32a6d"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

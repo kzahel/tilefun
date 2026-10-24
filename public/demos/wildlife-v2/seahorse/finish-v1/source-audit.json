@@ -1,0 +1,10 @@
+{
+  "identity": "seahorse-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/seahorse/roster-v3/seahorse.blend": "c9cb587b59d854d73d17d5fa123065d5e32bca57ecc1ce7bf053fa3049151ad8"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

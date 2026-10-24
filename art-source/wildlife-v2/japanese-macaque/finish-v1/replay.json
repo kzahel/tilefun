@@ -1,0 +1,17 @@
+{
+  "identity": "japanese-macaque-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "030877ebc771e6881c594efb91c954aaf7765116b0d19c7ad8d42cb1e5377441",
+    "index.html": "6dfaffb262494153eb9ee147a9f7c1773b1a17c98b792eab056ee5c38b1ce11e",
+    "pixel-audit.json": "627bb1948899784a9adb08d528b2873616df0ee0d77a550134511737114694b7",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "017d143059edb047a8666dc418fb5fc50e0d9efa42263f1a1d6e8680a683dd3d",
+    "preview.gif": "5d9afca87973d2076e0c358de56715a68c25d90b07f36195d1be9b2cfb2006ff",
+    "scene-native.png": "59c199120cfdf00a86aa136c3bdd3c34f6e095efb0db480bccfe0a8cf2edaa52",
+    "sheet.png": "be984e5fdd5f2f151a37f4c148ea94dc8a7cb969d764cb6c2b0d0688e5ce0bdb",
+    "source-audit.json": "e7a276af363daf5c959e169ea852082f5d0573bd95f88091d63c7b7c0c811587",
+    "sprite.json": "fbb72584f0309d63c1a575437a3d999d66653823143076900158f4e5f2ab90ad"
+  }
+}

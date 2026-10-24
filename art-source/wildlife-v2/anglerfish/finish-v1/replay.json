@@ -1,0 +1,17 @@
+{
+  "identity": "anglerfish-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "c43363ac8034f31626d85c14836a6f24ea42dbe5827e76ffcfad2e5222c56abf",
+    "index.html": "324a46028ef179915c848810a8456198ca6a73001a42c409d67086e3408aa37c",
+    "pixel-audit.json": "18238b14e691d13ba3a83d23038af575b5127fb6e00d8187d255a792e69c3ed0",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "15f03c2c83bc42dcc76a0fa97b3612ac1c6a7dbb904187069233e1d7a31e4753",
+    "preview.gif": "9f568ffa97f445b5bb7e97144a5a91fd62c2e2c4f2834ad4cbbc7d80166682dc",
+    "scene-native.png": "90b8251271f2154fb100221b673646721daaa936b0466489c6e8a41d619810e3",
+    "sheet.png": "4a2436a1d134cc097f2736d2c1030e9d7e32394e6f9f6cc40db3f79efc11b441",
+    "source-audit.json": "a149460f3fa3a6053bd170c9efce5f95b051b3fe313eaa8cc5ec79fd7ce6972f",
+    "sprite.json": "fef17f058650955125ca829d7e9114bcf61d4492ac76f23e29d6a398ba9a02b6"
+  }
+}

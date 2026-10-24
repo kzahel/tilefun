@@ -1,0 +1,57 @@
+{
+  "identity": "donkey-finish-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "anchor": [
+    32,
+    48
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "roll",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 100
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 60
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 100
+    },
+    "lie": {
+      "start": 41,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": false
+    },
+    "roll": {
+      "start": 53,
+      "count": 24,
+      "frameDuration": 150,
+      "loop": true
+    },
+    "stand": {
+      "start": 77,
+      "count": 12,
+      "frameDuration": 100,
+      "loop": false
+    }
+  },
+  "sheetSha256": "67f3d3ad44bb0ac715b6c439b4a2bc8f95d98cbd366c0f64eb6fd89e4fcfeb90",
+  "finishing": {
+    "policy": "wildlife-paint-v1",
+    "method": "retained-parts",
+    "contract": "donkey-finish-v1",
+    "predecessorImage": "demos/wildlife-v2/donkey/behavior-v1/sheet.png",
+    "predecessorSha256": "686bb36f677c943aad9c7a7cd6ede4b7b2d09f36ed681b9cad31ea709c7e8aaf",
+    "source": "art-source/wildlife-v2/donkey/behavior-v1"
+  }
+}

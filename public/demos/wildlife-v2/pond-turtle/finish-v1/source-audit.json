@@ -1,0 +1,10 @@
+{
+  "identity": "pond-turtle-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/pond-turtle/roster-v2/pond-turtle.blend": "26148136d59b479f1af0ee2b944e72d46ab1aee44c8ee41929b0f631025045e6"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

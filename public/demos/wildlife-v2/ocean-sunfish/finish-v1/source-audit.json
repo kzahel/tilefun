@@ -1,0 +1,10 @@
+{
+  "identity": "ocean-sunfish-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/ocean-sunfish.blend": "a3cf0497b81167b7f131bb3303d94f48ab52de94fba671aaf134a19d10eace6c"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

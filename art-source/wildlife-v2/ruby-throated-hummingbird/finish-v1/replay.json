@@ -1,0 +1,17 @@
+{
+  "identity": "ruby-throated-hummingbird-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "378e287c5f82cd8b576d3b234b8e1146f5f32ecdee486bb934ecd54edb644209",
+    "index.html": "35c8a6ce1ef472914c31a917f0e13505879401c491e8997242b49466347e085c",
+    "pixel-audit.json": "95a09a75b32a89569bb5e9cd0926de6f72630accba8ae380edc608e608ac798c",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "d8a1552577d724bc998c606337864c89f8ec812a775450c51c845f0fa91158d8",
+    "preview.gif": "f4021818acc63d073b895ef904d32503e092512f6c432bef2a87c2a04e5a8610",
+    "scene-native.png": "1a5c37893795ac6310f3d97c5f3538ff7759ecdb5c56627f379194962de290fa",
+    "sheet.png": "975900f9d142bd02de4f1002a1e77b8dfc04f51e1b65d65437bf1f8a4988aa46",
+    "source-audit.json": "ee6c68e12b4aa57d3f437daea00e20e25dbf695eb45d6cbc2da68751e64214ab",
+    "sprite.json": "d3293aaeaa1b13199562db6d6ac474b7c2c3fa98c2447ce75a47bc58d89e04db"
+  }
+}

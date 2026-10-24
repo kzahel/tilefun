@@ -1,0 +1,11 @@
+{
+  "identity": "donkey-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/donkey/behavior-v1/donkey.blend": "128d9dc4baf6033659958881b7af71053c3b1c1abac2dd355fddf8184797806f",
+    "art-source/wildlife-v2/donkey/roster-v2/donkey.blend": "7feba9ce28f80fe1baa8a8c257cd5e89be1af3cd3ac2a5a2d4234dee5998c6e7"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "retained-parts"
+}

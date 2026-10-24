@@ -1,0 +1,17 @@
+{
+  "identity": "crocodile-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "7d432e8f745f1a5a87e3076278091eeb03d0639a4c050342239e217a2c36c6b1",
+    "index.html": "738ac85d76009d63da125fda350662fbab1298fb36f8a246e319d1f1b9482a7b",
+    "pixel-audit.json": "d754ed8ae4df533902229e419ffcb4d037afcc6beef8dd6fec61bdcb841f0f99",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "e6185f04b4a012f244c9ea647317316048dd677f3a88287204c285032f2d4238",
+    "preview.gif": "eed6a1ee8995d1f02e572c4cf897a42d99a8ca2c1aec6fb882de8c775ef2a6c2",
+    "scene-native.png": "e25460ea44b688884720f147805e3065794d1ce80abe2233142f0aa91972eb44",
+    "sheet.png": "f0d9188123452920481574eec3b9ff3d3c3a1e3c0bf22d775b72409300f682b7",
+    "source-audit.json": "51f5b87110403161131d9fee6588ce346340f3e9b040e906cd800953c79dedb3",
+    "sprite.json": "f7b4655476adfffcd09d23ea1f08043cbd11c439d3343069cf90af57e4440568"
+  }
+}

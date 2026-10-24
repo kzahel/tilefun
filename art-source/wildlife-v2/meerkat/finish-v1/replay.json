@@ -1,0 +1,17 @@
+{
+  "identity": "meerkat-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "342067de7610de7ea33c0a715b5e22ba73cf2301dbb76a192b5b0419859d7edb",
+    "index.html": "633a6f9003c18273e7d31b25319c9c4906816b9bf312652c6109bc662bfcb65f",
+    "pixel-audit.json": "b6554abc42e52008727aed293ee32de664c11bf580482318bc8ab85750d5e1c6",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "1cafff19720cd2b1ade97439d50c8a1fb80c4b5f719c575a9829f14ea2f2fdcb",
+    "preview.gif": "6e90a5d558349e471becfb2bd97513ef9f001760fc3c2bd8cc258b157a37adda",
+    "scene-native.png": "b88fd2dc17430c26397a2f5b54c88d330e345bb5b256f56e7f7a11b922d1863b",
+    "sheet.png": "12224e3cc4725c8f45c49b3bd2801f4b57e89a4fa02a0cd036f12152763ffb9f",
+    "source-audit.json": "d80521f606c0ab56c647c7ccd315a1f6b7765b100363526e009de6bad918bb8d",
+    "sprite.json": "2c09e5790fad2741381a91b3f886093a207b2d487caf6dfa38fb0a9c488ceb2b"
+  }
+}

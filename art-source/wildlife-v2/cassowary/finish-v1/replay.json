@@ -1,0 +1,17 @@
+{
+  "identity": "cassowary-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "5f79661cbde935252d78a3d9be170a27059cd2cf69b8058fa7b970fd9d402fb4",
+    "index.html": "20df71fbdb378698590460d4f64fb8903371e112f2db50647753a03a9a5e7e0a",
+    "pixel-audit.json": "a77b3b4671aa6023aa7a3942f061c9f5332b40461712ecd8b377fe70d6ea837b",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "1a4f922105e1aa01b887718e1cd5d1bfbfde11f47892ea841f82baa1129d974a",
+    "preview.gif": "566933384d648332375df6a5dd929f55f17f8bf469552cbc9af5745d360b9737",
+    "scene-native.png": "3b1dfebe8fcf5a88b3656f5c96235428acea2d8dfed265143fd1281755f6a6bb",
+    "sheet.png": "cc55ce6673abeaeedfda4267ace4c6b92dab772c1abd73b0988bd7b7c15085c3",
+    "source-audit.json": "b2e77b9215d3da085d01a3a06d81edf6aba7779d03ed14b6e9b2381cfe9e52cd",
+    "sprite.json": "318fa6f81fa72aad7da591a7c5cc86f8070f7050e2f4fb4772729c6f1bfc92b8"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "pangolin-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "e92423b2e15078645dee83b8d9e207de2a92ffbe840b7ac9141995ec8b660086",
+    "index.html": "a79677aa5ecced363e9dec69dd83664405734e3abb5129609652b8003de6a359",
+    "pixel-audit.json": "31ea3f5f8ef1e8160941597675d9662f785b7768e6b6673d95f4419867a8390d",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "d550b57f1306373bdf36d221843f6528d808ef7c653f3afdfcebd5ba18a26c7e",
+    "preview.gif": "91621cad4be3f9390816ec20e0b4282cc4203d72ac2b626839df7eab880af7e1",
+    "scene-native.png": "8291acc748e440ec0b1600ffe2a8457a140a306c9d6dd7880f5e952fffc81572",
+    "sheet.png": "13edc8ae6d96a4833b7488ea01021a179ba0dca4335d8f9206cab639b80f288a",
+    "source-audit.json": "120ec4ba676149cde219b55e4eb8032b1f53be1c6eacecdae347bbb54d5cb34c",
+    "sprite.json": "5c1bb87cbb9d1a3c76238d6dd7063181827ca492a332373dcbbfd1b50e5ceb06"
+  }
+}

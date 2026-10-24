@@ -1,0 +1,10 @@
+{
+  "identity": "crow-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/crow/behavior-v1/crow.blend": "bd181f0b8712b63b34c073f87f938ae23c0c06068740a5fe74345f524ca48f55"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

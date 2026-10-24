@@ -1,0 +1,53 @@
+{
+  "identity": "praying-mantis-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "praying-mantis-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "a768d4265fe45672a1f0366652ce1f409243c80be9ab67a6a0f400444feffe41",
+      "index.html": "ad38c3158419e0d0c1ee2e0759881d328f8689317d17cf6f052d2e30301c9c47",
+      "pixel-audit.json": "677e7f4ff4940d82752630e139200b9119449d1b89da7424cf5eaf0151cdd4b9",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "fe02b9cb47d044c26c94cb4e1e0cdeff7c94b340599637e02209387c2bf5e2b1",
+      "preview.gif": "9189719f4661de93d6a6395083e8e0c5c639e1f53d59ac1848bd1b87a399b83f",
+      "scene-native.png": "b85c6f4b21032adcd1414fcf14d1514e9427cdb118a5fc6494f8d6f4d19ee6fc",
+      "sheet.png": "ecd3f24b9ebed705c348a33f1e78beb74dffb4e0866e281b050b94d9c1371a84",
+      "source-audit.json": "0581cd17c20a7ee482e510070ae7fca1eea3d476a08898bc87148b7dab93150d",
+      "sprite.json": "b99541b69834df8fbf07347b101b287f359b7ec59bd1ff36cae3ecc5a89c179a"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/praying-mantis/finish-v1/README.md": "f66dee822152292306535416452879d3b256f1f71cddfe1007c19c46a98ff8e4",
+    "art-source/wildlife-v2/praying-mantis/finish-v1/inputs.json": "0ec3cb431cc0e763212b76aec74cf01ab9b5d112408b623fe6c7a4b8bd70cc20",
+    "art-source/wildlife-v2/praying-mantis/finish-v1/replay.json": "480671c8d3f7fc0f03d135e4b9b194b58dd5661b1d90a5955b5003c2c14db23d",
+    "art-source/wildlife-v2/praying-mantis/roster-v3/inputs.json": "602be003e925ee8b5e44b457e443478301fb1c7d773ea57ac46d406171261055",
+    "art-source/wildlife-v2/praying-mantis/roster-v3/praying-mantis.blend": "8bd916f0126c4a678641fd3856acbdf5ba59a9d59c86ced3be241837f452d9a6",
+    "art-source/wildlife-v2/praying-mantis/roster-v3/projection.json": "4a98d3d3901efb26bc9b95c517f6195c7f30acc172821a4bd0ad547ae7d461d9",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/contact-sheet-native.png": "a768d4265fe45672a1f0366652ce1f409243c80be9ab67a6a0f400444feffe41",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/index.html": "ad38c3158419e0d0c1ee2e0759881d328f8689317d17cf6f052d2e30301c9c47",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/pixel-audit.json": "677e7f4ff4940d82752630e139200b9119449d1b89da7424cf5eaf0151cdd4b9",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/preview-native.gif": "fe02b9cb47d044c26c94cb4e1e0cdeff7c94b340599637e02209387c2bf5e2b1",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/preview.gif": "9189719f4661de93d6a6395083e8e0c5c639e1f53d59ac1848bd1b87a399b83f",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/scene-native.png": "b85c6f4b21032adcd1414fcf14d1514e9427cdb118a5fc6494f8d6f4d19ee6fc",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/sheet.png": "ecd3f24b9ebed705c348a33f1e78beb74dffb4e0866e281b050b94d9c1371a84",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/source-audit.json": "0581cd17c20a7ee482e510070ae7fca1eea3d476a08898bc87148b7dab93150d",
+    "public/demos/wildlife-v2/praying-mantis/finish-v1/sprite.json": "b99541b69834df8fbf07347b101b287f359b7ec59bd1ff36cae3ecc5a89c179a",
+    "public/demos/wildlife-v2/praying-mantis/roster-v3/sheet.png": "c461f6b1410ec5d944455b580b6f7adb2b45e0ebdccb0c497805bd4e5b434475",
+    "public/demos/wildlife-v2/praying-mantis/roster-v3/sprite.json": "06d2ae8312e720dbbdc527ac342e2e177e753112682ad0607ae75d134d2231fd",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

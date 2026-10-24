@@ -1,0 +1,10 @@
+{
+  "identity": "leafy-seadragon-finish-v1",
+  "geometryAndMotionUnchanged": true,
+  "cameraAnchorAndTimingUnchanged": true,
+  "editableScenes": {
+    "art-source/wildlife-v2/leafy-seadragon/roster-v3/leafy-seadragon.blend": "95256d3334b393141f2f76075278db7790e0dc6f1bdbb01a056737ca8fbe02c2"
+  },
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces"
+}

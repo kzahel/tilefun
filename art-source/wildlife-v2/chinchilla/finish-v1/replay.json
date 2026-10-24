@@ -1,0 +1,17 @@
+{
+  "identity": "chinchilla-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "32f6c2ad1ddfeaa8c7d61371e6d1707f5c0b66bf3ece717b2a16a2cf41c0eda5",
+    "index.html": "5af60f47a895212a5e6eb2d42a94dcf28f0b34cdedd2c103f2ec4d9348276b24",
+    "pixel-audit.json": "e549290c72029b2c17e98837a6da37799439d36eef2f24c6d861229670049827",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "48c3a4c742cb03a5e59449bcfcf4a1ec4fd0a17d4fb7cca2d8ad24a953408f55",
+    "preview.gif": "4d8aabdd734879e82cae0aa5ea6249a1ad98e274a43b07bf451397931d4b31d8",
+    "scene-native.png": "9b1f1c04f664dd527a1d2237ba073a8f7d13abc72af67f6ccc54d9f7cbc4459f",
+    "sheet.png": "f2e2a60abbc63dc0244e63efe3bae71e461a2b9fcd24bf79e10051fa81c1b7e5",
+    "source-audit.json": "8b1e9b4f449718149d5a1650281f9063440fad39596da584884a5f2207d06d45",
+    "sprite.json": "dfb7dbce6aa6958e80448e2538ee7fcecd2c5d3b70294218fc3693bbe18dfa92"
+  }
+}

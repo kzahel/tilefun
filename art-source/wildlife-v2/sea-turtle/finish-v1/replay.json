@@ -1,0 +1,17 @@
+{
+  "identity": "sea-turtle-finish-v1",
+  "status": "byte-identical",
+  "isolation": "declared inputs only",
+  "artifacts": {
+    "contact-sheet-native.png": "5db1e127e82ddb0380b1a6bca2faab6f7e1b7b262a7c37b9ee0c79abfa445289",
+    "index.html": "c522ac052bd73c7717d59191e9286e6eff9510aad002ae40d8ba6733411a7583",
+    "pixel-audit.json": "ac66be83c3790004c330f91a13b037b125ac9f613b2f33d699c5962e80080f49",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "4fdaffca92f9df6f0f6216b55ec2ef3aa02d6526e73c2dea4dc1939a79bdc41a",
+    "preview.gif": "038e23a6a4dfb90a605f6ff5a80d3f356a07b0162c594dd6bc514babeac23e5c",
+    "scene-native.png": "fd7be0ef11417a27ad9ca3e1ab9c58618c03a8e72b94621d7056a92e449f8a68",
+    "sheet.png": "4a98b9498abfe20a17d78b44ba77585196d311be27d1f8f95152442afe0cb2f4",
+    "source-audit.json": "662622e7a57b1c46887dc6bd48531106a0d268d1bf89542c4c04056f9324adef",
+    "sprite.json": "b73f60980315ebf9f443d01340b2e61ca396395a53fb09537d533af189dab360"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "lobster-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "lobster-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "d1922db4e66346330e4de96906a76a12c467390461f3a1411af975311bfe9fdc",
+      "index.html": "fd14c41d85d6114a870bcaedbcea5cacb7eae12f3c7be955fa5957d1070dcede",
+      "pixel-audit.json": "c7b822729e0596d858bf242da65164a2ff8480838796c6c2ec6f64a51f31e302",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "b5a4b1e77bc2b378f1520064778c4668d2f9fb421ff753cc5e7ea87283731cac",
+      "preview.gif": "581f56a8e9cd84fd85c007e84cd527d7ea5eb6bfd7931eb2f0bc73ed3728b5a5",
+      "scene-native.png": "d58e22cc7c741d9ce0696fb14b921ec0a0e51d875fb8a84048cc61c478bd6d35",
+      "sheet.png": "a4df00836a9e8971dbe98b8f981a26d2ccfe7cec75d9aa3909254be30af7ec70",
+      "source-audit.json": "cd1895dff9f91278284654c684f816d058101bf1e094ba77baf37c2366dc8820",
+      "sprite.json": "17a91791631ceaf243954ce071f31c004605a6bae1885746a66ccfaa8735f166"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/lobster/finish-v1/README.md": "55c73a13d37e8dc0de624a65661b948b5335797e0b4aa7a6268b5954bc15cfae",
+    "art-source/wildlife-v2/lobster/finish-v1/inputs.json": "692e83d2eef17d9ce54fecf591056e61d15e8bfffe8352b1bb583739134fb51f",
+    "art-source/wildlife-v2/lobster/finish-v1/replay.json": "353de9c8820bc30243dfe27a9365af00416c86be36e47dc7ea32ba22b2d6f621",
+    "art-source/wildlife-v2/lobster/roster-v3/inputs.json": "5fb44238331246d8d4219ef247554112457243cfab6ee1a04e441a6638985c72",
+    "art-source/wildlife-v2/lobster/roster-v3/lobster.blend": "dfe34191f932fe1b639b6de5aa590ede05fb3b1d8b69b4735a1b2ce011fe0ed1",
+    "art-source/wildlife-v2/lobster/roster-v3/projection.json": "958e5b7af13669d1e168e9b0f3e3cecc25e6bdc89eb19f6202646ae819806cdc",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/lobster/finish-v1/contact-sheet-native.png": "d1922db4e66346330e4de96906a76a12c467390461f3a1411af975311bfe9fdc",
+    "public/demos/wildlife-v2/lobster/finish-v1/index.html": "fd14c41d85d6114a870bcaedbcea5cacb7eae12f3c7be955fa5957d1070dcede",
+    "public/demos/wildlife-v2/lobster/finish-v1/pixel-audit.json": "c7b822729e0596d858bf242da65164a2ff8480838796c6c2ec6f64a51f31e302",
+    "public/demos/wildlife-v2/lobster/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/lobster/finish-v1/preview-native.gif": "b5a4b1e77bc2b378f1520064778c4668d2f9fb421ff753cc5e7ea87283731cac",
+    "public/demos/wildlife-v2/lobster/finish-v1/preview.gif": "581f56a8e9cd84fd85c007e84cd527d7ea5eb6bfd7931eb2f0bc73ed3728b5a5",
+    "public/demos/wildlife-v2/lobster/finish-v1/scene-native.png": "d58e22cc7c741d9ce0696fb14b921ec0a0e51d875fb8a84048cc61c478bd6d35",
+    "public/demos/wildlife-v2/lobster/finish-v1/sheet.png": "a4df00836a9e8971dbe98b8f981a26d2ccfe7cec75d9aa3909254be30af7ec70",
+    "public/demos/wildlife-v2/lobster/finish-v1/source-audit.json": "cd1895dff9f91278284654c684f816d058101bf1e094ba77baf37c2366dc8820",
+    "public/demos/wildlife-v2/lobster/finish-v1/sprite.json": "17a91791631ceaf243954ce071f31c004605a6bae1885746a66ccfaa8735f166",
+    "public/demos/wildlife-v2/lobster/roster-v3/sheet.png": "88b6d06ddbd5d171b3e77d3e6df8aef0904f2d957650d73b02c2e813b725c6e6",
+    "public/demos/wildlife-v2/lobster/roster-v3/sprite.json": "83cbc0a310057a53bd4be09cff4e041fc09168e9d300eaae814c7c12ef1971f6",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

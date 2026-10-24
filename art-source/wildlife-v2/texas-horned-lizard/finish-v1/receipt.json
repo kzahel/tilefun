@@ -1,0 +1,53 @@
+{
+  "identity": "texas-horned-lizard-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "texas-horned-lizard-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "90b69c2f20613c6cee37ef16a9ae17ad7ea63be7aafd980737aa537a857099d1",
+      "index.html": "eed052b27be8579fef6dfd1dd6e322e7e13ea80472934190732a4f82eeb77652",
+      "pixel-audit.json": "682217ee28f7a8adccffbd8238738745057a8f3f1b3a6f699352f1594b48a39e",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "49d4bfdafe32d0ee0c9876703d23d56179a45ea8b493bcbc4a6fb8efb660bd1b",
+      "preview.gif": "f86730a6710bcbb9aef417c07c15a2f218a8efd7f53256f58e7ac4017c6afb9d",
+      "scene-native.png": "6c3aaad06b8e771308192320137f08383e00fa3fdc315f1b1c65ef3882c823c5",
+      "sheet.png": "efb2526430447952bac109c05ebce8a3dd23dd96e90c7760a19f71a17956f6f2",
+      "source-audit.json": "116aa78e1d841e62f57a084aa82248fb2a063519af3a8215580e06c5ab75393f",
+      "sprite.json": "6abef0384dce8c3947c2ba29e9fe95636b7a28d000d43a7ad5d65b1b7c8a11e7"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/texas-horned-lizard/finish-v1/README.md": "7c81e6a4c0266abacd60388b7ad0049b0d0603d8cd5bb2b8d7932c1125151598",
+    "art-source/wildlife-v2/texas-horned-lizard/finish-v1/inputs.json": "dd941b6d08ed90af5aa84482b8ea48ed07c507090de9e1513dba3680018baa46",
+    "art-source/wildlife-v2/texas-horned-lizard/finish-v1/replay.json": "ec53c942650dc570d2a8f293875c8c93f40fdf94d65451a168c09c998ed1c68a",
+    "art-source/wildlife-v2/texas-horned-lizard/roster-v2/inputs.json": "b0c40ee2e383e1c36c91f5da9151668a9803a907783f188954c98b7a03051391",
+    "art-source/wildlife-v2/texas-horned-lizard/roster-v2/projection.json": "55f2485a8015c269e03dbdaecda07505ca26a7f67bf2d4070b4b13f394d8e3c2",
+    "art-source/wildlife-v2/texas-horned-lizard/roster-v2/texas-horned-lizard.blend": "35c06e16f8a1cd3c167eb473462a89bc001dde9ea2965c3967809cd4ed71c4ba",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/contact-sheet-native.png": "90b69c2f20613c6cee37ef16a9ae17ad7ea63be7aafd980737aa537a857099d1",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/index.html": "eed052b27be8579fef6dfd1dd6e322e7e13ea80472934190732a4f82eeb77652",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/pixel-audit.json": "682217ee28f7a8adccffbd8238738745057a8f3f1b3a6f699352f1594b48a39e",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/preview-native.gif": "49d4bfdafe32d0ee0c9876703d23d56179a45ea8b493bcbc4a6fb8efb660bd1b",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/preview.gif": "f86730a6710bcbb9aef417c07c15a2f218a8efd7f53256f58e7ac4017c6afb9d",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/scene-native.png": "6c3aaad06b8e771308192320137f08383e00fa3fdc315f1b1c65ef3882c823c5",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/sheet.png": "efb2526430447952bac109c05ebce8a3dd23dd96e90c7760a19f71a17956f6f2",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/source-audit.json": "116aa78e1d841e62f57a084aa82248fb2a063519af3a8215580e06c5ab75393f",
+    "public/demos/wildlife-v2/texas-horned-lizard/finish-v1/sprite.json": "6abef0384dce8c3947c2ba29e9fe95636b7a28d000d43a7ad5d65b1b7c8a11e7",
+    "public/demos/wildlife-v2/texas-horned-lizard/roster-v2/sheet.png": "7db9bdb4ef1af2537be5962d8c2b1c5fc9fbd089ee118b809e635580754fd384",
+    "public/demos/wildlife-v2/texas-horned-lizard/roster-v2/sprite.json": "9fe0014dc91222fdaafa69a75b2e016fb02e3dbf3b26db86bfd764986352912e",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "identity": "shoebill-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "shoebill-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "ea99385103a4a5278dca3eda7444ccd326c785a2e4b0472a99179c4c6f8b4225",
+      "index.html": "48396b40b1996b5c84faac746ca7dc28d9189a22e696681520c1af2c5ea691fd",
+      "pixel-audit.json": "72ebc78ec8e80e1056b36e88ab2254d83c2a3245833572a3f0e9e77e1eb1bfc1",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "2ce9778d5f78ef164d7c9c0915a69100f828e42407c64817ad9c77185748c21e",
+      "preview.gif": "bcc8e1e53ebeab51f18f3569a5d63a6ba361c3579a277482c475af60f401c7b6",
+      "scene-native.png": "1ccd992548fae6d1daf22ce776fc3de1bb5f7f170591d6d5e027aab44f957a1f",
+      "sheet.png": "2bc52d21794ddbe097afc1f98968b96abe31a43786e7767c36e09d8050755253",
+      "source-audit.json": "e8f3b5780b8e925b1e8c7dc2d1a8e4655c32f166a63de7062ae6b06b4947c437",
+      "sprite.json": "9ee7dee60f6c11041fa6b8efbbdd1ab185b81ebbf63b5a213b309bc6111c6481"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/shoebill/finish-v1/README.md": "69977a5dcce0d4dd67299b4e960d808cc6f89b12b3c5d607920a104e2a612d03",
+    "art-source/wildlife-v2/shoebill/finish-v1/inputs.json": "ca73e314cc0cf67a38dc885675a443a4cea30a26099cefd2ebe05d4bb43be2a6",
+    "art-source/wildlife-v2/shoebill/finish-v1/replay.json": "45b6a27ee3454d4f65f5e0e94a0437b1541d5fb64f7c046f46cc81e9b563baa1",
+    "art-source/wildlife-v2/shoebill/roster-v3/inputs.json": "ad9c3e5782b6b66d2f674df589f8ddf65304ac4668015daa2b3facd79d82bd4f",
+    "art-source/wildlife-v2/shoebill/roster-v3/projection.json": "6e969bc3739c5d0c483006e9a2369f199695231aaf5778c9e0989ab6c0389bfc",
+    "art-source/wildlife-v2/shoebill/roster-v3/shoebill.blend": "36d03976a042a0449d5d0f806a3ae107a98345183b79e48aa60c71e30712b615",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/shoebill/finish-v1/contact-sheet-native.png": "ea99385103a4a5278dca3eda7444ccd326c785a2e4b0472a99179c4c6f8b4225",
+    "public/demos/wildlife-v2/shoebill/finish-v1/index.html": "48396b40b1996b5c84faac746ca7dc28d9189a22e696681520c1af2c5ea691fd",
+    "public/demos/wildlife-v2/shoebill/finish-v1/pixel-audit.json": "72ebc78ec8e80e1056b36e88ab2254d83c2a3245833572a3f0e9e77e1eb1bfc1",
+    "public/demos/wildlife-v2/shoebill/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/shoebill/finish-v1/preview-native.gif": "2ce9778d5f78ef164d7c9c0915a69100f828e42407c64817ad9c77185748c21e",
+    "public/demos/wildlife-v2/shoebill/finish-v1/preview.gif": "bcc8e1e53ebeab51f18f3569a5d63a6ba361c3579a277482c475af60f401c7b6",
+    "public/demos/wildlife-v2/shoebill/finish-v1/scene-native.png": "1ccd992548fae6d1daf22ce776fc3de1bb5f7f170591d6d5e027aab44f957a1f",
+    "public/demos/wildlife-v2/shoebill/finish-v1/sheet.png": "2bc52d21794ddbe097afc1f98968b96abe31a43786e7767c36e09d8050755253",
+    "public/demos/wildlife-v2/shoebill/finish-v1/source-audit.json": "e8f3b5780b8e925b1e8c7dc2d1a8e4655c32f166a63de7062ae6b06b4947c437",
+    "public/demos/wildlife-v2/shoebill/finish-v1/sprite.json": "9ee7dee60f6c11041fa6b8efbbdd1ab185b81ebbf63b5a213b309bc6111c6481",
+    "public/demos/wildlife-v2/shoebill/roster-v3/sheet.png": "a2b633bebe9a195db2e5698a2dc5272d88b3fd3e0010157352e31f0678d1f8a9",
+    "public/demos/wildlife-v2/shoebill/roster-v3/sprite.json": "8fd03f1bb7a5a6d313c0b9786fbf920bd39fb40b7b1041421b4fb1d8b25f0996",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

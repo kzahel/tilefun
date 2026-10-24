@@ -1,0 +1,53 @@
+{
+  "identity": "ocean-sunfish-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "ocean-sunfish-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "11dfd7dec137e0ba65891d022f2df6240e95982eee8e1cbe6a7a797dfd501020",
+      "index.html": "543305812608b093cf5c1f775b1f8128001b3574562ef0507d455f07b2006402",
+      "pixel-audit.json": "f7eb29003a64413a876a8b1c662afdd177de4fbae6d16815e649dabd895363c1",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "07fc9f216d4b2acb3bf1b3c184803fed5888855ac0467db1383b4abba4c4cef2",
+      "preview.gif": "03e7c3b926d71ae21c7a025041e80aafbfe5904074ff35151e9c4bf31aa24cc2",
+      "scene-native.png": "f2e6afe7a66b046a74056e5fc04c78a48b85a7662dc90aaf98eeb069b49d439e",
+      "sheet.png": "f1d730399b7369102289cb2ed3f1f37a9f255299beebabaea578f9c959ac393c",
+      "source-audit.json": "1352b2c735d6d60e2e70b122abda2f3c629476199a2686a4053c94e8694b6450",
+      "sprite.json": "9de3f446f78f51568bb3923cd35cf3a7b560f67d5530a99e5fb4465ce235a5b8"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/ocean-sunfish/finish-v1/README.md": "8337b709f2e5438bb43cf731bd2df979283b3f1c0f749c1111f2d5ed2ca8b3d6",
+    "art-source/wildlife-v2/ocean-sunfish/finish-v1/inputs.json": "a7168f439c3dce9b0346f4e5d2c409a66a2dcbaa1bbdcedafefdd622bb6259e4",
+    "art-source/wildlife-v2/ocean-sunfish/finish-v1/replay.json": "22cf65244fdaaaf250c084cd6163934aea5a656493db006f010ac1b10c4d87fa",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/inputs.json": "3b14f2c3a54c37fff814eafc63f54f16f1669c4b9b6e1d1e495ac2c62e3635f2",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/ocean-sunfish.blend": "a3cf0497b81167b7f131bb3303d94f48ab52de94fba671aaf134a19d10eace6c",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/projection.json": "fcef6f863ffb1abbc0f86831d5edea9b348d9a142e7a9d41460aa5489b0fed4e",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/contact-sheet-native.png": "11dfd7dec137e0ba65891d022f2df6240e95982eee8e1cbe6a7a797dfd501020",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/index.html": "543305812608b093cf5c1f775b1f8128001b3574562ef0507d455f07b2006402",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/pixel-audit.json": "f7eb29003a64413a876a8b1c662afdd177de4fbae6d16815e649dabd895363c1",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/preview-native.gif": "07fc9f216d4b2acb3bf1b3c184803fed5888855ac0467db1383b4abba4c4cef2",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/preview.gif": "03e7c3b926d71ae21c7a025041e80aafbfe5904074ff35151e9c4bf31aa24cc2",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/scene-native.png": "f2e6afe7a66b046a74056e5fc04c78a48b85a7662dc90aaf98eeb069b49d439e",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/sheet.png": "f1d730399b7369102289cb2ed3f1f37a9f255299beebabaea578f9c959ac393c",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/source-audit.json": "1352b2c735d6d60e2e70b122abda2f3c629476199a2686a4053c94e8694b6450",
+    "public/demos/wildlife-v2/ocean-sunfish/finish-v1/sprite.json": "9de3f446f78f51568bb3923cd35cf3a7b560f67d5530a99e5fb4465ce235a5b8",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/sheet.png": "6bec15ed654d1d21c5ad021dc2b5f823f457d9bab2044b9f0949f5fd2bb95037",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/sprite.json": "af8dde3b4f4b9acf69d717a2647e7f27b420baa5fa322a900c725f1b682efeb5",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}

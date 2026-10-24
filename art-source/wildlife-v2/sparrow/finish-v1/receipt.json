@@ -1,0 +1,53 @@
+{
+  "identity": "sparrow-finish-v1",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
+  "policy": "wildlife-paint-v1",
+  "method": "material-surfaces",
+  "replay": {
+    "identity": "sparrow-finish-v1",
+    "status": "byte-identical",
+    "isolation": "declared inputs only",
+    "artifacts": {
+      "contact-sheet-native.png": "676667fe892b7a6ac55b87a05a0f059d0e3f9e898649a5da864ea496f729315e",
+      "index.html": "cad6bfb331eb5ce34f01a64215134b6d7b90b7f3b119097a59c3fccb655c6da4",
+      "pixel-audit.json": "f96d7b1021f6f60e3d9ff4cef6c54aee1a6a580cc2dc68b192c2593e09890501",
+      "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+      "preview-native.gif": "cc4b6b23203bcc7bee3fd124d809947b3c343ddbb14ad2f79d63b16c10ec0403",
+      "preview.gif": "08463dd387e16f6d0046a321375235adb105ab927ea9b2c79629dd3eaf216feb",
+      "scene-native.png": "cf032fcd904e32d0bb4459518cd7dff219ae8689e4d5523a11c0682cb49997eb",
+      "sheet.png": "3e995376f1f4b80ca2738358b83f898641a40348cd854c5e899e6d303305f0bb",
+      "source-audit.json": "63d7f3a9ec3f54409ac989c772192c49b67e2b627596bf1ea9638bdcb6a16540",
+      "sprite.json": "71a971c3817dbed8271151776a7069abf6f4dcb8a9863d9ee6bce5a09c54a6a7"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/finishing-v1/painter.py": "2d3c944da3a3ce22caba974b188e2a2edd722761407cc1ec1371f76539c0d3a4",
+    "art-source/wildlife-v2/finishing-v1/parts.py": "542589ef1288511b3024eb051662d67932cf20c4fcfb8c02e5f0b08d932706c4",
+    "art-source/wildlife-v2/sparrow/finish-v1/README.md": "dcc4d53cf7ff4b4160c35f98b0496c5510da7e2fb394f254fc8b1b675a98b0b7",
+    "art-source/wildlife-v2/sparrow/finish-v1/inputs.json": "ae7e2da5de348483f35ea1c67dd30db919646393ed5e19ff9ef03b79930c426d",
+    "art-source/wildlife-v2/sparrow/finish-v1/replay.json": "0aabdda0b87837fcfe6f115296b56ff6146d6e87ea340494b4d5b94fc5f58453",
+    "art-source/wildlife-v2/sparrow/roster-v2/inputs.json": "36bc3b4f0a4e6607f8179b29e4179e56934d9fb3e4915fac575764d0c51e549d",
+    "art-source/wildlife-v2/sparrow/roster-v2/projection.json": "ba02beb4bd9aee74d9f3361301283da7d0025ee9df61788ad4abaefd6e31e5de",
+    "art-source/wildlife-v2/sparrow/roster-v2/sparrow.blend": "c264a56d681f2987a0c6802f09b825da1deae74b1f72ae0c80ae00af6a2d2f42",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/sparrow/finish-v1/contact-sheet-native.png": "676667fe892b7a6ac55b87a05a0f059d0e3f9e898649a5da864ea496f729315e",
+    "public/demos/wildlife-v2/sparrow/finish-v1/index.html": "cad6bfb331eb5ce34f01a64215134b6d7b90b7f3b119097a59c3fccb655c6da4",
+    "public/demos/wildlife-v2/sparrow/finish-v1/pixel-audit.json": "f96d7b1021f6f60e3d9ff4cef6c54aee1a6a580cc2dc68b192c2593e09890501",
+    "public/demos/wildlife-v2/sparrow/finish-v1/playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "public/demos/wildlife-v2/sparrow/finish-v1/preview-native.gif": "cc4b6b23203bcc7bee3fd124d809947b3c343ddbb14ad2f79d63b16c10ec0403",
+    "public/demos/wildlife-v2/sparrow/finish-v1/preview.gif": "08463dd387e16f6d0046a321375235adb105ab927ea9b2c79629dd3eaf216feb",
+    "public/demos/wildlife-v2/sparrow/finish-v1/scene-native.png": "cf032fcd904e32d0bb4459518cd7dff219ae8689e4d5523a11c0682cb49997eb",
+    "public/demos/wildlife-v2/sparrow/finish-v1/sheet.png": "3e995376f1f4b80ca2738358b83f898641a40348cd854c5e899e6d303305f0bb",
+    "public/demos/wildlife-v2/sparrow/finish-v1/source-audit.json": "63d7f3a9ec3f54409ac989c772192c49b67e2b627596bf1ea9638bdcb6a16540",
+    "public/demos/wildlife-v2/sparrow/finish-v1/sprite.json": "71a971c3817dbed8271151776a7069abf6f4dcb8a9863d9ee6bce5a09c54a6a7",
+    "public/demos/wildlife-v2/sparrow/roster-v2/sheet.png": "d96b72f60e4762565fa782bd3f60673be019463757197b6d7a55113c599f7ff6",
+    "public/demos/wildlife-v2/sparrow/roster-v2/sprite.json": "87eee33a4393f251b85d7c009c63d37e7f1c89f63528b85c3774ae286893e0ba",
+    "scripts/wildlife/finish-bank.py": "862b42e16dfadf451bad63f2b346945e6afa02f0435f5a42a76d1e57c78a3d15",
+    "scripts/wildlife/meadow-playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "scripts/wildlife/project-paint.py": "fb71045af16c582641c220f45633a114444a6a815638d80d2069f8eaadd547f5",
+    "scripts/wildlife/register-finishing.mjs": "0ed841d8483593d837b8f423f215e4be142d4edfc86a6800505abc8867def79a"
+  }
+}
