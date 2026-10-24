@@ -1,5 +1,7 @@
 # Shared wildlife finishing
 
+Status: implemented and validated; exact human art review pending · 2026-10-24.
+
 Owner authorized the correction, hardening, commit and push on 2026-10-24,
 following the [206-entry source audit](../wildlife-outline-audit.md).
 This authorizes new correction identities, including provisional gameplay use;
@@ -104,8 +106,8 @@ single-worker reruns (eight passed, including the other doorway variant).
 The npm chain stops after the failed native stage; its Node integration stage
 was run separately and passes. Local logs are in ignored `data/wildlife-187/`.
 
-Full browser validation and delivery are in progress. Human review remains
-pending; the next art step is owner review of these exact correction identities.
+Full browser validation is recorded below. Human review remains pending; the
+next art step is owner review of these exact correction identities.
 
 ## Deployment gate follow-up
 
@@ -134,3 +136,30 @@ pass after the lockfile changes. During that rebuild, the first browser run's
 preview temporarily lost `dist`, causing page-load 404s. Stop that run, retain
 its 328 passing cases, and resume the exact remaining 512 with Playwright's
 `--test-list-invert`; do not weaken or omit the interrupted assertions.
+
+## Final verification
+
+All 840 collected browser cases are exercised: 328 passing cases retained from
+the interrupted run, then 511 passed / one failed in the exact remaining
+512-case run (28.1 minutes). The one failure is the existing comprehensive room
+editor flow exhausting its local 30-second budget. It repeats in isolation at
+30 seconds, then passes unchanged in 31.8 seconds with the existing 60-second
+CI budget (`--last-failed --workers=1 --timeout=60000`). No test source,
+assertion, polling deadline or configured budget is changed. Interrupted
+page-load 404s are all re-exercised against the stable build. Traces and both
+original-budget failures remain in ignored `data/wildlife-187/`.
+
+Implementation `dded5c0f2` and the dependency follow-up `fc954493f` are pushed to
+main. [Hosted CI for the code](https://github.com/kzahel/tilefun/actions/runs/40115916263)
+passes all three required validation jobs: check (including the complete Linux
+native suite), raster and smoke. This resolves the local Windows native
+environment limitations without hiding them. Deployment starts after these
+checks; final evidence/status documentation does not change runtime pixels.
+
+Fresh Workshop inbox: manifest current; `wildlife-v2-finishing-187` contains
+137 unchecked corrections, zero approvals and zero needs-changes reports;
+there are no pending requests/fixes. The production checkpoint is ready for
+owner review. Review deer idle → lower → browse → raise in all facings, then
+red panda, chinchilla, hedgehog and guinea pig at native scale before deciding
+whether further paint refinement is needed. Existing body-motion holds remain
+separate; this correction does not invent new motion approvals.

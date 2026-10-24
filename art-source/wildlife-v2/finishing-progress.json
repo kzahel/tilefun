@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-24",
   "authorization": "docs/tactical/187-shared-wildlife-finishing.md",
-  "state": "browser-validation",
+  "state": "ready-for-owner-review",
   "policies": 206,
   "corrected": 137,
   "retained": 69,
@@ -34,14 +34,49 @@
       "failed": 12,
       "skipped": 10,
       "preExistingWindowsTestFailures": 5,
-      "preExistingWindowsSuiteErrors": 1,
       "parallelLoadTimeouts": 7,
-      "targetedRerunPassed": 8
+      "targetedRerunPassed": 8,
+      "preExistingWindowsFailedSuites": 1
     },
     "nodeIntegrationPassed": 1,
     "httpIntegrationPassed": 3,
     "workerTestsPassed": 11,
     "workerBuild": "passed",
-    "browser": "in-progress"
+    "browser": {
+      "state": "verified",
+      "uniqueCases": 840,
+      "preservedPassingCases": 328,
+      "remainingRun": {
+        "passed": 511,
+        "failed": 1
+      },
+      "roomEditorRerun": {
+        "passed": 1,
+        "durationSeconds": 31.8,
+        "budget": "existing CI 60 seconds",
+        "local30SecondBudget": "times out unchanged"
+      },
+      "testSourcesAndAssertions": "unchanged"
+    },
+    "dependencyAudits": "zero vulnerabilities in root and Worker",
+    "cleanInstall": "root patches and Worker Undici verified",
+    "historicalReplayChecksPassed": 48,
+    "hostedCI": {
+      "commit": "fc954493f",
+      "url": "https://github.com/kzahel/tilefun/actions/runs/40115916263",
+      "check": "passed",
+      "raster": "passed",
+      "smoke": "passed"
+    }
+  },
+  "implementationCommit": "dded5c0f2",
+  "dependencyGateCommit": "fc954493f",
+  "sourceInputsTracked": 2552,
+  "reviewInbox": {
+    "manifest": "current",
+    "unchecked": 137,
+    "approved": 0,
+    "needsChanges": 0,
+    "pendingRequests": 0
   }
 }

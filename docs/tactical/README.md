@@ -12,7 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [187 Shared wildlife finishing](187-shared-wildlife-finishing.md) | In progress: per-animal paint policies, retained action detail and new immutable correction banks; [animal behaviors](../topics/wildlife-behaviors.md) |
+| [187 Shared wildlife finishing](187-shared-wildlife-finishing.md) | Implemented: 206 paint policies, 137 immutable corrections, isolated replays and browser/CI verification; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [186 CI reliability and deployment gate](186-ci-reliability-and-deployment-gate.md) | Locally qualified: dependency patches, browser race repairs, 27-case push gate and full nightly/manual coverage; hosted run pending push; [testing](../topics/testing.md) |
 | [184 Ground rendering and moving racetrack](184-ground-rendering-and-moving-racetrack.md) | Delivered: explicit ground ownership, local bridge images and ordered scene runs; native moving track/depot about 19→53–54 FPS, normal zoom/walking about 59 FPS; 836 browser checks pass; wide-view pacing/thermal limits retained; [rendering](../topics/rendering-architecture.md), [performance](../topics/performance.md) |
 | [185 Overnight animal voices](185-overnight-animal-voices.md) | Delivered 36 planned + 28 extra animals in eleven sound batches; targeted checks passed, listening review pending; [animal sounds](../topics/wildlife-audio.md) |

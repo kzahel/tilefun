@@ -4,7 +4,7 @@
 
 ## Consistent wildlife paint
 
-137 corrected whole-bank revisions; 69 retained paint policies across 206 active entries. State: browser-validation. Exact human review remains pending.
+137 corrected whole-bank revisions; 69 retained paint policies across 206 active entries. State: ready-for-owner-review. Exact human review remains pending.
 
 137 isolated byte-identical replays cover 30,468 pose cells. [Correction and validation](tactical/187-shared-wildlife-finishing.md) · [Finishing contracts](../art-source/wildlife-v2/finishing.json).
 
@@ -113,7 +113,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-24T17:08:45.151Z (24/10/2026, 19:08:45 Berlin).
+Snapshot: 2026-10-24T17:51:12.333Z (24/10/2026, 19:51:12 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
