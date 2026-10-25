@@ -63,10 +63,10 @@ export class OrderedWorkerChannel<T extends BufferedPacket> {
   }
 
   /** A single message is atomic. The time bound is checked between messages. */
-  pump(consume: (item: T) => void, budgetMs = 2): void {
+  pump(consume: (item: T) => void, budgetMs = 2, canConsume: () => boolean = () => true): void {
     const until = performance.now() + budgetMs;
     let count = 0;
-    while (!this.closed && this.cursor < this.incoming.length) {
+    while (!this.closed && this.cursor < this.incoming.length && canConsume()) {
       const item = this.incoming[this.cursor++];
       if (item) consume(item);
       if (++count >= 64 || performance.now() >= until) break;

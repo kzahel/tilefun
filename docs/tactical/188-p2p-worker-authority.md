@@ -23,7 +23,7 @@ decoding and re-encoding guest traffic there. Preserve the guest wire protocol.
 
 - [x] Generalize the Worker host with isolated peer links, connection lifecycle,
   per-recipient readiness and explicit multiplayer visibility policy.
-- [ ] Bridge PeerJS to Worker authority and integrate browser lifecycle/diagnostics.
+- [x] Bridge PeerJS to Worker authority and integrate browser lifecycle/diagnostics.
 - [ ] Qualify native P2P/Worker boundaries, record measurements and update owners.
 
 ## Validation budget
@@ -52,9 +52,23 @@ Expand only to investigate a specific failure or newly changed boundary.
 - Slice 1 checks: 30 focused tests pass (WorkerClientTransport,
   OrderedWorkerChannel, GameServer); browser TypeScript project passes. Changed
   runtime-file lint passes with two existing Realm non-null assertion warnings.
-- Before P2P integration, short regional-seed-2026 desktop samples record 241
-  render callbacks and 241 ticks in each four-second sample, frame p95 about
-  17.4–17.8ms. This warm scene does not reproduce the reported hosting lag.
+- Initial captures left the menu open and recorded idle play; these are not
+  walking evidence and are superseded by the movement-checked captures below.
+- Slice 2: P2P now uses the same Worker launcher, local transport, save/navigation
+  fences and watchdog as single player. PeerJS forwards owned binary buffers;
+  guest decode, GameServer simulation and replication encoding live in the Worker.
+  Native/PeerJS congestion checks withhold per-link credit between messages.
+- Slice 2 checks: 35 focused tests pass across transport, server, diagnostics and
+  embedded ScenarioWorkerHost. Browser TypeScript passes. Five selected production
+  browser checks pass: menu host/join/leave, large fragmented transfers/reconnect,
+  retry exhaustion, single-player save/reopen and physics/visibility lifecycle.
+- The new P2P Worker boundary check passes: actual authority ticks advance inside
+  a 350ms main-thread stall; render callbacks continue inside a 350ms Worker stall;
+  a hidden host with its render loop stopped serves over 120 guest ticks without
+  unbounded local buffering; Stop hosting saves an elevation edit for local reopen.
+- Bundling passes. The first build check found six art-catalog source line
+  references shifted by the Realm publication guard; refreshed metadata only.
+  Workshop digest regeneration is required because it includes transport sources.
 
 ## Evidence and remaining work
 

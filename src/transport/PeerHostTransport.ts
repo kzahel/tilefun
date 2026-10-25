@@ -1,117 +1,23 @@
 import Peer, { type DataConnection } from "peerjs";
-import {
-  decodeClientMessage,
-  decodeServerMessage,
-  encodeClientMessage,
-  encodeServerMessage,
-} from "../shared/binaryCodec.js";
-import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
+import { encodeServerMessage } from "../shared/binaryCodec.js";
 import { PeerConnectionDiagnostics } from "./PeerConnectionDiagnostics.js";
 import { peerOptions } from "./peerOptions.js";
-import type { ConnectionIdentity, IClientTransport, IServerTransport } from "./Transport.js";
-import { routeServerMessageChannel } from "./webrtcChannels.js";
+import type { WorkerClientTransport } from "./WorkerClientTransport.js";
+import type { WorkerPeerLink } from "./WorkerPeerLink.js";
 
-const LOCAL_CLIENT_ID = "local";
-
-/**
- * P2P host transport: combines local in-memory delivery for the host's own
- * GameClient (zero latency, like SerializingTransport) with PeerJS DataChannel
- * routing for remote guest connections.
- *
- * The host browser runs GameServer + GameClient. Remote guests connect via
- * PeerGuestTransport using the host's peer ID.
- */
+/** Main-thread PeerJS connections bridge owned binary buffers to Worker authority. */
 export class PeerHostTransport {
-  readonly clientSide: IClientTransport;
-  readonly serverSide: IServerTransport;
   readonly peer: Peer;
-
-  private serverMessageHandler: ((clientId: string, msg: ClientMessage) => void) | null = null;
-  private clientMessageHandler: ((msg: ServerMessage) => void) | null = null;
-  private connectHandler: ((clientId: string, identity?: ConnectionIdentity) => void) | null = null;
-  private disconnectHandler: ((clientId: string) => void) | null = null;
+  private links = new WeakMap<DataConnection, WorkerPeerLink>();
   private remoteClients = new Map<string, DataConnection>();
-  private remoteEntitiesFallbackLogged = new Set<string>();
   private closed = false;
-  private diagnostics = new WeakMap<DataConnection, PeerConnectionDiagnostics>();
 
-  constructor(peerId?: string) {
+  constructor(
+    private readonly authority: WorkerClientTransport,
+    peerId?: string,
+  ) {
     const opts = peerOptions();
     this.peer = peerId ? new Peer(peerId, opts) : new Peer(opts);
-
-    const self = this;
-
-    // --- clientSide: for host's own GameClient (binary roundtrip) ---
-    this.clientSide = {
-      send(msg: ClientMessage): void {
-        if (self.closed) return;
-        self.serverMessageHandler?.(LOCAL_CLIENT_ID, decodeClientMessage(encodeClientMessage(msg)));
-      },
-      onMessage(handler: (msg: ServerMessage) => void): void {
-        self.clientMessageHandler = handler;
-      },
-      close(): void {
-        self.closed = true;
-      },
-      getDebugInfo() {
-        return { transport: "Host local (P2P guests: WebRTC ordered sync)" };
-      },
-    };
-
-    // --- serverSide: for GameServer (routes to local + remote) ---
-    this.serverSide = {
-      send(clientId: string, msg: ServerMessage): void {
-        if (self.closed) return;
-        if (clientId === LOCAL_CLIENT_ID) {
-          const buf = encodeServerMessage(msg);
-          self.clientMessageHandler?.(decodeServerMessage(buf));
-        } else {
-          const routed = routeServerMessageChannel(msg, false);
-          if (routed.fellBack) {
-            self.logRemoteEntitiesFallbackOnce(clientId);
-          }
-          const conn = self.remoteClients.get(clientId);
-          if (conn?.open) {
-            self.diagnostics.get(conn)?.send(msg.type, encodeServerMessage(msg));
-          }
-        }
-      },
-      broadcast(msg: ServerMessage): void {
-        if (self.closed) return;
-        // Encode once, send to all
-        const buf = encodeServerMessage(msg);
-        // Local host client (decode copy)
-        self.clientMessageHandler?.(decodeServerMessage(buf));
-        // All remote guests
-        const routed = routeServerMessageChannel(msg, false);
-        for (const [clientId, conn] of self.remoteClients) {
-          if (routed.fellBack) {
-            self.logRemoteEntitiesFallbackOnce(clientId);
-          }
-          if (conn.open) {
-            self.diagnostics.get(conn)?.send(msg.type, buf);
-          }
-        }
-      },
-      onMessage(handler: (clientId: string, msg: ClientMessage) => void): void {
-        self.serverMessageHandler = handler;
-      },
-      onConnect(handler: (clientId: string, identity?: ConnectionIdentity) => void): void {
-        self.connectHandler = handler;
-      },
-      onDisconnect(handler: (clientId: string) => void): void {
-        self.disconnectHandler = handler;
-      },
-      close(): void {
-        self.closed = true;
-        for (const conn of self.remoteClients.values()) {
-          conn.close();
-        }
-        self.remoteClients.clear();
-        self.remoteEntitiesFallbackLogged.clear();
-        self.peer.destroy();
-      },
-    };
 
     this.peer.on("open", (id) => {
       console.log(
@@ -166,9 +72,15 @@ export class PeerHostTransport {
     });
   }
 
-  /** Fire the connect event for the local host client (like SerializingTransport.triggerConnect). */
-  triggerConnect(identity?: ConnectionIdentity): void {
-    this.connectHandler?.(LOCAL_CLIENT_ID, identity);
+  close(): void {
+    if (this.closed) return;
+    this.closed = true;
+    for (const conn of this.remoteClients.values()) {
+      this.links.get(conn)?.close();
+      conn.close();
+    }
+    this.remoteClients.clear();
+    this.peer.destroy();
   }
 
   /** Total player count (remote guests + local host). */
@@ -178,7 +90,7 @@ export class PeerHostTransport {
 
   private handleConnection(conn: DataConnection): void {
     const clientId = (conn.metadata as { uuid?: string })?.uuid;
-    if (!clientId) {
+    if (this.closed || typeof clientId !== "string" || !clientId || clientId === "local") {
       console.error("[tilefun] PeerJS connection without UUID metadata, closing");
       conn.close();
       return;
@@ -186,6 +98,8 @@ export class PeerHostTransport {
 
     // Last-write-wins: kick existing connection with same UUID
     const existing = this.remoteClients.get(clientId);
+    // Publish the replacement first so old callbacks cannot detach its authority.
+    this.remoteClients.set(clientId, conn);
     if (existing) {
       try {
         existing.send(
@@ -194,28 +108,51 @@ export class PeerHostTransport {
       } catch {
         // Old connection may already be closing
       }
+      this.links.get(existing)?.close();
       existing.close();
     }
-    this.remoteEntitiesFallbackLogged.delete(clientId);
-
-    this.remoteClients.set(clientId, conn);
     const diagnostics = new PeerConnectionDiagnostics("host", conn);
-    this.diagnostics.set(conn, diagnostics);
 
     conn.on("open", () => {
       if (this.closed || this.remoteClients.get(clientId) !== conn) return;
       diagnostics.opened();
       console.log(`[tilefun] P2P guest connected: ${clientId}`);
-      this.connectHandler?.(clientId);
+      try {
+        const link = this.authority.attachPeer(
+          clientId,
+          ({ buffer, messageType }) => {
+            if (conn.open) diagnostics.send(messageType ?? "unknown", buffer);
+          },
+          (error) => {
+            if (error !== undefined) diagnostics.log("Worker guest link closed", error);
+            if (this.remoteClients.get(clientId) === conn) {
+              this.remoteClients.delete(clientId);
+              conn.close();
+            }
+          },
+          () =>
+            conn.open &&
+            (conn.dataChannel?.bufferedAmount ?? 0) < 1024 * 1024 &&
+            ((conn as DataConnection & { readonly bufferSize?: number }).bufferSize ?? 0) < 64,
+        );
+        this.links.set(conn, link);
+      } catch (error) {
+        diagnostics.log("Worker guest attach failed", error);
+        this.remoteClients.delete(clientId);
+        conn.close();
+      }
     });
 
     conn.on("data", (data) => {
       if (this.closed || this.remoteClients.get(clientId) !== conn) return;
       try {
-        const buf =
-          data instanceof ArrayBuffer ? data : ((data as Uint8Array).buffer as ArrayBuffer);
-        const msg = decodeClientMessage(buf);
-        this.serverMessageHandler?.(clientId, msg);
+        let buffer: ArrayBuffer;
+        if (data instanceof ArrayBuffer) buffer = data;
+        else if (ArrayBuffer.isView(data)) {
+          const bytes = new Uint8Array(data.buffer, data.byteOffset, data.byteLength);
+          buffer = bytes.slice().buffer;
+        } else throw Error("Expected binary guest message");
+        this.links.get(conn)?.send({ buffer });
       } catch (err) {
         console.error(`[tilefun] Bad P2P message from ${clientId}:`, err);
       }
@@ -225,8 +162,7 @@ export class PeerHostTransport {
       if (this.remoteClients.get(clientId) === conn) {
         if (!this.closed) diagnostics.log("host channel closed");
         this.remoteClients.delete(clientId);
-        this.remoteEntitiesFallbackLogged.delete(clientId);
-        this.disconnectHandler?.(clientId);
+        this.links.get(conn)?.close();
       }
     });
 
@@ -234,18 +170,9 @@ export class PeerHostTransport {
       diagnostics.log("host connection error", err);
       if (this.remoteClients.get(clientId) === conn) {
         this.remoteClients.delete(clientId);
-        this.remoteEntitiesFallbackLogged.delete(clientId);
-        this.disconnectHandler?.(clientId);
+        this.links.get(conn)?.close();
         conn.close();
       }
     });
-  }
-
-  private logRemoteEntitiesFallbackOnce(clientId: string): void {
-    if (this.remoteEntitiesFallbackLogged.has(clientId)) return;
-    this.remoteEntitiesFallbackLogged.add(clientId);
-    console.warn(
-      `[tilefun] PeerJS host transport for ${clientId} uses a single reliable channel (ordered sync)`,
-    );
   }
 }

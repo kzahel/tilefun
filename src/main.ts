@@ -9,8 +9,6 @@ import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
 import { selectableRenderHostFactory } from "./rendering/SelectableRenderHost.js";
 import { ROOM_DIRECTORY_URL } from "./rooms/config.js";
 import { RoomDirectory } from "./rooms/RoomDirectory.js";
-import type { GameServer } from "./server/GameServer.js";
-import { browserServerDependencies } from "./server/hosts/browser.js";
 import { ACTIVE_PROFILE_KEY, TAB_SESSION_KEY } from "./shared/storageKeys.js";
 import { generateUUID } from "./shared/uuid.js";
 import { type PeerGuestStatus, PeerGuestTransport } from "./transport/PeerGuestTransport.js";
@@ -44,8 +42,8 @@ const hostP2P = params.has("host");
 const joinPeerId = params.get("join");
 
 let client: GameClient;
-let server: GameServer | null = null;
 let localHost: WorkerClientTransport | null = null;
+let peerHost: PeerHostTransport | null = null;
 let hostingBanner: HostingBanner | null = null;
 let roomDirectory: RoomDirectory | null = null;
 
@@ -67,7 +65,7 @@ const faultReporter = new FaultReporter({
       serverTick: 0,
       hidden: document.hidden,
     }),
-    mode: localHost ? "local-worker" : hostP2P ? "peer-host" : "remote",
+    mode: hostP2P ? "peer-host" : localHost ? "local-worker" : "remote",
   }),
   authority: () => localHost?.getFaultDiagnostics() ?? null,
 });
@@ -242,7 +240,6 @@ function createConnectionOverlay(onCancel: () => void) {
 
 async function saveSession(): Promise<void> {
   if (localHost) await localHost.flush();
-  if (server) await server.flushAsync();
 }
 function cancelSessionJoin(): void {
   const url = new URL(location.href);
@@ -375,9 +372,11 @@ async function start() {
     (canvas as any).__game = client;
     await client.init();
   } else if (hostP2P) {
-    // P2P Host mode: local server + PeerJS for remote guests
+    // The shared Worker owns authority; PeerJS only bridges guest binary traffic.
+    const transport = createLocalHost(true);
+    await transport.ready();
     // Use profile ID as peer ID so the join URL survives host refreshes
-    const peerHost = new PeerHostTransport(playerId);
+    peerHost = new PeerHostTransport(transport, playerId);
     const overlay = createConnectionOverlay(cancelSessionJoin);
     document.body.append(overlay.el);
     overlay.el.querySelector<HTMLButtonElement>("button:not([hidden])")?.focus();
@@ -385,16 +384,15 @@ async function start() {
     try {
       peerId = await peerHost.ready();
     } catch (error) {
-      peerHost.peer.destroy();
+      peerHost.close();
+      await transport.shutdown();
       overlay.update("failed", String(error));
       return;
     }
     deactivateMenu(overlay.el);
     overlay.el.remove();
     console.log(`[tilefun] Hosting P2P game. Peer ID: ${peerId}`);
-    const { GameServer } = await import("./server/GameServer.js");
-    server = new GameServer(peerHost.serverSide, browserServerDependencies());
-    client = new GameClient(canvas, peerHost.clientSide, null, {
+    client = new GameClient(canvas, transport, null, {
       renderHostFactory,
       mode: "serialized",
       profile,
@@ -404,13 +402,12 @@ async function start() {
     });
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
-    await server.init();
-    peerHost.triggerConnect({ profileId: profile.id, displayName: profile.name });
+    transport.connect({ profileId: profile.id, displayName: profile.name });
     await client.init();
-    server.startLoop();
+    startLocalHost(transport);
     hostingBanner = new HostingBanner(peerId, {
       directory: roomDirectory,
-      getPlayerCount: () => peerHost.playerCount,
+      getPlayerCount: () => peerHost?.playerCount ?? 1,
       hostName: profile.name,
     });
     client.setHostingInfo(hostingBanner.info);
@@ -463,11 +460,7 @@ async function start() {
     await client.init();
   } else {
     // Same authority and replicated client as remote play, on an independent thread.
-    const transport = new WorkerClientTransport(
-      new Worker(new URL("./server/local-server.worker.ts", import.meta.url), { type: "module" }),
-      { metrics: performanceMetrics.enabled, onError: showErrorOverlay, onFault: reportFault },
-    );
-    localHost = transport;
+    const transport = createLocalHost();
     await transport.ready();
     transport.connect({ profileId: profile.id, displayName: profile.name });
     client = new GameClient(canvas, transport, null, {
@@ -481,11 +474,31 @@ async function start() {
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
     await client.init();
-    transport.start();
-    transport.setHidden(document.hidden);
-    document.addEventListener("visibilitychange", syncLocalVisibility);
-    window.addEventListener("pagehide", hideLocalHost);
+    startLocalHost(transport);
   }
+}
+
+function createLocalHost(keepAliveWhenHidden = false): WorkerClientTransport {
+  const transport = new WorkerClientTransport(
+    new Worker(new URL("./server/local-server.worker.ts", import.meta.url), { type: "module" }),
+    {
+      metrics: performanceMetrics.enabled,
+      onError: (error) => {
+        peerHost?.close();
+        showErrorOverlay(error);
+      },
+      onFault: reportFault,
+      keepAliveWhenHidden,
+    },
+  );
+  localHost = transport;
+  return transport;
+}
+function startLocalHost(transport: WorkerClientTransport): void {
+  transport.start();
+  transport.setHidden(document.hidden);
+  document.addEventListener("visibilitychange", syncLocalVisibility);
+  window.addEventListener("pagehide", hideLocalHost);
 }
 
 function syncLocalVisibility(): void {
@@ -626,11 +639,7 @@ if (import.meta.hot) {
     }
     client?.saveHMRState();
     await localHost?.shutdown();
-    if (server) {
-      server.stopLoop();
-      await server.settle();
-      await server.flushAsync();
-    }
+    peerHost?.close();
   });
   import.meta.hot.dispose((data) => {
     disableFirstTouchFullscreen();
@@ -639,7 +648,7 @@ if (import.meta.hot) {
     window.removeEventListener("pagehide", hideLocalHost);
     client?.saveHMRState();
     client?.destroy();
-    server?.destroy();
+    peerHost?.close();
     hostingBanner?.destroy();
     roomDirectory?.stopHeartbeat();
   });

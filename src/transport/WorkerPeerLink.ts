@@ -70,7 +70,7 @@ export class WorkerPeerLink {
       () => {
         this.timer = undefined;
         try {
-          if (this.canConsume()) this.channel.pump(this.consume);
+          this.channel.pump(this.consume, 2, this.canConsume);
           this.schedulePump();
         } catch (error) {
           this.close(error);

@@ -63,6 +63,27 @@ describe("ordered Worker channel", () => {
     expect(channel.diagnostics().queued).toBe(0);
   });
 
+  it("withholds credit when downstream congestion begins partway through a batch", () => {
+    const credits: ChannelEnvelope<Packet>[] = [];
+    const receiver = new OrderedWorkerChannel<Packet>((message) => credits.push(message));
+    receiver.receive({ kind: "batch", items: [{ id: 1 }, { id: 2 }, { id: 3 }] });
+    const received: number[] = [];
+    let ready = true;
+    receiver.pump(
+      (packet) => {
+        received.push(packet.id);
+        ready = false;
+      },
+      Infinity,
+      () => ready,
+    );
+    expect(received).toEqual([1]);
+    expect(credits).toEqual([]);
+    receiver.pump((packet) => received.push(packet.id), Infinity);
+    expect(received).toEqual([1, 2, 3]);
+    expect(credits).toEqual([{ kind: "credit" }]);
+  });
+
   it("rejects unsolicited credits and overlapping inbound batches", () => {
     const channel = new OrderedWorkerChannel<Packet>(() => {});
     expect(() => channel.receive({ kind: "credit" })).toThrow(/credit/);
