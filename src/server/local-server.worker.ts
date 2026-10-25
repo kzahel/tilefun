@@ -29,10 +29,21 @@ port.onmessage = ({ data }) => {
       return;
     }
     initialized = true;
-    void runtime.init(data.metrics).then(
+    void runtime.init(data.metrics, data.keepAliveWhenHidden).then(
       () => port.postMessage({ kind: "ready" }),
       (error) => runtime.fail(error),
     );
+  } else if (data.kind === "attach-peer") {
+    runtime.attachPeer(data.clientId, data.connectionId, data.port, (error) =>
+      port.postMessage({
+        kind: "peer-closed",
+        clientId: data.clientId,
+        connectionId: data.connectionId,
+        ...(error === undefined ? {} : { error: String(error) }),
+      }),
+    );
+  } else if (data.kind === "detach-peer") {
+    runtime.detachPeer(data.clientId, data.connectionId);
   } else if (data.kind === "probe") {
     port.postMessage({ kind: "heartbeat", id: data.id, diagnostics: runtime.diagnostics() });
   } else if (data.kind === "batch" || data.kind === "credit") runtime.receive(data);

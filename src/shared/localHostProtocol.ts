@@ -1,6 +1,12 @@
 import type { PerformanceSnapshot } from "../diagnostics/PerformanceMetrics.js";
 import type { OrderedWorkerChannel } from "../transport/OrderedWorkerChannel.js";
 import type { ConnectionIdentity } from "../transport/Transport.js";
+import type { ServerMessage } from "./protocol.js";
+/** One private ordered link per guest; its identity is bound by the host, never the payload. */
+export interface PeerHostPacket {
+  buffer: ArrayBuffer;
+  messageType?: ServerMessage["type"];
+}
 export type LocalHostPacket = { buffer?: ArrayBuffer } & (
   | { type: "message"; buffer: ArrayBuffer }
   | { type: "connect"; identity?: ConnectionIdentity }
@@ -15,9 +21,16 @@ export interface LocalHostDiagnostics {
   ticks: number;
   hidden: boolean;
   persistence?: import("../server/GameServer.js").GameServer["persistenceDiagnostics"];
+  peers?: {
+    clientId: string;
+    channel: ReturnType<OrderedWorkerChannel<PeerHostPacket>["diagnostics"]>;
+  }[];
 }
 export type LocalHostBoot =
-  | { kind: "init"; metrics: boolean }
+  | { kind: "init"; metrics: boolean; keepAliveWhenHidden?: boolean }
+  | { kind: "attach-peer"; clientId: string; connectionId: number; port: MessagePort }
+  | { kind: "detach-peer"; clientId: string; connectionId: number }
+  | { kind: "peer-closed"; clientId: string; connectionId: number; error?: string }
   | { kind: "ready" }
   | { kind: "probe"; id: number }
   | { kind: "heartbeat"; id: number; diagnostics: LocalHostDiagnostics }

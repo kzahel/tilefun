@@ -30,7 +30,7 @@ export interface ConnectionIdentity {
 
 export interface IServerTransport {
   /** Backpressure: defer replica publication without dropping delta dependencies. */
-  canSend?(): boolean;
+  canSend?(clientId?: string): boolean;
   send(clientId: string, msg: ServerMessage): void;
   broadcast(msg: ServerMessage): void;
   onMessage(handler: (clientId: string, msg: ClientMessage) => void): void;

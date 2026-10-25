@@ -10,6 +10,9 @@ Owns ongoing transport/replication decisions and gaps. The
 [network design](../NETWORK-ARCHITECTURE.md) retains channel rationale and future
 proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 
+[188](../tactical/188-p2p-worker-authority.md) tracks the in-progress migration of
+browser P2P authority from the rendering thread to the shared server Worker.
+
 ## Entity registry beyond 256 types
 
 Wildlife continuation [147](../tactical/147-wildlife-continuation.md) crosses the

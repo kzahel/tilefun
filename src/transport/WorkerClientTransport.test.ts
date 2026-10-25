@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { RequestBroker } from "../client/RequestBroker.js";
 import { type LocalAuthority, LocalServerRuntime } from "../server/LocalServerRuntime.js";
+import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type { LocalHostBoot, LocalHostPacket } from "../shared/localHostProtocol.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import type { ChannelEnvelope } from "./OrderedWorkerChannel.js";
@@ -13,6 +14,7 @@ function rig(
     settle?: () => Promise<void>;
     flush?: () => Promise<void>;
     watchdogMs?: number;
+    keepAliveWhenHidden?: boolean;
   } = {},
 ) {
   const events: string[] = [];
@@ -50,7 +52,11 @@ function rig(
     (transport) => {
       serverTransport = transport;
       transport.onConnect((id) => events.push(`connect:${id}`));
-      transport.onMessage((_id, message: ClientMessage) => events.push(message.type));
+      transport.onDisconnect((id) => events.push(`disconnect:${id}`));
+      transport.onMessage((id, message: ClientMessage) => {
+        events.push(message.type);
+        if (id !== "local") events.push(`${id}:${message.type}`);
+      });
       return authority;
     },
   );
@@ -64,10 +70,21 @@ function rig(
         | ChannelEnvelope<LocalHostPacket>;
       queueMicrotask(() => {
         if (message.kind === "init")
-          void runtime.init(message.metrics).then(
+          void runtime.init(message.metrics, message.keepAliveWhenHidden).then(
             () => deliver({ kind: "ready" }),
             (error) => runtime.fail(error),
           );
+        else if (message.kind === "attach-peer")
+          runtime.attachPeer(message.clientId, message.connectionId, message.port, (error) =>
+            deliver({
+              kind: "peer-closed",
+              clientId: message.clientId,
+              connectionId: message.connectionId,
+              ...(error === undefined ? {} : { error: String(error) }),
+            }),
+          );
+        else if (message.kind === "detach-peer")
+          runtime.detachPeer(message.clientId, message.connectionId);
         else if (message.kind === "batch" || message.kind === "credit") runtime.receive(message);
       });
     },
@@ -77,12 +94,109 @@ function rig(
     onError: (error) => errors.push(error),
     onFault: (kind, error) => faults.push({ kind, error }),
     timeoutMs: 1000,
+    keepAliveWhenHidden: options.keepAliveWhenHidden ?? false,
     ...(options.watchdogMs === undefined ? {} : { watchdogMs: options.watchdogMs }),
   });
   return { client, endpoint, runtime, serverTransport, events, errors, faults, authority };
 }
 
 describe("local server Worker lifecycle", () => {
+  it("routes isolated guest links and keeps an obstructed recipient from blocking others", async () => {
+    const r = rig({ keepAliveWhenHidden: true });
+    await r.client.ready();
+    const local: string[] = [],
+      guest: string[] = [];
+    r.client.onMessage((message) => local.push(message.type));
+    let consumeSlow = false;
+    const slow = r.client.attachPeer(
+      "slow",
+      () => {},
+      () => {},
+      () => consumeSlow,
+    );
+    const fast = r.client.attachPeer(
+      "fast",
+      ({ buffer, messageType }) => {
+        guest.push(decodeServerMessage(buffer).type);
+        expect(messageType).toBe("chat");
+      },
+      () => {},
+    );
+    await vi.waitFor(() => expect(r.events).toContain("connect:fast"));
+    fast.send({ buffer: encodeClientMessage({ type: "identify", displayName: "Guest" }) });
+    await vi.waitFor(() => expect(r.events).toContain("fast:identify"));
+    for (let i = 0; i < 160; i++)
+      r.serverTransport.send("slow", { type: "chat", sender: "test", text: String(i) });
+    r.serverTransport.broadcast({ type: "chat", sender: "test", text: "all" });
+    await vi.waitFor(() => expect(guest).toEqual(["chat"]));
+    expect(local).toEqual(["chat"]);
+    expect(r.serverTransport.canSend?.("slow")).toBe(false);
+    expect(r.serverTransport.canSend?.("fast")).toBe(true);
+    expect(r.serverTransport.canSend?.()).toBe(true);
+    consumeSlow = true;
+    await vi.waitFor(() => expect(r.serverTransport.canSend?.("slow")).toBe(true));
+    slow.close();
+    fast.close();
+    await r.client.shutdown();
+  });
+
+  it("replaces guest identities without admitting old traffic or stale disconnects", async () => {
+    const r = rig();
+    await r.client.ready();
+    const closed = vi.fn();
+    const old = r.client.attachPeer("guest", () => {}, closed);
+    await vi.waitFor(() => expect(r.events).toContain("connect:guest"));
+    const received: string[] = [];
+    const replacement = r.client.attachPeer(
+      "guest",
+      ({ buffer }) => received.push(decodeServerMessage(buffer).type),
+      () => {},
+    );
+    await vi.waitFor(() =>
+      expect(r.events.filter((event) => event === "connect:guest")).toHaveLength(2),
+    );
+    expect(closed).toHaveBeenCalledOnce();
+    old.send({ buffer: encodeClientMessage({ type: "set-editor-mode", enabled: true }) });
+    r.runtime.detachPeer("guest", 1);
+    r.serverTransport.send("guest", { type: "chat", sender: "test", text: "replacement" });
+    await vi.waitFor(() => expect(received).toEqual(["chat"]));
+    expect(r.events).not.toContain("guest:set-editor-mode");
+    expect(r.events.filter((event) => event === "disconnect:guest")).toHaveLength(1);
+    replacement.close();
+    await r.client.shutdown();
+  });
+
+  it("keeps multiplayer authority running while hidden and defers only its local replica", async () => {
+    const r = rig({ keepAliveWhenHidden: true });
+    await r.client.ready();
+    r.client.start();
+    r.client.setHidden(true);
+    await vi.waitFor(() => expect(r.events).toContain("flush"));
+    expect(r.events).not.toContain("stop");
+    expect(r.serverTransport.canSend?.("local")).toBe(false);
+    expect(r.serverTransport.canSend?.()).toBe(true);
+    r.client.setHidden(false);
+    await vi.waitFor(() => expect(r.serverTransport.canSend?.("local")).toBe(true));
+    await r.client.shutdown();
+  });
+
+  it("isolates malformed guest traffic and closes guest ports when authority fails", async () => {
+    const r = rig();
+    await r.client.ready();
+    const badClosed = vi.fn(),
+      goodClosed = vi.fn();
+    const bad = r.client.attachPeer("bad", () => {}, badClosed);
+    r.client.attachPeer("good", () => {}, goodClosed);
+    await vi.waitFor(() => expect(r.events).toContain("connect:good"));
+    bad.send({ buffer: new Uint8Array([255]).buffer });
+    await vi.waitFor(() => expect(badClosed).toHaveBeenCalledOnce());
+    expect(r.events).toContain("disconnect:bad");
+    expect(r.errors).toEqual([]);
+    r.runtime.fail(new Error("authority failed"));
+    await vi.waitFor(() => expect(goodClosed).toHaveBeenCalledOnce());
+    expect(r.events).toContain("terminate");
+  });
+
   it("preserves Worker failure evidence and rejects subsequent game requests immediately", async () => {
     const r = rig();
     await r.client.ready();

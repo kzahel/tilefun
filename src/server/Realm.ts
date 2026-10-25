@@ -1436,6 +1436,8 @@ export class Realm {
 
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
+        // Check before building: replication advances this client's last-sent baseline.
+        if (transport.canSend && !transport.canSend(session.clientId)) continue;
         const replicationTiming = performanceMetrics.start();
         const messages = this.replicate(session.clientId);
         performanceMetrics.end("server.replication", replicationTiming);

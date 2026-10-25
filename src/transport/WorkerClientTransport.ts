@@ -5,14 +5,16 @@ import type {
   LocalHostBoot,
   LocalHostDiagnostics,
   LocalHostPacket,
+  PeerHostPacket,
 } from "../shared/localHostProtocol.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import { LocalServerWatchdog } from "./LocalServerWatchdog.js";
 import { type ChannelEnvelope, OrderedWorkerChannel } from "./OrderedWorkerChannel.js";
 import type { ConnectionIdentity, IClientTransport } from "./Transport.js";
+import { WorkerPeerLink } from "./WorkerPeerLink.js";
 
 export interface WorkerEndpoint {
-  postMessage(message: unknown, transfer: ArrayBuffer[]): void;
+  postMessage(message: unknown, transfer: Transferable[]): void;
   terminate(): void;
   onmessage:
     | ((event: MessageEvent<LocalHostBoot | ChannelEnvelope<LocalHostPacket>>) => void)
@@ -45,6 +47,8 @@ export class WorkerClientTransport implements IClientTransport {
   private autoPump = true;
   private pumpTimer: ReturnType<typeof setTimeout> | undefined;
   private nextId = 1;
+  private nextConnectionId = 1;
+  private readonly peers = new Map<string, { connectionId: number; link: WorkerPeerLink }>();
   private shutdownPromise: Promise<void> | undefined;
   private readonly requests = new Map<
     number,
@@ -64,6 +68,7 @@ export class WorkerClientTransport implements IClientTransport {
       timeoutMs?: number;
       watchdogMs?: number;
       onFault?: (kind: FaultReport["kind"], error: Error) => void;
+      keepAliveWhenHidden?: boolean;
     } = {},
   ) {
     this.watchdog = new LocalServerWatchdog(options.watchdogMs);
@@ -104,6 +109,9 @@ export class WorkerClientTransport implements IClientTransport {
               new Error("Repeated local chunk persistence failures"),
             );
           }
+        } else if (data.kind === "peer-closed") {
+          const peer = this.peers.get(data.clientId);
+          if (peer?.connectionId === data.connectionId) peer.link.close(data.error);
         } else if (data.kind === "failed") {
           const error = new Error(data.error);
           if (data.stack) error.stack = data.stack;
@@ -122,11 +130,54 @@ export class WorkerClientTransport implements IClientTransport {
     };
     worker.onmessageerror = () =>
       this.fail(new Error("Could not decode local server Worker message"));
-    worker.postMessage({ kind: "init", metrics: options.metrics ?? false }, []);
+    worker.postMessage(
+      {
+        kind: "init",
+        metrics: options.metrics ?? false,
+        keepAliveWhenHidden: options.keepAliveWhenHidden ?? false,
+      },
+      [],
+    );
   }
 
   ready(): Promise<void> {
     return this.startup;
+  }
+  /** Each guest owns an independent ordered port and publication credit. */
+  attachPeer(
+    clientId: string,
+    consume: (packet: PeerHostPacket) => void,
+    onClose: (error?: unknown) => void,
+    canConsume?: () => boolean,
+  ): WorkerPeerLink {
+    if (this.state !== "ready") throw Error("Local authority is not ready for guests");
+    if (!clientId || clientId === "local") throw Error("Invalid guest identity");
+    this.peers.get(clientId)?.link.close();
+    const { port1, port2 } = new MessageChannel();
+    const connectionId = this.nextConnectionId++;
+    const link = new WorkerPeerLink(
+      port1,
+      consume,
+      (error) => {
+        if (this.peers.get(clientId)?.link === link) {
+          this.peers.delete(clientId);
+          if (this.state === "ready")
+            this.worker.postMessage({ kind: "detach-peer", clientId, connectionId }, []);
+        }
+        onClose(error);
+      },
+      canConsume,
+    );
+    this.peers.set(clientId, { connectionId, link });
+    try {
+      this.worker.postMessage({ kind: "attach-peer", clientId, connectionId, port: port2 }, [
+        port2,
+      ]);
+    } catch (error) {
+      port2.close();
+      link.close(error);
+    }
+    return link;
   }
   connect(identity?: ConnectionIdentity): void {
     this.channel.send({ type: "connect", ...(identity ? { identity } : {}) });
@@ -319,6 +370,7 @@ export class WorkerClientTransport implements IClientTransport {
     this.options.onError?.(error);
   }
   private cleanup(): void {
+    for (const peer of this.peers.values()) peer.link.close();
     clearTimeout(this.startupTimer);
     clearInterval(this.watchdogTimer);
     clearTimeout(this.pumpTimer);
