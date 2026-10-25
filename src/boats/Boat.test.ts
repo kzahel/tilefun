@@ -120,8 +120,8 @@ it("creates broad connected water, a dry boarding beach and varied valid natural
   const { n, lake, animals } = collect(false);
   expect(lake.rx).toBeGreaterThan(50);
   expect(lake.ry).toBeGreaterThan(35);
-  expect(animals).toHaveLength(21);
-  expect(new Set(animals.map((a) => a.type)).size).toBe(6);
+  expect(animals).toHaveLength(23);
+  expect(new Set(animals.map((a) => a.type)).size).toBe(8);
   expect(animals).toEqual(collect(true).animals);
   for (const a of animals) expect(n.terrain(a.wx / 16, a.wy / 16)).toBe(TerrainId.DeepWater);
   expect(n.terrain(lake.x, lake.y - lake.ry - 1.25)).toBe(TerrainId.Sand);

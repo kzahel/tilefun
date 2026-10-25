@@ -4,7 +4,7 @@ Topic: wildlife
 Status: all 196 roster animals implemented and available in the animated lab.
 New exact art remains pending human review; specialist behavior limits are
 recorded in the individual checkpoints.
-Updated: 2026-10-24.
+Updated: 2026-10-25.
 
 [Shared finishing correction 187](../tactical/187-shared-wildlife-finishing.md)
 audits all 206 active entries and introduces 137 complete `finish-v1` banks.
@@ -92,9 +92,13 @@ native travel pixels and await human review. The behavior topic owns these
 contracts; the tactical records exact validation.
 
 [Explorer boats and large lakes](boats.md) add four natural fish schools, four
-other water species and one aquatic hunter per new large lake. Existing water
-refuges and the fixed ownership pools remain unchanged; normal shared habitat,
-hunting and delayed natural-only return rules apply. The zebra inspection point
+other water species, one large swimmer (whale shark, humpback or blue whale) and
+one or two aquatic hunters per new large lake. Every lake initially includes a
+shark or hammerhead, adding one when its original hunter is a dolphin/narwhal.
+Broad deep basins retain roughly four-tile shallow shores; all lake animals
+require complete deep-water footprints. Existing water refuges and the fixed
+ownership pools remain unchanged; normal shared habitat, hunting and delayed
+natural-only return rules apply. The zebra inspection point
 now uses a valid clearing under the updated current terrain. Exact animal art
 and completed roster counts remain unchanged.
 

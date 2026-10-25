@@ -65,14 +65,34 @@ capture was visually inspected for the removed oval. This is focused validation,
 not a full-suite claim.
 
 Large lakes have an independent bounded 512-tile owner bank. Their irregular
-shorelines enclose deep interiors and shallow margins, with a straight open
-boarding beach. Candidate admission preserves infrastructure and existing small
-ponds/lagoons. Sizes vary around 108–140 by 76–108 tiles, before shore fringes.
-Each admitted lake offers one natural boat, four fish schools, four other water
-species and one aquatic hunter. Natural actors use existing habitat, food-web
-and delayed natural-only meal replacement rules. Lake output is current-world
-generation: recreate a development world, or explore newly generated territory;
+shorelines enclose broad deep interiors and roughly four-tile shallow margins,
+with a straight open boarding beach. Candidate admission preserves infrastructure
+and existing small ponds/lagoons. Sizes vary around 108–140 by 76–108 tiles,
+before shore fringes. Deep water now covers about 80–86% of the water area, up
+from about 42%; small pond and lagoon depth rules are unchanged.
+Each admitted lake offers one natural
+boat, four fish schools, four other water species and the original mixed aquatic
+hunter. An independent large-swimmer slot selects a whale shark, humpback whale
+or blue whale. If the mixed hunter is a dolphin or narwhal, an additional shark
+or hammerhead ensures every lake initially has a shark. These 22–23 animals use
+stable coordinate-owned identities and full-body deep-water admission. Existing
+fish, variety and hunter identities, positions and RNG remain unchanged.
+Natural actors use existing habitat, food-web and delayed natural-only meal
+replacement rules. Lake output is current-world generation: recreate a
+development world, or explore newly generated territory;
 saved terrain edits are not migrated or erased.
+
+Depth/population validation on 2026-10-25: four regional lakes, including negative
+coordinates, retain shallow shores and have over 78% deep water in sampled grids.
+Every generated actor's complete footprint matches realized deep terrain. The
+production Realm admits natural sharks/giants and editor sharks/blue whales in
+the former shallow basin, then reloads the same durable individuals. Existing
+boat/query-order/seam checks, water-fauna/hunting/replacement regressions,
+typechecks and focused lint pass (282 focused native checks in total).
+No browser-specific contract changed.
+The wildlife production-table refresh was attempted but its ignored
+`data/wildlife-campaign-v2/progress.json` is absent in this checkout; the existing
+art production table is retained.
 
 Natural boat identities are coordinate-owned. Their parked route anchors use
 ordinary durable traffic records and origin receipts; revisiting a mooring does

@@ -4,7 +4,10 @@ import { BOAT_MOORING_RADIUS, type BoatPlacement } from "../../boats/Boat.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
-import { AQUATIC_HUNTER_PROFILES } from "../../wildlife/AquaticHunters.js";
+import {
+  AQUATIC_HUNTER_PROFILES,
+  type AquaticHunterSpecies,
+} from "../../wildlife/AquaticHunters.js";
 import { createDeer, DEER_TYPE } from "../../wildlife/Deer.js";
 import {
   createFauna,
@@ -300,6 +303,18 @@ export class NaturalLandscape {
     const lake = this.lake(Math.floor(cx / 32), Math.floor(cy / 32));
     if (!lake) return [];
     const actors: ActorPlacement[] = [];
+    // Match authority habitat checks at every tile touched by the body,
+    // including the wide whale bodies and negative-coordinate tile edges.
+    const deepBody = (x: number, y: number, body: readonly [number, number, number]) => {
+      for (let ty = Math.floor(y - body[1] / 32); ty <= Math.floor(y + body[1] / 32 - 0.0001); ty++)
+        for (
+          let tx = Math.floor(x - body[0] / 32);
+          tx <= Math.floor(x + body[0] / 32 - 0.0001);
+          tx++
+        )
+          if (this.terrain(tx + 0.5, ty + 0.5) !== TerrainId.DeepWater) return false;
+      return true;
+    };
     const add = (species: FaunaSpecies, x: number, y: number, i: number) => {
       const point = { wx: x * 16, wy: y * 16 };
       if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
@@ -315,9 +330,7 @@ export class NaturalLandscape {
         0;
       ai.groupId = `wildlife:lake:${this.world.seed}:${lake.id}:${species}`;
       const p = required(FAUNA_PROFILES.find((p) => p.species === species));
-      for (const dx of [-p.body[0] / 32, 0, p.body[0] / 32])
-        for (const dy of [-p.body[1] / 32, 0, p.body[1] / 32])
-          if (this.terrain(x + dx, y + dy) !== TerrainId.DeepWater) return;
+      if (!deepBody(x, y, p.body)) return;
       actors.push({
         featureId: `${ai.groupId}:${i}`,
         type: e.type,
@@ -353,12 +366,26 @@ export class NaturalLandscape {
           lake.y + (school < 2 ? -1 : 1) * lake.ry * 0.18 + (i % 2) * 1.2,
           10 + school * 4 + i,
         );
+    // Large swimmers get their own slot instead of competing with the small
+    // refuge roster. Keep existing fish/variety slots and their RNG unchanged.
+    const giants = ["whale-shark", "humpback-whale", "blue-whale"] as const;
+    add(
+      required(
+        giants[Math.floor(valueNoise(lake.x, lake.y, this.world.seed + 9157) * giants.length)],
+      ),
+      lake.x,
+      lake.y + lake.ry * 0.42,
+      26,
+    );
     const hunters = ["dolphin", "shark", "hammerhead-shark", "narwhal"] as const;
     const species = required(
       hunters[Math.floor(valueNoise(lake.x, lake.y, this.world.seed + 9151) * hunters.length)],
     );
-    const point = { wx: (lake.x - lake.rx * 0.2) * 16, wy: (lake.y - lake.ry * 0.18) * 16 };
-    if (Math.floor(point.wx / 256) === cx && Math.floor(point.wy / 256) === cy) {
+    const addHunter = (species: AquaticHunterSpecies, x: number, y: number) => {
+      const point = { wx: x * 16, wy: y * 16 };
+      if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
+      const p = required(AQUATIC_HUNTER_PROFILES.find((p) => p.species === species));
+      if (!deepBody(x, y, p.body)) return;
       const ai = required(createPredator(species, point.wx, point.wy).predator);
       actors.push({
         featureId: `wildlife:lake:${this.world.seed}:${lake.id}:${species}`,
@@ -367,7 +394,15 @@ export class NaturalLandscape {
         route: [],
         predator: ai,
       });
-    }
+    };
+    addHunter(species, lake.x - lake.rx * 0.2, lake.y - lake.ry * 0.18);
+    // A dolphin/narwhal choice must not leave a large lake without any sharks.
+    if (species !== "shark" && species !== "hammerhead-shark")
+      addHunter(
+        valueNoise(lake.x, lake.y, this.world.seed + 9161) < 0.5 ? "shark" : "hammerhead-shark",
+        lake.x + lake.rx * 0.38,
+        lake.y + lake.ry * 0.15,
+      );
     return actors;
   }
   pond(cx: number, cy: number): NaturalPond | null {
@@ -710,7 +745,12 @@ export class NaturalLandscape {
     const base = regionalTerrainForElevation(plannedElevation(this.world, x, y));
     const local = this.lakeAt(x, y) ?? this.pondAt(x, y) ?? this.lagoonAt(x, y);
     if (!local) return base;
-    if (local.distance < 0.65) return TerrainId.DeepWater;
+    // Large lakes need a broad connected basin. A four-tile shallow shelf
+    // preserves shore access instead of scaling to a third of the lake radius.
+    const deepEdge = local.pond.id.startsWith("lake:")
+      ? 1 - 4 / Math.min(local.pond.rx, local.pond.ry)
+      : 0.65;
+    if (local.distance < deepEdge) return TerrainId.DeepWater;
     if (local.distance < 1) return TerrainId.ShallowWater;
     if (local.distance < 1.1) return TerrainId.Sand;
     if (local.distance < 1.23) return TerrainId.SandLight;
