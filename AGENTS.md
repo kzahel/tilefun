@@ -93,17 +93,18 @@ browser). Existing similar tests are not a reason to copy their test level or
 multiply their case matrix. Keep browser coverage focused on distinct boundaries;
 validate exhaustive content variants below the browser where possible.
 
-Run typechecks, unit tests and lint before considering work done:
+Choose validation proportional to the change. For code, run focused tests for
+the affected behavior and relevant lint/typechecks. For documentation-only edits,
+review the diff and run `git diff --check`; runtime tests are unnecessary.
+Reserve full repository checks and test suites for broad changes, evidence of
+wider impact, explicit requests or CI. Do not run them after every small change
+or repeat passing checks without new changes or unresolved concerns.
 
-```sh
-npm run typecheck
-npm test
-npm run check
-```
-
-Fix diagnostics introduced by the change. For rendering or integration changes,
-also run `npm run build && npx playwright test`. Use isolated auth/data and bundled
-Playwright Chromium; GPU parity checks require full Chromium rendering.
+Fix diagnostics introduced by the change. Rendering or integration changes need
+the affected checks; run selected Playwright files/cases only when the contract
+depends on a browser, and build when the check requires production output.
+Use isolated auth/data and bundled Playwright Chromium; GPU parity checks require
+full Chromium rendering. See [testing](docs/topics/testing.md) for scope and commands.
 After render/recipe/input changes run `npm run art:catalog` followed by
 `npm run workshop:manifest`; builds check these generated inventories.
 For streaming/execution changes run `npm run streaming:bench -- --assert-ready`;

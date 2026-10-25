@@ -1,5 +1,24 @@
 # Testing
 
+## Local validation
+
+Match validation to the affected behavior and dependencies. Small code changes
+should run focused tests and relevant lint/typechecks. Documentation-only edits
+need diff review and `git diff --check`, without runtime tests. Report which
+checks ran and any material limits in their coverage.
+
+Use `npx vitest run <test-file>` for selected native tests and
+`npx biome check <changed-files>` for supported source files. Run
+`npm run typecheck` when TypeScript contracts are affected. For a browser-dependent
+contract, select the relevant Playwright file and, where useful, `--grep` cases;
+build first only when production output is required. Rendering or integration
+changes do not automatically require the full browser suite.
+
+Reserve `npm test`, repository-wide `npm run check`, and the full Playwright suite
+for broad changes, evidence of wider impact, explicit requests or CI. Broaden
+validation when focused checks expose unresolved concerns; do not repeat passing
+checks without a relevant change or unresolved concern. CI keeps its existing gates.
+
 ## CI and deployment
 
 [186](../tactical/186-ci-reliability-and-deployment-gate.md) owns the 2026-10-23
@@ -23,7 +42,8 @@ The full browser suite runs at 02:17 UTC daily and through **Actions → CI → 
 workflow**, using eight independent shards. It collects all failures and retains
 failure traces/screenshots. Only push validation on main deploys; scheduled and
 manual runs never deploy. New revisions cancel superseded runs for the same
-event/ref. Full local validation remains `npm run build && npx playwright test`.
+event/ref. When full browser validation is warranted, run
+`npm run build && npx playwright test` locally.
 
 The old run spent 16.2 minutes in `src/wildlife/Fauna.test.ts` alone; its per-species
 production Realm samples and habitat generation are the next native performance
