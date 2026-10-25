@@ -10531,6 +10531,10 @@
         },
         {
           "system": "World generation",
+          "source": "src/generation/ExplorationGems.ts:127"
+        },
+        {
+          "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:113"
         },
         {
@@ -37548,6 +37552,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:750"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/ExplorationGems.ts:127"
         },
         {
           "system": "World generation",

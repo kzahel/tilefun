@@ -10,7 +10,13 @@ The default regional overworld has finite, seeded exploration gems. Buildings ar
 the main source: up to five gems per interior, spread across reachable floor clear
 of furniture, passages and entrances. Tiny sheds may have fewer. Shopping centers
 have two outdoor finds in their parking/walking areas. Ponds, lagoons and large
-lakes have up to two finds on their dry northern bank; obstructed sites are skipped.
+lakes have up to two finds on their dry northern bank. Other outdoor interest spots
+also reward exploration: farmyards, crop edges and pastures; rabbit/deer clearings;
+town greens; station platforms; and speedway picnic areas. Forests and groves have
+at most one extra find per selected chunk, with a seeded bounded search for clear
+ground beside actual trees or thicket edges. Solid forest interiors stay intact.
+Obstructed sites are skipped. Existing gem IDs and positions retain their identity;
+new categories use independent IDs and do not change other generated populations.
 The existing animated gem, automatic walk-over pickup, pickup sound and on-screen
 counter are reused, so collection works with keyboard, touch and controller.
 
@@ -33,8 +39,9 @@ receives it, and it disappears for everyone.
 - `src/interiors/InteriorGems.ts`: seeded interior caches and reachable floor search.
 - `Generator`, `Realm`, `RealmTransitions`: ordinary actor admission, old-chunk
   additions and shared indoor/outdoor balance.
-- `ExplorationGems.test.ts`: parking/pond/lake positions, negative coordinates,
-  query-order stability, indoor layouts and usable floor.
+- `ExplorationGems.test.ts`: parking/pond/lake and farm/woodland/clearing/green/
+  station/picnic finds, negative coordinates, query-order/fresh-planner stability,
+  safe dry ground, indoor layouts and usable floor.
 - `RealmBrowser.test.ts`: native GameServer collection, visit/restart persistence,
   tombstones and the latest balance winning over older visit data.
 - `base-game.test.ts`: pickup, values, invincibility, guest collection and single
