@@ -1,6 +1,6 @@
 # Client/server architecture
 
-Current implementation map, checked 2026-10-07. The
+Current implementation map, checked 2026-10-25. The
 [original extraction plan](archive/client-server-extraction-plan.md) is archived;
 its shared-memory local mode and “future” multiplayer phases are historical.
 
@@ -16,14 +16,21 @@ its shared-memory local mode and “future” multiplayer phases are historical.
 | [RealmTransitions](../src/server/RealmTransitions.ts) | Guarded player transfer, persistence recovery and baseline reset |
 | [WorldAPI](../src/server/WorldAPI.ts) | Trusted gameplay API and per-realm services |
 
-Single player starts a dedicated server Worker from [main.ts](../src/main.ts).
+Single player and browser P2P hosting start a dedicated server Worker from [main.ts](../src/main.ts).
 [LocalServerRuntime](../src/server/LocalServerRuntime.ts) owns startup, visibility
 pause/resume, periodic saves and acknowledged shutdown. HMR waits for shutdown
 before replacement; Vite full reload also awaits shutdown before navigation. The main thread keeps a replicated client world, prediction
 and rendering; normal single player does not read live server objects directly.
 
-Browser P2P hosting still runs authority on the main thread. Dedicated Node
-hosting uses the same GameServer/Realm model through
+P2P keeps PeerJS connections on the main thread and transfers owned binary buffers
+through one independent ordered MessagePort per guest. Guest decode, simulation,
+replication and encoding run in the same authority Worker as the local host client.
+Per-recipient readiness is checked before advancing last-sent replication state;
+a blocked local replica or guest does not stop other ready recipients. Hidden
+single player pauses; hidden P2P keeps authority/guest delivery running and defers
+ordinary local replication until visible again. Browser/OS suspension can still
+interrupt a browser host. See [188](tactical/188-p2p-worker-authority.md).
+Dedicated Node hosting uses the same GameServer/Realm model through
 [standalone.ts](../src/server/standalone.ts). A direct LocalTransport/LocalStateView
 path still exists for specialized callers/tests; it is not the default launcher.
 

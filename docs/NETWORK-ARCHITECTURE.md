@@ -509,13 +509,14 @@ decision is in the transport layer, not the protocol layer.
 
 ### P2P (Browser-Hosted)
 
-1. Host creates `PeerHostTransport` (PeerJS signaling server)
+1. Host starts shared Worker authority and creates `PeerHostTransport` for PeerJS signaling
 2. Host gets a peer ID, shares join URL
 3. Guest opens URL → `PeerGuestTransport` connects via PeerJS
 4. PeerJS establishes `RTCPeerConnection` with ICE/STUN
 5. Single reliable data channel is used (explicit Phase 6 fallback mode)
-6. Server message routing still classifies `frame` vs sync/control, but both are
-   sent over the same reliable PeerJS channel
+6. Each guest has an independent bounded MessagePort to Worker authority. Main-thread
+   PeerJS forwards binary buffers; Worker decode/simulation/replication/encoding
+   feeds the same reliable ordered PeerJS channel for all gameplay messages.
 7. (Future) Voice: both sides add audio tracks after user permission
 
 ### Dedicated Server (WebSocket)

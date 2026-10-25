@@ -145,7 +145,8 @@ choices remain open.
 - Asset obfuscation proposal: store purchased art as XOR-encoded `.enc` files
   and decode to ignored PNGs during builds. This was a backlog idea, offers no
   real DRM, and is not the current committed-assets build workflow.
-- P2P Worker hosting or WASM only when justified by measured needs; see
+- WASM only when justified by measured compute needs; browser P2P Worker hosting
+  is delivered in [188](tactical/188-p2p-worker-authority.md). See
   [performance](topics/performance.md).
 
 ## Deferred networking investigation

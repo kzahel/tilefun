@@ -1,17 +1,41 @@
 # Multiplayer networking
 
 Topic: multiplayer-networking
-Status: reliable ordered replication and fragmented P2P snapshots; bounded guest
-recovery with failure diagnostics. Broader network investigation is deferred.
-Updated: 2026-10-19.
+Status: shared Worker authority for browser P2P, independent bounded guest links,
+reliable ordered replication and fragmented snapshots; bounded guest recovery.
+Broader network investigation is deferred.
+Updated: 2026-10-25.
 
 Owns ongoing transport/replication decisions and gaps. The
 [architecture guide](../client-server-architecture.md) owns runtime boundaries;
 [network design](../NETWORK-ARCHITECTURE.md) retains channel rationale and future
 proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 
-[188](../tactical/188-p2p-worker-authority.md) tracks the in-progress migration of
-browser P2P authority from the rendering thread to the shared server Worker.
+## Browser P2P Worker authority
+
+[188](../tactical/188-p2p-worker-authority.md) moves browser P2P authority onto
+the existing GameServer Worker, including hosts with no guests. PeerJS and native
+RTC connections stay on the main thread. Each guest gets an independent
+OrderedWorkerChannel over a transferred MessagePort; main-thread forwarding does
+not decode gameplay payloads. Host-assigned connection epochs isolate replacements
+from stale commands/disconnects. Guest link failures close only that guest.
+
+Replication tests recipient readiness before advancing its last-sent baseline.
+Main-thread forwarding checks native buffered bytes and PeerJS queued messages
+between messages, withholding consumption credit during congestion. Ordered delta
+dependencies remain intact. Hard queue limits disconnect an overflowing guest
+rather than failing the whole authority. Network callbacks still depend on the
+host's main thread; a Worker does not eliminate WAN congestion or OS suspension.
+
+Hidden P2P authority continues serving guests and defers ordinary host-local
+replication; its local transport drains finite pending/control messages without
+requiring rendering. Single-player visibility pause/resume is unchanged. Both
+modes share acknowledged saves/shutdown and fault/watchdog diagnostics; the fault
+mode remains peer-host for P2P. Existing guests use the same binary gameplay wire
+format and PeerJS fragmentation.
+
+Focused unit and native two-browser evidence, timing comparisons and their limits
+are recorded in 188. Broader browser/network/device matrices remain deferred.
 
 ## Entity registry beyond 256 types
 

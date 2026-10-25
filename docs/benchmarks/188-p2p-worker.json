@@ -1,0 +1,236 @@
+{
+  "version": 1,
+  "setup": {
+    "platform": "darwin arm64 Apple M4 Pro",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "browser": "153.0.8010.12",
+    "generation": {
+      "type": "regional",
+      "version": "regional-v13",
+      "seed": 2026,
+      "preset": "temperate-v1"
+    },
+    "warmSeconds": 2,
+    "sampleSeconds": 4,
+    "input": "ArrowRight walking, collision enabled; leave shared spawn before guest arrival",
+    "limits": "Local signaling, full bundled headless Chromium, one sample per mode. Baseline swaps only main.ts and PeerHostTransport.ts from 1093c70c onto the same current engine. No sustained FPS improvement, WAN, physical-device or OS-background-timer claim. Main timings reset before each sample; Worker lifetime timings are omitted."
+  },
+  "comparison": [
+    {
+      "revision": "d5b6ffdb2a21bd3b0c87f5a769a395cac4bcb933",
+      "baselineRef": "1093c70c",
+      "baselineFiles": [
+        "src/main.ts",
+        "src/transport/PeerHostTransport.ts"
+      ],
+      "dirty": true,
+      "date": "2026-10-25T08:31:08.613Z",
+      "variant": "before",
+      "samples": [
+        {
+          "mode": "single-player",
+          "durationMs": 4002,
+          "frames": 240,
+          "framesOver25Ms": 0,
+          "frameIntervals": {
+            "p95Ms": 17,
+            "maxMs": 19.5
+          },
+          "authorityArrivalIntervals": {
+            "p95Ms": 17,
+            "maxMs": 19.5
+          },
+          "inputAckArrivalIntervals": {
+            "p95Ms": 17,
+            "maxMs": 34
+          },
+          "tickAdvance": 240,
+          "inputAckAdvance": 239,
+          "entities": 37,
+          "chunks": 20,
+          "workers": [
+            "/tilefun/src/server/local-server.worker.ts"
+          ],
+          "errors": [],
+          "distancePixels": 294.4577,
+          "mainServerTick": null
+        },
+        {
+          "mode": "host-only",
+          "durationMs": 4001,
+          "frames": 240,
+          "framesOver25Ms": 0,
+          "frameIntervals": {
+            "p95Ms": 17.5,
+            "maxMs": 18.8
+          },
+          "authorityArrivalIntervals": {
+            "p95Ms": 17.5,
+            "maxMs": 33.5
+          },
+          "inputAckArrivalIntervals": {
+            "p95Ms": 17.5,
+            "maxMs": 33.5
+          },
+          "tickAdvance": 240,
+          "inputAckAdvance": 240,
+          "entities": 37,
+          "chunks": 20,
+          "workers": [],
+          "errors": [],
+          "distancePixels": 294.457,
+          "mainServerTick": {
+            "count": 240,
+            "totalMs": 242.3,
+            "maxMs": 1.9,
+            "retained": 240,
+            "p50Ms": 1,
+            "p95Ms": 1.4,
+            "p99Ms": 1.6
+          }
+        },
+        {
+          "mode": "one-guest",
+          "durationMs": 4000.1,
+          "frames": 240,
+          "framesOver25Ms": 0,
+          "frameIntervals": {
+            "p95Ms": 17,
+            "maxMs": 23.4
+          },
+          "authorityArrivalIntervals": {
+            "p95Ms": 17,
+            "maxMs": 23.4
+          },
+          "inputAckArrivalIntervals": {
+            "p95Ms": 17,
+            "maxMs": 23.4
+          },
+          "tickAdvance": 240,
+          "inputAckAdvance": 240,
+          "entities": 40,
+          "chunks": 20,
+          "workers": [],
+          "errors": [],
+          "distancePixels": 294.457,
+          "mainServerTick": {
+            "count": 240,
+            "totalMs": 318.1,
+            "maxMs": 3.5,
+            "retained": 240,
+            "p50Ms": 1.3,
+            "p95Ms": 1.7,
+            "p99Ms": 2.4
+          }
+        }
+      ]
+    },
+    {
+      "revision": "d5b6ffdb2a21bd3b0c87f5a769a395cac4bcb933",
+      "baselineRef": null,
+      "baselineFiles": [],
+      "dirty": true,
+      "date": "2026-10-25T08:31:48.214Z",
+      "variant": "after",
+      "samples": [
+        {
+          "mode": "single-player",
+          "durationMs": 4016.4,
+          "frames": 241,
+          "framesOver25Ms": 0,
+          "frameIntervals": {
+            "p95Ms": 18.3,
+            "maxMs": 19.8
+          },
+          "authorityArrivalIntervals": {
+            "p95Ms": 18.3,
+            "maxMs": 19.8
+          },
+          "inputAckArrivalIntervals": {
+            "p95Ms": 18.4,
+            "maxMs": 34.6
+          },
+          "tickAdvance": 241,
+          "inputAckAdvance": 241,
+          "entities": 34,
+          "chunks": 20,
+          "workers": [
+            "/tilefun/src/server/local-server.worker.ts"
+          ],
+          "errors": [],
+          "distancePixels": 295.6839,
+          "mainServerTick": null
+        },
+        {
+          "mode": "host-only",
+          "durationMs": 4001.8,
+          "frames": 240,
+          "framesOver25Ms": 0,
+          "frameIntervals": {
+            "p95Ms": 17.1,
+            "maxMs": 19.4
+          },
+          "authorityArrivalIntervals": {
+            "p95Ms": 17.3,
+            "maxMs": 33.6
+          },
+          "inputAckArrivalIntervals": {
+            "p95Ms": 17.6,
+            "maxMs": 33.6
+          },
+          "tickAdvance": 241,
+          "inputAckAdvance": 241,
+          "entities": 37,
+          "chunks": 20,
+          "workers": [
+            "/tilefun/src/server/local-server.worker.ts"
+          ],
+          "errors": [],
+          "distancePixels": 294.4577,
+          "mainServerTick": null
+        },
+        {
+          "mode": "one-guest",
+          "durationMs": 4002.7,
+          "frames": 240,
+          "framesOver25Ms": 2,
+          "frameIntervals": {
+            "p95Ms": 18.3,
+            "maxMs": 25.5
+          },
+          "authorityArrivalIntervals": {
+            "p95Ms": 18.3,
+            "maxMs": 25.5
+          },
+          "inputAckArrivalIntervals": {
+            "p95Ms": 18.3,
+            "maxMs": 25.5
+          },
+          "tickAdvance": 240,
+          "inputAckAdvance": 240,
+          "entities": 40,
+          "chunks": 20,
+          "workers": [
+            "/tilefun/src/server/local-server.worker.ts"
+          ],
+          "errors": [],
+          "distancePixels": 294.4574,
+          "mainServerTick": null
+        }
+      ]
+    }
+  ],
+  "productionBrowserIndependence": {
+    "ticksDuringMainStall": 19,
+    "framesDuringAuthorityStall": 20,
+    "backgroundTicks": 181,
+    "localPending": 1,
+    "localChannelHighWaterBytes": 456375,
+    "guestChannelHighWaterBytes": [
+      753560
+    ]
+  }
+}

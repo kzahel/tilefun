@@ -10,7 +10,7 @@ scheduling and cold-entry presentation remaining as separate performance work.
 Wildlife sleep, shared bounded planning across all native families and ambient
 wander, local predicted animation, bounded unchanged car image reuse and ordered
 multi-texture GPU batches are delivered.
-Updated: 2026-10-22.
+Updated: 2026-10-25.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend
@@ -41,11 +41,15 @@ motion/contact/persistence checks pass; these diagnostic tolerances remain
 unchanged and the platform discrepancy remains unresolved.
 Both failures reproduce serially without competing browser tests.
 
-- Single player runs the shared server in a dedicated browser Worker.
+- Single player and browser P2P hosting run the shared server in a dedicated browser Worker.
   `src/server/LocalServerRuntime.ts` owns lifecycle; ordered, bounded
   `src/transport/WorkerClientTransport.ts` carries replicated state. Prediction
-  and rendering stay on the main thread. P2P hosting still runs its authority
-  on the main thread; dedicated hosts reuse the same server implementation.
+  and rendering stay on the main thread. P2P forwards binary guest traffic over
+  independent bounded MessagePorts; guest decoding, simulation and replica encoding
+  run in the Worker. Hidden P2P hosts continue authority/guest delivery while
+  deferring ordinary local replication; single player still pauses when hidden.
+  [188](../tactical/188-p2p-worker-authority.md) records focused acceptance and
+  measurement limits. Dedicated hosts reuse the same server implementation.
 - Timed authority uses ServerLoop's monotonic fixed-step deadlines, not repeating
   timer callback counts. Fractional timer rounding no longer produces ~62.5Hz
   simulation while advertising 60Hz. Catch-up is bounded to 250ms and lifecycle
