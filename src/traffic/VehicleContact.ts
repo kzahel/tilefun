@@ -1,11 +1,10 @@
-import { isBoat } from "../boats/Boat.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { axisBox, boxMotion, type OrientedBox } from "../physics/OrientedBox.js";
 import { isVehicle, vehicleBodySize, vehicleNoseHeading } from "./Vehicle.js";
 
 export function orientedCar(entity: Entity): boolean {
-  return isVehicle(entity) && !isBoat(entity);
+  return isVehicle(entity);
 }
 export function entityBody(entity: Entity): OrientedBox {
   if (!entity.collider) throw Error("Contact body requires a collider");

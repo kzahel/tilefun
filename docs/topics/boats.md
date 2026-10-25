@@ -2,7 +2,7 @@
 
 Topic: boats
 Status: implemented and validated; original appearance pending human review.
-Updated: 2026-10-24.
+Updated: 2026-10-25.
 
 Owner requested a working boat, naturally generated larger lakes, boats beside
 shores and varied water creatures in [152](../tactical/152-explorer-boat-and-lakes.md).
@@ -23,25 +23,46 @@ to the open seat. Return beside a clear dry shore to get out. Open-water exit
 is refused. Boats stay parked, save their position/heading and occupied seat,
 and retain deletion through normal streaming and reload.
 
-Placement outlines are centered on the actual vehicle collision footprint. The
-previous outline extended downward from the cursor, misleading south-shore
-placement by 40px. Boats now offer **Drive boat** within 64px of their hull,
-matching the maximum shore exit gap; the prompt and authority share that range.
-This makes boats placed a short distance offshore reachable from dry land on
-every side. Cars and trains retain their 32px boarding range. Boat water clearance
-and safe dry-land exit checks still apply.
+Placement outlines are centered on the actual vehicle collision footprint. Boats
+use the retained mesh's measured 72×35px body, with a continuously rotated hull
+and a surrounding query rectangle. Water/shore, prop and body contacts use the
+same swept oriented-body checks as road vehicles; empty query corners do not
+block a hull. Authority, prediction, placement, saved-seat restoration and the
+collision inspector share that geometry. Existing shore/body overlaps can retreat
+without deepening penetration or entering new obstacles, so a bank edit or old
+stranded save no longer rejects every attempt to move. New placements still require
+clear loaded water. Natural moorings reserve the hull's full turning radius.
 
-The shoreline correction passes native placement/overlay regressions and all
-seven boat browser checks. The broader browser run was stopped at the owner's
-request; it is not a completed full-suite result.
+Boats offer **Drive boat** within 96px of the rotated hull, shared by the prompt
+and authority, and allow boarding while standing on the 16px rim. The shore exit
+search covers the same 96px gap and still requires clear dry ground. Cars and
+trains retain their 32px boarding range. The original misplaced placement outline
+and 32px boarding limit had already been corrected; the larger reach also keeps
+older offshore placements reachable after replacing the oversized square.
 
-The shared authority/prediction driving step uses gentler acceleration and
-braking, forward rolling turns and a conservative 80px square hull clearance
-covering every heading. Swept bounds require loaded water and reject solid
-terrain, props and other bodies. Boats never use road routing, traffic model
-selection, pushing or roadkill. Road catalogs remain road-only; the shared
-drivable/editor/asset catalog additionally includes this one boat. No new wire
-fields or separate lab simulation are introduced.
+The GPU loader omits the car-style ground-shadow oval for marked watercraft.
+That oval projected beneath the raised sides of the open hull and gave a floating
+appearance. The retained GLB, sprite fallback and exact art review snapshots are
+unchanged. Drivers have no independent ground shadow while seated. Shared game
+and lake-playground backends consume the same loader policy.
+
+The shared authority/prediction driving step retains gentler acceleration and
+braking and forward rolling turns. Swept bounds require loaded terrain. Boats
+never use road routing, traffic model selection, pushing or roadkill. Road
+catalogs remain road-only; the shared drivable/editor/asset catalog additionally
+includes this one boat. No new wire fields or separate lab simulation are
+introduced.
+
+Validation on 2026-10-25: focused boat, placement, vehicle-control, driving,
+pushing, mesh, scene-collection and collision-inspector native checks pass.
+Regressions cover measured mesh containment, narrow channels, shore recovery,
+dry enclosing-box corners, rim/shore boarding, and authority/prediction parity.
+The saved-boat GameServer regression and all seven boat browser checks pass;
+Canvas, GPU sprites and GPU meshes cover ordinary game and lake playground
+boarding/driving/reload. Typechecks, focused lint, regenerated art/Workshop
+inventories, production build and diff checks pass. The new gameplay mesh
+capture was visually inspected for the removed oval. This is focused validation,
+not a full-suite claim.
 
 Large lakes have an independent bounded 512-tile owner bank. Their irregular
 shorelines enclose deep interiors and shallow margins, with a straight open

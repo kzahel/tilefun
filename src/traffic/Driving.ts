@@ -1,10 +1,5 @@
 import { isBoat } from "../boats/Boat.js";
-import {
-  aabbLacksWater,
-  aabbOverlapsPropWalls,
-  aabbsOverlap,
-  getEntityAABB,
-} from "../entities/collision.js";
+import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { axisBox } from "../physics/OrientedBox.js";
@@ -16,6 +11,7 @@ import type { World } from "../world/World.js";
 import {
   hasUnsecuredTransportLoad,
   isTransporter,
+  supportingTransporter,
   TRANSPORTER,
   transportedPose,
   transporterRampBounds,
@@ -49,6 +45,17 @@ export function occupiedVehicle(player: Entity, entities: readonly Entity[]): En
 }
 export function boardingDistance(player: Entity, vehicle: Entity): number {
   if (!vehicle.collider) return Infinity;
+  if (isBoat(vehicle)) {
+    const body = entityBody({ ...vehicle, vehicleHeading: vehicleNoseHeading(vehicle) });
+    const dx = player.position.wx - body.x,
+      dy = player.position.wy - body.y;
+    const c = Math.cos(body.angle),
+      s = Math.sin(body.angle);
+    return Math.hypot(
+      Math.max(0, Math.abs(dx * c + dy * s) - body.halfLength),
+      Math.max(0, Math.abs(-dx * s + dy * c) - body.halfWidth),
+    );
+  }
   const box = getEntityAABB(vehicle.position, vehicle.collider);
   return Math.hypot(
     Math.max(box.left - player.position.wx, 0, player.position.wx - box.right),
@@ -57,7 +64,11 @@ export function boardingDistance(player: Entity, vehicle: Entity): number {
 }
 /** Boats need a short shore-to-hull gap, matching the safe shore exit search. */
 export function boardingRange(vehicle: Entity): number {
-  return isBoat(vehicle) ? 64 : 32;
+  return isBoat(vehicle) ? 96 : 32;
+}
+/** Standing on the boat's rim must still offer the open driver seat. */
+export function boardingHeightRange(vehicle: Entity, entities: readonly Entity[]): number {
+  return isBoat(vehicle) ? 16 : supportingTransporter(vehicle, entities) ? 32 : 12;
 }
 function facing(dx: number, dy: number, previous: Direction): Direction {
   if (!dx && !dy) return previous;
@@ -366,9 +377,12 @@ export function checkedCarPose(
   for (let y = Math.floor(swept.top / 16); y <= Math.floor((swept.bottom - 0.001) / 16); y++)
     for (let x = Math.floor(swept.left / 16); x <= Math.floor((swept.right - 0.001) / 16); x++) {
       if (!world.getChunkIfLoaded(Math.floor(x / 16), Math.floor(y / 16))) return;
+      const collision = world.getCollisionIfLoaded(x, y);
+      const blocked = isBoat(car)
+        ? !(collision & CollisionFlag.Water) || (collision & CollisionFlag.Solid) !== 0
+        : (collision & (CollisionFlag.Solid | CollisionFlag.Water)) !== 0;
       if (
-        world.getCollisionIfLoaded(x, y) &
-          (isBoat(car) ? CollisionFlag.Solid : CollisionFlag.Solid | CollisionFlag.Water) &&
+        blocked &&
         (motion
           ? motion.contact(
               axisBox(
@@ -378,8 +392,7 @@ export function checkedCarPose(
               ),
               true,
             )
-          : isBoat(car) ||
-            !separatesContact(before, after, {
+          : !separatesContact(before, after, {
               left: x * 16,
               right: (x + 1) * 16,
               top: y * 16,
@@ -388,7 +401,6 @@ export function checkedCarPose(
       )
         return;
     }
-  if (isBoat(car) && aabbLacksWater(swept, (x, y) => world.getCollisionIfLoaded(x, y))) return;
   queries ??= drivingQueries(props);
   // Include offset feet outside the collider as well as both cardinal poses.
   const bounds = {

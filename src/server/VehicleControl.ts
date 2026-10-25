@@ -11,7 +11,12 @@ import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight
 import { isTrain } from "../railway/Train.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
 import { supportingTransporter, type TransporterAction } from "../traffic/CarTransporter.js";
-import { boardingDistance, boardingRange, isDrivable } from "../traffic/Driving.js";
+import {
+  boardingDistance,
+  boardingHeightRange,
+  boardingRange,
+  isDrivable,
+} from "../traffic/Driving.js";
 import {
   hasVehicleLights,
   isWarningVehicle,
@@ -140,7 +145,7 @@ export class VehicleControl {
         session.gameplaySession.mountId !== null ||
         boardingDistance(session.player, vehicle) > boardingRange(vehicle) ||
         Math.abs((session.player.wz ?? 0) - (vehicle.wz ?? 0)) >
-          (supportingTransporter(vehicle, r.entityManager.entities) ? 32 : 12))
+          boardingHeightRange(vehicle, r.entityManager.entities))
     )
       throw Error("Stand beside the vehicle to enter.");
     if (!restore && Math.hypot(vehicle.velocity?.vx ?? 0, vehicle.velocity?.vy ?? 0) > 3)
@@ -332,7 +337,7 @@ export class VehicleControl {
     const b = getEntityAABB(vehicle.position, vehicle.collider);
     const x = Math.max(b.left, Math.min(b.right, player.position.wx));
     const y = Math.max(b.top, Math.min(b.bottom, player.position.wy));
-    for (const gap of [16, 24, 32, 48, 64])
+    for (const gap of isBoat(vehicle) ? [16, 24, 32, 48, 64, 80, 96] : [16, 24, 32, 48, 64])
       for (const [wx, wy] of [
         [x, b.top - gap],
         [x, b.bottom + gap],

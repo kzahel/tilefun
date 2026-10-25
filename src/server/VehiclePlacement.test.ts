@@ -2,6 +2,7 @@ import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { BOAT_MODEL } from "../boats/Boat.js";
 import { VEHICLE_PALETTE } from "../editor/EditorPalettes.js";
+import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
@@ -88,13 +89,17 @@ it("boards an editor boat across a short water gap from every shore and exits on
         (dx ? dx * (x * 16 + 8) : dy * (y * 16 + 8)) >= 80
           ? CollisionFlag.None
           : CollisionFlag.Water;
-      s.player.player.position = { wx: dx * 105, wy: dy * 105 };
+      s.player.player.position = { wx: dx * 150, wy: dy * 150 };
       const state = required(place(s, BOAT_MODEL, 0, 0));
       expect(state.placed).toBe(true);
       s.player.editorEnabled = false;
-      expect(boardingDistance(s.player.player, state.entity)).toBe(65);
+      expect(boardingDistance(s.player.player, state.entity)).toBeGreaterThan(
+        boardingRange(state.entity),
+      );
       expect(() => s.realm.vehicles.enter(s.player, state.entity.id)).toThrow("Stand beside");
-      s.player.player.position = { wx: dx * 104, wy: dy * 104 };
+      const b = getEntityAABB(state.entity.position, required(state.entity.collider));
+      const reach = boardingRange(state.entity) + (dx ? b.right : b.bottom);
+      s.player.player.position = { wx: dx * reach, wy: dy * reach };
       expect(boardingDistance(s.player.player, state.entity)).toBe(boardingRange(state.entity));
       s.realm.vehicles.enter(s.player, state.entity.id);
       expect(s.player.player.parentId).toBe(state.entity.id);
@@ -106,6 +111,12 @@ it("boards an editor boat across a short water gap from every shore and exits on
           Math.floor(s.player.player.position.wy / 16),
         ) & CollisionFlag.Water,
       ).toBe(0);
+      // Jumping/standing on the 16px rim must not hide/refuse Drive boat.
+      s.player.player.position = { ...state.entity.position };
+      s.player.player.wz = 16;
+      s.realm.vehicles.enter(s.player, state.entity.id);
+      expect(s.player.player.parentId).toBe(state.entity.id);
+      s.realm.vehicles.exit(s.player);
       s.realm.entityManager.remove(state.entity.id);
     }
     expect(boardingRange(createVehicle("compact-1", 0, 0))).toBe(32);

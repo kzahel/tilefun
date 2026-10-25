@@ -14,22 +14,33 @@ import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
+import { axisBox, boxDepth } from "../physics/OrientedBox.js";
 import { Camera } from "../rendering/Camera.js";
 import { CarMeshAsset } from "../rendering/CarMeshAsset.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
-import { boardingDistance, drivenCarPose } from "../traffic/Driving.js";
+import { boardingDistance, boardingRange, drivenCarPose } from "../traffic/Driving.js";
 import {
+  applyVehicleFacing,
   createVehicle,
   DRIVABLE_MODELS,
   TRAFFIC_MODELS,
   VEHICLE_MODELS,
 } from "../traffic/Vehicle.js";
+import { entityBody } from "../traffic/VehicleContact.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
-import { BOAT_MESH, BOAT_MODEL, BOAT_SEAT_Z, BOAT_SIZE, isBoat } from "./Boat.js";
+import {
+  BOAT_BEAM,
+  BOAT_LENGTH,
+  BOAT_MESH,
+  BOAT_MODEL,
+  BOAT_MOORING_RADIUS,
+  BOAT_SEAT_Z,
+  isBoat,
+} from "./Boat.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const lakeOwner = [1, -2] as const;
@@ -54,11 +65,13 @@ it("retains exact editable source and a wheel-free exported boat with animated p
   );
   const asset = new CarMeshAsset(gltf.scene, 1, {
     batch: true,
+    contactShadow: true,
     preserveParts: BOAT_MESH.batchPreserveParts,
   });
   try {
     expect(asset.object.getObjectByName("Boat_Root")?.userData.tilefun_watercraft).toBe(1);
     expect(asset.object.getObjectByName("Wheel_FL_Roll")).toBeUndefined();
+    expect(asset.object.getObjectByName("Game-contact-shadow")).toBeUndefined();
     const propeller = required(asset.object.getObjectByName("Boat_Propeller"));
     const rest = propeller.quaternion.clone();
     asset.setTravel(2);
@@ -69,14 +82,14 @@ it("retains exact editable source and a wheel-free exported boat with animated p
       asset.object.rotation.z = (i * Math.PI) / 8;
       asset.object.updateMatrixWorld(true);
       const bounds = new THREE.Box3().setFromObject(asset.object, true);
-      expect(
-        Math.max(
-          Math.abs(bounds.min.x),
-          Math.abs(bounds.max.x),
-          Math.abs(bounds.min.y),
-          Math.abs(bounds.max.y),
-        ),
-      ).toBeLessThan(BOAT_SIZE / 2);
+      const e = createVehicle(BOAT_MODEL, 0, 0);
+      e.vehicleHeading = asset.object.rotation.z;
+      applyVehicleFacing(e);
+      const body = getEntityAABB(e.position, required(e.collider));
+      expect(bounds.min.x).toBeGreaterThanOrEqual(body.left - 0.001);
+      expect(bounds.max.x).toBeLessThanOrEqual(body.right + 0.001);
+      expect(bounds.min.y).toBeGreaterThanOrEqual(body.top - 0.001);
+      expect(bounds.max.y).toBeLessThanOrEqual(body.bottom + 0.001);
     }
   } finally {
     asset.dispose();
@@ -135,13 +148,15 @@ it("keeps moorings on water and within boarding reach across fractional shore al
     const lake = required(n.lake(x, y));
     const shore = (lake.y - lake.ry) * 16;
     const cx = Math.floor(lake.x / 16),
-      cy = Math.floor((shore + 44) / 256);
+      cy = Math.floor((Math.floor(shore / 16 + 0.5) * 16 + 1 + BOAT_MOORING_RADIUS) / 256);
     const p = required(n.boats(cx, cy)[0]);
     for (let dy = -1; dy <= 1; dy++)
       for (let dx = -1; dx <= 1; dx++) world.getChunk(cx + dx, cy + dy);
     const boat = createVehicle(BOAT_MODEL, p.wx, p.wy);
     expect(drivenCarPose(boat, idle, 1 / 60, world, [], []), lake.id).toBeDefined();
-    expect(boardingDistance(createPlayer(lake.x * 16, shore - 20), boat)).toBeLessThanOrEqual(32);
+    expect(boardingDistance(createPlayer(lake.x * 16, shore - 20), boat)).toBeLessThanOrEqual(
+      boardingRange(boat),
+    );
   }
 });
 
@@ -166,7 +181,7 @@ it("shares water-only rolling steering and reverse while refusing shore, obstacl
     drivenCarPose(createVehicle(BOAT_MODEL, 96, 96), idle, 1 / 60, dry, [], []),
   ).toBeUndefined();
   expect(drivenCarPose(e, idle, 1 / 60, new World(new FlatStrategy()), [], [])).toBeUndefined();
-  const other = createVehicle(BOAT_MODEL, e.position.wx, e.position.wy);
+  const other = createVehicle(BOAT_MODEL, e.position.wx - BOAT_LENGTH - 0.1, e.position.wy);
   other.id = 99;
   expect(drivenCarPose(e, idle, 1 / 60, world, [], [other], undefined, [])).toBeUndefined();
 });
@@ -259,3 +274,52 @@ it("boards a natural shore boat, predicts the open seat, drives, reloads and kee
     await s.close();
   }
 }, 60000);
+
+it("uses the measured hull in narrow water and lets a shore overlap retreat without going inland", () => {
+  const world = new World(new FlatStrategy());
+  for (let y = -1; y <= 1; y++) for (let x = -1; x <= 1; x++) world.getChunk(x, y);
+  // Three tile rows fit the measured beam, but not an 80px square.
+  world.getCollisionIfLoaded = (_x, y) =>
+    y >= -1 && y <= 1 ? CollisionFlag.Water : CollisionFlag.None;
+  const boat = createVehicle(BOAT_MODEL, 0, 8, Direction.Right);
+  expect(boat.collider?.width).toBe(BOAT_LENGTH);
+  expect(boat.collider?.height).toBe(BOAT_BEAM);
+  expect(drivenCarPose(boat, { dx: 1, dy: 0 }, 1 / 60, world, [], [])).toBeDefined();
+
+  // A saved/edited bank overlaps the rear by 8px. Only movement out is legal.
+  world.getCollisionIfLoaded = (x) => (x >= 0 ? CollisionFlag.Water : CollisionFlag.None);
+  const stranded = createVehicle(BOAT_MODEL, 28, 8, Direction.Right);
+  expect(
+    drivenCarPose(stranded, { dx: 1, dy: 0 }, 1 / 60, world, [], [])?.position.wx,
+  ).toBeGreaterThan(28);
+  expect(drivenCarPose(stranded, { dx: -1, dy: 0 }, 1 / 60, world, [], [])).toBeUndefined();
+  const clear = createVehicle(BOAT_MODEL, 36, 8, Direction.Right);
+  expect(drivenCarPose(clear, { dx: -1, dy: 0 }, 1 / 60, world, [], [])).toBeUndefined();
+});
+
+it("checks the rotated hull rather than dry corners of its enclosing rectangle", () => {
+  const world = new World(new FlatStrategy());
+  for (let y = -1; y <= 1; y++) for (let x = -1; x <= 1; x++) world.getChunk(x, y);
+  const boat = createVehicle(BOAT_MODEL, 0, 0);
+  boat.vehicleHeading = Math.fround(Math.PI / 4);
+  applyVehicleFacing(boat);
+  const body = entityBody(boat);
+  world.getCollisionIfLoaded = (x, y) =>
+    boxDepth(
+      body,
+      axisBox(
+        { left: x * 16, right: (x + 1) * 16, top: y * 16, bottom: (y + 1) * 16 },
+        -1e30,
+        1e30,
+      ),
+    ) > 0
+      ? CollisionFlag.Water
+      : CollisionFlag.None;
+  expect(
+    aabbLacksWater(
+      getEntityAABB(boat.position, required(boat.collider)),
+      world.getCollisionIfLoaded,
+    ),
+  ).toBe(true);
+  expect(drivenCarPose(boat, idle, 1 / 60, world, [], [])).toBeDefined();
+});

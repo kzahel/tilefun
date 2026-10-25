@@ -15,6 +15,7 @@ import {
 } from "../traffic/CarTransporter.js";
 import {
   boardingDistance,
+  boardingHeightRange,
   boardingRange,
   isDrivable,
   occupiedVehicle,
@@ -148,8 +149,7 @@ export class VehicleControl {
             e.transportedBy === undefined &&
             !entities.some((other) => other.parentId === e.id) &&
             Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 3 &&
-            Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <=
-              (supportingTransporter(e, transporters) ? 32 : 12) &&
+            Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <= boardingHeightRange(e, transporters) &&
             boardingDistance(p, e) <= boardingRange(e),
         )
         .sort(

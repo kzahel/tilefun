@@ -8,7 +8,6 @@ import {
 import { TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
-import { aabbLacksWater, aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
@@ -53,8 +52,8 @@ import {
 import { WorldStorePool } from "../persistence/WorldStorePool.js";
 import { setServerPhysicsMult, setServerTickMs } from "../physics/PlayerMovement.js";
 import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
+import { drivenCarPose } from "../traffic/Driving.js";
 import type { IServerTransport } from "../transport/Transport.js";
-import { CollisionFlag } from "../world/TileRegistry.js";
 import { around } from "./InterestManager.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
@@ -906,11 +905,15 @@ export class GameServer {
                 realm.vehicles.available(boat.id) &&
                 Math.hypot(boat.position.wx - saved.player.x, boat.position.wy - saved.player.y) < 2
               ) {
-                const bounds = getEntityAABB(boat.position, boat.collider);
-                const collision = (x: number, y: number) => realm.world.getCollisionIfLoaded(x, y);
                 if (
-                  !aabbLacksWater(bounds, collision) &&
-                  !aabbOverlapsSolid(bounds, collision, CollisionFlag.Solid)
+                  drivenCarPose(
+                    { ...boat, velocity: { vx: 0, vy: 0 } },
+                    { dx: 0, dy: 0 },
+                    1 / 60,
+                    realm.world,
+                    realm.propManager.props,
+                    realm.entityManager.entities,
+                  )
                 )
                   return {
                     realm,

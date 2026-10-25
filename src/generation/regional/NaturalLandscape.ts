@@ -1,6 +1,6 @@
 import { required } from "../../art/ArtCatalog.js";
 import { TerrainId } from "../../autotile/TerrainId.js";
-import { BOAT_SIZE, type BoatPlacement } from "../../boats/Boat.js";
+import { BOAT_MOORING_RADIUS, type BoatPlacement } from "../../boats/Boat.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
@@ -285,7 +285,7 @@ export class NaturalLandscape {
     const wx = lake.x * 16,
       // Terrain collision samples tile centers. Snap the entire northern hull
       // edge inside the first water row, including fractional/negative shores.
-      wy = Math.floor(lake.y - lake.ry + 0.5) * 16 + 1 + BOAT_SIZE / 2;
+      wy = Math.floor(lake.y - lake.ry + 0.5) * 16 + 1 + BOAT_MOORING_RADIUS;
     return Math.floor(wx / 256) === cx && Math.floor(wy / 256) === cy
       ? [
           {

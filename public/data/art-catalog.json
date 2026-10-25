@@ -34593,7 +34593,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:126"
+          "source": "src/traffic/Vehicle.ts:125"
         }
       ]
     },
@@ -35547,7 +35547,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:570"
+          "source": "src/traffic/Driving.ts:582"
         },
         {
           "system": "Gameplay",

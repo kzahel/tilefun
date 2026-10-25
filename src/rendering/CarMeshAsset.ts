@@ -274,7 +274,9 @@ export class CarMeshAsset {
       registered.scale.z = options?.heightScale ?? 1;
       registered.add(normalized);
       this.object.add(registered);
-      if (options?.contactShadow) {
+      // A land-contact oval makes the open hull appear suspended above water.
+      // Watercraft retain their authored waterline without a car ground shadow.
+      if (options?.contactShadow && boat?.userData.tilefun_watercraft !== 1) {
         this.object.updateMatrixWorld(true);
         const bounds = new THREE.Box3().setFromObject(this.object, true);
         const center = bounds.getCenter(new THREE.Vector3());

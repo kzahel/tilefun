@@ -1,5 +1,5 @@
 import { required } from "../art/ArtCatalog.js";
-import { BOAT_MODEL, BOAT_SIZE, BOAT_TYPE, BOAT_VIEWS } from "../boats/Boat.js";
+import { BOAT_MODEL, BOAT_VIEWS } from "../boats/Boat.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
@@ -29,7 +29,7 @@ const turningRadii = new Map(
   ]),
 );
 const rollingBodies = new Map(
-  VEHICLE_MODELS.map((id) => {
+  DRIVABLE_MODELS.map((id) => {
     const colliders = views
       .filter((view) => view.vehicleId === id)
       .flatMap((view) => view.metadata.colliders);
@@ -75,7 +75,6 @@ export function vehicleBodySize(
   heading: number,
   towed = false,
 ): { width: number; height: number } {
-  if (type === BOAT_TYPE) return { width: BOAT_SIZE, height: BOAT_SIZE };
   const body = rollingBodies.get(type);
   if (!body) throw Error(`Unknown vehicle body ${type}`);
   const cos = Math.abs(Math.cos(heading)),
