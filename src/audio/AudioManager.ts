@@ -4,6 +4,7 @@ import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/Eme
 import { predatorProfile } from "../wildlife/Predator.js";
 import { AnimalAudio } from "./AnimalAudio.js";
 import { animalAudioPose, animalVoiceForSpecies, animalVoiceForType } from "./AnimalVoice.js";
+import { CarEngineAudio } from "./CarEngineAudio.js";
 import { creatureCallSamples } from "./CreatureCall.js";
 import { smallAnimalCallForSpecies, smallAnimalCallForType } from "./SmallAnimalCall.js";
 import { TrainAudio } from "./TrainAudio.js";
@@ -18,6 +19,7 @@ export class AudioManager {
   private buffers = new Map<string, AudioBuffer>();
   private unlocked = false;
   private master: GainNode | null = null;
+  private carEngine: CarEngineAudio | null = null;
   private sirens = new Map<
     number,
     { style: number; source: AudioBufferSourceNode; gain: GainNode; pan: StereoPannerNode }
@@ -239,10 +241,26 @@ export class AudioManager {
     this.stopHorns();
     this.stopSirens();
     this.stopTrains();
+    this.stopCarEngine();
+    this.carEngine = null;
     this.creatureClips.clear();
     if (this.ctx) void this.ctx.close();
     this.animals = null;
     this.ctx = null;
+  }
+
+  updateCarEngine(car: Entity | undefined, enabled: boolean): void {
+    if (!enabled || !this.ctx || this.ctx.state !== "running") {
+      this.stopCarEngine();
+      return;
+    }
+    if (!car && !this.carEngine) return;
+    this.carEngine ??= new CarEngineAudio(this.ctx, this.master ?? this.ctx.destination);
+    this.carEngine.update(car);
+  }
+
+  stopCarEngine(): void {
+    this.carEngine?.stop();
   }
 
   updateTrains(entities: readonly Entity[], listener: PositionComponent, enabled: boolean): void {

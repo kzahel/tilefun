@@ -452,6 +452,23 @@ build and all six streaming readiness cases also pass after the rebase.
 Next: hands-on driving around parked cars in both control styles, especially
 close rolling turns and backing away from contact.
 
+## Quiet engine audio
+
+The local driver hears a soft engine purr while seated in a road vehicle. It idles
+quietly when stopped, with gently rising pitch/level as actual speed increases;
+reverse uses the same speed response. Heavy vehicles idle a little lower. Gain
+smoothly stays between 0.025 and 0.06 before the shared master/Idea ducking, well
+below the horn. There is one reusable looping voice, with a short fade at entry,
+exit, pause, editing, menus, blocked input, blur and page hiding. It respects audio
+unlock/suspension. Automatic traffic, trains and boats do not add this car loop.
+
+`CarEngineAudio` synthesizes and caches the original periodic low harmonics; it
+needs no new sound files or authority messages. Main gameplay and the Traffic
+playground call the same AudioManager path. Native audio tests cover quiet output,
+speed/reverse/overspeed, heavy pitch, one-voice/buffer reuse, exclusions and resource
+cleanup. The existing car-driving browser boundary checks the real Web Audio
+voice, menu/blur silence, restart and exit alongside normal driving.
+
 ## Horns, driving personality and gentle contact
 
 [135](../tactical/135-vehicle-horns-speeds-and-pushing.md) adds **Horn / H** on

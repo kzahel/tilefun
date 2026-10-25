@@ -327,6 +327,10 @@ export class PlayScene implements GameScene {
       gc.stateView.playerEntity.position,
       !inputLocked,
     );
+    gc.audioManager.updateCarEngine(
+      vehicle,
+      !inputLocked && !gc.debugPanel.paused && !document.hidden,
+    );
     gc.audioManager.updateTrains(
       gc.stateView.entities,
       gc.stateView.playerEntity.position,
@@ -626,6 +630,7 @@ export class PlayScene implements GameScene {
   private stopMovement(gc: GameContext): void {
     gc.audioManager.stopSirens();
     gc.audioManager.stopTrains();
+    gc.audioManager.stopCarEngine();
     gc.audioManager.stopHorns();
     gc.audioManager.stopCreatureCalls();
     gc.transport.send({ type: "vehicle-horn", active: false });

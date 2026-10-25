@@ -47,6 +47,25 @@ async function read(page: Page) {
     };
   });
 }
+async function engine(page: Page) {
+  return page.locator("#game").evaluate((c) => {
+    const g = (
+      c as unknown as {
+        __game: {
+          audioManager: {
+            carEngine: {
+              voice: { id: number; gain: GainNode; source: AudioBufferSourceNode } | null;
+            } | null;
+          };
+        };
+      }
+    ).__game;
+    const voice = g.audioManager.carEngine?.voice;
+    return voice
+      ? { id: voice.id, volume: voice.gain.gain.value, rate: voice.source.playbackRate.value }
+      : null;
+  });
+}
 async function checkHorn(page: Page, kind: "car" | "train") {
   const canvas = page.locator("#game");
   await canvas.evaluate((c) => {
@@ -105,6 +124,7 @@ async function checkHorn(page: Page, kind: "car" | "train") {
   await expect.poll(sounding).toBe(1);
   await page.evaluate(() => window.dispatchEvent(new Event("blur")));
   await expect.poll(sounding).toBe(0);
+  if (kind === "car") await expect.poll(() => engine(page)).toBeNull();
   await page.keyboard.up(kind === "car" ? "Space" : "h");
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
 }
@@ -201,6 +221,14 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     await expect.poll(async () => (await read(page)).parent).not.toBeNull();
     expect((await read(page)).type).toMatch(/^vehicle-v1:/);
     await checkHorn(page, "car");
+    await expect.poll(async () => (await engine(page))?.volume ?? 0).toBeGreaterThan(0);
+    expect((await engine(page))?.id).toBe((await read(page)).parent);
+    expect((await engine(page))?.volume).toBeLessThan(0.07);
+    await page.keyboard.press("Escape");
+    await expect(page.getByTestId("world-menu")).toBeVisible();
+    await expect.poll(() => engine(page)).toBeNull();
+    await page.keyboard.press("Escape");
+    await expect.poll(() => engine(page)).not.toBeNull();
     if (backend.includes("meshes")) {
       if (override) expect((await read(page)).type).not.toBe("vehicle-v1:compact-1");
       else expect(authoredTypes).toContain((await read(page)).type);
@@ -406,6 +434,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
       await touch.detach();
     }
     await expect.poll(async () => (await read(page)).parent).toBeNull();
+    await expect.poll(() => engine(page)).toBeNull();
     expect(errors).toEqual([]);
   });
   if (backend.includes("meshes")) continue;

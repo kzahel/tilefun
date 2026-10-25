@@ -1821,6 +1821,7 @@ export class GameClient {
   private clearPlayInput(sendNeutral = true): void {
     this.audioManager.stopSirens();
     this.audioManager.stopTrains();
+    this.audioManager.stopCarEngine();
     this.audioManager.stopHorns();
     if (this.scenes?.current instanceof PlayScene)
       this.transport.send({ type: "vehicle-horn", active: false });

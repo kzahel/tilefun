@@ -98,6 +98,11 @@ export default function TrafficPage() {
         )
           honk(horn);
         if (presentation.current.paused || document.hidden) audio.current?.stopHorns();
+        audio.current ??= new AudioManager();
+        audio.current.updateCarEngine(
+          occupied ? car : undefined,
+          !presentation.current.paused && !document.hidden && document.hasFocus(),
+        );
         setDriving(occupied);
         setEmergencyState(vehicleLightState(car));
         c.dataset.emergencyState = String(vehicleLightState(car));
@@ -140,6 +145,7 @@ export default function TrafficPage() {
       keys.current.clear();
       honk(false);
       audio.current?.stopHorns();
+      audio.current?.stopCarEngine();
     };
     window.addEventListener("blur", release);
     const visibility = () => {
@@ -152,6 +158,9 @@ export default function TrafficPage() {
       delete c.dataset.ready;
       delete c.__presentationDiagnostics;
       audio.current?.stopHorns();
+      audio.current?.stopCarEngine();
+      audio.current?.dispose();
+      audio.current = null;
       hornState.current = { active: false, refreshed: 0 };
       host.dispose();
       window.removeEventListener("blur", release);
@@ -425,7 +434,13 @@ export default function TrafficPage() {
           aria-label="Generated traffic playground"
           tabIndex={0}
           style={{ display: "block", width: "100%", touchAction: "none", borderRadius: 12 }}
+          onPointerDown={() => {
+            audio.current ??= new AudioManager();
+            audio.current.tryResume();
+          }}
           onKeyDown={(e) => {
+            audio.current ??= new AudioManager();
+            audio.current.tryResume();
             if (driving && HORN_KEYS.includes(e.key)) {
               e.preventDefault();
               if (!e.repeat) {
