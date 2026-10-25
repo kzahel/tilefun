@@ -125,6 +125,13 @@ unchanged; no approvals or review events are synthesized. An initial manifest ru
 was superseded after detecting in-progress source edits; only the stable result
 is retained.
 
+Final process audit found PeerServer's private housekeeping timers retained idle
+Node capture processes after their HTTP servers closed. The runner now owns an
+isolated broker child, bounds startup, closes its sockets and awaits process exit.
+A focused `--modes=host-only` capture verifies normal completion and cleanup;
+completed in-process capture remnants were reaped. This changes the diagnostic
+runner only, not game hosting or the recorded before/after workload.
+
 ## Next work
 
 Play the usual parent/kid session on the devices where hosting felt slow. If lag

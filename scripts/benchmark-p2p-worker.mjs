@@ -1,10 +1,10 @@
 // Short local comparison, not a WAN or physical-device benchmark.
-import { execFileSync } from "node:child_process";
+import { execFileSync, fork } from "node:child_process";
+import { once } from "node:events";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import react from "@vitejs/plugin-react";
-import { PeerServer } from "peer";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
 
@@ -17,6 +17,12 @@ const git = (args) =>
 const output = process.argv.find((arg) => arg.startsWith("--output="))?.slice(9);
 if (!output) throw Error("Pass --output=/absolute/path/report.json");
 const baselineRef = process.argv.find((arg) => arg.startsWith("--baseline-ref="))?.slice(15);
+const modes = process.argv
+  .find((arg) => arg.startsWith("--modes="))
+  ?.slice(8)
+  .split(",") ?? ["single-player", "host-only", "one-guest"];
+if (modes.some((mode) => !["single-player", "host-only", "one-guest"].includes(mode)))
+  throw Error("Invalid --modes");
 // Compare the old launcher/PeerJS host on the current engine without another checkout.
 const baselineFiles = baselineRef
   ? new Map(
@@ -71,16 +77,14 @@ try {
   });
   await vite.listen();
   const origin = `http://127.0.0.1:${vite.httpServer.address().port}/tilefun/`;
-  await new Promise((resolve) =>
-    PeerServer({ host: "127.0.0.1", port: 0, path: "/peerjs" }, (server) => {
-      broker = server;
-      resolve();
-    }),
-  );
-  const peerServer = `http://127.0.0.1:${broker.address().port}/peerjs`;
+  broker = fork(new URL("./p2p-benchmark-broker.mjs", import.meta.url), [], {
+    stdio: ["ignore", "ignore", "inherit", "ipc"],
+  });
+  const [address] = await once(broker, "message", { signal: AbortSignal.timeout(10_000) });
+  const peerServer = `http://127.0.0.1:${address.port}/peerjs`;
   browser = await chromium.launch({ channel: "chromium", headless: true });
   report.browser = browser.version();
-  for (const mode of ["single-player", "host-only", "one-guest"]) {
+  for (const mode of modes) {
     const context = await browser.newContext({ viewport: report.viewport });
     const guestContext = await browser.newContext({ viewport: report.viewport });
     const errors = [];
@@ -244,7 +248,10 @@ try {
 } finally {
   await browser?.close();
   await vite?.close();
-  broker?.close();
-  broker?.closeAllConnections();
+  if (broker && broker.exitCode === null && broker.signalCode === null) {
+    const exited = once(broker, "exit");
+    broker.kill("SIGTERM");
+    await exited;
+  }
   await rm(temp, { recursive: true, force: true });
 }
