@@ -285,3 +285,62 @@ test.describe("gem HUD", () => {
     });
   });
 });
+
+test("startup shows the HTML shell before game code, image progress, and world preparation", async ({
+  page,
+}) => {
+  let releaseScripts!: () => void;
+  const scripts = new Promise<void>((resolve) => {
+    releaseScripts = resolve;
+  });
+  let releaseImage!: () => void;
+  const image = new Promise<void>((resolve) => {
+    releaseImage = resolve;
+  });
+  await page.route("**/*", async (route) => {
+    if (route.request().resourceType() === "script") await scripts;
+    if (new URL(route.request().url()).pathname.endsWith("/assets/sprites/player.png")) await image;
+    await route.continue();
+  });
+  try {
+    await page.goto("/tilefun/?nogamepad", { waitUntil: "commit" });
+    const screen = page.locator("#startup-screen");
+    await expect(screen).toBeVisible();
+    await expect(page.locator("#startup-stage")).toHaveText("Loading game code…");
+    await expect(page.locator("#startup-progress")).not.toHaveAttribute("value");
+    await page.evaluate(() => {
+      const root = document.getElementById("startup-screen");
+      const stages = [root?.dataset.stage];
+      (window as unknown as { startupStages: unknown[] }).startupStages = stages;
+      if (root)
+        new MutationObserver(() => stages.push(root.dataset.stage)).observe(root, {
+          attributes: true,
+          attributeFilter: ["data-stage"],
+        });
+    });
+    releaseScripts();
+    await expect(screen).toHaveAttribute("data-stage", "assets");
+    await expect
+      .poll(() =>
+        page.locator("#startup-progress").evaluate((node) => {
+          const bar = node as HTMLProgressElement;
+          return bar.value > 0 && bar.value < bar.max;
+        }),
+      )
+      .toBe(true);
+    await expect(page.locator("#startup-detail")).toHaveText(/\d+ of \d+ images ready/);
+    releaseImage();
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    await expect(screen).toBeHidden();
+    const stages = await page.evaluate(
+      () => (window as unknown as { startupStages: string[] }).startupStages,
+    );
+    expect(stages).toContain("profile");
+    expect(stages).toContain("server");
+    expect(stages).toContain("assets");
+    expect(stages).toContain("world");
+  } finally {
+    releaseScripts();
+    releaseImage();
+  }
+});

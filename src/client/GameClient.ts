@@ -34,6 +34,7 @@ import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
 import { type CarDrivingStyle, carDrivingStyle } from "../traffic/CarControls.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
+import { finishStartup, showStartupAssets, showStartupStage } from "../ui/StartupProgress.js";
 import { requestSessionNavigation } from "../ui/sessionNavigation.js";
 import { DoorPresentation } from "./DoorPresentation.js";
 import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
@@ -239,6 +240,7 @@ export class GameClient {
   private doorPresentation = new DoorPresentation();
   /** True once init() has completed and we're ready to show UI. */
   private initDone = false;
+  private startupWorldReady = false;
   /** Player profile (display name, id). */
   private profile: NonNullable<GameClientOptions["profile"]> | null = null;
   /** Profile store for listing/creating profiles (Switch Player). */
@@ -653,6 +655,7 @@ export class GameClient {
                   Math.floor(p.position.wy / CHUNK_SIZE_PX),
                 ),
               ));
+        if (this.initDone && ready) this.startupWorldReady = true;
         this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
         if (this.mapButton) {
           const hint = inputHint("G", "View");
@@ -688,6 +691,8 @@ export class GameClient {
         this.time.presentationSeconds = presentationSeconds;
         this.renderHost.beginFrame();
         this.scenes.render(alpha);
+        if (this.initDone && (this.startupWorldReady || this.scenes.has(MenuScene)))
+          finishStartup();
         if (this.initDone) {
           let buddies = 0;
           for (const entity of this.stateView.entities) if (entity.wanderAI?.following) buddies++;
@@ -810,14 +815,24 @@ export class GameClient {
       this.scenes.push(new PlayScene());
     }
 
+    showStartupStage(
+      "assets",
+      "Loading artwork and sounds…",
+      "Preparing images, sounds and tile data.",
+    );
     // Load all assets — BlendGraph is deterministic, construct locally
     const blendGraph = this.serialized ? new BlendGraph() : this.localServer.blendGraph;
     const [assets] = await Promise.all([
-      loadGameAssets(blendGraph),
+      loadGameAssets(blendGraph, showStartupAssets),
       loadAtlasIndex(),
       loadModernInteriorsAtlasIndex(),
       this.audioManager.preload(buildFootstepManifest()),
     ]);
+    showStartupStage(
+      "world",
+      "Preparing your world…",
+      "Loading nearby scenery and placing your player.",
+    );
     this.sheets = assets.sheets;
     this.mainMenu.characterPicker.setAssets(this.sheets, this.profile?.playerModel);
     this.mainMenu.characterPicker.onSelect = async (model) => {

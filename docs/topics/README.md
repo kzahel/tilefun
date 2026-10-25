@@ -19,6 +19,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | Topic | Scope and next direction |
 | --- | --- |
 | [Gem progression](gem-progression.md) | Exploration gems, saved balances and future shop/unlock decisions |
+| [Startup loading](startup-loading.md) | First-paint loading shell, actual asset counts and startup readiness/error stages |
 | [Testing](testing.md) | Narrowest effective test level, browser-suite audit and staged migration to existing native coverage |
 | [Steam Deck and menus](steam-deck-and-menus.md) | Linux Electron package, shared submenus, controller input and multiplayer acceptance |
 | [Touch movement](touch-movement.md) | Joystick, tap and hold modes, local Options preference and contact cancellation |

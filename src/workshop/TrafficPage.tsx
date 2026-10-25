@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
 import { AudioManager } from "../audio/AudioManager.js";
+import { DEFAULT_ACTION_MAP } from "../input/ActionMap.js";
 import {
   TERRAIN_PACING,
   type TerrainPacing,
@@ -25,6 +26,8 @@ export type TrafficCanvas = HTMLCanvasElement & {
   __terrainDiagnostics?: () => TerrainDiagnostics | undefined;
   __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
 };
+
+const HORN_KEYS = DEFAULT_ACTION_MAP.find((binding) => binding.action === "honk")?.keys ?? [];
 
 export default function TrafficPage() {
   const canvas = useRef<TrafficCanvas>(null),
@@ -85,7 +88,10 @@ export default function TrafficPage() {
         const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
         const occupied = s.view.playerEntity.parentId === car.id;
         const horn =
-          occupied && !presentation.current.paused && !document.hidden && keys.current.has("h");
+          occupied &&
+          !presentation.current.paused &&
+          !document.hidden &&
+          HORN_KEYS.some((key) => keys.current.has(key));
         if (
           horn !== hornState.current.active ||
           (horn && performance.now() - hornState.current.refreshed >= 200)
@@ -286,7 +292,7 @@ export default function TrafficPage() {
         )}
         {driving && (
           <button type="button" {...touch("h")} style={{ touchAction: "none" }}>
-            Horn · H
+            Horn · Space / H
           </button>
         )}
         {driving && hasVehicleLights({ type: `vehicle-v1:${model}` }) && (
@@ -420,10 +426,10 @@ export default function TrafficPage() {
           tabIndex={0}
           style={{ display: "block", width: "100%", touchAction: "none", borderRadius: 12 }}
           onKeyDown={(e) => {
-            if (driving && e.key.toLowerCase() === "h") {
+            if (driving && HORN_KEYS.includes(e.key)) {
               e.preventDefault();
               if (!e.repeat) {
-                keys.current.add("h");
+                keys.current.add(e.key);
                 honk(true);
               }
               return;
@@ -464,10 +470,7 @@ export default function TrafficPage() {
           }}
           onKeyUp={(e) => {
             keys.current.delete(e.key);
-            if (e.key.toLowerCase() === "h") {
-              keys.current.delete("h");
-              honk(false);
-            }
+            if (HORN_KEYS.includes(e.key)) honk(HORN_KEYS.some((key) => keys.current.has(key)));
           }}
           onBlur={() => {
             keys.current.clear();

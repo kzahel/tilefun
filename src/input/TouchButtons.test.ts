@@ -30,7 +30,12 @@ it("shows mouse-usable driving controls on desktop and releases boost on blur", 
   ctx.fillText.mockClear();
   buttons.driving = true;
   buttons.draw(ctx as unknown as CanvasRenderingContext2D);
-  expect(ctx.fillText.mock.calls.map((call) => call[0])).toEqual(["Fast", "Shift", "Horn", "H"]);
+  expect(ctx.fillText.mock.calls.map((call) => call[0])).toEqual([
+    "Fast",
+    "Shift",
+    "Horn",
+    "Space",
+  ]);
   buttons.emergency = true;
   buttons.emergencyState = 5;
   ctx.fillText.mockClear();

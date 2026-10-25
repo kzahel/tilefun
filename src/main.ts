@@ -1,3 +1,4 @@
+import { finishStartup, showStartupStage, suspendStartup } from "./ui/StartupProgress.js";
 import "./ui/Menus.css";
 import { GameClient } from "./client/GameClient.js";
 import { FaultReporter, reportFault, setFaultReporter } from "./diagnostics/FaultReporter.js";
@@ -125,6 +126,7 @@ async function resolveProfile(profileStore: PlayerProfileStore): Promise<PlayerP
   }
 
   // Multiple profiles — show picker
+  suspendStartup();
   return showProfilePicker(profileStore, profiles);
 }
 
@@ -271,6 +273,7 @@ window.tilefunDesktop?.onPrepareQuit(() => {
 });
 
 async function start() {
+  showStartupStage("graphics", "Preparing graphics…", "Setting up the game renderer.");
   const renderHostFactory = await selectableRenderHostFactory(
     new URLSearchParams(location.search),
     {
@@ -279,6 +282,7 @@ async function start() {
   );
   await import.meta.hot?.data.localShutdown;
   // Resolve player profile first
+  showStartupStage("profile", "Loading your player…", "Opening saved profiles and preferences.");
   const profileStore = new PlayerProfileStore();
   await profileStore.open();
   const profile = await resolveProfile(profileStore);
@@ -322,6 +326,7 @@ async function start() {
       url.searchParams.delete("join");
       window.location.href = url.toString();
     });
+    suspendStartup();
     document.body.appendChild(overlay.el);
     overlay.el.querySelector<HTMLButtonElement>("button:not([hidden])")?.focus();
 
@@ -378,6 +383,7 @@ async function start() {
     // Use profile ID as peer ID so the join URL survives host refreshes
     peerHost = new PeerHostTransport(transport, playerId);
     const overlay = createConnectionOverlay(cancelSessionJoin);
+    suspendStartup();
     document.body.append(overlay.el);
     overlay.el.querySelector<HTMLButtonElement>("button:not([hidden])")?.focus();
     let peerId: string;
@@ -412,6 +418,11 @@ async function start() {
     });
     client.setHostingInfo(hostingBanner.info);
   } else if (serverParam || multiplayer) {
+    showStartupStage(
+      "connection",
+      "Connecting to your game…",
+      "Waiting for the server connection.",
+    );
     // Multiplayer mode: connect via WebSocket.
     // ?multiplayer uses /ws path (Vite plugin shares HTTP server with HMR).
     // ?server=host:port connects to standalone server (no path needed).
@@ -479,6 +490,7 @@ async function start() {
 }
 
 function createLocalHost(keepAliveWhenHidden = false): WorkerClientTransport {
+  showStartupStage("server", "Opening your worlds…", "Starting the game and reading saved worlds.");
   const transport = new WorkerClientTransport(
     new Worker(new URL("./server/local-server.worker.ts", import.meta.url), { type: "module" }),
     {
@@ -510,6 +522,7 @@ function hideLocalHost(): void {
 
 /** Show a full-screen error overlay with recovery options. */
 function showErrorOverlay(error: unknown, recoverable = false): void {
+  if (!recoverable) finishStartup();
   reportFault(
     error instanceof Error && error.name === "LocalServerHang" ? "server-hang" : "fatal",
     error,

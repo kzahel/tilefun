@@ -183,12 +183,20 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
  * Returns sheets map, indexed blend sheet array, and tile variants.
  */
 /** Terrain-only consumer uses the same manifests and variants as gameplay. */
-export async function loadTerrainAssets(blendGraph: BlendGraph): Promise<GameAssets> {
+export async function loadTerrainAssets(
+  blendGraph: BlendGraph,
+  onImageLoaded?: () => void,
+): Promise<GameAssets> {
+  const load = async (path: string) => {
+    const image = await loadImage(path);
+    onImageLoaded?.();
+    return image;
+  };
   const blendDescs = blendGraph.allSheets;
   const [blendImages, completeImg, objectsImg] = await Promise.all([
-    Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
-    loadImage("assets/tilesets/me-complete.png"),
-    loadImage("assets/tilesets/objects.png"),
+    Promise.all(blendDescs.map((desc) => load(desc.assetPath))),
+    load("assets/tilesets/me-complete.png"),
+    load("assets/tilesets/objects.png"),
   ]);
   const sheets = new Map<string, Spritesheet>();
   const blendSheets: Spritesheet[] = [];
@@ -210,11 +218,27 @@ export async function loadTerrainAssets(blendGraph: BlendGraph): Promise<GameAss
   return { sheets, blendSheets, variants };
 }
 
-export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets> {
+export async function loadGameAssets(
+  blendGraph: BlendGraph,
+  onProgress?: (completed: number, total: number) => void,
+): Promise<GameAssets> {
+  const total = blendGraph.allSheets.length + SPRITE_MANIFEST.length + 3;
+  let completed = 0;
+  const loaded = () => onProgress?.(++completed, total);
+  onProgress?.(0, total);
   const [terrain, spriteImages, modernInteriorsImg] = await Promise.all([
-    loadTerrainAssets(blendGraph),
-    Promise.all(SPRITE_MANIFEST.map(loadSpriteAsset)),
-    loadImage("assets/tilesets/modern-interiors-atlas.png"),
+    loadTerrainAssets(blendGraph, loaded),
+    Promise.all(
+      SPRITE_MANIFEST.map(async (entry) => {
+        const image = await loadSpriteAsset(entry);
+        loaded();
+        return image;
+      }),
+    ),
+    loadImage("assets/tilesets/modern-interiors-atlas.png").then((image) => {
+      loaded();
+      return image;
+    }),
   ]);
   for (const [i, manifest] of SPRITE_MANIFEST.entries()) {
     const img = spriteImages[i];

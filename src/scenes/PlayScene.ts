@@ -339,7 +339,7 @@ export class PlayScene implements GameScene {
     );
     if (vehicle) rawMovement = { ...rawMovement, jump: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
-    const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked;
+    const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked && !vehicle;
     const commandDtMs = quantizeInputDtMs(dt * getTimeScale() * 1000);
     const commandDt = commandDtMs / 1000;
     const movement = {

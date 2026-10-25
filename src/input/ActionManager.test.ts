@@ -269,8 +269,11 @@ describe("ActionManager", () => {
 
 it("latches a complete horn tap between simulation frames and clears pending input", () => {
   const actions = new ActionManager();
-  actions.pressKey("h");
-  actions.releaseKey("h");
+  actions.pressKey(" ");
+  expect(actions.isHeld("honk")).toBe(true);
+  expect(actions.getMovement().jump).toBe(true); // Space still jumps on foot.
+  actions.releaseKey(" ");
+  expect(actions.getMovement().jump).toBe(false);
   expect(actions.isHeld("honk")).toBe(false);
   expect(actions.consumeHornPress()).toBe(true);
   expect(actions.consumeHornPress()).toBe(false);

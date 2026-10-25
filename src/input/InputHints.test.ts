@@ -12,6 +12,7 @@ describe("semantic action hints", () => {
     noteInputSource("keyboard");
     expect(actionHint("context_actions")).toBe("Q");
     expect(actionHint("jump")).toBe("Space");
+    expect(actionHint("honk")).toBe("Space");
     noteInputSource("touch");
     expect(actionHint("context_actions")).toBe("");
     noteInputSource("keyboard");

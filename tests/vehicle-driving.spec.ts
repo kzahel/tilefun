@@ -78,11 +78,11 @@ async function checkHorn(page: Page, kind: "car" | "train") {
         ).horns.size,
     );
   await expect.poll(sounding).toBe(0);
-  await page.keyboard.down("h");
+  await page.keyboard.down(kind === "car" ? "Space" : "h");
   await expect.poll(sounding).toBe(1);
   await page.waitForTimeout(1500);
   expect(await sounding()).toBe(1);
-  await page.keyboard.up("h");
+  await page.keyboard.up(kind === "car" ? "Space" : "h");
   await expect.poll(sounding).toBe(0);
   const spot = await canvas.evaluate((c) => {
     const rect = c.getBoundingClientRect();
@@ -101,11 +101,11 @@ async function checkHorn(page: Page, kind: "car" | "train") {
   await expect.poll(sounding).toBe(0);
   await cdp.detach();
   // Focus loss stops a held keyboard horn without waiting for keyup.
-  await page.keyboard.down("h");
+  await page.keyboard.down(kind === "car" ? "Space" : "h");
   await expect.poll(sounding).toBe(1);
   await page.evaluate(() => window.dispatchEvent(new Event("blur")));
   await expect.poll(sounding).toBe(0);
-  await page.keyboard.up("h");
+  await page.keyboard.up(kind === "car" ? "Space" : "h");
   await page.evaluate(() => window.dispatchEvent(new Event("focus")));
 }
 async function start(page: Page, backend: string, cars = false) {

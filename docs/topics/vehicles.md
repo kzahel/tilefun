@@ -11,7 +11,7 @@ shared engine. [Depot use and limits](../vehicle-depot.md) own the play contract
 
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-24.
+Updated: 2026-10-25.
 
 2026-10-22 integration verification: `tests/transporter.spec.ts:66` fails its strict
 paused/reload car-position equality, with a 0.72–1.82 world-pixel difference.
@@ -456,7 +456,11 @@ close rolling turns and backing away from contact.
 
 [135](../tactical/135-vehicle-horns-speeds-and-pushing.md) adds **Horn / H** on
 screen while driving, including desktop mouse and touch. Trains label it **Whistle**.
-Hold H or the screen button to sound the horn continuously; release to stop.
+Hold **Space** while inside a car to honk; **H** remains an alias. Space still
+jumps on foot and pans while editing. While seated, neither jump holds nor jump
+press edges reach movement. Trains use the same horn action for their whistle.
+The on-screen badge and Traffic playground use the same default key bindings.
+Hold the horn key or screen button to sound continuously; release to stop.
 The horn remains separate from emergency Siren/Style/Beacon controls. Authority
 verifies the driver and relays transient start/refresh/stop events, vehicle identity,
 position and car/heavy/train voice to nearby co-op clients. Held input refreshes

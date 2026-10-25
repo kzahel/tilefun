@@ -32,7 +32,9 @@ for (const [model, parts, resource] of [
       await page.keyboard.up("ArrowLeft");
       await page.getByRole("button", { name: "Drive car · E", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-driving", "true");
-      await page.getByRole("button", { name: "Horn · H", exact: true }).click();
+      await page.getByRole("button", { name: "Horn · Space / H", exact: true }).click();
+      await canvas.focus();
+      await page.keyboard.press("Space");
       if (backend.includes("meshes")) {
         await expect
           .poll(() =>

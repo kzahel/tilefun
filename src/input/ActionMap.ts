@@ -79,7 +79,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "toggle_tab", keys: ["t", "T"] },
   // Play mode actions
   { action: "throw", keys: ["b"] },
-  { action: "honk", keys: ["h", "H"] },
+  { action: "honk", keys: [" ", "h", "H"] },
   { action: "reverse", keys: ["r", "R"] },
   { action: "vehicle_lights", keys: ["l", "L"] },
   { action: "vehicle_style", keys: ["k", "K"] },
