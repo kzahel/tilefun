@@ -21,8 +21,11 @@ function createTestEnv(playerX = 50, playerY = 50) {
   const player = em.spawn(createPlayer(playerX, playerY));
   player.velocity = { vx: 0, vy: 0 };
   const session = new PlayerSession("test", player);
-  const api = new WorldAPIImpl(world, em, pm, te, () => session);
-  return { api, em, session, player };
+  const sessions = [session];
+  const api = new WorldAPIImpl(world, em, pm, te, (entityId) =>
+    entityId === undefined ? session : sessions.find((s) => s.player.id === entityId),
+  );
+  return { api, em, session, player, sessions };
 }
 
 function spawnGem(api: WorldAPIImpl, wx: number, wy: number) {
@@ -489,6 +492,34 @@ describe("gem collector", () => {
     expect(api.entities.find(gem.id)).toBeNull();
 
     teardown();
+  });
+
+  it("lets a co-op guest collect and awards each gem only once in a simulation snapshot", () => {
+    const { api, em, session, sessions } = createTestEnv();
+    const guest = em.spawn(createPlayer(80, 80));
+    const guestSession = new PlayerSession("guest", guest);
+    sessions.push(guestSession);
+    const teardown = baseGameMod.register(api);
+    try {
+      spawnGem(api, 80, 77);
+      em.simulationEntities = [...em.entities];
+      api.overlap.tick();
+      expect(guestSession.gameplaySession.gemsCollected).toBe(1);
+      expect(session.gameplaySession.gemsCollected).toBe(0);
+      // Both players overlap a single gem; callbacks retain the simulation snapshot.
+      guest.position = { ...session.player.position };
+      em.spatialHash.update(guest);
+      spawnGem(api, 50, 47);
+      em.simulationEntities = [...em.entities];
+      api.overlap.tick();
+      expect(
+        session.gameplaySession.gemsCollected + guestSession.gameplaySession.gemsCollected,
+      ).toBe(2);
+      expect(em.entities.filter((e) => e.type === "gem")).toHaveLength(0);
+    } finally {
+      em.simulationEntities = undefined;
+      teardown();
+    }
   });
 
   it("does not collect gem when player is invincible", () => {

@@ -359,7 +359,7 @@ class WorldQueryAPIImpl implements WorldQueryAPI {
 class PlayerAPIImpl implements PlayerAPI {
   constructor(
     private readonly em: EntityManager,
-    private readonly getSession: () => PlayerSession | undefined,
+    private readonly getSession: (entityId?: number) => PlayerSession | undefined,
   ) {}
 
   get(): PlayerHandle | null {
@@ -369,7 +369,7 @@ class PlayerAPIImpl implements PlayerAPI {
   }
 
   fromEntity(entity: EntityHandle): PlayerHandle | null {
-    const session = this.getSession();
+    const session = this.getSession(entity.id);
     if (!session) return null;
     if (entity.id !== session.player.id) return null;
     return new PlayerHandle(session.player, this.em, session.gameplaySession);
@@ -396,7 +396,7 @@ export class WorldAPIImpl implements WorldAPI {
     entityManager: EntityManager,
     propManager: PropManager,
     terrainEditor: TerrainEditor,
-    getSession: () => PlayerSession | undefined,
+    getSession: (entityId?: number) => PlayerSession | undefined,
   ) {
     const tagService = new TagServiceImpl(entityManager);
     this.terrain = new TerrainAPIImpl(terrainEditor);

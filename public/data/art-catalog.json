@@ -9557,7 +9557,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1133"
+          "source": "src/server/Realm.ts:1134"
         },
         {
           "system": "Gameplay",
@@ -10485,7 +10485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1135"
+          "source": "src/server/Realm.ts:1136"
         },
         {
           "system": "Gameplay",
@@ -10555,11 +10555,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1336"
+          "source": "src/generation/regional/NaturalLandscape.ts:1376"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1530"
+          "source": "src/generation/regional/NaturalLandscape.ts:1570"
         },
         {
           "system": "World generation",
@@ -10611,7 +10611,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1135"
+          "source": "src/server/Realm.ts:1136"
         },
         {
           "system": "Gameplay",
@@ -29755,7 +29755,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1133"
+          "source": "src/server/Realm.ts:1134"
         },
         {
           "system": "Gameplay",
@@ -35507,23 +35507,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:338"
+          "source": "src/server/Realm.ts:339"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1571"
+          "source": "src/server/Realm.ts:1572"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1756"
+          "source": "src/server/Realm.ts:1757"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2462"
+          "source": "src/server/Realm.ts:2473"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2682"
+          "source": "src/server/Realm.ts:2693"
         },
         {
           "system": "Gameplay",
@@ -36207,7 +36207,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/game/base-game.ts:239"
+          "source": "src/game/base-game.ts:240"
         }
       ]
     },
@@ -36635,11 +36635,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1667"
+          "source": "src/server/Realm.ts:1668"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2646"
+          "source": "src/server/Realm.ts:2657"
         },
         {
           "system": "Gameplay",
@@ -36745,7 +36745,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/game/base-game.ts:191"
+          "source": "src/game/base-game.ts:192"
         }
       ]
     },
@@ -37501,7 +37501,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1135"
+          "source": "src/server/Realm.ts:1136"
         },
         {
           "system": "Gameplay",
@@ -37575,11 +37575,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1336"
+          "source": "src/generation/regional/NaturalLandscape.ts:1376"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1530"
+          "source": "src/generation/regional/NaturalLandscape.ts:1570"
         },
         {
           "system": "World generation",
@@ -37631,7 +37631,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1135"
+          "source": "src/server/Realm.ts:1136"
         },
         {
           "system": "Gameplay",

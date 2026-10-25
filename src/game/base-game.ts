@@ -175,6 +175,7 @@ export const baseGameMod: Mod = {
     // ── Gems: collector ──
     unsubs.push(
       api.overlap.onOverlap("collectible", (self, other) => {
+        if (!self.alive) return;
         const player = api.player.fromEntity(other);
         if (!player || player.isInvincible) return;
 

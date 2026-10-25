@@ -2232,3 +2232,69 @@ it("enters every mall shop, exits at its own facade and restores a saved mall in
     await server.destroy();
   }
 });
+
+it("keeps collected exploration gems gone and carries the balance through building visits and restart", async () => {
+  const setup = await cityDoorSetup();
+  const { server, transport, lot, registry } = setup;
+  const { buildingDoor } = await import("../interiors/BuildingDoors.js");
+  const enter = async () => {
+    transport.clientSend("local", { type: "enter-building", requestId: 9900, featureId: lot.id });
+    await server.settle();
+    expect(server.worldInterior).not.toBeNull();
+  };
+  const exit = async () => {
+    server.getLocalSession().player.position = { ...buildingDoor(requiredInterior()).inside };
+    transport.clientSend("local", { type: "exit-building", requestId: 9901 });
+    await server.settle();
+    expect(server.worldInterior).toBeNull();
+  };
+  const requiredInterior = () => {
+    const interior = server.worldInterior;
+    if (!interior) throw Error("Missing interior");
+    return interior;
+  };
+  try {
+    server.getLocalSession().gameplaySession.gemsCollected = 7;
+    await enter();
+    expect(server.getLocalSession().gameplaySession.gemsCollected).toBe(7);
+    const gem = server.entityManager.entities.find((e) => e.type === "gem");
+    if (!gem) throw Error("Missing indoor gems");
+    const gemId = gem.proceduralId;
+    const count = server.entityManager.entities.filter((e) => e.type === "gem").length;
+    server.getLocalSession().player.position = { ...gem.position };
+    server.tick(1 / 60);
+    expect(server.getLocalSession().gameplaySession.gemsCollected).toBe(8);
+    expect(server.entityManager.entities.some((e) => e.proceduralId === gemId)).toBe(false);
+    await exit();
+    expect(server.getLocalSession().gameplaySession.gemsCollected).toBe(8);
+    // A newer outdoor balance must win over the older saved indoor visit.
+    server.getLocalSession().gameplaySession.gemsCollected = 10;
+    await enter();
+    expect(server.getLocalSession().gameplaySession.gemsCollected).toBe(10);
+    expect(server.entityManager.entities.filter((e) => e.type === "gem")).toHaveLength(count - 1);
+    await server.flushAsync();
+    await server.destroy();
+    const resumedTransport = new TestTransport();
+    const resumed = new GameServer(resumedTransport, { registry, createStore: setup.createStore });
+    try {
+      await resumed.init();
+      resumedTransport.connect("local", restoreProfile);
+      await resumed.settle();
+      expect(resumed.getLocalSession().gameplaySession.gemsCollected).toBe(10);
+      expect(resumed.entityManager.entities.some((e) => e.proceduralId === gemId)).toBe(false);
+      expect(resumed.entityManager.entities.filter((e) => e.type === "gem")).toHaveLength(
+        count - 1,
+      );
+      const interior = resumed.worldInterior;
+      if (!interior) throw Error("Missing resumed room");
+      resumed.getLocalSession().player.position = { ...buildingDoor(interior).inside };
+      resumedTransport.clientSend("local", { type: "exit-building", requestId: 9902 });
+      await resumed.settle();
+      expect(resumed.getLocalSession().gameplaySession.gemsCollected).toBe(10);
+    } finally {
+      await resumed.destroy();
+    }
+  } finally {
+    await server.destroy();
+  }
+});

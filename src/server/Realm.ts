@@ -57,6 +57,7 @@ import {
   parseGameplayRoom,
   validateRoomOccupancy,
 } from "../interiors/GameplayRoom.js";
+import { withInteriorGems } from "../interiors/InteriorGems.js";
 import { updateResident } from "../interiors/ResidentBehavior.js";
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
 import { actorScope, durableId } from "../persistence/ActorRecords.js";
@@ -1999,6 +2000,16 @@ export class Realm {
       this.interior = savedMeta.interior;
       this.generator = interiorGenerator(this.interior, descriptorFromMetadata(worldMeta).seed);
     }
+    if (this.interior) {
+      try {
+        const state = savedMeta?.roomPlan
+          ? parseGameplayRoom(savedMeta.roomPlan)
+          : initialRoom(this.interior);
+        this.generator = withInteriorGems(this.generator, this.interior, state);
+      } catch (error) {
+        throw new InvalidInteriorError("Saved interior geometry is invalid.", { cause: error });
+      }
+    }
     this.saveManager.bind(
       (key) => this.world.chunks.getChunkDataByKey(key),
       () => this.buildSaveMeta(),
@@ -2036,9 +2047,9 @@ export class Realm {
             this.propManager.add(createProp(placement.propType, placement.wx, placement.wy));
           }
         }
-        // Track additions can populate already visited chunks. Stable origin
-        // records suppress moved/deleted spectators; other populations seed once.
-        if (!seeded || this.generation.type === "regional")
+        // Exploration gems and track additions also populate visited chunks. Stable
+        // origin records suppress moved/deleted finds; other populations seed once.
+        if (!seeded || this.interior || this.generation.type === "regional")
           this.proceduralActors.reconcile(this.generator, [key], seeded);
       },
       trafficRecords,
@@ -2539,9 +2550,9 @@ export class Realm {
       this.entityManager,
       this.propManager,
       this.terrainEditor,
-      () => {
+      (entityId) => {
         for (const session of this.sessions.values()) {
-          return session;
+          if (entityId === undefined || session.player.id === entityId) return session;
         }
         return undefined;
       },

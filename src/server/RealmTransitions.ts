@@ -69,6 +69,13 @@ export class RealmTransitions {
         const restored = prepared ? { ...prepared } : prepared;
         if (position && restored) delete restored.driving;
         await target.addPlayer(session, restored);
+        // Buildings and their overworld share progress, regardless of older visit saves.
+        if (
+          source &&
+          (source.interior?.parentWorldId ?? source.currentWorldId) ===
+            (target.interior?.parentWorldId ?? target.currentWorldId)
+        )
+          session.gameplaySession.gemsCollected = previous.gameplaySession.gemsCollected;
         if (returnLocation !== undefined) session.returnLocation = returnLocation;
         session.inputQueue = [];
         if (position) {

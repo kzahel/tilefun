@@ -1,4 +1,5 @@
 import type { RouteWaypoint } from "../entities/Entity.js";
+import { outdoorGems } from "./ExplorationGems.js";
 import { FlatStrategy } from "./FlatStrategy.js";
 import { type GenerationDescriptor, requireCurrentGeneration } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
@@ -71,8 +72,11 @@ export function createGenerator(
       return {
         descriptor,
         terrain,
-        actors: (cx, cy) => terrain.actors(cx, cy),
-        actorAdditions: (cx, cy) => terrain.spectators(cx, cy),
+        actors: (cx, cy) => [...terrain.actors(cx, cy), ...outdoorGems(terrain, cx, cy)],
+        actorAdditions: (cx, cy) => [
+          ...terrain.spectators(cx, cy),
+          ...outdoorGems(terrain, cx, cy),
+        ],
         placements: (cx, cy) => ({
           placements: terrain.placements(cx, cy),
           newIntersectionKeys: [],
