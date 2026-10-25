@@ -177,3 +177,111 @@ test("F3 toggles debug overlay", async ({ page }, testInfo) => {
   await page.keyboard.press("F3");
   await expect(panel).toBeHidden();
 });
+
+test.describe("gem HUD", () => {
+  test.use({
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+    locale: "en-US",
+  });
+
+  test("zero and collected totals remain visible below Map in Play and Edit across screen sizes", async ({
+    page,
+  }, testInfo) => {
+    await page.goto("/tilefun/?nogamepad");
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    await page.evaluate(async () => {
+      const g = (
+        document.querySelector("#game") as unknown as {
+          __game: import("../src/client/GameClient.js").GameClient;
+        }
+      ).__game;
+      const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
+      const created = await g.gcSendRequest({
+        type: "create-world",
+        requestId: g.nextRequestId++,
+        name: "Gem HUD",
+        generation,
+      });
+      await g.gcSendRequest({
+        type: "join-realm",
+        requestId: g.nextRequestId++,
+        worldId: created.meta.id,
+        arrival: { x: 0, y: 0, generation },
+      });
+    });
+    const hud = page.getByTestId("gem-hud");
+    const count = page.getByTestId("gem-count");
+    await expect(hud).toBeVisible();
+    await expect(count).toHaveText("0");
+    const checkPlacement = async () => {
+      const rect = await hud.boundingBox();
+      const map = await page.getByTestId("open-world-map").boundingBox();
+      if (!rect || !map) throw Error("Missing HUD or Map button");
+      expect(rect.y).toBeGreaterThanOrEqual(map.y + map.height + 4);
+      expect(rect.x).toBeGreaterThanOrEqual(0);
+      expect(rect.x + rect.width).toBeLessThanOrEqual(page.viewportSize()?.width ?? 0);
+      expect(await hud.evaluate((e) => e.scrollWidth <= e.clientWidth)).toBe(true);
+    };
+    await checkPlacement();
+    await page.getByTestId("main-menu-toggle").tap();
+    await page.getByRole("button", { name: "Edit", exact: true }).tap();
+    await expect(page.getByTestId("editor-panel")).toBeVisible();
+    await expect(hud).toBeVisible();
+    await checkPlacement();
+    // Use the normal Worker editor/collection path, rather than assigning a display value.
+    await page.evaluate(() => {
+      const g = (
+        document.querySelector("#game") as unknown as {
+          __game: import("../src/client/GameClient.js").GameClient;
+        }
+      ).__game;
+      const p = g.stateView.playerEntity.position;
+      g.transport.send({ type: "edit-spawn", entityType: "gem", wx: p.wx, wy: p.wy });
+    });
+    await page.getByRole("button", { name: "Exit editor", exact: true }).tap();
+    await expect(count).toHaveText("1");
+    for (const viewport of [
+      { width: 360, height: 640 },
+      { width: 844, height: 390 },
+      { width: 1280, height: 800 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await expect(hud).toBeVisible();
+      await checkPlacement();
+    }
+    await testInfo.attach("gem-hud", { body: await page.screenshot(), contentType: "image/png" });
+    // Renderer replacement must retain this same progress display.
+    await page.evaluate(async () => {
+      const g = (
+        document.querySelector("#game") as unknown as {
+          __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+        }
+      ).__game;
+      await g.renderHost.rendererControl?.select("canvas");
+    });
+    await expect(count).toHaveText("1");
+    await checkPlacement();
+    // Check a larger readout without changing the player's authoritative balance.
+    await page.evaluate(() => {
+      const g = (
+        document.querySelector("#game") as unknown as {
+          __game: {
+            loop: { stop(): void };
+            gemHUD: { update(gems: number, buddies: number): void };
+          };
+        }
+      ).__game;
+      g.loop.stop();
+      g.gemHUD.update(123456, 2);
+    });
+    await page.setViewportSize({ width: 360, height: 640 });
+    await expect(count).toHaveText("123,456");
+    await checkPlacement();
+    await testInfo.attach("gem-hud-large-readout", {
+      body: await page.screenshot(),
+      contentType: "image/png",
+    });
+  });
+});

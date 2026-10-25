@@ -609,7 +609,6 @@ export class PlayScene implements GameScene {
       const particleItems = this.particles.collectItems();
       renderEntities(gc, alpha, particleItems);
       drawPlayerMarkers(gc, alpha);
-      drawGemHUD(gc);
       gc.chatHUD.render(gc.ctx);
       renderDebugOverlay(gc, alpha);
       render3DDebug(gc);
@@ -960,41 +959,4 @@ function playRandomSound(gc: GameContext, keys: string[], volume: number, pitch:
   const buf = gc.audioManager.getBuffer(key);
   if (!buf) return;
   gc.audioManager.playOneShot({ buffer: buf, volume, pitch });
-}
-
-function drawGemHUD(gc: GameContext): void {
-  if (!gc.gemSpriteCanvas) return;
-  const { ctx, canvas, stateView } = gc;
-  const ICON_SIZE = 24;
-  const PADDING = 12;
-  const x = canvas.width - PADDING - ICON_SIZE - 48;
-  const y = PADDING;
-
-  // Gem icon
-  ctx.drawImage(gc.gemSpriteCanvas, 0, 0, 16, 16, x, y, ICON_SIZE, ICON_SIZE);
-
-  // Count text
-  ctx.save();
-  ctx.font = "bold 20px monospace";
-  ctx.textBaseline = "top";
-  const text = `${stateView.gemsCollected}`;
-  ctx.strokeStyle = "#000";
-  ctx.lineWidth = 3;
-  ctx.strokeText(text, x + ICON_SIZE + 6, y + 2);
-  ctx.fillStyle = "#FFD700";
-  ctx.fillText(text, x + ICON_SIZE + 6, y + 2);
-
-  // Buddy count
-  let buddyCount = 0;
-  for (const e of stateView.entities) {
-    if (e.wanderAI?.following) buddyCount++;
-  }
-  if (buddyCount > 0) {
-    const bx = x - 60;
-    ctx.strokeStyle = "#000";
-    ctx.strokeText(`\u2764 ${buddyCount}`, bx, y + 2);
-    ctx.fillStyle = "#ff88aa";
-    ctx.fillText(`\u2764 ${buddyCount}`, bx, y + 2);
-  }
-  ctx.restore();
 }

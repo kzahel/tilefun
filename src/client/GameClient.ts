@@ -89,6 +89,7 @@ import { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransp
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
 import { DoorControl } from "../ui/DoorControl.js";
+import { GemHUD } from "../ui/GemHUD.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { OptionsDialog } from "../ui/OptionsDialog.js";
 import { ProfilePicker } from "../ui/ProfilePicker.js";
@@ -214,6 +215,7 @@ export class GameClient {
   // Mutable state exposed via GameContext
   private editorButton: HTMLButtonElement | null = null;
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
+  private readonly gemHUD = new GemHUD();
   private debugEnabled = false;
 
   /** Guard to prevent concurrent toggleMenu() calls from pushing duplicate MenuScenes. */
@@ -686,6 +688,11 @@ export class GameClient {
         this.time.presentationSeconds = presentationSeconds;
         this.renderHost.beginFrame();
         this.scenes.render(alpha);
+        if (this.initDone) {
+          let buddies = 0;
+          for (const entity of this.stateView.entities) if (entity.wanderAI?.following) buddies++;
+          this.gemHUD.update(this.stateView.gemsCollected, buddies);
+        }
       },
     });
   }
@@ -843,6 +850,7 @@ export class GameClient {
 
     // Generate procedural gem sprite and add to sheets
     this.gemSpriteCanvas = generateGemSprite();
+    this.gemHUD.setIcon(this.gemSpriteCanvas);
     this.sheets.set("gem", new Spritesheet(this.gemSpriteCanvas, 16, 16));
     this.renderHost.setAssets(assets, blendGraph);
 
@@ -1098,6 +1106,7 @@ export class GameClient {
   destroy(): void {
     this.clearPlayInput();
     this.optionsDialog.destroy();
+    this.gemHUD.destroy();
     this.optionsButton?.remove();
     window.removeEventListener("blur", this.onInputBlur);
     window.removeEventListener("focus", this.onInputFocus);

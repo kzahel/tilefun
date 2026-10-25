@@ -17,8 +17,12 @@ at most one extra find per selected chunk, with a seeded bounded search for clea
 ground beside actual trees or thicket edges. Solid forest interiors stay intact.
 Obstructed sites are skipped. Existing gem IDs and positions retain their identity;
 new categories use independent IDs and do not change other generated populations.
-The existing animated gem, automatic walk-over pickup, pickup sound and on-screen
-counter are reused, so collection works with keyboard, touch and controller.
+The existing animated gem, automatic walk-over pickup and pickup sound are reused,
+so collection works with keyboard, touch and controller. The persistent Gem HUD
+shows the current total, including zero, below the Map button in Play and Edit,
+indoors and outdoors, on both renderer backends. Its labeled, high-contrast panel
+respects screen safe areas and sizes to the count. Buddy totals share the panel.
+This replaces the Play-only canvas counter that the Map button obscured.
 
 Gems use ordinary authoritative actors, replication, durable origin identities
 and deletion tombstones. Collected gems do not respawn on travel, chunk re-entry
@@ -36,6 +40,7 @@ receives it, and it disappears for everyone.
 ## Implementation and evidence
 
 - `src/generation/ExplorationGems.ts`: bounded outdoor placement and dry/clear checks.
+- `src/ui/GemHUD.ts` / `GemHUD.css`: scene-independent, responsive progress display.
 - `src/interiors/InteriorGems.ts`: seeded interior caches and reachable floor search.
 - `Generator`, `Realm`, `RealmTransitions`: ordinary actor admission, old-chunk
   additions and shared indoor/outdoor balance.
@@ -46,6 +51,9 @@ receives it, and it disappears for everyone.
   tombstones and the latest balance winning over older visit data.
 - `base-game.test.ts`: pickup, values, invincibility, guest collection and single
   awards when multiple players overlap the same gem in a simulation snapshot.
+- `tests/smoke.spec.ts` checks the visible zero total, real Worker pickup update,
+  Play/Edit continuity, separation from Map, phone/landscape/desktop layouts,
+  larger totals and renderer replacement in one browser boundary.
 - `WorldAPI` resolves overlap participants by their actual player entity, so co-op
   guests use their own progress rather than the realm's first player's session.
 

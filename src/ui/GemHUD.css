@@ -1,0 +1,37 @@
+.gem-hud {
+  position: fixed;
+  top: calc(max(8px, env(safe-area-inset-top)) + 52px);
+  right: max(8px, env(safe-area-inset-right));
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  max-width: calc(100vw - 16px);
+  padding: 8px 12px;
+  border: 1px solid #c9a857;
+  border-radius: 8px;
+  background: #14251eef;
+  color: #ffe38a;
+  font:
+    bold 18px / 24px system-ui,
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  user-select: none;
+}
+.gem-hud[hidden],
+.gem-hud [hidden] {
+  display: none;
+}
+.gem-hud canvas {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  image-rendering: pixelated;
+}
+.gem-hud-buddies {
+  color: #ff9fbd;
+  border-left: 1px solid #718479;
+  padding-left: 8px;
+}
