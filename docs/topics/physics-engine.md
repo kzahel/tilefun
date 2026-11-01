@@ -43,6 +43,27 @@ frame tails, contact counts, geometry updates and memory. WASM is not an automat
 speedup; sparse specialized collision can be cheaper, AI/rendering are separate
 costs, and dynamic contacts may increase work. No Chromebook gain is established.
 
+## Controlled-player contacts (195)
+
+[195](../tactical/195-player-contact-feedback.md) fixes a raw physics feedback loop:
+player KCCs inherited one another's previous solved kinematic velocity as moving
+support motion. A native glancing reproduction drifted 4.65 m after release;
+another burst to 20.63 m/s against 4.5 m/s walking. Presentation was not the cause.
+
+Environment queries now exclude controlled actors. Rapier sweeps their actual
+capsules against both proposed movements; a shared motor rule removes approaching
+normal motion while retaining sliding and release. Environment rechecks and a
+final sweep prevent simultaneous overlap or sliding through adjacent walls.
+Prescribed lifts retain normal KCC carry. Characters block/slide without shoving
+another motor. Authority and full-world replay use the identical rule.
+
+New **Players head-on** / **Players glancing / release** scripts and raw native
+checks make speed, release drift, jumping/following and separation inspectable.
+The two-motor reference passes its 4.55 m/s / 2 mm drift bounds, including mirrored
+control seats. General initial-overlap recovery, crowds and moving player supports
+remain unqualified. Both-active cube prediction corrections below remain open;
+this does not establish normal-game migration or Chromebook performance.
+
 ## Contact presentation (194)
 
 [194](../tactical/194-coherent-contact-presentation.md) supersedes the display policy

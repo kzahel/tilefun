@@ -1,5 +1,10 @@
 # Embedded engine labs
 
+[195](../tactical/195-player-contact-feedback.md) fixes controlled-player velocity
+feedback in the shared Rapier motor. Relative collider sweeps and normal-motion
+clipping serve authority and both predictors. Two cube-free contact/release scripts
+share their native and visual input source; the ordinary game owner is unchanged.
+
 [194](../tactical/194-coherent-contact-presentation.md) replaces per-body display
 offsets with coherent component timelines/rigid transforms. Idle views buffer
 whole scenes; local activity predicts its contact component. First-push mesh-gap

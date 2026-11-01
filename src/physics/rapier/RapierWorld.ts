@@ -14,6 +14,8 @@ import { POSE_STRIDE } from "./PhysicsProtocol.js";
 let initialization: Promise<void> | undefined;
 export const initRapier = () => (initialization ??= RAPIER.init());
 export const PHYSICS_DT = 1 / 60;
+export const PHYSICS_WALK_SPEED = 4.5;
+const CHARACTER_SKIN = 0.015;
 export const PREDICTION_RADIUS = 24;
 export interface PhysicsMotorState {
   tick: number;
@@ -178,30 +180,33 @@ export class RapierWorld {
       true,
     );
     const state = this.motor();
-    const support = this.moveCharacter(
-      this.player,
-      this.playerCollider,
-      this.controller,
-      input,
-      state,
-    );
+    const playerMove = this.moveCharacter(this.playerCollider, this.controller, input, state);
+    const guestMove = this.guest
+      ? this.moveCharacter(this.guest.collider, this.guest.controller, guestInput, this.guest.motor)
+      : null;
+    if (this.guest && guestMove) {
+      this.resolveCharacterContact(
+        playerMove.movement,
+        guestMove.movement,
+        state,
+        this.guest.motor,
+      );
+      this.commitCharacterMovement(this.guest.body, guestMove.movement);
+    }
     this.verticalSpeed = state.verticalSpeed;
     this.jumpHeld = state.jumpHeld;
     this.grounded = state.grounded;
-    const guestSupport = this.guest
-      ? this.moveCharacter(
-          this.guest.body,
-          this.guest.collider,
-          this.guest.controller,
-          guestInput,
-          this.guest.motor,
-        )
-      : null;
+    this.commitCharacterMovement(this.player, playerMove.movement);
     this.world.step();
-    this.supportY = support && !support.isFixed() ? support.translation().y : null;
+    this.supportY =
+      playerMove.support && !playerMove.support.isFixed()
+        ? playerMove.support.translation().y
+        : null;
     if (this.guest)
       this.guest.motor.supportY =
-        guestSupport && !guestSupport.isFixed() ? guestSupport.translation().y : null;
+        guestMove?.support && !guestMove.support.isFixed()
+          ? guestMove.support.translation().y
+          : null;
     this.proxyAge += PHYSICS_DT;
     if (this.prediction && this.proxyAge > 0.1)
       for (const body of this.loose.values()) body.setLinvel({ x: 0, y: 0, z: 0 }, false);
@@ -216,7 +221,7 @@ export class RapierWorld {
   }
 
   private createController() {
-    const controller = this.world.createCharacterController(0.015);
+    const controller = this.world.createCharacterController(CHARACTER_SKIN);
     controller.enableAutostep(0.22, 0.25, false);
     controller.enableSnapToGround(0.25);
     controller.setMaxSlopeClimbAngle(Math.PI / 4);
@@ -226,8 +231,116 @@ export class RapierWorld {
     return controller;
   }
 
+  private queryCharacterMovement(
+    controller: RAPIER.KinematicCharacterController,
+    collider: RAPIER.Collider,
+    movement: RAPIER.Vector,
+  ) {
+    // Rapier's KCC inherits both normal and tangential kinematic velocity.
+    // That is correct for prescribed lifts, but feeds motion between motors.
+    // Actor/actor contacts use the relative sweep below, on the same colliders.
+    controller.computeColliderMovement(
+      collider,
+      movement,
+      undefined,
+      undefined,
+      this.guest
+        ? (other) =>
+            other.handle !== this.playerCollider.handle &&
+            other.handle !== this.guest?.collider.handle
+        : undefined,
+    );
+  }
+
+  private resolveCharacterContact(
+    first: RAPIER.Vector,
+    second: RAPIER.Vector,
+    firstState: PhysicsMotorState,
+    secondState: PhysicsMotorState,
+  ) {
+    if (!this.guest) return;
+    const hit = this.playerCollider.castCollider(
+      first,
+      this.guest.collider,
+      second,
+      CHARACTER_SKIN,
+      1,
+      false,
+    );
+    if (!hit) return;
+    // Collider-cast normals are local. Controlled capsules stay unrotated.
+    const n = hit.normal1;
+    const firstIn = first.x * n.x + first.y * n.y + first.z * n.z;
+    const secondIn = -(second.x * n.x + second.y * n.y + second.z * n.z);
+    const closing = firstIn + secondIn;
+    // Casts can report t=0 at the resting skin even while moving apart/tangent.
+    if (closing <= 1e-6) return;
+    const inward = Math.max(0, firstIn) + Math.max(0, secondIn);
+    const remove = closing * (1 - Math.max(0, hit.time_of_impact - 0.001));
+    const firstShare = (remove * Math.max(0, firstIn)) / inward;
+    const secondShare = (remove * Math.max(0, secondIn)) / inward;
+    // Remove approaching normal motion, preserving sliding and walking away.
+    // No actor receives velocity from another; each motor's speed can only fall.
+    first.x -= n.x * firstShare;
+    first.y -= n.y * firstShare;
+    first.z -= n.z * firstShare;
+    second.x += n.x * secondShare;
+    second.y += n.y * secondShare;
+    second.z += n.z * secondShare;
+    if (n.y < -0.5 && firstIn > 0) {
+      firstState.grounded = true;
+      firstState.verticalSpeed = 0;
+    }
+    if (n.y > 0.5 && secondIn > 0) {
+      secondState.grounded = true;
+      secondState.verticalSpeed = 0;
+    }
+    if (n.y > 0.5 && firstState.verticalSpeed > 0) firstState.verticalSpeed = 0;
+    if (n.y < -0.5 && secondState.verticalSpeed > 0) secondState.verticalSpeed = 0;
+
+    // Sliding along an actor can point into adjacent terrain. Recheck the
+    // environment without applying a second set of dynamic-body impulses.
+    for (const [controller, collider, move] of [
+      [this.controller, this.playerCollider, first],
+      [this.guest.controller, this.guest.collider, second],
+    ] as const) {
+      controller.setApplyImpulsesToDynamicBodies(false);
+      this.queryCharacterMovement(controller, collider, move);
+      Object.assign(move, controller.computedMovement());
+      controller.setApplyImpulsesToDynamicBodies(true);
+    }
+    // A terrain clip can change relative motion again. This final conservative
+    // guard only shortens both paths, so neither wall nor actor is crossed.
+    const guard = this.playerCollider.castCollider(
+      first,
+      this.guest.collider,
+      second,
+      CHARACTER_SKIN / 2,
+      1,
+      false,
+    );
+    if (guard) {
+      const closing =
+        (first.x - second.x) * guard.normal1.x +
+        (first.y - second.y) * guard.normal1.y +
+        (first.z - second.z) * guard.normal1.z;
+      if (closing > 1e-6) {
+        const fraction = Math.max(0, guard.time_of_impact - 0.001);
+        for (const move of [first, second]) {
+          move.x *= fraction;
+          move.y *= fraction;
+          move.z *= fraction;
+        }
+      }
+    }
+  }
+
+  private commitCharacterMovement(body: RAPIER.RigidBody, move: RAPIER.Vector) {
+    const p = body.translation();
+    body.setNextKinematicTranslation({ x: p.x + move.x, y: p.y + move.y, z: p.z + move.z });
+  }
+
   private moveCharacter(
-    body: RAPIER.RigidBody,
     collider: RAPIER.Collider,
     controller: RAPIER.KinematicCharacterController,
     input: PhysicsInput,
@@ -245,14 +358,12 @@ export class RapierWorld {
       z = rawZ / magnitude;
     // Publish prescribed support velocities before querying character motion;
     // Rapier resolves moving contacts without a platform-specific carry rule.
-    controller.computeColliderMovement(collider, {
-      x: x * 4.5 * PHYSICS_DT,
+    this.queryCharacterMovement(controller, collider, {
+      x: x * PHYSICS_WALK_SPEED * PHYSICS_DT,
       y: state.verticalSpeed * PHYSICS_DT,
-      z: z * 4.5 * PHYSICS_DT,
+      z: z * PHYSICS_WALK_SPEED * PHYSICS_DT,
     });
-    const move = controller.computedMovement(),
-      p = body.translation();
-    body.setNextKinematicTranslation({ x: p.x + move.x, y: p.y + move.y, z: p.z + move.z });
+    const move = controller.computedMovement();
     state.grounded = controller.computedGrounded();
     let support: RAPIER.RigidBody | null = null;
     if (state.grounded)
@@ -263,7 +374,7 @@ export class RapierWorld {
     if (state.grounded && state.verticalSpeed < 0) state.verticalSpeed = 0;
     if (move.y < state.verticalSpeed * PHYSICS_DT - 0.001 && state.verticalSpeed > 0)
       state.verticalSpeed = 0;
-    return support;
+    return { movement: move, support };
   }
 
   /** Reference scenes have two controlled capsules and fully dynamic loose bodies. */

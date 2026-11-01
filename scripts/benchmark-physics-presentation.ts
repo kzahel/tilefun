@@ -2,9 +2,17 @@ import { createHash } from "node:crypto";
 import { writeFile } from "node:fs/promises";
 import { PairAuthority } from "../src/physics/rapier/PairAuthority.js";
 import { PairHarness } from "../src/physics/rapier/PairHarness.js";
+import { PHYSICS_DT } from "../src/physics/rapier/RapierWorld.js";
 
 const results = [];
-for (const scene of ["push", "start-stop", "opposed", "reversal"] as const) {
+for (const scene of [
+  "push",
+  "start-stop",
+  "opposed",
+  "reversal",
+  "player-head-on",
+  "player-glance",
+] as const) {
   for (const mode of ["raw", "smooth-prediction", "buffered-when-clear"] as const) {
     const authority = await PairAuthority.create(scene);
     const harness = new PairHarness(
@@ -19,9 +27,31 @@ for (const scene of ["push", "start-stop", "opposed", "reversal"] as const) {
     const sources: [Set<string>, Set<string>] = [new Set(), new Set()];
     const firstPushGap: (number | undefined)[] = [],
       previousCubeX: (number | undefined)[] = [];
+    let previousMotors = harness.latest.snapshot.state.motors;
+    let releasedMotors: typeof previousMotors | undefined;
+    let maxAuthoritySpeed = 0,
+      maxReleaseDrift = 0;
     try {
       for (let tick = 0; tick < 300; tick++) {
         await harness.step();
+        const motors = harness.latest.snapshot.state.motors;
+        for (const seat of [0, 1] as const) {
+          const current = motors[seat],
+            previous = previousMotors[seat],
+            released = releasedMotors?.[seat];
+          if (current && previous)
+            maxAuthoritySpeed = Math.max(
+              maxAuthoritySpeed,
+              Math.hypot(current.x - previous.x, current.z - previous.z) / PHYSICS_DT,
+            );
+          if (current && released)
+            maxReleaseDrift = Math.max(
+              maxReleaseDrift,
+              Math.hypot(current.x - released.x, current.z - released.z),
+            );
+        }
+        previousMotors = motors;
+        if (tick === 140) releasedMotors = motors;
         for (const seat of [0, 1] as const) {
           const displayed = harness.presentedPoses(seat);
           const cube = displayed.findIndex((v, i) => i % 14 === 0 && v === 2);
@@ -45,6 +75,8 @@ for (const scene of ["push", "start-stop", "opposed", "reversal"] as const) {
         scene,
         mode,
         lateInputs: harness.latest.lateInputs,
+        maxAuthorityHorizontalSpeedMetresPerSecond: maxAuthoritySpeed,
+        maxAuthorityDriftAfterTick141Metres: maxReleaseDrift,
         finalPhysicsHash: createHash("sha256")
           .update(harness.latest.snapshot.state.bytes)
           .digest("hex"),
@@ -73,7 +105,7 @@ const report = `${JSON.stringify(
     rttMs: 200,
     jitterPerDirectionMs: 20,
     limits:
-      "Accelerated native coordinator, not browser frames or GPU timing. Same-tick past error, same-present raw rebase and sampled displayed position are separate metrics. Contact components share one timeline and one rigid transform; idle clients buffer the scene. First-push gap uses the authored unrotated cube half-width and allows sub-step snapshot/controller error. Prediction of unknown remote inputs still corrects; this experiment changes presentation only. Compare final physics hashes across modes within each scene.",
+      "Accelerated native coordinator, not browser frames or GPU timing. Same-tick past error, same-present raw rebase and sampled displayed position are separate metrics. Contact components share one timeline and one rigid transform; idle clients buffer the scene. First-push gap uses the authored unrotated cube half-width and allows sub-step snapshot/controller error. 195 adds motor/motor swept contacts shared by authority and prediction; 194's display policy is unchanged. Authority speed is measured every fixed tick, independently of presentation. Drift after tick 141 is meaningful for scripts whose input has already stopped. Unknown remote inputs still cause corrections. Compare final physics hashes across modes within each scene.",
     results,
   },
   null,

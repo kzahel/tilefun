@@ -2,11 +2,21 @@ import { PLAYER_FOOT_OFFSET } from "./BridgeFixture.js";
 import type { PhysicsInput, RapierWorld } from "./RapierWorld.js";
 
 export type PhysicsSeat = 0 | 1;
-export type PairScenario = "push" | "opposed" | "push-player" | "lift" | "start-stop" | "reversal";
+export type PairScenario =
+  | "push"
+  | "opposed"
+  | "push-player"
+  | "lift"
+  | "start-stop"
+  | "reversal"
+  | "player-head-on"
+  | "player-glance";
 export const PAIR_SCENARIOS: { id: PairScenario; name: string }[] = [
   { id: "push", name: "Push while watched" },
   { id: "opposed", name: "Opposing pushes" },
   { id: "push-player", name: "Push into player" },
+  { id: "player-head-on", name: "Players head-on" },
+  { id: "player-glance", name: "Players glancing / release" },
   { id: "lift", name: "Shared lift and jump" },
   { id: "start-stop", name: "Remote start / stop" },
   { id: "reversal", name: "Quick left / right" },
@@ -20,15 +30,33 @@ export function setupPair(world: RapierWorld, scene: PairScenario) {
           { x: -3.65, y: y + 0.2, z: 6.5 },
           { x: -2.35, y: y + 0.2, z: 6.5 },
         ]
-      : [
-          { x: -14, y, z: 0 },
-          { x: scene === "push-player" ? -11 : -10, y, z: 0 },
-        ],
-    scene === "lift" || scene === "start-stop" ? null : { x: -12.5, y: 0.42, z: 0 },
+      : scene === "player-head-on" || scene === "player-glance"
+        ? [
+            { x: -16, y, z: 0 },
+            { x: -14, y, z: scene === "player-glance" ? 0.1 : 0 },
+          ]
+        : [
+            { x: -14, y, z: 0 },
+            { x: scene === "push-player" ? -11 : -10, y, z: 0 },
+          ],
+    scene === "lift" ||
+      scene === "start-stop" ||
+      scene === "player-head-on" ||
+      scene === "player-glance"
+      ? null
+      : { x: -12.5, y: 0.42, z: 0 },
   );
 }
 /** Tick-addressed inputs, shared by visual playback and native tests. */
 export function pairInput(scene: PairScenario, seat: PhysicsSeat, tick: number): PhysicsInput {
+  if (scene === "player-head-on" || scene === "player-glance") {
+    if (tick < 30 || tick >= 90) return NEUTRAL;
+    return seat === 0
+      ? { x: 1, z: 0, jump: false }
+      : scene === "player-head-on"
+        ? { x: -1, z: 0, jump: false }
+        : NEUTRAL;
+  }
   if (scene === "reversal") {
     if (seat !== 0 || tick < 40 || tick >= 170) return NEUTRAL;
     const left =

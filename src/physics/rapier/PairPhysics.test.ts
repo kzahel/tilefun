@@ -7,26 +7,29 @@ import { PAIR_SCENARIOS, pairInput, setupPair } from "./PhysicsScenarios.js";
 import { initRapier, RapierWorld } from "./RapierWorld.js";
 
 beforeAll(initRapier);
-it("restores contact state and both motors, then reproduces a dynamic push exactly", () => {
-  const authority = new RapierWorld(2, 0),
-    replay = new RapierWorld(2, 0);
-  try {
-    setupPair(authority, "opposed");
-    for (let tick = 1; tick <= 55; tick++)
-      authority.step(pairInput("opposed", 0, tick), pairInput("opposed", 1, tick));
-    replay.restoreFull(authority.snapshot());
-    for (let tick = 56; tick < 160; tick++) {
-      const inputs = [pairInput("opposed", 0, tick), pairInput("opposed", 1, tick)] as const;
-      authority.step(...inputs);
-      replay.step(...inputs);
-      expect(poseDistance(authority.poses(), replay.poses())).toBeLessThan(0.00001);
-      expect([...replay.poses()]).toEqual([...authority.poses()]);
+it.each(["opposed", "player-head-on", "player-glance"] as const)(
+  "restores and exactly replays both motors and contacts in %s",
+  (scene) => {
+    const authority = new RapierWorld(2, 0),
+      replay = new RapierWorld(2, 0);
+    try {
+      setupPair(authority, scene);
+      for (let tick = 1; tick <= 55; tick++)
+        authority.step(pairInput(scene, 0, tick), pairInput(scene, 1, tick));
+      replay.restoreFull(authority.snapshot());
+      for (let tick = 56; tick < 160; tick++) {
+        const inputs = [pairInput(scene, 0, tick), pairInput(scene, 1, tick)] as const;
+        authority.step(...inputs);
+        replay.step(...inputs);
+        expect(poseDistance(authority.poses(), replay.poses())).toBeLessThan(0.00001);
+        expect([...replay.poses()]).toEqual([...authority.poses()]);
+      }
+    } finally {
+      authority.dispose();
+      replay.dispose();
     }
-  } finally {
-    authority.dispose();
-    replay.dispose();
-  }
-});
+  },
+);
 it.each(PAIR_SCENARIOS)(
   "runs $name through two real Realm sessions and converges under jitter",
   async ({ id }) => {
@@ -38,7 +41,7 @@ it.each(PAIR_SCENARIOS)(
     );
     try {
       for (let tick = 0; tick < 300; tick++) await harness.step();
-      if (id !== "lift" && id !== "start-stop") {
+      if (["push", "opposed", "push-player", "reversal"].includes(id)) {
         const cube = authority.session.realm.entityManager.entities.find(
           (actor) => Math.abs((actor.collider?.physicalHeight ?? 0) - 12.8) < 0.001,
         );
