@@ -4,7 +4,7 @@ import { PairAuthority } from "../src/physics/rapier/PairAuthority.js";
 import { PairHarness } from "../src/physics/rapier/PairHarness.js";
 
 const results = [];
-for (const scene of ["start-stop", "opposed"] as const) {
+for (const scene of ["start-stop", "opposed", "reversal"] as const) {
   for (const mode of ["raw", "smooth-prediction", "buffered-when-clear"] as const) {
     const authority = await PairAuthority.create(scene);
     const harness = new PairHarness(

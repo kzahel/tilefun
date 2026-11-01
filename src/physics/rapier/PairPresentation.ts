@@ -4,6 +4,8 @@ import { POSE_STRIDE } from "./PhysicsProtocol.js";
 import type { PhysicsSeat } from "./PhysicsScenarios.js";
 
 export const CORRECTION_DECAY_SECONDS = 0.12;
+/** Maximum display catch-up component; ordinary physics motion is added unchanged. */
+export const MAX_CORRECTION_SPEED = 4.5;
 export type RemotePresentation = "buffered" | "predicted";
 interface Offset {
   x: number;
@@ -34,6 +36,8 @@ export class PairPresentation {
     remoteStep: 0,
     maxRemoteStep: 0,
     historyFrames: 0,
+    correctionReleaseSpeed: 0,
+    maxCorrectionReleaseSpeed: 0,
   };
   constructor(
     readonly seat: PhysicsSeat,
@@ -49,8 +53,22 @@ export class PairPresentation {
     this.diagnostics.historyFrames = this.history.length;
   }
   advance(seconds: number) {
-    const decay = Math.exp(-Math.max(0, seconds) / CORRECTION_DECAY_SECONDS);
+    const elapsed = Math.max(0, seconds);
     if (!this.smooth) this.offsets.clear();
+    let largest = 0;
+    for (const offset of this.offsets.values())
+      largest = Math.max(largest, Math.hypot(offset.x, offset.y, offset.z));
+    // A fixed exponential alone turns a large reversal error into a visible
+    // lunge. Bound catch-up speed, using one fraction for the entire group.
+    const decay = Math.max(
+      Math.exp(-elapsed / CORRECTION_DECAY_SECONDS),
+      largest > 0 ? 1 - (MAX_CORRECTION_SPEED * elapsed) / largest : 0,
+    );
+    this.diagnostics.correctionReleaseSpeed = elapsed > 0 ? (largest * (1 - decay)) / elapsed : 0;
+    this.diagnostics.maxCorrectionReleaseSpeed = Math.max(
+      this.diagnostics.maxCorrectionReleaseSpeed,
+      this.diagnostics.correctionReleaseSpeed,
+    );
     for (const [id, offset] of this.offsets) {
       offset.x *= decay;
       offset.y *= decay;
@@ -108,6 +126,7 @@ export class PairPresentation {
     this.diagnostics.remoteOffset = 0;
     this.diagnostics.remoteStep = 0;
     this.diagnostics.historyFrames = 0;
+    this.diagnostics.correctionReleaseSpeed = 0;
   }
   private bufferedPose(tick: number): Float32Array | undefined {
     const first = this.history[0];

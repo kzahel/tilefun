@@ -1,0 +1,282 @@
+{
+  "seed": 713,
+  "rttMs": 200,
+  "jitterPerDirectionMs": 20,
+  "limits": "Accelerated native coordinator, not browser frames or GPU timing. Same-tick past error, same-present raw rebase and sampled displayed position are separate metrics. Prediction of unknown remote inputs still corrects; this experiment changes presentation only. Compare final physics hashes across modes within each scene.",
+  "results": [
+    {
+      "scene": "start-stop",
+      "mode": "raw",
+      "lateInputs": 0,
+      "finalPhysicsHash": "bc64f6a3ac9a1139147f1d2049b9422e7dc56f7f5525ceb600c0d745a3792d5b",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.00010437624139819293,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07560086261743279,
+          "maxCurrentCorrectionMetres": 1.2747714511652302,
+          "maxPresentedRemoteStepMetres": 1.274771447475481,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "start-stop",
+      "mode": "smooth-prediction",
+      "lateInputs": 0,
+      "finalPhysicsHash": "bc64f6a3ac9a1139147f1d2049b9422e7dc56f7f5525ceb600c0d745a3792d5b",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.00010437624139819293,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07560086261743279,
+          "maxCurrentCorrectionMetres": 1.2747714511652302,
+          "maxPresentedRemoteStepMetres": 0.15004174245950344,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "start-stop",
+      "mode": "buffered-when-clear",
+      "lateInputs": 0,
+      "finalPhysicsHash": "bc64f6a3ac9a1139147f1d2049b9422e7dc56f7f5525ceb600c0d745a3792d5b",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.01245570182800293,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "buffered"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07560086261743279,
+          "maxCurrentCorrectionMetres": 1.2747714511652302,
+          "maxPresentedRemoteStepMetres": 0.07506216232787465,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "buffered"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "opposed",
+      "mode": "raw",
+      "lateInputs": 0,
+      "finalPhysicsHash": "d1998e7ab7bbd49746dd40974b7c0a989ff51f29a4387343debf4b7d245e96f8",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0.07670811446451387,
+          "maxCurrentCorrectionMetres": 0.1753234537286099,
+          "maxPresentedRemoteStepMetres": 0.1252324765621866,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.14979440138614,
+          "maxCurrentCorrectionMetres": 1.3486101507292798,
+          "maxPresentedRemoteStepMetres": 1.2736212175217487,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "opposed",
+      "mode": "smooth-prediction",
+      "lateInputs": 0,
+      "finalPhysicsHash": "d1998e7ab7bbd49746dd40974b7c0a989ff51f29a4387343debf4b7d245e96f8",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0.07670811446451387,
+          "maxCurrentCorrectionMetres": 0.1753234537286099,
+          "maxPresentedRemoteStepMetres": 0.08487229040246665,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.14979440138614,
+          "maxCurrentCorrectionMetres": 1.3486101507292798,
+          "maxPresentedRemoteStepMetres": 0.11684228913179717,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "opposed",
+      "mode": "buffered-when-clear",
+      "lateInputs": 0,
+      "finalPhysicsHash": "d1998e7ab7bbd49746dd40974b7c0a989ff51f29a4387343debf4b7d245e96f8",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0.07670811446451387,
+          "maxCurrentCorrectionMetres": 0.1753234537286099,
+          "maxPresentedRemoteStepMetres": 0.12364487205410177,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "buffered",
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.14979440138614,
+          "maxCurrentCorrectionMetres": 1.3486101507292798,
+          "maxPresentedRemoteStepMetres": 0.11684229017525716,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "buffered",
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "reversal",
+      "mode": "raw",
+      "lateInputs": 0,
+      "finalPhysicsHash": "07b2ee617a56a1014bf0d2236e9842b2196e3066ec05dc6f72b99ddd31f30481",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.0005416871305028201,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.1500005722822874,
+          "maxCurrentCorrectionMetres": 2.101142169088203,
+          "maxPresentedRemoteStepMetres": 2.026450158337809,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "reversal",
+      "mode": "smooth-prediction",
+      "lateInputs": 0,
+      "finalPhysicsHash": "07b2ee617a56a1014bf0d2236e9842b2196e3066ec05dc6f72b99ddd31f30481",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.0005416871305028201,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.1500005722822874,
+          "maxCurrentCorrectionMetres": 2.101142169088203,
+          "maxPresentedRemoteStepMetres": 0.1501334194127224,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "reversal",
+      "mode": "buffered-when-clear",
+      "lateInputs": 0,
+      "finalPhysicsHash": "07b2ee617a56a1014bf0d2236e9842b2196e3066ec05dc6f72b99ddd31f30481",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.01245570182800293,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "buffered",
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.1500005722822874,
+          "maxCurrentCorrectionMetres": 2.101142169088203,
+          "maxPresentedRemoteStepMetres": 0.15013343750040936,
+          "finalOffsetMetres": 0,
+          "remoteSources": [
+            "buffered",
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    }
+  ]
+}

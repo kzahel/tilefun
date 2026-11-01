@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [193 Physics reversal catch-up](193-physics-reversal-catch-up.md) | Delivered and validated: bounded whole-group correction speed, both-seat reversal checks and shared quick left/right script; [physics engine](../topics/physics-engine.md) |
 | [192 Physics correction presentation](192-physics-correction-presentation.md) | Delivered and validated: current-pose rebase metrics, whole-group smoothing and buffered remote display with contact handoffs; [physics engine](../topics/physics-engine.md) |
 | [191 Cooperative physics laboratory](191-cooperative-physics-laboratory.md) | Delivered and validated: two real Realm players, full dynamic replay, seeded shared scenarios and host/guest views; [physics engine](../topics/physics-engine.md) |
 | [190 Rapier prediction and Realm proof](190-rapier-prediction-and-realm-proof.md) | Delivered for inspection: temporary Realm, nearby replay, delay/stall controls; loose-contact corrections remain a migration blocker; [physics engine](../topics/physics-engine.md) |

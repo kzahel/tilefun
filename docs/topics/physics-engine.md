@@ -43,7 +43,7 @@ frame tails, contact counts, geometry updates and memory. WASM is not an automat
 speedup; sparse specialized collision can be cheaper, AI/rendering are separate
 costs, and dynamic contacts may increase work. No Chromebook gain is established.
 
-## Correction presentation (192)
+## Correction presentation (192–193)
 
 [192](../tactical/192-physics-correction-presentation.md) addresses remote start/stop
 teleports. Physics remains fully predicted, while display-only correction offsets
@@ -53,6 +53,11 @@ chain. Both the source handoff and correction preserve display continuity. Contr
 compare predicted/buffered remote display and smooth/raw corrections. Diagnostics
 separate past-tick error, current-pose rebase, display offset and actual drawn steps.
 The shared **Remote start / stop** script reproduces the original large jump.
+[193](../tactical/193-physics-reversal-catch-up.md) bounds the added correction-release
+component to 4.5 m/s across the whole group. This prevents large reversal offsets
+from decaying as a lunge while normal physical movement retains its full delta.
+**Quick left / right** provides the shared reversal reproduction. Larger offsets
+can now take longer to converge; input prediction and authority are unchanged.
 
 This is a bounded presentation experiment: interpolation adds remote visual delay,
 smoothing can temporarily offset visible contacts, and the proximity graph is not

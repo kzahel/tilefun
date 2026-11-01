@@ -2,13 +2,14 @@ import { PLAYER_FOOT_OFFSET } from "./BridgeFixture.js";
 import type { PhysicsInput, RapierWorld } from "./RapierWorld.js";
 
 export type PhysicsSeat = 0 | 1;
-export type PairScenario = "push" | "opposed" | "push-player" | "lift" | "start-stop";
+export type PairScenario = "push" | "opposed" | "push-player" | "lift" | "start-stop" | "reversal";
 export const PAIR_SCENARIOS: { id: PairScenario; name: string }[] = [
   { id: "push", name: "Push while watched" },
   { id: "opposed", name: "Opposing pushes" },
   { id: "push-player", name: "Push into player" },
   { id: "lift", name: "Shared lift and jump" },
   { id: "start-stop", name: "Remote start / stop" },
+  { id: "reversal", name: "Quick left / right" },
 ];
 export const NEUTRAL: PhysicsInput = { x: 0, z: 0, jump: false };
 export function setupPair(world: RapierWorld, scene: PairScenario) {
@@ -28,6 +29,12 @@ export function setupPair(world: RapierWorld, scene: PairScenario) {
 }
 /** Tick-addressed inputs, shared by visual playback and native tests. */
 export function pairInput(scene: PairScenario, seat: PhysicsSeat, tick: number): PhysicsInput {
+  if (scene === "reversal") {
+    if (seat !== 0 || tick < 40 || tick >= 170) return NEUTRAL;
+    const left =
+      (tick >= 60 && tick < 64) || (tick >= 100 && tick < 104) || (tick >= 130 && tick < 134);
+    return { x: left ? -1 : 1, z: 0, jump: false };
+  }
   if (scene === "start-stop")
     return seat === 0 && tick >= 60 && tick < 95 ? { x: 0, z: 1, jump: false } : NEUTRAL;
   if (scene === "lift")

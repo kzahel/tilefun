@@ -47,9 +47,13 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
   await expect.poll(() => value(0, "x")).toBeLessThan(hostBefore - 0.15);
   await page.keyboard.up("ArrowLeft");
 
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
   await page.getByRole("button", { name: "Shared lift and jump", exact: true }).click();
   await expect(host).toHaveAttribute("data-ready", "true");
   await page.getByRole("button", { name: "Replay script", exact: true }).click();
+  await expect.poll(() => value(0, "tick")).toBe(0);
+  await expect(host).toHaveAttribute("data-ready", "true");
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
   await expect.poll(() => value(0, "tick")).toBeGreaterThan(195);
   await page.getByRole("button", { name: "Authority ghost", exact: true }).click();
   await page.screenshot({ path: test.info().outputPath("two-client-lift.png"), fullPage: true });
@@ -105,8 +109,12 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
   await page.mouse.up();
   // Browser boundary: the buffered path drives actual mesh positions, and
   // presentation comparisons do not replace/restart the authority Worker.
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
   await page.getByRole("button", { name: "Remote start / stop", exact: true }).click();
   await page.getByRole("button", { name: "Replay script", exact: true }).click();
+  await expect.poll(() => value(0, "tick")).toBe(0);
+  await expect(host).toHaveAttribute("data-ready", "true");
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
   await expect(host).toHaveAttribute("data-ready", "true");
   await expect.poll(() => value(0, "tick")).toBeGreaterThan(140);
   await expect(guest).toHaveAttribute("data-remote-source", "buffered");
@@ -129,6 +137,17 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
   await page.getByRole("button", { name: "Remote: buffered when clear", exact: true }).click();
   await expect(guest).toHaveAttribute("data-remote-source", "buffered");
   expect(page.workers()).toEqual(workersBefore);
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await page.getByRole("button", { name: "Quick left / right", exact: true }).click();
+  await page.getByRole("button", { name: "Replay script", exact: true }).click();
+  await expect.poll(() => value(0, "tick")).toBe(0);
+  await expect(host).toHaveAttribute("data-ready", "true");
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect.poll(() => value(0, "tick")).toBeGreaterThan(190);
+  expect(await value(1, "max-current-correction")).toBeGreaterThan(1);
+  expect(await value(1, "max-displayed-step")).toBeLessThan(0.5);
+  await expect(page.locator(".physics-stats")).toContainText("correction release max 4.50 m/s");
+  await page.screenshot({ path: test.info().outputPath("quick-reversal.png"), fullPage: true });
   await page.getByRole("link", { name: "All tools", exact: true }).click();
   await expect(views).toHaveCount(0);
   await expect

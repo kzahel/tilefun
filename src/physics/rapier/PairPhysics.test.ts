@@ -203,3 +203,48 @@ it("measures the live-pose start/stop jump and compares smooth and buffered pres
     await harness.close();
   }
 });
+
+it.each([0, 1] as const)(
+  "keeps quick reversals continuous when controlling seat %s near the cube",
+  async (controlled) => {
+    const authority = await PairAuthority.create("reversal");
+    const harness = new PairHarness(
+      { scene: "reversal", rtt: 200, jitter: 20, seed: 713 },
+      authority,
+      authority.frame(),
+    );
+    harness.script = false;
+    harness.controlled = controlled;
+    let maxOwnStep = 0,
+      previousOwn: ReturnType<(typeof harness.clients)[0]["world"]["motor"]> | undefined;
+    const sources = new Set<string>();
+    try {
+      for (let tick = 0; tick < 300; tick++) {
+        harness.desired = pairInput("reversal", 0, harness.tick + harness.lead[controlled] + 1);
+        await harness.step();
+        for (const seat of [0, 1] as const) harness.presentedPoses(seat);
+        const current = harness.clients[controlled].world.motorFor(controlled);
+        if (previousOwn)
+          maxOwnStep = Math.max(
+            maxOwnStep,
+            Math.hypot(
+              current.x - previousOwn.x,
+              current.y - previousOwn.y,
+              current.z - previousOwn.z,
+            ),
+          );
+        previousOwn = current;
+        const remote = harness.presentation[controlled === 0 ? 1 : 0];
+        sources.add(remote.diagnostics.remoteSource);
+        expect(remote.diagnostics.maxCorrectionReleaseSpeed).toBeLessThanOrEqual(4.50001);
+        expect(remote.diagnostics.maxRemoteStep).toBeLessThan(0.17);
+      }
+      if (controlled === 0) expect(sources).toEqual(new Set(["buffered", "predicted"]));
+      expect(maxOwnStep).toBeLessThan(0.08);
+      expect(harness.latest.lateInputs).toBe(0);
+      for (const client of harness.clients) expect(client.diagnostics.recoveries).toBe(0);
+    } finally {
+      await harness.close();
+    }
+  },
+);

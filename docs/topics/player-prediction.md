@@ -1,5 +1,9 @@
 # Player prediction and moving contacts
 
+[193](../tactical/193-physics-reversal-catch-up.md) caps the Rapier lab display offset
+release speed after quick reversals. This affects presentation only; the underlying
+large unknown-input corrections remain measured by the diagnostics from 192.
+
 [192](../tactical/192-physics-correction-presentation.md) separates past-tick agreement
 from current-pose rebase distance in the Rapier reference. Display-only offsets
 and buffered remote interpolation address start/stop teleports while full-world

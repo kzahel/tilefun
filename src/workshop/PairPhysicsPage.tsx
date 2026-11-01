@@ -256,7 +256,7 @@ export default function PairPhysicsPage() {
                 const d = client.diagnostics,
                   p = current?.presentation[seat].diagnostics;
                 return `${seat === 0 ? "Host" : "Guest"}: predicted tick ${client.tick} · compared tick ${d.comparedTick} · past error ${(d.correction * 100).toFixed(2)} cm / max ${(d.maxCorrection * 100).toFixed(2)}
-Current-pose correction ${(d.currentCorrection * 100).toFixed(2)} cm / max ${(d.maxCurrentCorrection * 100).toFixed(2)} · own ${(d.ownCorrection * 100).toFixed(2)} / remote ${(d.remoteCorrection * 100).toFixed(2)} cm · display offset ${((p?.maxOffset ?? 0) * 100).toFixed(2)} cm
+Current-pose correction ${(d.currentCorrection * 100).toFixed(2)} cm / max ${(d.maxCurrentCorrection * 100).toFixed(2)} · own ${(d.ownCorrection * 100).toFixed(2)} / remote ${(d.remoteCorrection * 100).toFixed(2)} cm · display offset ${((p?.maxOffset ?? 0) * 100).toFixed(2)} cm · correction release max ${(p?.maxCorrectionReleaseSpeed ?? 0).toFixed(2)} m/s
 Remote ${p?.remoteSource} at tick ${p?.remoteDisplayTick} · displayed frame step max ${((maxDisplayed[seat] ?? 0) * 100).toFixed(2)} cm · replay ${d.replaySteps} / ${d.replayMs.toFixed(2)} ms · ${d.pending} pending · ${d.recoveries} recoveries`;
               })
               .join(
@@ -465,8 +465,9 @@ Remote ${p?.remoteSource} at tick ${p?.remoteDisplayTick} · displayed frame ste
       <p className="physics-limit">
         Both clients always simulate the complete physics world. Far-away remote players default to
         buffered display; near a possible shared contact they return to prediction. Both handoffs
-        and physics corrections smooth their displayed position/rotation. Buffered display adds
-        delay; smoothing can temporarily offset visible contacts. Neither changes collisions.
+        and physics corrections smooth their displayed position/rotation, with bounded catch-up
+        speed so quick reversals cannot release a large correction in one step. Buffered display
+        adds delay; smoothing can temporarily offset visible contacts. Neither changes collisions.
         Compare Remote: predicted and Corrections: raw to expose the original start/stop jump. Past
         error compares matching old ticks; current-pose correction measures replay's change to the
         predicted present. The white ghost is the last received authority pose. Seed 713; ordered

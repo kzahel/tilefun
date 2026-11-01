@@ -1,5 +1,9 @@
 # Embedded engine labs
 
+[193](../tactical/193-physics-reversal-catch-up.md) bounds whole-group physics-display
+catch-up speed and adds the shared quick-reversal script, with native checks for
+both control seats. Physics and normal input motion remain unchanged.
+
 [192](../tactical/192-physics-correction-presentation.md) adds shared headless/visual
 physics presentation: current-pose correction diagnostics, whole-group smoothing,
 buffered remote display away from possible contacts and continuous source handoffs.

@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { PairPresentation } from "./PairPresentation.js";
+import { MAX_CORRECTION_SPEED, PairPresentation } from "./PairPresentation.js";
 import { POSE_STRIDE } from "./PhysicsProtocol.js";
 
 function poses(remoteX = 8, cubeX?: number) {
@@ -53,7 +53,7 @@ it("preserves a whole-group correction immediately, decays only the offset, and 
   expect(after).toEqual(copy);
   presentation.advance(0.12);
   const halfway = presentation.sample(after, 1);
-  expect(halfway[POSE_STRIDE + 1]).toBeGreaterThan(8.7);
+  expect(halfway[POSE_STRIDE + 1]).toBeGreaterThan(8);
   expect(halfway[POSE_STRIDE + 1]).toBeLessThan(9.2);
   // Ordinary subsequent movement keeps its full delta: no blanket low-pass lag.
   const moved = after.slice();
@@ -96,4 +96,33 @@ it("caps history, clears offsets for raw comparison, and does not advance a paus
   presentation.smooth = false;
   expect(presentation.sample(after, 100)).toEqual(after);
   expect(presentation.diagnostics.remoteOffset).toBe(0);
+});
+
+it("bounds large reversal catch-up speed for the entire group without slowing new motion", () => {
+  const presentation = new PairPresentation(0, 2);
+  presentation.remoteMode = "predicted";
+  const before = poses(1, 1),
+    after = poses(4, 3);
+  presentation.sample(before, 0);
+  presentation.correct({ before, after, reset: false });
+  let previous = presentation.sample(after, 0);
+  const raw = after.slice();
+  for (let tick = 1; tick <= 120; tick++) {
+    presentation.advance(1 / 60);
+    const displayed = presentation.sample(raw, tick);
+    const movement = (displayed[POSE_STRIDE + 1] ?? 0) - (previous[POSE_STRIDE + 1] ?? 0);
+    expect(movement).toBeGreaterThanOrEqual(0);
+    expect(movement).toBeLessThanOrEqual(MAX_CORRECTION_SPEED / 60 + 0.00001);
+    // The shorter cube offset follows the same group fraction, preserving the
+    // relative correction path instead of catching up on a different schedule.
+    const remoteOffset = (raw[POSE_STRIDE + 1] ?? 0) - (displayed[POSE_STRIDE + 1] ?? 0);
+    const cubeOffset = (raw[2 * POSE_STRIDE + 1] ?? 0) - (displayed[2 * POSE_STRIDE + 1] ?? 0);
+    expect(cubeOffset).toBeCloseTo((remoteOffset * 2) / 3, 4);
+    previous = displayed;
+  }
+  expect(previous[POSE_STRIDE + 1]).toBeCloseTo(4, 4);
+  const moved = raw.slice();
+  moved[1] = 0.075;
+  expect(presentation.sample(moved, 120)[1]).toBeCloseTo(0.075);
+  expect(after).toEqual(raw);
 });
