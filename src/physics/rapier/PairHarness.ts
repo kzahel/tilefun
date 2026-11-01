@@ -8,6 +8,7 @@ import type { BufferedMessage } from "../../shared/protocol.js";
 import { World } from "../../world/World.js";
 import { FullWorldPredictor } from "./FullWorldPredictor.js";
 import type { PairAuthorityPort, PairFrame, ScheduledPhysicsInput } from "./PairAuthority.js";
+import { PairPresentation } from "./PairPresentation.js";
 import { PhysicsLink } from "./PhysicsLink.js";
 import { NEUTRAL, type PairScenario, type PhysicsSeat, pairInput } from "./PhysicsScenarios.js";
 import { PHYSICS_DT, type PhysicsInput } from "./RapierWorld.js";
@@ -25,6 +26,7 @@ export class PairHarness {
   readonly clients = [new FullWorldPredictor(0), new FullWorldPredictor(1)] as const;
   readonly replicas = [new RemoteStateView(new World()), new RemoteStateView(new World())] as const;
   readonly lead: [number, number];
+  readonly presentation: [PairPresentation, PairPresentation];
   private up: [PhysicsLink<ScheduledPhysicsInput>, PhysicsLink<ScheduledPhysicsInput>];
   private down: [PhysicsLink<PairFrame>, PhysicsLink<PairFrame>];
   readonly received: [PairFrame | undefined, PairFrame | undefined] = [undefined, undefined];
@@ -42,6 +44,10 @@ export class PairHarness {
   ) {
     this.latest = initial;
     this.lead = [2, Math.ceil((config.rtt / 2 + config.jitter) / (PHYSICS_DT * 1000)) + 2];
+    this.presentation = [
+      new PairPresentation(0, this.lead[0]),
+      new PairPresentation(1, this.lead[1]),
+    ];
     this.up = [
       new PhysicsLink(0, 0, config.seed),
       new PhysicsLink(config.rtt / 2, config.jitter, config.seed + 1),
@@ -57,7 +63,14 @@ export class PairHarness {
     }
   }
   private consume(seat: PhysicsSeat, frame: PairFrame) {
-    this.clients[seat].receive(frame.snapshot);
+    const correction = this.clients[seat].receive(frame.snapshot);
+    if (correction) {
+      this.presentation[seat].correct(correction);
+      this.presentation[seat].acceptAuthority(
+        frame.snapshot.state.motors[0]?.tick ?? 0,
+        frame.poses,
+      );
+    }
     this.received[seat] = frame;
     for (const buffer of frame.frames[seat]) {
       const message = decodeServerMessage(buffer);
@@ -72,6 +85,7 @@ export class PairHarness {
       const now = ++this.tick * PHYSICS_DT * 1000;
       const commands: ScheduledPhysicsInput[] = [];
       for (const seat of [0, 1] as const) {
+        this.presentation[seat].advance(PHYSICS_DT);
         const client = this.clients[seat],
           target = this.tick + this.lead[seat];
         // Explicit recovery can rebase prediction. Fill the bounded lead again.
@@ -115,6 +129,13 @@ export class PairHarness {
       this.busy = false;
     }
   }
+  presentedPoses(seat: PhysicsSeat) {
+    return this.presentation[seat].sample(
+      this.clients[seat].world.poses(),
+      this.tick,
+      this.clients[seat].tick,
+    );
+  }
   get queued() {
     return (
       this.up.reduce((sum, link) => sum + link.pending, 0) +
@@ -126,6 +147,7 @@ export class PairHarness {
     this.closed = true;
     for (const link of [...this.up, ...this.down]) link.clear();
     for (const client of this.clients) client.dispose();
+    for (const presentation of this.presentation) presentation.clear();
     await this.authority.close();
   }
 }

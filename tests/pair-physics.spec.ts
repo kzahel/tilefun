@@ -103,6 +103,32 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
   await page.mouse.down();
   await expect.poll(() => value(1, "x")).toBeLessThan(touchBefore - 0.15);
   await page.mouse.up();
+  // Browser boundary: the buffered path drives actual mesh positions, and
+  // presentation comparisons do not replace/restart the authority Worker.
+  await page.getByRole("button", { name: "Remote start / stop", exact: true }).click();
+  await page.getByRole("button", { name: "Replay script", exact: true }).click();
+  await expect(host).toHaveAttribute("data-ready", "true");
+  await expect.poll(() => value(0, "tick")).toBeGreaterThan(140);
+  await expect(guest).toHaveAttribute("data-remote-source", "buffered");
+  expect(await value(1, "max-current-correction")).toBeGreaterThan(1);
+  expect(await value(1, "max-displayed-step")).toBeLessThan(0.3);
+  expect(await value(1, "displayed-remote-z")).toBeGreaterThan(2);
+  await page.screenshot({
+    path: test.info().outputPath("buffered-start-stop.png"),
+    fullPage: true,
+  });
+  const workersBefore = page.workers();
+  await page.getByRole("button", { name: "Remote: predicted", exact: true }).click();
+  await expect(guest).toHaveAttribute("data-remote-source", "predicted");
+  await page.getByRole("button", { name: "Corrections: smooth", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Corrections: raw", exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "false",
+  );
+  await page.getByRole("button", { name: "Corrections: raw", exact: true }).click();
+  await page.getByRole("button", { name: "Remote: buffered when clear", exact: true }).click();
+  await expect(guest).toHaveAttribute("data-remote-source", "buffered");
+  expect(page.workers()).toEqual(workersBefore);
   await page.getByRole("link", { name: "All tools", exact: true }).click();
   await expect(views).toHaveCount(0);
   await expect

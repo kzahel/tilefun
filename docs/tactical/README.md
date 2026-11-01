@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [192 Physics correction presentation](192-physics-correction-presentation.md) | Delivered and validated: current-pose rebase metrics, whole-group smoothing and buffered remote display with contact handoffs; [physics engine](../topics/physics-engine.md) |
 | [191 Cooperative physics laboratory](191-cooperative-physics-laboratory.md) | Delivered and validated: two real Realm players, full dynamic replay, seeded shared scenarios and host/guest views; [physics engine](../topics/physics-engine.md) |
 | [190 Rapier prediction and Realm proof](190-rapier-prediction-and-realm-proof.md) | Delivered for inspection: temporary Realm, nearby replay, delay/stall controls; loose-contact corrections remain a migration blocker; [physics engine](../topics/physics-engine.md) |
 | [189 Rapier physics prototype](189-rapier-physics-prototype.md) | Delivered for inspection: shared WASM backend, Worker playground, kilometre bridge and focused checks; prediction/Realm migration pending; [physics engine](../topics/physics-engine.md) |

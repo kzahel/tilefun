@@ -224,6 +224,11 @@ export class PhysicsViewport {
     };
   }
 
+  displayedPosition(id: number) {
+    const p = this.meshes.get(id)?.position;
+    return p ? { x: p.x, y: p.y, z: p.z } : undefined;
+  }
+
   dispose() {
     this.ghost.geometry.dispose();
     (this.ghost.material as THREE.Material).dispose();

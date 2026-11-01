@@ -1,5 +1,10 @@
 # Embedded engine labs
 
+[192](../tactical/192-physics-correction-presentation.md) adds shared headless/visual
+physics presentation: current-pose correction diagnostics, whole-group smoothing,
+buffered remote display away from possible contacts and continuous source handoffs.
+The original single-player bridge experiment keeps its existing presentation.
+
 [191](../tactical/191-cooperative-physics-laboratory.md) adds the two-client physics
 reference: one real temporary Realm, two sessions/replicas, full dynamic replay and
 shared native/visual scripts. Its explicit coordinator clock enables repeatable

@@ -5,6 +5,7 @@ import pairPredictor from "../physics/rapier/FullWorldPredictor.ts?raw";
 import latency from "../physics/rapier/OrderedLatency.ts?raw";
 import pairAuthority from "../physics/rapier/PairAuthority.ts?raw";
 import pairHarness from "../physics/rapier/PairHarness.ts?raw";
+import pairPresentation from "../physics/rapier/PairPresentation.ts?raw";
 import pairPort from "../physics/rapier/PairWorkerPort.ts?raw";
 import client from "../physics/rapier/PhysicsLabClient.ts?raw";
 import pairLink from "../physics/rapier/PhysicsLink.ts?raw";
@@ -40,6 +41,7 @@ export async function buildPhysicsCandidate(): Promise<WorkshopCandidate> {
           pairAuthority,
           pairHarness,
           pairPredictor,
+          pairPresentation,
           pairScenarios,
           pairLink,
           pairPort,

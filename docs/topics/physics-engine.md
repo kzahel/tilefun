@@ -1,6 +1,6 @@
 # General 3D physics backend
 
-Status: provisional direction; two-client full-physics laboratory delivered for inspection.
+Status: provisional direction; two-client full-physics laboratory and remote correction presentation delivered for inspection.
 Updated: 2026-11-01.
 
 Owns the proposed physics-backend migration. [World geometry](world-geometry.md)
@@ -42,6 +42,22 @@ Measure adapter/API overhead, whole Worker ticks, main-thread prediction/replay,
 frame tails, contact counts, geometry updates and memory. WASM is not an automatic
 speedup; sparse specialized collision can be cheaper, AI/rendering are separate
 costs, and dynamic contacts may increase work. No Chromebook gain is established.
+
+## Correction presentation (192)
+
+[192](../tactical/192-physics-correction-presentation.md) addresses remote start/stop
+teleports. Physics remains fully predicted, while display-only correction offsets
+smooth all affected bodies. The remote player defaults to buffered interpolation
+when clear, returning to prediction near a conservative capsule/cube/lift contact
+chain. Both the source handoff and correction preserve display continuity. Controls
+compare predicted/buffered remote display and smooth/raw corrections. Diagnostics
+separate past-tick error, current-pose rebase, display offset and actual drawn steps.
+The shared **Remote start / stop** script reproduces the original large jump.
+
+This is a bounded presentation experiment: interpolation adds remote visual delay,
+smoothing can temporarily offset visible contacts, and the proximity graph is not
+a general contact-island implementation. The coordinated-clock and Chromebook
+qualification limits from 191 still apply.
 
 ## Cooperative reference (191)
 

@@ -8,6 +8,11 @@ export interface PairSnapshot {
   inputs: [PhysicsInput, PhysicsInput];
   ack: [number, number];
 }
+export interface FullWorldCorrection {
+  before: Float32Array;
+  after: Float32Array;
+  reset: boolean;
+}
 const HISTORY = INPUT_HISTORY_SECONDS * 60;
 export const MAX_FULL_REPLAY_STEPS = 32;
 export function poseDistance(a: Float32Array, b: Float32Array): number {
@@ -39,6 +44,10 @@ export class FullWorldPredictor {
   diagnostics = {
     correction: 0,
     maxCorrection: 0,
+    currentCorrection: 0,
+    maxCurrentCorrection: 0,
+    ownCorrection: 0,
+    remoteCorrection: 0,
     replayMs: 0,
     replaySteps: 0,
     reconciles: 0,
@@ -66,10 +75,14 @@ export class FullWorldPredictor {
     for (const key of this.poses.keys()) if (key < tick - HISTORY) this.poses.delete(key);
     this.diagnostics.pending = Math.max(0, tick - this.latest.ack[this.seat]);
   }
-  receive(snapshot: PairSnapshot) {
+  receive(snapshot: PairSnapshot): FullWorldCorrection | undefined {
     const tick = snapshot.state.motors[0]?.tick ?? 0;
     if (this.latest && tick <= (this.latest.state.motors[0]?.tick ?? 0)) return;
     const began = performance.now();
+    const before = this.world.poses(),
+      beforeTick = this.tick;
+    let reset =
+      !this.latest || this.latest.state.motors[0]?.epoch !== snapshot.state.motors[0]?.epoch;
     const target = Math.max(tick, this.tick);
     const saved = this.poses.get(tick);
     this.world.restoreFull(snapshot.state);
@@ -88,6 +101,7 @@ export class FullWorldPredictor {
       this.inputs.clear();
       this.poses.clear();
       this.diagnostics.recoveries++;
+      reset = true;
     } else {
       this.poses.set(tick, this.world.poses());
       for (let step = tick + 1; step <= target; step++) {
@@ -104,6 +118,29 @@ export class FullWorldPredictor {
     this.diagnostics.snapshotBytes = snapshot.state.bytes.byteLength;
     this.diagnostics.reconciles++;
     this.diagnostics.pending = Math.max(0, this.tick - snapshot.ack[this.seat]);
+    const after = this.world.poses();
+    reset ||= beforeTick !== this.tick;
+    const distanceFor = (id: number) => {
+      const row = (poses: Float32Array) =>
+        poses.findIndex((value, i) => i % POSE_STRIDE === 0 && value === id);
+      const a = row(before),
+        b = row(after);
+      return a < 0 || b < 0
+        ? 0
+        : Math.hypot(
+            (before[a + 1] ?? 0) - (after[b + 1] ?? 0),
+            (before[a + 2] ?? 0) - (after[b + 2] ?? 0),
+            (before[a + 3] ?? 0) - (after[b + 3] ?? 0),
+          );
+    };
+    this.diagnostics.currentCorrection = reset ? 0 : poseDistance(before, after);
+    this.diagnostics.maxCurrentCorrection = Math.max(
+      this.diagnostics.maxCurrentCorrection,
+      this.diagnostics.currentCorrection,
+    );
+    this.diagnostics.ownCorrection = reset ? 0 : distanceFor(this.seat === 0 ? 0 : -1);
+    this.diagnostics.remoteCorrection = reset ? 0 : distanceFor(this.seat === 0 ? -1 : 0);
+    return { before, after, reset };
   }
   dispose() {
     this.world.dispose();

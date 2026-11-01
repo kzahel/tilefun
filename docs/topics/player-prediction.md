@@ -1,5 +1,10 @@
 # Player prediction and moving contacts
 
+[192](../tactical/192-physics-correction-presentation.md) separates past-tick agreement
+from current-pose rebase distance in the Rapier reference. Display-only offsets
+and buffered remote interpolation address start/stop teleports while full-world
+physics remains unchanged. Contact proximity returns remote display to prediction.
+
 [191](../tactical/191-cooperative-physics-laboratory.md) adds a bounded two-client
 Rapier reference with full dynamic-body replay and same-tick error comparisons.
 It uses shared seeded scripts and a coordinated clock; ordinary game prediction

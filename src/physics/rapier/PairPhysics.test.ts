@@ -38,7 +38,7 @@ it.each(PAIR_SCENARIOS)(
     );
     try {
       for (let tick = 0; tick < 300; tick++) await harness.step();
-      if (id !== "lift") {
+      if (id !== "lift" && id !== "start-stop") {
         const cube = authority.session.realm.entityManager.entities.find(
           (actor) => Math.abs((actor.collider?.physicalHeight ?? 0) - 12.8) < 0.001,
         );
@@ -147,6 +147,59 @@ it("retains an odd-tick entity change until the next delivered replication frame
     for (const replica of harness.replicas)
       expect(replica.entities.find((actor) => actor.id === cube.id)?.noShadow).toBe(true);
   } finally {
+    await harness.close();
+  }
+});
+
+it("measures the live-pose start/stop jump and compares smooth and buffered presentation without changing physics", async () => {
+  const authority = await PairAuthority.create("start-stop");
+  const harness = new PairHarness(
+    { scene: "start-stop", rtt: 200, jitter: 20, seed: 713 },
+    authority,
+    authority.frame(),
+  );
+  const smooth = harness.presentation[1];
+  smooth.remoteMode = "predicted";
+  const { PairPresentation } = await import("./PairPresentation.js");
+  const buffered = new PairPresentation(1, harness.lead[1]);
+  buffered.acceptAuthority(0, harness.latest.poses);
+  let lastReconcile = 0,
+    peak = 0,
+    missedByPastMetric = false;
+  try {
+    for (let tick = 0; tick < 240; tick++) {
+      buffered.advance(1 / 60);
+      const before = harness.clients[1].world.poses();
+      await harness.step();
+      const client = harness.clients[1],
+        received = harness.received[1];
+      if (received && lastReconcile !== client.diagnostics.reconciles) {
+        // Buffered presentation ignores remote raw corrections; local/body offsets
+        // are independently covered by the pure presentation tests.
+        buffered.acceptAuthority(received.snapshot.state.motors[0]?.tick ?? 0, received.poses);
+        lastReconcile = client.diagnostics.reconciles;
+      }
+      const raw = client.world.poses();
+      smooth.sample(raw, harness.tick);
+      buffered.sample(raw, harness.tick);
+      expect(client.world.poses()).toEqual(raw);
+      peak = Math.max(peak, client.diagnostics.currentCorrection);
+      if (
+        client.diagnostics.currentCorrection > 1 &&
+        client.diagnostics.correction < client.diagnostics.currentCorrection / 5
+      )
+        missedByPastMetric = true;
+      expect(before.length).toBe(raw.length);
+    }
+    expect(peak).toBeGreaterThan(1);
+    expect(missedByPastMetric).toBe(true);
+    expect(smooth.diagnostics.maxRemoteStep).toBeLessThan(0.25);
+    expect(buffered.diagnostics.maxRemoteStep).toBeLessThan(0.077);
+    expect(buffered.diagnostics.remoteSource).toBe("buffered");
+    expect(buffered.diagnostics.remoteOffset).toBe(0);
+    expect(harness.clients[1].diagnostics.recoveries).toBe(0);
+  } finally {
+    buffered.clear();
     await harness.close();
   }
 });

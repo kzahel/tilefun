@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { PairHarness } from "../physics/rapier/PairHarness.js";
+import type { RemotePresentation } from "../physics/rapier/PairPresentation.js";
 import { PairWorkerPort } from "../physics/rapier/PairWorkerPort.js";
 import {
   NEUTRAL,
@@ -20,6 +21,8 @@ export default function PairPhysicsPage() {
   const [seat, setSeat] = useState<PhysicsSeat>(0);
   const [shared, setShared] = useState(true);
   const [ghost, setGhost] = useState(false);
+  const [remoteMode, setRemoteMode] = useState<RemotePresentation>("buffered");
+  const [smooth, setSmooth] = useState(true);
   const [status, setStatus] = useState("Opening two-player Realm…");
   const [statistics, setStatistics] = useState("");
   const controls = useRef<HTMLDivElement>(null);
@@ -28,8 +31,8 @@ export default function PairPhysicsPage() {
   const harness = useRef<PairHarness | undefined>(undefined);
   const step = useRef<(() => Promise<void>) | undefined>(undefined);
   const held = useRef(new Set<string>());
-  const state = useRef({ paused, script, seat, shared, ghost });
-  state.current = { paused, script, seat, shared, ghost };
+  const state = useRef({ paused, script, seat, shared, ghost, remoteMode, smooth });
+  state.current = { paused, script, seat, shared, ghost, remoteMode, smooth };
   const focusScene = useCallback(() => {
     (state.current.seat === 0 ? host : guest).current?.querySelector("canvas")?.focus();
   }, []);
@@ -56,6 +59,8 @@ export default function PairPhysicsPage() {
       previousButtons: boolean[] = [];
     let current: PairHarness | undefined;
     const timings: number[] = [];
+    const lastDisplayed: ({ x: number; y: number; z: number } | undefined)[] = [];
+    const maxDisplayed = [0, 0];
     setStatus("Opening two-player Realm…");
     setStatistics("");
     for (const element of elements) if (element) element.dataset.ready = "false";
@@ -179,10 +184,16 @@ export default function PairPhysicsPage() {
                   Number(keys.has("ArrowUp") || keys.has("KeyW")) || axis(1),
               jump: keys.has("Space") || !!buttons[0],
             };
-        const paintKey = `${current.clients[0].tick}/${current.clients[1].tick}/${current.latest.snapshot.state.motors[0]?.tick}`;
+        for (const presentation of current.presentation) {
+          presentation.remoteMode = state.current.remoteMode;
+          presentation.smooth = state.current.smooth;
+        }
+        const paintKey = `${current.clients[0].tick}/${current.clients[1].tick}/${current.latest.snapshot.state.motors[0]?.tick}/${state.current.remoteMode}/${state.current.smooth}`;
         if (painted !== paintKey) {
-          for (const seat of [0, 1] as const)
-            views[seat].accept(current.clients[seat].world.poses(), now);
+          for (const seat of [0, 1] as const) {
+            const poses = current.presentedPoses(seat);
+            views[seat].accept(poses, now);
+          }
           painted = paintKey;
         }
         for (const seat of [0, 1] as const) {
@@ -212,6 +223,26 @@ export default function PairPhysicsPage() {
           element?.setAttribute("data-x", String(client.world.motorFor(seat).x));
           element?.setAttribute("data-correction", String(client.diagnostics.correction));
           element?.setAttribute("data-compared-tick", String(client.diagnostics.comparedTick));
+          element?.setAttribute(
+            "data-current-correction",
+            String(client.diagnostics.currentCorrection),
+          );
+          element?.setAttribute(
+            "data-max-current-correction",
+            String(client.diagnostics.maxCurrentCorrection),
+          );
+          element?.setAttribute(
+            "data-remote-source",
+            current.presentation[seat].diagnostics.remoteSource,
+          );
+          element?.setAttribute(
+            "data-remote-offset",
+            String(current.presentation[seat].diagnostics.remoteOffset),
+          );
+          element?.setAttribute(
+            "data-raw-remote-z",
+            String(client.world.motorFor(seat === 0 ? 1 : 0).z),
+          );
         }
         if (now - report > 250) {
           const sorted = [...timings].sort((a, b) => a - b);
@@ -222,8 +253,11 @@ export default function PairPhysicsPage() {
               .map((seat) => {
                 const client = current?.clients[seat];
                 if (!client) return "";
-                const d = client.diagnostics;
-                return `${seat === 0 ? "Host" : "Guest"}: predicted tick ${client.tick} · compared tick ${d.comparedTick} · error ${(d.correction * 100).toFixed(2)} cm / max ${(d.maxCorrection * 100).toFixed(2)} cm · replay ${d.replaySteps} steps / ${d.replayMs.toFixed(2)} ms · ${d.pending} pending · ${d.recoveries} recoveries`;
+                const d = client.diagnostics,
+                  p = current?.presentation[seat].diagnostics;
+                return `${seat === 0 ? "Host" : "Guest"}: predicted tick ${client.tick} · compared tick ${d.comparedTick} · past error ${(d.correction * 100).toFixed(2)} cm / max ${(d.maxCorrection * 100).toFixed(2)}
+Current-pose correction ${(d.currentCorrection * 100).toFixed(2)} cm / max ${(d.maxCurrentCorrection * 100).toFixed(2)} · own ${(d.ownCorrection * 100).toFixed(2)} / remote ${(d.remoteCorrection * 100).toFixed(2)} cm · display offset ${((p?.maxOffset ?? 0) * 100).toFixed(2)} cm
+Remote ${p?.remoteSource} at tick ${p?.remoteDisplayTick} · displayed frame step max ${((maxDisplayed[seat] ?? 0) * 100).toFixed(2)} cm · replay ${d.replaySteps} / ${d.replayMs.toFixed(2)} ms · ${d.pending} pending · ${d.recoveries} recoveries`;
               })
               .join(
                 "\n",
@@ -232,7 +266,20 @@ export default function PairPhysicsPage() {
           report = now;
         }
       }
-      for (const view of views) view.draw(now);
+      for (const seat of [0, 1] as const) {
+        const view = views[seat];
+        view.draw(now);
+        const position = view.displayedPosition(seat === 0 ? -1 : 0),
+          previous = lastDisplayed[seat];
+        if (position && previous)
+          maxDisplayed[seat] = Math.max(
+            maxDisplayed[seat] ?? 0,
+            Math.hypot(position.x - previous.x, position.y - previous.y, position.z - previous.z),
+          );
+        lastDisplayed[seat] = position;
+        elements[seat]?.setAttribute("data-displayed-remote-z", String(position?.z ?? 0));
+        elements[seat]?.setAttribute("data-max-displayed-step", String(maxDisplayed[seat] ?? 0));
+      }
       handle = requestAnimationFrame(draw);
     };
     window.addEventListener("keydown", down);
@@ -353,6 +400,23 @@ export default function PairPhysicsPage() {
         <button type="button" aria-pressed={shared} onClick={() => setShared((v) => !v)}>
           Shared camera
         </button>
+        <button type="button" aria-pressed={smooth} onClick={() => setSmooth((value) => !value)}>
+          Corrections: {smooth ? "smooth" : "raw"}
+        </button>
+        <button
+          type="button"
+          aria-pressed={remoteMode === "buffered"}
+          onClick={() => setRemoteMode("buffered")}
+        >
+          Remote: buffered when clear
+        </button>
+        <button
+          type="button"
+          aria-pressed={remoteMode === "predicted"}
+          onClick={() => setRemoteMode("predicted")}
+        >
+          Remote: predicted
+        </button>
         <button type="button" aria-pressed={ghost} onClick={() => setGhost((v) => !v)}>
           Authority ghost
         </button>
@@ -399,14 +463,19 @@ export default function PairPhysicsPage() {
       </p>
       <output className="physics-stats">{statistics}</output>
       <p className="physics-limit">
-        Both views simulate the complete small physics world, including dynamic cubes. Remote future
-        inputs remain unknown. Errors compare matching past ticks; the white ghost is the last
-        received authority pose. Seed 713; ordered application delay, no packet loss. Pause and Step
-        freeze/advance the shared coordinator clock, including network queues. Live playback crosses
-        a real Worker and normal Realm/input/replication code, but uses a coordinated clock rather
-        than the game’s independent server scheduler. Full snapshots are a correctness reference,
-        not a shipping bandwidth or Chromebook performance claim. Characters remain controlled
-        capsules, not freely tumbling rigid bodies.
+        Both clients always simulate the complete physics world. Far-away remote players default to
+        buffered display; near a possible shared contact they return to prediction. Both handoffs
+        and physics corrections smooth their displayed position/rotation. Buffered display adds
+        delay; smoothing can temporarily offset visible contacts. Neither changes collisions.
+        Compare Remote: predicted and Corrections: raw to expose the original start/stop jump. Past
+        error compares matching old ticks; current-pose correction measures replay's change to the
+        predicted present. The white ghost is the last received authority pose. Seed 713; ordered
+        application delay, no packet loss. Pause and Step freeze/advance the shared coordinator
+        clock, including network queues. Live playback crosses a real Worker and normal
+        Realm/input/replication code, but uses a coordinated clock rather than the game’s
+        independent server scheduler. Full snapshots are a correctness reference, not a shipping
+        bandwidth or Chromebook performance claim. Characters remain controlled capsules, not freely
+        tumbling rigid bodies.
       </p>
     </section>
   );
