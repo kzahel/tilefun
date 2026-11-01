@@ -38,6 +38,7 @@ export class MainMenu {
   private title = document.createElement("h1");
   private content = document.createElement("div");
   private creationError = document.createElement("p");
+  private readonly developmentUpdate = document.createElement("button");
   private page: Page = "home";
   private firstOpen = true;
   private currentRealms: RealmInfo[] = [];
@@ -67,6 +68,7 @@ export class MainMenu {
   onSwitchProfile: (() => void) | null = null;
   onHostP2P: (() => void) | null = null;
   onBuild: (() => void) | null = null;
+  onDevelopmentReload: (() => void) | null = null;
 
   constructor() {
     this.overlay.className = "game-menu";
@@ -82,7 +84,12 @@ export class MainMenu {
     const help = document.createElement("div");
     help.className = "menu-help";
     help.textContent = "D-pad / stick: move   ·   A: select   ·   B: back";
-    this.overlay.append(this.title, this.content, this.creationError, help);
+    this.developmentUpdate.type = "button";
+    this.developmentUpdate.style.cssText =
+      "font:inherit;padding:12px 16px;min-height:48px;margin-top:12px;background:#344650;color:#f4f5ec;border:2px solid #718189;border-radius:4px;cursor:pointer;max-width:100%;";
+    this.developmentUpdate.hidden = true;
+    this.developmentUpdate.onclick = () => this.onDevelopmentReload?.();
+    this.overlay.append(this.title, this.content, this.developmentUpdate, this.creationError, help);
     this.overlay.addEventListener("keydown", (e) => e.stopPropagation());
     this.overlay.addEventListener("keyup", (e) => e.stopPropagation());
     this.name.placeholder = "World name...";
@@ -130,6 +137,11 @@ export class MainMenu {
   }
   get visible(): boolean {
     return !this.overlay.hidden;
+  }
+  setDevelopmentUpdate(label: string | null, reload: () => void): void {
+    this.developmentUpdate.hidden = label === null;
+    this.developmentUpdate.textContent = label;
+    this.onDevelopmentReload = reload;
   }
   setTools(actions: { label: string; run: () => void }[]): void {
     this.toolActions = actions;

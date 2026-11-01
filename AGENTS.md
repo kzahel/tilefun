@@ -112,4 +112,10 @@ For streaming/execution changes run `npm run streaming:bench -- --assert-ready`;
 
 ## Session completion
 
+The live dev server keeps players running until they choose **Save and reload**.
+After completing and validating a playable feature/fix, run `npm run dev:ready`
+as your final step after source/asset writes. It updates the ignored local
+`.tilefun-dev-ready` marker; later playable edits clear readiness automatically.
+Do not mark unfinished or failing work ready. See [development reloads](docs/topics/development-reloads.md).
+
 Briefly suggest the next logical step when this work is part of a larger plan.

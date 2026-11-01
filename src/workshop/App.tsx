@@ -32,6 +32,7 @@ const CharactersPage = lazy(() => import("./CharactersPage.js"));
 const CarProjectionPage = lazy(() => import("./CarProjectionPage.js"));
 const TrafficPage = lazy(() => import("./TrafficPage.js"));
 const WorldGeometryPage = lazy(() => import("./WorldGeometryPage.js"));
+const PhysicsPage = lazy(() => import("./PhysicsPage.js"));
 const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
 const FamilySheetsPage = lazy(() => import("./FamilySheetsPage.js"));
@@ -246,6 +247,7 @@ export function App() {
               "outdoor",
               "traffic",
               "world-geometry",
+              "physics",
               "railways",
               "vehicles",
               "car-projection",
@@ -972,6 +974,7 @@ function ToolPage() {
   if (tool.id === "car-projection") return <CarProjectionPage />;
   if (tool.id === "traffic") return <TrafficPage />;
   if (tool.id === "world-geometry") return <WorldGeometryPage />;
+  if (tool.id === "physics") return <PhysicsPage />;
   if (tool.id === "vehicles")
     return (
       <AuthGate>

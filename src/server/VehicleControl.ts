@@ -26,6 +26,7 @@ import type { TowAction } from "../traffic/Towing.js";
 import type { VehicleBedAction } from "../traffic/VehicleCargo.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
+import { HORN_STARTLE_COOLDOWN, HORN_STARTLE_RADIUS, reactToHorn } from "./HornReaction.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { safeArrival } from "./SafeArrival.js";
@@ -52,6 +53,7 @@ export class VehicleControl {
       lastInput: number;
       lastHorn?: number;
       lastHornEvent?: number;
+      lastHornStartle?: number;
       honking?: boolean;
     }
   >();
@@ -64,9 +66,19 @@ export class VehicleControl {
     const now = this.realm.worldAPI.time;
     if (active) driver.lastHorn = now;
     if (active === !!driver.honking && (!active || now - (driver.lastHornEvent ?? 0) < 0.1)) return;
+    const starting = active && !driver.honking;
     driver.honking = active;
     driver.lastHornEvent = now;
     const vehicle = driver.vehicle;
+    if (starting && now - (driver.lastHornStartle ?? -Infinity) >= HORN_STARTLE_COOLDOWN) {
+      driver.lastHornStartle = now;
+      for (const entity of this.realm.entityManager.spatialHash.queryRadius(
+        vehicle.position.wx,
+        vehicle.position.wy,
+        HORN_STARTLE_RADIUS,
+      ))
+        if (reactToHorn(entity, vehicle)) this.realm.records?.changed(entity);
+    }
     this.horns.push({
       type: "vehicle-horn",
       vehicleId: vehicle.id,

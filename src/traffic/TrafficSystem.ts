@@ -191,8 +191,7 @@ export class TrafficSystem {
       if (!state) return;
       this.unlinkTransport(state, destroyed);
       this.unlinkTow(state, destroyed);
-      for (const [node, owner] of this.reservations)
-        if (owner === entity.id) this.reservations.delete(node);
+      this.releaseReservations(state);
       state.shopping?.dispose();
       this.states.delete(entity.id);
       if (destroyed) this.onChange?.(state, true);
@@ -594,6 +593,20 @@ export class TrafficSystem {
     }
     return "";
   }
+  private releaseReservation(node: string, state: TrafficState): void {
+    if (state.reservation === node) state.reservation = undefined;
+    if (this.reservations.get(node) !== state.entity.id) return;
+    // Independently streamed saves can restore several cars already in a turn.
+    // Keep new approaches waiting until every restored occupant has cleared it.
+    const remaining = [...this.states.values()].find((s) => s.reservation === node);
+    if (remaining) this.reservations.set(node, remaining.entity.id);
+    else this.reservations.delete(node);
+  }
+  private releaseReservations(state: TrafficState): void {
+    state.reservation = undefined;
+    for (const [node, owner] of this.reservations)
+      if (owner === state.entity.id) this.releaseReservation(node, state);
+  }
   /** Returns a blocking reason, or an empty string after securing the junction. */
   private reserve(s: TrafficState, reuseRoad = false): string {
     if (s.turn || s.reservation === s.lane.to) return "";
@@ -969,8 +982,7 @@ export class TrafficSystem {
         if (owner !== s.entity.id) continue;
         const [x = 0, y = 0] = node.split(",").map(Number);
         if (Math.max(Math.abs(pose.x - x * 16), Math.abs(pose.y - y * 16)) > 96 + half) {
-          this.reservations.delete(node);
-          if (s.reservation === node) s.reservation = undefined;
+          this.releaseReservation(node, s);
         }
       }
       this.entities.spatialHash.update(s.entity);
@@ -985,8 +997,7 @@ export class TrafficSystem {
     s.parked = true;
     s.speed = 0;
     s.entity.velocity = { vx: 0, vy: 0 };
-    for (const [node, owner] of this.reservations)
-      if (owner === s.entity.id) this.reservations.delete(node);
+    this.releaseReservations(s);
     s.turn = undefined;
     s.next = undefined;
     s.reservation = undefined;
@@ -1141,8 +1152,7 @@ export class TrafficSystem {
   private remove(s: TrafficState) {
     this.unlinkTransport(s, false);
     this.unlinkTow(s, false);
-    for (const [node, owner] of this.reservations)
-      if (owner === s.entity.id) this.reservations.delete(node);
+    this.releaseReservations(s);
     this.retired.set(s.entity.proceduralId ?? "", this.time + 30);
     if (this.retired.size > 256) this.retired.delete(this.retired.keys().next().value ?? "");
     s.shopping?.dispose();
@@ -1325,7 +1335,6 @@ export class TrafficSystem {
       }
     }
     const identities = new Set([...this.states.values()].map((s) => s.entity.proceduralId));
-    const reserved = new Set(this.reservations.keys());
     const centers = new Set(
       [...this.states.values()].flatMap((s) => (s.shopping ? [s.shopping.lot.id] : [])),
     );
@@ -1454,12 +1463,10 @@ export class TrafficSystem {
           )
         : undefined;
       if (r.nextId && !next) throw new Error("Saved traffic successor is unavailable.");
-      if (r.turning && (!next || reserved.has(lane.to)))
-        throw new Error("Saved traffic reservation conflicts.");
+      if (r.turning && !next) throw new Error("Saved traffic turn has no successor.");
       const activePath = r.turning && next ? turnPath(lane, next) : lane.path;
       if (r.distance < 0 || r.distance > activePath.length || (r.speed ?? 0) < 0)
         throw new Error("Invalid saved traffic progress.");
-      if (r.turning) reserved.add(lane.to);
       let shopping: ParkingSystem | undefined;
       if (r.shopping) {
         const center = this.strategy
@@ -1552,7 +1559,7 @@ export class TrafficSystem {
       if (r.turning) {
         s.turn = activePath;
         s.reservation = lane.to;
-        this.reservations.set(lane.to, s.entity.id);
+        if (!this.reservations.has(lane.to)) this.reservations.set(lane.to, s.entity.id);
       }
       const pose = samplePath(activePath, r.distance);
       s.entity.position = r.parked

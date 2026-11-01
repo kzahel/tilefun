@@ -27,16 +27,18 @@ import type { VehiclePush } from "../traffic/VehiclePush.js";
 import type { World } from "../world/World.js";
 
 import { PredictionCollisionTimeline } from "./PredictionCollisionTimeline.js";
+import {
+  INPUT_BUFFER_SIZE,
+  INPUT_HISTORY_SECONDS,
+  REPLAY_TIME_BUDGET_SECONDS,
+} from "./PredictionLimits.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
 const SNAP_THRESHOLD = 32;
 
 /** Ring buffer capacity for stored inputs (replay-based reconciliation). */
-const INPUT_BUFFER_SIZE = 1024;
-const INPUT_HISTORY_SECONDS = 8;
 /** Per prediction tick, including continuation of a replay started by a snapshot. */
 const REPLAY_STEP_BUDGET = INPUT_BACKLOG_STEP_BUDGET;
-const REPLAY_TIME_BUDGET_SECONDS = 0.002;
 /** Allow a resumed authority to acknowledge the lost prefix before explicit resync. */
 const HISTORY_GAP_GRACE_SECONDS = 0.25;
 

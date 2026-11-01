@@ -2,7 +2,7 @@
 
 Topic: voice-agents
 Status: proposed; builder-agent experiment is the preferred direction to explore.
-Updated: 2026-10-03.
+Updated: 2026-10-25.
 
 Owns the idea of a pre-literate player using speech to direct an agent, either
 inside the world or through actual development of the game. This records the
@@ -91,12 +91,12 @@ entity could resolve "this one"; short spoken responses and visible changes
 should make reading optional. Cancellation and correction need to invalidate
 pending work appropriately, as well as preserve useful session context.
 
-Keep the current live-development loop as the baseline for an initial trial.
-An explicit "try the new version" button was suggested in discussion, but is
-not a decided requirement. First investigate how to avoid showing intermediate
-broken builds while retaining quick updates. Possible approaches include
-keeping the last working build playable until validation succeeds or applying
-coherent edits together; no delivery mechanism has been selected.
+The 2026-10-25 [development reload flow](development-reloads.md) keeps the current
+game running during edits and offers an explicit **Save and reload** action.
+Agents can mark validated work ready; later source edits clear that signal.
+This improves the existing development loop without retaining build snapshots:
+reload and lazy asset requests still read the current checkout, so intermediate
+work is not isolated. Builder-session integration remains proposed.
 
 For later triage, associate each request/session with its original context,
 clarifications, implementation summary, validation results and commits. Keep

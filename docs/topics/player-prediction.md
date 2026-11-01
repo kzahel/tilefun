@@ -1,5 +1,17 @@
 # Player prediction and moving contacts
 
+[191](../tactical/191-cooperative-physics-laboratory.md) adds a bounded two-client
+Rapier reference with full dynamic-body replay and same-tick error comparisons.
+It uses shared seeded scripts and a coordinated clock; ordinary game prediction
+and independent-clock multiplayer qualification remain unchanged.
+
+[190](../tactical/190-rapier-prediction-and-realm-proof.md) qualifies an alternate
+Rapier backend in an opt-in temporary Realm. It reuses game input encoding,
+acknowledgments, sequence ownership and the history/time bounds now in
+`src/client/PredictionLimits.ts`; the ordinary predictor's behavior is unchanged.
+The alternate adapter uses scratch replay and bounded nearby collision proxies.
+Dynamic pushing remains unqualified; [physics engine](physics-engine.md) routes it.
+
 Topic: player-prediction
 Status: shared camera recovery, snapshot-anchored reload pacing and idle airborne
 support travel verified; local predicted animation and bounded backlog recovery

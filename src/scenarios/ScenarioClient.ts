@@ -62,6 +62,11 @@ export class ScenarioClient {
   private failure: Error | undefined;
 
   constructor(readonly recipe: ScenarioRecipe) {
+    if (recipe.experimentalRapier) {
+      this.worker.terminate();
+      this.channel.close();
+      throw new Error("Rapier recipes require PhysicsLabClient prediction");
+    }
     const physics = scenarioPhysics(recipe.physics);
     this.predictor = new PlayerPredictor(
       () => physics,

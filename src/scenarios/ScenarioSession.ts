@@ -11,6 +11,7 @@ import { railAlignment } from "../railway/RailPath.js";
 import { RoadType } from "../road/RoadType.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
+import type { RealmSimulationOwner } from "../server/RealmSimulationOwner.js";
 import {
   decodeClientMessage,
   encodeClientMessage,
@@ -24,6 +25,7 @@ import { applyScenarioAppearance, type ScenarioRecipe, scenarioPhysics } from ".
 
 /** Temporary host of the production Realm. No timers, DOM, IndexedDB or simulation callbacks. */
 export class ScenarioSession {
+  simulationOwner: RealmSimulationOwner | undefined;
   readonly records = new MemoryRecordStore();
   private store = new RecordPersistenceStore(this.records);
   private transport = new LocalTransport();
@@ -35,7 +37,12 @@ export class ScenarioSession {
   private seq = 0;
   private identities: Record<string, string> = {};
   private closed = false;
-  private constructor(readonly recipe: ScenarioRecipe) {
+  private constructor(
+    readonly recipe: ScenarioRecipe,
+    private readonly simulationFactory?: () => Promise<RealmSimulationOwner>,
+  ) {
+    if (recipe.experimentalRapier && !simulationFactory)
+      throw new Error("Experimental Rapier recipes require an explicit simulation factory");
     if (recipe.version !== 1) throw new Error("Unsupported scenario recipe");
     recipe.props.forEach((p, i) => {
       p.type = `scenario-prop-${i}`;
@@ -74,8 +81,11 @@ export class ScenarioSession {
     this.physics = scenarioPhysics(recipe.physics);
     this.randomState = recipe.generation.seed;
   }
-  static async create(recipe: ScenarioRecipe): Promise<ScenarioSession> {
-    const session = new ScenarioSession(structuredClone(recipe));
+  static async create(
+    recipe: ScenarioRecipe,
+    simulationFactory?: () => Promise<RealmSimulationOwner>,
+  ): Promise<ScenarioSession> {
+    const session = new ScenarioSession(structuredClone(recipe), simulationFactory);
     try {
       await session.open(true);
       return session;
@@ -85,6 +95,7 @@ export class ScenarioSession {
     }
   }
   private async open(fresh: boolean) {
+    this.simulationOwner = await this.simulationFactory?.();
     if (fresh && this.recipe.railwayStarts) {
       if (this.recipe.railwayStarts.length > 4) throw new Error("Too many scenario train starts");
       await this.records.commit(
@@ -128,6 +139,7 @@ export class ScenarioSession {
     this.realm = new Realm([baseGameMod], {
       physics: () => this.physics,
       ambientSpawns: false,
+      ...(this.simulationOwner ? { simulationOwner: this.simulationOwner } : {}),
       ...(this.recipe.parking ? { parking: this.recipe.parking } : {}),
       ...(this.recipe.landscape ? { landscape: this.recipe.landscape } : {}),
       ...(this.recipe.trafficLanes
@@ -402,6 +414,8 @@ export class ScenarioSession {
   }
   async step(input: Movement, dt = 1 / 60, range?: ChunkRange) {
     if (this.closed) throw new Error("Scenario is closed");
+    if (this.recipe.experimentalRapier && Math.abs(dt - 1 / 60) > 1e-6)
+      throw new Error("Rapier scenario inputs require fixed 60 Hz steps");
     if (
       !Number.isFinite(dt) ||
       dt <= 0 ||
@@ -416,10 +430,12 @@ export class ScenarioSession {
     );
     if (message.type !== "player-input") throw new Error("Invalid input codec");
     this.realm.handleMessage(this.player.clientId, this.player, message);
-    this.tick((message.dtMs ?? dt * 1000) / 1000);
+    this.tick(this.recipe.experimentalRapier ? dt : (message.dtMs ?? dt * 1000) / 1000);
   }
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
+    if (this.recipe.experimentalRapier)
+      throw new Error("Rapier proof commands are owned by its experimental backend");
     if (command.kind === "vehicle-transporter-action") {
       this.realm.vehicles.transporter(this.player, command.entityId, command.action);
       return;
@@ -574,6 +590,8 @@ export class ScenarioSession {
     await this.open(true);
   }
   async reload() {
+    if (this.recipe.experimentalRapier)
+      throw new Error("Rapier durable reload is not qualified; use reset");
     const range = this.player.visibleRange;
     if (this.closed) throw new Error("Scenario is closed");
     await this.realm.flushAsync();
@@ -586,6 +604,7 @@ export class ScenarioSession {
     if (this.closed) return;
     this.closed = true;
     await this.realm?.destroy();
+    if (!this.realm) this.simulationOwner?.dispose();
     this.transport.serverSide.close();
   }
 }

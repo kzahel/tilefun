@@ -33,6 +33,15 @@ The worker install supplies the Cloudflare types needed by `npm run typecheck`;
 it is not needed simply to run the browser game/labs. No Cloudflare deployment
 is required for those local tools.
 
+Development serving defaults to player-controlled reloads: edits settle into a
+quiet **Code changed** notice in the game, and `npm run dev:ready` marks completed,
+validated work **Changes ready to try**. Players select **Save and reload** on
+the notice or in the controller-accessible main menu. Subsequent edits clear
+readiness. Workshop/lab pages also require manual refresh in this server mode.
+For ordinary automatic HMR instead, set `TILEFUN_AUTO_RELOAD=1` before starting
+`npm run dev` (PowerShell: `$env:TILEFUN_AUTO_RELOAD = '1'`). See
+[development reloads](topics/development-reloads.md) for guarantees and limits.
+
 The long-running development server uses `node_modules/.vite-dev` for optimized
 dependencies. Manifest rendering uses `.vite-workshop-manifest`; streaming runs
 use their temporary run directory. Keep standalone tooling caches separate from

@@ -1099,6 +1099,11 @@ export class GameClient {
     this.canvas.dataset.ready = "true";
   }
 
+  /** Update the passive development action without changing menu focus. */
+  setDevelopmentUpdate(label: string | null, reload: () => void): void {
+    this.mainMenu.setDevelopmentUpdate(label, reload);
+  }
+
   /** Set hosting info to display in the main menu (when this client is hosting P2P). */
   setHostingInfo(info: import("../ui/HostingBanner.js").HostingInfo): void {
     this.mainMenu.hostingInfo = info;

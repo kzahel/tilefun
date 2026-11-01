@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "physics",
+    name: "Co-op physics laboratory",
+    description:
+      "Two playable clients, dynamic-body replay, shared physics scripts and seeded guest latency. Includes the bridge/scale experiment.",
+    url: "workshop.html#/tool/physics",
+    mode: "source",
+  },
+  {
     id: "car-transporter",
     name: "Car transporter playground",
     description:
@@ -274,6 +282,12 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "physics-prototype",
+    name: "3D physics backend experiment",
+    description: "Schematic Worker/WASM contact and long-structure experiment; no art promotion.",
+    toolId: "physics",
+  },
   {
     id: "original-vehicles",
     name: "Original vehicle review",

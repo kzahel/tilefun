@@ -6,10 +6,10 @@ import { createPlayer } from "../entities/Player.js";
 import { PropManager } from "../entities/PropManager.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { World } from "../world/World.js";
-import { buildLaneGraph, samplePath } from "./LaneGraph.js";
+import { buildLaneGraph, samplePath, turnPath } from "./LaneGraph.js";
 import { TrafficStrategy } from "./TrafficNetwork.js";
 import { TrafficSystem } from "./TrafficSystem.js";
-import { vehicleRoadWidth } from "./Vehicle.js";
+import { applyVehicleFacing, vehicleRoadWidth } from "./Vehicle.js";
 
 function junction(width = 6) {
   const segments = [];
@@ -28,6 +28,46 @@ function junction(width = 6) {
   const incoming = [...graph.lanes.values()].filter((l) => l.to === "40,40");
   return { graph, world, entities, traffic, incoming };
 }
+
+it("restores independently saved turners in one or separate chunks and retains every junction hold", () => {
+  const source = junction();
+  const lane = required(source.incoming.find((l) => l.from === "0,40"));
+  const records = ["compact-1", "compact-2"].map((model, index) => {
+    const car = source.traffic.add(model, lane, 0);
+    car.next = required(source.graph.lanes.get(`40,40>40,${index ? 0 : 80}`));
+    car.turn = turnPath(lane, car.next);
+    car.distance = car.turn.length * 0.95;
+    const pose = samplePath(car.turn, car.distance);
+    car.entity.position = { wx: pose.x, wy: pose.y };
+    applyVehicleFacing(car.entity, pose.direction);
+    return source.traffic.snapshot(car);
+  });
+  for (const separate of [false, true]) {
+    for (const release of ["remove", "drive", "advance"]) {
+      const f = junction();
+      f.traffic.managed = true;
+      if (separate) for (const record of records) f.traffic.restore([record]);
+      else f.traffic.restore(records);
+      const [first, second] = [...f.traffic.states.values()];
+      const a = required(first),
+        b = required(second);
+      expect(f.traffic.save()).toEqual(records);
+      expect(f.traffic.reservations.get(lane.to)).toBe(a.entity.id);
+      if (release === "remove") f.entities.remove(a.entity.id, false);
+      else if (release === "drive") f.traffic.takeControl(a, 1);
+      else {
+        // The other restored turner stays asleep in its own chunk.
+        for (let i = 0; i < 1800 && a.reservation; i++)
+          f.traffic.tick(1 / 60, [], new Set([a.entity]));
+        expect(a.reservation).toBeUndefined();
+      }
+      expect(f.traffic.reservations.get(lane.to)).toBe(b.entity.id);
+      expect(b.reservation).toBe(lane.to);
+      f.entities.remove(b.entity.id, false);
+      expect(f.traffic.reservations.has(lane.to)).toBe(false);
+    }
+  }
+});
 
 it.each([4, 6, 8].flatMap((width) => [-1, 0, 1].map((turn) => [width, turn])))(
   "clears four competing approaches on %s-tile roads with turn %s without overlap",

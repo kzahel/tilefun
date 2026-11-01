@@ -167,6 +167,8 @@ export interface RealmOptions {
   physics?: () => import("../physics/PlayerMovement.js").MovementPhysicsParams;
   random?: () => number;
   ambientSpawns?: boolean;
+  /** Temporary backend proofs replace both player and ambient physics together. */
+  simulationOwner?: import("./RealmSimulationOwner.js").RealmSimulationOwner;
   /** Explicit route source for authored infrastructure/scenarios. */
   railways?: RailRouteSource;
   traffic?: TrafficRouteSource;
@@ -772,6 +774,7 @@ export class Realm {
         if (!mount) this.dismountPlayer(session);
       }
 
+      if (this.options.simulationOwner) continue;
       if (!session.editorEnabled && session.inputQueue.length > 0) {
         // Preserve command order, edges and dt while spreading stall recovery
         // over ticks. Limit physics subdivisions, rather than just packet count.
@@ -989,7 +992,10 @@ export class Realm {
         !dormantClientIds.has(s.clientId) &&
         this.sessionSupported(s, dt),
     );
-    if (activeSessions.length > 0 || (!storagePaused && this.backgroundResidents.size > 0)) {
+    if (this.options.simulationOwner) {
+      if (!storagePaused && activeSessions.length)
+        this.options.simulationOwner.step(dt, activeSessions, this);
+    } else if (activeSessions.length > 0 || (!storagePaused && this.backgroundResidents.size > 0)) {
       const physicsSteps = Math.max(1, this.physicsMult);
       const stepDt = dt / physicsSteps;
       const players = activeSessions.map((s) => s.player);
@@ -1223,7 +1229,7 @@ export class Realm {
         );
 
         for (const [entity, elapsed] of entityTickDts)
-          if (entity.resident)
+          if (entity.resident && entity.wanderAI?.state !== "scared")
             updateResident(entity, elapsed, (p) => this.residentCanOccupy(entity, p, true), active);
 
         // â”€â”€ TickService.preSimulation â”€â”€
@@ -2239,6 +2245,7 @@ export class Realm {
       throw error;
     }
     if (this.saveManager === saves) this.saveManager = null;
+    this.options.simulationOwner?.dispose();
     for (const teardown of this.modTeardowns.values()) teardown();
     this.modTeardowns.clear();
     for (const entity of [...this.entityManager.entities])

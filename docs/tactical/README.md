@@ -12,6 +12,9 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [191 Cooperative physics laboratory](191-cooperative-physics-laboratory.md) | Delivered and validated: two real Realm players, full dynamic replay, seeded shared scenarios and host/guest views; [physics engine](../topics/physics-engine.md) |
+| [190 Rapier prediction and Realm proof](190-rapier-prediction-and-realm-proof.md) | Delivered for inspection: temporary Realm, nearby replay, delay/stall controls; loose-contact corrections remain a migration blocker; [physics engine](../topics/physics-engine.md) |
+| [189 Rapier physics prototype](189-rapier-physics-prototype.md) | Delivered for inspection: shared WASM backend, Worker playground, kilometre bridge and focused checks; prediction/Realm migration pending; [physics engine](../topics/physics-engine.md) |
 | [188 P2P Worker authority](188-p2p-worker-authority.md) | Delivered: shared Worker authority, independent guest links, hidden-host delivery, saved guest edits and focused native lifecycle/performance evidence; [multiplayer](../topics/multiplayer-networking.md) |
 | [187 Shared wildlife finishing](187-shared-wildlife-finishing.md) | Implemented: 206 paint policies, 137 immutable corrections, isolated replays and browser/CI verification; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [186 CI reliability and deployment gate](186-ci-reliability-and-deployment-gate.md) | Locally qualified: dependency patches, browser race repairs, 27-case push gate and full nightly/manual coverage; hosted run pending push; [testing](../topics/testing.md) |

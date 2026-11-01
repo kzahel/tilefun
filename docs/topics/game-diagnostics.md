@@ -2,7 +2,7 @@
 
 Topic: game-diagnostics
 Status: automatic fault intake, durable browser outbox, local authority watchdog and owner inbox delivered; synthetic crash/hang/reload and streaming validation complete.
-Updated: 2026-10-17.
+Updated: 2026-10-25.
 
 Owns fault collection, delivery, retention, access and hang detection. The original
 intermittent map/streaming report remains unreproduced; see the
@@ -33,6 +33,27 @@ were healthy. Live debugging uses the existing device via Machine Control's
 ChromeOS native CDP route; private device details stay outside the repository.
 
 ## Collection and recovery
+
+The 2026-10-25 Chromebook startup failure was reproduced from a private backup
+in the shared Realm with a memory executor. Chunk `-223,97` failed with
+`Saved traffic reservation conflicts.`: separately saved turners in neighboring
+chunks claimed one junction. This also explains how a failed chunk can remain
+empty during play before an arrival fence rejects startup. Traffic restore now
+preserves both saved poses and retains the junction hold until all restored
+occupants clear it. The original backup loads without modifying its records.
+On-device follow-up observed advancing ticks, 313 admitted / 192 evicted chunks
+and zero residency failures; a later capture showed complete ground. This does
+not establish that every transient rendering gap has the same cause.
+See [vehicle persistence](vehicles.md#streamed-junction-recovery-2026-10-25).
+
+Recovery validation passes typechecks, 36 focused traffic unit tests, eight
+Worker/save/traffic browser flows, Node integration, the production build and
+all six streaming readiness stages with zero missing-data/incomplete-cache
+frames. The full unit attempt hit timeouts
+in predator and vehicle-admission tests under competing machine workloads;
+the full unit/browser runs were stopped in favor of affected browser flows.
+Repository lint still reports the unchanged formatting error in
+`docs/benchmarks/188-p2p-worker.json`; changed traffic files pass lint.
 
 The normal game enables reports automatically. Fatal errors preserve their stack;
 map/travel and other typed RPC timeouts retain the request type. Worker probes

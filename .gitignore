@@ -323,3 +323,6 @@ data/
 /public/assets/models/vehicles/car-transporter-v1.glb
 /public/assets/vehicles/car-transporter-v1.png
 /public/assets/vehicles/car-transporter-ramp-v1.png
+
+# Local completion signal for player-controlled development reloads.
+/.tilefun-dev-ready

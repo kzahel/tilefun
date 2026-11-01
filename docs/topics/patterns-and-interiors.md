@@ -159,7 +159,9 @@ rather than silently overwriting the location with an outdoor fallback.
 
 Dev full reload uses Vite's awaited `vite:beforeFullReload` hook to settle and
 save the local authority before navigation. HMR replacement also waits for
-shutdown. Ordinary navigation/crashes cannot await unload: realm transfers are
+shutdown. The default [manual development update](development-reloads.md) awaits
+the same save/shutdown before the player's explicit reload. Ordinary
+navigation/crashes cannot await unload: realm transfers are
 committed immediately, movement checkpoints run every five seconds, and hiding/
 unloading makes a best-effort save. Camera restoration requires both the same
 profile and realm; legacy unscoped coordinates are discarded.

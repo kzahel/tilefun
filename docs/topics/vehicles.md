@@ -49,6 +49,23 @@ Game and Traffic lab share the catalog and lazy GPU paint cache. Missing paint i
 older records retains the original. [Paint variants](../vehicle-paint-variants.md)
 owns the palette, packaging and runtime contracts.
 
+## Streamed junction recovery (2026-10-25)
+
+Independently persisted traffic chunks can contain two cars already turning at
+the same junction. Restore must accept their valid route progress and exact
+poses, including when their chunks arrive separately. Rebuilding the transient
+exclusive reservation map must not reject a whole terrain chunk. Restored
+occupants retain individual holds; the map hands ownership to another occupant
+when its representative clears, is removed, or is taken over by a player.
+Ordinary collision checks still govern movement, and new approaches wait until
+the last hold clears. New junction entry retains the existing exclusive policy.
+
+The original Chromebook save reproduces a limousine/tractor conflict across
+neighboring chunk scopes and now loads unchanged. Native junction regression
+coverage checks combined/separate restoration, exact snapshots and ownership
+handoff on movement, removal and driving. [Game diagnostics](game-diagnostics.md)
+owns the failure and on-device recovery evidence.
+
 ## Desired next work
 
 Owner direction, 2026-10-20: record these three directions as desired follow-ons.
@@ -486,6 +503,18 @@ leaving the seat, menus and focus loss stop playback. Authority expires abandone
 holds after 600ms; browser voices also expire without refresh, including on a lost
 connection. Horn state is not saved. Traffic lab uses the same command, Worker
 event and browser audio; other scenario hosts can consume the shared event.
+
+Starting a honk also startles nearby NPC people and animals within 160 world pixels
+(ten tiles). Wildlife uses its native alert, escape and recovery; ordinary people
+run away at 1.5× walking speed for two seconds before resuming their behavior.
+Outdoor residents temporarily yield their activity route to the same escape.
+Players, attached occupants, ridden animals, dying actors and actors more than
+48 pixels above/below the vehicle are protected. The authority queries only nearby
+actors, preserves collision/habitat checks and records changed animal state.
+Held-horn refreshes do not restart escapes; new honks have a three-second reaction
+cooldown per driver/vehicle seat. Game and embedded labs share this authority path.
+`VehicleControl.test.ts` verifies actual outward travel/recovery for people,
+residents, cats and dogs, plus admission, range, protected actors and repeated honks.
 
 Shared gameplay profiles set ordinary driving speed and acceleration independently
 of approved art/collision banks. All retain held Fast (1.6×):

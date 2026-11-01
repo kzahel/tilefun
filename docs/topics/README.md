@@ -21,6 +21,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Gem progression](gem-progression.md) | Exploration gems, saved balances and future shop/unlock decisions |
 | [Startup loading](startup-loading.md) | First-paint loading shell, actual asset counts and startup readiness/error stages |
 | [Testing](testing.md) | Narrowest effective test level, browser-suite audit and staged migration to existing native coverage |
+| [Development reloads](development-reloads.md) | Passive source-change notices, agent readiness marker and player-controlled save/reload |
 | [Steam Deck and menus](steam-deck-and-menus.md) | Linux Electron package, shared submenus, controller input and multiplayer acceptance |
 | [Touch movement](touch-movement.md) | Joystick, tap and hold modes, local Options preference and contact cancellation |
 | [Pinch zoom](pinch-zoom.md) | Optional two-finger gameplay zoom, saved checkbox and joystick/button arbitration |
@@ -35,6 +36,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Vehicle riders](vehicle-riders.md) | Seated avatar/depth/fallback and automatic-occupant prerequisites for motorcycles and exposed seats |
 | [Trains](trains.md) | Proposed generated town railways, paired local/express tracks, stations, forks, bridges and tunnels |
 | [World geometry](world-geometry.md) | First ramp/deck/passage engine lab; direction and open terrain/indoor decisions for connected stacked spaces |
+| [General 3D physics](physics-engine.md) | Provisional Rapier/WASM subsystem, Worker ownership, prediction and long-structure qualification |
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |
 | [Wildlife](wildlife.md) | Completed 196-entry art roster, shared ecology and hunting, pending exact-art review |
 | [Distinct animal behaviors](wildlife-behaviors.md) | 206-entry behavior audit ledger and generated progress report; land/air first, observable mechanics and game/lab verification |

@@ -17,6 +17,7 @@ import { PeerHostTransport } from "./transport/PeerHostTransport.js";
 import { WebRtcClientTransport } from "./transport/WebRtcClientTransport.js";
 import { WebSocketClientTransport } from "./transport/WebSocketClientTransport.js";
 import { WorkerClientTransport } from "./transport/WorkerClientTransport.js";
+import { DevUpdateNotice } from "./ui/DevUpdateNotice.js";
 import { HostingBanner } from "./ui/HostingBanner.js";
 import { activateMenu, deactivateMenu } from "./ui/MenuNavigation.js";
 import { ProfilePicker } from "./ui/ProfilePicker.js";
@@ -47,6 +48,7 @@ let localHost: WorkerClientTransport | null = null;
 let peerHost: PeerHostTransport | null = null;
 let hostingBanner: HostingBanner | null = null;
 let roomDirectory: RoomDirectory | null = null;
+let devUpdateNotice: DevUpdateNotice | null = null;
 
 const faultReporter = new FaultReporter({
   // Acquire storage inside guarded methods; denied storage must still permit uploads.
@@ -613,8 +615,25 @@ function showErrorOverlay(error: unknown, recoverable = false): void {
   (recoverable ? backBtn : reloadBtn).focus();
 }
 
+// Development updates are passive until the player explicitly saves and reloads.
+async function startWithDevUpdates(): Promise<void> {
+  await start();
+  if (import.meta.env.DEV && import.meta.env.VITE_MANUAL_RELOAD) {
+    devUpdateNotice = new DevUpdateNotice(
+      (label) => client.setDevelopmentUpdate(label, () => void devUpdateNotice?.requestReload()),
+      async () => {
+        await saveSession();
+        client.saveHMRState();
+        await localHost?.shutdown();
+        peerHost?.close();
+        window.location.reload();
+      },
+    );
+  }
+}
+
 // Catch init errors
-start().catch((err) => {
+startWithDevUpdates().catch((err) => {
   console.error("[tilefun] init failed:", err);
   showErrorOverlay(err);
 });
@@ -655,6 +674,7 @@ if (import.meta.hot) {
     peerHost?.close();
   });
   import.meta.hot.dispose((data) => {
+    devUpdateNotice?.destroy();
     disableFirstTouchFullscreen();
     data.localShutdown = localHost?.shutdown();
     document.removeEventListener("visibilitychange", syncLocalVisibility);

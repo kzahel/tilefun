@@ -6,6 +6,16 @@ its shared-memory local mode and “future” multiplayer phases are historical.
 
 ## Runtime ownership
 
+[191](tactical/191-cooperative-physics-laboratory.md) extends the experimental
+physics reference to two real Realm sessions, separate client replicas and full
+small-world dynamic-body replay. Its shared scenario coordinator clock permits
+repeatable pause/step; it does not replace independently scheduled game hosting.
+
+[190](tactical/190-rapier-prediction-and-realm-proof.md) adds an explicit temporary
+Realm simulation owner for a Rapier backend proof. It reuses input/acknowledgment,
+replication and Worker transport, with alternate local physics prediction. Ordinary
+GameServer worlds omit this owner and retain the behavior described below.
+
 | Owner | Responsibility |
 | --- | --- |
 | [GameClient](../src/client/GameClient.ts) | Browser input, scenes, rendering and client state view |

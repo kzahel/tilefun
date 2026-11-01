@@ -154,6 +154,8 @@ Off-road cars stay parked and saved; cars on suitable roads resume traffic.
 See [vehicle driving](docs/tactical/087-player-driven-cars-and-trains.md). Driving keeps on-screen action buttons visible even on desktop:
 hold **Fast / Shift** to go faster and hold **Horn / H** to honk for as long as you
 hold it (**Whistle / H** in trains). Release to stop.
+Honking makes nearby people, cats, dogs and other animals briefly scatter away
+from the vehicle, then settle back to their usual behavior.
 Sportier cars drive faster; buses and heavy trucks accelerate more slowly. Driven
 cars and all trains gently nudge players and movable animals/balls, with stronger
 pushing from heavier vehicles. A blocked push stops the vehicle. Driven cars and

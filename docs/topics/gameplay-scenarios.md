@@ -13,6 +13,13 @@ an explicit test mode.
 aligned with engine changes, including presentation and lifecycle contracts.
 Shared simulation does not mean every lab runs the game's complete frame loop.
 
+The [cooperative physics reference](../tactical/191-cooperative-physics-laboratory.md)
+adds a second real Realm session through the existing Realm API. Its specialized
+Worker/native host shares scenarios, codecs, replication and full Rapier replay,
+with an explicit coordinated clock for repeatable stepping. This is a bounded
+experimental exception to ordinary labs' single-participant composition; general
+multiplayer and independent-clock qualification remain outside that proof.
+
 ## Composition
 
 `src/scenarios/ScenarioRecipe.ts` defines versioned plain data: generator identity,

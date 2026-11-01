@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-01",
+  "cpu": "Apple M4 Pro",
+  "platform": "darwin",
+  "rapier": "0.21.0",
+  "framesPerLane": 600,
+  "warmupFrames": 180,
+  "limits": "Accelerated single-process Node/WASM fixture; all static geometry resident; no rendering, Worker, networking, AI, persistence or Chromebook measurement. Step timers include adapter and engine but exclude pose packing/publication. No production speedup comparison.",
+  "lanes": [
+    {
+      "sections": 8,
+      "lengthMetres": 32,
+      "initialObjects": 0,
+      "initializationMs": 27.723208999999997,
+      "stepMeanMs": 0.031016611666666593,
+      "stepP95Ms": 0.04866699999999469,
+      "stepP99Ms": 0.10016600000000153,
+      "colliders": 38
+    },
+    {
+      "sections": 8,
+      "lengthMetres": 32,
+      "initialObjects": 128,
+      "initializationMs": 1.6185000000000116,
+      "stepMeanMs": 0.4307449766666673,
+      "stepP95Ms": 0.6034589999999866,
+      "stepP99Ms": 0.7259579999999914,
+      "colliders": 157
+    },
+    {
+      "sections": 64,
+      "lengthMetres": 256,
+      "initialObjects": 0,
+      "initializationMs": 2.089999999999918,
+      "stepMeanMs": 0.025734488333331265,
+      "stepP95Ms": 0.032583000000045104,
+      "stepP99Ms": 0.06720900000004804,
+      "colliders": 262
+    },
+    {
+      "sections": 64,
+      "lengthMetres": 256,
+      "initialObjects": 128,
+      "initializationMs": 2.381915999999933,
+      "stepMeanMs": 0.4757476933333337,
+      "stepP95Ms": 0.766208000000006,
+      "stepP99Ms": 0.8509999999999991,
+      "colliders": 382
+    },
+    {
+      "sections": 256,
+      "lengthMetres": 1024,
+      "initialObjects": 0,
+      "initializationMs": 6.003790999999978,
+      "stepMeanMs": 0.07234753333333345,
+      "stepP95Ms": 0.11470899999994799,
+      "stepP99Ms": 0.14437500000008185,
+      "colliders": 1030
+    },
+    {
+      "sections": 256,
+      "lengthMetres": 1024,
+      "initialObjects": 128,
+      "initializationMs": 5.870499999999993,
+      "stepMeanMs": 0.4829415533333353,
+      "stepP95Ms": 0.7220830000001115,
+      "stepP99Ms": 0.8252910000001066,
+      "colliders": 1149
+    }
+  ]
+}

@@ -1,5 +1,21 @@
 # Embedded engine labs
 
+[191](../tactical/191-cooperative-physics-laboratory.md) adds the two-client physics
+reference: one real temporary Realm, two sessions/replicas, full dynamic replay and
+shared native/visual scripts. Its explicit coordinator clock enables repeatable
+pause/step; it does not claim parity with independently scheduled game clocks.
+
+[189](../tactical/189-rapier-physics-prototype.md) introduced the isolated backend
+experiment at Workshop → 3D physics playground.
+[190](../tactical/190-rapier-prediction-and-realm-proof.md) now hosts it through a
+real ScenarioSession/Realm using an explicit whole-scene simulation owner, normal
+input/replication and RemoteStateView. Rapier owns contacts throughout that temporary
+scene; the old physics/AI phase does not also step it. The host still uses diagnostic
+Three.js meshes and an alternate Rapier replay adapter, not ScenarioPresentationHost
+or the ordinary PlayerPredictor. Unsupported generic commands/durable reload reject
+explicitly. [The provisional plan](physics-engine.md) requires more qualification
+before normal gameplay migration; other embedded labs retain their current engine.
+
 [175](../tactical/175-vehicle-depot-and-walkable-ramps.md) extends the same shared
 transporter support/collision and local-depth presentation with walkable steel
 tracks and decks. Both the existing Worker playground and normal game consume it;

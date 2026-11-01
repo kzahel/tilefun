@@ -1,0 +1,152 @@
+import { beforeAll, expect, it } from "vitest";
+import { poseDistance } from "./FullWorldPredictor.js";
+import { PairAuthority } from "./PairAuthority.js";
+import { PairHarness } from "./PairHarness.js";
+import { PhysicsLink } from "./PhysicsLink.js";
+import { PAIR_SCENARIOS, pairInput, setupPair } from "./PhysicsScenarios.js";
+import { initRapier, RapierWorld } from "./RapierWorld.js";
+
+beforeAll(initRapier);
+it("restores contact state and both motors, then reproduces a dynamic push exactly", () => {
+  const authority = new RapierWorld(2, 0),
+    replay = new RapierWorld(2, 0);
+  try {
+    setupPair(authority, "opposed");
+    for (let tick = 1; tick <= 55; tick++)
+      authority.step(pairInput("opposed", 0, tick), pairInput("opposed", 1, tick));
+    replay.restoreFull(authority.snapshot());
+    for (let tick = 56; tick < 160; tick++) {
+      const inputs = [pairInput("opposed", 0, tick), pairInput("opposed", 1, tick)] as const;
+      authority.step(...inputs);
+      replay.step(...inputs);
+      expect(poseDistance(authority.poses(), replay.poses())).toBeLessThan(0.00001);
+      expect([...replay.poses()]).toEqual([...authority.poses()]);
+    }
+  } finally {
+    authority.dispose();
+    replay.dispose();
+  }
+});
+it.each(PAIR_SCENARIOS)(
+  "runs $name through two real Realm sessions and converges under jitter",
+  async ({ id }) => {
+    const authority = await PairAuthority.create(id);
+    const harness = new PairHarness(
+      { scene: id, rtt: 200, jitter: 20, seed: 713 },
+      authority,
+      authority.frame(),
+    );
+    try {
+      for (let tick = 0; tick < 300; tick++) await harness.step();
+      if (id !== "lift") {
+        const cube = authority.session.realm.entityManager.entities.find(
+          (actor) => Math.abs((actor.collider?.physicalHeight ?? 0) - 12.8) < 0.001,
+        );
+        expect(cube?.collider?.width).toBeCloseTo(12.8);
+        const index = [...harness.latest.poses].findIndex(
+          (value, i) => i % 14 === 0 && value === 2,
+        );
+        expect((cube?.wz ?? 0) / 16).toBeCloseTo((harness.latest.poses[index + 2] ?? 0) - 0.4, 5);
+      }
+      expect(harness.latest.lateInputs).toBe(0);
+      expect(harness.queued).toBeLessThan(40);
+      expect(harness.latest.snapshot.ack[0]).toBeGreaterThan(290);
+      expect(harness.latest.snapshot.ack[1]).toBeGreaterThan(290);
+      for (const seat of [0, 1] as const) {
+        const predictor = harness.clients[seat];
+        expect(predictor.diagnostics.recoveries).toBe(0);
+        expect(predictor.diagnostics.correction).toBeLessThan(0.001);
+        expect(predictor.diagnostics.comparedTick).toBeGreaterThan(285);
+        const replica = harness.replicas[seat];
+        const frame = harness.received[seat];
+        expect(replica.lastProcessedInputSeq).toBe(frame?.snapshot.ack[seat]);
+        expect(replica.serverPlayerEntity.position.wx / 16).toBeCloseTo(
+          frame?.snapshot.state.motors[seat]?.x ?? 0,
+          2,
+        );
+      }
+    } finally {
+      await harness.close();
+    }
+  },
+  15000,
+);
+it("seeded links preserve order and enforce memory bounds", () => {
+  const a = new PhysicsLink<number>(50, 20, 9),
+    b = new PhysicsLink<number>(50, 20, 9);
+  for (let i = 0; i < 20; i++) {
+    a.push(i * 5, i, 8);
+    b.push(i * 5, i, 8);
+  }
+  const delivered: number[] = [];
+  for (let time = 0; time < 250; time++) {
+    const values = a.drain(time);
+    expect(values).toEqual(b.drain(time));
+    delivered.push(...values);
+  }
+  expect(delivered).toEqual(Array.from({ length: 20 }, (_, i) => i));
+  expect(() => a.push(0, 1, 17 * 1024 * 1024)).toThrow("bound");
+  a.clear();
+  expect(a.pending).toBe(0);
+});
+
+it("repeats a scripted network trace with the same seed and bounds a missing-history recovery", async () => {
+  const traces: number[][][] = [];
+  for (let run = 0; run < 2; run++) {
+    const authority = await PairAuthority.create("opposed");
+    const harness = new PairHarness(
+      { scene: "opposed", rtt: 200, jitter: 20, seed: 713 },
+      authority,
+      authority.frame(),
+    );
+    const trace: number[][] = [];
+    try {
+      for (let tick = 0; tick < 140; tick++) {
+        await harness.step();
+        trace.push([...harness.latest.poses, harness.clients[1].diagnostics.comparedTick]);
+      }
+      traces.push(trace);
+      expect(harness.clients[1].diagnostics.maxCorrection).toBeGreaterThan(0.01);
+      expect(harness.clients[1].diagnostics.maxCorrection).toBeLessThan(0.3);
+      const initialTick = harness.latest.snapshot.state.motors[0]?.tick ?? 0;
+      const predictor = harness.clients[0];
+      for (let i = 0; i < 40; i++)
+        predictor.advance(predictor.tick + 1, { x: 0, z: 0, jump: false });
+      // A fresh authority frame beyond the last delivery, but too far behind live.
+      const next = await authority.step([]);
+      predictor.receive(next.snapshot);
+      expect(predictor.diagnostics.recoveries).toBe(1);
+      expect(predictor.tick).toBe(initialTick + 1);
+      predictor.receive(harness.latest.snapshot);
+      expect(predictor.tick).toBe(initialTick + 1);
+    } finally {
+      await harness.close();
+    }
+  }
+  expect(traces[0]).toEqual(traces[1]);
+});
+
+it("retains an odd-tick entity change until the next delivered replication frame", async () => {
+  const authority = await PairAuthority.create("push");
+  const harness = new PairHarness(
+    { scene: "push", rtt: 200, jitter: 20, seed: 713 },
+    authority,
+    authority.frame(),
+  );
+  try {
+    for (let tick = 0; tick < 20; tick++) await harness.step();
+    const cube = authority.session.realm.entityManager.entities.find(
+      (actor) => Math.abs((actor.collider?.physicalHeight ?? 0) - 12.8) < 0.001,
+    );
+    if (!cube) throw Error("Missing dynamic cube");
+    cube.noShadow = true;
+    authority.session.realm.records?.changed(cube);
+    await harness.step();
+    expect(harness.latest.frames).toEqual([[], []]);
+    for (let tick = 0; tick < 20; tick++) await harness.step();
+    for (const replica of harness.replicas)
+      expect(replica.entities.find((actor) => actor.id === cube.id)?.noShadow).toBe(true);
+  } finally {
+    await harness.close();
+  }
+});

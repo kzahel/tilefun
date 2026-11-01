@@ -2,6 +2,7 @@ import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { Direction } from "../entities/Entity.js";
+import { createPerson1 } from "../entities/Person.js";
 import { createPlayer } from "../entities/Player.js";
 import { TrainTapMovement } from "../input/TrainTapMovement.js";
 import { Camera } from "../rendering/Camera.js";
@@ -12,6 +13,8 @@ import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { buildLaneGraph, samplePath } from "../traffic/LaneGraph.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
+import { createFauna } from "../wildlife/Fauna.js";
+import { HORN_STARTLE_RADIUS } from "./HornReaction.js";
 import { PlayerSession } from "./PlayerSession.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
@@ -400,6 +403,99 @@ it("admits horn events only from the driver, rate limits them, and broadcasts th
     expect(s.realm.vehicles.takeHorns()).toEqual([expect.objectContaining({ active: false })]);
     s.realm.vehicles.honk(s.player);
     expect(s.realm.vehicles.takeHorns()).toEqual([]);
+  } finally {
+    await s.close();
+  }
+});
+
+it("makes nearby people, cats and dogs escape from an admitted honk and then settle", async () => {
+  const s = await ScenarioSession.create(recipe());
+  try {
+    const r = s.realm,
+      car = required(r.traffic?.states.get(required(s.handles.car))).entity,
+      origin = { ...car.position };
+    const person = r.entityManager.spawn(createPerson1(origin.wx + 90, origin.wy));
+    const resident = r.entityManager.spawn(createPerson1(origin.wx - 90, origin.wy));
+    resident.resident = {
+      homeRealm: "home",
+      parentRealm: "outside",
+      doorId: "door",
+      place: "outside",
+      inside: [],
+      outside: [{ id: "rest", ...resident.position, action: "rest", seconds: 30 }],
+      index: 0,
+      phase: "act",
+      elapsed: 0,
+      retry: 0,
+      path: [],
+    };
+    const cat = r.entityManager.spawn(createFauna("cat", origin.wx, origin.wy - 100));
+    const dog = r.entityManager.spawn(createFauna("dog", origin.wx, origin.wy + 100));
+    const distance = (e: typeof person) =>
+      Math.hypot(e.position.wx - origin.wx, e.position.wy - origin.wy);
+    r.vehicles.honk(s.player);
+    expect(person.wanderAI?.state).toBe("idle");
+    expect(cat.fauna?.alarmFrom).toBeUndefined();
+    r.vehicles.enter(s.player, car.id);
+    r.vehicles.honk(s.player);
+    expect(person.wanderAI?.state).toBe("scared");
+    expect(cat.fauna?.alarmFrom).toEqual(origin);
+    expect(dog.fauna?.alarmFrom).toEqual(origin);
+    for (let i = 0; i < 90; i++) {
+      if (i % 12 === 0) r.vehicles.honk(s.player);
+      await s.step(idle);
+    }
+    expect(distance(person)).toBeGreaterThan(120);
+    expect(distance(resident)).toBeGreaterThan(120);
+    expect(distance(cat)).toBeGreaterThan(110);
+    expect(distance(dog)).toBeGreaterThan(110);
+    for (let i = 0; i < 270; i++) await s.step(idle);
+    expect(person.wanderAI?.scaredTimer).toBeUndefined();
+    expect(resident.wanderAI?.scaredTimer).toBeUndefined();
+    expect(cat.fauna?.alarmFrom).toBeUndefined();
+    expect(dog.fauna?.alarmFrom).toBeUndefined();
+    expect(cat.wanderAI?.state).not.toBe("scared");
+    expect(dog.wanderAI?.state).not.toBe("scared");
+  } finally {
+    await s.close();
+  }
+});
+
+it("bounds horn reactions, protects players and mounts, and does not restart escapes on horn spam", async () => {
+  const s = await ScenarioSession.create(recipe());
+  try {
+    const r = s.realm,
+      car = required(r.traffic?.states.get(required(s.handles.car))).entity,
+      { wx, wy } = car.position;
+    const distant = r.entityManager.spawn(createPerson1(wx + HORN_STARTLE_RADIUS + 1, wy));
+    const elevated = r.entityManager.spawn(createPerson1(wx + 60, wy));
+    elevated.wz = 64;
+    const horse = r.entityManager.spawn(createFauna("horse", wx, wy + 90));
+    required(horse.wanderAI).state = "ridden";
+    const attached = r.entityManager.spawn(createPerson1(wx - 60, wy));
+    attached.parentId = car.id;
+    const player = r.entityManager.spawn(createPlayer(wx, wy - 90));
+    const person = r.entityManager.spawn(createPerson1(wx + 90, wy));
+    r.vehicles.enter(s.player, car.id);
+    r.vehicles.honk(s.player);
+    expect(distant.wanderAI?.state).toBe("idle");
+    expect(elevated.wanderAI?.state).toBe("idle");
+    expect(horse.wanderAI?.state).toBe("ridden");
+    expect(horse.fauna?.alarmFrom).toBeUndefined();
+    expect(attached.wanderAI?.state).toBe("idle");
+    expect(player.velocity).toEqual({ vx: 0, vy: 0 });
+    required(person.wanderAI).scaredTimer = 0.25;
+    r.vehicles.honk(s.player, false);
+    r.vehicles.honk(s.player, true);
+    expect(person.wanderAI?.scaredTimer).toBe(0.25);
+    const late = r.entityManager.spawn(createPerson1(wx, wy - 100));
+    r.worldAPI.advanceTime(0.2);
+    r.vehicles.honk(s.player, true);
+    expect(late.wanderAI?.state).toBe("idle");
+    r.worldAPI.advanceTime(3);
+    r.vehicles.honk(s.player, false);
+    r.vehicles.honk(s.player, true);
+    expect(late.wanderAI?.state).toBe("scared");
   } finally {
     await s.close();
   }

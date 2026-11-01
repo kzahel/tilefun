@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-01T15:19:20.244Z",
+  "cpu": "Apple M4 Pro",
+  "platform": "darwin",
+  "inputDelaySteps": 6,
+  "snapshotDelaySteps": "6–8, ordered",
+  "limits": "Accelerated single-process Node/WASM roles, not Worker/Chromebook headroom. No Realm codec, render or persistence cost. Dynamic proxies extrapolate for 100 ms. Replay totals include restoration and all scratch slices. No production performance comparison.",
+  "lanes": [
+    {
+      "name": "ramp",
+      "frames": 600,
+      "maxPending": 15,
+      "finalBodies": 2,
+      "authorityStepMs": {
+        "count": 600,
+        "p95": 0.03395899999998164,
+        "max": 0.20662500000003092
+      },
+      "completeReplayMs": {
+        "count": 296,
+        "p95": 0.4390419999999722,
+        "max": 2.123916999999949
+      },
+      "correctionMetres": {
+        "count": 296,
+        "p95": 0,
+        "max": 0
+      },
+      "supportRelativeCorrectionMetres": {
+        "count": 296,
+        "p95": 0,
+        "max": 0
+      }
+    },
+    {
+      "name": "lift",
+      "frames": 600,
+      "maxPending": 15,
+      "finalBodies": 2,
+      "authorityStepMs": {
+        "count": 600,
+        "p95": 0.07645800000000236,
+        "max": 0.1047500000000241
+      },
+      "completeReplayMs": {
+        "count": 297,
+        "p95": 0.8837500000000205,
+        "max": 1.3136670000000095
+      },
+      "correctionMetres": {
+        "count": 297,
+        "p95": 0,
+        "max": 0.019547700881958008
+      },
+      "supportRelativeCorrectionMetres": {
+        "count": 297,
+        "p95": 0,
+        "max": 0
+      }
+    },
+    {
+      "name": "loose-contact",
+      "frames": 600,
+      "maxPending": 15,
+      "finalBodies": 18,
+      "authorityStepMs": {
+        "count": 600,
+        "p95": 0.13283300000000509,
+        "max": 0.4628749999999968
+      },
+      "completeReplayMs": {
+        "count": 295,
+        "p95": 1.591707999999926,
+        "max": 2.26887499999998
+      },
+      "correctionMetres": {
+        "count": 295,
+        "p95": 0.183392857612358,
+        "max": 0.6386278786781363
+      },
+      "supportRelativeCorrectionMetres": {
+        "count": 295,
+        "p95": 0.183392857612358,
+        "max": 0.6386278786781363
+      }
+    }
+  ]
+}
