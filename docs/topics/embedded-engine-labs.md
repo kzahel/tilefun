@@ -1,5 +1,11 @@
 # Embedded engine labs
 
+[196](../tactical/196-restore-controlled-player-pushing.md) restores intended player
+pushing through the shared motor response, with positive idle-recipient movement,
+bounded speed and release/wall checks. The cube-free pushing script shares visual
+and native inputs. This supersedes 195's no-push behavior without reintroducing
+previous-velocity feedback.
+
 [195](../tactical/195-player-contact-feedback.md) fixes controlled-player velocity
 feedback in the shared Rapier motor. Relative collider sweeps and normal-motion
 clipping serve authority and both predictors. Two cube-free contact/release scripts

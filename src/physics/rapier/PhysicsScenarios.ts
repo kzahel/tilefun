@@ -10,11 +10,13 @@ export type PairScenario =
   | "start-stop"
   | "reversal"
   | "player-head-on"
-  | "player-glance";
+  | "player-glance"
+  | "player-push";
 export const PAIR_SCENARIOS: { id: PairScenario; name: string }[] = [
   { id: "push", name: "Push while watched" },
   { id: "opposed", name: "Opposing pushes" },
   { id: "push-player", name: "Push into player" },
+  { id: "player-push", name: "Players pushing / release" },
   { id: "player-head-on", name: "Players head-on" },
   { id: "player-glance", name: "Players glancing / release" },
   { id: "lift", name: "Shared lift and jump" },
@@ -30,7 +32,7 @@ export function setupPair(world: RapierWorld, scene: PairScenario) {
           { x: -3.65, y: y + 0.2, z: 6.5 },
           { x: -2.35, y: y + 0.2, z: 6.5 },
         ]
-      : scene === "player-head-on" || scene === "player-glance"
+      : scene === "player-head-on" || scene === "player-glance" || scene === "player-push"
         ? [
             { x: -16, y, z: 0 },
             { x: -14, y, z: scene === "player-glance" ? 0.1 : 0 },
@@ -42,14 +44,15 @@ export function setupPair(world: RapierWorld, scene: PairScenario) {
     scene === "lift" ||
       scene === "start-stop" ||
       scene === "player-head-on" ||
-      scene === "player-glance"
+      scene === "player-glance" ||
+      scene === "player-push"
       ? null
       : { x: -12.5, y: 0.42, z: 0 },
   );
 }
 /** Tick-addressed inputs, shared by visual playback and native tests. */
 export function pairInput(scene: PairScenario, seat: PhysicsSeat, tick: number): PhysicsInput {
-  if (scene === "player-head-on" || scene === "player-glance") {
+  if (scene === "player-head-on" || scene === "player-glance" || scene === "player-push") {
     if (tick < 30 || tick >= 90) return NEUTRAL;
     return seat === 0
       ? { x: 1, z: 0, jump: false }

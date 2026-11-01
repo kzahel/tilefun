@@ -5143,7 +5143,7 @@
       "prompt": "Two playable clients share one temporary Realm. Replay dynamic cubes and both players with seeded guest latency, scripted interactions, pause and single-step. Bridge/scale prototype remains available; ordinary game physics is unchanged.",
       "url": "/tilefun/workshop.html#/tool/physics",
       "excluded": "Interactive backend experiment; not an immutable art approval snapshot.",
-      "fingerprint": "54c7fcdc0bf9cd156cb36415ee52cb116fd9a1a7160ca755e812edc64fd93607"
+      "fingerprint": "43ca9b2a17e71b11c8ab7015b0e2b365933dd55dafe7877b51898997608051a4"
     },
     {
       "id": "geometry:city-shopping-v1",
@@ -56158,5 +56158,5 @@
       }
     }
   ],
-  "inputDigest": "f7549758ac43e73537151327f8a1a54b87530158874126c0eee7b45404abbc3c"
+  "inputDigest": "60691b845700d4d47f52f5bb5c16629aa23f6146ad80d0280089cd6a1aa6ef89"
 }

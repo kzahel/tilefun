@@ -182,25 +182,27 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
   ).toBe(true);
   await page.screenshot({ path: test.info().outputPath("quick-reversal.png"), fullPage: true });
   await page.getByRole("button", { name: "Pause", exact: true }).click();
-  await page.getByRole("button", { name: "Players glancing / release", exact: true }).click();
+  await page.getByRole("button", { name: "Players pushing / release", exact: true }).click();
   await page.getByRole("button", { name: "Replay script", exact: true }).click();
   await expect.poll(() => value(0, "tick")).toBe(0);
   await expect(host).toHaveAttribute("data-ready", "true");
   await page.getByRole("button", { name: "Resume", exact: true }).click();
   await expect.poll(() => value(0, "tick")).toBeGreaterThan(65);
   await page.screenshot({
-    path: test.info().outputPath("players-glancing-contact.png"),
+    path: test.info().outputPath("players-pushing-playback.png"),
     fullPage: true,
   });
   await expect.poll(() => value(0, "tick")).toBeGreaterThan(140);
   const released = [await value(0, "authority-x"), await value(1, "authority-x")];
+  // The guest has no movement input: this must be a real authoritative push.
+  expect(released[1]).toBeGreaterThan(-13);
   await expect.poll(() => value(0, "tick")).toBeGreaterThan(220);
   for (const seat of [0, 1])
     expect(Math.abs((await value(seat, "authority-x")) - (released[seat] ?? 0))).toBeLessThan(
       0.002,
     );
   await page.screenshot({
-    path: test.info().outputPath("players-glancing-released.png"),
+    path: test.info().outputPath("players-pushing-released.png"),
     fullPage: true,
   });
   await page.getByRole("link", { name: "All tools", exact: true }).click();

@@ -12,6 +12,7 @@ function step(world: RapierWorld, frames: number, input = idle) {
 
 describe("experimental shared Rapier backend", () => {
   it.each([
+    { name: "head-on push into idle player", offset: 0, opposed: false },
     { name: "head-on simultaneous", offset: 0, opposed: true },
     { name: "glancing release feedback", offset: 0.1, opposed: false },
     { name: "glancing speed burst", offset: 0.3, opposed: false },
@@ -64,6 +65,10 @@ describe("experimental shared Rapier backend", () => {
           expect(maxSpeed).toBeLessThan(PHYSICS_WALK_SPEED + 0.05);
           expect(minSeparation).toBeGreaterThan(0.565);
           expect(maxHeight).toBeLessThan(0.7);
+          // Removing runaway velocity must preserve pushing: the idle actor
+          // must travel, in BOTH seat orders, even though it has no input.
+          if (offset === 0 && !opposed)
+            expect(world.motorFor(controlled === 0 ? 1 : 0).x).toBeGreaterThan(-13);
           // Contact must not trap either actor when input turns away.
           const before = [world.motorFor(0), world.motorFor(1)] as const;
           for (let tick = 0; tick < 30; tick++) world.step({ ...idle, z: -1 }, { ...idle, z: 1 });
@@ -129,6 +134,61 @@ describe("experimental shared Rapier backend", () => {
         expect(first.z).toBeGreaterThan(-0.425);
         expect(Math.hypot(first.x - second.x, first.z - second.z)).toBeGreaterThan(0.565);
       }
+    } finally {
+      world.dispose();
+    }
+  });
+
+  it("bounds combined sideways pushing and the recipient's own walking", () => {
+    const world = new RapierWorld(2, 0);
+    try {
+      world.configurePair(
+        [
+          { x: -15.58, y: 0.67, z: 0 },
+          { x: -15, y: 0.67, z: 0 },
+        ],
+        null,
+      );
+      step(world, 30);
+      let maxSpeed = 0;
+      for (let tick = 0; tick < 60; tick++) {
+        const before = [world.motorFor(0), world.motorFor(1)] as const;
+        world.step({ ...idle, x: 1 }, { ...idle, z: 1 });
+        for (const seat of [0, 1] as const) {
+          const after = world.motorFor(seat);
+          maxSpeed = Math.max(
+            maxSpeed,
+            Math.hypot(after.x - before[seat].x, after.z - before[seat].z) / PHYSICS_DT,
+          );
+        }
+      }
+      expect(maxSpeed).toBeLessThan(PHYSICS_WALK_SPEED + 0.05);
+      expect(world.motorFor(1).z).toBeGreaterThan(4);
+    } finally {
+      world.dispose();
+    }
+  });
+
+  it("pushes an idle actor up to a wall without pushing either capsule through it", () => {
+    const world = new RapierWorld(2, 0);
+    try {
+      world.configurePair(
+        [
+          { x: -15.58, y: 0.67, z: 0 },
+          { x: -15, y: 0.67, z: 0 },
+        ],
+        null,
+      );
+      world.world.createCollider(RAPIER.ColliderDesc.cuboid(0.1, 1, 2).setTranslation(-14.3, 1, 0));
+      for (let tick = 1; tick <= 150; tick++) {
+        world.step(tick >= 30 && tick < 120 ? { ...idle, x: 1 } : idle);
+        const first = world.motorFor(0),
+          second = world.motorFor(1);
+        expect(first.x).toBeLessThan(-14.665);
+        expect(second.x).toBeLessThan(-14.665);
+        expect(Math.hypot(first.x - second.x, first.z - second.z)).toBeGreaterThan(0.565);
+      }
+      expect(world.motorFor(1).x).toBeGreaterThan(-14.85);
     } finally {
       world.dispose();
     }

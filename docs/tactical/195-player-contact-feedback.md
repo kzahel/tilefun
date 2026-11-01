@@ -2,6 +2,8 @@
 
 Status: delivered and validated locally for owner inspection, 2026-11-01.
 [Physics engine](../topics/physics-engine.md) owns the continuing direction.
+The owner rejected the no-push gameplay policy after delivery; [196](196-restore-controlled-player-pushing.md)
+restores bounded player pushing. This record describes the earlier implementation.
 
 ## Reproduction and cause
 

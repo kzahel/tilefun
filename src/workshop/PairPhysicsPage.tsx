@@ -512,8 +512,8 @@ Displayed frame step max ${((maxDisplayed[seat] ?? 0) * 100).toFixed(2)} cm · r
         Realm/input/replication code, but uses a coordinated clock rather than the game’s
         independent server scheduler. Full snapshots are a correctness reference, not a shipping
         bandwidth or Chromebook performance claim. Characters remain controlled capsules, not freely
-        tumbling rigid bodies. Player contact blocks inward movement while allowing sliding, jumping
-        and walking away; it does not transfer walking velocity into the other motor.
+        tumbling rigid bodies. Players can push each other with a bounded shared contact response;
+        sliding, jumping and walking away remain available, and release stops the push.
       </p>
     </section>
   );

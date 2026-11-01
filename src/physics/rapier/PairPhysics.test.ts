@@ -7,7 +7,7 @@ import { PAIR_SCENARIOS, pairInput, setupPair } from "./PhysicsScenarios.js";
 import { initRapier, RapierWorld } from "./RapierWorld.js";
 
 beforeAll(initRapier);
-it.each(["opposed", "player-head-on", "player-glance"] as const)(
+it.each(["opposed", "player-head-on", "player-glance", "player-push"] as const)(
   "restores and exactly replays both motors and contacts in %s",
   (scene) => {
     const authority = new RapierWorld(2, 0),

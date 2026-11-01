@@ -10,6 +10,7 @@ for (const scene of [
   "start-stop",
   "opposed",
   "reversal",
+  "player-push",
   "player-head-on",
   "player-glance",
 ] as const) {
@@ -27,7 +28,8 @@ for (const scene of [
     const sources: [Set<string>, Set<string>] = [new Set(), new Set()];
     const firstPushGap: (number | undefined)[] = [],
       previousCubeX: (number | undefined)[] = [];
-    let previousMotors = harness.latest.snapshot.state.motors;
+    const initialMotors = harness.latest.snapshot.state.motors;
+    let previousMotors = initialMotors;
     let releasedMotors: typeof previousMotors | undefined;
     let maxAuthoritySpeed = 0,
       maxReleaseDrift = 0;
@@ -75,6 +77,13 @@ for (const scene of [
         scene,
         mode,
         lateInputs: harness.latest.lateInputs,
+        authorityDisplacementFromStartMetres: harness.latest.snapshot.state.motors.map(
+          (motor, seat) => ({
+            seat,
+            x: motor.x - (initialMotors[seat]?.x ?? motor.x),
+            z: motor.z - (initialMotors[seat]?.z ?? motor.z),
+          }),
+        ),
         maxAuthorityHorizontalSpeedMetresPerSecond: maxAuthoritySpeed,
         maxAuthorityDriftAfterTick141Metres: maxReleaseDrift,
         finalPhysicsHash: createHash("sha256")
@@ -105,7 +114,7 @@ const report = `${JSON.stringify(
     rttMs: 200,
     jitterPerDirectionMs: 20,
     limits:
-      "Accelerated native coordinator, not browser frames or GPU timing. Same-tick past error, same-present raw rebase and sampled displayed position are separate metrics. Contact components share one timeline and one rigid transform; idle clients buffer the scene. First-push gap uses the authored unrotated cube half-width and allows sub-step snapshot/controller error. 195 adds motor/motor swept contacts shared by authority and prediction; 194's display policy is unchanged. Authority speed is measured every fixed tick, independently of presentation. Drift after tick 141 is meaningful for scripts whose input has already stopped. Unknown remote inputs still cause corrections. Compare final physics hashes across modes within each scene.",
+      "Accelerated native coordinator, not browser frames or GPU timing. Same-tick past error, same-present raw rebase and sampled displayed position are separate metrics. Contact components share one timeline and one rigid transform; idle clients buffer the scene. First-push gap uses the authored unrotated cube half-width and allows sub-step snapshot/controller error. 196 shares bounded push displacement between player motors using current proposals; 195's relative sweeps and 194's display policy remain. Authority speed is measured every fixed tick, independently of presentation. Drift after tick 141 is meaningful for scripts whose input has already stopped. Unknown remote inputs still cause corrections. Compare final physics hashes across modes within each scene.",
     results,
   },
   null,
