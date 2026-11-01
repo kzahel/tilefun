@@ -1,5 +1,10 @@
 # Embedded engine labs
 
+[194](../tactical/194-coherent-contact-presentation.md) replaces per-body display
+offsets with coherent component timelines/rigid transforms. Idle views buffer
+whole scenes; local activity predicts its contact component. First-push mesh-gap
+checks qualify the reported observer case; both-active corrections remain open.
+
 [193](../tactical/193-physics-reversal-catch-up.md) bounds whole-group physics-display
 catch-up speed and adds the shared quick-reversal script, with native checks for
 both control seats. Physics and normal input motion remain unchanged.

@@ -4,7 +4,7 @@ import { PairAuthority } from "../src/physics/rapier/PairAuthority.js";
 import { PairHarness } from "../src/physics/rapier/PairHarness.js";
 
 const results = [];
-for (const scene of ["start-stop", "opposed", "reversal"] as const) {
+for (const scene of ["push", "start-stop", "opposed", "reversal"] as const) {
   for (const mode of ["raw", "smooth-prediction", "buffered-when-clear"] as const) {
     const authority = await PairAuthority.create(scene);
     const harness = new PairHarness(
@@ -17,11 +17,27 @@ for (const scene of ["start-stop", "opposed", "reversal"] as const) {
       presentation.smooth = mode !== "raw";
     }
     const sources: [Set<string>, Set<string>] = [new Set(), new Set()];
+    const firstPushGap: (number | undefined)[] = [],
+      previousCubeX: (number | undefined)[] = [];
     try {
       for (let tick = 0; tick < 300; tick++) {
         await harness.step();
         for (const seat of [0, 1] as const) {
-          harness.presentedPoses(seat);
+          const displayed = harness.presentedPoses(seat);
+          const cube = displayed.findIndex((v, i) => i % 14 === 0 && v === 2);
+          const player = displayed.findIndex((v, i) => i % 14 === 0 && v === 0);
+          const x = displayed[cube + 1],
+            previous = previousCubeX[seat];
+          if (
+            cube >= 0 &&
+            player >= 0 &&
+            x !== undefined &&
+            previous !== undefined &&
+            x - previous > 0.005 &&
+            firstPushGap[seat] === undefined
+          )
+            firstPushGap[seat] = x - 0.4 - ((displayed[player + 1] ?? 0) + 0.28);
+          previousCubeX[seat] = cube >= 0 ? x : undefined;
           sources[seat].add(harness.presentation[seat].diagnostics.remoteSource);
         }
       }
@@ -38,6 +54,10 @@ for (const scene of ["start-stop", "opposed", "reversal"] as const) {
           maxCurrentCorrectionMetres: harness.clients[seat].diagnostics.maxCurrentCorrection,
           maxPresentedRemoteStepMetres: harness.presentation[seat].diagnostics.maxRemoteStep,
           finalOffsetMetres: harness.presentation[seat].diagnostics.maxOffset,
+          firstPushGapMetres: firstPushGap[seat] ?? null,
+          cubeSource: harness.presentation[seat].diagnostics.cubeSource,
+          cubeDisplayTick: harness.presentation[seat].diagnostics.cubeDisplayTick,
+          remoteDisplayTick: harness.presentation[seat].diagnostics.remoteDisplayTick,
           remoteSources: [...sources[seat]],
           recoveries: harness.clients[seat].diagnostics.recoveries,
         })),
@@ -53,7 +73,7 @@ const report = `${JSON.stringify(
     rttMs: 200,
     jitterPerDirectionMs: 20,
     limits:
-      "Accelerated native coordinator, not browser frames or GPU timing. Same-tick past error, same-present raw rebase and sampled displayed position are separate metrics. Prediction of unknown remote inputs still corrects; this experiment changes presentation only. Compare final physics hashes across modes within each scene.",
+      "Accelerated native coordinator, not browser frames or GPU timing. Same-tick past error, same-present raw rebase and sampled displayed position are separate metrics. Contact components share one timeline and one rigid transform; idle clients buffer the scene. First-push gap uses the authored unrotated cube half-width and allows sub-step snapshot/controller error. Prediction of unknown remote inputs still corrects; this experiment changes presentation only. Compare final physics hashes across modes within each scene.",
     results,
   },
   null,

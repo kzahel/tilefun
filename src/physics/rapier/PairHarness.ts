@@ -108,6 +108,11 @@ export class PairHarness {
           });
           const decoded = decodeClientMessage(buffer);
           if (decoded.type !== "player-input") throw Error("Invalid pair input");
+          this.presentation[seat].noteInput(tick, {
+            x: decoded.dx,
+            z: decoded.dy,
+            jump: decoded.jump,
+          });
           client.advance(tick, { x: decoded.dx, z: decoded.dy, jump: decoded.jump });
           this.up[seat].push(now, { seat, tick, buffer }, buffer.byteLength);
         }
@@ -134,6 +139,7 @@ export class PairHarness {
       this.clients[seat].world.poses(),
       this.tick,
       this.clients[seat].tick,
+      !this.clients[seat].world.motorFor(seat).grounded,
     );
   }
   get queued() {

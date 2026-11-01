@@ -1,0 +1,468 @@
+{
+  "seed": 713,
+  "rttMs": 200,
+  "jitterPerDirectionMs": 20,
+  "limits": "Accelerated native coordinator, not browser frames or GPU timing. Same-tick past error, same-present raw rebase and sampled displayed position are separate metrics. Contact components share one timeline and one rigid transform; idle clients buffer the scene. First-push gap uses the authored unrotated cube half-width and allows sub-step snapshot/controller error. Prediction of unknown remote inputs still corrects; this experiment changes presentation only. Compare final physics hashes across modes within each scene.",
+  "results": [
+    {
+      "scene": "push",
+      "mode": "raw",
+      "lateInputs": 0,
+      "finalPhysicsHash": "79a596582e1b63fcefc7745f7700442bc06da13ef69da95863f785a88d77e1a1",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.00010437624139819293,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.03839427947998075,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 302,
+          "remoteDisplayTick": 302,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07492945602786415,
+          "maxCurrentCorrectionMetres": 1.0963831652370482,
+          "maxPresentedRemoteStepMetres": 1.096383169793574,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.05710441589355497,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 310,
+          "remoteDisplayTick": 310,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "push",
+      "mode": "smooth-prediction",
+      "lateInputs": 0,
+      "finalPhysicsHash": "79a596582e1b63fcefc7745f7700442bc06da13ef69da95863f785a88d77e1a1",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.00010437624139819293,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.03839427947998075,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 302,
+          "remoteDisplayTick": 302,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07492945602786415,
+          "maxCurrentCorrectionMetres": 1.0963831652370482,
+          "maxPresentedRemoteStepMetres": 0.32458048656810357,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.053538627624512,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 310,
+          "remoteDisplayTick": 310,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "push",
+      "mode": "buffered-when-clear",
+      "lateInputs": 0,
+      "finalPhysicsHash": "79a596582e1b63fcefc7745f7700442bc06da13ef69da95863f785a88d77e1a1",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.01245570182800293,
+          "finalOffsetMetres": 1.4027455696587232e-14,
+          "firstPushGapMetres": 0.03839427947998075,
+          "cubeSource": "buffered",
+          "cubeDisplayTick": 298,
+          "remoteDisplayTick": 298,
+          "remoteSources": [
+            "buffered",
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07492945602786415,
+          "maxCurrentCorrectionMetres": 1.0963831652370482,
+          "maxPresentedRemoteStepMetres": 0.07502091814827684,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.09193260192871122,
+          "cubeSource": "buffered",
+          "cubeDisplayTick": 290,
+          "remoteDisplayTick": 290,
+          "remoteSources": [
+            "buffered"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "start-stop",
+      "mode": "raw",
+      "lateInputs": 0,
+      "finalPhysicsHash": "bc64f6a3ac9a1139147f1d2049b9422e7dc56f7f5525ceb600c0d745a3792d5b",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.00010437624139819293,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": null,
+          "cubeSource": "absent",
+          "cubeDisplayTick": -1,
+          "remoteDisplayTick": 302,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07560086261743279,
+          "maxCurrentCorrectionMetres": 1.2747714511652302,
+          "maxPresentedRemoteStepMetres": 1.274771447475481,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": null,
+          "cubeSource": "absent",
+          "cubeDisplayTick": -1,
+          "remoteDisplayTick": 310,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "start-stop",
+      "mode": "smooth-prediction",
+      "lateInputs": 0,
+      "finalPhysicsHash": "bc64f6a3ac9a1139147f1d2049b9422e7dc56f7f5525ceb600c0d745a3792d5b",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.00010437624139819293,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": null,
+          "cubeSource": "absent",
+          "cubeDisplayTick": -1,
+          "remoteDisplayTick": 302,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07560086261743279,
+          "maxCurrentCorrectionMetres": 1.2747714511652302,
+          "maxPresentedRemoteStepMetres": 0.15004174245950344,
+          "finalOffsetMetres": 2.0494772259304282e-12,
+          "firstPushGapMetres": null,
+          "cubeSource": "absent",
+          "cubeDisplayTick": -1,
+          "remoteDisplayTick": 310,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "start-stop",
+      "mode": "buffered-when-clear",
+      "lateInputs": 0,
+      "finalPhysicsHash": "bc64f6a3ac9a1139147f1d2049b9422e7dc56f7f5525ceb600c0d745a3792d5b",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.01245570182800293,
+          "finalOffsetMetres": 4.9625971925356476e-17,
+          "firstPushGapMetres": null,
+          "cubeSource": "absent",
+          "cubeDisplayTick": -1,
+          "remoteDisplayTick": 298,
+          "remoteSources": [
+            "buffered"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.07560086261743279,
+          "maxCurrentCorrectionMetres": 1.2747714511652302,
+          "maxPresentedRemoteStepMetres": 0.07506216232787465,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": null,
+          "cubeSource": "absent",
+          "cubeDisplayTick": -1,
+          "remoteDisplayTick": 290,
+          "remoteSources": [
+            "buffered"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "opposed",
+      "mode": "raw",
+      "lateInputs": 0,
+      "finalPhysicsHash": "d1998e7ab7bbd49746dd40974b7c0a989ff51f29a4387343debf4b7d245e96f8",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0.07670811446451387,
+          "maxCurrentCorrectionMetres": 0.1753234537286099,
+          "maxPresentedRemoteStepMetres": 0.12523247656218664,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.03839427947998075,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 302,
+          "remoteDisplayTick": 302,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.14979440138614,
+          "maxCurrentCorrectionMetres": 1.3486101507292798,
+          "maxPresentedRemoteStepMetres": 1.2736212175217487,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.05710441589355497,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 310,
+          "remoteDisplayTick": 310,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "opposed",
+      "mode": "smooth-prediction",
+      "lateInputs": 0,
+      "finalPhysicsHash": "d1998e7ab7bbd49746dd40974b7c0a989ff51f29a4387343debf4b7d245e96f8",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0.07670811446451387,
+          "maxCurrentCorrectionMetres": 0.1753234537286099,
+          "maxPresentedRemoteStepMetres": 0.1389425004697371,
+          "finalOffsetMetres": 8.613803206123705e-15,
+          "firstPushGapMetres": 0.03839427947998075,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 302,
+          "remoteDisplayTick": 302,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.14979440138614,
+          "maxCurrentCorrectionMetres": 1.3486101507292798,
+          "maxPresentedRemoteStepMetres": 1.2763733766076477,
+          "finalOffsetMetres": 5.084902511947696e-13,
+          "firstPushGapMetres": 0.05710441589355497,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 310,
+          "remoteDisplayTick": 310,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "opposed",
+      "mode": "buffered-when-clear",
+      "lateInputs": 0,
+      "finalPhysicsHash": "d1998e7ab7bbd49746dd40974b7c0a989ff51f29a4387343debf4b7d245e96f8",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0.07670811446451387,
+          "maxCurrentCorrectionMetres": 0.1753234537286099,
+          "maxPresentedRemoteStepMetres": 0.3751325729013156,
+          "finalOffsetMetres": 3.107739530467736e-14,
+          "firstPushGapMetres": 0.03839427947998075,
+          "cubeSource": "buffered",
+          "cubeDisplayTick": 298,
+          "remoteDisplayTick": 298,
+          "remoteSources": [
+            "buffered",
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.14979440138614,
+          "maxCurrentCorrectionMetres": 1.3486101507292798,
+          "maxPresentedRemoteStepMetres": 1.0963831696972435,
+          "finalOffsetMetres": 5.658935707422479e-15,
+          "firstPushGapMetres": 0.05710441589355497,
+          "cubeSource": "buffered",
+          "cubeDisplayTick": 290,
+          "remoteDisplayTick": 290,
+          "remoteSources": [
+            "buffered",
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "reversal",
+      "mode": "raw",
+      "lateInputs": 0,
+      "finalPhysicsHash": "07b2ee617a56a1014bf0d2236e9842b2196e3066ec05dc6f72b99ddd31f30481",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.0005416871305028201,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.04225856781005888,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 302,
+          "remoteDisplayTick": 302,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.1500005722822874,
+          "maxCurrentCorrectionMetres": 2.101142169088203,
+          "maxPresentedRemoteStepMetres": 2.026450158337809,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.05055839538574247,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 310,
+          "remoteDisplayTick": 310,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "reversal",
+      "mode": "smooth-prediction",
+      "lateInputs": 0,
+      "finalPhysicsHash": "07b2ee617a56a1014bf0d2236e9842b2196e3066ec05dc6f72b99ddd31f30481",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.0005416871305028201,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.04225856781005888,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 302,
+          "remoteDisplayTick": 302,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.1500005722822874,
+          "maxCurrentCorrectionMetres": 2.101142169088203,
+          "maxPresentedRemoteStepMetres": 2.026450158337809,
+          "finalOffsetMetres": 1.7765069699893651e-13,
+          "firstPushGapMetres": 0.05429203033447294,
+          "cubeSource": "predicted",
+          "cubeDisplayTick": 310,
+          "remoteDisplayTick": 310,
+          "remoteSources": [
+            "predicted"
+          ],
+          "recoveries": 0
+        }
+      ]
+    },
+    {
+      "scene": "reversal",
+      "mode": "buffered-when-clear",
+      "lateInputs": 0,
+      "finalPhysicsHash": "07b2ee617a56a1014bf0d2236e9842b2196e3066ec05dc6f72b99ddd31f30481",
+      "clients": [
+        {
+          "seat": 0,
+          "maxPastErrorMetres": 0,
+          "maxCurrentCorrectionMetres": 0,
+          "maxPresentedRemoteStepMetres": 0.01245570182800293,
+          "finalOffsetMetres": 1.0440438792479697e-11,
+          "firstPushGapMetres": 0.04225856781005888,
+          "cubeSource": "buffered",
+          "cubeDisplayTick": 298,
+          "remoteDisplayTick": 298,
+          "remoteSources": [
+            "buffered",
+            "predicted"
+          ],
+          "recoveries": 0
+        },
+        {
+          "seat": 1,
+          "maxPastErrorMetres": 0.1500005722822874,
+          "maxCurrentCorrectionMetres": 2.101142169088203,
+          "maxPresentedRemoteStepMetres": 0.07517500423528937,
+          "finalOffsetMetres": 0,
+          "firstPushGapMetres": 0.06844360351562528,
+          "cubeSource": "buffered",
+          "cubeDisplayTick": 290,
+          "remoteDisplayTick": 290,
+          "remoteSources": [
+            "buffered"
+          ],
+          "recoveries": 0
+        }
+      ]
+    }
+  ]
+}

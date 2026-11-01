@@ -239,7 +239,7 @@ it.each([0, 1] as const)(
         expect(remote.diagnostics.maxCorrectionReleaseSpeed).toBeLessThanOrEqual(4.50001);
         expect(remote.diagnostics.maxRemoteStep).toBeLessThan(0.17);
       }
-      if (controlled === 0) expect(sources).toEqual(new Set(["buffered", "predicted"]));
+      expect(sources).toEqual(new Set(["buffered"]));
       expect(maxOwnStep).toBeLessThan(0.08);
       expect(harness.latest.lateInputs).toBe(0);
       for (const client of harness.clients) expect(client.diagnostics.recoveries).toBe(0);
@@ -248,3 +248,39 @@ it.each([0, 1] as const)(
     }
   },
 );
+
+it("shows the host touching the cube before its first visible push in the idle guest view", async () => {
+  const authority = await PairAuthority.create("push");
+  const harness = new PairHarness(
+    { scene: "push", rtt: 200, jitter: 20, seed: 713 },
+    authority,
+    authority.frame(),
+  );
+  let previousCubeX = -12.5,
+    firstPushGap: number | undefined;
+  try {
+    for (let tick = 0; tick < 180; tick++) {
+      await harness.step();
+      harness.presentedPoses(0);
+      const displayed = harness.presentedPoses(1);
+      const cube = displayed.findIndex((v, i) => i % 14 === 0 && v === 2);
+      const host = displayed.findIndex((v, i) => i % 14 === 0 && v === 0);
+      const cubeX = displayed[cube + 1] ?? 0;
+      if (cubeX - previousCubeX > 0.005 && firstPushGap === undefined)
+        firstPushGap = cubeX - 0.4 - ((displayed[host + 1] ?? 0) + 0.28);
+      previousCubeX = cubeX;
+      const p = harness.presentation[1].diagnostics;
+      expect(p.cubeSource).toBe(p.remoteSource);
+      expect(p.cubeDisplayTick).toBe(p.remoteDisplayTick);
+      if (tick >= 40 && tick < 100)
+        expect(harness.presentation[0].diagnostics.ownSource).toBe("predicted");
+      if (tick > 160) expect(harness.presentation[0].diagnostics.ownSource).toBe("buffered");
+    }
+    expect(firstPushGap).toBeDefined();
+    // 30 Hz snapshot interpolation and the character controller skin permit a
+    // sub-step gap; the previous mixed timeline produced roughly 0.9–1.0 m.
+    expect(firstPushGap).toBeLessThan(0.12);
+  } finally {
+    await harness.close();
+  }
+});

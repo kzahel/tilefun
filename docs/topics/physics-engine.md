@@ -43,26 +43,26 @@ frame tails, contact counts, geometry updates and memory. WASM is not an automat
 speedup; sparse specialized collision can be cheaper, AI/rendering are separate
 costs, and dynamic contacts may increase work. No Chromebook gain is established.
 
-## Correction presentation (192–193)
+## Contact presentation (194)
 
-[192](../tactical/192-physics-correction-presentation.md) addresses remote start/stop
-teleports. Physics remains fully predicted, while display-only correction offsets
-smooth all affected bodies. The remote player defaults to buffered interpolation
-when clear, returning to prediction near a conservative capsule/cube/lift contact
-chain. Both the source handoff and correction preserve display continuity. Controls
-compare predicted/buffered remote display and smooth/raw corrections. Diagnostics
-separate past-tick error, current-pose rebase, display offset and actual drawn steps.
-The shared **Remote start / stop** script reproduces the original large jump.
-[193](../tactical/193-physics-reversal-catch-up.md) bounds the added correction-release
-component to 4.5 m/s across the whole group. This prevents large reversal offsets
-from decaying as a lunge while normal physical movement retains its full delta.
-**Quick left / right** provides the shared reversal reproduction. Larger offsets
-can now take longer to converge; input prediction and authority are unchanged.
+[194](../tactical/194-coherent-contact-presentation.md) supersedes the display policy
+from 192–193. Buffering only a remote avatar while predicting its cube produced
+visible pushes across a roughly one-metre gap. Independent per-body correction
+offsets also separated touching shapes, even with a shared decay fraction.
 
-This is a bounded presentation experiment: interpolation adds remote visual delay,
-smoothing can temporarily offset visible contacts, and the proximity graph is not
-a general contact-island implementation. The coordinated-clock and Chromebook
-qualification limits from 191 still apply.
+Contact components now share one scene tick and a rigid correction transform.
+Idle clients buffer the coherent scene. Recent local input and airborne motion
+predict the local interaction component, with a confirmation/display tail through
+release and landing; unrelated components remain buffered. Source changes preserve
+the chosen local anchor and fresh local motion. Own/remote/cube source/tick metrics
+and drawn first-push gap make coherence observable. Physics and networking are unchanged.
+
+The left-control/right-idle-observer reproduction now aligns the cube and avatar.
+This prioritizes coherent contact geometry over preserving every independently
+smoothed member: both-active opposing pushes can still visibly correct by over a
+metre and remain a migration blocker. Do not interpret earlier 192–193 smoothness
+measurements as general contact qualification. Next address coupled input/timeline
+uncertainty and independent clocks before normal-game migration or Chromebook claims.
 
 ## Cooperative reference (191)
 

@@ -1,5 +1,10 @@
 # Player prediction and moving contacts
 
+[194](../tactical/194-coherent-contact-presentation.md) corrects mixed avatar/cube
+display timelines and independent offsets in the Rapier lab. Contact components
+share scene time and a rigid transform. This fixes early pushes in idle observers;
+both-active member corrections remain a blocker, not a solved prediction contract.
+
 [193](../tactical/193-physics-reversal-catch-up.md) caps the Rapier lab display offset
 release speed after quick reversals. This affects presentation only; the underlying
 large unknown-input corrections remain measured by the diagnostics from 192.

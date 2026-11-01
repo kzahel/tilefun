@@ -16,11 +16,39 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
   await expect(host).toHaveAttribute("data-ready", "true");
   await expect(guest).toHaveAttribute("data-ready", "true");
   expect(page.workers().some((worker) => worker.url().includes("pair.worker"))).toBe(true);
+  await expect(guest).not.toHaveAttribute("data-first-push-gap", "");
+  const firstContact = await guest.evaluate((element) => ({
+    gap: Number(element.dataset.firstPushGap),
+    playerTick: element.dataset.remoteDisplayTick,
+    cubeTick: element.dataset.cubeDisplayTick,
+    playerSource: element.dataset.remoteSource,
+    cubeSource: element.dataset.cubeSource,
+  }));
+  expect(firstContact.gap).toBeLessThan(0.15);
+  expect(firstContact.playerTick).toBe(firstContact.cubeTick);
+  expect(firstContact.playerSource).toBe(firstContact.cubeSource);
+  console.log("first visible contact", JSON.stringify(firstContact));
+  await test.info().attach("first-visible-contact", {
+    body: JSON.stringify(firstContact),
+    contentType: "application/json",
+  });
+  await page.screenshot({
+    path: test.info().outputPath("first-visible-contact.png"),
+    fullPage: true,
+  });
   await expect.poll(() => value(0, "tick")).toBeGreaterThan(160);
   await expect.poll(() => value(1, "compared-tick")).toBeGreaterThan(150);
   await expect.poll(() => value(1, "correction")).toBeLessThan(0.001);
   expect(await value(1, "prediction-tick")).toBeGreaterThan(await value(0, "prediction-tick"));
   expect(await value(1, "replica-ack")).toBeGreaterThan(100);
+  await expect(guest).not.toHaveAttribute("data-first-push-gap", "");
+  expect(await value(1, "first-push-gap")).toBeLessThan(0.15);
+  await expect(guest).toHaveAttribute("data-cube-source", "buffered");
+  expect(
+    await guest.evaluate(
+      (element) => element.dataset.cubeDisplayTick === element.dataset.remoteDisplayTick,
+    ),
+  ).toBe(true);
   await page.screenshot({ path: test.info().outputPath("two-client-push.png"), fullPage: true });
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await page.waitForTimeout(150);
@@ -146,7 +174,12 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
   await expect.poll(() => value(0, "tick")).toBeGreaterThan(190);
   expect(await value(1, "max-current-correction")).toBeGreaterThan(1);
   expect(await value(1, "max-displayed-step")).toBeLessThan(0.5);
-  await expect(page.locator(".physics-stats")).toContainText("correction release max 4.50 m/s");
+  await expect(guest).toHaveAttribute("data-cube-source", "buffered");
+  expect(
+    await guest.evaluate(
+      (element) => element.dataset.cubeDisplayTick === element.dataset.remoteDisplayTick,
+    ),
+  ).toBe(true);
   await page.screenshot({ path: test.info().outputPath("quick-reversal.png"), fullPage: true });
   await page.getByRole("link", { name: "All tools", exact: true }).click();
   await expect(views).toHaveCount(0);

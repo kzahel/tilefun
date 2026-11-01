@@ -224,6 +224,11 @@ export class PhysicsViewport {
     };
   }
 
+  displayedBounds(id: number) {
+    const mesh = this.meshes.get(id);
+    return mesh ? new THREE.Box3().setFromObject(mesh, true) : undefined;
+  }
+
   displayedPosition(id: number) {
     const p = this.meshes.get(id)?.position;
     return p ? { x: p.x, y: p.y, z: p.z } : undefined;

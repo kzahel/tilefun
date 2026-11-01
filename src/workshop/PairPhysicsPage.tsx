@@ -61,6 +61,9 @@ export default function PairPhysicsPage() {
     const timings: number[] = [];
     const lastDisplayed: ({ x: number; y: number; z: number } | undefined)[] = [];
     const maxDisplayed = [0, 0];
+    const previousCubeX: (number | undefined)[] = [];
+    const firstPushGap: (number | undefined)[] = [];
+    for (const element of elements) if (element) element.dataset.firstPushGap = "";
     setStatus("Opening two-player Realm…");
     setStatistics("");
     for (const element of elements) if (element) element.dataset.ready = "false";
@@ -236,6 +239,22 @@ export default function PairPhysicsPage() {
             current.presentation[seat].diagnostics.remoteSource,
           );
           element?.setAttribute(
+            "data-own-source",
+            current.presentation[seat].diagnostics.ownSource,
+          );
+          element?.setAttribute(
+            "data-cube-source",
+            current.presentation[seat].diagnostics.cubeSource,
+          );
+          element?.setAttribute(
+            "data-cube-display-tick",
+            String(current.presentation[seat].diagnostics.cubeDisplayTick),
+          );
+          element?.setAttribute(
+            "data-remote-display-tick",
+            String(current.presentation[seat].diagnostics.remoteDisplayTick),
+          );
+          element?.setAttribute(
             "data-remote-offset",
             String(current.presentation[seat].diagnostics.remoteOffset),
           );
@@ -257,7 +276,8 @@ export default function PairPhysicsPage() {
                   p = current?.presentation[seat].diagnostics;
                 return `${seat === 0 ? "Host" : "Guest"}: predicted tick ${client.tick} · compared tick ${d.comparedTick} · past error ${(d.correction * 100).toFixed(2)} cm / max ${(d.maxCorrection * 100).toFixed(2)}
 Current-pose correction ${(d.currentCorrection * 100).toFixed(2)} cm / max ${(d.maxCurrentCorrection * 100).toFixed(2)} · own ${(d.ownCorrection * 100).toFixed(2)} / remote ${(d.remoteCorrection * 100).toFixed(2)} cm · display offset ${((p?.maxOffset ?? 0) * 100).toFixed(2)} cm · correction release max ${(p?.maxCorrectionReleaseSpeed ?? 0).toFixed(2)} m/s
-Remote ${p?.remoteSource} at tick ${p?.remoteDisplayTick} · displayed frame step max ${((maxDisplayed[seat] ?? 0) * 100).toFixed(2)} cm · replay ${d.replaySteps} / ${d.replayMs.toFixed(2)} ms · ${d.pending} pending · ${d.recoveries} recoveries`;
+Remote ${p?.remoteSource} at tick ${p?.remoteDisplayTick} · cube ${p?.cubeSource} at ${p?.cubeDisplayTick} · own ${p?.ownSource} · groups ${p?.predictedGroups} predicted / ${p?.bufferedGroups} buffered
+Displayed frame step max ${((maxDisplayed[seat] ?? 0) * 100).toFixed(2)} cm · replay ${d.replaySteps} / ${d.replayMs.toFixed(2)} ms · ${d.pending} pending · ${d.recoveries} recoveries`;
               })
               .join(
                 "\n",
@@ -276,6 +296,22 @@ Remote ${p?.remoteSource} at tick ${p?.remoteDisplayTick} · displayed frame ste
             maxDisplayed[seat] ?? 0,
             Math.hypot(position.x - previous.x, position.y - previous.y, position.z - previous.z),
           );
+        const cube = view.displayedPosition(2),
+          oldCubeX = previousCubeX[seat];
+        if (
+          cube &&
+          oldCubeX !== undefined &&
+          cube.x - oldCubeX > 0.005 &&
+          firstPushGap[seat] === undefined
+        ) {
+          const cubeBounds = view.displayedBounds(2),
+            playerBounds = view.displayedBounds(0);
+          if (cubeBounds && playerBounds) {
+            firstPushGap[seat] = cubeBounds.min.x - playerBounds.max.x;
+            elements[seat]?.setAttribute("data-first-push-gap", String(firstPushGap[seat]));
+          }
+        }
+        previousCubeX[seat] = cube?.x;
         lastDisplayed[seat] = position;
         elements[seat]?.setAttribute("data-displayed-remote-z", String(position?.z ?? 0));
         elements[seat]?.setAttribute("data-max-displayed-step", String(maxDisplayed[seat] ?? 0));
@@ -463,14 +499,14 @@ Remote ${p?.remoteSource} at tick ${p?.remoteDisplayTick} · displayed frame ste
       </p>
       <output className="physics-stats">{statistics}</output>
       <p className="physics-limit">
-        Both clients always simulate the complete physics world. Far-away remote players default to
-        buffered display; near a possible shared contact they return to prediction. Both handoffs
-        and physics corrections smooth their displayed position/rotation, with bounded catch-up
-        speed so quick reversals cannot release a large correction in one step. Buffered display
-        adds delay; smoothing can temporarily offset visible contacts. Neither changes collisions.
-        Compare Remote: predicted and Corrections: raw to expose the original start/stop jump. Past
-        error compares matching old ticks; current-pose correction measures replay's change to the
-        predicted present. The white ghost is the last received authority pose. Seed 713; ordered
+        Both clients always simulate the complete physics world. Displayed interaction groups share
+        one scene time and one rigid correction transform, keeping players and loose bodies aligned.
+        Idle clients buffer the scene. Recent local input or an airborne local player predicts its
+        connected interaction group; release keeps prediction through the confirmation tail.
+        Buffered display adds delay. Joining or splitting groups can correct other members around
+        the preserved local anchor. Static-contact smoothing and independent-clock multiplayer
+        remain unqualified. Past error measures old-tick agreement; current-pose correction measures
+        raw replay changes. The white ghost is the last received authority pose. Seed 713; ordered
         application delay, no packet loss. Pause and Step freeze/advance the shared coordinator
         clock, including network queues. Live playback crosses a real Worker and normal
         Realm/input/replication code, but uses a coordinated clock rather than the game’s
