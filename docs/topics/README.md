@@ -36,7 +36,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Vehicle riders](vehicle-riders.md) | Seated avatar/depth/fallback and automatic-occupant prerequisites for motorcycles and exposed seats |
 | [Trains](trains.md) | Proposed generated town railways, paired local/express tracks, stations, forks, bridges and tunnels |
 | [World geometry](world-geometry.md) | First ramp/deck/passage engine lab; direction and open terrain/indoor decisions for connected stacked spaces |
-| [General 3D physics](physics-engine.md) | Provisional Rapier/WASM subsystem, Worker ownership, prediction and long-structure qualification |
+| [General 3D physics](physics-engine.md) | Rapier replacement direction, early gameplay/Chromebook decision, shared-world ownership and legacy deletion |
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |
 | [Wildlife](wildlife.md) | Completed 196-entry art roster, shared ecology and hunting, pending exact-art review |
 | [Distinct animal behaviors](wildlife-behaviors.md) | 206-entry behavior audit ledger and generated progress report; land/air first, observable mechanics and game/lab verification |

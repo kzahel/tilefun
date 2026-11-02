@@ -10,6 +10,7 @@ implementation scope and evidence.
 
 | Area | Delivered | Next checkpoint / owner |
 | --- | --- | --- |
+| Physics replacement | Opt-in Rapier player contacts and shared cooperative reference; default remains legacy | Persistent shared realm world and basic interaction/performance decision early; if qualified, default Rapier and delete legacy before dynamic-car expansion; [201](tactical/201-rapier-cutover-sequence.md), [physics engine](topics/physics-engine.md) |
 | Streaming and execution | Shared single-player Worker authority, terrain preparation, desktop and Pixel 7a traversal evidence | Bound offscreen raster work, improve cold entry and broaden device coverage; [performance](topics/performance.md) |
 | Rendering and 3D exploration | GPU gameplay and live 3D vehicles under the fixed pixel-art camera; per-body isolated depth and Canvas fallback | Investigate shared scene depth and live character meshes for passengers/cargo; [160](tactical/160-live-3d-and-shared-depth-investigation.md), [rendering](topics/rendering-architecture.md#open-engine-checkpoints) |
 | Entity persistence and unloading | Tick-aware NPC separation; target architecture researched and documented | Incremental entity saves first, then shared tickets/readiness, lazy residency and eviction; [entity activation](topics/entity-activation.md), [planned sequence](tactical/019-entity-streaming-and-persistence.md) |

@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [201 Rapier cutover sequence](201-rapier-cutover-sequence.md) | Approved parent sequence: persistent shared world, representative loop and early device/gameplay decision; then compatibility, default/deletion and dynamic car; [physics engine](../topics/physics-engine.md) |
 | [200 NPC support contact ownership](200-npc-support-contact-ownership.md) | Delivered: ordinary NPC landing uses the selected character solver without duplicate legacy ejection; real Realm and Worker game checks pass; [physics engine](../topics/physics-engine.md) |
 | [199 Idle player head support](199-idle-player-head-support.md) | Delivered: idle capsule supports stay still through landing/rest, with a shared visual landing script; [physics engine](../topics/physics-engine.md) |
 | [198 Character support and jumping](198-character-support-and-jumping.md) | Delivered: separate support from horizontal pushing, preserve jumps, and validate relative cap/terrain clearance; [physics engine](../topics/physics-engine.md) |

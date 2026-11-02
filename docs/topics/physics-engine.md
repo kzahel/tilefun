@@ -1,15 +1,41 @@
 # General 3D physics backend
 
-Status: opt-in on-foot game integration available; dynamic-world migration remains provisional.
+Status: opt-in on-foot game integration available; owner-approved replacement direction with early qualification gates.
 Updated: 2026-11-02.
 
-Owns the proposed physics-backend migration. [World geometry](world-geometry.md)
+Owns the physics-backend replacement direction. [World geometry](world-geometry.md)
 owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 [rendering](rendering-architecture.md) owns visual composition and resource limits.
 [189](../tactical/189-rapier-physics-prototype.md) owns the first bounded experiment;
 [190](../tactical/190-rapier-prediction-and-realm-proof.md) owns prediction/Realm integration.
 
-## Provisional plan
+## Replacement direction and early decision (201)
+
+Owner direction, 2026-11-02: qualify Rapier as the replacement, then make it the
+default and delete legacy collision if basic gameplay and Chromebook performance
+are acceptable. A permanent pair of supported physics implementations is not the
+goal. [201](../tactical/201-rapier-cutover-sequence.md) owns implementation slices,
+proposed budgets and the early proceed/repair/stop decision after a persistent
+world and representative interaction loop, before exhaustive compatibility or
+dynamic-car expansion. This sequencing supersedes isolated NPC push patching
+followed immediately by a dynamic-car prototype.
+
+The target is one persistent authoritative world per realm: static terrain and
+buildings share it with controlled players/NPCs/vehicles and dynamic loose bodies.
+Private client prediction worlds are nonauthoritative copies. Stream bounded
+geometry sections and retain AI activation; one collision authority does not
+require all actors to be free rigid bodies or every distant actor to tick.
+Legacy collision mode exists only for temporary comparison. It must not silently
+resolve unsupported contacts in exclusive Rapier mode. Current gameplay
+controllers may survive while their duplicate collision/support solvers retire.
+
+The default remains legacy today. The current on-foot mode below still rebuilds
+local query scenes and has not implemented this persistent replacement. Early
+performance and gameplay qualification must use the ordinary Worker game and the
+target Chromebook, not only the existing labs. Default cutover and legacy deletion
+belong to the same bounded milestone; new tumbling cars follow that cleanup.
+
+## Retained subsystem constraints
 
 Keep browser/Chromebook play primary, the existing renderer, TypeScript gameplay,
 AI, persistence, replication and Worker authority. Evaluate Rapier's JavaScript
