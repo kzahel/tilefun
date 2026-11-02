@@ -9,6 +9,10 @@ budget despite mostly smooth main-thread frames. At 384 active nearby NPCs GPU
 Worker tick p95 is 118–126ms versus legacy 31–32ms; smaller cohorts also regress.
 The decision is no default cutover. Reconsider per-NPC motor/query/refresh cost
 before compatibility migration; raw captures and measurement limits live in 202.
+The native [203 comparison](../tactical/203-physics-copy-and-model-comparison.md)
+finds descriptor caching alone insufficient and large headroom in simpler
+once-per-tick models; naive batched KCC contacts are incorrect. This is a design
+probe, not a promoted game performance gain.
 
 Topic: performance
 Status: shared Worker authority and terrain preparation implemented; physical

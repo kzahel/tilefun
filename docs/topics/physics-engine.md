@@ -56,6 +56,15 @@ and dynamic-car expansion; first reconsider repeated per-NPC motor/query/refresh
 work in a bounded performance proof. [202](../tactical/202-persistent-realm-collision-proof.md#early-decision--stop-the-cutover-reconsider-the-npc-stepping-approach)
 owns raw evidence, next exit conditions and unqualified gates.
 
+[203](../tactical/203-physics-copy-and-model-comparison.md) isolates the next design
+question with native simplified models. The adapter makes thousands of temporary
+shape descriptors and repeated neighbor scans plus one world refresh per motor;
+caching descriptors alone does not recover the budget. A lean sequential KCC and
+one-step rigid-body model are much cheaper, but omit gameplay semantics. Naive
+once-per-tick KCC batching fails approaching-peer contact checks. Next prove one
+shared contact phase with consistent commits and the existing character rules,
+then rerun the ordinary-game Chromebook gate. Production is unchanged by 203.
+
 ## Retained subsystem constraints
 
 Keep browser/Chromebook play primary, the existing renderer, TypeScript gameplay,

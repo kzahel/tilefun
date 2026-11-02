@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [203 Physics churn and simplified models](203-physics-copy-and-model-comparison.md) | Native comparison delivered: descriptor caching alone does not help; per-actor refresh/neighborhood costs remain; naive batching fails contacts; production unchanged |
 | [202 Persistent realm collision proof](202-persistent-realm-collision-proof.md) | Early decision reached: persistent Realm interaction proof delivered, Chromebook CPU gate failed; default cutover paused before compatibility; [physics engine](../topics/physics-engine.md) |
 | [201 Rapier cutover sequence](201-rapier-cutover-sequence.md) | Approved parent sequence: persistent shared world, representative loop and early device/gameplay decision; then compatibility, default/deletion and dynamic car; [physics engine](../topics/physics-engine.md) |
 | [200 NPC support contact ownership](200-npc-support-contact-ownership.md) | Delivered: ordinary NPC landing uses the selected character solver without duplicate legacy ejection; real Realm and Worker game checks pass; [physics engine](../topics/physics-engine.md) |

@@ -1,0 +1,5662 @@
+{
+  "revision": "43ea0b2655e05a25362705cd2f6404f5260cab63",
+  "dirty": true,
+  "date": "2026-11-02T18:44:08.641Z",
+  "cpu": "Apple M4 Pro",
+  "node": "v26.7.0",
+  "platform": "darwin",
+  "trials": 3,
+  "warmup": 40,
+  "ticks": 120,
+  "notes": [
+    "Native synchronous microbenchmark: no AI, Worker transport, replication, prediction or rendering.",
+    "Same ordinary dog box shapes, section floors, counts and prescribed tick-start poses/intents in all lanes.",
+    "Prescribed poses reset each tick; this is a query trace, not a closed-loop simulation or gameplay parity test.",
+    "Adapter uses real production motor, fine CollisionIndex and pushing; lean models omit push/support identity/water/one-way/airborne policy and callbacks.",
+    "Adapter cached-descriptors memoizes the cuboid descriptor factory only, a benchmark-local allocation ablation valid for these fixed unrotated boxes. Factory requests remain; actual construction after warmup is avoided. Final diagnostic endpoints must agree with adapter.",
+    "Lean sequential refreshes world per actor; lean batched refreshes once, queries tick-start scene and delays collider writes until all results exist.",
+    "Rigid bodies use one global dynamic step, gravity and locked rotations; this is a different controller model, not existing player/NPC motor behavior.",
+    "Timing runs are uninstrumented. Operation counts/timings come from one separate warm diagnostic tick; nested phase times are not additive."
+  ],
+  "cases": [
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 24,
+      "lane": "adapter",
+      "p50Ms": 0.6253749999999627,
+      "p95Ms": 0.815291000000002,
+      "p99Ms": 0.9031659999999988,
+      "maxMs": 1.697166999999979,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.04135799999971823
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.045628999999962616
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.1412120000005075
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.0842529999999897
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.17504000000002407
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.152998999999852
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.05624700000015537
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.10579000000012684
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 122.34086299999984,
+        "geometryMs": 2.0994980000015175,
+        "refreshMs": 46.28402600000135,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 24,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 0.6014999999999873,
+      "p95Ms": 0.6727500000000077,
+      "p99Ms": 0.7481669999999667,
+      "maxMs": 0.7667500000000018,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.05912599999919621
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.01262499999972988
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.08016100000077131
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.011293000000250686
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.12783100000035574
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.12433400000008987
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.045376000000032946
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.08546300000000429
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 100.81530800000195,
+        "geometryMs": 1.570322000000317,
+        "refreshMs": 20.950963000001195,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 24,
+      "lane": "lean-sequential",
+      "p50Ms": 0.2233330000000251,
+      "p95Ms": 0.2426669999999831,
+      "p99Ms": 0.2844590000000835,
+      "maxMs": 0.4017499999999927,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.10662500000034925
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.10295400000029531
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.03966599999967002
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.07470599999965089
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.1642519999996921,
+        "refreshMs": 16.734106000004317,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 714,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 24,
+      "lane": "lean-batched",
+      "p50Ms": 0.11929199999997309,
+      "p95Ms": 0.1440829999999096,
+      "p99Ms": 0.16700000000003,
+      "maxMs": 0.2273330000000442,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.007541000000060194
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.006999999999948159
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.04254099999980099
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.08624799999995503
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.15058200000009947,
+        "refreshMs": 0.869914999999537,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 714,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 24,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.03508399999998346,
+      "p95Ms": 0.04487499999993361,
+      "p99Ms": 0.2150419999999258,
+      "maxMs": 0.36858300000005784,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.026416999999923974
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.02608300000008512
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.16803700000014032,
+        "refreshMs": 6.986667999999781,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 24,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 96,
+      "lane": "adapter",
+      "p50Ms": 3.9401659999999765,
+      "p95Ms": 4.1542910000000575,
+      "p99Ms": 4.3648339999999735,
+      "maxMs": 5.469082999999955,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.24280100000783023
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.04054000000041924
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.6765850000047067
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.1675039999990986
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.7679640000014842
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.7514129999995021
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.1634119999991981
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.3165889999979754
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 633.361021000002,
+        "geometryMs": 4.32844599999828,
+        "refreshMs": 136.8313840000128,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 96,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 4.323333000000048,
+      "p95Ms": 4.9558750000001055,
+      "p99Ms": 5.488916999999901,
+      "maxMs": 5.917417000000114,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.6557739999982459
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.051286999999547334
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.9542320000050495
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.2501240000017333
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.8621690000009039
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.8456730000004882
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.17629500000089138
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.3417450000008557
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 704.5188600000097,
+        "geometryMs": 5.548119000006636,
+        "refreshMs": 139.89974199999233,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 96,
+      "lane": "lean-sequential",
+      "p50Ms": 1.2030420000000959,
+      "p95Ms": 1.3280420000000959,
+      "p99Ms": 1.3947499999999309,
+      "maxMs": 1.4233749999998508,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.9093420000012884
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.894786999999269
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.16083199999911812
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.31191800000033254
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07238499999971282,
+        "refreshMs": 121.97311700001251,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 2238,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 96,
+      "lane": "lean-batched",
+      "p50Ms": 0.4464170000001104,
+      "p95Ms": 0.5303340000000389,
+      "p99Ms": 0.6460839999999735,
+      "maxMs": 0.710667000000285,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.011625000000094587
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.010166999999910331
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.15846099999907892
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.34729100000049584
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.08262200000262965,
+        "refreshMs": 1.7151679999992666,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 2238,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 96,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.08550000000013824,
+      "p95Ms": 0.09479200000032506,
+      "p99Ms": 0.09829200000012861,
+      "maxMs": 0.09879200000023047,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.05716600000005201
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.0565839999999298
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07600700000102734,
+        "refreshMs": 9.570252999998957,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 96,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 384,
+      "lane": "adapter",
+      "p50Ms": 27.368625000000065,
+      "p95Ms": 29.215916999999536,
+      "p99Ms": 31.503541999999925,
+      "maxMs": 32.25883299999987,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 1.342579000049227
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.1823379999923418
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.409713999950327
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.3051640000112457
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.40809900000113
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.356408000008742
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.7301550000001953
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.4851180000077875
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 6,
+        "queryMs": 4423.175142000019,
+        "geometryMs": 22.857754000034674,
+        "refreshMs": 1650.847608999964,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 384,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 28.25262500000099,
+      "p95Ms": 30.177832999999737,
+      "p99Ms": 33.33429199999955,
+      "maxMs": 34.435833999999886,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 2.488981999877069
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.1958260000028531
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 4.0721819999544095
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.241455000003043
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.25807199999872
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.204833999976472
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.6861330000010639
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.3996300000017072
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 6,
+        "queryMs": 4627.557674000037,
+        "geometryMs": 23.227479999683055,
+        "refreshMs": 1713.178964000118,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 384,
+      "lane": "lean-sequential",
+      "p50Ms": 11.167457999999897,
+      "p95Ms": 11.326000000000931,
+      "p99Ms": 11.371832999999242,
+      "maxMs": 11.464750000001004,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.139207000020178
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.09851199998593
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.665885000000344
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.3962519999968208
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.15654399999220914,
+        "refreshMs": 1449.6249450001378,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 9793,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 384,
+      "lane": "lean-batched",
+      "p50Ms": 1.9048750000001746,
+      "p95Ms": 2.192291999999725,
+      "p99Ms": 2.217583999999988,
+      "maxMs": 2.2440000000005966,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.028874999999970896
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.028709000000162632
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.6488379999900644
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.4787520000008954
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.17534299999897485,
+        "refreshMs": 5.767580999978236,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 9793,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "spread",
+      "population": 384,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.3144160000010743,
+      "p95Ms": 0.3316660000000411,
+      "p99Ms": 0.4516249999996944,
+      "maxMs": 0.6586250000000291,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.21049999999922875
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.2101250000014261
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.17070800000510644,
+        "refreshMs": 35.93817200000194,
+        "sections": 6,
+        "actors": 0,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 384,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "adapter",
+      "p50Ms": 1.0203750000000582,
+      "p95Ms": 1.1286659999987023,
+      "p99Ms": 1.203457999999955,
+      "maxMs": 1.21875,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.02146500003800611
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.008581000003687222
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.07212199999958102
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.010956999998597894
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.09658300000228337
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.09412300000076357
+        },
+        "supportCasts": {
+          "calls": 120,
+          "ms": 0.18587799999841081
+        },
+        "kccQueries": {
+          "calls": 72,
+          "ms": 0.2345830000103888
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 169.21294100000887,
+        "geometryMs": 1.003671000007671,
+        "refreshMs": 15.634038000041983,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 1.0402090000006865,
+      "p95Ms": 1.1385000000009313,
+      "p99Ms": 1.2324590000007447,
+      "maxMs": 1.2735409999986587,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.06557899998188077
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.012125999999625492
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.09370099998886872
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.011500000005980837
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.10162900000250374
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.09778899999582791
+        },
+        "supportCasts": {
+          "calls": 120,
+          "ms": 0.19338099999367842
+        },
+        "kccQueries": {
+          "calls": 72,
+          "ms": 0.2586220000011963
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 185.42808799999693,
+        "geometryMs": 1.4323420000491751,
+        "refreshMs": 17.238502000067456,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "lean-sequential",
+      "p50Ms": 0.3205419999994774,
+      "p95Ms": 0.34545799999978044,
+      "p99Ms": 0.3600409999999101,
+      "maxMs": 0.4467090000016469,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.07454199999665434
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.07233399999313406
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.04274800000166579
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.21495799999865994
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.046542000001863926,
+        "refreshMs": 12.158285999996224,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 4626,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "lean-batched",
+      "p50Ms": 0.25141699999949196,
+      "p95Ms": 0.26229199999943376,
+      "p99Ms": 0.27145799999925657,
+      "maxMs": 0.2762089999996533,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.003832999998849118
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.003666000000521308
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.0409589999999298
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.20058399999288667
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.045420000000376604,
+        "refreshMs": 0.6670009999852482,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 12,
+      "maxEndpointPenetrationPx": 0.432803213596344,
+      "descriptorCache": null,
+      "leanComputedCollisions": 4775,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.032874999998966814,
+      "p95Ms": 0.04012499999953434,
+      "p99Ms": 0.042792000000190455,
+      "maxMs": 0.04370799999924202,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.02583299999969313
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.025666999999884865
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.04162999999789463,
+        "refreshMs": 5.343828000008216,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 24,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "adapter",
+      "p50Ms": 5.840041999999812,
+      "p95Ms": 5.976249999999709,
+      "p99Ms": 6.128541000000041,
+      "maxMs": 6.170124999998734,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.20119000000704546
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.038413999986005365
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.6197149999861722
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.16275299998414994
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.7594170000065787
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.7476209999786079
+        },
+        "supportCasts": {
+          "calls": 480,
+          "ms": 0.7774439999757305
+        },
+        "kccQueries": {
+          "calls": 288,
+          "ms": 1.0194119999814575
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 937.026122999936,
+        "geometryMs": 3.8624119999003597,
+        "refreshMs": 126.77621500024361,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 6.124249999998938,
+      "p95Ms": 6.402082999999038,
+      "p99Ms": 7.341834000000745,
+      "maxMs": 7.727917000000161,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.5152970000508503
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.043203000001085456
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.7741630000073201
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.19066300000849878
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.7640410000039992
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.751126999999542
+        },
+        "supportCasts": {
+          "calls": 480,
+          "ms": 0.7582049999709852
+        },
+        "kccQueries": {
+          "calls": 288,
+          "ms": 0.9948309999927005
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 996.9214659999325,
+        "geometryMs": 5.091064999893206,
+        "refreshMs": 136.3773400001519,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "lean-sequential",
+      "p50Ms": 1.6880000000001019,
+      "p95Ms": 1.781209000000672,
+      "p99Ms": 1.8883749999986321,
+      "maxMs": 1.8958330000004935,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.6566249999941647
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.6479589999944437
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.18207899999652
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.7836690000149247
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.06920899999931862,
+        "refreshMs": 106.74492300004204,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 18008,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "lean-batched",
+      "p50Ms": 1.042250000000422,
+      "p95Ms": 1.071458000002167,
+      "p99Ms": 1.177041000000827,
+      "maxMs": 1.2411670000001322,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.10275000000183354
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.1024169999982405
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.16800400001375237
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.8610830000179703
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.061463999994884944,
+        "refreshMs": 1.990202999992107,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 48,
+      "maxEndpointPenetrationPx": 0.43280377984046936,
+      "descriptorCache": null,
+      "leanComputedCollisions": 18475,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.09308299999975134,
+      "p95Ms": 0.10116600000037579,
+      "p99Ms": 0.10325000000011642,
+      "maxMs": 0.10883400000238908,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.06829099999958999
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.06804200000260607
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07103900000583963,
+        "refreshMs": 11.123499999997875,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 96,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "adapter",
+      "p50Ms": 34.39770800000042,
+      "p95Ms": 37.331333000001905,
+      "p99Ms": 37.898457999999664,
+      "maxMs": 38.58175000000119,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 0.9517409999862139
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.1874169999609876
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.198017999984586
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.150861000005534
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.12513299998318
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.078497999940737
+        },
+        "supportCasts": {
+          "calls": 1920,
+          "ms": 3.1321599999573664
+        },
+        "kccQueries": {
+          "calls": 1152,
+          "ms": 4.121126000030927
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 4,
+        "queryMs": 5592.0416680003655,
+        "geometryMs": 21.032663999983924,
+        "refreshMs": 1565.9852370001572,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 37.805334000000585,
+      "p95Ms": 40.359042000000045,
+      "p99Ms": 41.054166000001715,
+      "maxMs": 41.27508400000079,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 2.411253999765904
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.21366399994440144
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.870304000116448
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.578501999982109
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.123087000018131
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.075880000022153
+        },
+        "supportCasts": {
+          "calls": 1920,
+          "ms": 3.267770000096789
+        },
+        "kccQueries": {
+          "calls": 1152,
+          "ms": 4.124663000013243
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 4,
+        "queryMs": 6091.871886000459,
+        "geometryMs": 28.105903999869042,
+        "refreshMs": 1691.0143869996537,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "lean-sequential",
+      "p50Ms": 13.616083000000799,
+      "p95Ms": 14.31445800000074,
+      "p99Ms": 15.371666999999434,
+      "maxMs": 15.572291000000405,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 8.928287999984605
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 8.88325500002611
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.8483319999977539
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 3.682468000009976
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.35449800002243137,
+        "refreshMs": 1465.1902230007909,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 72723,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "lean-batched",
+      "p50Ms": 4.499041999999463,
+      "p95Ms": 4.670207999999548,
+      "p99Ms": 4.824292000001151,
+      "maxMs": 5.909875000001193,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.03441699999893899
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.03412500000194996
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.7097410000606033
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 3.6902179999488
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.14630799998849398,
+        "refreshMs": 6.328381000017544,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 192,
+      "maxEndpointPenetrationPx": 0.43281644582748413,
+      "descriptorCache": null,
+      "leanComputedCollisions": 74624,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 0,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.3665419999997539,
+      "p95Ms": 0.390625,
+      "p99Ms": 0.5669999999990978,
+      "maxMs": 0.6330000000016298,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.2632080000003043
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.26283300000068266
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.14991500001997338,
+        "refreshMs": 43.82449999999881,
+        "sections": 4,
+        "actors": 0,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 384,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 24,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.022790999999415362,
+      "p95Ms": 0.02341599999999744,
+      "p99Ms": 0.02529100000174367,
+      "maxMs": 0.025874999999359716,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.017041999999491964
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.016791999998531537
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07958299998790608,
+        "refreshMs": 2.6292929999835906,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 24,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 24,
+      "lane": "lean-batched",
+      "p50Ms": 0.10975000000325963,
+      "p95Ms": 0.12820800000190502,
+      "p99Ms": 0.1307089999972959,
+      "maxMs": 0.24966700000004494,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.004499999999097781
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.004249999998137355
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.037379000008513685
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.08171000000584172
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.03187600000455859,
+        "refreshMs": 0.6549979999945208,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 714,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 24,
+      "lane": "lean-sequential",
+      "p50Ms": 0.2040419999975711,
+      "p95Ms": 0.21729200000117999,
+      "p99Ms": 0.2242919999989681,
+      "maxMs": 0.34950000000026193,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.09220700000878423
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.0900020000153745
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.03424700000687153
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.07325000000491855
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.035667999985889765,
+        "refreshMs": 14.617875000043568,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 714,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 24,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 0.5662499999998545,
+      "p95Ms": 0.6236250000001746,
+      "p99Ms": 0.648750000000291,
+      "maxMs": 0.6808749999981956,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.05470999999670312
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.010168999997404171
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.07954299999619252
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.011082000000897096
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.1125400000018999
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.11021200000686804
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.039625000001251465
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.08537399999113404
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 91.44594199993298,
+        "geometryMs": 1.2535000000680157,
+        "refreshMs": 18.247146999903634,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 24,
+      "lane": "adapter",
+      "p50Ms": 0.5279160000027332,
+      "p95Ms": 0.5571249999993597,
+      "p99Ms": 0.5963340000016615,
+      "maxMs": 0.7264580000010028,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.02276099998925929
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.00891500000943779
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.06628599999385187
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.010959000006550923
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.113206000005448
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.11066500000015367
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.04033400000844267
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.08445999999457854
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 84.02499399986118,
+        "geometryMs": 1.059294999937265,
+        "refreshMs": 18.144390000106796,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 96,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.0812499999992724,
+      "p95Ms": 0.08566599999903701,
+      "p99Ms": 0.09529199999815319,
+      "maxMs": 0.22750000000087311,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.05616600000212202
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.05587499999819556
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07050099998377846,
+        "refreshMs": 9.328205000023445,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 96,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 96,
+      "lane": "lean-batched",
+      "p50Ms": 0.4540420000012091,
+      "p95Ms": 0.5307499999980791,
+      "p99Ms": 0.6318749999991269,
+      "maxMs": 0.6404579999980342,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.009125000000494765
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.008958999998867512
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.15987700003461214
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.35616200003642007
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.05287799996949616,
+        "refreshMs": 1.6796949999843491,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 2238,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 96,
+      "lane": "lean-sequential",
+      "p50Ms": 1.1697090000016033,
+      "p95Ms": 1.4002919999984442,
+      "p99Ms": 1.4631669999980659,
+      "maxMs": 1.4808329999978014,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.820756999994046
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.8090809999994235
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.18133300001500174
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.3501709999945888
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.0706649999920046,
+        "refreshMs": 117.08146300008957,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 2238,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 96,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 4.219249999998283,
+      "p95Ms": 4.342999999997119,
+      "p99Ms": 4.784875000001193,
+      "maxMs": 4.903333000002021,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.4968749999788997
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.04120600000169361
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.8226619999404647
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.17708099999072147
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.799209000007977
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.7880830000103742
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.16179499999270774
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.3212130000028992
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 677.2099590001271,
+        "geometryMs": 4.8849490000684455,
+        "refreshMs": 139.22193399982643,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 96,
+      "lane": "adapter",
+      "p50Ms": 3.9106250000004366,
+      "p95Ms": 4.043791000000056,
+      "p99Ms": 4.14350000000195,
+      "maxMs": 4.173083000001498,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.20605700006854022
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.039784000065992586
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.6307609999930719
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.2438309999415651
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.9127019999577897
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.9000059999525547
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.16679300003306707
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.33162800005084137
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 653.7163599998676,
+        "geometryMs": 4.501615000477614,
+        "refreshMs": 151.18922100057898,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 384,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.3163339999955497,
+      "p95Ms": 0.3385829999970156,
+      "p99Ms": 0.348666999998386,
+      "maxMs": 0.4799579999962589,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.21679199999925913
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.2164589999956661
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.17240599994693184,
+        "refreshMs": 36.05128999999579,
+        "sections": 6,
+        "actors": 0,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 384,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 384,
+      "lane": "lean-batched",
+      "p50Ms": 1.9071249999979045,
+      "p95Ms": 2.2016250000015134,
+      "p99Ms": 2.2676250000004075,
+      "maxMs": 2.2975420000002487,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.03458400000090478
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.03437500000291038
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.6432159999822034
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.480156000048737
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.16358599998784484,
+        "refreshMs": 5.630622000076983,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 9793,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 384,
+      "lane": "lean-sequential",
+      "p50Ms": 11.417541999995592,
+      "p95Ms": 12.33445799999754,
+      "p99Ms": 15.502000000000407,
+      "maxMs": 22.52991699999984,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.074669999965408
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.033035999949789
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.6817159999263822
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.4029669999144971
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.16345600001659477,
+        "refreshMs": 1477.1687879997698,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 9793,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 384,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 28.89458300000115,
+      "p95Ms": 31.217957999993814,
+      "p99Ms": 31.595957999998063,
+      "maxMs": 32.0590830000001,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 2.4162540003089816
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.2213280000796658
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.7688539990922436
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.319263999997929
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.404287000019394
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.35441500005254
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.7274539999925764
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.5024010000852286
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 6,
+        "queryMs": 4683.530769000608,
+        "geometryMs": 27.731612000032328,
+        "refreshMs": 1619.8192689999632,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "spread",
+      "population": 384,
+      "lane": "adapter",
+      "p50Ms": 27.21495799999684,
+      "p95Ms": 29.63641700000153,
+      "p99Ms": 30.31416700000409,
+      "maxMs": 30.42362499999581,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 0.9853429999348009
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.2136110000210465
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.2084579999936977
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.2597469999309396
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 10.264708999879076
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 10.212164999946253
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.7344660000380827
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.4898689999972703
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 6,
+        "queryMs": 4412.2643159984655,
+        "geometryMs": 23.005149000135134,
+        "refreshMs": 1678.027376999904,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.028500000000349246,
+      "p95Ms": 0.03358299999672454,
+      "p99Ms": 0.0339590000003227,
+      "maxMs": 0.057708000000275206,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.028542000000015832
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.028207999996084254
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07675100001506507,
+        "refreshMs": 3.5680429999847547,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 24,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "lean-batched",
+      "p50Ms": 0.263874999996915,
+      "p95Ms": 0.2860419999997248,
+      "p99Ms": 0.35079099999711616,
+      "maxMs": 0.3652920000022277,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.006832999999460299
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.006500000003143214
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.04375099999742815
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.21567000000504777
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.0553320000108215,
+        "refreshMs": 0.8144610000090324,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 12,
+      "maxEndpointPenetrationPx": 0.432803213596344,
+      "descriptorCache": null,
+      "leanComputedCollisions": 4775,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "lean-sequential",
+      "p50Ms": 0.3395410000011907,
+      "p95Ms": 0.36525000000256114,
+      "p99Ms": 0.38279200000397395,
+      "maxMs": 0.5560829999958514,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.08837399999902118
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.08608400000230176
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.04620800001430325
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.23095800000010058
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.0576669999936712,
+        "refreshMs": 13.065773000154877,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 4626,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 1.0737079999962589,
+      "p95Ms": 1.2559580000015558,
+      "p99Ms": 1.3222499999974389,
+      "maxMs": 3.562584000006609,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.058082999974431004
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.010830000006535556
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.0868760001467308
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.01121199999761302
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.10166599998046877
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.09899899999436457
+        },
+        "supportCasts": {
+          "calls": 120,
+          "ms": 0.18912599999748636
+        },
+        "kccQueries": {
+          "calls": 72,
+          "ms": 0.2451189999410417
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 177.50475299995014,
+        "geometryMs": 1.3580679998121923,
+        "refreshMs": 17.45094000010431,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "adapter",
+      "p50Ms": 1.0464589999974123,
+      "p95Ms": 1.2156670000040322,
+      "p99Ms": 1.3890829999945709,
+      "maxMs": 2.248875000004773,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.022791000046709087
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.008791999956883956
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.08075099995039636
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.01116800000454532
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.10066699999879347
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.09787599999253871
+        },
+        "supportCasts": {
+          "calls": 120,
+          "ms": 0.18878999995649792
+        },
+        "kccQueries": {
+          "calls": 72,
+          "ms": 0.24029199998039985
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 170.5689299998994,
+        "geometryMs": 1.0805749999562977,
+        "refreshMs": 17.01663100035512,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.09516699999949196,
+      "p95Ms": 0.10395799999969313,
+      "p99Ms": 0.105916000000434,
+      "maxMs": 0.1063750000030268,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.07699999999749707
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.0766250000015134
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.0685430000157794,
+        "refreshMs": 11.509538000005705,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 96,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "lean-batched",
+      "p50Ms": 1.0956250000017462,
+      "p95Ms": 1.1493750000008731,
+      "p99Ms": 1.391457999998238,
+      "maxMs": 1.4179999999978463,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.01187499999650754
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.011459000001195818
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.17683400001988048
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.890882000036072
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07266199997684453,
+        "refreshMs": 1.8813340000269818,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 48,
+      "maxEndpointPenetrationPx": 0.43280377984046936,
+      "descriptorCache": null,
+      "leanComputedCollisions": 18475,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "lean-sequential",
+      "p50Ms": 1.710291999996116,
+      "p95Ms": 1.8677500000048894,
+      "p99Ms": 2.0431660000031115,
+      "maxMs": 2.074708999993163,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.6562060000142083
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.6472139999823412
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.1839549999422161
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.8079540000398993
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07037900001159869,
+        "refreshMs": 109.7788230005608,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 18008,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 6.197375000003376,
+      "p95Ms": 6.428084000006493,
+      "p99Ms": 6.61970800000563,
+      "maxMs": 7.609333000000333,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.5362029997850186
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.04437899996264605
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.8210840000465396
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.19121000003360678
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.777914999947825
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.7601639999920735
+        },
+        "supportCasts": {
+          "calls": 480,
+          "ms": 0.7850320000725333
+        },
+        "kccQueries": {
+          "calls": 288,
+          "ms": 1.0375050000584451
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 996.2645420003464,
+        "geometryMs": 5.301004999972065,
+        "refreshMs": 131.90484500057937,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "adapter",
+      "p50Ms": 5.960374999995111,
+      "p95Ms": 6.8049580000006245,
+      "p99Ms": 7.00224999999773,
+      "maxMs": 7.031415999997989,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.20693600002414314
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.06383499997900799
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.7044949998817174
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.2558810000264202
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.8168369999839342
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.8038760000272305
+        },
+        "supportCasts": {
+          "calls": 480,
+          "ms": 0.9266179998885491
+        },
+        "kccQueries": {
+          "calls": 288,
+          "ms": 1.1227979999239324
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 965.8089559998334,
+        "geometryMs": 4.285725999536226,
+        "refreshMs": 134.04381599961926,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.37495900000067195,
+      "p95Ms": 0.4182500000024447,
+      "p99Ms": 0.4578750000000582,
+      "maxMs": 0.6585419999973965,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.2694169999958831
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.2690419999998994
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.17142200015950948,
+        "refreshMs": 45.360171000000264,
+        "sections": 4,
+        "actors": 0,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 384,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "lean-batched",
+      "p50Ms": 4.488459000000148,
+      "p95Ms": 4.834792000001471,
+      "p99Ms": 5.048167000000831,
+      "maxMs": 5.125832999998238,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.04029199999786215
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.03970900000422262
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.7725469999786583
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 3.9939940000185743
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.154655999976967,
+        "refreshMs": 6.221546999950078,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 192,
+      "maxEndpointPenetrationPx": 0.43281644582748413,
+      "descriptorCache": null,
+      "leanComputedCollisions": 74624,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "lean-sequential",
+      "p50Ms": 13.332041000001482,
+      "p95Ms": 13.846707999997307,
+      "p99Ms": 14.027874999999767,
+      "maxMs": 14.272250000001804,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 8.601418000056583
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 8.56025299999601
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.8373870000141324
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 3.6582500000149594
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.16804300007061101,
+        "refreshMs": 1411.4237389996124,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 72723,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 35.7766249999986,
+      "p95Ms": 37.91804199999751,
+      "p99Ms": 40.91229100000055,
+      "maxMs": 41.47491699999955,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 2.383520999981556
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.20066099995165132
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.683108998797252
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.0702069999606465
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 8.88558500004001
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 8.840166000052704
+        },
+        "supportCasts": {
+          "calls": 1920,
+          "ms": 3.0998019999824464
+        },
+        "kccQueries": {
+          "calls": 1152,
+          "ms": 4.084339000102773
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 4,
+        "queryMs": 5800.673675000253,
+        "geometryMs": 25.256850999729068,
+        "refreshMs": 1536.4647389991223,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 1,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "adapter",
+      "p50Ms": 36.0322079999969,
+      "p95Ms": 39.060624999998254,
+      "p99Ms": 39.88199999999779,
+      "maxMs": 41.885332999998354,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 0.9498800003348151
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.16409900005237432
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.4690849999169586
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.3413719999225577
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.109162999993714
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.059752999964985
+        },
+        "supportCasts": {
+          "calls": 1920,
+          "ms": 3.153580999947735
+        },
+        "kccQueries": {
+          "calls": 1152,
+          "ms": 4.082797999915783
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 4,
+        "queryMs": 5821.594497001919,
+        "geometryMs": 19.048854999906325,
+        "refreshMs": 1663.5811320010325,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 24,
+      "lane": "adapter",
+      "p50Ms": 0.5287079999980051,
+      "p95Ms": 0.5524169999989681,
+      "p99Ms": 0.6077499999955762,
+      "maxMs": 0.6157079999975394,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.022416000028897543
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.009085999998205807
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.07266600002185442
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.010998999983712565
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.11245799998141592
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.11008499997842591
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.04053899999416899
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.08495899999979883
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 84.43849400013278,
+        "geometryMs": 1.0216709999440354,
+        "refreshMs": 18.108534999846597,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 24,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 0.5615420000031008,
+      "p95Ms": 0.5897079999995185,
+      "p99Ms": 0.6493750000008731,
+      "maxMs": 0.7226250000021537,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.05754499997419771
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.010374999990744982
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.0875419999283622
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.010542999938479625
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.11316500001703389
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.1110000000189757
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.041252000017266255
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.09495699998660712
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 90.22511900003883,
+        "geometryMs": 1.2787419998639962,
+        "refreshMs": 18.32077800022671,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 24,
+      "lane": "lean-sequential",
+      "p50Ms": 0.2699999999967986,
+      "p95Ms": 0.2959590000027674,
+      "p99Ms": 0.2996250000069267,
+      "maxMs": 0.30408299999544397,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.15745700000115903
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.15508499999850756
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.03937400002905633
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.07745699998486089
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.06116699999984121,
+        "refreshMs": 20.298192999951425,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 714,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 24,
+      "lane": "lean-batched",
+      "p50Ms": 0.1104159999958938,
+      "p95Ms": 0.128458999999566,
+      "p99Ms": 0.13041700000030687,
+      "maxMs": 0.13083300000289455,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.004249999998137355
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.004124999999476131
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.0380449999938719
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.08295699996961048
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.0488340000010794,
+        "refreshMs": 0.6976610000419896,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 714,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 24,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.02254199999879347,
+      "p95Ms": 0.023250000005646143,
+      "p99Ms": 0.023708000000624452,
+      "maxMs": 0.023832999999285676,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.017416000002413057
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.017208000004757196
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.0423750000045402,
+        "refreshMs": 2.6145919999617036,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 24,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 96,
+      "lane": "adapter",
+      "p50Ms": 3.940541000003577,
+      "p95Ms": 4.096666000004916,
+      "p99Ms": 4.131249999998545,
+      "maxMs": 4.1848749999990105,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.19949799996538786
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.037632999978086445
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.624359000059485
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.17228900000918657
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.8063749999637366
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.7943379999851459
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.1659550000258605
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.3245319999768981
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 632.7279539998854,
+        "geometryMs": 4.311090000133845,
+        "refreshMs": 138.56730399965454,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 96,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 4.252458999995724,
+      "p95Ms": 4.42949999999837,
+      "p99Ms": 4.940583000003244,
+      "maxMs": 5.626916999994137,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.5018299996227142
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.04237299998203525
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.7711130005773157
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.1957119999860879
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.8081229999952484
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.7959169999521691
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.16716599997744197
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.3245349999924656
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 679.7900040001769,
+        "geometryMs": 4.9707949998555705,
+        "refreshMs": 139.64862700059166,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 96,
+      "lane": "lean-sequential",
+      "p50Ms": 1.1709169999958249,
+      "p95Ms": 1.234708000003593,
+      "p99Ms": 1.2736669999940204,
+      "maxMs": 1.2846659999995609,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.7295460000168532
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.7212450000151875
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.14958299994032132
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.28679200004262384
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.06278699996619252,
+        "refreshMs": 115.78168499937601,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 2238,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 96,
+      "lane": "lean-batched",
+      "p50Ms": 0.45108299999992596,
+      "p95Ms": 0.5357920000024023,
+      "p99Ms": 0.5393330000006245,
+      "maxMs": 0.6293339999974705,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.010667000002285931
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.010290999998687766
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.15787300001102267
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.34988099997281097
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.06920600000739796,
+        "refreshMs": 1.661872000004223,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 2238,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 96,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.08116700000391575,
+      "p95Ms": 0.08433299999887822,
+      "p99Ms": 0.08629199999995762,
+      "maxMs": 0.08699999999953434,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.056541999998444226
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.056375000000116415
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.060831000009784475,
+        "refreshMs": 9.223039000025892,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 96,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 384,
+      "lane": "adapter",
+      "p50Ms": 26.982290999992983,
+      "p95Ms": 28.108540999994148,
+      "p99Ms": 29.439458000008017,
+      "maxMs": 30.754832999999053,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 0.9640470002923394
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.18899199995212257
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.03563700018276
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.1499889999249717
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.49587800016161
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.443800000095507
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.7072519997745985
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.5191609998728381
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 6,
+        "queryMs": 4343.788997000862,
+        "geometryMs": 21.618252002321242,
+        "refreshMs": 1649.5161420004733,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 384,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 28.78741699999955,
+      "p95Ms": 31.152249999999185,
+      "p99Ms": 31.473125000004075,
+      "maxMs": 32.43354199999885,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 2.365785001195036
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.18892800019239075
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.822605000445037
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.242126999888569
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.38799899991136
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.341283999907319
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.6926740001072176
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.4324130000168225
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 6,
+        "queryMs": 4655.433294000366,
+        "geometryMs": 23.82510300212016,
+        "refreshMs": 1675.8054100014706,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 384,
+      "lane": "lean-sequential",
+      "p50Ms": 11.500333000003593,
+      "p95Ms": 11.83200000000943,
+      "p99Ms": 11.998875000004773,
+      "maxMs": 12.487959000005503,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.589428999955999
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.546625999879325
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.7014589999162126
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.4401720000169007
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.17951099995116238,
+        "refreshMs": 1487.2873850019241,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 9793,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 384,
+      "lane": "lean-batched",
+      "p50Ms": 1.9992079999938142,
+      "p95Ms": 2.334792000008747,
+      "p99Ms": 2.403082999997423,
+      "maxMs": 2.4521659999882104,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.03395799999998417
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.033750000002328306
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.6842499998019775
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 1.595288000185974
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.18980399987776764,
+        "refreshMs": 6.431870999978855,
+        "sections": 6,
+        "actors": 384,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 9793,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "spread",
+      "population": 384,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.32833400000527035,
+      "p95Ms": 0.36629099999845494,
+      "p99Ms": 0.6281250000029104,
+      "maxMs": 0.7493329999997513,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.22604200000932906
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.22570800001267344
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 6,
+        "queryMs": 0,
+        "geometryMs": 0.2236109999648761,
+        "refreshMs": 38.288208000099985,
+        "sections": 6,
+        "actors": 0,
+        "colliders": 390,
+        "unsupported": {}
+      },
+      "rigidBodies": 384,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "adapter",
+      "p50Ms": 1.0400410000002012,
+      "p95Ms": 1.1989170000015292,
+      "p99Ms": 1.2442909999954281,
+      "maxMs": 1.2847079999919515,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.021589999945717864
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.008667000016430393
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.07016699986706953
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.011249999966821633
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.09983599999395665
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.09687400003895164
+        },
+        "supportCasts": {
+          "calls": 120,
+          "ms": 0.19062699991627596
+        },
+        "kccQueries": {
+          "calls": 72,
+          "ms": 0.24046199992881157
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 168.32149199982814,
+        "geometryMs": 1.209320000052685,
+        "refreshMs": 16.983347000234062,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 1.059916999991401,
+      "p95Ms": 1.188416999997571,
+      "p99Ms": 1.2225410000100965,
+      "maxMs": 1.2282500000001164,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 388,
+          "ms": 0.061215999943669885
+        },
+        "prepare": {
+          "calls": 24,
+          "ms": 0.012667999995755963
+        },
+        "actorSync": {
+          "calls": 182,
+          "ms": 0.08716799999820068
+        },
+        "neighborhood": {
+          "calls": 24,
+          "ms": 0.0166260000114562
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.11041399998066481
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.10741799997049384
+        },
+        "supportCasts": {
+          "calls": 120,
+          "ms": 0.19428999998490326
+        },
+        "kccQueries": {
+          "calls": 72,
+          "ms": 0.29433499995502643
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 3864,
+        "rebuiltSections": 2,
+        "queryMs": 171.6925360000314,
+        "geometryMs": 1.3881790004379582,
+        "refreshMs": 16.78686600002402,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "lean-sequential",
+      "p50Ms": 0.3965420000022277,
+      "p95Ms": 0.49720899999374524,
+      "p99Ms": 3.7095830000034766,
+      "maxMs": 12.964292000004207,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 24,
+          "ms": 0.09091599998646416
+        },
+        "worldSteps": {
+          "calls": 24,
+          "ms": 0.08325200002582278
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.04820999997900799
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.24212200001056772
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.16824800000176765,
+        "refreshMs": 26.40452899936645,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 4626,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "lean-batched",
+      "p50Ms": 0.26487500000803266,
+      "p95Ms": 0.2811249999940628,
+      "p99Ms": 0.30525000000488944,
+      "maxMs": 0.5406249999941792,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.008000000001629815
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.007750000004307367
+        },
+        "supportCasts": {
+          "calls": 24,
+          "ms": 0.044872000042232685
+        },
+        "kccQueries": {
+          "calls": 24,
+          "ms": 0.2227949999651173
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.1323310000298079,
+        "refreshMs": 0.783036999986507,
+        "sections": 2,
+        "actors": 24,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 12,
+      "maxEndpointPenetrationPx": 0.432803213596344,
+      "descriptorCache": null,
+      "leanComputedCollisions": 4775,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 24,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.02637500000128057,
+      "p95Ms": 0.03029199999582488,
+      "p99Ms": 0.03229200000350829,
+      "maxMs": 0.032833999997819774,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.02404200000455603
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.023666000008233823
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.06083400001807604,
+        "refreshMs": 3.3643320000410313,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 26,
+        "unsupported": {}
+      },
+      "rigidBodies": 24,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "adapter",
+      "p50Ms": 6.096959000002244,
+      "p95Ms": 6.425709000002826,
+      "p99Ms": 11.610792000006768,
+      "maxMs": 12.278416000001016,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.2649979995476315
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.03508200003125239
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.6199869999400107
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.17207800007599872
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.7660420000029262
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.7544960000523133
+        },
+        "supportCasts": {
+          "calls": 480,
+          "ms": 0.7730480000464013
+        },
+        "kccQueries": {
+          "calls": 288,
+          "ms": 0.9959459999226965
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 1000.8563069988159,
+        "geometryMs": 4.916931000028853,
+        "refreshMs": 137.74252199943294,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 6.4490829999995185,
+      "p95Ms": 6.8964580000028946,
+      "p99Ms": 7.291542000006302,
+      "maxMs": 8.604458000001614,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 3648,
+          "ms": 0.5267469990940299
+        },
+        "prepare": {
+          "calls": 96,
+          "ms": 0.04391200002282858
+        },
+        "actorSync": {
+          "calls": 1776,
+          "ms": 0.8061050004616845
+        },
+        "neighborhood": {
+          "calls": 96,
+          "ms": 0.22004500005277805
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.8158410000760341
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.8007049999723677
+        },
+        "supportCasts": {
+          "calls": 480,
+          "ms": 0.8043810002272949
+        },
+        "kccQueries": {
+          "calls": 288,
+          "ms": 1.0519940002122894
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 15456,
+        "rebuiltSections": 2,
+        "queryMs": 1050.0638599997183,
+        "geometryMs": 5.358769000318716,
+        "refreshMs": 139.91786399885314,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "lean-sequential",
+      "p50Ms": 1.7264999999897555,
+      "p95Ms": 1.8467079999973066,
+      "p99Ms": 1.9631250000093132,
+      "maxMs": 2.7484170000097947,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 96,
+          "ms": 0.70205100007297
+        },
+        "worldSteps": {
+          "calls": 96,
+          "ms": 0.6930050000082701
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.1926629999798024
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.8329189999931259
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.06608400009281468,
+        "refreshMs": 109.78689599996142,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 18008,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "lean-batched",
+      "p50Ms": 1.1191250000119908,
+      "p95Ms": 1.175374999991618,
+      "p99Ms": 1.2785000000003492,
+      "maxMs": 1.6095829999976559,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.011542000007466413
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.011291000002529472
+        },
+        "supportCasts": {
+          "calls": 96,
+          "ms": 0.1744620000681607
+        },
+        "kccQueries": {
+          "calls": 96,
+          "ms": 0.8754140000091866
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.0696299999835901,
+        "refreshMs": 1.9180790000827983,
+        "sections": 2,
+        "actors": 96,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 48,
+      "maxEndpointPenetrationPx": 0.43280377984046936,
+      "descriptorCache": null,
+      "leanComputedCollisions": 18475,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 96,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.09350000000267755,
+      "p95Ms": 0.10270799999125302,
+      "p99Ms": 0.10720800000126474,
+      "maxMs": 0.3023339999926975,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.06891600000381004
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.068583000000217
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 2,
+        "queryMs": 0,
+        "geometryMs": 0.07362599996849895,
+        "refreshMs": 11.53708700016432,
+        "sections": 2,
+        "actors": 0,
+        "colliders": 98,
+        "unsupported": {}
+      },
+      "rigidBodies": 96,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "adapter",
+      "p50Ms": 35.027333000005456,
+      "p95Ms": 37.30104200000642,
+      "p99Ms": 38.7532910000009,
+      "maxMs": 39.82249999999476,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 1.1080910006421618
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.1835010000213515
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.191457999055274
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.17283100001805
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.538212000174099
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.485389000052237
+        },
+        "supportCasts": {
+          "calls": 1920,
+          "ms": 3.1913019997882657
+        },
+        "kccQueries": {
+          "calls": 1152,
+          "ms": 4.13106600001629
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 4,
+        "queryMs": 5685.472806999998,
+        "geometryMs": 22.615305997416726,
+        "refreshMs": 1585.4090209967108,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "adapter-cached-descriptors",
+      "p50Ms": 36.666792000003625,
+      "p95Ms": 39.277542000010726,
+      "p99Ms": 40.78329200000735,
+      "maxMs": 42.48741699999664,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 17256,
+          "ms": 2.4414250013505807
+        },
+        "prepare": {
+          "calls": 384,
+          "ms": 0.2037870000494877
+        },
+        "actorSync": {
+          "calls": 8436,
+          "ms": 3.7310230003058678
+        },
+        "neighborhood": {
+          "calls": 384,
+          "ms": 3.2647070001257816
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 9.386326000079862
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 9.340297000002465
+        },
+        "supportCasts": {
+          "calls": 1920,
+          "ms": 3.1390360003570095
+        },
+        "kccQueries": {
+          "calls": 1152,
+          "ms": 4.234259000004386
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 61824,
+        "rebuiltSections": 4,
+        "queryMs": 5917.551978997915,
+        "geometryMs": 25.03691099952266,
+        "refreshMs": 1638.1406970025128,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": {
+        "entries": 2,
+        "constructedDuringDiagnostic": 0
+      },
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": 0
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "lean-sequential",
+      "p50Ms": 13.43529199999466,
+      "p95Ms": 13.686374999990221,
+      "p99Ms": 14.793208000002778,
+      "maxMs": 15.285250000000815,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 384,
+          "ms": 8.861056000052486
+        },
+        "worldSteps": {
+          "calls": 384,
+          "ms": 8.813698999976623
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.8447960000630701
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 3.7409169998718426
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.26658399993903004,
+        "refreshMs": 1435.4512570020306,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 72723,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "lean-batched",
+      "p50Ms": 4.439417000001413,
+      "p95Ms": 4.569208000000799,
+      "p99Ms": 4.620332999998936,
+      "maxMs": 4.6259160000045085,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.033208000008016825
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.03291700000409037
+        },
+        "supportCasts": {
+          "calls": 384,
+          "ms": 0.7015469998150365
+        },
+        "kccQueries": {
+          "calls": 384,
+          "ms": 3.702209000053699
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.15047200018307194,
+        "refreshMs": 6.089750999977696,
+        "sections": 4,
+        "actors": 384,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 0,
+      "overlappingEndpointPairs": 192,
+      "maxEndpointPenetrationPx": 0.43281644582748413,
+      "descriptorCache": null,
+      "leanComputedCollisions": 74624,
+      "adapterEndpointAgreementPx": null
+    },
+    {
+      "trial": 2,
+      "layout": "contact-pairs",
+      "population": 384,
+      "lane": "rigid-bodies",
+      "p50Ms": 0.3643750000046566,
+      "p95Ms": 0.4042919999919832,
+      "p99Ms": 0.5692500000004657,
+      "maxMs": 0.6199159999960102,
+      "operations": {
+        "shapeDescriptorRequests": {
+          "calls": 0,
+          "ms": 0
+        },
+        "prepare": {
+          "calls": 0,
+          "ms": 0
+        },
+        "actorSync": {
+          "calls": 0,
+          "ms": 0
+        },
+        "neighborhood": {
+          "calls": 0,
+          "ms": 0
+        },
+        "refresh": {
+          "calls": 1,
+          "ms": 0.2556250000052387
+        },
+        "worldSteps": {
+          "calls": 1,
+          "ms": 0.25529200000164565
+        },
+        "supportCasts": {
+          "calls": 0,
+          "ms": 0
+        },
+        "kccQueries": {
+          "calls": 0,
+          "ms": 0
+        }
+      },
+      "residency": {
+        "replacedActorShapes": 0,
+        "queries": 0,
+        "rebuiltSections": 4,
+        "queryMs": 0,
+        "geometryMs": 0.14641500009747688,
+        "refreshMs": 43.74291800003266,
+        "sections": 4,
+        "actors": 0,
+        "colliders": 388,
+        "unsupported": {}
+      },
+      "rigidBodies": 384,
+      "overlappingEndpointPairs": 0,
+      "maxEndpointPenetrationPx": 0,
+      "descriptorCache": null,
+      "leanComputedCollisions": 0,
+      "adapterEndpointAgreementPx": null
+    }
+  ],
+  "qualification": {
+    "scope": "Native simplified-model comparison only; no positive game/Chromebook qualification.",
+    "source": "Production engine at recorded revision 43ea0b26; new harness was uncommitted during capture and is committed with this evidence. No production source changed.",
+    "metadataCorrection": "Descriptor-cache agreement describes the final diagnostic endpoints; all intermediate trace endpoints were not recorded."
+  }
+}

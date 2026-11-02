@@ -1,5 +1,11 @@
 # Diagnostic probes
 
+`npx tsx scripts/benchmark-physics-model.ts --output=<capture-directory>` compares
+the real controlled-collision adapter, a descriptor-cache ablation, lean KCC
+models and a one-step rigid-body model. It is a native prescribed query workload,
+not normal-game/Chromebook qualification. [203](../../docs/tactical/203-physics-copy-and-model-comparison.md)
+owns results, observed naive-batch contact failures and semantic limits.
+
 ## Elevated surface overlays and actual venue driving
 
 `node scripts/instrumentation/fused-outline-composite.mjs --probe=surface --output=/tmp/tilefun-surface-overlays`
