@@ -1,18 +1,5 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
-import {
-  configureCharacterPhysics,
-  getCharacterPhysics,
-  setAccelerate,
-  setAirAccelerate,
-  setAirWishCap,
-  setFriction,
-  setGravityScale,
-  setNoBunnyHop,
-  setPlatformerAir,
-  setSmallJumps,
-  setStopSpeed,
-  setTimeScale,
-} from "../physics/PlayerMovement.js";
+import { setGravityScale } from "../physics/PlayerMovement.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
 import { SERVER_CVAR_DEFS } from "./serverCVarDefs.js";
@@ -41,119 +28,9 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
     engine.cvars.register(def);
   }
 
-  const characterPhysics = getCVar(engine, "sv_characterphysics");
-  characterPhysics.set(getCharacterPhysics());
-  characterPhysics.onChange((value) => {
-    const previous = getCharacterPhysics();
-    void configureCharacterPhysics(value as number).catch((error) => {
-      console.error("Character physics initialization failed", error);
-      if (characterPhysics.get() === value) characterPhysics.set(previous);
-    });
-  });
-
-  // ── Wire CVars to server state ──
-  const sv_speed = getCVar(engine, "sv_speed");
-  server.speedMultiplier = sv_speed.get() as number;
-  sv_speed.onChange((val) => {
-    server.speedMultiplier = val as number;
-  });
-
-  const sv_gravity = getCVar(engine, "sv_gravity");
-  setGravityScale(sv_gravity.get() as number);
-  sv_gravity.onChange((val) => {
-    setGravityScale(val as number);
-  });
-
-  const sv_smalljumps = getCVar(engine, "sv_smalljumps");
-  setSmallJumps(sv_smalljumps.get() as boolean);
-  sv_smalljumps.onChange((val) => {
-    setSmallJumps(val as boolean);
-  });
-
-  const sv_nobunnyhop = getCVar(engine, "sv_nobunnyhop");
-  setNoBunnyHop(sv_nobunnyhop.get() as boolean);
-  sv_nobunnyhop.onChange((val) => {
-    setNoBunnyHop(val as boolean);
-  });
-
-  const sv_platformerair = getCVar(engine, "sv_platformerair");
-  setPlatformerAir(sv_platformerair.get() as boolean);
-  sv_platformerair.onChange((val) => {
-    setPlatformerAir(val as boolean);
-  });
-
-  const sv_friction = getCVar(engine, "sv_friction");
-  setFriction(sv_friction.get() as number);
-  sv_friction.onChange((val) => {
-    setFriction(val as number);
-  });
-
-  const sv_accelerate = getCVar(engine, "sv_accelerate");
-  setAccelerate(sv_accelerate.get() as number);
-  sv_accelerate.onChange((val) => {
-    setAccelerate(val as number);
-  });
-
-  const sv_airaccelerate = getCVar(engine, "sv_airaccelerate");
-  setAirAccelerate(sv_airaccelerate.get() as number);
-  sv_airaccelerate.onChange((val) => {
-    setAirAccelerate(val as number);
-  });
-
-  const sv_airwishcap = getCVar(engine, "sv_airwishcap");
-  setAirWishCap(sv_airwishcap.get() as number);
-  sv_airwishcap.onChange((val) => {
-    setAirWishCap(val as number);
-  });
-
-  const sv_stopspeed = getCVar(engine, "sv_stopspeed");
-  setStopSpeed(sv_stopspeed.get() as number);
-  sv_stopspeed.onChange((val) => {
-    setStopSpeed(val as number);
-  });
-
-  const sv_tickrate = getCVar(engine, "sv_tickrate");
-  const sv_tick_ms = getCVar(engine, "sv_tick_ms");
-  const sv_physics_mult = getCVar(engine, "sv_physics_mult");
-
-  let syncingTickCvars = false;
-  const applyTickMs = (ms: number) => {
-    server.setTickMs(ms);
-  };
-
-  applyTickMs(sv_tick_ms.get() as number);
-  server.setPhysicsMult(sv_physics_mult.get() as number);
-
-  sv_tickrate.onChange((val) => {
-    const hz = val as number;
-    const ms = 1000 / hz;
-    if (!syncingTickCvars) {
-      syncingTickCvars = true;
-      sv_tick_ms.set(ms);
-      syncingTickCvars = false;
-    }
-    applyTickMs(ms);
-  });
-  sv_tick_ms.onChange((val) => {
-    const ms = val as number;
-    if (!syncingTickCvars) {
-      syncingTickCvars = true;
-      sv_tickrate.set(1000 / ms);
-      syncingTickCvars = false;
-    }
-    applyTickMs(ms);
-  });
-  sv_physics_mult.onChange((val) => {
-    server.setPhysicsMult(val as number);
-  });
-
-  const sv_timescale = getCVar(engine, "sv_timescale");
-  server.timeScale = sv_timescale.get() as number;
-  setTimeScale(sv_timescale.get() as number);
-  sv_timescale.onChange((val) => {
-    server.timeScale = val as number;
-    setTimeScale(val as number);
-  });
+  const gravity = getCVar(engine, "sv_gravity");
+  setGravityScale(gravity.get() as number);
+  gravity.onChange((value) => setGravityScale(value as number));
 
   // ── Server Commands ──
 

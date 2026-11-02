@@ -99,3 +99,16 @@ Completion requires the shared normal startup path and legacy deletion, a cohere
 playable baseline with explicit peripheral dispositions, passing relevant checks,
 measured performance, review, clean commits and readiness. Do not call an isolated
 lab, option purge alone, a failing build, or a temporary compatibility shim complete.
+
+
+### Checkpoint 1a — public configuration purge
+
+Removed all server physics CVars except `sv_gravity`; removed client time-scale,
+prediction-disable and shadow extrapolation controls and their game/render wiring.
+Normal game URL no longer selects the disposable/persistent experimental backends
+or player hull. Network emulation, camera/render preferences and read-only
+reconciliation diagnostics remain. Deleted `CharacterPhysics.test.ts`, whose sole
+contract was lazy optional-backend selection. Shared contact/regression tests are
+retained until replaced with the new core outcomes. Internal old settings/schema
+and solver modules are transitional and must still be deleted later in this run;
+this checkpoint is not the completed physics reset.

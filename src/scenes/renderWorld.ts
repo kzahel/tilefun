@@ -41,16 +41,6 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     return;
   }
   const visible = camera.getVisibleChunkRange();
-  const extrapolate = gc.console.cvars.get("cl_extrapolate")?.get() === true;
-  const debugExtrapolation = gc.console.cvars.get("cl_debugextrapolation")?.get() === true;
-  const extrapolateAmountRaw = gc.console.cvars.get("cl_extrapolate_amount")?.get();
-  const extrapolateAmount =
-    typeof extrapolateAmountRaw === "number" ? Math.max(0, extrapolateAmountRaw) : 0;
-  const extrapolationGhosts =
-    (debugExtrapolation || extrapolate) && extrapolateAmount > 0
-      ? stateView.getExtrapolationGhosts?.(extrapolateAmount)
-      : undefined;
-
   gc.sceneFrame.presentationTime = gc.time?.presentationSeconds ?? 0;
   const items = collectScene(
     gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities,
@@ -62,7 +52,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     renderer,
     extraParticles ?? [],
     gc.spriteCatalog.has("grass-blades"),
-    debugExtrapolation ? extrapolationGhosts : undefined,
+    undefined,
     undefined,
     gc.sceneFrame,
   );

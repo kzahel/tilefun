@@ -774,11 +774,6 @@ export class GameClient {
       this.camera.zoom = val;
     });
 
-    // Wire cl_timescale to game loop
-    clientCVars.cl_timescale.onChange((val) => {
-      this.loop.timeScale = val;
-    });
-
     // Wire r_show3d to debug panel checkbox (bidirectional)
     clientCVars.r_show3d.onChange((val) => {
       this.debugPanel.show3d = val;
