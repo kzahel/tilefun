@@ -6,10 +6,11 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-it.each([30, 60, 120])("keeps %iHz wall-time cadence with integer timer delays", (hz) => {
+it("keeps 60Hz wall-time cadence with integer timer delays", () => {
+  const hz = 60;
   vi.useFakeTimers();
   const ticks: { at: number; dt: number }[] = [];
-  const loop = new ServerLoop((dt) => ticks.push({ at: performance.now(), dt }), hz);
+  const loop = new ServerLoop((dt) => ticks.push({ at: performance.now(), dt }));
   loop.start();
   loop.start();
   vi.advanceTimersByTime(10_000);
@@ -27,12 +28,12 @@ it.each([30, 60, 120])("keeps %iHz wall-time cadence with integer timer delays",
 });
 
 /** Drive a late OS timer while performance.now measures the actual wake. */
-function lateClock(hz = 60) {
+function lateClock() {
   vi.useFakeTimers();
   let now = 0;
   vi.spyOn(performance, "now").mockImplementation(() => now);
   const tick = vi.fn();
-  const loop = new ServerLoop(tick, hz);
+  const loop = new ServerLoop(tick);
   loop.start();
   return {
     loop,
@@ -67,8 +68,9 @@ it("bounds long stalls and drops debt instead of replaying hidden time", () => {
   loop.stop();
 });
 
-it.each([30, 60, 120])("caps catch-up simulation time at 250ms at %iHz", (hz) => {
-  const { loop, tick, wake } = lateClock(hz);
+it("caps catch-up simulation time at 250ms", () => {
+  const hz = 60;
+  const { loop, tick, wake } = lateClock();
   wake(250 + 1000 / hz + 0.1);
   const simulated = tick.mock.calls.reduce((sum, [dt]) => sum + dt, 0);
   expect(simulated).toBeLessThanOrEqual(0.250001);
@@ -107,31 +109,6 @@ it("accounts for callback work without adding its duration to every interval", (
   loop.stop();
 });
 
-it("changes 60→30→60Hz inside callbacks without extra old-rate catch-up or duplicate timers", () => {
-  vi.useFakeTimers();
-  let now = 0;
-  vi.spyOn(performance, "now").mockImplementation(() => now);
-  const dts: number[] = [];
-  const loop = new ServerLoop((dt) => {
-    dts.push(dt);
-    if (dts.length === 1) loop.setTickRate(30);
-    if (dts.length === 2) loop.setTickMs(1000 / 60);
-  });
-  loop.start();
-  now = 100;
-  vi.advanceTimersToNextTimer();
-  expect(dts).toEqual([1 / 60]);
-  expect(vi.getTimerCount()).toBe(1);
-  now = 134;
-  vi.advanceTimersToNextTimer();
-  expect(dts).toEqual([1 / 60, 1 / 30]);
-  expect(vi.getTimerCount()).toBe(1);
-  now = 151;
-  vi.advanceTimersToNextTimer();
-  expect(dts).toEqual([1 / 60, 1 / 30, 1 / 60]);
-  loop.stop();
-});
-
 it("can stop or stop/restart inside a tick without retaining the old timer generation", () => {
   vi.useFakeTimers();
   const tick = vi.fn(() => {
@@ -153,13 +130,9 @@ it("reports tick errors and honors a lifecycle stop from the error handler", () 
   vi.spyOn(console, "error").mockImplementation(() => {});
   const error = new Error("tick failure");
   const onError = vi.fn(() => loop.stop());
-  const loop = new ServerLoop(
-    () => {
-      throw error;
-    },
-    60,
-    onError,
-  );
+  const loop = new ServerLoop(() => {
+    throw error;
+  }, onError);
   loop.start();
   vi.advanceTimersByTime(100);
   expect(onError).toHaveBeenCalledExactlyOnceWith(error);
@@ -173,7 +146,7 @@ it("continues the same schedule after a recoverable tick error", () => {
     if (tick.mock.calls.length === 1) throw new Error("recoverable");
   });
   const onError = vi.fn();
-  const loop = new ServerLoop(tick, 60, onError);
+  const loop = new ServerLoop(tick, onError);
   loop.start();
   vi.advanceTimersByTime(101);
   expect(onError).toHaveBeenCalledTimes(1);

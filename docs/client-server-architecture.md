@@ -56,7 +56,8 @@ path still exists for specialized callers/tests; it is not the default launcher.
 All timed GameServer hosts use ServerLoop's monotonic fixed-step deadlines.
 Integer timer rounding and callback work do not accumulate simulation drift;
 short late wakes catch up, long stalls bound overdue debt to 250ms, and stop/resume
-start a fresh schedule; configurable legacy rate APIs are being retired by 205. Interactive embedded scenarios now use the
+start a fresh schedule. Both authority and client updates are fixed at 60Hz; there
+are no runtime rate/substep/time-scale setters. Interactive embedded scenarios now use the
 same ServerLoop and OrderedWorkerChannel. Their temporary Realm host separates
 input admission from ticks and uses ordinary streaming readiness policy. Explicit
 ScenarioSession steps remain available for headless tests and paused inspection.

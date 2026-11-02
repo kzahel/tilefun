@@ -1,35 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
-import {
-  PLAYER_ACCELERATE,
-  PLAYER_AIR_ACCELERATE,
-  PLAYER_AIR_WISHCAP,
-  PLAYER_FRICTION,
-  PLAYER_STOP_SPEED,
-} from "../config/constants.js";
 import { Direction } from "../entities/Entity.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
-import {
-  getAccelerate,
-  getAirAccelerate,
-  getAirWishCap,
-  getFriction,
-  getGravityScale,
-  getNoBunnyHop,
-  getPlatformerAir,
-  getSmallJumps,
-  getStopSpeed,
-  getTimeScale,
-  setAccelerate,
-  setAirAccelerate,
-  setAirWishCap,
-  setFriction,
-  setGravityScale,
-  setNoBunnyHop,
-  setPlatformerAir,
-  setSmallJumps,
-  setStopSpeed,
-  setTimeScale,
-} from "../physics/PlayerMovement.js";
+import { setGravityScale } from "../physics/Gravity.js";
 import type { FrameMessage } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import { createRobin } from "../wildlife/Robin.js";
@@ -601,63 +573,12 @@ describe("RemoteStateView", () => {
     expect(view.mountEntityId).toBeUndefined();
   });
 
-  it("syncs physics CVars from sync-cvars to PlayerMovement module", () => {
-    const world = new World(new FlatStrategy());
-    const view = new RemoteStateView(world);
-
-    // Reset to defaults
+  it("syncs only the gravity setting", () => {
+    const view = new RemoteStateView(new World());
+    view.applyMessage({ type: "sync-cvars", cvars: { gravity: 0.5 } });
+    expect(view.gravityScale).toBe(0.5);
+    expect(view.tickRate).toBe(60);
     setGravityScale(1);
-    setFriction(PLAYER_FRICTION);
-    setAccelerate(PLAYER_ACCELERATE);
-    setAirAccelerate(PLAYER_AIR_ACCELERATE);
-    setAirWishCap(PLAYER_AIR_WISHCAP);
-    setStopSpeed(PLAYER_STOP_SPEED);
-    setNoBunnyHop(false);
-    setSmallJumps(false);
-    setPlatformerAir(true);
-    setTimeScale(1);
-
-    view.applyMessage({
-      type: "sync-cvars",
-      cvars: {
-        gravity: 0.5,
-        friction: 4,
-        accelerate: 10,
-        airAccelerate: 0.7,
-        airWishCap: 30,
-        stopSpeed: 100,
-        noBunnyHop: true,
-        smallJumps: true,
-        platformerAir: false,
-        timeScale: 0.5,
-        tickMs: 1000 / 30,
-        physicsMult: 2,
-        tickRate: 30,
-      },
-    });
-
-    expect(getGravityScale()).toBe(0.5);
-    expect(getFriction()).toBe(4);
-    expect(getAccelerate()).toBe(10);
-    expect(getAirAccelerate()).toBe(0.7);
-    expect(getAirWishCap()).toBe(30);
-    expect(getStopSpeed()).toBe(100);
-    expect(getNoBunnyHop()).toBe(true);
-    expect(getSmallJumps()).toBe(true);
-    expect(getPlatformerAir()).toBe(false);
-    expect(getTimeScale()).toBe(0.5);
-
-    // Restore defaults so other tests aren't affected
-    setGravityScale(1);
-    setFriction(PLAYER_FRICTION);
-    setAccelerate(PLAYER_ACCELERATE);
-    setAirAccelerate(PLAYER_AIR_ACCELERATE);
-    setAirWishCap(PLAYER_AIR_WISHCAP);
-    setStopSpeed(PLAYER_STOP_SPEED);
-    setNoBunnyHop(false);
-    setSmallJumps(false);
-    setPlatformerAir(true);
-    setTimeScale(1);
   });
 
   it("applies sync-player-names", () => {

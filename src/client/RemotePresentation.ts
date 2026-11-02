@@ -19,20 +19,6 @@ export class RemotePresentation {
     return this.clock && this.first !== null ? Math.max(this.first, this.clock.time) : undefined;
   }
   private wasPaused = false;
-  private rate = 1;
-
-  setRate(rate: number, now: number) {
-    if (!Number.isFinite(rate) || rate < 0 || rate === this.rate) return;
-    if (this.clock && this.latest !== null) {
-      const state = advancePresentationClock(this.clock, now, this.latest, this.rate);
-      this.clock = {
-        localOrigin: now,
-        sourceOrigin: state.time + PRESENTATION_DELAY,
-        time: state.time,
-      };
-    }
-    this.rate = rate;
-  }
 
   record(entities: readonly Entity[], time: number, receivedAt: number) {
     if (this.latest !== null && time < this.latest) this.clear();
@@ -67,7 +53,7 @@ export class RemotePresentation {
         sourceOrigin: this.latest + PRESENTATION_DELAY,
         time: this.latest,
       };
-    } else this.clock = advancePresentationClock(this.clock, now, this.latest, this.rate);
+    } else this.clock = advancePresentationClock(this.clock, now, this.latest);
     this.wasPaused = paused;
     const time = paused ? this.latest : this.clock.time;
     return entities.map((e) => {

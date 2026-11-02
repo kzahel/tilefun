@@ -23,7 +23,6 @@ it("replicates original, painted and cleared cars to two clients and a reconnect
     sessions,
     tickCounter: 1,
     tickRate: 60,
-    physicsMult: 1,
     playerNamesRevision: 0,
     editorCursorsRevision: 0,
   };

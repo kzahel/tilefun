@@ -49,19 +49,15 @@ const publish = (freshFrames = false) => {
     ack: session.player.lastProcessedInputSeq,
   });
 };
-const loop = new ServerLoop(
-  (dt) => {
-    if (!session || failed) return;
-    const canPublish = ++ticks % 2 === 0 && channel.writable;
-    const began = performance.now();
-    const frames = session.tick(dt, canPublish);
-    realmTickMs = performance.now() - began;
-    engineFrames(frames);
-    if (canPublish) publish();
-  },
-  60,
-  fail,
-);
+const loop = new ServerLoop((dt) => {
+  if (!session || failed) return;
+  const canPublish = ++ticks % 2 === 0 && channel.writable;
+  const began = performance.now();
+  const frames = session.tick(dt, canPublish);
+  realmTickMs = performance.now() - began;
+  engineFrames(frames);
+  if (canPublish) publish();
+}, fail);
 
 async function receive(packet: PhysicsPacket) {
   if (packet.type === "open") {

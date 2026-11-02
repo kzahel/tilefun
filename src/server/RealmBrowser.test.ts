@@ -11,6 +11,7 @@ import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorld
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { SAVE_FORMAT } from "../persistence/SaveFormat.js";
+import { getGravityScale } from "../physics/Gravity.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
 import { GameServer } from "./GameServer.js";
@@ -1072,14 +1073,14 @@ it("remote administration requires authorization while ordinary chat and realm b
       { type: "recreate-world", requestId: 11, worldId },
       { type: "rename-world", requestId: 2, worldId, name: "Unauthorized" },
       { type: "delete-world", requestId: 3, worldId },
-      { type: "rcon", requestId: 4, command: "sv_speed 99" },
+      { type: "rcon", requestId: 4, command: "sv_gravity 99" },
     ] satisfies ClientMessage[])
       transport.clientSend("guest", message);
     // Omitting requestId must never bypass authorization on a decoded JSON message.
-    transport.clientSend("guest", { type: "rcon", command: "sv_speed 99" } as ClientMessage);
+    transport.clientSend("guest", { type: "rcon", command: "sv_gravity 99" } as ClientMessage);
     expect(transport.messagesOfType("guest", "request-error")).toHaveLength(6);
     expect(await registry.listWorlds()).toEqual(before);
-    expect(server.speedMultiplier).toBe(1);
+    expect(getGravityScale()).toBe(1);
     transport.clientSend("guest", { type: "rcon", requestId: 5, command: "say Hello" });
     expect(transport.messagesOfType("guest", "rcon-response").at(-1)?.output.join(" ")).toContain(
       "Hello",
@@ -1087,10 +1088,10 @@ it("remote administration requires authorization while ordinary chat and realm b
     transport.clientSend("guest", {
       type: "rcon",
       requestId: 6,
-      command: "sv_speed 2",
+      command: "sv_gravity 2",
       adminToken: "secret",
     });
-    expect(server.speedMultiplier).toBe(2);
+    expect(getGravityScale()).toBe(2);
     transport.clientSend("guest", {
       type: "rename-world",
       requestId: 7,

@@ -3,23 +3,7 @@ import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { setSpriteClipElapsed, tickSpriteAnimation } from "../entities/spriteAnimation.js";
-import { prepareCharacterPhysics } from "../physics/CharacterPhysics.js";
-import {
-  getMovementPhysicsParams,
-  selectCharacterPhysics,
-  setAccelerate,
-  setAirAccelerate,
-  setAirWishCap,
-  setFriction,
-  setGravityScale,
-  setNoBunnyHop,
-  setPlatformerAir,
-  setServerPhysicsMult,
-  setServerTickMs,
-  setSmallJumps,
-  setStopSpeed,
-  setTimeScale,
-} from "../physics/PlayerMovement.js";
+import { getGravityScale, setGravityScale } from "../physics/Gravity.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import type { GameServer } from "../server/GameServer.js";
 import { applyEntityDelta } from "../shared/entityDelta.js";
@@ -184,9 +168,6 @@ export class RemoteStateView implements ClientStateView {
   }
   private _lastProcessedInputSeq = 0;
   private _mountEntityId: number | undefined = undefined;
-  private _tickMs = 1000 / TICK_RATE;
-  private _tickRate = TICK_RATE;
-  private _physicsMult = 1;
   private _reconcileStats:
     | {
         samples: number;
@@ -247,8 +228,8 @@ export class RemoteStateView implements ClientStateView {
   }
 
   /** Server tick number from the latest game state. */
-  get physicsParameters() {
-    return getMovementPhysicsParams();
+  get gravityScale() {
+    return getGravityScale();
   }
 
   get simulationTime(): number | undefined {
@@ -409,7 +390,7 @@ export class RemoteStateView implements ClientStateView {
     this._entities = Array.from(this._entityMap.values());
     this.presentation.record(
       this._entities,
-      msg.simulationTime ?? (msg.serverTick * this._tickMs) / 1000,
+      msg.simulationTime ?? (msg.serverTick * (1000 / TICK_RATE)) / 1000,
       receivedAt,
     );
     this.updateExtrapolationStats(extrapolationSamples);
@@ -432,7 +413,7 @@ export class RemoteStateView implements ClientStateView {
   private applySyncInvincibility(msg: SyncInvincibilityMessage): void {
     this._invincibilityStartTick = msg.startTick;
     this._invincibilityDurationTicks = msg.durationTicks;
-    this._invincibilityTickRate = this._tickRate;
+    this._invincibilityTickRate = TICK_RATE;
     this.updateInvincibilityTimer();
   }
 
@@ -471,29 +452,7 @@ export class RemoteStateView implements ClientStateView {
 
   /** Apply physics CVars sync for client prediction. */
   private applySyncCVars(msg: SyncCVarsMessage): void {
-    const mode = msg.cvars.characterPhysics ?? 0;
-    selectCharacterPhysics(mode);
-    void prepareCharacterPhysics(mode).catch((error) =>
-      console.error("Prediction physics initialization failed", error),
-    );
     setGravityScale(msg.cvars.gravity);
-    setFriction(msg.cvars.friction);
-    setAccelerate(msg.cvars.accelerate);
-    setAirAccelerate(msg.cvars.airAccelerate);
-    setAirWishCap(msg.cvars.airWishCap);
-    setStopSpeed(msg.cvars.stopSpeed);
-    setNoBunnyHop(msg.cvars.noBunnyHop);
-    setSmallJumps(msg.cvars.smallJumps);
-    setPlatformerAir(msg.cvars.platformerAir);
-    setTimeScale(msg.cvars.timeScale);
-    this.presentation.setRate(msg.cvars.timeScale, performance.now() / 1000);
-    const tickMs = msg.cvars.tickMs > 0 ? msg.cvars.tickMs : 1000 / msg.cvars.tickRate;
-    this._tickMs = tickMs;
-    this._tickRate = 1000 / tickMs;
-    this._physicsMult = Math.max(1, Math.floor(msg.cvars.physicsMult ?? 1));
-    setServerTickMs(this._tickMs);
-    setServerPhysicsMult(this._physicsMult);
-    this.updateInvincibilityTimer();
   }
 
   /** Apply player names sync. */
@@ -526,9 +485,6 @@ export class RemoteStateView implements ClientStateView {
     this._invincibilityStartTick = -1;
     this._invincibilityDurationTicks = 0;
     this._invincibilityTickRate = TICK_RATE;
-    this._tickMs = 1000 / TICK_RATE;
-    this._tickRate = TICK_RATE;
-    this._physicsMult = 1;
     this._remoteCursors = [];
     this._playerNames = {};
     this._pendingStates.length = 0; // Fix: clear stale pending state from old realm
@@ -644,15 +600,11 @@ export class RemoteStateView implements ClientStateView {
   }
   /** Server tick rate in Hz (synced from sv_tickrate CVar). */
   get tickRate(): number {
-    return this._tickRate;
+    return TICK_RATE;
   }
   /** Server command tick interval in ms (synced from sv_tick_ms CVar). */
   get tickMs(): number {
-    return this._tickMs;
-  }
-  /** Physics substeps per command tick (synced from sv_physics_mult CVar). */
-  get physicsMult(): number {
-    return this._physicsMult;
+    return 1000 / TICK_RATE;
   }
 
   /** Raw server entities (not replaced by predictor). Used for reconciliation. */

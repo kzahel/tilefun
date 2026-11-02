@@ -14,15 +14,13 @@ export class ServerLoop {
   private generation = 0;
   private nextTickMs = 0;
   private readonly tickFn: (dt: number) => void;
-  private fixedDt: number;
+  private readonly fixedDt = 1 / TICK_RATE;
 
   constructor(
     tickFn: (dt: number) => void,
-    tickRate = TICK_RATE,
     private readonly onError?: (error: unknown) => void,
   ) {
     this.tickFn = tickFn;
-    this.fixedDt = 1 / tickRate;
   }
 
   start(): void {
@@ -50,7 +48,7 @@ export class ServerLoop {
       this.nextTickMs = now - MAX_CATCHUP_MS + stepMs;
     while (now >= this.nextTickMs) {
       const dt = this.fixedDt;
-      // Consume before callbacks can stop/restart or change the active rate.
+      // Consume before callbacks can stop or restart this clock.
       this.nextTickMs += dt * 1000;
       try {
         this.tickFn(dt);
@@ -68,19 +66,5 @@ export class ServerLoop {
     this.generation++;
     if (this.timerId !== null) clearTimeout(this.timerId);
     this.timerId = null;
-  }
-
-  setTickRate(hz: number): void {
-    if (!Number.isFinite(hz) || hz <= 0) return;
-    this.setTickMs(1000 / hz);
-  }
-
-  setTickMs(ms: number): void {
-    if (!Number.isFinite(ms) || ms <= 0) return;
-    this.fixedDt = ms / 1000;
-    if (this.running) {
-      this.stop();
-      this.start();
-    }
   }
 }

@@ -21,7 +21,6 @@ it("shares unchanged snapshots across clients while observing edits within the s
     sessions,
     tickCounter: 1,
     tickRate: 60,
-    physicsMult: 1,
     playerNamesRevision: 0,
     editorCursorsRevision: 0,
   };
@@ -62,7 +61,6 @@ it("replicates distant realm players for location markers while keeping other di
     sessions,
     tickCounter: 1,
     tickRate: 60,
-    physicsMult: 1,
     playerNamesRevision: 0,
     editorCursorsRevision: 0,
   };

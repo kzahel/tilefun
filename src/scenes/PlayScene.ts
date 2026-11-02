@@ -7,7 +7,6 @@ import { predictInput } from "../client/predictInput.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
-import { getTimeScale } from "../physics/PlayerMovement.js";
 import { isTrain } from "../railway/Train.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
@@ -335,7 +334,7 @@ export class PlayScene implements GameScene {
     if (vehicle) rawMovement = { ...rawMovement, jump: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked && !vehicle;
-    const commandDtMs = quantizeInputDtMs(dt * getTimeScale() * 1000);
+    const commandDtMs = quantizeInputDtMs(dt * 1000);
     const commandDt = commandDtMs / 1000;
     const movement = {
       dx: quantizeAxis(rawMovement.dx),

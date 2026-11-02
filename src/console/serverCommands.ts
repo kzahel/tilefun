@@ -1,5 +1,5 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
-import { setGravityScale } from "../physics/PlayerMovement.js";
+import { setGravityScale } from "../physics/Gravity.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
 import { SERVER_CVAR_DEFS } from "./serverCVarDefs.js";

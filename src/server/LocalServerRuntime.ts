@@ -1,5 +1,4 @@
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
-import { configureCharacterPhysics } from "../physics/PlayerMovement.js";
 import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import type { LocalHostDiagnostics, LocalHostPacket } from "../shared/localHostProtocol.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
@@ -79,10 +78,9 @@ export class LocalServerRuntime {
     this.server.onLoopError = (error) => this.fail(error);
   }
 
-  async init(metrics: boolean, keepAliveWhenHidden = false, characterPhysics = 0): Promise<void> {
+  async init(metrics: boolean, keepAliveWhenHidden = false): Promise<void> {
     this.keepAliveWhenHidden = keepAliveWhenHidden;
     performanceMetrics.enabled = metrics;
-    await configureCharacterPhysics(characterPhysics, true);
     await this.server.init();
     if (this.state !== "starting") throw Error("Local server stopped during startup");
     this.state = "ready";

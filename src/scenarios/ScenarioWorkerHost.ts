@@ -28,7 +28,6 @@ export class ScenarioWorkerHost {
         // Realm does not advance replica baselines while output is backpressured.
         if (frames.length) this.publish(this.response(0, frames));
       },
-      undefined,
       (error) => this.fail(error),
     );
   }

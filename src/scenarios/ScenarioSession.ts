@@ -144,7 +144,7 @@ export class ScenarioSession {
       async deleteWorld() {},
     };
     this.realm = new Realm([baseGameMod], {
-      physics: () => this.physics,
+      gravity: () => this.physics.gravityScale,
       ambientSpawns: false,
       ...(this.simulationOwner ? { simulationOwner: this.simulationOwner } : {}),
       ...(this.recipe.parking ? { parking: this.recipe.parking } : {}),

@@ -29,7 +29,7 @@ port.onmessage = ({ data }) => {
       return;
     }
     initialized = true;
-    void runtime.init(data.metrics, data.keepAliveWhenHidden, data.characterPhysics).then(
+    void runtime.init(data.metrics, data.keepAliveWhenHidden).then(
       () => port.postMessage({ kind: "ready" }),
       (error) => runtime.fail(error),
     );

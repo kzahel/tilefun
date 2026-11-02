@@ -27,7 +27,7 @@ export interface LocalHostDiagnostics {
   }[];
 }
 export type LocalHostBoot =
-  | { kind: "init"; metrics: boolean; characterPhysics?: number; keepAliveWhenHidden?: boolean }
+  | { kind: "init"; metrics: boolean; keepAliveWhenHidden?: boolean }
   | { kind: "attach-peer"; clientId: string; connectionId: number; port: MessagePort }
   | { kind: "detach-peer"; clientId: string; connectionId: number }
   | { kind: "peer-closed"; clientId: string; connectionId: number; error?: string }

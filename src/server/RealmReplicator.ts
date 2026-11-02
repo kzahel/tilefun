@@ -2,20 +2,7 @@ import { RENDER_DISTANCE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
-import {
-  getAccelerate,
-  getAirAccelerate,
-  getAirWishCap,
-  getCharacterPhysics,
-  getFriction,
-  getGravityScale,
-  getNoBunnyHop,
-  getPhysicsCVarRevision,
-  getPlatformerAir,
-  getSmallJumps,
-  getStopSpeed,
-  getTimeScale,
-} from "../physics/PlayerMovement.js";
+import { getGravityRevision, getGravityScale } from "../physics/Gravity.js";
 import { diffEntitySnapshots, type EntityDelta } from "../shared/entityDelta.js";
 import type {
   EntitySnapshot,
@@ -43,7 +30,6 @@ interface ReplicationSource {
     visible: ReadonlySet<number>,
   ) => import("../physics/PhysicsState.js").PhysicsState;
   readonly tickRate: number;
-  readonly physicsMult: number;
   readonly playerNamesRevision: number;
   readonly editorCursorsRevision: number;
 }
@@ -330,26 +316,11 @@ export class RealmReplicator {
     }
 
     // Sync: cvars
-    const cvarsRev = getPhysicsCVarRevision();
+    const cvarsRev = getGravityRevision();
     if (cvarsRev !== delta.cvarsRevision) {
       messages.push({
         type: "sync-cvars",
-        cvars: {
-          ...(getCharacterPhysics() ? { characterPhysics: getCharacterPhysics() } : {}),
-          gravity: getGravityScale(),
-          friction: getFriction(),
-          accelerate: getAccelerate(),
-          airAccelerate: getAirAccelerate(),
-          airWishCap: getAirWishCap(),
-          stopSpeed: getStopSpeed(),
-          noBunnyHop: getNoBunnyHop(),
-          smallJumps: getSmallJumps(),
-          platformerAir: getPlatformerAir(),
-          timeScale: getTimeScale(),
-          tickMs: 1000 / source.tickRate,
-          physicsMult: source.physicsMult,
-          tickRate: source.tickRate,
-        },
+        cvars: { gravity: getGravityScale() },
       });
       delta.cvarsRevision = cvarsRev;
     }

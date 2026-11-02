@@ -50,7 +50,6 @@ import {
   validateInspection,
 } from "../persistence/WorldInspection.js";
 import { WorldStorePool } from "../persistence/WorldStorePool.js";
-import { setServerPhysicsMult, setServerTickMs } from "../physics/PlayerMovement.js";
 import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
 import { drivenCarPose } from "../traffic/Driving.js";
 import type { IServerTransport } from "../transport/Transport.js";
@@ -135,15 +134,6 @@ export class GameServer {
   async settle(): Promise<void> {
     while (this.pendingOperations.size) await Promise.allSettled([...this.pendingOperations]);
   }
-
-  /** Player speed multiplier (set via sv_speed cvar). */
-  speedMultiplier = 1;
-  /** Server time scale (set via sv_timescale cvar). */
-  timeScale = 1;
-  /** Current server command tick interval in ms. */
-  private _tickMs = 1000 / TICK_RATE;
-  /** Physics substeps per command tick. */
-  private _physicsMult = 1;
 
   /** All active realms, keyed by worldId. */
   private readonly realms = new Map<string, Realm>();
@@ -272,13 +262,12 @@ export class GameServer {
   }
 
   /** Initialize the server-side console engine with server commands. */
-  initConsole(): void {
+  private async initConsole(): Promise<void> {
     const console_ = new ConsoleEngine();
     this.serverConsole = console_;
-    import("../console/serverCommands.js").then(({ registerServerCommands }) => {
-      registerServerCommands(console_, this);
-      console.log("[tilefun] server console initialized");
-    });
+    const { registerServerCommands } = await import("../console/serverCommands.js");
+    registerServerCommands(console_, this);
+    console.log("[tilefun] server console initialized");
   }
 
   /** Get the first player session (for single-player commands). */
@@ -289,7 +278,7 @@ export class GameServer {
   async init(): Promise<void> {
     // Register transport handlers
     this.start();
-    this.initConsole();
+    await this.initConsole();
 
     await this.registry.open();
     this.locations = new PlayerLocationStore(this.createStore(PLAYER_LOCATIONS_STORE));
@@ -532,7 +521,6 @@ export class GameServer {
       (dt) => {
         this.tick(dt);
       },
-      this.tickRate,
       (error) => this.onLoopError?.(error),
     );
     this.loop.start();
@@ -545,62 +533,22 @@ export class GameServer {
     this.broadcasting = false;
   }
 
-  /** Update server command tick rate (Hz, legacy compatibility). */
-  setTickRate(hz: number): void {
-    if (hz <= 0) return;
-    this.setTickMs(1000 / hz);
-  }
-
-  /** Update server command tick interval in milliseconds. */
-  setTickMs(ms: number): void {
-    if (ms <= 0) return;
-    if (Math.abs(ms - this._tickMs) < 1e-9) return;
-    const prevMs = this._tickMs;
-    this._tickMs = ms;
-    setServerTickMs(ms);
-    this.loop?.setTickMs(ms);
-    for (const realm of this.realms.values()) {
-      realm.tickRate = 1000 / ms;
-      realm.physicsMult = this._physicsMult;
-    }
-    console.log(
-      `[tilefun:server] tick changed: ${prevMs.toFixed(3)}ms (${(1000 / prevMs).toFixed(2)}Hz) -> ${ms.toFixed(3)}ms (${(1000 / ms).toFixed(2)}Hz)`,
-    );
-  }
-
-  setPhysicsMult(mult: number): void {
-    const next = Math.max(1, Math.floor(mult));
-    if (next === this._physicsMult) return;
-    const prev = this._physicsMult;
-    this._physicsMult = next;
-    setServerPhysicsMult(this._physicsMult);
-    for (const realm of this.realms.values()) {
-      realm.physicsMult = this._physicsMult;
-    }
-    console.log(`[tilefun:server] physics substeps changed: ${prev} -> ${this._physicsMult}`);
-  }
-
   get tickRate(): number {
-    return 1000 / this._tickMs;
+    return TICK_RATE;
   }
-
   get tickMs(): number {
-    return this._tickMs;
-  }
-
-  get physicsMult(): number {
-    return this._physicsMult;
+    return 1000 / TICK_RATE;
   }
 
   /** Run one simulation tick. Iterates ALL active realms. */
   tick(dt: number): void {
     const timing = performanceMetrics.start();
-    const scaledDt = dt * this.timeScale;
+    dt = 1 / TICK_RATE;
     const dormantIds = new Set(this.dormantSessions.keys());
     this.prepareResidentActivity(dormantIds);
     for (const realm of this.realms.values()) {
       realm.tick(
-        scaledDt,
+        dt,
         this.transport,
         this.broadcasting && (this.transport.canSend?.() ?? true),
         dormantIds,
@@ -740,8 +688,6 @@ export class GameServer {
     if (pending) return pending;
     const loading = (async () => {
       const realm = new Realm([baseGameMod]);
-      realm.tickRate = this.tickRate;
-      realm.physicsMult = this._physicsMult;
       try {
         await realm.loadWorld(
           worldId,

@@ -1,3 +1,5 @@
+import { getGravityScale, getGravityRevision } from "./Gravity.js";
+export { getGravityScale, setGravityScale } from "./Gravity.js";
 import {
   DEFAULT_PHYSICAL_HEIGHT,
   JUMP_CUT_MULTIPLIER,
@@ -68,7 +70,7 @@ export interface MovementPhysicsParams {
 /** Monotonic revision counter — incremented when any physics CVar changes. */
 let physicsCVarRevision = 0;
 export function getPhysicsCVarRevision(): number {
-  return physicsCVarRevision;
+  return physicsCVarRevision + getGravityRevision();
 }
 
 const movementPhysicsParams: Omit<MovementPhysicsParams, "revision"> = {
@@ -99,7 +101,7 @@ export function getMovementPhysicsParams(): MovementPhysicsParams {
     ...(movementPhysicsParams.characterPhysics
       ? { characterPhysics: movementPhysicsParams.characterPhysics }
       : {}),
-    gravityScale: movementPhysicsParams.gravityScale,
+    gravityScale: getGravityScale(),
     friction: movementPhysicsParams.friction,
     accelerate: movementPhysicsParams.accelerate,
     airAccelerate: movementPhysicsParams.airAccelerate,
@@ -133,13 +135,6 @@ export async function configureCharacterPhysics(mode: number, startup = false): 
   await prepareCharacterPhysics(mode);
   if (request === characterRequest)
     setPhysicsParam("characterPhysics", mode as CharacterPhysicsMode);
-}
-
-export function setGravityScale(scale: number): void {
-  setPhysicsParam("gravityScale", scale);
-}
-export function getGravityScale(): number {
-  return movementPhysicsParams.gravityScale;
 }
 
 export function setFriction(v: number): void {

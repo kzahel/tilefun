@@ -296,3 +296,36 @@ remaining peripheral pose writers; align/retire experimental labs and unsupporte
 controls; complete ordinary delayed P2P, streaming/device/performance and requested
 final review. No dev-ready marker yet. The clean shared default does not justify
 keeping dormant legacy implementations or declaring the reset complete.
+
+### Checkpoint 4a — gravity-only schema and fixed clocks
+
+Removed the remaining ordinary CVar schema/application for backend selection,
+friction/acceleration/air/jump variants, time scale, server tick-rate and physics
+multipliers. Normal frames sync only gravity through `Gravity.ts`; the ordinary
+predictor and authority no longer import the legacy movement implementation.
+Worker startup/transport has no backend selector. Realm has a gravity callback for
+scoped scenarios rather than a movement-parameter matrix.
+
+ServerLoop and GameLoop now have one fixed 60Hz clock and no rate/time-scale
+setters. GameServer's rate accessors are read-only, and main-thread startup no
+longer changes its clock from replication. Removed the obsolete speed multiplier,
+post-landing Quake jump branch and remote presentation-rate override. The old
+movement module still temporarily forwards gravity for its remaining retired
+consumers; deleting that module and those consumers is the next step, not a second
+supported configuration.
+
+Kept fixed-clock cadence, bounded stall debt, lifecycle stop/resume/error handling,
+120Hz display interpolation and sole-gravity replication tests. Retired the two
+clock rate-switch cases and collapsed rate permutations to the fixed default.
+Removed the old EntityActivation test fixture, which constructed an uninitialized
+Realm and asserted the deleted per-tier separation algorithm/substep counts; real
+shared residency/activation and streaming qualification remain required. The
+existing authorization check now uses the sole gravity setting rather than deleted
+speed tuning. It exposed unawaited console registration; GameServer startup now
+awaits command registration before accepting a ready connection.
+
+**95 focused native checks pass** (77 shared/clock/replica cases, 17 Worker transport/
+watchdog cases, one administration case), and all three TypeScript projects pass.
+No new lint diagnostics. No new browser/performance/readiness claim at this internal
+checkpoint. Legacy solver modules, alternate lab owners, remaining equipment/AI pose
+writers, obsolete commands/tests and final qualification still need removal/work.

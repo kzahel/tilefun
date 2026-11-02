@@ -4,6 +4,7 @@ import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
+import { getGravityScale } from "../physics/Gravity.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { type MotionIntent, type PhysicsGeometry, PhysicsScene } from "../physics/PhysicsScene.js";
 import { MAX_PREDICTION_BODIES, type PhysicsState } from "../physics/PhysicsState.js";
@@ -12,7 +13,6 @@ import {
   playerMotionIntent,
   vehicleMotionIntent,
 } from "../physics/PlayerControls.js";
-import { getGravityScale } from "../physics/PlayerMovement.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { World } from "../world/World.js";

@@ -70,14 +70,10 @@ import { SaveManager } from "../persistence/SaveManager.js";
 import { TrafficRecords } from "../persistence/TrafficRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickSharedBallGameplay } from "../physics/BallGameplay.js";
+import { getGravityScale } from "../physics/Gravity.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
 import { playerMotionIntent, vehicleMotionIntent } from "../physics/PlayerControls.js";
-import {
-  getMovementPhysicsParams,
-  initiateJump,
-  type PlayerStepOutcome,
-} from "../physics/PlayerMovement.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js";
@@ -141,7 +137,7 @@ export interface RealmOptions {
   /** Temporary review-world composition; ordinary saved worlds omit it. */
   landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile;
   definitions?: import("../persistence/ActorRecords.js").ActorDefinitions;
-  physics?: () => import("../physics/PlayerMovement.js").MovementPhysicsParams;
+  gravity?: () => number;
   random?: () => number;
   ambientSpawns?: boolean;
   /** Temporary backend proofs replace both player and ambient physics together. */
@@ -355,9 +351,8 @@ export class Realm {
   idleSince: number | null = null;
 
   /** Server tick rate in Hz (set by GameServer from sv_tickrate CVar). */
-  tickRate = TICK_RATE;
+  readonly tickRate = TICK_RATE;
   /** Physics substeps per command tick. */
-  physicsMult = 1;
 
   private readonly mods: Mod[];
   private modTeardowns = new Map<string, Unsubscribe>();
@@ -738,7 +733,7 @@ export class Realm {
           .map((s) => s.visibleRange),
         [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
       );
-    const movementPhysics = this.options.physics?.() ?? getMovementPhysicsParams();
+    const gravity = this.options.gravity?.() ?? getGravityScale();
     const controls = new Map<number, import("../input/ActionManager.js").Movement>();
     const controlTicks = new Map<number, number>();
     for (const session of this.sessions.values()) {
@@ -1056,7 +1051,7 @@ export class Realm {
               ),
             geometryVersion: this.geometryVersion,
           },
-          movementPhysics.gravityScale,
+          gravity,
         );
         this.entityManager.finishPhysics(participants, players, stepDt, (x, y) =>
           this.world.getCollisionIfLoaded(x, y),
@@ -1084,7 +1079,6 @@ export class Realm {
                 : {}),
             },
             getHeight,
-            movementPhysics,
           );
         }
         performanceMetrics.end("realm.entityPhysics", collisionTiming);
@@ -1245,7 +1239,6 @@ export class Realm {
       tickCounter: this.tickCounter,
       simulationTime: this.worldAPI.time,
       tickRate: this.tickRate,
-      physicsMult: this.physicsMult,
       ...(scene
         ? {
             physicsSnapshot: (anchorId: number, visible: ReadonlySet<number>) =>
@@ -2178,9 +2171,14 @@ export class Realm {
 
   private handlePlayerStepOutcome(
     session: PlayerSession,
-    outcome: PlayerStepOutcome,
+    outcome: {
+      landed: boolean;
+      enteredWater: boolean;
+      endedGrounded: boolean;
+      groundZ: number;
+      wildlifeContactId?: number;
+    },
     getHeight: (tx: number, ty: number) => number,
-    movementPhysics = getMovementPhysicsParams(),
   ): void {
     if (!outcome.landed) return;
     const p = session.player;
@@ -2223,13 +2221,6 @@ export class Realm {
     }
 
     if (!outcome.endedGrounded) return;
-
-    // Quake-style: jump immediately on landing if held and not consumed.
-    if (session.lastJumpHeld && !session.jumpConsumed) {
-      initiateJump(p, movementPhysics);
-      session.jumpConsumed = true;
-      return;
-    }
 
     if (session.gameplaySession.mountId === null) {
       this.tryMountOnLanding(session);

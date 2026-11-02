@@ -64,7 +64,6 @@ export class WorkerClientTransport implements IClientTransport {
     private readonly worker: WorkerEndpoint,
     private readonly options: {
       metrics?: boolean;
-      characterPhysics?: number;
       onError?: (error: Error) => void;
       timeoutMs?: number;
       watchdogMs?: number;
@@ -135,7 +134,6 @@ export class WorkerClientTransport implements IClientTransport {
       {
         kind: "init",
         metrics: options.metrics ?? false,
-        ...(options.characterPhysics ? { characterPhysics: options.characterPhysics } : {}),
         keepAliveWhenHidden: options.keepAliveWhenHidden ?? false,
       },
       [],

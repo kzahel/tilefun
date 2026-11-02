@@ -303,21 +303,7 @@ export interface WorldMapMessage {
 
 /** Physics CVar values that affect client-side prediction. */
 export interface PhysicsCVars {
-  characterPhysics?: import("../physics/CharacterPhysics.js").CharacterPhysicsMode;
   gravity: number;
-  friction: number;
-  accelerate: number;
-  airAccelerate: number;
-  airWishCap: number;
-  stopSpeed: number;
-  noBunnyHop: boolean;
-  smallJumps: boolean;
-  platformerAir: boolean;
-  timeScale: number;
-  tickMs: number;
-  physicsMult: number;
-  /** Backward-compat mirror of tickMs. */
-  tickRate: number;
 }
 
 // ---- Per-tick frame message (hot path — future unreliable channel) ----

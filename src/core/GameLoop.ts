@@ -11,7 +11,7 @@ export interface GameLoopCallbacks {
 /**
  * Fixed-timestep game loop with interpolation alpha.
  *
- * Runs update() at a fixed rate (default TICK_RATE Hz) regardless of display
+ * Runs update() at a fixed 60Hz rate regardless of display
  * refresh rate. The render() callback receives an alpha value [0, 1)
  * representing how far between two fixed updates the current frame falls,
  * for smooth interpolation on 120Hz/240Hz displays.
@@ -22,17 +22,10 @@ export class GameLoop {
   private running = false;
   private rafId = 0;
   private callbacks: GameLoopCallbacks;
-  private fixedDt = 1 / TICK_RATE;
-  timeScale = 1;
+  private readonly fixedDt = 1 / TICK_RATE;
 
   constructor(callbacks: GameLoopCallbacks) {
     this.callbacks = callbacks;
-  }
-
-  /** Change the simulation tick rate. Resets the accumulator to avoid burst ticks. */
-  setTickRate(hz: number): void {
-    this.fixedDt = 1 / hz;
-    this.accumulator = 0;
   }
 
   start(): void {
@@ -60,11 +53,11 @@ export class GameLoop {
       frameTime = MAX_FRAME_TIME;
     }
 
-    this.accumulator += frameTime * this.timeScale;
+    this.accumulator += frameTime;
 
     while (this.accumulator >= this.fixedDt) {
       const dt = this.fixedDt;
-      // Consume this step before callbacks can reset the accumulator/rate.
+      // Consume this step before callbacks run.
       this.accumulator -= dt;
       this.callbacks.update(dt);
     }
