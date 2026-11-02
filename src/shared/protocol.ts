@@ -323,6 +323,8 @@ export interface PhysicsCVars {
 // ---- Per-tick frame message (hot path — future unreliable channel) ----
 
 export interface FrameMessage {
+  /** Same physics tick for all bodies admitted to local replay. */
+  physics?: import("../physics/PhysicsState.js").PhysicsState;
   type: "frame";
   serverTick: number;
   /** Elapsed authoritative simulation seconds; independent of changing tick rate. */

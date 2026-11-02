@@ -5,6 +5,7 @@ import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { decodeServerMessage } from "../shared/binaryCodec.js";
 import { PlayerSession } from "./PlayerSession.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
@@ -33,6 +34,13 @@ it("normal Realm startup advances player, NPC and ball with one shared integrati
     const ball = s.realm.entityManager.entities.find((e) => e.type === "ball");
     expect(s.realm.collisionDiagnostics?.worldSteps).toBe(90);
     expect(s.realm.collisionDiagnostics?.bodyCreates).toBe(3);
+    const wire = s.frames()[0];
+    if (!wire) throw Error("Missing normal frame");
+    const frame = decodeServerMessage(wire);
+    if (frame.type !== "frame") throw Error("Expected normal frame");
+    expect(frame.physics?.tick).toBe(90);
+    expect(frame.physics?.bodies).toHaveLength(3);
+    expect(frame.physics?.omitted).toBe(0);
     expect(npc?.position.wx).toBeGreaterThan(65);
     expect(npc?.desiredVelocity?.vx).toBe(0);
     expect(Math.abs(ball?.wz ?? Infinity)).toBeLessThan(2);

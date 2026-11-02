@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x09 = FrameMessage (u16 entity types, vehicle paint, opt-in bed geometry) (server→client)
+ *   0x0A = FrameMessage (u16 entity types, vehicle paint, opt-in bed geometry) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x80 = player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -15,6 +15,7 @@ import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import { paintFromWire, paintWireIndex } from "../traffic/VehiclePaint.js";
 import type { EntityDelta } from "./entityDelta.js";
 import { ENTITY_TYPE_LIST, ENTITY_TYPE_TO_INDEX, indexToEntityType } from "./entityTypeIndex.js";
+import { physicsStateBytes, readPhysicsState, writePhysicsState } from "./physicsStateCodec.js";
 import type {
   ChunkSnapshot,
   ClientMessage,
@@ -26,7 +27,8 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x09;
+const TAG_FRAME = 0x0a;
+const TAG_PRE_SHARED_PHYSICS_FRAME = 0x09;
 const TAG_PRE_TRANSPORTER_FRAME = 0x08;
 const TAG_PRE_TOW_FRAME = 0x07;
 const TAG_PRE_TIPPING_FRAME = 0x06;
@@ -83,6 +85,7 @@ export function decodeServerMessage(buf: ArrayBuffer): ServerMessage {
   const tag = view.getUint8(0);
   if (tag === TAG_FRAME) return decodeFrameMessage(view, buf);
   if (
+    tag === TAG_PRE_SHARED_PHYSICS_FRAME ||
     tag === TAG_LEGACY_FRAME ||
     tag === TAG_PRE_PAINT_FRAME ||
     tag === TAG_PRE_BED_FRAME ||
@@ -142,7 +145,8 @@ function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
     FRAME_HEADER_SIZE +
     baselines.length * MAX_BASELINE_SIZE +
     deltas.length * MAX_DELTA_SIZE +
-    exits.length * 4;
+    exits.length * 4 +
+    physicsStateBytes(msg.physics);
 
   const buf = new ArrayBuffer(maxSize);
   const view = new DataView(buf);
@@ -182,6 +186,7 @@ function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
     off += 4;
   }
 
+  off = writePhysicsState(view, off, msg.physics);
   return buf.slice(0, off);
 }
 
@@ -244,6 +249,9 @@ function decodeFrameMessage(view: DataView, _buf: ArrayBuffer): FrameMessage {
     msg.entityExits = entityExits;
   }
 
+  const [physics, end] = readPhysicsState(view, off);
+  if (physics) msg.physics = physics;
+  if (end !== view.byteLength) throw Error("Unexpected trailing entity frame bytes");
   return msg;
 }
 

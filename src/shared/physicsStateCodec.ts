@@ -1,0 +1,142 @@
+import {
+  MAX_PREDICTION_BODIES,
+  type PhysicsBodyKind,
+  type PhysicsBodyState,
+  type PhysicsState,
+} from "../physics/PhysicsState.js";
+
+const KINDS: readonly PhysicsBodyKind[] = ["character", "vehicle", "loose", "fixed"];
+const POSITIONS = ["x", "y", "z"] as const;
+const FIELDS = [
+  "vx",
+  "vy",
+  "vz",
+  "heading",
+  "groundZ",
+  "desiredVx",
+  "desiredVy",
+  "normalX",
+  "normalY",
+  "normalZ",
+  "altitude",
+  "desiredHeading",
+] as const;
+const BODY_BYTES = 81;
+const HEADER_BYTES = 14;
+const NONE = 0xffff_ffff;
+
+export function physicsStateBytes(state?: PhysicsState): number {
+  if (state && state.bodies.length > MAX_PREDICTION_BODIES)
+    throw Error("Physics snapshot exceeds local body limit");
+  return 1 + (state ? HEADER_BYTES + state.bodies.length * BODY_BYTES : 0);
+}
+function uint(value: number) {
+  if (!Number.isInteger(value) || value < 0 || value > NONE) throw Error("Invalid physics integer");
+  return value;
+}
+function finite(value: number) {
+  if (!Number.isFinite(value)) throw Error("Non-finite physics state");
+  return value;
+}
+export function writePhysicsState(view: DataView, offset: number, state?: PhysicsState): number {
+  physicsStateBytes(state);
+  view.setUint8(offset++, state ? 1 : 0);
+  if (!state) return offset;
+  for (const value of [state.epoch, state.tick, state.omitted]) {
+    view.setUint32(offset, uint(value), true);
+    offset += 4;
+  }
+  view.setUint16(offset, state.bodies.length, true);
+  offset += 2;
+  const ids = new Set<number>();
+  for (const body of state.bodies) {
+    if (ids.has(body.id)) throw Error("Duplicate physics body");
+    ids.add(body.id);
+    view.setUint32(offset, uint(body.id), true);
+    offset += 4;
+    view.setUint32(offset, body.supportId === undefined ? NONE : uint(body.supportId), true);
+    offset += 4;
+    const kind = KINDS.indexOf(body.kind);
+    if (kind < 0) throw Error("Invalid physics body kind");
+    view.setUint8(
+      offset++,
+      kind |
+        (body.jumpHeld ? 4 : 0) |
+        (body.grounded ? 8 : 0) |
+        (body.altitude === undefined ? 0 : 16) |
+        (body.desiredHeading === undefined ? 0 : 32),
+    );
+    for (const field of POSITIONS) {
+      view.setFloat64(offset, finite(body[field]), true);
+      offset += 8;
+    }
+    for (const field of FIELDS) {
+      view.setFloat32(offset, finite(Math.fround(body[field] ?? 0)), true);
+      offset += 4;
+    }
+  }
+  return offset;
+}
+export function readPhysicsState(
+  view: DataView,
+  offset: number,
+): [PhysicsState | undefined, number] {
+  const present = view.getUint8(offset++);
+  if (present === 0) return [undefined, offset];
+  if (present !== 1) throw Error("Invalid physics snapshot presence");
+  const epoch = view.getUint32(offset, true);
+  offset += 4;
+  const tick = view.getUint32(offset, true);
+  offset += 4;
+  const omitted = view.getUint32(offset, true);
+  offset += 4;
+  const count = view.getUint16(offset, true);
+  offset += 2;
+  if (count > MAX_PREDICTION_BODIES || offset + count * BODY_BYTES > view.byteLength)
+    throw Error("Invalid physics snapshot body count/length");
+  const bodies: PhysicsBodyState[] = [],
+    ids = new Set<number>();
+  for (let i = 0; i < count; i++) {
+    const id = view.getUint32(offset, true);
+    offset += 4;
+    const supportId = view.getUint32(offset, true);
+    offset += 4;
+    const flags = view.getUint8(offset++),
+      kind = KINDS[flags & 3];
+    if (flags & 0xc0 || !kind || ids.has(id)) throw Error("Invalid physics body flags/identity");
+    ids.add(id);
+    const body: PhysicsBodyState = {
+      id,
+      kind,
+      jumpHeld: !!(flags & 4),
+      grounded: !!(flags & 8),
+      x: 0,
+      y: 0,
+      z: 0,
+      vx: 0,
+      vy: 0,
+      vz: 0,
+      heading: 0,
+      groundZ: 0,
+      desiredVx: 0,
+      desiredVy: 0,
+      normalX: 0,
+      normalY: 1,
+      normalZ: 0,
+    };
+    if (supportId !== NONE) body.supportId = supportId;
+    for (const field of POSITIONS) {
+      body[field] = finite(view.getFloat64(offset, true));
+      offset += 8;
+    }
+    for (const field of FIELDS) {
+      const value = finite(view.getFloat32(offset, true));
+      offset += 4;
+      if ((field === "altitude" && !(flags & 16)) || (field === "desiredHeading" && !(flags & 32)))
+        continue;
+      body[field] = value;
+    }
+    bodies.push(body);
+  }
+  return [{ epoch, tick, omitted, bodies }, offset];
+}

@@ -38,6 +38,10 @@ interface ReplicationSource {
   readonly sessions: ReadonlyMap<string, PlayerSession>;
   readonly tickCounter: number;
   readonly simulationTime?: number;
+  readonly physicsSnapshot?: (
+    anchorId: number,
+    visible: ReadonlySet<number>,
+  ) => import("../physics/PhysicsState.js").PhysicsState;
   readonly tickRate: number;
   readonly physicsMult: number;
   readonly playerNamesRevision: number;
@@ -222,6 +226,8 @@ export class RealmReplicator {
       lastProcessedInputSeq: session.lastProcessedInputSeq,
       playerEntityId: session.player.id,
     };
+    const anchor = session.player.parentId ?? session.player.id;
+    if (source.physicsSnapshot) frame.physics = source.physicsSnapshot(anchor, currentEntityIds);
     if (entityBaselines.length > 0) frame.entityBaselines = entityBaselines;
     if (entityDeltas.length > 0) frame.entityDeltas = entityDeltas;
     if (entityExits.length > 0) frame.entityExits = entityExits;

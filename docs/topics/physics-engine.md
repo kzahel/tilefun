@@ -27,8 +27,9 @@ EntityManager's separate collision/ground/separation phase. Players, NPCs, balls
 and basic cars now share `PhysicsScene` through ordinary ScenarioSession/Realm
 startup; AI supplies intent and readback owns poses. Native contact, input, AI,
 lifecycle, car save/reload and ball lifetime checks pass. **Client prediction still
-uses the old implementation**, so this is not a ready playable reset. Protocol/
-bounded replay, remaining peripheral writers and legacy deletion, Worker/P2P,
+uses the old implementation**, so this is not a ready playable reset. Bounded numerical body state now travels on normal frames (128-body cap, explicit
+overflow, scene epoch and common physics tick); the old predictor does not consume
+it yet. Bounded replay, remaining peripheral writers and legacy deletion, Worker/P2P,
 Chromebook evidence and review remain. See 205 for exact test dispositions/evidence.
 
 ## Historical replacement direction and early decision (201)

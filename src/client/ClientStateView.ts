@@ -179,6 +179,10 @@ export class RemoteStateView implements ClientStateView {
   private _stateAppliedThisTick = false;
   private _serverTick = 0;
   private _simulationTime: number | undefined;
+  private _physicsState: import("../physics/PhysicsState.js").PhysicsState | undefined;
+  get physicsState() {
+    return this._physicsState;
+  }
   private _lastProcessedInputSeq = 0;
   private _mountEntityId: number | undefined = undefined;
   private _tickMs = 1000 / TICK_RATE;
@@ -372,6 +376,7 @@ export class RemoteStateView implements ClientStateView {
     this._playerEntityId = msg.playerEntityId;
     this._serverTick = msg.serverTick;
     this._simulationTime = msg.simulationTime;
+    this._physicsState = msg.physics;
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
     this.updateInvincibilityTimer();
 
@@ -529,6 +534,7 @@ export class RemoteStateView implements ClientStateView {
     this._entityMap.clear();
     this.authoritativeClipPhases.clear();
     this._simulationTime = undefined;
+    this._physicsState = undefined;
     this._entities = [];
     this._props = [];
     this._playerEntityId = -1;

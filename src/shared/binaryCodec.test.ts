@@ -70,7 +70,7 @@ describe("FrameMessage binary codec", () => {
       playerEntityId: 1,
     };
     const buf = encodeServerMessage(msg);
-    expect(buf.byteLength).toBe(27); // header only
+    expect(buf.byteLength).toBe(28); // header only
     const decoded = decodeServerMessage(buf) as FrameMessage;
     expect(decoded).toEqual(msg);
   });
@@ -85,7 +85,7 @@ describe("FrameMessage binary codec", () => {
     };
     const decoded = roundtripServer(msg) as FrameMessage;
     expect(decoded).toEqual(msg);
-    expect(encodeServerMessage(msg).byteLength).toBe(27 + 3 * 4); // header + 3 u32s
+    expect(encodeServerMessage(msg).byteLength).toBe(28 + 3 * 4); // header + 3 u32s
   });
 
   it("roundtrips frame with baselines, deltas, and exits", () => {
@@ -281,7 +281,7 @@ describe("EntitySnapshot binary codec", () => {
       entityExits: [12, 13],
     };
     const bytes = encodeServerMessage(msg);
-    expect(new DataView(bytes).getUint8(0)).toBe(0x09);
+    expect(new DataView(bytes).getUint8(0)).toBe(0x0a);
     expect(roundtripServer(msg)).toEqual(msg);
   });
 
@@ -292,7 +292,7 @@ describe("EntitySnapshot binary codec", () => {
       lastProcessedInputSeq: 0,
       playerEntityId: 1,
     });
-    for (const tag of [0x01, 0x04, 0x05, 0x06, 0x07, 0x08]) {
+    for (const tag of [0x01, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09]) {
       new DataView(bytes).setUint8(0, tag);
       expect(() => decodeServerMessage(bytes)).toThrow("matching updated client and server");
     }
@@ -434,8 +434,8 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const buf = encodeServerMessage(msg);
-    // 27 header + (4 id + 4 changeMask + 4 nullMask + 8 position) = 47
-    expect(buf.byteLength).toBe(47);
+    // 27 header + (4 id + 4 changeMask + 4 nullMask + 8 position) + 1 physics presence = 48
+    expect(buf.byteLength).toBe(48);
   });
 
   it("roundtrips velocity set to null", () => {

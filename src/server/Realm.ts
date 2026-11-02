@@ -1230,6 +1230,7 @@ export class Realm {
     for (const session of this.sessions.values())
       session.player.jumpInputState =
         (session.jumpConsumed ? 1 : 0) | (session.lastJumpHeld ? 2 : 0);
+    const scene = this.physicsScene;
     return this.replication.build(clientId, {
       roomState: this.roomState,
       world: this.world,
@@ -1240,6 +1241,12 @@ export class Realm {
       simulationTime: this.worldAPI.time,
       tickRate: this.tickRate,
       physicsMult: this.physicsMult,
+      ...(scene
+        ? {
+            physicsSnapshot: (anchorId: number, visible: ReadonlySet<number>) =>
+              scene.snapshotAround(anchorId, visible),
+          }
+        : {}),
       playerNamesRevision: this.playerNamesRevision,
       editorCursorsRevision: this.editorCursorsRevision,
     });

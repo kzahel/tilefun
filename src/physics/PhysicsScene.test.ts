@@ -248,3 +248,27 @@ it("walks up a compiled ramp and retains empty space beneath an elevated deck", 
   expect(a.position.wx).toBeGreaterThan(90);
   expect(Math.abs(a.wz ?? Infinity)).toBeLessThan(0.15);
 });
+
+it("bounds local snapshots, exposes omitted bodies and changes epochs on scene replacement", async () => {
+  const a = await scene(),
+    b = await scene();
+  const actors = Array.from({ length: 150 }, (_, i) => {
+    const e = createPlayer((i % 15) * 8, Math.floor(i / 15) * 8);
+    e.id = i + 1;
+    return e;
+  });
+  a.synchronize(actors);
+  const visible = new Set(actors.map((e) => e.id)),
+    snapshot = a.snapshotAround(1, visible);
+  expect(snapshot.bodies.length).toBe(128);
+  expect(snapshot.omitted).toBe(22);
+  expect(snapshot.bodies[0]?.id).toBe(1);
+  const original = a.bodyState(1)?.x;
+  const first = snapshot.bodies[0];
+  if (!first) throw Error("Missing local anchor");
+  first.x = 999;
+  expect(a.bodyState(1)?.x).toBe(original);
+  expect(b.snapshot().epoch).not.toBe(snapshot.epoch);
+  visible.delete(1);
+  expect(a.snapshotAround(1, visible).omitted).toBeGreaterThan(0);
+});

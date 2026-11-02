@@ -195,3 +195,34 @@ protocol, and some peripheral commands still reject or reference retired equipme
 behavior. Next replace prediction/protocol at shared ticks, then remove those old
 engines/options and finish Worker/P2P/device qualification and review. Do not use
 this checkpoint as evidence of a completed cutover or Chromebook budget recovery.
+
+
+### Checkpoint 3b — bounded numerical state on ordinary frames
+
+Normal replication now carries a bounded numerical `PhysicsState`: scene epoch,
+physics tick, body kinds/poses/velocities, desired motor targets, jump latch and
+support normal/identity. It prioritizes the anchor's connected contacts, then nearby
+bodies within a 160px neighborhood (including body extent), and caps at 128 bodies.
+An explicit omitted count reports overflow or unavailable entity baselines; the new
+predictor must hold/recover rather than simulate through omitted contacts. Distant
+players still replicate as location markers without joining this local scene.
+No WASM full-world snapshots or entire streamed-world copies are added.
+
+World coordinates use Float64; motor/velocity/normal fields use Float32. The fixed
+wire body is 81 bytes, plus a 14-byte snapshot header and one presence byte. Thus a
+saturated 128-body snapshot adds about 10KB per frame; this is a bound, not a claim
+that bandwidth or replay CPU is qualified. Ordinary sparse worlds send only nearby
+physical bodies. Actual traffic, replay cost and Chromebook impact remain final gates.
+Frame tag is now `0x0a`; older frames explicitly reject and matching builds are
+required. Replicas cache the coherent state and clear it on world resets. Shared
+scene restore preserves the authoritative epoch and body kind; private membership
+can reconstruct body kinds without importing server-only AI/work components.
+
+**61 focused native checks pass**, including normal-frame delivery, bounded snapshot
+selection/overflow/isolation/epoch replacement, binary roundtrip and precise large
+coordinates, malformed/truncated/duplicate/oversized state rejection, replica reset,
+shared interactions, lifecycle/driving and existing entity codec/replication tests.
+All three TypeScript projects pass. Source lint has no introduced diagnostics (the
+existing binary entity codec still has its pre-existing non-null-assertion warnings).
+The ordinary old client predictor does not consume this state yet; replacement and
+latency/presentation qualification are next, with no readiness marker at this checkpoint.

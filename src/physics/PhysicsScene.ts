@@ -32,32 +32,18 @@ export interface MotionIntent {
   altitude?: number;
   heading?: number;
 }
-export type PhysicsBodyKind = "character" | "vehicle" | "loose" | "fixed";
-export interface PhysicsBodyState {
-  id: number;
-  x: number;
-  y: number;
-  z: number;
-  vx: number;
-  vy: number;
-  vz: number;
-  heading: number;
-  jumpHeld: boolean;
-  grounded: boolean;
-  groundZ: number;
-  desiredVx: number;
-  desiredVy: number;
-  altitude?: number;
-  desiredHeading?: number;
-  normalX: number;
-  normalY: number;
-  normalZ: number;
-  supportId?: number;
-}
-export interface PhysicsState {
-  tick: number;
-  bodies: PhysicsBodyState[];
-}
+export type { PhysicsBodyKind, PhysicsBodyState, PhysicsState } from "./PhysicsState.js";
+
+import {
+  MAX_PREDICTION_BODIES,
+  type PhysicsBodyKind,
+  type PhysicsBodyState,
+  type PhysicsState,
+  PREDICTION_RADIUS,
+} from "./PhysicsState.js";
+
+let nextSceneEpoch = 1;
+
 interface Body {
   entity: Entity;
   body: RAPIER.RigidBody;
@@ -96,6 +82,7 @@ export class PhysicsScene {
   private disposed = false;
   private originInitialized = false;
   private tick = 0;
+  private epoch = nextSceneEpoch++;
   readonly metrics = {
     worldSteps: 0,
     bodyCreates: 0,
@@ -132,7 +119,7 @@ export class PhysicsScene {
   }
 
   /** Synchronize membership/explicit edits once, not once per neighboring motor. */
-  synchronize(entities: readonly Entity[]) {
+  synchronize(entities: readonly Entity[], kinds?: ReadonlyMap<number, PhysicsBodyKind>) {
     if (this.disposed) throw Error("Physics scene is disposed");
     const present = new Set<number>();
     if (!this.originInitialized && entities[0]) {
@@ -142,15 +129,10 @@ export class PhysicsScene {
     }
     for (const entity of entities) {
       const c = entity.collider;
-      if (
-        !c ||
-        entity.parentId !== undefined ||
-        (c.solid === false && entity.type !== "ball" && !entity.workItem)
-      )
-        continue;
+      const kind = kinds?.get(entity.id) ?? physicsBodyKind(entity);
+      if (!c || entity.parentId !== undefined || (c.solid === false && kind !== "loose")) continue;
       if (present.has(entity.id)) throw Error(`Duplicate physics body ${entity.id}`);
       present.add(entity.id);
-      const kind = physicsBodyKind(entity);
       const vehicleSize = kind === "vehicle" ? vehicleBodySize(entity.type, 0) : undefined;
       const width = vehicleSize?.width ?? c.width,
         height = vehicleSize?.height ?? c.height;
@@ -218,6 +200,7 @@ export class PhysicsScene {
           offsetY,
           state: {
             id: entity.id,
+            kind,
             x: entity.position.wx,
             y: entity.position.wy,
             z: entity.wz ?? 0,
@@ -516,8 +499,55 @@ export class PhysicsScene {
     return this.bodies.get(id)?.state;
   }
 
+  /** Keep the anchor's contact graph, then nearby bodies, with an explicit cap.
+   * Reads cached numerical states; never serializes or copies a WASM world.
+   */
+  snapshotAround(anchorId: number, visible: ReadonlySet<number>): PhysicsState {
+    const anchor = this.bodies.get(anchorId);
+    if (!anchor) return { epoch: this.epoch, tick: this.tick, omitted: 0, bodies: [] };
+    const selected = new Map<number, Body>();
+    const required = new Set<number>();
+    const queue = [anchorId];
+    for (let i = 0; i < queue.length; i++) {
+      const id = queue[i];
+      if (id === undefined || required.has(id) || !this.bodies.has(id)) continue;
+      required.add(id);
+      for (const neighbor of this.contacts.get(id) ?? [])
+        if (!required.has(neighbor)) queue.push(neighbor);
+      const support = this.bodies.get(id)?.state.supportId;
+      if (support !== undefined && !required.has(support)) queue.push(support);
+    }
+    const candidates: { id: number; distance: number }[] = [];
+    for (const [id, entry] of this.bodies) {
+      const half =
+        Math.hypot(entry.entity.collider?.width ?? 0, entry.entity.collider?.height ?? 0) / 2;
+      const distance = Math.hypot(entry.state.x - anchor.state.x, entry.state.y - anchor.state.y);
+      if (distance <= PREDICTION_RADIUS + half || required.has(id))
+        candidates.push({ id, distance });
+    }
+    candidates.sort(
+      (a, b) =>
+        Number(required.has(b.id)) - Number(required.has(a.id)) ||
+        a.distance - b.distance ||
+        a.id - b.id,
+    );
+    for (const { id } of candidates)
+      if (visible.has(id) && selected.size < MAX_PREDICTION_BODIES) {
+        const entry = this.bodies.get(id);
+        if (entry) selected.set(id, entry);
+      }
+    return {
+      epoch: this.epoch,
+      tick: this.tick,
+      omitted: candidates.length - selected.size,
+      bodies: [...selected.values()].map((entry) => ({ ...entry.state })),
+    };
+  }
+
   snapshot(): PhysicsState {
     return {
+      epoch: this.epoch,
+      omitted: 0,
       tick: this.tick,
       bodies: [...this.bodies.values()].map((entry) => ({ ...entry.state })),
     };
@@ -525,9 +555,12 @@ export class PhysicsScene {
   /** Restore body/motor state at an authoritative physics tick; no hidden step. */
   restore(snapshot: PhysicsState) {
     this.tick = snapshot.tick;
+    this.epoch = snapshot.epoch;
+    this.contacts.clear();
     for (const state of snapshot.bodies) {
       const entry = this.bodies.get(state.id);
-      if (!entry) throw Error(`Missing physics body ${state.id} during restore`);
+      if (!entry || entry.kind !== state.kind)
+        throw Error(`Missing or incompatible physics body ${state.id} during restore`);
       entry.body.setTranslation(
         {
           x: state.x / SCALE + entry.offsetX - this.origin.x,
