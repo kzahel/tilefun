@@ -1,6 +1,6 @@
 # Rapier replacement and early decision sequence
 
-Status: owner-approved; slices 1–3 authorized and in progress, 2026-11-02.
+Status: slices 1–3 reached the early decision; cutover paused on failed Chromebook CPU gate, 2026-11-02.
 Parent sequencing plan. Owner: [physics engine](../topics/physics-engine.md).
 
 ## Outcome and scope
@@ -180,4 +180,8 @@ Broader traffic and articulated vehicle dynamics follow only after this proof.
 The owner authorized implementation through the early decision, with incremental
 commits. [202](202-persistent-realm-collision-proof.md) records execution, baseline,
 checks and remaining gaps. Default cutover/deletion and dynamic-car expansion are
-later slices; no qualification decision has been reached yet.
+later slices. The early decision is **no cutover**: the representative persistent
+controlled-collision proof passes focused gameplay/prediction checks but its
+Chromebook crowd CPU cost fails the provisional budget. A bounded NPC stepping
+performance proof must precede any renewed compatibility/default investment; see
+202 for raw paired GPU/Canvas/native captures and unqualified gates.

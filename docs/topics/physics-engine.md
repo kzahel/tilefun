@@ -1,6 +1,6 @@
 # General 3D physics backend
 
-Status: opt-in on-foot game integration available; owner-approved replacement direction with early qualification gates.
+Status: persistent realm proof available; early Chromebook CPU gate failed, default cutover paused.
 Updated: 2026-11-02.
 
 Owns the physics-backend replacement direction. [World geometry](world-geometry.md)
@@ -48,11 +48,13 @@ general dynamic rigid-body simulation. Unqualified mounts, autonomous traffic,
 parking, rail motion and moving roof passengers do not fall through to old solvers.
 Other compatibility gaps and the source/validation inventory belong to 202.
 
-Initial physical Chromebook crowd results exceed the proposed cutover budget;
-the decision remains pending final measurements after review fixes and a bounded
-fine-index adjustment. Smooth main-thread FPS does not qualify an over-budget
-authority tick. No default switch or legacy deletion has been authorized by this
-evidence.
+The final physical Chromebook GPU comparison fails the proposed cutover budget:
+24/96/384-near NPC tick p95 is 15–18.8/26.8–27.8/118.3–125.6ms versus legacy
+5.6–8.6/17.1–17.9/30.6–32.3ms. The decision is **no default cutover**. Smooth
+main-thread frames hide the Worker slowdown. Migration pauses before compatibility
+and dynamic-car expansion; first reconsider repeated per-NPC motor/query/refresh
+work in a bounded performance proof. [202](../tactical/202-persistent-realm-collision-proof.md#early-decision--stop-the-cutover-reconsider-the-npc-stepping-approach)
+owns raw evidence, next exit conditions and unqualified gates.
 
 ## Retained subsystem constraints
 

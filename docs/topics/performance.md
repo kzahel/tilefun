@@ -4,9 +4,11 @@ Physics replacement qualification (2026-11-02) is tracked in
 [202](../tactical/202-persistent-realm-collision-proof.md). The existing native
 active-crowds runner accepts `--physics=3` and a paired browser runner exercises the
 same ordinary Realm/Worker/rendering through the World Geometry crowd fixture.
-Initial physical Chromebook data fails the proposed dense-crowd cutover budget
-despite mostly smooth main-thread frames. Final results after the bounded fine-index
-adjustment are pending; this is not a promoted performance gain or default switch.
+Final paired physical Chromebook GPU and Canvas data fails the proposed cutover
+budget despite mostly smooth main-thread frames. At 384 active nearby NPCs GPU
+Worker tick p95 is 118–126ms versus legacy 31–32ms; smaller cohorts also regress.
+The decision is no default cutover. Reconsider per-NPC motor/query/refresh cost
+before compatibility migration; raw captures and measurement limits live in 202.
 
 Topic: performance
 Status: shared Worker authority and terrain preparation implemented; physical

@@ -1,0 +1,2814 @@
+{
+  "qualification": {
+    "physicsSourceRevision": "b65323105c728f65112f7aaacf0d4d13f58b2c2e",
+    "notes": [
+      "Physical Chromebook; frozen production build; actual renderer gpu verified in every case; canvas scrolled visible.",
+      "Requested 4s warmup and 6s sample. elapsedMs includes diagnostic reply and authority catch-up; use actual elapsed, not requested seconds, for throughput.",
+      "Normal seeded dog AI/activation; fixed camera culls offscreen actors. This is not an all-actors-visible rendering qualification.",
+      "navigator.deviceMemory is a browser bucket, not a measurement of installed RAM."
+    ]
+  },
+  "revision": "ee4196e63c3952635143bb65d4bb7e3398b8f3e4",
+  "dirty": false,
+  "date": "2026-11-02T17:10:26.252Z",
+  "browser": "150.0.7871.287",
+  "lane": "dedicated physical browser via CDP",
+  "renderer": "gpu",
+  "seconds": 6,
+  "warmup": 4,
+  "trials": 2,
+  "cases": [
+    {
+      "trial": 0,
+      "population": 0,
+      "mode": "legacy",
+      "elapsedMs": 6032.79999999702,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 362,
+            "totalMs": 4.900000020861626,
+            "maxMs": 0.20000000298023224,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.10000000894069672,
+            "p99Ms": 0.10000000894069672
+          },
+          "realm.entityPhysics": {
+            "count": 362,
+            "totalMs": 13.400000140070915,
+            "maxMs": 0.7000000029802322,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.10000000894069672,
+            "p99Ms": 0.20000000298023224
+          },
+          "server.autotile": {
+            "count": 362,
+            "totalMs": 2.9000000059604645,
+            "maxMs": 0.20000000298023224,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 362,
+            "totalMs": 72.299999833107,
+            "maxMs": 2.8999999910593033,
+            "retained": 362,
+            "p50Ms": 0.20000000298023224,
+            "p95Ms": 0.29999999701976776,
+            "p99Ms": 0.7000000029802322
+          },
+          "realm.tick": {
+            "count": 362,
+            "totalMs": 399.89999993145466,
+            "maxMs": 3.8999999910593033,
+            "retained": 362,
+            "p50Ms": 1,
+            "p95Ms": 1.699999988079071,
+            "p99Ms": 2.7999999970197678
+          }
+        },
+        "collision": null
+      },
+      "frames": {
+        "count": 361,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1274,
+            "uploadedBytes": 3126084464,
+            "vertexUploadedBytes": 457920,
+            "drawCalls": 2545,
+            "frames": 636,
+            "textureBytes": 2474864,
+            "textures": 3,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.9240000000000871,
+        "steps": 634,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 638
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 10,
+            "highWaterCount": 2
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 0,
+      "population": 0,
+      "mode": "rapier",
+      "elapsedMs": 6035.0999999940395,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 362,
+            "totalMs": 4.499999985098839,
+            "maxMs": 0.20000000298023224,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "realm.entityPhysics": {
+            "count": 362,
+            "totalMs": 10.799999952316284,
+            "maxMs": 0.20000000298023224,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.10000000894069672,
+            "p99Ms": 0.20000000298023224
+          },
+          "server.autotile": {
+            "count": 362,
+            "totalMs": 3.399999961256981,
+            "maxMs": 0.29999999701976776,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 362,
+            "totalMs": 64.70000003278255,
+            "maxMs": 1.1000000089406967,
+            "retained": 362,
+            "p50Ms": 0.19999998807907104,
+            "p95Ms": 0.30000001192092896,
+            "p99Ms": 0.6000000089406967
+          },
+          "realm.tick": {
+            "count": 362,
+            "totalMs": 532.3999999165535,
+            "maxMs": 5.699999988079071,
+            "retained": 362,
+            "p50Ms": 1.4000000059604645,
+            "p95Ms": 2.300000011920929,
+            "p99Ms": 3.4000000059604645
+          }
+        },
+        "collision": {
+          "replacedActorShapes": 0,
+          "queries": 660,
+          "rebuiltSections": 4,
+          "queryMs": 431.39999997615814,
+          "geometryMs": 46.099999994039536,
+          "refreshMs": 191.99999991059303,
+          "sections": 4,
+          "actors": 1,
+          "colliders": 5,
+          "unsupported": {}
+        }
+      },
+      "frames": {
+        "count": 361,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1242,
+            "uploadedBytes": 3047441264,
+            "vertexUploadedBytes": 446400,
+            "drawCalls": 2481,
+            "frames": 620,
+            "textureBytes": 2474864,
+            "textures": 3,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.820000000178777,
+        "steps": 623,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 625
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 60,
+            "highWaterCount": 6
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 0,
+      "population": 24,
+      "mode": "legacy",
+      "elapsedMs": 6137.20000000298,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 368,
+            "totalMs": 185.3000001013279,
+            "maxMs": 3,
+            "retained": 368,
+            "p50Ms": 0.4000000059604645,
+            "p95Ms": 0.9000000059604645,
+            "p99Ms": 2.5
+          },
+          "realm.entityPhysics": {
+            "count": 368,
+            "totalMs": 597.0999998152256,
+            "maxMs": 3.2999999970197678,
+            "retained": 368,
+            "p50Ms": 1.5999999940395355,
+            "p95Ms": 2.5999999940395355,
+            "p99Ms": 3.2000000029802322
+          },
+          "server.autotile": {
+            "count": 368,
+            "totalMs": 2.1999999284744263,
+            "maxMs": 0.10000000894069672,
+            "retained": 368,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 368,
+            "totalMs": 151.60000018775463,
+            "maxMs": 1.5,
+            "retained": 368,
+            "p50Ms": 0.4000000059604645,
+            "p95Ms": 0.7000000029802322,
+            "p99Ms": 1
+          },
+          "realm.tick": {
+            "count": 368,
+            "totalMs": 1447.9000001102686,
+            "maxMs": 9.599999994039536,
+            "retained": 368,
+            "p50Ms": 4.0999999940395355,
+            "p95Ms": 5.5999999940395355,
+            "p99Ms": 7.700000002980232
+          }
+        },
+        "collision": null
+      },
+      "frames": {
+        "count": 367,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1296,
+            "uploadedBytes": 3173470160,
+            "vertexUploadedBytes": 3678192,
+            "drawCalls": 2585,
+            "frames": 645,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.8499999998212485,
+        "steps": 642,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 643
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 20,
+            "highWaterCount": 2
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 0,
+      "population": 24,
+      "mode": "rapier",
+      "elapsedMs": 6134,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 368,
+            "totalMs": 84.09999980032444,
+            "maxMs": 1,
+            "retained": 368,
+            "p50Ms": 0.20000000298023224,
+            "p95Ms": 0.5,
+            "p99Ms": 0.7000000029802322
+          },
+          "realm.entityPhysics": {
+            "count": 368,
+            "totalMs": 1923.3000002354383,
+            "maxMs": 18.799999997019768,
+            "retained": 368,
+            "p50Ms": 4.4000000059604645,
+            "p95Ms": 12,
+            "p99Ms": 16
+          },
+          "server.autotile": {
+            "count": 368,
+            "totalMs": 1.1999999582767487,
+            "maxMs": 0.10000000894069672,
+            "retained": 368,
+            "p50Ms": 0,
+            "p95Ms": 0,
+            "p99Ms": 0.09999999403953552
+          },
+          "server.replication": {
+            "count": 368,
+            "totalMs": 76.00000017881393,
+            "maxMs": 0.6000000089406967,
+            "retained": 368,
+            "p50Ms": 0.20000000298023224,
+            "p95Ms": 0.4000000059604645,
+            "p99Ms": 0.5
+          },
+          "realm.tick": {
+            "count": 368,
+            "totalMs": 2476.900000154972,
+            "maxMs": 22.099999994039536,
+            "retained": 368,
+            "p50Ms": 5.799999997019768,
+            "p95Ms": 15,
+            "p99Ms": 19
+          }
+        },
+        "collision": {
+          "replacedActorShapes": 0,
+          "queries": 16281,
+          "rebuiltSections": 5,
+          "queryMs": 3380.200000718236,
+          "geometryMs": 82.99999998509884,
+          "refreshMs": 647.5000001639128,
+          "sections": 5,
+          "actors": 25,
+          "colliders": 30,
+          "unsupported": {}
+        }
+      },
+      "frames": {
+        "count": 367,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1298,
+            "uploadedBytes": 3178385360,
+            "vertexUploadedBytes": 3590784,
+            "drawCalls": 2589,
+            "frames": 646,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.9780000000001344,
+        "steps": 649,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 649
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 110,
+            "highWaterCount": 11
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 0,
+      "population": 96,
+      "mode": "legacy",
+      "elapsedMs": 6149.399999991059,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 368,
+            "totalMs": 505.7999999374151,
+            "maxMs": 4.700000002980232,
+            "retained": 368,
+            "p50Ms": 1.2000000029802322,
+            "p95Ms": 2.7000000029802322,
+            "p99Ms": 4.199999988079071
+          },
+          "realm.entityPhysics": {
+            "count": 368,
+            "totalMs": 1311.700000077486,
+            "maxMs": 12.099999994039536,
+            "retained": 368,
+            "p50Ms": 3,
+            "p95Ms": 8.200000002980232,
+            "p99Ms": 10.300000011920929
+          },
+          "server.autotile": {
+            "count": 368,
+            "totalMs": 2.099999949336052,
+            "maxMs": 0.10000000894069672,
+            "retained": 368,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 368,
+            "totalMs": 191.20000018179417,
+            "maxMs": 1.9000000059604645,
+            "retained": 368,
+            "p50Ms": 0.4000000059604645,
+            "p95Ms": 1.0999999940395355,
+            "p99Ms": 1.7999999970197678
+          },
+          "realm.tick": {
+            "count": 368,
+            "totalMs": 2825.8999999910593,
+            "maxMs": 23.600000008940697,
+            "retained": 368,
+            "p50Ms": 6.5999999940395355,
+            "p95Ms": 17.100000008940697,
+            "p99Ms": 21.399999991059303
+          }
+        },
+        "collision": null
+      },
+      "frames": {
+        "count": 367,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.30000000000109,
+        "over25ms": 1,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1294,
+            "uploadedBytes": 3168554960,
+            "vertexUploadedBytes": 9760032,
+            "drawCalls": 2581,
+            "frames": 644,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.20399999982124947,
+        "steps": 643,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 642
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 30,
+            "highWaterCount": 3
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 0,
+      "population": 96,
+      "mode": "rapier",
+      "elapsedMs": 6583.300000011921,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 302,
+            "totalMs": 225.39999993145466,
+            "maxMs": 3.7000000029802322,
+            "retained": 302,
+            "p50Ms": 0.6000000089406967,
+            "p95Ms": 1.2000000029802322,
+            "p99Ms": 1.8999999910593033
+          },
+          "realm.entityPhysics": {
+            "count": 302,
+            "totalMs": 5606.300000101328,
+            "maxMs": 31.400000005960464,
+            "retained": 302,
+            "p50Ms": 18.099999994039536,
+            "p95Ms": 22.799999997019768,
+            "p99Ms": 26.19999998807907
+          },
+          "server.autotile": {
+            "count": 302,
+            "totalMs": 2.3000000566244125,
+            "maxMs": 0.10000000894069672,
+            "retained": 302,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 302,
+            "totalMs": 119.10000009834766,
+            "maxMs": 1.0999999940395355,
+            "retained": 302,
+            "p50Ms": 0.3999999910593033,
+            "p95Ms": 0.6000000089406967,
+            "p99Ms": 0.7000000029802322
+          },
+          "realm.tick": {
+            "count": 302,
+            "totalMs": 6442.2000001221895,
+            "maxMs": 38,
+            "retained": 302,
+            "p50Ms": 20.700000002980232,
+            "p95Ms": 26.799999997019768,
+            "p99Ms": 29.900000005960464
+          }
+        },
+        "collision": {
+          "replacedActorShapes": 0,
+          "queries": 49513,
+          "rebuiltSections": 7,
+          "queryMs": 9159.700000196695,
+          "geometryMs": 137.70000045001507,
+          "refreshMs": 1797.1000011265278,
+          "sections": 7,
+          "actors": 97,
+          "colliders": 104,
+          "unsupported": {}
+        }
+      },
+      "frames": {
+        "count": 393,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 33.19999999999891,
+        "over25ms": 1,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1420,
+            "uploadedBytes": 3478212560,
+            "vertexUploadedBytes": 11058192,
+            "drawCalls": 2833,
+            "frames": 707,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.16200000017884472,
+        "steps": 712,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 505
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 22,
+            "oldestIncomingMs": 14.599999994039536,
+            "highWaterBytes": 410,
+            "highWaterCount": 41
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 0,
+      "population": 384,
+      "mode": "legacy",
+      "elapsedMs": 6550.70000000298,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 285,
+            "totalMs": 1346.0999998152256,
+            "maxMs": 15.799999997019768,
+            "retained": 285,
+            "p50Ms": 4,
+            "p95Ms": 8.5,
+            "p99Ms": 11
+          },
+          "realm.entityPhysics": {
+            "count": 285,
+            "totalMs": 3145.5,
+            "maxMs": 19.799999997019768,
+            "retained": 285,
+            "p50Ms": 10.599999994039536,
+            "p95Ms": 14.700000002980232,
+            "p99Ms": 18.400000005960464
+          },
+          "server.autotile": {
+            "count": 285,
+            "totalMs": 1,
+            "maxMs": 0.10000000894069672,
+            "retained": 285,
+            "p50Ms": 0,
+            "p95Ms": 0,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 285,
+            "totalMs": 324.30000008642673,
+            "maxMs": 2.3999999910593033,
+            "retained": 285,
+            "p50Ms": 1.0999999940395355,
+            "p95Ms": 1.7000000029802322,
+            "p99Ms": 2
+          },
+          "realm.tick": {
+            "count": 285,
+            "totalMs": 6341.500000029802,
+            "maxMs": 45.8999999910593,
+            "retained": 285,
+            "p50Ms": 20.600000008940697,
+            "p95Ms": 32.29999999701977,
+            "p99Ms": 39.79999999701977
+          }
+        },
+        "collision": null
+      },
+      "frames": {
+        "count": 392,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1415,
+            "uploadedBytes": 3464515536,
+            "vertexUploadedBytes": 13280256,
+            "drawCalls": 2822,
+            "frames": 704,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.15199999982117254,
+        "steps": 705,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 500
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 28,
+            "oldestIncomingMs": 21.80000001192093,
+            "highWaterBytes": 420,
+            "highWaterCount": 42
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 0,
+      "population": 384,
+      "mode": "rapier",
+      "elapsedMs": 8949.70000000298,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 83,
+            "totalMs": 248.99999986588955,
+            "maxMs": 6,
+            "retained": 83,
+            "p50Ms": 3,
+            "p95Ms": 4,
+            "p99Ms": 6
+          },
+          "realm.entityPhysics": {
+            "count": 83,
+            "totalMs": 7976.600000038743,
+            "maxMs": 114.19999998807907,
+            "retained": 83,
+            "p50Ms": 95.8999999910593,
+            "p95Ms": 103.70000000298023,
+            "p99Ms": 114.19999998807907
+          },
+          "server.autotile": {
+            "count": 83,
+            "totalMs": 0.7000000178813934,
+            "maxMs": 0.10000000894069672,
+            "retained": 83,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 83,
+            "totalMs": 69.19999994337559,
+            "maxMs": 1.7999999970197678,
+            "retained": 83,
+            "p50Ms": 0.7999999970197678,
+            "p95Ms": 1.2000000029802322,
+            "p99Ms": 1.7999999970197678
+          },
+          "realm.tick": {
+            "count": 83,
+            "totalMs": 8817.200000017881,
+            "maxMs": 139.69999998807907,
+            "retained": 83,
+            "p50Ms": 104.79999999701977,
+            "p95Ms": 118.30000001192093,
+            "p99Ms": 139.69999998807907
+          }
+        },
+        "collision": {
+          "replacedActorShapes": 0,
+          "queries": 54794,
+          "rebuiltSections": 9,
+          "queryMs": 13711.20000050962,
+          "geometryMs": 129.20000015199184,
+          "refreshMs": 4692.900000244379,
+          "sections": 9,
+          "actors": 385,
+          "colliders": 394,
+          "unsupported": {}
+        }
+      },
+      "frames": {
+        "count": 535,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.400000000001455,
+        "over25ms": 1,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1928,
+            "uploadedBytes": 4729491408,
+            "vertexUploadedBytes": 18147168,
+            "drawCalls": 3851,
+            "frames": 962,
+            "textureBytes": 3526608,
+            "textures": 5,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.34399999946349,
+        "steps": 668,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 142
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 1280,
+            "highWaterCount": 128
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 1,
+      "population": 0,
+      "mode": "rapier",
+      "elapsedMs": 6034.5,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 362,
+            "totalMs": 4.299999997019768,
+            "maxMs": 0.10000000894069672,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "realm.entityPhysics": {
+            "count": 362,
+            "totalMs": 10.499999836087227,
+            "maxMs": 0.20000000298023224,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.10000000894069672,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.autotile": {
+            "count": 362,
+            "totalMs": 2.5000000447034836,
+            "maxMs": 0.10000000894069672,
+            "retained": 362,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 362,
+            "totalMs": 68.00000011920929,
+            "maxMs": 0.7000000029802322,
+            "retained": 362,
+            "p50Ms": 0.20000000298023224,
+            "p95Ms": 0.30000001192092896,
+            "p99Ms": 0.5
+          },
+          "realm.tick": {
+            "count": 362,
+            "totalMs": 567.9000001102686,
+            "maxMs": 5.800000011920929,
+            "retained": 362,
+            "p50Ms": 1.5,
+            "p95Ms": 2.2999999970197678,
+            "p99Ms": 3.4000000059604645
+          }
+        },
+        "collision": {
+          "replacedActorShapes": 0,
+          "queries": 666,
+          "rebuiltSections": 4,
+          "queryMs": 453.1000001132488,
+          "geometryMs": 47.90000022947788,
+          "refreshMs": 182.39999969303608,
+          "sections": 4,
+          "actors": 1,
+          "colliders": 5,
+          "unsupported": {}
+        }
+      },
+      "frames": {
+        "count": 361,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1298,
+            "uploadedBytes": 3185066864,
+            "vertexUploadedBytes": 466560,
+            "drawCalls": 2593,
+            "frames": 648,
+            "textureBytes": 2474864,
+            "textures": 3,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.5780000005365459,
+        "steps": 651,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 650
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 80,
+            "highWaterCount": 8
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 1,
+      "population": 0,
+      "mode": "legacy",
+      "elapsedMs": 6049,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 361,
+            "totalMs": 3.8999999463558197,
+            "maxMs": 0.10000000894069672,
+            "retained": 361,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "realm.entityPhysics": {
+            "count": 361,
+            "totalMs": 15.800000116229057,
+            "maxMs": 1.2000000029802322,
+            "retained": 361,
+            "p50Ms": 0,
+            "p95Ms": 0.10000000894069672,
+            "p99Ms": 0.20000000298023224
+          },
+          "server.autotile": {
+            "count": 361,
+            "totalMs": 3.5999999791383743,
+            "maxMs": 0.19999998807907104,
+            "retained": 361,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 361,
+            "totalMs": 71.59999987483025,
+            "maxMs": 1.2000000029802322,
+            "retained": 361,
+            "p50Ms": 0.20000000298023224,
+            "p95Ms": 0.30000001192092896,
+            "p99Ms": 0.7000000029802322
+          },
+          "realm.tick": {
+            "count": 361,
+            "totalMs": 408.1000000089407,
+            "maxMs": 3.2999999970197678,
+            "retained": 361,
+            "p50Ms": 1.1000000089406967,
+            "p95Ms": 1.7999999970197678,
+            "p99Ms": 2.5999999940395355
+          }
+        },
+        "collision": null
+      },
+      "frames": {
+        "count": 360,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 50,
+        "over25ms": 1,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1246,
+            "uploadedBytes": 3057271664,
+            "vertexUploadedBytes": 447840,
+            "drawCalls": 2489,
+            "frames": 622,
+            "textureBytes": 2474864,
+            "textures": 3,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.7300000005363909,
+        "steps": 621,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 621
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 30,
+            "highWaterCount": 3
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 1,
+      "population": 24,
+      "mode": "rapier",
+      "elapsedMs": 6150.29999999702,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 368,
+            "totalMs": 103.10000020265579,
+            "maxMs": 2.0999999940395355,
+            "retained": 368,
+            "p50Ms": 0.20000000298023224,
+            "p95Ms": 0.5999999940395355,
+            "p99Ms": 0.9000000059604645
+          },
+          "realm.entityPhysics": {
+            "count": 368,
+            "totalMs": 2415.7999999821186,
+            "maxMs": 24.900000005960464,
+            "retained": 368,
+            "p50Ms": 4.5,
+            "p95Ms": 15.200000002980232,
+            "p99Ms": 18.600000008940697
+          },
+          "server.autotile": {
+            "count": 368,
+            "totalMs": 1.1999999731779099,
+            "maxMs": 0.20000000298023224,
+            "retained": 368,
+            "p50Ms": 0,
+            "p95Ms": 0,
+            "p99Ms": 0.09999999403953552
+          },
+          "server.replication": {
+            "count": 368,
+            "totalMs": 90.30000019073486,
+            "maxMs": 1.2999999970197678,
+            "retained": 368,
+            "p50Ms": 0.20000000298023224,
+            "p95Ms": 0.5999999940395355,
+            "p99Ms": 0.9000000059604645
+          },
+          "realm.tick": {
+            "count": 368,
+            "totalMs": 3079.899999976158,
+            "maxMs": 28.400000005960464,
+            "retained": 368,
+            "p50Ms": 5.799999997019768,
+            "p95Ms": 18.799999997019768,
+            "p99Ms": 21.600000008940697
+          }
+        },
+        "collision": {
+          "replacedActorShapes": 0,
+          "queries": 15902,
+          "rebuiltSections": 5,
+          "queryMs": 3898.200000062585,
+          "geometryMs": 92.89999967813492,
+          "refreshMs": 716.3000001609325,
+          "sections": 5,
+          "actors": 25,
+          "colliders": 30,
+          "unsupported": {}
+        }
+      },
+      "frames": {
+        "count": 368,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1268,
+            "uploadedBytes": 3104657360,
+            "vertexUploadedBytes": 3511728,
+            "drawCalls": 2529,
+            "frames": 631,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.06800000000000479,
+        "steps": 636,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 634
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 180,
+            "highWaterCount": 18
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 1,
+      "population": 24,
+      "mode": "legacy",
+      "elapsedMs": 6151.0999999940395,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 368,
+            "totalMs": 295.5000001937151,
+            "maxMs": 4.5,
+            "retained": 368,
+            "p50Ms": 0.7000000029802322,
+            "p95Ms": 1.4000000059604645,
+            "p99Ms": 3.0999999940395355
+          },
+          "realm.entityPhysics": {
+            "count": 368,
+            "totalMs": 902.599999755621,
+            "maxMs": 9.299999997019768,
+            "retained": 368,
+            "p50Ms": 2.2999999970197678,
+            "p95Ms": 3.800000011920929,
+            "p99Ms": 6.9000000059604645
+          },
+          "server.autotile": {
+            "count": 368,
+            "totalMs": 3.2999999672174454,
+            "maxMs": 0.7999999970197678,
+            "retained": 368,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 368,
+            "totalMs": 192.20000012218952,
+            "maxMs": 2.2999999970197678,
+            "retained": 368,
+            "p50Ms": 0.5,
+            "p95Ms": 0.800000011920929,
+            "p99Ms": 1.2000000029802322
+          },
+          "realm.tick": {
+            "count": 368,
+            "totalMs": 2153.9000000804663,
+            "maxMs": 13.300000011920929,
+            "retained": 368,
+            "p50Ms": 5.799999997019768,
+            "p95Ms": 8.600000008940697,
+            "p99Ms": 11.5
+          }
+        },
+        "collision": null
+      },
+      "frames": {
+        "count": 368,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1304,
+            "uploadedBytes": 3193130960,
+            "vertexUploadedBytes": 3700656,
+            "drawCalls": 2601,
+            "frames": 649,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.996000000000209,
+        "steps": 647,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 646
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 20,
+            "highWaterCount": 2
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 1,
+      "population": 96,
+      "mode": "rapier",
+      "elapsedMs": 6481.5999999940395,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 296,
+            "totalMs": 223.9999999254942,
+            "maxMs": 2.2000000029802322,
+            "retained": 296,
+            "p50Ms": 0.699999988079071,
+            "p95Ms": 1.2999999970197678,
+            "p99Ms": 2
+          },
+          "realm.entityPhysics": {
+            "count": 296,
+            "totalMs": 5486.200000047684,
+            "maxMs": 33.19999998807907,
+            "retained": 296,
+            "p50Ms": 17.80000001192093,
+            "p95Ms": 23.299999997019768,
+            "p99Ms": 28.30000001192093
+          },
+          "server.autotile": {
+            "count": 296,
+            "totalMs": 0.8999999910593033,
+            "maxMs": 0.10000000894069672,
+            "retained": 296,
+            "p50Ms": 0,
+            "p95Ms": 0,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 296,
+            "totalMs": 128.69999998807907,
+            "maxMs": 7.299999997019768,
+            "retained": 296,
+            "p50Ms": 0.3999999910593033,
+            "p95Ms": 0.699999988079071,
+            "p99Ms": 1.199999988079071
+          },
+          "realm.tick": {
+            "count": 296,
+            "totalMs": 6331.200000077486,
+            "maxMs": 37.099999994039536,
+            "retained": 296,
+            "p50Ms": 20.400000005960464,
+            "p95Ms": 27.799999997019768,
+            "p99Ms": 35.3999999910593
+          }
+        },
+        "collision": {
+          "replacedActorShapes": 0,
+          "queries": 48822,
+          "rebuiltSections": 7,
+          "queryMs": 8918.200000405312,
+          "geometryMs": 139.99999979138374,
+          "refreshMs": 1797.6000003814697,
+          "sections": 7,
+          "actors": 97,
+          "colliders": 104,
+          "unsupported": {}
+        }
+      },
+      "frames": {
+        "count": 387,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.30000000000109,
+        "over25ms": 1,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1380,
+            "uploadedBytes": 3379908560,
+            "vertexUploadedBytes": 10734480,
+            "drawCalls": 2753,
+            "frames": 687,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.26599999982119,
+        "steps": 692,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 497
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 22,
+            "oldestIncomingMs": 11.900000005960464,
+            "highWaterBytes": 440,
+            "highWaterCount": 44
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 1,
+      "population": 96,
+      "mode": "legacy",
+      "elapsedMs": 6074.79999999702,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 364,
+            "totalMs": 518.2999999970198,
+            "maxMs": 7.5,
+            "retained": 364,
+            "p50Ms": 1,
+            "p95Ms": 3.2999999970197678,
+            "p99Ms": 5.899999991059303
+          },
+          "realm.entityPhysics": {
+            "count": 364,
+            "totalMs": 1386.1000000685453,
+            "maxMs": 19.80000001192093,
+            "retained": 364,
+            "p50Ms": 2.7999999970197678,
+            "p95Ms": 8.700000002980232,
+            "p99Ms": 11
+          },
+          "server.autotile": {
+            "count": 364,
+            "totalMs": 2,
+            "maxMs": 0.10000000894069672,
+            "retained": 364,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 364,
+            "totalMs": 213.9000003784895,
+            "maxMs": 5.199999988079071,
+            "retained": 364,
+            "p50Ms": 0.5,
+            "p95Ms": 1.300000011920929,
+            "p99Ms": 2.1000000089406967
+          },
+          "realm.tick": {
+            "count": 364,
+            "totalMs": 2920.299999922514,
+            "maxMs": 27.799999997019768,
+            "retained": 364,
+            "p50Ms": 5.9000000059604645,
+            "p95Ms": 17.899999991059303,
+            "p99Ms": 22
+          }
+        },
+        "collision": null
+      },
+      "frames": {
+        "count": 363,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 33.30000000000109,
+        "over25ms": 1,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1298,
+            "uploadedBytes": 3178385360,
+            "vertexUploadedBytes": 9783936,
+            "drawCalls": 2589,
+            "frames": 646,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.510000000178746,
+        "steps": 648,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 645
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 40,
+            "highWaterCount": 4
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 1,
+      "population": 384,
+      "mode": "rapier",
+      "elapsedMs": 9002.59999999404,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 82,
+            "totalMs": 237.59999994933605,
+            "maxMs": 4.199999988079071,
+            "retained": 82,
+            "p50Ms": 2.7999999970197678,
+            "p95Ms": 3.7000000029802322,
+            "p99Ms": 4.199999988079071
+          },
+          "realm.entityPhysics": {
+            "count": 82,
+            "totalMs": 7981.1000000834465,
+            "maxMs": 114.79999999701977,
+            "retained": 82,
+            "p50Ms": 96.29999999701977,
+            "p95Ms": 110,
+            "p99Ms": 114.79999999701977
+          },
+          "server.autotile": {
+            "count": 82,
+            "totalMs": 0.5,
+            "maxMs": 0.10000000894069672,
+            "retained": 82,
+            "p50Ms": 0,
+            "p95Ms": 0.09999999403953552,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 82,
+            "totalMs": 64.10000003874302,
+            "maxMs": 1.4000000059604645,
+            "retained": 82,
+            "p50Ms": 0.7000000029802322,
+            "p95Ms": 1,
+            "p99Ms": 1.4000000059604645
+          },
+          "realm.tick": {
+            "count": 82,
+            "totalMs": 8811.20000000298,
+            "maxMs": 138.09999999403954,
+            "retained": 82,
+            "p50Ms": 104.70000000298023,
+            "p95Ms": 125.6000000089407,
+            "p99Ms": 138.09999999403954
+          }
+        },
+        "collision": {
+          "replacedActorShapes": 0,
+          "queries": 54415,
+          "rebuiltSections": 9,
+          "queryMs": 13950.699999034405,
+          "geometryMs": 126.6000000834465,
+          "refreshMs": 4968.699997723103,
+          "sections": 9,
+          "actors": 385,
+          "colliders": 394,
+          "unsupported": {}
+        }
+      },
+      "frames": {
+        "count": 538,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.20000000000073,
+        "over25ms": 1,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1960,
+            "uploadedBytes": 4808134608,
+            "vertexUploadedBytes": 18448992,
+            "drawCalls": 3915,
+            "frames": 978,
+            "textureBytes": 3526608,
+            "textures": 5,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.30399999964238883,
+        "steps": 674,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 141
+          },
+          "channel": {
+            "queued": 1,
+            "queuedBytes": 10,
+            "inFlight": 8,
+            "inFlightBytes": 80,
+            "incoming": 0,
+            "oldestIncomingMs": 0,
+            "highWaterBytes": 1280,
+            "highWaterCount": 128
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    },
+    {
+      "trial": 1,
+      "population": 384,
+      "mode": "legacy",
+      "elapsedMs": 6630.5,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 8,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 1600,
+          "height": 721
+        },
+        "pixelRatio": 2.4000000953674316
+      },
+      "diagnostics": {
+        "timings": {
+          "realm.ai": {
+            "count": 295,
+            "totalMs": 1342.2000002115965,
+            "maxMs": 11.299999997019768,
+            "retained": 295,
+            "p50Ms": 3.9000000059604645,
+            "p95Ms": 8.5,
+            "p99Ms": 10.299999997019768
+          },
+          "realm.entityPhysics": {
+            "count": 295,
+            "totalMs": 3166.0000000447035,
+            "maxMs": 20.900000005960464,
+            "retained": 295,
+            "p50Ms": 10.399999991059303,
+            "p95Ms": 13.799999997019768,
+            "p99Ms": 17.900000005960464
+          },
+          "server.autotile": {
+            "count": 295,
+            "totalMs": 1.400000050663948,
+            "maxMs": 0.10000000894069672,
+            "retained": 295,
+            "p50Ms": 0,
+            "p95Ms": 0,
+            "p99Ms": 0.10000000894069672
+          },
+          "server.replication": {
+            "count": 295,
+            "totalMs": 331.5999999344349,
+            "maxMs": 3.2000000029802322,
+            "retained": 295,
+            "p50Ms": 1.0999999940395355,
+            "p95Ms": 1.7999999970197678,
+            "p99Ms": 2.5
+          },
+          "realm.tick": {
+            "count": 295,
+            "totalMs": 6442.099999979138,
+            "maxMs": 48,
+            "retained": 295,
+            "p50Ms": 20.400000005960464,
+            "p95Ms": 30.600000008940697,
+            "p99Ms": 45.29999999701977
+          }
+        },
+        "collision": null
+      },
+      "frames": {
+        "count": 397,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109,
+        "over25ms": 0,
+        "over50ms": 0
+      },
+      "scene": {
+        "terrain": {
+          "resident": 0,
+          "schedulerRecordsCreated": 0,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0,
+          "gpu": {
+            "uploads": 1418,
+            "uploadedBytes": 3473297360,
+            "vertexUploadedBytes": 13317984,
+            "drawCalls": 2829,
+            "frames": 706,
+            "textureBytes": 5623760,
+            "textures": 7,
+            "recoveries": 0,
+            "batchTextureLimit": 8,
+            "overlayRasterBuilds": 0,
+            "overlayRasterHits": 0,
+            "overlayRasterCulls": 0,
+            "overlayRasterBytes": 0,
+            "overlayRasterCount": 0,
+            "meshDraws": 0,
+            "vehicleBedDraws": 0,
+            "meshDrawCalls": 0,
+            "meshImageHits": 0,
+            "meshImageMisses": 0,
+            "meshImageCount": 0,
+            "meshImageBytes": 0,
+            "meshState": "empty",
+            "meshAsset": null,
+            "meshParts": 0,
+            "ambulanceState": "empty",
+            "ambulanceParts": 0,
+            "fireTruckState": "empty",
+            "fireTruckParts": 0,
+            "vehicleAssets": {
+              "compact-1-authored-v7": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "ambulance-authored-v3": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              },
+              "fire-truck-ladder-1-authored-v2": {
+                "state": "empty",
+                "meshes": 0,
+                "drawMeshes": 0,
+                "error": null
+              }
+            },
+            "vehiclePaints": {},
+            "vehiclePaintDraws": 0,
+            "vehiclePaintFallbacks": 0,
+            "targetBytes": 12
+          }
+        },
+        "alpha": 0.3340000001789028,
+        "steps": 705,
+        "authority": {
+          "clock": {
+            "mode": "realtime",
+            "running": true,
+            "ticks": 511
+          },
+          "channel": {
+            "queued": 0,
+            "queuedBytes": 0,
+            "inFlight": 1,
+            "inFlightBytes": 10,
+            "incoming": 20,
+            "oldestIncomingMs": 7.300000011920929,
+            "highWaterBytes": 390,
+            "highWaterCount": 39
+          }
+        },
+        "cameraX": -16,
+        "cameraY": -16,
+        "pixelSnap": true,
+        "carMeshOverride": false,
+        "meshEligibleVehicleTypes": [],
+        "meshDraws": 0,
+        "bedMeshDraws": 0
+      },
+      "errors": []
+    }
+  ]
+}
