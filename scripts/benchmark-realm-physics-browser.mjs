@@ -11,6 +11,8 @@ const option = (name, fallback) =>
 const output = option("output", path.join(os.tmpdir(), "tilefun-realm-physics"));
 const counts = option("counts", "0,24,96,384").split(",").map(Number);
 const modes = option("modes", "legacy,rapier").split(",");
+const renderer = option("renderer", "gpu");
+if (!["canvas", "gpu"].includes(renderer)) throw Error("Renderer must be canvas or gpu");
 const trials = Number(option("trials", "2")),
   seconds = Number(option("seconds", "6")),
   warmup = Number(option("warmup", "4"));
@@ -38,6 +40,7 @@ const report = {
   date: new Date().toISOString(),
   browser: browser.version(),
   lane: cdp ? "dedicated physical browser via CDP" : "bundled full Chromium",
+  renderer,
   seconds,
   warmup,
   trials,
@@ -70,6 +73,7 @@ try {
           url.searchParams.set("geometry", "realm");
           url.searchParams.set("crowd", String(population));
           url.searchParams.set("physics", mode === "rapier" ? "rapier-world" : "legacy");
+          url.searchParams.set("renderer", renderer);
           url.hash = "/tool/world-geometry";
           await page.goto(url.href, { waitUntil: "domcontentloaded" });
           await page.waitForSelector('canvas[data-ready="true"]', { timeout: 60000 });
@@ -88,8 +92,10 @@ try {
             };
             window.__realmBenchFrame = requestAnimationFrame(frame);
             return {
+              at: performance.now(),
               diagnostics,
               device: {
+                renderer: c.dataset.renderer,
                 userAgent: navigator.userAgent,
                 cores: navigator.hardwareConcurrency,
                 memoryGiB: navigator.deviceMemory,
@@ -104,6 +110,7 @@ try {
             const diagnostics = await c.__physicsSample();
             cancelAnimationFrame(window.__realmBenchFrame);
             return {
+              at: performance.now(),
               diagnostics,
               frames: window.__realmBenchFrames,
               scene: c.__presentationDiagnostics(),
@@ -113,6 +120,7 @@ try {
             trial,
             population,
             mode,
+            elapsedMs: end.at - start.at,
             device: start.device,
             diagnostics: end.diagnostics,
             frames: summary(end.frames),
@@ -120,7 +128,12 @@ try {
             errors,
           };
           report.cases.push(row);
-          if (!end.diagnostics?.timings?.["realm.tick"]?.count || errors.length) failed = true;
+          if (
+            !end.diagnostics?.timings?.["realm.tick"]?.count ||
+            errors.length ||
+            start.device.renderer !== renderer
+          )
+            failed = true;
           console.log(
             JSON.stringify({
               trial,
