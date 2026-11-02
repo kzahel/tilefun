@@ -37,6 +37,11 @@ export class ScenarioClient {
   handles: Record<string, number> = {};
   traffic: ScenarioResponse["traffic"];
   parking: ScenarioResponse["parking"];
+  physicsDiagnostics: ScenarioResponse["physicsDiagnostics"];
+  async samplePhysicsDiagnostics(reset = false) {
+    await this.request({ kind: "diagnostics", reset });
+    return this.physicsDiagnostics;
+  }
   clock: ScenarioResponse["clock"];
   private worker = new Worker(new URL("./scenario.worker.ts", import.meta.url), { type: "module" });
   private channel = new OrderedWorkerChannel<ScenarioPacket>((message, transfer) =>
@@ -149,6 +154,7 @@ export class ScenarioClient {
       this.handles = response.handles;
       this.traffic = response.traffic;
       this.parking = response.parking;
+      if (response.physicsDiagnostics) this.physicsDiagnostics = response.physicsDiagnostics;
       this.clock = response.clock;
       const player = this.view.serverPlayerEntity;
       if (player.id !== -1) {
@@ -320,6 +326,7 @@ export class ScenarioClient {
     this.closed = true;
     this.fail(new Error("Scenario disposed"));
     this.worker.onmessage = this.worker.onerror = this.worker.onmessageerror = null;
+    this.predictor.clearPredicted();
     this.view.setPredictor(null);
   }
 }

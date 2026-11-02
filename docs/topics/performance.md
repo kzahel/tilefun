@@ -1,5 +1,13 @@
 # Streaming and gameplay performance
 
+Physics replacement qualification (2026-11-02) is tracked in
+[202](../tactical/202-persistent-realm-collision-proof.md). The existing native
+active-crowds runner accepts `--physics=3` and a paired browser runner exercises the
+same ordinary Realm/Worker/rendering through the World Geometry crowd fixture.
+Initial physical Chromebook data fails the proposed dense-crowd cutover budget
+despite mostly smooth main-thread frames. Final results after the bounded fine-index
+adjustment are pending; this is not a promoted performance gain or default switch.
+
 Topic: performance
 Status: shared Worker authority and terrain preparation implemented; physical
 Android traversal validated; renderer/allocation audit complete; grass cache

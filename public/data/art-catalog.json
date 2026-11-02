@@ -9557,7 +9557,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1204"
+          "source": "src/server/Realm.ts:1253"
         },
         {
           "system": "Gameplay",
@@ -10485,7 +10485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1206"
+          "source": "src/server/Realm.ts:1255"
         },
         {
           "system": "Gameplay",
@@ -10615,7 +10615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1206"
+          "source": "src/server/Realm.ts:1255"
         },
         {
           "system": "Gameplay",
@@ -29759,7 +29759,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1204"
+          "source": "src/server/Realm.ts:1253"
         },
         {
           "system": "Gameplay",
@@ -35415,15 +35415,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:693"
+          "source": "src/client/ClientStateView.ts:694"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:115"
+          "source": "src/client/PlayerPredictor.ts:120"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:1102"
+          "source": "src/client/PlayerPredictor.ts:1117"
         },
         {
           "system": "Gameplay",
@@ -35479,23 +35479,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:277"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:128"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:285"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:129"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:311"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:140"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:368"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:145"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:369"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:175"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:245"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:246"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/PersistentCollisionWorld.ts:283"
         },
         {
           "system": "Gameplay",
@@ -35507,11 +35519,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:65"
+          "source": "src/scenarios/ScenarioSession.ts:66"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:202"
+          "source": "src/scenarios/ScenarioSession.ts:207"
         },
         {
           "system": "Gameplay",
@@ -35535,23 +35547,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:344"
+          "source": "src/server/Realm.ts:360"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1643"
+          "source": "src/server/Realm.ts:1737"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1828"
+          "source": "src/server/Realm.ts:1922"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2585"
+          "source": "src/server/Realm.ts:2709"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2805"
+          "source": "src/server/Realm.ts:2929"
         },
         {
           "system": "Gameplay",
@@ -35575,7 +35587,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:582"
+          "source": "src/traffic/Driving.ts:605"
         },
         {
           "system": "Gameplay",
@@ -36643,19 +36655,43 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/entities/EntityManager.ts:169"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/persistence/ActorRecords.ts:141"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:54"
+          "source": "src/physics/BallPhysics.ts:55"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:215"
+          "source": "src/physics/BallPhysics.ts:222"
         },
         {
           "system": "Gameplay",
           "source": "src/physics/VehicleCargoPhysics.ts:21"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:115"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:176"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:332"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:504"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/PersistentCollisionWorld.ts:278"
         },
         {
           "system": "Editor",
@@ -36663,11 +36699,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1739"
+          "source": "src/server/Realm.ts:1833"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2769"
+          "source": "src/server/Realm.ts:2589"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:2893"
         },
         {
           "system": "Gameplay",
@@ -37529,7 +37569,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1206"
+          "source": "src/server/Realm.ts:1255"
         },
         {
           "system": "Gameplay",
@@ -37663,7 +37703,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1206"
+          "source": "src/server/Realm.ts:1255"
         },
         {
           "system": "Gameplay",

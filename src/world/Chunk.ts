@@ -69,6 +69,8 @@ export class Chunk {
 
   /** Incremented on each edit. Used for delta chunk sync. */
   revision = 0;
+  /** Physical grid changes, including direct diagnostic/editor setters. */
+  physicsRevision = 0;
 
   constructor() {
     this.subgrid = new Uint8Array(SUBGRID_AREA);
@@ -119,6 +121,7 @@ export class Chunk {
   }
 
   setCollision(lx: number, ly: number, flags: number): void {
+    if (this.collision[idx(lx, ly)] !== flags) this.physicsRevision++;
     this.collision[idx(lx, ly)] = flags;
   }
 
@@ -137,6 +140,7 @@ export class Chunk {
 
   /** Fill entire chunk collision with a single flag set. */
   fillCollision(flags: number): void {
+    this.physicsRevision++;
     this.collision.fill(flags);
   }
 
@@ -145,10 +149,12 @@ export class Chunk {
   }
 
   setRoad(lx: number, ly: number, roadType: number): void {
+    if (this.roadGrid[idx(lx, ly)] !== roadType) this.physicsRevision++;
     this.roadGrid[idx(lx, ly)] = roadType;
   }
 
   fillRoad(roadType: number): void {
+    this.physicsRevision++;
     this.roadGrid.fill(roadType);
   }
 
@@ -157,6 +163,7 @@ export class Chunk {
   }
 
   setHeight(lx: number, ly: number, h: number): void {
+    if (this.heightGrid[idx(lx, ly)] !== h) this.physicsRevision++;
     this.heightGrid[idx(lx, ly)] = h;
   }
 

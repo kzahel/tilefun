@@ -29,6 +29,7 @@ import { clearAirMomentum, clipAirMomentum, inheritAirMomentum } from "./Airborn
 import {
   type CharacterPhysicsMode,
   prepareCharacterPhysics,
+  usesRealmPhysics,
   validateCharacterPhysics,
 } from "./CharacterPhysics.js";
 import type { MovementContext } from "./MovementContext.js";
@@ -118,7 +119,15 @@ export function selectCharacterPhysics(mode: number): void {
   characterRequest++;
   setPhysicsParam("characterPhysics", validateCharacterPhysics(mode));
 }
-export async function configureCharacterPhysics(mode: number): Promise<void> {
+export async function configureCharacterPhysics(mode: number, startup = false): Promise<void> {
+  if (
+    !startup &&
+    (usesRealmPhysics(mode) || usesRealmPhysics(getCharacterPhysics())) &&
+    mode !== getCharacterPhysics()
+  )
+    throw Error(
+      "Exclusive realm physics is selected at startup; reload with ?physics=rapier-world",
+    );
   validateCharacterPhysics(mode);
   const request = ++characterRequest;
   await prepareCharacterPhysics(mode);
@@ -237,6 +246,8 @@ export interface JumpInputState {
 }
 
 export interface JumpGravityOutcome {
+  contactEntityId?: number;
+  collisionNormals?: { x: number; y: number; z: number }[];
   landed: boolean;
   groundZ: number;
   wildlifeContactId?: number;
@@ -837,6 +848,9 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
     entity.position.wy += entity.velocity.vy * dt;
     return;
   }
+
+  if (ctx.legacyCollisionForbidden)
+    throw Error("Legacy collision cannot resolve a body owned by the Rapier realm");
 
   const dx = entity.velocity.vx * dt;
   const dy = entity.velocity.vy * dt;

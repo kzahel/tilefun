@@ -1144,6 +1144,7 @@ export class GameClient {
     this.doorPresentation.destroy();
     this.loop.stop();
     this.gcFlushServer();
+    this.remoteView?.setPredictor(null);
     this.scenes.clear();
     this.requests.dispose();
     this.transport.close();

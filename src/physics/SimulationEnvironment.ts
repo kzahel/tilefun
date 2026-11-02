@@ -25,6 +25,11 @@ export interface SimulationQuerySource {
 }
 
 export interface CreateMovementContextOptions extends SimulationQuerySource {
+  collisionWorld?:
+    | import("./rapier/PersistentCollisionWorld.js").PersistentCollisionWorld
+    | undefined;
+  /** Identity changes on chunk replacement; revision changes on geometry edits. */
+  geometryVersion?(cx: number, cy: number): { identity: unknown; revision: string | number };
   motionBudget?: import("./CharacterMotionBudget.js").CharacterMotionBudget;
   pushBody?(before: Entity, after: Entity): void;
   getCollision: (tx: number, ty: number) => number;
@@ -50,6 +55,7 @@ function defaultShouldEntityBlock(other: Entity): boolean {
 export function createMovementContext(options: CreateMovementContextOptions): MovementContext {
   const shouldEntityBlock = options.shouldEntityBlock ?? defaultShouldEntityBlock;
   const ctx: MovementContext = {
+    legacyCollisionForbidden: !!options.collisionWorld,
     moveCharacter: (entity, dt, physics) => stepCharacterPhysics(entity, dt, physics, options),
     getCollision: options.getCollision,
     getHeight: options.getHeight,

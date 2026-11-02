@@ -1,3 +1,4 @@
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { ServerLoop } from "../server/ServerLoop.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioRequest, ScenarioResponse } from "./ScenarioProtocol.js";
@@ -60,6 +61,14 @@ export class ScenarioWorkerHost {
       id,
       frames,
       handles,
+      ...(id !== 0 && this.session?.recipe.measurePhysics
+        ? {
+            physicsDiagnostics: {
+              timings: performanceMetrics.snapshot(),
+              collision: this.session.realm.collisionDiagnostics,
+            },
+          }
+        : {}),
       ...(parking ? { parking } : {}),
       clock: { mode: this.mode, running: this.running, ticks: this.ticks },
       ...(car
@@ -113,6 +122,9 @@ export class ScenarioWorkerHost {
             case "reload":
               await session.reload();
               this.ticks = 0;
+              break;
+            case "diagnostics":
+              if (request.reset) performanceMetrics.reset();
               break;
             case "close":
               this.running = false;

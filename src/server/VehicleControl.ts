@@ -230,7 +230,10 @@ export class VehicleControl {
     if (car) this.realm.traffic?.onChange?.(car, false);
   }
   /** Cars hold across input gaps; trains brake on the service clock. */
-  missingInput(session: PlayerSession): void {
+  missingInput(session: PlayerSession, dt = 0): void {
+    const vehicle = this.get(session),
+      car = vehicle && this.realm.traffic?.states.get(vehicle.id);
+    if (car && dt > 0) this.realm.traffic?.idleCollisionStep(car, dt);
     const train = [...(this.realm.railway?.services.values() ?? [])].find(
       (s) => s.driverId === session.player.id,
     );

@@ -252,6 +252,7 @@ export class RemoteStateView implements ClientStateView {
 
   /** Attach a predictor so that playerEntity and entities use predicted position. */
   setPredictor(predictor: PlayerPredictor | null): void {
+    if (this._predictor !== predictor) this._predictor?.clearPredicted();
     this._predictor = predictor;
   }
 

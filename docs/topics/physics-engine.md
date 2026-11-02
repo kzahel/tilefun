@@ -29,11 +29,30 @@ Legacy collision mode exists only for temporary comparison. It must not silently
 resolve unsupported contacts in exclusive Rapier mode. Current gameplay
 controllers may survive while their duplicate collision/support solvers retire.
 
-The default remains legacy today. The current on-foot mode below still rebuilds
-local query scenes and has not implemented this persistent replacement. Early
-performance and gameplay qualification must use the ordinary Worker game and the
-target Chromebook, not only the existing labs. Default cutover and legacy deletion
-belong to the same bounded milestone; new tumbling cars follow that cleanup.
+The default remains legacy today. [202](../tactical/202-persistent-realm-collision-proof.md)
+implements the persistent controlled-collision proof through the early decision;
+the older on-foot-only modes below retain their disposable reference scenes.
+Qualification uses the ordinary Worker game and a physical Chromebook. Default
+cutover and legacy deletion belong to the same bounded milestone; new tumbling
+cars follow that cleanup.
+
+## Persistent realm proof (202)
+
+`?physics=rapier-world&hull=box|capsule` selects experimental startup modes 3/4.
+The shared [Realm physics fixture](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=realm#/tool/world-geometry)
+offers a normal Worker/rendered comparison. Persistent section geometry, controlled
+NPC/player contacts, one upright controlled car and ordinary ball collision use
+one authority; client predictors own private worlds and clear scratch resources.
+AI, steering and ball bounce intent remain gameplay motors. This proof is not yet
+general dynamic rigid-body simulation. Unqualified mounts, autonomous traffic,
+parking, rail motion and moving roof passengers do not fall through to old solvers.
+Other compatibility gaps and the source/validation inventory belong to 202.
+
+Initial physical Chromebook crowd results exceed the proposed cutover budget;
+the decision remains pending final measurements after review fixes and a bounded
+fine-index adjustment. Smooth main-thread FPS does not qualify an over-budget
+authority tick. No default switch or legacy deletion has been authorized by this
+evidence.
 
 ## Retained subsystem constraints
 

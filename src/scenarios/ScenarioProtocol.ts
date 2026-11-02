@@ -37,10 +37,15 @@ export type ScenarioRequest = { id: number } & (
   | { kind: "step"; input: Movement; dt: number; range?: ChunkRange }
   | { kind: "command"; command: ScenarioCommand }
   | { kind: "reload" }
+  | { kind: "diagnostics"; reset?: boolean }
   | { kind: "reset" }
   | { kind: "close" }
 );
 export type ScenarioResponse = {
+  physicsDiagnostics?: {
+    timings: import("../diagnostics/PerformanceMetrics.js").PerformanceSnapshot;
+    collision: import("../server/Realm.js").Realm["collisionDiagnostics"];
+  };
   id: number;
   frames: ArrayBuffer[];
   handles: Record<string, number>;

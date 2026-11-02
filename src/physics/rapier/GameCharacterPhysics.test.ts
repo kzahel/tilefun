@@ -1,11 +1,11 @@
-import { beforeAll, expect, it } from "vitest";
+import { afterEach, beforeAll, expect, it } from "vitest";
 import type { Entity } from "../../entities/Entity.js";
 import { createPlayer } from "../../entities/Player.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { Movement } from "../../input/ActionManager.js";
 import { createFauna } from "../../wildlife/Fauna.js";
 import { CollisionFlag } from "../../world/TileRegistry.js";
-import { prepareCharacterPhysics } from "../CharacterPhysics.js";
+import { createCollisionWorld, prepareCharacterPhysics } from "../CharacterPhysics.js";
 import {
   getMovementPhysicsParams,
   type MovementPhysicsParams,
@@ -14,10 +14,14 @@ import {
 import { createMovementContext, createSurfaceSampler } from "../SimulationEnvironment.js";
 import { characterShape } from "./CharacterShape.js";
 
+const worlds: ReturnType<typeof createCollisionWorld>[] = [];
+afterEach(() => {
+  for (const world of worlds.splice(0)) world.dispose();
+});
 const idle: Movement = { dx: 0, dy: 0, jump: false, sprinting: false };
 beforeAll(() => prepareCharacterPhysics(1));
 function fixture(
-  mode: 0 | 1 | 2 = 1,
+  mode: 0 | 1 | 2 | 3 | 4 = 1,
   props: Prop[] = [],
   x = 0,
   collision: (x: number, y: number) => number = () => 0,
@@ -29,7 +33,10 @@ function fixture(
   const physics: MovementPhysicsParams = { ...getMovementPhysicsParams(), characterPhysics: mode };
   const queryEntities = () => entities,
     queryProps = () => props;
+  const collisionWorld = mode >= 3 ? createCollisionWorld() : undefined;
+  if (collisionWorld) worlds.push(collisionWorld);
   const context = createMovementContext({
+    collisionWorld,
     getCollision: collision,
     getHeight: () => 0,
     queryEntities,
@@ -53,6 +60,7 @@ function fixture(
     entities,
     context,
     step(input = idle, dt = 1 / 60) {
+      collisionWorld?.beginFrame();
       const result = stepPlayerFromInput(
         player,
         input,
@@ -63,6 +71,7 @@ function fixture(
         state,
         physics,
       );
+      collisionWorld?.endFrame();
       state = result.jumpState;
       return result;
     },
@@ -391,4 +400,35 @@ it("lands on a one-way deck when gravity reverses velocity at the jump apex", ()
   expect(game.step().outcome.landed).toBe(true);
   expect(game.player.wz).toBeCloseTo(16, 1);
   expect(game.player.jumpVZ).toBeUndefined();
+});
+
+it.each([3, 4] as const)(
+  "persistent mode %s climbs a sectioned ramp, supports a long bridge and blocks its underside",
+  (mode) => {
+    const props = [slab(1, 0, 64, 0, 32), slab(2, 64, 10000000, 32)];
+    const game = fixture(mode, props, -12);
+    game.player.position.wy = 8;
+    for (let tick = 0; tick < 150; tick++) game.step({ ...idle, dx: 1 });
+    expect(game.player.position.wx).toBeGreaterThan(100);
+    expect(game.player.wz).toBeCloseTo(32, 0);
+    game.player.position.wx = 96;
+    game.player.wz = 0;
+    game.player.jumpVZ = 0;
+    for (let tick = 0; tick < 10; tick++) game.step(idle);
+    expect(game.player.wz).toBeLessThan(0.2);
+    // In-place geometry changes must invalidate cached sections, including within
+    // one existing section, rather than requiring a backend reset.
+    props.push(wall(116));
+    for (let tick = 0; tick < 45; tick++) game.step({ ...idle, dx: 1 });
+    expect(game.player.position.wx).toBeLessThan(109);
+  },
+);
+
+it("invalidates an edited neighboring section without stale terrain spilling across its seam", () => {
+  let wallPresent = true;
+  const game = fixture(3, [], 240, (x) => (wallPresent && x === 16 ? CollisionFlag.Solid : 0));
+  for (let i = 0; i < 5; i++) game.step(idle);
+  wallPresent = false;
+  for (let i = 0; i < 90; i++) game.step({ ...idle, dx: 1 });
+  expect(game.player.position.wx).toBeGreaterThan(280);
 });

@@ -55,6 +55,8 @@ import { onWanderBlocked } from "./wanderAI.js";
 const PUSH_PLAYER_SPEED_MULT = 0.5;
 
 export class EntityManager {
+  /** Live only during replacement NPC movement; updated after every committed pose. */
+  physicsNeighborhood: ((bounds: AABB) => readonly Entity[]) | undefined;
   readonly wildlifeRespawns = new Map<
     string,
     import("../wildlife/WildlifeRespawns.js").PendingWildlifeRespawn
@@ -141,6 +143,7 @@ export class EntityManager {
     skipEntityIds?: ReadonlySet<number>,
     getTerrain?: (tx: number, ty: number) => number,
     playerContactOwnerIds?: ReadonlySet<number>,
+    collisionMotor?: (entity: Entity, dt: number, speedMultiplier: number) => boolean,
   ): void {
     const playerSet = new Set(players);
     // AI can consume/despawn an admitted actor before physics starts. Never
@@ -162,6 +165,22 @@ export class EntityManager {
         );
       });
     if (useCollisionIndex) this.collisionIndex.rebuild(this.entities);
+    const balls = collisionMotor
+      ? this.entities.filter((e) => e.type === "ball" && e.collider && e.parentId === undefined)
+      : [];
+    this.physicsNeighborhood =
+      collisionMotor && useCollisionIndex
+        ? (bounds) => {
+            const nearby = this.collisionIndex.query(bounds);
+            for (const ball of balls)
+              if (
+                ball.collider &&
+                aabbsOverlap(bounds, getEntityAABB(ball.position, ball.collider))
+              )
+                nearby.push(ball);
+            return nearby;
+          }
+        : undefined;
 
     // Save previous positions for render interpolation (only for ticking entities)
     for (const entity of active) {
@@ -239,6 +258,10 @@ export class EntityManager {
     // Player velocity is already friction/acceleration-adjusted â€” no speedMult needed.
     for (const player of players) {
       if (skipEntityIds?.has(player.id)) continue;
+      if (collisionMotor && player.velocity && player.collider) {
+        collisionMotor(player, dt, 1);
+        continue;
+      }
       if (player.velocity && player.collider) {
         const { vx, vy } = player.velocity;
 
@@ -354,6 +377,12 @@ export class EntityManager {
         entity.collider && !entity.predator?.flight && !isAquatic && !isAmphibious
           ? getSpeedMultiplier(entity.position, getCollision)
           : 1.0;
+      if (collisionMotor && entity.collider) {
+        const blocked = collisionMotor(entity, entityDt, speedMult);
+        if (blocked && entity.wanderAI) onWanderBlocked(entity);
+        if (useCollisionIndex) this.collisionIndex.update(entity);
+        continue;
+      }
       const dx = entity.velocity.vx * entityDt * speedMult;
       const dy = entity.velocity.vy * entityDt * speedMult;
 
@@ -396,10 +425,11 @@ export class EntityManager {
 
     // Freeze XY membership after movement. Dense ground tracking below may still
     // query this snapshot and read live support heights before any later movement.
+    this.physicsNeighborhood = undefined;
     this.collisionIndex.finish();
 
     // --- Phase 2.5: Ground tracking â€” snap wz to surface, detect cliff edges ---
-    if (getHeight) {
+    if (getHeight && !collisionMotor) {
       const cargoBeds = this.entities.filter(hasVehicleBed);
       // Membership is stable during this synchronous pass. Keep live objects: earlier
       // ground snaps must still affect later support checks. Never reuse across ticks,
@@ -569,16 +599,17 @@ export class EntityManager {
     const unparentedEntities = active.filter(
       (e) => e.parentId === undefined && !skipEntityIds?.has(e.id),
     );
-    separateOverlappingEntities(
-      unparentedEntities,
-      playerContactOwnerIds?.size
-        ? new Set(players.filter((player) => !playerContactOwnerIds.has(player.id)))
-        : playerSet,
-      dt,
-      getCollision,
-      blockMask,
-      entityTickDts,
-    );
+    if (!collisionMotor)
+      separateOverlappingEntities(
+        unparentedEntities,
+        playerContactOwnerIds?.size
+          ? new Set(players.filter((player) => !playerContactOwnerIds.has(player.id)))
+          : playerSet,
+        dt,
+        getCollision,
+        blockMask,
+        entityTickDts,
+      );
 
     // --- Phase 4: Resolve parented entity positions ---
     this.resolveParentedPositions(players, active);

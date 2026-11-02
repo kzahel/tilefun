@@ -29,6 +29,8 @@ export interface ScenarioRecipe {
   /** Initial saved positions for generated services in temporary review worlds. */
   railwayStarts?: { id: string; x: number; target: 0 | 1 }[];
   physics?: Partial<MovementPhysicsParams>;
+  /** Bounded Worker timings, sampled on explicit diagnostics requests. */
+  measurePhysics?: boolean;
   /** Temporary opt-in proof; never inferred for saved game worlds. */
   experimentalRapier?: { sections: number };
   parking?: import("../traffic/ParkingSystem.js").ParkingLot;

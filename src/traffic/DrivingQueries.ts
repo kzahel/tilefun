@@ -6,6 +6,13 @@ import type { Prop } from "../entities/Prop.js";
 import { PropManager } from "../entities/PropManager.js";
 
 export interface DrivingQueries {
+  /** Exclusive replacement contact owner. Returning undefined rejects the step. */
+  resolveCarMotion?(
+    before: Entity,
+    desired: Entity,
+    dt: number,
+    pushes: import("./VehiclePush.js").VehiclePush[],
+  ): Entity | undefined;
   props(bounds: AABB): readonly Prop[];
   bodies?(bounds: AABB): readonly Entity[];
 }

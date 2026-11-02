@@ -1,5 +1,14 @@
 # Embedded engine labs
 
+[202](../tactical/202-persistent-realm-collision-proof.md) adds **Realm physics
+replacement proof** to World Geometry. It stages ordinary NPCs, a ball and a parked
+controlled car beside the existing ramp/deck; modes 3/4 share the normal Realm,
+Worker, PlayerPredictor and renderer with `?physics=rapier-world` game startup.
+Seeded crowd variants compare the same legacy/replacement inputs. Explicit
+diagnostic requests sample bounded Worker metrics; they do not add a lab physics
+owner or clock. Unqualified vehicle/wildlife cases remain explicit, and lab
+acceptance does not establish default cutover or Chromebook performance parity.
+
 [200](../tactical/200-npc-support-contact-ownership.md) adds real Realm NPC landing
 coverage and a normal-game Worker/input test alongside the existing two-player
 lab. NPCs retain their normal AI and legacy EntityManager phase. Opted-in on-foot

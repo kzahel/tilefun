@@ -209,6 +209,29 @@ export function drivenCarPose(
     vehicleHeading: nose,
   };
   applyVehicleFacing(next, facing(Math.cos(nose), Math.sin(nose), previous));
+  if (queries?.resolveCarMotion) {
+    if (trailer || load || isBoat(car) || isTransporter(car))
+      throw Error("Rapier realm proof does not yet qualify boats, towing or transporters");
+    const resolved = queries.resolveCarMotion(car, next, dt, pushes ?? []);
+    return (
+      resolved ??
+      (!straight && Math.abs(turn) > 1e-8
+        ? drivenCarPose(
+            car,
+            input,
+            dt,
+            world,
+            props,
+            entities,
+            queries,
+            pushes,
+            contactSpeed,
+            true,
+            towPlan,
+          )
+        : undefined)
+    );
+  }
   // A turn can widen the envelope against a wall. Let a clear straight roll
   // escape instead of requiring an impossible turn at rest. All gates still run.
   const retryStraight = () =>

@@ -71,6 +71,9 @@ import { TrafficRecords } from "../persistence/TrafficRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { CharacterMotionBudget } from "../physics/CharacterMotionBudget.js";
+import { createCollisionWorld, usesRealmPhysics } from "../physics/CharacterPhysics.js";
+import { controlledBallMotion } from "../physics/ControlledBallMotion.js";
+import { controlledCarMotion } from "../physics/ControlledCarMotion.js";
 import { completePlayerLanding } from "../physics/PlayerLanding.js";
 import {
   applyFriction,
@@ -85,6 +88,7 @@ import {
   stepPlayerFromInput,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
+import type { PersistentCollisionWorld } from "../physics/rapier/PersistentCollisionWorld.js";
 import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
@@ -178,10 +182,22 @@ export interface RealmOptions {
 }
 
 export class Realm {
+  private collisionWorld: PersistentCollisionWorld | undefined;
+  get collisionDiagnostics() {
+    return this.collisionWorld?.diagnostics ?? null;
+  }
+  private geometryVersion = (cx: number, cy: number) => {
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    return {
+      identity: chunk,
+      revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}:${this.propManager.revision}`,
+    };
+  };
   private readonly characterMotionBudget = new CharacterMotionBudget();
   get persistenceDiagnostics() {
     return {
       realmId: this.currentWorldId,
+      collision: this.collisionDiagnostics,
       loadedChunks: this.world.chunks.loadedCount,
       actors: this.entityManager.entities.length,
       activeActors: this.previousActive.size,
@@ -743,6 +759,26 @@ export class Realm {
         [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
       );
     const movementPhysics = this.options.physics?.() ?? getMovementPhysicsParams();
+    if (usesRealmPhysics(movementPhysics.characterPhysics))
+      this.collisionWorld ??= createCollisionWorld();
+    if (this.collisionWorld && this.traffic) {
+      const collision = this.collisionWorld;
+      this.traffic.setCollisionMotion((before, desired, elapsed, pushes) =>
+        controlledCarMotion(
+          before,
+          desired,
+          elapsed,
+          this.world,
+          this.propManager.props,
+          this.entityManager.entities,
+          movementPhysics,
+          collision,
+          pushes,
+          this.geometryVersion,
+        ),
+      );
+    }
+    this.collisionWorld?.beginFrame();
     this.characterMotionBudget.clear();
     const preSteppedEntityIds = new Set<number>();
     const landingCarryExcluded = new Set<number>();
@@ -858,6 +894,13 @@ export class Realm {
               this.dismountPlayer(session);
               session.jumpConsumed = true;
             } else {
+              if (this.collisionWorld) {
+                this.collisionWorld.reject("mounted animal controller");
+                preSteppedEntityIds.add(mount.id);
+                preSteppedEntityIds.add(session.player.id);
+                session.lastProcessedInputSeq = input.seq;
+                continue;
+              }
               if (!input.jump) session.jumpConsumed = false;
               const mountExclude = new Set([session.player.id, mount.id]);
               const mountCtx = createMovementContext({
@@ -909,6 +952,8 @@ export class Realm {
             queryProps,
             movingEntity: session.player,
             excludeIds: playerExclude,
+            collisionWorld: this.collisionWorld,
+            geometryVersion: this.geometryVersion,
             motionBudget: this.characterMotionBudget,
             pushBody: (before, after) => this.applyCharacterPush(before, after),
             noclip: session.debugNoclip,
@@ -950,7 +995,7 @@ export class Realm {
         }
       } else if (!session.editorEnabled && session.player.velocity) {
         if (this.vehicles.get(session)) {
-          this.vehicles.missingInput(session);
+          this.vehicles.missingInput(session, dt);
           continue;
         }
         // No input this tick (timing jitter) â€” apply friction only.
@@ -1075,8 +1120,10 @@ export class Realm {
 
       const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
       for (let step = 0; step < physicsSteps; step++) {
-        this.parking?.tick(stepDt, landingCarryExcluded);
-        this.traffic?.tickShopping(stepDt, landingCarryExcluded);
+        if (!this.collisionWorld) {
+          this.parking?.tick(stepDt, landingCarryExcluded);
+          this.traffic?.tickShopping(stepDt, landingCarryExcluded);
+        } else if (this.parking) this.collisionWorld.reject("parking maneuvers");
         // Merge entity tick tiers across all active sessions' visible ranges.
         const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, stepDt);
         if (!storagePaused)
@@ -1084,8 +1131,10 @@ export class Realm {
             if (!this.streaming || this.streaming.supported(e, stepDt))
               entityTickDts.set(e, stepDt);
         for (const [e] of entityTickDts) if (e.resident?.transferring) entityTickDts.delete(e);
-        this.parking?.admitShoppers(entityTickDts, stepDt);
-        this.traffic?.admitShoppingShoppers(entityTickDts, stepDt);
+        if (!this.collisionWorld) {
+          this.parking?.admitShoppers(entityTickDts, stepDt);
+          this.traffic?.admitShoppingShoppers(entityTickDts, stepDt);
+        }
         for (const session of this.sessions.values()) {
           if (session.transitioning || session.retired || Date.now() < session.doorArrivalUntil)
             entityTickDts.delete(session.player);
@@ -1282,6 +1331,7 @@ export class Realm {
               );
           },
         };
+        const aiTiming = performanceMetrics.start();
         tickAllAI(
           active,
           playerPositions,
@@ -1291,6 +1341,7 @@ export class Realm {
           this.robinTurn++,
           this.aiPlanning,
         );
+        performanceMetrics.end("realm.ai", aiTiming);
 
         for (const [entity, elapsed] of entityTickDts)
           if (entity.resident && entity.wanderAI?.state !== "scared")
@@ -1304,6 +1355,7 @@ export class Realm {
         for (const vehicle of this.traffic?.states.values() ?? [])
           preSteppedEntityIds.add(vehicle.entity.id);
         this.parking?.skipCars(preSteppedEntityIds);
+        const collisionTiming = performanceMetrics.start();
         this.entityManager.update(
           stepDt,
           (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
@@ -1314,7 +1366,33 @@ export class Realm {
           preSteppedEntityIds,
           (tx, ty) => this.world.getBlendBaseAt(tx, ty),
           characterContactOwners,
+          this.collisionWorld
+            ? (actor, elapsed, speedMultiplier) => {
+                const before = { ...actor.position };
+                const velocity = actor.velocity;
+                if (!velocity) return false;
+                const x = velocity.vx,
+                  y = velocity.vy;
+                velocity.vx *= speedMultiplier;
+                velocity.vy *= speedMultiplier;
+                const source = this.characterMovementContextFor(actor);
+                source.moveCharacter?.(actor, elapsed, {
+                  ...movementPhysics,
+                  walkSpeed: Math.max(1, Math.hypot(x, y)),
+                });
+                // Preserve intent for the AI; contact displacement is not next tick's input.
+                velocity.vx = x;
+                velocity.vy = y;
+
+                return (
+                  Math.hypot(actor.position.wx - before.wx, actor.position.wy - before.wy) <
+                  Math.hypot(x, y) * elapsed * speedMultiplier * 0.5
+                );
+              }
+            : undefined,
         );
+
+        performanceMetrics.end("realm.entityPhysics", collisionTiming);
 
         tickWildlifeRespawns(this.entityManager, stepDt, wildlifeEnvironment, playerPositions);
         resolvePredatorCatches(this.entityManager, active, wildlifeEnvironment, playerPositions);
@@ -1330,17 +1408,20 @@ export class Realm {
           this.streaming ? new Set(active) : undefined,
           landingCarryExcluded,
         );
-        this.railway?.tick(
-          stepDt,
-          (range) => this.streaming?.rangeReady(range) ?? false,
-          landingCarryExcluded,
-        );
+        if (this.collisionWorld && this.railway?.services.size)
+          this.collisionWorld.reject("railway motion");
+        if (!this.collisionWorld)
+          this.railway?.tick(
+            stepDt,
+            (range) => this.streaming?.rangeReady(range) ?? false,
+            landingCarryExcluded,
+          );
 
         this.vehicles.sync();
 
         // â”€â”€ Jump physics for all players + mount detection on landing â”€â”€
         for (const session of activeSessions) {
-          if (preSteppedEntityIds.has(session.player.id)) continue;
+          if (this.collisionWorld || preSteppedEntityIds.has(session.player.id)) continue;
           const p = session.player;
           const nearbyProps = p.collider
             ? this.propManager.getPropsNearPosition(p.position, p.collider)
@@ -1391,16 +1472,27 @@ export class Realm {
           (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
           (tx, ty) => this.world.getHeightAt(tx, ty),
           active,
+          this.collisionWorld
+            ? (ball, elapsed) =>
+                controlledBallMotion(
+                  ball,
+                  elapsed,
+                  this.characterMovementContextFor(ball),
+                  movementPhysics,
+                  this.entityManager,
+                )
+            : undefined,
         );
 
-        tickVehicleCargoPhysics(
-          this.entityManager,
-          this.propManager,
-          stepDt,
-          getHeight,
-          active,
-          (actor) => this.records?.changed(actor),
-        );
+        if (!this.collisionWorld)
+          tickVehicleCargoPhysics(
+            this.entityManager,
+            this.propManager,
+            stepDt,
+            getHeight,
+            active,
+            (actor) => this.records?.changed(actor),
+          );
 
         this.animalWork.syncAll(active);
         this.ownedBalls.sync(active);
@@ -1432,6 +1524,8 @@ export class Realm {
         session.player.collider = collider;
       }
     }
+
+    this.collisionWorld?.endFrame();
 
     // â”€â”€ Phase 3: Spawners (per-session, near each player) â”€â”€
     for (const session of this.sessions.values()) {
@@ -1930,6 +2024,9 @@ export class Realm {
       await this.saveManager.close();
     }
 
+    this.collisionWorld?.dispose();
+    this.collisionWorld = undefined;
+
     // Create fresh world state with the correct generation strategy
     this.interior = worldMeta.interior ?? null;
     this.roomEditor = null;
@@ -2310,6 +2407,8 @@ export class Realm {
       throw error;
     }
     if (this.saveManager === saves) this.saveManager = null;
+    this.collisionWorld?.dispose();
+    this.collisionWorld = undefined;
     this.options.simulationOwner?.dispose();
     for (const teardown of this.modTeardowns.values()) teardown();
     this.modTeardowns.clear();
@@ -2399,6 +2498,10 @@ export class Realm {
       const entityBox = getEntityAABB(entity.position, entity.collider);
       if (!aabbsOverlap(expandedBox, entityBox)) continue;
 
+      if (this.collisionWorld) {
+        this.collisionWorld.reject("mounted animal controller");
+        return;
+      }
       // Mount!
       session.gameplaySession.mountId = entity.id;
       player.parentId = entity.id;
@@ -2464,6 +2567,9 @@ export class Realm {
 
   /** Handle server-only side effects after applying a pure player simulation step. */
   private characterMovementContext(session: PlayerSession) {
+    return this.characterMovementContextFor(session.player, session.debugNoclip);
+  }
+  private characterMovementContextFor(entity: Entity, noclip = false) {
     const queryProps = (aabb: import("../entities/collision.js").AABB) =>
       this.propManager.getPropsInChunkRange(
         Math.floor(aabb.left / CHUNK_SIZE_PX) - 1,
@@ -2472,20 +2578,37 @@ export class Realm {
         Math.floor(aabb.bottom / CHUNK_SIZE_PX) + 1,
       );
     const queryEntities = (aabb: import("../entities/collision.js").AABB) =>
+      this.entityManager.physicsNeighborhood?.(aabb) ??
       this.entityManager.spatialHash.queryRange(
         Math.floor(aabb.left / CHUNK_SIZE_PX) - 1,
         Math.floor(aabb.top / CHUNK_SIZE_PX) - 1,
         Math.floor(aabb.right / CHUNK_SIZE_PX) + 1,
         Math.floor(aabb.bottom / CHUNK_SIZE_PX) + 1,
       );
+    const excludeIds = new Set([entity.id]);
+    if (entity.type === "ball" && entity.ballThrowerId !== undefined) {
+      const thrower = this.entityManager.byId.get(entity.ballThrowerId);
+      if (
+        thrower?.collider &&
+        entity.collider &&
+        aabbsOverlap(
+          getEntityAABB(entity.position, entity.collider),
+          getEntityAABB(thrower.position, thrower.collider),
+        )
+      )
+        excludeIds.add(entity.ballThrowerId);
+      else delete entity.ballThrowerId;
+    }
     return createMovementContext({
       getCollision: (x, y) => this.world.getCollisionIfLoaded(x, y),
       getHeight: (x, y) => this.world.getHeightAt(x, y),
       queryProps,
       queryEntities,
-      movingEntity: session.player,
-      excludeIds: new Set([session.player.id]),
-      noclip: session.debugNoclip,
+      movingEntity: entity,
+      collisionWorld: this.collisionWorld,
+      geometryVersion: this.geometryVersion,
+      excludeIds,
+      noclip,
       motionBudget: this.characterMotionBudget,
       pushBody: (before, after) => this.applyCharacterPush(before, after),
     });
@@ -2500,6 +2623,7 @@ export class Realm {
       else before[key] = after[key];
     }
     this.entityManager.spatialHash.update(before);
+    this.entityManager.collisionIndex.update(before);
     this.records?.changed(before);
   }
 

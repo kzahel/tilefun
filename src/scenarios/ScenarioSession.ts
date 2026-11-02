@@ -1,3 +1,4 @@
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { Direction } from "../entities/Entity.js";
 import { createProp } from "../entities/PropFactories.js";
 import { baseGameMod } from "../game/base-game.js";
@@ -86,6 +87,10 @@ export class ScenarioSession {
     recipe: ScenarioRecipe,
     simulationFactory?: () => Promise<RealmSimulationOwner>,
   ): Promise<ScenarioSession> {
+    if (recipe.measurePhysics) {
+      performanceMetrics.enabled = true;
+      performanceMetrics.reset();
+    }
     await prepareCharacterPhysics(recipe.physics?.characterPhysics ?? 0);
     const session = new ScenarioSession(structuredClone(recipe), simulationFactory);
     try {
@@ -406,7 +411,9 @@ export class ScenarioSession {
     const frames: ArrayBuffer[] = [];
     this.transport.clientSide.onMessage((message) => frames.push(encodeServerMessage(message)));
     this.applyAuthoredRailPaths();
+    const started = performanceMetrics.start();
     this.realm.tick(dt, this.transport.serverSide, publish, new Set());
+    performanceMetrics.end("realm.tick", started);
     return frames;
   }
   discardInputs() {

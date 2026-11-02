@@ -7,6 +7,7 @@ import type { AABB } from "../entities/collision.js";
  * - Client: iterates flat snapshot arrays (checks `clientSolid`)
  */
 export interface MovementContext {
+  legacyCollisionForbidden?: boolean;
   moveCharacter?(
     entity: import("../entities/Entity.js").Entity,
     dt: number,

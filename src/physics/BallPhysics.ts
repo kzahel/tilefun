@@ -46,6 +46,7 @@ export function tickBallPhysics(
   getCollision: (tx: number, ty: number) => number,
   getHeight: (tx: number, ty: number) => number,
   active: readonly Entity[] = entityManager.entities,
+  resolveBall?: (ball: Entity, dt: number) => boolean,
 ): void {
   const toRemove: number[] = [];
   const beds = entityManager.entities.filter(hasVehicleBed);
@@ -59,6 +60,12 @@ export function tickBallPhysics(
     ball.prevPosition = { wx: ball.position.wx, wy: ball.position.wy };
     if (ball.wz !== undefined) ball.prevWz = ball.wz;
     if (ball.jumpZ !== undefined) ball.prevJumpZ = ball.jumpZ;
+
+    if (resolveBall) {
+      if (resolveBall(ball, dt)) toRemove.push(ball.id);
+      entityManager.spatialHash.update(ball);
+      continue;
+    }
 
     slideOnVehicleBed(ball, dt, beds);
 
@@ -232,49 +239,7 @@ export function tickBallPhysics(
         const hitNx = hitDx / hitDist;
         const hitNy = hitDy / hitDist;
 
-        // Kill hostile entities (angry ghosts etc.)
-        const ai = other.wanderAI;
-        if (ai?.hostile && other.deathTimer === undefined) {
-          other.deathTimer = 0.4;
-          ai.hostile = false;
-          other.tags?.delete("hostile");
-          ai.state = "idle";
-          if (other.velocity) {
-            other.velocity.vx = 0;
-            other.velocity.vy = 0;
-          }
-          entityManager.spawn(createGem(other.position.wx, other.position.wy));
-        } else if (other.predator) {
-          startlePredator(other, ball.position);
-        } else if (other.fauna) {
-          startleFauna(other, ball.position);
-        } else if (other.deer) {
-          startleDeer(other, ball.position);
-        } else if (other.robin) {
-          startleRobin(other, ball.position);
-        } else if (other.rabbit) {
-          startleRabbit(other, ball.position);
-        } else if (other.frog) {
-          startleFrog(other, ball.position);
-        } else if (other.mallard) {
-          startleMallard(other, ball.position);
-        } else if (ai && !ai.hostile) {
-          // Scare NPCs (non-hostile entities with wander AI)
-          if (other.velocity) {
-            other.velocity.vx += hitNx * BALL_SCARE_KNOCKBACK;
-            other.velocity.vy += hitNy * BALL_SCARE_KNOCKBACK;
-          }
-          ai.state = "scared";
-          ai.scaredTimer = BALL_SCARE_DURATION;
-          delete ai.scaredSpeed;
-          ai.dirX = hitNx;
-          ai.dirY = hitNy;
-          ai.timer = 0.3;
-          if (other.sprite) other.sprite.moving = true;
-        } else if (other.velocity) {
-          other.velocity.vx += hitNx * BALL_PUSH_SPEED;
-          other.velocity.vy += hitNy * BALL_PUSH_SPEED;
-        }
+        applyBallImpact(entityManager, other, ball, hitNx, hitNy);
 
         // Bounce the ball away from entity
         ball.velocity.vx = -hitNx * Math.abs(ball.velocity.vx) * BOUNCE_RESTITUTION;
@@ -307,5 +272,58 @@ export function tickBallPhysics(
 
   for (const id of toRemove) {
     entityManager.remove(id);
+  }
+}
+
+/** Gameplay hit reactions shared by collision backends; no position resolution. */
+export function applyBallImpact(
+  entityManager: EntityManager,
+  other: Entity,
+  ball: Entity,
+  hitNx: number,
+  hitNy: number,
+) {
+  // Kill hostile entities (angry ghosts etc.)
+  const ai = other.wanderAI;
+  if (ai?.hostile && other.deathTimer === undefined) {
+    other.deathTimer = 0.4;
+    ai.hostile = false;
+    other.tags?.delete("hostile");
+    ai.state = "idle";
+    if (other.velocity) {
+      other.velocity.vx = 0;
+      other.velocity.vy = 0;
+    }
+    entityManager.spawn(createGem(other.position.wx, other.position.wy));
+  } else if (other.predator) {
+    startlePredator(other, ball.position);
+  } else if (other.fauna) {
+    startleFauna(other, ball.position);
+  } else if (other.deer) {
+    startleDeer(other, ball.position);
+  } else if (other.robin) {
+    startleRobin(other, ball.position);
+  } else if (other.rabbit) {
+    startleRabbit(other, ball.position);
+  } else if (other.frog) {
+    startleFrog(other, ball.position);
+  } else if (other.mallard) {
+    startleMallard(other, ball.position);
+  } else if (ai && !ai.hostile) {
+    // Scare NPCs (non-hostile entities with wander AI)
+    if (other.velocity) {
+      other.velocity.vx += hitNx * BALL_SCARE_KNOCKBACK;
+      other.velocity.vy += hitNy * BALL_SCARE_KNOCKBACK;
+    }
+    ai.state = "scared";
+    ai.scaredTimer = BALL_SCARE_DURATION;
+    delete ai.scaredSpeed;
+    ai.dirX = hitNx;
+    ai.dirY = hitNy;
+    ai.timer = 0.3;
+    if (other.sprite) other.sprite.moving = true;
+  } else if (other.velocity) {
+    other.velocity.vx += hitNx * BALL_PUSH_SPEED;
+    other.velocity.vy += hitNy * BALL_PUSH_SPEED;
   }
 }

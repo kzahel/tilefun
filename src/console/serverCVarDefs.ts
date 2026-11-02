@@ -4,11 +4,12 @@ import type { CVarDesc } from "./CVar.js";
 export const SERVER_CVAR_DEFS: readonly CVarDesc[] = [
   {
     name: "sv_characterphysics",
-    description: "Experimental on-foot contacts: 0 legacy, 1 fixed Rapier box, 2 upright capsule",
+    description:
+      "Physics: 0 legacy, 1/2 character box/capsule, 3/4 exclusive realm box/capsule (reload only)",
     type: "number",
     defaultValue: 0,
     min: 0,
-    max: 2,
+    max: 4,
     category: "sv",
   },
   {

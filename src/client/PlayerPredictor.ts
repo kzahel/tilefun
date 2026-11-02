@@ -5,7 +5,12 @@ import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
 import { CharacterMotionBudget } from "../physics/CharacterMotionBudget.js";
-import { characterPhysicsReady } from "../physics/CharacterPhysics.js";
+import {
+  characterPhysicsReady,
+  createCollisionWorld,
+  usesRealmPhysics,
+} from "../physics/CharacterPhysics.js";
+import { controlledCarMotion } from "../physics/ControlledCarMotion.js";
 import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import {
   getMovementPhysicsParams,
@@ -164,6 +169,9 @@ interface ReconcileReplayStats {
  * position is derived from the mount + local offset.
  */
 export class PlayerPredictor {
+  private collisionWorld:
+    | import("../physics/rapier/PersistentCollisionWorld.js").PersistentCollisionWorld
+    | undefined;
   private presentationInputSeconds = 0;
   private presentationInputDt = 0;
   private presentationEpoch: object = {};
@@ -276,6 +284,8 @@ export class PlayerPredictor {
    * Called on first server state and on world load.
    */
   reset(serverPlayer: Entity, serverMount?: Entity): void {
+    this.collisionWorld?.dispose();
+    this.collisionWorld = undefined;
     this.pushedBodies.clear();
     this.presentationInputSeconds = this.presentationInputDt = 0;
     this.presentationEpoch = {};
@@ -344,7 +354,7 @@ export class PlayerPredictor {
         (this.replayJob.candidate.replayedThroughSeq < discarded.seq ||
           this.replayJob.candidate.inputBuffer.length > INPUT_BUFFER_SIZE)
       )
-        this.replayJob = undefined;
+        this.discardReplay();
       this.queuedReconcile = undefined;
     }
   }
@@ -493,7 +503,7 @@ export class PlayerPredictor {
           this.replayJob.candidate.replayedThroughSeq >= this.discardedThroughSeq
         )
           return;
-        this.replayJob = undefined;
+        this.discardReplay();
         this.queuedReconcile = undefined;
         this.gapSince ??= this.clock();
         this.recoveryStatus = "history-gap";
@@ -516,7 +526,7 @@ export class PlayerPredictor {
     const cost = this.replayCost(ack);
     if (this.replayJob) {
       if (cost <= REPLAY_STEP_BUDGET - this.replayStepsThisTick) {
-        this.replayJob = undefined;
+        this.discardReplay();
         this.queuedReconcile = undefined;
       } else {
         // Retain progress; newer snapshots do not restart a long replay every tick.
@@ -547,13 +557,18 @@ export class PlayerPredictor {
     this.lastAuthority = { ack, player: this.clonePlayer(player) };
   }
 
+  private discardReplay(): void {
+    this.replayJob?.candidate.collisionWorld?.dispose();
+    this.replayJob = undefined;
+  }
+
   private clearInputHistory(): void {
     this.inputBuffer = [];
     this.inputSeconds = 0;
     this.discardedThroughSeq = this.gapSince = this.resyncThroughSeq = undefined;
     this.receivedAck = this.receivedTick = undefined;
     this.lastAuthority = undefined;
-    this.replayJob = undefined;
+    this.discardReplay();
     this.queuedReconcile = undefined;
     this.recoveryStatus = "ready";
     this.replayStepsThisTick = this.lastReplaySteps = 0;
@@ -676,7 +691,7 @@ export class PlayerPredictor {
     this.copyPredictionState(job.candidate);
     // Keep live collision arrivals, but use the replay's current physics horizon.
     this.trimInputBuffer(job.request.ack);
-    this.replayJob = undefined;
+    this.discardReplay();
     this.recoveryStatus = "ready";
   }
 
@@ -1143,6 +1158,8 @@ export class PlayerPredictor {
 
   /** Clear predicted state (e.g. when switching worlds). */
   clearPredicted(): void {
+    this.collisionWorld?.dispose();
+    this.collisionWorld = undefined;
     this.predicted = null;
     this.clearPresentationError();
     this.clearSupport();
@@ -1519,6 +1536,9 @@ export class PlayerPredictor {
     physics: MovementPhysicsParams,
   ): void {
     if (!this.predicted || !characterPhysicsReady(physics.characterPhysics ?? 0)) return;
+    if (usesRealmPhysics(physics.characterPhysics)) this.collisionWorld ??= createCollisionWorld();
+    const collisionWorld = this.collisionWorld;
+    collisionWorld?.beginFrame();
     const stepDts = splitInputStepDurations(dt, MAX_INPUT_STEP_SECONDS);
     if (stepDts.length === 0) return;
     const queryEntities = (_aabb: {
@@ -1552,6 +1572,14 @@ export class PlayerPredictor {
       // ── Riding: apply input to mount, derive player position ──
       const mountExclude = new Set([this.predictedMount.id, this.predicted.id]);
       const mountCtx = createMovementContext({
+        collisionWorld,
+        geometryVersion: (cx, cy) => {
+          const chunk = world.getChunkIfLoaded(cx, cy);
+          return {
+            identity: chunk,
+            revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}`,
+          };
+        },
         getCollision,
         getHeight,
         getTerrainAt,
@@ -1593,7 +1621,23 @@ export class PlayerPredictor {
               world,
               props,
               bodies,
-              undefined,
+              collisionWorld
+                ? {
+                    props: queryProps,
+                    resolveCarMotion: (before, desired, elapsed, planned) =>
+                      controlledCarMotion(
+                        before,
+                        desired,
+                        elapsed,
+                        world,
+                        props,
+                        bodies,
+                        physics,
+                        collisionWorld,
+                        planned,
+                      ),
+                  }
+                : undefined,
               pushes,
               undefined,
               false,
@@ -1615,6 +1659,10 @@ export class PlayerPredictor {
             for (const tow of towPlan) this.pushedBodies.set(tow.before.id, tow.after);
             this.predictedMount = next;
           }
+          continue;
+        }
+        if (collisionWorld) {
+          collisionWorld.reject("mounted animal controller");
           continue;
         }
         stepMountFromInput(
@@ -1645,6 +1693,14 @@ export class PlayerPredictor {
       if (this.support) this.poseSourceSeconds = this.sourceFrameSeconds;
       const playerExclude = new Set([this.predicted.id]);
       const playerCtx = createMovementContext({
+        collisionWorld,
+        geometryVersion: (cx, cy) => {
+          const chunk = world.getChunkIfLoaded(cx, cy);
+          return {
+            identity: chunk,
+            revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}`,
+          };
+        },
         getCollision,
         getHeight,
         getTerrainAt,
@@ -1685,6 +1741,7 @@ export class PlayerPredictor {
       this.lastJumpHeld = nextState.lastJumpHeld;
     }
     this.captureSupport(entities, landed);
+    this.collisionWorld?.endFrame();
   }
 
   private clonePlayer(serverPlayer: Entity): Entity {

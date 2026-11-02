@@ -498,7 +498,15 @@ function createLocalHost(keepAliveWhenHidden = false): WorkerClientTransport {
     {
       metrics: performanceMetrics.enabled,
       characterPhysics:
-        params.get("physics") === "rapier" ? (params.get("hull") === "capsule" ? 2 : 1) : 0,
+        params.get("physics") === "rapier-world"
+          ? params.get("hull") === "capsule"
+            ? 4
+            : 3
+          : params.get("physics") === "rapier"
+            ? params.get("hull") === "capsule"
+              ? 2
+              : 1
+            : 0,
       onError: (error) => {
         peerHost?.close();
         showErrorOverlay(error);

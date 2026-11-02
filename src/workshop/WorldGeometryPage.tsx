@@ -16,6 +16,7 @@ import {
   generatedCrossingRecipe,
 } from "../scenarios/GeneratedCrossingRecipe.js";
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
+import { realmPhysicsRecipe } from "../scenarios/RealmPhysicsRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { TRAIN_GEOMETRY_STARTS, trainGeometryRecipe } from "../scenarios/TrainGeometryRecipe.js";
@@ -35,6 +36,9 @@ import TransporterPage from "./TransporterPage.js";
 import TruckBedPage from "./TruckBedPage.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
+  __physicsSample?: (
+    reset?: boolean,
+  ) => Promise<import("../scenarios/ScenarioProtocol.js").ScenarioResponse["physicsDiagnostics"]>;
   __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
 };
 
@@ -60,7 +64,17 @@ function GeometryFixtures() {
   );
   const [characterPhysics, setCharacterPhysics] = useState<CharacterPhysicsMode>(() => {
     const params = new URLSearchParams(location.search);
-    return params.get("physics") === "rapier" ? (params.get("hull") === "capsule" ? 2 : 1) : 0;
+    return params.get("physics") === "legacy"
+      ? 0
+      : params.get("physics") === "rapier-world" || params.get("geometry") === "realm"
+        ? params.get("hull") === "capsule"
+          ? 4
+          : 3
+        : params.get("physics") === "rapier"
+          ? params.get("hull") === "capsule"
+            ? 2
+            : 1
+          : 0;
   });
   const [vehicleModel, setVehicleModel] = useState(() => {
     const model = new URLSearchParams(location.search).get("vehicle") ?? "compact-1";
@@ -115,7 +129,15 @@ function GeometryFixtures() {
     const host = new ScenarioPresentationHost(
       c,
       characterRecipe(
-        curveRecipe ??
+        (fixture === "realm"
+          ? realmPhysicsRecipe(
+              characterPhysics,
+              new URLSearchParams(location.search).has("crowd")
+                ? Number(new URLSearchParams(location.search).get("crowd"))
+                : undefined,
+            )
+          : undefined) ??
+          curveRecipe ??
           (generatedScene
             ? generatedScene.recipe
             : trainGrade
@@ -127,7 +149,7 @@ function GeometryFixtures() {
                   : garage
                     ? undergroundGarageRecipe()
                     : worldGeometryRecipe()),
-        fixture === "deck" ? characterPhysics : 0,
+        fixture === "deck" || fixture === "realm" ? characterPhysics : 0,
       ),
       {
         authoredTrains,
@@ -351,6 +373,7 @@ function GeometryFixtures() {
     );
     scene.current = host;
     c.__presentationDiagnostics = () => host.getDiagnostics();
+    c.__physicsSample = (reset) => host.session.samplePhysicsDiagnostics(reset);
     void host.ready
       .then(() => {
         if (alive) c.dataset.ready = "true";
@@ -444,6 +467,7 @@ function GeometryFixtures() {
               Generated bridge · {c.label}
             </option>
           ))}
+          <option value="realm">Realm physics replacement proof</option>
           <option value="deck">Raised deck and passage</option>
           <option value="garage">Underground parking garage</option>
           <option value="crossing">Road bridge over railway</option>
@@ -574,11 +598,18 @@ function GeometryFixtures() {
           Save / reload scene
         </button>
       </div>
+      {fixture === "realm" && (
+        <p>
+          Replacement qualification: shared collision for terrain, characters, one controlled car
+          and balls. Autonomous traffic, moving roof passengers, apparatus and full wildlife parity
+          remain unqualified. Cars stay upright. This is not the default backend.
+        </p>
+      )}
       <label>
-        Character contacts (deck fixture){" "}
+        Character contacts (deck / realm fixtures){" "}
         <select
           aria-label="Character contacts"
-          disabled={fixture !== "deck"}
+          disabled={fixture !== "deck" && fixture !== "realm"}
           value={characterPhysics}
           onChange={(event) =>
             setCharacterPhysics(Number(event.target.value) as CharacterPhysicsMode)
@@ -587,6 +618,8 @@ function GeometryFixtures() {
           <option value={0}>Game default</option>
           <option value={1}>Rapier fixed box</option>
           <option value={2}>Rapier capsule</option>
+          <option value={3}>Persistent realm box</option>
+          <option value={4}>Persistent realm capsule</option>
         </select>
       </label>
       <label>

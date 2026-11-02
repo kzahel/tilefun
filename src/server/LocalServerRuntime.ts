@@ -82,7 +82,7 @@ export class LocalServerRuntime {
   async init(metrics: boolean, keepAliveWhenHidden = false, characterPhysics = 0): Promise<void> {
     this.keepAliveWhenHidden = keepAliveWhenHidden;
     performanceMetrics.enabled = metrics;
-    await configureCharacterPhysics(characterPhysics);
+    await configureCharacterPhysics(characterPhysics, true);
     await this.server.init();
     if (this.state !== "starting") throw Error("Local server stopped during startup");
     this.state = "ready";

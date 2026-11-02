@@ -14,6 +14,9 @@ const output =
   path.join(os.tmpdir(), "tilefun-active-crowds");
 await mkdir(output, { recursive: true });
 const results = [];
+const characterPhysics = Number(
+  process.argv.find((arg) => arg.startsWith("--physics="))?.slice(10) ?? 0,
+);
 const syntheticCases = [
   [0, "near"],
   [24, "near"],
@@ -24,7 +27,11 @@ const syntheticCases = [
 const cases = process.argv.includes("--natural")
   ? ["city-pets", "farmstead", "pond", "dog", "deer", "forest"].map((id) => [0, id])
   : syntheticCases;
-for (const [population, placement] of cases) {
+for (const [population, placement] of cases.filter(
+  ([n]) =>
+    !process.argv.some((a) => a.startsWith("--population=")) ||
+    n === Number(process.argv.find((a) => a.startsWith("--population="))?.slice(13)),
+)) {
   const natural = process.argv.includes("--natural");
   const actors = Array.from({ length: population }, (_, i) =>
     createFauna(
@@ -43,6 +50,7 @@ for (const [population, placement] of cases) {
           player: createPlayer(32, 32),
           actors: placement === "far" ? [] : actors,
           props: [],
+          physics: { characterPhysics },
         },
   );
   try {
@@ -143,6 +151,7 @@ for (const [population, placement] of cases) {
     const row = {
       population,
       placement,
+      collision: realm.collisionDiagnostics,
       resident: realm.entityManager.entities.length,
       props: realm.propManager.props.length,
       active: realm.persistenceDiagnostics.activeActors,
@@ -165,6 +174,7 @@ await writeFile(
   path.join(output, "report.json"),
   JSON.stringify(
     {
+      characterPhysics,
       date: new Date().toISOString(),
       cpu: os.cpus()[0]?.model,
       platform: os.platform(),
