@@ -21,12 +21,29 @@ product, TypeScript gameplay, existing renderer, Worker/P2P transport, persisten
 infrastructure and world authoring. Keep Rapier/WASM inside the existing authority
 Worker; a Rust server, SharedArrayBuffer or extra physics Worker is unnecessary.
 
-The minimum product outcomes remain responsive keyboard/touch/controller movement,
-fixed nonrotating player box with an optional capsule, understandable pushing,
-standing on bodies without runaway movement, usable jumps, ramps/bridges/underpasses,
-normal animal intent, driving and usable current equipment. Those features may be
-implemented more simply and feel different. This is not permission to silently
-remove whole gameplay features to call the backend finished.
+Follow-up owner clarification: prefer a simpler codebase with one default physics
+configuration over migrating a matrix of legacy options and behaviors. The full
+feature-preservation assumption behind the original estimate below is no longer
+a required baseline. Simplification/removal of old modes and parameters is desired.
+
+The replacement baseline is responsive keyboard/touch/controller movement, the
+fixed upright player box, ordinary NPC movement/pushing/head standing/jumps,
+static geometry/ramps/bridges, a dynamic loose object and a basic driving adapter,
+with local/remote play sharing the same tick kernel. Use a single character preset
+and engine defaults as the starting point; do not require the old optional capsule
+comparison or historical movement CVars to survive as product switches. Different
+content shapes/masses are ordinary data, not separate simulation implementations.
+
+Specialized wildlife motion and equipment should use the same intent/body contract,
+be simplified, or be explicitly deferred/removed. Keeping every current machinery
+behavior usable is not a prerequisite for proving the clean core. Record specific
+feature dispositions before default cutover; deferred behavior cannot silently
+invoke the old solver. Preserve existing AI decision logic where it already emits
+ordinary intent; the species roster is not a list of distinct physics engines.
+
+The substantial remaining work is common input/time ownership and coupled local
+prediction. Removing optional permutations does not remove the need to advance
+interacting bodies consistently and acknowledge the input/state tick correctly.
 
 ## Source audit
 
@@ -130,7 +147,15 @@ the small-world full-replay reference to prove the contract first. Do not copy o
 roll back the entire streamed realm as a production default. Geometry readiness,
 versions, membership changes and contact/support dependencies bound replay scenes.
 
-## Work estimate
+## Original feature-preserving estimate
+
+The table records the initial broader assumption of keeping current equipment
+usable. Following the simplification clarification, **9–16 days is not a minimum
+for the clean replacement baseline**. A–C describe the core/time/prediction work;
+D is an optional feature-disposition workstream, not a mandatory compatibility
+project ahead of the core proof. Re-estimate its retained scope after the first
+shared controller/timing checkpoint rather than inventing a new precise estimate
+without that evidence. Cleanup/qualification is still required.
 
 These are **focused engineer-days including focused tests/review**, not a promise
 about elapsed agent time. Assumptions: simpler feel is acceptable; existing art,
@@ -188,5 +213,5 @@ per-command/character solvers and duplicate prediction/support corrections as pa
 of this milestone. If the character or prediction spike fails, report the exact
 remaining design choice before expanding into all equipment migrations.
 
-This is an audit/estimate handoff. Implementing slices A–E is the next task, not
-part of the current audit request.
+This is an audit/estimate handoff. Implementing the clean shared core and its
+prediction contract is the next task, not part of the current audit request.

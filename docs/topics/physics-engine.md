@@ -67,21 +67,27 @@ then rerun the ordinary-game Chromebook gate. Production is unchanged by 203.
 
 ## Unified architecture audit (204)
 
-The owner clarified that exact legacy movement behavior is not a compatibility
-requirement. [204](../tactical/204-unified-physics-architecture-audit.md) audits the
-normal shared-tick refactor and estimates 3–5 focused engineer-days to an ordinary
-playable core, 5–9 through meaningful predicted multiplayer, and 9–16 for the
-complete bounded cutover including current gameplay adapters and legacy deletion.
-These are planning ranges, not elapsed agent-time guarantees. The largest changes
-are common input/time ownership, separation of desired intent from body velocity,
-and bounded coupled prediction; existing static geometry/Worker/rendering remain.
+The owner prefers a simpler codebase and one default physics configuration. Exact
+legacy movement, optional backend/shape comparisons and historical parameter
+permutations are not migration requirements. [204](../tactical/204-unified-physics-architecture-audit.md)
+owns the source audit and the distinction between essential shared time/body/
+prediction work and optional feature-preservation work.
 
-Keep basic product outcomes (usable pushing, head standing, jumps, geometry and
-current equipment), while replacing old numeric tuning, command-clock car holds,
-manual separation/carry algorithms and other historical quirks as useful. Prove
-upright dynamic versus thin hybrid character control before committing to that
-model. Production is unchanged by this audit; implementation has not started,
-and the negative 202 game gate remains until a new normal-game device proof.
+The original 9–16 focused engineer-day estimate assumed keeping all current
+equipment usable. It is not a minimum for the now-simpler baseline. First prove
+one shared tick/controller configuration with players, ordinary NPCs, static
+geometry, a loose body and basic driving, followed by bounded coupled prediction.
+Retain AI decisions that supply intent; do not treat each species as its own
+physics port. Simplify or explicitly disposition specialized movement/equipment,
+then remove old backends, time policies and duplicate pose solvers. Use normal
+body shape/mass data without multiplying supported algorithms or product switches.
+
+The main architectural work remains input-to-tick admission, separating desired
+intent from physical velocity, and restoring/replaying interacting bodies at a
+common tick. Engine defaults are a starting point for a single character preset,
+not a guarantee that desired movement/pushing/support emerges without a controller.
+Production is unchanged by the audit and clarification; the 202 negative game gate
+remains until the shared core has normal-game device evidence.
 
 ## Retained subsystem constraints
 
