@@ -185,3 +185,10 @@ controlled-collision proof passes focused gameplay/prediction checks but its
 Chromebook crowd CPU cost fails the provisional budget. A bounded NPC stepping
 performance proof must precede any renewed compatibility/default investment; see
 202 for raw paired GPU/Canvas/native captures and unqualified gates.
+
+The follow-up [204 architecture audit](204-unified-physics-architecture-audit.md)
+records the owner's clarification: exact legacy feel and command-clock behavior
+need not survive. It recommends refactoring shared tick/input/intent/body ownership
+before further compatibility migration, with a bounded coupled prediction proof.
+This is an audit and effort estimate; the shared-tick implementation is not yet
+started and no positive cutover decision replaces the 202 result.

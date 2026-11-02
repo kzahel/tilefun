@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [204 Unified physics architecture audit](204-unified-physics-architecture-audit.md) | Audit complete: shared time/intent/body ownership and coupled prediction; 3–5 days to playable core, 9–16 focused engineer-days to bounded cutover; exact legacy feel unnecessary; implementation not started |
 | [203 Physics churn and simplified models](203-physics-copy-and-model-comparison.md) | Native comparison delivered: descriptor caching alone does not help; per-actor refresh/neighborhood costs remain; naive batching fails contacts; production unchanged |
 | [202 Persistent realm collision proof](202-persistent-realm-collision-proof.md) | Early decision reached: persistent Realm interaction proof delivered, Chromebook CPU gate failed; default cutover paused before compatibility; [physics engine](../topics/physics-engine.md) |
 | [201 Rapier cutover sequence](201-rapier-cutover-sequence.md) | Approved parent sequence: persistent shared world, representative loop and early device/gameplay decision; then compatibility, default/deletion and dynamic car; [physics engine](../topics/physics-engine.md) |

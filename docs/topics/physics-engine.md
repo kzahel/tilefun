@@ -65,6 +65,24 @@ once-per-tick KCC batching fails approaching-peer contact checks. Next prove one
 shared contact phase with consistent commits and the existing character rules,
 then rerun the ordinary-game Chromebook gate. Production is unchanged by 203.
 
+## Unified architecture audit (204)
+
+The owner clarified that exact legacy movement behavior is not a compatibility
+requirement. [204](../tactical/204-unified-physics-architecture-audit.md) audits the
+normal shared-tick refactor and estimates 3–5 focused engineer-days to an ordinary
+playable core, 5–9 through meaningful predicted multiplayer, and 9–16 for the
+complete bounded cutover including current gameplay adapters and legacy deletion.
+These are planning ranges, not elapsed agent-time guarantees. The largest changes
+are common input/time ownership, separation of desired intent from body velocity,
+and bounded coupled prediction; existing static geometry/Worker/rendering remain.
+
+Keep basic product outcomes (usable pushing, head standing, jumps, geometry and
+current equipment), while replacing old numeric tuning, command-clock car holds,
+manual separation/carry algorithms and other historical quirks as useful. Prove
+upright dynamic versus thin hybrid character control before committing to that
+model. Production is unchanged by this audit; implementation has not started,
+and the negative 202 game gate remains until a new normal-game device proof.
+
 ## Retained subsystem constraints
 
 Keep browser/Chromebook play primary, the existing renderer, TypeScript gameplay,
