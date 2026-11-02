@@ -1,6 +1,6 @@
 # General 3D physics backend
 
-Status: persistent realm proof available; early Chromebook CPU gate failed, default cutover paused.
+Status: autonomous shared-physics reset active; existing proof failed CPU gate, legacy default pending replacement.
 Updated: 2026-11-02.
 
 Owns the physics-backend replacement direction. [World geometry](world-geometry.md)
@@ -8,6 +8,19 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 [rendering](rendering-architecture.md) owns visual composition and resource limits.
 [189](../tactical/189-rapier-physics-prototype.md) owns the first bounded experiment;
 [190](../tactical/190-rapier-prediction-and-realm-proof.md) owns prediction/Realm integration.
+
+## Active reset (205)
+
+The owner authorized [205](../tactical/205-physics-reset.md): purge optional physics
+paths/commands and obsolete compatibility tests, retain gravity as the only exposed
+physics tuning option, one fixed 60Hz shared Rapier tick, and the same bounded local
+prediction kernel. Exact old feel and full peripheral compatibility are not required.
+Simplify or explicitly retire peripheral pose writers; do not retain another solver
+behind a flag. Keep browser/Worker/P2P, content, renderer and controller/touch access.
+Implementation proceeds autonomously with checkpoint commits, focused validation,
+actual Chromebook evidence and final review. The reset is not complete until the
+normal default is shared physics and old solvers/dispatch are deleted. Prior plans
+and measurements below are history/reference, not a compatibility checklist.
 
 ## Replacement direction and early decision (201)
 
