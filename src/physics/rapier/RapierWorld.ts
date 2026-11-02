@@ -18,8 +18,7 @@ import {
 } from "./CharacterContact.js";
 import { POSE_STRIDE } from "./PhysicsProtocol.js";
 
-let initialization: Promise<void> | undefined;
-export const initRapier = () => (initialization ??= RAPIER.init());
+export { initializePhysics as initRapier } from "../PhysicsDefaults.js";
 export const PHYSICS_DT = 1 / 60;
 export const PHYSICS_WALK_SPEED = 4.5;
 const CHARACTER_SKIN = 0.015;

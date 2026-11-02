@@ -112,3 +112,28 @@ contract was lazy optional-backend selection. Shared contact/regression tests ar
 retained until replaced with the new core outcomes. Internal old settings/schema
 and solver modules are transitional and must still be deleted later in this run;
 this checkpoint is not the completed physics reset.
+
+### Checkpoint 2a — shared body core and fixed-tick input admission
+
+Added `PhysicsScene`: ordinary fixed-footprint characters, dynamic balls/loose
+bodies and upright vehicle bodies share one persistent world and one integration
+per 1/60s tick. Shape creation is per body identity/change, section geometry is
+updated once per scene tick, and support/contact readback occurs after integration.
+The player outer box stays fixed, with a built-in 0.01m-or-smaller bevel to prevent
+subpixel ramp/slab seams from snagging its bottom edge. Normal contact projection
+supports slope travel; CCD replaces soft-CCD's premature seam face constraints.
+No user-facing shape/controller mode is added. Full orientation/suspension remains
+outside the baseline. Static authored geometry compiles through the existing common
+compiler, now independent of the old character-backend source interface.
+
+Added `PlayerControls`: coalesce arrived held-state changes into one tick, retain
+press/release jump edges, reject duplicate sequences and expire stale held controls
+on simulation ticks. Command `dtMs` cannot add travel. This input policy deliberately
+retires queued-duration travel and car pose freezing on missing-input ticks.
+
+Seven shared-scene and two input tests pass, plus 24 retained authored-character
+geometry checks (33 total); all three TypeScript projects pass at this checkpoint.
+The scene tests use real body interaction, persistent 96-NPC stepping, pushing and
+release, head standing/walking, side jumping/held-edge suppression, edited walls,
+ramp-to-deck/underpass traversal and snapshot restore. This is still a native core;
+ordinary Realm/prediction wiring and deletion of transitional engines are next.

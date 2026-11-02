@@ -1,20 +1,25 @@
 import RAPIER from "@dimforge/rapier3d-compat";
 import { ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
 import { type AABB, aabbsOverlap, getEntityAABB } from "../../entities/collision.js";
+import type { Prop } from "../../entities/Prop.js";
 import { CollisionFlag } from "../../world/TileRegistry.js";
-import type { CharacterMotionSource } from "../CharacterPhysics.js";
+import { PHYSICS_PIXELS_PER_METRE as SCALE } from "../PhysicsDefaults.js";
 import { surfaceZAt } from "../SurfacePatch.js";
-import { PHYSICS_PIXELS_PER_METRE as SCALE } from "./CharacterShape.js";
 import { clippedTerrainVertices } from "./ClippedTerrain.js";
 
 const MAX_COLLIDERS = 512;
+export interface CollisionGeometrySource {
+  getCollision(tx: number, ty: number): number;
+  getHeight(tx: number, ty: number): number;
+  queryProps(bounds: AABB): readonly Prop[];
+}
 export type OneWayColliders = Map<
   number,
   { bounds: AABB; collider: import("../../entities/Prop.js").PropCollider }
 >;
 /** Canonical geometry used by disposable reference queries and persistent sections. */
 export function compileCollisionGeometry(
-  source: CharacterMotionSource,
+  source: CollisionGeometrySource,
   bounds: AABB,
   origin: RAPIER.Vector,
   low: number,

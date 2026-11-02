@@ -5,7 +5,9 @@ import type { Entity } from "../../entities/Entity.js";
 import { isVehicle } from "../../traffic/Vehicle.js";
 import { entityBody } from "../../traffic/VehicleContact.js";
 
-export const PHYSICS_PIXELS_PER_METRE = 16;
+import { PHYSICS_PIXELS_PER_METRE } from "../PhysicsDefaults.js";
+
+export { PHYSICS_PIXELS_PER_METRE } from "../PhysicsDefaults.js";
 export type CharacterHull = "box" | "capsule";
 export function usesCapsule(entity: Entity, mode: number | undefined): boolean {
   return (
