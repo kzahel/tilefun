@@ -11,6 +11,8 @@
   letter-spacing: 0.12em;
 }
 .physics-actions {
+  border: 0;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;

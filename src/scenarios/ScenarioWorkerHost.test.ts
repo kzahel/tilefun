@@ -16,7 +16,7 @@ const recipe: ScenarioRecipe = {
   generation: FLAT_SCENARIO,
   player: createPlayer(0, 0),
   props: scenarioWalls(-80, -80, 80, 80),
-  physics: { gravityScale: 0.5 },
+  gravity: 0.5,
 };
 it("reports actual durable racer handles without including an ordinary car of the same model", async () => {
   const lane = (id: string, y: number, race: boolean): Lane => ({

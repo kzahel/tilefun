@@ -8,7 +8,7 @@ export function furnitureRecipe(model: FurnitureMotion): ScenarioRecipe {
     id: "furniture",
     generation: FLAT_SCENARIO,
     player: structuredClone(model.player),
-    physics: { gravityScale: model.gravityScale },
+    gravity: model.gravityScale,
     props: [
       ...scenarioWalls(left, top, right, bottom),
       ...model.objects.map((o, id) => ({

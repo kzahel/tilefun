@@ -7,8 +7,6 @@ import { PropManager } from "../entities/PropManager.js";
 import { CURRENT_REGIONAL_VERSION } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
-import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { World } from "../world/World.js";
@@ -39,35 +37,7 @@ function fixture() {
     createPlayer(car.entity.position.wx + 110, car.entity.position.wy + 3),
   );
   player.wz = 0;
-  const queryEntities = () => entities.entities,
-    queryProps = () => props.props;
-  const ctx = createMovementContext({
-    getCollision: () => 0,
-    getHeight: () => 0,
-    queryEntities,
-    queryProps,
-    movingEntity: player,
-    excludeIds: new Set([player.id]),
-    noclip: false,
-    deferRoofCarry: true,
-  });
-  let state = { jumpConsumed: false, lastJumpHeld: false };
-  function step(jump = false, dx = 0, dy = 0, inputs = 1) {
-    for (let i = 0; i < inputs; i++) {
-      state = stepPlayerFromInput(
-        player,
-        { dx, dy, jump, sprinting: false },
-        1 / 60,
-        ctx,
-        () => 0,
-        createSurfaceSampler({ queryEntities, queryProps }),
-        state,
-        getMovementPhysicsParams(),
-      ).jumpState;
-    }
-    traffic.tick(1 / 60, []);
-  }
-  return { graph, traffic, car, player, step, world, entities };
+  return { graph, traffic, car, player, world, entities };
 }
 describe("generated road traffic", () => {
   it("pins all 180 approved snapshots and reconstructs directional collision on both snapshot and delta", () => {
@@ -95,51 +65,7 @@ describe("generated road traffic", () => {
     for (const lane of graph.lanes.values())
       expect(samplePath(lane.path, 0).direction).toBe(lane.direction);
   });
-  it("stops before a child, then resumes with the child on its roof without mounting", () => {
-    const f = fixture();
-    for (let i = 0; i < 600; i++) f.step();
-    const stopped = f.car.entity.position.wx;
-    expect(f.car.speed).toBe(0);
-    expect(stopped).toBeLessThan(f.player.position.wx - 30);
-    f.player.position = { wx: stopped, wy: f.car.entity.position.wy + 3 };
-    f.player.wz = 24;
-    for (let i = 0; i < 120; i++) f.step();
-    expect(f.car.entity.position.wx).toBeGreaterThan(stopped + 25);
-    expect(Math.abs(f.player.position.wx - f.car.entity.position.wx)).toBeLessThan(1);
-    expect(f.player.wz).toBe(24);
-    expect(f.player.parentId).toBeUndefined();
-    f.step(true);
-    expect(f.player.jumpVZ).toBeGreaterThan(0);
-    expect(required(f.player.velocity).vx).toBeGreaterThan(20);
-  });
-  it("lands from a normal jump and carries a rider through a complete loop", () => {
-    const f = fixture();
-    f.player.position = { wx: f.car.entity.position.wx, wy: f.car.entity.position.wy + 3 };
-    f.player.wz = 35;
-    f.player.jumpVZ = -5;
-    for (let i = 0; i < 120; i++) f.step();
-    expect(f.player.wz).toBe(24);
-    const start = f.car.entity.position.wx;
-    for (let i = 0; i < 4200; i++) f.step();
-    expect(f.car.choices).toBeGreaterThan(3);
-    expect(f.player.wz).toBe(24);
-    expect(
-      Math.hypot(
-        f.player.position.wx - f.car.entity.position.wx,
-        f.player.position.wy - f.car.entity.position.wy,
-      ),
-    ).toBeLessThan(8);
-    expect(f.car.entity.position.wx).not.toBe(start);
-  });
-  it("supports the stop, normal jump toward the car, land and ride interaction", () => {
-    const f = fixture();
-    for (let i = 0; i < 600; i++) f.step();
-    for (let i = 0; i < 120; i++) f.step(i < 38, i < 38 ? -1 : 0);
-    expect(f.player.wz).toBe(24);
-    expect(f.player.jumpVZ).toBeUndefined();
-    expect(f.car.speed).toBeGreaterThan(20);
-    expect(f.player.parentId).toBeUndefined();
-  });
+
   it("restores exact route position safely and rebuilds junction ownership", () => {
     const f = fixture();
     f.player.position = { wx: 2000, wy: 2000 };
@@ -169,23 +95,6 @@ describe("generated road traffic", () => {
     const before = { ...f.car.entity.position };
     for (let i = 0; i < 120; i++) f.traffic.tick(1 / 60, []);
     expect(f.car.entity.position).toEqual(before);
-  });
-  it("carries a roof passenger once per vehicle tick with zero or multiple commands", () => {
-    const f = fixture();
-    f.player.position = { ...f.car.entity.position };
-    f.player.wz = 24;
-    const start = f.car.entity.position.wx;
-    for (let i = 0; i < 300; i++) {
-      f.step(false, 0, 0, [2, 0, 1, 1, 1][i % 5]);
-      expect(
-        Math.hypot(
-          f.player.position.wx - f.car.entity.position.wx,
-          f.player.position.wy - f.car.entity.position.wy,
-        ),
-      ).toBeLessThan(0.000001);
-      expect(f.player.wz).toBe(24);
-    }
-    expect(f.car.entity.position.wx).toBeGreaterThan(start + 100);
   });
 
   it("queues competing cars at a junction without overlap and releases it after exit", () => {

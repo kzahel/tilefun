@@ -6,7 +6,7 @@ import { getEntityAABB } from "../entities/collision.js";
 import type { Movement } from "../input/ActionManager.js";
 import { querySurfacePatch } from "../physics/SurfacePatch.js";
 import { surfaceVisibility } from "../rendering/SurfacePresentation.js";
-import { decodeServerMessage, quantizeInputDtMs } from "../shared/binaryCodec.js";
+import { decodeServerMessage } from "../shared/binaryCodec.js";
 import type { BufferedMessage } from "../shared/protocol.js";
 import { World } from "../world/World.js";
 import { ScenarioSession } from "./ScenarioSession.js";
@@ -98,7 +98,7 @@ it("keeps actors below the deck, catches upward head impacts, and reveals per ob
 it("replicates surfaces through the normal codec and predicts ramp movement through the shared kernel", async () => {
   const s = await ScenarioSession.create(worldGeometryRecipe());
   const view = new RemoteStateView(new World());
-  const predictor = new PlayerPredictor(() => s.physics.gravityScale);
+  const predictor = new PlayerPredictor(() => s.gravity);
   try {
     await predictor.ready;
     await s.step(idle);
@@ -119,7 +119,7 @@ it("replicates surfaces through the normal codec and predicts ramp movement thro
       { serverTick: view.serverTick, ...(view.physicsState ? { physics: view.physicsState } : {}) },
     );
     const firstSeq = view.lastProcessedInputSeq + 1;
-    const dt = quantizeInputDtMs(1000 / 60) / 1000;
+    const dt = 1 / 60;
     for (let i = 1; i <= 260; i++) {
       const input = { ...idle, dx: 1 };
       predictInput(predictor, firstSeq + i - 1, input, dt, view.world, view.props, view.entities);

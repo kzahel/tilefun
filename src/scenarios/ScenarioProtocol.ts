@@ -48,6 +48,7 @@ export type ScenarioResponse = {
   };
   id: number;
   frames: ArrayBuffer[];
+  guestFrames?: ArrayBuffer[];
   handles: Record<string, number>;
   parking?: import("../traffic/ParkingSystem.js").ParkingSystem["diagnostics"];
   traffic?: { speed: number; waiting: string; count: number };
@@ -59,8 +60,8 @@ export type ScenarioResponse = {
  * delivered independently of a client request. The response fences its frames. */
 export type ScenarioPacket = { buffer?: ArrayBuffer } & (
   | { type: "request"; request: ScenarioRequest }
-  | { type: "input"; buffer: ArrayBuffer; range?: ChunkRange }
+  | { type: "input"; buffer: ArrayBuffer; range?: ChunkRange; seat?: 0 | 1 }
   | { type: "reset" }
-  | { type: "frame"; buffer: ArrayBuffer }
-  | { type: "response"; response: Omit<ScenarioResponse, "frames"> }
+  | { type: "frame"; buffer: ArrayBuffer; seat?: 0 | 1 }
+  | { type: "response"; response: Omit<ScenarioResponse, "frames" | "guestFrames"> }
 );

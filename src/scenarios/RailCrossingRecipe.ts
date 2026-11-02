@@ -19,7 +19,6 @@ export function railCrossingRecipe(): ScenarioRecipe {
     id: "world-geometry-rail-crossing-v1",
     generation: FLAT_SCENARIO,
     player: createPlayer(start.position.wx, start.position.wy),
-    physics: { walkSpeed: 120 },
     railways: [{ id: "crossing-shuttle", start: -24, end: 24, y: 0 }],
     props: [
       surfaceProp(

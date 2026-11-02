@@ -18,7 +18,6 @@ export function undergroundGarageRecipe(): ScenarioRecipe {
     id: "underground-garage-v1",
     generation: FLAT_SCENARIO,
     player: createPlayer(-216, 8),
-    physics: { walkSpeed: 72 },
     props: [
       surfaceProp(
         { left: -192, top: -32, right: 0, bottom: 32 },

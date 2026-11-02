@@ -1,5 +1,5 @@
 import type { Entity } from "../entities/Entity.js";
-import { PlayerControls } from "../physics/PlayerControls.js";
+import { type ControlCommand, PlayerControls } from "../physics/PlayerControls.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 
 /**
@@ -37,17 +37,7 @@ export class PlayerSession {
   retired = false;
 
   /** Queued inputs from client (drained each tick). */
-  inputQueue: {
-    dx: number;
-    dy: number;
-    sprinting: boolean;
-    jump: boolean;
-    jumpPressed?: boolean;
-    reversing?: boolean;
-    relativeDriving?: boolean;
-    dtMs?: number;
-    seq: number;
-  }[] = [];
+  inputQueue: ControlCommand[] = [];
 
   /** Sequence number of the last input actually consumed in tick(). */
   lastProcessedInputSeq = 0;

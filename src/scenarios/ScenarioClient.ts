@@ -1,24 +1,17 @@
-import { RemoteStateView } from "../client/ClientStateView.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
-import { predictInput } from "../client/predictInput.js";
 import type { Movement } from "../input/ActionManager.js";
-import {
-  decodeServerMessage,
-  encodeClientMessage,
-  quantizeAxis,
-  quantizeInputDtMs,
-} from "../shared/binaryCodec.js";
+import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type { BufferedMessage, VehicleHornMessage } from "../shared/protocol.js";
 import { type ChannelEnvelope, OrderedWorkerChannel } from "../transport/OrderedWorkerChannel.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
-import { World } from "../world/World.js";
+import { OrderedLatency } from "./OrderedLatency.js";
 import type {
   ScenarioCommand,
   ScenarioPacket,
   ScenarioRequest,
   ScenarioResponse,
 } from "./ScenarioProtocol.js";
-import { applyScenarioAppearance, type ScenarioRecipe, scenarioPhysics } from "./ScenarioRecipe.js";
+import { type ScenarioRecipe, scenarioGravity } from "./ScenarioRecipe.js";
+import { ScenarioReplica } from "./ScenarioReplica.js";
 
 type Request = ScenarioRequest extends infer R
   ? R extends ScenarioRequest
@@ -29,8 +22,34 @@ type Request = ScenarioRequest extends infer R
 /** Reusable live client: independently clocked Worker authority and production
  * binary transport, replica, prediction and bounded decode. */
 export class ScenarioClient {
-  readonly view = new RemoteStateView(new World());
-  readonly predictor: PlayerPredictor;
+  readonly host: ScenarioReplica;
+  readonly guest: ScenarioReplica | undefined;
+  get view() {
+    return this.host.view;
+  }
+  get predictor() {
+    return this.host.predictor;
+  }
+  private readonly guestInputs = new OrderedLatency<ScenarioPacket>((packet) => {
+    try {
+      this.channel.send(packet);
+    } catch (error) {
+      this.fail(error);
+    }
+  });
+  private readonly guestFrames = new OrderedLatency<ScenarioPacket>((packet) => {
+    try {
+      this.consumeFrame(packet);
+    } catch (error) {
+      this.fail(error);
+    }
+  });
+  setNetwork(rtt: number, jitter = 0) {
+    if (![rtt, jitter].every((n) => Number.isFinite(n) && n >= 0 && n <= 1000))
+      throw Error("Invalid simulated network delay");
+    this.guestInputs.delayMs = this.guestFrames.delayMs = rtt / 2;
+    this.guestInputs.jitterMs = this.guestFrames.jitterMs = jitter;
+  }
   readonly ready: Promise<void>;
   onHorn?: (message: VehicleHornMessage) => void;
   handles: Record<string, number> = {};
@@ -57,25 +76,18 @@ export class ScenarioClient {
   >();
   private pumpTimer: ReturnType<typeof setTimeout> | undefined;
   private id = 0;
-  private seq = 0;
   private controls = 0;
   private clockChanges = 0;
   private running = false;
-  private resetReplica = false;
   private receivedFrame = false;
   private closed = false;
   private loaded = false;
   private failure: Error | undefined;
 
   constructor(readonly recipe: ScenarioRecipe) {
-    if (recipe.experimentalRapier) {
-      this.worker.terminate();
-      this.channel.close();
-      throw new Error("Rapier recipes require PhysicsLabClient prediction");
-    }
-    const physics = scenarioPhysics(recipe.physics);
-    this.predictor = new PlayerPredictor(() => physics.gravityScale);
-    this.view.setPredictor(this.predictor);
+    const gravity = scenarioGravity(recipe);
+    this.host = new ScenarioReplica(recipe.player, gravity, recipe.actors);
+    if (recipe.guest) this.guest = new ScenarioReplica(recipe.guest, gravity, recipe.actors);
     this.worker.onmessage = (event: MessageEvent<ChannelEnvelope<ScenarioPacket>>) => {
       try {
         this.channel.receive(event.data);
@@ -89,6 +101,7 @@ export class ScenarioClient {
       this.fail(new Error("Could not decode scenario Worker message"));
     this.ready = Promise.all([
       this.predictor.ready,
+      this.guest?.predictor.ready,
       this.request({ kind: "open", recipe, mode: "realtime" }),
     ]).then(() => {
       this.loaded = true;
@@ -131,18 +144,12 @@ export class ScenarioClient {
   }
   private consume(packet: ScenarioPacket) {
     if (packet.type === "reset") {
-      this.view.clear();
-      this.resetReplica = true;
+      this.guestFrames.flush();
+      this.host.clear();
+      this.guest?.clear();
     } else if (packet.type === "frame") {
-      const message = decodeServerMessage(packet.buffer);
-      if (message.type === "frame") this.receivedFrame = true;
-      if (message.type === "vehicle-horn") this.onHorn?.(message);
-      // Lab settings stay scoped; never change the page's global CVars.
-      if (
-        message.type !== "sync-cvars" &&
-        (message.type === "frame" || message.type.startsWith("sync-"))
-      )
-        this.view.applyMessage(message as BufferedMessage);
+      if (packet.seat === 1) this.guestFrames.push(packet, packet.buffer.byteLength);
+      else this.consumeFrame(packet);
     } else if (packet.type === "response") {
       const response = packet.response,
         pending = this.pending.get(response.id);
@@ -153,48 +160,46 @@ export class ScenarioClient {
         if (!pending || pending.fatal) this.fail(new Error(response.error));
         return;
       }
+      if (response.id > 0) {
+        this.guestInputs.flush();
+        this.guestFrames.flush();
+      }
       this.handles = response.handles;
       this.traffic = response.traffic;
       this.parking = response.parking;
       if (response.physicsDiagnostics) this.physicsDiagnostics = response.physicsDiagnostics;
       this.clock = response.clock;
-      this.synchronizePrediction();
+      if (response.id > 0) this.synchronizePrediction();
       pending?.resolve();
     } else throw new Error("Unexpected scenario authority packet");
   }
-  private synchronizePrediction(reset = false) {
-    const player = this.view.serverPlayerEntity;
-    if (player.id === -1) return;
-    applyScenarioAppearance(player, this.recipe.player);
+  private consumeFrame(packet: ScenarioPacket) {
+    if (packet.type !== "frame") throw Error("Expected frame packet");
+    const replica = packet.seat === 1 ? this.guest : this.host;
+    if (!replica) throw Error("Unexpected guest frame");
+    const message = decodeServerMessage(packet.buffer);
+    if (message.type === "vehicle-horn") this.onHorn?.(message);
     if (
-      reset ||
-      this.resetReplica ||
-      !this.predictor.player ||
-      this.predictor.player.id !== player.id
+      message.type !== "sync-cvars" &&
+      (message.type === "frame" || message.type.startsWith("sync-"))
     )
-      this.predictor.reset(
-        player,
-        this.view.serverEntities.find((e) => e.id === player.parentId),
-      );
-    this.predictor.reconcile(
-      player,
-      this.view.lastProcessedInputSeq,
-      this.view.world,
-      this.view.props,
-      this.view.serverEntities,
-      this.view.mountEntityId,
-      {
-        serverTick: this.view.serverTick,
-        ...(this.view.physicsState ? { physics: this.view.physicsState } : {}),
-      },
-    );
-    this.resetReplica = false;
+      replica.view.applyMessage(message as BufferedMessage);
+    if (message.type === "frame") {
+      if (packet.seat === 1) replica.synchronize();
+      else this.receivedFrame = true;
+    }
+  }
+  private synchronizePrediction(reset = false) {
+    this.host.synchronize(reset);
+    if (reset) this.guest?.synchronize(true);
   }
   private fail(reason: unknown) {
     if (this.failure) return;
     const error = reason instanceof Error ? reason : new Error(String(reason));
     this.failure = error;
     clearTimeout(this.pumpTimer);
+    this.guestInputs.close();
+    this.guestFrames.close();
     this.channel.close();
     this.worker.terminate();
     for (const p of this.pending.values()) {
@@ -220,6 +225,8 @@ export class ScenarioClient {
         fatal: request.kind === "open" || request.kind === "reload" || request.kind === "reset",
       });
       try {
+        // Admit all earlier inputs before a clock/edit/replacement fence.
+        this.guestInputs.flush();
         this.channel.send({ type: "request", request: { ...request, id } });
       } catch (error) {
         this.fail(error);
@@ -232,12 +239,14 @@ export class ScenarioClient {
   setRunning(running: boolean) {
     if (this.failure) throw this.failure;
     if (this.closed || running === this.running) return;
+    if (!running) this.guestInputs.flush();
     this.running = running;
     this.clockChanges++;
     void this.ready
       .then(() => this.request({ kind: "clock", running }))
       .then(() => {
         this.view.resetPresentationClock(true);
+        this.guest?.view.resetPresentationClock(true);
         this.synchronizePrediction(true);
       })
       .catch((error) => this.fail(error))
@@ -248,34 +257,23 @@ export class ScenarioClient {
   }
 
   /** Submit/predict input only. Realm advances on its own ServerLoop cadence. */
-  submitInput(input: Movement, dt = 1 / 60, range?: ChunkRange): boolean {
+  submitInput(input: Movement, _dt = 1 / 60, range?: ChunkRange, seat: 0 | 1 = 0): boolean {
     if (this.failure) throw this.failure;
     if (!this.loaded || this.closed || !this.running || this.busy || !this.channel.writable)
       return false;
-    const length = input.relativeDriving ? 1 : Math.max(1, Math.hypot(input.dx, input.dy));
-    const movement = {
-      ...input,
-      dx: quantizeAxis(input.dx / length),
-      dy: quantizeAxis(input.dy / length),
-    };
-    const seconds = quantizeInputDtMs(Math.min(dt, 0.1) * 1000) / 1000;
-    if (!seconds) return false;
-    const seq = ++this.seq;
-    this.channel.send({
+    const replica = seat === 1 ? this.guest : this.host;
+    if (!replica) throw Error("No guest in this scenario");
+    const movement = replica.normalize(input),
+      seq = ++replica.seq;
+    const packet: ScenarioPacket = {
       type: "input",
-      buffer: encodeClientMessage({ type: "player-input", ...movement, seq, dtMs: seconds * 1000 }),
+      seat,
+      buffer: encodeClientMessage({ type: "player-input", ...movement, seq }),
       ...(range ? { range } : {}),
-    });
-    this.view.tickAnimations(seconds);
-    predictInput(
-      this.predictor,
-      seq,
-      movement,
-      seconds,
-      this.view.world,
-      this.view.props,
-      this.view.entities,
-    );
+    };
+    if (seat === 1) this.guestInputs.push(packet, packet.buffer.byteLength);
+    else this.channel.send(packet);
+    replica.predict(seq, movement);
     return true;
   }
   async command(command: ScenarioCommand) {
@@ -296,7 +294,7 @@ export class ScenarioClient {
     try {
       await this.ready;
       await this.request({ kind: "step", input, dt: 1 / 60, range });
-      this.seq = Math.max(this.seq, this.view.lastProcessedInputSeq);
+      this.host.seq = Math.max(this.host.seq, this.view.lastProcessedInputSeq);
       this.view.resetPresentationClock(true);
       this.synchronizePrediction(true);
     } finally {
@@ -309,7 +307,8 @@ export class ScenarioClient {
     try {
       await this.ready;
       await this.request({ kind: reset ? "reset" : "reload" });
-      this.seq = 0;
+      this.host.seq = 0;
+      if (this.guest) this.guest.seq = 0;
       this.synchronizePrediction(true);
     } finally {
       this.controls--;
@@ -323,7 +322,7 @@ export class ScenarioClient {
     this.closed = true;
     this.fail(new Error("Scenario disposed"));
     this.worker.onmessage = this.worker.onerror = this.worker.onmessageerror = null;
-    this.predictor.clearPredicted();
-    this.view.setPredictor(null);
+    this.host.dispose();
+    this.guest?.dispose();
   }
 }

@@ -3,9 +3,21 @@
 Active reset [205](../tactical/205-physics-reset.md): ordinary Realm authority now
 uses one shared `PhysicsScene` step, including ordinary ScenarioSession consumers.
 Ordinary ScenarioClient prediction now uses the same shared kernel and reconciles
-live frames between control responses. The older experimental whole-scene labs must
-still be aligned or retired before delivery. Earlier mode-specific evidence below
-is historical; no lab currently establishes completion of this reset.
+live frames between control responses. The standalone prototype worlds, alternate Realm simulation owner,
+full-world rollback engines, backend/hull selectors and single bridge-scale page
+are deleted. The two-pane physics lab now runs two ordinary sessions through the
+same independently clocked ScenarioWorkerHost and normal binary frames. Each view
+has its own normal bounded PlayerPredictor. Shared data-only recipes/scripts stage
+pushing, opposed movement, glancing, head support and quick reversal; guest latency
+uses bounded ordered queues. Pause/replacement fences deliver earlier deltas before
+clearing replicas. Keyboard, touch and standard-controller controls remain.
+
+Scenario recipes now expose only scoped gravity, and World Geometry uses the shared
+default with no backend selector. Read-only Three.js collider meshes belong to the
+co-op diagnostic presentation; they do not implement another physics world. Older
+mode-specific evidence below is historical. Specialized vehicle/equipment and rail
+labs still need explicit disposition during 205; no lab establishes completion of
+the reset.
 
 [202](../tactical/202-persistent-realm-collision-proof.md) adds **Realm physics
 replacement proof** to World Geometry. It stages ordinary NPCs, a ball and a parked

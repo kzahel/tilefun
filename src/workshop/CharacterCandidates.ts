@@ -5,7 +5,7 @@ import { CharacterTestScene } from "../characters/CharacterTestScene.js";
 import controllerSource from "../characters/CharacterTestScene.ts?raw";
 import collisionSource from "../entities/collision.ts?raw";
 import animationSource from "../entities/spriteAnimation.ts?raw";
-import physicsSource from "../physics/PlayerMovement.ts?raw";
+import physicsSource from "../physics/PhysicsScene.ts?raw";
 import surfaceSource from "../physics/surfaceHeight.ts?raw";
 import scenarioSource from "../scenarios/CharacterRecipe.ts?raw";
 import hostSource from "../scenarios/ScenarioSession.ts?raw";

@@ -3,9 +3,7 @@ import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { createBall } from "../entities/Ball.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
-import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
@@ -14,7 +12,6 @@ import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
-import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
@@ -201,34 +198,6 @@ it("runs native ground cycles in production Realm and retains group/manual ident
     await s.close();
   }
 }, 30000);
-
-it("balls ricochet and startle deers; elevated balls miss and repeated alarms keep the escape intact", () => {
-  for (const z of [0, 50]) {
-    const manager = new EntityManager(),
-      deer = manager.spawn(createDeer(64, 64));
-    const ball = manager.spawn(createBall(54, 64));
-    ball.wz = z;
-    if (z) {
-      ball.jumpZ = z;
-      ball.jumpVZ = 0;
-    }
-    required(ball.velocity).vx = 100;
-    tickBallPhysics(
-      manager,
-      0.01,
-      () => 0,
-      () => 0,
-    );
-    expect(deer.deer?.state).toBe(z ? "rest" : "startle");
-    if (z) continue;
-    expect(ball.velocity?.vx).toBeLessThan(0);
-    expect(startleDeer(deer, { wx: 0, wy: 0 })).toBe(false);
-    updateDeerAI(deer, 0.5, open, [deer], []);
-    expect(deer.deer?.state).toBe("flee");
-    expect(deer.wanderAI?.state).toBe("scared");
-    expect(deer.deathTimer).toBeUndefined();
-  }
-});
 
 it.each([true, false])(
   "Realm landing startles a deer with or without player input (input=%s)",

@@ -329,3 +329,69 @@ watchdog cases, one administration case), and all three TypeScript projects pass
 No new lint diagnostics. No new browser/performance/readiness claim at this internal
 checkpoint. Legacy solver modules, alternate lab owners, remaining equipment/AI pose
 writers, obsolete commands/tests and final qualification still need removal/work.
+
+
+### Checkpoint 4b — remove alternate engines and align the co-op lab
+
+Deleted the old player integrator, movement-parameter schema, character backend
+loader/dispatch, per-character Rapier worlds, speculative collision timeline,
+whole-world lab authority/replay engines and `RealmSimulationOwner`. No Realm
+option can replace its default physics owner. Removed the legacy ball/cargo travel
+integrators and friction-option table; useful contact consequences remain after the
+shared step. The old native adapter comparison and prototype benchmark CLIs retire
+with their implementations; frozen research remains in 189–204 and benchmark data.
+Vehicle/equipment collision/pose solvers still require the next cleanup slice.
+
+Scenario recipes retain scoped gravity only. Removed the geometry backend/hull
+selector and recipe speed/frame-rate settings. Ordinary input packets now contain
+only controls, edges and sequence: eight bytes, tag **0x81**; `dtMs` and its quantizer
+are deleted throughout normal input, queues, tests and scenario wiring. Prior input
+tags reject; matching updated builds are required. The frame remains **0x0b**.
+
+Replaced the old cooperative lab engines with two ordinary sessions on the existing
+ScenarioSession/ScenarioWorkerHost. Its authority uses the independent ServerLoop;
+each view uses normal binary frames, RemoteStateView and PlayerPredictor. Binary
+packets remain top-level transferable/countable channel messages, including the
+guest. Bounded ordered delay/jitter applies to the guest's inputs and frames.
+Control/replacement fences admit preceding inputs and deliver preceding frame deltas
+rather than dropping dependencies. Save/reload/reset and pause/one-step use ordinary
+Realm operations. Data-only fixtures/scripts cover pushing, opposed movement,
+glancing, head standing and reversal; simple Three.js boxes visualize actual
+collider data. Body IDs reused across reload update their presentation roles.
+Keyboard, touch and controller movement/focus/confirm/back remain available.
+
+Test dispositions: removed old backend/full-world replay/bridge-scale test files,
+per-command cargo/roof integration and exact ricochet matrices. Kept geometry,
+identity/serialization, AI decisions and unrelated lifecycle tests. Touch destination
+arrival now exercises ordinary ScenarioSession; owned-toy/disposable water behavior
+uses actual shared stepping. Shared default ball contact now checks hit reaction.
+It exposed post-collision-speed filtering: the solver can remove incident speed
+before gameplay reads it. The scene retains pre-step loose-body speed for gameplay
+hit thresholds, with no separate bounce or position integration. Spectator backfill
+checks durable identities/uniqueness instead of hard-coding an incidental loaded
+crowd count. Failed-Worker lifecycle checks assert no publication/resumption; an
+unrelated pending storage flush is not treated as a physics timer.
+
+Validation at this checkpoint:
+
+- **93 focused native checks across 13 files pass**, plus the ten shared-scene
+  checks. These cover normal frames/input edges, two Worker-host sessions,
+  save/reload/reset, ordered queue fences, touch arrival, shared ball reactions,
+  owned water toys, geometry/headroom, private replay and clock replacement.
+- All three TypeScript projects pass. Changed core/lab source lint has no new
+  diagnostics; the binary codec retains its existing non-null warnings.
+- Catalog generation, Workshop manifest (2,119 candidates) and production build
+  pass. Generated inventories/fingerprints change; approved asset pixels do not.
+- **Four full-Chromium browser checks pass**: the two-session lab with 200ms guest
+  RTT, keyboard/controller/touch, pause/one-step, save/reload and Worker teardown;
+  ordinary GPU Worker repeated edit/play input recovery; normal-game NPC push/
+  prediction; actual P2P host/delayed guest reversal and release convergence.
+  The lab browser check exposed a pointer-focus bug: touch direction lost its
+  held input when default button focus blurred the canvas. Preventing that pointer
+  focus transfer fixes the real input route, which passes on rerun.
+
+The reset remains unfinished: simplify AI/work pose writers and old vehicle/
+equipment/rail behavior and controls, then finish residency/streaming and the
+post-cleanup browser checks, Chromebook CPU/render comparison and requested final
+review. The basic P2P check above is evidence, not complete gameplay qualification.
+No readiness marker.

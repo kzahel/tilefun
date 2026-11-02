@@ -647,7 +647,7 @@ describe("EntityDelta binary codec", () => {
 // ---- player-input ----
 
 describe("player-input binary codec", () => {
-  it("encodes to exactly 10 bytes", () => {
+  it("encodes fixed-tick controls to eight bytes and rejects old or malformed packets", () => {
     const msg: ClientMessage = {
       type: "player-input",
       seq: 12345,
@@ -657,7 +657,12 @@ describe("player-input binary codec", () => {
       jump: false,
     };
     const buf = encodeClientMessage(msg);
-    expect(buf.byteLength).toBe(10);
+    expect(buf.byteLength).toBe(8);
+    expect(new DataView(buf).getUint8(0)).toBe(0x81);
+    const old = buf.slice(0);
+    new DataView(old).setUint8(0, 0x80);
+    expect(() => decodeClientMessage(old)).toThrow("Unknown client message tag");
+    expect(() => decodeClientMessage(buf.slice(0, 7))).toThrow("input length");
   });
 
   it("roundtrips cardinal values exactly", () => {
@@ -762,22 +767,6 @@ describe("player-input binary codec", () => {
     const decoded = roundtripClient(msg) as Extract<ClientMessage, { type: "player-input" }>;
     expect(decoded.jump).toBe(false);
     expect(decoded.jumpPressed).toBe(true);
-  });
-
-  it("roundtrips command dtMs", () => {
-    const msg: ClientMessage = {
-      type: "player-input",
-      seq: 77,
-      dx: 0.25,
-      dy: -0.25,
-      sprinting: false,
-      jump: false,
-      dtMs: 17,
-    };
-    const decoded = roundtripClient(msg) as Extract<ClientMessage, { type: "player-input" }>;
-    expect(decoded.dtMs).toBe(17);
-    expect(decoded.dx).toBeCloseTo(0.25, 2);
-    expect(decoded.dy).toBeCloseTo(-0.25, 2);
   });
 });
 

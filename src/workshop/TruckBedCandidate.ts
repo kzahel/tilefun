@@ -4,10 +4,10 @@ import remotePresentation from "../client/RemotePresentation.ts?raw";
 import collisionIndex from "../entities/CollisionIndex.ts?raw";
 import spatialHash from "../entities/SpatialHash.ts?raw";
 import controllerBindings from "../input/ControllerBindings.ts?raw";
-import balls from "../physics/BallPhysics.ts?raw";
-import collision from "../physics/SimulationEnvironment.ts?raw";
+import balls from "../physics/BallGameplay.ts?raw";
+import foodPhysics from "../physics/PhysicsScene.ts?raw";
+import collision from "../physics/PhysicsState.ts?raw";
 import surfaces from "../physics/surfaceHeight.ts?raw";
-import foodPhysics from "../physics/VehicleCargoPhysics.ts?raw";
 import {
   authoredVehicleForType,
   vehicleMeshHeightScale,

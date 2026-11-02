@@ -54,7 +54,6 @@ export function characterRecipe(
     id: `character-${def.id}`,
     generation: FLAT_SCENARIO,
     player: createCharacterEntity(def, settings, 0, 8),
-    physics: { walkSpeed: settings.speed, walkFrameDuration: 1000 / settings.fps },
     props: [
       ...characterObstacles(),
       ...scenarioWalls(-132, -64, 132, 76),

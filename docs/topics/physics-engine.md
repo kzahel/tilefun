@@ -1,6 +1,6 @@
 # General 3D physics backend
 
-Status: autonomous reset active; ordinary authority uses one shared Rapier step; client prediction/deletion/qualification in progress.
+Status: autonomous reset active; shared authority/prediction and labs use one Rapier kernel; peripheral cleanup/qualification in progress.
 Updated: 2026-11-02.
 
 Owns the physics-backend replacement direction. [World geometry](world-geometry.md)
@@ -31,9 +31,22 @@ uses the same shared kernel with bounded numerical snapshots (128-body cap,
 explicit overflow, epoch, motor deadlines and common physics tick). Fixed-tick
 replay replaces the old per-command solver and duplicate carry policies. Native
 two-client delay/contact presentation, recovery and authored-geometry checks pass.
-The reset is **not ready for delivery yet**: remaining peripheral writers/old-engine
-deletion, experimental-lab alignment, ordinary Worker/P2P/browser qualification,
-Chromebook measurements and final review remain. See 205 for exact evidence.
+Deleted the old player integrator, character backend dispatch, disposable and
+persistent per-character adapters, full-world lab engines/predictors and their
+alternate Realm owner. The two-pane co-op lab now uses ordinary ScenarioSession,
+independently clocked ScenarioWorkerHost, normal binary frames and one private
+PlayerPredictor per pane. Scenario recipes retain only scoped gravity; normal
+input wire tag `0x81` has eight bytes and no duration field. The frame tag remains
+`0x0b`. Matching updated client/server builds are required.
+
+Basic ordinary GPU Worker edit/play recovery, NPC push/prediction and actual
+P2P reversal/convergence checks pass, alongside the normal two-session lab's
+input/fence/reload/teardown checks. The reset is **not ready for delivery yet**:
+old vehicle/equipment collision and peripheral AI pose writers still require
+simplification/removal, followed by residency/streaming and post-cleanup browser/
+device qualification, Chromebook measurements and final review. Useful
+lab scenarios now exercise the game kernel, but lab acceptance alone does not
+establish complete cutover. See 205 for exact evidence.
 
 ## Historical replacement direction and early decision (201)
 

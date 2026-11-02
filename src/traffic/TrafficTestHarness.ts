@@ -7,9 +7,6 @@ import { PropManager } from "../entities/PropManager.js";
 import { CURRENT_REGIONAL_VERSION } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { ProceduralProps } from "../generation/ProceduralProps.js";
-import type { Movement } from "../input/ActionManager.js";
-import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
-import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { World } from "../world/World.js";
 import type { TrafficStrategy } from "./TrafficNetwork.js";
@@ -34,7 +31,6 @@ export class TrafficTestHarness {
   readonly blend = new BlendGraph();
   readonly player = this.entities.spawn(createPlayer(0, 0));
   readonly car;
-  private jumpState = { jumpConsumed: false, lastJumpHeld: false };
   constructor() {
     const graph = this.strategy.trafficNetwork(300 * 16, 519 * 16);
     const lane = required(
@@ -66,7 +62,6 @@ export class TrafficTestHarness {
     this.player.velocity = { vx: 0, vy: 0 };
     delete this.player.jumpVZ;
     this.player.groundZ = 0;
-    this.jumpState = { jumpConsumed: false, lastJumpHeld: false };
     if (velocity) {
       velocity.vx = 0;
       velocity.vy = 0;
@@ -79,7 +74,6 @@ export class TrafficTestHarness {
     this.player.groundZ = this.player.wz;
     this.player.velocity = { vx: 0, vy: 0 };
     delete this.player.jumpVZ;
-    this.jumpState = { jumpConsumed: false, lastJumpHeld: false };
   }
   load(range: ChunkRange) {
     this.traffic.visibleRanges = [range];
@@ -89,31 +83,5 @@ export class TrafficTestHarness {
       this.generator,
       [...this.world.chunks.entries()].map(([k]) => k),
     );
-  }
-  step(input: Movement, dt = 1 / 60) {
-    const queryEntities = () => this.entities.entities,
-      queryProps = () => this.props.props;
-    const ctx = createMovementContext({
-      getCollision: (x, y) => this.world.getCollisionIfLoaded(x, y),
-      getHeight: () => 0,
-      queryEntities,
-      queryProps,
-      movingEntity: this.player,
-      excludeIds: new Set([this.player.id]),
-      noclip: false,
-      deferRoofCarry: true,
-    });
-    this.jumpState = stepPlayerFromInput(
-      this.player,
-      input,
-      dt,
-      ctx,
-      () => 0,
-      createSurfaceSampler({ queryEntities, queryProps }),
-      this.jumpState,
-      getMovementPhysicsParams(),
-    ).jumpState;
-    this.traffic.tick(dt, [this.player]);
-    this.entities.spatialHash.update(this.player);
   }
 }

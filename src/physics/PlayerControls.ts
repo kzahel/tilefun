@@ -8,7 +8,6 @@ import type { MotionIntent } from "./PhysicsScene.js";
 
 export interface ControlCommand extends Movement {
   seq: number;
-  dtMs?: number;
 }
 const NEUTRAL: Movement = { dx: 0, dy: 0, jump: false, sprinting: false };
 export const CONTROL_HOLD_TICKS = 15;

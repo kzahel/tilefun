@@ -3,9 +3,7 @@ import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { createBall } from "../entities/Ball.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
-import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
@@ -14,7 +12,6 @@ import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
-import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
@@ -24,7 +21,6 @@ import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { createFrog, FROG_CLIPS, FROG_IMAGE, FROG_TYPE } from "./Frog.js";
 import { updateFrogAI } from "./frogAI.js";
-import { startleFrog } from "./frogInteractions.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
@@ -111,34 +107,6 @@ it("replicates mid-hop phase through binary baselines/deltas and removes it on l
   delete required(frog.sprite).clipElapsedMs;
   applyEntityDelta(replica, required(diffEntitySnapshots(after, serializeEntity(frog))));
   expect(replica.sprite?.clipElapsedMs).toBeUndefined();
-});
-
-it("balls ricochet and startle frogs; elevated balls miss and repeated alarms keep the escape intact", () => {
-  for (const z of [0, 30]) {
-    const manager = new EntityManager(),
-      frog = manager.spawn(createFrog(64, 64));
-    const ball = manager.spawn(createBall(61, 64));
-    ball.wz = z;
-    if (z) {
-      ball.jumpZ = z;
-      ball.jumpVZ = 0;
-    }
-    required(ball.velocity).vx = 100;
-    tickBallPhysics(
-      manager,
-      0.01,
-      () => 0,
-      () => 0,
-    );
-    expect(frog.frog?.state).toBe(z ? "rest" : "startle");
-    if (z) continue;
-    expect(ball.velocity?.vx).toBeLessThan(0);
-    expect(startleFrog(frog, { wx: 0, wy: 0 })).toBe(false);
-    updateFrogAI(frog, 0.3, open, [frog], []);
-    expect(frog.frog?.state).toBe("hop");
-    expect(frog.wanderAI?.state).toBe("scared");
-    expect(frog.deathTimer).toBeUndefined();
-  }
 });
 
 it("runs all four frog cycles, land and water in the production pond Realm, and retains saved animals/deletions", async () => {

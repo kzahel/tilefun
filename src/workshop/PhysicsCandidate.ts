@@ -1,26 +1,9 @@
 import { sha256 } from "../art/ArtSource.js";
-import limits from "../client/PredictionLimits.ts?raw";
-import geometry from "../physics/rapier/BridgeFixture.ts?raw";
-import characterContact from "../physics/rapier/CharacterContact.ts?raw";
-import pairPredictor from "../physics/rapier/FullWorldPredictor.ts?raw";
-import latency from "../physics/rapier/OrderedLatency.ts?raw";
-import pairAuthority from "../physics/rapier/PairAuthority.ts?raw";
-import pairHarness from "../physics/rapier/PairHarness.ts?raw";
-import pairPresentation from "../physics/rapier/PairPresentation.ts?raw";
-import pairPort from "../physics/rapier/PairWorkerPort.ts?raw";
-import client from "../physics/rapier/PhysicsLabClient.ts?raw";
-import pairLink from "../physics/rapier/PhysicsLink.ts?raw";
-import protocol from "../physics/rapier/PhysicsProtocol.ts?raw";
-import pairScenarios from "../physics/rapier/PhysicsScenarios.ts?raw";
-import viewport from "../physics/rapier/PhysicsViewport.ts?raw";
-import pairWorker from "../physics/rapier/pair.worker.ts?raw";
-import worker from "../physics/rapier/physics.worker.ts?raw";
-import predictor from "../physics/rapier/RapierPredictor.ts?raw";
-import owner from "../physics/rapier/RapierRealmSimulation.ts?raw";
-import recipe from "../physics/rapier/RapierScenarioRecipe.ts?raw";
-import backend from "../physics/rapier/RapierWorld.ts?raw";
-import pairPage from "./PairPhysicsPage.tsx?raw";
+import recipe from "../scenarios/CoopRecipe.ts?raw";
+import latency from "../scenarios/OrderedLatency.ts?raw";
+import replica from "../scenarios/ScenarioReplica.ts?raw";
 import page from "./PhysicsPage.tsx?raw";
+import viewport from "./PhysicsViewport.ts?raw";
 import style from "./physics.css?raw";
 import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
@@ -32,37 +15,19 @@ export async function buildPhysicsCandidate(): Promise<WorkshopCandidate> {
     kind: "geometry",
     name: "Co-op physics laboratory",
     prompt:
-      "Two playable clients share one temporary Realm. Replay dynamic cubes and both players with seeded guest latency, scripted interactions, pause and single-step. Bridge/scale prototype remains available; ordinary game physics is unchanged.",
+      "Two ordinary clients share one temporary Realm Worker, the game’s fixed shared physics step, normal binary frames and private prediction. Inspect pushing, head support, reversal and ordered guest latency; pause, step, reset or save/reload.",
     url: "/tilefun/workshop.html#/tool/physics",
-    excluded: "Interactive backend experiment; not an immutable art approval snapshot.",
+    excluded: "Interactive diagnostic; not an immutable art approval snapshot.",
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
-          pairPage,
-          pairAuthority,
-          pairHarness,
-          pairPredictor,
-          pairPresentation,
-          pairScenarios,
-          pairLink,
-          pairPort,
-          pairWorker,
-          geometry,
-          characterContact,
-          backend,
-          predictor,
-          latency,
-          owner,
           recipe,
-          limits,
-          runtime: scenarioRuntimeSource,
-          protocol,
-          worker,
-          client,
-          viewport,
+          replica,
+          latency,
           page,
+          viewport,
           style,
-          rapier: "0.21.0",
+          runtime: scenarioRuntimeSource,
         }),
       ),
     ),

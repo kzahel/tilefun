@@ -22,7 +22,7 @@ export async function workshopInputDigest(root = ".") {
   const files: string[] = [];
   const walk = async (directory: string, include: (path: string) => boolean) => {
     for (const entry of await readdir(join(root, directory), { withFileTypes: true })) {
-      const path = directory + "/" + entry.name;
+      const path = `${directory}/${entry.name}`;
       if (entry.isDirectory()) await walk(path, include);
       else if (include(path)) files.push(path);
     }
@@ -98,7 +98,7 @@ export async function workshopInputDigest(root = ".") {
     "src/workshop/WorldGeometryCandidate.ts",
     "src/workshop/PhysicsCandidate.ts",
     "src/workshop/PhysicsPage.tsx",
-    "src/workshop/PairPhysicsPage.tsx",
+    "src/workshop/PhysicsViewport.ts",
     "src/workshop/physics.css",
     "src/workshop/TruckBedCandidate.ts",
     "src/workshop/TruckBedPage.tsx",

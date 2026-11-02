@@ -1,10 +1,15 @@
 # Streaming and gameplay performance
 
-Physics replacement qualification (2026-11-02) is tracked in
-[202](../tactical/202-persistent-realm-collision-proof.md). The existing native
-active-crowds runner accepts `--physics=3` and a paired browser runner exercises the
-same ordinary Realm/Worker/rendering through the World Geometry crowd fixture.
-Final paired physical Chromebook GPU and Canvas data fails the proposed cutover
+Active shared-physics reset [205](../tactical/205-physics-reset.md) replaces the
+per-character engines. The native `active-crowds` runner now measures only the
+shared default; it has no backend selector. New device qualification must compare
+the current default against a frozen old production bundle, not two URL flags that
+now select the same engine. The previous browser benchmark driver still needs
+alignment before it can provide that comparison. No new Chromebook result yet.
+
+Historical replacement qualification (2026-11-02) is tracked in
+[202](../tactical/202-persistent-realm-collision-proof.md). Its final paired physical
+Chromebook GPU and Canvas data fails the proposed cutover
 budget despite mostly smooth main-thread frames. At 384 active nearby NPCs GPU
 Worker tick p95 is 118–126ms versus legacy 31–32ms; smaller cohorts also regress.
 The decision is no default cutover. Reconsider per-NPC motor/query/refresh cost

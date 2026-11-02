@@ -20,7 +20,6 @@ export function trainGeometryRecipe(reverse = false): ScenarioRecipe {
     id: "train-grades-v1",
     generation: FLAT_SCENARIO,
     player,
-    physics: { walkSpeed: 120 },
     railways: [
       {
         id: "grade-shuttle",

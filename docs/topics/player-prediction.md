@@ -5,7 +5,8 @@
 The normal `PlayerPredictor` now restores/replays the same fixed 60Hz `PhysicsScene`
 as Realm. Ordinary frames carry a bounded local body set, common physics tick,
 epoch, motor targets and control deadline. The acknowledged input anchors local
-input ticks; packet duration never adds integration time. Replay retains at most
+input ticks. The eight-byte `0x81` control packet has no duration field; controls
+and sequence numbers are admitted at shared ticks. Replay retains at most
 120 inputs and performs at most eight steps/2ms per client update, holding committed
 poses while unfinished. Missing history or omitted bodies explicitly holds/rebases;
 there is no legacy fallback. Local contacts share a physics tick and one display
@@ -16,7 +17,9 @@ input still causes bounded correction and is not a bit-exact prediction guarante
 Native shared movement/contact, two-client delay/reversal, head support/jump,
 animation, history recovery, overflow/epoch fences and authored geometry checks
 pass. Normal Worker/P2P/browser/device qualification, peripheral disposition and
-old-engine deletion are still in progress. Earlier mode/rate/carry evidence below
+vehicle/equipment solver deletion are still in progress. The co-op lab now uses
+ordinary binary frames and one normal private predictor per pane; its old alternate
+replay engines are deleted. Earlier mode/rate/carry evidence below
 is historical and does not define a compatibility matrix for this reset.
 
 ## Historical integration and presentation work

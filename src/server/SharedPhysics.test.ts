@@ -63,14 +63,12 @@ it("packet bursts cannot add player travel or extra world integration; short gap
       ...idle,
       dx: 1,
       seq: 100,
-      dtMs: 100,
     });
     s.realm.handleMessage(s.player.clientId, s.player, {
       type: "player-input",
       ...idle,
       dx: 1,
       seq: 101,
-      dtMs: 100,
     });
     s.tick(1 / 60);
     expect(p.position.wx - start).toBeGreaterThan(0.5);
@@ -203,6 +201,24 @@ it("admits an explicit ball launch and removes a settled unowned ball through ga
     ball.velocity.vx = ball.velocity.vy = 0;
     for (let i = 0; i < 240; i++) await s.step(idle);
     expect(s.realm.entityManager.byId.has(ball.id)).toBe(false);
+  } finally {
+    await s.close();
+  }
+});
+
+it("ordinary shared ball contacts trigger NPC reactions without a separate bounce integrator", async () => {
+  const s = await open();
+  try {
+    const ball = s.realm.entityManager.entities.find((entity) => entity.type === "ball");
+    const npc = s.realm.entityManager.entities.find((entity) => entity.type === "chicken");
+    if (!ball || !npc) throw Error("Missing contact fixture");
+    ball.position = { wx: 48, wy: 32 };
+    ball.wz = 0;
+    ball.velocity = { vx: 120, vy: 0 };
+    for (let tick = 0; tick < 8; tick++) await s.step(idle);
+    expect(npc.wanderAI?.state).toBe("scared");
+    expect(npc.wanderAI?.scaredTimer).toBeGreaterThan(0);
+    expect(ball.position.wx).toBeLessThan(npc.position.wx);
   } finally {
     await s.close();
   }

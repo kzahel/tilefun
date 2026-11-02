@@ -223,7 +223,6 @@ it.each(["global", "recipient"])(
       dy: 0,
       sprinting: false,
       jump: false,
-      dtMs: 16,
     });
     server.tick(1 / 60);
     expect(session.player.position.wx).toBeGreaterThan(before);

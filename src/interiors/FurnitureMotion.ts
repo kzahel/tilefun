@@ -1,6 +1,5 @@
 import { type AABB, aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
-import type { MovementContext } from "../physics/MovementContext.js";
 import { depthAboveProps, propDepthSurfaces } from "../rendering/propDepth.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
@@ -107,7 +106,7 @@ export class FurnitureMotion {
   /** Physical inner edges of this sealed, rectangular test room, in pixels. No 32px wall-cell blocking. */
   readonly floor = { left: 8, top: 32, right: 152, bottom: 128 };
   readonly placementArea = { x: 8, y: 32, width: 144, height: 96 };
-  readonly context: MovementContext;
+  readonly context: { isPropBlocked(aabb: AABB, wz: number, height: number): boolean };
   constructor(furniture: readonly FurniturePlacement[], bodies?: FurnitureBodies) {
     this.furniture = structuredClone([...furniture]);
     this.objects = compileFurniture(this.plan, this.furniture, this.placementArea);
@@ -123,10 +122,6 @@ export class FurnitureMotion {
       if (o.definition.blocking && !this.bodies[o.placement.id])
         throw new Error("Missing furniture height");
     this.context = {
-      getCollision: () => 0,
-      getHeight: () => 0,
-      isEntityBlocked: () => false,
-      noclip: false,
       isPropBlocked: (aabb, wz, height) =>
         aabb.left < this.floor.left ||
         aabb.right > this.floor.right ||

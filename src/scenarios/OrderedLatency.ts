@@ -45,6 +45,17 @@ export class OrderedLatency<T> {
       Math.max(0, Math.ceil((this.queue[0]?.at ?? 0) - performance.now())),
     );
   }
+  /** Control fences must deliver queued deltas before reset/pause, never drop them. */
+  flush(): void {
+    clearTimeout(this.timer);
+    this.timer = undefined;
+    while (this.queue.length) {
+      const item = this.queue.shift();
+      if (!item) break;
+      this.bytes -= item.bytes;
+      this.deliver(item.value);
+    }
+  }
   get pending() {
     return this.queue.length;
   }

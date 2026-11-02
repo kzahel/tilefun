@@ -8,7 +8,8 @@ const channel = new OrderedWorkerChannel<ScenarioPacket>((message, transfer) =>
 const publish = (response: ScenarioResponse, reset = false) => {
   if (reset && !response.error) channel.send({ type: "reset" });
   for (const buffer of response.frames) channel.send({ type: "frame", buffer });
-  const { frames: _, ...metadata } = response;
+  for (const buffer of response.guestFrames ?? []) channel.send({ type: "frame", buffer, seat: 1 });
+  const { frames: _, guestFrames: __, ...metadata } = response;
   channel.send({ type: "response", response: metadata });
 };
 const host = new ScenarioWorkerHost(publish, () => channel.writable);
@@ -18,7 +19,7 @@ function pump() {
   timer = setTimeout(() => {
     timer = undefined;
     channel.pump((packet) => {
-      if (packet.type === "input") host.input(packet.buffer, packet.range);
+      if (packet.type === "input") host.input(packet.buffer, packet.range, packet.seat);
       else if (packet.type === "request") {
         const r = packet.request;
         void host

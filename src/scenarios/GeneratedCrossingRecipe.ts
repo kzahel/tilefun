@@ -45,7 +45,6 @@ export function generatedCrossingRecipe(index = 0, reverse = false) {
     generation: createDescriptor("regional", choice.seed),
     player: createPlayer(start.position.wx, start.position.wy),
     props: [],
-    physics: { walkSpeed: 120 },
     railwayStarts: [{ id: line.id, x: x + (reverse ? 480 : -480), target: reverse ? 0 : 1 }],
     trafficSpeed: 72,
     traffic: [{ name: "car", model: "compact-1", laneId: lane.id, x, y, distance }],

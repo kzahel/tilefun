@@ -97,7 +97,7 @@ it("reconciles delayed ordered input/snapshots through pushing, reversal, jump a
     lastInput = Math.max(lastInput, tick + 4 + (tick % 3));
     inputs.push({
       at: lastInput,
-      buffer: encodeClientMessage({ type: "player-input", seq: tick, ...movement, dtMs: 100 }),
+      buffer: encodeClientMessage({ type: "player-input", seq: tick, ...movement }),
     });
     while (inputs[0] && inputs[0].at <= tick) {
       const item = inputs.shift();

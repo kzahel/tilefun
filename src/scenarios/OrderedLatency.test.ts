@@ -17,8 +17,12 @@ it("preserves order through changing jitter/delay, bounds memory and cancels del
   queue.delayMs = 100;
   queue.push(12, 10 * 1024 * 1024);
   expect(() => queue.push(13, 10 * 1024 * 1024)).toThrow("bound");
+  queue.flush();
+  expect(seen.at(-1)).toBe(12);
+  expect(queue.pending).toBe(0);
+  queue.push(14, 100);
   queue.close();
   vi.advanceTimersByTime(200);
-  expect(seen).toHaveLength(11);
+  expect(seen).toHaveLength(12);
   expect(queue.pending).toBe(0);
 });

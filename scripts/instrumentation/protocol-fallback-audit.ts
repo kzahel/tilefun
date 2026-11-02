@@ -114,7 +114,6 @@ async function main(): Promise<void> {
       dy: 0,
       sprinting: false,
       jump: false,
-      dtMs: 16.67,
     });
     t.clientSend("peer2", {
       type: "player-input",
@@ -123,7 +122,6 @@ async function main(): Promise<void> {
       dy: 0.25,
       sprinting: false,
       jump: false,
-      dtMs: 16.67,
     });
     s.tick(1 / 60);
   }

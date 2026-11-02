@@ -1,10 +1,9 @@
 # Diagnostic probes
 
-`npx tsx scripts/benchmark-physics-model.ts --output=<capture-directory>` compares
-the real controlled-collision adapter, a descriptor-cache ablation, lean KCC
-models and a one-step rigid-body model. It is a native prescribed query workload,
-not normal-game/Chromebook qualification. [203](../../docs/tactical/203-physics-copy-and-model-comparison.md)
-owns results, observed naive-batch contact failures and semantic limits.
+The per-character adapter/model comparison CLI was retired by
+[205](../../docs/tactical/205-physics-reset.md). The frozen native measurements and
+semantic limits remain in [203](../../docs/tactical/203-physics-copy-and-model-comparison.md).
+Current authority/prediction scenarios exercise the shared default kernel.
 
 ## Elevated surface overlays and actual venue driving
 
@@ -283,12 +282,6 @@ flushed durable records must match. Crossings, turns, road edits, reload, bridge
 grades and deleted supports are covered. Query counts are separate from shallow
 city timing. [125](../../docs/tactical/125-traffic-lookahead-terrain-reuse.md) owns results.
 
-`node --import tsx scripts/instrumentation/driving-query-parity.mjs --reference=PATH --output=/tmp/tilefun-driving-query-parity`
-compares a supplied original Driving.ts with indexed authority and immutable replica
-snapshot queries on identical geometry. All 45 models/cardinal poses, mixed inputs,
-three step sizes and nine authored/native-city cases must match complete returned
-poses. Candidate counts are attribution, not timing or capacity acceptance.
-
 `node --import tsx scripts/instrumentation/driving-native-parity.mjs --before-root=PATH --after-root=PATH --output=/tmp/tilefun-driving-native-parity`
 compares matching frozen source trees through the existing native authority,
 binary-replica/predictor and camera fixture at 30/60Hz authority/120Hz presentation.
@@ -429,23 +422,10 @@ work counts, hashes, cache counters and source revisions alongside sampled bytes
 See [renderer completion](../../docs/tactical/034-renderer-completion.md).
 
 
-## Collision broad-phase scaling
-
-Run `node --import tsx scripts/instrumentation/collision-broad-phase.mjs
---output=/tmp/tilefun-collision-broad-phase` for three repeats of 0/24/96/384
-resting/traveling native dogs through production Realm/ScenarioSession. It uses
-memory persistence, fixed 60Hz steps, 60 warmup/180 retained ticks and no rendering
-or real IndexedDB; this is accelerated workload scaling, not native deadlines.
-Whole tick/physics includes index maintenance; replication is reported separately.
-Every traveling dog must advance 88px or the capture fails.
-
-`--count --repeats=1` adds candidate counts and a hash over every retained tick's
-wire/durable state, excluding random record IDs. Hash allocation still affects GC,
-so use a separate shallow run for timing. `--cell-size=32|64` changes only the
-diagnostic instance constructor; it is not a production setting. Run frozen source
-pairs sequentially without concurrent tests/builds, then compare sparse native
-Worker game controls. [115](../../docs/tactical/115-collision-broad-phase.md) owns
-accepted source/probe hashes, equivalence, desktop results and phone limits.
+The old per-actor collision broad-phase CLI was retired with its integrator by
+[205](../../docs/tactical/205-physics-reset.md). Historical measurements remain in
+[115](../../docs/tactical/115-collision-broad-phase.md); current crowd probes use
+ordinary shared Realm stepping through `active-crowds.mjs`.
 
 ## Rotated vehicle collision demand
 

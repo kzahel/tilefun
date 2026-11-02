@@ -3,7 +3,7 @@ import { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
-import { decodeServerMessage, quantizeInputDtMs } from "../shared/binaryCodec.js";
+import { decodeServerMessage } from "../shared/binaryCodec.js";
 import type { BufferedMessage } from "../shared/protocol.js";
 import { World } from "../world/World.js";
 import { ScenarioSession } from "./ScenarioSession.js";
@@ -70,7 +70,7 @@ it("retains solid terrain boundaries, ceiling headroom, and usable street at the
 it("replicates excavation geometry and predicts negative-height movement through the shared kernel", async () => {
   const s = await ScenarioSession.create(undergroundGarageRecipe());
   const view = new RemoteStateView(new World());
-  const predictor = new PlayerPredictor(() => s.physics.gravityScale);
+  const predictor = new PlayerPredictor(() => s.gravity);
   try {
     await predictor.ready;
     await s.step(idle);
@@ -91,7 +91,7 @@ it("replicates excavation geometry and predicts negative-height movement through
       { serverTick: view.serverTick, ...(view.physicsState ? { physics: view.physicsState } : {}) },
     );
     const firstSeq = view.lastProcessedInputSeq + 1;
-    const dt = quantizeInputDtMs(1000 / 60) / 1000;
+    const dt = 1 / 60;
     for (let i = 1; i <= 270; i++) {
       const input = { ...idle, dx: 1 };
       predictInput(predictor, firstSeq + i - 1, input, dt, view.world, view.props, view.entities);

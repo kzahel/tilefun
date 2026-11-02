@@ -1,11 +1,7 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { createBall } from "../entities/Ball.js";
-import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
-import { tickBallPhysics } from "../physics/BallPhysics.js";
-import { getMovementPhysicsParams, tickJumpGravity } from "../physics/PlayerMovement.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
@@ -17,7 +13,6 @@ import { startleMallard } from "./mallardInteractions.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
-const physics = getMovementPhysicsParams();
 it("replicates the alarm state through both binary baselines and deltas", () => {
   const d = createMallard(64, 64),
     before = serializeEntity(d);
@@ -48,50 +43,6 @@ function fallingPlayer() {
   player.jumpZ = 12;
   return player;
 }
-
-it("does not report wildlife landing contact on a near miss, an ascending pass or a body above the player", () => {
-  for (const kind of ["miss", "ascending", "above"] as const) {
-    const p = fallingPlayer(),
-      d = createMallard(64, 64);
-    d.id = 1;
-    if (kind === "miss") d.position.wx += 40;
-    if (kind === "ascending") p.jumpVZ = 80;
-    if (kind === "above") d.wz = 40;
-    expect(tickJumpGravity(p, 0.1, () => 0, physics, [], [d]).wildlifeContactId).toBeUndefined();
-  }
-});
-
-it("balls bounce and startle ducks without losing the reaction to custom AI; elevated balls miss", () => {
-  for (const z of [0, 30]) {
-    const manager = new EntityManager(),
-      d = manager.spawn(createMallard(64, 64)),
-      b = manager.spawn(createBall(60, 64));
-    b.wz = z;
-    if (z > 0) {
-      b.jumpZ = z;
-      b.jumpVZ = 0;
-    }
-    required(b.velocity).vx = 100;
-    tickBallPhysics(
-      manager,
-      0.01,
-      () => 0,
-      () => 0,
-    );
-    if (z > 0) {
-      expect(d.mallard?.state).toBe("rest");
-      expect(b.velocity?.vx).toBeGreaterThan(0);
-      continue;
-    }
-    expect(b.velocity?.vx).toBeLessThan(0);
-    expect(d.mallard?.state).toBe("startle");
-    updateMallardAI(d, 0.1, open, [d], []);
-    expect(d.mallard?.state).toBe("startle");
-    expect(d.wanderAI?.state).toBe("scared");
-    expect(d.deathTimer).toBeUndefined();
-    expect(startleMallard(d, { wx: 0, wy: 0 })).toBe(false);
-  }
-});
 
 it("quacks and settles in place when no safe escape exists", () => {
   const d = createMallard(64, 64);

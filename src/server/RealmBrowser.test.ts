@@ -1904,7 +1904,7 @@ it("resumes an available saved boat seat over water, while explicit travel retur
       setup.transport.clientSend("local", {
         type: "player-input",
         seq: i + 1,
-        dtMs: 16.67,
+
         dx: 0,
         dy: i < 100 ? 1 : 0,
         jump: false,

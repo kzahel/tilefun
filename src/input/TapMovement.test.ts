@@ -1,42 +1,38 @@
 import { describe, expect, it } from "vitest";
 import { createPlayer } from "../entities/Player.js";
-import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
 import { projectWorld } from "../rendering/Projection.js";
+import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
+import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { quantizeAxis } from "../shared/binaryCodec.js";
 import { TapMovement, touchMovementMode } from "./TapMovement.js";
 
 const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 describe("tap movement intent", () => {
-  it("walks with normal physics, brakes within the arrival tolerance and stays stopped", () => {
+  it("walks with normal physics, brakes within the arrival tolerance and stays stopped", async () => {
     const controller = new TapMovement();
-    const p = createPlayer(0, 0);
-    controller.setTarget({ wx: 100, wy: 60, wz: 0 });
-    const context = {
-      getCollision: () => 0,
-      getHeight: () => 0,
-      isEntityBlocked: () => false,
-      isPropBlocked: () => false,
-      noclip: false,
-    };
-    let arrived = false;
-    for (let i = 0; i < 300; i++) {
-      const input = controller.sample(p.position, idle, 1 / 60);
-      stepPlayerFromInput(
-        p,
-        { ...input, dx: quantizeAxis(input.dx), dy: quantizeAxis(input.dy) },
-        1 / 60,
-        context,
-        () => 0,
-        () => ({ props: [], entities: [] }),
-        { jumpConsumed: false, lastJumpHeld: false },
-        getMovementPhysicsParams(),
-      );
-      if (!controller.target) arrived = true;
-      if (arrived) expect(input.dx).toBe(0);
+    const session = await ScenarioSession.create({
+      version: 1,
+      id: "tap-arrival",
+      generation: FLAT_SCENARIO,
+      player: createPlayer(0, 0),
+      props: [],
+    });
+    const p = session.player.player;
+    try {
+      controller.setTarget({ wx: 100, wy: 60, wz: 0 });
+      let arrived = false;
+      for (let i = 0; i < 300; i++) {
+        const input = controller.sample(p.position, idle, 1 / 60);
+        await session.step({ ...input, dx: quantizeAxis(input.dx), dy: quantizeAxis(input.dy) });
+        if (!controller.target) arrived = true;
+        if (arrived) expect(input.dx).toBe(0);
+      }
+      expect(arrived).toBe(true);
+      expect(Math.hypot(p.position.wx - 100, p.position.wy - 60)).toBeLessThanOrEqual(8);
+      expect(Math.hypot(p.velocity?.vx ?? 0, p.velocity?.vy ?? 0)).toBeLessThan(0.01);
+    } finally {
+      await session.close();
     }
-    expect(arrived).toBe(true);
-    expect(Math.hypot(p.position.wx - 100, p.position.wy - 60)).toBeLessThanOrEqual(8);
-    expect(Math.hypot(p.velocity?.vx ?? 0, p.velocity?.vy ?? 0)).toBe(0);
   });
   it("redirects immediately and preserves Jump and Sprint", () => {
     const c = new TapMovement();

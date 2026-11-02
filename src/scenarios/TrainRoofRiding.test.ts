@@ -153,7 +153,7 @@ it("carries two passengers once through bends with independent zero/multiple-inp
         const count = required((index === 0 ? [2, 0, 1, 1, 1] : [0, 0, 3, 1, 1])[tick % 5]);
         for (let i = 0; i < count; i++) {
           seq[index] = required(seq[index]) + 1;
-          p.inputQueue.push({ ...idle, seq: required(seq[index]), dtMs: 16.67 });
+          p.inputQueue.push({ ...idle, seq: required(seq[index]) });
         }
       });
       s.realm.tick(1 / 60, new LocalTransport().serverSide, false, new Set());

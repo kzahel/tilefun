@@ -14,7 +14,6 @@ export function outdoorRecipe(asset: OutdoorAsset, metadata: OutdoorMetadata): S
     id: `outdoor-${asset.id}`,
     generation: FLAT_SCENARIO,
     player: required(ENTITY_FACTORIES.person1)(0, 40),
-    physics: { walkSpeed: 60 },
     props: [
       outdoorProp(asset, metadata, 0, 0),
       ...scenarioWalls(-width / 2, -height + 40, width / 2, 70),

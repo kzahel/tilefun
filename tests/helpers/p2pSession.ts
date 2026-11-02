@@ -55,7 +55,7 @@ export async function advancing(page: Page) {
   await expect.poll(async () => (await state(page)).tick).toBeGreaterThan(before + 5);
 }
 
-export async function session(browser: Browser, overview = true, physics = "") {
+export async function session(browser: Browser, overview = true) {
   let broker!: Server;
   PeerServer({ port: 0, host: "127.0.0.1", path: "/peerjs" }, (server) => {
     broker = server;
@@ -80,7 +80,7 @@ export async function session(browser: Browser, overview = true, physics = "") {
     );
     const hostId = `recovery-${crypto.randomUUID()}`;
     await host.goto(
-      `/tilefun/?host&desktop=1&nogamepad&playerid=${hostId}&peerServer=${peerServer}&generation=${generation}&physics=${encodeURIComponent(physics)}`,
+      `/tilefun/?host&desktop=1&nogamepad&playerid=${hostId}&peerServer=${peerServer}&generation=${generation}`,
     );
     await expect(host.getByText("Hosting as Player 1", { exact: true })).toBeVisible();
     await host.getByRole("button", { name: "Back", exact: true }).click();

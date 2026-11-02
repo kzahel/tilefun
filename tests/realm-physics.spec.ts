@@ -10,7 +10,7 @@ const state = (page: Page) =>
     const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
     const view = game.stateView as RemoteStateView;
     return {
-      mode: view.physicsParameters.characterPhysics,
+      physics: !!view.physicsState,
       editor: view.editorEnabled,
       player: { ...view.serverPlayerEntity.position },
       predicted: { ...view.playerEntity.position },
@@ -31,11 +31,11 @@ async function play(page: Page) {
 
 test("ordinary Worker game uses persistent NPC contacts and prediction", async ({ page }) => {
   await page.goto(
-    `/tilefun/?physics=rapier-world&nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-  await expect.poll(async () => (await state(page)).mode).toBe(3);
+  await expect.poll(async () => (await state(page)).physics).toBe(true);
   if (!(await state(page)).editor) {
     await page.getByTestId("main-menu-toggle").click();
     await page.getByRole("button", { name: "Edit", exact: true }).click();
@@ -73,14 +73,14 @@ test("ordinary Worker game uses persistent NPC contacts and prediction", async (
   await page.screenshot({ path: test.info().outputPath("realm-game-npc-push.png") });
 });
 
-test("P2P host and delayed guest share the replacement setting and converge after reversals", async ({
+test("P2P host and delayed guest use the shared default and converge after reversals", async ({
   browser,
 }) => {
   test.setTimeout(90000);
-  const { host, guest, dispose } = await session(browser, false, "rapier-world");
+  const { host, guest, dispose } = await session(browser, false);
   try {
     for (const page of [host, guest]) {
-      await expect.poll(async () => (await state(page)).mode).toBe(3);
+      await expect.poll(async () => (await state(page)).physics).toBe(true);
       await play(page);
     }
     await guest.evaluate(() => {

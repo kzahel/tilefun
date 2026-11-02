@@ -3,9 +3,7 @@ import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { createBall } from "../entities/Ball.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
-import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
@@ -14,7 +12,6 @@ import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
-import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
@@ -24,7 +21,6 @@ import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { createRobin, ROBIN_CLIPS, ROBIN_IMAGE, ROBIN_TYPE } from "./Robin.js";
 import { updateRobinAI } from "./robinAI.js";
-import { startleRobin } from "./robinInteractions.js";
 import { robinTreePerches } from "./robinPerches.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
@@ -273,34 +269,6 @@ it("replicates mid-hop phase through binary baselines/deltas and removes it on l
   delete required(robin.sprite).clipElapsedMs;
   applyEntityDelta(replica, required(diffEntitySnapshots(after, serializeEntity(robin))));
   expect(replica.sprite?.clipElapsedMs).toBeUndefined();
-});
-
-it("balls ricochet and startle robins; elevated balls miss and repeated alarms keep the escape intact", () => {
-  for (const z of [0, 30]) {
-    const manager = new EntityManager(),
-      robin = manager.spawn(createRobin(64, 64));
-    const ball = manager.spawn(createBall(61, 64));
-    ball.wz = z;
-    if (z) {
-      ball.jumpZ = z;
-      ball.jumpVZ = 0;
-    }
-    required(ball.velocity).vx = 100;
-    tickBallPhysics(
-      manager,
-      0.01,
-      () => 0,
-      () => 0,
-    );
-    expect(robin.robin?.state).toBe(z ? "rest" : "startle");
-    if (z) continue;
-    expect(ball.velocity?.vx).toBeLessThan(0);
-    expect(startleRobin(robin, { wx: 0, wy: 0 })).toBe(false);
-    updateRobinAI(robin, 0.3, open, [robin], []);
-    expect(robin.robin?.state).toBe("flight");
-    expect(robin.wanderAI?.state).toBe("scared");
-    expect(robin.deathTimer).toBeUndefined();
-  }
 });
 
 it.each([true, false])(

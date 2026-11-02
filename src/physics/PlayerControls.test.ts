@@ -1,12 +1,12 @@
 import { expect, it } from "vitest";
 import { PlayerControls, playerMotionIntent } from "./PlayerControls.js";
 
-it("coalesces burst axes, preserves a press/release jump edge and ignores command duration", () => {
+it("coalesces burst axes, preserves a press/release jump edge at one fixed tick", () => {
   const controls = new PlayerControls();
   const { movement, ack } = controls.admit(
     [
-      { seq: 1, dx: 1, dy: 0, jump: true, sprinting: false, dtMs: 100 },
-      { seq: 2, dx: -1, dy: 0, jump: false, sprinting: false, dtMs: 100 },
+      { seq: 1, dx: 1, dy: 0, jump: true, sprinting: false },
+      { seq: 2, dx: -1, dy: 0, jump: false, sprinting: false },
     ],
     1,
   );

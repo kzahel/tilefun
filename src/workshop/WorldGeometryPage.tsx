@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
-import type { CharacterPhysicsMode } from "../physics/CharacterPhysics.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
 import { CURVE_TRAIN, curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
 import { railAlignment } from "../railway/RailPath.js";
@@ -18,7 +17,6 @@ import {
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { realmPhysicsRecipe } from "../scenarios/RealmPhysicsRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
-import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { TRAIN_GEOMETRY_STARTS, trainGeometryRecipe } from "../scenarios/TrainGeometryRecipe.js";
 import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import {
@@ -53,29 +51,12 @@ export default function WorldGeometryPage() {
     <GeometryFixtures />
   );
 }
-function characterRecipe(recipe: ScenarioRecipe, mode: CharacterPhysicsMode): ScenarioRecipe {
-  return mode ? { ...recipe, physics: { ...recipe.physics, characterPhysics: mode } } : recipe;
-}
 function GeometryFixtures() {
   const canvas = useRef<GeometryCanvas>(null),
     scene = useRef<ScenarioPresentationHost | null>(null);
   const [fixture, setFixture] = useState(
     () => new URLSearchParams(location.search).get("geometry") ?? "deck",
   );
-  const [characterPhysics, setCharacterPhysics] = useState<CharacterPhysicsMode>(() => {
-    const params = new URLSearchParams(location.search);
-    return params.get("physics") === "legacy"
-      ? 0
-      : params.get("physics") === "rapier-world" || params.get("geometry") === "realm"
-        ? params.get("hull") === "capsule"
-          ? 4
-          : 3
-        : params.get("physics") === "rapier"
-          ? params.get("hull") === "capsule"
-            ? 2
-            : 1
-          : 0;
-  });
   const [vehicleModel, setVehicleModel] = useState(() => {
     const model = new URLSearchParams(location.search).get("vehicle") ?? "compact-1";
     return VEHICLE_MODELS.includes(model) ? model : "compact-1";
@@ -128,29 +109,26 @@ function GeometryFixtures() {
     keys.current.clear();
     const host = new ScenarioPresentationHost(
       c,
-      characterRecipe(
-        (fixture === "realm"
-          ? realmPhysicsRecipe(
-              characterPhysics,
-              new URLSearchParams(location.search).has("crowd")
-                ? Number(new URLSearchParams(location.search).get("crowd"))
-                : undefined,
-            )
-          : undefined) ??
-          curveRecipe ??
-          (generatedScene
-            ? generatedScene.recipe
-            : trainGrade
-              ? trainGeometryRecipe(reverse)
-              : vehicle
-                ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
-                : crossing
-                  ? railCrossingRecipe()
-                  : garage
-                    ? undergroundGarageRecipe()
-                    : worldGeometryRecipe()),
-        fixture === "deck" || fixture === "realm" ? characterPhysics : 0,
-      ),
+      (fixture === "realm"
+        ? realmPhysicsRecipe(
+            new URLSearchParams(location.search).has("crowd")
+              ? Number(new URLSearchParams(location.search).get("crowd"))
+              : undefined,
+          )
+        : undefined) ??
+        curveRecipe ??
+        (generatedScene
+          ? generatedScene.recipe
+          : trainGrade
+            ? trainGeometryRecipe(reverse)
+            : vehicle
+              ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
+              : crossing
+                ? railCrossingRecipe()
+                : garage
+                  ? undergroundGarageRecipe()
+                  : worldGeometryRecipe()),
+
       {
         authoredTrains,
         width: 960,
@@ -407,7 +385,6 @@ function GeometryFixtures() {
     generated,
     generatedIndex,
     generatedScene,
-    characterPhysics,
   ]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
@@ -602,26 +579,9 @@ function GeometryFixtures() {
         <p>
           Replacement qualification: shared collision for terrain, characters, one controlled car
           and balls. Autonomous traffic, moving roof passengers, apparatus and full wildlife parity
-          remain unqualified. Cars stay upright. This is not the default backend.
+          remain unqualified. Cars stay upright. This uses the game’s shared default kernel.
         </p>
       )}
-      <label>
-        Character contacts (deck / realm fixtures){" "}
-        <select
-          aria-label="Character contacts"
-          disabled={fixture !== "deck" && fixture !== "realm"}
-          value={characterPhysics}
-          onChange={(event) =>
-            setCharacterPhysics(Number(event.target.value) as CharacterPhysicsMode)
-          }
-        >
-          <option value={0}>Game default</option>
-          <option value={1}>Rapier fixed box</option>
-          <option value={2}>Rapier capsule</option>
-          <option value={3}>Persistent realm box</option>
-          <option value={4}>Persistent realm capsule</option>
-        </select>
-      </label>
       <label>
         Visible surfaces{" "}
         <select

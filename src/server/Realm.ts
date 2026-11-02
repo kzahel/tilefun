@@ -140,8 +140,6 @@ export interface RealmOptions {
   gravity?: () => number;
   random?: () => number;
   ambientSpawns?: boolean;
-  /** Temporary backend proofs replace both player and ambient physics together. */
-  simulationOwner?: import("./RealmSimulationOwner.js").RealmSimulationOwner;
   /** Explicit route source for authored infrastructure/scenarios. */
   railways?: RailRouteSource;
   traffic?: TrafficRouteSource;
@@ -737,7 +735,6 @@ export class Realm {
     const controls = new Map<number, import("../input/ActionManager.js").Movement>();
     const controlTicks = new Map<number, number>();
     for (const session of this.sessions.values()) {
-      if (this.options.simulationOwner) continue;
       const blocked =
         storagePaused ||
         session.editorEnabled ||
@@ -779,10 +776,7 @@ export class Realm {
         !dormantClientIds.has(s.clientId) &&
         this.sessionSupported(s, dt),
     );
-    if (this.options.simulationOwner) {
-      if (!storagePaused && activeSessions.length)
-        this.options.simulationOwner.step(dt, activeSessions, this);
-    } else if (activeSessions.length > 0 || (!storagePaused && this.backgroundResidents.size > 0)) {
+    if (activeSessions.length > 0 || (!storagePaused && this.backgroundResidents.size > 0)) {
       const stepDt = PHYSICS_DT;
       const getHeight = (x: number, y: number) => this.world.getHeightAt(x, y);
       const players = activeSessions.map((s) => s.player);
@@ -1416,7 +1410,6 @@ export class Realm {
           ...(msg.relativeDriving === true ? { relativeDriving: true } : {}),
           seq: msg.seq,
           ...(msg.jumpPressed !== undefined ? { jumpPressed: msg.jumpPressed } : {}),
-          ...(msg.dtMs !== undefined ? { dtMs: msg.dtMs } : {}),
         });
         break;
 
@@ -2025,7 +2018,6 @@ export class Realm {
     if (this.saveManager === saves) this.saveManager = null;
     this.physicsScene?.dispose();
     this.physicsScene = undefined;
-    this.options.simulationOwner?.dispose();
     for (const teardown of this.modTeardowns.values()) teardown();
     this.modTeardowns.clear();
     for (const entity of [...this.entityManager.entities])

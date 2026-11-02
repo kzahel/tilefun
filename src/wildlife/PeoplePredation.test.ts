@@ -3,15 +3,12 @@ import { MANUAL_PREY_PAIRS } from "../../tests-support/ManualPreyPairs.fixture.j
 import { required } from "../art/ArtCatalog.js";
 import { applyPlayerModel, PLAYER_MODELS } from "../characters/PlayerModels.js";
 import { CHARACTER_FACTORIES } from "../characters/PromotedCharacters.js";
-import { createBall } from "../entities/Ball.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPerson1 } from "../entities/Person.js";
 import { createPlayer } from "../entities/Player.js";
-import { updateWanderAI } from "../entities/wanderAI.js";
 import { ProceduralActors } from "../generation/ProceduralActors.js";
 import { durableId } from "../persistence/ActorRecords.js";
-import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { canEat } from "./FoodWeb.js";
@@ -91,37 +88,6 @@ describe("NPC people as prey", () => {
         manager.remove(player.id);
       }
     }
-  });
-
-  it("people flee at a catchable pace; calming down and ball hits clear that override", () => {
-    const manager = new EntityManager();
-    const hunter = manager.spawn(createPredator("tiger", 0, 0));
-    const person = manager.spawn(createPerson1(40, 0));
-    Object.assign(required(hunter.predator), {
-      state: "chase",
-      timer: 0,
-      targetId: durableId(person),
-    });
-    updatePredatorAI(hunter, 1 / 60, open, manager.entities, []);
-    updateWanderAI(person, 1 / 60, () => 0.5);
-    expect(person.wanderAI?.state).toBe("scared");
-    expect(person.velocity).toEqual({ vx: 30, vy: 0 });
-    updateWanderAI(person, 2, () => 0.5);
-    expect(person.wanderAI?.state).toBe("idle");
-    expect(person.wanderAI?.scaredSpeed).toBeUndefined();
-    updatePredatorAI(hunter, 1 / 60, open, manager.entities, []);
-    expect(person.wanderAI?.scaredSpeed).toBe(30);
-    const ball = manager.spawn(createBall(33, 0));
-    required(ball.velocity).vx = 100;
-    tickBallPhysics(
-      manager,
-      0.01,
-      () => 0,
-      () => 0,
-    );
-    expect(person.wanderAI?.scaredSpeed).toBeUndefined();
-    updateWanderAI(person, 1 / 60, () => 0.5);
-    expect(Math.hypot(person.velocity?.vx ?? 0, person.velocity?.vy ?? 0)).toBe(60);
   });
 
   it.each(people)("catches %s once without queuing a wildlife replacement", (type) => {

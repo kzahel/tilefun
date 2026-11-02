@@ -2,7 +2,6 @@ import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { createBall } from "../entities/Ball.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
-import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { woodlandWorkRecipe } from "../scenarios/WoodlandWorkRecipe.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -106,12 +105,9 @@ it("player toys stay on water while ordinary disposable balls retain their exist
     delete toy.jumpZ;
     const ordinary = s.realm.entityManager.spawn(createBall(128, 128));
     ordinary.wz = 0;
-    tickBallPhysics(
-      s.realm.entityManager,
-      1 / 30,
-      () => CollisionFlag.Water,
-      () => 0,
-    );
+    s.realm.world.getCollisionIfLoaded = () => CollisionFlag.Water;
+    for (let tick = 0; tick < 20; tick++)
+      await s.step({ dx: 0, dy: 0, jump: false, sprinting: false });
     expect(s.realm.entityManager.byId.has(toy.id)).toBe(true);
     expect(toy.deathTimer).toBeUndefined();
     expect(s.realm.entityManager.byId.has(ordinary.id)).toBe(false);

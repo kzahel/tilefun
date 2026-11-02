@@ -42,7 +42,6 @@ export function worldGeometryRecipe(): ScenarioRecipe {
     id: "world-geometry-deck-v1",
     generation: FLAT_SCENARIO,
     player: createPlayer(GEOMETRY_STARTS.ramp.position.wx, GEOMETRY_STARTS.ramp.position.wy),
-    physics: { walkSpeed: 72 },
     props: [
       surfaceProp(
         { left: -192, top: -32, right: 0, bottom: 32 },

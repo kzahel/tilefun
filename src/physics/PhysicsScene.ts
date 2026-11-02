@@ -55,6 +55,7 @@ interface Body {
   offsetX: number;
   offsetY: number;
   state: PhysicsBodyState;
+  incomingSpeed: number;
 }
 interface Section {
   identity: unknown;
@@ -214,6 +215,7 @@ export class PhysicsScene {
           halfY,
           offsetX,
           offsetY,
+          incomingSpeed: 0,
           state: {
             id: entity.id,
             kind,
@@ -349,7 +351,12 @@ export class PhysicsScene {
     const supportVelocities = new Map<number, RAPIER.Vector>();
     for (const [id, entry] of this.bodies) supportVelocities.set(id, entry.body.linvel());
     for (const [id, entry] of this.bodies) {
-      if (entry.kind === "fixed" || entry.kind === "loose") continue;
+      if (entry.kind === "loose") {
+        const v = entry.body.linvel();
+        entry.incomingSpeed = Math.hypot(v.x, v.y, v.z) * SCALE;
+        continue;
+      }
+      if (entry.kind === "fixed") continue;
       const submitted = intents.get(id) ?? { vx: 0, vy: 0 };
       if (submitted.controlUntil === undefined) delete entry.state.controlUntil;
       else entry.state.controlUntil = submitted.controlUntil;
@@ -519,6 +526,11 @@ export class PhysicsScene {
 
   contactIds(id: number): ReadonlySet<number> | undefined {
     return this.contacts.get(id);
+  }
+
+  /** Contact consequences need incident speed, before the solver removes it. */
+  incomingSpeed(id: number): number {
+    return this.bodies.get(id)?.incomingSpeed ?? 0;
   }
 
   bodyState(id: number): Readonly<PhysicsBodyState> | undefined {

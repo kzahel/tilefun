@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { createBall } from "../entities/Ball.js";
 import type { Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
@@ -9,7 +8,6 @@ import { ProceduralActors } from "../generation/ProceduralActors.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { decodeActor, durableId, encodeActor } from "../persistence/ActorRecords.js";
-import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { createDeer } from "./Deer.js";
@@ -182,21 +180,7 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
       const saved = decodeActor(encodeActor(hunter));
       expect("predator" in saved && saved.predator).toEqual(hunter.predator);
     });
-    it("a real ball ricochets and interrupts the hunt without killing the predator", () => {
-      const { manager, hunter } = setup();
-      const ball = manager.spawn(createBall(-required(hunter.collider).width / 2 - 2, 0));
-      required(ball.velocity).vx = 100;
-      tickBallPhysics(
-        manager,
-        0.01,
-        () => 0,
-        () => 0,
-      );
-      expect(hunter.predator?.state).toBe("scared");
-      expect(hunter.predator?.targetId).toBeUndefined();
-      expect(ball.velocity?.vx).toBeLessThan(0);
-      expect(hunter.deathTimer).toBeUndefined();
-    });
+
     it("catches already fleeing legal prey without lunging too early or pausing pursuit", async () => {
       const hunter = createPredator(p.species, 64, 64),
         prey = preyFactory(92, 64);

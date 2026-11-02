@@ -1,7 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
-import { getMovementPhysicsParams, type MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import type { RailRoute } from "../railway/RailwaySystem.js";
 import type { Lane } from "../traffic/LaneGraph.js";
 
@@ -12,6 +11,8 @@ export interface ScenarioRecipe {
   generation: GenerationDescriptor;
   landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile;
   player: Entity;
+  /** Optional second ordinary session for co-op inspection. */
+  guest?: Entity;
   props: Prop[];
   /** Known ordinary prop identities retain production AI semantics and persistence. */
   nativeProps?: { type: string; wx: number; wy: number }[];
@@ -28,11 +29,9 @@ export interface ScenarioRecipe {
   railways?: RailRoute[];
   /** Initial saved positions for generated services in temporary review worlds. */
   railwayStarts?: { id: string; x: number; target: 0 | 1 }[];
-  physics?: Partial<MovementPhysicsParams>;
+  gravity?: number;
   /** Bounded Worker timings, sampled on explicit diagnostics requests. */
   measurePhysics?: boolean;
-  /** Temporary opt-in proof; never inferred for saved game worlds. */
-  experimentalRapier?: { sections: number };
   parking?: import("../traffic/ParkingSystem.js").ParkingLot;
   trafficLanes?: Lane[];
   trafficSpeed?: number;
@@ -57,15 +56,11 @@ export const FLAT_SCENARIO = {
   seed: 1,
   preset: "grass",
 } as const;
-export function scenarioPhysics(
-  settings: Partial<MovementPhysicsParams> = {},
-): MovementPhysicsParams {
-  const result = { ...getMovementPhysicsParams(), ...settings };
-  for (const [key, value] of Object.entries(result)) {
-    if (typeof value === "number" && (!Number.isFinite(value) || value < 0 || value > 10000))
-      throw new Error(`Invalid scenario physics: ${key}`);
-  }
-  return result;
+export function scenarioGravity(recipe: ScenarioRecipe): number {
+  const gravity = recipe.gravity ?? 1;
+  if (!Number.isFinite(gravity) || gravity < 0 || gravity > 10000)
+    throw new Error("Invalid scenario gravity");
+  return gravity;
 }
 /** Apply candidate static geometry without touching replicated animation state. */
 export function applyScenarioAppearance(entity: Entity, template: Entity): void {

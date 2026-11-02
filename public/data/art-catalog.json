@@ -9557,7 +9557,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:917"
+          "source": "src/server/Realm.ts:906"
         },
         {
           "system": "Gameplay",
@@ -10485,7 +10485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:919"
+          "source": "src/server/Realm.ts:908"
         },
         {
           "system": "Gameplay",
@@ -10615,7 +10615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:919"
+          "source": "src/server/Realm.ts:908"
         },
         {
           "system": "Gameplay",
@@ -26791,7 +26791,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:38"
+          "source": "src/interiors/FurnitureMotion.ts:37"
         },
         {
           "system": "Interiors",
@@ -26837,7 +26837,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:19"
+          "source": "src/interiors/FurnitureMotion.ts:18"
         },
         {
           "system": "Interiors",
@@ -26871,15 +26871,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:21"
+          "source": "src/interiors/FurnitureMotion.ts:20"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:23"
+          "source": "src/interiors/FurnitureMotion.ts:22"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:23"
+          "source": "src/interiors/FurnitureMotion.ts:22"
         },
         {
           "system": "Interiors",
@@ -26949,7 +26949,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:44"
+          "source": "src/interiors/FurnitureMotion.ts:43"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureMotion.ts:46"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureMotion.ts:46"
         },
         {
           "system": "Interiors",
@@ -26957,19 +26965,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:47"
+          "source": "src/interiors/FurnitureMotion.ts:80"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:48"
-        },
-        {
-          "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:81"
-        },
-        {
-          "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:81"
+          "source": "src/interiors/FurnitureMotion.ts:80"
         },
         {
           "system": "Interiors",
@@ -27051,15 +27051,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:39"
+          "source": "src/interiors/FurnitureMotion.ts:38"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureMotion.ts:38"
         },
         {
           "system": "Interiors",
           "source": "src/interiors/FurnitureMotion.ts:39"
-        },
-        {
-          "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:40"
         },
         {
           "system": "Interiors",
@@ -27125,11 +27125,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:26"
+          "source": "src/interiors/FurnitureMotion.ts:25"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:29"
+          "source": "src/interiors/FurnitureMotion.ts:28"
         },
         {
           "system": "Interiors",
@@ -27203,27 +27203,27 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:31"
+          "source": "src/interiors/FurnitureMotion.ts:30"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:31"
+          "source": "src/interiors/FurnitureMotion.ts:30"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:73"
+          "source": "src/interiors/FurnitureMotion.ts:72"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:73"
+          "source": "src/interiors/FurnitureMotion.ts:72"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:89"
+          "source": "src/interiors/FurnitureMotion.ts:88"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:89"
+          "source": "src/interiors/FurnitureMotion.ts:88"
         },
         {
           "system": "Interiors",
@@ -27309,11 +27309,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:54"
+          "source": "src/interiors/FurnitureMotion.ts:53"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:90"
+          "source": "src/interiors/FurnitureMotion.ts:89"
         },
         {
           "system": "Interiors",
@@ -27363,15 +27363,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:57"
+          "source": "src/interiors/FurnitureMotion.ts:56"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:59"
+          "source": "src/interiors/FurnitureMotion.ts:58"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:91"
+          "source": "src/interiors/FurnitureMotion.ts:90"
         },
         {
           "system": "Interiors",
@@ -27417,11 +27417,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:65"
+          "source": "src/interiors/FurnitureMotion.ts:64"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:65"
+          "source": "src/interiors/FurnitureMotion.ts:64"
         },
         {
           "system": "Interiors",
@@ -27463,7 +27463,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:66"
+          "source": "src/interiors/FurnitureMotion.ts:65"
         },
         {
           "system": "Interiors",
@@ -27501,19 +27501,19 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:74"
+          "source": "src/interiors/FurnitureMotion.ts:73"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:74"
+          "source": "src/interiors/FurnitureMotion.ts:73"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:92"
+          "source": "src/interiors/FurnitureMotion.ts:91"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:92"
+          "source": "src/interiors/FurnitureMotion.ts:91"
         },
         {
           "system": "Interiors",
@@ -27579,7 +27579,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:82"
+          "source": "src/interiors/FurnitureMotion.ts:81"
         },
         {
           "system": "Interiors",
@@ -27629,7 +27629,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:30"
+          "source": "src/interiors/FurnitureMotion.ts:29"
         },
         {
           "system": "Interiors",
@@ -27663,7 +27663,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:40"
+          "source": "src/interiors/FurnitureMotion.ts:39"
         },
         {
           "system": "Interiors",
@@ -27697,7 +27697,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurnitureMotion.ts:48"
+          "source": "src/interiors/FurnitureMotion.ts:47"
         },
         {
           "system": "Interiors",
@@ -29759,7 +29759,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:917"
+          "source": "src/server/Realm.ts:906"
         },
         {
           "system": "Gameplay",
@@ -33437,7 +33437,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:811"
+          "source": "src/scenes/PlayScene.ts:807"
         },
         {
           "system": "Gameplay",
@@ -33493,7 +33493,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:811"
+          "source": "src/scenes/PlayScene.ts:807"
         },
         {
           "system": "Gameplay",
@@ -33545,7 +33545,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:811"
+          "source": "src/scenes/PlayScene.ts:807"
         },
         {
           "system": "Gameplay",
@@ -35411,11 +35411,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:142"
+          "source": "src/client/ClientStateView.ts:126"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:683"
+          "source": "src/client/ClientStateView.ts:635"
         },
         {
           "system": "Gameplay",
@@ -35467,39 +35467,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:68"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/PlayerLanding.ts:36"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/CharacterShape.ts:14"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/CharacterShape.ts:15"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:143"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:173"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:243"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:244"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/PersistentCollisionWorld.ts:291"
+          "source": "src/physics/PhysicsScene.ts:69"
         },
         {
           "system": "Gameplay",
@@ -35511,11 +35479,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:66"
+          "source": "src/scenarios/ScenarioSession.ts:79"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:207"
+          "source": "src/scenarios/ScenarioSession.ts:214"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ScenarioSession.ts:363"
         },
         {
           "system": "Gameplay",
@@ -35535,27 +35507,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/PlayerSession.ts:86"
+          "source": "src/server/PlayerSession.ts:76"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:339"
+          "source": "src/server/Realm.ts:333"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1360"
+          "source": "src/server/Realm.ts:1347"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1545"
+          "source": "src/server/Realm.ts:1531"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2258"
+          "source": "src/server/Realm.ts:2241"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2471"
+          "source": "src/server/Realm.ts:2454"
         },
         {
           "system": "Gameplay",
@@ -36659,59 +36631,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:47"
+          "source": "src/physics/PhysicsScene.ts:68"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:214"
+          "source": "src/physics/PhysicsScene.ts:197"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:67"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:196"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:203"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/VehicleCargoPhysics.ts:21"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:119"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:174"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:330"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:502"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/PersistentCollisionWorld.ts:286"
+          "source": "src/physics/PhysicsScene.ts:204"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:728"
+          "source": "src/scenes/PlayScene.ts:724"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1456"
+          "source": "src/server/Realm.ts:1442"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2435"
+          "source": "src/server/Realm.ts:2418"
         },
         {
           "system": "Gameplay",
@@ -37573,7 +37513,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:919"
+          "source": "src/server/Realm.ts:908"
         },
         {
           "system": "Gameplay",
@@ -37707,7 +37647,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:919"
+          "source": "src/server/Realm.ts:908"
         },
         {
           "system": "Gameplay",

@@ -39,11 +39,11 @@ export class ScenarioWorkerHost {
     this.publish({ id: 0, frames: [], handles: {}, error: String(error) });
   }
 
-  input(buffer: ArrayBuffer, range?: ChunkRange): void {
+  input(buffer: ArrayBuffer, range?: ChunkRange, seat: 0 | 1 = 0): void {
     this.tail = this.tail
       .then(() => {
         if (this.failed || this.mode !== "realtime" || !this.running) return;
-        this.session?.input(buffer, range);
+        this.session?.input(buffer, range, seat);
       })
       .catch((error) => this.fail(error));
   }
@@ -59,6 +59,7 @@ export class ScenarioWorkerHost {
     return {
       id,
       frames,
+      guestFrames: this.session?.takeGuestFrames() ?? [],
       handles,
       ...(id !== 0 && this.session?.recipe.measurePhysics
         ? {

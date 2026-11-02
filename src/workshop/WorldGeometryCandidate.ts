@@ -1,7 +1,7 @@
 import { sha256 } from "../art/ArtSource.js";
 import collision from "../entities/collision.ts?raw";
-import movement from "../physics/PlayerMovement.ts?raw";
-import queries from "../physics/SimulationEnvironment.ts?raw";
+import movement from "../physics/PhysicsScene.ts?raw";
+import queries from "../physics/PhysicsState.ts?raw";
 import geometry from "../physics/SurfacePatch.ts?raw";
 import support from "../physics/surfaceHeight.ts?raw";
 import excavation from "../physics/TerrainExcavation.ts?raw";

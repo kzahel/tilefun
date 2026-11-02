@@ -14,9 +14,6 @@ const output =
   path.join(os.tmpdir(), "tilefun-active-crowds");
 await mkdir(output, { recursive: true });
 const results = [];
-const characterPhysics = Number(
-  process.argv.find((arg) => arg.startsWith("--physics="))?.slice(10) ?? 0,
-);
 const syntheticCases = [
   [0, "near"],
   [24, "near"],
@@ -50,7 +47,6 @@ for (const [population, placement] of cases.filter(
           player: createPlayer(32, 32),
           actors: placement === "far" ? [] : actors,
           props: [],
-          physics: { characterPhysics },
         },
   );
   try {
@@ -106,7 +102,6 @@ for (const [population, placement] of cases.filter(
         dy: 0,
         sprinting: false,
         jump: false,
-        dtMs: 16.67,
       });
       const t = performance.now();
       realm.tick(
@@ -174,7 +169,7 @@ await writeFile(
   path.join(output, "report.json"),
   JSON.stringify(
     {
-      characterPhysics,
+      kernel: "shared-default",
       date: new Date().toISOString(),
       cpu: os.cpus()[0]?.model,
       platform: os.platform(),

@@ -72,7 +72,6 @@ it("persists a moving roof passenger, restores the ride, and removes a disconnec
         dy: 0,
         jump: false,
         sprinting: false,
-        dtMs: 1000 / 60,
       });
       realm.tick(1 / 60, transport.serverSide, false, new Set());
     }

@@ -88,8 +88,6 @@ export type ClientMessage =
       jumpPressed?: boolean;
       reversing?: boolean;
       relativeDriving?: boolean;
-      /** Command-step delta time in milliseconds (client simulation step). */
-      dtMs?: number;
     }
   | {
       type: "player-interact";

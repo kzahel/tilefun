@@ -12,7 +12,7 @@ import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { projectWorld } from "../rendering/Projection.js";
-import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
+import { quantizeAxis } from "../shared/binaryCodec.js";
 import { occupiedVehicle } from "../traffic/Driving.js";
 import {
   hasVehicleLights,
@@ -334,8 +334,7 @@ export class PlayScene implements GameScene {
     if (vehicle) rawMovement = { ...rawMovement, jump: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked && !vehicle;
-    const commandDtMs = quantizeInputDtMs(dt * 1000);
-    const commandDt = commandDtMs / 1000;
+    const commandDt = 1 / 60;
     const movement = {
       dx: quantizeAxis(rawMovement.dx),
       dy: quantizeAxis(rawMovement.dy),
@@ -362,7 +361,6 @@ export class PlayScene implements GameScene {
       jumpPressed: movement.jumpPressed,
       reversing: movement.reversing,
       relativeDriving: movement.relativeDriving,
-      dtMs: commandDtMs,
     });
 
     // Throw charge tracking
@@ -642,7 +640,6 @@ export class PlayScene implements GameScene {
       dy: 0,
       sprinting: false,
       jump: false,
-      dtMs: 0.01,
     });
   }
 

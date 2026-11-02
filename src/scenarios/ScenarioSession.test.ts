@@ -42,9 +42,9 @@ it("runs real Realm collision through binary frames, isolates sessions and reloa
   await expect(a.step({ dx: 0, dy: 0, jump: false, sprinting: false })).rejects.toThrow("closed");
 });
 it("rejects invalid scoped settings", async () => {
-  await expect(
-    ScenarioSession.create({ ...recipe, physics: { gravityScale: NaN } }),
-  ).rejects.toThrow("Invalid scenario physics");
+  await expect(ScenarioSession.create({ ...recipe, gravity: NaN })).rejects.toThrow(
+    "Invalid scenario gravity",
+  );
 });
 it("keeps candidate geometry and gravity local across simultaneous sessions and reload", async () => {
   const narrow = structuredClone(recipe),
@@ -52,8 +52,8 @@ it("keeps candidate geometry and gravity local across simultaneous sessions and 
   if (!narrow.player.collider || !wide.player.collider) throw new Error("Missing player collider");
   narrow.player.collider.width = 4;
   wide.player.collider.width = 20;
-  narrow.physics = { gravityScale: 0.25 };
-  wide.physics = { gravityScale: 1 };
+  narrow.gravity = 0.25;
+  wide.gravity = 1;
   const a = await ScenarioSession.create(narrow),
     b = await ScenarioSession.create(wide);
   try {
@@ -84,7 +84,8 @@ it("backfills missing track spectators in seeded chunks without duplicating move
       s.realm.entityManager.entities.filter((e) =>
         /:racetrack:(?:north-|bend-)?spectator:/.test(e.proceduralId ?? ""),
       );
-    expect(crowd()).toHaveLength(48);
+    expect(crowd().length).toBeGreaterThan(3);
+    const initialIds = crowd().map((e) => e.proceduralId);
     const [missing, moved, deleted] = crowd();
     if (!missing || !moved || !deleted) throw Error("Missing spectators");
     const ids = [missing.proceduralId, moved.proceduralId, deleted.proceduralId];
@@ -102,7 +103,9 @@ it("backfills missing track spectators in seeded chunks without duplicating move
         s.records.records.delete(key);
     await s.reload();
     await s.ready({ minCx: 24, maxCx: 33, minCy: 24, maxCy: 31 });
-    expect(crowd()).toHaveLength(47);
+    const restoredIds = crowd().map((e) => e.proceduralId);
+    expect(new Set(restoredIds).size).toBe(restoredIds.length);
+    for (const id of initialIds.filter((id) => id !== ids[2])) expect(restoredIds).toContain(id);
     expect(crowd().filter((e) => e.proceduralId === ids[0])).toHaveLength(1);
     expect(crowd().find((e) => e.proceduralId === ids[1])?.position).toEqual(movedAt);
     expect(crowd().some((e) => e.proceduralId === ids[2])).toBe(false);

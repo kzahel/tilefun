@@ -6,45 +6,58 @@ import type { Movement } from "../input/ActionManager.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
-import { prepareCharacterPhysics } from "../physics/CharacterPhysics.js";
 import { validateSurfacePatch } from "../physics/SurfacePatch.js";
 import { validateExcavations } from "../physics/TerrainExcavation.js";
 import { railAlignment } from "../railway/RailPath.js";
 import { RoadType } from "../road/RoadType.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
-import type { RealmSimulationOwner } from "../server/RealmSimulationOwner.js";
 import {
   decodeClientMessage,
   encodeClientMessage,
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
 import { bedWorldPoint, DUMP_BED, hasVehicleBed } from "../traffic/VehicleBed.js";
-import { LocalTransport } from "../transport/LocalTransport.js";
+import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioCommand } from "./ScenarioProtocol.js";
-import { applyScenarioAppearance, type ScenarioRecipe, scenarioPhysics } from "./ScenarioRecipe.js";
+import { applyScenarioAppearance, type ScenarioRecipe, scenarioGravity } from "./ScenarioRecipe.js";
 
 /** Temporary host of the production Realm. No timers, DOM, IndexedDB or simulation callbacks. */
 export class ScenarioSession {
-  simulationOwner: RealmSimulationOwner | undefined;
   readonly records = new MemoryRecordStore();
   private store = new RecordPersistenceStore(this.records);
-  private transport = new LocalTransport();
+  guest: PlayerSession | undefined;
+  private outgoing = new Map<string, ArrayBuffer[]>();
+  private transport: IServerTransport = {
+    send: (id, message) => {
+      const packets = this.outgoing.get(id) ?? [];
+      packets.push(encodeServerMessage(message));
+      this.outgoing.set(id, packets);
+    },
+    broadcast: (message) => {
+      for (const id of this.realm.sessions.keys()) this.transport.send(id, message);
+    },
+    onMessage() {},
+    onConnect() {},
+    onDisconnect() {},
+    close() {},
+  };
+  takeGuestFrames(): ArrayBuffer[] {
+    if (!this.guest) return [];
+    const packets = this.outgoing.get(this.guest.clientId) ?? [];
+    this.outgoing.delete(this.guest.clientId);
+    return packets;
+  }
   private randomState: number;
-  readonly physics;
+  readonly gravity;
   realm!: Realm;
   player!: PlayerSession;
   readonly handles: Record<string, number> = {};
   private seq = 0;
   private identities: Record<string, string> = {};
   private closed = false;
-  private constructor(
-    readonly recipe: ScenarioRecipe,
-    private readonly simulationFactory?: () => Promise<RealmSimulationOwner>,
-  ) {
-    if (recipe.experimentalRapier && !simulationFactory)
-      throw new Error("Experimental Rapier recipes require an explicit simulation factory");
+  private constructor(readonly recipe: ScenarioRecipe) {
     if (recipe.version !== 1) throw new Error("Unsupported scenario recipe");
     recipe.props.forEach((p, i) => {
       p.type = `scenario-prop-${i}`;
@@ -80,19 +93,15 @@ export class ScenarioSession {
       )
         throw new Error("Invalid scenario railway");
     for (const line of recipe.railways ?? []) if (line.path) railAlignment(line.path);
-    this.physics = scenarioPhysics(recipe.physics);
+    this.gravity = scenarioGravity(recipe);
     this.randomState = recipe.generation.seed;
   }
-  static async create(
-    recipe: ScenarioRecipe,
-    simulationFactory?: () => Promise<RealmSimulationOwner>,
-  ): Promise<ScenarioSession> {
+  static async create(recipe: ScenarioRecipe): Promise<ScenarioSession> {
     if (recipe.measurePhysics) {
       performanceMetrics.enabled = true;
       performanceMetrics.reset();
     }
-    await prepareCharacterPhysics(recipe.physics?.characterPhysics ?? 0);
-    const session = new ScenarioSession(structuredClone(recipe), simulationFactory);
+    const session = new ScenarioSession(structuredClone(recipe));
     try {
       await session.open(true);
       return session;
@@ -102,7 +111,6 @@ export class ScenarioSession {
     }
   }
   private async open(fresh: boolean) {
-    this.simulationOwner = await this.simulationFactory?.();
     if (fresh && this.recipe.railwayStarts) {
       if (this.recipe.railwayStarts.length > 4) throw new Error("Too many scenario train starts");
       await this.records.commit(
@@ -144,9 +152,8 @@ export class ScenarioSession {
       async deleteWorld() {},
     };
     this.realm = new Realm([baseGameMod], {
-      gravity: () => this.physics.gravityScale,
+      gravity: () => this.gravity,
       ambientSpawns: false,
-      ...(this.simulationOwner ? { simulationOwner: this.simulationOwner } : {}),
       ...(this.recipe.parking ? { parking: this.recipe.parking } : {}),
       ...(this.recipe.landscape ? { landscape: this.recipe.landscape } : {}),
       ...(this.recipe.trafficLanes
@@ -340,7 +347,30 @@ export class ScenarioSession {
         const entity = this.realm.entityManager.entities.find((e) => e.proceduralId === identity);
         if (entity) this.handles[name] = entity.id;
       }
+    for (const entity of this.realm.entityManager.entities) {
+      const template = this.recipe.actors?.find((actor) => actor.type === entity.type);
+      if (template) applyScenarioAppearance(entity, template);
+    }
     this.realm.entityManager.spatialHash.update(this.player.player);
+    this.guest = undefined;
+    if (this.recipe.guest) {
+      const guest = new PlayerSession("scenario-guest");
+      guest.editorEnabled = false;
+      await this.realm.addPlayer(guest);
+      if (fresh)
+        Object.assign(guest.player, structuredClone(this.recipe.guest), {
+          id: guest.player.id,
+          type: "player",
+        });
+      guest.player.wanderAI = null;
+      delete guest.player.routeAI;
+      guest.visibleRange = { ...this.player.visibleRange };
+      this.guest = guest;
+      this.handles.host = this.player.player.id;
+      this.handles.guest = guest.player.id;
+      this.realm.entityManager.spatialHash.update(guest.player);
+      this.realm.tick(1 / 60, this.transport, false, new Set());
+    }
   }
   private setViewRange(range?: ChunkRange) {
     if (
@@ -397,34 +427,38 @@ export class ScenarioSession {
     }
   }
   /** Normal live input admission; streaming readiness is owned by Realm.tick. */
-  input(buffer: ArrayBuffer, range?: ChunkRange) {
+  input(buffer: ArrayBuffer, range?: ChunkRange, seat: 0 | 1 = 0) {
     if (this.closed) throw new Error("Scenario is closed");
     const message = decodeClientMessage(buffer);
     if (message.type !== "player-input") throw new Error("Expected scenario player input");
-    this.setViewRange(range);
-    this.seq = Math.max(this.seq, message.seq);
-    this.realm.handleMessage(this.player.clientId, this.player, message);
+    const player = seat === 0 ? this.player : this.guest;
+    if (!player) throw Error("No guest in this scenario");
+    if (seat === 0) {
+      this.setViewRange(range);
+      this.seq = Math.max(this.seq, message.seq);
+    }
+    this.realm.handleMessage(player.clientId, player, message);
   }
   /** Synchronous production authority tick, independent of client/render cadence. */
   tick(dt: number, publish = false): ArrayBuffer[] {
     if (this.closed) throw new Error("Scenario is closed");
-    const frames: ArrayBuffer[] = [];
-    this.transport.clientSide.onMessage((message) => frames.push(encodeServerMessage(message)));
     this.applyAuthoredRailPaths();
     const started = performanceMetrics.start();
-    this.realm.tick(dt, this.transport.serverSide, publish, new Set());
+    this.realm.tick(dt, this.transport, publish, new Set());
     performanceMetrics.end("realm.tick", started);
+    const frames = this.outgoing.get(this.player.clientId) ?? [];
+    this.outgoing.delete(this.player.clientId);
     return frames;
   }
   discardInputs() {
-    this.player.lastProcessedInputSeq =
-      this.player.inputQueue.at(-1)?.seq ?? this.player.lastProcessedInputSeq;
-    this.player.inputQueue.length = 0;
+    for (const player of this.realm.sessions.values()) {
+      player.lastProcessedInputSeq = player.inputQueue.at(-1)?.seq ?? player.lastProcessedInputSeq;
+      player.inputQueue.length = 0;
+      player.controls.reset(player.lastProcessedInputSeq);
+    }
   }
   async step(input: Movement, dt = 1 / 60, range?: ChunkRange) {
     if (this.closed) throw new Error("Scenario is closed");
-    if (this.recipe.experimentalRapier && Math.abs(dt - 1 / 60) > 1e-6)
-      throw new Error("Rapier scenario inputs require fixed 60 Hz steps");
     if (
       !Number.isFinite(dt) ||
       dt <= 0 ||
@@ -435,16 +469,14 @@ export class ScenarioSession {
       throw new Error("Invalid scenario input");
     await this.ready(range);
     const message = decodeClientMessage(
-      encodeClientMessage({ type: "player-input", ...input, seq: ++this.seq, dtMs: dt * 1000 }),
+      encodeClientMessage({ type: "player-input", ...input, seq: ++this.seq }),
     );
     if (message.type !== "player-input") throw new Error("Invalid input codec");
     this.realm.handleMessage(this.player.clientId, this.player, message);
-    this.tick(this.recipe.experimentalRapier ? dt : (message.dtMs ?? dt * 1000) / 1000);
+    this.tick(1 / 60);
   }
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
-    if (this.recipe.experimentalRapier)
-      throw new Error("Rapier proof commands are owned by its experimental backend");
     if (command.kind === "vehicle-transporter-action") {
       this.realm.vehicles.transporter(this.player, command.entityId, command.action);
       return;
@@ -585,6 +617,11 @@ export class ScenarioSession {
     await this.ready(this.player.visibleRange);
   }
   frames(): ArrayBuffer[] {
+    if (this.guest)
+      this.outgoing.set(
+        this.guest.clientId,
+        this.realm.replicate(this.guest.clientId).map(encodeServerMessage),
+      );
     return this.realm.replicate(this.player.clientId).map(encodeServerMessage);
   }
   async reset() {
@@ -599,8 +636,6 @@ export class ScenarioSession {
     await this.open(true);
   }
   async reload() {
-    if (this.recipe.experimentalRapier)
-      throw new Error("Rapier durable reload is not qualified; use reset");
     const range = this.player.visibleRange;
     if (this.closed) throw new Error("Scenario is closed");
     await this.realm.flushAsync();
@@ -613,7 +648,6 @@ export class ScenarioSession {
     if (this.closed) return;
     this.closed = true;
     await this.realm?.destroy();
-    if (!this.realm) this.simulationOwner?.dispose();
-    this.transport.serverSide.close();
+    this.outgoing.clear();
   }
 }

@@ -4,7 +4,7 @@
  * Message type tags:
  *   0x0B = FrameMessage (u16 entity types, vehicle paint, opt-in bed geometry) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
- *   0x80 = player-input (client→server)
+ *   0x81 = fixed-tick player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
  *
  * All multi-byte values are little-endian. All offsets measured in bytes.
@@ -29,7 +29,7 @@ import type {
 
 const TAG_FRAME = 0x0b;
 const TAG_SYNC_CHUNKS = 0x03;
-const TAG_PLAYER_INPUT = 0x80;
+const TAG_PLAYER_INPUT = 0x81;
 const TAG_JSON = 0xff;
 
 // ---- AI state string ↔ u8 ----
@@ -1054,7 +1054,7 @@ function readWanderAIState(view: DataView, off: number): [WanderAIState, number]
 // ---- player-input encoding ----
 
 function encodePlayerInput(msg: Extract<ClientMessage, { type: "player-input" }>): ArrayBuffer {
-  const buf = new ArrayBuffer(10);
+  const buf = new ArrayBuffer(8);
   const view = new DataView(buf);
   view.setUint8(0, TAG_PLAYER_INPUT);
   view.setUint32(1, msg.seq, true);
@@ -1068,18 +1068,15 @@ function encodePlayerInput(msg: Extract<ClientMessage, { type: "player-input" }>
   if (msg.reversing) flags |= 0x08;
   if (msg.relativeDriving) flags |= 0x10;
   view.setUint8(7, flags);
-  const dtMs = quantizeInputDtMs(msg.dtMs ?? 0);
-  view.setUint16(8, Math.round(dtMs * 100), true);
   return buf;
 }
 
 function decodePlayerInput(view: DataView): ClientMessage {
+  if (view.byteLength !== 8) throw Error("Invalid fixed-tick input length");
   const seq = view.getUint32(1, true);
   const dx = view.getInt8(5) / 127;
   const dy = view.getInt8(6) / 127;
   const flags = view.getUint8(7);
-  const hasDt = view.byteLength >= 10;
-  const dtMs = hasDt ? view.getUint16(8, true) / 100 : 0;
   return {
     type: "player-input",
     seq,
@@ -1090,7 +1087,6 @@ function decodePlayerInput(view: DataView): ClientMessage {
     ...((flags & 0x04) !== 0 ? { jumpPressed: true } : {}),
     ...((flags & 0x08) !== 0 ? { reversing: true } : {}),
     ...((flags & 0x10) !== 0 ? { relativeDriving: true } : {}),
-    ...(dtMs > 0 ? { dtMs } : {}),
   };
 }
 
@@ -1365,12 +1361,6 @@ function readChunkSnapshot(
  *  process identical values. */
 export function quantizeAxis(v: number): number {
   return Math.round(Math.max(-1, Math.min(1, v)) * 127) / 127;
-}
-
-/** Quantize command dt (ms) to the binary wire precision (0.01ms, u16-backed). */
-export function quantizeInputDtMs(v: number): number {
-  const clamped = Math.max(0, Math.min(655.35, v));
-  return Math.round(clamped * 100) / 100;
 }
 
 // ---- Exports for testing ----

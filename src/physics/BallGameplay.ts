@@ -35,7 +35,7 @@ export function tickSharedBallGameplay(
     }
     if (!ball.workItem?.owner && state.grounded && Math.hypot(state.vx, state.vy) < 3)
       ball.deathTimer ??= BALL_DESPAWN_TIME;
-    if (Math.hypot(state.vx, state.vy, state.vz) < 8) continue;
+    if (scene.incomingSpeed(ball.id) < 8) continue;
     for (const id of scene.contactIds(ball.id) ?? []) {
       if (id === ball.ballThrowerId) continue;
       const other = manager.byId.get(id);
@@ -48,7 +48,7 @@ export function tickSharedBallGameplay(
   }
 }
 
-/** Gameplay hit reactions shared by collision backends; no position resolution. */
+/** Gameplay hit reactions after shared physics contacts; no position resolution. */
 export function applyBallImpact(
   entityManager: EntityManager,
   other: Entity,
