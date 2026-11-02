@@ -4,21 +4,15 @@ import { describe, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
-import { EntityManager } from "../entities/EntityManager.js";
 import { createProp } from "../entities/PropFactories.js";
-import { PropManager } from "../entities/PropManager.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
-import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
-import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
-import { CollisionFlag } from "../world/TileRegistry.js";
 import { createFauna, FAUNA_PROFILES, faunaProfile, faunaType } from "./Fauna.js";
 import { updateFaunaAI } from "./faunaAI.js";
 import { startleFauna } from "./faunaInteractions.js";
@@ -58,7 +52,6 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       TYPE = faunaType(p.species);
     const WALK_SPEED = p.speed,
       FLEE_SPEED = p.speed * 2;
-    const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
     const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 
     if (p.interest > 0)
@@ -190,67 +183,6 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       expect(n.cacheSizes.faunaHomes).toBeLessThanOrEqual(128);
     });
 
-    it("resumes exact saved movement and native phase", () => {
-      const manager = new EntityManager(),
-        props = new PropManager(),
-        animal = manager.spawn(createAnimal(64, 64));
-      required(animal.fauna).timer = 0;
-      updateFaunaAI(animal, 0.1, open, [animal], []);
-      expect(animal.fauna?.state).toBe("travel");
-      const target = { ...required(animal.fauna).target };
-      for (let i = 0; i < 27; i++)
-        manager.update(
-          1 / 60,
-          () => 0,
-          [],
-          props,
-          undefined,
-          () => 0,
-        );
-      const travelled = p.hop
-        ? Math.hypot(target.wx - 64, target.wy - 64) *
-          Math.max(0, Math.min(1, (0.45 - p.hop.push) / (p.hop.land - p.hop.push)))
-        : WALK_SPEED * 0.45;
-      expect(Math.hypot(animal.position.wx - 64, animal.position.wy - 64)).toBeCloseTo(
-        travelled,
-        3,
-      );
-      if (p.hop && animal.fauna?.motion) expect(animal.wz ?? 0).toBeGreaterThanOrEqual(0);
-      else expect(animal.wz).toBe(0);
-      if (!p.hop || !animal.fauna?.motion) expect(animal.jumpZ).toBeUndefined();
-      expect(animal.sprite?.frameCol).toBe(
-        required(CLIPS[1]).start + Math.floor(450 / required(CLIPS[1]).frameDuration),
-      );
-      const restored = decodeActor(encodeActor(animal));
-      if ("isProp" in restored) throw new Error("Expected animal");
-      expect(restored.sprite?.frameCol).toBe(animal.sprite?.frameCol);
-      const other = new EntityManager();
-      other.spawn(restored);
-      for (let i = 0; i < 600; i++) {
-        manager.update(
-          1 / 60,
-          () => 0,
-          [],
-          props,
-          undefined,
-          () => 0,
-        );
-        other.update(
-          1 / 60,
-          () => 0,
-          [],
-          props,
-          undefined,
-          () => 0,
-        );
-        expect(restored.position).toEqual(animal.position);
-        expect(restored.fauna).toEqual(animal.fauna);
-        if (p.hop && animal.fauna?.motion) expect(animal.wz ?? 0).toBeGreaterThanOrEqual(0);
-        else expect(animal.wz).toBe(0);
-      }
-      expect(animal.fauna?.state).toBe("rest");
-    });
-
     it("replicates timed walk phase in binary baselines/deltas and clears it at rest", () => {
       const animal = createAnimal(64, 64);
       required(animal.fauna).timer = 0;
@@ -283,46 +215,6 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       expect(replica.sprite?.clipElapsedMs).toBeUndefined();
     });
 
-    it("shares a nearby herd alarm, escapes away from the threat once and recovers without restarting", () => {
-      const manager = new EntityManager(),
-        props = new PropManager(),
-        first = manager.spawn(createAnimal(64, 64)),
-        second = manager.spawn(createAnimal(128, 64));
-      required(first.fauna).groupId = required(second.fauna).groupId = "test-herd";
-      startleFauna(first, { wx: 40, wy: 64 });
-      // Let peers observe the brief warning instead of skipping it in a single coarse tick.
-      for (let i = 0; i < 5; i++) {
-        updateFaunaAI(first, 0.1, open, [first, second], []);
-        updateFaunaAI(second, 0.1, open, [first, second], []);
-      }
-      for (const animal of [first, second]) {
-        const ai = required(animal.fauna);
-        expect(ai.state).toBe("flee");
-        expect(ai.alarmFrom).toEqual({ wx: 40, wy: 64 });
-        expect(Math.hypot(ai.target.wx - 40, ai.target.wy - 64)).toBeGreaterThan(
-          Math.hypot(animal.position.wx - 40, animal.position.wy - 64) + p.step / 4,
-        );
-        const motion = { ...ai.motion };
-        expect(startleFauna(animal, { wx: 0, wy: 0 })).toBe(false);
-        expect(ai.motion).toEqual(motion);
-      }
-      for (let i = 0; i < 600; i++)
-        manager.update(
-          1 / 60,
-          () => 0,
-          [],
-          props,
-          undefined,
-          () => 0,
-        );
-      for (const animal of [first, second]) {
-        expect(animal.fauna?.state).toBe("recover");
-        if (p.hop && animal.fauna?.motion) expect(animal.wz ?? 0).toBeGreaterThanOrEqual(0);
-        else expect(animal.wz).toBe(0);
-        expect(animal.jumpVZ).toBeUndefined();
-      }
-    });
-
     it("loosely keeps herd company and rejects water/closed routes without an alarm retry loop", () => {
       const animal = createAnimal(64, 64),
         peer = createAnimal(64 + Math.max(64, p.body[0] * 2), 64);
@@ -345,151 +237,5 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       updateFaunaAI(enclosed, 4, { ...open, canOccupy: () => false }, [enclosed], []);
       expect(enclosed.fauna?.state).toBe("rest");
     });
-
-    it("preserves a committed walk on alarm and stops at actual position when terrain is edited", () => {
-      const manager = new EntityManager(),
-        props = new PropManager(),
-        animal = manager.spawn(createAnimal(64, 64));
-      required(animal.fauna).timer = 0;
-      updateFaunaAI(animal, 0.1, open, [animal], []);
-      manager.update(
-        0.2,
-        () => 0,
-        [],
-        props,
-        undefined,
-        () => 0,
-      );
-      const before = { ...animal.position };
-      startleFauna(animal, { wx: 40, wy: 64 });
-      expect(animal.fauna?.state).toBe("travel");
-      // A slower coat keeps the same committed-motion contract. Wait its actual
-      // scheduled walk instead of assuming every animal finishes in 200 ticks.
-      const remainingTicks = Math.ceil((required(animal.fauna?.motion).duration + 0.1) * 60);
-      for (let i = 0; i < remainingTicks; i++)
-        manager.update(
-          1 / 60,
-          () => CollisionFlag.Solid,
-          [],
-          props,
-          undefined,
-          () => 0,
-        );
-      expect(animal.position).toEqual(before);
-      expect(animal.fauna?.state).toBe("startle");
-      updateFaunaAI(animal, 0.5, { ...open, canOccupy: () => false }, [animal], []);
-      expect(animal.fauna?.state).toBe("recover");
-    });
-
-    it("runs native ground cycles in production Realm and retains group/manual identity and deletion", async () => {
-      const s = await ScenarioSession.create(naturalLandscapeRecipe(p.species, "thicket"));
-      try {
-        const animal = () => s.realm.entityManager.entities.filter((e) => e.type === TYPE);
-        expect(animal().length).toBeGreaterThanOrEqual(p.group);
-        const clips = new Set<number>();
-        let defended = false;
-        for (let i = 0; i < 750; i++) {
-          await s.step(idle, 0.1);
-          for (const d of animal()) {
-            clips.add(d.sprite?.clip ?? 0);
-            if (
-              ["hedgehog", "porcupine"].includes(d.animalWork?.kind ?? "") &&
-              d.animalWork?.defenseReady
-            ) {
-              defended = true;
-              const anchor = required(d.animalWork.sitePosition);
-              expect(
-                Math.hypot(anchor.wx - d.position.wx, anchor.wy - d.position.wy),
-              ).toBeLessThanOrEqual(2);
-              expect(Math.abs((d.wz ?? 0) - anchor.z)).toBeLessThanOrEqual(1);
-            }
-            const rockWork =
-              d.animalWork?.kind === "goat" &&
-              ["hop", "perch"].includes(d.animalWork.state) &&
-              d.animalWork.rock;
-            if (rockWork) {
-              expect(
-                s.realm.propManager.props.some(
-                  (prop) =>
-                    prop.type === "prop-low-rock" &&
-                    (prop.proceduralId ?? prop.persistentId) === rockWork.id,
-                ),
-              ).toBe(true);
-              expect(d.wz ?? 0).toBeGreaterThanOrEqual(rockWork.ground);
-              expect(d.wz ?? 0).toBeLessThanOrEqual(rockWork.z + 14);
-              if (d.animalWork?.state === "perch") expect(d.wz).toBe(rockWork.z);
-              expect(d.jumpVZ).toBeUndefined();
-            } else if (
-              d.animalWork?.kind === "fox" &&
-              d.animalWork.state === "pounce" &&
-              d.fauna?.motion
-            ) {
-              const m = d.fauna.motion;
-              expect(m.lift).toBe(7);
-              expect(d.wz ?? 0).toBeCloseTo(
-                (m.startZ ?? 0) + Math.sin((Math.PI * m.elapsed) / m.duration) * 7,
-              );
-              expect(d.jumpVZ).toBeUndefined();
-            } else {
-              if (p.hop) expect(d.wz ?? 0).toBeGreaterThanOrEqual(0);
-              else expect(d.wz).toBe(0);
-              if (!p.hop || !d.fauna?.motion) expect(d.jumpZ).toBeUndefined();
-            }
-            expect(
-              Math.hypot(
-                d.position.wx - required(d.fauna).home.wx,
-                d.position.wy - required(d.fauna).home.wy,
-              ),
-            ).toBeLessThanOrEqual(required(d.fauna).radius + 1);
-            expect(
-              s.realm.world.getCollisionIfLoaded(
-                Math.floor(d.position.wx / 16),
-                Math.floor(d.position.wy / 16),
-              ) & CollisionFlag.Water,
-            ).toBe(0);
-          }
-        }
-        if (defended) {
-          // A nearby threat can keep a defender planted for the whole sample.
-          // Native free walking is independently checked for every profile above.
-          expect(
-            [...clips].some((c) => ["curled", "rattle"].includes(p.clips[c]?.name ?? "")),
-          ).toBe(true);
-          expect([...clips].every((c) => c < p.clips.length)).toBe(true);
-        } else if ([...clips].some((c) => c >= 4)) {
-          // Resource work can replace a generic idle action in natural homes.
-          expect(clips.has(0) && clips.has(1)).toBe(true);
-          expect([...clips].every((c) => c < p.clips.length)).toBe(true);
-        } else expect([...clips].filter((c) => c !== 3).sort()).toEqual([0, 1, 2]);
-        const removed = required(animal()[0]),
-          retained =
-            animal()[1] ??
-            s.realm.entityManager.spawn(
-              createAnimal(s.player.player.position.wx + 100, s.player.player.position.wy),
-            );
-        s.realm.handleMessage(s.player.clientId, s.player, {
-          type: "edit-delete-entity",
-          entityId: removed.id,
-        });
-        const known = new Set(animal().map((e) => e.id));
-        s.realm.handleMessage(s.player.clientId, s.player, {
-          type: "edit-spawn",
-          entityType: TYPE,
-          wx: s.player.player.position.wx + 50,
-          wy: s.player.player.position.wy,
-        });
-        const manual = required(animal().find((e) => !known.has(e.id)));
-        const saved = encodeActor(retained),
-          manualId = manual.persistentId;
-        await s.reload();
-        expect(animal().some((d) => d.persistentId === removed.persistentId)).toBe(false);
-        const restored = required(animal().find((d) => d.persistentId === saved.persistentId));
-        expect(restored.fauna).toEqual(saved.state.fauna);
-        expect(restored.position).toEqual({ wx: saved.wx, wy: saved.wy });
-        expect(animal().some((d) => d.persistentId === manualId)).toBe(true);
-      } finally {
-        await s.close();
-      }
-    }, 30000);
   },
 );

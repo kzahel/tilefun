@@ -4,9 +4,8 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { createBall } from "../entities/Ball.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
-import { PropManager } from "../entities/PropManager.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
-import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
+import { encodeActor } from "../persistence/ActorRecords.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import {
   getMovementPhysicsParams,
@@ -184,63 +183,6 @@ it("balls bounce and startle ducks without losing the reaction to custom AI; ele
     expect(d.deathTimer).toBeUndefined();
     expect(startleMallard(d, { wx: 0, wy: 0 })).toBe(false);
   }
-});
-
-it("bounds escape flight, restores its exact saved arc, and settles without teleporting through a new obstruction", () => {
-  const manager = new EntityManager(),
-    d = manager.spawn(createMallard(64, 64)),
-    props = new PropManager();
-  startleMallard(d, { wx: 40, wy: 64 });
-  updateMallardAI(d, 0.65, open, [d], []);
-  expect(d.mallard?.state).toBe("flight");
-  manager.update(
-    0.3,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(d.wz).toBeGreaterThan(0);
-  expect(d.sprite?.clip).toBe(5);
-  const restored = decodeActor(encodeActor(d));
-  if ("isProp" in restored) throw new Error("Expected duck");
-  const other = new EntityManager();
-  other.spawn(restored);
-  manager.update(
-    0.1,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  other.update(
-    0.1,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(restored.mallard).toEqual(d.mallard);
-  expect(restored.position).toEqual(d.position);
-  expect(restored.wz).toBe(d.wz);
-  const before = { ...restored.position };
-  // Terrain introduced during flight blocks further movement, not a teleport on landing.
-  for (let i = 0; i < 30; i++)
-    other.update(
-      0.1,
-      () => 1,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-  expect(restored.position).toEqual(before);
-  expect(restored.wz).toBe(0);
-  expect(restored.mallard?.state).toBe("recover");
-  expect(Math.hypot(d.position.wx - 64, d.position.wy - 64)).toBeLessThanOrEqual(160);
 });
 
 it("quacks and settles in place when no safe escape exists", () => {

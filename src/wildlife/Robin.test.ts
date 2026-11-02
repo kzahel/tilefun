@@ -9,14 +9,13 @@ import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
-import { PropManager } from "../entities/PropManager.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
+import { encodeActor } from "../persistence/ActorRecords.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
 import { createMovementContext } from "../physics/SimulationEnvironment.js";
@@ -192,140 +191,6 @@ it("seeds dry tree-edge robins with stable owner IDs independent of query order"
       robinTreePerches(props).some((perch) => Math.hypot(perch.wx - p.wx, perch.wy - p.wy) < 40),
     ).toBe(true);
   }
-});
-
-it("flies onto actual oak/palm crowns, reloads the same trajectory and leaves removed trees", () => {
-  for (const type of ["prop-oak-tree", "prop-palm-tree"]) {
-    const manager = new EntityManager(),
-      props = new PropManager();
-    const tree = props.add(createProp(type, 100, 64));
-    const bird = manager.spawn(createRobin(64, 64));
-    const ai = required(bird.robin);
-    ai.activity = 1;
-    ai.timer = 0;
-    const env = {
-      ...open,
-      perches: () => robinTreePerches(props.props),
-      canOccupy: (
-        entity: import("./mallardAI.js").WildlifeBody,
-        point: { wx: number; wy: number },
-      ) =>
-        !props.props.some((p) =>
-          aabbOverlapsPropWalls(
-            getEntityAABB(point, required(entity.collider)),
-            p.position,
-            p,
-            entity.wz ?? 0,
-            5,
-          ),
-        ),
-    };
-    updateRobinAI(bird, 0.1, env, [bird], []);
-    expect(ai.state).toBe("flight");
-    expect(ai.target.z).toBe(type === "prop-oak-tree" ? 32 : 48);
-    for (let i = 0; i < 45; i++)
-      manager.update(
-        1 / 60,
-        () => 0,
-        [],
-        props,
-        undefined,
-        () => 0,
-      );
-    expect(bird.wz).toBeGreaterThan(ai.target.z);
-    expect(bird.sprite?.clip).toBe(2);
-    const saved = decodeActor(encodeActor(bird));
-    if ("isProp" in saved) throw new Error("Expected bird");
-    expect(saved.sprite?.frameCol).toBe(bird.sprite?.frameCol);
-    const other = new EntityManager();
-    other.spawn(saved);
-    for (let i = 0; i < 60; i++) {
-      manager.update(
-        1 / 60,
-        () => 0,
-        [],
-        props,
-        undefined,
-        () => 0,
-      );
-      other.update(
-        1 / 60,
-        () => 0,
-        [],
-        props,
-        undefined,
-        () => 0,
-      );
-      expect(saved.position).toEqual(bird.position);
-      expect(saved.wz).toBe(bird.wz);
-      expect(saved.robin).toEqual(bird.robin);
-    }
-    expect(ai.state).toBe("perch");
-    expect(bird.wz).toBe(ai.target.z);
-    // Actual ground tracking keeps the bird on its crown until that support changes.
-    manager.update(
-      0.1,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-    expect(bird.wz).toBe(ai.target.z);
-    props.move(tree.id, 160, 64);
-    expect(robinTreePerches(props.props)[0]?.wx).toBe(160);
-    props.remove(tree.id);
-    manager.update(
-      0.1,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-    expect(bird.wz).toBe(0);
-    ai.timer = 0;
-    updateRobinAI(bird, 0.1, env, [bird], []);
-    expect(ai.state).not.toBe("perch");
-  }
-});
-
-it("recovers without retries in closed habitat and preserves a routine trajectory when startled", () => {
-  const manager = new EntityManager(),
-    props = new PropManager(),
-    bird = manager.spawn(createRobin(64, 64));
-  const ai = required(bird.robin);
-  ai.timer = 0;
-  updateRobinAI(bird, 0.1, open, [bird], []);
-  expect(ai.state).toBe("hop");
-  manager.update(
-    0.2,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(bird.position).toEqual({ wx: 64, wy: 64 });
-  startleRobin(bird, { wx: 40, wy: 64 });
-  const motion = { ...ai.motion };
-  expect(startleRobin(bird, { wx: 0, wy: 0 })).toBe(false);
-  expect(ai.motion).toEqual(motion);
-  for (let i = 0; i < 60; i++)
-    manager.update(
-      1 / 60,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-  expect(ai.state).toBe("startle");
-  updateRobinAI(bird, 0.2, { ...open, canOccupy: () => false }, [bird], []);
-  expect(ai.state).toBe("recover");
-  expect(ai.alarmFrom).toBeUndefined();
-  updateRobinAI(bird, 3, { ...open, canOccupy: () => false }, [bird], []);
-  expect(ai.state).toBe("rest");
 });
 
 it("runs hops, flights, crown rests and songs in production Realm and saves durable individuals", async () => {

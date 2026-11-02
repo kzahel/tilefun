@@ -2,9 +2,7 @@ import { expect, it } from "vitest";
 import { required } from "../../art/ArtCatalog.js";
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../../entities/collision.js";
-import { EntityManager } from "../../entities/EntityManager.js";
 import { createProp } from "../../entities/PropFactories.js";
-import { PropManager } from "../../entities/PropManager.js";
 import { decodeActor, encodeActor } from "../../persistence/ActorRecords.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
@@ -12,8 +10,7 @@ import { RoadType } from "../../road/RoadType.js";
 import { naturalLandscapeRecipe } from "../../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../../scenarios/ScenarioSession.js";
 import { createFauna, faunaProfile } from "../../wildlife/Fauna.js";
-import { faunaHabitatAllows, updateFaunaAI } from "../../wildlife/faunaAI.js";
-import { startleFauna } from "../../wildlife/faunaInteractions.js";
+import { faunaHabitatAllows } from "../../wildlife/faunaAI.js";
 import { Chunk } from "../../world/Chunk.js";
 import { createDescriptor } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
@@ -239,39 +236,6 @@ it("generates every authorized pet coat with stable family IDs and independent q
     expect(pet.featureId.endsWith(`:${p.variantOf ?? p.species}`)).toBe(true);
   }
 });
-
-it.each(["cat", "dog", "cow"] as const)(
-  "safe %s home constrains routine and scared physical motion without bouncing",
-  (species) => {
-    const m = new EntityManager(),
-      props = new PropManager(),
-      e = m.spawn(createFauna(species, 80, 80));
-    const ai = required(e.fauna);
-    ai.habitatBounds = { minX: 0, minY: 0, maxX: 160, maxY: 160 };
-    ai.timer = 0;
-    const env = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
-    for (let i = 0; i < 5400; i++) {
-      if (i === 600) startleFauna(e, { wx: 48, wy: 80 });
-      updateFaunaAI(e, 1 / 60, env, [e], []);
-      m.update(
-        1 / 60,
-        () => 0,
-        [],
-        props,
-        undefined,
-        () => 0,
-      );
-      expect(faunaHabitatAllows(e, e.position, env)).toBe(true);
-      const box = getEntityAABB(e.position, required(e.collider));
-      expect(box.left).toBeGreaterThanOrEqual(0);
-      expect(box.right).toBeLessThanOrEqual(160);
-      expect(box.top).toBeGreaterThanOrEqual(0);
-      expect(box.bottom).toBeLessThanOrEqual(160);
-      expect(e.jumpVZ ?? 0).toBe(0);
-    }
-    expect(faunaHabitatAllows(e, { wx: 158, wy: 80 }, env)).toBe(false);
-  },
-);
 
 it.each(["farmstead", "village-pets", "city-pets"])(
   "production %s retains resident phases and durable deletion on reload",

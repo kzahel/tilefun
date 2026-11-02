@@ -346,6 +346,7 @@ export class GameServer {
           const realm = this.realms.get(existingSession.realmId ?? "");
           if (!realm) return;
           existingSession.lastProcessedInputSeq = 0;
+          existingSession.controls.reset(0);
           existingSession.inputQueue = [];
           this.transport.send(clientId, {
             type: "player-assigned",

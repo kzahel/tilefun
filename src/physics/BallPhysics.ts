@@ -1,9 +1,6 @@
 import {
   BALL_DESPAWN_TIME,
   BALL_GRAVITY,
-  BALL_PUSH_SPEED,
-  BALL_SCARE_DURATION,
-  BALL_SCARE_KNOCKBACK,
   BOUNCE_FRICTION,
   BOUNCE_RESTITUTION,
   BOUNCE_STOP_VZ,
@@ -14,24 +11,19 @@ import {
 import { aabbOverlapsSolid, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import { createGem } from "../entities/Gem.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { hasVehicleBed, vehicleBedMovementBlocks } from "../traffic/VehicleBed.js";
 import { slideOnVehicleBed } from "../traffic/VehicleBedSlide.js";
-import { startleDeer } from "../wildlife/deerInteractions.js";
-import { startleFauna } from "../wildlife/faunaInteractions.js";
-import { startleFrog } from "../wildlife/frogInteractions.js";
-import { startleMallard } from "../wildlife/mallardInteractions.js";
-import { startlePredator } from "../wildlife/predatorAI.js";
-import { startleRabbit } from "../wildlife/rabbitInteractions.js";
-import { startleRobin } from "../wildlife/robinInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { zRangesOverlap } from "./AABB3D.js";
+import { applyBallImpact } from "./BallGameplay.js";
 import {
   getSurfaceZ,
   resolveGroundZForLanding,
   resolveGroundZForTracking,
 } from "./surfaceHeight.js";
+
+export { applyBallImpact } from "./BallGameplay.js";
 
 const WALL_MASK = CollisionFlag.Solid;
 
@@ -272,58 +264,5 @@ export function tickBallPhysics(
 
   for (const id of toRemove) {
     entityManager.remove(id);
-  }
-}
-
-/** Gameplay hit reactions shared by collision backends; no position resolution. */
-export function applyBallImpact(
-  entityManager: EntityManager,
-  other: Entity,
-  ball: Entity,
-  hitNx: number,
-  hitNy: number,
-) {
-  // Kill hostile entities (angry ghosts etc.)
-  const ai = other.wanderAI;
-  if (ai?.hostile && other.deathTimer === undefined) {
-    other.deathTimer = 0.4;
-    ai.hostile = false;
-    other.tags?.delete("hostile");
-    ai.state = "idle";
-    if (other.velocity) {
-      other.velocity.vx = 0;
-      other.velocity.vy = 0;
-    }
-    entityManager.spawn(createGem(other.position.wx, other.position.wy));
-  } else if (other.predator) {
-    startlePredator(other, ball.position);
-  } else if (other.fauna) {
-    startleFauna(other, ball.position);
-  } else if (other.deer) {
-    startleDeer(other, ball.position);
-  } else if (other.robin) {
-    startleRobin(other, ball.position);
-  } else if (other.rabbit) {
-    startleRabbit(other, ball.position);
-  } else if (other.frog) {
-    startleFrog(other, ball.position);
-  } else if (other.mallard) {
-    startleMallard(other, ball.position);
-  } else if (ai && !ai.hostile) {
-    // Scare NPCs (non-hostile entities with wander AI)
-    if (other.velocity) {
-      other.velocity.vx += hitNx * BALL_SCARE_KNOCKBACK;
-      other.velocity.vy += hitNy * BALL_SCARE_KNOCKBACK;
-    }
-    ai.state = "scared";
-    ai.scaredTimer = BALL_SCARE_DURATION;
-    delete ai.scaredSpeed;
-    ai.dirX = hitNx;
-    ai.dirY = hitNy;
-    ai.timer = 0.3;
-    if (other.sprite) other.sprite.moving = true;
-  } else if (other.velocity) {
-    other.velocity.vx += hitNx * BALL_PUSH_SPEED;
-    other.velocity.vy += hitNy * BALL_PUSH_SPEED;
   }
 }

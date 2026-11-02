@@ -19,9 +19,10 @@ export function updateFaunaAI(
   players: readonly PositionComponent[],
   planning?: AiPlanningScheduler,
 ): void {
+  animal.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = animal.fauna,
     p = faunaProfile(animal.type),
-    velocity = animal.velocity;
+    velocity = animal.desiredVelocity;
   if (!ai || !velocity || !animal.sprite || !p) return;
   if (animal.wanderAI?.state === "ridden") return;
   syncFaunaWater(animal, environment.isWater(animal.position));

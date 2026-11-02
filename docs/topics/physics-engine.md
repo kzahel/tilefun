@@ -1,6 +1,6 @@
 # General 3D physics backend
 
-Status: autonomous shared-physics reset active; existing proof failed CPU gate, legacy default pending replacement.
+Status: autonomous reset active; ordinary authority uses one shared Rapier step; client prediction/deletion/qualification in progress.
 Updated: 2026-11-02.
 
 Owns the physics-backend replacement direction. [World geometry](world-geometry.md)
@@ -22,7 +22,16 @@ actual Chromebook evidence and final review. The reset is not complete until the
 normal default is shared physics and old solvers/dispatch are deleted. Prior plans
 and measurements below are history/reference, not a compatibility checklist.
 
-## Replacement direction and early decision (201)
+The current authority checkpoint removes Realm's per-command integration and
+EntityManager's separate collision/ground/separation phase. Players, NPCs, balls
+and basic cars now share `PhysicsScene` through ordinary ScenarioSession/Realm
+startup; AI supplies intent and readback owns poses. Native contact, input, AI,
+lifecycle, car save/reload and ball lifetime checks pass. **Client prediction still
+uses the old implementation**, so this is not a ready playable reset. Protocol/
+bounded replay, remaining peripheral writers and legacy deletion, Worker/P2P,
+Chromebook evidence and review remain. See 205 for exact test dispositions/evidence.
+
+## Historical replacement direction and early decision (201)
 
 Owner direction, 2026-11-02: qualify Rapier as the replacement, then make it the
 default and delete legacy collision if basic gameplay and Chromebook performance
@@ -42,16 +51,17 @@ Legacy collision mode exists only for temporary comparison. It must not silently
 resolve unsupported contacts in exclusive Rapier mode. Current gameplay
 controllers may survive while their duplicate collision/support solvers retire.
 
-The default remains legacy today. [202](../tactical/202-persistent-realm-collision-proof.md)
+Before reset 205 the default remained legacy. [202](../tactical/202-persistent-realm-collision-proof.md)
 implements the persistent controlled-collision proof through the early decision;
 the older on-foot-only modes below retain their disposable reference scenes.
 Qualification uses the ordinary Worker game and a physical Chromebook. Default
 cutover and legacy deletion belong to the same bounded milestone; new tumbling
 cars follow that cleanup.
 
-## Persistent realm proof (202)
+## Historical persistent realm proof (202)
 
-`?physics=rapier-world&hull=box|capsule` selects experimental startup modes 3/4.
+The 202 proof used `?physics=rapier-world&hull=box|capsule` for modes 3/4.
+Normal startup no longer selects a backend or hull from these URL parameters.
 The shared [Realm physics fixture](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=realm#/tool/world-geometry)
 offers a normal Worker/rendered comparison. Persistent section geometry, controlled
 NPC/player contacts, one upright controlled car and ordinary ball collision use

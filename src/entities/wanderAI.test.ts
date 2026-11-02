@@ -18,8 +18,8 @@ describe("updateWanderAI", () => {
     updateWanderAI(c, 0.1, Math.random);
     // Still idle, timer was 2.0 so 0.1 won't expire it
     expect(c.wanderAI?.state).toBe("idle");
-    expect(c.velocity?.vx).toBe(0);
-    expect(c.velocity?.vy).toBe(0);
+    expect(c.desiredVelocity?.vx).toBe(0);
+    expect(c.desiredVelocity?.vy).toBe(0);
   });
 
   it("transitions to walking after idle timer expires", () => {
@@ -42,19 +42,20 @@ describe("updateWanderAI", () => {
     expect(c.wanderAI?.state).toBe("idle");
   });
 
-  it("sets velocity during walking state", () => {
+  it("sets movement intent during walking state", () => {
     const c = createChicken(0, 0);
     const rng = makeRandom([0.5, 0.0]); // angle = 0 → dirX=1, dirY=0
     updateWanderAI(c, 2.1, rng);
-    expect(c.velocity?.vx).not.toBe(0);
+    expect(c.desiredVelocity?.vx).not.toBe(0);
+    expect(c.velocity?.vx).toBe(0);
     expect(c.wanderAI?.state).toBe("walking");
   });
 
-  it("clears velocity during idle state", () => {
+  it("clears movement intent during idle state", () => {
     const c = createChicken(0, 0);
     updateWanderAI(c, 0.5, Math.random);
-    expect(c.velocity?.vx).toBe(0);
-    expect(c.velocity?.vy).toBe(0);
+    expect(c.desiredVelocity?.vx).toBe(0);
+    expect(c.desiredVelocity?.vy).toBe(0);
   });
 
   it("updates sprite moving flag", () => {
@@ -119,7 +120,7 @@ describe("updateWanderAI", () => {
     expect(p.wanderAI).toBeNull();
     // Should not throw
     updateWanderAI(p, 1.0, Math.random);
-    expect(p.velocity?.vx).toBe(0);
+    expect(p.desiredVelocity?.vx).toBe(0);
   });
 });
 

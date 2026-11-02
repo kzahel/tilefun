@@ -3,9 +3,10 @@ import { directionFromVelocity } from "./wanderAI.js";
 
 /** Follow short planned, walkable routes through normal entity collision and animation. */
 export function updateRouteAI(entity: Entity, dt: number): void {
+  entity.desiredVelocity ??= { vx: 0, vy: 0 };
   const route = entity.routeAI,
     ai = entity.wanderAI,
-    velocity = entity.velocity;
+    velocity = entity.desiredVelocity;
   if (!route || !ai || !velocity || !route.points.length) return;
   velocity.vx = 0;
   velocity.vy = 0;

@@ -1,27 +1,6 @@
-import { TerrainId } from "../autotile/TerrainId.js";
-import {
-  CHUNK_SIZE_PX,
-  DEFAULT_PHYSICAL_HEIGHT,
-  STEP_UP_THRESHOLD,
-  TILE_SIZE,
-} from "../config/constants.js";
-import { zRangesOverlap } from "../physics/AABB3D.js";
-import {
-  applyGroundTracking,
-  isElevationBlocked3D,
-  resolveGroundZForLanding,
-  resolveGroundZForTracking,
-} from "../physics/surfaceHeight.js";
-import {
-  hasDetailedVehicleSurface,
-  hasVehicleBed,
-  vehicleBedMovementBlocks,
-} from "../traffic/VehicleBed.js";
-import { isLooseCargo } from "../traffic/VehicleCargo.js";
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
-import { faunaProfile } from "../wildlife/Fauna.js";
 import { prepareFaunaTravel, settleFauna, syncFaunaWater } from "../wildlife/faunaInteractions.js";
-import { prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
+import { FROG_HOP_DURATION, prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
 import { preparePredatorFlight, settlePredatorFlight } from "../wildlife/PredatorMotion.js";
 import {
@@ -30,33 +9,14 @@ import {
   settleRabbit,
 } from "../wildlife/rabbitInteractions.js";
 import { prepareRobinMotion, settleRobin } from "../wildlife/robinInteractions.js";
-import { controlsTreeHeight } from "../wildlife/TreeClimbing.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { CollisionIndex } from "./CollisionIndex.js";
-import type { AABB } from "./collision.js";
-import {
-  aabbLacksWater,
-  aabbOverlapsPropWalls,
-  aabbsOverlap,
-  getEntityAABB,
-  getSpeedMultiplier,
-  resolveCollision,
-  separateOverlappingEntities,
-} from "./collision.js";
 import type { Entity } from "./Entity.js";
-import { ENTITY_DEFS } from "./EntityDefs.js";
-import type { Prop } from "./Prop.js";
-import type { PropManager } from "./PropManager.js";
-import { COLLISION_CROWD_SIZE, SpatialHash } from "./SpatialHash.js";
+import { SpatialHash } from "./SpatialHash.js";
 import { setSpriteClipElapsed, tickSpriteAnimation } from "./spriteAnimation.js";
 import { onWanderBlocked } from "./wanderAI.js";
 
-/** Player speed multiplier while pushing an entity. */
-const PUSH_PLAYER_SPEED_MULT = 0.5;
-
 export class EntityManager {
-  /** Live only during replacement NPC movement; updated after every committed pose. */
-  physicsNeighborhood: ((bounds: AABB) => readonly Entity[]) | undefined;
   readonly wildlifeRespawns = new Map<
     string,
     import("../wildlife/WildlifeRespawns.js").PendingWildlifeRespawn
@@ -100,6 +60,7 @@ export class EntityManager {
   /** Add an entity to the world. Assigns a unique id. */
   spawn(entity: Entity): Entity {
     this.beforeSpawn?.(entity);
+    if (entity.velocity) entity.desiredVelocity ??= { vx: 0, vy: 0 };
     entity.id = this.nextId++;
     this.entities.push(entity);
     this.byId.set(entity.id, entity);
@@ -120,244 +81,18 @@ export class EntityManager {
     this.nextId = Math.max(this.nextId, entity.id + 1);
   }
 
-  /**
-   * Update all entities: apply velocity with collision, tick animation.
-   * @param players One or more player entities. In local mode this is a
-   *   single-element array; in multiplayer it contains all active players.
-   * @param entityTickDts If provided, only entities in this map are ticked,
-   *   using their per-entity dt (accumulated from tick tiering).
-   *   Entities not in the map are frozen. If omitted, all entities tick with `dt`.
-   * @param skipEntityIds Optional entity IDs to freeze for this update pass.
-   * @param getTerrain Base terrain for deep-water-only body collision; supplied by production Realm.
-   * @param playerContactOwnerIds Players whose contact response belongs to another solver.
-   * Collision/height/terrain callbacks must keep geometry stable during each synchronous
-   * NPC resolution, including across position and momentum changes between its axes.
-   */
-  update(
+  /** Species/AI produce intent, never an independently committed physical pose. */
+  collectMotionIntents(
+    active: readonly Entity[],
     dt: number,
-    getCollision: (tx: number, ty: number) => number,
-    players: readonly Entity[],
-    propManager: PropManager,
-    entityTickDts?: ReadonlyMap<Entity, number>,
-    getHeight?: (tx: number, ty: number) => number,
-    skipEntityIds?: ReadonlySet<number>,
-    getTerrain?: (tx: number, ty: number) => number,
-    playerContactOwnerIds?: ReadonlySet<number>,
-    collisionMotor?: (entity: Entity, dt: number, speedMultiplier: number) => boolean,
-  ): void {
-    const playerSet = new Set(players);
-    // AI can consume/despawn an admitted actor before physics starts. Never
-    // reinsert that stale tick entry into spatial interest or collision indexes.
-    const active = entityTickDts
-      ? [...entityTickDts.keys()].filter((e) => this.byId.get(e.id) === e)
-      : this.entities;
-    // Sparse chunk queries are already short. Pay the resident-index build cost
-    // only when a queried neighborhood can contain a crowded origin bucket.
-    const useCollisionIndex =
-      active.length >= COLLISION_CROWD_SIZE &&
-      this.spatialHash.hasCrowdedCells() &&
-      active.some((entity) => {
-        if (!entity.collider || entity.collider.solid === false) return false;
-        const { wx, wy } = entity.position;
-        return (
-          this.spatialHash.getCell(Math.floor(wx / CHUNK_SIZE_PX), Math.floor(wy / CHUNK_SIZE_PX))
-            .length >= COLLISION_CROWD_SIZE
-        );
-      });
-    if (useCollisionIndex) this.collisionIndex.rebuild(this.entities);
-    const balls = collisionMotor
-      ? this.entities.filter((e) => e.type === "ball" && e.collider && e.parentId === undefined)
-      : [];
-    this.physicsNeighborhood =
-      collisionMotor && useCollisionIndex
-        ? (bounds) => {
-            const nearby = this.collisionIndex.query(bounds);
-            for (const ball of balls)
-              if (
-                ball.collider &&
-                aabbsOverlap(bounds, getEntityAABB(ball.position, ball.collider))
-              )
-                nearby.push(ball);
-            return nearby;
-          }
-        : undefined;
-
-    // Save previous positions for render interpolation (only for ticking entities)
+    getCollision: (x: number, y: number) => number,
+  ) {
+    const intents = new Map<number, import("../physics/PhysicsScene.js").MotionIntent>();
     for (const entity of active) {
-      if (entityTickDts && !entityTickDts.has(entity)) continue;
-      entity.prevPosition = { wx: entity.position.wx, wy: entity.position.wy };
-    }
-    // Players may not be in this.entities (they're passed separately)
-    for (const player of players) {
-      player.prevPosition = { wx: player.position.wx, wy: player.position.wy };
-    }
-
-    const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
-
-    // Helper: check if an AABB overlaps any prop's wall segments (or single collider)
-    const overlapsAnyProp = (aabb: AABB, entityWz?: number, entityHeight?: number): boolean => {
-      const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
-      const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
-      const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
-      const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
-      for (const prop of propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
-        if (aabbOverlapsPropWalls(aabb, prop.position, prop, entityWz, entityHeight)) {
-          return true;
-        }
-      }
-      return false;
-    };
-
-    // Helper: build extra-blocker for resolveCollision (props + other entities).
-    // Uses spatial hash for nearby entity lookups instead of scanning all entities.
-    // When self is airborne (jumping), small entities (spriteHeight <= 32) are skipped.
-    const makeExtraBlocker =
-      (self: Entity, alsoExclude?: Entity) =>
-      (aabb: AABB): boolean => {
-        const selfWz = self.wz ?? 0;
-        const selfHeight = self.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-        if (overlapsAnyProp(aabb, selfWz, selfHeight)) return true;
-        if (getHeight) {
-          // Airborne entities can't step up â€” must be above terrain to pass
-          const elevStepUp = self.jumpVZ !== undefined ? 0 : STEP_UP_THRESHOLD;
-          if (isElevationBlocked3D(aabb, selfWz, getHeight, elevStepUp)) return true;
-        }
-        const nearby = useCollisionIndex
-          ? this.collisionIndex.query(aabb)
-          : this.spatialHash.queryRange(
-              Math.floor(aabb.left / CHUNK_SIZE_PX),
-              Math.floor(aabb.top / CHUNK_SIZE_PX),
-              Math.floor(aabb.right / CHUNK_SIZE_PX),
-              Math.floor(aabb.bottom / CHUNK_SIZE_PX),
-            );
-        for (const e of nearby) {
-          if (
-            e.id === self.id ||
-            e.id === alsoExclude?.id ||
-            e.parentId === self.id ||
-            !e.collider ||
-            e.collider.solid === false
-          )
-            continue;
-          const eWz = e.wz ?? 0;
-          const eHeight = e.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-          if (hasDetailedVehicleSurface(e)) {
-            if (vehicleBedMovementBlocks(e, aabb, self)) return true;
-            continue;
-          }
-          if (
-            zRangesOverlap(selfWz, selfHeight, eWz, eHeight) &&
-            aabbsOverlap(aabb, getEntityAABB(e.position, e.collider))
-          )
-            return true;
-        }
-        return false;
-      };
-
-    // --- Phase 1: Push entities in each player's path, then move players ---
-    // Player velocity is already friction/acceleration-adjusted â€” no speedMult needed.
-    for (const player of players) {
-      if (skipEntityIds?.has(player.id)) continue;
-      if (collisionMotor && player.velocity && player.collider) {
-        collisionMotor(player, dt, 1);
-        continue;
-      }
-      if (player.velocity && player.collider) {
-        const { vx, vy } = player.velocity;
-
-        // Detect pushable entities adjacent to player in movement direction.
-        const toPush: { entity: Entity; pushFactor: number }[] = [];
-        const playerWz = player.wz ?? 0;
-        const playerPhysH = player.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-        if (vx !== 0 || vy !== 0) {
-          const playerBox = getEntityAABB(player.position, player.collider);
-          const probeX = Math.max(1, Math.abs(vx * dt)) * Math.sign(vx);
-          const probeY = Math.max(1, Math.abs(vy * dt)) * Math.sign(vy);
-          const probeBox: AABB = {
-            left: playerBox.left + probeX,
-            top: playerBox.top + probeY,
-            right: playerBox.right + probeX,
-            bottom: playerBox.bottom + probeY,
-          };
-          const velLen = Math.sqrt(vx * vx + vy * vy);
-          const playerCx = (playerBox.left + playerBox.right) / 2;
-          const playerCy = (playerBox.top + playerBox.bottom) / 2;
-          const probMinCx = Math.floor(probeBox.left / CHUNK_SIZE_PX);
-          const probMaxCx = Math.floor(probeBox.right / CHUNK_SIZE_PX);
-          const probMinCy = Math.floor(probeBox.top / CHUNK_SIZE_PX);
-          const probMaxCy = Math.floor(probeBox.bottom / CHUNK_SIZE_PX);
-          const nearbyEntities = this.spatialHash.queryRange(
-            probMinCx,
-            probMinCy,
-            probMaxCx,
-            probMaxCy,
-          );
-          for (const entity of nearbyEntities) {
-            if (
-              entity === player ||
-              !entity.collider ||
-              entity.collider.solid === false ||
-              !entity.wanderAI ||
-              (entityTickDts && !entityTickDts.has(entity))
-            )
-              continue;
-            // Skip push if Z ranges don't overlap
-            const eWz = entity.wz ?? 0;
-            const eH = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-            if (!zRangesOverlap(playerWz, playerPhysH, eWz, eH)) continue;
-            const entityBox = getEntityAABB(entity.position, entity.collider);
-            if (!aabbsOverlap(probeBox, entityBox)) continue;
-            const toDirX = (entityBox.left + entityBox.right) / 2 - playerCx;
-            const toDirY = (entityBox.top + entityBox.bottom) / 2 - playerCy;
-            const toDirLen = Math.sqrt(toDirX * toDirX + toDirY * toDirY);
-            if (toDirLen === 0) continue;
-            const dot = (vx / velLen) * (toDirX / toDirLen) + (vy / velLen) * (toDirY / toDirLen);
-            const pushFactor = Math.max(0, dot);
-            if (pushFactor > 0) toPush.push({ entity, pushFactor });
-          }
-        }
-
-        // Slow the player proportional to the strongest push
-        const maxPushFactor = toPush.reduce((m, p) => Math.max(m, p.pushFactor), 0);
-        const pushMult = 1.0 - (1.0 - PUSH_PLAYER_SPEED_MULT) * maxPushFactor;
-        const dx = vx * dt * pushMult;
-        const dy = vy * dt * pushMult;
-
-        // Pre-push: move entities proportional to how directly the player walks into them.
-        for (const { entity, pushFactor } of toPush) {
-          resolveCollision(
-            entity,
-            dx * pushFactor,
-            dy * pushFactor,
-            getCollision,
-            blockMask,
-            makeExtraBlocker(entity, player),
-          );
-          if (useCollisionIndex) this.collisionIndex.update(entity);
-        }
-
-        // Now move the player â€” entities are still solid blockers.
-        // Airborne players can fly over water tiles (land-in-water respawns them).
-        const playerMask = player.jumpVZ !== undefined ? CollisionFlag.Solid : blockMask;
-        resolveCollision(player, dx, dy, getCollision, playerMask, makeExtraBlocker(player));
-      } else if (player.velocity) {
-        player.position.wx += player.velocity.vx * dt;
-        player.position.wy += player.velocity.vy * dt;
-      }
-      if (useCollisionIndex && this.byId.has(player.id)) this.collisionIndex.update(player);
-    }
-
-    // --- Phase 2: Move NPCs (using per-entity tick dt when available) ---
-    for (const entity of active) {
-      if (playerSet.has(entity) || !entity.velocity) continue;
-      if (skipEntityIds?.has(entity.id)) continue;
-      if (entity.parentId !== undefined) continue; // parented: position derived from parent
-      if (entity.tags?.has("projectile")) continue; // projectiles handled by BallPhysics
-      if (entityTickDts && !entityTickDts.has(entity)) continue;
-
-      const entityDt = entityTickDts?.get(entity) ?? dt;
-      if (entity.mallard?.state === "flight") prepareMallardFlight(entity, entityDt);
-      if (entity.deer?.motion) prepareDeerTravel(entity, entityDt);
+      if (this.byId.get(entity.id) !== entity || entity.parentId !== undefined) continue;
+      const oldZ = entity.wz;
+      if (entity.mallard?.state === "flight") prepareMallardFlight(entity, dt);
+      if (entity.deer?.motion) prepareDeerTravel(entity, dt);
       if (entity.fauna)
         syncFaunaWater(
           entity,
@@ -365,259 +100,70 @@ export class EntityManager {
             CollisionFlag.Water) !==
             0,
         );
-      if (entity.fauna?.actionElapsed !== undefined) entity.fauna.actionElapsed += entityDt;
-      if (entity.fauna?.motion) prepareFaunaTravel(entity, entityDt);
-      if (entity.predator?.flight) preparePredatorFlight(entity, entityDt);
-      if (entity.robin?.motion) prepareRobinMotion(entity, entityDt);
-      if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, entityDt);
-      if (entity.frog?.state === "hop") prepareFrogHop(entity, entityDt);
-      const isAquatic = ENTITY_DEFS[entity.type]?.aquatic === true;
-      const isAmphibious = ENTITY_DEFS[entity.type]?.amphibious === true;
-      const speedMult =
-        entity.collider && !entity.predator?.flight && !isAquatic && !isAmphibious
-          ? getSpeedMultiplier(entity.position, getCollision)
-          : 1.0;
-      if (collisionMotor && entity.collider) {
-        const blocked = collisionMotor(entity, entityDt, speedMult);
-        if (blocked && entity.wanderAI) onWanderBlocked(entity);
-        if (useCollisionIndex) this.collisionIndex.update(entity);
-        continue;
-      }
-      const dx = entity.velocity.vx * entityDt * speedMult;
-      const dy = entity.velocity.vy * entityDt * speedMult;
-
-      if (entity.collider) {
-        // Aquatic entities: blocked by Solid only (water is passable),
-        // plus an extra check that every tile under their AABB has water.
-        const entityBlockMask =
-          isAquatic || isAmphibious || entity.predator?.flight ? CollisionFlag.Solid : blockMask;
-        const baseBlocker = makeExtraBlocker(entity);
-        const extraBlocker = isAquatic
-          ? (aabb: AABB): boolean => {
-              if (baseBlocker(aabb)) return true;
-              if (aabbLacksWater(aabb, getCollision)) return true;
-              return faunaProfile(entity.type)?.habitat === "deep" && getTerrain
-                ? aabbLacksWater(aabb, (tx, ty) =>
-                    getTerrain(tx, ty) === TerrainId.DeepWater ? CollisionFlag.Water : 0,
-                  )
-                : false;
-            }
-          : baseBlocker;
-        const blocked = resolveCollision(
-          entity,
-          dx,
-          dy,
-          getCollision,
-          entityBlockMask,
-          extraBlocker,
-          // These geometry reads remain stable across this entity's axis updates.
-          true,
-        );
-        if (blocked && entity.wanderAI) {
-          onWanderBlocked(entity);
-        }
-      } else {
-        entity.position.wx += dx;
-        entity.position.wy += dy;
-      }
-      if (useCollisionIndex) this.collisionIndex.update(entity);
-    }
-
-    // Freeze XY membership after movement. Dense ground tracking below may still
-    // query this snapshot and read live support heights before any later movement.
-    this.physicsNeighborhood = undefined;
-    this.collisionIndex.finish();
-
-    // --- Phase 2.5: Ground tracking â€” snap wz to surface, detect cliff edges ---
-    if (getHeight && !collisionMotor) {
-      const cargoBeds = this.entities.filter(hasVehicleBed);
-      // Membership is stable during this synchronous pass. Keep live objects: earlier
-      // ground snaps must still affect later support checks. Never reuse across ticks,
-      // movement, index updates, edits or streaming changes.
-      const groundCandidates = new Map<string, { props: Prop[]; entities: Entity[] }>();
-      const computeGroundZ = (e: Entity, landingFrom?: number): number => {
-        const footprint = e.collider ? getEntityAABB(e.position, e.collider) : null;
-        const minCx = Math.floor((footprint?.left ?? e.position.wx) / CHUNK_SIZE_PX);
-        const maxCx = Math.floor((footprint?.right ?? e.position.wx) / CHUNK_SIZE_PX);
-        const minCy = Math.floor((footprint?.top ?? e.position.wy) / CHUNK_SIZE_PX);
-        const maxCy = Math.floor((footprint?.bottom ?? e.position.wy) / CHUNK_SIZE_PX);
-        const key = `${minCx},${minCy},${maxCx},${maxCy}`;
-        let candidates = groundCandidates.get(key);
-        if (!candidates) {
-          candidates = {
-            props: propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy),
-            entities: useCollisionIndex
-              ? []
-              : this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy),
-          };
-          groundCandidates.set(key, candidates);
-        }
-        const entities =
-          useCollisionIndex && footprint
-            ? this.collisionIndex.query(footprint)
-            : candidates.entities;
-        return landingFrom === undefined
-          ? resolveGroundZForTracking(e, getHeight, candidates.props, entities)
-          : resolveGroundZForLanding(e, getHeight, candidates.props, entities, landingFrom);
+      if (entity.fauna?.actionElapsed !== undefined) entity.fauna.actionElapsed += dt;
+      if (entity.fauna?.motion) prepareFaunaTravel(entity, dt);
+      if (entity.predator?.flight) preparePredatorFlight(entity, dt);
+      if (entity.robin?.motion) prepareRobinMotion(entity, dt);
+      if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, dt);
+      if (entity.frog?.state === "hop") prepareFrogHop(entity, dt);
+      const velocity = entity.desiredVelocity;
+      const targetZ = entity.wz;
+      if (oldZ === undefined) delete entity.wz;
+      else entity.wz = oldZ;
+      if (!velocity) continue;
+      const intent: import("../physics/PhysicsScene.js").MotionIntent = {
+        vx: velocity.vx,
+        vy: velocity.vy,
       };
-
-      for (const entity of active) {
-        if (entityTickDts && !entityTickDts.has(entity)) continue;
-        if (skipEntityIds?.has(entity.id)) continue;
-        if (entity.parentId !== undefined) continue; // riders: Z is visual-only
-        if (entity.tags?.has("projectile")) continue; // projectiles handled by BallPhysics
-        if (entity.mallard?.state === "flight" && entity.mallard.flight) {
-          if (entity.mallard.flight.elapsed >= entity.mallard.flight.duration)
-            settleMallard(
-              entity,
-              computeGroundZ(entity),
-              (getCollision(
-                Math.floor(entity.position.wx / TILE_SIZE),
-                Math.floor(entity.position.wy / TILE_SIZE),
-              ) &
-                CollisionFlag.Water) !==
-                0,
-            );
-          continue;
-        }
-        if (entity.predator?.flight) {
-          const flight = entity.predator.flight;
-          const previousZ = flight.previousZ ?? entity.wz ?? 0;
-          const ground = computeGroundZ(entity, previousZ);
-          if (
-            flight.elapsed >= flight.duration ||
-            (previousZ > (entity.wz ?? 0) &&
-              (entity.wz ?? 0) <= ground &&
-              ground <= previousZ + 0.001)
-          )
-            settlePredatorFlight(
-              entity,
-              ground <= previousZ + 0.001 ? ground : computeGroundZ(entity),
-            );
-          continue;
-        }
-        if (entity.robin?.motion) {
-          if (entity.robin.motion.elapsed >= entity.robin.motion.duration)
-            settleRobin(entity, computeGroundZ(entity));
-          continue;
-        }
-        if (entity.rabbit?.state === "hop" && entity.rabbit.hop) {
-          if (entity.rabbit.hop.elapsed >= RABBIT_HOP_DURATION)
-            settleRabbit(entity, computeGroundZ(entity));
-          continue;
-        }
-        if (entity.frog?.state === "hop" && entity.frog.hop) {
-          if (entity.frog.hop.elapsed >= 1.12)
-            settleFrog(
-              entity,
-              computeGroundZ(entity),
-              (getCollision(
-                Math.floor(entity.position.wx / TILE_SIZE),
-                Math.floor(entity.position.wy / TILE_SIZE),
-              ) &
-                CollisionFlag.Water) !==
-                0,
-            );
-          continue;
-        }
-        if (
-          entity.deer?.motion &&
-          (entity.deer.motion.elapsed >= entity.deer.motion.duration ||
-            Math.hypot(
-              entity.deer.target.wx - entity.position.wx,
-              entity.deer.target.wy - entity.position.wy,
-            ) < 0.5)
-        )
-          settleDeer(entity);
-        if (entity.fauna)
-          syncFaunaWater(
-            entity,
-            (getCollision(
-              Math.floor(entity.position.wx / 16),
-              Math.floor(entity.position.wy / 16),
-            ) &
-              CollisionFlag.Water) !==
-              0,
-          );
-        if (
-          (entity.animalWork?.state === "pounce" || entity.animalWork?.state === "hop") &&
-          entity.fauna?.motion
-        ) {
-          if (entity.fauna.motion.elapsed >= entity.fauna.motion.duration)
-            settleFauna(entity, computeGroundZ(entity));
-          continue;
-        }
-        if (entity.fauna?.motion && faunaProfile(entity.type)?.hop) {
-          if (entity.fauna.motion.elapsed >= entity.fauna.motion.duration)
-            settleFauna(entity, computeGroundZ(entity));
-          continue;
-        }
-        if (
-          entity.fauna?.motion &&
-          (entity.fauna.motion.elapsed >= entity.fauna.motion.duration ||
-            Math.hypot(
-              entity.fauna.target.wx - entity.position.wx,
-              entity.fauna.target.wy - entity.position.wy,
-            ) < 0.5)
-        )
-          settleFauna(entity);
-        if (controlsTreeHeight(entity)) {
-          entity.wz = entity.animalWork?.climbZ ?? entity.wz ?? 0;
-          continue;
-        }
-        applyGroundTracking(
-          entity,
-          computeGroundZ(entity),
-          playerSet.has(entity) ||
-            (isLooseCargo(entity) &&
-              cargoBeds.some(
-                (b) =>
-                  Math.hypot(
-                    b.position.wx - entity.position.wx,
-                    b.position.wy - entity.position.wy,
-                  ) < 100,
-              )),
-        );
-      }
-      // Also initialize players that may not be in this.entities
-      for (const player of players) {
-        if (skipEntityIds?.has(player.id)) continue;
-        if (player.parentId !== undefined) continue; // riders: Z is visual-only
-        applyGroundTracking(player, computeGroundZ(player), true);
-      }
+      // Existing authored travel curves become a vertical target for the shared motor.
+      if (targetZ !== oldZ && targetZ !== undefined) intent.altitude = targetZ;
+      intents.set(entity.id, intent);
     }
+    return intents;
+  }
 
-    // Update spatial hash after all movement (players + NPCs)
+  /** After one shared readback: gameplay completion, derived attachments and animation. */
+  finishPhysics(
+    active: readonly Entity[],
+    players: readonly Entity[],
+    dt: number,
+    getCollision: (x: number, y: number) => number,
+  ) {
+    for (const e of active) {
+      // Ordinary wanderers reverse their next intent when a wall blocks travel.
+      // Specialized species retain their own decision/arrival policies.
+      const wanted = Math.hypot(e.desiredVelocity?.vx ?? 0, e.desiredVelocity?.vy ?? 0);
+      if (
+        e.wanderAI &&
+        !e.fauna &&
+        !e.mallard &&
+        !e.frog &&
+        !e.rabbit &&
+        !e.deer &&
+        !e.robin &&
+        !e.predator &&
+        wanted > 1 &&
+        Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) < wanted * 0.1
+      )
+        onWanderBlocked(e);
+      const z = e.groundZ ?? e.wz ?? 0;
+      const water =
+        (getCollision(Math.floor(e.position.wx / 16), Math.floor(e.position.wy / 16)) &
+          CollisionFlag.Water) !==
+        0;
+      if (e.mallard?.flight && e.mallard.flight.elapsed >= e.mallard.flight.duration)
+        settleMallard(e, z, water);
+      if (e.frog?.hop && e.frog.hop.elapsed >= FROG_HOP_DURATION) settleFrog(e, z, water);
+      if (e.rabbit?.hop && e.rabbit.hop.elapsed >= RABBIT_HOP_DURATION) settleRabbit(e, z);
+      if (e.deer?.motion && e.deer.motion.elapsed >= e.deer.motion.duration) settleDeer(e);
+      if (e.fauna?.motion && e.fauna.motion.elapsed >= e.fauna.motion.duration) settleFauna(e, z);
+      if (e.robin?.motion && e.robin.motion.elapsed >= e.robin.motion.duration) settleRobin(e, z);
+      if (e.predator?.flight && e.predator.flight.elapsed >= e.predator.flight.duration)
+        settlePredatorFlight(e, z);
+    }
+    this.resolveParentedPositions(players, active);
     for (const entity of active) {
       this.spatialHash.update(entity);
-    }
-
-    // --- Phase 3: Separate overlapping entities (skip parented) ---
-    // Skipping a player's movement does not itself transfer contact ownership:
-    // legacy per-command players still push NPCs here. Selected character motors
-    // opt out separately so this pass cannot undo their resolved support/clearance.
-    const unparentedEntities = active.filter(
-      (e) => e.parentId === undefined && !skipEntityIds?.has(e.id),
-    );
-    if (!collisionMotor)
-      separateOverlappingEntities(
-        unparentedEntities,
-        playerContactOwnerIds?.size
-          ? new Set(players.filter((player) => !playerContactOwnerIds.has(player.id)))
-          : playerSet,
-        dt,
-        getCollision,
-        blockMask,
-        entityTickDts,
-      );
-
-    // --- Phase 4: Resolve parented entity positions ---
-    this.resolveParentedPositions(players, active);
-    for (const entity of active) this.spatialHash.update(entity);
-
-    // --- Phase 5: Tick animations (only for ticking entities) ---
-    for (const entity of active) {
-      if (entityTickDts && !entityTickDts.has(entity)) continue;
       if (entity.fauna?.motion || entity.fauna?.actionElapsed !== undefined)
         setSpriteClipElapsed(
           entity,
@@ -627,11 +173,11 @@ export class EntityManager {
         setSpriteClipElapsed(entity, Math.round(entity.deer.motion.elapsed * 1000));
       else if (entity.robin?.motion)
         setSpriteClipElapsed(entity, Math.round(entity.robin.motion.elapsed * 1000));
-      else if (entity.frog?.state === "hop" && entity.frog.hop)
+      else if (entity.frog?.hop)
         setSpriteClipElapsed(entity, Math.round(entity.frog.hop.elapsed * 1000));
-      else if (entity.rabbit?.state === "hop" && entity.rabbit.hop)
+      else if (entity.rabbit?.hop)
         setSpriteClipElapsed(entity, Math.round(entity.rabbit.hop.elapsed * 1000));
-      else tickSpriteAnimation(entity, entityTickDts?.get(entity) ?? dt);
+      else tickSpriteAnimation(entity, dt);
     }
   }
 

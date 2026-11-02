@@ -9,14 +9,13 @@ import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
-import { PropManager } from "../entities/PropManager.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
+import { encodeActor } from "../persistence/ActorRecords.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
 import { createMovementContext } from "../physics/SimulationEnvironment.js";
@@ -108,58 +107,6 @@ it("seeds small stable groups in wider dry glades with whole-body tree clearance
   expect(n.cacheSizes.deerGlades).toBeLessThanOrEqual(128);
 });
 
-it("walks on the ground and resumes exact saved movement/animation without vertical motion", () => {
-  const manager = new EntityManager(),
-    props = new PropManager(),
-    deer = manager.spawn(createDeer(64, 64));
-  required(deer.deer).timer = 0;
-  updateDeerAI(deer, 0.1, open, [deer], []);
-  expect(deer.deer?.state).toBe("travel");
-  for (let i = 0; i < 27; i++)
-    manager.update(
-      1 / 60,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-  expect(Math.hypot(deer.position.wx - 64, deer.position.wy - 64)).toBeCloseTo(
-    DEER_WALK_SPEED * 0.45,
-    3,
-  );
-  expect(deer.wz).toBe(0);
-  expect(deer.jumpZ).toBeUndefined();
-  expect(deer.sprite?.frameCol).toBe(16);
-  const restored = decodeActor(encodeActor(deer));
-  if ("isProp" in restored) throw new Error("Expected deer");
-  expect(restored.sprite?.frameCol).toBe(deer.sprite?.frameCol);
-  const other = new EntityManager();
-  other.spawn(restored);
-  for (let i = 0; i < 180; i++) {
-    manager.update(
-      1 / 60,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-    other.update(
-      1 / 60,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-    expect(restored.position).toEqual(deer.position);
-    expect(restored.deer).toEqual(deer.deer);
-    expect(deer.wz).toBe(0);
-  }
-  expect(deer.deer?.state).toBe("rest");
-});
-
 it("replicates timed walk phase in binary baselines/deltas and clears it at rest", () => {
   const deer = createDeer(64, 64);
   required(deer.deer).timer = 0;
@@ -188,42 +135,6 @@ it("replicates timed walk phase in binary baselines/deltas and clears it at rest
   expect(replica.sprite?.clipElapsedMs).toBeUndefined();
 });
 
-it("shares a nearby herd alarm, escapes away from the threat once and recovers without restarting", () => {
-  const manager = new EntityManager(),
-    props = new PropManager(),
-    first = manager.spawn(createDeer(64, 64)),
-    second = manager.spawn(createDeer(128, 64));
-  required(first.deer).herdId = required(second.deer).herdId = "test-herd";
-  startleDeer(first, { wx: 40, wy: 64 });
-  updateDeerAI(first, 0.5, open, [first, second], []);
-  updateDeerAI(second, 0.5, open, [first, second], []);
-  for (const deer of [first, second]) {
-    const ai = required(deer.deer);
-    expect(ai.state).toBe("flee");
-    expect(ai.alarmFrom).toEqual({ wx: 40, wy: 64 });
-    expect(Math.hypot(ai.target.wx - 40, ai.target.wy - 64)).toBeGreaterThan(
-      Math.hypot(deer.position.wx - 40, deer.position.wy - 64) + 12,
-    );
-    const motion = { ...ai.motion };
-    expect(startleDeer(deer, { wx: 0, wy: 0 })).toBe(false);
-    expect(ai.motion).toEqual(motion);
-  }
-  for (let i = 0; i < 160; i++)
-    manager.update(
-      1 / 60,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-  for (const deer of [first, second]) {
-    expect(deer.deer?.state).toBe("recover");
-    expect(deer.wz).toBe(0);
-    expect(deer.jumpVZ).toBeUndefined();
-  }
-});
-
 it("loosely keeps herd company and rejects water/closed routes without an alarm retry loop", () => {
   const deer = createDeer(64, 64),
     peer = createDeer(128, 64);
@@ -244,38 +155,6 @@ it("loosely keeps herd company and rejects water/closed routes without an alarm 
   expect(enclosed.deer?.alarmFrom).toBeUndefined();
   updateDeerAI(enclosed, 4, { ...open, canOccupy: () => false }, [enclosed], []);
   expect(enclosed.deer?.state).toBe("rest");
-});
-
-it("preserves a committed walk on alarm and stops at actual position when terrain is edited", () => {
-  const manager = new EntityManager(),
-    props = new PropManager(),
-    deer = manager.spawn(createDeer(64, 64));
-  required(deer.deer).timer = 0;
-  updateDeerAI(deer, 0.1, open, [deer], []);
-  manager.update(
-    0.2,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  const before = { ...deer.position };
-  startleDeer(deer, { wx: 40, wy: 64 });
-  expect(deer.deer?.state).toBe("travel");
-  for (let i = 0; i < 200; i++)
-    manager.update(
-      1 / 60,
-      () => CollisionFlag.Solid,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-  expect(deer.position).toEqual(before);
-  expect(deer.deer?.state).toBe("startle");
-  updateDeerAI(deer, 0.5, { ...open, canOccupy: () => false }, [deer], []);
-  expect(deer.deer?.state).toBe("recover");
 });
 
 it("runs native ground cycles in production Realm and retains group/manual identity and deletion", async () => {

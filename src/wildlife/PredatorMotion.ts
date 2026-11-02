@@ -46,10 +46,11 @@ export function predatorFlightZ(start: number, end: number, t: number, lift: num
 }
 /** Collision owns XY. This only supplies a bounded velocity and the committed arc. */
 export function preparePredatorFlight(e: Entity, dt: number): void {
+  e.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = e.predator,
     f = ai?.flight,
     speed = predatorProfile(e.type)?.chaseSpeed;
-  if (!ai || !f || !speed || !e.velocity || dt <= 0) return;
+  if (!ai || !f || !speed || !e.desiredVelocity || dt <= 0) return;
   f.elapsed = Math.min(f.duration, f.elapsed + dt);
   const t = f.elapsed / f.duration,
     target = {
@@ -60,8 +61,8 @@ export function preparePredatorFlight(e: Entity, dt: number): void {
     dy = target.wy - e.position.wy,
     d = Math.hypot(dx, dy);
   const step = Math.min(speed, d / dt);
-  e.velocity.vx = d > 0.001 ? (dx / d) * step : 0;
-  e.velocity.vy = d > 0.001 ? (dy / d) * step : 0;
+  e.desiredVelocity.vx = d > 0.001 ? (dx / d) * step : 0;
+  e.desiredVelocity.vy = d > 0.001 ? (dy / d) * step : 0;
   f.previousZ = e.wz ?? f.startZ;
   e.wz = predatorFlightZ(f.startZ, f.endZ, t, f.lift);
   e.jumpZ = Math.sin(Math.PI * t) * f.lift;
@@ -72,14 +73,14 @@ export function preparePredatorFlight(e: Entity, dt: number): void {
   restorePredatorPose(e);
 }
 export function settlePredatorFlight(e: Entity, groundZ: number): void {
+  e.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = e.predator,
     f = ai?.flight;
   if (!ai || !f) return;
   const attack = f.attack && !!ai.targetId && !ai.alarmFrom;
   delete ai.flight;
   delete e.jumpZ;
-  e.wz = groundZ;
-  e.groundZ = groundZ;
+
   ai.state = attack ? "chase" : groundZ > 4 ? "perch" : "rest";
   ai.timer = attack ? 0 : groundZ > 4 ? 2 : 1;
   ai.elapsed = 0;
@@ -88,6 +89,6 @@ export function settlePredatorFlight(e: Entity, groundZ: number): void {
     delete ai.huntElapsed;
     delete ai.aim;
   }
-  if (e.velocity) e.velocity.vx = e.velocity.vy = 0;
+  if (e.desiredVelocity) e.desiredVelocity.vx = e.desiredVelocity.vy = 0;
   restorePredatorPose(e);
 }

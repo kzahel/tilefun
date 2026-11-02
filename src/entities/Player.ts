@@ -46,11 +46,18 @@ export function updatePlayerFromInput(entity: Entity, movement: Movement, _dt: n
   const { velocity, sprite } = entity;
   if (!velocity || !sprite) return;
 
-  const moving = movement.dx !== 0 || movement.dy !== 0;
   const speed = movement.sprinting ? PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER : PLAYER_SPEED;
   velocity.vx = movement.dx * speed;
   velocity.vy = movement.dy * speed;
 
+  updatePlayerSpriteFromInput(entity, movement);
+}
+
+/** Presentation intent only; the shared scene owns physical velocity. */
+export function updatePlayerSpriteFromInput(entity: Entity, movement: Movement): void {
+  const sprite = entity.sprite;
+  if (!sprite) return;
+  const moving = movement.dx !== 0 || movement.dy !== 0;
   sprite.moving = moving;
   sprite.frameDuration = movement.sprinting
     ? PLAYER_FRAME_DURATION / PLAYER_SPRINT_MULTIPLIER

@@ -1,5 +1,9 @@
 import { PLAYER_SPEED, PLAYER_SPRINT_MULTIPLIER } from "../config/constants.js";
+import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
+import { vehicleNoseHeading } from "../traffic/Vehicle.js";
+import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
+import { PHYSICS_DT } from "./PhysicsDefaults.js";
 import type { MotionIntent } from "./PhysicsScene.js";
 
 export interface ControlCommand extends Movement {
@@ -18,7 +22,7 @@ export class PlayerControls {
   private sequence = 0;
 
   reset(ack = this.sequence) {
-    this.sequence = Math.max(this.sequence, ack);
+    this.sequence = ack;
     this.held = { ...NEUTRAL };
     this.receivedAt = -Infinity;
   }
@@ -50,4 +54,23 @@ export function playerMotionIntent(movement: Movement): MotionIntent {
     jump: movement.jump,
     jumpPressed: movement.jumpPressed ?? false,
   };
+}
+
+/** Input mapping only; the scene owns all vehicle motion and collision. */
+export function vehicleMotionIntent(vehicle: Entity, movement: Movement): MotionIntent {
+  let heading = vehicleNoseHeading(vehicle);
+  const maxSpeed = vehiclePerformance(vehicle.type).speed * (movement.sprinting ? 1.5 : 1);
+  if (movement.relativeDriving) {
+    heading += movement.dx * 2.5 * PHYSICS_DT;
+    const speed = -movement.dy * maxSpeed;
+    return { vx: Math.cos(heading) * speed, vy: Math.sin(heading) * speed, heading };
+  }
+  if (movement.reversing)
+    return {
+      vx: -Math.cos(heading) * maxSpeed * 0.5,
+      vy: -Math.sin(heading) * maxSpeed * 0.5,
+      heading,
+    };
+  if (movement.dx || movement.dy) heading = Math.atan2(movement.dy, movement.dx);
+  return { vx: movement.dx * maxSpeed, vy: movement.dy * maxSpeed, heading };
 }

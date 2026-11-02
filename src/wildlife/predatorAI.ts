@@ -28,11 +28,12 @@ const random = (e: Entity) => {
   return ai.randomState / 4294967296;
 };
 function enter(e: Entity, state: NonNullable<Entity["predator"]>["state"], timer: number) {
+  e.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = required(e.predator);
   ai.state = state;
   ai.timer = timer;
   ai.elapsed = 0;
-  if (e.velocity) e.velocity.vx = e.velocity.vy = 0;
+  if (e.desiredVelocity) e.desiredVelocity.vx = e.desiredVelocity.vy = 0;
   if (["rest", "feed", "scared", "patrol", "sleep", "guard", "ambush", "perch"].includes(state))
     delete ai.aim;
   if (["rest", "feed", "scared", "evade", "sleep", "guard", "ambush", "perch"].includes(state)) {
@@ -183,8 +184,9 @@ export function updatePredatorAI(
   players: readonly PositionComponent[],
   planning?: AiPlanningScheduler,
 ): void {
+  e.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = e.predator,
-    v = e.velocity;
+    v = e.desiredVelocity;
   if (!ai || !v || !e.sprite) return;
   const profile = required(predatorProfile(e.type)),
     fierce = profile.fierce;

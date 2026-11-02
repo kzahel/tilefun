@@ -1,4 +1,5 @@
 import type { Entity } from "../entities/Entity.js";
+import { PlayerControls } from "../physics/PlayerControls.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 
 /**
@@ -50,6 +51,7 @@ export class PlayerSession {
 
   /** Sequence number of the last input actually consumed in tick(). */
   lastProcessedInputSeq = 0;
+  readonly controls = new PlayerControls();
 
   /** Gameplay state (gems, invincibility, knockback). */
   gameplaySession!: GameplaySession;

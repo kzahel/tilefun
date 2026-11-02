@@ -42,9 +42,10 @@ export function updateMallardAI(
   players: readonly PositionComponent[],
   planning?: AiPlanningScheduler,
 ): void {
+  duck.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = duck.mallard,
     sprite = duck.sprite,
-    velocity = duck.velocity;
+    velocity = duck.desiredVelocity;
   if (!ai || !sprite || !velocity) return;
   const random = () => {
     ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
@@ -82,7 +83,7 @@ export function updateMallardAI(
   }
   if (ai.state === "startle" || ai.state === "recover") {
     ai.timer -= dt;
-    if (duck.velocity) duck.velocity.vx = duck.velocity.vy = 0;
+    if (duck.desiredVelocity) duck.desiredVelocity.vx = duck.desiredVelocity.vy = 0;
     sprite.moving = false;
     if (duck.wanderAI) duck.wanderAI.state = "scared";
     setSpriteClip(duck, ai.state === "startle" ? 4 : 0);

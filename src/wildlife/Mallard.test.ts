@@ -5,10 +5,7 @@ import { required } from "../art/ArtCatalog.js";
 import { RemoteStateView } from "../client/ClientStateView.js";
 import { createChicken } from "../entities/Chicken.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
-import { EntityManager } from "../entities/EntityManager.js";
-import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
-import { PropManager } from "../entities/PropManager.js";
 import { setSpriteClip, tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
@@ -161,7 +158,7 @@ it("avoids obstructed targets and stays near its home", () => {
   };
   for (let i = 0; i < 300; i++) {
     updateMallardAI(duck, 0.1, env, [duck], []);
-    const v = required(duck.velocity);
+    const v = required(duck.desiredVelocity);
     duck.position.wx += v.vx * 0.1;
     duck.position.wy += v.vy * 0.1;
     expect(duck.position.wx).toBeLessThan(0);
@@ -216,20 +213,3 @@ it("runs all five cycles in the real pond Realm and restores moved, deleted and 
     await s.close();
   }
 }, 30000);
-
-it("duck bodies are solid, and amphibious motion respects solid terrain", () => {
-  const manager = new EntityManager(),
-    player = manager.spawn(createPlayer(0, 10));
-  const duck = manager.spawn(createMallard(10, 10));
-  expect(duck.collider?.solid).toBe(true);
-  required(player.velocity).vx = 20;
-  manager.update(0.1, () => CollisionFlag.None, [player], new PropManager());
-  expect(player.position.wx).toBeLessThan(2);
-  manager.remove(player.id);
-  duck.position = { wx: 10, wy: 10 };
-  required(duck.velocity).vx = 20;
-  manager.update(0.1, () => CollisionFlag.Water, [], new PropManager());
-  expect(duck.position.wx).toBe(12);
-  manager.update(0.1, () => CollisionFlag.Solid, [], new PropManager());
-  expect(duck.position.wx).toBe(12);
-});

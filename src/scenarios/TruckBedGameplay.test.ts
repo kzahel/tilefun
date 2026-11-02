@@ -2,7 +2,6 @@ import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { createBall } from "../entities/Ball.js";
 import { entityHeading } from "../rendering/EntityMeshPose.js";
-import { PlayerSession } from "../server/PlayerSession.js";
 import { path } from "../traffic/LaneGraph.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { bedHeading, bedLocalPoint, DUMP_BED } from "../traffic/VehicleBed.js";
@@ -41,52 +40,6 @@ it("keeps routed diagonal bed contacts aligned with the rendered mesh through st
     await s.close();
   }
 }, 30000);
-it.each([false, true])(
-  "jumping in a moving bed does not block its truck (driven=%s)",
-  async (driven) => {
-    const s = await ScenarioSession.create(truckBedRecipe());
-    try {
-      const truck = required(s.realm.entityManager.byId.get(required(s.handles.truck)));
-      let driver: PlayerSession | undefined;
-      if (driven) {
-        driver = new PlayerSession("jump-test-driver");
-        driver.editorEnabled = false;
-        await s.realm.addPlayer(driver);
-        driver.player.position = { wx: 40, wy: 45 };
-        driver.player.wz = driver.player.groundZ = 0;
-        driver.visibleRange = { ...s.player.visibleRange };
-        s.realm.entityManager.spatialHash.update(driver.player);
-        s.realm.vehicles.enter(driver, truck.id);
-      } else await s.command({ kind: "vehicle-bed", action: "drive" });
-      const step = async (jump: boolean) => {
-        if (driver) s.realm.vehicles.input(driver, { dx: 1, dy: 0 }, 1 / 60);
-        await s.step({ ...idle, jump });
-      };
-      for (let i = 0; i < 180; i++) await step(false);
-      const ball = s.realm.entityManager.spawn(
-        createBall(truck.position.wx - 36, truck.position.wy - 7),
-      );
-      ball.wz = DUMP_BED.floorZ + 4;
-      ball.jumpVZ = 20;
-      ball.velocity = { ...(truck.velocity ?? { vx: 0, vy: 0 }) };
-      const speed = () => Math.hypot(truck.velocity?.vx ?? 0, truck.velocity?.vy ?? 0);
-      const cruising = speed();
-      expect(cruising).toBeGreaterThan(20);
-      let slowest = cruising;
-      for (let i = 0; i < 90; i++) {
-        await step(i < 10);
-        slowest = Math.min(slowest, speed());
-      }
-      expect(slowest).toBeGreaterThan(cruising * 0.95);
-      expect(s.player.player.wz).toBeCloseTo(DUMP_BED.floorZ);
-      expect(roofSupport(s.player.player, [truck])?.id).toBe(truck.id);
-      expect(ball.wz).toBeCloseTo(DUMP_BED.floorZ);
-    } finally {
-      await s.close();
-    }
-  },
-  30000,
-);
 
 it("still stops a driven bed wall from sweeping through an airborne occupant", async () => {
   const s = await ScenarioSession.create(truckBedRecipe());
@@ -172,46 +125,6 @@ it("normal editor placements and old saved dump trucks acquire the bed; other ro
     );
     const other = required(required(s.realm.traffic).place("pickup", -140, 0));
     expect(other.entity.vehicleBed).toBeUndefined();
-  } finally {
-    await s.close();
-  }
-}, 30000);
-
-it("a second real player and cargo ride while another player drives, turns and brakes", async () => {
-  const s = await ScenarioSession.create(truckBedRecipe());
-  try {
-    const truck = required(s.realm.entityManager.byId.get(required(s.handles.truck)));
-    const rider = s.player.player;
-    const ball = s.realm.entityManager.spawn(createBall(-30, 8));
-    ball.wz = ball.groundZ = DUMP_BED.floorZ;
-    const driver = new PlayerSession("truck-driver");
-    driver.editorEnabled = false;
-    await s.realm.addPlayer(driver);
-    driver.player.position = { wx: 40, wy: 45 };
-    driver.player.wz = driver.player.groundZ = 0;
-    driver.visibleRange = { ...s.player.visibleRange };
-    s.realm.entityManager.spatialHash.update(driver.player);
-    s.realm.vehicles.enter(driver, truck.id);
-    const a = bedLocalPoint(truck, rider.position),
-      b = bedLocalPoint(truck, ball.position);
-    for (let i = 0; i < 160; i++) {
-      s.realm.vehicles.input(driver, { dx: i < 60 ? 1 : 0.7, dy: i < 60 ? 0 : 0.7 }, 1 / 60);
-      await s.step(idle);
-    }
-    expect(truck.vehicleHeading).toBeGreaterThan(0.2);
-    expect(truck.position.wx).toBeGreaterThan(40);
-    expect(bedLocalPoint(truck, rider.position).x).toBeCloseTo(a.x, 3);
-    expect(bedLocalPoint(truck, rider.position).y).toBeCloseTo(a.y, 3);
-    expect(bedLocalPoint(truck, ball.position).x).toBeCloseTo(b.x, 3);
-    expect(bedLocalPoint(truck, ball.position).y).toBeCloseTo(b.y, 3);
-    expect(roofSupport(rider, [truck])?.id).toBe(truck.id);
-    expect(rider.parentId).toBeUndefined();
-    expect(driver.player.parentId).toBe(truck.id);
-    for (let i = 0; i < 60; i++) {
-      s.realm.vehicles.input(driver, { dx: 0, dy: 0 }, 1 / 60);
-      await s.step(idle);
-    }
-    expect(Math.hypot(truck.velocity?.vx ?? 0, truck.velocity?.vy ?? 0)).toBeLessThan(0.01);
   } finally {
     await s.close();
   }

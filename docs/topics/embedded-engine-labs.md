@@ -1,5 +1,11 @@
 # Embedded engine labs
 
+Active reset [205](../tactical/205-physics-reset.md): ordinary Realm authority now
+uses one shared `PhysicsScene` step, including ordinary ScenarioSession consumers.
+Client prediction and the older experimental whole-scene labs are still transitional
+and must be aligned or retired before delivery. Earlier mode-specific evidence below
+is historical; no lab currently establishes completion of this reset.
+
 [202](../tactical/202-persistent-realm-collision-proof.md) adds **Realm physics
 replacement proof** to World Geometry. It stages ordinary NPCs, a ball and a parked
 controlled car beside the existing ramp/deck; modes 3/4 share the normal Realm,

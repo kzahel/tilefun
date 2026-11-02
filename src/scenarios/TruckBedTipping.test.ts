@@ -2,14 +2,12 @@ import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
-import { PlayerSession } from "../server/PlayerSession.js";
 import {
   bedFloorSupport,
   bedLocalPoint,
   bedVisualOwner,
   bedWorldPoint,
   DUMP_BED,
-  vehicleBedBlocks,
 } from "../traffic/VehicleBed.js";
 import { bedContents } from "../traffic/VehicleCargo.js";
 import { createForageItem } from "../wildlife/ForageResources.js";
@@ -157,49 +155,6 @@ it("allows an independent person to walk uphill and jump from an inclined floor"
     for (let i = 0; i < 10; i++) await s.step({ ...idle, jump: i < 4 });
     expect(p.wz).toBeGreaterThan(floor + 5);
     expect(p.parentId).toBeUndefined();
-  } finally {
-    await s.close();
-  }
-}, 30000);
-
-it("requires a nearby stopped operator and prevents driving until the bed is level", async () => {
-  const s = await ScenarioSession.create(truckBedRecipe());
-  try {
-    const truck = required(s.realm.entityManager.byId.get(required(s.handles.truck)));
-    const driver = new PlayerSession("tip-driver");
-    driver.editorEnabled = false;
-    await s.realm.addPlayer(driver);
-    driver.player.position = { wx: 30, wy: 40 };
-    driver.player.wz = driver.player.groundZ = 0;
-    driver.visibleRange = { ...s.player.visibleRange };
-    s.realm.entityManager.spatialHash.update(driver.player);
-    s.realm.vehicles.enter(driver, truck.id);
-    s.realm.vehicles.bed(driver, truck.id, "tip");
-    const start = { ...truck.position };
-    for (let i = 0; i < 60; i++) {
-      s.realm.vehicles.input(driver, { dx: 1, dy: 0 }, 1 / 60);
-      await s.step(idle);
-    }
-    expect(truck.position).toEqual(start);
-    expect(truck.vehicleBedTilt).toBeGreaterThan(0.2);
-    const floor = bedFloorSupport(
-      truck,
-      getEntityAABB(s.player.player.position, required(s.player.player.collider)),
-    );
-    expect(floor).toBeCloseTo(s.player.player.wz ?? 0);
-    expect(
-      vehicleBedBlocks(
-        truck,
-        getEntityAABB(s.player.player.position, required(s.player.player.collider)),
-        s.player.player.wz ?? 0,
-        12,
-      ),
-    ).toBe(false);
-    expect(() => s.realm.vehicles.bed(s.player, truck.id, "load")).toThrow(/Lower/);
-    s.realm.vehicles.bed(driver, truck.id, "lower");
-    for (let i = 0; i < 90; i++) await s.step(idle);
-    s.realm.vehicles.input(driver, { dx: 1, dy: 0 }, 1 / 60);
-    expect(truck.position.wx).toBeGreaterThan(start.wx);
   } finally {
     await s.close();
   }

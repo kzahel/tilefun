@@ -191,38 +191,10 @@ export class VehicleControl {
     session.gameplaySession.mountId = id;
     session.lastProcessedInputSeq = session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
     session.inputQueue = [];
+    session.controls.reset(session.lastProcessedInputSeq);
     this.drivers.set(p.id, { session, vehicle, lastInput: r.worldAPI.time });
     this.sync();
     r.savePlayerData(session);
-  }
-  input(
-    session: PlayerSession,
-    input: {
-      dx: number;
-      dy: number;
-      sprinting?: boolean;
-      reversing?: boolean;
-      relativeDriving?: boolean;
-    },
-    dt: number,
-  ): void {
-    const driver = this.drivers.get(session.player.id);
-    if (!driver) return;
-    if (!Number.isFinite(input.dx) || !Number.isFinite(input.dy)) {
-      this.stop(session);
-      return;
-    }
-    driver.lastInput = this.realm.worldAPI.time;
-    const car = this.realm.traffic?.states.get(driver.vehicle.id);
-    if (car) this.realm.traffic?.drive(car, input, dt);
-    const train = [...(this.realm.railway?.services.values() ?? [])].find(
-      (s) => s.driverId === session.player.id,
-    );
-    if (train) {
-      train.driveInput = Math.sign(input.dx || -input.dy);
-      train.driveBoost = input.sprinting === true;
-    }
-    this.sync();
   }
   emergency(session: PlayerSession, action: "toggle" | "style"): void {
     const vehicle = this.get(session);
@@ -237,16 +209,6 @@ export class VehicleControl {
     vehicle.emergencyState = nextVehicleLightState(vehicle, action);
     const car = this.realm.traffic?.states.get(vehicle.id);
     if (car) this.realm.traffic?.onChange?.(car, false);
-  }
-  /** Cars hold across input gaps; trains brake on the service clock. */
-  missingInput(session: PlayerSession): void {
-    const train = [...(this.realm.railway?.services.values() ?? [])].find(
-      (s) => s.driverId === session.player.id,
-    );
-    if (train) {
-      train.driveInput = 0;
-      train.driveBoost = false;
-    }
   }
   stop(session: PlayerSession): void {
     const vehicle = this.get(session);
@@ -316,17 +278,17 @@ export class VehicleControl {
     session.gameplaySession.lastSafePosition = { ...p.position };
     session.lastProcessedInputSeq = session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
     session.inputQueue = [];
+    session.controls.reset(session.lastProcessedInputSeq);
     this.drivers.delete(p.id);
     this.realm.entityManager.spatialHash.update(p);
     this.realm.savePlayerData(session);
   }
   sync(): void {
-    for (const { session, vehicle, lastInput, lastHorn, honking } of [...this.drivers.values()]) {
+    for (const { session, vehicle, lastHorn, honking } of [...this.drivers.values()]) {
       if (!this.realm.entityManager.byId.has(vehicle.id)) {
         this.exit(session, true);
         continue;
       }
-      if (this.realm.worldAPI.time - lastInput > 0.25) this.stop(session);
       if (
         honking &&
         (this.realm.worldAPI.time - (lastHorn ?? 0) > 0.6 ||

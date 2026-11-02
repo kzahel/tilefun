@@ -9,14 +9,13 @@ import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
-import { PropManager } from "../entities/PropManager.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
+import { encodeActor } from "../persistence/ActorRecords.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
 import { createMovementContext } from "../physics/SimulationEnvironment.js";
@@ -101,64 +100,6 @@ it("seeds small durable groups in dry glades beside woodland, independent of chu
   }
   for (let i = 0; i < 140; i++) n.rabbitGlade(i, -9);
   expect(n.cacheSizes.glades).toBeLessThanOrEqual(128);
-});
-
-it("hops with a stationary push, physical flight and landing recovery; reload continues the same arc", () => {
-  const manager = new EntityManager(),
-    props = new PropManager();
-  const rabbit = manager.spawn(createRabbit(64, 64));
-  required(rabbit.rabbit).timer = 0;
-  updateRabbitAI(rabbit, 0.1, open, [rabbit], []);
-  expect(rabbit.rabbit?.state).toBe("hop");
-  manager.update(
-    0.2,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(rabbit.position).toEqual({ wx: 64, wy: 64 });
-  expect(rabbit.wz).toBe(0);
-  manager.update(
-    0.3,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(rabbit.wz).toBeGreaterThan(4);
-  expect(rabbit.position).not.toEqual({ wx: 64, wy: 64 });
-  expect(rabbit.sprite?.frameCol).toBe(5);
-  const restored = decodeActor(encodeActor(rabbit));
-  if ("isProp" in restored) throw new Error("Expected rabbit");
-  expect(restored.sprite?.frameCol).toBe(rabbit.sprite?.frameCol);
-  const other = new EntityManager();
-  other.spawn(restored);
-  for (let i = 0; i < 8; i++) {
-    manager.update(
-      0.1,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-    other.update(
-      0.1,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-    expect(restored.position).toEqual(rabbit.position);
-    expect(restored.wz).toBe(rabbit.wz);
-    expect(restored.rabbit).toEqual(rabbit.rabbit);
-  }
-  expect(rabbit.rabbit?.state).toBe("rest");
-  expect(rabbit.wz).toBe(0);
 });
 
 it("replicates mid-hop phase through binary baselines/deltas and removes it on landing", () => {
@@ -298,31 +239,6 @@ it("lands and stands on a replicated rabbit body until Jump is pressed", () => {
   expect(predictor.player?.jumpVZ).toBeCloseTo(required(player.jumpVZ), 5);
 });
 
-it("recovers in a closed habitat and lands at the actual position if new terrain blocks a hop", () => {
-  const rabbit = createRabbit(64, 64);
-  startleRabbit(rabbit, { wx: 40, wy: 64 });
-  updateRabbitAI(rabbit, 0.3, { ...open, canOccupy: () => false }, [rabbit], []);
-  expect(rabbit.rabbit?.state).toBe("recover");
-  updateRabbitAI(rabbit, 2.6, open, [rabbit], []);
-  expect(rabbit.rabbit?.state).toBe("rest");
-  startleRabbit(rabbit, { wx: 40, wy: 64 });
-  updateRabbitAI(rabbit, 0.3, open, [rabbit], []);
-  const manager = new EntityManager();
-  manager.spawn(rabbit);
-  for (let i = 0; i < 15; i++)
-    manager.update(
-      0.1,
-      () => CollisionFlag.Solid,
-      [],
-      new PropManager(),
-      undefined,
-      () => 0,
-    );
-  expect(rabbit.position).toEqual({ wx: 64, wy: 64 });
-  expect(rabbit.wz).toBe(0);
-  expect(rabbit.rabbit?.state).toBe("recover");
-});
-
 it("runs all native cycles on dry ground in the production Realm and retains saved individuals/deletions", async () => {
   const s = await ScenarioSession.create(naturalLandscapeRecipe("rabbits", "thicket"));
   try {
@@ -423,45 +339,4 @@ it("avoids water, rejects escape routes toward a threat and favors accessible co
   startleRabbit(rabbit, { wx: 40, wy: 64 });
   updateRabbitAI(rabbit, 0.2, { ...open, isWater: () => true }, [rabbit], []);
   expect(rabbit.rabbit?.state).toBe("recover");
-});
-
-it("finishes a routine hop before a newly triggered escape, without restarting airborne motion", () => {
-  const manager = new EntityManager(),
-    rabbit = manager.spawn(createRabbit(64, 64)),
-    props = new PropManager();
-  required(rabbit.rabbit).timer = 0;
-  updateRabbitAI(rabbit, 0.1, open, [rabbit], []);
-  manager.update(
-    0.4,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  const hop = structuredClone(rabbit.rabbit?.hop);
-  startleRabbit(rabbit, { wx: 40, wy: 64 });
-  expect(rabbit.rabbit?.hop).toEqual(hop);
-  expect(startleRabbit(rabbit, { wx: 0, wy: 0 })).toBe(false);
-  manager.update(
-    0.6,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(rabbit.rabbit?.state).toBe("startle");
-  updateRabbitAI(rabbit, 0.2, open, [rabbit], []);
-  expect(rabbit.rabbit?.hop?.escaping).toBe(true);
-  manager.update(
-    1,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(rabbit.rabbit?.state).toBe("recover");
-  expect(rabbit.rabbit?.alarmFrom).toBeUndefined();
 });

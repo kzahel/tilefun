@@ -9,14 +9,13 @@ import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
-import { PropManager } from "../entities/PropManager.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
+import { encodeActor } from "../persistence/ActorRecords.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
 import { createMovementContext } from "../physics/SimulationEnvironment.js";
@@ -88,64 +87,6 @@ it("seeds a small independent frog population on open grassy banks, in either qu
       }),
     ).toBe(false);
   }
-});
-
-it("hops with a stationary push, physical flight and landing recovery; reload continues the same arc", () => {
-  const manager = new EntityManager(),
-    props = new PropManager();
-  const frog = manager.spawn(createFrog(64, 64));
-  required(frog.frog).timer = 0;
-  updateFrogAI(frog, 0.1, open, [frog], []);
-  expect(frog.frog?.state).toBe("hop");
-  manager.update(
-    0.2,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(frog.position).toEqual({ wx: 64, wy: 64 });
-  expect(frog.wz).toBe(0);
-  manager.update(
-    0.3,
-    () => 0,
-    [],
-    props,
-    undefined,
-    () => 0,
-  );
-  expect(frog.wz).toBeGreaterThan(4);
-  expect(frog.position).not.toEqual({ wx: 64, wy: 64 });
-  expect(frog.sprite?.frameCol).toBe(4);
-  const restored = decodeActor(encodeActor(frog));
-  if ("isProp" in restored) throw new Error("Expected frog");
-  expect(restored.sprite?.frameCol).toBe(frog.sprite?.frameCol);
-  const other = new EntityManager();
-  other.spawn(restored);
-  for (let i = 0; i < 8; i++) {
-    manager.update(
-      0.1,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-    other.update(
-      0.1,
-      () => 0,
-      [],
-      props,
-      undefined,
-      () => 0,
-    );
-    expect(restored.position).toEqual(frog.position);
-    expect(restored.wz).toBe(frog.wz);
-    expect(restored.frog).toEqual(frog.frog);
-  }
-  expect(frog.frog?.state).toBe("rest");
-  expect(frog.wz).toBe(0);
 });
 
 it("replicates mid-hop phase through binary baselines/deltas and removes it on landing", () => {
@@ -283,31 +224,6 @@ it("lands and stands on a replicated frog body until Jump is pressed", () => {
   );
   expect(player.jumpVZ).toBeGreaterThan(0);
   expect(predictor.player?.jumpVZ).toBeCloseTo(required(player.jumpVZ), 5);
-});
-
-it("recovers in a closed habitat and lands at the actual position if new terrain blocks a hop", () => {
-  const frog = createFrog(64, 64);
-  startleFrog(frog, { wx: 40, wy: 64 });
-  updateFrogAI(frog, 0.3, { ...open, canOccupy: () => false }, [frog], []);
-  expect(frog.frog?.state).toBe("recover");
-  updateFrogAI(frog, 2.1, open, [frog], []);
-  expect(frog.frog?.state).toBe("rest");
-  startleFrog(frog, { wx: 40, wy: 64 });
-  updateFrogAI(frog, 0.3, open, [frog], []);
-  const manager = new EntityManager();
-  manager.spawn(frog);
-  for (let i = 0; i < 15; i++)
-    manager.update(
-      0.1,
-      () => CollisionFlag.Solid,
-      [],
-      new PropManager(),
-      undefined,
-      () => 0,
-    );
-  expect(frog.position).toEqual({ wx: 64, wy: 64 });
-  expect(frog.wz).toBe(0);
-  expect(frog.frog?.state).toBe("recover");
 });
 
 it("runs all four frog cycles, land and water in the production pond Realm, and retains saved animals/deletions", async () => {

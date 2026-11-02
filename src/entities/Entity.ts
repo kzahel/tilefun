@@ -164,6 +164,8 @@ export interface Entity {
   /** Adjusts the Y used for depth sorting (negative = sort as if higher/behind). */
   sortOffsetY?: number;
   velocity: VelocityComponent | null;
+  /** Gameplay/AI wish velocity; physics readback never overwrites it. Not persisted. */
+  desiredVelocity?: VelocityComponent;
   sprite: SpriteComponent | null;
   collider: ColliderComponent | null;
   wanderAI: WanderAIComponent | null;

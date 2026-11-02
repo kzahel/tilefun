@@ -28,6 +28,7 @@ export function restoreRobinPose(bird: Entity): void {
   setSpriteClipElapsed(bird, ai.motion ? Math.round(ai.motion.elapsed * 1000) : undefined);
 }
 export function startleRobin(bird: Entity, from: PositionComponent): boolean {
+  bird.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = bird.robin;
   if (!ai || ai.alarmFrom || ai.state === "recover") return false;
   ai.alarmFrom = { ...from };
@@ -35,26 +36,28 @@ export function startleRobin(bird: Entity, from: PositionComponent): boolean {
   if (!ai.motion) {
     ai.state = "startle";
     ai.timer = 0.12;
-    if (bird.velocity) bird.velocity.vx = bird.velocity.vy = 0;
+    if (bird.desiredVelocity) bird.desiredVelocity.vx = bird.desiredVelocity.vy = 0;
     restoreRobinPose(bird);
   }
   return true;
 }
 /** Ordinary collision owns XY; the authority timeline owns elevation and wing/hop phase. */
 export function prepareRobinMotion(bird: Entity, dt: number): void {
+  bird.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = bird.robin,
     motion = ai?.motion;
-  if (!ai || !motion || !bird.velocity || dt <= 0) return;
+  if (!ai || !motion || !bird.desiredVelocity || dt <= 0) return;
   const old = robinMotionPhase(ai.state, motion.elapsed, motion.duration);
   motion.elapsed = Math.min(motion.duration, motion.elapsed + dt);
   const t = robinMotionPhase(ai.state, motion.elapsed, motion.duration);
   const fraction = Math.max(0, t - old) / Math.max(0.0001, 1 - old);
-  bird.velocity.vx = ((ai.target.wx - bird.position.wx) * fraction) / dt;
-  bird.velocity.vy = ((ai.target.wy - bird.position.wy) * fraction) / dt;
+  bird.desiredVelocity.vx = ((ai.target.wx - bird.position.wx) * fraction) / dt;
+  bird.desiredVelocity.vy = ((ai.target.wy - bird.position.wy) * fraction) / dt;
   bird.wz = robinMotionZ(ai.state, motion.startZ, motion.endZ, t);
   bird.jumpZ = Math.sin(Math.PI * t) * (ai.state === "hop" ? 5 : 44);
 }
 export function settleRobin(bird: Entity, groundZ: number): void {
+  bird.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = bird.robin;
   if (!ai) return;
   const alarm = !!ai.alarmFrom,
@@ -63,9 +66,9 @@ export function settleRobin(bird: Entity, groundZ: number): void {
   ai.timer = queued ? 0.12 : alarm ? 2.5 : groundZ > 4 ? 3 : 0.7;
   delete ai.motion;
   if (!queued) delete ai.alarmFrom;
-  bird.wz = groundZ;
+
   delete bird.jumpZ;
-  if (bird.velocity) bird.velocity.vx = bird.velocity.vy = 0;
+  if (bird.desiredVelocity) bird.desiredVelocity.vx = bird.desiredVelocity.vy = 0;
   if (bird.wanderAI) bird.wanderAI.state = alarm ? "scared" : "idle";
   restoreRobinPose(bird);
 }

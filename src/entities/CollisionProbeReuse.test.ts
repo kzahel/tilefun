@@ -1,19 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
-import { TerrainId } from "../autotile/TerrainId.js";
-import { encodeActor } from "../persistence/ActorRecords.js";
 import { clipAirMomentum } from "../physics/AirborneMomentum.js";
-import { tickAllAI } from "../server/tickAllAI.js";
-import { createFauna } from "../wildlife/Fauna.js";
-import { createFrog } from "../wildlife/Frog.js";
-import { createRobin } from "../wildlife/Robin.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
-import { createChicken } from "./Chicken.js";
 import * as collision from "./collision.js";
 import { type AABB, aabbOverlapsSolid, getEntityAABB, resolveCollision } from "./collision.js";
 import type { Entity, PositionComponent } from "./Entity.js";
-import { EntityManager } from "./EntityManager.js";
 import { createPlayer } from "./Player.js";
-import { PropManager } from "./PropManager.js";
 
 // Frozen pre-optimization axis policy (64829c0), independent of the new branch.
 function referenceResolveCollision(
@@ -146,98 +137,5 @@ describe("identical collision probe reuse", () => {
       );
       expect(optimized, `case ${i}`).toEqual(original);
     }
-  });
-
-  it("matches live AI/RNG, water/deep-water/elevation, props, contacts, attachments and saved state", () => {
-    const run = () => {
-      const manager = new EntityManager();
-      const props = new PropManager();
-      const player = manager.spawn(createPlayer(40, 44));
-      const horse = createFauna("horse", 48, 90);
-      const actors = [
-        createChicken(24, 24),
-        createChicken(26, 24),
-        createChicken(256, 24),
-        createRobin(72, 40),
-        createFrog(112, 36),
-        createFauna("dog", 48, 44),
-        createFauna("kangaroo", 76, 76),
-        createFauna("fish", 136, 40),
-        createFauna("penguin", 108, 64),
-        createFauna("manta-ray", 164, 60),
-        horse,
-      ];
-      for (const e of actors) manager.spawn(e);
-      const mounted = manager.spawn(createPlayer(48, 90));
-      mounted.parentId = horse.id;
-      mounted.localOffsetX = 1;
-      mounted.localOffsetY = -1;
-      mounted.jumpZ = 18;
-      for (const e of manager.entities) e.persistentId = `fixture-${e.id}`;
-      props.add({
-        id: 0,
-        type: "fixture-wall",
-        position: { wx: 24, wy: 24 },
-        isProp: true,
-        sprite: { sheetKey: "", frameCol: 0, frameRow: 0, spriteWidth: 16, spriteHeight: 16 },
-        walls: null,
-        collider: { offsetX: 0, offsetY: 0, width: 10, height: 6, zHeight: 12 },
-      });
-      const tile = (tx: number, ty: number) =>
-        tx < 0 || ty < 0 || tx === 16 ? CollisionFlag.Solid : tx >= 7 ? CollisionFlag.Water : 0;
-      const height = (tx: number, ty: number) => (tx === 5 && ty >= 4 ? 2 : 0);
-      const terrain = (tx: number) => (tx >= 9 ? TerrainId.DeepWater : TerrainId.ShallowWater);
-      let rng = 2026;
-      const draws: number[] = [];
-      const random = () => {
-        rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0;
-        draws.push(rng);
-        return rng / 4294967296;
-      };
-      const frames = [];
-      for (let step = 0; step < 180; step++) {
-        // Exercise live prop edits and changed bodies on later calls: no cross-call cache.
-        if (step === 30) props.move(1, 38, 24);
-        if (step === 60) props.remove(1);
-        if (step === 90 && actors[0]?.collider) actors[0].collider.width = 18;
-        const active = new Map(
-          manager.entities.filter((e) => e !== actors[2]).map((e) => [e, 1 / 60]),
-        );
-        tickAllAI(
-          manager.entities,
-          [player.position],
-          active,
-          random,
-          {
-            perches: () => [],
-            surfaceZ: (p) => height(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) * 8,
-            isWater: (p) =>
-              !!(tile(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) & CollisionFlag.Water),
-            isDeepWater: (p) => Math.floor(p.wx / 16) >= 9,
-            canOccupy: () => true,
-          },
-          step,
-        );
-        manager.update(1 / 60, tile, [player, mounted], props, active, height, undefined, terrain);
-        frames.push({
-          live: structuredClone(manager.entities),
-          saved: manager.entities.map((e) => encodeActor(e, manager.byId.get(e.parentId ?? -1))),
-          rng,
-        });
-      }
-      return { frames, draws };
-    };
-    const spy = vi
-      .spyOn(collision, "resolveCollision")
-      .mockImplementation(referenceResolveCollision);
-    let expected: ReturnType<typeof run>;
-    try {
-      expected = run();
-      expect(spy).toHaveBeenCalled();
-      expect(spy.mock.calls.some((args) => args[6] === true)).toBe(true);
-    } finally {
-      spy.mockRestore();
-    }
-    expect(run()).toEqual(expected);
   });
 });

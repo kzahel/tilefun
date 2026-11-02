@@ -19,8 +19,9 @@ export function updateDeerAI(
   players: readonly PositionComponent[],
   planning?: AiPlanningScheduler,
 ): void {
+  deer.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = deer.deer,
-    velocity = deer.velocity;
+    velocity = deer.desiredVelocity;
   if (!ai || !velocity || !deer.sprite) return;
   const nearby = players.find((p) => distance(p, deer.position) < 38);
   // Urgent sensing stays live even between planning slots. Avoid building a herd

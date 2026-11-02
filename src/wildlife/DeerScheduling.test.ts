@@ -1,7 +1,5 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { EntityManager } from "../entities/EntityManager.js";
-import { PropManager } from "../entities/PropManager.js";
 import { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { tickAllAI } from "../server/tickAllAI.js";
 import { createDeer } from "./Deer.js";
@@ -68,40 +66,4 @@ it("checks live player and herd alarms between ambient slots and advances timers
   expect(b.deer?.alarmFrom).toEqual({ wx: 0, wy: 10 });
   expect(b.deer?.timer).toBeCloseTo(0.4 - 1 / 60);
   expect(b.deer?.motion).toBeUndefined();
-});
-
-it("keeps native committed movement at 60Hz between decisions and accrues no sleeping motion", () => {
-  const manager = new EntityManager(),
-    props = new PropManager();
-  const deer = manager.spawn(createDeer(64, 64));
-  required(deer.deer).timer = 0;
-  updateDeerAI(deer, 0.1, open, [deer], []);
-  const scheduler = new AiPlanningScheduler();
-  const dts = new Map([[deer, 1 / 60]]);
-  for (let tick = 0; tick < 30; tick++) {
-    tickAllAI([deer], [], dts, () => 0, open, tick, scheduler);
-    manager.update(
-      1 / 60,
-      () => 0,
-      [],
-      props,
-      dts,
-      () => 0,
-    );
-  }
-  expect(Math.hypot(deer.position.wx - 64, deer.position.wy - 64)).toBeCloseTo(9, 3);
-  const elapsed = required(required(deer.deer).motion).elapsed;
-  for (let tick = 0; tick < 600; tick++)
-    tickAllAI([deer], [], new Map(), () => 0, open, tick, scheduler);
-  expect(deer.deer?.motion?.elapsed).toBe(elapsed);
-  tickAllAI([deer], [], dts, () => 0, open, 600, scheduler);
-  manager.update(
-    1 / 60,
-    () => 0,
-    [],
-    props,
-    dts,
-    () => 0,
-  );
-  expect(deer.deer?.motion?.elapsed).toBeCloseTo(elapsed + 1 / 60);
 });

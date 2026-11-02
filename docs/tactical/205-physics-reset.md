@@ -143,3 +143,55 @@ ground/support normals and derived ground height so private replay can resume a
 coupled scene rather than infer control from contact velocity. Input resets retain
 the acknowledged sequence fence. The nine focused new tests and three typecheck
 projects pass after these state additions.
+
+
+### Checkpoint 3a — ordinary shared authority
+
+Normal `Realm` startup now creates `PhysicsScene`; a tick admits held controls,
+collects NPC/species intent, synchronizes body membership/explicit edits, integrates
+once, then publishes poses and runs gameplay/attachments/persistence. Removed the
+per-command player movement/idle-gravity phase and EntityManager's independent
+movement, ground tracking, push and separation solver. AI has a distinct transient
+`desiredVelocity`; measured `velocity` is physics readback. AI decision cadence can
+remain slower without giving each actor a separate integration clock. Existing
+flight/hop curves temporarily supply vertical motor targets rather than committing
+another physical pose. This is transitional species adaptation, not a promise to
+preserve every authored legacy trajectory.
+
+Basic car input supplies velocity/heading intent. Canonical vehicle body dimensions
+avoid recreating or double-rotating collision hulls as sprite facing changes. Seats
+remain derived, and shared car readback is persisted through normal traffic records.
+Balls use the same gravity/contact solver; hit reactions and lifetime run as gameplay
+consequences, with no second bounce/push integration. Explicit velocity-only launches
+are admitted by body synchronization. Character/vehicle zero-friction uses Rapier's
+minimum combine rule so static material friction cannot silently slow the motor.
+Support tests use relative contact velocity and tolerate small solver separation
+velocities; jump requests still immediately leave support.
+
+Seven ordinary `ScenarioSession`/Realm tests cover normal default player/NPC/ball,
+packet bursts and gaps, NPC head standing/walking, multiple sessions in one step,
+reload, car driving and persisted pose, actual AI intent/stop/removal and ball launch/
+despawn. Together with core/input and retained AI scheduling tests, **45 focused
+checks pass**. Eight retained Realm wildlife-landing cases also pass after connecting
+support body identity to startle gameplay. A broader retained lifecycle/AI/content
+run passed 674 cases and found four failures (three old velocity assertions, one
+static-friction combine issue); all four pass in the focused rerun. Three TypeScript
+projects pass. These are native authority checks, not browser/P2P qualification.
+
+Test dispositions are intentional: removed 56 declarations coupled to deleted
+`EntityManager.update` integration/ground/separation behavior and its private query
+counters, three per-command driving/equipment scenarios, and the two all-profile
+exact-pose/activity-cycle integration matrices. Removed the retired persistent
+per-character backend test file. Keep entity lifecycle/index tests, AI decision and
+scheduler tests, species/habitat/asset identity data checks, and basic shared outcome
+coverage. Per-species exact resting zeroes, legacy catch-up trajectory timing and
+full equipment compatibility are not reset requirements; no implementation shim was
+added to preserve those APIs. Remaining old predictor/solver tests and experimental
+lab ownership must still be retired/aligned in subsequent checkpoints.
+
+**Not ready for playable delivery yet:** the ordinary client predictor is still the
+old movement implementation, physics snapshots are not yet on the normal frame
+protocol, and some peripheral commands still reject or reference retired equipment
+behavior. Next replace prediction/protocol at shared ticks, then remove those old
+engines/options and finish Worker/P2P/device qualification and review. Do not use
+this checkpoint as evidence of a completed cutover or Chromebook budget recovery.

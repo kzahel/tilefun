@@ -7,6 +7,8 @@ import {
 } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
+import { Direction } from "../entities/Entity.js";
+import { applyVehicleFacing, vehicleBodySize, vehicleNoseHeading } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import {
   initializePhysics,
@@ -89,6 +91,7 @@ export class PhysicsScene {
   readonly origin = { x: 0, y: 0, z: 0 };
   private readonly bodies = new Map<number, Body>();
   private readonly colliderIds = new Map<number, number>();
+  private readonly contacts = new Map<number, Set<number>>();
   private readonly sections = new Map<string, Section>();
   private disposed = false;
   private originInitialized = false;
@@ -125,6 +128,7 @@ export class PhysicsScene {
     this.bodies.clear();
     this.sections.clear();
     this.colliderIds.clear();
+    this.contacts.clear();
   }
 
   /** Synchronize membership/explicit edits once, not once per neighboring motor. */
@@ -147,7 +151,10 @@ export class PhysicsScene {
       if (present.has(entity.id)) throw Error(`Duplicate physics body ${entity.id}`);
       present.add(entity.id);
       const kind = physicsBodyKind(entity);
-      const signature = `${kind}:${c.width}:${c.height}:${c.physicalHeight}:${c.offsetX}:${c.offsetY}`;
+      const vehicleSize = kind === "vehicle" ? vehicleBodySize(entity.type, 0) : undefined;
+      const width = vehicleSize?.width ?? c.width,
+        height = vehicleSize?.height ?? c.height;
+      const signature = `${kind}:${width}:${height}:${c.physicalHeight}:${kind === "vehicle" ? 0 : c.offsetX}:${kind === "vehicle" ? 0 : c.offsetY}`;
       let entry = this.bodies.get(entity.id);
       if (entry && entry.signature !== signature) {
         this.remove(entry);
@@ -155,8 +162,8 @@ export class PhysicsScene {
       }
       if (!entry) {
         const halfY = (c.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT) / 2 / SCALE;
-        const offsetX = c.offsetX / SCALE,
-          offsetY = (c.offsetY - c.height / 2) / SCALE;
+        const offsetX = kind === "vehicle" ? 0 : c.offsetX / SCALE,
+          offsetY = kind === "vehicle" ? 0 : (c.offsetY - c.height / 2) / SCALE;
         const desc =
           kind === "fixed"
             ? RAPIER.RigidBodyDesc.fixed()
@@ -167,7 +174,7 @@ export class PhysicsScene {
           entity.position.wy / SCALE + offsetY - this.origin.z,
         );
         if (kind === "vehicle") {
-          const angle = entity.vehicleHeading ?? 0;
+          const angle = vehicleNoseHeading(entity);
           desc.setRotation({ x: 0, y: -Math.sin(angle / 2), z: 0, w: Math.cos(angle / 2) });
         }
         if (kind !== "loose") desc.enabledRotations(false, kind === "vehicle", false);
@@ -181,8 +188,8 @@ export class PhysicsScene {
           },
           true,
         );
-        const hx = c.width / 2 / SCALE,
-          hz = c.height / 2 / SCALE;
+        const hx = width / 2 / SCALE,
+          hz = height / 2 / SCALE;
         // Keep the exact outer box footprint, with a fixed subpixel bevel so
         // the bottom edge clears adjacent ramp/slab seams. CCD resolves actual
         // travel instead of soft-CCD's premature face constraint at the seam.
@@ -196,6 +203,8 @@ export class PhysicsScene {
         shape
           .setFriction(kind === "loose" ? 0.5 : 0)
           .setRestitution(entity.type === "ball" ? 0.55 : 0);
+        if (kind === "character" || kind === "vehicle")
+          shape.setFrictionCombineRule(RAPIER.CoefficientCombineRule.Min);
         shape.setMass(kind === "vehicle" ? 8 : kind === "loose" ? 0.2 : 1);
         const collider = this.world.createCollider(shape, body);
         entry = {
@@ -215,7 +224,7 @@ export class PhysicsScene {
             vx: entity.velocity?.vx ?? 0,
             vy: entity.velocity?.vy ?? 0,
             vz: entity.jumpVZ ?? 0,
-            heading: entity.vehicleHeading ?? 0,
+            heading: kind === "vehicle" ? vehicleNoseHeading(entity) : 0,
             jumpHeld: !!((entity.jumpInputState ?? 0) & 2),
             grounded: entity.jumpVZ === undefined,
             groundZ: entity.groundZ ?? entity.wz ?? 0,
@@ -242,6 +251,15 @@ export class PhysicsScene {
             },
             true,
           );
+          s.grounded = entity.jumpVZ === undefined;
+        }
+        // Explicit throws/launches or script velocity changes are admitted once.
+        // AI and controls use intent and never overwrite this readback velocity.
+        if (
+          (entity.velocity?.vx ?? 0) !== s.vx ||
+          (entity.velocity?.vy ?? 0) !== s.vy ||
+          (entity.jumpVZ !== undefined && entity.jumpVZ !== s.vz)
+        ) {
           entry.body.setLinvel(
             {
               x: (entity.velocity?.vx ?? 0) / SCALE,
@@ -379,6 +397,7 @@ export class PhysicsScene {
       }
     }
     this.world.step();
+    this.contacts.clear();
     this.tick++;
     this.metrics.worldSteps++;
     for (const entry of this.bodies.values()) this.readBody(entry);
@@ -401,11 +420,34 @@ export class PhysicsScene {
     delete state.supportId;
     this.world.contactPairsWith(entry.collider, (other) => {
       this.world.contactPair(entry.collider, other, (manifold, flipped) => {
+        const otherId = this.colliderIds.get(other.handle);
+        let touching = false;
+        for (let i = 0; i < manifold.numContacts(); i++)
+          if (manifold.contactDist(i) <= 0.005) {
+            touching = true;
+            break;
+          }
+        if (otherId !== undefined && touching) {
+          let neighbors = this.contacts.get(entry.entity.id);
+          if (!neighbors) {
+            neighbors = new Set();
+            this.contacts.set(entry.entity.id, neighbors);
+          }
+          neighbors.add(otherId);
+        }
         const normal = manifold.normal(),
           factor = flipped ? -1 : 1;
         const ny = normal.y * factor;
-        const separating = -(normal.x * v.x + normal.y * v.y + normal.z * v.z) * factor;
-        if (ny < -0.5 && manifold.numContacts() > 0 && separating < 0.1) {
+        const supportVelocity = other.parent()?.linvel();
+        const separating =
+          -(
+            normal.x * (v.x - (supportVelocity?.x ?? 0)) +
+            normal.y * (v.y - (supportVelocity?.y ?? 0)) +
+            normal.z * (v.z - (supportVelocity?.z ?? 0))
+          ) * factor;
+        // Ignore small solver separation velocities; a requested jump is far
+        // above this threshold and immediately leaves support.
+        if (ny < -0.5 && touching && separating < 0.25) {
           // At a ramp/deck seam both support manifolds may exist. Keep the
           // rising tangent instead of letting contact iteration order flatten it.
           if (state.grounded && -ny >= state.normalY) return;
@@ -447,8 +489,31 @@ export class PhysicsScene {
       entity.jumpZ = Math.max(0, state.z - entity.groundZ);
     }
     state.groundZ = entity.groundZ ?? state.z;
-    if (entry.kind === "vehicle") entity.vehicleHeading = state.heading;
+    if (entry.kind === "vehicle") {
+      entity.vehicleHeading = state.heading;
+      const x = Math.cos(state.heading),
+        y = Math.sin(state.heading);
+      applyVehicleFacing(
+        entity,
+        Math.abs(x) >= Math.abs(y)
+          ? x >= 0
+            ? Direction.Right
+            : Direction.Left
+          : y >= 0
+            ? Direction.Down
+            : Direction.Up,
+      );
+      if (entity.sprite) entity.sprite.moving = Math.hypot(state.vx, state.vy) > 1;
+    }
     entity.jumpInputState = state.jumpHeld ? 3 : 0;
+  }
+
+  contactIds(id: number): ReadonlySet<number> | undefined {
+    return this.contacts.get(id);
+  }
+
+  bodyState(id: number): Readonly<PhysicsBodyState> | undefined {
+    return this.bodies.get(id)?.state;
   }
 
   snapshot(): PhysicsState {

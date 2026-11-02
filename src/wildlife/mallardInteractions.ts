@@ -31,13 +31,14 @@ export function restoreMallardPose(duck: Entity): void {
 
 /** Authority-only reaction; a single alarm lasts through flight and settling. */
 export function startleMallard(duck: Entity, from: PositionComponent): boolean {
+  duck.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = duck.mallard;
   if (!ai || ai.state === "startle" || ai.state === "flight" || ai.state === "recover")
     return false;
   ai.state = "startle";
   ai.timer = 0.64;
   ai.alarmFrom = { ...from };
-  if (duck.velocity) duck.velocity.vx = duck.velocity.vy = 0;
+  if (duck.desiredVelocity) duck.desiredVelocity.vx = duck.desiredVelocity.vy = 0;
   if (duck.wanderAI) duck.wanderAI.state = "scared";
   if (duck.sprite) duck.sprite.moving = false;
   setSpriteClip(duck, 4);
@@ -46,13 +47,14 @@ export function startleMallard(duck: Entity, from: PositionComponent): boolean {
 
 /** Physics-time flight arc. Ordinary EntityManager collision still owns XY movement. */
 export function prepareMallardFlight(duck: Entity, dt: number): void {
+  duck.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = duck.mallard,
     flight = ai?.flight;
-  if (ai?.state !== "flight" || !flight || !duck.velocity) return;
+  if (ai?.state !== "flight" || !flight || !duck.desiredVelocity) return;
   const remaining = Math.max(0, flight.duration - flight.elapsed);
   const fraction = Math.min(1, dt / Math.max(0.0001, remaining));
-  duck.velocity.vx = ((ai.target.wx - duck.position.wx) * fraction) / dt;
-  duck.velocity.vy = ((ai.target.wy - duck.position.wy) * fraction) / dt;
+  duck.desiredVelocity.vx = ((ai.target.wx - duck.position.wx) * fraction) / dt;
+  duck.desiredVelocity.vy = ((ai.target.wy - duck.position.wy) * fraction) / dt;
   flight.elapsed = Math.min(flight.duration, flight.elapsed + dt);
   const t = flight.elapsed / flight.duration;
   duck.wz = flight.startZ + (flight.endZ - flight.startZ) * t + Math.sin(Math.PI * t) * 34;
@@ -61,17 +63,18 @@ export function prepareMallardFlight(duck: Entity, dt: number): void {
 }
 
 /** Settle at the actual collision-resolved position, never teleport to a blocked target. */
-export function settleMallard(duck: Entity, groundZ: number, water: boolean): void {
+export function settleMallard(duck: Entity, _groundZ: number, water: boolean): void {
+  duck.desiredVelocity ??= { vx: 0, vy: 0 };
   const ai = duck.mallard;
   if (!ai) return;
   ai.state = "recover";
   ai.timer = 2;
   delete ai.flight;
   delete ai.alarmFrom;
-  duck.wz = groundZ;
+
   delete duck.jumpZ;
   duck.noShadow = water;
-  if (duck.velocity) duck.velocity.vx = duck.velocity.vy = 0;
+  if (duck.desiredVelocity) duck.desiredVelocity.vx = duck.desiredVelocity.vy = 0;
   if (duck.sprite) duck.sprite.moving = false;
   setSpriteClip(duck, 0);
 }

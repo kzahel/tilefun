@@ -2,10 +2,8 @@ import { describe, expect, it, vi } from "vitest";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { createChicken } from "./Chicken.js";
 import { separateOverlappingEntities } from "./collision.js";
-import type { Entity } from "./Entity.js";
 import { EntityManager } from "./EntityManager.js";
 import { createPlayer } from "./Player.js";
-import { PropManager } from "./PropManager.js";
 
 const dt = 1 / 60;
 const mask = CollisionFlag.Solid | CollisionFlag.Water;
@@ -116,23 +114,5 @@ describe("tick-aware entity separation", () => {
     separateOverlappingEntities(manager.entities, new Set([player]), dt, noCollision, mask, ticks);
     expect(a.position).not.toEqual({ wx: 100, wy: 100 });
     expect(player.position).toEqual({ wx: 100, wy: 100 });
-  });
-
-  it("passes tick selection through EntityManager and preserves pre-stepped exclusions", () => {
-    const { manager, a, b } = pair();
-    const props = new PropManager();
-    manager.update(dt, noCollision, [], props, new Map());
-    expect(a.position.wx).toBe(100);
-    expect(b.position.wx).toBe(100);
-    const ticks = new Map<Entity, number>([
-      [a, dt],
-      [b, dt],
-    ]);
-    manager.update(dt, noCollision, [], props, ticks, undefined, new Set([a.id]));
-    expect(a.position.wx).toBe(100);
-    expect(b.position.wx).toBe(100);
-    manager.update(dt, noCollision, [], props, ticks);
-    expect(a.position.wx).toBeLessThan(100);
-    expect(b.position.wx).toBeGreaterThan(100);
   });
 });

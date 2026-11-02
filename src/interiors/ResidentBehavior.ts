@@ -100,9 +100,10 @@ export function updateResident(
   clear: (p: PositionComponent) => boolean,
   peers: readonly Entity[],
 ): void {
+  entity.desiredVelocity ??= { vx: 0, vy: 0 };
   const r = entity.resident;
-  if (!r || !entity.velocity) return;
-  entity.velocity.vx = entity.velocity.vy = 0;
+  if (!r || !entity.desiredVelocity) return;
+  entity.desiredVelocity.vx = entity.desiredVelocity.vy = 0;
   const stops = r.place === "inside" ? r.inside : r.outside,
     stop = stops[r.index];
   if (!stop || r.transferring || r.phase === "transfer") {
@@ -167,8 +168,8 @@ export function updateResident(
             dy = next.wy - entity.position.wy;
           const length = Math.hypot(dx, dy),
             speed = Math.min(r.cat ? 14 : 24, length / dt);
-          entity.velocity.vx = (dx / length) * speed;
-          entity.velocity.vy = (dy / length) * speed;
+          entity.desiredVelocity.vx = (dx / length) * speed;
+          entity.desiredVelocity.vy = (dy / length) * speed;
           if (entity.sprite) {
             entity.sprite.direction =
               Math.abs(dx) > Math.abs(dy)
@@ -186,5 +187,6 @@ export function updateResident(
     }
   }
   restoreResidentPose(entity);
-  if (entity.sprite && !entity.velocity.vx && !entity.velocity.vy) entity.sprite.moving = false;
+  if (entity.sprite && !entity.desiredVelocity.vx && !entity.desiredVelocity.vy)
+    entity.sprite.moving = false;
 }
