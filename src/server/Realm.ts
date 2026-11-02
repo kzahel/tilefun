@@ -1048,6 +1048,21 @@ export class Realm {
       const physicsSteps = Math.max(1, this.physicsMult);
       const stepDt = dt / physicsSteps;
       const players = activeSessions.map((s) => s.player);
+      // Skip the legacy player/NPC overlap response only for on-foot players
+      // actually advanced by the selected character solver this tick.
+      const characterContactOwners = movementPhysics.characterPhysics
+        ? new Set(
+            activeSessions
+              .filter(
+                (s) =>
+                  preSteppedEntityIds.has(s.player.id) &&
+                  !s.debugNoclip &&
+                  s.gameplaySession.mountId === null &&
+                  !this.vehicles.get(s),
+              )
+              .map((s) => s.player.id),
+          )
+        : undefined;
 
       // Noclip: temporarily remove player colliders for all physics substeps.
       const savedColliders = new Map<PlayerSession, ColliderComponent>();
@@ -1298,6 +1313,7 @@ export class Realm {
           (tx, ty) => this.world.getHeightAt(tx, ty),
           preSteppedEntityIds,
           (tx, ty) => this.world.getBlendBaseAt(tx, ty),
+          characterContactOwners,
         );
 
         tickWildlifeRespawns(this.entityManager, stepDt, wildlifeEnvironment, playerPositions);

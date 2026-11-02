@@ -45,6 +45,15 @@ costs, and dynamic contacts may increase work. No Chromebook gain is established
 
 ## Opt-in game characters (197)
 
+[200](../tactical/200-npc-support-contact-ownership.md) fixes the separate ordinary
+game NPC case: the legacy player/NPC overlap pass could eject an NPC after Rapier
+had landed a rider on its top. Opted-in on-foot players actually stepped by the
+character solver now exclude that duplicate response. Default legacy pushing,
+NPC AI and NPC/NPC separation retain their owners. NPCs remain fixed query
+obstacles to the selected player motor; dynamic NPC pushing/carry is unqualified.
+Real Realm chicken/person landings in both hulls and an ordinary Worker game
+landing on a following person cover the boundary missed by two-player fixtures.
+
 [199](../tactical/199-idle-player-head-support.md) fixes the ordinary capsule backend's
 idle lower motor moving sideways to clear an overhead rider after landing. Idle
 nonascending support queries ignore that separated overhead player; horizontal/upward

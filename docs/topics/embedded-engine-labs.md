@@ -1,5 +1,12 @@
 # Embedded engine labs
 
+[200](../tactical/200-npc-support-contact-ownership.md) adds real Realm NPC landing
+coverage and a normal-game Worker/input test alongside the existing two-player
+lab. NPCs retain their normal AI and legacy EntityManager phase. Opted-in on-foot
+players exclude the duplicate legacy NPC overlap response after character-solver
+movement; default players still use it. A passing two-controlled-player lab does
+not by itself qualify NPC support in the game.
+
 [199](../tactical/199-idle-player-head-support.md) adds **Land and stand on player**
 to the cooperative reference, including raw falling/resting, exact replay and
 delayed Realm checks. It accompanies the ordinary game's idle capsule-support fix.

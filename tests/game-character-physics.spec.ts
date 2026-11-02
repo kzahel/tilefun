@@ -28,6 +28,7 @@ test("normal game opts into box/capsule contacts, synchronizes settings and retu
         mode: view.physicsParameters.characterPhysics ?? 0,
         gravity: view.physicsParameters.gravityScale,
         x: view.serverPlayerEntity.position.wx,
+        y: view.serverPlayerEntity.position.wy,
         z: view.serverPlayerEntity.wz ?? 0,
         editor: view.editorEnabled,
         box: view.serverPlayerEntity.collider && {
@@ -74,6 +75,54 @@ test("normal game opts into box/capsule contacts, synchronizes settings and retu
   await expect.poll(async () => (await state()).z).toBeGreaterThan(5);
   await expect.poll(async () => (await state()).z, { timeout: 5000 }).toBeLessThan(0.2);
   await page.screenshot({ path: test.info().outputPath("game-rapier-capsule.png") });
+  // Exercise the ordinary NPC/AI phase too: this NPC remains a following
+  // person, not a second controlled player or a frozen physics fixture.
+  const origin = await state();
+  await selectMode("Edit");
+  await expect.poll(async () => (await state()).editor).toBe(true);
+  await page.evaluate(({ x, y }) => {
+    const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    game.transport.send({ type: "edit-spawn", entityType: "person1", wx: x + 14, wy: y });
+  }, origin);
+  const person = () =>
+    page.evaluate(() => {
+      const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const npc = game.stateView.entities.find((e) => e.type === "person1");
+      return npc
+        ? { ...npc.position, z: npc.wz ?? 0, height: npc.collider?.physicalHeight ?? 0 }
+        : null;
+    });
+  await expect.poll(person).not.toBeNull();
+  const npc = await person();
+  if (!npc) throw Error("Missing person fixture");
+  await selectMode("Play");
+  await expect.poll(async () => (await state()).editor).toBe(false);
+  await page.evaluate(({ wx, wy }) => {
+    const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    game.transport.send({ type: "player-interact", wx, wy });
+  }, npc);
+  await page.keyboard.down("Space");
+  await expect
+    .poll(async () => (await state()).z, { intervals: [20] })
+    .toBeGreaterThan(npc.height + 4);
+  await page.keyboard.down("d");
+  try {
+    await expect
+      .poll(async () => (await state()).x, { intervals: [10], timeout: 2000 })
+      .toBeGreaterThan(npc.wx - 1);
+  } finally {
+    await page.keyboard.up("d");
+    await page.keyboard.up("Space");
+  }
+  await expect
+    .poll(async () => Math.abs((await state()).z - (npc.z + npc.height)))
+    .toBeLessThan(0.1);
+  await page.waitForTimeout(350);
+  expect((await state()).z).toBeCloseTo(npc.z + npc.height, 1);
+  const supported = await person();
+  if (!supported) throw Error("Lost person fixture");
+  expect(Math.hypot(supported.wx - npc.wx, supported.wy - npc.wy)).toBeLessThan(0.01);
+  await page.screenshot({ path: test.info().outputPath("game-standing-on-npc.png") });
   await command("sv_characterphysics 0");
   await expect.poll(async () => (await state()).mode).toBe(0);
   expect(backendRequests.length).toBeGreaterThan(0);

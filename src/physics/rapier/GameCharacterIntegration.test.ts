@@ -1,5 +1,6 @@
 import { expect, it } from "vitest";
 import { PlayerPredictor } from "../../client/PlayerPredictor.js";
+import { ENTITY_FACTORIES } from "../../entities/EntityFactories.js";
 import { createPlayer } from "../../entities/Player.js";
 import { FlatStrategy } from "../../generation/FlatStrategy.js";
 import type { Movement } from "../../input/ActionManager.js";
@@ -13,6 +14,72 @@ import { getMovementPhysicsParams, stepPlayerFromInput } from "../PlayerMovement
 import { createMovementContext, createSurfaceSampler } from "../SimulationEnvironment.js";
 
 const idle: Movement = { dx: 0, dy: 0, jump: false, sprinting: false };
+it("retains legacy NPC pushing while leaving capsule clearance to the selected solver", async () => {
+  for (const mode of [0, 2] as const) {
+    const npc = ENTITY_FACTORIES.chicken?.(32, 32);
+    if (!npc?.wanderAI) throw Error("Missing chicken fixture");
+    npc.wanderAI.timer = 100;
+    const session = await ScenarioSession.create({
+      version: 1,
+      id: `npc-contact-owner-${mode}`,
+      generation: FLAT_SCENARIO,
+      player: createPlayer(40.1, 32),
+      actors: [npc],
+      props: [],
+      physics: { characterPhysics: mode },
+    });
+    try {
+      const actor = session.realm.entityManager.entities.find((e) => e.type === "chicken");
+      if (!actor) throw Error("Missing chicken");
+      for (let tick = 0; tick < 30; tick++) await session.step(idle, 0.017);
+      const drift = Math.hypot(actor.position.wx - 32, actor.position.wy - 32);
+      if (mode === 0) expect(drift).toBeGreaterThan(1);
+      else expect(drift).toBeLessThan(0.01);
+    } finally {
+      await session.close();
+    }
+  }
+});
+it.each(["chicken", "person1"])(
+  "supports landing on an idle %s through the real Realm NPC update",
+  async (type) => {
+    for (const mode of [1, 2] as const) {
+      const factory = ENTITY_FACTORIES[type];
+      if (!factory) throw Error("Missing NPC factory");
+      const npc = factory(32, 32),
+        player = createPlayer(33, 32);
+      if (!npc.wanderAI || !npc.collider) throw Error("Missing NPC components");
+      npc.wanderAI.timer = 100;
+      player.wz = (npc.collider.physicalHeight ?? 0) + 20;
+      player.jumpVZ = 0;
+      const session = await ScenarioSession.create({
+        version: 1,
+        id: `head-${type}-${mode}`,
+        generation: FLAT_SCENARIO,
+        player,
+        actors: [npc],
+        props: [],
+        physics: { characterPhysics: mode },
+      });
+      try {
+        const actor = session.realm.entityManager.entities.find((e) => e.type === type);
+        if (!actor) throw Error("Missing NPC");
+        let drift = 0,
+          minHeight = Infinity;
+        for (let tick = 0; tick < 120; tick++) {
+          await session.step(idle, 0.017);
+          drift = Math.max(drift, Math.hypot(actor.position.wx - 32, actor.position.wy - 32));
+          if (tick > 60)
+            minHeight = Math.min(minHeight, (session.player.player.wz ?? 0) - (actor.wz ?? 0));
+        }
+        expect(drift).toBeLessThan(0.01);
+        expect(minHeight).toBeGreaterThan((npc.collider.physicalHeight ?? 0) - 0.1);
+      } finally {
+        await session.close();
+      }
+    }
+  },
+);
 it("lands and stands on a player's head in either motor processing order", async () => {
   await prepareCharacterPhysics(1);
   for (const mode of [1, 2] as const)

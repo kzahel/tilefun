@@ -127,6 +127,7 @@ export class EntityManager {
    *   Entities not in the map are frozen. If omitted, all entities tick with `dt`.
    * @param skipEntityIds Optional entity IDs to freeze for this update pass.
    * @param getTerrain Base terrain for deep-water-only body collision; supplied by production Realm.
+   * @param playerContactOwnerIds Players whose contact response belongs to another solver.
    * Collision/height/terrain callbacks must keep geometry stable during each synchronous
    * NPC resolution, including across position and momentum changes between its axes.
    */
@@ -139,6 +140,7 @@ export class EntityManager {
     getHeight?: (tx: number, ty: number) => number,
     skipEntityIds?: ReadonlySet<number>,
     getTerrain?: (tx: number, ty: number) => number,
+    playerContactOwnerIds?: ReadonlySet<number>,
   ): void {
     const playerSet = new Set(players);
     // AI can consume/despawn an admitted actor before physics starts. Never
@@ -561,12 +563,17 @@ export class EntityManager {
     }
 
     // --- Phase 3: Separate overlapping entities (skip parented) ---
+    // Skipping a player's movement does not itself transfer contact ownership:
+    // legacy per-command players still push NPCs here. Selected character motors
+    // opt out separately so this pass cannot undo their resolved support/clearance.
     const unparentedEntities = active.filter(
       (e) => e.parentId === undefined && !skipEntityIds?.has(e.id),
     );
     separateOverlappingEntities(
       unparentedEntities,
-      playerSet,
+      playerContactOwnerIds?.size
+        ? new Set(players.filter((player) => !playerContactOwnerIds.has(player.id)))
+        : playerSet,
       dt,
       getCollision,
       blockMask,
